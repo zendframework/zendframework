@@ -6,7 +6,7 @@
     <para>
         This filter will decrypt any given string with the provided setting. Therefor it makes use
         of Adapters. Actually there are adapters for the <classname>Mcrypt</classname> and
-        <classname>OpenSSL</classname> extensions from php.
+        <classname>OpenSSL</classname> extensions from <acronym>PHP</acronym>.
     </para>
 
     <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
     <title>Filter für Zend_File_Transfer</title>
@@ -19,31 +19,32 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>Decrypt</code>: Dieser Filter kann verschlüsselte Dateien entschlüsseln.
+                <classname>Decrypt</classname>: Dieser Filter kann verschlüsselte Dateien
+                entschlüsseln.
             </para>
         </listitem>
 
         <listitem>
-            <para><code>Encrypt</code>: Dieser Filter kann Dateien verschlüsseln.</para>
+            <para><classname>Encrypt</classname>: Dieser Filter kann Dateien verschlüsseln.</para>
         </listitem>
 
         <listitem>
             <para>
-                <code>LowerCase</code>: Dieser Filter kann den Inhalt einer Textdatei auf
+                <classname>LowerCase</classname>: Dieser Filter kann den Inhalt einer Textdatei auf
                 Kleinschreibung ändern.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Rename</code>: Dieser Filter kann Dateien umbenennen, den Ort ändern und sogar
-                das Überschreiben von existierenden Dateien erzwingen.
+                <classname>Rename</classname>: Dieser Filter kann Dateien umbenennen, den Ort ändern
+                und sogar das Überschreiben von existierenden Dateien erzwingen.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>UpperCase</code>: Dieser Filter kann den Inhalt einer Textdatei auf
+                <classname>UpperCase</classname>: Dieser Filter kann den Inhalt einer Textdatei auf
                 Großschreibung ändern.
             </para>
         </listitem>
@@ -60,18 +61,18 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>addFilter($filter, $options = null, $files = null)</code>: Fügt den
-                    angegebenen Filter zu den Filterstapel hinzu (optional nur zu den Datei(en) die
-                    spezifiziert wurden). <varname>$filter</varname> kann entweder eine aktuelle
-                    Filterinstanz sein, oder ein Kurzname der den Filtertyp spezifiziert (z.B.
-                    'Rename').
+                    <methodname>addFilter($filter, $options = null, $files = null)</methodname>:
+                    Fügt den angegebenen Filter zu den Filterstapel hinzu (optional nur zu den
+                    Datei(en) die spezifiziert wurden). <varname>$filter</varname> kann entweder
+                    eine aktuelle Filterinstanz sein, oder ein Kurzname der den Filtertyp
+                    spezifiziert (z.B. 'Rename').
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>addFilters(array $filters, $files = null)</code>: Fügt die angegebenen
-                    Filter zum Filterstapel hinzu. Jeder Eintrag kann entweder ein
+                    <methodname>addFilters(array $filters, $files = null)</methodname>: Fügt die
+                    angegebenen Filter zum Filterstapel hinzu. Jeder Eintrag kann entweder ein
                     Filtertyp/-options Paar sein, oder ein Array mit dem Schlüssel 'filter' das den
                     Filter spezifiziert (alle anderen Optionen werden als Optionen für die
                     Instanzierung der Filter angenommen).
@@ -80,8 +81,8 @@
 
             <listitem>
                 <para>
-                    <code>setFilters(array $filters, $files = null)</code>: Überschreibt alle
-                    bestehenden Filter mit den spezifizierten Filtern. Die Filter sollten der
+                    <methodname>setFilters(array $filters, $files = null)</methodname>: Überschreibt
+                    alle bestehenden Filter mit den spezifizierten Filtern. Die Filter sollten der
                     Syntax folgen die für <methodname>addFilters()</methodname> definiert ist.
                 </para>
             </listitem>
@@ -194,22 +195,24 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
         <title>Decrypt Filter</title>
 
         <para>
-            Der <code>Decrypt</code> Filter erlaubt es verschlüsselte Dateien zu entschlüsseln.
+            Der <classname>Decrypt</classname> Filter erlaubt es verschlüsselte Dateien zu
+            entschlüsseln.
         </para>
 
         <para>
             Dieser Filter verwendet <classname>Zend_Filter_Decrypt</classname>. Er unterstützt die
-            Erweiterungen <code>Mcrypt</code> und <code>OpenSSL</code> von <acronym>PHP</acronym>.
-            Lesen Sie bitte das betreffende Kapitel für Details darüber wie Optionen für die
-            Entschlüsselung gesetzt werden können und welche Optionen unterstützt werden.
+            Erweiterungen <classname>Mcrypt</classname> und <classname>OpenSSL</classname> von
+            <acronym>PHP</acronym>. Lesen Sie bitte das betreffende Kapitel für Details darüber wie
+            Optionen für die Entschlüsselung gesetzt werden können und welche Optionen unterstützt
+            werden.
         </para>
 
         <para>
             Dieser Filter unterstützt eine zusätzliche Option die verwendet werden kann um die
             entschlüsselte Datei unter einem anderen Dateinamen zu speichern. Setze die
-            <code>filename</code> Option um den Dateinamen zu ändern unter dem die entschlüsselte
-            Datei abgespeichert wird. Wenn diese Option nicht angegeben wird, überschreibt die
-            entschlüsselte Datei die verschlüsselte Originaldatei.
+            <property>filename</property> Option um den Dateinamen zu ändern unter dem die
+            entschlüsselte Datei abgespeichert wird. Wenn diese Option nicht angegeben wird,
+            überschreibt die entschlüsselte Datei die verschlüsselte Originaldatei.
         </para>
 
         <example id="zend.file.transfer.filters.decrypt.example1">
@@ -246,22 +249,23 @@ $upload->addFilter('Decrypt',
         <title>Encrypt Filter</title>
 
         <para>
-            Der <code>Encrypt</code> Filter erlaubt es eine Datei zu verschlüsseln.
+            Der <classname>Encrypt</classname> Filter erlaubt es eine Datei zu verschlüsseln.
         </para>
 
         <para>
             Dieser Filter verwendet <classname>Zend_Filter_Encrypt</classname>. Er unterstützt die
-            Erweiterungen <code>Mcrypt</code> und <code>OpenSSL</code> von <acronym>PHP</acronym>.
-            Lesen Sie bitte das betreffende Kapitel für Details darüber wie Optionen für die
-            Entschlüsselung gesetzt werden können und welche Optionen unterstützt werden.
+            Erweiterungen <classname>Mcrypt</classname> und <classname>OpenSSL</classname> von
+            <acronym>PHP</acronym>. Lesen Sie bitte das betreffende Kapitel für Details darüber wie
+            Optionen für die Entschlüsselung gesetzt werden können und welche Optionen unterstützt
+            werden.
         </para>
 
         <para>
             Dieser Filter unterstützt eine zusätzliche Option die verwendet werden kann um die
             verschlüsselte Datei unter einem anderen Dateinamen zu speichern. Setze die
-            <code>filename</code> Option um den Dateinamen zu ändern unter dem die verschlüsselte
-            Datei abgespeichert wird. Wenn diese Option nicht angegeben wird, überschreibt die
-            verschlüsselte Datei die Originaldatei.
+            <property>filename</property> Option um den Dateinamen zu ändern unter dem die
+            verschlüsselte Datei abgespeichert wird. Wenn diese Option nicht angegeben wird,
+            überschreibt die verschlüsselte Datei die Originaldatei.
         </para>
 
         <example id="zend.file.transfer.filters.encrypt.example1">
@@ -296,8 +300,8 @@ $upload->addFilter('Encrypt',
         <title>LowerCase Filter</title>
 
         <para>
-            Der <code>LowerCase</code> Filter erlaubt es den Inhalt einer Datei auf Kleinschreibung
-            zu ändern. Dieser Filter sollte nur mit Textdateien verwendet werden.
+            Der <classname>LowerCase</classname> Filter erlaubt es den Inhalt einer Datei auf
+            Kleinschreibung zu ändern. Dieser Filter sollte nur mit Textdateien verwendet werden.
         </para>
 
         <para>
@@ -340,29 +344,29 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         <title>Rename Filter</title>
 
         <para>
-            Der <code>Rename</code> Filter erlaubt es das Ziel des Uploads zu Ändern, den Dateinamen
-            sowie bereits bestehende Dateien zu überschreiben. Er unterstützt die folgenden
-            Optionen:
+            Der <classname>Rename</classname> Filter erlaubt es das Ziel des Uploads zu Ändern, den
+            Dateinamen sowie bereits bestehende Dateien zu überschreiben. Er unterstützt die
+            folgenden Optionen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>source</code>: Der Name und das Ziel der alten Datei welche umbenannt
-                    werden soll.
+                    <property>source</property>: Der Name und das Ziel der alten Datei welche
+                    umbenannt werden soll.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>target</code>: Das neue Verzeichnis, oder der Dateiname der Datei.
+                    <property>target</property>: Das neue Verzeichnis, oder der Dateiname der Datei.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>overwrite</code>: Definiert ob die alte Datei von der neuen überschrieben
-                    wird wenn diese bereits existiert. Der Standardwert ist
+                    <property>overwrite</property>: Definiert ob die alte Datei von der neuen
+                    überschrieben wird wenn diese bereits existiert. Der Standardwert ist
                     <constant>FALSE</constant>.
                 </para>
             </listitem>
@@ -483,8 +487,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         <title>UpperCase Filter</title>
 
         <para>
-            Der <code>UpperCase</code> Filter erlaubt es den Inhalt einer Datei auf Großschreibung
-            zu ändern. Dieser Filter sollte nur mit Textdateien verwendet werden.
+            Der <classname>UpperCase</classname> Filter erlaubt es den Inhalt einer Datei auf
+            Großschreibung zu ändern. Dieser Filter sollte nur mit Textdateien verwendet werden.
         </para>
 
         <para>

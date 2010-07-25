@@ -28,7 +28,7 @@ namespace Zend\GData\Books\Extension;
 /**
  * Describes a preview link
  *
- * @uses       \Zend\GData\Books\Books
+ * @uses       \Zend\GData\Books
  * @uses       \Zend\GData\Books\Extension\BooksLink
  * @category   Zend
  * @package    Zend_Gdata
@@ -54,7 +54,7 @@ class PreviewLink extends
     public function __construct($href = null, $rel = null, $type = null,
             $hrefLang = null, $title = null, $length = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Books\Books::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Books::$namespaces);
         parent::__construct($href, $rel, $type, $hrefLang, $title, $length);
     }
 

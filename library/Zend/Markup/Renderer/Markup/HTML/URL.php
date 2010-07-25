@@ -30,7 +30,7 @@ use Zend\Markup\Token;
  * URL markup for HTML
  *
  * @uses       \Zend\Markup\Renderer\HTML
- * @uses       \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
+ * @uses       \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -38,7 +38,7 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URL extends HTMLAbstract
+class URL extends AbstractHTML
 {
 
     /**
@@ -62,7 +62,7 @@ class URL extends HTMLAbstract
         }
 
         // check if the URL is valid
-        // TODO: use the new Zend\URI for this
+        // TODO: use the new Zend\Uri for this
         if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
             return $text;
         }

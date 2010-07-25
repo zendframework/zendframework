@@ -20,22 +20,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form\Element;
+
+/**
  * Abstract Slider dijit
  *
- * @uses       Zend_Dojo_Form_Element_Dijit
+ * @uses       \Zend\Dojo\Form\Element\Dijit
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Dijit
+abstract class Slider extends Dijit
 {
     /**
      * Set clickSelect flag
      *
      * @param  bool $clickSelect
-     * @return Zend_Dojo_Form_Element_TextBox
+     * @return \Zend\Dojo\Form\Element\TextBox
      */
     public function setClickSelect($flag)
     {
@@ -60,7 +65,7 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
      * Set intermediateChanges flag
      *
      * @param  bool $intermediateChanges
-     * @return Zend_Dojo_Form_Element_TextBox
+     * @return \Zend\Dojo\Form\Element\TextBox
      */
     public function setIntermediateChanges($flag)
     {
@@ -85,7 +90,7 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
      * Set showButtons flag
      *
      * @param  bool $showButtons
-     * @return Zend_Dojo_Form_Element_TextBox
+     * @return \Zend\Dojo\Form\Element\TextBox
      */
     public function setShowButtons($flag)
     {
@@ -110,7 +115,7 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
      * Set discreteValues
      *
      * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
+     * @return \Zend\Dojo\Form\Element\TextBox
      */
     public function setDiscreteValues($value)
     {
@@ -132,7 +137,7 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
      * Set maximum
      *
      * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
+     * @return \Zend\Dojo\Form\Element\TextBox
      */
     public function setMaximum($value)
     {
@@ -154,7 +159,7 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
      * Set minimum
      *
      * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
+     * @return \Zend\Dojo\Form\Element\TextBox
      */
     public function setMinimum($value)
     {
@@ -176,7 +181,7 @@ abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Diji
      * Set pageIncrement
      *
      * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
+     * @return \Zend\Dojo\Form\Element\TextBox
      */
     public function setPageIncrement($value)
     {

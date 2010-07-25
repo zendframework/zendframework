@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19111 -->
+<!-- EN-Revision: 20792 -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-schema">
     <title>Zend_Ldap_Node_Schema</title>
 
@@ -77,8 +77,8 @@
                     </entry>
                     <entry>
                         現行ノードの配列表現を返します。
-                        もし <code>$includeSystemAttributes</code> が <code>false</code>
-                        (既定値は <code>true</code>) なら、システム固有の属性は配列から除去されます。
+                        もし <code>$includeSystemAttributes</code> が <constant>FALSE</constant>
+                        (既定値は <constant>TRUE</constant>) なら、システム固有の属性は配列から除去されます。
                         <code>Zend_Ldap_Node_Schema::getAttributes()</code> とは異なり、
                         結果の配列には キー <code>'dn'</code> をもつ DN を含みます。
                     </entry>
@@ -110,13 +110,13 @@
                     </entry>
                     <entry>
                         与えられた属性が存在するかどうかチェックします。
-                        もし <code>$emptyExists</code> が <code>false</code> なら、
+                        もし <code>$emptyExists</code> が <constant>FALSE</constant> なら、
                         空の属性 (array() のみを含む) は、
-                        <code>false</code> を返す、存在しないものとして扱われます。
+                        <constant>FALSE</constant> を返す、存在しないものとして扱われます。
                         もし <code>$emptyExists</code> が true なら、
-                        空の属性は <code>true</code> を返す、存在するものとして扱われます。
+                        空の属性は <constant>TRUE</constant> を返す、存在するものとして扱われます。
                         この場合、属性の名前がキーの集合に欠落している場合のみ、
-                        メソッドは <code>false</code> を返します。
+                        メソッドは <constant>FALSE</constant> を返します。
                     </entry>
                 </row>
                 <row>
@@ -127,7 +127,7 @@
                     <entry>
                         与えられた値が属性に存在するかチェックします。
                         <code>$value</code> 内の値全てが属性に現れる場合のみ、
-                        メソッドは <code>true</code> を返します。
+                        メソッドは <constant>TRUE</constant> を返します。
                         比較は厳格に行なわれます。（データ型を考慮します）
                     </entry>
                 </row>
@@ -154,8 +154,8 @@
                     </entry>
                     <entry>
                         ノードの属性全てを取得します。もし
-                        <code>$includeSystemAttributes</code> が <code>false</code> なら、
-                        (既定は <code>true</code>) システム固有の属性は配列から除去されます。
+                        <code>$includeSystemAttributes</code> が <constant>FALSE</constant> なら、
+                        (既定は <constant>TRUE</constant>) システム固有の属性は配列から除去されます。
                     </entry>
                 </row>
                 <row>

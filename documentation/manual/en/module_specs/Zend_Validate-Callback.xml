@@ -67,8 +67,9 @@ if ($valid->isValid($input)) {
         <title>Usage with closures</title>
 
         <para>
-            PHP 5.3 introduces <ulink url="http://php.net/functions.anonymous">closures</ulink>,
-            which are basically self-contained or <emphasis>anonymous</emphasis> functions. PHP
+            <acronym>PHP</acronym> 5.3 introduces <ulink
+                url="http://php.net/functions.anonymous">closures</ulink>, which are basically
+            self-contained or <emphasis>anonymous</emphasis> functions. <acronym>PHP</acronym>
             considers closures another form of callback, and, as such, may be used with
             <classname>Zend_Validate_Callback</classname>. As an example:
         </para>
@@ -145,7 +146,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
 
         <para>
-            Finally, if you are using PHP 5.3, you may define the magic method
+            Finally, if you are using <acronym>PHP</acronym> 5.3, you may define the magic method
             <methodname>__invoke()</methodname> in your class. If you do so, simply providing an
             instance of the class as the callback will also work:
         </para>

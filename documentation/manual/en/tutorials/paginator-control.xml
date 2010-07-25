@@ -16,10 +16,10 @@
         The View Partial is a small view script that renders the Pagination controls, such as
         buttons to go to the next or previous page. Which pagination controls are rendered depends
         on the contents of the view partial. Working with the view partial requires that you have
-        set up Zend_View. To get started with the pagination control, create a new view script
-        somewhere in your view scripts path. You can name it anything you want, but we'll call it
-        "controls.phtml" in this text. The reference manual contains various examples of what might
-        go in the view script. Here is one example.
+        set up <classname>Zend_View</classname>. To get started with the pagination control, create
+        a new view script somewhere in your view scripts path. You can name it anything you want,
+        but we'll call it "controls.phtml" in this text. The reference manual contains various
+        examples of what might go in the view script. Here is one example.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -65,8 +65,9 @@
 ]]></programlisting>
 
     <para>
-        The next step is to tell Zend_Paginator which view partial can be used to render
-        the navigation controls. Put the following line in your application's bootstrap file.
+        The next step is to tell <classname>Zend_Paginator</classname> which view partial can be
+        used to render the navigation controls. Put the following line in your application's
+        bootstrap file.
     </para>
 
     <programlisting language="php"><![CDATA[

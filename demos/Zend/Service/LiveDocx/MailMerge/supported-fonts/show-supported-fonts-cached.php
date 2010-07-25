@@ -59,4 +59,6 @@ Helper::printLine(
     PHP_EOL
 );
 
+print(PHP_EOL);
+
 unset($mailMerge);

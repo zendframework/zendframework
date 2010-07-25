@@ -24,8 +24,8 @@
  * @namespace
  */
 namespace Zend\InfoCard\XML\EncryptedData;
-use Zend\InfoCard\XML\Element;
-use Zend\InfoCard\XML;
+use Zend\InfoCard\XML\AbstractElement,
+    Zend\InfoCard\XML;
 
 /**
  * An XmlEnc formatted EncryptedData XML block
@@ -53,13 +53,13 @@ class XMLEnc extends AbstractEncryptedData
 
         list(,$cipherdata) = $this->xpath("//enc:CipherData");
 
-        if(!($cipherdata instanceof Element\Element)) {
+        if(!($cipherdata instanceof AbstractElement)) {
             throw new XML\Exception("Unable to find the enc:CipherData block");
         }
 
         list(,$ciphervalue) = $cipherdata->xpath("//enc:CipherValue");
 
-        if(!($ciphervalue instanceof Element\Element)) {
+        if(!($ciphervalue instanceof AbstractElement)) {
             throw new XML\Exception("Unable to fidn the enc:CipherValue block");
         }
 

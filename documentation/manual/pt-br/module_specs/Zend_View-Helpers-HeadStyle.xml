@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>Assistente HeadStyle</title>
 
     <para>
-        O elemento HTML <emphasis>&lt;style&gt;</emphasis> é usado para incluir folhas de estilo
-        <acronym>CSS</acronym> de forma inline no elemento HTML <emphasis>&lt;head&gt;</emphasis>.
+        O elemento <acronym>HTML</acronym> <emphasis>&lt;style&gt;</emphasis> é usado para incluir
+        folhas de estilo <acronym>CSS</acronym> de forma inline no elemento <acronym>HTML</acronym>
+        <emphasis>&lt;head&gt;</emphasis>.
     </para>
 
     <note>

@@ -10,7 +10,8 @@
             <classname>Zend_Service_Amazon</classname> is a simple <acronym>API</acronym> for using
             Amazon web services. <classname>Zend_Service_Amazon</classname> has two
             <acronym>API</acronym>s: a more traditional one that follows Amazon's own
-            <acronym>API</acronym>, and a simpler "Query <acronym>API</acronym>" for constructing even complex search queries easily.
+            <acronym>API</acronym>, and a simpler "Query <acronym>API</acronym>" for constructing
+            even complex search queries easily.
         </para>
 
         <para>
@@ -756,7 +757,12 @@ foreach ($results as $result) {
                             <row>
                                 <entry>MerchantName</entry>
                                 <entry>string</entry>
-                                <entry>Merchants Amazon Name.  Requires setting the <code>ResponseGroup</code> option to <code>OfferFull</code> to retrieve.</entry>
+
+                                <entry>
+                                    Merchants Amazon Name. Requires setting the
+                                    <code>ResponseGroup</code> option to <code>OfferFull</code> to
+                                    retrieve.
+                                </entry>
                             </row>
                             <row>
                                 <entry>GlancePage</entry>

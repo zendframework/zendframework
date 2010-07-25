@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16831 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.ldap.ldif">
     <title>LDIFへ、または、からのLDAPデータシリアライズ</title>
     <sect2 id="zend.ldap.ldif.encode">

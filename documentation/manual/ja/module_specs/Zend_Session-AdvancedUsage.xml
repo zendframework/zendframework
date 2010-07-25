@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 21829 -->
 <sect1 id="zend.session.advanced_usage">
 
     <title>高度な使用法</title>
 
     <para>
-        基本的な使用法の例で Zend Framework のセッションを完全に使用することができますが、
+        基本的な使用法の例で Zend Framework のセッションを完全に使用できますが、
         よりよい方法もあります。ここでは、セッションの処理方法や
         <classname>Zend_Session</classname> コンポーネントのより行動な使用法を説明します。
     </para>
@@ -51,13 +51,16 @@ Zend_Session::start();
                     </ulink> を有効にしてはいけません。
                     もし mod_php (やそれと同等のもの) を使用しており、
                     <code>php.ini</code> でこの設定が有効になっている、かつそれを無効にすることができない
-                    という場合は、<code>.htaccess</code> ファイル (通常は HTML のドキュメントルートにあります)
+                    という場合は、<code>.htaccess</code> ファイル (通常は <acronym>HTML</acronym> のドキュメントルートにあります)
                     に以下の内容を追加します。
-                    <programlisting language="httpd.conf"><![CDATA[
+                </para>
+
+                <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting>
-                </para>
+
             </listitem>
+
             <listitem>
                 <para>
                     間違い: <acronym>PHP</acronym> の
@@ -140,7 +143,7 @@ php_value session.auto_start 0
 
         <para>
             セッション名前空間をロックし、
-            それ以降その名前空間のデータに手を加えられないようにすることができます。
+            それ以降その名前空間のデータに手を加えられないようにできます。
             特定の名前空間を読み取り専用にするには
             <methodname>lock()</methodname> を、そして
             読み取り専用の名前空間を読み書きできるようにするには <methodname>unLock()</methodname>
@@ -182,7 +185,7 @@ if ($userProfileNamespace->isLocked()) {
         <title>名前空間の有効期限</title>
 
         <para>
-            名前空間およびその中の個々のキーについて、その寿命を制限することができます。
+            名前空間およびその中の個々のキーについて、その寿命を制限できます。
             これは、たとえばリクエスト間で一時的な情報を渡す際に使用します。
             これにより、認証内容などの機密情報へアクセスできないようにし、
             セキュリティリスクを下げます。有効期限の設定は経過秒数によって決めることもできますし、

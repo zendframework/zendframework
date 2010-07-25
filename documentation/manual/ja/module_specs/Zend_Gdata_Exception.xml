@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 20779 -->
 <sect1 id="zend.gdata.exception">
     <title>Gdata の例外処理</title>
 
@@ -77,7 +77,7 @@ try {
     </para>
 
     <para>
-        これらの例外サブクラスを使用すると、より細やかな例外処理をすることができます。
+        これらの例外サブクラスを使用すると、より細やかな例外処理を行なえます。
         どの <classname>Zend_Gdata</classname> のメソッドがどんな例外サブクラスをスローするのかについては、
         <acronym>API</acronym> ドキュメントを参照ください。
     </para>

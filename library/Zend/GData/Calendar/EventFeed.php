@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Calendar;
 
+use Zend\GData\Calendar;
+
 /**
  * Data model for a Google Calendar feed of events
  *
- * @uses       \Zend\GData\Calendar\Calendar
+ * @uses       \Zend\GData\Calendar
  * @uses       Zend_Gdata_Extension_Timezone
  * @uses       \Zend\GData\Feed
  * @category   Zend
@@ -47,14 +49,14 @@ class EventFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\Calendar\EventEntry';
+    protected $_entryClassName = 'Zend\GData\Calendar\EventEntry';
 
     /**
      * The classname for the feed.
      *
      * @var string
      */
-    protected $_feedClassName = '\Zend\GData\Calendar\EventFeed';
+    protected $_feedClassName = 'Zend\GData\Calendar\EventFeed';
 
     public function __construct($element = null)
     {

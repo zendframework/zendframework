@@ -4,8 +4,8 @@
     <title>HeadLink Helper</title>
 
     <para>
-        The HTML <emphasis>&lt;link&gt;</emphasis> element is increasingly used for
-        linking a variety of resources for your site: stylesheets, feeds,
+        The <acronym>HTML</acronym> <emphasis>&lt;link&gt;</emphasis> element is increasingly used
+        for linking a variety of resources for your site: stylesheets, feeds,
         favicons, trackbacks, and more. The <classname>HeadLink</classname> helper
         provides a simple interface for creating and aggregating these elements
         for later retrieval and output in your layout script.

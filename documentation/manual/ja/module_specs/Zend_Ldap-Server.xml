@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16641 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.ldap.server">
     <title>LDAPサーバから情報を取得</title>
     <sect2 id="zend.ldap.server.rootdse">

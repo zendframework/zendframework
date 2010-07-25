@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17663 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.form.standardElements">
     <title>Zend Framework に同梱されている標準のフォーム要素</title>
 
@@ -55,7 +55,7 @@
         <para>
             Captcha フォーム要素は、フォームの captcha でどの <link
                 linkend="zend.captcha.adapters">Zend_Captcha アダプタ</link>
-            を使用するかを選択することができます。
+            を使用するかを選択できます。
             それからこのアダプタをオブジェクトのバリデータとして設定し、
             CAPTCHA デコレータを使用してレンダリングを行います
             (CAPTCHA アダプタへのプロキシとなります)。
@@ -105,7 +105,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 
 // captcha と captchaOptions の使用
 $element = new Zend_Form_Element_Captcha('foo', array(
-    'label' => "あなたが人間かどうかを確認します"
+    'label' => "あなたが人間かどうかを確認します",
     'captcha' => 'Figlet',
     'captchaOptions' => array(
         'captcha' => 'Figlet',
@@ -370,7 +370,7 @@ if ($form->foo->isUploaded()) {
         <para>
             <classname>Zend_Form_Element_File</classname> は複数のファイルもサポートしています。
             <methodname>setMultiFile($count)</methodname> メソッドをコールすると、
-            作成したい file 要素の数を設定することができます。
+            作成したい file 要素の数を設定できます。
             これを使えば、同じ設定を何度も行う手間が省けます。
         </para>
 
@@ -514,8 +514,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <title>Zend_Form_Element_Image</title>
 
         <para>
-            画像もフォーム要素として使用することができます。
-            これを用いると、フォームのボタンにグラフィカルな要素を指定したりすることができます。
+            画像もフォーム要素として使用できます。
+            これを用いると、フォームのボタンにグラフィカルな要素を指定したりできます。
         </para>
 
         <para>
@@ -525,10 +525,10 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             (あるいは設定キー 'image') で設定します。
             また、画像を submit したときに使用する値は、
             <methodname>setImageValue()</methodname> アクセサ
-            (あるいは設定キー 'imageValue') でオプションとして設定することができます。
+            (あるいは設定キー 'imageValue') でオプションとして設定できます。
             その要素に設定された値が
             <code>imageValue</code> とマッチした場合、アクセサ
-            <methodname>isChecked()</methodname> は true を返します。
+            <methodname>isChecked()</methodname> は <constant>TRUE</constant> を返します。
         </para>
 
         <para>
@@ -537,7 +537,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             デコレータ</link> でレンダリングを行います
             (それ以外に標準のデコレータ Errors、HtmlTag および Label も使用します)。
             オプションのタグを <code>Image</code> デコレータに指定すると、
-            それで image 要素をラップすることができます。
+            それで image 要素をラップできます。
         </para>
     </sect2>
 
@@ -556,7 +556,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <para>
             <classname>Zend_Form_Element_MultiCheckbox</classname> は
             それを行うためのものです。Multi 要素を継承したその他の要素を同様に、
-            選択肢のリストを指定してそれらを同じ方法で検証することができます。
+            選択肢のリストを指定してそれらを同じ方法で検証できます。
             'formMultiCheckbox' ビューヘルパーを使用して、
             フォームの送信内容を配列で返すようにします。
         </para>
@@ -569,7 +569,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
-            に false 値を渡します。
+            に <constant>FALSE</constant> 値を渡します。
         </para>
 
         <para>
@@ -623,14 +623,14 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             <acronym>XHTML</acronym> の <code>select</code> 要素には 'multiple'
-            属性を指定することができます。
+            属性を指定できます。
             これは、普通の要素ではなく複数項目を選択できる要素を表します。
             <classname>Zend_Form_Element_Multiselect</classname> は、
             <link
                 linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link>
             を継承して <code>multiple</code> 要素を 'multiple'
             に設定したものです。基底クラス <classname>Zend_Form_Element_Multi</classname>
-            を継承したその他のクラスと同様、以下のメソッドでオプションを操作することができます。
+            を継承したその他のクラスと同様、以下のメソッドでオプションを操作できます。
         </para>
 
         <itemizedlist>
@@ -663,7 +663,7 @@ $element->setValue(array('bar', 'bat'));
             <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
-            に false 値を渡します。
+            に <constant>FALSE</constant> 値を渡します。
         </para>
     </sect2>
 
@@ -693,7 +693,7 @@ $element->setValue(array('bar', 'bat'));
             ひとつを選ばせるためのものです。
             <classname>Zend_Form_Element_Radio</classname> は規定クラス
             <classname>Zend_Form_Element_Multi</classname> を継承したもので、
-            複数のオプションを指定することができます。そして、それを表示するために
+            複数のオプションを指定できます。そして、それを表示するために
             <code>formRadio</code> ビューヘルパーを使用します。
         </para>
 
@@ -705,12 +705,12 @@ $element->setValue(array('bar', 'bat'));
             <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
-            に false 値を渡します。
+            に <constant>FALSE</constant> 値を渡します。
         </para>
 
         <para>
             Multi 要素基底クラスを継承したその他のクラスと同様、
-            以下のメソッドでラジオボタンの表示オプションを操作することができます。
+            以下のメソッドでラジオボタンの表示オプションを操作できます。
         </para>
 
         <itemizedlist>
@@ -768,12 +768,12 @@ $element->setValue(array('bar', 'bat'));
             <methodname>setRegisterInArrayValidator(false)</methodname>
             をコールするか、あるいは設定キー
             <code>registerInArrayValidator</code>
-            に false 値を渡します。
+            に <constant>FALSE</constant> 値を渡します。
         </para>
 
         <para>
             Multi 要素を継承したその他のクラスと同様、
-            以下のメソッドでオプションを操作することができます。
+            以下のメソッドでオプションを操作できます。
         </para>
 
         <itemizedlist>
@@ -811,7 +811,7 @@ $element->setValue(array('bar', 'bat'));
             <methodname>isChecked()</methodname> メソッドを用意しています。
             フォームから送信される submit ボタンはひとつだけなので、
             各 submit 要素に対してこのメソッドをコールすることで
-            どのボタンが押されたのかを判断することができます。
+            どのボタンが押されたのかを判断できます。
         </para>
 
         <para>

@@ -145,9 +145,10 @@
             Assuming you want to put the link inside <filename>/usr/local/bin</filename>
             (this could also work for placing the link inside
             <filename>/home/username/bin/</filename> for example) you would issue a
-            command similar to this: </para>
+            command similar to this:
+        </para>
 
-            <programlisting language="sh"><![CDATA[
+        <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
 # OR (for example)

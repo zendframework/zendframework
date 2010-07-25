@@ -86,10 +86,10 @@ abstract class AbstractQuery
      * Score specified document
      *
      * @param integer $docId
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @return float
      */
-    abstract public function score($docId, Lucene\IndexInterface $reader);
+    abstract public function score($docId, Lucene\SearchIndex $reader);
 
     /**
      * Get document ids likely matching the query
@@ -106,25 +106,25 @@ abstract class AbstractQuery
      *
      * AbstractQuery specific implementation
      *
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      */
-    abstract public function execute(Lucene\IndexInterface $reader, $docsFilter = null);
+    abstract public function execute(Lucene\SearchIndex $reader, $docsFilter = null);
 
     /**
      * Constructs an appropriate Weight implementation for this query.
      *
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
-    abstract public function createWeight(Lucene\IndexInterface $reader);
+    abstract public function createWeight(Lucene\SearchIndex $reader);
 
     /**
      * Constructs an initializes a Weight for a _top-level_query_.
      *
-     * @param \Zend\Search\Lucene\IndexInterface $reader
+     * @param \Zend\Search\Lucene\SearchIndex $reader
      */
-    protected function _initWeight(Lucene\IndexInterface $reader)
+    protected function _initWeight(Lucene\SearchIndex $reader)
     {
         // Check, that it's a top-level query and query weight is not initialized yet.
         if ($this->_weight !== null) {
@@ -140,18 +140,18 @@ abstract class AbstractQuery
     /**
      * Re-write query into primitive queries in the context of specified index
      *
-     * @param \Zend\Search\Lucene\IndexInterface $index
+     * @param \Zend\Search\Lucene\SearchIndex $index
      * @return \Zend\Search\Lucene\Search\AbstractQuery\AbstractQuery
      */
-    abstract public function rewrite(Lucene\IndexInterface $index);
+    abstract public function rewrite(Lucene\SearchIndex $index);
 
     /**
      * Optimize query in the context of specified index
      *
-     * @param \Zend\Search\Lucene\IndexInterface $index
+     * @param \Zend\Search\Lucene\SearchIndex $index
      * @return \Zend\Search\Lucene\Search\AbstractQuery\AbstractQuery
      */
-    abstract public function optimize(Lucene\IndexInterface $index);
+    abstract public function optimize(Lucene\SearchIndex $index);
 
     /**
      * Reset query, so it can be reused within other queries or
@@ -180,16 +180,16 @@ abstract class AbstractQuery
     /**
      * AbstractQuery specific matches highlighting
      *
-     * @param \Zend\Search\Lucene\Search\Highlighter\HighlighterInterface $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param \Zend\Search\Lucene\Search\Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
      */
-    abstract protected function _highlightMatches(Highlighter\HighlighterInterface $highlighter);
+    abstract protected function _highlightMatches(Highlighter $highlighter);
 
     /**
      * Highlight matches in $inputHTML
      *
      * @param string $inputHTML
      * @param string  $defaultEncoding   HTML encoding, is used if it's not specified using Content-type HTTP-EQUIV meta tag.
-     * @param \Zend\Search\Lucene\Search\Highlighter\HighlighterInterface|null $highlighter
+     * @param \Zend\Search\Lucene\Search\Highlighter|null $highlighter
      * @return string
      */
     public function highlightMatches($inputHTML, $defaultEncoding = '', $highlighter = null)
@@ -211,7 +211,7 @@ abstract class AbstractQuery
      *
      * @param string $inputHTMLFragment
      * @param string  $encoding   Input HTML string encoding
-     * @param \Zend\Search\Lucene\Search\Highlighter\HighlighterInterface|null $highlighter
+     * @param \Zend\Search\Lucene\Search\Highlighter|null $highlighter
      * @return string
      */
     public function htmlFragmentHighlightMatches($inputHTMLFragment, $encoding = 'UTF-8', $highlighter = null)

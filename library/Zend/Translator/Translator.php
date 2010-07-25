@@ -57,47 +57,87 @@ class Translator
      * @var \Zend\Translator\Adapter
      */
     private $_adapter;
-    private static $_cache = null;
 
     /**
      * Generates the standard translation object
      *
-     * @param  string              $adapter  Adapter to use
-     * @param  array               $data     OPTIONAL Translation source data for the adapter
-     *                                       Depends on the Adapter
-     * @param  string|\Zend\Locale\Locale  $locale   OPTIONAL locale to use
-     * @param  array               $options  OPTIONAL options for the adapter
-     * @throws \Zend\Translator\Exception
+     * @param  array|Zend_Config $options Options to use
+     * @throws Zend_Translate_Exception
      */
-    public function __construct($adapter, $data = null, $locale = null, array $options = array())
+    public function __construct($options = array())
     {
-        $this->setAdapter($adapter, $data, $locale, $options);
+        if ($options instanceof \Zend\Config\Config) {
+            $options = $options->toArray();
+        } else if (func_num_args() > 1) {
+            $args               = func_get_args();
+            $options            = array();
+            $options['adapter'] = array_shift($args);
+            if (!empty($args)) {
+                $options['content'] = array_shift($args);
+            }
+
+            if (!empty($args)) {
+                $options['locale'] = array_shift($args);
+            }
+
+            if (!empty($args)) {
+                $opt     = array_shift($args);
+                $options = array_merge($opt, $options);
+            }
+        } else if (!is_array($options)) {
+            $options = array('adapter' => $options);
+        }
+
+        $this->setAdapter($options);
     }
 
     /**
      * Sets a new adapter
      *
-     * @param  string              $adapter  Adapter to use
-     * @param  string|array        $data     OPTIONAL Translation data
-     * @param  string|\Zend\Locale\Locale  $locale   OPTIONAL locale to use
-     * @param  array               $options  OPTIONAL Options to use
-     * @throws \Zend\Translator\Exception
+     * @param  array|Zend_Config $options Options to use
+     * @throws Zend_Translate_Exception
      */
-    public function setAdapter($adapter, $data = null, $locale = null, array $options = array())
+    public function setAdapter($options = array())
     {
-        $adapter = 'Zend\\Translator\\Adapter\\' . ucfirst($adapter);
+        if ($options instanceof \Zend\Config\Config) {
+            $options = $options->toArray();
+        } elseif (func_num_args() > 1) {
+            $args               = func_get_args();
+            $options            = array();
+            $options['adapter'] = array_shift($args);
+            if (!empty($args)) {
+                $options['content'] = array_shift($args);
+            }
 
-        if (!class_exists($adapter, true)) {
-            throw new Exception("Adapter " . $adapter . " does not exist and cannot be loaded.");
+            if (!empty($args)) {
+                $options['locale'] = array_shift($args);
+            }
+
+            if (!empty($args)) {
+                $opt     = array_shift($args);
+                $options = array_merge($opt, $options);
+            }
+        } else if (!is_array($options)) {
+            $options = array('adapter' => $options);
         }
 
-        if (self::$_cache !== null) {
-            call_user_func(array($adapter, 'setCache'), self::$_cache);
+        if (\Zend\Loader::isReadable('Zend/Translator/Adapter/' . ucfirst($options['adapter']). '.php')) {
+            $options['adapter'] = 'Zend\Translator\Adapter\\' . ucfirst($options['adapter']);
         }
 
-        $this->_adapter = new $adapter($data, $locale, $options);
+        if (!class_exists($options['adapter'])) {
+            throw new Exception("Adapter " . $options['adapter'] . " does not exist and cannot be loaded");
+        }
+
+        if (array_key_exists('cache', $options)) {
+            Adapter::setCache($options['cache']);
+        }
+
+        $adapter = $options['adapter'];
+        unset($options['adapter']);
+        $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Adapter) {
-            throw new Exception("Adapter " . $adapter . " does not extend Zend_Translate_Adapter");
+            throw new Exception("Adapter " . $adapter . " does not extend Zend\Translate\Adapter");
         }
     }
 
@@ -118,18 +158,18 @@ class Translator
      */
     public static function getCache()
     {
-        return self::$_cache;
+        return Adapter::getCache();
     }
 
     /**
      * Sets a cache for all instances of Zend_Translate
      *
-     * @param  \Zend\Cache\Frontend\Core $cache Cache to store to
+     * @param  \Zend\Cache\Frontend $cache Cache to store to
      * @return void
      */
-    public static function setCache(\Zend\Cache\Frontend\Core $cache)
+    public static function setCache(\Zend\Cache\Frontend $cache)
     {
-        self::$_cache = $cache;
+        Adapter::setCache($cache);
     }
 
     /**
@@ -139,11 +179,7 @@ class Translator
      */
     public static function hasCache()
     {
-        if (self::$_cache !== null) {
-            return true;
-        }
-
-        return false;
+        return Adapter::hasCache();
     }
 
     /**
@@ -153,17 +189,18 @@ class Translator
      */
     public static function removeCache()
     {
-        self::$_cache = null;
+        Adapter::removeCache();
     }
 
     /**
      * Clears all set cache data
      *
+     * @param string $tag Tag to clear when the default tag name is not used
      * @return void
      */
-    public static function clearCache()
+    public static function clearCache($tag = null)
     {
-        self::$_cache->clean();
+        Adapter::clearCache($tag);
     }
 
     /**

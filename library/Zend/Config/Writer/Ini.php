@@ -96,7 +96,8 @@ class Ini extends AbstractFileWriter
                        .  $this->_addBranch($this->_config)
                        .  "\n";
         } else {
-            foreach ($this->_config as $sectionName => $data) {
+            $config = $this->_sortRootElements($this->_config);
+            foreach ($config as $sectionName => $data) {
                 if (!($data instanceof Config\Config)) {
                     $iniString .= $sectionName
                                .  ' = '
@@ -160,5 +161,34 @@ class Ini extends AbstractFileWriter
         } else {
             throw new Config\Exception('Value can not contain double quotes "');
         }
+    }
+    
+    /**
+     * Root elements that are not assigned to any section needs to be
+     * on the top of config.
+     * 
+     * @see    http://framework.zend.com/issues/browse/ZF-6289
+     * @param  Zend_Config
+     * @return Zend_Config
+     */
+    protected function _sortRootElements(Zend_Config $config)
+    {
+        $configArray = $config->toArray();
+        $sections = array();
+        
+        // remove sections from config array
+        foreach ($configArray as $key => $value) {
+            if (is_array($value)) {
+                $sections[$key] = $value;
+                unset($configArray[$key]);
+            }
+        }
+        
+        // readd sections to the end
+        foreach ($sections as $key => $value) {
+            $configArray[$key] = $value;
+        }
+        
+        return new Zend_Config($configArray);
     }
 }

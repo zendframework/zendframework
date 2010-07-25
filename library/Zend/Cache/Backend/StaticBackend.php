@@ -36,9 +36,7 @@ use Zend\Cache,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StaticBackend
-    extends AbstractBackend
-    implements Backend
+class StaticBackend extends AbstractBackend implements Backend
 {
     const INNER_CACHE_NAME = 'zend_cache_backend_static_tagcache';
 
@@ -153,7 +151,7 @@ class StaticBackend
      * Test if a cache is available or not (for the given id)
      *
      * @param  string $id cache id
-     * @return bool 
+     * @return bool
      */
     public function test($id)
     {
@@ -172,7 +170,7 @@ class StaticBackend
             return false;
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
-        
+
         // Switch extension if needed
         if (isset($this->_tagged[$id])) {
             $extension = $this->_tagged[$id]['extension'];
@@ -255,12 +253,19 @@ class StaticBackend
         $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
         return (bool) $result;
     }
-    
+
     /**
      * Recursively create the directories needed to write the static file
      */
     protected function _createDirectoriesFor($path)
     {
+        if ( !is_dir($path)
+          && !@mkdir($path, $this->_options['cache_directory_umask'], true)) {
+            $lastErr = error_get_last();
+            Zend_Cache::throwException("Can't create directory: {$lastErr['message']}");
+        }
+
+        /*
         $parts = explode('/', $path);
         $directory = '';
         foreach ($parts as $part) {
@@ -269,8 +274,9 @@ class StaticBackend
                 mkdir($directory, $this->_octdec($this->_options['cache_directory_umask']));
             }
         }
+        */
     }
-    
+
     /**
      * Detect serialization of data (cannot predict since this is the only way
      * to obey the interface yet pass in another parameter).
@@ -481,8 +487,8 @@ class StaticBackend
 
     /**
      * Verify path exists and is non-empty
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
      * @return bool
      */
     protected function _verifyPath($path)
@@ -494,7 +500,7 @@ class StaticBackend
 
     /**
      * Determine the page to save from the request
-     * 
+     *
      * @return string
      */
     protected function _detectId()
@@ -525,14 +531,14 @@ class StaticBackend
 
         // Validation assumes no query string, fragments or scheme included - only the path
         if (!preg_match(
-                '/^(?:\/(?:(?:%[[:xdigit:]]{2}|[A-Za-z0-9-_.!~*\'()\[\]:@&=+$,;])*)?)+$/', 
+                '/^(?:\/(?:(?:%[[:xdigit:]]{2}|[A-Za-z0-9-_.!~*\'()\[\]:@&=+$,;])*)?)+$/',
                 $string
             )
         ) {
             Cache\Cache::throwException("Invalid id or tag '$string' : must be a valid URL path");
         }
     }
-    
+
     /**
      * Detect an octal string and return its octal value for file permission ops
      * otherwise return the non-string (assumed octal or decimal int already)
@@ -547,7 +553,7 @@ class StaticBackend
         }
         return $val;
     }
-    
+
     /**
      * Decode a request URI from the provided ID
      */

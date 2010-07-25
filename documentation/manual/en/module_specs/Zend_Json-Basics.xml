@@ -38,8 +38,8 @@ if($debug) {
 
         <para>
             Second optional argument of <methodname>Zend_Json::prettyPrint()</methodname> is an
-            option array. Option <code>indent</code> allows to set indentation string - by default
-            it's a single tab character.
+            option array. Option <property>indent</property> allows to set indentation string - by
+            default it's a single tab character.
         </para>
     </sect2>
 </sect1>

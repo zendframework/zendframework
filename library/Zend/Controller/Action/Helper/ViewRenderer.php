@@ -77,7 +77,7 @@ use Zend\Filter;
 class ViewRenderer extends AbstractHelper
 {
     /**
-     * @var \Zend\View\ViewInterface
+     * @var \Zend\View\ViewEngine
      */
     public $view;
 
@@ -178,11 +178,11 @@ class ViewRenderer extends AbstractHelper
      *
      * Optionally set view object and options.
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @param  array               $options
      * @return void
      */
-    public function __construct(View\ViewInterface $view = null, array $options = array())
+    public function __construct(View\ViewEngine $view = null, array $options = array())
     {
         if (null !== $view) {
             $this->setView($view);
@@ -200,7 +200,7 @@ class ViewRenderer extends AbstractHelper
      */
     public function __clone()
     {
-        if (isset($this->view) && $this->view instanceof View\ViewInterface) {
+        if (isset($this->view) && $this->view instanceof View\ViewEngine) {
             $this->view = clone $this->view;
 
         }
@@ -209,10 +209,10 @@ class ViewRenderer extends AbstractHelper
     /**
      * Set the view object
      *
-     * @param  \Zend\View\ViewInterface $view
+     * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Controller\Action\Helper\ViewRenderer Provides a fluent interface
      */
-    public function setView(View\ViewInterface $view)
+    public function setView(View\ViewEngine $view)
     {
         $this->view = $view;
         return $this;

@@ -24,6 +24,8 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Provider;
+use Zend\Tool\Framework\Provider,
+    Zend\Tool\Framework\RegistryEnabled;
 
 /**
  * The purpose of Zend_Tool_Framework_Provider_Signature is to derive
@@ -32,22 +34,22 @@ namespace Zend\Tool\Framework\Provider;
  * @uses       \Zend\Reflection\ReflectionClass
  * @uses       \Zend\Tool\Framework\Action\Base
  * @uses       \Zend\Tool\Framework\Provider\Exception
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Signature implements \Zend\Tool\Framework\Registry\EnabledInterface
+class Signature implements RegistryEnabled
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\Registry
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
     /**
-     * @var \Zend\Tool\Framework\Provider\ProviderInterface
+     * @var \Zend\Tool\Framework\Provider
      */
     protected $_provider = null;
 
@@ -84,9 +86,9 @@ class Signature implements \Zend\Tool\Framework\Registry\EnabledInterface
     /**
      * Constructor
      *
-     * @param \Zend\Tool\Framework\Provider\ProviderInterface $provider
+     * @param \Zend\Tool\Framework\Provider $provider
      */
-    public function __construct(ProviderInterface $provider)
+    public function __construct(Provider $provider)
     {
         $this->_provider = $provider;
         $this->_providerReflection = new \Zend\Reflection\ReflectionClass($provider);
@@ -95,10 +97,10 @@ class Signature implements \Zend\Tool\Framework\Registry\EnabledInterface
     /**
      * setRegistry()
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return \Zend\Tool\Framework\Provider\Signature
      */
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry $registry)
     {
         $this->_registry = $registry;
         return $this;
@@ -126,7 +128,7 @@ class Signature implements \Zend\Tool\Framework\Registry\EnabledInterface
     /**
      * Get the provider for this signature
      *
-     * @return \Zend\Tool\Framework\Provider\ProviderInterface
+     * @return \Zend\Tool\Framework\Provider
      */
     public function getProvider()
     {

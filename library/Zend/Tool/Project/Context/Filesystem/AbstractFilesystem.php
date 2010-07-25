@@ -31,17 +31,17 @@ namespace Zend\Tool\Project\Context\Filesystem;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\Tool\Project\Context\ContextInterface
+ * @uses       \Zend\Tool\Project\Context
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractFilesystem implements \Zend\Tool\Project\Context\ContextInterface
+abstract class AbstractFilesystem implements \Zend\Tool\Project\Context
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource\Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_resource = null;
 
@@ -70,10 +70,10 @@ abstract class AbstractFilesystem implements \Zend\Tool\Project\Context\ContextI
     /**
      * setResource()
      *
-     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource $resource
      * @return \Zend\Tool\Project\Context\Filesystem\AbstractFilesystem
      */
-    public function setResource(\Zend\Tool\Project\Profile\Resource\Resource $resource)
+    public function setResource(\Zend\Tool\Project\Profile\Resource $resource)
     {
         $this->_resource = $resource;
         return $this;

@@ -28,20 +28,18 @@ namespace Zend\InfoCard\XML;
 /**
  * An object representing an Xml EncryptedKEy block
  *
- * @uses       \Zend\InfoCard\XML\Element\Element
+ * @uses       \Zend\InfoCard\XML\AbstractElement
  * @uses       \Zend\InfoCard\XML\EncryptedKey
  * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\InfoCard\XML\KeyInfo\KeyInfo
- * @uses       \Zend\InfoCard\XML\KeyInfo\KeyInfoInterface
+ * @uses       \Zend\InfoCard\XML\KeyInfo\Factory
+ * @uses       \Zend\InfoCard\XML\KeyInfo
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EncryptedKey
-    extends Element\Element
-    implements KeyInfo\KeyInfoInterface
+class EncryptedKey extends AbstractElement implements KeyInfo
 {
     /**
      * Return an instance of the object based on input XML Data
@@ -52,7 +50,7 @@ class EncryptedKey
      */
     static public function getInstance($xmlData)
     {
-        if($xmlData instanceof Element\Element) {
+        if($xmlData instanceof AbstractElement) {
             $strXmlData = $xmlData->asXML();
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
@@ -81,7 +79,7 @@ class EncryptedKey
         $this->registerXPathNamespace('e', 'http://www.w3.org/2001/04/xmlenc#');
         list($encryption_method) = $this->xpath("//e:EncryptionMethod");
 
-        if(!($encryption_method instanceof Element\Element)) {
+        if(!($encryption_method instanceof AbstractElement)) {
             throw new Exception("Unable to find the e:EncryptionMethod KeyInfo encryption block");
         }
 
@@ -106,11 +104,11 @@ class EncryptedKey
         $this->registerXPathNamespace('e', 'http://www.w3.org/2001/04/xmlenc#');
         list($encryption_method) = $this->xpath("//e:EncryptionMethod");
 
-        if(!($encryption_method instanceof Element\Element)) {
+        if(!($encryption_method instanceof AbstractElement)) {
             throw new Exception("Unable to find the e:EncryptionMethod KeyInfo encryption block");
         }
 
-        if(!($encryption_method->DigestMethod instanceof Element\Element)) {
+        if(!($encryption_method->DigestMethod instanceof AbstractElement)) {
             throw new Exception("Unable to find the DigestMethod block");
         }
 
@@ -134,7 +132,7 @@ class EncryptedKey
     {
 
         if(isset($this->KeyInfo)) {
-            return KeyInfo\KeyInfo::getInstance($this->KeyInfo);
+            return KeyInfo\Factory::getInstance($this->KeyInfo);
         }
 
         throw new Exception("Unable to locate a KeyInfo block");
@@ -153,14 +151,14 @@ class EncryptedKey
 
         list($cipherdata) = $this->xpath("//e:CipherData");
 
-        if(!($cipherdata instanceof Element\Element)) {
+        if(!($cipherdata instanceof AbstractElement)) {
             throw new Exception("Unable to find the e:CipherData block");
         }
 
         $cipherdata->registerXPathNameSpace('enc', 'http://www.w3.org/2001/04/xmlenc#');
         list($ciphervalue) = $cipherdata->xpath("//enc:CipherValue");
 
-        if(!($ciphervalue instanceof Element\Element)) {
+        if(!($ciphervalue instanceof AbstractElement)) {
             throw new Exception("Unable to fidn the enc:CipherValue block");
         }
 

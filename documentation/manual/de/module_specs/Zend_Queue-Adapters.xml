@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.adapters">
     <title>Adapter</title>
@@ -487,8 +487,8 @@ $queue = new Zend_Queue('Db', $options);
                 <listitem>
                     <para>
                         <methodname>getQueues()</methodname> - Zend Platform erlaubt es nicht
-                        über die API die angehängten Job Handling Skripte einzusehen. Diese
-                        Methode wirft eine Exception.
+                        über die <acronym>API</acronym> die angehängten Job Handling Skripte
+                        einzusehen. Diese Methode wirft eine Exception.
                     </para>
                 </listitem>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17592 -->
+<!-- EN-Revision: 21661 -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
@@ -42,6 +42,7 @@ $router->addRoute('user', $route);
 
     <note>
         <title>文字の使用法</title>
+
         <para>
             現在の実装では、(スラッシュ以外の)
             任意の文字を変数名として使用できます。しかし、
@@ -105,7 +106,7 @@ $router->addRoute('default', $route);
         <title>変数のデフォルト</title>
 
         <para>
-            ルートで使用するすべての変数についてデフォルト値を指定することができます。
+            ルートで使用するすべての変数についてデフォルト値を指定できます。
             これは、 <classname>Zend_Controller_Router_Route</classname>
             のコンストラクタの 2 番目のパラメータで指定します。
             このパラメータは、変数名をキーとする配列で、
@@ -161,7 +162,7 @@ $router->addRoute('archive', $route);
 
         <para>
             <classname>Zend_Controller_Router_Route</classname> のコンストラクタの
-            三番目のパラメータで、変数の制約を指定することができます。
+            三番目のパラメータで、変数の制約を指定できます。
             これは、正規表現で指定します。
         </para>
 
@@ -202,12 +203,14 @@ $router->addRoute('archive', $route);
                     レジストリに、キー <classname>Zend_Translate</classname> で格納する
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     静的メソッド
                     <methodname>Zend_Controller_Router_Route::setDefaultTranslator()</methodname> で設定する
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     コンストラクタの 4 番目のパラメータとして渡す
@@ -228,17 +231,20 @@ $router->addRoute('archive', $route);
                     レジストリに、キー <classname>Zend_Locale</classname> で格納する
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     静的メソッド
                     <methodname>Zend_Controller_Router_Route::setDefaultLocale()</methodname> で設定する
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     コンストラクタの 5 番目のパラメータとして渡す
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     アセンブルメソッドのパラメータ <command>@locale</command> として渡す
@@ -260,6 +266,7 @@ $router->addRoute('archive', $route);
 
         <note>
             <title>メッセージ ID と分割された言語ファイル</title>
+
             <para>
                 ルートの中で使いたいメッセージ ID が、
                 ビュースクリプトやその他の部分ですでに使われていることもあるでしょう。
@@ -275,12 +282,25 @@ $router->addRoute('archive', $route);
 
         <programlisting language="php"><![CDATA[
 // 翻訳器を準備します
-$translator = new Zend_Translate('array', array(), 'en');
-$translator->addTranslation(array('archive' => 'archiv',
-                                  'year'    => 'jahr',
-                                  'month'   => 'monat',
-                                  'index'   => 'uebersicht'),
-                            'de');
+$translator = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array(),
+        'locale'  => 'en'
+    )
+);
+$translator->addTranslation(
+    array(
+        'content' =>
+            array(
+                'archive' => 'archiv',
+                'year'    => 'jahr',
+                'month'   => 'monat',
+                'index'   => 'uebersicht'
+            ),
+        'locale'  => 'de'
+    )
+);
 
 // 現在のロケールを翻訳器に設定します
 $translator->setLocale('en');

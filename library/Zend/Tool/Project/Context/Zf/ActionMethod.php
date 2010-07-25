@@ -36,22 +36,22 @@ use Zend\CodeGenerator\PHP;
  * @uses       \Zend\CodeGenerator\PHP\PHPFile
  * @uses       \Zend\Reflection\ReflectionFile
  * @uses       \Zend\Tool\Project\Context\Exception
- * @uses       \Zend\Tool\Project\Context\ContextInterface
+ * @uses       \Zend\Tool\Project\Context
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActionMethod implements Context\ContextInterface
+class ActionMethod implements Context
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource\Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_resource = null;
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource\Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_controllerResource = null;
 
@@ -112,10 +112,10 @@ class ActionMethod implements Context\ContextInterface
     /**
      * setResource()
      *
-     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource $resource
      * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
-    public function setResource(\Zend\Tool\Project\Profile\Resource\Resource $resource)
+    public function setResource(\Zend\Tool\Project\Profile\Resource $resource)
     {
         $this->_resource = $resource;
         return $this;

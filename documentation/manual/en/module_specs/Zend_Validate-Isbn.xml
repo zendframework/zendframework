@@ -18,8 +18,9 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>separator</property></emphasis>: Defines the allowed separator
-                    for the <acronym>ISBN</acronym> number. It defaults to an empty string.
+                    <emphasis><property>separator</property></emphasis>: Defines the allowed
+                    separator for the <acronym>ISBN</acronym> number. It defaults to an empty
+                    string.
                 </para>
             </listitem>
 

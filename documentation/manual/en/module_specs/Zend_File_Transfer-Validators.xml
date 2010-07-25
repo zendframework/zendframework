@@ -435,16 +435,16 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
         <title>Crc32 Validator</title>
 
         <para>
-            The <classname>Crc32</classname> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension from <acronym>PHP</acronym> with the crc32
-            algorithm. It supports the following options:
+            The <classname>Crc32</classname> validator checks the content of a transferred file by
+            hashing it. This validator uses the hash extension from <acronym>PHP</acronym> with the
+            crc32 algorithm. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <property>*</property>: Sets any key or use a numeric array. The values will be used
-                    as hash to validate against.
+                    <property>*</property>: Sets any key or use a numeric array. The values will be
+                    used as hash to validate against.
                 </para>
 
                 <para>

@@ -35,12 +35,12 @@ namespace Zend\Controller\Request;
  * In each case, the URL to check against is found in REDIRECT_URL, not
  * REQUEST_URI.
  *
- * @uses       \Zend\Controller\Request\HTTP
+ * @uses       \Zend\Controller\Request\Http
  * @uses       \Zend\Uri\Uri
  * @package    Zend_Controller
  * @subpackage Request
  */
-class Apache404 extends HTTP
+class Apache404 extends Http
 {
     public function setRequestUri($requestUri = null)
     {

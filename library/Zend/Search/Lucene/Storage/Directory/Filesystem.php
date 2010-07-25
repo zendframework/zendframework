@@ -24,22 +24,24 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Storage\Directory;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Storage\File;
+
+use Zend\Search\Lucene\Storage\Directory,
+    Zend\Search\Lucene\Storage\File,
+    Zend\Search\Lucene;
 
 /**
  * FileSystem implementation of Directory abstraction.
  *
  * @uses       \Zend\Search\Lucene\Exception
- * @uses       \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
- * @uses       \Zend\Search\Lucene\Storage\File\FileInterfacesystem
+ * @uses       \Zend\Search\Lucene\Storage\Directory
+ * @uses       \Zend\Search\Lucene\Storage\File\Filesystem
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filesystem implements DirectoryInterface
+class Filesystem implements Directory
 {
     /**
      * Filesystem path to the directory
@@ -174,7 +176,7 @@ class Filesystem implements DirectoryInterface
      * Creates a new, empty file in the directory with the given $filename.
      *
      * @param string $filename
-     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @return \Zend\Search\Lucene\Storage\File
      * @throws \Zend\Search\Lucene\Exception
      */
     public function createFile($filename)
@@ -338,7 +340,7 @@ class Filesystem implements DirectoryInterface
      *
      * @param string $filename
      * @param boolean $shareHandler
-     * @return \Zend\Search\Lucene\Storage\File\FileInterface
+     * @return \Zend\Search\Lucene\Storage\File
      */
     public function getFileObject($filename, $shareHandler = true)
     {

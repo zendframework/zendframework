@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\App\Extension;
 
+use Zend\GData\App\Extension;
+
 /**
  * Represents the atom:published element
  *
- * @uses       \Zend\GData\App\Extension\Extension
+ * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

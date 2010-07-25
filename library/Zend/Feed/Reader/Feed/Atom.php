@@ -13,29 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Atom.php 22107 2010-05-05 13:42:20Z padraic $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Feed;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Extension\Atom\Feed
-* @uses \Zend\Feed\Reader\Feed\AbstractFeed
-* @category Zend
-* @package Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Atom extends AbstractFeed
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\Extension\Atom\Feed
+ * @uses       \Zend\Feed\Reader\AbstractFeed
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Atom extends Reader\AbstractFeed
 {
 
     /**
@@ -47,10 +46,10 @@ class Atom extends AbstractFeed
     public function __construct(\DOMDocument $dom, $type = null)
     {
         parent::__construct($dom, $type);
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
-        $this->_extensions['Atom\\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Feed');
-        $this->_extensions['DublinCore\\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\Feed');
+        $this->_extensions['Atom\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $atomClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Feed');
+        $this->_extensions['DublinCore\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
         foreach ($this->_extensions as $extension) {
             $extension->setXpathPrefix('/atom:feed');
         }
@@ -366,7 +365,7 @@ class Atom extends AbstractFeed
     /**
      * Get all categories
      *
-     * @return Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories()
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21238 -->
+<!-- EN-Revision: 22183 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.creditcard">
     <title>CreditCard</title>
@@ -165,7 +165,7 @@ $valid = new Zend_Validate_CreditCard(array(
         <table id="zend.validate.set.creditcard.institute.table">
             <title>Konstanten für Kreditkarten Institute</title>
 
-            <tgroup cols="5">
+            <tgroup cols="2">
                 <thead>
                     <row>
                         <entry>Institut</entry>

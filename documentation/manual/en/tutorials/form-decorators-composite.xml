@@ -8,7 +8,6 @@
         example showing a "date of birth element":
     </para>
 
-
     <programlisting language="php"><![CDATA[
 <div class="element">
     <?php echo $form->dateOfBirth->renderLabel() ?>
@@ -184,7 +183,7 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
         <para>
             This class gives some nice flexibility -- we can set default values from our database,
-            and be certain that the value will be stored and represented correctly.  Additionally,
+            and be certain that the value will be stored and represented correctly. Additionally,
             we can allow for the value to be set from an array passed via form input. Finally, we
             have discrete accessors for each date segment, which we can now use in a decorator to
             create a composite element.
@@ -196,10 +195,10 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
         <para>
             Revisiting the example from the last section, let's assume that we want users to input
-            each of the year, month, and day separately. PHP fortunately allows us to use array
-            notation when creating elements, so it's still possible to capture these three entities
-            into a single value -- and we've now created a <classname>Zend_Form</classname> element
-            that can handle such an array value.
+            each of the year, month, and day separately. <acronym>PHP</acronym> fortunately allows
+            us to use array notation when creating elements, so it's still possible to capture these
+            three entities into a single value -- and we've now created a
+            <classname>Zend_Form</classname> element that can handle such an array value.
         </para>
 
         <para>
@@ -377,8 +376,8 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         </para>
 
         <para>
-            In the end, you get a uniform element API you can use to describe an element
-            representing a composite value.
+            In the end, you get a uniform element <acronym>API</acronym> you can use to describe an
+            element representing a composite value.
         </para>
     </sect2>
 </sect1>

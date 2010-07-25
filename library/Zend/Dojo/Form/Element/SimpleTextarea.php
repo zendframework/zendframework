@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form\Element;
+
+/**
  * dijit.form.SimpleTextArea
  *
- * @uses       Zend_Dojo_Form_Element_Dijit
+ * @uses       \Zend\Dojo\Form\Element\Dijit
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo_Form_Element_SimpleTextarea extends Zend_Dojo_Form_Element_Dijit
+class SimpleTextarea extends Dijit
 {
     /**
      * Use SimpleTextarea dijit view helper

@@ -23,7 +23,10 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer;
-use Zend\Markup;
+
+use Zend\Markup\Token,
+    Zend\Loader\PluginLoader,
+    Zend\Filter\PregReplace as PregReplaceFilter;
 
 /**
  * HTML renderer
@@ -32,15 +35,15 @@ use Zend\Markup;
  * @uses       \Zend\Filter\Callback
  * @uses       \Zend\Filter\HtmlEntities
  * @uses       \Zend\Filter\PregReplace
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
- * @uses       \Zend\Markup\Renderer\RendererAbstract
+ * @uses       \Zend\Loader\PluginLoader
+ * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HTML extends RendererAbstract
+class HTML extends AbstractRenderer
 {
 
     /**
@@ -91,11 +94,18 @@ class HTML extends RendererAbstract
             $options = $options->toArray();
         }
 
-        $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array(
-            'Zend\Markup\Renderer\HTML' => 'Zend/Markup/Renderer/HTML/'
+        $this->_pluginLoader = new PluginLoader(array(
+            'Zend\Markup\Renderer\Markup\HTML' => 'Zend/Markup/Renderer/Markup/HTML/'
         ));
 
-        $this->_defineDefaultMarkups();
+        if (!isset($options['useDefaultMarkups']) && isset($options['useDefaultTags'])) {
+            $options['useDefaultMarkups'] = $options['useDefaultTags'];
+        }
+        if (isset($options['useDefaultMarkups']) && ($options['useDefaultMarkups'] !== false)) {
+            $this->_defineDefaultMarkups();
+        } elseif (!isset($options['useDefaultMarkups'])) {
+            $this->_defineDefaultMarkups();
+        }
 
         parent::__construct($options);
     }
@@ -107,6 +117,241 @@ class HTML extends RendererAbstract
      */
     protected function _defineDefaultMarkups()
     {
+        $this->_markups = array(
+            'b' => array(
+                'type'   => 10, // self::TYPE_REPLACE | self::TAG_NORMAL
+                'tag'    => 'strong',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'u' => array(
+                'type'        => 10,
+                'tag'         => 'span',
+                'attributes'  => array(
+                    'style' => 'text-decoration: underline;',
+                ),
+                'group'       => 'inline',
+                'filter'      => true,
+            ),
+            'i' => array(
+                'type'   => 10,
+                'tag'    => 'em',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'cite' => array(
+                'type'   => 10,
+                'tag'    => 'cite',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'del' => array(
+                'type'   => 10,
+                'tag'    => 'del',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'ins' => array(
+                'type'   => 10,
+                'tag'    => 'ins',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'sub' => array(
+                'type'   => 10,
+                'tag'    => 'sub',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'sup' => array(
+                'type'   => 10,
+                'tag'    => 'sup',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'span' => array(
+                'type'   => 10,
+                'tag'    => 'span',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'acronym'  => array(
+                'type'   => 10,
+                'tag'    => 'acronym',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            // headings
+            'h1' => array(
+                'type'   => 10,
+                'tag'    => 'h1',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'h2' => array(
+                'type'   => 10,
+                'tag'    => 'h2',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'h3' => array(
+                'type'   => 10,
+                'tag'    => 'h3',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'h4' => array(
+                'type'   => 10,
+                'tag'    => 'h4',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'h5' => array(
+                'type'   => 10,
+                'tag'    => 'h5',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'h6' => array(
+                'type'   => 10,
+                'tag'    => 'h6',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            // callback tags
+            'url' => array(
+                'type'     => 16, // self::TYPE_ALIAS
+                'name'     => 'URL',
+            ),
+            'URL' => array(
+                'type'     => 6, // self::TYPE_CALLBACK | self::TAG_NORMAL
+                'callback' => null,
+                'group'    => 'inline',
+                'filter'   => true,
+            ),
+            'img' => array(
+                'type'     => 6,
+                'callback' => null,
+                'group'    => 'inline-empty',
+                'filter'   => true,
+            ),
+            'code' => array(
+                'type'     => 6,
+                'callback' => null,
+                'group'    => 'block-empty',
+                'filter'   => false,
+            ),
+            'p' => array(
+                'type'   => 10,
+                'tag'    => 'p',
+                'group'  => 'block',
+                'filter' => true,
+            ),
+            'ignore' => array(
+                'type'   => 10,
+                'start'  => '',
+                'end'    => '',
+                'group'  => 'block-empty',
+                'filter' => true,
+            ),
+            'quote' => array(
+                'type'   => 10,
+                'tag'    => 'blockquote',
+                'group'  => 'block',
+                'filter' => true,
+            ),
+            'list' => array(
+                'type'     => 16,
+                'name'     => 'ListItem',
+            ),
+            'ListItem' => array(
+                'type'     => 6,
+                'callback' => null,
+                'group'    => 'list',
+                'filter'   => new PregReplaceFilter('/.*/is', ''),
+            ),
+            '*' => array(
+                'type'   => 10,
+                'tag'    => 'li',
+                'group'  => 'list-item',
+                'filter' => true,
+            ),
+            'hr' => array(
+                'type'    => 9, // self::TYPE_REPLACE | self::TAG_SINGLE
+                'tag'     => 'hr',
+                'group'   => 'block',
+                'empty'   => true,
+            ),
+            // aliases
+            'bold' => array(
+                'type' => 16,
+                'name' => 'b',
+            ),
+            'strong' => array(
+                'type' => 16,
+                'name' => 'b',
+            ),
+            'italic' => array(
+                'type' => 16,
+                'name' => 'i',
+            ),
+            'em' => array(
+                'type' => 16,
+                'name' => 'i',
+            ),
+            'emphasized' => array(
+                'type' => 16,
+                'name' => 'i',
+            ),
+            'underline' => array(
+                'type' => 16,
+                'name' => 'u',
+            ),
+            'citation' => array(
+                'type' => 16,
+                'name' => 'cite',
+            ),
+            'deleted' => array(
+                'type' => 16,
+                'name' => 'del',
+            ),
+            'insert' => array(
+                'type' => 16,
+                'name' => 'ins',
+            ),
+            'strike' => array(
+                'type' => 16,
+                'name' => 's',
+            ),
+            's' => array(
+                'type' => 16,
+                'name' => 'del',
+            ),
+            'subscript' => array(
+                'type' => 16,
+                'name' => 'sub',
+            ),
+            'superscript' => array(
+                'type' => 16,
+                'name' => 'sup',
+            ),
+            'a' => array(
+                'type' => 16,
+                'name' => 'url',
+            ),
+            'image' => array(
+                'type' => 16,
+                'name' => 'img',
+            ),
+            'li' => array(
+                'type' => 16,
+                'name' => '*',
+            ),
+            'color' => array(
+                'type' => 16,
+                'name' => 'span',
+            ),
+        );
     }
 
     /**
@@ -129,7 +374,7 @@ class HTML extends RendererAbstract
      * @param  array $markup
      * @return string
      */
-    protected function _executeReplace(Markup\Token $token, $markup)
+    protected function _executeReplace(Token $token, $markup)
     {
         if (isset($markup['tag'])) {
             if (!isset($markup['attributes'])) {
@@ -149,7 +394,7 @@ class HTML extends RendererAbstract
      * @param  array $markup
      * @return string
      */
-    protected function _executeSingleReplace(Markup\Token $token, $markup)
+    protected function _executeSingleReplace(Token $token, $markup)
     {
         if (isset($markup['tag'])) {
             if (!isset($markup['attributes'])) {
@@ -168,7 +413,7 @@ class HTML extends RendererAbstract
      * @param  array $attributes
      * @return string
      */
-    public static function renderAttributes(Markup\Token $token, array $attributes = array())
+    public static function renderAttributes(Token $token, array $attributes = array())
     {
         $attributes = array_merge(self::$_defaultAttributes, $attributes);
 

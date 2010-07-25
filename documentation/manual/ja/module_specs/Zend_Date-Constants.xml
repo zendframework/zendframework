@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19162 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -1352,7 +1352,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>うるう年かどうか</entry>
                         <entry><constant>Zend_Date::LEAPYEAR</constant></entry>
                         <entry>なし</entry>
-                        <entry><emphasis>true</emphasis>
+                        <entry><emphasis><constant>TRUE</constant></emphasis>
                         </entry>
                     </row>
                     <row>

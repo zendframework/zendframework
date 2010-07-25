@@ -28,8 +28,8 @@ namespace Zend\GData\Geo\Extension;
 /**
  * Represents the georss:where element used by the Gdata Geo extensions.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Geo\Geo
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Geo
  * @uses       \Zend\GData\Geo\Extension\GmlPoint
  * @category   Zend
  * @package    Zend_Gdata
@@ -37,7 +37,7 @@ namespace Zend\GData\Geo\Extension;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GeoRssWhere extends \Zend\GData\Extension\Extension
+class GeoRssWhere extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'georss';
@@ -58,7 +58,7 @@ class GeoRssWhere extends \Zend\GData\Extension\Extension
      */
     public function __construct($point = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Geo\Geo::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Geo::$namespaces);
         parent::__construct();
         $this->setPoint($point);
     }

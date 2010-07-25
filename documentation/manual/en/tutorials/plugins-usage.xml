@@ -106,12 +106,12 @@ $element->addValidator('NotEmpty')
             For example, let's consider <classname>Zend_View_Helper_FormButton</classname> (view
             helpers are one form of plugin). This view helper accepts three arguments, an element
             name (also used as the element's DOM identifier), a value (used as the button label),
-            and an optional array of attributes.  The helper then generates HTML markup for a form
-            input element.
+            and an optional array of attributes. The helper then generates <acronym>HTML</acronym>
+            markup for a form input element.
         </para>
 
         <para>
-            Let's say you want the helper to instead generate a true HTML
+            Let's say you want the helper to instead generate a true <acronym>HTML</acronym>
             <constant>button</constant> element; don't want the helper to generate a DOM identifier,
             but instead use the value for a CSS class selector; and that you have no interest in
             handling arbitrary attributes. You could accomplish this in a couple of ways. In both

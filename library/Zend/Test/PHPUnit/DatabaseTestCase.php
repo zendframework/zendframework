@@ -21,40 +21,45 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Test\PHPUnit;
+
+/**
  * Generic Testcase for Zend Framework related DbUnit Testing with PHPUnit
  *
  * @uses       PHPUnit_Extensions_Database_Operation_Composite
  * @uses       PHPUnit_Extensions_Database_TestCase
- * @uses       Zend_Test_PHPUnit_Db_Connection
- * @uses       Zend_Test_PHPUnit_Db_DataSet_DbTable
- * @uses       Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet
- * @uses       Zend_Test_PHPUnit_Db_DataSet_DbRowset
- * @uses       Zend_Test_PHPUnit_Db_Operation_Insert
- * @uses       Zend_Test_PHPUnit_Db_Operation_Truncate
+ * @uses       \Zend\Test\PHPUnit\Db\Connection
+ * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbTable
+ * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbTableDataSet
+ * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbRowset
+ * @uses       \Zend\Test\PHPUnit\Db\Operation\Insert
+ * @uses       \Zend\Test\PHPUnit\Db\Operation\Truncate
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Test_PHPUnit_DatabaseTestCase extends PHPUnit_Extensions_Database_TestCase
+abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     /**
      * Creates a new Zend Database Connection using the given Adapter and database schema name.
      *
-     * @param  Zend_Db_Adapter_Abstract $connection
+     * @param  \Zend\Db\Adapter\AbstractAdapter $connection
      * @param  string $schema
-     * @return Zend_Test_PHPUnit_Db_Connection
+     * @return \Zend\Test\PHPUnit\Db\Connection
      */
-    protected function createZendDbConnection(Zend_Db_Adapter_Abstract $connection, $schema)
+    protected function createZendDbConnection(\Zend\Db\Adapter\AbstractAdapter $connection, $schema)
     {
-        return new Zend_Test_PHPUnit_Db_Connection($connection, $schema);
+        return new Db\Connection($connection, $schema);
     }
 
     /**
      * Convenience function to get access to the database connection.
      *
-     * @return Zend_Db_Adapter_Abstract
+     * @return \Zend\Db\Adapter\AbstractAdapter
      */
     protected function getAdapter()
     {
@@ -68,9 +73,9 @@ abstract class Zend_Test_PHPUnit_DatabaseTestCase extends PHPUnit_Extensions_Dat
      */
     protected function getSetUpOperation()
     {
-        return new PHPUnit_Extensions_Database_Operation_Composite(array(
-            new Zend_Test_PHPUnit_Db_Operation_Truncate(),
-            new Zend_Test_PHPUnit_Db_Operation_Insert(),
+        return new \PHPUnit_Extensions_Database_Operation_Composite(array(
+            new Db\Operation\Truncate(),
+            new Db\Operation\Insert(),
         ));
     }
 
@@ -81,18 +86,18 @@ abstract class Zend_Test_PHPUnit_DatabaseTestCase extends PHPUnit_Extensions_Dat
      */
     protected function getTearDownOperation()
     {
-        return PHPUnit_Extensions_Database_Operation_Factory::NONE();
+        return \PHPUnit_Extensions_Database_Operation_Factory::NONE();
     }
 
     /**
      * Create a dataset based on multiple Zend_Db_Table instances
      *
      * @param  array $tables
-     * @return Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet
+     * @return \Zend\Test\PHPUnit\Db\DataSet\DbTableDataSet
      */
     protected function createDbTableDataSet(array $tables=array())
     {
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
+        $dataSet = new Db\DataSet\DbTableDataSet();
         foreach($tables AS $table) {
             $dataSet->addTable($table);
         }
@@ -102,27 +107,27 @@ abstract class Zend_Test_PHPUnit_DatabaseTestCase extends PHPUnit_Extensions_Dat
     /**
      * Create a table based on one Zend_Db_Table instance
      *
-     * @param Zend_Db_Table_Abstract $table
+     * @param \Zend\Db\Table\AbstractTable $table
      * @param string $where
      * @param string $order
      * @param string $count
      * @param string $offset
-     * @return Zend_Test_PHPUnit_Db_DataSet_DbTable
+     * @return \Zend\Test\PHPUnit\Db\DataSet\DbTable
      */
-    protected function createDbTable(Zend_Db_Table_Abstract $table, $where=null, $order=null, $count=null, $offset=null)
+    protected function createDbTable(\Zend\Db\Table\AbstractTable $table, $where=null, $order=null, $count=null, $offset=null)
     {
-        return new Zend_Test_PHPUnit_Db_DataSet_DbTable($table, $where, $order, $count, $offset);
+        return new Db\DataSet\DbTable($table, $where, $order, $count, $offset);
     }
 
     /**
      * Create a data table based on a Zend_Db_Table_Rowset instance
      *
-     * @param  Zend_Db_Table_Rowset_Abstract $rowset
+     * @param  \Zend\Db\Table\AbstractRowset $rowset
      * @param  string
-     * @return Zend_Test_PHPUnit_Db_DataSet_DbRowset
+     * @return \Zend\Test\PHPUnit\Db\DataSet\DbRowset
      */
-    protected function createDbRowset(Zend_Db_Table_Rowset_Abstract $rowset, $tableName = null)
+    protected function createDbRowset(\Zend\Db\Table\AbstractRowset $rowset, $tableName = null)
     {
-        return new Zend_Test_PHPUnit_Db_DataSet_DbRowset($rowset, $tableName);
+        return new Db\DataSet\DbRowset($rowset, $tableName);
     }
 }

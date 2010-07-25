@@ -46,10 +46,6 @@ class Form extends FormElement
      */
     public function direct($name = null, $attribs = null, $content = false)
     {
-        if ($name === null) { // $name can be empty string ''
-            throw new \InvalidArgumentException('Form: missing argument. $name is required in form($name, $attribs = null, $content = false)');
-        }
-        
         $info = $this->_getInfo($name, $content, $attribs);
         $id = null;
         extract($info);

@@ -106,7 +106,7 @@ class Css2Xpath
         // arbitrary attribute strict equality
         $expression = preg_replace_callback(
             '|\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
-            function($matches) {
+            function ($matches) {
                 return '[@' . strtolower($matches[1]) . "='" . $matches[2] . "']";
             },
             $expression

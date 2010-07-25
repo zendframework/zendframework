@@ -111,7 +111,7 @@ class Partial extends \Zend\View\Helper\AbstractHelper
     /**
      * Clone the current View
      *
-     * @return \Zend\View\ViewInterface
+     * @return \Zend\View\ViewEngine
      */
     public function cloneView()
     {

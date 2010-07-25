@@ -133,14 +133,12 @@ class Row
      * Render the row
      *
      * @param  array                               $columnWidths Width of all columns
-     * @param  \Zend\Text\Table\Decorator\DecoratorInterface $decorator    Decorator for the row borders
+     * @param  \Zend\Text\Table\Decorator $decorator    Decorator for the row borders
      * @param  integer                             $padding      Padding for the columns
      * @throws \Zend\Text\Table\Exception When there are too many columns
      * @return string
      */
-    public function render(array $columnWidths,
-                           Decorator\DecoratorInterface $decorator,
-                           $padding = 0)
+    public function render(array $columnWidths, Decorator $decorator, $padding = 0)
     {
         // Prepare an array to store all column widths
         $this->_columnWidths = array();

@@ -11,10 +11,11 @@
         <title>Install Zend Framework</title>
 
         <para>
-            The easiest way to get Zend Framework along with a complete PHP stack is by installing
-            <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend Server</ulink>.
-            Zend Server has native installers for Mac OSX, Windows, Fedora Core, and Ubuntu, as well
-            as a universal installation package compatible with most Linux distributions.
+            The easiest way to get Zend Framework along with a complete <acronym>PHP</acronym> stack
+            is by installing <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend
+                Server</ulink>. Zend Server has native installers for Mac OSX, Windows, Fedora Core,
+            and Ubuntu, as well as a universal installation package compatible with most Linux
+            distributions.
         </para>
 
         <para>
@@ -64,7 +65,7 @@
 
             <para>
                 If you have problems setting up the <command>zf</command> command-line tool, please
-                refer to <link linkend="zend.tool.framework.clitool.setup-general">the
+                refer to <link linkend="zend.tool.framework.clitool">the
                     manual</link>.
             </para>
         </note>
@@ -171,9 +172,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             While Zend Framework is itself configurationless, you often need to configure your
             application. The default configuration is placed in
             <filename>application/configs/application.ini</filename>, and contains some basic
-            directives for setting your PHP environment (for instance, turning error reporting on
-            and off), indicating the path to your bootstrap class (as well as its class name), and
-            the path to your action controllers. It looks as follows:
+            directives for setting your <acronym>PHP</acronym> environment (for instance, turning
+            error reporting on and off), indicating the path to your bootstrap class (as well as its
+            class name), and the path to your action controllers. It looks as follows:
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -201,13 +202,13 @@ phpSettings.display_errors = 1
 ]]></programlisting>
 
         <para>
-            Several things about this file should be noted. First, when using INI-style
-            configuration, you can reference constants directly and expand them;
-            <constant>APPLICATION_PATH</constant> is actually a constant. Additionally note that
-            there are several sections defined: production, staging, testing, and development. The
-            latter three inherit settings from the "production" environment. This is a useful way to
-            organize configuration to ensure that appropriate settings are available in each stage
-            of application development.
+            Several things about this file should be noted. First, when using
+            <acronym>INI</acronym>-style configuration, you can reference constants directly and
+            expand them; <constant>APPLICATION_PATH</constant> is actually a constant. Additionally
+            note that there are several sections defined: production, staging, testing, and
+            development. The latter three inherit settings from the "production" environment. This
+            is a useful way to organize configuration to ensure that appropriate settings are
+            available in each stage of application development.
         </para>
     </sect2>
 
@@ -230,8 +231,9 @@ phpSettings.display_errors = 1
         <para>
             Typically, you always need an <classname>IndexController</classname>, which is a
             fallback controller and which also serves the home page of the site, and an
-            <classname>ErrorController</classname>, which is used to indicate things such as HTTP
-            404 errors (controller or action not found) and HTTP 500 errors (application errors).
+            <classname>ErrorController</classname>, which is used to indicate things such as
+            <acronym>HTTP</acronym> 404 errors (controller or action not found) and
+            <acronym>HTTP</acronym> 500 errors (application errors).
         </para>
 
         <para>
@@ -303,9 +305,9 @@ class ErrorController extends Zend_Controller_Action
         <title>Views</title>
 
         <para>
-            Views in Zend Framework are written in plain old PHP. View scripts are placed in
-            <filename>application/views/scripts/</filename>, where they are further categorized
-            using the controller names. In our case, we have an
+            Views in Zend Framework are written in plain old <acronym>PHP</acronym>. View scripts
+            are placed in <filename>application/views/scripts/</filename>, where they are further
+            categorized using the controller names. In our case, we have an
             <classname>IndexController</classname> and an <classname>ErrorController</classname>,
             and thus we have corresponding <filename>index/</filename> and
             <filename>error/</filename> subdirectories within our view scripts directory. Within
@@ -315,8 +317,9 @@ class ErrorController extends Zend_Controller_Action
         </para>
 
         <para>
-            View scripts may contain any markup you want, and use the <code>&lt;?php</code> opening
-            tag and <code>?&gt;</code> closing tag to insert PHP directives.
+            View scripts may contain any markup you want, and use the <emphasis>&lt;?php</emphasis>
+            opening tag and <emphasis>?&gt;</emphasis> closing tag to insert <acronym>PHP</acronym>
+            directives.
         </para>
 
         <para>
@@ -377,7 +380,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             The <filename>error/error.phtml</filename> view script is slightly more interesting as
-            it uses some PHP conditionals:
+            it uses some <acronym>PHP</acronym> conditionals:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -420,10 +423,10 @@ class ErrorController extends Zend_Controller_Action
         <para>
             For purposes of this quick start, we will assume you are using the <ulink
                 url="http://httpd.apache.org/">Apache web server</ulink>. Zend Framework works
-            perfectly well with other web servers -- including Microsoft Internet Information Server,
-            lighttpd, nginx, and more -- but most developers should be famililar with Apache at the
-            minimum, and it provides an easy introduction to Zend Framework's directory structure
-            and rewrite capabilities.
+            perfectly well with other web servers -- including Microsoft Internet Information
+            Server, lighttpd, nginx, and more -- but most developers should be famililar with Apache
+            at the minimum, and it provides an easy introduction to Zend Framework's directory
+            structure and rewrite capabilities.
         </para>
 
         <para>

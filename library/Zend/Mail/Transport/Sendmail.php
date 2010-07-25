@@ -24,12 +24,13 @@
  * @namespace
  */
 namespace Zend\Mail\Transport;
-use Zend\Config;
+use Zend\Config,
+    Zend\Mail\AbstractTransport;
 
 /**
  * Class for sending eMails via the PHP internal mail() function
  *
- * @uses       \Zend\Mail\Transport\AbstractTransport
+ * @uses       \Zend\Mail\AbstractTransport
  * @uses       \Zend\Mail\Transport\Exception
  * @category   Zend
  * @package    Zend_Mail

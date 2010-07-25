@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21824 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch et AjaxContext</title>
@@ -146,7 +146,7 @@ class NewsController extends Zend_Controller_Action
 
         <para>
             Par défaut, il existe 2 contextes dans l'aide <emphasis>ContextSwitch</emphasis>&#160;:
-            json et xml.
+            json et <acronym>XML</acronym>.
         </para>
 
         <itemizedlist>

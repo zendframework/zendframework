@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.plugins.usage">
     <title>Verwenden von Plugins</title>
@@ -110,17 +110,17 @@ $element->addValidator('NotEmpty')
             Helfer sind eine Form von Plugins). Dieser View Helfer akzeptiert drei Argumente, ein
             Elementname (der auch als DOM Identifikator des Elements verwendet wird), einen Wert
             (der als Button Label verwendet wird), und ein optionales Array an Attributen. Der
-            Helfer erzeugt dann das HTML Markup für ein Formular Eingabeelement.
+            Helfer erzeugt dann das <acronym>HTML</acronym> Markup für ein Formular Eingabeelement.
         </para>
 
         <para>
-            Sagen wir, dass der Helfer stattdessen ein echtes HTML <constant>button</constant>
-            Element erzeugen soll; dass wir nicht wollen das der Helfer einen DOM Identifikator
-            erzeugt, sondern statt dessen den Wert für einen CSS Klassen Selektor; und das wir kein
-            Interesse an der behandling eigener Attribute haben. Man könnte dies auf verschiedenen
-            wegen erreichen. In beiden Fällen erstellen wir eine eigene View Helfer Klasse die das
-            Verhalten implementiert welches wir wollen; der Unterschied liegt darin wie wir Sie
-            benennen und aufrufen wollen.
+            Sagen wir, dass der Helfer stattdessen ein echtes <acronym>HTML</acronym>
+            <constant>button</constant> Element erzeugen soll; dass wir nicht wollen das der Helfer
+            einen DOM Identifikator erzeugt, sondern statt dessen den Wert für einen CSS Klassen
+            Selektor; und das wir kein Interesse an der behandling eigener Attribute haben. Man
+            könnte dies auf verschiedenen wegen erreichen. In beiden Fällen erstellen wir eine
+            eigene View Helfer Klasse die das Verhalten implementiert welches wir wollen; der
+            Unterschied liegt darin wie wir Sie benennen und aufrufen wollen.
         </para>
 
         <para>

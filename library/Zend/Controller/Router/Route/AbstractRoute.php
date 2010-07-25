@@ -25,19 +25,21 @@
  */
 namespace Zend\Controller\Router\Route;
 
+use Zend\Controller\Router\Route;
+
 /**
  * Abstract Route
  *
  * Implements interface and provides convenience methods
  *
- * @uses       \Zend\Controller\Router\Route\RouteInterface
+ * @uses       \Zend\Controller\Router\Route
  * @uses       \Zend\Controller\Router\Route\Chain
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRoute implements RouteInterface
+abstract class AbstractRoute implements Route
 {
     /**
      * Wether this route is abstract or not

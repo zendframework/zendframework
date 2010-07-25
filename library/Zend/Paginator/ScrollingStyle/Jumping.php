@@ -24,18 +24,20 @@
  */
 namespace Zend\Paginator\ScrollingStyle;
 
+use Zend\Paginator\ScrollingStyle;
+
 /**
  * A scrolling style in which the cursor advances to the upper bound
  * of the page range, the page range "jumps" to the next section, and
  * the cursor moves back to the beginning of the range.
  *
- * @uses       \Zend\Paginator\ScrollingStyle\ScrollingStyleInterface
+ * @uses       \Zend\Paginator\ScrollingStyle
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Jumping implements ScrollingStyleInterface
+class Jumping implements ScrollingStyle
 {
     /**
      * Returns an array of "local" pages given a page number and range.

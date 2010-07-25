@@ -6,9 +6,9 @@
 
     <para>
         Zend Framework is an open source framework for developing web applications and services
-        with PHP 5. Zend Framework is implemented using 100% object-oriented code. The component
-        structure of Zend Framework is somewhat unique; each component is designed
-        with few dependencies on other components. This loosely coupled architecture allows
+        with <acronym>PHP</acronym> 5. Zend Framework is implemented using 100% object-oriented
+        code. The component structure of Zend Framework is somewhat unique; each component is
+        designed with few dependencies on other components. This loosely coupled architecture allows
         developers to use components individually. We often call this a "use-at-will" design.
     </para>
 

@@ -42,7 +42,7 @@ class Module
     implements \Zend\Tool\Framework\Provider\Pretendable
 {
 
-    public static function createResources(\Zend\Tool\Project\Profile\Profile $profile, $moduleName, \Zend\Tool\Project\Profile\Resource\Resource $targetModuleResource = null)
+    public static function createResources(\Zend\Tool\Project\Profile $profile, $moduleName, \Zend\Tool\Project\Profile\Resource $targetModuleResource = null)
     {
 
         // find the appliction directory, it will serve as our module skeleton

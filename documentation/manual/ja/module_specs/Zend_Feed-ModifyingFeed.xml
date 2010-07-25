@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21586 -->
 <sect1 id="zend.feed.modifying-feed">
     <title>フィードおよびエントリの構造の変更</title>
 
@@ -25,21 +25,21 @@ echo $entry->saveXML();
 ]]></programlisting>
         <para>
             これは、必要な <acronym>XML</acronym> 名前空間も含めた完全な
-            (最初の <code>&lt;?xml ... &gt;</code> も含めた)
+            (最初の <command>&lt;?xml ... &gt;</command> も含めた)
             <acronym>XML</acronym> 表記で新しいエントリを出力します。
         </para>
 
         <para>
             既存のエントリが author タグを保持していない場合にも、
             上の例は正しく動作することに注意しましょう。
-            代入する場所を指定するために、いくらでも <code>-&gt;</code>
+            代入する場所を指定するために、いくらでも <command>-&gt;</command>
             をつなげることができます。その途中の段階の要素は、
             必要に応じて自動的に作成されます。
         </para>
     </example>
 
     <para>
-        <code>atom:</code>、<code>rss:</code>、<code>osrss:</code>
+        <command>atom:</command>、<command>rss:</command>、<command>osrss:</command>
         以外の名前空間をエントリで使用したい場合は、<methodname>Zend_Feed::registerNamespace()</methodname>
         を使用して <classname>Zend_Feed</classname> で名前空間を登録する必要があります。
         既存の要素を書き換えた場合は、常にもとの名前空間が維持されます。

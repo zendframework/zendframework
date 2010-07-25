@@ -78,7 +78,7 @@ class Zend_Service_DeveloperGarden_Credential
      *
      * @param string $password
      * @throws Zend_Service_DeveloperGarden_Client_Exception
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setPassword($password = null)
     {
@@ -109,7 +109,7 @@ class Zend_Service_DeveloperGarden_Credential
      *
      * @param string $username
      * @throws Zend_Service_DeveloperGarden_Client_Exception
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setUsername($username = null)
     {
@@ -152,7 +152,7 @@ class Zend_Service_DeveloperGarden_Credential
      *
      * @param string $realm
      * @throws Zend_Service_DeveloperGarden_Client_Exception
-     * @return Zend_Service_DeveloperGarden_Client_ClientAbstract
+     * @return Zend_Service_DeveloperGarden_Client_AbstractClient
      */
     public function setRealm($realm = null)
     {

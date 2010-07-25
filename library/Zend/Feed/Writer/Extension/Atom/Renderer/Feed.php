@@ -16,22 +16,22 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Feed.php 20325 2010-01-16 00:17:59Z padraic $
+ * @version    $Id$
  */
- 
+
 /**
- * @see Zend_Feed_Writer_Extension_RendererAbstract
+ * @namespace
  */
-require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
- 
+namespace Zend\Feed\Writer\Extension\Atom\Renderer;
+
 /**
+ * @uses       \Zend\Feed\Writer\Extension\AbstractRenderer
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
-    extends Zend_Feed_Writer_Extension_RendererAbstract
+class Feed extends \Zend\Feed\Writer\Extension\AbstractRenderer
 {
 
     /**
@@ -82,7 +82,7 @@ class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
+    protected function _setFeedLinks(\DOMDocument $dom, \DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
         if(!$flinks || empty($flinks)) {
@@ -106,7 +106,7 @@ class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setHubs(DOMDocument $dom, DOMElement $root)
+    protected function _setHubs(\DOMDocument $dom, \DOMElement $root)
     {
         $hubs = $this->getDataContainer()->getHubs();
         if (!$hubs || empty($hubs)) {

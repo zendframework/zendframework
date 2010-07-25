@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.dir">
+    <title>Dir</title>
+
+    <para>
+        Given a string containing a path to a file, this function will return the
+        name of the directory.
+    </para>
+
+     <sect3 id="zend.filter.set.dir.options">
+        <title>Supported options for Zend_Filter_Dir</title>
+
+        <para>
+            There are no additional options for <classname>Zend_Filter_Dir</classname>.
+        </para>
+    </sect3>
+
+     <sect3 id="zend.filter.set.dir.basic">
+        <title>Basic usage</title>
+
+        <para>
+            A basic example of usage is below:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Dir();
+
+print $filter->filter('/etc/passwd');
+]]></programlisting>
+
+        <para>
+            This returns "<filename>/etc</filename>".
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Dir();
+
+print $filter->filter('C:/Temp/x');
+]]></programlisting>
+
+        <para>
+            This returns "<filename>C:/Temp</filename>".
+        </para>
+    </sect3>
+</sect2>

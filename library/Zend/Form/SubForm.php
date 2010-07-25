@@ -19,16 +19,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form;
+
+/**
  * Zend_Form_SubForm
  *
- * @uses       Zend_Form
+ * @uses       \Zend\Form\Form
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_SubForm extends Zend_Form
+class SubForm extends Form
 {
     /**
      * Whether or not form elements are members of an array
@@ -39,12 +44,12 @@ class Zend_Form_SubForm extends Zend_Form
     /**
      * Load the default decorators
      *
-     * @return void
+     * @return Zend_Form_SubForm
      */
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -54,5 +59,6 @@ class Zend_Form_SubForm extends Zend_Form
                  ->addDecorator('Fieldset')
                  ->addDecorator('DtDdWrapper');
         }
+        return $this;
     }
 }

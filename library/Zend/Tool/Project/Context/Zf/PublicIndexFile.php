@@ -67,7 +67,7 @@ class PublicIndexFile extends \Zend\Tool\Project\Context\Filesystem\File
             'body' => <<<EOS
 // Define path to application directory
 defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+    || define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
 
 // Define application environment
 defined('APPLICATION_ENV')

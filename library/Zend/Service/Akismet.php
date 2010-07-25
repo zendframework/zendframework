@@ -220,7 +220,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
     protected function _post($host, $path, array $params)
     {
         $uri    = 'http://' . $host . ':' . $this->getPort() . $path;
-        $client = $this->getHTTPClient();
+        $client = $this->getHttpClient();
         $client->setUri($uri);
         $client->setConfig(array(
             'useragent'    => $this->getUserAgent(),

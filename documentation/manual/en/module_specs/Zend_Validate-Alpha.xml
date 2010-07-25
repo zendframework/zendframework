@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.alpha">
+    <title>Alpha</title>
+
+    <para>
+        <classname>Zend_Validate_Alpha</classname> allows you to validate if a given value contains
+        only alphabetical characters. There is no length limitation for the input you want to
+        validate. This validator is related to the <classname>Zend_Validate_Alnum</classname>
+        validator with the exception that it does not accept digits.
+    </para>
+
+    <sect3 id="zend.validate.set.alpha.options">
+        <title>Supported options for Zend_Validate_Alpha</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_Alpha</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>allowWhiteSpace</property></emphasis>: If whitespace
+                    characters are allowed. This option defaults to <constant>FALSE</constant>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.alpha.basic">
+        <title>Basic usage</title>
+
+        <para>
+            A basic example is the following one:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Alpha();
+if ($validator->isValid('Abcd')) {
+    // value contains only allowed chars
+} else {
+    // false
+}
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.set.alpha.whitespace">
+        <title>Using whitespaces</title>
+
+        <para>
+            Per default whitespaces are not accepted because they are not part of the alphabet.
+            Still, there is a way to accept them as input. This allows to validate complete
+            sentences or phrases.
+        </para>
+
+        <para>
+            To allow the usage of whitespaces you need to give the
+            <property>allowWhiteSpace</property> option. This can be done while creating an instance
+            of the validator, or afterwards by using <methodname>setAllowWhiteSpace()</methodname>.
+            To get the actual state you can use <methodname>getAllowWhiteSpace()</methodname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Alpha(array('allowWhiteSpace' => true));
+if ($validator->isValid('Abcd and efg')) {
+    // value contains only allowed chars
+} else {
+    // false
+}
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.set.alpha.languages">
+        <title>Using different languages</title>
+
+        <para>
+            When using <classname>Zend_Validate_Alpha</classname> then the language which the user
+            sets within his browser will be used to set the allowed characters. This means when your
+            user sets <emphasis>de</emphasis> for german then he can also enter characters like
+            <emphasis>ä</emphasis>, <emphasis>ö</emphasis> and <emphasis>ü</emphasis> additionally
+            to the characters from the english alphabet.
+        </para>
+
+        <para>
+            Which characters are allowed depends completly on the used language as every language
+            defines it's own set of characters.
+        </para>
+
+        <para>
+            There are actually 3 languages which are not accepted in their own script. These
+            languages are <emphasis>korean</emphasis>, <emphasis>japanese</emphasis> and
+            <emphasis>chinese</emphasis> because this languages are using an alphabet where a
+            single character is build by using multiple characters.
+        </para>
+
+        <para>
+            In the case you are using these languages, the input will only be validated by using
+            the english alphabet.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

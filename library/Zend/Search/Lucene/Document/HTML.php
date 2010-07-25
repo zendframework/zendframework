@@ -24,8 +24,10 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Document;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Analysis\Analyzer;
+
+use Zend\Search\Lucene\Document,
+    Zend\Search\Lucene,
+    Zend\Search\Lucene\Analysis\Analyzer;
 
 /**
  * HTML document.
@@ -33,7 +35,7 @@ use Zend\Search\Lucene\Analysis\Analyzer;
  * @uses       DOMDocument
  * @uses       DOMXPath
  * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene\Document\Document
+ * @uses       \Zend\Search\Lucene\Document
  * @uses       \Zend\Search\Lucene\Document\Field
  * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend
@@ -74,6 +76,17 @@ class HTML extends Document
      * @var boolean
      */
     private static $_excludeNoFollowLinks = false;
+
+    /**
+     *
+     * List of inline tags
+     *
+     * @var array
+     */
+    private $_inlineTags = array('a', 'abbr', 'acronym', 'dfn', 'em', 'strong', 'code',
+                                'samp', 'kbd', 'var', 'b', 'i', 'big', 'small', 'strike',
+                                'tt', 'u', 'font', 'span', 'bdo', 'cite', 'del', 'ins',
+                                'q', 'sub', 'sup');
 
     /**
      * Object constructor
@@ -163,6 +176,14 @@ class HTML extends Document
                 $this->_links[] = $href;
             }
         }
+        $linkNodes = $this->_doc->getElementsByTagName('area');
+        foreach ($linkNodes as $linkNode) {
+            if (($href = $linkNode->getAttribute('href')) != '' &&
+                (!self::$_excludeNoFollowLinks  ||  strtolower($linkNode->getAttribute('rel')) != 'nofollow' )
+               ) {
+                $this->_links[] = $href;
+            }
+        }
         $this->_links = array_unique($this->_links);
 
         $linkNodes = $xpath->query('/html/head/link');
@@ -205,8 +226,10 @@ class HTML extends Document
     private function _retrieveNodeText(\DOMNode $node, &$text)
     {
         if ($node->nodeType == XML_TEXT_NODE) {
-            $text .= $node->nodeValue ;
-            $text .= ' ';
+            $text .= $node->nodeValue;
+            if(!in_array($node->parentNode->tagName, $this->_inlineTags)) {
+                $text .= ' ';
+            }
         } else if ($node->nodeType == XML_ELEMENT_NODE  &&  $node->nodeName != 'script') {
             foreach ($node->childNodes as $childNode) {
                 $this->_retrieveNodeText($childNode, $text);

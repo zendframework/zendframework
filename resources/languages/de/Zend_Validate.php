@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21573
+ * EN-Revision: 22075
  */
 return array(
     // Zend_Validate_Alnum
@@ -208,7 +208,7 @@ return array(
     "'%value%' has failed the IBAN check" => "Die IBAN Prüfung ist für '%value%' fehlgeschlagen",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "Der Token '%token%' stimmt nicht mit dem angegebenen Token '%value%' überein",
+    "The two given tokens do not match" => "Die zwei angegebenen Token stimmen nicht überein",
     "No token was provided to match against" => "Es wurde kein Token angegeben gegen den geprüft werden kann",
 
     // Zend_Validate_InArray
@@ -223,6 +223,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => "'%value%' scheint keine gültige IP Adresse zu sein",
 
     // Zend_Validate_Isbn
+    "Invalid type given, value should be string or integer" => "Ungültiger Typ angegeben. Der Wert sollte ein String sein",
     "'%value%' is no valid ISBN number" => "'%value%' ist keine gültige ISBN Nummer",
 
     // Zend_Validate_LessThan

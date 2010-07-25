@@ -70,7 +70,7 @@ class Module extends AbstractRoute
     /**#@-*/
 
     /**
-     * @var \Zend\Controller\Dispatcher\DispatcherInterface
+     * @var \Zend\Controller\Dispatcher
      */
     protected $_dispatcher;
 
@@ -101,11 +101,11 @@ class Module extends AbstractRoute
      * Constructor
      *
      * @param array $defaults Defaults for map variables with keys as variable names
-     * @param \Zend\Controller\Dispatcher\DispatcherInterface $dispatcher Dispatcher object
+     * @param \Zend\Controller\Dispatcher $dispatcher Dispatcher object
      * @param \Zend\Controller\Request\AbstractRequest $request Request object
      */
     public function __construct(array $defaults = array(),
-                \Zend\Controller\Dispatcher\DispatcherInterface $dispatcher = null,
+                \Zend\Controller\Dispatcher $dispatcher = null,
                 \Zend\Controller\Request\AbstractRequest $request = null)
     {
         $this->_defaults = $defaults;

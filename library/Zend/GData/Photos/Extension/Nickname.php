@@ -29,15 +29,15 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:nickname element used by the API.
  * This class represents the nickname for a user.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Nickname extends \Zend\GData\Extension\Extension
+class Nickname extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gphoto';
@@ -50,7 +50,7 @@ class Nickname extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Photos\Photos::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Photos::$namespaces);
         parent::__construct();
         $this->setText($text);
     }

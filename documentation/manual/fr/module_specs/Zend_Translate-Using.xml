@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.using">
     <title>Utiliser les adaptateurs de traduction</title>
@@ -36,10 +36,19 @@ print "Correction de la langue ceci est la ligne deux\n";
         <title>Exemple de code PHP multilingue</title>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('gettext',
-                                '/mon/chemin/source-de.mo',
-                                'de');
-$translate->addTranslation('//mon/chemin/fr-source.mo', 'fr');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/my/path/source-de.mo',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/translation/fr-source.mo',
+        'locale'  => 'fr'
+    )
+);
 
 print $translate->_("Exemple")."\n";
 print "=======\n";
@@ -61,9 +70,13 @@ print $translate->_("Correction de la langue ceci est la ligne deux") . "\n";
     <para>
         Créer un nouvel objet de traduction et définir l'adaptateur de base : <programlisting
         role="php"><![CDATA[
-$translate = new Zend_Translate('gettext',
-                                '/chemin/vers/source-de.mo',
-                                'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
+);
 ]]></programlisting> Dans cet exemple nous avons décidé d'utiliser <emphasis>l'adaptateur
         Gettext</emphasis>. Nous plaçons notre fichier <code>source-de.mo</code> dans le dossier
         <code>/chemin/vers</code>. Le fichier gettext inclura la traduction allemande. Et nous avons

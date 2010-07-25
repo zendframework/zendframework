@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17948 -->
+<!-- EN-Revision: 20818 -->
 <sect1 id="zend.service.amazon.ec2.zones">
     <title>Zend_Service_Amazon_Ec2:リージョンおよび利用可能ゾーン</title>
 
@@ -16,12 +16,14 @@
 
     <sect2 id="zend.service.amazon.ec2.zones.regions">
         <title>アマゾンEC2リージョン</title>
+
         <para>
             必須条件を満たす場所で、アマゾンEC2インスタンスを開始できるように、
             アマゾンEC2は、複数のリージョンを提供します。
             たとえば、ヨーロッパの顧客とより親しいか、または法的要求を満たすために、
             ヨーロッパでインスタンスを開始したいかもしれません。
         </para>
+
         <para>
             アマゾンEC2リージョンは、
             他のアマゾンEC2リージョンからそれぞれ完全に分離されるように設計されています。
@@ -31,9 +33,11 @@
 
         <example id="zend.service.amazon.ec2.zones.regions.example">
             <title>利用可能リージョンを表示</title>
+
             <para>
                 <code>describe</code>は、アカウントがアクセスすべきリージョンを見つけるために使われます。
             </para>
+
             <para>
                 <code>describe</code>は、リージョンが利用できる情報を含む配列を返します。
                 各配列はregionNameおよびregionUrlを含みます。
@@ -52,6 +56,7 @@ foreach($regions as $region) {
 
     <sect2 id="zend.service.amazon.ec2.zones.availability">
         <title>アマゾンEC2利用可能ゾーン</title>
+
         <para>
             インスタンスを開始するとき、利用可能ゾーンを任意に指定できます。
             利用可能ゾーンを指定しなければ、アマゾンEC2はあなたが使用しているリージョン内で1つを選択します。
@@ -65,9 +70,11 @@ foreach($regions as $region) {
 
         <example id="zend.service.amazon.ec2.zones.availability.example">
             <title>利用可能ゾーンを表示</title>
+
             <para>
                 <code>describe</code>は、各利用可能ゾーンの状態を探すために使われます。
             </para>
+
             <para>
                 <code>describe</code>は、ゾーンが利用できる情報を含む配列を返します。
                 各配列はzoneNameおよびzoneStateを含みます。

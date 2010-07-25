@@ -9,11 +9,11 @@
     </para>
 
     <para>
-        Every adapter has different pros and cons. In some cases, not every PHP datatype (e.g.,
-        objects) can be converted to a string representation. In most such cases, the type will be
-        converted to a similar type that is serializable -- as an example, PHP objects will often be
-        cast to arrays.  If this fails, a <classname>Zend_Serializer_Exception</classname> will be
-        thrown.
+        Every adapter has different pros and cons. In some cases, not every <acronym>PHP</acronym>
+        datatype (e.g., objects) can be converted to a string representation. In most such cases,
+        the type will be converted to a similar type that is serializable -- as an example,
+        <acronym>PHP</acronym> objects will often be cast to arrays. If this fails, a
+        <classname>Zend_Serializer_Exception</classname> will be thrown.
     </para>
 
     <para>
@@ -24,8 +24,8 @@
         <title>Zend_Serializer_Adapter_PhpSerialize</title>
 
         <para>
-            This adapter uses the built-in <methodname>un/serialize</methodname> PHP functions, and
-            is a good default adapter choice.
+            This adapter uses the built-in <methodname>un/serialize</methodname>
+            <acronym>PHP</acronym> functions, and is a good default adapter choice.
         </para>
 
         <para>
@@ -38,15 +38,16 @@
 
         <para>
             <ulink url="http://opensource.dynamoid.com">Igbinary</ulink> is Open Source Software
-            released by Sulake Dynamoid Oy. It's a drop-in replacement for the standard PHP
-            serializer. Instead of time and space consuming textual representation, igbinary stores
-            PHP data structures in a compact binary form. Savings are significant when using
-            memcached or similar memory based storages for serialized data.
+            released by Sulake Dynamoid Oy. It's a drop-in replacement for the standard
+            <acronym>PHP</acronym> serializer. Instead of time and space consuming textual
+            representation, igbinary stores <acronym>PHP</acronym> data structures in a compact
+            binary form. Savings are significant when using memcached or similar memory based
+            storages for serialized data.
         </para>
 
         <para>
-            You need the igbinary PHP extension installed on your system in order to use this
-            adapter.
+            You need the igbinary <acronym>PHP</acronym> extension installed on your system in order
+            to use this adapter.
         </para>
 
         <para>
@@ -65,16 +66,17 @@
 
         <para>
             The adapter simply uses the <ulink
-                url="http://php.net/manual/book.wddx.php">wddx_*()</ulink> PHP functions. Please
-            read the php manual to determine how you may enable them in your PHP installation.
+                url="http://php.net/manual/book.wddx.php">wddx_*()</ulink> <acronym>PHP</acronym>
+            functions. Please read the <acronym>PHP</acronym> manual to determine how you may enable
+            them in your <acronym>PHP</acronym> installation.
         </para>
 
         <para>
             Additionally, the <ulink
-                url="http://php.net/manual/book.simplexml.php">SimpleXML</ulink> PHP extension is
-            used to check if a returned <constant>NULL</constant> value from
-            <methodname>wddx_unserialize()</methodname> is based on a serialized
-            <constant>NULL</constant> or on invalid data.
+                url="http://php.net/manual/book.simplexml.php">SimpleXML</ulink>
+            <acronym>PHP</acronym> extension is used to check if a returned
+            <constant>NULL</constant> value from <methodname>wddx_unserialize()</methodname> is
+            based on a serialized <constant>NULL</constant> or on invalid data.
         </para>
 
         <para>
@@ -179,10 +181,10 @@
         <title>Zend_Serializer_Adapter_PythonPickle</title>
 
         <para>
-            This adapter converts PHP types to a <ulink
+            This adapter converts <acronym>PHP</acronym> types to a <ulink
                 url="http://docs.python.org/library/pickle.html">Python Pickle</ulink> string
-            representation.  With it, you can read the serialized data with Python and read Pickled
-            data of Python with PHP.
+            representation. With it, you can read the serialized data with Python and read Pickled
+            data of Python with <acronym>PHP</acronym>.
         </para>
 
         <para>
@@ -277,7 +279,7 @@
         </table>
 
         <para>
-            Datatype merging (Python to PHP) occurs per the following:
+            Datatype merging (Python to <acronym>PHP</acronym>) occurs per the following:
         </para>
 
         <table id="zend.serializer.adapter.pythonpickle.table.python2php">
@@ -364,8 +366,8 @@
         <title>Zend_Serializer_Adapter_PhpCode</title>
 
         <para>
-            This adapter generates a parsable PHP code representation using <ulink
-                url="http://php.net/manual/function.var-export.php">var_export()</ulink>. On
+            This adapter generates a parsable <acronym>PHP</acronym> code representation using
+            <ulink url="http://php.net/manual/function.var-export.php">var_export()</ulink>. On
             restoring, the data will be executed using <ulink
                 url="http://php.net/manual/function.eval.php">eval</ulink>.
         </para>

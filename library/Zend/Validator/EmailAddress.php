@@ -27,7 +27,7 @@ namespace Zend\Validator;
 /**
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\Hostname\Hostname
+ * @uses       \Zend\Validator\Hostname
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -109,7 +109,7 @@ class EmailAddress extends AbstractValidator
         'mx'       => false,
         'deep'     => false,
         'domain'   => true,
-        'allow'    => Hostname\Hostname::ALLOW_DNS,
+        'allow'    => Hostname::ALLOW_DNS,
         'hostname' => null
     );
 
@@ -220,7 +220,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set hostname validator
      *
-     * @return \Zend\Validator\Hostname\Hostname
+     * @return \Zend\Validator\Hostname
      */
     public function getHostnameValidator()
     {
@@ -228,14 +228,14 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
-     * @param \Zend\Validator\Hostname\Hostname $hostnameValidator OPTIONAL
+     * @param \Zend\Validator\Hostname $hostnameValidator OPTIONAL
      * @param int                    $allow             OPTIONAL
      * @return void
      */
-    public function setHostnameValidator(Hostname\Hostname $hostnameValidator = null, $allow = Hostname\HostnameHostname\Hostname::ALLOW_DNS)
+    public function setHostnameValidator(Hostname $hostnameValidator = null, $allow = Hostname::ALLOW_DNS)
     {
         if (!$hostnameValidator) {
-            $hostnameValidator = new Hostname\Hostname($allow);
+            $hostnameValidator = new Hostname($allow);
         }
 
         $this->_options['hostname'] = $hostnameValidator;

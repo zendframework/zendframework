@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16475 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
         <classname>Zend_Console_Getopt</classname> オブジェクトでオプションを宣言し、
         コマンドラインあるいは配列から引数を受け取ったら、
         このオブジェクトを使用して、ユーザがプログラムを起動した際に
-        指定したオプションを取得することができます。
+        指定したオプションを取得できます。
         このクラスはマジックメソッドを実装しているので、
         オプションの名前を指定して問い合わせることができます。
     </para>

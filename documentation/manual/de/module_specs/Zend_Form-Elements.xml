@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21988 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
 
     <para>
-        Ein Formular ist aus Elementen gemacht, die typischerweise mit einer HTML Form Eingabe
-        korrespondieren. <classname>Zend_Form_Element</classname> kapselt einzelne Formularelemente
-        mit den folgenden Bereichen die erfüllt werden sollen:
+        Ein Formular ist aus Elementen gemacht, die typischerweise mit einer <acronym>HTML</acronym>
+        Form Eingabe korrespondieren. <classname>Zend_Form_Element</classname> kapselt einzelne
+        Formularelemente mit den folgenden Bereichen die erfüllt werden sollen:
     </para>
 
     <itemizedlist>
@@ -206,11 +206,12 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
         <para>
             Es ist oft nützlich und/oder notwendig einige Normalisierungen an Eingaben vorzunehmen,
-            bevor diese geprüft werden - zum Beispiel kann es gewünscht sein alles an HTML zu
-            entfernen, aber die Prüfungen auf dem verbleibenden durchzuführen um sicherzustellen,
-            dass die Übertragung gültig ist. Oder man will Leerzeichen bei Eingaben entfernen, damit
-            eine StringLength Prüfung kein falsches "Korrekt" zurückgibt. Diese Operationen können
-            durchgeführt werden indem <classname>Zend_Filter</classname> verwendet wird, und
+            bevor diese geprüft werden - zum Beispiel kann es gewünscht sein alles an
+            <acronym>HTML</acronym> zu entfernen, aber die Prüfungen auf dem verbleibenden
+            durchzuführen um sicherzustellen, dass die Übertragung gültig ist. Oder man will
+            Leerzeichen bei Eingaben entfernen, damit eine StringLength Prüfung kein falsches
+            "Korrekt" zurückgibt. Diese Operationen können durchgeführt werden indem
+            <classname>Zend_Filter</classname> verwendet wird, und
             <classname>Zend_Form_Element</classname> unterstützt Filterketten, was es erlaubt
             mehrere, sequentielle Filter zu spezifizieren und anzupassen. Das Filtern geschieht
             während der Prüfung und wenn der Wert des Elements über
@@ -230,8 +231,7 @@ $filtered = $element->getValue();
 
             <listitem>
                 <para>
-                    Angabe eines Filternamens - entweder ein Kurzname oder ein voll qualifizierter
-                    Klassenname
+                    Angabe eines kurzen Filternamens
                 </para>
             </listitem>
         </itemizedlist>
@@ -243,9 +243,6 @@ $filtered = $element->getValue();
         <programlisting language="php"><![CDATA[
 // Konkrete Filterinstanz:
 $element->addFilter(new Zend_Filter_Alnum());
-
-// Voll qualifizierter Klassenname:
-$element->addFilter('Zend_Filter_Alnum');
 
 // Kurzname des Filters:
 $element->addFilter('Alnum');
@@ -356,8 +353,7 @@ $unfiltered = $element->getUnfilteredValue();
 
             <listitem>
                 <para>
-                    Anbieten eines Prüfnamens - entweder ein Kurzname oder ein voll qualifizierter
-                    Klassenname
+                    Anbieten eines kurzen Prüfnamens
                 </para>
             </listitem>
         </itemizedlist>
@@ -369,9 +365,6 @@ $unfiltered = $element->getUnfilteredValue();
         <programlisting language="php"><![CDATA[
 // Konkrete Prüfinstanz:
 $element->addValidator(new Zend_Validate_Alnum());
-
-// Voll qualifizierter Klassenname:
-$element->addValidator('Zend_Validate_Alnum');
 
 // Kurzer Prüfname:
 $element->addValidator('Alnum');
@@ -584,8 +577,8 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         <para>
             Prüfungen werden in der Reihenfolge ausgeführt. Jede Prüfung wird ausgeführt solange bis
             eine Prüfung die mit einem <constant>TRUE</constant> Wert für
-            <code>breakChainOnFailure</code> bei Ihrer Prüfung fehlschlägt. Man sollte sichergehen,
-            dass Prüfungen in einer begründeten Reihenfolge definiert werden.
+            <varname>$breakChainOnFailure</varname> bei Ihrer Prüfung fehlschlägt. Man sollte
+            sichergehen, dass Prüfungen in einer begründeten Reihenfolge definiert werden.
         </para>
 
         <para>
@@ -605,34 +598,42 @@ $messages = $element->getMessages();
 
         <para>
             Zusätzlich zu Prüfungen, kann spezifiziert werden, dass ein Element benötigt wird,
-            indem <methodname>setRequired(true)</methodname> verwendet wird. Standardmäßig ist
-            dieses Flag <constant>FALSE</constant>, was bedeutet, dass die Prüfkette übersprungen
-            wird, wenn kein Wert an <methodname>isValid()</methodname> übergeben wird. Dieses
-            Verhalten kann auf verschiedene Weisen geändert werden:
+            indem <methodname>setRequired($flag)</methodname> verwendet wird. Standardmäßig ist
+            dieses Flag <constant>FALSE</constant>. In Kombination mit
+            <methodname>setAllowEmpty($flag)</methodname> (Standardmäßig <constant>TRUE</constant>)
+            und <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> (standardmäßig
+            <constant>TRUE</constant>), kann das Verhalten der Prüfkette auf unterschiedliche Art
+            und Weise verändert werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Standardmäßig, wenn ein Element benötigt wird, ist auch ein Flag 'allowEmpty'
-                    <constant>TRUE</constant>. Das bedeutet, dass, wenn ein Wert evaluiert wird,
-                    der leer ist, und an <methodname>isValid()</methodname> übergeben wird, die
-                    Prüfung übersprungen wird. Dieses Flag kann gewechselt werden mit Hilfe der
-                    Zugriffsmethode <methodname>setAllowEmpty($flag)</methodname>; Wenn das Flag
-                    <constant>FALSE</constant> ist, und ein Wert übergeben wird, werden die
-                    Prüfungen trotzdem durchlaufen.
+                    Bei Verwendung der Standardwerte werden beim Prüfen eines Elements ohne der
+                    Übergabe eines Werts, oder der Übergabe eines leeren Strings, alle Prüfungen
+                    übersprungen und <constant>TRUE</constant> zurückgegeben.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Standardmäßig, wenn ein Element benötigt wird, es aber keine 'NotEmpty'
-                    Prüfung hat, wird <methodname>isValid()</methodname> eine an oberster Stelle im
-                    Stack platzieren. Das heißt, dass das Flag folgende semantische Bedeutung
-                    bekommt: Wenn kein Wert übergeben wird, wird die Übertragung sofort ungülig und
-                    der Benutzer wird informiert, was die anderen Prüfungen davon abhält,
-                    ausgeführt zu werden, auf Daten, von denen wir bereits wissen, dass sie
-                    ungültig sind.
+                    <methodname>setAllowEmpty(false)</methodname> prüft, wenn die anderen zwei
+                    erwähnten Flags unberührt bleiben, gegen die Prüfkette welche für dieses Element
+                    definiert wurde, unabhängig von dem an <methodname>isValid()</methodname>
+                    übergebenen Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setRequired(true)</methodname> fügt, wenn die anderen zwei
+                    erwähnten Flags unberührt bleiben, eine 'NotEmpty' Prüfung an den Beginn der
+                    Prüfkette (wenn nicht bereits eine gesetzt wurde) wobei das
+                    <varname>$breakChainOnFailure</varname> Flag gesetzt wird. Das heißt, dass das
+                    Flag folgende semantische Bedeutung bekommt: Wenn kein Wert übergeben wird, wird
+                    die Übertragung sofort ungülig und der Benutzer wird informiert, was die anderen
+                    Prüfungen davon abhält, ausgeführt zu werden, auf Daten, von denen wir bereits
+                    wissen, dass sie ungültig sind.
                 </para>
 
                 <para>
@@ -717,8 +718,8 @@ $messages = $element->getMessages();
 
             <listitem>
                 <para>
-                    <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array
-                        $options = null)</code>
+                    <methodname>addValidator($nameOrValidator, $breakChainOnFailure = false, array
+                        $options = null)</methodname>
                 </para>
             </listitem>
 
@@ -906,8 +907,8 @@ $messages = $element->getMessages();
 
             <listitem>
                 <para>
-                    <emphasis>HtmlTag</emphasis>: Umschliesst das Element und Fehler in einem HTML
-                    &lt;dd&gt; Tag.
+                    <emphasis>HtmlTag</emphasis>: Umschliesst das Element und Fehler in einem
+                    <acronym>HTML</acronym> &lt;dd&gt; Tag.
                 </para>
             </listitem>
 
@@ -968,10 +969,11 @@ $this->addDecorators(array(
             zur Darstellung. Wenn eine Beschreibung vorhanden ist, wird der 'Description' Dekorator
             einen Paragraph der Klasse 'description' anhängen, der den beschreibenden Text für den
             betreffenden Inhalt enthält. Der nächste Dekorator, 'HtmlTag', umschliesst das Element
-            und die Fehler in ein HTML &lt;dd&gt; Tag. Letztendlich, empfängt der letzte Dekorator,
-            'label' das Label des Elements und übergibt es an den 'FormLabel' View Helfer, und
-            umschliesst es in einen HTML &lt;dt&gt; Tag; der Wert wird dem Inhalt standardmäßig
-            vorangestellt. Die resultierende Ausgabe sieht grundsätzlich wie folgt aus:
+            und die Fehler in ein <acronym>HTML</acronym> &lt;dd&gt; Tag. Letztendlich, empfängt der
+            letzte Dekorator, 'label' das Label des Elements und übergibt es an den 'FormLabel' View
+            Helfer, und umschliesst es in einen <acronym>HTML</acronym> &lt;dt&gt; Tag; der Wert
+            wird dem Inhalt standardmäßig vorangestellt. Die resultierende Ausgabe sieht
+            grundsätzlich wie folgt aus:
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -1246,8 +1248,8 @@ $element->class = 'text;
 
         <para>
             Standardmäßig werden alle Attribute, die an den View Helfer übergeben werden, auch vom
-            Element während der Darstellung verwendet, und als HTML Attribute des Element Tags
-            dargestellt.
+            Element während der Darstellung verwendet, und als <acronym>HTML</acronym> Attribute des
+            Element Tags dargestellt.
         </para>
     </sect2>
 
@@ -1365,8 +1367,8 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
-                            $type)</code>
+                            <methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader,
+                                $type)</methodname>
                         </para>
                     </listitem>
 
@@ -1392,8 +1394,8 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <code>addValidator($validator, $breakChainOnFailure = false, $options =
-                            array())</code>
+                            <methodname>addValidator($validator, $breakChainOnFailure = false,
+                                $options = array())</methodname>
                         </para>
                     </listitem>
 
@@ -1524,8 +1526,8 @@ $element->class = 'text;
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>prefixPath</code> wird an <methodname>addPrefixPaths()</methodname>
-                    übergeben
+                    <property>prefixPath</property> wird an
+                    <methodname>addPrefixPaths()</methodname> übergeben
                 </para>
             </listitem>
 
@@ -1537,16 +1539,16 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                                <code>setAttrib</code> (über <code>setAttribs</code>
+                                <property>setAttrib</property> (über <property>setAttribs</property>
                                 <emphasis>wird</emphasis> es funktionieren)
                         </para>
                     </listitem>
 
-                    <listitem><para><code>setConfig</code></para></listitem>
-                    <listitem><para><code>setOptions</code></para></listitem>
-                    <listitem><para><code>setPluginLoader</code></para></listitem>
-                    <listitem><para><code>setTranslator</code></para></listitem>
-                    <listitem><para><code>setView</code></para></listitem>
+                    <listitem><para><property>setConfig</property></para></listitem>
+                    <listitem><para><property>setOptions</property></para></listitem>
+                    <listitem><para><property>setPluginLoader</property></para></listitem>
+                    <listitem><para><property>setTranslator</property></para></listitem>
+                    <listitem><para><property>setView</property></para></listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
@@ -1615,11 +1617,11 @@ decorators.label.decorator = "Label"
 
         <para>
             Als Beispiel nehmen wir an, dass alle Text Elemente eines Formulars die erstellt werden
-            mit <code>StringTrim</code> gefiltert werden müssen, mit einem gemeinsamen Regulären
-            Ausdruck und das ein eigener Dekorator 'My_Decorator_TextItem' verwendet werden soll,
-            der für die Darstellung von ihnen erstellt wurde; zusätzlich gibt es eine Anzahl an
-            Standardattributen, wie 'size', 'maxLength', und 'class', die spezifiziert werden
-            sollen. So ein Element könnte wie folgt definiert werden:
+            mit <classname>StringTrim</classname> gefiltert werden müssen, mit einem gemeinsamen
+            Regulären Ausdruck und das ein eigener Dekorator 'My_Decorator_TextItem' verwendet
+            werden soll, der für die Darstellung von ihnen erstellt wurde; zusätzlich gibt es eine
+            Anzahl an Standardattributen, wie 'size', 'maxLength', und 'class', die spezifiziert
+            werden sollen. So ein Element könnte wie folgt definiert werden:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -21,13 +21,32 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <programlisting language="ini"><![CDATA[
 ; APPLICATION_PATH/configs/application.ini
 [production]
+autoloaderNamespaces[] = "My_"
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
+pluginpaths.My_Bootstrap_Resource = "My/Bootstrap/Resource"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
 [testing : production]
 [development : production]
 ]]></programlisting>
+
+    <note>
+        <title>Autoloader namespaces</title>
+
+        <para>
+            Because these examples use custom code, we need to register the namespace prefixes for
+            that code with our configuration; this is done with the
+            <code>autoloaderNamespaces</code> configuration key, which is an array.
+        </para>
+
+        <para>
+            Additionally, to ensure that custom plugin resources are discovered, we need to register
+            a plugin prefix path with the bootstrap. This is done with the <code>pluginpaths</code>
+            configuration key, which is an associative array, with keys denoting the prefix to use,
+            and values denoting the path related to that prefix.
+        </para>
+    </note>
 
     <para>
         However, should custom initialization be necessary, you have two

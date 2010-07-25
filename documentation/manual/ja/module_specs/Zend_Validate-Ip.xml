@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21243 -->
+<!-- EN-Revision: 21740 -->
 <sect2 id="zend.validate.set.ip">
 
     <title>Ip</title>
@@ -11,7 +11,6 @@
         これは IPv4 及び IPv6 標準をサポートします。
     </para>
 
-    <!-- TODO : to be translated -->
     <sect3 id="zend.validate.set.ip.options">
         <title>Supported options for Zend_Validate_Ip</title>
 
@@ -67,7 +66,7 @@ if ($validator->isValid($ip)) {
 
             <para>
                 <classname>Zend_Validate_Ip</classname> は正規表現で IPv6 アドレスを検証します。
-                それは、 PHP 自身のフィルターやメソッドが RFC に準拠していないからです。
+                それは、 <acronym>PHP</acronym> 自身のフィルターやメソッドが RFC に準拠していないからです。
                 他の多くの利用可能なクラスもまた、それに準拠しません。
             </para>
         </note>

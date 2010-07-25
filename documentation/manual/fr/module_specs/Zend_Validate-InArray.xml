@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21243 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.in_array">
 
@@ -9,6 +9,40 @@
         <classname>Zend_Validate_InArray</classname> vous permet de valider qu'une entrée est bien présente
         dans un tableau. Ceci fonctionne aussi avec des tableaux multidimensionnels.
     </para>
+
+    <sect3 id="zend.validate.set.in_array.options">
+        <title>Options supportées par Zend_Validate_InArray</title>
+
+        <para>
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_InArray</classname>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>haystack</property></emphasis>&#160;: spécifie le tableau
+                    pour la validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>recursive</property></emphasis>&#160;: définit si la
+                    validation doit être recursive. Cette option vaut <constant>FALSE</constant>
+                    par défaut.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>strict</property></emphasis>&#160;: définit si la validation
+                    doit être strict (même type). Cette option vaut <constant>FALSE</constant> par
+                    défaut.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.set.in_array.basic">
         <title>Validation tableau simple</title>

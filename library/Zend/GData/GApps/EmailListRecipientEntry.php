@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\GApps;
 
+use Zend\GData\GApps;
+
 /**
  * Data model class for a Google Apps Email List Recipient Entry.
  *
@@ -42,7 +44,7 @@ namespace Zend\GData\GApps;
  *
  * @uses       \Zend\GData\Entry
  * @uses       \Zend\GData\Extension\Who
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
@@ -52,7 +54,7 @@ namespace Zend\GData\GApps;
 class EmailListRecipientEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\GApps\EmailListRecipientEntry';
+    protected $_entryClassName = 'Zend\GData\GApps\EmailListRecipientEntry';
 
     /**
      * <gd:who> element used to store the email address of the current

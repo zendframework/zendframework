@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
+<!-- EN-Revision: 21741 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -687,7 +687,7 @@ private function onFault(fault:Object):void {
 
         <para>
             これで、ActionScript 内でのリモート接続処理は完成しました。
-            ZendExample を実行すると、Zend Amf へ接続されるようになります。
+            ZendExample を実行すると、 <classname>Zend_Amf</classname> へ接続されるようになります。
             ここまでを振り返ってみましょう。まず最初にリモートサーバへの接続に必要な変数を追加し、
             サーバからのレスポンスを受け取ったときに使用するメソッドを定義し、
             そして最後に返された結果を <methodname>trace()</methodname> で出力しました。

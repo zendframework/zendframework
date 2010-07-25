@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\GData\Photos;
-use Zend\GData\App;
+
+use Zend\GData\Photos,
+    Zend\GData\App;
 
 /**
  * Assists in constructing queries for user entries.
@@ -36,7 +38,7 @@ use Zend\GData\App;
  *
  * @uses       \Zend\GData\App\InvalidArgumentException
  * @uses       \Zend\GData\GApps\Query
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

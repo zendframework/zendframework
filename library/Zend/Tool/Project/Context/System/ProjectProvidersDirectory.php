@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\System;
+use Zend\Tool\Project\Context\System;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -33,7 +34,7 @@ namespace Zend\Tool\Project\Context\System;
  *
  * @uses       DirectoryIterator
  * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
- * @uses       \Zend\Tool\Project\Context\System\SystemInterface
+ * @uses       \Zend\Tool\Project\Context\System
  * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
  * @category   Zend
  * @package    Zend_Tool
@@ -42,7 +43,7 @@ namespace Zend\Tool\Project\Context\System;
  */
 class ProjectProvidersDirectory
     extends \Zend\Tool\Project\Context\Filesystem\Directory
-    implements SystemInterface,
+    implements System,
                NotOverwritable
 {
 

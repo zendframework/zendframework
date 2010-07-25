@@ -31,15 +31,15 @@ namespace Zend\GData\GApps\Extension;
  * may not be able to be set, depending on the domain used. This class
  * is usually contained within an instance of Zend_Gdata_GApps_UserEntry.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Quota extends \Zend\GData\Extension\Extension
+class Quota extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'apps';
@@ -59,7 +59,7 @@ class Quota extends \Zend\GData\Extension\Extension
      */
     public function __construct($limit = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\GApps\GApps::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\GApps::$namespaces);
         parent::__construct();
         $this->_limit = $limit;
     }

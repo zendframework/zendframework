@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\GApps;
 
+use Zend\GData\GApps;
+
 /**
  * Data model class for a Google Apps Email List Entry.
  *
@@ -41,7 +43,7 @@ namespace Zend\GData\GApps;
  *
  * @uses       \Zend\GData\Entry
  * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\GApps
  * @uses       \Zend\GData\GApps\Extension\EmailList
  * @category   Zend
  * @package    Zend_Gdata
@@ -52,7 +54,7 @@ namespace Zend\GData\GApps;
 class EmailListEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\GApps\EmailListEntry';
+    protected $_entryClassName = 'Zend\GData\GApps\EmailListEntry';
 
     /**
      * <apps:emailList> child element containing general information about

@@ -24,24 +24,25 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Client\Console;
-use Zend\Tool\Framework\Client;
+use Zend\Tool\Framework\Client,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled;
 
 /**
  * @uses       Zend_Console_GetOpt
  * @uses       \Zend\Tool\Framework\Client\Console\HelpSystem
  * @uses       \Zend\Tool\Framework\Client\Exception
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ArgumentParser 
-    implements \Zend\Tool\Framework\Registry\EnabledInterface
+class ArgumentParser implements RegistryEnabled
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\RegistryInterface
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
@@ -51,7 +52,7 @@ class ArgumentParser
     protected $_request = null;
 
     /**
-     * @var \Zend\Tool\Framework\Client\Response\Response
+     * @var \Zend\Tool\Framework\Client\Response
      */
     protected $_response = null;
 
@@ -86,10 +87,10 @@ class ArgumentParser
     /**
      * setRegistry()
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return \Zend\Tool\Framework\Client\Console\ArgumentParser
      */
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(Registry $registry)
     {
         // get the client registry
         $this->_registry = $registry;

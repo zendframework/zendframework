@@ -29,7 +29,7 @@ namespace Zend\GData\Books\Extension;
  * Extends the base Link class with Books extensions
  *
  * @uses       \Zend\GData\App\Extension\Link
- * @uses       \Zend\GData\Books\Books
+ * @uses       \Zend\GData\Books
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books
@@ -53,7 +53,7 @@ class BooksLink extends \Zend\GData\App\Extension\Link
     public function __construct($href = null, $rel = null, $type = null,
             $hrefLang = null, $title = null, $length = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Books\Books::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Books::$namespaces);
         parent::__construct($href, $rel, $type, $hrefLang, $title, $length);
     }
 

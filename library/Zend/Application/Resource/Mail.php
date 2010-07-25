@@ -47,14 +47,14 @@ class Mail extends AbstractResource
 {
 
     /**
-     * @var \Zend\Mail\Transport\AbstractTransport
+     * @var \Zend\Mail\AbstractTransport
      */
     protected $_transport;
 
     /**
      * Initialize mail resource
      * 
-     * @return \Zend\Mail\Transport\AbstractTransport
+     * @return \Zend\Mail\AbstractTransport
      */
     public function init() 
     {
@@ -62,7 +62,7 @@ class Mail extends AbstractResource
     }
     
     /**
-     * @return \Zend\Mail\Transport\AbstractTransport|null
+     * @return \Zend\Mail\AbstractTransport|null
      */
     public function getMail()
     {

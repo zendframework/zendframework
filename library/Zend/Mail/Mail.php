@@ -23,14 +23,15 @@
  * @namespace
  */
 namespace Zend\Mail;
-use Zend\Mime;
-use Zend\Date;
+
+use Zend\Mime,
+    Zend\Date;
 
 /**
  * Class for sending an email.
  *
  * @uses       \Zend\Mail\Exception
- * @uses       \Zend\Mail\Transport\AbstractTransport
+ * @uses       \Zend\Mail\AbstractTransport
  * @uses       \Zend\Mail\Transport\Sendmail
  * @uses       \Zend\Mime\Mime
  * @uses       \Zend\Mime\Message
@@ -47,7 +48,7 @@ class Mail extends Mime\Message
      */
 
     /**
-     * @var \Zend\Mail\Transport\AbstractTransport
+     * @var \Zend\Mail\AbstractTransport
      * @static
      */
     protected static $_defaultTransport = null;
@@ -169,9 +170,9 @@ class Mail extends Mime\Message
      *
      * @todo Allow passing a string to indicate the transport to load
      * @todo Allow passing in optional options for the transport to load
-     * @param  \Zend\Mail\Transport\AbstractTransport $transport
+     * @param  \Zend\Mail\AbstractTransport $transport
      */
-    public static function setDefaultTransport(Transport\AbstractTransport $transport)
+    public static function setDefaultTransport(AbstractTransport $transport)
     {
         self::$_defaultTransport = $transport;
     }
@@ -200,10 +201,13 @@ class Mail extends Mime\Message
      * Public constructor
      *
      * @param string $charset
+     * @return void
      */
-    public function __construct($charset = 'iso-8859-1')
+    public function __construct($charset = null)
     {
-        $this->_charset = $charset;
+        if ($charset != null) {
+            $this->_charset = $charset;
+        }
     }
 
     /**
@@ -1077,13 +1081,13 @@ class Mail extends Mime\Message
      * set DefaultTransport or the internal mail function if no
      * default transport had been set.
      *
-     * @param  \Zend\Mail\Transport\AbstractTransport $transport
+     * @param  \Zend\Mail\AbstractTransport $transport
      * @return \Zend\Mail\Mail                    Provides fluent interface
      */
     public function send($transport = null)
     {
         if ($transport === null) {
-            if (! self::$_defaultTransport instanceof Transport\AbstractTransport) {
+            if (! self::$_defaultTransport instanceof AbstractTransport) {
                 $transport = new Transport\Sendmail();
             } else {
                 $transport = self::$_defaultTransport;

@@ -40,7 +40,7 @@ class Code39 extends AbstractObject
      * Coding map
      * @var array
      */
-    private $_codingMap = array(
+    protected $_codingMap = array(
         '0' => '000110100',
         '1' => '100100001',
         '2' => '001100001',

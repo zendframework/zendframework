@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.advanced">
     <title>Uso Avançado do Zend_Json</title>
@@ -79,7 +79,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             descodificação <acronym>JSON</acronym>. Se não estiver instalado, uma implementação do
             Zend Framework no código <acronym>PHP</acronym> é usada para a codificação e
             descodificação. Este último é consideravelmente mais lento do que usando a extensão
-            do php, mas comporta-se exatamente da mesma forma.
+            do <acronym>PHP</acronym>, mas comporta-se exatamente da mesma forma.
         </para>
 
         <para>

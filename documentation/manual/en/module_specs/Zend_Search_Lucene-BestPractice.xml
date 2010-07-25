@@ -22,8 +22,9 @@
                 linkend="zend.search.lucene.searching.results-scoring">score</link>. If the indexed
             document has the same stored fields, you have to use the
             <methodname>getDocument()</methodname> method to access them:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
@@ -49,7 +50,6 @@ foreach ($hits as $hit) {
     $title = $hit->getDocument()->title;
 }
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.best-practice.indexing-performance">
@@ -77,13 +77,13 @@ foreach ($hits as $hit) {
         <para>
             Full index optimization may be performed with the <methodname>optimize()</methodname>
             method:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
 ]]></programlisting>
-        </para>
 
         <para>
             Index optimization works with data streams and doesn't take a lot of memory but does
@@ -315,25 +315,27 @@ $index->optimize();
 
         <para>
             The first is to force going out of scope:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 ...
 
 unset($index);
 ]]></programlisting>
-        </para>
 
         <para>
             And the second is to perform a commit operation before the end of script execution:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->commit();
 ]]></programlisting>
 
+        <para>
             This possibility is also described in the "<link
                 linkend="zend.search.lucene.advanced.static">Advanced. Using index as static
                 property</link>" section.
@@ -355,8 +357,9 @@ $index->commit();
 
         <para>
             This is more efficient than using the <methodname>find()</methodname> method:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Retrieving documents with find() method using a query string
 $query = $idFieldName . ':' . $docId;
 $hits  = $index->find($query);
@@ -389,7 +392,6 @@ foreach ($docIds as $id) {
     ...
 }
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.best-practice.memory-usage">
@@ -474,8 +476,9 @@ foreach ($docIds as $id) {
 
         <para>
             Encoding may be explicitly specified as an optional parameter of field creation methods:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
@@ -485,14 +488,16 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   'utf-8'));
 ]]></programlisting>
 
+        <para>
             This is the best way to avoid ambiguity in the encoding used.
         </para>
 
         <para>
             If optional encoding parameter is omitted, then the current locale is used. The current
             locale may contain character encoding data in addition to the language specification:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'fr_FR');
 ...
 
@@ -502,7 +507,6 @@ setlocale(LC_ALL, 'de_DE.iso-8859-1');
 setlocale(LC_ALL, 'ru_RU.UTF-8');
 ...
 ]]></programlisting>
-        </para>
 
         <para>
             The same approach is used to set query string encoding.
@@ -515,25 +519,27 @@ setlocale(LC_ALL, 'ru_RU.UTF-8');
         <para>
             Encoding may be passed as an optional parameter, if the query is parsed explicitly
             before search:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query =
     Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
 $hits = $index->find($query);
 ...
 ]]></programlisting>
-        </para>
 
         <para>
             The default encoding may also be specified with
             <methodname>setDefaultEncoding()</methodname> method:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);
 ...
 ]]></programlisting>
 
+        <para>
             The empty string implies 'current locale'.
         </para>
 

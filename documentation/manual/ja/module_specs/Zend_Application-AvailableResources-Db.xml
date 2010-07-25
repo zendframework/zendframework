@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
+<!-- EN-Revision: 22631 -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
 
@@ -36,6 +36,13 @@
                 <emphasis><property>isDefaultTableAdapter</property></emphasis>: アダプタをデフォルト・テーブル・アダプタとして確立するべきかどうか。
             </para>
         </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>defaultMetadataCache</property></emphasis>: the name of the cache 
+                template or an instance of Zend_Cache_Core to use as metadata cache for Zend_Db_Table.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.application.available-resources.db.configExample">
@@ -45,6 +52,7 @@
             下記は、DBリソースを初期化するために使える<acronym>INI</acronym>構成サンプルです。
         </para>
 
+        <!-- TODO : to be translated -->
         <programlisting language="ini"><![CDATA[
 [production]
 resources.db.adapter = "pdo_mysql"
@@ -53,6 +61,9 @@ resources.db.params.username = "webuser"
 resources.db.params.password = "XXXXXXX"
 resources.db.params.dbname = "test"
 resources.db.isDefaultTableAdapter = true
+
+; Optionally you can also the cache template to use for metadata caching:
+resources.db.defaultMetadataCache = "database"
 ]]></programlisting>
     </example>
 

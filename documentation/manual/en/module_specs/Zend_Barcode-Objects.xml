@@ -192,6 +192,13 @@ $barcode->setText('ZEND-FRAMEWORK')
                     </row>
 
                     <row>
+                        <entry><emphasis>withQuietZones</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>TRUE</constant></entry>
+                        <entry>Leave a quiet zone before and after the barcode</entry>
+                    </row>
+
+                    <row>
                         <entry><emphasis>drawText</emphasis></entry>
                         <entry><type>Boolean</type></entry>
                         <entry><constant>TRUE</constant></entry>

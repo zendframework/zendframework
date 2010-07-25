@@ -107,7 +107,7 @@
             and registers an action helper to allow access to the layout object
             from your action controllers. Additionally, you may at any time grab
             the layout instance from within a view script using the
-            <code>layout</code> view helper.
+            <classname>Layout</classname> view helper.
         </para>
 
         <para>
@@ -150,7 +150,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             In your view scripts, you can then access the layout object via the
-            <code>layout</code> view helper. This view helper is slightly
+            <classname>Layout</classname> view helper. This view helper is slightly
             different than others in that it takes no arguments, and returns an
             object instead of a string value. This allows you to immediately
             call methods on the layout object:

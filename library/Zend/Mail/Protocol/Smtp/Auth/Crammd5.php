@@ -24,19 +24,20 @@
  * @namespace
  */
 namespace Zend\Mail\Protocol\Smtp\Auth;
+
 use Zend\Mail\Protocol\Smtp;
 
 /**
  * Performs CRAM-MD5 authentication
  *
- * @uses       \Zend\Mail\Protocol\Smtp\Smtp
+ * @uses       \Zend\Mail\Protocol\Smtp
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Crammd5 extends Smtp\Smtp
+class Crammd5 extends Smtp
 {
     /**
      * Constructor.

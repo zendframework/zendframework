@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 20377
+ * EN-Revision: 22076
  */
 return array(
     // Zend_Validate_Alnum
@@ -72,7 +72,7 @@ return array(
 
     // Zend_Validate_Digits
     "Invalid type given, value should be string, integer or float" => "Ongeldig type opgegeven, waarde moet een string, integer of float zijn",
-    "'%value%' contains not only digit characters" => "'%value%' bevat niet enkel numerieke karakters",
+    "'%value%' contains characters which are not digits; but only digits are allowed" => "'%value%' bevat niet enkel numerieke karakters",
     "'%value%' is an empty string" => "'%value%' is een lege string",
 
     // Zend_Validate_EmailAddress
@@ -208,7 +208,7 @@ return array(
     "'%value%' has failed the IBAN check" => "'%value%' is geen geldige IBAN",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "Het token '%token%' komt niet overeen met de opgegeven token '%value%'",
+    "The two given tokens do not match" => "De twee tokens komen niet overeen",
     "No token was provided to match against" => "Er is geen token opgegeven om mee te matchen",
 
     // Zend_Validate_InArray
@@ -223,6 +223,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => "'%value%' lijkt geen geldig IP adres te zijn",
 
     // Zend_Validate_Isbn
+    "Invalid type given, value should be string or integer" => "Ongeldig type opgegeven, waarde moet een string of integer zijn",
     "'%value%' is no valid ISBN number" => "'%value%' is geen geldig ISBN nummer",
 
     // Zend_Validate_LessThan
@@ -233,24 +234,29 @@ return array(
     "Value is required and can't be empty" => "Waarde is vereist en kan niet leeg worden gelaten",
 
     // Zend_Validate_PostCode
-    "Invalid type given, value should be string or integer" => "Ongeldig type opgegeven, waarde moet een string of integer zijn",
-    "'%value%' does not appear to be an postal code" => "'%value%' lijkt geen geldige postcode te zijn",
+    "Invalid type given. The value should be a string or a integer" => "Ongeldig type opgegeven, waarde moet een string of integer zijn",
+    "'%value%' does not appear to be a postal code" => "'%value%' lijkt geen geldige postcode te zijn",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Ongeldig type opgegeven, waarde dient een string, integer of float te zijn",
     "'%value%' does not match against pattern '%pattern%'" => "'%value%' matcht niet met het patroon '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Er is een interne fout opgetreden tijdens het gebruik van het patroon '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' is geen geldige sitemap changefreq",
+    "Invalid type given, the value should be a string" => "Ongeldig type opgegeven, waarde dient een string te zijn",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => "'%value%' is geen geldige sitemap lastmod",
+    "Invalid type given, the value should be a string" => "Ongeldig type opgegeven, waarde dient een string te zijn",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => "'%value%' is geen geldige sitemap locatie",
+    "Invalid type given, the value should be a string" => "Ongeldig type opgegeven, waarde dient een string te zijn",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => "'%value%' is geen geldige sitemap prioriteit",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "Ongeldig type opgegeven, waarde dient een integer, float of een numerieke string te zijn",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Ongeldig type opgegeven, waarde dient een string te zijn",

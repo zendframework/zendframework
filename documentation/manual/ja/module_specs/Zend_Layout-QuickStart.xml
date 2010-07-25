@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout クイックスタート</title>
 
@@ -56,13 +56,13 @@
         <para>
             <classname>Zend_Layout</classname> は <classname>Zend_View</classname>
             を用いてレンダリングをしているので、
-            登録されているビューヘルパーはすべて使用することができます。
-            またビューに登録されている変数も使用することができます。
+            登録されているビューヘルパーはすべて使用できます。
+            またビューに登録されている変数も使用できます。
             特に便利なのは、さまざまな <link
             linkend="zend.view.helpers.initial.placeholder">プレースホルダヘルパー</link>
             を使用できることでしょう。
             これらを用いると、たとえば &lt;head&gt;
-            セクションやナビゲーション部などのコンテンツを取得することができます。
+            セクションやナビゲーション部などのコンテンツを取得できます。
         </para>
 
         <programlisting language="php"><![CDATA[

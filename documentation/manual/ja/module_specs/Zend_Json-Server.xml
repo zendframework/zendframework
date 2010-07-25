@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPCサーバー</title>
 

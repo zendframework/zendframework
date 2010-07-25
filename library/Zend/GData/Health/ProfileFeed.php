@@ -26,13 +26,15 @@
  */
 namespace Zend\GData\Health;
 
+use Zend\GData\Health;
+
 /**
  * Represents a Google Health user's Profile Feed
  *
  * @link http://code.google.com/apis/health/
  *
  * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Health\Health
+ * @uses       \Zend\GData\Health
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Health
@@ -46,7 +48,7 @@ class ProfileFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\Health\ProfileEntry';
+    protected $_entryClassName = 'Zend\GData\Health\ProfileEntry';
 
     /**
      * Creates a Health Profile feed, representing a user's Health profile

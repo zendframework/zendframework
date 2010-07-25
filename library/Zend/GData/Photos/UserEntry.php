@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Photos;
 
+use Zend\GData\Photos;
+
 /**
  * Data model class for a User Entry.
  *
@@ -36,8 +38,8 @@ namespace Zend\GData\Photos;
  *
  * @uses       \Zend\GData\App\Extension\Category
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\GApps\GApps
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\GApps
+ * @uses       \Zend\GData\Photos
  * @uses       \Zend\GData\Photos\Extension\MaxPhotosPerAlbum
  * @uses       \Zend\GData\Photos\Extension\Nickname
  * @uses       \Zend\GData\Photos\Extension\QuotaCurrent
@@ -53,7 +55,7 @@ namespace Zend\GData\Photos;
 class UserEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Photos\UserEntry';
+    protected $_entryClassName = 'Zend\GData\Photos\UserEntry';
 
     /**
      * gphoto:nickname element

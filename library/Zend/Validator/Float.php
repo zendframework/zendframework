@@ -58,7 +58,7 @@ class Float extends AbstractValidator
      */
     public function __construct($locale = null)
     {
-        if ($locale instanceof end\Config\Config) {
+        if ($locale instanceof \Zend\Config\Config) {
             $locale = $locale->toArray();
         }
 
@@ -76,9 +76,7 @@ class Float extends AbstractValidator
             }
         }
 
-        if ($locale !== null) {
-            $this->setLocale($locale);
-        }
+        $this->setLocale($locale);
     }
 
     /**
@@ -120,27 +118,14 @@ class Float extends AbstractValidator
         }
 
         $this->_setValue($value);
-        if ($this->_locale === null) {
-            $locale        = localeconv();
-            $valueFiltered = str_replace($locale['thousands_sep'], '', (string) $value);
-            $valueFiltered = str_replace($locale['decimal_point'], '.', $valueFiltered);
-
-            if (strval(floatval($valueFiltered)) != $valueFiltered) {
+        try {
+            if (!Locale\Format::isFloat($value, array('locale' => $this->_locale))) {
                 $this->_error(self::NOT_FLOAT);
                 return false;
             }
-
-        } else {
-            try {
-                if (!Locale\Format::isFloat($value, array('locale' => 'en')) &&
-                    !Locale\Format::isFloat($value, array('locale' => $this->_locale))) {
-                    $this->_error(self::NOT_FLOAT);
-                    return false;
-                }
-            } catch (Locale\Exception $e) {
-                $this->_error(self::NOT_FLOAT);
-                return false;
-            }
+        } catch (Locale\Exception $e) {
+            $this->_error(self::NOT_FLOAT);
+            return false;
         }
 
         return true;

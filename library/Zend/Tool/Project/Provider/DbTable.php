@@ -49,7 +49,7 @@ class DbTable
      */
     protected $_nameFilter = null;
     
-    public static function createResource(ProjectProfile\Profile $profile, $dbTableName, $actualTableName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $dbTableName, $actualTableName, $moduleName = null)
     {
         $profileSearchParams = array();
 
@@ -61,7 +61,7 @@ class DbTable
         
         $modelsDirectory = $profile->search($profileSearchParams);
         
-        if (!($modelsDirectory instanceof ProjectProfile\Resource\Resource)) {
+        if (!($modelsDirectory instanceof ProjectProfile\Resource)) {
             throw new Exception(
                 'A models directory was not found' .
                 (($moduleName) ? ' for module ' . $moduleName . '.' : '.')
@@ -77,7 +77,7 @@ class DbTable
         return $dbTableFile;
     }
     
-    public static function hasResource(ProjectProfile\Profile $profile, $dbTableName, $moduleName = null)
+    public static function hasResource(ProjectProfile $profile, $dbTableName, $moduleName = null)
     {
         $profileSearchParams = array();
 
@@ -89,14 +89,14 @@ class DbTable
         
         $modelsDirectory = $profile->search($profileSearchParams);
         
-        if (!($modelsDirectory instanceof ProjectProfile\Resource\Resource)
+        if (!($modelsDirectory instanceof ProjectProfile\Resource)
             || !($dbTableDirectory = $modelsDirectory->search('DbTableDirectory'))) {
             return false;
         }
         
         $dbTableFile = $dbTableDirectory->search(array('DbTableFile' => array('dbTableName' => $dbTableName)));
         
-        return ($dbTableFile instanceof ProjectProfile\Resource\Resource) ? true : false;
+        return ($dbTableFile instanceof ProjectProfile\Resource) ? true : false;
     }
       
     

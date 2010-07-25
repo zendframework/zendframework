@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20819 -->
+<!-- EN-Revision: 21740 -->
 <sect1 id="zend.mail.introduction">
 
     <title>導入</title>
@@ -135,7 +135,7 @@ $mail->send();
             <title>Sendmail トランスポートと Windows</title>
 
             <para>
-                PHPマニュアルでは、<methodname>mail()</methodname>関数は Windows と *nix ベースのシステムとでは、
+                <acronym>PHP</acronym> マニュアルでは、<methodname>mail()</methodname>関数は Windows と *nix ベースのシステムとでは、
                 異なる振る舞いをすると述べています。
                 Windows で Sendmail トランスポートを利用すると、
                 <methodname>addBcc()</methodname> との連携は動作しません。

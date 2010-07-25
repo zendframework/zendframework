@@ -20,13 +20,18 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * MultiCheckbox form element
  *
  * Allows specifyinc a (multi-)dimensional associative array of values to use
  * as labelled checkboxes; these will return an array of values for those
  * checkboxes selected.
  *
- * @uses       Zend_Form_Element_Multi
+ * @uses       \Zend\Form\Element\Multi
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -34,7 +39,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_MultiCheckbox extends Zend_Form_Element_Multi
+class MultiCheckbox extends Multi
 {
     /**
      * Use formMultiCheckbox view helper by default

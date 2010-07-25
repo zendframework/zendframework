@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20996 -->
+<!-- EN-Revision: 21997 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-project">
     <title>Das Projekt erstellen</title>
@@ -13,8 +13,8 @@
         <title>Zend Framework installieren</title>
 
         <para>
-            Der einfachste Weg um Zend Framework zusammen mit einem kompletten PHP Stack zu
-            erhalten ist durch die Installation von <ulink
+            Der einfachste Weg um Zend Framework zusammen mit einem kompletten
+            <acronym>PHP</acronym> Stack zu erhalten ist durch die Installation von <ulink
                 url="http://www.zend.com/en/products/server-ce/downloads">Zend Server</ulink>.
             Zend Server hat native Installationsroutinen für Mac OSX, Windows, Fedora Core und
             Ubuntu, sowie ein universelles Installationspaket das mit den meisten Linux
@@ -68,7 +68,7 @@
 
             <para>
                 Wenn man Probleme hat das <command>zf</command> Kommandozeilen Tool zu konfigurieren
-                sollte man in <link linkend="zend.tool.framework.clitool.setup-general">das
+                sollte man in <link linkend="zend.tool.framework.clitool">das
                     Handbuch</link> sehen.
             </para>
         </note>
@@ -152,7 +152,7 @@ quickstart
         <para>
             Die <classname>Bootstrap</classname> Klasse definiert welche Ressourcen und Komponenten
             zu initialisieren sind. Standardmäßig wird Zend Framework's <link
-                linkend="zend.controller.front">Front Controller</link>initialisiert und er
+                linkend="zend.controller.front">Front Controller</link> initialisiert und er
             verwendet <filename>application/controllers/</filename> als Standardverzeichnis in dem
             nach Action Controllern nachgesehen wird (mehr davon später). Die Klasse sieht wie
             folgt aus:
@@ -178,10 +178,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Wärend Zend Framework selbst konfigurationslos ist, ist es oft notwendig die eigene
             Anwendung zu konfigurieren. Die Standardkonfiguration wird in
             <filename>application/configs/application.ini</filename> platziert und enthält einige
-            grundsätzliche Direktiven für die Einstellung der PHP Umgebung (zum Beispiel ein- und
-            ausschalten der Fehlermeldungen), zeigt den Pfad zur eigenen Bootstrap Klasse (wie auch
-            dessen Klassenname), und den Pfad zu den eigenen Action Controllern. Das sieht wie folgt
-            aus:
+            grundsätzliche Direktiven für die Einstellung der <acronym>PHP</acronym> Umgebung (zum
+            Beispiel ein- und ausschalten der Fehlermeldungen), zeigt den Pfad zur eigenen Bootstrap
+            Klasse (wie auch dessen Klassenname), und den Pfad zu den eigenen Action Controllern.
+            Das sieht wie folgt aus:
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -210,13 +210,13 @@ phpSettings.display_errors = 1
 
         <para>
             Verschiedene Dinge sollten über diese Datei gesagt werden. Erstens kann man, wenn
-            INI-artige Konfigurationen verwendet werden, direkt auf Konstanten referenzieren und Sie
-            erweitern; <constant>APPLICATION_PATH</constant> selbst ist eine Konstante. Zusätzlich
-            ist zu beachten das es verschiedene definierte Sektionen gibt: production, staging,
-            testing, und development. Die letzten drei verweisen auf Einstellungen der
-            "production" Umgebung. Das ist ein nützlicher Weg die Konfiguration zu organisieren und
-            stellt sicher das die richtigen Einstellungen in jeder Stufe der Anwendungsentwicklung
-            vorhanden sind.
+            <acronym>INI</acronym>-artige Konfigurationen verwendet werden, direkt auf Konstanten
+            referenzieren und Sie erweitern; <constant>APPLICATION_PATH</constant> selbst ist eine
+            Konstante. Zusätzlich ist zu beachten das es verschiedene definierte Sektionen gibt:
+            production, staging, testing, und development. Die letzten drei verweisen auf
+            Einstellungen der "production" Umgebung. Das ist ein nützlicher Weg die Konfiguration zu
+            organisieren und stellt sicher das die richtigen Einstellungen in jeder Stufe der
+            Anwendungsentwicklung vorhanden sind.
         </para>
     </sect2>
 
@@ -239,9 +239,9 @@ phpSettings.display_errors = 1
         <para>
             Typischerweise benötigt man immer einen <classname>IndexController</classname>, der ein
             Fallback Controller ist und auch als Homepage der Site arbeitet, und einen
-            <classname>ErrorController</classname> der verwendet wird um Dinge wie HTTP 404 Fehler
-            zu zeigen (wenn der Controller oder die Action nicht gefunden wird) und HTTP 500 Fehler
-            (Anwendungsfehler).
+            <classname>ErrorController</classname> der verwendet wird um Dinge wie
+            <acronym>HTTP</acronym> 404 Fehler zu zeigen (wenn der Controller oder die Action nicht
+            gefunden wird) und <acronym>HTTP</acronym> 500 Fehler (Anwendungsfehler).
         </para>
 
         <para>
@@ -313,10 +313,10 @@ class ErrorController extends Zend_Controller_Action
         <title>Views</title>
 
         <para>
-            Views werden im Zend Framework in reinem alten PHP geschrieben. View Skripte werden
-            unter <filename>application/views/scripts/</filename> platziert, wo Sie weiters
-            kategorisiert werden indem der Name des Controllers verwendet wird. In unserem Fall
-            haben wir einen <classname>IndexController</classname> und einen
+            Views werden im Zend Framework in reinem alten <acronym>PHP</acronym> geschrieben. View
+            Skripte werden unter <filename>application/views/scripts/</filename> platziert, wo Sie
+            weiters kategorisiert werden indem der Name des Controllers verwendet wird. In unserem
+            Fall haben wir einen <classname>IndexController</classname> und einen
             <classname>ErrorController</classname>, und deshalb haben wir entsprechende
             <filename>index/</filename> und <filename>error/</filename> Unterverzeichnisse in
             unserem View Skript Verzeichnis. In diesem Unterverzeichnissen finden und erstellen wir
@@ -327,8 +327,8 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             View Skripte können jedes Markup enthalten das man haben will, und verwenden das
-            öffnende <code>&lt;?php</code> Tag und das schließende <code>?&gt;</code> Tag um PHP
-            Direktiven einzufügen.
+            öffnende <emphasis>&lt;?php</emphasis> Tag und das schließende
+            <emphasis>?&gt;</emphasis> Tag um <acronym>PHP</acronym> Direktiven einzufügen.
         </para>
 
         <para>
@@ -389,7 +389,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Das <filename>error/error.phtml</filename> View Skript ist etwas interessanter da es
-            einige PHP Konditionen verwendet:
+            einige <acronym>PHP</acronym> Konditionen verwendet:
         </para>
 
         <programlisting language="php"><![CDATA[

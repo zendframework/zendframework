@@ -63,10 +63,11 @@ $log->error('unable to connect to database');
         <title>Zend_Layout Usage</title>
 
         <para>
-            A <classname>Zend_Layout</classname> instance may be used to generate the HTML
-            portion of a multipart email. If a <classname>Zend_Layout</classname> instance
-            is in use, <classname>Zend_Log_Writer_Mail</classname> assumes that it is
-            being used to render HTML and sets the body HTML for the message as
+            A <classname>Zend_Layout</classname> instance may be used to generate the
+            <acronym>HTML</acronym> portion of a multipart email. If a
+            <classname>Zend_Layout</classname> instance is in use,
+            <classname>Zend_Log_Writer_Mail</classname> assumes that it is being used to render
+            <acronym>HTML</acronym> and sets the body <acronym>HTML</acronym> for the message as
             the <classname>Zend_Layout</classname>-rendered value.
         </para>
 

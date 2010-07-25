@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21762 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.digits">
+    <title>Digits</title>
+
+    <para>
+        <classname>Zend_Validate_Digit</classname> prüft ob ein angegebener Wert nur Ziffern
+        enthält.
+    </para>
+
+    <sect3 id="zend.validate.set.digits.options">
+        <title>Unterstützte Optionen für Zend_Validate_Digits</title>
+
+        <para>
+            Es gibt keine zusätzlichen Optionen für <classname>Zend_Validate_Digits</classname>:
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.digits.basic">
+        <title>Prüfen von Ziffern</title>
+
+        <para>
+            Um zu prüfen ob ein angegebener Wert nur Ziffern und keine anderen Zeichen enthält, muss
+            die Prüfung einfach wie in diesem Beispiel gezeigt aufgerufen werden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Digits();
+
+$validator->isValid("1234567890"); // Gibt true zurück
+$validator->isValid(1234);         // Gibt true zurück
+$validator->isValid('1a234');      // Gibt false zurück
+]]></programlisting>
+
+        <note>
+            <title>Nummern prüfen</title>
+
+            <para>
+                Wenn man Nummern oder nummerische Werte prüfen will, muss man darauf achten dass
+                diese Prüfung nur auf Ziffern prüft. Das bedeutet dass jedes andere Zeichen wie ein
+                Trennzeichen für Tausender oder ein Komma diese Prüfung nicht bestehen. In diesem
+                Fall sollte man <classname>Zend_Validate_Int</classname> oder
+                <classname>Zend_Validate_Float</classname> verwenden.
+            </para>
+        </note>
+    </sect3>
+</sect2>

@@ -25,13 +25,15 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * The YouTube video playlist flavor of an Atom Feed with media support
  * Represents a list of individual playlists, where each contained entry is
  * a playlist.
  *
  * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\PlaylistListEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -47,7 +49,7 @@ class PlaylistListFeed extends \Zend\GData\Media\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\YouTube\PlaylistListEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\PlaylistListEntry';
 
     /**
      * Creates a Playlist list feed, representing a list of playlists,

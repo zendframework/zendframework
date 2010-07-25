@@ -38,13 +38,13 @@ class InputHandler
 {
 
     /**
-     * @var \Zend\Tool\Framework\Client\Interactive\InputInterface
+     * @var \Zend\Tool\Framework\Client\Interactive\InteractveInput
      */
     protected $_client = null;
 
     protected $_inputRequest = null;
 
-    public function setClient(InputInterface $client)
+    public function setClient(InteractveInput $client)
     {
         $this->_client = $client;
         return $this;

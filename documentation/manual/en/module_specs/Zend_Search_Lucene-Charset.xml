@@ -79,13 +79,13 @@
         </para>
 
         <para>
-             Any of this analyzers can be enabled with the code like this:
+            Any of this analyzers can be enabled with the code like this:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
 ]]></programlisting>
-        </para>
 
         <warning>
             <title/>
@@ -110,16 +110,16 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
 
         <para>
-             Use the following code to check, if PCRE UTF-8 support is enabled:
+            Use the following code to check, if PCRE UTF-8 support is enabled:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE unicode support is turned on.\n";
 } else {
     echo "PCRE unicode support is turned off.\n";
 }
 ]]></programlisting>
-        </para>
 
         <para>
             Case insensitive versions of UTF-8 compatible analyzers also need <ulink
@@ -131,8 +131,9 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             If you don't want mbstring extension to be turned on, but need case insensitive search,
             you may use the following approach: normalize source data before indexing and query
             string before searching by converting them to lowercase:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Indexing
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -169,6 +170,5 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $hits = $index->find(strtolower($query));
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

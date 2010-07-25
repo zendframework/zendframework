@@ -24,8 +24,10 @@
  * @namespace
  */
 namespace Zend\View\Helper\Navigation;
-use Zend\Navigation;
-use Zend\View;
+
+use Zend\Navigation\AbstractPage,
+    Zend\Navigation\Container,
+    Zend\View;
 
 /**
  * Helper for printing sitemaps
@@ -34,8 +36,8 @@ use Zend\View;
  *
  * @uses       DOMDocument
  * @uses       RecursiveIteratorIterator
- * @uses       \Zend\Uri\Uri
- * @uses       \Zend\URI\Exception
+ * @uses       \Zend\Uri\Url
+ * @uses       \Zend\Uri\Exception
  * @uses       \Zend\Validator\Sitemap\Changefreq
  * @uses       \Zend\Validator\Sitemap\Lastmod
  * @uses       \Zend\Validator\Sitemap\Loc
@@ -108,7 +110,7 @@ class Sitemap extends AbstractHelper
      * @return \Zend\View\Helper\Navigation\Sitemap   fluent interface, returns
      *                                               self
      */
-    public function sitemap(Navigation\Container $container = null)
+    public function direct(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -223,21 +225,21 @@ class Sitemap extends AbstractHelper
      *
      * @param  string $serverUrl                    server URL to set (only
      *                                              scheme and host)
-     * @throws \Zend\URI\Exception                   if invalid server URL
+     * @throws \Zend\Uri\Exception                   if invalid server URL
      * @return \Zend\View\Helper\Navigation\Sitemap  fluent interface, returns
      *                                              self
      */
     public function setServerUrl($serverUrl)
     {
-        $uri = \Zend\Uri\Uri::factory($serverUrl);
+        $uri = new \Zend\Uri\Url($serverUrl);
         $uri->setFragment('');
         $uri->setPath('');
         $uri->setQuery('');
 
-        if ($uri->valid()) {
-            $this->_serverUrl = $uri->getUri();
+        if ($uri->isValid()) {
+            $this->_serverUrl = $uri->generate();
         } else {
-            $e = new \Zend\URI\Exception(sprintf(
+            $e = new \Zend\Uri\Exception(sprintf(
                     'Invalid server URL: "%s"',
                     $serverUrl));
             $e->setView($this->view);
@@ -272,7 +274,7 @@ class Sitemap extends AbstractHelper
     protected function _xmlEscape($string)
     {
         $enc = 'UTF-8';
-        if ($this->view instanceof View\ViewInterface
+        if ($this->view instanceof View\ViewEngine
             && method_exists($this->view, 'getEncoding')
         ) {
             $enc = $this->view->getEncoding();
@@ -294,10 +296,10 @@ class Sitemap extends AbstractHelper
     /**
      * Returns an escaped absolute URL for the given page
      *
-     * @param  \Zend\Navigation\Page\Page $page  page to get URL from
+     * @param  \Zend\Navigation\AbstractPage $page  page to get URL from
      * @return string
      */
-    public function url(Navigation\Page\Page $page)
+    public function url(AbstractPage $page)
     {
         $href = $page->getHref();
 
@@ -312,9 +314,11 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $url = $this->getServerUrl()
-                 . rtrim($this->view->url(), '/') . '/'
-                 . $href;
+            $curDoc = $this->view->url();
+            $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
+            $url = rtrim($this->getServerUrl(), '/') . '/'
+                 . $curDoc 
+                 . (empty($curDoc) ? '' : '/') . $href;
         }
 
         return $this->_xmlEscape($url);
@@ -336,7 +340,7 @@ class Sitemap extends AbstractHelper
      *                                               validators are used and the
      *                                               loc element fails validation
      */
-    public function getDomSitemap(Navigation\Container $container = null)
+    public function getDomSitemap(Container $container = null)
     {
         if (null === $container) {
             $container = $this->getContainer();
@@ -472,7 +476,7 @@ class Sitemap extends AbstractHelper
      *                                               registered in the helper.
      * @return string                                helper output
      */
-    public function render(Navigation\Container $container = null)
+    public function render(Container $container = null)
     {
         $dom = $this->getDomSitemap($container);
 

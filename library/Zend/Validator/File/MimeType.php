@@ -199,7 +199,7 @@ class MimeType extends Validator\AbstractValidator
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             $this->_finfo = @finfo_open($const, $file);
-            if ($this->_finfo === false) {
+            if (empty($this->_finfo)) {
                 $this->_finfo = null;
                 throw new Validator\Exception('The given magicfile is not accepted by finfo');
             } else {
@@ -331,19 +331,18 @@ class MimeType extends Validator\AbstractValidator
         $mimefile = $this->getMagicFile();
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-            if (!empty($mimefile) && !empty($this->_finfo)) {
+            if (!empty($mimefile) && empty($this->_finfo)) {
                 $this->_finfo = @finfo_open($const, $mimefile);
             }
 
-            if ($this->_finfo === false) {
+            if (empty($this->_finfo)) {
                 $this->_finfo = @finfo_open($const);
             }
 
-            if ($this->_finfo !== false) {
+            $this->_type = null;
+            if (!empty($this->_finfo)) {
                 $this->_type = finfo_file($this->_finfo, $value);
             }
-
-            unset($this->_finfo);
         }
 
         if (empty($this->_type) &&

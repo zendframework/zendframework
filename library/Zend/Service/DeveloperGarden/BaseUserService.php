@@ -22,7 +22,7 @@
 
 /**
  * @uses       Zend_Service_DeveloperGarden_BaseUserService_AccountBalance
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_Client_Exception
  * @uses       Zend_Service_DeveloperGarden_Request_BaseUserService_ChangeQuotaPool
  * @uses       Zend_Service_DeveloperGarden_Request_BaseUserService_GetAccountBalance
@@ -37,7 +37,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_DeveloperGarden_BaseUserService extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+class Zend_Service_DeveloperGarden_BaseUserService extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * wsdl file

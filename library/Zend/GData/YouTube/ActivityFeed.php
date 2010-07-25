@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * A feed of user activity entries for YouTube
  *
  * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\ActivityEntry
  * @link http://code.google.com/apis/youtube/
  * @category   Zend
@@ -46,7 +48,7 @@ class ActivityFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\YouTube\ActivityEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\ActivityEntry';
 
     /**
      * Creates an Activity feed, representing a list of activity entries

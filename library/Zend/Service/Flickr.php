@@ -68,10 +68,6 @@ class Zend_Service_Flickr
      */
     public function __construct($apiKey)
     {
-        iconv_set_encoding('output_encoding', 'UTF-8');
-        iconv_set_encoding('input_encoding', 'UTF-8');
-        iconv_set_encoding('internal_encoding', 'UTF-8');
-
         $this->apiKey = (string) $apiKey;
     }
 
@@ -360,7 +356,7 @@ class Zend_Service_Flickr
     protected function _validateUserSearch(array $options)
     {
         $validOptions = array('api_key', 'method', 'user_id', 'per_page', 'page', 'extras', 'min_upload_date',
-                              'min_taken_date', 'max_upload_date', 'max_taken_date');
+                              'min_taken_date', 'max_upload_date', 'max_taken_date', 'safe_search');
 
         $this->_compareOptions($options, $validOptions);
 
@@ -399,7 +395,9 @@ class Zend_Service_Flickr
     {
         $validOptions = array('method', 'api_key', 'user_id', 'tags', 'tag_mode', 'text', 'min_upload_date',
                               'max_upload_date', 'min_taken_date', 'max_taken_date', 'license', 'sort',
-                              'privacy_filter', 'bbox', 'accuracy', 'machine_tags', 'machine_tag_mode', 'group_id',
+                              'privacy_filter', 'bbox', 'accuracy', 'safe_search', 'content_type', 'machine_tags',
+                              'machine_tag_mode', 'group_id', 'contacts', 'woe_id', 'place_id', 'media', 'has_geo',
+                              'geo_context', 'lat', 'lon', 'radius', 'radius_units', 'is_commons', 'is_gallery',
                               'extras', 'per_page', 'page');
 
         $this->_compareOptions($options, $validOptions);

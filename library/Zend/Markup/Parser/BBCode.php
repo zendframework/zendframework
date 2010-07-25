@@ -24,11 +24,13 @@
  * @namespace
  */
 namespace Zend\Markup\Parser;
-use Zend\Markup;
+
+use Zend\Markup\Parser,
+    Zend\Markup;
 
 /**
  * @uses       \Zend\Markup\Parser\Exception
- * @uses       \Zend\Markup\Parser\ParserInterface
+ * @uses       \Zend\Markup\Parser
  * @uses       \Zend\Markup\Token
  * @uses       \Zend\Markup\TokenList
  * @category   Zend
@@ -37,7 +39,7 @@ use Zend\Markup;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BBCode implements ParserInterface
+class BBCode implements Parser
 {
     const NEWLINE   = "[newline\0]";
 

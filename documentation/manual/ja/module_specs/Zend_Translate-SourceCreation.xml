@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21049 -->
+<!-- EN-Revision: 21661 -->
 <sect1 id="zend.translate.sourcecreation">
 
     <title>ソースファイルの作成</title>
@@ -41,8 +41,14 @@ $german = array(
     'message2' => 'Nachricht2',
     'message3' => 'Nachricht3');
 
-$translate = new Zend_Translate('array', $english, 'en');
-$translate->addTranslation($deutsch, 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => $english,
+        'locale'  => 'en'
+    )
+);
+$translate->addTranslation(array('content' => $deutsch, 'locale' => 'de'));
 ]]></programlisting>
 
         <para>
@@ -60,7 +66,13 @@ return array(
     'message3' => 'Nachricht3');
 
 // コントローラ
-$translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => '/path/to/myarray.php',
+        'locale'  => 'de'
+    )
+);
 ]]></programlisting>
 
         <note>
@@ -89,8 +101,19 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
 
         <programlisting language="php"><![CDATA[
 // mo ファイルを作成し、翻訳を済ませているものとします
-$translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
-$translate->addTranslation('/path/to/german.mo', 'de');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/english.mo',
+        'locale'  => 'en'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/german.mo',
+        'locale' => 'de'
+    )
+);
 ]]></programlisting>
 
         <para>
@@ -136,7 +159,13 @@ $translate->addTranslation('/path/to/german.mo', 'de');
 
         <programlisting language="php"><![CDATA[
 // アダプタの情報を取得する方法
-$translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/english.mo',
+        'locale'  => 'en'
+    )
+);
 print_r($translate->getAdapterInfo());
 ]]></programlisting>
 
@@ -181,7 +210,13 @@ print_r($translate->getAdapterInfo());
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'tmx',
+        'content' => 'path/to/mytranslation.tmx',
+        'locale'  => 'en'
+    )
+);
 ]]></programlisting>
         </example>
 
@@ -244,8 +279,14 @@ message2;Nachricht2
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('csv', '/path/to/mytranslation.csv', 'de');
-$translate->addTranslation('path/to/other.csv', 'fr');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(array('content' => 'path/to/other.csv', 'locale' => 'fr'));
 ]]></programlisting>
         </example>
 
@@ -292,12 +333,20 @@ message2,"Nachricht,2"
 
             <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
-    'csv',
-    '/path/to/mytranslation.csv',
-    'de',
-    array('delimiter' => ','));
+    array(
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de',
+        'delimiter' => ','
+    )
+);
 
-$translate->addTranslation('/path/to/other.csv', 'fr');
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/other.csv',
+        'locale' => 'fr'
+    )
+);
 ]]></programlisting>
         </example>
 
@@ -336,8 +385,19 @@ Message_3="Nachricht :3 (de)"
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate('ini', '/path/to/mytranslation.ini', 'de');
-$translate->addTranslation('/path/to/other.ini', 'it');
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'ini',
+        'content' => '/path/to/mytranslation.ini',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/other.ini',
+        'locale' => 'it'
+    )
+);
 ]]></programlisting>
         </example>
 

@@ -127,7 +127,7 @@ class Zend_Validate_DigitsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('#'));
         $messages = $this->_validator->getMessages();
         $arrayExpected = array(
-            Zend_Validate_Digits::NOT_DIGITS => '\'#\' contains characters which are not digits; but only digits are allowed'
+            Zend_Validate_Digits::NOT_DIGITS => '\'#\' must contain only digits'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }

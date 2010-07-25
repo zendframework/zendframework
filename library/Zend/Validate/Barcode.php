@@ -46,7 +46,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
         self::FAILED         => "'%value%' failed checksum validation",
         self::INVALID_CHARS  => "'%value%' contains invalid characters",
         self::INVALID_LENGTH => "'%value%' should have a length of %length% characters",
-        self::INVALID        => "Invalid type given, value should be string",
+        self::INVALID        => "Invalid type given. String expected",
     );
 
     /**

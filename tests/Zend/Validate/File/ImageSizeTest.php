@@ -86,7 +86,7 @@ class Zend_Validate_File_ImageSizeTest extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_ImageSize(array('minwidth' => 0, 'minheight' => 10, 'maxwidth' => 1000, 'maxheight' => 2000));
         $this->assertEquals(false, $validator->isValid(dirname(__FILE__) . '/_files/nofile.jpg'));
         $failures = $validator->getMessages();
-        $this->assertContains('can not be read', $failures['fileImageSizeNotReadable']);
+        $this->assertContains('is not readable', $failures['fileImageSizeNotReadable']);
 
         $file['name'] = 'TestName';
         $validator = new Zend_Validate_File_ImageSize(array('minwidth' => 0, 'minheight' => 10, 'maxwidth' => 1000, 'maxheight' => 2000));

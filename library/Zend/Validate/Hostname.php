@@ -61,7 +61,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID                 => "Invalid type given, value should be a string",
+        self::INVALID                 => "Invalid type given. String expected",
         self::IP_ADDRESS_NOT_ALLOWED  => "'%value%' appears to be an IP address, but IP addresses are not allowed",
         self::UNKNOWN_TLD             => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
         self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash in an invalid position",

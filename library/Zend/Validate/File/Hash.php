@@ -47,7 +47,7 @@ class Zend_Validate_File_Hash extends Zend_Validate_Abstract
     protected $_messageTemplates = array(
         self::DOES_NOT_MATCH => "File '%value%' does not match the given hashes",
         self::NOT_DETECTED   => "A hash could not be evaluated for the given file",
-        self::NOT_FOUND      => "File '%value%' could not be found"
+        self::NOT_FOUND      => "File '%value%' is not readable or does not exist"
     );
 
     /**

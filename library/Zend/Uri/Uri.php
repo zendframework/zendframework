@@ -281,6 +281,9 @@ class Uri
      * Convert a relative URI into an absolute URI using a base absolute URI as 
      * a reference.    
      * 
+     * Merging algorithm is adapted from RFC-3986 section 5.2 
+     * (@link http://tools.ietf.org/html/rfc3986#section-5.2)
+     * 
      * @param \Zend\Uri\Uri | string $baseUrl
      * @return \Zend\Uri\Uri
      */
@@ -297,11 +300,6 @@ class Uri
         if (! $baseUrl instanceof static) {
             /** @todo create an exception type for this */ 
             throw new Exception("Provided base URL is not an instance of " . get_class($this));
-        }
-        
-        if (! $baseUrl->isAbsolute()) {
-            /** @todo create an exception type for this */ 
-            throw new Exception("Provided base URL '$baseUrl' is not absolute");
         }
         
         // Merging starts here...
@@ -344,7 +342,7 @@ class Uri
     /**
      * Convert the link to a relative link by substracting a base URI
      * 
-     *  This is the opposite of 'resolving' a relative link - creating a 
+     *  This is the opposite of resolving a relative link - i.e. creating a 
      *  relative reference link from an original URI and a base URI. 
      *  
      *  If the two URIs do not intersect (e.g. the original URI is not in any
@@ -700,7 +698,11 @@ class Uri
     /**
      * Remove any extra dot segments (/../, /./) from a path
      *
+     * Algorithm is adapted from RFC-3986 section 5.2.4
+     * (@link http://tools.ietf.org/html/rfc3986#section-5.2.4)
+     * 
      * @todo   consider optimizing
+     * 
      * @param  string $path
      * @return string
      */

@@ -23,18 +23,19 @@
 /**
  * @namespace
  */
-namespace Zend\URI;
+namespace Zend\Uri;
 
 /**
- * Exceptions for Zend_Uri
+ * "Mailto" URI handler
  *
- * @uses      \Zend\URI\Exception
+ * The 'mailto:...' scheme is loosly defined in RFC-1738
+ * 
  * @category  Zend
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidURIException extends Exception
+class Mailto extends Uri
 {
-    
+    static protected $_validSchemes = array('mailto');
 }

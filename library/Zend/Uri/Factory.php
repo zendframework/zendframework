@@ -23,8 +23,8 @@
 /**
  * @namespace
  */
-namespace Zend\URI;
-use Zend\URI\URI;
+namespace Zend\Uri;
+use Zend\Uri\Uri;
 
 /**
  * URI Factory Class
@@ -36,11 +36,11 @@ use Zend\URI\URI;
  * Note that this class contains only static methods and should not be 
  * instanciated 
  *
- * @uses      \Zend\URI\URI
- * @uses      \Zend\URI\HTTP
- * @uses      \Zend\URI\File
- * @uses      \Zend\URI\Mailto
- * @uses      \Zend\URI\Exception
+ * @uses      \Zend\Uri\Uri
+ * @uses      \Zend\Uri\HTTP
+ * @uses      \Zend\Uri\File
+ * @uses      \Zend\Uri\Mailto
+ * @uses      \Zend\Uri\Exception
  * @uses      \Zend\Loader
  * @category  Zend
  * @package   Zend_Uri
@@ -55,10 +55,10 @@ abstract class Factory
      * @var array
      */
     static protected $_schemeClasses = array(
-        'http'   => '\Zend\URI\HTTP',
-        'https'  => '\Zend\URI\HTTP',
-        'mailto' => '\Zend\URI\Mailto',
-        'file'   => '\Zend\URI\File'
+        'http'   => '\Zend\Uri\Http',
+        'https'  => '\Zend\Uri\Http',
+        'mailto' => '\Zend\Uri\Mailto',
+        'file'   => '\Zend\Uri\File'
     );
     
     /**
@@ -78,7 +78,7 @@ abstract class Factory
      * 
      * @param  string $uri
      * @param  string $defaultScheme
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Uri
      */
     static public function factory($uriString, $defaultScheme = null)
     {
@@ -86,7 +86,7 @@ abstract class Factory
             throw new \InvalidArgumentException('Expecting a string, got ' . gettype($uriString));
         }
         
-        $uri = new URI($uriString);
+        $uri = new Uri($uriString);
         $scheme = strtolower($uri->getScheme());
         if (! $scheme && $defaultScheme) { 
             $scheme = $defaultScheme;
@@ -96,8 +96,8 @@ abstract class Factory
             $class = static::$_schemeClasses[$scheme];
             \Zend\Loader::loadClass($class); 
             $uri = new $class($uri);
-            if (! $uri instanceof URI) { 
-                throw new \InvalidArgumentException("class '$class' registered for scheme '$scheme' is not a subclass of \\Zend\\URI\\URI");
+            if (! $uri instanceof Uri) { 
+                throw new \InvalidArgumentException("class '$class' registered for scheme '$scheme' is not a subclass of \\Zend\\Uri\\Uri");
             }
         }
         

@@ -23,20 +23,18 @@
 /**
  * @namespace
  */
-namespace \Zend\URI;
-use \Zend\URI\URI;
+namespace Zend\Uri;
 
 /**
- * HTTP URI handler
+ * Exceptions for Zend_Uri
  *
- * @uses      \Zend\URI\URI
  * @uses      \Zend\URI\Exception
  * @category  Zend
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HTTP extends URI
+class InvalidSchemeException extends Exception
 {
-    static protected $_validSchemes = array('http', 'https');
+    
 }

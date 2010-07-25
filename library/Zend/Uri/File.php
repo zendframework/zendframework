@@ -23,22 +23,19 @@
 /**
  * @namespace
  */
-namespace \Zend\URI;
-use \Zend\URI\URI;
+namespace Zend\Uri;
 
 /**
  * File URI handler
  *
  * The 'file:...' scheme is loosly defined in RFC-1738
  * 
- * @uses      \Zend\URI\URI
- * @uses      \Zend\URI\Exception
  * @category  Zend
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends URI
+class File extends Uri
 {
     static protected $_validSchemes = array('file');
     

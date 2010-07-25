@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\URI;
+namespace Zend\Uri;
 
 /**
  * Exceptions for Zend_Uri
@@ -34,7 +34,7 @@ namespace Zend\URI;
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidSchemeException extends Exception
+class InvalidUriException extends Exception
 {
     
 }

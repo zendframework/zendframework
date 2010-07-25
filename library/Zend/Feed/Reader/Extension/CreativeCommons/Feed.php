@@ -27,7 +27,6 @@ use Zend\Feed\Reader;
 use Zend\Feed\Reader\Extension;
 
 /**
-<<<<<<< HEAD
 * @uses \Zend\Feed\Reader\Reader
 * @uses Reader\Reader_Entry_EntryAbstract
 * @category Zend
@@ -36,15 +35,6 @@ use Zend\Feed\Reader\Extension;
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Feed extends Extension\AbstractFeed
-=======
- * @uses       \Zend\Feed\Reader\Extension\AbstractFeed
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
->>>>>>> master
 {
     /**
      * Get the entry license

@@ -23,14 +23,8 @@
 * @namespace
 */
 namespace Zend\Feed\Writer;
-<<<<<<< HEAD
 use Zend\Date;
-use Zend\URI;
-=======
-
-use Zend\Feed\Exception as FeedException,
-    Zend\Date;
->>>>>>> master
+use Zend\Uri;
 
 /**
 * @uses \Zend\Date\Date
@@ -67,11 +61,7 @@ class Deleted
     public function setEncoding($encoding)
     {
         if (empty($encoding) || !is_string($encoding)) {
-<<<<<<< HEAD
             throw new Exception('Invalid parameter: parameter must be a non-empty string');
-=======
-            throw new FeedException('Invalid parameter: parameter must be a non-empty string');
->>>>>>> master
         }
         $this->_data['encoding'] = $encoding;
     }
@@ -126,11 +116,7 @@ class Deleted
     public function setReference($reference)
     {
         if (empty($reference) || !is_string($reference)) {
-<<<<<<< HEAD
             throw new Exception('Invalid parameter: reference must be a non-empty string');
-=======
-            throw new FeedException('Invalid parameter: reference must be a non-empty string');
->>>>>>> master
         }
         $this->_data['reference'] = $reference;
     }
@@ -153,12 +139,8 @@ class Deleted
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
         } else {
-<<<<<<< HEAD
             throw new Exception('Invalid Date\Date object or UNIX Timestamp'
             . ' passed as parameter');
-=======
-            throw new FeedException('Invalid Zend_Date object or UNIX Timestamp passed as parameter');
->>>>>>> master
         }
         $this->_data['when'] = $zdate;
     }
@@ -178,38 +160,24 @@ class Deleted
             || empty($by['name']) 
             || !is_string($by['name'])
         ) {
-<<<<<<< HEAD
             throw new Exception('Invalid parameter: author array must include a'
             . ' "name" key with a non-empty string value');
-=======
-            throw new FeedException('Invalid parameter: author array must include a "name" key with a non-empty string value');
->>>>>>> master
         }
         $author['name'] = $by['name'];
         if (isset($by['email'])) {
             if (empty($by['email']) || !is_string($by['email'])) {
-<<<<<<< HEAD
                 throw new Exception('Invalid parameter: "email" array'
                 . ' value must be a non-empty string');
-=======
-                throw new FeedException('Invalid parameter: "email" array value must be a non-empty string');
->>>>>>> master
             }
             $author['email'] = $by['email'];
         }
         if (isset($by['uri'])) {
             if (empty($by['uri']) 
                 || !is_string($by['uri']) 
-<<<<<<< HEAD
-                || !URI\URL::validate($by['uri'])
+                || !Uri\Url::validate($by['uri'])
             ) {
                 throw new Exception('Invalid parameter: "uri" array value must'
                  . ' be a non-empty string and valid URI/IRI');
-=======
-                || !\Zend\Uri\Url::validate($by['uri'])
-            ) {
-                throw new FeedException('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
->>>>>>> master
             }
             $author['uri'] = $by['uri'];
         }

@@ -27,7 +27,6 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 
 /**
-<<<<<<< HEAD:library/Zend/Feed/Writer/Renderer/Entry/AtomDeleted.php
 * @uses DOMDocument
 * @uses \Zend\Date\Date
 * @uses \Zend\Feed\Writer\Renderer\RendererAbstract
@@ -38,20 +37,6 @@ use Zend\Feed\Writer;
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
-=======
- * @uses       DOMDocument
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
- * @uses       \Zend\Feed\Writer\Renderer
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Deleted
-    extends \Zend\Feed\Writer\Renderer\AbstractRenderer
-    implements \Zend\Feed\Writer\Renderer
->>>>>>> master:library/Zend/Feed/Writer/Renderer/Entry/Atom/Deleted.php
 {
     /**
      * Constructor
@@ -66,12 +51,8 @@ class Deleted
 
     /**
      * Render atom entry
-     * 
-<<<<<<< HEAD:library/Zend/Feed/Writer/Renderer/Entry/AtomDeleted.php
-     * @return Zend_Feed_Writer_Renderer_Entry_Atom
-=======
+     *
      * @return \Zend\Feed\Writer\Renderer\Entry\Atom
->>>>>>> master:library/Zend/Feed/Writer/Renderer/Entry/Atom/Deleted.php
      */
     public function render()
     {

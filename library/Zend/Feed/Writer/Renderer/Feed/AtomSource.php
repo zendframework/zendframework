@@ -27,7 +27,6 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 
 /**
-<<<<<<< HEAD:library/Zend/Feed/Writer/Renderer/Feed/AtomSource.php
 * @uses DOMDocument
 * @uses \Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract
 * @uses \Zend\Feed\Writer\Renderer\RendererInterface
@@ -37,17 +36,6 @@ use Zend\Feed\Writer;
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class AtomSource extends AtomAbstract implements Renderer\Renderer
-=======
- * @uses       DOMDocument
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\AbstractAtom
- * @uses       \Zend\Feed\Writer\Renderer
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Source extends AbstractAtom implements \Zend\Feed\Writer\Renderer
->>>>>>> master:library/Zend/Feed/Writer/Renderer/Feed/Atom/Source.php
 {
 
     /**
@@ -64,11 +52,7 @@ class Source extends AbstractAtom implements \Zend\Feed\Writer\Renderer
     /**
      * Render Atom Feed Metadata (Source element)
      * 
-<<<<<<< HEAD:library/Zend/Feed/Writer/Renderer/Feed/AtomSource.php
-     * @return Zend_Feed_Writer_Renderer_Feed_Atom
-=======
      * @return \Zend\Feed\Writer\Renderer\Feed\Atom
->>>>>>> master:library/Zend/Feed/Writer/Renderer/Feed/Atom/Source.php
      */
     public function render()
     {

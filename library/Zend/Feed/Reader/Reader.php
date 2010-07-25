@@ -33,7 +33,7 @@ use Zend\Loader;
 * @uses \Zend\Feed\Reader\Feed\Atom\Atom
 * @uses \Zend\Feed\Reader\Feed\RSS
 * @uses \Zend\HTTP\Client
-* @uses \Zend\Loader\PluginLoader\PluginLoader
+* @uses \Zend\Loader\PluginLoader
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -481,9 +481,9 @@ class Reader
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  Zend_Loader_PluginLoader_Interface $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      */
-    public static function setPluginLoader(PluginLoader\PluginLoaderInterface $loader)
+    public static function setPluginLoader(Loader\ShortNameLocater $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -512,9 +512,12 @@ class Reader
      */
     public static function addPrefixPath($prefix, $path)
     {
-        $prefix = rtrim($prefix, '\\');
-        $path   = rtrim($path, DIRECTORY_SEPARATOR);
-        self::getPluginLoader()->addPrefixPath($prefix, $path);
+        $pluginLoader = self::getPluginLoader();
+        if ($pluginLoader instanceof Loader\PrefixPathMapper) {
+            $prefix = rtrim($prefix, '\\');
+            $path = rtrim($path, DIRECTORY_SEPARATOR);
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
     }
 
     /**
@@ -525,6 +528,10 @@ class Reader
      */
     public static function addPrefixPaths(array $spec)
     {
+        $pluginLoader = self::getPluginLoader();
+        if (!$pluginLoader instanceof Loader\PrefixPathMapper) {
+            return;
+        }
         if (isset($spec['prefix']) && isset($spec['path'])) {
             self::addPrefixPath($spec['prefix'], $spec['path']);
         }
@@ -540,12 +547,12 @@ class Reader
      *
      * @param  string $name
      * @return void
-     * @throws Zend_Feed_Exception if unable to resolve Extension class
+     * @throws \Zend\Feed\Exception if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
-        $feedName  = $name . '\\Feed';
-        $entryName = $name . '\\Entry';
+        $feedName = $name . '\Feed';
+        $entryName = $name . '\Entry';
         if (self::isRegistered($name)) {
             if (self::getPluginLoader()->isLoaded($feedName) ||
                 self::getPluginLoader()->isLoaded($entryName)) {
@@ -555,19 +562,18 @@ class Reader
         try {
             self::getPluginLoader()->load($feedName);
             self::$_extensions['feed'][] = $feedName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (Loader\PluginLoaderException $e) {
         }
         try {
             self::getPluginLoader()->load($entryName);
             self::$_extensions['entry'][] = $entryName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (Loader\PluginLoaderException $e) {
         }
         if (!self::getPluginLoader()->isLoaded($feedName)
             && !self::getPluginLoader()->isLoaded($entryName)
         ) {
-            throw new Exception('Could not load extension: ' . $name
-                . ' using Plugin Loader. Check prefix paths are configured and'
-                . ' extension exists.');
+            throw new \Zend\Feed\Exception('Could not load extension: ' . $name
+                . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
     }
 

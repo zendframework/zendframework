@@ -28,7 +28,6 @@ use Zend\Feed\Writer;
 
 
 /**
-<<<<<<< HEAD
 * @uses \Zend\Feed\Exception
 * @uses \Zend\Feed\Writer\Writer
 * @uses \Zend\Feed\Writer\Exception\InvalidMethodException
@@ -37,16 +36,6 @@ use Zend\Feed\Writer;
 * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-=======
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\InvalidMethodException
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
->>>>>>> master
 class Entry
 {
     /**
@@ -240,11 +229,7 @@ class Entry
         if (!method_exists($this, 'setItunes' . ucfirst($point))
             && !method_exists($this, 'addItunes' . ucfirst($point))
         ) {
-<<<<<<< HEAD
             throw new Writer\Exception\InvalidMethodException(
-=======
-            throw new \Zend\Feed\Writer\InvalidMethodException(
->>>>>>> master
                 'invalid method: ' . $method
             );
         }

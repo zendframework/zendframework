@@ -25,7 +25,7 @@
 namespace Zend\Feed\Writer\Renderer\Feed;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
-use Zend\URI;
+use Zend\Uri;
 use Zend\Date;
 
 /**
@@ -264,7 +264,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         $root->appendChild($link);
         $text = $dom->createTextNode($value);
         $link->appendChild($text);
-        if (!URI\URL::validate($value)) {
+        if (!Uri\Url::validate($value)) {
             $link->setAttribute('isPermaLink', 'false');
         }
     }
@@ -338,7 +338,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             }
         }
         if (empty($image['link']) || !is_string($image['link'])
-        || !URI\URL::validate($image['link'])) {
+        || !Uri\Url::validate($image['link'])) {
             $message = 'Invalid parameter: parameter \'link\''
             . ' must be a non-empty string and valid URI/IRI';
             $exception = new Writer\Exception($message);

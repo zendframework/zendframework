@@ -34,7 +34,7 @@ namespace Zend\Feed\Writer\Extension;
 abstract class AbstractRenderer implements Renderer
 {
     /**
-     * @var DOMDocument
+     * @var \DOMDocument
      */
     protected $_dom = null;
     
@@ -59,7 +59,7 @@ abstract class AbstractRenderer implements Renderer
     protected $_type = null;
     
     /**
-     * @var DOMElement
+     * @var \DOMElement
      */
     protected $_rootElement = null;
     
@@ -106,8 +106,8 @@ abstract class AbstractRenderer implements Renderer
     /**
      * Set DOMDocument and DOMElement on which to operate
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $base 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $base 
      * @return Zend_Feed_Writer_Extension_RendererAbstract
      */
     public function setDomDocument(\DOMDocument $dom, \DOMElement $base)

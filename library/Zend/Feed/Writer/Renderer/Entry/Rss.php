@@ -298,7 +298,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         }
         $text = $dom->createTextNode($this->getDataContainer()->getId());
         $id->appendChild($text);
-        if (!URI\URL::validate($this->getDataContainer()->getId())) {
+        if (!Uri\Url::validate($this->getDataContainer()->getId())) {
             $id->setAttribute('isPermaLink', 'false');
         }
     }

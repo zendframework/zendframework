@@ -23,7 +23,6 @@
 * @namespace
 */
 namespace Zend\Feed\Reader\Feed\Atom;
-<<<<<<< HEAD
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Feed;
 use Zend\Date;
@@ -38,30 +37,11 @@ use Zend\Date;
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Source extends Feed\Atom
-=======
-
-use Zend\Feed\Reader\Feed\Atom,
-    Zend\Feed\Reader;
-
-/**
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Feed\Atom
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Source extends Atom
->>>>>>> master
 {
 
     /**
      * Constructor: Create a Source object which is largely just a normal
-<<<<<<< HEAD
-     * Reader\Reader_FeedAbstract object only designed to retrieve feed level
-=======
      * Zend\Feed\Reader\AbstractFeed object only designed to retrieve feed level
->>>>>>> master
      * metadata from an Atom entry's source element.
      *
      * @param DOMElement $source

@@ -23,9 +23,8 @@
 * @namespace
 */
 namespace Zend\Feed\Writer\Extension\ITunes;
-<<<<<<< HEAD
 use Zend\Feed\Writer;
-use Zend\URI;
+use Zend\Uri;
 
 /**
 * @uses \Zend\Feed\Exception
@@ -37,20 +36,6 @@ use Zend\URI;
 * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-=======
-use Zend\Uri;
-
-/**
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\InvalidMethodException
- * @uses       \Zend\Uri\Uri
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
->>>>>>> master
 class Feed
 {
     /**
@@ -186,15 +171,9 @@ class Feed
      */
     public function setItunesImage($value)
     {
-<<<<<<< HEAD
-        if (!URI\URL::validate($value)) {
+        if (!Uri\Url::validate($value)) {
             throw new Writer\Exception('invalid parameter: "image" may only'
             . ' be a valid URI/IRI');
-=======
-        if (!\Zend\Uri\Url::validate($value)) {
-            throw new \Zend\Feed\Exception('invalid parameter: "image" may only'
-                . ' be a valid URI/IRI');
->>>>>>> master
         }
         if (!in_array(substr($value, -3), array('jpg','png'))) {
             throw new Writer\Exception('invalid parameter: "image" may only'
@@ -271,15 +250,9 @@ class Feed
      */
     public function setItunesNewFeedUrl($value)
     {
-<<<<<<< HEAD
-        if (!URI\URL::validate($value)) {
+        if (!Uri\Url::validate($value)) {
             throw new Writer\Exception('invalid parameter: "newFeedUrl" may only'
             . ' be a valid URI/IRI');
-=======
-        if (!\Zend\Uri\Url::validate($value)) {
-            throw new \Zend\Feed\Exception('invalid parameter: "newFeedUrl" may only'
-                . ' be a valid URI/IRI');
->>>>>>> master
         }
         $this->_data['newFeedUrl'] = $value;
         return $this;
@@ -369,11 +342,7 @@ class Feed
         if (!method_exists($this, 'setItunes' . ucfirst($point))
             && !method_exists($this, 'addItunes' . ucfirst($point))
         ) {
-<<<<<<< HEAD
             throw new Writer\Exception\InvalidMethodException(
-=======
-            throw new \Zend\Feed\Writer\InvalidMethodException(
->>>>>>> master
                 'invalid method: ' . $method
             );
         }

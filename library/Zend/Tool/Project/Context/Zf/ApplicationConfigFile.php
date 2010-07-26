@@ -257,7 +257,7 @@ class ApplicationConfigFile extends \Zend\Tool\Project\Context\Filesystem\File
     protected function _getDefaultContents()
     {
 
-        $contents =<<<EOS
+        $contents = <<<'EOS'
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0

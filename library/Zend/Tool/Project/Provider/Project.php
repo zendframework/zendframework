@@ -121,7 +121,7 @@ class Project
 
     protected function _getDefaultProfile()
     {
-        $data = <<<EOS
+        $data = <<<'EOS'
 <?xml version="1.0" encoding="UTF-8"?>
 <projectProfile type="default" version="1.10">
     <projectDirectory>

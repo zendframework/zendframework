@@ -64,7 +64,7 @@ class PublicIndexFile extends \Zend\Tool\Project\Context\Filesystem\File
     public function getContents()
     {
         $codeGenerator = new \Zend\CodeGenerator\PHP\PHPFile(array(
-            'body' => <<<EOS
+            'body' => <<<'EOS'
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
@@ -80,15 +80,16 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 /** Zend_Application */
-require_once 'Zend/Application.php';
+require_once 'Zend/Application/Application.php';
 
 // Create application, bootstrap, and run
-\$application = new Zend_Application(
+$application = new Zend\Application\Application (
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
-\$application->bootstrap()
+$application->bootstrap()
             ->run();
+
 EOS
             ));
         return $codeGenerator->generate();

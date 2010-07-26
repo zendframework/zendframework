@@ -221,7 +221,7 @@ class Uri
         if ($uri && substr($uri, 0, 1) == '#') {
             $this->setFragment(substr($uri, 1));
         }
-                
+        
         return $this;
     }
 

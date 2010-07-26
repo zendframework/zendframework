@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22432 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.photos">
     <title>Picasa Web Alben verwenden</title>
@@ -280,7 +280,7 @@ $service = new Zend_Gdata_Photos();
             </listitem>
         </itemizedlist>
 
-        <para>Eine neue <code>UserQuery</code> kann wie folgt erstellt werden:</para>
+        <para>Eine neue <classname>UserQuery</classname> kann wie folgt erstellt werden:</para>
 
         <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -403,12 +403,13 @@ $query->setUser("sample.user");
             <para>
                 Dieser Service unterstützt das Erhalten eines Benutzer Feeds und Listen von Benutzer
                 Inhalten. Wenn der abgefragte Benutzer auch der authentifizierter Benutzer ist,
-                werden auch Einträge die als "<code>hidden</code>" markiert sind, zurückgegeben.
+                werden auch Einträge die als "<emphasis>hidden</emphasis>" markiert sind,
+                zurückgegeben.
             </para>
 
             <para>
                 Auf den Benutzer Feed kann durch die Übergabe eines Benutzernamens an die
-                <code>getUserFeed</code> Methode zugegriffen werden:
+                <methodname>getUserFeed()</methodname> Methode zugegriffen werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -475,7 +476,7 @@ try {
 
             <para>
                 Auf einen Album Feed wird durch die Erstellung eines Abfrage Objekts zugegriffen und
-                dessen Übergabe an <code>getAlbumFeed</code>:
+                dessen Übergabe an <methodname>getAlbumFeed()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -495,9 +496,10 @@ try {
 ]]></programlisting>
 
             <para>
-                Alternativ kann dem Abfrage Objekt ein Album Name mit <code>setAlbumName</code>
-                angegeben werden. Das Setzen des Album Namens schließt sich gegenseitig mit der
-                Album ID aus und das Setzen des einen entfernt den anderen Wert.
+                Alternativ kann dem Abfrage Objekt ein Album Name mit
+                <methodname>setAlbumName()</methodname> angegeben werden. Das Setzen des Album
+                Namens schließt sich gegenseitig mit der Album ID aus und das Setzen des einen
+                entfernt den anderen Wert.
             </para>
 
             <para>
@@ -533,7 +535,7 @@ try {
 
             <para>
                 Auf einen Photo Feed wird durch die Erstellung eines Abfrage Objekts zugegriffen und
-                dessen Übergabe an <code>getPhotoFeed</code>:
+                dessen Übergabe an <methodname>getPhotoFeed()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -891,7 +893,7 @@ $service->deleteTagEntry($tagEntry, true);
 
             <para>
                 Ein Beispiel davon wie die Versionierung wärend einer Löschung handzuhaben ist wird
-                durch <code>deleteAlbumEntry</code> gezeigt:
+                durch <methodname>deleteAlbumEntry()</methodname> gezeigt:
             </para>
 
             <programlisting language="php"><![CDATA[

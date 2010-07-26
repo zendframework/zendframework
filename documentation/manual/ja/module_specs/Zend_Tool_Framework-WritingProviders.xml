@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21741 -->
+<!-- EN-Revision: 21888 -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Zend_Tool_Frameworkを利用してプロバイダを作成する</title>
 
@@ -230,7 +230,7 @@ class My_Component_HelloProvider
         $nameResponse = $this->_registry
                              ->getClient()
                              ->promptInteractiveInput("Whats your name?");
-        $name = $name->getContent();
+        $name = $nameResponse->getContent();
 
         echo 'Hello' . $name . ', from my provider!';
     }
@@ -373,7 +373,7 @@ class My_Component_HelloProvider
 ]]></programlisting>
 
             <para>
-                ストレージ API はとても簡単です。
+                ストレージ <acronym>API</acronym> はとても簡単です。
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 22468 -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
 
@@ -689,21 +689,21 @@ echo $server->handle($request);
                 extension <code>ext/dom</code> to generate it's
                 <acronym>XML</acronym> output. While <code>ext/dom</code> is
                 available on a lot of hosts it is not exactly the fastest.
-                Benchmarks have shown, that <classname>XMLWriter</classname>
+                Benchmarks have shown, that <classname>XmlWriter</classname>
                 from <code>ext/xmlwriter</code> performs better.
             </para>
 
             <para>
                 If <code>ext/xmlwriter</code> is available on your host, you can
-                select a the <classname>XMLWriter</classname>-based generator
+                select a the <classname>XmlWriter</classname>-based generator
                 to leaverage the performance differences.
             </para>
 
             <programlisting language="php"><![CDATA[
 require_once 'Zend/XmlRpc/Server.php';
-require_once 'Zend/XmlRpc/Generator/XMLWriter.php';
+require_once 'Zend/XmlRpc/Generator/XmlWriter.php';
 
-Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XMLWriter());
+Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XmlWriter());
 
 $server = new Zend_XmlRpc_Server();
 ...

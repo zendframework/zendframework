@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 22397 -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base の使用法</title>
     <para>
@@ -207,11 +207,14 @@ session_start();
 // AuthSub サーバにリダイレクトします
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 ]]></programlisting>
-<para>最後に、snippets フィード用の未認証のサーバを作成する方法を示します。</para>
-<programlisting language="php"><![CDATA[
+
+            <para>最後に、snippets フィード用の未認証のサーバを作成する方法を示します。</para>
+
+            <programlisting language="php"><![CDATA[
 // Base サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
+
         </sect3>
     </sect2>
     <sect2 id="zend.gdata.gbase.retrieve">
@@ -284,8 +287,8 @@ $feed = $service->getGbaseSnippetFeed($query);
         <sect3 id="zend.gdata.gbase.retrieve.iterate">
             <title>アイテムに対する順次処理</title>
             <para>
-                Google Base のアイテムには、<code>&lt;g:main_ingredient&gt;</code>
-                や <code>&lt;g:weight&gt;</code> といったアイテム固有の属性が含まれています。
+                Google Base のアイテムには、<emphasis>&lt;g:main_ingredient&gt;</emphasis>
+                や <emphasis>&lt;g:weight&gt;</emphasis> といったアイテム固有の属性が含まれています。
             </para>
             <para>
                 指定したアイテムのすべての属性を順に処理するには、

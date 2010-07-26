@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20819 -->
+<!-- EN-Revision: 21992 -->
 <sect1 id="zend.mail.character-sets">
     <title>文字セット</title>
 
@@ -38,8 +38,13 @@ function myConvert($string) {
 }
 
 $mail = new Zend_Mail('ISO-2022-JP');
-//この場合、 ISO-2022-JP は MSB を使わないので、 ENCODING_7BIT を使えます。
-$mail->setBodyText(myConvert('This is the text of the mail.'), null, Zend_Mime::ENCODING_7BIT);
+//この場合、 ISO-2022-JP は MSB を使わないので、
+// ENCODING_7BIT を使えます。
+$mail->setBodyText(
+    myConvert('This is the text of the mail.'),
+    null,
+    Zend_Mime::ENCODING_7BIT
+);
 $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
 $mail->setFrom('somebody@example.com', myConvert('Some Sender'));
 $mail->addTo('somebody_else@example.com', myConvert('Some Recipient'));

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 22432 -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout クイックスタート</title>
 
@@ -112,7 +112,7 @@
             また、アクションヘルパーを登録して、
             アクションコントローラからレイアウトオブジェクトにアクセスできるようにします。
             さらに、ビュースクリプトからレイアウトのインスタンスを取得するには
-            <code>layout</code> ビューヘルパーを使用します。
+            <classname>Layout</classname> ビューヘルパーを使用します。
         </para>
 
         <para>
@@ -156,7 +156,7 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            ビュースクリプトでは、<code>layout</code>
+            ビュースクリプトでは、<classname>Layout</classname>
             ビューヘルパーを用いてレイアウトオブジェクトにアクセスします。
             このビューヘルパーは、他のヘルパーとは異なり引数を受け取りません。
             そして文字列ではなくオブジェクトを返します。

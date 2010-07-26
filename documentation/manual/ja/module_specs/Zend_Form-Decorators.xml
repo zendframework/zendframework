@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21606 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="zend.form.decorators">
     <title>Zend_Form_Decorator による独自のフォームマークアップの作成</title>
 
@@ -174,7 +174,7 @@ interface Zend_Form_Decorator_Interface
             たとえば、使用するデコレータの数を減らすために
             "複合" デコレータを作成することにしましょう。
             このデコレータでは、ラベルや要素、エラーメッセージ、
-            そして説明を HTML の 'div' でレンダリングします。
+            そして説明を <acronym>HTML</acronym> の 'div' でレンダリングします。
             この 'Composite' デコレータは、次のようになります。
         </para>
 

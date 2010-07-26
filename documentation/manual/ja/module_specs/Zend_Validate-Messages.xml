@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21992 -->
 <sect1 id="zend.validate.messages">
 
     <title>検証メッセージ</title>
@@ -46,7 +46,10 @@ $messages  = $validator->getMessageTemplates();
 
     <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_GreaterThan();
-$validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::NOT_GREATER);
+$validator->setMessage(
+    'Please enter a lower value',
+    Zend_Validate_GreaterThan::NOT_GREATER
+);
 ]]></programlisting>
 
     <para>

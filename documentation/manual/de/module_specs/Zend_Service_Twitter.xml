@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22628 -->
+<!-- EN-Revision: 22640 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.twitter" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Twitter</title>
@@ -130,20 +130,6 @@
                 erlaubt seinen Benutzernamen und sein Passwort zu speichern.
             </para>
 
-            <note>
-                <para>
-                    Um sich bei Twitter zu authentifizieren, MÜSSEN ALLE Anwendungen bei Twitter
-                    registriert werden um einen Kunden Schlüssel und ein Kunden Geheimnis zu
-                    erhalten welches benutzt wird wenn mit OAuth authentifiziert wird. Diese können
-                    nicht zwischen mehreren Anwendungen wiederverwendet werden - man muss jede neue
-                    Anwendung separat registrieren. Zugriffstoken von Twitter haben kein
-                    Ablaufdatum, deshalb ist deren Speicherung in einer Datenbank zu empfehlen (sie
-                    können natürlich aktualisiert werden indem der OAuth Prozess der Authorisierung
-                    wiederholt wird). Das kann nur getan werden indem mit dem betreffenden Benutzer,
-                    welchem der Zugriffstoken gehört, interagiert wird.
-                </para>
-            </note>
-
             <para>
                 Das folgende Beispiel demonstriert das Setup von
                 <classname>Zend_Service_Twitter</classname> welchem ein bereits bereitgestellter
@@ -171,16 +157,28 @@ $twitter = new Zend_Service_Twitter(array(
 // Die Daten des Benutzers mit Twitter prüfen
 $response = $twitter->account->verifyCredentials();
 ]]></programlisting>
-
-            <note>
-                <para>
-                    Die vorher gezeigte pre-OAuth Version von
-                    <classname>Zend_Service_Twitter</classname> erlaubte die Übergabe eines
-                    Benutzernamens als ersten Parameter statt in einem Array. Dies wird nicht länger
-                    unterstützt.
-                </para>
-            </note>
         </example>
+
+        <note>
+            <para>
+                Um sich bei Twitter zu authentifizieren, MÜSSEN ALLE Anwendungen bei Twitter
+                registriert werden um einen Kunden Schlüssel und ein Kunden Geheimnis zu
+                erhalten welches benutzt wird wenn mit OAuth authentifiziert wird. Diese können
+                nicht zwischen mehreren Anwendungen wiederverwendet werden - man muss jede neue
+                Anwendung separat registrieren. Zugriffstoken von Twitter haben kein
+                Ablaufdatum, deshalb ist deren Speicherung in einer Datenbank zu empfehlen (sie
+                können natürlich aktualisiert werden indem der OAuth Prozess der Authorisierung
+                wiederholt wird). Das kann nur getan werden indem mit dem betreffenden Benutzer,
+                welchem der Zugriffstoken gehört, interagiert wird.
+            </para>
+
+            <para>
+                Die vorher gezeigte pre-OAuth Version von
+                <classname>Zend_Service_Twitter</classname> erlaubte die Übergabe eines
+                Benutzernamens als ersten Parameter statt in einem Array. Dies wird nicht länger
+                unterstützt.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.service.twitter.account">

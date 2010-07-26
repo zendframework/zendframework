@@ -23,7 +23,11 @@
 /**
  * @namespace
  */
-namespace ZendTest\Service\Delicious;
+namespace ZendTest\Service\Delicious\PrivateData;
+use \Zend\Service\Delicious,
+    \Zend\Http,
+    \Zend\Rest\Client as RestClient,
+    \Zend\Date\Date;
 
 /**
  * @category   Zend_Service
@@ -39,6 +43,9 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     const TEST_UNAME = 'zfTestUser';
     const TEST_PASS  = 'zfuser';
 
+    // artificial wait interval between successive calls
+    const API_CALL_INTERVAL = 3;
+
     private static $TEST_POST_TITLE  = 'test - title';
     private static $TEST_POST_URL    = 'http://zfdev.com/unittests/delicious/test_url_1';
     private static $TEST_POST_NOTES  = 'test - note';
@@ -46,7 +53,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     private static $TEST_POST_SHARED = false;
 
     /**
-     * @var Zend_Service_Delicious
+     * @var \Zend\Service\Delicious
      */
     protected $_delicious;
 
@@ -57,16 +64,16 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED')) {
-            $this->markTestSkipped('Zend_Service_Delicious online tests are not enabled');
+            $this->markTestSkipped('Zend\Service\Delicious online tests are not enabled');
         }
-        $httpClient = new \Zend\HTTP\Client();
+        $httpClient = new Http\Client();
         $httpClient->setConfig(array(
-                'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',
+                'useragent' => 'Zend\Service\Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
-        \Zend\REST\Client\RESTClient::setDefaultHttpClient($httpClient);
+        RestClient\RestClient::setDefaultHttpClient($httpClient);
 
-        $this->_delicious = new \Zend\Service\Delicious\Delicious(self::TEST_UNAME, self::TEST_PASS);
+        $this->_delicious = new Delicious\Delicious(self::TEST_UNAME, self::TEST_PASS);
     }
 
     /**
@@ -75,7 +82,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLastUpdate()
     {
-        $this->assertType('Zend_Date', $this->_delicious->getLastUpdate());
+        $this->assertType('\Zend\Date\Date', $this->_delicious->getLastUpdate());
     }
 
     /**
@@ -99,7 +106,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         // rename tag
         $this->_delicious->renameTag($oldTagName, $newTagName);
 
-        sleep(15);
+        sleep(self::API_CALL_INTERVAL);
 
         // get renamed tags
         $tags = $this->_delicious->getTags();
@@ -113,7 +120,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         $newBundleName = uniqid('bundle');
         $this->_delicious->addBundle($newBundleName, $tags);
 
-        sleep(15);
+        sleep(self::API_CALL_INTERVAL);
 
         // check if bundle was added
         $bundles = $this->_delicious->getBundles();
@@ -124,7 +131,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         // delete bundle
         $this->_delicious->deleteBundle($newBundleName);
 
-        sleep(15);
+        sleep(self::API_CALL_INTERVAL);
 
         // check if bundle was deleted
         $bundles = $this->_delicious->getBundles();
@@ -161,7 +168,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         // send post to del.icio.us
         $newPost->save();
 
-        sleep(15);
+        sleep(self::API_CALL_INTERVAL);
 
         // get the post back
         $returnedPosts = $this->_delicious->getPosts(null, null, self::$TEST_POST_URL);
@@ -176,14 +183,14 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$TEST_POST_NOTES, $savedPost->getNotes());
         $this->assertEquals(self::$TEST_POST_TAGS, $savedPost->getTags());
         $this->assertEquals(self::$TEST_POST_SHARED, $savedPost->getShared());
-        $this->assertType('Zend_Date', $savedPost->getDate());
+        $this->assertType('\Zend\Date\Date', $savedPost->getDate());
         $this->assertType('string', $savedPost->getHash());
         $this->assertType('int', $savedPost->getOthers());
 
         // delete post
         $savedPost->delete();
 
-        sleep(15);
+        sleep(self::API_CALL_INTERVAL);
 
         // check if post was realy deleted
         $returnedPosts = $this->_delicious->getPosts(null, null, self::$TEST_POST_URL);
@@ -198,7 +205,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testGetAllPosts()
     {
         $posts = $this->_delicious->getAllPosts('zfSite');
-        $this->assertType('Zend_Service_Delicious_PostList', $posts);
+        $this->assertType('Zend\Service\Delicious\PostList', $posts);
 
         foreach ($posts as $post) {
             $this->assertContains('zfSite', $post->getTags());
@@ -213,7 +220,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testGetRecentPosts()
     {
         $posts = $this->_delicious->getRecentPosts('zfSite', 10);
-        $this->assertType('Zend_Service_Delicious_PostList', $posts);
+        $this->assertType('Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 
         foreach ($posts as $post) {
@@ -228,8 +235,8 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPosts()
     {
-        $posts = $this->_delicious->getPosts('zfSite', new \Zend\Date\Date(), 'help');
-        $this->assertType('Zend_Service_Delicious_PostList', $posts);
+        $posts = $this->_delicious->getPosts('zfSite', new Date(), 'help');
+        $this->assertType('\Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 
         foreach ($posts as $post) {

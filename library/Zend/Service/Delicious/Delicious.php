@@ -25,7 +25,8 @@
  */
 namespace Zend\Service\Delicious;
 
-use \Zend\Rest\Client as RestClient;
+use \Zend\Rest\Client as RestClient,
+    \Zend\Date\Date;
 
 /**
  * Zend_Service_Delicious is a concrete implementation of the del.icio.us web service
@@ -137,7 +138,7 @@ class Delicious
 
         $rootNode = $response->documentElement;
         if ($rootNode && $rootNode->nodeName == 'update') {
-            return new \Zend\Date\Date(strtotime($rootNode->getAttribute('time')));
+            return new Date(strtotime($rootNode->getAttribute('time')));
         } else {
             throw new Exception('del.icio.us web service has returned something odd!');
         }
@@ -265,7 +266,7 @@ class Delicious
      * @throws Zend_Service_Delicious_Exception
      * @return Zend_Service_Delicious_PostList
      */
-    public function getPosts($tag = null, \Zend\Date $dt = null, $url = null)
+    public function getPosts($tag = null, Date $dt = null, $url = null)
     {
         $parms = array();
         if ($tag) {

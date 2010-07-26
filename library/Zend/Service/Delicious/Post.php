@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Service\Delicious;
+use \Zend\Date\Date;
 
 /**
  * Zend_Service_Delicious_Post represents a post of a user that can be edited
@@ -53,7 +54,7 @@ class Post extends SimplePost
     protected $_others;
 
     /**
-     * @var Zend_Date Post date
+     * @var \Zend\Date\Date Post date
      */
     protected $_date;
 
@@ -75,7 +76,7 @@ class Post extends SimplePost
      * @throws Zend_Service_Delicious_Exception
      * @return void
      */
-    public function __construct(\Zend\Service\Delicious $service, $values)
+    public function __construct(Delicious $service, $values)
     {
         $this->_service = $service;
 
@@ -88,8 +89,8 @@ class Post extends SimplePost
                                                      . " 'title')");
         }
 
-        if (isset($values['date']) && ! $values['date'] instanceof \Zend\Date) {
-            throw new Exception("Date has to be an instance of Zend_Date");
+        if (isset($values['date']) && ! $values['date'] instanceof Date) {
+            throw new Exception("Date has to be an instance of \Zend\Date\Date");
         }
 
         foreach (array('url', 'title', 'notes', 'others', 'tags', 'date', 'shared', 'hash') as $key) {
@@ -167,7 +168,7 @@ class Post extends SimplePost
     /**
      * Getter for date
      *
-     * @return Zend_Date
+     * @return \Zend\Date\Date
      */
     public function getDate()
     {
@@ -247,7 +248,7 @@ class Post extends SimplePost
             'replace'    => 'yes'
         );
         /*
-        if ($this->_date instanceof Zend_Date) {
+        if ($this->_date instanceof \Zend\Date\Date) {
             $parms['dt'] = $this->_date->get('Y-m-d\TH:i:s\Z');
         }
         */
@@ -269,7 +270,7 @@ class Post extends SimplePost
             'notes'  => $node->getAttribute('extended'),
             'others' => (int) $node->getAttribute('others'),
             'tags'   => explode(' ', $node->getAttribute('tag')),
-            'date'   => new \Zend\Date\Date(strtotime($node->getAttribute('time'))),
+            'date'   => new Date(strtotime($node->getAttribute('time'))),
             'shared' => ($node->getAttribute('shared') == 'no' ? false : true),
             'hash'   => $node->getAttribute('hash')
         );

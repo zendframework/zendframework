@@ -64,7 +64,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED')) {
-            $this->markTestSkipped('Zend\Service\Delicious online tests are not enabled');
+            $this->markTestSkipped('\Zend\Service\Delicious online tests are not enabled');
         }
         $httpClient = new Http\Client();
         $httpClient->setConfig(array(

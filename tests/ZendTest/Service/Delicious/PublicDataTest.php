@@ -24,6 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Service\Delicious;
+use \Zend\Service\Delicious\Delicious as DeliciousClient,
+    \Zend\Http,
+    \Zend\Rest\Client as RestClient,
+    \Zend\Date\Date;
 
 /**
  * @category   Zend_Service
@@ -51,16 +55,16 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED')) {
-            $this->markTestSkipped('Zend_Service_Delicious online tests are not enabled');
+            $this->markTestSkipped('\Zend\Service\Delicious online tests are not enabled');
         }
-        $httpClient = new \Zend\HTTP\Client();
+        $httpClient = new Http\Client();
         $httpClient->setConfig(array(
-                'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',
+                'useragent' => '\Zend\Service\Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
-        \Zend\REST\Client\RESTClient::setDefaultHttpClient($httpClient);
+        RestClient\RestClient::setDefaultHttpClient($httpClient);
 
-        $this->_delicious = new \Zend\Service\Delicious\Delicious();
+        $this->_delicious = new DeliciousClient();
     }
 
     /**
@@ -126,12 +130,12 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
     {
         $posts = $this->_delicious->getUserPosts(self::TEST_UNAME, 10);
 
-        $this->assertType('Zend_Service_Delicious_PostList', $posts);
+        $this->assertType('\Zend\Service\Delicious\PostList', $posts);
 
-        // check if all objects in returned Zend_Service_Delicious_PostList
-        // are instances of Zend_Service_Delicious_SimplePost
+        // check if all objects in returned \Zend\Service\Delicious\PostList
+        // are instances of \Zend\Service\Delicious\SimplePost
         foreach ($posts as $post) {
-            $this->assertType('Zend_Service_Delicious_SimplePost', $post);
+            $this->assertType('\Zend\Service\Delicious\SimplePost', $post);
         }
 
         // test filtering of Zend_Service_Delicious_PostList by tag name

@@ -16,42 +16,42 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Atom.php 22064 2010-04-30 14:02:38Z padraic $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Writer\Renderer\Entry;
-use Zend\Feed;
+use Zend\Feed\Writer\Renderer;
+use Zend\Feed\Writer;
 use Zend\Date;
+use Zend\URI;
 
 /**
- * @uses       DOMDocument
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\Source
- * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
- * @uses       \Zend\Feed\Writer\Renderer
- * @uses       \Zend\Uri\Uri
- * @uses       tidy
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Atom
-    extends Feed\Writer\Renderer\AbstractRenderer
-    implements Feed\Writer\Renderer
+* @uses DOMDocument
+* @uses \Zend\Date\Date
+* @uses \Zend\Feed\Exception
+* @uses \Zend\Feed\Writer\Writer
+* @uses \Zend\Feed\Writer\Renderer\Feed\Atom\Source
+* @uses \Zend\Feed\Writer\Renderer\RendererAbstract
+* @uses \Zend\Feed\Writer\Renderer\RendererInterface
+* @uses \Zend\Uri\Uri
+* @uses tidy
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
 {
     /**
      * Constructor
      * 
-     * @param  \Zend\Feed\Writer\Entry $container 
+     * @param  Zend_Feed_Writer_Entry $container 
      * @return void
      */
-    public function __construct (Feed\Writer\Entry $container)
+    public function __construct (Writer\Entry $container)
     {
         parent::__construct($container);
     }
@@ -59,13 +59,13 @@ class Atom
     /**
      * Render atom entry
      * 
-     * @return \Zend\Feed\Writer\Renderer\Entry\Atom
+     * @return Zend_Feed_Writer_Renderer_Entry_Atom
      */
     public function render()
     {
         $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
-        $entry = $this->_dom->createElementNS(Feed\Writer\Writer::NAMESPACE_ATOM_10, 'entry');
+        $entry = $this->_dom->createElementNS(Writer\Writer::NAMESPACE_ATOM_10, 'entry');
         $this->_dom->appendChild($entry);
         
         $this->_setSource($this->_dom, $entry);
@@ -83,7 +83,7 @@ class Atom
         foreach ($this->_extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
-            $ext->setDomDocument($this->getDomDocument(), $entry);
+            $ext->setDOMDocument($this->getDOMDocument(), $entry);
             $ext->render();
         }
         
@@ -93,16 +93,16 @@ class Atom
     /**
      * Set entry title
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setTitle(\DOMDocument $dom, \DOMElement $root)
     {
         if(!$this->getDataContainer()->getTitle()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
-                . ' atom:title element but a title has not been set';
-            $exception = new Feed\Exception($message);
+            . ' atom:title element but a title has not been set';
+            $exception = new Writer\Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -120,8 +120,8 @@ class Atom
     /**
      * Set entry description
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setDescription(\DOMDocument $dom, \DOMElement $root)
@@ -141,16 +141,16 @@ class Atom
     /**
      * Set date entry was modified
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setDateModified(\DOMDocument $dom, \DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateModified()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
-                . ' atom:updated element but a modification date has not been set';
-            $exception = new Feed\Exception($message);
+            . ' atom:updated element but a modification date has not been set';
+            $exception = new Writer\Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -170,8 +170,8 @@ class Atom
     /**
      * Set date entry was created
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setDateCreated(\DOMDocument $dom, \DOMElement $root)
@@ -190,8 +190,8 @@ class Atom
     /**
      * Set entry authors 
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
@@ -229,8 +229,8 @@ class Atom
     /**
      * Set entry enclosure
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setEnclosure(\DOMDocument $dom, \DOMElement $root)
@@ -266,8 +266,8 @@ class Atom
     /**
      * Set entry identifier 
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setId(\DOMDocument $dom, \DOMElement $root)
@@ -275,10 +275,10 @@ class Atom
         if(!$this->getDataContainer()->getId()
         && !$this->getDataContainer()->getLink()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one '
-                . 'atom:id element, or as an alternative, we can use the same '
-                . 'value as atom:link however neither a suitable link nor an '
-                . 'id have been set';
-            $exception = new Feed\Exception($message);
+            . 'atom:id element, or as an alternative, we can use the same '
+            . 'value as atom:link however neither a suitable link nor an '
+            . 'id have been set';
+            $exception = new Writer\Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -291,9 +291,9 @@ class Atom
             $this->getDataContainer()->setId(
                 $this->getDataContainer()->getLink());
         }
-        if (!\Zend\Uri\Url::validate($this->getDataContainer()->getId()) &&
-        !preg_match('#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#', $this->getDataContainer()->getId())) {
-            throw new Feed\Exception('Atom 1.0 IDs must be a valid URI/IRI');
+        if (!URI\URL::validate($this->getDataContainer()->getId()) &&
+        !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $this->getDataContainer()->getId())) {
+            throw new Exception('Atom 1.0 IDs must be a valid URI/IRI');
         }
         $id = $dom->createElement('id');
         $root->appendChild($id);
@@ -304,8 +304,8 @@ class Atom
     /**
      * Set entry content 
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setContent(\DOMDocument $dom, \DOMElement $root)
@@ -313,10 +313,10 @@ class Atom
         $content = $this->getDataContainer()->getContent();
         if (!$content && !$this->getDataContainer()->getLink()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one '
-                . 'atom:content element, or as an alternative, at least one link '
-                . 'with a rel attribute of "alternate" to indicate an alternate '
-                . 'method to consume the content.';
-            $exception = new Feed\Exception($message);
+            . 'atom:content element, or as an alternative, at least one link '
+            . 'with a rel attribute of "alternate" to indicate an alternate '
+            . 'method to consume the content.';
+            $exception = new Writer\Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -367,8 +367,8 @@ class Atom
     /**
      * Set entry cateories 
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setCategories(\DOMDocument $dom, \DOMElement $root)
@@ -395,8 +395,8 @@ class Atom
     /**
      * Append Source element (Atom 1.0 Feed Metadata)
      *
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
     protected function _setSource(\DOMDocument $dom, \DOMElement $root)
@@ -405,7 +405,7 @@ class Atom
         if (!$source) {
             return;
         }
-        $renderer = new Feed\Writer\Renderer\Feed\Atom\Source($source);
+        $renderer = new Renderer\Feed\AtomSource($source);
         $renderer->setType($this->getType());
         $element = $renderer->render()->getElement();
         $imported = $dom->importNode($element, true);

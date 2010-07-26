@@ -21,22 +21,23 @@
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace ZendTest\Feed\Writer\Renderer\Entry;
-use Zend\Feed\Writer\Renderer\Feed\Atom;
+use Zend\Feed\Writer\Renderer;
+use Zend\Feed\Writer;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @group      Zend_Feed
- * @group      Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+* @category Zend
+* @package Zend_Feed
+* @subpackage UnitTests
+* @group Zend_Feed
+* @group Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -45,7 +46,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_validWriter = new \Zend\Feed\Writer\Feed;
+        $this->_validWriter = new Writer\Feed;
         
         $this->_validWriter->setType('atom');
         
@@ -74,10 +75,10 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         try {
             $renderer->render();
-        } catch (\Zend\Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
             $this->fail('Valid Writer object caused an exception when building which should never happen');
         }
     }
@@ -85,7 +86,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testEntryEncodingHasBeenSet()
     {
         $this->_validWriter->setEncoding('iso-8859-1');
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('iso-8859-1', $entry->getEncoding());
@@ -93,7 +94,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testEntryEncodingDefaultIsUsedIfEncodingNotSetByHand()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
@@ -101,23 +102,25 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testEntryTitleHasBeenSet()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('This is a test entry.', $entry->getTitle());
     }
     
+    /**
+     * @expectedException Zend\Feed\Writer\Exception
+     */
     public function testFeedTitleIfMissingThrowsException()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $atomFeed = new Atom($this->_validWriter);
+        $atomFeed = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->remove('title');
         $atomFeed->render();
     }
 
     public function testEntrySummaryDescriptionHasBeenSet()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('This is a test entry description.', $entry->getDescription());
@@ -128,16 +131,18 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testEntryContentHasBeenSet_Xhtml()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('<p class="xhtml:">This is test content for <em>xhtml:</em></p>', $entry->getContent());
     }
     
+    /**
+     * @expectedException Zend\Feed\Writer\Exception
+     */
     public function testFeedContentIfMissingThrowsExceptionIfThereIsNoLink()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $atomFeed = new Atom($this->_validWriter);
+        $atomFeed = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->remove('content');
         $this->_validEntry->remove('link');
         $atomFeed->render();
@@ -145,23 +150,25 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testEntryUpdatedDateHasBeenSet()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals(1234567890, $entry->getDateModified()->get(Date\Date::TIMESTAMP));
     }
     
+    /**
+     * @expectedException Zend\Feed\Writer\Exception
+     */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $atomFeed = new Atom($this->_validWriter);
+        $atomFeed = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->remove('dateModified');
         $atomFeed->render();
     }
 
     public function testEntryPublishedDateHasBeenSet()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals(1234567000, $entry->getDateCreated()->get(Date\Date::TIMESTAMP));
@@ -169,7 +176,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testEntryIncludesLinkToHtmlVersionOfFeed()
     {
-        $renderer= new Atom($this->_validWriter);
+        $renderer= new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/1', $entry->getLink());
@@ -177,7 +184,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testEntryHoldsAnyAuthorAdded()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $author = $entry->getAuthor();
@@ -189,7 +196,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     
     public function testEntryHoldsAnyEnclosureAdded()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->setEnclosure(array(
             'type' => 'audio/mpeg',
             'length' => '1337',
@@ -206,7 +213,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testEntryIdHasBeenSet()
     {
         $this->_validEntry->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6', $entry->getId());
@@ -214,26 +221,30 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testFeedIdDefaultIsUsedIfNotSetByHand()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals($entry->getLink(), $entry->getId());
     }
     
+    /**
+     * @expectedException Zend\Feed\Writer\Exception
+     */
     public function testFeedIdIfMissingThrowsException()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $atomFeed = new Atom($this->_validWriter);
+        $atomFeed = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->remove('id');
         $this->_validEntry->remove('link');
         $atomFeed->render();
     }
     
+    /**
+     * @expectedException Zend\Feed\Writer\Exception
+     */
     public function testFeedIdThrowsExceptionIfNotUri()
     {
-        $this->markTestSkipped('Skipped until Zend\URI is refactored for validation');
-        $this->setExpectedException('Zend\Feed\Exception');
-        $atomFeed = new Atom($this->_validWriter);
+        $this->markTestIncomplete('Pending Zend\URI fix for validation');
+        $atomFeed = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->remove('id');
         $this->_validEntry->remove('link');
         $this->_validEntry->setId('not-a-uri');
@@ -242,7 +253,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     
     public function testCommentLinkRendered()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->setCommentLink('http://www.example.com/id/1');
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
@@ -251,7 +262,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     
     public function testCommentCountRendered()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->setCommentCount(22);
         $feed = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
@@ -264,7 +275,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2')
         ));
-        $atomFeed = new Atom($this->_validWriter);
+        $atomFeed = new Renderer\Feed\Atom($this->_validWriter);
         $atomFeed->render();
         $feed = Reader\Reader::importString($atomFeed->saveXml());
         $entry = $feed->current();
@@ -277,7 +288,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     
     public function testCommentFeedLinksRendered()
     {
-        $renderer = new Atom($this->_validWriter);
+        $renderer = new Renderer\Feed\Atom($this->_validWriter);
         $this->_validEntry->setCommentFeedLinks(array(
             array('uri'=>'http://www.example.com/atom/id/1','type'=>'atom'),
             array('uri'=>'http://www.example.com/rss/id/1','type'=>'rss'),

@@ -21,22 +21,21 @@
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace ZendTest\Feed\Writer;
 use Zend\Feed\Writer;
-use Zend\Feed;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Exception
- * @subpackage UnitTests
- * @group      Zend_Feed
- * @group      Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+* @category Zend
+* @package Zend_Exception
+* @subpackage UnitTests
+* @group Zend_Feed
+* @group Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -44,7 +43,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_feedSamplePath = __DIR__ . '/_files';
+        $this->_feedSamplePath = dirname(__FILE__) . '/_files';
     }
 
     public function testAddsAuthorName()
@@ -74,7 +73,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->addAuthor('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -84,18 +83,18 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->addAuthor('Joe', '');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidUri()
     {
-        $this->markTestSkipped('Skipped until Zend\URI is refactored for validation');
+        $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         try {
             $entry->addAuthor('Joe', null, 'notauri');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -126,7 +125,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->addAuthor(array('name'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -136,18 +135,18 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->addAuthor(array('name'=>'Joe','email'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidUriFromArray()
     {
-        $this->markTestSkipped('Skipped until Zend\URI is refactored for validation');
+        $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         try {
             $entry->addAuthor(array('name'=>'Joe','uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -157,7 +156,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->addAuthor(array('uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -191,19 +190,12 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $entry->getEnclosure());
     }
     
-    public function testAddsEnclosureThrowsExceptionOnMissingType()
-    {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $entry = new Writer\Entry;
-        $entry->setEnclosure(array(
-            'uri' => 'http://example.com/audio.mp3',
-            'length' => '1337'
-        ));
-    }
-    
+    /**
+     * @expectedException Zend\Feed\Writer\Exception
+     */
     public function testAddsEnclosureThrowsExceptionOnMissingUri()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
+        $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure(array(
             'type' => 'audio/mpeg',
@@ -211,43 +203,12 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         ));
     }
     
-
-    public function testAddsEnclosureThrowsExceptionOnMissingLength()
-    {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $entry = new Writer\Entry;
-        $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3'
-        ));
-    }
-    
-    public function testAddsEnclosureThrowsExceptionOnNonNumericLength()
-    {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $entry = new Writer\Entry;
-        $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3',
-            'length' => 'abc'
-        ));
-    }
-    
-
-    public function testAddsEnclosureThrowsExceptionOnNegativeLength()
-    {
-        $this->setExpectedException('Zend\Feed\Exception');
-        $entry = new Writer\Entry;
-        $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3',
-            'length' => -23
-        ));
-    }
-    
+    /**
+     * @expectedException Zend\Feed\Writer\Exception
+     */
     public function testAddsEnclosureThrowsExceptionWhenUriIsInvalid()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
+        $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure(array(
             'type' => 'audio/mpeg',
@@ -269,7 +230,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCopyright('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -286,7 +247,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setContent('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -344,7 +305,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDateCreated('abc');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -354,7 +315,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDateModified('abc');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -395,7 +356,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDescription('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -418,7 +379,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setId('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -441,7 +402,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setLink('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -451,7 +412,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setLink('http://');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -474,7 +435,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentLink('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -484,7 +445,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentLink('http://');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -504,12 +465,12 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetCommentFeedLinkThrowsExceptionOnEmptyString()
     {
-        $this->markTestSkipped('Skipped until Zend\URI is refactored for validation');
+        $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         try {
             $entry->setCommentFeedLink(array('uri'=>'', 'type'=>'rdf'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -519,7 +480,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentFeedLink(array('uri'=>'http://', 'type'=>'rdf'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
     
@@ -529,7 +490,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentFeedLink(array('uri'=>'http://www.example.com/id/comments', 'type'=>'foo'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -552,7 +513,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setTitle('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -575,7 +536,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentCount('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -585,7 +546,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentCount('a');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 

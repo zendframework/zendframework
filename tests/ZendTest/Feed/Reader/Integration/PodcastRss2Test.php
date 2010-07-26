@@ -17,26 +17,26 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: PodcastRss2Test.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Feed
- * @group      Zend_Feed_Reader
- */
-class PodcastRSS2Test extends \PHPUnit_Framework_TestCase
+* @category Zend
+* @package Zend_Feed
+* @subpackage UnitTests
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+* @group Zend_Feed
+* @group Zend_Feed_Reader
+*/
+class PodcastRss2Test extends \PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
@@ -44,7 +44,7 @@ class PodcastRSS2Test extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = __DIR__ . '/_files/podcast.xml';
+        $this->_feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
@@ -89,7 +89,7 @@ class PodcastRSS2Test extends \PHPUnit_Framework_TestCase
                 'Gadgets' => null
             ),
             'TV & Film' => null
-        ), $feed->getCategories());
+        ), $feed->getItunesCategories());
     }
 
     public function testGetsTitle()
@@ -180,7 +180,7 @@ class PodcastRSS2Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals('http://example.com/podcasts/everything/AllAboutEverything.jpg', $feed->getImage());
+        $this->assertEquals('http://example.com/podcasts/everything/AllAboutEverything.jpg', $feed->getItunesImage());
     }
 
     /**

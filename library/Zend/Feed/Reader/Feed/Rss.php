@@ -13,33 +13,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ * @package    Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Rss.php 22300 2010-05-26 10:13:34Z padraic $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Reader\Feed;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
 use Zend\Date;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Collection\Author
- * @uses       \Zend\Feed\Reader\Extension\Atom\Feed
- * @uses       \Zend\Feed\Reader\Extension\DublinCore\Feed
- * @uses       \Zend\Feed\Reader\AbstractFeed
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class RSS extends Reader\AbstractFeed
+* @uses \Zend\Date\Date
+* @uses \Zend\Feed\Reader\Exception
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Collection\Author
+* @uses \Zend\Feed\Reader\Extension\Atom\Feed
+* @uses \Zend\Feed\Reader\Extension\DublinCore\Feed
+* @uses \Zend\Feed\Reader\Feed\AbstractFeed
+* @category Zend
+* @package Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Rss extends AbstractFeed
 {
 
     /**
@@ -52,10 +53,10 @@ class RSS extends Reader\AbstractFeed
     {
         parent::__construct($dom, $type);
 
-        $dublinCoreClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Feed');
-        $this->_extensions['DublinCore\Feed'] = new $dublinCoreClass($dom, $this->_data['type'], $this->_xpath);
-        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\Feed');
-        $this->_extensions['Atom\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $dublinCoreClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Feed');
+        $this->_extensions['DublinCore\\Feed'] = new $dublinCoreClass($dom, $this->_data['type'], $this->_xpath);
+        $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
+        $this->_extensions['Atom\\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 && $this->getType() !== Reader\Reader::TYPE_RSS_090) {
             $xpathPrefix = '/rss/channel';
@@ -124,7 +125,7 @@ class RSS extends Reader\AbstractFeed
                 // Pretty rough parsing - but it's a catchall
                 if (preg_match("/^.*@[^ ]*/", $string, $matches)) {
                     $data['email'] = trim($matches[0]);
-                    if (preg_match('/\((.*)\)$/', $string, $matches)) {
+                    if (preg_match("/\((.*)\)$/", $string, $matches)) {
                         $data['name'] = $matches[1];
                     }
                     $authors[] = $data;
@@ -197,7 +198,7 @@ class RSS extends Reader\AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return \Zend\Date\Date
+     * @return Date\Date
      */
     public function getDateModified()
     {
@@ -219,10 +220,8 @@ class RSS extends Reader\AbstractFeed
                 if ($dateModifiedParsed) {
                     $date = new Date\Date($dateModifiedParsed);
                 } else {
-                    $dateStandards = array(
-                        Date\Date::RSS, Date\Date::RFC_822,
-                        Date\Date::RFC_2822, Date\Date::DATES,
-                    );
+                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
+                    Date\Date::RFC_2822, Date\Date::DATES);
                     $date = new Date\Date;
                     foreach ($dateStandards as $standard) {
                         try {
@@ -230,7 +229,7 @@ class RSS extends Reader\AbstractFeed
                             break;
                         } catch (Date\Exception $e) {
                             if ($standard == Date\Date::DATES) {
-                                throw new \Zend\Feed\Exception(
+                                throw new Exception(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -263,7 +262,7 @@ class RSS extends Reader\AbstractFeed
     /**
      * Get the feed lastBuild date
      *
-     * @return Zend\Date\Date
+     * @return Date\Date
      */
     public function getLastBuildDate()
     {
@@ -291,7 +290,7 @@ class RSS extends Reader\AbstractFeed
                             break;
                         } catch (Date\Exception $e) {
                             if ($standard == Date\Date::DATES) {
-                                throw new \Zend\Feed\Exception(
+                                throw new Exception(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -645,7 +644,7 @@ class RSS extends Reader\AbstractFeed
     /**
      * Get all categories
      *
-     * @return \Zend\Feed\Reader\Collection\Category
+     * @return Reader_Collection_Category
      */
     public function getCategories()
     {
@@ -661,7 +660,7 @@ class RSS extends Reader\AbstractFeed
         }
 
         if ($list->length) {
-            $categoryCollection = new Reader\Collection\Category;
+            $categoryCollection = new Collection\Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->nodeValue,

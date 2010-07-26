@@ -16,34 +16,33 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Feed.php 20518 2010-01-22 14:00:30Z padraic $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Writer;
-
-use Zend\Feed as ZendFeed;
+use Zend\Feed\Writer\Renderer;
 use Zend\Date;
 
 /**
- * @uses       Countable
- * @uses       Iterator
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\Deleted
- * @uses       \Zend\Feed\Writer\Entry
- * @uses       \Zend\Feed\Writer\Feed\AbstractFeed
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom
- * @uses       \Zend\Feed\Writer\Renderer\Feed\RSS
- * @uses       \Zend\Uri\Uri
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+* @uses Countable
+* @uses Iterator
+* @uses \Zend\Date\Date
+* @uses \Zend\Feed\Exception
+* @uses \Zend\Feed\Writer\Writer
+* @uses \Zend\Feed\Writer\Deleted
+* @uses \Zend\Feed\Writer\Entry
+* @uses \Zend\Feed\Writer\Feed\FeedAbstract
+* @uses \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
+* @uses \Zend\Feed\Writer\Renderer\Feed\RSS
+* @uses \Zend\Uri\Uri
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
 class Feed extends AbstractFeed implements \Iterator, \Countable
 {
 
@@ -66,7 +65,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return \Zend\Feed\Writer\Entry
+     * @return Zend_Feed_Writer_Entry
      */
     public function createEntry()
     {
@@ -82,7 +81,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
      * Appends a Zend_Feed_Writer_Deleted object representing a new entry tombstone
      * to the feed data container's internal group of entries.
      *
-     * @param \Zend\Feed\Writer\Deleted $entry
+     * @param Zend_Feed_Writer_Deleted $entry
      */
     public function addTombstone(Deleted $deleted)
     {
@@ -94,7 +93,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return \Zend\Feed\Writer\Deleted
+     * @return Zend_Feed_Writer_Deleted
      */
     public function createTombstone()
     {
@@ -110,7 +109,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
      * Appends a Zend_Feed_Writer_Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @param \Zend\Feed\Writer\Entry $entry
+     * @param Zend_Feed_Writer_Entry $entry
      */
     public function addEntry(Entry $entry)
     {
@@ -128,7 +127,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
         if (isset($this->_entries[$index])) {
             unset($this->_entries[$index]);
         }
-        throw new ZendFeed\Exception('Undefined index: ' . $index . '. Entry does not exist.');
+        throw new Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
     /**
@@ -142,7 +141,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
         if (isset($this->_entries[$index])) {
             return $this->_entries[$index];
         }
-        throw new ZendFeed\Exception('Undefined index: ' . $index . '. Entry does not exist.');
+        throw new Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
     /**
@@ -169,7 +168,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
             }
             $entries[$timestamp] = $entry;
         }
-        krsort($entries, SORT_NUMERIC);
+        krsort($entries, \SORT_NUMERIC);
         $this->_entries = array_values($entries);
     }
 
@@ -187,7 +186,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
 	/**
      * Return the current entry
      *
-     * @return Zend\Feed\Reader\Entry
+     * @return Zend_Feed_Reader_Entry_Interface
      */
     public function current()
     {
@@ -245,10 +244,10 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
         $this->setType(strtolower($type));
         $type = ucfirst($this->getType());
         if ($type !== 'Rss' && $type !== 'Atom') {
-            throw new ZendFeed\Exception('Invalid feed type specified: ' . $type . '.'
+            throw new Exception('Invalid feed type specified: ' . $type . '.'
             . ' Should be one of "rss" or "atom".');
         }
-        $renderClass = 'Zend\Feed\Writer\Renderer\Feed\\' . $type;
+        $renderClass = 'Renderer\\Feed\\' . $type;
         $renderer = new $renderClass($this);
         if ($ignoreExceptions) {
             $renderer->ignoreExceptions();

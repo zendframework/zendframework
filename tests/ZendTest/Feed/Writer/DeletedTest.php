@@ -21,22 +21,21 @@
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace ZendTest\Feed\Writer;
 use Zend\Feed\Writer;
-use Zend\Feed;
 use Zend\Date;
 
 /**
- * @category   Zend
- * @package    Zend_Exception
- * @subpackage UnitTests
- * @group      Zend_Feed
- * @group      Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+* @category Zend
+* @package Zend_Exception
+* @subpackage UnitTests
+* @group Zend_Feed
+* @group Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
 class DeletedTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -53,7 +52,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setReference('');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -93,7 +92,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setWhen('abc');
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
     
@@ -130,7 +129,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -140,18 +139,18 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>'Joe','email'=>''));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
     public function testAddByThrowsExceptionOnInvalidUriFromArray()
     {
-        $this->markTestSkipped('Skipped until Zend\URI is refactored for validation');
+        $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Deleted;
         try {
             $entry->setBy(array('name'=>'Joe','uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 
@@ -161,7 +160,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('uri'=>'notauri'));
             $this->fail();
-        } catch (Feed\Exception $e) {
+        } catch (Writer\Exception $e) {
         }
     }
 

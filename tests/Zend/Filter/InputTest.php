@@ -1909,7 +1909,7 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
     public function testTranslateNotEmptyMessages()
     {
         require_once 'Zend/Translate/Adapter/Array.php';
-        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'));
+        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'), 'en');
 
         $validators = array(
             'rule1'   => array('presence' => 'required',
@@ -1934,7 +1934,7 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
     public function testTranslateNotEmptyMessagesByUsingRegistry()
     {
         require_once 'Zend/Translate/Adapter/Array.php';
-        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'));
+        $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'), 'en');
         require_once 'Zend/Registry.php';
         Zend_Registry::set('Zend_Translate', $translator);
 

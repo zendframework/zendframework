@@ -24,7 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Service\Delicious;
-use Zend\Service\Delicious;
+use \Zend\Service\Delicious\Delicious as DeliciousClient,
+    \Zend\Service\Delicious,
+    \Zend\Service\Delicious\Post,
+    \Zend\Date\Date;
 
 /**
  * Test helper
@@ -74,13 +77,13 @@ class PostTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_delicious = new Delicious\Delicious(self::UNAME, self::PASS);
+        $this->_delicious = new DeliciousClient(self::UNAME, self::PASS);
 
         $values = array(
             'title' => 'anything',
             'url'   => 'anything'
             );
-        $this->_post = new Delicious\Post($this->_delicious, $values);
+        $this->_post = new Post($this->_delicious, $values);
     }
 
     /**
@@ -91,8 +94,8 @@ class PostTest extends \PHPUnit_Framework_TestCase
     public function testConstructExceptionValuesTitleMissing()
     {
         try {
-            $post = new Delicious\Post($this->_delicious, array('url' => 'anything'));
-            $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
+            $post = new Post($this->_delicious, array('url' => 'anything'));
+            $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
         } catch (Delicious\Exception $e) {
             $this->assertContains("'url' and 'title'", $e->getMessage());
         }
@@ -106,8 +109,8 @@ class PostTest extends \PHPUnit_Framework_TestCase
     public function testConstructExceptionValuesUrlMissing()
     {
         try {
-            $post = new Delicious\Post($this->_delicious, array('title' => 'anything'));
-            $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
+            $post = new Post($this->_delicious, array('title' => 'anything'));
+            $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
         } catch (Delicious\Exception $e) {
             $this->assertContains("'url' and 'title'", $e->getMessage());
         }
@@ -126,10 +129,10 @@ class PostTest extends \PHPUnit_Framework_TestCase
             'date'  => 'invalid'
             );
         try {
-            $post = new Delicious\Post($this->_delicious, $values);
-            $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
+            $post = new Post($this->_delicious, $values);
+            $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
         } catch (Delicious\Exception $e) {
-            $this->assertContains('instance of Zend_Date', $e->getMessage());
+            $this->assertContains('instance of \Zend\Date\Date', $e->getMessage());
         }
     }
 

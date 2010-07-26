@@ -2145,7 +2145,7 @@ class Zend_Feed_Reader_Feed_RssTest extends PHPUnit_Framework_TestCase
         );
         $fdate = $feed->getDateModified();
         $edate = new Zend_Date;
-        $edate->set('2010-01-04T08:14:00-0600', Zend_Date::ISO_8601);
+        $edate->set('2010-01-04T02:14:00-0600', Zend_Date::ISO_8601);
         Zend_Registry::getInstance()->offsetUnset('Zend_Locale');
         $this->assertTrue($edate->equals($fdate));
     }

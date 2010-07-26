@@ -62,7 +62,7 @@ class Proxy extends Socket
         'proxy_port'    => 8080,
         'proxy_user'    => '',
         'proxy_pass'    => '',
-        'proxy_auth'    => Client\Client::AUTH_BASIC,
+        'proxy_auth'    => Client::AUTH_BASIC,
         'persistent'    => false
     );
 

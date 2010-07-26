@@ -28,8 +28,8 @@ use Zend\Validator\Hostname;
 /**
  * URL handler
  *
- * @uses      \Zend\Uri\Uri
- * @uses      \Zend\Uri\Exception
+ * @uses      \Zend\URI\URI
+ * @uses      \Zend\URI\Exception
  * @uses      \Zend\Validator\Hostname\Hostname
  * @category  Zend
  * @package   Zend_Uri
@@ -38,7 +38,6 @@ use Zend\Validator\Hostname;
  */
 class Url implements Uri
 {
-    
     /**
      * Character classes for validation regular expressions
      * (null) values here will be initialized during calls to _getRegex
@@ -233,7 +232,7 @@ class Url implements Uri
         }
 
         // Check the port against the allowed values
-        return ctype_digit((string) $port) and 1 <= $port and $port <= 65535;
+        return (ctype_digit((string) $port) && 1 <= $port && $port <= 0xffff);
     }
     
     /**

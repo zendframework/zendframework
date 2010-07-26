@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Delicious;
+use Zend\Service\Delicious;
 
 /**
  * Test helper
@@ -39,7 +44,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
+class SimplePostTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Ensures that the constructor throws an exception when the title is missing
@@ -50,9 +55,9 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
     {
         $post = array('u' => 'anything');
         try {
-            $simplePost = new Zend_Service_Delicious_SimplePost($post);
+            $simplePost = new Delicious\SimplePost($post);
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
-        } catch (Zend_Service_Delicious_Exception $e) {
+        } catch (Delicious\Exception $e) {
             $this->assertContains('Title and URL', $e->getMessage());
         }
     }
@@ -66,9 +71,9 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
     {
         $post = array('d' => 'anything');
         try {
-            $simplePost = new Zend_Service_Delicious_SimplePost($post);
+            $simplePost = new Delicious\SimplePost($post);
             $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
-        } catch (Zend_Service_Delicious_Exception $e) {
+        } catch (Delicious\Exception $e) {
             $this->assertContains('Title and URL', $e->getMessage());
         }
     }
@@ -85,7 +90,7 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
             'd' => 'anything',
             'u' => $url
             );
-        $simplePost = new Zend_Service_Delicious_SimplePost($post);
+        $simplePost = new Delicious\SimplePost($post);
         $this->assertEquals(
             $url,
             $result = $simplePost->getUrl(),
@@ -105,7 +110,7 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
             'd' => $title,
             'u' => 'anything'
             );
-        $simplePost = new Zend_Service_Delicious_SimplePost($post);
+        $simplePost = new Delicious\SimplePost($post);
         $this->assertEquals(
             $title,
             $result = $simplePost->getTitle(),
@@ -126,7 +131,7 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
             'u' => 'anything',
             'n' => $notes
             );
-        $simplePost = new Zend_Service_Delicious_SimplePost($post);
+        $simplePost = new Delicious\SimplePost($post);
         $this->assertEquals(
             $notes,
             $result = $simplePost->getNotes(),
@@ -147,7 +152,7 @@ class Zend_Service_Delicious_SimplePostTest extends PHPUnit_Framework_TestCase
             'u' => 'anything',
             't' => $tags
             );
-        $simplePost = new Zend_Service_Delicious_SimplePost($post);
+        $simplePost = new Delicious\SimplePost($post);
         $this->assertEquals(
             $tags,
             $result = $simplePost->getTags(),

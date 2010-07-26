@@ -20,6 +20,14 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Delicious;
+use \Zend\Service\Delicious\Delicious as DeliciousClient,
+    \Zend\Service\Delicious,
+    \Zend\Service\Delicious\Post,
+    \Zend\Date\Date;
 
 /**
  * Test helper
@@ -43,7 +51,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
  */
-class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
+class PostTest extends \PHPUnit_Framework_TestCase
 {
     const UNAME = 'zfTestUser';
     const PASS  = 'zfuser';
@@ -69,13 +77,13 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_delicious = new Zend_Service_Delicious(self::UNAME, self::PASS);
+        $this->_delicious = new DeliciousClient(self::UNAME, self::PASS);
 
         $values = array(
             'title' => 'anything',
             'url'   => 'anything'
             );
-        $this->_post = new Zend_Service_Delicious_Post($this->_delicious, $values);
+        $this->_post = new Post($this->_delicious, $values);
     }
 
     /**
@@ -86,9 +94,9 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     public function testConstructExceptionValuesTitleMissing()
     {
         try {
-            $post = new Zend_Service_Delicious_Post($this->_delicious, array('url' => 'anything'));
-            $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
-        } catch (Zend_Service_Delicious_Exception $e) {
+            $post = new Post($this->_delicious, array('url' => 'anything'));
+            $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
+        } catch (Delicious\Exception $e) {
             $this->assertContains("'url' and 'title'", $e->getMessage());
         }
     }
@@ -101,9 +109,9 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
     public function testConstructExceptionValuesUrlMissing()
     {
         try {
-            $post = new Zend_Service_Delicious_Post($this->_delicious, array('title' => 'anything'));
-            $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
-        } catch (Zend_Service_Delicious_Exception $e) {
+            $post = new Post($this->_delicious, array('title' => 'anything'));
+            $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
+        } catch (Delicious\Exception $e) {
             $this->assertContains("'url' and 'title'", $e->getMessage());
         }
     }
@@ -121,10 +129,10 @@ class Zend_Service_Delicious_PostTest extends PHPUnit_Framework_TestCase
             'date'  => 'invalid'
             );
         try {
-            $post = new Zend_Service_Delicious_Post($this->_delicious, $values);
-            $this->fail('Expected Zend_Service_Delicious_Exception not thrown');
-        } catch (Zend_Service_Delicious_Exception $e) {
-            $this->assertContains('instance of Zend_Date', $e->getMessage());
+            $post = new Post($this->_delicious, $values);
+            $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
+        } catch (Delicious\Exception $e) {
+            $this->assertContains('instance of \Zend\Date\Date', $e->getMessage());
         }
     }
 

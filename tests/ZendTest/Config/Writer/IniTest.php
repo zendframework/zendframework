@@ -223,7 +223,7 @@ ECS;
      */
     public function testZF6289_NonSectionElementsAndSectionJumbling()
     {
-        $config = new Zend_Config(array(
+        $config = new \Zend\Config\Config(array(
             'one'   => 'element',
             'two'   => array('type' => 'section'),
             'three' => 'element',
@@ -231,7 +231,7 @@ ECS;
             'five'  => 'element'
         ));
         
-        $writer = new Zend_Config_Writer_Ini;
+        $writer = new \Zend\Config\Writer\Ini;
         $iniString = $writer->setConfig($config)->render($config);
         
         $expected = <<<ECS

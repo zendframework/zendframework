@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Service\Delicious;
+namespace Zend\Service\Delicious;
 
 /**
  * Zend_Service_Delicious_Post represents a post of a user that can be edited
@@ -38,7 +38,7 @@ namespace Service\Delicious;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Post extends \Zend\Service\Delicious\SimplePost
+class Post extends SimplePost
 {
     /**
      * Service that has downloaded the post
@@ -84,12 +84,12 @@ class Post extends \Zend\Service\Delicious\SimplePost
         }
 
         if (!is_array($values) || !isset($values['url']) || !isset($values['title'])) {
-            throw new \Zend\Service\Delicious\Exception("Second argument must be array with at least 2 keys ('url' and"
+            throw new Exception("Second argument must be array with at least 2 keys ('url' and"
                                                      . " 'title')");
         }
 
         if (isset($values['date']) && ! $values['date'] instanceof \Zend\Date) {
-            throw new \Zend\Service\Delicious\Exception("Date has to be an instance of Zend_Date");
+            throw new Exception("Date has to be an instance of Zend_Date");
         }
 
         foreach (array('url', 'title', 'notes', 'others', 'tags', 'date', 'shared', 'hash') as $key) {
@@ -252,7 +252,7 @@ class Post extends \Zend\Service\Delicious\SimplePost
         }
         */
 
-        return $this->_service->makeRequest(\Zend\Service\Delicious::PATH_POSTS_ADD, $parms);
+        return $this->_service->makeRequest(Delicious::PATH_POSTS_ADD, $parms);
     }
 
     /**
@@ -269,7 +269,7 @@ class Post extends \Zend\Service\Delicious\SimplePost
             'notes'  => $node->getAttribute('extended'),
             'others' => (int) $node->getAttribute('others'),
             'tags'   => explode(' ', $node->getAttribute('tag')),
-            'date'   => new \Zend\Date(strtotime($node->getAttribute('time'))),
+            'date'   => new \Zend\Date\Date(strtotime($node->getAttribute('time'))),
             'shared' => ($node->getAttribute('shared') == 'no' ? false : true),
             'hash'   => $node->getAttribute('hash')
         );

@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Service\Delicious;
+namespace Zend\Service\Delicious;
 
 /**
  * @uses       Zend_Service_Exception

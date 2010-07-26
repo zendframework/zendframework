@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Service\Delicious;
+namespace Zend\Service\Delicious;
 
 /**
  * List of posts retrived from the del.icio.us web service
@@ -63,7 +63,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      * @param  DOMNodeList|array      $posts
      * @return void
      */
-    public function __construct(\Zend\Service\Delicious $service, $posts = null)
+    public function __construct(Delicious $service, $posts = null)
     {
         $this->_service = $service;
         if ($posts instanceof \DOMNodeList) {
@@ -84,7 +84,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
         for ($i = 0; $i < $nodeList->length; $i++) {
             $curentNode = $nodeList->item($i);
             if($curentNode->nodeName == 'post') {
-                $this->_addPost(new \Zend\Service\Delicious\Post($this->_service, $curentNode));
+                $this->_addPost(new Post($this->_service, $curentNode));
             }
         }
     }
@@ -98,7 +98,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
     private function _constructFromArray(array $postList)
     {
         foreach ($postList as $f_post) {
-            $this->_addPost(new \Zend\Service\Delicious\SimplePost($f_post));
+            $this->_addPost(new SimplePost($f_post));
         }
     }
 
@@ -108,7 +108,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      * @param  Zend_Service_Delicious_SimplePost $post
      * @return Zend_Service_Delicious_PostList
      */
-    protected function _addPost(\Zend\Service\Delicious\SimplePost $post)
+    protected function _addPost(SimplePost $post)
     {
         $this->_posts[] = $post;
 
@@ -123,7 +123,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function withTags(array $tags)
     {
-        $postList = new \self($this->_service);
+        $postList = new self($this->_service);
 
         foreach ($this->_posts as $post) {
             if (count(array_diff($tags, $post->getTags())) == 0) {
@@ -153,7 +153,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function withUrl($regexp)
     {
-        $postList = new \self($this->_service);
+        $postList = new self($this->_service);
 
         foreach ($this->_posts as $post) {
             if (preg_match($regexp, $post->getUrl())) {
@@ -284,7 +284,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        throw new \Zend\Service\Delicious\Exception('You are trying to set read-only property');
+        throw new Exception('You are trying to set read-only property');
     }
 
     /**
@@ -297,6 +297,6 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        throw new \Zend\Service\Delicious\Exception('You are trying to unset read-only property');
+        throw new Exception('You are trying to unset read-only property');
     }
 }

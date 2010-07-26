@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Service\Delicious;
+namespace Zend\Service\Delicious;
 
 /**
  * Represents a publicly available post
@@ -67,7 +67,7 @@ class SimplePost
     public function __construct(array $post)
     {
         if (!isset($post['u']) || !isset($post['d'])) {
-            throw new \Zend\Service\Delicious\Exception('Title and URL not set.');
+            throw new Exception('Title and URL not set.');
         }
 
         $this->_url   = $post['u'];

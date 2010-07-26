@@ -23,7 +23,9 @@
 /**
  * @namespace
  */
-namespace Service\Delicious;
+namespace Zend\Service\Delicious;
+
+use \Zend\Rest\Client as RestClient;
 
 /**
  * Zend_Service_Delicious is a concrete implementation of the del.icio.us web service
@@ -103,7 +105,7 @@ class Delicious
      */
     public function __construct($uname = null, $pass = null)
     {
-        $this->_rest = new \Zend\Rest\Client();
+        $this->_rest = new RestClient\RestClient();
         $this->_rest->getHttpClient()->setConfig(array('ssltransport' => 'ssl'));
         $this->setAuth($uname, $pass);
     }
@@ -135,9 +137,9 @@ class Delicious
 
         $rootNode = $response->documentElement;
         if ($rootNode && $rootNode->nodeName == 'update') {
-            return new \Zend\Date(strtotime($rootNode->getAttribute('time')));
+            return new \Zend\Date\Date(strtotime($rootNode->getAttribute('time')));
         } else {
-            throw new \Zend\Service\Delicious\Exception('del.icio.us web service has returned something odd!');
+            throw new Exception('del.icio.us web service has returned something odd!');
         }
     }
 
@@ -328,7 +330,7 @@ class Delicious
      */
     public function createNewPost($title, $url)
     {
-        return new \Zend\Service\Delicious\Post($this, array('title' => $title, 'url' => $url));
+        return new Post($this, array('title' => $title, 'url' => $url));
     }
 
     /**
@@ -349,7 +351,7 @@ class Delicious
         $path = sprintf(self::JSON_POSTS, $user, $tag);
         $res = $this->makeRequest($path, $parms, 'json');
 
-        return new \Zend\Service\Delicious\PostList($this, $res);
+        return new PostList($this, $res);
     }
 
     /**
@@ -461,14 +463,14 @@ class Delicious
                 $this->_rest->setUri(self::JSON_URI);
                 break;
             default:
-                throw new \Zend\Service\Delicious\Exception('Unknown request type');
+                throw new Exception('Unknown request type');
         }
 
         self::$_lastRequestTime = microtime(true);
         $response = $this->_rest->restGet($path, $parms);
 
         if (!$response->isSuccessful()) {
-            throw new \Zend\Service\Delicious\Exception("Http client reported an error: '{$response->getMessage()}'");
+            throw new Exception("Http client reported an error: '{$response->getMessage()}'");
         }
 
         $responseBody = $response->getBody();
@@ -478,7 +480,7 @@ class Delicious
                 $dom = new \DOMDocument() ;
 
                 if (!@$dom->loadXML($responseBody)) {
-                    throw new \Zend\Service\Delicious\Exception('XML Error');
+                    throw new Exception('XML Error');
                 }
 
                 return $dom;
@@ -513,7 +515,7 @@ class Delicious
                 }
             }
         } else {
-            throw new \Zend\Service\Delicious\Exception('del.icio.us web service has returned something odd!');
+            throw new Exception('del.icio.us web service has returned something odd!');
         }
 
         return $arrOut;
@@ -531,9 +533,9 @@ class Delicious
         $rootNode = $response->documentElement;
 
         if ($rootNode->nodeName == 'posts') {
-            return new \Zend\Service\Delicious\PostList($this, $rootNode->childNodes);
+            return new PostList($this, $rootNode->childNodes);
         } else {
-            throw new \Zend\Service\Delicious\Exception('del.icio.us web service has returned something odd!');
+            throw new Exception('del.icio.us web service has returned something odd!');
         }
     }
 
@@ -557,10 +559,10 @@ class Delicious
             }
 
             if ($strResponse != 'done' && $strResponse != 'ok') {
-                throw new \Zend\Service\Delicious\Exception("del.icio.us web service: '{$strResponse}'");
+                throw new Exception("del.icio.us web service: '{$strResponse}'");
             }
         } else {
-            throw new \Zend\Service\Delicious\Exception('del.icio.us web service has returned something odd!');
+            throw new Exception('del.icio.us web service has returned something odd!');
         }
     }
 }

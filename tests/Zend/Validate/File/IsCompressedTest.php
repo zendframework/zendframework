@@ -192,13 +192,14 @@ class Zend_Validate_File_IsCompressedTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
+        $magicFile = dirname(__FILE__) . '/_files/magic.mime';
         $validator = new Zend_Validate_File_IsCompressed(array(
             'image/gif',
             'image/jpg',
-            'magicfile' => __DIR__ . '/_files/magic.mime',
+            'magicfile'   => $magicFile,
             'headerCheck' => true));
 
-        $this->assertEquals(__DIR__ . '/_files/magic.mime', $validator->getMagicFile());
+        $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }

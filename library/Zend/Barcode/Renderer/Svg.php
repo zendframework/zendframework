@@ -24,8 +24,6 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
-use Zend\Pdf\Color;
-use Zend;
 
 /**
  * Class for rendering the barcode as svg

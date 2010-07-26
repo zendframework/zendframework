@@ -24,7 +24,6 @@
  * @namespace
  */
 namespace ZendTest\Barcode\Renderer;
-use Zend\Pdf;
 use Zend\Barcode;
 use Zend\Barcode\Renderer\Svg;
 use Zend\Barcode\Object\Code39;

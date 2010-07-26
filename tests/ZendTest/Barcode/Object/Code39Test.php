@@ -94,11 +94,9 @@ class Code39Test extends TestCommon
         $this->assertSame('&', $this->_object->getRawText());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testBadTextDetectedIfChecksumWished()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('&');
         $this->_object->setWithChecksum(true);
         $this->_object->getText();
@@ -110,22 +108,18 @@ class Code39Test extends TestCommon
         $this->assertTrue($this->_object->checkParams());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testCheckParamsWithLowRatio()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('TEST');
         $this->_object->setBarThinWidth(21);
         $this->_object->setBarThickWidth(40);
         $this->_object->checkParams();
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testCheckParamsWithHighRatio()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('TEST');
         $this->_object->setBarThinWidth(20);
         $this->_object->setBarThickWidth(61);

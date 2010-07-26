@@ -186,10 +186,10 @@ class Zend_Validate_File_IsImageTest extends PHPUnit_Framework_TestCase
         $validator = new Zend_Validate_File_IsImage(array(
             'image/gif',
             'image/jpg',
-            'magicfile' => __FILE__,
+            'magicfile' => __DIR__ . '/_files/magic.mime',
             'headerCheck' => true));
 
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
+        $this->assertEquals(__DIR__ . '/_files/magic.mime', $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }

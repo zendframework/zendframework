@@ -133,6 +133,26 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
+    public function testSerializeSplFixedArray()
+    {
+        $value = new \SplFixedArray(3);
+        $value[0] = '1';
+        $value[1] = '2';
+        $value[2] = 'test';
+
+        $expected   = "(lp0\r\n"
+                    . "S'1'\r\n"
+                    . "p1\r\n"
+                    . "aS'2'\r\n"
+                    . "p2\r\n"
+                    . "aS'test'\r\n"
+                    . "p3\r\n"
+                    . "a.";
+
+        $data = $this->_adapter->serialize($value);
+        $this->assertEquals($expected, $data);
+    }
+
     public function testSerializeArrayDict()
     {
         $value    = array('1', '2', 'three' => 'test');

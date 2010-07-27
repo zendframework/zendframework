@@ -532,13 +532,19 @@ class Uri
     /**
      * Set the query string
      * 
+     * If an array is provided, will encode this array of parameters into a 
+     * query string. Array values will be represented in the query string using
+     * PHP's common square bracket notation. 
+     * 
      * @param  string | array $query
      * @return \Zend\Uri\Uri
      */
     public function setQuery($query)
     {
         if (is_array($query)) {
-            $query = http_build_query($query);
+            // We replace the + used for spaces by http_build_query with the 
+            // more standard %20. 
+            $query = str_replace('+', '%20', http_build_query($query));
         }
         
         $this->_query = $query;

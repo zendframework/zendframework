@@ -25,6 +25,7 @@
  * @namespace
  */
 namespace ZendTest\Uri;
+
 use Zend\Uri\Uri;
 
 /**
@@ -256,6 +257,20 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $uri->setScheme($scheme);
     }
     
+    /**
+     * Test that we can use an array to set the query parameters
+     * 
+     * @param array  $data
+     * @param string $expqs
+     * @dataProvider queryParamsArrayProvider
+     */
+    public function testSetQueryFromArray(array $data, $expqs)
+    {
+        $uri = new Uri();
+        $uri->setQuery($data);
+        
+        $this->assertEquals('?' . $expqs, $uri->generate());
+    }
     
     /**
      * Validation and encoding tests
@@ -884,6 +899,30 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('http://a/b/c/d;p?q', 'g;x=1/./y',     'http://a/b/c/g;x=1/y'),
             array('http://a/b/c/d;p?q', 'g;x=1/../y',    'http://a/b/c/y'),
             array('http://a/b/c/d;p?q', 'http:g',        'http:g'),
+        );
+    }
+    
+    /**
+     * Data provider for arrays of query string parameters, with the expected
+     * query string
+     * 
+     * @return array
+     */
+    static public function queryParamsArrayProvider()
+    {
+        return array(
+            array(array(
+                'foo' => 'bar',
+                'baz' => 'waka'
+            ), 'foo=bar&baz=waka'),
+            array(array(
+                'some key' => 'some crazy value?!#[]',
+                '1'        => ''
+            ), 'some%20key=some%20crazy%20value%3F%21%23%5B%5D&1='),
+            array(array(
+                'array'        => array('foo', 'bar', 'baz'),
+                'otherstuff[]' => 1234
+            ), 'array%5B0%5D=foo&array%5B1%5D=bar&array%5B2%5D=baz&otherstuff%5B%5D=1234')
         );
     }
     

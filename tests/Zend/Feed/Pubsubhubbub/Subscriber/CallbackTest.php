@@ -22,6 +22,7 @@
 require_once 'Zend/Feed/Pubsubhubbub/Subscriber/Callback.php';
 require_once 'Zend/Feed/Pubsubhubbub/Model/Subscription.php';
 require_once 'Zend/Db/Table/Rowset/Abstract.php';
+require_once 'Zend/Db/Table/Row.php';
 
 /**
  * @category   Zend
@@ -275,7 +276,6 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
             'lease_seconds' => 10000
             );
 
-        require_once 'Zend/Db/Table/Row.php';
         $row = new Zend_Db_Table_Row(array('data' => $rowdata));
 
         $this->_rowset->expects($this->any())

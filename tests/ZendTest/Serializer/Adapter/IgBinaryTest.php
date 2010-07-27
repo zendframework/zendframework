@@ -25,6 +25,8 @@
  */
 namespace ZendTest\Serializer\Adapter;
 
+use Zend\Serializer;
+
 /**
  * @category   Zend
  * @package    Zend_Serializer
@@ -39,10 +41,10 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_SERIALIZER_ADAPTER_IGBINARY_ENABLED')) {
-            $this->markTestSkipped('Zend_Serializer IgBinary tests are not enabled');
+        if (!extension_loaded('igbinary')) {
+            $this->markTestSkipped('Zend\\Serializer IgBinary needs ext/igbinary');
         }
-        $this->_adapter = new \Zend\Serializer\Adapter\Igbinary();
+        $this->_adapter = new Serializer\Adapter\IgBinary();
     }
 
     public function tearDown()

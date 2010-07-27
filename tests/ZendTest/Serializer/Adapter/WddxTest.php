@@ -25,6 +25,8 @@
  */
 namespace ZendTest\Serializer\Adapter;
 
+use Zend\Serializer;
+
 /**
  * @category   Zend
  * @package    Zend_Serializer
@@ -39,8 +41,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED')) {
-            $this->markTestSkipped('Zend_Serializer WDDX tests are not enabled');
+        if (!extension_loaded('wddx')) {
+            $this->markTestSkipped('Zend\\Serializer Wddx needs ext/wddx');
         }
         $this->_adapter = new \Zend\Serializer\Adapter\Wddx();
     }

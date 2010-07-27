@@ -25,6 +25,8 @@
  */
 namespace ZendTest\Serializer\Adapter;
 
+use Zend\Serializer;
+
 /**
  * @category   Zend
  * @package    Zend_Serializer
@@ -39,7 +41,7 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_adapter = new \Zend\Serializer\Adapter\PythonPickle();
+        $this->_adapter = new Serializer\Adapter\PythonPickle();
     }
 
     public function tearDown()

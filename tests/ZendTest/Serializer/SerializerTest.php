@@ -61,7 +61,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryValidCall()
     {
-        $serializer = Serializer::factory('PHPSerialize');
+        $serializer = Serializer::factory('PhpSerialize');
         $this->assertTrue($serializer instanceof Adapter\PHPSerialize);
     }
 
@@ -86,8 +86,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testChangeDefaultAdapterWithString()
     {
-        $newAdapter = 'JSON';
-        Serializer::setDefaultAdapter($newAdapter);
+        Serializer::setDefaultAdapter('Json');
         $this->assertTrue(Serializer::getDefaultAdapter() instanceof Adapter\Json);
     }
 

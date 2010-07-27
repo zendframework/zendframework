@@ -68,10 +68,14 @@ class Zend_Feed_Pubsubhubbub_Model_SubscriptionTest extends PHPUnit_Framework_Te
 
     protected function _initDb()
     {
-        if (!extension_loaded('pdo')
-            && !in_array('sqlite', PDO::getAvailableDrivers())) {
-            $this->markTestSkipped('Test only with pdo_sqlite');
+        if (!extension_loaded('pdo')) {
+            $this->markTestSkipped("extension 'PDO' is not loaded");
         }
+
+        if (!in_array('sqlite', PDO::getAvailableDrivers())) {
+            $this->markTestSkipped("PDO driver 'sqlite' is not available");
+        }
+
         $db = Zend_Db::factory('Pdo_Sqlite', array('dbname' => ':memory:'));
         Zend_Db_Table::setDefaultAdapter($db);
         $this->_createTable();

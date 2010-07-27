@@ -111,7 +111,7 @@ class Uri
     /**
      * Create a new URI object
      * 
-     * @param \Zend\Uri\Uri|string|null $uri
+     * @param  \Zend\Uri\Uri|string|null $uri
      * @throws \InvalidArgumentException
      */
     public function __construct($uri = null) 
@@ -168,7 +168,8 @@ class Uri
     
     /**
      * Parse a URI string
-     * 
+     *
+     * @param  string $uri
      * @return \Zend\Uri\Uri
      */
     public function parse($uri)
@@ -284,20 +285,20 @@ class Uri
      * Merging algorithm is adapted from RFC-3986 section 5.2 
      * (@link http://tools.ietf.org/html/rfc3986#section-5.2)
      * 
-     * @param \Zend\Uri\Uri | string $baseUrl
+     * @param  \Zend\Uri\Uri | string $baseUri
      * @return \Zend\Uri\Uri
      */
-    public function resolve($baseUrl)
+    public function resolve($baseUri)
     {
         // Ignore if URI is absolute
         if ($this->isAbsolute()) return $this;
             
-        if (is_string($baseUrl)) {
-            $baseUrl = new static($baseUrl);
+        if (is_string($baseUri)) {
+            $baseUri = new static($baseUri);
         }
         
         /* @var $baseUrl \Zend\Uri\Uri */
-        if (! $baseUrl instanceof static) {
+        if (! $baseUri instanceof static) {
             /** @todo create an exception type for this */ 
             throw new Exception("Provided base URL is not an instance of " . get_class($this));
         }
@@ -307,19 +308,19 @@ class Uri
             $this->setPath(static::removePathDotSegments($this->getPath()));
             
         } else { 
-            $basePath = $baseUrl->getPath();
+            $basePath = $baseUri->getPath();
             $relPath  = $this->getPath();
             if (! $relPath) {
                 $this->setPath($basePath);
                 if (! $this->getQuery()) {
-                    $this->setQuery($baseUrl->getQuery());
+                    $this->setQuery($baseUri->getQuery());
                 }
                 
             } else {
                 if (substr($relPath, 0, 1) == '/') {
                     $this->setPath(static::removePathDotSegments($relPath));
                 } else {
-                    if ($baseUrl->getHost() && ! $basePath) {
+                    if ($baseUri->getHost() && ! $basePath) {
                         $mergedPath = '/';
                     } else {
                         $mergedPath = substr($basePath, 0, strrpos($basePath, '/') + 1);
@@ -329,12 +330,12 @@ class Uri
             }
             
             // Set the authority part
-            $this->setUserInfo($baseUrl->getUserInfo());
-            $this->setHost($baseUrl->getHost());
-            $this->setPort($baseUrl->getPort());
+            $this->setUserInfo($baseUri->getUserInfo());
+            $this->setHost($baseUri->getHost());
+            $this->setPort($baseUri->getPort());
         }
         
-        $this->setScheme($baseUrl->getScheme());
+        $this->setScheme($baseUri->getScheme());
         
         return $this;
     } 
@@ -348,55 +349,68 @@ class Uri
      *  If the two URIs do not intersect (e.g. the original URI is not in any
      *  way related to the base URI) the URI will not be modified. 
      * 
+     * @param  \Zend\Uri\Uri | string $baseUri 
      * @return \Zend\Uri\Uri
      */
-    public function makeRelative($baseUrl)
+    public function makeRelative($baseUri)
     {
         return $this;
     }
     
     /**
-     * @return the $_scheme
+     * Get the scheme part of the URI 
+     * 
+     * @return string | null
      */
     public function getScheme()
     {
         return $this->_scheme;
     }
 
-	/**
-     * @return the $_userInfo
+    /**
+     * Get the User-info (usually user:password) part
+     * 
+     * @return string | null
      */
     public function getUserInfo()
     {
         return $this->_userInfo;
     }
 
-	/**
-     * @return the $_host
+    /**
+     * Get the URI host
+     * 
+     * @return string | null
      */
     public function getHost()
     {
         return $this->_host;
     }
 
-	/**
-     * @return the $_port
+    /**
+     * Get the URI port
+     * 
+     * @return integer | null
      */
     public function getPort()
     {
         return $this->_port;
     }
 
-	/**
-     * @return the $_path
+    /**
+     * Get the URI path
+     * 
+     * @return string | null
      */
     public function getPath()
     {
         return $this->_path;
     }
 
-	/**
-     * @return the $_query
+    /**
+     * Get the URI query
+     * 
+     * @return string | null
      */
     public function getQuery()
     {
@@ -421,8 +435,10 @@ class Uri
         return $query;
     }
 
-	/**
-     * @return the $_fragment
+    /**
+     * Get the URI fragment
+     *  
+     * @return string | null
      */
     public function getFragment()
     {
@@ -440,7 +456,7 @@ class Uri
 	 * You can check if a scheme is valid before setting it using the 
 	 * validateScheme() method. 
 	 * 
-     * @param string $scheme
+     * @param  string $scheme
      * @throws \Zend\Uri\InvalidSchemeException
      * @return \Zend\Uri\Uri
      */
@@ -454,8 +470,10 @@ class Uri
         return $this;
     }
 
-	/**
-     * @param string $userInfo
+    /**
+     * Set the URI User-info part (usually user:password)
+     * 
+     * @param  string $userInfo
      * @return \Zend\Uri\Uri
      */
     public function setUserInfo($userInfo)
@@ -464,8 +482,21 @@ class Uri
         return $this;
     }
 
-	/**
-     * @param string $host
+    /**
+     * Set the URI host
+     * 
+     * Note that the generic syntax for URIs allows using host names which
+     * are not neceserily IPv4 addresses or valid DNS host names. For example, 
+     * IPv6 addresses are allowed as well, and also an abstract "registered name"
+     * which may be any name composed of a valid set of characters, including, 
+     * for example, tilda (~) and underscore (_) which are not allowed in DNS
+     * names. 
+     * 
+     * Subclasses of \Zend\Uri\Uri may impose more strict validation of host
+     * names - for example the HTTP RFC clearly states that only IPv4 and 
+     * valid DNS names are allowed in HTTP URIs.  
+     *  
+     * @param  string $host
      * @return \Zend\Uri\Uri
      */
     public function setHost($host)
@@ -474,8 +505,10 @@ class Uri
         return $this;
     }
 
-	/**
-     * @param integer $port
+    /**
+     * Set the port part of the URI
+     * 
+     * @param  integer $port
      * @return \Zend\Uri\Uri
      */
     public function setPort($port)
@@ -484,8 +517,10 @@ class Uri
         return $this;
     }
 
-	/**
-     * @param string $path
+    /**
+     * Set the path
+     * 
+     * @param  string $path
      * @return \Zend\Uri\Uri
      */
     public function setPath($path)
@@ -494,20 +529,26 @@ class Uri
         return $this;
     }
 
-	/**
-	 * Set the query string, encoding any characters which should be encoded.
-	 * 
-     * @param string $query
+    /**
+     * Set the query string
+     * 
+     * @param  string | array $query
      * @return \Zend\Uri\Uri
      */
     public function setQuery($query)
     {
+        if (is_array($query)) {
+            $query = http_build_query($query);
+        }
+        
         $this->_query = $query;
         return $this;
     }
 
-	/**
-     * @param string $fragment
+    /**
+     * Set the URI fragment part
+     * 
+     * @param  string $fragment
      * @return \Zend\Uri\Uri
      */
     public function setFragment($fragment)
@@ -554,7 +595,7 @@ class Uri
     /**
      * Check that the userInfo part of a URI is valid
      * 
-     * @param string $userInfo
+     * @param  string $userInfo
      * @return boolean
      */
     static public function validateUserInfo($userInfo)
@@ -572,8 +613,8 @@ class Uri
      * more loose) from what is commonly accepted as valid HTTP URLs for 
      * example.
      *   
-     * @todo  Users should be able to control which host types are allowed 
-     * @param string $host
+     * @todo   Users should be able to control which host types are allowed 
+     * @param  string $host
      * @return boolean
      */
     static public function validateHost($host)
@@ -622,6 +663,12 @@ class Uri
         return true;
     }
     
+    /**
+     * Validate the path 
+     * 
+     * @param  string $path
+     * @return boolean
+     */
     static public function validatePath($path)
     {
         throw new Exception("Implelemt me!");
@@ -666,6 +713,12 @@ class Uri
         return preg_replace_callback($regex, $replace, $userInfo);
     }
     
+    /**
+     * Encode the path
+     *  
+     * @param  string $path
+     * @return string
+     */
     static public function encodePath($path)
     {
         throw new Exception("Implelemt me!");

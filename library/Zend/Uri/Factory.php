@@ -37,7 +37,7 @@ use Zend\Uri\Uri;
  * instanciated 
  *
  * @uses      \Zend\Uri\Uri
- * @uses      \Zend\Uri\HTTP
+ * @uses      \Zend\Uri\Http
  * @uses      \Zend\Uri\File
  * @uses      \Zend\Uri\Mailto
  * @uses      \Zend\Uri\Exception

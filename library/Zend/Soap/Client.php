@@ -964,9 +964,11 @@ class Client
     {
         // Perform request as is
         if ($one_way == null) {
-            return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version);
+            $client->__doRequest($request, $location, $action, $version);
+            // return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version);
         } else {
-            return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version, $one_way);
+            $client->__doRequest($request, $location, $action, $version, $one_way);
+            // return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version, $one_way);
         }
     }
 

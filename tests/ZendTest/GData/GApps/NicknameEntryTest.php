@@ -52,7 +52,7 @@ class NicknameEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $nicknameEntry->category[0]->scheme);
         $this->assertEquals('http://schemas.google.com/apps/2006#nickname', $nicknameEntry->category[0]->term);
         $this->assertEquals('text', $nicknameEntry->title->type);
-        $this->assertEquals('Susy', $nicknameEntry->title->text);;
+        $this->assertEquals('Susy', $nicknameEntry->title->text);
         $this->assertEquals('self', $nicknameEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $nicknameEntry->getLink('self')->type);
         $this->assertEquals('https://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Susy', $nicknameEntry->getLink('self')->href);

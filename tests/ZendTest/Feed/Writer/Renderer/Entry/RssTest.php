@@ -56,7 +56,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->_validEntry = $this->_validWriter->createEntry();
         $this->_validEntry->setTitle('This is a test entry.');
         $this->_validEntry->setDescription('This is a test entry description.');
-        $this->_validEntry->setLink('http://www.example.com/1');;
+        $this->_validEntry->setLink('http://www.example.com/1');
         $this->_validWriter->addEntry($this->_validEntry);
     }
 

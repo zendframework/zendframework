@@ -58,7 +58,7 @@ class CommentFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#comment', $commentFeed->category[0]->term);
         $this->assertEquals('http://www.youtube.com/img/pic_youtubelogo_123x63.gif', $commentFeed->logo->text);
         $this->assertEquals('text', $commentFeed->title->type);
-        $this->assertEquals('Comments on \'"That Girl" - Original Song - Acoustic Version\'', $commentFeed->title->text);;
+        $this->assertEquals('Comments on \'"That Girl" - Original Song - Acoustic Version\'', $commentFeed->title->text);
         $this->assertEquals('self', $commentFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $commentFeed->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/videos/Lnio-pqLPgg/comments?start-index=1&max-results=4', $commentFeed->getLink('self')->href);

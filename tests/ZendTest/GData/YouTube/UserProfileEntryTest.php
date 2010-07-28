@@ -61,7 +61,7 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $userProfileEntry->category[0]->scheme);
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#userProfile', $userProfileEntry->category[0]->term);
         $this->assertEquals('text', $userProfileEntry->title->type);
-        $this->assertEquals('Darcy', $userProfileEntry->title->text);;
+        $this->assertEquals('Darcy', $userProfileEntry->title->text);
         $this->assertEquals('self', $userProfileEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $userProfileEntry->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/users/darcy', $userProfileEntry->getLink('self')->href);
@@ -107,7 +107,7 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
             'Standard',
             $userProfileEntry->category[0]->term);
         $this->assertEquals('zfgdata Channel',
-            $userProfileEntry->title->text);;
+            $userProfileEntry->title->text);
         $this->assertEquals('self', $userProfileEntry->getLink('self')->rel);
         $this->assertEquals("I'm a lonely test account, with little to do " .
             "but sit\naround and wait for people to use me. I get bored in " .

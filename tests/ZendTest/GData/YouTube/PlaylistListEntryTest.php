@@ -64,9 +64,9 @@ class PlaylistListEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $playlistListEntry->category[1]->scheme);
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#playlistLink', $playlistListEntry->category[1]->term);
         $this->assertEquals('text', $playlistListEntry->title->type);
-        $this->assertEquals('YouTube Musicians', $playlistListEntry->title->text);;
+        $this->assertEquals('YouTube Musicians', $playlistListEntry->title->text);
         $this->assertEquals('text', $playlistListEntry->content->type);
-        $this->assertEquals('Music from talented people on YouTube.', $playlistListEntry->content->text);;
+        $this->assertEquals('Music from talented people on YouTube.', $playlistListEntry->content->text);
         $this->assertEquals('self', $playlistListEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $playlistListEntry->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/users/testuser/playlists/46A2F8C9B36B6FE7', $playlistListEntry->getLink('self')->href);

@@ -57,7 +57,7 @@ class VolumeFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $volumeFeed->category[0]->scheme);
         $this->assertEquals('http://schemas.google.com/books/2008#volume', $volumeFeed->category[0]->term);
         $this->assertEquals('text', $volumeFeed->title->type);
-        $this->assertEquals('Search results for Hamlet', $volumeFeed->title->text);;
+        $this->assertEquals('Search results for Hamlet', $volumeFeed->title->text);
         $this->assertEquals('self', $volumeFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $volumeFeed->getLink('self')->type);
         $this->assertEquals('http://www.google.com/books/feeds/volumes?q=Hamlet&start-index=3&max-results=5', $volumeFeed->getLink('self')->href);

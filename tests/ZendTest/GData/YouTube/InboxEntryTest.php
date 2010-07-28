@@ -66,7 +66,7 @@ class InboxEntryTest extends \PHPUnit_Framework_TestCase
             'http://gdata.youtube.com/schemas/2007#videoMessage',
             $InboxEntry->category[0]->term);
         $this->assertEquals('andyland74sFriend sent you a video!',
-            $InboxEntry->title->text);;
+            $InboxEntry->title->text);
         $this->assertEquals('self',
             $InboxEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml',

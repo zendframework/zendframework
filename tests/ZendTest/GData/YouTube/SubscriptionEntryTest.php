@@ -87,7 +87,7 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
             $subscriptionListEntry->category[0]->term);
         $this->assertEquals('text', $subscriptionListEntry->title->type);
         $this->assertEquals('Videos published by : BBC',
-            $subscriptionListEntry->title->text);;
+            $subscriptionListEntry->title->text);
         $this->assertEquals('self',
             $subscriptionListEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml',

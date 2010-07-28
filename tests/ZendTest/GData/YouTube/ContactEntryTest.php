@@ -59,7 +59,7 @@ class ContactEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007/contact.cat', $contactEntry->category[1]->scheme);
         $this->assertEquals('Friends', $contactEntry->category[1]->term);
         $this->assertEquals('text', $contactEntry->title->type);
-        $this->assertEquals('testuser', $contactEntry->title->text);;
+        $this->assertEquals('testuser', $contactEntry->title->text);
         $this->assertEquals('self', $contactEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $contactEntry->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/users/davidchoimusic/contacts/testuser', $contactEntry->getLink('self')->href);

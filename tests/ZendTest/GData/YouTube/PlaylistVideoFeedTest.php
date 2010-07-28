@@ -60,7 +60,7 @@ class PlaylistVideoFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('music', $playlistVideoFeed->category[1]->term);
         $this->assertEquals('http://www.youtube.com/img/pic_youtubelogo_123x63.gif', $playlistVideoFeed->logo->text);
         $this->assertEquals('text', $playlistVideoFeed->title->type);
-        $this->assertEquals('YouTube Musicians', $playlistVideoFeed->title->text);;
+        $this->assertEquals('YouTube Musicians', $playlistVideoFeed->title->text);
         $this->assertEquals('self', $playlistVideoFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $playlistVideoFeed->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/playlists/46A2F8C9B36B6FE7?start-index=1&max-results=25', $playlistVideoFeed->getLink('self')->href);

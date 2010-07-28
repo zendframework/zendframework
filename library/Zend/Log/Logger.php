@@ -227,7 +227,7 @@ class Logger implements Factory
             );
         }
 
-        return call_user_func(array($className, 'factory'), $params);
+        return $className::factory($params);
     }
 
     /**

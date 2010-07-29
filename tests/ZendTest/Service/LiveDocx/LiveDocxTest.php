@@ -26,7 +26,6 @@
  */
 namespace ZendTest\Service;
 namespace Zend\Service\LiveDocx;
-use Zend\Validator;
 
 
 if (!defined('PHPUnit_MAIN_METHOD')) {

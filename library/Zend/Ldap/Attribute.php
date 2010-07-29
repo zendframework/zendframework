@@ -53,27 +53,27 @@ class Attribute
     {
         $attribName = strtolower($attribName);
         $valArray = array();
-        if (is_array($value) || ($value instanceof \Traversable))
-        {
+        if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v)
             {
-                $v = self::_valueToLDAP($v);
-                if (!is_null($v)) $valArray[] = $v;
+                $v = self::_valueToLdap($v);
+                if ($v !== null) {
+                    $valArray[] = $v;
+                }
+            }
+        } elseif ($value !== null) {
+            $value = self::_valueToLdap($value);
+            if ($value !== null) {
+                $valArray[] = $value;
             }
         }
-        else if (!is_null($value))
-        {
-            $value = self::_valueToLDAP($value);
-            if (!is_null($value)) $valArray[] = $value;
-        }
 
-        if ($append === true && isset($data[$attribName]))
-        {
-            if (is_string($data[$attribName])) $data[$attribName] = array($data[$attribName]);
+        if ($append === true && isset($data[$attribName])) {
+            if (is_string($data[$attribName])) {
+                $data[$attribName] = array($data[$attribName]);
+            }
             $data[$attribName] = array_merge($data[$attribName], $valArray);
-        }
-        else
-        {
+        } else {
             $data[$attribName] = $valArray;
         }
     }
@@ -89,7 +89,7 @@ class Attribute
     public static function getAttribute(array $data, $attribName, $index = null)
     {
         $attribName = strtolower($attribName);
-        if (is_null($index)) {
+        if ($index === null) {
             if (!isset($data[$attribName])) return array();
             $retArray = array();
             foreach ($data[$attribName] as $v)
@@ -188,7 +188,7 @@ class Attribute
      * @param  mixed $value
      * @return string|null
      */
-    private static function _valueToLDAP($value)
+    private static function _valueToLdap($value)
     {
         if (is_string($value)) return $value;
         else if (is_int($value) || is_float($value)) return (string)$value;
@@ -203,7 +203,7 @@ class Attribute
      * @param  string $value
      * @return string|boolean
      */
-    private static function _valueFromLDAP($value)
+    private static function _valueFromLdap($value)
     {
         $value = (string)$value;
         if ($value === 'TRUE') return true;
@@ -217,9 +217,9 @@ class Attribute
      * @param  mixed $value
      * @return string|null - null if the PHP data type cannot be converted.
      */
-    public static function convertToLDAPValue($value)
+    public static function convertToLdapValue($value)
     {
-        return self::_valueToLDAP($value);
+        return self::_valueToLdap($value);
     }
 
     /**
@@ -228,9 +228,9 @@ class Attribute
      * @param  string $value
      * @return mixed
      */
-    public static function convertFromLDAPValue($value)
+    public static function convertFromLdapValue($value)
     {
-        return self::_valueFromLDAP($value);
+        return self::_valueFromLdap($value);
     }
 
     /**
@@ -240,9 +240,9 @@ class Attribute
      * @param  boolean $utc
      * @return string|null - null if the value cannot be converted.
      */
-    public static function convertToLDAPDateTimeValue($value, $utc = false)
+    public static function convertToLdapDateTimeValue($value, $utc = false)
     {
-        return self::_valueToLDAPDateTime($value, $utc);
+        return self::_valueToLdapDateTime($value, $utc);
     }
 
     /**
@@ -251,9 +251,9 @@ class Attribute
      * @param  string $value
      * @return integer|null - null if the value cannot be converted.
      */
-    public static function convertFromLDAPDateTimeValue($value)
+    public static function convertFromLdapDateTimeValue($value)
     {
-        return self::_valueFromLDAPDateTime($value);
+        return self::_valueFromLdapDateTime($value);
     }
 
     /**
@@ -345,16 +345,18 @@ class Attribute
         $append = false)
     {
         $convertedValues = array();
-        if (is_array($value) || ($value instanceof \Traversable))
-        {
+        if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = self::_valueToLDAPDateTime($v, $utc);
-                if (!is_null($v)) $convertedValues[] = $v;
+                $v = self::_valueToLdapDateTime($v, $utc);
+                if ($v !== null) {
+                    $convertedValues[] = $v;
+                }
             }
-        }
-        else if (!is_null($value)) {
-            $value = self::_valueToLDAPDateTime($value, $utc);
-            if (!is_null($value)) $convertedValues[] = $value;
+        } elseif (!is_null($value)) {
+            $value = self::_valueToLdapDateTime($value, $utc);
+            if ($value !== null) {
+                $convertedValues[] = $value;
+            }
         }
         self::setAttribute($data, $attribName, $convertedValues, $append);
     }

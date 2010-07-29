@@ -115,7 +115,7 @@ class DiffieHellman
     {
         $this->setPrime($prime);
         $this->setGenerator($generator);
-        if (!is_null($privateKey)) {
+        if ($privateKey !== null) {
             $this->setPrivateKey($privateKey, $privateKeyType);
         }
         $this->setBigIntegerMath();
@@ -176,7 +176,7 @@ class DiffieHellman
      */
     public function getPublicKey($type = self::NUMBER)
     {
-        if (is_null($this->_publicKey)) {
+        if ($this->_publicKey === null)) {
             throw new DiffieHellmanException('A public key has not yet been generated using a prior call to generateKeys()');
         }
         if ($type == self::BINARY) {

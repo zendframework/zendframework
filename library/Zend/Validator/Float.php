@@ -45,7 +45,7 @@ class Float extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID   => "Invalid type given, value should be float, string, or integer",
+        self::INVALID   => "Invalid type given. String, integer or float expected",
         self::NOT_FLOAT => "'%value%' does not appear to be a float",
     );
 

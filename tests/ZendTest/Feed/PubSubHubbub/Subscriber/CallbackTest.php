@@ -44,7 +44,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_callback = new \Zend\Feed\PubSubHubbub\Subscriber\Callback;
-        
+
         $this->_adapter = $this->_getCleanMock(
             'Zend\Db\Adapter\AbstractAdapter'
         );
@@ -54,7 +54,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_rowset = $this->_getCleanMock(
             'Zend\Db\Table\AbstractRowset'
         );
-        
+
         $this->_tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->_adapter));
         $storage = new Model\Subscription($this->_tableGateway);
@@ -155,15 +155,22 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatesValidHttpGetData()
     {
+        $mockReturnValue = $this->getMock('Result', array('toArray'));
+        $mockReturnValue->expects($this->any())->method('toArray')->will($this->returnValue(array(
+                'verify_token' => hash('sha256', 'cba')
+            )));
+
         $this->_tableGateway->expects($this->any())
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
         $this->_rowset->expects($this->any())
             ->method('current')
-            ->will($this->returnValue(array(
-                'verify_token' => hash('sha256', 'cba')
-            )));
+            ->will($this->returnValue($mockReturnValue));
+        $this->_rowset->expects($this->any())
+            ->method('count')
+            ->will($this->returnValue(1));
+
         $this->assertTrue($this->_callback->isValidHubVerification($this->_get));
     }
 
@@ -196,9 +203,14 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         unset($this->_get['hub_verify_token']);
         $this->assertFalse($this->_callback->isValidHubVerification($this->_get));
     }
-    
+
     public function testReturnsTrueIfModeSetAsUnsubscribeFromHttpGetData()
     {
+        $mockReturnValue = $this->getMock('Result', array('toArray'));
+        $mockReturnValue->expects($this->any())->method('toArray')->will($this->returnValue(array(
+                'verify_token' => hash('sha256', 'cba')
+            )));
+
         $this->_get['hub_mode'] = 'unsubscribe';
         $this->_tableGateway->expects($this->any())
             ->method('find')
@@ -206,9 +218,12 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->_rowset));
         $this->_rowset->expects($this->any())
             ->method('current')
-            ->will($this->returnValue(array(
-                'verify_token' => hash('sha256', 'cba')
-            )));
+            ->will($this->returnValue($mockReturnValue));
+        // require for the count call on the rowset in Model/Subscription
+        $this->_rowset->expects($this->any())
+            ->method('count')
+            ->will($this->returnValue(1));
+
         $this->assertTrue($this->_callback->isValidHubVerification($this->_get));
     }
 
@@ -256,16 +271,25 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
-        $rowdata->id = 'verifytokenkey';
-        $rowdata->verify_token = hash('sha256', 'cba');
+
         $t = new Date\Date;
-        $rowdata->created_time = $t->get(Date\Date::TIMESTAMP);
-        $rowdata->lease_seconds = 10000;
+        $rowdata = array(
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => $t->get(Date\Date::TIMESTAMP),
+            'lease_seconds' => 10000
+            );
+
+        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+
         $this->_rowset->expects($this->any())
             ->method('current')
-            ->will($this->returnValue($rowdata));
-            
+            ->will($this->returnValue($row));
+        // require for the count call on the rowset in Model/Subscription
+        $this->_rowset->expects($this->any())
+            ->method('count')
+            ->will($this->returnValue(1));
+
         $this->_tableGateway->expects($this->once())
             ->method('update')
             ->with(
@@ -275,8 +299,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->expects($this->once())
             ->method('quoteInto')
             ->with($this->equalTo('id = ?'), $this->equalTo('verifytokenkey'))
-            ->will($this->returnValue('id = \'verifytokenkey\'')); 
-            
+            ->will($this->returnValue('id = \'verifytokenkey\''));
+
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
     }
@@ -287,16 +311,25 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
-        $rowdata->id = 'verifytokenkey';
-        $rowdata->verify_token = hash('sha256', 'cba');
+
         $t = new Date\Date;
-        $rowdata->created_time = $t->get(Date\Date::TIMESTAMP);
-        $rowdata->lease_seconds = 10000;
+        $rowdata = array(
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => $t->get(Date\Date::TIMESTAMP),
+            'lease_seconds' => 10000
+            );
+
+        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+
         $this->_rowset->expects($this->any())
             ->method('current')
-            ->will($this->returnValue($rowdata));
-            
+            ->will($this->returnValue($row));
+        // require for the count call on the rowset in Model/Subscription
+        $this->_rowset->expects($this->any())
+            ->method('count')
+            ->will($this->returnValue(1));
+
         $this->_tableGateway->expects($this->once())
             ->method('update')
             ->with(
@@ -318,24 +351,33 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
         $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml; // dirty  alternative to php://input
-        
+
         $this->_tableGateway->expects($this->any())
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
-        $rowdata->id = 'verifytokenkey';
-        $rowdata->verify_token = hash('sha256', 'cba');
-        $t = time();
-        $rowdata->created_time = $t;
+
+        $t = new Date\Date;
+        $rowdata = array(
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => time()
+            );
+
+        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+
         $this->_rowset->expects($this->any())
             ->method('current')
-            ->will($this->returnValue($rowdata));
-        
+            ->will($this->returnValue($row));
+        // require for the count call on the rowset in Model/Subscription
+        $this->_rowset->expects($this->any())
+            ->method('count')
+            ->will($this->returnValue(1));
+
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
     }
-    
+
     public function testRespondsToInvalidFeedUpdateNotPostWith404Response()
     {   // yes, this example makes no sense for GET - I know!!!
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -343,7 +385,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
         $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
-        
+
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 404);
     }
@@ -372,20 +414,29 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $_SERVER['CONTENT_TYPE'] = 'application/rss+xml';
         $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
-        
+
         $this->_tableGateway->expects($this->any())
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
-        $rowdata->id = 'verifytokenkey';
-        $rowdata->verify_token = hash('sha256', 'cba');
-        $t = time();
-        $rowdata->created_time = $t;
+
+        $rowdata = array(
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => time(),
+            'lease_seconds' => 10000
+            );
+
+        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+
         $this->_rowset->expects($this->any())
             ->method('current')
-            ->will($this->returnValue($rowdata));
-        
+            ->will($this->returnValue($row));
+        // require for the count call on the rowset in Model/Subscription
+        $this->_rowset->expects($this->any())
+            ->method('count')
+            ->will($this->returnValue(1));
+
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
     }
@@ -397,24 +448,33 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
         $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
-        
+
         $this->_tableGateway->expects($this->any())
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $rowdata = new \stdClass;
-        $rowdata->id = 'verifytokenkey';
-        $rowdata->verify_token = hash('sha256', 'cba');
-        $t = time();
-        $rowdata->created_time = $t;
+
+        $rowdata = array(
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => time(),
+            'lease_seconds' => 10000
+            );
+
+        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+
         $this->_rowset->expects($this->any())
             ->method('current')
-            ->will($this->returnValue($rowdata));
-        
+            ->will($this->returnValue($row));
+        // require for the count call on the rowset in Model/Subscription
+        $this->_rowset->expects($this->any())
+            ->method('count')
+            ->will($this->returnValue(1));
+
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHeader('X-Hub-On-Behalf-Of') == 1);
     }
-    
+
     protected function _getCleanMock($className) 
     {
         $class = new \ReflectionClass($className);

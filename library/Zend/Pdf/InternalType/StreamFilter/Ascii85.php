@@ -85,7 +85,7 @@ class Ascii85 implements StreamFilter
 
             //0 pad the rest
             for ($j = $n;$j < 4;$j++) {
-                $chunk .= chr(0);
+                $chunk .= "\0";
             }
 
             $b = unpack("N", $chunk);

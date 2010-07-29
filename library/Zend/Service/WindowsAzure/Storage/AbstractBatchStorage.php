@@ -51,7 +51,7 @@ abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
      */
     public function setCurrentBatch(Zend_Service_WindowsAzure_Storage_Batch $batch = null)
     {
-        if (!is_null($batch) && $this->isInBatch()) {
+        if ($batch !== null && $this->isInBatch()) {
             throw new Zend_Service_WindowsAzure_Exception('Only one batch can be active at a time.');
         }
         $this->_currentBatch = $batch;
@@ -74,7 +74,7 @@ abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
      */
     public function isInBatch()
     {
-        return !is_null($this->_currentBatch);
+        return $this->_currentBatch !== null;
     }
     
     /**

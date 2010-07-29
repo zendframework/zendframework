@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21819 -->
 <sect1 id="zend.queue.adapters">
     <title>アダプタ</title>
 
@@ -495,7 +495,7 @@ $queue = new Zend_Queue('Db', $options);
                 <listitem>
                     <para>
                         <methodname>getQueues()</methodname> - Zend Platformは、
-                        APIによってスクリプトを取り扱う、タスク生成されたジョブを参照できません。
+                        <acronym>API</acronym> によってスクリプトを取り扱う、タスク生成されたジョブを参照できません。
                         このメソッドは、例外を投げます。
                     </para>
                 </listitem>

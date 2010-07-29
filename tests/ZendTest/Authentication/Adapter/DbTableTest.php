@@ -368,7 +368,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         \Zend\Db\Table\AbstractTable::setDefaultAdapter($this->_db);
 
         // check w/o passing adapter
-        $this->_adapter = new Adapter\DbTable($this->_db);
+        $this->_adapter = new Adapter\DbTable();
         $this->_adapter
              ->setTableName('users')
              ->setIdentityColumn('username')

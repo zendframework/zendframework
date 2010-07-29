@@ -246,12 +246,11 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     public function testFluentInterface()
     {
-        require_once 'Zend/Log/Formatter/Simple.php';
         list(, $writer) = $this->_getSimpleLogger(true);
-        $instance = $writer->setLayoutFormatter(new Zend_Log_Formatter_Simple())
+        $instance = $writer->setLayoutFormatter(new SimpleFormatter())
                            ->setSubjectPrependText('subject');
 
-        $this->assertTrue($instance instanceof Zend_Log_Writer_Mail);
+        $this->assertTrue($instance instanceof MailWriter);
     }
 
     /**

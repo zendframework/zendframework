@@ -194,7 +194,7 @@ class Frame implements StompFrame
      */
     public function getBody()
     {
-        return is_null($this->_body)
+        return $this->_body === null
             ? false
             : $this->_body;
     }
@@ -210,7 +210,7 @@ class Frame implements StompFrame
      */
     public function setBody($body)
     {
-        if (!is_string($body) && !is_null($body)) {
+        if (!is_string($body) && $body !== null) {
             throw new QueueException('$body is not a string or null');
         }
 
@@ -227,7 +227,7 @@ class Frame implements StompFrame
      */
     public function getCommand()
     {
-        return is_null($this->_command)
+        return $this->_command === null
             ? false
             : $this->_command;
     }
@@ -241,7 +241,7 @@ class Frame implements StompFrame
      */
     public function setCommand($command)
     {
-        if (!is_string($command) && !is_null($command)) {
+        if (!is_string($command) && $command !== null) {
             throw new QueueException('$command is not a string or null');
         }
 

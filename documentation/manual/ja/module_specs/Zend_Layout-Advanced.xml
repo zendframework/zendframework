@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22432 -->
 <sect1 id="zend.layout.advanced">
     <title>Zend_Layout の高度な使用法</title>
 
@@ -114,7 +114,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             もし独自のプラグインを作成したい場合は、
             作成したプラグインクラスの名前を
             <methodname>startMvc()</methodname> メソッドの
-            <code>pluginClass</code> オプションで指定します。
+            <property>pluginClass</property> オプションで指定します。
         </para>
 
         <para>
@@ -151,7 +151,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             を継承したアクションヘルパークラスを作成します。
             そして、そのクラス名を
             <methodname>startMvc()</methodname> メソッドの
-            <code>helperClass</code> オプションに指定します。
+            <property>helperClass</property> オプションに指定します。
             実装の詳細は自由に決められます。
         </para>
     </sect2>

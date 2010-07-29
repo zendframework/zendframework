@@ -105,7 +105,7 @@ class Entry extends Extension\AbstractRenderer
     protected function _setBlock(\DOMDocument $dom, \DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
-        if (is_null($block)) {
+        if ($block === null) {
             return;
         }
         $el = $dom->createElement('itunes:block');
@@ -145,7 +145,7 @@ class Entry extends Extension\AbstractRenderer
     protected function _setExplicit(\DOMDocument $dom, \DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
-        if (is_null($explicit)) {
+        if ($explicit === null) {
             return;
         }
         $el = $dom->createElement('itunes:explicit');

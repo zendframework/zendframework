@@ -51,9 +51,9 @@ class Digits extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_DIGITS   => "'%value%' contains characters which are not digits; but only digits are allowed",
+        self::NOT_DIGITS   => "'%value%' must contain only digits",
         self::STRING_EMPTY => "'%value%' is an empty string",
-        self::INVALID      => "Invalid type given, value should be string, integer or float",
+        self::INVALID      => "Invalid type given. String, integer or float expected",
     );
 
     /**
@@ -82,7 +82,7 @@ class Digits extends AbstractValidator
             self::$_filter = new \Zend\Filter\Digits();
         }
 
-        if ($this->_value !== self::$_filter->__invoke($this->_value)) {
+        if ($this->_value !== self::$_filter->filter($this->_value)) {
             $this->_error(self::NOT_DIGITS);
             return false;
         }

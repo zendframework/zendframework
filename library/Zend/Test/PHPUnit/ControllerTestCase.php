@@ -182,7 +182,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
         $redirector->setExit(false);
 
         // json helper should not exit
-        $json = HelperBroker::getStaticHelper('JSON');
+        $json = HelperBroker::getStaticHelper('json');
         $json->suppressExit = true;
 
         $request    = $this->getRequest();

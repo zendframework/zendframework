@@ -47,31 +47,17 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
     protected $_profiler = null;
     protected $_db = null;
 
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Db_Profiler_FirebugTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-  
     public function setUp()
     {
-        $this->markTestSkipped('This suite is skipped until Zend\DB can be refactored.');
+        $this->markTestSkipped('This suite is skipped until Zend\Db can be refactored.');
         
         if (!extension_loaded('pdo_sqlite')) {
-            $this->markTestSkipped('Requires PDO_Sqlite extension');
+            $this->markTestSkipped('Requires PDO Sqlite extension');
         }
 
         date_default_timezone_set('America/Los_Angeles');
 
-        $this->_request = new \Zend_Db_Profiler_FirebugTest_Request();
+        $this->_request  = new \Zend_Db_Profiler_FirebugTest_Request();
         $this->_response = new \Zend_Db_Profiler_FirebugTest_Response();
 
         $channel = Channel\HttpHeaders::getInstance();

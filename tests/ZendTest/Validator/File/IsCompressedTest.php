@@ -66,7 +66,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
                 . ' but mime_content_type exhibits buggy behavior on this system.'
                 );
         }
-        
+
         $valuesExpected = array(
             array(null, true),
             array('zip', true),
@@ -181,14 +181,18 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionsAtConstructor()
     {
-        $this->markTestSkipped('magicFile current throws error if not validate, test needs to be rewritten');
+        if (!extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
+        $magicFile = dirname(__FILE__) . '/_files/magic.mime';
         $validator = new File\IsCompressed(array(
             'image/gif',
             'image/jpg',
-            'magicfile' => __FILE__,
+            'magicfile'   => $magicFile,
             'headerCheck' => true));
 
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
+        $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }

@@ -201,7 +201,7 @@ class Basic implements Metadata, Attributable
                     $varValue = '(object)';
                 }
 
-                if (is_null($varValue)) {
+                if ($varValue === null) {
                     $varValue = '(null)';
                 }
 

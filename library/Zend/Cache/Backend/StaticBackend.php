@@ -164,7 +164,7 @@ class StaticBackend extends AbstractBackend implements Backend
         if (empty($fileName)) {
             $fileName = $this->_options['index_filename'];
         }
-        if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+        if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
             $this->_tagged = $tagged;
         } elseif (!$this->_tagged) {
             return false;
@@ -209,7 +209,7 @@ class StaticBackend extends AbstractBackend implements Backend
         }
 
         clearstatcache();
-        if (is_null($id) || strlen($id) == 0) {
+        if ($id === null || strlen($id) == 0) {
             $id = $this->_detectId();
         } else {
             $id = $this->_decodeId($id);
@@ -223,7 +223,7 @@ class StaticBackend extends AbstractBackend implements Backend
         $pathName = realpath($this->_options['public_dir']) . dirname($id);
         $this->_createDirectoriesFor($pathName);
 
-        if (is_null($id) || strlen($id) == 0) {
+        if ($id === null || strlen($id) == 0) {
             $dataUnserialized = unserialize($data);
             $data = $dataUnserialized['data'];
         }
@@ -237,9 +237,9 @@ class StaticBackend extends AbstractBackend implements Backend
         }
         @chmod($file, $this->_octdec($this->_options['cache_file_umask']));
 
-        if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+        if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
             $this->_tagged = $tagged;
-        } elseif (is_null($this->_tagged)) {
+        } elseif ($this->_tagged === null) {
             $this->_tagged = array();
         }
         if (!isset($this->_tagged[$id])) {
@@ -303,7 +303,7 @@ class StaticBackend extends AbstractBackend implements Backend
             Cache\Cache::throwException('Invalid cache id: does not match expected public_dir path');
         }
         $fileName = basename($id);
-        if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+        if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
             $this->_tagged = $tagged;
         } elseif (!$this->_tagged) {
             return false;
@@ -392,7 +392,7 @@ class StaticBackend extends AbstractBackend implements Backend
                 if (empty($tags)) {
                     throw new end\Exception('Cannot use tag matching modes as no tags were defined');
                 }
-                if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+                if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
                     $this->_tagged = $tagged;
                 } elseif (!$this->_tagged) {
                     return true;
@@ -410,11 +410,11 @@ class StaticBackend extends AbstractBackend implements Backend
                 $result = true;
                 break;
             case Cache\Cache::CLEANING_MODE_ALL:
-                if (is_null($this->_tagged)) {
+                if ($this->_tagged === null) {
                     $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME);
                     $this->_tagged = $tagged;
                 }
-                if (is_null($this->_tagged) || empty($this->_tagged)) {
+                if ($this->_tagged === null || empty($this->_tagged)) {
                     return true;
                 }
                 $urls = array_keys($this->_tagged);
@@ -430,13 +430,13 @@ class StaticBackend extends AbstractBackend implements Backend
                 break;
             case Cache\Cache::CLEANING_MODE_NOT_MATCHING_TAG:
                 if (empty($tags)) {
-                    throw new end\Exception('Cannot use tag matching modes as no tags were defined');
+                    throw new \Zend\Exception('Cannot use tag matching modes as no tags were defined');
                 }
-                if (is_null($this->_tagged)) {
+                if ($this->_tagged === null) {
                     $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME);
                     $this->_tagged = $tagged;
                 }
-                if (is_null($this->_tagged) || empty($this->_tagged)) {
+                if ($this->_tagged === null || empty($this->_tagged)) {
                     return true;
                 }
                 $urls = array_keys($this->_tagged);
@@ -479,7 +479,7 @@ class StaticBackend extends AbstractBackend implements Backend
      */
     public function getInnerCache()
     {
-        if (is_null($this->_tagCache)) {
+        if ($this->_tagCache === null) {
             Cache\Cache::throwException('An Inner Cache has not been set; use setInnerCache()');
         }
         return $this->_tagCache;

@@ -48,19 +48,16 @@ class AuthorizedRequest extends AbstractToken
      * @param  null|Zend\OAuth\Http\Utility $utility
      * @return void
      */
-    public function __construct($data = null, Http\Utility $utility = null)
+    public function __construct(array $data = null, Http\Utility $utility = null)
     {
-        if (!is_null($data) && !is_array($data)) {
-            throw new OAuthException('Invalid response provided');
-        }
-        if (!is_null($data)) {
+        if ($data !== null) {
             $this->_data = $data;
             $params = $this->_parseData();
             if (count($params) > 0) {
                 $this->setParams($params);
             }
         }
-        if (!is_null($utility)) {
+        if ($utility !== null) {
             $this->_httpUtility = $utility;
         } else {
             $this->_httpUtility = new Http\Utility;

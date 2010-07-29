@@ -132,7 +132,7 @@ class Deleted
     public function setWhen($date = null)
     {
         $zdate = null;
-        if (is_null($date)) {
+        if ($date === null) {
             $zdate = new Date\Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);

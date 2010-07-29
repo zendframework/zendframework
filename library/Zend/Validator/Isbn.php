@@ -46,7 +46,7 @@ class Isbn extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID => "Invalid type given, value should be string or integer",
+        self::INVALID => "Invalid type given. String or integer expected",
         self::NO_ISBN => "'%value%' is no valid ISBN number",
     );
 
@@ -145,7 +145,7 @@ class Isbn extends AbstractValidator
     /**
      * Defined by Zend_Validate_Interface.
      *
-     * Returns true if and only if $value contains a valid ISBN.
+     * Returns true if and only if $value is a valid ISBN.
      *
      * @param  string $value
      * @return boolean

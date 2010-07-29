@@ -98,20 +98,20 @@ class Reader
 
     protected static $_extensions = array(
         'feed' => array(
-            'DublinCore\\Feed',
-            'Atom\\Feed'
+            'DublinCore\Feed',
+            'Atom\Feed'
         ),
         'entry' => array(
-            'Content\\Entry',
-            'DublinCore\\Entry',
-            'Atom\\Entry'
+            'Content\Entry',
+            'DublinCore\Entry',
+            'Atom\Entry'
         ),
         'core' => array(
-            'DublinCore\\Feed',
-            'Atom\\Feed',
-            'Content\\Entry',
-            'DublinCore\\Entry',
-            'Atom\\Entry'
+            'DublinCore\Feed',
+            'Atom\Feed',
+            'Content\Entry',
+            'DublinCore\Entry',
+            'Atom\Entry'
         )
     );
 
@@ -226,10 +226,10 @@ class Reader
         if (self::$_httpConditionalGet && $cache) {
             $data = $cache->load($cacheId);
             if ($data) {
-                if (is_null($etag)) {
+                if ($etag === null) {
                     $etag = $cache->load($cacheId.'_etag');
                 }
-                if (is_null($lastModified)) {
+                if ($lastModified === null) {
                     $lastModified = $cache->load($cacheId.'_lastmodified');;
                 }
                 if ($etag) {
@@ -352,11 +352,12 @@ class Reader
         $status = $dom->loadHTML($responseHtml);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
+            // Build error message
             $error = libxml_get_last_error();
             if ($error && $error->message) {
-                $errormsg = "\DOMDocument cannot parse HTML: {$error->message}";
+                $errormsg = "DOMDocument cannot parse HTML: {$error->message}";
             } else {
-                $errormsg = "\DOMDocument cannot parse HTML: Please check the XML document's validity";
+                $errormsg = "DOMDocument cannot parse HTML: Please check the XML document's validity";
             }
             throw new Exception($errormsg);
         }
@@ -391,11 +392,11 @@ class Reader
                         $php_errormsg = '(error message not available)';
                     }
                 }
-                throw new Exception("\DOMDocument cannot parse XML: $php_errormsg");
+                throw new Exception("DOMDocument cannot parse XML: $php_errormsg");
             }
         } else {
             throw new Exception('Invalid object/scalar provided: must'
-            . ' be of type \Zend\Feed\Reader\Feed, \DomDocument or string');
+            . ' be of type Zend\Feed\Reader\Feed, DomDocument or string');
         }
         $xpath = new \DOMXPath($dom);
 
@@ -496,9 +497,9 @@ class Reader
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            self::$_pluginLoader = new Loader\PluginLoader(array(
+            self::setPluginLoader(new Loader\PluginLoader(array(
                 'Zend\\Feed\\Reader\\Extension\\' => 'Zend/Feed/Reader/Extension/',
-            ));
+            )));
         }
         return self::$_pluginLoader;
     }
@@ -551,7 +552,7 @@ class Reader
      */
     public static function registerExtension($name)
     {
-        $feedName = $name . '\Feed';
+        $feedName  = $name . '\Feed';
         $entryName = $name . '\Entry';
         if (self::isRegistered($name)) {
             if (self::getPluginLoader()->isLoaded($feedName) ||
@@ -585,8 +586,8 @@ class Reader
      */
     public static function isRegistered($extensionName)
     {
-        $feedName  = $extensionName . '\\Feed';
-        $entryName = $extensionName . '\\Entry';
+        $feedName  = $extensionName . '\Feed';
+        $entryName = $extensionName . '\Entry';
         if (in_array($feedName, self::$_extensions['feed'])
             || in_array($entryName, self::$_extensions['entry'])
         ) {
@@ -620,20 +621,20 @@ class Reader
         self::$_prefixPaths        = array();
         self::$_extensions         = array(
             'feed' => array(
-                'DublinCore\\Feed',
-                'Atom\\Feed'
+                'DublinCore\Feed',
+                'Atom\Feed'
             ),
             'entry' => array(
-                'Content\\Entry',
-                'DublinCore\\Entry',
-                'Atom\\Entry'
+                'Content\Entry',
+                'DublinCore\Entry',
+                'Atom\Entry'
             ),
             'core' => array(
-                'DublinCore\\Feed',
-                'Atom\\Feed',
-                'Content\\Entry',
-                'DublinCore\\Entry',
-                'Atom\\Entry'
+                'DublinCore\Feed',
+                'Atom\Feed',
+                'Content\Entry',
+                'DublinCore\Entry',
+                'Atom\Entry'
             )
         );
     }

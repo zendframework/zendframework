@@ -44,7 +44,7 @@ class Int extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID => "Invalid type given, value should be string or integer",
+        self::INVALID => "Invalid type given. String or integer expected",
         self::NOT_INT => "'%value%' does not appear to be an integer",
     );
 
@@ -57,7 +57,7 @@ class Int extends AbstractValidator
      */
     public function __construct($locale = null)
     {
-        if ($locale instanceof end\Config\Config) {
+        if ($locale instanceof \Zend\Config\Config) {
             $locale = $locale->toArray();
         }
 

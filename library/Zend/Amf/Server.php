@@ -624,7 +624,7 @@ class Server implements \Zend\Server\Server
     public function handle($request = null)
     {
         // Check if request was passed otherwise get it from the server
-        if (is_null($request) || !$request instanceof Request\StreamRequest) {
+        if ($request === null || !$request instanceof Request\StreamRequest) {
             $request = $this->getRequest();
         } else {
             $this->setRequest($request);

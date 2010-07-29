@@ -73,7 +73,7 @@
             String, einer Datei, <acronym>URI</acronym> oder einer Instanz des Typs
             <classname>Zend_Feed_Abstract</classname> importiert werden. Das importieren von einer
             <acronym>URI</acronym> kann zusätzlich eine konditionelle <acronym>HTTP</acronym>
-            <acroym>GET</acronym> Anfrage benützen. Wenn das importieren fehlschlägt, wird eine
+            <acronym>GET</acronym> Anfrage benützen. Wenn das importieren fehlschlägt, wird eine
             Exception geworfen. Das Endergebnis wird ein Objekt des Typs
             <classname>Zend_Feed_Reader_FeedInterface</classname> sein, die Core Implementation
             von <classname>Zend_Feed_Reader_Feed_Rss</classname> und

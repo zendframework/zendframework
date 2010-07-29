@@ -91,7 +91,7 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\ImageSize(array('minwidth' => 0, 'minheight' => 10, 'maxwidth' => 1000, 'maxheight' => 2000));
         $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.jpg'));
         $failures = $validator->getMessages();
-        $this->assertContains('can not be read', $failures['fileImageSizeNotReadable']);
+        $this->assertContains('is not readable', $failures['fileImageSizeNotReadable']);
 
         $file['name'] = 'TestName';
         $validator = new File\ImageSize(array('minwidth' => 0, 'minheight' => 10, 'maxwidth' => 1000, 'maxheight' => 2000));

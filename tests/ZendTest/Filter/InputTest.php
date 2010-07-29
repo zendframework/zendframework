@@ -192,7 +192,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertType('array', $messages['month']);
-        $this->assertEquals("'6abc ' contains characters which are not digits; but only digits are allowed", current($messages['month']));
+        $this->assertEquals("'6abc ' must contain only digits", current($messages['month']));
 
         $errors = $input->getErrors();
         $this->assertType('array', $errors);
@@ -279,7 +279,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('field2', 'field3'), array_keys($messages));
         $this->assertType('array', $messages['field2']);
         $this->assertType('array', $messages['field3']);
-        $this->assertEquals("'abc123' contains characters which are not digits; but only digits are allowed",
+        $this->assertEquals("'abc123' must contain only digits",
             current($messages['field2']));
         $this->assertEquals("'150' is not between '1' and '100', inclusively",
             current($messages['field3']));
@@ -312,7 +312,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('field2a', 'field2b'), array_keys($messages));
         $this->assertType('array', $messages['field2a']);
         $this->assertType('array', $messages['field2b']);
-        $this->assertEquals("'abc123' contains characters which are not digits; but only digits are allowed",
+        $this->assertEquals("'abc123' must contain only digits",
             current($messages['field2a']));
         $this->assertEquals("'abc123' is not between '1' and '100', inclusively",
             current($messages['field2b']));
@@ -880,7 +880,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(2, count($messages['month']));
-        $this->assertEquals("'13abc' contains characters which are not digits; but only digits are allowed", current($messages['month']));
+        $this->assertEquals("'13abc' must contain only digits", current($messages['month']));
         /**
          * @todo $this->assertEquals($betweenMesg, next($messages['month']));
          */
@@ -1182,7 +1182,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $messages = $input->getMessages();
         $this->assertType('array', $messages);
         $this->assertThat($messages, $this->arrayHasKey('field1'));
-        $this->assertEquals("'abc' contains characters which are not digits; but only digits are allowed", current($messages['field1']));
+        $this->assertEquals("'abc' must contain only digits", current($messages['field1']));
     }
 
     public function testGetPluginLoader()
@@ -1190,10 +1190,10 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $input = new InputFilter(null, null);
 
         $loader = $input->getPluginLoader(InputFilter::VALIDATOR);
-        $this->assertType('\\Zend\\Loader\\PluginLoader', $loader,
-            'Expected object of type Zend\\Loader\\PluginLoader, got ' , get_class($loader));
+        $this->assertType('Zend\Loader\PluginLoader', $loader,
+            'Expected object of type Zend\Loader\PluginLoader, got ' , get_class($loader));
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
         $loader = $input->getPluginLoader('foo');
     }
 
@@ -1212,7 +1212,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         $loader = new PluginLoader();
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
         $input->setPluginLoader($loader, 'foo');
     }
 
@@ -1227,7 +1227,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         // Do not add namespace on purpose, so MyDigits will not be found
         $input = new InputFilter(null, $validators, $data);
 
-        $this->setExpectedException('\\Zend\\Loader\\Exception', 'not found');
+        $this->setExpectedException('Zend\Loader\Exception', 'not found');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1243,7 +1243,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         $input = new InputFilter(null, $validators, $data);
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'must implement');
+        $this->setExpectedException('Zend\Filter\Exception', 'must implement');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1267,7 +1267,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
     {
         $input = new InputFilter(null, null);
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'does not implement');
+        $this->setExpectedException('Zend\Filter\Exception', 'does not implement');
         $input->setDefaultEscapeFilter(new \StdClass());
     }
 
@@ -1374,7 +1374,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $messages = $input->getMessages();
         $this->assertType('array', $messages);
         $this->assertThat($messages, $this->arrayHasKey('field1'));
-        $this->assertEquals("'abc' contains characters which are not digits; but only digits are allowed", current($messages['field1']));
+        $this->assertEquals("'abc' must contain only digits", current($messages['field1']));
     }
 
     public function testOptionPresence()
@@ -1409,7 +1409,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             'unknown' => 'xxx'
         );
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown option');
+        $this->setExpectedException('Zend\Filter\Exception', 'Unknown option');
         $input = new InputFilter(null, null, null, $options);
     }
 
@@ -1675,7 +1675,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         );
         $filter = new InputFilter($filters, $validators, $data, $options);
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'must implement');
+        $this->setExpectedException('Zend\Filter\Exception', 'must implement');
         $filter->process();
     }
 
@@ -1695,8 +1695,8 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             'date1' => '1990-01-01'
         );
         $options = array(
-            'filterNamespace' => array('\\ZendTest\\Filter\\TestClasses\\Filter'),
-            'validatorNamespace' => array('\\ZendTest\\Filter\\TestClasses\\Validator'),
+            'filterNamespace' => array('ZendTest\Filter\TestClasses\Filter'),
+            'validatorNamespace' => array('ZendTest\Filter\TestClasses\Validator'),
         );
         $filter = new InputFilter($filters, $validators, $data, $options);
 
@@ -1705,8 +1705,8 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         // String notation
         $options = array(
-            'filterNamespace' => '\\ZendTest\\Filter\\TestClasses\\Filter',
-            'validatorNamespace' => '\\ZendTest\\Filter\\TestClasses\\Validate',
+            'filterNamespace' => 'ZendTest\Filter\TestClasses\Filter',
+            'validatorNamespace' => 'ZendTest\Filter\TestClasses\Validate',
         );
         $filter = new InputFilter($filters, $validators, $data, $options);
 
@@ -1811,7 +1811,10 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function testTranslateNotEmptyMessages()
     {
-        $translator = new Translator\Adapter\ArrayAdapter(array('missingMessage' => 'Still missing'));
+        $translator = new Translator\Adapter\ArrayAdapter(array(
+            'locale' => 'en_US',
+            'content' => array('missingMessage' => 'Still missing'),
+        ));
 
         $validators = array(
             'rule1'   => array('presence' => 'required',
@@ -1835,7 +1838,10 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function testTranslateNotEmptyMessagesByUsingRegistry()
     {
-        $translator = new Translator\Adapter\ArrayAdapter(array('missingMessage' => 'Still missing'));
+        $translator = new Translator\Adapter\ArrayAdapter(array(
+            'locale'  => 'en_US',
+            'content' => array('missingMessage' => 'Still missing'),
+        ));
         \Zend\Registry::set('Zend_Translate', $translator);
 
         $validators = array(

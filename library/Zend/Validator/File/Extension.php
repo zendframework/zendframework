@@ -47,7 +47,7 @@ class Extension extends \Zend\Validator\AbstractValidator
      */
     protected $_messageTemplates = array(
         self::FALSE_EXTENSION => "File '%value%' has a false extension",
-        self::NOT_FOUND       => "File '%value%' could not be found",
+        self::NOT_FOUND       => "File '%value%' is not readable or does not exist",
     );
 
     /**

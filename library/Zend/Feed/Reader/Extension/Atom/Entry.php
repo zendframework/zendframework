@@ -13,37 +13,38 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ * @package    Reader\Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Entry.php 22300 2010-05-26 10:13:34Z padraic $
  */
 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Reader\Extension\Atom;
 use Zend\Feed\Reader;
 use Zend\Date;
 use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
 use Zend\URI;
 
 /**
- * @uses       DOMDocument
- * @uses       stdClass
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Feed\Reader\Feed\Atom\Source
- * @uses       \Zend\Feed\Reader\Collection\Author
- * @uses       \Zend\Feed\Reader\Collection\Category
- * @uses       \Zend\Feed\Reader\Extension\AbstractEntry
- * @uses       \Zend\Uri\Uri
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Entry extends Reader\Extension\AbstractEntry
+* @uses DOMDocument
+* @uses stdClass
+* @uses \Zend\Date\Date
+* @uses \Zend\Feed\Reader\Reader
+* @uses \Zend\Feed\Reader\Feed\Atom\Source
+* @uses \Zend\Feed\Reader\Collection\Author
+* @uses \Zend\Feed\Reader\Collection\Category
+* @uses \Zend\Feed\Reader\Extension\EntryAbstract
+* @uses \Zend\Uri\Uri
+* @category Zend
+* @package Reader\Reader
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Entry extends Extension\AbstractEntry
 {
     /**
      * Get the specified author
@@ -134,7 +135,6 @@ class Entry extends Reader\Extension\AbstractEntry
                     $xhtml = $this->getXpath()->query(
                         $this->getXpathPrefix() . '/atom:content/xhtml:div'
                     )->item(0);
-                    //$xhtml->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
                     $d = new \DOMDocument('1.0', $this->getEncoding());
                     $xhtmls = $d->importNode($xhtml, true);
                     $d->appendChild($xhtmls);
@@ -145,8 +145,6 @@ class Entry extends Reader\Extension\AbstractEntry
                 break;
             }
         }
-        
-        //var_dump($content); exit;
 
         if (!$content) {
             $content = $this->getDescription();
@@ -501,7 +499,7 @@ class Entry extends Reader\Extension\AbstractEntry
     /**
      * Get all categories
      *
-     * @return \Zend\Feed\Reader\Collection\Category
+     * @return Reader\Reader_Collection_Category
      */
     public function getCategories()
     {
@@ -515,7 +513,7 @@ class Entry extends Reader\Extension\AbstractEntry
             /**
              * Since Atom 0.3 did not support categories, it would have used the
              * Dublin Core extension. However there is a small possibility Atom 0.3
-             * may have been retrofittied to use Atom 1.0 instead.
+             * may have been retrofitted to use Atom 1.0 instead.
              */
             $this->getXpath()->registerNamespace('atom10', Reader\Reader::NAMESPACE_ATOM_10);
             $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom10:category');
@@ -542,7 +540,7 @@ class Entry extends Reader\Extension\AbstractEntry
     /**
      * Get source feed metadata from the entry
      *
-     * @return \Zend\Feed\Reader\Feed\Atom\Source|null
+     * @return Reader\Reader_Feed_Atom_Source|null
      */
     public function getSource()
     {
@@ -570,10 +568,10 @@ class Entry extends Reader\Extension\AbstractEntry
      */
     protected function _absolutiseUri($link)
     {
-        if (!\Zend\URI\URL::validate($link)) {
+        if (!\Zend\Uri\Url::validate($link)) {
             if (!is_null($this->getBaseUrl())) {
                 $link = $this->getBaseUrl() . $link;
-                if (!\Zend\URI\URL::validate($link)) {
+                if (!\Zend\Uri\Url::validate($link)) {
                     $link = null;
                 }
             }

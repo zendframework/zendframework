@@ -49,9 +49,9 @@ abstract class AbstractCallback implements Callback
     /**
      * An instance of a class handling Http Responses. This is implemented in
      * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
-     * (i.e. not inherited from) Zend\Controller\Response\HTTP.
+     * (i.e. not inherited from) Zend\Controller\Response\Http.
      *
-     * @var Zend_Feed_Pubsubhubbub_HttpResponse|\Zend\Controller\Response\HTTP
+     * @var Zend_Feed_Pubsubhubbub_HttpResponse|\Zend\Controller\Response\Http
      */
     protected $_httpResponse = null;
 
@@ -142,20 +142,20 @@ abstract class AbstractCallback implements Callback
     /**
      * An instance of a class handling Http Responses. This is implemented in
      * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
-     * (i.e. not inherited from) Zend\Controller\Response\HTTP.
+     * (i.e. not inherited from) Zend\Controller\Response\Http.
      *
-     * @param  Zend\Feed\Pubsubhubbub\HttpResponse|\Zend\Controller\Response\HTTP $httpResponse
+     * @param  Zend\Feed\Pubsubhubbub\HttpResponse|\Zend\Controller\Response\Http $httpResponse
      * @return \Zend\Feed\PubSubHubbub\AbstractCallback
      */
     public function setHttpResponse($httpResponse)
     {
         if (!is_object($httpResponse)
             || (!$httpResponse instanceof HttpResponse
-                && !$httpResponse instanceof \Zend\Controller\Response\HTTP)
+                && !$httpResponse instanceof \Zend\Controller\Response\Http)
         ) {
             throw new Exception('HTTP Response object must'
                 . ' implement one of Zend\Feed\Pubsubhubbub\HttpResponse or'
-                . ' Zend\Controller\Response\HTTP');
+                . ' Zend\Controller\Response\Http');
         }
         $this->_httpResponse = $httpResponse;
         return $this;
@@ -164,9 +164,9 @@ abstract class AbstractCallback implements Callback
     /**
      * An instance of a class handling Http Responses. This is implemented in
      * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
-     * (i.e. not inherited from) Zend\Controller\Response\HTTP.
+     * (i.e. not inherited from) Zend\Controller\Response\Http.
      *
-     * @return Zend\Feed\Pubsubhubbub\HttpResponse|\Zend\Controller\Response\HTTP
+     * @return Zend\Feed\Pubsubhubbub\HttpResponse|\Zend\Controller\Response\Http
      */
     public function getHttpResponse()
     {

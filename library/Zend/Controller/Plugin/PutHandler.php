@@ -29,7 +29,7 @@ namespace Zend\Controller\Plugin;
  * Plugin to digest PUT request body and make params available just like POST
  *
  * @uses       \Zend\Controller\Plugin\AbstractPlugin
- * @uses       \Zend\Controller\Request\HTTP
+ * @uses       \Zend\Controller\Request\Http
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Plugin
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -44,7 +44,7 @@ class PutHandler extends AbstractPlugin
      */
     public function preDispatch(\Zend\Controller\Request\AbstractRequest $request)
     {
-        if (!$request instanceof \Zend\Controller\Request\HTTP) {
+        if (!$request instanceof \Zend\Controller\Request\Http) {
             return;
         }
 

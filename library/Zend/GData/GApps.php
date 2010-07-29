@@ -103,7 +103,7 @@ class GApps extends GData
     /**
      * Create Gdata_GApps object
      *
-     * @param \Zend\HTTP\Client $client (optional) The HTTP client to use when
+     * @param \Zend\Http\Client $client (optional) The HTTP client to use when
      *          when communicating with the Google Apps servers.
      * @param string $domain (optional) The Google Apps domain which is to be
      *          accessed.
@@ -159,7 +159,7 @@ class GApps extends GData
      * providing support for Zend_Gdata_GApps_ServiceException.
      *
      * @param  string $uri
-     * @param  \Zend\HTTP\Client $client (optional) The client used for
+     * @param  \Zend\Http\Client $client (optional) The client used for
      *          communication
      * @param  string $className (optional) The class which is used as the
      *          return type
@@ -187,7 +187,7 @@ class GApps extends GData
      *        array of string-based key/value pairs.
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\GApps\ServiceException
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      */
     public function get($uri, $extraHeaders = array())
     {
@@ -208,7 +208,7 @@ class GApps extends GData
      * @param integer $remainingRedirects (optional)
      * @param string $contentType Content-type of the data
      * @param array $extraHaders Extra headers to add tot he request
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException
      * @throws \Zend\GData\GApps\ServiceException
@@ -233,7 +233,7 @@ class GApps extends GData
      * @param integer $remainingRedirects (optional)
      * @param string $contentType Content-type of the data
      * @param array $extraHaders Extra headers to add tot he request
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      * @throws \Zend\GData\App\HttpException
      * @throws \Zend\GData\App\InvalidArgumentException
      * @throws \Zend\GData\GApps\ServiceException

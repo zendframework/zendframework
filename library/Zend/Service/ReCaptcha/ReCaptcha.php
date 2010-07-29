@@ -29,8 +29,8 @@ use Zend\Config\Config;
 /**
  * Zend_Service_ReCaptcha
  *
- * @uses       \Zend\HTTP\Client
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Http\Client
+ * @uses       \Zend\Json\Json
  * @uses       Zend\Service\AbstractService
  * @uses       \Zend\Service\ReCaptcha\Exception
  * @uses       \Zend\Service\ReCaptcha\Response
@@ -402,7 +402,7 @@ class ReCaptcha extends \Zend\Service\AbstractService
         $reCaptchaOptions = '';
 
         if (!empty($this->_options)) {
-            $encoded = \Zend\JSON\JSON::encode($this->_options);
+            $encoded = \Zend\Json\Json::encode($this->_options);
             $reCaptchaOptions = <<<SCRIPT
 <script type="text/javascript">
     var RecaptchaOptions = {$encoded};
@@ -435,7 +435,7 @@ HTML;
      *
      * @param string $challengeField
      * @param string $responseField
-     * @return \Zend\HTTP\Response
+     * @return \Zend\Http\Response
      * @throws \Zend\Service\ReCaptcha\Exception
      */
     protected function _post($challengeField, $responseField)
@@ -457,7 +457,7 @@ HTML;
         }
 
         /* Fetch an instance of the http client */
-        $httpClient = $this->getHTTPClient();
+        $httpClient = $this->getHttpClient();
 
         $postParams = array('privatekey' => $this->_privateKey,
                             'remoteip'   => $this->_ip,
@@ -467,7 +467,7 @@ HTML;
         /* Make the POST and return the response */
         return $httpClient->setUri(self::VERIFY_SERVER)
                           ->setParameterPost($postParams)
-                          ->request(\Zend\HTTP\Client::POST);
+                          ->request(\Zend\Http\Client::POST);
     }
 
     /**

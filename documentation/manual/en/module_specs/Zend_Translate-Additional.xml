@@ -240,6 +240,19 @@ $translate->addTranslation(
                     </row>
 
                     <row>
+                        <entry>tag</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets an individual tag which is used for the attached cache. Using this
+                            option allows to use and clear the cache for single instances. When this
+                            option is not set, the attached cache is used for all instances combined
+                        </entry>
+
+                        <entry><emphasis><classname>Zend_Translate</classname></emphasis></entry>
+                    </row>
+
+                    <row>
                         <entry>delimiter</entry>
                         <entry>Csv</entry>
 

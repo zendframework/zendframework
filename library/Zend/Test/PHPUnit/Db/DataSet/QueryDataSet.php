@@ -24,14 +24,14 @@
  * @namespace
  */
 namespace Zend\Test\PHPUnit\Db\DataSet;
-use Zend\DB\Select;
+use Zend\Db\Select;
 
 /**
  * Uses several query strings or Zend_Db_Select objects to form a dataset of tables for assertion with other datasets.
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryDataSet
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
- * @uses       \Zend\DB\Select
+ * @uses       \Zend\Db\Select
  * @uses       \Zend\Test\PHPUnit\Db\DataSet\QueryTable
  * @uses       \Zend\Test\PHPUnit\Db\Exception
  * @category   Zend
@@ -61,7 +61,7 @@ class QueryDataSet extends \PHPUnit_Extensions_Database_DataSet_QueryDataSet
      * By default a select * will be done on the given tablename.
      *
      * @param string                $tableName
-     * @param string|\Zend\DB\Select $query
+     * @param string|\Zend\Db\Select $query
      */
     public function addTable($tableName, $query = \NULL)
     {

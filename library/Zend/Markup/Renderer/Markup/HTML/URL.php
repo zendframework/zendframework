@@ -62,7 +62,7 @@ class URL extends AbstractHTML
         }
 
         // check if the URL is valid
-        // TODO: use the new Zend\URI for this
+        // TODO: use the new Zend\Uri for this
         if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
             return $text;
         }

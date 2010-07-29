@@ -69,10 +69,10 @@ abstract class FeedSourceParent extends FeedEntryParent
      *
      * @deprecated Deprecated as of Zend Framework 1.7. Use
      *             setService() instead.
-     * @param  \Zend\HTTP\Client $httpClient
+     * @param  \Zend\Http\Client $httpClient
      * @return \Zend\GData\App\FeedSourceParent Provides a fluent interface
      */
-    public function setHttpClient(\Zend\HTTP\Client $httpClient)
+    public function setHttpClient(\Zend\Http\Client $httpClient)
     {
         parent::setHttpClient($httpClient);
         foreach ($this->_entry as $entry) {

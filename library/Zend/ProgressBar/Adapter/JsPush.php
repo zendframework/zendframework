@@ -22,13 +22,13 @@
  */
 namespace Zend\ProgressBar\Adapter;
 
-use Zend\JSON\JSON;
+use Zend\Json\Json;
 
 /**
  * Zend_ProgressBar_Adapter_JsPush offers a simple method for updating a
  * progressbar in a browser.
  *
- * @uses      \Zend\JSON\JSON
+ * @uses      \Zend\Json\Json
  * @uses      \Zend\ProgressBar\Adapter\Adapter
  * @category  Zend
  * @package   Zend_ProgressBar
@@ -101,7 +101,7 @@ class JsPush extends AbstractAdapter
         );
 
         $data = '<script type="text/javascript">'
-              . 'parent.' . $this->_updateMethodName . '(' . JSON::encode($arguments) . ');'
+              . 'parent.' . $this->_updateMethodName . '(' . Json::encode($arguments) . ');'
               . '</script>';
 
         // Output the data

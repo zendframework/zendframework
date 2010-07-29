@@ -29,7 +29,7 @@ use Zend\Dojo\View\Exception as DojoViewException,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Config\Config,
     Zend\View\ViewEngine as View,
-    Zend\JSON\JSON;
+    Zend\Json\Json;
 
 /**
  * Container for  Dojo View Helper
@@ -37,7 +37,7 @@ use Zend\Dojo\View\Exception as DojoViewException,
  * @uses       \Zend\Dojo\Dojo
  * @uses       \Zend\Dojo\View\Exception
  * @uses       \Zend\Dojo\View\Helper\Dojo
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -850,7 +850,7 @@ class Container
      */
     public function dijitsToJson()
     {
-        return JSON::encode($this->getDijits());
+        return Json::encode($this->getDijits());
     }
 
     /**
@@ -1056,7 +1056,7 @@ EOJ;
 
         $scriptTag = '<script type="text/javascript">' . PHP_EOL
                    . (($this->_isXhtml) ? '//<![CDATA[' : '//<!--') . PHP_EOL
-                   . '    var djConfig = ' . JSON::encode($djConfigValues) . ';' . PHP_EOL
+                   . '    var djConfig = ' . Json::encode($djConfigValues) . ';' . PHP_EOL
                    . (($this->_isXhtml) ? '//]]>' : '//-->') . PHP_EOL
                    . '</script>';
 

@@ -27,6 +27,7 @@ namespace Zend\Tag;
 
 use Zend\Config,
     Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Loader\PluginLoader;
 
 /**
@@ -65,7 +66,7 @@ class Cloud
     /**
      * Plugin loader for decorators
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\ShortNameLocater
      */
     protected $_pluginLoader = null;
 
@@ -309,10 +310,10 @@ class Cloud
     /**
      * Set plugin loaders for use with decorators
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      * @return \Zend\Tag\Cloud
      */
-    public function setPluginLoader(PrefixPathMapper $loader)
+    public function setPluginLoader(ShortNameLocater $loader)
     {
         $this->_pluginLoader = $loader;
         return $this;
@@ -321,7 +322,7 @@ class Cloud
     /**
      * Get the plugin loader for decorators
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\ShortNameLocater
      */
     public function getPluginLoader()
     {

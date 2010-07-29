@@ -38,7 +38,7 @@ $client->setConfig(array(
     'timeout'      => 30));
 
 // You can also use a Zend_Config object to set the client's configuration
-$config = new Zend_Config_Ini('httpclient.ini, 'secure');
+$config = new Zend_Config_Ini('httpclient.ini', 'secure');
 $client->setConfig($config);
 ]]></programlisting>
             </example>

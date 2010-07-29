@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon;
+
+/**
  * @uses       DOMXPath
  * @uses       Zend_Service_Amazon_Accessories
  * @uses       Zend_Service_Amazon_CustomerReview
@@ -35,7 +40,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Item
+class Item
 {
     /**
      * @var string
@@ -124,6 +129,7 @@ class Zend_Service_Amazon_Item
      * 
      * @group ZF-9547
      */
+<<<<<<< HEAD
     public function __construct($dom)
     {
     	if (null === $dom) {
@@ -135,6 +141,11 @@ class Zend_Service_Amazon_Item
     		throw new Zend_Service_Amazon_Exception('Item is not a valid DOM element');
     	}
         $xpath = new DOMXPath($dom->ownerDocument);
+=======
+    public function __construct(\DOMElement $dom)
+    {
+        $xpath = new \DOMXPath($dom->ownerDocument);
+>>>>>>> merges/farazdagi
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
         $this->ASIN = $xpath->query('./az:ASIN/text()', $dom)->item(0)->data;
 
@@ -167,7 +178,7 @@ class Zend_Service_Amazon_Item
         foreach (array('SmallImage', 'MediumImage', 'LargeImage') as $im) {
             $result = $xpath->query("./az:ImageSets/az:ImageSet[position() = 1]/az:$im", $dom);
             if ($result->length == 1) {
-                $this->$im = new Zend_Service_Amazon_Image($result->item(0));
+                $this->$im = new Image($result->item(0));
             }
         }
 
@@ -179,7 +190,7 @@ class Zend_Service_Amazon_Item
         $result = $xpath->query('./az:CustomerReviews/az:Review', $dom);
         if ($result->length >= 1) {
             foreach ($result as $review) {
-                $this->CustomerReviews[] = new Zend_Service_Amazon_CustomerReview($review);
+                $this->CustomerReviews[] = new CustomerReview($review);
             }
             $this->AverageRating = (float) $xpath->query('./az:CustomerReviews/az:AverageRating/text()', $dom)->item(0)->data;
             $this->TotalReviews = (int) $xpath->query('./az:CustomerReviews/az:TotalReviews/text()', $dom)->item(0)->data;
@@ -188,21 +199,21 @@ class Zend_Service_Amazon_Item
         $result = $xpath->query('./az:EditorialReviews/az:*', $dom);
         if ($result->length >= 1) {
             foreach ($result as $r) {
-                $this->EditorialReviews[] = new Zend_Service_Amazon_EditorialReview($r);
+                $this->EditorialReviews[] = new EditorialReview($r);
             }
         }
 
         $result = $xpath->query('./az:SimilarProducts/az:*', $dom);
         if ($result->length >= 1) {
             foreach ($result as $r) {
-                $this->SimilarProducts[] = new Zend_Service_Amazon_SimilarProduct($r);
+                $this->SimilarProducts[] = new SimilarProduct($r);
             }
         }
 
         $result = $xpath->query('./az:ListmaniaLists/*', $dom);
         if ($result->length >= 1) {
             foreach ($result as $r) {
-                $this->ListmaniaLists[] = new Zend_Service_Amazon_ListmaniaList($r);
+                $this->ListmaniaLists[] = new ListmaniaList($r);
             }
         }
 
@@ -224,13 +235,13 @@ class Zend_Service_Amazon_Item
         $result = $xpath->query('./az:Offers', $dom);
         $resultSummary = $xpath->query('./az:OfferSummary', $dom);
         if ($result->length > 1 || $resultSummary->length == 1) {
-            $this->Offers = new Zend_Service_Amazon_OfferSet($dom);
+            $this->Offers = new OfferSet($dom);
         }
 
         $result = $xpath->query('./az:Accessories/*', $dom);
         if ($result->length > 1) {
             foreach ($result as $r) {
-                $this->Accessories[] = new Zend_Service_Amazon_Accessories($r);
+                $this->Accessories[] = new Accessories($r);
             }
         }
 

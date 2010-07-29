@@ -25,7 +25,7 @@
  */
 namespace Zend\Application\Resource;
 
-use Zend\DB\Adapter,
+use Zend\Db\Adapter,
     Zend\Application\ResourceException;
 
 /**
@@ -51,8 +51,8 @@ use Zend\DB\Adapter,
  *
  * @uses       \Zend\Application\ResourceException
  * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\DB\DB
- * @uses       \Zend\DB\Table\Table
+ * @uses       \Zend\Db\Db
+ * @uses       \Zend\Db\Table\Table
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -71,14 +71,14 @@ class Multidb extends AbstractResource
     /**
      * An instance of the default db, if set
      * 
-     * @var null|\Zend\DB\Adapter\AbstractAdapter
+     * @var null|\Zend\Db\Adapter\AbstractAdapter
      */
     protected $_defaultDb;
 
     /**
      * Initialize the Database Connections (instances of Zend_Db_Table_Abstract)
      *
-     * @return \Zend\Application\Resource\MultiDB
+     * @return \Zend\Application\Resource\Multidb
      */    
     public function init() 
     {
@@ -101,7 +101,7 @@ class Multidb extends AbstractResource
                 $params['isDefaultTableAdapter']
             );
 
-            $this->_dbs[$id] = \Zend\DB\DB::factory($adapter, $params);
+            $this->_dbs[$id] = \Zend\Db\Db::factory($adapter, $params);
 
             if ($default) {
                 $this->_setDefault($this->_dbs[$id]);
@@ -114,7 +114,7 @@ class Multidb extends AbstractResource
     /**
      * Determine if the given db(identifier) is the default db.
      *
-     * @param  string|\Zend\DB\Adapter\AbstractAdapter $db The db to determine whether it's set as default
+     * @param  string|\Zend\Db\Adapter\AbstractAdapter $db The db to determine whether it's set as default
      * @return boolean True if the given parameter is configured as default. False otherwise
      */
     public function isDefault($db)
@@ -129,9 +129,9 @@ class Multidb extends AbstractResource
     /**
      * Retrieve the specified database connection
      * 
-     * @param  null|string|\Zend\DB\Adapter\AbstractAdapter $db The adapter to retrieve.
+     * @param  null|string|\Zend\Db\Adapter\AbstractAdapter $db The adapter to retrieve.
      *                                               Null to retrieve the default connection
-     * @return \Zend\DB\Adapter\AbstractAdapter
+     * @return \Zend\Db\Adapter\AbstractAdapter
      * @throws \Zend\Application\ResourceException if the given parameter could not be found
      */
     public function getDb($db = null)
@@ -155,7 +155,7 @@ class Multidb extends AbstractResource
      * @param  boolean $justPickOne If true, a random (the first one in the stack)
      *                           connection is returned if no default was set.
      *                           If false, null is returned if no default was set.
-     * @return null|\Zend\DB\Adapter\AbstractAdapter
+     * @return null|\Zend\Db\Adapter\AbstractAdapter
      */
     public function getDefaultDb($justPickOne = true)
     {
@@ -173,11 +173,11 @@ class Multidb extends AbstractResource
     /**
      * Set the default db adapter
      * 
-     * @var \Zend\DB\Adapter\AbstractAdapter $adapter Adapter to set as default
+     * @var \Zend\Db\Adapter\AbstractAdapter $adapter Adapter to set as default
      */
     protected function _setDefault(Adapter\AbstractAdapter $adapter) 
     {
-        \Zend\DB\Table\Table::setDefaultAdapter($adapter);
+        \Zend\Db\Table\Table::setDefaultAdapter($adapter);
         $this->_defaultDb = $adapter;
     }
 
@@ -193,8 +193,8 @@ class Multidb extends AbstractResource
 
         if (is_string($cache)) {
             $bootstrap = $this->getBootstrap();
-            if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper &&
-                $bootstrap->hasPluginResource('CacheManager')
+            if ($bootstrap instanceof \Zend\Application\ResourceBootstrapper 
+                && $bootstrap->hasPluginResource('CacheManager')
             ) {
                 $cacheManager = $bootstrap->bootstrap('CacheManager')
                     ->getResource('CacheManager');
@@ -202,12 +202,12 @@ class Multidb extends AbstractResource
                     $metadataCache = $cacheManager->getCache($cache);
                 }
             }
-        } else if ($cache instanceof Zend_Cache_Core) {
+        } else if ($cache instanceof \Zend\Cache\Frontend) {
             $metadataCache = $cache;
         }
 
-        if ($metadataCache instanceof Zend_Cache_Core) {
-            Zend_Db_Table::setDefaultMetadataCache($metadataCache);
+        if ($metadataCache instanceof \Zend\Cache\Frontend) {
+            \Zend\Db\Table\AbstractTable::setDefaultMetadataCache($metadataCache);
         }
 
         return $this;

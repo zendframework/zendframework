@@ -263,7 +263,7 @@ class RSS
         $root->appendChild($link);
         $text = $dom->createTextNode($value);
         $link->appendChild($text);
-        if (!\Zend\URI\URL::validate($value)) {
+        if (!\Zend\Uri\Url::validate($value)) {
             $link->setAttribute('isPermaLink', 'false');
         }
     }
@@ -337,7 +337,7 @@ class RSS
             }
         }
         if (empty($image['link']) || !is_string($image['link'])
-        || !\Zend\URI\URL::validate($image['link'])) {
+        || !\Zend\Uri\Url::validate($image['link'])) {
             $message = 'Invalid parameter: parameter \'link\''
             . ' must be a non-empty string and valid URI/IRI';
             $exception = new \Zend\Feed\Exception($message);

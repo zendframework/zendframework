@@ -46,10 +46,10 @@ class StaticFilter
     /**
      * Set plugin loader for resolving filter classes
      * 
-     * @param  Loader\PrefixPathMapper $loader 
+     * @param  Loader\ShortNameLocater $loader 
      * @return void
      */
-    public static function setPluginLoader(Loader\PrefixPathMapper $loader = null)
+    public static function setPluginLoader(Loader\ShortNameLocater $loader = null)
     {
         self::$_pluginLoader = $loader;
     }
@@ -57,7 +57,7 @@ class StaticFilter
     /**
      * Get plugin loader for resolving filter classes
      * 
-     * @return Loader\PrefixPathMapper
+     * @return Loader\ShortNameLocater
      */
     public static function getPluginLoader()
     {

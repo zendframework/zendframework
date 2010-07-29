@@ -23,11 +23,11 @@
  * @namespace
  */
 namespace Zend\OAuth\Token;
-use Zend\OAuth\HTTP,
+use Zend\OAuth\Http,
     Zend\OAuth\Exception as OAuthException;
 
 /**
- * @uses       Zend\OAuth\HTTP\Utility
+ * @uses       Zend\OAuth\Http\Utility
  * @uses       Zend\OAuth\Token\AbstractToken
  * @category   Zend
  * @package    Zend_OAuth
@@ -45,10 +45,10 @@ class AuthorizedRequest extends AbstractToken
      * Constructor
      *
      * @param  null|array $data
-     * @param  null|Zend\OAuth\HTTP\Utility $utility
+     * @param  null|Zend\OAuth\Http\Utility $utility
      * @return void
      */
-    public function __construct($data = null, HTTP\Utility $utility = null)
+    public function __construct($data = null, Http\Utility $utility = null)
     {
         if (!is_null($data) && !is_array($data)) {
             throw new OAuthException('Invalid response provided');
@@ -63,7 +63,7 @@ class AuthorizedRequest extends AbstractToken
         if (!is_null($utility)) {
             $this->_httpUtility = $utility;
         } else {
-            $this->_httpUtility = new HTTP\Utility;
+            $this->_httpUtility = new Http\Utility;
         }
     }
 

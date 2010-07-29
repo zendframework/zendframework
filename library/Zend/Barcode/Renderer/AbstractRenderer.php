@@ -496,12 +496,6 @@ abstract class AbstractRenderer implements Renderer
     abstract protected function _checkParams();
 
     /**
-     * Render the resource by sending headers and drawed resource
-     * @return mixed
-     */
-    abstract public function render();
-
-    /**
      * Initialize the rendering resource
      * @return void
      */

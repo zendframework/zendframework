@@ -16,24 +16,24 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: RendererAbstract.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
-
+ 
 /**
- * @namespace
- */
+* @namespace
+*/
 namespace Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 
 /**
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Version
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+* @uses \Zend\Feed\Exception
+* @uses \Zend\Feed\Writer\Writer
+* @uses \Zend\Version
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
 class AbstractRenderer
 {
     /**
@@ -139,7 +139,7 @@ class AbstractRenderer
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return \Zend\Feed\Writer\Renderer\AbstractRenderer
+     * @return Zend_Feed_Writer_Renderer_RendererAbstract
      */
     public function setEncoding($enc)
     {
@@ -161,12 +161,12 @@ class AbstractRenderer
      * Indicate whether or not to ignore exceptions
      * 
      * @param  bool $bool 
-     * @return \Zend\Feed\Writer\Renderer\AbstractRenderer
+     * @return Zend_Feed_Writer_Renderer_RendererAbstract
      */
     public function ignoreExceptions($bool = true)
     {
         if (!is_bool($bool)) {
-            throw new \Zend\Feed\Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
+            throw new Writer\Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->_ignoreExceptions = $bool;
         return $this;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20077 -->
+<!-- EN-Revision: 22597 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.locale">
     <title>Zend_Application_Resource_Locale</title>
@@ -7,7 +7,9 @@
     <para>
         <classname>Zend_Application_Resource_Locale</classname> kann verwendet werden um ein
         Anwendungsweites Gebietsschema zu setzen welches dann in allen Klassen und Komponenten
-        verwendet wird welche mit Lokalisierung oder Internationalisierung arbeiten.
+        verwendet wird welche mit Lokalisierung oder Internationalisierung arbeiten. Standardmäßig
+        wird das Gebietsschema in einem Zend_Registry Eintrag mit dem Schlüssel 'Zend_Locale'
+        gespeichert.
     </para>
 
     <para>

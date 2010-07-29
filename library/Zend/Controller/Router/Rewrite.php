@@ -372,7 +372,7 @@ class Rewrite extends AbstractRouter
      */
     public function route(\Zend\Controller\Request\AbstractRequest $request)
     {
-        if (!$request instanceof \Zend\Controller\Request\HTTP) {
+        if (!$request instanceof \Zend\Controller\Request\Http) {
             require_once 'Zend/Controller/Router/Exception.php';
             throw new Exception('Zend_Controller_Router_Rewrite requires a Zend_Controller_Request_HTTP-based request object');
         }

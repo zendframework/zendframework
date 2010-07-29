@@ -31,7 +31,7 @@ namespace Zend\Test\PHPUnit\Db\DataSet;
  * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
- * @uses       \Zend\DB\DB
+ * @uses       \Zend\Db\Db
  * @uses       \Zend\Test\PHPUnit\Db\Exception
  * @category   Zend
  * @package    Zend_Test
@@ -65,7 +65,7 @@ class QueryTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
     {
         if($this->data === null) {
             $stmt = $this->databaseConnection->getConnection()->query($this->query);
-            $this->data = $stmt->fetchAll(\Zend\DB\DB::FETCH_ASSOC);
+            $this->data = $stmt->fetchAll(\Zend\Db\Db::FETCH_ASSOC);
         }
     }
 

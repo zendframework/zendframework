@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Dojo;
-use Zend\JSON\JSON;
+use Zend\Json\Json;
 
 /**
  * dojo.data support for Zend Framework
@@ -32,7 +32,7 @@ use Zend\JSON\JSON;
  * @uses       IteratorAggregate
  * @uses       Countable
  * @uses       \Zend\Dojo\Exception
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -361,7 +361,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
         if (!is_string($json)) {
             throw new Exception('fromJson() expects JSON input');
         }
-        $data = JSON::decode($json);
+        $data = Json::decode($json);
         return $this->fromArray($data);
     }
 
@@ -402,7 +402,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
      */
     public function toJson()
     {
-        return JSON::encode($this->toArray());
+        return Json::encode($this->toArray());
     }
 
     /**

@@ -25,13 +25,13 @@
 namespace Zend\Dojo;
 
 use Zend\Config\Config,
-    Zend\JSON\JSON,
+    Zend\Json\Json,
     Zend\View\ViewEngine;
 
 /**
  * Dojo module layer and custom build profile generation support
  *
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -534,7 +534,7 @@ class BuildLayer
      */
     protected function _filterJsonProfileToJavascript($profile)
     {
-        $profile = JSON::encode($profile);
+        $profile = Json::encode($profile);
         $profile = preg_replace('/"([^"]*)":/', '$1:', $profile);
         $profile = preg_replace('/' . preg_quote('\\') . '/', '', $profile);
         return $profile;

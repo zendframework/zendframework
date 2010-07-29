@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * An Amazon EC2 interface to create, delete and describe Ec2 KeyPairs.
  *
  * @uses       Zend_Service_Amazon_Ec2_Abstract
@@ -31,7 +36,11 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+<<<<<<< HEAD
 class Zend_Service_Amazon_Ec2_Keypair extends Zend_Service_Amazon_Ec2_AbstractService
+=======
+class Keypair extends AbstractEc2
+>>>>>>> merges/farazdagi
 {
     /**
      * Creates a new 2048 bit RSA key pair and returns a unique ID that can
@@ -48,7 +57,7 @@ class Zend_Service_Amazon_Ec2_Keypair extends Zend_Service_Amazon_Ec2_AbstractSe
         $params['Action'] = 'CreateKeyPair';
 
         if(!$keyName) {
-            throw new Zend_Service_Amazon_Ec2_Exception('Invalid Key Name');
+            throw new Exception('Invalid Key Name');
         }
 
         $params['KeyName'] = $keyName;
@@ -117,7 +126,7 @@ class Zend_Service_Amazon_Ec2_Keypair extends Zend_Service_Amazon_Ec2_AbstractSe
         $params['Action'] = 'DeleteKeyPair';
 
         if(!$keyName) {
-            throw new Zend_Service_Amazon_Ec2_Exception('Invalid Key Name');
+            throw new Exception('Invalid Key Name');
         }
 
         $params['KeyName'] = $keyName;

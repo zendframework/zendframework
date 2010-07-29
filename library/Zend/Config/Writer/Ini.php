@@ -78,7 +78,7 @@ class Ini extends AbstractFileWriter
     }
 
     /**
-     * Render a Zend_Config into a INI config string.
+     * Render a Zend\Config into a INI config string.
      *
      * @since 1.10
      * @return string
@@ -168,10 +168,10 @@ class Ini extends AbstractFileWriter
      * on the top of config.
      * 
      * @see    http://framework.zend.com/issues/browse/ZF-6289
-     * @param  Zend_Config
-     * @return Zend_Config
+     * @param  Zend\Config
+     * @return Zend\Config
      */
-    protected function _sortRootElements(Zend_Config $config)
+    protected function _sortRootElements(\Zend\Config\Config $config)
     {
         $configArray = $config->toArray();
         $sections = array();
@@ -189,6 +189,6 @@ class Ini extends AbstractFileWriter
             $configArray[$key] = $value;
         }
         
-        return new Zend_Config($configArray);
+        return new \Zend\Config\Config($configArray);
     }
 }

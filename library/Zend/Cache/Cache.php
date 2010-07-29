@@ -143,20 +143,19 @@ abstract class Cache
         if (!$customBackendNaming) {
             $backend  = self::_normalizeName($backend);
         }
-echo "Normalized backend name: $backend\n";
         if (in_array($backend, self::$standardBackends)) {
             // we use a standard backend
-            $backendClass = 'Zend\\Cache\\Backend\\' . $backend;
+            $backendClass = 'Zend\Cache\Backend\\' . $backend;
             // security controls are explicit
             require_once str_replace('\\', DIRECTORY_SEPARATOR, $backendClass) . '.php';
         } else {
             // we use a custom backend
-            if (!preg_match('~^[\w]+$~D', $backend)) {
+            if (!preg_match('~^[\w\\\\]+$~D', $backend)) {
                 self::throwException("Invalid backend name [$backend]");
             }
             if (!$customBackendNaming) {
                 // we use this boolean to avoid an API break
-                $backendClass = '\\Zend\\Cache\\Backend\\' . $backend;
+                $backendClass = 'Zend\Cache\Backend\\' . $backend;
             } else {
                 $backendClass = $backend;
             }
@@ -192,17 +191,17 @@ echo "Normalized backend name: $backend\n";
         if (in_array($frontend, self::$standardFrontends)) {
             // we use a standard frontend
             // For perfs reasons, with frontend == 'Core', we can interact with the Core itself
-            $frontendClass = 'Zend\\Cache\\Frontend\\' . $frontend;
+            $frontendClass = 'Zend\Cache\Frontend\\' . $frontend;
             // security controls are explicit
             require_once str_replace('\\', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
         } else {
             // we use a custom frontend
-            if (!preg_match('~^[\w]+$~D', $frontend)) {
+            if (!preg_match('~^[\w\\\\]+$~D', $frontend)) {
                 self::throwException("Invalid frontend name [$frontend]");
             }
             if (!$customFrontendNaming) {
                 // we use this boolean to avoid an API break
-                $frontendClass = '\\Zend\\Cache\\Frontend\\' . $frontend;
+                $frontendClass = 'Zend\Cache\Frontend\\' . $frontend;
             } else {
                 $frontendClass = $frontend;
             }

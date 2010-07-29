@@ -94,7 +94,7 @@ class Translate extends AbstractResource
 
             if (!empty($options['cache']) && is_string($options['cache'])) {
                 $bootstrap = $this->getBootstrap();
-                if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper &&
+                if ($bootstrap instanceof \Zend\Application\ResourceBootstrapper &&
                     $bootstrap->hasPluginResource('CacheManager')
                 ) {
                     $cacheManager = $bootstrap->bootstrap('CacheManager')

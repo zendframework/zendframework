@@ -116,14 +116,24 @@ class FunctionFrontend extends Core
     }
 
     /**
+     * ZF-9970
+     *
+     * @deprecated
+     */
+    private function _makeId($callback, array $args)
+    {
+        return $this->makeId($callback, $args);
+    }
+
+    /**
      * Make a cache id from the function name and parameters
      *
      * @param  callback $callback A valid callback
-     * @param  array  $parameters Function parameters
+     * @param  array    $args     Function parameters
      * @throws \Zend\Cache\Exception
      * @return string Cache id
      */
-    private function _makeId($callback, array $args)
+    public function makeId($callback, array $args = array())
     {
         if (!is_callable($callback, true, $name)) {
             Cache::throwException('Invalid callback');

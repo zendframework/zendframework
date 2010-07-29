@@ -60,8 +60,9 @@ abstract class AbstractProtocol
 
     /**
      * Maximum of the transaction log
+     * @var integer
      */
-    const MAXIMUM_LOG = 64;
+    protected $_maximumLog = 64;
 
 
     /**
@@ -153,6 +154,28 @@ abstract class AbstractProtocol
         $this->_disconnect();
     }
 
+    /**
+     * Set the maximum log size 
+     * 
+     * @param integer $maximumLog Maximum log size
+     * @return void
+     */
+    public function setMaximumLog($maximumLog)
+    {
+        $this->_maximumLog = (int) $maximumLog;
+    }
+    
+    
+    /**
+     * Get the maximum log size 
+     * 
+     * @return int the maximum log size
+     */
+    public function getMaximumLog()
+    {
+        return $this->_maximumLog;
+    }
+    
 
     /**
      * Create a connection to the remote host
@@ -213,7 +236,7 @@ abstract class AbstractProtocol
      */
     protected function _addLog($value)
     {
-        if (count($this->_log) >= self::MAXIMUM_LOG) {
+        if ($this->_maximumLog >= 0 && count($this->_log) >= $this->_maximumLog) {
             array_shift($this->_log);
         }
 

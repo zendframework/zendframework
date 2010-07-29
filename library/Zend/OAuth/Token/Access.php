@@ -25,14 +25,14 @@
 namespace Zend\OAuth\Token;
 use Zend\OAuth\Config,
     Zend\OAuth,
-    Zend\URI;
+    Zend\Uri;
 
 /**
  * @uses       \Zend\OAuth\Client
  * @uses       \Zend\OAuth\Exception
  * @uses       \Zend\OAuth\Http\Http
  * @uses       \Zend\OAuth\Token\AbstractToken
- * @uses       \Zend\URI\URL
+ * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -52,7 +52,7 @@ class Access extends AbstractToken
     public function toHeader(
         $url, Config $config, array $customParams = null, $realm = null
     ) {
-        $uri = new URI\URL($url);
+        $uri = new Uri\Url($url);
         if (!$uri->isValid()
             || !in_array($uri->getScheme(), array('http', 'https'))
         ) {
@@ -74,7 +74,7 @@ class Access extends AbstractToken
      */
     public function toQueryString($url, Config $config, array $params = null)
     {
-        $uri = new URI\URL($url);
+        $uri = new Uri\Url($url);
         if (!$uri->isValid()
             || !in_array($uri->getScheme(), array('http', 'https'))
         ) {

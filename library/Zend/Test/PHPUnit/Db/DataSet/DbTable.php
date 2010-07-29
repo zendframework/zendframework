@@ -30,7 +30,7 @@ namespace Zend\Test\PHPUnit\Db\DataSet;
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
- * @uses       \Zend\DB\Table\AbstractTable
+ * @uses       \Zend\Db\Table\AbstractTable
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -42,7 +42,7 @@ class DbTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
     /**
      * Zend_Db_Table object
      *
-     * @var \Zend\DB\Table\AbstractTable
+     * @var \Zend\Db\Table\AbstractTable
      */
     protected $_table = null;
 
@@ -74,13 +74,13 @@ class DbTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
     /**
      * Construct Dataset Table from Zend_Db_Table object
      *
-     * @param \Zend\DB\Table\AbstractTable        $table
-     * @param string|\Zend\DB\Select|null    $where
+     * @param \Zend\Db\Table\AbstractTable        $table
+     * @param string|\Zend\Db\Select|null    $where
      * @param string|null                   $order
      * @param int                           $count
      * @param int                           $offset
      */
-    public function __construct(\Zend\DB\Table\AbstractTable $table, $where=null, $order=null, $count=null, $offset=null)
+    public function __construct(\Zend\Db\Table\AbstractTable $table, $where=null, $order=null, $count=null, $offset=null)
     {
         $this->tableName = $table->info('name');
         $this->_columns = $table->info('cols');
@@ -103,7 +103,7 @@ class DbTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
             $this->data = $this->_table->fetchAll(
                 $this->_where, $this->_order, $this->_count, $this->_offset
             );
-            if($this->data instanceof \Zend\DB\Table\AbstractRowset) {
+            if($this->data instanceof \Zend\Db\Table\AbstractRowset) {
                 $this->data = $this->data->toArray();
             }
         }

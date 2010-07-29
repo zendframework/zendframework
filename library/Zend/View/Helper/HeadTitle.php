@@ -77,7 +77,7 @@ class HeadTitle extends Placeholder\Container\Standalone
     public function direct($title = null, $setType = null)
     {
         if (is_null($setType) && is_null($this->getDefaultAttachOrder())) {
-            $setType = Zend_View_Helper_Placeholder_Container_Abstract::APPEND;
+            $setType = Placeholder\Container\AbstractContainer::APPEND;
         } elseif (is_null($setType) && !is_null($this->getDefaultAttachOrder())) {
             $setType = $this->getDefaultAttachOrder();
         }
@@ -103,12 +103,11 @@ class HeadTitle extends Placeholder\Container\Standalone
     public function setDefaultAttachOrder($setType)
     {
         if (!in_array($setType, array(
-            Zend_View_Helper_Placeholder_Container_Abstract::APPEND,
-            Zend_View_Helper_Placeholder_Container_Abstract::SET,
-            Zend_View_Helper_Placeholder_Container_Abstract::PREPEND
+            Placeholder\Container\AbstractContainer::APPEND,
+            Placeholder\Container\AbstractContainer::SET,
+            Placeholder\Container\AbstractContainer::PREPEND
         ))) {
-            require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception("You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'");
+            throw new Zend\View\Exception("You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'");
         }
         $this->_defaultAttachOrder = $setType;
     }

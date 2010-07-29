@@ -34,7 +34,7 @@
     </sect2>
 
     <sect2 id="zend.serializer.adapter.igbinary">
-        <title>Zend_Serializer_Adapter_Igbinary</title>
+        <title>Zend_Serializer_Adapter_IgBinary</title>
 
         <para>
             <ulink url="http://opensource.dynamoid.com">Igbinary</ulink> is Open Source Software

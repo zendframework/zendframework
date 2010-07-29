@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22466 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
@@ -363,7 +363,7 @@ $client = new Zend_Http_Client('http://www.example.com/fetchdata.php', array(
 
 // Haben wir die Cookies in unserer Session gespeichert?
 if (isset($_SESSION['cookiejar']) &&
-    $_SESSION['cookiejar'] instanceof Zend_Http_CookieJar)) {
+    $_SESSION['cookiejar'] instanceof Zend_Http_CookieJar) {
 
     $client->setCookieJar($_SESSION['cookiejar']);
 } else {

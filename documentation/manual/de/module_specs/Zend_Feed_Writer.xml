@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22109 -->
-<!-- Reviewed: 22109 -->
+<!-- EN-Revision: 22392 -->
+<!-- Reviewed: 22392 -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
 
@@ -10,12 +10,12 @@
         <para>
             <classname>Zend_Feed_Writer</classname> ist die Bruderkomponente zu
             <classname>Zend_Feed_Reader</classname> und verantwortlich für die Erzeugung von
-            Feeds für die Ausgabe. Sie unterstützt die Atom 1.0 Spezifikation (RFC 4287) und
-            <acronym>RSS</acronym> 2.0 wie vom <acronym>RSS</acronym> Advisory Board
-            (<acronym>RSS</acronym> 2.0.11) spezifiziert. Es weicht nicht von diesen
-            Standards ab. Trotzdem bietet es ein einfaches System der Erweiterung, welches es erlaubt
-            jede Erweiterung und jedes Modul für jede der zwei Spezifikationen zu implementieren,
-            wenn diese nicht von Haus aus angeboten werden.
+            Feeds für die Ausgabe. Sie unterstützt die Atom 1.0 Spezifikation
+            (<acronym>RFC</acronym> 4287) und <acronym>RSS</acronym> 2.0 wie vom
+            <acronym>RSS</acronym> Advisory Board (<acronym>RSS</acronym> 2.0.11) spezifiziert. Es
+            weicht nicht von diesen Standards ab. Trotzdem bietet es ein einfaches System der
+            Erweiterung, welches es erlaubt jede Erweiterung und jedes Modul für jede der zwei
+            Spezifikationen zu implementieren, wenn diese nicht von Haus aus angeboten werden.
         </para>
 
         <para>
@@ -74,8 +74,8 @@
             <classname>Zend_Feed_Writer_Deleted</classname>. Die erstere implementiert Atom 2.0
             Quell-Elemente, welche Feed-Metadaten der Quelle für spezielle Einträge im verwendeten
             Feed enthalten (z.B. wenn der aktuelle Feed nicht die originale Quelle des Eintrags
-            enthält). Die letztere implementiert Atom Tombstones RFC und erlaubt es Feeds, Referenzen
-            zu Einträgen zu haben, welche bereits gelöscht wurden.
+            enthält). Die letztere implementiert Atom Tombstones <acronym>RFC</acronym> und erlaubt
+            es Feeds, Referenzen zu Einträgen zu haben, welche bereits gelöscht wurden.
         </para>
 
         <para>
@@ -98,7 +98,7 @@
             diese Hierarchie ihre Teile den betreffenden Darstellern und die partiellen Feeds (alle
             DOMDocuments) werden dann zusammen geworfen, um einen kompletten Feed zu erstellen. Im
             Falle von Source oder Deleted (Tomestone) Containern werden diese nur für Atom 2.0
-            dargestellt und für RSS ignoriert.
+            dargestellt und für <acronym>RSS</acronym> ignoriert.
         </para>
 
         <para>
@@ -385,9 +385,9 @@ $out = $feed->export('atom');
                         <entry>
                             Setzt das Datum an dem der Feed das letzte mal erstellt wurde. Der
                             erwartete Parameter kann ein <acronym>UNIX</acronym> Timestamp oder ein
-                            <classname>Zend_Date</classname> Objekt sein. Das wird nur für RSS 2.0
-                            Feeds dargestellt und wird automatisch als aktuelles Datum dargestellt
-                            wenn er nicht explizit gesetzt wird.
+                            <classname>Zend_Date</classname> Objekt sein. Das wird nur für
+                            <acronym>RSS</acronym> 2.0 Feeds dargestellt und wird automatisch als
+                            aktuelles Datum dargestellt wenn er nicht explizit gesetzt wird.
                         </entry>
                     </row>
 
@@ -454,13 +454,18 @@ $out = $feed->export('atom');
                         <entry><methodname>setImage()</methodname></entry>
 
                         <entry>
-                            Akzeptiert ein Array an Metadaten für Bilder für ein RSS Bild oder ein
-                            Atom Logo. Atom 1.0 benötigt nur eine URI. RSS 2.0 benötigt eine URI,
-                            einen HTML Link, und einen Bildtitel. RSS 2.0 kann optional eine Breite,
-                            eine Höhe und eine Beschreibung des Bildes senden. Die Array Parameter
-                            können Sie enthalten indem die folgenden Schlüssel verwendet werden:
-                            uri, link, title, description, height und width. Der RSS 2.0 HTML Link
-                            sollte auf die HTML Quellseite des Feeds zeigen.
+                            Akzeptiert ein Array an Metadaten für Bilder für ein
+                            <acronym>RSS</acronym> Bild oder ein Atom Logo. Atom 1.0 benötigt nur
+                            eine <acronym>URI</acronym>. <acronym>RSS</acronym> 2.0 benötigt eine
+                            <acronym>URI</acronym>, einen <acronym>HTML</acronym> Link, und einen
+                            Bildtitel. <acronym>RSS</acronym> 2.0 kann optional eine Breite, eine
+                            Höhe und eine Beschreibung des Bildes senden. Die Array Parameter können
+                            Sie enthalten indem die folgenden Schlüssel verwendet werden:
+                            <property>uri</property>, <property>link</property>,
+                            <property>title</property>, <property>description</property>,
+                            <property>height</property> und <property>width</property>. Der
+                            <acronym>RSS</acronym> 2.0 <acronym>HTML</acronym> Link sollte auf die
+                            <acronym>HTML</acronym> Quellseite des Feeds zeigen.
                         </entry>
                     </row>
 
@@ -548,12 +553,12 @@ $out = $feed->export('atom');
 
         <para>
             Hier ist eine Zusammenfassung der Kern-<acronym>API</acronym> für Einträge und Elemente.
-            Man sollte beachten, dass dies nicht nur die Standards für <acronym>RSS</acronym> und Atom
-            umfasst, sondern auch eine Anzahl von Erweiterungen, welche in
+            Man sollte beachten, dass dies nicht nur die Standards für <acronym>RSS</acronym> und
+            Atom umfasst, sondern auch eine Anzahl von Erweiterungen, welche in
             <classname>Zend_Feed_Writer</classname> enthalten sind. Die Benennung dieser
-            Erweiterungsmethoden ist recht generisch - alle Erweiterungsmethoden arbeiten auf der gleichen
-            Ebene wie die Kern-<acronym>API</acronym>, da wir es zulassen, jedes Erweiterungsobjekt
-            separat zu empfangen, wenn das notwendig ist.
+            Erweiterungsmethoden ist recht generisch - alle Erweiterungsmethoden arbeiten auf der
+            gleichen Ebene wie die Kern-<acronym>API</acronym>, da wir es zulassen, jedes
+            Erweiterungsobjekt separat zu empfangen, wenn das notwendig ist.
         </para>
 
         <para>
@@ -570,10 +575,10 @@ $out = $feed->export('atom');
                         <entry><methodname>setId()</methodname></entry>
 
                         <entry>
-                            Setzt eine eindeutige ID, die mit diesem Eintrag assoziiert ist. Für Atom
-                            1.0 ist das ein atom:id Element und für <acronym>RSS</acronym> 2.0 wird
-                            es als guid-Element hinzugefügt. Diese sind optional, solange ein Link
-                            hinzugefügt wird, wenn z.B. der Link als ID gesetzt ist.
+                            Setzt eine eindeutige ID, die mit diesem Eintrag assoziiert ist. Für
+                            Atom 1.0 ist das ein atom:id Element und für <acronym>RSS</acronym> 2.0
+                            wird es als guid-Element hinzugefügt. Diese sind optional, solange ein
+                            Link hinzugefügt wird, wenn z.B. der Link als ID gesetzt ist.
                         </entry>
                     </row>
 
@@ -610,10 +615,10 @@ $out = $feed->export('atom');
                         <entry>
                             Fügt einen Link zu einem <acronym>XML</acronym>-Feed hinzu, entweder der
                             erzeugte Feed oder eine alternative <acronym>URI</acronym>, dieauf
-                            den gleichen Feed zeigt, aber in einem anderen Format. Es wird empfohlen,
-                            mindestens einen Link zum erstellten Feed zu aufzunehmen, damit dieser
-                            eine erkennbare endgültige <acronym>URI</acronym> hat, welche es
-                            dem Client erlaubt, Ortswechsel mitzubekommen, ohne
+                            den gleichen Feed zeigt, aber in einem anderen Format. Es wird
+                            empfohlen, mindestens einen Link zum erstellten Feed zu aufzunehmen,
+                            damit dieser eine erkennbare endgültige <acronym>URI</acronym> hat,
+                            welche es dem Client erlaubt, Ortswechsel mitzubekommen, ohne
                             dass dauernde Umleitungen notwendig sind. Dieser Parameter ist ein Array
                             von Arrays, wobei jedes Unter-Array die Schlüssel "type" und "uri"
                             enthält. Der Typ sollte "atom", "rss" oder "rdf" sein. Wenn der Typ
@@ -631,8 +636,8 @@ $out = $feed->export('atom');
                             enthalten kann. Der Wert "uri" ist nur für Atom-Feeds anwendbar, da
                             <acronym>RSS</acronym> keine Möglichkeit enthält, diese anzuzeigen. Für
                             <acronym>RSS</acronym> 2.0 werden bei der Darstellung zwei Elemente
-                            erzeugt - ein Autorelement, welches die Referenz zur Email und
-                            den Namen in Klammern enthält und ein Dublin Core Creator Element, welches nur
+                            erzeugt - ein Autorelement, welches die Referenz zur Email und den Namen
+                            in Klammern enthält und ein Dublin Core Creator Element, welches nur
                             den Namen enthält.
                         </entry>
                     </row>
@@ -720,9 +725,9 @@ $out = $feed->export('atom');
 
                         <entry>
                             Setzt einen Link zu einem <acronym>XML</acronym>-Feed, der Kommentare
-                            enthält, welche mit diesem Eintrag assoziiert sind. Der Parameter ist ein
-                            Array, welches die Schlüssel "uri" und "type" enthält, wobei der Typ
-                            entweder "rdf", "rss" oder "atom" ist.
+                            enthält, welche mit diesem Eintrag assoziiert sind. Der Parameter ist
+                            ein Array, welches die Schlüssel "uri" und "type" enthält, wobei der
+                            Typ entweder "rdf", "rss" oder "atom" ist.
                         </entry>
                     </row>
 
@@ -730,8 +735,8 @@ $out = $feed->export('atom');
                         <entry><methodname>setCommentFeedLinks()</methodname></entry>
 
                         <entry>
-                            Das gleiche wie <methodname>setCommentFeedLink()</methodname>, außer dass sie
-                            ein Array von Arrays akzeptiert, wobei jedes Unterarray die von
+                            Das gleiche wie <methodname>setCommentFeedLink()</methodname>, außer
+                            dass sie ein Array von Arrays akzeptiert, wobei jedes Unterarray die von
                             <methodname>setCommentFeedLink()</methodname> erwarteten Parameter
                             enthält.
                         </entry>
@@ -742,7 +747,7 @@ $out = $feed->export('atom');
 
                         <entry>
                             Setzt die Kodierung des Textes des Eintrags. Diese ist standardmäßig
-                            UTF-8, welche auch die bevorzugte Kodierung ist.
+                            <acronym>UTF-8</acronym>, welche auch die bevorzugte Kodierung ist.
                         </entry>
                     </row>
                 </tbody>

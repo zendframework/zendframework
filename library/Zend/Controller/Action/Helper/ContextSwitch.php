@@ -35,7 +35,7 @@ use Zend\View;
  *
  * @uses       \Zend\Controller\Action\Exception
  * @uses       \Zend\Controller\Action\Helper\AbstractHelper
- * @uses       \Zend\JSON\JSON
+ * @uses       \Zend\Json\Json
  * @uses       \Zend\Layout\Layout
  * @category   Zend
  * @package    Zend_Controller
@@ -1074,7 +1074,7 @@ class ContextSwitch extends AbstractHelper
         $view = $viewRenderer->view;
         if ($view instanceof View\ViewEngine) {
             if(method_exists($view, 'getVars')) {
-                $vars = \Zend\JSON\JSON::encode($view->getVars());
+                $vars = \Zend\Json\Json::encode($view->getVars());
                 $this->getResponse()->setBody($vars);
             } else {
                 throw new Action\Exception('View does not implement the getVars() method needed to encode the view into JSON');

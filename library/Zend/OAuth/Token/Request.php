@@ -24,12 +24,12 @@
  */
 namespace Zend\OAuth\Token;
 
-use Zend\HTTP\Response as HTTPResponse,
-    Zend\OAuth\HTTP\Utility as HTTPUtility,
+use Zend\Http\Response as HTTPResponse,
+    Zend\OAuth\Http\Utility as HTTPUtility,
     Zend\OAuth\Client;
 
 /**
- * @uses       \Zend\HTTP\Response
+ * @uses       \Zend\Http\Response
  * @uses       \Zend\OAuth\Client
  * @uses       \Zend\OAuth\Http\Utility
  * @uses       \Zend\OAuth\Token\Token
@@ -43,7 +43,7 @@ class Request extends AbstractToken
     /**
      * Constructor
      *
-     * @param null|Zend\HTTP\Response $response
+     * @param null|Zend\Http\Response $response
      * @param null|Zend\OAuth\Http\Utility $utility
      */
     public function __construct(

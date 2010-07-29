@@ -158,7 +158,7 @@ class DomQuery extends \PHPUnit_Framework_Constraint
 
         $this->_assertType = $assertType;
 
-        $method   = $this->_useXpath ? 'queryXpath' : 'query';
+        $method   = $this->_useXpath ? 'queryXpath' : 'execute';
         $domQuery = new \Zend\Dom\Query($other);
         $domQuery->registerXpathNamespaces($this->_xpathNamespaces);
         $result   = $domQuery->$method($this->_path);
@@ -289,6 +289,8 @@ class DomQuery extends \PHPUnit_Framework_Constraint
      */
     protected function _matchContent($result, $match)
     {
+        $match = (string) $match;
+
         if (0 == count($result)) {
             return false;
         }

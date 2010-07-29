@@ -55,10 +55,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
             );
         }
         $result = $this->_db->find($data['id']);
-        if ($result) {
+        if ($result && (0 < count($result))) {
             $data['created_time'] = $result->current()->created_time;
             $now = new Date\Date;
-            if ($data['lease_seconds']) {
+            if (array_key_exists('lease_seconds', $data) 
+                && $data['lease_seconds']
+            ) {
                 $data['expiration_time'] = $now->add($data['lease_seconds'], Date\Date::SECOND)
                 ->get('yyyy-MM-dd HH:mm:ss');
             }

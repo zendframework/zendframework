@@ -108,7 +108,7 @@ class Photos extends GData
     /**
      * Create Zend_Gdata_Photos object
      *
-     * @param \Zend\HTTP\Client $client (optional) The HTTP client to use when
+     * @param \Zend\Http\Client $client (optional) The HTTP client to use when
      *          when communicating with the servers.
      * @param string $applicationId The identity of the app in the form of Company-AppName-Version
      */

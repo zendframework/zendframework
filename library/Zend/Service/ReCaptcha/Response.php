@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\ReCaptcha;
 
-use Zend\HTTP\Response as HTTPResponse;
+use Zend\Http\Response as HTTPResponse;
 
 /**
  * Zend_Service_ReCaptcha_Response
@@ -62,7 +62,7 @@ class Response
      *
      * @param string $status
      * @param string $errorCode
-     * @param \Zend\HTTP\Response $httpResponse If this is set the content will override $status and $errorCode
+     * @param \Zend\Http\Response $httpResponse If this is set the content will override $status and $errorCode
      */
     public function __construct($status = null, $errorCode = null, HTTPResponse $httpResponse = null)
     {
@@ -142,7 +142,7 @@ class Response
     /**
      * Populate this instance based on a Zend_Http_Response object
      *
-     * @param \Zend\HTTP\Response $response
+     * @param \Zend\Http\Response $response
      * @return \Zend\Service\ReCaptcha\Response
      */
     public function setFromHttpResponse(HTTPResponse $response)

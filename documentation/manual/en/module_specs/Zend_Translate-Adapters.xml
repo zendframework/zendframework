@@ -416,6 +416,9 @@ $translate = new Zend_Translate(
         'locale'  => 'en'
     )
 );
+
+// to clear the cache somewhere later in your code
+Zend_Translate::clearCache();
 ]]></programlisting>
 
         <note>
@@ -426,6 +429,37 @@ $translate = new Zend_Translate(
                 <methodname>addTranslation()</methodname> method.
             </para>
         </note>
+
+        <para>
+            When the attached cache supports tagging you can set a own tag string by using the
+            option <property>tag</property>. This allows you do delete only the cache from this
+            single instance of <classname>Zend_Translate</classname>. When you are not using this
+            option the default tag <classname>Zend_Translate</classname> is used.
+        </para>
+
+        <para>
+            Using the option <property>tag</property> you must give the used tag to
+            <methodname>clearCache()</methodname> to declare which tag you want to delete.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+Zend_Translate::setCache($cache);
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en',
+        'tag'     => 'MyTag'
+    )
+);
+
+// somewhere later in your code
+Zend_Translate::clearCache('MyTag');
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

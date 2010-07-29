@@ -31,12 +31,13 @@ namespace Zend\Loader;
  * @uses       \Zend\Loader
  * @uses       \Zend\Loader\PluginLoaderException
  * @uses       \Zend\Loader\PrefixPathMapper
+ * @uses       \Zend\Loader\ShortNameLocater
  * @category   Zend
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginLoader implements PrefixPathMapper
+class PluginLoader implements ShortNameLocater, PrefixPathMapper
 {
     /**
      * Class map cache file
@@ -268,7 +269,7 @@ class PluginLoader implements PrefixPathMapper
 
         if ($path != null) {
             $pos = array_search($path, $registry[$prefix]);
-            if (in_array($pos, array(null, false))) {
+            if (false === $pos) {
                 throw new PluginLoaderException('Prefix ' . $prefix . ' / Path ' . $path . ' was not found in the PluginLoader.');
             }
             unset($registry[$prefix][$pos]);

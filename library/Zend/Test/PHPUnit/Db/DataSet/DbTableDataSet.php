@@ -51,14 +51,14 @@ class DbTableDataSet extends \PHPUnit_Extensions_Database_DataSet_AbstractDataSe
      *
      * By default a select * will be done on the given tablename.
      *
-     * @param \Zend\DB\Table\AbstractTable $table
-     * @param string|\Zend\DB\Select $query
+     * @param \Zend\Db\Table\AbstractTable $table
+     * @param string|\Zend\Db\Select $query
      * @param string $where
      * @param string $order
      * @param string $count
      * @param string $offset
      */
-    public function addTable(\Zend\DB\Table\AbstractTable $table, $where = null, $order = null, $count = null, $offset = null)
+    public function addTable(\Zend\Db\Table\AbstractTable $table, $where = null, $order = null, $count = null, $offset = null)
     {
         $tableName = $table->info('name');
         $this->tables[$tableName] = new DbTable($table, $where, $order, $count, $offset);

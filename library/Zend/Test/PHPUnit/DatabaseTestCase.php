@@ -47,11 +47,11 @@ abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
     /**
      * Creates a new Zend Database Connection using the given Adapter and database schema name.
      *
-     * @param  \Zend\DB\Adapter\AbstractAdapter $connection
+     * @param  \Zend\Db\Adapter\AbstractAdapter $connection
      * @param  string $schema
      * @return \Zend\Test\PHPUnit\Db\Connection
      */
-    protected function createZendDbConnection(\Zend\DB\Adapter\AbstractAdapter $connection, $schema)
+    protected function createZendDbConnection(\Zend\Db\Adapter\AbstractAdapter $connection, $schema)
     {
         return new Db\Connection($connection, $schema);
     }
@@ -59,7 +59,7 @@ abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
     /**
      * Convenience function to get access to the database connection.
      *
-     * @return \Zend\DB\Adapter\AbstractAdapter
+     * @return \Zend\Db\Adapter\AbstractAdapter
      */
     protected function getAdapter()
     {
@@ -107,14 +107,14 @@ abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
     /**
      * Create a table based on one Zend_Db_Table instance
      *
-     * @param \Zend\DB\Table\AbstractTable $table
+     * @param \Zend\Db\Table\AbstractTable $table
      * @param string $where
      * @param string $order
      * @param string $count
      * @param string $offset
      * @return \Zend\Test\PHPUnit\Db\DataSet\DbTable
      */
-    protected function createDbTable(\Zend\DB\Table\AbstractTable $table, $where=null, $order=null, $count=null, $offset=null)
+    protected function createDbTable(\Zend\Db\Table\AbstractTable $table, $where=null, $order=null, $count=null, $offset=null)
     {
         return new Db\DataSet\DbTable($table, $where, $order, $count, $offset);
     }
@@ -122,11 +122,11 @@ abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
     /**
      * Create a data table based on a Zend_Db_Table_Rowset instance
      *
-     * @param  \Zend\DB\Table\AbstractRowset $rowset
+     * @param  \Zend\Db\Table\AbstractRowset $rowset
      * @param  string
      * @return \Zend\Test\PHPUnit\Db\DataSet\DbRowset
      */
-    protected function createDbRowset(\Zend\DB\Table\AbstractRowset $rowset, $tableName = null)
+    protected function createDbRowset(\Zend\Db\Table\AbstractRowset $rowset, $tableName = null)
     {
         return new Db\DataSet\DbRowset($rowset, $tableName);
     }

@@ -6,7 +6,7 @@ if (!$component) {
     die('A component is required');
 }
 
-$path       = realpath(__DIR__ . '/../tests/Zend/' . $component . '/');
+$path       = realpath(__DIR__ . '/../tests/ZendTest/' . $component . '/');
 $tests_path = realpath(__DIR__ . '/../tests/');
 $output     = __DIR__ . '/tmp/tests';
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21993 -->
+<!-- EN-Revision: 22392 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -112,12 +112,12 @@
             Sammlung, oder sogar ein Webservice mit einer öffentlichen Feed basierenden
             <acronym>API</acronym> sein. Damit diese Aktualisierungen zu den Abonnenten geschickt
             werden können, muss der Publizist alle seine unterstützten Hubs darüber informieren das
-            eine Aktualisierung stattgefunden hat, indem eine einfache <acronym>HTTP</acronym> POST
-            Anfrage verwendet wird, welche die <acronym>URI</acronym> oder das aktualisierte Thema
-            enthält (z.B. den aktualisierten <acronym>RSS</acronym> oder Atom Feed). Der Hub
-            bestätigt den Empfang der Benachrichtigung, holt den aktualisierten Feed, und leitet
-            alle Aktualisierungen an alle Abonnenten weiter welche sich bei diesem Hub für
-            Aktualisierungen für den relevanten Feed angemeldet haben.
+            eine Aktualisierung stattgefunden hat, indem eine einfache <acronym>HTTP</acronym>
+            <acronym>POST</acronym> Anfrage verwendet wird, welche die <acronym>URI</acronym> oder
+            das aktualisierte Thema enthält (z.B. den aktualisierten <acronym>RSS</acronym> oder
+            Atom Feed). Der Hub bestätigt den Empfang der Benachrichtigung, holt den aktualisierten
+            Feed, und leitet alle Aktualisierungen an alle Abonnenten weiter welche sich bei diesem
+            Hub für Aktualisierungen für den relevanten Feed angemeldet haben.
         </para>
 
         <para>
@@ -359,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                     <tbody>
                         <row>
-                            <entry>hub.callback</entry>
+                            <entry><property>hub.callback</property></entry>
                             <entry>http://www.mydomain.com/hubbub/callback?xhub.subscription=5536df06b5dcb966edab3a4c4d56213c16a8184</entry>
 
                             <entry>
@@ -398,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.lease_seconds</entry>
+                            <entry><property>hub.lease_seconds</property></entry>
                             <entry>2592000</entry>
 
                             <entry>
@@ -417,7 +417,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.mode</entry>
+                            <entry><property>hub.mode</property></entry>
                             <entry>subscribe</entry>
 
                             <entry>
@@ -430,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.topic</entry>
+                            <entry><property>hub.topic</property></entry>
                             <entry>http://www.example.net/rss.xml</entry>
 
                             <entry>
@@ -443,7 +443,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.verify</entry>
+                            <entry><property>hub.verify</property></entry>
                             <entry>sync</entry>
 
                             <entry>
@@ -457,7 +457,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.verify</entry>
+                            <entry><property>hub.verify</property></entry>
                             <entry>async</entry>
 
                             <entry>
@@ -471,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                         </row>
 
                         <row>
-                            <entry>hub.verify_token</entry>
+                            <entry><property>hub.verify_token</property></entry>
                             <entry>3065919804abcaa7212ae89.879827871253878386</entry>
 
                             <entry>

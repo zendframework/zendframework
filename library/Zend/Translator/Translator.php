@@ -57,7 +57,6 @@ class Translator
      * @var \Zend\Translator\Adapter
      */
     private $_adapter;
-    private static $_cache = null;
 
     /**
      * Generates the standard translation object
@@ -131,11 +130,7 @@ class Translator
         }
 
         if (array_key_exists('cache', $options)) {
-            self::setCache($options['cache']);
-        }
-
-        if (self::$_cache !== null) {
-            $options['cache'] = self::getCache();
+            Adapter::setCache($options['cache']);
         }
 
         $adapter = $options['adapter'];
@@ -163,18 +158,18 @@ class Translator
      */
     public static function getCache()
     {
-        return self::$_cache;
+        return Adapter::getCache();
     }
 
     /**
      * Sets a cache for all instances of Zend_Translate
      *
-     * @param  \Zend\Cache\Frontend\Core $cache Cache to store to
+     * @param  \Zend\Cache\Frontend $cache Cache to store to
      * @return void
      */
-    public static function setCache(\Zend\Cache\Frontend\Core $cache)
+    public static function setCache(\Zend\Cache\Frontend $cache)
     {
-        self::$_cache = $cache;
+        Adapter::setCache($cache);
     }
 
     /**
@@ -184,11 +179,7 @@ class Translator
      */
     public static function hasCache()
     {
-        if (self::$_cache !== null) {
-            return true;
-        }
-
-        return false;
+        return Adapter::hasCache();
     }
 
     /**
@@ -198,17 +189,18 @@ class Translator
      */
     public static function removeCache()
     {
-        self::$_cache = null;
+        Adapter::removeCache();
     }
 
     /**
      * Clears all set cache data
      *
+     * @param string $tag Tag to clear when the default tag name is not used
      * @return void
      */
-    public static function clearCache()
+    public static function clearCache($tag = null)
     {
-        self::$_cache->clean();
+        Adapter::clearCache($tag);
     }
 
     /**

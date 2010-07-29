@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 21826 -->
 <sect1 id="zend.gdata.clientlogin">
     <title>ClientLogin による認証</title>
 
     <para>
         ClientLogin を使用すると、<acronym>PHP</acronym> アプリケーションで
         Google Data サービスへのアクセスのための認証ができるようになります。
-        ユーザの認証情報を、Http クライアントに指定します。
+        ユーザの認証情報を、 <acronym>HTTP</acronym> クライアントに指定します。
     </para>
 
     <para>
@@ -35,7 +35,7 @@
         <title>ClientLogin 認証済みの Http クライアントの作成</title>
 
         <para>
-            ClientLogin を使用した認証済みの Http クライアントを作成するには、
+            ClientLogin を使用した認証済みの <acronym>HTTP</acronym> クライアントを作成するには、
             静的関数 <methodname>Zend_Gdata_ClientLogin::getHttpClient()</methodname>
             をコールし、Google アカウントの認証情報をプレーンテキストで渡します。
             この関数の返り値は、<classname>Zend_Http_Client</classname> クラスのオブジェクトとなります。

@@ -24,9 +24,9 @@
  * @namespace
  */
 namespace Zend\Service\SlideShare;
-use Zend\HTTP;
+use Zend\Http;
 use Zend\Cache\Frontend;
-use Zend\HTTP\Client;
+use Zend\Http\Client;
 
 /**
  * The Zend_Service_SlideShare component is used to interface with the
@@ -130,7 +130,7 @@ class SlideShare
      * @param Zend_Http_Client $client The HTTP client instance to use
      * @return Zend_Service_SlideShare
      */
-    public function setHttpClient(HTTP\Client $client)
+    public function setHttpClient(Http\Client $client)
     {
         $this->_httpclient = $client;
         return $this;
@@ -145,8 +145,8 @@ class SlideShare
     public function getHttpClient()
     {
 
-        if(!($this->_httpclient instanceof HTTP\Client)) {
-            $client = new HTTP\Client();
+        if(!($this->_httpclient instanceof Http\Client)) {
+            $client = new Http\Client();
             $client->setConfig(array('maxredirects' => 2,
                                      'timeout' => 5));
 
@@ -293,7 +293,7 @@ class SlideShare
              ->setUserName($username)
              ->setPassword($password);
 
-        $this->_httpclient = new HTTP\Client();
+        $this->_httpclient = new Http\Client();
     }
 
     /**

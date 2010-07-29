@@ -24,10 +24,10 @@
  */
 namespace Zend\Feed\PubSubHubbub;
 use Zend\Feed\Reader;
-use Zend\HTTP;
+use Zend\Http;
 
 /**
- * @uses       \Zend\HTTP\Client
+ * @uses       \Zend\Http\Client
  * @uses       \Zend\Feed\AbstractFeed
  * @uses       \Zend\Feed\PubSubHubbub\Exception
  * @uses       \Zend\Feed\Reader\Reader
@@ -56,7 +56,7 @@ class PubSubHubbub
     /**
      * Singleton instance if required of the HTTP client
      *
-     * @var \Zend\HTTP\Client
+     * @var \Zend\Http\Client
      */
     protected static $httpClient = null;
 
@@ -66,17 +66,15 @@ class PubSubHubbub
      * best if directly given an instance of Zend_Feed_Reader_Atom|Rss
      * to leverage off.
      *
-     * @param  Zend_Feed_Reader_FeedAbstract|\Zend\Feed\AbstractFeed|string $source
+     * @param  \Zend\Feed\Reader\AbstractFeed|string $source
      * @return array
      */
     public static function detectHubs($source)
     {
         if (is_string($source)) {
             $feed = Reader\Reader::import($source);
-        } elseif (is_object($source) && $source instanceof Reader\AbstractFeed) {
+        } elseif (is_object($source) && $source instanceof Reader\Feed\AbstractFeed) {
             $feed = $source;
-        } elseif (is_object($source) && $source instanceof \Zend\Feed\AbstractFeed) {
-            $feed = Reader\Reader::importFeed($source);
         } else {
             throw new Exception('The source parameter was'
             . ' invalid, i.e. not a URL string or an instance of type'
@@ -89,10 +87,10 @@ class PubSubHubbub
      * Allows the external environment to make Zend_Oauth use a specific
      * Client instance.
      *
-     * @param  \Zend\HTTP\Client $httpClient
+     * @param  \Zend\Http\Client $httpClient
      * @return void
      */
-    public static function setHttpClient(HTTP\Client $httpClient)
+    public static function setHttpClient(Http\Client $httpClient)
     {
         self::$httpClient = $httpClient;
     }
@@ -102,12 +100,12 @@ class PubSubHubbub
      * the instance is reset and cleared of previous parameters GET/POST.
      * Headers are NOT reset but handled by this component if applicable.
      *
-     * @return \Zend\HTTP\Client
+     * @return \Zend\Http\Client
      */
     public static function getHttpClient()
     {
         if (!isset(self::$httpClient)):
-            self::$httpClient = new HTTP\Client;
+            self::$httpClient = new Http\Client;
         else:
             self::$httpClient->resetParameters();
         endif;

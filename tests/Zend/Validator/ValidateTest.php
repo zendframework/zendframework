@@ -55,16 +55,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Resets the default namespaces
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-        Validator\StaticValidator::setDefaultNamespaces(array());
-    }
-
-    /**
      * Ensures expected results from empty validator chain
      *
      * @return void
@@ -154,38 +144,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         Validator\ValidatorChain::execute('1234', 'UnknownValidator');
     }
 
-    /**
-     * Testing Namespaces
-     *
-     * @return void
-     */
-    public function testNamespaces()
-    {
-        $this->assertEquals(array(), Validator\StaticValidator::getDefaultNamespaces());
-        $this->assertFalse(Validator\StaticValidator::hasDefaultNamespaces());
-
-        Validator\StaticValidator::setDefaultNamespaces('TestDir');
-        $this->assertEquals(array('TestDir'), Validator\StaticValidator::getDefaultNamespaces());
-
-        Validator\StaticValidator::setDefaultNamespaces('OtherTestDir');
-        $this->assertEquals(array('OtherTestDir'), Validator\StaticValidator::getDefaultNamespaces());
-
-        $this->assertTrue(Validator\StaticValidator::hasDefaultNamespaces());
-
-        Validator\StaticValidator::setDefaultNamespaces(array());
-
-        $this->assertEquals(array(), Validator\StaticValidator::getDefaultNamespaces());
-        $this->assertFalse(Validator\StaticValidator::hasDefaultNamespaces());
-
-        Validator\StaticValidator::addDefaultNamespaces(array('One', 'Two'));
-        $this->assertEquals(array('One', 'Two'), Validator\StaticValidator::getDefaultNamespaces());
-
-        Validator\StaticValidator::addDefaultNamespaces('Three');
-        $this->assertEquals(array('One', 'Two', 'Three'), Validator\StaticValidator::getDefaultNamespaces());
-
-        Validator\StaticValidator::setDefaultNamespaces(array());
-    }
-
     public function testIsValidWithParameters()
     {
         $this->assertTrue(Validator\StaticValidator::execute(5, 'Between', array(1, 10)));
@@ -194,8 +152,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetMessageLengthLimitation()
     {
-        Validator\StaticValidator::setMessageLength(5);
-        $this->assertEquals(5, Validator\StaticValidator::getMessageLength());
+        Validator\AbstractValidator::setMessageLength(5);
+        $this->assertEquals(5, Validator\AbstractValidator::getMessageLength());
 
         $valid = new Validator\Between(1, 10);
         $this->assertFalse($valid->isValid(24));

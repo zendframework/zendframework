@@ -68,7 +68,7 @@ class ActivityEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#userEvent',
             $activityEntry->category[1]->term);
         $this->assertEquals('tayzonzay has favorited a video',
-            $activityEntry->title->text);;
+            $activityEntry->title->text);
 
         $this->assertEquals('self', $activityEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml',

@@ -60,7 +60,7 @@ class ActivityFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#userEvent',
             $activityFeed->category[0]->term);
         $this->assertEquals('Activity of tayzonzay',
-            $activityFeed->title->text);;
+            $activityFeed->title->text);
 
         $this->assertEquals('self', $activityFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml',

@@ -60,7 +60,7 @@ class PlaylistVideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $playlistVideoEntry->category[0]->scheme);
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#playlist', $playlistVideoEntry->category[0]->term);
         $this->assertEquals('text', $playlistVideoEntry->title->type);
-        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $playlistVideoEntry->title->text);;
+        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $playlistVideoEntry->title->text);
         $this->assertEquals('html', $playlistVideoEntry->content->type);
         $this->assertEquals('self', $playlistVideoEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $playlistVideoEntry->getLink('self')->type);
@@ -133,7 +133,7 @@ class PlaylistVideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#playlist',
             $playlistVideoEntry->category[2]->term);
         $this->assertEquals('Paris Police Find Dynamite in Department Store',
-            $playlistVideoEntry->title->text);;
+            $playlistVideoEntry->title->text);
 
         $this->assertEquals('alternate',
             $playlistVideoEntry->getLink('alternate')->rel);

@@ -61,7 +61,7 @@ class SubscriptionFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#subscription', $subscriptionFeed->category[0]->term);
         $this->assertEquals('http://www.youtube.com/img/pic_youtubelogo_123x63.gif', $subscriptionFeed->logo->text);
         $this->assertEquals('text', $subscriptionFeed->title->type);
-        $this->assertEquals('testuser\'s Subscriptions', $subscriptionFeed->title->text);;
+        $this->assertEquals('testuser\'s Subscriptions', $subscriptionFeed->title->text);
         $this->assertEquals('self', $subscriptionFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $subscriptionFeed->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/users/testuser/subscriptions?start-index=1&max-results=25', $subscriptionFeed->getLink('self')->href);
@@ -84,7 +84,7 @@ class SubscriptionFeedTest extends \PHPUnit_Framework_TestCase
             'http://www.youtube.com/img/pic_youtubelogo_123x63.gif',
             $subscriptionFeed->logo->text);
         $this->assertEquals('Subscriptions of zfgdata',
-            $subscriptionFeed->title->text);;
+            $subscriptionFeed->title->text);
         $this->assertEquals('zfgdata',
             $subscriptionFeed->author[0]->name->text);
         $this->assertEquals('http://gdata.youtube.com/feeds/api/users/zfgdata',

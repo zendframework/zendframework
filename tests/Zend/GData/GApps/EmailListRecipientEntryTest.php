@@ -52,7 +52,7 @@ class EmailListRecipientEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $emailListRecipientEntry->category[0]->scheme);
         $this->assertEquals('http://schemas.google.com/apps/2006#emailList.recipient', $emailListRecipientEntry->category[0]->term);
         $this->assertEquals('text', $emailListRecipientEntry->title->type);
-        $this->assertEquals('SusanJones', $emailListRecipientEntry->title->text);;
+        $this->assertEquals('SusanJones', $emailListRecipientEntry->title->text);
         $this->assertEquals('self', $emailListRecipientEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $emailListRecipientEntry->getLink('self')->type);
         $this->assertEquals('https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/SusanJones%40example.com', $emailListRecipientEntry->getLink('self')->href);

@@ -569,7 +569,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(
             array('name'=>'Joe Bloggs'), array('name'=>'Jane Bloggs')
         ), (array) $feed->getAuthors());
-        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());;
+        $this->assertEquals(array('Joe Bloggs','Jane Bloggs'), $feed->getAuthors()->getValues());
     }
 
     // DC 1.1

@@ -58,7 +58,7 @@ class ContactFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#friend', $contactFeed->category[0]->term);
         $this->assertEquals('http://www.youtube.com/img/pic_youtubelogo_123x63.gif', $contactFeed->logo->text);
         $this->assertEquals('text', $contactFeed->title->type);
-        $this->assertEquals('davidchoimusic\'s Contacts', $contactFeed->title->text);;
+        $this->assertEquals('davidchoimusic\'s Contacts', $contactFeed->title->text);
         $this->assertEquals('self', $contactFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $contactFeed->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/users/davidchoimusic/contacts?start-index=1&max-results=5', $contactFeed->getLink('self')->href);

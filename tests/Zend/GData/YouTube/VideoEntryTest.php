@@ -91,7 +91,7 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('music', $videoEntry->category[7]->term);
 
         $this->assertEquals('text', $videoEntry->title->type);
-        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $videoEntry->title->text);;
+        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $videoEntry->title->text);
         $this->assertEquals('html', $videoEntry->content->type);
         $this->assertEquals('self', $videoEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $videoEntry->getLink('self')->type);
@@ -178,7 +178,7 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('music', $videoEntry->category[7]->term);
 
         $this->assertEquals('text', $videoEntry->title->type);
-        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $videoEntry->title->text);;
+        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $videoEntry->title->text);
         $this->assertEquals('html', $videoEntry->content->type);
         $this->assertEquals('self', $videoEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $videoEntry->getLink('self')->type);
@@ -266,7 +266,7 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Music', $videoEntry->category[7]->term);
 
         $this->assertEquals('text', $videoEntry->title->type);
-        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $videoEntry->title->text);;
+        $this->assertEquals('"Crazy (Gnarles Barkley)" - Acoustic Cover', $videoEntry->title->text);
         $this->assertEquals('application/x-shockwave-flash', $videoEntry->content->type);
         $this->assertEquals('self', $videoEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $videoEntry->getLink('self')->type);

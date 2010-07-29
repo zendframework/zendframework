@@ -388,7 +388,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
 
         $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_ARRAY);
         $this->assertType('array', $cookies, '$cookies is expected to be an array, but it is not');
-        $this->assertType('string', $cookies[0], '$cookies[0] is expected to be a string');;
+        $this->assertType('string', $cookies[0], '$cookies[0] is expected to be a string');
 
         $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_CONCAT);
         $this->assertType('string', $cookies, '$cookies is expected to be a string');

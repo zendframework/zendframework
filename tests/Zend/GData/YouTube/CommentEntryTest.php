@@ -57,9 +57,9 @@ class CommentEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $commentEntry->category[0]->scheme);
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#comment', $commentEntry->category[0]->term);
         $this->assertEquals('text', $commentEntry->title->type);
-        $this->assertEquals('how to turn ...', $commentEntry->title->text);;
+        $this->assertEquals('how to turn ...', $commentEntry->title->text);
         $this->assertEquals('text', $commentEntry->content->type);
-        $this->assertEquals('how to turn rejection and heartbreak into something positive is the big mystery of life but you\'re managed to turn it to your advantage with a beautiful song. Who was she?', $commentEntry->content->text);;
+        $this->assertEquals('how to turn rejection and heartbreak into something positive is the big mystery of life but you\'re managed to turn it to your advantage with a beautiful song. Who was she?', $commentEntry->content->text);
         $this->assertEquals('self', $commentEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $commentEntry->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/videos/Lnio-pqLPgg/comments/CE0314DEBFFC9052', $commentEntry->getLink('self')->href);

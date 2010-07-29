@@ -72,7 +72,7 @@ function ZendTest_Autoloader($class)
             break;
         default:
             $file = false;
-            break;;
+            break;
     }
 
     if ($file) {

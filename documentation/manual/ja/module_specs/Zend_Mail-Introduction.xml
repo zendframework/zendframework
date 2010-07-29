@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="zend.mail.introduction">
 
     <title>導入</title>
@@ -45,7 +45,7 @@ $mail->send();
             <para>
                 <classname>Zend_Mail</classname> でメールを送信するには、
                 最低 1 か所以上の受信者、送信者 (<methodname>setFrom()</methodname> を使用します)、
-                そして本文 (テキストや HTML) を指定しなければなりません。
+                そして本文 (テキストや <acronym>HTML</acronym>) を指定しなければなりません。
             </para>
         </note>
 

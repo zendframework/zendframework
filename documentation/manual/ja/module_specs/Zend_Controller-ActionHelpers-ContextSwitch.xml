@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21824 -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch および AjaxContext</title>
 
@@ -145,7 +145,7 @@ class NewsController extends Zend_Controller_Action
 
         <para>
             <emphasis>ContextSwitch</emphasis> ヘルパーで
-            使用できるデフォルトのコンテキストは、json と xml のふたつです。
+            使用できるデフォルトのコンテキストは、json と <acronym>XML</acronym> のふたつです。
         </para>
 
         <itemizedlist>

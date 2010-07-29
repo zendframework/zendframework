@@ -71,7 +71,7 @@ class Consumer extends OAuth
     public function __construct($options = null)
     {
         $this->_config = new Config\StandardConfig;
-        if (!is_null($options)) {
+        if ($options !== null) {
             if ($options instanceof \Zend\Config\Config) {
                 $options = $options->toArray();
             }
@@ -94,12 +94,12 @@ class Consumer extends OAuth
         $httpMethod = null,
         Http\RequestToken $request = null
     ) {
-        if (is_null($request)) {
+        if ($request === null) {
             $request = new Http\RequestToken($this, $customServiceParameters);
-        } elseif(!is_null($customServiceParameters)) {
+        } elseif($customServiceParameters !== null) {
             $request->setParameters($customServiceParameters);
         }
-        if (!is_null($httpMethod)) {
+        if ($httpMethod !== null) {
             $request->setMethod($httpMethod);
         } else {
             $request->setMethod($this->getRequestMethod());
@@ -126,12 +126,12 @@ class Consumer extends OAuth
         Token\Request $token = null,
         Http\UserAuthorization $redirect = null
     ) {
-        if (is_null($redirect)) {
+        if ($redirect === null) {
             $redirect = new Http\UserAuthorization($this, $customServiceParameters);
         } elseif(!is_null($customServiceParameters)) {
             $redirect->setParameters($customServiceParameters);
         }
-        if (!is_null($token)) {
+        if ($token !== null) {
             $this->_requestToken = $token;
         }
         return $redirect->getUrl();
@@ -178,7 +178,7 @@ class Consumer extends OAuth
             throw new Exception(
                 'Response from Service Provider is not a valid authorized request token');
         }
-        if (is_null($request)) {
+        if ($request === null) {
             $request = new Http\AccessToken($this);
         }
 
@@ -189,7 +189,7 @@ class Consumer extends OAuth
             ));
             $request->setParameters($params);
         }
-        if (!is_null($httpMethod)) {
+        if ($httpMethod !== null) {
             $request->setMethod($httpMethod);
         } else {
             $request->setMethod($this->getRequestMethod());

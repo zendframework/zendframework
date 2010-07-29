@@ -309,7 +309,7 @@ class Png extends AbstractImage
                   */
 
                   $tmpData = $this->readBytes($chunkLength);
-                  if(($trnsIdx = strpos($tmpData, chr(0))) !== false) {
+                  if(($trnsIdx = strpos($tmpData, "\0")) !== false) {
                        $this->_transparencyData = array($trnsIdx, $trnsIdx);
                   }
 

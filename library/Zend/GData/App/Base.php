@@ -375,8 +375,8 @@ abstract class Base
     {
         // Check for a memoized result
         $key = $prefix . ' ' .
-               (is_null($majorVersion) ? 'NULL' : $majorVersion) .
-               ' '. (is_null($minorVersion) ? 'NULL' : $minorVersion);
+               ($majorVersion === null ? 'NULL' : $majorVersion) .
+               ' '. ($minorVersion === null ? 'NULL' : $minorVersion);
         if (array_key_exists($key, self::$_namespaceLookupCache))
           return self::$_namespaceLookupCache[$key];
         // If no match, return the prefix by default

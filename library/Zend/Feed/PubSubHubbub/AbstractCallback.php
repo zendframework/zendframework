@@ -71,7 +71,7 @@ abstract class AbstractCallback implements Callback
      */
     public function __construct($config = null)
     {
-        if (!is_null($config)) {
+        if ($config !== null) {
             $this->setConfig($config);
         }
     }

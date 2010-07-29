@@ -61,7 +61,7 @@ class PrivateKey extends Key
 
     public function getPublicKey()
     {
-        if (is_null($this->_publicKey)) {
+        if ($this->_publicKey === null) {
             $this->_publicKey = new PublicKey($this->_details['key']);
         }
         return $this->_publicKey;

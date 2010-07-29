@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21790 -->
+<!-- EN-Revision: 21816 -->
 <sect1 id="zend.locale.introduction">
 
     <title>導入</title>
@@ -294,7 +294,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                     <para>
                         <code>'browser'</code> - <classname>Zend_Locale</classname>
                         は、ユーザが使用するウェブブラウザが提供する情報を使用します。
-                        これは、<acronym>PHP</acronym> のグローバル変数 <constant>HTTP_ACCEPT_LANGUAGE</constant>
+                        これは、<acronym>PHP</acronym> のグローバル変数 <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant>
                         で取得します。
                     </para>
                     <para>

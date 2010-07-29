@@ -139,7 +139,7 @@ class Twitter extends Rest\Client\RestClient
             $this->setLocalHttpClient($options['accessToken']->getHttpClient($options));
         } else {
             $this->setLocalHttpClient(clone self::getHttpClient());
-            if (is_null($consumer)) {
+            if ($consumer === null) {
                 $this->_oauthConsumer = new OAuth\Consumer($options);
             } else {
                 $this->_oauthConsumer = $consumer;

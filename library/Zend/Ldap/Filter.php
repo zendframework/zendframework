@@ -234,9 +234,9 @@ class Filter extends Filter\StringFilter
     private static function _createFilterString($attr, $value, $filtertype, $prepend = null, $append = null)
     {
         $str = $attr . $filtertype;
-        if (!is_null($prepend)) $str .= $prepend;
+        if ($prepend !== null) $str .= $prepend;
         $str .= self::escapeValue($value);
-        if (!is_null($append)) $str .= $append;
+        if ($append !== null) $str .= $append;
         return $str;
     }
 

@@ -57,7 +57,7 @@ class ImageSize extends Validator\AbstractValidator
         self::HEIGHT_TOO_BIG   => "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected",
         self::HEIGHT_TOO_SMALL => "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected",
         self::NOT_DETECTED     => "The size of image '%value%' could not be detected",
-        self::NOT_READABLE     => "File '%value%' can not be read",
+        self::NOT_READABLE     => "File '%value%' is not readable or does not exist",
     );
 
     /**

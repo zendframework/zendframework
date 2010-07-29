@@ -59,7 +59,7 @@ abstract class Adapter
 
     /**
      * Internal cache for all adapters
-     * @var \Zend\Cache\Frontend\Core
+     * @var \Zend\Cache\Frontend
      */
     protected static $_cache     = null;
 
@@ -84,7 +84,8 @@ abstract class Adapter
 
     /**
      * Array with all options, each adapter can have own additional options
-     *   'clear'           => when true, clears already loaded data when adding new files
+     *   'clear'           => when true, clears already loaded translations when adding new files
+     *   'content'         => content to translate or file or directory with content
      *   'disableNotices'  => when true, omits notices from being displayed
      *   'ignore'          => a prefix for files and directories which are not being added
      *   'locale'          => the actual set locale to use
@@ -171,7 +172,6 @@ abstract class Adapter
             unset($options['locale']);
         }
 
-
         $this->setOptions($options);
         $options['locale'] = $locale;
 
@@ -179,19 +179,17 @@ abstract class Adapter
             $this->addTranslation($options);
         }
 
-        if ((null !== $options['locale']) 
-            && ($this->getLocale() !== (string) $options['locale'])
-        ) {
+        if ($this->getLocale() !== (string) $options['locale']) {
             $this->setLocale($options['locale']);
         }
     }
 
     /**
-     * Add translation data
+     * Add translations
      *
-     * It may be a new language or additional data for existing language
-     * If $clear parameter is true, then translation data for specified
-     * language is replaced and added otherwise
+     * This may be a new language or additional content for an existing language
+     * If the key 'clear' is true, then translations for the specified
+     * language will be replaced and added otherwise
      *
      * @param  array|Zend_Config $options Options and translations to be added
      * @throws Zend_Translate_Exception
@@ -904,9 +902,9 @@ abstract class Adapter
     /**
      * Sets a cache for all Zend_Translate_Adapters
      *
-     * @param \Zend\Cache\Frontend\Core $cache Cache to store to
+     * @param \Zend\Cache\Frontend $cache Cache to store to
      */
-    public static function setCache(\Zend\Cache\Frontend\Core $cache)
+    public static function setCache(\Zend\Cache\Frontend $cache)
     {
         self::$_cache = $cache;
         self::_getTagSupportForCache();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 22585 -->
 <sect1 id="zend.translate.adapter">
     <title>Zend_Translate のアダプタ</title>
 
@@ -43,7 +43,7 @@
 
                 <row>
                     <entry>Ini</entry>
-                    <entry>シンプルな ini ファイル (*.ini)</entry>
+                    <entry>シンプルな <acronym>INI</acronym> ファイル (*.ini)</entry>
                     <entry>シンプルなテキスト形式。高速。Unicode 文字で問題が発生する可能性がある。</entry>
                 </row>
 
@@ -298,7 +298,7 @@
 
             <para>
                 XmlTm アダプタは、すでにこのレイアウトを採用している顧客が使用するアダプタです。
-                XmlTm は、html ソース全体を翻訳ソースに含めることのできるフォーマットで、
+                XmlTm は、 <acronym>HTML</acronym> ソース全体を翻訳ソースに含めることのできるフォーマットで、
                 翻訳とレイアウトがひとつにまとまります。
                 XLIFF は <acronym>XML</acronym> ベースのフォーマットです。XLIFF
                 と関連していますが、それほど読みやすくはありません。
@@ -374,6 +374,7 @@ try {
             <methodname>removeCache()</methodname> も用意されています。
         </para>
 
+        <!-- TODO : to be translated -->
         <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core',
                              'File',
@@ -387,6 +388,9 @@ $translate = new Zend_Translate(
         'locale'  => 'en'
     )
 );
+
+// to clear the cache somewhere later in your code
+Zend_Translate::clearCache();
 ]]></programlisting>
 
         <note>
@@ -399,6 +403,37 @@ $translate = new Zend_Translate(
                 翻訳ソースのキャッシュは行われません。
             </para>
         </note>
+
+        <para>
+            When the attached cache supports tagging you can set a own tag string by using the
+            option <property>tag</property>. This allows you do delete only the cache from this
+            single instance of <classname>Zend_Translate</classname>. When you are not using this
+            option the default tag <classname>Zend_Translate</classname> is used.
+        </para>
+
+        <para>
+            Using the option <property>tag</property> you must give the used tag to
+            <methodname>clearCache()</methodname> to declare which tag you want to delete.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+Zend_Translate::setCache($cache);
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en',
+        'tag'     => 'MyTag'
+    )
+);
+
+// somewhere later in your code
+Zend_Translate::clearCache('MyTag');
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

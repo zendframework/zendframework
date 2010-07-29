@@ -73,21 +73,17 @@ abstract class AbstractToken implements OAuthToken
      * @return void
      */
     public function __construct(
-        $response = null,
+        HTTPResponse $response = null,
         HTTPUtility $utility = null
     ) {
-        if (!is_null($response) && !($response instanceof HTTPResponse)) {
-            throw new OAuthException('Invalid response provided');
-        }
-
-        if (!is_null($response)) {
+        if ($response !== null) {
             $this->_response = $response;
             $params = $this->_parseParameters($response);
             if (count($params) > 0) {
                 $this->setParams($params);
             }
         }
-        if (!is_null($utility)) {
+        if ($utility !== null) {
             $this->_httpUtility = $utility;
         } else {
             $this->_httpUtility = new HTTPUtility;
@@ -290,7 +286,7 @@ abstract class AbstractToken implements OAuthToken
      */
     public function __wakeup() 
     {
-        if (is_null($this->_httpUtility)) {
+        if ($this->_httpUtility === null) {
             $this->_httpUtility = new HTTPUtility;
         }
     }

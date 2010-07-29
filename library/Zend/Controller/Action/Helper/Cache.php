@@ -215,7 +215,7 @@ class Cache extends AbstractHelper
      */
     public function getManager()
     {
-        if (!is_null($this->_manager)) {
+        if ($this->_manager !== null) {
             return $this->_manager;
         }
         $front = \Zend\Controller\Front::getInstance();

@@ -159,7 +159,7 @@ class StandardConfig implements OAuthConfig
      */
     public function __construct($options = null)
     {
-        if (!is_null($options)) {
+        if ($options !== null) {
             if ($options instanceof \Zend\Config\Config) {
                 $options = $options->toArray();
             }

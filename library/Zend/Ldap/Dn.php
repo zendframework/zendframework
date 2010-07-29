@@ -581,8 +581,8 @@ class Dn implements \ArrayAccess
                 $ret[] = array($k[$i] => $v[$i]);
             }
         }
-        if (!is_null($keys)) $keys = $k;
-        if (!is_null($vals)) $vals = $v;
+        if ($keys !== null) $keys = $k;
+        if ($vals !== null) $vals = $v;
         return $ret;
     }
 

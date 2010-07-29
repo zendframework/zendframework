@@ -82,14 +82,17 @@ class Http
      * @param  null|Zend\OAuth\Http\Utility $utility
      * @return void
      */
-    public function __construct(Consumer $consumer, array $parameters = null, Http\Utility $utility = null) 
-    {
+    public function __construct(
+        Consumer $consumer, 
+        array $parameters = null, 
+        Http\Utility $utility = null
+    ) {
         $this->_consumer = $consumer;
         $this->_preferredRequestScheme = $this->_consumer->getRequestScheme();
-        if (!is_null($parameters)) {
+        if ($parameters !== null) {
             $this->setParameters($parameters);
         }
-        if (!is_null($utility)) {
+        if ($utility !== null) {
             $this->_httpUtility = $utility;
         } else {
             $this->_httpUtility = new Http\Utility;
@@ -175,11 +178,11 @@ class Http
         } catch (\Zend\Http\Client\Exception $e) {
             throw new Exception('Error in HTTP request', null, $e);
         }
-        if (!is_null($response)) {
+        if ($response !== null) {
             $body   = $response->getBody();
             $status = $response->getStatus();
         }
-        if (is_null($response) // Request failure/exception
+        if ($response === null // Request failure/exception
             || $status == 500  // Internal Server Error
             || $status == 400  // Bad Request
             || $status == 401  // Unauthorized
@@ -230,7 +233,7 @@ class Http
             default:
                 throw new Exception(
                     'Could not retrieve a valid Token response from Token URL:'
-                    . (!is_null($response) 
+                    . ($response !== null 
                         ? PHP_EOL . $response->getBody()
                         : ' No body - check for headers')
                 );

@@ -185,7 +185,7 @@ class Rsa
     {
         $config = null;
         $passPhrase = null;
-        if (!is_null($configargs)) {
+        if ($configargs !== null) {
             if (isset($configargs['passPhrase'])) {
                 $passPhrase = $configargs['passPhrase'];
                 unset($configargs['passPhrase']);

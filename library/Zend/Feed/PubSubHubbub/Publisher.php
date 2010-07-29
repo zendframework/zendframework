@@ -80,7 +80,7 @@ class Publisher
      */
     public function __construct($config = null)
     {
-        if (!is_null($config)) {
+        if ($config !== null) {
             $this->setConfig($config);
         }
     }
@@ -236,7 +236,7 @@ class Publisher
      */
     public function notifyHub($url)
     {
-        if (empty($url) || !is_string($url) || !URI\Zend\Uri\Uri::check($url)) {
+        if (empty($url) || !is_string($url) || !Uri\Url::validate($url)) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .'URL');
@@ -305,7 +305,7 @@ class Publisher
             $this->removeParameter($name);
             return $this;
         }
-        if (empty($value) || (!is_string($value) && !is_null($value))) {
+        if (empty($value) || (!is_string($value) && $value !== null)) {
             throw new Exception('Invalid parameter "value"'
                 .' of "' . $value . '" must be a non-empty string');
         }

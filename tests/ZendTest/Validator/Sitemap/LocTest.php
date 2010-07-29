@@ -115,7 +115,7 @@ class LocTest extends \PHPUnit_Framework_TestCase
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('should be a string', current($messages));
+            $this->assertContains('String expected', current($messages));
         }
     }
 

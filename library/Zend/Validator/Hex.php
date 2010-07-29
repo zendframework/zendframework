@@ -42,7 +42,7 @@ class Hex extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID => "Invalid type given, value should be a string",
+        self::INVALID => "Invalid type given. String expected",
         self::NOT_HEX => "'%value%' has not only hexadecimal digit characters",
     );
 

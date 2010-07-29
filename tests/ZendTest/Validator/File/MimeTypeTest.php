@@ -27,19 +27,6 @@ namespace ZendTest\Validate\File;
 use Zend\Validator\File;
 use Zend\Validator;
 
-// Call Zend_Validate_File_MimeTypeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_MimeTypeTest::main");
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_File_MimeType
- */
-
 /**
  * MimeType testbed
  *
@@ -52,17 +39,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class MimeTypeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Validate_File_MimeTypeTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Ensures that the validator follows expected behavior
      *
@@ -188,6 +164,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $validator = new File\MimeType(array('image/gif', 'magicfile' => __FILE__));
+            $this->fail('Zend\Validator\File\MimeType should not accept invalid magic file.');
         } catch (Validator\Exception $e) {
             // @ZF-9320: False Magic File is not allowed to be set
         }

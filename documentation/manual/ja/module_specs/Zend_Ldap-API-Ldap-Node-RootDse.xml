@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21821 -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
     <title>Zend_Ldap_Node_RootDse</title>
 
@@ -34,7 +34,7 @@
             <tbody>
                 <row>
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
-                    <entry>Zend_Ldap_Dn として現行ノードの DN を取得</entry>
+                    <entry><classname>Zend_Ldap_Dn</classname> として現行ノードの DN を取得</entry>
                 </row>
                 <row>
                     <entry><code>string getDnString(string $caseFold)</code></entry>

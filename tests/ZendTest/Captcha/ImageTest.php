@@ -66,7 +66,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         }
         $this->element = new \Zend\Form\Element\Captcha('captchaI',
                     array('captcha' => array('Image',
-                                             'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer',
+                                             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
                                              'imgDir'       => $this->testDir,
                                              'font'         => __DIR__. '/../Pdf/_fonts/Vera.ttf')
                          ));

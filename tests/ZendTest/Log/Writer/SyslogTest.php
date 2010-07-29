@@ -20,11 +20,9 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
+namespace ZendTest\Log\Writer;
 
-/** Zend_Log_Writer_Syslog */
-require_once 'Zend/Log/Writer/Syslog.php';
+use Zend\Log\Writer\Syslog as SyslogWriter;
 
 /**
  * @category   Zend
@@ -34,12 +32,12 @@ require_once 'Zend/Log/Writer/Syslog.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
+class SyslogTest extends \PHPUnit_Framework_TestCase
 {
     public function testWrite()
     {
         $fields = array('message' => 'foo', 'priority' => LOG_NOTICE);
-        $writer = new Zend_Log_Writer_Syslog();
+        $writer = new SyslogWriter();
         $writer->write($fields);
     }
 
@@ -50,8 +48,8 @@ class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
             'facility'    => LOG_USER
         );
 
-        $writer = Zend_Log_Writer_Syslog::factory($cfg);
-        $this->assertTrue($writer instanceof Zend_Log_Writer_Syslog);
+        $writer = SyslogWriter::factory($cfg);
+        $this->assertTrue($writer instanceof SyslogWriter);
     }
 
     /**
@@ -59,13 +57,9 @@ class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
      */
     public function testThrowExceptionValueNotPresentInFacilities()
     {
-        try {
-            $writer = new Zend_Log_Writer_Syslog();
-            $writer->setFacility(LOG_USER * 1000);
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertContains('Invalid log facility provided', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Log\Exception', 'Invalid log facility provided');
+        $writer = new SyslogWriter();
+        $writer->setFacility(LOG_USER * 1000);
     }
 
     /**
@@ -76,13 +70,9 @@ class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
         if ('WIN' != strtoupper(substr(PHP_OS, 0, 3))) {
             $this->markTestSkipped('Run only in windows');
         }
-        try {
-            $writer = new Zend_Log_Writer_Syslog();
-            $writer->setFacility(LOG_AUTH);
-        } catch (Exception $e) {
-            $this->assertType('Zend_Log_Exception', $e);
-            $this->assertContains('Only LOG_USER is a valid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Log\Exception', 'Only LOG_USER is a valid');
+        $writer = new SyslogWriter();
+        $writer->setFacility(LOG_AUTH);
     }
 
     /**
@@ -90,10 +80,10 @@ class Zend_Log_Writer_SyslogTest extends PHPUnit_Framework_TestCase
      */
     public function testFluentInterface()
     {
-        $writer   = new Zend_Log_Writer_Syslog();
+        $writer   = new SyslogWriter();
         $instance = $writer->setFacility(LOG_USER)
                            ->setApplicationName('my_app');
 
-        $this->assertTrue($instance instanceof Zend_Log_Writer_Syslog);
+        $this->assertTrue($instance instanceof SyslogWriter);
     }
 }

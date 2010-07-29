@@ -85,7 +85,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('pdo_sqlite')) {
-            $this->markTestSkipped('Zend\\Session\\SaveHandler\\DbTable tests are not enabled due to missing PDO_Sqlite extension');
+            $this->markTestSkipped('Zend\Session\SaveHandler\DbTable tests are not enabled due to missing PDO_Sqlite extension');
         }
 
         $this->manager = $manager = new TestManager();
@@ -100,7 +100,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        $this->_dropTable();
+        if ($this->_db instanceof AbstractAdapter) {
+            $this->_dropTable();
+        }
     }
 
     public function testConfigPrimaryAssignmentFullConfig()
@@ -114,7 +116,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsExceptionGivenConfigAsNull()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable(null);
     }
 
@@ -145,7 +147,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testPrimaryAssignmentIdNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         $config['primary'] = array('id');
         $config[DbTable::PRIMARY_ASSIGNMENT]
@@ -172,7 +174,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testModifiedColumnNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[DbTable::MODIFIED_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -184,7 +186,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testLifetimeColumnNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[DbTable::LIFETIME_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -196,7 +198,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testDataColumnNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[DbTable::DATA_COLUMN]);
         $this->_usedSaveHandlers[] =

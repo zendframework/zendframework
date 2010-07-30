@@ -43,7 +43,7 @@ class ApplicationDirectory
 
     protected $_filesystemName = 'application';
 
-    protected $_classNamePrefix = 'Application\\\\';
+    protected $_classNamePrefix = 'Application\\';
     
     public function init()
     {

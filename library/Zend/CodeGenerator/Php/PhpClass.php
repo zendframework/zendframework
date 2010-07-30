@@ -227,6 +227,12 @@ class PhpClass extends AbstractPhp
      */
     public function setName($name)
     {
+        if (strstr($name, '\\')) {
+            $namespace = substr($name, 0, strrpos($name, '\\'));
+            $name      = substr($name, strrpos($name, '\\') + 1);
+            $this->setNamespaceName($namespace);
+        }
+
         $this->_name = $name;
         return $this;
     }
@@ -494,10 +500,18 @@ class PhpClass extends AbstractPhp
     public function generate()
     {
         if (!$this->isSourceDirty()) {
-            return $this->getSourceContent();
+            $output = $this->getSourceContent();
+            if (!empty($output)) {
+                return $output;
+            }
         }
 
         $output = '';
+
+        if (null !== ($namespace = $this->getNamespaceName())) {
+            $output .= "/** @namespace */" . self::LINE_FEED;
+            $output .= 'namespace ' . $namespace . ';' . self::LINE_FEED . self::LINE_FEED;
+        }
 
         if (null !== ($docblock = $this->getDocblock())) {
             $docblock->setIndentation('');

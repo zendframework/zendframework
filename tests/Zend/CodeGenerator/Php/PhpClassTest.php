@@ -302,4 +302,60 @@ class MyClass extends ParentClass
 CODE;
         $this->assertEquals( $expected, $codeGenClass->generate() );
     }
+
+    /**
+     * @group namespace
+     */
+    public function testCodeGenerationShouldTakeIntoAccountNamespacesFromReflection()
+    {
+        $reflClass = new Reflection\ReflectionClass('ZendTest\CodeGenerator\Php\TestAsset\ClassWithNamespace');
+        $codeGen = Php\PhpClass::fromReflection($reflClass);
+        $this->assertEquals('ZendTest\CodeGenerator\Php\TestAsset', $codeGen->getNamespaceName());
+        $this->assertEquals('ClassWithNamespace', $codeGen->getName());
+        $expected = <<<CODE
+/** @namespace */
+namespace ZendTest\CodeGenerator\Php\\TestAsset;
+
+class ClassWithNamespace
+{
+
+
+}
+
+CODE;
+        $received = $codeGen->generate();
+        $this->assertEquals($expected, $received, $received);
+    }
+
+    /**
+     * @group namespace
+     */
+    public function testSetNameShouldDetermineIfNamespaceSegmentIsPresent()
+    {
+        $codeGenClass = new Php\PhpClass();
+        $codeGenClass->setName('My\Namespaced\FunClass');
+        $this->assertEquals('My\Namespaced', $codeGenClass->getNamespaceName());
+    }
+
+    /**
+     * @group namespace
+     */
+    public function testPassingANamespacedClassnameShouldGenerateANamespaceDeclaration()
+    {
+        $codeGenClass = new Php\PhpClass();
+        $codeGenClass->setName('My\Namespaced\FunClass');
+        $received = $codeGenClass->generate();
+        $this->assertContains('namespace My\Namespaced;', $received, $received);
+    }
+
+    /**
+     * @group namespace
+     */
+    public function testPassingANamespacedClassnameShouldGenerateAClassnameWithoutItsNamespace()
+    {
+        $codeGenClass = new Php\PhpClass();
+        $codeGenClass->setName('My\Namespaced\FunClass');
+        $received = $codeGenClass->generate();
+        $this->assertContains('class FunClass', $received, $received);
+    }
 }

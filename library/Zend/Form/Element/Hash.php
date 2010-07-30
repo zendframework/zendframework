@@ -184,7 +184,7 @@ class Hash extends Xhtml
      */
     public function getSessionName()
     {
-        return __CLASS__ . '_' . $this->getSalt() . '_' . $this->getName();
+        return str_replace('\\', '_', __CLASS__) . '_' . $this->getSalt() . '_' . $this->getName();
     }
 
     /**

@@ -123,7 +123,7 @@ class ProjectProviderFile extends \Zend\Tool\Project\Context\Filesystem\File
 
         $class = new \Zend\CodeGenerator\Php\PhpClass(array(
             'name' => $className,
-            'extendedClass' => 'Zend_Tool_Project_Provider_Abstract'
+            'extendedClass' => '\Zend\Tool\Project\Provider\AbstractProvider'
             ));
 
         $methods = array();

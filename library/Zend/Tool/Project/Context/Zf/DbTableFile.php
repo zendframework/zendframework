@@ -77,14 +77,14 @@ class DbTableFile extends AbstractClassFile
 
     public function getContents()
     {
-        $className = $this->getFullClassName($this->_dbTableName, 'Model_DbTable');
+        $className = $this->getFullClassName($this->_dbTableName, 'Model\DbTable');
         
         $codeGenFile = new Php\PhpFile(array(
             'fileName' => $this->getPath(),
             'classes' => array(
                 new Php\PhpClass(array(
                     'name' => $className,
-                    'extendedClass' => 'Zend_Db_Table_Abstract',
+                    'extendedClass' => '\Zend\Db\Table\AbstractTable',
                     'properties' => array(
                         new Php\PhpProperty(array(
                             'name' => '_name',

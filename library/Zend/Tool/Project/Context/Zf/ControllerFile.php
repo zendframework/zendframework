@@ -109,7 +109,7 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
      */
     public function getContents()
     {
-        $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '_' : '';
+        $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '\\' : '';
         $className .= ucfirst($this->_controllerName) . 'Controller';
         
         $codeGenFile = new Php\PhpFile(array(

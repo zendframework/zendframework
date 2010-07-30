@@ -101,7 +101,7 @@ class FormFile extends AbstractClassFile
             'classes' => array(
                 new \Zend\CodeGenerator\Php\PhpClass(array(
                     'name' => $className,
-                    'extendedClass' => 'Zend_Form',
+                    'extendedClass' => '\Zend\Form\Form',
                     'methods' => array(
                         new \Zend\CodeGenerator\Php\PhpMethod(array(
                             'name' => 'init',

@@ -13,40 +13,39 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Reader\Reader
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Rss.php 22300 2010-05-26 10:13:34Z padraic $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Entry;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\EntryAbstract
-* @uses \Zend\Feed\Reader\EntryInterface
-* @uses \Zend\Feed\Reader\Extension\Atom\Entry
-* @uses \Zend\Feed\Reader\Extension\Content\Entry
-* @uses \Zend\Feed\Reader\Extension\DublinCore\Entry
-* @uses \Zend\Feed\Reader\Extension\Slash\Entry
-* @uses \Zend\Feed\Reader\Extension\Thread\Entry
-* @uses \Zend\Feed\Reader\Extension\WellformedWeb\Entry
-* @category Zend
-* @package Reader\Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Rss extends AbstractEntry implements Reader\Entry
+ * @uses       \Zend\Date\Date
+ * @uses       \Zend\Feed\Exception
+ * @uses       \Zend\Feed\Reader\Reader
+ * @uses       \Zend\Feed\Reader\Collection\Category
+ * @uses       \Zend\Feed\Reader\AbstractEntry
+ * @uses       \Zend\Feed\Reader\Entry
+ * @uses       \Zend\Feed\Reader\Extension\Atom\Entry
+ * @uses       \Zend\Feed\Reader\Extension\Content\Entry
+ * @uses       \Zend\Feed\Reader\Extension\DublinCore\Entry
+ * @uses       \Zend\Feed\Reader\Extension\Slash\Entry
+ * @uses       \Zend\Feed\Reader\Extension\Thread\Entry
+ * @uses       Zend_Feed_Reader_Extension_WellformedWeb_Entry
+ * @category   Zend
+ * @package    Zend_Feed_Reader
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class RSS extends Reader\AbstractEntry implements Reader\Entry
 {
-
     /**
      * XPath query for RDF
      *
@@ -64,7 +63,7 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Entry_Abstract $entry
+     * @param  \Zend\Feed\Entry\AbstractEntry $entry
      * @param  string $entryKey
      * @param  string $type
      * @return void
@@ -77,23 +76,23 @@ class Rss extends AbstractEntry implements Reader\Entry
 
         $pluginLoader = Reader\Reader::getPluginLoader();
 
-        $dublinCoreClass = $pluginLoader->getClassName('DublinCore\\Entry');
-        $this->_extensions['DublinCore\\Entry'] = new $dublinCoreClass($entry, $entryKey, $type);
+        $dublinCoreClass = $pluginLoader->getClassName('DublinCore\Entry');
+        $this->_extensions['DublinCore\Entry'] = new $dublinCoreClass($entry, $entryKey, $type);
 
-        $contentClass   = $pluginLoader->getClassName('Content\\Entry');
-        $this->_extensions['Content\\Entry'] = new $contentClass($entry, $entryKey, $type);
+        $contentClass   = $pluginLoader->getClassName('Content\Entry');
+        $this->_extensions['Content\Entry'] = new $contentClass($entry, $entryKey, $type);
 
-        $atomClass   = $pluginLoader->getClassName('Atom\\Entry');
-        $this->_extensions['Atom\\Entry'] = new $atomClass($entry, $entryKey, $type);
+        $atomClass   = $pluginLoader->getClassName('Atom\Entry');
+        $this->_extensions['Atom\Entry'] = new $atomClass($entry, $entryKey, $type);
 
-        $wfwClass   = $pluginLoader->getClassName('WellFormedWeb\\Entry');
-        $this->_extensions['WellFormedWeb\\Entry'] = new $wfwClass($entry, $entryKey, $type);
+        $wfwClass   = $pluginLoader->getClassName('WellFormedWeb\Entry');
+        $this->_extensions['WellFormedWeb\Entry'] = new $wfwClass($entry, $entryKey, $type);
 
-        $slashClass   = $pluginLoader->getClassName('Slash\\Entry');
-        $this->_extensions['Slash\\Entry'] = new $slashClass($entry, $entryKey, $type);
+        $slashClass   = $pluginLoader->getClassName('Slash\Entry');
+        $this->_extensions['Slash\Entry'] = new $slashClass($entry, $entryKey, $type);
 
-        $threadClass   = $pluginLoader->getClassName('Thread\\Entry');
-        $this->_extensions['Thread\\Entry'] = new $threadClass($entry, $entryKey, $type);
+        $threadClass   = $pluginLoader->getClassName('Thread\Entry');
+        $this->_extensions['Thread\Entry'] = new $threadClass($entry, $entryKey, $type);
     }
 
     /**
@@ -233,8 +232,10 @@ class Rss extends AbstractEntry implements Reader\Entry
                 if ($dateModifiedParsed) {
                     $date = new Date\Date($dateModifiedParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
+                    $dateStandards = array(
+                        Date\Date::RSS, Date\Date::RFC_822,
+                        Date\Date::RFC_2822, Date\Date::DATES,
+                    );
                     $date = new Date\Date;
                     foreach ($dateStandards as $standard) {
                         try {
@@ -242,8 +243,7 @@ class Rss extends AbstractEntry implements Reader\Entry
                             break;
                         } catch (Date\Exception $e) {
                             if ($standard == Date\Date::DATES) {
-                                require_once 'Zend/Feed/Exception.php';
-                                throw new Exception(
+                                throw new \Zend\Feed\Exception(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -440,7 +440,7 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Get all categories
      *
-     * @return Reader\Reader_Collection_Category
+     * @return \Zend\Feed\Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -620,7 +620,7 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param \DOMXPath $xpath
+     * @param DOMXPath $xpath
      */
     public function setXpath(\DOMXPath $xpath)
     {

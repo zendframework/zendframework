@@ -62,7 +62,7 @@ class Priority extends AbstractFilter
         }
 
         $this->_priority = $priority;
-        $this->_operator = is_null($operator) ? '<=' : $operator;
+        $this->_operator = $operator === null ? '<=' : $operator;
     }
 
     /**

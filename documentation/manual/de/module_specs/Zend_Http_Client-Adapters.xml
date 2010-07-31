@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22432 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -47,8 +47,8 @@
             Verwendung der 'adapter' Konfigurationsoption gesetzt. Beim Instanzieren des Client
             Objektes kann man die 'adapter' Konfigurationsoption setzen mit einem String, der den
             Adapternamen (z.B. 'Zend_Http_Client_Adapter_Socket') enthält, oder mit eine Variable,
-            die ein Adapterobjekt (z.B. <code>new Zend_Http_Client_Adapter_Test</code>) enthält. Man
-            kann den Adapter auch danach setzen, indem man die
+            die ein Adapterobjekt (z.B. <command>new Zend_Http_Client_Adapter_Test</command>)
+            enthält. Man kann den Adapter auch danach setzen, indem man die
             <classname>Zend_Http_Client->setConfig()</classname> Methode verwendet.
         </para>
     </sect2>
@@ -170,8 +170,9 @@
                 <title>HTTPS SSL Stream Parameter</title>
 
                 <para>
-                    <code>ssltransport, sslcert</code> und <code>sslpassphrase</code> sind nur
-                    relevant wenn <acronym>HTTPS</acronym> für die Verbindung verwendet wird.
+                    <property>ssltransport</property>, <property>sslcert</property> und
+                    <property>sslpassphrase</property> sind nur relevant wenn
+                    <acronym>HTTPS</acronym> für die Verbindung verwendet wird.
                 </para>
 
                 <para>
@@ -479,7 +480,7 @@ $client = new Zend_Http_Client($uri, $config);
             <methodname>setCurlOption($name, $value)</methodname>, verändern. Der
             <varname>$name</varname> Schlüssel entspricht den CURL_* Konstanten der cURL
             Erweiterung. Man kann auf den CURL Handler durch den Aufruf von
-            <code>$adapter->getHandle();</code> Zugriff erhalten.
+            <command>$adapter->getHandle();</command> Zugriff erhalten.
         </para>
 
         <example id="zend.http.client.adapters.curl.example-2">

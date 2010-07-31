@@ -98,7 +98,7 @@ class GlobalSignals implements StaticSignalSlot
         $signals = self::getInstance();
         $args    = func_get_args();
         $args    = array_slice($args, 2);
-        return call_user_func(array($signals, 'emitUntil'), $callback, $signal, $args);
+        return $signals->emitUntil($callback, $signal, $args);
     }
 
     /**

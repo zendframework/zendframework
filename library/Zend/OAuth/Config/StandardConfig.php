@@ -159,7 +159,7 @@ class StandardConfig implements OAuthConfig
      */
     public function __construct($options = null)
     {
-        if (!is_null($options)) {
+        if ($options !== null) {
             if ($options instanceof \Zend\Config\Config) {
                 $options = $options->toArray();
             }
@@ -294,7 +294,7 @@ class StandardConfig implements OAuthConfig
                 . $method
                 . '. Supported are HMAC-SHA1, RSA-SHA1, PLAINTEXT and HMAC-SHA256');
         }
-        $this->_signatureMethod = $method;;
+        $this->_signatureMethod = $method;
         return $this;
     }
 

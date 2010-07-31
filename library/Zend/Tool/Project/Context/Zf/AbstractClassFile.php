@@ -69,13 +69,13 @@ abstract class AbstractClassFile
                 $prefix = $containingResource->getAttribute('classNamePrefix');
                 $fullClassName = $prefix;
             } elseif ($containingResource->getName() == 'ModuleDirectory') {
-                $prefix = $containingResource->getAttribute('moduleName') . '_';
+                $prefix = $containingResource->getAttribute('moduleName') . '\\';
                 $fullClassName = $prefix;    
             }
         }
 
         if ($classContextName) {
-            $fullClassName .= rtrim($classContextName, '_') . '_';
+            $fullClassName .= rtrim($classContextName, '\\') . '\\';
         }
         $fullClassName .= $localClassName;
 

@@ -113,7 +113,7 @@ class Gettext extends TranslationAdapter
             if ($origtemp[$count * 2 + 1] != 0) {
                 fseek($this->_file, $origtemp[$count * 2 + 2]);
                 $original = @fread($this->_file, $origtemp[$count * 2 + 1]);
-                $original = explode(chr(00), $original);
+                $original = explode("\0", $original);
             } else {
                 $original[0] = '';
             }
@@ -121,7 +121,7 @@ class Gettext extends TranslationAdapter
             if ($transtemp[$count * 2 + 1] != 0) {
                 fseek($this->_file, $transtemp[$count * 2 + 2]);
                 $translate = fread($this->_file, $transtemp[$count * 2 + 1]);
-                $translate = explode(chr(00), $translate);
+                $translate = explode("\0", $translate);
                 if ((count($original) > 1) && (count($translate) > 1)) {
                     $this->_data[$locale][$original[0]] = $translate;
                     array_shift($original);

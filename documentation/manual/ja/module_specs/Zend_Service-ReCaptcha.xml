@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21819 -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
 
@@ -120,7 +120,7 @@ if (!$result->isValid()) {
 
         <para>
             このコンポーネントを使うには、
-            mailhide API 用の公開キーと秘密キーを生成するための
+            mailhide <acronym>API</acronym> 用の公開キーと秘密キーを生成するための
             <ulink url="http://recaptcha.net/whyrecaptcha.html">アカウント</ulink>
             が必要です。
         </para>

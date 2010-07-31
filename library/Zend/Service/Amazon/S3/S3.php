@@ -42,11 +42,7 @@ use Zend\Crypt;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
  */
-<<<<<<< HEAD:library/Zend/Service/Amazon/S3.php
-class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_AbstractService
-=======
 class S3 extends \Zend\Service\Amazon\AbstractAmazon
->>>>>>> merges/farazdagi:library/Zend/Service/Amazon/S3/S3.php
 {
     /**
      * Store for stream wrapper clients
@@ -58,7 +54,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Endpoint for the service
      *
-     * @var \Zend\URI\URL
+     * @var \Zend\Uri\Url
      */
     protected $_endpoint;
 
@@ -81,8 +77,8 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
      */
     public function setEndpoint($endpoint)
     {
-        if (!($endpoint instanceof \Zend\URI\URL)) {
-            $endpoint = new \Zend\URI\URL($endpoint);
+        if (!($endpoint instanceof \Zend\Uri\Url)) {
+            $endpoint = new \Zend\Uri\Url($endpoint);
         }
         if (!$endpoint->isValid()) {
             throw new Exception('Invalid endpoint supplied');
@@ -94,7 +90,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Get current S3 endpoint
      *
-     * @return \Zend\URI\URI
+     * @return \Zend\Uri\Url
      */
     public function getEndpoint()
     {
@@ -372,7 +368,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         }
         $this->getHttpClient()->setStream(null);
 
-        if ($response->getStatus() != 200 || !($response instanceof \Zend\HTTP\Response\Stream)) {
+        if ($response->getStatus() != 200 || !($response instanceof \Zend\Http\Response\Stream)) {
             return false;
         }
 
@@ -503,7 +499,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         $headers = (is_array($meta)) ? $meta : array();
         $headers['x-amz-copy-source'] = $sourceObject;
-        $headers['x-amz-metadata-directive'] = is_null($meta) ? 'COPY' : 'REPLACE';
+        $headers['x-amz-metadata-directive'] = $meta === null ? 'COPY' : 'REPLACE';
 
         $response = $this->_makeRequest('PUT', $destObject, null, $headers);
 
@@ -911,7 +907,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
      */
     public function registerStreamWrapper($name='s3')
     {
-        stream_register_wrapper($name, '\Zend\Service\Amazon\S3\Stream');
+        stream_register_wrapper($name, 'Zend\Service\Amazon\S3\Stream');
         $this->registerAsClient($name);
     }
 

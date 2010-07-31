@@ -141,10 +141,11 @@ class SignalHandler
             throw new InvalidCallbackException('Provided callback is not a function or a class');
         }
 
-        $object = new $callback();
-        if (!is_callable($object)) {
+        // check __invoke before instantiating
+        if (!method_exists($callback, '__invoke')) {
             throw new InvalidCallbackException('Class provided as a callback does not implement __invoke');
         }
+        $object = new $callback();
 
         $this->_callback        = $object;
         $this->_isValidCallback = true;

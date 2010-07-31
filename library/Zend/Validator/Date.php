@@ -48,7 +48,7 @@ class Date extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID        => "Invalid type given, value should be string, integer, array or Zend_Date",
+        self::INVALID        => "Invalid type given. String, integer, array or Zend_Date expected",
         self::INVALID_DATE   => "'%value%' does not appear to be a valid date",
         self::FALSEFORMAT    => "'%value%' does not fit the date format '%format%'",
     );
@@ -173,8 +173,9 @@ class Date extends AbstractValidator
 
         $this->_setValue($value);
 
-        if (($this->_format !== null) || ($this->_locale !== null) || is_array($value) ||
-             $value instanceof Date\Date) {
+        if (($this->_format !== null) || ($this->_locale !== null) 
+            || is_array($value) || $value instanceof Date\Date
+        ) {
             if (!ZendDate\Date::isDate($value, $this->_format, $this->_locale)) {
                 if ($this->_checkFormat($value) === false) {
                     $this->_error(self::FALSEFORMAT);

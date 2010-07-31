@@ -44,7 +44,7 @@ class Barcode extends AbstractValidator
         self::FAILED         => "'%value%' failed checksum validation",
         self::INVALID_CHARS  => "'%value%' contains invalid characters",
         self::INVALID_LENGTH => "'%value%' should have a length of %length% characters",
-        self::INVALID        => "Invalid type given, value should be string",
+        self::INVALID        => "Invalid type given. String expected",
     );
 
     /**
@@ -129,9 +129,9 @@ class Barcode extends AbstractValidator
     public function setAdapter($adapter, $options = null)
     {
         $adapter = ucfirst(strtolower($adapter));
-        $adapter = '\\Zend\\Validator\\Barcode\\' . $adapter;
+        $adapter = 'Zend\Validator\Barcode\\' . $adapter;
         if (\Zend\Loader::isReadable('Zend/Validator/Barcode/' . $adapter . '.php')) {
-            $adapter = '\\Zend\\Validator\\Barcode\\' . $adapter;
+            $adapter = 'Zend\Validator\Barcode\\' . $adapter;
         }
 
         if (!class_exists($adapter)) {
@@ -141,7 +141,7 @@ class Barcode extends AbstractValidator
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Barcode\Adapter) {
             throw new Exception(
-                "Adapter " . $adapter . " does not implement Zend\\Validate\\Barcode\\Adapter"
+                "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\Adapter"
             );
         }
 

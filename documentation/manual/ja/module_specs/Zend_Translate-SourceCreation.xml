@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21661 -->
+<!-- EN-Revision: 21992 -->
 <sect1 id="zend.translate.sourcecreation">
 
     <title>ソースファイルの作成</title>
@@ -48,7 +48,7 @@ $translate = new Zend_Translate(
         'locale'  => 'en'
     )
 );
-$translate->addTranslation(array('content' => $deutsch, 'locale' => 'de'));
+$translate->addTranslation(array('content' => $german, 'locale' => 'de'));
 ]]></programlisting>
 
         <para>
@@ -235,7 +235,6 @@ $translate = new Zend_Translate(
             全言語を対象とするようになっています。
         </para>
 
-        <!-- TODO : to be translated -->
         <note>
             <title>Option useId</title>
 
@@ -286,7 +285,12 @@ $translate = new Zend_Translate(
         'locale'  => 'de'
     )
 );
-$translate->addTranslation(array('content' => 'path/to/other.csv', 'locale' => 'fr'));
+$translate->addTranslation(
+    array(
+        'content' => 'path/to/other.csv',
+        'locale' => 'fr'
+    )
+);
 ]]></programlisting>
         </example>
 
@@ -404,7 +408,7 @@ $translate->addTranslation(
         <para>
             <acronym>INI</acronym> にはいくつかの制約があります。
             <acronym>INI</acronym> ファイルの値に非英数字が含まれる場合は、値をダブルクォート (<code>"</code>)
-            で囲まなければなりません。また、ini ファイルのキーとしては使えない予約語があります。
+            で囲まなければなりません。また、 <acronym>INI</acronym> ファイルのキーとしては使えない予約語があります。
             予約語には <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>
             そして <constant>FALSE</constant> があります。
             値に <constant>NULL</constant>, <code>no</code> および <constant>FALSE</constant>

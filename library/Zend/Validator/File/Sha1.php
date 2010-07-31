@@ -50,7 +50,7 @@ class Sha1 extends Hash
     protected $_messageTemplates = array(
         self::DOES_NOT_MATCH => "File '%value%' does not match the given sha1 hashes",
         self::NOT_DETECTED   => "A sha1 hash could not be evaluated for the given file",
-        self::NOT_FOUND      => "File '%value%' could not be found",
+        self::NOT_FOUND      => "File '%value%' is not readable or does not exist",
     );
 
     /**

@@ -52,7 +52,7 @@ interface Writer
      * @param  \Zend\Log\Formatter|Callable $formatter 
      * @return Writer
      */
-    public function setFormatter($formatter);
+    public function setFormatter(Formatter $formatter);
 
     /**
      * Write a log message

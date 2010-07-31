@@ -320,7 +320,7 @@ abstract class Zend_Service_DeveloperGarden_Client_AbstractClient
             $options['classmap'] = $this->_classMap;
         }
         $wsdlCache = Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getWsdlCache();
-        if (!is_null($wsdlCache)) {
+        if ($wsdlCache !== null) {
             $options['cache_wsdl'] = $wsdlCache;
         }
         return $options;

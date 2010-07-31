@@ -96,7 +96,7 @@ abstract class AbstractWriter implements Writer, Factory
      * @param  \Zend\Log\Formatter $formatter
      * @return void
      */
-    public function setFormatter($formatter)
+    public function setFormatter(\Zend\Log\Formatter $formatter)
     {
         $this->_formatter = $formatter;
         return $this;
@@ -120,7 +120,7 @@ abstract class AbstractWriter implements Writer, Factory
 
     /**
      * Validate and optionally convert the config to array
-     * 
+     *
      * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
      * @return array
      * @throws \Zend\Log\Exception

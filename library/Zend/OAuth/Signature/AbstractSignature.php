@@ -83,6 +83,16 @@ abstract class AbstractSignature implements OAuthSignature
     }
 
     /**
+     * Sign a request
+     * 
+     * @param  array $params 
+     * @param  null|string $method 
+     * @param  null|string $url 
+     * @return string
+     */
+    public abstract function sign(array $params, $method = null, $url = null);
+
+    /**
      * Normalize the base signature URL
      * 
      * @param  string $url 
@@ -112,7 +122,7 @@ abstract class AbstractSignature implements OAuthSignature
     protected function _assembleKey()
     {
         $parts = array($this->_consumerSecret);
-        if (!is_null($this->_tokenSecret)) {
+        if ($this->_tokenSecret !== null) {
             $parts[] = $this->_tokenSecret;
         }
         foreach ($parts as $key => $secret) {

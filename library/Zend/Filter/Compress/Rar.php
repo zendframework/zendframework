@@ -176,7 +176,7 @@ class Rar extends AbstractCompressionAlgorithm
     public function compress($content)
     {
         $callback = $this->getCallback();
-        if (is_null($callback)) {
+        if ($callback === null) {
             throw new Exception('No compression callback available');
         }
 
@@ -207,7 +207,7 @@ class Rar extends AbstractCompressionAlgorithm
         }
 
         $password = $this->getPassword();
-        if (!is_null($password)) {
+        if ($password !== null) {
             $archive = rar_open($archive, $password);
         } else {
             $archive = rar_open($archive);

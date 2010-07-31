@@ -76,7 +76,7 @@ class Client extends \Zend\Http\Client
     {
         parent::__construct($uri, $config);
         $this->_config = new Config\StandardConfig;
-        if (!is_null($oauthOptions)) {
+        if ($oauthOptions !== null) {
             if ($oauthOptions instanceof \Zend\Config\Config) {
                 $oauthOptions = $oauthOptions->toArray();
             }

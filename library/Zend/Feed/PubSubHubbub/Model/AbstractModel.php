@@ -50,7 +50,7 @@ class AbstractModel
      */
     public function __construct(\Zend\Db\Table\AbstractTable $tableGateway = null)
     {
-        if (is_null($tableGateway)) {
+        if ($tableGateway === null) {
             $parts = explode('\\', get_class($this));
             $table = strtolower(array_pop($parts));
             $this->_db = new \Zend\Db\Table\Table($table);

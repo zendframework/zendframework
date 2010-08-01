@@ -375,8 +375,8 @@ abstract class Base
     {
         // Check for a memoized result
         $key = $prefix . ' ' .
-               (is_null($majorVersion) ? 'NULL' : $majorVersion) .
-               ' '. (is_null($minorVersion) ? 'NULL' : $minorVersion);
+               ($majorVersion === null ? 'NULL' : $majorVersion) .
+               ' '. ($minorVersion === null ? 'NULL' : $minorVersion);
         if (array_key_exists($key, self::$_namespaceLookupCache))
           return self::$_namespaceLookupCache[$key];
         // If no match, return the prefix by default
@@ -476,7 +476,7 @@ abstract class Base
     {
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method));
+            return $this->$method();
         } else if (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
@@ -496,12 +496,13 @@ abstract class Base
      *
      * @param string $name
      * @param string $value
+     * @return void
      */
     public function __set($name, $val)
     {
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method), $val);
+            $this->$method($val);
         } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {

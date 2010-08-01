@@ -429,13 +429,13 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 	{
 	    // Build query string
 	    $queryString = '?comp=list';
-	    if (!is_null($prefix)) {
+	    if ($prefix !== null) {
 	        $queryString .= '&prefix=' . $prefix;
 	    }
-	    if (!is_null($maxResults)) {
+	    if ($maxResults !== null) {
 	        $queryString .= '&maxresults=' . $maxResults;
 	    }
-	    if (!is_null($marker)) {
+	    if ($marker !== null) {
 	        $queryString .= '&marker=' . $marker;
 	    }
 	        
@@ -446,7 +446,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 
 			$containers = array();
-			if (!is_null($xmlContainers)) {
+			if ($xmlContainers !== null) {
 				for ($i = 0; $i < count($xmlContainers); $i++) {
 					$containers[] = new Zend_Service_WindowsAzure_Storage_BlobContainer(
 						(string)$xmlContainers[$i]->Name,
@@ -456,12 +456,12 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 				}
 			}
 			$currentResultCount = $currentResultCount + count($containers);
-			if (!is_null($maxResults) && $currentResultCount < $maxResults) {
-    			if (!is_null($xmlMarker) && $xmlMarker != '') {
+			if ($maxResults !== null && $currentResultCount < $maxResults) {
+    			if ($xmlMarker !== null && $xmlMarker != '') {
     			    $containers = array_merge($containers, $this->listContainers($prefix, $maxResults, $xmlMarker, $currentResultCount));
     			}
 			}
-			if (!is_null($maxResults) && count($containers) > $maxResults) {
+			if ($maxResults !== null && count($containers) > $maxResults) {
 			    $containers = array_slice($containers, 0, $maxResults);
 			}
 			    
@@ -1095,16 +1095,16 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			
 	    // Build query string
 	    $queryString = '?restype=container&comp=list';
-        if (!is_null($prefix)) {
+        if ($prefix !== null) {
 	        $queryString .= '&prefix=' . $prefix;
         }
 		if ($delimiter !== '') {
 			$queryString .= '&delimiter=' . $delimiter;
 		}
-	    if (!is_null($maxResults)) {
+	    if ($maxResults !== null) {
 	        $queryString .= '&maxresults=' . $maxResults;
 	    }
-	    if (!is_null($marker)) {
+	    if ($marker !== null) {
 	        $queryString .= '&marker=' . $marker;
 	    }
 
@@ -1116,7 +1116,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		    
 			// Blobs
 			$xmlBlobs = $this->_parseResponse($response)->Blobs->Blob;
-			if (!is_null($xmlBlobs)) {
+			if ($xmlBlobs !== null) {
 				for ($i = 0; $i < count($xmlBlobs); $i++) {
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
 						$containerName,
@@ -1136,7 +1136,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			// Blob prefixes (folders)
 			$xmlBlobs = $this->_parseResponse($response)->Blobs->BlobPrefix;
 			
-			if (!is_null($xmlBlobs)) {
+			if ($xmlBlobs !== null) {
 				for ($i = 0; $i < count($xmlBlobs); $i++) {
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
 						$containerName,
@@ -1156,12 +1156,12 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			// More blobs?
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 			$currentResultCount = $currentResultCount + count($blobs);
-			if (!is_null($maxResults) && $currentResultCount < $maxResults) {
-    			if (!is_null($xmlMarker) && $xmlMarker != '') {
+			if ($maxResults !== null && $currentResultCount < $maxResults) {
+    			if ($xmlMarker !== null && $xmlMarker != '') {
     			    $blobs = array_merge($blobs, $this->listBlobs($containerName, $prefix, $delimiter, $maxResults, $marker, $currentResultCount));
     			}
 			}
-			if (!is_null($maxResults) && count($blobs) > $maxResults) {
+			if ($maxResults !== null && count($blobs) > $maxResults) {
 			    $blobs = array_slice($blobs, 0, $maxResults);
 			}
 			

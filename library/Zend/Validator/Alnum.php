@@ -59,7 +59,7 @@ class Alnum extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID      => "Invalid type given, value should be float, string, or integer",
+        self::INVALID      => "Invalid type given. String, integer or float expected",
         self::NOT_ALNUM    => "'%value%' contains characters which are non alphabetic and no digits",
         self::STRING_EMPTY => "'%value%' is an empty string",
     );
@@ -137,7 +137,7 @@ class Alnum extends AbstractValidator
 
         self::$_filter->allowWhiteSpace = $this->allowWhiteSpace;
 
-        if ($value != self::$_filter->__invoke($value)) {
+        if ($value != self::$_filter->filter($value)) {
             $this->_error(self::NOT_ALNUM);
             return false;
         }

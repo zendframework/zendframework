@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21130 -->
+<!-- EN-Revision: 21823 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
 
@@ -118,7 +118,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
                 <row>
                     <entry><varname>$section</varname></entry>
                     <entry>
-                        ini ファイルの中の、読み込む [section]。
+                        <acronym>INI</acronym> ファイル内で読み込む [section]。
                         このパラメータを <constant>NULL</constant> にすると、
                         すべてのセクションを読み込みます。
                         また、セクション名の配列を指定すると、複数のセクションを読み込みます。

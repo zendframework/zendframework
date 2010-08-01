@@ -217,7 +217,7 @@ class Rewrite extends AbstractRouter
             throw new \InvalidArgumentException('Class name ' . $class . ' does not exist.');
         }
 
-        $route = call_user_func(array($class, 'getInstance'), $info);
+        $route = $class::getInstance($info);
 
         if (isset($info->abstract) && $info->abstract && method_exists($route, 'isAbstract')) {
             $route->isAbstract(true);

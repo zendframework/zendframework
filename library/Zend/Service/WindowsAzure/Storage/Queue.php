@@ -246,13 +246,13 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 	{
 	    // Build query string
 	    $queryString = '?comp=list';
-	    if (!is_null($prefix)) {
+	    if ($prefix !== null) {
 	        $queryString .= '&prefix=' . $prefix;
 	    }
-	    if (!is_null($maxResults)) {
+	    if ($maxResults !== null) {
 	        $queryString .= '&maxresults=' . $maxResults;
 	    }
-	    if (!is_null($marker)) {
+	    if ($marker !== null) {
 	        $queryString .= '&marker=' . $marker;
 	    }
 	        
@@ -263,7 +263,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 
 			$queues = array();
-			if (!is_null($xmlQueues)) {
+			if ($xmlQueues !== null) {
 				for ($i = 0; $i < count($xmlQueues); $i++) {
 					$queues[] = new Zend_Service_WindowsAzure_Storage_QueueInstance(
 						(string)$xmlQueues[$i]->QueueName
@@ -271,12 +271,12 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 				}
 			}
 			$currentResultCount = $currentResultCount + count($queues);
-			if (!is_null($maxResults) && $currentResultCount < $maxResults) {
-    			if (!is_null($xmlMarker) && $xmlMarker != '') {
+			if ($maxResults !== null && $currentResultCount < $maxResults) {
+    			if ($xmlMarker !== null && $xmlMarker != '') {
     			    $queues = array_merge($queues, $this->listQueues($prefix, $maxResults, $xmlMarker, $currentResultCount));
     			}
 			}
-			if (!is_null($maxResults) && count($queues) > $maxResults) {
+			if ($maxResults !== null && count($queues) > $maxResults) {
 			    $queues = array_slice($queues, 0, $maxResults);
 			}
 			    
@@ -308,13 +308,13 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 		if ($message == '') {
 		    throw new Zend_Service_WindowsAzure_Exception('Message is not specified.');
 		}
-		if (!is_null($ttl) && ($ttl <= 0 || $ttl > self::MAX_MESSAGE_SIZE)) {
+		if ($ttl !== null && ($ttl <= 0 || $ttl > self::MAX_MESSAGE_SIZE)) {
 		    throw new Zend_Service_WindowsAzure_Exception('Message TTL is invalid. Maximal TTL is 7 days (' . self::MAX_MESSAGE_SIZE . ' seconds) and should be greater than zero.');
 		}
 		    
 	    // Build query string
 	    $queryString = '';
-	    if (!is_null($ttl)) {
+	    if ($ttl !== null) {
 	        $queryString .= '?messagettl=' . $ttl;
 	    }
 	        
@@ -353,7 +353,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 		if ($numOfMessages < 1 || $numOfMessages > 32 || intval($numOfMessages) != $numOfMessages) {
 		    throw new Zend_Service_WindowsAzure_Exception('Invalid number of messages to retrieve.');
 		}
-		if (!is_null($visibilityTimeout) && ($visibilityTimeout <= 0 || $visibilityTimeout > 7200)) {
+		if ($visibilityTimeout !== null && ($visibilityTimeout <= 0 || $visibilityTimeout > 7200)) {
 		    throw new Zend_Service_WindowsAzure_Exception('Visibility timeout is invalid. Maximum value is 2 hours (7200 seconds) and should be greater than zero.');
 		}
 		    
@@ -365,7 +365,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
     	if ($numOfMessages > 1) {
 	        $query[] = 'numofmessages=' . $numOfMessages;
     	}
-    	if (!$peek && !is_null($visibilityTimeout)) {
+    	if (!$peek && $visibilityTimeout !== null) {
 	        $query[] = 'visibilitytimeout=' . $visibilityTimeout;
     	}   
     	$queryString = '?' . implode('&', $query);

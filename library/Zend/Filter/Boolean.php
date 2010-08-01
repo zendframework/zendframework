@@ -272,7 +272,7 @@ class Boolean extends AbstractFilter
         // NULL (null)
         if ($type >= self::NULL) {
             $type -= self::NULL;
-            if (is_null($value)) {
+            if ($value === null) {
                 return false;
             }
         }

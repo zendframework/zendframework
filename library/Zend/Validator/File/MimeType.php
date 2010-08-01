@@ -53,7 +53,7 @@ class MimeType extends Validator\AbstractValidator
     protected $_messageTemplates = array(
         self::FALSE_TYPE   => "File '%value%' has a false mimetype of '%type%'",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
-        self::NOT_READABLE => "File '%value%' can not be read",
+        self::NOT_READABLE => "File '%value%' is not readable or does not exist",
     );
 
     /**
@@ -156,7 +156,6 @@ class MimeType extends Validator\AbstractValidator
             if (!empty($_ENV['MAGIC'])) {
                 $this->setMagicFile($_ENV['MAGIC']);
             } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
-
                 foreach ($this->_magicFiles as $file) {
                     // supressing errors which are thrown due to openbase_dir restrictions
                     try {

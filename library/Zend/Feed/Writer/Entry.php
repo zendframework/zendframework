@@ -204,7 +204,7 @@ class Entry
     public function setDateCreated($date = null)
     {
         $zdate = null;
-        if (is_null($date)) {
+        if ($date === null) {
             $zdate = new Date\Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
@@ -224,7 +224,7 @@ class Entry
     public function setDateModified($date = null)
     {
         $zdate = null;
-        if (is_null($date)) {
+        if ($date === null) {
             $zdate = new Date\Date;
         } elseif (ctype_digit($date) && strlen($date) == 10) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);

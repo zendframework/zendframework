@@ -306,7 +306,7 @@ class Http extends AbstractAdapter
     public static function getProgress($id = null)
     {
         if (!function_exists('apc_fetch') and !function_exists('uploadprogress_get_info')) {
-            throw new Transfer\Exception('Wether APC nor uploadprogress extension installed');
+            throw new Transfer\Exception('Neither APC nor uploadprogress extension installed');
         }
 
         $session = 'Zend\File\Transfer\Adapter\Http\ProgressBar';

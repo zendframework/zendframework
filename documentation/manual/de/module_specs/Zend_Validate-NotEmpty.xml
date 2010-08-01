@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21245 -->
+<!-- EN-Revision: 22659 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.notempty">
     <title>NotEmpty</title>
@@ -140,6 +140,30 @@ $result = $valid->isValid($value);
                 <para>
                     <emphasis>space</emphasis>: Gibt <constant>FALSE</constant> zurück wenn ein
                     String angegeben wird der nur Leerzeichen enthält.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>object</emphasis>: Gibt <constant>TRUE</constant> zurück wenn ein
+                    Objekt angegeben wurde. <constant>FALSE</constant> wird zurückgegeben wenn
+                    <property>object</property> nicht erlaubt, aber ein Objekt angegeben wurde.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>object_string</emphasis>: Gibt <constant>FALSE</constant> zurück wenn
+                    ein Objekt angegeben wurde und dessen <methodname>__toString()</methodname>
+                    Methode einen leeren String zurückgibt.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>object_count</emphasis>: Gibt <constant>FALSE</constant> zurück wenn
+                    ein Objekt angegeben wurde, es ein <classname>Countable</classname> Interface
+                    hat und seine Anzahl 0 ist.
                 </para>
             </listitem>
 

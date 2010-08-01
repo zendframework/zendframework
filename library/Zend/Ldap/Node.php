@@ -103,7 +103,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     protected function __construct(Dn $dn, array $data, $fromDataSource, Ldap $ldap = null)
     {
         parent::__construct($dn, $data, $fromDataSource);
-        if (!is_null($ldap)) $this->attachLdap($ldap);
+        if ($ldap !== null) $this->attachLdap($ldap);
         else $this->detachLdap();
     }
 
@@ -140,7 +140,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      */
     public function getLdap()
     {
-        if (is_null($this->_ldap)) {
+        if ($this->_ldap === null) {
             throw new Exception(null, 'No LDAP connection specified.', Exception::LDAP_OTHER);
         }
         else return $this->_ldap;
@@ -201,7 +201,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      */
     public function isAttached()
     {
-        return (!is_null($this->_ldap));
+        return ($this->_ldap !== null);
     }
 
     /**

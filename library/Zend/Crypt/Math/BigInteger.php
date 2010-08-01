@@ -66,7 +66,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
      */
     public function __construct($extension = null)
     {
-        if (!is_null($extension) && !in_array($extension, array('bcmath', 'gmp', 'bigint'))) {
+        if ($extension !== null && !in_array($extension, array('bcmath', 'gmp', 'bigint'))) {
             throw new BigInteger\Exception('Invalid extension type; please use one of bcmath, gmp or bigint');
         }
         $this->_loadAdapter($extension);
@@ -220,7 +220,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
      */
     protected function _loadAdapter($extension = null)
     {
-        if (is_null($extension)) {
+        if ($extension === null) {
             if (extension_loaded('gmp')) {
                 $extension = 'gmp';
             } else {

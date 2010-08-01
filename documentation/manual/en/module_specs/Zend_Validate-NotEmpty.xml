@@ -138,6 +138,30 @@ $result = $valid->isValid($value);
 
             <listitem>
                 <para>
+                    <emphasis>object</emphasis>: Returns <constant>TRUE</constant>.
+                    <constant>FALSE</constant> will be returned when <property>object</property> is
+                    not allowed but an object is given.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>object_string</emphasis>: Returns <constant>FALSE</constant> when an
+                    object is given and it's <methodname>__toString()</methodname> method returns an
+                   empty string.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>object_count</emphasis>: Returns <constant>FALSE</constant> when an
+                    object is given, it has an <classname>Countable</classname> interface and it's
+                    count is 0.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <emphasis>all</emphasis>: Returns <constant>FALSE</constant> on all above types.
                 </para>
             </listitem>

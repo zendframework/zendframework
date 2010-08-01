@@ -396,11 +396,11 @@ class Ldap
             $accountDomainName = $this->_getAccountDomainName();
             $accountDomainNameShort = $this->_getAccountDomainNameShort();
             if ($accountDomainNameShort) {
-                $accountCanonicalForm = Ldap::ACCTNAME_FORM_BACKSLASH;
+                $accountCanonicalForm = self::ACCTNAME_FORM_BACKSLASH;
             } else if ($accountDomainName) {
-                $accountCanonicalForm = Ldap::ACCTNAME_FORM_PRINCIPAL;
+                $accountCanonicalForm = self::ACCTNAME_FORM_PRINCIPAL;
             } else {
-                $accountCanonicalForm = Ldap::ACCTNAME_FORM_USERNAME;
+                $accountCanonicalForm = self::ACCTNAME_FORM_USERNAME;
             }
         }
 
@@ -520,7 +520,7 @@ class Ldap
         if (DN::checkDn($acctname)) {
             return $acctname;
         }
-        $acctname = $this->getCanonicalAccountName($acctname, Ldap::ACCTNAME_FORM_USERNAME);
+        $acctname = $this->getCanonicalAccountName($acctname, self::ACCTNAME_FORM_USERNAME);
         $acct = $this->_getAccount($acctname, array('dn'));
         return $acct['dn'];
     }
@@ -579,17 +579,17 @@ class Ldap
         }
 
         switch ($form) {
-            case Ldap::ACCTNAME_FORM_DN:
+            case self::ACCTNAME_FORM_DN:
                 return $this->_getAccountDn($acctname);
-            case Ldap::ACCTNAME_FORM_USERNAME:
+            case self::ACCTNAME_FORM_USERNAME:
                 return $uname;
-            case Ldap::ACCTNAME_FORM_BACKSLASH:
+            case self::ACCTNAME_FORM_BACKSLASH:
                 $accountDomainNameShort = $this->_getAccountDomainNameShort();
                 if (!$accountDomainNameShort) {
                     throw new Exception(null, 'Option required: accountDomainNameShort');
                 }
                 return "$accountDomainNameShort\\$uname";
-            case Ldap::ACCTNAME_FORM_PRINCIPAL:
+            case self::ACCTNAME_FORM_PRINCIPAL:
                 $accountDomainName = $this->_getAccountDomainName();
                 if (!$accountDomainName) {
                     throw new Exception(null, 'Option required: accountDomainName');
@@ -893,7 +893,7 @@ class Ldap
         if($search === false) {
             throw new Exception($this, 'searching: ' . $filter);
         }
-        if (!is_null($sort) && is_string($sort)) {
+        if ($sort !== null && is_string($sort)) {
             $isSorted = @ldap_sort($this->getResource(), $search, $sort);
             if($isSorted === false) {
                 throw new Exception($this, 'sorting: ' . $sort);
@@ -1050,8 +1050,9 @@ class Ldap
         foreach ($entry as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $i => $v) {
-                    if (is_null($v)) unset($value[$i]);
-                    else if (!is_scalar($v)) {
+                    if ($v === null) {
+                        unset($value[$i]);
+                    } elseif (!is_scalar($v)) {
                         throw new \InvalidArgumentException('Only scalar values allowed in LDAP data');
                     } else {
                         $v = (string)$v;
@@ -1064,8 +1065,9 @@ class Ldap
                 }
                 $entry[$key] = array_values($value);
             } else {
-                if (is_null($value)) $entry[$key] = array();
-                else if (!is_scalar($value)) {
+                if ($value === null) {
+                    $entry[$key] = array();
+                } elseif (!is_scalar($value)) {
                     throw new \InvalidArgumentException('Only scalar values allowed in LDAP data');
                 } else {
                     $value = (string)$value;

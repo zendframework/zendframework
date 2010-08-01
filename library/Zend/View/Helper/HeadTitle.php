@@ -76,9 +76,9 @@ class HeadTitle extends Placeholder\Container\Standalone
      */
     public function direct($title = null, $setType = null)
     {
-        if (is_null($setType) && is_null($this->getDefaultAttachOrder())) {
+        if ($setType === null && is_null($this->getDefaultAttachOrder())) {
             $setType = Placeholder\Container\AbstractContainer::APPEND;
-        } elseif (is_null($setType) && !is_null($this->getDefaultAttachOrder())) {
+        } elseif ($setType === null && !is_null($this->getDefaultAttachOrder())) {
             $setType = $this->getDefaultAttachOrder();
         }
         $title = (string) $title;

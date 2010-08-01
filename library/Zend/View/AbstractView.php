@@ -992,7 +992,7 @@ abstract class AbstractView implements ViewEngine
         foreach ($this->_filter as $name) {
             // load and apply the filter class
             $filter = $this->getFilter($name);
-            $buffer = call_user_func(array($filter, 'filter'), $buffer);
+            $buffer = $filter->filter($buffer);
         }
 
         // done!

@@ -531,7 +531,7 @@ class Rss extends AbstractFeed
 
         $link = $this->getExtension('Atom')->getFeedLink();
 
-        if (is_null($link) || empty($link)) {
+        if ($link === null || empty($link)) {
             $link = $this->getOriginalSourceUri();
         }
 

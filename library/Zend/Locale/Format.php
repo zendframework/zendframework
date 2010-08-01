@@ -748,6 +748,9 @@ class Format
      */
     private static function _parseDate($date, $options)
     {
+        if (!is_string($date)) {
+            throw new Exception('Invalid date provided; must be string, ' . gettype($date) . ' provided');
+        }
         $options = self::_checkOptions($options) + self::$_options;
         $test = array('h', 'H', 'm', 's', 'y', 'Y', 'M', 'd', 'D', 'E', 'S', 'l', 'B', 'I',
                        'X', 'r', 'U', 'G', 'w', 'e', 'a', 'A', 'Z', 'z', 'v');
@@ -782,13 +785,16 @@ class Format
         if ($day !== false) {
             $parse[$day]   = 'd';
             if (!empty($options['locale']) && ($options['locale'] !== 'root') &&
-                (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))) {
+                (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))
+            ) {
                 // erase day string
-                    $daylist = Data::getList($options['locale'], 'day');
-                foreach($daylist as $key => $name) {
-                    if (iconv_strpos($number, $name) !== false) {
-                        $number = str_replace($name, "EEEE", $number);
-                        break;
+                $daylist = Data::getList($options['locale'], 'day');
+                if (is_scalar($number)) {
+                    foreach($daylist as $key => $name) {
+                        if (iconv_strpos($number, $name) !== false) {
+                            $number = str_replace($name, "EEEE", $number);
+                            break;
+                        }
                     }
                 }
             }
@@ -1037,7 +1043,7 @@ class Format
         // If no $locale was given, or $locale was invalid, do not use this identity mapping to normalize.
         // Otherwise, translate locale aware month names in $number to their numeric equivalents.
         $position = false;
-        if ($monthlist && $monthlist[1] != 1) {
+        if ($monthlist && $monthlist[1] != 1 && is_scalar($number)) {
             foreach($monthlist as $key => $name) {
                 if (($position = iconv_strpos($number, $name, 0, 'UTF-8')) !== false) {
                     $number   = str_ireplace($name, $key, $number);
@@ -1114,40 +1120,46 @@ class Format
         $options = self::_checkOptions($options) + self::$_options;
 
         // day expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'd', 0, 'UTF-8') !== false) and 
-            (!isset($date['day']) or ($date['day'] === false) or ($date['day'] === ""))) {
+        if ((iconv_strpos($options['date_format'], 'd', 0, 'UTF-8') !== false) 
+            and (!isset($date['day']) or ($date['day'] === ""))
+        ) {
             return false;
         }
 
         // month expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'M', 0, 'UTF-8') !== false) and 
-            (!isset($date['month']) or ($date['month'] === false) or ($date['month'] === ""))) {
+        if ((iconv_strpos($options['date_format'], 'M', 0, 'UTF-8') !== false) 
+            and (!isset($date['month']) or ($date['month'] === ""))
+        ) {
             return false;
         }
 
         // year expected but not parsed
         if (((iconv_strpos($options['date_format'], 'Y', 0, 'UTF-8') !== false) or
-            (iconv_strpos($options['date_format'], 'y', 0, 'UTF-8') !== false)) and 
-            (!isset($date['year']) or ($date['year'] === false) or ($date['year'] === ""))) {
+            (iconv_strpos($options['date_format'], 'y', 0, 'UTF-8') !== false)) 
+            and (!isset($date['year']) or ($date['year'] === ""))
+        ) {
             return false;
         }
 
         // second expected but not parsed
-        if ((iconv_strpos($options['date_format'], 's', 0, 'UTF-8') !== false) and
-            (!isset($date['second']) or ($date['second'] === false) or ($date['second'] === ""))) {
+        if ((iconv_strpos($options['date_format'], 's', 0, 'UTF-8') !== false) 
+            and (!isset($date['second']) or ($date['second'] === ""))
+        ) {
             return false;
         }
 
         // minute expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'm', 0, 'UTF-8') !== false) and 
-            (!isset($date['minute']) or ($date['minute'] === false) or ($date['minute'] === ""))) {
+        if ((iconv_strpos($options['date_format'], 'm', 0, 'UTF-8') !== false) 
+            and (!isset($date['minute']) or ($date['minute'] === ""))
+        ) {
             return false;
         }
 
         // hour expected but not parsed
         if (((iconv_strpos($options['date_format'], 'H', 0, 'UTF-8') !== false) or
-            (iconv_strpos($options['date_format'], 'h', 0, 'UTF-8') !== false)) and 
-            (!isset($date['hour']) or ($date['hour'] === false) or ($date['hour'] === ""))) {
+            (iconv_strpos($options['date_format'], 'h', 0, 'UTF-8') !== false)) 
+            and (!isset($date['hour']) or ($date['hour'] === ""))
+        ) {
             return false;
         }
 

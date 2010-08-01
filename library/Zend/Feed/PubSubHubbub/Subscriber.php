@@ -154,7 +154,7 @@ class Subscriber
      */
     public function __construct($config = null)
     {
-        if (!is_null($config)) {
+        if ($config !== null) {
             $this->setConfig($config);
         }
     }
@@ -312,11 +312,12 @@ class Subscriber
     public function setPreferredVerificationMode($mode)
     {
         if ($mode !== PubSubHubbub::VERIFICATION_MODE_SYNC
-        && $mode !== PubSubHubbub::VERIFICATION_MODE_ASYNC) {
+            && $mode !== PubSubHubbub::VERIFICATION_MODE_ASYNC
+        ) {
             throw new Exception('Invalid preferred'
                 . ' mode specified: "' . $mode . '" but should be one of'
-                . ' Zend\Feed\Pubsubhubbub::VERIFICATION\MODE\SYNC or'
-                . ' Zend\Feed\Pubsubhubbub::VERIFICATION\MODE\ASYNC');
+                . ' Zend\Feed\Pubsubhubbub::VERIFICATION_MODE_SYNC or'
+                . ' Zend\Feed\Pubsubhubbub::VERIFICATION_MODE_ASYNC');
         }
         $this->_preferredVerificationMode = $mode;
         return $this;
@@ -465,7 +466,7 @@ class Subscriber
             $this->removeParameter($name);
             return $this;
         }
-        if (empty($value) || (!is_string($value) && !is_null($value))) {
+        if (empty($value) || (!is_string($value) && $value !== null)) {
             throw new Exception('Invalid parameter "value"'
                 . ' of "' . $value . '" must be a non-empty string');
         }

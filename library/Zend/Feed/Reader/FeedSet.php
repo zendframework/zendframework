@@ -86,7 +86,7 @@ class FeedSet extends \ArrayObject
     protected function _absolutiseUri($link, $uri = null)
     {
         if (!Uri\Url::validate($link)) {
-            if (!is_null($uri)) {
+            if ($uri !== null) {
                 $uri = new Uri\Url($uri);
 
                 if ($link[0] !== '/') {

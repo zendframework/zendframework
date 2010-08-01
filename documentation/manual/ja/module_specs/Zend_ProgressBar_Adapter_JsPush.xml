@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22210 -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
     <para>
@@ -34,7 +34,7 @@
     <para>
         このアダプタの使い方はきわめて単純です。まず、ブラウザ上にプログレスバーを作成します。
         これは JavaScript を用いたものでもかまいませんしプレーンな
-        HTML によるものでもかまいません。それから、更新時のメソッドと
+        <acronym>HTML</acronym> によるものでもかまいません。それから、更新時のメソッドと
         終了時のメソッド (オプション) を JavaScript で定義します。
         これらのメソッドは、どちらも唯一の引数として json オブジェクトを受け取るようにします。
         そして、処理時間が長くかかるウェブページを
@@ -78,7 +78,7 @@
     <example id="zend.progressbar-adapter.jspush.example">
         <title>クライアント側の基本例</title>
         <para>
-            この例では、JsPush アダプタ用の HTML および <acronym>CSS</acronym>、JavaScript
+            この例では、JsPush アダプタ用の <acronym>HTML</acronym> および <acronym>CSS</acronym>、JavaScript
             の基本的な設定方法を示します。
         </para>
         <programlisting language="html"><![CDATA[
@@ -116,7 +116,8 @@
         <programlisting language="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
-    document.getElementById('zend-progressbar-done').style.width = data.percent + '%';
+    document.getElementById('zend-progressbar-done').style.width =
+         data.percent + '%';
 }
 ]]></programlisting>
 

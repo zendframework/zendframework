@@ -45,8 +45,11 @@ class Utility
      * @param  null|array $serviceProviderParams
      * @return array
      */
-    public function assembleParams($url, OAuth\Config $config, array $serviceProviderParams = null) 
-    {
+    public function assembleParams(
+        $url, 
+        OAuth\Config $config, 
+        array $serviceProviderParams = null
+    ) {
         $params = array(
             'oauth_consumer_key'     => $config->getConsumerKey(),
             'oauth_nonce'            => $this->generateNonce(),
@@ -60,7 +63,7 @@ class Utility
         }
 
 
-        if (!is_null($serviceProviderParams)) {
+        if ($serviceProviderParams !== null) {
             $params = array_merge($params, $serviceProviderParams);
         }
 
@@ -148,10 +151,10 @@ class Utility
         $hashAlgo  = null;
         $parts     = explode('-', $signatureMethod);
         if (count($parts) > 1) {
-            $className = '\\Zend\\OAuth\\Signature\\' . ucfirst(strtolower($parts[0]));
+            $className = 'Zend\OAuth\Signature\\' . ucfirst(strtolower($parts[0]));
             $hashAlgo  = $parts[1];
         } else {
-            $className = '\\Zend\\OAuth\\Signature\\' . ucfirst(strtolower($signatureMethod));
+            $className = 'Zend\OAuth\Signature\\' . ucfirst(strtolower($signatureMethod));
         }
 
         $signatureObject = new $className($consumerSecret, $tokenSecret, $hashAlgo);

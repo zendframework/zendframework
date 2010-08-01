@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
+<!-- EN-Revision: 22631 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
@@ -40,6 +40,14 @@
                 als Standard-Tabellen Adapter verwendet werden soll oder nicht.
             </para>
         </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>defaultMetadataCache</property></emphasis>: Der Name des
+                Cache Templates oder einer Instanz von Zend_Cache_Core welche als Metadaten-Cache
+                für Zend_Db_Table zu verwenden ist.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.application.available-resources.db.configExample">
@@ -58,6 +66,10 @@ resources.db.params.username = "webuser"
 resources.db.params.password = "XXXXXXX"
 resources.db.params.dbname = "test"
 resources.db.isDefaultTableAdapter = true
+
+; Optional kann auch ein Cache Template zur Verwendung für Metadaten Caching
+; angegeben werden:
+resources.db.defaultMetadataCache = "database"
 ]]></programlisting>
     </example>
 

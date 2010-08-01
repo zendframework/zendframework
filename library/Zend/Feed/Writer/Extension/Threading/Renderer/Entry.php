@@ -91,7 +91,7 @@ class Entry extends Extension\AbstractRenderer
         $clink->setAttribute('type', 'text/html');
         $clink->setAttribute('href', $link);
         $count = $this->getDataContainer()->getCommentCount();
-        if (!is_null($count)) {
+        if ($count !== null) {
             $clink->setAttribute('thr:count', $count);
         }
         $root->appendChild($clink);
@@ -117,7 +117,7 @@ class Entry extends Extension\AbstractRenderer
             $flink->setAttribute('type', 'application/'. $link['type'] .'+xml');
             $flink->setAttribute('href', $link['uri']);
             $count = $this->getDataContainer()->getCommentCount();
-            if (!is_null($count)) {
+            if ($count !== null) {
                 $flink->setAttribute('thr:count', $count);
             }
             $root->appendChild($flink);
@@ -135,7 +135,7 @@ class Entry extends Extension\AbstractRenderer
     protected function _setCommentCount(\DOMDocument $dom, \DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
-        if (is_null($count)) {
+        if ($count === null) {
             return;
         }
         $tcount = $this->_dom->createElement('thr:total');

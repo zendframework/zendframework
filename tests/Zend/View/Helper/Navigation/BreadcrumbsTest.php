@@ -221,7 +221,7 @@ class BreadcrumbsTest
 
     public function testRenderingPartialBySpecifyingAnArrayAsPartial()
     {
-        $this->_helper->setPartial(array('bc.phtml', 'default'));
+        $this->_helper->setPartial(array('bc.phtml', 'application'));
 
         $expected = $this->_getExpected('bc/partial.html');
         $this->assertEquals($expected, $this->_helper->render());

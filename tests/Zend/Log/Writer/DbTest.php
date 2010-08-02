@@ -118,12 +118,13 @@ class DbTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowStrictSetFormatter()
     {
-        try {
-            $this->writer->setFormatter(new StdClass());
-        } catch (Exception $e) {
-            $this->assertType('PHPUnit_Framework_Error', $e);
-            $this->assertContains('must implement interface', $e->getMessage());
-        }
+    	$this->setExpectedException('PHPUnit_Framework_Error');
+//        try {
+            $this->writer->setFormatter(new \StdClass());
+//        } catch (Exception $e) {
+//            $this->assertType('PHPUnit_Framework_Error', $e);
+//            $this->assertContains('must implement interface', $e->getMessage());
+//        }
     }
 }
 

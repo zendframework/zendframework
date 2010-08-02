@@ -57,7 +57,7 @@ abstract class AbstractDispatcher implements Dispatcher
      * Default module
      * @var string
      */
-    protected $_defaultModule = 'default';
+    protected $_defaultModule = 'application';
 
     /**
      * Front Controller instance
@@ -76,7 +76,7 @@ abstract class AbstractDispatcher implements Dispatcher
      * Path delimiter character
      * @var string
      */
-    protected $_pathDelimiter = '_';
+    protected $_pathDelimiter = '\\';
 
     /**
      * Response object to pass to action controllers, if any
@@ -248,7 +248,7 @@ abstract class AbstractDispatcher implements Dispatcher
             $segments[$key] = str_replace(' ', '', ucwords($segment));
         }
 
-        return implode('_', $segments);
+        return implode('\\', $segments);
     }
 
     /**

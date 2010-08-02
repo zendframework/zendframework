@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+namespace Admin;
+
 /**
  * @category   Zend
  * @package    Zend_Controller
@@ -27,10 +29,9 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_SampleZfHelper extends \Zend\View\Helper\AbstractHelper
+class HelperController extends \Zend\Controller\Action
 {
-    public function direct()
+    public function renderAction()
     {
-        return 'SampleZfHelper invoked';
     }
 }

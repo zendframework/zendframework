@@ -135,7 +135,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('error', $this->request->getActionName());
         $this->assertEquals('error', $this->request->getControllerName());
-        $this->assertEquals('default', $this->request->getModuleName());
+        $this->assertEquals('application', $this->request->getModuleName());
     }
 
     public function testPostDispatchNoActionException()
@@ -153,7 +153,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('error', $this->request->getActionName());
         $this->assertEquals('error', $this->request->getControllerName());
-        $this->assertEquals('default', $this->request->getModuleName());
+        $this->assertEquals('application', $this->request->getModuleName());
     }
 
     public function testPostDispatchOtherException()
@@ -171,7 +171,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('error', $this->request->getActionName());
         $this->assertEquals('error', $this->request->getControllerName());
-        $this->assertEquals('default', $this->request->getModuleName());
+        $this->assertEquals('application', $this->request->getModuleName());
     }
 
     public function testPostDispatchThrowsWhenCalledRepeatedly()

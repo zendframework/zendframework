@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         \Zend\Controller\Action\HelperBroker::removeHelper('viewRenderer');
         $this->_dispatcher = new \Zend\Controller\Dispatcher\Standard();
         $this->_dispatcher->setControllerDirectory(array(
-            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
+            'application' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
             'admin'   => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin'
         ));
     }
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     public function testFormatControllerName()
     {
         $this->assertEquals('IndexController', $this->_dispatcher->formatControllerName('index'));
-        $this->assertEquals('Site_CustomController', $this->_dispatcher->formatControllerName('site_custom'));
+        $this->assertEquals('Site\CustomController', $this->_dispatcher->formatControllerName('site\custom'));
     }
 
     public function testFormatActionName()
@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     public function testSetGetControllerDirectory()
     {
         $expected = array(
-            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
+            'application' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
             'admin'   => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin'
         );
         $dirs = $this->_dispatcher->getControllerDirectory();
@@ -125,6 +125,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     public function testIsDispatchableManuallyIncludedController()
     {
         require_once __DIR__ . '/../_files/ManuallyIncludedControllers.php';
+        require_once __DIR__ . '/../_files/ManuallyIncludedControllersNamespaced.php';
         $request = new \Zend\Controller\Request\Http();
 
 
@@ -260,14 +261,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request\Http();
         $request->setControllerName('bogus')
-                ->setModuleName('default');
+                ->setModuleName('application');
         $response = new Response\Cli();
 
         $this->_dispatcher->setParam('useDefaultControllerAlways', true);
 
         try {
             $this->_dispatcher->dispatch($request, $response);
-            $this->assertSame('default', $request->getModuleName());
+            $this->assertSame('application', $request->getModuleName());
             $this->assertSame('index', $request->getControllerName());
             $this->assertSame('index', $request->getActionName());
         } catch (\Exception $e) {
@@ -317,7 +318,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testPathDelimiter()
     {
-        $this->assertEquals('_', $this->_dispatcher->getPathDelimiter());
+        $this->assertEquals('\\', $this->_dispatcher->getPathDelimiter());
         $this->_dispatcher->setPathDelimiter(':');
         $this->assertEquals(':', $this->_dispatcher->getPathDelimiter());
     }
@@ -427,7 +428,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
         $request = new Request\Http();
         $request->setModuleName('foo');
-        $request->setControllerName('admin_index');
+        $request->setControllerName('admin\index');
         $request->setActionName('index');
 
         $this->assertTrue($this->_dispatcher->isDispatchable($request), var_export($this->_dispatcher->getControllerDirectory(), 1));
@@ -440,14 +441,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultModule()
     {
-        $this->assertEquals('default', $this->_dispatcher->getDefaultModule());
+        $this->assertEquals('application', $this->_dispatcher->getDefaultModule());
         $this->_dispatcher->setDefaultModule('foobar');
         $this->assertEquals('foobar', $this->_dispatcher->getDefaultModule());
     }
 
     public function testModuleValid()
     {
-        $this->assertTrue($this->_dispatcher->isValidModule('default'));
+        $this->assertTrue($this->_dispatcher->isValidModule('application'));
         $this->assertTrue($this->_dispatcher->isValidModule('admin'));
         $this->assertFalse($this->_dispatcher->isValidModule('bogus'));
         $this->assertFalse($this->_dispatcher->isValidModule(null));
@@ -516,7 +517,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $class = $this->_dispatcher->getControllerClass($request);
         $this->assertEquals('IndexController', $class);
         $test = $this->_dispatcher->loadClass($class);
-        $this->assertEquals('Bar_IndexController', $test);
+        $this->assertEquals('Bar\IndexController', $test);
         $this->assertTrue(class_exists($test));
     }
 
@@ -532,7 +533,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $class = $this->_dispatcher->getControllerClass($request);
         $this->assertEquals('IndexController', $class);
         $test = $this->_dispatcher->loadClass($class);
-        $this->assertEquals('Foo_IndexController', $test);
+        $this->assertEquals('Foo\IndexController', $test);
         $this->assertTrue(class_exists($test));
     }
 

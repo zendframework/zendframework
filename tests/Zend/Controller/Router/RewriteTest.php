@@ -165,7 +165,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $token = $this->_router->route($request);
 
         $routes = $this->_router->getRoutes();
-        $this->assertType('Zend\Controller\Router\Route\Module', $routes['default']);
+        $this->assertType('Zend\Controller\Router\Route\Module', $routes['application']);
     }
 
     public function testDefaultRouteWithEmptyAction()
@@ -221,7 +221,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request('http://localhost/archive/action/bogus');
 
-        $this->_router->addRoute('default', new Route\Route(':controller/:action'));
+        $this->_router->addRoute('application', new Route\Route(':controller/:action'));
 
         try {
             $token = $this->_router->route($request);
@@ -294,7 +294,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
             $this->fail('Current route is not set');
         }
 
-        $this->assertEquals('default', $name);
+        $this->assertEquals('application', $name);
         $this->assertType('Zend\Controller\Router\Route\Module', $route);
     }
 
@@ -374,7 +374,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $token = $this->_router->route($request);
 
-        $this->assertEquals('default', $token->getModuleName());
+        $this->assertEquals('application', $token->getModuleName());
         $this->assertEquals('defctrl', $token->getControllerName());
         $this->assertEquals('defact', $token->getActionName());
     }
@@ -382,7 +382,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     public function testDefaultRouteWithEmptyControllerAndAction()
     {
         Controller\Front::getInstance()->setControllerDirectory(array(
-            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
+            'application' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
             'mod'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin',
         ));
         $request = new Request('http://localhost/mod');
@@ -701,7 +701,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     public function testCanGenerateNumericKeyUri()
     {
         $this->_router->addRoute(
-            'default', 
+            'application', 
             new Route\Route(
                 ':controller/:action/*',
                 array('controller' => 'index', 'action' => 'index')

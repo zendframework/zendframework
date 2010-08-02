@@ -251,7 +251,7 @@ class MenuTest
 
     public function testRenderingPartialBySpecifyingAnArrayAsPartial()
     {
-        $this->_helper->setPartial(array('menu.phtml', 'default'));
+        $this->_helper->setPartial(array('menu.phtml', 'application'));
 
         $expected = $this->_getExpected('menu/partial.html');
         $actual = $this->_helper->render();

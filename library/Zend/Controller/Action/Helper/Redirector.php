@@ -299,7 +299,7 @@ class Redirector extends AbstractHelper
         $params['action']     = $action;
 
         $router = $this->getFrontController()->getRouter();
-        $url    = $router->assemble($params, 'default', true);
+        $url    = $router->assemble($params, 'application', true);
 
         $this->_redirect($url);
     }

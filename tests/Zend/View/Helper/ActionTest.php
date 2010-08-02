@@ -264,7 +264,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testActionWithPartialsUseOfViewRendererReturnsToOriginatingViewState()
     {
         $partial = new \Zend\View\Helper\Partial();
-        $this->view->setScriptPath(__DIR__ . '/_files/modules/default/views/scripts/');
+        $this->view->setScriptPath(__DIR__ . '/_files/modules/application/views/scripts/');
         $partial->setView($this->view);
 
         HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;

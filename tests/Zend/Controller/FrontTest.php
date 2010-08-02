@@ -168,7 +168,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testSetGetControllerDirectory()
     {
         $test = $this->_controller->getControllerDirectory();
-        $expected = array('default' => __DIR__ . DIRECTORY_SEPARATOR . '_files');
+        $expected = array('application' => __DIR__ . DIRECTORY_SEPARATOR . '_files');
         $this->assertSame($expected, $test);
     }
 
@@ -530,12 +530,12 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         $controllerDirs = $this->_controller->getControllerDirectory();
         $this->assertTrue(isset($controllerDirs['foo']));
         $this->assertTrue(isset($controllerDirs['bar']));
-        $this->assertTrue(isset($controllerDirs['default']));
+        $this->assertTrue(isset($controllerDirs['application']));
         $this->assertFalse(isset($controllerDirs['.svn']));
 
         $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'foo', $controllerDirs['foo']);
         $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $controllerDirs['bar']);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'default', $controllerDirs['default']);
+        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'application', $controllerDirs['application']);
     }
 
     /**#@+

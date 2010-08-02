@@ -91,14 +91,14 @@ class Rewrite extends AbstractRouter
      */
     public function addDefaultRoutes()
     {
-        if (!$this->hasRoute('default')) {
+        if (!$this->hasRoute('application')) {
             $dispatcher = $this->getFrontController()->getDispatcher();
             $request = $this->getFrontController()->getRequest();
 
             require_once 'Zend/Controller/Router/Route/Module.php';
             $compat = new Route\Module(array(), $dispatcher, $request);
 
-            $this->_routes = array_merge(array('default' => $compat), $this->_routes);
+            $this->_routes = array_merge(array('application' => $compat), $this->_routes);
         }
 
         return $this;
@@ -456,7 +456,7 @@ class Rewrite extends AbstractRouter
             try {
                 $name = $this->getCurrentRouteName();
             } catch (Exception $e) {
-                $name = 'default';
+                $name = 'application';
             }
         }
 

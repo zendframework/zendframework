@@ -65,7 +65,7 @@ class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Coun
      *
      * @var string
      */
-    protected $_namespace = 'default';
+    protected $_namespace = 'application';
 
     /**
      * __construct() - Instance constructor, needed to get iterators, etc

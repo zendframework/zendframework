@@ -237,7 +237,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
     public function testGotoDoesNotUtilizeDefaultSegments()
     {
         $request = $this->request;
-        $request->setModuleName('default');
+        $request->setModuleName('application');
         $this->redirector->setGoto('index', 'index');
         $this->assertEquals('/', $this->redirector->getRedirectUrl());
 
@@ -451,7 +451,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         $this->request->setModuleName('admin')
                       ->setControllerName('class')
                       ->setActionName('view');
-        $this->redirector->gotoSimple('login', 'account', 'default');
+        $this->redirector->gotoSimple('login', 'account', 'application');
         $test = $this->redirector->getRedirectUrl();
         $this->assertEquals('/account/login', $test, $test);
     }

@@ -38,4 +38,43 @@ namespace Zend\Uri;
 class Mailto extends Uri
 {
     static protected $_validSchemes = array('mailto');
+    
+    /**
+     * Check if the URI is a valid Mailto URI
+     * 
+     * This applys additional specific validation rules beyond the ones 
+     * required by the generic URI syntax
+     * 
+     * @return boolean
+     * @see    \Zend\Uri\Uri::isValid()
+     */
+    public function isValid()
+    {
+        
+    }
+    
+    /**
+     * Set the email address
+     * 
+     * This is infact equivalent to setPath() - but provides a more clear interface
+     * 
+     * @param  string $email
+     * @return \Zend\Uri\Mailto
+     */
+    public function setEmail($email)
+    {
+        return $this->setPath($email);
+    }
+    
+    /**
+     * Get the email address
+     * 
+     * This is infact equivalent to getPath() - but provides a more clear interface
+     * 
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getPath();
+    }
 }

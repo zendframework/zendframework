@@ -36,4 +36,74 @@ namespace Zend\Uri;
 class Http extends Uri
 {
     static protected $_validSchemes = array('http', 'https');
+    
+    /**
+     * Check if the URI is a valid HTTP URI
+     * 
+     * This applys additional HTTP specific validation rules beyond the ones 
+     * required by the generic URI syntax
+     * 
+     * @return boolean
+     * @see    \Zend\Uri\Uri::isValid()
+     */
+    public function isValid()
+    {
+        
+    }
+
+    /**
+     * Get the username part (before the ':') of the userInfo URI part
+     * 
+     * @return string
+     */
+    public function getUser()
+    {
+        
+    }
+    
+    /**
+     * Get the password part (after the ':') of the userInfo URI part
+     * 
+     * @return string
+     */
+    public function getPassword()
+    {
+        
+    }
+
+    /**
+     * Set the username part (before the ':') of the userInfo URI part
+     * 
+     * @param  string $user
+     * @return \Zend\Uri\Http
+     */
+    public function setUser($user)
+    {
+        
+    }
+    
+    /**
+     * Set the password part (after the ':') of the userInfo URI part
+     * 
+     * @param  string $password
+     * @return \Zend\Uri\Http
+     */
+    public function setPassword($password)
+    {
+        
+    }
+    
+    /**
+     * Validate the host part of an HTTP URI
+     * 
+     * Unlike the generic URI syntax, HTTP URIs do not allow IPv6 or reg-name
+     * URIs, only IPv4 and DNS compatible host names.
+     * 
+     * @param  string $host
+     * @return boolean
+     */
+    static public function validateHost($host)
+    {
+        
+    }
 }

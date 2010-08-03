@@ -279,8 +279,29 @@ class Uri
     }
     
     /**
+     * Merge a relative URI into the current (usually absolute) URI, using the
+     * current URI as a base reference point. 
+     *  
+     * Merging algorithm is adapted from RFC-3986 section 5.2 
+     * (@link http://tools.ietf.org/html/rfc3986#section-5.2)
+     * 
+     * @todo Implement by moving the logic from ::resolve to a common static
+     *       method shared by both methods
+     *       
+     * @param  \Zend\Uri\Uri | string $baseUri
+     * @return \Zend\Uri\Uri
+     */
+    public function merge($relativeUri)
+    {
+        throw new \ErrorException("Implement me!");
+    }
+    
+    /**
      * Convert a relative URI into an absolute URI using a base absolute URI as 
-     * a reference.    
+     * a reference.
+     * 
+     * This is similar to ::merge() - only it uses the supplied URI as the 
+     * base reference instead of using the current URI as the base reference.
      * 
      * Merging algorithm is adapted from RFC-3986 section 5.2 
      * (@link http://tools.ietf.org/html/rfc3986#section-5.2)
@@ -339,6 +360,7 @@ class Uri
         
         return $this;
     } 
+    
 
     /**
      * Convert the link to a relative link by substracting a base URI

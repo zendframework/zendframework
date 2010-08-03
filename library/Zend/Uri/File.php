@@ -38,12 +38,48 @@ namespace Zend\Uri;
 class File extends Uri
 {
     static protected $_validSchemes = array('file');
+
+    /**
+     * Check if the URI is a valid File URI
+     * 
+     * This applys additional specific validation rules beyond the ones 
+     * required by the generic URI syntax
+     * 
+     * @return boolean
+     * @see    \Zend\Uri\Uri::isValid()
+     */
+    public function isValid()
+    {
+        
+    }
+    
+    /**
+     * User Info part is not used in file URIs
+     * 
+     * @see    \Zend\Uri\Uri::setUserInfo()
+     * @throws InvalidUriPartException
+     */
+    public function setUserInfo($userInfo)
+    {
+        
+    }
+    
+    /**
+     * Fragment part is not used in file URIs
+     * 
+     * @see    \Zend\Uri\Uri::setFragment()
+     * @throws InvalidUriPartException
+     */
+    public function setFragment($fragment)
+    {
+        
+    }
     
     /**
      * Convert a UNIX file path to a valid file:// URL
      * 
      * @param  srting $path
-     * @return \Zend\URI\File
+     * @return \Zend\Uri\File
      */
     static public function fromUnixPath($path)
     {
@@ -60,7 +96,7 @@ class File extends Uri
      * Convert a Windows file path to a valid file:// URL
      * 
      * @param  string $path
-     * @return \Zend\URI\File
+     * @return \Zend\Uri\File
      */
     static public function fromWindowsPath($path)
     {

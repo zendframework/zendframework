@@ -270,7 +270,8 @@ class Server implements \Zend\Server\Server
             return true;
         }
         if($object) {
-            $class = is_object($object) ? get_class($object) : $object;
+            $isObject = is_object($object);
+            $class    = ($isObject) ? get_class($object) : $object;
             if(!$this->_acl->hasResource($class)) {
                 $this->_acl->addResource(new \Zend\Acl\Resource\GenericResource($class));
             }

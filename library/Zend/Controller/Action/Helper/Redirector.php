@@ -477,13 +477,6 @@ class Redirector extends AbstractHelper
      */
     public function redirectAndExit()
     {
-        if ($this->getCloseSessionOnExit()) {
-            // Close session, if started
-            if (isset($_SESSION) && !empty($_SESSION)) {
-                session_write_close();
-            }
-        }
-
         $this->getResponse()->sendHeaders();
         exit();
     }

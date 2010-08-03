@@ -184,14 +184,18 @@ class Container extends ArrayObject
      * If not, it raises an exception; otherwise, it returns the Storage 
      * object.
      * 
-     * @return Storage
+     * @param  bool $createContainer Whether or not to create the container for the namespace
+     * @return Storage|null Returns null only if $createContainer is false
      * @throws Exception
      */
-    protected function _verifyNamespace()
+    protected function _verifyNamespace($createContainer = true)
     {
         $storage = $this->_getStorage();
         $name    = $this->getName();
         if (!isset($storage[$name])) {
+            if (!$createContainer) {
+                return;
+            }
             $storage[$name] = $this->_createContainer();
         }
         if (!is_array($storage[$name]) && !$storage[$name] instanceof ArrayObject) {
@@ -341,7 +345,10 @@ class Container extends ArrayObject
      */
     public function offsetExists($key)
     {
-        $storage = $this->_verifyNamespace();
+        // If no container exists, we can't inspect it
+        if (null === ($storage = $this->_verifyNamespace(false))) {
+            return false;
+        }
         $name    = $this->getName();
 
         // Return early if the key isn't set

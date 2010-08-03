@@ -105,8 +105,10 @@ class SessionManager extends AbstractManager
 
         // Since session is starting, we need to potentially repopulate our 
         // session storage
-        if ($storage instanceof Storage\SessionStorage) {
-            $storage->exchangeArray($_SESSION);
+        if ($storage instanceof Storage\SessionStorage
+            && $_SESSION !== $storage
+        ) {
+            $storage->fromArray($_SESSION);
             $_SESSION = $storage;
         }
     }

@@ -15,7 +15,7 @@
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -48,6 +48,18 @@ class Uri
     const CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
     const CHAR_RESERVED   = ':\/\?#\[\]@!\$&\'\(\)\*\+,;=';
     
+    /**
+     * Host part types
+     */
+    const HOST_IPV4      = 1;
+    const HOST_IPV6      = 2;
+    const HOST_IPVF      = 4;
+    const HOST_IPVANY    = 7;       
+    const HOST_DNSNAME   = 8;
+    const HOST_DNSORIPV4 = 9; 
+    const HOST_REGNAME   = 16;
+    const HOST_ALL       = 31;
+     
     /**
      * URI scheme 
      * 
@@ -97,6 +109,13 @@ class Uri
      */
     protected $_fragment;
 
+    /**
+     * Which host part types are valid for this URI?
+     *
+     * @var integer
+     */
+    protected $_validHostTypes = self::HOST_ALL;
+    
     /**
      * Array of valid schemes.
      * 
@@ -635,40 +654,37 @@ class Uri
     /**
      * Validate the host part
      * 
-     * This allows different host representations, including IPv4 addresses, 
-     * IPv6 addresses enclosed in square brackets, and registered names which
-     * may be DNS names or even more complex names. This is different (and is
-     * more loose) from what is commonly accepted as valid HTTP URLs for 
-     * example.
-     *   
-     * @todo   Users should be able to control which host types are allowed 
-     * @param  string $host
+     * Users may control which host types to allow by passing a second parameter
+     * with a bitmask of HOST_* constants which are allowed. If not specified,
+     * all address types will be allowed. 
+     * 
+     * Note that the generic URI syntax allows different host representations, 
+     * including IPv4 addresses, IPv6 addresses and future IP address formats 
+     * enclosed in square brackets, and registered names which may be DNS names 
+     * or even more complex names. This is different (and is much more loose) 
+     * from what is commonly accepted as valid HTTP URLs for example.
+     * 
+     * @param  string  $host
+     * @param  integer $allowed bitmask of allowed host types 
      * @return boolean
      */
-    static public function validateHost($host)
+    static public function validateHost($host, $allowed = self::HOST_ALL)
     {
-        if (preg_match('/^\[(.+)\]$/', $host, $match)) {
-            // Expect an IPv6 address
-            $validator = new Validator\Ip(array('allowipv4' => false));
-            $host = $match[1];
-             
-        } else {
-            // Expect an IPv4 address or a hostname
-            $validator = new Validator\Hostname(array(
-                'allow' => Validator\Hostname::ALLOW_ALL,
-                'ip'    => new Validator\Ip(array('allowipv6' => false))
-            ));
+        if ($allowed & self::HOST_REGNAME) { 
+            if (static::_isValidRegName($host)) return true;
         }
         
-        if ($validator->isValid($host)) { 
-            return true;
-        } else {
-            // Fallback: validate using reg-name regex
-            $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})+$/';
-            return (bool) preg_match($regex, $host);
+        if ($allowed & self::HOST_DNSNAME) { 
+            if (static::_isValidDnsHostname($host)) return true;
         }
+        
+        if ($allowed & self::HOST_IPVANY) {
+            if (static::_isValidIpAddress($host, $allowed)) return true; 
+        }
+        
+        return false;
     }
-
+    
     /**
      * Validate the port 
      * 
@@ -828,5 +844,66 @@ class Uri
         }
         
         return $output; 
+    }
+    
+    /**
+     * Check if a host name is a valid IP address, depending on allowed IP address types
+     * 
+     * @param  string  $host
+     * @param  integer $allowed allowed address types
+     * @return boolean
+     */
+    static protected function _isValidIpAddress($host, $allowed)
+    {
+        $validatorParams = array(
+            'allowipv4' => (bool) ($allowed & self::HOST_IPV4),
+            'allowipv6' => (bool) ($allowed & self::HOST_IPV6)
+        );
+        
+        if ($allowed & (self::HOST_IPV6 | self::HOST_IPVF)) {
+            if (preg_match('/^\[(.+)\]$/', $host, $match)) { 
+                $host = $match[1];
+                $validatorParams['allowipv4'] = false;
+            }
+        }
+        
+        if ($allowed & (self::HOST_IPV4 | self::HOST_IPV6)) {
+            $validator = new Validator\Ip($validatorParams);
+            if ($validator->isValid($host)) return true;
+        }
+        
+        if ($allowed & self::HOST_IPVF) { 
+            $regex = '/^v\.[[:xdigit:]]+[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':]+$/';
+            return (bool) preg_match($regex, $host);
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check if an address is a valid DNS hostname
+     *
+     * @param  string $host
+     * @return boolean
+     */
+    static protected function _isValidDnsHostname($host)
+    {
+        $validator = new Validator\Hostname(array(
+            'allow' => Validator\Hostname::ALLOW_DNS | Validator\Hostname::ALLOW_LOCAL
+        ));
+        
+        return $validator->isValid($host);
+    }
+    
+    /**
+     * Check if an address is a valid registerd name (as defined by RFC-3986) address
+     *
+     * @param  string $host
+     * @return boolean
+     */
+    static protected function _isValidRegName($host)
+    {
+        $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})+$/';
+        return (bool) preg_match($regex, $host);
     }
 }

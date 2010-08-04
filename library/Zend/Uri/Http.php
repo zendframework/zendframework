@@ -102,7 +102,7 @@ class Http extends Uri
      * @param  string $host
      * @return boolean
      */
-    static public function validateHost($host)
+    static public function validateHost($host, $allowed = self::HOST_DNSORIPV4)
     {
         
     }

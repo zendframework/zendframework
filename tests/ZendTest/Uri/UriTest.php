@@ -51,7 +51,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testParseComposeUri($uriString)
     {
         $uri = new Uri($uriString);
-        $this->assertEquals($uriString, $uri->generate());
+        $this->assertEquals($uriString, $uri->toString());
     }
 
     /**
@@ -269,7 +269,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $uri = new Uri();
         $uri->setQuery($data);
         
-        $this->assertEquals('?' . $expqs, $uri->generate());
+        $this->assertEquals('?' . $expqs, $uri->toString());
     }
     
     /**
@@ -509,7 +509,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $uri = new Uri($relative);
         $uri->resolve($baseUrl);
         
-        $this->assertEquals($expected, $uri->generate());
+        $this->assertEquals($expected, $uri->toString());
     }
     
     /**

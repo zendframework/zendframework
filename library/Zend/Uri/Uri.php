@@ -231,7 +231,7 @@ class Uri
      * 
      * @return string
      */
-    public function generate()
+    public function toString()
     {
         if (! $this->isValid()) {
             throw new InvalidURIException("URI is not valid and cannot be converted into a string");
@@ -592,7 +592,7 @@ class Uri
      */
 	public function __toString()
     {
-        return $this->generate();
+        return $this->toString();
     }
     
     /**

@@ -14,55 +14,61 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\Markup\TestAsset\Renderer\HTML;
-
-use Zend\Markup\Renderer\AbstractRenderer;
+namespace Zend\Markup\Renderer\Markup\Html;
+use Zend\Markup;
 
 /**
- * Tag interface
+ * Simple replace markup for HTML
  *
+ * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
+ * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bar implements \Zend\Markup\Renderer\Markup
+class Replace extends AbstractHtml
 {
-    public function setEncoding($encoding = 'UTF-8')
+
+    /**
+     * Markup's replacement
+     *
+     * @var string
+     */
+    protected $_replace;
+
+
+    /**
+     * Constructor
+     *
+     * @param string $replace
+     * 
+     * @return void
+     */
+    public function __construct($replace)
     {
-    }
-   
-    public function setRenderer(AbstractRenderer $renderer)
-    {
+        $this->_replace = $replace;
     }
 
     /**
-     * Convert the token
+     * Invoke the markup on the token
      *
-     * @param Zend_Markup_Token $token
+     * @param \Zend\Markup\Token $token
      * @param string $text
      *
      * @return string
      */
-    public function __invoke(\Zend\Markup\Token $token, $text)
+    public function __invoke(Markup\Token $token, $text)
     {
-        $bar = $token->getAttribute('bar');
-
-        if (!empty($bar)) {
-            $bar = '=' . $bar;
-        }
-
-        return "[foo{$bar}]" . $text . '[/foo]';
+        return "<{$this->_replace}>{$text}</{$this->_replace}>";
     }
-
 }

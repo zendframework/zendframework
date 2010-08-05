@@ -17,18 +17,19 @@
  * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
+namespace Zend\Markup\Renderer\Markup\Html;
 use Zend\Markup;
 
 /**
- * Simple replace markup for HTML
+ * Code markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
+ * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -36,31 +37,11 @@ use Zend\Markup;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Replace extends AbstractHTML
+class Code extends AbstractHtml
 {
 
     /**
-     * Markup's replacement
-     *
-     * @var string
-     */
-    protected $_replace;
-
-
-    /**
-     * Constructor
-     *
-     * @param string $replace
-     * 
-     * @return void
-     */
-    public function __construct($replace)
-    {
-        $this->_replace = $replace;
-    }
-
-    /**
-     * Invoke the markup on the token
+     * Convert the token
      *
      * @param \Zend\Markup\Token $token
      * @param string $text
@@ -69,6 +50,6 @@ class Replace extends AbstractHTML
      */
     public function __invoke(Markup\Token $token, $text)
     {
-        return "<{$this->_replace}>{$text}</{$this->_replace}>";
+        return highlight_string($text, true);
     }
 }

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,55 +23,46 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
-use Zend\Markup\Token;
+namespace ZendTest\Markup\TestAsset\Renderer\Html;
+
+use Zend\Markup\Renderer\AbstractRenderer;
 
 /**
- * URL markup for HTML
+ * Tag interface
  *
- * @uses       \Zend\Markup\Renderer\HTML
- * @uses       \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URL extends AbstractHTML
+class Bar implements \Zend\Markup\Renderer\Markup
 {
+    public function setEncoding($encoding = 'UTF-8')
+    {
+    }
+   
+    public function setRenderer(AbstractRenderer $renderer)
+    {
+    }
 
     /**
      * Convert the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param Zend_Markup_Token $token
      * @param string $text
      *
      * @return string
      */
-    public function __invoke(Token $token, $text)
+    public function __invoke(\Zend\Markup\Token $token, $text)
     {
-        if ($token->hasAttribute('url')) {
-            $uri = $token->getAttribute('url');
-        } else {
-            $uri = $text;
+        $bar = $token->getAttribute('bar');
+
+        if (!empty($bar)) {
+            $bar = '=' . $bar;
         }
 
-        if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
-            $uri = 'http://' . $uri;
-        }
-
-        // check if the URL is valid
-        // TODO: use the new Zend\Uri for this
-        if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
-            return $text;
-        }
-
-        $attributes = $this->renderAttributes($token);
-
-        // run the URI through htmlentities
-        $uri = htmlentities($uri, ENT_QUOTES, $this->getEncoding());
-
-        return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
+        return "[foo{$bar}]" . $text . '[/foo]';
     }
+
 }

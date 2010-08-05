@@ -78,8 +78,15 @@ class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Coun
     {
         if (!self::$_session instanceof Session\Container) {
             self::$_session = new Session\Container($this->getName());
+
+            // Should not modify the iterator while iterating; aggregate 
+            // namespaces so they may be deleted after retrieving messages.
+            $namespaces = array();
             foreach (self::$_session as $namespace => $messages) {
                 self::$_messages[$namespace] = $messages;
+                $namespaces[] = $namespace;
+            }
+            foreach ($namespaces as $namespace) {
                 unset(self::$_session->{$namespace});
             }
         }

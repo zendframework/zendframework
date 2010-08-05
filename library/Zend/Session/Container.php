@@ -393,6 +393,19 @@ class Container extends ArrayObject
     }
 
     /**
+     * Iterate over session container
+     * 
+     * @return Iterator
+     */
+    public function getIterator()
+    {
+        $storage   = $this->_verifyNamespace();
+        $storage   = $this->_getStorage();
+        $container = $storage[$this->getName()];
+        return $container->getIterator();
+    }
+
+    /**
      * Set expiration TTL
      *
      * Set the TTL for the entire container, a single key, or a set of keys.

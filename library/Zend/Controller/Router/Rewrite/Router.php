@@ -25,7 +25,7 @@
  */
 namespace Zend\Controller\Router\Rewrite;
 use Zend\Controller\Router\Rewrite\Route;
-use Zend\Controller\Request\HTTP as HTTPRequest;
+use Zend\Controller\Request\Http as HttpRequest;
 
 /**
  * Ruby routing based router
@@ -68,8 +68,12 @@ class Router
      */
     public function setOptions($options)
     {
-        if (!is_array($options) || !$options instanceof Traversable) {
-            throw new InvalidArgumentException('Options must either be an array or implement Traversable');
+        if ($options instanceof \Zend\Config) {
+            $options = $options->toArray();
+        }
+
+        if (!is_array($options)) {
+            throw new InvalidArgumentException('Options must either be an array or an instance of \Zend\Config');
         }
 
         foreach ($options as $key => $value) {
@@ -126,10 +130,10 @@ class Router
      */
     protected function _routeFromArray(array $specs)
     {
-        if (!isset($specs['type'])) {
-            throw new InvalidArgumentException('"type" key missing in array');
-        } elseif (!isset($specs['options'])) {
-            throw new InvalidArgumentException('"options" key missing in array');
+        if (!isset($specs['type']) || !is_string($specs['type'])) {
+            throw new InvalidArgumentException('Type not defined or not a string');
+        } elseif (!isset($specs['options']) || !is_array($specs['options'])) {
+            throw new InvalidArgumentException('Options not defined or not an array');
         }
 
         if (strpos($specs['type'], '\\') !== false) {
@@ -141,16 +145,15 @@ class Router
         $route = new $className($specs['options']);
 
         if (isset($specs['routes'])) {
-            $route = new Route\Part($route);
+            $options = array(
+                'route'         => $route,
+                'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate'])
+            );
 
-            foreach ($specs['routes'] as $subName => $subRoute) {
-                if (is_array($subRoute)) {
-                    $subRoute = $this->_routeFromArray($subRoute);
-                }
+            $route = new Route\Part($options);
 
-                $mayTerminate = (isset($specs['may_terminate']) && $specs['may_terminate']);
-
-                $route->append($subName, new Route\Part($subRoute), $mayTerminate);
+            foreach ($specs['routes'] as $subName => $subSpecs) {
+                $route->append($subName, $this->_routeFromArray($subSpecs));
             }
         }
 
@@ -160,10 +163,10 @@ class Router
     /**
      * Match a request
      *
-     * @param  HTTPRequest $request
+     * @param  HttpRequest $request
      * @return RouterMatch
      */
-    public function match(HTTPRequest $request)
+    public function match(HttpRequest $request)
     {
         $match = null;
 

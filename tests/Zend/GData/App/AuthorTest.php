@@ -63,7 +63,7 @@ class AuthorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newAuthor->name->text, 'Jeff Scudder');
 
         /* try constructing using magic factory */
-        $app = new \Zend\GData\App\App();
+        $app = new \Zend\GData\App();
         $newAuthor2 = $app->newAuthor();
         $newAuthor2->transferFromXML($newAuthor->saveXML());
         $this->assertEquals(count($newAuthor2->extensionElements), 1);

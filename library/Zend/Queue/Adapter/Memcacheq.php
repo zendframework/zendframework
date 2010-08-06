@@ -34,14 +34,14 @@ use Zend\Queue\Message;
  * @uses       \Zend\Queue\Adapter\AdapterAbstract
  * @uses       \Zend\Queue\Queue
  * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
+ * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Memcacheq extends AdapterAbstract
+class Memcacheq extends AbstractAdapter
 {
     const DEFAULT_HOST = '127.0.0.1';
     const DEFAULT_PORT = 22201;
@@ -250,7 +250,7 @@ class Memcacheq extends AdapterAbstract
      *
      * @param  string     $message Message to send to the active queue
      * @param  \Zend\Queue\Queue $queue
-     * @return \Zend\Queue\Message\Message
+     * @return \Zend\Queue\Message
      * @throws \Zend\Queue\Exception
      */
     public function send($message, Queue\Queue $queue=null)
@@ -333,11 +333,11 @@ class Memcacheq extends AdapterAbstract
      * Returns true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  \Zend\Queue\Message\Message $message
+     * @param  \Zend\Queue\Message $message
      * @return boolean
      * @throws \Zend\Queue\Exception (unsupported)
      */
-    public function deleteMessage(Message\Message $message)
+    public function deleteMessage(Message $message)
     {
         throw new Queue\Exception('deleteMessage() is not supported in  ' . get_class($this));
     }

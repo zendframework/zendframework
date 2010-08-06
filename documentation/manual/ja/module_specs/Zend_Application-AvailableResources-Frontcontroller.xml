@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20885 -->
+<!-- EN-Revision: 22596 -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
 
@@ -81,7 +81,6 @@
                 フロントコントローラのプラグイン・クラス名配列
                 このリソースは、各々のクラスを（コンストラクタ引数なしで）インスタンス化して、
                 それからフロントコントローラでインスタンスを登録します。
-                <!-- TODO : to be translated -->
                 If you want to
                 register a plugin with a particular stack index, you need to provide an array with
                 two keys <property>class</property> and <property>stackIndex</property>.
@@ -97,7 +96,6 @@
 
         <listitem>
             <para>
-                <!-- TODO : to be translated -->
                 <emphasis><property>returnresponse</property></emphasis>: whether or not to return
                 the response object after dispatching the front controller. Value should be a
                 boolean; by default, this is disabled.
@@ -118,6 +116,7 @@
             下記は、フロントコントローラ・リソースを設定する方法を示す<acronym>INI</acronym>スニペット・サンプルです。
         </para>
 
+        <!-- TODO : to be translated -->
         <programlisting language="ini"><![CDATA[
 [production]
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
@@ -133,6 +132,9 @@ resources.frontController.plugins.baz.class = "My_Plugin_Baz"
 resources.frontController.plugins.baz.stackIndex = 123
 resources.frontController.returnresponse = 1
 resources.frontController.env = APPLICATION_ENV
+
+; The following proxies to: Zend_Controller_Action_HelperBroker::addPath('Helper_Path', $helperPrefix);
+resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
 ]]></programlisting>
     </example>
 

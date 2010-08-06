@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21130 -->
+<!-- EN-Revision: 21823 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -117,10 +117,10 @@ echo $config->database->params->dbname; // affiche "dbname"
                     <row>
                         <entry><varname>$section</varname></entry>
                         <entry>
-                            La [section] dans le fichier ini qui doit être chargé.
-                            L'affectation de <constant>NULL</constant> à ce paramètre chargera
-                            toutes les sections. Alternativement, un tableau de noms de section
-                            peut être fourni pour charger des sections multiples.
+                            La [section] dans le fichier <acronym>INI</acronym> qui doit être
+                            chargé. L'affectation de <constant>NULL</constant> à ce paramètre
+                            chargera toutes les sections. Alternativement, un tableau de noms
+                            de section peut être fourni pour charger des sections multiples.
                         </entry>
                     </row>
                     <row>
@@ -131,10 +131,11 @@ echo $config->database->params->dbname; // affiche "dbname"
                             Tableau d'options. Les clés suivantes sont supportées&#160;:
                             <itemizedlist>
                                 <listitem>
-                                    <para><emphasis><property>allowModifications</property></emphasis>&#160;:
-                                    Mettre à <constant>TRUE</constant> pour permettre la
-                                    modification en mémoire des données de configuration chargées.
-                                    Par défaut à <constant>FALSE</constant>.
+                                    <para>
+                                        <emphasis><property>allowModifications</property></emphasis>&#160;:
+                                        Mettre à <constant>TRUE</constant> pour permettre la
+                                        modification en mémoire des données de configuration
+                                        chargées. Par défaut à <constant>FALSE</constant>.
                                     </para>
                                 </listitem>
                                 <listitem>

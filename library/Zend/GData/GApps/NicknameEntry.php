@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\GApps;
 
+use Zend\GData\GApps;
+
 /**
  * Data model class for a Google Apps Nickname Entry.
  *
@@ -40,7 +42,7 @@ namespace Zend\GData\GApps;
  * This class represents <atom:entry> in the Google Data protocol.
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\GApps
  * @uses       \Zend\GData\GApps\Extension\Login
  * @uses       \Zend\GData\GApps\Extension\Nickname
  * @category   Zend
@@ -52,7 +54,7 @@ namespace Zend\GData\GApps;
 class NicknameEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\GApps\NicknameEntry';
+    protected $_entryClassName = 'Zend\GData\GApps\NicknameEntry';
 
     /**
      * <apps:login> element used to hold information about the owner

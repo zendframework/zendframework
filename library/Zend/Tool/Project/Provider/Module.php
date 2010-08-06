@@ -42,7 +42,7 @@ class Module
     implements \Zend\Tool\Framework\Provider\Pretendable
 {
 
-    public static function createResources(\Zend\Tool\Project\Profile\Profile $profile, $moduleName, \Zend\Tool\Project\Profile\Resource\Resource $targetModuleResource = null)
+    public static function createResources(\Zend\Tool\Project\Profile $profile, $moduleName, \Zend\Tool\Project\Profile\Resource $targetModuleResource = null)
     {
 
         // find the appliction directory, it will serve as our module skeleton
@@ -70,7 +70,7 @@ class Module
             $targetModuleResource,
             array(
                 'denyNames' => array('ModulesDirectory', 'ViewControllerScriptsDirectory'),
-                'denyType'  => 'Zend_Tool_Project_Context_Filesystem_File'
+                'denyType'  => 'Zend\Tool\Project\Context\Filesystem\File'
                 )
             );
 
@@ -81,6 +81,7 @@ class Module
         $currentDepth = 0;
         $parentResources = array();
         $currentResource = $moduleDirectory;
+        $currentChildResource = null;
 
         // loop through the target module skeleton
         foreach ($targetIterator as $targetSubResource) {

@@ -20,19 +20,22 @@
  * @version    $Id$
  */
 
-// Call Zend_Test_PHPUnit_ControllerTestCaseTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Test_PHPUnit_ControllerTestCaseTest::main");
-}
-
-
-/** Zend_Test_PHPUnit_ControllerTestCase */
-
-/** Zend_Registry */
-
-/** Zend_Session */
-
-/** Zend_Controller_Action */
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit;
+use Zend\Application,
+    Zend\Controller,
+    Zend\Controller\Action\HelperBroker,
+    Zend\Controller\Dispatcher,
+    Zend\Controller\Plugin,
+    Zend\Controller\Request,
+    Zend\Controller\Response,
+    Zend\Controller\Router,
+    Zend\Dom,
+    Zend\Registry,
+    Zend\Session,
+    Zend\Test\PHPUnit\Constraint;
 
 /**
  * Test class for Zend_Test_PHPUnit_ControllerTestCase.
@@ -45,18 +48,9 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Test
  * @group      Zend_Test_PHPUnit
  */
-class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCase
+class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Test_PHPUnit_ControllerTestCaseTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
+
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -68,7 +62,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     {
         $_SESSION = array();
         $this->setExpectedException(null);
-        $this->testCase = new Zend_Test_PHPUnit_ControllerTestCaseTest_Concrete();
+        $this->testCase = new Concrete();
         $this->testCase->reset();
         $this->testCase->bootstrap = array($this, 'bootstrap');
     }
@@ -81,7 +75,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function tearDown()
     {
-        $registry = Zend_Registry::getInstance();
+        $registry = Registry::getInstance();
         if (isset($registry['router'])) {
             unset($registry['router']);
         }
@@ -94,7 +88,6 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
         if (isset($registry['viewRenderer'])) {
             unset($registry['viewRenderer']);
         }
-        Zend_Session::$_unitTestEnabled = false;
         session_id(uniqid());
     }
 
@@ -105,13 +98,13 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     public function testGetFrontControllerShouldReturnFrontController()
     {
         $controller = $this->testCase->getFrontController();
-        $this->assertTrue($controller instanceof Zend_Controller_Front);
+        $this->assertTrue($controller instanceof Controller\Front);
     }
 
     public function testGetFrontControllerShouldReturnSameFrontControllerObjectOnRepeatedCalls()
     {
         $controller = $this->testCase->getFrontController();
-        $this->assertTrue($controller instanceof Zend_Controller_Front);
+        $this->assertTrue($controller instanceof Controller\Front);
         $test = $this->testCase->getFrontController();
         $this->assertSame($controller, $test);
     }
@@ -119,13 +112,13 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     public function testGetRequestShouldReturnRequestTestCase()
     {
         $request = $this->testCase->getRequest();
-        $this->assertTrue($request instanceof Zend_Controller_Request_HttpTestCase);
+        $this->assertTrue($request instanceof Request\HttpTestCase);
     }
 
     public function testGetRequestShouldReturnSameRequestObjectOnRepeatedCalls()
     {
         $request = $this->testCase->getRequest();
-        $this->assertTrue($request instanceof Zend_Controller_Request_HttpTestCase);
+        $this->assertTrue($request instanceof Request\HttpTestCase);
         $test = $this->testCase->getRequest();
         $this->assertSame($request, $test);
     }
@@ -133,13 +126,13 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     public function testGetResponseShouldReturnResponseTestCase()
     {
         $response = $this->testCase->getResponse();
-        $this->assertTrue($response instanceof Zend_Controller_Response_HttpTestCase);
+        $this->assertTrue($response instanceof Response\HttpTestCase);
     }
 
     public function testGetResponseShouldReturnSameResponseObjectOnRepeatedCalls()
     {
         $response = $this->testCase->getResponse();
-        $this->assertTrue($response instanceof Zend_Controller_Response_HttpTestCase);
+        $this->assertTrue($response instanceof Response\HttpTestCase);
         $test = $this->testCase->getResponse();
         $this->assertSame($response, $test);
     }
@@ -147,13 +140,13 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     public function testGetQueryShouldReturnQueryTestCase()
     {
         $query = $this->testCase->getQuery();
-        $this->assertTrue($query instanceof Zend_Dom_Query);
+        $this->assertTrue($query instanceof Dom\Query);
     }
 
     public function testGetQueryShouldReturnSameQueryObjectOnRepeatedCalls()
     {
         $query = $this->testCase->getQuery();
-        $this->assertTrue($query instanceof Zend_Dom_Query);
+        $this->assertTrue($query instanceof Dom\Query);
         $test = $this->testCase->getQuery();
         $this->assertSame($query, $test);
     }
@@ -171,23 +164,23 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     public function testOverloadingShouldPreventSettingRequestResponseAndFrontControllerObjects()
     {
         try {
-            $this->testCase->request = new Zend_Controller_Request_Http();
+            $this->testCase->request = new Request\Http();
             $this->fail('Setting request object as public property should raise exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertContains('not allow', $e->getMessage());
         }
 
         try {
-            $this->testCase->response = new Zend_Controller_Response_Http();
+            $this->testCase->response = new Response\Http();
             $this->fail('Setting response object as public property should raise exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertContains('not allow', $e->getMessage());
         }
 
         try {
-            $this->testCase->frontController = Zend_Controller_Front::getInstance();
+            $this->testCase->frontController = Controller\Front::getInstance();
             $this->fail('Setting front controller as public property should raise exception');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertContains('not allow', $e->getMessage());
         }
     }
@@ -196,22 +189,22 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
     {
         $request    = $this->testCase->getRequest();
         $response   = $this->testCase->getResponse();
-        $router     = new Zend_Controller_Router_Rewrite();
-        $dispatcher = new Zend_Controller_Dispatcher_Standard();
-        $plugin     = new Zend_Controller_Plugin_ErrorHandler();
+        $router     = new Router\Rewrite();
+        $dispatcher = new Dispatcher\Standard();
+        $plugin     = new Plugin\ErrorHandler();
         $controller = $this->testCase->getFrontController();
         $controller->setParam('foo', 'bar')
                    ->registerPlugin($plugin)
                    ->setRouter($router)
                    ->setDispatcher($dispatcher);
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
+        $viewRenderer = HelperBroker::getStaticHelper('ViewRenderer');
         $this->testCase->reset();
         $test = $controller->getRouter();
         $this->assertNotSame($router, $test);
         $test = $controller->getDispatcher();
         $this->assertNotSame($dispatcher, $test);
-        $this->assertFalse($controller->getPlugin('Zend_Controller_Plugin_ErrorHandler'));
-        $test = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
+        $this->assertFalse($controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
+        $test = HelperBroker::getStaticHelper('ViewRenderer');
         $this->assertNotSame($viewRenderer, $test);
         $this->assertNull($controller->getRequest());
         $this->assertNull($controller->getResponse());
@@ -231,13 +224,13 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testBootstrapShouldIncludeBootstrapFileSpecifiedInPublicBootstrapProperty()
     {
-        $this->testCase->bootstrap = dirname(__FILE__) . '/_files/bootstrap.php';
+        $this->testCase->bootstrap = __DIR__ . '/_files/bootstrap.php';
         $this->testCase->bootstrap();
         $controller = $this->testCase->getFrontController();
-        $this->assertSame(Zend_Registry::get('router'), $controller->getRouter());
-        $this->assertSame(Zend_Registry::get('dispatcher'), $controller->getDispatcher());
-        $this->assertSame(Zend_Registry::get('plugin'), $controller->getPlugin('Zend_Controller_Plugin_ErrorHandler'));
-        $this->assertSame(Zend_Registry::get('viewRenderer'), Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer'));
+        $this->assertSame(Registry::get('router'), $controller->getRouter());
+        $this->assertSame(Registry::get('dispatcher'), $controller->getDispatcher());
+        $this->assertSame(Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
+        $this->assertSame(Registry::get('viewRenderer'), HelperBroker::getStaticHelper('ViewRenderer'));
     }
 
     public function testBootstrapShouldInvokeCallbackSpecifiedInPublicBootstrapProperty()
@@ -245,32 +238,32 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
         $this->testCase->bootstrap = array($this, 'bootstrapCallback');
         $this->testCase->bootstrap();
         $controller = $this->testCase->getFrontController();
-        $this->assertSame(Zend_Registry::get('router'), $controller->getRouter());
-        $this->assertSame(Zend_Registry::get('dispatcher'), $controller->getDispatcher());
-        $this->assertSame(Zend_Registry::get('plugin'), $controller->getPlugin('Zend_Controller_Plugin_ErrorHandler'));
-        $this->assertSame(Zend_Registry::get('viewRenderer'), Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer'));
+        $this->assertSame(Registry::get('router'), $controller->getRouter());
+        $this->assertSame(Registry::get('dispatcher'), $controller->getDispatcher());
+        $this->assertSame(Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
+        $this->assertSame(Registry::get('viewRenderer'), HelperBroker::getStaticHelper('ViewRenderer'));
     }
 
     public function bootstrapCallback()
     {
-        $router     = new Zend_Controller_Router_Rewrite();
-        $dispatcher = new Zend_Controller_Dispatcher_Standard();
-        $plugin     = new Zend_Controller_Plugin_ErrorHandler();
-        $controller = Zend_Controller_Front::getInstance();
+        $router     = new Router\Rewrite();
+        $dispatcher = new Dispatcher\Standard();
+        $plugin     = new Plugin\ErrorHandler();
+        $controller = Controller\Front::getInstance();
         $controller->setParam('foo', 'bar')
                    ->registerPlugin($plugin)
                    ->setRouter($router)
                    ->setDispatcher($dispatcher);
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
-        Zend_Registry::set('router', $router);
-        Zend_Registry::set('dispatcher', $dispatcher);
-        Zend_Registry::set('plugin', $plugin);
-        Zend_Registry::set('viewRenderer', $viewRenderer);
+        $viewRenderer = HelperBroker::getStaticHelper('ViewRenderer');
+        Registry::set('router', $router);
+        Registry::set('dispatcher', $dispatcher);
+        Registry::set('plugin', $plugin);
+        Registry::set('viewRenderer', $viewRenderer);
     }
 
     public function testDispatchShouldDispatchSpecifiedUrl()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/bar');
         $request  = $this->testCase->getRequest();
         $response = $this->testCase->getResponse();
@@ -282,7 +275,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testAssertQueryShouldDoNothingForValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(realpath(dirname(__FILE__)) . '/_files/application/controllers', 'default');
+        $this->testCase->getFrontController()->setControllerDirectory(realpath(__DIR__) . '/_files/application/controllers', 'default');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $body = $this->testCase->getResponse()->getBody();
         $this->testCase->assertQuery('div#foo legend.bar', $body);
@@ -290,6 +283,8 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
         $this->testCase->assertQuery('div#foo legend.bat', $body);
         $this->testCase->assertNotQuery('div#foo legend.bogus', $body);
         $this->testCase->assertQueryContentContains('legend.bat', 'La di da', $body);
+        $this->testCase->assertQueryContentContains('legend.numeric', 42, $body);
+        $this->testCase->assertNotQueryContentContains('legend.numeric', 31, $body);
         $this->testCase->assertNotQueryContentContains('legend.bat', 'La do da', $body);
         $this->testCase->assertQueryContentRegex('legend.bat', '/d[a|i]/i', $body);
         $this->testCase->assertNotQueryContentRegex('legend.bat', '/d[o|e]/i', $body);
@@ -311,131 +306,131 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testAssertQueryShouldThrowExceptionsForInValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         try {
             $this->testCase->assertNotQuery('div#foo legend.bar');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertQuery('div#foo legend.bogus');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertNotQueryContentContains('legend.bat', 'La di da');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertQueryContentContains('legend.bat', 'La do da');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertNotQueryContentRegex('legend.bat', '/d[a|i]/i');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertQueryContentRegex('legend.bat', '/d[o|e]/i');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertQueryCountMin('div#foo legend.bar', 3);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertQueryCount('div#foo legend.bar', 1);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertQueryCountMin('div#foo legend.bar', 3);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
         try {
             $this->testCase->assertQueryCountMax('div#foo legend.bar', 1);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
         }
     }
 
     public function testAssertXpathShouldDoNothingForValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
-        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' bar ')]");
-        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' baz ')]");
-        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' bat ')]");
-        $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, ' bogus ')]");
-        $this->testCase->assertXpathContentContains("//legend[contains(@class, ' bat ')]", "La di da");
-        $this->testCase->assertNotXpathContentContains("//legend[contains(@class, ' bat ')]", "La do da");
-        $this->testCase->assertXpathContentRegex("//legend[contains(@class, ' bat ')]", "/d[a'i]/i");
-        $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, ' bat ')]", "/d[o'e]/i");
-        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
-        $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
-        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
-        $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, ' bar ')]", 2);
+        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'bar')]");
+        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'baz')]");
+        $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'bat')]");
+        $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, 'bogus')]");
+        $this->testCase->assertXpathContentContains("//legend[contains(@class, 'bat')]", "La di da");
+        $this->testCase->assertNotXpathContentContains("//legend[contains(@class, 'bat')]", "La do da");
+        $this->testCase->assertXpathContentRegex("//legend[contains(@class, 'bat')]", "/d[a'i]/i");
+        $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, 'bat')]", "/d[o'e]/i");
+        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
+        $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
+        $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
+        $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, 'bar')]", 2);
     }
 
     public function testAssertXpathShouldThrowExceptionsForInValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         try {
-            $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, ' bar ')]");
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, 'bar')]");
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, ' bogus ')]");
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bogus ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'bogus')]");
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bogus')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertNotXpathContentContains("//legend[contains(@class, ' bat ')]", "La di da");
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertNotXpathContentContains("//legend[contains(@class, 'bat')]", "La di da");
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathContentContains("//legend[contains(@class, ' bat ')]", 'La do da');
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertXpathContentContains("//legend[contains(@class, 'bat')]", 'La do da');
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, ' bat ')]", '/d[a|i]/i');
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, 'bat')]", '/d[a|i]/i');
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathContentRegex("//legend[contains(@class, ' bat ')]", '/d[o|e]/i');
-            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, ' bat ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertXpathContentRegex("//legend[contains(@class, 'bat')]", '/d[o|e]/i');
+            $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 3);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 3);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, ' bar ')]", 1);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, 'bar')]", 1);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, ' bar ')]", 3);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 3);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
+        } catch (Constraint\Exception $e) {
         }
         try {
-            $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, ' bar ')]", 1);
-            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, ' bar ')] failed");
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+            $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, 'bar')]", 1);
+            $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
+        } catch (Constraint\Exception $e) {
         }
     }
 
@@ -474,56 +469,56 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
         try {
             $this->testCase->assertResponseCode(500);
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotResponseCode(200);
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeader('Content-Type');
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeader('X-Bogus');
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeaderContains('Content-Type', 'my-foo');
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeaderContains('Content-Type', 'my-bar');
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeaderRegex('Content-Type', '#^[a-z-]+/[a-z-]+$#i');
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeaderRegex('Content-Type', '#^\d+#i');
             $this->fail();
-        } catch (Zend_Test_PHPUnit_Constraint_Exception $e) {
+        } catch (Constraint\Exception $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
     }
 
     public function testModuleAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertModule('default');
         $this->testCase->assertNotModule('zend-test-php-unit-foo');
@@ -531,7 +526,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testModuleAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertModule('zend-test-php-unit-foo');
@@ -540,7 +535,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testControllerAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertController('zend-test-php-unit-foo');
         $this->testCase->assertNotController('baz');
@@ -548,7 +543,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testControllerAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertController('baz');
@@ -557,7 +552,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testActionAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertAction('baz');
         $this->testCase->assertNotAction('zend-test-php-unit-foo');
@@ -565,7 +560,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testActionAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertAction('foo');
@@ -574,7 +569,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testRouteAssertionShouldDoNothingForValidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $this->testCase->assertRoute('default');
         $this->testCase->assertNotRoute('zend-test-php-unit-foo');
@@ -582,7 +577,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testRouteAssertionShouldThrowExceptionForInvalidComparison()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/foo/baz');
         $this->setExpectedException('PHPUnit_Framework_AssertionFailedError');
         $this->testCase->assertRoute('foo');
@@ -600,13 +595,14 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testResetShouldUnitTestEnableZendSession()
     {
+        $this->markTestSkipped('Must wait until Zend\Session is fully understood for unit testing.');
         $this->testCase->reset();
-        $this->assertTrue(Zend_Session::$_unitTestEnabled);
+        $this->assertTrue(Session\Manager::$_unitTestEnabled);
     }
 
     public function testResetResponseShouldClearResponseObject()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $response = $this->testCase->getResponse();
         $this->testCase->resetResponse();
@@ -619,7 +615,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function testResetRequestShouldClearRequestObject()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $request = $this->testCase->getRequest();
         $this->testCase->resetRequest();
@@ -629,11 +625,11 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 
     public function testResetResponseShouldClearAllViewPlaceholders()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
-        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
+        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->initView();
         $view = $viewRenderer->view;
-        $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
+        $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');
         $view->dojo()->setCdnVersion('1.1.0')
                      ->requireModule('dojo.parser')
                      ->enable();
@@ -642,8 +638,8 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
         $response = $this->testCase->getResponse();
         $this->testCase->resetResponse();
 
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
+        $view = new \Zend\View\View();
+        $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');
         $this->assertFalse($view->dojo()->isEnabled(), 'Dojo is enabled? ', $view->dojo());
         $this->assertNotContains('Foo', $view->headTitle()->__toString(), 'Head title persisted?');
     }
@@ -653,7 +649,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function testQueryParametersShouldPersistFollowingDispatch()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $request = $this->testCase->request;
         $request->setQuery('mr', 'proper')
                 ->setQuery('james', 'bond');
@@ -672,7 +668,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function testQueryStringShouldNotOverwritePreviouslySetQueryParameters()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $request = $this->testCase->request;
         $request->setQuery('mr', 'proper')
                 ->setQuery('james', 'bond');
@@ -692,7 +688,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function testSuperGlobalArraysShouldBeClearedDuringSetUp()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $request = $this->testCase->request;
         $request->setQuery('mr', 'proper')
                 ->setPost('foo', 'bar')
@@ -709,7 +705,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function testResetRequestShouldClearPostAndQueryParameters()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(dirname(__FILE__) . '/_files/application/controllers');
+        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->getRequest()->setPost(array(
             'foo' => 'bar',
         ));
@@ -727,10 +723,10 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function testTestCaseShouldAllowUsingApplicationObjectAsBootstrap()
     {
-        $application = new Zend_Application('testing', array(
+        $application = new Application\Application('testing', array(
             'resources' => array(
                 'frontcontroller' => array(
-                    'controllerDirectory' => dirname(__FILE__) . '/_files/application/controllers',
+                    'controllerDirectory' => __DIR__ . '/_files/application/controllers',
                 ),
             ),
         ));
@@ -747,10 +743,10 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
      */
     public function testWhenApplicationObjectUsedAsBootstrapTestCaseShouldExecuteBootstrapRunMethod()
     {
-        $application = new Zend_Application('testing', array(
+        $application = new Application\Application('testing', array(
             'resources' => array(
                 'frontcontroller' => array(
-                    'controllerDirectory' => dirname(__FILE__) . '/_files/application/controllers',
+                    'controllerDirectory' => __DIR__ . '/_files/application/controllers',
                 ),
             ),
         ));
@@ -767,11 +763,7 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
 }
 
 // Concrete test case class for testing purposes
-class Zend_Test_PHPUnit_ControllerTestCaseTest_Concrete extends Zend_Test_PHPUnit_ControllerTestCase
+class Concrete extends \Zend\Test\PHPUnit\ControllerTestCase
 {
 }
 
-// Call Zend_Test_PHPUnit_ControllerTestCaseTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Test_PHPUnit_ControllerTestCaseTest::main") {
-    Zend_Test_PHPUnit_ControllerTestCaseTest::main();
-}

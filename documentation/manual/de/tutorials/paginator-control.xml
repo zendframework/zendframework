@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.paginator.control">
     <title>Seitenkontrolle und ScrollingStyles</title>
@@ -17,10 +17,11 @@
         Der View Partial ist ein kleines View Skript welches die Seitenkontrollen darstellt, wie
         Buttons um zur nächsten oder vorigen Seite zu gehen. Welche Seitenkontrollen dargestellt
         werden hängt vom Inhalt des View Partials ab. Die Arbeit mit View Partials benötigt deren
-        Einrichtung in Zend_View. Um mit den Seitenkontrollen anzufangen muss irgendwo in eigenen
-        View Skript Pfad ein neues View Skript erstellt werden. Man kann es benennen wie man will,
-        aber wir nennen es in diesem Text "controls.phtml". Das Referenz Handbuch enthält
-        verschiedene Beispiele darüber was im View Skript möglich ist. Hier ist ein Beispiel:
+        Einrichtung in <classname>Zend_View</classname>. Um mit den Seitenkontrollen anzufangen muss
+        irgendwo in eigenen View Skript Pfad ein neues View Skript erstellt werden. Man kann es
+        benennen wie man will, aber wir nennen es in diesem Text "controls.phtml". Das Referenz
+        Handbuch enthält verschiedene Beispiele darüber was im View Skript möglich ist. Hier ist ein
+        Beispiel:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -66,9 +67,9 @@
 ]]></programlisting>
 
     <para>
-        Der nächste Schritt ist es Zend_Paginator zu sagen welche View Partials verwendet werden
-        können um die Navigationskontrollen darzustellen. Die folgende Zeile ist in die Bootstrap
-        Datei der Anwendung zu geben.
+        Der nächste Schritt ist es <classname>Zend_Paginator</classname> zu sagen welche View
+        Partials verwendet werden können um die Navigationskontrollen darzustellen. Die folgende
+        Zeile ist in die Bootstrap Datei der Anwendung zu geben.
     </para>
 
     <programlisting language="php"><![CDATA[

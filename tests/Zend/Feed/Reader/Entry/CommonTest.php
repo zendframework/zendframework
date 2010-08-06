@@ -24,6 +24,7 @@
 * @namespace
 */
 namespace ZendTest\Feed\Reader\Entry;
+use Zend\Feed\Reader\Extension;
 use Zend\Feed\Reader;
 
 /**
@@ -104,7 +105,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertTrue($entry->getExtension('Atom') instanceof Reader\Reader_Extension_Atom_Entry);
+        $this->assertTrue($entry->getExtension('Atom') instanceof Extension\Atom\Entry);
     }
 
     public function testReturnsNullIfExtensionDoesNotExist()

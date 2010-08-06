@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 21825 -->
 <sect1 id="zend.infocard.basics">
     <title>導入</title>
 
@@ -30,7 +30,7 @@
             <classname>Zend_InfoCard</classname> 認証アダプタを使用するか、
             あるいは単体のコンポーネントとして使用するかのいずれかです。
             どちらの場合についても、ユーザから情報カードを受け取るには
-            HTML のログインフォームの中で次のような HTML ブロックを使用します。
+            <acronym>HTML</acronym> のログインフォームの中で次のような <acronym>HTML</acronym> ブロックを使用します。
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -58,7 +58,7 @@
         </para>
 
         <para>
-            上の HTML をユーザが実行する (クリックする) と、
+            上の <acronym>HTML</acronym> をユーザが実行する (クリックする) と、
             ブラウザはカード選択プログラムを実行します。
             これは、そのサイトの要求を満たす情報カードを表示させるだけでなく、
             条件を満たす情報カードが複数存在する場合に好きなものを選択させることができます。
@@ -253,7 +253,7 @@ if (isset($_POST['xmlToken'])) {
             一般論として、<classname>Zend_InfoCard</classname>
             コンポーネントがデフォルトで設定する claim 用 <acronym>URI</acronym>
             は情報カードの中で最もよく用いられるものです。
-            この場合は単純にプロパティを使用してアクセスすることができます。
+            この場合は単純にプロパティを使用してアクセスできます。
         </para>
 
         <para>

@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\GApps;
 
+use Zend\GData\GApps;
+
 /**
  * Assists in constructing queries for Google Apps user entries.
  * Instances of this class can be provided in many places where a URL is
@@ -33,7 +35,7 @@ namespace Zend\GData\GApps;
  * For information on submitting queries to a server, see the Google Apps
  * service class, Zend_Gdata_GApps.
  *
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\GApps
  * @uses       \Zend\GData\GApps\Query
  * @category   Zend
  * @package    Zend_Gdata

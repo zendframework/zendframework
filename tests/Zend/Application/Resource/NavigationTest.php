@@ -133,7 +133,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     public function testViewMethodIsUsedWhenAvailableInsteadOfResourcePlugin()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrapCustomView($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrapCustomView($this->application);
         $bootstrap->registerPluginResource('view');
         $view = $bootstrap->bootstrap('view')->view;
 

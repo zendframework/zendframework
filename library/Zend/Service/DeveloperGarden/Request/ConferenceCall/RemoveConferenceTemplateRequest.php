@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Request_RequestAbstract
+ * @uses       Zend_Service_DeveloperGarden_Request_AbstractRequest
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+    extends Zend_Service_DeveloperGarden_Request_AbstractRequest
 {
     /**
      * the template id

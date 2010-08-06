@@ -246,7 +246,7 @@ class Redirector extends AbstractHelper
     {
         if ($this->getPrependBase()) {
             $request = $this->getRequest();
-            if ($request instanceof \Zend\Controller\Request\HTTP) {
+            if ($request instanceof \Zend\Controller\Request\Http) {
                 $base = rtrim($request->getBaseUrl(), '/');
                 if (!empty($base) && ('/' != $base)) {
                     $url = $base . '/' . ltrim($url, '/');
@@ -299,7 +299,7 @@ class Redirector extends AbstractHelper
         $params['action']     = $action;
 
         $router = $this->getFrontController()->getRouter();
-        $url    = $router->assemble($params, 'default', true);
+        $url    = $router->assemble($params, 'application', true);
 
         $this->_redirect($url);
     }
@@ -477,15 +477,6 @@ class Redirector extends AbstractHelper
      */
     public function redirectAndExit()
     {
-        if ($this->getCloseSessionOnExit()) {
-            // Close session, if started
-            if (class_exists('Zend_Session', false) && Session\Manager::isStarted()) {
-                Session\Manager::writeClose();
-            } elseif (isset($_SESSION)) {
-                session_write_close();
-            }
-        }
-
         $this->getResponse()->sendHeaders();
         exit();
     }

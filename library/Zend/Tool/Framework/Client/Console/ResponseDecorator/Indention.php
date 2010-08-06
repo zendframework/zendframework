@@ -25,14 +25,14 @@
 namespace Zend\Tool\Framework\Client\Console\ResponseDecorator;
 
 /**
- * @uses       \Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface
+ * @uses       \Zend\Tool\Framework\Client\Response\ContentDecorator
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Indention
-    implements \Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface
+    implements \Zend\Tool\Framework\Client\Response\ContentDecorator
 {
     public function getName()
     {

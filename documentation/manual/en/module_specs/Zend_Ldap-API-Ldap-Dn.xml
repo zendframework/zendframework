@@ -133,8 +133,9 @@
 
                     <entry>
                         Returns a slice of the current DN determined by
-                        <varname>$index</varname> and <varname>$length</varname>. <varname>$index</varname>
-                        starts with <code>0</code> on the DN part from the left.
+                        <varname>$index</varname> and <varname>$length</varname>.
+                        <varname>$index</varname> starts with <code>0</code> on the DN part from the
+                        left.
                     </entry>
                 </row>
 
@@ -259,10 +260,12 @@
                     </entry>
 
                     <entry>
-                        Explodes the DN <varname>$dn</varname> into an array containing
-                        all parts of the given DN. <varname>$keys</varname> optinally receive DN
-                        keys (e.g. CN, OU, DC, ...). <varname>$vals</varname> optionally receive
-                        DN values. The resulting array will be of type
+                        <para>
+                            Explodes the DN <varname>$dn</varname> into an array containing
+                            all parts of the given DN. <varname>$keys</varname> optinally receive DN
+                            keys (e.g. CN, OU, DC, ...). <varname>$vals</varname> optionally receive
+                            DN values. The resulting array will be of type
+                        </para>
 
                         <programlisting language="php"><![CDATA[
 array(
@@ -271,7 +274,11 @@ array("cn" => "name2"),
 array("dc" => "example"),
 array("dc" => "org")
 )
-]]></programlisting>for a DN of <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
+]]></programlisting>
+
+                        <para>
+                            for a DN of <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
+                        </para>
                     </entry>
                 </row>
 
@@ -310,11 +317,13 @@ array("dc" => "org")
                     </entry>
 
                     <entry>
-                        Implodes an array in the form delivered by
-                        <methodname>Zend_Ldap_Dn::explodeDn()</methodname> to a DN string.
-                        <varname>$separator</varname> defaults to <code>','</code> but some LDAP
-                        servers also understand <code>';'</code>. <varname>$dnArray</varname>
-                        must of type
+                        <para>
+                            Implodes an array in the form delivered by
+                            <methodname>Zend_Ldap_Dn::explodeDn()</methodname> to a DN string.
+                            <varname>$separator</varname> defaults to <code>','</code> but some LDAP
+                            servers also understand <code>';'</code>. <varname>$dnArray</varname>
+                            must of type
+                        </para>
 
                         <programlisting language="php"><![CDATA[
 array(

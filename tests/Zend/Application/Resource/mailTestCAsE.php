@@ -2,7 +2,7 @@
 
 namespace ZendTest\Application\Resource;
 
-use Zend\Mail\Transport\AbstractTransport;
+use Zend\Mail\AbstractTransport;
 
 /**
  * @group ZF-9136

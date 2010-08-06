@@ -113,7 +113,7 @@ $this->dojo()->enable()
 
     <note>
         <title>UTF-8 encoding used by default</title>
-        
+
         <para>
             By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding, and,
             specific to this case, <classname>Zend_View</classname> does as well. Character encoding
@@ -125,14 +125,14 @@ $this->dojo()->enable()
             <methodname>getEncoding()</methodname> method, which is what the view helper uses
             internally for determining the character set in which to encode.
         </para>
-        
+
         <para>
             If you do not want to utilize <acronym>UTF-8</acronym> in such a situation, you will
             need to implement a <methodname>getEncoding()</methodname> method in your custom view
             implementation.
         </para>
     </note>
-    
+
     <sect3 id="zend.dojo.view.dojo.declarative">
         <title>Uso Programático y Declarativo de Dojo</title>
 

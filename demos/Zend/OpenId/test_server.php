@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-$dir = realpath(dirname(__FILE__)."/../../..");
+$dir = realpath(__DIR__."/../../..");
 set_include_path("$dir/library" . PATH_SEPARATOR . get_include_path());
 
 /**
@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         require_once 'Zend/View.php';
 
         $view = new Zend_View();
-        $view->setScriptPath(dirname(__FILE__) . '/templates');
+        $view->setScriptPath(__DIR__ . '/templates');
         $view->strictVars(true);
 
         if (isset($session->id)) {

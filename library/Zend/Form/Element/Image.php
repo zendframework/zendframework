@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Image form element
  *
- * @uses       Zend_Form_Element_Xhtml
+ * @uses       \Zend\Form\Element\Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_Image extends Zend_Form_Element_Xhtml
+class Image extends Xhtml
 {
     /**
      * What view helper to use when using view helper decorator
@@ -58,7 +63,7 @@ class Zend_Form_Element_Image extends Zend_Form_Element_Xhtml
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -69,13 +74,14 @@ class Zend_Form_Element_Image extends Zend_Form_Element_Xhtml
                  ->addDecorator('HtmlTag', array('tag' => 'dd'))
                  ->addDecorator('Label', array('tag' => 'dt'));
         }
+        return $this;
     }
 
     /**
      * Set image path
      *
      * @param  string $path
-     * @return Zend_Form_Element_Image
+     * @return \Zend\Form\Element\Image
      */
     public function setImage($path)
     {
@@ -97,7 +103,7 @@ class Zend_Form_Element_Image extends Zend_Form_Element_Xhtml
      * Set image value to use when submitted
      *
      * @param  mixed $value
-     * @return Zend_Form_Element_Image
+     * @return \Zend\Form\Element\Image
      */
     public function setImageValue($value)
     {

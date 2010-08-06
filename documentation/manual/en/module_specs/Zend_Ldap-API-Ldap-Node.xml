@@ -166,8 +166,9 @@
                     <entry><code>Zend_Ldap_Dn getCurrentDn()</code></entry>
 
                     <entry>
-                        Gets the current DN of the current node as a Zend_Ldap_Dn.
-                        This does not reflect possible rename-operations.
+                        Gets the current DN of the current node as a
+                        <classname>Zend_Ldap_Dn</classname>. This does not reflect possible
+                        rename-operations.
                     </entry>
                 </row>
 
@@ -175,8 +176,9 @@
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
 
                     <entry>
-                        Gets the original DN of the current node as a Zend_Ldap_Dn.
-                        This reflects possible rename-operations.
+                        Gets the original DN of the current node as a
+                        <classname>Zend_Ldap_Dn</classname>. This reflects possible
+                        rename-operations.
                     </entry>
                 </row>
 

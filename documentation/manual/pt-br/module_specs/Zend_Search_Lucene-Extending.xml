@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Extensibilidade</title>
@@ -9,7 +9,7 @@
 
         <para>
             A classe <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> é usada pelo
-            indexador para "tokenizar" campos de documentos de texto.
+            indexador para separar em tokens os campos de texto do documento.
         </para>
 
         <para>
@@ -19,13 +19,13 @@
         </para>
 
         <para>
-            Você pode estipular o seu próprio analisador de textos ou selecioná-lo dentre uma lista
+            Você pode atribuir o seu próprio analisador de textos ou selecioná-lo dentre uma lista
             de analisadores pré-definidos:
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</classname> e
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
-            (padrão). Ambos interpretam os "tokens" como sequencias de letras.
+            (padrão). Ambos interpretam os tokens como sequências de letras.
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
-            converte todos os "tokens" para caixa baixa.
+            converte todos os tokens para minúsculas.
         </para>
 
         <para>
@@ -44,14 +44,14 @@ $index->addDocument($doc);
             projetada para ser um antepassado de todos os analisadores definidos pelo usuário. O
             usuário só precisa definir os métodos <methodname>reset()</methodname> e
             <methodname>nextToken()</methodname>, que receberá a string do membro $_input e
-            retornará os "tokens" um por um (um valor <constant>NULL</constant> indica o fim do
+            retornará os tokens um por um (um valor <constant>NULL</constant> indica o fim do
             fluxo).
         </para>
 
         <para>
             O método <methodname>nextToken()</methodname> deve chamar o método
-            <methodname>normalize()</methodname> em cada "token". Isso te permite usar filtros de
-            "token" junto com o seu analisador.
+            <methodname>normalize()</methodname> em cada token. Isso te permite usar filtros de
+            token junto com o seu analisador.
         </para>
 
         <para>
@@ -63,8 +63,8 @@ $index->addDocument($doc);
 
                 <programlisting language="php"><![CDATA[
 /**
- * Here is a custom text analyser, which treats words with digits as
- * one term
+ * Aqui está um analisador de texto personalizado, que trata as palavras com
+ * dígitos como um termo
  */
 
 class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
@@ -72,7 +72,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
     private $_position;
 
     /**
-     * Reset token stream
+     * Reinicia o fluxo do token
      */
     public function reset()
     {
@@ -80,9 +80,9 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
     }
 
     /**
-     * Tokenization stream API
-     * Get next token
-     * Returns null at the end of stream
+     * API do fluxo de separação de tokens
+     * Obtém o próximo token
+     * Retorna null no final do fluxo
      *
      * @return Zend_Search_Lucene_Analysis_Token|null
      */
@@ -93,7 +93,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
         }
 
         while ($this->_position < strlen($this->_input)) {
-            // skip white space
+            // ignora os espaços em branco
             while ($this->_position < strlen($this->_input) &&
                    !ctype_alnum( $this->_input[$this->_position] )) {
                 $this->_position++;
@@ -101,13 +101,13 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
 
             $termStartPosition = $this->_position;
 
-            // read token
+            // lê o token
             while ($this->_position < strlen($this->_input) &&
                    ctype_alnum( $this->_input[$this->_position] )) {
                 $this->_position++;
             }
 
-            // Empty token, end of stream.
+            // Token vazio, fim do fluxo.
             if ($this->_position == $termStartPosition) {
                 return null;
             }
@@ -123,7 +123,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
             if ($token !== null) {
                 return $token;
             }
-            // Continue if token is skipped
+            // Continua se o token for ignorado
         }
 
         return null;
@@ -138,26 +138,27 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     </sect2>
 
     <sect2 id="zend.search.lucene.extending.filters">
-        <title>Tokens Filtering</title>
+        <title>Filtragem de Tokens</title>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> analyzer also
-            offers a token filtering mechanism.
+            O analisador <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> também
+            oferece um mecanismo de filtragem de token.
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> class provides an
-            abstract interface for such filters. Your own filters should extend this class either
-            directly or indirectly.
+            A classe <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> fornece uma
+            interface abstrata para estes filtros. Seus próprios filtros devem estender esta classe,
+            diretamente ou indiretamente.
         </para>
 
         <para>
-            Any custom filter must implement the <methodname>normalize()</methodname> method which
-            may transform input token or signal that the current token should be skipped.
+            Qualquer filtro personalizado deve implementar o método
+            <methodname>normalize()</methodname> que pode transformar o token de entrada ou
+            sinalizar que o token corrente deve ser ignorado.
         </para>
 
         <para>
-            There are three filters already defined in the analysis subpackage:
+            Aí estão três filtros já definidos no subpacote de análise:
 
             <itemizedlist>
                 <listitem>
@@ -181,16 +182,17 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
 
         <para>
-            The <code>LowerCase</code> filter is already used for
+            O filtro <code>LowerCase</code> já é utilizado pelo analisador
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
-            analyzer by default.
+            por padrão.
         </para>
 
         <para>
-            The <code>ShortWords</code> and <code>StopWords</code> filters may be used with
-            pre-defined or custom analyzers like this:
+            Os filtros <code>ShortWords</code> e <code>StopWords</code> podem ser utilizados com
+            analisadores pré-definidos ou personalizados desta forma:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
     new Zend_Search_Lucene_Analysis_TokenFilter_StopWords($stopWords);
@@ -201,7 +203,8 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-            <programlisting language="php"><![CDATA[
+
+        <programlisting language="php"><![CDATA[
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
 $analyzer =
@@ -210,13 +213,14 @@ $analyzer->addFilter($shortWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-        </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> constructor
-            takes an array of stop-words as an input. But stop-words may be also loaded from a file:
+            O construtor <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname>
+            recebe uma matriz de stop-words como uma entrada. Mas as stop-words podem também ser
+            carregadas a partir de um arquivo:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
 
@@ -227,14 +231,15 @@ $analyzer->addFilter($stopWordsFilter);
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
 
-            This file should be a common text file with one word in each line. The '#' character
-            marks a line as a comment.
+        <para>
+            Este arquivo deve ser um arquivo de texto comum com uma palavra em cada linha. O
+            caractere '#' marca uma linha como um comentário.
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname>
-            constructor has one optional argument. This is the word length limit, set by default to
-            2.
+            O construtor <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname> é
+            um argumento opcional. Este é o limite do comprimento de palavra, definido por padrão
+            para 2.
         </para>
     </sect2>
 

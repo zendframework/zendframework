@@ -24,10 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Queue\Adapter;
-use Zend\Queue;
-use Zend\Config;
-use Zend\Queue\Adapter;
-use Zend\Queue\Message;
+use Zend\Queue,
+    Zend\Config,
+    Zend\Queue\Adapter,
+    Zend\Queue\Message;
 
 /*
  * The adapter test class provides a universal test class for all of the
@@ -221,7 +221,7 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
             return;
         }
         $obj = new $class($queue->getOptions(), $queue);
-        $this->assertTrue($obj instanceof Adapter\AdapterInterface);
+        $this->assertTrue($obj instanceof Adapter);
     }
 
     // this tests the configuration option $config['messageClass']
@@ -248,7 +248,7 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
         $body = 'this is a test message';
         $message = $queue->send($body);
 
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         $list = $queue->receive();
         $this->assertTrue($list instanceof Message\MessageIterator);
@@ -266,7 +266,7 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
         if (!$queue = $this->createQueue(__FUNCTION__)) {
             return;
         }
-        $this->assertTrue($queue->getAdapter() instanceof Adapter\AdapterInterface);
+        $this->assertTrue($queue->getAdapter() instanceof Adapter);
     }
 
     public function testCreate()
@@ -369,7 +369,7 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
 
         $body = 'this is a test message';
         $message = $adapter->send($body);
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         // receive the record we created.
         if (! $adapter->isSupported('receive')) {
@@ -401,7 +401,7 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
         // send the message
         $body = 'this is a test message 2';
         $message = $adapter->send($body);
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         // get it back
         $list = $adapter->receive(1);
@@ -414,7 +414,7 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
             $adapter->deleteMessage($list->current());
         }
 
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
         $this->assertEquals($message->body, $body);
 
         // delete the queue we created
@@ -443,14 +443,14 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
 
         $body = 'this is a test message';
         $message = $adapter->send($body);
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         $list = $adapter->receive();
         $this->assertTrue($list instanceof Message\MessageIterator);
         $this->assertTrue($list->valid());
 
         $message = $list->current();
-        $this->assertTrue($message instanceof Message\Message);
+        $this->assertTrue($message instanceof Message);
 
         $this->assertTrue($adapter->deleteMessage($message));
 
@@ -819,7 +819,7 @@ abstract class AdapterTest extends \PHPUnit_Framework_TestCase
 
         if (! $functions['deleteMessage']) {
             try {
-                $message = new Message\Message();
+                $message = new Message();
                 $adapter->deleteMessage($message);
                 $this->fail('unsupported deleteMessage() failed to throw an exception');
             } catch (\Exception $e) {

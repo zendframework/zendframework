@@ -157,6 +157,7 @@ class Upload extends \Zend\Validator\AbstractValidator
      */
     public function isValid($value, $file = null)
     {
+        $this->_messages = null;
         if (array_key_exists($value, $this->_files)) {
             $files[$value] = $this->_files[$value];
         } else {

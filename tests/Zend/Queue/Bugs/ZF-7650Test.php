@@ -85,12 +85,12 @@ class Zf7650Test extends \PHPUnit_Framework_TestCase
         }
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_DB')) {
-            $driverOptions = \Zend\JSON\JSON::decode(TESTS_ZEND_QUEUE_DB);
+            $driverOptions = \Zend\Json\Json::decode(TESTS_ZEND_QUEUE_DB);
         }
 
         $options = array(
             'name'          => '/temp-queue/ZF7650',
-            'options'       => array(\Zend\DB\Select\Select::FOR_UPDATE => true),
+            'options'       => array(\Zend\DB\Select::FOR_UPDATE => true),
             'driverOptions' => $driverOptions,
         );
 

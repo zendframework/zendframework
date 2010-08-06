@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Submit form element
  *
- * @uses       Zend_Form_Element_Xhtml
+ * @uses       \Zend\Form\Element\Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
+class Submit extends Xhtml
 {
     /**
      * Default view helper to use
@@ -41,8 +46,8 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
     /**
      * Constructor
      *
-     * @param  string|array|Zend_Config $spec Element name or configuration
-     * @param  string|array|Zend_Config $options Element value or configuration
+     * @param  string|array|\Zend\Config\Config $spec Element name or configuration
+     * @param  string|array|\Zend\Config\Config $options Element value or configuration
      * @return void
      */
     public function __construct($spec, $options = null)
@@ -111,7 +116,7 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
     public function loadDefaultDecorators()
     {
         if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
+            return $this;
         }
 
         $decorators = $this->getDecorators();
@@ -120,5 +125,6 @@ class Zend_Form_Element_Submit extends Zend_Form_Element_Xhtml
                  ->addDecorator('ViewHelper')
                  ->addDecorator('DtDdWrapper');
         }
+        return $this;
     }
 }

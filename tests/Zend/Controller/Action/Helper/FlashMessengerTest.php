@@ -81,9 +81,9 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
 
         $this->front      = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
-        $this->front->setControllerDirectory(dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . '_files');
+        $this->front->setControllerDirectory(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . '_files');
         $this->front->returnResponse(true);
-        $this->request    = new \Zend\Controller\Request\HTTP();
+        $this->request    = new \Zend\Controller\Request\Http();
         $this->request->setControllerName('helper-flash-messenger');
         $this->response   = new \Zend\Controller\Response\Cli();
         $this->controller = new \HelperFlashMessengerController($this->request, $this->response, array());

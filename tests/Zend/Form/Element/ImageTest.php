@@ -20,12 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Element_ImageTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_ImageTest::main");
-}
+namespace ZendTest\Form\Element;
 
-
+use Zend\Form\Element\Image as ImageElement,
+    Zend\Form\Element\Xhtml as XhtmlElement,
+    Zend\Form\Element,
+    Zend\Form\Decorator,
+    Zend\Translator\Adapter\ArrayAdapter as ArrayTranslator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Element_Image
@@ -37,19 +39,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
+class ImageTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_ImageTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -58,35 +49,23 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->element = new Zend_Form_Element_Image('foo');
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->element = new ImageElement('foo');
     }
 
     public function testImageElementSubclassesXhtmlElement()
     {
-        $this->assertTrue($this->element instanceof Zend_Form_Element_Xhtml);
+        $this->assertTrue($this->element instanceof XhtmlElement);
     }
 
     public function testImageElementInstanceOfBaseElement()
     {
-        $this->assertTrue($this->element instanceof Zend_Form_Element);
+        $this->assertTrue($this->element instanceof Element);
     }
 
     public function testImageElementUsesImageDecoratorByDefault()
     {
-        $this->_checkZf2794();
-
         $decorator = $this->element->getDecorator('Image');
-        $this->assertTrue($decorator instanceof Zend_Form_Decorator_Image);
+        $this->assertTrue($decorator instanceof Decorator\Image);
     }
 
     /**
@@ -113,21 +92,21 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     public function testImageSourceUsedWhenRenderingImage()
     {
         $this->testCanSetImageSourceViaAccessors();
-        $html = $this->element->render(new Zend_View());
+        $html = $this->element->render(new View());
         $this->assertContains('src="foo.gif"', $html);
     }
 
     public function testHelperAttributeNotRenderedWhenRenderingImage()
     {
         $this->testCanSetImageSourceViaAccessors();
-        $html = $this->element->render(new Zend_View());
+        $html = $this->element->render(new View());
         $this->assertNotContains('helper="', $html);
     }
 
     public function testValueEmptyWhenRenderingImageByDefault()
     {
         $this->testCanSetImageSourceViaAccessors();
-        $html = $this->element->render(new Zend_View());
+        $html = $this->element->render(new View());
         if (!strstr($html, 'value="')) {
             return;
         }
@@ -137,7 +116,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     public function testLabelUsedAsAltAttribute()
     {
         $this->element->setLabel('Foo Bar');
-        $html = $this->element->render(new Zend_View());
+        $html = $this->element->render(new View());
         $this->assertRegexp('#<input[^>]*alt="Foo Bar"#', $html);
     }
 
@@ -145,7 +124,7 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     {
         $this->element->setImageValue('foo')
              ->setImage('foo.gif');
-        $html = $this->element->render(new Zend_View());
+        $html = $this->element->render(new View());
         $this->assertRegexp('#<input[^>]*value="foo"#', $html, $html);
     }
 
@@ -168,9 +147,9 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     public function testTitleAttributeGetsTranslated()
     {
         $this->element->setAttrib('title', 'bar');
-        $translator = new Zend_Translate_Adapter_Array(array("bar" => "baz"), 'de');
+        $translator = new ArrayTranslator(array("bar" => "baz"), 'de');
         $this->element->setTranslator($translator);
-        $html = $this->element->render(new Zend_View());
+        $html = $this->element->render(new View());
         $this->assertContains('title', $html);
         $this->assertContains('baz', $html);
         $this->assertNotContains('bar', $html);
@@ -179,31 +158,23 @@ class Zend_Form_Element_ImageTest extends PHPUnit_Framework_TestCase
     public function testTitleAttributeDoesNotGetTranslatedIfTranslatorIsDisabled()
     {
         $this->element->setAttrib('title', 'bar');
-        $translator = new Zend_Translate_Adapter_Array(array("bar" => "baz"), 'de');
+        $translator = new ArrayTranslator(array("bar" => "baz"), 'de');
         $this->element->setTranslator($translator);
         // now disable translator and see if that works
         $this->element->setDisableTranslator(true);
-        $html = $this->element->render(new Zend_View());
+        $html = $this->element->render(new View());
         $this->assertContains('title', $html);
         $this->assertContains('bar', $html);
         $this->assertNotContains('baz', $html);
     }
 
     /**
-     * Used by test methods susceptible to ZF-2794, marks a test as incomplete
+     * Prove the fluent interface on Zend_Form_Element_Image::loadDefaultDecorators
      *
-     * @link   http://framework.zend.com/issues/browse/ZF-2794
-     * @return void
+     * @group ZF-9913
      */
-    protected function _checkZf2794()
+    public function testFluentInterfaceOnLoadDefaultDecorators()
     {
-        if (strtolower(substr(PHP_OS, 0, 3)) == 'win' && version_compare(PHP_VERSION, '5.1.4', '=')) {
-            $this->markTestIncomplete('Error occurs for PHP 5.1.4 on Windows');
-        }
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
     }
-}
-
-// Call Zend_Form_Element_ImageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_ImageTest::main") {
-    Zend_Form_Element_ImageTest::main();
 }

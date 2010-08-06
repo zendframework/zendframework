@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db\Integration;
 
 /**
  * @category   Zend
@@ -30,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_Integration_SqLiteIntegrationTest extends Zend_Test_PHPUnit_Db_Integration_AbstractTestCase
+class SqLiteIntegrationTest extends AbstractTestCase
 {
     public function setUp()
     {
@@ -38,11 +41,11 @@ class Zend_Test_PHPUnit_Db_Integration_SqLiteIntegrationTest extends Zend_Test_P
             $this->markTestSkipped('PDO is required for this test.');
         }
 
-        if(!in_array('sqlite', PDO::getAvailableDrivers())) {
+        if(!in_array('sqlite', \PDO::getAvailableDrivers())) {
             $this->markTestSkipped('SqLite is not included in PDO in this PHP installation.');
         }
 
-        $this->dbAdapter = Zend_Db::factory('pdo_sqlite', array('dbname' => ':memory:'));
+        $this->dbAdapter = \Zend\Db\Db::factory('Pdo\Sqlite', array('dbname' => ':memory:'));
         $this->dbAdapter->query(
             'CREATE TABLE "foo" (id INTEGER PRIMARY KEY AUTOINCREMENT, foo VARCHAR, bar VARCHAR, baz VARCHAR)'
         );

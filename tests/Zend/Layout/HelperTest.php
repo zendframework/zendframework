@@ -46,11 +46,11 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     {
         \Zend\Layout\Layout::resetMvcInstance();
         \Zend\Controller\Front::getInstance()->resetInstance();
-        if (HelperBroker\HelperBroker::hasHelper('Layout')) {
-            HelperBroker\HelperBroker::removeHelper('Layout');
+        if (HelperBroker::hasHelper('Layout')) {
+            HelperBroker::removeHelper('Layout');
         }
-        if (HelperBroker\HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        if (HelperBroker::hasHelper('viewRenderer')) {
+            HelperBroker::removeHelper('viewRenderer');
         }
     }
 
@@ -108,11 +108,11 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 
         $helper->setOptions(array(
             'layout'     => 'foo.phtml',
-            'layoutPath' => dirname(__FILE__) . '/_files/layouts',
+            'layoutPath' => __DIR__ . '/_files/layouts',
             'contentKey' => 'foo'
         ));
         $this->assertEquals('foo.phtml', $helper->getLayout());
-        $this->assertEquals(dirname(__FILE__) . '/_files/layouts', $helper->getLayoutPath());
+        $this->assertEquals(__DIR__ . '/_files/layouts', $helper->getLayoutPath());
         $this->assertEquals('foo', $helper->getContentKey());
     }
 }

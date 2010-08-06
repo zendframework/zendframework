@@ -20,13 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Decorator_PrepareElementsTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_PrepareElementsTest::main");
-}
+namespace ZendTest\Form\Decorator;
 
-
-
+use Zend\Form\Form,
+    Zend\Form\SubForm,
+    Zend\Translator\Translator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Decorator_PrepareElements
@@ -38,19 +37,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
+class PrepareElementsTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_PrepareElementsTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -59,30 +47,20 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->form = new Zend_Form();
+        $this->form = new Form();
         $this->form->setDecorators(array('PrepareElements'));
         $this->decorator = $this->form->getDecorator('PrepareElements');
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
+        $view = new View();
         return $view;
     }
 
     public function prepareForm()
     {
-        $sub1 = new Zend_Form_SubForm();
+        $sub1 = new SubForm();
         $sub1->addElement('text', 'foo')
              ->addElement('text', 'bar');
 
@@ -119,7 +97,7 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
         $view = $this->form->getView();
         foreach ($this->form as $item) {
             $this->assertSame($view, $item->getView());
-            if ($item instanceof Zend_Form) {
+            if ($item instanceof Form) {
                 foreach ($item->getElements() as $subItem) {
                     $this->assertSame($view, $subItem->getView(), var_export($subItem, 1));
                 }
@@ -130,22 +108,17 @@ class Zend_Form_Decorator_PrepareElementsTest extends PHPUnit_Framework_TestCase
     public function testEachElementShouldHaveUpdatedTranslatorProperty()
     {
         $this->prepareForm();
-        $translator = new Zend_Translate('array', array('foo' => 'bar'), 'en');
+        $translator = new Translator('ArrayAdapter', array('foo' => 'bar'), 'en');
         $this->form->setTranslator($translator);
         $this->form->render();
         $translator = $this->form->getTranslator();
         foreach ($this->form as $item) {
             $this->assertSame($translator, $item->getTranslator(), 'Translator not the same: ' . var_export($item->getTranslator(), 1));
-            if ($item instanceof Zend_Form) {
+            if ($item instanceof Form) {
                 foreach ($item->getElements() as $subItem) {
                     $this->assertSame($translator, $subItem->getTranslator(), var_export($subItem, 1));
                 }
             }
         }
     }
-}
-
-// Call Zend_Form_Decorator_PrepareElementsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_PrepareElementsTest::main") {
-    Zend_Form_Decorator_PrepareElementsTest::main();
 }

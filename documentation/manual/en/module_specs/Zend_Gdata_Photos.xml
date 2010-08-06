@@ -40,7 +40,8 @@
             The Picasa Web Albums <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is
             based off of the Atom Publishing Protocol (APP), an <acronym>XML</acronym> based format
             for managing web-based resources. Traffic between a client and the servers occurs over
-            <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated connections.
+            <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated
+            connections.
         </para>
 
         <para>
@@ -275,7 +276,7 @@ $service = new Zend_Gdata_Photos();
             </listitem>
         </itemizedlist>
 
-        <para>A new <code>UserQuery</code> can be constructed as followed:</para>
+        <para>A new <classname>UserQuery</classname> can be constructed as followed:</para>
 
         <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -391,12 +392,12 @@ $query->setUser("sample.user");
             <para>
                 The service supports retrieving a user feed and list of the user's content. If the
                 requested user is also the authenticated user, entries marked as
-                "<code>hidden</code>" will also be returned.
+                "<emphasis>hidden</emphasis>" will also be returned.
             </para>
 
             <para>
                 The user feed can be accessed by passing the username to the
-                <code>getUserFeed</code> method:
+                <methodname>getUserFeed()</methodname> method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -458,7 +459,7 @@ try {
 
             <para>
                 The album feed is accessed by constructing a query object and passing it to
-                <code>getAlbumFeed</code>:
+                <methodname>getAlbumFeed()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -479,8 +480,8 @@ try {
 
             <para>
                 Alternatively, the query object can be given an album name with
-                <code>setAlbumName</code>. Setting the album name is mutually exclusive with setting
-                the album id, and setting one will unset the other.
+                <methodname>setAlbumName()</methodname>. Setting the album name is mutually
+                exclusive with setting the album id, and setting one will unset the other.
             </para>
 
             <para>
@@ -515,7 +516,7 @@ try {
 
             <para>
                 The photo feed is accessed by constructing a query object and passing it to
-                <code>getPhotoFeed</code>:
+                <methodname>getPhotoFeed()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -857,7 +858,7 @@ $service->deleteTagEntry($tagEntry, true);
 
             <para>
                 An example of how to handle versioning during a deletion is shown by
-                <code>deleteAlbumEntry</code>:
+                <methodname>deleteAlbumEntry()</methodname>:
             </para>
 
             <programlisting language="php"><![CDATA[

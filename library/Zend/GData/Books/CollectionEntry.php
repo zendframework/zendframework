@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Books;
 
+use Zend\GData\Books;
+
 /**
  * Describes an entry in a feed of collections
  *
- * @uses       \Zend\GData\Books\Books
+ * @uses       \Zend\GData\Books
  * @uses       \Zend\GData\Entry
  * @category   Zend
  * @package    Zend_Gdata

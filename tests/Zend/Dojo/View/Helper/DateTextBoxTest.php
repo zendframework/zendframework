@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_DateTextBoxTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_DateTextBoxTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_DateTextBox */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\View\Helper\DateTextBox as DateTextBoxHelper,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_DateTextBox.
@@ -45,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_DateTextBoxTest extends PHPUnit_Framework_TestCase
+class DateTextBoxTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_DateTextBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,34 +48,24 @@ class Zend_Dojo_View_Helper_DateTextBoxTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->helper = new Zend_Dojo_View_Helper_DateTextBox();
+        $this->helper = new DateTextBoxHelper();
         $this->helper->setView($this->view);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        return $this->helper->dateTextBox(
+        return $this->helper->direct(
             'elementId',
             '2008-07-07',
             array(
@@ -111,7 +83,7 @@ class Zend_Dojo_View_Helper_DateTextBoxTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowProgrammaticDijitCreation()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.DateTextBox")/', $html);
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
@@ -122,9 +94,4 @@ class Zend_Dojo_View_Helper_DateTextBoxTest extends PHPUnit_Framework_TestCase
         $html = $this->getElement();
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
     }
-}
-
-// Call Zend_Dojo_View_Helper_DateTextBoxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_DateTextBoxTest::main") {
-    Zend_Dojo_View_Helper_DateTextBoxTest::main();
 }

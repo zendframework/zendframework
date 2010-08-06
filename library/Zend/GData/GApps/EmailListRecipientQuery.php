@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\GApps;
 
+use Zend\GData\GApps;
+
 /**
  * Assists in constructing queries for Google Apps email list recipient
  * entries. Instances of this class can be provided in many places where a
@@ -34,7 +36,7 @@ namespace Zend\GData\GApps;
  * service class, Zend_Gdata_GApps.
  *
  * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\GApps
  * @uses       \Zend\GData\GApps\Query
  * @category   Zend
  * @package    Zend_Gdata

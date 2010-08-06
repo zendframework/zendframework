@@ -37,7 +37,7 @@ abstract class AbstractHelper
     /**
      * $_actionController
      *
-     * @var \Zend\Controller\Action\Action $_actionController
+     * @var \Zend\Controller\Action $_actionController
      */
     protected $_actionController = null;
 
@@ -49,10 +49,10 @@ abstract class AbstractHelper
     /**
      * setActionController()
      *
-     * @param  \Zend\Controller\Action\Action $actionController
+     * @param  \Zend\Controller\Action $actionController
      * @return Zend_Controller_ActionHelper_Abstract Provides a fluent interface
      */
-    public function setActionController(\Zend\Controller\Action\Action $actionController = null)
+    public function setActionController(\Zend\Controller\Action $actionController = null)
     {
         $this->_actionController = $actionController;
         return $this;
@@ -61,7 +61,7 @@ abstract class AbstractHelper
     /**
      * Retrieve current action controller
      *
-     * @return \Zend\Controller\Action\Action
+     * @return \Zend\Controller\Action
      */
     public function getActionController()
     {

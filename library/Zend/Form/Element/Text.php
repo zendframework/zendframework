@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Element;
+
+/**
  * Text form element
  *
- * @uses       Zend_Form_Element_Xhtml
+ * @uses       \Zend\Form\Element\Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Element_Text extends Zend_Form_Element_Xhtml
+class Text extends Xhtml
 {
     /**
      * Default form view helper to use for rendering

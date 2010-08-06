@@ -88,7 +88,7 @@ class WebContentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newWebContent->width, "200");
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newWebContent2 = $cal->newWebContent();
         $newWebContent2->transferFromXML($newWebContent->saveXML());
         $this->assertEquals(count($newWebContent2->extensionElements), 1);

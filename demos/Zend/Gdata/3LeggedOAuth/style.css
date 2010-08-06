@@ -1,0 +1,43 @@
+body {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 12px;
+}
+ul, ol {
+  padding: 0 0 0 15px;
+  margin: 0;
+}
+#logout {
+  text-align: right;
+}
+#token_info {
+  float: left;
+}
+#token {
+  margin-top: 12px;
+  padding: 10px 10px 10px 85px;
+  width: 500px;
+  border: 1px solid #ccc;
+  border-radius : 5px;
+  -moz-border-radius: 5px;
+  background-color: #eee;
+}
+#doclist, #spreadsheets {
+  float: left;
+  width: 450px;
+  margin-right: 10px;
+}
+#doclist .feed {
+  background: transparent url('doclist-72.png') no-repeat top right;
+}
+#spreadsheets .feed {
+  background: transparent url('data-api-72.png') no-repeat top right;
+}
+.feed {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  padding: 25px;
+}
+.feed h4 {
+  text-align: center;
+}

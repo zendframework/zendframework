@@ -73,10 +73,12 @@ class Loader
         $className = ltrim($class, '\\');
         $file      = '';
         $namespace = '';
-        if ($lastNsPos = strripos($className, '\\')) {
+        if ($lastNsPos = strrpos($className, '\\')) {
             $namespace = substr($className, 0, $lastNsPos);
             $className = substr($className, $lastNsPos + 1);
-            $file      = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+            $file      = (DIRECTORY_SEPARATOR != '\\') // small speed up on windows
+                         ? str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR
+                         : $namespace . DIRECTORY_SEPARATOR;
         }
         $file .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
@@ -182,6 +184,14 @@ class Loader
             // Return early if the filename is readable without needing the 
             // include_path
             return true;
+        }
+
+        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN'
+            && preg_match('/^[a-z]:/i', $filename)
+        ) {
+            // If on windows, and path provided is clearly an absolute path, 
+            // return false immediately
+            return false;
         }
 
         foreach (self::explodeIncludePath() as $path) {

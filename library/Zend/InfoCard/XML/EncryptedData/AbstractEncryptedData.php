@@ -24,22 +24,22 @@
  * @namespace
  */
 namespace Zend\InfoCard\XML\EncryptedData;
-use Zend\InfoCard\XML\Element;
+use Zend\InfoCard\XML\AbstractElement;
 use Zend\InfoCard\XML;
 
 /**
  * An abstract class representing a generic EncryptedData XML block. This class is extended
  * into a specific type of EncryptedData XML block (i.e. XmlEnc) as necessary
  *
- * @uses       \Zend\InfoCard\XML\Element\Element
- * @uses       \Zend\InfoCard\XML\KeyInfo\KeyInfo
+ * @uses       \Zend\InfoCard\XML\AbstractElement
+ * @uses       \Zend\InfoCard\XML\KeyInfo\Factory
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractEncryptedData extends Element\Element
+abstract class AbstractEncryptedData extends AbstractElement
 {
 
     /**
@@ -49,7 +49,7 @@ abstract class AbstractEncryptedData extends Element\Element
      */
     public function getKeyInfo()
     {
-        return XML\KeyInfo\KeyInfo::getInstance($this->KeyInfo[0]);
+        return XML\KeyInfo\Factory::getInstance($this->KeyInfo[0]);
     }
 
     /**
@@ -69,7 +69,7 @@ abstract class AbstractEncryptedData extends Element\Element
          */
         list($encryption_method) = $this->xpath("//enc:EncryptionMethod");
 
-        if(!($encryption_method instanceof Element\Element)) {
+        if(!($encryption_method instanceof AbstractElement)) {
             throw new XML\Exception("Unable to find the enc:EncryptionMethod symmetric encryption block");
         }
 

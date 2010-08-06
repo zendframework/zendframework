@@ -17,7 +17,7 @@ class HMACTest extends \PHPUnit_Framework_TestCase
             'oauth_nonce' => 'hsu94j3884jdopsl',
             'oauth_version' => '1.0'
         );
-        $signature = new Signature\HMAC('1234567890', null, 'SHA1');
+        $signature = new Signature\Hmac('1234567890', null, 'SHA1');
         $this->assertEquals('XYkaERjLVjp2yP/klDCGQ+hZ2So=', $signature->sign($params));
     }
 
@@ -31,7 +31,7 @@ class HMACTest extends \PHPUnit_Framework_TestCase
             'oauth_nonce' => 'hsu94j3884jdopsl',
             'oauth_version' => '1.0'
         );
-        $signature = new Signature\HMAC('1234567890', '0987654321', 'SHA1');
+        $signature = new Signature\Hmac('1234567890', '0987654321', 'SHA1');
         $this->assertEquals('b0J6H0jCEo+tvzVJy2G615sM6/M=', $signature->sign($params));
     }
 

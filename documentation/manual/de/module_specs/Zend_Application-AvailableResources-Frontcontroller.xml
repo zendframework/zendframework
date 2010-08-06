@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20885 -->
+<!-- EN-Revision: 22596 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -130,6 +130,9 @@ resources.frontController.plugins.baz.class = "My_Plugin_Baz"
 resources.frontController.plugins.baz.stackIndex = 123
 resources.frontController.returnresponse = 1
 resources.frontController.env = APPLICATION_ENV
+
+; Das folgende verweist auf: Zend_Controller_Action_HelperBroker::addPath('Helper_Path', $helperPrefix);
+resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
 ]]></programlisting>
     </example>
 

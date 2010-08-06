@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
     <title>Zeichensätze</title>
@@ -19,6 +19,7 @@
                    Plane (BMP) Zeichen (von 0x0000 bis 0xFFFF) und unterstützt keine "zusätzlichen
                    Zeichen" (Zeichen deren Codepunkte größer als 0xFFFF sind).
                </para>
+
                <para>
                    Java 2 zeigt diese Werte als Paare von Zeichen (16-bit) Werten an, der erste vom
                    High-Surrogate Bereich (0xD800-0xDBFF), den zweiten vom Low-Surrogate Bereich
@@ -81,12 +82,12 @@
 
         <para>
             Jeder dieser Analysatoren kenn mit Code wie dem folgenden eingeschaltet werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
 ]]></programlisting>
-        </para>
 
         <warning>
             <title/>
@@ -116,15 +117,15 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
             Der folgende Code kann verwendet werden um zu prüfen ob PCRE UTF-8 Unterstützung
             eingeschaltet ist:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE Unicode Unterstützung ist eingeschaltet.\n";
 } else {
     echo "PCRE Unicode Unterstützung ist ausgeschaltet.\n";
 }
 ]]></programlisting>
-        </para>
 
         <para>
             Groß-/Kleinschreibungs-unabhängige Versionen von UTF-8 kompatiblen Analysatoren
@@ -138,8 +139,9 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             Groß-/Kleinschreibungs unabhängige Suchen benötigt, kann die folgende Vorgehensweise
             verwendet werden: Quelldaten vor der Indizierung und Abfragestring for der Suche
             normalisieren indem diese zur Kleinschreibung konvertiert werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Indizierung
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -163,7 +165,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('title',
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
 ]]></programlisting>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Suche
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -176,6 +178,5 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $hits = $index->find(strtolower($query));
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace Zend\Mail\Storage;
-use Zend\Mail\Protocol;
-use Zend\Mail;
-use Zend\Mime;
+use Zend\Mail\AbstractStorage,
+    Zend\Mail\Protocol,
+    Zend\Mail,
+    Zend\Mime;
 
 /**
  * @uses       \Zend\Mail\Message\Message

@@ -51,7 +51,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         // setup the registry components required to test with
-        $this->_registry = new \Zend\Tool\Framework\Registry\Registry();
+        $this->_registry = new \Zend\Tool\Framework\Registry\FrameworkRegistry();
         $this->_registry->setActionRepository(new Action\Repository());
         $this->_targetSignature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeatured());
         $this->_targetSignature->setRegistry($this->_registry);

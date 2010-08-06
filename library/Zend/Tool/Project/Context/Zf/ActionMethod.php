@@ -25,7 +25,7 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 use Zend\Tool\Project\Context;
-use Zend\CodeGenerator\PHP;
+use Zend\CodeGenerator\Php;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -33,25 +33,25 @@ use Zend\CodeGenerator\PHP;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\PHP\PHPFile
+ * @uses       \Zend\CodeGenerator\Php\PhpFile
  * @uses       \Zend\Reflection\ReflectionFile
  * @uses       \Zend\Tool\Project\Context\Exception
- * @uses       \Zend\Tool\Project\Context\ContextInterface
+ * @uses       \Zend\Tool\Project\Context
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActionMethod implements Context\ContextInterface
+class ActionMethod implements Context
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource\Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_resource = null;
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource\Resource
+     * @var \Zend\Tool\Project\Profile\Resource
      */
     protected $_controllerResource = null;
 
@@ -112,10 +112,10 @@ class ActionMethod implements Context\ContextInterface
     /**
      * setResource()
      *
-     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource $resource
      * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
-    public function setResource(\Zend\Tool\Project\Profile\Resource\Resource $resource)
+    public function setResource(\Zend\Tool\Project\Profile\Resource $resource)
     {
         $this->_resource = $resource;
         return $this;
@@ -184,7 +184,7 @@ class ActionMethod implements Context\ContextInterface
             return false;
         }
 
-        $controllerCodeGenFile = PHP\PHPFile::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile = Php\PhpFile::fromReflectedFileName($controllerPath, true, true);
         $controllerCodeGenFile->getClass()->setMethod(array(
             'name' => $actionName . 'Action',
             'body' => $body
@@ -207,7 +207,7 @@ class ActionMethod implements Context\ContextInterface
             return false;
         }
 
-        $controllerCodeGenFile = PHP\PHPFile::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile = Php\PhpFile::fromReflectedFileName($controllerPath, true, true);
         return $controllerCodeGenFile->getClass()->hasMethod($actionName . 'Action');
     }
 

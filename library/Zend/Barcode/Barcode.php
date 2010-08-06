@@ -23,16 +23,17 @@
  * @namespace
  */
 namespace Zend\Barcode;
-use Zend\Barcode\Renderer;
-use Zend\Loader;
-use Zend\Config;
-use Zend;
+use Zend\Barcode\Renderer,
+    Zend\Loader\PluginLoader,
+    Zend\Loader\ShortNameLocater,
+    Zend\Config\Config,
+    Zend;
 
 /**
  * Class for generate Barcode
  *
  * @uses       \Zend\Barcode\Exception
- * @uses       \Zend\Barcode\Object\ObjectInterface
+ * @uses       \Zend\Barcode\BarcodeObject
  * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Barcode
@@ -41,6 +42,8 @@ use Zend;
  */
 class Barcode
 {
+    const OBJECT   = 'OBJECT';
+    const RENDERER = 'RENDERER';
     /**
      * Default barcode TTF font name
      *
@@ -51,6 +54,62 @@ class Barcode
      * @var string
      */
     protected static $_staticFont = null;
+
+    /**
+     * Plugin loaders for object and renderer
+     * @var array
+     */
+    protected static $_loaders = array();
+
+    /**
+     * Set plugin loader to use for validator or filter chain
+     *
+     * @param  \Zend\Loader\ShortNameLocater $loader
+     * @param  string $type 'object', or 'renderer'
+     * @return \Zend\Form\Element
+     * @throws \Zend\Form\Exception on invalid type
+     */
+    public static function setPluginLoader(ShortNameLocater $loader, $type)
+    {
+        $type = strtoupper($type);
+        switch ($type) {
+            case self::OBJECT:
+            case self::RENDERER:
+                self::$_loaders[$type] = $loader;
+                return;
+            default:
+                throw new Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+        }
+    }
+
+    /**
+     * Retrieve plugin loader for validator or filter chain
+     *
+     * Instantiates with default rules if none available for that type. Use
+     * 'decorator', 'filter', or 'validate' for $type.
+     *
+     * @param  string $type
+     * @return \Zend\Loader\ShortNameLocater
+     * @throws \Zend\Loader\Exception on invalid type.
+     */
+    public static function getPluginLoader($type)
+    {
+        $type = strtoupper($type);
+        switch ($type) {
+            case self::OBJECT:
+            case self::RENDERER:
+                $prefixSegment = ucfirst(strtolower($type));
+                $pathSegment   = $prefixSegment;
+                if (!isset(self::$_loaders[$type])) {
+                    self::$_loaders[$type] = new PluginLoader(
+                        array('Zend\\Barcode\\' . $prefixSegment . '\\' => 'Zend/Barcode/' . $pathSegment . '/')
+                    );
+                }
+                return self::$_loaders[$type];
+            default:
+                throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+        }
+    }
 
     /**
      * Factory for Zend_Barcode classes.
@@ -87,7 +146,7 @@ class Barcode
          * Convert \Zend\Config\Config argument to plain string
          * barcode name and separate config object.
          */
-        if ($barcode instanceof Config\Config) {
+        if ($barcode instanceof Config) {
             if (isset($barcode->rendererParams)) {
                 $rendererConfig = $barcode->rendererParams->toArray();
             }
@@ -130,7 +189,7 @@ class Barcode
      */
     public static function makeBarcode($barcode, $barcodeConfig = array())
     {
-        if ($barcode instanceof Object\ObjectInterface) {
+        if ($barcode instanceof BarcodeObject) {
             return $barcode;
         }
 
@@ -138,8 +197,8 @@ class Barcode
          * Convert \Zend\Config\Config argument to plain string
          * barcode name and separate config object.
          */
-        if ($barcode instanceof Config\Config) {
-            if (isset($barcode->barcodeParams) && $barcode->barcodeParams instanceof Config\Config) {
+        if ($barcode instanceof Config) {
+            if (isset($barcode->barcodeParams) && $barcode->barcodeParams instanceof Config) {
                 $barcodeConfig = $barcode->barcodeParams->toArray();
             }
             if (isset($barcode->barcode)) {
@@ -148,7 +207,7 @@ class Barcode
                 $barcode = null;
             }
         }
-        if ($barcodeConfig instanceof Config\Config) {
+        if ($barcodeConfig instanceof Config) {
             $barcodeConfig = $barcodeConfig->toArray();
         }
 
@@ -169,24 +228,8 @@ class Barcode
                 'Barcode name must be specified in a string'
             );
         }
-        /*
-         * Form full barcode class name
-         */
-        $barcodeNamespace = '\Zend\Barcode\Object';
-        if (isset($barcodeConfig['barcodeNamespace'])) {
-            $barcodeNamespace = $barcodeConfig['barcodeNamespace'];
-        }
 
-        /** @todo Check if it's correct to drop case transformation */
-        $barcodeName = $barcodeNamespace . '\\' . ucfirst($barcode);
-
-        /*
-         * Load the barcode class.
-         * Important! This throws an exception if the specified class cannot be loaded.
-         */
-        if (!class_exists($barcodeName, false)) {
-            Loader::loadClass($barcodeName);
-        }
+        $barcodeName = self::getPluginLoader(self::OBJECT)->load($barcode);
 
         /*
          * Create an instance of the barcode class.
@@ -197,9 +240,9 @@ class Barcode
         /*
          * Verify that the object created is a descendent of the abstract barcode type.
          */
-        if (!$bcAdapter instanceof Object\ObjectInterface) {
+        if (!$bcAdapter instanceof BarcodeObject) {
             throw new Exception(
-                "Barcode class '$barcodeName' does not implement \Zend\Barcode\Object\ObjectInterface"
+                "Barcode class '$barcodeName' does not implement \Zend\Barcode\BarcodeObject"
             );
         }
         return $bcAdapter;
@@ -210,11 +253,11 @@ class Barcode
      *
      * @param mixed $renderer           String name of renderer class, or \Zend\Config\Config object.
      * @param mixed $rendererConfig     OPTIONAL; an array or \Zend\Config\Config object with renderer parameters.
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      */
     public static function makeRenderer($renderer = 'image', $rendererConfig = array())
     {
-        if ($renderer instanceof Renderer\RendererInterface) {
+        if ($renderer instanceof Renderer) {
             return $renderer;
         }
 
@@ -222,7 +265,7 @@ class Barcode
          * Convert \Zend\Config\Config argument to plain string
          * barcode name and separate config object.
          */
-        if ($renderer instanceof Config\Config) {
+        if ($renderer instanceof Config) {
             if (isset($renderer->rendererParams)) {
                 $rendererConfig = $renderer->rendererParams->toArray();
             }
@@ -230,7 +273,7 @@ class Barcode
                 $renderer = (string) $renderer->renderer;
             }
         }
-        if ($rendererConfig instanceof Config\Config) {
+        if ($rendererConfig instanceof Config) {
             $rendererConfig = $rendererConfig->toArray();
         }
 
@@ -256,24 +299,7 @@ class Barcode
             throw $e;
         }
 
-        /*
-         * Form full barcode class name
-         */
-        $rendererNamespace = '\Zend\Barcode\Renderer';
-        if (isset($rendererConfig['rendererNamespace'])) {
-            $rendererNamespace = $rendererConfig['rendererNamespace'];
-        }
-
-        /** @todo Check if it's correct to drop case transformation */
-        $rendererName = $rendererNamespace . '\\' . ucfirst($renderer);
-
-        /*
-         * Load the renderer class.
-         * Important! This throws an exception if the specified class cannot be loaded.
-         */
-        if (!class_exists($rendererName, false)) {
-            Loader::loadClass($rendererName);
-        }
+        $rendererName = self::getPluginLoader(self::RENDERER)->load($renderer);
 
         /*
          * Create an instance of the barcode class.
@@ -284,9 +310,9 @@ class Barcode
         /*
          * Verify that the object created is a descendent of the abstract barcode type.
          */
-        if (!$rdrAdapter instanceof Renderer\RendererInterface) {
+        if (!$rdrAdapter instanceof Renderer) {
             $e = new Exception(
-                "Renderer class '$rendererName' does not implements \Zend\Barcode\Renderer\RendererInterface"
+                "Renderer class '$rendererName' does not implements \Zend\Barcode\Renderer"
             );
             $e->setIsRenderable(false);
             throw $e;
@@ -297,8 +323,8 @@ class Barcode
     /**
      * Proxy to renderer render() method
      *
-     * @param string | \Zend\Barcode\Object\ObjectInterface | array | \Zend\Config\Config $barcode
-     * @param string | \Zend\Barcode\Renderer\RendererInterface $renderer
+     * @param string | \Zend\Barcode\BarcodeObject | array | \Zend\Config\Config $barcode
+     * @param string | \Zend\Barcode\Renderer $renderer
      * @param array  | \Zend\Config\Config $barcodeConfig
      * @param array  | \Zend\Config\Config $rendererConfig
      */
@@ -313,8 +339,8 @@ class Barcode
     /**
      * Proxy to renderer draw() method
      *
-     * @param string | \Zend\Barcode\Object\ObjectInterface | array | \Zend\Config\Config $barcode
-     * @param string | \Zend\Barcode\Renderer\RendererInterface $renderer
+     * @param string | \Zend\Barcode\BarcodeObject | array | \Zend\Config\Config $barcode
+     * @param string | \Zend\Barcode\Renderer $renderer
      * @param array | \Zend\Config\Config $barcodeConfig
      * @param array | \Zend\Config\Config $rendererConfig
      * @return mixed

@@ -43,7 +43,7 @@ class PlanetTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Planet', $this->_object->getType());
+        $this->assertSame('planet', $this->_object->getType());
     }
 
     public function testChecksum()
@@ -60,11 +60,9 @@ class PlanetTest extends TestCommon
         $this->assertSame('000000123455', $this->_object->getTextToDisplay());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testSetTextWithoutGoodNumberOfCharacters()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('1234');
         $this->_object->getText();
     }
@@ -95,11 +93,9 @@ class PlanetTest extends TestCommon
         $this->assertSame('000000123455', $this->_object->getTextToDisplay());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testBadTextDetectedIfChecksumWished()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('a');
         $this->_object->setWithChecksum(true);
         $this->_object->getText();
@@ -116,6 +112,8 @@ class PlanetTest extends TestCommon
     {
         $this->_object->setText('00000012345');
         $this->assertEquals(286, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(246, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

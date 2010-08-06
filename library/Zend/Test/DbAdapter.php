@@ -21,18 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Test;
+
+/**
  * Testing Database Adapter which acts as a stack for SQL Results
  *
- * @uses       Zend_Db_Adapter_Abstract
- * @uses       Zend_Db_Profiler
- * @uses       Zend_Test_DbStatement
+ * @uses       \Zend\Db\Adapter\AbstractAdapter
+ * @uses       \Zend\Db\Profiler\Profiler
+ * @uses       \Zend\Test\DbStatement
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
+class DbAdapter extends \Zend\Db\Adapter\AbstractAdapter
 {
     /**
      * @var array
@@ -69,7 +74,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function __construct()
     {
-        $profiler = new Zend_Db_Profiler();
+        $profiler = new \Zend\Db\Profiler();
         $profiler->setEnabled(true);
         $this->setProfiler($profiler);
     }
@@ -77,10 +82,10 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
     /**
      * Append a new Statement to the SQL Result Stack.
      *
-     * @param  Zend_Test_DbStatement $stmt
-     * @return Zend_Test_DbAdapter
+     * @param  \Zend\Test\DbStatement $stmt
+     * @return \Zend\Test\DbAdapter
      */
-    public function appendStatementToStack(Zend_Test_DbStatement $stmt)
+    public function appendStatementToStack(DbStatement $stmt)
     {
         array_push($this->_statementStack, $stmt);
         return $this;
@@ -90,7 +95,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      * Append a new Insert Id to the {@see lastInsertId}.
      *
      * @param  int|string $id
-     * @return Zend_Test_DbAdapter
+     * @return \Zend\Test\DbAdapter
      */
     public function appendLastInsertIdToStack($id)
     {
@@ -140,7 +145,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      *
      * @param  string $table
      * @param  array $tableInfo
-     * @return Zend_Test_DbAdapter
+     * @return \Zend\Test\DbAdapter
      */
     public function setDescribeTable($table, $tableInfo)
     {
@@ -217,7 +222,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
     /**
      * Prepare a statement and return a PDOStatement-like object.
      *
-     * @param string|Zend_Db_Select $sql SQL query
+     * @param string|\Zend\DB\Select $sql SQL query
      * @return Zend_Db_Statment|PDOStatement
      */
     public function prepare($sql)
@@ -227,7 +232,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
         if(count($this->_statementStack)) {
             $stmt = array_pop($this->_statementStack);
         } else {
-            $stmt = new Zend_Test_DbStatement();
+            $stmt = new DbStatement();
         }
 
         if($this->getProfiler()->getEnabled() == true) {
@@ -290,7 +295,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      *
      * @param integer $mode
      * @return void
-     * @throws Zend_Db_Adapter_Exception
+     * @throws \Zend\Db\Adapter\Exception
      */
     public function setFetchMode($mode)
     {

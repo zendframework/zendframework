@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Photos;
 
+use Zend\GData\Photos;
+
 /**
  * Data model for a collection of album entries, usually
  * provided by the servers.
@@ -34,7 +36,7 @@ namespace Zend\GData\Photos;
  *
  * @uses       \Zend\GData\App\Exception
  * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Photos
  * @uses       \Zend\GData\Photos\AlbumEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -44,8 +46,8 @@ namespace Zend\GData\Photos;
  */
 class AlbumFeed extends \Zend\GData\Feed
 {
-    protected $_entryClassName = '\Zend\GData\Photos\AlbumEntry';
-    protected $_feedClassName = '\Zend\GData\Photos\AlbumFeed';
+    protected $_entryClassName = 'Zend\GData\Photos\AlbumEntry';
+    protected $_feedClassName = 'Zend\GData\Photos\AlbumFeed';
 
     /**
      * gphoto:id element
@@ -118,9 +120,9 @@ class AlbumFeed extends \Zend\GData\Feed
     protected $_gphotoCommentingEnabled = null;
 
     protected $_entryKindClassMapping = array(
-        'http://schemas.google.com/photos/2007#photo' => '\Zend\GData\Photos\PhotoEntry',
-        'http://schemas.google.com/photos/2007#comment' => '\Zend\GData\Photos\CommentEntry',
-        'http://schemas.google.com/photos/2007#tag' => '\Zend\GData\Photos\TagEntry'
+        'http://schemas.google.com/photos/2007#photo' => 'Zend\GData\Photos\PhotoEntry',
+        'http://schemas.google.com/photos/2007#comment' => 'Zend\GData\Photos\CommentEntry',
+        'http://schemas.google.com/photos/2007#tag' => 'Zend\GData\Photos\TagEntry'
     );
 
     public function __construct($element = null)

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: 20766 -->
+<!-- EN-Revision: 21585 -->
+<!-- Reviewed: 21585 -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
 
     <para>
         <classname>Zend_Dom_Query</classname> bietet einen Mechanismus für die Abfrage von
-        <acronym>XML</acronym> und (X)HTML Dokumenten indem entweder XPath oder
+        <acronym>XML</acronym> und (X)<acronym>HTML</acronym> Dokumenten indem entweder XPath oder
         <acronym>CSS</acronym> Selektoren verwendet werden. Sie wurde entwickelt um bei funktionalem
         Testen von <acronym>MVC</acronym> Anwendungen zu helfen, könnte aber auch für schnelle
         Entwicklung von Screen Scraper verwendet werden.
@@ -53,9 +53,10 @@
             <listitem>
                 <para>
                     <emphasis>Stil Attribute</emphasis>: <acronym>CSS</acronym> Stil Attribute
-                    passen zu folgenden: '.error', 'div.error', 'label.required', usw. Wenn ein
-                    Element mehr als einen Stil definiert, wird er entsprechen solange der benannte
-                    Stil irgendwo in der Stil Definition vorhanden ist.
+                    passen zu folgenden: '<command>.error</command>',
+                    '<command>div.error</command>', '<command>label.required</command>', usw. Wenn
+                    ein Element mehr als einen Stil definiert, wird er entsprechen solange der
+                    benannte Stil irgendwo in der Stil Definition vorhanden ist.
                 </para>
             </listitem>
 
@@ -114,11 +115,11 @@
                 <para>
                     <emphasis>Abhängigkeit</emphasis>: Verknüpfung mehrerer Selektoren, um eine
                     Hierarchie zwischen Ihnen auszudrücken nach welcher gesucht werden soll.
-                    'div .foo span #one' würde ein Element mit der Id 'one' auswählen, das abhängig
-                    ist, in einer beliebigen Tiefe unter einem 'span' Element, welches seinerseits
-                    in einer beliebigen Tiefe darunter von einer Klase von 'foo' abhängig ist,
-                    welche in einer beliebigen Tiefe von einem 'div' Element abhängig ist. Der Link
-                    zum Wort 'One' im Beispiel anbei würde passen:
+                    '<command>div .foo span #one</command>' würde ein Element mit der Id 'one'
+                    auswählen, das abhängig ist, in einer beliebigen Tiefe unter einem 'span'
+                    Element, welches seinerseits in einer beliebigen Tiefe darunter von einer Klasse
+                    von 'foo' abhängig ist, welche in einer beliebigen Tiefe von einem 'div' Element
+                    abhängig ist. Der Link zum Wort 'One' im Beispiel anbei würde passen:
                 </para>
 
                 <programlisting language="html"><![CDATA[
@@ -146,9 +147,10 @@
             Wenn man eine Abfrage ausgeführt hat, kann man mit dem Ergebnis Objekt arbeiten um
             Informationen über die Knoten zu bekommen, sowie um Sie und/oder Ihren Inhalt direkt für
             die Extrahierung und Manipulation herauszuholen.
-            <classname>Zend_Dom_Query_Result</classname> implementiert <code>Countable</code> und
-            <code>Iterator</code> und speichert die Ergebnisse intern als DOMNodes/DOMElements. Als
-            Beispiel nehmen wir erstmal den folgenden Aufruf an der das obige HTML auswählt:
+            <classname>Zend_Dom_Query_Result</classname> implementiert
+            <classname>Countable</classname> und <classname>Iterator</classname> und speichert die
+            Ergebnisse intern als DOMNodes und DOMElements. Als Beispiel nehmen wir erstmal den
+            folgenden Aufruf an der das obige <acronym>HTML</acronym> auswählt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -201,8 +203,8 @@ foreach ($results as $result) {
 
                 <listitem>
                     <para>
-                        <methodname>setDocumentHtml($document)</methodname>: Spezifiziert einen HTML
-                        String der abgefragt werden soll.
+                        <methodname>setDocumentHtml($document)</methodname>: Spezifiziert einen
+                        <acronym>HTML</acronym> String der abgefragt werden soll.
                     </para>
                 </listitem>
 
@@ -251,10 +253,10 @@ foreach ($results as $result) {
 
             <para>
                 Wie vorher erwähnt, implementiert <classname>Zend_Dom_Query_Result</classname>
-                beide, <code>Iterator</code> und <code>Countable</code>, und kann deswegen in einer
-                <code>foreach</code> Schleife verwendet werden wie auch mit der
-                <methodname>count()</methodname> Funktion. Zusätzlich bietet es die folgenden
-                Methoden an:
+                beide, <classname>Iterator</classname> und <classname>Countable</classname>, und
+                kann deswegen in einer <methodname>foreach()</methodname> Schleife verwendet werden
+                wie auch mit der <methodname>count()</methodname> Funktion. Zusätzlich bietet es die
+                folgenden Methoden an:
             </para>
 
             <itemizedlist>

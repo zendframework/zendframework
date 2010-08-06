@@ -26,7 +26,7 @@ use Zend\Loader\Autoloader,
     Zend\Application\Resource\Modules as ModulesResource,
     Zend\Application\Application,
     Zend\Controller\Front as FrontController,
-    ZendTest\Application\TestAssett\ZfAppBootstrap;
+    ZendTest\Application\TestAsset\ZfAppBootstrap;
 
 /**
  * @category   Zend
@@ -36,7 +36,7 @@ use Zend\Loader\Autoloader,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class ModulesResourceTest extends \PHPUnit_Framework_TestCase
+class ModulesTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -94,7 +94,7 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
     public function testInitializationTriggersDefaultModuleBootstrapWhenDiffersFromApplicationBootstrap()
     {
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
@@ -106,7 +106,7 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
     {
 
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
@@ -123,7 +123,7 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
     {
 
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
@@ -133,7 +133,7 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
-        $this->assertArrayHasKey('default', (array)$bootstraps);
+        $this->assertArrayHasKey('application', (array)$bootstraps);
     }
 
     /**
@@ -144,7 +144,7 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
     {
 
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
-            'moduleDirectory' => __DIR__ . '/../TestAssett/modules',
+            'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
@@ -153,6 +153,6 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
-        $this->assertArrayHasKey('default', (array)$bootstraps);
+        $this->assertArrayHasKey('application', (array)$bootstraps);
     }
 }

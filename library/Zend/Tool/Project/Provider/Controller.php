@@ -48,12 +48,12 @@ class Controller
      * profile.  NOTE: it is your job to execute the create() method on the resource, as well as
      * store the profile when done.
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createResource(ProjectProfile\Profile $profile, $controllerName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
             throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
@@ -79,29 +79,29 @@ class Controller
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function hasResource(ProjectProfile\Profile $profile, $controllerName, $moduleName = null)
+    public static function hasResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
             throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName);
-        return (($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof ProjectProfile\Resource\Resource);
+        return (($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof ProjectProfile\Resource);
     }
 
     /**
      * _getControllersDirectoryResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    protected static function _getControllersDirectoryResource(ProjectProfile\Profile $profile, $moduleName = null)
+    protected static function _getControllersDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {
         $profileSearchParams = array();
 

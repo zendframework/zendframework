@@ -24,15 +24,16 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Manifest;
+use Zend\Tool\Framework\Manifest;
 
 /**
- * @uses       \Zend\Tool\Framework\Manifest\ManifestInterface
+ * @uses       \Zend\Tool\Framework\Manifest
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Indexable extends ManifestInterface
+interface Indexable extends Manifest
 {
 
     /**
@@ -41,7 +42,7 @@ interface Indexable extends ManifestInterface
      * Should either return a single action, or an array
      * of actions
      *
-     * @return array|\Zend\Tool\Framework\Action\ActionInterface
+     * @return array|\Zend\Tool\Framework\Action
      */
     public function getIndex();
 

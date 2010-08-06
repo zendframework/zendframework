@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 21357 -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data エンベロープ</title>
 
     <para>
         Dojo には、データを扱うウィジェットのデータを抽象化するための
-        dojo.data コンポーネントが存在します。
+        <command>dojo.data</command> コンポーネントが存在します。
         このコンポーネントの持つ機能は、
         データストアのアタッチ、identifier フィールド (そしてオプションで
         label フィールド) に関連するメタデータの提供、
@@ -15,7 +15,7 @@
     </para>
 
     <para>
-        dojo.data は、よく XmlHttpRequest と組み合わせて用いられます。
+        <command>dojo.data</command> は、よく XmlHttpRequest と組み合わせて用いられます。
         動的なデータをサーバから取得するためにです。
         この基本的な仕組みは、QueryReadStore
         を拡張して <acronym>URL</acronym> とクエリ情報を指定するようにします。
@@ -43,7 +43,7 @@
         <title>Zend_Dojo_Data の使用法</title>
 
         <para>
-            もっともシンプルな使用法は、dojo.data
+            もっともシンプルな使用法は、<command>dojo.data</command>
             に各アイテムの identifier フィールドの名前とアイテムの内容 (データ) を渡すことです。
             コンストラクタか、あるいは設定用メソッドで渡します。
         </para>
@@ -87,7 +87,7 @@ $data->addItems($someMoreItems);
             <title>常に identifier を使うこと!</title>
 
             <para>
-                すべての dojo.data データストアは、identifier
+                すべての <command>dojo.data</command> データストアは、identifier
                 カラムがメタデータに存在することを必須としています。
                 <classname>Zend_Dojo_Data</classname> でもそれは同じです。
                 identifier のないアイテムを追加しようとすると、
@@ -109,7 +109,7 @@ $data->addItems($someMoreItems);
             </para></listitem>
 
             <listitem><para>
-                その他のオブジェクト (get_object_vars() でシリアライズされます)
+                その他のオブジェクト (<methodname>get_object_vars()</methodname> でシリアライズされます)
             </para></listitem>
         </itemizedlist>
 
@@ -126,9 +126,9 @@ $data->addItems($someMoreItems);
             </para></listitem>
 
             <listitem><para>
-                <code>Traversable</code> インターフェイスを実装したオブジェクト
-                (このインターフェイスは <code>Iterator</code> と
-                <code>ArrayAccess</code> を含んでいます)。
+                <classname>Traversable</classname> インターフェイスを実装したオブジェクト
+                (このインターフェイスは <classname>Iterator</classname> と
+                <classname>ArrayAccess</classname> を含んでいます)。
             </para></listitem>
         </itemizedlist>
 
@@ -147,7 +147,7 @@ $data->setLabel('name');
 
         <para>
             最後に、<classname>Zend_Dojo_Data</classname> のアイテムを
-            dojo.data <acronym>JSON</acronym> 配列から読み込むには <methodname>fromJson()</methodname>
+            <command>dojo.data</command> <acronym>JSON</acronym> 配列から読み込むには <methodname>fromJson()</methodname>
             メソッドを使用します。
         </para>
 
@@ -165,10 +165,10 @@ $data->fromJson($json);
 
         <para>
             Dojo コンポーネントの中には、
-            dojo.data の中に追加のメタデータを必要とするものもあります。
-            たとえば <code>dojox.grid.Grid</code> は、データを動的に
-            <code>dojox.data.QueryReadStore</code> から取得することができます。
-            ページ移動を正しく行うには、返されるデータの中に <code>numRows</code>
+            <command>dojo.data</command> の中に追加のメタデータを必要とするものもあります。
+            たとえば <command>dojox.grid.Grid</command> は、データを動的に
+            <command>dojox.data.QueryReadStore</command> から取得できます。
+            ページ移動を正しく行うには、返されるデータの中に <property>numRows</property>
             というキーのデータ (中身はクエリが返す行の数) が必要となります。
             これによりグリッドが、サーバ側へのリクエストをいつ送ったらいいのか、
             そしていつリクエストが不要になるのか
@@ -179,7 +179,7 @@ $data->fromJson($json);
 
         <para>
             <classname>Zend_Dojo_Data</classname> では、
-            このようなプロパティをオブジェクトのメタデータとして設定することができます。
+            このようなプロパティをオブジェクトのメタデータとして設定できます。
             以下の使用例をご覧ください。
         </para>
 
@@ -218,9 +218,9 @@ $data->clearMetadata();
 
         <para>
             <classname>Zend_Dojo_Data</classname> は、インターフェイス
-            <code>ArrayAccess</code>、<code>Iterator</code> および
-            <code>Countable</code> を実装しています。
-            そのため、データコレクションをまるで配列であるかのように使用することができます。
+            <classname>ArrayAccess</classname>、<classname>Iterator</classname> および
+            <classname>Countable</classname> を実装しています。
+            そのため、データコレクションをまるで配列であるかのように使用できます。
         </para>
 
         <para>
@@ -241,7 +241,7 @@ $item = $data['foo'];
 
         <para>
             identifier がわかれば、それを使用してアイテムを取得したり、
-            あるいは更新したり削除したり作成したり調べたりすることができます。
+            あるいは更新したり削除したり作成したり調べたりできます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -299,7 +299,7 @@ $json = (string) $data; // 文字列へのキャスト == JSON へのキャス�
                     <methodname>setItems($items)</methodname>: 複数のアイテムを一度に設定し、
                     それまでそのオブジェクトに設定されていたアイテムをすべて上書きします。
                     <code>$items</code> は、配列あるいは
-                    <code>Traversable</code> オブジェクトでなければなりません。
+                    <classname>Traversable</classname> オブジェクトでなければなりません。
                 </para></listitem>
 
                 <listitem><para>
@@ -325,8 +325,8 @@ $json = (string) $data; // 文字列へのキャスト == JSON へのキャス�
                     それを任意のアイテムに追記します。新しく追加するアイテムの中に、
                     コレクション内の既存のアイテムの identifier
                     と一致するものがある場合は例外が発生します。
-                    <code>$items</code> は、配列あるいは
-                    <code>Traversable</code> オブジェクトでなければなりません。
+                    <varname>$items</varname> は、配列あるいは
+                    <classname>Traversable</classname> オブジェクトでなければなりません。
                 </para></listitem>
 
                 <listitem><para>
@@ -342,7 +342,7 @@ $json = (string) $data; // 文字列へのキャスト == JSON へのキャス�
                     <methodname>getItem($id)</methodname>: 指定した identifier
                     のアイテムをコレクションから取得します。
                     返されるアイテムは連想配列となります。
-                    マッチするアイテムがない場合は、null 値を返します。
+                    マッチするアイテムがない場合は、 <constant>NULL</constant> 値を返します。
                 </para></listitem>
 
                 <listitem><para>

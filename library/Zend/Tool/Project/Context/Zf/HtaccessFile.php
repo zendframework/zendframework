@@ -62,7 +62,7 @@ class HtaccessFile extends \Zend\Tool\Project\Context\Filesystem\File
      */
     public function getContents()
     {
-        $output = <<<EOS
+        $output = <<<'EOS'
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]

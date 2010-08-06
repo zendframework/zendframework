@@ -29,15 +29,15 @@ namespace Zend\GData\Calendar\Extension;
  * Represents the gCal:hidden element used by the Calendar data API
  *
  * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Calendar\Calendar
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\Calendar
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Hidden extends \Zend\GData\Extension\Extension
+class Hidden extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gCal';
@@ -50,7 +50,7 @@ class Hidden extends \Zend\GData\Extension\Extension
      */
     public function __construct($value = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Calendar\Calendar::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Calendar::$namespaces);
         parent::__construct();
         $this->_value = $value;
     }

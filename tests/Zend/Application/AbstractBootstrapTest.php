@@ -22,9 +22,11 @@
 
 namespace ZendTest\Application;
 
+require_once __DIR__ . '/TestAsset/Zf7696Bootstrap.php';
+
 use Zend\Loader\Autoloader,
     Zend\Loader\ResourceAutoloader,
-    Zend\Loader\PluginLoader\PluginLoader,
+    Zend\Loader\PluginLoader,
     Zend\Registry,
     Zend\Application,
     Zend\Application\Resource\AbstractResource;
@@ -81,7 +83,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorShouldPopulateApplication()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $this->assertSame($this->application, $bootstrap->getApplication());
     }
 
@@ -92,21 +94,21 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
             'bar' => 'baz',
         );
         $this->application->setOptions($options);
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $this->assertSame($options, $bootstrap->getOptions());
     }
 
     public function testConstructorShouldAllowPassingAnotherBootstrapObject()
     {
-        $bootstrap1 = new TestAssett\ZfAppBootstrap($this->application);
-        $bootstrap2 = new TestAssett\ZfAppBootstrap($bootstrap1);
+        $bootstrap1 = new TestAsset\ZfAppBootstrap($this->application);
+        $bootstrap2 = new TestAsset\ZfAppBootstrap($bootstrap1);
         $this->assertSame($bootstrap1, $bootstrap2->getApplication());
     }
 
     public function testConstructorShouldRaiseExceptionForInvalidApplicationArgument()
     {
         $this->setExpectedException('Zend\\Application\\BootstrapException');
-        $bootstrap = new TestAssett\ZfAppBootstrap(new \stdClass);
+        $bootstrap = new TestAsset\ZfAppBootstrap(new \stdClass);
     }
 
     public function testSettingOptionsShouldProxyToInternalSetters()
@@ -114,7 +116,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'arbitrary' => 'foo',
         );
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->setOptions($options);
         $this->assertEquals('foo', $bootstrap->getArbitrary());
     }
@@ -130,7 +132,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
                 'bar' => 'baz',
             ),
         );
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->setOptions($options);
         $options2 = array(
             'deep' => array(
@@ -146,7 +148,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testPluginPathsOptionKeyShouldAddPrefixPathsToPluginLoader()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->setOptions(array(
             'pluginPaths' => array(
                 'Foo' => 'foo/bar/path/',
@@ -159,11 +161,11 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testResourcesOptionKeyShouldRegisterBootstrapPluginResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->setOptions(array(
             'resources' => array(
                 'view' => array(
-                    'basePath' => __DIR__ . '/TestAssett/views/scripts',
+                    'basePath' => __DIR__ . '/TestAsset/views/scripts',
                 ),
             ),
         ));
@@ -172,33 +174,33 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testHasOptionShouldReturnFalseWhenOptionUnavailable()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $this->assertFalse($bootstrap->hasOption('foo'));
     }
 
     public function testHasOptionShouldReturnTrueWhenOptionPresent()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->setOptions(array('foo' => 'bar'));
         $this->assertTrue($bootstrap->hasOption('foo'));
     }
 
     public function testGetOptionShouldReturnNullWhenOptionUnavailable()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $this->assertNull($bootstrap->getOption('foo'));
     }
 
     public function testGetOptionShouldReturnOptionValue()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->setOptions(array('foo' => 'bar'));
         $this->assertEquals('bar', $bootstrap->getOption('foo'));
     }
 
     public function testInternalIntializersShouldBeRegisteredAsClassResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $test      = $bootstrap->getClassResources();
         $resources = array('foo' => '_initFoo', 'bar' => '_initBar', 'barbaz' => '_initBarbaz');
         $this->assertEquals($resources, $test);
@@ -206,7 +208,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testInternalInitializersShouldRegisterResourceNames()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $test      = $bootstrap->getClassResourceNames();
         $resources = array('foo', 'bar', 'barbaz');
         $this->assertEquals($resources, $test);
@@ -214,14 +216,14 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterPluginResourceShouldThrowExceptionForInvalidResourceType()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $this->setExpectedException('Zend\Application\BootstrapException');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource(array());
     }
 
     public function testShouldAllowRegisteringConcretePluginResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $resource  = new Application\Resource\View();
         $bootstrap->registerPluginResource($resource);
         $test = $bootstrap->getPluginResource('view');
@@ -230,7 +232,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisteringSecondPluginResourceOfSameTypeShouldOverwrite()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $resource1  = new Application\Resource\View();
         $resource2  = new Application\Resource\View();
         $bootstrap->registerPluginResource($resource1)
@@ -241,15 +243,15 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowRegisteringPluginResourceUsingNameOnly()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource('view');
         $test = $bootstrap->getPluginResource('view');
-        $this->assertEquals('Zend\\Application\\Resource\\View', get_class($test));
+        $this->assertEquals('Zend\Application\Resource\View', get_class($test));
     }
 
     public function testShouldAllowUnregisteringPluginResourcesUsingConcreteInstance()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $resource  = new Application\Resource\View();
         $bootstrap->registerPluginResource($resource);
         $bootstrap->unregisterPluginResource($resource);
@@ -258,15 +260,15 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testAttemptingToUnregisterPluginResourcesUsingInvalidResourceTypeShouldThrowException()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $this->setExpectedException('Zend\Application\BootstrapException');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource('view');
         $bootstrap->unregisterPluginResource(array());
     }
 
     public function testShouldAllowUnregisteringPluginResourcesByName()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource('view');
         $bootstrap->unregisterPluginResource('view');
         $this->assertFalse($bootstrap->hasPluginResource('view'));
@@ -274,13 +276,13 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrievingNonExistentPluginResourceShouldReturnNull()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $this->assertNull($bootstrap->getPluginResource('view'));
     }
 
     public function testRetrievingPluginResourcesShouldRetrieveConcreteInstances()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource('view');
         $test = $bootstrap->getPluginResources();
         foreach ($test as $type => $resource) {
@@ -290,7 +292,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowRetrievingOnlyPluginResourceNames()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource('view');
         $test = $bootstrap->getPluginResourceNames();
         $this->assertEquals(array('view'), $test);
@@ -298,7 +300,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowSettingAlternativePluginLoaderInstance()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $loader    = new PluginLoader();
         $bootstrap->setPluginLoader($loader);
         $this->assertSame($loader, $bootstrap->getPluginLoader());
@@ -306,21 +308,21 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultPluginLoaderShouldRegisterPrefixPathForResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $loader = $bootstrap->getPluginLoader();
-        $paths  = $loader->getPaths('Zend\\Application\\Resource');
+        $paths  = $loader->getPaths('Zend\Application\Resource');
         $this->assertFalse(empty($paths));
     }
 
     public function testEnvironmentShouldMatchApplicationEnvironment()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $this->assertSame($this->application->getEnvironment(), $bootstrap->getEnvironment());
     }
 
     public function testBootstrappingShouldOnlyExecuteEachInitializerOnce()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap('foo');
         $bootstrap->bootstrap('foo');
         $this->assertEquals(1, $bootstrap->fooExecuted);
@@ -331,7 +333,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testBootstrappingIsCaseInsensitive()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap('Foo');
         $bootstrap->bootstrap('Foo');
         $bootstrap->bootstrap('foo');
@@ -341,15 +343,15 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testBootstrappingShouldFavorInternalResourcesOverPlugins()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
-        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\\Application\\TestAssett\\Resource', __DIR__ . '/_files/resources');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
+        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\\Application\\TestAsset\\Resource', __DIR__ . '/_files/resources');
         $bootstrap->bootstrap('foo');
         $this->assertFalse($bootstrap->executedFooResource);
     }
 
     public function testBootstrappingShouldAllowPassingAnArrayOfResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap(array('foo', 'bar'));
         $this->assertEquals(1, $bootstrap->fooExecuted);
         $this->assertEquals(1, $bootstrap->barExecuted);
@@ -357,8 +359,8 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingNoValuesToBootstrapExecutesAllResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
-        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\\Application\\TestAssett\\Resource', __DIR__ . '/TestAssett/resources');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
+        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\\Application\\TestAsset\\Resource', __DIR__ . '/TestAsset/resources');
         $bootstrap->registerPluginResource('foobar');
         set_error_handler(array($this, 'handleError'), E_WARNING);
         $bootstrap->bootstrap();
@@ -370,49 +372,49 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidResourceArgumentToBootstrapShouldThrowException()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $this->setExpectedException('Zend\Application\BootstrapException');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap(new \stdClass);
     }
 
     public function testPassingUnknownResourceToBootstrapShouldThrowException()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $this->setExpectedException('Zend\Application\BootstrapException');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap('bazbat');
     }
 
     public function testCallShouldOverloadToBootstrap()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrapFoo();
         $this->assertEquals(1, $bootstrap->fooExecuted);
     }
 
     public function testCallShouldThrowExceptionForInvalidMethodCall()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $this->setExpectedException('Zend\Application\BootstrapException');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->initFoo();
     }
 
     public function testDependencyTrackingShouldDetectCircularDependencies()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
-        $bootstrap = new TestAssett\BootstrapBaseCircularDependency($this->application);
+        $this->setExpectedException('Zend\Application\BootstrapException');
+        $bootstrap = new TestAsset\BootstrapBaseCircularDependency($this->application);
         $bootstrap->bootstrap();
     }
 
     public function testContainerShouldBeRegistryInstanceByDefault()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $container = $bootstrap->getContainer();
         $this->assertTrue($container instanceof Registry);
     }
 
     public function testContainerShouldAggregateReturnValuesFromClassResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap('barbaz');
         $container = $bootstrap->getContainer();
         $this->assertEquals('Baz', $container->barbaz->baz);
@@ -420,8 +422,8 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testContainerShouldAggregateReturnValuesFromPluginResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
-        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\\Application\\TestAssett\\Resource', __DIR__ . '/TestAssett/resources');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
+        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\Application\TestAsset\Resource', __DIR__ . '/TestAsset/resources');
         $bootstrap->registerPluginResource('baz');
         set_error_handler(array($this, 'handleError'), E_WARNING);
         $bootstrap->bootstrap('baz');
@@ -432,7 +434,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testClassResourcesShouldBeAvailableFollowingBootstrapping()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap('barbaz');
         $this->assertTrue($bootstrap->hasResource('barbaz'));
 
@@ -442,8 +444,8 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testPluginResourcesShouldBeAvailableFollowingBootstrapping()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
-        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\\Application\\TestAssett\\Resource', __DIR__ . '/TestAssett/resources');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
+        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\Application\TestAsset\Resource', __DIR__ . '/TestAsset/resources');
         $bootstrap->registerPluginResource('baz');
         $bootstrap->bootstrap('baz');
 
@@ -454,8 +456,8 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testMagicMethodsForPluginResources()
     {
-        $bootstrap = new TestAssett\ZfAppBootstrap($this->application);
-        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\\Application\\TestAssett\\Resource', __DIR__ . '/TestAssett/resources');
+        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
+        $bootstrap->getPluginLoader()->addPrefixPath('ZendTest\Application\TestAsset\Resource', __DIR__ . '/TestAsset/resources');
         $bootstrap->registerPluginResource('baz');
         $bootstrap->bootstrap('baz');
 
@@ -471,10 +473,10 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'resources' => array(
-                'ZendTest\\Application\\TestAssett\\Resource\\View' => array(),
+                'ZendTest\Application\TestAsset\Resource\View' => array(),
             ),
             'pluginPaths' => array(
-                'ZendTest\\Application\\TestAssett\\Resource' => __DIR__ . '/TestAssett/Resource',
+                'ZendTest\Application\TestAsset\Resource' => __DIR__ . '/TestAsset/Resource',
             ),
         ));
         set_error_handler(array($this, 'handleError'), E_WARNING);
@@ -490,12 +492,12 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'resources' => array(
-                'ZendTest\\Application\\TestAssett\\Resource\\View' => array(),
+                'ZendTest\Application\TestAsset\Resource\View' => array(),
             ),
         ));
         set_error_handler(array($this, 'handleError'));
         $bootstrap = new Application\Bootstrap($this->application);
-        $this->assertTrue($bootstrap->hasPluginResource('ZendTest\\Application\\TestAssett\\Resource\\View'));
+        $this->assertTrue($bootstrap->hasPluginResource('ZendTest\\Application\\TestAsset\\Resource\\View'));
         restore_error_handler();
     }
 
@@ -506,13 +508,16 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'resources' => array(
-                'ZendTest\\Application\\TestAssett\\Resource\\View' => array(),
+                'ZendTest\Application\TestAsset\Resource\View' => array(),
             ),
         ));
+        set_error_handler(array($this, 'handleError'));
         $bootstrap = new Application\Bootstrap($this->application);
-        $bootstrap->bootstrap('ZendTest\\Application\\TestAssett\\Resource\\View');
-        $resource = $bootstrap->getResource('ZendTest\\Application\\TestAssett\\Resource\\View');
-        $this->assertTrue($resource instanceof View, var_export(array_keys($bootstrap->getPluginResources()), 1));
+        $bootstrap->bootstrap('ZendTest\Application\TestAsset\Resource\View');
+        $resource = $bootstrap->getResource('ZendTest\Application\TestAsset\Resource\View');
+        $this->assertTrue($resource instanceof \ZendTest\Application\TestAsset\Resource\View,
+            var_export(array_keys($bootstrap->getPluginResources()), 1));
+        restore_error_handler();
     }
 
     /**
@@ -522,18 +527,21 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'resources' => array(
-                'ZendTest\\Application\\TestAssett\\Resource\\View' => array(),
+                'ZendTest\Application\TestAsset\Resource\View' => array(),
                 'view' => array(),
             ),
         ));
+        set_error_handler(array($this, 'handleError'));
         $bootstrap = new Application\Bootstrap($this->application);
-        $bootstrap->bootstrap('ZendTest\\Application\\TestAssett\\Resource\\View');
-        $resource1 = $bootstrap->getResource('ZendTest\\Application\\TestAssett\\Resource\\View');
+        $bootstrap->bootstrap('ZendTest\Application\TestAsset\Resource\View');
+        $resource1 = $bootstrap->getResource('ZendTest\Application\TestAsset\Resource\View');
         $bootstrap->bootstrap('view');
         $resource2 = $bootstrap->getResource('view');
         $this->assertNotSame($resource1, $resource2);
-        $this->assertTrue($resource1 instanceof View, var_export(array_keys($bootstrap->getPluginResources()), 1));
+        $this->assertTrue($resource1 instanceof \ZendTest\Application\TestAsset\Resource\View,
+            var_export(array_keys($bootstrap->getPluginResources()), 1));
         $this->assertTrue($resource2 instanceof \Zend\View\View);
+        restore_error_handler();
     }
 
     /**
@@ -543,10 +551,11 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'resources' => array(
-                'ZendTest\\Application\\Layout' => array(),
+                'ZendTest\Application\Layout' => array(),
                 'layout' => array(),
             ),
         ));
+        set_error_handler(array($this, 'handleError'));
         $bootstrap = new Application\Bootstrap($this->application);
         $bootstrap->bootstrap('BootstrapAbstractTestLayout');
         $resource1 = $bootstrap->getResource('BootstrapAbstractTestLayout');
@@ -555,6 +564,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($resource1, $resource2);
         $this->assertTrue($resource1 instanceof Layout, var_export(array_keys($bootstrap->getPluginResources()), 1));
         $this->assertTrue($resource2 instanceof \Zend\Layout\Layout);
+        restore_error_handler();
     }
 
     /**
@@ -564,7 +574,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->setOptions(array(
             'pluginPaths' => array(
-                'ZendTest\\Application' => __DIR__,
+                'ZendTest\Application' => __DIR__,
             ),
             'resources' => array(
                 'Foo' => array(),
@@ -602,17 +612,19 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         // Using namesapce 'zabt' to prevent conflict with Zend namespace
         $rl = new ResourceAutoloader(array(
             'namespace' => 'Zabt',
-            'basePath'  => __DIR__ . '/TestAssett',
+            'basePath'  => __DIR__ . '/TestAsset',
         ));
         $rl->addResourceType('resources', 'resources', 'Resource');
         $options = array(
             'resources' => array(
-                'Zabt\\Resource\\Autoloaded' => array('bar' => 'baz')
+                'Zabt\Resource\Autoloaded' => array('bar' => 'baz')
             ),
         );
+        set_error_handler(array($this, 'handleError'));
         $this->application->setOptions($options);
         $bootstrap = new Application\Bootstrap($this->application);
         $bootstrap->bootstrap();
+        restore_error_handler();
     }
 
     /**
@@ -641,9 +653,49 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingSameBootstrapAsApplicationShouldNotCauseRecursion()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
+        $this->setExpectedException('Zend\Application\BootstrapException');
         $bootstrap = new Application\Bootstrap($this->application);
         $bootstrap->setApplication($bootstrap);
+    }
+    
+    /**
+     * @group ZF-7696
+     */
+    public function testUsingFallbackAutoloaderWithModulesShouldNotResultInFrontcontrollerNotFoundWarning()
+    {
+        $this->autoloader->setFallbackAutoloader(true);
+        $options = array(
+            'Resources' => array(
+                'modules' => array(),
+            ),
+        );
+        $this->application->setOptions($options);
+        $bootstrap = new \Zf7696Bootstrap($this->application);
+        $bootstrap->bootstrap(array('modules'));
+    }
+
+    /**
+     * @group ZF-10199
+     */
+    public function testHasOptionShouldTreatOptionKeysAsCaseInsensitive()
+    {
+        $application = $this->application;
+        $application->setOptions(array(
+            'fooBar' => 'baz',
+        ));
+        $this->assertTrue($application->getBootstrap()->hasOption('FooBar'));
+    }
+
+    /**
+     * @group ZF-10199
+     */
+    public function testGetOptionShouldTreatOptionKeysAsCaseInsensitive()
+    {
+        $application = $this->application;
+        $application->setOptions(array(
+            'fooBar' => 'baz',
+        ));
+        $this->assertEquals('baz', $application->getBootstrap()->getOption('FooBar'));
     }
 }
 

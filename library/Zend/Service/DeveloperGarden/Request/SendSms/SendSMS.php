@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+ * @uses       Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_SendSms_SendSMS
-    extends Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+    extends Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
 {
     /**
      * this is the sms type

@@ -19,17 +19,19 @@
     <para>
         Each instance of <classname>Zend_Session_Namespace</classname> corresponds to an entry of
         the <varname>$_SESSION</varname> superglobal array, where the namespace is used as the key.
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace corresponds to $_SESSION['myNamespace']
 ]]></programlisting>
 
-        It is possible to use Zend_Session in conjunction with other code that uses
-        <varname>$_SESSION</varname> directly. To avoid problems, however, it is highly recommended
-        that such code only uses parts of <varname>$_SESSION</varname> that do not correspond to
-        instances of <classname>Zend_Session_Namespace</classname>.
+    <para>
+        It is possible to use <classname>Zend_Session</classname> in conjunction with other code
+        that uses <varname>$_SESSION</varname> directly. To avoid problems, however, it is highly
+        recommended that such code only uses parts of <varname>$_SESSION</varname> that do not
+        correspond to instances of <classname>Zend_Session_Namespace</classname>.
     </para>
 
     <sect2 id="zend.session.basic_usage.basic_examples">
@@ -138,9 +140,10 @@ foreach ($aNamespace as $index => $value) {
             <classname>Zend_Session_Namespace</classname> implements the
             <methodname>__get()</methodname>, <methodname>__set()</methodname>,
             <methodname>__isset()</methodname>, and <methodname>__unset()</methodname> <ulink
-                url="http://www.php.net/manual/en/language.oop5.overloading.php">magic methods</ulink>,
-            which should not be invoked directly, except from within a subclass. Instead, the normal
-            operators automatically invoke these methods, such as in the following example:
+                url="http://www.php.net/manual/en/language.oop5.overloading.php">magic
+                methods</ulink>, which should not be invoked directly, except from within a
+            subclass. Instead, the normal operators automatically invoke these methods, such as in
+            the following example:
         </para>
 
         <example id="zend.session.basic_usage.accessors.example">

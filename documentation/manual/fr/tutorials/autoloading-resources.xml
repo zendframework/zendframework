@@ -6,16 +6,21 @@
 
     <para>
         En développant des applications, il est souvent difficile de regrouper certaines classes
-        dans une relation 1:1 avec le système de fichiers que recommande le Zend framework, ou alors
-        ça ne semble pas intuitif de le faire. Cela signifie que les classes ne seront pas trouvées
+        dans une relation 1:1 avec le système de fichiers que recommande le Zend framework, ou
+        alors
+        ça ne semble pas intuitif de le faire. Cela signifie que les classes ne seront pas
+        trouvées
         par l'autoloader.
     </para>
 
     <para>
-        Si vous lisez <link linkend="learning.autoloading.design">les caractéristiques de l'architecture
-        </link> de l'autoloader, le dernier point de cette section indique qu'une solution existe pour
+        Si vous lisez <link linkend="learning.autoloading.design">les caractéristiques de
+            l'architecture
+        </link>
+         de l'autoloader, le dernier point de cette section indique qu'une solution existe pour
         un tel problème. Zend Framework utilise alors <classname>Zend_Loader_Autoloader_Resource
-        </classname>.
+        </classname>
+        .
     </para>
 
     <para>
@@ -66,9 +71,11 @@ $loader = new Zend_Loader_Autoloader_Resource(array(
         Puis, nous définissons des types de ressources.
         <methodname>Zend_Loader_Autoloader_Resourse::addResourceType()</methodname> prend trois
         arguments: le "type" de resource (une chaine arbitraire), le chemin sous le chemin de base
-        dans lequel le type de ressource doit se trouver, et le préfixe particulier à utiliser pour
+        dans lequel le type de ressource doit se trouver, et le préfixe particulier à utiliser
+        pour
         ce type de ressource. Dans l'arbre représenté ci-dessus, il y a trois types : form
-        (dans le sous-dossier "forms", avec un préfixe "Form"), model (dans le sous-dossier "models",
+        (dans le sous-dossier "forms", avec un préfixe "Form"), model (dans le sous-dossier
+        "models",
         avec un préfixe "Model"), et dbtable (dans le sous-dossier
         "<filename>models/DbTable</filename>", avec un préfixe "<classname>Model_DbTable</classname>").
         Nous les définirons comme ceci:
@@ -93,17 +100,25 @@ $guestbook = new Foo_Model_Guestbook();
         <title>Autoload de ressource Module</title>
 
         <para>
-            La couche <acronym>MVC</acronym> de Zend Framework encourage l'utilisation de "modules",
-            qui sont des mini-applications de votre site. Les modules possèdent typiquement des
+            La couche <acronym>MVC</acronym> de Zend Framework encourage l'utilisation de
+            "modules",            qui sont des mini-applications de votre site. Les modules
+            possèdent typiquement des
             types de ressource par défaut, et Zend Framework
             <link linkend="project-structure.filesystem">recommande une hiérarchie de répertoires
-            standard pour les modules</link>. Les autoloaders de ressources sont particulièrement
-            adaptés à cette situation -- tellement qu'ils sont activés par défaut lorsque vous créez
+                standard pour les modules
+            </link>
+            .Les autoloaders de ressources sont particulièrement
+            adaptés à cette situation -- tellement qu'ils sont activés par défaut lorsque vous
+            créez
             des classes de bootstrap qui étendent
-            <classname>Zend_Application_Module_Bootstrap</classname>. Pour plus d'informations, lisez
+            <classname>Zend_Application_Module_Bootstrap</classname>. Pour plus d'informations,
+            lisez
             la <link
-                linkend="zend.loader.autoloader-resource.module">documentation de
-                Zend_Loader_Autoloader_Module</link>.
+                linkend="zend.loader.autoloader-resource.module">documentation
+                de
+                Zend_Loader_Autoloader_Module
+            </link>
+            .
         </para>
     </note>
 </sect1>

@@ -28,15 +28,15 @@ namespace Zend\GData\YouTube\Extension;
 /**
  * Represents the yt:token element used by the YouTube data API
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Token extends \Zend\GData\App\Extension\Extension
+class Token extends \Zend\GData\App\Extension
 {
 
     protected $_rootNamespace = 'yt';
@@ -47,7 +47,7 @@ class Token extends \Zend\GData\App\Extension\Extension
      */
     public function __construct($text = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\YouTube\YouTube::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\YouTube::$namespaces);
         parent::__construct();
         $this->_text = $text;
     }

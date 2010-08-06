@@ -22,9 +22,9 @@
 
 namespace ZendTest\Locale;
 
-use \Zend\Locale\Math\Math,
-    \Zend\Locale\Math\PhpMath,
-    \Zend\Locale\Math\Exception as MathException;
+use \Zend\Locale\Math,
+    \Zend\Locale\PhpMath,
+    \Zend\Locale\MathException;
 
 /**
  * @category   Zend

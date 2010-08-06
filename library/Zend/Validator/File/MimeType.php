@@ -53,7 +53,7 @@ class MimeType extends Validator\AbstractValidator
     protected $_messageTemplates = array(
         self::FALSE_TYPE   => "File '%value%' has a false mimetype of '%type%'",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
-        self::NOT_READABLE => "File '%value%' can not be read",
+        self::NOT_READABLE => "File '%value%' is not readable or does not exist",
     );
 
     /**
@@ -156,7 +156,6 @@ class MimeType extends Validator\AbstractValidator
             if (!empty($_ENV['MAGIC'])) {
                 $this->setMagicFile($_ENV['MAGIC']);
             } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
-
                 foreach ($this->_magicFiles as $file) {
                     // supressing errors which are thrown due to openbase_dir restrictions
                     try {
@@ -199,7 +198,7 @@ class MimeType extends Validator\AbstractValidator
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             $this->_finfo = @finfo_open($const, $file);
-            if ($this->_finfo === false) {
+            if (empty($this->_finfo)) {
                 $this->_finfo = null;
                 throw new Validator\Exception('The given magicfile is not accepted by finfo');
             } else {
@@ -331,19 +330,18 @@ class MimeType extends Validator\AbstractValidator
         $mimefile = $this->getMagicFile();
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-            if (!empty($mimefile) && !empty($this->_finfo)) {
+            if (!empty($mimefile) && empty($this->_finfo)) {
                 $this->_finfo = @finfo_open($const, $mimefile);
             }
 
-            if ($this->_finfo === false) {
+            if (empty($this->_finfo)) {
                 $this->_finfo = @finfo_open($const);
             }
 
-            if ($this->_finfo !== false) {
+            $this->_type = null;
+            if (!empty($this->_finfo)) {
                 $this->_type = finfo_file($this->_finfo, $value);
             }
-
-            unset($this->_finfo);
         }
 
         if (empty($this->_type) &&

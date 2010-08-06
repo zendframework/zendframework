@@ -29,15 +29,15 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:name element used by the API.
  * This indicates the URL-usable name for an album.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Name extends \Zend\GData\Extension\Extension
+class Name extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gphoto';
@@ -50,7 +50,7 @@ class Name extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Photos\Photos::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Photos::$namespaces);
         parent::__construct();
         $this->setText($text);
     }

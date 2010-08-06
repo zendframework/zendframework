@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * The YouTube video flavor of an Atom Feed with media support
  *
  * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\VideoEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -45,7 +47,7 @@ class VideoFeed extends \Zend\GData\Media\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\YouTube\VideoEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\VideoEntry';
 
     /**
      * Creates a Video feed, representing a list of videos

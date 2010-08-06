@@ -50,7 +50,5 @@ abstract class Scalar extends XmlRpcValue
                   ->openElement($this->_type, $this->_value)
                   ->closeElement($this->_type)
                   ->closeElement('value');
-
-        $this->_xml = (string)$generator;
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 22397 -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base の使用法</title>
     <para>
@@ -23,7 +23,7 @@
         snippets フィードにはすべての Google Base のデータが含まれ、
         認証なしで誰でも問い合わせることができます。
         customer items フィードは特定の顧客に特化したデータの一部で、
-        そのカスタマー/オーナーだけがフィードにアクセスしてデータを追加、更新、削除することができます。
+        そのカスタマー/オーナーだけがフィードにアクセスしてデータを追加、更新、削除できます。
         どちらのフィードに対しても、クエリの作成方法は同じです。
     </para>
     <para>
@@ -49,7 +49,7 @@
             <title>認証</title>
             <para>
                 Google Base <acronym>API</acronym> は、公開 (public) フィードと非公開 (private)
-                フィードの両方にアクセスすることができます。
+                フィードの両方にアクセスできます。
                 公開フィードへのアクセスには認証は不要です。
                 しかし読み込み専用のアクセスとなり、機能も制限されます。
                 非公開フィードに対してはほぼすべての機能を使用できますが、
@@ -189,7 +189,7 @@ function getAuthSubHttpClient()
     }
 
     // この時点で AuthSub による認証がすんでおり、
-    // 認証済みの HTTP クライアントのインスタンスを取得することができます
+    // 認証済みの HTTP クライアントのインスタンスを取得できます
 
     // 認証済みの HTTP クライアントを作成します
     $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['sessionToken']);
@@ -207,18 +207,21 @@ session_start();
 // AuthSub サーバにリダイレクトします
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 ]]></programlisting>
-<para>最後に、snippets フィード用の未認証のサーバを作成する方法を示します。</para>
-<programlisting language="php"><![CDATA[
+
+            <para>最後に、snippets フィード用の未認証のサーバを作成する方法を示します。</para>
+
+            <programlisting language="php"><![CDATA[
 // Base サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
+
         </sect3>
     </sect2>
     <sect2 id="zend.gdata.gbase.retrieve">
         <title>アイテムの取得</title>
         <para>
             customer items フィードや snippets フィードに問い合わせて、
-            アイテムを取得することができます。
+            アイテムを取得できます。
             これは、まずクエリを送信して
             返ってきたフィードを順に取得するという二段階の手順で行います。
         </para>
@@ -284,8 +287,8 @@ $feed = $service->getGbaseSnippetFeed($query);
         <sect3 id="zend.gdata.gbase.retrieve.iterate">
             <title>アイテムに対する順次処理</title>
             <para>
-                Google Base のアイテムには、<code>&lt;g:main_ingredient&gt;</code>
-                や <code>&lt;g:weight&gt;</code> といったアイテム固有の属性が含まれています。
+                Google Base のアイテムには、<emphasis>&lt;g:main_ingredient&gt;</emphasis>
+                や <emphasis>&lt;g:weight&gt;</emphasis> といったアイテム固有の属性が含まれています。
             </para>
             <para>
                 指定したアイテムのすべての属性を順に処理するには、
@@ -370,7 +373,7 @@ $createdEntry = $service->insertGbaseItem($newEntry, $dryRun);
         <sect3 id="zend.gdata.gbase.crud.modify">
             <title>アイテムの変更</title>
             <para>
-                アイテムの各属性要素の値を変更することができます。
+                アイテムの各属性要素の値を変更できます。
             </para>
             <programlisting language="php"><![CDATA[
 // タイトルを更新します

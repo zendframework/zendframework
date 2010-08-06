@@ -31,14 +31,14 @@ namespace Zend\GData\App;
  * in the config as $config['logfile'].  Requests and responses are logged after
  * they are sent and received/processed, thus an error could prevent logging.
  *
- * @uses       \Zend\HTTP\Client\Adapter\Socket
+ * @uses       \Zend\Http\Client\Adapter\Socket
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LoggingHttpClientAdapterSocket extends \Zend\HTTP\Client\Adapter\Socket
+class LoggingHttpClientAdapterSocket extends \Zend\Http\Client\Adapter\Socket
 {
 
     /**

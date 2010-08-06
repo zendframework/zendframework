@@ -71,31 +71,37 @@ class Logger implements Factory
      *
      * @var string
      */
-    protected $_defaultWriterNamespace = '\\Zend\\Log\\Writer';
+    protected $_defaultWriterNamespace = 'Zend\Log\Writer';
 
     /**
      *
      * @var string
      */
-    protected $_defaultFilterNamespace = '\\Zend\\Log\\Filter';
+    protected $_defaultFilterNamespace = 'Zend\Log\Filter';
 
     /**
      *
      * @var callback
      */
     protected $_origErrorHandler       = null;
-    
+
     /**
      *
      * @var boolean
      */
     protected $_registeredErrorHandler = false;
-    
+
     /**
      *
      * @var array
      */
     protected $_errorHandlerMap        = false;
+
+    /**
+     *
+     * @var string
+     */
+    protected $_timestampFormat        = 'c';
 
     /**
      * Class constructor.  Create a new logger
@@ -154,6 +160,9 @@ class Logger implements Factory
         $writer = $this->_constructFromConfig('writer', $config, $this->_defaultWriterNamespace);
 
         if (!$writer instanceof Writer) {
+            $writerName = is_object($writer)
+                        ? get_class($writer)
+                        : 'The specified writer';
             throw new Exception("{$writerName} does not extend Zend\\Log\\Writer!");
         }
 
@@ -176,6 +185,9 @@ class Logger implements Factory
         $filter = $this->_constructFromConfig('filter', $config, $this->_defaultFilterNamespace);
 
         if (!$filter instanceof Filter) {
+             $filterName = is_object($filter)
+                         ? get_class($filter)
+                         : 'The specified filter';
             throw new Exception("{$filterName} does not implement Zend\\Log\\Filter");
         }
 
@@ -209,13 +221,13 @@ class Logger implements Factory
         }
 
         $reflection = new \ReflectionClass($className);
-        if (!$reflection->implementsInterface('\\Zend\\Log\\Factory')) {
+        if (!$reflection->implementsInterface('Zend\Log\Factory')) {
             throw new Exception(
-                'Driver does not implement Zend\\Log\\Factory and can not be constructed from config.'
+                'Driver does not implement Zend\Log\Factory and can not be constructed from config.'
             );
         }
 
-        return call_user_func(array($className, 'factory'), $params);
+        return $className::factory($params);
     }
 
     /**
@@ -252,7 +264,7 @@ class Logger implements Factory
     protected function _packEvent($message, $priority)
     {
         return array_merge(array(
-            'timestamp'    => date('c'),
+            'timestamp'    => date($this->_timestampFormat),
             'message'      => $message,
             'priority'     => $priority,
             'priorityName' => $this->_priorities[$priority]
@@ -374,11 +386,12 @@ class Logger implements Factory
         $name = strtoupper($name);
 
         if (isset($this->_priorities[$priority])
-            || array_search($name, $this->_priorities)) {
+            || false !== array_search($name, $this->_priorities)) {
             throw new Exception('Existing priorities cannot be overwritten');
         }
 
         $this->_priorities[$priority] = $name;
+        return $this;
     }
 
     /**
@@ -402,6 +415,7 @@ class Logger implements Factory
         }
 
         $this->_filters[] = $filter;
+        return $this;
     }
 
     /**
@@ -425,6 +439,7 @@ class Logger implements Factory
         }
 
         $this->_writers[] = $writer;
+        return $this;
     }
 
     /**
@@ -434,11 +449,12 @@ class Logger implements Factory
      * @param  $value   Value of the field
      * @return void
      */
-    public function setEventItem($name, $value) 
+    public function setEventItem($name, $value)
     {
         $this->_extras = array_merge($this->_extras, array($name => $value));
+        return $this;
     }
-    
+
     /**
      * Register Logging system as an error handler to log php errors
      * Note: it still calls the original error handler if set_error_handler is able to return it.
@@ -457,12 +473,12 @@ class Logger implements Factory
     public function registerErrorHandler()
     {
         // Only register once.  Avoids loop issues if it gets registered twice.
-        if ($this->_registeredErrorHandler) { 
-        	return $this; 
+        if ($this->_registeredErrorHandler) {
+        	return $this;
         }
-        
+
         $this->_origErrorHandler = set_error_handler(array($this, 'errorHandler'));
-        
+
         // Contruct a default map of phpErrors to Zend_Log priorities.
         // Some of the errors are uncatchable, but are included for completeness
         $this->_errorHandlerMap = array(
@@ -483,7 +499,7 @@ class Logger implements Factory
         $this->_registeredErrorHandler = true;
         return $this;
     }
-    
+
     /**
      * Error Handler will convert error into log message, and then call the original error handler
      *
@@ -498,7 +514,7 @@ class Logger implements Factory
     public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
     {
         $errorLevel = error_reporting();
-        
+
         if ($errorLevel && $errno) {
             if (isset($this->_errorHandlerMap[$errno])) {
                 $priority = $this->_errorHandlerMap[$errno];
@@ -507,10 +523,32 @@ class Logger implements Factory
             }
             $this->log($errstr, $priority, array('errno'=>$errno, 'file'=>$errfile, 'line'=>$errline, 'context'=>$errcontext));
         }
-        
+
         if ($this->_origErrorHandler !== null) {
             return call_user_func($this->_origErrorHandler, $errno, $errstr, $errfile, $errline, $errcontext);
         }
         return false;
+    }
+
+    /**
+     * Set timestamp format for log entries.
+     *
+     * @param string $format
+     * @return Zend\Log\Logger
+     */
+    public function setTimestampFormat($format)
+    {
+        $this->_timestampFormat = $format;
+        return $this;
+    }
+
+    /**
+     * Get timestamp format used for log entries.
+     *
+     * @return string
+     */
+    public function getTimestampFormat()
+    {
+        return $this->_timestampFormat;
     }
 }

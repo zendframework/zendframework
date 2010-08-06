@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
-use Zend\CodeGenerator\PHP;
+use Zend\CodeGenerator\Php;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -32,9 +32,9 @@ use Zend\CodeGenerator\PHP;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\PHP\PHPClass
- * @uses       \Zend\CodeGenerator\PHP\PHPFile
- * @uses       \Zend\CodeGenerator\PHP\PHPMethod
+ * @uses       \Zend\CodeGenerator\Php\PhpClass
+ * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\CodeGenerator\Php\PhpMethod
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -109,17 +109,17 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
      */
     public function getContents()
     {
-        $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '_' : '';
+        $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '\\' : '';
         $className .= ucfirst($this->_controllerName) . 'Controller';
         
-        $codeGenFile = new PHP\PHPFile(array(
+        $codeGenFile = new Php\PhpFile(array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new PHP\PHPClass(array(
+                new Php\PhpClass(array(
                     'name' => $className,
-                    'extendedClass' => 'Zend_Controller_Action',
+                    'extendedClass' => 'Zend\Controller\Action',
                     'methods' => array(
-                        new PHP\PHPMethod(array(
+                        new Php\PhpMethod(array(
                             'name' => 'init',
                             'body' => '/* Initialize action controller here */',
                         	))
@@ -131,56 +131,56 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
 
         if ($className == 'ErrorController') {
 
-            $codeGenFile = new PHP\PHPFile(array(
+            $codeGenFile = new Php\PhpFile(array(
                 'fileName' => $this->getPath(),
                 'classes' => array(
-                    new PHP\PHPClass(array(
+                    new Php\PhpClass(array(
                         'name' => $className,
-                        'extendedClass' => 'Zend_Controller_Action',
+                        'extendedClass' => 'Zend\Controller\Action',
                         'methods' => array(
-                            new PHP\PHPMethod(array(
+                            new Php\PhpMethod(array(
                                 'name' => 'errorAction',
-                                'body' => <<<EOS
-\$errors = \$this->_getParam('error_handler');
+                                'body' => <<<'EOS'
+$errors = $this->_getParam('error_handler');
 
-switch (\$errors->type) {
-    case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
-    case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
-    case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+switch ($errors->type) {
+    case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ROUTE:
+    case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_CONTROLLER:
+    case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ACTION:
 
         // 404 error -- controller or action not found
-        \$this->getResponse()->setHttpResponseCode(404);
-        \$this->view->message = 'Page not found';
+        $this->getResponse()->setHttpResponseCode(404);
+        $this->view->message = 'Page not found';
         break;
     default:
         // application error
-        \$this->getResponse()->setHttpResponseCode(500);
-        \$this->view->message = 'Application error';
+        $this->getResponse()->setHttpResponseCode(500);
+        $this->view->message = 'Application error';
         break;
 }
 
 // Log exception, if logger available
-if (\$log = \$this->getLog()) {
-    \$log->crit(\$this->view->message, \$errors->exception);
+if (($log = $this->getLog())) {
+    $log->crit($this->view->message, $errors->exception);
 }
 
 // conditionally display exceptions
-if (\$this->getInvokeArg('displayExceptions') == true) {
-    \$this->view->exception = \$errors->exception;
+if ($this->getInvokeArg('displayExceptions') == true) {
+    $this->view->exception = $errors->exception;
 }
 
-\$this->view->request   = \$errors->request;
+$this->view->request = $errors->request;
 EOS
                                 )),
-                            new PHP\PHPMethod(array(
+                            new Php\PhpMethod(array(
                                 'name' => 'getLog',
-                                'body' => <<<EOS
-\$bootstrap = \$this->getInvokeArg('bootstrap');
-if (!\$bootstrap->hasPluginResource('Log')) {
+                                'body' => <<<'EOS'
+$bootstrap = $this->getInvokeArg('bootstrap');
+if (!$bootstrap->hasPluginResource('Log')) {
     return false;
 }
-\$log = \$bootstrap->getResource('Log');
-return \$log;
+$log = $bootstrap->getResource('Log');
+return $log;
 EOS
                                 )),
                             )
@@ -191,7 +191,7 @@ EOS
         }
 
         // store the generator into the registry so that the addAction command can use the same object later
-        PHP\PHPFile::registerFileCodeGenerator($codeGenFile); // REQUIRES filename to be set
+        Php\PhpFile::registerFileCodeGenerator($codeGenFile); // REQUIRES filename to be set
         return $codeGenFile->generate();
     }
 
@@ -210,11 +210,11 @@ EOS
     /**
      * getCodeGenerator()
      *
-     * @return \Zend\CodeGenerator\PHP\PHPClass
+     * @return \Zend\CodeGenerator\Php\PhpClass
      */
     public function getCodeGenerator()
     {
-        $codeGenFile = PHP\PHPFile::fromReflectedFileName($this->getPath());
+        $codeGenFile = Php\PhpFile::fromReflectedFileName($this->getPath());
         $codeGenFileClasses = $codeGenFile->getClasses();
         $class = array_shift($codeGenFileClasses);
         return $class;

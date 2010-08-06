@@ -20,12 +20,17 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Element_MultiselectTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_MultiselectTest::main");
-}
+namespace ZendTest\Form\Element;
 
-
+use Zend\Form\Element\Multiselect as MultiselectElement,
+    Zend\Form\Element\Multi as MultiElement,
+    Zend\Form\Element\Xhtml as XhtmlElement,
+    Zend\Form\Element,
+    Zend\Form\Decorator,
+    Zend\Config\Xml as XMLConfig,
+    Zend\Config\Ini as INIConfig,
+    Zend\Translator\Translator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Element_Multiselect
@@ -37,19 +42,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
+class MultiselectTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_MultiselectTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -58,39 +52,28 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->element = new Zend_Form_Element_Multiselect('foo');
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->element = new MultiselectElement('foo');
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper/');
+        $view = new View();
         return $view;
     }
 
     public function testMultiselectElementInstanceOfMultiElement()
     {
-        $this->assertTrue($this->element instanceof Zend_Form_Element_Multi);
+        $this->assertTrue($this->element instanceof MultiElement);
     }
 
     public function testMultiselectElementInstanceOfXhtmlElement()
     {
-        $this->assertTrue($this->element instanceof Zend_Form_Element_Xhtml);
+        $this->assertTrue($this->element instanceof XhtmlElement);
     }
 
     public function testMultiselectElementInstanceOfBaseElement()
     {
-        $this->assertTrue($this->element instanceof Zend_Form_Element);
+        $this->assertTrue($this->element instanceof Element);
     }
 
     public function testMultiselectElementIsAnArrayByDefault()
@@ -100,10 +83,8 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
 
     public function testMultiselectElementUsesSelectHelperInViewHelperDecoratorByDefault()
     {
-        $this->_checkZf2794();
-
         $decorator = $this->element->getDecorator('viewHelper');
-        $this->assertTrue($decorator instanceof Zend_Form_Decorator_ViewHelper);
+        $this->assertTrue($decorator instanceof Decorator\ViewHelper);
         $decorator->setElement($this->element);
         $helper = $decorator->getHelper();
         $this->assertEquals('formSelect', $helper);
@@ -148,7 +129,7 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2824
+     * @group ZF-2824
      */
     public function testCanSetMultiOptionsUsingAssocArraysWithKeyValueKeys()
     {
@@ -173,17 +154,17 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2824
+     * @group ZF-2824
      */
     public function testCanSetMultiOptionsUsingConfigWithKeyValueKeys()
     {
-        $config = new Zend_Config_Xml(dirname(__FILE__) . '/../_files/config/multiOptions.xml', 'testing');
+        $config = new XMLConfig(__DIR__ . '/../TestAsset/config/multiOptions.xml', 'testing');
         $this->element->setMultiOptions($config->options->toArray());
         $this->assertEquals($config->options->first->value, $this->element->getMultiOption('aa'));
         $this->assertEquals($config->options->second->value, $this->element->getMultiOption(2));
         $this->assertEquals($config->options->third->value, $this->element->getMultiOption('ssss'));
 
-        $config = new Zend_Config_Ini(dirname(__FILE__) . '/../_files/config/multiOptions.ini', 'testing');
+        $config = new INIConfig(__DIR__ . '/../TestAsset/config/multiOptions.ini', 'testing');
         $this->element->setMultiOptions($config->options->toArray());
         $this->assertEquals($config->options->first->value, $this->element->getMultiOption('aa'));
         $this->assertEquals($config->options->second->value, $this->element->getMultiOption(2));
@@ -219,7 +200,7 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
             'ThisShouldNotShow'   => 'Foo Value',
             'ThisShouldNeverShow' => 'Bar Value'
         );
-        $translate = new Zend_Translate('array', $translations, 'en');
+        $translate = new Translator('ArrayAdapter', $translations, 'en');
         $translate->setLocale('en');
 
         $options = array(
@@ -239,8 +220,8 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLabelsAreTranslatedWhenTranslateAdapterIsPresent()
     {
-        $translations = include dirname(__FILE__) . '/../_files/locale/array.php';
-        $translate    = new Zend_Translate('array', $translations, 'en');
+        $translations = include __DIR__ . '/../TestAsset/locale/array.php';
+        $translate    = new Translator('ArrayAdapter', $translations, 'en');
         $translate->setLocale('en');
 
         $options = array(
@@ -260,8 +241,8 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLabelsAreUntouchedIfTranslatonDoesNotExistInnTranslateAdapter()
     {
-        $translations = include dirname(__FILE__) . '/../_files/locale/array.php';
-        $translate    = new Zend_Translate('array', $translations, 'en');
+        $translations = include __DIR__ . '/../TestAsset/locale/array.php';
+        $translate    = new Translator('ArrayAdapter', $translations, 'en');
         $translate->setLocale('en');
 
         $options = array(
@@ -290,7 +271,7 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
             'ThisShouldNotShow'   => 'Foo Value',
             'ThisShouldNeverShow' => 'Bar Value'
         );
-        $translate = new Zend_Translate('array', $translations, 'en');
+        $translate = new Translator('ArrayAdapter', $translations, 'en');
         $translate->setLocale('en');
 
         $options = array(
@@ -322,22 +303,4 @@ class Zend_Form_Element_MultiselectTest extends PHPUnit_Framework_TestCase
         $test = $this->element->getMultiOption('foovalue');
         $this->assertEquals($options['foovalue'], $test);
     }
-
-    /**
-     * Used by test methods susceptible to ZF-2794, marks a test as incomplete
-     *
-     * @link   http://framework.zend.com/issues/browse/ZF-2794
-     * @return void
-     */
-    protected function _checkZf2794()
-    {
-        if (strtolower(substr(PHP_OS, 0, 3)) == 'win' && version_compare(PHP_VERSION, '5.1.4', '=')) {
-            $this->markTestIncomplete('Error occurs for PHP 5.1.4 on Windows');
-        }
-    }
-}
-
-// Call Zend_Form_Element_MultiselectTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_MultiselectTest::main") {
-    Zend_Form_Element_MultiselectTest::main();
 }

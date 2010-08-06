@@ -25,7 +25,7 @@
 namespace Zend\OAuth\Config;
 use Zend\OAuth\Config as OAuthConfig,
     Zend\OAuth,
-    Zend\URI;
+    Zend\Uri;
 
 /**
  * @uses       Zend\OAuth\OAuth
@@ -130,7 +130,7 @@ class StandardConfig implements OAuthConfig
      * If relevant, a PEM encoded RSA private key encapsulated as a
      * Zend_Crypt_Rsa Key
      *
-     * @var \Zend\Crypt\RSA\PrivateKey
+     * @var \Zend\Crypt\Rsa\PrivateKey
      */
     protected $_rsaPrivateKey = null;
 
@@ -138,7 +138,7 @@ class StandardConfig implements OAuthConfig
      * If relevant, a PEM encoded RSA public key encapsulated as a
      * Zend_Crypt_Rsa Key
      *
-     * @var \Zend\Crypt\RSA\PublicKey
+     * @var \Zend\Crypt\Rsa\PublicKey
      */
     protected $_rsaPublicKey = null;
 
@@ -159,7 +159,7 @@ class StandardConfig implements OAuthConfig
      */
     public function __construct($options = null)
     {
-        if (!is_null($options)) {
+        if ($options !== null) {
             if ($options instanceof \Zend\Config\Config) {
                 $options = $options->toArray();
             }
@@ -294,7 +294,7 @@ class StandardConfig implements OAuthConfig
                 . $method
                 . '. Supported are HMAC-SHA1, RSA-SHA1, PLAINTEXT and HMAC-SHA256');
         }
-        $this->_signatureMethod = $method;;
+        $this->_signatureMethod = $method;
         return $this;
     }
 
@@ -567,10 +567,10 @@ class StandardConfig implements OAuthConfig
     /**
      * Set RSA public key
      *
-     * @param  \Zend\Crypt\RSA\PublicKey $key
+     * @param  \Zend\Crypt\Rsa\PublicKey $key
      * @return \Zend\OAuth\Config
      */
-    public function setRsaPublicKey(\Zend\Crypt\RSA\PublicKey $key)
+    public function setRsaPublicKey(\Zend\Crypt\Rsa\PublicKey $key)
     {
         $this->_rsaPublicKey = $key;
         return $this;
@@ -579,7 +579,7 @@ class StandardConfig implements OAuthConfig
     /**
      * Get RSA public key
      *
-     * @return \Zend\Crypt\RSA\PublicKey
+     * @return \Zend\Crypt\Rsa\PublicKey
      */
     public function getRsaPublicKey()
     {
@@ -589,10 +589,10 @@ class StandardConfig implements OAuthConfig
     /**
      * Set RSA private key
      *
-     * @param  \Zend\Crypt\RSA\PrivateKey $key
+     * @param  \Zend\Crypt\Rsa\PrivateKey $key
      * @return \Zend\OAuth\Config
      */
-    public function setRsaPrivateKey(\Zend\Crypt\RSA\PrivateKey $key)
+    public function setRsaPrivateKey(\Zend\Crypt\Rsa\PrivateKey $key)
     {
         $this->_rsaPrivateKey = $key;
         return $this;
@@ -601,7 +601,7 @@ class StandardConfig implements OAuthConfig
     /**
      * Get RSA private key
      *
-     * @return \Zend\Crypt\RSA\PrivateKey
+     * @return \Zend\Crypt\Rsa\PrivateKey
      */
     public function getRsaPrivateKey()
     {
@@ -639,7 +639,7 @@ class StandardConfig implements OAuthConfig
      */
     protected function _validateUrl($url)
     {
-        $uri = new URI\URL($url);
+        $uri = new Uri\Url($url);
         if (!$uri->isValid()) {
             throw new OAuth\Exception(sprintf("'%s' is not a valid URI", $url));
         } elseif (!in_array($uri->getScheme(), array('http', 'https'))) {

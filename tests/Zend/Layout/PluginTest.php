@@ -56,11 +56,11 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         \Zend\Layout\Layout::resetMvcInstance();
 
-        if (HelperBroker\HelperBroker::hasHelper('Layout')) {
-            HelperBroker\HelperBroker::removeHelper('Layout');
+        if (HelperBroker::hasHelper('Layout')) {
+            HelperBroker::removeHelper('Layout');
         }
-        if (HelperBroker\HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        if (HelperBroker::hasHelper('viewRenderer')) {
+            HelperBroker::removeHelper('viewRenderer');
         }
     }
 
@@ -119,11 +119,11 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->disableInflector();
 
-        $helper = HelperBroker\HelperBroker::getStaticHelper('layout');
+        $helper = HelperBroker::getStaticHelper('layout');
         $plugin = $front->getPlugin('Zend\Layout\Controller\Plugin\Layout');
         $plugin->setResponse($response);
 
@@ -147,7 +147,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->disableInflector();
 
@@ -172,7 +172,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->disableInflector()
                ->disableLayout();
@@ -202,7 +202,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
 
         $layout = Layout\Layout::startMvc();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setLayout('plugin.phtml')
                ->setMvcSuccessfulActionOnly(false)
                ->disableInflector();

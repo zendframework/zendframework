@@ -54,13 +54,10 @@ class FormButton extends FormElement
      */
     public function direct($name = null, $value = null, $attribs = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormButton: missing argument. $name is required in formButton($name, $value = null, $attribs = null)');
-        }
-
         $info = $this->_getInfo($name, $value, $attribs);
-        
+
         $id = $disable = $escape = null;
+
         extract($info); // name, id, value, attribs, options, listsep, disable
 
         // Get content

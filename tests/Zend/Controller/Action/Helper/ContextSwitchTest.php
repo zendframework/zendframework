@@ -55,26 +55,26 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker\HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
 
         $this->front = Controller\Front::getInstance();
         $this->front->resetInstance();
-        $this->front->addModuleDirectory(dirname(__FILE__) . '/../../_files/modules');
+        $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
 
         $this->layout = Layout\Layout::startMvc();
 
         $this->helper = new Helper\ContextSwitch();
-        HelperBroker\HelperBroker::addHelper($this->helper);
+        HelperBroker::addHelper($this->helper);
 
-        $this->request = new \Zend\Controller\Request\HTTP();
+        $this->request = new \Zend\Controller\Request\Http();
         $this->response = new \Zend\Controller\Response\Cli();
 
         $this->front->setRequest($this->request)
                     ->setResponse($this->response)
-                    ->addControllerDirectory(dirname(__FILE__));
+                    ->addControllerDirectory(__DIR__);
 
         $this->view = new \Zend\View\View();
-        $this->viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
         $this->controller = new ContextSwitchTestController(
@@ -666,7 +666,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'JSON content type header not found');
 
         $body = $this->response->getBody();
-        $result = \Zend\JSON\JSON::decode($body);
+        $result = \Zend\Json\Json::decode($body);
         $this->assertTrue(is_array($result), var_export($body, 1));
         $this->assertTrue(isset($result['foo']));
         $this->assertTrue(isset($result['bar']));
@@ -901,7 +901,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class ContextSwitchTestController extends Action\Action
+class ContextSwitchTestController extends Action
 {
     public $contextSwitch;
 
@@ -937,7 +937,7 @@ class ContextSwitchTestController extends Action\Action
 }
 
 
-class CustomView implements \Zend\View\ViewInterface
+class CustomView implements \Zend\View\ViewEngine
 {
     public function getEngine()
     {}

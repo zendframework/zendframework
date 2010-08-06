@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db;
+use Zend\Test\PHPUnit\Db;
 
 /**
  * @category   Zend
@@ -29,13 +34,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_ConnectionTest extends PHPUnit_Framework_TestCase
+class ConnectionTest extends \PHPUnit_Framework_TestCase
 {
     protected $adapterMock;
 
     public function setUp()
     {
-        $this->adapterMock = $this->getMock('Zend_Test_DbAdapter');
+        $this->adapterMock = $this->getMock('Zend\Test\DbAdapter');
     }
 
     /**
@@ -43,7 +48,7 @@ class Zend_Test_PHPUnit_Db_ConnectionTest extends PHPUnit_Framework_TestCase
      */
     public function createConnection()
     {
-        $connection = new Zend_Test_PHPUnit_Db_Connection($this->adapterMock, "schema");
+        $connection = new Db\Connection($this->adapterMock, "schema");
         return $connection;
     }
 
@@ -61,13 +66,13 @@ class Zend_Test_PHPUnit_Db_ConnectionTest extends PHPUnit_Framework_TestCase
         $connection = $this->createConnection();
         $ret = $connection->createQueryTable("foo", "foo");
 
-        $this->assertType('Zend_Test_PHPUnit_Db_DataSet_QueryTable', $ret);
+        $this->assertType('Zend\Test\PHPUnit\Db\DataSet\QueryTable', $ret);
     }
 
     public function testGetSchema()
     {
         $fixtureSchema = "schema";
-        $connection = new Zend_Test_PHPUnit_Db_Connection($this->adapterMock, $fixtureSchema);
+        $connection = new Db\Connection($this->adapterMock, $fixtureSchema);
 
         $this->assertEquals($fixtureSchema, $connection->getSchema());
     }
@@ -77,7 +82,7 @@ class Zend_Test_PHPUnit_Db_ConnectionTest extends PHPUnit_Framework_TestCase
         $connection = $this->createConnection();
         $metadata = $connection->getMetaData();
 
-        $this->assertType('Zend_Test_PHPUnit_Db_Metadata_Generic', $metadata);
+        $this->assertType('Zend\Test\PHPUnit\Db\Metadata\Generic', $metadata);
     }
 
     public function testGetTruncateCommand()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20779 -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
 
@@ -14,7 +14,7 @@
         </para>
         <para>
             ほとんどの場合は、Zend_Http_Response オブジェクトのインスタンスを作成するには
-            factory() メソッドを使用します。これは、<acronym>HTTP</acronym>
+            fromString() メソッドを使用します。これは、<acronym>HTTP</acronym>
             レスポンスメッセージを含む文字列を受け取って新しい
             Zend_Http_Response オブジェクトを返します。
             <example id="zend.http.response.introduction.example-1">
@@ -31,7 +31,7 @@ fwrite($sock, $req);
 while ($buff = fread($sock, 1024))
     $str .= $sock;
 
-$response = Zend_Http_Response::factory($str);
+$response = Zend_Http_Response::fromString($str);
 ]]></programlisting>
             </example>
         </para>
@@ -78,25 +78,25 @@ $response = Zend_Http_Response::factory($str);
         <para>
             <classname>Zend_Http_Response</classname> のインスタンスを取得すると、
             レスポンスの種類を調べるためのメソッドが使用できるようになります。
-            これらのメソッドは、すべて true あるいは false を返します。
+            これらのメソッドは、すべて <constant>TRUE</constant> あるいは <constant>FALSE</constant> を返します。
             <itemizedlist>
                 <listitem>
                     <para>
                         <code>Boolean isSuccessful()</code>: リクエストが成功したかどうかを調べます。
-                        <acronym>HTTP</acronym> レスポンスコードが 1xx か 2xx であった場合に TRUE を返します。
+                        <acronym>HTTP</acronym> レスポンスコードが 1xx か 2xx であった場合に <constant>TRUE</constant> を返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Boolean isError()</code>: レスポンスコードがエラーを意味しているかどうかを調べます。
                         <acronym>HTTP</acronym> レスポンスコードが 4xx (クライアントのエラー) あるいは
-                        5xx (サーバのエラー) であった場合に TRUE を返します。
+                        5xx (サーバのエラー) であった場合に <constant>TRUE</constant> を返します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Boolean isRedirect()</code>: レスポンスがリダイレクトされているかどうかを調べます。
-                        <acronym>HTTP</acronym> レスポンスコードが 3xx であった場合に TRUE を返します。
+                        <acronym>HTTP</acronym> レスポンスコードが 3xx であった場合に <constant>TRUE</constant> を返します。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -157,7 +157,7 @@ if ($response->isError()) {
                 <listitem>
                     <para>
                         <code>string getHeadersAsString($status_line = true, $br = "\n")</code>:
-                        ヘッダ全体を文字列として取得します。$status_line が true の場合 (デフォルト) は、
+                        ヘッダ全体を文字列として取得します。$status_line が <constant>TRUE</constant> の場合 (デフォルト) は、
                         最初のステータス行 (たとえば "HTTP/1.1 200 OK" など) も返されます。
                         改行は $br パラメータで指定します (たとえば "&lt;br /&gt;" などにもできます)。
                     </para>
@@ -167,7 +167,7 @@ if ($response->isError()) {
                         <code>string asString($br = "\n")</code>: レスポンスメッセージ全体を文字列として取得します。
                         改行は $br パラメータで指定します (たとえば "&lt;br /&gt;" などにもできます)。
                         マジックメソッド __toString()
-                        を使ってオブジェクトを文字列にキャストすることができます。
+                        を使ってオブジェクトを文字列にキャストできます。
                         これは asString() へのプロキシとなります。
                     </para>
                 </listitem>
@@ -257,7 +257,7 @@ echo $body;
                         <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 = true)</code>:
                         レスポンスコード $code に対応する、標準的な <acronym>HTTP</acronym> レスポンスメッセージを取得します。
                         たとえば $code が 500 の場合は "Internal Server Error" を返します。
-                        $http11 が true の場合 (デフォルト) は <acronym>HTTP</acronym>/1.1 のメッセージを、
+                        $http11 が <constant>TRUE</constant> の場合 (デフォルト) は <acronym>HTTP</acronym>/1.1 のメッセージを、
                         そうでない場合は <acronym>HTTP</acronym>/1.0 のメッセージを返します。
                         $code を省略した場合は、このメソッドは、すべての既知の <acronym>HTTP</acronym>
                         レスポンスコードを連想配列 (code => message) で返します。

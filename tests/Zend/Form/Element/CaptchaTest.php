@@ -20,15 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Element_CaptchaTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_CaptchaTest::main");
-}
+namespace ZendTest\Form\Element;
 
-
-/** Zend_Form_Element_Captcha */
-
-/** Zend_Captcha_Dumb */
+use Zend\Form\Element\Captcha as CaptchaElement,
+    Zend\Form\Form,
+    Zend\Captcha\Dumb as DumbCaptcha,
+    Zend\View\View;
 
 /**
  * @category   Zend
@@ -38,23 +35,16 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
+class CaptchaTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_Element_CaptchaTest');
-        PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
-        $this->element = new Zend_Form_Element_Captcha(
+        $this->element = new CaptchaElement(
             'foo',
             array(
                 'captcha' => 'Dumb',
                 'captchaOptions' => array(
-                    'sessionClass' => 'Zend_Form_Element_CaptchaTest_SessionContainer',
+                    'sessionClass' => 'ZendTest\Form\Element\TestAsset\SessionContainer',
                 ),
             )
         );
@@ -62,18 +52,16 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
 
     public function getCaptcha()
     {
-        $captcha = new Zend_Captcha_Dumb(array(
-            'sessionClass' => 'Zend_Form_Element_CaptchaTest_SessionContainer',
+        $captcha = new DumbCaptcha(array(
+            'sessionClass' => 'ZendTest\Form\Element\TestAsset\SessionContainer',
         ));
         return $captcha;
     }
 
-    /**
-     * @expectedException Zend_Form_Exception
-     */
     public function testConstructionShouldRequireCaptchaDetails()
     {
-        $this->element = new Zend_Form_Element_Captcha('foo');
+        $this->setExpectedException('Zend\Form\Exception');
+        $this->element = new CaptchaElement('foo');
     }
 
     public function testShouldAllowSettingCaptcha()
@@ -86,9 +74,9 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowAddingCaptchaPrefixPath()
     {
-        $this->element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
+        $this->element->addPrefixPath('My\Captcha', 'My/Captcha/', 'captcha');
         $loader = $this->element->getPluginLoader('captcha');
-        $paths  = $loader->getPaths('My_Captcha');
+        $paths  = $loader->getPaths('My\Captcha');
         $this->assertTrue(is_array($paths));
     }
 
@@ -96,27 +84,25 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
     {
         $this->element->addPrefixPath('My', 'My');
         $loader = $this->element->getPluginLoader('captcha');
-        $paths  = $loader->getPaths('My_Captcha');
+        $paths  = $loader->getPaths('My\Captcha');
         $this->assertTrue(is_array($paths));
     }
 
     /**
-     * @see   ZF-4038
      * @group ZF-4038
      */
     public function testCaptchaShouldRenderFullyQualifiedElementName()
     {
-        $form = new Zend_Form();
+        $form = new Form();
         $form->addElement($this->element)
              ->setElementsBelongTo('bar');
-        $html = $form->render(new Zend_View);
+        $html = $form->render(new View);
         $this->assertContains('name="bar[foo', $html, $html);
         $this->assertContains('id="bar-foo-', $html, $html);
         $this->form = $form;
     }
 
     /**
-     * @see   ZF-4038
      * @group ZF-4038
      */
     public function testCaptchaShouldValidateUsingFullyQualifiedElementName()
@@ -143,10 +129,10 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
     {
         $decorators = $this->element->getDecorators();
         $this->assertTrue(is_array($decorators));
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_Errors', $decorators), 'Missing Errors decorator' . var_export(array_keys($decorators), 1));
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_Description', $decorators), 'Missing Description decorator' . var_export(array_keys($decorators), 1));
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_HtmlTag', $decorators), 'Missing HtmlTag decorator' . var_export(array_keys($decorators), 1));
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_Label', $decorators), 'Missing Label decorator' . var_export(array_keys($decorators), 1));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\Errors', $decorators), 'Missing Errors decorator' . var_export(array_keys($decorators), 1));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\Description', $decorators), 'Missing Description decorator' . var_export(array_keys($decorators), 1));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\HtmlTag', $decorators), 'Missing HtmlTag decorator' . var_export(array_keys($decorators), 1));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\Label', $decorators), 'Missing Label decorator' . var_export(array_keys($decorators), 1));
     }
 
     /**
@@ -156,60 +142,15 @@ class Zend_Form_Element_CaptchaTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse(array_key_exists('helper', $this->element->getAttribs()));
     }
-}
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Form
- */
-class Zend_Form_Element_CaptchaTest_SessionContainer
-{
-    protected static $_word;
-
-    public function __get($name)
+    /**
+     * Prove the fluent interface on Zend_Form_Element_Captcha::loadDefaultDecorators
+     *
+     * @link http://framework.zend.com/issues/browse/ZF-9913
+     * @return void
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
     {
-        if ('word' == $name) {
-            return self::$_word;
-        }
-
-        return null;
+        $this->assertSame($this->element, $this->element->loadDefaultDecorators());
     }
-
-    public function __set($name, $value)
-    {
-        if ('word' == $name) {
-            self::$_word = $value;
-        } else {
-            $this->$name = $value;
-        }
-    }
-
-    public function __isset($name)
-    {
-        if (('word' == $name) && (null !== self::$_word))  {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function __call($method, $args)
-    {
-        switch ($method) {
-            case 'setExpirationHops':
-            case 'setExpirationSeconds':
-                $this->$method = array_shift($args);
-                break;
-            default:
-        }
-    }
-}
-
-// Call Zend_Form_Element_CaptchaTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_CaptchaTest::main") {
-    Zend_Form_Element_CaptchaTest::main();
 }

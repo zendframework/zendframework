@@ -58,7 +58,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = dirname(__FILE__) . '/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new \Zend\View\Helper\PartialLoop();
         Controller\Front::getInstance()->resetInstance();
     }
@@ -87,7 +87,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -112,7 +112,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $o = new IteratorTest($data);
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -137,7 +137,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         }
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -163,7 +163,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $o = new BogusIteratorTest($data);
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -188,7 +188,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -216,7 +216,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $o = new \ArrayObject($data);
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -238,7 +238,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $o = new ToArrayTest($data);
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -264,7 +264,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $o = new IteratorWithToArrayTest($data);
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
         $this->helper->setObjectKey('obj');
@@ -282,7 +282,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
     public function testEmptyArrayPassedToPartialLoopShouldNotThrowException()
     {
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -313,7 +313,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -338,7 +338,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 

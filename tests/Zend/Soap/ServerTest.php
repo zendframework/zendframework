@@ -24,13 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Soap;
-use Zend\Soap\Server;
 
-/** PHPUnit Test Case */
+require_once __DIR__ . '/TestAsset/commontypes.php';
 
-/** Zend_Soap_Server */
-
-
+use Zend\Soap\Server,
+    Zend\Soap\ServerException;
 
 /**
  * Zend_Soap_Server
@@ -55,14 +53,14 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetOptions()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertTrue($server->getOptions() == array('soap_version' => SOAP_1_2));
 
         $options = array('soap_version' => SOAP_1_1,
                          'actor' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
-                         'classmap' => array('TestData1' => 'Zend_Soap_Server_TestData1',
-                                             'TestData2' => 'Zend_Soap_Server_TestData2',),
+                         'classmap' => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                                             'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                          'encoding' => 'ISO-8859-1',
                          'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php'
                         );
@@ -77,20 +75,35 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             'soap_version' => SOAP_1_1,
             'actor' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
             'classmap' => array(
-                'TestData1' => 'Zend_Soap_Server_TestData1',
-                'TestData2' => 'Zend_Soap_Server_TestData2',
+                'TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',
             ),
             'encoding' => 'ISO-8859-1',
             'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
         );
-        $server = new Server\Server(null, $options);
+        $server = new Server(null, $options);
 
         $this->assertTrue($server->getOptions() == $options);
     }
 
-    public function testSetWSDLViaOptionsArrayIsPossible()
+    /**
+     * @group ZF-9816
+     */
+    public function testSetOptionsWithFeaturesOption()
     {
-        $server = new Server\Server();
+        $server = new Server(null, array(
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS
+        ));
+
+        $this->assertEquals(
+            SOAP_SINGLE_ELEMENT_ARRAYS,
+            $server->getSoapFeatures()
+        );
+    }
+
+    public function testSetWsdlViaOptionsArrayIsPossible()
+    {
+        $server = new Server();
         $server->setOptions(array('wsdl' => 'http://www.example.com/test.wsdl'));
 
         $this->assertEquals('http://www.example.com/test.wsdl', $server->getWSDL());
@@ -98,7 +111,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOptions()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertTrue($server->getOptions() == array('soap_version' => SOAP_1_2));
 
@@ -112,7 +125,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testEncoding()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getEncoding());
         $server->setEncoding('ISO-8859-1');
@@ -128,7 +141,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSoapVersion()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertEquals(SOAP_1_2, $server->getSoapVersion());
         $server->setSoapVersion(SOAP_1_1);
@@ -143,7 +156,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateUrn()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
             $server->validateUrn('bogosity');
@@ -158,7 +171,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetActor()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getActor());
         $server->setActor('http://framework.zend.com/');
@@ -173,7 +186,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetActor()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getActor());
         $server->setActor('http://framework.zend.com/');
@@ -182,7 +195,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUri()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getUri());
         $server->setUri('http://framework.zend.com/');
@@ -197,7 +210,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetUri()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getUri());
         $server->setUri('http://framework.zend.com/');
@@ -206,10 +219,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetClassmap()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
-        $classmap = array('TestData1' => 'Zend_Soap_Server_TestData1',
-                          'TestData2' => 'Zend_Soap_Server_TestData2');
+        $classmap = array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                          'TestData2' => '\ZendTest\Soap\TestAsset\TestData2');
 
         $this->assertNull($server->getClassmap());
         $server->setClassmap($classmap);
@@ -230,10 +243,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetClassmap()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
-        $classmap = array('TestData1' => 'Zend_Soap_Server_TestData1',
-                          'TestData2' => 'Zend_Soap_Server_TestData2');
+        $classmap = array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                          'TestData2' => '\ZendTest\Soap\TestAsset\TestData2');
 
         $this->assertNull($server->getClassmap());
         $server->setClassmap($classmap);
@@ -242,13 +255,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetWSDL()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getWSDL());
-        $server->setWSDL(dirname(__FILE__).'/_files/wsdl_example.wsdl');
-        $this->assertEquals(dirname(__FILE__).'/_files/wsdl_example.wsdl', $server->getWSDL());
+        $server->setWSDL(__DIR__.'/_files/wsdl_example.wsdl');
+        $this->assertEquals(__DIR__.'/_files/wsdl_example.wsdl', $server->getWSDL());
         try {
-            $server->setWSDL(dirname(__FILE__).'/_files/bogus.wsdl');
+            $server->setWSDL(__DIR__.'/_files/bogus.wsdl');
             $this->fail('Invalid WSDL URI or PATH should fail');
         } catch (\Exception $e)  {
             // success
@@ -257,73 +270,73 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetWSDL()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getWSDL());
-        $server->setWSDL(dirname(__FILE__).'/_files/wsdl_example.wsdl');
-        $this->assertEquals(dirname(__FILE__).'/_files/wsdl_example.wsdl', $server->getWSDL());
+        $server->setWSDL(__DIR__.'/_files/wsdl_example.wsdl');
+        $this->assertEquals(__DIR__.'/_files/wsdl_example.wsdl', $server->getWSDL());
     }
 
     public function testAddFunction()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         // Correct function should pass
-        $server->addFunction('Zend_Soap_Server_TestFunc1');
+        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
         // Array of correct functions should pass
-        $functions = array('Zend_Soap_Server_TestFunc2',
-                           'Zend_Soap_Server_TestFunc3',
-                           'Zend_Soap_Server_TestFunc4');
+        $functions = array('\ZendTest\Soap\TestAsset\TestFunc2',
+                           '\ZendTest\Soap\TestAsset\TestFunc3',
+                           '\ZendTest\Soap\TestAsset\TestFunc4');
         $server->addFunction($functions);
 
         $this->assertEquals(
-            array_merge(array('Zend_Soap_Server_TestFunc1'), $functions),
+            array_merge(array('\ZendTest\Soap\TestAsset\TestFunc'), $functions),
             $server->getFunctions()
         );
     }
 
     public function testAddBogusFunctionAsInteger()
     {
-        $server = new Server\Server();
+        $server = new Server();
         try {
             $server->addFunction(126);
             $this->fail('Invalid value should fail');
-        } catch (Server\Exception $e)  {
+        } catch (ServerException $e)  {
             // success
         }
     }
 
     public function testAddBogusFunctionsAsString()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
             $server->addFunction('bogus_function');
             $this->fail('Invalid function should fail.');
-        } catch (Server\Exception $e)  {
+        } catch (ServerException $e)  {
             // success
         }
     }
 
     public function testAddBogusFunctionsAsArray()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
-            $functions = array('Zend_Soap_Server_TestFunc5',
+            $functions = array('\ZendTest\Soap\TestAsset\TestFunc5',
                                 'bogus_function',
-                                'Zend_Soap_Server_TestFunc6');
+                                '\ZendTest\Soap\TestAsset\TestFunc6');
             $server->addFunction($functions);
             $this->fail('Invalid function within a set of functions should fail');
-        } catch (Server\Exception $e)  {
+        } catch (ServerException $e)  {
             // success
         }
     }
 
     public function testAddAllFunctionsSoapConstant()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         // SOAP_FUNCTIONS_ALL as a value should pass
         $server->addFunction(SOAP_FUNCTIONS_ALL);
@@ -333,11 +346,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetClass()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         // Correct class name should pass
         try {
-            $server->setClass('Zend_Soap_Server_TestClass');
+            $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         } catch(\Exception $e) {
             $this->fail("Setting a correct class name should not fail setClass()");
         }
@@ -345,25 +358,25 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetClassTwiceThrowsException()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         // Correct class name should pass
         try {
-            $server->setClass('Zend_Soap_Server_TestClass');
-            $server->setClass('Zend_Soap_Server_TestClass');
+            $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
+            $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
             $this->fail();
-        } catch(Server\Exception $e) {
+        } catch(ServerException $e) {
             $this->assertEquals('A class has already been registered with this soap server instance', $e->getMessage());
         }
     }
 
     public function testSetClassWithArguments()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         // Correct class name should pass
         try {
-            $server->setClass('Zend_Soap_Server_TestClass', 1, 2, 3, 4);
+            $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass', 1, 2, 3, 4);
         } catch(\Exception $e) {
             $this->fail("Setting a correct class name should not fail setClass()");
         }
@@ -371,7 +384,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetBogusClassWithIntegerName()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
             $server->setClass(465);
@@ -383,7 +396,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetBogusClassWithUnknownClassName()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
             $server->setClass('Zend_Soap_Server_Test_BogusClass');
@@ -398,7 +411,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetObject()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
             $server->setObject(465);
@@ -416,10 +429,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         }
 
         // Correct class name should pass
-        $server->setObject(new \Zend_Soap_Server_TestClass());
+        $server->setObject(new TestAsset\ServerTestClass());
 
         try {
-            $server->setObject(new \Zend_Soap_Server_TestClass());
+            $server->setObject(new TestAsset\ServerTestClass());
             $this->fail('setClass() should pass only once');
         } catch (\Exception $e)  {
             // success
@@ -428,35 +441,35 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFunctions()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
-        $server->addFunction('Zend_Soap_Server_TestFunc1');
+        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
-        $functions  =  array('Zend_Soap_Server_TestFunc2',
-                             'Zend_Soap_Server_TestFunc3',
-                             'Zend_Soap_Server_TestFunc4');
+        $functions  =  array('\ZendTest\Soap\TestAsset\TestFunc2',
+                             '\ZendTest\Soap\TestAsset\TestFunc3',
+                             '\ZendTest\Soap\TestAsset\TestFunc4');
         $server->addFunction($functions);
 
-        $functions  =  array('Zend_Soap_Server_TestFunc3',
-                             'Zend_Soap_Server_TestFunc5',
-                             'Zend_Soap_Server_TestFunc6');
+        $functions  =  array('\ZendTest\Soap\TestAsset\TestFunc3',
+                             '\ZendTest\Soap\TestAsset\TestFunc5',
+                             '\ZendTest\Soap\TestAsset\TestFunc6');
         $server->addFunction($functions);
 
         $allAddedFunctions = array(
-            'Zend_Soap_Server_TestFunc1',
-            'Zend_Soap_Server_TestFunc2',
-            'Zend_Soap_Server_TestFunc3',
-            'Zend_Soap_Server_TestFunc4',
-            'Zend_Soap_Server_TestFunc5',
-            'Zend_Soap_Server_TestFunc6'
+            '\ZendTest\Soap\TestAsset\TestFunc',
+            '\ZendTest\Soap\TestAsset\TestFunc2',
+            '\ZendTest\Soap\TestAsset\TestFunc3',
+            '\ZendTest\Soap\TestAsset\TestFunc4',
+            '\ZendTest\Soap\TestAsset\TestFunc5',
+            '\ZendTest\Soap\TestAsset\TestFunc6'
         );
         $this->assertTrue($server->getFunctions() == $allAddedFunctions);
     }
 
     public function testGetFunctionsWithClassAttached()
     {
-        $server = new Server\Server();
-        $server->setClass('Zend_Soap_Server_TestClass');
+        $server = new Server();
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $this->assertEquals(
             array('testFunc1', 'testFunc2', 'testFunc3', 'testFunc4', 'testFunc5'),
@@ -466,8 +479,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFunctionsWithObjectAttached()
     {
-        $server = new Server\Server();
-        $server->setObject(new \Zend_Soap_Server_TestClass());
+        $server = new Server();
+        $server->setObject(new TestAsset\ServerTestClass());
 
         $this->assertEquals(
             array('testFunc1', 'testFunc2', 'testFunc3', 'testFunc4', 'testFunc5'),
@@ -477,7 +490,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPersistence()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getPersistence());
         $server->setPersistence(SOAP_PERSISTENCE_SESSION);
@@ -495,19 +508,19 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUnknownPersistenceStateThrowsException()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
             $server->setPersistence('bogus');
             $this->fail();
-        } catch(Server\Exception $e) {
+        } catch(ServerException $e) {
 
         }
     }
 
     public function testGetPersistence()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertNull($server->getPersistence());
         $server->setPersistence(SOAP_PERSISTENCE_SESSION);
@@ -521,11 +534,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server\Server();
+        $server = new Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
         $server->setReturnResponse(true);
 
-        $server->setClass('Zend_Soap_Server_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $request =
             '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
@@ -549,7 +562,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetReturnResponse()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertFalse($server->getReturnResponse());
 
@@ -562,7 +575,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetReturnResponse()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertFalse($server->getReturnResponse());
 
@@ -577,11 +590,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server\Server();
+        $server = new Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
         $server->setReturnResponse(true);
 
-        $server->setClass('Zend_Soap_Server_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $request =
             '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
@@ -620,20 +633,24 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandle()
     {
+        if (!extension_loaded('soap')) {
+            $this->markTestSkipped('Soap extension not loaded');
+        }
+
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testHandle() when headers have already been sent; enable output buffering to run this test');
             return;
         }
 
-        $server = new Server\Server();
+        $server = new Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
 
-        $server->setClass('Zend_Soap_Server_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
-        $localClient = new \Zend_Soap_Server_TestLocalSoapClient($server,
-                                                                null,
-                                                                array('location'=>'test://',
-                                                                      'uri'=>'http://framework.zend.com'));
+        $localClient = new TestAsset\TestLocalSoapClient($server,
+                                                         null,
+                                                         array('location'=>'test://',
+                                                               'uri'=>'http://framework.zend.com'));
 
         // Local SOAP client call automatically invokes handle method of the provided SOAP server
         $this->assertEquals('Hello World!', $localClient->testFunc2('World'));
@@ -669,10 +686,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .     '</SOAP-ENV:Body>'
           . '</SOAP-ENV:Envelope>' . "\n";
 
-        $server1 = new Server\Server();
+        $server1 = new Server();
         $server1->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
 
-        $server1->setClass('Zend_Soap_Server_TestClass');
+        $server1->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         $server1->setReturnResponse(true);
 
         $this->assertEquals($expectedResponse, $server1->handle($request));
@@ -683,7 +700,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterFaultException()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $server->registerFaultException("Zend_Soap_Server_Exception");
         $server->registerFaultException(array("OutOfBoundsException", "BogusException"));
@@ -700,7 +717,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeregisterFaultException()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $server->registerFaultException(array("OutOfBoundsException", "BogusException"));
         $ret = $server->deregisterFaultException("BogusException");
@@ -719,7 +736,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFaultExceptions()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         $this->assertEquals(array(), $server->getFaultExceptions());
         $server->registerFaultException("Exception");
@@ -728,7 +745,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testFaultWithTextMessage()
     {
-        $server = new Server\Server();
+        $server = new Server();
         $fault = $server->fault("Faultmessage!");
 
         $this->assertTrue($fault instanceof \SOAPFault);
@@ -737,7 +754,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testFaultWithUnregisteredException()
     {
-        $server = new Server\Server();
+        $server = new Server();
         $fault = $server->fault(new \Exception("MyException"));
 
         $this->assertTrue($fault instanceof \SOAPFault);
@@ -747,7 +764,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testFaultWithRegisteredException()
     {
-        $server = new Server\Server();
+        $server = new Server();
         $server->registerFaultException("Exception");
         $fault = $server->fault(new \Exception("MyException"));
 
@@ -758,7 +775,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testFautlWithBogusInput()
     {
-        $server = new Server\Server();
+        $server = new Server();
         $fault = $server->fault(array("Here", "There", "Bogus"));
 
         $this->assertContains("Unknown error", $fault->getMessage());
@@ -769,7 +786,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testFaultWithIntegerFailureCodeDoesNotBreakClassSoapFault()
     {
-        $server = new Server\Server();
+        $server = new Server();
         $fault = $server->fault("Faultmessage!", 5000);
 
         $this->assertTrue($fault instanceof \SOAPFault);
@@ -780,7 +797,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testHandlePhpErrors()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         // Remove the following line when you implement this test.
         $this->markTestIncomplete(
@@ -790,12 +807,12 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadFunctionsIsNotImplemented()
     {
-        $server = new Server\Server();
+        $server = new Server();
 
         try {
             $server->loadFunctions("bogus");
             $this->fail();
-        } catch(Server\Exception $e) {
+        } catch(ServerException $e) {
 
         }
     }
@@ -807,7 +824,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server\Server();
+        $server = new Server();
         $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
         $server->setReturnResponse(true);
 
@@ -825,7 +842,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .     '</SOAP-ENV:Body>'
           . '</SOAP-ENV:Envelope>' . "\n";
 
-        $server->setClass('Zend_Soap_Server_TestClass');
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         $response = $server->handle($request);
 
         $this->assertContains(
@@ -841,14 +858,14 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $options = array('soap_version' => SOAP_1_1,
                          'actor' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
-                         'classmap' => array('TestData1' => 'Zend_Soap_Server_TestData1',
-                                             'TestData2' => 'Zend_Soap_Server_TestData2',),
+                         'classmap' => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
+                                             'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                          'encoding' => 'ISO-8859-1',
                          'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php'
                         );
         $config = new \Zend\Config\Config($options);
 
-        $server = new Server\Server();
+        $server = new Server();
         $server->setOptions($config);
         $this->assertEquals($options, $server->getOptions());
     }
@@ -858,7 +875,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetAndGetFeatures()
     {
-        $server = new Server\Server();
+        $server = new Server();
         $this->assertNull($server->getSoapFeatures());
         $server->setSoapFeatures(100);
         $this->assertEquals(100, $server->getSoapFeatures());
@@ -872,7 +889,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetAndGetWSDLCache()
     {
-        $server = new Server\Server();
+        $server = new Server();
         $this->assertNull($server->getWSDLCache());
         $server->setWSDLCache(100);
         $this->assertEquals(100, $server->getWSDLCache());
@@ -880,196 +897,4 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($options['cache_wsdl']));
         $this->assertEquals(100, $options['cache_wsdl']);
     }
-}
-
-
-if (extension_loaded('soap')) {
-
-/** Local SOAP client */
-class TestLocalSoapClient extends \SoapClient
-{
-    /**
-     * Server object
-     *
-     * @var Zend_Soap_Server
-     */
-    public $server;
-
-    /**
-     * Local client constructor
-     *
-     * @param Zend_Soap_Server $server
-     * @param string $wsdl
-     * @param array $options
-     */
-    function __construct(Server\Server $server, $wsdl, $options)
-    {
-        $this->server = $server;
-        parent::__construct($wsdl, $options);
-    }
-
-    function __doRequest($request, $location, $action, $version, $one_way = 0)
-    {
-        ob_start();
-        $this->server->handle($request);
-        $response = ob_get_clean();
-
-        return $response;
-    }
-}
-
-}
-
-
-/** Test Class */
-class TestClass {
-    /**
-     * Test Function 1
-     *
-     * @return string
-     */
-    function testFunc1()
-    {
-        return "Hello World";
-    }
-
-    /**
-     * Test Function 2
-     *
-     * @param string $who Some Arg
-     * @return string
-     */
-    function testFunc2($who)
-    {
-        return "Hello $who!";
-    }
-
-    /**
-     * Test Function 3
-     *
-     * @param string $who Some Arg
-     * @param int $when Some
-     * @return string
-     */
-    function testFunc3($who, $when)
-    {
-        return "Hello $who, How are you $when";
-    }
-
-    /**
-     * Test Function 4
-     *
-     * @return string
-     */
-    static function testFunc4()
-    {
-        return "I'm Static!";
-    }
-
-    /**
-     * Test Function 5 raises a user error
-     *
-     * @return void
-     */
-    function testFunc5()
-    {
-        trigger_error("Test Message", E_USER_ERROR);
-    }
-}
-
-
-/** Test class 2 */
-class TestData1 {
-    /**
-     * Property1
-     *
-     * @var string
-     */
-     public $property1;
-
-    /**
-     * Property2
-     *
-     * @var float
-     */
-     public $property2;
-}
-
-/** Test class 2 */
-class TestData2 {
-    /**
-     * Property1
-     *
-     * @var integer
-     */
-     public $property1;
-
-    /**
-     * Property1
-     *
-     * @var float
-     */
-     public $property2;
-}
-
-
-/* Test Functions */
-
-/**
- * Test Function
- *
- * @param string $arg
- * @return string
- */
-function Zend_Soap_Server_TestFunc1($who)
-{
-    return "Hello $who";
-}
-
-/**
- * Test Function 2
- */
-function Zend_Soap_Server_TestFunc2()
-{
-    return "Hello World";
-}
-
-/**
- * Return false
- *
- * @return bool
- */
-function Zend_Soap_Server_TestFunc3()
-{
-    return false;
-}
-
-/**
- * Return true
- *
- * @return bool
- */
-function Zend_Soap_Server_TestFunc4()
-{
-    return true;
-}
-
-/**
- * Return integer
- *
- * @return int
- */
-function Zend_Soap_Server_TestFunc5()
-{
-    return 123;
-}
-
-/**
- * Return string
- *
- * @return string
- */
-function Zend_Soap_Server_TestFunc6()
-{
-    return "string";
 }

@@ -247,7 +247,7 @@ class MemoryManager
      * Create new Zend_Memory value container
      *
      * @param string $value
-     * @return \Zend\Memory\Container\ContainerInterface
+     * @return \Zend\Memory\Container
      * @throws \Zend\Memory\Exception
      */
     public function create($value = '')
@@ -260,7 +260,7 @@ class MemoryManager
      * locked in memory
      *
      * @param string $value
-     * @return \Zend\Memory\Container\ContainerInterface
+     * @return \Zend\Memory\Container
      * @throws \Zend\Memory\Exception
      */
     public function createLocked($value = '')
@@ -273,7 +273,7 @@ class MemoryManager
      *
      * @param string $value
      * @param boolean $locked
-     * @return \Zend\Memory\Container\ContainerInterface
+     * @return \Zend\Memory\Container
      * @throws \Zend\Memory\Exception
      */
     private function _create($value, $locked)

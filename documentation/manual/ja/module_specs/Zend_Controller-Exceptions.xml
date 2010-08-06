@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21684 -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC での例外</title>
 
@@ -13,7 +13,7 @@
             つまり、あるサイトに対するすべてのリクエストを
             ひとつのエントリポイントで処理するということです。その結果、
             すべての例外は最終的にフロントコントローラに到達することになります。
-            開発者は、例外をここでまとめて処理することができます。
+            開発者は、例外をここでまとめて処理できます。
         </para>
 
         <para>
@@ -85,7 +85,7 @@ try {
                 <para>
                     これが、自分のアプリケーションで独自の例外処理を行うための
                     もっとも簡単な方法でしょう。
-                    この方法で、発生しうるすべての例外を処理することができます。
+                    この方法で、発生しうるすべての例外を処理できます。
                 </para>
             </listitem>
 
@@ -311,7 +311,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             アプリケーション内でさまざまなアクションコントローラを使用しているとしましょう。
                             それらがすべて同一のクラスを継承しているとは限りません。
                             そのような場合にこの方式を使用すると、
-                            さまざまなクラスに対して一貫した処理を行うことができます。
+                            さまざまなクラスに対して一貫した処理を行えます。
                         </para>
 
                         <para>
@@ -326,7 +326,7 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
         $front      = Zend_Controller_Front::getInstance();
         $dispatcher = $front->getDispatcher();
         $class      = $dispatcher->getControllerClass($request);
-        if (!$controller) {
+        if (!$class) {
             $class = $dispatcher->getDefaultControllerClass($request);
         }
 

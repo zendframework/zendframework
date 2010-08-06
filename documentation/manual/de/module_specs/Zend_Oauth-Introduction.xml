@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20843 -->
+<!-- EN-Revision: 21819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.oauth.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Einführung zu OAuth</title>
@@ -23,14 +23,14 @@
         ist. Bei Verwendung dieses Access Tokens kann die Anwendungen auf die privaten Daten
         zugreifen ohne dauernd die Zugangsdaten zu benötigen. Insgesamt ist dieses Prokoll einer
         delegationsartigen Authorisierung eine sicherere Lösung des Problems auf private Daten
-        über eine beliebige Webservice API zuzugreifen.
+        über eine beliebige Webservice <acronym>API</acronym> zuzugreifen.
     </para>
 
     <para>
         OAuth ist keine komplett neue Idee, es ist mehr ein standardisiertes Protokoll welches auf
-        existierende Eigenschaften von Protokollen wie Google AuthSub, Yahoo BBAuth, Flickr API,
-        usw. aufsetzt. Alle von Ihnen arbeiten im weiteren Sinne auf der Basis einer
-        standardisierten Benutzerkennung für eine Art Access Token. Der Vorteil einer
+        existierende Eigenschaften von Protokollen wie Google AuthSub, Yahoo BBAuth, Flickr
+        <acronym>API</acronym>, usw. aufsetzt. Alle von Ihnen arbeiten im weiteren Sinne auf der
+        Basis einer standardisierten Benutzerkennung für eine Art Access Token. Der Vorteil einer
         standardisierten Spezifikation wie OAuth ist, das Sie nur eine einzelne Implementation
         benötigt im gegensatz zu vielen unterschiedlichen abhängig vom verwendeten Webservice. Diese
         Standardisierung hat nicht unabhängig von den Major Players stattgefunden, und aktuell

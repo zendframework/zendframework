@@ -27,14 +27,13 @@ namespace Zend\Tool\Framework\Client\Storage;
 
 /**
  * @uses       \Zend\Tool\Framework\Client\Exception
- * @uses       \Zend\Tool\Framework\Client\Storage\AdapterInterface
+ * @uses       \Zend\Tool\Framework\Client\Storage\Adapter
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Directory
-    implements AdapterInterface
+class Directory implements Adapter
 {
 
     protected $_directoryPath = null;

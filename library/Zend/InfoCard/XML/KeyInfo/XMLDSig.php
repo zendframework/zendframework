@@ -24,21 +24,21 @@
  */
 namespace Zend\InfoCard\XML\KeyInfo;
 
+use Zend\InfoCard\XML\KeyInfo;
+
 /**
  * Represents a Xml Digital Signature XML Data Block
  *
  * @uses       \Zend\InfoCard\XML\EncryptedKey
  * @uses       \Zend\InfoCard\XML\Exception
  * @uses       \Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo
- * @uses       \Zend\InfoCard\XML\KeyInfo\KeyInfoInterface
+ * @uses       \Zend\InfoCard\XML\KeyInfo
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class XMLDSig
-    extends AbstractKeyInfo
-    implements KeyInfoInterface
+class XMLDSig extends AbstractKeyInfo implements KeyInfo
 {
     /**
      * Returns an instance of the EncryptedKey Data Block
@@ -51,7 +51,7 @@ class XMLDSig
         $this->registerXPathNamespace('e', 'http://www.w3.org/2001/04/xmlenc#');
         list($encryptedkey) = $this->xpath('//e:EncryptedKey');
 
-        if(!($encryptedkey instanceof \Zend\InfoCard\XML\Element\Element)) {
+        if(!($encryptedkey instanceof \Zend\InfoCard\XML\AbstractElement)) {
             throw new \Zend\InfoCard\XML\Exception("Failed to retrieve encrypted key");
         }
 

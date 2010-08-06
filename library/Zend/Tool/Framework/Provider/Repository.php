@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Provider;
-use Zend\Tool\Framework\Registry;
+use Zend\Tool\Framework\Provider,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Framework\RegistryEnabled;
 
 /**
  * @uses       ArrayIterator
@@ -32,18 +34,17 @@ use Zend\Tool\Framework\Registry;
  * @uses       IteratorAggregate
  * @uses       \Zend\Tool\Framework\Provider\Exception
  * @uses       \Zend\Tool\Framework\Provider\Signature
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Repository
-    implements Registry\EnabledInterface, \IteratorAggregate, \Countable
+class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
 {
 
     /**
-     * @var \Zend\Tool\Framework\Registry\Registry
+     * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
 
@@ -53,7 +54,7 @@ class Repository
     protected $_processOnAdd = false;
 
     /**
-     * @var \Zend\Tool\Framework\Provider\ProviderInterface[]
+     * @var \Zend\Tool\Framework\Provider[]
      */
     protected $_unprocessedProviders = array();
 
@@ -70,10 +71,10 @@ class Repository
     /**
      * setRegistry()
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return unknown
      */
-    public function setRegistry(Registry\RegistryInterface $registry)
+    public function setRegistry(Registry $registry)
     {
         $this->_registry = $registry;
         return $this;
@@ -94,12 +95,12 @@ class Repository
     /**
      * Add a provider to the repository for processing
      *
-     * @param \Zend\Tool\Framework\Provider\ProviderInterface $provider
+     * @param \Zend\Tool\Framework\Provider $provider
      * @return \Zend\Tool\Framework\Provider\Repository
      */
-    public function addProvider(ProviderInterface $provider, $overwriteExistingProvider = false)
+    public function addProvider(Provider $provider, $overwriteExistingProvider = false)
     {
-        if ($provider instanceof Registry\EnabledInterface) {
+        if ($provider instanceof RegistryEnabled) {
             $provider->setRegistry($this->_registry);
         }
 
@@ -130,7 +131,7 @@ class Repository
 
     public function hasProvider($providerOrClassName, $processedOnly = true)
     {
-        if ($providerOrClassName instanceof ProviderInterface) {
+        if ($providerOrClassName instanceof Provider) {
             $targetProviderClassName = get_class($providerOrClassName);
         } else {
             $targetProviderClassName = (string) $providerOrClassName;
@@ -166,7 +167,7 @@ class Repository
             // create a signature for the provided provider
             $providerSignature = new Signature($provider);
 
-            if ($providerSignature instanceof Registry\EnabledInterface) {
+            if ($providerSignature instanceof RegistryEnabled) {
                 $providerSignature->setRegistry($this->_registry);
             }
 
@@ -209,7 +210,7 @@ class Repository
      * getProvider()
      *
      * @param string $providerName
-     * @return \Zend\Tool\Framework\Provider\ProviderInterface
+     * @return \Zend\Tool\Framework\Provider
      */
     public function getProvider($providerName)
     {
@@ -250,10 +251,10 @@ class Repository
     /**
      * _parseName - internal method to determine the name of an action when one is not explicity provided.
      *
-     * @param \Zend\Tool\Framework\Action\ActionInterface $action
+     * @param \Zend\Tool\Framework\Provider $action
      * @return string
      */
-    protected function _parseName(ProviderInterface $provider)
+    protected function _parseName(Provider $provider)
     {
         $className = get_class($provider);
         $providerName = substr($className, strrpos($className, '\\')+1);

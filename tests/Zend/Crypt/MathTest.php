@@ -25,7 +25,7 @@
  */
 namespace ZendTest\Crypt;
 
-use Zend\Crypt\Math\Math;
+use Zend\Crypt\Math;
 
 /**
  * @category   Zend

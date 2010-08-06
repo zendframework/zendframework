@@ -283,12 +283,25 @@ $router->addRoute('archive', $route);
 
         <programlisting language="php"><![CDATA[
 // Prepare the translator
-$translator = new Zend_Translate('array', array(), 'en');
-$translator->addTranslation(array('archive' => 'archiv',
-                                  'year'    => 'jahr',
-                                  'month'   => 'monat',
-                                  'index'   => 'uebersicht'),
-                            'de');
+$translator = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array(),
+        'locale'  => 'en'
+    )
+);
+$translator->addTranslation(
+    array(
+        'content' =>
+            array(
+                'archive' => 'archiv',
+                'year'    => 'jahr',
+                'month'   => 'monat',
+                'index'   => 'uebersicht'
+            ),
+        'locale'  => 'de'
+    )
+);
 
 // Set the current locale for the translator
 $translator->setLocale('en');

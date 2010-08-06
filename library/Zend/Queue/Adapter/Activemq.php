@@ -35,21 +35,21 @@ use Zend\Queue\Stomp\Client;
  * @uses       \Zend\Queue\Queue
  * @uses       \Zend\Queue\Exception
  * @uses       \Zend\Queue\Message\Message
- * @uses       \Zend\Queue\Stomp\Client\Client
+ * @uses       \Zend\Queue\Stomp\Client
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Activemq extends AdapterAbstract
+class Activemq extends AbstractAdapter
 {
     const DEFAULT_SCHEME = 'tcp';
     const DEFAULT_HOST   = '127.0.0.1';
     const DEFAULT_PORT   = 61613;
 
     /**
-     * @var \Zend\Queue\Stomp\Client\Client
+     * @var \Zend\Queue\Stomp\Client
      */
     private $_client = null;
 
@@ -78,7 +78,7 @@ class Activemq extends AdapterAbstract
         if (array_key_exists('stompClient', $options)) {
             $this->_client = $options['stompClient'];
         } else {
-            $this->_client = new Client\Client($options['scheme'], $options['host'], $options['port']);
+            $this->_client = new Client($options['scheme'], $options['host'], $options['port']);
         }
 
         $connect = $this->_client->createFrame();

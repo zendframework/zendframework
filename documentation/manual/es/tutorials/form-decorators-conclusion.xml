@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 19766 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.form.decorators.conclusion">
+    <title>Conclusión</title>
+    <para>
+         Los decoradores de Fomularios son un sistema que toma algún tiempo aprender. Al
+         principio, es probable que sienta que es demasiado complejo. Esperemos que los
+         distintos temas tratados en este capítulo le ayuden a entender su funcionamiento,
+         así como las estrategias para usarlos de manera efectiva en tus Formularios.
+    </para>
+</sect1>

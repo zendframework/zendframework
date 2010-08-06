@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Extension;
 
+use Zend\GData\Extension;
+
 /**
  * Implements the gd:rating element
  *
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

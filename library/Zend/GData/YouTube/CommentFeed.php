@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * The YouTube comments flavor of an Atom Feed
  *
  * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\CommentEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -45,7 +47,7 @@ class CommentFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\YouTube\CommentEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\CommentEntry';
 
     /**
      * Constructs a new YouTube Comment Feed object, to represent

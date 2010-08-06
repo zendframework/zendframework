@@ -24,9 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Navigation;
-use Zend\Navigation\Page;
-use Zend\Navigation;
-use Zend\Config;
+
+use Zend\Navigation\AbstractPage,
+    Zend\Navigation\Page,
+    Zend\Navigation,
+    Zend\Config;
 
 /**
  * Tests the class Zend_Navigation_Page
@@ -61,7 +63,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetShouldMapToNativeProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'mvc'
         ));
 
@@ -74,7 +76,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetShouldMapToNativeProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'mvc'
         ));
 
@@ -87,7 +89,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetShouldNormalizePropertyName()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'mvc'
         ));
 
@@ -98,7 +100,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetShouldNormalizePropertyName()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'mvc'
         ));
 
@@ -108,7 +110,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetAndGetShouldMapToProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri'
         ));
 
@@ -118,7 +120,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetShouldNotMapToSetOptionsToPreventRecursion()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'label' => 'foo'
         ));
@@ -132,7 +134,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetShouldNotMapToSetConfigToPreventRecursion()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'label' => 'foo'
         ));
@@ -146,7 +148,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetLabel()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -169,7 +171,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetId()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -193,7 +195,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testIdCouldBeAnInteger()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#',
             'id' => 10
@@ -204,7 +206,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetClass()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -227,7 +229,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetTitle()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -250,7 +252,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetTarget()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -273,7 +275,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructingWithRelationsInArray()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'bar',
             'uri'   => '#',
             'rel'   => array(
@@ -305,7 +307,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructingWithRelationsInConfig()
     {
-        $page = Page\Page::factory(new Config\Config(array(
+        $page = AbstractPage::factory(new Config\Config(array(
             'label' => 'bar',
             'uri'   => '#',
             'rel'   => array(
@@ -337,7 +339,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGettingSpecificRelations()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'bar',
             'uri'   => '#',
             'rel'   => array(
@@ -363,7 +365,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetOrder()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -393,7 +395,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetResourceString()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'  => 'uri',
             'label' => 'hello'
         ));
@@ -404,7 +406,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetResourceNoParam()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
             'resource' => 'foo'
@@ -416,7 +418,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetResourceNull()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
             'resource' => 'foo'
@@ -428,7 +430,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetResourceInterface()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello'
         ));
@@ -441,7 +443,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetResourceShouldThrowExceptionWhenGivenInteger()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello'
         ));
@@ -457,7 +459,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetResourceShouldThrowExceptionWhenGivenObject()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello'
         ));
@@ -473,7 +475,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPrivilegeNoParams()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
             'privilege' => 'foo'
@@ -485,7 +487,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPrivilegeNull()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
             'privilege' => 'foo'
@@ -497,7 +499,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPrivilegeString()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
             'privilege' => 'foo'
@@ -695,7 +697,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testMagicOverLoadsShouldSetAndGetNativeProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => 'foo'
         ));
@@ -710,7 +712,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testMagicOverLoadsShouldCheckNativeProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => 'foo'
         ));
@@ -727,7 +729,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testMagicOverLoadsShouldHandleCustomProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => 'foo'
         ));
@@ -744,7 +746,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testMagicToStringMethodShouldReturnLabel()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -754,7 +756,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetOptionsShouldTranslateToAccessor()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -794,7 +796,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetConfig()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'action' => 'index',
             'controller' => 'index'
@@ -834,7 +836,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetOptionsShouldSetCustomProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#'
         ));
@@ -856,7 +858,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingRelations()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'page',
             'uri'   => '#'
         ));
@@ -879,7 +881,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testRemovingRelations()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'page',
             'uri'   => '#'
         ));
@@ -904,7 +906,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRelShouldWorkWithArray()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rel'  => array(
                 'foo' => 'bar',
@@ -919,7 +921,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRelShouldWorkWithConfig()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rel'  => array(
                 'foo' => 'bar',
@@ -934,7 +936,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRelShouldWithNoParamsShouldResetRelations()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rel'  => array(
                 'foo' => 'bar',
@@ -949,7 +951,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRelShouldThrowExceptionWhenNotNullOrArrayOrConfig()
     {
-        $page = Page\Page::factory(array('type' => 'uri'));
+        $page = AbstractPage::factory(array('type' => 'uri'));
 
         try {
             $page->setRel('alternate');
@@ -962,7 +964,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRevShouldWorkWithArray()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rev'  => array(
                 'foo' => 'bar',
@@ -977,7 +979,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRevShouldWorkWithConfig()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rev'  => array(
                 'foo' => 'bar',
@@ -992,7 +994,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRevShouldWithNoParamsShouldResetRelations()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rev'  => array(
                 'foo' => 'bar',
@@ -1007,7 +1009,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetRevShouldThrowExceptionWhenNotNullOrArrayOrConfig()
     {
-        $page = Page\Page::factory(array('type' => 'uri'));
+        $page = AbstractPage::factory(array('type' => 'uri'));
 
         try {
             $page->setRev('alternate');
@@ -1020,7 +1022,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRelWithArgumentShouldRetrieveSpecificRelation()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rel'  => array(
                 'foo' => 'bar'
@@ -1032,7 +1034,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetRevWithArgumentShouldRetrieveSpecificRelation()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rev'  => array(
                 'foo' => 'bar'
@@ -1044,7 +1046,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefinedRel()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rel'  => array(
                 'alternate' => 'foo',
@@ -1058,7 +1060,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefinedRev()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rev'  => array(
                 'alternate' => 'foo',
@@ -1072,7 +1074,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCustomProperties()
     {
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#',
             'baz' => 'bat'
@@ -1127,7 +1129,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $page = Page\Page::factory($options);
+        $page = AbstractPage::factory($options);
         $toArray = $page->toArray();
 
         // tweak options to what we expect toArray() to contain

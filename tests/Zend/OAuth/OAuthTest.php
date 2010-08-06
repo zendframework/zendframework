@@ -2,7 +2,8 @@
 
 namespace ZendTest\OAuth;
 
-use Zend\OAuth;
+use Zend\OAuth,
+    Zend\Config\Config;
 
 class OauthTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +16,7 @@ class OauthTest extends \PHPUnit_Framework_TestCase
     public function testCanSetCustomHttpClient()
     {
         OAuth\OAuth::setHttpClient(new HTTPClient19485876());
-        $this->assertType('ZendTest\\OAuth\\HTTPClient19485876', OAuth\OAuth::getHttpClient());
+        $this->assertType('ZendTest\\OAuth\\HttpClient19485876', OAuth\OAuth::getHttpClient());
     }
 
     public function testGetHttpClientResetsParameters()
@@ -37,6 +38,36 @@ class OauthTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $resetClient->getHeader('Authorization'));
     }
 
+    /**
+     * @group ZF-10182
+     */
+    public function testOauthClientPassingObjectConfigInConstructor()
+    {
+        $options = array(
+            'requestMethod' => 'GET',
+            'siteUrl'       => 'http://www.example.com'
+        );
+
+        $config = new Config($options);
+        $client = new OAuth\Client($config);
+        $this->assertEquals('GET', $client->getRequestMethod());
+        $this->assertEquals('http://www.example.com', $client->getSiteUrl());
+    }
+
+    /**
+     * @group ZF-10182
+     */
+    public function testOauthClientPassingArrayInConstructor()
+    {
+        $options = array(
+            'requestMethod' => 'GET',
+            'siteUrl'       => 'http://www.example.com'
+        );
+
+        $client = new OAuth\Client($options);
+        $this->assertEquals('GET', $client->getRequestMethod());
+        $this->assertEquals('http://www.example.com', $client->getSiteUrl());
+    }
 }
 
-class HTTPClient19485876 extends \Zend\HTTP\Client {}
+class HTTPClient19485876 extends \Zend\Http\Client {}

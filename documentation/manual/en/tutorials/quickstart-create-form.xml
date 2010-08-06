@@ -91,10 +91,10 @@ class Application_Form_Guestbook extends Zend_Form
 
     <programlisting language="shell"><![CDATA[
 % zf create action sign Guestbook
-Creating an action named sign inside controller 
+Creating an action named sign inside controller
     at application/controllers/GuestbookController.php
 Updating project profile '.zfproject.xml'
-Creating a view script for the sign action method 
+Creating a view script for the sign action method
     at application/views/scripts/guestbook/sign.phtml
 Updating project profile '.zfproject.xml'
 ]]></programlisting>

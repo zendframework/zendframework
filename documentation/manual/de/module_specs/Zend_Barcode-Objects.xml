@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20764 -->
+<!-- EN-Revision: 21667 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.barcode.objects" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Barcode Objekte</title>
@@ -201,6 +201,13 @@ $barcode->setText('ZEND-FRAMEWORK')
                         <entry><type>Boolean</type></entry>
                         <entry><constant>FALSE</constant></entry>
                         <entry>Zeichnet einen Rahmen um den Barcode und die Randzonen</entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>withQuietZones</emphasis></entry>
+                        <entry><type>Boolean</type></entry>
+                        <entry><constant>TRUE</constant></entry>
+                        <entry>Lässt die Leerzone vor und nach dem Barcode weg</entry>
                     </row>
 
                     <row>

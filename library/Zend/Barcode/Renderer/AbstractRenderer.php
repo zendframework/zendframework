@@ -24,9 +24,11 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
-use Zend\Config;
-use Zend\Barcode;
-use Zend\Barcode\Object;
+
+use Zend\Barcode\Renderer,
+    Zend\Config\Config,
+    Zend\Barcode\BarcodeObject,
+    Zend\Barcode;
 
 /**
  * Class for rendering the barcode
@@ -37,13 +39,13 @@ use Zend\Barcode\Object;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRenderer implements RendererInterface
+abstract class AbstractRenderer implements Renderer
 {
     /**
      * Namespace of the renderer for autoloading
      * @var string
      */
-    protected $_rendererNamespace = '\Zend\Barcode\Renderer';
+    protected $_rendererNamespace = 'Zend\Barcode\Renderer';
 
     /**
      * Renderer type
@@ -89,7 +91,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Barcode object
-     * @var \Zend\Barcode\Object\ObjectInterface
+     * @var \Zend\Barcode\BarcodeObject
      */
     protected $_barcode;
 
@@ -105,21 +107,22 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
         }
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        /** @todo check if conversion is correct */
-        // $this->_type = strtolower(substr(get_class($this), strlen($this->_rendererNamespace) + 1));
-        $this->_type = substr(strrchr(get_class($this), '\\'), 1);
+        $this->_type = strtolower(substr(
+            get_class($this),
+            strlen($this->_rendererNamespace) + 1
+        ));
     }
 
     /**
      * Set renderer state from options array
      * @param  array $options
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      */
     public function setOptions($options)
     {
@@ -135,9 +138,9 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Set renderer state from config object
      * @param \Zend\Config\Config $config
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      */
-    public function setConfig(Config\Config $config)
+    public function setConfig(Config $config)
     {
         return $this->setOptions($config->toArray());
     }
@@ -146,7 +149,7 @@ abstract class AbstractRenderer implements RendererInterface
      * Set renderer namespace for autoloading
      *
      * @param string $namespace
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      */
     public function setRendererNamespace($namespace)
     {
@@ -176,7 +179,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Manually adjust top position
      * @param integer $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setTopOffset($value)
@@ -202,7 +205,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Manually adjust left position
      * @param integer $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setLeftOffset($value)
@@ -238,7 +241,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Horizontal position of the barcode in the rendering resource
      * @param string $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setHorizontalPosition($value)
@@ -264,7 +267,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Vertical position of the barcode in the rendering resource
      * @param string $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setVerticalPosition($value)
@@ -290,7 +293,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Set the size of a module
      * @param float $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setModuleSize($value)
@@ -325,12 +328,12 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Set the barcode object
-     * @param \Zend\Barcode\Object\ObjectInterface $barcode
+     * @param \Zend\Barcode\BarcodeObject $barcode
      * @return Zend_Barcode_Renderer
      */
     public function setBarcode($barcode)
     {
-        if (!$barcode instanceof Object\ObjectInterface) {
+        if (!$barcode instanceof BarcodeObject) {
             throw new Exception(
                 'Invalid barcode object provided to setBarcode()'
             );
@@ -341,7 +344,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Retrieve the barcode object
-     * \Zend\Barcode\Object\ObjectInterface
+     * \Zend\Barcode\BarcodeObject
      */
     public function getBarcode()
     {

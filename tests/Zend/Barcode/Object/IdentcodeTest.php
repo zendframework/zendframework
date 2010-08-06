@@ -43,7 +43,7 @@ class IdentcodeTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Identcode', $this->_object->getType());
+        $this->assertSame('identcode', $this->_object->getType());
     }
 
     public function testChecksum()
@@ -93,11 +93,9 @@ class IdentcodeTest extends TestCommon
         $this->assertSame('00.123 456.789 0', $this->_object->getTextToDisplay());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testBadTextDetectedIfChecksumWished()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('a');
         $this->_object->setWithChecksum(true);
         $this->_object->getText();
@@ -114,6 +112,8 @@ class IdentcodeTest extends TestCommon
     {
         $this->_object->setText('00123456789');
         $this->assertEquals(137, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(117, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

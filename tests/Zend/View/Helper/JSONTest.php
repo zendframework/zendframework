@@ -57,7 +57,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $front->resetInstance();
         $front->setResponse($this->response);
 
-        $this->helper = new \Zend\View\Helper\JSON();
+        $this->helper = new \Zend\View\Helper\Json();
     }
 
     /**
@@ -96,7 +96,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->helper->direct('foobar');
         $this->assertTrue(is_string($data));
-        $this->assertEquals('foobar', \Zend\JSON\JSON::decode($data));
+        $this->assertEquals('foobar', \Zend\Json\Json::decode($data));
     }
 
     public function testJsonHelperDisablesLayoutsByDefault()

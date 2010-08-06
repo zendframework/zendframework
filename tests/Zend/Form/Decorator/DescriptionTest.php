@@ -20,13 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Decorator_DescriptionTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_DescriptionTest::main");
-}
+namespace ZendTest\Form\Decorator;
 
-
-
+use Zend\Form\Decorator\Description as DescriptionDecorator,
+    Zend\Form\Element,
+    Zend\Translator\Translator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Decorator_Description
@@ -38,20 +37,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
+class DescriptionTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_DescriptionTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -64,27 +51,16 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
             unset($this->html);
         }
 
-        $this->element = new Zend_Form_Element('foo');
+        $this->element = new Element('foo');
         $this->element->setDescription('a test description')
                       ->setView($this->getView());
-        $this->decorator = new Zend_Form_Decorator_Description();
+        $this->decorator = new DescriptionDecorator();
         $this->decorator->setElement($this->element);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
+        $view = new View();
         return $view;
     }
 
@@ -172,15 +148,10 @@ class Zend_Form_Decorator_DescriptionTest extends PHPUnit_Framework_TestCase
     public function testDescriptionIsTranslatedWhenTranslationAvailable()
     {
         $translations = array('description' => 'This is the description');
-        $translate = new Zend_Translate('array', $translations);
+        $translate = new Translator('ArrayAdapter', $translations);
         $this->element->setDescription('description')
                       ->setTranslator($translate);
         $html = $this->decorator->render('');
         $this->assertContains($translations['description'], $html);
     }
-}
-
-// Call Zend_Form_Decorator_DescriptionTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_DescriptionTest::main") {
-    Zend_Form_Decorator_DescriptionTest::main();
 }

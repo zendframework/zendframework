@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile;
+use Zend\Tool\Project\Profile as ProjectProfile;
 
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
@@ -42,10 +42,10 @@ class Test extends AbstractProvider
     /**
      * isTestingEnabled()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @return bool
      */
-    public static function isTestingEnabled(Profile\Profile $profile)
+    public static function isTestingEnabled(ProjectProfile $profile)
     {
         $profileSearchParams = array('testsDirectory');
         $testsDirectory = $profile->search($profileSearchParams);
@@ -56,13 +56,13 @@ class Test extends AbstractProvider
     /**
      * createApplicationResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $controllerName
      * @param string $actionName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createApplicationResource(Profile\Profile $profile, $controllerName, $actionName, $moduleName = null)
+    public static function createApplicationResource(ProjectProfile $profile, $controllerName, $actionName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
             throw new Exception('Zend_Tool_Project_Provider_View::createApplicationResource() expects \"controllerName\" is the name of a controller resource to create.');
@@ -95,11 +95,11 @@ class Test extends AbstractProvider
     /**
      * createLibraryResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $libraryClassName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createLibraryResource(Profile\Profile $profile, $libraryClassName)
+    public static function createLibraryResource(ProjectProfile $profile, $libraryClassName)
     {
         $testLibraryDirectoryResource = $profile->search(array('TestsDirectory', 'TestLibraryDirectory'));
 

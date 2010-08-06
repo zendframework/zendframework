@@ -42,7 +42,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_URI'] = '/foo';
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
-        $this->request = new \Zend\Controller\Request\HTTP();
+        $this->request = new \Zend\Controller\Request\Http();
         $this->request->setModuleName('foo')
                 ->setControllerName('bar')
                 ->setActionName('baz');

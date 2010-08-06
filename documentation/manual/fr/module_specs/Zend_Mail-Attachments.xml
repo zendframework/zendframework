@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17503 -->
+<!-- EN-Revision: 21230 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.attachments">
     <title>Fichiers joints</title>
@@ -23,7 +23,7 @@ $mail->createAttachment($uneChaineBinaire);
 $mail->createAttachment($monImage,
                         'image/gif',
                         Zend_Mime::DISPOSITION_INLINE,
-                        Zend_Mime::ENCODING_8BIT);
+                        Zend_Mime::ENCODING_BASE64);
 ]]></programlisting>
     </example>
 
@@ -37,7 +37,7 @@ $mail = new Zend_Mail();
 $at = $mail->createAttachment($monImage);
 $at->type        = 'image/gif';
 $at->disposition = Zend_Mime::DISPOSITION_INLINE;
-$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->encoding    = Zend_Mime::ENCODING_BASE64;
 $at->filename    = 'test.gif';
 
 $mail->send();
@@ -55,7 +55,7 @@ $mail = new Zend_Mail();
 $at = new Zend_Mime_Part($monImage);
 $at->type        = 'image/gif';
 $at->disposition = Zend_Mime::DISPOSITION_INLINE;
-$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->encoding    = Zend_Mime::ENCODING_BASE64;
 $at->filename    = 'test.gif';
 
 $mail->addAttachment($at);

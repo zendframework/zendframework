@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Analysis;
+use Zend\Search\Lucene,
+    Zend\Search\Lucene\Analysis\TokenFilter,
+    Zend\Search\Lucene\Analysis\Token;
 
 /**
  * Token filter that removes stop words. These words must be provided as array (set), example:
@@ -33,7 +34,7 @@ use Zend\Search\Lucene\Analysis;
  *
  * We do recommend to provide all words in lowercase and concatenate this class after the lowercase filter.
  *
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface
+ * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
  * @uses       \Zend\Search\Lucene\Exception
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -41,7 +42,7 @@ use Zend\Search\Lucene\Analysis;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StopWords implements TokenFilterInterface
+class StopWords implements TokenFilter
 {
     /**
      * Stop Words
@@ -64,7 +65,7 @@ class StopWords implements TokenFilterInterface
      * @param \Zend\Search\Lucene\Analysis\Token $srcToken
      * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Analysis\Token $srcToken) {
+    public function normalize(Token $srcToken) {
         if (array_key_exists($srcToken->getTermText(), $this->_stopSet)) {
             return null;
         } else {

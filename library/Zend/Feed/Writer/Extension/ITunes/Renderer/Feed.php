@@ -20,18 +20,19 @@
  */
  
 /**
- * @see Zend_Feed_Writer_Extension_RendererAbstract
- */
-require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
- 
+* @namespace
+*/
+namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
+use Zend\Feed\Writer\Extension;
+
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
-    extends Zend_Feed_Writer_Extension_RendererAbstract
+* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Feed extends Extension\AbstractRenderer
 {
     
     /**
@@ -80,11 +81,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed authors
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
+    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
     {
         $authors = $this->getDataContainer()->getItunesAuthors();
         if (!$authors || empty($authors)) {
@@ -102,14 +103,14 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed itunes block
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setBlock(DOMDocument $dom, DOMElement $root)
+    protected function _setBlock(\DOMDocument $dom, \DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
-        if (is_null($block)) {
+        if ($block === null) {
             return;
         }
         $el = $dom->createElement('itunes:block');
@@ -122,11 +123,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed categories
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setCategories(DOMDocument $dom, DOMElement $root)
+    protected function _setCategories(\DOMDocument $dom, \DOMElement $root)
     {
         $cats = $this->getDataContainer()->getItunesCategories();
         if (!$cats || empty($cats)) {
@@ -154,11 +155,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed image (icon)
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setImage(DOMDocument $dom, DOMElement $root)
+    protected function _setImage(\DOMDocument $dom, \DOMElement $root)
     {
         $image = $this->getDataContainer()->getItunesImage();
         if (!$image) {
@@ -173,11 +174,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed cumulative duration
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setDuration(DOMDocument $dom, DOMElement $root)
+    protected function _setDuration(\DOMDocument $dom, \DOMElement $root)
     {
         $duration = $this->getDataContainer()->getItunesDuration();
         if (!$duration) {
@@ -193,14 +194,14 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set explicit flag
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setExplicit(DOMDocument $dom, DOMElement $root)
+    protected function _setExplicit(\DOMDocument $dom, \DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
-        if (is_null($explicit)) {
+        if ($explicit === null) {
             return;
         }
         $el = $dom->createElement('itunes:explicit');
@@ -213,11 +214,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed keywords
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setKeywords(DOMDocument $dom, DOMElement $root)
+    protected function _setKeywords(\DOMDocument $dom, \DOMElement $root)
     {
         $keywords = $this->getDataContainer()->getItunesKeywords();
         if (!$keywords || empty($keywords)) {
@@ -233,11 +234,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed's new URL
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setNewFeedUrl(DOMDocument $dom, DOMElement $root)
+    protected function _setNewFeedUrl(\DOMDocument $dom, \DOMElement $root)
     {
         $url = $this->getDataContainer()->getItunesNewFeedUrl();
         if (!$url) {
@@ -253,11 +254,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed owners 
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setOwners(DOMDocument $dom, DOMElement $root)
+    protected function _setOwners(\DOMDocument $dom, \DOMElement $root)
     {
         $owners = $this->getDataContainer()->getItunesOwners();
         if (!$owners || empty($owners)) {
@@ -281,11 +282,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed subtitle
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
+    protected function _setSubtitle(\DOMDocument $dom, \DOMElement $root)
     {
         $subtitle = $this->getDataContainer()->getItunesSubtitle();
         if (!$subtitle) {
@@ -301,11 +302,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     /**
      * Set feed summary
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setSummary(DOMDocument $dom, DOMElement $root)
+    protected function _setSummary(\DOMDocument $dom, \DOMElement $root)
     {
         $summary = $this->getDataContainer()->getItunesSummary();
         if (!$summary) {

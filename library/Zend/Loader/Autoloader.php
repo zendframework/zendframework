@@ -136,16 +136,16 @@ class Autoloader
         $self = self::getInstance();
 
         foreach ($self->getClassAutoloaders($class) as $autoloader) {
-            if ($autoloader instanceof AutoloaderInterface) {
+            if ($autoloader instanceof Autoloadable) {
                 if ($autoloader->autoload($class)) {
                     return true;
                 }
-            } elseif (is_string($autoloader)) {
-                if ($autoloader($class)) {
+            } elseif (is_array($autoloader)) {
+                if (call_user_func($autoloader, $class)) {
                     return true;
                 }
-            } elseif (is_callable($autoloader)) {
-                if (call_user_func($autoloader, $class)) {
+            } elseif (is_string($autoloader) || is_callable($autoloader)) {
+                if ($autoloader($class)) {
                     return true;
                 }
             }

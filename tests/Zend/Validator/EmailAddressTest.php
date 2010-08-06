@@ -27,18 +27,6 @@ namespace ZendTest\Validator;
 use Zend\Validator;
 use Zend\Validator\Hostname;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_EmailAddressTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_EmailAddress
- */
-
 /**
  * @category   Zend
  * @package    Zend_Validate
@@ -57,24 +45,12 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     protected $_validator;
 
     /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Creates a new Zend_Validate_EmailAddress object for each test method
      *
      * @return void
      */
     public function setUp()
     {
-        $this->markTestSkipped('Skipped until operands can be figured out.');
         $this->_validator = new Validator\EmailAddress();
     }
 
@@ -95,7 +71,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testLocalhostAllowed()
     {
-        $validator = new Validator\EmailAddress(Hostname\Hostname::ALLOW_ALL);
+        $validator = new Validator\EmailAddress(Hostname::ALLOW_ALL);
         $this->assertTrue($validator->isValid('username@localhost'));
     }
 
@@ -106,7 +82,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testLocaldomainAllowed()
     {
-        $validator = new Validator\EmailAddress(Hostname\Hostname::ALLOW_ALL);
+        $validator = new Validator\EmailAddress(Hostname::ALLOW_ALL);
         $this->assertTrue($validator->isValid('username@localhost.localdomain'));
     }
 
@@ -117,10 +93,10 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testIPAllowed()
     {
-        $validator = new Validator\EmailAddress(Hostname\Hostname::ALLOW_DNS | Hostname\Hostname::ALLOW_IP);
+        $validator = new Validator\EmailAddress(Hostname::ALLOW_DNS | Hostname::ALLOW_IP);
         $valuesExpected = array(
-            array(Hostname\Hostname::ALLOW_DNS, true, array('bob@212.212.20.4')),
-            array(Hostname\Hostname::ALLOW_DNS, false, array('bob@localhost'))
+            array(Hostname::ALLOW_DNS, true, array('bob@212.212.20.4')),
+            array(Hostname::ALLOW_DNS, false, array('bob@localhost'))
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[2] as $input) {
@@ -321,7 +297,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $validator = new Validator\EmailAddress(Hostname\Hostname::ALLOW_DNS, true);
+        $validator = new Validator\EmailAddress(Hostname::ALLOW_DNS, true);
 
         // Are MX checks supported by this system?
         if (!$validator->validateMxSupported()) {
@@ -397,7 +373,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testHostnameValidatorMessagesShouldBeTranslated()
     {
-        $hostnameValidator = new Hostname\Hostname();
+        $hostnameValidator = new Hostname();
         $translations = array(
             'hostnameIpAddressNotAllowed' => 'hostnameIpAddressNotAllowed translation',
             'hostnameUnknownTld' => 'hostnameUnknownTld translation',
@@ -408,7 +384,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             'hostnameInvalidLocalName' => 'hostnameInvalidLocalName translation',
             'hostnameLocalNameNotAllowed' => 'hostnameLocalNameNotAllowed translation',
         );
-        $translator = new \Zend\Translate\Translate('array', $translations);
+        $translator = new \Zend\Translator\Translator('ArrayAdapter', $translations);
         $this->_validator->setTranslator($translator)->setHostnameValidator($hostnameValidator);
 
         $this->_validator->isValid('_XX.!!3xx@0.239,512.777');
@@ -486,14 +462,14 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator\EmailAddress();
         $options   = $validator->getOptions();
 
-        $this->assertEquals(Hostname\Hostname::ALLOW_DNS, $options['allow']);
+        $this->assertEquals(Hostname::ALLOW_DNS, $options['allow']);
         $this->assertFalse($options['mx']);
 
         try {
-            $validator = new Validator\EmailAddress(Hostname\Hostname::ALLOW_ALL, true, new Hostname\Hostname(Hostname\Hostname::ALLOW_ALL));
+            $validator = new Validator\EmailAddress(Hostname::ALLOW_ALL, true, new Hostname(Hostname::ALLOW_ALL));
             $options   = $validator->getOptions();
 
-            $this->assertEquals(Hostname\Hostname::ALLOW_ALL, $options['allow']);
+            $this->assertEquals(Hostname::ALLOW_ALL, $options['allow']);
             $this->assertTrue($options['mx']);
             set_error_handler($handler);
         } catch (\Zend\Exception $e) {
@@ -511,7 +487,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('TestMessage', $messages[Validator\EmailAddress::INVALID]);
 
         $oldHostname = $this->_validator->getHostnameValidator();
-        $this->_validator->setOptions(array('hostname' => new Hostname\Hostname(Hostname\Hostname::ALLOW_ALL)));
+        $this->_validator->setOptions(array('hostname' => new Hostname(Hostname::ALLOW_ALL)));
         $hostname = $this->_validator->getHostnameValidator();
         $this->assertNotEquals($oldHostname, $hostname);
     }
@@ -570,8 +546,4 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             $this->multipleOptionsDetected = true;
         }
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Validate_EmailAddressTest::main') {
-    \Zend_Validate_EmailAddressTest::main();
 }

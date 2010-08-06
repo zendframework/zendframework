@@ -58,12 +58,12 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Registry\Registry::REGISTRY_KEY;
+        $regKey = Registry::REGISTRY_KEY;
         if (\Zend\Registry::isRegistered($regKey)) {
             $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
         }
-        $this->basePath = dirname(__FILE__) . '/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadTitle();
     }
 
@@ -80,7 +80,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Registry\Registry::getRegistry();
+        $registry = Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadTitle')) {
             $registry->deleteContainer('Zend_View_Helper_HeadTitle');
         }
@@ -193,7 +193,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTranslateTitle()
     {
-        $adapter = new \Zend\Translator\Adapter\Ini(dirname(__FILE__) . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
+        $adapter = new \Zend\Translator\Adapter\Ini(__DIR__ . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
         \Zend\Registry::set('Zend_Translate', $adapter);
         $this->helper->enableTranslation();
         $this->helper->direct('Message_1');
@@ -207,5 +207,13 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->direct('0');
         $this->assertEquals('<title>0</title>', $this->helper->toString());
+    }
+
+    public function testCanPrependTitlesUsingDefaultAttachOrder()
+    {
+        $this->helper->setDefaultAttachOrder('PREPEND');
+        $placeholder = $this->helper->direct('Foo');
+        $placeholder = $this->helper->direct('Bar');
+        $this->assertContains('BarFoo', $placeholder->toString());
     }
 }

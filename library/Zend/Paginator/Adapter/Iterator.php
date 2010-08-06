@@ -24,8 +24,10 @@
  */
 namespace Zend\Paginator\Adapter;
 
+use Zend\Paginator\Adapter;
+
 /**
- * @uses       \Zend\Paginator\Adapter\AdapterInterface
+ * @uses       \Zend\Paginator\Adapter
  * @uses       \Zend\Paginator\Exception
  * @uses       \Zend\Paginator\SerializableLimitIterator
  * @category   Zend
@@ -33,7 +35,7 @@ namespace Zend\Paginator\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Iterator implements AdapterInterface
+class Iterator implements Adapter
 {
     /**
      * Iterator which implements Countable

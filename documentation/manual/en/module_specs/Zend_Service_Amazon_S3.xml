@@ -459,8 +459,8 @@ foreach($list as $name) {
 
         <para>
             It is possible to get and put objects using not stream data held in memory but files or
-            PHP streams. This is especially useful when file sizes are large in order not to
-            overcome memory limits.
+            <acronym>PHP</acronym> streams. This is especially useful when file sizes are large in
+            order not to overcome memory limits.
         </para>
 
         <para>
@@ -486,7 +486,7 @@ stream_copy_to_stream($response->getStream(), $fp);
         <para>
             Second parameter for <methodname>getObjectStream()</methodname> is optional and
             specifies target file to write the data. If not specified, temporary file is used, which
-            will be deleted after the respons eobject is destroyed.
+            will be deleted after the response object is destroyed.
         </para>
 
         <para>

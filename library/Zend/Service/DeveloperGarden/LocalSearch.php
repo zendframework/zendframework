@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
  * @uses       Zend_Service_DeveloperGarden_Request_LocalSearch_LocalSearchRequest
  * @uses       Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponse
@@ -34,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_LocalSearch
-    extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+    extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * wsdl file

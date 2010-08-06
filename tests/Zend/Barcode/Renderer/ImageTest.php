@@ -53,7 +53,7 @@ class ImageTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Image', $this->_renderer->getType());
+        $this->assertSame('image', $this->_renderer->getType());
     }
 
     public function testGoodImageResource()
@@ -62,11 +62,9 @@ class ImageTest extends TestCommon
         $this->_renderer->setResource($imageResource);
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testObjectImageResource()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $imageResource = new \StdClass();
         $this->_renderer->setResource($imageResource);
     }
@@ -80,11 +78,9 @@ class ImageTest extends TestCommon
         $this->assertSame(0, $this->_renderer->getHeight());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadHeight()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setHeight(- 1);
     }
 
@@ -97,11 +93,9 @@ class ImageTest extends TestCommon
         $this->assertSame(0, $this->_renderer->getWidth());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadWidth()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setWidth(- 1);
     }
 
@@ -116,18 +110,15 @@ class ImageTest extends TestCommon
         }
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testNonAllowedImageType()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setImageType('other');
     }
 
     public function testDrawReturnResource()
     {
         $this->_checkTTFRequirement();
-
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $resource = $this->_renderer->draw();
@@ -138,7 +129,6 @@ class ImageTest extends TestCommon
     public function testDrawWithExistantResourceReturnResource()
     {
         $this->_checkTTFRequirement();
-
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $imageResource = imagecreatetruecolor(500, 500);
@@ -158,11 +148,9 @@ class ImageTest extends TestCommon
         $this->assertTrue($this->_renderer->checkParams());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadUserHeightLessThanBarcodeHeight()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
@@ -179,11 +167,9 @@ class ImageTest extends TestCommon
         $this->assertTrue($this->_renderer->checkParams());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadUserWidthLessThanBarcodeWidth()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $this->_renderer->setBarcode($barcode);
@@ -201,11 +187,9 @@ class ImageTest extends TestCommon
         $this->assertTrue($this->_renderer->checkParams());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadHeightOfUserResource()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
@@ -224,11 +208,9 @@ class ImageTest extends TestCommon
         $this->assertTrue($this->_renderer->checkParams());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadWidthOfUserResource()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $this->_renderer->setBarcode($barcode);
@@ -237,11 +219,9 @@ class ImageTest extends TestCommon
         $this->_renderer->checkParams();
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testNoFontWithOrientation()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         Barcode\Barcode::setBarcodeFont(null);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $barcode->setOrientation(1);
@@ -254,11 +234,9 @@ class ImageTest extends TestCommon
         return $this->_renderer->setHeight(300)->setWidth(500);
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testRendererWithUnkownInstructionProvideByObject()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         parent::testRendererWithUnkownInstructionProvideByObject();
     }
 

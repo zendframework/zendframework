@@ -39,7 +39,7 @@ class Zend_Service_AkismetTest extends PHPUnit_Framework_TestCase
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Akismet::setDefaultHTTPClient($client);
+        Zend_Service_Akismet::setDefaultHttpClient($client);
 
         $this->comment = array(
             'user_ip'         => '71.161.221.76',

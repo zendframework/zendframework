@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db\DataSet;
+use Zend\Test\PHPUnit\Db\DataSet;
 
 /**
  * @category   Zend
@@ -29,7 +34,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCase
+class DbTableTest extends \PHPUnit_Framework_TestCase
 {
     public function testLoadDataSetDelegatesWhereLimitOrderBy()
     {
@@ -38,13 +43,13 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCas
         $fixtureOffset = "offset";
         $fixtureOrderBy = "order";
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend\Db\Table\Table', array(), array(), '', false);
         $table->expects($this->once())
               ->method('fetchAll')
               ->with($fixtureWhere, $fixtureOrderBy, $fixtureLimit, $fixtureOffset)
               ->will($this->returnValue(array()));
 
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table, $fixtureWhere, $fixtureOrderBy, $fixtureLimit, $fixtureOffset);
+        $dataSet = new DataSet\DbTable($table, $fixtureWhere, $fixtureOrderBy, $fixtureLimit, $fixtureOffset);
         $count = $dataSet->getRowCount();
     }
 
@@ -52,7 +57,7 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCas
     {
         $fixtureTableName = "foo";
 
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend\Db\Table\Table', array(), array(), '', false);
         $table->expects($this->at(0))
               ->method('info')
               ->with($this->equalTo('name'))
@@ -65,7 +70,7 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCas
               ->method('fetchAll')
               ->will($this->returnValue(array( array("foo" => 1, "bar" => 2) )));
 
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table);
+        $dataSet = new DataSet\DbTable($table);
 
         $this->assertEquals($fixtureTableName, $dataSet->getTableMetaData()->getTableName());
         $this->assertEquals(array("foo", "bar"), $dataSet->getTableMetaData()->getColumns());
@@ -73,12 +78,12 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTableTest extends PHPUnit_Framework_TestCas
 
     public function testLoadDataOnlyCalledOnce()
     {
-        $table = $this->getMock('Zend_Db_Table', array(), array(), '', false);
+        $table = $this->getMock('Zend\Db\Table\Table', array(), array(), '', false);
         $table->expects($this->once())
               ->method('fetchAll')
               ->will($this->returnValue(array( array("foo" => 1, "bar" => 2) )));
 
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table);
+        $dataSet = new DataSet\DbTable($table);
         $dataSet->getRow(0);
         $dataSet->getRow(0);
     }

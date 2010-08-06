@@ -88,7 +88,7 @@ $validator->setFormat('AT-\d{5}');
             <classname>Zend_Validate_PostCode</classname>.
         </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_PostCode('de_AT');
 $validator = new Zend_Validate_PostCode($locale);
 ]]></programlisting>
@@ -99,7 +99,7 @@ $validator = new Zend_Validate_PostCode($locale);
             "format"; these will be used to set the appropriate values in the validator object.
         </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_PostCode(array(
     'locale' => 'de_AT',
     'format' => 'AT_\d+'

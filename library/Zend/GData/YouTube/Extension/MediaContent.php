@@ -32,7 +32,7 @@ namespace Zend\GData\YouTube\Extension;
  * media:group (Zend_Gdata_Media_Extension_MediaGroup) element.
  *
  * @uses       \Zend\GData\Media\Extension\MediaContent
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
@@ -54,7 +54,7 @@ class MediaContent extends \Zend\GData\Media\Extension\MediaContent
 
 
     function __construct() {
-        $this->registerAllNamespaces(\Zend\GData\YouTube\YouTube::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\YouTube::$namespaces);
         parent::__construct();
     }
 

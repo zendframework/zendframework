@@ -29,7 +29,7 @@ error_reporting( E_ALL | E_STRICT );
  * Determine the root, library, and tests directories of the framework
  * distribution.
  */
-$zfRoot        = realpath(dirname(dirname(__FILE__)));
+$zfRoot        = realpath(dirname(__DIR__));
 $zfCoreLibrary = "$zfRoot/library";
 $zfCoreTests   = "$zfRoot/tests";
 
@@ -53,11 +53,12 @@ function ZendTest_Autoloader($class)
 {
     $class = ltrim($class, '\\');
 
-    if (!preg_match('#^Zend(Test)?(\\\\|_)#', $class)) {
+    if (!preg_match('#^(Zend(Test)?|PHPUnit)(\\\\|_)#', $class)) {
         return false;
     }
 
-    $segments = explode('\\', $class);
+    // $segments = explode('\\', $class); // preg_split('#\\\\|_#', $class);//
+    $segments = preg_split('#[\\\\_]#', $class); // preg_split('#\\\\|_#', $class);//
     $ns       = array_shift($segments);
 
     switch ($ns) {
@@ -71,7 +72,7 @@ function ZendTest_Autoloader($class)
             break;
         default:
             $file = false;
-            break;;
+            break;
     }
 
     if ($file) {
@@ -85,6 +86,8 @@ function ZendTest_Autoloader($class)
     $ns       = array_shift($segments);
 
     switch ($ns) {
+        case 'PHPUnit':
+            return include_once str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
         case 'Zend':
             $file = dirname(__DIR__) . '/library/Zend/';
             break;

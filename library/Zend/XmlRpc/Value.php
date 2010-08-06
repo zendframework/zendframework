@@ -174,6 +174,7 @@ abstract class Value
     {
         if (!$this->_xml) {
             $this->generateXml();
+            $this->_xml = (string) $this->getGenerator();
         }
         return $this->_xml;
     }
@@ -185,9 +186,7 @@ abstract class Value
      */
     public function generateXml()
     {
-        if (!$this->_xml) {
-            $this->_generateXml();
-        }
+        $this->_generateXml();
     }
 
     /**
@@ -276,7 +275,7 @@ abstract class Value
                     return $value;
                 }
 
-                if ($value instanceof \Zend\Crypt\Math\BigInteger\BigInteger) {
+                if ($value instanceof \Zend\Crypt\Math\BigInteger) {
                     return new Value\BigInteger($value);
                 }
 

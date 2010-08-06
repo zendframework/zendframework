@@ -25,8 +25,9 @@ namespace ZendTest\Session\SaveHandler;
 use Zend\Session\SaveHandler\DbTable,
     Zend\Session\SaveHandler\Exception as SaveHandlerException,
     Zend\Session\Manager,
-    Zend\DB\DB,
-    Zend\DB\Table\AbstractTable,
+    Zend\Db\Db,
+    Zend\Db\Adapter\AbstractAdapter,
+    Zend\Db\Table\AbstractTable,
     ZendTest\Session\TestAsset\TestManager;
 
 /**
@@ -84,7 +85,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('pdo_sqlite')) {
-            $this->markTestSkipped('Zend\\Session\\SaveHandler\\DbTable tests are not enabled due to missing PDO_Sqlite extension');
+            $this->markTestSkipped('Zend\Session\SaveHandler\DbTable tests are not enabled due to missing PDO_Sqlite extension');
         }
 
         $this->manager = $manager = new TestManager();
@@ -99,7 +100,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        $this->_dropTable();
+        if ($this->_db instanceof AbstractAdapter) {
+            $this->_dropTable();
+        }
     }
 
     public function testConfigPrimaryAssignmentFullConfig()
@@ -113,7 +116,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsExceptionGivenConfigAsNull()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable(null);
     }
 
@@ -144,7 +147,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testPrimaryAssignmentIdNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         $config['primary'] = array('id');
         $config[DbTable::PRIMARY_ASSIGNMENT]
@@ -171,7 +174,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testModifiedColumnNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[DbTable::MODIFIED_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -183,7 +186,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testLifetimeColumnNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[DbTable::LIFETIME_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -195,7 +198,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testDataColumnNotSet()
     {
-        $this->setExpectedException('Zend\\Session\\SaveHandler\\Exception');
+        $this->setExpectedException('Zend\Session\SaveHandler\Exception');
         $config = $this->_saveHandlerTableConfig;
         unset($config[DbTable::DATA_COLUMN]);
         $this->_usedSaveHandlers[] =
@@ -529,7 +532,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The pdo_sqlite extension must be available and enabled for this test');
         }
 
-        $this->_db = DB::factory('PDO\\SQLite', array('dbname' => ':memory:'));
+        $this->_db = Db::factory('Pdo\Sqlite', array('dbname' => ':memory:'));
         AbstractTable::setDefaultAdapter($this->_db);
         $query = array();
         $query[] = 'CREATE TABLE `Sessions` ( ';
@@ -555,7 +558,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     protected function _dropTable()
     {
-        if (!$this->_db instanceof \Zend_Db_Adapter_Abstract) {
+        if (!$this->_db instanceof AbstractAdapter) {
             return;
         }
         $this->_db->query('DROP TABLE Sessions');

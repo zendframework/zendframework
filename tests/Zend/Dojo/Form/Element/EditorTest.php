@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_Element_EditorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_EditorTest::main");
-}
+namespace ZendTest\Dojo\Form\Element;
 
-
-/** Zend_Dojo_Form_Element_Editor */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\Form\Element\Editor as EditorElement,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_Editor.
@@ -45,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
+class EditorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_EditorTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,34 +48,24 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view    = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Dojo_Form_Element_Editor(
+        $element = new EditorElement(
             'foo',
             array(
                 'value' => 'some text',
@@ -258,9 +230,4 @@ class Zend_Dojo_Form_Element_EditorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->element->getDijitParam('updateInterval'), $this->element->getUpdateInterval());
         $this->assertEquals(300, $this->element->getUpdateInterval());
     }
-}
-
-// Call Zend_Dojo_Form_Element_EditorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_EditorTest::main") {
-    Zend_Dojo_Form_Element_EditorTest::main();
 }

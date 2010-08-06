@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20827 -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer の基本</title>
     <para>
@@ -294,7 +294,7 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
             しかし、このストレージがあらゆる場合にうまく使えるというわけではありません。
             たとえばその手の情報はデータベースに保存したいという人もいるでしょうし、
             大規模なウェブファームで共通のストレージを使用したいこともあるでしょう。
-            幸いなことに、このデフォルトのストレージは簡単に変更することができます。
+            幸いなことに、このデフォルトのストレージは簡単に変更できます。
             そのために必要なのは、<classname>Zend_OpenId_Consumer_Storage</classname>
             クラスを継承した独自のストレージクラスを実装して
             それを <classname>Zend_OpenId_Consumer</classname>
@@ -601,7 +601,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
 
         <para>
             OpenID 対応のウェブサイトからは、
-            これらのフィールドの任意の組み合わせについての問い合わせをすることができます。
+            これらのフィールドの任意の組み合わせについて問い合わせられます。
             また、いくつかの情報についてのみ厳密に問い合わせを行い、
             それ以外の情報については開示するかしないかをユーザに決めさせることもできます。
             次の例は、<emphasis>nickname</emphasis> およびオプションで
@@ -634,7 +634,7 @@ if (!$consumer->login($_POST['openid_identifier'],
             <constant>TRUE</constant> はそのフィールドが必須であること、そして
             <constant>FALSE</constant> はそのフィールドがオプションであることを表します。
             <classname>Zend_OpenId_Consumer::login</classname> の 4 番目の引数には、
-            extension あるいは extension のリストを指定することができます。
+            extension あるいは extension のリストを指定できます。
         </para>
 
         <para>

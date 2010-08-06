@@ -56,24 +56,24 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
         }
 
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker\HelperBroker::resetHelpers();
-        HelperBroker\HelperBroker::addPrefix('Zend\Controller\Action\Helper');
+        HelperBroker::resetHelpers();
+        HelperBroker::addPrefix('Zend\Controller\Action\Helper');
 
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
-        $this->front->addModuleDirectory(dirname(__FILE__) . '/../../_files/modules');
+        $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
 
         $this->layout = Layout\Layout::startMvc();
 
         $this->helper = new \Zend\Controller\Action\Helper\AjaxContext();
 
-        $this->request = new \Zend\Controller\Request\HTTP();
+        $this->request = new \Zend\Controller\Request\Http();
         $this->response = new \Zend\Controller\Response\Cli();
 
         $this->front->setRequest($this->request)->setResponse($this->response);
         $this->view = new \Zend\View\View();
-        $this->view->addHelperPath(dirname(__FILE__) . '/../../../../../library/Zend/View/Helper/');
-        $this->viewRenderer = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $this->view->addHelperPath(__DIR__ . '/../../../../../library/Zend/View/Helper/');
+        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
         $this->controller = new AjaxContextTestController(
@@ -123,8 +123,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
 
     public function testInitContextFailsWithNoAjaxableActions()
     {
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
-        $this->assertTrue($this->request->isXmlHTTPRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $this->assertTrue($this->request->isXmlHttpRequest());
 
         $this->controller->contexts = $this->controller->ajaxable;
         unset($this->controller->ajaxable);
@@ -136,8 +136,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
 
     public function testInitContextSwitchesContextWithXhrRequests()
     {
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
-        $this->assertTrue($this->request->isXmlHTTPRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $this->assertTrue($this->request->isXmlHttpRequest());
 
         $this->request->setParam('format', 'xml')
                       ->setActionName('foo');
@@ -161,8 +161,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCurrentContextResetToNullWhenSubsequentInitContextFailsXhrTest()
     {
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
-        $this->assertTrue($this->request->isXmlHTTPRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $this->assertTrue($this->request->isXmlHttpRequest());
 
         $this->assertNull($this->helper->getCurrentContext());
 
@@ -179,7 +179,7 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class AjaxContextTestController extends \Zend\Controller\Action\Action
+class AjaxContextTestController extends \Zend\Controller\Action
 {
     public $ajaxable = array(
         'foo' => array('xml'),

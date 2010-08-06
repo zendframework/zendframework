@@ -80,7 +80,7 @@ echo $element->renderSimpleInput();
     <para>
         First, let's define a form. Our form will capture a user's demographic details. The markup
         will be highly customized, and in some cases use view helpers directly instead of form
-        elements in order to achieve its goals.  Here is the basic form definition:
+        elements in order to achieve its goals. Here is the basic form definition:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -128,7 +128,7 @@ class My_Form_UserDemographics extends Zend_Form
     <para>
         With that out of the way, let's consider how we might want to display this form. One common
         idiom with first/last names is to display them on a single line; when a title is provided,
-        that is often on the same line as well.  Dates, when not using a JavaScript date chooser,
+        that is often on the same line as well. Dates, when not using a JavaScript date chooser,
         will often be separated into three fields displayed side by side.
     </para>
 
@@ -162,7 +162,7 @@ class My_Form_UserDemographics extends Zend_Form
         <listitem>
             <para>
                 <classname>HtmlTag</classname>: wrap the above three items in a
-                <code>&lt;dd&gt;</code> tag
+                <emphasis>&lt;dd&gt;</emphasis> tag
             </para>
         </listitem>
 
@@ -170,7 +170,7 @@ class My_Form_UserDemographics extends Zend_Form
             <para>
                 <classname>Label</classname>: render the element label using the
                 <classname>FormLabel</classname> view helper (and wrap it in a
-                <code>&lt;dt&gt;</code> tag)
+                <emphasis>&lt;dt&gt;</emphasis> tag)
             </para>
         </listitem>
     </itemizedlist>
@@ -226,8 +226,8 @@ foreach ($form->getElements() as $element) {
 ]]></programlisting>
 
     <para>
-        If you use the above view script, you'll get approximately the following HTML (approximate,
-        as the HTML below is formatted):
+        If you use the above view script, you'll get approximately the following
+        <acronym>HTML</acronym> (approximate, as the <acronym>HTML</acronym> below is formatted):
     </para>
 
     <programlisting language="html"><![CDATA[

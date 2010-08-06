@@ -52,7 +52,7 @@ class Size extends Validator\AbstractValidator
     protected $_messageTemplates = array(
         self::TOO_BIG   => "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected",
         self::TOO_SMALL => "Minimum expected size for file '%value%' is '%min%' but '%size%' detected",
-        self::NOT_FOUND => "File '%value%' could not be found",
+        self::NOT_FOUND => "File '%value%' is not readable or does not exist",
     );
 
     /**

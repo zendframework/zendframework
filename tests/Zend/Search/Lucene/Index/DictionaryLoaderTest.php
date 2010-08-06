@@ -54,7 +54,7 @@ class DictionaryLoaderTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $directory = new \Zend\Search\Lucene\Storage\Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new \Zend\Search\Lucene\Storage\Directory\Filesystem(__DIR__ . '/_source/_files');
 
         $stiFile = $directory->getFileObject('_1.sti');
         $stiFileData = $stiFile->readBytes($directory->fileLength('_1.sti'));

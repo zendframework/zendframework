@@ -84,12 +84,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForValidators()
     {
         $loader = $this->adapter->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof PluginLoader\PluginLoader);
+        $this->assertTrue($loader instanceof PluginLoader);
     }
 
     public function testAdapterShouldAllowAddingCustomPluginLoader()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->adapter->setPluginLoader($loader, 'filter');
         $this->assertSame($loader, $this->adapter->getPluginLoader('filter'));
     }
@@ -99,7 +99,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
     {
-        $loader = new PluginLoader\PluginLoader();
+        $loader = new PluginLoader();
         $this->adapter->setPluginLoader($loader, 'bogus');
     }
 
@@ -117,7 +117,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $validateLoader = $this->adapter->getPluginLoader('validator');
         $filterLoader   = $this->adapter->getPluginLoader('filter');
         $paths = $validateLoader->getPaths('Foo\Validator');
-        $this->assertTrue(is_array($paths));
+        $this->assertTrue(is_array($paths), var_export($paths, 1));
         $paths = $filterLoader->getPaths('Foo\Filter');
         $this->assertTrue(is_array($paths));
     }
@@ -354,7 +354,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForFilters()
     {
         $loader = $this->adapter->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof PluginLoader\PluginLoader);
+        $this->assertTrue($loader instanceof PluginLoader);
     }
 
     public function testFilterPluginLoaderShouldRegisterPathsForBaseAndFileFiltersByDefault()
@@ -498,7 +498,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testTransferDestinationShouldBeMutable()
     {
-        $directory = dirname(__FILE__);
+        $directory = __DIR__;
         $this->adapter->setDestination($directory);
         $destinations = $this->adapter->getDestination();
         $this->assertTrue(is_array($destinations));
@@ -506,7 +506,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($directory, $destination);
         }
 
-        $newdirectory = dirname(__FILE__)
+        $newdirectory = __DIR__
                       . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($newdirectory, 'foo');
         $this->assertEquals($newdirectory, $this->adapter->getDestination('foo'));
@@ -515,10 +515,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowRetrievingDestinationsForAnArrayOfSpecifiedFiles()
     {
-        $this->adapter->setDestination(dirname(__FILE__));
+        $this->adapter->setDestination(__DIR__);
         $destinations = $this->adapter->getDestination(array('bar', 'baz'));
         $this->assertTrue(is_array($destinations));
-        $directory = dirname(__FILE__);
+        $directory = __DIR__;
         foreach ($destinations as $file => $destination) {
             $this->assertTrue(in_array($file, array('bar', 'baz')));
             $this->assertEquals($directory, $destination);
@@ -621,7 +621,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowRetrievingFileName()
     {
-        $path = dirname(__FILE__)
+        $path = __DIR__
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo.jpg', $this->adapter->getFileName('foo'));
@@ -629,7 +629,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowRetrievingFileNameWithoutPath()
     {
-        $path = dirname(__FILE__)
+        $path = __DIR__
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $this->assertEquals('foo.jpg', $this->adapter->getFileName('foo', false));
@@ -637,7 +637,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowRetrievingAllFileNames()
     {
-        $path = dirname(__FILE__)
+        $path = __DIR__
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName();
@@ -647,7 +647,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowRetrievingAllFileNamesWithoutPath()
     {
-        $path = dirname(__FILE__)
+        $path = __DIR__
               . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName(null, false);
@@ -759,7 +759,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testTransferDestinationAtNonExistingElement()
     {
-        $directory = dirname(__FILE__);
+        $directory = __DIR__;
         $this->adapter->setDestination($directory, 'nonexisting');
         $this->assertEquals($directory, $this->adapter->getDestination('nonexisting'));
         try {
@@ -847,7 +847,7 @@ class AbstractTestMockAdapter extends \Zend\File\Transfer\Adapter\AbstractAdapte
 
     public function __construct()
     {
-        $testfile = dirname(__FILE__) . '/_files/test.txt';
+        $testfile = __DIR__ . '/_files/test.txt';
         $this->_files = array(
             'foo' => array(
                 'name'      => 'foo.jpg',

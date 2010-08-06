@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 22068 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.calendar">
     <title>Google Kalender verwenden</title>
@@ -248,8 +248,8 @@ $service = new Zend_Gdata_Calendar();
         <para>
             Der Kalender Service unterstützt den Empfang einer Liste von Kalendern für den
             authentifizierten Benutzer. Das ist die gleiche Liste von Kalendern welche im Google
-            Kalender UI angezeigt werden, ausser das jene die als "<code>hidden</code>" markiert
-            sind, auch vorhanden sind.
+            Kalender UI angezeigt werden, ausser das jene die als "<emphasis>hidden</emphasis>"
+            markiert sind, auch vorhanden sind.
         </para>
 
         <para>
@@ -363,11 +363,11 @@ echo "</ul>";
                 <classname>Zend_Gdata_Query</classname> Klasse und spezifiziert den privat
                 sichtbaren Feed, welcher eine vorhandene authentifizierte Verbindung zu den Kalender
                 Servern benötigt. Wenn ein MagicCookie für die Authentifizierung verwendet wird,
-                sollte die Sichtbarkeit zuerst auf "<code>private-magicCookieValue</code>" gesetzt
-                werden, sobei magicCookieValue der zufälliger String ist, der erhalten wird, wenn
-                man die private <acronym>XML</acronym> Adresse im Google Kalender UI betrachtet.
-                Events werden chronologisch anhand des Startzeitpunktes angefragt und nur Events die
-                in der Zukunft stattfinden werden zurückgegeben.
+                sollte die Sichtbarkeit zuerst auf "<emphasis>private-magicCookieValue</emphasis>"
+                gesetzt werden, sobei magicCookieValue der zufälliger String ist, der erhalten wird,
+                wenn man die private <acronym>XML</acronym> Adresse im Google Kalender UI
+                betrachtet. Events werden chronologisch anhand des Startzeitpunktes angefragt und
+                nur Events die in der Zukunft stattfinden werden zurückgegeben.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -413,9 +413,9 @@ echo "</ul>";
                 Um alle Events in einem gewünschten Bereich auszugeben, zum Beispiel vom 1. Dezember
                 2006 bis zum 15. Dezember 2006, müssen die folgenden zwei Zeilen im vorhergehenden
                 Beispiel hinzugefügt werden. Es ist zu beachten das
-                "<code>$query->setFutureevents('true')</code>" entfernt werden muß, da
-                <code>futureevents</code> die Werte von <code>startMin</code> und
-                <code>startMax</code> überschreibt.
+                "<command>$query->setFutureevents('true')</command>" entfernt werden muß, da
+                <property>futureevents</property> die Werte von <property>startMin</property> und
+                <property>startMax</property> überschreibt.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -424,8 +424,8 @@ $query->setStartMax('2006-12-16');
 ]]></programlisting>
 
             <para>
-                Es ist zu beachten das <code>startMin</code> inklusive ist, wobei
-                <code>startMax</code> exklusive ist. Als Ergebnis, werden nur die Events bis
+                Es ist zu beachten das <property>startMin</property> inklusive ist, wobei
+                <property>startMax</property> exklusive ist. Als Ergebnis, werden nur die Events bis
                 2006-12-15 23:59:59 zurückgegeben.
             </para>
         </sect3>
@@ -636,19 +636,20 @@ $newEvent = $service->insertEvent($event);
             <title>Event Planungen und Erinnerungen</title>
 
             <para>
-                Die Startzeit und Dauer eines Events werden durch die Werte seiner <code>when</code>
-                Eigenschaften, <code>startTime</code>, <code>endTime</code>, und
-                <code>valueString</code> ermittelt. <code>startTime</code> und <code>endTime</code>
-                kontrollieren die Dauer des Events, wärend die <code>valueString</code> Eigenschaft
-                aktuell nicht verwendet wird.
+                Die Startzeit und Dauer eines Events werden durch die Werte seiner
+                <property>when</property> Eigenschaften, <property>startTime</property>,
+                <property>endTime</property>, und <property>valueString</property> ermittelt.
+                <emphasis>StartTime</emphasis> und <emphasis>EndTime</emphasis>
+                kontrollieren die Dauer des Events, wärend die <property>valueString</property>
+                Eigenschaft aktuell nicht verwendet wird.
             </para>
 
             <para>
                 Jeden Tag wiederkehrende Events können geplant werden indem nur das Datum
-                spezifiziert und die Zeit ausgelassen wird wenn <code>startTime</code> und
-                <code>endTime</code> gesetzt werden. Genauso können Events die keine Dauer haben
-                spezifiziert werden indem <code>endTime</code> unterdrückt wird. In allen Fällen
-                sollten Datums und Zeitwerte im <ulink
+                spezifiziert und die Zeit ausgelassen wird wenn <property>startTime</property> und
+                <property>endTime</property> gesetzt werden. Genauso können Events die keine Dauer
+                haben spezifiziert werden indem <property>endTime</property> unterdrückt wird. In
+                allen Fällen sollten Datums und Zeitwerte im <ulink
                     url="http://www.ietf.org/rfc/rfc3339.txt">RFC3339</ulink> Format angegeben
                 werden.
             </para>
@@ -665,21 +666,23 @@ $event->when = array($when);
 ]]></programlisting>
 
             <para>
-                Das <code>when</code> Attribut kontrolliert auch wann Erinnerungen an einen Benutzer
-                gesendet werden. Erinnerungen werden in einem Array gespeichert und jedes Event kann
-                abgefragt werden um die Erinnerungen herauszufinden die mit Ihm verbunden sind.
+                Das <property>when</property> Attribut kontrolliert auch wann Erinnerungen an einen
+                Benutzer gesendet werden. Erinnerungen werden in einem Array gespeichert und jedes
+                Event kann abgefragt werden um die Erinnerungen herauszufinden die mit Ihm verbunden
+                sind.
             </para>
 
             <para>
-                Damit ein <code>reminder</code> gültig ist, muß er zwei Attribute gesetzt haben:
-                <code>method</code> und eine Zeit. <code>Method</code> akzeptiert einen der
-                folgenden Strings: "alert", "email" oder "sms". Die Zeit sollte als Integer
-                eingegeben werden und kann mit den Eigenschaften <code>minutes</code>,
-                <code>hours</code>, <code>days</code> oder <code>absoluteTime</code> gesetzt werden.
-                Trotzdem darf eine gültige Anfrage nur eines dieser Attribute gesetzt haben. Wenn
-                eine gemischte Zeit gewünscht wird, muß der Wert in die am besten passende und
-                vorhandene Einheit konvertiert werden. Zum Beispiel, 1 Stunde und 30 Minuten sollten
-                als 90 Minuten angegeben werden.
+                Damit ein <emphasis>reminder</emphasis> gültig ist, muß er zwei Attribute gesetzt
+                haben: <property>method</property> und eine Zeit. <emphasis>Method</emphasis>
+                akzeptiert einen der folgenden Strings: "alert", "email" oder "sms". Die Zeit sollte
+                als Integer eingegeben werden und kann mit den Eigenschaften
+                <property>minutes</property>, <property>hours</property>, <property>days</property>
+                oder <property>absoluteTime</property> gesetzt werden. Trotzdem darf eine gültige
+                Anfrage nur eines dieser Attribute gesetzt haben. Wenn eine gemischte Zeit gewünscht
+                wird, muß der Wert in die am besten passende und vorhandene Einheit konvertiert
+                werden. Zum Beispiel, 1 Stunde und 30 Minuten sollten als 90 Minuten angegeben
+                werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -709,7 +712,7 @@ $when->reminders = array($reminder);
 
             <para>
                 Ausnahmen im Wiederholungs Pattern werden normalerweise durch ein ausgeprägtes
-                <code>recurrenceException</code> Attribut spezifiziert. Trotzdem bietet der
+                <property>recurrenceException</property> Attribut spezifiziert. Trotzdem bietet der
                 iCalender Standard ein zweites Format für die Definition von Wiederholungen, und die
                 Möglichkeit das jedes von Ihnen verwendet werden kann und für jedes davon muß das
                 gehandhabt werden.
@@ -762,9 +765,9 @@ $newEvent = $service->insertEvent($event);
                 definierter Texteintrag verwendet wird. Zum Beispie lwürde der String "Abendessen
                 bei Joe's Dinner am Dienstag" ein Event erstellen mit dem Titel "Abendessen", dem
                 Ort "Joe's Dinner", und dem Datum "Dienstag". Um die Vorteile von QuickAdd zu
-                verwenden, muß eine neue <code>QuickAdd</code> Eigenschaft erstellt, auf
+                verwenden, muß eine neue <property>QuickAdd</property> Eigenschaft erstellt, auf
                 <constant>TRUE</constant> gesetzt und der frei definierbare Text als
-                <code>content</code> Eigenschaft gespeichert werden.
+                <property>content</property> Eigenschaft gespeichert werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -831,9 +834,9 @@ try {
 
         <para>
             In jedem Fall, wird das gelöschte Event trotzdem noch am Privaten Event Feed des
-            Benutzers aufscheinen wenn ein <code>updateMin</code> Abfrage Parameter angegeben wurde.
-            Gelöschte Events können von normalen Events unterschieden werden weil Sie Ihre eigene
-            <code>eventStatus</code> Eigenschaft auf
+            Benutzers aufscheinen wenn ein <property>updateMin</property> Abfrage Parameter
+            angegeben wurde. Gelöschte Events können von normalen Events unterschieden werden weil
+            Sie Ihre eigene <property>eventStatus</property> Eigenschaft auf
             "http://schemas.google.com/g/2005#event.canceled" gesetzt haben.
         </para>
 
@@ -863,8 +866,8 @@ $service->delete($event->getEditLink()->href);
             einzigen signifikanten Unterschied das eine andere Feed und Event Klasse verwendet
             werden sollte, und das die zusätzlichen Meta-Daten für Events wie zum Beispiel "where"
             und "when" für Kommentare nicht existieren. Speziell wird der Author des Kommentars in
-            der <code>author</code> Eigenschaft und der Kommentar Text in der <code>content</code>
-            Eigenschaft gespeichert.
+            der <property>author</property> Eigenschaft und der Kommentar Text in der
+            <property>content</property> Eigenschaft gespeichert.
         </para>
 
         <programlisting language="php"><![CDATA[

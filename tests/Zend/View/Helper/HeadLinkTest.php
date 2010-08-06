@@ -59,13 +59,13 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        foreach (array(Registry\Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
+        foreach (array(Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
             if (\Zend\Registry::isRegistered($key)) {
                 $registry = \Zend\Registry::getInstance();
                 unset($registry[$key]);
             }
         }
-        $this->basePath = dirname(__FILE__) . '/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->view = new View\View();
         $this->helper = new Helper\HeadLink();
         $this->helper->setView($this->view);
@@ -84,7 +84,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Registry\Registry::getRegistry();
+        $registry = Registry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadLink')) {
             $registry->deleteContainer('Zend_View_Helper_HeadLink');
         }

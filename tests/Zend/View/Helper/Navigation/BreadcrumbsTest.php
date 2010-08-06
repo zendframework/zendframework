@@ -55,14 +55,14 @@ class BreadcrumbsTest
 
     public function testHelperEntryPointWithoutAnyParams()
     {
-        $returned = $this->_helper->breadcrumbs();
+        $returned = $this->_helper->direct();
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav1, $returned->getContainer());
     }
 
     public function testHelperEntryPointWithContainerParam()
     {
-        $returned = $this->_helper->breadcrumbs($this->_nav2);
+        $returned = $this->_helper->direct($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }
@@ -221,7 +221,7 @@ class BreadcrumbsTest
 
     public function testRenderingPartialBySpecifyingAnArrayAsPartial()
     {
-        $this->_helper->setPartial(array('bc.phtml', 'default'));
+        $this->_helper->setPartial(array('bc.phtml', 'application'));
 
         $expected = $this->_getExpected('bc/partial.html');
         $this->assertEquals($expected, $this->_helper->render());

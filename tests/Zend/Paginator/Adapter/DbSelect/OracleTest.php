@@ -24,11 +24,13 @@
  * @namespace
  */
 namespace ZendTest\Paginator\Adapter\DbSelect;
-use Zend\Paginator\Adapter;
-use Zend\DB\Statement\Oracle;
+
+use Zend\Paginator\Adapter,
+    Zend\Db\Statement\Oracle,
+    Zend\Db\Statement\OracleException;
 
 require_once 'Zend/Paginator/Adapter/DbSelectTest.php';
-require_once dirname(__FILE__) . '/../../_files/TestTable.php';
+require_once __DIR__ . '/../../_files/TestTable.php';
 
 /**
  * @category   Zend
@@ -52,15 +54,15 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelectTest
             $this->markTestSkipped('Oci8 extension is not loaded');
         }
 
-        if (! TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED) {
+        if (! TESTS_ZEND_Db_ADAPTER_ORACLE_ENABLED) {
             $this->markTestSkipped('Oracle is required');
         }
 
-        $this->_db = new \Zend\DB\Adapter\Oracle\Oracle(
-                array('host' => TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME ,
-                        'username' => TESTS_ZEND_DB_ADAPTER_ORACLE_USERNAME ,
-                        'password' => TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD ,
-                        'dbname' => TESTS_ZEND_DB_ADAPTER_ORACLE_SID));
+        $this->_db = new \Zend\Db\Adapter\Oracle(
+                array('host' => TESTS_ZEND_Db_ADAPTER_ORACLE_HOSTNAME ,
+                        'username' => TESTS_ZEND_Db_ADAPTER_ORACLE_USERNAME ,
+                        'password' => TESTS_ZEND_Db_ADAPTER_ORACLE_PASSWORD ,
+                        'dbname' => TESTS_ZEND_Db_ADAPTER_ORACLE_SID));
 
         $this->_dropTable();
         $this->_createTable();
@@ -81,7 +83,7 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelectTest
      */
     protected function tearDown ()
     {
-        if (! TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED) {
+        if (! TESTS_ZEND_Db_ADAPTER_ORACLE_ENABLED) {
             return;
         }
 
@@ -118,10 +120,10 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelectTest
     {
         try {
             $this->_db->query('drop table "test"');
-        } catch (Oracle\Exception $e) {}
+        } catch (OracleException $e) {}
         try {
             $this->_db->query('drop table "test_empty"');
-        } catch (Oracle\Exception $e) {}
+        } catch (OracleException $e) {}
     }
 
     public function testGroupByQueryOnEmptyTableReturnsRowCountZero()

@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Decorator_CallbackTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_CallbackTest::main");
-}
+namespace ZendTest\Form\Decorator;
 
-
+use Zend\Form\Decorator\Callback as CallbackDecorator,
+    Zend\Form\Element;
 
 /**
  * Test class for Zend_Form_Decorator_Callback
@@ -37,20 +35,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
+class CallbackTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_CallbackTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -59,33 +45,23 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->decorator = new Zend_Form_Decorator_Callback();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->decorator = new CallbackDecorator();
     }
 
     public function testCanSetCallback()
     {
-        $callback = 'Zend_Form_Decorator_CallbackTest_TestCallback';
+        $callback = 'ZendTest\Form\Decorator\TestCallback';
         $this->decorator->setCallback($callback);
         $this->assertSame($callback, $this->decorator->getCallback());
 
-        $callback = array('Zend_Form_Decorator_CallbackTest_TestCallbackClass', 'direct');
+        $callback = array('ZendTest\Form\TestAsset\TestCallbackClass', 'direct');
         $this->decorator->setCallback($callback);
         $this->assertSame($callback, $this->decorator->getCallback());
     }
 
     public function testCanSetCallbackViaOptions()
     {
-        $callback = 'Zend_Form_Decorator_CallbackTest_TestCallback';
+        $callback = 'ZendTest\Form\Decorator\TestCallback';
         $this->decorator->setOptions(array('callback' => $callback));
         $this->assertSame($callback, $this->decorator->getCallback());
     }
@@ -95,37 +71,37 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
         try {
             $this->decorator->setCallback(true);
             $this->fail('Only string or array callbacks should be allowed');
-        } catch (Zend_Form_Exception $e) {
+        } catch (\Zend\Form\Exception $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
 
         try {
-            $o = new stdClass;
+            $o = new \stdClass;
             $this->decorator->setCallback($o);
             $this->fail('Only string or array callbacks should be allowed');
-        } catch (Zend_Form_Exception $e) {
+        } catch (\Zend\Form\Exception $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
 
         try {
             $this->decorator->setCallback(array('foo', 'bar', 'baz'));
             $this->fail('Only arrays of two elements should be allowed as callbacks');
-        } catch (Zend_Form_Exception $e) {
+        } catch (\Zend\Form\Exception $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
 
         try {
             $this->decorator->setCallback(array('foo'));
             $this->fail('Only arrays of two elements should be allowed as callbacks');
-        } catch (Zend_Form_Exception $e) {
+        } catch (\Zend\Form\Exception $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
     }
 
     public function testRenderCallsFunctionCallback()
     {
-        $callback = 'Zend_Form_Decorator_CallbackTest_TestCallback';
-        $element  = new Zend_Form_Element('foobar');
+        $callback = 'ZendTest\Form\Decorator\TestCallback';
+        $element  = new Element('foobar');
         $element->setLabel('Label Me');
 
         $this->decorator->setOptions(array('callback' => $callback))
@@ -139,8 +115,8 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
 
     public function testRenderCallsMethodCallback()
     {
-        $callback = array('Zend_Form_Decorator_CallbackTest_TestCallbackClass', 'direct');
-        $element  = new Zend_Form_Element('foobar');
+        $callback = array('ZendTest\Form\TestAsset\TestCallbackClass', 'direct');
+        $element  = new Element('foobar');
         $element->setLabel('Label Me');
 
         $this->decorator->setOptions(array('callback' => $callback))
@@ -155,8 +131,8 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
 
     public function testRenderCanPrepend()
     {
-        $callback = 'Zend_Form_Decorator_CallbackTest_TestCallback';
-        $element  = new Zend_Form_Element('foobar');
+        $callback = 'ZendTest\Form\Decorator\TestCallback';
+        $element  = new Element('foobar');
         $element->setLabel('Label Me');
 
         $this->decorator->setOptions(array('callback' => $callback, 'placement' => 'prepend'))
@@ -171,8 +147,8 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
 
     public function testRenderCanReplaceContent()
     {
-        $callback = 'Zend_Form_Decorator_CallbackTest_TestCallback';
-        $element  = new Zend_Form_Element('foobar');
+        $callback = 'ZendTest\Form\Decorator\TestCallback';
+        $element  = new Element('foobar');
         $element->setLabel('Label Me');
 
         $this->decorator->setOptions(array('callback' => $callback, 'placement' => false))
@@ -185,7 +161,7 @@ class Zend_Form_Decorator_CallbackTest extends PHPUnit_Framework_TestCase
     }
 }
 
-function Zend_Form_Decorator_CallbackTest_TestCallback($content, $element, array $options)
+function TestCallback($content, $element, array $options)
 {
     $name  = $element->getName();
     $label = '';
@@ -197,26 +173,4 @@ $label: $name
 
 EOH;
     return $html;
-}
-
-class Zend_Form_Decorator_CallbackTest_TestCallbackClass
-{
-    public static function direct($content, $element, array $options)
-    {
-        $name  = $element->getName();
-        $label = '';
-        if (method_exists($element, 'getLabel')) {
-            $label = $element->getLabel();
-        }
-        $html =<<<EOH
-Item "$label": $name
-
-EOH;
-        return $html;
-    }
-}
-
-// Call Zend_Form_Decorator_CallbackTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_CallbackTest::main") {
-    Zend_Form_Decorator_CallbackTest::main();
 }

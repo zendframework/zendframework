@@ -354,6 +354,7 @@ echo $obj->bug_description;
 
         <example id="zend.db.statement.binding-param.example">
             <title>Binding parameters from PHP variables</title>
+
             <programlisting language="php"><![CDATA[
 ]]></programlisting>
         </example>
@@ -377,6 +378,7 @@ echo $obj->bug_description;
 
         <example id="zend.db.statement.binding-column.example">
             <title>Binding results to PHP variables</title>
+
             <programlisting language="php"><![CDATA[
 ]]></programlisting>
         </example>

@@ -25,8 +25,8 @@ namespace ZendTest\Application;
 use Zend\Loader\Autoloader,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    Zend\Controller\Request\HTTPTestCase as HttpRequestTestCase,
-    Zend\Controller\Response\HTTPTestCase as HttpResponseTestCase;
+    Zend\Controller\Request\HttpTestCase as HttpRequestTestCase,
+    Zend\Controller\Response\HttpTestCase as HttpResponseTestCase;
 
 /**
  * @category   Zend
@@ -98,7 +98,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $this->bootstrap->setOptions(array(
             'resources' => array(
                 'frontcontroller' => array(
-                    'moduleDirectory' => __DIR__ . '/TestAssett/modules',
+                    'moduleDirectory' => __DIR__ . '/TestAsset/modules',
                 ),
             ),
         ));
@@ -156,7 +156,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $this->bootstrap->setOptions(array(
             'resources' => array(
                 'frontcontroller' => array(
-                    'moduleDirectory' => __DIR__ . '/TestAssett/modules',
+                    'moduleDirectory' => __DIR__ . '/TestAsset/modules',
                     'returnresponse'  => true,
                 ),
             ),

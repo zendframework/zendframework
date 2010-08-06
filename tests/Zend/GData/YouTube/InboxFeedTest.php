@@ -69,7 +69,7 @@ class InboxFeedTest extends \PHPUnit_Framework_TestCase
             $inboxFeed->logo->text);
         $this->assertEquals('text', $inboxFeed->title->type);
         $this->assertEquals('Inbox of andyland74',
-            $inboxFeed->title->text);;
+            $inboxFeed->title->text);
         $this->assertEquals('self', $inboxFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml',
             $inboxFeed->getLink('self')->type);
@@ -97,7 +97,7 @@ class InboxFeedTest extends \PHPUnit_Framework_TestCase
             'http://www.youtube.com/img/pic_youtubelogo_123x63.gif',
             $inboxFeed->logo->text);
         $this->assertEquals('Inbox of andyland74',
-            $inboxFeed->title->text);;
+            $inboxFeed->title->text);
         $this->assertEquals('andyland74',
             $inboxFeed->author[0]->name->text);
         $this->assertEquals(

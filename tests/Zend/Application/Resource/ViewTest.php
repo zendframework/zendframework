@@ -23,10 +23,10 @@
 namespace ZendTest\Application\Resource;
 
 use Zend\Loader\Autoloader,
-    ZendTest\Application\TestAssett\ZfAppBootstrap,
+    ZendTest\Application\TestAsset\ZfAppBootstrap,
     Zend\Application\Application,
     Zend\Application\Resource\View as ViewResource,
-    Zend\Controller\Action\HelperBroker\HelperBroker,
+    Zend\Controller\Action\HelperBroker,
     Zend\View\View;
 
 /**
@@ -94,13 +94,13 @@ class ViewTest extends \PHPUnit_Framework_TestCase
     public function testOptionsPassedToResourceAreUsedToSetViewState()
     {
         $options = array(
-            'scriptPath' => dirname(__FILE__),
+            'scriptPath' => __DIR__,
         );
         $resource = new ViewResource($options);
         $resource->init();
         $view  = $resource->getView();
         $paths = $view->getScriptPaths();
-        $this->assertContains(dirname(__FILE__) . '/', $paths, var_export($paths, 1));
+        $this->assertContains(__DIR__ . '/', $paths, var_export($paths, 1));
     }
 
     public function testDoctypeIsSet()

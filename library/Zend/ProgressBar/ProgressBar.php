@@ -92,7 +92,7 @@ class ProgressBar
      * @param  string                   $persistenceNamespace
      * @throws \Zend\ProgressBar\Exception When $min is greater than $max
      */
-    public function __construct(Adapter\Adapter $adapter, $min = 0, $max = 100, $persistenceNamespace = null)
+    public function __construct(Adapter\AbstractAdapter $adapter, $min = 0, $max = 100, $persistenceNamespace = null)
     {
         // Check min/max values and set them
         if ($min > $max) {

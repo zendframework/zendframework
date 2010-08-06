@@ -57,7 +57,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
             'SCRIPT_FILENAME' => __FILE__,
             'PHP_SELF'        => __FILE__,
         );
-        $this->_request = new Request\HTTP('http://framework.zend.com/news/3?var1=val1&var2=val2#anchor');
+        $this->_request = new Request\Http('http://framework.zend.com/news/3?var1=val1&var2=val2#anchor');
     }
 
     public function tearDown()
@@ -267,13 +267,13 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
     public function testConstructSetsRequestUri()
     {
         $_SERVER['REQUEST_URI'] = '/mycontroller/myaction?foo=bar';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $this->assertEquals('/mycontroller/myaction?foo=bar', $request->getRequestUri());
     }
 
     public function testSetRequestUriDoesNotPassUriThroughUrldecode()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setRequestUri('/foo/bar?foo=bar%20baz');
         $requestUri = $request->getRequestUri();
         $this->assertNotEquals('/foo/bar?foo=bar baz', $requestUri);
@@ -377,7 +377,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
 
     public function testPathInfoNeedingBaseUrl()
     {
-        $request = new Request\HTTP('http://localhost/test/index.php/ctrl-name/act-name');
+        $request = new Request\Http('http://localhost/test/index.php/ctrl-name/act-name');
         $this->assertEquals('/test/index.php/ctrl-name/act-name', $request->getRequestUri());
         $request->setBaseUrl('/test/index.php');
         $this->assertEquals('/test/index.php', $request->getBaseUrl());
@@ -428,7 +428,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBasePathIsEmptyStringIfNoneSet()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $this->assertEquals('', $request->getBasePath());
     }
 
@@ -448,7 +448,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -464,7 +464,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -478,7 +478,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -493,7 +493,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -509,7 +509,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
@@ -518,7 +518,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetBaseUrlWithScriptNameAsGetParam()
     {
-        $request = new Request\HTTP;
+        $request = new Request\Http;
 
         $_SERVER['REQUEST_URI']     = '/article/archive?foo=index.php';
         $_SERVER['QUERY_STRING']    = 'foo=index.php';
@@ -542,7 +542,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
             'var1' => 'val1',
             'var2' => 'val2'
         );
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertEquals('/html', $request->getBasePath(), $request->getBaseUrl());
     }
@@ -552,7 +552,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_URI']     = '/dir/action';
         $_SERVER['PHP_SELF']        = '/dir/index.php';
         $_SERVER['SCRIPT_FILENAME'] = '/var/web/dir/index.php';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $this->assertEquals('/dir', $request->getBasePath(), $request->getBaseUrl());
     }
@@ -605,11 +605,11 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testIsXmlHTTPRequest()
+    public function testIsXmlHttpRequest()
     {
-        $this->assertFalse($this->_request->isXmlHTTPRequest());
-        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHTTPRequest';
-        $this->assertTrue($this->_request->isXmlHTTPRequest());
+        $this->assertFalse($this->_request->isXmlHttpRequest());
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $this->assertTrue($this->_request->isXmlHttpRequest());
     }
 
     public function testSetNullParamUnsetsKey()
@@ -687,17 +687,17 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      * @group ZFI-233
      * @group ZF-5818
      */
-    public function testStrippingHTTPProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
+    public function testStrippingHttpProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'http://foo.example.com/foo/bar?r=http://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=http://foo.example.com/bar/baz', $test);
 
         $_SERVER['REQUEST_URI'] = '/foo/bar?r=http://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=http://foo.example.com/bar/baz', $test);
     }
@@ -707,19 +707,19 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      * @group ZFI-233
      * @group ZF-5818
      */
-    public function testStrippingHTTPsProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
+    public function testStrippingHttpsProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'https://foo.example.com/foo/bar?r=https://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
         $_SERVER['HTTPS']       = 'on';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=https://foo.example.com/bar/baz', $test);
 
         $_SERVER['REQUEST_URI'] = '/foo/bar?r=https://foo.example.com/bar/baz';
         $_SERVER['HTTP_HOST']   = 'foo.example.com';
         $_SERVER['HTTPS']       = 'on';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=https://foo.example.com/bar/baz', $test);
     }
@@ -729,13 +729,13 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      * @group ZFI-233
      * @group ZF-5818
      */
-    public function testStrippingHTTPProtocolHostAndNonStandardPortFromRequestUriOnlyWhenPresentAtBeginningOfUri()
+    public function testStrippingHttpProtocolHostAndNonStandardPortFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'http://foo.example.com:8888/foo/bar?r=http://foo.example.com:8888/bar/baz';
         $_SERVER['HTTP_HOST']   = '';
         $_SERVER['SERVER_NAME'] = 'foo.example.com';
         $_SERVER['SERVER_PORT'] = '8888';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=http://foo.example.com:8888/bar/baz', $test);
 
@@ -743,7 +743,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST']   = '';
         $_SERVER['SERVER_NAME'] = 'foo.example.com';
         $_SERVER['SERVER_PORT'] = '8888';
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $test = $request->getRequestUri();
         $this->assertEquals('/foo/bar?r=https://foo.example.com:8888/bar/baz', $test);
     }
@@ -753,7 +753,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetClientIp()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $_SERVER['HTTP_CLIENT_IP'] = '192.168.1.10';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.1.11';
@@ -779,7 +779,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetClientIpNoProxyCheck()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
 
         $_SERVER['HTTP_CLIENT_IP'] = '192.168.1.10';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.1.11';
@@ -794,7 +794,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
     public function testCallingGetRawBodyMultipleTimesShouldReturnSameValue()
     {
         \ZendTest\AllTests\StreamWrapper\PHPInput::mockInput('foobar');
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $first = $request->getRawBody();
         $this->assertSame($first, $request->getRawBody());
         stream_wrapper_restore('php');
@@ -817,7 +817,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetPathInfoShouldNotStripBaseUrlIfBaseUrlNotInRequestUri()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setBaseUrl('/app');
         $_SERVER['REQUEST_URI'] = '/index/index';
         $pathInfo = $request->getPathInfo();

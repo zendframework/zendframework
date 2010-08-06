@@ -30,7 +30,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class IndexController extends \Zend\Controller\Action\Action
+class IndexController extends \Zend\Controller\Action
 {
 
     /**
@@ -75,11 +75,11 @@ class IndexController extends \Zend\Controller\Action\Action
      */
     public function replaceAction()
     {
-        $request = new \Zend\Controller\Request\HTTP();
+        $request = new \Zend\Controller\Request\Http();
         $request->setControllerName('index')
                 ->setActionName('reset')
                 ->setDispatched(false);
-        $response = new \Zend\Controller\Response\HTTP();
+        $response = new \Zend\Controller\Response\Http();
         $front    = \Zend\Controller\Front::getInstance();
         $front->setRequest($request)
               ->setResponse($response);

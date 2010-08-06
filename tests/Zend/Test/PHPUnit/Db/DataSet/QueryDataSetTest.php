@@ -20,16 +20,11 @@
  * @version    $Id$
  */
 
-
-
-
 /**
- * @see Zend_Test_PHPUnit_Db_DataSet_DataSetTestCase
+ * @namespace
  */
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_QueryTable
- */
+namespace ZendTest\Test\PHPUnit\Db\DataSet;
+use Zend\Test\PHPUnit\Db\DataSet;
 
 /**
  * @category   Zend
@@ -39,27 +34,27 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_DataSet_QueryDataSetTest extends Zend_Test_PHPUnit_Db_DataSet_DataSetTestCase
+class QueryDataSetTest extends DataSetTestCase
 {
     public function testCreateQueryDataSetWithoutZendDbAdapterThrowsException()
     {
         $connectionMock = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');
-        $this->setExpectedException('Zend_Test_PHPUnit_Db_Exception');
-        $queryDataSet = new Zend_Test_PHPUnit_Db_DataSet_QueryDataSet($connectionMock);
+        $this->setExpectedException('Zend\Test\PHPUnit\Db\Exception');
+        $queryDataSet = new DataSet\QueryDataSet($connectionMock);
     }
 
     public function testCreateQueryDataSetWithZendDbAdapter()
     {
         $this->decorateConnectionMockWithZendAdapter();
-        $queryDataSet = new Zend_Test_PHPUnit_Db_DataSet_QueryDataSet($this->connectionMock);
+        $queryDataSet = new DataSet\QueryDataSet($this->connectionMock);
     }
 
     public function testAddTableWithoutQueryParameterCreatesSelectWildcardAll()
     {
         $fixtureTableName = "foo";
 
-        $adapterMock = $this->getMock('Zend_Test_DbAdapter');
-        $selectMock = $this->getMock('Zend_Db_Select', array(), array($adapterMock));
+        $adapterMock = $this->getMock('Zend\Test\DbAdapter');
+        $selectMock = $this->getMock('Zend\Db\Select', array(), array($adapterMock));
 
         $adapterMock->expects($this->once())
                     ->method('select')
@@ -68,12 +63,12 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryDataSetTest extends Zend_Test_PHPUnit_Db
 
         $selectMock->expects($this->once())
                    ->method('from')
-                   ->with($fixtureTableName, Zend_Db_Select::SQL_WILDCARD);
+                   ->with($fixtureTableName, \Zend\Db\Select::SQL_WILDCARD);
         $selectMock->expects($this->once())
                    ->method('__toString')
                    ->will($this->returnValue('SELECT * FOM foo'));
 
-        $queryDataSet = new Zend_Test_PHPUnit_Db_DataSet_QueryDataSet($this->connectionMock);
+        $queryDataSet = new DataSet\QueryDataSet($this->connectionMock);
         $queryDataSet->addTable('foo');
     }
 }

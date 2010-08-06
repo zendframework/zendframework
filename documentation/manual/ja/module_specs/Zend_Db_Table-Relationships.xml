@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.db.table.relationships">
 
     <title>導入</title>
@@ -224,7 +224,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <para>
             親テーブルに対するクエリの結果を Row オブジェクトとして取得すれば、
-            その行を参照している従属テーブルの行を取得することができます。
+            その行を参照している従属テーブルの行を取得できます。
             使用するメソッドは、次のようになります。
         </para>
 
@@ -410,7 +410,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
 
         <para>
             従属テーブルに対するクエリの結果を Row オブジェクトとして取得すれば、
-            その従属行が参照している親テーブルの行を取得することができます。
+            その従属行が参照している親テーブルの行を取得できます。
             使用するメソッドは、次のようになります。
         </para>
 
@@ -563,7 +563,7 @@ $engineer = $bug1->findParentAccountsByEngineer();
             多対多のリレーションの片方のテーブル (この例では "元テーブル"
             と呼ぶことにします) に対するクエリの結果を Row
             オブジェクトとして取得すれば、もう一方のテーブル (この例では
-            "対象テーブル" と呼ぶことにします) の対応する行を取得することができます。
+            "対象テーブル" と呼ぶことにします) の対応する行を取得できます。
             使用するメソッドは、次のようになります。
         </para>
 
@@ -792,7 +792,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
         <para>
             親テーブルに対して <constant>UPDATE</constant> あるいは
             <constant>DELETE</constant> を行った際に、
-            従属テーブルに対して行う操作を指定することができます。
+            従属テーブルに対して行う操作を指定できます。
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-delete">
@@ -820,7 +820,7 @@ $product1234->delete();
         <para>
             同様に、<constant>UPDATE</constant> で親テーブルの主キーの値を変更した場合は、
             従属テーブルの外部キーの値も自動的に新しい値に更新したくなることでしょう。
-            これにより、その参照を最新の状態にすることができます。
+            これにより、その参照を最新の状態にできます。
         </para>
 
         <para>

@@ -50,12 +50,12 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     {
         $this->_controller = Controller\Front::getInstance();
         $this->_controller->resetInstance();
-        $this->_controller->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files')
+        $this->_controller->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files')
                           ->setParam('noErrorHandler', true)
                           ->setParam('noViewRenderer', true)
                           ->returnResponse(true)
                           ->throwExceptions(false);
-        HelperBroker\HelperBroker::resetHelpers();
+        HelperBroker::resetHelpers();
     }
 
     public function tearDown()
@@ -79,28 +79,28 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testResetInstanceShouldResetHelperBroker()
     {
-        HelperBroker\HelperBroker::addHelper(new \Zend\Controller\Action\Helper\ViewRenderer());
-        HelperBroker\HelperBroker::addHelper(new \Zend\Controller\Action\Helper\Url());
-        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
+        HelperBroker::addHelper(new \Zend\Controller\Action\Helper\ViewRenderer());
+        HelperBroker::addHelper(new \Zend\Controller\Action\Helper\Url());
+        $helpers = HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertFalse(empty($helpers));
 
         $this->_controller->resetInstance();
-        $helpers = HelperBroker\HelperBroker::getExistingHelpers();
+        $helpers = HelperBroker::getExistingHelpers();
         $this->assertTrue(is_array($helpers));
         $this->assertTrue(empty($helpers));
     }
 
     public function testSetGetRequest()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $this->_controller->setRequest($request);
         $this->assertTrue($request === $this->_controller->getRequest());
 
         $this->_controller->resetInstance();
-        $this->_controller->setRequest('\Zend\Controller\Request\HTTP');
+        $this->_controller->setRequest('\Zend\Controller\Request\Http');
         $request = $this->_controller->getRequest();
-        $this->assertTrue($request instanceof Request\HTTP);
+        $this->assertTrue($request instanceof Request\Http);
     }
 
     public function testSetRequestThrowsExceptionWithBadRequest()
@@ -128,7 +128,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testSetResponseThrowsExceptionWithBadResponse()
     {
         try {
-            $this->_controller->setResponse('\Zend\Controller\Request\HTTP');
+            $this->_controller->setResponse('\Zend\Controller\Request\Http');
             $this->fail('Should not be able to set invalid response class');
         } catch (\Exception $e) {
             // success
@@ -150,7 +150,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testSetRouterThrowsExceptionWithBadRouter()
     {
         try {
-            $this->_controller->setRouter('\Zend\Controller\Request\HTTP');
+            $this->_controller->setRouter('\Zend\Controller\Request\Http');
             $this->fail('Should not be able to set invalid router class');
         } catch (\Exception $e) {
             // success
@@ -168,7 +168,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testSetGetControllerDirectory()
     {
         $test = $this->_controller->getControllerDirectory();
-        $expected = array('default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $expected = array('application' => __DIR__ . DIRECTORY_SEPARATOR . '_files');
         $this->assertSame($expected, $test);
     }
 
@@ -245,7 +245,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatch()
     {
-        $request = new Request\HTTP('http://example.com/index');
+        $request = new Request\Http('http://example.com/index');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
@@ -257,7 +257,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatch1()
     {
-        $request = new Request\HTTP('http://example.com/index/index');
+        $request = new Request\Http('http://example.com/index/index');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
@@ -303,7 +303,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatch4()
     {
-        $request = new Request\HTTP('http://example.com/foo/bar');
+        $request = new Request\Http('http://example.com/foo/bar');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
@@ -318,7 +318,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatch5()
     {
-        $request = new Request\HTTP('http://example.com/index/args');
+        $request = new Request\Http('http://example.com/index/args');
         $this->_controller->setResponse(new Response\Cli());
         $this->_controller->setParam('foo', 'bar');
         $this->_controller->setParam('baz', 'bat');
@@ -334,7 +334,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatch6()
     {
-        $request = new Request\HTTP('http://framework.zend.com/foo/bar/var1/baz');
+        $request = new Request\Http('http://framework.zend.com/foo/bar/var1/baz');
         $this->_controller->setResponse(new Response\Cli());
         $this->_controller->setRouter(new Router\Rewrite());
         $response = $this->_controller->dispatch($request);
@@ -354,7 +354,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         if ('cli' == strtolower(php_sapi_name())) {
             $this->markTestSkipped('Issues with $_GET in CLI interface prevents test from passing');
         }
-        $request = new Request\HTTP('http://framework.zend.com/index.php?controller=foo&action=bar');
+        $request = new Request\Http('http://framework.zend.com/index.php?controller=foo&action=bar');
 
         $response = new Response\Cli();
         $response = $this->_controller->dispatch($request, $response);
@@ -369,7 +369,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function _testRunThrowsException()
     {
         try {
-            $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+            $this->_controller->run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
             $this->fail('Should not be able to call run() from object instance');
         } catch (\Exception $e) {
             // success
@@ -388,7 +388,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetBaseUrlPopulatesRequest()
     {
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $this->_controller->setRequest($request);
         $this->_controller->setBaseUrl('/index.php');
         $this->assertEquals('/index.php', $request->getBaseUrl());
@@ -413,7 +413,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testBaseUrlPushedToRequest()
     {
         $this->_controller->setBaseUrl('/index.php');
-        $request  = new Request\HTTP('http://example.com/index');
+        $request  = new Request\Http('http://example.com/index');
         $response = new Response\Cli();
         $response = $this->_controller->dispatch($request, $response);
 
@@ -443,8 +443,8 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testThrowExceptionsThrows()
     {
         $this->_controller->throwExceptions(true);
-        $this->_controller->setControllerDirectory(dirname(__FILE__));
-        $request = new Request\HTTP('http://framework.zend.com/bogus/baz');
+        $this->_controller->setControllerDirectory(__DIR__);
+        $request = new Request\Http('http://framework.zend.com/bogus/baz');
         $this->_controller->setResponse(new Response\Cli());
         $this->_controller->setRouter(new Router\Rewrite());
 
@@ -478,7 +478,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnResponseReturnsResponse()
     {
-        $request = new Request\HTTP('http://framework.zend.com/foo/bar/var1/baz');
+        $request = new Request\Http('http://framework.zend.com/foo/bar/var1/baz');
         $this->_controller->setResponse(new Response\Cli());
         $this->_controller->setRouter(new Router\Rewrite());
         $this->_controller->returnResponse(false);
@@ -493,22 +493,22 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testRunStatically()
     {
-        $request = new Request\HTTP('http://example.com/index/index');
+        $request = new Request\Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
-        Controller\Front::run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        Controller\Front::run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
     }
 
     public function testRunDynamically()
     {
-        $request = new Request\HTTP('http://example.com/index/index');
+        $request = new Request\Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
-        $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+        $this->_controller->run(__DIR__ . DIRECTORY_SEPARATOR . '_files');
     }
 
     public function testModulePathDispatched()
     {
-        $this->_controller->addControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '/Admin', 'admin');
-        $request = new Request\HTTP('http://example.com/admin/foo/bar');
+        $this->_controller->addControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '/Admin', 'admin');
+        $request = new Request\Http('http://example.com/admin/foo/bar');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
@@ -525,17 +525,17 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testAddModuleDirectory()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $controllerDirs = $this->_controller->getControllerDirectory();
         $this->assertTrue(isset($controllerDirs['foo']));
         $this->assertTrue(isset($controllerDirs['bar']));
-        $this->assertTrue(isset($controllerDirs['default']));
+        $this->assertTrue(isset($controllerDirs['application']));
         $this->assertFalse(isset($controllerDirs['.svn']));
 
         $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'foo', $controllerDirs['foo']);
         $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'bar', $controllerDirs['bar']);
-        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'default', $controllerDirs['default']);
+        $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'application', $controllerDirs['application']);
     }
 
     /**#@+
@@ -544,7 +544,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testShouldAllowRetrievingCurrentModuleDirectory()
     {
         $this->testAddModuleDirectory();
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $request->setModuleName('bar');
         $this->_controller->setRequest($request);
         $dir = $this->_controller->getModuleDirectory();
@@ -572,7 +572,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanRemoveIndividualModuleDirectory()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $controllerDirs = $this->_controller->getControllerDirectory();
         $this->_controller->removeControllerDirectory('foo');
@@ -595,7 +595,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testGetControllerDirectoryByModuleName()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $barDir = $this->_controller->getControllerDirectory('bar');
         $this->assertNotNull($barDir);
@@ -604,7 +604,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testGetControllerDirectoryByModuleNameReturnsNullOnBadModule()
     {
-        $moduleDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
+        $moduleDir = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules';
         $this->_controller->addModuleDirectory($moduleDir);
         $dir = $this->_controller->getControllerDirectory('_bazbat');
         $this->assertNull($dir);
@@ -622,7 +622,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testErrorHandlerPluginRegisteredWhenDispatched()
     {
         $this->assertFalse($this->_controller->hasPlugin('\Zend\Controller\Plugin\ErrorHandler'));
-        $request = new Request\HTTP('http://example.com/index/index');
+        $request = new Request\Http('http://example.com/index/index');
         $this->_controller->setParam('noErrorHandler', false)
                           ->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
@@ -633,7 +633,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     public function testErrorHandlerPluginNotRegisteredIfNoErrorHandlerSet()
     {
         $this->assertFalse($this->_controller->hasPlugin('\Zend\Controller\Plugin\ErrorHandler'));
-        $request = new Request\HTTP('http://example.com/index/index');
+        $request = new Request\Http('http://example.com/index/index');
         $this->_controller->setParam('noErrorHandler', true)
                           ->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
@@ -643,9 +643,9 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testReplaceRequestAndResponseMidStream()
     {
-        $request = new Request\HTTP('http://example.com/index/replace');
+        $request = new Request\Http('http://example.com/index/replace');
         $this->_controller->setResponse(new Response\Cli());
-        $response = new Response\HTTP();
+        $response = new Response\Http();
         $responsePost = $this->_controller->dispatch($request, $response);
 
         $requestPost  = $this->_controller->getRequest();
@@ -659,25 +659,25 @@ class FrontTest extends \PHPUnit_Framework_TestCase
 
     public function testViewRendererHelperRegisteredWhenDispatched()
     {
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker::hasHelper('viewRenderer'));
         $this->_controller->setParam('noViewRenderer', false);
 
-        $request = new Request\HTTP('http://example.com/index/index');
+        $request = new Request\Http('http://example.com/index/index');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertTrue(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertTrue(HelperBroker::hasHelper('viewRenderer'));
     }
 
     public function testViewRendererHelperNotRegisteredIfNoViewRendererSet()
     {
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker::hasHelper('viewRenderer'));
         $this->_controller->setParam('noViewRenderer', true);
 
-        $request = new Request\HTTP('http://example.com/index/index');
+        $request = new Request\Http('http://example.com/index/index');
         $this->_controller->setResponse(new Response\Cli());
         $response = $this->_controller->dispatch($request);
 
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('viewRenderer'));
+        $this->assertFalse(HelperBroker::hasHelper('viewRenderer'));
     }
 }

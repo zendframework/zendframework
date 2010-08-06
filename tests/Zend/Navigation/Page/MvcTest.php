@@ -51,7 +51,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $this->_oldRouter = $this->_front->getRouter();
 
         $this->_front->resetInstance();
-        $this->_front->setRequest(new Request\HTTP());
+        $this->_front->setRequest(new Request\Http());
         $this->_front->getRouter()->addDefaultRoutes();
     }
 
@@ -60,7 +60,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         if (null !== $this->_oldRequest) {
             $this->_front->setRequest($this->_oldRequest);
         } else {
-            $this->_front->setRequest(new Request\HTTP());
+            $this->_front->setRequest(new Request\Http());
         }
         $this->_front->setRouter($this->_oldRouter);
     }
@@ -359,7 +359,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $expected = \ZendTest\Navigation\TestAsset\UrlHelper::RETURN_URL;
         $actual = $page->getHref();
 
-        $old = \Zend\Controller\Action\HelperBroker\HelperBroker::getStaticHelper('URL');
+        $old = \Zend\Controller\Action\HelperBroker::getStaticHelper('URL');
         Page\Mvc::setUrlHelper($old);
 
         $this->assertEquals($expected, $actual);

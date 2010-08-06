@@ -37,7 +37,7 @@ class Exception extends \Zend\Exception
 {
     protected $view = null;
 
-    public function setView(ViewInterface $view = null)
+    public function setView(ViewEngine $view = null)
     {
         $this->view = $view;
         return $this;

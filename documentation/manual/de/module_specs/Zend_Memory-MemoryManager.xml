@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-manager">
     <title>Memory Manager</title>
@@ -43,11 +43,11 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
         <para>
             Der spezielle Name '<code>None</code>' kann als Backend Name verwendet werden,
             zusätzlich zu den Standard <classname>Zend_Cache</classname> Backends.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $memoryManager = Zend_Memory::factory('None');
 ]]></programlisting>
-        </para>
 
         <para>
             Wenn '<code>None</code>' als Backend Name verwendet wird, dann tauscht der
@@ -77,11 +77,11 @@ $memoryManager = Zend_Memory::factory('None');
                 Verschiebbare Objekte (Objekte, welche verschoben werden können)
                 können erstellt werden mit Hilfe der
                 <methodname>Zend_Memory_Manager::create([$data])</methodname> Methode:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
-            </para>
 
             <para>
                 Das <varname>$data</varname> Argument ist optional und wird verwendet um
@@ -97,11 +97,11 @@ $memObject = $memoryManager->create($data);
                 Verschlüsselte Objekte (Objekte, welche niemals getauscht werden) können
                 erstellt werden mit Hilfe der
                 <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> Methode:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
-            </para>
 
             <para>
                 Das <varname>$data</varname> Argument ist optional und wird verwendet um
@@ -116,8 +116,9 @@ $memObject = $memoryManager->createLocked($data);
             <para>
                 Memory Objekte werden automatische vernichtet und vom Speicher
                 entfernt wenn sie ausserhalb des Bereichs sind:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 function foo()
 {
     global $memoryManager, $memList;
@@ -142,7 +143,6 @@ function foo()
     // durch $memList und ist nicht zerstört
 }
 ]]></programlisting>
-            </para>
 
             <para>
                 Das gilt für beide, verschiebbare und verschlüsselte Objekte.
@@ -171,12 +171,12 @@ function foo()
                 Das Memory Limit kann empfangen oder gesetzt werden durch Verwendung
                 der <methodname>getMemoryLimit()</methodname> und
                 <methodname>setMemoryLimit($newLimit)</methodname> Methoden:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit(); // Memorylimit in Bytes empfangen
 $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
 ]]></programlisting>
-            </para>
 
             <para>
                 Ein negativer Wert für das Memory Limit bedeutet 'kein Limit'.
@@ -203,12 +203,12 @@ $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
                 Man kann die minimale Größe empfangen oder setzen durch Verwendung der
                 <methodname>getMinSize()</methodname> und
                 <methodname>setMinSize($newSize)</methodname> Methoden:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();  // MinSize in Bytes empfangen
 $memoryManager->setMinSize($newSize);        // MinSize Limit in Bytes setzen
 ]]></programlisting>
-            </para>
 
             <para>
                 Die standardmäßige Wert für die minimale Größe ist 16KB (16384 bytes).

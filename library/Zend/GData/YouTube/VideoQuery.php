@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\GData\YouTube;
-use Zend\GData\App;
+
+use Zend\GData\YouTube,
+    Zend\GData\App;
 
 /**
  * Assists in constructing queries for YouTube videos
@@ -35,7 +37,7 @@ use Zend\GData\App;
  * @uses       \Zend\GData\App\InvalidArgumentException
  * @uses       \Zend\GData\App\VersionException
  * @uses       \Zend\GData\Query
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

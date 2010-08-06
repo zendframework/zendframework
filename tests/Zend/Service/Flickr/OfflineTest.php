@@ -87,7 +87,7 @@ class Zend_Service_Flickr_OfflineTest extends PHPUnit_Framework_TestCase
         $this->_flickrProxy = new Zend_Service_Flickr_OfflineTest_FlickrProtectedMethodProxy(
             constant('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY')
             );
-        $this->_filesPath   = dirname(__FILE__) . '/_files';
+        $this->_filesPath   = __DIR__ . '/_files';
 
         /**
          * @see Zend_Http_Client_Adapter_Socket

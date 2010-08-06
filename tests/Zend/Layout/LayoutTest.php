@@ -54,11 +54,11 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         \Zend\Layout\Layout::resetMvcInstance();
 
         Controller\Front::getInstance()->resetInstance();
-        if (HelperBroker\HelperBroker::hasHelper('Layout')) {
-            HelperBroker\HelperBroker::removeHelper('Layout');
+        if (HelperBroker::hasHelper('Layout')) {
+            HelperBroker::removeHelper('Layout');
         }
-        if (HelperBroker\HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        if (HelperBroker::hasHelper('viewRenderer')) {
+            HelperBroker::removeHelper('viewRenderer');
         }
     }
 
@@ -105,13 +105,13 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $config = new Config\Config(array(
             'layout'           => 'foo',
             'contentKey'       => 'foo',
-            'layoutPath'       => dirname(__FILE__),
+            'layoutPath'       => __DIR__,
             'mvcEnabled'       => false,
         ));
         $layout->setConfig($config);
         $this->assertEquals('foo', $layout->getLayout());
         $this->assertEquals('foo', $layout->getContentKey());
-        $this->assertEquals(dirname(__FILE__), $layout->getLayoutPath());
+        $this->assertEquals(__DIR__, $layout->getLayoutPath());
         $this->assertFalse($layout->getMvcEnabled());
     }
 
@@ -125,13 +125,13 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $config = new Config\Config(array(
             'layout'           => 'foo',
             'contentKey'       => 'foo',
-            'layoutPath'       => dirname(__FILE__),
+            'layoutPath'       => __DIR__,
             'mvcEnabled'       => false,
         ));
         $layout->setOptions($config);
         $this->assertEquals('foo', $layout->getLayout());
         $this->assertEquals('foo', $layout->getContentKey());
-        $this->assertEquals(dirname(__FILE__), $layout->getLayoutPath());
+        $this->assertEquals(__DIR__, $layout->getLayoutPath());
         $this->assertFalse($layout->getMvcEnabled());
     }
 
@@ -187,8 +187,8 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testLayoutPathAccessorsWork()
     {
         $layout = new Layout\Layout();
-        $layout->setLayoutPath(dirname(__FILE__));
-        $this->assertEquals(dirname(__FILE__), $layout->getLayoutPath());
+        $layout->setLayoutPath(__DIR__);
+        $this->assertEquals(__DIR__, $layout->getLayoutPath());
     }
 
     /**
@@ -226,7 +226,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view = $layout->getView();
-        $this->assertTrue($view instanceof View\ViewInterface);
+        $this->assertTrue($view instanceof View\ViewEngine);
     }
 
     /**
@@ -236,7 +236,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view = $layout->getView();
-        $vr = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $vr = HelperBroker::getStaticHelper('viewRenderer');
         $this->assertSame($vr->view, $view);
     }
 
@@ -298,8 +298,8 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testHelperClassPassedToStartMvcIsUsed()
     {
         $layout = Layout\Layout::startMvc(array('helperClass' => 'ZendTest\Layout\TestAsset\MockActionHelper\Layout'));
-        $this->assertTrue(HelperBroker\HelperBroker::hasHelper('layout'));
-        $helper = HelperBroker\HelperBroker::getStaticHelper('layout');
+        $this->assertTrue(HelperBroker::hasHelper('layout'));
+        $helper = HelperBroker::getStaticHelper('layout');
         $this->assertTrue($helper instanceof \ZendTest\Layout\TestAsset\MockActionHelper\Layout);
     }
 
@@ -369,7 +369,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view   = new View\View();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->disableInflector()
                ->setLayout('layout.phtml')
                ->setView($view);
@@ -383,7 +383,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view   = new View\View();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setView($view);
         $layout->message = 'Rendered layout';
         $received = $layout->render();
@@ -395,7 +395,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view   = new View\View();
-        $layout->setLayoutPath(dirname(__FILE__) . '/_files/layouts')
+        $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setView($view);
         $inflector = $layout->getInflector();
         $inflector->setTarget('test/:script.:suffix')
@@ -482,7 +482,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testLayoutWithViewBasePath()
     {
         $layout = new Layout\Layout(array(
-            'viewBasePath' => dirname(__FILE__) . '/_files/layouts-basepath/')
+            'viewBasePath' => __DIR__ . '/_files/layouts-basepath/')
             );
         $this->assertEquals('layout inside basePath', $layout->render());
         $layout->setLayout('layout2');
@@ -495,7 +495,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         Layout\Layout::resetMvcInstance();
         $front = Controller\Front::getInstance();
         $this->assertFalse($front->hasPlugin('Zend_Layout_Controller_Plugin_Layout'), 'Plugin not unregistered');
-        $this->assertFalse(HelperBroker\HelperBroker::hasHelper('Layout'), 'Helper not unregistered');
+        $this->assertFalse(HelperBroker::hasHelper('Layout'), 'Helper not unregistered');
     }
 
     public function testResettingMvcInstanceRemovesMvcSingleton()

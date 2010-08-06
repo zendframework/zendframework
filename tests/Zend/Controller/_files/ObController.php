@@ -29,7 +29,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ObController extends \Zend\Controller\Action\Action
+class ObController extends \Zend\Controller\Action
 {
 
     /**
@@ -51,7 +51,7 @@ class ObController extends \Zend\Controller\Action\Action
     {
         echo "In exception action\n";
         $view = new \Zend\View\View();
-        $view->addBasePath(dirname(dirname(__FILE__)) . '/views');
+        $view->addBasePath(dirname(__DIR__) . '/views');
         $view->render('ob.phtml');
     }
 

@@ -24,12 +24,12 @@
  * @namespace
  */
 namespace ZendTest\Paginator\Adapter;
-use Zend\DB\Adapter\PDO;
+use Zend\Db\Adapter\Pdo;
 use Zend\Paginator\Adapter;
-use Zend\DB;
-use Zend\DB\Select;
+use Zend\Db;
+use Zend\Db\Select;
 
-require_once dirname(__FILE__) . '/../_files/TestTable.php';
+require_once __DIR__ . '/../_files/TestTable.php';
 
 /**
  * @category   Zend
@@ -72,8 +72,8 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $this->_db = new PDO\SQLite(array(
-            'dbname' => dirname(__FILE__) . '/../_files/test.sqlite'
+        $this->_db = new Pdo\Sqlite(array(
+            'dbname' => __DIR__ . '/../_files/test.sqlite'
         ));
 
         $this->_table = new \ZendTest\Paginator\TestAsset\TestTable($this->_db);
@@ -132,7 +132,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
         try {
             $wrongcolumn = $this->_db->quoteIdentifier('wrongcolumn');
-            $expr = new DB\Expr("COUNT(*) AS $wrongcolumn");
+            $expr = new Db\Expr("COUNT(*) AS $wrongcolumn");
             $query = $this->_db->select($expr)->from('test');
 
             $this->_adapter->setRowCount($query);
@@ -145,13 +145,13 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
     public function testAcceptsQueryForRowCount()
     {
         $row_count_column = $this->_db->quoteIdentifier(Adapter\DbSelect::ROW_COUNT_COLUMN);
-        $expression = new DB\Expr("COUNT(*) AS $row_count_column");
+        $expression = new Db\Expr("COUNT(*) AS $row_count_column");
 
         $rowCount = clone $this->_query;
-        $rowCount->reset(Select\Select::COLUMNS)
-                 ->reset(Select\Select::ORDER)        // ZF-3740
-                 ->reset(Select\Select::LIMIT_OFFSET) // ZF-3727
-                 ->reset(Select\Select::GROUP)        // ZF-4001
+        $rowCount->reset(Select::COLUMNS)
+                 ->reset(Select::ORDER)        // ZF-3740
+                 ->reset(Select::LIMIT_OFFSET) // ZF-3727
+                 ->reset(Select::GROUP)        // ZF-4001
                  ->columns($expression);
 
         $this->_adapter->setRowCount($rowCount);
@@ -204,8 +204,8 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupByQueryOnEmptyTableReturnsRowCountZero()
     {
-        $db = new PDO\SQLite(array(
-            'dbname' => dirname(__FILE__) . '/../_files/testempty.sqlite'
+        $db = new Pdo\Sqlite(array(
+            'dbname' => __DIR__ . '/../_files/testempty.sqlite'
         ));
 
         $query = $db->select()->from('test')

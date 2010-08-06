@@ -21,20 +21,25 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Test\PHPUnit\Db\DataSet;
+
+/**
  * Represent a PHPUnit Database Extension table with Queries using a Zend_Db adapter for assertion against other tables.
  *
  * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
- * @uses       Zend_Db
- * @uses       Zend_Test_PHPUnit_Db_Exception
+ * @uses       \Zend\Db\Db
+ * @uses       \Zend\Test\PHPUnit\Db\Exception
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Database_DataSet_QueryTable
+class QueryTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
 {
     /**
      * Creates a new database query table object.
@@ -43,10 +48,10 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Databas
      * @param string $query
      * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection
      */
-    public function __construct($tableName, $query, PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
+    public function __construct($tableName, $query, \PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
     {
-        if( !($databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection) ) {
-            throw new Zend_Test_PHPUnit_Db_Exception("Zend_Test_PHPUnit_Db_DataSet_QueryTable only works with Zend_Test_PHPUnit_Db_Connection connections-");
+        if( !($databaseConnection instanceof \Zend\Test\PHPUnit\Db\Connection) ) {
+            throw new \Zend\Test\PHPUnit\Db\Exception("Zend_Test_PHPUnit_Db_DataSet_QueryTable only works with Zend_Test_PHPUnit_Db_Connection connections-");
         }
         parent::__construct($tableName, $query, $databaseConnection);
     }
@@ -60,7 +65,7 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Databas
     {
         if($this->data === null) {
             $stmt = $this->databaseConnection->getConnection()->query($this->query);
-            $this->data = $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
+            $this->data = $stmt->fetchAll(\Zend\Db\Db::FETCH_ASSOC);
         }
     }
 
@@ -76,7 +81,7 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Databas
             if(count($this->data) > 0) {
                 $keys = array_keys($this->data[0]);
             }
-            $this->tableMetaData = new PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData(
+            $this->tableMetaData = new \PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData(
                 $this->tableName, $keys
             );
         }

@@ -30,7 +30,7 @@ use Zend\Search\Lucene;
 /**
  * @uses       \Zend\Search\Lucene\Search\Weight\AbstractWeight
  * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
- * @uses       \Zend\Search\Lucene\IndexInterface
+ * @uses       \Zend\Search\Lucene\SearchIndex
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -42,7 +42,7 @@ class Boolean extends AbstractWeight
     /**
      * IndexReader.
      *
-     * @var \Zend\Search\Lucene\IndexInterface
+     * @var \Zend\Search\Lucene\SearchIndex
      */
     private $_reader;
 
@@ -68,9 +68,9 @@ class Boolean extends AbstractWeight
      * reader - index reader
      *
      * @param \Zend\Search\Lucene\Search\Query\AbstractQuery $query
-     * @param \Zend\Search\Lucene\IndexInterface    $reader
+     * @param \Zend\Search\Lucene\SearchIndex    $reader
      */
-    public function __construct(Query\AbstractQuery $query, Lucene\IndexInterface    $reader)
+    public function __construct(Query\AbstractQuery $query, Lucene\SearchIndex    $reader)
     {
         $this->_query   = $query;
         $this->_reader  = $reader;

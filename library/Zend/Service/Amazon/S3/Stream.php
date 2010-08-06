@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\S3;
+
+/**
  * Amazon S3 PHP stream wrapper
  *
  * @uses       Zend_Service_Amazon_S3
@@ -31,7 +36,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_S3_Stream
+class Stream
 {
     /**
      * @var boolean Write the buffer on fflush()?
@@ -80,12 +85,12 @@ class Zend_Service_Amazon_S3_Stream
             $url = explode(':', $path);
 
             if (!$url) {
-                throw new Zend_Service_Amazon_S3_Exception("Unable to parse URL $path");
+                throw new Exception("Unable to parse URL $path");
             }
 
-            $this->_s3 = Zend_Service_Amazon_S3::getWrapperClient($url[0]);
+            $this->_s3 = S3::getWrapperClient($url[0]);
             if (!$this->_s3) {
-                throw new Zend_Service_Amazon_S3_Exception("Unknown client for wrapper {$url[0]}");
+                throw new Exception("Unknown client for wrapper {$url[0]}");
             }
         }
 
@@ -164,6 +169,10 @@ class Zend_Service_Amazon_S3_Stream
     /**
      * Read from the stream
      *
+     * http://bugs.php.net/21641 - stream_read() is always passed PHP's 
+     * internal read buffer size (8192) no matter what is passed as $count 
+     * parameter to fread(). 
+     *
      * @param  integer $count
      * @return string
      */
@@ -171,6 +180,11 @@ class Zend_Service_Amazon_S3_Stream
     {
         if (!$this->_objectName) {
             return false;
+        }
+
+        // make sure that count doesn't exceed object size
+        if ($count + $this->_position > $this->_objectSize) {
+            $count = $this->_objectSize - $this->_position;
         }
 
         $range_start = $this->_position;
@@ -183,12 +197,12 @@ class Zend_Service_Amazon_S3_Stream
         if (($this->_position == 0) || (($range_end > strlen($this->_objectBuffer)) && ($range_end <= $this->_objectSize))) {
 
             $headers = array(
-                'Range' => "$range_start-$range_end"
+                'Range' => "bytes=$range_start-$range_end"
             );
 
             $response = $this->_s3->_makeRequest('GET', $this->_objectName, null, $headers);
 
-            if ($response->getStatus() == 200) {
+            if ($response->getStatus() == 206) { // 206 Partial Content
                 $this->_objectBuffer .= $response->getBody();
             }
         }

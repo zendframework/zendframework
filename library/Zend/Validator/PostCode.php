@@ -46,7 +46,7 @@ class PostCode extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID  => "Invalid type given. The value should be a string or a integer",
+        self::INVALID  => "Invalid type given. String or integer expected",
         self::NO_MATCH => "'%value%' does not appear to be a postal code",
     );
 
@@ -75,13 +75,13 @@ class PostCode extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        if ($options instanceof end\Config\Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
         if (empty($options)) {
-            if (end\Registry::isRegistered('Zend_Locale')) {
-                $this->setLocale(end\Registry::get('Zend_Locale'));
+            if (\Zend\Registry::isRegistered('Zend_Locale')) {
+                $this->setLocale(\Zend\Registry::get('Zend_Locale'));
             }
         } elseif (is_array($options)) {
             // Received

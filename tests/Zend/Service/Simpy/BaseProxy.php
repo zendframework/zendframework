@@ -103,7 +103,7 @@ abstract class Zend_Service_Simpy_BaseProxy
 
         $this->_calls[$name]++;
 
-        $dir = dirname(__FILE__) . '/_files/';
+        $dir = __DIR__ . '/_files/';
         $file = $this->_test . '_' . $name . '_' . $this->_calls[$name];
 
         return $dir . $file;

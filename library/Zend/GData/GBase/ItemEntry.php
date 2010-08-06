@@ -46,7 +46,7 @@ class ItemEntry extends Entry
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\GBase\ItemEntry';
+    protected $_entryClassName = 'Zend\GData\GBase\ItemEntry';
 
     /**
      * Set the value of the itme_type
@@ -121,7 +121,7 @@ class ItemEntry extends Entry
             if ($uri === null) {
                 throw new App\InvalidArgumentException('You must specify an URI which needs deleted.');
             }
-            $service = new App\App($this->getHttpClient());
+            $service = new App($this->getHttpClient());
             return $service->updateEntry($this,
                                          $uri,
                                          $className,

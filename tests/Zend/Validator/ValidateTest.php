@@ -55,16 +55,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Resets the default namespaces
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-        //Validator\ValidatorChain::setDefaultNamespaces(array());
-    }
-
-    /**
      * Ensures expected results from empty validator chain
      *
      * @return void
@@ -123,8 +113,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testStaticFactory()
     {
         $this->markTestSkipped('is() method should not try to implement its own plugin loader- refactor this');
-        $this->assertTrue(Validator\ValidatorChain::is('1234', 'Digits'));
-        $this->assertFalse(Validator\ValidatorChain::is('abc', 'Digits'));
+        $this->assertTrue(Validator\ValidatorChain::execute('1234', 'Digits'));
+        $this->assertFalse(Validator\ValidatorChain::execute('abc', 'Digits'));
     }
 
     /**
@@ -134,8 +124,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testStaticFactoryWithConstructorArguments()
     {
         $this->markTestSkipped('is() method should not try to implement its own plugin loader - refactor this');
-        $this->assertTrue(Validator\ValidatorChain::is('12', 'Between', array('min' => 1, 'max' => 12)));
-        $this->assertFalse(Validator\ValidatorChain::is('24', 'Between', array('min' => 1, 'max' => 12)));
+        $this->assertTrue(Validator\ValidatorChain::execute('12', 'Between', array('min' => 1, 'max' => 12)));
+        $this->assertFalse(Validator\ValidatorChain::execute('24', 'Between', array('min' => 1, 'max' => 12)));
     }
 
     /**
@@ -151,9 +141,34 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testStaticFactoryClassNotFound()
     {
         $this->markTestSkipped('is() method should not try to implement its own plugin loader - refactor this');
-        Validator\ValidatorChain::is('1234', 'UnknownValidator');
+        Validator\ValidatorChain::execute('1234', 'UnknownValidator');
     }
 
+    public function testIsValidWithParameters()
+    {
+        $this->assertTrue(Validator\StaticValidator::execute(5, 'Between', array(1, 10)));
+        $this->assertTrue(Validator\StaticValidator::execute(5, 'Between', array('min' => 1, 'max' => 10)));
+    }
+
+    public function testSetGetMessageLengthLimitation()
+    {
+        Validator\AbstractValidator::setMessageLength(5);
+        $this->assertEquals(5, Validator\AbstractValidator::getMessageLength());
+
+        $valid = new Validator\Between(1, 10);
+        $this->assertFalse($valid->isValid(24));
+        $message = current($valid->getMessages());
+        $this->assertTrue(strlen($message) <= 5);
+    }
+
+    public function testSetGetDefaultTranslator()
+    {
+        set_error_handler(array($this, 'errorHandlerIgnore'));
+        $translator = new \Zend\Translator\Translator('ArrayAdapter', array(), 'en');
+        restore_error_handler();
+        Validator\AbstractValidator::setDefaultTranslator($translator);
+        $this->assertSame($translator->getAdapter(), Validator\AbstractValidator::getDefaultTranslator());
+    }
 
     /**
      * Handle file not found errors

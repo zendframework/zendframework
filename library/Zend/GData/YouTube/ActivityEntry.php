@@ -25,13 +25,15 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * A concrete class for working with YouTube user activity entries.
  *
  * @link http://code.google.com/apis/youtube/
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       Zend_Gdata_YouTube_Extension_Rating
  * @uses       \Zend\GData\YouTube\Extension\Username
  * @uses       \Zend\GData\YouTube\Extension\VideoId
@@ -51,7 +53,7 @@ class ActivityEntry extends \Zend\GData\Entry
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\YouTube\ActivityEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\ActivityEntry';
 
     /**
      * The ID of the video that was part of the activity

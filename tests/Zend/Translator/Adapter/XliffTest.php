@@ -46,31 +46,20 @@ use Zend\Locale;
  */
 class XliffTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_XliffTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testCreate()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'en');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $this->assertTrue($adapter instanceof Adapter\Xliff);
 
         try {
-            $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/nofile.xliff', 'en');
+            $adapter = new Adapter\Xliff(__DIR__ . '/_files/nofile.xliff', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('is not readable', $e->getMessage());
         }
 
         try {
-            $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/failed.xliff', 'en');
+            $adapter = new Adapter\Xliff(__DIR__ . '/_files/failed.xliff', 'en');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('Mismatched tag at line', $e->getMessage());
@@ -79,13 +68,13 @@ class XliffTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'en');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $this->assertEquals('Xliff', $adapter->toString());
     }
 
     public function testTranslate()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'fr');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'fr');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
@@ -95,7 +84,7 @@ class XliffTest extends \PHPUnit_Framework_TestCase
 
     public function testIsTranslated()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'en');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $this->assertTrue($adapter->isTranslated('Message 1'));
         $this->assertFalse($adapter->isTranslated('Message 6'));
         $this->assertTrue($adapter->isTranslated('Message 1', true));
@@ -105,7 +94,7 @@ class XliffTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadTranslationData()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'fr');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'fr');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
@@ -113,51 +102,58 @@ class XliffTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'fr_FR'));
 
         try {
-            $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en.xliff', 'xx');
+            $adapter->addTranslation(__DIR__ . '/_files/translation_en.xliff', 'xx');
             $this->fail("exception expected");
         } catch (Translator\Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.xliff', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.xliff', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Message 4', $adapter->translate('Message 4'));
     }
 
     public function testOptions()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'en');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $adapter->setOptions(array('testoption' => 'testkey'));
-        $this->assertEquals(
-            array(
-                'testoption'      => 'testkey',
-                'clear'           => false,
-                'scan'            => null,
-                'locale'          => 'en',
-                'ignore'          => '.',
-                'disableNotices'  => false,
-                'log'             => false,
-                'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
-                'logUntranslated' => false,
-                'reload'          => false),
-            $adapter->getOptions());
+        $expected = array(
+            'testoption'      => 'testkey',
+            'clear'           => false,
+            'content'         => __DIR__ . '/_files/translation_en.xliff',
+            'scan'            => null,
+            'locale'          => 'en',
+            'ignore'          => '.',
+            'disableNotices'  => false,
+            'log'             => false,
+            'logMessage'      => 'Untranslated message within \'%locale%\': %message%',
+            'logUntranslated' => false,
+            'reload'          => false,
+        );
+        $options = $adapter->getOptions();
+
+        foreach ($expected as $key => $value) {
+            $this->assertArrayHasKey($key, $options);
+            $this->assertEquals($value, $options[$key]);
+        }
+
         $this->assertEquals('testkey', $adapter->getOptions('testoption'));
         $this->assertTrue(is_null($adapter->getOptions('nooption')));
     }
 
     public function testClearing()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'fr');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'fr');
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 6', $adapter->translate('Message 6'));
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.xliff', 'de', array('clear' => true));
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.xliff', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Message 5', $adapter->translate('Message 5'));
     }
 
     public function testLocale()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'en');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $this->assertEquals('en', $adapter->getLocale());
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
@@ -178,9 +174,9 @@ class XliffTest extends \PHPUnit_Framework_TestCase
 
     public function testList()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en.xliff', 'en');
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $this->assertEquals(array('en' => 'en', 'fr' => 'fr'), $adapter->getList());
-        $adapter->addTranslation(dirname(__FILE__) . '/_files/translation_en2.xliff', 'de');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.xliff', 'de');
         $this->assertEquals(array('en' => 'en', 'de' => 'de', 'fr' => 'fr'), $adapter->getList());
         $this->assertTrue($adapter->isAvailable('de'));
         $locale = new Locale\Locale('en');
@@ -190,21 +186,21 @@ class XliffTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionLocaleDirectory()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/testxliff', 'de', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/testxliff', 'de', array('scan' => Translator\Translator::LOCALE_DIRECTORY));
         $this->assertEquals(array('de' => 'de', 'en' => 'en', 'fr' => 'fr'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
     }
 
     public function testOptionLocaleFilename()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/testxliff', 'de', array('scan' => Translator\Translator::LOCALE_FILENAME));
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/testxliff', 'de', array('scan' => Translator\Translator::LOCALE_FILENAME));
         $this->assertEquals(array('de' => 'de', 'en' => 'en', 'fr' => 'fr'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
     }
 
     public function testIsoEncoding()
     {
-        $adapter = new Adapter\Xliff(dirname(__FILE__) . '/_files/translation_en3.xliff', 'en', array('useId' => false));
+        $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en3.xliff', 'en', array('useId' => false));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
 
@@ -231,9 +227,4 @@ class XliffTest extends \PHPUnit_Framework_TestCase
     {
         $this->_errorOccurred = true;
     }
-}
-
-// Call Zend_Translate_Adapter_XliffTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Translate_Adapter_XliffTest::main") {
-    \Zend_Translate_Adapter_XliffTest::main();
 }

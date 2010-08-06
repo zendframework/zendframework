@@ -25,6 +25,8 @@
  */
 namespace Zend\Controller\Action\Helper;
 
+use Zend\Controller\Action\Exception as ActionException;
+
 /**
  * Create and send Scriptaculous-compatible autocompletion lists
  *
@@ -36,8 +38,7 @@ namespace Zend\Controller\Action\Helper;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AutoCompleteScriptaculous 
-    extends AutoComplete\AbstractAutoComplete
+class AutoCompleteScriptaculous extends AbstractAutoComplete
 {
     /**
      * Validate data for autocompletion
@@ -65,7 +66,7 @@ class AutoCompleteScriptaculous
     public function prepareAutoCompletion($data, $keepLayouts = false)
     {
         if (!$this->validateData($data)) {
-            throw new \Zend\Controller\Action\Exception('Invalid data passed for autocompletion');
+            throw new ActionException('Invalid data passed for autocompletion');
         }
 
         $data = (array) $data;

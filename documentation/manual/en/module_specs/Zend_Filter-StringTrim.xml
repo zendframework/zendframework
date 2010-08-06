@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.stringtrim">
+    <title>StringTrim</title>
+
+    <para>
+        This filter modifies a given string such that certain characters are removed from the
+        beginning and end.
+    </para>
+
+     <sect3 id="zend.filter.set.stringtrim.options">
+        <title>Supported options for Zend_Filter_StringTrim</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Filter_StringTrim</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>charlist</property></emphasis>: List of characters to
+                    remove from the beginning and end of the string. If this is not set or is null,
+                    the default behavior will be invoked, which is to remove only whitespace from
+                    the beginning and end of the string.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.filter.set.stringtrim.basic">
+        <title>Basic usage</title>
+
+        <para>
+            A basic example of usage is below:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringTrim();
+
+print $filter->filter(' This is (my) content: ');
+]]></programlisting>
+
+        <para>
+            The above example returns 'This is (my) content:'. Notice that the whitespace characters
+            have been removed.
+        </para>
+
+    </sect3>
+
+    <sect3 id="zend.filter.set.stringtrim.types">
+        <title>Default behaviour for Zend_Filter_StringTrim</title>
+
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringTrim(':');
+// or new Zend_Filter_StringTrim(array('charlist' => ':'));
+
+print $filter->filter(' This is (my) content:');
+]]></programlisting>
+
+        <para>
+            The above example returns 'This is (my) content'. Notice that the whitespace characters
+            and colon are removed. You can also provide an instance of
+            <classname>Zend_Config</classname> or an array with a 'charlist' key. To set the
+            desired character list after instantiation, use the
+            <methodname>setCharList()</methodname> method.
+            The <methodname>getCharList()</methodname> return the values set for charlist.
+        </para>
+    </sect3>
+
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21018 -->
+<!-- EN-Revision: 21815 -->
 <sect1 id="zend.http.client">
     <title>導入</title>
 
@@ -164,7 +164,6 @@ $client->setConfig($config);
                             <entry><constant>TRUE</constant></entry>
                         </row>
 
-                        <!-- TODO : to be translated -->
                         <row>
                             <entry>encodecookies</entry>
                             <entry>Whether to pass the cookie value through urlencode/urldecode.

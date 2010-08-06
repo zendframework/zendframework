@@ -76,7 +76,7 @@ class SessionManager extends AbstractManager
     public function sessionExists()
     {
         $sid = defined('SID') ? constant('SID') : false;
-        if ($sid && $this->getId()) {
+        if ($sid !== false && $this->getId()) {
             return true;
         }
         return false;
@@ -100,6 +100,16 @@ class SessionManager extends AbstractManager
         session_start();
         if (!$this->isValid()) {
             throw new Exception('Session failed validation');
+        }
+        $storage = $this->getStorage();
+
+        // Since session is starting, we need to potentially repopulate our 
+        // session storage
+        if ($storage instanceof Storage\SessionStorage
+            && $_SESSION !== $storage
+        ) {
+            $storage->fromArray($_SESSION);
+            $_SESSION = $storage;
         }
     }
 

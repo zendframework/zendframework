@@ -486,7 +486,7 @@ class Core implements Frontend
             Cache::throwException(self::BACKEND_NOT_IMPLEMENTS_EXTENDED_IF);
         }
         if (!($this->_backendCapabilities['tags'])) {
-            Cache::throwException(self::BACKEND_NOT_SUPPORT_TAG);
+            Cache::throwException(self::BACKEND_NOT_SUPPORTS_TAG);
         }
 
         $ids = $this->_backend->getIdsMatchingTags($tags);
@@ -519,7 +519,7 @@ class Core implements Frontend
             Cache::throwException(self::BACKEND_NOT_IMPLEMENTS_EXTENDED_IF);
         }
         if (!($this->_backendCapabilities['tags'])) {
-            Cache::throwException(self::BACKEND_NOT_SUPPORT_TAG);
+            Cache::throwException(self::BACKEND_NOT_SUPPORTS_TAG);
         }
 
         $ids = $this->_backend->getIdsNotMatchingTags($tags);
@@ -552,7 +552,7 @@ class Core implements Frontend
             Cache::throwException(self::BACKEND_NOT_IMPLEMENTS_EXTENDED_IF);
         }
         if (!($this->_backendCapabilities['tags'])) {
-            Cache::throwException(self::BACKEND_NOT_SUPPORT_TAG);
+            Cache::throwException(self::BACKEND_NOT_SUPPORTS_TAG);
         }
 
         $ids = $this->_backend->getIdsMatchingAnyTags($tags);
@@ -609,7 +609,7 @@ class Core implements Frontend
             Cache::throwException(self::BACKEND_NOT_IMPLEMENTS_EXTENDED_IF);
         }
         if (!($this->_backendCapabilities['tags'])) {
-            Cache::throwException(self::BACKEND_NOT_SUPPORT_TAG);
+            Cache::throwException(self::BACKEND_NOT_SUPPORTS_TAG);
         }
         return $this->_backend->getTags();
     }

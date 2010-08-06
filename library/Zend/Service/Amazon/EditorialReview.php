@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon;
+
+/**
  * @uses       DOMXPath
  * @category   Zend
  * @package    Zend_Service
@@ -28,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_EditorialReview
+class EditorialReview
 {
     /**
      * @var string
@@ -46,9 +51,9 @@ class Zend_Service_Amazon_EditorialReview
      * @param  DOMElement $dom
      * @return void
      */
-    public function __construct(DOMElement $dom)
+    public function __construct(\DOMElement $dom)
     {
-        $xpath = new DOMXPath($dom->ownerDocument);
+        $xpath = new \DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
         foreach (array('Source', 'Content') as $el) {
             $this->$el = (string) $xpath->query("./az:$el/text()", $dom)->item(0)->data;

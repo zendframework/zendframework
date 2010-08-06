@@ -177,7 +177,7 @@ class Standard extends AbstractDispatcher
      */
     public function formatClassName($moduleName, $className)
     {
-        return $this->formatModuleName($moduleName) . '_' . $className;
+        return $this->formatModuleName($moduleName) . '\\' . $className;
     }
 
     /**
@@ -210,7 +210,13 @@ class Standard extends AbstractDispatcher
             return false;
         }
 
-        if (class_exists($className, false)) {
+        $finalClass  = $className;
+        if (($this->_defaultModule != $this->_curModule)
+            || $this->getParam('prefixDefaultModule'))
+        {
+            $finalClass = $this->formatClassName($this->_curModule, $className);
+        }
+        if (class_exists($finalClass, false)) {
             return true;
         }
 
@@ -263,10 +269,10 @@ class Standard extends AbstractDispatcher
          * arguments; throw exception if it's not an action controller
          */
         $controller = new $className($request, $this->getResponse(), $this->getParams());
-        if (!($controller instanceof \Zend\Controller\Action\ActionInterface) &&
-            !($controller instanceof \Zend\Controller\Action\Action)) {
+        if (!($controller instanceof \Zend\Controller\ActionController) &&
+            !($controller instanceof \Zend\Controller\Action)) {
             throw new Exception(
-                'Controller "' . $className . '" is not an instance of Zend_Controller_Action_Interface'
+                'Controller "' . $className . '" is not an instance of Zend\Controller\ActionController'
             );
         }
 

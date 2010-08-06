@@ -34,7 +34,7 @@ use Zend\View\Helper\Placeholder\Registry;
  * @uses       IteratorAggregate
  * @uses       \Zend\View\Exception
  * @uses       \Zend\View\Helper\AbstractHelper
- * @uses       \Zend\View\Helper\Placeholder\Registry\Registry
+ * @uses       \Zend\View\Helper\Placeholder\Registry
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -50,7 +50,7 @@ abstract class Standalone
     protected $_container;
 
     /**
-     * @var \Zend\View\Helper\Placeholder\Registry\Registry
+     * @var \Zend\View\Helper\Placeholder\Registry
      */
     protected $_registry;
 
@@ -74,14 +74,14 @@ abstract class Standalone
      */
     public function __construct()
     {
-        $this->setRegistry(Registry\Registry::getRegistry());
+        $this->setRegistry(Registry::getRegistry());
         $this->setContainer($this->getRegistry()->getContainer($this->_regKey));
     }
 
     /**
      * Retrieve registry
      *
-     * @return \Zend\View\Helper\Placeholder\Registry\Registry
+     * @return \Zend\View\Helper\Placeholder\Registry
      */
     public function getRegistry()
     {
@@ -91,10 +91,10 @@ abstract class Standalone
     /**
      * Set registry object
      *
-     * @param  \Zend\View\Helper\Placeholder\Registry\Registry $registry
+     * @param  \Zend\View\Helper\Placeholder\Registry $registry
      * @return \Zend\View\Helper\Placeholder\Container\Standalone
      */
-    public function setRegistry(Registry\Registry $registry)
+    public function setRegistry(Registry $registry)
     {
         $this->_registry = $registry;
         return $this;
@@ -131,7 +131,7 @@ abstract class Standalone
     protected function _escape($string)
     {
         $enc = 'UTF-8';
-        if ($this->view instanceof \Zend\View\ViewInterface
+        if ($this->view instanceof \Zend\View\ViewEngine
             && method_exists($this->view, 'getEncoding')
         ) {
             $enc = $this->view->getEncoding();

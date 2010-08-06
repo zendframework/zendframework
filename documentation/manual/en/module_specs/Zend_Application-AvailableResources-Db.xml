@@ -38,6 +38,13 @@
                 establish this adapter as the default table adapter.
             </para>
         </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>defaultMetadataCache</property></emphasis>: the name of the cache 
+                template or an instance of Zend_Cache_Core to use as metadata cache for Zend_Db_Table.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.application.available-resources.db.configExample">
@@ -56,6 +63,9 @@ resources.db.params.username = "webuser"
 resources.db.params.password = "XXXXXXX"
 resources.db.params.dbname = "test"
 resources.db.isDefaultTableAdapter = true
+
+; Optionally you can also the cache template to use for metadata caching:
+resources.db.defaultMetadataCache = "database"
 ]]></programlisting>
     </example>
 

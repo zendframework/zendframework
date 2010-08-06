@@ -25,13 +25,15 @@
  */
 namespace Zend\GData\GBase;
 
+use Zend\GData\GBase;
+
 /**
  * Base class for working with Google Base entries.
  *
  * @link http://code.google.com/apis/base/
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\GBase\GBase
+ * @uses       \Zend\GData\GBase
  * @uses       \Zend\GData\GBase\Extension\BaseAttribute
  * @category   Zend
  * @package    Zend_Gdata
@@ -47,7 +49,7 @@ class Entry extends \Zend\GData\Entry
      *
      * var @string
      */
-    protected $_entryClassName = '\Zend\GData\GBase\Entry';
+    protected $_entryClassName = 'Zend\GData\GBase\Entry';
 
     /**
      * Google Base attribute elements in the 'g' namespace

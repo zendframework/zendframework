@@ -25,7 +25,7 @@ namespace ZendTest\Locale;
 use \Zend\Locale\Format,
     \Zend\Locale\Exception as LocaleException,
     \Zend\Locale\Locale,
-    \Zend\Locale\Data\Data;
+    \Zend\Locale\Data;
 
 /**
  * @category   Zend
@@ -649,7 +649,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse(Format::checkDateFormat('20.April',      array('date_format' => 'dd.MMMM.YYYY')));
         $this->assertTrue(Format::checkDateFormat('20.April',      array('date_format' => 'MMMM.YYYY'   )));
-        $this->assertFalse(Format::checkDateFormat('20',            array('date_format' => 'dd.MMMM.YYYY')));
+        $this->assertTrue(Format::checkDateFormat('20',            array('date_format' => 'dd.MMMM.YYYY')));
         $this->assertTrue( Format::checkDateFormat('April.2007',    array('date_format' => 'MMMM.YYYY'   )));
         $this->assertTrue( Format::checkDateFormat('20.April.2007', array('date_format' => 'dd.YYYY'     )));
 
@@ -670,7 +670,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( Format::checkDateFormat('11:10:55 am', array('date_format' => 'HH:mm:ss', 'locale' => 'ar_EG')));
         $this->assertFalse(Format::checkDateFormat('notime'));
         $this->assertFalse(Format::checkDateFormat('13:10',       array('date_format' => 'HH:mm:ss', 'locale' => 'de_AT')));
-        $this->assertFalse(Format::checkDateFormat('13',          array('date_format' => 'HH:mm',    'locale' => 'de_AT')));
+        $this->assertTrue(Format::checkDateFormat('13',          array('date_format' => 'HH:mm',    'locale' => 'de_AT')));
         $this->assertFalse(Format::checkDateFormat('00:13',       array('date_format' => 'ss:mm:HH', 'locale' => 'de_AT')));
     }
 
@@ -1089,10 +1089,10 @@ class FormatTest extends \PHPUnit_Framework_TestCase
     public function testToNumberWithoutFormatWithPrecision()
     {
         $options = array('locale' => 'de_AT', 'precision' => 2);
-        $this->assertEquals('3,99', Format::toNumber(3.99, $options));
-        $this->assertEquals('3,99', Format::toNumber(3.994, $options));
-        $this->assertEquals('4,00', Format::toNumber(3.995, $options));
-        $this->assertEquals('4,00', Format::toNumber(3.999, $options));
-        $this->assertEquals('4,00', Format::toNumber(4, $options));
+        $this->assertEquals('3,99', \Zend\Locale\Format::toNumber(3.99, $options));
+        $this->assertEquals('3,99', \Zend\Locale\Format::toNumber(3.994, $options));
+        $this->assertEquals('4,00', \Zend\Locale\Format::toNumber(3.995, $options));
+        $this->assertEquals('4,00', \Zend\Locale\Format::toNumber(3.999, $options));
+        $this->assertEquals('4,00', \Zend\Locale\Format::toNumber(4, $options));
     }
 }

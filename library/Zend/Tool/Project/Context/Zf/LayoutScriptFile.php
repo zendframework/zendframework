@@ -101,8 +101,9 @@ class LayoutScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
      */
     public function getContents()
     {
-        $contents = <<<EOS
-<?php echo \$this->layout()->content; ?>
+        $contents = <<<'EOS'
+<?php echo $this->layout()->content; ?>
+
 EOS;
 
         return $contents;

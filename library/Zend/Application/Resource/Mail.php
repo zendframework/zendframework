@@ -47,14 +47,14 @@ class Mail extends AbstractResource
 {
 
     /**
-     * @var \Zend\Mail\Transport\AbstractTransport
+     * @var \Zend\Mail\AbstractTransport
      */
     protected $_transport;
 
     /**
      * Initialize mail resource
      * 
-     * @return \Zend\Mail\Transport\AbstractTransport
+     * @return \Zend\Mail\AbstractTransport
      */
     public function init() 
     {
@@ -62,7 +62,7 @@ class Mail extends AbstractResource
     }
     
     /**
-     * @return \Zend\Mail\Transport\AbstractTransport|null
+     * @return \Zend\Mail\AbstractTransport|null
      */
     public function getMail()
     {
@@ -108,14 +108,13 @@ class Mail extends AbstractResource
         if(isset($options[$key]['email']) &&
            !is_numeric($options[$key]['email']))
         {
-            $method = array('Zend\\Mail\\Mail', 'setDefault' . ucfirst($type));
+            $method = 'setDefault' . ucfirst($type);
             if(isset($options[$key]['name']) &&
                !is_numeric($options[$key]['name']))
             {
-                call_user_func($method, $options[$key]['email'],
-                                        $options[$key]['name']);
+                \Zend\Mail\Mail::$method($options[$key]['email'], $options[$key]['name']);
             } else {
-                call_user_func($method, $options[$key]['email']);
+                \Zend\Mail\Mail::$method($options[$key]['email']);
             }
         }
     }

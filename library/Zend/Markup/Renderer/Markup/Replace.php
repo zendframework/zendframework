@@ -28,7 +28,7 @@ use Zend\Markup\Token;
 /**
  * Simple replace markup
  *
- * @uses       \Zend\Markup\Renderer\Markup\MarkupAbstract
+ * @uses       \Zend\Markup\Renderer\Markup\AbstractMarkup
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -36,7 +36,7 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Replace extends MarkupAbstract
+class Replace extends AbstractMarkup
 {
 
     /**

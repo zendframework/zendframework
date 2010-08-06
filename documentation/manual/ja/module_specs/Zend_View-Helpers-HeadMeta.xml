@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta ヘルパー</title>
 
     <para>
-        HTML の <emphasis>&lt;meta&gt;</emphasis> 要素は、
-        HTML ドキュメントに関するメタ情報を扱います。
+        <acronym>HTML</acronym> の <emphasis>&lt;meta&gt;</emphasis> 要素は、
+        <acronym>HTML</acronym> ドキュメントに関するメタ情報を扱います。
         たとえばキーワードや文字セット、キャッシュ方式などです。
         Meta タグには 'http-equiv' 形式と 'name' 形式があり、
         'content' 属性が必須となります。また、
@@ -152,7 +152,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 
         <!-- TODO : to be translated -->
          <para>
-            If you are serving an HTML5 document, you should provide the character
+            If you are serving an <acronym>HTML</acronym>5 document, you should provide the character
             set like this:
         </para>
 

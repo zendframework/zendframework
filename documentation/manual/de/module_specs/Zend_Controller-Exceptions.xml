@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21684 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC Ausnahmen</title>
@@ -323,7 +323,7 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
         $front      = Zend_Controller_Front::getInstance();
         $dispatcher = $front->getDispatcher();
         $class      = $dispatcher->getControllerClass($request);
-        if (!$controller) {
+        if (!$class) {
             $class = $dispatcher->getDefaultControllerClass($request);
         }
 

@@ -85,7 +85,7 @@ class SegmentMerger
      * Creates new segment merger with $directory as target to merge segments into
      * and $name as a name of new segment
      *
-     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
+     * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @param string $name
      */
     public function __construct($directory, $name)

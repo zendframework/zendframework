@@ -189,7 +189,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
             'userAuthorizationUrl'=>'http://www.example.com/authorize');
         $consumer = new Consumer48231($config);
         $params = array('foo'=>'bar');
-        $uauth = new OAuth\HTTP\UserAuthorization($consumer, $params);
+        $uauth = new OAuth\Http\UserAuthorization($consumer, $params);
         $token = new OAuth\Token\Request;
         $token->setParams(array('oauth_token'=>'123456', 'oauth_token_secret'=>'654321'));
         $redirectUrl = $consumer->getRedirectUrl($params, $token, $uauth);
@@ -225,7 +225,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 
 }
 
-class RequestToken48231 extends OAuth\HTTP\RequestToken
+class RequestToken48231 extends OAuth\Http\RequestToken
 {
     public function __construct(){}
     public function execute(array $params = null){
@@ -234,7 +234,7 @@ class RequestToken48231 extends OAuth\HTTP\RequestToken
     public function setParams(array $customServiceParameters){}
 }
 
-class AccessToken48231 extends OAuth\HTTP\AccessToken
+class AccessToken48231 extends OAuth\Http\AccessToken
 {
     public function __construct(){}
     public function execute(array $params = null){

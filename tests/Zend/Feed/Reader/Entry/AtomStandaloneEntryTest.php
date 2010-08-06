@@ -101,7 +101,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $object = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath . '/id/atom10.xml')
         );
-        $this->assertTrue($object instanceof \Reader\Entry\Atom);
+        $this->assertTrue($object instanceof Reader\Entry\Atom);
     }
 
     /**

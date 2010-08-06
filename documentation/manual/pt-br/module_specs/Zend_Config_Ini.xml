@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21130 -->
+<!-- EN-Revision: 21823 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -116,10 +116,10 @@ echo $config->database->params->dbname; // imprime "dbname"
                     <row>
                         <entry><varname>$section</varname></entry>
 
-                        <entry>A [seção] no arquivo ini que está sendo carregado. Definir este
-                            parâmetro como <constant>NULL</constant> irá carregar todas as seções.
-                            Alternativamente, uma matriz de nomes de seção pode ser fornecida para
-                            carregar várias seções.
+                        <entry>A [seção] no arquivo <acronym>INI</acronym> que está sendo carregado.
+                            Definir este parâmetro como <constant>NULL</constant> irá carregar todas
+                            as seções. Alternativamente, uma matriz de nomes de seção pode ser
+                            fornecida para carregar várias seções.
                         </entry>
                     </row>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 22068 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.books">
     <title>Die Buchsuche Daten API verwenden</title>
@@ -55,17 +55,17 @@
 
         <para>
             Die am meisten übliche Aktion ist das empfangen von Bücherlisten die einer
-            Suchanfrage entsprechen. Um das zu tun muß ein <code>VolumeQuery</code>
-            Objekt erstellt und an die <code>Books::getVolumeFeed</code> Methode
+            Suchanfrage entsprechen. Um das zu tun muß ein <classname>VolumeQuery</classname>
+            Objekt erstellt und an die <methodname>Books::getVolumeFeed()</methodname> Methode
             übergeben werden.
         </para>
 
         <para>
             Um zum Beispiel eine Schlüsselwortabfrage, mit einem Filter auf der Sichtbarkeit
             um die Ergebnisse auf partielle oder komplette sichtbare Bücher zu gegrenzen,
-            durchzuführen müssen die <code>setMinViewability</code> und
-            <code>setQuery</code> Methoden des <code>VolumeQuery</code> Objekts verwendet
-            werden. Der folgende Codeschnipsel zeigt Titel und Sichtbarkeit aller Volumes
+            durchzuführen müssen die <methodname>setMinViewability()</methodname> und
+            <methodname>()</methodname> Methoden des <classname>VolumeQuery</classname> Objekts
+            verwendet werden. Der folgende Codeschnipsel zeigt Titel und Sichtbarkeit aller Volumes
             deren Metadaten oder Texte dem Suchbegriff "domino" entsprechen:
         </para>
 
@@ -86,9 +86,10 @@ foreach ($feed as $entry) {
 ]]></programlisting>
 
         <para>
-            Die <code>Query</code> Klasse, und Subklassen wie <code>VolumeQuery</code>,
-            sind dafür zuständig das Feed <acronym>URL</acronym> erzeugt werden. Der VolumeQuery der
-            vorher gezeigt wurde erzeugt eine <acronym>URL</acronym> die der folgenden entspricht:
+            Die <classname>Query</classname> Klasse, und Subklassen wie
+            <classname>VolumeQuery</classname>, sind dafür zuständig das Feed <acronym>URL</acronym>
+            erzeugt werden. Der VolumeQuery der vorher gezeigt wurde erzeugt eine
+            <acronym>URL</acronym> die der folgenden entspricht:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -101,61 +102,62 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
         </para>
 
         <para>
-            Hier sind einige der üblichsten <code>VolumeQuery</code> Methoden für das
+            Hier sind einige der üblichsten <classname>VolumeQuery</classname> Methoden für das
             Setzen von Suchparametern:
         </para>
 
         <para>
-            <code>setQuery:</code> Spezifiziert einen Suchabfragebegriff. Buchsuchen
+            <methodname>setQuery()</methodname>: Spezifiziert einen Suchabfragebegriff. Buchsuchen
             durchsuchen alle Metadaten der Bücher und des kompletten Textes nach Büchern die
             dem Begriff entsprechen. Buchmetadaten enthalten Titel, Schlüsselwörter,
             Beschreibungen, Namen von Autoren, und Untertitel. Es ist zu beachten das alle
             Leerzeichen, Hochkomma oder andere Punktierungen im Parameterwert
-            <acronym>URL</acronym>-escaped werden müssen. (Verwende ein Plus (<code>+</code>) für
-            ein Leerzeichen.) Um nach einer exakten Phrase zu suchen muß die Phrase in Hochkomma
-            eingeschlossen werden. Um zum Beispiel nach einem Buch zu suchen das der Phrase
-            "spy plane" entspricht, muß der <code>q</code> Parameter auf
-            <code>%22spy+plane%22</code> gesetzt werden. Man kann jede der <ulink
+            <acronym>URL</acronym>-escaped werden müssen. (Verwende ein Plus
+            (<emphasis>+</emphasis>) für ein Leerzeichen.) Um nach einer exakten Phrase zu suchen
+            muß die Phrase in Hochkomma eingeschlossen werden. Um zum Beispiel nach einem Buch zu
+            suchen das der Phrase "spy plane" entspricht, muß der <property>q</property> Parameter
+            auf <command>%22spy+plane%22</command> gesetzt werden. Man kann jede der <ulink
                 url="http://books.google.com/advanced_book_search">zusätzlichen
                 Suchoperatoren</ulink> verwenden die von der Buchsuche unterstützt werden. Zum
-            Beispiel gibt <code>jane+austen+-inauthor:austen</code> Entsprechungen zurück die Jane
-            Austen erwähnen (aber nicht von Ihr geschrieben wurden).
+            Beispiel gibt <command>jane+austen+-inauthor:austen</command> Entsprechungen zurück die
+            Jane Austen erwähnen (aber nicht von Ihr geschrieben wurden).
         </para>
 
         <para>
-            <code>setStartIndex:</code> Spezifiziert den Index des ersten passenden
+            <methodname>setStartIndex()</methodname>: Spezifiziert den Index des ersten passenden
             Ergebnisses das im Ergebnisset enthalten sein sollte. Dieser Parameter verwendet
             einen eins-basierenden Index, was bedeutet dass das erste Ergebnis 1 ist, das
             zweite Ergebnis 2 und so weiter. Dieser Parameter arbeitet in Verbindung mit
             dem max-results Parameter um festzustellen welche Ergebnisse zurückzugeben
             sind. Um zum Beispiel das dritte Set von 10er Ergebnissen zu erhalten,
-            21-30-set, muß der <code>start-index</code> Parameter auf <code>21</code>
-            und der max-results Parameter auf <code>10</code> gesetzt werden. Es ist zu
-            beachten dass dies kein genereller Cursor Mechanismus ist. Wenn man zuerst
-            eine Abfrage mit <code>?start-index=1&amp;max-results=10</code> und
-            anschließend eine andere Anfrage mit <code>?start-index=11&amp;max-results=10</code>,
-            kann der Service nicht garantieren das die Ergebnisse äquivalent sind, weil
-            zwischen den zwei Anfragen Einfügungen oder Löschungen durchgeführt worden sein
-            können.
+            21-30-set, muß der <property>start-index</property> Parameter auf
+            <emphasis>21</emphasis> und der max-results Parameter auf <emphasis>10</emphasis>
+            gesetzt werden. Es ist zu beachten dass dies kein genereller Cursor Mechanismus ist.
+            Wenn man zuerst eine Abfrage mit <command>?start-index=1&amp;max-results=10</command>
+            und anschließend eine andere Anfrage mit
+            <command>?start-index=11&amp;max-results=10</command>, kann der Service nicht
+            garantieren das die Ergebnisse äquivalent sind, weil zwischen den zwei Anfragen
+            Einfügungen oder Löschungen durchgeführt worden sein können.
         </para>
 
         <para>
-            <code>setMaxResults:</code> Spezifiziert die maximale Anzahl an Ergebnissen die
-            im Ergebnisset enthalten sein sollen. Dieser Parameter arbeitet in Verbindung
-            mit dem start-index Parameter um festzustellen welche Ergebnisse zurückgegeben
-            werden sollen. Der Standardwert dieses Parameters ist <code>10</code> und der
-            Maximalwert ist <code>20</code>.
+            <methodname>setMaxResults()</methodname>: Spezifiziert die maximale Anzahl an
+            Ergebnissen die im Ergebnisset enthalten sein sollen. Dieser Parameter arbeitet in
+            Verbindung mit dem start-index Parameter um festzustellen welche Ergebnisse
+            zurückgegeben werden sollen. Der Standardwert dieses Parameters ist
+            <emphasis>10</emphasis> und der Maximalwert ist <emphasis>20</emphasis>.
         </para>
 
         <para>
-            <code>setMinViewability:</code> Erlaubt es Ergebnisse entsprechend dem <ulink
+            <methodname>setMinViewability()</methodname>: Erlaubt es Ergebnisse entsprechend dem
+            <ulink
                 url="http://code.google.com/apis/books/docs/dynamic-links.html#terminology">Status
                 der Sichtbarkeit</ulink> der Bücher zu filtern. Dieser Parameter akzeptiert einen
-            von drei Werten: <code>'none'</code> (der Standardwert, der alle passenden Bücher
-            zurückgibt Unabhängigkeit von der Sichtbarkeit), <code>'partial_view'</code> (was nur
-            Bücher zurückgibt die der Benutzer komplett oder teilweise sehen kann), oder
-            <code>'full_view'</code> (was nur Bücher zurückgibt die der Benutzer in Ihrer
-            Komplettheit sehen kann).
+            von drei Werten: <emphasis>'none'</emphasis> (der Standardwert, der alle passenden
+            Bücher zurückgibt Unabhängigkeit von der Sichtbarkeit),
+            <emphasis>'partial_view'</emphasis> (was nur Bücher zurückgibt die der Benutzer komplett
+            oder teilweise sehen kann), oder <emphasis>'full_view'</emphasis> (was nur Bücher
+            zurückgibt die der Benutzer in Ihrer Komplettheit sehen kann).
         </para>
 
         <sect3 id="zend.gdata.books.partner_restrict">
@@ -191,8 +193,8 @@ http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
 
             <para>
                 Um eine alternative <acronym>URL</acronym> zu spezifizieren wenn ein Volume Feed
-                abgefragt wird, kann ein extra Parameter an <code>newVolumeQuery</code> übergeben
-                werden
+                abgefragt wird, kann ein extra Parameter an
+                <methodname>newVolumeQuery()</methodname> übergeben werden
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -220,10 +222,10 @@ $query =
             </para>
 
             <para>
-                Um eine Bewertung hinzuzufügen, muß ein <code>Rating</code> an
-                <code>VolumeEntry</code> hinzugefügt werden und an den Anmerkungsfeed gesendet
-                werden. Im unten gezeigten Beispiel starten wir von einem leeren
-                <code>VolumeEntry</code> Objekt.
+                Um eine Bewertung hinzuzufügen, muß ein <classname>Rating</classname> an
+                <classname>VolumeEntry</classname> hinzugefügt werden und an den Anmerkungsfeed
+                gesendet werden. Im unten gezeigten Beispiel starten wir von einem leeren
+                <classname>VolumeEntry</classname> Objekt.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -249,10 +251,10 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 <title>Eine Review hinzufügen</title>
 
                 <para>
-                    Um eine Review hinzuzufügen, muß man ein <code>Review</code> Objekt an
-                    <code>VolumeEntry</code> übergeben und es an den Anmerkungsfeed übertragen.
-                    Im unteren Beispiel starten wir von einem bestehenden <code>VolumeEntry</code>
-                    Objekt.
+                    Um eine Review hinzuzufügen, muß man ein <classname>Review</classname> Objekt an
+                    <classname>VolumeEntry</classname> übergeben und es an den Anmerkungsfeed
+                    übertragen. Im unteren Beispiel starten wir von einem bestehenden
+                    <classname>VolumeEntry</classname> Objekt.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -300,9 +302,9 @@ $books->updateVolume($entry, $entryUrl);
                 <title>Ein Set von Label übermitteln</title>
 
                 <para>
-                    Um Label zu übermitteln muß ein <code>Category</code> Objekt mit dem Schema
-                    <constant>LABELS_SCHEME</constant> an <code>VolumeEntry</code> hinzugefügt und
-                    an den Anmerkungsfeed übergeben werden.
+                    Um Label zu übermitteln muß ein <classname>Category</classname> Objekt mit dem
+                    Schema <constant>LABELS_SCHEME</constant> an <classname>VolumeEntry</classname>
+                    hinzugefügt und an den Anmerkungsfeed übergeben werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -325,7 +327,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 enthalten Reviews, Bewertungen und Label. Um irgendwelche Anmerkungen von Benutzern
                 zu empfangen muß eine nicht authentifizierte Anfrage gesendet werden die die
                 BenutzerID des Benutzers enthält. Um die Anmerkungen des authentifizierten Benutzers
-                zu empfangen muß der Wert <code>me</code> als BenutzerID verwendet werden.
+                zu empfangen muß der Wert <emphasis>me</emphasis> als BenutzerID verwendet werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -356,8 +358,8 @@ foreach ($feed as $entry) {
 
             <para>
                 Wenn man einen Anmerkungseintrag empfängt der Bewertungen, Reviews und/oder Label
-                enthält können alle Anmerkungen entfernt werden indem <code>deleteVolume</code>
-                an diesem Eintrag aufgerufen wird.
+                enthält können alle Anmerkungen entfernt werden indem
+                <methodname>deleteVolume()</methodname> an diesem Eintrag aufgerufen wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -400,8 +402,8 @@ $books->deleteVolume($entry);
                 <para>
                     Um alle Bücher eines Benutzers zu empfangen muß eine Anfrage an den My Library
                     Feed gesendet werden. Um die Bibliothek des authentifizierten Benutzers zu
-                    erhalten muß <code>me</code> statt der <constant>USER_ID</constant> verwendet
-                    werden.
+                    erhalten muß <emphasis>me</emphasis> statt der <constant>USER_ID</constant>
+                    verwendet werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -411,7 +413,7 @@ $feed = $books->getUserLibraryFeed();
                 <para>
                     Es ist zu beachten das es sein kann das der Feed nicht alle Bücher des Benutzers
                     enthält, weil es ein Standardlimit der Anzahl der zurückgegebenen Ergebnisse
-                    gibt. Für weitere Information siehe den <code>max-results</code>
+                    gibt. Für weitere Information siehe den <property>max-results</property>
                     Abfrageparameter in <ulink url="#zend.gdata.books.searching_for_books">Suchen
                         nach Büchern</ulink>.
                 </para>
@@ -425,7 +427,7 @@ $feed = $books->getUserLibraryFeed();
                     <ulink url="#zend.gdata.books.searching_for_books">über alle Bücher suchen
                         kann</ulink>, kann man auch eine Volltextsuche über die Bücher in einer
                     Benutzerbibliothek durchführen. Um das zu tun müssen einfach die betreffenden
-                    Parameter am <code>VolumeQuery</code> Objekt gesetzt werden.
+                    Parameter am <classname>VolumeQuery</classname> Objekt gesetzt werden.
                 </para>
 
                 <para>
@@ -499,8 +501,8 @@ $books->insertVolume(
 ]]></programlisting>
 
                 <para>
-                    Das folgende Beispiel fügt ein bestehendes <code>VolumeEntry</code> Objekt in
-                    der Bibliothek hinzu:
+                    Das folgende Beispiel fügt ein bestehendes <classname>VolumeEntry</classname>
+                    Objekt in der Bibliothek hinzu:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -516,8 +518,8 @@ $books->insertVolume(
 
                 <para>
                     Um ein Buch von einer Benutzerbibliothek zu entfernen, muß
-                    <code>deleteVolume</code> auf dem <code>VolumeEntry</code>
-                    Objekt aufgerufen werden.
+                    <methodname>deleteVolume()</methodname> auf dem
+                    <classname>VolumeEntry</classname> Objekt aufgerufen werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[

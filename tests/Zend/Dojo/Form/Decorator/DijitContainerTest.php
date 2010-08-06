@@ -20,23 +20,15 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_Decorator_DijitContainerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Decorator_DijitContainerTest::main");
-}
+namespace ZendTest\Dojo\Form\Decorator;
 
-
-/** Zend_Dojo_Form_Decorator_DijitContainer */
-
-/** Zend_Dojo_Form_Decorator_ContentPane */
-
-/** Zend_Dojo_Form_SubForm */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\Form\Decorator\DijitContainer as DijitContainerDecorator,
+    Zend\Dojo\Form\Decorator\ContentPane as ContentPaneDecorator,
+    Zend\Dojo\Form\SubForm as DojoSubForm,
+    Zend\Dojo\Form\Form as DojoForm,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form_Decorator_DijitContainer.
@@ -49,19 +41,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_TestCase
+class DijitContainerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_DijitContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -70,37 +51,27 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_Test
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->errors = array();
         $this->view   = $this->getView();
-        $this->decorator = new Zend_Dojo_Form_Decorator_ContentPane();
+        $this->decorator = new ContentPaneDecorator();
         $this->element   = $this->getElement();
         $this->element->setView($this->view);
         $this->decorator->setElement($this->element);
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Dojo_Form_SubForm();
+        $element = new DojoSubForm();
         $element->setAttribs(array(
             'name'   => 'foo',
             'style'  => 'width: 300px; height: 500px;',
@@ -192,18 +163,16 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_Test
         $this->assertContains('dojoType="dijit.layout.ContentPane"', $html);
     }
 
-    /**
-     * @expectedException Zend_Form_Decorator_Exception
-     */
     public function testAbsenceOfHelperShouldRaiseException()
     {
-        $decorator = new Zend_Dojo_Form_Decorator_DijitContainerTest_Example();
+        $decorator = new TestAsset\ExampleContainer();
+        $this->setExpectedException('Zend\Form\Decorator\Exception');
         $helper = $decorator->getHelper();
     }
 
     public function testShouldAllowPassingDijitParamsAsOptions()
     {
-        $element = new Zend_Dojo_Form_SubForm();
+        $element = new DojoSubForm();
         $element->setAttribs(array(
             'name'   => 'foo',
             'style'  => 'width: 300px; height: 500px;',
@@ -223,7 +192,7 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_Test
 
     public function testShouldUseLegendAttribAsTitleIfNoTitlePresent()
     {
-        $element = new Zend_Dojo_Form_SubForm();
+        $element = new DojoSubForm();
         $element->setAttribs(array(
                     'name'   => 'foo',
                     'legend' => 'FooBar',
@@ -235,13 +204,4 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_Test
         $html = $this->decorator->render('');
         $this->assertContains('FooBar', $html);
     }
-}
-
-class Zend_Dojo_Form_Decorator_DijitContainerTest_Example extends Zend_Dojo_Form_Decorator_DijitContainer
-{
-}
-
-// Call Zend_Dojo_Form_Decorator_DijitContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Decorator_DijitContainerTest::main") {
-    Zend_Dojo_Form_Decorator_DijitContainerTest::main();
 }

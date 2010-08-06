@@ -97,8 +97,9 @@
             Here is an example of common usage of the autodiscovery functionality. The
             <methodname>handle()</methodname> function generates the WSDL file and posts it to the
             browser.
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_SoapServer_Class {
 ...
 }
@@ -107,7 +108,6 @@ $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->setClass('My_SoapServer_Class');
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
 
         <para>
             If you need access to the generated WSDL file either to save it to a file or as an
@@ -134,8 +134,7 @@ $autodiscover->handle();
                 requests.
             </para>
 
-            <para>
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if(isset($_GET['wsdl'])) {
     $autodiscover = new Zend_Soap_AutoDiscover();
     $autodiscover->setClass('HelloWorldService');
@@ -147,7 +146,6 @@ if(isset($_GET['wsdl'])) {
     $soap->handle();
 }
 ]]></programlisting>
-            </para>
         </note>
     </sect2>
 
@@ -157,13 +155,13 @@ if(isset($_GET['wsdl'])) {
         <para>
             If class is used to provide SOAP server functionality, then the same class should be
             provided to <classname>Zend_Soap_AutoDiscover</classname> for WSDL generation:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->setClass('My_SoapServer_Class');
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
 
         <para>
             The following rules are used while WSDL generation:
@@ -241,8 +239,9 @@ $autodiscover->handle();
             If set of functions are used to provide SOAP server functionality, then the same set
             should be provided to <classname>Zend_Soap_AutoDiscovery</classname> for WSDL
             generation:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->addFunction('function1');
 $autodiscover->addFunction('function2');
@@ -250,7 +249,6 @@ $autodiscover->addFunction('function3');
 ...
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
 
         <para>
             The following rules are used while WSDL generation:
@@ -414,8 +412,7 @@ $autodiscover->handle();
             or <code>addFunction</code> method on the AutoDiscover class.
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 // Default is 'use' => 'encoded' and
 // 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'
@@ -434,6 +431,5 @@ $autodiscover->setBindingStyle(
 $autodiscover->addFunction('myfunc1');
 $autodiscover->handle();
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

@@ -28,7 +28,7 @@ use Zend\Tool\Framework\Client;
 
 /**
  * @uses       \Zend\Tool\Framework\Client\Exception
- * @uses       \Zend\Tool\Project\Profile\Profile
+ * @uses       \Zend\Tool\Project\Profile
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
  * @category   Zend
  * @package    Zend_Tool
@@ -84,7 +84,7 @@ class Project
             $profileData = $this->_getDefaultProfile();
         }
 
-        $newProfile = new \Zend\Tool\Project\Profile\Profile(array(
+        $newProfile = new \Zend\Tool\Project\Profile(array(
             'projectDirectory' => $path,
             'profileData' => $profileData
             ));
@@ -121,7 +121,7 @@ class Project
 
     protected function _getDefaultProfile()
     {
-        $data = <<<EOS
+        $data = <<<'EOS'
 <?xml version="1.0" encoding="UTF-8"?>
 <projectProfile type="default" version="1.10">
     <projectDirectory>

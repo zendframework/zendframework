@@ -80,7 +80,7 @@ class SelectedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newSelected->value, true);
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newSelected2 = $cal->newSelected();
         $newSelected2->transferFromXML($newSelected->saveXML());
         $this->assertEquals(count($newSelected2->extensionElements), 1);

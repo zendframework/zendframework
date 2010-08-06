@@ -24,9 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Navigation;
-use Zend\Navigation;
-use Zend\Config;
-use Zend\Navigation\Page;
+
+use Zend\Navigation,
+    Zend\Navigation\AbstractPage,
+    Zend\Navigation\Page,
+    Zend\Config;
 
 /**
  * Tests the class Zend_Navigation_Container
@@ -238,7 +240,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $page3 = Page\Page::factory(array(
+        $page3 = AbstractPage::factory(array(
             'label' => 'Page 3',
             'uri' => '#'
         ));
@@ -305,7 +307,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $nav = new Navigation\Navigation(array($pageOptions));
 
-        $page = Page\Page::factory($pageOptions);
+        $page = AbstractPage::factory($pageOptions);
         $nav->addPage($page);
 
         $this->assertEquals(2, count($nav));
@@ -362,7 +364,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
                 'action' => 'index',
                 'controller' => 'index'
             )),
-            Page\Page::factory(array(
+            AbstractPage::factory(array(
                 'label' => 'Page 3',
                 'uri' => '#'
             ))
@@ -561,7 +563,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $page3 = Page\Page::factory(array(
+        $page3 = AbstractPage::factory(array(
             'label' => 'Page 3',
             'uri' => '#'
         ));
@@ -584,7 +586,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'label' => 'Page lol',
             'uri' => '#'
         ));
@@ -594,42 +596,42 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testHasPage()
     {
-        $page0 = Page\Page::factory(array(
+        $page0 = AbstractPage::factory(array(
             'label' => 'Page 0',
             'uri' => '#'
         ));
 
-        $page1 = Page\Page::factory(array(
+        $page1 = AbstractPage::factory(array(
             'label' => 'Page 1',
             'uri' => '#'
         ));
 
-        $page1_1 = Page\Page::factory(array(
+        $page1_1 = AbstractPage::factory(array(
             'label' => 'Page 1.1',
             'uri' => '#'
         ));
 
-        $page1_2 = Page\Page::factory(array(
+        $page1_2 = AbstractPage::factory(array(
             'label' => 'Page 1.2',
             'uri' => '#'
         ));
 
-        $page1_2_1 = Page\Page::factory(array(
+        $page1_2_1 = AbstractPage::factory(array(
             'label' => 'Page 1.2.1',
             'uri' => '#'
         ));
 
-        $page1_3 = Page\Page::factory(array(
+        $page1_3 = AbstractPage::factory(array(
             'label' => 'Page 1.3',
             'uri' => '#'
         ));
 
-        $page2 = Page\Page::factory(array(
+        $page2 = AbstractPage::factory(array(
             'label' => 'Page 2',
             'uri' => '#'
         ));
 
-        $page3 = Page\Page::factory(array(
+        $page3 = AbstractPage::factory(array(
             'label' => 'Page 3',
             'uri' => '#'
         ));
@@ -682,12 +684,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetParentShouldWorkWithPage()
     {
-        $page1 = Page\Page::factory(array(
+        $page1 = AbstractPage::factory(array(
             'label' => 'Page 1',
             'uri' => '#'
         ));
 
-        $page2 = Page\Page::factory(array(
+        $page2 = AbstractPage::factory(array(
             'label' => 'Page 2',
             'uri' => '#'
         ));
@@ -709,12 +711,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetParentShouldWorkWithNull()
     {
-        $page1 = Page\Page::factory(array(
+        $page1 = AbstractPage::factory(array(
             'label' => 'Page 1',
             'uri' => '#'
         ));
 
-        $page2 = Page\Page::factory(array(
+        $page2 = AbstractPage::factory(array(
             'label' => 'Page 2',
             'uri' => '#'
         ));
@@ -727,12 +729,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetParentShouldRemoveFromOldParentPage()
     {
-        $page1 = Page\Page::factory(array(
+        $page1 = AbstractPage::factory(array(
             'label' => 'Page 1',
             'uri' => '#'
         ));
 
-        $page2 = Page\Page::factory(array(
+        $page2 = AbstractPage::factory(array(
             'label' => 'Page 2',
             'uri' => '#'
         ));
@@ -758,7 +760,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneBy('page2', 'page2');
-        $this->assertType('Zend\Navigation\Page\Page', $found);
+        $this->assertType('Zend\Navigation\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -767,7 +769,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneBy('id', 'page_2_and_3');
-        $this->assertType('Zend\Navigation\Page\Page', $found);
+        $this->assertType('Zend\Navigation\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -784,7 +786,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findAllBy('id', 'page_2_and_3');
-        $this->assertContainsOnly('Zend\Navigation\Page\Page', $found, false);
+        $this->assertContainsOnly('Zend\Navigation\AbstractPage', $found, false);
 
         $expected = array('Page 2', 'Page 3');
         $actual = array();
@@ -811,7 +813,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findBy('id', 'page_2_and_3');
-        $this->assertType('Zend\Navigation\Page\Page', $found);
+        $this->assertType('Zend\Navigation\AbstractPage', $found);
     }
 
     public function testFindOneByMagicMethodNativeProperty()
@@ -819,7 +821,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneById('page_2_and_3');
-        $this->assertType('Zend\Navigation\Page\Page', $found);
+        $this->assertType('Zend\Navigation\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -828,7 +830,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneBypage2('page2');
-        $this->assertType('Zend\Navigation\Page\Page', $found);
+        $this->assertType('Zend\Navigation\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -837,7 +839,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findAllById('page_2_and_3');
-        $this->assertContainsOnly('Zend\Navigation\Page\Page', $found, false);
+        $this->assertContainsOnly('Zend\Navigation\AbstractPage', $found, false);
 
         $expected = array('Page 2', 'Page 3');
         $actual = array();
@@ -853,7 +855,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findAllByAction('about');
-        $this->assertContainsOnly('Zend\Navigation\Page\Page', $found, false);
+        $this->assertContainsOnly('Zend\Navigation\AbstractPage', $found, false);
 
         $expected = array('Page 3');
         $actual = array();
@@ -869,7 +871,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findAllByaction('about');
-        $this->assertContainsOnly('Zend\Navigation\Page\Page', $found, false);
+        $this->assertContainsOnly('Zend\Navigation\AbstractPage', $found, false);
 
         $expected = array('Page 1.3', 'Page 3');
         $actual = array();
@@ -885,7 +887,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findById('page_2_and_3');
-        $this->assertType('Zend\Navigation\Page\Page', $found);
+        $this->assertType('Zend\Navigation\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -1016,7 +1018,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testKeyShouldReturnCurrentPageHash()
     {
         $container = new Navigation\Navigation();
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri'
         ));
         $container->addPage($page);
@@ -1027,7 +1029,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testGetChildrenShouldReturnTheCurrentPage()
     {
         $container = new Navigation\Navigation();
-        $page = Page\Page::factory(array(
+        $page = AbstractPage::factory(array(
             'type' => 'uri'
         ));
         $container->addPage($page);

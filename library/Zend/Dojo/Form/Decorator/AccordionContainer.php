@@ -19,18 +19,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form\Decorator;
+
+/**
  * AccordionContainer
  *
  * Render a dijit AccordionContainer
  *
- * @uses       Zend_Dojo_Form_Decorator_DijitContainer
+ * @uses       \Zend\Dojo\Form\Decorator\DijitContainer
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo_Form_Decorator_AccordionContainer extends Zend_Dojo_Form_Decorator_DijitContainer
+class AccordionContainer extends DijitContainer
 {
     /**
      * View helper

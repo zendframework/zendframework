@@ -24,23 +24,24 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Loader;
+use Zend\Tool\Framework\Loader,
+    Zend\Tool\Framework\RegistryEnabled;
 
 /**
  * @uses       ReflectionClass
- * @uses       \Zend\Tool\Framework\Loader\LoaderInterface
- * @uses       \Zend\Tool\Framework\Manifest\ManifestInterface
- * @uses       \Zend\Tool\Framework\Provider\ProviderInterface
- * @uses       \Zend\Tool\Framework\Registry\EnabledInterface
+ * @uses       \Zend\Tool\Framework\Loader
+ * @uses       \Zend\Tool\Framework\Manifest
+ * @uses       \Zend\Tool\Framework\Provider
+ * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractLoader 
-    implements LoaderInterface, \Zend\Tool\Framework\Registry\EnabledInterface
+abstract class AbstractLoader implements Loader, RegistryEnabled
 {
     /**
-     * @var Zend_Tool_Framework_Repository_Interface
+     * @var Zend\Tool\Framework\Repository
      */
     protected $_registry = null;
 
@@ -65,10 +66,10 @@ abstract class AbstractLoader
      * setRegistry() - required by the enabled interface to get an instance of
      * the registry
      *
-     * @param \Zend\Tool\Framework\Registry\RegistryInterface $registry
+     * @param \Zend\Tool\Framework\Registry $registry
      * @return \Zend\Tool\Framework\Loader\AbstractLoader
      */
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry $registry)
     {
         $this->_registry = $registry;
         return $this;

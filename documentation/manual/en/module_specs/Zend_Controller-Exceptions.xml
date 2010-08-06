@@ -333,7 +333,7 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
         $front      = Zend_Controller_Front::getInstance();
         $dispatcher = $front->getDispatcher();
         $class      = $dispatcher->getControllerClass($request);
-        if (!$controller) {
+        if (!$class) {
             $class = $dispatcher->getDefaultControllerClass($request);
         }
 

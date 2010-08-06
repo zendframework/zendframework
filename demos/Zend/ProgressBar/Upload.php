@@ -24,7 +24,7 @@
  */
 
 if (isset($_GET['uploadId'])) {
-    set_include_path(realpath(dirname(__FILE__) . '/../../../library')
+    set_include_path(realpath(__DIR__ . '/../../../library')
                      . PATH_SEPARATOR . get_include_path());
 
     require_once 'Zend/ProgressBar.php';

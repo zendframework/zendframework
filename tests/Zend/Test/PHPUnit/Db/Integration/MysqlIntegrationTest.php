@@ -20,7 +20,10 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db\Integration;
 
 /**
  * @category   Zend
@@ -30,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_Integration_MysqlIntegrationTest extends Zend_Test_PHPUnit_Db_Integration_AbstractTestCase
+class MysqlIntegrationTest extends AbstractTestCase
 {
     public function setUp()
     {
@@ -44,7 +47,7 @@ class Zend_Test_PHPUnit_Db_Integration_MysqlIntegrationTest extends Zend_Test_PH
             return;
         }
 
-        if (!in_array('mysql', PDO::getAvailableDrivers())) {
+        if (!in_array('mysql', \PDO::getAvailableDrivers())) {
             $this->markTestSkipped('Mysql is not included in PDO in this PHP installation.');
             return;
         }
@@ -56,9 +59,9 @@ class Zend_Test_PHPUnit_Db_Integration_MysqlIntegrationTest extends Zend_Test_PH
             'dbname'   => TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE,
         );
 
-        $this->dbAdapter = Zend_Db::factory('pdo_mysql', $params);
-        $this->dbAdapter->query("DROP TABLE foo");
-        $this->dbAdapter->query("DROP TABLE bar");
+        $this->dbAdapter = \Zend\Db\Db::factory('PdoMysql', $params);
+        $this->dbAdapter->query("DROP TABLE IF EXISTS foo");
+        $this->dbAdapter->query("DROP TABLE IF EXISTS bar");
         $this->dbAdapter->query(
             'CREATE TABLE foo (id INT(10) AUTO_INCREMENT PRIMARY KEY, foo VARCHAR(255), bar VARCHAR(255), baz VARCHAR(255)) AUTO_INCREMENT=1'
         );

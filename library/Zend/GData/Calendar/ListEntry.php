@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\Calendar;
 
+use Zend\GData\Calendar;
+
 /**
  * Represents a Calendar entry in the Calendar data API meta feed of a user's
  * calendars.
  *
- * @uses       \Zend\GData\Calendar\Calendar
+ * @uses       \Zend\GData\Calendar
  * @uses       \Zend\GData\Calendar\Extension\AccessLevel
  * @uses       \Zend\GData\Calendar\Extension\Color
  * @uses       \Zend\GData\Calendar\Extension\Hidden

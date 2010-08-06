@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_ResponseAbstract
+ * @uses       Zend_Service_DeveloperGarden_Response_AbstractResponse
  * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Exception
  * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Interface
  * @category   Zend
@@ -32,7 +32,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_SecurityTokenServer_GetTokensResponse
-    extends Zend_Service_DeveloperGarden_Response_ResponseAbstract
+    extends Zend_Service_DeveloperGarden_Response_AbstractResponse
     implements Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Interface
 {
     /**

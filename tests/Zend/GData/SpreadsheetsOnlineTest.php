@@ -47,9 +47,9 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
         $this->sprKey = constant('TESTS_ZEND_GDATA_SPREADSHEETS_SPREADSHEETKEY');
         $this->wksId = constant('TESTS_ZEND_GDATA_SPREADSHEETS_WORKSHEETID');
-        $service = Spreadsheets\Spreadsheets::AUTH_SERVICE_NAME;
+        $service = Spreadsheets::AUTH_SERVICE_NAME;
         $client = \Zend\GData\ClientLogin::getHttpClient($user, $pass, $service);
-        $this->gdata = new Spreadsheets\Spreadsheets($client);
+        $this->gdata = new Spreadsheets($client);
     }
 
     public function testGetSpreadsheetsAndWorksheetsAndData()
@@ -254,7 +254,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $entry = $this->gdata->insertRow($rowData, $this->sprKey);
         $rowData['a1'] = 'newer';
         $entry = $this->gdata->updateRow($entry, $rowData);
-        $ssTest = new Spreadsheets\Spreadsheets($entry->getHttpClient());
+        $ssTest = new Spreadsheets($entry->getHttpClient());
         $ssTest->delete($entry->getEditLink()->href);
     }
 
@@ -268,7 +268,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $entry = $this->gdata->insertRow($rowData, $this->sprKey);
         $rowData['a1'] = 'newer';
         $entry = $this->gdata->updateRow($entry, $rowData);
-        $ssTest = new Spreadsheets\Spreadsheets($entry->getHttpClient());
+        $ssTest = new Spreadsheets($entry->getHttpClient());
         $ssTest->delete($entry);
     }
 
@@ -293,7 +293,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('data', $entry->customByName['c1']->getText());
         $this->assertEquals('here', $entry->customByName['d1']->getText());
 
-        $ssTest = new Spreadsheets\Spreadsheets($entry->getHttpClient());
+        $ssTest = new Spreadsheets($entry->getHttpClient());
         $ssTest->delete($entry);
     }
 

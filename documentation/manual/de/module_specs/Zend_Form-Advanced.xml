@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Form</title>
@@ -152,9 +152,9 @@
             <classname>Zend_Form</classname> versucht diesen Prozess mit seinen
             <link linkend="zend.form.forms.subforms">Unterformularen</link> zu automatisieren.
             Standardmäßig werden Unterformulare dargestellt, indem die Array Schreibweise, wie im
-            vorherigen HTML Form Code gezeigt, komplett mit Ids, verwendet wird. Der Arrayname
-            basiert auf dem Namen des Unterformulars, mit den Schlüsseln basierend auf den
-            Elementen, die im Unterformualr enthalten sind. Unterformulare können beliebig tief
+            vorherigen <acronym>HTML</acronym> Form Code gezeigt, komplett mit Ids, verwendet wird.
+            Der Arrayname basiert auf dem Namen des Unterformulars, mit den Schlüsseln basierend auf
+            den Elementen, die im Unterformualr enthalten sind. Unterformulare können beliebig tief
             verschachtelt sein, und das erzeugt verschachtelte Arrays um die Struktur zu
             reflektieren. Zusätzlich beachten die verschiedenen Prüfroutinen in
             <classname>Zend_Form</classname> die Arraystruktur, und stellen sicher, dass die form

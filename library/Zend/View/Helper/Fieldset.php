@@ -46,10 +46,6 @@ class Fieldset extends FormElement
      */
     public function direct($name = null, $content = null, $attribs = null)
     {
-        if ($name == null || $content == null) {
-            throw new \InvalidArgumentException('Fieldset helper requires both $name and $content to be provided.');
-        }
-        
         $info = $this->_getInfo($name, $content, $attribs);
         $escape = $id = null;
         extract($info);

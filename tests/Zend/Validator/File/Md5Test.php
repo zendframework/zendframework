@@ -80,13 +80,13 @@ class Md5Test extends \PHPUnit_Framework_TestCase
             $validator = new File\Md5($element[0]);
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(dirname(__FILE__) . '/_files/picture.jpg'),
+                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
                 "Tested with " . var_export($element, 1)
             );
         }
 
         $validator = new File\Md5('ed74c22109fe9f110579f77b053b8bc3');
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileMd5NotFound', $validator->getMessages()));
 
         $files = array(
@@ -97,28 +97,28 @@ class Md5Test extends \PHPUnit_Framework_TestCase
             'error'    => 0
         );
         $validator = new File\Md5('ed74c22109fe9f110579f77b053b8bc3');
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/nofile.mo', $files));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
         $this->assertTrue(array_key_exists('fileMd5NotFound', $validator->getMessages()));
 
         $files = array(
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
         $validator = new File\Md5('ed74c22109fe9f110579f77b053b8bc3');
-        $this->assertTrue($validator->isValid(dirname(__FILE__) . '/_files/picture.jpg', $files));
+        $this->assertTrue($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
 
         $files = array(
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
         $validator = new File\Md5('7d74c22109fe9f110579f77b053b8bc3');
-        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/picture.jpg', $files));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
         $this->assertTrue(array_key_exists('fileMd5DoesNotMatch', $validator->getMessages()));
     }
 

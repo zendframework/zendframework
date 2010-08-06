@@ -46,7 +46,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_registry = new \Zend\Tool\Framework\Registry\Registry();
+        $this->_registry = new \Zend\Tool\Framework\Registry\FrameworkRegistry();
     }
 
     public function teardown()
@@ -98,8 +98,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testRegistryCanGetAndSetResponse()
     {
-        $this->assertTrue($this->_registry->getResponse() instanceof Response\Response);
-        $this->_registry->setResponse($resp = new Response\Response());
+        $this->assertTrue($this->_registry->getResponse() instanceof Response);
+        $this->_registry->setResponse($resp = new Response());
         $this->assertTrue($this->_registry->getResponse() === $resp);
     }
 

@@ -59,7 +59,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = dirname(__FILE__) . '/_files/modules';
+        $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new \Zend\View\Helper\Partial();
         Controller\Front::getInstance()->resetInstance();
     }
@@ -81,7 +81,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     public function testPartialRendersScript()
     {
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
         $return = $this->helper->direct('partialOne.phtml');
@@ -94,7 +94,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     public function testPartialRendersScriptWithVars()
     {
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $view->message = 'This should never be read';
         $this->helper->setView($view);
@@ -110,7 +110,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     {
         Controller\Front::getInstance()->addModuleDirectory($this->basePath);
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
         $return = $this->helper->direct('partialTwo.phtml', 'foo');
@@ -124,7 +124,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     {
         Controller\Front::getInstance()->addModuleDirectory($this->basePath);
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
@@ -180,7 +180,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $model->bar = 'baz';
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
         $return = $this->helper->direct('partialVars.phtml', $model);
@@ -196,7 +196,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $model = new Aggregate();
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
         $return = $this->helper->direct('partialVars.phtml', $model);
@@ -215,7 +215,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $model->bartest = 'baz';
 
         $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/default/views/scripts'
+            'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
         $return = $this->helper->direct('partialObj.phtml', $model);

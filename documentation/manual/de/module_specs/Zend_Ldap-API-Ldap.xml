@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21821 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap">
     <title>Zend_Ldap</title>
@@ -145,8 +145,8 @@
                     <entry><code>Zend_Ldap disconnect()</code></entry>
 
                     <entry>
-                        Trennt die Verbindung der Zend_Ldap Instanz vom <acronym>LDAP</acronym>
-                        Server.
+                        Trennt die Verbindung der <classname>Zend_Ldap</classname> Instanz vom
+                        <acronym>LDAP</acronym> Server.
                     </entry>
                 </row>
 
@@ -157,11 +157,11 @@
                     </entry>
 
                     <entry>
-                        Verbindet eine Instanz von Zend_Ldap mit dem angegebenen
-                        <acronym>LDAP</acronym> Server. Alle Parameter sind optional, und werden von
-                        den <acronym>LDAP</acronym> Verbindungs- und Bindungsparametern genommen
-                        welche der Instanz über den Constructor oder über
-                        <methodname>Zend_Ldap::setOptions()</methodname> angegeben wurden, wenn
+                        Verbindet eine Instanz von <classname>Zend_Ldap</classname> mit dem
+                        angegebenen <acronym>LDAP</acronym> Server. Alle Parameter sind optional,
+                        und werden von den <acronym>LDAP</acronym> Verbindungs- und
+                        Bindungsparametern genommen welche der Instanz über den Constructor oder
+                        über <methodname>Zend_Ldap::setOptions()</methodname> angegeben wurden, wenn
                         <constant>NULL</constant> angegeben wurde.
                     </entry>
                 </row>

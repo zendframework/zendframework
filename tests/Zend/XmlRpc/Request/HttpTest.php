@@ -29,7 +29,7 @@ use Zend\XmlRpc\Request,
     ZendTest\AllTests\StreamWrapper\PHPInput;
 
 /**
- * Test case for Zend\XmlRpc\Request\HTTP
+ * Test case for Zend\XmlRpc\Request\Http
  *
  * @category   Zend
  * @package    Zend_XmlRpc
@@ -76,7 +76,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
     </params>
 </methodCall>
 EOX;
-        $this->request = new Request\HTTP();
+        $this->request = new Request\Http();
         $this->request->loadXml($this->xml);
 
         $this->server = $_SERVER;
@@ -135,7 +135,7 @@ EOT;
     public function testCanPassInMethodAndParams()
     {
         try {
-            $request = new Request\HTTP('foo', array('bar', 'baz'));
+            $request = new Request\Http('foo', array('bar', 'baz'));
         } catch (\Exception $e) {
             $this->fail('Should be able to pass in methods and params to request');
         }
@@ -155,7 +155,7 @@ EOT;
     public function testHttpRequestReadsFromPhpInput()
     {
         $this->assertNull(PHPInput::argumentsPassedTo('stream_open'));
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         list($path, $mode,) = PHPInput::argumentsPassedTo('stream_open');
         $this->assertSame('php://input', $path);
         $this->assertSame('rb', $mode);
@@ -165,13 +165,13 @@ EOT;
     public function testHttpRequestGeneratesFaultIfReadFromPhpInputFails()
     {
         PHPInput::methodWillReturn('stream_open', false);
-        $request = new Request\HTTP();
+        $request = new Request\Http();
         $this->assertTrue($request->isFault());
         $this->assertSame(630, $request->getFault()->getCode());
     }
 }
 
-class HTTPTestExtension extends Request\HTTP
+class HTTPTestExtension extends Request\Http
 {
     public function __construct($method = null, $params = null)
     {

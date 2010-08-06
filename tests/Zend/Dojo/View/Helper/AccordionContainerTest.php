@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_AccordionContainerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_AccordionContainerTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_AccordionContainer */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\View\Helper\AccordionContainer as AccordionContainerHelper,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_AccordionContainer.
@@ -45,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_TestCase
+class AccordionContainerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_AccordionContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,28 +48,18 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->helper = new Zend_Dojo_View_Helper_AccordionContainer();
+        $this->helper = new AccordionContainerHelper();
         $this->helper->setView($this->view);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
@@ -100,7 +72,7 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
             $content = 'This is the content of pane ' . $i;
             $html   .= $this->view->accordionPane($id, $content, array('title' => $title));
         }
-        return $this->helper->accordionContainer('container', $html, array(), array('style' => 'height: 200px; width: 100px;'));
+        return $this->helper->direct('container', $html, array(), array('style' => 'height: 200px; width: 100px;'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -111,7 +83,7 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
 
     public function testShouldAllowProgrammaticDijitCreation()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $html = $this->getContainer();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.layout.AccordionContainer")/', $html);
         $this->assertNotNull($this->view->dojo()->getDijit('container'));
@@ -138,11 +110,9 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
         $this->assertContains('Nested Content', $html);
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testCapturingShouldRaiseErrorWhenDuplicateIdDiscovered()
     {
+        $this->setExpectedException('Zend\Dojo\View\Exception');
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
         $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
         $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
@@ -152,17 +122,10 @@ class Zend_Dojo_View_Helper_AccordionContainerTest extends PHPUnit_Framework_Tes
         $html = $this->helper->captureEnd('foo');
     }
 
-    /**
-     * @expectedException Zend_Dojo_View_Exception
-     */
     public function testCapturingShouldRaiseErrorWhenNonexistentIdPassedToEnd()
     {
+        $this->setExpectedException('Zend\Dojo\View\Exception');
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
         $html = $this->helper->captureEnd('bar');
     }
-}
-
-// Call Zend_Dojo_View_Helper_AccordionContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_AccordionContainerTest::main") {
-    Zend_Dojo_View_Helper_AccordionContainerTest::main();
 }

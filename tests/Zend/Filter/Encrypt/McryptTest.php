@@ -228,7 +228,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This adapter needs the bz2 extension');
         }
 
-        $filter = new McryptEncryption(array('key' => 'testkey'));
+        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $filter->setCompression('bz2');
         $output = $filter->encrypt('teststring');

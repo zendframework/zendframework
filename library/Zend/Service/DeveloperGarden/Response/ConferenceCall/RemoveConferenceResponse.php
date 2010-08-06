@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_AbstractConferenceCall
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -30,7 +30,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveConferenceResponse
-    extends Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
+    extends Zend_Service_DeveloperGarden_Response_ConferenceCall_AbstractConferenceCall
 {
     /**
      * response data

@@ -38,7 +38,7 @@ use Zend\Tool\Project\Profile as ProjectProfile;
 class Form extends AbstractProvider
 {
 
-    public static function createResource(ProjectProfile\Profile $profile, $formName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
             throw new Exception('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to create.');
@@ -64,29 +64,29 @@ class Form extends AbstractProvider
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $formName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function hasResource(ProjectProfile\Profile $profile, $formName, $moduleName = null)
+    public static function hasResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
             throw new Exception('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to check for existence.');
         }
 
         $formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName);
-        return (($formsDirectory->search(array('formFile' => array('formName' => $formName)))) instanceof ProjectProfile\Resource\Resource);
+        return (($formsDirectory->search(array('formFile' => array('formName' => $formName)))) instanceof ProjectProfile\Resource);
     }
     
     /**
      * _getFormsDirectoryResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    protected static function _getFormsDirectoryResource(ProjectProfile\Profile $profile, $moduleName = null)
+    protected static function _getFormsDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {
         $profileSearchParams = array();
 

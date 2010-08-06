@@ -20,10 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Test_PHPUnit_Constraint_DomQuery
+ * @namespace
  */
+namespace ZendTest\Test\PHPUnit\Constraint;
+use Zend\Test\PHPUnit\Constraint;
 
 /**
  * @category   Zend
@@ -34,7 +35,7 @@
  * @group      Zend_Test
  * @group      Zend_Test_PHPUnit
  */
-class Zend_Test_PHPUnit_Constraint_DomQueryTest extends PHPUnit_Framework_TestCase
+class DomQueryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group ZF-4010
@@ -58,9 +59,9 @@ class Zend_Test_PHPUnit_Constraint_DomQueryTest extends PHPUnit_Framework_TestCa
         </form>
     </body>
 </html>';
-        $assertion = new Zend_Test_PHPUnit_Constraint_DomQuery('input#input-0 @value');
+        $assertion = new Constraint\DomQuery('input#input-0 @value');
         $result = $assertion->evaluate($html,
-            Zend_Test_PHPUnit_Constraint_DomQuery::ASSERT_CONTENT_CONTAINS, 'value1');
+            Constraint\DomQuery::ASSERT_CONTENT_CONTAINS, 'value1');
         $this->assertTrue($result);
     }
 }

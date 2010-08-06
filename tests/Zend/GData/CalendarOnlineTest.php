@@ -48,9 +48,9 @@ class CalendarOnlineTest extends \PHPUnit_Framework_TestCase
         }
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
-        $service = Calendar\Calendar::AUTH_SERVICE_NAME;
+        $service = Calendar::AUTH_SERVICE_NAME;
         $client = \Zend\GData\ClientLogin::getHttpClient($user, $pass, $service);
-        $this->gdata = new Calendar\Calendar($client);
+        $this->gdata = new Calendar($client);
     }
 
     public function testCalendarListFeed()

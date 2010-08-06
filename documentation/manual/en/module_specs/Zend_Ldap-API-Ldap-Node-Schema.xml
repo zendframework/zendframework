@@ -32,7 +32,10 @@
             <tbody>
                 <row>
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
-                    <entry>Gets the DN of the current node as a Zend_Ldap_Dn.</entry>
+
+                    <entry>
+                        Gets the DN of the current node as a <classname>Zend_Ldap_Dn</classname>.
+                    </entry>
                 </row>
 
                 <row>

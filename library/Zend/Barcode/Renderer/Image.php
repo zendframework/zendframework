@@ -94,7 +94,7 @@ class Image extends AbstractRenderer
     /**
      * Set height of the result image
      * @param null|integer $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setHeight($value)
@@ -149,7 +149,7 @@ class Image extends AbstractRenderer
      * Set an image resource to draw the barcode inside
      *
      * @param resource $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setResource($image)
@@ -167,7 +167,7 @@ class Image extends AbstractRenderer
      * Set the image type to produce (png, jpeg, gif)
      *
      * @param string $value
-     * @return \Zend\Barcode\Renderer\RendererInterface
+     * @return \Zend\Barcode\Renderer
      * @throw \Zend\Barcode\Renderer\Exception
      */
     public function setImageType($value)
@@ -333,7 +333,7 @@ class Image extends AbstractRenderer
         $this->draw();
         header("Content-Type: image/" . $this->_imageType);
         $functionName = 'image' . $this->_imageType;
-        call_user_func($functionName, $this->_resource);
+        $functionName($this->_resource);
         @imagedestroy($this->_resource);
     }
 

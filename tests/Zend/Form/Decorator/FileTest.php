@@ -20,13 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Decorator_FileTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_FileTest::main");
-}
+namespace ZendTest\Form\Decorator;
 
-
-
+use Zend\Form\Decorator\File as FileDecorator,
+    Zend\Form\Decorator\AbstractDecorator,
+    Zend\Form\Element\File as FileElement,
+    Zend\Form\Element,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Decorator_Errors
@@ -38,20 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
+class FileTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_FileTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -60,22 +48,12 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->decorator = new Zend_Form_Decorator_File();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->decorator = new FileDecorator();
     }
 
     public function testRenderReturnsInitialContentIfNoViewPresentInElement()
     {
-        $element = new Zend_Form_Element_File('foo');
+        $element = new FileElement('foo');
         $this->decorator->setElement($element);
         $content = 'test content';
         $this->assertSame($content, $this->decorator->render($content));
@@ -83,14 +61,13 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
+        $view = new View();
         return $view;
     }
 
     public function setupSingleElement()
     {
-        $element = new Zend_Form_Element_File('foo');
+        $element = new FileElement('foo');
         $element->addValidator('Count', 1)
                 ->setView($this->getView());
         $this->element = $element;
@@ -99,7 +76,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
 
     public function setupMultiElement()
     {
-        $element = new Zend_Form_Element_File('foo');
+        $element = new FileElement('foo');
         $element->addValidator('Count', 1)
                 ->setMultiFile(2)
                 ->setView($this->getView());
@@ -125,7 +102,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
     {
         $max = $this->_convertIniToInteger(trim(ini_get('upload_max_filesize')));
 
-        $element = new Zend_Form_Element_File('foo');
+        $element = new FileElement('foo');
         $element->addValidator('Count', 1)
                 ->setView($this->getView())
                 ->setMaxFileSize($max);
@@ -145,12 +122,12 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
 
     public function testPlacementInitiallyAppends()
     {
-        $this->assertEquals(Zend_Form_Decorator_Abstract::APPEND, $this->decorator->getPlacement());
+        $this->assertEquals(AbstractDecorator::APPEND, $this->decorator->getPlacement());
     }
 
     public function testRenderReturnsOriginalContentWhenNoViewPresentInElement()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $this->decorator->setElement($element);
         $content = 'test content';
         $this->assertSame($content, $this->decorator->render($content));
@@ -158,7 +135,7 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
 
     public function testCanPrependFileToContent()
     {
-        $element = new Zend_Form_Element_File('foo');
+        $element = new FileElement('foo');
         $element->setValue('foobar')
                 ->setView($this->getView());
         $this->decorator->setElement($element)
@@ -190,9 +167,4 @@ class Zend_Form_Decorator_FileTest extends PHPUnit_Framework_TestCase
 
         return (integer) $setting;
     }
-}
-
-// Call Zend_Form_Decorator_FileTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_FileTest::main") {
-    Zend_Form_Decorator_FileTest::main();
 }

@@ -115,7 +115,7 @@ class Zend_Service_DeveloperGarden_OfflineClientTest extends PHPUnit_Framework_T
         foreach ($options as $key => $value) {
             $this->assertNull($this->service->getOption($key));
             $this->assertType(
-                'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+                'Zend_Service_DeveloperGarden_Client_AbstractClient',
                 $this->service->setOption($key, $value)
             );
         }
@@ -154,7 +154,7 @@ class Zend_Service_DeveloperGarden_OfflineClientTest extends PHPUnit_Framework_T
     public function testOnlineWsdl()
     {
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setUseLocalWsdl(false)
         );
         $this->assertEquals(
@@ -166,7 +166,7 @@ class Zend_Service_DeveloperGarden_OfflineClientTest extends PHPUnit_Framework_T
     public function testSetLocalWsdl()
     {
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setLocalWsdl('my.wsdl')
         );
 
@@ -179,12 +179,12 @@ class Zend_Service_DeveloperGarden_OfflineClientTest extends PHPUnit_Framework_T
     public function testSetWsdl()
     {
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setWsdl('http://my.wsdl')
         );
 
         $this->assertType(
-            'Zend_Service_DeveloperGarden_Client_ClientAbstract',
+            'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setUseLocalWsdl(false)
         );
 

@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\Extension;
 
+use Zend\GData\Extension;
+
 /**
  * Represents the gd:entryLink element
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

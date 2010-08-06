@@ -62,7 +62,7 @@ class PlaylistListFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#playlistLink', $playlistListFeed->category[0]->term);
         $this->assertEquals('http://www.youtube.com/img/pic_youtubelogo_123x63.gif', $playlistListFeed->logo->text);
         $this->assertEquals('text', $playlistListFeed->title->type);
-        $this->assertEquals('testuser\'s Playlists', $playlistListFeed->title->text);;
+        $this->assertEquals('testuser\'s Playlists', $playlistListFeed->title->text);
         $this->assertEquals('self', $playlistListFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $playlistListFeed->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/users/testuser/playlists?start-index=1&max-results=25', $playlistListFeed->getLink('self')->href);
@@ -85,7 +85,7 @@ class PlaylistListFeedTest extends \PHPUnit_Framework_TestCase
             'http://www.youtube.com/img/pic_youtubelogo_123x63.gif',
             $playlistListFeed->logo->text);
         $this->assertEquals('Playlists of GoogleDevelopers',
-            $playlistListFeed->title->text);;
+            $playlistListFeed->title->text);
         $this->assertEquals('self', $playlistListFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml',
             $playlistListFeed->getLink('self')->type);

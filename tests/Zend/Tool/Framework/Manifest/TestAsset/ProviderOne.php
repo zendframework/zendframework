@@ -33,12 +33,12 @@ namespace ZendTest\Tool\Framework\Manifest\TestAsset;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ProviderOne
-    implements \Zend\Tool\Framework\Provider\ProviderInterface, \Zend\Tool\Framework\Registry\EnabledInterface
+    implements \Zend\Tool\Framework\Provider, \Zend\Tool\Framework\RegistryEnabled
 {
 
     protected $_registry = null;
 
-    public function setRegistry(\Zend\Tool\Framework\Registry\RegistryInterface $registry)
+    public function setRegistry(\Zend\Tool\Framework\Registry $registry)
     {
         $this->_registry = $registry;
     }

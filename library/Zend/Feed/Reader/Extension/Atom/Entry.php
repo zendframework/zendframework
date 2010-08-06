@@ -568,10 +568,10 @@ class Entry extends Extension\AbstractEntry
      */
     protected function _absolutiseUri($link)
     {
-        if (!\Zend\URI\URL::validate($link)) {
+        if (!\Zend\Uri\Url::validate($link)) {
             if (!is_null($this->getBaseUrl())) {
                 $link = $this->getBaseUrl() . $link;
-                if (!\Zend\URI\URL::validate($link)) {
+                if (!\Zend\Uri\Url::validate($link)) {
                     $link = null;
                 }
             }

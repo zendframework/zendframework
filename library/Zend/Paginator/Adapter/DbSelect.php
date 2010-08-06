@@ -23,22 +23,24 @@
  * @namespace
  */
 namespace Zend\Paginator\Adapter;
-use Zend\DB\Select;
-use Zend\DB;
-use Zend\Paginator;
+
+use Zend\Db\Select,
+    Zend\Db,
+    Zend\Paginator\Adapter,
+    Zend\Paginator\Exception as PaginatorException;
 
 /**
- * @uses       \Zend\DB\DB
- * @uses       \Zend\DB\Expr
- * @uses       \Zend\DB\Select\Select
- * @uses       \Zend\Paginator\Adapter\AdapterInterface
+ * @uses       \Zend\Db\Db
+ * @uses       \Zend\Db\Expr
+ * @uses       \Zend\Db\Select
+ * @uses       \Zend\Paginator\Adapter
  * @uses       \Zend\Paginator\Exception
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbSelect implements AdapterInterface
+class DbSelect implements Adapter
 {
     /**
      * Name of the row count column
@@ -50,14 +52,14 @@ class DbSelect implements AdapterInterface
     /**
      * The COUNT query
      *
-     * @var \Zend\DB\Select\Select
+     * @var \Zend\Db\Select
      */
     protected $_countSelect = null;
 
     /**
      * Database query
      *
-     * @var \Zend\DB\Select\Select
+     * @var \Zend\Db\Select
      */
     protected $_select = null;
 
@@ -71,9 +73,9 @@ class DbSelect implements AdapterInterface
     /**
      * Constructor.
      *
-     * @param \Zend\DB\Select\Select $select The select query
+     * @param \Zend\Db\Select $select The select query
      */
-    public function __construct(Select\Select $select)
+    public function __construct(Select $select)
     {
         $this->_select = $select;
     }
@@ -88,19 +90,19 @@ class DbSelect implements AdapterInterface
      * Users are therefore encouraged to profile their queries to find
      * the solution that best meets their needs.
      *
-     * @param  \Zend\DB\Select\Select|integer $totalRowCount Total row count integer
+     * @param  \Zend\Db\Select|integer $totalRowCount Total row count integer
      *                                               or query
      * @return \Zend\Paginator\Adapter\DbSelect $this
      * @throws \Zend\Paginator\Exception
      */
     public function setRowCount($rowCount)
     {
-        if ($rowCount instanceof Select\Select) {
-            $columns = $rowCount->getPart(Select\Select::COLUMNS);
+        if ($rowCount instanceof Select) {
+            $columns = $rowCount->getPart(Select::COLUMNS);
 
             $countColumnPart = $columns[0][1];
 
-            if ($countColumnPart instanceof DB\Expr) {
+            if ($countColumnPart instanceof Db\Expr) {
                 $countColumnPart = $countColumnPart->__toString();
             }
 
@@ -108,16 +110,16 @@ class DbSelect implements AdapterInterface
 
             // The select query can contain only one column, which should be the row count column
             if (false === strpos($countColumnPart, $rowCountColumn)) {
-                throw new Paginator\Exception('Row count column not found');
+                throw new PaginatorException('Row count column not found');
             }
 
-            $result = $rowCount->query(DB\DB::FETCH_ASSOC)->fetch();
+            $result = $rowCount->query(Db\Db::FETCH_ASSOC)->fetch();
 
             $this->_rowCount = count($result) > 0 ? $result[$rowCountColumn] : 0;
         } else if (is_integer($rowCount)) {
             $this->_rowCount = $rowCount;
         } else {
-            throw new Paginator\Exception('Invalid row count');
+            throw new PaginatorException('Invalid row count');
         }
 
         return $this;
@@ -160,7 +162,7 @@ class DbSelect implements AdapterInterface
      * In that use-case I'm expecting problems when either GROUP BY or DISTINCT
      * has one column.
      *
-     * @return \Zend\DB\Select\Select
+     * @return \Zend\Db\Select
      */
     public function getCountSelect()
     {
@@ -180,21 +182,21 @@ class DbSelect implements AdapterInterface
         $countColumn = $db->quoteIdentifier($db->foldCase(self::ROW_COUNT_COLUMN));
         $countPart   = 'COUNT(1) AS ';
         $groupPart   = null;
-        $unionParts  = $rowCount->getPart(Select\Select::UNION);
+        $unionParts  = $rowCount->getPart(Select::UNION);
 
         /**
          * If we're dealing with a UNION query, execute the UNION as a subquery
          * to the COUNT query.
          */
         if (!empty($unionParts)) {
-            $expression = new DB\Expr($countPart . $countColumn);
+            $expression = new Db\Expr($countPart . $countColumn);
 
             $rowCount = $db->select()->from($rowCount, $expression);
         } else {
-            $columnParts = $rowCount->getPart(Select\Select::COLUMNS);
-            $groupParts  = $rowCount->getPart(Select\Select::GROUP);
-            $havingParts = $rowCount->getPart(Select\Select::HAVING);
-            $isDistinct  = $rowCount->getPart(Select\Select::DISTINCT);
+            $columnParts = $rowCount->getPart(Select::COLUMNS);
+            $groupParts  = $rowCount->getPart(Select::GROUP);
+            $havingParts = $rowCount->getPart(Select::HAVING);
+            $isDistinct  = $rowCount->getPart(Select::DISTINCT);
 
             /**
              * If there is more than one column AND it's a DISTINCT query, more
@@ -206,7 +208,7 @@ class DbSelect implements AdapterInterface
             } else if ($isDistinct) {
                 $part = $columnParts[0];
 
-                if ($part[1] !== Select\Select::SQL_WILDCARD && !($part[1] instanceof DB\Expr)) {
+                if ($part[1] !== Select::SQL_WILDCARD && !($part[1] instanceof Db\Expr)) {
                     $column = $db->quoteIdentifier($part[1], true);
 
                     if (!empty($part[0])) {
@@ -215,8 +217,8 @@ class DbSelect implements AdapterInterface
 
                     $groupPart = $column;
                 }
-            } else if (!empty($groupParts) && $groupParts[0] !== Select\Select::SQL_WILDCARD &&
-                       !($groupParts[0] instanceof DB\Expr)) {
+            } else if (!empty($groupParts) && $groupParts[0] !== Select::SQL_WILDCARD &&
+                       !($groupParts[0] instanceof Db\Expr)) {
                 $groupPart = $db->quoteIdentifier($groupParts[0], true);
             }
 
@@ -232,14 +234,14 @@ class DbSelect implements AdapterInterface
             /**
              * Create the COUNT part of the query
              */
-            $expression = new DB\Expr($countPart . $countColumn);
+            $expression = new Db\Expr($countPart . $countColumn);
 
-            $rowCount->reset(Select\Select::COLUMNS)
-                     ->reset(Select\Select::ORDER)
-                     ->reset(Select\Select::LIMIT_OFFSET)
-                     ->reset(Select\Select::GROUP)
-                     ->reset(Select\Select::DISTINCT)
-                     ->reset(Select\Select::HAVING)
+            $rowCount->reset(Select::COLUMNS)
+                     ->reset(Select::ORDER)
+                     ->reset(Select::LIMIT_OFFSET)
+                     ->reset(Select::GROUP)
+                     ->reset(Select::DISTINCT)
+                     ->reset(Select::HAVING)
                      ->columns($expression);
         }
 

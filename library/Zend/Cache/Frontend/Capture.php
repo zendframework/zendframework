@@ -76,7 +76,7 @@ class Capture extends Core
     public function _flush($data)
     {
         $id = array_pop($this->_idStack);
-        if (is_null($id)) {
+        if ($id === null) {
             Cache::throwException('use of _flush() without a start()');
         }
         if ($this->_extension) {

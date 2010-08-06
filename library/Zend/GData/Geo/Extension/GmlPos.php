@@ -28,15 +28,15 @@ namespace Zend\GData\Geo\Extension;
 /**
  * Represents the gml:pos element used by the Gdata Geo extensions.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Geo\Geo
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Geo
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GmlPos extends \Zend\GData\Extension\Extension
+class GmlPos extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gml';
@@ -49,7 +49,7 @@ class GmlPos extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Geo\Geo::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Geo::$namespaces);
         parent::__construct();
         $this->setText($text);
     }

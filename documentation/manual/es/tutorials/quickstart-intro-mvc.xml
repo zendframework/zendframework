@@ -8,13 +8,14 @@
         <title>Zend Framework</title>
 
         <para>
-            Zend Framework es un framework de código abierto y orientado a objectos para facilitar 
-            el desarrollo de aplicaciones web con PHP 5.
+            Zend Framework es un framework de código abierto y orientado a objectos para facilitar
+            el desarrollo de aplicaciones web con <acronym>PHP</acronym> 5.
             A menudo es considerado una 'biblioteca de componentes', debido a que estos poseen bajo
             acoplamiento entre sí lo cual permite reutilizarlos con un alto grado de independencia. Proporciona
-            además una sofisticada implementación del patrón Modelo-Vista-Controlador (MVC) el cual puede
+            además una sofisticada implementación del patrón Modelo-Vista-Controlador 
+            (<acronym>MVC</acronym>) el cual puede
             ser utilizado para fijar la estructura básica de las aplicaciones desarrolladas con el framework.
-            Encontrarás la lista completa de los componentes del Zend Framework junto a
+            Encontrarás la lista completa de los componentes de Zend Framework junto a
             breves descripciones de los mismos en la
             <ulink url="http://framework.zend.com/about/components">lista de componentes</ulink>.
             En este tutorial te ayudaremos a familiarizarte con aquellos componentes del framework
@@ -52,10 +53,10 @@
         <title>Modelo-Vista-Controlador</title>
 
         <para>
-            En resumen ¿qué es exactamente el patrón MVC del que tanto hablan? ¿y por qué
-            debería importarte? MVC no es sólo un acrónimo de tres letras que puedes utilizar
-            para impresionar a tus amigos, actualmente MVC se ha convertido en un estándar
-            para el diseño de las aplicaciones web modernas. Y por buenas razones ya que 
+            En resumen ¿qué es exactamente el patrón <acronym>MVC</acronym> del que tanto hablan? ¿y por qué
+            debería importarte? <acronym>MVC</acronym> no es sólo un acrónimo de tres letras (<acronym>TLA</acronym>) que puedes utilizar
+            para impresionar a tus amigos, actualmente <acronym>MVC</acronym> se ha convertido en un estándar
+            para el diseño de las aplicaciones web modernas. Y por buenas razones ya que
             ayuda a modelar de forma precisa la separación de intereses permitiendo agrupar
             en distintas partes de la aplicación el código que se relaciona con la presentación,
             el que implementa la lógica de negocios y el que accede a los datos.
@@ -88,7 +89,7 @@
                     <para>
                         <emphasis role="strong">Vista</emphasis> - se encarga de generar lo que se presenta
                         al usuario a partir de los datos que recibe del controlador, al mismo tiempo que recogen
-                        los datos que brindan los usuarios. Es la parte de la aplicación donde encontrarás el HTML.
+                        los datos que brindan los usuarios. Es la parte de la aplicación donde encontrarás el <acronym>HTML</acronym>.
                     </para>
                 </listitem>
 
@@ -98,7 +99,7 @@
                         Según el pedido del usuario y otras variables ellos pueden decidir ejecutar
                         otro controlador o manipular los datos del modelo para luego asignarle el resultado
                         a una vista en particular.
-                        Muchos expertos en MVC recomiendan <ulink
+                        Muchos expertos en <acronym>MVC</acronym> recomiendan <ulink
                             url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">mantener
                             el controlador lo más limpio posible</ulink>.
                     </para>

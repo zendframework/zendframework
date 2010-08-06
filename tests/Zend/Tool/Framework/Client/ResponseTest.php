@@ -58,7 +58,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_response = new \Zend\Tool\Framework\Client\Response\Response();
+        $this->_response = new \Zend\Tool\Framework\Client\Response();
     }
 
     public function testContentGetterAndSetter()

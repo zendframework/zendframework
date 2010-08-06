@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\App\Extension;
 
+use Zend\GData\App\Extension;
+
 /**
  * Abstract class for data models that require only text and type-- such as:
  * title, summary, etc.
  *
- * @uses       \Zend\GData\App\Extension\Extension
+ * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

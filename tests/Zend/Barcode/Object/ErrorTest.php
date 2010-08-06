@@ -43,7 +43,7 @@ class ErrorTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('Error', $this->_object->getType());
+        $this->assertSame('error', $this->_object->getType());
     }
 
     public function testSetText()

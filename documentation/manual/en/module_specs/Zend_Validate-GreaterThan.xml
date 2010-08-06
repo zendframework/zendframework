@@ -12,8 +12,8 @@
         <title>Zend_Validate_GreaterThan supports only number validation</title>
 
         <para>
-            It should be noted that Zend_Validate_GreaterThan supports only the validation of
-            numbers. Strings or dates can not be validated with this validator.
+            It should be noted that <classname>Zend_Validate_GreaterThan</classname> supports only
+            the validation of numbers. Strings or dates can not be validated with this validator.
         </para>
     </note>
 
@@ -21,7 +21,8 @@
         <title>Supported options for Zend_Validate_GreaterThan</title>
 
         <para>
-            The following options are supported for <classname>Zend_Validate_GreaterThan</classname>:
+            The following options are supported for
+            <classname>Zend_Validate_GreaterThan</classname>:
         </para>
 
         <itemizedlist>

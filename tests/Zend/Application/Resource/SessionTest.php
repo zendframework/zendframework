@@ -60,7 +60,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
     public function testSetSaveHandlerString()
     {
-        $saveHandlerClassName = 'ZendTest\\Application\\TestAssett\\SessionHandlerMock1';
+        $saveHandlerClassName = 'ZendTest\\Application\\TestAsset\\SessionHandlerMock1';
 
         $this->resource->setSaveHandler($saveHandlerClassName);
 
@@ -69,7 +69,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
     public function testSetSaveHandlerArray()
     {
-        $saveHandlerClassName = 'ZendTest\\Application\\TestAssett\\SessionHandlerMock1';
+        $saveHandlerClassName = 'ZendTest\\Application\\TestAsset\\SessionHandlerMock1';
 
         $this->resource->setSaveHandler(array('class' => $saveHandlerClassName));
 
@@ -96,7 +96,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
             'use_only_cookies'    => true,
             'remember_me_seconds' => 7200,
             'savehandler'         => array(
-                'class' => 'ZendTest\\Application\\TestAssett\\SessionHandlerMock1',
+                'class' => 'ZendTest\\Application\\TestAsset\\SessionHandlerMock1',
             ),
         ));
 

@@ -27,9 +27,9 @@ use Zend\Application\Module\Bootstrap as ModuleBootstrap,
     Zend\Loader\ResourceAutoloader,
     Zend\Application\Application,
     Zend\Controller\Front as FrontController,
-    ZendTest\Application\TestAssett\ZfModule_Bootstrap;
+    ZendTest\Application\TestAsset\ZfModule_Bootstrap;
 
-require_once __DIR__ . '/../TestAssett/ZfModuleBootstrap.php';
+require_once __DIR__ . '/../TestAsset/ZfModuleBootstrap.php';
 
 /**
  * @category   Zend
@@ -77,7 +77,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorShouldInitializeModuleResourceLoaderWithModulePrefix()
     {
-        $bootstrap = new \ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule\Bootstrap($this->application);
         $module = $bootstrap->getModuleName();
         $loader = $bootstrap->getResourceLoader();
         $this->assertNotNull($loader, "resource loader is unexpectedly NULL");
@@ -92,13 +92,13 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         ));
         $this->application->setOptions(array('resourceLoader' => $loader));
 
-        $bootstrap = new \ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule\Bootstrap($this->application);
         $this->assertSame($loader, $bootstrap->getResourceLoader(), var_export($bootstrap->getOptions(), 1));
     }
 
     public function testModuleNameShouldBeFirstSegmentOfClassName()
     {
-        $bootstrap = new \ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule\Bootstrap($this->application);
         $this->assertEquals('ZfModule', $bootstrap->getModuleName());
     }
 
@@ -111,7 +111,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->application->setOptions($options);
-        $bootstrap = new \ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule\Bootstrap($this->application);
         $this->assertEquals('baz', $bootstrap->foo);
     }
 
@@ -120,7 +120,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testFrontControllerPluginResourceShouldBeRegistered()
     {
-        $bootstrap = new \ZfModule_Bootstrap($this->application);
+        $bootstrap = new \ZfModule\Bootstrap($this->application);
         $this->assertTrue($bootstrap->hasPluginResource('FrontController'));
     }
 
@@ -137,8 +137,8 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'bootstrap' => array(
-                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             ),
             'ZfModule' => array(
                 'resources' => array(
@@ -149,12 +149,12 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $appBootstrap = $this->application->getBootstrap();
         $appBootstrap->bootstrap('FrontController');
         $front = $appBootstrap->getResource('FrontController');
-        $bootstrap = new \ZfModule_Bootstrap($appBootstrap);
+        $bootstrap = new \ZfModule\Bootstrap($appBootstrap);
         $bootstrap->bootstrap('FrontController');
         $test = $bootstrap->getResource('FrontController');
         $this->assertSame($front, $test);
         $this->assertEquals('/foo', $test->getBaseUrl());
-        $this->assertEquals(__DIR__, $test->getControllerDirectory('default'));
+        $this->assertEquals(__DIR__, $test->getControllerDirectory('application'));
     }
 
     /**
@@ -167,19 +167,19 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
                 'modules' => array(),
                 'frontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => __DIR__ . '/../TestAssett/modules',
+                    'moduleDirectory'     => __DIR__ . '/../TestAsset/modules',
                 ),
             ),
             'bootstrap' => array(
-                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             )
         ));
         $appBootstrap = $this->application->getBootstrap();
         $appBootstrap->bootstrap('Modules');
         $modules = $appBootstrap->getResource('Modules');
         foreach ($modules as $module => $bootstrap) {
-            if ($module == 'default') {
+            if ($module == 'application') {
                 // "default" module gets lumped in, and is not a Module_Bootstrap
                 continue;
             }
@@ -198,15 +198,15 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
                 'modules' => array(),
                 'frontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => __DIR__ . '/../TestAssett/modules',
+                    'moduleDirectory'     => __DIR__ . '/../TestAsset/modules',
                 ),
             ),
             'pluginPaths' => array(
                 'ZfModule\\Bootstrap\\Resource' => __DIR__,
             ),
             'bootstrap' => array(
-                'path'  => __DIR__ . '/../TestAssett/ZfAppBootstrap.php',
-                'class' => 'ZendTest\\Application\\TestAssett\\ZfAppBootstrap',
+                'path'  => __DIR__ . '/../TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             )
         ));
         $appBootstrap = $this->application->getBootstrap();

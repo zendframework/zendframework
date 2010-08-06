@@ -44,7 +44,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
         date_default_timezone_set('Europe/Paris');
         $this->_cache = Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => dirname(__FILE__) . '/../_files/'));
+                 array('cache_dir' => __DIR__ . '/../_files/'));
         DateObjectTestHelper::setOptions(array('cache' => $this->_cache));
     }
 

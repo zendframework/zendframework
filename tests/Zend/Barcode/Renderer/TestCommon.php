@@ -24,14 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Barcode\Renderer;
-use ZendTest\Barcode\Object\_files as ObjectNSFiles;
+
+use ZendTest\Barcode\Object\TestAsset as TestAsset;
 use Zend\Barcode;
 use Zend\Barcode\Object;
 use Zend\Config;
-
-/**
- * Test helper
- */
 
 /**
  * @category   Zend
@@ -44,7 +41,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \Zend\Barcode\Renderer\RendererInterface
+     * @var \Zend\Barcode\Renderer
      */
     protected $_renderer = null;
 
@@ -56,7 +53,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         // message if timezone is not set within php.ini
         date_default_timezone_set('GMT');
 
-        Barcode\Barcode::setBarcodeFont(dirname(__FILE__) . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
         $this->_renderer = $this->_getRendererObject();
     }
 
@@ -72,11 +69,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertSame($barcode, $this->_renderer->getBarcode());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testSetInvalidBarcodeObject()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $barcode = new \StdClass();
         $this->_renderer->setBarcode($barcode);
     }
@@ -87,19 +82,15 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertSame(2.34, $this->_renderer->getModuleSize());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testModuleSizeAsString()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setModuleSize('abc');
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testModuleSizeLessThan0()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setModuleSize(-0.5);
     }
 
@@ -120,11 +111,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadHorizontalPosition()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setHorizontalPosition('none');
     }
 
@@ -137,11 +126,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadVerticalPosition()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setVerticalPosition('none');
     }
 
@@ -154,11 +141,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $this->_renderer->getLeftOffset());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadLeftOffset()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setLeftOffset(- 1);
     }
 
@@ -171,11 +156,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $this->_renderer->getTopOffset());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBadTopOffset()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->setTopOffset(- 1);
     }
 
@@ -221,23 +204,19 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My_Namespace', $this->_renderer->getRendererNamespace());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testRendererWithUnkownInstructionProvideByObject()
     {
-        $object = new ObjectNSFiles\BarcodeTest();
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $object = new TestAsset\BarcodeTest();
         $object->setText('test');
         $object->addInstruction(array('type' => 'unknown'));
         $this->_renderer->setBarcode($object);
         $this->_renderer->draw();
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Renderer\Exception
-     */
     public function testBarcodeObjectProvided()
     {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $this->_renderer->draw();
     }
 

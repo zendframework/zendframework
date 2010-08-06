@@ -9,11 +9,11 @@
         <para>
             Create movable memory objects using the <methodname>create([$data])</methodname>
             method of the memory manager:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
-        </para>
 
         <para>
             "Movable" means that such objects may be swapped and unloaded from
@@ -27,11 +27,11 @@ $memObject = $memoryManager->create($data);
         <para>
             Create locked memory objects using the <methodname>createLocked([$data])</methodname>
             method of the memory manager:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
-        </para>
 
         <para>
             "Locked" means that such objects are never swapped and unloaded
@@ -67,8 +67,9 @@ $memObject = $memoryManager->createLocked($data);
         <para>
             Use the memory container (movable or locked) '<code>value</code>'
             property to operate with memory object data:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 echo $memObject->value;
@@ -81,7 +82,6 @@ echo ord($memObject->value[$index1]);
 
 $memObject->value = substr($memObject->value, $start, $length);
 ]]></programlisting>
-        </para>
 
         <para>
             An alternative way to access memory object data is to use the <link
@@ -129,8 +129,9 @@ public function &getRef();
                 which is changed directly by user application.
                 So, it's a good idea to use the <methodname>getRef()</methodname> method
                 for value data processing:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 $value = &$memObject->getRef();
@@ -140,7 +141,6 @@ for ($count = 0; $count < strlen($value); $count++) {
     ...
 }
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.memory.memory-objects.api.touch">
@@ -153,8 +153,9 @@ public function touch();
             <para>
                 The <methodname>touch()</methodname> method should be used in common with
                 <methodname>getRef()</methodname>. It signals that object value has been changed:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ...
 
@@ -170,7 +171,6 @@ for ($count = 0; $count < strlen($value); $count++) {
 
 $memObject->touch();
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.memory.memory-objects.api.lock">
@@ -193,8 +193,9 @@ public function lock();
                 Locking objects in memory also guarantees that reference
                 returned by the <methodname>getRef()</methodname> method is valid until you
                 unlock the object:
+            </para>
 
-                <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $memObject1 = $memoryManager->create($data1);
 $memObject2 = $memoryManager->create($data2);
 ...
@@ -213,7 +214,6 @@ $memObject1->touch();
 $memObject1->unlock();
 $memObject2->unlock();
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.memory.memory-objects.api.unlock">

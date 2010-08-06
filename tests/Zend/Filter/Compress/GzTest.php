@@ -163,7 +163,7 @@ class GzTest extends \PHPUnit_Framework_TestCase
     public function testGzCompressToFile()
     {
         $filter   = new GzCompression();
-        $archive = dirname(__FILE__) . '/../_files/compressed.gz';
+        $archive = __DIR__ . '/../_files/compressed.gz';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');

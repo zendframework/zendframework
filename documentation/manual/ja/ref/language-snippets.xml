@@ -15,16 +15,27 @@
 
 <!ENTITY chapter.introduction.title             'Zend Framework の紹介'>
 
-<!ENTITY part.learning.title                    'Zend Framework を学ぶ'>
-<!ENTITY part.learning.quickstart.title         'Zend Framework クイックスタート'>
-<!ENTITY part.learning.autoloading.title        'Zend Framework のオートローディング'>
-<!ENTITY part.learning.plugins.title            'Zend Framework のプラグイン'>
-<!ENTITY part.learning.layout.title             'Zend_Layout 入門'>
-<!ENTITY part.learning.view.placeholders.title  'Zend_View プレイスフォルダ入門'>
-<!ENTITY part.learning.form.decorators.title    'Zend Form デコレータを理解して使う'>
-<!ENTITY part.learning.multiuser.title          'Zend_Session, Zend_Auth, Zend_Acl 入門'>
-<!ENTITY part.learning.lucene.title             'Zend_Search_Lucene 入門'>
-<!ENTITY part.learning.paginator.title          'Zend_Paginator 入門'>
+<!-- ENTITY part.learning.title                    'Zend Framework を学ぶ'-->
+<!-- ENTITY part.learning.quickstart.title         'Zend Framework クイックスタート'-->
+<!-- ENTITY part.learning.autoloading.title        'Zend Framework のオートローディング'-->
+<!-- ENTITY part.learning.plugins.title            'Zend Framework のプラグイン'-->
+<!-- ENTITY part.learning.layout.title             'Zend_Layout 入門'-->
+<!-- ENTITY part.learning.view.placeholders.title  'Zend_View プレイスフォルダ入門'-->
+<!-- ENTITY part.learning.form.decorators.title    'Zend Form デコレータを理解して使う'-->
+<!-- ENTITY part.learning.multiuser.title          'Zend_Session, Zend_Auth, Zend_Acl 入門'-->
+<!-- ENTITY part.learning.lucene.title             'Zend_Search_Lucene 入門'-->
+<!-- ENTITY part.learning.paginator.title          'Zend_Paginator 入門'-->
+
+<!ENTITY part.learning.title                    'Learning Zend Framework'>
+<!ENTITY part.learning.quickstart.title         'Zend Framework Quick Start'>
+<!ENTITY part.learning.autoloading.title        'Autoloading in Zend Framework'>
+<!ENTITY part.learning.plugins.title            'Plugins in Zend Framework'>
+<!ENTITY part.learning.layout.title             'Getting Started with Zend_Layout'>
+<!ENTITY part.learning.view.placeholders.title  'Getting Started Zend_View Placeholders'>
+<!ENTITY part.learning.form.decorators.title    'Understanding and Using Zend Form Decorators'>
+<!ENTITY part.learning.multiuser.title          'Getting Started with Zend_Session, Zend_Auth, and Zend_Acl'>
+<!ENTITY part.learning.lucene.title             'Getting Started with Zend_Search_Lucene'>
+<!ENTITY part.learning.paginator.title          'Getting Started with Zend_Paginator'>
 
 <!ENTITY part.reference.title                   'Zend Framework リファレンス'>
 

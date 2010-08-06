@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta Helfer</title>
 
     <para>
-        Das HTML Element <emphasis>&lt;meta&gt;</emphasis> wird verwendet um Meta Informationen über
-        das HTML Dokument anzubieten -- typischerweise Schlüsselwörter. Dokument Zeichensätze, Cache
-        Pragmas, usw. Meta Tags können entweder 'http-equiv' oder 'name' Typen sein, müssen ein
-        'content' Attribut enthalten, und können auch eines der 'lang' oder 'scheme' Modifikator
-        Attributen enthalten.
+        Das <acronym>HTML</acronym> Element <emphasis>&lt;meta&gt;</emphasis> wird verwendet um Meta
+        Informationen über das <acronym>HTML</acronym> Dokument anzubieten -- typischerweise
+        Schlüsselwörter. Dokument Zeichensätze, Cache Pragmas, usw. Meta Tags können entweder
+        'http-equiv' oder 'name' Typen sein, müssen ein 'content' Attribut enthalten, und können
+        auch eines der 'lang' oder 'scheme' Modifikator Attributen enthalten.
     </para>
 
     <para>
@@ -152,7 +152,8 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 ]]></programlisting>
 
         <para>
-            Wenn man ein HTML5 Dokument serviert, sollte man das Character Set wie folgt angeben:
+            Wenn man ein <acronym>HTML</acronym>5 Dokument serviert, sollte man das Character Set
+            wie folgt angeben:
         </para>
 
         <programlisting language="php"><![CDATA[

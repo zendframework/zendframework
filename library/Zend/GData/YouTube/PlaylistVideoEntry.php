@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * Represents the YouTube video playlist flavor of an Atom entry
  *
  * @uses       \Zend\GData\YouTube\Extension\Position
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\VideoEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -40,7 +42,7 @@ namespace Zend\GData\YouTube;
 class PlaylistVideoEntry extends VideoEntry
 {
 
-    protected $_entryClassName = '\Zend\GData\YouTube\PlaylistVideoEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\PlaylistVideoEntry';
 
     /**
      * Position of the entry in the feed, as specified by the user

@@ -44,7 +44,18 @@ abstract class Cache
      *
      * @var array
      */
-    public static $standardBackends = array('File', 'Sqlite', 'Memcached', 'Apc', 'ZendPlatform', 'Xcache', 'TwoLevels');
+    public static $standardBackends = array(
+        'Apc', 
+        'BlackHole',
+        'File', 
+        'Memcached', 
+        'Sqlite', 
+        'TwoLevels',
+        'Xcache', 
+        'ZendPlatform', 
+        'ZendServer\Disk',
+        'ZendServer\ShMem',
+    );
 
     /**
      * Standard backends which implement the ExtendedInterface
@@ -68,6 +79,11 @@ abstract class Cache
      * @deprecated
      */
     public static $availableBackends = array('File', 'Sqlite', 'Memcached', 'Apc', 'ZendPlatform', 'Xcache', 'TwoLevels');
+
+    /**
+     * Filter to split camelCased words into individual words
+     */
+    protected static $_camelCaseFilter;
 
     /**
      * Consts for clean() method
@@ -129,17 +145,17 @@ abstract class Cache
         }
         if (in_array($backend, self::$standardBackends)) {
             // we use a standard backend
-            $backendClass = 'Zend\\Cache\\Backend\\' . $backend;
+            $backendClass = 'Zend\Cache\Backend\\' . $backend;
             // security controls are explicit
             require_once str_replace('\\', DIRECTORY_SEPARATOR, $backendClass) . '.php';
         } else {
             // we use a custom backend
-            if (!preg_match('~^[\w]+$~D', $backend)) {
+            if (!preg_match('~^[\w\\\\]+$~D', $backend)) {
                 self::throwException("Invalid backend name [$backend]");
             }
             if (!$customBackendNaming) {
                 // we use this boolean to avoid an API break
-                $backendClass = '\\Zend\\Cache\\Backend\\' . $backend;
+                $backendClass = 'Zend\Cache\Backend\\' . $backend;
             } else {
                 $backendClass = $backend;
             }
@@ -175,17 +191,17 @@ abstract class Cache
         if (in_array($frontend, self::$standardFrontends)) {
             // we use a standard frontend
             // For perfs reasons, with frontend == 'Core', we can interact with the Core itself
-            $frontendClass = 'Zend\\Cache\\Frontend\\' . $frontend;
+            $frontendClass = 'Zend\Cache\Frontend\\' . $frontend;
             // security controls are explicit
             require_once str_replace('\\', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
         } else {
             // we use a custom frontend
-            if (!preg_match('~^[\w]+$~D', $frontend)) {
+            if (!preg_match('~^[\w\\\\]+$~D', $frontend)) {
                 self::throwException("Invalid frontend name [$frontend]");
             }
             if (!$customFrontendNaming) {
                 // we use this boolean to avoid an API break
-                $frontendClass = '\\Zend\\Cache\\Frontend\\' . $frontend;
+                $frontendClass = 'Zend\Cache\Frontend\\' . $frontend;
             } else {
                 $frontendClass = $frontend;
             }
@@ -216,6 +232,14 @@ abstract class Cache
         throw new Exception($msg, 0, $e);
     }
 
+    protected static function _getCamelCaseFilter()
+    {
+        if (null === self::$_camelCaseFilter) {
+            self::$_camelCaseFilter = new \Zend\Filter\Word\CamelCaseToSeparator();
+        }
+        return self::$_camelCaseFilter;
+    }
+
     /**
      * Normalize frontend and backend names to allow multiple words TitleCased
      *
@@ -224,10 +248,15 @@ abstract class Cache
      */
     protected static function _normalizeName($name)
     {
-        $name = ucfirst(strtolower($name));
+        $filter = self::_getCamelCaseFilter();
+        $name = $filter($name);
         $name = str_replace(array('-', '_', '.'), ' ', $name);
         $name = ucwords($name);
         $name = str_replace(' ', '', $name);
+        if (stripos($name, 'ZendServer') === 0) {
+            $name = 'ZendServer\\' . substr($name, strlen('ZendServer'));
+        }
+
         return $name;
     }
 

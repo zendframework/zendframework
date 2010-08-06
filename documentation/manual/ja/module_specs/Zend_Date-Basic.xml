@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.date.basic">
 
     <title>基本メソッド</title>
@@ -143,7 +143,7 @@ echo "toString() で取得した日付 = ", $date, "\n";
 
             <para>
                 <classname>Zend_Date</classname> の基本メソッド群はすべて、
-                オブジェクトに含まれる日付データ全体に対して操作することができます。
+                オブジェクトに含まれる日付データ全体に対して操作できます。
                 また、日付の一部に対して操作する (日付の "分"
                 の部分だけをある値と比較するなど) こともできます。
                 たとえば、現在時刻の "分" の部分を指定した値と比較するには

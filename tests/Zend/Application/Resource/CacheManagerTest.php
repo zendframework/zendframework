@@ -26,7 +26,7 @@ use Zend\Loader\Autoloader,
     Zend\Application\Resource\Cachemanager,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    ZendTest\Application\TestAssett\ZfAppBootstrap;
+    ZendTest\Application\TestAsset\ZfAppBootstrap;
 
 /**
  * @category   Zend
@@ -106,7 +106,7 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/foo', $cacheTemplate['backend']['options']['cache_dir']);
 
     }
-    
+
     public function testShouldCreateNewCacheTemplateIfConfigNotMatchesADefaultTemplate()
     {
         $options = array(
@@ -123,7 +123,7 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $cacheTemplate = $manager->getCacheTemplate('foo');
         $this->assertSame($options['foo'], $cacheTemplate);
     }
-    
+
     public function testShouldNotMeddleWithFrontendOrBackendCapitalisation()
     {
         $options = array(
@@ -158,5 +158,61 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
         $manager = $resource->init();
         $cache = $manager->getCache('foo');
         $this->assertTrue($cache instanceof \Zend\Cache\Frontend\Core);
+    }
+
+    /**
+     * @group ZF-9738
+     */
+    public function testZendServer()
+    {
+        if (!function_exists('zend_disk_cache_store')) {
+            $this->markTestSkipped('ZendServer is required for this test');
+        }
+
+        $options = array(
+            'foo' => array(
+                'frontend' => array(
+                    'name' => 'Core',
+                    'options' => array(
+                        'lifetime' => 7200,
+                    ),
+                ),
+                'backend' => array(
+                    'name' => 'ZendServer_Disk',
+                ),
+            ),
+        );
+        $resource = new Cachemanager($options);
+        $manager = $resource->init();
+        $cache = $manager->getCache('foo')->getBackend();
+        $this->assertTrue($cache instanceof \Zend\Cache\Backend\ZendServer\Disk);
+    }
+
+    /**
+     * @group ZF-9737
+     */
+    public function testCustomFrontendBackendNaming()
+    {
+        $incPath = get_include_path();
+        set_include_path(implode(PATH_SEPARATOR, array(
+            __DIR__ . '/../../Cache/TestAsset',
+            $incPath,
+        )));
+        $options = array(
+            'zf9737' => array(
+                'frontend' => array(
+                    'name'                 => 'custom-naming',
+                    'customFrontendNaming' => false),
+                'backend' => array('name'                    => 'ZendTest\Cache\TestAsset\Backend\CustomNaming',
+                                   'customBackendNaming'     => true),
+                'frontendBackendAutoload' => true)
+        );
+
+        $resource = new Cachemanager($options);
+        $manager  = $resource->init();
+        $cache    = $manager->getCache('zf9737');
+        $this->assertTrue($cache->getBackend() instanceof \ZendTest\Cache\TestAsset\Backend\CustomNaming);
+        $this->assertTrue($cache instanceof \Zend\Cache\Frontend\CustomNaming);
+        set_include_path($incPath);
     }
 }

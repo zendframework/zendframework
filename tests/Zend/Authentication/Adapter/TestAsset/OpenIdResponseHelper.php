@@ -25,11 +25,13 @@
  */
 namespace ZendTest\Authentication\Adapter\TestAsset;
 
+use Zend\Controller\Response\AbstractResponse;
+
 /**
  * Zend_OpenId
  */
 
-\Zend_OpenId::$exitOnRedirect = false;
+\Zend\OpenID\OpenID::$exitOnRedirect = false;
 
 /**
  * @category   Zend
@@ -38,7 +40,7 @@ namespace ZendTest\Authentication\Adapter\TestAsset;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenIdResponseHelper extends \Zend_Controller_Response_Abstract
+class OpenIdResponseHelper extends AbstractResponse
 {
     private $_canSendHeaders;
 

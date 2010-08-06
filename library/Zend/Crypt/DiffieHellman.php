@@ -31,7 +31,7 @@ namespace Zend\Crypt;
  * to be used in encrypting subsequent communications.
  *
  * @uses       Zend\Crypt\DiffieHellmanException
- * @uses       Zend\Crypt\Math\Math
+ * @uses       Zend\Crypt\Math
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -74,7 +74,7 @@ class DiffieHellman
     /**
      * BigInteger support object courtesy of Zend_Crypt_Math
      *
-     * @var Zend\Crypt\Math\BigInteger\BigInteger
+     * @var Zend\Crypt\Math\BigInteger
      */
     private $_math = null;
 
@@ -115,7 +115,7 @@ class DiffieHellman
     {
         $this->setPrime($prime);
         $this->setGenerator($generator);
-        if (!is_null($privateKey)) {
+        if ($privateKey !== null) {
             $this->setPrivateKey($privateKey, $privateKeyType);
         }
         $this->setBigIntegerMath();
@@ -176,7 +176,7 @@ class DiffieHellman
      */
     public function getPublicKey($type = self::NUMBER)
     {
-        if (is_null($this->_publicKey)) {
+        if ($this->_publicKey === null)) {
             throw new DiffieHellmanException('A public key has not yet been generated using a prior call to generateKeys()');
         }
         if ($type == self::BINARY) {
@@ -322,7 +322,7 @@ class DiffieHellman
     public function getPrivateKey($type = self::NUMBER)
     {
         if (!$this->hasPrivateKey()) {
-            $this->setPrivateKey($this->_generatePrivateKey());
+            $this->setPrivateKey($this->_generatePrivateKey(), self::BINARY);
         }
         if ($type == self::BINARY) {
             return $this->_math->toBinary($this->_privateKey);
@@ -353,7 +353,7 @@ class DiffieHellman
      */
     public function setBigIntegerMath($extension = null)
     {
-        $this->_math = new \Zend\Crypt\Math\Math($extension);
+        $this->_math = new \Zend\Crypt\Math($extension);
     }
 
     /**

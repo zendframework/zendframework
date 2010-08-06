@@ -24,20 +24,22 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
-use Zend\Search\Lucene\Analysis;
+
+use Zend\Search\Lucene\Analysis\TokenFilter,
+    Zend\Search\Lucene\Analysis\Token;
 
 /**
  * Lower case Token filter.
  *
  * @uses       \Zend\Search\Lucene\Analysis\Token
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface
+ * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LowerCase implements TokenFilterInterface
+class LowerCase implements TokenFilter
 {
     /**
      * Normalize Token or remove it (if null is returned)
@@ -45,9 +47,9 @@ class LowerCase implements TokenFilterInterface
      * @param \Zend\Search\Lucene\Analysis\Token $srcToken
      * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Analysis\Token $srcToken)
+    public function normalize(Token $srcToken)
     {
-        $newToken = new Analysis\Token(strtolower( $srcToken->getTermText() ),
+        $newToken = new Token(strtolower( $srcToken->getTermText() ),
                                        $srcToken->getStartOffset(),
                                        $srcToken->getEndOffset());
 

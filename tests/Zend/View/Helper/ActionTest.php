@@ -61,12 +61,12 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $front = Controller\Front::getInstance();
         $front->resetInstance();
 
-        $this->request  = new Request\HTTP('http://framework.zend.com/action-foo');
-        $this->response = new Response\HTTP();
+        $this->request  = new Request\Http('http://framework.zend.com/action-foo');
+        $this->response = new Response\Http();
         $this->response->headersSentThrowsException = false;
         $front->setRequest($this->request)
               ->setResponse($this->response)
-              ->addModuleDirectory(dirname(__FILE__) . '/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
 
         $this->view   = new \Zend\View\View();
         $this->helper = new Helper\Action();
@@ -213,10 +213,10 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $front = Controller\Front::getInstance();
         $front->resetInstance();
 
-        $response = new Response\HTTP();
+        $response = new Response\Http();
         $response->headersSentThrowsException = false;
         $front->setResponse($response)
-              ->addModuleDirectory(dirname(__FILE__) . '/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
         try {
             $helper = new Helper\Action();
             $this->fail('No request in front controller should cause action helper to throw exception');
@@ -232,9 +232,9 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $front = Controller\Front::getInstance();
         $front->resetInstance();
 
-        $request = new Request\HTTP('http://framework.zend.com/foo');
+        $request = new Request\Http('http://framework.zend.com/foo');
         $front->setRequest($this->request)
-              ->addModuleDirectory(dirname(__FILE__) . '/_files/modules');
+              ->addModuleDirectory(__DIR__ . '/_files/modules');
         try {
             $helper = new Helper\Action();
             $this->fail('No response in front controller should cause action helper to throw exception');
@@ -264,14 +264,14 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testActionWithPartialsUseOfViewRendererReturnsToOriginatingViewState()
     {
         $partial = new \Zend\View\Helper\Partial();
-        $this->view->setScriptPath(dirname(__FILE__) . '/_files/modules/default/views/scripts/');
+        $this->view->setScriptPath(__DIR__ . '/_files/modules/application/views/scripts/');
         $partial->setView($this->view);
 
-        HelperBroker\HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;
+        HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;
 
         $partial->direct('partialActionCall.phtml');
 
-        $this->assertSame($this->view, HelperBroker\HelperBroker::getStaticHelper('viewRenderer')->view);
+        $this->assertSame($this->view, HelperBroker::getStaticHelper('viewRenderer')->view);
 
     }
 
@@ -285,14 +285,14 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         /* Setup the VR as if we were inside an action controller */
         $viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
         $viewRenderer->init();
-        HelperBroker\HelperBroker::addHelper($viewRenderer);
+        HelperBroker::addHelper($viewRenderer);
 
         // make sure noRender is false
         $this->assertFalse($viewRenderer->getNoRender());
 
         $value = $this->helper->direct('bar', 'action-foo');
 
-        $viewRendererPostAction = HelperBroker\HelperBroker::getStaticHelper('viewRenderer');
+        $viewRendererPostAction = HelperBroker::getStaticHelper('viewRenderer');
 
         // ViewRenderer noRender should still be false
         $this->assertFalse($viewRendererPostAction->getNoRender());

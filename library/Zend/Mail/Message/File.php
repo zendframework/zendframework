@@ -23,17 +23,19 @@
  * @namespace
  */
 namespace Zend\Mail\Message;
-use Zend\Mail\Part as MailPart;
+
+use Zend\Mail\MailMessage,
+    Zend\Mail\Part\File as FilePart;
 
 /**
- * @uses       \Zend\Mail\Message\MessageInterface
+ * @uses       \Zend\Mail\MailMessage
  * @uses       \Zend\Mail\Part\File
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends MailPart\File implements MessageInterface
+class File extends FilePart implements MailMessage
 {
     /**
      * flags for this message
@@ -73,7 +75,7 @@ class File extends MailPart\File implements MessageInterface
     /**
      * check if flag is set
      *
-     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage\Storage
+     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage
      * @return bool true if set, otherwise false
      */
     public function hasFlag($flag)

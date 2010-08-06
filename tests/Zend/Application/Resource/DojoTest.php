@@ -25,7 +25,8 @@ namespace ZendTest\Application\Resource;
 use Zend\Loader\Autoloader,
     Zend\Application\Resource\Dojo as DojoResource,
     Zend\Application,
-    Zend\Controller\Front as FrontController;
+    Zend\Controller\Front as FrontController,
+    Zend\Dojo\View\Helper\Dojo\Container as DojoContainer;
 
 /**
  * @category   Zend
@@ -79,7 +80,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $resource = new DojoResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $this->assertTrue($resource->getDojo() instanceof \Zend_Dojo_View_Helper_Dojo_Container);
+        $this->assertTrue($resource->getDojo() instanceof DojoContainer);
     }
 
     public function testInitializationReturnsDojoContainer()
@@ -87,7 +88,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $resource = new DojoResource(array());
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
-        $this->assertTrue($test instanceof \Zend_Dojo_View_Helper_Dojo_Container);
+        $this->assertTrue($test instanceof DojoContainer);
     }
 
     public function testOptionsPassedToResourceAreUsedToSetDojosContainerState()

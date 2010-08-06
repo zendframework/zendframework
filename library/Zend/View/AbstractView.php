@@ -24,19 +24,24 @@
  */
 namespace Zend\View;
 
+use Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
+    Zend\Loader\PluginLoader;
+
 /**
  * Abstract class for Zend_View to help enforce private constructs.
  *
  * @uses       \Zend\Loader
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
+ * @uses       \Zend\Loader\PluginLoader
  * @uses       \Zend\View\Exception
- * @uses       \Zend\View\ViewInterface
+ * @uses       \Zend\View\Helper
+ * @uses       \Zend\View\ViewEngine
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractView implements ViewInterface
+abstract class AbstractView implements ViewEngine
 {
     /**
      * Path stack for script, helper, and filter directories.
@@ -457,11 +462,11 @@ abstract class AbstractView implements ViewInterface
     /**
      * Set plugin loader for a particular plugin type
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoader $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      * @param  string $type
      * @return \Zend\View\AbstractView
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoader $loader, $type)
+    public function setPluginLoader(ShortNameLocater $loader, $type)
     {
         $type = strtolower($type);
         if (!in_array($type, $this->_loaderTypes)) {
@@ -478,7 +483,7 @@ abstract class AbstractView implements ViewInterface
      * Retrieve plugin loader for a specific plugin type
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\ShortNameLocater
      */
     public function getPluginLoader($type)
     {
@@ -500,7 +505,7 @@ abstract class AbstractView implements ViewInterface
                 default:
                     $prefix     .= $pType;
                     $pathPrefix .= $pType;
-                    $loader = new \Zend\Loader\PluginLoader\PluginLoader(array(
+                    $loader = new PluginLoader(array(
                         $prefix => $pathPrefix
                     ));
                     $this->_loaders[$type] = $loader;
@@ -577,7 +582,7 @@ abstract class AbstractView implements ViewInterface
             throw $e;
         }
 
-        if (!$helper instanceof ViewInterface) {
+        if (!$helper instanceof Helper) {
             if (!method_exists($helper, 'direct')) {
                 $e =  new Exception(
                     'View helper must implement Zend\\View\\Interface or have a "direct" method'
@@ -987,7 +992,7 @@ abstract class AbstractView implements ViewInterface
         foreach ($this->_filter as $name) {
             // load and apply the filter class
             $filter = $this->getFilter($name);
-            $buffer = call_user_func(array($filter, 'filter'), $buffer);
+            $buffer = $filter->filter($buffer);
         }
 
         // done!
@@ -1049,15 +1054,15 @@ abstract class AbstractView implements ViewInterface
 
         switch ($type) {
             case 'script':
-                $this->_path[$type] = array(dirname(__FILE__) . $dir);
+                $this->_path[$type] = array(__DIR__ . $dir);
                 $this->_addPath($type, $path);
                 break;
             case 'filter':
             case 'helper':
             default:
                 $this->_path[$type] = array(array(
-                    'prefix' => 'Zend\View\\' . ucfirst($type) . '_',
-                    'dir'    => dirname(__FILE__) . $dir
+                    'prefix' => 'Zend\View\\' . ucfirst($type) . '\\',
+                    'dir'    => __DIR__ . $dir
                 ));
                 $this->_addPath($type, $path, $classPrefix);
                 break;
@@ -1115,6 +1120,9 @@ abstract class AbstractView implements ViewInterface
     private function _addPluginPath($type, $classPrefix, array $paths, $namespaced = true)
     {
         $loader = $this->getPluginLoader($type);
+        if (!$loader instanceof PrefixPathMapper) {
+            return $this;
+        }
         foreach ($paths as $path) {
             $loader->addPrefixPath($classPrefix, $path, $namespaced);
         }

@@ -41,7 +41,7 @@ class SpreadsheetFeedTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->sprFeed = new Spreadsheets\SpreadsheetFeed(
-                file_get_contents(dirname(__FILE__) . '/_files/TestDataSpreadsheetFeedSample1.xml'),
+                file_get_contents(__DIR__ . '/_files/TestDataSpreadsheetFeedSample1.xml'),
                 true);
     }
 

@@ -29,7 +29,7 @@ namespace Zend\GData\YouTube\Extension;
  * Specialized Control class for use with YouTube. Enables use of yt extension elements.
  *
  * @uses       \Zend\GData\App\Extension\Control
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\Extension\State
  * @category   Zend
  * @package    Zend_Gdata
@@ -50,7 +50,7 @@ class Control extends \Zend\GData\App\Extension\Control
      */
     public function __construct($draft = null, $state = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\YouTube\YouTube::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\YouTube::$namespaces);
         parent::__construct($draft);
         $this->_state = $state;
     }

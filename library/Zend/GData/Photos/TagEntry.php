@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Photos;
 
+use Zend\GData\Photos;
+
 /**
  * Data model class for a Tag Entry.
  *
@@ -36,7 +38,7 @@ namespace Zend\GData\Photos;
  *
  * @uses       \Zend\GData\App\Extension\Category
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Photos
  * @uses       \Zend\GData\Photos\Extension\Weight
  * @category   Zend
  * @package    Zend_Gdata
@@ -47,7 +49,7 @@ namespace Zend\GData\Photos;
 class TagEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Photos\TagEntry';
+    protected $_entryClassName = 'Zend\GData\Photos\TagEntry';
 
     protected $_gphotoWeight = null;
 

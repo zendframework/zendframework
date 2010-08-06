@@ -89,7 +89,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
                 'Gadgets' => null
             ),
             'TV & Film' => null
-        ), $feed->getCategories());
+        ), $feed->getItunesCategories());
     }
 
     public function testGetsTitle()
@@ -180,7 +180,7 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals('http://example.com/podcasts/everything/AllAboutEverything.jpg', $feed->getImage());
+        $this->assertEquals('http://example.com/podcasts/everything/AllAboutEverything.jpg', $feed->getItunesImage());
     }
 
     /**

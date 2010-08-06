@@ -24,25 +24,24 @@
  * @namespace
  */
 namespace Zend\InfoCard\XML\Assertion;
-use Zend\InfoCard\XML\Element;
-use Zend\InfoCard\XML;
+
+use Zend\InfoCard\XML\Assertion as XMLAssertion,
+    Zend\InfoCard\XML\AbstractElement,
+    Zend\InfoCard\XML\Exception as XMLException;
 
 /**
  * A Xml Assertion Document in SAML Token format
  *
  * @uses       \Zend\InfoCard\Exception
- * @uses       \Zend\InfoCard\XML\Assertion\Assertion
- * @uses       \Zend\InfoCard\XML\Assertion\AssertionInterface
- * @uses       \Zend\InfoCard\XML\Element\Element
+ * @uses       \Zend\InfoCard\XML\Assertion
+ * @uses       \Zend\InfoCard\XML\AbstractElement
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SAML
-    extends Element\Element
-    implements AssertionInterface
+class SAML extends AbstractElement implements XMLAssertion
 {
 
     /**
@@ -207,8 +206,8 @@ class SAML
 
         list($conditions) = $this->xpath("//saml:Conditions");
 
-        if(!($conditions instanceof Element\Element)) {
-            throw new XML\Exception("Unable to find the saml:Conditions block");
+        if(!($conditions instanceof AbstractElement)) {
+            throw new XMLException("Unable to find the saml:Conditions block");
         }
 
         $retval = array();
@@ -244,7 +243,7 @@ class SAML
          */
 
         if($this->getConfirmationMethod() == self::CONFIRMATION_BEARER) {
-            throw new XML\Exception("Cannot get Subject Key Info when Confirmation Method was Bearer");
+            throw new XMLException("Cannot get Subject Key Info when Confirmation Method was Bearer");
         }
     }
 

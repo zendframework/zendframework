@@ -64,7 +64,7 @@ class ActionStackTest extends \PHPUnit_Framework_TestCase
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
 
-        $this->request = new Request\HTTP();
+        $this->request = new Request\Http();
         $this->front->setRequest($this->request);
     }
 

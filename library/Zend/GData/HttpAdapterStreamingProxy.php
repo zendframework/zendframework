@@ -25,15 +25,15 @@
  * @namespace
  */
 namespace Zend\GData;
-use Zend\HTTP\Client\Adapter;
+use Zend\Http\Client\Adapter;
 
 /**
  * Extends the proxy HTTP adapter to handle streams instead of discrete body
  * strings.
  *
- * @uses       \Zend\HTTP\Client
- * @uses       \Zend\HTTP\Client\Adapter\Exception
- * @uses       \Zend\HTTP\Client\Adapter\Proxy
+ * @uses       \Zend\Http\Client
+ * @uses       \Zend\Http\Client\Adapter\Exception
+ * @uses       \Zend\Http\Client\Adapter\Proxy
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -83,7 +83,7 @@ class HttpAdapterStreamingProxy extends Adapter\Proxy
 
         // Add Proxy-Authorization header
         if ($this->config['proxy_user'] && ! isset($headers['proxy-authorization'])) {
-            $headers['proxy-authorization'] = \Zend\HTTP\Client::encodeAuthHeader(
+            $headers['proxy-authorization'] = \Zend\Http\Client::encodeAuthHeader(
                 $this->config['proxy_user'], $this->config['proxy_pass'], $this->config['proxy_auth']
             );
         }

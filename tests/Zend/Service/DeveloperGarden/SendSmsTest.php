@@ -200,7 +200,7 @@ class Zend_Service_DeveloperGarden_SendSmsTest extends PHPUnit_Framework_TestCas
 }
 
 class Zend_Service_DeveloperGarden_Request_SendSms_WrongSmsType
-    extends Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+    extends Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
 {
     protected $_smsType = 999999;
 }

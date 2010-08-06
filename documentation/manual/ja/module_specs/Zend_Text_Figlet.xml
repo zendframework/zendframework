@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20807 -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
+
     <para>
         <classname>Zend_Text_Figlet</classname> は、いわゆる
         FIGlet テキストを作成するためのコンポーネントです。
@@ -13,8 +14,10 @@
         <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>
         からその他のフォントをダウンロードできます。
     </para>
+
     <note>
         <title>圧縮されたフォント</title>
+
         <para>
             <classname>Zend_Text_Figlet</classname> は gzip で圧縮されたフォントに対応しています。
             つまり、<code>.flf</code> ファイルを gzip した状態で使えるということです。
@@ -24,8 +27,10 @@
             の GZIP 拡張モジュールを有効にする必要があります。
         </para>
     </note>
+
     <note>
         <title>エンコーディング</title>
+
         <para>
             <classname>Zend_Text_Figlet</classname> は、デフォルトでは文字列が UTF-8
             でエンコードされていることを想定しています。それ以外の場合は、
@@ -33,6 +38,7 @@
             2 番目のパラメータで文字エンコーディングを指定します。
         </para>
     </note>
+
     <para>
         FIGlet 用のさまざまなオプションを指定できます。
         <classname>Zend_Text_Figlet</classname> のインスタンスを作成する際に、
@@ -45,6 +51,7 @@
                     未定義の場合は組み込みのフォントを使用します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>outputWidth</code> - 出力文字列の最大幅。
@@ -54,6 +61,7 @@
                     デフォルトは 80 です。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>handleParagraphs</code> - 改行の処理方法を示す boolean 値。
@@ -62,6 +70,7 @@
                     デフォルトは <constant>FALSE</constant> です。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>justification</code> -
@@ -73,6 +82,7 @@
                     <code>rightToLeft</code> の値によって決まります。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>rightToLeft</code> - テキストを記述する方向。
@@ -83,6 +93,7 @@
                     右から左にテキストを書くときには自動的に右揃えとなります。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>smushMode</code> - 整数値。
@@ -104,21 +115,26 @@
             </listitem>
         </itemizedlist>
     </para>
+
     <example id="zend.text.figlet.example.using">
         <title>Zend_Text_Figlet の使用法</title>
+
         <para>
             この例は、<classname>Zend_Text_Figlet</classname>
             の基本的な使用法を説明するためにシンプルな
             FIGlet テキストを作成するものです。
         </para>
+
         <programlisting language="php"><![CDATA[
 require_once 'Zend/Text/Figlet.php';
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
 ]]></programlisting>
+
         <para>
             等幅フォントを使用すると、この結果は次のようになります。
         </para>
+
         <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\

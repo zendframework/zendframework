@@ -60,7 +60,7 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
     {
         $view = new \Zend\View\View();
         $base = str_replace('/', DIRECTORY_SEPARATOR, '/../_templates');
-        $view->setScriptPath(dirname(__FILE__) . $base);
+        $view->setScriptPath(__DIR__ . $base);
         $view->strictVars(true);
         $this->view = $view;
     }

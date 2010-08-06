@@ -44,5 +44,5 @@ class SnippetFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\GBase\SnippetEntry';
+    protected $_entryClassName = 'Zend\GData\GBase\SnippetEntry';
 }

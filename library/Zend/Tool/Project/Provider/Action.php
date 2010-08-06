@@ -44,13 +44,13 @@ class Action
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createResource(ProjectProfile\Profile $profile, $actionName, $controllerName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
 
         if (!is_string($actionName)) {
@@ -71,13 +71,13 @@ class Action
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function hasResource(ProjectProfile\Profile $profile, $actionName, $controllerName, $moduleName = null)
+    public static function hasResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
         if (!is_string($actionName)) {
             throw new Exception('Zend_Tool_Project_Provider_Action::createResource() expects \"actionName\" is the name of a action resource to create.');
@@ -93,18 +93,18 @@ class Action
             throw new Exception('Controller ' . $controllerName . ' was not found.');
         }
        
-        return (($controllerFile->search(array('actionMethod' => array('actionName' => $actionName)))) instanceof ProjectProfile\Resource\Resource);
+        return (($controllerFile->search(array('actionMethod' => array('actionName' => $actionName)))) instanceof ProjectProfile\Resource);
     }
 
     /**
      * _getControllerFileResource()
      *
-     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @param \Zend\Tool\Project\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource\Resource
+     * @return \Zend\Tool\Project\Profile\Resource
      */
-    protected static function _getControllerFileResource(ProjectProfile\Profile $profile, $controllerName, $moduleName = null)
+    protected static function _getControllerFileResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         $profileSearchParams = array();
 

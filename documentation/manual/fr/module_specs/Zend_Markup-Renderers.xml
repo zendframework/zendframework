@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 21992 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.renderers">
     <title>Moteurs de rendu Zend_Markup</title>
@@ -10,13 +10,14 @@
     </para>
 
     <sect2 id="zend.markup.renderers.add">
-        <title>Ajouter vos propres tags</title>
+        <title>Ajouter vos propres markups</title>
 
         <para>
-            En ajoutant vos tags, vous pouvez ajouter vos propres fonctionnalités aux moteurs
-            de rendu de <classname>Zend_Markup</classname>. Grâce à la structure en tags, vous pouvez
-            ajouter presque toutes les fonctionnalités que vous voulez, depuis des tags simples jusqu'à
-            des structures de données complexes. Voici un exemple pour un tag simple 'foo':
+            En ajoutant vos markups, vous pouvez ajouter vos propres fonctionnalités aux moteurs
+            de rendu de <classname>Zend_Markup</classname>. Grâce à la structure en markups, vous
+            pouvez ajouter presque toutes les fonctionnalités que vous voulez, depuis des markups
+            simples jusqu'à des structures de données complexes. Voici un exemple pour un markup
+            simple 'foo'&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -24,12 +25,12 @@
 // avec Zend_Markup_Parser_BbCode comme analyseur
 $bbcode = Zend_Markup::factory('Bbcode');
 
-// Ceci va créer un tag simple 'foo'
-// Le premier paramètre définit le nom du tag
-// Le second param prend un entier qui définit le type de tag.
+// Ceci va créer un markup simple 'foo'
+// Le premier paramètre définit le nom du markup
+// Le second param prend un entier qui définit le type de markup.
 // Le troisième param est un tableau qui définit d'autres caractéristiques
-// du tag comme son groupe et (dans ce cas) les tags de début et de fin
-$bbcode->addTag(
+// du markup comme son groupe et (dans ce cas) les markups de début et de fin
+$bbcode->addMarkup(
     'foo',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
@@ -39,26 +40,27 @@ $bbcode->addTag(
     )
 );
 
-// La sortie sera: 'my -bar-tag-baz-'
-echo $bbcode->render('my [foo]tag[/foo]');
+// La sortie sera: 'my -bar-markup-baz-'
+echo $bbcode->render('my [foo]markup[/foo]');
 ]]></programlisting>
 
         <para>
-            Notez que créer vos propres tags n'est utile que si l'analyseur syntaxique en tient compte.
-            Actuellement, seul BBCode supporte cela. Textile ne supporte pas les tags personnalisés.
+            Notez que créer vos propres markups n'est utile que si l'analyseur syntaxique en tient
+            compte. Actuellement, seul BBCode supporte cela. Textile ne supporte pas les markups
+            personnalisés.
         </para>
 
         <para>
-            Certains moteurs de rendu (comme le moteur HTML) supporte un paramètre nommé 'tag'.
-            Cela remplace les paramètres 'start' et 'end', et il rend le tag avec des attributs
-            par défaut ainsi que le tag de fin.
+            Certains moteurs de rendu (comme le moteur <acronym>HTML</acronym>) supporte un
+            paramètre nommé "markup". Cela remplace les paramètres "start" et "end", et il effectue
+            le rendu du markup avec des attributs par défaut ainsi que le markup de fin.
         </para>
 
         <sect3 id="zend.markup.renderers.add.callback">
-            <title>Ajout d'un tag de rappel(callback)</title>
+            <title>Ajout d'un markup de rappel(callback)</title>
 
             <para>
-                Ajouter des tags de rappel permet de faire bien plus que de simples
+                Ajouter des markups de rappel permet de faire bien plus que de simples
                 remplacements. Par exemple, vous pouvez changer le contenu, utiliser
                 des paramètres pour changer la sortie, etc.
             </para>
@@ -66,11 +68,12 @@ echo $bbcode->render('my [foo]tag[/foo]');
             <para>
                 Un rappel est une classe qui implémente
                 <classname>Zend_Markup_Renderer_TokenInterface</classname>
-                Voici un exemple de classe de tag de rappel:
+                Voici un exemple de classe de markup de rappel&#160;:
             </para>
 
             <programlisting language="php"><![CDATA[
-class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterInterface
+class My_Markup_Renderer_Html_Upper
+    implements Zend_Markup_Renderer_TokenConverterInterface
 {
 
     public function convert(Zend_Markup_Token $token, $text)
@@ -82,9 +85,9 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
 ]]></programlisting>
 
             <para>
-                Il est possible maintenant d'ajouter le tag 'upper', avec comme fonction de rappel,
-                une instance de <classname>My_Markup_Renderer_Html_Upper</classname>.
-                Voici un exemple:
+                Il est possible maintenant d'ajouter le markup "upper", avec comme fonction de
+                rappel, une instance de <classname>My_Markup_Renderer_Html_Upper</classname>.
+                Voici un exemple&#160;:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -92,12 +95,12 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
 // avec Zend_Markup_Parser_BbCode comme analyseur
 $bbcode = Zend_Markup::factory('Bbcode');
 
-// Ceci va créer un tag simple 'foo'
-// Le premier paramètre définit le nom du tag
-// Le second param prend un entier qui définit le type de tag.
+// Ceci va créer un markup simple 'foo'
+// Le premier paramètre définit le nom du markup
+// Le second param prend un entier qui définit le type de markup.
 // Le troisième param est un tableau qui définit d'autres caractéristiques
-// du tag comme son groupe et (dans ce cas) les tags de début et de fin
-$bbcode->addTag(
+// du markup comme son groupe et (dans ce cas) les markups de début et de fin
+$bbcode->addMarkup(
     'upper',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
@@ -106,23 +109,22 @@ $bbcode->addTag(
     )
 );
 
-// La sortie sera: 'my !up!TAG!up!'
-echo $bbcode->render('my [upper]tag[/upper]');
+// La sortie sera: 'my !up!MARKUP!up!'
+echo $bbcode->render('my [upper]markup[/upper]');
 ]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.markup.renderers.list">
-        <title>Liste de tags</title>
+        <title>Liste de markups</title>
 
         <table id="zend.markup.renderers.list.tags">
-            <title>Liste de tags</title>
+            <title>Liste de markups</title>
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>
                     <row>
                         <entry>Entrée (bbcode)</entry>
-
                         <entry>Sortie</entry>
                     </row>
                 </thead>
@@ -130,74 +132,68 @@ echo $bbcode->render('my [upper]tag[/upper]');
                 <tbody>
                     <row>
                         <entry>[b]foo[/b]</entry>
-
                         <entry><![CDATA[<strong>foo</strong>]]></entry>
                     </row>
 
                     <row>
                         <entry>[i]foo[/i]</entry>
-
                         <entry><![CDATA[<em>foo</em>]]></entry>
                     </row>
 
                     <row>
                         <entry>[cite]foo[/cite]</entry>
-
                         <entry><![CDATA[<cite>foo</cite>]]></entry>
                     </row>
 
                     <row>
                         <entry>[del]foo[/del]</entry>
-
                         <entry><![CDATA[<del>foo</del>]]></entry>
                     </row>
 
                     <row>
                         <entry>[ins]foo[/ins]</entry>
-
                         <entry><![CDATA[<ins>foo</ins>]]></entry>
                     </row>
 
                     <row>
                         <entry>[sup]foo[/sup]</entry>
-
                         <entry><![CDATA[<sup>foo</sup>]]></entry>
                     </row>
 
                     <row>
                         <entry>[sub]foo[/sub]</entry>
-
                         <entry><![CDATA[<sub>foo</sub>]]></entry>
                     </row>
 
                     <row>
                         <entry>[span]foo[/span]</entry>
-
                         <entry><![CDATA[<span>foo</span>]]></entry>
                     </row>
 
                     <row>
                         <entry>[acronym title="PHP Hypertext Preprocessor]PHP[/acronym]</entry>
-
-                        <entry><![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]></entry>
+                        <entry>
+                            <![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]>
+                        </entry>
                     </row>
 
                     <row>
                         <entry>[url=http://framework.zend.com/]Zend Framework[/url]</entry>
-
-                        <entry><![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]></entry>
+                        <entry>
+                            <![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]>
+                        </entry>
                     </row>
 
                     <row>
                         <entry>[h1]foobar[/h1]</entry>
-
                         <entry><![CDATA[<h1>foobar</h1>]]></entry>
                     </row>
 
                     <row>
                         <entry>[img]http://framework.zend.com/images/logo.gif[/img]</entry>
-
-                        <entry><![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]></entry>
+                        <entry>
+                            <![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]>
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

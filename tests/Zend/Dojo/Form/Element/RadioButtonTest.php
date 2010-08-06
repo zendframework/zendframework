@@ -20,19 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_Element_RadioButtonTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_RadioButtonTest::main");
-}
+namespace ZendTest\Dojo\Form\Element;
 
-
-/** Zend_Dojo_Form_Element_RadioButton */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\Form\Element\RadioButton as RadioButtonElement,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\Translator\Translator,
+    Zend\Validator\InArray as InArrayValidator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_RadioButton.
@@ -45,19 +40,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
+class RadioButtonTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Element_RadioButtonTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,34 +50,24 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view    = $this->getView();
         $this->element = $this->getElement();
         $this->element->setView($this->view);
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Dojo_Form_Element_RadioButton(
+        $element = new RadioButtonElement(
             'foo',
             array(
                 'value' => 'bar',
@@ -146,7 +120,7 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
             'Bar' => 'This is Bar',
             'Baz' => 'This is Baz',
         );
-        $translate = new Zend_Translate('array', $translations, 'en');
+        $translate = new Translator('ArrayAdapter', $translations, 'en');
         $this->element->setTranslator($translate);
 
         $this->element->setMultiOptions(array(
@@ -176,14 +150,17 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
         $this->assertContains('checked="checked"', $matches[1]);
     }
 
-    /**#+
-     * @see ZF-3286
+    /**
+     * @group ZF-3286
      */
     public function testShouldRegisterInArrayValidatorByDefault()
     {
         $this->assertTrue($this->element->registerInArrayValidator());
     }
 
+    /**
+     * @group ZF-3286
+     */
     public function testShouldAllowSpecifyingWhetherOrNotToUseInArrayValidator()
     {
         $this->testShouldRegisterInArrayValidatorByDefault();
@@ -193,6 +170,9 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->element->registerInArrayValidator());
     }
 
+    /**
+     * @group ZF-3286
+     */
     public function testInArrayValidatorShouldBeRegisteredAfterValidation()
     {
         $options = array(
@@ -204,9 +184,12 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->element->isValid('test');
         $validator = $this->element->getValidator('InArray');
-        $this->assertTrue($validator instanceof Zend_Validate_InArray);
+        $this->assertTrue($validator instanceof InArrayValidator);
     }
 
+    /**
+     * @group ZF-3286
+     */
     public function testShouldNotValidateIfValueIsNotInArray()
     {
         $options = array(
@@ -218,10 +201,4 @@ class Zend_Dojo_Form_Element_RadioButtonTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->element->getValidator('InArray'));
         $this->assertFalse($this->element->isValid('test'));
     }
-    /**#@-*/
-}
-
-// Call Zend_Dojo_Form_Element_RadioButtonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Element_RadioButtonTest::main") {
-    Zend_Dojo_Form_Element_RadioButtonTest::main();
 }

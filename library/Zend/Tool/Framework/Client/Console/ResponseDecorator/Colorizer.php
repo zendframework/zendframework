@@ -31,7 +31,7 @@ namespace Zend\Tool\Framework\Client\Console\ResponseDecorator;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Colorizer
-    implements \Zend\Tool\Framework\Client\Response\ContentDecorator\ContentDecoratorInterface
+    implements \Zend\Tool\Framework\Client\Response\ContentDecorator
 {
 
     protected $_colorOptions = array(

@@ -47,7 +47,7 @@ abstract class AbstractCommon extends Analyzer\AbstractAnalyzer
 {
     /**
      * The set of Token filters applied to the Token stream.
-     * Array of \Zend\Search\Lucene\Analysis\TokenFilterInterface objects.
+     * Array of \Zend\Search\Lucene\Analysis\TokenFilter objects.
      *
      * @var array
      */
@@ -56,9 +56,9 @@ abstract class AbstractCommon extends Analyzer\AbstractAnalyzer
     /**
      * Add Token filter to the Analyzer
      *
-     * @param \Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface $filter
+     * @param \Zend\Search\Lucene\Analysis\TokenFilter $filter
      */
-    public function addFilter(TokenFilter\TokenFilterInterface $filter)
+    public function addFilter(TokenFilter $filter)
     {
         $this->_filters[] = $filter;
     }

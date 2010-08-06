@@ -166,7 +166,7 @@ date_default_timezone_set('Europe/Berlin');
 
                 <para>
                     Sonnenauf-und Untergang können für jeden beliebigen Ort und Tag anzeigen werden,
-                    so dass keine einzige Sekunde Tageslicht für das 
+                    so dass keine einzige Sekunde Tageslicht für das
                     Lieblings-<acronym>PHP</acronym>-Projekt verpasst werden muß :)
                 </para>
             </listitem>

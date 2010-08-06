@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_BorderContainerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_BorderContainerTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_BorderContainer */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\View\Helper\BorderContainer as BorderContainerHelper,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_BorderContainer.
@@ -45,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_BorderContainerTest extends PHPUnit_Framework_TestCase
+class BorderContainerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_BorderContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,28 +48,18 @@ class Zend_Dojo_View_Helper_BorderContainerTest extends PHPUnit_Framework_TestCa
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->helper = new Zend_Dojo_View_Helper_BorderContainer();
+        $this->helper = new BorderContainerHelper();
         $this->helper->setView($this->view);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
@@ -99,7 +71,7 @@ class Zend_Dojo_View_Helper_BorderContainerTest extends PHPUnit_Framework_TestCa
             $content = 'This is the content of pane ' . $pane;
             $html   .= $this->view->contentPane($id, $content, array('region' => $pane));
         }
-        return $this->helper->borderContainer('container', $html, array('design' => 'headline'));
+        return $this->helper->direct('container', $html, array('design' => 'headline'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -110,7 +82,7 @@ class Zend_Dojo_View_Helper_BorderContainerTest extends PHPUnit_Framework_TestCa
 
     public function testShouldAllowProgrammaticDijitCreation()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $html = $this->getContainer();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.layout.BorderContainer")/', $html);
         $this->assertNotNull($this->view->dojo()->getDijit('container'));
@@ -127,9 +99,4 @@ class Zend_Dojo_View_Helper_BorderContainerTest extends PHPUnit_Framework_TestCa
         $styles = $this->helper->view->headStyle()->toString();
         $this->assertEquals(1, substr_count($styles, $style), $styles);
     }
-}
-
-// Call Zend_Dojo_View_Helper_BorderContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_BorderContainerTest::main") {
-    Zend_Dojo_View_Helper_BorderContainerTest::main();
 }

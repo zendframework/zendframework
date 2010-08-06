@@ -28,7 +28,7 @@ use Zend\Search\Lucene;
 
 /**
  * @uses       \Zend\Search\Lucene\Exception
- * @uses       \Zend\Search\Lucene\Storage\File\FileInterface
+ * @uses       \Zend\Search\Lucene\Storage\File
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Storage

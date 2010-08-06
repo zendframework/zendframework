@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.youtube">
     <title>Verwenden der YouTube Daten API</title>
@@ -428,7 +428,7 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
                 Guide</ulink> auf code.google.com für eine Übersicht des Upload Prozesses betrachtet
             haben. Das Hochladen von Videos kann auf 2 Wegen durchgeführt werden: Entweder durch das
             direkte Hochladen des Videos oder durch das Senden der Video Meta-Daten und indem der
-            Benutzer das Video über ein HTML Formular hochlädt.
+            Benutzer das Video über ein <acronym>HTML</acronym> Formular hochlädt.
         </para>
 
         <para>
@@ -585,8 +585,8 @@ try {
             Objekt an den <ulink
                 url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
             anhängt den man erstellt. Stattdessen überträgt man einfach alle Metadaten des Videos um
-            ein Token Element zurück zu erhalten welches verwendet werden kann um ein HTML Upload
-            Formular zu erstellen.
+            ein Token Element zurück zu erhalten welches verwendet werden kann um ein
+            <acronym>HTML</acronym> Upload Formular zu erstellen.
         </para>
 
         <example id="zend.gdata.youtube.uploads.browser.example-1">
@@ -611,15 +611,15 @@ $postUrl = $tokenArray['url'];
         </example>
 
         <para>
-            Der obige Code gibt einen Link und ein Token aus das verwendet wird um ein HTML Formular
-            zu erstellen und im Browser des Benutzers anzuzeigen. Ein einfaches Beispielformular
-            wird unten gezeigt mit $tokenValue welches den Inhalt des zurückgegebenen Token Elements
-            darstellt, welches wie gezeigt, oben von $myVideoEntry empfangen wird. Damit der
-            Benutzer, nachdem das Formular übermittelt wurde, auf die Website umgeleitet wird, muß
-            ein $nextUrl Parameter an die $postUrl von oben angehängt werden, was auf die gleiche
-            Weise funktioniert wie der $next Parameter eines AuthSub Links. Der einzige Unterschied
-            ist hier das, statt eines einmal zu verwendenden Tokens, ein Status und eine ID Variable
-            in der <acronym>URL</acronym> zurückgegeben werden.
+            Der obige Code gibt einen Link und ein Token aus das verwendet wird um ein
+            <acronym>HTML</acronym> Formular zu erstellen und im Browser des Benutzers anzuzeigen.
+            Ein einfaches Beispielformular wird unten gezeigt mit $tokenValue welches den Inhalt des
+            zurückgegebenen Token Elements darstellt, welches wie gezeigt, oben von $myVideoEntry
+            empfangen wird. Damit der Benutzer, nachdem das Formular übermittelt wurde, auf die
+            Website umgeleitet wird, muß ein $nextUrl Parameter an die $postUrl von oben angehängt
+            werden, was auf die gleiche Weise funktioniert wie der $next Parameter eines AuthSub
+            Links. Der einzige Unterschied ist hier das, statt eines einmal zu verwendenden Tokens,
+            ein Status und eine ID Variable in der <acronym>URL</acronym> zurückgegeben werden.
         </para>
 
         <example id="zend.gdata.youtube.uploads.browser.example-2">

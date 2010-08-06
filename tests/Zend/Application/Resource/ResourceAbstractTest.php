@@ -24,9 +24,9 @@ namespace ZendTest\Application\Resource;
 
 use Zend\Loader\Autoloader,
     Zend\Application\Application,
-    ZendTest\Application\TestAssett\ZfAppBootstrap;
+    ZendTest\Application\TestAsset\ZfAppBootstrap;
 
-require_once __DIR__ . '/../TestAssett/resources/Foo.php';
+require_once __DIR__ . '/../TestAsset/resources/Foo.php';
 
 /**
  * @category   Zend
@@ -74,20 +74,20 @@ class ResourceAbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testBootstrapIsNullByDefault()
     {
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo();
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo();
         $this->assertNull($resource->getBootstrap());
     }
 
     public function testResourceShouldAllowSettingParentBootstrap()
     {
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo();
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo();
         $resource->setBootstrap($this->bootstrap);
         $this->assertSame($this->bootstrap, $resource->getBootstrap());
     }
 
     public function testOptionsAreStoredVerbatim()
     {
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo();
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo();
         $options  = array(
             'foo' => 'bar',
         );
@@ -97,7 +97,7 @@ class ResourceAbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testCallingSetOptionsMultipleTimesMergesOptions()
     {
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo();
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo();
         $options1  = array(
             'foo' => 'bar',
         );
@@ -117,7 +117,7 @@ class ResourceAbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testSetOptionsProxiesToLocalSetters()
     {
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo();
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo();
         $options  = array(
             'someArbitraryKey' => 'test',
         );
@@ -130,7 +130,7 @@ class ResourceAbstractTest extends \PHPUnit_Framework_TestCase
         $options  = array(
             'foo' => 'bar',
         );
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo($options);
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo($options);
         $this->assertEquals($options, $resource->getOptions());
     }
 
@@ -140,7 +140,7 @@ class ResourceAbstractTest extends \PHPUnit_Framework_TestCase
             'foo' => 'bar',
         );
         $config = new \Zend\Config\Config($options);
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo($config);
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo($config);
         $this->assertEquals($options, $resource->getOptions());
     }
 
@@ -149,7 +149,7 @@ class ResourceAbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOptionsShouldRemoveBootstrapOptionWhenPassed()
     {
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo();
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo();
         $resource->setOptions(array(
             'bootstrap' => $this->bootstrap,
         ));
@@ -168,7 +168,7 @@ class ResourceAbstractTest extends \PHPUnit_Framework_TestCase
             array('someMoreData'),
         );
 
-        $resource = new \ZendTest\Application\TestAssett\Resource\Foo($options);
+        $resource = new \ZendTest\Application\TestAsset\Resource\Foo($options);
         $stored   = $resource->getOptions();
         $this->assertSame($options, $stored);
     }

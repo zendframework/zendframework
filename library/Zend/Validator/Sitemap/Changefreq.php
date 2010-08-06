@@ -53,7 +53,7 @@ class Changefreq extends \Zend\Validator\AbstractValidator
      */
     protected $_messageTemplates = array(
         self::NOT_VALID => "'%value%' is no valid sitemap changefreq",
-        self::INVALID   => "Invalid type given, the value should be a string",
+        self::INVALID   => "Invalid type given. String expected",
     );
 
     /**

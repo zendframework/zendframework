@@ -42,7 +42,7 @@ class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_view = new \Zend\View\View(array('scriptPath'=>dirname(__FILE__).'/_files/scripts/'));
+        $this->_view = new \Zend\View\View(array('scriptPath'=>__DIR__.'/_files/scripts/'));
     }
 
     public function testDefaultEmpty()

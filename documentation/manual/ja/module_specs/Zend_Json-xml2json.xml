@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.json.xml2json">
     <title>XML から JSON への変換</title>
     <para>
@@ -17,7 +17,7 @@
         が搭載されています。この関数は、<acronym>XML</acronym> を受け取って <acronym>JSON</acronym> を作成します。
         入力パラメータには、任意の <acronym>XML</acronym> 文字列を渡すことができます。
         また、オプションのパラメータで論理値を渡し、
-        変換処理中に <acronym>XML</acronym> の属性を無視するかどうかを指定することができます。
+        変換処理中に <acronym>XML</acronym> の属性を無視するかどうかを指定できます。
         このパラメータを省略した場合のデフォルトの挙動は、
         <acronym>XML</acronym> の属性を無視します。この関数の使用法は、以下のようになります。
     </para>

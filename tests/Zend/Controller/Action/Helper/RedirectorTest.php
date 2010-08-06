@@ -75,12 +75,12 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
     {
         $front = Controller\Front::getInstance();
         $front->resetInstance();
-        \Zend\Controller\Action\HelperBroker\HelperBroker::removeHelper('viewRenderer');
+        \Zend\Controller\Action\HelperBroker::removeHelper('viewRenderer');
 
         $this->redirector = new \Zend\Controller\Action\Helper\Redirector();
         $this->router     = $front->getRouter();
-        $this->request    = new \Zend\Controller\Request\HTTP();
-        $this->response   = new \Zend\Controller\Response\HTTP();
+        $this->request    = new \Zend\Controller\Request\Http();
+        $this->response   = new \Zend\Controller\Response\Http();
         $this->controller = new TestController(
             $this->request,
             $this->response,
@@ -147,7 +147,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testRedirectorShouldOnlyAllowValidHTTPRedirectCodes()
+    public function testRedirectorShouldOnlyAllowValidHttpRedirectCodes()
     {
         try {
             $this->redirector->setCode('306');
@@ -237,7 +237,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
     public function testGotoDoesNotUtilizeDefaultSegments()
     {
         $request = $this->request;
-        $request->setModuleName('default');
+        $request->setModuleName('application');
         $this->redirector->setGoto('index', 'index');
         $this->assertEquals('/', $this->redirector->getRedirectUrl());
 
@@ -285,19 +285,19 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/my/foo/bar', $this->redirector->getRedirectUrl());
     }
 
-    public function testSetGotoUrlWithHTTPCodeUsingCodeProperty()
+    public function testSetGotoUrlWithHttpCodeUsingCodeProperty()
     {
         $this->redirector->setCode(301);
         $this->redirector->setGotoUrl('/foo/bar');
         $this->assertEquals('/foo/bar', $this->redirector->getRedirectUrl());
-        $this->assertEquals(301, $this->response->getHTTPResponseCode());
+        $this->assertEquals(301, $this->response->getHttpResponseCode());
     }
 
-    public function testSetGotoUrlWithHTTPCodeUsingCodeOption()
+    public function testSetGotoUrlWithHttpCodeUsingCodeOption()
     {
         $this->redirector->setGotoUrl('/foo/bar', array('code' => 301));
         $this->assertEquals('/foo/bar', $this->redirector->getRedirectUrl());
-        $this->assertEquals(301, $this->response->getHTTPResponseCode());
+        $this->assertEquals(301, $this->response->getHttpResponseCode());
     }
 
     /**
@@ -451,7 +451,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         $this->request->setModuleName('admin')
                       ->setControllerName('class')
                       ->setActionName('view');
-        $this->redirector->gotoSimple('login', 'account', 'default');
+        $this->redirector->gotoSimple('login', 'account', 'application');
         $test = $this->redirector->getRedirectUrl();
         $this->assertEquals('/account/login', $test, $test);
     }
@@ -459,7 +459,7 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4318
      */
-    public function testServerVariableHTTPsToOffDoesNotBuildHTTPsUrl()
+    public function testServerVariableHttpsToOffDoesNotBuildHttpsUrl()
     {
         // Set Preconditions from Issue:
         $_SERVER['HTTPS'] = "off";
@@ -483,14 +483,6 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
 /**
  * Test controller for use with redirector tests
  */
-class TestController extends Action\Action
+class TestController extends Action
 {
 }
-
-// Call Zend_Controller_Action_Helper_RedirectorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_RedirectorTest::main") {
-    \Zend_Controller_Action_Helper_RedirectorTest::main();
-}
-
-
-

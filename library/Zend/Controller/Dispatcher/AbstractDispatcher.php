@@ -24,11 +24,14 @@
  * @namespace
  */
 namespace Zend\Controller\Dispatcher;
-use Zend\Controller;
+
+use Zend\Controller\Dispatcher,
+    Zend\Controller\Front as FrontController,
+    Zend\Controller\Response\AbstractResponse;
 
 /**
  * @uses       \Zend\Controller\Dispatcher\Exception
- * @uses       \Zend\Controller\Dispatcher\DispatcherInterface
+ * @uses       \Zend\Controller\Dispatcher
  * @uses       \Zend\Controller\Front
  * @category   Zend
  * @package    Zend_Controller
@@ -36,7 +39,7 @@ use Zend\Controller;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractDispatcher implements DispatcherInterface
+abstract class AbstractDispatcher implements Dispatcher
 {
     /**
      * Default action
@@ -54,7 +57,7 @@ abstract class AbstractDispatcher implements DispatcherInterface
      * Default module
      * @var string
      */
-    protected $_defaultModule = 'default';
+    protected $_defaultModule = 'application';
 
     /**
      * Front Controller instance
@@ -73,7 +76,7 @@ abstract class AbstractDispatcher implements DispatcherInterface
      * Path delimiter character
      * @var string
      */
-    protected $_pathDelimiter = '_';
+    protected $_pathDelimiter = '\\';
 
     /**
      * Response object to pass to action controllers, if any
@@ -245,7 +248,7 @@ abstract class AbstractDispatcher implements DispatcherInterface
             $segments[$key] = str_replace(' ', '', ucwords($segment));
         }
 
-        return implode('_', $segments);
+        return implode('\\', $segments);
     }
 
     /**
@@ -256,7 +259,7 @@ abstract class AbstractDispatcher implements DispatcherInterface
     public function getFrontController()
     {
         if (null === $this->_frontController) {
-            $this->_frontController = Controller\Front::getInstance();
+            $this->_frontController = FrontController::getInstance();
         }
 
         return $this->_frontController;
@@ -268,7 +271,7 @@ abstract class AbstractDispatcher implements DispatcherInterface
      * @param \Zend\Controller\Front $controller
      * @return \Zend\Controller\Dispatcher\AbstractDispatcher
      */
-    public function setFrontController(Controller\Front $controller)
+    public function setFrontController(FrontController $controller)
     {
         $this->_frontController = $controller;
         return $this;
@@ -358,7 +361,7 @@ abstract class AbstractDispatcher implements DispatcherInterface
      * @param \Zend\Controller\Response\AbstractResponse|null $response
      * @return \Zend\Controller\Dispatcher\AbstractDispatcher
      */
-    public function setResponse(Controller\Response\AbstractResponse $response = null)
+    public function setResponse(AbstractResponse $response = null)
     {
         $this->_response = $response;
         return $this;

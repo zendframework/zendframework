@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19577 -->
+<!-- EN-Revision: 20799 -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>バリデータの書き方</title>
@@ -109,9 +109,11 @@ class MyValid_Float extends Zend_Validate_Abstract
             <listitem>
                 <para>入力値が数値ではない</para>
             </listitem>
+
             <listitem>
                 <para>入力値が最小値より小さい</para>
             </listitem>
+
             <listitem>
                 <para>入力値が最大値より大きい</para>
             </listitem>
@@ -198,18 +200,10 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>最低 8 文字以上であること</para>
-            </listitem>
-            <listitem>
-                <para>最低ひとつの大文字を含むこと</para>
-            </listitem>
-            <listitem>
-                <para>最低ひとつの小文字を含むこと</para>
-            </listitem>
-            <listitem>
-                <para>最低ひとつの数字を含むこと</para>
-            </listitem>
+            <listitem><para>最低 8 文字以上であること</para></listitem>
+            <listitem><para>最低ひとつの大文字を含むこと</para></listitem>
+            <listitem><para>最低ひとつの小文字を含むこと</para></listitem>
+            <listitem><para>最低ひとつの数字を含むこと</para></listitem>
         </itemizedlist>
 
         <para>

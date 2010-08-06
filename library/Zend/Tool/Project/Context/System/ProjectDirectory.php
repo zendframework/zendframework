@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\System;
+use Zend\Tool\Project\Context\System;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -32,7 +33,7 @@ namespace Zend\Tool\Project\Context\System;
  * items within a specific project.
  *
  * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
- * @uses       \Zend\Tool\Project\Context\System\SystemInterface
+ * @uses       \Zend\Tool\Project\Context\System
  * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
  * @uses       \Zend\Tool\Project\Context\System\TopLevelRestrictable
  * @uses       \Zend\Tool\Project\Exception
@@ -43,7 +44,7 @@ namespace Zend\Tool\Project\Context\System;
  */
 class ProjectDirectory
     extends \Zend\Tool\Project\Context\Filesystem\Directory
-    implements SystemInterface,
+    implements System,
                NotOverwritable,
                TopLevelRestrictable
 {

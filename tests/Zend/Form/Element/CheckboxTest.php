@@ -20,12 +20,13 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Element_CheckboxTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_CheckboxTest::main");
-}
+namespace ZendTest\Form\Element;
 
-
+use Zend\Form\Element\Checkbox as CheckboxElement,
+    Zend\Form\Element\Xhtml as XhtmlElement,
+    Zend\Form\Element,
+    Zend\Form\Decorator,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Element_Checkbox
@@ -37,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Element_CheckboxTest extends PHPUnit_Framework_TestCase
+class CheckboxTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_CheckboxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -58,40 +48,28 @@ class Zend_Form_Element_CheckboxTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->element = new Zend_Form_Element_Checkbox('foo');
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->element = new CheckboxElement('foo');
     }
 
     public function getView()
     {
-        return new Zend_View();
+        return new View();
     }
 
     public function testCheckboxElementSubclassesXhtmlElement()
     {
-        $this->assertTrue($this->element instanceof Zend_Form_Element_Xhtml);
+        $this->assertTrue($this->element instanceof XhtmlElement);
     }
 
     public function testCheckboxElementInstanceOfBaseElement()
     {
-        $this->assertTrue($this->element instanceof Zend_Form_Element);
+        $this->assertTrue($this->element instanceof Element);
     }
 
     public function testCheckboxElementUsesCheckboxHelperInViewHelperDecoratorByDefault()
     {
-        $this->_checkZf2794();
-
         $decorator = $this->element->getDecorator('viewHelper');
-        $this->assertTrue($decorator instanceof Zend_Form_Decorator_ViewHelper);
+        $this->assertTrue($decorator instanceof Decorator\ViewHelper);
         $decorator->setElement($this->element);
         $helper = $decorator->getHelper();
         $this->assertEquals('formCheckbox', $helper);
@@ -104,14 +82,14 @@ class Zend_Form_Element_CheckboxTest extends PHPUnit_Framework_TestCase
 
     public function testCheckedAttributeNotRenderedByDefault()
     {
-        $view = new Zend_View();
+        $view = new View();
         $html = $this->element->render($view);
         $this->assertNotContains('checked="checked"', $html);
     }
 
     public function testCheckedAttributeRenderedWhenCheckedFlagTrue()
     {
-        $view = new Zend_View();
+        $view = new View();
         $this->element->checked = true;
         $html = $this->element->render($view);
         $this->assertContains('checked="checked"', $html);
@@ -195,7 +173,7 @@ class Zend_Form_Element_CheckboxTest extends PHPUnit_Framework_TestCase
             'uncheckedValue' => 'bar',
         );
 
-        $element = new Zend_Form_Element_Checkbox('test', $options);
+        $element = new CheckboxElement('test', $options);
         $this->assertEquals($options['uncheckedValue'], $element->getValue());
     }
 
@@ -215,7 +193,7 @@ class Zend_Form_Element_CheckboxTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($options as $current) {
-            $element = new Zend_Form_Element_Checkbox('test', $current);
+            $element = new CheckboxElement('test', $current);
             $this->assertEquals($current['value'], $element->getValue());
             $this->assertEquals($current['checkedValue'], $element->getCheckedValue());
             $this->assertEquals($current['uncheckedValue'], $element->getUncheckedValue());
@@ -238,22 +216,4 @@ class Zend_Form_Element_CheckboxTest extends PHPUnit_Framework_TestCase
             }
         }
     }
-
-    /**
-     * Used by test methods susceptible to ZF-2794, marks a test as incomplete
-     *
-     * @link   http://framework.zend.com/issues/browse/ZF-2794
-     * @return void
-     */
-    protected function _checkZf2794()
-    {
-        if (strtolower(substr(PHP_OS, 0, 3)) == 'win' && version_compare(PHP_VERSION, '5.1.4', '=')) {
-            $this->markTestIncomplete('Error occurs for PHP 5.1.4 on Windows');
-        }
-    }
-}
-
-// Call Zend_Form_Element_CheckboxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Element_CheckboxTest::main") {
-    Zend_Form_Element_CheckboxTest::main();
 }

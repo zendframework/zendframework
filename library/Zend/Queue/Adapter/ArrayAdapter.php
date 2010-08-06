@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace Zend\Queue\Adapter;
-use Zend\Queue;
-use Zend\Queue\Message;
+use Zend\Queue\Queue,
+    Zend\Queue\Message,
+    Zend\Queue\Exception as QueueException;
 
 /**
  * Class for using a standard PHP array as a queue
@@ -33,14 +34,14 @@ use Zend\Queue\Message;
  * @uses       \Zend\Queue\Adapter\AdapterAbstract
  * @uses       \Zend\Queue\Queue
  * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
+ * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ArrayAdapter extends AdapterAbstract
+class ArrayAdapter extends AbstractAdapter
 {
     /**
      * @var array
@@ -54,7 +55,7 @@ class ArrayAdapter extends AdapterAbstract
      * @param  \Zend\Queue\Queue|null $queue
      * @return void
      */
-    public function __construct($options, Queue\Queue $queue = null)
+    public function __construct($options, Queue $queue = null)
     {
         parent::__construct($options, $queue);
     }
@@ -142,14 +143,14 @@ class ArrayAdapter extends AdapterAbstract
      * @return integer
      * @throws \Zend\Queue\Exception
      */
-    public function count(Queue\Queue $queue=null)
+    public function count(Queue $queue=null)
     {
         if ($queue === null) {
             $queue = $this->_queue;
         }
 
         if (!isset($this->_data[$queue->getName()])) {
-            throw new Queue\Exception('Queue does not exist');
+            throw new QueueException('Queue does not exist');
         }
 
         return count($this->_data[$queue->getName()]);
@@ -164,17 +165,17 @@ class ArrayAdapter extends AdapterAbstract
      *
      * @param  string     $message Message to send to the active queue
      * @param  \Zend\Queue\Queue $queue
-     * @return \Zend\Queue\Message\Message
+     * @return \Zend\Queue\Message
      * @throws \Zend\Queue\Exception
      */
-    public function send($message, Queue\Queue $queue=null)
+    public function send($message, Queue $queue=null)
     {
         if ($queue === null) {
             $queue = $this->_queue;
         }
 
         if (!$this->isExists($queue->getName())) {
-            throw new Queue\Exception('Queue does not exist:' . $queue->getName());
+            throw new QueueException('Queue does not exist:' . $queue->getName());
         }
 
         // create the message
@@ -206,7 +207,7 @@ class ArrayAdapter extends AdapterAbstract
      * @param  \Zend\Queue\Queue $queue
      * @return \Zend\Queue\Message\MessageIterator
      */
-    public function receive($maxMessages = null, $timeout = null, Queue\Queue $queue = null)
+    public function receive($maxMessages = null, $timeout = null, Queue $queue = null)
     {
         if ($maxMessages === null) {
             $maxMessages = 1;
@@ -258,11 +259,11 @@ class ArrayAdapter extends AdapterAbstract
      * Returns true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  \Zend\Queue\Message\Message $message
+     * @param  \Zend\Queue\Message $message
      * @return boolean
      * @throws \Zend\Queue\Exception
      */
-    public function deleteMessage(Message\Message $message)
+    public function deleteMessage(Message $message)
     {
         // load the queue
         $queue = &$this->_data[$message->queue_name];

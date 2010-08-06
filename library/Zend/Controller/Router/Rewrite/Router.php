@@ -41,7 +41,7 @@ class Router
     /**
      * Heap containing all routes
      *
-     * @var SplMaxHeap
+     * @var PriorityList
      */
     protected $_routes;
 
@@ -53,7 +53,7 @@ class Router
      */
     public function __construct($options = null)
     {
-        $this->_routes = SplMaxHeap();
+        $this->_routes = new PriorityList();
 
         if ($options !== null) {
             $this->setOptions($options);
@@ -148,9 +148,9 @@ class Router
                     $subRoute = $this->_routeFromArray($subRoute);
                 }
 
-                $terminates = (isset($specs['terminates']) && $specs['terminates']);
+                $mayTerminate = (isset($specs['may_terminate']) && $specs['may_terminate']);
 
-                $route->append($subName, new Route\Part($subRoute), $terminates);
+                $route->append($subName, new Route\Part($subRoute), $mayTerminate);
             }
         }
 
@@ -165,7 +165,14 @@ class Router
      */
     public function match(HTTPRequest $request)
     {
+        $match = null;
 
+        foreach ($this->_routes as $route) {
+            if (($result = $route->match($request)) !== null) {
+            }
+        }
+
+        return $match;
     }
 
     /**

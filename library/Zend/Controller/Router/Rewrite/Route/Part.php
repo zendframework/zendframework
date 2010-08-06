@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace Zend\Controller\Router\Rewrite\Route;
+use Zend\Controller\Router\Rewrite\PriorityList;
 use Zend\Controller\Request\Http as HttpRequest;
 
 /**
- * Regex route
+ * Route part
  *
  * @package    Zend_Controller
  * @subpackage Router
@@ -35,33 +36,59 @@ use Zend\Controller\Request\Http as HttpRequest;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Regex implements Route
+class Part implements Route
 {
     /**
-     * Regex to match
+     * Route to match
      * 
-     * @var string
+     * @var Route
      */
-    protected $_regex;
+    protected $_route;
 
     /**
-     * Default values
+     * Wether the route may terminate
      *
-     * @var array
+     * @var boolean
      */
-    protected $_defaults;
+    protected $_mayTerminate;
 
     /**
-     * Create a new literal route
+     * Children of the route
      *
-     * @param  string $regex
-     * @param  array  $defaults
+     * @var PriorityList
+     */
+    protected $_children;
+
+    /**
+     * __construct(): defined by Route interface
+     *
+     * @see    Route::__construct()
+     * @param  array $options
      * @return void
      */
-    public function __construct($regex, $defaults = array())
+    public function __construct(array $options)
     {
-        $this->_route    = $regex;
-        $this->_defaults = $defaults;
+        if (!isset($options['route']) || !$options['route'] instanceof Route) {
+            throw new UnexpectedValueException('Options must contain a route');
+        }
+
+        $this->_route        = $options['route'];
+        $this->_mayTerminate = (isset($options['may_terminate']) && $options['may_terminate']);
+        $this->_children     = new PriorityList();
+    }
+
+    /**
+     * Append a route to the part
+     *
+     * @param  string $name
+     * @param  Route $route
+     * @return Part
+     */
+    public function append($name, Route $route)
+    {
+        $this->_children[$name] = $route;
+
+        return $this;
     }
 
     /**
@@ -74,18 +101,24 @@ class Regex implements Route
      */
     public function match(HttpRequest $request, $pathOffset = null)
     {
-        if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->_regex . ')i', $request->getRequestUri(), $match, null, $pathOffset);
-        } else {
-            $result = preg_match('(^' . $this->_regex . '$)i', $request->getRequestUri(), $match);
+        $match = $this->_route->match($request, $pathOffset);
+
+        if ($match !== null) {
+            foreach ($this->_children as $name => $route) {
+                $subMatch = $route->match($match, $pathOffset);
+
+                if ($subMatch !== null) {
+                    return $match->merge($subMatch);
+                }
+            }
+
+            if ($this->_mayTerminate) {
+                // @todo: also check that the http request is at it's end
+                return $match;
+            }
         }
 
-        if ($result === null) {
-            return null;
-        }
-
-        // @todo: examine $match
-        return $this->_defaults;
+        return null;
     }
 
     /**
@@ -98,6 +131,6 @@ class Regex implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        // @todo: implement this
+        // @todo
     }
 }

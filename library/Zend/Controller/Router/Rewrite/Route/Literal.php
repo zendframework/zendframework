@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Controller\Router\Rewrite\Route;
-use Zend\Controller\Request\HTTP as HTTPRequest;
+use Zend\Controller\Request\Http as HttpRequest;
 
 /**
  * Literal route
@@ -68,11 +68,11 @@ class Literal implements Route
      * match(): defined by Route interface
      *
      * @see    Route::match()
-     * @param  HTTPRequest $request
+     * @param  HttpRequest $request
      * @param  integer     $pathOffset
      * @return boolean
      */
-    public function match(HTTPRequest $request, $pathOffset = null)
+    public function match(HttpRequest $request, $pathOffset = null)
     {
         if ($pathOffset !== null) {
             if (strpos($request->getRequestUri(), $this->_route) === $pathOffset) {

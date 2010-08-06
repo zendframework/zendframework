@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Controller\Router\Rewrite\Route;
-use Zend\Controller\Request\HTTP as HTTPRequest;
+use Zend\Controller\Request\Http as HttpRequest;
 
 /**
  * Route interface
@@ -38,13 +38,21 @@ use Zend\Controller\Request\HTTP as HTTPRequest;
 interface Route
 {
     /**
+     * Create a new route
+     * 
+     * @param  array $options
+     * @return void
+     */
+    public function __construct(array $options);
+
+    /**
      * Match a request
      *
-     * @param  HTTPRequest $request
+     * @param  HttpRequest $request
      * @param  integer     $pathOffset
      * @return boolean
      */
-    public function match(HTTPRequest $request, $pathOffset = null);
+    public function match(HttpRequest $request, $pathOffset = null);
 
     /**
      * Assemble an URL

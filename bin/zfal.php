@@ -17,10 +17,11 @@ require_once 'Zend/Loader/Autoloader.php';
 Zend\Loader\Autoloader::getInstance();
 
 $rules = array(
-    'library|l-s' => 'Library to parse; if none provided, assumes current directory',
-    'output|o-s'  => 'Where to write autoload file; if not provided, assumes "_autoload.php" in library directory',
-    'overwrite|w' => 'Whether or not to overwrite existing autoload file',
+    'library|l-s'   => 'Library to parse; if none provided, assumes current directory',
+    'output|o-s'    => 'Where to write autoload file; if not provided, assumes "_autoload.php" in library directory',
+    'overwrite|w'   => 'Whether or not to overwrite existing autoload file',
     'keepdepth|k-i' => 'How many additional segments of the library path to keep in the generated classfile map',
+    'usedir|d'      => 'Prepend filenames with __DIR__',
 );
 
 try {
@@ -45,11 +46,13 @@ if (isset($opts->l)) {
     $path = realpath($path);
 }
 
+$usingStdout = false;
 $output = $path . DIRECTORY_SEPARATOR . '_autoload.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
         $output = STDOUT;
+        $usingStdout = true;
     } elseif (!is_writeable(dirname($output))) {
         echo "Cannot write to '$output'; aborting." . PHP_EOL
             . PHP_EOL
@@ -66,15 +69,15 @@ if (isset($opts->o)) {
     }
 }
 
-$strip     = '';
-$keepDepth = 1;
+$strip     = $path;
+$keepDepth = 0;
 if (isset($opts->k)) {
     $keepDepth = $opts->k;
     if ($keepDepth < 0) {
         $keepDepth = 0;
     }
 }
-if ($keepDepth) {
+if ($keepDepth > 0) {
     $segments = explode(DIRECTORY_SEPARATOR, $path);
     do {
         array_pop($segments);
@@ -83,13 +86,19 @@ if ($keepDepth) {
     $strip = implode(DIRECTORY_SEPARATOR, $segments);
 }
 
+$prefixWithDir = $opts->getOption('d');
+
+if (!$usingStdout) {
+    echo "Creating class file map for library in '$path'..." . PHP_EOL;
+}
+
 // Get the ClassFileLocater, and pass it the library path
 $l = new \Zend\File\ClassFileLocater($path);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
 $map   = array();
-iterator_apply($l, function(\Iterator $it, $strip, array $map) {
+iterator_apply($l, function(\Iterator $it, array $map, $strip) {
     $file      = $it->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getRealpath());
@@ -97,12 +106,18 @@ iterator_apply($l, function(\Iterator $it, $strip, array $map) {
     $map[$namespace . $file->classname] = $filename;
 
     return true;
-}, array($l, $strip . DIRECTORY_SEPARATOR, &$map));
+}, array($l, &$map, $strip . DIRECTORY_SEPARATOR));
 
 // Create a file with the class/file map.
 // Stupid syntax highlighters make separating < from PHP declaration necessary
 $content = '<' . "?php\n"
          . 'return ' . var_export($map, true) . ';';
+// If requested to prefix with __DIR__, modify the content
+if ($prefixWithDir) {
+    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+}
 file_put_contents($output, $content);
 
-echo "Wrote autoload file to " . realpath($output) . PHP_EOL;
+if (!$usingStdout) {
+    echo "Wrote autoload file to '" . realpath($output) . "'" . PHP_EOL;
+}

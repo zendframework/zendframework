@@ -5,36 +5,6 @@ if (!is_dir($libPath)) {
     exit(2);
 }
 $libPath  = realpath($libPath);
-$filePath = $libPath . '/Zend/_autoload.php';
-
-if ($argc && $argc > 1) {
-    // Did we get a path to the autoload file? 
-    // If so, make sure we can write to it.
-    $filePath = $argv[1];
-    if (!is_writeable(dirname($filePath))) {
-        echo "Unable to write to $filePath; aborting" . PHP_EOL;
-        exit(2);
-    }
-}
-
-if (file_exists($filePath)) {
-    // Does the specified autoload file exist?
-    // If so, check to see if the "overwrite" flag was provided.
-    // If it wasn't, abort, and tell the user why.
-    $filePath = realpath($filePath);
-    if ($argc && $argc < 3) {
-        echo "Autoload file already exists at location $filePath." . PHP_EOL
-            . "Append the switch --overwrite or -o to overwrite:" . PHP_EOL
-            . "    ". $argv[0] . ' ' . $filePath . ' --overwrite' . PHP_EOL
-            . "    ". $argv[0] . ' ' . $filePath . ' -o' . PHP_EOL;
-        exit(2);
-    }
-    if (!in_array($argv[2], array('--overwrite', '-o'))) {
-        echo "Autoload file already exists at location $filePath," . PHP_EOL
-            . "and unknown switch provided." . PHP_EOL;
-        exit(2);
-    }
-}
 
 // Add ZF to the include_path, if it isn't already
 $incPath = get_include_path();
@@ -46,8 +16,75 @@ if (!strstr($incPath, $libPath)) {
 require_once 'Zend/Loader/Autoloader.php';
 Zend\Loader\Autoloader::getInstance();
 
+$rules = array(
+    'library|l-s' => 'Library to parse; if none provided, assumes current directory',
+    'output|o-s'  => 'Where to write autoload file; if not provided, assumes "_autoload.php" in library directory',
+    'overwrite|w' => 'Whether or not to overwrite existing autoload file',
+    'keepdepth|k-i' => 'How many additional segments of the library path to keep in the generated classfile map',
+);
+
+try {
+    $opts = new Zend\Console\Getopt($rules);
+    $opts->parse();
+} catch (Zend\Console\Getopt\Exception $e) {
+    echo $e->getUsageMessage();
+    exit(2);
+}
+
+$path = $libPath;
+if (array_key_exists('PWD', $_SERVER)) {
+    $path = $_SERVER['PWD'];
+}
+if (isset($opts->l)) {
+    $path = $opts->l;
+    if (!is_dir($path)) {
+        echo "Invalid library directory provided" . PHP_EOL . PHP_EOL;
+        echo $opts->getUsageMessage();
+        exit(2);
+    }
+    $path = realpath($path);
+}
+
+$output = $path . DIRECTORY_SEPARATOR . '_autoload.php';
+if (isset($opts->o)) {
+    $output = $opts->o;
+    if ('-' == $output) {
+        $output = STDOUT;
+    } elseif (!is_writeable(dirname($output))) {
+        echo "Cannot write to '$output'; aborting." . PHP_EOL
+            . PHP_EOL
+            . $opts->getUsageMessage();
+        exit(2);
+    } elseif (file_exists($output)) {
+        if (!$opts->getOption('w')) {
+            echo "Autoload file already exists at '$output'," . PHP_EOL
+                . "but 'overwrite' flag was not specified; aborting." . PHP_EOL 
+                . PHP_EOL
+                . $opts->getUsageMessage();
+            exit(2);
+        }
+    }
+}
+
+$strip     = '';
+$keepDepth = 1;
+if (isset($opts->k)) {
+    $keepDepth = $opts->k;
+    if ($keepDepth < 0) {
+        $keepDepth = 0;
+    }
+}
+if ($keepDepth) {
+    $segments = explode(DIRECTORY_SEPARATOR, $path);
+    do {
+        array_pop($segments);
+        --$keepDepth;
+    } while (count($segments) > 0 && $keepDepth > 0);
+    $strip = implode(DIRECTORY_SEPARATOR, $segments);
+}
+
 // Get the ClassFileLocater, and pass it the library path
-$l = new \Zend\File\ClassFileLocater($libPath);
+$l = new \Zend\File\ClassFileLocater($path);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
@@ -60,12 +97,12 @@ iterator_apply($l, function(\Iterator $it, $strip, array $map) {
     $map[$namespace . $file->classname] = $filename;
 
     return true;
-}, array($l, $libPath . DIRECTORY_SEPARATOR, &$map));
+}, array($l, $strip . DIRECTORY_SEPARATOR, &$map));
 
 // Create a file with the class/file map.
 // Stupid syntax highlighters make separating < from PHP declaration necessary
 $content = '<' . "?php\n"
          . 'return ' . var_export($map, true) . ';';
-file_put_contents($libPath . '/Zend/_autoload.php', $content);
+file_put_contents($output, $content);
 
-echo "Wrote autoload file to " . realpath($filePath) . PHP_EOL;
+echo "Wrote autoload file to " . realpath($output) . PHP_EOL;

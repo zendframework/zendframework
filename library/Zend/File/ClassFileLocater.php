@@ -47,6 +47,7 @@ class ClassFileLocater extends FilterIterator
         }
 
         parent::__construct($iterator);
+        $this->rewind();
     }
 
     /**

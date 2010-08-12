@@ -22,7 +22,7 @@ class Psr0Autoloader implements Autoloadable
     const LOAD_PREFIX      = 'prefixes';
 
     /**
-     * @var array Namespace/directory pairs to search
+     * @var array Namespace/directory pairs to search; ZF library added by default
      */
     protected $namespaces = array();
 
@@ -39,6 +39,7 @@ class Psr0Autoloader implements Autoloadable
      */
     public function __construct(array $options = null)
     {
+        $this->registerNamespace('Zend', dirname(__DIR__));
         if (null !== $options) {
             foreach ($options as $type => $pairs) {
                 switch ($type) {
@@ -58,6 +59,23 @@ class Psr0Autoloader implements Autoloadable
     }
 
     /**
+     * Normalize the directory to include a trailing directory separator
+     * 
+     * @param  string $directory 
+     * @return string
+     */
+    protected function normalizeDirectory($directory)
+    {
+        $last = $directory[strlen($directory) - 1];
+        if (in_array($last, array('/', '\\'))) {
+            $directory[strlen($directory) - 1] = DIRECTORY_SEPARATOR;
+            return $directory;
+        }
+        $directory .= DIRECTORY_SEPARATOR;
+        return $directory;
+    }
+
+    /**
      * Register a namespace/directory pair
      * 
      * @param  string $namespace 
@@ -66,7 +84,8 @@ class Psr0Autoloader implements Autoloadable
      */
     public function registerNamespace($namespace, $directory)
     {
-        $this->namespaces[$namespace] = $directory;
+        $namespace = rtrim($namespace, self::NS_SEPARATOR). self::NS_SEPARATOR;
+        $this->namespaces[$namespace] = $this->normalizeDirectory($directory);
         return $this;
     }
 
@@ -93,7 +112,8 @@ class Psr0Autoloader implements Autoloadable
      */
     public function registerPrefix($prefix, $directory)
     {
-        $this->prefixes[$prefix] = $directory;
+        $namespace = rtrim($namespace, self::PREFIX_SEPARATOR). self::PREFIX_SEPARATOR;
+        $this->prefixes[$prefix] = $this->normalizeDirectory($directory);
         return $this;
     }
 

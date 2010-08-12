@@ -1,10 +1,9 @@
 <?php
-$classMap = include __DIR__ . '/../library/Zend/Controller/_autoload.php';
-spl_autoload_register(function($class) use ($classMap) {
-    if (array_key_exists($class, $classMap)) {
-        require_once $classMap[$class];
-    }
-});
+require_once __DIR__ . '/../library/Zend/Loader/ClassMapAutoloader.php';
+$loader = new Zend\Loader\ClassMapAutoloader();
+$loader->registerAutoloadMap(__DIR__ . '/../library/Zend/Controller/_autoload.php');
+$loader->register();
+
 if (!class_exists('Zend\Controller\Action')) {
     echo "Could not find action class?\n";
 } else {

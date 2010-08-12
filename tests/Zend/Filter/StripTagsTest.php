@@ -579,16 +579,6 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9434
-     */
-    public function testCommentWithTagInSameLine()
-    {
-        $input    = 'test <!-- testcomment --> test <div>div-content</div>';
-        $expected = 'test  test div-content';
-        $this->assertEquals($expected, $this->_filter->filter($input));
-    }
-
-    /**
      * @group ZF-9833
      */
     public function testMultiParamArray()
@@ -616,6 +606,4 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $expected = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
         $this->assertEquals($expected, $filter->filter($input));
     }
-}
-
 }

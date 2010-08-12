@@ -13,56 +13,66 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\Markup\TestAsset\Renderer\HTML;
-
-use Zend\Markup\Renderer\AbstractRenderer;
+namespace Zend\Stdlib;
 
 /**
- * Tag interface
+ * Serializable version of SplStack
  *
  * @category   Zend
- * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bar implements \Zend\Markup\Renderer\Markup
+class SplStack extends \SplStack
 {
-    public function setEncoding($encoding = 'UTF-8')
+    /**
+     * @var array Used in serialization
+     */
+    private $_data = array();
+
+    /**
+     * Serialize to an array representing the stack
+     * 
+     * @return void
+     */
+    public function toArray()
     {
-    }
-   
-    public function setRenderer(AbstractRenderer $renderer)
-    {
+        $array = array();
+        foreach ($this as $item) {
+            $array[] = $item;
+        }
+        return $array;
     }
 
     /**
-     * Convert the token
-     *
-     * @param Zend_Markup_Token $token
-     * @param string $text
-     *
-     * @return string
+     * Serialize
+     * 
+     * @return array
      */
-    public function __invoke(\Zend\Markup\Token $token, $text)
+    public function __sleep()
     {
-        $bar = $token->getAttribute('bar');
-
-        if (!empty($bar)) {
-            $bar = '=' . $bar;
-        }
-
-        return "[foo{$bar}]" . $text . '[/foo]';
+        $this->_data = $this->toArray();
+        return array('_data');
     }
 
+    /**
+     * Unserialize
+     * 
+     * @return void
+     */
+    public function __wakeup()
+    {
+        foreach ($this->_data as $item) {
+            $this->unshift($item);
+        }
+        $this->_data = array();
+    }
 }

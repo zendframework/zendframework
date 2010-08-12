@@ -20,37 +20,18 @@
  * @version    $Id$
  */
 
-namespace Bar;
+namespace Admin;
 
 /**
- * Mock file for testbed
- *
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class IndexController extends \Zend\Controller\Action
+class HelperController extends \Zend\Controller\Action
 {
-
-    /**
-     * Test Function for indexAction
-     *
-     * @return void
-     */
-    public function indexAction()
-    {
-        $this->_response->appendBody("Bar_IndexController::indexAction() called\n");
-    }
-
-    /**
-     * Test Function for testAction
-     *
-     * @return void
-     */
-    public function testAction()
+    public function renderAction()
     {
     }
-
 }

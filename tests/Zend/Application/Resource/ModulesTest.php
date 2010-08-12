@@ -36,7 +36,7 @@ use Zend\Loader\Autoloader,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class ModulesResourceTest extends \PHPUnit_Framework_TestCase
+class ModulesTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -133,7 +133,7 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
-        $this->assertArrayHasKey('default', (array)$bootstraps);
+        $this->assertArrayHasKey('application', (array)$bootstraps);
     }
 
     /**
@@ -153,6 +153,6 @@ class ModulesResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
-        $this->assertArrayHasKey('default', (array)$bootstraps);
+        $this->assertArrayHasKey('application', (array)$bootstraps);
     }
 }

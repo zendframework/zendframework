@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
+namespace Zend\Markup\Renderer\Markup\Html;
 
 use Zend\Markup\Renderer\Markup\AbstractMarkup,
     Zend\Markup;
@@ -34,11 +34,11 @@ use Zend\Markup\Renderer\Markup\AbstractMarkup,
  * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_HTML
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractHTML extends AbstractMarkup
+abstract class AbstractHtml extends AbstractMarkup
 {
 
     /**
@@ -54,7 +54,7 @@ abstract class AbstractHTML extends AbstractMarkup
      *
      * @param array $attributes
      *
-     * @return \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
+     * @return \Zend\Markup\Renderer\Markup\Html\AbstractHtml
      */
     public function setAttributes(array $attributes)
     {
@@ -69,7 +69,7 @@ abstract class AbstractHTML extends AbstractMarkup
      * @param string $name
      * @param string $value
      *
-     * @return \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
+     * @return \Zend\Markup\Renderer\Markup\Html\AbstractHtml
      */
     public function addAttribute($name, $value)
     {
@@ -83,7 +83,7 @@ abstract class AbstractHTML extends AbstractMarkup
      *
      * @param string $name
      *
-     * @return \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
+     * @return \Zend\Markup\Renderer\Markup\Html\AbstractHtml
      */
     public function removeAttribute($name)
     {

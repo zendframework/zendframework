@@ -350,6 +350,20 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');
         $this->assertEquals('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6', $writer->getId());
     }
+    
+    public function testSetsIdAcceptsSimpleTagUri()
+    {
+        $writer = new Writer\Feed;
+        $writer->setId('tag:example.org,2010:/foo/bar/');
+        $this->assertEquals('tag:example.org,2010:/foo/bar/', $writer->getId());
+    }
+    
+    public function testSetsIdAcceptsComplexTagUri()
+    {
+        $writer = new Writer\Feed;
+        $writer->setId('tag:diveintomark.org,2004-05-27:/archives/2004/05/27/howto-atom-linkblog');
+        $this->assertEquals('tag:diveintomark.org,2004-05-27:/archives/2004/05/27/howto-atom-linkblog', $writer->getId());
+    }
 
     public function testSetIdThrowsExceptionOnInvalidParameter()
     {

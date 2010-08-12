@@ -26,7 +26,7 @@
 namespace ZendTest\Markup;
 
 use Zend\Markup\Renderer\AbstractRenderer,
-    Zend\Markup\Renderer\HTML as HTMLRenderer,
+    Zend\Markup\Renderer\Html as HTMLRenderer,
     Zend\Filter;
 
 /**
@@ -55,7 +55,7 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_markup = \Zend\Markup\Markup::factory('BBCode', 'HTML');
+        $this->_markup = \Zend\Markup\Markup::factory('Bbcode', 'Html');
     }
 
     /**
@@ -131,8 +131,8 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
     public function testAddTags()
     {
         $this->_markup->getPluginLoader()->addPrefixPath(
-            'ZendTest\Markup\TestAsset\Renderer\HTML',
-            'Zend/Markup/TestAsset/Renderer/HTML'
+            'ZendTest\Markup\TestAsset\Renderer\Html',
+            'Zend/Markup/TestAsset/Renderer/Html'
         );
 
         $this->_markup->addMarkup(

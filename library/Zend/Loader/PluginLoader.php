@@ -389,7 +389,7 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
         foreach ($registry as $prefix => $paths) {
             $className = $prefix . $name;
 
-            if (class_exists($className, true)) {
+            if (class_exists($className, false)) {
                 $found = true;
                 break;
             }

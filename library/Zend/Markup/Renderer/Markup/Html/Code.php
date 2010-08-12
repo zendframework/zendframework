@@ -23,14 +23,13 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
-use Zend\Markup\Token;
+namespace Zend\Markup\Renderer\Markup\Html;
+use Zend\Markup;
 
 /**
- * URL markup for HTML
+ * Code markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\HTML
- * @uses       \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
+ * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -38,7 +37,7 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URL extends AbstractHTML
+class Code extends AbstractHtml
 {
 
     /**
@@ -49,29 +48,8 @@ class URL extends AbstractHTML
      *
      * @return string
      */
-    public function __invoke(Token $token, $text)
+    public function __invoke(Markup\Token $token, $text)
     {
-        if ($token->hasAttribute('url')) {
-            $uri = $token->getAttribute('url');
-        } else {
-            $uri = $text;
-        }
-
-        if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
-            $uri = 'http://' . $uri;
-        }
-
-        // check if the URL is valid
-        // TODO: use the new Zend\Uri for this
-        if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
-            return $text;
-        }
-
-        $attributes = $this->renderAttributes($token);
-
-        // run the URI through htmlentities
-        $uri = htmlentities($uri, ENT_QUOTES, $this->getEncoding());
-
-        return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
+        return highlight_string($text, true);
     }
 }

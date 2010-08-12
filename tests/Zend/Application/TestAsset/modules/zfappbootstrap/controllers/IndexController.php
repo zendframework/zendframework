@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+namespace Zfappbootstrap;
 use Zend\Controller\Action as ActionController;
 
 /**
@@ -29,7 +30,7 @@ use Zend\Controller\Action as ActionController;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zfappbootstrap_IndexController extends ActionController
+class IndexController extends ActionController
 {
     public function indexAction()
     {

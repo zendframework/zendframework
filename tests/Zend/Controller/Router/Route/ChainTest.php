@@ -400,7 +400,7 @@ class ChainTest extends \PHPUnit_Framework_TestCase
         $request = new Request('http://foo.example.com/imprint');
         $token   = $router->route($request);
 
-        $this->assertEquals('default', $token->getModuleName());
+        $this->assertEquals('application', $token->getModuleName());
         $this->assertEquals('imprint', $token->getControllerName());
         $this->assertEquals('defact',  $token->getActionName());
     }

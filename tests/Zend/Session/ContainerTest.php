@@ -379,4 +379,68 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $this->container->bar);
         $this->assertNull($this->container->baz);
     }
+
+    public function testCanIterateOverContainer()
+    {
+        $this->container->foo = 'bar';
+        $this->container->bar = 'baz';
+        $this->container->baz = 'bat';
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+            'baz' => 'bat',
+        );
+        $test = array();
+        foreach ($this->container as $key => $value) {
+            $test[$key] = $value;
+        }
+        $this->assertSame($expected, $test);
+    }
+
+    public function testIterationHonorsExpirationHops()
+    {
+        $this->container->foo = 'bar';
+        $this->container->bar = 'baz';
+        $this->container->baz = 'bat';
+        $this->container->setExpirationHops(1, array('foo', 'baz'));
+
+        $storage = $this->manager->getStorage();
+        $ts = $storage->getRequestAccessTime();
+
+        // First hop
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 60);
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+            'baz' => 'bat',
+        );
+        $test = array();
+        foreach ($this->container as $key => $value) {
+            $test[$key] = $value;
+        }
+        $this->assertSame($expected, $test);
+
+        // Second hop
+        $storage->setMetadata('_REQUEST_ACCESS_TIME', $ts + 120);
+        $expected = array('bar' => 'baz');
+        $test = array();
+        foreach ($this->container as $key => $value) {
+            $test[$key] = $value;
+        }
+        $this->assertSame($expected, $test);
+    }
+
+    public function testIterationHonorsExpirationTimestamps()
+    {
+        $this->container->foo = 'bar';
+        $this->container->bar = 'baz';
+        $storage = $this->manager->getStorage();
+        $storage->setMetadata('Default', array('EXPIRE_KEYS' => array('foo' => $_SERVER['REQUEST_TIME'] - 18600)));
+        $expected = array('bar' => 'baz');
+        $test     = array();
+        foreach ($this->container as $key => $value) {
+            $test[$key] =  $value;
+        }
+        $this->assertSame($expected, $test);
+    }
 }

@@ -139,10 +139,6 @@ class ProjectProviderFile extends \Zend\Tool\Project\Context\Filesystem\File
         }
 
         $codeGenFile = new \Zend\CodeGenerator\Php\PhpFile(array(
-            'requiredFiles' => array(
-                'Zend/Tool/Project/Provider/Abstract.php',
-                'Zend/Tool/Project/Provider/Exception.php'
-                ),
             'classes' => array($class)
             ));
 

@@ -13,23 +13,56 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ * @package    Zend_Markup
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Markup\TestAsset\Renderer\Html;
+
+use Zend\Markup\Renderer\AbstractRenderer;
+
+/**
+ * Tag interface
+ *
  * @category   Zend
- * @package    Zend_Controller
- * @subpackage UnitTests
+ * @package    Zend_Markup
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Admin_HelperController extends \Zend\Controller\Action
+class Bar implements \Zend\Markup\Renderer\Markup
 {
-    public function renderAction()
+    public function setEncoding($encoding = 'UTF-8')
     {
     }
+   
+    public function setRenderer(AbstractRenderer $renderer)
+    {
+    }
+
+    /**
+     * Convert the token
+     *
+     * @param Zend_Markup_Token $token
+     * @param string $text
+     *
+     * @return string
+     */
+    public function __invoke(\Zend\Markup\Token $token, $text)
+    {
+        $bar = $token->getAttribute('bar');
+
+        if (!empty($bar)) {
+            $bar = '=' . $bar;
+        }
+
+        return "[foo{$bar}]" . $text . '[/foo]';
+    }
+
 }

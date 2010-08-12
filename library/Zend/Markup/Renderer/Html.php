@@ -43,7 +43,7 @@ use Zend\Markup\Token,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HTML extends AbstractRenderer
+class Html extends AbstractRenderer
 {
 
     /**
@@ -95,7 +95,7 @@ class HTML extends AbstractRenderer
         }
 
         $this->_pluginLoader = new PluginLoader(array(
-            'Zend\Markup\Renderer\Markup\HTML' => 'Zend/Markup/Renderer/Markup/HTML/'
+            'Zend\Markup\Renderer\Markup\Html' => 'Zend/Markup/Renderer/Markup/Html/'
         ));
 
         if (!isset($options['useDefaultMarkups']) && isset($options['useDefaultTags'])) {
@@ -220,10 +220,6 @@ class HTML extends AbstractRenderer
             ),
             // callback tags
             'url' => array(
-                'type'     => 16, // self::TYPE_ALIAS
-                'name'     => 'URL',
-            ),
-            'URL' => array(
                 'type'     => 6, // self::TYPE_CALLBACK | self::TAG_NORMAL
                 'callback' => null,
                 'group'    => 'inline',

@@ -96,7 +96,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
         ));
         $resource->init();
         $front = $resource->getFrontController();
-        $dir   = $front->getControllerDirectory('default');
+        $dir   = $front->getControllerDirectory('application');
         $this->assertEquals(__DIR__, $dir);
     }
 
@@ -157,9 +157,9 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
             'bar'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                        . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'bar' . DIRECTORY_SEPARATOR . 'controllers',
-            'default' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+            'application' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                        . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
-                       . 'default' . DIRECTORY_SEPARATOR . 'controllers',
+                       . 'application' . DIRECTORY_SEPARATOR . 'controllers',
             'foo-bar' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                        . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'foo-bar' . DIRECTORY_SEPARATOR . 'controllers',

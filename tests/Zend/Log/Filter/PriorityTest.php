@@ -67,7 +67,7 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
             'writerName' => "Mock", 
             'filterName' => "Priority", 
             'filterParams' => array(
-                'priority' => "\\Zend\\Log\\Logger::CRIT", 
+                'priority' => '\Zend\Log\Logger::CRIT', 
                 'operator' => "<="
              ),        
         )));
@@ -78,7 +78,7 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryRaisesExceptionWithInvalidPriority()
     {
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'must be an integer');
+        $this->setExpectedException('\Zend\Log\Exception', 'must be an integer');
         $logger = Logger::factory(array('Null' => array(
             'writerName'   => 'Mock',
             'filterName'   => 'Priority',

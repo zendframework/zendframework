@@ -82,4 +82,12 @@ class MockParser implements Parser
 
         return $tree;
     }
+
+    public function buildTree(array $tokens, $strategy = 'default')
+    {
+    }
+
+    public function tokenize($value)
+    {
+    }
 }

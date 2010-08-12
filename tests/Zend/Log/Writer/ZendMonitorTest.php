@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+namespace ZendTest\Log\Writer;
+
 /** PHPUnit_Framework_TestCase */
 require_once 'PHPUnit/Framework/TestCase.php';
 
@@ -34,14 +36,14 @@ require_once 'Zend/Log/Writer/ZendMonitor.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class Zend_Log_Writer_ZendMonitorTest extends PHPUnit_Framework_TestCase
+class ZendMonitorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group ZF-10081
      */
     public function testWrite()
     {
-        $writer = new Zend_Log_Writer_ZendMonitor();
+        $writer = new \Zend\Log\Writer\ZendMonitor();
         $writer->write(array('message' => 'my mess', 'priority' => 1));
     }
 
@@ -49,13 +51,13 @@ class Zend_Log_Writer_ZendMonitorTest extends PHPUnit_Framework_TestCase
     {
         $cfg = array();
 
-        $writer = Zend_Log_Writer_ZendMonitor::factory($cfg);
-        $this->assertTrue($writer instanceof Zend_Log_Writer_ZendMonitor);
+        $writer = \Zend\Log\Writer\ZendMonitor::factory($cfg);
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\ZendMonitor);
     }
 
     public function testIsEnabled()
     {
-        $writer = new Zend_Log_Writer_ZendMonitor();
+        $writer = new \Zend\Log\Writer\ZendMonitor();
         $this->assertType('boolean', $writer->isEnabled());
     }
 }

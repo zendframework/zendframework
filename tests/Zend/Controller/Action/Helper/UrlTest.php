@@ -87,7 +87,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
     public function testSimpleWithDefaultModuleProducesURLWithoutModuleSegment()
     {
-        $url = $this->helper->simple('baz', 'bar', 'default', array('bat' => 'foo', 'ho' => 'hum'));
+        $url = $this->helper->simple('baz', 'bar', 'application', array('bat' => 'foo', 'ho' => 'hum'));
         $this->assertEquals('/bar/baz', substr($url, 0, 8));
     }
 

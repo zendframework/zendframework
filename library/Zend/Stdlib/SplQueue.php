@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,53 +21,58 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
-use Zend\Markup;
+namespace Zend\Stdlib;
 
 /**
- * Simple replace markup for HTML
+ * Serializable version of SplQueue
  *
- * @uses       \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
- * @uses       \Zend\Markup\Token
  * @category   Zend
- * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Replace extends AbstractHTML
+class SplQueue extends \SplQueue
 {
-
     /**
-     * Markup's replacement
-     *
-     * @var string
+     * @var array Used for serialization
      */
-    protected $_replace;
-
+    private $_data = array();
 
     /**
-     * Constructor
-     *
-     * @param string $replace
+     * Return an array representing the queue
      * 
-     * @return void
+     * @return array
      */
-    public function __construct($replace)
+    public function toArray()
     {
-        $this->_replace = $replace;
+        $array = array();
+        foreach ($this as $item) {
+            $array[] = $item;
+        }
+        return $array;
     }
 
     /**
-     * Invoke the markup on the token
-     *
-     * @param \Zend\Markup\Token $token
-     * @param string $text
-     *
-     * @return string
+     * Serialize
+     * 
+     * @return array
      */
-    public function __invoke(Markup\Token $token, $text)
+    public function __sleep()
     {
-        return "<{$this->_replace}>{$text}</{$this->_replace}>";
+        $this->_data = $this->toArray();
+        return array('_data');
+    }
+
+    /**
+     * Unserialize
+     * 
+     * @return void
+     */
+    public function __wakeup()
+    {
+        foreach ($this->_data as $item) {
+            $this->push($item);
+        }
+        $this->_data = array();
     }
 }

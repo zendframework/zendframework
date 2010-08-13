@@ -177,7 +177,7 @@ class Mvc extends AbstractPage
 
         if (null === self::$_urlHelper) {
             self::$_urlHelper =
-                \Zend\Controller\Action\HelperBroker::getStaticHelper('URL');
+                \Zend\Controller\Action\HelperBroker::getStaticHelper('url');
         }
 
         $params = $this->getParams();
@@ -197,7 +197,7 @@ class Mvc extends AbstractPage
         $url = self::$_urlHelper->__invoke($params,
                                       $this->getRoute(),
                                       $this->getResetParams());
-//var_dump($url);
+
         return $this->_hrefCache = $url;
     }
 

@@ -101,7 +101,7 @@ class Db extends AbstractWriter
     /**
      * Formatting is not possible on this writer
      */
-    public function setFormatter(Zend_Log_Formatter_Interface $formatter)
+    public function setFormatter(\Zend\Log\Formatter $formatter)
     {
         throw new Log\Exception(get_class() . ' does not support formatting');
     }

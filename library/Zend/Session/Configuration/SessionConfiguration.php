@@ -25,7 +25,7 @@
 namespace Zend\Session\Configuration;
 
 use Zend\Validator\Hostname\Hostname as HostnameValidator,
-    Zend\Session\Exception as SessionException;;
+    Zend\Session\Exception as SessionException;
 
 /**
  * Session configuration proxying to session INI options 

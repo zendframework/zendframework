@@ -55,6 +55,11 @@ To run tests:
 
    % phpunit --group Zend_Application
 
+   This will likely lead to errors, so it's usually best to specify a
+   specific component in which to run test:
+
+   % phpunit --group ZF-XYZ Zend/Application
+
 You can turn on conditional tests with the TestConfiguration.php file.
 To do so:
 

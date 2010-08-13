@@ -270,14 +270,18 @@ class Server implements \Zend\Server\Server
             return true;
         }
         if($object) {
-            $class = is_object($object)?get_class($object):$object;
+            $isObject = is_object($object);
+            $class    = ($isObject) ? get_class($object) : $object;
             if(!$this->_acl->hasResource($class)) {
                 $this->_acl->addResource(new \Zend\Acl\Resource\GenericResource($class));
             }
-            $call = array($object, "initAcl");
-            if(is_callable($call) && !call_user_func($call, $this->_acl)) {
+            if (method_exists($object, 'initAcl')) {
                 // if initAcl returns false, no ACL check
-                return true;
+                if ($isObject && $object->initAcl($this->_acl)) {
+                    return true;
+                } elseif ($class::initAcl($this->_acl)) {
+                    return true;
+                }
             }
         } else {
             $class = null;

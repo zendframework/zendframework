@@ -7,6 +7,14 @@ Zend Framework 2.0.0dev1
 THIS RELEASE IS A DEVELOPMENT RELEASE AND NOT INTENDED FOR PRODUCTION USE.
 PLEASE USE AT YOUR OWN RISK.
 
+At this time, we have tested all functionality of Zend\Tool, and followed the
+Quick Start application instructions, and all functionality works as it did in
+the ZF1 series of releases. However, most Zend\Service components have not been
+migrated to namespaces, and Zend\Db has not been completely vetted (in favor of
+doing a complete refactor). Again, please use at your own risk, and be prepared
+for major changes in APIs in the development and alpha milestones prior to the
+first beta release.
+
 NEW FEATURES
 ------------
 
@@ -23,6 +31,13 @@ INSTALLATION
 ------------
 
 Please see INSTALL.txt.
+
+CONTRIBUTING
+------------
+
+If you wish to contribute to Zend Framework 2.0, please make sure you have
+signed a CLA (http://framework.zend.com/cla), and please read both the
+README-DEV.txt and README-GIT.txt file.
 
 QUESTIONS AND FEEDBACK
 ----------------------

@@ -173,8 +173,9 @@ class Date extends AbstractValidator
 
         $this->_setValue($value);
 
-        if (($this->_format !== null) || ($this->_locale !== null) || is_array($value) ||
-             $value instanceof Date\Date) {
+        if (($this->_format !== null) || ($this->_locale !== null) 
+            || is_array($value) || $value instanceof Date\Date
+        ) {
             if (!ZendDate\Date::isDate($value, $this->_format, $this->_locale)) {
                 if ($this->_checkFormat($value) === false) {
                     $this->_error(self::FALSEFORMAT);

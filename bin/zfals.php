@@ -119,10 +119,10 @@ iterator_apply($l, function(\Iterator $it, array $map, $strip) {
 $map     = var_export($map, true);
 $content =<<<EOT
 <?php
-spl_autoload_register(function(\$class) {
-    static \$map = $map;
-    if (array_key_exists(\$class, \$map)) {
-        require_once \$map[\$class];
+\$_map = $map;
+spl_autoload_register(function(\$class) use (\$_map) {
+    if (array_key_exists(\$class, \$_map)) {
+        require_once \$_map[\$class];
     }
 });
 EOT;

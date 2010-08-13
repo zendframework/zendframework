@@ -17,6 +17,7 @@ require_once 'Zend/Loader/Autoloader.php';
 Zend\Loader\Autoloader::getInstance();
 
 $rules = array(
+    'help|h'        => 'Get usage message',
     'library|l-s'   => 'Library to parse; if none provided, assumes current directory',
     'output|o-s'    => 'Where to write autoload file; if not provided, assumes "_autoload.php" in library directory',
     'overwrite|w'   => 'Whether or not to overwrite existing autoload file',
@@ -30,6 +31,11 @@ try {
 } catch (Zend\Console\Getopt\Exception $e) {
     echo $e->getUsageMessage();
     exit(2);
+}
+
+if ($opts->getOption('h')) {
+    echo $opts->getUsageMessage();
+    exit();
 }
 
 $path = $libPath;

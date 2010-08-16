@@ -19,6 +19,7 @@ Zend\Loader\Autoloader::getInstance();
 $rules = array(
     'help|h'        => 'Get usage message',
     'library|l-s'   => 'Library to parse; if none provided, assumes current directory',
+    'namespace|n-s' => 'Namespace in which to create map; by default, uses last segment of library directory name',
     'output|o-s'    => 'Where to write autoload file; if not provided, assumes "_autoload.php" in library directory',
     'overwrite|w'   => 'Whether or not to overwrite existing autoload file',
     'keepdepth|k-i' => 'How many additional segments of the library path to keep in the generated classfile map',
@@ -50,6 +51,20 @@ if (isset($opts->l)) {
         exit(2);
     }
     $path = realpath($path);
+}
+
+$namespace = substr($path, strrpos($path, DIRECTORY_SEPARATOR) + 1);
+if (isset($opts->n)) {
+    $tmp = $opts->n;
+    if (!empty($tmp)) {
+        if (!preg_match('#^[a-z][a-z0-9]*(\\\\[a-z][a-z[0-9_]])*#', $tmp)) {
+            echo "Invalid namespace provided; aborting." . PHP_EOL
+                . PHP_EOL
+                . $opts->getUsageMessage();
+            exit(2);
+        }
+        $namespace = $tmp;
+    }
 }
 
 $usingStdout = false;
@@ -103,22 +118,24 @@ $l = new \Zend\File\ClassFileLocater($path);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
-$map   = array();
-iterator_apply($l, function(\Iterator $it, array $map, $strip) {
-    $file      = $it->current();
+$map    = new \stdClass;
+$strip .= DIRECTORY_SEPARATOR;
+iterator_apply($l, function() use ($l, $map, $strip){
+    $file      = $l->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getRealpath());
 
-    $map[$namespace . $file->classname] = $filename;
+    $map->{$namespace . $file->classname} = $filename;
 
     return true;
-}, array($l, &$map, $strip . DIRECTORY_SEPARATOR));
+});
 
 // Create a file with the class/file map.
 // Stupid syntax highlighters make separating < from PHP declaration necessary
-$map     = var_export($map, true);
+$map     = var_export((array) $map, true);
 $content =<<<EOT
 <?php
+namespace $namespace;
 \$_map = $map;
 spl_autoload_register(function(\$class) use (\$_map) {
     if (array_key_exists(\$class, \$_map)) {

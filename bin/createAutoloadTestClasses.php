@@ -3,14 +3,14 @@
  * createAutoloadTestClasses.php
  *
  * A script for creating a hierarchy of classes for use with testing 
- * autoloading. Each directory has classes from a to z; additional classes are 
- * generated 2 levels deep, giving a total of 26^3 classes to use in 
+ * autoloading. Each directory has classes from a to p; additional classes are 
+ * generated 2 levels deep, giving a total of 16^3 classes to use in 
  * autoloading tests.
  */
 
 function createClasses($depth, $namespace)
 {
-    foreach (range('a', 'z') as $letter) {
+    foreach (range('a', 'p') as $letter) {
         // Create content for namespaced class
         $content =<<<EOT
 <?php

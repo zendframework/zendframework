@@ -103,21 +103,22 @@ $l = new \Zend\File\ClassFileLocater($path);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
-$map   = array();
-iterator_apply($l, function(\Iterator $it, array $map, $strip) {
-    $file      = $it->current();
+$map    = new \stdClass;
+$strip .= DIRECTORY_SEPARATOR;
+iterator_apply($l, function() use ($l, $map, $strip){
+    $file      = $l->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getRealpath());
 
-    $map[$namespace . $file->classname] = $filename;
+    $map->{$namespace . $file->classname} = $filename;
 
     return true;
-}, array($l, &$map, $strip . DIRECTORY_SEPARATOR));
+});
 
 // Create a file with the class/file map.
 // Stupid syntax highlighters make separating < from PHP declaration necessary
 $content = '<' . "?php\n"
-         . 'return ' . var_export($map, true) . ';';
+         . 'return ' . var_export((array) $map, true) . ';';
 // If requested to prefix with __DIR__, modify the content
 if ($prefixWithDir) {
     $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);

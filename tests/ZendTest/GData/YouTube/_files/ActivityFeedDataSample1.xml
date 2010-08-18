@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+  xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/'
+  xmlns:gml='http://www.opengis.net/gml'
+  xmlns:georss='http://www.georss.org/georss'
+  xmlns:media='http://search.yahoo.com/mrss/'
+  xmlns:batch='http://schemas.google.com/gdata/batch'
+  xmlns:yt='http://gdata.youtube.com/schemas/2007'
+  xmlns:gd='http://schemas.google.com/g/2005'
+  gd:etag='W/"D0EGSH47eCp7ImA9WxRVGEg.&quot;'>
+  <updated>2009-01-28T09:13:49.000-08:00</updated>
+<link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/events?v=2'/><link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/events/batch?v=2'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/events?author=gdpython&amp;start-index=1&amp;max-results=25&amp;v=2'/><link rel='service' type='application/atomsvc+xml' href='http://gdata.youtube.com/feeds/api/events?alt=atom-service&amp;v=2'/>
+
+
+
+  <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://gdata.youtube.com/schemas/2007#userEvent'/>
+  <title>Activity of tayzonzay</title>
+  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+  <author>
+    <name>YouTube</name>
+    <uri>http://www.youtube.com/</uri>
+  </author>
+  <generator version='2.0' uri='http://gdata.youtube.com/'>YouTube data API</generator>
+  <openSearch:totalResults>12</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry gd:etag='W/"D0EGSH47eCp7ImA9WxRQQEg."'>
+    <updated>2009-01-16T09:13:49.000-08:00</updated>
+    <category scheme='http://gdata.youtube.com/schemas/2007/userevents.cat'
+      term='video_favorited'/>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+      term='http://gdata.youtube.com/schemas/2007#userEvent'/>
+    <title>tayzonzay has favorited a video</title>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com'/>
+    <link rel='http://gdata.youtube.com/schemas/2007#video'
+      type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/z3U0kuLH974?v=2'/>
+    <link rel='self' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/events/VGF5Wm9uZGF5MzEyaIl2MTMxOTcxMDk3NzQ5MzM%3D?v=2'/>
+    <author>
+      <name>tayzonzay</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/tayzonzay</uri>
+    </author>
+    <yt:videoid>z3U0kuLH974</yt:videoid>
+  </entry>
+</feed>

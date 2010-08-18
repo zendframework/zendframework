@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users type="array">
+<user>
+  <id>783214</id>
+  <name>Twitter</name>
+  <screen_name>twitter</screen_name>
+  <location>San Francisco, CA</location>
+  <description>Always wondering what's happening. </description>
+  <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+  <url>http://twitter.com</url>
+  <protected>false</protected>
+  <followers_count>3230113</followers_count>
+  <profile_background_color>ACDED6</profile_background_color>
+  <profile_text_color>333333</profile_text_color>
+  <profile_link_color>038543</profile_link_color>
+  <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+  <friends_count>247</friends_count>
+  <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+  <favourites_count>2</favourites_count>
+  <utc_offset>-28800</utc_offset>
+  <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme18/bg.gif</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications/>
+  <geo_enabled>false</geo_enabled>
+  <verified>true</verified>
+  <following/>
+  <statuses_count>745</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>true</contributors_enabled>
+  <status>
+    <created_at>Fri May 28 21:14:05 +0000 2010</created_at>
+    <id>14932507266</id>
+    <text>Good news for people everywhere http://bit.ly/b1Cf9A</text>
+    <source>web</source>
+    <truncated>false</truncated>
+    <in_reply_to_status_id/>
+    <in_reply_to_user_id/>
+    <favorited>false</favorited>
+    <in_reply_to_screen_name/>
+    <geo/>
+    <coordinates/>
+    <place/>
+    <contributors>
+      <user_id>16739704</user_id>
+    </contributors>
+  </status>
+</user>
+<user>
+  <id>16136505</id>
+  <name>Nate Harding</name>
+  <screen_name>nateharding</screen_name>
+  <location>East Side</location>
+  <description>where we pick cash from the money tree of internet marketing...metaphorically speaking of course,</description>
+  <profile_image_url>http://s.twimg.com/a/1274899949/images/default_profile_0_normal.png</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>28</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>4</friends_count>
+  <created_at>Thu Sep 04 22:37:58 +0000 2008</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset>-18000</utc_offset>
+  <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>460</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+  <status>
+    <created_at>Sat Feb 20 09:25:54 +0000 2010</created_at>
+    <id>9377514336</id>
+    <text>Wuttup Twitter World?  Hey, @robertplank how'd the webinar go?  I couldn't make it.  Is there a recording I can check out?</text>
+    <source>web</source>
+    <truncated>false</truncated>
+    <in_reply_to_status_id/>
+    <in_reply_to_user_id/>
+    <favorited>false</favorited>
+    <in_reply_to_screen_name/>
+    <geo/>
+    <coordinates/>
+    <place/>
+    <contributors/>
+  </status>
+</user>
+<user>
+  <id>23836616</id>
+  <name>Ian McGahon</name>
+  <screen_name>ianmcgahon</screen_name>
+  <location>Bray, Co Wicklow, Ireland</location>
+  <description/>
+  <profile_image_url>http://a1.twimg.com/profile_images/623139340/ian_normal.jpg</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>211</followers_count>
+  <profile_background_color>C6E2EE</profile_background_color>
+  <profile_text_color>663B12</profile_text_color>
+  <profile_link_color>1F98C7</profile_link_color>
+  <profile_sidebar_fill_color>DAECF4</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>C6E2EE</profile_sidebar_border_color>
+  <friends_count>332</friends_count>
+  <created_at>Wed Mar 11 21:46:11 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset>0</utc_offset>
+  <time_zone>Dublin</time_zone>
+  <profile_background_image_url>http://a3.twimg.com/profile_background_images/5566801/n52950876433_9929.jpg</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>561</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+  <status>
+    <created_at>Sun May 30 14:30:18 +0000 2010</created_at>
+    <id>15044593156</id>
+    <text>@ChristineBohan ;-) - A Libertarian in FF! - The increasing amount of libertarians astounds me, perhaps I'm just reading too much boards.ie</text>
+    <source>web</source>
+    <truncated>false</truncated>
+    <in_reply_to_status_id>14999351526</in_reply_to_status_id>
+    <in_reply_to_user_id>14395202</in_reply_to_user_id>
+    <favorited>false</favorited>
+    <in_reply_to_screen_name>ChristineBohan</in_reply_to_screen_name>
+    <geo/>
+    <coordinates/>
+    <place/>
+    <contributors/>
+  </status>
+</user>
+<user>
+  <id>40165170</id>
+  <name>Richard Lee</name>
+  <screen_name>RichardLee4</screen_name>
+  <location/>
+  <description/>
+  <profile_image_url>http://s.twimg.com/a/1274899949/images/default_profile_3_normal.png</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>10</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>2</friends_count>
+  <created_at>Fri May 15 03:25:00 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset/>
+  <time_zone/>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>277</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+  <status>
+    <created_at>Thu Oct 15 23:34:39 +0000 2009</created_at>
+    <id>4901594956</id>
+    <text>Road_and_Track: SNOUJMESNOUMESNOUME</text>
+    <source>&lt;a href="/devices" rel="nofollow"&gt;txt&lt;/a&gt;</source>
+    <truncated>false</truncated>
+    <in_reply_to_status_id/>
+    <in_reply_to_user_id/>
+    <favorited>false</favorited>
+    <in_reply_to_screen_name/>
+    <geo/>
+    <coordinates/>
+    <place/>
+    <contributors/>
+  </status>
+</user>
+<user>
+  <id>56212353</id>
+  <name>Wicked Girl</name>
+  <screen_name>KelliKanyon5</screen_name>
+  <location/>
+  <description>I love to Swallow</description>
+  <profile_image_url>http://a3.twimg.com/profile_images/310487971/member5_normal.jpg</profile_image_url>
+  <url>http://www.Kellikanyon.net</url>
+  <protected>false</protected>
+  <followers_count>0</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>0</friends_count>
+  <created_at>Sun Jul 12 22:39:28 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset/>
+  <time_zone/>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>2381</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+</user>
+<user>
+  <id>56703639</id>
+  <name>s r</name>
+  <screen_name>smrn9290</screen_name>
+  <location/>
+  <description/>
+  <profile_image_url>http://s.twimg.com/a/1274144130/images/default_profile_6_normal.png</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>858</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>0</friends_count>
+  <created_at>Tue Jul 14 14:13:36 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset/>
+  <time_zone/>
+  <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>76801</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+  <status>
+    <created_at>Thu Apr 29 22:31:28 +0000 2010</created_at>
+    <id>13093509801</id>
+    <text>Society - WoW Gold Wizard World Of Warcraft Complete Auction House Farming Guide. http://tinyurl.com/22v3rhe</text>
+    <source>&lt;a href="http://www.ping.fm/" rel="nofollow"&gt;Ping.fm&lt;/a&gt;</source>
+    <truncated>false</truncated>
+    <in_reply_to_status_id/>
+    <in_reply_to_user_id/>
+    <favorited>false</favorited>
+    <in_reply_to_screen_name/>
+    <geo/>
+    <coordinates/>
+    <place/>
+    <contributors/>
+  </status>
+</user>
+<user>
+  <id>63492591</id>
+  <name>Billy Jacobs</name>
+  <screen_name>billy_ja</screen_name>
+  <location>New York</location>
+  <description>I'm a lawyer. I love women and good food, and I love Ney York's bars.</description>
+  <profile_image_url>http://a1.twimg.com/profile_images/351857976/dork1_normal.jpg</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>0</followers_count>
+  <profile_background_color>352726</profile_background_color>
+  <profile_text_color>3E4415</profile_text_color>
+  <profile_link_color>D02B55</profile_link_color>
+  <profile_sidebar_fill_color>99CC33</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>829D5E</profile_sidebar_border_color>
+  <friends_count>0</friends_count>
+  <created_at>Thu Aug 06 17:50:22 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset>-18000</utc_offset>
+  <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme5/bg.gif</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>5680</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+</user>
+<user>
+  <id>82974000</id>
+  <name>gWave Hottie</name>
+  <screen_name>gWaveHottie</screen_name>
+  <location/>
+  <description/>
+  <profile_image_url>http://a1.twimg.com/profile_images/475062666/sexy_pink_lips_real_large_normal.jpg</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>9</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>39</friends_count>
+  <created_at>Fri Oct 16 21:09:46 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset/>
+  <time_zone/>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>188</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+  <status>
+    <created_at>Mon May 03 17:08:38 +0000 2010</created_at>
+    <id>13315799357</id>
+    <text>RT @dealsplus: Win an Apple iPhone today! Just retweet this and follow @dealsplus to be entered. Details here: http://bit.ly/9aq1Su  #Ap ...</text>
+    <source>&lt;a href="http://apiwiki.twitter.com/" rel="nofollow"&gt;API&lt;/a&gt;</source>
+    <truncated>true</truncated>
+    <in_reply_to_status_id/>
+    <in_reply_to_user_id/>
+    <favorited>false</favorited>
+    <in_reply_to_screen_name/>
+    <retweeted_status>
+      <created_at>Mon May 03 14:23:18 +0000 2010</created_at>
+      <id>13307896708</id>
+      <text>Win an Apple iPhone today! Just retweet this and follow @dealsplus to be entered. Details here: http://bit.ly/9aq1Su  #Apple #iPhone</text>
+      <source>web</source>
+      <truncated>false</truncated>
+      <in_reply_to_status_id/>
+      <in_reply_to_user_id/>
+      <favorited>false</favorited>
+      <in_reply_to_screen_name/>
+      <geo/>
+      <coordinates/>
+      <place/>
+      <contributors/>
+    </retweeted_status>
+    <geo/>
+    <coordinates/>
+    <place/>
+    <contributors/>
+  </status>
+</user>
+<user>
+  <id>89470889</id>
+  <name>ARBITRARY</name>
+  <screen_name>the_arbitrator</screen_name>
+  <location/>
+  <description>EVERYTHING IS ARBITRARY</description>
+  <profile_image_url>http://a3.twimg.com/profile_images/523546277/IMG_0972_c_normal.jpg</profile_image_url>
+  <url>http://everythingisarbitrary.com</url>
+  <protected>false</protected>
+  <followers_count>0</followers_count>
+  <profile_background_color>C0DEED</profile_background_color>
+  <profile_text_color>333333</profile_text_color>
+  <profile_link_color>0084B4</profile_link_color>
+  <profile_sidebar_fill_color>DDEEF6</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>C0DEED</profile_sidebar_border_color>
+  <friends_count>0</friends_count>
+  <created_at>Thu Nov 12 15:37:58 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset>-21600</utc_offset>
+  <time_zone>Central Time (US &amp; Canada)</time_zone>
+  <profile_background_image_url>http://a3.twimg.com/profile_background_images/53416759/IMG_0988.jpg</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>24065</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+</user>
+<user>
+  <id>89781386</id>
+  <name>CockSuckBritney</name>
+  <screen_name>mkrxwnhuovet</screen_name>
+  <location/>
+  <description/>
+  <profile_image_url>http://a3.twimg.com/profile_images/525201671/pic_normal.jpg</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>0</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>0</friends_count>
+  <created_at>Fri Nov 13 20:08:25 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset/>
+  <time_zone/>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>130</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+</user>
+<user>
+  <id>92871705</id>
+  <name>metric60923</name>
+  <screen_name>metric60923</screen_name>
+  <location/>
+  <description/>
+  <profile_image_url>http://a1.twimg.com/profile_images/545691202/pic_normal.jpg</profile_image_url>
+  <url>http://cli.gs/NhRYM</url>
+  <protected>false</protected>
+  <followers_count>0</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>0</friends_count>
+  <created_at>Fri Nov 27 00:57:21 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset>-32400</utc_offset>
+  <time_zone>Alaska</time_zone>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>913</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+</user>
+<user>
+  <id>94547675</id>
+  <name>rendition96892</name>
+  <screen_name>rendition96892</screen_name>
+  <location/>
+  <description/>
+  <profile_image_url>http://s.twimg.com/a/1274899949/images/default_profile_5_normal.png</profile_image_url>
+  <url/>
+  <protected>false</protected>
+  <followers_count>0</followers_count>
+  <profile_background_color>9ae4e8</profile_background_color>
+  <profile_text_color>000000</profile_text_color>
+  <profile_link_color>0000ff</profile_link_color>
+  <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+  <friends_count>0</friends_count>
+  <created_at>Fri Dec 04 12:22:10 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset/>
+  <time_zone/>
+  <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme1/bg.png</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>128</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+</user>
+<user>
+  <id>95515577</id>
+  <name>Bob</name>
+  <screen_name>coinsclub777</screen_name>
+  <location>LO, Cali</location>
+  <description/>
+  <profile_image_url>http://a1.twimg.com/profile_images/565428644/coins2_normal.jpg</profile_image_url>
+  <url>http://www.numisone.com/theconnector</url>
+  <protected>false</protected>
+  <followers_count>2003</followers_count>
+  <profile_background_color>C0DEED</profile_background_color>
+  <profile_text_color>333333</profile_text_color>
+  <profile_link_color>0084B4</profile_link_color>
+  <profile_sidebar_fill_color>DDEEF6</profile_sidebar_fill_color>
+  <profile_sidebar_border_color>C0DEED</profile_sidebar_border_color>
+  <friends_count>2198</friends_count>
+  <created_at>Tue Dec 08 22:19:53 +0000 2009</created_at>
+  <favourites_count>0</favourites_count>
+  <utc_offset>-28800</utc_offset>
+  <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+  <profile_background_image_url>http://a1.twimg.com/profile_background_images/62814552/twitter_background.jpg</profile_background_image_url>
+  <profile_background_tile>false</profile_background_tile>
+  <notifications>false</notifications>
+  <geo_enabled>false</geo_enabled>
+  <verified>false</verified>
+  <following>false</following>
+  <statuses_count>555</statuses_count>
+  <lang>en</lang>
+  <contributors_enabled>false</contributors_enabled>
+  <status>
+    <created_at>Fri May 28 22:07:21 +0000 2010</created_at>
+    <id>14935035855</id>
+    <text>Youtube - Miracle of Science http://ht.ly/1RoSf</text>
+    <source>&lt;a href="http://www.hootsuite.com" rel="nofollow"&gt;HootSuite&lt;/a&gt;</source>
+    <truncated>false</truncated>
+    <in_reply_to_status_id/>
+    <in_reply_to_user_id/>
+    <favorited>false</favorited>
+    <in_reply_to_screen_name/>
+    <geo/>
+    <coordinates/>
+    <place/>
+    <contributors/>
+  </status>
+</user>
+</users>

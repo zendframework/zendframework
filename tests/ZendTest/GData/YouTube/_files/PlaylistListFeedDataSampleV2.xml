@@ -1,0 +1,553 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:media='http://search.yahoo.com/mrss/' xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:yt='http://gdata.youtube.com/schemas/2007' xmlns:gd='http://schemas.google.com/g/2005' gd:etag='W/&quot;CE4CQn47eCp7ImA9WxRbGU0.&quot;'>
+    <id>tag:youtube.com,2008:user:GoogleDevelopers:playlists</id>
+    <updated>2008-12-10T09:56:03.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title>Playlists of GoogleDevelopers</title>
+    <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/profile_play_list?user=GoogleDevelopers'/>
+    <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists?v=2'/>
+    <link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/batch?v=2'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists?start-index=1&amp;max-results=25&amp;v=2'/>
+    <link rel='service' type='application/atomsvc+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists?alt=atom-service&amp;v=2'/>
+    <link rel='next' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists?start-index=26&amp;max-results=25&amp;v=2'/>
+    <author>
+        <name>GoogleDevelopers</name>
+        <uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+        </author>
+        <generator version='2.0' uri='http://gdata.youtube.com/'>YouTube data API</generator>
+        <openSearch:totalResults>70</openSearch:totalResults>
+<openSearch:startIndex>1</openSearch:startIndex>
+        <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+        <entry gd:etag='W/&quot;CE4CQn47eCp7ImA9WxRbGU0.&quot;'>
+            <id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:8E2186857EE27746</id>
+            <published>2007-08-23T21:48:43.000Z</published>
+            <updated>2008-12-10T09:56:03.000Z</updated>
+            <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+            <title>Non-google Interviews</title>
+            <summary>This playlist contains interviews with people outside of Google.</summary>
+            <content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/8E2186857EE27746?v=2'/>
+            <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+            <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=8E2186857EE27746'/>
+            <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/8E2186857EE27746?v=2'/>
+            <author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+            <yt:playlistId>8E2186857EE27746</yt:playlistId>
+            <yt:countHint>1</yt:countHint>
+            </entry>
+            <entry gd:etag='W/&quot;DkUDQn47eCp7ImA9WxRaEE0.&quot;'>
+                <id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:4AE5C0D23C2EB82D</id>
+                <published>2007-08-23T21:50:19.000Z</published>
+                <updated>2008-12-11T14:04:33.000Z</updated>
+                <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+                <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='engineers'/>
+                <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+                <title>From Google Engineers</title>
+                <summary>These videos are interviews straight from the horses mouth... the Google teams themselves.</summary>
+                <content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/4AE5C0D23C2EB82D?v=2'/>
+                <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+                <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=4AE5C0D23C2EB82D'/>
+                <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/4AE5C0D23C2EB82D?v=2'/>
+                <author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+                <yt:playlistId>4AE5C0D23C2EB82D</yt:playlistId>
+                <yt:countHint>5</yt:countHint>
+                </entry>
+                <entry gd:etag='W/&quot;DUEDQn47eCp7ImA9WxRaEU0.&quot;'>
+                    <id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:2C63610CE65A92B9</id>
+                    <published>2007-08-28T16:11:35.000Z</published>
+                    <updated>2008-12-12T18:47:53.000Z</updated>
+                    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+                    <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='googlecodeforeducators'/>
+                    <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='googlecode'/>
+                    <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+                    <title>Google Code For Educators</title>
+                    <summary>Videos from Google Code For Educators</summary>
+                    <content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/2C63610CE65A92B9?v=2'/>
+                    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+                    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=2C63610CE65A92B9'/>
+                    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/2C63610CE65A92B9?v=2'/>
+                    <author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+                    <yt:playlistId>2C63610CE65A92B9</yt:playlistId>
+                    <yt:countHint>5</yt:countHint>
+                    </entry>
+                    <entry gd:etag='W/&quot;CE4CRH47eCp7ImA9WxRbF0o.&quot;'>
+                        <id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:D9740C0183D07BE6</id>
+                        <published>2007-08-30T00:03:01.000Z</published>
+                        <updated>2008-12-08T21:49:25.000Z</updated>
+                        <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+                        <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='offline'/>
+                        <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='gears'/>
+                        <category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+                        <title>Gears</title>
+                        <summary>All videos related to Gears</summary>
+                        <content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/D9740C0183D07BE6?v=2'/>
+                        <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+                        <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=D9740C0183D07BE6'/>
+                        <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/D9740C0183D07BE6?v=2'/>
+                        <author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+                        <yt:playlistId>D9740C0183D07BE6</yt:playlistId>
+                        <yt:countHint>10</yt:countHint>
+                        </entry>
+                        <entry gd:etag='W/&quot;DUAFQn47eCp7ImA9WxRaEU0.&quot;'>
+                            <id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:3A74996A44A8FA83</id>
+                            <published>2007-10-12T22:26:05.000Z</published>
+                            <updated>2008-12-12T18:48:33.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='googlesummerofcode'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='summerofcode'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>Google Summer of Code</title>
+<summary>The Google Summer of Code is an annual program in which Google awards stipends to students who successfully complete a free software / open-source coding project during the summer. This playlist contains videos that touch on the Summer of Code.</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/3A74996A44A8FA83?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=3A74996A44A8FA83'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/3A74996A44A8FA83?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>3A74996A44A8FA83</yt:playlistId>
+<yt:countHint>2</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;A0AMRX47eCp7ImA9WxRbGU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:0559F3902CC876AE</id>
+<published>2007-10-15T22:04:22.000Z</published>
+<updated>2008-12-10T11:49:44.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='mashup'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='editor'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='gme'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>Google Mashup Editor</title>
+<summary>Videos related to the Google Mashup Editor</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/0559F3902CC876AE?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=0559F3902CC876AE'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/0559F3902CC876AE?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>0559F3902CC876AE</yt:playlistId>
+<yt:countHint>2</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;A0IMQH47eCp7ImA9WxRbFkg.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:327240CFB48BEC5D</id>
+<published>2007-10-15T22:16:04.000Z</published>
+<updated>2008-12-07T14:19:41.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='widgets'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='components'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='gadgets'/>
+<title>Google Gadgets</title>
+<summary>Content on all types of gadgets (desktop, igoogle, and embedable!)</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/327240CFB48BEC5D?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=327240CFB48BEC5D'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/327240CFB48BEC5D?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>327240CFB48BEC5D</yt:playlistId>
+<yt:countHint>4</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;AkENRn47eCp7ImA9WxRbGUw.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:EC7C82F4E9ACC351</id>
+<published>2007-10-15T22:17:03.000Z</published>
+<updated>2008-12-10T14:18:17.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='earth'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='maps'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='kml'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='geo'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>Google Maps and Earth</title>
+<summary>All things Geo</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/EC7C82F4E9ACC351?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=EC7C82F4E9ACC351'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/EC7C82F4E9ACC351?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>EC7C82F4E9ACC351</yt:playlistId>
+<yt:countHint>16</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DE8GQ347eCp7ImA9WxRbFE8.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:968FABA11F2EDEA1</id>
+<published>2007-10-15T22:18:00.000Z</published>
+<updated>2008-12-04T21:40:22.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='toolkit'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='ajax'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='gwt'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='web'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>Google Web Toolkit</title>
+<summary>Content on the Google Web Toolkit</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/968FABA11F2EDEA1?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=968FABA11F2EDEA1'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/968FABA11F2EDEA1?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>968FABA11F2EDEA1</yt:playlistId>
+<yt:countHint>34</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;Ck8EQX47eCp7ImA9WxRaEU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:E6DE6EC9A373AF57</id>
+<published>2007-10-15T22:20:18.000Z</published>
+<updated>2008-12-12T16:53:20.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='gdata'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='apis'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='data'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='youtubeapis'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>Google Data APIs</title>
+<summary>All things related to Google Data APIs</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/E6DE6EC9A373AF57?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=E6DE6EC9A373AF57'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/E6DE6EC9A373AF57?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>E6DE6EC9A373AF57</yt:playlistId>
+<yt:countHint>24</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;C0AERX47eCp7ImA9WxRaEUw.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:CCAE880913CAFE9B</id>
+<published>2007-10-15T22:24:17.000Z</published>
+<updated>2008-12-12T19:55:04.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='adsense'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='advertising'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='ads'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>AdSense APIs</title>
+<summary>Content related to our ad APIs</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/CCAE880913CAFE9B?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=CCAE880913CAFE9B'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/CCAE880913CAFE9B?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>CCAE880913CAFE9B</yt:playlistId>
+<yt:countHint>1</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;C0IBQ347eCp7ImA9WxRbF0Q.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:72CF07D200AA2AFA</id>
+<published>2007-10-17T18:36:51.000Z</published>
+<updated>2008-12-09T02:59:12.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='youtube'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='apis'/>
+<title>YouTube</title>
+<summary>Content related to YouTube APIs</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/72CF07D200AA2AFA?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=72CF07D200AA2AFA'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/72CF07D200AA2AFA?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>72CF07D200AA2AFA</yt:playlistId>
+<yt:countHint>18</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;CE4DQ347eCp7ImA9WxRbGU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:BC2ECF70FE499266</id>
+<published>2007-10-17T18:38:13.000Z</published>
+<updated>2008-12-10T09:56:12.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='opensource'/>
+<title>Open Source at Google</title>
+<summary>Content related to open source.</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/BC2ECF70FE499266?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=BC2ECF70FE499266'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/BC2ECF70FE499266?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>BC2ECF70FE499266</yt:playlistId>
+<yt:countHint>8</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;CkYEQX47eCp7ImA9WxRbEEs.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:79B6967AC7A09B42</id>
+<published>2007-10-17T18:40:07.000Z</published>
+<updated>2008-11-30T15:48:20.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='search'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='apis'/>
+<title>Google Search</title>
+<summary>Content released to Search APIs</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/79B6967AC7A09B42?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=79B6967AC7A09B42'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/79B6967AC7A09B42?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>79B6967AC7A09B42</yt:playlistId>
+<yt:countHint>2</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DEUGQX47eCp7ImA9WxRaEE0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:DA15B72EA2633F26</id>
+<published>2007-10-17T18:41:25.000Z</published>
+<updated>2008-12-11T14:37:00.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='ajax'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='apis'/>
+<title>Google AJAX APIs</title>
+<summary>Content related to the various Ajax APIs</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/DA15B72EA2633F26?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=DA15B72EA2633F26'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/DA15B72EA2633F26?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>DA15B72EA2633F26</yt:playlistId>
+<yt:countHint>5</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DUEDRH47eCp7ImA9WxRaEU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:18E9C145F20ED640</id>
+<published>2007-10-17T18:42:21.000Z</published>
+<updated>2008-12-12T18:47:55.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='mobile'/>
+<title>Google Mobile</title>
+<summary>Content related to mobile development and Google</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/18E9C145F20ED640?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=18E9C145F20ED640'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/18E9C145F20ED640?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>18E9C145F20ED640</yt:playlistId>
+<yt:countHint>1</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DUAFR347eCp7ImA9WxRaEU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:74D78B3235613DCB</id>
+<published>2007-10-17T18:44:32.000Z</published>
+<updated>2008-12-12T18:48:36.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='gmail'/>
+<title>Gmail</title>
+<summary>Content related to the Gmail product.</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/74D78B3235613DCB?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=74D78B3235613DCB'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/74D78B3235613DCB?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>74D78B3235613DCB</yt:playlistId>
+<yt:countHint>1</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DUAGQX47eCp7ImA9WxRaEU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:7F19205748B0A698</id>
+<published>2007-10-19T18:45:08.000Z</published>
+<updated>2008-12-12T18:48:40.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='api'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='base'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='googlebase'/>
+<title>Google Base</title>
+<summary>Content related to the Google Base product</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/7F19205748B0A698?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=7F19205748B0A698'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/7F19205748B0A698?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>7F19205748B0A698</yt:playlistId>
+<yt:countHint>2</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;D0MHR347eCp7ImA9WxRbE08.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:59127FA00275EB77</id>
+<published>2007-10-29T19:26:57.000Z</published>
+<updated>2008-12-03T17:30:36.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='feedburner'/>
+<title>FeedBurner</title>
+<summary>FeedBurner API videos</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/59127FA00275EB77?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=59127FA00275EB77'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/59127FA00275EB77?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>59127FA00275EB77</yt:playlistId>
+<yt:countHint>1</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;A0QGSX47eCp7ImA9WxRbGUU.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:A31A1098FDE85663</id>
+<published>2007-10-29T23:52:25.000Z</published>
+<updated>2008-12-11T09:55:28.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='apps'/>
+<title>Google Apps</title>
+<summary>Google Apps User Videos</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/A31A1098FDE85663?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=A31A1098FDE85663'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/A31A1098FDE85663?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>A31A1098FDE85663</yt:playlistId>
+<yt:countHint>3</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DEACQ347eCp7ImA9WxRbFE8.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:CF46C525B4C90C17</id>
+<published>2007-10-30T01:19:18.000Z</published>
+<updated>2008-12-04T21:39:22.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='ajax'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='feed'/>
+<title>Google AJAX Feed API</title>
+<summary>AJAX Feed API</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/CF46C525B4C90C17?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=CF46C525B4C90C17'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/CF46C525B4C90C17?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>CF46C525B4C90C17</yt:playlistId>
+<yt:countHint>2</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DEEMR347eCp7ImA9WxRaEEU.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:5F0F046F77B7B62A</id>
+<published>2007-11-02T15:29:38.000Z</published>
+<updated>2008-12-12T12:58:06.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='opensocial'/>
+<title>OpenSocial</title>
+<summary>Tutorials on how to build OpenSocial applications, videos from our Campfire One launch as well as interviews with some of our partners: Slide, Ning, Hi5, Plaxo, Flixster, iLike, Salesforce, LinkedIn, RockYou and more.</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/5F0F046F77B7B62A?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=5F0F046F77B7B62A'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/5F0F046F77B7B62A?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>5F0F046F77B7B62A</yt:playlistId>
+<yt:countHint>48</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;AkUAQH47eCp7ImA9WxRaEU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:586D322B5E2764CF</id>
+<published>2007-11-13T19:41:21.000Z</published>
+<updated>2008-12-12T18:57:21.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='phone'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='alliance'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='handset'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='android'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='developers'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='mobile'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>Android</title>
+<summary>Demos and tutorials about the new Android platform.</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/586D322B5E2764CF?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=586D322B5E2764CF'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/586D322B5E2764CF?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>586D322B5E2764CF</yt:playlistId>
+<yt:countHint>32</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DUEDQ347eCp7ImA9WxRaEU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:8B1C566EDD2DCB77</id>
+<published>2007-11-28T21:45:37.000Z</published>
+<updated>2008-12-12T18:47:52.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Repor'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Ning'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='E-junkie'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Flixster'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Plaxo'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Bleacher'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='iLike'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Qloud'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='FotoFlexer'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='interviews'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='LinkedIn'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Hi5'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='opensocial'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Shelfari'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='Chronus'/>
+<title>OpenSocial Interviews</title>
+<summary>We brought in a bunch of developers and partners to talk about OpenSocial and demo their stuff :) Big Thanks to Shelfari, E-junkie, Ning, Flixster, Plaxo, iLike, FotoFlexer, LinkedIn, Hi5, Qloud, Bleacher Report, Slide, RockYou, Oberon, Chronus, and Hungry Machine!</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/8B1C566EDD2DCB77?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=8B1C566EDD2DCB77'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/8B1C566EDD2DCB77?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>8B1C566EDD2DCB77</yt:playlistId>
+<yt:countHint>16</yt:countHint>
+</entry>
+<entry gd:etag='W/&quot;DUAFR347eCp7ImA9WxRaEU0.&quot;'>
+<id>tag:youtube.com,2008:user:GoogleDevelopers:playlist:8F1A9670BA923DF3</id>
+<published>2007-12-04T18:07:07.000Z</published>
+<updated>2008-12-12T18:48:36.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='googlemac'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='opensource'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='google'/>
+<title>Google Mac</title>
+<summary>Content related to Google Mac development, including the Google Mac Playground.</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/8F1A9670BA923DF3?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=8F1A9670BA923DF3'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/GoogleDevelopers/playlists/8F1A9670BA923DF3?v=2'/>
+<author>
+<name>GoogleDevelopers</name>
+<uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:playlistId>8F1A9670BA923DF3</yt:playlistId>
+<yt:countHint>3</yt:countHint>
+</entry>
+</feed>

@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<dataset>
+    <foo foo="foo" bar="bar" baz="baz" />
+    <foo foo="bar" bar="bar" baz="bar" />
+    <foo foo="baz" bar="baz" baz="baz" />
+</dataset>

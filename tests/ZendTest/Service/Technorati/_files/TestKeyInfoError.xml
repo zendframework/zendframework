@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Error response returned for a KeyInfo request
+    http://api.technorati.com/keyinfo?key=foo
+
+-->
+<!-- generator="Technorati API version 1.0 /keyinfo" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <error>Invalid key. Please visit http://technorati.com/developers/apikey.html to obtain a valid key.</error>
+        </result>
+    </document>
+</tapi>

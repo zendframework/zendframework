@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="0.91">
+    <channel>
+        <item>
+            <author>joe@example.com (Joe Bloggs)</author>
+            <author>jane@example.com (Jane Bloggs)</author>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,10 @@
+<?php
+use Zend\Log;
+require_once 'PHPUnit/Util/Filter.php';
+
+PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+
+$content = $this->render($this->content);
+$logger = new Log\Logger(new Log\Writer\Stream(__DIR__ . '/view.log'));
+$logger->log(var_export($content, 1), Log\Logger::DEBUG);
+$logger->log(var_export(__FILE__, 1), Log\Logger::DEBUG);

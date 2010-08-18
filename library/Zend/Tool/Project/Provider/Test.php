@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+use Zend\Tool\Project\Profile;
 
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
@@ -45,7 +45,7 @@ class Test extends AbstractProvider
      * @param \Zend\Tool\Project\Profile $profile
      * @return bool
      */
-    public static function isTestingEnabled(ProjectProfile $profile)
+    public static function isTestingEnabled(Profile $profile)
     {
         $profileSearchParams = array('testsDirectory');
         $testsDirectory = $profile->search($profileSearchParams);
@@ -62,7 +62,7 @@ class Test extends AbstractProvider
      * @param string $moduleName
      * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createApplicationResource(ProjectProfile $profile, $controllerName, $actionName, $moduleName = null)
+    public static function createApplicationResource(Profile $profile, $controllerName, $actionName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
             throw new Exception('Zend_Tool_Project_Provider_View::createApplicationResource() expects \"controllerName\" is the name of a controller resource to create.');
@@ -99,7 +99,7 @@ class Test extends AbstractProvider
      * @param string $libraryClassName
      * @return \Zend\Tool\Project\Profile\Resource
      */
-    public static function createLibraryResource(ProjectProfile $profile, $libraryClassName)
+    public static function createLibraryResource(Profile $profile, $libraryClassName)
     {
         $testLibraryDirectoryResource = $profile->search(array('TestsDirectory', 'TestLibraryDirectory'));
 

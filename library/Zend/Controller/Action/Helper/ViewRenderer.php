@@ -345,7 +345,7 @@ class ViewRenderer extends AbstractHelper
         }
 
         $module = $this->getModule();
-        if ('application' == $module) {
+        if ('default' == $module) {
             return $default;
         }
 

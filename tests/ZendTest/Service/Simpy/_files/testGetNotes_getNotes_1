@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+  
+  
+    <notes>
+      
+        <note accessType="private">
+          <uri><![CDATA[http://www.simpy.com/simpy/NoteDetails.do?noteId=21984]]></uri>
+          <id>21984</id>
+          <modDate>2009-06-04</modDate>
+          <addDate>2009-06-04 </addDate>
+          <title><![CDATA[Test Note]]></title>
+          <tags>
+            
+              <tag><![CDATA[test]]></tag>
+            
+          </tags>
+          <description><![CDATA[This is a test note.]]></description>
+        </note>
+      
+    </notes>
+  
+

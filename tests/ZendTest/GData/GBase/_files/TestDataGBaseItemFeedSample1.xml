@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://base.google.com/ns-metadata/1.0' xmlns:g='http://base.google.com/ns/1.0' xmlns:batch='http://schemas.google.com/gdata/batch'>
+    <id>http://www.google.com/base/feeds/items</id>
+    <updated>2007-09-15T00:08:42.580Z</updated>
+    <title type='text'>Items matching query: [customer id(int):1385111]</title>
+    <link rel='alternate' type='text/html' href='http://base.google.com'/>
+    <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://www.google.com/base/feeds/items'/>
+    <link rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='http://www.google.com/base/feeds/items'/>
+    <link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://www.google.com/base/feeds/items/batch'/>
+    <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/items?start-index=1&amp;max-results=2'/>
+    <link rel='next' type='application/atom+xml' href='http://www.google.com/base/feeds/items?start-index=3&amp;max-results=2'/>
+    <author>
+      <name>Google Inc.</name>
+      <email>base@google.com</email>
+    </author>
+    <generator version='1.0' uri='http://base.google.com'>GoogleBase</generator>
+    <openSearch:totalResults>9</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>2</openSearch:itemsPerPage>
+    <g:customer_id type='int'>1385111</g:customer_id>
+    <entry>
+      <id>http://www.google.com/base/feeds/items/1717711776806040891</id>
+      <published>2007-09-14T00:26:01.000Z</published>
+      <updated>2007-09-14T00:26:01.000Z</updated>
+      <category scheme='http://base.google.com/categories/itemtypes' term='Products'/>
+      <title type='text'>PHP Developer Handbook Second Edition</title>
+      <content type='html'>Essential handbook for PHP developers. This is a test item.</content>
+      <link rel='alternate' type='text/html' href='http://base.google.com/base/a/1385111/D1717711776806040891'/>
+      <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/items/1717711776806040891'/>
+      <link rel='edit' type='application/atom+xml' href='http://www.google.com/base/feeds/items/1717711776806040891'/>
+      <author>
+        <name>jacobm@google.com</name>
+        <email>anon-d2dp8lsofybp@base.google.com</email>
+      </author>
+      <g:item_type type='text'>Products</g:item_type>
+      <g:publisher type='text'>My Press</g:publisher>
+      <g:isbn type='text'>ISBN12345</g:isbn>
+      <g:condition type='text'>New</g:condition>
+      <g:published_date type='text'>Sep 2007</g:published_date>
+      <g:payment type='text'>Google Checkout</g:payment>
+      <g:upc type='text'>UPC12345</g:upc>
+      <g:brand type='text'>Oxford</g:brand>
+      <g:product_type type='text'>book</g:product_type>
+      <g:edition type='text'>First Edition</g:edition>
+      <g:year type='float'>2006.0</g:year>
+      <g:item_language type='text'>en</g:item_language>
+      <g:pages type='float'>253.0</g:pages>
+      <g:price type='floatUnit'>16.99 usd</g:price>
+      <g:target_country type='text'>US</g:target_country>
+      <g:customer_id type='int'>1385111</g:customer_id>
+      <g:customer_id type='int'>1385111</g:customer_id>
+      <g:quantity type='int'>10</g:quantity>
+      <g:author type='text'>John Doe</g:author>
+      <g:weight type='floatUnit'>2.2 lbs</g:weight>
+      <g:expiration_date type='dateTime'>2007-10-14T00:26:01.000Z</g:expiration_date>
+    </entry>
+    <entry>
+      <id>http://www.google.com/base/feeds/items/5366131833179111427</id>
+      <published>2007-09-14T00:32:03.000Z</published>
+      <updated>2007-09-14T00:32:04.000Z</updated>
+      <category scheme='http://base.google.com/categories/itemtypes' term='Products'/>
+      <title type='text'>PHP Developer Handbook Second Edition</title>
+      <content type='html'>Essential handbook for PHP developers. This is a test item.</content>
+      <link rel='alternate' type='text/html' href='http://base.google.com/base/a/1385111/D5366131833179111427'/>
+      <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/items/5366131833179111427'/>
+      <link rel='edit' type='application/atom+xml' href='http://www.google.com/base/feeds/items/5366131833179111427'/>
+      <author>
+        <name>jacobm@google.com</name>
+        <email>anon-d2dp8lsofybp@base.google.com</email>
+      </author>
+      <g:item_type type='text'>Products</g:item_type>
+      <g:isbn type='text'>ISBN12345</g:isbn>
+      <g:publisher type='text'>My Press</g:publisher>
+      <g:condition type='text'>New</g:condition>
+      <g:payment type='text'>Google Checkout</g:payment>
+      <g:upc type='text'>UPC12345</g:upc>
+      <g:edition type='text'>First Edition</g:edition>
+      <g:product_type type='text'>book</g:product_type>
+      <g:year type='float'>2006.0</g:year>
+      <g:item_language type='text'>en</g:item_language>
+      <g:pages type='float'>253.0</g:pages>
+      <g:price type='floatUnit'>12.99 usd</g:price>
+      <g:target_country type='text'>US</g:target_country>
+      <g:customer_id type='int'>1385111</g:customer_id>
+      <g:customer_id type='int'>1385111</g:customer_id>
+      <g:quantity type='int'>10</g:quantity>
+      <g:author type='text'>John Doe</g:author>
+      <g:weight type='floatUnit'>2.2 lbs</g:weight>
+      <g:expiration_date type='dateTime'>2007-10-14T00:32:03.000Z</g:expiration_date>
+    </entry>
+  </feed>

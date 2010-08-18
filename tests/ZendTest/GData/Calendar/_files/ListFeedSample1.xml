@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:gd="http://schemas.google.com/g/2005" xmlns:gCal="http://schemas.google.com/gCal/2005">
+	<id>http://www.google.com/calendar/feeds/default</id>
+	<updated>2007-05-30T00:23:26.998Z</updated>
+	<title type="text">GData Ops Demo's Calendar List</title>
+	<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default"/>
+	<link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default"/>
+	<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default"/>
+	<author>
+		<name>GData Ops Demo</name>
+		<email>gdata.ops.demo@gmail.com</email>
+                <uri>http://test.address.invalid/</uri>
+	</author>
+	<generator version="1.0" uri="http://www.google.com/calendar">Google Calendar</generator>
+	<openSearch:startIndex>1</openSearch:startIndex>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/gdata.ops.demo%40gmail.com</id>
+		<published>2007-05-30T00:23:27.006Z</published>
+		<updated>2007-05-30T00:20:38.000Z</updated>
+		<title type="text">GData Ops Demo</title>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/gdata.ops.demo%40gmail.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/gdata.ops.demo%41gmail.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/gdata.ops.demo%40gmail.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Chicago"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#2952A3"/>
+		<gCal:selected value="true"/>
+		<gCal:accesslevel value="owner"/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/ri3u1buho56d1k2papoec4c16s%40group.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.005Z</published>
+		<updated>2007-05-30T00:20:38.000Z</updated>
+		<title type="text">My Other Awesome Calendar</title>
+		<summary type="text">This is my other calendar.</summary>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/ri3u1buho56d1k2papoec4c16s%40group.calendar.google.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/ri3u1buho56d1k2papoec4c16s%40group.calendar.google.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/ri3u1buho56d1k2papoec4c16s%40group.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+                        <email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Chicago"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#A32929"/>
+		<gCal:selected value="true"/>
+		<gCal:accesslevel value="owner"/>
+		<gd:where valueString="Palo Alto, California"/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/5fcmq8mrd633rulib1jgtuuk90%40group.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.005Z</published>
+		<updated>2007-05-22T05:35:47.000Z</updated>
+		<title type="text">Sample Calendar A</title>
+		<summary type="text"/>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/5fcmq8mrd633rulib1jgtuuk90%40group.calendar.google.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/5fcmq8mrd633rulib1jgtuuk90%40group.calendar.google.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/5fcmq8mrd633rulib1jgtuuk90%40group.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Los_Angeles"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#5A6986"/>
+		<gCal:selected value="false"/>
+		<gCal:accesslevel value="owner"/>
+		<gd:where valueString=""/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/a2f8cl1m7ottkhmoita51gu9cc%40group.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.005Z</published>
+		<updated>2007-05-21T07:31:41.000Z</updated>
+		<title type="text">Sample Calendar B</title>
+		<summary type="text"/>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/a2f8cl1m7ottkhmoita51gu9cc%40group.calendar.google.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/a2f8cl1m7ottkhmoita51gu9cc%40group.calendar.google.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/a2f8cl1m7ottkhmoita51gu9cc%40group.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Los_Angeles"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#5A6986"/>
+		<gCal:selected value="false"/>
+		<gCal:accesslevel value="owner"/>
+		<gd:where valueString=""/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/rndpkbg35nhelu9fbp63u9sgp0%40group.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.006Z</published>
+		<updated>2007-05-22T21:02:34.000Z</updated>
+		<title type="text">Sample Calendar C</title>
+		<summary type="text"/>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/rndpkbg35nhelu9fbp63u9sgp0%40group.calendar.google.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/rndpkbg35nhelu9fbp63u9sgp0%40group.calendar.google.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/rndpkbg35nhelu9fbp63u9sgp0%40group.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Los_Angeles"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#B1440E"/>
+		<gCal:selected value="true"/>
+		<gCal:accesslevel value="owner"/>
+		<gd:where valueString=""/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/u4u5cksnpp1vufdarpupn5um5s%40group.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.006Z</published>
+		<updated>2007-05-17T10:12:36.000Z</updated>
+		<title type="text">Sample Calendar D</title>
+		<summary type="text"/>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/u4u5cksnpp1vufdarpupn5um5s%40group.calendar.google.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/u4u5cksnpp1vufdarpupn5um5s%40group.calendar.google.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/u4u5cksnpp1vufdarpupn5um5s%40group.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Los_Angeles"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#528800"/>
+		<gCal:selected value="false"/>
+		<gCal:accesslevel value="owner"/>
+		<gd:where valueString=""/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/ibdlf33v6fj62rgfucib6s181s%40group.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.006Z</published>
+		<updated>2007-05-17T10:52:01.000Z</updated>
+		<title type="text">Sample Calender E</title>
+		<summary type="text"/>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/ibdlf33v6fj62rgfucib6s181s%40group.calendar.google.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/ibdlf33v6fj62rgfucib6s181s%40group.calendar.google.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/ibdlf33v6fj62rgfucib6s181s%40group.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Chicago"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#5A6986"/>
+		<gCal:selected value="false"/>
+		<gCal:accesslevel value="owner"/>
+		<gd:where valueString=""/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/usa__en%40holiday.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.006Z</published>
+		<updated>2007-05-17T09:48:29.000Z</updated>
+		<title type="text">US Holidays</title>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/private/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/usa__en%40holiday.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Los_Angeles"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#5A6986"/>
+		<gCal:selected value="false"/>
+		<gCal:accesslevel value="read"/>
+	</entry>
+	<entry>
+		<id>http://www.google.com/calendar/feeds/default/7u5mocvk4et2vgtjte1dtcff2o%40group.calendar.google.com</id>
+		<published>2007-05-30T00:23:27.005Z</published>
+		<updated>2007-05-30T00:20:02.000Z</updated>
+		<title type="text">My Awesome Calendar</title>
+		<summary type="text">This is my awesome calendar</summary>
+		<link rel="alternate" type="application/atom+xml" href="http://www.google.com/calendar/feeds/7u5mocvk4et2vgtjte1dtcff2o%40group.calendar.google.com/private/full"/>
+		<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://www.google.com/calendar/feeds/7u5mocvk4et2vgtjte1dtcff2o%40group.calendar.google.com/acl/full"/>
+		<link rel="self" type="application/atom+xml" href="http://www.google.com/calendar/feeds/default/7u5mocvk4et2vgtjte1dtcff2o%40group.calendar.google.com"/>
+		<author>
+			<name>GData Ops Demo</name>
+			<email>gdata.ops.demo@gmail.com</email>
+		</author>
+		<gCal:timezone value="America/Los_Angeles"/>
+		<gCal:hidden value="false"/>
+		<gCal:color value="#5A6986"/>
+		<gCal:selected value="false"/>
+		<gCal:accesslevel value="owner"/>
+		<gd:where valueString="Mountain View, California"/>
+	</entry>
+</feed>
+

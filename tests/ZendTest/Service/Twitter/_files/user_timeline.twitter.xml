@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Fri May 28 21:14:05 +0000 2010</created_at>
+  <id>14932507266</id>
+  <text>Good news for people everywhere http://bit.ly/b1Cf9A</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3223630</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>247</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>745</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>16739704</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Mon May 24 16:02:43 +0000 2010</created_at>
+  <id>14632050758</id>
+  <text>The Twitter Platform: Enduring Value, Ecosystem Clarity, Fostering Innovation http://bit.ly/azilHc</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3210585</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>743</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>7694352</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Thu May 20 23:17:25 +0000 2010</created_at>
+  <id>14391164138</id>
+  <text>Feel free to keep the stories coming. You can also check out @cleveraccounts to learn about interesting examples from more clever folks.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3196883</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>741</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 20 22:59:49 +0000 2010</created_at>
+  <id>14390500918</id>
+  <text>Cool to hear all of your stories! Of course it's too hard to pick just one to retweet, so here are a few that stood out...</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3199005</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>741</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>16739704</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Thu May 20 21:39:43 +0000 2010</created_at>
+  <id>14386817576</id>
+  <text>Have you ever learned about something just in the nick of time because you checked Twitter? Share your story &amp; we'll retweet the best one!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3196754</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>736</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>16739704</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Thu May 20 18:32:50 +0000 2010</created_at>
+  <id>14378412372</id>
+  <text>40cents a day = 2 lifesaving pills. http://bit.ly/93qPj3 Film premieres tonight on @hbo. Go @joinred!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3227196</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>247</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>745</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>16739704</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Wed May 19 17:50:12 +0000 2010</created_at>
+  <id>14307539760</id>
+  <text>Twitter for iPhone now available in the iTunes App Store http://bit.ly/bu4gSu</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3205225</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>742</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>7694352</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Sun May 16 05:38:12 +0000 2010</created_at>
+  <id>14080930416</id>
+  <text>@justinbieber the TT tweak is nothing personal. It was long planned &amp; better shows what is emerging right now. See http://bit.ly/byhJ7M. Thx</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id>27260086</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>justinbieber</in_reply_to_screen_name>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3180216</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>236</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1273875281/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>733</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>822571</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Fri May 14 21:24:23 +0000 2010</created_at>
+  <id>13998259745</id>
+  <text>Curious about the recent changes to the Worldwide Trending Topic algorithm?  See: http://bit.ly/byhJ7M</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3223641</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>247</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>false</following>
+    <statuses_count>745</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>822571</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Thu May 13 19:09:31 +0000 2010</created_at>
+  <id>13929657914</id>
+  <text>It's bike-to-work day everyday when you're headquartered in San Francisco! @jointheflock</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3220708</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>247</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274739546/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>744</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>16739704</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Thu May 13 00:28:59 +0000 2010</created_at>
+  <id>13881748072</id>
+  <text>We have tweaked our worldwide trending topic algorithm to better capture the most emergent trends being talked about on Twitter *right now*</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3201215</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>742</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>822571</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Mon May 10 17:15:53 +0000 2010</created_at>
+  <id>13737532357</id>
+  <text>Follow bug discovered, remedied. Read our status blog for details. http://bit.ly/dhQ3fF</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3201215</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>742</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>16739704</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Mon May 10 17:02:18 +0000 2010</created_at>
+  <id>13736700173</id>
+  <text>Follow count display is set to 0 and follow/unfollow is temporarily offline while we fix a bug.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3226158</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>247</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>745</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>13</user_id>
+  </contributors>
+</status>
+<status>
+  <created_at>Sat May 08 01:39:13 +0000 2010</created_at>
+  <id>13581872903</id>
+  <text>Enjoying 2 barrels of @fledgling wine that will pour 3000 generous glasses. We've got a lot to work to do tonight. Cheers @roomtoread!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>783214</id>
+    <name>Twitter</name>
+    <screen_name>twitter</screen_name>
+    <location>San Francisco, CA</location>
+    <description>Always wondering what's happening. </description>
+    <profile_image_url>http://a1.twimg.com/profile_images/878669694/twitter_bird_normal.jpg</profile_image_url>
+    <url>http://twitter.com</url>
+    <protected>false</protected>
+    <followers_count>3201330</followers_count>
+    <profile_background_color>ACDED6</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>038543</profile_link_color>
+    <profile_sidebar_fill_color>F6F6F6</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>EEEEEE</profile_sidebar_border_color>
+    <friends_count>246</friends_count>
+    <created_at>Tue Feb 20 14:35:54 +0000 2007</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme18/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>742</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>true</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors>
+    <user_id>16739704</user_id>
+  </contributors>
+</status>
+</statuses>

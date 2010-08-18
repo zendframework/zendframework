@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Successful response returned for a Cosmos request
+    http://api.technorati.com/cosmos?key=VALID_API_KEY&url=www.simonecarletti.com/blog
+    
+    This is the most simple Cosmos request.
+    
+-->
+<!-- generator="Technorati API version 1.0" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <url>http://www.simonecarletti.com/blog</url>
+            <weblog>
+                <name>Simone Carletti's Blog</name>
+                <url>http://www.simonecarletti.com/blog</url>
+                <atomurl>http://www.simonecarletti.com/blog/index.xml</atomurl>
+                <inboundblogs>82</inboundblogs>
+                <inboundlinks>111</inboundlinks>
+                <lastupdate>2007-12-19 16:11:13 GMT</lastupdate>
+                <rank>85297</rank>
+            </weblog>
+            <inboundlinks>278</inboundlinks>
+            <rankingstart>1</rankingstart>
+        </result>
+        <item>
+            <weblog>
+                <name>Sentieri Didattici del Veneto </name>
+                <url>http://sentierididattici.scuoleinrete.net/wpmu</url>
+                <rssurl>http://sentierididattici.scuoleinrete.net/wpmu/feed/</rssurl>
+                <inboundblogs>4</inboundblogs>
+                <inboundlinks>4</inboundlinks>
+                <lastupdate>2007-09-20 11:42:39 GMT</lastupdate>
+            </weblog>
+            <excerpt>Che cos'è un blog  Blog di Sergio Maistrello Il mestiere di scrivere ScuolaERSimone Carletti's BlogWikipedia</excerpt>
+            <linkcreated>2007-12-24 15:29:17 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2005/09/che_cose_un_blog.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Marco Cattaneo Weblog - Tecnologia e New Media; Innovazione, Informazione e Comunicazione Digitale </name>
+                <url>http://www.marcocattaneo.com</url>
+                <rssurl>http://www.marcocattaneo.com/feed/</rssurl>
+                <inboundblogs>39</inboundblogs>
+                <inboundlinks>73</inboundlinks>
+                <lastupdate>2007-12-22 10:00:14 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://www.marcocattaneo.com/2007/12/22/buon-natale-con-sentimento-e-spero-non-con-banalita/</nearestpermalink>
+            <excerpt>cultura, ricette, ricordi o piacevoli scorci di vita vissuta, regalo un link, che per me equivale ad un piccolo pensiero natalizio.Ringrazio quindi (in rigoroso ordine quasi sparso):  Tevac, Mac Blog, Macity, Lele, Paolo Valdemarin, Luca Mascaro,Simone Carletti, Ludo, Dario Salvelli, Kurai, Roberto, Nicola Mattina Blog, Alberto Mucignat, Alberto Nardelli, Andrea Beggi, Luca Pandemia Conti, Marco Camisani Calzolari, Robin Good, Maestrini, Alberto, Tiziano Fogliata</excerpt>
+            <linkcreated>2007-12-22 10:00:14 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+
+    </document>
+</tapi>

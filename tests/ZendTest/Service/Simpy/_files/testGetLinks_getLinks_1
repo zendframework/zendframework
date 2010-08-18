@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+  
+  
+    <links>
+      
+        <link clicks="1" 
+          
+            
+            accessType="public"
+          
+          >
+          <url><![CDATA[http://framework.zend.com]]></url>
+          <modDate>2009-06-04</modDate>
+          <addDate>2009-06-04 00:14</addDate>
+          <title><![CDATA[Zend Framework]]></title>
+          <nickname><![CDATA[Zend Framework web site]]></nickname>
+          <tags>
+            
+              <tag><![CDATA[zend]]></tag>
+            
+              <tag><![CDATA[framework]]></tag>
+            
+              <tag><![CDATA[php]]></tag>
+            
+          </tags>
+          <note><![CDATA[This web site rules!]]></note>
+        </link>
+      
+    </links>
+  
+

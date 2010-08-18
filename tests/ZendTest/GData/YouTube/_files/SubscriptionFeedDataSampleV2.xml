@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/'
+xmlns:media='http://search.yahoo.com/mrss/'
+xmlns:batch='http://schemas.google.com/gdata/batch'
+xmlns:yt='http://gdata.youtube.com/schemas/2007'
+xmlns:gd='http://schemas.google.com/g/2005'
+gd:etag='W/"DUUDQn47eCp7ImA9WB9TE0k."'>
+<id>tag:youtube.com,2008:user:zfgdata:subscriptions</id>
+<updated>2007-09-20T21:01:13.000-07:00</updated>
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#subscription' />
+<title>Subscriptions of zfgdata</title>
+<logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata?v=2' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/profile_subscriptions?user=zfgdata' />
+<link rel='http://schemas.google.com/g/2005#feed'
+type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions?v=2' />
+<link rel='http://schemas.google.com/g/2005#batch'
+type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions/batch?v=2' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions?start-index=1&amp;max-results=25&amp;v=2' />
+<link rel='service' type='application/atomsvc+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions?alt=atom-service&amp;v=2' />
+<author>
+<name>zfgdata</name>
+<uri>http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<generator version='2.0' uri='http://gdata.youtube.com/'>YouTube
+data API</generator>
+<openSearch:totalResults>8</openSearch:totalResults>
+<openSearch:startIndex>1</openSearch:startIndex>
+<openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+<entry gd:etag='W/"DUUDQn47eCp7ImA9WB9TE0k."'>
+<id>tag:youtube.com,2008:user:zfgdata:subscription:_Jkf5no0ZW0</id>
+<published>2007-09-20T21:01:13.000-07:00</published>
+<updated>2007-09-20T21:01:13.000-07:00</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'
+term='channel' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#subscription' />
+<title>Videos published by : tonyrain</title>
+<content type='application/atom+xml;type=feed'
+src='http://gdata.youtube.com/feeds/api/users/tonyrain/uploads?v=2' />
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata?v=2' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/profile_videos?user=tonyrain' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions/_Jkf5no0ZW0?v=2' />
+<author>
+<name>zfgdata</name>
+<uri>http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<yt:username>tonyrain</yt:username>
+<yt:countHint>13</yt:countHint>
+<media:thumbnail url='http://i2.ytimg.com/vi/10-yctITMjk/default.jpg' />
+</entry>
+<entry gd:etag='W/"C04CR347eCp7ImA9WxRaE0U."'>
+<id>tag:youtube.com,2008:user:zfgdata:subscription:S_KBJ3ylYwc</id>
+<published>2008-12-15T14:59:26.000-08:00</published>
+<updated>2008-12-15T14:59:26.000-08:00</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'
+term='favorites' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#subscription' />
+<title>Favorites of : NBA</title>
+<content type='application/atom+xml;type=feed'
+src='http://gdata.youtube.com/feeds/api/users/nba/favorites?v=2' />
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata?v=2' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/profile_favorites?user=NBA' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions/S_KBJ3ylYwc?v=2' />
+<author>
+<name>zfgdata</name>
+<uri>http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<yt:username>NBA</yt:username>
+<media:thumbnail url='http://i4.ytimg.com/i/WJ2lWNubArHWmf3FIHbfcQ/1.jpg' />
+</entry>
+<entry gd:etag='W/"DUMHQ347eCp7ImA9WB9TE0k."'>
+<id>tag:youtube.com,2008:user:zfgdata:subscription:i_2YXxZb9Zg</id>
+<published>2007-09-20T21:03:52.000-07:00</published>
+<updated>2007-09-20T21:03:52.000-07:00</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'
+term='playlist' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#subscription' />
+<title>From Google Engineers</title>
+<content type='application/atom+xml;type=feed'
+src='http://gdata.youtube.com/feeds/api/playlists/4AE5C0D23C2EB82D?v=2' />
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata?v=2' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/view_play_list?p=4AE5C0D23C2EB82D' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions/i_2YXxZb9Zg?v=2' />
+<author>
+<name>zfgdata</name>
+<uri>http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<yt:playlistTitle>From Google Engineers</yt:playlistTitle>
+<yt:username>GoogleDevelopers</yt:username>
+<yt:playlistId>4AE5C0D23C2EB82D</yt:playlistId>
+<media:thumbnail url='http://i3.ytimg.com/vi/zI38Tc9GjSk/default.jpg' />
+</entry>
+<entry gd:etag='W/"C0QFSH47eCp7ImA9WxRaE0U."'>
+<id>
+tag:youtube.com,2008:user:zfgdata:subscription:59NG0lkr7r4</id>
+<published>2008-12-15T14:48:39.000-08:00</published>
+<updated>2008-12-15T14:48:39.000-08:00</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'
+term='query' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#subscription' />
+<title>Videos matching : google</title>
+<content type='application/atom+xml;type=feed'
+src='http://gdata.youtube.com/feeds/api/videos?q=google&amp;v=2' />
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata?v=2' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/results?search_query=google' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions/59NG0lkr7r4?v=2' />
+<author>
+<name>zfgdata</name>
+<uri>
+http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<yt:queryString>google</yt:queryString>
+</entry>
+</feed>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <all hostname="all" name="thisname">
+        <db host="127.0.0.1" user="username" pass="password" name="live"/>
+        <one>
+            <two three="multi" />
+        </one>
+    </all>
+
+    <staging extends="all" hostname="staging" debug="false">
+        <db name="dbstaging"/>
+    </staging>
+
+    <other_staging extends="staging" only_in="otherStaging">
+        <db pass="anotherpwd"/>
+    </other_staging>
+
+    <extendserror extends="nonexistent">
+    </extendserror>
+</config>

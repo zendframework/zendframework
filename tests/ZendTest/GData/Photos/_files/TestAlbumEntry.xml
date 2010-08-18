@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:exif="http://schemas.google.com/photos/exif/2007" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:gml="http://www.opengis.net/gml" xmlns:georss="http://www.georss.org/georss" xmlns:photo="http://www.pheed.com/pheed/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gphoto="http://schemas.google.com/photos/2007">
+  <id>http://picasaweb.google.com/data/entry/api/user/sample.user/albumid/1</id>
+  <published>2007-09-05T07:00:00.000Z</published>
+  <updated>2007-09-05T20:49:24.000Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/photos/2007#album"/>
+  <title type="text">Test</title>
+  <summary type="text"/>
+  <rights type="text">public</rights>
+  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1"/>
+  <link rel="alternate" type="text/html" href="http://picasaweb.google.com/sample.user/Test"/>
+  <link rel="self" type="application/atom+xml" href="http://picasaweb.google.com/data/entry/api/user/sample.user/albumid/1"/>
+  <author>
+    <name>sample</name>
+    <uri>http://picasaweb.google.com/sample.user</uri>
+  </author>
+  <gphoto:id>1</gphoto:id>
+  <gphoto:name>Test</gphoto:name>
+  <gphoto:location/>
+  <gphoto:access>public</gphoto:access>
+  <gphoto:timestamp>1188975600000</gphoto:timestamp>
+  <gphoto:numphotos>2</gphoto:numphotos>
+  <gphoto:user>sample.user</gphoto:user>
+  <gphoto:nickname>sample</gphoto:nickname>
+  <gphoto:commentingEnabled>true</gphoto:commentingEnabled>
+  <gphoto:commentCount>0</gphoto:commentCount>
+  <media:group>
+    <media:title type="plain">Test</media:title>
+    <media:description type="plain"/>
+    <media:keywords/>
+    <media:content url="http://lh6.google.com/sample.user/Rt8WNoDZEJE/AAAAAAAAABk/HQGlDhpIgWo/Test.jpg" type="image/jpeg" medium="image"/>
+    <media:thumbnail url="http://lh6.google.com/sample.user/Rt8WNoDZEJE/AAAAAAAAABk/HQGlDhpIgWo/s160-c/Test.jpg" height="160" width="160"/>
+    <media:credit>sample</media:credit>
+  </media:group>
+  <georss:where>
+    <gml:Point>
+      <gml:pos>42.87194 13.56738</gml:pos>
+    </gml:Point>
+  </georss:where>
+</entry>

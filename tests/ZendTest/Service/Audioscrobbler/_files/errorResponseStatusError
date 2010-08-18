@@ -1,0 +1,18 @@
+HTTP/1.1 404 Not Found
+Date: Mon, 14 Jan 2008 00:06:52 GMT
+Server: Apache/1.3.33 (Unix) PHP/4.4.3
+Content-Type: text/html; charset=iso-8859-1
+X-Cache: MISS from cache5.int.last.fm
+X-Cache-Lookup: MISS from cache5.int.last.fm:8081
+Via: 1.0 cache5.int.last.fm:8081 (squid/2.6.STABLE17)
+Connection: close
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML><HEAD>
+<TITLE>404 Not Found</TITLE>
+</HEAD><BODY>
+<H1>Not Found</H1>
+The requested URL /1.0/group/ was not found on this server.<P>
+<HR>
+<ADDRESS>Apache/1.3.33 Server at ws.audioscrobbler.com Port 80</ADDRESS>
+</BODY></HTML>

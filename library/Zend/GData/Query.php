@@ -393,11 +393,12 @@ class Query
         return $this->_category;
     }
 
+
     public function __get($name)
     {
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
-            return $this->$method();
+            return call_user_func(array(&$this, $method));
         } else {
             throw new App\Exception('Property ' . $name . '  does not exist');
         }
@@ -407,7 +408,7 @@ class Query
     {
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
-            $this->$method($val);
+            return call_user_func(array(&$this, $method), $val);
         } else {
             throw new App\Exception('Property ' . $name . '  does not exist');
         }

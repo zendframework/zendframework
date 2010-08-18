@@ -108,13 +108,14 @@ class Mail extends AbstractResource
         if(isset($options[$key]['email']) &&
            !is_numeric($options[$key]['email']))
         {
-            $method = 'setDefault' . ucfirst($type);
+            $method = array('Zend\\Mail\\Mail', 'setDefault' . ucfirst($type));
             if(isset($options[$key]['name']) &&
                !is_numeric($options[$key]['name']))
             {
-                \Zend\Mail\Mail::$method($options[$key]['email'], $options[$key]['name']);
+                call_user_func($method, $options[$key]['email'],
+                                        $options[$key]['name']);
             } else {
-                \Zend\Mail\Mail::$method($options[$key]['email']);
+                call_user_func($method, $options[$key]['email']);
             }
         }
     }

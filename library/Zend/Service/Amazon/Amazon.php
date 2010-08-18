@@ -229,7 +229,7 @@ class Amazon
         $options = array_merge($defaultOptions, $options);
 
         if($this->_secretKey !== null) {
-            $options['Timestamp'] = gmdate("Y-m-d\TH:i:s\Z");
+            $options['Timestamp'] = gmdate("Y-m-d\TH:i:s\Z");;
             ksort($options);
             $options['Signature'] = self::computeSignature($this->_baseUri, $this->_secretKey, $options);
         }

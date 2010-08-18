@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gd:feedLink xmlns="http://www.w3.org/2005/Atom" xmlns:gd="http://schemas.google.com/g/2005" href="http://www.google.com/calendar/feeds/default/private/full/3tsi3ag1q40bnsik88k25sgpss/comments" countHint="0" readOnly="true" rel="http://schemas.google.com/g/2005#feed">
+	<feed>
+		<updated>2007-06-19T00:48:41.230Z</updated>
+		<category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/g/2005#message"/>
+		<title type="text">Comments for: Sample Event</title>
+		<link rel="alternate" type="text/html" href="http://www.google.com/calendar/feeds/default/private/full/3tsi3ag1q40bnsik88k25sgpss/comments" title="alternate"/>
+	</feed>
+</gd:feedLink>

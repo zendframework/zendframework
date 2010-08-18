@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gd:entryLink xmlns="http://www.w3.org/2005/Atom" xmlns:gd="http://schemas.google.com/g/2005" href="http://gmail.com/jo/contacts/Jo" readOnly="true" rel="via">
+	<entry>
+      <category scheme="http://schemas.google.com/g/2005#kind"
+        term="http://schemas.google.com/g/2005#contact"/>
+      <id>http://gmail.com/jo/contacts/Jo</id>
+      <category term="user-tag" label="Google"/>
+      <title>Jo March</title>
+    </entry>
+</gd:entryLink>

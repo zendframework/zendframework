@@ -1,0 +1,19 @@
+HTTP/1.1 404 Not Found
+Date: Fri, 17 Nov 2006 22:22:40 GMT
+Server: Apache
+Content-Length: 272
+Keep-Alive: timeout=15, 
+	max=100
+Connection: Keep-Alive
+Content-Type: text/html; 
+  charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /some/wrong/path was not found on this server.</p>
+<hr>
+<address>Apache Server at localhost Port 80</address>
+</body></html>

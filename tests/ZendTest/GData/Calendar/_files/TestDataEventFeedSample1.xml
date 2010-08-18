@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+xmlns:gd='http://schemas.google.com/g/2005'
+xmlns:gCal='http://schemas.google.com/gCal/2005'>
+  <id>
+  http://www.google.com/calendar/feeds/default/private/full</id>
+  <updated>2007-03-20T21:29:57.000Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+  term='http://schemas.google.com/g/2005#event'></category>
+  <title type='text'>GData Ops Demo</title>
+  <subtitle type='text'>Demo Feed</subtitle>
+  <link rel='http://schemas.google.com/g/2005#feed'
+  type='application/atom+xml'
+  href='http://www.google.com/calendar/feeds/default/private/full'>
+  </link>
+  <link rel='http://schemas.google.com/g/2005#post'
+  type='application/atom+xml'
+  href='http://www.google.com/calendar/feeds/default/private/full'>
+  </link>
+  <link rel='self' type='application/atom+xml'
+  href='http://www.google.com/calendar/feeds/default/private/full?updated-min=2001-01-01&amp;max-results=25'>
+  </link>
+  <author>
+    <name>GData Ops Demo</name>
+    <email>gdata.ops.demo@gmail.com</email>
+    <uri>http://test.address.invalid/</uri>
+  </author>
+  <generator version='1.0' uri='http://www.google.com/calendar'>
+  Google Calendar</generator>
+  <openSearch:totalResults>10</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <gCal:timezone value='America/Los_Angeles'></gCal:timezone>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/o99flmgmkfkfrr8u745ghr3100</id>
+    <published>2007-03-20T21:29:52.000Z</published>
+    <updated>2007-03-20T21:29:57.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>test deleted</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=bzk5ZmxtZ21rZmtmcnI4dTc0NWdocjMxMDAgZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/o99flmgmkfkfrr8u745ghr3100'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/o99flmgmkfkfrr8u745ghr3100/63310109397'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.canceled'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/o99flmgmkfkfrr8u745ghr3100/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:when startTime='2007-03-23T12:00:00.000-07:00'
+    endTime='2007-03-23T13:00:00.000-07:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/2qt3ao5hbaq7m9igr5ak9esjo0</id>
+    <published>2007-03-20T21:26:04.000Z</published>
+    <updated>2007-03-20T21:28:46.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>Afternoon at Dolores Park with Kim</title>
+    <content type='text'>This will be fun.</content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=MnF0M2FvNWhiYXE3bTlpZ3I1YWs5ZXNqbzAgZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/2qt3ao5hbaq7m9igr5ak9esjo0'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/2qt3ao5hbaq7m9igr5ak9esjo0/63310109326'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/2qt3ao5hbaq7m9igr5ak9esjo0/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.private'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:who rel='http://schemas.google.com/g/2005#event.organizer'
+    valueString='GData Ops Demo' email='gdata.ops.demo@gmail.com'>
+      <gd:attendeeStatus value='http://schemas.google.com/g/2005#event.accepted'>
+      </gd:attendeeStatus>
+    </gd:who>
+    <gd:who rel='http://schemas.google.com/g/2005#event.attendee'
+    valueString='Ryan Boyd (API)' email='api.rboyd@gmail.com'>
+      <gd:attendeeStatus value='http://schemas.google.com/g/2005#event.invited'>
+      </gd:attendeeStatus>
+    </gd:who>
+    <gd:when startTime='2007-03-24T12:00:00.000-07:00'
+    endTime='2007-03-24T15:00:00.000-07:00'>
+      <gd:reminder minutes='20' method="alert"></gd:reminder>
+    </gd:when>
+    <gd:where valueString='Dolores Park with Kim'></gd:where>
+    <gCal:quickadd value="true" />    
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/uvsqhg7klnae40v50vihr1pvos</id>
+    <published>2007-03-20T21:28:37.000Z</published>
+    <updated>2007-03-20T21:28:37.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>Team meeting</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=dXZzcWhnN2tsbmFlNDB2NTB2aWhyMXB2b3NfMjAwNzAzMjNUMTYwMDAwWiBnZGF0YS5vcHMuZGVtb0Bt'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/uvsqhg7klnae40v50vihr1pvos'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/uvsqhg7klnae40v50vihr1pvos/63310109317'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gd:recurrence>DTSTART;TZID=America/Los_Angeles:20070323T090000
+    DTEND;TZID=America/Los_Angeles:20070323T100000
+    RRULE:FREQ=WEEKLY;BYDAY=FR;UNTIL=20070817T160000Z;WKST=SU
+    BEGIN:VTIMEZONE TZID:America/Los_Angeles
+    X-LIC-LOCATION:America/Los_Angeles BEGIN:STANDARD
+    TZOFFSETFROM:-0700 TZOFFSETTO:-0800 TZNAME:PST
+    DTSTART:19701025T020000 RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+    END:STANDARD BEGIN:DAYLIGHT TZOFFSETFROM:-0800 TZOFFSETTO:-0700
+    TZNAME:PDT DTSTART:19700405T020000
+    RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=1SU END:DAYLIGHT
+    END:VTIMEZONE</gd:recurrence>
+    <gCal:sendEventNotifications value='true'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.public'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:reminder minutes='10'></gd:reminder>
+    <gd:where valueString=''></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/st4vk9kiffs6rasrl32e4a7alo</id>
+    <published>2007-03-20T21:25:46.000Z</published>
+    <updated>2007-03-20T21:25:46.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>Movie with Kim and danah</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=c3Q0dms5a2lmZnM2cmFzcmwzMmU0YTdhbG8gZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/st4vk9kiffs6rasrl32e4a7alo'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/st4vk9kiffs6rasrl32e4a7alo/63310109146'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/st4vk9kiffs6rasrl32e4a7alo/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:when startTime='2007-03-24T20:00:00.000-07:00'
+    endTime='2007-03-24T21:00:00.000-07:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/ofl1e45ubtsoh6gtu127cls2oo</id>
+    <published>2007-03-20T21:24:43.000Z</published>
+    <updated>2007-03-20T21:25:08.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>Dinner with Kim and Sarah</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=b2ZsMWU0NXVidHNvaDZndHUxMjdjbHMyb28gZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/ofl1e45ubtsoh6gtu127cls2oo'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/ofl1e45ubtsoh6gtu127cls2oo/63310109108'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/ofl1e45ubtsoh6gtu127cls2oo/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:when startTime='2007-03-20T19:00:00.000-07:00'
+    endTime='2007-03-20T21:30:00.000-07:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/b69s2avfi2joigsclecvjlc91g</id>
+    <published>2007-03-20T21:24:19.000Z</published>
+    <updated>2007-03-20T21:25:05.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>Dinner with Jane and John</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=YjY5czJhdmZpMmpvaWdzY2xlY3ZqbGM5MWcgZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/b69s2avfi2joigsclecvjlc91g'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/b69s2avfi2joigsclecvjlc91g/63310109105'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/b69s2avfi2joigsclecvjlc91g/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:when startTime='2007-03-22T17:00:00.000-07:00'
+    endTime='2007-03-22T19:30:00.000-07:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/u9p66kkiotn8bqh9k7j4rcnjjc</id>
+    <published>2007-03-20T21:24:33.000Z</published>
+    <updated>2007-03-20T21:24:33.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>Tennis with Elizabeth</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=dTlwNjZra2lvdG44YnFoOWs3ajRyY25qamMgZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/u9p66kkiotn8bqh9k7j4rcnjjc'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/u9p66kkiotn8bqh9k7j4rcnjjc/63310109073'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/u9p66kkiotn8bqh9k7j4rcnjjc/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:when startTime='2007-03-24T10:00:00.000-07:00'
+    endTime='2007-03-24T11:00:00.000-07:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/76oj2kceidob3s708tvfnuaq3c</id>
+    <published>2007-03-20T21:24:00.000Z</published>
+    <updated>2007-03-20T21:24:00.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>Lunch with Jenn</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=NzZvajJrY2VpZG9iM3M3MDh0dmZudWFxM2MgZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/76oj2kceidob3s708tvfnuaq3c'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/76oj2kceidob3s708tvfnuaq3c/63310109040'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/76oj2kceidob3s708tvfnuaq3c/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:when startTime='2007-03-20T11:30:00.000-07:00'
+    endTime='2007-03-20T12:30:00.000-07:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/5np9ec8m7uoauk1vedh5mhodco</id>
+    <published>2007-03-20T07:50:02.000Z</published>
+    <updated>2007-03-20T20:39:26.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>test entry</title>
+    <content type='text'>test desc</content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=NW5wOWVjOG03dW9hdWsxdmVkaDVtaG9kY28gZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/5np9ec8m7uoauk1vedh5mhodco'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/5np9ec8m7uoauk1vedh5mhodco/63310106366'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/5np9ec8m7uoauk1vedh5mhodco/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.private'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:who rel='http://schemas.google.com/g/2005#event.attendee'
+    valueString='Vivian Li' email='vli@google.com'>
+      <gd:attendeeStatus value='http://schemas.google.com/g/2005#event.declined'>
+      </gd:attendeeStatus>
+    </gd:who>
+    <gd:who rel='http://schemas.google.com/g/2005#event.organizer'
+    valueString='GData Ops Demo' email='gdata.ops.demo@gmail.com'>
+      <gd:attendeeStatus value='http://schemas.google.com/g/2005#event.accepted'>
+      </gd:attendeeStatus>
+    </gd:who>
+    <gd:when startTime='2007-03-21T08:00:00.000-07:00'
+    endTime='2007-03-21T09:00:00.000-07:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where valueString='anywhere'></gd:where>
+  </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/fu6sl0rqakf3o0a13oo1i1a1mg</id>
+    <published>2007-02-14T23:23:37.000Z</published>
+    <updated>2007-02-14T23:25:30.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>test</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=ZnU2c2wwcnFha2YzbzBhMTNvbzFpMWExbWcgZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/fu6sl0rqakf3o0a13oo1i1a1mg'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/fu6sl0rqakf3o0a13oo1i1a1mg/63307178730'>
+    </link>
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/fu6sl0rqakf3o0a13oo1i1a1mg/comments'>
+      </gd:feedLink>
+    </gd:comments>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:when startTime='2007-02-15T08:30:00.000-08:00'
+    endTime='2007-02-15T09:30:00.000-08:00'>
+      <gd:reminder minutes='10'></gd:reminder>
+    </gd:when>
+    <gd:where></gd:where>
+  </entry>
+</feed>

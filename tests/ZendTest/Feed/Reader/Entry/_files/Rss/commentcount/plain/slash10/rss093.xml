@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="0.93"
+    xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+    <channel>
+        <item>
+            <slash:comments>321</slash:comments>
+        </item>
+    </channel>
+</rss>

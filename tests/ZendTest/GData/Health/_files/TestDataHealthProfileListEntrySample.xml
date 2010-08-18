@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'>
+  <id>
+  https://www.google.com/health/feeds/profile/list/vndCn5sdfwdEIY</id>
+  <updated>1970-01-01T00:00:00.000Z</updated>
+  <title type='text'>profile name</title>
+  <content type='text'>vndCn5sdfwdEIY</content>
+  <link rel='self' type='application/atom+xml'
+  href='https://www.google.com/health/feeds/profile/list/vndCn5sdfwdEIY' />
+  <link rel='edit' type='application/atom+xml'
+  href='https://www.google.com/health/feeds/profile/list/vndCn5sdfwdEIY' />
+  <author>
+    <name>user@gmail.com</name>
+  </author>
+</entry>

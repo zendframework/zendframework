@@ -333,7 +333,7 @@ class Image extends AbstractRenderer
         $this->draw();
         header("Content-Type: image/" . $this->_imageType);
         $functionName = 'image' . $this->_imageType;
-        $functionName($this->_resource);
+        call_user_func($functionName, $this->_resource);
         @imagedestroy($this->_resource);
     }
 

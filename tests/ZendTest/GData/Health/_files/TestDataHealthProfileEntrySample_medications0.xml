@@ -1,0 +1,48 @@
+<Medications>
+<Medication>
+  <Type />
+  <Description />
+  <Status>
+    <Text>ACTIVE</Text>
+  </Status>
+  <Source>
+    <Actor>
+      <ActorID>user@gmail.com</ActorID>
+      <ActorRole>
+        <Text>Patient</Text>
+      </ActorRole>
+    </Actor>
+  </Source>
+  <Product>
+    <ProductName>
+      <Text>A&amp; D</Text>
+    </ProductName>
+    <Strength>
+      <Units />
+      <StrengthSequencePosition>0</StrengthSequencePosition>
+      <VariableStrengthModifier />
+    </Strength>
+  </Product>
+  <Directions>
+    <Direction>
+      <Description />
+      <DeliveryMethod />
+      <Dose>
+        <Units />
+        <DoseSequencePosition>0</DoseSequencePosition>
+        <VariableDoseModifier />
+      </Dose>
+      <Route>
+        <Text>To skin</Text>
+        <Code>
+          <Value>C38305</Value>
+          <CodingSystem>FDA</CodingSystem>
+        </Code>
+        <RouteSequencePosition>0</RouteSequencePosition>
+        <MultipleRouteModifier />
+      </Route>
+    </Direction>
+  </Directions>
+  <Refills />
+</Medication>
+</Medications>

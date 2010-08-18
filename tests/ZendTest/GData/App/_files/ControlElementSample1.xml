@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<control xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://purl.org/atom/app#">
+  <app:draft>yes</app:draft>
+</control>

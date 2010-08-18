@@ -1,0 +1,13 @@
+HTTP/1.1 404 Not Found
+Date: Sun, 13 Jan 2008 23:53:03 GMT
+Server: Apache/1.3.33 (Unix) PHP/4.4.3
+X-Proxy-Fix-Up: headers fixed up
+X-Powered-By: PHP/4.4.3
+Vary: Accept-Encoding
+Content-Type: text/html; charset=utf-8
+X-Cache: MISS from cache7.int.last.fm
+X-Cache-Lookup: MISS from cache7.int.last.fm:8081
+Via: 1.0 cache7.int.last.fm:8081 (squid/2.HEAD-20071216)
+Connection: close
+
+No user exists with this name.

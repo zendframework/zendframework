@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Sun May 30 10:30:33 +0000 2010</created_at>
+  <id>15033538555</id>
+  <text>@padraicb please add a test for using the 'cursor' parameter on Zend_Service_Twitter::userFriends(). And then make it pass. ;-)</text>
+  <source>&lt;a href="https://oauth.filttr.com/" rel="nofollow"&gt;Filttr&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>15008737288</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>14996367</id>
+    <name>Matthias v/d Heide</name>
+    <screen_name>matthiasvdh</screen_name>
+    <location>Netherlands</location>
+    <description>Student, software developer, techie, Lego fan</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/269860838/Untitled_normal.png</profile_image_url>
+    <url>http://vanderheide.it</url>
+    <protected>false</protected>
+    <followers_count>78</followers_count>
+    <profile_background_color>0099B9</profile_background_color>
+    <profile_text_color>3C3940</profile_text_color>
+    <profile_link_color>0099B9</profile_link_color>
+    <profile_sidebar_fill_color>95E8EC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>5ED4DC</profile_sidebar_border_color>
+    <friends_count>153</friends_count>
+    <created_at>Tue Jun 03 19:19:52 +0000 2008</created_at>
+    <favourites_count>205</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Amsterdam</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme4/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications/>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following/>
+    <statuses_count>755</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri May 28 09:43:43 +0000 2010</created_at>
+  <id>14895853986</id>
+  <text>very cool video! http://www.airspacemag.com/video/Go-For-Launch.html #NASA (/cc @padraicb)</text>
+  <source>&lt;a href="http://echofon.com/" rel="nofollow"&gt;Echofon&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>56789751</id>
+    <name>Arvid Bergelmir</name>
+    <screen_name>bergelmir</screen_name>
+    <location>Germany</location>
+    <description/>
+    <profile_image_url>http://a3.twimg.com/profile_images/479345149/1-a4e9ea4edf20b03d5318f3e1689ca9e7_normal.jpg</profile_image_url>
+    <url>http://www.flabben.net/</url>
+    <protected>false</protected>
+    <followers_count>64</followers_count>
+    <profile_background_color>0099B9</profile_background_color>
+    <profile_text_color>3C3940</profile_text_color>
+    <profile_link_color>0099B9</profile_link_color>
+    <profile_sidebar_fill_color>95E8EC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>5ED4DC</profile_sidebar_border_color>
+    <friends_count>91</friends_count>
+    <created_at>Tue Jul 14 19:29:38 +0000 2009</created_at>
+    <favourites_count>76</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Berlin</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme4/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>1831</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 19:27:21 +0000 2010</created_at>
+  <id>14854465881</id>
+  <text>@padraicb it works so good *and* easy that I'm gonna make both rss and atom feeds *bows before master*</text>
+  <source>&lt;a href="http://www.echofon.com/" rel="nofollow"&gt;Echofon&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14854405950</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>12744542</id>
+    <name>Robert Basic</name>
+    <screen_name>robertbasic</screen_name>
+    <location>Serbia</location>
+    <description>For those about to code - I salute you.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/630933128/twitterProfilePhoto.jpg_normal.png</profile_image_url>
+    <url>http://robertbasic.com</url>
+    <protected>false</protected>
+    <followers_count>1005</followers_count>
+    <profile_background_color>161D32</profile_background_color>
+    <profile_text_color>6B7287</profile_text_color>
+    <profile_link_color>0000FF</profile_link_color>
+    <profile_sidebar_fill_color>FDF08D</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>000000</profile_sidebar_border_color>
+    <friends_count>372</friends_count>
+    <created_at>Sun Jan 27 09:29:10 +0000 2008</created_at>
+    <favourites_count>25</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Belgrade</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/3156960/header.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15237</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 19:21:36 +0000 2010</created_at>
+  <id>14854191542</id>
+  <text>thank you @padraicb #zf</text>
+  <source>&lt;a href="http://www.echofon.com/" rel="nofollow"&gt;Echofon&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>12744542</id>
+    <name>Robert Basic</name>
+    <screen_name>robertbasic</screen_name>
+    <location>Serbia</location>
+    <description>For those about to code - I salute you.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/630933128/twitterProfilePhoto.jpg_normal.png</profile_image_url>
+    <url>http://robertbasic.com</url>
+    <protected>false</protected>
+    <followers_count>1005</followers_count>
+    <profile_background_color>161D32</profile_background_color>
+    <profile_text_color>6B7287</profile_text_color>
+    <profile_link_color>0000FF</profile_link_color>
+    <profile_sidebar_fill_color>FDF08D</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>000000</profile_sidebar_border_color>
+    <friends_count>372</friends_count>
+    <created_at>Sun Jan 27 09:29:10 +0000 2008</created_at>
+    <favourites_count>25</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Belgrade</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/3156960/header.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15237</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 19:05:36 +0000 2010</created_at>
+  <id>14853489927</id>
+  <text>let's see what @padraicb did with that Zend_Feed_Writer thingy...</text>
+  <source>&lt;a href="http://www.echofon.com/" rel="nofollow"&gt;Echofon&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>12744542</id>
+    <name>Robert Basic</name>
+    <screen_name>robertbasic</screen_name>
+    <location>Serbia</location>
+    <description>For those about to code - I salute you.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/630933128/twitterProfilePhoto.jpg_normal.png</profile_image_url>
+    <url>http://robertbasic.com</url>
+    <protected>false</protected>
+    <followers_count>1005</followers_count>
+    <profile_background_color>161D32</profile_background_color>
+    <profile_text_color>6B7287</profile_text_color>
+    <profile_link_color>0000FF</profile_link_color>
+    <profile_sidebar_fill_color>FDF08D</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>000000</profile_sidebar_border_color>
+    <friends_count>372</friends_count>
+    <created_at>Sun Jan 27 09:29:10 +0000 2008</created_at>
+    <favourites_count>25</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Belgrade</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/3156960/header.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15237</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 17:19:29 +0000 2010</created_at>
+  <id>14848101893</id>
+  <text>Happy to announce the release of Mockery 0.6. Power to the Mock Object! http://bit.ly/b7s26h (via @padraicb)</text>
+  <source>&lt;a href="http://itunes.apple.com/app/twitter/id333903271?mt=8" rel="nofollow"&gt;Twitter for iPhone&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>14457722</id>
+    <name>Eric Clemmons</name>
+    <screen_name>ericclemmons</screen_name>
+    <location>iPhone: 30.266818,-97.737081</location>
+    <description>Developer passionate about technology and user experience.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/111313709/eric_normal.png</profile_image_url>
+    <url>http://blog.uxdriven.com</url>
+    <protected>false</protected>
+    <followers_count>74</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>53</friends_count>
+    <created_at>Mon Apr 21 03:03:14 +0000 2008</created_at>
+    <favourites_count>7</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274144130/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>627</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 16:22:56 +0000 2010</created_at>
+  <id>14844788858</id>
+  <text>@padraicb You sure? This could go on for a while. =) But srly - great work!</text>
+  <source>&lt;a href="http://www.brizzly.com" rel="nofollow"&gt;Brizzly&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14844633578</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>4600051</id>
+    <name>Till!</name>
+    <screen_name>klimpong</screen_name>
+    <location>Berlin, Germany</location>
+    <description>I'm immature. Don't follow if you can't handle it. I also twitter from @easybib and @roundcube. Bing!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/18810092/till_avatar_normal.jpg</profile_image_url>
+    <url>http://till.klampaeckel.de/</url>
+    <protected>false</protected>
+    <followers_count>584</followers_count>
+    <profile_background_color>9ac2e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0071ff</profile_link_color>
+    <profile_sidebar_fill_color>ffe292</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>bc444c</profile_sidebar_border_color>
+    <friends_count>232</friends_count>
+    <created_at>Sat Apr 14 13:09:04 +0000 2007</created_at>
+    <favourites_count>15</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Berlin</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/1790412/2198002194_aa7845d082_b.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>7367</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 16:19:34 +0000 2010</created_at>
+  <id>14844582959</id>
+  <text>@padraicb: look who's mocking now? ;-)</text>
+  <source>&lt;a href="https://launchpad.net/gwibber/" rel="nofollow"&gt;Gwibber&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14844004546</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>14407919</id>
+    <name>kenguest</name>
+    <screen_name>kenguest</screen_name>
+    <location>Nenagh, Ireland</location>
+    <description>I'm a geek and not ashamed of it :p Interests: openstreetmap, languages beginning with the letter 'P' and databases.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/842798614/kwg2_normal.jpg</profile_image_url>
+    <url>http://blogs.linux.ie/kenguest/</url>
+    <protected>false</protected>
+    <followers_count>307</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>405</friends_count>
+    <created_at>Wed Apr 16 13:32:35 +0000 2008</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>Dublin</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/75441177/twilk_background_4b797d49cf805.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>704</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 16:17:03 +0000 2010</created_at>
+  <id>14844431760</id>
+  <text>@padraicb Mock, mock!!!</text>
+  <source>&lt;a href="http://www.brizzly.com" rel="nofollow"&gt;Brizzly&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14844004546</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>4600051</id>
+    <name>Till!</name>
+    <screen_name>klimpong</screen_name>
+    <location>Berlin, Germany</location>
+    <description>I'm immature. Don't follow if you can't handle it. I also twitter from @easybib and @roundcube. Bing!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/18810092/till_avatar_normal.jpg</profile_image_url>
+    <url>http://till.klampaeckel.de/</url>
+    <protected>false</protected>
+    <followers_count>584</followers_count>
+    <profile_background_color>9ac2e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0071ff</profile_link_color>
+    <profile_sidebar_fill_color>ffe292</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>bc444c</profile_sidebar_border_color>
+    <friends_count>232</friends_count>
+    <created_at>Sat Apr 14 13:09:04 +0000 2007</created_at>
+    <favourites_count>15</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Berlin</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/1790412/2198002194_aa7845d082_b.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>7367</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 14:34:24 +0000 2010</created_at>
+  <id>14838395116</id>
+  <text>@padraicb Zend_Service_Twitter - saw on the mailing list you're working on stuff - if you need assistance let me know</text>
+  <source>&lt;a href="http://www.destroytwitter.com" rel="nofollow"&gt;DestroyTwitter&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>14319947</id>
+    <name>Justin Hart</name>
+    <screen_name>onyxraven</screen_name>
+    <location>Denver, CO</location>
+    <description>Gamer, lead dev for Photobucket and Twitgoo!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/52507214/blueraven2_normal.gif</profile_image_url>
+    <url>http://twitgoo.com/u/onyxraven</url>
+    <protected>false</protected>
+    <followers_count>201</followers_count>
+    <profile_background_color>C6E2EE</profile_background_color>
+    <profile_text_color>663B12</profile_text_color>
+    <profile_link_color>1F98C7</profile_link_color>
+    <profile_sidebar_fill_color>DAECF4</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>C6E2EE</profile_sidebar_border_color>
+    <friends_count>180</friends_count>
+    <created_at>Mon Apr 07 03:52:38 +0000 2008</created_at>
+    <favourites_count>10</favourites_count>
+    <utc_offset>-25200</utc_offset>
+    <time_zone>Mountain Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274739546/images/themes/theme2/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>3018</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 13:54:32 +0000 2010</created_at>
+  <id>14835896954</id>
+  <text>@padraicb 62!? 34 Blocker + 50 Critical = 84 issues</text>
+  <source>&lt;a href="http://echofon.com/" rel="nofollow"&gt;Echofon&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14834640295</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>56789751</id>
+    <name>Arvid Bergelmir</name>
+    <screen_name>bergelmir</screen_name>
+    <location>Germany</location>
+    <description/>
+    <profile_image_url>http://a3.twimg.com/profile_images/479345149/1-a4e9ea4edf20b03d5318f3e1689ca9e7_normal.jpg</profile_image_url>
+    <url>http://www.flabben.net/</url>
+    <protected>false</protected>
+    <followers_count>64</followers_count>
+    <profile_background_color>0099B9</profile_background_color>
+    <profile_text_color>3C3940</profile_text_color>
+    <profile_link_color>0099B9</profile_link_color>
+    <profile_sidebar_fill_color>95E8EC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>5ED4DC</profile_sidebar_border_color>
+    <friends_count>91</friends_count>
+    <created_at>Tue Jul 14 19:29:38 +0000 2009</created_at>
+    <favourites_count>76</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Berlin</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme4/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>1832</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 13:35:24 +0000 2010</created_at>
+  <id>14834728110</id>
+  <text>RT @padraicb: Interesting #ZF issues fact: There are just 62 open issues marked Blocker/Critical. Nice focus for the next bug hunt...</text>
+  <source>&lt;a href="http://www.tweetdeck.com" rel="nofollow"&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>20496827</id>
+    <name>Victor Farazdagi</name>
+    <screen_name>farazdagi</screen_name>
+    <location>Ставрополь</location>
+    <description/>
+    <profile_image_url>http://a3.twimg.com/profile_images/861970301/pingninja-white_normal.png</profile_image_url>
+    <url>http://phpmag.ru</url>
+    <protected>false</protected>
+    <followers_count>22</followers_count>
+    <profile_background_color>EDECE9</profile_background_color>
+    <profile_text_color>634047</profile_text_color>
+    <profile_link_color>088253</profile_link_color>
+    <profile_sidebar_fill_color>E3E2DE</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>D3D2CF</profile_sidebar_border_color>
+    <friends_count>15</friends_count>
+    <created_at>Tue Feb 10 07:17:57 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset/>
+    <time_zone/>
+    <profile_background_image_url>http://s.twimg.com/a/1274899949/images/themes/theme3/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>187</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu May 27 10:53:03 +0000 2010</created_at>
+  <id>14826671084</id>
+  <text>Test spies  are finally catching on? http://bit.ly/cGO75A http://bit.ly/9w6ZFd (@magnars @zmalltalker @padraicb)</text>
+  <source>&lt;a href="http://www.tweetdeck.com" rel="nofollow"&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id/>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name/>
+  <user>
+    <id>14640402</id>
+    <name>dagfinnr</name>
+    <screen_name>dagfinnr</screen_name>
+    <location>Oslo, Norway</location>
+    <description>Web developer, author PHP in Action, father, husband.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/71308130/dagfinn7_square_normal.jpg</profile_image_url>
+    <url>http://www.reiersol.com</url>
+    <protected>false</protected>
+    <followers_count>217</followers_count>
+    <profile_background_color>709397</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>FF3300</profile_link_color>
+    <profile_sidebar_fill_color>A0C5C7</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>86A4A6</profile_sidebar_border_color>
+    <friends_count>188</friends_count>
+    <created_at>Sat May 03 18:45:50 +0000 2008</created_at>
+    <favourites_count>33</favourites_count>
+    <utc_offset>3600</utc_offset>
+    <time_zone>Copenhagen</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/4120429/dscf0308.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>992</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Wed May 26 00:46:17 +0000 2010</created_at>
+  <id>14728733916</id>
+  <text>@padraicb yes, that was pretty amazing</text>
+  <source>&lt;a href="http://funkatron.com/spaz" rel="nofollow"&gt;Spaz&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14727669043</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>65583</id>
+    <name>Ed Finkler</name>
+    <screen_name>funkatron</screen_name>
+    <location>47904</location>
+    <description>Dork, Dad, HiiDef Patriot, Webapp security dude, Spaz developer, webmonkey, designer, musician, ego-ho. See also: @funkalinks</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/882207061/BurgerKingDiamond_square_normal.jpg</profile_image_url>
+    <url>http://funkatron.com</url>
+    <protected>false</protected>
+    <followers_count>2536</followers_count>
+    <profile_background_color>660000</profile_background_color>
+    <profile_text_color>424141</profile_text_color>
+    <profile_link_color>660000</profile_link_color>
+    <profile_sidebar_fill_color>b8b8b8</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>1023</friends_count>
+    <created_at>Thu Dec 14 00:31:16 +0000 2006</created_at>
+    <favourites_count>1417</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/90616269/funbike.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>27649</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Tue May 25 01:42:16 +0000 2010</created_at>
+  <id>14661998647</id>
+  <text>@padraicb how far are you into it? I didn't want to spoil much.</text>
+  <source>&lt;a href="http://funkatron.com/spaz" rel="nofollow"&gt;Spaz&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14654478761</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>65583</id>
+    <name>Ed Finkler</name>
+    <screen_name>funkatron</screen_name>
+    <location>47904</location>
+    <description>Dork, Dad, HiiDef Patriot, Webapp security dude, Spaz developer, webmonkey, designer, musician, ego-ho. See also: @funkalinks</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/882207061/BurgerKingDiamond_square_normal.jpg</profile_image_url>
+    <url>http://funkatron.com</url>
+    <protected>false</protected>
+    <followers_count>2536</followers_count>
+    <profile_background_color>660000</profile_background_color>
+    <profile_text_color>424141</profile_text_color>
+    <profile_link_color>660000</profile_link_color>
+    <profile_sidebar_fill_color>b8b8b8</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>1023</friends_count>
+    <created_at>Thu Dec 14 00:31:16 +0000 2006</created_at>
+    <favourites_count>1417</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/90616269/funbike.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>27649</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon May 24 23:33:22 +0000 2010</created_at>
+  <id>14654756605</id>
+  <text>@padraicb Jacob and Miranda were flat and disinteresting, IMHO</text>
+  <source>&lt;a href="http://funkatron.com/spaz" rel="nofollow"&gt;Spaz&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14654478761</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>65583</id>
+    <name>Ed Finkler</name>
+    <screen_name>funkatron</screen_name>
+    <location>47904</location>
+    <description>Dork, Dad, HiiDef Patriot, Webapp security dude, Spaz developer, webmonkey, designer, musician, ego-ho. See also: @funkalinks</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/882207061/BurgerKingDiamond_square_normal.jpg</profile_image_url>
+    <url>http://funkatron.com</url>
+    <protected>false</protected>
+    <followers_count>2536</followers_count>
+    <profile_background_color>660000</profile_background_color>
+    <profile_text_color>424141</profile_text_color>
+    <profile_link_color>660000</profile_link_color>
+    <profile_sidebar_fill_color>b8b8b8</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>1023</friends_count>
+    <created_at>Thu Dec 14 00:31:16 +0000 2006</created_at>
+    <favourites_count>1417</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/90616269/funbike.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>27649</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon May 24 23:32:30 +0000 2010</created_at>
+  <id>14654709942</id>
+  <text>@padraicb Mordan (Salarian) was excellent. Jack v good. Some other good ones, but they were most compelling stories and characters.</text>
+  <source>&lt;a href="http://funkatron.com/spaz" rel="nofollow"&gt;Spaz&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14654478761</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>65583</id>
+    <name>Ed Finkler</name>
+    <screen_name>funkatron</screen_name>
+    <location>47904</location>
+    <description>Dork, Dad, HiiDef Patriot, Webapp security dude, Spaz developer, webmonkey, designer, musician, ego-ho. See also: @funkalinks</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/882207061/BurgerKingDiamond_square_normal.jpg</profile_image_url>
+    <url>http://funkatron.com</url>
+    <protected>false</protected>
+    <followers_count>2536</followers_count>
+    <profile_background_color>660000</profile_background_color>
+    <profile_text_color>424141</profile_text_color>
+    <profile_link_color>660000</profile_link_color>
+    <profile_sidebar_fill_color>b8b8b8</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>1023</friends_count>
+    <created_at>Thu Dec 14 00:31:16 +0000 2006</created_at>
+    <favourites_count>1417</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/90616269/funbike.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>27649</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon May 24 23:25:48 +0000 2010</created_at>
+  <id>14654351112</id>
+  <text>@padraicb I had exactly the same issue. I enjoyed it, but it lacked the replay value of the first, I felt</text>
+  <source>&lt;a href="http://funkatron.com/spaz" rel="nofollow"&gt;Spaz&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>14654250994</in_reply_to_status_id>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>65583</id>
+    <name>Ed Finkler</name>
+    <screen_name>funkatron</screen_name>
+    <location>47904</location>
+    <description>Dork, Dad, HiiDef Patriot, Webapp security dude, Spaz developer, webmonkey, designer, musician, ego-ho. See also: @funkalinks</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/882207061/BurgerKingDiamond_square_normal.jpg</profile_image_url>
+    <url>http://funkatron.com</url>
+    <protected>false</protected>
+    <followers_count>2536</followers_count>
+    <profile_background_color>660000</profile_background_color>
+    <profile_text_color>424141</profile_text_color>
+    <profile_link_color>660000</profile_link_color>
+    <profile_sidebar_fill_color>b8b8b8</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>1023</friends_count>
+    <created_at>Thu Dec 14 00:31:16 +0000 2006</created_at>
+    <favourites_count>1417</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/90616269/funbike.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>27649</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon May 24 18:13:59 +0000 2010</created_at>
+  <id>14638944219</id>
+  <text>@padraicb's Mockery looks interesting. might have to find some time to play with it. http://bit.ly/d6eWLy #unittest #php</text>
+  <source>&lt;a href="http://www.tweetdeck.com" rel="nofollow"&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>7021562</id>
+    <name>Chance Garcia</name>
+    <screen_name>chancegarcia</screen_name>
+    <location>Bloomington, IN</location>
+    <description>I'm a Web Applications Specialist working in php and occasionally manage to avoid the fail hammer. will be learning how to work with AS/400 on current project</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/422223117/un_normal.gif</profile_image_url>
+    <url>http://chance.garciawebapps.com</url>
+    <protected>false</protected>
+    <followers_count>352</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>353</friends_count>
+    <created_at>Fri Jun 22 18:37:34 +0000 2007</created_at>
+    <favourites_count>8</favourites_count>
+    <utc_offset>-18000</utc_offset>
+    <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/308732/mka_wallpaper_1280x1024.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>4361</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon May 24 06:42:25 +0000 2010</created_at>
+  <id>14607181347</id>
+  <text>@padraicb Having a look Mockery it looks very good, nice work :) This is going to save me time! http://bit.ly/bScH98</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id/>
+  <in_reply_to_user_id>9075802</in_reply_to_user_id>
+  <favorited>false</favorited>
+  <in_reply_to_screen_name>padraicb</in_reply_to_screen_name>
+  <user>
+    <id>18796463</id>
+    <name>Keith Pope</name>
+    <screen_name>muteor</screen_name>
+    <location>UK</location>
+    <description>Monkey...</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/70376323/optimusprime_normal.png</profile_image_url>
+    <url>http://www.thepopeisdead.com</url>
+    <protected>true</protected>
+    <followers_count>30</followers_count>
+    <profile_background_color>B2DFDA</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>93A644</profile_link_color>
+    <profile_sidebar_fill_color>ffffff</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>eeeeee</profile_sidebar_border_color>
+    <friends_count>37</friends_count>
+    <created_at>Fri Jan 09 08:43:27 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1274130900/images/themes/theme13/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>741</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <coordinates/>
+  <place/>
+  <contributors/>
+</status>
+</statuses>

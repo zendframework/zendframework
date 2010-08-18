@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+    <channel>
+        <item>
+            <category domain="http://example.com/schema1">topic1</category>
+            <category domain="http://example.com/schema2">topic1</category>
+            <category domain="http://example.com/schema1">topic2</category>
+        </item>
+    </channel>
+</rss>

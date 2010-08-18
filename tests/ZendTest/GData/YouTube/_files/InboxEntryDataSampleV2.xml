@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+  xmlns:gml='http://www.opengis.net/gml'
+  xmlns:georss='http://www.georss.org/georss'
+  xmlns:media='http://search.yahoo.com/mrss/'
+  xmlns:yt='http://gdata.youtube.com/schemas/2007'
+  xmlns:gd='http://schemas.google.com/g/2005'
+  gd:etag='W/&quot;C0QHQ347eCp7ImA9WxdQEU4.&quot;'>
+    <id>tag:youtube,2008:user:andyland74:inbox:D_uaXzLRX1U</id>
+    <published>2008-06-10T13:55:32.000-07:00</published>
+    <updated>2008-06-10T13:55:32.000-07:00</updated>
+    <app:edited
+  xmlns:app='http://www.w3.org/2007/app'>2008-06-10T20:55:32.000Z</app:edited>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+      term='http://gdata.youtube.com/schemas/2007#videoMessage'/>
+    <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='surfing'/>
+    <category scheme='http://gdata.youtube.com/schemas/2007/categories.cat'
+      term='People' label='People &amp; Blogs'/>
+    <title>andyland74sFriend sent you a video!</title>
+    <summary>Check out this video!</summary>
+    <link rel='alternate' type='text/html'
+      href='http://www.youtube.com/watch?v=jXE6G9CYcJs'/>
+    <link rel='http://gdata.youtube.com/schemas/2007#video.responses'
+      type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/jXE6G9CYcJs/responses?v=2'/>
+    <link rel='http://gdata.youtube.com/schemas/2007#video.ratings'
+      type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/jXE6G9CYcJs/ratings?v=2'/>
+    <link rel='http://gdata.youtube.com/schemas/2007#video.complaints'
+      type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/jXE6G9CYcJs/complaints?v=2'/>
+    <link rel='http://gdata.youtube.com/schemas/2007#mobile'
+      type='text/html' href='http://m.youtube.com/details?v=jXE6G9CYcJs'/>
+    <link rel='http://gdata.youtube.com/schemas/2007#video.related'
+      type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/jXE6G9CYcJs/related?v=2'/>
+    <link rel='related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/jXE6G9CYcJs?v=2'/>
+    <link rel='self' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/users/andyland74/inbox/ffb9a5f32cd5f55?v=2'/>
+    <link rel='edit' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/users/andyland74/inbox/ffb9a5f32cd5f55?v=2'/>
+    <author>
+      <name>andyland74sFriend</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/andyland74sFriend</uri>
+    </author>
+    <media:group>
+      <media:title type='plain'>Learning the ABCs</media:title>
+      <media:description type='plain'>
+        A great method for teaching kids the alphabet.
+      </media:description>
+      <media:keywords>alphabet, teaching, children</media:keywords>
+      <yt:duration seconds='202'/>
+      <yt:videoid>jXE6G9CYcJs</yt:videoid>
+      <media:credit role='uploader' scheme='urn:youtube'>andyland74sFriend</media:credit>
+      <media:category label='Education'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>
+        Education</media:category>
+      <media:content url='http://www.youtube.com/v/jXE6G9CYcJs'
+        type='application/x-shockwave-flash' medium='video' isDefault='true'
+        expression='full' duration='202' yt:format='5'/>
+      <media:content
+        url='rtsp://rtsp2.youtube.com/ChoLENySANFEgGDA==/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full'
+        duration='202' yt:format='1'/>
+      <media:content
+        url='rtsp://rtsp2.youtube.com/ChoLENySARFEgGDA==/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full'
+        duration='202' yt:format='6'/>
+      <media:player url='http://www.youtube.com/watch?v=jXE6G9CYcJs'/>
+      <media:thumbnail url='http://img.youtube.com/vi/jXE6G9CYcJs/2.jpg'
+        height='97' width='130' time='00:01:41'/>
+      <media:thumbnail url='http://img.youtube.com/vi/jXE6G9CYcJs/1.jpg'
+        height='97' width='130' time='00:00:50.500'/>
+      <media:thumbnail url='http://img.youtube.com/vi/jXE6G9CYcJs/3.jpg'
+        height='97' width='130' time='00:02:31.500'/>
+      <media:thumbnail url='http://img.youtube.com/vi/jXE6G9CYcJs/0.jpg'
+        height='240' width='320' time='00:01:41'/>
+    </media:group>
+    <yt:statistics viewCount='286355' favoriteCount='201'/>
+    <gd:rating min='1' max='5' numRaters='877' average='3.88'/>
+    <gd:comments>
+      <gd:feedLink
+        href='http://gdata.youtube.com/feeds/api/videos/jXE6G9CYcJs/comments'
+        countHint='1088'/>
+    </gd:comments>
+</entry>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+<watchlist id="1331" name="Test Watchlist"
+       description="This is a watchlist for testing purposes. Please do not remove it."
+       addDate="Fri Dec 08 21:40:56 EST 2006"
+       newLinks="0">
+
+  
+    <user username="otis"/>
+  
+  
+    <filter name="Test Filter" query="zend"/>
+  
+</watchlist>

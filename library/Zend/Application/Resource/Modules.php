@@ -25,8 +25,6 @@
  */
 namespace Zend\Application\Resource;
 
-use Zend\Application\Exception as Exception;
-
 /**
  * Module bootstrapping resource
  *
@@ -74,7 +72,7 @@ class Modules extends AbstractResource
         $default = $front->getDefaultModule();
         $curBootstrapClass = get_class($bootstrap);
         foreach ($modules as $module => $moduleDirectory) {
-            $bootstrapClass = $this->_formatModuleName($module) . '\Bootstrap';
+            $bootstrapClass = $this->_formatModuleName($module) . '_Bootstrap';
             if (!class_exists($bootstrapClass, false)) {
                 $bootstrapPath  = dirname($moduleDirectory) . '/Bootstrap.php';
                 if (file_exists($bootstrapPath)) {
@@ -83,14 +81,14 @@ class Modules extends AbstractResource
                     if (($default != $module)
                         && !class_exists($bootstrapClass, false)
                     ) {
-                        throw new Exception(sprintf(
+                        throw new xception(sprintf(
                             $eMsgTpl, $module, $bootstrapClass
                         ));
                     } elseif ($default == $module) {
                         if (!class_exists($bootstrapClass, false)) {
                             $bootstrapClass = 'Bootstrap';
                             if (!class_exists($bootstrapClass, false)) {
-                                throw new Exception(sprintf(
+                                throw new xception(sprintf(
                                     $eMsgTpl, $module, $bootstrapClass
                                 ));
                             }

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet href="http://www.blogger.com/styles/atom.css" type="text/css"?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gd='http://schemas.google.com/g/2005'>
+ <id>tag:blogger.com,1999:blog-8273578352962669317</id>
+ <updated>2008-11-11T20:09:14.238-08:00</updated>
+ <title>Test Blog</title>
+ <subtitle type='html'>This is my description.</subtitle>
+ <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://tmjdev-test.blogspot.com/feeds/posts/default'/>
+ <link rel='self'  type='application/atom+xml' href='http://www.blogger.com/feeds/8273578352962669317/posts/default'/>
+ <link rel='alternate' type='text/html' href='http://tmjdev-test.blogspot.com/'/>
+ <link rel='next' type='application/atom+xml' href='http://www.blogger.com/feeds/8273578352962669317/posts/default?start-index=26&amp;max-results=25'/>
+ <author>
+  <name>John Doe</name>
+  <uri>http://www.blogger.com/profile/05925487542352262450</uri>
+  <email>tmjdev@gmail.com</email>
+ </author>
+ <generator version='7.00' uri='http://www.blogger.com'>Blogger</generator>
+ <openSearch:totalResults>30</openSearch:totalResults>
+ <openSearch:startIndex>1</openSearch:startIndex>
+ <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+   <id>tag:blogger.com,1999:blog-8273578352962669317.post-4858063079003295518</id>
+   <published>2008-11-11T20:09:00.001-08:00</published>
+   <updated>2008-11-11T20:09:14.251-08:00</updated>
+   <app:edited xmlns:app='http://www.w3.org/2007/app'>2008-11-11T20:09:14.251-08:00</app:edited>
+   <title>Test Image</title>
+   <content type='html'>FOO</content>
+  <link
+   rel='replies'
+   type='application/atom+xml'
+   href='http://tmjdev-test.blogspot.com/feeds/4858063079003295518/comments/default'
+   title='Post Comments'/>
+  <link
+   rel='replies'
+   type='text/html'
+   href='https://www.blogger.com/comment.g?blogID=8273578352962669317&amp;postID=4858063079003295518'
+   title='0 Comments'/>
+  <link
+   rel='edit'
+   type='application/atom+xml'
+   href='http://www.blogger.com/feeds/8273578352962669317/posts/default/4858063079003295518/1234567890'/>
+  <link
+   rel='self'
+   type='application/atom+xml'
+   href='http://www.blogger.com/feeds/8273578352962669317/posts/default/4858063079003295518'/>
+  <link
+   rel='alternate'
+   type='text/html'
+   href='http://tmjdev-test.blogspot.com/2008/11/test-image_11.html'
+   title='Test Image'/>
+  <author>
+   <name>John Doe</name>
+   <uri>http://www.blogger.com/profile/05925487542352262450</uri>
+   <email>tmjdev@gmail.com</email>
+  </author>
+  <thr:total xmlns:thr='http://purl.org/syndication/thread/1.0'>0</thr:total>
+ </entry>
+</feed>

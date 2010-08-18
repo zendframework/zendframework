@@ -27,7 +27,6 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 use Zend\Date;
 use Zend\URI;
-use Zend\Validator;
 
 /**
 * @uses DOMDocument
@@ -37,8 +36,7 @@ use Zend\Validator;
 * @uses \Zend\Feed\Writer\Renderer\Feed\Atom\Source
 * @uses \Zend\Feed\Writer\Renderer\RendererAbstract
 * @uses \Zend\Feed\Writer\Renderer\RendererInterface
-* @uses \Zend\Uri\Url
-* @uses \Zend\Validator
+* @uses \Zend\Uri\Uri
 * @uses tidy
 * @category Zend
 * @package Zend_Feed_Writer
@@ -294,47 +292,13 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
                 $this->getDataContainer()->getLink());
         }
         if (!URI\URL::validate($this->getDataContainer()->getId()) &&
-        !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#",
-            $this->getDataContainer()->getId()
-        ) && !$this->_validateTagUri($this->getDataContainer()->getId())) {
+        !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $this->getDataContainer()->getId())) {
             throw new Exception('Atom 1.0 IDs must be a valid URI/IRI');
         }
         $id = $dom->createElement('id');
         $root->appendChild($id);
         $text = $dom->createTextNode($this->getDataContainer()->getId());
         $id->appendChild($text);
-    }
-    
-    /**
-     * Validate a URI using the tag scheme (RFC 4151)
-     *
-     * @param string $id
-     * @return bool
-     */
-    protected function _validateTagUri($id)
-    {
-        if (preg_match('/^tag:(?<name>.*),(?<date>\d{4}-?\d{0,2}-?\d{0,2}):(?<specific>.*)(.*:)*$/', $id, $matches)) {
-            $dvalid = false;
-            $nvalid = false;
-            $date = $matches['date'];
-            $d6 = strtotime($date);
-            if ((strlen($date) == 4) && $date <= date('Y')) {
-                $dvalid = true;
-            } elseif ((strlen($date) == 7) && ($d6 < strtotime("now"))) {
-                $dvalid = true;
-            } elseif ((strlen($date) == 10) && ($d6 < strtotime("now"))) {
-                $dvalid = true;
-            }
-            $validator = new Validator\EmailAddress;
-            if ($validator->isValid($matches['name'])) {
-                $nvalid = true;
-            } else {
-                $nvalid = $validator->isValid('info@' . $matches['name']);
-            }
-            return $dvalid && $nvalid;
-
-        }
-        return false;
     }
     
     /**

@@ -184,18 +184,14 @@ class Container extends ArrayObject
      * If not, it raises an exception; otherwise, it returns the Storage 
      * object.
      * 
-     * @param  bool $createContainer Whether or not to create the container for the namespace
-     * @return Storage|null Returns null only if $createContainer is false
+     * @return Storage
      * @throws Exception
      */
-    protected function _verifyNamespace($createContainer = true)
+    protected function _verifyNamespace()
     {
         $storage = $this->_getStorage();
         $name    = $this->getName();
         if (!isset($storage[$name])) {
-            if (!$createContainer) {
-                return;
-            }
             $storage[$name] = $this->_createContainer();
         }
         if (!is_array($storage[$name]) && !$storage[$name] instanceof ArrayObject) {
@@ -209,16 +205,16 @@ class Container extends ArrayObject
      *
      * Returns true if the key has expired, false otherwise.
      * 
-     * @param  null|string $key 
+     * @param  string $key 
      * @return bool
      */
-    protected function _expireKeys($key = null)
+    protected function _expireKeys($key)
     {
         $storage = $this->_verifyNamespace();
         $name    = $this->getName();
 
         // Return early if key not found
-        if ((null !== $key) && !isset($storage[$name][$key])) {
+        if (!isset($storage[$name][$key])) {
             return true;
         }
 
@@ -247,8 +243,6 @@ class Container extends ArrayObject
     protected function _expireByExpiryTime(Storage $storage, $name, $key)
     {
         $metadata = $storage->getMetadata($name);
-
-        // Global container expiry
         if (is_array($metadata) 
             && isset($metadata['EXPIRE']) 
             && ($_SERVER['REQUEST_TIME'] > $metadata['EXPIRE'])
@@ -259,9 +253,7 @@ class Container extends ArrayObject
             return true;
         }
 
-        // Expire individual key
-        if ((null !== $key)
-            && is_array($metadata) 
+        if (is_array($metadata) 
             && isset($metadata['EXPIRE_KEYS']) 
             && isset($metadata['EXPIRE_KEYS'][$key]) 
             && ($_SERVER['REQUEST_TIME'] > $metadata['EXPIRE_KEYS'][$key])
@@ -269,23 +261,6 @@ class Container extends ArrayObject
             unset($metadata['EXPIRE_KEYS'][$key]);
             $storage->setMetadata($name, $metadata, true);
             unset($storage[$name][$key]);
-            return true;
-        }
-
-        // Find any keys that have expired
-        if ((null === $key)
-            && is_array($metadata) 
-            && isset($metadata['EXPIRE_KEYS']) 
-        ) {
-            foreach (array_keys($metadata['EXPIRE_KEYS']) as $key) {
-                if ($_SERVER['REQUEST_TIME'] > $metadata['EXPIRE_KEYS'][$key]) {
-                    unset($metadata['EXPIRE_KEYS'][$key]);
-                    if (isset($storage[$name][$key])) {
-                        unset($storage[$name][$key]);
-                    }
-                }
-            }
-            $storage->setMetadata($name, $metadata, true);
             return true;
         }
 
@@ -307,8 +282,6 @@ class Container extends ArrayObject
     {
         $ts       = $storage->getRequestAccessTime();
         $metadata = $storage->getMetadata($name);
-
-        // Global container expiry
         if (is_array($metadata) 
             && isset($metadata['EXPIRE_HOPS']) 
             && ($ts > $metadata['EXPIRE_HOPS']['ts'])
@@ -325,9 +298,7 @@ class Container extends ArrayObject
             return false;
         }
 
-        // Single key expiry
-        if ((null !== $key)
-            && is_array($metadata) 
+        if (is_array($metadata) 
             && isset($metadata['EXPIRE_HOPS_KEYS']) 
             && isset($metadata['EXPIRE_HOPS_KEYS'][$key]) 
             && ($ts > $metadata['EXPIRE_HOPS_KEYS'][$key]['ts'])
@@ -340,27 +311,6 @@ class Container extends ArrayObject
                 return true;
             }
             $metadata['EXPIRE_HOPS_KEYS'][$key]['ts'] = $ts;
-            $storage->setMetadata($name, $metadata, true);
-            return false;
-        }
-
-        // Find all expired keys
-        if ((null === $key)
-            && is_array($metadata) 
-            && isset($metadata['EXPIRE_HOPS_KEYS']) 
-        ) {
-            foreach (array_keys($metadata['EXPIRE_HOPS_KEYS']) as $key) {
-                if ($ts > $metadata['EXPIRE_HOPS_KEYS'][$key]['ts']) {
-                    $metadata['EXPIRE_HOPS_KEYS'][$key]['hops']--;
-                    if (-1 === $metadata['EXPIRE_HOPS_KEYS'][$key]['hops']) {
-                        unset($metadata['EXPIRE_HOPS_KEYS'][$key]);
-                        $storage->setMetadata($name, $metadata, true);
-                        unset($storage[$name][$key]);
-                        continue;
-                    }
-                    $metadata['EXPIRE_HOPS_KEYS'][$key]['ts'] = $ts;
-                }
-            }
             $storage->setMetadata($name, $metadata, true);
             return false;
         }
@@ -391,10 +341,7 @@ class Container extends ArrayObject
      */
     public function offsetExists($key)
     {
-        // If no container exists, we can't inspect it
-        if (null === ($storage = $this->_verifyNamespace(false))) {
-            return false;
-        }
+        $storage = $this->_verifyNamespace();
         $name    = $this->getName();
 
         // Return early if the key isn't set
@@ -436,19 +383,6 @@ class Container extends ArrayObject
         $storage = $this->_getStorage();
         $name    = $this->getName();
         unset($storage[$name][$key]);
-    }
-
-    /**
-     * Iterate over session container
-     * 
-     * @return Iterator
-     */
-    public function getIterator()
-    {
-        $this->_expireKeys();
-        $storage   = $this->_getStorage();
-        $container = $storage[$this->getName()];
-        return $container->getIterator();
     }
 
     /**

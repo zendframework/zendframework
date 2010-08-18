@@ -32,7 +32,7 @@ use Zend\Tool\Project\Context;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\CodeGenerator\PHP\PHPFile
  * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
  * @package    Zend_Tool
@@ -90,7 +90,7 @@ class CodeGenerator
         if (method_exists($context, 'getCodeGenerator')) {
             $codeGenerator = $context->getCodeGenerator();
         } else {
-            $codeGenerator = new \Zend\CodeGenerator\Php\PhpFile();
+            $codeGenerator = new \Zend\CodeGenerator\PHP\PHPFile();
         }
 
         $codeGenerator = include $streamUri;

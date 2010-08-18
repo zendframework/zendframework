@@ -177,7 +177,7 @@ class Standard extends AbstractDispatcher
      */
     public function formatClassName($moduleName, $className)
     {
-        return $this->formatModuleName($moduleName) . '\\' . $className;
+        return $this->formatModuleName($moduleName) . '_' . $className;
     }
 
     /**

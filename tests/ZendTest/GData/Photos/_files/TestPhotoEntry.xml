@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:exif="http://schemas.google.com/photos/exif/2007" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:gml="http://www.opengis.net/gml" xmlns:georss="http://www.georss.org/georss" xmlns:photo="http://www.pheed.com/pheed/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:gphoto="http://schemas.google.com/photos/2007">
+  <id>http://picasaweb.google.com/data/entry/api/user/sample.user/albumid/1/photoid/100</id>
+  <published>2007-09-05T20:49:24.000Z</published>
+  <updated>2007-09-21T18:19:38.000Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/photos/2007#photo"/>
+  <title type="text">Aqua Graphite.jpg</title>
+  <summary type="text">Gray</summary>
+  <content type="image/jpeg" src="http://lh5.google.com/sample.user/Rt8WVIDZELI/AAAAAAAAABg/d7e0i7gvhNU/Aqua%20Graphite.jpg"/>
+  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1/photoid/100"/>
+  <link rel="alternate" type="text/html" href="http://picasaweb.google.com/sample.user/Test/photo#100"/>
+  <link rel="self" type="application/atom+xml" href="http://picasaweb.google.com/data/entry/api/user/sample.user/albumid/1/photoid/100"/>
+  <gphoto:id>100</gphoto:id>
+  <gphoto:version>1190398778006402</gphoto:version>
+  <gphoto:albumid>1</gphoto:albumid>
+  <gphoto:width>2560</gphoto:width>
+  <gphoto:height>1600</gphoto:height>
+  <gphoto:size>798334</gphoto:size>
+  <gphoto:client/>
+  <gphoto:checksum/>
+  <gphoto:timestamp>1189025363000</gphoto:timestamp>
+  <exif:tags>
+     <exif:fstop>11.0</exif:fstop>
+     <exif:exposure>0.0040</exif:exposure>
+     <exif:flash>true</exif:flash>
+     <exif:focallength>22.0</exif:focallength>
+     <exif:iso>200</exif:iso>
+     <exif:time>1180950900000</exif:time>
+     <exif:imageUniqueID>a5ce2e36b9df7d3cb081511c72e73926</exif:imageUniqueID>
+     <exif:distance>0.0</exif:distance>
+     <exif:make>Fictitious Camera Company</exif:make>
+     <exif:model>AMAZING-100D</exif:model>
+  </exif:tags>
+  <gphoto:commentingEnabled>true</gphoto:commentingEnabled>
+  <gphoto:commentCount>0</gphoto:commentCount>
+  <media:group>
+    <media:title type="plain">Aqua Graphite.jpg</media:title>
+    <media:description type="plain">Gray</media:description>
+    <media:keywords/>
+    <media:content url="http://lh5.google.com/sample.user/Rt8WVIDZELI/AAAAAAAAABg/d7e0i7gvhNU/Aqua%20Graphite.jpg" height="1600" width="2560" type="image/jpeg" medium="image"/>
+    <media:thumbnail url="http://lh5.google.com/sample.user/Rt8WVIDZELI/AAAAAAAAABg/d7e0i7gvhNU/s72/Aqua%20Graphite.jpg" height="45" width="72"/>
+    <media:thumbnail url="http://lh5.google.com/sample.user/Rt8WVIDZELI/AAAAAAAAABg/d7e0i7gvhNU/s144/Aqua%20Graphite.jpg" height="90" width="144"/>
+    <media:thumbnail url="http://lh5.google.com/sample.user/Rt8WVIDZELI/AAAAAAAAABg/d7e0i7gvhNU/s288/Aqua%20Graphite.jpg" height="180" width="288"/>
+    <media:credit>sample</media:credit>
+  </media:group>
+  <georss:where>
+    <gml:Point>
+      <gml:pos>41.87194 12.56738</gml:pos>
+    </gml:Point>
+  </georss:where>
+</entry>

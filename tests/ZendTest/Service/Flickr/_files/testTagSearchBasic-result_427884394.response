@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Date: Thu, 22 Mar 2007 19:09:47 GMT
+Server: Apache/2.0.52
+Content-length: 641
+Connection: close
+Content-type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8" ?>
+<rsp stat="ok">
+<sizes>
+	<size label="Square" width="75" height="75" source="http://farm1.static.flickr.com/145/427884394_48678fb007_s.jpg" url="http://www.flickr.com/photo_zoom.gne?id=427884394&amp;size=sq" />
+	<size label="Thumbnail" width="92" height="37" source="http://farm1.static.flickr.com/145/427884394_48678fb007_t.jpg" url="http://www.flickr.com/photo_zoom.gne?id=427884394&amp;size=t" />
+	<size label="Large" width="92" height="37" source="http://farm1.static.flickr.com/145/427884394_d1e788022b_o.gif" url="http://www.flickr.com/photo_zoom.gne?id=427884394&amp;size=o" />
+</sizes>
+</rsp>

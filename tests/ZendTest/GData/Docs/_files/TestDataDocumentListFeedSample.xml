@@ -1,0 +1,38 @@
+<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom">
+  <ns1:totalResults xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">2</ns1:totalResults>
+  <ns1:startIndex xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">1</ns1:startIndex>
+  <ns0:entry>
+    <ns0:content src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpeadocious" type="text/html"/>
+    <ns0:author>
+      <ns0:name>test.user</ns0:name>
+      <ns0:email>test.user@gmail.com</ns0:email>
+    </ns0:author>
+    <ns0:category label="spreadsheet" scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/docs/2007#spreadsheet" />
+    <ns0:id>http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpeadocious</ns0:id>
+    <ns0:link href="http://foo.com/ccc?key=supercalifragilisticexpeadocious" rel="alternate" type="text/html" />
+    <ns0:link href="http://foo.com/feeds/worksheets/supercalifragilisticexpeadocious/private/full" rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" />
+    <ns0:link href="http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpeadocious" rel="self" type="application/atom+xml" />
+    <ns0:title type="text">Test Spreadsheet</ns0:title>
+    <ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:content src="http://docs.google.com/RawDocContents?action=fetch&amp;docID=gr00vy" type="text/html" />
+    <ns0:author>
+      <ns0:name>test.user</ns0:name>
+      <ns0:email>test.user@gmail.com</ns0:email>
+    </ns0:author>
+    <ns0:category label="document" scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/docs/2007#document" />
+    <ns0:id>http://docs.google.com/feeds/documents/private/full/document%3Agr00vy</ns0:id>
+    <ns0:link href="http://foobar.com/Doc?id=gr00vy" rel="alternate" type="text/html" />
+    <ns0:link href="http://docs.google.com/feeds/documents/private/full/document%3Agr00vy" rel="self" type="application/atom+xml" />
+    <ns0:title type="text">Test Document</ns0:title>
+    <ns0:updated>2007-07-03T18:02:50.338Z</ns0:updated>
+  </ns0:entry>
+  <ns0:id>http://docs.google.com/feeds/documents/private/full</ns0:id>
+  <ns0:link href="http://docs.google.com" rel="alternate" type="text/html" />
+  <ns0:link href="http://docs.google.com/feeds/documents/private/full" rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" />
+  <ns0:link href="http://docs.google.com/feeds/documents/private/full" rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" />
+  <ns0:link href="http://docs.google.com/feeds/documents/private/full" rel="self" type="application/atom+xml" />
+  <ns0:title type="text">Available Documents - test.user@gmail.com</ns0:title>
+  <ns0:updated>2007-07-09T23:07:21.898Z</ns0:updated>
+</ns0:feed>

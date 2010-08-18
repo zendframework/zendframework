@@ -66,13 +66,11 @@ function ZendTest_Autoloader($class)
             $file = dirname(__DIR__) . '/library/Zend/';
             break;
         case 'ZendTest':
-            // temporary fix for ZendTest namespace until we can migrate files 
-            // into ZendTest dir
-            $file = __DIR__ . '/Zend/';
+            $file = __DIR__ . '/ZendTest/';
             break;
         default:
             $file = false;
-            break;
+            break;;
     }
 
     if ($file) {

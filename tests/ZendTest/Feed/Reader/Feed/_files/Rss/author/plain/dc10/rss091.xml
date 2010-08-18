@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="0.91"
+    xmlns:dc="http://purl.org/dc/elements/1.0/">
+    <channel>
+        <item>
+            <dc:creator>Joe Bloggs</dc:creator>
+            <dc:creator>Jane Bloggs</dc:creator>
+        </item>
+    </channel>
+</rss>

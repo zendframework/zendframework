@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed version="0.3" xmlns="http://purl.org/atom/ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <entry>
+        <dc:subject><![CDATA[topic1]]></dc:subject>
+        <dc:subject><![CDATA[topic2]]></dc:subject>
+    </entry>
+</feed>

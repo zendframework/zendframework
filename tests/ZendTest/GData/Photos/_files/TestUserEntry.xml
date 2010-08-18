@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:gml="http://www.opengis.net/gml" xmlns:georss="http://www.georss.org/georss" xmlns:photo="http://www.pheed.com/pheed/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gphoto="http://schemas.google.com/photos/2007">
+  <id>http://picasaweb.google.com/data/entry/api/user/sample.user</id>
+  <published>2007-09-24T23:45:49.059Z</published>
+  <updated>2007-09-24T23:45:49.059Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/photos/2007#user"/>
+  <title type="text">sample.user</title>
+  <summary type="text"/>
+  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://picasaweb.google.com/data/feed/api/user/sample.user"/>
+  <link rel="alternate" type="text/html" href="http://picasaweb.google.com/sample.user"/>
+  <link rel="self" type="application/atom+xml" href="http://picasaweb.google.com/data/entry/api/user/sample.user"/>
+  <author>
+    <name>sample</name>
+    <uri>http://picasaweb.google.com/sample.user</uri>
+  </author>
+  <gphoto:user>sample.user</gphoto:user>
+  <gphoto:nickname>sample</gphoto:nickname>
+  <gphoto:thumbnail>http://lh5.google.com/sample.user/AAAAuZnob5E/AAAAAAAAAAA/EtCbNCdLGxM/s64-c/sample.user</gphoto:thumbnail>
+</entry>

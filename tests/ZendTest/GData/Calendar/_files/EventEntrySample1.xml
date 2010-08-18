@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:gd='http://schemas.google.com/g/2005'
+xmlns:gCal='http://schemas.google.com/gCal/2005'>
+  <id>
+  http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z</id>
+  <published>2007-05-09T16:32:03.000Z</published>
+  <updated>2007-05-09T16:34:33.000Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+  term='http://schemas.google.com/g/2005#event'></category>
+  <title type='text'>www2007 recurring</title>
+  <content type='text'></content>
+  <link rel='alternate' type='text/html'
+  href='http://www.google.com/calendar/event?eid=czBkdHN2cTRwZTE1a3UwOWppZGVnNjdmdjRfMjAwNzA1MDlUMTkzMDAwWiBnZGF0YS5vcHMudGVzdEBt'
+  title='alternate'></link>
+  <link rel='self' type='application/atom+xml'
+  href='http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z'>
+  </link>
+  <link rel='edit' type='application/atom+xml'
+  href='http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z/63314411673'>
+  </link>
+  <author>
+    <name>gdata ops</name>
+    <email>gdata.ops.test@gmail.com</email>
+  </author>
+  <gd:originalEvent id='s0dtsvq4pe15ku09jideg67fv4'
+  href='http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4'>
+    <gd:when startTime='2007-05-09T14:30:00.000-05:00'></gd:when>
+  </gd:originalEvent>
+  <gd:comments>
+    <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/s0dtsvq4pe15ku09jideg67fv4_20070509T193000Z/comments'>
+    </gd:feedLink>
+  </gd:comments>
+  <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+  </gd:eventStatus>
+  <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+  </gd:visibility>
+  <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+  </gd:transparency>
+  <gCal:sendEventNotifications value='false'>
+  </gCal:sendEventNotifications>
+  <gCal:timezone value='America/Los_Angeles'>
+  </gCal:timezone>
+  <gd:when startTime='2007-05-09T17:30:00.000-05:00'
+  endTime='2007-05-09T18:30:00.000-05:00'>
+    <gd:reminder minutes='10' method='alert'></gd:reminder>
+    <gd:reminder minutes='10' method='email'></gd:reminder>
+  </gd:when>
+  <gd:where valueString='Down by the river'></gd:where>
+  <gd:extendedProperty name='http://frank.schemas/2005#prop' value='Mantek' />
+</entry>

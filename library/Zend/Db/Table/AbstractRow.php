@@ -834,7 +834,7 @@ abstract class AbstractRow implements \ArrayAccess, \IteratorAggregate
      */
     protected function _prepareReference(AbstractTable $dependentTable, AbstractTable $parentTable, $ruleKey)
     {
-        $parentTableName = (get_class($parentTable) === 'Zend\Db\Table') ? $parentTable->getDefinitionConfigName() : get_class($parentTable);
+        $parentTableName = (get_class($parentTable) === 'Zend_Db_Table') ? $parentTable->getDefinitionConfigName() : get_class($parentTable);
         $map = $dependentTable->getReference($parentTableName, $ruleKey);
 
         if (!isset($map[AbstractTable::REF_COLUMNS])) {

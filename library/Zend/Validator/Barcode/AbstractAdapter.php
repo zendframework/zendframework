@@ -139,7 +139,7 @@ abstract class AbstractAdapter implements Adapter
         $checksum = $this->getChecksum();
         if (!empty($checksum)) {
             if (method_exists($this, $checksum)) {
-                return $this->$checksum($value);
+                return call_user_func(array($this, $checksum), $value);
             }
         }
 

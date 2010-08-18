@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'>
+  <id>http://gdata.youtube.com/feeds/videos/Lnio-pqLPgg/comments/CE0314DEBFFC9052</id>
+  <published>2007-09-02T18:00:04.000-07:00</published>
+  <updated>2007-09-02T18:00:04.000-07:00</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+  term='http://gdata.youtube.com/schemas/2007#comment' />
+  <title type='text'>how to turn ...</title>
+  <content type='text'>how to turn rejection and heartbreak into something positive is the big mystery of life but you're managed to turn it to your advantage with a beautiful song. Who was she?</content>
+  <link rel='related' type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/Lnio-pqLPgg' />
+  <link rel='alternate' type='text/html'
+  href='http://www.youtube.com/watch?v=Lnio-pqLPgg' />
+  <link rel='self' type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/Lnio-pqLPgg/comments/CE0314DEBFFC9052' />
+  <author>
+    <name>reneemathome</name>
+    <uri>http://gdata.youtube.com/feeds/users/reneemathome</uri>
+  </author>
+</entry>

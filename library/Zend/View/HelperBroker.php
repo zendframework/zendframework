@@ -34,6 +34,11 @@ class HelperBroker
             $r = new \ReflectionClass($class);
             $instance = $r->newInstanceArgs($options);
         }
+
+        if (!$instance instanceof Helper) {
+            throw new InvalidHelperException('View helpers must implement Zend\View\Helper');
+        }
+
         $this->helpers[$helperName] = $instance;
         return $instance;
     }

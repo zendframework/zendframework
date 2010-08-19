@@ -24,6 +24,9 @@
  */
 namespace Zend\Loader;
 
+use ArrayIterator,
+    Traversable;
+
 /**
  * Plugin class locater interface
  *
@@ -144,5 +147,18 @@ class PluginClassLoader implements PluginClassLocater
             return false;
         }
         return $this->plugins[strtolower($name)];
+    }
+
+    /**
+     * Defined by IteratorAggregate
+     *
+     * Returns an instance of ArrayIterator, containing a map of 
+     * all plugins
+     * 
+     * @return Iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->plugins);
     }
 }

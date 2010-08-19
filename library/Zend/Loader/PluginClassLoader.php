@@ -104,9 +104,7 @@ class PluginClassLoader implements PluginClassLocater
         // iterator_apply is faster than foreach
         $loader = $this;
         iterator_apply($map, function() use ($loader, $map) {
-            $plugin = $map->key();
-            $class  = $map->current();
-            $loader->registerPlugin($plugin, $class);
+            $loader->registerPlugin($map->key(), $map->current());
         });
 
         return $this;

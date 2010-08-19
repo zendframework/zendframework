@@ -2,8 +2,11 @@
 /** @namespace */
 namespace Zend\Loader;
 
-// Grab Autoloadable interface
+/** Zend\Loader\Autoloadable */
 require_once __DIR__ . '/Autoloadable.php';
+
+/** Zend\Loader\InvalidArgumentException */
+require_once __DIR__ . '/InvalidArgumentException.php';
 
 /**
  * Class-map autoloader
@@ -31,7 +34,6 @@ class ClassMapAutoloader implements Autoloadable
     public function registerAutoloadMap($location)
     {
         if (!file_exists($location)) {
-            require_once __DIR__ . '/InvalidArgumentException.php';
             throw new InvalidArgumentException('Map file provided does not exist');
         }
 
@@ -45,7 +47,6 @@ class ClassMapAutoloader implements Autoloadable
         $map = include $location;
 
         if (!is_array($map)) {
-            require_once __DIR__ . '/InvalidArgumentException.php';
             throw new InvalidArgumentException('Map file provided does not return a map');
         }
 
@@ -87,8 +88,12 @@ class ClassMapAutoloader implements Autoloadable
      */
     public function autoload($class)
     {
-        if (array_key_exists($class, $this->map)) {
-            require_once $this->map[$class];
+        // isset() ensures that if a null value is present for path, we don't
+        // get a false positive.
+        if (isset($this->map[$class])) {
+            // include() is faster; will only be an issue if manually calling 
+            // include/require_once elsewhere
+            include $this->map[$class];
         }
     }
 }

@@ -35,12 +35,42 @@ class PluginBroker implements Broker
             $instance = $r->newInstanceArgs($options);
         }
 
-        if (!$this->validatePlugin($instance)) {
+        $this->register($pluginName, $instance);
+        return $instance;
+    }
+
+    /**
+     * Register a plugin object by name
+     * 
+     * @param  string $name 
+     * @param  mixed $plugin 
+     * @return PluginBroker
+     */
+    public function register($name, $plugin)
+    {
+        if (!$this->validatePlugin($plugin)) {
             throw new InvalidPluginException();
         }
 
-        $this->plugins[$pluginName] = $instance;
-        return $instance;
+        $this->plugins[$name] = $plugin;
+        return $this;
+    }
+
+    /**
+     * Unregister a named plugin
+     *
+     * Removes the plugin instance from the registry, if found.
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function unregister($name)
+    {
+        if (isset($this->plugins[$name])) {
+            unset($this->plugins[$name]);
+            return true;
+        }
+        return false;
     }
 
     /**

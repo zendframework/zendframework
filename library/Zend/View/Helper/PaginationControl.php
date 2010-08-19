@@ -33,33 +33,14 @@ use Zend\View;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PaginationControl
+class PaginationControl extends AbstractHelper
 {
-    /**
-     * View instance
-     *
-     * @var Zend_View_Instance
-     */
-    public $view = null;
-
     /**
      * Default view partial
      *
      * @var string|array
      */
     protected static $_defaultViewPartial = null;
-
-    /**
-     * Sets the view instance.
-     *
-     * @param  \Zend\View\ViewEngine $view View instance
-     * @return \Zend\View\Helper\PaginationControl
-     */
-    public function setView(View\ViewEngine $view)
-    {
-        $this->view = $view;
-        return $this;
-    }
 
     /**
      * Sets the default view partial.

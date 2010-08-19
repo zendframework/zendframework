@@ -71,19 +71,44 @@ class PluginClassLoader implements PluginClassLocater
 
     /**
      * Register many plugins at once
+     *
+     * If $map is a string, assumes that the map is the class name of a 
+     * Traversable object (likely a ShortNameLocater); it will then instantiate
+     * this class and use it to register plugins.
+     *
+     * If $map is an array or Traversable object, it will iterate it to 
+     * register plugin names/classes.
+     *
+     * For all other arguments, or if the string $map is not a class or not a 
+     * Traversable class, an exception will be raised.
      * 
-     * @param  array|Traversable $map 
+     * @param  string|array|Traversable $map 
      * @return PluginClassLoader
+     * @throws InvalidArgumentException
      */
     public function registerPlugins($map)
     {
-        if (!is_array($map) && !$map instanceof Traversable) {
-            throw new InvalidArgumentException('Map provided is invalid; must be an array or traversable');
+        if (is_string($map)) {
+            if (!class_exists($map)) {
+                throw new InvalidArgumentException('Map class provided is invalid');
+            }
+            $map = new $map;
+        }
+        if (is_array($map)) {
+            $map = new ArrayIterator($map);
+        }
+        if (!$map instanceof Traversable) {
+            throw new InvalidArgumentException('Map provided is invalid; must be traversable');
         }
 
-        foreach ($map as $plugin => $class)  {
-            $this->registerPlugin($plugin, $class);
-        }
+        // iterator_apply is faster than foreach
+        $loader = $this;
+        iterator_apply($map, function() use ($loader, $map) {
+            $plugin = $map->key();
+            $class  = $map->current();
+            $loader->registerPlugin($plugin, $class);
+        });
+
         return $this;
     }
 

@@ -19,6 +19,19 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         Registry::_unsetInstance();
     }
 
+    /**
+     * Hack to allow running tests in separate processes
+     *
+     * @see    http://matthewturland.com/2010/08/19/process-isolation-in-phpunit/
+     * @param  PHPUnit_Framework_TestResult $result 
+     * @return void
+     */
+    public function run(\PHPUnit_Framework_TestResult $result = NULL)
+    {
+        $this->setPreserveGlobalState(false);
+        return parent::run($result);
+    }
+
     public function handleErrors($errno, $errstr)
     {
         $this->error = $errstr;

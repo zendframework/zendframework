@@ -185,6 +185,32 @@ class IndirectObjectReference extends AbstractTypeObject
     }
 
     /**
+     * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
+     *
+     * @param \Zend\Pdf\ObjectFactory $factory  The factory to attach
+     * @param array &$processed  List of already processed indirect objects, used to avoid objects duplication
+     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @returns \Zend\Pdf\InternalType\AbstractTypeObject
+     */
+    public function makeClone(Pdf\ObjectFactory $factory, array &$processed, $mode)
+    {
+        if ($this->_ref === null) {
+            $this->_dereference();
+        }
+
+        // This code duplicates code in \Zend\Pdf\InternalType\IndirectObject class,
+        // but allows to avoid unnecessary method call in most cases
+        $id = spl_object_hash($this->_ref);
+        if (isset($processed[$id])) {
+            // Do nothing if object is already processed
+            // return it
+            return $processed[$id];
+        }
+
+        return $this->_ref->makeClone($factory, $processed, $mode);
+    }
+
+    /**
      * Mark object as modified, to include it into new PDF file segment.
      */
     public function touch()

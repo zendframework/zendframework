@@ -370,10 +370,10 @@ class Loaded extends AbstractOutline
      * @throws \Zend\Pdf\Exception
      */
     public function dumpOutline(ObjectFactory $factory,
-                                                                     $updateNavigation,
-                                     InternalType\AbstractTypeObject $parent,
-                                     InternalType\AbstractTypeObject $prev = null,
-                                                   \SplObjectStorage $processedOutlines = null)
+                                              $updateNavigation,
+              InternalType\AbstractTypeObject $parent,
+              InternalType\AbstractTypeObject $prev = null,
+                            \SplObjectStorage $processedOutlines = null)
     {
         if ($processedOutlines === null) {
             $processedOutlines = new \SplObjectStorage();

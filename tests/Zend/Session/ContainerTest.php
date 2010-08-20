@@ -10,6 +10,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $this->forceAutoloader();
         $_SESSION = array();
         Container::setDefaultManager(null);
         $this->manager = $manager = new TestAsset\TestManager(array(
@@ -23,6 +24,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $_SESSION = array();
         Container::setDefaultManager(null);
+    }
+
+    protected function forceAutoloader()
+    {
+        $splAutoloadFunctions = spl_autoload_functions();
+        if (!$splAutoloadFunctions || !in_array('ZendTest_Autoloader', $splAutoloadFunctions)) {
+            include __DIR__ . '/../../_autoload.php';
+        }
     }
 
     /**

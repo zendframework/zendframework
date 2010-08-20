@@ -14,9 +14,18 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->forceAutoloader();
         $this->error   = false;
         $this->manager = new SessionManager();
         Registry::_unsetInstance();
+    }
+
+    protected function forceAutoloader()
+    {
+        $splAutoloadFunctions = spl_autoload_functions();
+        if (!$splAutoloadFunctions || !in_array('ZendTest_Autoloader', $splAutoloadFunctions)) {
+            include __DIR__ . '/../../_autoload.php';
+        }
     }
 
     /**

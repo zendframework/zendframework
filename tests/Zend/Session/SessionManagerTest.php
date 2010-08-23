@@ -14,9 +14,31 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->forceAutoloader();
         $this->error   = false;
         $this->manager = new SessionManager();
         Registry::_unsetInstance();
+    }
+
+    protected function forceAutoloader()
+    {
+        $splAutoloadFunctions = spl_autoload_functions();
+        if (!$splAutoloadFunctions || !in_array('ZendTest_Autoloader', $splAutoloadFunctions)) {
+            include __DIR__ . '/../../_autoload.php';
+        }
+    }
+
+    /**
+     * Hack to allow running tests in separate processes
+     *
+     * @see    http://matthewturland.com/2010/08/19/process-isolation-in-phpunit/
+     * @param  PHPUnit_Framework_TestResult $result 
+     * @return void
+     */
+    public function run(\PHPUnit_Framework_TestResult $result = NULL)
+    {
+        $this->setPreserveGlobalState(false);
+        return parent::run($result);
     }
 
     public function handleErrors($errno, $errstr)

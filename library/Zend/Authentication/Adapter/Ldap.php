@@ -281,7 +281,7 @@ class Ldap implements AuthenticationAdapter
         foreach ($this->_options as $name => $options) {
 
             if (!is_array($options)) {
-                throw new Exception('Adapter options array not an array');
+                throw new InvalidArgumentException('Adapter options array not an array');
             }
             $adapterOptions = $this->_prepareOptions($ldap, $options);
             $dname = '';

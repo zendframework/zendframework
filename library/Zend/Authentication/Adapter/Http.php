@@ -167,13 +167,14 @@ class Http implements AuthenticationAdapter
      *    'use_opaque' => <bool> Whether to send the opaque value in the header
      *    'alogrithm' => <string> See $_supportedAlgos. Default: MD5
      *    'proxy_auth' => <bool> Whether to do authentication as a Proxy
-     * @throws Zend\Authentication\Exception
+     * @throws Zend\Authentication\Adapter\MissingDependencyException
+     * @throws Zend\Authentication\Adapter\InvalidArgumentException
      * @return void
      */
     public function __construct(array $config)
     {
         if (!extension_loaded('hash')) {
-            throw new Exception(__CLASS__  . ' requires the \'hash\' extension');
+            throw new MissingDependencyException(__CLASS__  . ' requires the \'hash\' extension to be availabe in PHP');
         }
 
         $this->_request  = null;
@@ -182,13 +183,13 @@ class Http implements AuthenticationAdapter
 
 
         if (empty($config['accept_schemes'])) {
-            throw new Exception('Config key \'accept_schemes\' is required');
+            throw new InvalidArgumentException('Config key \'accept_schemes\' is required');
         }
 
         $schemes = explode(' ', $config['accept_schemes']);
         $this->_acceptSchemes = array_intersect($schemes, $this->_supportedSchemes);
         if (empty($this->_acceptSchemes)) {
-            throw new Exception('No supported schemes given in \'accept_schemes\'. Valid values: '
+            throw new InvalidArgumentException('No supported schemes given in \'accept_schemes\'. Valid values: '
                                                 . implode(', ', $this->_supportedSchemes));
         }
 
@@ -198,7 +199,7 @@ class Http implements AuthenticationAdapter
             !ctype_print($config['realm']) ||
             strpos($config['realm'], ':') !== false ||
             strpos($config['realm'], '"') !== false) {
-            throw new Exception('Config key \'realm\' is required, and must contain only printable '
+            throw new InvalidArgumentException('Config key \'realm\' is required, and must contain only printable '
                                                 . 'characters, excluding quotation marks and colons');
         } else {
             $this->_realm = $config['realm'];
@@ -208,7 +209,7 @@ class Http implements AuthenticationAdapter
             if (empty($config['digest_domains']) ||
                 !ctype_print($config['digest_domains']) ||
                 strpos($config['digest_domains'], '"') !== false) {
-                throw new Exception('Config key \'digest_domains\' is required, and must contain '
+                throw new InvalidArgumentException('Config key \'digest_domains\' is required, and must contain '
                                                     . 'only printable characters, excluding quotation marks');
             } else {
                 $this->_domains = $config['digest_domains'];
@@ -216,7 +217,7 @@ class Http implements AuthenticationAdapter
 
             if (empty($config['nonce_timeout']) ||
                 !is_numeric($config['nonce_timeout'])) {
-                throw new Exception('Config key \'nonce_timeout\' is required, and must be an '
+                throw new InvalidArgumentException('Config key \'nonce_timeout\' is required, and must be an '
                                                     . 'integer');
             } else {
                 $this->_nonceTimeout = (int) $config['nonce_timeout'];
@@ -339,14 +340,15 @@ class Http implements AuthenticationAdapter
     /**
      * Authenticate
      *
-     * @throws Zend\Authentication\Exception
+     * @throws Zend\Authentication\Adapter\MissingDependencyException
+     * @throws Zend\Authentication\Adapter\UnsupportedRequestException
      * @return Zend\Authentication\Result
      */
     public function authenticate()
     {
         if (empty($this->_request) ||
             empty($this->_response)) {
-            throw new Exception('Request and Response objects must be set before calling '
+            throw new MissingDependencyException('Request and Response objects must be set before calling '
                                                 . 'authenticate()');
         }
 
@@ -389,7 +391,7 @@ class Http implements AuthenticationAdapter
                 $result = $this->_digestAuth($authHeader);
             break;
             default:
-                throw new Exception('Unsupported authentication scheme');
+                throw new UnsupportedRequestException('Unsupported authentication scheme: ' . $clientScheme);
         }
 
         return $result;
@@ -466,24 +468,25 @@ class Http implements AuthenticationAdapter
      * Basic Authentication
      *
      * @param  string $header Client's Authorization header
-     * @throws Zend\Authentication\Exception
+     * @throws Zend\Authentication\UnexpectedValueException
      * @return Zend\Authentication\Result
      */
     protected function _basicAuth($header)
     {
         if (empty($header)) {
-            throw new Exception('The value of the client Authorization header is required');
+            throw new UnexpectedValueException('The value of the client Authorization header is required');
         }
         if (empty($this->_basicResolver)) {
-            throw new Exception('A basicResolver object must be set before doing Basic '
-                                                . 'authentication');
+            throw new MissingDependencyException(
+                'A basicResolver object must be set before doing Basic '
+                . 'authentication');
         }
 
         // Decode the Authorization header
         $auth = substr($header, strlen('Basic '));
         $auth = base64_decode($auth);
         if (!$auth) {
-            throw new Exception('Unable to base64_decode Authorization header value');
+            throw new UnexpectedValueException('Unable to base64_decode Authorization header value');
         }
 
         // See ZF-1253. Validate the credentials the same way the digest
@@ -511,16 +514,18 @@ class Http implements AuthenticationAdapter
      * Digest Authentication
      *
      * @param  string $header Client's Authorization header
-     * @throws Zend\Authentication\Exception
+     * @throws Zend\Authentication\Adapter\UnexpectedValueException
+     * @throws Zend\Authentication\Adapter\MissingDependencyException
+     * @throws Zend\Authentication\Adapter\UnsupportedRequestException
      * @return Zend\Authentication\Result Valid auth result only on successful auth
      */
     protected function _digestAuth($header)
     {
         if (empty($header)) {
-            throw new Exception('The value of the client Authorization header is required');
+            throw new UnexpectedValueException('The value of the client Authorization header is required');
         }
         if (empty($this->_digestResolver)) {
-            throw new Exception('A digestResolver object must be set before doing Digest authentication');
+            throw new MissingDependencyException('A digestResolver object must be set before doing Digest authentication');
         }
 
         $data = $this->_parseDigestAuth($header);
@@ -575,7 +580,7 @@ class Http implements AuthenticationAdapter
                 // Should be REQUEST_METHOD . ':' . uri . ':' . hash(entity-body),
                 // but this isn't supported yet, so fall through to default case
             default:
-                throw new Exception('Client requested an unsupported qop option');
+                throw new UnsupportedRequestException('Client requested an unsupported qop option');
         }
         // Using hash() should make parameterizing the hash algorithm
         // easier

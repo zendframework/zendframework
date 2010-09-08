@@ -172,7 +172,10 @@ class DbTable implements AuthenticationAdapter
         if(null === $this->_zendDb) {
             $this->_zendDb = AbstractTable::getDefaultAdapter();
             if (null === $this->_zendDb) {
-                throw new Exception('No database adapter present');
+                throw new MissingDependencyException(
+                    'A null adapter was provided but there is no default adatper '
+                    . 'registered with Zend\Db\Table to utilize.'
+                    );
             }
         }
         

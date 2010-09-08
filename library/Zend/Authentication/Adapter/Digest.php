@@ -185,12 +185,12 @@ class Digest implements AuthenticationAdapter
         $optionsRequired = array('filename', 'realm', 'username', 'password');
         foreach ($optionsRequired as $optionRequired) {
             if (null === $this->{"_$optionRequired"}) {
-                throw new Exception("Option '$optionRequired' must be set before authentication");
+                throw new MissingDependencyException("Option '$optionRequired' must be set before authentication");
             }
         }
 
         if (false === ($fileHandle = @fopen($this->_filename, 'r'))) {
-            throw new Exception("Cannot open '$this->_filename' for reading");
+            throw new UnexpectedValueException("Cannot open '$this->_filename' for reading");
         }
 
         $id       = "$this->_username:$this->_realm";

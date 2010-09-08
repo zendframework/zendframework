@@ -2,7 +2,7 @@
 
 namespace Zend\Authentication\Adapter;
 
-class MissingDependencyException 
+class RuntimeException 
     extends \RuntimeException 
     implements Exception
 {

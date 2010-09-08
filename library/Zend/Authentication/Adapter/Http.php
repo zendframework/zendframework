@@ -167,14 +167,13 @@ class Http implements AuthenticationAdapter
      *    'use_opaque' => <bool> Whether to send the opaque value in the header
      *    'alogrithm' => <string> See $_supportedAlgos. Default: MD5
      *    'proxy_auth' => <bool> Whether to do authentication as a Proxy
-     * @throws Zend\Authentication\Adapter\MissingDependencyException
      * @throws Zend\Authentication\Adapter\InvalidArgumentException
      * @return void
      */
     public function __construct(array $config)
     {
         if (!extension_loaded('hash')) {
-            throw new MissingDependencyException(__CLASS__  . ' requires the \'hash\' extension to be availabe in PHP');
+            throw new InvalidArgumentException(__CLASS__  . ' requires the \'hash\' extension to be availabe in PHP');
         }
 
         $this->_request  = null;
@@ -340,15 +339,14 @@ class Http implements AuthenticationAdapter
     /**
      * Authenticate
      *
-     * @throws Zend\Authentication\Adapter\MissingDependencyException
-     * @throws Zend\Authentication\Adapter\UnsupportedRequestException
+     * @throws Zend\Authentication\Adapter\RuntimeException
      * @return Zend\Authentication\Result
      */
     public function authenticate()
     {
         if (empty($this->_request) ||
             empty($this->_response)) {
-            throw new MissingDependencyException('Request and Response objects must be set before calling '
+            throw new RuntimeException('Request and Response objects must be set before calling '
                                                 . 'authenticate()');
         }
 
@@ -391,7 +389,7 @@ class Http implements AuthenticationAdapter
                 $result = $this->_digestAuth($authHeader);
             break;
             default:
-                throw new UnsupportedRequestException('Unsupported authentication scheme: ' . $clientScheme);
+                throw new RuntimeException('Unsupported authentication scheme: ' . $clientScheme);
         }
 
         return $result;
@@ -474,10 +472,10 @@ class Http implements AuthenticationAdapter
     protected function _basicAuth($header)
     {
         if (empty($header)) {
-            throw new UnexpectedValueException('The value of the client Authorization header is required');
+            throw new RuntimeException('The value of the client Authorization header is required');
         }
         if (empty($this->_basicResolver)) {
-            throw new MissingDependencyException(
+            throw new RuntimeException(
                 'A basicResolver object must be set before doing Basic '
                 . 'authentication');
         }
@@ -486,7 +484,7 @@ class Http implements AuthenticationAdapter
         $auth = substr($header, strlen('Basic '));
         $auth = base64_decode($auth);
         if (!$auth) {
-            throw new UnexpectedValueException('Unable to base64_decode Authorization header value');
+            throw new RuntimeException('Unable to base64_decode Authorization header value');
         }
 
         // See ZF-1253. Validate the credentials the same way the digest
@@ -522,10 +520,10 @@ class Http implements AuthenticationAdapter
     protected function _digestAuth($header)
     {
         if (empty($header)) {
-            throw new UnexpectedValueException('The value of the client Authorization header is required');
+            throw new RuntimeException('The value of the client Authorization header is required');
         }
         if (empty($this->_digestResolver)) {
-            throw new MissingDependencyException('A digestResolver object must be set before doing Digest authentication');
+            throw new RuntimeException('A digestResolver object must be set before doing Digest authentication');
         }
 
         $data = $this->_parseDigestAuth($header);
@@ -580,7 +578,7 @@ class Http implements AuthenticationAdapter
                 // Should be REQUEST_METHOD . ':' . uri . ':' . hash(entity-body),
                 // but this isn't supported yet, so fall through to default case
             default:
-                throw new UnsupportedRequestException('Client requested an unsupported qop option');
+                throw new RuntimeException('Client requested an unsupported qop option');
         }
         // Using hash() should make parameterizing the hash algorithm
         // easier

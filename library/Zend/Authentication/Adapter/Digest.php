@@ -177,7 +177,7 @@ class Digest implements AuthenticationAdapter
     /**
      * Defined by Zend_Auth_Adapter_Interface
      *
-     * @throws Zend\Authentication\Adapter\Exception
+     * @throws Zend\Authentication\Adapter\RuntimeException
      * @return Zend\Authentication\Result
      */
     public function authenticate()
@@ -185,7 +185,7 @@ class Digest implements AuthenticationAdapter
         $optionsRequired = array('filename', 'realm', 'username', 'password');
         foreach ($optionsRequired as $optionRequired) {
             if (null === $this->{"_$optionRequired"}) {
-                throw new MissingDependencyException("Option '$optionRequired' must be set before authentication");
+                throw new RuntimeException("Option '$optionRequired' must be set before authentication");
             }
         }
 

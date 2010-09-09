@@ -92,7 +92,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testChangeDefaultAdapterWithInstance()
     {
-        $newAdapter = new Adapter\PHPSerialize();
+        $newAdapter = new Adapter\PhpSerialize();
 
         Serializer::setDefaultAdapter($newAdapter);
         $this->assertTrue($newAdapter === Serializer::getDefaultAdapter());

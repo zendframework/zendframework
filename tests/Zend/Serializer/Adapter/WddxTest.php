@@ -42,7 +42,11 @@ class WddxTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('wddx')) {
-            $this->markTestSkipped('Zend\\Serializer Wddx needs ext/wddx');
+            try {
+                new Serializer\Adapter\Wddx();
+                $this->fail("Zend\\Serializer\\Adapter\\Wddx needs missing ext/wddx but did't throw exception");
+            } catch (Serializer\Exception $e) {}
+            $this->markTestSkipped('Zend\\Serializer\\Adapter\\Wddx needs ext/wddx');
         }
         $this->_adapter = new \Zend\Serializer\Adapter\Wddx();
     }

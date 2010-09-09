@@ -42,7 +42,11 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('igbinary')) {
-            $this->markTestSkipped('Zend\\Serializer IgBinary needs ext/igbinary');
+            try {
+                new Serializer\Adapter\IgBinary();
+                $this->fail("Zend\\Serializer\\Adapter\\IgBinary needs missing ext/igbinary but did't throw exception");
+            } catch (Serializer\Exception $e) {}
+            $this->markTestSkipped('Zend\\Serializer\\Adapter\\IgBinary needs ext/igbinary');
         }
         $this->_adapter = new Serializer\Adapter\IgBinary();
     }

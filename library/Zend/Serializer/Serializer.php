@@ -123,7 +123,7 @@ class Serializer
     protected static function _getDefaultAdapterLoader()
     {
         $loader = new PluginLoader();
-        $loader->addPrefixPath('Zend\\Serializer\\Adapter\\', __DIR__ . '/Serializer/Adapter');
+        $loader->addPrefixPath('Zend\\Serializer\\Adapter\\', __DIR__ . DIRECTORY_SEPARATOR . 'Adapter');
         return $loader;
     }
 

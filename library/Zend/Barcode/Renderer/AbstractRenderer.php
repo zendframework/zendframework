@@ -25,7 +25,7 @@
  */
 namespace Zend\Barcode\Renderer;
 
-use Zend\Barcode\Renderer,
+use Zend\Barcode\BarcodeRenderer,
     Zend\Config\Config,
     Zend\Barcode\BarcodeObject,
     Zend\Barcode;
@@ -39,7 +39,7 @@ use Zend\Barcode\Renderer,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRenderer implements Renderer
+abstract class AbstractRenderer implements BarcodeRenderer
 {
     /**
      * Namespace of the renderer for autoloading

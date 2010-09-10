@@ -473,9 +473,10 @@ class Image extends Word
 
         $img_file   = $this->getImgDir() . $id . $this->getSuffix();
         if(empty($this->_startImage)) {
-            $img        = imagecreatetruecolor($w, $h);
+            $img = imagecreatetruecolor($w, $h);
         } else {
-            $img = imagecreatefrompng($this->_startImage);
+            // Potential error is change to exception
+            $img = @imagecreatefrompng($this->_startImage);
             if(!$img) {
                 throw new ImageNotLoadableException("Can not load start image");
             }

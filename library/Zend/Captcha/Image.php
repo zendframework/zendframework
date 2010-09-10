@@ -450,21 +450,21 @@ class Image extends Word
     protected function _generateImage($id, $word)
     {
         if (!extension_loaded("gd")) {
-            throw new Exception("Image CAPTCHA requires GD extension");
+            throw new ExtensionNotLoadedException("Image CAPTCHA requires GD extension");
         }
 
         if (!function_exists("imagepng")) {
-            throw new Exception("Image CAPTCHA requires PNG support");
+            throw new ExtensionNotLoadedException("Image CAPTCHA requires PNG support");
         }
 
         if (!function_exists("imageftbbox")) {
-            throw new Exception("Image CAPTCHA requires FT fonts support");
+            throw new ExtensionNotLoadedException("Image CAPTCHA requires FT fonts support");
         }
 
         $font = $this->getFont();
 
         if (empty($font)) {
-            throw new Exception("Image CAPTCHA requires font");
+            throw new NoFontProvidedException("Image CAPTCHA requires font");
         }
 
         $w     = $this->getWidth();
@@ -477,7 +477,7 @@ class Image extends Word
         } else {
             $img = imagecreatefrompng($this->_startImage);
             if(!$img) {
-                throw new Exception("Can not load start image");
+                throw new ImageNotLoadableException("Can not load start image");
             }
             $w = imagesx($img);
             $h = imagesy($img);

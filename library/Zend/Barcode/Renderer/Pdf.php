@@ -72,7 +72,7 @@ class Pdf extends AbstractRenderer
     public function setResource($pdf, $page = 0)
     {
         if (!$pdf instanceof PdfDocument) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 'Invalid \Zend\Pdf\PdfDocument resource provided to setResource()'
             );
         }

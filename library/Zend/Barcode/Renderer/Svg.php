@@ -71,7 +71,7 @@ class Svg extends AbstractRenderer
     public function setHeight($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new Exception(
+            throw new OutOfRangeException(
                 'Svg height must be greater than or equals 0'
             );
         }
@@ -98,7 +98,7 @@ class Svg extends AbstractRenderer
     public function setWidth($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new Exception(
+            throw new OutOfRangeException(
                 'Svg width must be greater than or equals 0'
             );
         }
@@ -126,7 +126,7 @@ class Svg extends AbstractRenderer
     public function setResource($svg)
     {
         if (!$svg instanceof \DOMDocument) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 'Invalid DOMDocument resource provided to setResource()'
             );
         }
@@ -245,7 +245,7 @@ class Svg extends AbstractRenderer
             $this->_readRootElement();
             $height = (float) $this->_rootElement->getAttribute('height');
             if ($height < $this->_barcode->getHeight(true)) {
-                throw new Exception(
+                throw new RuntimeException(
                     'Barcode is define outside the image (height)'
                 );
             }
@@ -253,7 +253,7 @@ class Svg extends AbstractRenderer
             if ($this->_userHeight) {
                 $height = $this->_barcode->getHeight(true);
                 if ($this->_userHeight < $height) {
-                    throw new Exception(sprintf(
+                    throw new RuntimeException(sprintf(
                         "Barcode is define outside the image (calculated: '%d', provided: '%d')",
                         $height,
                         $this->_userHeight
@@ -265,7 +265,7 @@ class Svg extends AbstractRenderer
             $this->_readRootElement();
             $width = $this->_rootElement->getAttribute('width');
             if ($width < $this->_barcode->getWidth(true)) {
-                throw new Exception(
+                throw new RuntimeException(
                     'Barcode is define outside the image (width)'
                 );
             }
@@ -273,7 +273,7 @@ class Svg extends AbstractRenderer
             if ($this->_userWidth) {
                 $width = (float) $this->_barcode->getWidth(true);
                 if ($this->_userWidth < $width) {
-                    throw new Exception(sprintf(
+                    throw new RuntimeException(sprintf(
                         "Barcode is define outside the image (calculated: '%d', provided: '%d')",
                         $width,
                         $this->_userWidth

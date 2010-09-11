@@ -201,7 +201,7 @@ class Upce extends Ean13
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
-            throw new Exception($message);
+            throw new BarcodeValidationException($message);
         }
     }
 

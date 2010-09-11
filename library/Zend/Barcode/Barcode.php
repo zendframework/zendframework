@@ -23,8 +23,7 @@
  * @namespace
  */
 namespace Zend\Barcode;
-use Zend\Barcode\Renderer,
-    Zend\Loader\PluginLoader,
+use Zend\Loader\PluginLoader,
     Zend\Loader\ShortNameLocater,
     Zend\Config\Config,
     Zend;
@@ -78,7 +77,7 @@ class Barcode
                 self::$_loaders[$type] = $loader;
                 return;
             default:
-                throw new Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+                throw new InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }
     }
 
@@ -107,7 +106,7 @@ class Barcode
                 }
                 return self::$_loaders[$type];
             default:
-                throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
         }
     }
 
@@ -166,9 +165,8 @@ class Barcode
         try {
             $barcode  = self::makeBarcode($barcode, $barcodeConfig);
             $renderer = self::makeRenderer($renderer, $rendererConfig);
-        } catch (Zend\Exception $e) {
-            $renderable = ($e instanceof Exception) ? $e->isRenderable() : false;
-            if ($automaticRenderError && $renderable) {
+        } catch (Exception $e) {
+            if ($automaticRenderError && !($e instanceof RendererCreationException)) {
                 $barcode  = self::makeBarcode('error', array( 'text' => $e->getMessage() ));
                 $renderer = self::makeRenderer($renderer, array());
             } else {
@@ -215,7 +213,7 @@ class Barcode
          * Verify that barcode parameters are in an array.
          */
         if (!is_array($barcodeConfig)) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 'Barcode parameters must be in an array or a \Zend\Config\Config object'
             );
         }
@@ -224,7 +222,7 @@ class Barcode
          * Verify that an barcode name has been specified.
          */
         if (!is_string($barcode) || empty($barcode)) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 'Barcode name must be specified in a string'
             );
         }
@@ -241,7 +239,7 @@ class Barcode
          * Verify that the object created is a descendent of the abstract barcode type.
          */
         if (!$bcAdapter instanceof BarcodeObject) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 "Barcode class '$barcodeName' does not implement \Zend\Barcode\BarcodeObject"
             );
         }
@@ -257,7 +255,7 @@ class Barcode
      */
     public static function makeRenderer($renderer = 'image', $rendererConfig = array())
     {
-        if ($renderer instanceof Renderer) {
+        if ($renderer instanceof BarcodeRenderer) {
             return $renderer;
         }
 
@@ -281,22 +279,18 @@ class Barcode
          * Verify that barcode parameters are in an array.
          */
         if (!is_array($rendererConfig)) {
-            $e = new Exception(
+            throw new RendererCreationException(
                 'Barcode parameters must be in an array or a \Zend\Config\Config object'
             );
-            $e->setIsRenderable(false);
-            throw $e;
         }
 
         /*
          * Verify that an barcode name has been specified.
          */
         if (!is_string($renderer) || empty($renderer)) {
-            $e = new Exception(
+            throw new RendererCreationException(
                 'Renderer name must be specified in a string'
             );
-            $e->setIsRenderable(false);
-            throw $e;
         }
 
         $rendererName = self::getPluginLoader(self::RENDERER)->load($renderer);
@@ -310,12 +304,10 @@ class Barcode
         /*
          * Verify that the object created is a descendent of the abstract barcode type.
          */
-        if (!$rdrAdapter instanceof Renderer) {
-            $e = new Exception(
+        if (!$rdrAdapter instanceof BarcodeRenderer) {
+            throw new RendererCreationException(
                 "Renderer class '$rendererName' does not implements \Zend\Barcode\Renderer"
             );
-            $e->setIsRenderable(false);
-            throw $e;
         }
         return $rdrAdapter;
     }

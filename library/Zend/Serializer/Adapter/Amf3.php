@@ -26,7 +26,7 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Exception as SerializationException,
-    Zend\Amf\Parser as AMFParser;
+    Zend\Amf\Parser as AmfParser;
 
 /**
  * @uses       Zend\Amf\Parser\Amf3\Deserializer
@@ -41,7 +41,7 @@ use Zend\Serializer\Exception as SerializationException,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AMF3 extends AbstractAdapter
+class Amf3 extends AbstractAdapter
 {
     /**
      * Serialize a PHP value to AMF3 format
@@ -54,8 +54,8 @@ class AMF3 extends AbstractAdapter
     public function serialize($value, array $opts = array())
     {
         try  {
-            $stream     = new AMFParser\OutputStream();
-            $serializer = new AMFParser\Amf3\Serializer($stream);
+            $stream     = new AmfParser\OutputStream();
+            $serializer = new AmfParser\Amf3\Serializer($stream);
             $serializer->writeTypeMarker($value);
             return $stream->getStream();
         } catch (\Exception $e) {
@@ -74,7 +74,7 @@ class AMF3 extends AbstractAdapter
     public function unserialize($value, array $opts = array())
     {
         try {
-            $stream       = new AMFParser\InputStream($value);
+            $stream       = new AmfParser\InputStream($value);
             $deserializer = new AMFParser\Amf3\Deserializer($stream);
             return $deserializer->readTypeMarker();
         } catch (\Exception $e) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZendTest\Acl\UseCase1;
+namespace ZendTest\Acl\TestAsset\UseCase1;
 
 use Zend\Acl\Assertion,
     Zend\Acl as ZendAcl;

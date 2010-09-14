@@ -8,4 +8,6 @@ to be worked on.
 In alphabetical order:
 
 Zend\Authentication     COMPLETE    Ralph Schindler (ralph)
+Zend\AccessControl      IN PROGRESS Ralph Schindler (ralph)
+Zend\Paginator          IN PROGRESS Wil Moore (wilmoore)
 Zend\Tool               IN PROGRESS Ralph Schindler (ralph)

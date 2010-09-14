@@ -25,7 +25,7 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException;
+use Zend\Serializer\Exception\SerializerException;
 
 /**
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
@@ -39,7 +39,7 @@ use Zend\Serializer\Exception as SerializationException;
 class PhpSerialize extends AbstractAdapter
 {
     /**
-     *  @var null|string Serialized boolean false value
+     * @var null|string Serialized boolean false value
      */
     private static $_serializedFalse = null;
 
@@ -71,7 +71,7 @@ class PhpSerialize extends AbstractAdapter
         $ret = serialize($value);
         if ($ret === false) {
             $lastErr = error_get_last();
-            throw new SerializationException($lastErr['message']);
+            throw new SerializerException($lastErr['message']);
         }
         return $ret;
     }
@@ -91,7 +91,7 @@ class PhpSerialize extends AbstractAdapter
         $ret = @unserialize($serialized);
         if ($ret === false && $serialized !== self::$_serializedFalse) {
             $lastErr = error_get_last();
-            throw new SerializationException($lastErr['message']);
+            throw new SerializerException($lastErr['message']);
         }
         return $ret;
     }

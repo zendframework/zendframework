@@ -24,7 +24,8 @@
  */
 namespace Zend\Serializer;
 
-use Zend\Loader\PluginLoader,
+use Zend\Serializer\Exception\SerializerException,
+    Zend\Loader\PluginLoader,
     Zend\Loader\ShortNameLocater;
 
 /**
@@ -57,6 +58,7 @@ class Serializer
      * @param string|Zend\Serializer\Adapter $adapterName Name of the adapter class
      * @param array |Zend\Config\Config $opts Serializer options
      * @return Zend\Serializer\Adapter
+     * @throws Zend\Serializer\Exception
      */
     public static function factory($adapterName, $opts = array()) 
     {
@@ -68,13 +70,13 @@ class Serializer
         try {
             $adapterClass = $adapterLoader->load($adapterName);
         } catch (\Exception $e) {
-            throw new Exception('Can\'t load serializer adapter "'.$adapterName.'"', 0, $e);
+            throw new SerializerException('Can\'t load serializer adapter "'.$adapterName.'"', 0, $e);
         }
 
         // ZF-8842:
         // check that the loaded class implements Zend_Serializer_Adapter_AdapterInterface without execute code
         if (!in_array('Zend\\Serializer\\Adapter', class_implements($adapterClass))) {
-            throw new Exception('The serializer adapter class "'.$adapterClass.'" must implement Zend\\Serializer\\Adapter');
+            throw new SerializerException('The serializer adapter class "'.$adapterClass.'" must implement Zend\\Serializer\\Adapter');
         }
 
         return new $adapterClass($opts);

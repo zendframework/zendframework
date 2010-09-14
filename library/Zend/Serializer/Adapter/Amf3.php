@@ -25,7 +25,7 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException,
+use Zend\Serializer\Exception\SerializerException,
     Zend\Amf\Parser as AMFParser;
 
 /**
@@ -49,7 +49,7 @@ class AMF3 extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws \Zend\Serializer\Exception
+     * @throws Zend\Serializer\Exception
      */
     public function serialize($value, array $opts = array())
     {
@@ -59,7 +59,7 @@ class AMF3 extends AbstractAdapter
             $serializer->writeTypeMarker($value);
             return $stream->getStream();
         } catch (\Exception $e) {
-            throw new SerializationException('Serialization failed by previous error', 0, $e);
+            throw new SerializerException('Serialization failed by previous error', 0, $e);
         }
     }
 
@@ -69,7 +69,7 @@ class AMF3 extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws \Zend\Serializer\Exception
+     * @throws Zend\Serializer\Exception
      */
     public function unserialize($value, array $opts = array())
     {
@@ -78,7 +78,7 @@ class AMF3 extends AbstractAdapter
             $deserializer = new AMFParser\Amf3\Deserializer($stream);
             return $deserializer->readTypeMarker();
         } catch (\Exception $e) {
-            throw new SerializationException('Unserialization failed by previous error', 0, $e);
+            throw new SerializerException('Unserialization failed by previous error', 0, $e);
         }
     }
 }

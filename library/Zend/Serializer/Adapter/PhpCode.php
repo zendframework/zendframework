@@ -25,7 +25,7 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException;
+use Zend\Serializer\Exception\SerializerException;
 
 /**
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
@@ -58,14 +58,14 @@ class PhpCode extends AbstractAdapter
      * @param  string $code 
      * @param  array $opts 
      * @return mixed
-     * @throws \Zend\Serializer\Exception on eval error
+     * @throws Zend\Serializer\Exception on eval error
      */
     public function unserialize($code, array $opts = array())
     {
         $eval = @eval('$ret=' . $code . ';');
         if ($eval === false) {
             $lastErr = error_get_last();
-            throw new SerializationException('eval failed: ' . $lastErr['message']);
+            throw new SerializerException('eval failed: ' . $lastErr['message']);
         }
         return $ret;
     }

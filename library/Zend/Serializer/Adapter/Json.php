@@ -25,7 +25,7 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException,
+use Zend\Serializer\Exception\SerializerException,
     Zend\Json\Json as ZendJson;
 
 /**
@@ -55,7 +55,7 @@ class Json extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws \Zend\Serializer\Exception on JSON encoding exception
+     * @throws Zend\Serializer\Exception on JSON encoding exception
      */
     public function serialize($value, array $opts = array())
     {
@@ -64,7 +64,7 @@ class Json extends AbstractAdapter
         try  {
             return ZendJson::encode($value, $opts['cycleCheck'], $opts);
         } catch (\Exception $e) {
-            throw new SerializationException('Serialization failed', 0, $e);
+            throw new SerializerException('Serialization failed: ' . $e->getMessage(), 0, $e);
         }
     }
 
@@ -82,12 +82,12 @@ class Json extends AbstractAdapter
         try {
             $ret = ZendJson::decode($json, $opts['objectDecodeType']);
         } catch (\Exception $e) {
-            throw new SerializationException('Unserialization failed by previous error', 0, $e);
+            throw new SerializerException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         }
 
         // json_decode returns null for invalid JSON
         if ($ret === null && $json !== 'null') {
-            throw new SerializationException('Invalid json data');
+            throw new SerializerException('Invalid json data');
         }
 
         return $ret;

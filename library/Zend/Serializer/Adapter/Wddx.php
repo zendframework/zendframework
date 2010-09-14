@@ -25,7 +25,7 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException;
+use Zend\Serializer\Exception\SerializerException;
 
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
@@ -84,7 +84,7 @@ class Wddx extends AbstractAdapter
 
         if ($wddx === false) {
             $lastErr = error_get_last();
-            throw new SerializationException($lastErr['message']);
+            throw new SerializerException($lastErr['message']);
         }
         return $wddx;
     }
@@ -114,7 +114,7 @@ class Wddx extends AbstractAdapter
                 $errMsg = $e->getMessage();
             }
 
-            throw new SerializationException($errMsg);
+            throw new SerializerException($errMsg);
         }
 
         return $ret;

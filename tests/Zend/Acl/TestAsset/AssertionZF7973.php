@@ -1,6 +1,6 @@
 <?php
 
-namespace ZendTest\Acl;
+namespace ZendTest\Acl\TestAsset;
 
 use Zend\Acl\Assertion,
     Zend\Acl;

@@ -29,13 +29,6 @@ use Zend\Acl,
     Zend\Acl\Role,
     Zend\Acl\Resource;
 
-require_once __DIR__ . '/_files/MockAssertion.php';
-require_once __DIR__ . '/_files/ExtendedAclZF2234.php';
-require_once __DIR__ . '/_files/UseCase1/User.php';
-require_once __DIR__ . '/_files/UseCase1/BlogPost.php';
-require_once __DIR__ . '/_files/UseCase1/Acl.php';
-require_once __DIR__ . '/_files/AssertionZF7973.php';
-
 /**
  * @category   Zend
  * @package    Zend_Acl
@@ -110,7 +103,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testRoleRegistryRemoveOneNonExistent()
     {
-        $this->setExpectedException('Zend\Acl\Role\Exception', 'not found');
+        $this->setExpectedException('\Zend\Acl\InvalidArgumentException', 'not found');
         $this->_acl->removeRole('nonexistent');
     }
 
@@ -134,7 +127,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testRoleRegistryAddInheritsNonExistent()
     {
-        $this->setExpectedException('Zend\Acl\Role\Exception', 'does not exist');
+        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'not found');
         $this->_acl->addRole(new Role\GenericRole('guest'), 'nonexistent');
     }
 
@@ -150,13 +143,13 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->inheritsRole('nonexistent', $roleGuest);
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon specifying a non-existent child Role');
-        } catch (Role\Exception $e) {
+        } catch (Acl\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         try {
             $this->_acl->inheritsRole($roleGuest, 'nonexistent');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon specifying a non-existent child Role');
-        } catch (Role\Exception $e) {
+        } catch (Acl\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
     }
@@ -232,7 +225,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     {
         $roleGuest = new Role\GenericRole('guest');
         $roleRegistry = new Role\Registry();
-        $this->setExpectedException('Zend\Acl\Role\Exception', 'already exists');
+        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'already exists');
         $roleRegistry->add($roleGuest)
                      ->add($roleGuest);
     }
@@ -247,7 +240,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $roleGuest1 = new Role\GenericRole('guest');
         $roleGuest2 = new Role\GenericRole('guest');
         $roleRegistry = new Role\Registry();
-        $this->setExpectedException('Zend\Acl\Role\Exception', 'already exists');
+        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'already exists');
         $roleRegistry->add($roleGuest1)
                      ->add($roleGuest2);
     }
@@ -337,7 +330,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testResourceAddInheritsNonExistent()
     {
-        $this->setExpectedException('Zend\Acl\Exception', 'does not exist');
+        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'does not exist');
         $this->_acl->addResource(new Resource\GenericResource('area'), 'nonexistent');
     }
 
@@ -424,13 +417,13 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->isAllowed('nonexistent');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon non-existent Role');
-        } catch (Role\Exception $e) {
+        } catch (Acl\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         try {
             $this->_acl->isAllowed(null, 'nonexistent');
             $this->fail('Expected Zend\Acl\Exception not thrown upon non-existent Resource');
-        } catch (Acl\Exception $e) {
+        } catch (Acl\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
     }
@@ -452,7 +445,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultAssert()
     {
-        $this->_acl->deny(null, null, null, new MockAssertion(false));
+        $this->_acl->deny(null, null, null, new TestAsset\MockAssertion(false));
         $this->assertTrue($this->_acl->isAllowed());
         $this->assertTrue($this->_acl->isAllowed(null, null, 'somePrivilege'));
     }
@@ -542,9 +535,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrivilegeAssert()
     {
-        $this->_acl->allow(null, null, 'somePrivilege', new MockAssertion(true));
+        $this->_acl->allow(null, null, 'somePrivilege', new TestAsset\MockAssertion(true));
         $this->assertTrue($this->_acl->isAllowed(null, null, 'somePrivilege'));
-        $this->_acl->allow(null, null, 'somePrivilege', new MockAssertion(false));
+        $this->_acl->allow(null, null, 'somePrivilege', new TestAsset\MockAssertion(false));
         $this->assertFalse($this->_acl->isAllowed(null, null, 'somePrivilege'));
     }
 
@@ -659,9 +652,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
     {
         $roleGuest = new Role\GenericRole('guest');
         $this->_acl->addRole($roleGuest)
-                   ->allow($roleGuest, null, 'somePrivilege', new MockAssertion(true));
+                   ->allow($roleGuest, null, 'somePrivilege', new TestAsset\MockAssertion(true));
         $this->assertTrue($this->_acl->isAllowed($roleGuest, null, 'somePrivilege'));
-        $this->_acl->allow($roleGuest, null, 'somePrivilege', new MockAssertion(false));
+        $this->_acl->allow($roleGuest, null, 'somePrivilege', new TestAsset\MockAssertion(false));
         $this->assertFalse($this->_acl->isAllowed($roleGuest, null, 'somePrivilege'));
     }
 
@@ -684,7 +677,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemoveDefaultDenyAssert()
     {
-        $this->_acl->deny(null, null, null, new MockAssertion(false));
+        $this->_acl->deny(null, null, null, new TestAsset\MockAssertion(false));
         $this->assertTrue($this->_acl->isAllowed());
         $this->_acl->removeDeny();
         $this->assertFalse($this->_acl->isAllowed());
@@ -790,7 +783,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->isAllowed('guest');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon isAllowed() on non-existent Role');
-        } catch (Role\Exception $e) {
+        } catch (Acl\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         $this->_acl->addRole(new Role\GenericRole('guest'));
@@ -811,7 +804,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->isAllowed('guest');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon isAllowed() on non-existent Role');
-        } catch (Role\Exception $e) {
+        } catch (Acl\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         $this->_acl->addRole(new Role\GenericRole('guest'));
@@ -1049,7 +1042,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testAclInternalDFSMethodsBehaveProperly()
     {
-        $acl = new ExtendedAclZF2234();
+        $acl = new TestAsset\ExtendedAclZF2234();
 
         $someResource = new Resource\GenericResource('someResource');
         $someRole     = new Role\GenericRole('someRole');
@@ -1119,8 +1112,8 @@ class AclTest extends \PHPUnit_Framework_TestCase
     {
         $acl = $this->_loadUseCase1();
 
-        $user     = new UseCase1\User();
-        $blogPost = new UseCase1\BlogPost();
+        $user     = new TestAsset\UseCase1\User();
+        $blogPost = new TestAsset\UseCase1\BlogPost();
 
         $this->assertTrue($acl->isAllowed($user, $blogPost, 'view'));
 
@@ -1136,8 +1129,8 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return false');
 
         // check to see if the last assertion has the proper objets
-        $this->assertType('ZendTest\Acl\UseCase1\User', $assertion->lastAssertRole, 'Assertion did not recieve proper role object');
-        $this->assertType('ZendTest\Acl\UseCase1\BlogPost', $assertion->lastAssertResource, 'Assertion did not recieve proper resource object');
+        $this->assertType('ZendTest\Acl\TestAsset\UseCase1\User', $assertion->lastAssertRole, 'Assertion did not recieve proper role object');
+        $this->assertType('ZendTest\Acl\TestAsset\UseCase1\BlogPost', $assertion->lastAssertResource, 'Assertion did not recieve proper resource object');
 
     }
 
@@ -1147,7 +1140,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     protected function _loadUseCase1()
     {
-        return new UseCase1\Acl();
+        return new TestAsset\UseCase1\Acl();
     }
 
     /**
@@ -1205,7 +1198,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testAclPassesPrivilegeToAssertClass() 
     {
-        $assertion = new AssertionZF7973();
+        $assertion = new TestAsset\AssertionZF7973();
 
         $acl = new Acl\Acl();
         $acl->addRole('role');

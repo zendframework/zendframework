@@ -33,7 +33,7 @@ use Zend\Config;
  * @uses      Countable
  * @uses      RecursiveIterator
  * @uses      RecursiveIteratorIterator
- * @uses      \Zend\Navigation\Exception
+ * @uses      \Zend\Navigation\InvalidArgumentException
  * @uses      \Zend\Navigation\AbstractPage
  * @category  Zend
  * @package   Zend_Navigation
@@ -113,19 +113,19 @@ abstract class Container implements \RecursiveIterator, \Countable
      * @param  Zend_Navigation_Page|array|\Zend\Config\Config $page  page to add
      * @return \Zend\Navigation\Container                     fluent interface,
      *                                                       returns self
-     * @throws \Zend\Navigation\Exception                     if page is invalid
+     * @throws \Zend\Navigation\InvalidArgumentException      if page is invalid
      */
     public function addPage($page)
     {
         if ($page === $this) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 'A page cannot have itself as a parent');
         }
 
         if (is_array($page) || $page instanceof Config\Config) {
             $page = AbstractPage::factory($page);
         } elseif (!$page instanceof AbstractPage) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                     'Invalid argument: $page must be an instance of ' .
                     'Zend_Navigation_Page or Zend_Config, or an array');
         }
@@ -153,7 +153,8 @@ abstract class Container implements \RecursiveIterator, \Countable
      *
      * @param  array|\Zend\Config\Config $pages   pages to add
      * @return \Zend\Navigation\Container  fluent interface, returns self
-     * @throws Zend_Navigation_Exception  if $pages is not array or \Zend\Config\Config
+     * @throws \Zend\Navigation\InvalidArgumentException  if $pages is not array
+     *                                                   or \Zend\Config\Config
      */
     public function addPages($pages)
     {
@@ -162,7 +163,7 @@ abstract class Container implements \RecursiveIterator, \Countable
         }
 
         if (!is_array($pages)) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                     'Invalid argument: $pages must be an array or an ' .
                     'instance of Zend_Config');
         }
@@ -353,7 +354,7 @@ abstract class Container implements \RecursiveIterator, \Countable
      *
      * @param  string $method             method name
      * @param  array  $arguments          method arguments
-     * @throws \Zend\Navigation\Exception  if method does not exist
+     * @throws \Zend\Navigation\InvalidArgumentException  if method does not exist
      */
     public function __call($method, $arguments)
     {
@@ -361,7 +362,7 @@ abstract class Container implements \RecursiveIterator, \Countable
             return $this->{$match[1]}($match[2], $arguments[0]);
         }
 
-        throw new Exception(sprintf(
+        throw new InvalidArgumentException(sprintf(
                 'Bad method call: Unknown method %s::%s',
                 get_class($this),
                 $method));
@@ -393,7 +394,7 @@ abstract class Container implements \RecursiveIterator, \Countable
      * Implements RecursiveIterator interface.
      *
      * @return \Zend\Navigation\AbstractPage       current page or null
-     * @throws \Zend\Navigation\Exception  if the index is invalid
+     * @throws \Zend\Navigation\InvalidArgumentException  if the index is invalid
      */
     public function current()
     {
@@ -404,7 +405,7 @@ abstract class Container implements \RecursiveIterator, \Countable
         if (isset($this->_pages[$hash])) {
             return $this->_pages[$hash];
         } else {
-            throw new Exception(
+            throw new InvalidArgumentException(
                     'Corruption detected in container; ' .
                     'invalid key found in internal iterator');
         }

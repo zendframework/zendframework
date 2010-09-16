@@ -26,7 +26,7 @@
 namespace Zend\Navigation\Page;
 
 use Zend\Navigation\AbstractPage,
-    Zend\Navigation\Exception as NavigationException;
+    Zend\Navigation\InvalidArgumentException;
 
 /**
  * Represents a page that is defined using module, controller, action, route
@@ -34,7 +34,7 @@ use Zend\Navigation\AbstractPage,
  *
  * @uses       \Zend\Controller\Action\HelperBroker
  * @uses       \Zend\Controller\Front
- * @uses       \Zend\Navigation\Exception
+ * @uses       \Zend\Navigation\InvalidArgumentException
  * @uses       \Zend\Navigation\Page\Page
  * @category   Zend
  * @package    Zend_Navigation
@@ -208,12 +208,12 @@ class Mvc extends AbstractPage
      *
      * @param  string $action             action name
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid $action is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid $action is given
      */
     public function setAction($action)
     {
         if (null !== $action && !is_string($action)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                     'Invalid argument: $action must be a string or null');
         }
 
@@ -241,12 +241,12 @@ class Mvc extends AbstractPage
      *
      * @param  string|null $controller    controller name
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid controller name is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid controller name is given
      */
     public function setController($controller)
     {
         if (null !== $controller && !is_string($controller)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                     'Invalid argument: $controller must be a string or null');
         }
 
@@ -274,12 +274,12 @@ class Mvc extends AbstractPage
      *
      * @param  string|null $module        module name
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid module name is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid module name is given
      */
     public function setModule($module)
     {
         if (null !== $module && !is_string($module)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                     'Invalid argument: $module must be a string or null');
         }
 
@@ -341,12 +341,12 @@ class Mvc extends AbstractPage
      *
      * @param  string $route              route name to use when assembling URL
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid $route is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid $route is given
      */
     public function setRoute($route)
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                  'Invalid argument: $route must be a non-empty string or null');
         }
 

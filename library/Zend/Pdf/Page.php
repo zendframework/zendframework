@@ -28,7 +28,7 @@ namespace Zend\Pdf;
  * PDF Page
  *
  * @uses       \Zend\Pdf\PdfDocument
- * @uses       \Zend\Pdf\ObjectFactory\ElementFactory
+ * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\InternalType
  * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Resource\Font
@@ -36,6 +36,8 @@ namespace Zend\Pdf;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+use Zend\Pdf\InternalType;
+
 class Page
 {
     /**** Class Constants ****/
@@ -182,10 +184,10 @@ class Page
      *    Object factory is created by PDF parser.
      * ---------------------------------------------------------
      * new Zend_PDF_Page(\Zend\Pdf\InternalType\DictionaryObject $pageDict,
-     *                   \Zend\Pdf\InternalType\ObjectFactory $factory);
+     *                   \Zend\Pdf\ObjectFactory $factory);
      * ---------------------------------------------------------
      *
-     * 2. Clone PDF page.
+     * 2. Make a copy of the PDF page.
      *    New page is created in the same context as source page. Object factory is shared.
      *    Thus it will be attached to the document, but need to be placed into Zend_Pdf::$pages array
      *    to be included into output.
@@ -216,18 +218,33 @@ class Page
      */
     public function __construct($param1, $param2 = null, $param3 = null)
     {
-        if ($param1 instanceof InternalType\IndirectObjectReference &&
+        if (($param1 instanceof InternalType\IndirectObjectReference ||
+             $param1 instanceof InternalType\IndirectObject
+            ) &&
             $param1->getType() == InternalType\AbstractTypeObject::TYPE_DICTIONARY &&
             $param2 instanceof ObjectFactory &&
             $param3 === null
            ) {
-            $this->_pageDictionary = $param1;
-            $this->_objFactory     = $param2;
-            $this->_attached       = true;
-            $this->_safeGS         = false;
+            switch ($param1->getType()) {
+                case InternalType\AbstractTypeObject::TYPE_DICTIONARY:
+                    $this->_pageDictionary = $param1;
+                    $this->_objFactory     = $param2;
+                    $this->_attached       = true;
+                    $this->_safeGS         = false;
+                    return;
+                    break;
 
-            return;
+                case InternalType\AbstractTypeObject::TYPE_NULL:
+                    $this->_objFactory = $param2;
+                    $pageWidth = $pageHeight = 0;
+                    break;
 
+                default:
+                    require_once 'Zend/Pdf/Exception.php';
+                    throw new Exception('Unrecognized object type.');
+                    break;
+
+            }
         } else if ($param1 instanceof Page && $param2 === null && $param3 === null) {
             // Clone existing page.
             // Let already existing content and resources to be shared between pages
@@ -265,7 +282,7 @@ class Page
             if ($param2 !== null) {
                 $this->_objFactory = $param2;
             } else {
-                $this->_objFactory = ObjectFactory\ElementFactory::createFactory(1);
+                $this->_objFactory = ObjectFactory::createFactory(1);
             }
             $this->_attached   = false;
             $this->_safeGS     = true; /** New page created. That's users App responsibility to track GS changes */
@@ -307,7 +324,7 @@ class Page
             if ($param3 !== null) {
                 $this->_objFactory = $param3;
             } else {
-                $this->_objFactory = ObjectFactory\ElementFactory::createFactory(1);
+                $this->_objFactory = ObjectFactory::createFactory(1);
             }
 
             $this->_attached = false;
@@ -331,16 +348,6 @@ class Page
         $this->_pageDictionary->Contents     = new InternalType\ArrayObject();
     }
 
-
-    /**
-     * Clone operator
-     *
-     * @throws \Zend\Pdf\Exception
-     */
-    public function __clone()
-    {
-        throw new Exception('Cloning \Zend\Pdf\Page object using \'clone\' keyword is not supported. Use \'new Zend_PDF_Page($srcPage)\' syntax');
-    }
 
     /**
      * Attach resource to the page
@@ -401,6 +408,59 @@ class Page
         }
 
         $this->_pageDictionary->Resources->ProcSet->items[] = new InternalType\NameObject($procSetName);
+    }
+
+    /**
+     * Clone page, extract it and dependent objects from the current document,
+     * so it can be used within other docs.
+     */
+    public function __clone()
+    {
+        $factory = ObjectFactory::createFactory(1);
+        $processed = array();
+
+        // Clone dictionary object.
+        // Do it explicitly to prevent sharing page attributes between different
+        // results of clonePage() operation (other resources are still shared)
+        $dictionary = new InternalType\DictionaryObject();
+        foreach ($this->_pageDictionary->getKeys() as $key) {
+            $dictionary->$key = $this->_pageDictionary->$key->makeClone($factory,
+                                                                        $processed,
+                                                                        InternalType\AbstractTypeObject::CLONE_MODE_SKIP_PAGES);
+        }
+
+        $this->_pageDictionary = $factory->newObject($dictionary);
+        $this->_objFactory     = $factory;
+        $this->_attached       = false;
+        $this->_style          = null;
+        $this->_font           = null;
+    }
+
+    /**
+     * Clone page, extract it and dependent objects from the current document,
+     * so it can be used within other docs.
+     *
+     * @internal
+     * @param \Zend\Pdf\ObjectFactory $factory
+     * @param array $processed
+     * @return \Zend\Pdf\Page
+     */
+    public function clonePage(ObjectFactory $factory, &$processed)
+    {
+        // Clone dictionary object.
+        // Do it explicitly to prevent sharing page attributes between different
+        // results of clonePage() operation (other resources are still shared)
+        $dictionary = new InternalType\DictionaryObject();
+        foreach ($this->_pageDictionary->getKeys() as $key) {
+            $dictionary->$key = $this->_pageDictionary->$key->makeClone($factory,
+                                                                        $processed,
+                                                                        InternalType\AbstractTypeObject::CLONE_MODE_SKIP_PAGES);
+        }
+
+        $clonedPage = new Page($factory->newObject($dictionary), $factory);
+        $clonedPage->_attached = false;
+
+        return $clonedPage;
     }
 
     /**
@@ -490,15 +550,7 @@ class Page
         }
 
         if ($this->_attached) {
-            throw new Exception('Page is attached to one documen, but rendered in context of another.');
-            /**
-             * @todo Page cloning must be implemented here instead of exception.
-             *       PDF objects (ex. fonts) can be shared between pages.
-             *       Thus all referenced objects, which can be modified, must be cloned recursively,
-             *       to avoid producing wrong object references in a context of source PDF.
-             */
-
-            //...
+            throw new Exception('Page is attached to other documen. Use clone $page to get it context free.');
         } else {
             $objFactory->attach($this->_objFactory);
         }

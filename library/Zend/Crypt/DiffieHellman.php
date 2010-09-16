@@ -176,7 +176,7 @@ class DiffieHellman
      */
     public function getPublicKey($type = self::NUMBER)
     {
-        if ($this->_publicKey === null)) {
+        if ($this->_publicKey === null) {
             throw new DiffieHellmanException('A public key has not yet been generated using a prior call to generateKeys()');
         }
         if ($type == self::BINARY) {

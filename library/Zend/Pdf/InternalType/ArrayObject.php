@@ -133,6 +133,39 @@ class ArrayObject extends AbstractTypeObject
     }
 
     /**
+     * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
+     *
+     * @param \Zend\Pdf\ObjectFactory $factory  The factory to attach
+     * @param array &$processed List of already processed indirect objects, used to avoid objects duplication
+     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @returns \Zend\Pdf\InternalType\AbstractTypeObject
+     */
+    public function makeClone(Pdf\ObjectFactory $factory, array &$processed, $mode)
+    {
+        $newArray = new self();
+
+        foreach ($this->items as $key => $value) {
+            $newArray->items[$key] = $value->makeClone($factory, $processed, $mode);
+        }
+
+        return $newArray;
+    }
+
+    /**
+     * Set top level parent indirect object.
+     *
+     * @param \Zend\Pdf\InternalType\IndirectObject $parent
+     */
+    public function setParentObject(IndirectObject $parent)
+    {
+        parent::setParentObject($parent);
+
+        foreach ($this->items as $item) {
+            $item->setParentObject($parent);
+        }
+    }
+
+    /**
      * Convert PDF element to PHP type.
      *
      * Dictionary is returned as an associative array

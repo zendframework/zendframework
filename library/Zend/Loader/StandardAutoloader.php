@@ -28,12 +28,14 @@ require_once __DIR__ . '/SplAutolaoder.php';
 /**
  * PSR-0 compliant autoloader
  *
- * Allows autoloading both namespaced and vendor-prefixed classes.
+ * Allows autoloading both namespaced and vendor-prefixed classes. Class 
+ * lookups are performed on the filesystem. If a class file for the referenced
+ * class is not found, a PHP warning will be raised by include().
  * 
  * @package    Zend_Loader
  * @license New BSD {@link http://framework.zend.com/license/new-bsd}
  */
-class Psr0Autoloader implements SplAutoloader
+class StandardAutoloader implements SplAutoloader
 {
     const NS_SEPARATOR     = '\\';
     const PREFIX_SEPARATOR = '_';
@@ -83,7 +85,7 @@ class Psr0Autoloader implements SplAutoloader
      * </code>
      * 
      * @param  array|Traversable $options 
-     * @return Psr0Autoloader
+     * @return StandardAutoloader
      */
     public function setOptions($options)
     {
@@ -115,7 +117,7 @@ class Psr0Autoloader implements SplAutoloader
      * 
      * @param  string $namespace 
      * @param  string $directory 
-     * @return Psr0Autoloader
+     * @return StandardAutoloader
      */
     public function registerNamespace($namespace, $directory)
     {
@@ -128,7 +130,7 @@ class Psr0Autoloader implements SplAutoloader
      * Register many namespace/directory pairs at once
      * 
      * @param  array $namespaces 
-     * @return Psr0Autoloader
+     * @return StandardAutoloader
      */
     public function registerNamespaces($namespaces)
     {
@@ -148,7 +150,7 @@ class Psr0Autoloader implements SplAutoloader
      * 
      * @param  string $prefix 
      * @param  string $directory 
-     * @return Psr0Autoloader
+     * @return StandardAutoloader
      */
     public function registerPrefix($prefix, $directory)
     {
@@ -161,7 +163,7 @@ class Psr0Autoloader implements SplAutoloader
      * Register many namespace/directory pairs at once
      * 
      * @param  array $prefixes 
-     * @return Psr0Autoloader
+     * @return StandardAutoloader
      */
     public function registerPrefixes($prefixes)
     {
@@ -231,7 +233,7 @@ class Psr0Autoloader implements SplAutoloader
     protected function loadClass($class, $type)
     {
         if (!in_array($type, array(self::LOAD_NS, self::LOAD_PREFIX))) {
-            require_once __DIR__ . '/InvalidArgumentException.php';
+            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException();
         }
 
@@ -243,7 +245,7 @@ class Psr0Autoloader implements SplAutoloader
                 // create filename
                 $filename = $this->transformClassNameToFilename($trimmedClass, $path);
                 if (file_exists($filename)) {
-                    require_once $filename;
+                    include $filename;
                 }
                 return;
             }

@@ -90,8 +90,8 @@ class ClassMapAutoloader implements SplAutoloader
     public function registerAutoloadMap($location)
     {
         if (!file_exists($location)) {
-            require_once __DIR__ . '/InvalidArgumentException.php';
-            throw new InvalidArgumentException('Map file provided does not exist');
+            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            throw new Exception\InvalidArgumentException('Map file provided does not exist');
         }
 
         $location = realpath($location);
@@ -104,8 +104,8 @@ class ClassMapAutoloader implements SplAutoloader
         $map = include $location;
 
         if (!is_array($map)) {
-            require_once __DIR__ . '/InvalidArgumentException.php';
-            throw new InvalidArgumentException('Map file provided does not return a map');
+            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            throw new Exception\InvalidArgumentException('Map file provided does not return a map');
         }
 
         $this->map = array_merge($this->map, $map);
@@ -141,7 +141,7 @@ class ClassMapAutoloader implements SplAutoloader
     public function autoload($class)
     {
         if (array_key_exists($class, $this->map)) {
-            require_once $this->map[$class];
+            include $this->map[$class];
         }
     }
 

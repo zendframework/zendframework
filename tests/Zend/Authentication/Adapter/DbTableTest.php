@@ -129,7 +129,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         try {
             $result = $this->_adapter->authenticate();
             $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_NOT_FOUND, $result->getCode());
-        } catch (Adapter\RuntimeException $e) {
+        } catch (Adapter\Exception\RuntimeException $e) {
             $this->fail('Exception should have been thrown');
         }
     }
@@ -150,7 +150,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         try {
             $result = $this->_adapter->authenticate();
             $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_AMBIGUOUS, $result->getCode());
-        } catch (Adapter\RuntimeException $e) {
+        } catch (Adapter\Exception\RuntimeException $e) {
             $this->fail('Exception should have been thrown');
         }
     }
@@ -255,7 +255,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoTable()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\RuntimeException', 'A table must be supplied for');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A table must be supplied for');
         $adapter = new Adapter\DbTable($this->_db);
         $result = $adapter->authenticate();
     }
@@ -265,7 +265,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoIdentityColumn()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\RuntimeException', 'An identity column must be supplied for the');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'An identity column must be supplied for the');
         $adapter = new Adapter\DbTable($this->_db, 'users');
         $result = $adapter->authenticate();
     }
@@ -275,7 +275,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoCredentialColumn()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\RuntimeException', 'A credential column must be supplied');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A credential column must be supplied');
         $adapter = new Adapter\DbTable($this->_db, 'users', 'username');
         $result = $adapter->authenticate();
     }
@@ -285,7 +285,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoIdentity()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\RuntimeException', 'A value for the identity was not provided prior');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A value for the identity was not provided prior');
         $result = $this->_adapter->authenticate();
     }
 
@@ -294,7 +294,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoCredential()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\RuntimeException', 'A credential value was not provided prior');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A credential value was not provided prior');
         $this->_adapter->setIdentity('my_username');
         $result = $this->_adapter->authenticate();
     }
@@ -304,7 +304,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionBadSql()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\RuntimeException', 'The supplied parameters to');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'The supplied parameters to');
         $this->_adapter->setTableName('bad_table_name');
         $this->_adapter->setIdentity('value');
         $this->_adapter->setCredential('value');
@@ -335,7 +335,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateWithDefaultDbAdapterNoAdapterException()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\RuntimeException', 'Null was provided');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'Null was provided');
 
         // make sure that no default adapter exists
         \Zend\Db\Table\AbstractTable::setDefaultAdapter(null);

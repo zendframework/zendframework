@@ -124,7 +124,7 @@ class Acl
      * @param  Zend\Acl\Role              $role
      * @param  Zend\Acl\Role|string|array $parents
      * @uses   Zend\Acl\Role\Registry::add()
-     * @throws Zend\Acl\InvalidArgumentException
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Acl Provides a fluent interface
      */
     public function addRole($role, $parents = null)
@@ -134,7 +134,7 @@ class Acl
         }
 
         if (!$role instanceof Role) {
-            throw new InvalidArgumentException('addRole() expects $role to be of type Zend_Acl_Role_Interface');
+            throw new Exception\InvalidArgumentException('addRole() expects $role to be of type Zend_Acl_Role_Interface');
         }
 
 
@@ -258,7 +258,7 @@ class Acl
      *
      * @param  Zend\Acl\Resource|string $resource
      * @param  Zend\Acl\Resource|string $parent
-     * @throws Zend\Acl\InvalidArgumentException
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Acl Provides a fluent interface
      */
     public function addResource($resource, $parent = null)
@@ -268,13 +268,13 @@ class Acl
         }
 
         if (!$resource instanceof Resource) {
-            throw new InvalidArgumentException('addResource() expects $resource to be of type Zend_Acl_Resource_Interface');
+            throw new Exception\InvalidArgumentException('addResource() expects $resource to be of type Zend_Acl_Resource_Interface');
         }
 
         $resourceId = $resource->getResourceId();
 
         if ($this->hasResource($resourceId)) {
-            throw new InvalidArgumentException("Resource id '$resourceId' already exists in the ACL");
+            throw new Exception\InvalidArgumentException("Resource id '$resourceId' already exists in the ACL");
         }
 
         $resourceParent = null;
@@ -288,7 +288,7 @@ class Acl
                 }
                 $resourceParent = $this->getResource($resourceParentId);
             } catch (Exception $e) {
-                throw new InvalidArgumentException("Parent Resource id '$resourceParentId' does not exist", 0, $e);
+                throw new Exception\InvalidArgumentException("Parent Resource id '$resourceParentId' does not exist", 0, $e);
             }
             $this->_resources[$resourceParentId]['children'][$resourceId] = $resource;
         }
@@ -308,7 +308,7 @@ class Acl
      * The $resource parameter can either be a Resource or a Resource identifier.
      *
      * @param  Zend\Acl\Resource|string $resource
-     * @throws Zend\Acl\InvalidArgumentException
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Resource
      */
     public function getResource($resource)
@@ -320,7 +320,7 @@ class Acl
         }
 
         if (!$this->hasResource($resource)) {
-            throw new InvalidArgumentException("Resource '$resourceId' not found");
+            throw new Exception\InvalidArgumentException("Resource '$resourceId' not found");
         }
 
         return $this->_resources[$resourceId]['instance'];
@@ -357,7 +357,7 @@ class Acl
      * @param  Zend\Acl\Resource|string $resource
      * @param  Zend\Acl\Resource|string $inherit
      * @param  boolean                  $onlyParent
-     * @throws Zend\Acl\InvalidArgumentException
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return boolean
      */
     public function inheritsResource($resource, $inherit, $onlyParent = false)
@@ -366,7 +366,7 @@ class Acl
             $resourceId = $this->getResource($resource)->getResourceId();
             $inheritId  = $this->getResource($inherit)->getResourceId();
         } catch (Exception $e) {
-            throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         if (null !== $this->_resources[$resourceId]['parent']) {
@@ -396,7 +396,7 @@ class Acl
      * The $resource parameter can either be a Resource or a Resource identifier.
      *
      * @param  Zend\Acl\Resource|string $resource
-     * @throws Zend\Acl\InvalidArgumentException
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Acl Provides a fluent interface
      */
     public function removeResource($resource)
@@ -404,7 +404,7 @@ class Acl
         try {
             $resourceId = $this->getResource($resource)->getResourceId();
         } catch (Exception $e) {
-            throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         $resourcesRemoved = array($resourceId);
@@ -556,7 +556,7 @@ class Acl
      * @param  Zend\Acl\Resource|string|array $resources
      * @param  string|array                   $privileges
      * @param  Zend\Acl\Assertion             $assert
-     * @throws Zend\Acl\InvalidArgumentException
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Acl Provides a fluent interface
      */
     public function setRule($operation, $type, $roles = null, $resources = null, 
@@ -565,7 +565,7 @@ class Acl
         // ensure that the rule type is valid; normalize input to uppercase
         $type = strtoupper($type);
         if (self::TYPE_ALLOW !== $type && self::TYPE_DENY !== $type) {
-            throw new InvalidArgumentException("Unsupported rule type; must be either '" . self::TYPE_ALLOW . "' or '"
+            throw new Exception\InvalidArgumentException("Unsupported rule type; must be either '" . self::TYPE_ALLOW . "' or '"
                                        . self::TYPE_DENY . "'");
         }
 
@@ -674,7 +674,7 @@ class Acl
                 break;
 
             default:
-                throw new InvalidArgumentException("Unsupported operation; must be either '" . self::OP_ADD . "' or '"
+                throw new Exception\InvalidArgumentException("Unsupported operation; must be either '" . self::OP_ADD . "' or '"
                                            . self::OP_REMOVE . "'");
         }
 
@@ -842,12 +842,12 @@ class Acl
      * @param  Zend\Acl\Resource $resource
      * @param  array             $dfs
      * @return boolean|null
-     * @throws \Zend\Acl\RuntimeException
+     * @throws \Zend\Acl\Exception\RuntimeException
      */
     protected function _roleDFSVisitAllPrivileges(Role $role, Resource $resource = null, &$dfs = null)
     {
         if (null === $dfs) {
-            throw new RuntimeException('$dfs parameter may not be null');
+            throw new Exception\RuntimeException('$dfs parameter may not be null');
         }
 
         if (null !== ($rules = $this->_getRules($resource, $role))) {
@@ -880,12 +880,12 @@ class Acl
      * @param  Zend\Acl\Resource $resource
      * @param  string            $privilege
      * @return boolean|null
-     * @throws Zend\Acl\RuntimeException
+     * @throws Zend\Acl\Exception\RuntimeException
      */
     protected function _roleDFSOnePrivilege(Role $role, Resource $resource = null, $privilege = null)
     {
         if (null === $privilege) {
-            throw new RuntimeException('$privilege parameter may not be null');
+            throw new Exception\RuntimeException('$privilege parameter may not be null');
         }
 
         $dfs = array(
@@ -921,7 +921,7 @@ class Acl
      * @param  string            $privilege
      * @param  array             $dfs
      * @return boolean|null
-     * @throws Zend\Acl\RuntimeException
+     * @throws Zend\Acl\Exception\RuntimeException
      */
     protected function _roleDFSVisitOnePrivilege(Role $role, Resource $resource = null, 
         $privilege = null, &$dfs = null
@@ -930,14 +930,14 @@ class Acl
             /**
              * @see Zend_Acl_Exception
              */
-            throw new RuntimeException('$privilege parameter may not be null');
+            throw new Exception\RuntimeException('$privilege parameter may not be null');
         }
 
         if (null === $dfs) {
             /**
              * @see Zend_Acl_Exception
              */
-            throw new RuntimeException('$dfs parameter may not be null');
+            throw new Exception\RuntimeException('$dfs parameter may not be null');
         }
 
         if (null !== ($ruleTypeOnePrivilege = $this->_getRuleType($resource, $role, $privilege))) {

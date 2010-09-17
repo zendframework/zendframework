@@ -103,7 +103,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testRoleRegistryRemoveOneNonExistent()
     {
-        $this->setExpectedException('\Zend\Acl\InvalidArgumentException', 'not found');
+        $this->setExpectedException('\Zend\Acl\Exception\InvalidArgumentException', 'not found');
         $this->_acl->removeRole('nonexistent');
     }
 
@@ -127,7 +127,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testRoleRegistryAddInheritsNonExistent()
     {
-        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'not found');
+        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException', 'not found');
         $this->_acl->addRole(new Role\GenericRole('guest'), 'nonexistent');
     }
 
@@ -143,13 +143,13 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->inheritsRole('nonexistent', $roleGuest);
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon specifying a non-existent child Role');
-        } catch (Acl\InvalidArgumentException $e) {
+        } catch (Acl\Exception\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         try {
             $this->_acl->inheritsRole($roleGuest, 'nonexistent');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon specifying a non-existent child Role');
-        } catch (Acl\InvalidArgumentException $e) {
+        } catch (Acl\Exception\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
     }
@@ -225,7 +225,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     {
         $roleGuest = new Role\GenericRole('guest');
         $roleRegistry = new Role\Registry();
-        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'already exists');
+        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException', 'already exists');
         $roleRegistry->add($roleGuest)
                      ->add($roleGuest);
     }
@@ -240,7 +240,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $roleGuest1 = new Role\GenericRole('guest');
         $roleGuest2 = new Role\GenericRole('guest');
         $roleRegistry = new Role\Registry();
-        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'already exists');
+        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException', 'already exists');
         $roleRegistry->add($roleGuest1)
                      ->add($roleGuest2);
     }
@@ -330,7 +330,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testResourceAddInheritsNonExistent()
     {
-        $this->setExpectedException('Zend\Acl\InvalidArgumentException', 'does not exist');
+        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException', 'does not exist');
         $this->_acl->addResource(new Resource\GenericResource('area'), 'nonexistent');
     }
 
@@ -417,13 +417,13 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->isAllowed('nonexistent');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon non-existent Role');
-        } catch (Acl\InvalidArgumentException $e) {
+        } catch (Acl\Exception\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         try {
             $this->_acl->isAllowed(null, 'nonexistent');
             $this->fail('Expected Zend\Acl\Exception not thrown upon non-existent Resource');
-        } catch (Acl\InvalidArgumentException $e) {
+        } catch (Acl\Exception\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
     }
@@ -783,7 +783,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->isAllowed('guest');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon isAllowed() on non-existent Role');
-        } catch (Acl\InvalidArgumentException $e) {
+        } catch (Acl\Exception\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         $this->_acl->addRole(new Role\GenericRole('guest'));
@@ -804,7 +804,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_acl->isAllowed('guest');
             $this->fail('Expected Zend\Acl\Role\Exception not thrown upon isAllowed() on non-existent Role');
-        } catch (Acl\InvalidArgumentException $e) {
+        } catch (Acl\Exception\InvalidArgumentException $e) {
             $this->assertContains('not found', $e->getMessage());
         }
         $this->_acl->addRole(new Role\GenericRole('guest'));

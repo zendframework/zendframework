@@ -8,7 +8,7 @@ to be worked on.
 In alphabetical order:
 
 Zend\Authentication     COMPLETE    Ralph Schindler (ralph)
-Zend\AccessControl      COMPLETE    Ralph Schindler (ralph)
+Zend\Acl                COMPLETE    Ralph Schindler (ralph)
 Zend\Cache              IN PROGRESS Paul Katsande (?) (paul [+] katsande [a] gmail [+] com)
 Zend\Navigation         IN PROGRESS Michael Ridgway () (mcridgway [a] gmail [+] com)
 Zend\Paginator          IN PROGRESS Wil Moore (wilmoore) (wil [+] moore [a] wilmoore [+] com)

@@ -1,9 +1,10 @@
 <?php
 
-namespace Zend\Authentication\Adapter;
+namespace Zend\Acl\Exception;
 
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements \Zend\Acl\Exception
 {
-} 
+    
+}

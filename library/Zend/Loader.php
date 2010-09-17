@@ -21,14 +21,9 @@
 
 namespace Zend;
 
-require_once __DIR__ . '/Loader/ClassNotFoundException.php';
-require_once __DIR__ . '/Loader/InvalidDirectoryArgumentException.php';
-require_once __DIR__ . '/Loader/SecurityException.php';
-
 /**
  * Static methods for loading classes and files.
  *
- * @uses       Zend_Exception
  * @category   Zend
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -36,77 +31,6 @@ require_once __DIR__ . '/Loader/SecurityException.php';
  */
 class Loader
 {
-    /**
-     * Loads a class from a PHP file.  The filename must be formatted
-     * as "$class.php".
-     *
-     * If $dirs is a string or an array, it will search the directories
-     * in the order supplied, and attempt to load the first matching file.
-     *
-     * If $dirs is null, it will split the class name at underscores to
-     * generate a path hierarchy (e.g., "Zend_Example_Class" will map
-     * to "Zend/Example/Class.php").
-     *
-     * If the file was not found in the $dirs, or if no $dirs were specified,
-     * it will attempt to load it from PHP's include_path.
-     *
-     * @param string $class      - The full class name of a Zend component.
-     * @param string|array $dirs - OPTIONAL Either a path or an array of paths
-     *                             to search.
-     * @return void
-     * @throws Zend_Exception
-     */
-    public static function loadClass($class, $dirs = null)
-    {
-        if (class_exists($class, false) || interface_exists($class, false)) {
-            return;
-        }
-
-        if ((null !== $dirs) && !is_string($dirs) && !is_array($dirs)) {
-            throw new Loader\InvalidDirectoryArgumentException('Directory argument must be a string or an array');
-        }
-
-        // Autodiscover the path from the class name
-        // Implementation is PHP namespace-aware, and based on 
-        // Framework Interop Group reference implementation:
-        // http://groups.google.com/group/php-standards/web/psr-0-final-proposal
-        $className = ltrim($class, '\\');
-        $file      = '';
-        $namespace = '';
-        if ($lastNsPos = strrpos($className, '\\')) {
-            $namespace = substr($className, 0, $lastNsPos);
-            $className = substr($className, $lastNsPos + 1);
-            $file      = (DIRECTORY_SEPARATOR != '\\') // small speed up on windows
-                         ? str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR
-                         : $namespace . DIRECTORY_SEPARATOR;
-        }
-        $file .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-
-        if (!empty($dirs)) {
-            // use the autodiscovered path
-            $dirPath = dirname($file);
-            if (is_string($dirs)) {
-                $dirs = explode(PATH_SEPARATOR, $dirs);
-            }
-            foreach ($dirs as $key => $dir) {
-                if ($dir == '.') {
-                    $dirs[$key] = $dirPath;
-                } else {
-                    $dir = rtrim($dir, '\\/');
-                    $dirs[$key] = $dir . DIRECTORY_SEPARATOR . $dirPath;
-                }
-            }
-            $file = basename($file);
-            self::loadFile($file, $dirs, true);
-        } else {
-            self::loadFile($file, null, true);
-        }
-
-        if (!class_exists($class, false) && !interface_exists($class, false)) {
-            throw new Loader\ClassNotFoundException("File \"$file\" does not exist or class \"$class\" was not found in the file");
-        }
-    }
-
     /**
      * Loads a PHP file.  This is a wrapper for PHP's include() function.
      *
@@ -128,7 +52,7 @@ class Loader
      *                       to search.
      * @param  boolean       $once
      * @return boolean
-     * @throws Zend_Exception
+     * @throws Zend\Loader\Exception\SecurityException
      */
     public static function loadFile($filename, $dirs = null, $once = false)
     {
@@ -240,7 +164,7 @@ class Loader
      *
      * @param  string $filename
      * @return void
-     * @throws Zend_Exception
+     * @throws Zend\Loader\Exception\SecurityException
      */
     protected static function _securityCheck($filename)
     {
@@ -248,7 +172,8 @@ class Loader
          * Security check
          */
         if (preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $filename)) {
-            throw new Loader\SecurityException('Illegal character in filename');
+            require_once __DIR__ . '/Loader/Exception/SecurityException.php';
+            throw new Loader\Exception\SecurityException('Illegal character in filename');
         }
     }
 

@@ -1,5 +1,4 @@
 /*
- * @version    $Id$
 Sample grant for SQLite
 
 CREATE ROLE queue LOGIN

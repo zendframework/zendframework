@@ -16,7 +16,6 @@
  * @package    Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Atom.php 22107 2010-05-05 13:42:20Z padraic $
  */
 
 /**

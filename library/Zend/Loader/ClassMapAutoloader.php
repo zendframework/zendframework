@@ -1,23 +1,82 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Loader
+ * @subpackage Exception
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+
 /** @namespace */
 namespace Zend\Loader;
 
-// Grab Autoloadable interface
-require_once __DIR__ . '/Autoloadable.php';
+// Grab SplAutoloader interface
+require_once __DIR__ . '/SplAutoloader.php';
 
 /**
  * Class-map autoloader
  *
  * Utilizes class-map files to lookup classfile locations.
  * 
+ * @catebory   Zend
  * @package    Zend_Loader
- * @license New BSD {@link http://framework.zend.com/license/new-bsd}
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
-class ClassMapAutoloader implements Autoloadable
+class ClassMapAutoloader implements SplAutoloader
 {
+    /**
+     * Registry of map files that have already been loaded
+     * @var array
+     */
     protected $mapsLoaded = array();
 
+    /**
+     * Class name/filename map
+     * @var array
+     */
     protected $map = array();
+
+    /**
+     * Constructor
+     *
+     * Create a new instance, and optionally configure the autoloader.
+     * 
+     * @param  null|array|Traversable $options 
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if (null !== $options) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
+     * Configure the autoloader
+     *
+     * Proxies to {@link registerAutoloadMaps()}.
+     * 
+     * @param  array|Traversable $options 
+     * @return ClassMapAutoloader
+     */
+    public function setOptions($options)
+    {
+        $this->registerAutoloadMaps($options);
+        return $this;
+    }
 
     /**
      * Register an autoload map file
@@ -61,22 +120,16 @@ class ClassMapAutoloader implements Autoloadable
      * @param  array $locations 
      * @return ClassMapAutoloader
      */
-    public function registerAutoloadMaps(array $locations)
+    public function registerAutoloadMaps($locations)
     {
+        if (!is_array($locations) && !($locations instanceof \Traversable)) {
+            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            throw new Exception/InvalidArgumentException('Map list must be an array or implement Traversable');
+        }
         foreach ($locations as $location) {
             $this->registerAutoloadMap($location);
         }
         return $this;
-    }
-
-    /**
-     * Register the autoloader with spl_autoload registry
-     * 
-     * @return void
-     */
-    public function register()
-    {
-        spl_autoload_register(array($this, 'autoload'));
     }
 
     /**
@@ -90,5 +143,15 @@ class ClassMapAutoloader implements Autoloadable
         if (array_key_exists($class, $this->map)) {
             require_once $this->map[$class];
         }
+    }
+
+    /**
+     * Register the autoloader with spl_autoload registry
+     * 
+     * @return void
+     */
+    public function register()
+    {
+        spl_autoload_register(array($this, 'autoload'));
     }
 }

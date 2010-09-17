@@ -41,6 +41,7 @@ class StandardAutoloader implements SplAutoloader
     const PREFIX_SEPARATOR = '_';
     const LOAD_NS          = 'namespaces';
     const LOAD_PREFIX      = 'prefixes';
+    const ACT_AS_FALLBACK  = 'fallback_autoloader';
 
     /**
      * @var array Namespace/directory pairs to search; ZF library added by default
@@ -51,6 +52,11 @@ class StandardAutoloader implements SplAutoloader
      * @var array Prefix/directory pairs to search
      */
     protected $prefixes = array();
+
+    /**
+     * @var bool Whether or not the autoloader should also act as a fallback autoloader
+     */
+    protected $fallbackAutoloaderFlag = false;
 
     /**
      * Constructor
@@ -81,6 +87,7 @@ class StandardAutoloader implements SplAutoloader
      *     'prefixes' => array(
      *         'Phly_'     => '/path/to/Phly/library',
      *     ),
+     *     'fallback_autoloader' => true,
      * )
      * </code>
      * 
@@ -106,12 +113,38 @@ class StandardAutoloader implements SplAutoloader
                         $this->registerPrefixes($pairs);
                     }
                     break;
+                case self::ACT_AS_FALLBACK:
+                    $this->setFallbackAutoloader($pairs);
+                    break;
                 default:
                     // ignore
             }
         }
         return $this;
     }
+
+    /**
+     * Set flag indicating fallback autoloader status
+     * 
+     * @param  bool $flag 
+     * @return StandardAutoloader
+     */
+    public function setFallbackAutoloader($flag)
+    {
+        $this->fallbackAutoloaderFlag = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Is this autoloader acting as a fallback autoloader?
+     * 
+     * @return bool
+     */
+    public function isFallbackAutoloader()
+    {
+        return $this->fallbackAutoloaderFlag;
+    }
+
     /**
      * Register a namespace/directory pair
      * 
@@ -192,7 +225,9 @@ class StandardAutoloader implements SplAutoloader
         if (false !== strpos($class, self::PREFIX_SEPARATOR)) {
             return $this->loadClass($class, self::LOAD_PREFIX);
         }
-        // Refuse to load classes without a prefix or namespace!
+        if ($this->isFallbackAutoloader()) {
+            return $this->loadClass($class, self::ACT_AS_FALLBACK);
+        }
     }
 
     /**
@@ -232,11 +267,22 @@ class StandardAutoloader implements SplAutoloader
      */
     protected function loadClass($class, $type)
     {
-        if (!in_array($type, array(self::LOAD_NS, self::LOAD_PREFIX))) {
+        if (!in_array($type, array(self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK))) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException();
         }
 
+        // Fallback autoloading
+        if ($type === self::ACT_AS_FALLBACK) {
+            // create filename
+            $filename = $this->transformClassNameToFilename($class, '');
+            if (file_exists($filename)) {
+                return include $filename;
+            }
+            return false;
+        }
+
+        // Namespace and/or prefix autoloading
         foreach ($this->$type as $leader => $path) {
             if (0 === strpos($class, $leader)) {
                 // Trim off leader (namespace or prefix)
@@ -245,11 +291,12 @@ class StandardAutoloader implements SplAutoloader
                 // create filename
                 $filename = $this->transformClassNameToFilename($trimmedClass, $path);
                 if (file_exists($filename)) {
-                    include $filename;
+                    return include $filename;
                 }
-                return;
+                return false;
             }
         }
+        return false;
     }
 
     /**

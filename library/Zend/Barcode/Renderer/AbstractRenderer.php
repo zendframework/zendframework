@@ -28,7 +28,11 @@ namespace Zend\Barcode\Renderer;
 use Zend\Barcode\BarcodeRenderer,
     Zend\Config\Config,
     Zend\Barcode\BarcodeObject,
-    Zend\Barcode;
+    Zend\Barcode,
+    Zend\Barcode\Renderer\Exception\OutOfRangeException,
+    Zend\Barcode\Renderer\Exception\UnexpectedValueException,
+    Zend\Barcode\Renderer\Exception\RuntimeException,
+    Zend\Barcode\Renderer\Exception\InvalidArgumentException;
 
 /**
  * Class for rendering the barcode

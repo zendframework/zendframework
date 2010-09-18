@@ -22,7 +22,8 @@
 /**
  * @namespace
  */
-namespace Zend\Barcode\Object;
+namespace Zend\Barcode\Object\Exception;
+use Zend\Barcode\Object\Exception;
 
 /**
  * Exception for Zend_Barcode component.

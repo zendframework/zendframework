@@ -22,7 +22,8 @@
 /**
  * @namespace
  */
-namespace Zend\Barcode;
+namespace Zend\Barcode\Renderer\Exception;
+use Zend\Barcode\Renderer\Exception;
 
 /**
  * Exception for Zend_Barcode component.
@@ -33,8 +34,8 @@ namespace Zend\Barcode;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
+class OutOfRangeException
+    extends \OutOfRangeException
     implements Exception
 {
 }

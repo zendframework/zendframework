@@ -26,7 +26,9 @@ namespace Zend\Barcode;
 use Zend\Loader\PluginLoader,
     Zend\Loader\ShortNameLocater,
     Zend\Config\Config,
-    Zend;
+    Zend,
+    Zend\Barcode\Exception\RendererCreationException,
+    Zend\Barcode\Exception\InvalidArgumentException;
 
 /**
  * Class for generate Barcode

@@ -28,7 +28,9 @@ use Zend\Pdf\Color,
     Zend\Pdf\PdfDocument,
     Zend\Pdf\Page,
     Zend\Pdf\Font,
-    Zend;
+    Zend,
+    Zend\Barcode\Renderer\Exception\OutOfRangeException,
+    Zend\Barcode\Renderer\Exception\InvalidArgumentException;
 
 /**
  * Class for rendering the barcode in PDF resource

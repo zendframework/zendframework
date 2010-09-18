@@ -28,7 +28,11 @@ namespace Zend\Barcode\Object;
 
 use Zend\Barcode,
     Zend\Config\Config,
-    Zend\Validator\Barcode as BarcodeValidator;
+    Zend\Validator\Barcode as BarcodeValidator,
+    Zend\Barcode\Object\Exception\RuntimeException,
+    Zend\Barcode\Object\Exception\InvalidArgumentException,
+    Zend\Barcode\Object\Exception\BarcodeValidationException,
+    Zend\Barcode\Object\Exception\OutOfRangeException;
 
 /**
  * Class for generate Barcode

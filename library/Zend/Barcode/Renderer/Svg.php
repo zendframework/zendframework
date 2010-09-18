@@ -24,6 +24,8 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
+use Zend\Barcode\Renderer\Exception\OutOfRangeException,
+    Zend\Barcode\Renderer\Exception\InvalidArgumentException;
 
 /**
  * Class for rendering the barcode as svg

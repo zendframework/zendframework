@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-namespace ZendTest;
+namespace ZendTest\Loader;
 use \stdClass,
     \Phar,
     \Zend\Loader;

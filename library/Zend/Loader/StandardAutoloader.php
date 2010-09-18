@@ -22,8 +22,8 @@
 /** @namespace */
 namespace Zend\Loader;
 
-// Grab SplAutolaoder interface
-require_once __DIR__ . '/SplAutolaoder.php';
+// Grab SplAutoloader interface
+require_once __DIR__ . '/SplAutoloader.php';
 
 /**
  * PSR-0 compliant autoloader
@@ -96,7 +96,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function setOptions($options)
     {
-        if (is_array($options) && !($options instanceof \Traversable)) {
+        if (!is_array($options) && !($options instanceof \Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Options must be either an array or Traversable');
         }
@@ -200,7 +200,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function registerPrefixes($prefixes)
     {
-        if (!is_array($namespaces) && !$namespaces instanceof \Traversable) {
+        if (!is_array($prefixes) && !$prefixes instanceof \Traversable) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Prefix pairs must be either an array or Traversable');
         }
@@ -215,19 +215,29 @@ class StandardAutoloader implements SplAutoloader
      * Defined by Autoloadable; autoload a class
      * 
      * @param  string $class 
-     * @return void
+     * @return false|string
      */
     public function autoload($class)
     {
+        $isFallback = $this->isFallbackAutoloader();
         if (false !== strpos($class, self::NS_SEPARATOR)) {
-            return $this->loadClass($class, self::LOAD_NS);
+            if ($this->loadClass($class, self::LOAD_NS)) {
+                return $class;
+            } elseif ($this->isFallbackAutoloader()) {
+                return $this->loadClass($class, self::ACT_AS_FALLBACK);
+            }
+            return false;
         }
         if (false !== strpos($class, self::PREFIX_SEPARATOR)) {
-            return $this->loadClass($class, self::LOAD_PREFIX);
+            if ($this->loadClass($class, self::LOAD_PREFIX)) {
+                return $class;
+            } elseif ($this->isFallbackAutoloader()) {
+                return $this->loadClass($class, self::ACT_AS_FALLBACK);
+            }
+            return false;
         }
-        if ($this->isFallbackAutoloader()) {
-            return $this->loadClass($class, self::ACT_AS_FALLBACK);
-        }
+                return $this->loadClass($class, self::ACT_AS_FALLBACK);
+        return false;
     }
 
     /**
@@ -276,8 +286,8 @@ class StandardAutoloader implements SplAutoloader
         if ($type === self::ACT_AS_FALLBACK) {
             // create filename
             $filename = $this->transformClassNameToFilename($class, '');
-            if (file_exists($filename)) {
-                return include $filename;
+            if (false !== ($resolvedName = $this->fileExists($filename))) {
+                return include $resolvedName;
             }
             return false;
         }
@@ -316,4 +326,33 @@ class StandardAutoloader implements SplAutoloader
         return $directory;
     }
 
+    /**
+     * Determine if a file exists
+     *
+     * For PHP versions >= 5.3.2, utilizes stream_resolve_include_path(). 
+     * Otherwise, loops through the elements of the include_path, prefixing 
+     * them to the filename; if a match is found, it is returned. Otherwise, 
+     * returns boolean false.
+     * 
+     * @param mixed $filename 
+     * @return string|false
+     */
+    protected function fileExists($filename)
+    {
+        if (version_compare(PHP_VERSION, '5.3.2', '>=')) {
+            return stream_resolve_include_path($filename);
+        }
+
+        if (file_exists($filename)) {
+            return $filename;
+        }
+
+        foreach (explode(PATH_SEPARATOR, get_include_path()) as $path) {
+            $resolvedName = $path . DIRECTORY_SEPARATOR . $filename;
+            if (file_exists($resolvedName)) {
+                return $resolvedName;
+            }
+        }
+        return false;
+    }
 }

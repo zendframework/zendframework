@@ -315,14 +315,14 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     public function testNoFontProvidedWillThrowException()
     {
-        $this->setExpectedException('Zend\Captcha\NoFontProvidedException');
+        $this->setExpectedException('Zend\Captcha\Exception\NoFontProvidedException');
         $captcha = new Image();
         $captcha->generate();
     }
 
     public function testImageProvidedNotLoadableWillThrowException()
     {
-        $this->setExpectedException('Zend\Captcha\ImageNotLoadableException');
+        $this->setExpectedException('Zend\Captcha\Exception\ImageNotLoadableException');
         $captcha = new Image(array('font' => __DIR__. '/../Pdf/_fonts/Vera.ttf',
                                    'startImage' => 'file_not_found.png'));
         $captcha->generate();

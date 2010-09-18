@@ -24,6 +24,9 @@
  * @namespace
  */
 namespace Zend\Captcha;
+use Zend\Captcha\Exception\NoFontProvidedException,
+ Zend\Captcha\Exception\ExtensionNotLoadedException,
+    Zend\Captcha\Exception\ImageNotLoadableException;
 
 /**
  * Image-based captcha element

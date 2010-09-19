@@ -25,7 +25,7 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\SerializerException;
+use Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
@@ -65,7 +65,7 @@ class PhpCode extends AbstractAdapter
         $eval = @eval('$ret=' . $code . ';');
         if ($eval === false) {
             $lastErr = error_get_last();
-            throw new SerializerException('eval failed: ' . $lastErr['message']);
+            throw new RuntimeException('eval failed: ' . $lastErr['message']);
         }
         return $ret;
     }

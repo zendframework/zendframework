@@ -25,7 +25,8 @@
  */
 namespace ZendTest\Serializer\Adapter;
 
-use Zend\Serializer;
+use Zend\Serializer,
+    Zend\Serializer\Exception\MissingExtensionException;
 
 /**
  * @category   Zend
@@ -45,7 +46,7 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
             try {
                 new Serializer\Adapter\IgBinary();
                 $this->fail("Zend\\Serializer\\Adapter\\IgBinary needs missing ext/igbinary but did't throw exception");
-            } catch (Serializer\Exception $e) {}
+            } catch (MissingExtensionException $e) {}
             $this->markTestSkipped('Zend\\Serializer\\Adapter\\IgBinary needs ext/igbinary');
         }
         $this->_adapter = new Serializer\Adapter\IgBinary();

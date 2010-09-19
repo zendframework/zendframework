@@ -25,7 +25,8 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\SerializerException;
+use Zend\Serializer\Exception\RuntimeException,
+    Zend\Serializer\Exception\MissingExtensionException;
 
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
@@ -58,7 +59,7 @@ class Wddx extends AbstractAdapter
     public function __construct($opts = array())
     {
         if (!extension_loaded('wddx')) {
-            throw new SerializationException('PHP extension "wddx" is required for this adapter');
+            throw new MissingExtensionException('PHP extension "wddx" is required for this adapter');
         }
 
         parent::__construct($opts);
@@ -84,7 +85,7 @@ class Wddx extends AbstractAdapter
 
         if ($wddx === false) {
             $lastErr = error_get_last();
-            throw new SerializerException($lastErr['message']);
+            throw new RuntimeException($lastErr['message']);
         }
         return $wddx;
     }
@@ -114,7 +115,7 @@ class Wddx extends AbstractAdapter
                 $errMsg = $e->getMessage();
             }
 
-            throw new SerializerException($errMsg);
+            throw new RuntimeException($errMsg);
         }
 
         return $ret;

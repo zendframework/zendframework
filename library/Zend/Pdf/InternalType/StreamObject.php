@@ -65,13 +65,13 @@ class StreamObject extends IndirectObject
 
     /**
      * Stored original stream object dictionary.
-     * Used to decode stream during an access time.
+     * Used to decode stream at access time.
      *
-     * The only properties, which affect decoding, are sored here.
+     * The only properties affecting decoding are sored here.
      *
      * @var array|null
      */
-    private $_originalDictionary = null;
+    private $_initialDictionaryData = null;
 
     /**
      * Object constructor
@@ -99,77 +99,80 @@ class StreamObject extends IndirectObject
 
 
     /**
-     * Store original dictionary information in $_originalDictionary class member.
-     * Used to store information and to normalize filters information before defiltering.
+     * Extract dictionary data which are used to store information and to normalize filters
+     * information before defiltering.
      *
+     * @return array
      */
-    private function _storeOriginalDictionary()
+    private function _extractDictionaryData()
     {
-        $this->_originalDictionary = array();
+        $dictionaryArray = array();
 
-        $this->_originalDictionary['Filter']      = array();
-        $this->_originalDictionary['DecodeParms'] = array();
+        $dictionaryArray['Filter']      = array();
+        $dictionaryArray['DecodeParms'] = array();
         if ($this->_dictionary->Filter === null) {
             // Do nothing.
         } else if ($this->_dictionary->Filter->getType() == AbstractTypeObject::TYPE_ARRAY) {
             foreach ($this->_dictionary->Filter->items as $id => $filter) {
-                $this->_originalDictionary['Filter'][$id]      = $filter->value;
-                $this->_originalDictionary['DecodeParms'][$id] = array();
+                $dictionaryArray['Filter'][$id]      = $filter->value;
+                $dictionaryArray['DecodeParms'][$id] = array();
 
                 if ($this->_dictionary->DecodeParms !== null ) {
                     if ($this->_dictionary->DecodeParms->items[$id] !== null &&
                         $this->_dictionary->DecodeParms->items[$id]->value !== null ) {
                         foreach ($this->_dictionary->DecodeParms->items[$id]->getKeys() as $paramKey) {
-                            $this->_originalDictionary['DecodeParms'][$id][$paramKey] =
+                            $dictionaryArray['DecodeParms'][$id][$paramKey] =
                                   $this->_dictionary->DecodeParms->items[$id]->$paramKey->value;
                         }
                     }
                 }
             }
         } else if ($this->_dictionary->Filter->getType() != AbstractTypeObject::TYPE_NULL) {
-            $this->_originalDictionary['Filter'][0]      = $this->_dictionary->Filter->value;
-            $this->_originalDictionary['DecodeParms'][0] = array();
+            $dictionaryArray['Filter'][0]      = $this->_dictionary->Filter->value;
+            $dictionaryArray['DecodeParms'][0] = array();
             if ($this->_dictionary->DecodeParms !== null ) {
                 foreach ($this->_dictionary->DecodeParms->getKeys() as $paramKey) {
-                    $this->_originalDictionary['DecodeParms'][0][$paramKey] =
+                    $dictionaryArray['DecodeParms'][0][$paramKey] =
                           $this->_dictionary->DecodeParms->$paramKey->value;
                 }
             }
         }
 
         if ($this->_dictionary->F !== null) {
-            $this->_originalDictionary['F'] = $this->_dictionary->F->value;
+            $dictionaryArray['F'] = $this->_dictionary->F->value;
         }
 
-        $this->_originalDictionary['FFilter']      = array();
-        $this->_originalDictionary['FDecodeParms'] = array();
+        $dictionaryArray['FFilter']      = array();
+        $dictionaryArray['FDecodeParms'] = array();
         if ($this->_dictionary->FFilter === null) {
             // Do nothing.
         } else if ($this->_dictionary->FFilter->getType() == AbstractTypeObject::TYPE_ARRAY) {
             foreach ($this->_dictionary->FFilter->items as $id => $filter) {
-                $this->_originalDictionary['FFilter'][$id]      = $filter->value;
-                $this->_originalDictionary['FDecodeParms'][$id] = array();
+                $dictionaryArray['FFilter'][$id]      = $filter->value;
+                $dictionaryArray['FDecodeParms'][$id] = array();
 
                 if ($this->_dictionary->FDecodeParms !== null ) {
                     if ($this->_dictionary->FDecodeParms->items[$id] !== null &&
                         $this->_dictionary->FDecodeParms->items[$id]->value !== null) {
                         foreach ($this->_dictionary->FDecodeParms->items[$id]->getKeys() as $paramKey) {
-                            $this->_originalDictionary['FDecodeParms'][$id][$paramKey] =
+                            $dictionaryArray['FDecodeParms'][$id][$paramKey] =
                                   $this->_dictionary->FDecodeParms->items[$id]->items[$paramKey]->value;
                         }
                     }
                 }
             }
         } else {
-            $this->_originalDictionary['FFilter'][0]      = $this->_dictionary->FFilter->value;
-            $this->_originalDictionary['FDecodeParms'][0] = array();
+            $dictionaryArray['FFilter'][0]      = $this->_dictionary->FFilter->value;
+            $dictionaryArray['FDecodeParms'][0] = array();
             if ($this->_dictionary->FDecodeParms !== null ) {
                 foreach ($this->_dictionary->FDecodeParms->getKeys() as $paramKey) {
-                    $this->_originalDictionary['FDecodeParms'][0][$paramKey] =
+                    $dictionaryArray['FDecodeParms'][0][$paramKey] =
                           $this->_dictionary->FDecodeParms->items[$paramKey]->value;
                 }
             }
         }
+
+        return $dictionaryArray;
     }
 
     /**
@@ -179,20 +182,20 @@ class StreamObject extends IndirectObject
      */
     private function _decodeStream()
     {
-        if ($this->_originalDictionary === null) {
-            $this->_storeOriginalDictionary();
+        if ($this->_initialDictionaryData === null) {
+            $this->_initialDictionaryData = $this->_extractDictionaryData();
         }
 
         /**
          * All applied stream filters must be processed to decode stream.
          * If we don't recognize any of applied filetrs an exception should be thrown here
          */
-        if (isset($this->_originalDictionary['F'])) {
+        if (isset($this->_initialDictionaryData['F'])) {
             /** @todo Check, how external files can be processed. */
             throw new Pdf\Exception('External filters are not supported now.');
         }
 
-        foreach ($this->_originalDictionary['Filter'] as $id => $filterName ) {
+        foreach ($this->_initialDictionaryData['Filter'] as $id => $filterName ) {
             $valueRef = &$this->_value->value->getRef();
             $this->_value->value->touch();
             switch ($filterName) {
@@ -206,12 +209,12 @@ class StreamObject extends IndirectObject
 
                 case 'FlateDecode':
                     $valueRef = CompressionFilter\Flate::decode($valueRef,
-                                                                $this->_originalDictionary['DecodeParms'][$id]);
+                                                                $this->_initialDictionaryData['DecodeParms'][$id]);
                     break;
 
                 case 'LZWDecode':
                     $valueRef = CompressionFilter\Lzw::decode($valueRef,
-                                                              $this->_originalDictionary['DecodeParms'][$id]);
+                                                              $this->_initialDictionaryData['DecodeParms'][$id]);
                     break;
 
                 case 'RunLengthDecode':
@@ -237,12 +240,12 @@ class StreamObject extends IndirectObject
          * All applied stream filters must be processed to encode stream.
          * If we don't recognize any of applied filetrs an exception should be thrown here
          */
-        if (isset($this->_originalDictionary['F'])) {
+        if (isset($this->_initialDictionaryData['F'])) {
             /** @todo Check, how external files can be processed. */
             throw new Pdf\Exception('External filters are not supported now.');
         }
 
-        $filters = array_reverse($this->_originalDictionary['Filter'], true);
+        $filters = array_reverse($this->_initialDictionaryData['Filter'], true);
 
         foreach ($filters as $id => $filterName ) {
             $valueRef = &$this->_value->value->getRef();
@@ -258,12 +261,12 @@ class StreamObject extends IndirectObject
 
                 case 'FlateDecode':
                     $valueRef = CompressionFilter\Flate::encode($valueRef,
-                                                                $this->_originalDictionary['DecodeParms'][$id]);
+                                                                $this->_initialDictionaryData['DecodeParms'][$id]);
                     break;
 
                 case 'LZWDecode':
                     $valueRef = CompressionFilter\Lzw::encode($valueRef,
-                                                              $this->_originalDictionary['DecodeParms'][$id]);
+                                                              $this->_initialDictionaryData['DecodeParms'][$id]);
                     break;
 
                  case 'RunLengthDecode':
@@ -291,8 +294,8 @@ class StreamObject extends IndirectObject
             /**
              * If stream is note decoded yet, then store original decoding options (do it only once).
              */
-            if (( !$this->_streamDecoded ) && ($this->_originalDictionary === null)) {
-                $this->_storeOriginalDictionary();
+            if (( !$this->_streamDecoded ) && ($this->_initialDictionaryData === null)) {
+                $this->_initialDictionaryData = $this->_extractDictionaryData();
             }
 
             return $this->_dictionary;
@@ -365,6 +368,38 @@ class StreamObject extends IndirectObject
     }
 
     /**
+     * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
+     *
+     * @param \Zend\Pdf\ObjectFactory $factory  The factory to attach
+     * @param array &$processed  List of already processed indirect objects, used to avoid objects duplication
+     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @returns \Zend\Pdf\InternalType\AbstractTypeObject
+     */
+    public function makeClone(ObjectFactory $factory, array &$processed, $mode)
+    {
+        $id = spl_object_hash($this);
+        if (isset($processed[$id])) {
+            // Do nothing if object is already processed
+            // return it
+            return $processed[$id];
+        }
+
+        $streamValue      = $this->_value;
+        $streamDictionary = $this->_dictionary->makeClone($factory, $processed, $mode);
+
+        // Make new empty instance of stream object and register it in $processed container
+        $processed[$id] = $clonedObject = $factory->newStreamObject('');
+
+        // Copy current object data and state
+        $clonedObject->_dictionary            = $this->_dictionary->makeClone($factory, $processed, $mode);
+        $clonedObject->_value                 = $this->_value->makeClone($factory, $processed, $mode);
+        $clonedObject->_initialDictionaryData = $this->_initialDictionaryData;
+        $clonedObject->_streamDecoded         = $this->_streamDecoded;
+
+        return  $clonedObject;
+    }
+
+    /**
      * Dump object to a string to save within PDF file
      *
      * $factory parameter defines operation context.
@@ -377,18 +412,14 @@ class StreamObject extends IndirectObject
         $shift = $factory->getEnumerationShift($this->_factory);
 
         if ($this->_streamDecoded) {
-            $this->_storeOriginalDictionary();
+            $this->_initialDictionaryData = $this->_extractDictionaryData();
             $this->_encodeStream();
-        } else if ($this->_originalDictionary != null) {
-            $startDictionary = $this->_originalDictionary;
-            $this->_storeOriginalDictionary();
-            $newDictionary = $this->_originalDictionary;
+        } else if ($this->_initialDictionaryData != null) {
+            $newDictionary   = $this->_extractDictionaryData();
 
-            if ($startDictionary !== $newDictionary) {
-                $this->_originalDictionary = $startDictionary;
+            if ($this->_initialDictionaryData !== $newDictionary) {
                 $this->_decodeStream();
-
-                $this->_originalDictionary = $newDictionary;
+                $this->_initialDictionaryData = $newDictionary;
                 $this->_encodeStream();
             }
         }

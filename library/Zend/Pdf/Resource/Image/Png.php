@@ -228,7 +228,7 @@ class Png extends AbstractImage
 
                 $colorSpace = new InternalType\NameObject('DeviceGray');
 
-                $decodingObjFactory = ObjectFactory\ElementFactory::createFactory(1);
+                $decodingObjFactory = ObjectFactory::createFactory(1);
                 $decodingStream = $decodingObjFactory->newStreamObject($imageData);
                 $decodingStream->dictionary->Filter      = new InternalType\NameObject('FlateDecode');
                 $decodingStream->dictionary->DecodeParms = new InternalType\DictionaryObject();
@@ -261,7 +261,7 @@ class Png extends AbstractImage
 
                 $colorSpace = new InternalType\NameObject('DeviceRGB');
 
-                $decodingObjFactory = ObjectFactory\ElementFactory::createFactory(1);
+                $decodingObjFactory = ObjectFactory::createFactory(1);
                 $decodingStream = $decodingObjFactory->newStreamObject($imageData);
                 $decodingStream->dictionary->Filter      = new InternalType\NameObject('FlateDecode');
                 $decodingStream->dictionary->DecodeParms = new InternalType\DictionaryObject();

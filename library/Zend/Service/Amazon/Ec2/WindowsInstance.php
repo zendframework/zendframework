@@ -39,11 +39,7 @@ use Zend\Crypt;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-<<<<<<< HEAD:library/Zend/Service/Amazon/Ec2/Instance/Windows.php
-class Zend_Service_Amazon_Ec2_Instance_Windows extends Zend_Service_Amazon_Ec2_AbstractService
-=======
 class WindowsInstance extends AbstractEc2
->>>>>>> merges/farazdagi:library/Zend/Service/Amazon/Ec2/WindowsInstance.php
 {
     /**
      * Bundles an Amazon EC2 instance running Windows

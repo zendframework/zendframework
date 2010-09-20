@@ -26,12 +26,14 @@
 namespace Zend\Pdf\Resource;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
+use Zend\Pdf;
 
 /**
  * PDF file Resource abstraction
  *
  * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\InternalType
+ * @uses       \Zend\Pdf
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -76,12 +78,65 @@ abstract class AbstractResource
      */
     public function __construct($resource)
     {
-        $this->_objectFactory = ObjectFactory\ElementFactory::createFactory(1);
+        $this->_objectFactory = ObjectFactory::createFactory(1);
         if ($resource instanceof InternalType\AbstractTypeObject) {
             $this->_resource = $this->_objectFactory->newObject($resource);
         } else {
             $this->_resource = $this->_objectFactory->newStreamObject($resource);
         }
+    }
+
+    /**
+     * Clone page, extract it and dependent objects from the current document,
+     * so it can be used within other docs.
+     */
+    public function __clone()
+    {
+        $factory = \Zend\Pdf\ObjectFactory::createFactory(1);
+        $processed = array();
+
+        // Clone dictionary object.
+        // Do it explicitly to prevent sharing page attributes between different
+        // results of clonePage() operation (other resources are still shared)
+        $dictionary = new InternalType\DictionaryObject();
+        foreach ($this->_pageDictionary->getKeys() as $key) {
+            $dictionary->$key = $this->_pageDictionary->$key->makeClone($factory,
+                                                                        $processed,
+                                                                        InternalType\AbstractTypeObject::CLONE_MODE_SKIP_PAGES);
+        }
+
+        $this->_pageDictionary = $factory->newObject($dictionary);
+        $this->_objFactory     = $factory;
+        $this->_attached       = false;
+        $this->_style          = null;
+        $this->_font           = null;
+    }
+
+    /**
+     * Clone page, extract it and dependent objects from the current document,
+     * so it can be used within other docs.
+     *
+     * @internal
+     * @param \Zend\Pdf\ObjectFactory $factory
+     * @param array $processed
+     * @return \Zend\Pdf\Page
+     */
+    public function clonePage($factory, &$processed)
+    {
+        // Clone dictionary object.
+        // Do it explicitly to prevent sharing page attributes between different
+        // results of clonePage() operation (other resources are still shared)
+        $dictionary = new InternalType\DictionaryObject();
+        foreach ($this->_pageDictionary->getKeys() as $key) {
+            $dictionary->$key = $this->_pageDictionary->$key->makeClone($factory,
+                                                                        $processed,
+                                                                        InternalType\AbstractTypeObject::CLONE_MODE_SKIP_PAGES);
+        }
+
+        $clonedPage = new Pdf\Page($factory->newObject($dictionary), $factory);
+        $clonedPage->_attached = false;
+
+        return $clonedPage;
     }
 
     /**

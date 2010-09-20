@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Action;
+use Zend\Pdf\ObjectFactory;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -249,12 +250,12 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
      * Returns dictionary indirect object or reference
      *
      * @internal
-     * @param \Zend\Pdf\ObjectFactory $factory   Object factory for newly created indirect objects
+     * @param \Zend\Pdf\ObjectFactory $factory    Object factory for newly created indirect objects
      * @param SplObjectStorage $processedActions  list of already processed actions
      *                                            (used to prevent infinity loop caused by cyclic references)
      * @return \Zend\Pdf\InternalType\IndirectObject|\Zend\Pdf\InternalType\IndirectObjectReference
      */
-    public function dumpAction(Pdf\ObjectFactory $factory, \SplObjectStorage $processedActions = null)
+    public function dumpAction(ObjectFactory $factory, \SplObjectStorage $processedActions = null)
     {
         if ($processedActions === null) {
             $processedActions = new \SplObjectStorage();

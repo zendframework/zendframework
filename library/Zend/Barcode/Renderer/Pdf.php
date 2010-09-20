@@ -28,7 +28,9 @@ use Zend\Pdf\Color,
     Zend\Pdf\PdfDocument,
     Zend\Pdf\Page,
     Zend\Pdf\Font,
-    Zend;
+    Zend,
+    Zend\Barcode\Renderer\Exception\OutOfRangeException,
+    Zend\Barcode\Renderer\Exception\InvalidArgumentException;
 
 /**
  * Class for rendering the barcode in PDF resource
@@ -72,7 +74,7 @@ class Pdf extends AbstractRenderer
     public function setResource($pdf, $page = 0)
     {
         if (!$pdf instanceof PdfDocument) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 'Invalid \Zend\Pdf\PdfDocument resource provided to setResource()'
             );
         }

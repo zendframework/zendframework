@@ -31,13 +31,13 @@ class ClassFileLocater extends FilterIterator
     {
         if (is_string($dirOrIterator)) {
             if (!is_dir($dirOrIterator)) {
-                throw new InvalidArgumentException('Expected a valid directory name');
+                throw new Exception\InvalidArgumentException('Expected a valid directory name');
             }
 
             $dirOrIterator = new RecursiveDirectoryIterator($dirOrIterator);
         }
         if (!$dirOrIterator instanceof DirectoryIterator) {
-            throw new InvalidArgumentException('Expected a DirectoryIterator');
+            throw new Exception\InvalidArgumentException('Expected a DirectoryIterator');
         }
 
         if ($dirOrIterator instanceof RecursiveIterator) {
@@ -116,7 +116,6 @@ class ClassFileLocater extends FilterIterator
                     // Set the namespace of this file in the object
                     $file->namespace = $namespace;
                     break;
-                case T_ABSTRACT:
                 case T_CLASS:
                 case T_INTERFACE:
                     // Abstract class, class, or interface found

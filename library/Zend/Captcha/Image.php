@@ -106,6 +106,7 @@ class Image extends Word
      * @var string
      */
     protected $_startImage;
+
     /**
      * How frequently to execute garbage collection
      *
@@ -127,6 +128,7 @@ class Image extends Word
      * @var int
      */
     protected $_dotNoiseLevel = 100;
+
     /**
      * Number of noise lines on image
      * Used twice - before and after transform
@@ -134,6 +136,30 @@ class Image extends Word
      * @var int
      */
     protected $_lineNoiseLevel = 5;
+
+    /**
+     * Constructor
+     *
+     * @param  array|Zend\Config\Config $options
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if (!extension_loaded("gd")) {
+            throw new ExtensionNotLoadedException("Image CAPTCHA requires GD extension");
+        }
+
+        if (!function_exists("imagepng")) {
+            throw new ExtensionNotLoadedException("Image CAPTCHA requires PNG support");
+        }
+
+        if (!function_exists("imageftbbox")) {
+            throw new ExtensionNotLoadedException("Image CAPTCHA requires FT fonts support");
+        }
+
+        parent::__construct($options);
+    }
+
     /**
      * @return string
      */
@@ -141,6 +167,7 @@ class Image extends Word
     {
         return $this->_imgAlt;
     }
+
     /**
      * @return string
      */
@@ -148,6 +175,7 @@ class Image extends Word
     {
         return $this->_startImage;
     }
+
     /**
      * @return int
      */
@@ -155,6 +183,7 @@ class Image extends Word
     {
         return $this->_dotNoiseLevel;
     }
+
     /**
      * @return int
      */
@@ -162,6 +191,7 @@ class Image extends Word
     {
         return $this->_lineNoiseLevel;
     }
+
     /**
      * Get captcha expiration
      *
@@ -181,6 +211,7 @@ class Image extends Word
     {
         return $this->_gcFreq;
     }
+
     /**
      * Get font to use when generating captcha
      *
@@ -220,6 +251,7 @@ class Image extends Word
     {
         return $this->_imgDir;
     }
+
     /**
      * Get captcha image base URL
      *
@@ -229,6 +261,7 @@ class Image extends Word
     {
         return $this->_imgUrl;
     }
+
     /**
      * Get captcha image file suffix
      *
@@ -238,6 +271,7 @@ class Image extends Word
     {
         return $this->_suffix;
     }
+
     /**
      * Get captcha image width
      *
@@ -247,6 +281,7 @@ class Image extends Word
     {
         return $this->_width;
     }
+
     /**
      * @param string $startImage
      */
@@ -255,6 +290,7 @@ class Image extends Word
         $this->_startImage = $startImage;
         return $this;
     }
+
     /**
      * @param int $dotNoiseLevel
      */
@@ -263,7 +299,8 @@ class Image extends Word
         $this->_dotNoiseLevel = $dotNoiseLevel;
         return $this;
     }
-   /**
+
+    /**
      * @param int $lineNoiseLevel
      */
     public function setLineNoiseLevel ($lineNoiseLevel)
@@ -452,18 +489,6 @@ class Image extends Word
      */
     protected function _generateImage($id, $word)
     {
-        if (!extension_loaded("gd")) {
-            throw new ExtensionNotLoadedException("Image CAPTCHA requires GD extension");
-        }
-
-        if (!function_exists("imagepng")) {
-            throw new ExtensionNotLoadedException("Image CAPTCHA requires PNG support");
-        }
-
-        if (!function_exists("imageftbbox")) {
-            throw new ExtensionNotLoadedException("Image CAPTCHA requires FT fonts support");
-        }
-
         $font = $this->getFont();
 
         if (empty($font)) {

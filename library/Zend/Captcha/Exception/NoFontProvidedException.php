@@ -35,7 +35,7 @@ use Zend\Captcha\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class NoFontProvidedException
-    extends \Exception
+    extends \InvalidArgumentException
     implements Exception
 {
 }

@@ -79,29 +79,25 @@ class ClassMapAutoloader implements SplAutoloader
     }
 
     /**
-     * Register an autoload map file
+     * Register an autoload map
      *
-     * An autoload map file should return an associative array containing 
+     * An autoload map may be either an associative array, or a file returning
+     * an associative array.
+     *
+     * An autoload map should be an associative array containing 
      * classname/file pairs.
      * 
-     * @param  string $location 
+     * @param  string|array $location 
      * @return ClassMapAutoloader
      */
-    public function registerAutoloadMap($location)
+    public function registerAutoloadMap($map)
     {
-        if (!file_exists($location)) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Map file provided does not exist');
+        if (is_string($map)) {
+            $location = $map;
+            if ($this === ($map = $this->loadMapFromFile($location))) {
+                return $this;
+            }
         }
-
-        $location = realpath($location);
-
-        if (in_array($location, $this->mapsLoaded)) {
-            // Already loaded this map
-            return $this;
-        }
-
-        $map = include $location;
 
         if (!is_array($map)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
@@ -109,7 +105,10 @@ class ClassMapAutoloader implements SplAutoloader
         }
 
         $this->map = array_merge($this->map, $map);
-        $this->mapsLoaded[] = $location;
+
+        if (isset($location)) {
+            $this->mapsLoaded[] = $location;
+        }
 
         return $this;
     }
@@ -133,6 +132,16 @@ class ClassMapAutoloader implements SplAutoloader
     }
 
     /**
+     * Retrieve current autoload map
+     * 
+     * @return array
+     */
+    public function getAutoloadMap()
+    {
+        return $this->map;
+    }
+
+    /**
      * Defined by Autoloadable
      * 
      * @param  string $class 
@@ -140,7 +149,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function autoload($class)
     {
-        if (array_key_exists($class, $this->map)) {
+        if (isset($this->map[$class])) {
             include $this->map[$class];
         }
     }
@@ -153,5 +162,35 @@ class ClassMapAutoloader implements SplAutoloader
     public function register()
     {
         spl_autoload_register(array($this, 'autoload'));
+    }
+
+    /**
+     * Load a map from a file
+     *
+     * If the map has been previously loaded, returns the current instance;
+     * otherwise, returns whatever was returned by calling include() on the
+     * location.
+     * 
+     * @param  string $location 
+     * @return ClassMapAutoloader|mixed
+     * @throws Exception\InvalidArgumentException for nonexistent locations
+     */
+    protected function loadMapFromFile($location)
+    {
+        if (!file_exists($location)) {
+            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            throw new Exception\InvalidArgumentException('Map file provided does not exist');
+        }
+
+        $location = realpath($location);
+
+        if (in_array($location, $this->mapsLoaded)) {
+            // Already loaded this map
+            return $this;
+        }
+
+        $map = include $location;
+
+        return $map;
     }
 }

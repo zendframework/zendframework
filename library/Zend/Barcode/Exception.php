@@ -23,44 +23,16 @@
  * @namespace
  */
 namespace Zend\Barcode;
-use Zend;
 
 /**
- * Zend_Barcode_Exception
+ * Exception for Zend_Barcode component.
  *
- * @uses       \Zend\Exception
+ * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends Zend\Exception
+interface Exception
 {
-    /**
-     * Is this exception renderable?
-     * @var bool
-     */
-    protected $_isRenderable = true;
-
-    /**
-     * Set renderable flag
-     *
-     * @param  bool $flag
-     * @return \Zend\Barcode\Exception
-     */
-    public function setIsRenderable($flag)
-    {
-        $this->_isRenderable = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Retrieve renderable flag
-     *
-     * @return bool
-     */
-    public function isRenderable()
-    {
-        return $this->_isRenderable;
-    }
 }

@@ -31,7 +31,7 @@ use Zend\Pdf;
  * PDF file 'indirect object' element implementation
  *
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\ObjectFactory\ElementFactory
+ * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
@@ -78,7 +78,10 @@ class IndirectObject extends AbstractTypeObject
      * @param \Zend\Pdf\ObjectFactory $factory
      * @throws \Zend\Pdf\Exception
      */
-    public function __construct(AbstractTypeObject $val, $objNum, $genNum, ObjectFactory $factory)
+    public function __construct(AbstractTypeObject $val,
+                                $objNum,
+                                $genNum,
+                                ObjectFactory $factory)
     {
         if ($val instanceof self) {
             throw new Pdf\Exception('Object number must not be an instance of \Zend\Pdf\InternalType\IndirectObject.');
@@ -215,6 +218,40 @@ class IndirectObject extends AbstractTypeObject
         return call_user_func_array(array($this->_value, $method), $args);
     }
 
+    /**
+     * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
+     *
+     * @param \Zend\Pdf\ObjectFactory $factory  The factory to attach
+     * @param array &$processed  List of already processed indirect objects, used to avoid objects duplication
+     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @returns \Zend\Pdf\InternalType\AbstractTypeObject
+     */
+    public function makeClone(ObjectFactory $factory, array &$processed, $mode)
+    {
+        $id = spl_object_hash($this);
+        if (isset($processed[$id])) {
+            // Do nothing if object is already processed
+            // return it
+            return $processed[$id];
+        }
+
+        // Create obect with null value and register it in $processed container
+        $processed[$id] = $clonedObject = $factory->newObject(new NullObject());
+
+        // Pecursively process actual data
+        $clonedObject->_value = $this->_value->makeClone($factory, $processed, $mode);
+
+        if ($clonedObject->_value instanceof NullObject) {
+            // Do not store null objects within $processed container since it may be filtered
+            // by $mode parameter but used in some future pass
+            unset($processed[$id]);
+
+            // Return direct null object
+            return $clonedObject->_value;
+        }
+
+        return $clonedObject;
+    }
 
     /**
      * Mark object as modified, to include it into new PDF file segment

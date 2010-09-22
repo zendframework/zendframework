@@ -288,10 +288,10 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
      */
     abstract public function dumpOutline(ObjectFactory $factory,
-                                                                              $updateNavigation,
-                                              InternalType\AbstractTypeObject $parent,
-                                              InternalType\AbstractTypeObject $prev = null,
-                                                            \SplObjectStorage $processedOutlines = null);
+                                                       $updateNavigation,
+                       InternalType\AbstractTypeObject $parent,
+                       InternalType\AbstractTypeObject $prev = null,
+                                     \SplObjectStorage $processedOutlines = null);
 
 
     ////////////////////////////////////////////////////////////////////////

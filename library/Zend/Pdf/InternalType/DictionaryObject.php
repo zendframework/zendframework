@@ -137,7 +137,6 @@ class DictionaryObject extends AbstractTypeObject
         return AbstractTypeObject::TYPE_DICTIONARY;
     }
 
-
     /**
      * Return object as string
      *
@@ -167,6 +166,53 @@ class DictionaryObject extends AbstractTypeObject
         return $outStr;
     }
 
+    /**
+     * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
+     *
+     * @param \Zend\Pdf\ObjectFactory $factory  The factory to attach
+     * @param array &$processed List of already processed indirect objects, used to avoid objects duplication
+     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @returns \Zend\Pdf\InternalType\AbstractTypeObject
+     * @throws \Zend\Pdf\Exception
+     */
+    public function makeClone(Pdf\ObjectFactory $factory, array &$processed, $mode)
+    {
+        if (isset($this->_items['Type'])) {
+            if ($this->_items['Type']->value == 'Pages') {
+                // It's a page tree node
+                // skip it and its children
+                return new NullObject();
+            }
+
+            if ($this->_items['Type']->value == 'Page'  &&
+                $mode == AbstractTypeObject::CLONE_MODE_SKIP_PAGES
+            ) {
+                // It's a page node, skip it
+                return new NullObject();
+            }
+        }
+
+        $newDictionary = new self();
+        foreach ($this->_items as $key => $value) {
+            $newDictionary->_items[$key] = $value->makeClone($factory, $processed, $mode);
+        }
+
+        return $newDictionary;
+    }
+
+    /**
+     * Set top level parent indirect object.
+     *
+     * @param \Zend\Pdf\InternalType\IndirectObject $parent
+     */
+    public function setParentObject(IndirectObject $parent)
+    {
+        parent::setParentObject($parent);
+
+        foreach ($this->_items as $item) {
+            $item->setParentObject($parent);
+        }
+    }
 
     /**
      * Convert PDF element to PHP type.

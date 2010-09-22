@@ -1,28 +1,61 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Loader
+ * @subpackage Exception
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+
+/**
+ * Generate class maps for use with autoloading.
+ *
+ * Usage:
+ * --help|-h                    Get usage message
+ * --library|-l [ <string> ]    Library to parse; if none provided, assumes 
+ *                              current directory
+ * --output|-o [ <string> ]     Where to write autoload file; if not provided, 
+ *                              assumes ".classmap.php" in library directory
+ * --overwrite|-w               Whether or not to overwrite existing autoload 
+ *                              file
+ */
+
 $libPath = __DIR__ . '/../library';
 if (!is_dir($libPath)) {
-    echo "Unable to find Zend Framework library; aborting" . PHP_EOL;
-    exit(2);
-}
-$libPath  = realpath($libPath);
-
-// Add ZF to the include_path, if it isn't already
-$incPath = get_include_path();
-if (!strstr($incPath, $libPath)) {
-    set_include_path($libPath . PATH_SEPARATOR . $incPath);
+    // Try to load StandardAutoloader from include_path
+    if (false === include('Zend/Loader/StandardAutoloader.php')) {
+        echo "Unable to locate autoloader via include_path; aborting" . PHP_EOL;
+        exit(2);
+    }
+} else {
+    // Try to load StandardAutoloader from library
+    if (false === include(__DIR__ . '/../library/Zend/Loader/StandardAutoloader.php')) {
+        echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
+        exit(2);
+    }
 }
 
 // Setup autoloading
-require_once 'Zend/Loader/Autoloader.php';
-Zend\Loader\Autoloader::getInstance();
+$loader = new Zend\Loader\StandardAutoloader();
+$loader->register();
 
 $rules = array(
     'help|h'        => 'Get usage message',
     'library|l-s'   => 'Library to parse; if none provided, assumes current directory',
-    'output|o-s'    => 'Where to write autoload file; if not provided, assumes "_autoload.php" in library directory',
+    'output|o-s'    => 'Where to write autoload file; if not provided, assumes ".classmap.php" in library directory',
     'overwrite|w'   => 'Whether or not to overwrite existing autoload file',
-    'keepdepth|k-i' => 'How many additional segments of the library path to keep in the generated classfile map',
-    'usedir|d'      => 'Prepend filenames with __DIR__',
 );
 
 try {
@@ -53,7 +86,7 @@ if (isset($opts->l)) {
 }
 
 $usingStdout = false;
-$output = $path . DIRECTORY_SEPARATOR . '_autoload.php';
+$output = $path . DIRECTORY_SEPARATOR . '.classmap.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
@@ -76,23 +109,6 @@ if (isset($opts->o)) {
 }
 
 $strip     = $path;
-$keepDepth = 0;
-if (isset($opts->k)) {
-    $keepDepth = $opts->k;
-    if ($keepDepth < 0) {
-        $keepDepth = 0;
-    }
-}
-if ($keepDepth > 0) {
-    $segments = explode(DIRECTORY_SEPARATOR, $path);
-    do {
-        array_pop($segments);
-        --$keepDepth;
-    } while (count($segments) > 0 && $keepDepth > 0);
-    $strip = implode(DIRECTORY_SEPARATOR, $segments);
-}
-
-$prefixWithDir = $opts->getOption('d');
 
 if (!$usingStdout) {
     echo "Creating class file map for library in '$path'..." . PHP_EOL;
@@ -119,12 +135,13 @@ iterator_apply($l, function() use ($l, $map, $strip){
 // Stupid syntax highlighters make separating < from PHP declaration necessary
 $content = '<' . "?php\n"
          . 'return ' . var_export((array) $map, true) . ';';
-// If requested to prefix with __DIR__, modify the content
-if ($prefixWithDir) {
-    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
-}
+
+// Prefix with __DIR__; modify the generated content
+$content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+
+// Write the contents to disk
 file_put_contents($output, $content);
 
 if (!$usingStdout) {
-    echo "Wrote autoload file to '" . realpath($output) . "'" . PHP_EOL;
+    echo "Wrote classmap file to '" . realpath($output) . "'" . PHP_EOL;
 }

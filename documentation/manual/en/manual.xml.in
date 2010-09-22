@@ -1201,6 +1201,16 @@
                     <xi:include href="../en/module_specs/Zend_Loader-StandardAutoloader.xml" />
                 </xi:fallback>
             </xi:include>
+            <xi:include href="module_specs/Zend_Loader-ClassMapAutoloader.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-ClassMapAutoloader.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-Classmap_Generator.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-Classmap_Generator.xml" />
+                </xi:fallback>
+            </xi:include>
             <xi:include href="module_specs/Zend_Loader-Autoloader-Resource.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-Autoloader-Resource.xml" />

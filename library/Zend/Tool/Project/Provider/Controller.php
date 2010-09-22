@@ -56,7 +56,7 @@ class Controller
     public static function createResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         if (!($controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName))) {
@@ -65,7 +65,7 @@ class Controller
             } else {
                 $exceptionMessage = 'A controller directory was not found.';
             }
-            throw new Exception($exceptionMessage);
+            throw new Exception\RuntimeException($exceptionMessage);
         }
 
         $newController = $controllersDirectory->createResource(
@@ -87,7 +87,7 @@ class Controller
     public static function hasResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName);
@@ -128,12 +128,12 @@ class Controller
         $testingEnabled = Test::isTestingEnabled($this->_loadedProfile);
 
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
-            throw new Exception('This project already has a controller named ' . $name);
+            throw new Exception\RuntimeException('This project already has a controller named ' . $name);
         }
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
-            throw new Exception('Controller names should be camel cased.');
+            throw new Exception\RuntimeException('Controller names should be camel cased.');
         }
         
         $originalName = $name;

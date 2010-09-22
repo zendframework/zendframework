@@ -59,7 +59,7 @@ class Module
 
         // if there is a module directory already, except
         if ($modulesDirectory->search(array('moduleDirectory' => array('moduleName' => $moduleName)))) {
-            throw new Exception('A module named "' . $moduleName . '" already exists.');
+            throw new Exception\RuntimeException('A module named "' . $moduleName . '" already exists.');
         }
 
         // create the module directory

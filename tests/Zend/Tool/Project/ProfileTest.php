@@ -24,8 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Tool\Project;
-use Zend\Tool\Project\Context;
-use Zend\Tool\Project\Profile;
+use Zend\Tool\Project\Context,
+    Zend\Tool\Project\Profile\Profile;
 
 /**
  * @category   Zend

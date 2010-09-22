@@ -24,8 +24,8 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Profile\FileParser;
-use Zend\Tool\Project\Profile\FileParser,
-    Zend\Tool\Project\Profile,
+use Zend\Tool\Project\Profile\Profile,
+    Zend\Tool\Project\Profile\Exception,
     Zend\Tool\Project\Profile\Resource;
 
 /**
@@ -113,7 +113,7 @@ class Xml implements FileParser
     public function unserialize($data, Profile $profile)
     {
         if ($data == null) {
-            throw new \Exception('contents not available to unserialize.');
+            throw new Exception\InvalidArgumentException('contents not available to unserialize.');
         }
 
         $this->_profile = $profile;
@@ -121,7 +121,7 @@ class Xml implements FileParser
         $xmlDataIterator = new \SimpleXMLIterator($data);
 
         if ($xmlDataIterator->getName() != 'projectProfile') {
-            throw new \Exception('Profiles must start with a projectProfile node');
+            throw new Exception\RuntimeException('Profiles must start with a projectProfile node');
         }
         
         if (isset($xmlDataIterator['type'])) {

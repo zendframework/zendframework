@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project;
+namespace Zend\Tool\Project\Profile;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -41,7 +41,7 @@ namespace Zend\Tool\Project;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Profile extends Profile\Resource\Container
+class Profile extends Resource\Container
 {
 
     /**
@@ -61,7 +61,7 @@ class Profile extends Profile\Resource\Container
             $this->setOptions($options);
         }
 
-        $this->_topResources = new Profile\Resource\Container();
+        $this->_topResources = new Resource\Container();
     }
 
     /**
@@ -83,7 +83,7 @@ class Profile extends Profile\Resource\Container
     public function getIterator()
     {
         return new \RecursiveIteratorIterator(
-            new Profile\Iterator\EnabledResourceFilter($this),
+            new Iterator\EnabledResourceFilter($this),
             \RecursiveIteratorIterator::SELF_FIRST
         );
     }
@@ -96,10 +96,10 @@ class Profile extends Profile\Resource\Container
     public function loadFromData()
     {
         if (!isset($this->_attributes['profileData'])) {
-            throw new Exception('loadFromData() must have "profileData" set.');
+            throw new Exception\RuntimeExcpetion('loadFromData() must have "profileData" set.');
         }
 
-        $profileFileParser = new Profile\FileParser\Xml();
+        $profileFileParser = new FileParser\Xml();
         $profileFileParser->unserialize($this->_attributes['profileData'], $this);
 
         $this->rewind();
@@ -147,26 +147,26 @@ class Profile extends Profile\Resource\Container
     {
         // if no data is supplied, need either a projectProfileFile or a projectDirectory
         if (!isset($this->_attributes['projectProfileFile']) && !isset($this->_attributes['projectDirectory'])) {
-            throw new Exception('loadFromFile() must have at least "projectProfileFile" or "projectDirectory" set.');
+            throw new Exception\RuntimeExcpetion('loadFromFile() must have at least "projectProfileFile" or "projectDirectory" set.');
         }
 
         if (isset($this->_attributes['projectProfileFile'])) {
             $projectProfileFilePath = $this->_attributes['projectProfileFile'];
             if (!file_exists($projectProfileFilePath)) {
-                throw new Exception('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
+                throw new Exception\RuntimeExcpetion('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectDirectory'] = dirname($projectProfileFilePath);
         } else {
             $projectProfileFilePath = rtrim($this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
             if (!file_exists($projectProfileFilePath)) {
-                throw new Exception('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
+                throw new Exception\RuntimeExcpetion('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectProfileFile'] = $projectProfileFilePath;
         }
 
         $profileData = file_get_contents($projectProfileFilePath);
 
-        $profileFileParser = new Profile\FileParser\Xml();
+        $profileFileParser = new FileParser\Xml();
         $profileFileParser->unserialize($profileData, $this);
 
         $this->rewind();
@@ -188,10 +188,10 @@ class Profile extends Profile\Resource\Container
         }
 
         if ($file == null) {
-            throw new Exception('storeToFile() must have a "projectProfileFile" attribute set.');
+            throw new Exception\RuntimeExcpetion('storeToFile() must have a "projectProfileFile" attribute set.');
         }
 
-        $parser = new Profile\FileParser\Xml();
+        $parser = new FileParser\Xml();
         $xml = $parser->serialize($this);
         file_put_contents($file, $xml);
     }
@@ -203,7 +203,7 @@ class Profile extends Profile\Resource\Container
      */
     public function storeToData()
     {
-        $parser = new Profile\FileParser\Xml();
+        $parser = new FileParser\Xml();
         $xml = $parser->serialize($this);
         return $xml;
     }

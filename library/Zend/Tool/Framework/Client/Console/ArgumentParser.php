@@ -26,7 +26,8 @@
 namespace Zend\Tool\Framework\Client\Console;
 use Zend\Tool\Framework\Client,
     Zend\Tool\Framework\Registry,
-    Zend\Tool\Framework\RegistryEnabled;
+    Zend\Tool\Framework\RegistryEnabled,
+    Zend\Tool\Framework\Exception;
 
 /**
  * @uses       Zend_Console_GetOpt

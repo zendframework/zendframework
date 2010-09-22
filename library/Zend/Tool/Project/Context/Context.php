@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project;
+namespace Zend\Tool\Project\Context;
 
 /**
  * Interface for contexts

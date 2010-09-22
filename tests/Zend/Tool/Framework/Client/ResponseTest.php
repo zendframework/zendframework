@@ -102,7 +102,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testSetCallbackThrowsExceptionOnInvalidCallback()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Client\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Client\Exception\InvalidArgumentException');
         $this->_response->setContentCallback(5);
     }
 

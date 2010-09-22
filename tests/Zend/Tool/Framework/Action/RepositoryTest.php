@@ -79,13 +79,13 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->_repository->addAction(new \ZendTest\Tool\Framework\Action\TestAsset\Foo());
         
-        $this->setExpectedException('\Zend\Tool\Framework\Action\Exception');
+        $this->setExpectedException('\Zend\Tool\Framework\Exception\InvalidArgumentException');
         $this->_repository->addAction(new \ZendTest\Tool\Framework\Action\TestAsset\Foo());
     }
 
     public function testAddActionThrowsExceptionOnActionWithNoName()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Action\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Exception\InvalidArgumentException');
         $this->_repository->addAction(new Action\Base());
     }
 

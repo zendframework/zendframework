@@ -65,11 +65,11 @@ class Test extends AbstractProvider
     public static function createApplicationResource(ProjectProfile $profile, $controllerName, $actionName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
-            throw new Exception('Zend_Tool_Project_Provider_View::createApplicationResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_View::createApplicationResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         if (!is_string($actionName)) {
-            throw new Exception('Zend_Tool_Project_Provider_View::createApplicationResource() expects \"actionName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_View::createApplicationResource() expects \"actionName\" is the name of a controller resource to create.');
         }
 
         $testsDirectoryResource = $profile->search('testsDirectory');

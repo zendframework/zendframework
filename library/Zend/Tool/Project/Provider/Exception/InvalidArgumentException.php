@@ -3,7 +3,7 @@
 namespace Zend\Tool\Project\Provider\Exception;
 
 class InvalidArgumentException
-    extends \InvalidArgumentException
+    extends \Zend\Tool\Project\Exception\InvalidArgumentException
     implements \Zend\Tool\Project\Provider\Exception
 {
 }

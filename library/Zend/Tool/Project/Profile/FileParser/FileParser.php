@@ -23,8 +23,8 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project\Profile;
-use Zend\Tool\Project\Profile;
+namespace Zend\Tool\Project\Profile\FileParser;
+use Zend\Tool\Project\Profile\Profile;
 
 /**
  * @category   Zend

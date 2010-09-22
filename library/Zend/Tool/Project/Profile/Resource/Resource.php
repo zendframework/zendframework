@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Tool\Project\Profile;
+namespace Zend\Tool\Project\Profile\Resource;
 
 /**
  * This class is an iterator that will iterate only over enabled resources
@@ -114,10 +114,10 @@ class Resource extends Container
     {
         if (is_string($this->_context)) {
             return $this->_context;
-        } elseif ($this->_context instanceof \Zend\Tool\Project\Context) {
+        } elseif ($this->_context instanceof \Zend\Tool\Project\Context\Context) {
             return $this->_context->getName();
         } else {
-            throw new \Zend\Tool\Project\Exception('Invalid context in resource');
+            throw new \Zend\Tool\Project\Profile\Exception\InvalidArgumentException('Invalid context in resource');
         }
     }
 
@@ -127,7 +127,7 @@ class Resource extends Container
      * @param \Zend\Tool\Project\Profile $profile
      * @return \Zend\Tool\Project\Profile\Resource
      */
-    public function setProfile(\Zend\Tool\Project\Profile $profile)
+    public function setProfile(\Zend\Tool\Project\Profile\Profile $profile)
     {
         $this->_profile = $profile;
         return $this;

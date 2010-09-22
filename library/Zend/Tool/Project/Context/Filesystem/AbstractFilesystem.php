@@ -73,7 +73,7 @@ abstract class AbstractFilesystem implements \Zend\Tool\Project\Context\Context
      * @param \Zend\Tool\Project\Profile\Resource $resource
      * @return \Zend\Tool\Project\Context\Filesystem\AbstractFilesystem
      */
-    public function setResource(\Zend\Tool\Project\Profile\Resource $resource)
+    public function setResource(\Zend\Tool\Project\Profile\Resource\Resource $resource)
     {
         $this->_resource = $resource;
         return $this;

@@ -26,7 +26,7 @@
 namespace Zend\Tool\Project\Profile\FileParser;
 use Zend\Tool\Project\Profile\Profile,
     Zend\Tool\Project\Profile\Exception,
-    Zend\Tool\Project\Profile\Resource;
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       DOMDocument

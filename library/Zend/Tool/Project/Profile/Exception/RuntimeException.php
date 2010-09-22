@@ -1,9 +1,9 @@
 <?php
 
-namespace Zend\Tool\Project\Exception;
+namespace Zend\Tool\Project\Profile\Exception;
 
 class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Tool\Project\Exception
+    extends \Zend\Tool\Project\Exception\RuntimeException
+    implements \Zend\Tool\Project\Profile\Exception
 {
 }

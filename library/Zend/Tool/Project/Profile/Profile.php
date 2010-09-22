@@ -96,7 +96,7 @@ class Profile extends Resource\Container
     public function loadFromData()
     {
         if (!isset($this->_attributes['profileData'])) {
-            throw new Exception\RuntimeExcpetion('loadFromData() must have "profileData" set.');
+            throw new Exception\RuntimeException('loadFromData() must have "profileData" set.');
         }
 
         $profileFileParser = new FileParser\Xml();
@@ -147,19 +147,19 @@ class Profile extends Resource\Container
     {
         // if no data is supplied, need either a projectProfileFile or a projectDirectory
         if (!isset($this->_attributes['projectProfileFile']) && !isset($this->_attributes['projectDirectory'])) {
-            throw new Exception\RuntimeExcpetion('loadFromFile() must have at least "projectProfileFile" or "projectDirectory" set.');
+            throw new Exception\RuntimeException('loadFromFile() must have at least "projectProfileFile" or "projectDirectory" set.');
         }
 
         if (isset($this->_attributes['projectProfileFile'])) {
             $projectProfileFilePath = $this->_attributes['projectProfileFile'];
             if (!file_exists($projectProfileFilePath)) {
-                throw new Exception\RuntimeExcpetion('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
+                throw new Exception\RuntimeException('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectDirectory'] = dirname($projectProfileFilePath);
         } else {
             $projectProfileFilePath = rtrim($this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
             if (!file_exists($projectProfileFilePath)) {
-                throw new Exception\RuntimeExcpetion('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
+                throw new Exception\RuntimeException('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectProfileFile'] = $projectProfileFilePath;
         }
@@ -188,7 +188,7 @@ class Profile extends Resource\Container
         }
 
         if ($file == null) {
-            throw new Exception\RuntimeExcpetion('storeToFile() must have a "projectProfileFile" attribute set.');
+            throw new Exception\RuntimeException('storeToFile() must have a "projectProfileFile" attribute set.');
         }
 
         $parser = new FileParser\Xml();

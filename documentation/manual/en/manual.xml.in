@@ -1196,6 +1196,16 @@
                     <xi:include href="../en/module_specs/Zend_Loader.xml" />
                 </xi:fallback>
             </xi:include>
+            <xi:include href="module_specs/Zend_Loader-SplAutoloader.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-SplAutoloader.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-AutoloaderFactory.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-AutoloaderFactory.xml" />
+                </xi:fallback>
+            </xi:include>
             <xi:include href="module_specs/Zend_Loader-StandardAutoloader.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-StandardAutoloader.xml" />

@@ -108,7 +108,7 @@ class StreamRequest implements AMFRequest
             && ($clientVersion != Amf\Constants::AMF3_OBJECT_ENCODING)
             && ($clientVersion != Amf\Constants::FMS_OBJECT_ENCODING)
         ) {
-            throw new Amf\Exception('Unknown Player Version ' . $clientVersion);
+            throw new Amf\Exception\RuntimeException('Unknown Player Version ' . $clientVersion);
         }
 
         $this->_bodies  = array();
@@ -149,7 +149,7 @@ class StreamRequest implements AMFRequest
         try {
             $data = $this->_deserializer->readTypeMarker();
         } catch (\Exception $e) {
-            throw new Amf\Exception('Unable to parse ' . $name . ' header data: ' . $e->getMessage() . ' '. $e->getLine(), 0, $e);
+            throw new Amf\Exception\RuntimeException('Unable to parse ' . $name . ' header data: ' . $e->getMessage() . ' '. $e->getLine(), 0, $e);
         }
 
         $header = new Value\MessageHeader($name, $mustRead, $data, $length);
@@ -170,7 +170,7 @@ class StreamRequest implements AMFRequest
         try {
             $data = $this->_deserializer->readTypeMarker();
         } catch (\Exception $e) {
-            throw new Amf\Exception('Unable to parse ' . $targetURI . ' body data ' . $e->getMessage(), 0, $e);
+            throw new Amf\Exception\RuntimeException('Unable to parse ' . $targetURI . ' body data ' . $e->getMessage(), 0, $e);
         }
 
         // Check for AMF3 objectEncoding

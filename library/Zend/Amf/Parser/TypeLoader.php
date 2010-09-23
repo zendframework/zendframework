@@ -25,8 +25,7 @@
  */
 namespace Zend\Amf\Parser;
 
-use Zend\Amf\Exception as AMFException,
-    Zend\Loader\PrefixPathMapper,
+use Zend\Loader\PrefixPathMapper,
     Zend\Loader\ShortNameLocater;
 
 /**
@@ -196,26 +195,26 @@ final class TypeLoader
     public static function handleResource($resource)
     {
         if(!self::$_resourceLoader) {
-            throw new AMFException('Unable to handle resources - resource plugin loader not set');
+            throw new Exception\InvalidArgumentException('Unable to handle resources - resource plugin loader not set');
         }
         try {
             while (is_resource($resource)) {
                 $resclass = self::getResourceParser($resource);
                 if (!$resclass) {
-                    throw new AMFException('Can not serialize resource type: '. get_resource_type($resource));
+                    throw new Exception\RuntimeException('Can not serialize resource type: '. get_resource_type($resource));
                 }
                 $parser = new $resclass();
                 if(is_callable(array($parser, 'parse'))) {
                     $resource = $parser->parse($resource);
                 } else {
-                    throw new AMFException("Could not call parse() method on class $resclass");
+                    throw new Exception\RuntimeException("Could not call parse() method on class $resclass");
                 }
             }
             return $resource;
-        } catch(AMFException $e) {
-            throw new AMFException($e->getMessage(), $e->getCode(), $e);
+        } catch(Exception $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         } catch(\Exception $e) {
-            throw new AMFException('Can not serialize resource type: '. get_resource_type($resource), 0, $e);
+            throw new Exception\RuntimeException('Can not serialize resource type: '. get_resource_type($resource), 0, $e);
         }
     }
 }

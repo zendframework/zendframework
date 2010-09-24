@@ -25,6 +25,7 @@
 namespace Zend\Loader;
 
 use ArrayIterator,
+    IteratorAggregate,
     Traversable;
 
 /**
@@ -84,13 +85,13 @@ class PluginClassLoader implements PluginClassLocater
      * 
      * @param  string|array|Traversable $map 
      * @return PluginClassLoader
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function registerPlugins($map)
     {
         if (is_string($map)) {
             if (!class_exists($map)) {
-                throw new InvalidArgumentException('Map class provided is invalid');
+                throw new Exception\InvalidArgumentException('Map class provided is invalid');
             }
             $map = new $map;
         }
@@ -98,13 +99,19 @@ class PluginClassLoader implements PluginClassLocater
             $map = new ArrayIterator($map);
         }
         if (!$map instanceof Traversable) {
-            throw new InvalidArgumentException('Map provided is invalid; must be traversable');
+            throw new Exception\InvalidArgumentException('Map provided is invalid; must be traversable');
+        }
+
+        // iterator_apply doesn't work as expected with IteratorAggregate
+        if ($map instanceof IteratorAggregate) {
+            $map = $map->getIterator();
         }
 
         // iterator_apply is faster than foreach
         $loader = $this;
         iterator_apply($map, function() use ($loader, $map) {
             $loader->registerPlugin($map->key(), $map->current());
+            return true;
         });
 
         return $this;
@@ -136,7 +143,7 @@ class PluginClassLoader implements PluginClassLocater
     }
 
     /**
-     * Whether or not a Helper by a specific name
+     * Whether or not a plugin by a specific name has been registered
      *
      * @param  string $name
      * @return bool

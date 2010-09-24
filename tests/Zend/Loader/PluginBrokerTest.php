@@ -155,4 +155,21 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $test = $this->broker->load('sample');
         $this->assertType('ZendTest\Loader\TestAsset\SamplePlugin', $test);
     }
+
+    public function testPluginNamesAreCaseInsensitive()
+    {
+        $loader = $this->broker->getClassLoader();
+        $loader->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+        $plugin1 = $this->broker->load('sample');
+        $plugin2 = $this->broker->load('Sample');
+        $this->assertSame($plugin1, $plugin2);
+    }
+
+    public function testExplicitlyRegisteredPluginNamesAreCaseInsensitive()
+    {
+        $test = $this->broker->register('sample', new TestAsset\SamplePlugin());
+        $plugin1 = $this->broker->load('sample');
+        $plugin2 = $this->broker->load('Sample');
+        $this->assertSame($plugin1, $plugin2);
+    }
 }

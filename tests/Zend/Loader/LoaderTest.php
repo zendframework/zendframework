@@ -20,11 +20,10 @@
  * @version    $Id$
  */
 
-namespace ZendTest;
+namespace ZendTest\Loader;
 use \stdClass,
     \Phar,
-    \Zend\Loader,
-    \Zend\Loader\Autoloader;
+    \Zend\Loader;
 
 /**
  * @category   Zend
@@ -51,7 +50,6 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         $this->error = null;
         $this->errorHandler = null;
-        Autoloader::resetInstance();
     }
 
     public function tearDown()
@@ -68,17 +66,12 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        if (is_array($this->loaders)) {
-            foreach ($this->loaders as $loader) {
-                spl_autoload_register($loader);
-            }
+        foreach ($this->loaders as $loader) {
+            spl_autoload_register($loader);
         }
 
-        // Retore original include_path
+        // Restore original include_path
         set_include_path($this->includePath);
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function setErrorHandler()
@@ -90,95 +83,6 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function handleErrors($errno, $errstr)
     {
         $this->error = $errstr;
-    }
-
-    /**
-     * Tests that a class can be loaded from a well-formed PHP file
-     */
-    public function testLoaderClassValid()
-    {
-        $dir = implode(array(__DIR__, '_files', '_testDir1'), DIRECTORY_SEPARATOR);
-
-        Loader::loadClass('Class1', $dir);
-    }
-
-    public function testLoaderInterfaceViaLoadClass()
-    {
-        try {
-            Loader::loadClass('Zend\Controller\Dispatcher');
-        } catch (\Zend_Exception $e) {
-            $this->fail('Loading interfaces should not fail');
-        }
-    }
-
-    public function testLoaderLoadClassWithDotDir()
-    {
-        $dirs = array('.');
-        try {
-            Loader::loadClass('\\Zend\\Version', $dirs);
-        } catch (\Zend_Exception $e) {
-            $this->fail('Loading from dot should not fail');
-        }
-    }
-
-    /**
-     * Tests that an exception is thrown when a file is loaded but the
-     * class is not found within the file
-     */
-    public function testLoaderClassNonexistent()
-    {
-        $dir = implode(array(__DIR__, '_files', '_testDir1'), DIRECTORY_SEPARATOR);
-
-        $this->setExpectedException('\\Zend\\Loader\\ClassNotFoundException');
-        Loader::loadClass('ClassNonexistent', $dir);
-    }
-
-    /**
-     * Tests that an exception is thrown if the $dirs argument is
-     * not a string or an array.
-     */
-    public function testLoaderInvalidDirs()
-    {
-        $this->setExpectedException('\\Zend\\Loader\\InvalidDirectoryArgumentException');
-        Loader::loadClass('Zend_Invalid_Dirs', new stdClass());
-    }
-
-    /**
-     * Tests that a class can be loaded from the search directories.
-     */
-    public function testLoaderClassSearchDirs()
-    {
-        $dirs = array();
-        foreach (array('_testDir1', '_testDir2') as $dir) {
-            $dirs[] = implode(array(__DIR__, '_files', $dir), DIRECTORY_SEPARATOR);
-        }
-
-        // throws exception on failure
-        Loader::loadClass('Class1', $dirs);
-        Loader::loadClass('Class2', $dirs);
-    }
-
-    /**
-     * Tests that a class locatedin a subdirectory can be loaded from the search directories
-     */
-    public function testLoaderClassSearchSubDirs()
-    {
-        $dirs = array();
-        foreach (array('_testDir1', '_testDir2') as $dir) {
-            $dirs[] = implode(array(__DIR__, '_files', $dir), DIRECTORY_SEPARATOR);
-        }
-
-        // throws exception on failure
-        Loader::loadClass('Class1_Subclass2', $dirs);
-    }
-
-    /**
-     * Tests that the security filter catches illegal characters.
-     */
-    public function testLoaderClassIllegalFilename()
-    {
-        $this->setExpectedException('\\Zend\\Loader\\SecurityException', 'Illegal character');
-        Loader::loadClass('/path/:to/@danger');
     }
 
     /**
@@ -218,27 +122,6 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         // test that a file in include_path gets loaded, see ZF-2985
         $this->assertTrue(Loader::isReadable('Zend/Controller/Front.php'), get_include_path());
-    }
-
-    public function testLoaderRegisterAutoloadFailsWithoutSplAutoload()
-    {
-        if (function_exists('spl_autoload_register')) {
-            $this->markTestSkipped("spl_autoload() is installed on this PHP installation; cannot test for failure");
-        }
-
-        try {
-            Loader::registerAutoload();
-            $this->fail('registerAutoload should fail without spl_autoload');
-        } catch (Zend_Exception $e) {
-        }
-    }
-
-    /**
-     * @group ZF-8200
-     */
-    public function testLoadClassShouldAllowLoadingPhpNamespacedClasses()
-    {
-        Loader::loadClass('\Zfns\Foo', array(__DIR__ . '/_files'));
     }
 
     /**

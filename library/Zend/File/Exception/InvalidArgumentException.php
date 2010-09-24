@@ -20,15 +20,18 @@
  */
 
 /** @namespace */
-namespace Zend\File;
+namespace Zend\File\Exception;
+
+use Zend\File\Exception;
 
 /**
- * Marker interface for exceptions found in this component
+ * Exception class raised when invalid arguments are discovered
  * 
  * @package    Zend_File
- * @subpackage Exception
  * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
-interface Exception
+class InvalidArgumentException 
+    extends \InvalidArgumentException 
+    implements Exception
 {
 }

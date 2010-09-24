@@ -14,9 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,16 +23,13 @@ namespace Zend\Loader;
 /**
  * Resource loader
  *
- * @uses       Zend_Loader
- * @uses       Zend_Loader_Autoloader
- * @uses       Zend_Loader_Autoloadable
- * @uses       Zend_Loader_Exception
+ * @catebory   Zend
  * @package    Zend_Loader
  * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResourceAutoloader implements Autoloadable
+class ResourceAutoloader implements SplAutoloader
 {
     /**
      * @var string Base path to resource classes
@@ -69,16 +64,13 @@ class ResourceAutoloader implements Autoloadable
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options Configuration options for resource autoloader
+     * @param  array|Traversable $options Configuration options for resource autoloader
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
-        if ($options instanceof \Zend_Config) {
-            $options = $options->toArray();
-        }
-        if (!is_array($options)) {
-            throw new InvalidArgumentException('Options must be passed to resource loader constructor');
+        if (null === $options) {
+            throw new Exception\InvalidArgumentException('Options must be passed to resource loader constructor');
         }
 
         $this->setOptions($options);
@@ -88,16 +80,7 @@ class ResourceAutoloader implements Autoloadable
         if (((null === $namespace) || (null === $this->getBasePath()))
             && ((null === $prefix) || (null === $this->getBasePath()))
         ) {
-            throw new InvalidArgumentException('Resource loader requires both a base path and either a namespace or prefix for initialization');
-        }
-
-        if (null !== $namespace) {
-            Autoloader::getInstance()->unshiftAutoloader($this, $namespace);
-        } elseif (null !== $prefix) {
-            if (!empty($prefix)) {
-                $prefix .= '_';
-            }
-            Autoloader::getInstance()->unshiftAutoloader($this, $prefix, true);
+            throw new Exception\InvalidArgumentException('Resource loader requires both a base path and either a namespace or prefix for initialization');
         }
     }
 
@@ -272,13 +255,27 @@ class ResourceAutoloader implements Autoloadable
     }
 
     /**
+     * Register with spl_autoload registry
+     * 
+     * @return void
+     */
+    public function register()
+    {
+        spl_autoload_register(array($this, 'autoload'));
+    }
+
+    /**
      * Set class state from options
      *
      * @param  array $options
      * @return Zend_Loader_Autoloader_Resource
      */
-    public function setOptions(array $options)
+    public function setOptions($options)
     {
+        if (!is_array($options) && !($options instanceof \Traversable)) {
+            throw new Exception\InvalidArgumentException('Options must be an array or Traversable');
+        }
+
         $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);

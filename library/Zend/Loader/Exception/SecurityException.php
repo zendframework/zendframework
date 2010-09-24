@@ -13,22 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_File
+ * @package    Zend_Loader
  * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @namespace */
-namespace Zend\File;
+namespace Zend\Loader\Exception;
+require_once __DIR__ . '/../Exception.php';
+use Zend\Loader\Exception;
 
 /**
- * Marker interface for exceptions found in this component
- * 
- * @package    Zend_File
+ * @category   Zend
+ * @package    Zend_Loader
  * @subpackage Exception
- * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class SecurityException extends \DomainException implements Exception
 {
 }

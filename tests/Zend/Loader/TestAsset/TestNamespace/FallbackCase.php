@@ -13,22 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_File
- * @subpackage Exception
+ * @package    Loader
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
-/** @namespace */
-namespace Zend\File;
+namespace TestNamespace;
 
 /**
- * Marker interface for exceptions found in this component
- * 
- * @package    Zend_File
- * @subpackage Exception
- * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
+ * @category   Zend
+ * @package    Loader
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Loader
  */
-interface Exception
+class FallbackCase
 {
 }

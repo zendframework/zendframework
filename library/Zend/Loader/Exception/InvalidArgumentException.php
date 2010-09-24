@@ -14,25 +14,25 @@
  *
  * @category   Zend
  * @package    Zend_Loader
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace Zend\Loader;
+
+namespace Zend\Loader\Exception;
+require_once __DIR__ . '/../Exception.php';
+use Zend\Loader\Exception;
 
 /**
- * Plugin class loader exceptions
- *
- * @uses       \Zend\Loader\Exception
  * @category   Zend
  * @package    Zend_Loader
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginLoaderException extends \DomainException implements Exception
+class InvalidArgumentException
+    extends \InvalidArgumentException
+    implements Exception
 {
 }

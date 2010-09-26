@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer;
-use Zend\Markup;
+use Zend\Markup,
+    Zend\Loader\PluginLoader;
 
 /**
  * HTML renderer
@@ -78,7 +79,7 @@ class Html extends AbstractRenderer
             $options = $options->toArray();
         }
 
-        $this->_pluginLoader = new \Zend\Loader\PluginLoader\PluginLoader(array(
+        $this->_pluginLoader = new PluginLoader(array(
             'Zend\Markup\Renderer\Markup\HTML' => 'Zend/Markup/Renderer/Markup/HTML/'
         ));
 

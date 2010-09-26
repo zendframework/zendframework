@@ -24,9 +24,9 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer;
-use Zend\Markup;
-use Zend\Markup\Parser;
-use Zend\Markup\Renderer\Markup\MarkupInterface;
+use Zend\Markup,
+    Zend\Markup\Parser,
+    Zend\Markup\Renderer\Markup\MarkupInterface;
 
 /**
  * Defines the basic rendering functionality
@@ -52,7 +52,7 @@ abstract class AbstractRenderer
     /**
      * Parser
      *
-     * @var \Zend\Markup\Parser\ParserInterface
+     * @var \Zend\Markup\Parser
      */
     protected $_parser;
 
@@ -73,7 +73,7 @@ abstract class AbstractRenderer
     /**
      * Plugin loader for markups
      *
-     * @var \Zend\Loader\PluginLoader\PluginLoader
+     * @var \Zend\Loader\PluginLoader
      */
     protected $_pluginLoader;
 
@@ -118,11 +118,11 @@ abstract class AbstractRenderer
     /**
      * Set the parser
      *
-     * @param  \Zend\Markup\Parser\ParserInterface $parser
+     * @param  \Zend\Markup\Parser $parser
      *
      * @return \Zend\Markup\Renderer\RendererAbstract
      */
-    public function setParser(Parser\ParserInterface $parser)
+    public function setParser(Parser $parser)
     {
         $this->_parser = $parser;
 
@@ -132,7 +132,7 @@ abstract class AbstractRenderer
     /**
      * Get the parser
      *
-     * @return \Zend\Markup\Parser\ParserInterface
+     * @return \Zend\Markup\Parser
      */
     public function getParser()
     {
@@ -142,7 +142,7 @@ abstract class AbstractRenderer
     /**
      * Get the plugin loader
      *
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\PluginLoader
      */
     public function getPluginLoader()
     {
@@ -154,7 +154,7 @@ abstract class AbstractRenderer
      *
      * @param string $encoding
      *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\Renderer\AbstractRenderer
      */
     public function setEncoding($encoding)
     {
@@ -177,9 +177,9 @@ abstract class AbstractRenderer
      * Add a new markup
      *
      * @param string $name
-     * @param \Zend\Markup\Renderer\Markup\MarkupInterface $markup
+     * @param \Zend\Markup\Renderer\Markup $markup
      *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @return \Zend\Markup\Renderer\AbstractRenderer
      */
     public function addMarkup($name, MarkupInterface $markup)
     {

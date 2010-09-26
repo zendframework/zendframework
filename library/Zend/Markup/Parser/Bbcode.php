@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\Markup\Parser;
-use Zend\Markup;
+use Zend\Markup\Parser,
+    Zend\Markup;
 
 /**
  * @uses       \Zend\Markup\Parser\Exception
@@ -37,7 +38,7 @@ use Zend\Markup;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bbcode implements ParserInterface
+class Bbcode implements Parser
 {
     const NEWLINE   = "[newline\0]";
 

@@ -58,7 +58,7 @@ class Html extends AbstractRenderer
         }
 
         $this->_pluginLoader = new PluginLoader(array(
-            'Zend\Markup\Renderer\Markup\HTML' => 'Zend/Markup/Renderer/Markup/HTML/'
+            'Zend\Markup\Renderer\Markup\Html' => 'Zend/Markup/Renderer/Markup/Html'
         ));
 
         $this->_defineDefaultMarkups();
@@ -73,5 +73,8 @@ class Html extends AbstractRenderer
      */
     protected function _defineDefaultMarkups()
     {
+        $this->addMarkupByName('code', 'code');
+        $this->addMarkupByName('img', 'img');
+        $this->addMarkupByName('url', 'url');
     }
 }

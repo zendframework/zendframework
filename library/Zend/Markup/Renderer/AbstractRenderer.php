@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer;
-use Zend\Markup,
+use Zend\Markup\Token,
+    Zend\Markup\TokenList,
     Zend\Markup\Parser,
-    Zend\Markup\Renderer\Markup\MarkupInterface;
+    Zend\Markup\Renderer\Markup;
 
 /**
  * Defines the basic rendering functionality
@@ -167,11 +168,28 @@ abstract class AbstractRenderer
      *
      * @return \Zend\Markup\Renderer\AbstractRenderer
      */
-    public function addMarkup($name, MarkupInterface $markup)
+    public function addMarkup($name, Markup $markup)
     {
+        $markup->setRenderer($this);
+
         $this->_markups[$name] = $markup;
 
         return $this;
+    }
+
+    /**
+     * Add a new markup by giving its plugin name
+     *
+     * @param string $name
+     * @param string $markup
+     *
+     * @return \Zend\Markup\Renderer\AbstractRenderer
+     */
+    public function addMarkupByName($name, $markup)
+    {
+        $markup = $this->_pluginLoader->load($markup);
+
+        $this->addMarkup($name, new $markup());
     }
 
     /**
@@ -205,7 +223,7 @@ abstract class AbstractRenderer
      */
     public function render($value)
     {
-        if ($value instanceof Markup\TokenList) {
+        if ($value instanceof TokenList) {
             $tokenList = $value;
         } else {
             $tokenList = $this->getParser()->parse($value);
@@ -222,7 +240,7 @@ abstract class AbstractRenderer
      * @param  \Zend\Markup\Token $token
      * @return string
      */
-    protected function _render(Markup\Token $token)
+    protected function _render(Token $token)
     {
         $return = '';
 
@@ -245,20 +263,20 @@ abstract class AbstractRenderer
      *
      * @return string
      */
-    protected function _execute(Markup\Token $token)
+    protected function _execute(Token $token)
     {
         switch ($token->getType()) {
-            case Markup\Token::TYPE_MARKUP:
-                if (!isset($this->_markups[$token->getName()])) {
-                    // TODO: apply filters
-                    return $token->getContent() . $this->_render($token) . $token->getStopper();
+            case Token::TYPE_MARKUP:
+                if (isset($this->_markups[$token->getName()])) {
+                    $markup = $this->_markups[$token->getName()];
+
+                    return $markup($token, $this->_render($token));
                 }
 
-                $markup = $this->_markups[$token->getName()];
-
-                return $markup($token, $this->_render($token));
+                // TODO: apply filters
+                return $token->getContent() . $this->_render($token) . $token->getStopper();
                 break;
-            case Markup\Token::TYPE_NONE:
+            case Token::TYPE_NONE:
             default:
                 // TODO: apply filters
                 return $token->getContent();

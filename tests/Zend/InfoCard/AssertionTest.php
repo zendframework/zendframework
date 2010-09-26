@@ -40,9 +40,9 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tokenDocument = dirname(__FILE__) . '/_files/signedToken.xml';
-        $this->sslPubKey     = dirname(__FILE__) . '/_files/ssl_pub.cert';
-        $this->sslPrvKey     = dirname(__FILE__) . '/_files/ssl_private.cert';
+        $this->tokenDocument = __DIR__ . '/_files/signedToken.xml';
+        $this->sslPubKey     = __DIR__ . '/_files/ssl_pub.cert';
+        $this->sslPrvKey     = __DIR__ . '/_files/ssl_private.cert';
         $this->loadXmlDocument();
     }
 
@@ -55,7 +55,7 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
     {
         date_default_timezone_set("America/Los_Angeles");
 
-        $assertions = Assertion\Assertion::getInstance($this->_xmlDocument);
+        $assertions = Assertion\Factory::getInstance($this->_xmlDocument);
 
         $this->assertTrue($assertions instanceof Assertion\SAML);
 
@@ -71,16 +71,16 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
     public function testAssertionErrors()
     {
         try {
-            Assertion\Assertion::getInstance(10);
+            Assertion\Factory::getInstance(10);
             $this->fail("Exception Not Thrown as Expected");
         } catch(\Exception $e) {
             /* yay */
         }
 
-        $doc = file_get_contents(dirname(__FILE__) . '/_files/signedToken_bad_type.xml');
+        $doc = file_get_contents(__DIR__ . '/_files/signedToken_bad_type.xml');
 
         try {
-            $assertions = Assertion\Assertion::getInstance($doc);
+            $assertions = Assertion\Factory::getInstance($doc);
             $this->fail("Exception Not thrown as expected");
         } catch(\Exception $e) {
             /* yay */

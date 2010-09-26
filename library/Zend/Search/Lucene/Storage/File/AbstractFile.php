@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Storage\File;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene\Storage\File,
+    Zend\Search\Lucene;
 
 /**
  * @uses       \Zend\Search\Lucene\Exception
@@ -34,7 +36,7 @@ use Zend\Search\Lucene;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractFile implements FileInterface
+abstract class AbstractFile implements File
 {
     /**
      * Reads a byte from the current position in the file

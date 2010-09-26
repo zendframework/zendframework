@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Loader\IncludePathLoader;
+
+/**
  * @uses       RecursiveFilterIterator
  * @uses       ReflectionClass
  * @category   Zend
@@ -28,7 +33,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator extends RecursiveFilterIterator
+class RecursiveFilterIterator extends \RecursiveFilterIterator
 {
 
     protected $_denyDirectoryPattern = null;
@@ -41,7 +46,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator exten
      * @param string $denyDirectoryPattern
      * @param string $acceptFilePattern
      */
-    public function __construct(RecursiveIterator $iterator, $denyDirectoryPattern = null, $acceptFilePattern = null)
+    public function __construct(\RecursiveIterator $iterator, $denyDirectoryPattern = null, $acceptFilePattern = null)
     {
         $this->_denyDirectoryPattern = $denyDirectoryPattern;
         $this->_acceptFilePattern    = $acceptFilePattern;
@@ -74,12 +79,12 @@ class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator exten
      * the $_denyDirectoryPattern and the $_acceptFilePattern when sub iterators of this filter
      * are needed to be created.
      *
-     * @return Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator
+     * @return \Zend\Tool\Framework\Loader\IncludePathLoader\RecursiveFilterIterator
      */
     public function getChildren()
     {
         if (empty($this->ref)) {
-            $this->ref = new ReflectionClass($this);
+            $this->ref = new \ReflectionClass($this);
         }
 
         return $this->ref->newInstance(

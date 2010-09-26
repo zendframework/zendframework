@@ -31,7 +31,7 @@
 
         <para>
             You can get a list of spreadsheets for a particular user by using
-            the <code>getSpreadsheetFeed</code> method of the Spreadsheets
+            the <methodname>getSpreadsheetFeed()</methodname> method of the Spreadsheets
             service. The service will return a
             <classname>Zend_Gdata_Spreadsheets_SpreadsheetFeed</classname> object
             containing a list of spreadsheets associated with the authenticated
@@ -73,7 +73,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
             object feed represents the response from the server. Among other
             things, this feed contains a list of
             <classname>Zend_Gdata_Spreadsheets_WorksheetEntry </classname>
-            objects (<code>$feed->entries</code>), each of which represents a
+            objects (<command>$feed->entries</command>), each of which represents a
             single worksheet.
         </para>
     </sect2>
@@ -128,7 +128,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
 
             <para>
                 To retrieve a worksheet's list feed, use the
-                <code>getListFeed</code> method of the Spreadsheets service.
+                <methodname>getListFeed()</methodname> method of the Spreadsheets service.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -143,13 +143,13 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 object <varname>$listfeed</varname> represents a response from the
                 server. Among other things, this feed contains an array of
                 <classname>Zend_Gdata_Spreadsheets_ListEntry</classname> objects
-                (<code>$listFeed->entries</code>), each of which represents
+                (<command>$listFeed->entries</command>), each of which represents
                 a single row in a worksheet.
             </para>
 
             <para>
                 Each <classname>Zend_Gdata_Spreadsheets_ListEntry</classname> contains an
-                array, <code>custom</code>, which contains the data for that
+                array, <property>custom</property>, which contains the data for that
                 row. You can extract and display this array:
             </para>
 
@@ -161,7 +161,7 @@ foreach($rowData as $customEntry) {
 ]]></programlisting>
 
             <para>
-                An alternate version of this array, <code>customByName</code>,
+                An alternate version of this array, <property>customByName</property>,
                 allows direct access to an entry's cells by name. This is
                 convenient when trying to access a specific header:
             </para>
@@ -194,9 +194,9 @@ $listFeed = $spreadsheetService->getListFeed($query);
             <para>
                 Note that if you want to order (or reverse sort) by a
                 particular column, rather than by position in the worksheet,
-                you can set the <code>orderby</code> value of the
+                you can set the <property>orderby</property> value of the
                 <classname>Zend_Gdata_Spreadsheets_ListQuery</classname> object to
-                <code>column:&lt;the header of that column&gt;</code>.
+                <emphasis>column:&lt;the header of that column&gt;</emphasis>.
             </para>
         </sect3>
 
@@ -205,12 +205,12 @@ $listFeed = $spreadsheetService->getListFeed($query);
 
             <para>
                 You can set a <classname>Zend_Gdata_Spreadsheets_ListQuery</classname>'s
-                <code>sq</code> value to produce a feed with entries that meet
+                <property>sq</property> value to produce a feed with entries that meet
                 the specified criteria. For example, suppose you have a worksheet
                 containing personnel data, in which each row represents
                 information about a single person. You wish to retrieve all rows
                 in which the person's name is "John" and the person's age is over
-                25. To do so, you would set <code>sq</code> as follows:
+                25. To do so, you would set <property>sq</property> as follows:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -227,7 +227,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
 
             <para>
                 Rows can be added to a spreadsheet by using the
-                <code>insertRow</code> method of the Spreadsheet service.
+                <methodname>insertRow()</methodname> method of the Spreadsheet service.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -256,7 +256,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
             <para>
                 Once a <classname>Zend_Gdata_Spreadsheets_ListEntry</classname> object
                 is fetched, its rows can be updated by using the
-                <code>updateRow</code> method of the Spreadsheet service.
+                <methodname>updateRow()</methodname> method of the Spreadsheet service.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -278,7 +278,7 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
             <title>Delete a Row</title>
 
             <para>
-                To delete a row, simply invoke <code>deleteRow</code> on the
+                To delete a row, simply invoke <methodname>deleteRow()</methodname> on the
                 <classname>Zend_Gdata_Spreadsheets</classname> object with the existing
                 entry to be deleted:
             </para>
@@ -288,7 +288,7 @@ $spreadsheetService->deleteRow($listEntry);
 ]]></programlisting>
 
             <para>
-                Alternatively, you can call the <code>delete</code> method of
+                Alternatively, you can call the <methodname>delete()</methodname> method of
                 the entry itself:
             </para>
 
@@ -315,7 +315,7 @@ $listEntry->delete();
 
             <para>
                 To retrieve a worksheet's cell feed, use the
-                <code>getCellFeed</code> method of the Spreadsheets service.
+                <methodname>getCellFeed()</methodname> method of the Spreadsheets service.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -330,7 +330,7 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
                 object <varname>$cellFeed</varname> represents a response from the
                 server. Among other things, this feed contains an array of
                 <classname>Zend_Gdata_Spreadsheets_CellEntry</classname> objects
-                (<code>$cellFeed>entries</code>), each of which represents
+                (<command>$cellFeed>entries</command>), each of which represents
                 a single cell in a worksheet. You can display this information:
             </para>
 
@@ -371,7 +371,7 @@ $feed = $spreadsheetService->getCellsFeed($query);
 
             <para>
                 To modify the contents of a cell, call
-                <code>updateCell</code> with the row, column,
+                <methodname>updateCell()</methodname> with the row, column,
                 and new value of the cell.
             </para>
 
@@ -386,7 +386,7 @@ $updatedCell = $spreadsheetService->updateCell($row,
             <para>
                 The new data is placed in the specified cell in the worksheet.
                 If the specified cell contains data already, it will be
-                overwritten. Note: Use <code>updateCell</code> to change
+                overwritten. Note: Use <methodname>updateCell()</methodname> to change
                 the data in a cell, even if the cell is empty.
             </para>
         </sect3>

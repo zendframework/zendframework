@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_HtmlFlashTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HtmlFlashTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * @category   Zend
@@ -36,25 +34,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_HtmlFlashTest extends PHPUnit_Framework_TestCase
+class HtmlFlashTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_HtmlFlash
      */
     public $helper;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_HtmlFlashTest");
-        PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -64,8 +49,8 @@ class Zend_View_Helper_HtmlFlashTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_HtmlFlash();
+        $this->view = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\HtmlFlash();
         $this->helper->setView($this->view);
     }
 
@@ -76,7 +61,7 @@ class Zend_View_Helper_HtmlFlashTest extends PHPUnit_Framework_TestCase
 
     public function testMakeHtmlFlash()
     {
-        $htmlFlash = $this->helper->htmlFlash('/path/to/flash.swf');
+        $htmlFlash = $this->helper->direct('/path/to/flash.swf');
 
         $objectStartElement = '<object data="/path/to/flash.swf" type="application/x-shockwave-flash">';
 
@@ -85,7 +70,3 @@ class Zend_View_Helper_HtmlFlashTest extends PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_View_Helper_HtmlFlashTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HtmlFlashTest::main") {
-    Zend_View_Helper_HtmlFlashTest::main();
-}

@@ -73,6 +73,7 @@ class Upce extends Ean13
     {
         $this->_barcodeLength = 8;
         $this->_mandatoryChecksum = true;
+        $this->_mandatoryQuietZones = true;
     }
 
     /**
@@ -191,7 +192,7 @@ class Upce extends Ean13
      */
     protected function _validateText($value, $options = array())
     {
-        $validator = new BarcodeValidator\Barcode(array(
+        $validator = new BarcodeValidator(array(
             'adapter'  => 'upce',
             'checksum' => false,
         ));

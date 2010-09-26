@@ -4,7 +4,7 @@
     <title>HTML Object Helpers</title>
 
     <para>
-        The HTML <emphasis><![CDATA[
+        The <acronym>HTML</acronym> <emphasis><![CDATA[
 <object>]]></emphasis> element is used for embedding
         media like Flash or QuickTime in web pages. The object view helpers take
         care of embedding media with minimum effort.
@@ -62,7 +62,7 @@
 ]]></programlisting>
 
         <para>
-            This outputs the following HTML:
+            This outputs the following <acronym>HTML</acronym>:
         </para>
 
         <programlisting language="html"><![CDATA[

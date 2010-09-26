@@ -22,6 +22,9 @@
 
 namespace ZendTest\Log;
 
+require_once __DIR__ . '/TestAsset/NotExtendedWriterAbstract.php';
+require_once __DIR__ . '/TestAsset/NotImplementsFilterInterface.php';
+
 use \Zend\Log\Logger,
     \Zend\Log;
 
@@ -93,7 +96,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoggerThrowsWhenNoWriters()
     {
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'No writers');
+        $this->setExpectedException('Zend\Log\Exception', 'No writers');
         $logger = new Logger();
         $logger->log('message', Logger::INFO);
     }
@@ -122,7 +125,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger($this->writer);
 
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'Bad log priority');
+        $this->setExpectedException('Zend\Log\Exception', 'Bad log priority');
         $logger->log('foo', 42);
     }
 
@@ -130,13 +133,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger($this->writer);
 
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'Bad log priority');
+        $this->setExpectedException('Zend\Log\Exception', 'Bad log priority');
         $logger->nonexistantPriority('');
     }
 
     public function testAddingPriorityThrowsWhenOverridingBuiltinLogPriority()
     {
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'Existing priorities');
+        $this->setExpectedException('Zend\Log\Exception', 'Existing priorities');
         $logger = new Logger($this->writer);
         $logger->addPriority('BOB', 0);
     }
@@ -219,14 +222,14 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $info = $event['info'];
         $this->assertContains('nonesuch', $info);
     }
-    
+
     // Factory
 
     public function testLogConstructFromConfigStream()
     {
         $cfg = array('log' => array('memory' => array(
             'writerName'      => "Stream",
-            'writerNamespace' => "\\Zend\\Log\\Writer",
+            'writerNamespace' => "Zend\Log\Writer",
             'writerParams'    => array(
                 'stream'      => "php://memory"
             )
@@ -240,13 +243,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $cfg = array('log' => array('memory' => array(
             'writerName'      => "Stream",
-            'writerNamespace' => "\\Zend\\Log\\Writer",
+            'writerNamespace' => "Zend\Log\Writer",
             'writerParams'    => array(
                 'stream'      => "php://memory"
             ),
             'filterName'   => "Priority",
             'filterParams' => array(
-                'priority' => "\\Zend\\Log\\Logger::CRIT",
+                'priority' => "Zend\Log\Logger::CRIT",
                 'operator' => "<="
              ),
         )));
@@ -259,7 +262,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $cfg = array('log' => array('memory' => array(
             'writerName'      => "ZendMonitor",
-            'writerNamespace' => "\\Zend\\Log\\Writer",
+            'writerNamespace' => "Zend\Log\Writer",
         )));
 
         $logger = Logger::factory($cfg['log']);
@@ -276,36 +279,36 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $logger = new Logger();
         $logger->addWriter($writer);
         $this->errWriter = $writer;
-        
-        
+
+
         $oldErrorLevel = error_reporting();
-        
+
         $this->expectingLogging = true;
         error_reporting(E_ALL | E_STRICT);
-        
+
         $oldHandler = set_error_handler(array($this, 'verifyHandlerData'));
         $logger->registerErrorHandler();
-        
+
         trigger_error("Testing notice shows up in logs", E_USER_NOTICE);
         trigger_error("Testing warning shows up in logs", E_USER_WARNING);
         trigger_error("Testing error shows up in logs", E_USER_ERROR);
-        
+
         $this->expectingLogging = false;
         error_reporting(0);
-        
+
         trigger_error("Testing notice misses logs", E_USER_NOTICE);
         trigger_error("Testing warning misses logs", E_USER_WARNING);
         trigger_error("Testing error misses logs", E_USER_ERROR);
-        
+
         restore_error_handler(); // Pop off the Logger
         restore_error_handler(); // Pop off the verifyHandlerData
         error_reporting($oldErrorLevel); // Restore original reporting level
         unset($this->errWriter);
     }
-    
+
     /**
      * @group ZF-9192
-     * Used by testUsingWithErrorHandler - 
+     * Used by testUsingWithErrorHandler -
      * verifies that the data written to the original logger is the same as the data written in Zend_Log
      */
     public function verifyHandlerData($errno, $errstr, $errfile, $errline, $errcontext)
@@ -320,5 +323,102 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         } else {
             $this->assertTrue(empty($this->errWriter->events));
         }
+    }
+
+    /**
+     * @group ZF-9870
+     */
+    public function testSetAndGetTimestampFormat()
+    {
+        $logger = new Logger($this->writer);
+        $this->assertEquals('c', $logger->getTimestampFormat());
+        $this->assertSame($logger, $logger->setTimestampFormat('Y-m-d H:i:s'));
+        $this->assertEquals('Y-m-d H:i:s', $logger->getTimestampFormat());
+    }
+
+    /**
+     * @group ZF-9870
+     */
+    public function testLogWritesWithModifiedTimestampFormat()
+    {
+        $logger = new Logger($this->writer);
+        $logger->setTimestampFormat('Y-m-d');
+        $logger->debug('ZF-9870');
+        rewind($this->log);
+        $message = stream_get_contents($this->log);
+        $this->assertEquals(date('Y-m-d'), substr($message, 0, 10));
+    }
+
+    /**
+     * @group ZF-9955
+     */
+    public function testExceptionConstructWriterFromConfig()
+    {
+        try {
+            $logger = new Logger();
+            $writer = array('writerName' => 'NotExtendedWriterAbstract');
+            $logger->addWriter($writer);
+        } catch (\Exception $e) {
+            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertRegExp('#^(Zend\\\\Log\\\\Writer\\\\NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
+        }
+    }
+
+    /**
+     * @group ZF-9956
+     */
+    public function testExceptionConstructFilterFromConfig()
+    {
+        try {
+            $logger = new Logger();
+            $filter = array('filterName' => 'NotImplementsFilterInterface');
+            $logger->addFilter($filter);
+        } catch (\Exception $e) {
+            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertRegExp('#^(Zend\\\\Log\\\\Filter\\\\NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
+        }
+    }
+
+    /**
+     * @group ZF-8953
+     */
+    public function testFluentInterface()
+    {
+        $logger   = new Logger();
+        $instance = $logger->addPriority('all', 8)
+                           ->addFilter(1)
+                           ->addWriter(array('writerName' => 'Null'))
+                           ->setEventItem('os', PHP_OS);
+
+        $this->assertTrue($instance instanceof Logger);
+    }
+
+    /**
+     * @group ZF-10170
+     */
+    public function testPriorityDuplicates()
+    {
+        $logger   = new Logger();
+        $mock     = new Log\Writer\Mock();
+        $logger->addWriter($mock);
+        try {
+            $logger->addPriority('emerg', 8);
+            $this->fail();
+        } catch(\Exception $e) {
+            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertEquals('Existing priorities cannot be overwritten', $e->getMessage());
+        }
+
+        try {
+            $logger->log('zf10170', 0);
+            $logger->log('clone zf10170', 8);
+            $this->fail();
+        } catch (\Exception $e) {
+            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertEquals('Bad log priority', $e->getMessage());
+        }
+        $this->assertEquals(0, $mock->events[0]['priority']);
+        $this->assertEquals('EMERG', $mock->events[0]['priorityName']);
+        $this->assertFalse(array_key_exists(1, $mock->events));
     }
 }

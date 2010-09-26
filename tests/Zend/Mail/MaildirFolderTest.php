@@ -44,7 +44,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_originalDir = dirname(__FILE__) . '/_files/test.maildir/';
+        $this->_originalDir = __DIR__ . '/_files/test.maildir/';
 
         if (!is_dir($this->_originalDir . '/cur/')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
@@ -56,7 +56,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = dirname(__FILE__) . '/_files/test.tmp/';
+                $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -389,7 +389,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
+        $root->foobar = new Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
 
         try {
             $mail->selectFolder('foobar');
@@ -404,7 +404,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('foobar', 'foobar');
+        $root->foobar = new Folder('foobar', 'foobar');
 
         try {
             $mail->selectFolder('foobar');
@@ -419,7 +419,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder\Folder('foobar', 'foobar', false);
+        $root->foobar = new Folder('foobar', 'foobar', false);
 
         try {
             $mail->selectFolder('foobar');

@@ -108,7 +108,7 @@ class Zend_Service_DeveloperGarden_Client_Soap extends Zend_Soap_Client
         /**
          * add WSSE Security header
          */
-        if (!is_null($this->_tokenService)) {
+        if ($this->_tokenService !== null) {
             // if login method we addWsseLoginHeader
             if (in_array('login', $arguments)) {
                 $this->addWsseLoginHeader();

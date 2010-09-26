@@ -19,5 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\views\scripts\custom;
+
 ?>
 Inside custom/renderScript.php

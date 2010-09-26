@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Form_SubFormTest::main');
-}
+namespace ZendTest\Form;
 
-
-// error_reporting(E_ALL);
-
+use Zend\Form\Form,
+    Zend\Form\SubForm,
+    Zend\View\View;
 
 /**
  * @category   Zend
@@ -36,35 +34,25 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
+class SubFormTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_SubFormTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
-        Zend_Form::setDefaultTranslator(null);
+        Form::setDefaultTranslator(null);
 
-        $this->form = new Zend_Form_SubForm();
-    }
-
-    public function tearDown()
-    {
+        $this->form = new SubForm();
     }
 
     // General
     public function testSubFormUtilizesDefaultDecorators()
     {
         $decorators = $this->form->getDecorators();
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_FormElements', $decorators));
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_HtmlTag', $decorators));
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_Fieldset', $decorators));
-        $this->assertTrue(array_key_exists('Zend_Form_Decorator_DtDdWrapper', $decorators));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\FormElements', $decorators));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\HtmlTag', $decorators));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\Fieldset', $decorators));
+        $this->assertTrue(array_key_exists('Zend\Form\Decorator\DtDdWrapper', $decorators));
 
-        $htmlTag = $decorators['Zend_Form_Decorator_HtmlTag'];
+        $htmlTag = $decorators['Zend\Form\Decorator\HtmlTag'];
         $tag = $htmlTag->getOption('tag');
         $this->assertEquals('dl', $tag);
     }
@@ -85,7 +73,7 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
 
     public function testInitCalledBeforeLoadDecorators()
     {
-        $form = new Zend_Form_SubFormTest_SubForm();
+        $form = new TestAsset\SubForm();
         $decorators = $form->getDecorators();
         $this->assertTrue(empty($decorators));
     }
@@ -101,9 +89,9 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
                    ->addElement('text', 'bar')
                    ->addDisplayGroup(array('foo', 'bar'), 'foobar');
 
-        $form = new Zend_Form();
+        $form = new Form();
         $form->addSubForm($this->form, 'attributes');
-        $html = $form->render(new Zend_View());
+        $html = $form->render(new View());
 
         $this->assertContains('name="attributes[foo]"', $html);
         $this->assertContains('name="attributes[bar]"', $html);
@@ -114,28 +102,27 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderedSubFormDtShouldContainNoBreakSpace()
     {
-        $subForm = new Zend_Form_SubForm(array(
+        $subForm = new SubForm(array(
             'elements' => array(
                 'foo' => 'text',
                 'bar' => 'text',
             ),
         ));
-        $form = new Zend_Form();
+        $form = new Form();
         $form->addSubForm($subForm, 'foobar')
-             ->setView(new Zend_View);
+             ->setView(new View);
         $html = $form->render();
-        $this->assertRegexp('#<dt[^>]*>&nbsp;</dt>#s', $html);
+        $this->assertContains('>&#160;</dt>', $html  );
     }
-}
 
-class Zend_Form_SubFormTest_SubForm extends Zend_Form_SubForm
-{
-    public function init()
+    /**
+     * Prove the fluent interface on Zend_Form_Subform::loadDefaultDecorators
+     *
+     * @group ZF-9913
+     * @return void
+     */
+    public function testFluentInterfaceOnLoadDefaultDecorators()
     {
-        $this->setDisableLoadDefaultDecorators(true);
+        $this->assertSame($this->form, $this->form->loadDefaultDecorators());
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Form_SubFormTest::main') {
-    Zend_Form_SubFormTest::main();
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21357 -->
+<!-- EN-Revision: 22210 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.build-layers">
     <title>Support für den Build Layer von Zend_Dojo</title>
@@ -364,7 +364,7 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
                 usw. Für eine Aufstellung vorhandener Optionen, sollte man die
                 <ulink url="http://docs.dojocampus.org/build/index">Dojo Build Dokumentation</ulink>
                 und die <ulink
-                    url="http://www.dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">begleitende
+                    url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">begleitende
                     Dokumentation</ulink> lesen.
             </para>
 

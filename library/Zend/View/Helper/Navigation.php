@@ -21,25 +21,33 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+use Zend\Navigation\Container,
+    Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
+    Zend\View\Helper\Navigation\Helper as NavigationHelper;
+
+/**
  * Proxy helper for retrieving navigational helpers and forwarding calls
  *
- * @uses       Zend_View_Exception
- * @uses       Zend_View_Helper_Navigation_HelperAbstract
+ * @uses       \Zend\View\Exception
+ * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Navigation
-    extends Zend_View_Helper_Navigation_HelperAbstract
+class Navigation extends AbstractNavigationHelper
 {
     /**
      * View helper namespace
      *
      * @var string
      */
-    const NS = 'Zend_View_Helper_Navigation';
+    const NS = 'Zend\View\Helper\Navigation';
 
     /**
      * Default proxy to use in {@link render()}
@@ -79,12 +87,12 @@ class Zend_View_Helper_Navigation
     /**
      * Helper entry point
      *
-     * @param  Zend_Navigation_Container $container  [optional] container to
+     * @param  \Zend\Navigation\Container $container  [optional] container to
      *                                               operate on
-     * @return Zend_View_Helper_Navigation           fluent interface, returns
+     * @return \Zend\View\Helper\Navigation           fluent interface, returns
      *                                               self
      */
-    public function navigation(Zend_Navigation_Container $container = null)
+    public function direct(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -112,17 +120,17 @@ class Zend_View_Helper_Navigation
      *                                    container
      * @param  array  $arguments          [optional] arguments to pass
      * @return mixed                      returns what the proxied call returns
-     * @throws Zend_View_Exception        if proxying to a helper, and the
+     * @throws \Zend\View\Exception        if proxying to a helper, and the
      *                                    helper is not an instance of the
      *                                    interface specified in
      *                                    {@link findHelper()}
-     * @throws Zend_Navigation_Exception  if method does not exist in container
+     * @throws \Zend\Navigation\Exception  if method does not exist in container
      */
     public function __call($method, array $arguments = array())
     {
         // check if call should proxy to another helper
         if ($helper = $this->findHelper($method, false)) {
-            return call_user_func_array(array($helper, $method), $arguments);
+            return call_user_func_array(array($helper, 'direct'), $arguments);
         }
 
         // default behaviour: proxy call to container
@@ -133,17 +141,17 @@ class Zend_View_Helper_Navigation
      * Returns the helper matching $proxy
      *
      * The helper must implement the interface
-     * {@link Zend_View_Helper_Navigation_Helper}.
+     * {@link Zend\View\Helper\Navigation\Helper}.
      *
      * @param string $proxy                        helper name
      * @param bool   $strict                       [optional] whether
      *                                             exceptions should be
      *                                             thrown if something goes
      *                                             wrong. Default is true.
-     * @return Zend_View_Helper_Navigation_Helper  helper instance
-     * @throws Zend_Loader_PluginLoader_Exception  if $strict is true and
+     * @return \Zend\View\Helper\Navigation\Helper  helper instance
+     * @throws \Zend\Loader\PluginLoader\Exception  if $strict is true and
      *                                             helper cannot be found
-     * @throws Zend_View_Exception                 if $strict is true and
+     * @throws \Zend\View\Exception                 if $strict is true and
      *                                             helper does not implement
      *                                             the specified interface
      */
@@ -155,7 +163,7 @@ class Zend_View_Helper_Navigation
 
         if (!$this->view->getPluginLoader('helper')->getPaths(self::NS)) {
             $this->view->addHelperPath(
-                    str_replace('_', '/', self::NS),
+                    str_replace('\\', '/', self::NS),
                     self::NS);
         }
 
@@ -164,16 +172,16 @@ class Zend_View_Helper_Navigation
         } else {
             try {
                 $helper = $this->view->getHelper($proxy);
-            } catch (Zend_Loader_PluginLoader_Exception $e) {
+            } catch (\Zend\Loader\PluginLoader\Exception $e) {
                 return null;
             }
         }
 
-        if (!$helper instanceof Zend_View_Helper_Navigation_Helper) {
+        if (!$helper instanceof AbstractNavigationHelper) {
             if ($strict) {
-                $e = new Zend_View_Exception(sprintf(
+                $e = new \Zend\View\Exception(sprintf(
                         'Proxy helper "%s" is not an instance of ' .
-                        'Zend_View_Helper_Navigation_Helper',
+                        'Zend\View\Helper\Navigation\Helper',
                         get_class($helper)));
                 $e->setView($this->view);
                 throw $e;
@@ -192,10 +200,10 @@ class Zend_View_Helper_Navigation
      * Injects container, ACL, and translator to the given $helper if this
      * helper is configured to do so
      *
-     * @param  Zend_View_Helper_Navigation_Helper $helper  helper instance
+     * @param  \Zend\View\Helper\Navigation\Helper $helper  helper instance
      * @return void
      */
-    protected function _inject(Zend_View_Helper_Navigation_Helper $helper)
+    protected function _inject(NavigationHelper $helper)
     {
         if ($this->getInjectContainer() && !$helper->hasContainer()) {
             $helper->setContainer($this->getContainer());
@@ -221,7 +229,7 @@ class Zend_View_Helper_Navigation
      * Sets the default proxy to use in {@link render()}
      *
      * @param  string $proxy                default proxy
-     * @return Zend_View_Helper_Navigation  fluent interface, returns self
+     * @return \Zend\View\Helper\Navigation  fluent interface, returns self
      */
     public function setDefaultProxy($proxy)
     {
@@ -245,7 +253,7 @@ class Zend_View_Helper_Navigation
      * @param bool $injectContainer         [optional] whether container should
      *                                      be injected when proxying. Default
      *                                      is true.
-     * @return Zend_View_Helper_Navigation  fluent interface, returns self
+     * @return \Zend\View\Helper\Navigation  fluent interface, returns self
      */
     public function setInjectContainer($injectContainer = true)
     {
@@ -269,7 +277,7 @@ class Zend_View_Helper_Navigation
      * @param  bool $injectAcl              [optional] whether ACL should be
      *                                      injected when proxying. Default is
      *                                      true.
-     * @return Zend_View_Helper_Navigation  fluent interface, returns self
+     * @return \Zend\View\Helper\Navigation  fluent interface, returns self
      */
     public function setInjectAcl($injectAcl = true)
     {
@@ -293,7 +301,7 @@ class Zend_View_Helper_Navigation
      * @param  bool $injectTranslator       [optional] whether translator should
      *                                      be injected when proxying. Default
      *                                      is true.
-     * @return Zend_View_Helper_Navigation  fluent interface, returns self
+     * @return \Zend\View\Helper\Navigation  fluent interface, returns self
      */
     public function setInjectTranslator($injectTranslator = true)
     {
@@ -311,22 +319,22 @@ class Zend_View_Helper_Navigation
         return $this->_injectTranslator;
     }
 
-    // Zend_View_Helper_Navigation_Helper:
+    // Zend\View\Helper\Navigation\Helper:
 
     /**
      * Renders helper
      *
-     * @param  Zend_Navigation_Container $container  [optional] container to
+     * @param  \Zend\Navigation\Container $container  [optional] container to
      *                                               render. Default is to
      *                                               render the container
      *                                               registered in the helper.
      * @return string                                helper output
-     * @throws Zend_Loader_PluginLoader_Exception    if helper cannot be found
-     * @throws Zend_View_Exception                   if helper doesn't implement
+     * @throws \Zend\Loader\PluginLoader\Exception    if helper cannot be found
+     * @throws \Zend\View\Exception                   if helper doesn't implement
      *                                               the interface specified in
      *                                               {@link findHelper()}
      */
-    public function render(Zend_Navigation_Container $container = null)
+    public function render(Container $container = null)
     {
         $helper = $this->findHelper($this->getDefaultProxy());
         return $helper->render($container);

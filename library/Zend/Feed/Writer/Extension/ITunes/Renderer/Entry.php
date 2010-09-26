@@ -20,18 +20,19 @@
  */
  
 /**
- * @see Zend_Feed_Writer_Extension_RendererAbstract
- */
-require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
- 
+* @namespace
+*/
+namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
+use Zend\Feed\Writer\Extension;
+
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
-    extends Zend_Feed_Writer_Extension_RendererAbstract
+* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Entry extends Extension\AbstractRenderer
 {
     /**
      * Set to TRUE if a rendering method actually renders something. This
@@ -79,7 +80,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
+    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
     {
         $authors = $this->getDataContainer()->getItunesAuthors();
         if (!$authors || empty($authors)) {
@@ -101,10 +102,10 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setBlock(DOMDocument $dom, DOMElement $root)
+    protected function _setBlock(\DOMDocument $dom, \DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
-        if (is_null($block)) {
+        if ($block === null) {
             return;
         }
         $el = $dom->createElement('itunes:block');
@@ -121,7 +122,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDuration(DOMDocument $dom, DOMElement $root)
+    protected function _setDuration(\DOMDocument $dom, \DOMElement $root)
     {
         $duration = $this->getDataContainer()->getItunesDuration();
         if (!$duration) {
@@ -141,10 +142,10 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setExplicit(DOMDocument $dom, DOMElement $root)
+    protected function _setExplicit(\DOMDocument $dom, \DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
-        if (is_null($explicit)) {
+        if ($explicit === null) {
             return;
         }
         $el = $dom->createElement('itunes:explicit');
@@ -161,7 +162,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setKeywords(DOMDocument $dom, DOMElement $root)
+    protected function _setKeywords(\DOMDocument $dom, \DOMElement $root)
     {
         $keywords = $this->getDataContainer()->getItunesKeywords();
         if (!$keywords || empty($keywords)) {
@@ -181,7 +182,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
+    protected function _setSubtitle(\DOMDocument $dom, \DOMElement $root)
     {
         $subtitle = $this->getDataContainer()->getItunesSubtitle();
         if (!$subtitle) {
@@ -201,7 +202,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setSummary(DOMDocument $dom, DOMElement $root)
+    protected function _setSummary(\DOMDocument $dom, \DOMElement $root)
     {
         $summary = $this->getDataContainer()->getItunesSummary();
         if (!$summary) {

@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\Spreadsheets;
 
+use Zend\GData\Spreadsheets;
+
 /**
  * Concrete class for working with Atom entries.
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Spreadsheets\Spreadsheets
+ * @uses       \Zend\GData\Spreadsheets
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets
@@ -39,7 +41,7 @@ namespace Zend\GData\Spreadsheets;
 class SpreadsheetEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Spreadsheets\SpreadsheetEntry';
+    protected $_entryClassName = 'Zend\GData\Spreadsheets\SpreadsheetEntry';
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_SpreadsheetEntry object.

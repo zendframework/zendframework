@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\Spreadsheets;
 
+use Zend\GData\Spreadsheets;
+
 /**
  * Concrete class for working with Cell entries.
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Spreadsheets\Spreadsheets
+ * @uses       \Zend\GData\Spreadsheets
  * @uses       \Zend\GData\Spreadsheets\Extension\Cell
  * @category   Zend
  * @package    Zend_Gdata
@@ -40,7 +42,7 @@ namespace Zend\GData\Spreadsheets;
 class CellEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Spreadsheets\CellEntry';
+    protected $_entryClassName = 'Zend\GData\Spreadsheets\CellEntry';
     protected $_cell;
 
     /**

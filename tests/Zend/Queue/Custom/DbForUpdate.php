@@ -39,7 +39,7 @@ namespace ZendTest\Queue\Custom;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbForUpdate extends \Zend\Queue\Adapter\DB\DB
+class DbForUpdate extends \Zend\Queue\Adapter\DB
 {
     /**
      * Return the first element in the queue

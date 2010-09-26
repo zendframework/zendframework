@@ -82,7 +82,7 @@ class QuotaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("123456789", $newQuota->limit);
 
         /* try constructing using magic factory */
-        $gdata = new \Zend\GData\GApps\GApps();
+        $gdata = new \Zend\GData\GApps();
         $newQuota2 = $gdata->newQuota();
         $newQuota2->transferFromXML($newQuota->saveXML());
         $this->assertEquals(1, count($newQuota2->extensionElements));

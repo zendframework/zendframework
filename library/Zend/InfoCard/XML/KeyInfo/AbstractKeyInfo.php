@@ -26,13 +26,13 @@
 namespace Zend\InfoCard\XML\KeyInfo;
 
 /**
- * @uses       \Zend\InfoCard\XML\Element\Element
+ * @uses       \Zend\InfoCard\XML\AbstractElement
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractKeyInfo extends \Zend\InfoCard\XML\Element\Element
+abstract class AbstractKeyInfo extends \Zend\InfoCard\XML\AbstractElement
 {
 }

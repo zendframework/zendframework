@@ -107,7 +107,7 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
             $messages = $this->_validator->getMessages();
-            $this->assertContains('should be a integer', current($messages));
+            $this->assertContains('integer or float expected', current($messages));
         }
     }
 }

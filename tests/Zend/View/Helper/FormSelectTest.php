@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_FormSelectTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormSelectTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_FormSelect.
@@ -38,18 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
+class FormSelectTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormSelectTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -59,8 +47,8 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->view   = new Zend_View();
-        $this->helper = new Zend_View_Helper_FormSelect();
+        $this->view   = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\FormSelect();
         $this->helper->setView($this->view);
     }
 
@@ -77,7 +65,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
 
     public function testFormSelectWithNameOnlyCreatesEmptySelect()
     {
-        $html = $this->helper->formSelect('foo');
+        $html = $this->helper->direct('foo');
         $this->assertRegExp('#<select[^>]+name="foo"#', $html);
         $this->assertContains('</select>', $html);
         $this->assertNotContains('<option', $html);
@@ -85,7 +73,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
 
     public function testFormSelectWithOptionsCreatesPopulatedSelect()
     {
-        $html = $this->helper->formSelect('foo', null, null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->direct('foo', null, null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<select[^>]+name="foo"#', $html);
         $this->assertContains('</select>', $html);
         $this->assertRegExp('#<option[^>]+value="foo".*?>Foobar</option>#', $html);
@@ -95,20 +83,20 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
 
     public function testFormSelectWithOptionsAndValueSelectsAppropriateValue()
     {
-        $html = $this->helper->formSelect('foo', 'baz', null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->direct('foo', 'baz', null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
     }
 
     public function testFormSelectWithMultipleAttributeCreatesMultiSelect()
     {
-        $html = $this->helper->formSelect('foo', null, array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->direct('foo', null, array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<select[^>]+name="foo\[\]"#', $html);
         $this->assertRegExp('#<select[^>]+multiple="multiple"#', $html);
     }
 
     public function testFormSelectWithMultipleAttributeAndValuesCreatesMultiSelectWithSelectedValues()
     {
-        $html = $this->helper->formSelect('foo', array('foo', 'baz'), array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->direct('foo', array('foo', 'baz'), array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<option[^>]+value="foo"[^>]*selected.*?>Foobar</option>#', $html);
         $this->assertRegExp('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
     }
@@ -119,7 +107,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function testFormSelectWithZeroValueSelectsValue()
     {
-        $html = $this->helper->formSelect('foo', 0, null, array('foo' => 'Foobar', 0 => 'Bazbat'));
+        $html = $this->helper->direct('foo', 0, null, array('foo' => 'Foobar', 0 => 'Bazbat'));
         $this->assertRegExp('#<option[^>]+value="0"[^>]*selected.*?>Bazbat</option>#', $html);
     }
 
@@ -128,7 +116,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableEntireSelect()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -147,7 +135,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableIndividualSelectOptionsOnly()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -160,7 +148,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
         $this->assertNotRegexp('/<select[^>]*?disabled/', $html, $html);
         $this->assertRegexp('/<option value="bar"[^>]*?disabled="disabled"/', $html, $html);
 
-        $html = $this->helper->formSelect(
+        $html = $this->helper->direct(
             'baz',
             'foo',
             array(
@@ -180,7 +168,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableMultipleSelectOptions()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -201,7 +189,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableOptGroups()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -226,7 +214,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableOptGroupOptions()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -248,7 +236,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
 
     public function testCanSpecifySelectMultipleThroughAttribute()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -264,7 +252,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
 
     public function testSpecifyingSelectMultipleThroughAttributeAppendsNameWithBrackets()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -280,7 +268,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
 
     public function testCanSpecifySelectMultipleThroughName()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz[]',
             'options' => array(
                 'foo' => 'Foo',
@@ -296,7 +284,7 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
      */
     public function testNameCanContainBracketsButNotBeMultiple()
     {
-        $html = $this->helper->formSelect(array(
+        $html = $this->helper->direct(array(
             'name'    => 'baz[]',
             'options' => array(
                 'foo' => 'Foo',
@@ -312,7 +300,3 @@ class Zend_View_Helper_FormSelectTest extends PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_View_Helper_FormSelectTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormSelectTest::main") {
-    Zend_View_Helper_FormSelectTest::main();
-}

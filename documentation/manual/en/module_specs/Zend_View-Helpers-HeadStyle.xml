@@ -4,9 +4,9 @@
     <title>HeadStyle Helper</title>
 
     <para>
-        The HTML <emphasis>&lt;style&gt;</emphasis> element is used to include
-        <acronym>CSS</acronym> stylesheets inline in the HTML <emphasis>&lt;head&gt;</emphasis>
-        element.
+        The <acronym>HTML</acronym> <emphasis>&lt;style&gt;</emphasis> element is used to include
+        <acronym>CSS</acronym> stylesheets inline in the <acronym>HTML</acronym>
+        <emphasis>&lt;head&gt;</emphasis> element.
     </para>
 
     <note>

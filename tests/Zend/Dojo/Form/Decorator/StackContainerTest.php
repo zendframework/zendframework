@@ -20,21 +20,14 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_Form_Decorator_StackContainerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Decorator_StackContainerTest::main");
-}
+namespace ZendTest\Dojo\Form\Decorator;
 
-
-/** Zend_Dojo_Form_Decorator_StackContainer */
-
-/** Zend_Dojo_Form_SubForm */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\Form\Decorator\StackContainer as StackContainerDecorator,
+    Zend\Dojo\Form\SubForm as DojoSubForm,
+    Zend\Dojo\Form\Form as DojoForm,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_Form_Decorator_StackContainer.
@@ -47,19 +40,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
  */
-class Zend_Dojo_Form_Decorator_StackContainerTest extends PHPUnit_Framework_TestCase
+class StackContainerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_Form_Decorator_StackContainerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -68,36 +50,26 @@ class Zend_Dojo_Form_Decorator_StackContainerTest extends PHPUnit_Framework_Test
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->decorator = new Zend_Dojo_Form_Decorator_StackContainer();
+        $this->decorator = new StackContainerDecorator();
         $this->element   = $this->getElement();
         $this->element->setView($this->view);
         $this->decorator->setElement($this->element);
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-    }
-
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElement()
     {
-        $element = new Zend_Dojo_Form();
+        $element = new DojoForm();
         $element->setAttribs(array(
             'name'   => 'foo',
             'style'  => 'width: 300px; height: 500px;',
@@ -121,9 +93,4 @@ class Zend_Dojo_Form_Decorator_StackContainerTest extends PHPUnit_Framework_Test
         $html = $this->decorator->render('');
         $this->assertContains('dojoType="dijit.layout.StackContainer"', $html);
     }
-}
-
-// Call Zend_Dojo_Form_Decorator_StackContainerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_Form_Decorator_StackContainerTest::main") {
-    Zend_Dojo_Form_Decorator_StackContainerTest::main();
 }

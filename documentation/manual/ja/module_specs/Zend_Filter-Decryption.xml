@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 21212 -->
+<!-- EN-Revision: 21740 -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
     <para>
         このフィルタは、指定した文字列を指定した設定で復号します。
-        復号の際に、アダプタを使用します。実際には、PHP の
+        復号の際に、アダプタを使用します。実際には、 <acronym>PHP</acronym> の
         <classname>Mcrypt</classname> および <classname>OpenSSL</classname>
         拡張モジュール用のアダプタを使用します。
     </para>

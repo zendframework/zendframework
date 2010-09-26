@@ -40,28 +40,34 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        Serializer::resetAdapterLoader();
     }
 
     public function tearDown()
     {
+        Serializer::resetAdapterLoader();
     }
 
     public function testGetDefaultAdapterLoader()
     {
-        $this->assertTrue(Serializer::getAdapterLoader() instanceof PluginLoader\PluginLoader);
+        $this->assertTrue(Serializer::getAdapterLoader() instanceof PluginLoader);
     }
 
     public function testChangeAdapterLoader()
     {
-        $newLoader = new PluginLoader\PluginLoader();
+        $newLoader = new PluginLoader();
         Serializer::setAdapterLoader($newLoader);
         $this->assertTrue(Serializer::getAdapterLoader() === $newLoader);
     }
 
+    public function testDefaultAdapter()
+    {
+        $adapter = Serializer::getDefaultAdapter();
+        $this->assertTrue($adapter instanceof Adapter);
+    }
+
     public function testFactoryValidCall()
     {
-        $serializer = Serializer::factory('PHPSerialize');
+        $serializer = Serializer::factory('PhpSerialize');
         $this->assertTrue($serializer instanceof Adapter\PHPSerialize);
     }
 
@@ -74,21 +80,14 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testFactoryOnADummyClassAdapter()
     {
         $this->setExpectedException('Zend\\Serializer\\Exception','must implement Zend\\Serializer\\Adapter');
-        Serializer::setAdapterLoader(new PluginLoader\PluginLoader(array('ZendTest\\Serializer\\TestAsset' => __DIR__ . '/TestAsset')));
+        Serializer::setAdapterLoader(new PluginLoader(array('ZendTest\\Serializer\\TestAsset' => __DIR__ . '/TestAsset')));
         Serializer::factory('dummy');
-    }
-
-    public function testDefaultAdapter()
-    {
-        $adapter = Serializer::getDefaultAdapter();
-        $this->assertTrue($adapter instanceof Adapter);
     }
 
     public function testChangeDefaultAdapterWithString()
     {
-        $newAdapter = 'JSON';
-        Serializer::setDefaultAdapter($newAdapter);
-        $this->assertTrue(Serializer::getDefaultAdapter() instanceof Adapter\JSON);
+        Serializer::setDefaultAdapter('Json');
+        $this->assertTrue(Serializer::getDefaultAdapter() instanceof Adapter\Json);
     }
 
     public function testChangeDefaultAdapterWithInstance()
@@ -110,7 +109,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testSerializeSpecificAdapter()
     {
         $value = 'test';
-        $adapter = new Adapter\JSON();
+        $adapter = new Adapter\Json();
         $expected = $adapter->serialize($value);
         $this->assertEquals($expected, Serializer::serialize($value, array('adapter' => $adapter)));
     }
@@ -126,7 +125,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeSpecificAdapter()
     {
-        $adapter = new Adapter\JSON();
+        $adapter = new Adapter\Json();
         $value = '"test"';
         $expected = $adapter->unserialize($value);
         $this->assertEquals($expected, Serializer::unserialize($value, array('adapter' => $adapter)));

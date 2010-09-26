@@ -47,7 +47,7 @@ class TermsPriorityQueueTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueue()
     {
-        $directory = new Directory\Filesystem(dirname(__FILE__) . '/_source/_files');
+        $directory = new Directory\Filesystem(__DIR__ . '/_source/_files');
         $segmentsList = array('_0', '_1', '_2', '_3', '_4');
 
         $segmentInfoQueue = new Index\TermsPriorityQueue();

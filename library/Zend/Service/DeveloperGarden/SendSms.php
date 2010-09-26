@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_Client_Exception
  * @uses       Zend_Service_DeveloperGarden_Request_SendSms_SendFlashSMS
  * @uses       Zend_Service_DeveloperGarden_Request_SendSms_SendSMS
@@ -35,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_SendSms
-    extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+    extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * wsdl file
@@ -107,11 +107,11 @@ class Zend_Service_DeveloperGarden_SendSms
     /**
      * sends an sms with the given parameters
      *
-     * @param Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract $sms
+     * @param Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms $sms
      *
-     * @return Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
+     * @return Zend_Service_DeveloperGarden_Response_SendSms_AbstractSendSms
      */
-    public function send(Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract $sms)
+    public function send(Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms $sms)
     {
         $client = $this->getSoapClient();
         $request = array(

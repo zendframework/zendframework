@@ -53,7 +53,7 @@ class DefaultKeyInfo extends AbstractKeyInfo
 
         list($sectokenref) = $this->xpath('//o:SecurityTokenReference');
 
-        if(!($sectokenref instanceof \Zend\InfoCard\XML\Element\Element)) {
+        if(!($sectokenref instanceof \Zend\InfoCard\XML\AbstractElement)) {
             throw new \Zend\InfoCard\XML\Exception('Could not locate the Security Token Reference');
         }
 

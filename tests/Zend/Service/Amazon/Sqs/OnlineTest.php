@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Sqs;
+
+/**
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
@@ -30,7 +35,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Sqs
  */
-class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
+class OnlineTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Reference to Amazon service consumer object
@@ -54,16 +59,16 @@ class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
+            $this->markTestSkipped('Zend_Service_Amazon online tests are not enabled');
         }
-        $this->_amazon = new Zend_Service_Amazon_Sqs(
+        $this->_amazon = new \Zend\Service\Amazon\Sqs\Sqs(
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
         );
 
         $this->_queue_name = constant('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE');
 
-        $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
+        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
 
         $this->_amazon->getHttpClient()
                       ->setAdapter($this->_httpClientAdapterSocket);
@@ -99,7 +104,7 @@ class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(0, $count);
 
             $this->_amazon->delete($queue_url);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail($e->getMessage());
         }
     }

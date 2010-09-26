@@ -805,9 +805,9 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
 
             <para>
                 <methodname>Zend_Pdf_Action_URI::create($uri[, $isMap])</methodname> method has
-                to be used to create a URI action (see API documentation for the details).
-                Optional <varname>$isMap</varname> parameter is set to <constant>FALSE</constant>
-                by default.
+                to be used to create a URI action (see <acronym>API</acronym> documentation for the
+                details). Optional <varname>$isMap</varname> parameter is set to
+                <constant>FALSE</constant> by default.
             </para>
 
             <para>
@@ -1064,8 +1064,9 @@ $pdf->save($path, true);
         <para>
             <classname>Zend_Pdf_Outline</classname> class implements RecursiveArray interface,
             so child outlines may be recursively iterated using RecursiveIteratorIterator:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($path);
 
 foreach ($pdf->outlines as $documentRootOutlineEntry) {
@@ -1094,7 +1095,6 @@ foreach ($pdf->outlines as $documentRootOutlineEntry) {
 
 $pdf->save($path, true);
 ]]></programlisting>
-        </para>
 
         <note>
             <para>

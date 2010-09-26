@@ -124,7 +124,7 @@ class ReflectionFileTest extends \PHPUnit_Framework_TestCase
     public function testFileGetFunctionsReturnsFunctions()
     {
         $this->markTestSkipped('Regex in Zend_Reflection_File needs work in the function department');
-        $fileToRequire = dirname(__FILE__) . '/_files/FileOfFunctions.php';
+        $fileToRequire = __DIR__ . '/_files/FileOfFunctions.php';
         include_once $fileToRequire;
         $reflectionFile = new Reflection\ReflectionFile($fileToRequire);
         echo count($reflectionFile->getFunctions());

@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Paginator\ScrollingStyle;
+
+/**
  * Test helper
  */
 
@@ -44,7 +49,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-class Zend_Paginator_ScrollingStyle_ElasticTest extends PHPUnit_Framework_TestCase
+class ElasticTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Paginator_ScrollingStyle_Elastic
@@ -61,8 +66,8 @@ class Zend_Paginator_ScrollingStyle_ElasticTest extends PHPUnit_Framework_TestCa
     protected function setUp()
     {
         parent::setUp();
-        $this->_scrollingStyle = new Zend_Paginator_ScrollingStyle_Elastic();
-        $this->_paginator = Zend_Paginator::factory(range(1, 101));
+        $this->_scrollingStyle = new \Zend\Paginator\ScrollingStyle\Elastic();
+        $this->_paginator = \Zend\Paginator\Paginator::factory(range(1, 101));
         $this->_paginator->setItemCountPerPage(5);
         $this->_paginator->setPageRange(5);
     }

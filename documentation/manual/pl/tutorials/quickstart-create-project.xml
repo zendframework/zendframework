@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20996 -->
-<!-- Reviewed: no -->
+<!-- EN-Revision: 21826 -->
+<!-- Reviewed: yes -->
 <sect1 id="learning.quickstart.create-project">
     <title>Utworzenie projektu</title>
 
@@ -12,31 +12,31 @@
         <title>Instalacja Zend Framework</title>
 
         <para>
-            Najprostszym sposobem pobrania Zend Framework razem z całym środowiskiem PHP jest 
-            zainstalowanie
+            Najprostszym sposobem pobrania Zend Framework razem z całym środowiskiem
+            <acronym>PHP</acronym> jest zainstalowanie
             <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend Server</ulink>.
-            Zend Server zawiera instalatory dla Mac OSX, Windows, Fedora Core oraz Ubuntu. 
+            Zend Server zawiera instalatory dla Mac OS X, Windows, Fedora Core oraz Ubuntu.
             Oprócz tego dostępna jest uniwersalna paczka instalacyjna kompatybilna z większością
             dystrybucji Linux.
         </para>
 
         <para>
             Po zainstalowaniu Zend Server, pliki frameworka są dostępne w katalogu
-            <filename>/usr/local/zend/share/ZendFramework</filename> dla Mac OSX oraz Linux,
+            <filename>/usr/local/zend/share/ZendFramework</filename> dla Mac OS X oraz Linux,
             lub <filename>C:\Program Files\Zend\ZendServer\share\ZendFramework</filename> dla
             Windows. Zmienna <constant>include_path</constant> będzie automatycznie ustawiona
             tak aby obejmowała Zend Framework.
         </para>
 
         <para>
-            Alternatywnie można <ulink url="http://framework.zend.com/download/latest">pobrać 
+            Alternatywnie można <ulink url="http://framework.zend.com/download/latest">pobrać
             najnowszą wersję Zend Framework</ulink> i rozpakować zawartość do dowolnego katalogu;
             należy zapamiętać wybraną lokalizację instalacji.
         </para>
 
         <para>
-            Opcjonalnie w pliku <filename>php.ini</filename> można umieścić w 
-            zmiennej <constant>include_path</constant> ścieżkę do 
+            Opcjonalnie w pliku <filename>php.ini</filename> można umieścić w
+            zmiennej <constant>include_path</constant> ścieżkę do
             podkatalogu <filename>library/</filename> znajdującego się w pobranym archiwum.
         </para>
 
@@ -54,7 +54,7 @@
             <para>
                 W katalogu instalacji Zend Framework znajduje się podkatalog
                 <filename>bin/</filename>.
-                Zawiera on skrypty <filename>zf.sh</filename> oraz <filename>zf.bat</filename> 
+                Zawiera on skrypty <filename>zf.sh</filename> oraz <filename>zf.bat</filename>
                 odpowiednio dla użytkowników Unix oraz Windows. Należy zapamiętać ścieżkę dostępu
                 do tych skryptów.
             </para>
@@ -73,8 +73,8 @@
         </note>
 
         <para>
-            Aby utworzyć nowy projekt należy otworzyć terminal (dla Windows - wiersz polecenia 
-            <command>Start -> Run</command> i polecenie <command>cmd</command>). Należy przejść do 
+            Aby utworzyć nowy projekt należy otworzyć terminal (dla Windows - wiersz polecenia
+            <command>Start -> Run</command> i polecenie <command>cmd</command>). Należy przejść do
             katalogu nowego projektu. Następnie, używając ścieżki do odpowiedniego skryptu, należy
             wywołać następujące polecenie:
         </para>
@@ -119,10 +119,10 @@ quickstart
 ]]></programlisting>
 
         <para>
-            W tym momencie, jeśli Zend Framework nie jest umieszczony w zmiennej 
-            <constant>include_path</constant>, zaleca się przekopiowanie lub umieszczenie
+            W tym momencie, jeśli Zend Framework nie jest umieszczony w zmiennej
+            <constant>include_path</constant>, zaleca się skopiowanie lub umieszczenie
             linku symbolicznego do podkatalogu <filename>library/</filename> projektu.
-            Najistotniejszy jest aby zawartość katalogu <filename>library/Zend/</filename>
+            Najistotniejsze jest aby zawartość katalogu <filename>library/Zend/</filename>
             instalacji Zend Framework była dostępna w katalogu <filename>library/</filename>
             projektu. Na systemach Unix można tego dokonać za pomocą następujących poleceń:
         </para>
@@ -150,9 +150,9 @@ quickstart
 
         <para>
             Klasa <classname>Bootstrap</classname> definiuje zasoby i komponenty do inicjalizacji.
-            Domyślnie uruchamiany jest <link linkend="zend.controller.front">Front Controller</link>
+            Domyślnie uruchamiany jest <link linkend="zend.controller.front">kontroler frontowy</link>
             ze standardowym katalogiem w którym szukane są kontrolery akcji (o których mowa później)
-            ustawionym na <filename>application/controllers/</filename>. Klasa przedstawia się 
+            ustawionym na <filename>application/controllers/</filename>. Klasa przedstawia się
             następująco:
         </para>
 
@@ -165,7 +165,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
         <para>
-            Jak widać, na początek wymagane jest nie wiele.
+            Jak widać, na początek wymagane jest niewiele.
         </para>
     </sect2>
 
@@ -174,9 +174,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Sam Zend Framework nie wymaga konfiguracji ale tworzona aplikacja - najczęściej tak.
-            Standardowo plik konfiguracyjny umieszczony jest w 
+            Standardowo plik konfiguracyjny umieszczony jest w
             <filename>application/configs/application.ini</filename>. Zawiera on podstawowe
-            instrukcje ustawienia środowiska PHP (np. włączanie/wyłączanie raportowania błędów),
+            instrukcje ustawienia środowiska <acronym>PHP</acronym>
+            (np. włączanie/wyłączanie raportowania błędów),
             wskazanie ścieżki i klasy <classname>Bootstrap</classname> oraz ścieżkę do katalogu
             kontrolerów akcji. Domyślny plik wygląda następująco:
         </para>
@@ -207,10 +208,11 @@ phpSettings.display_errors = 1
 
         <para>
             Należy zwrócić uwagę na kilka cech tego pliku. Po pierwsze, używając konfiguracji
-            w pliku INI, można bezpośrednio używać stałych; <constant>APPLICATION_PATH</constant>
-            to stała PHP (opisana później). Dodatkowo, zdefiniowane zostały oddzielne sekcje:
+            w pliku <acronym>INI</acronym>, można bezpośrednio używać stałych;
+            <constant>APPLICATION_PATH</constant> to stała PHP (opisana później).
+            Dodatkowo, zdefiniowane zostały oddzielne sekcje:
             production, staging, testing oraz development. Ostatnie trzy dziedziczą ustawienia ze
-            środowiska produkcyjnego (production). Podany sposób stanowi użyteczny przykład 
+            środowiska produkcyjnego (production). Podany sposób stanowi użyteczny przykład
             organizacji konfiguracji, dzięki której odpowiednie ustawienia są dostępne w
             odpowiednim momencie cyklu rozwoju oprogramowania.
         </para>
@@ -220,14 +222,14 @@ phpSettings.display_errors = 1
         <title>Kontrolery akcji (action controllers)</title>
 
         <para>
-            Zawarte w aplikacji <emphasis>kontrolery akcji</emphasis> przechowują ścieżki 
-            działania programu i odwzorowują żądania na odpowiednie modele i widoki. 
+            Zawarte w aplikacji <emphasis>kontrolery akcji</emphasis> przechowują ścieżki
+            działania programu i odwzorowują żądania na odpowiednie modele i widoki.
         </para>
 
         <para>
             Kontroler akcji powinien posiadać co najmniej jedną metodę o nazwie zakończonej na
             "Action". Te metody stają się dostępne dla użytkowników. Domyślnie URLe w Zend
-            Framework stosują się do schematu <constant>/kontroler/akcja</constant>, gdzie
+            Framework stosują schemat <constant>/kontroler/akcja</constant>, gdzie
             "kontroler" jest odwzorowany na nazwę kontrolera akcji
             (z pominięciem sufiksu "Controller")
             a "akcja" jest odwzorowana na metodę w tym kontrolerze
@@ -237,8 +239,9 @@ phpSettings.display_errors = 1
         <para>
             W typowym projekcie niezbędny jest kontroler <classname>IndexController</classname>,
             który jest początkowym punktem odniesienia i stanowi stronę początkową aplikacji,
-            oraz <classname>ErrorController</classname> czyli kontroler obsługujący błędy HTTP 404
-            (brak kontrolera i/lub akcji) lub HTTP 500 (błąd aplikacji).
+            oraz <classname>ErrorController</classname> czyli kontroler obsługujący błędy
+            <acronym>HTTP</acronym> 404 (brak kontrolera i/lub akcji) lub
+            <acronym>HTTP</acronym> 500 (błąd aplikacji).
         </para>
 
         <para>
@@ -310,10 +313,11 @@ class ErrorController extends Zend_Controller_Action
         <title>Widoki (views)</title>
 
         <para>
-            Widoki (view scripts) w Zend Framework są napisane w starym dobrym PHP. Domyślnie
-            znajdują się w <filename>application/views/scripts/</filename>, gdzie są w dalszym 
-            stopniu dzielone wg. kontrolerów do których należą. W obecnym przypadku istnieją
-            dwa kontrolery: <classname>IndexController</classname> oraz 
+            Widoki (view scripts) w Zend Framework są napisane w starym dobrym
+            <acronym>PHP</acronym>. Domyślnie
+            znajdują się w <filename>application/views/scripts/</filename>, gdzie są w dalszym
+            stopniu dzielone wg kontrolerów do których należą. W obecnym przypadku istnieją
+            dwa kontrolery: <classname>IndexController</classname> oraz
             <classname>ErrorController</classname>. Oznacza to, że w katalogu widoków powinny się
             znaleźć dwa podkatalogi: <filename>index/</filename> oraz <filename>error/</filename>.
             W nich należy umieścić skrypty widoków odpowiednie dla każdej z akcji danego kontrolera.
@@ -322,8 +326,9 @@ class ErrorController extends Zend_Controller_Action
         </para>
 
         <para>
-            Skrypty widoków mogą zawierać dowolny kod HTML i używać <code>&lt;?php</code> jako tagów
-            otwarcia i <code>?&gt;</code> jako tagów zamknięcia dla poleceń PHP.
+            Skrypty widoków mogą zawierać dowolny kod <acronym>HTML</acronym>
+            i używać <code>&lt;?php</code> jako tagów
+            otwarcia i <code>?&gt;</code> jako tagów zamknięcia dla poleceń <acronym>PHP</acronym>.
         </para>
 
         <para>
@@ -383,7 +388,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Skrypt <filename>error/error.phtml</filename> jest nieco bardziej interesujący - używa
-            instrukcji warunkowych PHP:
+            instrukcji warunkowych <acronym>PHP</acronym>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -425,9 +430,9 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Na potrzeby tego wprowadzenia, założono użycie <ulink url="http://httpd.apache.org/">
-            web serwera Apache</ulink>. Zend Framework działa równie dobrze z innymi 
-            serwerami - włączając Microsoft Internet Information Services, lighttpd, nginx i 
-            wiele innych. Większość deweloperów jednak jest najbardziej zaznajomiona z Apache, który
+            web serwera Apache</ulink>. Zend Framework działa równie dobrze z innymi
+            serwerami - włączając Microsoft Internet Information Services, lighttpd, nginx i
+            wiele innych. Większość programistów jednak jest najbardziej zaznajomiona z Apache, który
             ułatwia zrozumienie struktury katalogów Zend Framework i posiada szerokie możliwości
             przepisywania linków (mod_rewrite).
         </para>
@@ -491,21 +496,21 @@ class ErrorController extends Zend_Controller_Action
         <para>
             Należy zwrócić uwagę na kilka szczegółów. Po pierwsze, <varname>DocumentRoot</varname>
             wskazuje na podkatalog projektu o nazwie <filename>public</filename>. To oznacza, że
-            jedynie pliki znajdujące się w tym podkatalogu mogą być zwracane przez serwer 
-            bezpośrednio. Po drugie, instrukcje <varname>AllowOverride</varname>, 
+            jedynie pliki znajdujące się w tym podkatalogu mogą być zwracane przez serwer
+            bezpośrednio. Po drugie, instrukcje <varname>AllowOverride</varname>,
             <varname>Order</varname> oraz <varname>Allow</varname> umożliwiają stosowanie plików
             <filename>htacess</filename> w projekcie. W środowisku programistycznym (development)
             jest to uznawane za dobrą praktykę ponieważ eliminuje potrzebę resetowania
             serwera po każdej zmianie instrukcji konfiguracyjnych. Jednak w środowisku produkcyjnym
             (production), zalecane jest przeniesienie zawartości pliku <filename>htaccess</filename>
-            do głównego pliku konfiguracyjnego serwera oraz wyłączenie obsługi 
+            do głównego pliku konfiguracyjnego serwera oraz wyłączenie obsługi
             <filename>htaccess</filename>. Po trzecie, instrukcja
             <varname>SetEnv</varname> pozwala zainicjować zmienną środowiskową oraz
             przekazać ją do PHP i <filename>index.php</filename>.
             Dzięki temu stanie się ona podstawą stałej
             <constant>APPLICATION_ENV</constant> aplikacji Zend Framework.
-            W środowisku produkcyjnym można ją ustawić na "production" lub zrezygnować 
-            z tej instrukcji ("production" jest domyślną wartością stałej 
+            W środowisku produkcyjnym można ją ustawić na "production" lub zrezygnować
+            z tej instrukcji ("production" jest domyślną wartością stałej
             <constant>APPLICATION_ENV</constant>).
         </para>
 

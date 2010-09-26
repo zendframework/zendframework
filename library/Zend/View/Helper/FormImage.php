@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate an "image" element
  *
  * @category   Zend
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
+class FormImage extends FormElement
 {
     /**
      * Generates an 'image' element.
@@ -46,8 +51,12 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
      *
      * @return string The element XHTML.
      */
-    public function formImage($name, $value = null, $attribs = null)
+    public function direct($name = null, $value = null, $attribs = null)
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormImage: missing argument. $name is required in formImage($name, $value = null, $attribs = null)');
+        }
+        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
 
@@ -75,7 +84,7 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof Zend_View_Abstract) && !$this->view->doctype()->isXhtml()) {
+        if (($this->view instanceof \Zend\View\AbstractView) && !$this->view->doctype()->isXhtml()) {
             $endTag= '>';
         }
 

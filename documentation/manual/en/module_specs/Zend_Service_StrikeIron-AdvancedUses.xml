@@ -23,8 +23,9 @@
             To try a StrikeIron service that does not have a wrapper class available,
             give the <code>wsdl</code> option to <methodname>getService()</methodname>
             instead of the <code>class</code> option:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -38,7 +39,6 @@ echo $result->listingName;
 
 // Zend Technologies USA Inc
 ]]></programlisting>
-        </para>
 
         <para>
             Using StrikeIron services from the WSDL will require at least some understanding
@@ -46,7 +46,8 @@ echo $result->listingName;
             <ulink url="http://janschneider.de">Jan Schneider</ulink> from the <ulink
                 url="http://horde.org">Horde project</ulink> has written a <ulink
                 url="http://janschneider.de/news/25/268">small <acronym>PHP</acronym>
-                routine</ulink> that will format a WSDL file into more readable HTML.
+                routine</ulink> that will format a WSDL file into more readable
+            <acronym>HTML</acronym>.
         </para>
 
         <para>
@@ -89,8 +90,9 @@ echo $result->listingName;
                 url="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
             and <ulink
                 url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron =
     new Zend_Service_StrikeIron(array('username' => 'your-username',
                                       'password' => 'your-password',
@@ -107,6 +109,5 @@ $soapClient = $taxBasic->getSoapClient();
 echo $soapClient->__getLastRequest();
 echo $soapClient->__getLastResponse();
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

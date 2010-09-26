@@ -128,7 +128,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         }
 
         // Set new service instance and test for propagation
-        $s = new App\App();
+        $s = new App();
         $this->feed->setService($s);
 
         $service = $this->feed->getService();
@@ -136,7 +136,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $this->fail('No feed service received');
         }
         $this->assertEquals(
-            'Zend\GData\App\App',
+            'Zend\GData\App',
             get_class($service)
             );
 
@@ -146,7 +146,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
                 $this->fail('No entry service received');
             }
             $this->assertEquals(
-                'Zend\GData\App\App',
+                'Zend\GData\App',
                 get_class($service)
                 );
         }

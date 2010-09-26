@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 20763 -->
 <sect1 id="zend.acl.refining">
     <title>Verfeinern der Zugriffskontrolle</title>
 
@@ -18,17 +18,17 @@
         </para>
 
         <para>
-            Für das Beispiel <acronym>CMS</acronym> wurde ermittelt, dass, während die 'staff'
-            Gruppe die Bedürfnisse der überwiegenden Mehrheit der Benutzer abdeckt, es den Bedarf
-            für eine neue 'marketing' Gruppe gibt, die Zugriff auf den Newsletter und die neuesten
+            Für das Beispiel <acronym>CMS</acronym> wurde ermittelt, dass während die Gruppe
+            'staff' die Bedürfnisse der überwiegenden Mehrheit der Benutzer abdeckt, es den Bedarf
+            für eine neue Gruppe 'marketing' gibt, die Zugriff auf den Newsletter und die neuesten
             Nachrichten im <acronym>CMS</acronym> benötigen. Die Gruppe ist ziemlich unabhängig und
             wird die Möglichkeit haben, sowohl Newsletter als auch die neuesten Nachrichten zu
             veröffentlichen und zu archivieren.
         </para>
 
         <para>
-            Zusätzlich wurde angefordert, dass es der 'staff' Gruppe erlaubt sein soll, die
-            Nachrichten ansehen, aber nicht die neuesten Nachrichen überarbeiten zu können.
+            Zusätzlich wurde angefordert, dass es der Gruppe 'staff' erlaubt sein soll, die
+            Nachrichten ansehen, aber nicht die neuesten Nachrichten überarbeiten zu können.
             Letztendlich soll es für jeden (Administratoren eingeschlossen) unmöglich sein, irgend
             eine Bekanntmachung zu archivieren, da diese sowieso nur eine Lebensdauer von 1 bis 2
             Tagen haben.
@@ -36,13 +36,13 @@
 
         <para>
             Zuerst überarbeiten wir die Rollenregistrierung, um die Änderungen wider zu spiegeln.
-            Wir haben ermittelt, dass die 'marketing' Gruppe die selben grundlegenden Rechte wie
+            Wir haben ermittelt, dass die Gruppe 'marketing' dieselben grundlegenden Rechte wie
             'staff' hat, also definieren wir 'marketing' so, dass die Genehmigungen von 'staff'
             geerbt werden:
         </para>
 
         <programlisting language="php"><![CDATA[
-// Die neue Marketing Gruppe erbt Genehmigungen der Mitarbeiter
+// Die neue Gruppe Marketing erbt Genehmigungen der Mitarbeiter
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 ]]></programlisting>
 
@@ -90,7 +90,7 @@ $acl->deny(null, 'announcement', 'archive');
 ]]></programlisting>
 
         <para>
-            Wir können nun die <acronym>ACL</acronym> abfragen hinsichtlich der letzten Änderungen:
+            Wir können nun die <acronym>ACL</acronym> hinsichtlich der letzten Änderungen abfragen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -133,8 +133,8 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 
         <para>
             Um eine oder mehrere Zugangsregel von der <acronym>ACL</acronym> zu entfernen,
-            verwendet man einfach die vorhandenen <methodname>removeAllow()</methodname> oder
-            <methodname>removeDeny()</methodname> Methoden. Wie bei
+            verwendet man einfach die vorhandenen Methoden <methodname>removeAllow()</methodname>
+            oder <methodname>removeDeny()</methodname>. Wie bei
             <methodname>allow()</methodname> und <methodname>deny()</methodname> kann man den
             <constant>NULL</constant> Wert übergeben, um die Anwendung auf alle Rollen, Ressourcen
             und / oder Rechte anzuzeigen:
@@ -166,7 +166,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
 
         <para>
             Rechte können schrittweise wie oben angezeigt verändert werden, aber ein
-            <constant>NULL</constant> Wert für die Rechte überschreibt solche schrittweisen
+            <constant>NULL</constant>-Wert für die Rechte überschreibt solche schrittweisen
             Änderungen:
         </para>
 

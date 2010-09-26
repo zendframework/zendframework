@@ -32,7 +32,7 @@ use Zend\Search\Lucene;
  * @uses       \Zend\Search\Lucene\Search\Weight\AbstractWeight
  * @uses       \Zend\Search\Lucene\Index\Term
  * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
- * @uses       \Zend\Search\Lucene\IndexInterface
+ * @uses       \Zend\Search\Lucene\SearchIndex
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -44,7 +44,7 @@ class Term extends AbstractWeight
     /**
      * IndexReader.
      *
-     * @var \Zend\Search\Lucene\IndexInterface
+     * @var \Zend\Search\Lucene\SearchIndex
      */
     private $_reader;
 
@@ -83,11 +83,11 @@ class Term extends AbstractWeight
      *
      * @param \Zend\Search\Lucene\Index\Term                 $term
      * @param \Zend\Search\Lucene\Search\Query\AbstractQuery $query
-     * @param \Zend\Search\Lucene\IndexInterface             $reader
+     * @param \Zend\Search\Lucene\SearchIndex             $reader
      */
     public function __construct(Index\Term            $term,
                                 Query\AbstractQuery   $query,
-                                Lucene\IndexInterface $reader)
+                                Lucene\SearchIndex $reader)
     {
         $this->_term   = $term;
         $this->_query  = $query;

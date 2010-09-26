@@ -64,7 +64,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newCategory->scheme, 'http://schemas.google.com/g/2005#kind');
 
         /* try constructing using magic factory */
-        $app = new \Zend\GData\App\App();
+        $app = new \Zend\GData\App();
         $newCategory2 = $app->newCategory();
         $newCategory2->transferFromXML($newCategory->saveXML());
         $this->assertEquals(count($newCategory2->extensionElements), 1);

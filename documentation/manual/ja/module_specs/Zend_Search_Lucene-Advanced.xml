@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 20854 -->
 <sect1 id="zend.search.lucene.advanced">
     <title>応用</title>
 
@@ -54,7 +54,7 @@
 
         <para>
             変換作業を管理するために、対象となるインデックスフォーマットを
-            <code>$index->setFormatVersion()</code> で指定することができます。ここでは定数
+            <code>$index->setFormatVersion()</code> で指定できます。ここでは定数
             <constant>Zend_Search_Lucene::FORMAT_2_1</constant> あるいは <constant>Zend_Search_Lucene::FORMAT_2_3</constant>
             をパラメータとして使用します。
             <itemizedlist>

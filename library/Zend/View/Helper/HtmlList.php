@@ -21,17 +21,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper for ordered and unordered lists
  *
- * @uses       Zend_View_Exception
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Exception
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_HtmlList extends Zend_View_Helper_FormElement
+class HtmlList extends FormElement
 {
 
     /**
@@ -42,10 +47,14 @@ class Zend_View_Helper_HtmlList extends Zend_View_Helper_FormElement
      * @param array   $attribs Attributes for the ol/ul tag.
      * @return string The list XHTML.
      */
-    public function htmlList(array $items, $ordered = false, $attribs = false, $escape = true)
+    public function direct(array $items = null, $ordered = false, $attribs = false, $escape = true)
     {
+        if ($items == null) {
+            throw new \InvalidArgumentException('HTMLList: missing argument. $items is required in htmlList(array $items, $ordered = false, $attribs = false, $escape = true)');
+        }
+        
         if (!is_array($items)) {
-            $e = new Zend_View_Exception('First param must be an array');
+            $e = new \Zend\View\Exception('First param must be an array');
             $e->setView($this->view);
             throw $e;
         }
@@ -61,9 +70,9 @@ class Zend_View_Helper_HtmlList extends Zend_View_Helper_FormElement
             } else {
                 if (6 < strlen($list)) {
                     $list = substr($list, 0, strlen($list) - 6)
-                     . $this->htmlList($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                     . $this->direct($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 } else {
-                    $list .= '<li>' . $this->htmlList($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                    $list .= '<li>' . $this->direct($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 }
             }
         }

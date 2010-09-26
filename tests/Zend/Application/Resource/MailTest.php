@@ -20,17 +20,13 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_MailTest::main');
-}
+namespace ZendTest\Application\Resource;
 
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
+use Zend\Loader\Autoloader,
+    Zend\Application\Resource\Mail as MailResource,
+    Zend\Application,
+    Zend\Controller\Front as FrontController,
+    Zend\Mail\Mail;
 
 /**
  * @category   Zend
@@ -40,14 +36,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
+class MailResourceTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -58,17 +48,17 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
-        $this->application = new Zend_Application('testing');
-        $this->bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
+        $this->application = new Application\Application('testing');
+        $this->bootstrap = new Application\Bootstrap($this->application);
 
-        Zend_Controller_Front::getInstance()->resetInstance();
+        FrontController::getInstance()->resetInstance();
     }
 
     public function tearDown()
     {
-        Zend_Mail::clearDefaultTransport();
+        Mail::clearDefaultTransport();
         
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
@@ -81,27 +71,27 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesMailObject()
     {
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array('transport' => array('type' => 'sendmail')));
         $resource->init();
-        $this->assertTrue($resource->getMail() instanceof Zend_Mail_Transport_Abstract);
-        $this->assertTrue($resource->getMail() instanceof Zend_Mail_Transport_Sendmail);
+        $this->assertTrue($resource->getMail() instanceof \Zend\Mail\AbstractTransport);
+        $this->assertTrue($resource->getMail() instanceof \Zend\Mail\Transport\Sendmail);
     }
 
     public function testInitializationReturnsMailObject()
     {
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array('transport' => array('type' => 'sendmail')));
         $resource->init();
-        $this->assertTrue($resource->init() instanceof Zend_Mail_Transport_Abstract);
-        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);
+        $this->assertTrue($resource->init() instanceof \Zend\Mail\AbstractTransport);
+        $this->assertTrue(Mail::getDefaultTransport() instanceof \Zend\Mail\Transport\Sendmail);
     }
 
     public function testOptionsPassedToResourceAreUsedToInitializeMailTransportSmtp()
@@ -110,12 +100,12 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
         $options = array('transport' => array('type' => 'smtp',
                                               'host' => 'example.com',
                                               'register' => true));
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
         $resource->init();
-        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Smtp);
+        $this->assertTrue(Mail::getDefaultTransport() instanceof \Zend\Mail\Transport\Smtp);
     }
 
     public function testNotRegisteringTransport()
@@ -123,12 +113,12 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
         // If host option isn't passed on, an exception is thrown, making this test effective
         $options = array('transport' => array('type' => 'sendmail',
                                               'register' => false));
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
         $resource->init();
-        $this->assertNull(Zend_Mail::getDefaultTransport()); 
+        $this->assertNull(Mail::getDefaultTransport()); 
     }
     
     public function testDefaultFromAndReplyTo()
@@ -137,14 +127,14 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
                                                    'name' => 'Foo Bar'),
                          'defaultreplyto' => array('email' => 'john@example.com',
                                                    'name' => 'John Doe'));
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
         $resource->init();
-        $this->assertNull(Zend_Mail::getDefaultTransport());
-        $this->assertEquals($options['defaultfrom'], Zend_Mail::getDefaultFrom());
-        $this->assertEquals($options['defaultreplyto'], Zend_Mail::getDefaultReplyTo());
+        $this->assertNull(Mail::getDefaultTransport());
+        $this->assertEquals($options['defaultfrom'], Mail::getDefaultFrom());
+        $this->assertEquals($options['defaultreplyto'], Mail::getDefaultReplyTo());
     }
 
     /**
@@ -153,12 +143,12 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
     public function testDefaultTransport() {
         $options = array('transport' => array(//'type' => 'sendmail', // dont define type
                                               'register' => true)); 
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
         $resource->init();
-        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);        
+        $this->assertTrue(Mail::getDefaultTransport() instanceof \Zend\Mail\Transport\Sendmail);
     }
     
     /**
@@ -167,14 +157,14 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
     public function testDefaultsCaseSensivity() {
         $options = array('defaultFroM'    => array('email' => 'f00@example.com', 'name' => null),
                          'defAultReplyTo' => array('email' => 'j0hn@example.com', 'name' => null));
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
         $resource->init();
-        $this->assertNull(Zend_Mail::getDefaultTransport());
-        $this->assertEquals($options['defaultFroM'], Zend_Mail::getDefaultFrom());
-        $this->assertEquals($options['defAultReplyTo'], Zend_Mail::getDefaultReplyTo());
+        $this->assertNull(Mail::getDefaultTransport());
+        $this->assertEquals($options['defaultFroM'], Mail::getDefaultFrom());
+        $this->assertEquals($options['defAultReplyTo'], Mail::getDefaultReplyTo());
     }
     
     /**
@@ -183,41 +173,39 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
     public function testNumericRegisterDirectiveIsPassedOnCorrectly() {
         $options = array('transport' => array('type' => 'sendmail',
                                               'register' => '1')); // Culprit
-        $resource = new Zend_Application_Resource_Mail(array());
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
         $resource->init();
-        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);       
+        $this->assertTrue(Mail::getDefaultTransport() instanceof \Zend\Mail\Transport\Sendmail);       
     }
 
     /**
      * @group ZF-9136
      */
-    public function testCustomMailTransportWithFQName() {
-        $options = array('transport' => array('type' => 'Zend_Mail_Transport_Sendmail'));
-        $resource = new Zend_Application_Resource_Mail(array());
+    public function testCustomMailTransportWithFQName() 
+    {
+        $options = array('transport' => array('type' => 'Zend\Mail\Transport\Sendmail'));
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
-        $this->assertTrue($resource->init() instanceof Zend_Mail_Transport_Sendmail);
+        $this->assertTrue($resource->init() instanceof \Zend\Mail\Transport\Sendmail);
     }
 
     /**
      * @group ZF-9136
      */
-    public function testCustomMailTransportWithWrontCasesAsShouldBe() {
-        $options = array('transport' => array('type' => 'Zend_Application_Resource_mailTestCAsE'));
-        $resource = new Zend_Application_Resource_Mail(array());
+    public function testCustomMailTransportWithWrontCasesAsShouldBe() 
+    {
+        // Have to add an autoloader for ZendTest so that loadClass() can find it.
+        $this->autoloader->unshiftAutoloader('ZendTest_Autoloader', 'ZendTest');
+        $options = array('transport' => array('type' => 'ZendTest\\Application\\Resource\\mailTestCAsE'));
+        $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
-        $this->assertTrue($resource->init() instanceof Zend_Application_Resource_mailTestCAsE);
+        $this->assertTrue($resource->init() instanceof mailTestCAsE);
     }
-    
 }
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_MailTest::main') {
-    Zend_Application_Resource_MailTest::main();
-}
-

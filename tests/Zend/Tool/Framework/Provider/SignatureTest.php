@@ -21,13 +21,11 @@
  */
 
 /**
- * @see TestHelper.php
+ * @namespace
  */
-
-/**
- * @see Zend_Tool_Framework_Provider_Repository
- */
-
+namespace ZendTest\Tool\Framework\Provider;
+use Zend\Tool\Framework\Provider;
+use Zend\Tool\Framework\Action;
 
 /**
  * @category   Zend
@@ -40,7 +38,7 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Provider
  */
-class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestCase
+class SignatureTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_registry = null;
@@ -53,9 +51,9 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
     public function setup()
     {
         // setup the registry components required to test with
-        $this->_registry = new Zend_Tool_Framework_Registry();
-        $this->_registry->setActionRepository(new Zend_Tool_Framework_Action_Repository());
-        $this->_targetSignature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured());
+        $this->_registry = new \Zend\Tool\Framework\Registry\FrameworkRegistry();
+        $this->_registry->setActionRepository(new Action\Repository());
+        $this->_targetSignature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeatured());
         $this->_targetSignature->setRegistry($this->_registry);
         $this->_targetSignature->process();
     }
@@ -67,7 +65,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testSignatureCanBeCreatedFromProvider()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
         $signature->setRegistry($this->_registry);
         $signature->process();
         $signature->process();
@@ -76,7 +74,7 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testSignatureCanBeCreatedFromProviderWhenOverridingName()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured());
+        $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeatured());
         $signature->setRegistry($this->_registry);
         $signature->process();
         $this->assertEquals('FooBarBaz', $signature->getName());
@@ -84,18 +82,18 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testGetProviderReturnsProvider()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
         $signature->setRegistry($this->_registry);
         $signature->process();
-        $this->assertTrue($signature->getProvider() instanceof Zend_Tool_Framework_Provider_Asset_ProviderOne);
+        $this->assertTrue($signature->getProvider() instanceof \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne);
     }
 
     public function testGetProviderReflectionWillReturnZendReflectionClassObject()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderOne());
+        $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
         $signature->setRegistry($this->_registry);
         $signature->process();
-        $this->assertTrue($signature->getProviderReflection() instanceof Zend_Reflection_Class);
+        $this->assertTrue($signature->getProviderReflection() instanceof \Zend\Reflection\ReflectionClass);
     }
 
     public function testGetSpecialtiesReturnsParsedSpecialties()
@@ -105,28 +103,24 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
 
     public function testGetSpecialtiesReturnsParsedSpecialtiesFromMethodInsteadOfProperty()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeatured2());
+        $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeatured2());
         $signature->setRegistry($this->_registry);
         $signature->process();
         $this->assertEquals(array('_Global', 'Hi', 'BloodyMurder', 'ForYourTeam'), $signature->getSpecialties());
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Provider_Exception
-     */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadPropertyValue()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeaturedBadSpecialties());
+        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception');
+        $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeaturedBadSpecialties());
         $signature->setRegistry($this->_registry);
         $signature->process();
     }
 
-    /**
-     * @expectedException Zend_Tool_Framework_Provider_Exception
-     */
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadReturnValue()
     {
-        $signature = new Zend_Tool_Framework_Provider_Signature(new Zend_Tool_Framework_Provider_Asset_ProviderFullFeaturedBadSpecialties2());
+        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception');
+        $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeaturedBadSpecialties2());
         $signature->setRegistry($this->_registry);
         $signature->process();
     }
@@ -135,10 +129,10 @@ class Zend_Tool_Framework_Provider_SignatureTest extends PHPUnit_Framework_TestC
     {
         $actionArray = $this->_targetSignature->getActions();
         $action = array_shift($actionArray);
-        $this->assertTrue($action instanceof Zend_Tool_Framework_Action_Base);
+        $this->assertTrue($action instanceof Action\Base);
         $this->assertEquals('Say', $action->getName());
         $action = array_shift($actionArray);
-        $this->assertTrue($action instanceof Zend_Tool_Framework_Action_Base);
+        $this->assertTrue($action instanceof Action\Base);
         $this->assertEquals('Scream', $action->getName());
     }
 

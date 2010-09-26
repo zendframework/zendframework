@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Captcha;
+use Zend\View\View;
 
 /**
  * @category   Zend
@@ -47,7 +48,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
             unset($this->word);
         }
 
-        $this->element = new \Zend_Form_Element_Captcha(
+        $this->element = new \Zend\Form\Element\Captcha(
             'captchaF',
             array(
                 'captcha' => array(
@@ -66,7 +67,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new \Zend_View();
+        $view = new View();
         $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
@@ -92,7 +93,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
      */
     public function testLabelIdIsCorrect()
     {
-        $form = new \Zend_Form();
+        $form = new \Zend\Form\Form();
         $form->setElementsBelongTo('comment');
         $this->element->setLabel("My Captcha");
         $form->addElement($this->element);
@@ -208,7 +209,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesWordCaptchaDecoratorByDefault()
     {
-        $this->assertEquals('Captcha_Word', $this->element->getCaptcha()->getDecorator());
+        $this->assertEquals('Captcha\\Word', $this->element->getCaptcha()->getDecorator());
     }
 
     public function testCaptchaShouldBeConfigurableViaConfigObject()

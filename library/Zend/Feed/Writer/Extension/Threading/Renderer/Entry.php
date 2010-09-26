@@ -20,18 +20,19 @@
  */
  
 /**
- * @see Zend_Feed_Writer_Extension_RendererAbstract
- */
-require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
- 
+* @namespace
+*/
+namespace Zend\Feed\Writer\Extension\Threading\Renderer;
+use Zend\Feed\Writer\Extension;
+
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
-    extends Zend_Feed_Writer_Extension_RendererAbstract
+* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Entry extends Extension\AbstractRenderer
 {
 
     /**
@@ -79,7 +80,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
+    protected function _setCommentLink(\DOMDocument $dom, \DOMElement $root)
     {
         $link = $this->getDataContainer()->getCommentLink();
         if (!$link) {
@@ -90,7 +91,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
         $clink->setAttribute('type', 'text/html');
         $clink->setAttribute('href', $link);
         $count = $this->getDataContainer()->getCommentCount();
-        if (!is_null($count)) {
+        if ($count !== null) {
             $clink->setAttribute('thr:count', $count);
         }
         $root->appendChild($clink);
@@ -104,7 +105,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
+    protected function _setCommentFeedLinks(\DOMDocument $dom, \DOMElement $root)
     {
         $links = $this->getDataContainer()->getCommentFeedLinks();
         if (!$links || empty($links)) {
@@ -116,7 +117,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
             $flink->setAttribute('type', 'application/'. $link['type'] .'+xml');
             $flink->setAttribute('href', $link['uri']);
             $count = $this->getDataContainer()->getCommentCount();
-            if (!is_null($count)) {
+            if ($count !== null) {
                 $flink->setAttribute('thr:count', $count);
             }
             $root->appendChild($flink);
@@ -131,10 +132,10 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
+    protected function _setCommentCount(\DOMDocument $dom, \DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
-        if (is_null($count)) {
+        if ($count === null) {
             return;
         }
         $tcount = $this->_dom->createElement('thr:total');

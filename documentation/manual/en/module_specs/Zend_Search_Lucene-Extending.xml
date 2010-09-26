@@ -185,8 +185,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
             The <code>ShortWords</code> and <code>StopWords</code> filters may be used with
             pre-defined or custom analyzers like this:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
     new Zend_Search_Lucene_Analysis_TokenFilter_StopWords($stopWords);
@@ -197,7 +198,8 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-            <programlisting language="php"><![CDATA[
+
+        <programlisting language="php"><![CDATA[
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
 $analyzer =
@@ -206,13 +208,13 @@ $analyzer->addFilter($shortWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-        </para>
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> constructor
             takes an array of stop-words as an input. But stop-words may be also loaded from a file:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
 
@@ -223,6 +225,7 @@ $analyzer->addFilter($stopWordsFilter);
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
 
+        <para>
             This file should be a common text file with one word in each line. The '#' character
             marks a line as a comment.
         </para>

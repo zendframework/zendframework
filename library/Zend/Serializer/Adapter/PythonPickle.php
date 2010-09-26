@@ -107,11 +107,6 @@ class PythonPickle extends AbstractAdapter
     const OP_SHORT_BINBYTES  = 'C';     //  "     "   ;    "      "       "      " < 256 bytes
 
     /**
-     * @var bool Whether or not this is a PHP 6 binary
-     */
-    protected static $_isPhp6 = null;
-
-    /**
      * @var bool Whether or not the system is little-endian
      */
     protected static $_isLittleEndian = null;
@@ -161,9 +156,6 @@ class PythonPickle extends AbstractAdapter
         // init
         if (self::$_isLittleEndian === null) {
             self::$_isLittleEndian = (pack('l', 1) === "\x01\x00\x00\x00");
-        }
-        if (self::$_isPhp6 === null) {
-            self::$_isPhp6 = !version_compare(PHP_VERSION, '6.0.0', '<');
         }
 
         $this->_marker = new \stdClass();
@@ -441,7 +433,7 @@ class PythonPickle extends AbstractAdapter
      */
     protected function _writeString($value)
     {
-        if ( ($id=$this->_searchMomo($value)) !== false ) {
+        if ( ($id=$this->_searchMemo($value)) !== false ) {
             $this->_writeGet($id);
             return;
         }
@@ -463,24 +455,24 @@ class PythonPickle extends AbstractAdapter
             $this->_pickle .= self::OP_STRING . $this->_quoteString($value) . "\r\n";
         }
 
-        $this->_momorize($value);
+        $this->_memorize($value);
     }
 
     /**
      * Write an associative array value as dictionary
      *
-     * @param  array $value
+     * @param  array|Traversable $value
      * @return void
      */
-    protected function _writeArrayDict(array $value)
+    protected function _writeArrayDict($value)
     {
-        if (($id=$this->_searchMomo($value)) !== false) {
-            $this->_writeGet($id);;
+        if (($id=$this->_searchMemo($value)) !== false) {
+            $this->_writeGet($id);
             return;
         }
 
         $this->_pickle .= self::OP_MARK . self::OP_DICT;
-        $this->_momorize($value);
+        $this->_memorize($value);
 
         foreach ($value as $k => $v) {
             $this->_pickle .= $this->_write($k)
@@ -497,15 +489,15 @@ class PythonPickle extends AbstractAdapter
      */
     protected function _writeArrayList(array $value)
     {
-        if (($id = $this->_searchMomo($value)) !== false) {
+        if (($id = $this->_searchMemo($value)) !== false) {
             $this->_writeGet($id);
             return;
         }
 
         $this->_pickle .= self::OP_MARK . self::OP_LIST;
-        $this->_momorize($value);
+        $this->_memorize($value);
 
-        foreach ($value as $k => $v) {
+        foreach ($value as $v) {
             $this->_pickle .= $this->_write($v) . self::OP_APPEND;
         }
     }
@@ -518,8 +510,25 @@ class PythonPickle extends AbstractAdapter
      */
     protected function _writeObject($value)
     {
-        // can't serialize php objects to python objects yet
-        $this->_writeArrayDict(get_object_vars($value));
+        // The main differences between a SplFixedArray and a normal PHP array is
+        // that the SplFixedArray is of fixed length and allows only integers
+        // within the range as indexes.
+        if ($value instanceof \SplFixedArray) {
+            $this->_writeArrayList($value->toArray());
+
+        // Use the object method toArray if available
+        } elseif (method_exists($value, 'toArray')) {
+            $this->_writeArrayDict($value->toArray());
+
+        // If the object is an iterator simply iterate it
+        // and convert it to an dictionary
+        } elseif ($value instanceof \Traversable) {
+            $this->_writeArrayDict($value);
+
+        // other objects are simply converted by using its properties
+        } else {
+            $this->_writeArrayDict(get_object_vars($value));
+        }
     }
 
     /**
@@ -540,7 +549,7 @@ class PythonPickle extends AbstractAdapter
      * @param mixed $value
      * @return void
      */
-    protected function _momorize($value)
+    protected function _memorize($value)
     {
         $id = count($this->_memo);
         $this->_memo[$id] = $value;
@@ -548,12 +557,12 @@ class PythonPickle extends AbstractAdapter
     }
 
     /**
-     * Search a value in the meno and return  the id
+     * Search a value in the memo and return  the id
      *
      * @param  mixed $value
      * @return int|false The id or false
      */
-    protected function _searchMomo($value)
+    protected function _searchMemo($value)
     {
         return array_search($value, $this->_memo, true);
     }
@@ -1100,10 +1109,6 @@ class PythonPickle extends AbstractAdapter
         $pattern = '/\\\\u([a-fA-F0-9]{4})/u'; // \uXXXX
         $data    = preg_replace_callback($pattern, array($this, '_convertMatchingUnicodeSequence2Utf8'), $data);
 
-        if (self::$_isPhp6) {
-            $data = unicode_decode($data, 'UTF-8');
-        }
-
         $this->_stack[] = $data;
     }
 
@@ -1167,10 +1172,6 @@ class PythonPickle extends AbstractAdapter
         }
         list(, $n) = unpack('l', $n);
         $data      = $this->_read($n);
-
-        if (self::$_isPhp6) {
-            $data = unicode_decode($data, 'UTF-8');
-        }
 
         $this->_stack[] = $data;
     }

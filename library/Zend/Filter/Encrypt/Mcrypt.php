@@ -90,6 +90,11 @@ class Mcrypt implements EncryptionAlgorithm
             unset($options['compress']);
         }
 
+        if (array_key_exists('compression', $options)) {
+            $this->setCompression($options['compression']);
+            unset($options['compress']);
+        }
+
         $this->setEncryption($options);
     }
 

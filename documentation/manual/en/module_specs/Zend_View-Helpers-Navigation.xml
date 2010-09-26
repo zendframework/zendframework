@@ -186,8 +186,9 @@
 
         <listitem>
             <para>
-                <methodname>htmlify()</methodname> renders an <emphasis>'a'</emphasis> HTML
-                element from a <classname>Zend_Navigation_Page</classname> instance.
+                <methodname>htmlify()</methodname> renders an <emphasis>'a'</emphasis>
+                <acronym>HTML</acronym> element from a <classname>Zend_Navigation_Page</classname>
+                instance.
             </para>
         </listitem>
 
@@ -779,14 +780,14 @@ Products, Foo Server, FAQ
         <title>Links Helper</title>
 
         <para>
-            The links helper is used for rendering HTML <constant>LINK</constant>
+            The links helper is used for rendering <acronym>HTML</acronym> <constant>LINK</constant>
             elements. Links are used for describing document relationships
             of the currently active page. Read more about links and link
             types at <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Document
                 relationships: the LINK element (HTML4 W3C Rec.)</ulink>
             and <ulink
                 url="http://www.w3.org/TR/html4/types.html#h-6.12">Link types (HTML4 W3C
-                Rec.)</ulink> in the HTML4 W3C Recommendation.
+                Rec.)</ulink> in the <acronym>HTML</acronym>4 W3C Recommendation.
         </para>
 
         <para>
@@ -1040,7 +1041,7 @@ Products, Foo Server, FAQ
 
         <para>
             The constants from <constant>RENDER_ALTERNATE</constant> to
-            <constant>RENDER_BOOKMARK</constant> denote standard HTML link types.
+            <constant>RENDER_BOOKMARK</constant> denote standard <acronym>HTML</acronym> link types.
             <constant>RENDER_CUSTOM</constant> denotes non-standard relations that
             specified in pages. <constant>RENDER_ALL</constant> denotes standard and
             non-standard relations.
@@ -1230,7 +1231,7 @@ Output:
         <para>
             The Menu helper is used for rendering menus from navigation
             containers. By default, the menu will be rendered using
-            HTML <code>UL</code> and <code>LI</code> tags, but the helper also
+            <acronym>HTML</acronym> <code>UL</code> and <code>LI</code> tags, but the helper also
             allows using a partial view script.
         </para>
 
@@ -1294,7 +1295,7 @@ Output:
                 <para>
                     <methodname>renderMenu($container = null, $options = array())</methodname>
                     is the default render method, and will render a container as
-                    a HTML <code>UL</code> list.
+                    a <acronym>HTML</acronym> <code>UL</code> list.
                 </para>
 
                 <para>

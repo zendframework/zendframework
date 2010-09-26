@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon;
+use Zend\Service\Amazon;
 
 /**
  * Test helper
@@ -55,7 +60,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
-class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
+class OfflineTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Reference to Amazon service consumer object
@@ -78,9 +83,9 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_amazon = new Zend_Service_Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
+        $this->_amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
 
-        $this->_httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
+        $this->_httpClientAdapterTest = new \Zend\HTTP\Client\Adapter\Test();
     }
 
     /**
@@ -91,9 +96,9 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
     public function testConstructExceptionCountryCodeInvalid()
     {
         try {
-            $amazon = new Zend_Service_Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 'oops');
+            $amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 'oops');
             $this->fail('Expected Zend_Service_Exception not thrown');
-        } catch (Zend_Service_Exception $e) {
+        } catch (\Zend\Service\Exception $e) {
             $this->assertContains('Unknown country code', $e->getMessage());
         }
     }
@@ -103,8 +108,8 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
      */
     public function testMozardSearchFromFile()
     {
-        $xml = file_get_contents(dirname(__FILE__)."/_files/mozart_result.xml");
-        $dom = new DOMDocument();
+        $xml = file_get_contents(__DIR__."/_files/mozart_result.xml");
+        $dom = new \DOMDocument();
         $dom->loadXML($xml);
 
         $mozartTracks = array(
@@ -120,7 +125,7 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
             'B00004SA87' => '42',
         );
 
-        $result = new Zend_Service_Amazon_ResultSet($dom);
+        $result = new Amazon\ResultSet($dom);
 
         foreach($result AS $item) {
             $trackCount = $mozartTracks[$item->ASIN];
@@ -133,12 +138,12 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
      */
     public function testSimilarProductConstructorMissingAttributeDoesNotThrowNotice()
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $asin = $dom->createElement("ASIN", "TEST");
         $product = $dom->createElement("product");
         $product->appendChild($asin);
 
-        $similarproduct = new Zend_Service_Amazon_SimilarProduct($product);
+        $similarproduct = new Amazon\SimilarProduct($product);
     }
 
     /**
@@ -146,8 +151,8 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
      */
     public function testFullOffersFromFile()
     {
-        $xml = file_get_contents(dirname(__FILE__)."/_files/offers_with_names.xml");
-        $dom = new DOMDocument();
+        $xml = file_get_contents(__DIR__."/_files/offers_with_names.xml");
+        $dom = new \DOMDocument();
         $dom->loadXML($xml);
 
         $dataExpected = array(
@@ -241,7 +246,7 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
             ),
         );
 
-        $result = new Zend_Service_Amazon_ResultSet($dom);
+        $result = new Amazon\ResultSet($dom);
 
         foreach($result AS $item) {
             $data = $dataExpected[$item->ASIN];
@@ -312,14 +317,60 @@ class Zend_Service_Amazon_OfflineTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             $expectedStringToSign,
-            Zend_Service_Amazon::buildRawSignature($baseUri, $params)
+            Amazon\Amazon::buildRawSignature($baseUri, $params)
         );
 
         $this->assertEquals(
             $expectedSignature,
-            rawurlencode(Zend_Service_Amazon::computeSignature(
+            rawurlencode(Amazon\Amazon::computeSignature(
                 $baseUri, '1234567890', $params
             ))
         );
+    }
+    
+	/**
+     * Testing if Amazon service component can handle return values where the
+     * item-list is not empty
+     * 
+     * @group ZF-9547
+     */
+    public function testAmazonComponentHandlesValidBookResults()
+    {
+    	$xml = file_get_contents(__DIR__."/_files/amazon-response-valid.xml");
+        $dom = new DOMDocument();
+        $dom->loadXML($xml);
+        
+    	$result = new Zend_Service_Amazon_ResultSet($dom);
+
+    	$currentItem = null;
+    	try {
+    		$currentItem = $result->current();
+    	} catch (Zend_Service_Amazon_Exception $e) {
+    		$this->fail('Unexpected exception was triggered');
+    	}
+    	$this->assertType('Zend_Service_Amazon_Item', $currentItem);
+    	$this->assertEquals('0754512673', $currentItem->ASIN);
+    }
+    
+    /**
+     * Testing if Amazon service component can handle return values where the
+     * item-list is empty (no results found)
+     * 
+     * @group ZF-9547
+     */
+    public function testAmazonComponentHandlesEmptyBookResults()
+    {
+    	$xml = file_get_contents(__DIR__."/_files/amazon-response-invalid.xml");
+        $dom = new DOMDocument();
+        $dom->loadXML($xml);
+        
+    	$result = new Zend_Service_Amazon_ResultSet($dom);
+
+    	try {
+    		$result->current();
+    		$this->fail('Expected exception was not triggered');
+    	} catch (Zend_Service_Amazon_Exception $e) {
+			return;
+    	}
     }
 }

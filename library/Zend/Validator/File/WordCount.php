@@ -50,7 +50,7 @@ class WordCount extends Count
     protected $_messageTemplates = array(
         self::TOO_MUCH => "Too much words, maximum '%max%' are allowed but '%count%' were counted",
         self::TOO_LESS => "Too less words, minimum '%min%' are expected but '%count%' were counted",
-        self::NOT_FOUND => "File '%value%' could not be found",
+        self::NOT_FOUND => "File '%value%' is not readable or does not exist",
     );
 
     /**

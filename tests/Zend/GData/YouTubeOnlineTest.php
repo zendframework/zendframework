@@ -50,7 +50,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $this->pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
         $this->subscriptionTypeSchema = 'http://gdata.youtube.com/schemas/' .
             '2007/subscriptiontypes.cat';
-        $this->gdata = new YouTube\YouTube();
+        $this->gdata = new YouTube();
     }
 
     public function tearDown()
@@ -148,7 +148,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
     public function testRetrieveAndUpdatePlaylistList()
     {
 
-        $service = YouTube\YouTube::AUTH_SERVICE_NAME;
+        $service = YouTube::AUTH_SERVICE_NAME;
         $authenticationURL= 'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
                                           $username = $this->user,
@@ -160,7 +160,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
                                           $loginCaptcha = null,
                                           $authenticationURL);
 
-        $this->gdata = new YouTube\YouTube($httpClient,
+        $this->gdata = new YouTube($httpClient,
             'Google-UnitTests-1.0', 'ytapi-gdataops-12345-u78960r7-0',
             'AI39si6c-ZMGFZ5fkDAEJoCNHP9LOM2LSO1XuycZF7Eyu1IuvkioESq' .
             'zRcf3voDLymIUGIrxdMx2aTufdbf5D7E51NyLYyfeaw');
@@ -314,7 +314,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testAddUpdateAndDeletePlaylistV2()
     {
-        $service = YouTube\YouTube::AUTH_SERVICE_NAME;
+        $service = YouTube::AUTH_SERVICE_NAME;
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
@@ -327,7 +327,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
                                           $loginCaptcha = null,
                                           $authenticationURL);
 
-        $yt = new YouTube\YouTube(
+        $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
             'ytapi-gdataops-12345-u78960r7-0',
             'AI39si6c-ZMGFZ5fkDAEJoCNHP9LOM2LSO1XuycZF7E' .
@@ -397,7 +397,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testAddAndDeleteSubscriptionToChannelV2()
     {
-        $service = YouTube\YouTube::AUTH_SERVICE_NAME;
+        $service = YouTube::AUTH_SERVICE_NAME;
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
@@ -410,7 +410,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
                                           $loginCaptcha = null,
                                           $authenticationURL);
 
-        $yt = new YouTube\YouTube(
+        $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
             'ytapi-gdataops-12345-u78960r7-0',
             'AI39si6c-ZMGFZ5fkDAEJoCNHP9LOM2LSO1XuycZF7E' .
@@ -492,7 +492,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testAddAndDeleteSubscriptionToFavoritesV2()
     {
-        $service = YouTube\YouTube::AUTH_SERVICE_NAME;
+        $service = YouTube::AUTH_SERVICE_NAME;
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
@@ -505,7 +505,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
                                           $loginCaptcha = null,
                                           $authenticationURL);
 
-        $yt = new YouTube\YouTube(
+        $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
             'ytapi-gdataops-12345-u78960r7-0',
             'AI39si6c-ZMGFZ5fkDAEJoCNHP9LOM2LSO1XuycZF7E' .
@@ -587,7 +587,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testAddAndDeleteSubscriptionToPlaylistV2()
     {
-        $service = YouTube\YouTube::AUTH_SERVICE_NAME;
+        $service = YouTube::AUTH_SERVICE_NAME;
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
@@ -600,7 +600,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
                                           $loginCaptcha = null,
                                           $authenticationURL);
 
-        $yt = new YouTube\YouTube(
+        $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
             'ytapi-gdataops-12345-u78960r7-0',
             'AI39si6c-ZMGFZ5fkDAEJoCNHP9LOM2LSO1XuycZF7E' .
@@ -685,7 +685,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $developerKey = constant('TESTS_ZEND_GDATA_YOUTUBE_DEVELOPER_KEY');
         $clientId = constant('TESTS_ZEND_GDATA_YOUTUBE_CLIENT_ID');
 
-        $service = YouTube\YouTube::AUTH_SERVICE_NAME;
+        $service = YouTube::AUTH_SERVICE_NAME;
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
@@ -698,7 +698,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
                                           $loginCaptcha = null,
                                           $authenticationURL);
 
-        $yt = new YouTube\YouTube($httpClient, 'Google-UnitTests-1.0', $clientId, $developerKey);
+        $yt = new YouTube($httpClient, 'Google-UnitTests-1.0', $clientId, $developerKey);
 
         $yt->setMajorProtocolVersion(2);
         $queryStringToSubscribeTo = 'zend';
@@ -792,7 +792,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
 
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
         $youtube->setMajorProtocolVersion(2);
 
@@ -806,7 +806,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
     public function testExceptionIfNotUsingDeveloperKey()
     {
         $exceptionThrown = false;
-        $youtube = new YouTube\YouTube();
+        $youtube = new YouTube();
         $youtube->setMajorProtocolVersion(2);
         try {
             $youtube->getActivityForUser($this->ytAccount);
@@ -828,7 +828,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
 
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
         $youtube->setMajorProtocolVersion(2);
 
@@ -850,7 +850,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
 
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
         $youtube->setMajorProtocolVersion(2);
 
@@ -865,7 +865,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
    {
         $exceptionThrown = false;
         $listOfMoreThan20Users = null;
-        $youtube = new YouTube\YouTube();
+        $youtube = new YouTube();
         $youtube->setMajorProtocolVersion(2);
 
         for ($x = 0;  $x < 30; $x++) {
@@ -895,7 +895,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
 
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
 
         $inboxFeed = $youtube->getInboxFeedForCurrentUser();
@@ -921,7 +921,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
 
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
         $youtube->setMajorProtocolVersion(2);
 
@@ -947,7 +947,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
 
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
         $youtube->setMajorProtocolVersion(2);
 
@@ -975,7 +975,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
 
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
         $youtube->setMajorProtocolVersion(1);
 
@@ -995,7 +995,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
     public function testThrowExceptionOnSendingMessageWithoutVideo()
     {
         $exceptionCaught = false;
-        $this->gdata = new YouTube\YouTube();
+        $this->gdata = new YouTube();
         try {
             $this->gdata->sendVideoMessage('Should fail', null, null, 'foo');
         } catch (App\InvalidArgumentException $e) {
@@ -1012,7 +1012,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $client = GData\ClientLogin::getHttpClient(
             $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
             'https://www.google.com/youtube/accounts/ClientLogin');
-        $youtube = new YouTube\YouTube($client, 'ZF_UnitTest',
+        $youtube = new YouTube($client, 'ZF_UnitTest',
             $clientId, $developerKey);
         $youtube->setMajorProtocolVersion(2);
 

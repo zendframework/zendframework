@@ -414,8 +414,8 @@ echo "hometown: " . $userProfile->hometown->text . "\n";
                 url="http://code.google.com/apis/youtube/developers_guide_protocol.html#Process_Flows_for_Uploading_Videos">protocol
                 guide</ulink> on code.google.com for a high-level
             overview of the upload process. Uploading videos can be done in one of
-            two ways: either by uploading the video directly or by sending just the
-            video meta-data and having a user upload the video through an HTML form.
+            two ways: either by uploading the video directly or by sending just the video
+            meta-data and having a user upload the video through an <acronym>HTML</acronym> form.
         </para>
 
         <para>
@@ -570,7 +570,8 @@ try {
             object to the <ulink
                 url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
             you are constructing. Instead you simply submit all of your video's meta-data to receive
-            back a token element which can be used to construct an HTML upload form.
+            back a token element which can be used to construct an <acronym>HTML</acronym> upload
+            form.
         </para>
 
         <example id="zend.gdata.youtube.uploads.browser.example-1">
@@ -596,8 +597,8 @@ $postUrl = $tokenArray['url'];
 
         <para>
             The above code prints out a link and a token that is used to construct an
-            HTML form to display in the user's browser. A simple example form is shown
-            below with $tokenValue representing the content of the returned token element,
+            <acronym>HTML</acronym> form to display in the user's browser. A simple example form is
+            shown below with $tokenValue representing the content of the returned token element,
             as shown being retrieved from $myVideoEntry above. In order for the user
             to be redirected to your website after submitting the form, make sure to
             append a $nextUrl parameter to the $postUrl above, which functions in the

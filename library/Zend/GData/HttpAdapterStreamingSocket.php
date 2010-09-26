@@ -25,14 +25,14 @@
  * @namespace
  */
 namespace Zend\GData;
-use Zend\HTTP\Client\Adapter;
+use Zend\Http\Client\Adapter;
 
 /**
  * Extends the default HTTP adapter to handle streams instead of discrete body
  * strings.
  *
- * @uses       \Zend\HTTP\Client\Adapter\Exception
- * @uses       \Zend\HTTP\Client\Adapter\Socket
+ * @uses       \Zend\Http\Client\Adapter\Exception
+ * @uses       \Zend\Http\Client\Adapter\Socket
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

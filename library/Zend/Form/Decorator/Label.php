@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Zend_Form_Decorator_Label
  *
  * Accepts the options:
@@ -33,9 +38,9 @@
  *
  * Any other options passed will be used as HTML attributes of the label tag.
  *
- * @uses       Zend_Form_Decorator_Abstract
- * @uses       Zend_Form_Decorator_HtmlTag
- * @uses       Zend_Form_Exception
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
+ * @uses       \Zend\Form\Decorator\HtmlTag
+ * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -43,7 +48,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
+class Label extends AbstractDecorator
 {
     /**
      * Default placement: prepend
@@ -61,7 +66,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
      * Set element ID
      *
      * @param  string $id
-     * @return Zend_Form_Decorator_Label
+     * @return \Zend\Form\Decorator\Label
      */
     public function setId($id)
     {
@@ -94,7 +99,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
      * Set HTML tag with which to surround label
      *
      * @param  string $tag
-     * @return Zend_Form_Decorator_Label
+     * @return \Zend\Form\Decorator\Label
      */
     public function setTag($tag)
     {
@@ -190,7 +195,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws Zend_Form_Exception for unsupported methods
+     * @throws \Zend\Form\Exception for unsupported methods
      */
     public function __call($method, $args)
     {
@@ -209,13 +214,13 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
                     $key = 'optional' . $position;
                     break;
                 default:
-                    throw new Zend_Form_Exception(sprintf('Invalid method "%s" called in Label decorator, and detected as type %s', $method, $type));
+                    throw new Exception(sprintf('Invalid method "%s" called in Label decorator, and detected as type %s', $method, $type));
             }
 
             switch ($head) {
                 case 'set':
                     if (0 === count($args)) {
-                        throw new Zend_Form_Exception(sprintf('Method "%s" requires at least one argument; none provided', $method));
+                        throw new Exception(sprintf('Method "%s" requires at least one argument; none provided', $method));
                     }
                     $value = array_shift($args);
                     $this->$key = $value;
@@ -233,7 +238,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
             }
         }
 
-        throw new Zend_Form_Exception(sprintf('Invalid method "%s" called in Label decorator', $method));
+        throw new Exception(sprintf('Invalid method "%s" called in Label decorator', $method));
     }
 
     /**
@@ -307,13 +312,13 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
             $options['class'] = $class;
             $label = $view->formLabel($element->getFullyQualifiedName(), trim($label), $options);
         } else {
-            $label = '&nbsp;';
+            $label = '&#160;';
         }
 
         if (null !== $tag) {
-            $decorator = new Zend_Form_Decorator_HtmlTag();
+            $decorator = new HtmlTag();
             $decorator->setOptions(array('tag' => $tag,
-                                         'id'  => $this->getElement()->getName() . '-label'));
+                                         'id'  => $id . '-label'));
 
             $label = $decorator->render($label);
         }

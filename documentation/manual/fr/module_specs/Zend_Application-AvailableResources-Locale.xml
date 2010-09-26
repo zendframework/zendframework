@@ -114,7 +114,7 @@
             </para>
 
             <programlisting language="ini"><![CDATA[
-; tentative de détection automaitque,
+; tentative de détection automatique,
 ; si impossible alors on prend fr_FR.
 resources.locale.default = "fr_FR"
 ]]></programlisting>

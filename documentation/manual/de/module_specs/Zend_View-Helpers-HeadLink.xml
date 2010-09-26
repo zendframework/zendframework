@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink Helfer</title>
 
     <para>
-        Das HTML <emphasis>&lt;link&gt;</emphasis> Element wird immer mehr für das Verlinken einer
-        Vielzahl von Ressourcen der eigenen Site verwendet: Stylesheets, Feeds, FavIcons,
-        Trackbacks, und andere. Der <classname>HeadLink</classname> Helfer bietet ein einfaches
-        Interface für die Erstellung und das Anhäufen dieser Elemente für das spätere Empfangen und
-        deren Ausgabe im eigenen Layout Skript.
+        Das <acronym>HTML</acronym> <emphasis>&lt;link&gt;</emphasis> Element wird immer mehr für
+        das Verlinken einer Vielzahl von Ressourcen der eigenen Site verwendet: Stylesheets, Feeds,
+        FavIcons, Trackbacks, und andere. Der <classname>HeadLink</classname> Helfer bietet ein
+        einfaches Interface für die Erstellung und das Anhäufen dieser Elemente für das spätere
+        Empfangen und deren Ausgabe im eigenen Layout Skript.
     </para>
 
     <para>

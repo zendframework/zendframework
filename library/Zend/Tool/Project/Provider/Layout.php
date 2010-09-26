@@ -21,20 +21,25 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Provider_Pretendable
- * @uses       Zend_Tool_Project_Exception
- * @uses       Zend_Tool_Project_Provider_Abstract
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+
+/**
+ * @uses       \Zend\Tool\Framework\Provider\Pretendable
+ * @uses       \Zend\Tool\Project\Exception
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Layout 
-    extends Zend_Tool_Project_Provider_Abstract 
-    implements Zend_Tool_Framework_Provider_Pretendable
+class Layout 
+    extends AbstractProvider 
+    implements \Zend\Tool\Framework\Provider\Pretendable
 {
     
-    public static function createResource(Zend_Tool_Project_Profile $profile, $layoutName = 'layout')
+    public static function createResource(\Zend\Tool\Project\Profile $profile, $layoutName = 'layout')
     {
         $applicationDirectory = $profile->search('applicationDirectory');
         $layoutDirectory = $applicationDirectory->search('layoutsDirectory');
@@ -65,7 +70,7 @@ class Zend_Tool_Project_Provider_Layout
         $applicationConfigResource = $profile->search('ApplicationConfigFile');
 
         if (!$applicationConfigResource) {
-            throw new Zend_Tool_Project_Exception('A project with an application config file is required to use this provider.');
+            throw new \Zend\Tool\Project\Exception('A project with an application config file is required to use this provider.');
         }
         
         $zc = $applicationConfigResource->getAsZendConfig();

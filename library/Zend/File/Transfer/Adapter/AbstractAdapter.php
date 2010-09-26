@@ -23,16 +23,20 @@
  * @namespace
  */
 namespace Zend\File\Transfer\Adapter;
-use Zend\File\Transfer;
-use Zend\Validator;
-use Zend\Filter;
+
+use Zend\File\Transfer,
+    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
+    Zend\Validator,
+    Zend\Filter;
 
 /**
  * Abstract class for file transfers (Downloads and Uploads)
  *
  * @uses      finfo
  * @uses      \Zend\File\Transfer\Exception
- * @uses      \Zend\Loader\PluginLoader\PluginLoader
+ * @uses      \Zend\Loader\PluginLoader
  * @category  Zend
  * @package   Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -44,7 +48,7 @@ abstract class AbstractAdapter
      * Plugin loader Constants
      */
     const FILTER    = 'FILTER';
-    const VALIDATOR  = 'VALIDATOR';
+    const VALIDATOR = 'VALIDATOR';
     /**@-*/
 
     /**
@@ -188,12 +192,12 @@ abstract class AbstractAdapter
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'filter', or 'validator'
      * @return \Zend\File\Transfer\Adapter\AbstractAdapter
      * @throws \Zend\File\Transfer\Exception on invalid type
      */
-    public function setPluginLoader(\Zend\Loader\PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(ShortNameLocater $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -213,7 +217,7 @@ abstract class AbstractAdapter
      * 'filter' or 'validator' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\PluginLoader\PluginLoader
+     * @return \Zend\Loader\ShortNameLocater
      * @throws \Zend\File\Transfer\Exception on invalid type.
      */
     public function getPluginLoader($type)
@@ -226,16 +230,18 @@ abstract class AbstractAdapter
                 $pathSegment   = $prefixSegment;
                 if (!isset($this->_loaders[$type])) {
                     $paths         = array(
-                        'Zend\\' . $prefixSegment . '\\'     => 'Zend/' . $pathSegment . '/',
-                        'Zend\\' . $prefixSegment . '\\File' => 'Zend/' . $pathSegment . '/File',
+                        'Zend\\' . $prefixSegment . '\\'    => 'Zend/' . $pathSegment . '/',
+                        'Zend\\' . $prefixSegment . '\File' => 'Zend/' . $pathSegment . '/File',
                     );
 
-                    $this->_loaders[$type] = new \Zend\Loader\PluginLoader\PluginLoader($paths);
+                    $this->_loaders[$type] = new PluginLoader($paths);
                 } else {
                     $loader = $this->_loaders[$type];
-                    $prefix = 'Zend\\' . $prefixSegment . '\\File\\';
-                    if (!$loader->getPaths($prefix)) {
-                        $loader->addPrefixPath($prefix, str_replace('_', '/', $prefix));
+                    if ($loader instanceof PrefixPathMapper) {
+                        $prefix = 'Zend\\' . $prefixSegment . '\File\\';
+                        if (!$loader->getPaths($prefix)) {
+                            $loader->addPrefixPath($prefix, str_replace('_', '/', $prefix));
+                        }
                     }
                 }
                 return $this->_loaders[$type];
@@ -262,22 +268,26 @@ abstract class AbstractAdapter
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
-        $type = strtoupper($type);
+        $type = (null === $type) ? null : strtoupper($type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATOR:
                 $loader = $this->getPluginLoader($type);
-                $loader->addPrefixPath($prefix, $path);
+                if ($loader instanceof PrefixPathMapper) {
+                    $loader->addPrefixPath($prefix, $path);
+                }
                 return $this;
             case null:
                 $prefix = rtrim($prefix, '\\');
                 $path   = rtrim($path, DIRECTORY_SEPARATOR);
                 foreach (array(self::FILTER, self::VALIDATOR) as $type) {
-                    $cType        = ucfirst(strtolower($type));
-                    $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
-                    $pluginPrefix = $prefix . '\\' . $cType;
                     $loader       = $this->getPluginLoader($type);
-                    $loader->addPrefixPath($pluginPrefix, $pluginPath);
+                    if ($loader instanceof PrefixPathMapper) {
+                        $cType        = ucfirst(strtolower($type));
+                        $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
+                        $pluginPrefix = $prefix . '\\' . $cType;
+                        $loader->addPrefixPath($pluginPrefix, $pluginPath);
+                    }
                 }
                 return $this;
             default:
@@ -360,7 +370,14 @@ abstract class AbstractAdapter
         $this->_break[$name]      = $breakChainOnFailure;
         $files                    = $this->_getFiles($files, true, true);
         foreach ($files as $file) {
-            $this->_files[$file]['validators'][] = $name;
+            if ($name == 'NotEmpty') {
+                $temp = $this->_files[$file]['validators'];
+                $this->_files[$file]['validators']  = array($name);
+                $this->_files[$file]['validators'] += $temp;
+            } else {
+                $this->_files[$file]['validators'][] = $name;
+            }
+
             $this->_files[$file]['validated']    = false;
         }
 
@@ -1281,7 +1298,7 @@ abstract class AbstractAdapter
                 $mime = @finfo_open($const);
             }
 
-            if ($mime !== false) {
+            if (!empty($mime)) {
                 $result = finfo_file($mime, $file);
             }
 

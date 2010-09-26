@@ -83,9 +83,9 @@ class Util
             By default, if no description is present, no output is generated. If
             the description is present, then it is wrapped in an <acronym>HTML</acronym>
             <emphasis>p</emphasis> tag by default, though you may specify a tag by
-            passing a <code>tag</code> option when creating the decorator, or
+            passing a <property>tag</property> option when creating the decorator, or
             calling <methodname>setTag()</methodname>. You may additionally specify a class
-            for the tag using the <code>class</code> option or by calling
+            for the tag using the <property>class</property> option or by calling
             <methodname>setClass()</methodname>; by default, the class 'hint' is used.
         </para>
 
@@ -102,12 +102,12 @@ class Util
 
         <para>
             The default decorators utilize definition lists
-            (<code>&lt;dl&gt;</code>) to render form elements. Since form
+            (<emphasis>&lt;dl&gt;</emphasis>) to render form elements. Since form
             items can appear in any order, display groups and sub forms can
             be interspersed with other form items. To keep these particular
             item types within the definition list, the DtDdWrapper creates a
-            new, empty definition term (<code>&lt;dt&gt;</code>) and wraps
-            its content in a new definition datum (<code>&lt;dd&gt;</code>).
+            new, empty definition term (<emphasis>&lt;dt&gt;</emphasis>) and wraps
+            its content in a new definition datum (<emphasis>&lt;dd&gt;</emphasis>).
             The output looks something like this:
         </para>
 
@@ -121,7 +121,7 @@ class Util
 
         <para>
             This decorator replaces the content provided to it by wrapping
-            it within the <code>&lt;dd&gt;</code> element.
+            it within the <emphasis>&lt;dd&gt;</emphasis> element.
         </para>
     </sect2>
 
@@ -132,8 +132,8 @@ class Util
             Element errors get their own decorator with the Errors
             decorator. This decorator proxies to the FormErrors view helper,
             which renders error messages in an unordered list
-            (<code>&lt;ul&gt;</code>) as list items. The
-            <code>&lt;ul&gt;</code> element receives a class of "errors".
+            (<emphasis>&lt;ul&gt;</emphasis>) as list items. The
+            <emphasis>&lt;ul&gt;</emphasis> element receives a class of "errors".
         </para>
 
         <para>
@@ -150,9 +150,9 @@ class Util
             fieldsets by default. The Fieldset decorator checks for either a
             'legend' option or a <methodname>getLegend()</methodname> method in the
             registered element, and uses that as a legend if non-empty. Any
-            content passed in is wrapped in the HTML fieldset, replacing the
+            content passed in is wrapped in the <acronym>HTML</acronym> fieldset, replacing the
             original content. Any attributes set in the decorated item are
-            passed to the fieldset as HTML attributes.
+            passed to the fieldset as <acronym>HTML</acronym> attributes.
         </para>
     </sect2>
 
@@ -172,11 +172,11 @@ class Util
         <title>Zend_Form_Decorator_Form</title>
 
         <para>
-            <classname>Zend_Form</classname> objects typically need to render an HTML
-            form tag. The Form decorator proxies to the Form view helper. It
-            wraps any provided content in an HTML form element, using the
+            <classname>Zend_Form</classname> objects typically need to render an
+            <acronym>HTML</acronym> form tag. The Form decorator proxies to the Form view helper. It
+            wraps any provided content in an <acronym>HTML</acronym> form element, using the
             <classname>Zend_Form</classname> object's action and method, and any
-            attributes as HTML attributes.
+            attributes as <acronym>HTML</acronym> attributes.
         </para>
     </sect2>
 
@@ -230,49 +230,49 @@ class Util
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>ignoreSubForms</code>: whether or not to disable recursion into
+                    <property>ignoreSubForms</property>: whether or not to disable recursion into
                     subforms. Default value: <constant>FALSE</constant> (i.e., allow recursion).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupElementLabelEnd</code>: Markup to append to element
+                    <property>markupElementLabelEnd</property>: Markup to append to element
                     labels. Default value: '&lt;/b&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupElementLabelStart</code>: Markup to prepend to
+                    <property>markupElementLabelStart</property>: Markup to prepend to
                     element labels. Default value: '&lt;b&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListEnd</code>: Markup to append error message lists
+                    <property>markupListEnd</property>: Markup to append error message lists
                     with. Default value: '&lt;/ul&gt;'.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListItemEnd</code>: Markup to append individual
+                    <property>markupListItemEnd</property>: Markup to append individual
                     error messages with. Default value: '&lt;/li&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListItemStart</code>: Markup to prepend individual
+                    <property>markupListItemStart</property>: Markup to prepend individual
                     error messages with. Default value: '&lt;li&gt;'
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>markupListStart</code>: Markup to append error message
+                    <property>markupListStart</property>: Markup to append error message
                     lists with. Default value: '&lt;ul class="form-errors"&gt;'
                 </para>
             </listitem>
@@ -288,9 +288,9 @@ class Util
         <title>Zend_Form_Decorator_HtmlTag</title>
 
         <para>
-            The HtmlTag decorator allows you to utilize HTML tags to
+            The HtmlTag decorator allows you to utilize <acronym>HTML</acronym> tags to
             decorate content; the tag utilized is passed in the 'tag'
-            option, and any other options are used as HTML attributes to
+            option, and any other options are used as <acronym>HTML</acronym> attributes to
             that tag. The tag by default is assumed to be block level, and
             replaces the content by wrapping it in the given tag. However,
             you can specify a placement to append or prepend a tag as well.
@@ -301,22 +301,22 @@ class Util
         <title>Zend_Form_Decorator_Image</title>
 
         <para>
-            The Image decorator allows you to create an HTML image input
-            (<code>&lt;input type="image" ... /&gt;</code>), and optionally
-            render it within another HTML tag.
+            The Image decorator allows you to create an <acronym>HTML</acronym> image input
+            (<emphasis>&lt;input type="image" ... /&gt;</emphasis>), and optionally
+            render it within another <acronym>HTML</acronym> tag.
         </para>
 
         <para>
             By default, the decorator uses the element's src property, which can
             be set with the <methodname>setImage()</methodname> method, as the image
             source. Additionally, the element's label will be used as the alt
-            tag, and the <code>imageValue</code> (manipulated with the Image
+            tag, and the <property>imageValue</property> (manipulated with the Image
             element's <methodname>setImageValue()</methodname> and
             <methodname>getImageValue()</methodname> accessors) will be used for the value.
         </para>
 
         <para>
-            To specify an HTML tag with which to wrap the element, either pass a
+            To specify an <acronym>HTML</acronym> tag with which to wrap the element, either pass a
             'tag' option to the decorator, or explicitly call
             <methodname>setTag()</methodname>.
         </para>
@@ -353,7 +353,7 @@ class Util
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>optionalPrefix</code>: set the text to prefix the
+                    <property>optionalPrefix</property>: set the text to prefix the
                     label with when the element is optional. Use the
                     <methodname>setOptionalPrefix()</methodname> and
                     <methodname>getOptionalPrefix()</methodname> accessors to manipulate it.
@@ -362,7 +362,7 @@ class Util
 
             <listitem>
                 <para>
-                    <code>optionalSuffix</code>: set the text to append the
+                    <property>optionalSuffix</property>: set the text to append the
                     label with when the element is optional. Use the
                     <methodname>setOptionalSuffix()</methodname> and
                     <methodname>getOptionalSuffix()</methodname> accessors to manipulate it.
@@ -371,7 +371,7 @@ class Util
 
             <listitem>
                 <para>
-                    <code>requiredPrefix</code>: set the text to prefix the
+                    <property>requiredPrefix</property>: set the text to prefix the
                     label with when the element is required. Use the
                     <methodname>setRequiredPrefix()</methodname> and
                     <methodname>getRequiredPrefix()</methodname> accessors to manipulate it.
@@ -380,7 +380,7 @@ class Util
 
             <listitem>
                 <para>
-                    <code>requiredSuffix</code>: set the text to append the
+                    <property>requiredSuffix</property>: set the text to append the
                     label with when the element is required. Use the
                     <methodname>setRequiredSuffix()</methodname> and
                     <methodname>getRequiredSuffix()</methodname> accessors to manipulate it.
@@ -465,19 +465,19 @@ $form->setDecorators(array(
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>element</code>: the element being decorated
+                    <property>element</property>: the element being decorated
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>content</code>: the content passed to the decorator
+                    <property>content</property>: the content passed to the decorator
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>decorator</code>: the decorator object itself
+                    <property>decorator</property>: the decorator object itself
                 </para>
             </listitem>
 

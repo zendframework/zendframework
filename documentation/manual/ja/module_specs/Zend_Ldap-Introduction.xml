@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16828 -->
+<!-- EN-Revision: 20792 -->
 <sect1 id="zend.ldap.introduction">
     <title>導入</title>
 
@@ -305,7 +305,7 @@ foreach ($multiOptions as $name => $options) {
 
             <para>
                 <methodname>getCanonicalAccountName()</methodname> をコールすると、
-                正規化したアカウント名を取得することができます。
+                正規化したアカウント名を取得できます。
                 これを使用して、アプリケーションから関連データを取得できるようになります。
                 <emphasis>accountCanonicalForm = 4</emphasis> をすべてのサーバのオプションに設定することで、
                 どのサーバを使用する場合にも一貫した正規化が行えるようになっています。

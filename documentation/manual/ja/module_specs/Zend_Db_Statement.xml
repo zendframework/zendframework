@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
@@ -27,7 +27,7 @@
         <para>
             通常は、ステートメントオブジェクトはデータベースアダプタクラスの
             <methodname>query()</methodname> メソッドの返り値として取得します。
-            このメソッドは、任意の <acronym>SQL</acronym> 文を実行することができます。
+            このメソッドは、任意の <acronym>SQL</acronym> 文を実行できます。
             最初の引数には <acronym>SQL</acronym> 文を指定し、
             オプションの二番目の引数には <acronym>SQL</acronym> 文中のプレースホルダを置き換える
             バインド変数の配列を指定します。
@@ -135,7 +135,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
         <para>
             ステートメントオブジェクトのメソッドをコールすることで、
-            <acronym>SQL</acronym> 文の結果セットから行を取得することができます。
+            <acronym>SQL</acronym> 文の結果セットから行を取得できます。
             SELECT、SHOW、DESCRIBE そして EXPLAIN
             などのステートメントが結果セットを返します。
             INSERT、UPDATE そして DELETE などのステートメントは結果セットを返しません。

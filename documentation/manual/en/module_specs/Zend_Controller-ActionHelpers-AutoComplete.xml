@@ -124,7 +124,7 @@ class FooController extends Zend_Controller_Action
             widgets that can perform AutoCompletion: ComboBox and
             FilteringSelect. In both cases, they require a data store that
             implements the QueryReadStore; for more information on these topics, see the <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink>
+                url="http://dojotoolkit.org/reference-guide/dojo/data.html">dojo.data</ulink>
             documentation.
         </para>
 

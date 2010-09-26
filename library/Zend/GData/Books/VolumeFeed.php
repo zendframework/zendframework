@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Books;
 
+use Zend\GData\Books;
+
 /**
  * Describes a Book Search volume feed
  *
@@ -57,7 +59,7 @@ class VolumeFeed extends \Zend\GData\Feed
       *
       * @var string
       */
-     protected $_entryClassName = '\Zend\GData\Books\VolumeEntry';
+     protected $_entryClassName = 'Zend\GData\Books\VolumeEntry';
 
 }
 

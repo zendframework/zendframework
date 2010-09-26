@@ -80,7 +80,7 @@ class HiddenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newHidden->value, true);
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newHidden2 = $cal->newHidden();
         $newHidden2->transferFromXML($newHidden->saveXML());
         $this->assertEquals(count($newHidden2->extensionElements), 1);

@@ -21,6 +21,12 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2;
+
+/**
  * Zend_Service_Amazon_Ec2_Keypair test case.
  *
  * @category   Zend
@@ -32,7 +38,7 @@
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
  */
-class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
+class KeypairTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -47,14 +53,14 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Keypair = new Zend_Service_Amazon_Ec2_Keypair('access_key', 'secret_access_key');
+        $this->Zend_Service_Amazon_Ec2_Keypair = new Ec2\Keypair('access_key', 'secret_access_key');
 
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $adapter = new \Zend\HTTP\Client\Adapter\Test();
+        $client = new \Zend\HTTP\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Amazon_Ec2_Keypair::setDefaultHTTPClient($client);
+        Ec2\Keypair::setDefaultHTTPClient($client);
 
 
     }
@@ -76,7 +82,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
         try {
             $this->Zend_Service_Amazon_Ec2_Keypair->create('');
             $this->fail('An exception should be thrown if an empty keyname is passed in.');
-        } catch (Zend_Service_Amazon_Ec2_Exception $zsaee) {
+        } catch (Ec2\Exception $zsaee) {
         }
     }
 
@@ -207,7 +213,7 @@ class Zend_Service_Amazon_Ec2_KeypairTest extends PHPUnit_Framework_TestCase
         try {
             $this->Zend_Service_Amazon_Ec2_Keypair->delete('');
             $this->fail('An exception should be thrown if an empty keyname is passed in.');
-        } catch (Zend_Service_Amazon_Ec2_Exception $zsaee) {
+        } catch (Ec2\Exception $zsaee) {
         }
     }
 

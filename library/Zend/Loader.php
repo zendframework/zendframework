@@ -21,6 +21,10 @@
 
 namespace Zend;
 
+require_once __DIR__ . '/Loader/ClassNotFoundException.php';
+require_once __DIR__ . '/Loader/InvalidDirectoryArgumentException.php';
+require_once __DIR__ . '/Loader/SecurityException.php';
+
 /**
  * Static methods for loading classes and files.
  *
@@ -59,8 +63,7 @@ class Loader
         }
 
         if ((null !== $dirs) && !is_string($dirs) && !is_array($dirs)) {
-            require_once __DIR__ . '/Loader/InvalidDirectoryArgumentException.php';
-            throw new \Zend\Loader\InvalidDirectoryArgumentException('Directory argument must be a string or an array');
+            throw new Loader\InvalidDirectoryArgumentException('Directory argument must be a string or an array');
         }
 
         // Autodiscover the path from the class name
@@ -70,10 +73,12 @@ class Loader
         $className = ltrim($class, '\\');
         $file      = '';
         $namespace = '';
-        if ($lastNsPos = strripos($className, '\\')) {
+        if ($lastNsPos = strrpos($className, '\\')) {
             $namespace = substr($className, 0, $lastNsPos);
             $className = substr($className, $lastNsPos + 1);
-            $file      = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+            $file      = (DIRECTORY_SEPARATOR != '\\') // small speed up on windows
+                         ? str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR
+                         : $namespace . DIRECTORY_SEPARATOR;
         }
         $file .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
@@ -98,8 +103,7 @@ class Loader
         }
 
         if (!class_exists($class, false) && !interface_exists($class, false)) {
-            require_once __DIR__ . '/Loader/ClassNotFoundException.php';
-            throw new \Zend\Loader\ClassNotFoundException("File \"$file\" does not exist or class \"$class\" was not found in the file");
+            throw new Loader\ClassNotFoundException("File \"$file\" does not exist or class \"$class\" was not found in the file");
         }
     }
 
@@ -182,6 +186,14 @@ class Loader
             return true;
         }
 
+        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN'
+            && preg_match('/^[a-z]:/i', $filename)
+        ) {
+            // If on windows, and path provided is clearly an absolute path, 
+            // return false immediately
+            return false;
+        }
+
         foreach (self::explodeIncludePath() as $path) {
             if ($path == '.') {
                 if (is_readable($filename)) {
@@ -236,8 +248,7 @@ class Loader
          * Security check
          */
         if (preg_match('/[^a-z0-9\\/\\\\_.:-]/i', $filename)) {
-            require_once __DIR__ . '/Loader/SecurityException.php';
-            throw new \Zend\Loader\SecurityException('Illegal character in filename');
+            throw new Loader\SecurityException('Illegal character in filename');
         }
     }
 

@@ -20,6 +20,10 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db;
 
 /**
  * @category   Zend
@@ -29,7 +33,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_PHPUnit_Db_TestCaseTest extends Zend_Test_PHPUnit_DatabaseTestCase
+class TestCaseTest extends \Zend\Test\PHPUnit\DatabaseTestCase
 {
     /**
      * Contains a Database Connection
@@ -47,7 +51,7 @@ class Zend_Test_PHPUnit_Db_TestCaseTest extends Zend_Test_PHPUnit_DatabaseTestCa
     {
         if($this->_connectionMock == null) {
             $this->_connectionMock = $this->getMock(
-                'Zend_Test_PHPUnit_Db_Connection', array(), array(new Zend_Test_DbAdapter(), "schema")
+                'Zend\Test\PHPUnit\Db\Connection', array(), array(new \Zend\Test\DbAdapter(), "schema")
             );
         }
         return $this->_connectionMock;
@@ -60,47 +64,47 @@ class Zend_Test_PHPUnit_Db_TestCaseTest extends Zend_Test_PHPUnit_DatabaseTestCa
      */
     protected function getDataSet()
     {
-        return new PHPUnit_Extensions_Database_DataSet_CompositeDataSet(array());
+        return new \PHPUnit_Extensions_Database_DataSet_CompositeDataSet(array());
     }
 
     public function testDatabaseTesterIsInitialized()
     {
-        $this->assertTrue($this->databaseTester instanceof PHPUnit_Extensions_Database_ITester);
+        $this->assertTrue($this->databaseTester instanceof \PHPUnit_Extensions_Database_ITester);
     }
 
     public function testDatabaseTesterNestsDefaultConnection()
     {
-        $this->assertTrue($this->databaseTester->getConnection() instanceof PHPUnit_Extensions_Database_DB_IDatabaseConnection);
+        $this->assertTrue($this->databaseTester->getConnection() instanceof \PHPUnit_Extensions_Database_DB_IDatabaseConnection);
     }
 
     public function testCheckZendDbConnectionConvenienceMethodReturnType()
     {
-        $mock = $this->getMock('Zend_Db_Adapter_Pdo_Sqlite', array('delete'), array(), "Zend_Db_Adapter_Mock", false);
-        $this->assertTrue($this->createZendDbConnection($mock, "test") instanceof Zend_Test_PHPUnit_Db_Connection);
+        $mock = $this->getMock('\Zend\Db\Adapter\Pdo\Sqlite', array('delete'), array(), 'Zend_DB_Adapter_Mock', false);
+        $this->assertTrue($this->createZendDbConnection($mock, "test") instanceof \Zend\Test\PHPUnit\Db\Connection);
     }
 
     public function testCreateDbTableDataSetConvenienceMethodReturnType()
     {
-        $tableMock = $this->getMock('Zend_Db_Table', array(), array(), "", false);
+        $tableMock = $this->getMock('\Zend\Db\Table\Table', array(), array(), "", false);
         $tableDataSet = $this->createDbTableDataSet(array($tableMock));
-        $this->assertTrue($tableDataSet instanceof Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet);
+        $this->assertTrue($tableDataSet instanceof \Zend\Test\PHPUnit\Db\DataSet\DbTableDataSet);
     }
 
     public function testCreateDbTableConvenienceMethodReturnType()
     {
-        $mock = $this->getMock('Zend_Db_Table', array(), array(), "", false);
+        $mock = $this->getMock('Zend\Db\Table\Table', array(), array(), "", false);
         $table = $this->createDbTable($mock);
-        $this->assertTrue($table instanceof Zend_Test_PHPUnit_Db_DataSet_DbTable);
+        $this->assertTrue($table instanceof \Zend\Test\PHPUnit\Db\DataSet\DbTable);
     }
 
     public function testCreateDbRowsetConvenienceMethodReturnType()
     {
-        $mock = $this->getMock('Zend_Db_Table_Rowset', array(), array(array()));
+        $mock = $this->getMock('Zend\Db\Table\Rowset', array(), array(array()));
         $mock->expects($this->once())->method('toArray')->will($this->returnValue(array("foo" => 1, "bar" => 1)));
 
         $rowset = $this->createDbRowset($mock, "fooTable");
 
-        $this->assertTrue($rowset instanceof Zend_Test_PHPUnit_Db_DataSet_DbRowset);
+        $this->assertTrue($rowset instanceof \Zend\Test\PHPUnit\Db\DataSet\DbRowset);
     }
 
     public function testGetAdapterConvenienceMethod()

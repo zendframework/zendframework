@@ -21,22 +21,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Filter
- * @uses       Zend_Filter_StringToLower
- * @uses       Zend_Filter_Word_CamelCaseToDash
- * @uses       Zend_Tool_Project_Context_Filesystem_File
- * @uses       Zend_Tool_Project_Exception
+ * @uses       \Zend\Filter\FilterChain
+ * @uses       \Zend\Filter\StringToLower
+ * @uses       \Zend\Filter\Word\CamelCaseToDash
+ * @uses       \Zend\Tool\Project\Context\Filesystem\File
+ * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Context_Filesystem_File
+class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
 {
 
     /**
@@ -67,7 +72,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Zf_ViewScriptFile
+     * @return \Zend\Tool\Project\Context\Zf\ViewScriptFile
      */
     public function init()
     {
@@ -115,7 +120,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
         $contents = '';
 
         if ($this->_filesystemName == 'error.phtml') {  // should also check that the above directory is forController=error
-            $contents .= <<<EOS
+            $contents .= <<<'EOS'
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -124,21 +129,21 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
 </head>
 <body>
   <h1>An error occurred</h1>
-  <h2><?php echo \$this->message ?></h2>
+  <h2><?php echo $this->message ?></h2>
 
-  <?php if (isset(\$this->exception)): ?>
+  <?php if (isset($this->exception)): ?>
 
   <h3>Exception information:</h3>
   <p>
-      <b>Message:</b> <?php echo \$this->exception->getMessage() ?>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
   </p>
 
   <h3>Stack trace:</h3>
-  <pre><?php echo \$this->exception->getTraceAsString() ?>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
   </pre>
 
   <h3>Request Parameters:</h3>
-  <pre><?php echo var_export(\$this->request->getParams(), true) ?>
+  <pre><?php echo var_export($this->request->getParams(), true) ?>
   </pre>
   <?php endif ?>
 
@@ -148,7 +153,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
 EOS;
         } elseif ($this->_forActionName == 'index' && $this->_resource->getParentResource()->getAttribute('forControllerName') == 'Index') {
 
-            $contents =<<<EOS
+            $contents =<<<'EOS'
 <style>
     a:link,
     a:visited
@@ -196,17 +201,17 @@ EOS;
 
         } else {
             $contents = '<br /><br /><center>View script for controller <b>' . $this->_resource->getParentResource()->getAttribute('forControllerName') . '</b>'
-                . ' and script/action name <b>' . $this->_forActionName . '</b></center>';
+            . ' and script/action name <b>' . $this->_forActionName . '</b></center>';
         }
         return $contents;
     }
 
     protected function _convertActionNameToFilesystemName($actionName)
     {
-        $filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
-            ->addFilter(new Zend_Filter_StringToLower());
+        $filter = new \Zend\Filter\FilterChain();
+        $filter->addFilter(new \Zend\Filter\Word\CamelCaseToDash())
+        ->addFilter(new \Zend\Filter\StringToLower());
         return $filter->filter($actionName);
     }
-    
+
 }

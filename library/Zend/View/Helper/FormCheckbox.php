@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate a "checkbox" element
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
+class FormCheckbox extends FormElement
 {
     /**
      * Default checked/unchecked options
@@ -53,8 +58,12 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
      * @param array $attribs Attributes for the element tag.
      * @return string The element XHTML.
      */
-    public function formCheckbox($name, $value = null, $attribs = null, array $checkedOptions = null)
+    public function direct($name = null, $value = null, $attribs = null, array $checkedOptions = null)
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('Action: missing argument. $name is required in formCheckbox($name, $value = null, $attribs = null, array $checkedOptions = null)');
+        }
+        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, id, value, attribs, options, listsep, disable
 
@@ -77,7 +86,7 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof Zend_View_Abstract) && !$this->view->doctype()->isXhtml()) {
+        if (($this->view instanceof \Zend\View\AbstractView) && !$this->view->doctype()->isXhtml()) {
             $endTag= '>';
         }
 

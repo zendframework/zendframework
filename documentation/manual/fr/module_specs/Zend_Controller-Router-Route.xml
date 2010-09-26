@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21661 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -188,6 +188,198 @@ $router->addRoute('archive', $route);
             ne sera pas captée (matchée) par cette route, et le contrôle sera passé à la route
             suivante, etc.
         </para>
+    </sect4>
 
+    <sect4 id="zend.controller.router.routes.standard.translated-segments">
+        <title>Translated segments</title>
+
+        <para>
+            The standard route supports translated segments. To use this
+            feature, you have to define at least a translator (an instance
+            of <classname>Zend_Translate</classname>) via one of the following ways:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Put it into the registry with the key <classname>Zend_Translate</classname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Set it via the static method
+                    <methodname>Zend_Controller_Router_Route::setDefaultTranslator()</methodname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Pass it as fourth parameter to the constructor.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            By default, the locale specified in the <classname>Zend_Translate</classname>
+            instance will be used. To override it, you set it
+            (an instance of <classname>Zend_Locale</classname> or a locale string) in one
+            of the following ways:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Put it into the registry with the key <classname>Zend_Locale</classname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Set it via the static method
+                    <methodname>Zend_Controller_Router_Route::setDefaultLocale()</methodname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Pass it as fifth parameter to the constructor.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Pass it as <command>@locale</command> parameter to the assemble
+                    method.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Translated segments are separated into two parts. Fixed segments
+            are prefixed by a single <emphasis>@</emphasis>-sign, and will be
+            translated to the current locale when assembling and reverted
+            to the message ID when matching again. Dynamic segments
+            are prefixed by <command>:@</command>. When assembling, the given
+            parameter will be translated and inserted into the parameter
+            position. When matching, the translated parameter from the
+            <acronym>URL</acronym> will be reverted to the message ID again.
+        </para>
+
+        <note>
+            <title>Message IDs and separate language file</title>
+
+            <para>
+                Occasionally a message ID which you want to use in one
+                of your routes is already used in a view script or somewhere
+                else. To have full control over safe <acronym>URL</acronym>s, you should use
+                a separate language file for the messages used in the route.
+            </para>
+        </note>
+
+        <para>
+            The following is the simplest way to prepare the standard route for
+            translated segment usage:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Prepare the translator
+$translator = new Zend_Translate(
+    array(
+        'adapter' => 'array',
+        'content' => array(),
+        'locale'  => 'en'
+    )
+);
+$translator->addTranslation(
+    array(
+        'content' =>
+            array(
+                'archive' => 'archiv',
+                'year'    => 'jahr',
+                'month'   => 'monat',
+                'index'   => 'uebersicht'
+            ),
+        'locale'  => 'de'
+    )
+);
+
+// Set the current locale for the translator
+$translator->setLocale('en');
+
+// Set it as default translator for routes
+Zend_Controller_Router_Route::setDefaultTranslator($translator);
+]]></programlisting>
+
+        <para>
+            This example demonstrates the usage of static segments:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Create the route
+$route = new Zend_Controller_Router_Route(
+    '@archive',
+    array(
+        'controller' => 'archive',
+        'action'     => 'index'
+    )
+);
+$router->addRoute('archive', $route);
+
+// Assemble the URL in default locale: archive
+$route->assemble(array());
+
+// Assemble the URL in german: archiv
+$route->assemble(array());
+]]></programlisting>
+
+        <para>
+            You can use the dynamic segments to create a module-route like
+            translated version:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Create the route
+$route = new Zend_Controller_Router_Route(
+    ':@controller/:@action/*',
+    array(
+        'controller' => 'index',
+        'action'     => 'index'
+    )
+);
+$router->addRoute('archive', $route);
+
+// Assemble the URL in default locale: archive/index/foo/bar
+$route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
+
+// Assemble the URL in german: archiv/uebersicht/foo/bar
+$route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
+]]></programlisting>
+
+        <para>
+            You can also mix static and dynamic segments:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Create the route
+$route = new Zend_Controller_Router_Route(
+    '@archive/:@mode/:value',
+    array(
+        'mode'       => 'year'
+        'value'      => 2005,
+        'controller' => 'archive',
+        'action'     => 'show'
+    ),
+    array('mode'  => '(month|year)'
+          'value' => '\d+')
+);
+$router->addRoute('archive', $route);
+
+// Assemble the URL in default locale: archive/month/5
+$route->assemble(array('mode' => 'month', 'value' => '5'));
+
+// Assemble the URL in german: archiv/monat/5
+$route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
+]]></programlisting>
     </sect4>
 </sect3>

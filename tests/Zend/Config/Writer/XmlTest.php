@@ -40,7 +40,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_tempName = tempnam(dirname(__FILE__) . '/temp', 'tmp');
+        $this->_tempName = tempnam(__DIR__ . '/temp', 'tmp');
     }
 
     public function tearDown()
@@ -99,7 +99,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = new XmlConfig(dirname(__FILE__) . '/files/allsections.xml', null, array('skipExtends' => true));
+        $config = new XmlConfig(__DIR__ . '/files/allsections.xml', null, array('skipExtends' => true));
 
         $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
@@ -113,7 +113,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteAndReadSingleSection()
     {
-        $config = new XmlConfig(dirname(__FILE__) . '/files/allsections.xml', 'staging', array('skipExtends' => true));
+        $config = new XmlConfig(__DIR__ . '/files/allsections.xml', 'staging', array('skipExtends' => true));
 
         $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();

@@ -290,9 +290,6 @@ class TimeSync implements \IteratorAggregate
         }
 
         $className = 'Zend\\TimeSync\\' . $protocol;
-        if (!class_exists($className)) {
-            \Zend\Loader::loadClass($className);
-        }
         $timeServerObj = new $className($address, $port);
 
         $this->_timeservers[$alias] = $timeServerObj;

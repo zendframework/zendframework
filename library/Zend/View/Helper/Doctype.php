@@ -21,18 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper for setting and retrieving the doctype
  *
  * @uses       ArrayObject
- * @uses       Zend_Registry
- * @uses       Zend_View_Exception
- * @uses       Zend_View_Helper_Abstract
+ * @uses       \Zend\Registry
+ * @uses       \Zend\View\Exception
+ * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
+class Doctype extends AbstractHelper
 {
     /**#@+
      * DocType constants
@@ -78,8 +83,8 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
      */
     public function __construct()
     {
-        if (!Zend_Registry::isRegistered($this->_regKey)) {
-            $this->_registry = new ArrayObject(array(
+        if (!\Zend\Registry::isRegistered($this->_regKey)) {
+            $this->_registry = new \ArrayObject(array(
                 'doctypes' => array(
                     self::XHTML11             => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
                     self::XHTML1_STRICT       => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
@@ -93,10 +98,10 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
                     self::HTML5               => '<!DOCTYPE html>',
                 )
             ));
-            Zend_Registry::set($this->_regKey, $this->_registry);
+            \Zend\Registry::set($this->_regKey, $this->_registry);
             $this->setDoctype($this->_defaultDoctype);
         } else {
-            $this->_registry = Zend_Registry::get($this->_regKey);
+            $this->_registry = \Zend\Registry::get($this->_regKey);
         }
     }
 
@@ -104,9 +109,9 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
      * Set or retrieve doctype
      *
      * @param  string $doctype
-     * @return Zend_View_Helper_Doctype
+     * @return \Zend\View\Helper\Doctype
      */
-    public function doctype($doctype = null)
+    public function direct($doctype = null)
     {
         if (null !== $doctype) {
             switch ($doctype) {
@@ -124,7 +129,7 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
                     break;
                 default:
                     if (substr($doctype, 0, 9) != '<!DOCTYPE') {
-                        $e = new Zend_View_Exception('The specified doctype is malformed');
+                        $e = new \Zend\View\Exception('The specified doctype is malformed');
                         $e->setView($this->view);
                         throw $e;
                     }
@@ -146,7 +151,7 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
      * Set doctype
      *
      * @param  string $doctype
-     * @return Zend_View_Helper_Doctype
+     * @return \Zend\View\Helper\Doctype
      */
     public function setDoctype($doctype)
     {
@@ -190,7 +195,7 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
 	 * @return booleean
 	 */
 	public function isHtml5() {
-		return (stristr($this->doctype(), '<!DOCTYPE html>') ? true : false);
+		return (stristr($this->direct(), '<!DOCTYPE html>') ? true : false);
 	}
 
     /**

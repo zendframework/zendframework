@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21829 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-dn">
     <title>Zend_Ldap_Dn</title>
@@ -264,10 +264,12 @@
                     </entry>
 
                     <entry>
-                        Zerteilt den DN <varname>$dn</varname> in ein Array das alle Teile des
-                        angegebenen DN enthält. <varname>$keys</varname> sind optional die DN
-                        Schlüssel (z.B. CN, OU, DC, ...). <varname>$vals</varname> sind optional die
-                        DN Werte. Das zurückgegebene Array ist vom Typ
+                        <para>
+                            Zerteilt den DN <varname>$dn</varname> in ein Array das alle Teile des
+                            angegebenen DN enthält. <varname>$keys</varname> sind optional die DN
+                            Schlüssel (z.B. CN, OU, DC, ...). <varname>$vals</varname> sind optional
+                            die DN Werte. Das zurückgegebene Array ist vom Typ
+                        </para>
 
                         <programlisting language="php"><![CDATA[
 array(
@@ -278,7 +280,10 @@ array("dc" => "org")
 )
 ]]></programlisting>
 
-                        für einen DN von <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
+                        <para>
+                            für einen DN von
+                            <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
+                        </para>
                     </entry>
                 </row>
 
@@ -314,11 +319,13 @@ array("dc" => "org")
                     </entry>
 
                     <entry>
-                        Implodiert ein Array der Form die von
-                        <methodname>Zend_Ldap_Dn::explodeDn()</methodname> kommt in einen DN
-                        String. <varname>$separator</varname> ist standardmäßig <code>','</code>
-                        aber einige LDAP Server verstehen auch <code>';'</code>.
-                        <varname>$dnArray</varname> muß von folgendem Typ sein:
+                        <para>
+                            Implodiert ein Array der Form die von
+                            <methodname>Zend_Ldap_Dn::explodeDn()</methodname> kommt in einen DN
+                            String. <varname>$separator</varname> ist standardmäßig <code>','</code>
+                            aber einige LDAP Server verstehen auch <code>';'</code>.
+                            <varname>$dnArray</varname> muß von folgendem Typ sein:
+                        </para>
 
                         <programlisting language="php"><![CDATA[
 array(

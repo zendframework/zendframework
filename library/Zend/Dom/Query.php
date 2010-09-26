@@ -62,6 +62,12 @@ class Query
     protected $_docType;
 
     /**
+     * XPath namespaces
+     * @var array
+     */
+    protected $_xpathNamespaces = array();
+
+    /**
      * Constructor
      *
      * @param  null|string $document
@@ -216,6 +222,17 @@ class Query
     }
 
     /**
+     * Register XPath namespaces
+     *
+     * @param   array $xpathNamespaces
+     * @return  void
+     */
+    public function registerXpathNamespaces($xpathNamespaces)
+    {
+        $this->_xpathNamespaces = $xpathNamespaces;
+    }
+
+    /**
      * Prepare node list
      *
      * @param  DOMDocument $document
@@ -225,6 +242,9 @@ class Query
     protected function _getNodeList($document, $xpathQuery)
     {
         $xpath      = new \DOMXPath($document);
+        foreach ($this->_xpathNamespaces as $prefix => $namespaceUri) {
+            $xpath->registerNamespace($prefix, $namespaceUri);
+        }
         $xpathQuery = (string) $xpathQuery;
         return $xpath->query($xpathQuery);
     }

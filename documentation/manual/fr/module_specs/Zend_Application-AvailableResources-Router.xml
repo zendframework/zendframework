@@ -26,11 +26,11 @@ resources.router.routes.route_id.defaults.module = "user"
 resources.router.routes.route_id.defaults.controller = "login"
 resources.router.routes.route_id.defaults.action = "index"
 
-; Optionellement, un séparateur de chaines peut être précisé:
+; Optionnellement, un séparateur de chaînes peut être précisé :
 resources.router.chainNameSeparator = "_"
 ]]></programlisting>
 
-        <para>Pour plus d'informations sur le séparateur de chaines, voyez
+        <para>Pour plus d'informations sur le séparateur de chaînes, voyez
             <link linkend="zend.controller.router.routes.chain.config">sa section</link>.
         </para>
     </example>

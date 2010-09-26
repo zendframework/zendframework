@@ -20,6 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+use Zend\Filter,
+    Zend\View\AbstractView;
+
+/**
  * Zend_Form_Decorator_Element_HtmlTag
  *
  * Wraps content in an HTML block tag.
@@ -35,10 +43,10 @@
  *
  * Any other options passed are processed as HTML attributes of the tag.
  *
- * @uses       Zend_Filter
- * @uses       Zend_Filter_Alnum
- * @uses       Zend_Filter_StringToLower
- * @uses       Zend_Form_Decorator_Abstract
+ * @uses       \Zend\Filter\FilterChain
+ * @uses       \Zend\Filter\Alnum
+ * @uses       \Zend\Filter\StringToLower
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -46,7 +54,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
+class HtmlTag extends AbstractDecorator
 {
     /**
      * Character encoding to use when escaping attributes
@@ -67,7 +75,7 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
     protected $_tag;
 
     /**
-     * @var Zend_Filter
+     * @var \Zend\Filter\FilterChain
      */
     protected $_tagFilter;
 
@@ -83,7 +91,12 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
         foreach ((array) $attribs as $key => $val) {
             $key = htmlspecialchars($key, ENT_COMPAT, $enc);
             if (is_array($val)) {
-                $val = implode(' ', $val);
+                if (array_key_exists('callback', $val)
+                    && is_callable($val['callback'])) {
+                    $val = $val['callback']($this);
+                } else {
+                    $val = implode(' ', $val);
+                }
             }
             $val    = htmlspecialchars($val, ENT_COMPAT, $enc);
             $xhtml .= " $key=\"$val\"";
@@ -102,9 +115,9 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
     public function normalizeTag($tag)
     {
         if (!isset($this->_tagFilter)) {
-            $this->_tagFilter = new Zend_Filter();
-            $this->_tagFilter->addFilter(new Zend_Filter_Alnum())
-                             ->addFilter(new Zend_Filter_StringToLower());
+            $this->_tagFilter = new Filter\FilterChain();
+            $this->_tagFilter->addFilter(new Filter\Alnum())
+                             ->addFilter(new Filter\StringToLower());
         }
         return $this->_tagFilter->filter($tag);
     }
@@ -113,7 +126,7 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
      * Set tag to use
      *
      * @param  string $tag
-     * @return Zend_Form_Decorator_HtmlTag
+     * @return \Zend\Form\Decorator\HtmlTag
      */
     public function setTag($tag)
     {
@@ -235,7 +248,7 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
             $this->_encoding = 'UTF-8';
         } elseif (null === ($view = $element->getView())) {
             $this->_encoding = 'UTF-8';
-        } elseif (!$view instanceof Zend_View_Abstract
+        } elseif (!$view instanceof AbstractView
             && !method_exists($view, 'getEncoding')
         ) {
             $this->_encoding = 'UTF-8';

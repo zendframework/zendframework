@@ -44,9 +44,9 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tokenDocument = dirname(__FILE__) . '/_files/encryptedtoken.xml';
-        $this->sslPubKey     = dirname(__FILE__) . '/_files/ssl_pub.cert';
-        $this->sslPrvKey     = dirname(__FILE__) . '/_files/ssl_private.cert';
+        $this->tokenDocument = __DIR__ . '/_files/encryptedtoken.xml';
+        $this->sslPubKey     = __DIR__ . '/_files/ssl_pub.cert';
+        $this->sslPrvKey     = __DIR__ . '/_files/ssl_private.cert';
         $this->loadXmlDocument();
         $_SERVER['SERVER_NAME'] = "192.168.1.105";
         $_SERVER['SERVER_PORT'] = 80;
@@ -100,10 +100,10 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse(true);
         }
 
-        $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher\Cipher::ENC_RSA_OAEP_MGF1P, "foo");
+        $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher::ENC_RSA_OAEP_MGF1P, "foo");
 
         try {
-            $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher\Cipher::ENC_RSA_OAEP_MGF1P, "foo");
+            $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher::ENC_RSA_OAEP_MGF1P, "foo");
         } catch(InfoCard\Exception $e) {
             $this->assertTrue(true);
         } catch(\Exception $e) {
@@ -167,7 +167,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
         $infoCard->setAdapter($adapter);
 
-        $result = $infoCard->getAdapter() instanceof Adapter\AdapterInterface;
+        $result = $infoCard->getAdapter() instanceof Adapter;
 
         $this->assertTrue($result);
         $this->assertTrue($infoCard->getAdapter() instanceof TestAsset\MockAdapter);
@@ -262,7 +262,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function testTransforms()
     {
-        $trans = new \Zend\InfoCard\XML\Security\Transform\Transform();
+        $trans = new \Zend\InfoCard\XML\Security\Transform\TransformChain();
 
         try {
             $trans->addTransform("foo");

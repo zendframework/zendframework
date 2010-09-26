@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16656 -->
+<!-- EN-Revision: 20799 -->
 <sect1 id="zend.tool.framework.introduction">
     <title>導入</title>
 
@@ -70,42 +70,56 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <classname>Zend_Tool_Framework</classname> - 
-            ツーリング機能を公開するフレームワーク。
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Tool_Framework</classname> - 
+                ツーリング機能を公開するフレームワーク。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>ツーリングクライアント</emphasis> - 
-            <classname>Zend_Tool_Framework</classname>に接続したり消費したりする開発ツール。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>ツーリングクライアント</emphasis> - 
+                <classname>Zend_Tool_Framework</classname>に接続したり消費したりする開発ツール。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>クライアント</emphasis> - ツーリングクライアントが接続したり、
-            問い合わせたり、コマンドを実行できるようなインターフェースを公開する
-            <classname>Zend_Tool_Framework</classname>。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>クライアント</emphasis> - ツーリングクライアントが接続したり、
+                問い合わせたり、コマンドを実行できるようなインターフェースを公開する
+                <classname>Zend_Tool_Framework</classname>。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>コンソールクライアント／コマンドラインインターフェース／
-            <filename>zf.php</filename></emphasis> - コマンドラインのためのツーリングクライアント。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>コンソールクライアント／コマンドラインインターフェース／
+                <filename>zf.php</filename></emphasis> - コマンドラインのためのツーリングクライアント。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>プロバイダー</emphasis> - 
-            フレームワークがエクスポートするビルトイン機能のサブシステムと集まりです。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>プロバイダー</emphasis> - 
+                フレームワークがエクスポートするビルトイン機能のサブシステムと集まりです。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>マニフェスト</emphasis> - プロバイダー要求データを定義して、
-            構成して、行き渡らせるためのサブシステム。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>マニフェスト</emphasis> - プロバイダー要求データを定義して、
+                構成して、行き渡らせるためのサブシステム。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <classname>Zend_Tool_Project</classname>プロバイダー - 
-            Zend Frameworkベースのプロジェクトを生成して、
-            維持するための特別なプロバイダーのセットです。
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Tool_Project</classname>プロバイダー - 
+                Zend Frameworkベースのプロジェクトを生成して、
+                維持するための特別なプロバイダーのセットです。
+            </para>
+        </listitem>
     </itemizedlist>
 </sect1>
 

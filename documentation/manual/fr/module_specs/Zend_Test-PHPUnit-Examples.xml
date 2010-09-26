@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
+<!-- EN-Revision: 22236 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.examples">
     <title>Exemples</title>
@@ -315,7 +315,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             vous aurez besoin probablement d'un certain échafaudage pour s'assurer que la base de
             données est dans une configuration initiale et testable au début de chaque essai.
             PHPUnit fournit déjà une fonctionnalité pour faire ceci ; <ulink
-            url="http://www.phpunit.de/pocket_guide/3.3/en/database.html">lisez ceci dans la
+            url="http://www.phpunit.de/manual/3.4/en/database.html">lisez ceci dans la
             documentation PHPUnit</ulink>. Nous recommandons d'utiliser une base de données séparée
             pour les tests et pour la production, et recommandons en particulier d'employer un
             fichier SQLite ou une base de données en mémoire, d'autant que les deux options

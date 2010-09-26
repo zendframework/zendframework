@@ -21,27 +21,32 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+/**
  * Cache Manager resource
  *
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Cache_Manager
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\Cache\Manager
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Cachemanager extends Zend_Application_Resource_ResourceAbstract
+class Cachemanager extends AbstractResource
 {
     /**
-     * @var Zend_Cache_Manager
+     * @var \Zend\Cache\Manager
      */
     protected $_manager = null;
 
     /**
      * Initialize Cache_Manager
      *
-     * @return Zend_Cache_Manager
+     * @return \Zend\Cache\Manager
      */
     public function init()
     {
@@ -51,12 +56,12 @@ class Zend_Application_Resource_Cachemanager extends Zend_Application_Resource_R
     /**
      * Retrieve Zend_Cache_Manager instance
      *
-     * @return Zend_Cache_Manager
+     * @return \Zend\Cache\Manager
      */
     public function getCacheManager()
     {
         if (null === $this->_manager) {
-            $this->_manager = new Zend_Cache_Manager;
+            $this->_manager = new \Zend\Cache\Manager;
             
             $options = $this->getOptions();
             foreach ($options as $key => $value) {

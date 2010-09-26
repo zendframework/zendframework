@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Ec2;
+
+/**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
@@ -32,7 +37,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
+class Instance extends AbstractEc2
 {
     /**
      * Constant for Small Instance TYpe
@@ -114,7 +119,7 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
         $options = array_merge($_defaultOptions, $options);
 
         if(!isset($options['imageId'])) {
-            throw new Zend_Service_Amazon_Ec2_Exception('No Image Id Provided');
+            throw new Exception('No Image Id Provided');
         }
 
 
@@ -278,9 +283,9 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
                 $item['amiLaunchIndex'] = $xpath->evaluate('string(ec2:amiLaunchIndex/text())', $is_node);
                 $item['monitoringState'] = $xpath->evaluate('string(ec2:monitoring/ec2:state/text())', $is_node);
 
+                $return['instances'][] = $item;
                 unset($is_node);
             }
-            $return['instances'][] = $item;
             unset($item);
             unset($is);
         }

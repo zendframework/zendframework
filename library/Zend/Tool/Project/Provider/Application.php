@@ -21,17 +21,22 @@
  */
 
 /**
- * @uses       Zend_Tool_Framework_Provider_Pretendable
- * @uses       Zend_Tool_Project_Exception
- * @uses       Zend_Tool_Project_Provider_Abstract
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+
+/**
+ * @uses       \Zend\Tool\Framework\Provider\Pretendable
+ * @uses       \Zend\Tool\Project\Exception
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Application 
-    extends Zend_Tool_Project_Provider_Abstract
-    implements Zend_Tool_Framework_Provider_Pretendable
+class Application 
+    extends AbstractProvider
+    implements \Zend\Tool\Framework\Provider\Pretendable
 {
     
     protected $_specialties = array('ClassNamePrefix');
@@ -54,7 +59,7 @@ class Zend_Tool_Project_Provider_Application
         $configFileResource = $profile->search('ApplicationConfigFile');
         $zc = $configFileResource->getAsZendConfig('production');
         if ($zc->appnamespace == $classNamePrefix) {
-            throw new Zend_Tool_Project_Exception('The requested name ' . $classNamePrefix . ' is already the prefix.');
+            throw new \Zend\Tool\Project\Exception('The requested name ' . $classNamePrefix . ' is already the prefix.');
         }
 
         // remove the old

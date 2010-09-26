@@ -53,7 +53,7 @@ $filtered = $inflector->filter(array('page' => $string));
 
         <para>
             When calling <methodname>filter()</methodname>, you then pass in an array of
-            key/value pairs corresponding to the variables in the target.
+            key and value pairs corresponding to the variables in the target.
         </para>
 
         <para>
@@ -68,8 +68,9 @@ $filtered = $inflector->filter(array('page' => $string));
         <para>
             As an example, you can use any <classname>Zend_Filter</classname> concrete
             implementations; however, instead of referring to them as
-            'Zend_Filter_Alpha' or 'Zend_Filter_StringToLower', you'd specify
-            only 'Alpha' or 'StringToLower'.
+            '<classname>Zend_Filter_Alpha</classname>' or
+            '<classname>Zend_Filter_StringToLower</classname>', you'd specify
+            only '<classname>Alpha</classname>' or '<classname>StringToLower</classname>'.
         </para>
     </sect2>
 
@@ -304,7 +305,7 @@ class Foo
                         <emphasis>String</emphasis>. The string may be a filter
                         class name, or a class name segment minus any prefix set
                         in the inflector's plugin loader (by default, minus the
-                        'Zend_Filter' prefix).
+                        '<classname>Zend_Filter</classname>' prefix).
                     </para>
                 </listitem>
 
@@ -352,7 +353,7 @@ $inflector->setFilterRule('script', array(
             </para>
 
             <para>
-                Each method takes an array of variable/rule pairs, where the
+                Each method takes an array of variable and rule pairs, where the
                 rule may be whatever the type of rule accepts (string, filter
                 object, or array). Variable names accept a special notation to
                 allow setting static rules and filter rules, according to the
@@ -468,7 +469,7 @@ $inflector->addRules(array(
             <listitem>
                 <para>
                     <property>filterPrefixPath</property> specifies one or more filter
-                    prefix/path pairs for use with the inflector.
+                    prefix and path pairs for use with the inflector.
                 </para>
             </listitem>
 

@@ -171,7 +171,7 @@ abstract class QueueBaseTest extends \PHPUnit_Framework_TestCase
 
         // ------------------------------------ send()
         $message = 'Hello world'; // never gets boring!
-        $this->assertTrue($this->queue->send($message) instanceof \Zend\Queue\Message\Message);
+        $this->assertTrue($this->queue->send($message) instanceof \Zend\Queue\Message);
 
         // ------------------------------------ count()
         $this->assertEquals($this->queue->count(), 1, var_export($this->queue->getAdapter()->getData(), 1));

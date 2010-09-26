@@ -155,7 +155,7 @@ class Stub extends \Zend\ProgressBar\ProgressBar
     }
 }
 
-class MockUp extends \Zend\ProgressBar\Adapter\Adapter
+class MockUp extends \Zend\ProgressBar\Adapter\AbstractAdapter
 {
     protected $_current;
     protected $_max;

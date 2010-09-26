@@ -29,7 +29,7 @@ namespace Zend\Server;
  * @uses       ReflectionClass
  * @uses       \Zend\Server\Definition
  * @uses       \Zend\Server\Exception
- * @uses       \Zend\Server\ServerInterface
+ * @uses       \Zend\Server\Server
  * @uses       \Zend\Server\Method\Callback
  * @uses       \Zend\Server\Method\Definition
  * @uses       \Zend\Server\Method\Parameter
@@ -40,7 +40,7 @@ namespace Zend\Server;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class AbstractServer implements ServerInterface
+abstract class AbstractServer implements Server
 {
     /**
      * @deprecated

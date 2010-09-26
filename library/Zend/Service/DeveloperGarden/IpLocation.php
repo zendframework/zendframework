@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
  * @uses       Zend_Service_DeveloperGarden_Request_IpLocation_LocateIPRequest
  * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_CityType
  * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_GeoCoordinatesType
@@ -36,7 +36,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_IpLocation 
-    extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+    extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**
      * wsdl file

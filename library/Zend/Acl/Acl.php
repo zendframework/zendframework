@@ -587,7 +587,7 @@ class Acl
 
         // ensure that all specified Resources exist; normalize input to array of Resource objects or null
         if (!is_array($resources)) {
-            $resources = array($resources);
+            $resources = ($resources == null && count($this->_resources) > 0) ? array_keys($this->_resources) : array($resources);
         } else if (0 === count($resources)) {
             $resources = array(null);
         }

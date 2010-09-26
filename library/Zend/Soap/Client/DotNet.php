@@ -25,8 +25,11 @@
  */
 namespace Zend\Soap\Client;
 
+use Zend\Soap\Client as SOAPClient,
+    Zend\Soap\ClientException;
+
 /**
- * Zend_Soap_Client_Local
+ * .NET SOAP client
  *
  * Class is intended to be used with .Net Web Services.
  *
@@ -34,13 +37,13 @@ namespace Zend\Soap\Client;
  * Please leave your notes, compatiblity issues reports or
  * suggestions in fw-webservices@lists.zend.com or fw-general@lists.com
  *
- * @uses       \Zend\Soap\Client\Client
- * @uses       \Zend\Soap\Client\Exception
+ * @uses       \Zend\Soap\Client
+ * @uses       \Zend\Soap\ClientException
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
  */
-class DotNet extends Client
+class DotNet extends SOAPClient
 {
     /**
      * Constructor
@@ -63,14 +66,14 @@ class DotNet extends Client
      * My be overridden in descendant classes
      *
      * @param array $arguments
-     * @throws \Zend\Soap\Client\Exception
+     * @throws \Zend\Soap\ClientException
      */
     protected function _preProcessArguments($arguments)
     {
         if (count($arguments) > 1  ||
             (count($arguments) == 1  &&  !is_array(reset($arguments)))
            ) {
-            throw new Exception('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
+            throw new ClientException('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
         }
 
         // Do nothing

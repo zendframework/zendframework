@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.digits">
+    <title>Digits</title>
+
+    <para>
+        <classname>Zend_Validate_Digit</classname> validates if a given value contains only digits.
+    </para>
+
+    <sect3 id="zend.validate.set.digits.options">
+        <title>Supported options for Zend_Validate_Digits</title>
+
+        <para>
+            There are no additional options for <classname>Zend_Validate_Digits</classname>:
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.digits.basic">
+        <title>Validating digits</title>
+
+        <para>
+            To validate if a given value contains only digits and no other characters, simply call
+            the validator like shown in this example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Digits();
+
+$validator->isValid("1234567890"); // returns true
+$validator->isValid(1234);         // returns true
+$validator->isValid('1a234');      // returns false
+]]></programlisting>
+
+        <note>
+            <title>Validating numbers</title>
+
+            <para>
+                When you want to validate numbers or numeric values, be aware that this validator
+                only validates digits. This means that any other sign like a thousand separator or
+                a comma will not pass this validator. In this case you should use
+                <classname>Zend_Validate_Int</classname> or
+                <classname>Zend_Validate_Float</classname>.
+            </para>
+        </note>
+    </sect3>
+</sect2>

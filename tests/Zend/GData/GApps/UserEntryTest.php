@@ -53,7 +53,7 @@ class UserEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $userEntry->category[0]->scheme);
         $this->assertEquals('http://schemas.google.com/apps/2006#user', $userEntry->category[0]->term);
         $this->assertEquals('text', $userEntry->title->type);
-        $this->assertEquals('SusanJones', $userEntry->title->text);;
+        $this->assertEquals('SusanJones', $userEntry->title->text);
         $this->assertEquals('self', $userEntry->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $userEntry->getLink('self')->type);
         $this->assertEquals('https://apps-apis.google.com/a/feeds/example.com/user/2.0/SusanJones', $userEntry->getLink('self')->href);

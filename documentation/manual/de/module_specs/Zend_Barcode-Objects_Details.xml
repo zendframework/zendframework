@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20764 -->
+<!-- EN-Revision: 21667 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.barcode.objects.details">
     <title>Beschreibung der ausgelieferten Barcodes</title>
@@ -301,6 +301,10 @@
                 Wenn die Anzahl der Zeichen kleiner als 13 ist, wird
                 <classname>Zend_Barcode_Object_Ean13</classname> fehlende Nullen dem Barcode
                 Text automatisch voranstellen.
+            </para>
+
+            <para>
+                Die Option <property>withQuietZones</property> hat bei diesem Barcode keinen Effekt
             </para>
         </note>
     </sect3>
@@ -632,6 +636,10 @@
                 <classname>Zend_Barcode_Object_Upca</classname> fehlende Nullen dem Barcode
                 Text automatisch voranstellen.
             </para>
+
+            <para>
+                Die Option <property>withQuietZones</property> hat bei diesem Barcode keinen Effekt
+            </para>
         </note>
     </sect3>
 
@@ -687,6 +695,10 @@
             <para>
                 Wenn das erste Zeichen des zu kodierenden Textes nicht 0 oder 1 ist, ersetzt
                 <classname>Zend_Barcode_Object_Upce</classname> dieses automatisch durch 0.
+            </para>
+
+            <para>
+                Die Option <property>withQuietZones</property> hat bei diesem Barcode keinen Effekt
             </para>
         </note>
     </sect3>

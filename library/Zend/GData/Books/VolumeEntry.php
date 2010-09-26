@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\Books;
 
+use Zend\GData\Books;
+
 /**
  * Describes an entry in a feed of Book Search volumes
  *
  * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\Books\Books
+ * @uses       \Zend\GData\Books
  * @uses       \Zend\GData\Books\Extension\Embeddability
  * @uses       \Zend\GData\DublinCore\Extension\Creator
  * @uses       \Zend\GData\DublinCore\Extension\Format

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21520 -->
+<!-- EN-Revision: 22146 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.regex">
     <title>Regex</title>
@@ -46,7 +46,7 @@ $validator->isValid("Pest"); // Gibt false zurück
 
         <para>
             Wie man sehen kann hat das Pattern welches anzugeben ist die gleiche Syntax wie für
-            <methodname>preg_match</methodname>. Für Details über Regular Expressions sollte man
+            <methodname>preg_match()</methodname>. Für Details über Regular Expressions sollte man
             einen Blick in <ulink
                 url="http://php.net/manual/en/reference.pcre.pattern.syntax.php">PHP's Handbuch
                 über die PCRE Pattern Syntax</ulink> werfen.

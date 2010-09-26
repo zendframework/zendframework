@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Extension;
 
+use Zend\GData\Extension;
+
 /**
  * Data model class to represent a participant
  *
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\Extension
  * @uses       \Zend\GData\Extension\AttendeeStatus
  * @uses       \Zend\GData\Extension\AttendeeType
  * @uses       \Zend\GData\Extension\EntryLink

@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Zend_Form_Decorator_Description
  *
  * Accepts the options:
@@ -31,8 +36,8 @@
  *
  * Any other options passed will be used as HTML attributes of the HTML tag used.
  *
- * @uses       Zend_Form_Decorator_Abstract
- * @uses       Zend_Form_Decorator_HtmlTag
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
+ * @uses       \Zend\Form\Decorator\HtmlTag
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -40,7 +45,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
+class Description extends AbstractDecorator
 {
     /**
      * Whether or not to escape the description
@@ -64,7 +69,7 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
      * Set HTML tag with which to surround description
      *
      * @param  string $tag
-     * @return Zend_Form_Decorator_Description
+     * @return \Zend\Form\Decorator\Description
      */
     public function setTag($tag)
     {
@@ -116,7 +121,7 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
      * Set whether or not to escape description
      *
      * @param  bool $flag
-     * @return Zend_Form_Decorator_Description
+     * @return \Zend\Form\Decorator\Description
      */
     public function setEscape($flag)
     {
@@ -182,7 +187,7 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
 
         if (!empty($tag)) {
             $options['tag'] = $tag;
-            $decorator      = new Zend_Form_Decorator_HtmlTag($options);
+            $decorator      = new HtmlTag($options);
             $description    = $decorator->render($description);
         }
 

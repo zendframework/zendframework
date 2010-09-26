@@ -25,6 +25,8 @@
  */
 namespace Zend\GData\Photos;
 
+use Zend\GData\Photos;
+
 /**
  * Data model for a collection of photo entries, usually
  * provided by the Picasa servers.
@@ -34,7 +36,7 @@ namespace Zend\GData\Photos;
  *
  * @uses       \Zend\GData\App\Exception
  * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Photos\Photos
+ * @uses       \Zend\GData\Photos
  * @uses       \Zend\GData\Photos\PhotoEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -129,12 +131,12 @@ class PhotoFeed extends \Zend\GData\Feed
      */
     protected $_mediaGroup = null;
 
-    protected $_entryClassName = '\Zend\GData\Photos\PhotoEntry';
-    protected $_feedClassName = '\Zend\GData\Photos\PhotoFeed';
+    protected $_entryClassName = 'Zend\GData\Photos\PhotoEntry';
+    protected $_feedClassName = 'Zend\GData\Photos\PhotoFeed';
 
     protected $_entryKindClassMapping = array(
-        'http://schemas.google.com/photos/2007#comment' => '\Zend\GData\Photos\CommentEntry',
-        'http://schemas.google.com/photos/2007#tag' => '\Zend\GData\Photos\TagEntry'
+        'http://schemas.google.com/photos/2007#comment' => 'Zend\GData\Photos\CommentEntry',
+        'http://schemas.google.com/photos/2007#tag' => 'Zend\GData\Photos\TagEntry'
     );
 
     public function __construct($element = null)

@@ -21,20 +21,25 @@
  */
 
 /**
- * @uses       Zend_Config_Ini
- * @uses       Zend_Tool_Framework_Provider_Interactable
- * @uses       Zend_Tool_Framework_Provider_Pretendable
- * @uses       Zend_Tool_Project_Exception
- * @uses       Zend_Tool_Project_Provider_Abstract
- * @uses       Zend_Tool_Project_Provider_Exception
+ * @namespace
+ */
+namespace Zend\Tool\Project\Provider;
+
+/**
+ * @uses       \Zend\Config\Ini
+ * @uses       \Zend\Tool\Framework\Provider\Interactable
+ * @uses       \Zend\Tool\Framework\Provider\Pretendable
+ * @uses       \Zend\Tool\Project\Exception
+ * @uses       \Zend\Tool\Project\Provider\AbstractProvider
+ * @uses       \Zend\Tool\Project\Provider\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_DbAdapter
-    extends Zend_Tool_Project_Provider_Abstract
-    implements Zend_Tool_Framework_Provider_Interactable, Zend_Tool_Framework_Provider_Pretendable
+class DbAdapter
+    extends AbstractProvider
+    implements \Zend\Tool\Framework\Provider\Interactable, \Zend\Tool\Framework\Provider\Pretendable
 {
     
     protected $_appConfigFilePath = null;
@@ -50,23 +55,23 @@ class Zend_Tool_Project_Provider_DbAdapter
         $appConfigFileResource = $profile->search('applicationConfigFile');
                 
         if ($appConfigFileResource == false) {
-            throw new Zend_Tool_Project_Exception('A project with an application config file is required to use this provider.');
+            throw new \Zend\Tool\Project\Exception('A project with an application config file is required to use this provider.');
         }
         
         $this->_appConfigFilePath = $appConfigFileResource->getPath();
         
-        $this->_config = new Zend_Config_Ini($this->_appConfigFilePath, null, array('skipExtends' => true, 'allowModifications' => true));
+        $this->_config = new \Zend\Config\Ini($this->_appConfigFilePath, null, array('skipExtends' => true, 'allowModifications' => true));
         
         if ($sectionName != 'production') {
             $this->_sectionName = $sectionName;
         }
         
         if (!isset($this->_config->{$this->_sectionName})) {
-            throw new Zend_Tool_Project_Exception('The config does not have a ' . $this->_sectionName . ' section.');
+            throw new \Zend\Tool\Project\Exception('The config does not have a ' . $this->_sectionName . ' section.');
         }
         
         if (isset($this->_config->{$this->_sectionName}->resources->db)) {
-            throw new Zend_Tool_Project_Exception('The config already has a db resource configured in section ' . $this->_sectionName . '.');
+            throw new \Zend\Tool\Project\Exception('The config already has a db resource configured in section ' . $this->_sectionName . '.');
         }
         
         if ($dsn) {
@@ -85,7 +90,7 @@ class Zend_Tool_Project_Provider_DbAdapter
         $dsnVars = array();
         
         if (strpos($dsn, '=') === false) {
-            throw new Zend_Tool_Project_Provider_Exception('At least one name value pair is expected, typcially '
+            throw new Exception('At least one name value pair is expected, typcially '
                 . 'in the format of "adapter=Mysqli&username=uname&password=mypass&dbname=mydb"' 
                 );
         }

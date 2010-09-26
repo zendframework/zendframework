@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_FormButtonTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormButtonTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_FormButton.
@@ -38,20 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
+class FormButtonTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormButtonTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -61,8 +47,8 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_FormButton();
+        $this->view = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\FormButton();
         $this->helper->setView($this->view);
     }
 
@@ -78,7 +64,7 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
 
     public function testFormButtonRendersButtonXhtml()
     {
-        $button = $this->helper->formButton('foo', 'bar');
+        $button = $this->helper->direct('foo', 'bar');
         $this->assertRegexp('/<button[^>]*?value="bar"/', $button);
         $this->assertRegexp('/<button[^>]*?name="foo"/', $button);
         $this->assertRegexp('/<button[^>]*?id="foo"/', $button);
@@ -87,7 +73,7 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
 
     public function testCanPassContentViaContentAttribKey()
     {
-        $button = $this->helper->formButton('foo', 'bar', array('content' => 'Display this'));
+        $button = $this->helper->direct('foo', 'bar', array('content' => 'Display this'));
         $this->assertContains('>Display this<', $button);
         $this->assertContains('<button', $button);
         $this->assertContains('</button>', $button);
@@ -95,13 +81,13 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
 
     public function testCanDisableContentEscaping()
     {
-        $button = $this->helper->formButton('foo', 'bar', array('content' => '<b>Display this</b>', 'escape' => false));
+        $button = $this->helper->direct('foo', 'bar', array('content' => '<b>Display this</b>', 'escape' => false));
         $this->assertContains('><b>Display this</b><', $button);
 
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('content' => '<b>Display this</b>', 'escape' => false)));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('content' => '<b>Display this</b>', 'escape' => false)));
         $this->assertContains('><b>Display this</b><', $button);
 
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => array('content' => '<b>Display this</b>')));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => array('content' => '<b>Display this</b>')));
         $this->assertContains('><b>Display this</b><', $button);
         $this->assertContains('<button', $button);
         $this->assertContains('</button>', $button);
@@ -109,30 +95,26 @@ class Zend_View_Helper_FormButtonTest extends PHPUnit_Framework_TestCase
 
     public function testValueUsedForContentWhenNoContentProvided()
     {
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar'));
         $this->assertRegexp('#<button[^>]*?value="bar"[^>]*>bar</button>#', $button);
     }
 
     public function testButtonTypeIsButtonByDefault()
     {
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar'));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar'));
         $this->assertContains('type="button"', $button);
     }
 
     public function testButtonTypeMayOnlyBeValidXhtmlButtonType()
     {
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'submit')));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'submit')));
         $this->assertContains('type="submit"', $button);
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'reset')));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'reset')));
         $this->assertContains('type="reset"', $button);
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'button')));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'button')));
         $this->assertContains('type="button"', $button);
-        $button = $this->helper->formButton(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'bogus')));
+        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'bogus')));
         $this->assertContains('type="button"', $button);
     }
 }
 
-// Call Zend_View_Helper_FormButtonTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormButtonTest::main") {
-    Zend_View_Helper_FormButtonTest::main();
-}

@@ -25,13 +25,13 @@
 namespace Zend\Validator\Barcode;
 
 /**
- * @uses       \Zend\Validator\Barcode\AdapterAbstract
+ * @uses       \Zend\Validator\Barcode\AbstractAdapter
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Itf14 extends AdapterAbstract
+class Itf14 extends AbstractAdapter
 {
     /**
      * Allowed barcode lengths

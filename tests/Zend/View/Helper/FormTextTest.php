@@ -20,12 +20,10 @@
  * @version $Id$
  */
 
-// Call Zend_View_Helper_FormTextTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormTextTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Zend_View_Helper_FormTextTest
@@ -39,19 +37,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
+class FormTextTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormTextTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -61,39 +48,39 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
-            $registry = Zend_Registry::getInstance();
+        if (\Zend\Registry::isRegistered('Zend_View_Helper_Doctype')) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_FormText();
+        $this->view = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\FormText();
         $this->helper->setView($this->view);
     }
 
     public function testIdSetFromName()
     {
-        $element = $this->helper->formText('foo');
+        $element = $this->helper->direct('foo');
         $this->assertContains('name="foo"', $element);
         $this->assertContains('id="foo"', $element);
     }
 
     public function testSetIdFromAttribs()
     {
-        $element = $this->helper->formText('foo', null, array('id' => 'bar'));
+        $element = $this->helper->direct('foo', null, array('id' => 'bar'));
         $this->assertContains('name="foo"', $element);
         $this->assertContains('id="bar"', $element);
     }
 
     public function testSetValue()
     {
-        $element = $this->helper->formText('foo', 'bar');
+        $element = $this->helper->direct('foo', 'bar');
         $this->assertContains('name="foo"', $element);
         $this->assertContains('value="bar"', $element);
     }
 
     public function testReadOnlyAttribute()
     {
-        $element = $this->helper->formText('foo', null, array('readonly' => 'readonly'));
+        $element = $this->helper->direct('foo', null, array('readonly' => 'readonly'));
         $this->assertContains('readonly="readonly"', $element);
     }
 
@@ -102,7 +89,7 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->formText(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -116,7 +103,7 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->formText(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -127,19 +114,14 @@ class Zend_View_Helper_FormTextTest extends PHPUnit_Framework_TestCase
 
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->formText('foo', 'bar');
+        $test = $this->helper->direct('foo', 'bar');
         $this->assertNotContains(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
-        $test = $this->helper->formText('foo', 'bar');
+        $test = $this->helper->direct('foo', 'bar');
         $this->assertContains(' />', $test);
     }
-}
-
-// Call Zend_View_Helper_FormTextTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormTextTest::main") {
-    Zend_View_Helper_FormTextTest::main();
 }

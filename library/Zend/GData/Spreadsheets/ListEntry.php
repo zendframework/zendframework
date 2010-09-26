@@ -24,6 +24,8 @@
  * @namespace
  */
 namespace Zend\GData\Spreadsheets;
+
+use Zend\GData\Spreadsheets;
 use Zend\GData\App;
 
 /**
@@ -31,7 +33,7 @@ use Zend\GData\App;
  *
  * @uses       \Zend\GData\App\InvalidArgumentException;
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Spreadsheets\Spreadsheets
+ * @uses       \Zend\GData\Spreadsheets
  * @uses       \Zend\GData\Spreadsheets\Extension\Custom
  * @category   Zend
  * @package    Zend_Gdata
@@ -42,7 +44,7 @@ use Zend\GData\App;
 class ListEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\Spreadsheets\ListEntry';
+    protected $_entryClassName = 'Zend\GData\Spreadsheets\ListEntry';
 
     /**
      * List of custom row elements (Zend_Gdata_Spreadsheets_Extension_Custom),

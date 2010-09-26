@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21740 -->
 <chapter id="introduction.overview">
 
     <title>概要</title>
 
     <para>
         Zend Framework はオープンソースのフレームワークで、
-        ウェブアプリケーションやウェブサービスを PHP 5 で開発するためのものです。
+        ウェブアプリケーションやウェブサービスを <acronym>PHP</acronym> 5 で開発するためのものです。
         Zend Framework は完全にオブジェクト指向なコードを用いて実装されています。
         Zend Framework のコンポーネントの構造は少し変わっており、
         個々のコンポーネントはできるだけ他のコンポーネントに依存しないよう設計されています。

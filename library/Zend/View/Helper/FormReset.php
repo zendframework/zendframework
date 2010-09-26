@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate a "reset" button
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormReset extends Zend_View_Helper_FormElement
+class FormReset extends FormElement
 {
     /**
      * Generates a 'reset' button.
@@ -47,7 +52,7 @@ class Zend_View_Helper_FormReset extends Zend_View_Helper_FormElement
      *
      * @return string The element XHTML.
      */
-    public function formReset($name = '', $value = 'Reset', $attribs = null)
+    public function direct($name = '', $value = 'Reset', $attribs = null)
     {
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable

@@ -21,12 +21,11 @@
  */
 
 /**
- * @see Zend_Paginator_Adapter_Iterator
+ * @namespace
  */
+namespace ZendTest\Paginator\Adapter;
+use Zend\Paginator\Adapter;
 
-/**
- * @see PHPUnit_Framework_TestCase
- */
 
 /**
  * @category   Zend
@@ -36,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
+class IteratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Paginator_Adapter_Iterator
@@ -49,8 +48,8 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
     protected function setUp ()
     {
         parent::setUp();
-        $iterator = new ArrayIterator(range(1, 101));
-        $this->_adapter = new Zend_Paginator_Adapter_Iterator($iterator);
+        $iterator = new \ArrayIterator(range(1, 101));
+        $this->_adapter = new Adapter\Iterator($iterator);
     }
     /**
      * Cleans up the environment after running a test.
@@ -92,12 +91,12 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionIfNotCountable()
     {
-        $iterator = new LimitIterator(new ArrayIterator(range(1, 101)));
+        $iterator = new \LimitIterator(new \ArrayIterator(range(1, 101)));
 
         try {
-            new Zend_Paginator_Adapter_Iterator($iterator);
-        } catch (Exception $e) {
-            $this->assertType('Zend_Paginator_Exception', $e);
+            new Adapter\Iterator($iterator);
+        } catch (\Exception $e) {
+            $this->assertType('Zend\Paginator\Exception', $e);
             $this->assertEquals('Iterator must implement Countable', $e->getMessage());
         }
     }
@@ -107,11 +106,11 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
      */
     public function testDoesNotThrowOutOfBoundsExceptionIfIteratorIsEmpty()
     {
-        $this->_paginator = Zend_Paginator::factory(new ArrayIterator(array()));
+        $this->_paginator = \Zend\Paginator\Paginator::factory(new \ArrayIterator(array()));
         $items = $this->_paginator->getCurrentItems();
         try {
             foreach ($items as $item);
-        } catch (OutOfBoundsException $e) {
+        } catch (\OutOfBoundsException $e) {
             $this->fail('Empty iterator caused in an OutOfBoundsException');
         }
     }
@@ -130,8 +129,8 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
      * @group ZF-4151
      */
     public function testEmptySet() {
-        $iterator = new ArrayIterator(array());
-        $this->_adapter = new Zend_Paginator_Adapter_Iterator($iterator);
+        $iterator = new \ArrayIterator(array());
+        $this->_adapter = new Adapter\Iterator($iterator);
         $actual = $this->_adapter->getItems(0, 10);
         $this->assertEquals(array(), $actual);
     }

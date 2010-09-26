@@ -21,18 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Filesystem;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Tool_Project_Context_Filesystem_Abstract
+ * @uses       \Zend\Tool\Project\Context\Filesystem\AbstractFilesystem
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Filesystem_Directory extends Zend_Tool_Project_Context_Filesystem_Abstract
+class Directory extends AbstractFilesystem
 {
 
     /**
@@ -48,13 +53,13 @@ class Zend_Tool_Project_Context_Filesystem_Directory extends Zend_Tool_Project_C
     /**
      * create()
      *
-     * @return Zend_Tool_Project_Context_Filesystem_Directory;
+     * @return \Zend\Tool\Project\Context\Filesystem\Directory;
      */
     public function create()
     {
         // check to ensure the parent exists, if not, call it and create it
-        if (($parentResource = $this->_resource->getParentResource()) instanceof Zend_Tool_Project_Profile_Resource) {
-            if ((($parentContext = $parentResource->getContext()) instanceof Zend_Tool_Project_Context_Filesystem_Abstract)
+        if (($parentResource = $this->_resource->getParentResource()) instanceof \Zend\Tool\Project\Profile\Resource) {
+            if ((($parentContext = $parentResource->getContext()) instanceof AbstractFilesystem)
                 && (!$parentContext->exists())) {
                 $parentResource->create();
             }
@@ -70,7 +75,7 @@ class Zend_Tool_Project_Context_Filesystem_Directory extends Zend_Tool_Project_C
     /**
      * delete()
      *
-     * @return Zend_Tool_Project_Context_Filesystem_Directory
+     * @return \Zend\Tool\Project\Context\Filesystem\Directory
      */
     public function delete()
     {

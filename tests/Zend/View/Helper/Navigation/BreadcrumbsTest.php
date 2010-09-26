@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\View\Helper\Navigation;
+
+/**
  * Tests Zend_View_Helper_Navigation_Breadcrumbs
  *
  * @category   Zend_Tests
@@ -31,33 +36,33 @@
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_Navigation_BreadcrumbsTest
-    extends Zend_View_Helper_Navigation_TestAbstract
+class BreadcrumbsTest
+    extends TestAbstract
 {
     /**
      * Class name for view helper to test
      *
      * @var string
      */
-    protected $_helperName = 'Zend_View_Helper_Navigation_Breadcrumbs';
+    protected $_helperName = 'Zend\View\Helper\Navigation\Breadcrumbs';
 
     /**
      * View helper
      *
-     * @var Zend_View_Helper_Navigation_Breadcrumbs
+     * @var Zend\View\Helper\Navigation\Breadcrumbs
      */
     protected $_helper;
 
     public function testHelperEntryPointWithoutAnyParams()
     {
-        $returned = $this->_helper->breadcrumbs();
+        $returned = $this->_helper->direct();
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav1, $returned->getContainer());
     }
 
     public function testHelperEntryPointWithContainerParam()
     {
-        $returned = $this->_helper->breadcrumbs($this->_nav2);
+        $returned = $this->_helper->direct($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }
@@ -74,16 +79,16 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
     public function testAutoloadContainerFromRegistry()
     {
         $oldReg = null;
-        if (Zend_Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = Zend_Registry::get(self::REGISTRY_KEY);
+        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
+            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
         }
-        Zend_Registry::set(self::REGISTRY_KEY, $this->_nav1);
+        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
 
         $this->_helper->setContainer();
         $expected = $this->_getExpected('bc/default.html');
         $actual = $this->_helper->render();
 
-        Zend_Registry::set(self::REGISTRY_KEY, $oldReg);
+        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
 
         $this->assertEquals($expected, $actual);
     }
@@ -181,17 +186,17 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
 
     public function testTranslationFromTranslatorInRegistry()
     {
-        $oldReg = Zend_Registry::isRegistered('Zend_Translate')
-                ? Zend_Registry::get('Zend_Translate')
+        $oldReg = \Zend\Registry::isRegistered('Zend_Translate')
+                ? \Zend\Registry::get('Zend_Translate')
                 : null;
 
         $translator = $this->_getTranslator();
-        Zend_Registry::set('Zend_Translate', $translator);
+        \Zend\Registry::set('Zend_Translate', $translator);
 
         $expected = $this->_getExpected('bc/translated.html');
         $actual = $this->_helper->render();
 
-        Zend_Registry::set('Zend_Translate', $oldReg);
+        \Zend\Registry::set('Zend_Translate', $oldReg);
 
         $this->assertEquals($expected, $actual);
     }
@@ -216,7 +221,7 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
 
     public function testRenderingPartialBySpecifyingAnArrayAsPartial()
     {
-        $this->_helper->setPartial(array('bc.phtml', 'default'));
+        $this->_helper->setPartial(array('bc.phtml', 'application'));
 
         $expected = $this->_getExpected('bc/partial.html');
         $this->assertEquals($expected, $this->_helper->render());
@@ -230,13 +235,13 @@ class Zend_View_Helper_Navigation_BreadcrumbsTest
             $this->_helper->render();
             $this->fail(
                 '$partial was invalid, but no Zend_View_Exception was thrown');
-        } catch (Zend_View_Exception $e) {
+        } catch (\Zend\View\Exception $e) {
         }
     }
 
     public function testLastBreadcrumbShouldBeEscaped()
     {
-        $container = new Zend_Navigation(array(
+        $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label'  => 'Live & Learn',
                 'uri'    => '#',

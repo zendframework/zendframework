@@ -75,7 +75,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             <methodname>json_decode()</methodname> functions are used for encoding and decoding
             <acronym>JSON</acronym>. If ext/json is not installed a Zend Framework implementation in
             <acronym>PHP</acronym> code is used for en-/decoding. This is considerably slower than
-            using the php extension, but behaves exactly the same.
+            using the <acronym>PHP</acronym> extension, but behaves exactly the same.
         </para>
 
         <para>

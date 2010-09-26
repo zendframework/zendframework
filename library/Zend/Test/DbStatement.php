@@ -21,17 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Test;
+use Zend\Db\Statement;
+
+/**
  * Testing Database Statement that acts as a stack to SQL resultsets.
  *
- * @uses       Zend_Db_Statement_Exception
- * @uses       Zend_Db_Statement_Interface
+ * @uses       \Zend\Db\Statement\Exception
+ * @uses       \Zend\Db\Statement
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
+class DbStatement implements Statement
 {
     /**
      * @var array
@@ -49,7 +55,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     protected $_rowCount = 0;
 
     /**
-     * @var Zend_Db_Profiler_Query
+     * @var \Zend\Db\Profiler\Query
      */
     protected $_queryProfile = null;
 
@@ -57,7 +63,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * Create a Select statement which returns the given array of rows.
      *
      * @param array $rows
-     * @return Zend_Test_DbStatement
+     * @return \Zend\Test\DbStatement
      */
     static public function createSelectStatement(array $rows=array())
     {
@@ -72,7 +78,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * Create an Insert Statement
      *
      * @param  int $affectedRows
-     * @return Zend_Test_DbStatement
+     * @return \Zend\Test\DbStatement
      */
     static public function createInsertStatement($affectedRows=0)
     {
@@ -83,7 +89,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * Create an Delete Statement
      *
      * @param  int $affectedRows
-     * @return Zend_Test_DbStatement
+     * @return \Zend\Test\DbStatement
      */
     static public function createDeleteStatement($affectedRows=0)
     {
@@ -94,7 +100,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * Create an Update Statement
      *
      * @param  int $affectedRows
-     * @return Zend_Test_DbStatement
+     * @return \Zend\Test\DbStatement
      */
     static public function createUpdateStatement($affectedRows=0)
     {
@@ -105,7 +111,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * Create a Row Count Statement
      *
      * @param  int $affectedRows
-     * @return Zend_Test_DbStatement
+     * @return \Zend\Test\DbStatement
      */
     static protected function _createRowCountStatement($affectedRows)
     {
@@ -115,9 +121,9 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     }
 
     /**
-     * @param Zend_Db_Profiler_Query $qp
+     * @param \Zend\Db\Profiler\Query $qp
      */
-    public function setQueryProfile(Zend_Db_Profiler_Query $qp)
+    public function setQueryProfile(\Zend\Db\Profiler\Query $qp)
     {
         $this->_queryProfile = $qp;
     }
@@ -149,7 +155,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param mixed  $param  Reference to the PHP variable containing the value.
      * @param mixed  $type   OPTIONAL
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function bindColumn($column, &$param, $type = null)
     {
@@ -165,7 +171,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param mixed $length    OPTIONAL Length of SQL parameter.
      * @param mixed $options   OPTIONAL Other options.
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function bindParam($parameter, &$variable, $type = null, $length = null, $options = null)
     {
@@ -182,7 +188,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param mixed $value     Scalar value to bind to the parameter.
      * @param mixed $type      OPTIONAL Datatype of the parameter.
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function bindValue($parameter, $value, $type = null)
     {
@@ -193,7 +199,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * Closes the cursor, allowing the statement to be executed again.
      *
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function closeCursor()
     {
@@ -205,7 +211,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * Returns null if the statement has no result set metadata.
      *
      * @return int The number of columns.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function columnCount()
     {
@@ -217,7 +223,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * the statement handle.
      *
      * @return string error code.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function errorCode()
     {
@@ -229,7 +235,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * last operation on the statement handle.
      *
      * @return array
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function errorInfo()
     {
@@ -241,7 +247,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      *
      * @param array $params OPTIONAL Values to bind to parameter placeholders.
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function execute(array $params = array())
     {
@@ -259,7 +265,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param int $cursor OPTIONAL Absolute, relative, or other.
      * @param int $offset OPTIONAL Number for absolute or relative cursors.
      * @return mixed Array, object, or scalar depending on fetch mode.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function fetch($style = null, $cursor = null, $offset = null)
     {
@@ -277,7 +283,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param int $style OPTIONAL Fetch mode.
      * @param int $col   OPTIONAL Column number, if fetch mode is by column.
      * @return array Collection of rows, each in a format by the fetch mode.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function fetchAll($style = null, $col = null)
     {
@@ -292,7 +298,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      *
      * @param int $col OPTIONAL Position of the column to fetch.
      * @return string
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function fetchColumn($col = 0)
     {
@@ -302,7 +308,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
             return false;
         } else {
             if(count($row) < $col) {
-                throw new Zend_Db_Statement_Exception(
+                throw new Statement\Exception(
                     "Column Position '".$col."' is out of bounds."
                 );
             }
@@ -318,12 +324,12 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param string $class  OPTIONAL Name of the class to create.
      * @param array  $config OPTIONAL Constructor arguments for the class.
      * @return mixed One object instance of the specified class.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function fetchObject($class = 'stdClass', array $config = array())
     {
         if(!class_exists($class)) {
-            throw new Zend_Db_Statement_Exception("Class '".$class."' does not exist!");
+            throw new Statement\Exception("Class '".$class."' does not exist!");
         }
 
         $object = new $class();
@@ -340,7 +346,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      *
      * @param string $key Attribute name.
      * @return mixed      Attribute value.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function getAttribute($key)
     {
@@ -353,7 +359,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * the results of multiple queries.
      *
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function nextRowset()
     {
@@ -366,7 +372,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * statement object.
      *
      * @return int     The number of rows affected.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function rowCount()
     {
@@ -379,7 +385,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param string $key Attribute name.
      * @param mixed  $val Attribute value.
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function setAttribute($key, $val)
     {
@@ -391,7 +397,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      *
      * @param int   $mode The fetch mode.
      * @return bool
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend\Db\Statement\Exception
      */
     public function setFetchMode($mode)
     {

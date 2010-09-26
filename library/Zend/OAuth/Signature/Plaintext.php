@@ -43,7 +43,7 @@ class Plaintext extends AbstractSignature
      */
     public function sign(array $params, $method = null, $url = null)
     {
-        if (is_null($this->_tokenSecret)) {
+        if ($this->_tokenSecret === null) {
             return $this->_consumerSecret . '&';
         }
         $return = implode('&', array($this->_consumerSecret, $this->_tokenSecret));

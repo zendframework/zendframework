@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 20763 -->
 <sect1 id="zend.acl.advanced">
     <title>Fortgeschrittene Verwendung</title>
 
     <sect2 id="zend.acl.advanced.storing">
-        <title>Dauerhafte Speicherung von ACL Daten</title>
+        <title>Dauerhafte Speicherung von ACL-Daten</title>
 
         <para>
             <classname>Zend_Acl</classname> wurde so entwickelt, dass keine spezielle Backend
             Technologie benötigt wird, wie z.B. eine Datenbank oder ein Cache Server, um die
-            <acronym>ACL</acronym> Daten zu speichern. Die vollständige <acronym>PHP</acronym>
-            Implementation ermöglicht angepasste Administrationstools, die relativ einfach und
-            flexibel auf <classname>Zend_Acl</classname> aufbauen. Viele Situationen erfordern eine
-            interaktive Wartung der <acronym>ACL</acronym> und <classname>Zend_Acl</classname>
+            <acronym>ACL</acronym>-Daten zu speichern. Ihre vollständige
+            <acronym>PHP</acronym>-Implementation ermöglicht angepasste Administrationstools, die relativ
+            einfach und flexibel auf <classname>Zend_Acl</classname> aufbauen. Viele Situationen erfordern
+            eine interaktive Wartung der <acronym>ACL</acronym> und <classname>Zend_Acl</classname>
             stellt Methoden für das Einrichten und Abfragen der Zugriffskontrolle einer Anwendung.
         </para>
 
         <para>
-            Die Speicherung der <acronym>ACL</acronym> Daten ist deshalb die Aufgabe des
+            Die Speicherung der <acronym>ACL</acronym>-Daten ist deshalb die Aufgabe des
             Entwicklers, da sich die Anwendungsfälle für verschiedene Situationen erwartungsgemäß
             stark unterscheiden. Da <classname>Zend_Acl</classname> serialisierbar ist, können
-            <acronym>ACL</acronym> Objekte mit der <acronym>PHP</acronym> Funktion <ulink
+            <acronym>ACL</acronym>-Objekte mit der <acronym>PHP</acronym>-Funktion <ulink
                 url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
             serialisiert werden und das Ergebnis kann überall gespeichert werden, wo es der
-            Entwickler möchte, wie z.B. eine Datei, eine Datenbank oder ein Cache Mechanismus.
+            Entwickler möchte, wie z.B. in einer Datei, in einer Datenbank oder mit einem
+            Cache-Mechanismus.
         </para>
     </sect2>
 
     <sect2 id="zend.acl.advanced.assertions">
-        <title>Schreiben von bedingten ACL Regeln mit Behauptungen</title>
+        <title>Schreiben von bedingten ACL-Regeln mit Zusicherungen</title>
 
         <para>
             Manchmal soll eine Regel für das Erlauben oder Verbieten des Zugriffs auf eine
-            Ressource nicht absolut sein, sondern von verschiedenen Kriterien abhängen. Zum
-            Beispiel, nehmen wir an, dass ein bestimmter Zugriff erlaubt sei, aber nur zwischen
+            Ressource nicht absolut sein, sondern von verschiedenen Kriterien abhängen. Nehmen
+            wir zum Beispiel an, dass ein bestimmter Zugriff erlaubt sei, aber nur zwischen
             08:00 und 17:00 Uhr. Ein anderes Beispiel könnte sein, dass der Zugriff verboten wird,
-            weil eine Anfrage von einer bestimmten IP Addresse kommt, die als Missbrauchsquelle
+            weil eine Anfrage von einer bestimmten IP-Adresse kommt, die als Missbrauchsquelle
             markiert worden ist. <classname>Zend_Acl</classname> bietet eine eingebaute
             Unterstützung für die Implementierung von Regeln, die auf Bedingungen basieren, die der
             Entwickler benötigt.
         </para>
 
         <para>
-            <classname>Zend_Acl</classname> bietet Unterstützung für bedingte Regel mit dem
-            <classname>Zend_Acl_Assert_Interface</classname>. Um das Regelbehauptungsinterface
+            <classname>Zend_Acl</classname> bietet Unterstützung für bedingte Regeln mit dem
+            <classname>Zend_Acl_Assert_Interface</classname>. Um das Regelzusicherungsinterface
             benutzen zu können, schreibt der Entwickler eine Klasse, welche die
-            <methodname>assert()</methodname> Methode des Interfaces implementiert:
+            Methode <methodname>assert()</methodname> des Interfaces implementiert:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -68,9 +69,9 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
 ]]></programlisting>
 
         <para>
-            Sobald eine Behauptungsklasse verfügbar ist, muss der Entwickler eine Instanz dieser
-            Aussageklasse bei der Zuordnung bedingte Regeln übergeben. Eine Regel, die mit einer
-            Behauptung angelegt wird, wird nur angewendet, wenn die Behauptungsmethode
+            Sobald eine Zusicherungsklasse verfügbar ist, muss der Entwickler eine Instanz dieser
+            Zusicherungsklasse bei der Zuordnung bedingter Regeln übergeben. Eine Regel, die mit
+            einer Zusicherung angelegt wird, wird nur angewendet, wenn die Zusicherungsmethode
             <constant>TRUE</constant> zurück gibt.
         </para>
 
@@ -87,15 +88,15 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             alle Rechte zutrifft, würde eine "unsaubere" IP zu einem Zugriffsverbot führen. Dies
             ist ein besonderer Fall und es sollte verstanden werden, dass in allen anderen Fällen
             (d.h. wenn eine spezielle Rolle, Ressource oder Recht für die Regel spezifiziert wird)
-            eine fehlerhafte Behauptung dazu führt, dass die Regel nicht angewandt wird und andere
-            Regeln verwendet werden, um zu ermittel, ob der Zugriff erlaubt oder verboten ist.
+            eine fehlerhafte Zusicherung dazu führt, dass die Regel nicht angewandt wird und andere
+            Regeln verwendet werden um zu ermitteln, ob der Zugriff erlaubt oder verboten ist.
         </para>
 
         <para>
-            Der <methodname>assert()</methodname> Methode eines Behauptungsobjektes werden die
-            <acronym>ACL</acronym>, Rolle, Ressource and die Rechte übergeben, auf welche die
+            Der Methode <methodname>assert()</methodname> eines Zusicherungsobjektes werden die
+            <acronym>ACL</acronym>, Rolle, Ressource und die Rechte übergeben, auf welche die
             Autorisierungsabfrage (d.h., <methodname>isAllowed()</methodname>) passt, um den
-            Kontext für die Behauptungsklasse bereit zu stellen, um die Bedingungen zu ermitteln wo
+            Kontext für die Zusicherungsklasse bereit zu stellen, um die Bedingungen zu ermitteln wo
             erforderlich.
         </para>
     </sect2>

@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper for returning the current server URL (optionally with request URI)
  *
  * @category   Zend
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_ServerUrl
+class ServerUrl
 {
     /**
      * Scheme
@@ -85,7 +90,7 @@ class Zend_View_Helper_ServerUrl
      *                                     is to not append any path.
      * @return string                      server url
      */
-    public function serverUrl($requestUri = null)
+    public function direct($requestUri = null)
     {
         if ($requestUri === true) {
             $path = $_SERVER['REQUEST_URI'];
@@ -112,7 +117,7 @@ class Zend_View_Helper_ServerUrl
      * Sets host
      *
      * @param  string $host                new host
-     * @return Zend_View_Helper_ServerUrl  fluent interface, returns self
+     * @return \Zend\View\Helper\ServerUrl  fluent interface, returns self
      */
     public function setHost($host)
     {
@@ -134,7 +139,7 @@ class Zend_View_Helper_ServerUrl
      * Sets scheme (typically http or https)
      *
      * @param  string $scheme              new scheme (typically http or https)
-     * @return Zend_View_Helper_ServerUrl  fluent interface, returns self
+     * @return \Zend\View\Helper\ServerUrl  fluent interface, returns self
      */
     public function setScheme($scheme)
     {

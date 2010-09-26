@@ -22,7 +22,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\StaticFilter;
+use Zend\Filter\StaticFilter,
+    Zend\Loader\PluginLoader;
 
 /**
  * @category   Zend
@@ -41,7 +42,33 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        StaticFilter::setDefaultNamespaces(array());
+        StaticFilter::setPluginLoader(null);
+    }
+
+    public function testPluginLoaderInstanceWithZendFilterPathsRegisteredByDefault()
+    {
+        $loader = StaticFilter::getPluginLoader();
+        $this->assertType('Zend\Loader\PluginLoader', $loader);
+        $paths = $loader->getPaths('Zend\Filter');
+        $this->assertEquals(1, count($paths));
+    }
+
+    public function testCanSpecifyCustomPluginLoader()
+    {
+        $loader = new PluginLoader();
+        StaticFilter::setPluginLoader($loader);
+        $this->assertSame($loader, StaticFilter::getPluginLoader());
+    }
+
+    public function testCanResetPluginLoaderByPassingNull()
+    {
+        $loader = new PluginLoader();
+        StaticFilter::setPluginLoader($loader);
+        $this->assertSame($loader, StaticFilter::getPluginLoader());
+        StaticFilter::setPluginLoader(null);
+        $registered = StaticFilter::getPluginLoader();
+        $this->assertNotSame($loader, $registered);
+        $this->assertType('Zend\Loader\PluginLoader', $registered);
     }
 
     /**
@@ -84,37 +111,5 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
         StaticFilter::execute('1234', 'UnknownFilter');
-    }
-
-    /**
-     * Testing Namespaces
-     *
-     * @return void
-     */
-    public function testNamespaces()
-    {
-        $this->assertEquals(array(), StaticFilter::getDefaultNamespaces());
-        $this->assertFalse(StaticFilter::hasDefaultNamespaces());
-
-        StaticFilter::setDefaultNamespaces('TestDir');
-        $this->assertEquals(array('TestDir'), StaticFilter::getDefaultNamespaces());
-
-        StaticFilter::setDefaultNamespaces('OtherTestDir');
-        $this->assertEquals(array('OtherTestDir'), StaticFilter::getDefaultNamespaces());
-
-        $this->assertTrue(StaticFilter::hasDefaultNamespaces());
-
-        StaticFilter::setDefaultNamespaces(array());
-
-        $this->assertEquals(array(), StaticFilter::getDefaultNamespaces());
-        $this->assertFalse(StaticFilter::hasDefaultNamespaces());
-
-        StaticFilter::addDefaultNamespaces(array('One', 'Two'));
-        $this->assertEquals(array('One', 'Two'), StaticFilter::getDefaultNamespaces());
-
-        StaticFilter::addDefaultNamespaces('Three');
-        $this->assertEquals(array('One', 'Two', 'Three'), StaticFilter::getDefaultNamespaces());
-
-        StaticFilter::setDefaultNamespaces(array());
     }
 }

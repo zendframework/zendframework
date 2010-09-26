@@ -20,15 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_CycleTest::main() if this source file is executed directly.
-if (! defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_CycleTest::main");
-}
-
-
-
-
-/** Zend_View_Helper_Cycle */
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
+use Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_Cycle.
@@ -41,23 +37,12 @@ if (! defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
+class CycleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_View_Helper_Cycle
      */
     public $helper;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite = new PHPUnit_Framework_TestSuite("Zend_View_Helper_CycleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -67,7 +52,7 @@ class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->helper = new Zend_View_Helper_Cycle();
+        $this->helper = new Helper\Cycle();
     }
 
     /**
@@ -83,8 +68,8 @@ class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
 
     public function testCycleMethodReturnsObjectInstance()
     {
-        $cycle = $this->helper->cycle();
-        $this->assertTrue($cycle instanceof Zend_View_Helper_Cycle);
+        $cycle = $this->helper->direct();
+        $this->assertTrue($cycle instanceof Helper\Cycle);
     }
 
     public function testAssignAndGetValues()
@@ -95,13 +80,13 @@ class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
 
     public function testCycleMethod()
     {
-        $this->helper->cycle(array('a', 1, 'asd'));
+        $this->helper->direct(array('a', 1, 'asd'));
         $this->assertEquals(array('a', 1, 'asd'), $this->helper->getAll());
     }
 
     public function testToString()
     {
-        $this->helper->cycle(array('a', 1, 'asd'));
+        $this->helper->direct(array('a', 1, 'asd'));
         $this->assertEquals('a', (string) $this->helper->toString());
     }
 
@@ -148,8 +133,8 @@ class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
     {
         $this->helper->assign(array(5, 8, 3));
         $this->assertEquals(5, (string) $this->helper->next());
-        $this->assertEquals(2, (string) $this->helper->cycle(array(2,38,1),'cycle2')->next());
-        $this->assertEquals(8, (string) $this->helper->cycle()->next());
+        $this->assertEquals(2, (string) $this->helper->direct(array(2,38,1),'cycle2')->next());
+        $this->assertEquals(8, (string) $this->helper->direct()->next());
         $this->assertEquals(38, (string) $this->helper->setName('cycle2')->next());
     }
 
@@ -158,14 +143,9 @@ class Zend_View_Helper_CycleTest extends PHPUnit_Framework_TestCase
         $expected = array(5,4,2,3);
         $expected2 = array(7,34,8,6);
         for($i=0;$i<4;$i++) {
-          $this->assertEquals($expected[$i], (string) $this->helper->cycle($expected)->next());
-          $this->assertEquals($expected2[$i], (string) $this->helper->cycle($expected2,'cycle2')->next());
+          $this->assertEquals($expected[$i], (string) $this->helper->direct($expected)->next());
+          $this->assertEquals($expected2[$i], (string) $this->helper->direct($expected2,'cycle2')->next());
         }
     }
 
 }
-// Call Zend_View_Helper_CycleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_CycleTest::main") {
-    Zend_View_Helper_CycleTest::main();
-}
-

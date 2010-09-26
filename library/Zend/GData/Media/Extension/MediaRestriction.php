@@ -28,15 +28,15 @@ namespace Zend\GData\Media\Extension;
 /**
  * Represents the media:restriction element
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Media\Media
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MediaRestriction extends \Zend\GData\Extension\Extension
+class MediaRestriction extends \Zend\GData\Extension
 {
 
     protected $_rootElement = 'restriction';
@@ -61,7 +61,7 @@ class MediaRestriction extends \Zend\GData\Extension\Extension
      */
     public function __construct($text = null, $relationship = null,  $type = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Media\Media::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Media::$namespaces);
         parent::__construct();
         $this->_text = $text;
         $this->_relationship = $relationship;

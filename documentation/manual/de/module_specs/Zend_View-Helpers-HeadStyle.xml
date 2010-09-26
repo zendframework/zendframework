@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle Helfer</title>
 
     <para>
-        Das HTML Element <emphasis>&lt;style&gt;</emphasis> wird verwendet um <acronym>CSS</acronym>
-        Stylesheets im HTML Element <emphasis>&lt;head&gt;</emphasis> zu inkludieren.
+        Das <acronym>HTML</acronym> Element <emphasis>&lt;style&gt;</emphasis> wird verwendet um
+        <acronym>CSS</acronym> Stylesheets im <acronym>HTML</acronym> Element
+        <emphasis>&lt;head&gt;</emphasis> zu inkludieren.
     </para>
 
     <note>

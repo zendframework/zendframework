@@ -84,7 +84,7 @@ class Feed extends Extension\AbstractFeed
      *
      * @return string
      */
-    public function getCategories()
+    public function getItunesCategories()
     {
         if (isset($this->_data['categories'])) {
             return $this->_data['categories'];
@@ -149,7 +149,7 @@ class Feed extends Extension\AbstractFeed
      *
      * @return string
      */
-    public function getImage()
+    public function getItunesImage()
     {
         if (isset($this->_data['image'])) {
             return $this->_data['image'];

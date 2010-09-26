@@ -25,6 +25,8 @@
  */
 namespace Zend\Queue\Message;
 
+use Zend\Queue\Queue;
+
 /**
  * @uses       \Countable
  * @uses       \Iterator
@@ -46,7 +48,7 @@ class MessageIterator implements \Iterator, \Countable
 
      /**
      * Connected is true if we have a reference to a live
-     * \Zend\Queue\Adapter\AdapterInterface object.
+     * \Zend\Queue\Adapter object.
      * This is false after the Message has been deserialized.
      *
      * @var boolean
@@ -54,14 +56,14 @@ class MessageIterator implements \Iterator, \Countable
     protected $_connected = true;
 
     /**
-     * \Zend\Queue\Adapter\AdapterInterface parent class or instance
+     * \Zend\Queue\Adapter parent class or instance
      *
-     * @var \Zend\Queue\Adapter\AdapterInterface
+     * @var \Zend\Queue\Adapter
      */
     protected $_queue = null;
 
     /**
-     * Name of the class of the \Zend\Queue\Adapter\AdapterInterface object.
+     * Name of the class of the \Zend\Queue\Adapter object.
      *
      * @var string
      */
@@ -175,11 +177,11 @@ class MessageIterator implements \Iterator, \Countable
      * Set the queue object, to re-establish a live connection
      * to the queue for a Message that has been de-serialized.
      *
-     * @param  \Zend\Queue\Adapter\AdapterInterface $queue
+     * @param  \Zend\Queue\Adapter $queue
      * @return boolean
      * @throws \Zend\Queue\Exception
      */
-    public function setQueue(\Zend\Queue\Queue $queue)
+    public function setQueue(Queue $queue)
     {
         $this->_queue     = $queue;
         $this->_connected = false;
@@ -225,7 +227,7 @@ class MessageIterator implements \Iterator, \Countable
      * Similar to the current() function for arrays in PHP
      * Required by interface MessageIterator.
      *
-     * @return \Zend\Queue\Message\Message current element from the collection
+     * @return \Zend\Queue\Message current element from the collection
      */
     public function current()
     {

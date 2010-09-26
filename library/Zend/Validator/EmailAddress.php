@@ -27,7 +27,7 @@ namespace Zend\Validator;
 /**
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\Hostname\Hostname
+ * @uses       \Zend\Validator\Hostname
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -49,11 +49,11 @@ class EmailAddress extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID            => "Invalid type given, value should be a string",
+        self::INVALID            => "Invalid type given. String expected",
         self::INVALID_FORMAT     => "'%value%' is no valid email address in the basic format local-part@hostname",
         self::INVALID_HOSTNAME   => "'%hostname%' is no valid hostname for email address '%value%'",
         self::INVALID_MX_RECORD  => "'%hostname%' does not appear to have a valid MX record for the email address '%value%'",
-        self::INVALID_SEGMENT    => "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network.",
+        self::INVALID_SEGMENT    => "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network",
         self::DOT_ATOM           => "'%localPart%' can not be matched against dot-atom format",
         self::QUOTED_STRING      => "'%localPart%' can not be matched against quoted-string format",
         self::INVALID_LOCAL_PART => "'%localPart%' is no valid local part for email address '%value%'",
@@ -109,7 +109,7 @@ class EmailAddress extends AbstractValidator
         'mx'       => false,
         'deep'     => false,
         'domain'   => true,
-        'allow'    => Hostname\Hostname::ALLOW_DNS,
+        'allow'    => Hostname::ALLOW_DNS,
         'hostname' => null
     );
 
@@ -220,7 +220,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set hostname validator
      *
-     * @return \Zend\Validator\Hostname\Hostname
+     * @return \Zend\Validator\Hostname
      */
     public function getHostnameValidator()
     {
@@ -228,14 +228,14 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
-     * @param \Zend\Validator\Hostname\Hostname $hostnameValidator OPTIONAL
+     * @param \Zend\Validator\Hostname $hostnameValidator OPTIONAL
      * @param int                    $allow             OPTIONAL
      * @return void
      */
-    public function setHostnameValidator(Hostname\Hostname $hostnameValidator = null, $allow = Hostname\HostnameHostname\Hostname::ALLOW_DNS)
+    public function setHostnameValidator(Hostname $hostnameValidator = null, $allow = Hostname::ALLOW_DNS)
     {
         if (!$hostnameValidator) {
-            $hostnameValidator = new Hostname\Hostname($allow);
+            $hostnameValidator = new Hostname($allow);
         }
 
         $this->_options['hostname'] = $hostnameValidator;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 20799 -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
+
     <para>
         <classname>Zend_Text_Table</classname> は、さまざまなデコレータを使用して
         テキストベースの表をその場で作成するためのコンポーネントです。
@@ -12,8 +13,10 @@
         <classname>Zend_Text_Table</classname> は、複数行にわたるカラムやカラムの連結、
         テキストの配置の指定に対応しています。
     </para>
+
     <note>
         <title>エンコーディング</title>
+
         <para>
             <classname>Zend_Text_Table</classname> のデフォルトでは、文字列が
             UTF-8 でエンコードされていることを前提としています。
@@ -22,17 +25,18 @@
             の <code>setContent</code> メソッドのパラメータで指定します。
             もうひとつの方法として、もしそのエンコーディングをプロセス全体で使う場合には
             <methodname>Zend_Text_Table::setInputCharset($charset)</methodname>
-            で標準の入力文字セットを定義することができます。
+            で標準の入力文字セットを定義できます。
             表を出力する際に別の文字セットを使用したい場合は、
             <methodname>Zend_Text_Table::setOutputCharset($charset)</methodname> で設定します。
         </para>
     </note>
+
     <para>
         <classname>Zend_Text_Table</classname> オブジェクトは行の集まりで構成されており、
         行は列の集まりで構成されています。行と列を表すのが、それぞれ
         <classname>Zend_Text_Table_Row</classname> および
         <classname>Zend_Text_Table_Column</classname> です。
-        表を作成する際に、表のオプションを配列で指定することができます。
+        表を作成する際に、表のオプションを配列で指定できます。
         指定できるオプションは次のとおりです。
 
         <itemizedlist>
@@ -42,6 +46,7 @@
                     配列で、すべてのカラムとその幅 (文字数) を指定します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>decorator</code>: テーブルの罫線に使用するデコレータ。
@@ -49,36 +54,44 @@
                     あるいは独自のデコレータオブジェクトのインスタンスを指定することもできます。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>padding</code>: カラムの左右の余白文字数。
                     デフォルトはゼロです。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>AutoSeparate</code>: 各行を横線でどのように区切るかの方法。
                     デフォルトは、すべての行間を区切ります。これは、次の
                     <classname>Zend_Text_Table</classname> の定数のビットマスクで指定します。
+
                     <itemizedlist>
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_NONE</constant></para>
                         </listitem>
+
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_HEADER</constant></para>
                         </listitem>
+
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_FOOTER</constant></para>
                         </listitem>
+
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_ALL</constant></para>
                         </listitem>
                     </itemizedlist>
+
                     ヘッダは常に最初の行、フッタは常に最後の行となります。
                 </para>
             </listitem>
         </itemizedlist>
     </para>
+
     <para>
         表に行を追加するには、
         <classname>Zend_Text_Table_Row</classname> のインスタンスを作成して、それを
@@ -86,6 +99,7 @@
         配列を直接 <code>appendRow</code> メソッドに渡すこともできます。
         この場合は、複数の列オブジェクトからなる行オブジェクトに自動的に変換されます。
     </para>
+
     <para>
         行に列を追加する方法も同じです。
         <classname>Zend_Text_Table_Column</classname> のインスタンスを作成し、
@@ -94,7 +108,7 @@
         最初のパラメータは列の中身で、これは複数行にすることもできます。
         複数行にする場合は <code>\n</code> で行を区切ります。
         2 番目のパラメータは配置を指定します。デフォルトは左詰めで、
-        <classname>Zend_Text_Table_Column</classname> のクラス定数のいずれかを指定することができます。
+        <classname>Zend_Text_Table_Column</classname> のクラス定数のいずれかを指定できます。
 
         <itemizedlist>
             <listitem>
@@ -102,11 +116,13 @@
                     <constant>ALIGN_LEFT</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>ALIGN_CENTER</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>ALIGN_RIGHT</constant>
@@ -123,18 +139,22 @@
         のパラメータに列オブジェクトを指定してコールします。
         あるいは、文字列を直接 <code>appendColumn</code> メソッドに渡すこともできます。
     </para>
+
     <para>
         最後に、表をレンダリングするには <code>render</code>
         メソッドを使用します。あるいは、
         <code>echo $table;</code> や <code>$tableString = (string) $table</code>
         などとしてマジックメソッド <code>__toString</code> を使用することもできます。
     </para>
+
     <example id="zend.text.table.example.using">
         <title>Zend_Text_Table の使用例</title>
+
         <para>
             この例では、<classname>Zend_Text_Table</classname>
             でシンプルな表を作成するための方法を示します。
         </para>
+
         <programlisting language="php"><![CDATA[
 $table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
 
@@ -151,9 +171,11 @@ $table->appendRow($row);
 
 echo $table;
 ]]></programlisting>
+
         <para>
             この結果は次のようになります。
         </para>
+
         <programlisting language="text"><![CDATA[
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │

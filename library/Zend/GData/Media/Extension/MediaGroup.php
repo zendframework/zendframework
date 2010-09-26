@@ -32,8 +32,8 @@ namespace Zend\GData\Media\Extension;
  * it is a child of an Entry (Atom) or Item (RSS).
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\Media\Media
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\Media
  * @uses       \Zend\GData\Media\Extension\MediaCategory
  * @uses       \Zend\GData\Media\Extension\MediaContent
  * @uses       \Zend\GData\Media\Extension\MediaCopyright
@@ -53,7 +53,7 @@ namespace Zend\GData\Media\Extension;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MediaGroup extends \Zend\GData\Extension\Extension
+class MediaGroup extends \Zend\GData\Extension
 {
 
     protected $_rootElement = 'group';
@@ -129,7 +129,7 @@ class MediaGroup extends \Zend\GData\Extension\Extension
      */
     public function __construct($element = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Media\Media::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Media::$namespaces);
         parent::__construct($element);
     }
 

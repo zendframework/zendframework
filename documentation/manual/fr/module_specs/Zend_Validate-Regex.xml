@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 22146 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.regex">
+    <title>Regex</title>
+
+    <para>
+        Ce validateur valide si une chaine correspond à un motif d'expression régulière.
+    </para>
+
+    <sect3 id="zend.validate.set.regex.options">
+        <title>Options supportées par Zend_Validate_Regex</title>
+
+        <para>
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_Regex</classname>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>pattern</property></emphasis>&#160;: le motif d'expression
+                    régulière.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.regex.basic">
+        <title>Validation avec Zend_Validate_Regex</title>
+
+        <para>
+            La validation au travers d'expressions régulières est pratique, très utilisée et simple
+            dans la mesure où elle vous évite la plupart du temps d'écrire votre propre validateur.
+            Voyons quelques exemples&#160;:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Regex(array('pattern' => '/^Test/');
+
+$validator->isValid("Test"); // retourne true
+$validator->isValid("Testing"); // retourne true
+$validator->isValid("Pest"); // retourne false
+]]></programlisting>
+
+        <para>
+            Comme vous le voyez, le motif doit être passé avec la même forme que pour
+            <methodname>preg_match()</methodname>. Pour plus de détails sur les expressions
+            régulières, voyez <ulink
+                url="http://php.net/manual/en/reference.pcre.pattern.syntax.php">le manuel de PHP
+                sur la syntaxe des motifs d'expressions PCRE</ulink>.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.regex.handling">
+        <title>Gestion des motifs</title>
+
+        <para>
+            Vous pouvez affecter&#160;/&#160;récupérer le motif après avoir crée le validateur en
+            utilisant les méthodes <methodname>setPattern()</methodname> et
+            <methodname>getPattern()</methodname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Regex(array('pattern' => '/^Test/');
+$validator->setPattern('ing$/');
+
+$validator->isValid("Test"); // retourne false
+$validator->isValid("Testing"); // retourne true
+$validator->isValid("Pest"); // retourne false
+]]></programlisting>
+    </sect3>
+</sect2>

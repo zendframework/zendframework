@@ -20,9 +20,9 @@
  * @version    $Id$
  */
 
+namespace Admin;
 
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
+require_once __DIR__ . '/../FooController.php';
 
 /**
  * Mock file for testbed
@@ -33,7 +33,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Admin_FooController extends FooController
+class FooController extends \FooController
 {
 
     /**

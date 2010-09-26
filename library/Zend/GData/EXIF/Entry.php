@@ -25,11 +25,13 @@
  */
 namespace Zend\GData\EXIF;
 
+use Zend\GData\EXIF;
+
 /**
  * An Atom entry containing EXIF metadata.
  *
  * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\EXIF\EXIF
+ * @uses       \Zend\GData\EXIF
  * @uses       \Zend\GData\EXIF\Extension\Tags
  * @category   Zend
  * @package    Zend_Gdata
@@ -44,7 +46,7 @@ class Entry extends \Zend\GData\Entry
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\Exif\Entry';
+    protected $_entryClassName = '\Zend\GData\EXIF\Entry';
 
     /**
      * The tags that belong to the Exif group.

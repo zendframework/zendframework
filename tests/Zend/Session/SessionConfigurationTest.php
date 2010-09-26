@@ -372,22 +372,22 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.cookie_httponly
 
-    public function testCookieHTTPOnlyDefaultsToIniSettings()
+    public function testCookieHttpOnlyDefaultsToIniSettings()
     {
-        $this->assertSame(ini_get('session.cookie_httponly'), $this->config->getCookieHTTPOnly());
+        $this->assertSame(ini_get('session.cookie_httponly'), $this->config->getCookieHttpOnly());
     }
 
-    public function testCookieHTTPOnlyIsMutable()
+    public function testCookieHttpOnlyIsMutable()
     {
         $value = ini_get('session.cookie_httponly') ? false : true;
-        $this->config->setCookieHTTPOnly($value);
-        $this->assertEquals($value, $this->config->getCookieHTTPOnly());
+        $this->config->setCookieHttpOnly($value);
+        $this->assertEquals($value, $this->config->getCookieHttpOnly());
     }
 
-    public function testCookieHTTPOnlyAltersIniSetting()
+    public function testCookieHttpOnlyAltersIniSetting()
     {
         $value = ini_get('session.cookie_httponly') ? false : true;
-        $this->config->setCookieHTTPOnly($value);
+        $this->config->setCookieHttpOnly($value);
         $this->assertEquals($value, ini_get('session.cookie_httponly'));
     }
 
@@ -804,7 +804,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'cookie_httponly',
-                'getCookieHTTPOnly',
+                'getCookieHttpOnly',
                 true,
             ),
             array(

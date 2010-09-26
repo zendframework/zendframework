@@ -11,8 +11,9 @@
         <title>Zend_Validate_StringLength supports only string validation</title>
 
         <para>
-            It should be noted that Zend_Validate_StringLength supports only the validation of strings.
-            Integers, floats, dates or objects can not be validated with this validator.
+            It should be noted that <classname>Zend_Validate_StringLength</classname> supports only
+            the validation of strings. Integers, floats, dates or objects can not be validated with
+            this validator.
         </para>
     </note>
 

@@ -20,11 +20,16 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Captcha generic decorator
  *
  * Adds captcha adapter output
  *
- * @uses       Zend_Form_Decorator_Abstract
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -32,7 +37,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Captcha extends Zend_Form_Decorator_Abstract
+class Captcha extends AbstractDecorator
 {
     /**
      * Render captcha

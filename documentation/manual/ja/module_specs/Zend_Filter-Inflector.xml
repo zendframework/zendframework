@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 21217 -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
 
@@ -51,7 +51,7 @@ $filtered = $inflector->filter(array('page' => $string));
             インフレクタには、ひとつの <emphasis>ターゲット</emphasis>
             とひとつあるいは複数の <emphasis>ルール</emphasis> が必要です。
             ターゲットは基本的に文字列であり、置き換えを行うプレースホルダを定義します。
-            プレースホルダは、先頭に ':' をつけて <code>:script</code>
+            プレースホルダは、先頭に ':' をつけて <emphasis>:script</emphasis>
             のように定義します。
         </para>
 
@@ -154,7 +154,7 @@ $inflector->setTargetReplacementIdentifier('#');
             普通はコンストラクタでターゲットを指定することになるでしょう。
             しかし、あとでターゲットを設定しなおしたくなることもあるかもしれません
             (たとえば、
-            <code>ViewRenderer</code> や <classname>Zend_Layout</classname>
+            <classname>ViewRenderer</classname> や <classname>Zend_Layout</classname>
             といったコアコンポーネントのデフォルトのインフレクタを変更したい場合など)。
             この際に使用できるのが <methodname>setTarget()</methodname> です。
         </para>
@@ -246,7 +246,7 @@ $inflector->setStaticRule('suffix', 'php');
 ]]></programlisting>
 
             <para>
-                ターゲットと同様、静的ルールも参照で指定することができます。
+                ターゲットと同様、静的ルールも参照で指定できます。
                 これにより、メソッドコールをせずに変数を更新するだけでルールを変更できるようになります。
                 これは、クラスの中で内部的にインフレクタを使用している場合に便利です。
                 ユーザにいちいちインフレクタを取得させる必要がなくなります。
@@ -352,7 +352,7 @@ $inflector->setFilterRule('script', array(
                 一括してルールを設定できたほうが楽でしょう。
                 <classname>Zend_Filter_Inflector</classname> の <methodname>addRules()</methodname>
                 メソッドや <methodname>setRules()</methodname> メソッドを使用すると、
-                一括設定することができます。
+                一括設定できます。
             </para>
 
             <para>
@@ -445,36 +445,36 @@ $inflector->addRules(array(
 
         <para>
             <classname>Zend_Config</classname> を使用してルールを設定したり、
-            フィルタのプレフィックスのパスやその他のインフレクタの状態を設定することができます。
+            フィルタのプレフィックスのパスやその他のインフレクタの状態を設定できます。
             そのためには、<classname>Zend_Config</classname> オブジェクトをコンストラクタあるいは
-            <methodname>setConfig()</methodname> に渡します。
+            <methodname>setOptions()</methodname> に渡します。
             設定可能な項目は以下のとおりです。
         </para>
 
         <itemizedlist>
             <listitem><para>
-                    <code>target</code> は、インフレクションのターゲットを指定します。
+                    <property>target</property> は、インフレクションのターゲットを指定します。
             </para></listitem>
 
             <listitem><para>
-                    <code>filterPrefixPath</code> は、
+                    <property>filterPrefixPath</property> は、
                     インフレクタが使用するフィルタの プレフィックス/パス
                     のペアを指定します。
             </para></listitem>
 
             <listitem><para>
-                    <code>throwTargetExceptionsOn</code> は、
+                    <property>throwTargetExceptionsOn</property> は、
                     インフレクション処理の後にまだ置換識別子が残っていた場合に
                     例外をスローするかどうかを boolean 値で指定します。
             </para></listitem>
 
             <listitem><para>
-                    <code>targetReplacementIdentifier</code> は、
+                    <property>targetReplacementIdentifier</property> は、
                     ターゲット文字列内で置換変数を表すために使用する文字を指定します。
             </para></listitem>
 
             <listitem><para>
-                    <code>rules</code> は、インフレクションルールの配列を指定します。
+                    <property>rules</property> は、インフレクションルールの配列を指定します。
                     値、あるいは値の配列をキーに指定し、
                     <methodname>addRules()</methodname> と同じ形式となります。
             </para></listitem>
@@ -488,9 +488,9 @@ $inflector->addRules(array(
 $config    = new Zend_Config($options);
 $inflector = new Zend_Filter_Inflector($config);
 
-// あるいは setConfig() で
+// あるいは setOptions() で
 $inflector = new Zend_Filter_Inflector();
-$inflector->setConfig($config);
+$inflector->setOptions($config);
 ]]></programlisting>
         </example>
     </sect2>

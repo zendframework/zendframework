@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -20,7 +20,7 @@
             in the router interface, throw an exception if no route matches. The error
             plugin will then catch that exception and forward to the error controller.
             You can then test for that specific error with the constant
-            <constant></constant>:
+            <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE</constant>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -130,7 +130,7 @@ $authors = $feed->getAuthors()->getValues();
             </para>
 
             <para>
-                When you are in need of the original values you can eighter store them before
+                When you are in need of the original values you can either store them before
                 initiating <classname>Zend_File_Transfer</classname> or use the
                 <property>disableInfos</property> option at initiation. Note that this option is
                 useless when its given after initiation.
@@ -211,13 +211,15 @@ $authors = $feed->getAuthors()->getValues();
         <para>
             <classname>Zend_Filter_StripTags</classname> contains a flag,
             <varname>commentsAllowed</varname>, that, in previous versions, allowed you to
-            optionally whitelist HTML comments in HTML text filtered by the class. However, this
-            opens code enabling the flag to <acronym>XSS</acronym> attacks, particularly in Internet
-            Explorer (which allows specifying conditional functionality via HTML comments). Starting
+            optionally whitelist <acronym>HTML</acronym> comments in <acronym>HTML</acronym> text
+            filtered by the class. However, this opens code enabling the flag to
+            <acronym>XSS</acronym> attacks, particularly in Internet Explorer (which allows
+            specifying conditional functionality via <acronym>HTML</acronym> comments). Starting
             in version 1.9.7 (and backported to versions 1.8.5 and 1.7.9), the
-            <varname>commentsAllowed</varname> flag no longer has any meaning, and all HTML
-            comments, including those containing other HTML tags or nested commments, will be
-            stripped from the final output of the filter.
+            <varname>commentsAllowed</varname> flag no longer has any meaning, and all
+            <acronym>HTML</acronym> comments, including those containing other
+            <acronym>HTML</acronym> tags or nested commments, will be stripped from the final output
+            of the filter.
         </para>
     </sect2>
 
@@ -239,7 +241,9 @@ $authors = $feed->getAuthors()->getValues();
             </para>
 
             <programlisting language="php"><![CDATA[
-$trans = new Zend_Translate('xliff', '/path/to/source', $locale, array('useId' => false));
+$trans = new Zend_Translate(
+    'xliff', '/path/to/source', $locale, array('useId' => false)
+);
 ]]></programlisting>
         </sect3>
     </sect2>

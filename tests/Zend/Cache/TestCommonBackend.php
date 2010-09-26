@@ -45,7 +45,7 @@ abstract class TestCommonBackend extends \PHPUnit_Framework_TestCase
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $this->_className = $name;
-        $this->_root = dirname(__FILE__);
+        $this->_root = __DIR__;
         date_default_timezone_set('UTC');
         parent::__construct($name, $data, $dataName);
     }

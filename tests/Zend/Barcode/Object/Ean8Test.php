@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Barcode\Object;
-use Zend\Barcode;
+use Zend\Barcode\Object\Ean8;
 
 /**
  * @category   Zend
@@ -38,12 +38,12 @@ class Ean8Test extends TestCommon
 {
     protected function _getBarcodeObject($options = null)
     {
-        return new Barcode\Object\Ean8($options);
+        return new Ean8($options);
     }
 
     public function testType()
     {
-        $this->assertSame('Ean8', $this->_object->getType());
+        $this->assertSame('ean8', $this->_object->getType());
     }
 
     public function testChecksum()
@@ -93,11 +93,9 @@ class Ean8Test extends TestCommon
         $this->assertSame('01234565', $this->_object->getTextToDisplay());
     }
 
-    /**
-     * @expectedException \Zend\Barcode\Object\Exception
-     */
     public function testBadTextDetectedIfChecksumWished()
     {
+        $this->setExpectedException('\Zend\Barcode\Object\Exception');
         $this->_object->setText('a');
         $this->_object->setWithChecksum(true);
         $this->_object->getText();
@@ -109,11 +107,12 @@ class Ean8Test extends TestCommon
         $this->assertTrue($this->_object->checkParams());
     }
 
-
     public function testGetKnownWidthWithoutOrientation()
     {
         $this->_object->setText('123456');
-        $this->assertEquals(82, $this->_object->getWidth());
+        $this->assertEquals(87, $this->_object->getWidth());
+        $this->_object->setWithQuietZones(false);
+        $this->assertEquals(67, $this->_object->getWidth(true));
     }
 
     public function testCompleteGeneration()

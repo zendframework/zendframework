@@ -82,7 +82,7 @@ class NicknameTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Trogdor", $newNickname->name);
 
         /* try constructing using magic factory */
-        $gdata = new \Zend\GData\GApps\GApps();
+        $gdata = new \Zend\GData\GApps();
         $newNickname2 = $gdata->newNickname();
         $newNickname2->transferFromXML($newNickname->saveXML());
         $this->assertEquals(1, count($newNickname2->extensionElements));

@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\GData\YouTube;
-use Zend\GData\App;
+
+use Zend\GData\YouTube,
+    Zend\GData\App;
 
 /**
  * Represents the YouTube video playlist flavor of an Atom entry
@@ -33,7 +35,7 @@ use Zend\GData\App;
  * @uses       \Zend\GData\Entry
  * @uses       \Zend\GData\Extension\FeedLink
  * @uses       \Zend\GData\Media\Extension\MediaThumbnail
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\Extension\AboutMe
  * @uses       \Zend\GData\YouTube\Extension\Age
  * @uses       \Zend\GData\YouTube\Extension\Books
@@ -61,7 +63,7 @@ use Zend\GData\App;
 class UserProfileEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\GData\YouTube\UserProfileEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\UserProfileEntry';
 
     /**
      * Nested feed links

@@ -59,7 +59,7 @@ class Alpha extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID      => "Invalid type given, value should be a string",
+        self::INVALID      => "Invalid type given. String expected",
         self::NOT_ALPHA    => "'%value%' contains non alphabetic characters",
         self::STRING_EMPTY => "'%value%' is an empty string"
     );
@@ -137,7 +137,7 @@ class Alpha extends AbstractValidator
 
         self::$_filter->allowWhiteSpace = $this->allowWhiteSpace;
 
-        if ($value !== self::$_filter->__invoke($value)) {
+        if ($value !== self::$_filter->filter($value)) {
             $this->_error(self::NOT_ALPHA);
             return false;
         }

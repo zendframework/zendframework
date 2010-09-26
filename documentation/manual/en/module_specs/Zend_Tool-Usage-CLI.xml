@@ -25,12 +25,13 @@
             <title>Download And Go</title>
 
             <para>
-                First download Zend Framework.  This can be done by going to framework.zend.com
-                and downloading the latest release.  After you've downloaded the package and placed
-                it on your system.  The next step is to make the zf command available to your
+                First download Zend Framework. This can be done by going to framework.zend.com
+                and downloading the latest release. After you've downloaded the package and placed
+                it on your system. The next step is to make the zf command available to your
                 system. The easiest way to do this, is to copy the proper files from the bin/
                 directory of the download, and place these files within the
-                <emphasis>same</emphasis> directory as the location of the php cli binary.
+                <emphasis>same</emphasis> directory as the location of the <acronym>PHP</acronym>
+                cli binary.
             </para>
         </sect3>
 
@@ -39,8 +40,8 @@
 
             <para>
                 To install via PEAR, you must use the 3rd party zfcampus.org site to retrieve the
-                latest Zend Framework PEAR package.  These packages are typically built within a day
-                of an official Zend Framework release.  The benefit of installing via the PEAR
+                latest Zend Framework PEAR package. These packages are typically built within a day
+                of an official Zend Framework release. The benefit of installing via the PEAR
                 package manager is that during the install process, the ZF library will end up on
                 the include_path, and the zf.php and zf scripts will end up in a place on your
                 system that will allow you to run them without any additional setup.
@@ -53,7 +54,7 @@ pear install zfcampus/zf
 
             <para>
                 That is it. After the initial install, you should be able to continue on by
-                running the zf command.  Go good way to check to see if it't there is to run
+                running the zf command. Go good way to check to see if it't there is to run
                 zf --help
             </para>
         </sect3>
@@ -70,7 +71,7 @@ pear install zfcampus/zf
 
             <para>
                 If you are on a *nix or mac system, you can also create a link from somewhere in
-                your path to the zf.sh file.  If you do this, you do not need to worry about having
+                your path to the zf.sh file. If you do this, you do not need to worry about having
                 Zend Framework's library on your include_path, as the zf.php and zf.sh files will
                 be able to access the library relative to where they are (meaning the ./bin/ files
                 are ../library/ relative to the Zend Framework library).
@@ -78,9 +79,9 @@ pear install zfcampus/zf
 
             <para>
                 There are a number of other options available for setting up the zf.php and library
-                on your system.  These options revolve around setting specific environment
+                on your system. These options revolve around setting specific environment
                 variables. These are described in the later section on "customizing the CLI
-                environement".  The environment variables for setting the zf.php include_path,
+                environement". The environment variables for setting the zf.php include_path,
                 ZF_INCLUDE_PATH and ZF_INCLUDE_PATH_PREPEND, are the ones of most interest.
             </para>
         </sect3>
@@ -107,9 +108,9 @@ zf show version
 
             <para>
                 The built-in help system is the primary place where you can get up-to-date
-                information on what your system is capable of doing.  The help system is dynamic in
+                information on what your system is capable of doing. The help system is dynamic in
                 that as providers are added to your system, they are automatically dispatchable, and
-                as such, the parameters required to run them will be in the help screen.  The
+                as such, the parameters required to run them will be in the help screen. The
                 easiest way to retrieve the help screen is the following:
             </para>
 
@@ -223,7 +224,7 @@ zf create module Blog
 
             <para>
                 The controller provider is responsible for creating (mostly) empty controllers as
-                well as their corresponding view script directories and files.  To utilize it to
+                well as their corresponding view script directories and files. To utilize it to
                 create an 'Auth' controlller, for example, execute:
             </para>
 
@@ -362,7 +363,6 @@ zf create form Comment -m Blog
                 The following will have to be run on the command line:
             </para>
 
-
             <programlisting language="text"><![CDATA[
 zf configure dbadapter "adapter=Pdo_Mysql&username=test&password=test&dbname=test"
 ]]></programlisting>
@@ -384,10 +384,10 @@ zf configure dbadapter "adapter=Pdo_Sqlite&dbname=../data/test.db" -s developmen
             <title>DbTable</title>
 
             <para>
-                The DbTable provider is responsible for creating Zend_Db_Table
-                model/data access files for your application to consume, with the proper
-                class name, and in the proper location in the application. The two
-                important pieces of information are the <emphasis>DbTable name</emphasis>,
+                The DbTable provider is responsible for creating
+                <classname>Zend_Db_Table</classname> model/data access files for your application to
+                consume, with the proper class name, and in the proper location in the application.
+                The two important pieces of information are the <emphasis>DbTable name</emphasis>,
                 and the <emphasis>actual database table name</emphasis>. For example:
             </para>
 
@@ -562,7 +562,11 @@ zf --setup config-file
                             <para>original behavior:</para>
 
                             <itemizedlist>
-                                <listitem><para>use php's include_path to find ZF</para></listitem>
+                                <listitem>
+                                    <para>
+                                        use <acronym>PHP</acronym>'s include_path to find ZF
+                                    </para>
+                                </listitem>
 
                                 <listitem>
                                     <para>use the ZF_INCLUDE_PATH environment variable</para>

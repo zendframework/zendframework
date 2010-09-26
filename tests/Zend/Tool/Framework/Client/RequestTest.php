@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Tool\Framework\Client;
+
+/**
  * @see TestHelper.php
  */
 
@@ -39,7 +44,7 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Client
  */
-class Zend_Tool_Framework_Client_RequestTest extends PHPUnit_Framework_TestCase
+class RequestTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -49,7 +54,7 @@ class Zend_Tool_Framework_Client_RequestTest extends PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_request = new Zend_Tool_Framework_Client_Request();
+        $this->_request = new \Zend\Tool\Framework\Client\Request();
     }
 
     public function testProviderNameGetterAndSetter()

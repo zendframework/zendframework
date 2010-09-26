@@ -21,28 +21,33 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+/**
  * Resource for initializing the locale
  *
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Config
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\Config\Config
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Router
-    extends Zend_Application_Resource_ResourceAbstract
+class Router
+    extends AbstractResource
 {
     /**
-     * @var Zend_Controller_Router_Rewrite
+     * @var \Zend\Controller\Router\Rewrite
      */
     protected $_router;
 
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return Zend_Controller_Router_Rewrite
+     * @return \Zend\Controller\Router\Rewrite
      */
     public function init()
     {
@@ -52,13 +57,13 @@ class Zend_Application_Resource_Router
     /**
      * Retrieve router object
      *
-     * @return Zend_Controller_Router_Rewrite
+     * @return \Zend\Controller\Router\Rewrite
      */
     public function getRouter()
     {
         if (null === $this->_router) {
             $bootstrap = $this->getBootstrap();
-            $bootstrap->bootstrap('FrontController');
+            $bootstrap->bootstrap('frontcontroller');
             $this->_router = $bootstrap->getContainer()->frontcontroller->getRouter();
 
             $options = $this->getOptions();
@@ -74,7 +79,7 @@ class Zend_Application_Resource_Router
                 $this->_router->useRequestParametersAsGlobal($options['useRequestParametersAsGlobal']);
             }
 
-            $this->_router->addConfig(new Zend_Config($options['routes']));
+            $this->_router->addConfig(new \Zend\Config\Config($options['routes']));
         }
 
         return $this->_router;

@@ -80,7 +80,7 @@ class AccessLevelTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newAccessLevel->value, 'freebusy');
 
         /* try constructing using magic factory */
-        $cal = new \Zend\GData\Calendar\Calendar();
+        $cal = new \Zend\GData\Calendar();
         $newAccessLevel2 = $cal->newAccessLevel();
         $newAccessLevel2->transferFromXML($newAccessLevel->saveXML());
         $this->assertEquals(count($newAccessLevel2->extensionElements), 1);

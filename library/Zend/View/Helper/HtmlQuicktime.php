@@ -21,14 +21,19 @@
  */
 
 /**
- * @uses       Zend_View_Helper_HtmlObject
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
+ * @uses       \Zend\View\Helper\HtmlObject
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_HtmlQuicktime extends Zend_View_Helper_HtmlObject
+class HtmlQuicktime extends HtmlObject
 {
     /**
      * Default file type for a movie applet
@@ -65,14 +70,18 @@ class Zend_View_Helper_HtmlQuicktime extends Zend_View_Helper_HtmlObject
      * @param string $content Alternative content
      * @return string
      */
-    public function htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)
+    public function direct($data = null, array $attribs = array(), array $params = array(), $content = null)
     {
+        if ($data == null) {
+            throw new \InvalidArgumentException('HTMLQuicktime: missing argument. $data is required in htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)');
+        }
+        
         // Attrs
         $attribs = array_merge($this->_attribs, $attribs);
 
         // Params
         $params = array_merge(array('src' => $data), $params);
 
-        return $this->htmlObject($data, self::TYPE, $attribs, $params, $content);
+        return parent::direct($data, self::TYPE, $attribs, $params, $content);
     }
 }

@@ -28,7 +28,7 @@ namespace Zend\GData\YouTube;
 /**
  * Represents the YouTube flavor of a Gdata Media Entry
  *
- * @uses       \Zend\GData\Media\Media
+ * @uses       \Zend\GData\Media
  * @uses       \Zend\GData\Media\Entry
  * @uses       \Zend\GData\YouTube\Extension\MediaGroup
  * @category   Zend

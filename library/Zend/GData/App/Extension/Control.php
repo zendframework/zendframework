@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\App\Extension;
 
+use Zend\GData\App\Extension;
+
 /**
  * Represents the app:control element
  *
- * @uses       \Zend\GData\App\Extension\Extension
+ * @uses       \Zend\GData\App\Extension
  * @uses       \Zend\GData\App\Extension\Draft
  * @category   Zend
  * @package    Zend_Gdata

@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\Form\Element;
+
+/**
  * Textarea dijit
  *
- * @uses       Zend_Dojo_Form_Element_Dijit
+ * @uses       \Zend\Dojo\Form\Element\Dijit
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -30,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo_Form_Element_Textarea extends Zend_Dojo_Form_Element_Dijit
+class Textarea extends Dijit
 {
     /**
      * Use Textarea dijit view helper

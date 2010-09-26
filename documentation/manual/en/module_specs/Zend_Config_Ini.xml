@@ -114,10 +114,10 @@ echo $config->database->params->dbname; // prints "dbname"
                         <entry><varname>$section</varname></entry>
 
                         <entry>
-                            The [section] within the ini file that is to be loaded. Setting
-                            this parameter to <constant>NULL</constant> will load all sections.
-                            Alternatively, an array of section names may be supplied to load
-                            multiple sections.
+                            The [section] within the <acronym>INI</acronym> file that is to be
+                            loaded. Setting this parameter to <constant>NULL</constant> will load
+                            all sections. Alternatively, an array of section names may be supplied
+                            to load multiple sections.
                         </entry>
                     </row>
 

@@ -1,93 +1,71 @@
-During the namespace conversion, do the following:
+If you wish to contribute to Zend Framework, please be sure to
+read/subscribe to the following resources:
 
- % cd working
- % php ../tools/phptools/bin/php-namespacer.php \
- > -m./ -l=../library/ -p=Zend -o=./tmp/library -d=Zend/<component name>
+ * ZF2 Requirements:
+   http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Requirements
 
-Check the changes, and merge them into the trunk. Then make the unit
-tests pass.
+ * Coding Standards:
+   http://framework.zend.com/manual/en/coding-standard.html
 
-Checklist:
-First pass
-[X] Zend_Exception
-[X] Zend_Version
-[X] Zend_Loader
-    [X] Including pluginloader, resource loader, etc.
-[X] Zend_Registry
-[X] Zend_Config
-[X] Zend_Debug
-[X] Zend_Log
-    Would need to ignore Firebug writer for now, and potentially Db writer
-[X] Zend_Cache
-    [X] Zend_Locale
-        [X] Zend_Date
-        [X] Zend_Translate
-        [X] Zend_TimeSync
-        [X] Zend_Measure
-        [X] Zend_Currency
+ * ZF Git Guide:
+   README-GIT.txt
 
-Second pass:
-[X] Zend_Filter
-    skip Input at first
-[X] Zend_Validate
-    skip Validate_Db at first
-    do [X] Zend_Filter_Input at this time
-[X] Zend_Uri
+ * Contributor's Guide:
+   http://framework.zend.com/wiki/display/ZFDEV/Contributing+to+Zend+Framework
 
-Third pass:
-[X] Zend_Server
-[X] Zend_Http
+ * ZF Contributor's mailing list:
+   Archives:  http://short.ie/tc64rv
+   Subscribe: zf-contributors-subscribe@lists.zend.com
 
-Fourth pass:
-THE FOLLOWING IN ANY ORDER (except where indicated):
-[X] Zend_Json
-[X] Zend_Crypt 
-[X] `-> Zend_Oauth 
-[X] `-> Zend_XmlRpc
-[X] Zend_Acl
-[X] Zend_Reflection
-[X] Zend_CodeGenerator
-[X] Zend_Console
-[X] Zend_Dom
-[X] Zend_Gdata
-[X] Zend_InfoCard
-[X] Zend_Ldap
-[X] Zend_Mime 
-[X] `-> Zend_Mail
-[X] Zend_Markup
-[X] Zend_Memory 
-[X] `-> Zend_Pdf
-[X]     `-> Zend_Barcode
-[X] Zend_Db (except Firebug profiler)
-[X] `-> Zend_Feed
-[ ]     `-> Zend_Queue
-[X] Zend_Text
-[X] `-> Zend_ProgressBar
-[X]     `-> Zend_File
-[X] Zend_Search
-[X] Zend_Service_Abstract
-[X] `-> Zend_Rest_Client
-[X]     `-> Zend_Service_ReCaptcha
-[X]         `-> Zend_Captcha
-[X] Zend_Soap
-[X] Zend_Tag
-[ ] Zend_Service_*
-[X] Zend_Session 
-[X] `-> Zend_Auth 
-[X]     `-> Zend_Amf 
-[X]         `-> Zend_Serializer
+ * ZF Contributor's IRC channel:
+   #zftalk.dev on Freenode.net
 
-Fifth pass:
-All together:
-[ ] Zend_Controller, [ ] Zend_View, [ ] Zend_Layout, [ ] Zend_Rest_Route/Controller
+In order to contribute, you MUST first sign and send in a Contributor's
+License Agreement; you may obtain a copy from
+http://framework.zend.com/cla (individuals) or
+http://framework.zend.com/ccla (corporate); please read the
+contributor's guide, linked above, for more information on the CLA and
+how to deliver it.
 
-Sixth pass:
-[ ] Zend_Wildfire (and all Firebug related sub-components)
-[ ] Zend_OpenId
-[ ] Zend_Form -> [ ] Zend_Dojo
-[ ] Zend_Navigation
-[ ] Zend_Paginator
-[ ] Zend_Test
+If you are working on new features, or refactoring an existing
+component, please create a proposal. You can do this in on the proposals
+page, http://framework.zend.com/wiki/display/ZFPROP/Home. 
 
-Seventh (and last) pass:
-[ ] Zend_Application -> [ ] Zend_Tool
+RUNNING TESTS
+=============
+The full test suite currently does not run! This is due to some
+components not yet being migrated to namespaces, as well as to some
+issues we've encountered in refactoring.
+
+To run tests:
+
+ * Make sure you have a recent version of PHPUnit installed; 3.4.0
+   minimally.
+
+ * Enter the tests/ subdirectory.
+
+ * Execute PHPUnit, providing a path to a component directory for which
+   you wish to run tests, or a specific test class file.
+
+   % phpunit ZendTest/Application
+   % phpunit ZendTest/Application/Resource/CacheManagerTest.php
+
+ * You may also provide the "--group" switch; in such cases, provide the
+   top-level component name:
+
+   % phpunit --group Zend_Application
+
+   This will likely lead to errors, so it's usually best to specify a
+   specific component in which to run test:
+
+   % phpunit --group ZF-XYZ Zend/Application
+
+You can turn on conditional tests with the TestConfiguration.php file.
+To do so:
+
+ * Enter the tests/ subdirectory.
+
+ * Copy TestConfiguration.php.dist file to TestConfiguration.php
+ 
+ * Edit TestConfiguration.php to enable any specific functionality you
+   want to test, as well as to provide test values to utilize.

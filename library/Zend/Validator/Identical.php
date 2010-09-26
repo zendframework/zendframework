@@ -45,7 +45,7 @@ class Identical extends AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_SAME      => "The token '%token%' does not match the given token '%value%'",
+        self::NOT_SAME      => "The two given tokens do not match",
         self::MISSING_TOKEN => 'No token was provided to match against',
     );
 
@@ -62,6 +62,7 @@ class Identical extends AbstractValidator
      */
     protected $_tokenString;
     protected $_token;
+    protected $_strict = true;
 
     /**
      * Sets validator options
@@ -75,13 +76,25 @@ class Identical extends AbstractValidator
             $token = $token->toArray();
         }
 
-        if (is_array($token) && (count($token) == 1) && array_key_exists('token', $token)) {
-            $token = $token['token'];
-        }
+        if (is_array($token) && array_key_exists('token', $token)) {
+            if (array_key_exists('strict', $token)) {
+                $this->setStrict($token['strict']);
+            }
 
-        if (null !== $token) {
+            $this->setToken($token['token']);
+        } elseif (null !== $token) {
             $this->setToken($token);
         }
+    }
+
+    /**
+     * Retrieve token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->_token;
     }
 
     /**
@@ -98,13 +111,24 @@ class Identical extends AbstractValidator
     }
 
     /**
-     * Retrieve token
+     * Returns the strict parameter
      *
-     * @return string
+     * @return boolean
      */
-    public function getToken()
+    public function getStrict()
     {
-        return $this->_token;
+        return $this->_strict;
+    }
+
+    /**
+     * Sets the strict parameter
+     *
+     * @param Zend_Validate_Identical
+     */
+    public function setStrict($strict)
+    {
+        $this->_strict = (boolean) $strict;
+        return $this;
     }
 
     /**
@@ -114,19 +138,26 @@ class Identical extends AbstractValidator
      * matches that token.
      *
      * @param  mixed $value
+     * @param  array $context
      * @return boolean
      */
-    public function isValid($value)
+    public function isValid($value, $context = null)
     {
         $this->_setValue((string) $value);
-        $token        = $this->getToken();
+
+        if (($context !== null) && isset($context) && array_key_exists($this->getToken(), $context)) {
+            $token = $context[$this->getToken()];
+        } else {
+            $token = $this->getToken();
+        }
 
         if ($token === null) {
             $this->_error(self::MISSING_TOKEN);
             return false;
         }
 
-        if ($value !== $token)  {
+        $strict = $this->getStrict();
+        if (($strict && ($value !== $token)) || (!$strict && ($value != $token))) {
             $this->_error(self::NOT_SAME);
             return false;
         }

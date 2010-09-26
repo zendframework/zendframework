@@ -20,18 +20,19 @@
  */
  
 /**
- * @see Zend_Feed_Writer_Extension_RendererAbstract
- */
-require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
- 
+* @namespace
+*/
+namespace Zend\Feed\Writer\Extension\Content\Renderer;
+use Zend\Feed\Writer\Extension;
+
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Feed_Writer_Extension_Content_Renderer_Entry
-    extends Zend_Feed_Writer_Extension_RendererAbstract
+* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+class Entry extends Extension\AbstractRenderer
 {
 
     /**
@@ -73,11 +74,11 @@ class Zend_Feed_Writer_Extension_Content_Renderer_Entry
     /**
      * Set entry content
      * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     * @param  \DOMDocument $dom 
+     * @param  \DOMElement $root 
      * @return void
      */
-    protected function _setContent(DOMDocument $dom, DOMElement $root)
+    protected function _setContent(\DOMDocument $dom, \DOMElement $root)
     {
         $content = $this->getDataContainer()->getContent();
         if (!$content) {

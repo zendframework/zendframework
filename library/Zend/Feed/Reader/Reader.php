@@ -24,7 +24,7 @@
 */
 namespace Zend\Feed\Reader;
 use Zend\HTTP;
-use Zend\Loader\PluginLoader;
+use Zend\Loader;
 
 /**
 * @uses \Zend\Feed\Feed
@@ -33,7 +33,7 @@ use Zend\Loader\PluginLoader;
 * @uses \Zend\Feed\Reader\Feed\Atom\Atom
 * @uses \Zend\Feed\Reader\Feed\RSS
 * @uses \Zend\HTTP\Client
-* @uses \Zend\Loader\PluginLoader\PluginLoader
+* @uses \Zend\Loader\PluginLoader
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -98,20 +98,20 @@ class Reader
 
     protected static $_extensions = array(
         'feed' => array(
-            'DublinCore\\Feed',
-            'Atom\\Feed'
+            'DublinCore\Feed',
+            'Atom\Feed'
         ),
         'entry' => array(
-            'Content\\Entry',
-            'DublinCore\\Entry',
-            'Atom\\Entry'
+            'Content\Entry',
+            'DublinCore\Entry',
+            'Atom\Entry'
         ),
         'core' => array(
-            'DublinCore\\Feed',
-            'Atom\\Feed',
-            'Content\\Entry',
-            'DublinCore\\Entry',
-            'Atom\\Entry'
+            'DublinCore\Feed',
+            'Atom\Feed',
+            'Content\Entry',
+            'DublinCore\Entry',
+            'Atom\Entry'
         )
     );
 
@@ -226,10 +226,10 @@ class Reader
         if (self::$_httpConditionalGet && $cache) {
             $data = $cache->load($cacheId);
             if ($data) {
-                if (is_null($etag)) {
+                if ($etag === null) {
                     $etag = $cache->load($cacheId.'_etag');
                 }
-                if (is_null($lastModified)) {
+                if ($lastModified === null) {
                     $lastModified = $cache->load($cacheId.'_lastmodified');;
                 }
                 if ($etag) {
@@ -352,11 +352,12 @@ class Reader
         $status = $dom->loadHTML($responseHtml);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
+            // Build error message
             $error = libxml_get_last_error();
             if ($error && $error->message) {
-                $errormsg = "\DOMDocument cannot parse HTML: {$error->message}";
+                $errormsg = "DOMDocument cannot parse HTML: {$error->message}";
             } else {
-                $errormsg = "\DOMDocument cannot parse HTML: Please check the XML document's validity";
+                $errormsg = "DOMDocument cannot parse HTML: Please check the XML document's validity";
             }
             throw new Exception($errormsg);
         }
@@ -391,11 +392,11 @@ class Reader
                         $php_errormsg = '(error message not available)';
                     }
                 }
-                throw new Exception("\DOMDocument cannot parse XML: $php_errormsg");
+                throw new Exception("DOMDocument cannot parse XML: $php_errormsg");
             }
         } else {
             throw new Exception('Invalid object/scalar provided: must'
-            . ' be of type \Zend\Feed\Reader\Feed, \DomDocument or string');
+            . ' be of type Zend\Feed\Reader\Feed, DomDocument or string');
         }
         $xpath = new \DOMXPath($dom);
 
@@ -481,9 +482,9 @@ class Reader
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  Zend_Loader_PluginLoader_Interface $loader
+     * @param  \Zend\Loader\ShortNameLocater $loader
      */
-    public static function setPluginLoader(PluginLoader\PluginLoaderInterface $loader)
+    public static function setPluginLoader(Loader\ShortNameLocater $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -491,14 +492,14 @@ class Reader
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  Zend_Loader_PluginLoader_Interface $loader
+     * @return  \Zend\Loader\PluginLoader $loader
      */
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            self::$_pluginLoader = new PluginLoader\PluginLoader(array(
+            self::setPluginLoader(new Loader\PluginLoader(array(
                 'Zend\\Feed\\Reader\\Extension\\' => 'Zend/Feed/Reader/Extension/',
-            ));
+            )));
         }
         return self::$_pluginLoader;
     }
@@ -512,9 +513,12 @@ class Reader
      */
     public static function addPrefixPath($prefix, $path)
     {
-        $prefix = rtrim($prefix, '\\');
-        $path   = rtrim($path, DIRECTORY_SEPARATOR);
-        self::getPluginLoader()->addPrefixPath($prefix, $path);
+        $pluginLoader = self::getPluginLoader();
+        if ($pluginLoader instanceof Loader\PrefixPathMapper) {
+            $prefix = rtrim($prefix, '\\');
+            $path = rtrim($path, DIRECTORY_SEPARATOR);
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
     }
 
     /**
@@ -525,6 +529,10 @@ class Reader
      */
     public static function addPrefixPaths(array $spec)
     {
+        $pluginLoader = self::getPluginLoader();
+        if (!$pluginLoader instanceof Loader\PrefixPathMapper) {
+            return;
+        }
         if (isset($spec['prefix']) && isset($spec['path'])) {
             self::addPrefixPath($spec['prefix'], $spec['path']);
         }
@@ -540,12 +548,12 @@ class Reader
      *
      * @param  string $name
      * @return void
-     * @throws Zend_Feed_Exception if unable to resolve Extension class
+     * @throws \Zend\Feed\Exception if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
-        $feedName  = $name . '\\Feed';
-        $entryName = $name . '\\Entry';
+        $feedName  = $name . '\Feed';
+        $entryName = $name . '\Entry';
         if (self::isRegistered($name)) {
             if (self::getPluginLoader()->isLoaded($feedName) ||
                 self::getPluginLoader()->isLoaded($entryName)) {
@@ -555,19 +563,18 @@ class Reader
         try {
             self::getPluginLoader()->load($feedName);
             self::$_extensions['feed'][] = $feedName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (Loader\PluginLoaderException $e) {
         }
         try {
             self::getPluginLoader()->load($entryName);
             self::$_extensions['entry'][] = $entryName;
-        } catch (PluginLoader\Exception $e) {
+        } catch (Loader\PluginLoaderException $e) {
         }
         if (!self::getPluginLoader()->isLoaded($feedName)
             && !self::getPluginLoader()->isLoaded($entryName)
         ) {
-            throw new Exception('Could not load extension: ' . $name
-                . ' using Plugin Loader. Check prefix paths are configured and'
-                . ' extension exists.');
+            throw new \Zend\Feed\Exception('Could not load extension: ' . $name
+                . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
     }
 
@@ -579,8 +586,8 @@ class Reader
      */
     public static function isRegistered($extensionName)
     {
-        $feedName  = $extensionName . '\\Feed';
-        $entryName = $extensionName . '\\Entry';
+        $feedName  = $extensionName . '\Feed';
+        $entryName = $extensionName . '\Entry';
         if (in_array($feedName, self::$_extensions['feed'])
             || in_array($entryName, self::$_extensions['entry'])
         ) {
@@ -614,20 +621,20 @@ class Reader
         self::$_prefixPaths        = array();
         self::$_extensions         = array(
             'feed' => array(
-                'DublinCore\\Feed',
-                'Atom\\Feed'
+                'DublinCore\Feed',
+                'Atom\Feed'
             ),
             'entry' => array(
-                'Content\\Entry',
-                'DublinCore\\Entry',
-                'Atom\\Entry'
+                'Content\Entry',
+                'DublinCore\Entry',
+                'Atom\Entry'
             ),
             'core' => array(
-                'DublinCore\\Feed',
-                'Atom\\Feed',
-                'Content\\Entry',
-                'DublinCore\\Entry',
-                'Atom\\Entry'
+                'DublinCore\Feed',
+                'Atom\Feed',
+                'Content\Entry',
+                'DublinCore\Entry',
+                'Atom\Entry'
             )
         );
     }

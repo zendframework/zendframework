@@ -21,20 +21,30 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+use Zend\Dojo\View\Exception as DojoViewException,
+    Zend\Registry,
+    Zend\View\ViewEngine as View,
+    Zend\View\Helper\AbstractHelper as AbstractViewHelper;
+
+/**
  * Zend_Dojo_View_Helper_Dojo: Dojo View Helper
  *
  * Allows specifying stylesheets, path to dojo, module paths, and onLoad
  * events.
  *
- * @uses       Zend_Dojo_View_Exception
- * @uses       Zend_Dojo_View_Helper_Dojo_Container
- * @uses       Zend_Registry
+ * @uses       \Zend\Dojo\View\Exception
+ * @uses       \Zend\Dojo\View\Helper\DojoContainer
+ * @uses       \Zend\Registry
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_View_Helper_Dojo
+class Dojo extends AbstractViewHelper
 {
     /**#@+
      * Programmatic dijit creation style constants
@@ -44,12 +54,12 @@ class Zend_Dojo_View_Helper_Dojo
     /**#@-*/
 
     /**
-     * @var Zend_View_Interface
+     * @var \Zend\View\ViewEngine
      */
     public $view;
 
     /**
-     * @var Zend_Dojo_View_Helper_Dojo_Container
+     * @var \Zend\Dojo\View\Helper\DojoContainer
      */
     protected $_container;
 
@@ -68,21 +78,22 @@ class Zend_Dojo_View_Helper_Dojo
      */
     public function __construct()
     {
-        $registry = Zend_Registry::getInstance();
-        if (!isset($registry[__CLASS__])) {
-            $container = new Zend_Dojo_View_Helper_Dojo_Container();
-            $registry[__CLASS__] = $container;
+        $registry = Registry::getInstance();
+        $key      = __CLASS__;
+        if (!isset($registry[$key])) {
+            $container = new Dojo\Container();
+            $registry[$key] = $container;
         }
-        $this->_container = $registry[__CLASS__];
+        $this->_container = $registry[$key];
     }
 
     /**
      * Set view object
      *
-     * @param  Zend_Dojo_View_Interface $view
+     * @param  Zend\View\ViewEngine $view
      * @return void
      */
-    public function setView(Zend_View_Interface $view)
+    public function setView(View $view)
     {
         $this->view = $view;
         $this->_container->setView($view);
@@ -91,9 +102,9 @@ class Zend_Dojo_View_Helper_Dojo
     /**
      * Return dojo container
      *
-     * @return Zend_Dojo_View_Helper_Dojo_Container
+     * @return \Zend\Dojo\View\Helper\DojoContainer
      */
-    public function dojo()
+    public function direct()
     {
         return $this->_container;
     }
@@ -104,12 +115,12 @@ class Zend_Dojo_View_Helper_Dojo
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws Zend_Dojo_View_Exception For invalid method calls
+     * @throws \Zend\Dojo\View\Exception For invalid method calls
      */
     public function __call($method, $args)
     {
         if (!method_exists($this->_container, $method)) {
-            throw new Zend_Dojo_View_Exception(sprintf('Invalid method "%s" called on dojo view helper', $method));
+            throw new DojoViewException(sprintf('Invalid method "%s" called on dojo view helper', $method));
         }
 
         return call_user_func_array(array($this->_container, $method), $args);

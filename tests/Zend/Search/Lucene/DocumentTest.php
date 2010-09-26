@@ -25,22 +25,7 @@
  */
 namespace ZendTest\Search\Lucene;
 use Zend\Search\Lucene\Document;
-
-/**
- * Zend_Search_Lucene_Document
- */
-
-/**
- * Zend_Search_Lucene_Document_Docx
- */
-
-/**
- * Zend_Search_Lucene_Document_Pptx
- */
-
-/**
- * Zend_Search_Lucene_Document_Xlsx
- */
+use Zend\Search\Lucene;
 
 /**
  * PHPUnit test case
@@ -56,16 +41,33 @@ use Zend\Search\Lucene\Document;
  */
 class DocumentTest extends \PHPUnit_Framework_TestCase
 {
+
+    private function _clearDirectory($dirName)
+    {
+        if (!file_exists($dirName) || !is_dir($dirName))  {
+            return;
+        }
+
+        // remove files from temporary direcytory
+        $dir = opendir($dirName);
+        while (($file = readdir($dir)) !== false) {
+            if (!is_dir($dirName . '/' . $file)) {
+                @unlink($dirName . '/' . $file);
+            }
+        }
+        closedir($dir);
+    }
+
     public function testCreate()
     {
-        $document =  new Document\Document();
+        $document =  new Document();
 
         $this->assertEquals($document->boost, 1);
     }
 
     public function testFields()
     {
-        $document =  new Document\Document();
+        $document =  new Document();
 
         $document->addField(Document\Field::Text('title',      'Title'));
         $document->addField(Document\Field::Text('annotation', 'Annotation'));
@@ -100,10 +102,10 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testAddFieldMethodChaining()
     {
-        $document =  new Document\Document();
-        $this->assertTrue($document->addField(Document\Field::Text('title', 'Title')) instanceof Document\Document);
+        $document =  new Document();
+        $this->assertTrue($document->addField(Document\Field::Text('title', 'Title')) instanceof Document);
 
-        $document =  new Document\Document();
+        $document =  new Document();
         $document->addField(Document\Field::Text('title',      'Title'))
                  ->addField(Document\Field::Text('annotation', 'Annotation'))
                  ->addField(Document\Field::Text('body',       'Document body, document body, document body...'));
@@ -158,7 +160,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testHtmlLinksProcessing()
     {
-        $doc =  Document\HTML::loadHTMLFile(dirname(__FILE__) . '/_indexSource/_files/contributing.documentation.html', true);
+        $doc =  Document\HTML::loadHTMLFile(__DIR__ . '/_indexSource/_files/contributing.documentation.html', true);
         $this->assertTrue($doc instanceof Document\HTML);
 
         $this->assertTrue(array_values($doc->getHeaderLinks()) ==
@@ -170,6 +172,60 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
                                 'faq.translators-revision-tracking.html',
                                 'index.html',
                                 'contributing.html'));
+    }
+
+
+    /**
+     * @group ZF-4252
+     */
+    public function testHtmlInlineTagsIndexing()
+    {
+        $index = Lucene\Lucene::create(__DIR__ . '/_index/_files');
+
+        $htmlString = '<html><head><title>Hello World</title></head>'
+                    . '<body><b>Zend</b>Framework' . "\n" . ' <div>Foo</div>Bar ' . "\n"
+                    . ' <strong>Test</strong></body></html>';
+
+        $doc = Document\Html::loadHTML($htmlString);
+
+        $index->addDocument($doc);
+
+        $hits = $index->find('FooBar');
+        $this->assertEquals(count($hits), 0);
+
+        $hits = $index->find('ZendFramework');
+        $this->assertEquals(count($hits), 1);
+
+        unset($index);
+        $this->_clearDirectory(__DIR__ . '/_index/_files');
+    }
+
+    /**
+     * @group ZF-8740
+     */
+    public function testHtmlAreaTags()
+    {
+        $html = '<HTML>'
+                . '<HEAD><TITLE>Page title</TITLE></HEAD>'
+                . '<BODY>'
+                .   'Document body.'
+                .   '<img src="img.png" width="640" height="480" alt="some image" usemap="#some_map" />'
+                .   '<map name="some_map">'
+                .     '<area shape="rect" coords="0,0,100,100" href="link3.html" alt="Link 3" />'
+                .     '<area shape="rect" coords="200,200,300,300" href="link4.html" alt="Link 4" />'
+                .   '</map>'
+                .   '<a href="link1.html">Link 1</a>.'
+                .   '<a href="link2.html" rel="nofollow">Link 1</a>.'
+                . '</BODY>'
+              . '</HTML>';
+
+        $oldNoFollowValue = Document\Html::getExcludeNoFollowLinks();
+
+        Document\Html::setExcludeNoFollowLinks(false);
+        $doc1 = Document\Html::loadHTML($html);
+        $this->assertTrue($doc1 instanceof Document\Html);
+        $links = array('link1.html', 'link2.html', 'link3.html', 'link4.html');
+        $this->assertTrue(array_values($doc1->getLinks()) == $links);
     }
 
     public function testHtmlNoFollowLinks()
@@ -202,7 +258,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZipArchive class (Zip extension) is not loaded');
         }
 
-        $docxDocument = Document\Docx::loadDocxFile(dirname(__FILE__) . '/_openXmlDocuments/test.docx', true);
+        $docxDocument = Document\Docx::loadDocxFile(__DIR__ . '/_openXmlDocuments/test.docx', true);
 
         $this->assertTrue($docxDocument instanceof Document\Docx);
         $this->assertEquals($docxDocument->getFieldValue('title'), 'Test document');
@@ -210,7 +266,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($docxDocument->getFieldValue('body') != '');
 
         try {
-            $docxDocument1 = Document\Docx::loadDocxFile(dirname(__FILE__) . '/_openXmlDocuments/dummy.docx', true);
+            $docxDocument1 = Document\Docx::loadDocxFile(__DIR__ . '/_openXmlDocuments/dummy.docx', true);
 
             $this->fail('File not readable exception is expected.');
         } catch (Document\Exception $e) {
@@ -227,7 +283,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZipArchive class (Zip extension) is not loaded');
         }
 
-        $pptxDocument = Document\Pptx::loadPptxFile(dirname(__FILE__) . '/_openXmlDocuments/test.pptx', true);
+        $pptxDocument = Document\Pptx::loadPptxFile(__DIR__ . '/_openXmlDocuments/test.pptx', true);
 
         $this->assertTrue($pptxDocument instanceof Document\Pptx);
         $this->assertEquals($pptxDocument->getFieldValue('title'), 'Test document');
@@ -241,7 +297,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZipArchive class (Zip extension) is not loaded');
         }
 
-        $xlsxDocument = Document\Xlsx::loadXlsxFile(dirname(__FILE__) . '/_openXmlDocuments/test.xlsx', true);
+        $xlsxDocument = Document\Xlsx::loadXlsxFile(__DIR__ . '/_openXmlDocuments/test.xlsx', true);
 
         $this->assertTrue($xlsxDocument instanceof Document\Xlsx);
         $this->assertEquals($xlsxDocument->getFieldValue('title'), 'Test document');

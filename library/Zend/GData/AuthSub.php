@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\GData;
-use Zend\HTTP\Client;
+use Zend\Http\Client;
 
 /**
  * Wrapper around Zend_Http_Client to facilitate Google's "Account Authentication
@@ -90,7 +90,7 @@ class AuthSub
      * Upgrades a single use token to a session token
      *
      * @param string $token The single use token which is to be upgraded
-     * @param \Zend\HTTP\Client $client (optional) HTTP client to use to
+     * @param \Zend\Http\Client $client (optional) HTTP client to use to
      *                                 make the request
      * @param string $request_uri (optional) URI to which to direct
      *                            the session token upgrade
@@ -141,7 +141,7 @@ class AuthSub
      * Revoke a token
      *
      * @param string $token The token to revoke
-     * @param \Zend\HTTP\Client $client (optional) HTTP client to use to make the request
+     * @param \Zend\Http\Client $client (optional) HTTP client to use to make the request
      * @param string $request_uri (optional) URI to which to direct the revokation request
      * @return boolean Whether the revokation was successful
      * @throws \Zend\GData\App\HttpException
@@ -182,7 +182,7 @@ class AuthSub
      * get token information
      *
      * @param string $token The token to retrieve information about
-     * @param \Zend\HTTP\Client $client (optional) HTTP client to use to
+     * @param \Zend\Http\Client $client (optional) HTTP client to use to
      *                                 make the request
      * @param string $request_uri (optional) URI to which to direct
      *                            the information request

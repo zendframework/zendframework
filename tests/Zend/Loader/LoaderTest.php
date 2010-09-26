@@ -105,7 +105,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function testLoaderInterfaceViaLoadClass()
     {
         try {
-            Loader::loadClass('\\Zend_Controller_Dispatcher_Interface');
+            Loader::loadClass('Zend\Controller\Dispatcher');
         } catch (\Zend_Exception $e) {
             $this->fail('Loading interfaces should not fail');
         }
@@ -220,6 +220,19 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Loader::isReadable('Zend/Controller/Front.php'), get_include_path());
     }
 
+    public function testLoaderRegisterAutoloadFailsWithoutSplAutoload()
+    {
+        if (function_exists('spl_autoload_register')) {
+            $this->markTestSkipped("spl_autoload() is installed on this PHP installation; cannot test for failure");
+        }
+
+        try {
+            Loader::registerAutoload();
+            $this->fail('registerAutoload should fail without spl_autoload');
+        } catch (Zend_Exception $e) {
+        }
+    }
+
     /**
      * @group ZF-8200
      */
@@ -288,5 +301,19 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         set_include_path(__DIR__ . '../../../');
         $path = __DIR__;
         $this->assertTrue(Loader::isReadable($path));
+    }
+
+    /**
+     * @group ZF-9263
+     * @group ZF-9166
+     * @group ZF-9306
+     */
+    public function testIsReadableShouldFailEarlyWhenProvidedInvalidWindowsAbsolutePath()
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
+            $this->markTestSkipped('Windows-only test');
+        }
+        $path = 'C:/this/file/should/not/exist.php';
+        $this->assertFalse(Loader::isReadable($path));
     }
 }

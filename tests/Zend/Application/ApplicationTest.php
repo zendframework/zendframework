@@ -20,17 +20,11 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_ApplicationTest::main');
-}
+namespace ZendTest\Application;
 
-/**
- * Test helper
- */
-
-/** Zend_Loader_Autoloader */
-
-/** Zend_Application */
+use Zend\Loader\Autoloader,
+    Zend\Application,
+    Zend\Config\Ini as IniConfig;
 
 /**
  * @category   Zend
@@ -40,14 +34,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
+class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -61,10 +49,10 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
-        $this->application = new Zend_Application('testing');
+        $this->application = new Application\Application('testing');
 
         $this->iniOptions = array();
     }
@@ -86,7 +74,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testConstructorSetsEnvironment()
@@ -97,7 +85,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
     public function testConstructorInstantiatesAutoloader()
     {
         $autoloader = $this->application->getAutoloader();
-        $this->assertTrue($autoloader instanceof Zend_Loader_Autoloader);
+        $this->assertTrue($autoloader instanceof Autoloader);
     }
 
     public function testConstructorShouldSetOptionsWhenProvided()
@@ -106,7 +94,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
             'foo' => 'bar',
             'bar' => 'baz',
         );
-        $application = new Zend_Application('testing', $options);
+        $application = new Application\Application('testing', $options);
         $this->assertEquals($options, $application->getOptions());
     }
 
@@ -121,7 +109,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
             'foo' => 'bar',
             'bar' => 'baz',
         );
-        $application = new Zend_Application('testing', $options);
+        $application = new Application\Application('testing', $options);
         $this->assertTrue($application->hasOption('foo'));
     }
 
@@ -136,7 +124,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
             'foo' => 'bar',
             'bar' => 'baz',
         );
-        $application = new Zend_Application('testing', $options);
+        $application = new Application\Application('testing', $options);
         $this->assertEquals($options['foo'], $application->getOption('foo'));
     }
 
@@ -154,7 +142,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
 
     public function testPassingIncludePathOptionShouldModifyIncludePath()
     {
-        $expected = dirname(__FILE__) . '/_files';
+        $expected = __DIR__ . '/TestAsset';
         $this->application->setOptions(array(
             'includePaths' => array(
                 $expected,
@@ -195,46 +183,44 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
     public function testShouldUseBaseBootstrapClassByDefaultIfNoBootstrapRegistered()
     {
         $bootstrap = $this->application->getBootstrap();
-        $this->assertTrue($bootstrap instanceof Zend_Application_Bootstrap_Bootstrap);
+        $this->assertTrue($bootstrap instanceof Application\Bootstrap);
     }
 
     public function testPassingStringBootstrapPathOptionShouldRegisterBootstrap()
     {
         $this->application->setOptions(array(
-            'bootstrap' => dirname(__FILE__) . '/_files/modules/default/Bootstrap.php',
+            'bootstrap' => __DIR__ . '/TestAsset/modules/default/Bootstrap.php',
         ));
         $bootstrap = $this->application->getBootstrap();
-        $this->assertTrue($bootstrap instanceof Bootstrap);
+        $this->assertTrue($bootstrap instanceof \Bootstrap);
     }
 
     public function testPassingArrayBootstrapOptionShouldRegisterBootstrapBasedOnPathOption()
     {
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path' => dirname(__FILE__) . '/_files/modules/default/Bootstrap.php',
+                'path' => __DIR__ . '/TestAsset/modules/default/Bootstrap.php',
             ),
         ));
         $bootstrap = $this->application->getBootstrap();
-        $this->assertTrue($bootstrap instanceof Bootstrap);
+        $this->assertTrue($bootstrap instanceof \Bootstrap);
     }
 
     public function testPassingArrayBootstrapOptionShouldRegisterBootstrapBasedOnPathAndClassOption()
     {
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path'  => dirname(__FILE__) . '/_files/ZfAppBootstrap.php',
-                'class' => 'ZfAppBootstrap',
+                'path'  => __DIR__ . '/TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             ),
         ));
         $bootstrap = $this->application->getBootstrap();
-        $this->assertTrue($bootstrap instanceof ZfAppBootstrap);
+        $this->assertTrue($bootstrap instanceof TestAsset\ZfAppBootstrap);
     }
 
-    /**
-     * @expectedException Zend_Application_Exception
-     */
     public function testPassingArrayBootstrapWithoutPathOptionShouldRaiseException()
     {
+        $this->setExpectedException('Zend\\Application\\Exception');
         $this->application->setOptions(array(
             'bootstrap' => array(
                 'class' => 'ZfAppBootstrap',
@@ -243,52 +229,48 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $bootstrap = $this->application->getBootstrap();
     }
 
-    /**
-     * @expectedException Zend_Application_Exception
-     */
     public function testPassingInvalidBootstrapOptionShouldRaiseException()
     {
+        $this->setExpectedException('Zend\\Application\\Exception');
         $this->application->setOptions(array(
-            'bootstrap' => new stdClass(),
+            'bootstrap' => new \stdClass(),
         ));
         $bootstrap = $this->application->getBootstrap();
     }
 
-    /**
-     * @expectedException Zend_Application_Exception
-     */
     public function testPassingInvalidOptionsArgumentToConstructorShouldRaiseException()
     {
-        $application = new Zend_Application('testing', new stdClass());
+        $this->setExpectedException('Zend\\Application\\Exception');
+        $application = new Application\Application('testing', new \stdClass());
     }
 
     public function testPassingStringIniConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.ini');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.ini');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingStringXmlConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.xml');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.xml');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingStringPhpConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.php');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.php');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingStringIncConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.inc');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.inc');
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptions()
     {
-        $application = new Zend_Application('testing', array('bar' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.inc'));
+        $application = new Application\Application('testing', array('bar' => 'baz', 'config' => __DIR__ . '/TestAsset/appconfig.inc'));
         $this->assertTrue($application->hasOption('foo'));
         $this->assertTrue($application->hasOption('bar'));
     }
@@ -299,29 +281,27 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
      */
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptionsAndNotOverride()
     {
-        $application = new Zend_Application('testing', array('foo' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.inc'));
+        $application = new Application\Application('testing', array('foo' => 'baz', 'config' => __DIR__ . '/TestAsset/appconfig.inc'));
         $this->assertNotEquals('bar', $application->getOption('foo'));
     }
 
-    /**
-     * @expectedException Zend_Application_Exception
-     */
     public function testPassingInvalidStringOptionToConstructorShouldRaiseException()
     {
-        $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig');
+        $this->setExpectedException('Zend\\Application\\Exception');
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig');
     }
 
     public function testPassingZendConfigToConstructorShouldLoadOptions()
     {
-        $config = new Zend_Config_Ini(dirname(__FILE__) . '/_files/appconfig.ini', 'testing');
-        $application = new Zend_Application('testing', $config);
+        $config = new IniConfig(__DIR__ . '/TestAsset/appconfig.ini', 'testing');
+        $application = new Application\Application('testing', $config);
         $this->assertTrue($application->hasOption('foo'));
     }
 
     public function testPassingArrayOptionsToConstructorShouldLoadOptions()
     {
-        $config = new Zend_Config_Ini(dirname(__FILE__) . '/_files/appconfig.ini', 'testing');
-        $application = new Zend_Application('testing', $config->toArray());
+        $config = new IniConfig(__DIR__ . '/TestAsset/appconfig.ini', 'testing');
+        $application = new Application\Application('testing', $config->toArray());
         $this->assertTrue($application->hasOption('foo'));
     }
 
@@ -331,29 +311,25 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $this->assertSame($application, $this->application);
     }
 
-    /**
-     * @expectedException Zend_Application_Exception
-     */
     public function testApplicationShouldRaiseExceptionIfBootstrapFileDoesNotContainBootstrapClass()
     {
+        $this->setExpectedException('Zend\\Application\\Exception');
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path'  => dirname(__FILE__) . '/_files/ZfAppNoBootstrap.php',
+                'path'  => __DIR__ . '/TestAsset/ZfAppNoBootstrap.php',
                 'class' => 'ZfAppNoBootstrap',
             ),
         ));
         $bootstrap = $this->application->getBootstrap();
     }
 
-    /**
-     * @expectedException Zend_Application_Exception
-     */
     public function testApplicationShouldRaiseExceptionWhenBootstrapClassNotOfCorrectType()
     {
+        $this->setExpectedException('Zend\\Application\\Exception');
         $this->application->setOptions(array(
             'bootstrap' => array(
-                'path'  => dirname(__FILE__) . '/_files/ZfAppBadBootstrap.php',
-                'class' => 'ZfAppBadBootstrap',
+                'path'  => __DIR__ . '/TestAsset/ZfAppBadBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBadBootstrap',
             ),
         ));
         $bootstrap = $this->application->getBootstrap();
@@ -363,18 +339,18 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
     {
         $options = array(
             'pluginPaths' => array(
-                'Zend_Application_Test_Path' => dirname(__FILE__),
+                'Zend_Application_Test_Path' => __DIR__,
             ),
             'Resources' => array(
                 'modules' => array(),
                 'FrontController' => array(
                     'baseUrl'             => '/foo',
-                    'moduleDirectory'     => dirname(__FILE__) . '/_files/modules',
+                    'moduleDirectory'     => __DIR__ . '/TestAsset/modules',
                 ),
             ),
             'Bootstrap' => array(
-                'path'  => dirname(__FILE__) . '/_files/ZfAppBootstrap.php',
-                'class' => 'ZfAppBootstrap',
+                'path'  => __DIR__ . '/TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap',
             ),
         );
         $this->application->setOptions($options);
@@ -387,9 +363,9 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
      */
     public function testSetOptionsShouldProperlyMergeTwoConfigFileOptions()
     {
-        $application = new Zend_Application(
-            'production', dirname(__FILE__) .
-            '/_files/zf-6679-1.inc'
+        $application = new Application\Application(
+            'production', __DIR__ .
+            '/TestAsset/zf-6679-1.inc'
         );
         $options = $application->getOptions();
         $this->assertEquals(array('includePaths', 'config'), array_keys($options));
@@ -406,7 +382,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
         $path   = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_PATH');
         $latest = constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST');
 
-        $application = new Zend_Application('production', array(
+        $application = new Application\Application('production', array(
             'autoloaderZfPath'    => $path,
             'autoloaderZfVersion' => 'latest',
         ));
@@ -420,7 +396,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
      */
     public function testHasOptionShouldTreatOptionKeysAsCaseInsensitive()
     {
-        $application = new Zend_Application('production', array(
+        $application = new Application\Application('production', array(
             'fooBar' => 'baz',
         ));
         $this->assertTrue($application->hasOption('FooBar'));
@@ -431,7 +407,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
      */
     public function testGetOptionShouldTreatOptionKeysAsCaseInsensitive()
     {
-        $application = new Zend_Application('production', array(
+        $application = new Application\Application('production', array(
             'fooBar' => 'baz',
         ));
         $this->assertEquals('baz', $application->getOption('FooBar'));
@@ -442,10 +418,10 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
      */
     public function testCanExecuteBoostrapResourceViaApplicationInstanceBootstrapMethod()
     {
-        $application = new Zend_Application('testing', array(
+        $application = new Application\Application('testing', array(
             'bootstrap' => array(
-                'path' => dirname(__FILE__) . '/_files/ZfAppBootstrap.php',
-                'class' => 'ZfAppBootstrap'
+                'path' => __DIR__ . '/TestAsset/ZfAppBootstrap.php',
+                'class' => 'ZendTest\\Application\\TestAsset\\ZfAppBootstrap'
                 )
             )
         );
@@ -457,18 +433,14 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
     
     public function testOptionsCanHandleMuiltipleConigFiles()
     {
-        $application = new Zend_Application('testing', array(
+        $application = new Application\Application('testing', array(
             'config' => array(
-                dirname(__FILE__) . '/_files/Zf-6719-1.ini',
-                dirname(__FILE__) . '/_files/Zf-6719-2.ini'
+                __DIR__ . '/TestAsset/Zf-6719-1.ini',
+                __DIR__ . '/TestAsset/Zf-6719-2.ini'
                 )
             )
         );
         
         $this->assertEquals('baz', $application->getOption('foo'));
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_ApplicationTest::main') {
-    Zend_Application_ApplicationTest::main();
 }

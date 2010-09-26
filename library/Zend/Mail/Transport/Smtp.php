@@ -24,9 +24,11 @@
  * @namespace
  */
 namespace Zend\Mail\Transport;
-use Zend\Mail\Protocol\Smtp as SmtpProtocol;
-use Zend\Mail\Protocol;
-use Zend\Mime;
+use Zend\Mail\AbstractProtocol,
+    Zend\Mail\AbstractTransport,
+    Zend\Mail\Protocol\Smtp as SmtpProtocol,
+    Zend\Mail\Protocol,
+    Zend\Mime;
 
 /**
  * SMTP connection object
@@ -34,8 +36,8 @@ use Zend\Mime;
  * Loads an instance of \Zend\Mail\Protocol\Smtp and forwards smtp transactions
  *
  * @uses       \Zend\Loader
- * @uses       \Zend\Mail\Protocol\Smtp\Smtp
- * @uses       \Zend\Mail\Transport\AbstractTransport
+ * @uses       \Zend\Mail\Protocol\Smtp
+ * @uses       \Zend\Mail\AbstractTransport
  * @uses       \Zend\Mail\Transport\Exception
  * @uses       \Zend\Mime\Mime
  * @category   Zend
@@ -94,9 +96,9 @@ class Smtp extends AbstractTransport
 
 
     /**
-     * Instance of \Zend\Mail\Protocol\Smtp\Smtp
+     * Instance of \Zend\Mail\Protocol\Smtp
      *
-     * @var \Zend\Mail\Protocol\Smtp\Smtp
+     * @var \Zend\Mail\Protocol\Smtp
      */
     protected $_connection;
 
@@ -135,7 +137,7 @@ class Smtp extends AbstractTransport
      */
     public function __destruct()
     {
-        if ($this->_connection instanceof SmtpProtocol\Smtp) {
+        if ($this->_connection instanceof SmtpProtocol) {
             try {
                 $this->_connection->quit();
             } catch (Protocol\Exception $e) {
@@ -153,7 +155,7 @@ class Smtp extends AbstractTransport
      *
      * @return void
      */
-    public function setConnection(Protocol\AbstractProtocol $connection)
+    public function setConnection(AbstractProtocol $connection)
     {
         $this->_connection = $connection;
     }
@@ -181,7 +183,7 @@ class Smtp extends AbstractTransport
     public function _sendMail()
     {
         // If sending multiple messages per session use existing adapter
-        if (!($this->_connection instanceof SmtpProtocol\Smtp)) {
+        if (!($this->_connection instanceof SmtpProtocol)) {
             // Check if authentication is required and determine required class
             $connectionClass = '\Zend\Mail\Protocol\Smtp';
             if ($this->_auth) {

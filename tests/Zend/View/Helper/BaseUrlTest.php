@@ -20,18 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_BaseUrlTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_BaseUrlTest::main');
-}
-
 /**
- * @see Zend_View_Helper_BaseUrl
+ * @namespace
  */
-
-/**
- * @see Zend_Controller_Front
- */
+namespace ZendTest\View\Helper;
+use Zend\Controller;
+use Zend\View\Helper;
 
 /**
  * @category   Zend
@@ -42,7 +36,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
+class BaseUrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Previous baseUrl before changing
@@ -59,20 +53,11 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
     protected $_server;
 
     /**
-     * Main
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_BaseUrlTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->_previousBaseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->_previousBaseUrl = Controller\Front::getInstance()->getBaseUrl();
         $this->_server = $_SERVER;
     }
 
@@ -81,8 +66,8 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        Zend_Controller_Front::getInstance()->setBaseUrl($this->_previousBaseUrl);
-        Zend_Controller_Front::getInstance()->resetInstance();
+        Controller\Front::getInstance()->setBaseUrl($this->_previousBaseUrl);
+        Controller\Front::getInstance()->resetInstance();
 
         $_SERVER = $this->_server;
     }
@@ -95,10 +80,10 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
     {
         $baseUrls = array('', '/subdir', '/subdir/', '/sub/sub/dir');
         foreach ($baseUrls as $baseUrl) {
-            Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
-            $helper = new Zend_View_Helper_BaseUrl();
+            Controller\Front::getInstance()->setBaseUrl($baseUrl);
+            $helper = new Helper\BaseUrl();
 
-            $this->assertEquals(rtrim($baseUrl, '/\\'), $helper->baseUrl());
+            $this->assertEquals(rtrim($baseUrl, '/\\'), $helper->direct());
         }
     }
 
@@ -115,10 +100,10 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
-            $helper = new Zend_View_Helper_BaseUrl();
+            Controller\Front::getInstance()->setBaseUrl($baseUrl);
+            $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->baseUrl('file.js'));
+            $this->assertEquals($val, $helper->direct('file.js'));
         }
     }
 
@@ -135,10 +120,10 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
-            $helper = new Zend_View_Helper_BaseUrl();
+            Controller\Front::getInstance()->setBaseUrl($baseUrl);
+            $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->baseUrl('/file.js'));
+            $this->assertEquals($val, $helper->direct('/file.js'));
         }
     }
 
@@ -155,10 +140,10 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
-            $helper = new Zend_View_Helper_BaseUrl();
+            Controller\Front::getInstance()->setBaseUrl($baseUrl);
+            $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->baseUrl('/path/bar'));
+            $this->assertEquals($val, $helper->direct('/path/bar'));
         }
     }
 
@@ -174,37 +159,37 @@ class Zend_View_Helper_BaseUrlTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
-            $helper = new Zend_View_Helper_BaseUrl();
+            Controller\Front::getInstance()->setBaseUrl($baseUrl);
+            $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->baseUrl('/'));
+            $this->assertEquals($val, $helper->direct('/'));
         }
     }
 
     public function testSetBaseUrlModifiesBaseUrl()
     {
-        $helper = new Zend_View_Helper_BaseUrl();
+        $helper = new Helper\BaseUrl();
         $helper->setBaseUrl('/myfoo');
         $this->assertEquals('/myfoo', $helper->getBaseUrl());
     }
 
     public function testGetBaseUrlReturnsBaseUrl()
     {
-        Zend_Controller_Front::getInstance()->setBaseUrl('/mybar');
-        $helper = new Zend_View_Helper_BaseUrl();
+        Controller\Front::getInstance()->setBaseUrl('/mybar');
+        $helper = new Helper\BaseUrl();
         $this->assertEquals('/mybar', $helper->getBaseUrl());
     }
 
     public function testGetBaseUrlReturnsBaseUrlWithoutScriptName()
     {
         $_SERVER['SCRIPT_NAME'] = '/foo/bar/bat/mybar/index.php';
-        Zend_Controller_Front::getInstance()->setBaseUrl('/mybar/index.php');
-        $helper = new Zend_View_Helper_BaseUrl();
+        Controller\Front::getInstance()->setBaseUrl('/mybar/index.php');
+        $helper = new Helper\BaseUrl();
         $this->assertEquals('/mybar', $helper->getBaseUrl());
     }
 }
 
 // Call Zend_View_Helper_BaseUrlTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_BaseUrlTest::main') {
-    Zend_View_Helper_BaseUrlTest::main();
+    \Zend_View_Helper_BaseUrlTest::main();
 }

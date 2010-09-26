@@ -223,12 +223,12 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     }
 
     protected function _testVerifyOffline() {
-        $adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client = new \Zend\HTTP\Client(null, array(
+        $adapter = new \Zend\Http\Client\Adapter\Test();
+        $client = new \Zend\Http\Client(null, array(
             'adapter' => $adapter
         ));
 
-        ReCaptcha\ReCaptcha::setDefaultHTTPClient($client);
+        ReCaptcha\ReCaptcha::setDefaultHttpClient($client);
 
         $resp = $this->_reCaptcha->verify('challengeField', 'responseField');
 

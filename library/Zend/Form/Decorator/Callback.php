@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Form\Decorator;
+
+/**
  * Zend_Form_Decorator_Callback
  *
  * Execute an arbitrary callback to decorate an element. Callbacks should take
@@ -38,8 +43,8 @@
  * content. To replace the content, specify a placement of boolean false;
  * defaults to append content.
  *
- * @uses       Zend_Form_Decorator_Abstract
- * @uses       Zend_Form_Exception
+ * @uses       \Zend\Form\Decorator\AbstractDecorator
+ * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -47,7 +52,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Form_Decorator_Callback extends Zend_Form_Decorator_Abstract
+class Callback extends AbstractDecorator
 {
     /**
      * Callback
@@ -59,13 +64,13 @@ class Zend_Form_Decorator_Callback extends Zend_Form_Decorator_Abstract
      * Set callback
      *
      * @param  callback $callback
-     * @return Zend_Form_Decorator_Callback
-     * @throws Zend_Form_Exception
+     * @return \Zend\Form\Decorator\Callback
+     * @throws \Zend\Form\Exception
      */
     public function setCallback($callback)
     {
         if (!is_callable($callback)) {
-            throw new Zend_Form_Exception('Invalid callback provided to callback decorator');
+            throw new Exception('Invalid callback provided to callback decorator');
         }
         $this->_callback = $callback;
         return $this;

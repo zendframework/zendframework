@@ -24,16 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Tag\Cloud\Decorator;
+
 use Zend\Tag\Cloud\Decorator;
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Tag_Cloud_Decorator_HTMLCloudTest::main');
-}
-
-/**
- * Test helper
- */
-
 
 /**
  * @category   Zend
@@ -46,12 +38,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class HTMLCloudTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testDefaultOutput()
     {
         $decorator = new Decorator\HTMLCloud();
@@ -104,9 +90,3 @@ class HTMLCloudTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Tag_Cloud_Decorator_HTMLCloudTest::main') {
-    \Zend_Tag_Cloud_Decorator_HTMLCloudTest::main();
-}
-/**
- *
- */

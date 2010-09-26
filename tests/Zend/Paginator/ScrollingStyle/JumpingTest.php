@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Paginator\ScrollingStyle;
+
+/**
  * @see Zend_Paginator
  */
 
@@ -40,7 +45,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-class Zend_Paginator_ScrollingStyle_JumpingTest extends PHPUnit_Framework_TestCase
+class JumpingTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Paginator_ScrollingStyle_Jumping
@@ -59,8 +64,8 @@ class Zend_Paginator_ScrollingStyle_JumpingTest extends PHPUnit_Framework_TestCa
     protected function setUp()
     {
         parent::setUp();
-        $this->_scrollingStyle = new Zend_Paginator_ScrollingStyle_Jumping();
-        $this->_paginator = Zend_Paginator::factory(range(1, 101));
+        $this->_scrollingStyle = new \Zend\Paginator\ScrollingStyle\Jumping();
+        $this->_paginator = \Zend\Paginator\Paginator::factory(range(1, 101));
         $this->_paginator->setItemCountPerPage(10);
         $this->_paginator->setPageRange(10);
         $this->_expectedRange = array_combine(range(1, 10), range(1, 10));

@@ -20,7 +20,11 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Test;
+use Zend\Test;
 
 /**
  * @category   Zend
@@ -30,24 +34,24 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
+class DbAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Test_DbAdapter
+     * @var Zend\Test\DbAdapter
      */
     private $_adapter = null;
 
     public function setUp()
     {
-        $this->_adapter = new Zend_Test_DbAdapter();
+        $this->_adapter = new Test\DbAdapter();
     }
 
     public function testAppendStatementToStack()
     {
-        $stmt1 = Zend_Test_DbStatement::createSelectStatement( array() );
+        $stmt1 = Test\DbStatement::createSelectStatement( array() );
         $this->_adapter->appendStatementToStack($stmt1);
 
-        $stmt2 = Zend_Test_DbStatement::createSelectStatement( array() );
+        $stmt2 = Test\DbStatement::createSelectStatement( array() );
         $this->_adapter->appendStatementToStack($stmt2);
 
         $this->assertSame($stmt2, $this->_adapter->query("foo"));
@@ -119,8 +123,8 @@ class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_adapter->getProfiler()->getTotalNumQueries());
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\Db\Profiler\Query */
         $this->assertFalse($qp->hasEnded());
     }
 
@@ -131,8 +135,8 @@ class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_adapter->getProfiler()->getTotalNumQueries());
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\Db\Profiler\Query */
         $this->assertTrue($qp->hasEnded());
     }
 
@@ -141,8 +145,8 @@ class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
         $stmt = $this->_adapter->query("SELECT * FROM foo WHERE bar = ?", array(1234));
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\Db\Profiler\Query */
         $this->assertEquals(array(1 => 1234), $qp->getQueryParams());
         $this->assertEquals("SELECT * FROM foo WHERE bar = ?", $qp->getQuery());
     }
@@ -155,8 +159,8 @@ class Zend_Test_DbAdapterTest extends PHPUnit_Framework_TestCase
         $stmt->bindParam(1, $var);
 
         $qp = $this->_adapter->getProfiler()->getLastQueryProfile();
-        /* @var $qp Zend_Db_Profiler_Query */
 
+        /* @var $qp Zend\Db\Profiler\Query */
         $this->assertEquals(array(1 => 1234), $qp->getQueryParams());
         $this->assertEquals("SELECT * FROM foo WHERE bar = ?", $qp->getQuery());
     }

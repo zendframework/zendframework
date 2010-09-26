@@ -149,7 +149,7 @@ abstract class AbstractMeasure
         if ($round < 0) {
             $return = $this->_value;
         } else {
-            $return = Math\Math::round($this->_value, $round);
+            $return = Math::round($this->_value, $round);
         }
 
         if ($locale !== null) {
@@ -233,22 +233,22 @@ abstract class AbstractMeasure
                     switch ($key) {
                         case "/":
                             if ($found != 0) {
-                                $value = call_user_func(Math\Math::$div, $value, $found, 25);
+                                $value = call_user_func(Math::$div, $value, $found, 25);
                             }
                             break;
                         case "+":
-                            $value = call_user_func(Math\Math::$add, $value, $found, 25);
+                            $value = call_user_func(Math::$add, $value, $found, 25);
                             break;
                         case "-":
-                            $value = call_user_func(Math\Math::$sub, $value, $found, 25);
+                            $value = call_user_func(Math::$sub, $value, $found, 25);
                             break;
                         default:
-                            $value = call_user_func(Math\Math::$mul, $value, $found, 25);
+                            $value = call_user_func(Math::$mul, $value, $found, 25);
                             break;
                     }
                 }
             } else {
-                $value = call_user_func(Math\Math::$mul, $value, $this->_units[$this->getType()][0], 25);
+                $value = call_user_func(Math::$mul, $value, $this->_units[$this->getType()][0], 25);
             }
 
             // Convert to expected value
@@ -256,23 +256,23 @@ abstract class AbstractMeasure
                 foreach (array_reverse($this->_units[$type][0]) as $key => $found) {
                     switch ($key) {
                         case "/":
-                            $value = call_user_func(Math\Math::$mul, $value, $found, 25);
+                            $value = call_user_func(Math::$mul, $value, $found, 25);
                             break;
                         case "+":
-                            $value = call_user_func(Math\Math::$sub, $value, $found, 25);
+                            $value = call_user_func(Math::$sub, $value, $found, 25);
                             break;
                         case "-":
-                            $value = call_user_func(Math\Math::$add, $value, $found, 25);
+                            $value = call_user_func(Math::$add, $value, $found, 25);
                             break;
                         default:
                             if ($found != 0) {
-                                $value = call_user_func(Math\Math::$div, $value, $found, 25);
+                                $value = call_user_func(Math::$div, $value, $found, 25);
                             }
                             break;
                     }
                 }
             } else {
-                $value = call_user_func(Math\Math::$div, $value, $this->_units[$type][0], 25);
+                $value = call_user_func(Math::$div, $value, $this->_units[$type][0], 25);
             }
 
             $slength = strlen($value);
@@ -284,7 +284,7 @@ abstract class AbstractMeasure
                 }
             }
 
-            $this->_value = Math\Math::round($value, $length);
+            $this->_value = Math::round($value, $length);
             $this->_type  = $type;
         }
         return $this;

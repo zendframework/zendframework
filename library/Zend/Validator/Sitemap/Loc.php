@@ -54,7 +54,7 @@ class Loc extends \Zend\Validator\AbstractValidator
      */
     protected $_messageTemplates = array(
         self::NOT_VALID => "'%value%' is no valid sitemap location",
-        self::INVALID   => "Invalid type given, the value should be a string",
+        self::INVALID   => "Invalid type given. String expected",
     );
 
     /**
@@ -73,8 +73,9 @@ class Loc extends \Zend\Validator\AbstractValidator
         }
 
         $this->_setValue($value);
-        $result = \Zend\Uri\Uri::check($value);
-        if ($result !== true) {
+        $uri = new \Zend\Uri\Url($value);
+        $uri->setAllowUnwise(false);
+        if (!$uri->isValid()) {
             $this->_error(self::NOT_VALID);
             return false;
         }

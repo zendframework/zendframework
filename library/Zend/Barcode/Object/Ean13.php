@@ -78,6 +78,7 @@ class Ean13 extends AbstractObject
     {
         $this->_barcodeLength = 13;
         $this->_mandatoryChecksum = true;
+        $this->_mandatoryQuietZones = true;
     }
 
     /**

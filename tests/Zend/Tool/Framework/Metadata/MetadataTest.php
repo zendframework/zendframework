@@ -21,12 +21,10 @@
  */
 
 /**
- * @see TestHelper.php
+ * @namespace
  */
-
-/**
- * @see Zend_Tool_Framework_Action_Base
- */
+namespace ZendTest\Tool\Framework\Metadata;
+use Zend\Tool\Framework\Metadata;
 
 /**
  * @category   Zend
@@ -39,7 +37,7 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Manifest
  */
-class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCase
+class MetadataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -49,7 +47,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
     public function setup()
     {
-        $this->_metadata = new Zend_Tool_Framework_Metadata_Basic();
+        $this->_metadata = new Metadata\Basic();
     }
 
     public function teardown()
@@ -59,9 +57,9 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
     public function testConstructorWillAcceptAndPersistValues()
     {
-        $obj1 = new ArrayObject();
+        $obj1 = new \ArrayObject();
 
-        $metadata = new Zend_Tool_Framework_Metadata_Basic(array(
+        $metadata = new Metadata\Basic(array(
             'name' => 'Foo',
             'value' => 'Bar',
             'reference' => $obj1
@@ -74,7 +72,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
     public function testSetOptionsPersistValues()
     {
-        $obj1 = new ArrayObject();
+        $obj1 = new \ArrayObject();
 
         $this->_metadata->setOptions(array(
             'name' => 'Foo',
@@ -108,7 +106,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
     public function testGetAttributesReturnsProperValues()
     {
-        $obj1 = new ArrayObject();
+        $obj1 = new \ArrayObject();
 
         $this->_metadata->setOptions(array(
             'name' => 'Foo',
@@ -125,12 +123,12 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
         $this->assertEquals(null, $attributes['value']);
         $this->assertTrue($obj1 === $attributes['reference']);
 
-        $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Metadata_Basic::ATTRIBUTES_NO_PARENT);
+        $attributes = $this->_metadata->getAttributes(Metadata\Basic::ATTRIBUTES_NO_PARENT);
 
         $this->assertEquals(0, count($attributes));
 
 
-        $attributes = $this->_metadata->getAttributes(Zend_Tool_Framework_Metadata_Basic::ATTRIBUTES_ALL, true);
+        $attributes = $this->_metadata->getAttributes(Metadata\Basic::ATTRIBUTES_ALL, true);
 
         $this->assertEquals(4, count($attributes));
 
@@ -143,7 +141,7 @@ class Zend_Tool_Framework_Manifest_MetadataTest extends PHPUnit_Framework_TestCa
 
     public function testMetadataObjectCanCastToStringRepresentation()
     {
-        $obj1 = new ArrayObject();
+        $obj1 = new \ArrayObject();
 
         $this->_metadata->setOptions(array(
             'name' => 'Foo',

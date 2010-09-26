@@ -46,7 +46,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
     {
 //        // ensure we are only required this file once per runtime
 //        if (self::$_sampleClassFileRequired === false) {
-//            $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
+//            $fileToRequire = __DIR__ . '/_files/TestSampleClass.php';
 //            self::$_sampleClassFileRequired = true;
 //        }
     }

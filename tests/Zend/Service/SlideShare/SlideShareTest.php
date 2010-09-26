@@ -67,7 +67,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID);
 
         $cache = Cache::factory('Core', 'File', array('lifetime' => 0, 'automatic_serialization' => true),
-                                                     array('cache_dir' => dirname(__FILE__)."/_files"));
+                                                     array('cache_dir' => __DIR__."/_files"));
         $ss->setCacheObject($cache);
         return $ss;
     }
@@ -166,7 +166,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
         $ss = $this->_getSSObject();
 
         $title = "Unit Test for ZF SlideShare Component";
-        $ppt_file = dirname(__FILE__)."/_files/demo.ppt";
+        $ppt_file = __DIR__."/_files/demo.ppt";
 
         $show = new SlideShare\SlideShow();
         $show->setFilename($ppt_file);
@@ -230,4 +230,18 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ss->getTranscript(), "none");
 
     }
+
+    /**
+     * @group   ZF-3247
+     */
+	public function testSlideShareObjectHandlesUnicodeCharactersWell()
+	{
+		$slideShow = new Zend_Service_SlideShare_SlideShow();
+		$slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
+
+		if (!extension_loaded('mbstring')) {
+		    $this->markTestSkipped('Extension "mbstring" not loaded');
+		}
+        $this->assertEquals('UTF-8', mb_detect_encoding($slideShow->getTitle()));
+	}
 }

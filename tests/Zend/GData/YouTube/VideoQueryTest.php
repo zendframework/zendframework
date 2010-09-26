@@ -40,7 +40,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testQueryStringConstruction () {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setOrderBy('viewCount');
         $query->setVideoQuery('foobar');
@@ -49,7 +49,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testQueryStringConstructionV2() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setOrderBy('viewCount');
         $query->setVideoQuery('version2');
@@ -58,7 +58,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testSafeSearchQueryV2() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
         $query->setRacy('include');
@@ -72,7 +72,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testLocationRadiusV1() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
         $query->setLocationRadius('1km');
@@ -86,7 +86,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testLocationV2() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setLocation('-37.122,122.01');
         $expectedString = '?location=-37.122%2C122.01';
@@ -94,7 +94,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testLocationExceptionOnNonNumericV2() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
 
@@ -109,7 +109,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testLocationExceptionOnOnlyOneCoordinateV2() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
 
@@ -125,7 +125,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testUploaderExceptionOnInvalidV2() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
 
@@ -141,7 +141,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testProjectionPresentInV2Query() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setVideoQuery('foo');
         $expectedString = 'http://gdata.youtube.com/feeds/api/videos?q=foo';
@@ -149,7 +149,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testSafeSearchParametersInV2() {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
         try {
@@ -168,7 +168,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     public function testVideoQuerySetLocationException()
     {
         $this->setExpectedException('Zend\GData\App\InvalidArgumentException');
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $location = 'foobar';
         $this->assertNull($query->setLocation($location));
@@ -180,7 +180,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     public function testVideoQuerySetLocationExceptionV2()
     {
         $this->setExpectedException('Zend\GData\App\InvalidArgumentException');
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $location = '-100x,-200y';
         $this->assertNull($query->setLocation($location));
@@ -192,7 +192,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
     public function testVideoQuerySetLocationExceptionV3()
     {
         $this->setExpectedException('Zend\GData\App\InvalidArgumentException');
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $location = '-100x,-200y!';
         $this->assertNull($query->setLocation($location));
@@ -203,7 +203,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryExclamationMarkRemoveBug()
     {
-        $yt = new YouTube\YouTube();
+        $yt = new YouTube();
         $query = $yt->newVideoQuery();
 
         $location = '37.42307,-122.08427';

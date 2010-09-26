@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21261 -->
+<!-- EN-Revision: 21740 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.callback">
     <title>Callback</title>
@@ -69,11 +69,12 @@ if ($valid->isValid($input)) {
         <title>Verwendung mit Closures</title>
 
         <para>
-            PHP 5.3 führt <ulink url="http://php.net/functions.anonymous">Closures</ulink> ein,
+            <acronym>PHP</acronym> 5.3 führt <ulink
+                url="http://php.net/functions.anonymous">Closures</ulink> ein,
             welche grundsätzlich selbst-enthaltene oder <emphasis>anonyme</emphasis> Funktionen
-            sind. PHP nimmt an das Closures eine andere Form eines Callbacks sind, und können daher
-            als solche mit <classname>Zend_Validate_Callback</classname> verwendet werden. Als
-            Beispiel:
+            sind. <acronym>PHP</acronym> nimmt an das Closures eine andere Form eines Callbacks
+            sind, und können daher als solche mit <classname>Zend_Validate_Callback</classname>
+            verwendet werden. Als Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -148,9 +149,9 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
 
         <para>
-            Letztendlich kann man, wenn man PHP 5.3 verwendet, die magische Methode
-            <methodname>__invoke()</methodname> in der eigenen Klasse definieren. Wenn man das tut
-            dann funktioniert die Angabe einer Instanz der Klasse genauso:
+            Letztendlich kann man, wenn man <acronym>PHP</acronym> 5.3 verwendet, die magische
+            Methode <methodname>__invoke()</methodname> in der eigenen Klasse definieren. Wenn man
+            das tut dann funktioniert die Angabe einer Instanz der Klasse genauso:
         </para>
 
         <programlisting language="php"><![CDATA[

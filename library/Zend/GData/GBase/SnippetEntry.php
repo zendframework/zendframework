@@ -44,5 +44,5 @@ class SnippetEntry extends Entry
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\GBase\SnippetEntry';
+    protected $_entryClassName = 'Zend\GData\GBase\SnippetEntry';
 }

@@ -21,28 +21,33 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+/**
  * Front Controller resource
  *
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Front
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\Controller\Action\HelperBroker
+ * @uses       \Zend\Controller\Front
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resource_ResourceAbstract
+class Frontcontroller extends AbstractResource
 {
     /**
-     * @var Zend_Controller_Front
+     * @var \Zend\Controller\Front
      */
     protected $_front;
 
     /**
      * Initialize Front Controller
      *
-     * @return Zend_Controller_Front
+     * @return \Zend\Controller\Front
      */
     public function init()
     {
@@ -121,7 +126,7 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                 case 'actionhelperpaths':
                     if (is_array($value)) {
                         foreach ($value as $helperPrefix => $helperPath) {
-                            Zend_Controller_Action_HelperBroker::addPath($helperPath, $helperPrefix);
+                            \Zend\Controller\Action\HelperBroker::addPath($helperPath, $helperPrefix);
                         }
                     }
                     break;
@@ -142,12 +147,12 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
     /**
      * Retrieve front controller instance
      *
-     * @return Zend_Controller_Front
+     * @return \Zend\Controller\Front
      */
     public function getFrontController()
     {
         if (null === $this->_front) {
-            $this->_front = Zend_Controller_Front::getInstance();
+            $this->_front = \Zend\Controller\Front::getInstance();
         }
         return $this->_front;
     }

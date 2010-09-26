@@ -21,6 +21,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Profile\Resource;
+
+/**
  * This class is an iterator that will iterate only over enabled resources
  *
  * @uses       ArrayObject
@@ -29,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Profile_Resource_SearchConstraints
+class SearchConstraints
 {
 
     /**
@@ -55,7 +60,7 @@ class Zend_Tool_Project_Profile_Resource_SearchConstraints
      * setOptions()
      *
      * @param array $option
-     * @return Zend_Tool_Project_Profile_Resource_SearchConstraints
+     * @return \Zend\Tool\Project\Profile\Resource\SearchConstraints
      */
     public function setOptions(Array $option)
     {
@@ -74,7 +79,7 @@ class Zend_Tool_Project_Profile_Resource_SearchConstraints
      * addConstraint()
      *
      * @param string|array $constraint
-     * @return Zend_Tool_Project_Profile_Resource_SearchConstraints
+     * @return \Zend\Tool\Project\Profile\Resource\SearchConstraints
      */
     public function addConstraint($constraint)
     {
@@ -112,7 +117,7 @@ class Zend_Tool_Project_Profile_Resource_SearchConstraints
     protected function _makeConstraint($name, $params)
     {
         $value = array('name' => $name, 'params' => $params);
-        return new ArrayObject($value, ArrayObject::ARRAY_AS_PROPS);
+        return new \ArrayObject($value, \ArrayObject::ARRAY_AS_PROPS);
     }
 
 }

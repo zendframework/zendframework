@@ -117,20 +117,39 @@ class TwoLevels extends AbstractBackend implements ExtendedBackend
     public function __construct(array $options = array())
     {
         parent::__construct($options);
+
         if ($this->_options['slow_backend'] === null) {
             Cache\Cache::throwException('slow_backend option has to set');
+        } elseif ($this->_options['slow_backend'] instanceof ExtendedBackend) {
+            $this->_slowBackend = $this->_options['slow_backend'];
+        } else {
+            $this->_slowBackend = Cache\Cache::_makeBackend(
+                $this->_options['slow_backend'],
+                $this->_options['slow_backend_options'],
+                $this->_options['slow_backend_custom_naming'],
+                $this->_options['slow_backend_autoload']
+            );
+            if (!in_array('Zend\Cache\Backend\ExtendedBackend', class_implements($this->_slowBackend))) {
+                Cache\Cache::throwException('slow_backend must implement the Zend\Cache\Backend\ExtendedBackend interface');
+            }
         }
+
         if ($this->_options['fast_backend'] === null) {
             Cache\Cache::throwException('fast_backend option has to set');
+        } elseif ($this->_options['fast_backend'] instanceof ExtendedBackend) {
+            $this->_fastBackend = $this->_options['fast_backend'];
+        } else {
+            $this->_fastBackend = Cache\Cache::_makeBackend(
+                $this->_options['fast_backend'],
+                $this->_options['fast_backend_options'],
+                $this->_options['fast_backend_custom_naming'],
+                $this->_options['fast_backend_autoload']
+            );
+            if (!in_array('Zend\Cache\Backend\ExtendedBackend', class_implements($this->_fastBackend))) {
+                Zend_Cache::throwException('fast_backend must implement the Zend\Cache\Backend\ExtendedBackend interface');
+            }
         }
-        $this->_slowBackend = Cache\Cache::_makeBackend($this->_options['slow_backend'], $this->_options['slow_backend_options'], $this->_options['slow_backend_custom_naming'], $this->_options['slow_backend_autoload']);
-        $this->_fastBackend = Cache\Cache::_makeBackend($this->_options['fast_backend'], $this->_options['fast_backend_options'], $this->_options['fast_backend_custom_naming'], $this->_options['fast_backend_autoload']);
-        if (!in_array('Zend_Cache_Backend_ExtendedInterface', class_implements($this->_slowBackend))) {
-            Cache\Cache::throwException('slow_backend must implement the Zend_Cache_Backend_ExtendedInterface interface');
-        }
-        if (!in_array('Zend_Cache_Backend_ExtendedInterface', class_implements($this->_fastBackend))) {
-            Cache\Cache::throwException('fast_backend must implement the Zend_Cache_Backend_ExtendedInterface interface');
-        }
+
         $this->_slowBackend->setDirectives($this->_directives);
         $this->_fastBackend->setDirectives($this->_directives);
     }
@@ -173,8 +192,14 @@ class TwoLevels extends AbstractBackend implements ExtendedBackend
         if (($priority > 0) && (10 * $priority >= $usage)) {
             $fastLifetime = $this->_getFastLifetime($lifetime, $priority);
             $boolFast = $this->_fastBackend->save($preparedData, $id, array(), $fastLifetime);
+            $boolSlow = $this->_slowBackend->save($preparedData, $id, $tags, $lifetime);
+        } else {
+            $boolSlow = $this->_slowBackend->save($preparedData, $id, $tags, $lifetime);
+            if ($boolSlow === true) {
+                $boolFast = $this->_fastBackend->remove($id);
+            }
         }
-        $boolSlow = $this->_slowBackend->save($preparedData, $id, $tags, $lifetime);
+
         return ($boolFast && $boolSlow);
     }
 

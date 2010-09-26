@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\App\Extension;
 
+use Zend\GData\App\Extension;
+
 /**
  * Data model for representing an atom:link element
  *
- * @uses       \Zend\GData\App\Extension\Extension
+ * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

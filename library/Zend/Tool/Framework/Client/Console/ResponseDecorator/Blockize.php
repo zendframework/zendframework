@@ -20,9 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Framework\Client\Console\ResponseDecorator;
+
+/**
  * Take a text and block it into several lines of a fixed length.
  *
- * @uses       Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
+ * @uses       \Zend\Tool\Framework\Client\Response\ContentDecorator
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage Framework
@@ -30,8 +35,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Tool_Framework_Client_Console_ResponseDecorator_Blockize
-    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
+class Blockize
+    implements \Zend\Tool\Framework\Client\Response\ContentDecorator
 {
     public function getName()
     {

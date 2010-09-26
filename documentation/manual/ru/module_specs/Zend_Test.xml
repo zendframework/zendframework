@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.test.introduction">
+    <title>Введение</title>
+
+    <para>
+        <classname>Zend_Test</classname> предоставляет инструменты,
+        облегчающие модульное тестирование приложений на базе Zend Framework.
+        На данный момент мы предлагаем средства, делающие возможным тестирование
+        <acronym>MVC</acronym>-приложений на базе Zend Framework.
+    </para>
+</sect1>

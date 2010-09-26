@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19432 -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript ヘルパー</title>
 
@@ -75,7 +75,7 @@ $this->headScript()->appendFile(
 
     <para>
         <methodname>headScript()</methodname> メソッドを使うと、
-        スクリプト要素を手っ取り早く追加することができます。
+        スクリプト要素を手っ取り早く追加できます。
         シグネチャは
         <methodname>headScript($mode = 'FILE', $spec, $placement = 'APPEND')</methodname>
         です。<varname>$mode</varname> は 'FILE' あるいは 'SCRIPT' のいずれかで、
@@ -139,7 +139,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
         <title>HeadScript ヘルパーの基本的な使用法</title>
 
         <para>
-            上で説明したように、新しい script タグを、好きなときに指定することができます。
+            上で説明したように、新しい script タグを、好きなときに指定できます。
             外部のリソースへのリンクも可能ですし、
             スクリプト自体を指定することも可能です。
         </para>

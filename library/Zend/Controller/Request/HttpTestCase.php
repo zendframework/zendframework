@@ -20,16 +20,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Request;
+
+/**
  * Zend_Controller_Request_HttpTestCase
  *
  * HTTP request object for use with Zend_Controller family.
  *
- * @uses       Zend_Controller_Exception
- * @uses       Zend_Controller_Request_Http
+ * @uses       \Zend\Controller\Exception
+ * @uses       \Zend\Controller\Request\Http
  * @package    Zend_Controller
  * @subpackage Request
  */
-class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
+class HttpTestCase extends Http
 {
     /**
      * Request headers
@@ -65,7 +70,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     /**
      * Clear GET values
      *
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function clearQuery()
     {
@@ -76,7 +81,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     /**
      * Clear POST values
      *
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function clearPost()
     {
@@ -88,7 +93,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      * Set raw POST body
      *
      * @param  string $content
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function setRawBody($content)
     {
@@ -109,7 +114,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     /**
      * Clear raw POST body
      *
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function clearRawBody()
     {
@@ -122,7 +127,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      *
      * @param  string $key
      * @param  mixed $value
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function setCookie($key, $value)
     {
@@ -147,7 +152,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     /**
      * Clear all cookies
      *
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function clearCookies()
     {
@@ -159,13 +164,13 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      * Set request method
      *
      * @param  string $type
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function setMethod($type)
     {
         $type = strtoupper(trim((string) $type));
         if (!in_array($type, $this->_validMethodTypes)) {
-            throw new Zend_Controller_Exception('Invalid request method specified');
+            throw new \Zend\Controller\Exception('Invalid request method specified');
         }
         $this->_method = $type;
         return $this;
@@ -186,7 +191,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      *
      * @param  string $key
      * @param  string $value
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function setHeader($key, $value)
     {
@@ -199,7 +204,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      * Set request headers
      *
      * @param  array $headers
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function setHeaders(array $headers)
     {
@@ -238,7 +243,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     /**
      * Clear request headers
      *
-     * @return Zend_Controller_Request_HttpTestCase
+     * @return \Zend\Controller\Request\HttpTestCase
      */
     public function clearHeaders()
     {

@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Dojo\View\Helper;
+
+/**
  * dijit.form.SimpleTextarea view helper
  *
- * @uses       Zend_Dojo_View_Helper_Dijit
+ * @uses       \Zend\Dojo\View\Helper\Dijit
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Dojo_View_Helper_SimpleTextarea extends Zend_Dojo_View_Helper_Dijit
+class SimpleTextarea extends Dijit
 {
     /**
      * @var string Dijit type
@@ -56,7 +61,7 @@ class Zend_Dojo_View_Helper_SimpleTextarea extends Zend_Dojo_View_Helper_Dijit
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function simpleTextarea($id, $value = null, array $params = array(), array $attribs = array())
+    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         if (!array_key_exists('id', $attribs)) {
             $attribs['id']    = $id;

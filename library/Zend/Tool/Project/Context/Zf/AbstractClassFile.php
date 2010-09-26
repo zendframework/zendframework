@@ -21,19 +21,24 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project\Context\Zf;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       Zend_Tool_Project_Context_Filesystem_File
+ * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Tool_Project_Context_Zf_AbstractClassFile 
-    extends Zend_Tool_Project_Context_Filesystem_File
+abstract class AbstractClassFile 
+    extends \Zend\Tool\Project\Context\Filesystem\File
 {
     
     /**
@@ -53,7 +58,7 @@ abstract class Zend_Tool_Project_Context_Zf_AbstractClassFile
                 $containingResource = $currentResource;
                 break;
             }
-        } while ($currentResource instanceof Zend_Tool_Project_Profile_Resource
+        } while ($currentResource instanceof \Zend\Tool\Project\Profile\Resource
             && $currentResource = $currentResource->getParentResource());
         
         $fullClassName = '';
@@ -64,13 +69,13 @@ abstract class Zend_Tool_Project_Context_Zf_AbstractClassFile
                 $prefix = $containingResource->getAttribute('classNamePrefix');
                 $fullClassName = $prefix;
             } elseif ($containingResource->getName() == 'ModuleDirectory') {
-                $prefix = $containingResource->getAttribute('moduleName') . '_';
+                $prefix = $containingResource->getAttribute('moduleName') . '\\';
                 $fullClassName = $prefix;    
             }
         }
 
         if ($classContextName) {
-            $fullClassName .= rtrim($classContextName, '_') . '_';
+            $fullClassName .= rtrim($classContextName, '\\') . '\\';
         }
         $fullClassName .= $localClassName;
 

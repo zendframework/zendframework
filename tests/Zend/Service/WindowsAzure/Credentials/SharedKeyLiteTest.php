@@ -53,7 +53,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLiteTest extends PHPUnit_Fr
      */
     public function testSignForDevstoreWithRootPath()
     {
-        $credentials = new Zend_Service_WindowsAzure_Credentials_SharedKeyLite(Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, true);
+        $credentials = new Zend_Service_WindowsAzure_Credentials_SharedKeyLite(Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY, true);
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/',
@@ -72,7 +72,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLiteTest extends PHPUnit_Fr
      */
     public function testSignForDevstoreWithOtherPath()
     {
-        $credentials = new Zend_Service_WindowsAzure_Credentials_SharedKeyLite(Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, true);
+        $credentials = new Zend_Service_WindowsAzure_Credentials_SharedKeyLite(Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY, true);
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/test',
@@ -91,7 +91,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLiteTest extends PHPUnit_Fr
      */
     public function testSignForDevstoreWithQueryString()
     {
-        $credentials = new Zend_Service_WindowsAzure_Credentials_SharedKeyLite(Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, true);
+        $credentials = new Zend_Service_WindowsAzure_Credentials_SharedKeyLite(Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY, true);
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/',

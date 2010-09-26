@@ -53,7 +53,7 @@ interface Adapter extends \Zend\Validator\Validator
      * @param  mixed $element
      * @return string
      */
-    public function render(\Zend_View_Interface $view = null, $element = null);
+    public function render(\Zend\View\ViewEngine $view = null, $element = null);
 
     /**
      * Set captcha name

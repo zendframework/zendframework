@@ -29,7 +29,7 @@ namespace Zend\GData\GBase\Extension;
  * Concrete class for working with ItemType elements.
  *
  * @uses       \Zend\GData\App\Extension\Element
- * @uses       \Zend\GData\GBase\GBase
+ * @uses       \Zend\GData\GBase
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GBase
@@ -55,7 +55,7 @@ class BaseAttribute extends \Zend\GData\App\Extension\Element
      */
     public function __construct($name = null, $text = null, $type = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\GBase\GBase::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\GBase::$namespaces);
         if ($type !== null) {
           $attr = array('name' => 'type', 'value' => $type);
           $typeAttr = array('type' => $attr);

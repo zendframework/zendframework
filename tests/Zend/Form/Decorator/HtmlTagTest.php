@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-// Call Zend_Form_Decorator_HtmlTagTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_HtmlTagTest::main");
-}
+namespace ZendTest\Form\Decorator;
 
-
-
+use Zend\Form\Decorator\HtmlTag as HtmlTagDecorator,
+    Zend\Form\Element,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Form_Decorator_HtmlTag
@@ -38,20 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
-class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
+class HtmlTagTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Decorator_HtmlTagTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -60,23 +46,12 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->decorator = new Zend_Form_Decorator_HtmlTag();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->decorator = new HtmlTagDecorator();
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
+        $view = new View();
         return $view;
     }
 
@@ -89,7 +64,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
 
     public function testRendersOptionsAsHtmlAttribsByDefault()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo');
         $this->decorator->setElement($element)
                         ->setOptions($options);
@@ -106,7 +81,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
 
     public function testDoesNotRenderAttribsWhenNoAttribsOptionSet()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'noAttribs' => true);
         $this->decorator->setElement($element)
                         ->setOptions($options);
@@ -123,7 +98,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
 
     public function testCanRenderOnlyOpeningTag()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'openOnly' => true);
         $this->decorator->setElement($element)
                         ->setOptions($options);
@@ -142,7 +117,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
 
     public function testCanRenderOnlyClosingTag()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $options = array('tag' => 'div', 'class' => 'foobar', 'id' => 'foo', 'closeOnly' => true);
         $this->decorator->setElement($element)
                         ->setOptions($options);
@@ -159,7 +134,7 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
 
     public function testArrayAttributesAreRenderedAsSpaceSeparatedLists()
     {
-        $element = new Zend_Form_Element('foo');
+        $element = new Element('foo');
         $options = array('tag' => 'div', 'class' => array('foobar', 'bazbat'), 'id' => 'foo');
         $this->decorator->setElement($element)
                         ->setOptions($options);
@@ -232,9 +207,4 @@ class Zend_Form_Decorator_HtmlTagTest extends PHPUnit_Framework_TestCase
         $this->decorator->setOption('tag', 'dl');
         $this->assertEquals('dl', $this->decorator->getTag());
     }
-}
-
-// Call Zend_Form_Decorator_HtmlTagTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Form_Decorator_HtmlTagTest::main") {
-    Zend_Form_Decorator_HtmlTagTest::main();
 }

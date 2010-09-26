@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21358 -->
+<!-- EN-Revision: 21877 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -2118,6 +2118,13 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
+                        Somente o Microsoft <acronym>SQL</acronym> Server 2005 ou superior é
+                        suportado.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
                         Microsoft <acronym>SQL</acronym> Server não suporta sequências, assim
                         <methodname>lastInsertId()</methodname> ignora o argumento de chave
                         primária e retorna o último valor gerado para uma chave de autoincremento
@@ -2453,8 +2460,8 @@ if (!is_null($version)) {
                     </para>
 
                     <para>
-                        Recomendamos a atualização de <filename>gds32.dll</filename> (ou
-                        equivalente Linux) empacotado junto com PHP, para a mesma versão do
+                        Recomendamos a atualização de <filename>gds32.dll</filename> (ou equivalente
+                        Linux) empacotado junto com <acronym>PHP</acronym>, para a mesma versão do
                         servidor. Para Firebird o equivalente de <filename>gds32.dll</filename> é
                         <filename>fbclient.dll</filename>.
                     </para>

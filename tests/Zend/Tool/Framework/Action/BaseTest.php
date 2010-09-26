@@ -21,12 +21,10 @@
  */
 
 /**
- * @see TestHelper.php
+ * @namespace
  */
-
-/**
- * @see Zend_Tool_Framework_Action_Base
- */
+namespace ZendTest\Tool\Framework\Action;
+use Zend\Tool\Framework\Action;
 
 /**
  * @category   Zend
@@ -39,18 +37,18 @@
  * @group Zend_Tool_Framework
  * @group Zend_Tool_Framework_Action
  */
-class Zend_Tool_Framework_Action_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testBaseActionCanGetNameViaConstructor()
     {
-        $baseAction = new Zend_Tool_Framework_Action_Base('Foo');
+        $baseAction = new Action\Base('Foo');
         $this->assertEquals('Foo', $baseAction->getName());
     }
 
     public function testBaseActionCanGetAndSetName()
     {
-        $baseAction = new Zend_Tool_Framework_Action_Base();
+        $baseAction = new Action\Base();
         $this->assertEquals('Base', $baseAction->getName());
         $baseAction->setName('Foo');
         $this->assertEquals('Foo', $baseAction->getName());

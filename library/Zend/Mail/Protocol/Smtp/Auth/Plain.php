@@ -29,14 +29,14 @@ use Zend\Mail\Protocol\Smtp;
 /**
  * Performs PLAIN authentication
  *
- * @uses       \Zend\Mail\Protocol\Smtp\Smtp
+ * @uses       \Zend\Mail\Protocol\Smtp
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Plain extends Smtp\Smtp
+class Plain extends Smtp
 {
     /**
      * PLAIN username
@@ -89,7 +89,7 @@ class Plain extends Smtp\Smtp
 
         $this->_send('AUTH PLAIN');
         $this->_expect(334);
-        $this->_send(base64_encode(chr(0) . $this->_username . chr(0) . $this->_password));
+        $this->_send(base64_encode("\0" . $this->_username . "\0" . $this->_password));
         $this->_expect(235);
         $this->_auth = true;
     }

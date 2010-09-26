@@ -25,10 +25,7 @@
  */
 namespace ZendTest\Markup;
 
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Markup_TextileAndHtmlTest::main");
-}
-
+use Zend\Markup\Markup;
 
 /**
  * Test class for Zend_Markup_Renderer_Html and Zend_Markup_Parser_Textile
@@ -50,19 +47,6 @@ class TextileAndHtmlTest extends \PHPUnit_Framework_TestCase
      */
     protected $_markup;
 
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture
      * This method is called before a test is executed.
@@ -71,7 +55,7 @@ class TextileAndHtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_markup = \Zend\Markup\Markup::factory('Textile', 'html');
+        $this->_markup = Markup::factory('Textile', 'html');
     }
 
     /**
@@ -188,9 +172,4 @@ baz
 TESTLIST;
         $this->assertEquals('<p><ul><li>foo</li><li>bar</li></ul>baz</p>', $this->_markup->render($text));
     }
-}
-
-// Call Zend_Markup_BbcodeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Markup_TextileAndHtmlTest::main") {
-    \Zend_Markup_TextileAndHtmlTest::main();
 }

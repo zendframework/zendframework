@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20818 -->
 <sect1 id="zend.reflection.introduction">
     <title>導入</title>
 
@@ -27,7 +27,7 @@
         <listitem><para>
             DocBlockはReflectionクラスでdocblock内部を参照できる利益を得ます。
             これにより、それらの値を取得するだけでなく、定義された注釈タグが何か判断でき、
-            短い説明と長い説明を取得することができます。
+            短い説明と長い説明を取得できます。
         </para></listitem>
 
         <listitem><para>

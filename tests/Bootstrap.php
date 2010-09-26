@@ -29,7 +29,7 @@ error_reporting( E_ALL | E_STRICT );
  * Determine the root, library, and tests directories of the framework
  * distribution.
  */
-$zfRoot        = realpath(dirname(dirname(__FILE__)));
+$zfRoot        = realpath(dirname(__DIR__));
 $zfCoreLibrary = "$zfRoot/library";
 $zfCoreTests   = "$zfRoot/tests";
 
@@ -49,56 +49,7 @@ set_include_path(implode(PATH_SEPARATOR, $path));
 /**
  * Setup autoloading
  */
-function ZendTest_Autoloader($class) 
-{
-    $class = ltrim($class, '\\');
-
-    if (!preg_match('#^Zend(Test)?(\\\\|_)#', $class)) {
-        return false;
-    }
-
-    $segments = explode('\\', $class);
-    $ns       = array_shift($segments);
-
-    switch ($ns) {
-        case 'Zend':
-            $file = dirname(__DIR__) . '/library/Zend/';
-            break;
-        case 'ZendTest':
-            // temporary fix for ZendTest namespace until we can migrate files 
-            // into ZendTest dir
-            $file = __DIR__ . '/Zend/';
-            break;
-        default:
-            $file = false;
-            break;;
-    }
-
-    if ($file) {
-        $file .= implode('/', $segments) . '.php';
-        if (file_exists($file)) {
-            return include_once $file;
-        }
-    }
-
-    $segments = explode('_', $class);
-    $ns       = array_shift($segments);
-
-    switch ($ns) {
-        case 'Zend':
-            $file = dirname(__DIR__) . '/library/Zend/';
-            break;
-        default:
-            return false;
-    }
-    $file .= implode('/', $segments) . '.php';
-    if (file_exists($file)) {
-        return include_once $file;
-    }
-
-    return false;
-}
-spl_autoload_register('ZendTest_Autoloader', true, true);
+include __DIR__ . '/_autoload.php';
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load

@@ -20,11 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_FormTextareaTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormTextareaTest::main");
-}
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 
 /**
@@ -42,19 +41,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase
+class FormTextareaTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormTextareaTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -64,8 +52,8 @@ class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_FormTextarea();
+        $this->view = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\FormTextarea();
         $this->helper->setView($this->view);
     }
 
@@ -74,7 +62,7 @@ class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->formTextarea(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -88,7 +76,7 @@ class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->formTextarea(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -98,7 +86,3 @@ class Zend_View_Helper_FormTextareaTest extends PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_View_Helper_FormTextareaTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormTextareaTest::main") {
-    Zend_View_Helper_FormTextareaTest::main();
-}

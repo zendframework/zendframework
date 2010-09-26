@@ -21,17 +21,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper for rendering a template fragment in its own variable scope; iterates
  * over data provided and renders for each iteration.
  *
- * @uses       Zend_View_Helper_Partial
- * @uses       Zend_View_Helper_Partial_Exception
+ * @uses       \Zend\View\Helper\Partial\Partial
+ * @uses       \Zend\View\Helper\Partial\Exception
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
+class PartialLoop extends Partial
 {
 
     /**
@@ -54,7 +59,7 @@ class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
      * @param  array $model Variables to populate in the view
      * @return string
      */
-    public function partialLoop($name = null, $module = null, $model = null)
+    public function direct($name = null, $module = null, $model = null)
     {
         if (0 == func_num_args()) {
             return $this;
@@ -66,16 +71,16 @@ class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
         }
 
         if (!is_array($model)
-            && (!$model instanceof Traversable)
+            && (!$model instanceof \Traversable)
             && (is_object($model) && !method_exists($model, 'toArray'))
         ) {
-            $e = new Zend_View_Helper_Partial_Exception('PartialLoop helper requires iterable data');
+            $e = new Partial\Exception('PartialLoop helper requires iterable data');
             $e->setView($this->view);
             throw $e;
         }
 
         if (is_object($model)
-            && (!$model instanceof Traversable)
+            && (!$model instanceof \Traversable)
             && method_exists($model, 'toArray')
         ) {
             $model = $model->toArray();
@@ -88,7 +93,7 @@ class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
             // increment the counter variable
             $this->partialCounter++;
 
-            $content .= $this->partial($name, $module, $item);
+            $content .= parent::direct($name, $module, $item);
         }
 
         return $content;

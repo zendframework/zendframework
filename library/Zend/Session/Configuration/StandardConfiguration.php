@@ -26,7 +26,7 @@ namespace Zend\Session\Configuration;
 
 use Zend\Session\Configuration as Configurable,
     Zend\Session\Exception as SessionException,
-    Zend\Validator\Hostname\Hostname as HostnameValidator,
+    Zend\Validator\Hostname as HostnameValidator,
     Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
 
 /**

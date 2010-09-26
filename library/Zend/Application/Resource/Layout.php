@@ -21,44 +21,49 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Application\Resource;
+
+/**
  * Resource for settings layout options
  *
- * @uses       Zend_Application_Resource_ResourceAbstract
- * @uses       Zend_Layout
+ * @uses       \Zend\Application\Resource\AbstractResource
+ * @uses       \Zend\Layout\Layout
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_Layout
-    extends Zend_Application_Resource_ResourceAbstract
+class Layout
+    extends AbstractResource
 {
     /**
-     * @var Zend_Layout
+     * @var \Zend\Layout\Layout
      */
     protected $_layout;
 
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return Zend_Layout
+     * @return \Zend\Layout\Layout
      */
     public function init()
     {
-        $this->getBootstrap()->bootstrap('FrontController');
+        $this->getBootstrap()->bootstrap('frontcontroller');
         return $this->getLayout();
     }
 
     /**
      * Retrieve layout object
      *
-     * @return Zend_Layout
+     * @return \Zend\Layout\Layout
      */
     public function getLayout()
     {
         if (null === $this->_layout) {
-            $this->_layout = Zend_Layout::startMvc($this->getOptions());
+            $this->_layout = \Zend\Layout\Layout::startMvc($this->getOptions());
         }
         return $this->_layout;
     }

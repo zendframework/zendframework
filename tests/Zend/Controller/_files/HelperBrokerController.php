@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 /**
  * Mock file for testbed
@@ -32,7 +30,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HelperBrokerController extends Zend_Controller_Action
+class HelperBrokerController extends \Zend\Controller\Action
 {
 
     /**
@@ -76,7 +74,7 @@ class HelperBrokerController extends Zend_Controller_Action
     {
         try {
             $this->_helper->getHelper('NonExistentHelper');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->getResponse()->appendBody($e->getMessage());
         }
     }
@@ -91,4 +89,13 @@ class HelperBrokerController extends Zend_Controller_Action
         $this->getResponse()->appendBody(get_class($this->_helper->TestHelper));
     }
 
+    /**
+     * Test function for testLoadingHelperOnlyInitializesOnce
+     * 
+     * @return void
+     */
+    public function test()
+    {
+        $this->_helper->getHelper('testHelper');
+    }
 }

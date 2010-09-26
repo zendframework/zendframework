@@ -21,21 +21,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Action\Helper;
+use Zend\Controller\Action\HelperBroker,
+    Zend\Controller\Front as FrontController,
+    Zend\Dojo\Data as DojoData,
+    Zend\Layout\Layout;
+
+/**
  * Create and send Dojo-compatible autocompletion lists
  *
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Action_Helper_AutoComplete_Abstract
- * @uses       Zend_Controller_Front
- * @uses       Zend_Dojo_Data
- * @uses       Zend_Layout
+ * @uses       \Zend\Controller\Action\HelperBroker
+ * @uses       \Zend\Controller\Action\Helper\AbstractAutoComplete
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\Dojo\Data
+ * @uses       \Zend\Layout\Layout
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Action_Helper_AutoCompleteDojo 
-    extends Zend_Controller_Action_Helper_AutoComplete_Abstract
+class AutoCompleteDojo extends AbstractAutoComplete
 {
     /**
      * Validate data for autocompletion
@@ -59,23 +67,23 @@ class Zend_Controller_Action_Helper_AutoCompleteDojo
      */
     public function prepareAutoCompletion($data, $keepLayouts = false)
     {
-        if (!$data instanceof Zend_Dojo_Data) {
+        if (!$data instanceof DojoData) {
             $items = array();
             foreach ($data as $key => $value) {
                 $items[] = array('label' => $value, 'name' => $value);
             }
-            $data = new Zend_Dojo_Data('name', $items);
+            $data = new DojoData('name', $items);
         }
 
         if (!$keepLayouts) {
-            Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
-            $layout = Zend_Layout::getMvcInstance();
-            if ($layout instanceof Zend_Layout) {
+            HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+            $layout = Layout::getMvcInstance();
+            if ($layout instanceof Layout) {
                 $layout->disableLayout();
             }
         }
 
-        $response = Zend_Controller_Front::getInstance()->getResponse();
+        $response = FrontController::getInstance()->getResponse();
         $response->setHeader('Content-Type', 'application/json');
 
         return $data->toJson();

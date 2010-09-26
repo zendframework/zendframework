@@ -60,7 +60,7 @@ class DocumentListEntryTest extends \PHPUnit_Framework_TestCase
     public function testSetMediaSource()
     {
         // Service object to create the media file source.
-        $this->docsClient = new Docs\Docs(null);
+        $this->docsClient = new Docs(null);
         $mediaSource = $this->docsClient->newMediaFileSource('test_file_name');
         $mediaSource->setSlug('test slug');
         $mediaSource->setContentType('test content type');

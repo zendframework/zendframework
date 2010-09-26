@@ -20,19 +20,29 @@
  */
 
 /**
- * @uses       Zend_Controller_Action_Exception
- * @uses       Zend_Controller_Action_HelperBroker
- * @uses       Zend_Controller_Action_Interface
- * @uses       Zend_Controller_Exception
- * @uses       Zend_Controller_Front
- * @uses       Zend_View
- * @uses       Zend_View_Interface
+ * @namespace
+ */
+namespace Zend\Controller;
+
+use Zend\Controller\Request\AbstractRequest,
+    Zend\Controller\Response\AbstractResponse,
+    Zend\Controller\Action\HelperBroker,
+    Zend\View;
+
+/**
+ * @uses       \Zend\Controller\Action\Exception
+ * @uses       \Zend\Controller\Action\HelperBroker
+ * @uses       \Zend\Controller\ActionController
+ * @uses       \Zend\Controller\Exception
+ * @uses       \Zend\Controller\Front
+ * @uses       \Zend\View\View
+ * @uses       \Zend\View\ViewEngine
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Controller_Action implements Zend_Controller_Action_Interface
+abstract class Action implements ActionController
 {
     /**
      * @var array of existing class methods
@@ -54,19 +64,19 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
 
     /**
      * Front controller instance
-     * @var Zend_Controller_Front
+     * @var \Zend\Controller\Front
      */
     protected $_frontController;
 
     /**
-     * Zend_Controller_Request_Abstract object wrapping the request environment
-     * @var Zend_Controller_Request_Abstract
+     * AbstractRequest object wrapping the request environment
+     * @var \Zend\Controller\Request\AbstractRequest
      */
     protected $_request = null;
 
     /**
      * Zend_Controller_Response_Abstract object wrapping the response
-     * @var Zend_Controller_Response_Abstract
+     * @var \Zend\Controller\Response\AbstractResponse
      */
     protected $_response = null;
 
@@ -79,14 +89,14 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
 
     /**
      * View object
-     * @var Zend_View_Interface
+     * @var \Zend\View\ViewEngine
      */
     public $view;
 
     /**
      * Helper Broker to assist in routing help requests to the proper object
      *
-     * @var Zend_Controller_Action_HelperBroker
+     * @var \Zend\Controller\Action\HelperBroker
      */
     protected $_helper = null;
 
@@ -111,17 +121,17 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * tasks; as a general rule, override {@link init()} instead of the
      * constructor to customize an action controller's instantiation.
      *
-     * @param Zend_Controller_Request_Abstract $request
-     * @param Zend_Controller_Response_Abstract $response
+     * @param \Zend\Controller\Request\AbstractRequest $request
+     * @param \Zend\Controller\Response\AbstractResponse $response
      * @param array $invokeArgs Any additional invocation arguments
      * @return void
      */
-    public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
+    public function __construct(AbstractRequest $request, AbstractResponse $response, array $invokeArgs = array())
     {
         $this->setRequest($request)
              ->setResponse($response)
              ->_setInvokeArgs($invokeArgs);
-        $this->_helper = new Zend_Controller_Action_HelperBroker($this);
+        $this->_helper = new HelperBroker($this);
         $this->init();
     }
 
@@ -149,8 +159,8 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * - helper path = views/helpers/
      * - filter path = views/filters/
      *
-     * @return Zend_View_Interface
-     * @throws Zend_Controller_Exception if base view directory does not exist
+     * @return \Zend\View\ViewEngine
+     * @throws \Zend\Controller\Exception if base view directory does not exist
      */
     public function initView()
     {
@@ -158,7 +168,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
             return $this->view;
         }
 
-        if (isset($this->view) && ($this->view instanceof Zend_View_Interface)) {
+        if (isset($this->view) && ($this->view instanceof View\ViewEngine)) {
             return $this->view;
         }
 
@@ -170,10 +180,10 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
         }
         $baseDir = dirname($dirs[$module]) . DIRECTORY_SEPARATOR . 'views';
         if (!file_exists($baseDir) || !is_dir($baseDir)) {
-            throw new Zend_Controller_Exception('Missing base view directory ("' . $baseDir . '")');
+            throw new Exception('Missing base view directory ("' . $baseDir . '")');
         }
 
-        $this->view = new Zend_View(array('basePath' => $baseDir));
+        $this->view = new View\View(array('basePath' => $baseDir));
 
         return $this->view;
     }
@@ -247,7 +257,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * @param  string $action Defaults to action registered in request object
      * @param  bool $noController  Defaults to false; i.e. use controller name as subdir in which to search for view script
      * @return string
-     * @throws Zend_Controller_Exception with bad $action
+     * @throws \Zend\Controller\Exception with bad $action
      */
     public function getViewScript($action = null, $noController = null)
     {
@@ -263,13 +273,14 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
         if (null === $action) {
             $action = $request->getActionName();
         } elseif (!is_string($action)) {
-            throw new Zend_Controller_Exception('Invalid action specifier for view render');
+            throw new Exception('Invalid action specifier for view render');
         }
 
         if (null === $this->_delimiters) {
-            $dispatcher = Zend_Controller_Front::getInstance()->getDispatcher();
+            $dispatcher = Front::getInstance()->getDispatcher();
             $wordDelimiters = $dispatcher->getWordDelimiter();
             $pathDelimiters = $dispatcher->getPathDelimiter();
+			$pathDelimiters = array($pathDelimiters, '_');
             $this->_delimiters = array_unique(array_merge($wordDelimiters, (array) $pathDelimiters));
         }
 
@@ -288,7 +299,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     /**
      * Return the Request object
      *
-     * @return Zend_Controller_Request_Abstract
+     * @return \Zend\Controller\Request\AbstractRequest
      */
     public function getRequest()
     {
@@ -298,10 +309,10 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     /**
      * Set the Request object
      *
-     * @param Zend_Controller_Request_Abstract $request
-     * @return Zend_Controller_Action
+     * @param \Zend\Controller\Request\AbstractRequest $request
+     * @return \Zend\Controller\Action
      */
-    public function setRequest(Zend_Controller_Request_Abstract $request)
+    public function setRequest(AbstractRequest $request)
     {
         $this->_request = $request;
         return $this;
@@ -310,7 +321,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     /**
      * Return the Response object
      *
-     * @return Zend_Controller_Response_Abstract
+     * @return \Zend\Controller\Response\AbstractResponse
      */
     public function getResponse()
     {
@@ -320,10 +331,10 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     /**
      * Set the Response object
      *
-     * @param Zend_Controller_Response_Abstract $response
-     * @return Zend_Controller_Action
+     * @param \Zend\Controller\Response\AbstractResponse $response
+     * @return \Zend\Controller\Action
      */
-    public function setResponse(Zend_Controller_Response_Abstract $response)
+    public function setResponse(AbstractResponse $response)
     {
         $this->_response = $response;
         return $this;
@@ -333,7 +344,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * Set invocation arguments
      *
      * @param array $args
-     * @return Zend_Controller_Action
+     * @return \Zend\Controller\Action
      */
     protected function _setInvokeArgs(array $args = array())
     {
@@ -370,7 +381,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * Get a helper by name
      *
      * @param  string $helperName
-     * @return Zend_Controller_Action_Helper_Abstract
+     * @return \Zend\Controller\Action\Helper\AbstractHelper
      */
     public function getHelper($helperName)
     {
@@ -381,7 +392,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * Get a clone of a helper by name
      *
      * @param  string $helperName
-     * @return Zend_Controller_Action_Helper_Abstract
+     * @return \Zend\Controller\Action\Helper\AbstractHelper
      */
     public function getHelperCopy($helperName)
     {
@@ -391,10 +402,10 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     /**
      * Set the front controller instance
      *
-     * @param Zend_Controller_Front $front
-     * @return Zend_Controller_Action
+     * @param \Zend\Controller\Front $front
+     * @return \Zend\Controller\Action
      */
-    public function setFrontController(Zend_Controller_Front $front)
+    public function setFrontController(Front $front)
     {
         $this->_frontController = $front;
         return $this;
@@ -403,7 +414,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     /**
      * Retrieve Front Controller
      *
-     * @return Zend_Controller_Front
+     * @return \Zend\Controller\Front
      */
     public function getFrontController()
     {
@@ -413,13 +424,13 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
         }
 
         // Grab singleton instance, if class has been loaded
-        if (class_exists('Zend_Controller_Front')) {
-            $this->_frontController = Zend_Controller_Front::getInstance();
+        if (class_exists('Zend\Controller\Front')) {
+            $this->_frontController = Front::getInstance();
             return $this->_frontController;
         }
 
         // Throw exception in all other cases
-        throw new Zend_Controller_Exception('Front controller class has not been loaded');
+        throw new Exception('Front controller class has not been loaded');
     }
 
     /**
@@ -462,16 +473,16 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * @param  string $methodName
      * @param  array $args
      * @return void
-     * @throws Zend_Controller_Action_Exception
+     * @throws \Zend\Controller\Action\Exception
      */
     public function __call($methodName, $args)
     {
         if ('Action' == substr($methodName, -6)) {
             $action = substr($methodName, 0, strlen($methodName) - 6);
-            throw new Zend_Controller_Action_Exception(sprintf('Action "%s" does not exist and was not trapped in __call()', $action), 404);
+            throw new Action\Exception(sprintf('Action "%s" does not exist and was not trapped in __call()', $action), 404);
         }
 
-        throw new Zend_Controller_Action_Exception(sprintf('Method "%s" does not exist and was not trapped in __call()', $methodName), 500);
+        throw new Action\Exception(sprintf('Method "%s" does not exist and was not trapped in __call()', $methodName), 500);
     }
 
     /**
@@ -522,13 +533,13 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * {@link preDispatch()} is called prior to the action,
      * {@link postDispatch()} is called following it.
      *
-     * @param null|Zend_Controller_Request_Abstract $request Optional request
+     * @param null|\Zend\Controller\Request\AbstractRequest $request Optional request
      * object to use
-     * @param null|Zend_Controller_Response_Abstract $response Optional response
+     * @param null|\Zend\Controller\Response\AbstractResponse $response Optional response
      * object to use
-     * @return Zend_Controller_Response_Abstract
+     * @return \Zend\Controller\Response\AbstractResponse
      */
-    public function run(Zend_Controller_Request_Abstract $request = null, Zend_Controller_Response_Abstract $response = null)
+    public function run(AbstractRequest $request = null, \AbstractResponse $response = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
@@ -578,7 +589,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      *
      * @param string $paramName
      * @param mixed $value
-     * @return Zend_Controller_Action
+     * @return \Zend\Controller\Action
      */
     protected function _setParam($paramName, $value)
     {

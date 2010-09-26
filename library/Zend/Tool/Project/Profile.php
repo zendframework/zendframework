@@ -21,22 +21,27 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Tool\Project;
+
+/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
  * @uses       RecursiveIteratorIterator
- * @uses       Zend_Tool_Project_Exception
- * @uses       Zend_Tool_Project_Profile_FileParser_Xml
- * @uses       Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter
- * @uses       Zend_Tool_Project_Profile_Resource_Container
+ * @uses       \Zend\Tool\Project\Exception
+ * @uses       \Zend\Tool\Project\Profile\FileParser\Xml
+ * @uses       \Zend\Tool\Project\Profile\Iterator\EnabledResourceFilter
+ * @uses       \Zend\Tool\Project\Profile\Resource\Container
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Container
+class Profile extends Profile\Resource\Container
 {
 
     /**
@@ -56,7 +61,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
             $this->setOptions($options);
         }
 
-        $this->_topResources = new Zend_Tool_Project_Profile_Resource_Container();
+        $this->_topResources = new Profile\Resource\Container();
     }
 
     /**
@@ -77,10 +82,10 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      */
     public function getIterator()
     {
-        return new RecursiveIteratorIterator(
-            new Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter($this),
-            RecursiveIteratorIterator::SELF_FIRST
-            );
+        return new \RecursiveIteratorIterator(
+            new Profile\Iterator\EnabledResourceFilter($this),
+            \RecursiveIteratorIterator::SELF_FIRST
+        );
     }
 
     /**
@@ -91,10 +96,10 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
     public function loadFromData()
     {
         if (!isset($this->_attributes['profileData'])) {
-            throw new Zend_Tool_Project_Exception('loadFromData() must have "profileData" set.');
+            throw new Exception('loadFromData() must have "profileData" set.');
         }
 
-        $profileFileParser = new Zend_Tool_Project_Profile_FileParser_Xml();
+        $profileFileParser = new Profile\FileParser\Xml();
         $profileFileParser->unserialize($this->_attributes['profileData'], $this);
 
         $this->rewind();
@@ -142,26 +147,26 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
     {
         // if no data is supplied, need either a projectProfileFile or a projectDirectory
         if (!isset($this->_attributes['projectProfileFile']) && !isset($this->_attributes['projectDirectory'])) {
-            throw new Zend_Tool_Project_Exception('loadFromFile() must have at least "projectProfileFile" or "projectDirectory" set.');
+            throw new Exception('loadFromFile() must have at least "projectProfileFile" or "projectDirectory" set.');
         }
 
         if (isset($this->_attributes['projectProfileFile'])) {
             $projectProfileFilePath = $this->_attributes['projectProfileFile'];
             if (!file_exists($projectProfileFilePath)) {
-                throw new Zend_Tool_Project_Exception('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
+                throw new Exception('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectDirectory'] = dirname($projectProfileFilePath);
         } else {
             $projectProfileFilePath = rtrim($this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
             if (!file_exists($projectProfileFilePath)) {
-                throw new Zend_Tool_Project_Exception('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
+                throw new Exception('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectProfileFile'] = $projectProfileFilePath;
         }
 
         $profileData = file_get_contents($projectProfileFilePath);
 
-        $profileFileParser = new Zend_Tool_Project_Profile_FileParser_Xml();
+        $profileFileParser = new Profile\FileParser\Xml();
         $profileFileParser->unserialize($profileData, $this);
 
         $this->rewind();
@@ -183,10 +188,10 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
         }
 
         if ($file == null) {
-            throw new Zend_Tool_Project_Exception('storeToFile() must have a "projectProfileFile" attribute set.');
+            throw new Exception('storeToFile() must have a "projectProfileFile" attribute set.');
         }
 
-        $parser = new Zend_Tool_Project_Profile_FileParser_Xml();
+        $parser = new Profile\FileParser\Xml();
         $xml = $parser->serialize($this);
         file_put_contents($file, $xml);
     }
@@ -198,7 +203,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      */
     public function storeToData()
     {
-        $parser = new Zend_Tool_Project_Profile_FileParser_Xml();
+        $parser = new Profile\FileParser\Xml();
         $xml = $parser->serialize($this);
         return $xml;
     }
@@ -213,7 +218,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
         $string = '';
         foreach ($this as $resource) {
             $string .= $resource->getName() . PHP_EOL;
-            $rii = new RecursiveIteratorIterator($resource, RecursiveIteratorIterator::SELF_FIRST);
+            $rii = new \RecursiveIteratorIterator($resource, \RecursiveIteratorIterator::SELF_FIRST);
             foreach ($rii as $item) {
                 $string .= str_repeat('  ', $rii->getDepth()+1) . $item->getName()
                         . ((count($attributes = $item->getAttributes()) > 0) ? ' [' . http_build_query($attributes) . ']' : '')

@@ -20,7 +20,11 @@
  * @version    $Id$
  */
 
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Test;
+use Zend\Test;
 
 /**
  * @category   Zend
@@ -30,17 +34,17 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
+class DbStatementTest extends \PHPUnit_Framework_TestCase
 {
     public function testRowCountDefault()
     {
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $this->assertEquals(0, $stmt->rowCount());
     }
 
     public function testSetRowCount()
     {
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $stmt->setRowCount(10);
         $this->assertEquals(10, $stmt->rowCount());
     }
@@ -49,33 +53,33 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
     {
         $rows = array("foo", "bar");
 
-        $stmt = Zend_Test_DbStatement::createSelectStatement($rows);
+        $stmt = Test\DbStatement::createSelectStatement($rows);
 
-        $this->assertType('Zend_Test_DbStatement', $stmt);
+        $this->assertType('Zend\Test\DbStatement', $stmt);
         $this->assertEquals($rows, $stmt->fetchAll());
     }
 
     public function testCreateInsertStatementWithRowCount()
     {
-        $stmt = Zend_Test_DbStatement::createInsertStatement(1234);
+        $stmt = Test\DbStatement::createInsertStatement(1234);
 
-        $this->assertType('Zend_Test_DbStatement', $stmt);
+        $this->assertType('Zend\Test\DbStatement', $stmt);
         $this->assertEquals(1234, $stmt->rowCount());
     }
 
     public function testCreateUpdateStatementWithRowCount()
     {
-        $stmt = Zend_Test_DbStatement::createUpdateStatement(1234);
+        $stmt = Test\DbStatement::createUpdateStatement(1234);
 
-        $this->assertType('Zend_Test_DbStatement', $stmt);
+        $this->assertType('Zend\Test\DbStatement', $stmt);
         $this->assertEquals(1234, $stmt->rowCount());
     }
 
     public function testCreateDeleteStatementWithRowCount()
     {
-        $stmt = Zend_Test_DbStatement::createDeleteStatement(1234);
+        $stmt = Test\DbStatement::createDeleteStatement(1234);
 
-        $this->assertType('Zend_Test_DbStatement', $stmt);
+        $this->assertType('Zend\Test\DbStatement', $stmt);
         $this->assertEquals(1234, $stmt->rowCount());
     }
 
@@ -83,7 +87,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
     {
         $row = array("foo");
 
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $stmt->append($row);
 
         $this->assertEquals($row, $stmt->fetch());
@@ -91,7 +95,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testFetchDefault()
     {
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $this->assertFalse($stmt->fetch());
     }
 
@@ -99,7 +103,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
     {
         $row = array("foo");
 
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $stmt->append($row);
         $stmt->append($row);
 
@@ -110,7 +114,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testFetchColumnDefault()
     {
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $this->assertFalse($stmt->fetchColumn());
     }
 
@@ -118,7 +122,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
     {
         $row = array("foo" => "bar", "bar" => "baz");
 
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $stmt->append($row);
 
         $this->assertEquals("baz", $stmt->fetchColumn(1));
@@ -126,11 +130,11 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testFetchColumn_OutOfBounds()
     {
-        $this->setExpectedException("Zend_Db_Statement_Exception");
+        $this->setExpectedException("Zend\Db\Statement\Exception");
 
         $row = array("foo" => "bar", "bar" => "baz");
 
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $stmt->append($row);
 
         $stmt->fetchColumn(1234);
@@ -140,7 +144,7 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
     {
         $row = array("foo" => "bar", "bar" => "baz");
 
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $stmt->append($row);
 
         $object = $stmt->fetchObject();
@@ -151,11 +155,11 @@ class Zend_Test_DbStatementTest extends PHPUnit_Framework_TestCase
 
     public function testFetchObject_ClassNotExists_ThrowsException()
     {
-        $this->setExpectedException("Zend_Db_Statement_Exception");
+        $this->setExpectedException("Zend\Db\Statement\Exception");
 
         $row = array("foo" => "bar", "bar" => "baz");
 
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new Test\DbStatement();
         $stmt->append($row);
 
         $object = $stmt->fetchObject("anInvalidClassName");

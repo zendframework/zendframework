@@ -60,8 +60,8 @@
             <classname>Zend_View</classname> comes with an initial set of helper classes,
             most of which relate to form element generation and perform
             the appropriate output escaping automatically. In addition, there
-            are helpers for creating route-based <acronym>URL</acronym>s and HTML lists, as well as
-            declaring variables. The currently shipped helpers include:
+            are helpers for creating route-based <acronym>URL</acronym>s and <acronym>HTML</acronym>
+            lists, as well as declaring variables. The currently shipped helpers include:
         </para>
 
         <itemizedlist>
@@ -255,9 +255,9 @@ echo $this->formCheckbox('foo',
                     <varname>$options</varname> should be an associative array, and may be
                     arbitrarily deep. <varname>$value</varname> may be a single value or
                     an array of selected values that match the keys in the
-                    <varname>$options</varname> array. <varname>$listsep</varname> is an HTML
-                    break ("&lt;br /&gt;") by default. By default, this element is
-                    treated as an array; all checkboxes share the same name, and are
+                    <varname>$options</varname> array. <varname>$listsep</varname> is an
+                    <acronym>HTML</acronym> break ("&lt;br /&gt;") by default. By default, this
+                    element is treated as an array; all checkboxes share the same name, and are
                     submitted as an array.
                 </para>
             </listitem>
@@ -633,7 +633,7 @@ $view->registerHelper($helper, 'foo');
                 The second argument to <methodname>registerHelper()</methodname> is the name of the
                 helper. A corresponding method name should exist in the helper; otherwise,
                 <classname>Zend_View</classname> will call a non-existent method when invoking the
-                helper, raising a fatal PHP error.
+                helper, raising a fatal <acronym>PHP</acronym> error.
             </para>
         </note>
     </sect2>

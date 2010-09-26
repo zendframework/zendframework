@@ -21,7 +21,7 @@
  */
 
 /**
- * @uses       Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
  * @uses       Zend_Service_WindowsAzure_RetryPolicy_Exception
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -29,7 +29,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_RetryPolicy_RetryN extends Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+class Zend_Service_WindowsAzure_RetryPolicy_RetryN extends Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
 {
     /**
      * Number of retries

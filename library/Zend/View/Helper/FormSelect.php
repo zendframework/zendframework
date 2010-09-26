@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate "select" list of options
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormSelect extends Zend_View_Helper_FormElement
+class FormSelect extends FormElement
 {
     /**
      * Generates 'select' list of options.
@@ -55,9 +60,12 @@ class Zend_View_Helper_FormSelect extends Zend_View_Helper_FormElement
      *
      * @return string The select tag and options XHTML.
      */
-    public function formSelect($name, $value = null, $attribs = null,
-        $options = null, $listsep = "<br />\n")
+    public function direct($name = null, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormSelect: missing argument. $name is required in formSelect($name, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")');
+        }
+        
         $info = $this->_getInfo($name, $value, $attribs, $options, $listsep);
         extract($info); // name, id, value, attribs, options, listsep, disable
 

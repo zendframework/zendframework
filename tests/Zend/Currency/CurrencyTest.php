@@ -38,29 +38,18 @@ use Zend\Cache;
  */
 class CurrencyTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_CurrencyTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-
     public function setUp()
     {
-        $cache = Cache\Cache::factory('Core', 'File',
+        $this->_cache = Cache\Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => dirname(__FILE__) . '/_files/'));
-        Currency\Currency::setCache($cache);
+            array('cache_dir' => __DIR__ . '/../_files/'));
+        Currency\Currency::setCache($this->_cache);
     }
 
     public function tearDown()
     {
         Currency\Currency::clearCache();
+        $this->_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
     }
 
     /**
@@ -777,10 +766,10 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(null, $currency->getService());
         $currency->setService(new ExchangeTest());
-        $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
+        $this->assertTrue($currency->getService() instanceof Currency\CurrencyService);
 
         $currency->setService('ZendTest\Currency\ExchangeTest');
-        $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
+        $this->assertTrue($currency->getService() instanceof Currency\CurrencyService);
     }
 
     /**
@@ -811,10 +800,19 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(null, $currency->getService());
         $currency->setService(new ExchangeTest());
-        $this->assertTrue($currency->getService() instanceof Currency\CurrencyServiceInterface);
+        $this->assertTrue($currency->getService() instanceof Currency\CurrencyService);
 
         $currency->setValue(100, 'USD');
         $this->assertEquals(50, $currency->getValue());
         $this->assertEquals('RUB', $currency->getShortName());
+    }
+
+    /**
+     * @ZF-9941
+     */
+    public function testSetValueByOutput()
+    {
+        $currency = new Currency\Currency(array('value' => 1000, 'locale' => 'de_AT'));
+        $this->assertEquals('€ 2.000,00', $currency->toCurrency(null, array('value' => 2000)));
     }
 }

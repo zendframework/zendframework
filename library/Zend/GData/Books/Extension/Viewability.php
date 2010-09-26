@@ -28,15 +28,15 @@ namespace Zend\GData\Books\Extension;
 /**
  * Describes a viewability
  *
- * @uses       \Zend\GData\Books\Books
- * @uses       \Zend\GData\Extension\Extension
+ * @uses       \Zend\GData\Books
+ * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Viewability extends \Zend\GData\Extension\Extension
+class Viewability extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gbs';
@@ -52,7 +52,7 @@ class Viewability extends \Zend\GData\Extension\Extension
      */
     public function __construct($value = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\Books\Books::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\Books::$namespaces);
         parent::__construct();
         $this->_value = $value;
     }

@@ -21,14 +21,19 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper\Placeholder;
+
+/**
  * Container for placeholder values
  *
- * @uses       Zend_View_Helper_Placeholder_Container_Abstract
+ * @uses       \Zend\View\Helper\Placeholder\Container\AbstractContainer
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Placeholder_Container extends Zend_View_Helper_Placeholder_Container_Abstract
+class Container extends Container\AbstractContainer
 {
 }

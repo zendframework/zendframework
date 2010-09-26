@@ -25,7 +25,12 @@
  */
 namespace Zend\Authentication\Adapter;
 use Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+    Zend\Authentication\Result as AuthenticationResult,
+    Zend\Db\Db,
+    Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
+    Zend\Db\Expr as DBExpr,
+    Zend\Db\Select as DBSelect,
+    Zend\Db\Table\AbstractTable;
 
 /**
  * @uses       Zend\Authentication\Adapter\Exception
@@ -44,12 +49,12 @@ class DbTable implements AuthenticationAdapter
     /**
      * Database Connection
      *
-     * @var Zend_Db_Adapter_Abstract
+     * @var Zend\Db\Adapter\AbstractAdapter
      */
     protected $_zendDb = null;
 
     /**
-     * @var Zend_Db_Select
+     * @var Zend\Db\Select
      */
     protected $_dbSelect = null;
 
@@ -108,21 +113,30 @@ class DbTable implements AuthenticationAdapter
      * @var array
      */
     protected $_resultRow = null;
+    
+    /**
+     * $_ambiguityIdentity - Flag to indicate same Identity can be used with 
+     * different credentials. Default is FALSE and need to be set to true to
+     * allow ambiguity usage.
+     * 
+     * @var boolean
+     */
+    protected $_ambiguityIdentity = false;
 
     /**
      * __construct() - Sets configuration options
      *
-     * @param  Zend_Db_Adapter_Abstract $zendDb
+     * @param  Zend\Db\Adapter\AbstractAdapter $zendDb
      * @param  string                   $tableName
      * @param  string                   $identityColumn
      * @param  string                   $credentialColumn
      * @param  string                   $credentialTreatment
      * @return void
      */
-    public function __construct(\Zend_Db_Adapter_Abstract $zendDb, $tableName = null, $identityColumn = null,
+    public function __construct(AbstractDBAdapter $zendDb = null, $tableName = null, $identityColumn = null,
                                 $credentialColumn = null, $credentialTreatment = null)
     {
-        $this->_zendDb = $zendDb;
+        $this->_setDbAdapter($zendDb);
 
         if (null !== $tableName) {
             $this->setTableName($tableName);
@@ -139,6 +153,30 @@ class DbTable implements AuthenticationAdapter
         if (null !== $credentialTreatment) {
             $this->setCredentialTreatment($credentialTreatment);
         }
+    }
+
+    /**
+     * _setDbAdapter() - set the database adapter to be used for quering
+     *
+     * @param Zend_Db_Adapter_Abstract 
+     * @throws Zend_Auth_Adapter_Exception
+     * @return Zend_Auth_Adapter_DbTable
+     */
+    protected function _setDbAdapter(AbstractDBAdapter $zendDb = null)
+    {
+        $this->_zendDb = $zendDb;
+
+        /**
+         * If no adapter is specified, fetch default database adapter.
+         */
+        if(null === $this->_zendDb) {
+            $this->_zendDb = AbstractTable::getDefaultAdapter();
+            if (null === $this->_zendDb) {
+                throw new Exception('No database adapter present');
+            }
+        }
+        
+        return $this;
     }
 
     /**
@@ -224,11 +262,39 @@ class DbTable implements AuthenticationAdapter
         $this->_credential = $credential;
         return $this;
     }
+    
+    /**
+     * setAmbiguityIdentity() - sets a flag for usage of identical identities
+     * with unique credentials. It accepts integers (0, 1) or boolean (true,
+     * false) parameters. Default is false.
+     * 
+     * @param  int|bool $flag
+     * @return Zend_Auth_Adapter_DbTable
+     */
+    public function setAmbiguityIdentity($flag)
+    {
+        if (is_integer($flag)) {
+            $this->_ambiguityIdentity = (1 === $flag ? true : false);
+        } elseif (is_bool($flag)) {
+            $this->_ambiguityIdentity = $flag;
+        }
+        return $this;
+    }
+    /**
+     * getAmbiguityIdentity() - returns TRUE for usage of multiple identical 
+     * identies with different credentials, FALSE if not used.
+     * 
+     * @return bool
+     */
+    public function getAmbiguityIdentity()
+    {
+        return $this->_ambiguityIdentity;
+    }
 
     /**
      * getDbSelect() - Return the preauthentication Db Select object for userland select query modification
      *
-     * @return Zend_Db_Select
+     * @return Zend\Db\Select
      */
     public function getDbSelect()
     {
@@ -299,10 +365,21 @@ class DbTable implements AuthenticationAdapter
         $dbSelect = $this->_authenticateCreateSelect();
         $resultIdentities = $this->_authenticateQuerySelect($dbSelect);
 
-        if ( ($authResult = $this->_authenticateValidateResultset($resultIdentities)) instanceof AuthenticationResult) {
+        if ( ($authResult = $this->_authenticateValidateResultSet($resultIdentities)) instanceof AuthenticationResult) {
             return $authResult;
         }
 
+        if (true === $this->getAmbiguityIdentity()) {
+            $validIdentities = array ();
+            $zendAuthCredentialMatchColumn = $this->_zendDb->foldCase('zend_auth_credential_match');
+            foreach ($resultIdentities as $identity) {
+                if (1 === (int) $identity[$zendAuthCredentialMatchColumn]) {
+                    $validIdentities[] = $identity;
+                }
+            }
+            $resultIdentities = $validIdentities;
+        }
+        
         $authResult = $this->_authenticateValidateResult(array_shift($resultIdentities));
         return $authResult;
     }
@@ -357,7 +434,7 @@ class DbTable implements AuthenticationAdapter
             $this->_credentialTreatment = '?';
         }
 
-        $credentialExpression = new \Zend_Db_Expr(
+        $credentialExpression = new DBExpr(
             '(CASE WHEN ' .
             $this->_zendDb->quoteInto(
                 $this->_zendDb->quoteIdentifier($this->_credentialColumn, true)
@@ -386,12 +463,12 @@ class DbTable implements AuthenticationAdapter
      *                                       object is encountered
      * @return array
      */
-    protected function _authenticateQuerySelect(\Zend_Db_Select $dbSelect)
+    protected function _authenticateQuerySelect(DBSelect $dbSelect)
     {
         try {
-            if ($this->_zendDb->getFetchMode() != \Zend_DB::FETCH_ASSOC) {
+            if ($this->_zendDb->getFetchMode() != Db::FETCH_ASSOC) {
                 $origDbFetchMode = $this->_zendDb->getFetchMode();
-                $this->_zendDb->setFetchMode(\Zend_DB::FETCH_ASSOC);
+                $this->_zendDb->setFetchMode(Db::FETCH_ASSOC);
             }
             $resultIdentities = $this->_zendDb->fetchAll($dbSelect->__toString());
             if (isset($origDbFetchMode)) {
@@ -420,7 +497,7 @@ class DbTable implements AuthenticationAdapter
             $this->_authenticateResultInfo['code'] = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
             $this->_authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
             return $this->_authenticateCreateAuthResult();
-        } elseif (count($resultIdentities) > 1) {
+        } elseif (count($resultIdentities) > 1 && false === $this->getAmbiguityIdentity()) {
             $this->_authenticateResultInfo['code'] = AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS;
             $this->_authenticateResultInfo['messages'][] = 'More than one record matches the supplied identity.';
             return $this->_authenticateCreateAuthResult();

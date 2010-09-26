@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20043 -->
+<!-- EN-Revision: 21245 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.notempty">
     <title>NotEmpty</title>
@@ -9,6 +9,25 @@
         avec des formulaires ou des entrées utilisateur, là où vous pouvez l'utiliser pour savoir si des
         éléments requis ont été saisis.
     </para>
+
+    <sect3 id="zend.validate.set.notempty.options">
+        <title>Options supportées par Zend_Validate_NotEmpty</title>
+
+        <para>
+            Les options suivantes sont supportées par
+            <classname>Zend_Validate_NotEmpty</classname>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>type</property></emphasis>&#160;: paramètre le type de
+                    validation qui sera réalisée. Pour plus de détails, reportez vous à
+                    <link linkend="zend.validate.set.notempty.types">cette section</link>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.set.notempty.default">
         <title>Comportement par défaut de Zend_Validate_NotEmpty</title>
@@ -49,20 +68,20 @@ $result = $valid->isValid($value);
         </para>
 
         <para>
-            Les types suivants sont gérés:
+            Les types suivants sont gérés&#160;:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>booléen</emphasis>: Retourne <constant>FALSE</constant> lorsque
+                    <emphasis>booléen</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsque
                     la valeur booléenne est <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>entier</emphasis>: Retourne <constant>FALSE</constant> lorsque l'entier
+                    <emphasis>entier</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsque l'entier
                     <emphasis>0</emphasis> est passé. Par défaut cette validation n'est pas activée et
                     retourne <constant>TRUE</constant> pour toute valeur d'entier.
                 </para>
@@ -70,7 +89,7 @@ $result = $valid->isValid($value);
 
             <listitem>
                 <para>
-                    <emphasis>flottant</emphasis>: Retourne <constant>FALSE</constant> lorsque le flottant
+                    <emphasis>flottant</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsque le flottant
                     <emphasis>0.0</emphasis> est passé. Par défaut cette validation n'est pas activée et
                     retourne <constant>TRUE</constant> pour toute valeur de flottant.
                 </para>
@@ -78,35 +97,35 @@ $result = $valid->isValid($value);
 
             <listitem>
                 <para>
-                    <emphasis>chaine</emphasis>: Retourne <constant>FALSE</constant> lorsque la chaine vide
+                    <emphasis>chaine</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsque la chaine vide
                     <emphasis>''</emphasis> est passée.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>zero</emphasis>: Retourne <constant>FALSE</constant> lorsque le seul caractère
+                    <emphasis>zero</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsque le seul caractère
                     zéro (<emphasis>'0'</emphasis>) est passé.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>tableau_vide</emphasis>: Retourne <constant>FALSE</constant> lorsqu'un tableau vide
+                    <emphasis>tableau_vide</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsqu'un tableau vide
                     <emphasis>array()</emphasis> est passé.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>null</emphasis>: Retourne <constant>FALSE</constant> lorsqu'une valeur
+                    <emphasis>null</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsqu'une valeur
                     <constant>NULL</constant> est passée.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>php</emphasis>: Retourne <constant>FALSE</constant> lorsque la fonction
+                    <emphasis>php</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsque la fonction
                     <acronym>PHP</acronym> <methodname>empty()</methodname> retournerait
                     <constant>TRUE</constant>.
                 </para>
@@ -114,14 +133,14 @@ $result = $valid->isValid($value);
 
             <listitem>
                 <para>
-                    <emphasis>espace</emphasis>: Retourne <constant>FALSE</constant> lorsqu'une chaine
+                    <emphasis>espace</emphasis>&#160;: Retourne <constant>FALSE</constant> lorsqu'une chaine
                     ne contenant que des caractères espace est passée.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>tout</emphasis>: Retourne <constant>FALSE</constant> pour tous les
+                    <emphasis>tout</emphasis>&#160;: Retourne <constant>FALSE</constant> pour tous les
                     types gérés cités ci-dessus.
                 </para>
             </listitem>
@@ -134,7 +153,7 @@ $result = $valid->isValid($value);
         <para>
             Il existe différentes manières de selectionner les types ci-dessus. Vous pouvez en spécifier
             un ou plusieurs, sous forme de tableau ou de constantes ou encore de chaines.
-            Voyez les exemples ci-après:
+            Voyez les exemples ci-après&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -166,6 +185,3 @@ $validator = new Zend_Validate_NotEmpty(array(
         </para>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

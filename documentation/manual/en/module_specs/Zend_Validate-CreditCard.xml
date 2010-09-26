@@ -197,7 +197,7 @@ $valid = new Zend_Validate_CreditCard(array(
         <table id="zend.validate.set.creditcard.institute.table">
             <title>Constants for credit card institutes</title>
 
-            <tgroup cols="5">
+            <tgroup cols="2">
                 <thead>
                     <row>
                         <entry>Institute</entry>

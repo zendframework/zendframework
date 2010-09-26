@@ -1,0 +1,1914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21864 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.locale.functions">
+    <title>Użycie Zend_Locale</title>
+
+    <para>
+        <classname>Zend_Locale</classname> udostępnia zlokalizowane informacje o innych locale.
+        Włączając w to nazwy innych locale, dni tygodnia, miesięcy itp.
+    </para>
+
+    <sect2 id="zend.locale.copying">
+        <title>Kopiowanie, klonowanie oraz serializowanie obiektów locale</title>
+
+        <para>
+            Aby pomyślnie zduplikować obiekt locale należy użyć
+            <ulink url="http://php.net/language.oop5.cloning">klonowania obiektów</ulink>.
+            Większość metod świadomych locale przyjmują w argumencie nazwę locale, taką jaka
+            jest zwracana przez <code>$locale->toString()</code>.
+        </para>
+
+        <example id="zend.locale.copying.example-1">
+            <title>Klonowanie</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale('ar');
+
+// Serializacja oraz zapisanie obiektu $locale
+$serializedLocale = $locale->serialize();
+// odtworzenie oryginalnego obiektu
+$localeObject = unserialize($serializedLocale);
+
+// Uzyskanie identyfikatora locale
+$stringLocale = $locale->toString();
+
+// Utworzenie kopii obiektu $locale
+$copiedLocale = clone $locale;
+
+print "copied: ", $copiedLocale->toString();
+
+// PHP automatycznie wywołuje toString() poprzez __toString()
+print "copied: ", $copiedLocale;
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.equals">
+        <title>Równość</title>
+
+        <para>
+            <classname>Zend_Locale</classname> udostępnia wygodną funkcję służącą do porównania
+            dwóch locale. Wszystkie klasy świadome locale powinny umożliwiać podobną funkcjonalność.
+        </para>
+
+        <example id="zend.locale.equals.example-1">
+            <title>Sprawdzenie równoważnych locale</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale();
+$mylocale = new Zend_Locale('en_US');
+
+// Sprawdzenie równoważności
+if ($locale->equals($mylocale)) {
+    print "Locales are equal";
+}
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.getdefault">
+        <title>Domyślne locale</title>
+
+        <para>
+            Metoda <methodname>getDefault()</methodname> zwraca tablicę identyfikatorów locale
+            na podstawie informacji udostępnianych przez przeglądarkę użytkownika (jeśli
+            jest dostępna), informacji pochodzących ze środowiska serwera hostingowego lub z
+            ustawień Zend Framework. Pierwszy parametr określa preferencję źródła
+            (<link linkend="zend.locale.selection">(<constant>BROWSER</constant>,
+            <constant>ENVIRONMENT</constant>, or <code>FRAMEWORK</code></link>).
+            Drugi parametr określa czy mają być zwrócone wszystkie locale wyszczególnione w
+            źródle czy tylko pierwsze z nich. Komponenty świadome locale używają przeważnie
+            jedynie pierwszego locale, w zależności od oceny ich preferencji (jeśli jest dostępna).
+        </para>
+
+        <example id="zend.locale.getdefault.example-1">
+            <title>Zwrócenie domyślnego locale</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale();
+
+// Zwrócenie wszystkich domyślnych locale
+$found = $locale->getDefault();
+print_r($found);
+
+// Zwrócenie jedynie locale domyślnego dla przeglądarki
+$found2 = $locale->getDefault(Zend_Locale::BROWSER,TRUE);
+print_r($found2);
+]]></programlisting>
+        </example>
+
+        <para>
+            Aby uzyskać locale domyślne dla określonego źródła:
+            <link linkend="zend.locale.selection"><constant>BROWSER</constant>,
+            <constant>ENVIRONMENT</constant> lub <constant>FRAMEWORK</constant></link>, należy
+            skorzystać z odpowiedniej metody:
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>getEnvironment()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getBrowser()</methodname>
+                    </para>
+                </listitem>
+
+            </itemizedlist>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.locale.setlocale">
+        <title>Ustawienie nowego locale</title>
+
+        <para>
+            Nowe locale może zostać ustawione za pomocą metody <methodname>setLocale()</methodname>.
+            Przyjmuje ona łańcuch znaków identyfikatora locale jako parametr. Jeśli argument
+            nie zostanie podany to nastąpi próba
+            <link linkend="zend.locale.selection">automatycznego wyboru</link>.
+            Ponieważ obiekty <classname>Zend_Locale</classname> są "lekkie" metoda ta istnieje
+            głównie po to aby wykluczyć efekty uboczne w kodzie, który odnosi się do
+            już istniejącej instancji.
+        </para>
+
+        <example id="zend.locale.setlocale.example-1">
+            <title>Metoda setLocale()</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale();
+
+// Obecne locale
+print $locale->toString();
+
+// Nowe locale
+$locale->setLocale('aa_DJ');
+print $locale->toString();
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.getlocale">
+        <title>Zwrócenie języka i regionu</title>
+
+        <para>
+            Aby uzyskać skrót języka z identyfikatora locale należy skorzystać z metody
+            <methodname>getLanguage()</methodname>. Do uzyskania skrótu regionu służy
+            metoda <methodname>getRegion()</methodname>.
+        </para>
+
+        <example id="zend.locale.getlocale.example-1">
+            <title>getLanguage oraz getRegion</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale();
+
+// jeśli locale to 'de_AT' wtedy 'de' zostanie zwrócone jako język
+print $locale->getLanguage();
+
+// jeśli locale to 'de_AT' wtedy 'AT' zostanie zwrócone region
+print $locale->getRegion();
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.getdata">
+        <title>Uzyskanie zlokalizowanych łańcuchów znaków</title>
+
+        <para>
+            Metoda <methodname>getTranslationList()</methodname> umożliwia dostęp do zlokalizowanych
+            danych różnego rodzaju. Te informacje są przydatne jeśli zajdzie potrzeba
+            zaprezentowania użytkownikowi zlokalizowanych danych. W takiej sytuacji nie ma
+            potrzeby własnoręcznego tłumaczenia - odpowiednie dane są dostępne do użytku.
+        </para>
+
+        <para>
+            Lista żądanych danych jest zawsze zwracana w postaci tablic asocjacyjnych.
+            Jeśli istnieje potrzeba przekazania więcej niż jednego parametru do określonego
+            typu, z którego chce się pobrać wartości to należy przekazać te parametry w
+            postaci tablicy.
+        </para>
+
+        <example id="zend.locale.getdata.example-1">
+            <title>getTranslationList</title>
+
+            <programlisting language="php"><![CDATA[
+$list = Zend_Locale::getTranslationList('language', 'de_AT');
+
+print_r ($list);
+// przykładowe pary klucz -> wartość
+// [de] -> Deutsch
+// [en] -> Englisch
+
+// użycie jednego ze zwróconych kluczy jako parametru metody getTranslation()
+// dla innego języka
+print Zend_Locale::getTranslation('de', 'language', 'zh');
+// zwraca tłumaczenie nazwy języka określonego jako 'de' w języku chińskim
+]]></programlisting>
+        </example>
+
+        <para>
+            Podobne informacje można uzyskać dla wszystkich języków ale w niektórych przypadkach
+            nie wszystkie dane są dostępne. Aby ułatwić dostęp do nich, pewne typy
+            informacji są również dostępne poprzez dedykowane metody. Niżej znajduje
+            się obszerniejszy opis.
+        </para>
+
+        <table id="zend.locale.getdata.table-1">
+            <title>
+            Szczegóły użycia metody getTranslationList($type = null, $locale = null, $value = null)
+            </title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Typ</entry>
+                        <entry>Opis</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry><emphasis>Language</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną listę wszystkich języków. Część identyfikatora
+                            locale wskazująca na język jest zwracana w kluczu a pełna nazwa w
+                            wartości
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Script</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną listę systemów pisma. Identyfikator systemu
+                            zwracany jest w kluczu, przetłumaczona nazwa - w wartości 
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Territory</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną listę wszystkich terytoriów. Zawiera kraje,
+                            kontynenty i inne terytoria. Aby uzyskać jedynie terytoria i
+                            kontynenty należy przekazać jako wartość 1. Aby uzyskać kraje - 2.
+                            Tam gdzie jest to możliwe część locale wskazująca na kraj jest zwracana
+                            w kluczu, w pozostałych przypadkach podany jest oficjalny kod ISO
+                            danego terytorium. Przetłumaczona nazwa terytorium zwracana jest w
+                            wartości
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Variant</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną listę odmian systemów pisma. Identyfikator odmiany
+                            w kluczu a przetłumaczona nazwa w wartości
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Key</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną listę znanych kluczy. Są to generyczne wartości
+                            używane w tłumaczeniu. Są to kalendarz, sortowanie i waluta. W kluczu
+                            zwracany jest klucz a przetłumaczona nazwa w wartości
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Type</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną listę typów kluczy. Są to rodzaje kalendarzy oraz
+                            porządków sortowania. Jeśli poda się parametr 'collation' to zostanie
+                            zwrócona lista porządków sortowania. Dla parametru 'calendar' - 
+                            rodzajów kalendarzy. Jeśli parametr nie zostanie podany to lista
+                            zwrotna będzie zawierała oba rodzaje danych. Rodzaj jest podany w
+                            kluczu a przetłumaczona nazwa w wartości
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Layout</emphasis></entry>
+                        <entry>
+                            Zwraca listę zasad formatowania specjalnych znaków
+                            tekstowych
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Characters</emphasis></entry>
+                        <entry>Zwraca listę  dozwolonych znaków w ramach danego locale</entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Delimiters</emphasis></entry>
+                        <entry>Zwraca listę dozwolonych znaków służących do umieszczania
+                        w cudzysłowu dla danego locale</entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Measurement</emphasis></entry>
+                        <entry>
+                            Zwraca listę znanych jednostek miary. Lista jest nieaktualna
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Months</emphasis></entry>
+                        <entry>
+                            Zwraca listę nazw miesięcy w danym locale. Zwracanych jest kilka
+                            różnych form reprezentacji miesięcy - każda w oddzielnej tablicy
+                            zagnieżdżonej. Jeśli nie poda się parametru to zostanie zwrócona pełna
+                            lista miesięcy z kalendarza gregoriańskiego. Można podać inną, znaną
+                            nazwę kalendarza aby uzyskać jego nazwy miesięcy.
+                            Z uwagi na prostotę można zamiast tego używać
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Month</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę miesięcy. Bez podania parametru zwracana
+                            jest zwykła lista pełnych nazw miesięcy wg. kalendarza gregoriańskiego.
+                            Numer porządkowy miesiąca znajduje się w kluczu a przetłumaczona
+                            nazwa w wartości. Można uzyskać nazwy miesięcy z innego kalendarza
+                            jeśli poda się tablicę w parametrze. Pierwszą wartością tej tablicy
+                            powinna być nazwa kalendarza, drugą - kontekst, trzecią - szerokość
+                            zwracanych danych. Z uwagi na prostotę można zamiast tego używać
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Days</emphasis></entry>
+                        <entry>
+                            Zwraca listę nazw dni tygodnia  w danym locale. Zwracanych jest kilka
+                            różnych form reprezentacji dni - każda w oddzielnej tablicy
+                            zagnieżdżonej. Jeśli nie poda się parametru to zostanie zwrócona pełna
+                            lista dni tygodnia z kalendarza gregoriańskiego. Można podać inną, znaną
+                            nazwę kalendarza aby uzyskać jego nazwy dni tygodnia.
+                            Z uwagi na prostotę można zamiast tego używać
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Day</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę dni tygodnia. Bez podania parametru zwracana
+                            jest zwykła lista pełnych nazw dni tygodnia wg. kalendarza
+                            gregoriańskiego ze skrótem angielskiej nazwy dnia tygodnia w kluczu
+                            i przetłumaczoną pełną nazwą dnia w wartości. 
+                            Można uzyskać nazwy dni z innego kalendarza
+                            jeśli poda się tablicę w parametrze. Pierwszą wartością tej tablicy
+                            powinna być nazwa kalendarza, drugą - kontekst, trzecią - szerokość
+                            zwracanych danych. Z uwagi na prostotę można zamiast tego używać
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+                    
+                    <row>
+                        <entry><emphasis>Week</emphasis></entry>
+                        <entry>
+                            Zwraca listę wartości używanych przy obliczeniach dotyczących wygodni
+                            w ramach danego locale. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Quarters</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę wszystkich nazw kwartałów dla podanego
+                            locale. Istnieje szereg różnych zestawów nazw kwartałów - każdy z nich
+                            zwracany jest w osobnej tablicy zagnieżdżonej.                            
+                            Jeśli w parametrze nie zostanie podana wartość to zwrócona
+                            lista będzie dotyczyć kalandarza gregoriańskiego. Można uzyskać
+                            listę dla innego systemu kalendarza jeśli przekaże się jego nazwę w
+                            parametrze.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Quarter</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę nazw kwartałów dla danego locale.
+                            Jeśli w parametrze nie zostanie podana wartość to zwrócona lista będzie
+                            dotyczyć kalandarza gregoriańskiego, gdzie numer porządkowy kwartału
+                            jest przechowywany w kluczu tablicy a przetłumaczona
+                            nazwa - w wartości. Można uzyskać listę dla innego systemu kalendarza
+                            jeśli przekaże się w parametrze tablicę zawierającą jego nazwę
+                            oraz szerokość łańcucha z nazwą żądanego kwartału.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Eras</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę wszystkich nazw er (okresów) dla podanego
+                            locale. Jeśli w parametrze nie zostanie podana wartość to zwrócona
+                            lista będzie dotyczyć kalandarza gregoriańskiego. Można uzyskać
+                            listę dla innego systemu kalendarza jeśli przekaże się jego nazwę w
+                            parametrze.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Era</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę nazw er (okresów) dla podanego locale.
+                            Jeśli w parametrze nie zostanie podana wartość to zwrócona lista będzie
+                            dotyczyć kalandarza gregoriańskiego, gdzie numer ery jest przechowywany
+                            w kluczu tablicy a przetłumaczona nazwa - w wartości. Można uzyskać
+                            listę dla innego systemu kalendarza jeśli przekaże się w parametrze
+                            tablicę zawierającą jego nazwę oraz szerokość łańcucha z nazwą żądanej
+                            ery.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Date</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę wszystkich znanych formatów daty dla
+                            podanego locale. Nazwa formatu jest umieszczona w kluczu tablicy a
+                            sam format - w wartości. Jeśli w parametrze nie zostanie podana
+                            wartość to zwrócona lista będzie
+                            dotyczyć kalandarza gregoriańskiego. Można uzyskać listę dla innego
+                            systemu kalendarza jeśli przekaże się jego nazwę w parametrze.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Time</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę wszystkich znanych formatów czasu dla
+                            podanego locale. Nazwa formatu jest umieszczona w kluczu tablicy a
+                            sam format - w wartości. Jeśli w parametrze nie zostanie podana
+                            wartość to zwrócona lista będzie
+                            dotyczyć kalandarza gregoriańskiego. Można uzyskać listę dla innego
+                            systemu kalendarza jeśli przekaże się jego nazwę w parametrze.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateTime</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę wszystkich znanych formatów daty i czasu dla
+                            podanego locale. Nazwa formatu jest umieszczona w kluczu tablicy a
+                            sam format - w wartości. Jeśli w parametrze nie zostanie podana
+                            wartość to zwrócona lista będzie
+                            dotyczyć kalandarza gregoriańskiego. Można uzyskać listę dla innego
+                            systemu kalendarza jeśli przekaże się jego nazwę w parametrze.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>
+                            Zwraca listę domyślnych formatów dla danej części daty lub czasu
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+                        <entry>
+                            Zwraca listę formatów daty i czasu, które są używane w przypadku
+                            wyświetlania różnic dat. Zwracana lista to wielowymiarowa tablica,
+                            gdzie pierwszym wymiarem jest format, drugim - składnik formatu o
+                            największej różnicy.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Field</emphasis></entry>
+                        <entry>
+                            Zwraca listę zlokalizowanych nazw części daty, które mogą zostać użyte
+                            do wyświetlenia kalendarza lub wyrazów takich jak 'miesiąc' czy 'rok'
+                            w odpowiednim języku. Jeśli nie zostanie podana wartość to zwrócona
+                            lista będzie
+                            dotyczyć kalandarza gregoriańskiego. Można uzyskać listę dla innego
+                            systemu kalendarza jeśli przekaże się jego nazwę w parametrze
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Relative</emphasis></entry>
+                        <entry>
+                            Zwraca listę zlokalizowanych określeń relatywnych dat, których można
+                            użyć do wyświetlenia zwrotów typu 'wczoraj' czy 'jutro' w odpowiednim
+                            języku. Jeśli nie zostanie podana wartość to zwrócona lista będzie
+                            dotyczyć kalandarza gregoriańskiego. Można uzyskać listę dla innego
+                            systemu kalendarza jeśli przekaże się jego nazwę w parametrze
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Symbols</emphasis></entry>
+                        <entry>
+                            Zwraca listę zlokalizowanych znaków używanych przy formatowaniu liczb.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>NameToCurrency</emphasis></entry>
+                        <entry>
+                            Zwraca listę zlokalizowanych nazw walut. Kod waluty jest umieszczony w
+                            kluczu tablicy a przetłumaczona nazwa - w wartości. Dla uproszczenia
+                            można korzystać z
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CurrencyToName</emphasis></entry>
+                        <entry>
+                            Zwraca listę kodów walut wg. zlokalizowanych nazw walut. Przetłumaczona
+                            nazwa jest umieszczona w kluczu a kod waluty - w wartości. Dla
+                            uproszczenia można używać
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                         </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CurrencySymbol</emphasis></entry>
+                        <entry>
+                            Zwraca listę zlokalizowanych symboli walut. Kod waluty jest umieszczony
+                            w kluczu tablicy a symbol - w wartości. Dla uproszczenia można używać
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Question</emphasis></entry>
+                        <entry>
+                            Zwraca listę zlokalizowanych odpowiedzi oznaczających zgodę ('yes')
+                            oraz zaprzeczenie ('no'). Dla uproszczenia można używać
+                            <link linkend="zend.locale.getquestion">metody getQuestion</link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CurrencyFraction</emphasis></entry>
+                        <entry>
+                            Zwraca listę ilości miejsc po przecinku dla walut. Kod waluty
+                            jest umieszczony w kluczu tablicy a ilość miejsc po przecinku - w
+                            wartości. Dla uproszczenia można używać
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CurrencyRounding</emphasis></entry>
+                        <entry>
+                            Zwraca listę sposobów zaokrąglenia dla walut. Kod waluty
+                            jest umieszczony w kluczu tablicy a ilość miejsc po przecinku do
+                            zaokrąglenia - w wartości. Dla uproszczenia można używać
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CurrencyToRegion</emphasis></entry>
+                        <entry>
+                            Zwraca listę walut wg. regionu, w którym obowiązują. Kod regionu
+                            <constant>ISO3166</constant> jest umieszczony w kluczu tablicy a
+                            kod waluty <constant>ISO4217</constant> - w wartości.
+                            Dla uproszczenia można używać
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>RegionToCurrency</emphasis></entry>
+                        <entry>
+                            Zwraca listę regionów wg. obowiązującej waluty. Kod waluty
+                            <constant>ISO4217</constant> umieszczony jest w kluczu tablicy a
+                            kod regionu <constant>ISO3166</constant> - w wartości. Jeśli dana
+                            waluta jest używana w wielu regionach to są one oddzielone spacją.
+                            Dla uproszczenia można używać
+                            <link linkend="zend.currency.introduction">Zend_Currency</link> 
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>RegionToTerritory</emphasis></entry>
+                        <entry>
+                            Zwraca listę terytoriów z krajami lub subterytoriami, które są zawarte
+                            w nich. Kod <acronym>ISO</acronym> terytorium jest używany jako klucz
+                            tablicy a kod <constant>ISO3166</constant> kraju/subterytorium - jako
+                            wartości. Jeśli terytorium zawiera więcej niż jedno
+                            państwo/subterytorium to są one oddzielone spacją.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TerritoryToRegion</emphasis></entry>
+                        <entry>
+                            Zwraca listę krajów lub subterytoriów z terytoriami w których są
+                            zawarte. Kod <constant>ISO3166</constant> kraju/subterytorium jest
+                            używany jako klucz tablicy a kod <acronym>ISO</acronym> terytorium -
+                            jako wartości. Jeśli państwo/subterytorium wchodzi w skład więcej niż
+                            jednego terytorium to są one oddzielone spacją.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>ScriptToLanguage</emphasis></entry>
+                        <entry>
+                            Zwraca listę systemów pisma, jakie są używane w ramach języka. Kod
+                            języka jest umieszczony w kluczu tablicy a kod systemu pisma - w
+                            wartości. Jeśli język posługuje się wieloma systemami to są one
+                            oddzielone spacją.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>LanguageToScript</emphasis></entry>
+                        <entry>
+                            Zwraca listę języków i systemów pisma, jakie są używane w jego ramach.
+                            Kod systemu jest umieszczony w kluczu tablicy a kod języka - w
+                            wartości. Jeśli system jest używany w wielu językach to są one
+                            oddzielone spacją.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TerritoryToLanguage</emphasis></entry>
+                        <entry>
+                            Zwraca listę państw używających określonego języka. Kod państwa jest
+                            umieszczany w kluczu tablicy a kod języka - w wartości. Jeśli dany
+                            język jest używany w więcej niż jednym państwie to zostają one
+                            oddzielone spacją.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>LanguageToTerritory</emphasis></entry>
+                        <entry>
+                            Zwraca listę języków i państw używających określonego języka.
+                            Kod języka jest umieszczany w kluczu tablicy a kod państwa - w wartości.
+                            Jeśli dane państwo używa więcej niż jednego języka zostają one
+                            oddzielone spacją.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TimezoneToWindows</emphasis></entry>
+                        <entry>
+                            Zwraca listę stref czasowych Windows i odpowiadających im stref
+                            czasowych <acronym>ISO</acronym>. Strefa Windows jest umieszczona w
+                            kluczu a strefa <acronym>ISO</acronym> - w wartości. 
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>WindowsToTimezone</emphasis></entry>
+                        <entry>
+                            Zwraca listę stref czasowych <acronym>ISO</acronym> i odpowiadających
+                            im stref czasowych Windows. Strefa <acronym>ISO</acronym> jest
+                            umieszczona w kluczu a strefa Windows - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TerritoryToTimezone</emphasis></entry>
+                        <entry>
+                            Zwraca listę terytoriów i związanych z nimi stref czasowych
+                            <acronym>ISO</acronym>. Strefa czasowa jest umieszczona w kluczu a
+                            kod terytorium (regionu) - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TimezoneToTerritory</emphasis></entry>
+                        <entry>
+                            Zwraca listę stref czasowych <acronym>ISO</acronym> i związanych z nimi
+                            terytoriów. Kod terytorium (regionu) jest umieszczony w kluczu a
+                            strefa czasowa - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CityToTimezone</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę nazw miast, które mogą zostać użyte przy
+                            tłumaczeniu nazw stref czasowych. Lista nie jest dostępna dla
+                            wszystkich stref ale dla użytkownika może być ważniejsze wyszukanie
+                            przetłumaczonej nazwy konkretnego miasta niż nazwy
+                            <acronym>ISO</acronym> strefy czasowej. Nazwa <acronym>ISO</acronym>
+                            strefy jest umieszczona w kluczu a
+                            przetłumaczona nazwa miasta - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TimezoneToCity</emphasis></entry>
+                        <entry>
+                            Zwraca zlokalizowaną listę nazw nazw stref czasowych i przetłumaczonych
+                            nazw miast. Miasto jest umieszczone w kluczu a strefa czasowa
+                            <acronym>ISO</acronym> - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>PhoneToTerritory</emphasis></entry>
+                        <entry>
+                            Zwraca listę telefonicznych kodów kierunkowych i terytoriów w których
+                            obowiązują. Nazwa terytorium (regionu) umieszczona jest w kluczu a
+                            kod kierunkowy - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TerritoryToPhone</emphasis></entry>
+                        <entry>
+                            Zwraca listę terytoriów i ich telefonicznych kodów kierunkowych.
+                            Kod jest umieszczony
+                            w kluczu tablicy a nazwa terytorium (regionu) - w wartości. Jeśli dany
+                            kod jest używany w więcej niż jednym regionie są one oddzielone spacją.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>NumericToTerritory</emphasis></entry>
+                        <entry>
+                            Zwraca listę 3-cyfrowych kodów odpowiadających terytoriom. Terytorium
+                            (region) jest umieszczany w kluczu a 3-cyfrowy kod - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TerritoryToNumeric</emphasis></entry>
+                        <entry>
+                            Zwraca listę terytoriów z ich 3-cyfrowym kodem. 3-cyfrowy kod jest
+                            umieszczony w kluczu a nazwa terytorium (regionu) w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Alpha3ToTerritory</emphasis></entry>
+                        <entry>
+                            Zwraca listę 3-literowych kodów odpowiadających terytoriom. Terytorium
+                            (region) jest umieszczany w kluczu a 3-literowy kod - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
+                        <entry>
+                            Zwraca listę terytoriów z ich 3-literowym kodem. 3-literowy kod jest
+                            umieszczony w kluczu a nazwa terytorium (regionu) w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+                        <entry>
+                            Zwraca listę terytoriów z wyrażeniem regularnym sprawdzającym poprawność
+                            kodu pocztowego w danym terytorium. Kod <acronym>ISO</acronym>
+                            terytorium jest umieszczony w kluczu z regex - w wartości.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+                        <entry>
+                            Zwraca listę systemów pisma z cyframi używanymi w danym systemie.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+                        <entry>
+                            Zwraca listę znaków specjalnych i ich odpowiedników w unicode. Dzięki
+                            temu można np. zamienić "©" na "(C)".
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+                        <entry>
+                            Zwraca listę znaków unicode dla często zastępowanych znaków. Dzięki
+                            temu można np. zamienić "(C)" na "©"
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+                        <entry>
+                            Zwraca listę zależności locale, co może zostać wykorzystane do
+                            rozwinięcia podanego języka do pełnego identyfikatora locale
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><emphasis>Unit</emphasis></entry>
+                        <entry>
+                            Zwraca listę zlokalizowanych jednostek kalendarzowych. Dzięki temu można
+                            automatycznie przetłumaczyć łańcuchy takie jak "day", "month" itp.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            Jeśli potrzebna jest pojedyncza przetłumaczona wartość można skorzystać z metody
+            <methodname>getTranslation()</methodname>. Zawsze zwracany jest łańcuch znaków zaś
+            przyjmowane argumenty są różne od tych przyjmowanych przez
+            <methodname>getTranslationList()</methodname>.
+            Parametr wartości jest taki sam jak wcześniej z jedną różnicą - identyfikator
+            żądanego detalu musi zostać przekazany jako dodatkowy parametr.
+        </para>
+
+        <note>
+            <para>
+                Ponieważ wartość prawie zawsze musi być przekazana to staje się ona pierwszym
+                parametrem. Jest to różnica w stosunku do metody
+                <methodname>getTranslationList()</methodname>.
+            </para>
+        </note>
+
+        <para>
+            Poniżej przedstawiono tabelę zawierającą bardziej szczegółowe informacje:
+        </para>
+
+
+        <table id="zend.locale.getdata.table-2">
+            <title>
+                Szczegóły użycia metody getTranslation($value = null, $type = null, $locale = null)
+            </title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Typ</entry>
+                        <entry>Opis</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry><emphasis>Language</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy języka. Aby uzyskać żądane tłumaczenie należy
+                            w parametrze wartości przekazać kod języka
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Script</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy systemu pisma. Aby uzyskać żądane 
+                            tłumaczenie należy w parametrze wartości przekazać kod systemu pisma
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <emphasis>Territory</emphasis> lub <emphasis>Country</emphasis>
+                        </entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy terytorium. Mogą to być kraje, kontynenty
+                            i inne terytoria. Aby uzyskać żądane tłumaczenie należy w parametrze
+                            wartości przekazać kod terytorium
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Variant</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy odmiany systemu pisma. Aby uzyskać żądane 
+                            tłumaczenie należy w parametrze wartości przekazać kod żądanej odmiany
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Key</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazw znanych kluczy. Są to generyczne wartości
+                            używane w tłumaczeniach oznaczające system kalendarza, porządek
+                            sortowania, walutę. Aby uzyskać żądane tłumaczenie należy w
+                            parametrze wartości przekazać kod klucza
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DefaultCalendar</emphasis></entry>
+
+                        <entry>
+                            Zwraca domyślny system kalendarza dla podanego locale. Dla większości
+                            będzie to 'gregorian'. Dla uproszczenia można używać
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>MonthContext</emphasis></entry>
+
+                        <entry>
+                            Zwraca domyślny kontekst miesięcy, który jest używany w ramach podanego
+                            systemu kalendarza. Jeśli nie poda się nazwy kalendarza to zostanie
+                            użyta domyślna nazwa - 'gregorian'. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DefaultMonth</emphasis></entry>
+
+                        <entry>
+                            Zwraca domyślny format miesięcy, który jest używany w ramach podanego
+                            systemu kalendarza. Jeśli nie poda się nazwy kalendarza to zostanie
+                            użyta domyślna nazwa - 'gregorian'. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Month</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy miesiąca. Należy podać numer miesiąca w postaci
+                            liczby (w zakresie 1-12). Jeśli występuje potrzeba pobrania danych dla
+                            innego kalendarza, kontekstu czy formatu to przekazany argument musi
+                            być tablicą zawierającą oczekiwane dane. Tablica musi mieć następującą
+                            strukturę:
+                            <code>array( 'calendar', 'context', 'format', 'month number')</code>.
+                            W przypadku podania jedynie numeru miesiąca domyślnymi wartościami
+                            są kalendarz - 'gregorian', contekst - 'format', format - 'wide'.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DayContext</emphasis></entry>
+
+                        <entry>
+                            Zwraca domyślny kontekst dni, który jest używany w ramach podanego
+                            systemu kalendarza. Jeśli nie poda się nazwy kalendarza to zostanie
+                            użyta domyślna nazwa - 'gregorian'. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DefaultDay</emphasis></entry>
+
+                        <entry>
+                            Zwraca domyślny format dni, który jest używany w ramach podanego
+                            systemu kalendarza. Jeśli nie poda się nazwy kalendarza to zostanie
+                            użyta domyślna nazwa - 'gregorian'. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Day</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy dnia tygodnia. Należy podać angielski skrót
+                            żądanego dnia tygodnia w postaci łańcucha znaków ('sun', 'mon', itp.).
+                            Jeśli występuje potrzeba pobrania danych dla
+                            innego kalendarza, kontekstu czy formatu to przekazany argument musi
+                            być tablicą zawierającą oczekiwane dane. Tablica musi mieć następującą
+                            strukturę:
+                            <code>array( 'calendar', 'context', 'format','day abbreviation')</code>.
+                            W przypadku podania jedynie skrótu dnia domyślnymi wartościami
+                            są kalendarz - 'gregorian', contekst - 'format', format - 'wide'.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+                    
+                    
+                    <row>
+                        <entry><emphasis>Quarter</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy kwartału. Należy podać numer kwartału w postaci
+                            liczby całkowitej (w zakresie 1-4).
+                            Jeśli występuje potrzeba pobrania danych dla
+                            innego kalendarza, kontekstu czy formatu to przekazany argument musi
+                            być tablicą zawierającą oczekiwane dane. Tablica musi mieć następującą
+                            strukturę:
+                            <code>array( 'calendar', 'context', 'format','quarter number')</code>.
+                            W przypadku podania jedynie numeru kwartału domyślnymi wartościami
+                            są kalendarz - 'gregorian', contekst - 'format', format - 'wide'
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Am</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie 'AM' dla podanego locale. Jeśli występuje potrzeba
+                            pobrania danych dla innego kalendarza, należy podać jego nazwę w
+                            argumencie. Bez podania nazwy zostanie użyty kalendarz gregoriański.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Pm</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie 'AM' dla podanego locale. Jeśli występuje potrzeba
+                            pobrania danych dla innego kalendarza, należy podać jego nazwę w
+                            argumencie. Bez podania nazwy zostanie użyty kalendarz gregoriański.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Era</emphasis></entry>
+
+                        <entry>
+                            Zwraca tłumaczenie nazwy ery. Należy podać numer ery w postaci
+                            liczby całkowitej. Jeśli występuje potrzeba pobrania danych dla
+                            innego kalendarza czy formatu to przekazany argument musi
+                            być tablicą zawierającą oczekiwane dane. Tablica musi mieć następującą
+                            strukturę:
+                            <code>array('calendar', 'format','era number')</code>.
+                            W przypadku podania jedynie numeru kwartału domyślnymi wartościami
+                            są kalendarz - 'gregorian', format - 'abbr'
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DefaultDate</emphasis></entry>
+
+                        <entry>
+                            Zwraca domyślny format daty używany w ramach danego kalendarza.
+                            Bez podania nazwy zostanie użyty kalendarz gregoriański.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Date</emphasis></entry>
+
+                        <entry>
+                            Zwraca format daty dla danego kalendarza lub format w ramach locale.
+                            Bez podania nazwy zostanie użyty kalendarz gregoriański z formatem
+                            'medium'. Jeśli zostanie podana nazwa w łańcuchu wtedy użyty będzie
+                            kalendarz gregoriański z formatem o podanej nazwie. Można podać również
+                            tablicę o strukturze:
+                            <methodname>array('calendar','format')</methodname>.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DefaultTime</emphasis></entry>
+
+                        <entry>
+                            Zwraca domyślny format czasu w ramach danego kalendarza.
+                            Bez podania nazwy zostanie użyty kalendarz gregoriański.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Time</emphasis></entry>
+
+                        <entry>
+                            Zwraca format czasu dla danego kalendarza lub format w ramach locale.
+                            Bez podania nazwy zostanie użyty kalendarz gregoriański z formatem
+                            'medium'. Jeśli zostanie podana nazwa w łańcuchu wtedy użyty będzie
+                            kalendarz gregoriański z formatem o podanej nazwie. Można podać również
+                            tablicę o strukturze:
+                            <methodname>array('calendar','format')</methodname>.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DateTime</emphasis></entry>
+
+                        <entry>
+                            Zwraca format daty i czasu dla danego locale, co wskazuje na sposób
+                            reprezentowania daty z czasem w jednym łańcuchu znaków w ramach
+                            danego kalendarza. Bez podania nazwy zostanie użyty kalendarz
+                            gregoriański. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DateItem</emphasis></entry>
+                        <entry>
+                            Zwraca domyślny format dla podanej części daty lub czasu
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DateInterval</emphasis></entry>
+
+                        <entry>
+                            Zwraca format różnicy dla podanego formatu daty lub czasu. Pierwszą
+                            wartością jest nazwa kalendarza, przeważnie 'gregorian'. Drugą
+                            wartością format daty lub czasu a trzecią - część formatu o największej
+                            różnicy. Dla przykładu: array('gregorian', 'yMMMM', 'y') zwróci
+                            format różnicy dla formatu daty 'yMMMM' gdzie 'y' ma największą różnicę.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Field</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowany element daty, co może zostać wykorzystane do
+                            wyświetlania łańcuchów takich jak 'miesiąc' czy 'rok' przetłumaczonych
+                            na podany język. Element, który ma zostać przetłumaczony musi być
+                            podany w argumencie. Domyślnie użyty będzie kalendarz gregoriański.
+                            Aby skorzystać z innego systemu kalendarza należy podać tablicę o
+                            poniższej strukturze:
+                            <methodname>array('calendar', 'date field')</methodname>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Relative</emphasis></entry>
+
+                        <entry>
+                            Zwraca przetłumaczoną, relatywną datę w stosunku do obecnej chwili.
+                            Wynik może zawierać łańcuchy znaków takie jak 'wczoraj' czy 'jutro'
+                            w podanym języku. W argumencie należy podać ilość dni w stosunku
+                            do bieżącego dnia. Dla dnia poprzedniego będzie to '-1', dla
+                            następnego - '1' itp. Domyślnie użyty będzie kalendarz gregoriański.
+                            Aby skorzystać z innego systemu kalendarza należy podać tablicę o
+                            poniższej strukturze:
+                            <methodname>array('calendar', 'relative days')</methodname>
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Date</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>DecimalNumber</emphasis></entry>
+
+                        <entry>
+                            Zwraca format liczb dziesiętnych obowiązujący w danym locale.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Locale_Format</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>ScientificNumber</emphasis></entry>
+
+                        <entry>
+                            Zwraca naukowy format liczb obowiązujący w danym locale
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>PercentNumber</emphasis></entry>
+
+                        <entry>
+                            Zwraca format liczb procentowych obowiązujący w danym locale
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CurrencyNumber</emphasis></entry>
+
+                        <entry>
+                            Zwraca format używany do reprezentacji kwot walut obowiązujący
+                            w danym locale. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>NameToCurrency</emphasis></entry>
+
+                        <entry>
+                            Zwraca przetłumaczoną nazwę podanej waluty. Waluta musi być podana w
+                            formacie <acronym>ISO</acronym>. Np.: 'EUR' dla waluty 'euro'.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CurrencyToName</emphasis></entry>
+
+                        <entry>
+                            Zwraca walutę dla podanej zlokalizowanej nazwy
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CurrencySymbol</emphasis></entry>
+
+                        <entry>
+                            Zwraca symbol waluty używanej w ramach podanego locale. Nie wszystkie
+                            waluty mają swój symbol. Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Question</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowane łańcuchy znaków oznaczające potwierdzenie lub
+                            zaprzeczenie. Należy podać 'yes' lub 'no' jako parametr aby otrzymać
+                            odpowiednie tłumaczenie. Dla uproszczenia można korzystać z
+                            <link linkend="zend.locale.getquestion">Zend_Locale::getQuestion</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CurrencyFraction</emphasis></entry>
+
+                        <entry>
+                            Zwraca część składową danej waluty. Waluta musi być podana w
+                            formacie <acronym>ISO</acronym>. Np.: 'EUR' dla waluty 'euro'.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CurrencyRounding</emphasis></entry>
+
+                        <entry>
+                            Zwraca format zaokrąglenia danej waluty. Waluta musi być podana w
+                            formacie <acronym>ISO</acronym>. Np.: 'EUR' dla waluty Euro. Jeśli
+                            nie poda się nazwy to zostanie użyte zaokrąglenie 'DEFAULT'.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CurrencyToRegion</emphasis></entry>
+
+                        <entry>
+                            Zwraca walutę dla podanego regionu. Kod regionu musi być podany w formie
+                            łańcucha znaków <constant>ISO3166</constant>. Np.: 'AT' dla Austrii.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>RegionToCurrency</emphasis></entry>
+
+                        <entry>
+                            Zwraca listę regionów, gdzie dana waluta jest używana. Kod waluty
+                            musi być podany w formie łańcucha znaków <constant>ISO4217</constant>.
+                            Np.: 'EUR' dla Euro. Jeśli waluta jest używana w wielu regionach to 
+                            zostaną one oddzielone spacją.
+                            Dla uproszczenia można korzystać z
+                            <link linkend="zend.date.introduction">Zend_Currency</link>
+                        </entry>
+                    </row>
+                    
+                    <row>
+                        <entry><emphasis>RegionToTerritory</emphasis></entry>
+
+                        <entry>
+                            Zwraca listę regionów danego terytorium. Terytorium powinno być podane
+                            jako łańcuch znaków standardu <constant>ISO4217</constant> (np. '001'
+                            oznacza 'cały świat'). Nazwy zwracanych regionów są oddzielone spacją
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TerritoryToRegion</emphasis></entry>
+
+                        <entry>
+                            Zwraca terytoria lokalizacji podanego regionu. Region powinien być
+                            podany jako łańcuch znaków standardu <constant>ISO3166</constant>
+                            (np. 'AT' - Austria). Jeśli region rozciąga się na wiele terytoriów
+                            to ich nazwy oddzielone są spacją
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>ScriptToLanguage</emphasis></entry>
+
+                        <entry>
+                            Zwraca systemy pisma używane w ramach danego locale. Język musi być
+                            podany w formie kodu <acronym>ISO</acronym> (np. 'en' - angielski).
+                            Jeśli dany język używa więcej niż jednego systemu pisma to ich nazwy
+                            oddzielone są spacją
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>LanguageToScript</emphasis></entry>
+
+                        <entry>
+                            Zwraca języki używające danego systemu pisma. System pisma musi być
+                            podany w formie kodu <acronym>ISO</acronym> (np. 'Latn' - Łacina).
+                            Jeśli systemu pisma jest używany przez więcej niż jeden język to ich
+                            nazwy oddzielone są spacją
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TerritoryToLanguage</emphasis></entry>
+
+                        <entry>
+                            Zwraca terytoria gdzie dany język jest używany. Język musi być
+                            podany w formie kodu <acronym>ISO</acronym> (np. 'en' - angielski).
+                            Jeśli dany język jest używany przez więcej niż jedno terytorium
+                            to ich nazwy oddzielone są spacją
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>LanguageToTerritory</emphasis></entry>
+
+                        <entry>
+                            Zwraca listę języków danego terytorium. Terytorium powinno być podane
+                            jako łańcuch znaków standardu <constant>ISO3166</constant> (np. 'IT'
+                            oznacza Włochy). Jeśli na danym terytorium używa się więcej niż
+                            jednego języka to ich nazwy oddzielone są spacją
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TimezoneToWindows</emphasis></entry>
+
+                        <entry>
+                            Zwraca strefę czasową <acronym>ISO</acronym> odpowiadającą strefie
+                            czasowej Windows
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>WindowsToTimezone</emphasis></entry>
+
+                        <entry>
+                            Zwraca strefę czasową Windows odpowiadającą strefie
+                            czasowej <acronym>ISO</acronym>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TerritoryToTimezone</emphasis></entry>
+
+                        <entry>
+                            Zwraca terytorium odpowiadające danej strefie czasowej
+                            <acronym>ISO</acronym>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TimezoneToTerritory</emphasis></entry>
+
+                        <entry>
+                            Zwraca strefę czasową <acronym>ISO</acronym> odpowiadającą danemu
+                            terytorium
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CityToTimezone</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną nazwę miasta odpowiadającą danej strefie czasowej
+                            <acronym>ISO</acronym>. Nie wszystkie strefy mają przypisaną
+                            przetłumaczoną nazwę miasta
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TimezoneToCity</emphasis></entry>
+
+                        <entry>
+                            Zwraca strefę czasową <acronym>ISO</acronym> odpowiadającą podanej,
+                            zlokalizowanej nazwie miasta. Nie wszystkie miasta mają przypisaną
+                            strefę czasową
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>PhoneToTerritory</emphasis></entry>
+
+                        <entry>
+                            Zwraca kod telefoniczny odpowiadający podanemu terytorium (regionowi).
+                            Kod terytorium musi być podany w standardzie
+                            <constant>ISO3166</constant> (np. 'AT' - Austria)
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TerritoryToPhone</emphasis></entry>
+
+                        <entry>
+                            Zwraca terytorium (region) na którym obowiązuje podany kod telefoniczny.
+                            Kod musi być podany w postaci cyfr (np. '43' zamiast '+43'). Jeśli
+                            dany kod jest używany na wielu terytoriach to ich nazwy oddzielone są
+                            spacją
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>NumericToTerritory</emphasis></entry>
+
+                        <entry>
+                            Zwraca 3-cyfrowy kod podanego terytorium (regionu). Nazwa terytorium
+                            musi być podana w standardzie <constant>ISO3166</constant> (np. 'AT'
+                            oznacza Austrię)
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TerritoryToNumeric</emphasis></entry>
+
+                        <entry>
+                            Zwraca terytorium (region) odpowiadający podanemu 3-cyfrowemu kodowi.
+                            Kod musi być podany w postaci samych cyfr (np. '43')
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Alpha3ToTerritory</emphasis></entry>
+
+                        <entry>
+                            Zwraca 3-znakowy kod podanego terytorium (regionu). Nazwa terytorium
+                            musi być podana w standardzie <constant>ISO3166</constant> (np. 'AT'
+                            dla Austrii)
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
+                        <entry>
+                            Zwraca terytorium (region) odpowiadający danemu 3-znakowemu kodowi
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>PostalToTerritory</emphasis></entry>
+
+                        <entry>
+                            Zwraca wzór wyrażenia regularnego odpowiadającego kodowi pocztowemu
+                            dla podanego terytorium. Nazwa terytorium musi być podana w standardzie
+                            <constant>ISO4217</constant> (np. '001' - Świat)
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>NumberingSystem</emphasis></entry>
+
+                        <entry>
+                            Zwraca znaki oznaczające cyfry w ramach podanego systemu pisma 
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>FallbackToChar</emphasis></entry>
+
+                        <entry>
+                            Zwraca znaki zastępujące często używany specjalny znak unicode. Można
+                            tego użyć do zastąpienia "©" za pomocą "(C)"
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>CharToFallback</emphasis></entry>
+
+                        <entry>
+                            Zwraca specjalny znak unicode dla podanego łańcucha zastępującego.
+                            Można tego użyć do zastąpienia "(C)" za pomocą "©"
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>LocaleUpgrade</emphasis></entry>
+
+                        <entry>
+                            Zwraca nazwę zależnego locale, dla locale podanego. Dzięki temu można
+                            uzyskać pełną nazwę poprawnego locale
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><emphasis>Unit</emphasis></entry>
+
+                        <entry>
+                            Zwraca zlokalizowaną nazwę jednostki kalendarza. Dzięki temu można
+                            automatycznie uzyskać tłumaczenie łańcuchów "dzień", "miesiąc" itp.
+                            Pierwszym parametrem musi być typ a drugim - liczba
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <note>
+            <para>
+                Z nadejściem Zend Framework 1.5 wiele starszych typów zostało przemianowanych.
+                Zostało to wymuszone przez wprowadzenie szeregu nowych typów i występowanie błędów
+                w starych nazwach. Zmiany te zwiększają użyteczność powyższych metod. Poniżej
+                znajduje się lista zmian:
+            </para>
+        </note>
+
+        <table id="zend.locale.getdata.table-3">
+            <title>Różnica pomiędzy Zend Framework 1.0 oraz 1.5</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Stary typ</entry>
+                        <entry>Nowy typ</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>Country</entry>
+                        <entry>Territory (z wartością '2')</entry>
+                    </row>
+
+                    <row>
+                        <entry>Calendar</entry>
+                        <entry>Type (z wartością 'calendar')</entry>
+                    </row>
+
+                    <row>
+                        <entry>Month_Short</entry>
+                        <entry>Month (z tablicą array('gregorian', 'format', 'abbreviated')</entry>
+                    </row>
+
+                    <row>
+                        <entry>Month_Narrow</entry>
+                        <entry>Month (z tablicą array('gregorian', 'stand-alone', 'narrow')</entry>
+                    </row>
+
+                    <row>
+                        <entry>Month_Complete</entry>
+                        <entry>Months</entry>
+                    </row>
+
+                    <row>
+                        <entry>Day_Short</entry>
+                        <entry>Day (z tablicą array('gregorian', 'format', 'abbreviated')</entry>
+                    </row>
+
+                    <row>
+                        <entry>Day_Narrow</entry>
+                        <entry>Day (z tablicą array('gregorian', 'stand-alone', 'narrow')</entry>
+                    </row>
+
+                    <row>
+                        <entry>DateFormat</entry>
+                        <entry>Date</entry>
+                    </row>
+
+                    <row>
+                        <entry>TimeFormat</entry>
+                        <entry>Time</entry>
+                    </row>
+
+                    <row>
+                        <entry>Timezones</entry>
+                        <entry>CityToTimezone</entry>
+                    </row>
+
+                    <row>
+                        <entry>Currency</entry>
+                        <entry>NameToCurrency</entry>
+                    </row>
+
+                    <row>
+                        <entry>Currency_Sign</entry>
+                        <entry>CurrencySymbol</entry>
+                    </row>
+
+                    <row>
+                        <entry>Currency_Detail</entry>
+                        <entry>CurrencyToRegion</entry>
+                    </row>
+
+                    <row>
+                        <entry>Territory_Detail</entry>
+                        <entry>TerritoryToRegion</entry>
+                    </row>
+
+                    <row>
+                        <entry>Language_Detail</entry>
+                        <entry>LanguageToTerritory</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            Poniższy przykład pokazuje sposób pozyskania określonych nazw w żądanym języku.
+        </para>
+
+        <example id="zend.locale.getdata.example-3">
+            <title>getTranslationList</title>
+
+            <programlisting language="php"><![CDATA[
+// wyświetla nazwy wszystkich krajów w języku niemieckim
+print_r(Zend_Locale::getTranslationList('country', 'de'));
+]]></programlisting>
+        </example>
+
+        <para>
+            Następny przykład pokazuje sposób odnalezienia nazwy locale w innym języku, jeśli
+            nieznany jest kod ISO kraju.
+        </para>
+
+        <example id="zend.locale.getdata.example-4">
+            <title>Zamiana nazwy kraju z jednego języka na drugi</title>
+
+            <programlisting language="php"><![CDATA[
+$code2name = Zend_Locale::getLanguageTranslationList('en_US');
+$name2code = array_flip($code2name);
+$frenchCode = $name2code['French'];
+echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
+// na wyjściu znajduje się nazwa języka francuskiego po niemiecku
+]]></programlisting>
+        </example>
+
+        <para>
+            Aby wygenerować listę wszystkich języków znanych przez
+            <classname>Zend_Locale</classname>, z każdą nazwą w oryginalnej formie można skorzystać
+            z poniższego przykładu. Podobnie metody
+            <methodname>getCountryTranslationList()</methodname> oraz
+            <methodname>getCountryTranslation()</methodname> mogą zostać użyte do utworzenia tabeli
+            mapującej nazwy regionów w języku użytkownika do nazw regionów w innym języku.
+            Aby wyłapać wyjątki spowodowane przez nieistniejące locale należy użyć konstrukcji
+            <code>try .. catch</code>.
+            Nie wszystkie języki stanowią locale. W poniższym przykładzie wyjątki są ignorowane
+            aby zapobiec przedwczesnemu zakończeniu skryptu.
+        </para>
+
+        <example id="zend.locale.getdata.example-6">
+            <title>Nazwy wszystkich języków w oryginalnym brzmieniu</title>
+
+            <programlisting language="php"><![CDATA[
+$list = Zend_Locale::getLanguageTranslationList('auto');
+
+foreach($list as $language => $content) {
+    try {
+        $output = Zend_Locale::getLanguageTranslation($language, $language);
+        if (is_string($output)) {
+            print "\n<br>[".$language."] ".$output;
+        }
+    } catch (Exception $e) {
+        continue;
+    }
+}
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.locale.getquestion">
+        <title>Uzyskanie tłumaczenia dla "yes" oraz "no"</title>
+
+        <para>
+            Często może dochodzić do sytuacji, w której niezbędne jest uzyskanie od użytkownika
+            odpowiedzi "tak" lub "nie". Aby uzyskać tablicę zawierającą odpowiednie słowa
+            lub wyrażenia regularne w zależności od określonego locale (domyślnie jest to locale
+            bieżącego obiektu) należy użyć metody <methodname>getQuestion()</methodname>. Tablica
+            zwrotna zawiera następujące dane:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>yes and no</emphasis>: Generyczny łańcuch znaków z odpowiedziami
+                    oznaczającymi zgodę oraz odmowę. Będzie to najprostszy element tablicy
+                    yesarray oraz noarray.
+                </para>
+
+                <para>
+                    <emphasis>yesarray and noarray</emphasis>: Tablica ze wszystkimi znanymi
+                    odpowiedziami oznaczającymi zgodę oraz odmowę. Wiele języków posiada więcej niż
+                    jeden zestaw odpowiedzi. Generalnie zawarte są tu pełne odpowiedzi oraz skróty.
+                </para>
+
+                <para>
+                    <emphasis>yesexpr and noexpr</emphasis>: Wyrażenie regularne ułatwiające
+                    odpowiednie zakwalifikowanie odpowiedzi dostarczonej przez użytkownika oraz
+                    wyszukanie odpowiedzi oznaczających zgodę oraz odmowę.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Wszystkie powyższe informacje są zlokalizowane. Poniższy przykład przedstawia zestaw
+            danych, jakie można otrzymać:
+        </para>
+
+        <example id="zend.locale.getquestion.example-1">
+            <title>getQuestion()</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = new Zend_Locale();
+// Łańcuchy ze zgodą oraz odmową
+print_r($locale->getQuestion('de'));
+
+- - - Output - - -
+
+Array
+(
+    [yes] => ja
+    [no] => nein
+    [yesarray] => Array
+        (
+            [0] => ja
+            [1] => j
+        )
+
+    [noarray] => Array
+        (
+            [0] => nein
+            [1] => n
+        )
+
+    [yesexpr] => ^([jJ][aA]?)|([jJ]?)
+    [noexpr] => ^([nN]([eE][iI][nN])?)|([nN]?)
+)
+]]></programlisting>
+        </example>
+
+        <note>
+            <para>
+                Do wersji 1.0.3 była dostępna również tablica <emphasis>yesabbr</emphasis>.
+                Od 1.5 te informacje nie są dostępne bezpośrednio ale można je odnaleźć w
+                <emphasis>yesarray</emphasis>.
+            </para>
+        </note>
+    </sect2>
+    <sect2 id="zend.locale.getlocalelist">
+        <title>Uzyskanie listy wszystkich znanych locale</title>
+
+        <para>
+            Może nastąpić sytuacja w której niezbędne okaże się uzyskanie listy wszystkich znanych
+            locale. Może to być użyteczne przy wielu czynnościach jak np. utworzenie listy wyboru.
+            Aby to osiągnąć należy użyć statycznej metody <methodname>getLocaleList()</methodname>.
+        </para>
+
+        <example id="zend.locale.getlocalelist.example-1">
+            <title>getLocaleList()</title>
+
+            <programlisting language="php"><![CDATA[
+$localelist = Zend_Locale::getLocaleList();
+]]></programlisting>
+        </example>
+
+        <note>
+            <para>
+                Należy zwrócić uwagę na fakt iż nazwy locale znajdują się w kluczach tablicy
+                zwrotnej. Wartości każdego jej elementu to boolean <constant>TRUE</constant>.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.locale.detection">
+        <title>Rozpoznanie locale</title>
+
+        <para>
+            Jeśli zaistnieje potrzeba rozpoznania czy dana zmienna, niezależnie z jakiego źródła
+            pochodzi, jest poprawnym locale można do tego celu użyć statycznej metody
+            <methodname>isLocale()</methodname>. Jej pierwszy parametr to łańcuch znaków do
+            sprawdzenia.
+        </para>
+
+        <example id="zend.locale.detection.example-1">
+            <title>Proste rozpoznanie locale</title>
+
+            <programlisting language="php"><![CDATA[
+$input = 'to_RU';
+if (Zend_Locale::isLocale($input)) {
+    print "'{$input}' to poprawne locale";
+} else {
+    print "Niestety... podana zmienna nie jest poprawnym locale";
+}
+]]></programlisting>
+        </example>
+
+        <para>
+            Jak widać, powyższa metoda zawsze zwraca wartość logiczną. Istnieje jeden powód,
+            który powoduje rzucenie wyjątku w tej metodzie. Dzieje się tak jeśli system
+            operacyjny nie dostarcza żadnego locale a Zend Framework nie jest w stanie
+            go wykryć automatycznie. Często może to oznaczać problem istniejący na styku systemu
+            i środowiska <acronym>PHP</acronym> i jego funkcji <methodname>setlocale()</methodname>.
+        </para>
+
+        <para>
+            Należy też zauważyć, iż każdy podany łańcuch locale zostanie automatycznie ograniczony
+            do kodu języka jeśli kod regionu nie jest poprawny. W poprzednim przykładzie kod
+            języka <code>'to'</code> nie istnieje w regionie <code>'RU'</code> ale klasa
+            <classname>Zend_Locale</classname> zwróci <constant>TRUE</constant> ponieważ możliwe
+            jest dostosowanie podanego stringu do poprawnego locale.
+        </para>
+
+        <para>
+            Niekiedy, przydatne może okazać się ograniczenie wyżej opisanego zachowania. W takiej
+            sytuacji należy skorzystać z drugiego parametru metody
+            <methodname>isLocale()</methodname>. Parametr <code>strict</code> przyjmuje domyślnie
+            wartość <constant>FALSE</constant> ale można zadeklarować jego wartość jako
+            <constant>TRUE</constant> i wyłączyć dostosowywanie przekazanego locale.
+        </para>
+
+        <example id="zend.locale.detection.example-2">
+            <title>Ścisłe rozpoznanie locale</title>
+
+            <programlisting language="php"><![CDATA[
+$input = 'to_RU';
+if (Zend_Locale::isLocale($input, true)) {
+    print "'{$input}' to poprawne locale";
+} else {
+    print "Niestety... podana zmienna nie jest poprawnym locale";
+}
+]]></programlisting>
+        </example>
+
+        <para>
+            Teraz, kiedy możliwe jest rozpoznanie czy określony łańcuch znaków jest poprawnym
+            locale, nic nie stoi na przeszkodzie aby samemu tworzyć klasy świadome locale. Jednak
+            wprowadzając podobne rozwiązanie szybko dochodzi się do wniosku, że implementacja
+            będzie stanowiła bardzo podobne 15 linijek kodu. Przykładowo: 
+        </para>
+
+        <example id="zend.locale.detection.example-3">
+            <title>Implementacja kodu świadomego locale</title>
+
+            <programlisting language="php"><![CDATA[
+if ($locale === null) {
+    $locale = new Zend_Locale();
+}
+
+if (!Zend_Locale::isLocale($locale, true, false)) {
+    if (!Zend_Locale::isLocale($locale, false, false)) {
+        throw new Zend_Locale_Exception(
+            "The locale '$locale' is no known locale");
+    }
+
+    $locale = new Zend_Locale($locale);
+}
+
+if ($locale instanceof Zend_Locale) {
+    $locale = $locale->toString();
+}
+]]></programlisting>
+        </example>
+
+        <para>
+            Z nadejściem Zend Framework 1.8 dodano statyczną metodę
+            <methodname>findLocale()</methodname>, która zwraca łańcuch znaków zawierający locale.
+            Oto lista jej zadań:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Sprawdzenie czy podany string jest poprawnym locale
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Ograniczenie locale jeśli region nie jest poprawny
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Zwrócenie uprzednio ustawionego locale aplikacji w przypadku braku argumentów
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Sprawdzenie locale pobranego z przeglądarki jeśli wcześniejsze detekcje
+                    zawiodły
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Sprawdzenie locale środowiska serwera jeśli wcześniejsze detekcje zawiodły
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Sprawdzenie locale frameworka jeśli wcześniejsze detekcje zawiodły
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Zwrócenie łańcucha znaków reprezentującego znalezione locale
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Poniższy przykład pokazuje sposób użycia tej metody zamiast, wcześniej opisanych,
+            kilkunastu linijek:
+        </para>
+
+        <example id="zend.locale.detection.example-4">
+            <title>Implementacja kodu świadomego locale z Zend Framework 1.8</title>
+
+            <programlisting language="php"><![CDATA[
+$locale = Zend_Locale::findLocale($inputstring);
+]]></programlisting>
+        </example>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

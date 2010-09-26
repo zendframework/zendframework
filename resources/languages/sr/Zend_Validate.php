@@ -209,7 +209,7 @@ return array(
     "'%value%' has failed the IBAN check" => "'%value%' ne prolazi IBAN proveru",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "Token '%token%' se ne poklapa sa '%value%'",
+    "The two given tokens do not match" => "Tokeni se ne poklapaju",
     "No token was provided to match against" => "Token za proveru nije prosleđen",
 
     // Zend_Validate_InArray
@@ -224,6 +224,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => "'%value%' nije validna IP adresa",
 
     // Zend_Validate_Isbn
+    "Invalid type given, value should be string or integer" => "Nevalidan tip, vrednost treba da bude tekst ili ceo broj",
     "'%value%' is no valid ISBN number" => "'%value%' nije validan ISBN broj",
 
     // Zend_Validate_LessThan
@@ -231,27 +232,32 @@ return array(
 
     // Zend_Validate_NotEmpty
     "Invalid type given, value should be float, string, array, boolean or integer" => "Nevalidan tip, vrednost treba da bude tekst, broj ili logička vrednost",
-    "Value is required and can't be empty" => "Vrednost je obaezna i ne sme biti prazna",
+    "Value is required and can't be empty" => "Vrednost je obavezna i ne sme biti prazna",
 
     // Zend_Validate_PostCode
-    "Invalid type given, value should be string or integer" => "Nevalidan tip, vrednost treba da bude tekst ili ceo broj",
-    "'%value%' does not appear to be an postal code" => "'%value%' nije poštanski broj",
+    "Invalid type given. The value should be a string or a integer" => "Nevalidan tip. Vrednost treba da bude tekst ili ceo broj",
+    "'%value%' does not appear to be a postal code" => "'%value%' nije poštanski broj",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Nevalidan tip, vrednost treba da bude tekst ili broj",
     "'%value%' does not match against pattern '%pattern%'" => "'%value%' se ne poklapa sa formatom '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Dogodila se greška pri korišćenju formata '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' nije validna frekvencija promene mape sajta",
+    "Invalid type given, the value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => "'%value%' nije validan datum izmene mape sajta",
+    "Invalid type given, the value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => "'%value%' nije validna lokacija mape sajta",
+    "Invalid type given, the value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => "'%value%' nije validan prioritet mape sajta",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "Nevalidan tip, vrednost treba da bude broj ili numerički niz",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",

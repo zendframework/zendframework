@@ -25,6 +25,8 @@
 namespace Zend\Filter;
 
 use Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\ShortNameLocater,
     Zend\Registry,
     Zend\Translator\Adapter as TranslationAdapter,
     Zend\Translator\Translator as Translator,
@@ -34,7 +36,7 @@ use Zend\Loader\PluginLoader,
  * @uses       ReflectionClass
  * @uses       Zend\Filter\Filter
  * @uses       Zend\Filter\Exception
- * @uses       Zend\Loader\PluginLoader\PluginLoader
+ * @uses       Zend\Loader\PluginLoader
  * @uses       Zend\Registry
  * @uses       Zend\Validator\Validator
  * @category   Zend
@@ -207,8 +209,10 @@ class InputFilter
      */
     public function addFilterPrefixPath($prefix, $path)
     {
-        $this->getPluginLoader(self::FILTER)->addPrefixPath($prefix, $path);
-
+        $pluginLoader = $this->getPluginLoader(self::FILTER);
+        if ($pluginLoader instanceof PrefixPathMapper) {
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
         return $this;
     }
 
@@ -221,20 +225,22 @@ class InputFilter
      */
     public function addValidatorPrefixPath($prefix, $path)
     {
-        $this->getPluginLoader(self::VALIDATOR)->addPrefixPath($prefix, $path);
-
+        $pluginLoader = $this->getPluginLoader(self::VALIDATOR);
+        if ($pluginLoader instanceof PrefixPathMapper) {
+            $pluginLoader->addPrefixPath($prefix, $path);
+        }
         return $this;
     }
 
     /**
      * Set plugin loaders for use with decorators and elements
      *
-     * @param  Zend\Loader\PluginLoader\PluginLoaderInterface $loader
+     * @param  Zend\Loader\ShortNameLocater $loader
      * @param  string $type 'filter' or 'validate'
      * @return Zend\Filter\InputFilter
      * @throws Zend\Filter\Exception on invalid type
      */
-    public function setPluginLoader(PluginLoader\PluginLoaderInterface $loader, $type)
+    public function setPluginLoader(ShortNameLocater $loader, $type)
     {
         $type = strtolower($type);
         switch ($type) {
@@ -260,7 +266,7 @@ class InputFilter
      * created.
      *
      * @param  string $type 'filter' or 'validate'
-     * @return Zend\Loader\PluginLoader\PluginLoaderInterface
+     * @return Zend\Loader\ShortNameLocater
      * @throws Zend\Filter\Exception on invalid type
      */
     public function getPluginLoader($type)
@@ -280,7 +286,7 @@ class InputFilter
                     throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            $this->_loaders[$type] = new PluginLoader\PluginLoader(
+            $this->_loaders[$type] = new PluginLoader(
                 array($prefixSegment => $pathSegment)
             );
         }
@@ -738,10 +744,10 @@ class InputFilter
         $message = $this->_defaults[self::MISSING_MESSAGE];
 
         if (null !== ($translator = $this->getTranslator())) {
-            if ($translator->isTranslated($message)) {
-                $message = $translator->translate($message);
-            } elseif ($translator->isTranslated(self::MISSING_MESSAGE)) {
+            if ($translator->isTranslated(self::MISSING_MESSAGE)) {
                 $message = $translator->translate(self::MISSING_MESSAGE);
+            } else {
+                $message = $translator->translate($message);
             }
         }
 
@@ -758,10 +764,10 @@ class InputFilter
         $message = $this->_defaults[self::NOT_EMPTY_MESSAGE];
 
         if (null !== ($translator = $this->getTranslator())) {
-            if ($translator->isTranslated($message)) {
-                $message = $translator->translate($message);
-            } elseif ($translator->isTranslated(self::NOT_EMPTY_MESSAGE)) {
+            if ($translator->isTranslated(self::NOT_EMPTY_MESSAGE)) {
                 $message = $translator->translate(self::NOT_EMPTY_MESSAGE);
+            } else {
+                $message = $translator->translate($message);
             }
         }
 
@@ -1099,7 +1105,7 @@ class InputFilter
         }
 
         $interfaceType = ucfirst($type);
-        $interfaceName = '\\Zend\\' . $interfaceType . '\\' . $interfaceType;
+        $interfaceName = 'Zend\\' . $interfaceType . '\\' . $interfaceType;
         $className = $this->getPluginLoader($type)->load(ucfirst($classBaseName));
 
         $class = new \ReflectionClass($className);

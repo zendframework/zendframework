@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Queue\Adapter;
-use Zend\DB\Select;
+use Zend\Db\Select;
 
 /*
  * The adapter test class provides a universal test class for all of the
@@ -59,7 +59,7 @@ class DBTest extends AdapterTest
      */
     public function getAdapterName()
     {
-        return 'DB\DB';
+        return 'Db';
     }
 
     /**
@@ -80,11 +80,11 @@ class DBTest extends AdapterTest
     {
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_DB')) {
-            $driverOptions = \Zend\JSON\JSON::decode(TESTS_ZEND_QUEUE_DB);
+            $driverOptions = \Zend\Json\Json::decode(TESTS_ZEND_QUEUE_DB);
         }
 
         return array(
-            'options'       => array(Select\Select::FOR_UPDATE => true),
+            'options'       => array(Select::FOR_UPDATE => true),
             'driverOptions' => $driverOptions,
         );
     }
@@ -104,7 +104,7 @@ class DBTest extends AdapterTest
             /**
              * @see Zend_Db_Select
              */
-            $config['options'][Select\Select::FOR_UPDATE] = array();
+            $config['options'][Select::FOR_UPDATE] = array();
             $queue = $this->createQueue(__FUNCTION__, $config);
             $this->fail('FOR_UPDATE accepted an array');
         } catch (\Exception $e) {

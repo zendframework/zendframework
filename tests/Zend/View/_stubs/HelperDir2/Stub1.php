@@ -20,8 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\View\_stubs\HelperDir2;
 
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**
  * @category   Zend
@@ -30,9 +34,9 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_Stub1
+class Stub1
 {
-    public function stub1()
+    public function direct()
     {
         return 'foo';
     }

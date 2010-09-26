@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML Objekt Helfer</title>
 
     <para>
-        Das HTML <emphasis><![CDATA[<object>]]></emphasis> Element wird für das Einbetten von Medien
-        wie Flash oder Quicktime in Webseiten verwendet. Der Object View Helfer übernimmt die
-        Einbettung von Medien mit einem minimalen Aufwand.
+        Das <acronym>HTML</acronym> <emphasis><![CDATA[<object>]]></emphasis> Element wird für das
+        Einbetten von Medien wie Flash oder Quicktime in Webseiten verwendet. Der Object View Helfer
+        übernimmt die Einbettung von Medien mit einem minimalen Aufwand.
     </para>
 
     <para>
@@ -62,7 +62,7 @@
 ]]></programlisting>
 
         <para>
-            Das gibt das folgende HTML aus:
+            Das gibt das folgende <acronym>HTML</acronym> aus:
         </para>
 
         <programlisting language="html"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21815 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.advanced">
     <title>Uso Avançado de Zend_Layout</title>
@@ -95,9 +95,9 @@ $layout->setView($view);
 
             <para>
                 Alternativamente, se sua implementação de view suporta qualquer espécie de
-                capacidade do plugin, você pode acessar as variáveis por
-                meio do placeholder 'Zend_Layout' usando o
-                <link linkend="zend.view.helpers.initial.placeholder">helper placeholder</link>:
+                capacidade do plugin, você pode acessar as variáveis por meio do placeholder
+                'Zend_Layout' usando o <link linkend="zend.view.helpers.initial.placeholder">helper
+                    placeholder</link>:
             </para>
 
             <programlisting language="php"><![CDATA[

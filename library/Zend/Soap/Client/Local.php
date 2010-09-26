@@ -25,6 +25,9 @@
  */
 namespace Zend\Soap\Client;
 
+use Zend\Soap\Client as SOAPClient,
+    Zend\Soap\Server as SOAPServer;
+
 /**
  * \Zend\Soap\Client\Local
  *
@@ -33,29 +36,29 @@ namespace Zend\Soap\Client;
  *
  * Could be used for development or testing purposes.
  *
- * @uses       \Zend\Soap\Client\Client
- * @uses       \Zend\Soap\Server\Server
+ * @uses       \Zend\Soap\Client
+ * @uses       \Zend\Soap\Server
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
  */
-class Local extends Client
+class Local extends SOAPClient
 {
     /**
      * Server object
      *
-     * @var \Zend\Soap\Server\Server
+     * @var \Zend\Soap\Server
      */
     protected $_server;
 
     /**
      * Local client constructor
      *
-     * @param \Zend\Soap\Server\Server $server
+     * @param \Zend\Soap\Server $server
      * @param string $wsdl
      * @param array $options
      */
-    function __construct(\Zend\Soap\Server\Server $server, $wsdl, $options = null)
+    function __construct(SOAPServer $server, $wsdl, $options = null)
     {
         $this->_server = $server;
 

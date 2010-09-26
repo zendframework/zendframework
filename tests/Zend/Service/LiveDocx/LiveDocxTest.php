@@ -97,6 +97,37 @@ class LiveDocxTest extends \PHPUnit_Framework_TestCase
         $expectedResults = '1.2';
         $this->assertEquals($expectedResults, $this->mailMerge->getVersion());
     }
+
+    public function testSetWSDLGetWSDL()
+    {
+        $wsdl = 'http://example.com/somewhere.wsdl';
+
+        $mailMerge = new MailMerge();
+        $mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+                  ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD)
+                  ->setWSDL($wsdl);
+
+        $this->assertTrue($wsdl === $mailMerge->getWSDL());
+
+        unset($mailMerge);
+    }
+
+    public function testSetWSDLGetWSDLWithSoapClient()
+    {
+        $wsdl = 'http://example.com/somewhere.wsdl';
+
+        $mailMerge = new MailMerge();
+
+        $soapClient = new \Zend\Soap\Client\Client();
+        $soapClient->setWSDL($wsdl);
+
+        $mailMerge->setSoapClient($soapClient);
+
+        $this->assertTrue($wsdl === $mailMerge->getWSDL());
+
+        unset($mailMerge);
+    }
+
 }
 
 if (PHPUnit_MAIN_METHOD == 'LiveDocxTest::main') {

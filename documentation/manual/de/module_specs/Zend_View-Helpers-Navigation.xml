@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -189,8 +189,9 @@
 
         <listitem>
             <para>
-                <methodname>htmlify()</methodname> stellt ein <emphasis>'a'</emphasis> HTML Element
-                von einer <classname>Zend_Navigation_Page</classname> Instanz dar.
+                <methodname>htmlify()</methodname> stellt ein <emphasis>'a'</emphasis>
+                <acronym>HTML</acronym> Element von einer
+                <classname>Zend_Navigation_Page</classname> Instanz dar.
             </para>
         </listitem>
 
@@ -773,13 +774,14 @@ Produkte, Foo Server, FAQ
         <title>Link Helfer</title>
 
         <para>
-            Der Link Helfer wird für die Darstellung von HTML <constant>LINK</constant> Elementen
-            verwendet. Links werden für die Beschreibung von Dokument-Beziehungen der aktuell
-            aktiven Seite verwendet. Mehr über Links und Linktypen kann unter
-            <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Dokument-Beziehung:
-            Das LINK Element (HTML4 W3C Rec.)</ulink> und
-            <ulink url="http://www.w3.org/TR/html4/types.html#h-6.12">Link Typen
-            (HTML4 W3C Rec.)</ulink> in der HMTL4 W3C Empfehlung nachgelesen werden.
+            Der Link Helfer wird für die Darstellung von <acronym>HTML</acronym>
+            <constant>LINK</constant> Elementen verwendet. Links werden für die Beschreibung von
+            Dokument-Beziehungen der aktuell aktiven Seite verwendet. Mehr über Links und Linktypen
+            kann unter <ulink
+                url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Dokument-Beziehung: Das
+                LINK Element (HTML4 W3C Rec.)</ulink> und <ulink
+                url="http://www.w3.org/TR/html4/types.html#h-6.12">Link Typen (HTML4 W3C
+                Rec.)</ulink> in der <acronym>HTML</acronym>4 W3C Empfehlung nachgelesen werden.
         </para>
 
         <para>
@@ -1021,10 +1023,10 @@ Produkte, Foo Server, FAQ
 
         <para>
             Die Konstanten von <constant>RENDER_ALTERNATE</constant> bis
-            <constant>RENDER_BOOKMARK</constant> stellen standardmäßige HTML Linktypen dar.
-            <constant>RENDER_CUSTOM</constant> stellt eine nicht-standardmäßige Beziehung dar die
-            in der Seite spezifiziert ist. <constant>RENDER_ALL</constant> stellt standardmäßige
-            und nicht-standardmäßige Beziehungen dar.
+            <constant>RENDER_BOOKMARK</constant> stellen standardmäßige <acronym>HTML</acronym>
+            Linktypen dar. <constant>RENDER_CUSTOM</constant> stellt eine nicht-standardmäßige
+            Beziehung dar die in der Seite spezifiziert ist. <constant>RENDER_ALL</constant> stellt
+            standardmäßige und nicht-standardmäßige Beziehungen dar.
         </para>
 
         <para>
@@ -1209,8 +1211,8 @@ Ausgabe:
 
         <para>
             Der Menu Helfer wird für die Darstellung von Menüs aus Navigations Containern
-            verwendet. Standardmäßig wird das Menü durch Verwendung der HTML Tags
-            <code>UL</code> und <code>LI</code> dargestellt. Der Helfer erlaubt aber auch
+            verwendet. Standardmäßig wird das Menü durch Verwendung der <acronym>HTML</acronym>
+            Tags <code>UL</code> und <code>LI</code> dargestellt. Der Helfer erlaubt aber auch
             die Verwendung eines partiellen View Skripts.
         </para>
 
@@ -1269,8 +1271,8 @@ Ausgabe:
             <listitem>
                 <para>
                     <methodname>renderMenu($container = null, $options = array())</methodname> ist
-                    eine standardmäßige render Methode, und stellt einen Container als HTML
-                    <code>UL</code> Liste dar.
+                    eine standardmäßige render Methode, und stellt einen Container als
+                    <acronym>HTML</acronym> <code>UL</code> Liste dar.
                 </para>
 
                 <para>

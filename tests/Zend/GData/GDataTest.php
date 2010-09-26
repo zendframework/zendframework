@@ -25,7 +25,7 @@
  */
 namespace ZendTest\GData;
 use Zend\GData;
-use Zend\HTTP;
+use Zend\Http;
 
 /**
  * @category   Zend
@@ -42,7 +42,7 @@ class GDataTest extends \PHPUnit_Framework_TestCase
     {
         $gdata = new GData\GData();
         $client = $gdata->getHttpClient();
-        $this->assertTrue($client instanceof HTTP\Client,
+        $this->assertTrue($client instanceof Http\Client,
             'Expecting object of type Zend_Http_Client, got '
             . (gettype($client) == 'object' ? get_class($client) : gettype($client))
         );
@@ -50,10 +50,10 @@ class GDataTest extends \PHPUnit_Framework_TestCase
 
     public function testSpecificHttpClient()
     {
-        $client = new HTTP\Client();
+        $client = new Http\Client();
         $gdata = new GData\GData($client);
         $client2 = $gdata->getHttpClient();
-        $this->assertTrue($client2 instanceof HTTP\Client,
+        $this->assertTrue($client2 instanceof Http\Client,
             'Expecting object of type Zend_Http_Client, got '
             . (gettype($client) == 'object' ? get_class($client) : gettype($client))
         );
@@ -69,7 +69,7 @@ class GDataTest extends \PHPUnit_Framework_TestCase
         } catch (\Exception $e) {
             $this->assertThat($e, $this->isInstanceOf('Zend\GData\App\HttpException'),
                 'Expecting Zend\GData\App\HttpException, got '.get_class($e));
-            $this->assertEquals('Argument is not an instance of Zend\HTTP\Client.', $e->getMessage());
+            $this->assertEquals('Argument is not an instance of Zend\Http\Client.', $e->getMessage());
         }
     }
 

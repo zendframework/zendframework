@@ -47,7 +47,7 @@ class DumbTest extends \PHPUnit_Framework_TestCase
             unset($this->word);
         }
 
-        $this->element = new \Zend_Form_Element_Captcha(
+        $this->element = new \Zend\Form\Element\Captcha(
             'captchaD',
             array(
                 'captcha' => array(
@@ -63,7 +63,7 @@ class DumbTest extends \PHPUnit_Framework_TestCase
     {
         $id   = $this->captcha->generate('test');
         $word = $this->captcha->getWord();
-        $html = $this->captcha->render(new \Zend_View);
+        $html = $this->captcha->render(new \Zend\View\View);
         $this->assertContains(strrev($word), $html);
         $this->assertNotContains($word, $html);
     }

@@ -21,16 +21,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Controller\Action\Helper;
+
+/**
  * Helper for creating URLs for redirects and other tasks
  *
- * @uses       Zend_Controller_Action_Helper_Abstract
+ * @uses       \Zend\Controller\Action\Helper\AbstractHelper
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Abstract
+use Zend\Controller\Request;
+
+class Url extends AbstractHelper
 {
     /**
      * Create URL based on default route
@@ -44,7 +51,7 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
     public function simple($action, $controller = null, $module = null, array $params = null)
     {
         $request = $this->getRequest();
-
+        
         if (null === $controller) {
             $controller = $request->getControllerName();
         }
@@ -86,9 +93,9 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
      * @param  mixed   $name       The name of a Route to use. If null it will use the current Route
      * @param  boolean $reset
      * @param  boolean $encode
-     * @return string Url for the link href attribute.
+     * @return string URL for the link href attribute.
      */
-    public function url($urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function __invoke($urlOptions = array(), $name = null, $reset = false, $encode = true)
     {
         $router = $this->getFrontController()->getRouter();
         return $router->assemble($urlOptions, $name, $reset, $encode);

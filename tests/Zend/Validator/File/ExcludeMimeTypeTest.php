@@ -60,17 +60,17 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
             'name'     => 'testsize.mo',
             'type'     => 'image/gif',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/testsize.mo',
             'error'    => 0
         );
 
         foreach ($valuesExpected as $element) {
             $validator = new File\ExcludeMimeType($element[0]);
             $validator->enableHeaderCheck();
-            $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo', $files);
+            $validator->isValid(__DIR__ . '/_files/testsize.mo', $files);
             $this->assertEquals(
                 $element[1],
-                $validator->isValid(dirname(__FILE__) . '/_files/testsize.mo', $files),
+                $validator->isValid(__DIR__ . '/_files/testsize.mo', $files),
                 "Tested with " . var_export($element, 1)
             );
         }

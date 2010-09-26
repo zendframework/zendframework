@@ -62,13 +62,13 @@ use Zend\Server\AbstractServer,
  * @uses       ReflectionClass
  * @uses       Zend\Server\AbstractServer
  * @uses       Zend\Server\Definition
- * @uses       Zend\Server\Reflection\Reflection
+ * @uses       Zend\Server\Reflection
  * @uses       Zend\Server\Reflection\AbstractFunction
  * @uses       Zend\Server\Reflection\ReflectionMethod
  * @uses       Zend\XmlRpc\Request
- * @uses       Zend\XmlRpc\Request\HTTP
+ * @uses       Zend\XmlRpc\Request\Http
  * @uses       Zend\XmlRpc\Response
- * @uses       Zend\XmlRpc\Response\HTTP
+ * @uses       Zend\XmlRpc\Response\Http
  * @uses       Zend\XmlRpc\Server\Exception
  * @uses       Zend\XmlRpc\Server\Fault
  * @uses       Zend\XmlRpc\Server\System
@@ -94,10 +94,10 @@ class Server extends AbstractServer
     protected $_request = null;
 
     /**
-     * Class to use for responses; defaults to {@link Zend\XmlRpc\Response\HTTP}
+     * Class to use for responses; defaults to {@link Zend\XmlRpc\Response\Http}
      * @var string
      */
-    protected $_responseClass = 'Zend\\XmlRpc\\Response\\HTTP';
+    protected $_responseClass = 'Zend\\XmlRpc\\Response\\Http';
 
     /**
      * Dispatch table of name => method pairs
@@ -211,7 +211,7 @@ class Server extends AbstractServer
             if (!is_string($func) || !function_exists($func)) {
                 throw new Server\Exception('Unable to attach function; invalid', 611);
             }
-            $reflection = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
+            $reflection = Reflection::reflectFunction($func, $argv, $namespace);
             $this->_buildSignature($reflection);
         }
     }
@@ -245,7 +245,7 @@ class Server extends AbstractServer
             $argv = array_slice($argv, 2);
         }
 
-        $dispatchable = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+        $dispatchable = Reflection::reflectClass($class, $argv, $namespace);
         foreach ($dispatchable->getMethods() as $reflection) {
             $this->_buildSignature($reflection, $class);
         }
@@ -283,7 +283,7 @@ class Server extends AbstractServer
         if ((!$request || !$request instanceof Request)
             && (null === ($request = $this->getRequest()))
         ) {
-            $request = new Request\HTTP();
+            $request = new Request\Http();
             $request->setEncoding($this->getEncoding());
         }
 

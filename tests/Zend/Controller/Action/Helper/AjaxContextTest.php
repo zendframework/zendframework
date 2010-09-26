@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Action\Helper;
+use Zend\Controller\Action\HelperBroker;
+use Zend\Layout;
 
 /**
  * Test class for Zend_Controller_Action_Helper_AjaxContext.
@@ -33,20 +39,9 @@
  * @group      Zend_Controller_Action
  * @group      Zend_Controller_Action_Helper
  */
-class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_TestCase
+class AjaxContextTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_AjaxContextTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -60,28 +55,28 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
             unset($_SERVER['HTTP_X_REQUESTED_WITH']);
         }
 
-        Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride::resetMvcInstance();
-        Zend_Controller_Action_HelperBroker::resetHelpers();
-        Zend_Controller_Action_HelperBroker::addPrefix('Zend_Controller_Action_Helper');
+        \Zend\Layout\Layout::resetMvcInstance();
+        HelperBroker::resetHelpers();
+        HelperBroker::addPrefix('Zend\Controller\Action\Helper');
 
-        $this->front = Zend_Controller_Front::getInstance();
+        $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
-        $this->front->addModuleDirectory(dirname(__FILE__) . '/../../_files/modules');
+        $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
 
-        $this->layout = Zend_Layout::startMvc();
+        $this->layout = Layout\Layout::startMvc();
 
-        $this->helper = new Zend_Controller_Action_Helper_AjaxContext();
+        $this->helper = new \Zend\Controller\Action\Helper\AjaxContext();
 
-        $this->request = new Zend_Controller_Request_Http();
-        $this->response = new Zend_Controller_Response_Cli();
+        $this->request = new \Zend\Controller\Request\Http();
+        $this->response = new \Zend\Controller\Response\Cli();
 
         $this->front->setRequest($this->request)->setResponse($this->response);
-        $this->view = new Zend_View();
-        $this->view->addHelperPath(dirname(__FILE__) . '/../../../../../library/Zend/View/Helper/');
-        $this->viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $this->view = new \Zend\View\View();
+        $this->view->addHelperPath(__DIR__ . '/../../../../../library/Zend/View/Helper/');
+        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
-        $this->controller = new Zend_Controller_Action_Helper_AjaxContextTestController(
+        $this->controller = new AjaxContextTestController(
             $this->request,
             $this->response,
             array()
@@ -184,19 +179,11 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
     }
 }
 
-class Zend_Controller_Action_Helper_AjaxContextTestController extends Zend_Controller_Action
+class AjaxContextTestController extends \Zend\Controller\Action
 {
     public $ajaxable = array(
         'foo' => array('xml'),
         'bar' => array('xml', 'json'),
         'baz' => array(),
     );
-}
-
-class Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride extends Zend_Layout
-{
-    public static function resetMvcInstance()
-    {
-        self::$_mvcInstance = null;
-    }
 }

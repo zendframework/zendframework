@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 21358 -->
 <sect1 id="zend.dom.introduction">
     <title>導入</title>
 
     <para>
-        <classname>Zend_Dom</classname> は、DOM ドキュメントや構造を扱うためのツールを提供します。
+        <classname>Zend_Dom</classname> は、 <acronym>DOM</acronym> ドキュメントや構造を扱うためのツールを提供します。
         現在用意しているのは <classname>Zend_Dom_Query</classname> で、これは XPath や <acronym>CSS</acronym> セレクタによる
-        DOM ドキュメントの問い合わせを共通インターフェイスで行えるようにします。
+        <acronym>DOM</acronym> ドキュメントの問い合わせを共通インターフェイスで行えるようにします。
     </para>
 </sect1>
 <!--

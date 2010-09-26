@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21825 -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype ヘルパー</title>
 
     <para>
-        正しい形式の HTML ドキュメントおよび <acronym>XHTML</acronym> ドキュメントには、
+        正しい形式の <acronym>HTML</acronym> ドキュメントおよび <acronym>XHTML</acronym> ドキュメントには、
         <constant>DOCTYPE</constant> 宣言が必要です。
         覚えておくことが難しいというだけではなく、
         これらは特定の要素のレンダリング方法

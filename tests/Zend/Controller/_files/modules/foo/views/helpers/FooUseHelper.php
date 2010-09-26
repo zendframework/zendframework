@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+namespace Foo\View\Helper;
 
 /**
  * @category   Zend
@@ -28,10 +29,10 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Foo_View_Helper_FooUseHelper extends Zend_View_Helper_Abstract
+class FooUseHelper extends \Zend\View\Helper\AbstractHelper
 {
-    public function fooUseHelper()
+    public function direct()
     {
-        return __FUNCTION__ . ' invoked';
+        return __CLASS__ . ' invoked';
     }
 }

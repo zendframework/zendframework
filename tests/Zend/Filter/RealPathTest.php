@@ -112,14 +112,14 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
         $filter = $this->_filter;
         $filter->setExists(false);
 
-        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files';
+        $path = __DIR__ . DIRECTORY_SEPARATOR . '_files';
         $this->assertEquals($path, $filter($path));
 
-        $path2 = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files'
+        $path2 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
                . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files';
         $this->assertEquals($path, $filter($path2));
 
-        $path3 = dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files'
+        $path3 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
                . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.'
                . DIRECTORY_SEPARATOR . '_files';
         $this->assertEquals($path, $filter($path3));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21130 -->
+<!-- EN-Revision: 22140 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
@@ -683,14 +683,14 @@ $res = $cache->foobar2('1', '2');
                     Dieses Frontend arbeitet indem es eine Callback Funktion registriert welche
                     aufgerufen wird wenn das Buffern der Ausgabe welches es verwendet, gelöscht
                     wird. Damit dies korrekt arbeitet muss es der letzte Ausgabebuffer in der
-                    Anfrage sein. Um dies zu garantieren muss der Ausgabebuffer, den der Dispatcher
-                    verwendet, deaktiviert sein indem die <methodname>setParam()</methodname>
-                    Methode von <classname>Zend_Controller_Front</classname> verwendet wird. Zum
-                    Beispiel <command>$front->setParam('disableOutputBuffering', true)</command>
-                    oder durch hinzufügen von
-                    "resources.frontcontroller.params.disableOutputBuffering = true" zum eigenen
-                    Konfigurationsdatei der Bootstrap (<acronym>INI</acronym> angenommen) wenn
-                    <classname>Zend_Application</classname> verwendet wird.
+                    Anfrage sein. Um dies zu garantieren <emphasis>muss</emphasis> der
+                    Ausgabebuffer, den der Dispatcher verwendet, deaktiviert sein indem die
+                    <methodname>setParam()</methodname> Methode von
+                    <classname>Zend_Controller_Front</classname> verwendet wird. Zum Beispiel
+                    <command>$front->setParam('disableOutputBuffering', true)</command> oder durch
+                    Hinzufügen von "resources.frontcontroller.params.disableOutputBuffering = true"
+                    zum eigenen Konfigurationsdatei der Bootstrap (<acronym>INI</acronym>
+                    angenommen) wenn <classname>Zend_Application</classname> verwendet wird.
                 </para>
             </note>
         </sect3>
@@ -1017,6 +1017,48 @@ if ($someTest) {
 
 // [...]
 ]]></programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.capture">
+        <title>Zend_Cache_Frontend_Capture</title>
+
+        <sect3 id="zend.cache.frontends.capture.introduction">
+            <title>Einführung</title>
+
+            <para>
+                <classname>Zend_Cache_Frontend_Capture</classname> ist wie
+                <classname>Zend_Cache_Frontend_Output</classname> aber für komplette Seiten
+                gestaltet. Es ist nicht möglich <classname>Zend_Cache_Frontend_Capture</classname>
+                für das Cachen eines einzelnen Blocks zu verwenden. Diese Klasse ist speziell dazu
+                gestaltet um nur in Verbindung mit dem
+                <classname>Zend_Cache_Backend_Static</classname> Backend zu funktionieren indem es
+                komplette Seiten von <acronym>HTML</acronym> / <acronym>XML</acronym> oder anderen
+                Inhalten in einer statischen physikalischen Datei auf dem lokalen Dateisystem
+                cached.
+            </para>
+
+            <para>
+                Sehen Sie bitte in die Dokumentation von
+                <classname>Zend_Cache_Backend_Static</classname> für alle Use Cases bezüglich dieser
+                Klasse.
+            </para>
+
+            <note>
+                <para>
+                    Dieses Frontend arbeitet indem es eine Callback Funktion registriert welche
+                    aufgerufen wird wenn das Buffern der Ausgabe welches es verwendet, gelöscht
+                    wird. Damit dies korrekt arbeitet muss es der letzte Ausgabebuffer in der
+                    Anfrage sein. Um dies zu garantieren <acronym>muss</acronym> der Ausgabebuffer,
+                    den der Dispatcher verwendet, deaktiviert sein indem die
+                    <methodname>setParam()</methodname> Methode von
+                    <classname>Zend_Controller_Front</classname> verwendet wird. Zum Beispiel
+                    <command>$front->setParam('disableOutputBuffering', true)</command> oder durch
+                    Hinzufügen von "resources.frontcontroller.params.disableOutputBuffering = true"
+                    zum eigenen Konfigurationsdatei der Bootstrap (<acronym>INI</acronym>
+                    angenommen) wenn <classname>Zend_Application</classname> verwendet wird.
+                </para>
+            </note>
         </sect3>
     </sect2>
 </sect1>

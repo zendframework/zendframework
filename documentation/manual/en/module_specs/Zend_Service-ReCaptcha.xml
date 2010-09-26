@@ -113,7 +113,7 @@ if (!$result->isValid()) {
         <para>
             In order to use this component you will need
             <ulink url="http://recaptcha.net/whyrecaptcha.html">an account</ulink> to generate
-            public and private keys for the mailhide API.
+            public and private keys for the mailhide <acronym>API</acronym>.
         </para>
 
         <example id="zend.service.recaptcha.mailhide.example-1">

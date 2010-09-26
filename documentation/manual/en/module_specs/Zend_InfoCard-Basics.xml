@@ -24,8 +24,8 @@
             either as part of the larger <classname>Zend_Auth</classname> component via
             the <classname>Zend_InfoCard</classname> authentication adapter or as a
             stand-alone component. In both cases an information card can be
-            requested from a user by using the following HTML block in your HTML
-            login form:
+            requested from a user by using the following <acronym>HTML</acronym> block in your
+            <acronym>HTML</acronym> login form:
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -55,7 +55,7 @@
         </para>
 
         <para>
-            When the above HTML is activated by a user (clicks on it), the
+            When the above <acronym>HTML</acronym> is activated by a user (clicks on it), the
             browser will bring up a card selection program which not only shows
             them which information cards meet the requirements of the site, but
             also allows them to select which information card to use if multiple

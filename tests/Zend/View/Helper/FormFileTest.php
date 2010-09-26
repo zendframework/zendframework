@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_View_Helper_FormFileTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormFileTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Zend_View_Helper_FormFileTest
@@ -40,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
+class FormFileTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FormFileTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -62,12 +49,12 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        if (Zend_Registry::isRegistered('Zend_View_Helper_Doctype')) {
-            $registry = Zend_Registry::getInstance();
+        if (\Zend\Registry::isRegistered('Zend_View_Helper_Doctype')) {
+            $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view = new Zend_View();
-        $this->helper = new Zend_View_Helper_FormFile();
+        $this->view = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\FormFile();
         $this->helper->setView($this->view);
     }
 
@@ -76,7 +63,7 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->formFile(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'attribs' => array('disable' => true)
         ));
@@ -89,7 +76,7 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->formFile(array(
+        $html = $this->helper->direct(array(
             'name'    => 'foo',
             'attribs' => array('disable' => true)
         ));
@@ -100,7 +87,7 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
 
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->formFile(array(
+        $test = $this->helper->direct(array(
             'name'    => 'foo',
         ));
         $this->assertNotContains(' />', $test);
@@ -109,7 +96,7 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
     public function testCanRendersAsXHtml()
     {
         $this->view->doctype('XHTML1_STRICT');
-        $test = $this->helper->formFile(array(
+        $test = $this->helper->direct(array(
             'name'    => 'foo',
         ));
         $this->assertContains(' />', $test);
@@ -118,5 +105,5 @@ class Zend_View_Helper_FormFileTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_View_Helper_FormFileTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormFileTest::main") {
-    Zend_View_Helper_FormFileTest::main();
+    \Zend_View_Helper_FormFileTest::main();
 }

@@ -25,13 +25,15 @@
  */
 namespace Zend\GData\YouTube;
 
+use Zend\GData\YouTube;
+
 /**
  * The YouTube video subscription list flavor of an Atom Feed with media support
  * Represents a list of individual subscriptions, where each contained entry is
  * a subscription.
  *
  * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube\YouTube
+ * @uses       \Zend\GData\YouTube
  * @uses       \Zend\GData\YouTube\SubscriptionEntry
  * @category   Zend
  * @package    Zend_Gdata
@@ -47,7 +49,7 @@ class SubscriptionFeed extends \Zend\GData\Media\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\YouTube\SubscriptionEntry';
+    protected $_entryClassName = 'Zend\GData\YouTube\SubscriptionEntry';
 
     /**
      * Creates a Subscription feed, representing a list of subscriptions,

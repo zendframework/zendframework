@@ -387,7 +387,7 @@
         <title>Basic usage</title>
 
         <para>
-            To validate if a given string is a barcode you just need to know its type.  See the
+            To validate if a given string is a barcode you just need to know its type. See the
             following example for an EAN13 barcode:
         </para>
 
@@ -442,7 +442,7 @@ if ($valid->isValid($input)) {
         <para>
             You may write custom barcode validators for usage with
             <classname>Zend_Validate_Barcode</classname>; this is often necessary when dealing with
-            proprietary barcode types.  To write your own barcode validator, you need the following
+            proprietary barcode types. To write your own barcode validator, you need the following
             information.
         </para>
 

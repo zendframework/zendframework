@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-// Call Zend_Dojo_View_Helper_ComboBoxTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Dojo_View_Helper_ComboBoxTest::main");
-}
+namespace ZendTest\Dojo\View\Helper;
 
-
-/** Zend_Dojo_View_Helper_ComboBox */
-
-/** Zend_View */
-
-/** Zend_Registry */
-
-/** Zend_Dojo_View_Helper_Dojo */
+use Zend\Dojo\View\Helper\ComboBox as ComboBoxHelper,
+    Zend\Dojo\View\Helper\Dojo as DojoHelper,
+    Zend\Registry,
+    Zend\View\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_ComboBox.
@@ -45,19 +38,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
+class ComboBoxTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Dojo_View_Helper_ComboBoxTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -66,34 +48,24 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Zend_Registry::_unsetInstance();
-        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+        Registry::_unsetInstance();
+        DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->helper = new Zend_Dojo_View_Helper_ComboBox();
+        $this->helper = new ComboBoxHelper();
         $this->helper->setView($this->view);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
     }
 
     public function getView()
     {
-        $view = new Zend_View();
-        $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+        $view = new View();
+        \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
 
     public function getElementAsSelect()
     {
-        return $this->helper->comboBox(
+        return $this->helper->direct(
             'elementId',
             'someCombo',
             array(),
@@ -111,7 +83,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
 
     public function getElementAsRemoter()
     {
-        return $this->helper->comboBox(
+        return $this->helper->direct(
             'elementId',
             'someCombo',
             array(
@@ -136,7 +108,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowProgrammaticDijitCreationAsSelect()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $html = $this->getElementAsSelect();
         $this->assertNotRegexp('/<select[^>]*(dojoType="dijit.form.ComboBox")/', $html);
         $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
@@ -153,7 +125,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowProgrammaticDijitCreationAsRemoter()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+        DojoHelper::setUseProgrammatic();
         $html = $this->getElementAsRemoter();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.ComboBox")/', $html);
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
@@ -174,7 +146,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
 
     public function testShouldAllowAlternateNotationToSpecifyRemoter()
     {
-        $html = $this->helper->comboBox(
+        $html = $this->helper->direct(
             'elementId',
             'someCombo',
             array(
@@ -200,7 +172,7 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
      */
     public function testStoreCreationWhenUsingProgrammaticCreationShouldRegisterAsDojoJavascript()
     {
-        Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(true);
+        DojoHelper::setUseProgrammatic(true);
         $html = $this->getElementAsRemoter();
 
         $js   = $this->view->dojo()->getJavascript();
@@ -216,9 +188,4 @@ class Zend_Dojo_View_Helper_ComboBoxTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue($storeDeclarationFound, 'Store definition not found');
     }
-}
-
-// Call Zend_Dojo_View_Helper_ComboBoxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Dojo_View_Helper_ComboBoxTest::main") {
-    Zend_Dojo_View_Helper_ComboBoxTest::main();
 }

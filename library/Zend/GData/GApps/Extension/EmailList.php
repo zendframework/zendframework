@@ -30,15 +30,15 @@ namespace Zend\GData\GApps\Extension;
  * class represents properties of an email list and is usually contained
  * within an instance of Zend_Gdata_GApps_EmailListEntry.
  *
- * @uses       \Zend\GData\Extension\Extension
- * @uses       \Zend\GData\GApps\GApps
+ * @uses       \Zend\GData\Extension
+ * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EmailList extends \Zend\GData\Extension\Extension
+class EmailList extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'apps';
@@ -59,7 +59,7 @@ class EmailList extends \Zend\GData\Extension\Extension
      */
     public function __construct($name = null)
     {
-        $this->registerAllNamespaces(\Zend\GData\GApps\GApps::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\GApps::$namespaces);
         parent::__construct();
         $this->_name = $name;
     }

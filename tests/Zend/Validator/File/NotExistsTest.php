@@ -69,7 +69,7 @@ class NotExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $baseDir = dirname(__FILE__);
+        $baseDir = __DIR__;
         $valuesExpected = array(
             array($baseDir, 'testsize.mo', true),
             array($baseDir . '/_files', 'testsize.mo', false)
@@ -79,7 +79,7 @@ class NotExistsTest extends \PHPUnit_Framework_TestCase
             'name'        => 'testsize.mo',
             'type'        => 'text',
             'size'        => 200,
-            'tmp_name'    => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name'    => __DIR__ . '/_files/testsize.mo',
             'error'       => 0
         );
 
@@ -106,9 +106,9 @@ class NotExistsTest extends \PHPUnit_Framework_TestCase
             'name'        => 'testsize.mo',
             'type'        => 'text',
             'size'        => 200,
-            'tmp_name'    => dirname(__FILE__) . '/_files/testsize.mo',
+            'tmp_name'    => __DIR__ . '/_files/testsize.mo',
             'error'       => 0,
-            'destination' => dirname(__FILE__) . '/_files'
+            'destination' => __DIR__ . '/_files'
         );
 
         foreach ($valuesExpected as $element) {

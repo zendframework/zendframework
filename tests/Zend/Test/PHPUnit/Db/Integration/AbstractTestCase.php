@@ -20,12 +20,12 @@
  * @version    $Id$
  */
 
-
-
-
-
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\Test\PHPUnit\Db\Integration;
+use Zend\Test\PHPUnit\Db\DataSet;
+use Zend\Db\Table;
 
 /**
  * @category   Zend
@@ -35,7 +35,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Db_Adapter_Abstract
@@ -44,7 +44,7 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
 
     public function testZendDbTableDataSet()
     {
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
+        $dataSet = new DataSet\DbTableDataSet();
         $dataSet->addTable($this->createFooTable());
         $dataSet->addTable($this->createBarTable());
 
@@ -65,11 +65,11 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
         $fooTable->insert(array("id" => null, "foo" => "bar", "bar" => "bar", "baz" => "bar"));
         $fooTable->insert(array("id" => null, "foo" => "baz", "bar" => "baz", "baz" => "baz"));
 
-        $dataSet = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
+        $dataSet = new DataSet\DbTableDataSet();
         $dataSet->addTable($fooTable);
 
-        $xmlDataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
-            dirname(__FILE__)."/_files/sqliteIntegrationFixture.xml"
+        $xmlDataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
+            __DIR__."/_files/sqliteIntegrationFixture.xml"
         );
         $this->assertTrue($xmlDataSet->assertEquals($dataSet));
     }
@@ -79,17 +79,17 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
      */
     public function getConnection()
     {
-        return new Zend_Test_PHPUnit_Db_Connection($this->dbAdapter, 'foo');
+        return new \Zend\Test\PHPUnit\Db\Connection($this->dbAdapter, 'foo');
     }
 
     public function testSimpleTesterSetupAndRowsetEquals()
     {
-        $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
-            dirname(__FILE__)."/_files/sqliteIntegrationFixture.xml"
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet(
+            __DIR__."/_files/sqliteIntegrationFixture.xml"
         );
         $fooDataTable = $dataSet->getTable("foo");
 
-        $tester = new Zend_Test_PHPUnit_Db_SimpleTester($this->getConnection());
+        $tester = new \Zend\Test\PHPUnit\Db\SimpleTester($this->getConnection());
         $tester->setUpDatabase($dataSet);
 
         $fooTable = $this->createFooTable();
@@ -97,7 +97,7 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
 
         $this->assertEquals(3, count($rows));
 
-        $rowsetTable = new Zend_Test_PHPUnit_Db_DataSet_DbRowset($rows);
+        $rowsetTable = new DataSet\DbRowset($rows);
         $rowsetTable->assertEquals($fooDataTable);
     }
 
@@ -106,7 +106,7 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
      */
     public function createFooTable()
     {
-        $table = new Zend_Test_PHPUnit_Db_TableFoo(array('db' => $this->dbAdapter));
+        $table = new TableFoo(array('db' => $this->dbAdapter));
         return $table;
     }
 
@@ -115,19 +115,19 @@ abstract class Zend_Test_PHPUnit_Db_Integration_AbstractTestCase extends PHPUnit
      */
     public function createBarTable()
     {
-        $table = new Zend_Test_PHPUnit_Db_TableBar(array('db' => $this->dbAdapter));
+        $table = new TableBar(array('db' => $this->dbAdapter));
         return $table;
     }
 }
 
-class Zend_Test_PHPUnit_Db_TableFoo extends Zend_Db_Table_Abstract
+class TableFoo extends Table\AbstractTable
 {
     protected $_name = "foo";
 
     protected $_primary = "id";
 }
 
-class Zend_Test_PHPUnit_Db_TableBar extends Zend_Db_Table_Abstract
+class TableBar extends Table\AbstractTable
 {
     protected $_name = "bar";
 

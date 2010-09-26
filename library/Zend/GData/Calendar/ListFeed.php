@@ -25,10 +25,12 @@
  */
 namespace Zend\GData\Calendar;
 
+use Zend\GData\Calendar;
+
 /**
  * Represents the meta-feed list of calendars
  *
- * @uses       \Zend\GData\Calendar\Calendar
+ * @uses       \Zend\GData\Calendar
  * @uses       Zend_Gdata_Extension_Timezone
  * @uses       \Zend\GData\Feed
  * @category   Zend
@@ -46,14 +48,14 @@ class ListFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_entryClassName = '\Zend\GData\Calendar\ListEntry';
+    protected $_entryClassName = 'Zend\GData\Calendar\ListEntry';
 
     /**
      * The classname for the feed.
      *
      * @var string
      */
-    protected $_feedClassName = '\Zend\GData\Calendar\ListFeed';
+    protected $_feedClassName = 'Zend\GData\Calendar\ListFeed';
 
     public function __construct($element = null)
     {

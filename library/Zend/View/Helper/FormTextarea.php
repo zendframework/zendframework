@@ -21,16 +21,21 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\View\Helper;
+
+/**
  * Helper to generate a "textarea" element
  *
- * @uses       Zend_View_Helper_FormElement
+ * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_View_Helper_FormTextarea extends Zend_View_Helper_FormElement
+class FormTextarea extends FormElement
 {
     /**
      * The default number of rows for a textarea.
@@ -65,8 +70,12 @@ class Zend_View_Helper_FormTextarea extends Zend_View_Helper_FormElement
      *
      * @return string The element XHTML.
      */
-    public function formTextarea($name, $value = null, $attribs = null)
+    public function direct($name = null, $value = null, $attribs = null)
     {
+        if ($name == null) {
+            throw new \InvalidArgumentException('FormTextarea: missing argument. $name is required in formTextarea($name, $value = null, $attribs = null)');
+        }
+        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
 

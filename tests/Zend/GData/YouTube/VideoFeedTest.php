@@ -58,7 +58,7 @@ class VideoFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://gdata.youtube.com/schemas/2007#video', $videoFeed->category[0]->term);
         $this->assertEquals('http://www.youtube.com/img/pic_youtubelogo_123x63.gif', $videoFeed->logo->text);
         $this->assertEquals('text', $videoFeed->title->type);
-        $this->assertEquals('Davidchoimusic\'s Videos', $videoFeed->title->text);;
+        $this->assertEquals('Davidchoimusic\'s Videos', $videoFeed->title->text);
         $this->assertEquals('self', $videoFeed->getLink('self')->rel);
         $this->assertEquals('application/atom+xml', $videoFeed->getLink('self')->type);
         $this->assertEquals('http://gdata.youtube.com/feeds/users/davidchoimusic/uploads?start-index=1&max-results=5', $videoFeed->getLink('self')->href);

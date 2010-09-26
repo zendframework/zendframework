@@ -63,4 +63,4 @@ Zend_Registry::set('db',$db);
 
 require_once 'Zend/Controller/Front.php';
 
-Zend_Controller_Front::run(dirname(dirname(__FILE__)).'/application/controllers');
+Zend_Controller_Front::run(dirname(__DIR__).'/application/controllers');

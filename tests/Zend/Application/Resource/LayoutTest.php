@@ -20,17 +20,12 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_LayoutTest::main');
-}
+namespace ZendTest\Application\Resource;
 
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
+use Zend\Loader\Autoloader,
+    Zend\Application\Resource\Layout as LayoutResource,
+    Zend\Application,
+    Zend\Controller\Front as FrontController;
 
 /**
  * @category   Zend
@@ -40,14 +35,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
+class LayoutTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -58,14 +47,14 @@ class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Zend_Loader_Autoloader::resetInstance();
-        $this->autoloader = Zend_Loader_Autoloader::getInstance();
+        Autoloader::resetInstance();
+        $this->autoloader = Autoloader::getInstance();
 
-        $this->application = new Zend_Application('testing');
+        $this->application = new Application\Application('testing');
 
-        $this->bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $this->bootstrap = new Application\Bootstrap($this->application);
 
-        Zend_Controller_Front::getInstance()->resetInstance();
+        FrontController::getInstance()->resetInstance();
     }
 
     public function tearDown()
@@ -81,33 +70,33 @@ class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
         }
 
         // Reset autoloader instance so it doesn't affect other tests
-        Zend_Loader_Autoloader::resetInstance();
+        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesLayoutObject()
     {
-        $resource = new Zend_Application_Resource_Layout(array());
+        $resource = new LayoutResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $this->assertTrue($resource->getLayout() instanceof Zend_Layout);
+        $this->assertTrue($resource->getLayout() instanceof \Zend\Layout\Layout);
     }
 
     public function testInitializationReturnsLayoutObject()
     {
-        $resource = new Zend_Application_Resource_Layout(array());
+        $resource = new LayoutResource(array());
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
-        $this->assertTrue($test instanceof Zend_Layout);
+        $this->assertTrue($test instanceof \Zend\Layout\Layout);
     }
 
     public function testOptionsPassedToResourceAreUsedToSetLayoutState()
     {
         $options = array(
             'layout'     => 'foo.phtml',
-            'layoutPath' => dirname(__FILE__),
+            'layoutPath' => __DIR__,
         );
 
-        $resource = new Zend_Application_Resource_Layout($options);
+        $resource = new LayoutResource($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $layout   = $resource->getLayout();
@@ -117,8 +106,4 @@ class Zend_Application_Resource_LayoutTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals($options, $test);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LayoutTest::main') {
-    Zend_Application_Resource_LayoutTest::main();
 }

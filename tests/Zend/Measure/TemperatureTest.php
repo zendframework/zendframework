@@ -41,10 +41,10 @@ class TemperatureTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (Registry::isRegistered('Zend_Locale')) {
-            $registry = Zend\Registry::getInstance();
+            $registry = Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        Data\Data::removeCache();
+        Data::removeCache();
 
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');

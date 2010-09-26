@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Controller\Request;
+use Zend\Controller\Request;
+
 // Call Zend_Controller_Request_SimpleTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_SimpleTest::main");
@@ -38,7 +44,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_Controller
  * @group      Zend_Controller_Request
  */
-class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase
+class SimpleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Runs the test methods of this class.
@@ -49,19 +55,19 @@ class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase
     public static function main()
     {
 
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Request_SimpleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Controller_Request_SimpleTest");
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testSimpleRequestIsOfAbstractRequestType()
     {
-        $request = new Zend_Controller_Request_Simple();
-        $this->assertTrue($request instanceof Zend_Controller_Request_Abstract);
+        $request = new Request\Simple();
+        $this->assertTrue($request instanceof Request\AbstractRequest);
     }
 
     public function testSimpleReqestRetainsValuesPassedFromConstructor()
     {
-        $request = new Zend_Controller_Request_Simple('test1', 'test2', 'test3', array('test4' => 'test5'));
+        $request = new Request\Simple('test1', 'test2', 'test3', array('test4' => 'test5'));
         $this->assertEquals($request->getActionName(), 'test1');
         $this->assertEquals($request->getControllerName(), 'test2');
         $this->assertEquals($request->getModuleName(), 'test3');
@@ -72,5 +78,5 @@ class Zend_Controller_Request_SimpleTest extends PHPUnit_Framework_TestCase
 
 // Call Zend_Controller_Request_SimpleTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_SimpleTest::main") {
-    Zend_Controller_Request_SimpleTest::main();
+    \Zend_Controller_Request_SimpleTest::main();
 }

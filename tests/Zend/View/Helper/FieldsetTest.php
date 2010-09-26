@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-// Call Zend_FieldsetTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FieldsetTest::main");
-}
-
-
+/**
+ * @namespace
+ */
+namespace ZendTest\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_Fieldset
@@ -38,19 +36,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
+class FieldsetTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_FieldsetTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -60,8 +47,8 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->view   = new Zend_View();
-        $this->helper = new Zend_View_Helper_Fieldset();
+        $this->view   = new \Zend\View\View();
+        $this->helper = new \Zend\View\Helper\Fieldset();
         $this->helper->setView($this->view);
         ob_start();
     }
@@ -79,7 +66,7 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
 
     public function testFieldsetHelperCreatesFieldsetWithProvidedContent()
     {
-        $html = $this->helper->fieldset('foo', 'foobar');
+        $html = $this->helper->direct('foo', 'foobar');
         $this->assertRegexp('#<fieldset[^>]+id="foo".*?>#', $html);
         $this->assertContains('</fieldset>', $html);
         $this->assertContains('foobar', $html);
@@ -87,7 +74,7 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
 
     public function testProvidingLegendOptionToFieldsetCreatesLegendTag()
     {
-        $html = $this->helper->fieldset('foo', 'foobar', array('legend' => 'Great Scott!'));
+        $html = $this->helper->direct('foo', 'foobar', array('legend' => 'Great Scott!'));
         $this->assertRegexp('#<legend>Great Scott!</legend>#', $html);
     }
 
@@ -97,7 +84,7 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
     public function testEmptyLegendShouldNotRenderLegendTag()
     {
         foreach (array(null, '', ' ', false) as $legend) {
-            $html = $this->helper->fieldset('foo', 'foobar', array('legend' => $legend));
+            $html = $this->helper->direct('foo', 'foobar', array('legend' => $legend));
             $this->assertNotContains('<legend>', $html, 'Failed with value ' . var_export($legend, 1) . ': ' . $html);
         }
     }
@@ -107,12 +94,7 @@ class Zend_View_Helper_FieldsetTest extends PHPUnit_Framework_TestCase
      */
     public function testHelperShouldAllowDisablingEscapingOfLegend()
     {
-        $html = $this->helper->fieldset('foo', 'foobar', array('legend' => '<b>Great Scott!</b>', 'escape' => false));
+        $html = $this->helper->direct('foo', 'foobar', array('legend' => '<b>Great Scott!</b>', 'escape' => false));
         $this->assertRegexp('#<legend><b>Great Scott!</b></legend>#', $html, $html);
     }
-}
-
-// Call Zend_View_Helper_FieldsetTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FieldsetTest::main") {
-    Zend_View_Helper_FieldsetTest::main();
 }

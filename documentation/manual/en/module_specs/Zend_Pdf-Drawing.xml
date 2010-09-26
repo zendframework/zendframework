@@ -15,12 +15,10 @@
             Page size can be retrieved from a page object:
         </para>
 
-        <para>
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $width  = $pdfPage->getWidth();
 $height = $pdfPage->getHeight();
 ]]></programlisting>
-        </para>
     </sect2>
 
     <sect2 id="zend.pdf.drawing.color">
@@ -47,8 +45,8 @@ $color3 = new Zend_Pdf_Color_Cmyk($c, $m, $y, $k);
 ]]></programlisting>
 
         <para>
-            HTML style colors are also provided with <classname>Zend_Pdf_Color_Html</classname>
-            class:
+            <acronym>HTML</acronym> style colors are also provided with
+            <classname>Zend_Pdf_Color_Html</classname> class:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -108,7 +106,8 @@ public function drawRectangle($x1, $y1, $x2, $y2,
  * Draw a rounded rectangle.
  *
  * Fill types:
- * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle
+ *                                             and stroke (default)
  * Zend_Pdf_Page::SHAPE_DRAW_STROKE      - stroke rectangle
  * Zend_Pdf_Page::SHAPE_DRAW_FILL        - fill rectangle
  *
@@ -575,6 +574,7 @@ $fontName = $font->getFontName(Zend_Pdf_Font::NAME_POSTSCRIPT,
 $pdf->save($docPath);
 ...
 ]]></programlisting>
+
             <programlisting language="php"><![CDATA[
 ...
 $pdf = Zend_Pdf::load($docPath);
@@ -609,8 +609,9 @@ $pdf->save($docPath, true /* incremental update mode */);
                         Possibly embedded font program is actually not extracted. So extracted font
                         can't provide correct font metrics and original font has to be used for text
                         width calculations:
+                    </para>
 
-                        <programlisting language="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 ...
 $font = $pdf->extractFont($fontName);
 $originalFont = Zend_Pdf_Font::fontWithPath($fontPath);
@@ -628,7 +629,6 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
 }
 ...
 ]]></programlisting>
-                    </para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -1193,8 +1193,9 @@ public function getFontSize();
 
         <para>
             Transparency may be set using <methodname>Zend_Pdf_Page::setAlpha()</methodname> method:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Set the transparency
  *
@@ -1212,6 +1213,5 @@ public function getFontSize();
  */
 public function setAlpha($alpha, $mode = 'Normal');
 ]]></programlisting>
-        </para>
     </sect2>
 </sect1>

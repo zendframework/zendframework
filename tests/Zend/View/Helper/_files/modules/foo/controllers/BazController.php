@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+namespace Foo;
 
 /**
  * @category   Zend
@@ -28,7 +29,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Foo_BazController extends Zend_Controller_Action
+class BazController extends \Zend\Controller\Action
 {
 
     public function barOneAction()

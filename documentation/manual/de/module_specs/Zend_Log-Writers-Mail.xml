@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17875 -->
+<!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.mail">
     <title>In Emails schreiben</title>
@@ -65,10 +65,11 @@ $log->error('Kann nicht zur datenbank verbinden');
         <title>Zend_Layout Verwendung</title>
 
         <para>
-            Eine <classname>Zend_Layout</classname> Instanz kann verwendet werden um den HTML
-            Anteil einer Multipart Email zu erstellen. Wenn eine <classname>Zend_Layout</classname>
-            Instanz in Verwendung ist, nimmt <classname>Zend_Log_Writer_Mail</classname> an das sie
-            verwendet wird um HTML darzustellen und setzt den Body HTML für die
+            Eine <classname>Zend_Layout</classname> Instanz kann verwendet werden um den
+            <acronym>HTML</acronym> Anteil einer Multipart Email zu erstellen. Wenn eine
+            <classname>Zend_Layout</classname> Instanz in Verwendung ist, nimmt
+            <classname>Zend_Log_Writer_Mail</classname> an das sie verwendet wird um
+            <acronym>HTML</acronym> darzustellen und setzt den Body <acronym>HTML</acronym> für die
             Nachricht als den <classname>Zend_Layout</classname>-darstellenden Wert.
         </para>
 

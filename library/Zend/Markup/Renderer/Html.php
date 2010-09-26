@@ -45,28 +45,6 @@ class Html extends AbstractRenderer
 {
 
     /**
-     * Element groups
-     *
-     * @var array
-     */
-    protected $_groups = array(
-        'block'        => array('block', 'inline', 'block-empty', 'inline-empty', 'list'),
-        'inline'       => array('inline', 'inline-empty'),
-        'list'         => array('list-item'),
-        'list-item'    => array('inline', 'inline-empty', 'list'),
-        'block-empty'  => array(),
-        'inline-empty' => array(),
-    );
-
-    /**
-     * The current group
-     *
-     * @var string
-     */
-    protected $_group = 'block';
-
-
-    /**
      * Constructor
      *
      * @param array|\Zend\Config\Config $options

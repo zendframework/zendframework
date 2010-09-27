@@ -68,11 +68,11 @@ class BbcodeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the tokenizer
+     * Test the tokenizer with a simple tag
      *
      * @return void
      */
-    public function testTokenizer()
+    public function testTokenizerSimpleTag()
     {
         $this->assertEquals(array(
             array(
@@ -96,5 +96,111 @@ class BbcodeTest extends \PHPUnit_Framework_TestCase
                 'type'       => 'markup'
             )
         ), $this->_parser->tokenize('foo[b]bar[/b]'));
+    }
+
+    /**
+     * Test the tokenizer with a complicated tag
+     *
+     * @return void
+     */
+    public function testTokenizerComplicatedTag()
+    {
+        $this->assertEquals(array(
+            array(
+                'tag'  => 'foo',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[bar=foo a="b^c" d=\']\']',
+                'name'       => 'bar',
+                'attributes' => array(
+                    'bar' => 'foo',
+                    'a'   => 'b^c',
+                    'd'   => ']'
+                ),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'bar',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[/b]',
+                'name'       => '/b',
+                'attributes' => array(),
+                'type'       => 'markup'
+            )
+        ), $this->_parser->tokenize('foo[bar=foo a="b^c" d=\']\']bar[/b]'));
+    }
+
+    /**
+     * Test the tokenizer with nested (simple) tags
+     *
+     * @return void
+     */
+    public function testTokenizerNestedTags()
+    {
+        $this->assertEquals(array(
+            array(
+                'tag'  => 'foo',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[b]',
+                'name'       => 'b',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'bar',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[i]',
+                'name'       => 'i',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'baz',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[abc]',
+                'name'       => 'abc',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'caz',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[/abc]',
+                'name'       => '/abc',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'naz',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[/i]',
+                'name'       => '/i',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'booh',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[/b]',
+                'name'       => '/b',
+                'attributes' => array(),
+                'type'       => 'markup'
+            )
+        ), $this->_parser->tokenize('foo[b]bar[i]baz[abc]caz[/abc]naz[/i]booh[/b]'));
     }
 }

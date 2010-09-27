@@ -16,7 +16,6 @@
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -24,129 +23,71 @@
  */
 namespace Zend\Loader;
 
+use Zend\Stdlib\ArrayStack,
+    Zend\Stdlib\SplStack,
+    SplDoublyLinkedList,
+    SplFileInfo;
+
 /**
- * Generic plugin class loader
+ * Prefix/Path plugin loader
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Loader
- * @uses       \Zend\Loader\PluginLoaderException
- * @uses       \Zend\Loader\PrefixPathMapper
- * @uses       \Zend\Loader\ShortNameLocater
  * @category   Zend
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginLoader implements ShortNameLocater, PrefixPathMapper
+class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
 {
-    /**
-     * Class map cache file
-     * @var string
-     */
-    protected static $_includeFileCache;
-
     /**
      * Instance loaded plugin paths
      *
      * @var array
      */
-    protected $_loadedPluginPaths = array();
+    protected $loadedPluginPaths = array();
 
     /**
      * Instance loaded plugins
      *
      * @var array
      */
-    protected $_loadedPlugins = array();
+    protected $loadedPlugins = array();
 
     /**
      * Instance registry property
      *
      * @var array
      */
-    protected $_prefixToPaths = array();
-
-    /**
-     * Statically loaded plugin path mappings
-     *
-     * @var array
-     */
-    protected static $_staticLoadedPluginPaths = array();
-
-    /**
-     * Statically loaded plugins
-     *
-     * @var array
-     */
-    protected static $_staticLoadedPlugins = array();
-
-    /**
-     * Static registry property
-     *
-     * @var array
-     */
-    protected static $_staticPrefixToPaths = array();
-
-    /**
-     * Whether to use a statically named registry for loading plugins
-     *
-     * @var string|null
-     */
-    protected $_useStaticRegistry = null;
+    protected $prefixPaths = array();
 
     /**
      * Constructor
      *
-     * @param array $prefixToPaths
-     * @param string $staticRegistryName OPTIONAL
+     * Options are passed to {@link setOptions()}
+     *
+     * @param  array $options
+     * @return void
      */
-    public function __construct(Array $prefixToPaths = array(), $staticRegistryName = null)
+    public function __construct($options = null)
     {
-        if (is_string($staticRegistryName) && !empty($staticRegistryName)) {
-            $this->_useStaticRegistry = $staticRegistryName;
-            if(!isset(self::$_staticPrefixToPaths[$staticRegistryName])) {
-                self::$_staticPrefixToPaths[$staticRegistryName] = array();
-            }
-            if(!isset(self::$_staticLoadedPlugins[$staticRegistryName])) {
-                self::$_staticLoadedPlugins[$staticRegistryName] = array();
-            }
-        }
+        $this->prefixPaths = new ArrayStack();
 
-        foreach ($prefixToPaths as $prefix => $path) {
-            $this->addPrefixPath($prefix, $path);
+        if (null !== $options) {
+            $this->setOptions($options);
         }
     }
 
     /**
-     * Format prefix for internal use
+     * Configure the prefix path plugin loader
      *
-     * @param  string $prefix
-     * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
-     * @return string
+     * Proxies to {@link addPrefixPaths()}.
+     * 
+     * @param  array|Traversable $options 
+     * @return PrefixPathLoader
      */
-    protected function _formatPrefix($prefix, $namespaced = true)
+    public function setOptions($options)
     {
-        if($prefix == "") {
-            return $prefix;
-        }
-
-
-        switch ($namespaced) {
-            case true:
-                $last = strlen($prefix) - 1;
-                if ($prefix{$last} == '\\') {
-                    return $prefix;
-                }
-
-                return $prefix . '\\';
-            case false:
-                $last = strlen($prefix) - 1;
-                if ($prefix{$last} == '_') {
-                    return $prefix;
-                }
-
-                return $prefix . '_';
-        }
+        $this->addPrefixPaths($options);
+        return $this;
     }
 
     /**
@@ -155,25 +96,58 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
      * @param string $prefix
      * @param string $path
      * @param  bool $namespaced Whether the paths are namespaced or prefixed; namespaced by default
-     * @return \Zend\Loader\PluginLoader
+     * @return \Zend\Loader\PrefixPathLoader
      */
     public function addPrefixPath($prefix, $path, $namespaced = true)
     {
         if (!is_string($prefix) || !is_string($path)) {
-            throw new PluginLoaderException('Zend\\Loader\\PluginLoader::addPrefixPath() method only takes strings for prefix and path.');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected strings for prefix and path; received %s and %s, respectively',
+                (is_object($prefix) ? get_class($prefix) : gettype($prefix)),
+                (is_object($path)   ? get_class($path)   : gettype($path))
+            ));
         }
 
-        $prefix = $this->_formatPrefix($prefix, $namespaced);
-        $path   = rtrim($path, '/\\') . '/';
+        $prefix = $this->formatPrefix($prefix, $namespaced);
+        $path   = $this->formatPath($path);
 
-        if ($this->_useStaticRegistry) {
-            self::$_staticPrefixToPaths[$this->_useStaticRegistry][$prefix][] = $path;
-        } else {
-            if (!isset($this->_prefixToPaths[$prefix])) {
-                $this->_prefixToPaths[$prefix] = array();
-            }
-            if (!in_array($path, $this->_prefixToPaths[$prefix])) {
-                $this->_prefixToPaths[$prefix][] = $path;
+        if (!isset($this->prefixPaths[$prefix])) {
+            $this->prefixPaths[$prefix] = new SplStack;
+        }
+        if (!in_array($path, $this->prefixPaths[$prefix]->toArray())) {
+            $this->prefixPaths[$prefix][] = $path;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add many prefix paths at once
+     *
+     * Accepts an array or Traversable object of prefix (or namspace) / path 
+     * pairs. The path may either be a string path, or an array or Traversable
+     * object with many paths to associate with this prefix. If adding many 
+     * paths at once, please remember that the prefix/path pairs act as a LIFO 
+     * stack, as does the stack of paths associated with any given prefix.
+     * 
+     * @param  array|Traversable $prefixPaths 
+     * @return PrefixPathLoader
+     */
+    public function addPrefixPaths($prefixPaths)
+    {
+        if (!is_array($prefixPaths) && !$prefixPaths instanceof \Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected an array or Traversable object; received %s', 
+                (is_object($prefixPaths) ? get_class($prefixPaths) : gettype($prefixPaths))
+            ));
+        }
+        foreach ($prefixPaths as $prefix => $paths) {
+            if (is_array($paths) || $paths instanceof \Traversable) {
+                foreach ($paths as $path) {
+                    $this->addPrefixPath($prefix, $path);
+                }
+            } else {
+                $this->addPrefixPath($prefix, $paths);
             }
         }
         return $this;
@@ -183,36 +157,29 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
      * Get path stack
      *
      * @param  string $prefix
-     * @return false|array False if prefix does not exist, array otherwise
+     * @return false|ArrayStack|SplStack False if prefix does not exist, 
+     * SplStack otherwise; if no prefix provide, ArrayStack of prefix/SplStack 
+     * pairs
      */
     public function getPaths($prefix = null)
     {
         if ((null !== $prefix) && is_string($prefix)) {
-            $prefix = $this->_formatPrefix($prefix);
-            if ($this->_useStaticRegistry) {
-                if (isset(self::$_staticPrefixToPaths[$this->_useStaticRegistry][$prefix])) {
-                    return self::$_staticPrefixToPaths[$this->_useStaticRegistry][$prefix];
-                }
+            $prefix = $this->formatPrefix($prefix);
 
-                return false;
-            }
-
-            if (isset($this->_prefixToPaths[$prefix])) {
-                return $this->_prefixToPaths[$prefix];
+            if (isset($this->prefixPaths[$prefix])) {
+                return $this->prefixPaths[$prefix];
             }
 
             return false;
         }
 
-        if ($this->_useStaticRegistry) {
-            return self::$_staticPrefixToPaths[$this->_useStaticRegistry];
-        }
-
-        return $this->_prefixToPaths;
+        return $this->prefixPaths;
     }
 
     /**
      * Clear path stack
+     *
+     * Clears path stack for a single prefix, or all prefixes.
      *
      * @param  string $prefix
      * @return bool False only if $prefix does not exist
@@ -220,29 +187,17 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
     public function clearPaths($prefix = null)
     {
         if ((null !== $prefix) && is_string($prefix)) {
-            $prefix = $this->_formatPrefix($prefix);
-            if ($this->_useStaticRegistry) {
-                if (isset(self::$_staticPrefixToPaths[$this->_useStaticRegistry][$prefix])) {
-                    unset(self::$_staticPrefixToPaths[$this->_useStaticRegistry][$prefix]);
-                    return true;
-                }
+            $prefix = $this->formatPrefix($prefix);
 
-                return false;
-            }
-
-            if (isset($this->_prefixToPaths[$prefix])) {
-                unset($this->_prefixToPaths[$prefix]);
+            if (isset($this->prefixPaths[$prefix])) {
+                unset($this->prefixPaths[$prefix]);
                 return true;
             }
 
             return false;
         }
 
-        if ($this->_useStaticRegistry) {
-            self::$_staticPrefixToPaths[$this->_useStaticRegistry] = array();
-        } else {
-            $this->_prefixToPaths = array();
-        }
+        $this->prefixPaths = new ArrayStack();
 
         return true;
     }
@@ -250,61 +205,57 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
     /**
      * Remove a prefix (or prefixed-path) from the registry
      *
-     * @param string $prefix
-     * @param string $path OPTIONAL
-     * @return \Zend\Loader\PluginLoader
+     * @param  string $prefix
+     * @param  string $path
+     * @return Zend\Loader\PrefixPathLoader
      */
-    public function removePrefixPath($prefix, $path = null)
+    public function removePrefixPath($prefix, $path)
     {
-        $prefix = $this->_formatPrefix($prefix);
-        if ($this->_useStaticRegistry) {
-            $registry =& self::$_staticPrefixToPaths[$this->_useStaticRegistry];
-        } else {
-            $registry =& $this->_prefixToPaths;
-        }
+        $prefix   = $this->formatPrefix($prefix);
+        $path     = $this->formatPath($path);
+        $registry = $this->prefixPaths;
 
         if (!isset($registry[$prefix])) {
-            throw new PluginLoaderException('Prefix ' . $prefix . ' was not found in the PluginLoader.');
+            return false;
         }
 
-        if ($path != null) {
-            $pos = array_search($path, $registry[$prefix]);
-            if (false === $pos) {
-                throw new PluginLoaderException('Prefix ' . $prefix . ' / Path ' . $path . ' was not found in the PluginLoader.');
+
+        // Find prefix path in stack
+        $index = false;
+        $stack = $registry[$prefix];
+        foreach ($stack as $idx => $test) {
+            if ($test == $path) {
+                $index = $idx;
+                break;
             }
-            unset($registry[$prefix][$pos]);
-        } else {
+        }
+
+        if (false === $index) {
+            return false;
+        }
+
+        // Re-calculate index, since this is a stack
+        $index = count($stack) - $index - 1;
+        unset($stack[$index]);
+
+        // If stack is now empty, remove prefix from ArrayStack
+        if (0 === count($stack)) {
             unset($registry[$prefix]);
         }
 
-        return $this;
-    }
-
-    /**
-     * Normalize plugin name
-     *
-     * @param  string $name
-     * @return string
-     */
-    protected function _formatName($name)
-    {
-        return ucfirst((string) $name);
+        return true;
     }
 
     /**
      * Whether or not a Plugin by a specific name is loaded
      *
      * @param string $name
-     * @return \Zend\Loader\PluginLoader
+     * @return \Zend\Loader\PrefixPathLoader
      */
     public function isLoaded($name)
     {
-        $name = $this->_formatName($name);
-        if ($this->_useStaticRegistry) {
-            return isset(self::$_staticLoadedPlugins[$this->_useStaticRegistry][$name]);
-        }
-
-        return isset($this->_loadedPlugins[$name]);
+        $name = $this->formatName($name);
+        return isset($this->loadedPlugins[$name]);
     }
 
     /**
@@ -315,13 +266,10 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
      */
     public function getClassName($name)
     {
-        $name = $this->_formatName($name);
-        if ($this->_useStaticRegistry
-            && isset(self::$_staticLoadedPlugins[$this->_useStaticRegistry][$name])
-        ) {
-            return self::$_staticLoadedPlugins[$this->_useStaticRegistry][$name];
-        } elseif (isset($this->_loadedPlugins[$name])) {
-            return $this->_loadedPlugins[$name];
+        $name = $this->formatName($name);
+
+        if (isset($this->loadedPlugins[$name])) {
+            return $this->loadedPlugins[$name];
         }
 
         return false;
@@ -335,24 +283,18 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
      */
     public function getClassPath($name)
     {
-        $name = $this->_formatName($name);
-        if ($this->_useStaticRegistry
-            && !empty(self::$_staticLoadedPluginPaths[$this->_useStaticRegistry][$name])
-        ) {
-            return self::$_staticLoadedPluginPaths[$this->_useStaticRegistry][$name];
-        } elseif (!empty($this->_loadedPluginPaths[$name])) {
-            return $this->_loadedPluginPaths[$name];
+        $name = $this->formatName($name);
+
+        if (!empty($this->loadedPluginPaths[$name])) {
+            return $this->loadedPluginPaths[$name];
         }
 
         if ($this->isLoaded($name)) {
             $class = $this->getClassName($name);
             $r     = new \ReflectionClass($class);
             $path  = $r->getFileName();
-            if ($this->_useStaticRegistry) {
-                self::$_staticLoadedPluginPaths[$this->_useStaticRegistry][$name] = $path;
-            } else {
-                $this->_loadedPluginPaths[$name] = $path;
-            }
+
+            $this->loadedPluginPaths[$name] = $path;
             return $path;
         }
 
@@ -363,47 +305,30 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
      * Load a plugin via the name provided
      *
      * @param  string $name
-     * @param  bool $throwExceptions Whether or not to throw exceptions if the
-     * class is not resolved
-     * @return string|false Class name of loaded class; false if $throwExceptions
-     * if false and no class found
-     * @throws \Zend\Loader\Exception if class not found
+     * @return string|false Class name of loaded class; false if no class found
      */
-    public function load($name, $throwExceptions = true)
+    public function load($name)
     {
-        $name = $this->_formatName($name);
+        $name = $this->formatName($name);
         if ($this->isLoaded($name)) {
             return $this->getClassName($name);
         }
 
-        if ($this->_useStaticRegistry) {
-            $registry = self::$_staticPrefixToPaths[$this->_useStaticRegistry];
-        } else {
-            $registry = $this->_prefixToPaths;
-        }
-
-        $registry  = array_reverse($registry, true);
         $found     = false;
-        $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $name) . '.php';
-        $incFile   = self::getIncludeFileCache();
-        foreach ($registry as $prefix => $paths) {
+        $classFile = str_replace(array('\\', '_'), DIRECTORY_SEPARATOR, $name) . '.php';
+        foreach ($this->prefixPaths as $prefix => $paths) {
             $className = $prefix . $name;
 
-            if (class_exists($className, false)) {
+            if (class_exists($className)) {
                 $found = true;
                 break;
             }
 
-            $paths     = array_reverse($paths, true);
-
             foreach ($paths as $path) {
-                $loadFile = $path . $classFile;
-                if (\Zend\Loader::isReadable($loadFile)) {
-                    include_once $loadFile;
+                $loadFile = new SplFileInfo($path . $classFile);
+                if ($loadFile->isFile() && $loadFile->isReadable()) {
+                    include_once $loadFile->getPathName();
                     if (class_exists($className, false)) {
-                        if (null !== $incFile) {
-                            self::_appendIncFile($loadFile);
-                        }
                         $found = true;
                         break 2;
                     }
@@ -412,22 +337,11 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
         }
 
         if (!$found) {
-            if (!$throwExceptions) {
-                return false;
-            }
-
-            $message = "Plugin by name '$name' was not found in the registry; used paths:";
-            foreach ($registry as $prefix => $paths) {
-                $message .= "\n$prefix: " . implode(PATH_SEPARATOR, $paths);
-            }
-            throw new PluginLoaderException($message);
+            return false;
        }
 
-        if ($this->_useStaticRegistry) {
-            self::$_staticLoadedPlugins[$this->_useStaticRegistry][$name]     = $className;
-        } else {
-            $this->_loadedPlugins[$name]     = $className;
-        }
+        $this->loadedPlugins[$name] = $className;
+
         return $className;
     }
 
@@ -439,7 +353,7 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
      *
      * @param  string $file
      * @return void
-     * @throws \Zend\Loader\PluginLoaderException if file is not writeable or path does not exist
+     * @throws \Zend\Loader\Exception\InvalidArgumentException if file is not writeable or path does not exist
      */
     public static function setIncludeFileCache($file)
     {
@@ -449,13 +363,22 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
         }
 
         if (!file_exists($file) && !file_exists(dirname($file))) {
-            throw new PluginLoaderException('Specified file does not exist and/or directory does not exist (' . $file . ')');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Specified file does not exist and/or directory does not exist ("%s")', 
+                $file
+            ));
         }
         if (file_exists($file) && !is_writable($file)) {
-            throw new PluginLoaderException('Specified file is not writeable (' . $file . ')');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Specified file is not writeable ("%s")', 
+                $file
+            ));
         }
         if (!file_exists($file) && file_exists(dirname($file)) && !is_writable(dirname($file))) {
-            throw new PluginLoaderException('Specified file is not writeable (' . $file . ')');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Specified file is not writeable ("%s")', 
+                $file
+            ));
         }
 
         self::$_includeFileCache = $file;
@@ -477,7 +400,7 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
      * @param  string $incFile
      * @return void
      */
-    protected static function _appendIncFile($incFile)
+    protected static function appendIncFile($incFile)
     {
         if (!file_exists(self::$_includeFileCache)) {
             $file = '<?php';
@@ -488,5 +411,67 @@ class PluginLoader implements ShortNameLocater, PrefixPathMapper
             $file .= "\ninclude_once '$incFile';";
             file_put_contents(self::$_includeFileCache, $file);
         }
+    }
+
+    /**
+     * Normalize plugin name
+     *
+     * @param  string $name
+     * @return string
+     */
+    protected function formatName($name)
+    {
+        return ucfirst((string) $name);
+    }
+
+    /**
+     * Format prefix for internal use
+     *
+     * @param  string $prefix
+     * @param  bool $namespaced Whether the paths are namespaced or prefixed; 
+     * namespaced by default
+     * @return string
+     */
+    protected function formatPrefix($prefix, $namespaced = true)
+    {
+        if($prefix == "") {
+            return $prefix;
+        }
+
+        switch ((bool) $namespaced) {
+            case true:
+                $last = strlen($prefix) - 1;
+                if ($prefix{$last} == '\\') {
+                    return $prefix;
+                }
+
+                return $prefix . '\\';
+            case false:
+                $last = strlen($prefix) - 1;
+                if ($prefix{$last} == '_') {
+                    return $prefix;
+                }
+
+                return $prefix . '_';
+            default:
+                // do nothing; unknown value
+        }
+    }
+
+    /**
+     * Format a path for comparisons
+     *
+     * Strips trailing directory separator(s), if any, and then appends 
+     * system directory separator.
+     * 
+     * @param  string $path 
+     * @return string
+     */
+    protected function formatPath($path)
+    {
+        $path  = rtrim($path, '/');
+        $path  = rtrim($path, '\\');
+        $path .= DIRECTORY_SEPARATOR;
+        return $path;
     }
 }

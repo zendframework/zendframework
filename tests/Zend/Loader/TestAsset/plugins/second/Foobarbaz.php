@@ -13,42 +13,20 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
- * @namespace
- */
-namespace Zend\Loader;
-
-/**
- * Plugin class loader interface
- *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Loader
  */
-interface PrefixPathMapper extends ShortNameLocater
+class ZendTest_PluginTest_Foobarbaz
 {
-    /**
-     * Add prefixed paths to the registry of paths
-     *
-     * @param string $prefix
-     * @param string $path
-     * @return \Zend\Loader\PrefixPathMapper
-     */
-    public function addPrefixPath($prefix, $path);
-
-    /**
-     * Remove a prefix (or prefixed-path) from the registry
-     *
-     * @param string $prefix
-     * @param string $path
-     * @return \Zend\Loader\PrefixPathMapper
-     */
-    public function removePrefixPath($prefix, $path);
 }

@@ -13,42 +13,40 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Loader;
+namespace Zend\Stdlib;
+
+use ArrayIterator,
+    ArrayObject;
 
 /**
- * Plugin class loader interface
+ * ArrayObject that acts as a stack with regards to iteration
  *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface PrefixPathMapper extends ShortNameLocater
+class ArrayStack extends ArrayObject
 {
     /**
-     * Add prefixed paths to the registry of paths
+     * Retrieve iterator
      *
-     * @param string $prefix
-     * @param string $path
-     * @return \Zend\Loader\PrefixPathMapper
+     * Retrieve an array copy of the object, reverse its order, and return an 
+     * ArrayIterator with that reversed array.
+     * 
+     * @return ArrayIterator
      */
-    public function addPrefixPath($prefix, $path);
-
-    /**
-     * Remove a prefix (or prefixed-path) from the registry
-     *
-     * @param string $prefix
-     * @param string $path
-     * @return \Zend\Loader\PrefixPathMapper
-     */
-    public function removePrefixPath($prefix, $path);
+    public function getIterator()
+    {
+        $array = $this->getArrayCopy();
+        return new ArrayIterator(array_reverse($array));
+    }
 }

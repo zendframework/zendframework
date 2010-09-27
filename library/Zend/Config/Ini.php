@@ -100,7 +100,7 @@ class Ini extends Config
     public function __construct($filename, $section = null, $options = false)
     {
         if (empty($filename)) {
-            throw new Exception('Filename is not set');
+            throw new Exception\InvalidArgumentException('Filename is not set');
         }
 
         $allowModifications = false;
@@ -139,7 +139,7 @@ class Ini extends Config
             $dataArray = array();
             foreach ($section as $sectionName) {
                 if (!isset($iniArray[$sectionName])) {
-                    throw new Exception("Section '$sectionName' cannot be found in $filename");
+                    throw new Exception\InvalidArgumentException("Section '$sectionName' cannot be found in $filename");
                 }
                 $dataArray = $this->_arrayMergeRecursive($this->_processSection($iniArray, $sectionName), $dataArray);
 
@@ -166,7 +166,7 @@ class Ini extends Config
         
         // Check if there was a error while loading file
         if ($this->_loadFileErrorStr !== null) {
-            throw new Exception($this->_loadFileErrorStr);
+            throw new Exception\RuntimeException($this->_loadFileErrorStr);
         }
         
         return $iniArray;
@@ -203,7 +203,7 @@ class Ini extends Config
                     break;
 
                 default:
-                    throw new Exception("Section '$thisSection' may not extend multiple sections in $filename");
+                    throw new Exception\RuntimeException("Section '$thisSection' may not extend multiple sections in $filename");
             }
         }
 
@@ -234,7 +234,7 @@ class Ini extends Config
                         $config = $this->_processSection($iniArray, $value, $config);
                     }
                 } else {
-                    throw new Exception("Parent section '$section' cannot be found");
+                    throw new Exception\RuntimeException("Parent section '$section' cannot be found");
                 }
             } else {
                 $config = $this->_processKey($config, $key, $value);
@@ -266,11 +266,11 @@ class Ini extends Config
                         $config[$pieces[0]] = array();
                     }
                 } elseif (!is_array($config[$pieces[0]])) {
-                    throw new Exception("Cannot create sub-key for '{$pieces[0]}' as key already exists");
+                    throw new Exception\RuntimeException("Cannot create sub-key for '{$pieces[0]}' as key already exists");
                 }
                 $config[$pieces[0]] = $this->_processKey($config[$pieces[0]], $pieces[1], $value);
             } else {
-                throw new Exception("Invalid key '$key'");
+                throw new Exception\RuntimeException("Invalid key '$key'");
             }
         } else {
             $config[$key] = $value;

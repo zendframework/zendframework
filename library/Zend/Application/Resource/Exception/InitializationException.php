@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Application;
+namespace Zend\Application\Resource\Exception;
 
 /**
  * Exception class for Zend_Application
@@ -35,6 +35,8 @@ namespace Zend\Application;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResourceException extends Exception
+class InitializationException
+    extends RuntimeException
+    implements \Zend\Application\Exception
 {
 }

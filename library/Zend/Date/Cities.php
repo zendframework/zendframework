@@ -312,7 +312,7 @@ class Cities
                 return $return;
             }
         }
-        throw new Exception('unknown city');
+        throw new Exception\InvalidArgumentException('unknown city');
     }
 
     /**

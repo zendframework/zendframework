@@ -159,7 +159,7 @@ class Ini extends AbstractFileWriter
         } elseif (strpos($value, '"') === false) {
             return '"' . $value .  '"';
         } else {
-            throw new Config\Exception('Value can not contain double quotes "');
+            throw new Config\Exception\RuntimeException('Value can not contain double quotes "');
         }
     }
     

@@ -100,7 +100,7 @@ class Xml extends AbstractFileWriter
                     $branchType = 'string';
                 }
             } else if ($branchType !== (is_numeric($key) ? 'numeric' : 'string')) {
-                throw new Config\Exception('Mixing of string and numeric keys is not allowed');
+                throw new Config\Exception\RuntimeException('Mixing of string and numeric keys is not allowed');
             }
 
             if ($branchType === 'numeric') {

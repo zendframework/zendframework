@@ -141,7 +141,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array('--pear', 'pear_param'));
         try {
             $opts->parse();
-            $this->fail('Expected to catch Zend\\Console\\GetoptException');
+            $this->fail('Expected to catch Zend\Console\Exception\RuntimeException');
         } catch (\Zend\Console\Exception\RuntimeException $e) {
             $this->assertEquals($e->getMessage(), 'Option "pear" is not recognized.');
         }

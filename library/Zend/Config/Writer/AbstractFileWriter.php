@@ -101,11 +101,11 @@ class AbstractFileWriter extends AbstractWriter
         }
 
         if ($this->_filename === null) {
-            throw new Config\Exception\InvalidArugmentException('No filename was set');
+            throw new Config\Exception\InvalidArgumentException('No filename was set');
         }
 
         if ($this->_config === null) {
-            throw new Config\Exception\InvalidArugmentException('No config was set');
+            throw new Config\Exception\InvalidArgumentException('No config was set');
         }
 
         $configString = $this->render();

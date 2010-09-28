@@ -143,19 +143,64 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
         $this->loader->addPrefixPaths($arg);
     }
 
-    public function testPassingArrayPathsToAddPrefixPathsAddsManyPathsToAPrefixAtOnce()
+    public function testPassingArrayPathsToAddPrefixPathsAddsManyPathsAtOnce()
     {
-        $this->markTestIncomplete();
+        $path1 = array('prefix' => 'foo', 'path'   => __DIR__);
+        $path2 = array('prefix' => 'foo', 'path'   => __DIR__ . '/TestAsset');
+        $path3 = array('prefix' => 'bar', 'path'   => __DIR__, 'namespaced' => false);
+        $path3 = (object) $path3;
+        $paths = array($path1, $path2, $path3);
+        $this->loader->addPrefixPaths($paths);
+        $test = $this->loader->getPaths();
+        $this->assertTrue(isset($test['foo\\']));
+        $this->assertTrue(isset($test['bar_']));
+
+        $path = $test['foo\\'];
+        $this->assertEquals(2, count($path));
+        $testPaths = array();
+        foreach ($path as $p) {
+            $testPaths[] = $p;
+        }
+        foreach (array($path1['path'], $path2['path']) as $p) {
+            $this->assertContains($p . DIRECTORY_SEPARATOR, $testPaths, var_export($testPaths, 1));
+        }
+
+        $path = $test['bar_'];
+        $this->assertEquals(1, count($path));
+        foreach ($path as $p) {
+            $this->assertContains($path3->path, $p);
+        }
     }
 
-    public function testPassingTraversablePathsToAddPrefixPathsAddsManyPathsToAPrefixAtOnce()
+    public function testPassingTraversablePathsToAddPrefixPathsAddsManyPathsAtOnce()
     {
-        $this->markTestIncomplete();
-    }
+        $path1 = array('prefix' => 'foo', 'path'   => __DIR__);
+        $path2 = array('prefix' => 'foo', 'path'   => __DIR__ . '/TestAsset');
+        $path3 = array('prefix' => 'bar', 'path'   => __DIR__, 'namespaced' => false);
+        $path3 = (object) $path3;
+        $paths = array($path1, $path2, $path3);
+        $paths = new \ArrayObject($paths);
 
-    public function testCanPassMultiplePrefixesToAddPrefixPaths()
-    {
-        $this->markTestIncomplete();
+        $this->loader->addPrefixPaths($paths);
+        $test = $this->loader->getPaths();
+        $this->assertTrue(isset($test['foo\\']));
+        $this->assertTrue(isset($test['bar_']));
+
+        $path = $test['foo\\'];
+        $this->assertEquals(2, count($path));
+        $testPaths = array();
+        foreach ($path as $p) {
+            $testPaths[] = $p;
+        }
+        foreach (array($path1['path'], $path2['path']) as $p) {
+            $this->assertContains($p . DIRECTORY_SEPARATOR, $testPaths, var_export($testPaths, 1));
+        }
+
+        $path = $test['bar_'];
+        $this->assertEquals(1, count($path));
+        foreach ($path as $p) {
+            $this->assertContains($path3->path, $p);
+        }
     }
 
     public function testCanGetPathsForASinglePrefix()

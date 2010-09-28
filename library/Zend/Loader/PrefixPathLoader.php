@@ -54,9 +54,9 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
     /**
      * Instance registry property
      *
-     * @var array
+     * @var ArrayStack
      */
-    protected $prefixPaths = array();
+    protected $prefixPaths;
 
     /**
      * Constructor
@@ -68,7 +68,10 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
      */
     public function __construct($options = null)
     {
-        $this->prefixPaths = new ArrayStack();
+        // Allow extending classes to pre-set the prefix paths
+        if (null === $this->prefixPaths) {
+            $this->prefixPaths = new ArrayStack();
+        }
 
         if (null !== $options) {
             $this->setOptions($options);
@@ -140,14 +143,26 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
                 (is_object($prefixPaths) ? get_class($prefixPaths) : gettype($prefixPaths))
             ));
         }
-        foreach ($prefixPaths as $prefix => $paths) {
-            if (is_array($paths) || $paths instanceof \Traversable) {
-                foreach ($paths as $path) {
-                    $this->addPrefixPath($prefix, $path);
-                }
+        foreach ($prefixPaths as $spec) {
+            if (is_object($spec)) {
+                $prefix     = $spec->prefix ?: false;
+                $path       = $spec->path   ?: false;
+                $namespaced = isset($spec->namespaced) ? (bool) $spec->namespaced : true;
+            } elseif (is_array($spec)) {
+                $prefix     = $spec['prefix'] ?: false;
+                $path       = $spec['path']   ?: false;
+                $namespaced = isset($spec['namespaced']) ? (bool) $spec['namespaced'] : true;
             } else {
-                $this->addPrefixPath($prefix, $paths);
+                throw new Exception\InvalidArgumentException(
+                    'Invalid prefix path array specification; must be an array or object'
+                );
             }
+            if (!$prefix || !$path) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid prefix path object specification; missing either prefix or path'
+                );
+            }
+            $this->addPrefixPath($prefix, $path, $namespaced);
         }
         return $this;
     }

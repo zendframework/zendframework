@@ -45,6 +45,12 @@ class PluginClassLoader implements PluginClassLocater
     protected $plugins = array();
 
     /**
+     * Static map allow global seeding of plugin loader
+     * @var array
+     */
+    protected static $staticMap = array();
+
+    /**
      * Constructor
      * 
      * @param  null|array|Traversable $map If provided, seeds the loader with a map
@@ -52,8 +58,37 @@ class PluginClassLoader implements PluginClassLocater
      */
     public function __construct($map = null)
     {
+        // Merge in static overrides
+        if (!empty(static::$staticMap)) {
+            $this->registerPlugins(static::$staticMap);
+        }
+
+        // Merge in constructor arguments
         if ($map !== null) {
             $this->registerPlugins($map);
+        }
+    }
+
+    /**
+     * Add a static map of plugins
+     *
+     * A null value will clear the static map.
+     * 
+     * @param  null|array|Traversable $map 
+     * @return void
+     */
+    public static function addStaticMap($map)
+    {
+        if (null === $map) {
+            static::$staticMap = array();
+            return;
+        }
+
+        if (!is_array($map) && !$map instanceof \Traversable) {
+            throw new Exception\InvalidArgumentException('Expects an array or Traversable object');
+        }
+        foreach ($map as $key => $value) {
+            static::$staticMap[$key] = $value;
         }
     }
 

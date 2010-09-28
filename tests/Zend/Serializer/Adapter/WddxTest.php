@@ -26,7 +26,7 @@
 namespace ZendTest\Serializer\Adapter;
 
 use Zend\Serializer,
-    Zend\Serializer\Exception\MissingExtensionException;
+    Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
  * @category   Zend
@@ -46,7 +46,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
             try {
                 new Serializer\Adapter\Wddx();
                 $this->fail("Zend\\Serializer\\Adapter\\Wddx needs missing ext/wddx but did't throw exception");
-            } catch (MissingExtensionException $e) {}
+            } catch (ExtensionNotLoadedException $e) {}
             $this->markTestSkipped('Zend\\Serializer\\Adapter\\Wddx needs ext/wddx');
         }
         $this->_adapter = new \Zend\Serializer\Adapter\Wddx();

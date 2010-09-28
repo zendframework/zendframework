@@ -26,7 +26,7 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Exception\RuntimeException,
-    Zend\Serializer\Exception\MissingExtensionException;
+    Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
@@ -54,7 +54,7 @@ class IgBinary extends AbstractAdapter
     public function __construct($opts = array()) 
     {
         if (!extension_loaded('igbinary')) {
-            throw new MissingExtensionException('PHP extension "igbinary" is required for this adapter');
+            throw new ExtensionNotLoadedException('PHP extension "igbinary" is required for this adapter');
         }
 
         parent::__construct($opts);

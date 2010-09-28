@@ -37,6 +37,11 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        // Ensure any statically created paths are cleared
+        PrefixPathLoader::addStaticPaths(null);
+        TestAsset\ExtendedPrefixPathLoader::addStaticPaths(null);
+
+        // Create instance of the loader
         $this->loader = new PrefixPathLoader();
     }
 
@@ -405,5 +410,133 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
             'ZendTest\Loader\TestAsset\TestPlugins\Bar'  => realpath(__DIR__ . '/TestAsset/TestPlugins/Bar.php'),
         );
         $this->assertEquals($expected, $this->loader->getClassMap());
+    }
+
+    public function testAddingStaticPathsDoesNotAffectExistingIntances()
+    {
+        PrefixPathLoader::addStaticPaths(array(
+            array('prefix' => 'ZendTest\Loader\TestAsset', 'path' => __DIR__ . '/TestAsset'),
+        ));
+        $this->assertFalse($this->loader->getPaths('ZendTest\Loader\TestAsset'));
+    }
+
+    public function testAllowsAddingStaticPathsForSeedingInstances()
+    {
+        PrefixPathLoader::addStaticPaths(array(
+            array('prefix' => 'ZendTest\Loader\TestAsset', 'path' => __DIR__ . '/TestAsset'),
+        ));
+        $loader = new PrefixPathLoader();
+        $paths = $loader->getPaths('ZendTest\Loader\TestAsset');
+        $this->assertEquals(1, count($paths));
+    }
+
+    public function testPassingNullToStaticPathsClearsStaticPaths()
+    {
+        PrefixPathLoader::addStaticPaths(null);
+        $loader = new PrefixPathLoader();
+        $this->assertFalse($loader->getPaths('ZendTest\Loader\TestAsset'));
+    }
+
+    public function testAddingStaticPathsAllowsSameArgumentsAsAddPrefixPaths()
+    {
+        // array of paths
+        $path1 = array('prefix' => 'foo', 'path'   => __DIR__);
+        $path2 = array('prefix' => 'foo', 'path'   => __DIR__ . '/TestAsset');
+        $path3 = array('prefix' => 'bar', 'path'   => __DIR__, 'namespaced' => false);
+        $path3 = (object) $path3;
+        $paths = array($path1, $path2, $path3);
+        PrefixPathLoader::addStaticPaths($paths);
+        $loader = new PrefixPathLoader();
+        $test = $loader->getPaths();
+        $this->assertTrue(isset($test['foo\\']));
+        $this->assertTrue(isset($test['bar_']));
+
+        PrefixPathLoader::addStaticPaths(null);
+
+        // Traversable object of paths
+        $path1 = array('prefix' => 'foo', 'path'   => __DIR__);
+        $path2 = array('prefix' => 'foo', 'path'   => __DIR__ . '/TestAsset');
+        $path3 = array('prefix' => 'bar', 'path'   => __DIR__, 'namespaced' => false);
+        $path3 = (object) $path3;
+        $paths = array($path1, $path2, $path3);
+        $paths = new \ArrayObject($paths);
+        PrefixPathLoader::addStaticPaths($paths);
+        $loader = new PrefixPathLoader();
+        $test = $loader->getPaths();
+        $this->assertTrue(isset($test['foo\\']));
+        $this->assertTrue(isset($test['bar_']));
+    }
+
+    public function testMulitipleCallsToAddStaticPathsMergesPaths()
+    {
+        PrefixPathLoader::addStaticPaths(array(
+            array('prefix' => 'foo', 'path' => __DIR__),
+        ));
+        PrefixPathLoader::addStaticPaths(array(
+            array('prefix' => 'foo', 'path' => __DIR__ . '/TestAsset'),
+            array('prefix' => 'bar', 'path' => __DIR__ . '/TestAsset/plugins'),
+        ));
+        $loader = new PrefixPathLoader();
+        $paths = $loader->getPaths();
+
+        $this->assertTrue(isset($paths['foo\\']));
+        $foo = $paths['foo\\'];
+        $this->assertEquals(2, count($foo));
+
+        $this->assertTrue(isset($paths['bar\\']));
+        $foo = $paths['bar\\'];
+        $this->assertEquals(1, count($foo));
+    }
+
+    public function testStaticPathsUsesLateStaticBinding()
+    {
+        TestAsset\ExtendedPrefixPathLoader::addStaticPaths(array(
+            array('prefix' => 'foo', 'path' => __DIR__),
+        ));
+        $loader = new PrefixPathLoader();
+        $this->assertFalse($loader->getPaths('foo'));
+
+        $loader = new TestAsset\ExtendedPrefixPathLoader();
+        $paths  = $loader->getPaths('foo');
+        $this->assertEquals(1, count($paths));
+    }
+
+    public function testPathPrecedenceIsExplicitTrumpsConstructorTrumpsStaticTrumpsInternal()
+    {
+        $loader = new TestAsset\ExtendedPrefixPathLoader();
+        $paths  = $loader->getPaths('loader');
+        $this->assertEquals(1, count($paths));
+        foreach ($paths as $path) {
+            $this->assertContains(__DIR__ . '/TestAsset', $path);
+        }
+
+        TestAsset\ExtendedPrefixPathLoader::addStaticPaths(array(
+            array('prefix' => 'loader', 'path' => __DIR__),
+        ));
+        $loader = new TestAsset\ExtendedPrefixPathLoader();
+        $paths = $loader->getPaths('loader');
+        $this->assertEquals(2, count($paths));
+        $test = $paths->toArray();
+        $expected = array(__DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
+        $this->assertSame($expected, $test);
+
+        $loader = new TestAsset\ExtendedPrefixPathLoader(array(
+            array('prefix' => 'loader', 'path' => __DIR__ . '/TestAsset/plugins'),
+        ));
+        $paths = $loader->getPaths('loader');
+        $this->assertEquals(3, count($paths));
+        $test = $paths->toArray();
+        $expected = array(__DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
+        $this->assertSame($expected, $test);
+
+        $loader = new TestAsset\ExtendedPrefixPathLoader(array(
+            array('prefix' => 'loader', 'path' => __DIR__ . '/TestAsset/plugins'),
+        ));
+        $loader->addPrefixPath('loader', __DIR__ . '/TestAsset/TestNamespace');
+        $paths = $loader->getPaths('loader');
+        $this->assertEquals(4, count($paths));
+        $test = $paths->toArray();
+        $expected = array(__DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'TestNamespace' . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
+        $this->assertSame($expected, $test);
     }
 }

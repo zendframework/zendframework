@@ -59,6 +59,13 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
     protected $prefixPaths;
 
     /**
+     * Global static overrides to merge at instantiation
+     *
+     * @var array
+     */
+    protected static $staticPaths = array();
+
+    /**
      * Constructor
      *
      * Options are passed to {@link setOptions()}
@@ -69,12 +76,55 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
     public function __construct($options = null)
     {
         // Allow extending classes to pre-set the prefix paths
-        if (null === $this->prefixPaths) {
+        if (is_array($this->prefixPaths)) {
+            // If prefixPaths is an array, pass the array to addPrefixPaths() 
+            // after first setting the property to an ArrayStack
+            $prefixPaths = $this->prefixPaths;
             $this->prefixPaths = new ArrayStack();
+            $this->addPrefixPaths($prefixPaths);
+        } elseif (!$this->prefixPaths instanceof ArrayStack) {
+            // If we don't have an array stack, fix that!
+            $this->prefixPaths = new ArrayStack();
+        }
+
+        // Merge in static paths
+        if (!empty(static::$staticPaths)) {
+            $this->addPrefixPaths(static::$staticPaths);
         }
 
         if (null !== $options) {
             $this->setOptions($options);
+        }
+    }
+
+    /**
+     * Add global static paths to merge at instantiation
+     * 
+     * @param  null|array|Traversable $paths 
+     * @return void
+     */
+    public static function addStaticPaths($paths)
+    {
+        if (null === $paths) {
+            static::$staticPaths = array();
+            return;
+        }
+
+        if (!is_array($paths) && !$paths instanceof \Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected a null value, array, or Traversable object, received %s',
+                (is_object($paths) ? get_class($paths) : gettype($paths))
+            ));
+        }
+
+        foreach ($paths as $spec) {
+            if (!is_array($spec) && !is_object($spec)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'At least one item in the paths is not an array or object (received %s); aborting population of static prefix path map',
+                    (is_object($spec) ? get_class($spec) : gettype($spec))
+                ));
+            }
+            static::$staticPaths[] = $spec;
         }
     }
 

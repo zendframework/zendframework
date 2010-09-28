@@ -39,18 +39,17 @@ use Zend\Stdlib\ArrayStack,
 class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
 {
     /**
-     * Instance loaded plugin paths
-     *
+     * Map of class names to files
      * @var array
      */
-    protected $loadedPluginPaths = array();
+    protected $classMap = array();
 
     /**
-     * Instance loaded plugins
+     * Map of loaded plugins to class names
      *
      * @var array
      */
-    protected $loadedPlugins = array();
+    protected $pluginMap = array();
 
     /**
      * Instance registry property
@@ -255,7 +254,7 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
     public function isLoaded($name)
     {
         $name = $this->formatName($name);
-        return isset($this->loadedPlugins[$name]);
+        return isset($this->pluginMap[$name]);
     }
 
     /**
@@ -268,34 +267,8 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
     {
         $name = $this->formatName($name);
 
-        if (isset($this->loadedPlugins[$name])) {
-            return $this->loadedPlugins[$name];
-        }
-
-        return false;
-    }
-
-    /**
-     * Get path to plugin class
-     *
-     * @param  mixed $name
-     * @return string|false False if not found
-     */
-    public function getClassPath($name)
-    {
-        $name = $this->formatName($name);
-
-        if (!empty($this->loadedPluginPaths[$name])) {
-            return $this->loadedPluginPaths[$name];
-        }
-
-        if ($this->isLoaded($name)) {
-            $class = $this->getClassName($name);
-            $r     = new \ReflectionClass($class);
-            $path  = $r->getFileName();
-
-            $this->loadedPluginPaths[$name] = $path;
-            return $path;
+        if (isset($this->pluginMap[$name])) {
+            return $this->pluginMap[$name];
         }
 
         return false;
@@ -317,100 +290,83 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
         $found     = false;
         $classFile = str_replace(array('\\', '_'), DIRECTORY_SEPARATOR, $name) . '.php';
         foreach ($this->prefixPaths as $prefix => $paths) {
+            // Initialize file and class variables
+            $loadFile  = false;
             $className = $prefix . $name;
 
             if (class_exists($className)) {
+                // Class already loaded or autoloaded; done
                 $found = true;
                 break;
             }
 
+            // Search path stack
             foreach ($paths as $path) {
+                // Is the class file readable?
                 $loadFile = new SplFileInfo($path . $classFile);
                 if ($loadFile->isFile() && $loadFile->isReadable()) {
+                    // File is readable, let's load and check for the class
                     include_once $loadFile->getPathName();
                     if (class_exists($className, false)) {
+                        // Found!
                         $found = true;
                         break 2;
                     }
                 }
+                // Not found, so reset path holder
+                $loadFile = false;
             }
         }
 
+        // Plugin class not found -- return early
         if (!$found) {
             return false;
-       }
+        }
 
-        $this->loadedPlugins[$name] = $className;
+        // Get class file for class map
+        $fileName = null;
+        if ($loadFile) {
+            // We have a populated file object from searching
+            $fileName = $loadFile->getPathName();
+        } else {
+            // Class was already loaded or autoloaded
+            $r = new \ReflectionClass($className);
+            $fileName = $r->getFileName();
+        }
+
+        // Seed plugin map and class map
+        $this->pluginMap[$name]     = $className;
+        $this->classMap[$className] = $fileName;
 
         return $className;
     }
 
     /**
-     * Set path to class file cache
+     * Get plugin map
      *
-     * Specify a path to a file that will add include_once statements for each
-     * plugin class loaded. This is an opt-in feature for performance purposes.
-     *
-     * @param  string $file
-     * @return void
-     * @throws \Zend\Loader\Exception\InvalidArgumentException if file is not writeable or path does not exist
+     * Returns an array of plugin name/class name pairs, suitable for seeding
+     * a PluginClassLoader instance.
+     * 
+     * @return array
      */
-    public static function setIncludeFileCache($file)
+    public function getPluginMap()
     {
-        if (null === $file) {
-            self::$_includeFileCache = null;
-            return;
-        }
-
-        if (!file_exists($file) && !file_exists(dirname($file))) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Specified file does not exist and/or directory does not exist ("%s")', 
-                $file
-            ));
-        }
-        if (file_exists($file) && !is_writable($file)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Specified file is not writeable ("%s")', 
-                $file
-            ));
-        }
-        if (!file_exists($file) && file_exists(dirname($file)) && !is_writable(dirname($file))) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Specified file is not writeable ("%s")', 
-                $file
-            ));
-        }
-
-        self::$_includeFileCache = $file;
+        return $this->pluginMap;
     }
 
     /**
-     * Retrieve class file cache path
+     * Get class map
      *
-     * @return string|null
+     * Returns an array of class name/file name pairs, suitable for seeding
+     * a ClassMapAutoloader instance. Note: filenames will be absolute paths
+     * based on the operating system on which the class map is retrieved. You
+     * may need to alter the paths to be relative to any filesystem.
+     * 
+     * @return array
      */
-    public static function getIncludeFileCache()
+    public function getClassMap()
     {
-        return self::$_includeFileCache;
-    }
-
-    /**
-     * Append an include_once statement to the class file cache
-     *
-     * @param  string $incFile
-     * @return void
-     */
-    protected static function appendIncFile($incFile)
-    {
-        if (!file_exists(self::$_includeFileCache)) {
-            $file = '<?php';
-        } else {
-            $file = file_get_contents(self::$_includeFileCache);
-        }
-        if (!strstr($file, $incFile)) {
-            $file .= "\ninclude_once '$incFile';";
-            file_put_contents(self::$_includeFileCache, $file);
-        }
+        return $this->classMap;
     }
 
     /**

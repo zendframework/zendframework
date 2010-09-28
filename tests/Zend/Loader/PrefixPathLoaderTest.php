@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Loader;
@@ -257,37 +256,6 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ZendTest\Loader\TestAsset\TestPlugins\Foo', $name);
     }
 
-    public function testGetClassPathReturnsFalseForUnknownPlugin()
-    {
-        $this->assertFalse($this->loader->getClassName('foo'));
-    }
-
-    public function testGetClassPathReturnsFalseForUnloadedPlugin()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testGetClassPathReturnsPathForLoadedPlugin()
-    {
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @todo Add this functionality to class
-     */
-    public function testGetClassPathsReturnsEmptyWhenNoPluginsLoaded()
-    {
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @todo Add this functionality to class
-     */
-    public function testGetClassPathsReturnsMapOfLoadedPluginPathPairs()
-    {
-        $this->markTestIncomplete();
-    }
-
     /**
      * This is to conform to what other loaders do
      */
@@ -354,5 +322,43 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
         $this->loader->addPrefixPath('ZendTest_PluginTest', __DIR__ . '/TestAsset/plugins/second', false);
         $test = $this->loader->load('foobarbaz');
         $this->assertEquals('ZendTest_PluginTest_Foobarbaz', $test);
+    }
+
+    public function testGetPluginMapReturnsEmptyArrayByDefault()
+    {
+        $map = $this->loader->getPluginMap();
+        $this->assertTrue(empty($map));
+    }
+
+    public function testGetPluginMapReturnsListOfPluginsMappingToClasses()
+    {
+        $this->loader->addPrefixPath('ZendTest\Loader\TestAsset\TestPlugins', __DIR__ . '/TestAsset/TestPlugins');
+        $this->loader->addPrefixPath('ZendTest\Loader\TestAsset\TestPlugins2', __DIR__ . '/TestAsset/TestPlugins2');
+        $this->loader->load('foo');
+        $this->loader->load('bar');
+        $expected = array(
+            'Foo' => 'ZendTest\Loader\TestAsset\TestPlugins2\Foo',
+            'Bar' => 'ZendTest\Loader\TestAsset\TestPlugins\Bar',
+        );
+        $this->assertEquals($expected, $this->loader->getPluginMap());
+    }
+
+    public function testGetClassMapReturnsEmptyArrayByDefault()
+    {
+        $map = $this->loader->getClassMap();
+        $this->assertTrue(empty($map));
+    }
+
+    public function testGetClassMapReturnsListOfClassNamesMappingToFilenames()
+    {
+        $this->loader->addPrefixPath('ZendTest\Loader\TestAsset\TestPlugins', __DIR__ . '/TestAsset/TestPlugins');
+        $this->loader->addPrefixPath('ZendTest\Loader\TestAsset\TestPlugins2', __DIR__ . '/TestAsset/TestPlugins2');
+        $this->loader->load('foo');
+        $this->loader->load('bar');
+        $expected = array(
+            'ZendTest\Loader\TestAsset\TestPlugins2\Foo' => realpath(__DIR__ . '/TestAsset/TestPlugins2/Foo.php'),
+            'ZendTest\Loader\TestAsset\TestPlugins\Bar'  => realpath(__DIR__ . '/TestAsset/TestPlugins/Bar.php'),
+        );
+        $this->assertEquals($expected, $this->loader->getClassMap());
     }
 }

@@ -236,7 +236,8 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
      */
 	public function testSlideShareObjectHandlesUnicodeCharactersWell()
 	{
-		$slideShow = new Zend_Service_SlideShare_SlideShow();
+        $slideShow = new SlideShare\SlideShow();
+		
 		$slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
 
 		if (!extension_loaded('mbstring')) {

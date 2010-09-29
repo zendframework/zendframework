@@ -23,7 +23,8 @@
  */
 namespace Zend\Json;
 
-use Zend\Json\Exception\JsonException;
+use Zend\Json\Exception\JsonException,
+    Zend\Json\Exception\InvalidArgumentException;
 
 /**
  * Decode JSON encoded string to PHP variable constructs
@@ -100,6 +101,10 @@ class Decoder
      */
     protected function __construct($source, $decodeType)
     {
+        if (!is_string($source)) {
+            throw new InvalidArgumentException('Can only decode JSON encoded strings');
+        }
+
         // Set defaults
         $this->_source       = self::decodeUnicodeString($source);
         $this->_sourceLength = strlen($this->_source);
@@ -141,18 +146,15 @@ class Decoder
      * either or {@link Zend_Json::TYPE_ARRAY} or
      * {@link Zend_Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
      * @return mixed
-     * @throws \Zend\Json\Exception\JsonException if the source string is null
+     * @throws Zend\Json\Exception\JsonException if the source string is null
      */
     public static function decode($source = null, $objectDecodeType = Json::TYPE_ARRAY)
     {
         if (null === $source) {
             throw new JsonException('Must specify JSON encoded source for decoding');
-        } elseif (!is_string($source)) {
-            throw new JsonException('Can only decode JSON encoded strings');
         }
 
         $decoder = new self($source, $objectDecodeType);
-
         return $decoder->_decodeValue();
     }
 
@@ -468,6 +470,7 @@ class Decoder
      */
     public static function decodeUnicodeString($chrs)
     {
+        $chrs        = (string)$chrs;
         $delim       = substr($chrs, 0, 1);
         $utf8        = '';
         $strlen_chrs = strlen($chrs);

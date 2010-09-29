@@ -24,10 +24,12 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Manifest;
+
 use Zend\Tool\Framework\Manifest,
     Zend\Tool\Framework\Registry,
     Zend\Tool\Framework\RegistryEnabled,
-    Zend\Tool\Framework\Metadata;
+    Zend\Tool\Framework\Metadata,
+    Zend\Tool\Framework\Manifest\Exception;
 
 /**
  * @uses       ArrayIterator
@@ -112,7 +114,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
                 }
                 
                 if (!$provider instanceof \Zend\Tool\Framework\Provider) {
-                    throw new Exception(
+                    throw new Exception\InvalidArgumentException(
                         'A provider provided by the ' . get_class($manifest)
                         . ' does not implement Zend_Tool_Framework_Provider_Interface'
                         );
@@ -191,7 +193,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
                     }
                     
                     if (!$metadata instanceof Metadata) {
-                        throw new Exception(
+                        throw new Exception\RuntimeException(
                             'A Zend_Tool_Framework_Metadata_Interface object was not found in manifest ' . get_class($manifest)
                             );
                     }

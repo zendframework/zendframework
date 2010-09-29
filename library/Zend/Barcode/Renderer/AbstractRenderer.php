@@ -25,10 +25,14 @@
  */
 namespace Zend\Barcode\Renderer;
 
-use Zend\Barcode\Renderer,
+use Zend\Barcode\BarcodeRenderer,
     Zend\Config\Config,
     Zend\Barcode\BarcodeObject,
-    Zend\Barcode;
+    Zend\Barcode,
+    Zend\Barcode\Renderer\Exception\OutOfRangeException,
+    Zend\Barcode\Renderer\Exception\UnexpectedValueException,
+    Zend\Barcode\Renderer\Exception\RuntimeException,
+    Zend\Barcode\Renderer\Exception\InvalidArgumentException;
 
 /**
  * Class for rendering the barcode
@@ -39,7 +43,7 @@ use Zend\Barcode\Renderer,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRenderer implements Renderer
+abstract class AbstractRenderer implements BarcodeRenderer
 {
     /**
      * Namespace of the renderer for autoloading
@@ -185,7 +189,7 @@ abstract class AbstractRenderer implements Renderer
     public function setTopOffset($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new Exception(
+            throw new OutOfRangeException(
                 'Vertical position must be greater than or equals 0'
             );
         }
@@ -211,7 +215,7 @@ abstract class AbstractRenderer implements Renderer
     public function setLeftOffset($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new Exception(
+            throw new OutOfRangeException(
                 'Horizontal position must be greater than or equals 0'
             );
         }
@@ -247,7 +251,7 @@ abstract class AbstractRenderer implements Renderer
     public function setHorizontalPosition($value)
     {
         if (!in_array($value, array('left' , 'center' , 'right'))) {
-            throw new Exception(
+            throw new UnexpectedValueException(
                 "Invalid barcode position provided must be 'left', 'center' or 'right'"
             );
         }
@@ -273,7 +277,7 @@ abstract class AbstractRenderer implements Renderer
     public function setVerticalPosition($value)
     {
         if (!in_array($value, array('top' , 'middle' , 'bottom'))) {
-            throw new Exception(
+            throw new UnexpectedValueException(
                 "Invalid barcode position provided must be 'top', 'middle' or 'bottom'"
             );
         }
@@ -299,7 +303,7 @@ abstract class AbstractRenderer implements Renderer
     public function setModuleSize($value)
     {
         if (!is_numeric($value) || floatval($value) <= 0) {
-            throw new Exception(
+            throw new OutOfRangeException(
                 'Float size must be greater than 0'
             );
         }
@@ -334,7 +338,7 @@ abstract class AbstractRenderer implements Renderer
     public function setBarcode($barcode)
     {
         if (!$barcode instanceof BarcodeObject) {
-            throw new Exception(
+            throw new InvalidArgumentException(
                 'Invalid barcode object provided to setBarcode()'
             );
         }
@@ -370,7 +374,7 @@ abstract class AbstractRenderer implements Renderer
     protected function _checkBarcodeObject()
     {
         if ($this->_barcode === null) {
-            throw new Exception(
+            throw new RuntimeException(
                 'No barcode object provided'
             );
         }
@@ -430,12 +434,8 @@ abstract class AbstractRenderer implements Renderer
             $this->checkParams();
             $this->_initRenderer();
             $this->_drawInstructionList();
-        } catch (\Zend\Exception $e) {
-            $renderable = false;
-            if ($e instanceof Barcode\Exception) {
-                $renderable = $e->isRenderable();
-            }
-            if ($this->_automaticRenderError && $renderable) {
+        } catch (\Zend\Barcode\Exception $e) {
+            if ($this->_automaticRenderError && !($e instanceof RendererCreationException)) {
                 $barcode = Barcode\Barcode::makeBarcode(
                     'error',
                     array('text' => $e->getMessage())
@@ -445,9 +445,6 @@ abstract class AbstractRenderer implements Renderer
                 $this->_initRenderer();
                 $this->_drawInstructionList();
             } else {
-                if ($e instanceof Barcode\Exception) {
-                    $e->setIsRenderable(false);
-                }
                 throw $e;
             }
         }
@@ -482,7 +479,7 @@ abstract class AbstractRenderer implements Renderer
                     );
                     break;
                 default:
-                    throw new Exception(
+                    throw new UnexpectedValueException(
                         'Unkown drawing command'
                     );
             }

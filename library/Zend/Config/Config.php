@@ -169,7 +169,7 @@ class Config implements \Countable, \Iterator
             }
             $this->_count = count($this->_data);
         } else {
-            throw new Exception('Zend_Config is read only');
+            throw new Exception\InvalidArgumentException('Zend_Config is read only');
         }
     }
 
@@ -236,7 +236,7 @@ class Config implements \Countable, \Iterator
             $this->_count = count($this->_data);
             $this->_skipNextIteration = true;
         } else {
-            throw new Exception('Zend_Config is read only');
+            throw new Exception\InvalidArgumentException('Zend_Config is read only');
         }
 
     }
@@ -427,7 +427,7 @@ class Config implements \Countable, \Iterator
         $extendedSectionCurrent = $extendedSection;
         while (array_key_exists($extendedSectionCurrent, $this->_extends)) {
             if ($this->_extends[$extendedSectionCurrent] == $extendingSection) {
-                throw new Exception('Illegal circular inheritance detected');
+                throw new Exception\RuntimeException('Illegal circular inheritance detected');
             }
             $extendedSectionCurrent = $this->_extends[$extendedSectionCurrent];
         }

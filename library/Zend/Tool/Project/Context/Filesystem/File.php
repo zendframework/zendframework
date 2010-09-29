@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Filesystem;
-use Zend\Tool\Project\Profile\Resource;
+use Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project

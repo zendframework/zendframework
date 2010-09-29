@@ -25,8 +25,7 @@
  */
 namespace Zend\Application\Resource;
 
-use Zend\Application\ResourceException,
-    Zend\Registry,
+use Zend\Registry,
     Zend\Translator\Translator;
 
 /**
@@ -74,7 +73,7 @@ class Translate extends AbstractResource
             $options = $this->getOptions();
 
             if (!isset($options['data'])) {
-                throw new ResourceException('No translation source data provided.');
+                throw new Exception\InitializationException('No translation source data provided.');
             }
 
             if (empty($options['adapter'])) {
@@ -115,7 +114,7 @@ class Translate extends AbstractResource
             if(Registry::isRegistered($key)) {
                 $translate = Registry::get($key);
                 if(!$translate instanceof Translator) {
-                    throw new ResourceException($key
+                    throw new Exception\InitializationException($key
                                    . ' already registered in registry but is '
                                    . 'no instance of Zend_Translate');
                 }

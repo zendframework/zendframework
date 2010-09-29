@@ -24,8 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Tool\Project;
-use Zend\Tool\Project\Context;
-use Zend\Tool\Project\Profile;
+use Zend\Tool\Project\Context,
+    Zend\Tool\Project\Profile\Profile;
 
 /**
  * @category   Zend
@@ -100,7 +100,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $projectDirectoryResource = $profile->current();
 
         $this->assertEquals(1, count($profile));
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($projectDirectoryResource));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($projectDirectoryResource));
         $this->assertEquals('Zend\Tool\Project\Context\System\ProjectDirectory', get_class($projectDirectoryResource->getContext()));
     }
 
@@ -116,7 +116,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
         $projectDirectoryResource = $profile->current();
 
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($projectDirectoryResource));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($projectDirectoryResource));
         $this->assertEquals('Zend\Tool\Project\Context\System\ProjectDirectory', get_class($projectDirectoryResource->getContext()));
     }
 
@@ -169,7 +169,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testProfileCanReturnStorageData()
     {
         $this->_standardProfileFromData->loadFromData();
-        $expectedValue = '<?xml version="1.0"?><projectProfile>  <projectDirectory>    <projectProfileFile filesystemName=".zfproject.xml"/>    <applicationDirectory classNamePrefix="Application_">      <apisDirectory enabled="false"/>      <configsDirectory>        <applicationConfigFile type="ini"/>      </configsDirectory>      <controllersDirectory>        <controllerFile controllerName="index"/>        <controllerFile controllerName="error"/>      </controllersDirectory>      <layoutsDirectory enabled="false"/>      <modelsDirectory/>      <modulesDirectory enabled="false"/>      <viewsDirectory>        <viewScriptsDirectory>          <viewControllerScriptsDirectory forControllerName="index">            <viewScriptFile scriptName="index"/>          </viewControllerScriptsDirectory>        </viewScriptsDirectory>        <viewHelpersDirectory/>        <viewFiltersDirectory enabled="false"/>      </viewsDirectory>      <bootstrapFile filesystemName="Bootstrap.php"/>    </applicationDirectory>    <dataDirectory enabled="false">      <cacheDirectory enabled="false"/>      <searchIndexesDirectory enabled="false"/>      <localesDirectory enabled="false"/>      <logsDirectory enabled="false"/>      <sessionsDirectory enabled="false"/>      <uploadsDirectory enabled="false"/>    </dataDirectory>    <libraryDirectory>      <zfStandardLibraryDirectory/>    </libraryDirectory>    <publicDirectory>      <publicStylesheetsDirectory enabled="false"/>      <publicScriptsDirectory enabled="false"/>      <publicImagesDirectory enabled="false"/>      <publicIndexFile filesystemName="index.php"/>      <htaccessFile filesystemName=".htaccess"/>    </publicDirectory>    <projectProvidersDirectory enabled="false"/>  </projectDirectory></projectProfile>';
+        $expectedValue = '<?xml version="1.0"?><projectProfile>  <projectDirectory>    <projectProfileFile filesystemName=".zfproject.xml"/>    <applicationDirectory classNamePrefix="Application\">      <apisDirectory enabled="false"/>      <configsDirectory>        <applicationConfigFile type="ini"/>      </configsDirectory>      <controllersDirectory>        <controllerFile controllerName="index"/>        <controllerFile controllerName="error"/>      </controllersDirectory>      <layoutsDirectory enabled="false"/>      <modelsDirectory/>      <modulesDirectory enabled="false"/>      <viewsDirectory>        <viewScriptsDirectory>          <viewControllerScriptsDirectory forControllerName="index">            <viewScriptFile scriptName="index"/>          </viewControllerScriptsDirectory>        </viewScriptsDirectory>        <viewHelpersDirectory/>        <viewFiltersDirectory enabled="false"/>      </viewsDirectory>      <bootstrapFile filesystemName="Bootstrap.php"/>    </applicationDirectory>    <dataDirectory enabled="false">      <cacheDirectory enabled="false"/>      <searchIndexesDirectory enabled="false"/>      <localesDirectory enabled="false"/>      <logsDirectory enabled="false"/>      <sessionsDirectory enabled="false"/>      <uploadsDirectory enabled="false"/>    </dataDirectory>    <libraryDirectory>      <zfStandardLibraryDirectory/>    </libraryDirectory>    <publicDirectory>      <publicStylesheetsDirectory enabled="false"/>      <publicScriptsDirectory enabled="false"/>      <publicImagesDirectory enabled="false"/>      <publicIndexFile filesystemName="index.php"/>      <htaccessFile filesystemName=".htaccess"/>    </publicDirectory>    <projectProvidersDirectory enabled="false"/>  </projectDirectory></projectProfile>';
         $this->assertEquals($expectedValue, str_replace(array("\r\n", "\n"), '', $this->_standardProfileFromData->storeToData()));
     }
 
@@ -191,12 +191,12 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
         $modelsDirectoryResource = $profile->search('modelsDirectory');
 
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($modelsDirectoryResource));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($modelsDirectoryResource));
         $this->assertEquals('Zend\Tool\Project\Context\Zf\ModelsDirectory', get_class($modelsDirectoryResource->getContext()));
 
         $publicIndexFile = $profile->search(array('publicDirectory', 'publicIndexFile'));
 
-        $this->assertEquals('Zend\Tool\Project\Profile\Resource', get_class($publicIndexFile));
+        $this->assertEquals('Zend\Tool\Project\Profile\Resource\Resource', get_class($publicIndexFile));
         $this->assertEquals('Zend\Tool\Project\Context\Zf\PublicIndexFile', get_class($publicIndexFile->getContext()));
 
     }
@@ -237,38 +237,38 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
     public function testProfileThrowsExceptionOnLoadFromData()
     {
-        $this->setExpectedException('Zend\Tool\Project\Exception');
         $profile = new Profile();
 
         // missing data from attributes should throw exception here
+        $this->setExpectedException('Zend\Tool\Project\Profile\Exception\RuntimeException');
         $profile->loadFromData();
     }
 
     public function testProfileThrowsExceptionOnLoadFromFile()
     {
-        $this->setExpectedException('Zend\Tool\Project\Exception');
         $profile = new Profile();
 
         // missing file path or project path
+        $this->setExpectedException('Zend\Tool\Project\Profile\Exception\RuntimeException');
         $profile->loadFromFile();
     }
 
     public function testProfileThrowsExceptionOnStoreToFile()
     {
-        $this->setExpectedException('Zend\Tool\Project\Exception');
         $profile = new Profile();
 
         // missing file path or project path
+        $this->setExpectedException('Zend\Tool\Project\Profile\Exception\RuntimeException');
         $profile->storeToFile();
     }
 
     public function testProfileThrowsExceptionOnLoadFromFileWithBadPathForProfileFile()
     {
-        $this->setExpectedException('Zend\Tool\Project\Exception');
         $profile = new Profile();
         $profile->setAttribute('projectProfileFile', '/path/should/not/exist');
 
         // missing file path or project path
+        $this->setExpectedException('Zend\Tool\Project\Profile\Exception\RuntimeException');
         $profile->loadFromFile();
     }
 

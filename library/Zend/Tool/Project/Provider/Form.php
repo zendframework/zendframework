@@ -41,7 +41,7 @@ class Form extends AbstractProvider
     public static function createResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to create.');
         }
 
         if (!($formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName))) {
@@ -50,7 +50,7 @@ class Form extends AbstractProvider
             } else {
                 $exceptionMessage = 'A form directory was not found.';
             }
-            throw new Exception($exceptionMessage);
+            throw new Exception\RuntimeException($exceptionMessage);
         }
 
         $newForm = $formsDirectory->createResource(
@@ -72,7 +72,7 @@ class Form extends AbstractProvider
     public static function hasResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to check for existence.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to check for existence.');
         }
 
         $formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName);
@@ -113,12 +113,12 @@ class Form extends AbstractProvider
         $testingEnabled = Test::isTestingEnabled($this->_loadedProfile);
 
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
-            throw new Exception('This project already has a form named ' . $name);
+            throw new Exception\RuntimeException('This project already has a form named ' . $name);
         }
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
-            throw new Exception('Form names should be camel cased.');
+            throw new Exception\RuntimeException('Form names should be camel cased.');
         }
         
         $name = ucwords($name);

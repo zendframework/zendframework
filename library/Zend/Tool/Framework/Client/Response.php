@@ -68,7 +68,7 @@ class Response
     public function setContentCallback($callback)
     {
         if (!is_callable($callback)) {
-            throw new \Zend\Tool\Framework\Client\Exception('The callback provided is not callable');
+            throw new Exception\InvalidArgumentException('The callback provided is not callable');
         }
         $this->_callback = $callback;
         return $this;

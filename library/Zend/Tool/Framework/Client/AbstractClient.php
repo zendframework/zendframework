@@ -204,7 +204,7 @@ abstract class AbstractClient implements RegistryEnabled
     public function promptInteractiveInput($inputRequest)
     {
         if (!$this->hasInteractiveInput()) {
-            throw new Exception('promptInteractive() cannot be called on a non-interactive client.');
+            throw new Exception\RuntimeException('promptInteractive() cannot be called on a non-interactive client.');
         }
 
         $inputHandler = new Interactive\InputHandler();
@@ -229,11 +229,11 @@ abstract class AbstractClient implements RegistryEnabled
             if ($this->_registry->getRequest()->isDispatchable()) {
 
                 if ($this->_registry->getRequest()->getActionName() == null) {
-                    throw new Exception('Client failed to setup the action name.');
+                    throw new Exception\RuntimeException('Client failed to setup the action name.');
                 }
 
                 if ($this->_registry->getRequest()->getProviderName() == null) {
-                    throw new Exception('Client failed to setup the provider name.');
+                    throw new Exception\RuntimeException('Client failed to setup the provider name.');
                 }
 
                 $this->_handleDispatch();
@@ -272,7 +272,7 @@ abstract class AbstractClient implements RegistryEnabled
 
         // ensure that we can pretend if this is a pretend request
         if ($request->isPretend() && (!$provider instanceof \Zend\Tool\Framework\Provider\Pretendable)) {
-            throw new Exception('Dispatcher error - provider does not support pretend');
+            throw new Exception\RuntimeException('Dispatcher error - provider does not support pretend');
         }
 
         // get the action name
@@ -280,7 +280,7 @@ abstract class AbstractClient implements RegistryEnabled
         $specialtyName = $this->_registry->getRequest()->getSpecialtyName();
 
         if (!$actionableMethod = $providerSignature->getActionableMethodByActionName($actionName, $specialtyName)) {
-            throw new Exception('Dispatcher error - actionable method not found');
+            throw new Exception\RuntimeException('Dispatcher error - actionable method not found');
         }
 
         // get the actual method and param information
@@ -298,11 +298,11 @@ abstract class AbstractClient implements RegistryEnabled
                     $promptSting = $this->getMissingParameterPromptString($provider, $actionableMethod['action'], $methodParameterValue['name']);
                     $parameterPromptValue = $this->promptInteractiveInput($promptSting)->getContent();
                     if ($parameterPromptValue == null) {
-                        throw new Exception('Value supplied for required parameter "' . $methodParameterValue['name'] . '" is empty');
+                        throw new Exception\RuntimeException('Value supplied for required parameter "' . $methodParameterValue['name'] . '" is empty');
                     }
                     $callParameters[] = $parameterPromptValue;
                 } else {
-                    throw new Exception('A required parameter "' . $methodParameterValue['name'] . '" was not supplied.');
+                    throw new Exception\RuntimeException('A required parameter "' . $methodParameterValue['name'] . '" was not supplied.');
                 }
             } else {
                 $callParameters[] = (array_key_exists($methodParameterName, $requestParameters)) ? $requestParameters[$methodParameterName] : $methodParameterValue['default'];
@@ -319,7 +319,7 @@ abstract class AbstractClient implements RegistryEnabled
         } elseif (method_exists($class, $methodName . 'Action')) {
             call_user_func_array(array($class, $methodName . 'Action'), $callParameters);
         } else {
-            throw new Exception('Not a supported method.');
+            throw new Exception\RuntimeException('Not a supported method.');
         }
     }
 

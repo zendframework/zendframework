@@ -23,6 +23,8 @@
  * @namespace
  */
 namespace Zend\Amf;
+use Zend\Amf\Exception;
+
 use Zend\Loader\PluginLoader,
     Zend\Authentication\AuthenticationService,
     Zend\Server\Reflection;
@@ -294,13 +296,13 @@ class Server implements \Zend\Server\Server
             if($this->_acl->hasRole(Constants::GUEST_ROLE)) {
                 $role = Constants::GUEST_ROLE;
             } else {
-                throw new Exception("Unauthenticated access not allowed");
+                throw new Exception\RuntimeException("Unauthenticated access not allowed");
             }
         }
         if($this->_acl->isAllowed($role, $class, $function)) {
             return true;
         } else {
-            throw new Exception("Access not allowed");
+            throw new Exception\RuntimeException("Access not allowed");
         }
     }
 
@@ -340,17 +342,17 @@ class Server implements \Zend\Server\Server
             if ($source) {
                 $className = str_replace(".", "\\", $source);
                 if(class_exists($className, false) && !isset($this->_classAllowed[$className])) {
-                    throw new Exception('Can not call "' . $className . '" - use setClass()');
+                    throw new Exception\RuntimeException('Can not call "' . $className . '" - use setClass()');
                 }
                 try {
                     $this->getLoader()->load($className);
                 } catch (\Exception $e) {
-                    throw new Exception('Class "' . $className . '" does not exist: '.$e->getMessage(), 0, $e);
+                    throw new Exception\RuntimeException('Class "' . $className . '" does not exist: '.$e->getMessage(), 0, $e);
                 }
                 // Add the new loaded class to the server.
                 $this->setClass($className, $source);
             } else {
-                throw new Exception('Method "' . $method . '" does not exist');
+                throw new Exception\BadMethodCallException('Method "' . $method . '" does not exist');
             }
         }
 
@@ -379,13 +381,13 @@ class Server implements \Zend\Server\Server
                 try {
                     $object = $info->getDeclaringClass()->newInstance();
                 } catch (\Exception $e) {
-                    throw new Exception('Error instantiating class ' . $class . ' to invoke method ' . $info->getName() . ': '.$e->getMessage(), 621, $e);
+                    throw new Exception\RuntimeException('Error instantiating class ' . $class . ' to invoke method ' . $info->getName() . ': '.$e->getMessage(), 621, $e);
                 }
                 $this->_checkAcl($object, $info->getName());
                 $return = $info->invokeArgs($object, $params);
             }
         } else {
-            throw new Exception('Method missing implementation ' . get_class($info));
+            throw new Exception\BadMethodCallException('Method missing implementation ' . get_class($info));
         }
 
         return $return;
@@ -412,10 +414,10 @@ class Server implements \Zend\Server\Server
                 $userid = $data[0];
                 $password = isset($data[1])?$data[1]:"";
                 if(empty($userid)) {
-                    throw new Exception('Login failed: username not supplied');
+                    throw new Exception\RuntimeException('Login failed: username not supplied');
                 }
                 if(!$this->_handleAuth($userid, $password)) {
-                    throw new Exception('Authentication failed');
+                    throw new Exception\RuntimeException('Authentication failed');
                 }
                 $return = new Value\Messaging\AcknowledgeMessage($message);
                 break;
@@ -426,7 +428,7 @@ class Server implements \Zend\Server\Server
                 $return = new Value\Messaging\AcknowledgeMessage($message);
                 break;
             default :
-                throw new Exception('CommandMessage::' . $message->operation . ' not implemented');
+                throw new Exception\RuntimeException('CommandMessage::' . $message->operation . ' not implemented');
                 break;
         }
         return $return;
@@ -486,7 +488,7 @@ class Server implements \Zend\Server\Server
             return true;
         } else {
             // authentication failed, good bye
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 "Authentication failed: " . join("\n",
                     $result->getMessages()), $result->getCode());
         }
@@ -648,7 +650,7 @@ class Server implements \Zend\Server\Server
             $response = $this->getResponse();
         } catch (\Exception $e) {
             // Handle any errors in the serialization and service  calls.
-            throw new Exception('Handle error: ' . $e->getMessage() . ' ' . $e->getLine(), 0, $e);
+            throw new Exception\RuntimeException('Handle error: ' . $e->getMessage() . ' ' . $e->getLine(), 0, $e);
         }
 
         // Return the Amf serialized output string
@@ -666,12 +668,12 @@ class Server implements \Zend\Server\Server
         if (is_string($request) && class_exists($request)) {
             $request = new $request();
             if (!$request instanceof Request\StreamRequest) {
-                throw new Exception('Invalid request class');
+                throw new Exception\InvalidArgumentException('Invalid request class');
             }
         } elseif (is_string($request) && !class_exists($request)) {
-            throw new Exception('Invalid request class');
+            throw new Exception\InvalidArgumentException('Invalid request class');
         } elseif (!$request instanceof Request\StreamRequest) {
-            throw new Exception('Invalid request object');
+            throw new Exception\InvalidArgumentException('Invalid request object');
         }
         $this->_request = $request;
         return $this;
@@ -702,12 +704,12 @@ class Server implements \Zend\Server\Server
         if (is_string($response) && class_exists($response)) {
             $response = new $response();
             if (!$response instanceof Response\StreamResponse) {
-                throw new Exception('Invalid response class');
+                throw new Exception\InvalidArgumentException('Invalid response class');
             }
         } elseif (is_string($response) && !class_exists($response)) {
-            throw new Exception('Invalid response class');
+            throw new Exception\InvalidArgumentException('Invalid response class');
         } elseif (!$response instanceof Response\StreamResponse) {
-            throw new Exception('Invalid response object');
+            throw new Exception\InvalidArgumentException('Invalid response object');
         }
         $this->_response = $response;
         return $this;
@@ -720,7 +722,7 @@ class Server implements \Zend\Server\Server
      */
     public function getResponse()
     {
-        if (null === ($response = $this->_response)) {
+        if (null === $this->_response) {
             $this->setResponse(new Response\HttpResponse());
         }
         return $this->_response;
@@ -744,9 +746,9 @@ class Server implements \Zend\Server\Server
     public function setClass($class, $namespace = '', $argv = null)
     {
         if (is_string($class) && !class_exists($class)){
-            throw new Exception('Invalid method or class');
+            throw new Exception\InvalidArgumentException('Invalid method or class');
         } elseif (!is_string($class) && !is_object($class)) {
-            throw new Exception('Invalid method or class; must be a classname or object');
+            throw new Exception\InvalidArgumentException('Invalid method or class; must be a classname or object');
         }
 
         $argv = null;
@@ -783,7 +785,7 @@ class Server implements \Zend\Server\Server
     public function addFunction($function, $namespace = '')
     {
         if (!is_string($function) && !is_array($function)) {
-            throw new Exception('Unable to attach function');
+            throw new Exception\InvalidArgumentException('Unable to attach function');
         }
 
         $argv = null;
@@ -794,7 +796,7 @@ class Server implements \Zend\Server\Server
         $function = (array) $function;
         foreach ($function as $func) {
             if (!is_string($func) || !function_exists($func)) {
-                throw new Exception('Unable to attach function');
+                throw new Exception\InvalidArgumentException('Unable to attach function');
             }
             $this->_methods[] = Reflection::reflectFunction($func, $argv, $namespace);
         }
@@ -843,7 +845,7 @@ class Server implements \Zend\Server\Server
                 $name = empty($ns) ? $name : $ns . '.' . $name;
 
                 if (isset($table[$name])) {
-                    throw new Exception('Duplicate method registered: ' . $name);
+                    throw new Exception\InvalidArgumentException('Duplicate method registered: ' . $name);
                 }
                 $table[$name] = $dispatchable;
                 continue;
@@ -856,7 +858,7 @@ class Server implements \Zend\Server\Server
                     $name = empty($ns) ? $name : $ns . '.' . $name;
 
                     if (isset($table[$name])) {
-                        throw new Exception('Duplicate method registered: ' . $name);
+                        throw new Exception\InvalidArgumentException('Duplicate method registered: ' . $name);
                     }
                     $table[$name] = $method;
                     continue;

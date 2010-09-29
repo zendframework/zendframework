@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Captcha;
-use Zend\View\View;
+use Zend\View\View,
+    Zend\Captcha\Image;
 
 /**
  * @category   Zend
@@ -311,5 +312,21 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $input = array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord());
         $this->assertTrue($this->element->isValid($input));
     }
+
+    public function testNoFontProvidedWillThrowException()
+    {
+        $this->setExpectedException('Zend\Captcha\Exception\NoFontProvidedException');
+        $captcha = new Image();
+        $captcha->generate();
+    }
+
+    public function testImageProvidedNotLoadableWillThrowException()
+    {
+        $this->setExpectedException('Zend\Captcha\Exception\ImageNotLoadableException');
+        $captcha = new Image(array('font' => __DIR__. '/../Pdf/_fonts/Vera.ttf',
+                                   'startImage' => 'file_not_found.png'));
+        $captcha->generate();
+    }
+
 }
 

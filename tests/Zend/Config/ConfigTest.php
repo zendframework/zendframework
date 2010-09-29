@@ -126,14 +126,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testNoModifications()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'is read only');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
         $config = new Config($this->_all);
         $config->hostname = 'test';
     }
 
     public function testNoNestedModifications()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'is read only');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
         $config = new Config($this->_all);
         $config->db->host = 'test';
     }
@@ -195,7 +195,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorWriteToReadOnly()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'read only');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'read only');
         $config = new Config($this->_all);
         $config->test = '32';
     }
@@ -268,7 +268,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(isset($config->hostname)); // top level
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'is read only');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
         unset($config->hostname);
     }
 
@@ -354,7 +354,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config->b = 'b';
 
         $config->setReadOnly();
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'is read only');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
         $config->c = 'c';
     }
 
@@ -394,14 +394,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config2->merge($config);
         try {
             $config2->key2 = 'no';
-        }  catch (\Zend\Config\Exception $e) {
+        }  catch (\Zend\Config\Exception\RuntimeException $e) {
             $this->fail('Unexpected exception at top level has been raised: ' . $e->getMessage());
         }
         $this->assertEquals('no', $config2->key2);
 
         try {
             $config2->key->nested = 'no';
-        }  catch (\Zend\Config\Exception $e) {
+        }  catch (\Zend\Config\Exception\RuntimeException $e) {
             $this->fail('Unexpected exception on nested object has been raised: ' . $e->getMessage());
         }
         $this->assertEquals('no', $config2->key->nested);

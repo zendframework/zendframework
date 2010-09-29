@@ -80,7 +80,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
      */
     public function testCtxNoResource()
     {
-        $this->setExpectedException('Zend\\Amf\\Exception', 'serialize resource type');
+        $this->setExpectedException('Zend\Amf\Exception\RuntimeException', 'serialize resource type');
         $this->_callService("returnCtx");
     }
 
@@ -114,7 +114,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
     public function testCtxNoParse()
     {
         Parser\TypeLoader::setResourceLoader(new TestAsset\TestResourceLoader("3"));
-        $this->setExpectedException('Zend\\Amf\\Exception', 'Could not call parse()');
+        $this->setExpectedException('Zend\Amf\Exception\RuntimeException', 'Could not call parse()');
         $resp = $this->_callService("returnCtx");
     }
 

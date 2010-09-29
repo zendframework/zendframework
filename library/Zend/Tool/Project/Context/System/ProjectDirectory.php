@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\System;
-use Zend\Tool\Project\Context\System;
+use Zend\Tool\Project\Context\System,
+    Zend\Tool\Project\Context\Exception;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -81,7 +82,7 @@ class ProjectDirectory
 
         // if not, exception.
         if ($projectDirectory == null) {
-            throw new \Zend\Tool\Project\Exception('projectDirectory cannot find the directory for this project.');
+            throw new Exception\RuntimeException('projectDirectory cannot find the directory for this project.');
         }
 
         $this->_baseDirectory = rtrim($projectDirectory, '\\/');

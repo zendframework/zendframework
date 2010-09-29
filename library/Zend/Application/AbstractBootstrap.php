@@ -282,7 +282,7 @@ abstract class AbstractBootstrap
         }
 
         if (!is_string($resource)) {
-            throw new BootstrapException('Invalid resource provided to ' . __METHOD__);
+            throw new Exception\InvalidArgumentException('Invalid resource provided to ' . __METHOD__);
         }
 
         $this->_pluginResources[$resource] = $options;
@@ -306,7 +306,7 @@ abstract class AbstractBootstrap
         }
 
         if (!is_string($resource)) {
-            throw new BootstrapException('Unknown resource type provided to ' . __METHOD__);
+            throw new Exception\InvalidArgumentException('Unknown resource type provided to ' . __METHOD__);
         }
 
         $resource = strtolower($resource);
@@ -341,7 +341,7 @@ abstract class AbstractBootstrap
             if (!$this->_pluginResources[$resource] instanceof Resource) {
                 $resourceName = $this->_loadPluginResource($resource, $this->_pluginResources[$resource]);
                 if (!$resourceName) {
-                    throw new BootstrapException(sprintf('Unable to resolve plugin "%s"; no corresponding plugin with that name', $resource));
+                    throw new Exception\RuntimeException(sprintf('Unable to resolve plugin "%s"; no corresponding plugin with that name', $resource));
                 }
                 $resource = $resourceName;
             }
@@ -449,11 +449,11 @@ abstract class AbstractBootstrap
             || ($application instanceof Bootstrapper)
         ) {
             if ($application === $this) {
-                throw new BootstrapException('Cannot set application to same object; creates recursion');
+                throw new Exception\InvalidArgumentException('Cannot set application to same object; creates recursion');
             }
             $this->_application = $application;
         } else {
-            throw new BootstrapException('Invalid application provided to bootstrap constructor (received "' . get_class($application) . '" instance)');
+            throw new Exception\InvalidArgumentException('Invalid application provided to bootstrap constructor (received "' . get_class($application) . '" instance)');
         }
         return $this;
     }
@@ -496,7 +496,7 @@ abstract class AbstractBootstrap
     public function setContainer($container)
     {
         if (!is_object($container)) {
-            throw new BootstrapException('Resource containers must be objects');
+            throw new Exception\InvalidArgumentException('Resource containers must be objects');
         }
         $this->_container = $container;
         return $this;
@@ -613,7 +613,7 @@ abstract class AbstractBootstrap
             return $this->bootstrap($resource);
         }
 
-        throw new BootstrapException('Invalid method "' . $method . '"');
+        throw new Exception\BadMethodCallException('Invalid method "' . $method . '"');
     }
 
     /**
@@ -643,7 +643,7 @@ abstract class AbstractBootstrap
                 $this->_executeResource($r);
             }
         } else {
-            throw new BootstrapException('Invalid argument passed to ' . __METHOD__);
+            throw new Exception\InvalidArgumentException('Invalid argument passed to ' . __METHOD__);
         }
     }
 
@@ -670,7 +670,7 @@ abstract class AbstractBootstrap
         }
 
         if (isset($this->_started[$resourceName]) && $this->_started[$resourceName]) {
-            throw new BootstrapException('Circular resource dependency detected');
+            throw new Exception\RuntimeException('Circular resource dependency detected');
         }
 
         $classResources = $this->getClassResources();
@@ -702,7 +702,7 @@ abstract class AbstractBootstrap
             return;
         }
 
-        throw new BootstrapException('Resource matching "' . $resource . '" not found');
+        throw new Exception\InvalidArgumentException('Resource matching "' . $resource . '" not found');
     }
 
     /**

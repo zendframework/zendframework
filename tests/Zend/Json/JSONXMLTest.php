@@ -17,14 +17,14 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Json;
-use Zend\Json;
+use Zend\Json,
+    Zend\Json\Exception\JsonException;
 
 error_reporting( E_ALL | E_STRICT ); // now required for each test suite
 
@@ -109,7 +109,7 @@ EOT;
         // fromXml function simply takes a String containing XML contents as input.
         try {
             $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-        } catch (\Exception $ex) {
+        } catch (JsonException $ex) {
             ;
         }
 
@@ -165,7 +165,7 @@ EOT;
         // fromXml function simply takes a String containing XML contents as input.
         try {
             $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-        } catch (\Exception $ex) {
+        } catch (JsonException $ex) {
             ;
         }
 
@@ -252,7 +252,7 @@ EOT;
         // fromXml function simply takes a String containing XML contents as input.
         try {
             $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-        } catch (\Exception $ex) {
+        } catch (JsonException $ex) {
             ;
         }
 
@@ -365,7 +365,7 @@ EOT;
         // fromXml function simply takes a String containing XML contents as input.
         try {
             $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-        } catch (\Exception $ex) {
+        } catch (JsonException $ex) {
             ;
         }
 
@@ -417,7 +417,7 @@ EOT;
         // fromXml function simply takes a String containing XML contents as input.
         try {
             $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-        } catch (\Exception $ex) {
+        } catch (JsonException $ex) {
             ;
         }
 
@@ -499,7 +499,7 @@ EOT;
         // fromXml function simply takes a String containing XML contents as input.
         try {
             $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-        } catch (\Exception $ex) {
+        } catch (JsonException $ex) {
             ;
         }
 
@@ -549,7 +549,7 @@ EOT;
         // fromXml function simply takes a String containing XML contents as input.
         try {
             $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-        } catch (Exception $ex) {
+        } catch (JsonException $ex) {
             ;
         }
 

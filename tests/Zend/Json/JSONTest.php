@@ -17,14 +17,14 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Json;
-use Zend\Json;
+use Zend\Json,
+    Zend\Json\Exception\JsonException;
 
 /**
  * @category   Zend
@@ -323,7 +323,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
             $json = '[a"],["a]';
             $test = Json\Decoder::decode($json);
             $this->fail("Should not be able to decode '$json'");
-        } catch (\Exception $e) {
+        } catch (JsonException $e) {
             // success
         }
 
@@ -331,7 +331,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
             $expected = 010;
             $test = Json\Decoder::decode('010');
             $this->fail('Octal values are not supported in JSON notation');
-        } catch (\Exception $e) {
+        } catch (JsonException $e) {
             // sucess
         }
     }
@@ -351,14 +351,14 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
         try {
             $encoded = Json\Encoder::encode($everything);
-        } catch (\Exception $e) {
+        } catch (JsonException $e) {
             $this->fail('Object cycling checks should check for recursion, not duplicate usage of an item');
         }
 
         try {
             $encoded = Json\Encoder::encode($everything, true);
             $this->fail('Object cycling not allowed when cycleCheck parameter is true');
-        } catch (\Exception $e) {
+        } catch (JsonException $e) {
             // success
         }
     }
@@ -733,7 +733,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodingInvalidJSONShouldRaiseAnException()
     {
-        $this->setExpectedException('Zend\Json\Exception');
+        $this->setExpectedException('Zend\Json\Exception\JsonException');
         Json\Json::decode(' some string ');
     }
 

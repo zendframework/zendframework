@@ -25,6 +25,8 @@
  */
 namespace Zend\Tool\Framework\Client;
 
+use Zend\Tool\Framework\Exception;
+
 /**
  * @uses       \Zend\Config\Config
  * @uses       \Zend\Config\Ini
@@ -78,7 +80,7 @@ class Config
     public function setConfigFilepath($configFilepath)
     {
         if (!file_exists($configFilepath)) {
-            throw new Exception('Provided path to config ' . $configFilepath . ' does not exist');
+            throw new Exception\InvalidArgumentException('Provided path to config ' . $configFilepath . ' does not exist');
         }
 
         $this->_configFilepath = $configFilepath;
@@ -107,7 +109,7 @@ class Config
                 $this->_config = new \Zend\Config\Config(include $configFilepath, true);
                 break;
             default:
-                throw new Exception('Unknown config file type '
+                throw new Exception\InvalidArgumentException('Unknown config file type '
                     . $suffix . ' at location ' . $configFilepath
                     );
         }

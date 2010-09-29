@@ -107,7 +107,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
         if ($projectDirectory == null) {
             $projectDirectory = getcwd();
         } elseif (realpath($projectDirectory) == false) {
-            throw new Exception('The $projectDirectory supplied does not exist.');
+            throw new Exception\InvalidArgumentException('The $projectDirectory supplied does not exist.');
         }
 
         $profile = new \Zend\Tool\Project\Profile();
@@ -139,7 +139,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
 
         if ($this->_loadedProfile == null) {
             if ($loadProfileFlag == self::NO_PROFILE_THROW_EXCEPTION) {
-                throw new Exception('A project profile was not found.');
+                throw new Exception\RuntimeException('A project profile was not found.');
             } elseif ($loadProfileFlag == self::NO_PROFILE_RETURN_FALSE) {
                 return false;
             }
@@ -157,7 +157,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
     {
         $profile = $this->_loadProfile();
         if ($profile === false) {
-            throw new Exception('A project profile was not found in the current working directory.');
+            throw new Exception\RuntimeException('A project profile was not found in the current working directory.');
         }
         return $profile;
     }

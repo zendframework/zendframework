@@ -88,7 +88,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testRunShouldRaiseExceptionIfNoControllerDirectoryRegisteredWithFrontController()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\RuntimeException');
         $this->bootstrap->bootstrap();
         $this->bootstrap->run();
     }

@@ -172,7 +172,7 @@ class DbTable implements AuthenticationAdapter
         if(null === $this->_zendDb) {
             $this->_zendDb = AbstractTable::getDefaultAdapter();
             if (null === $this->_zendDb) {
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     'Null was provided for the adapter but there is no default'
                     . ' adatper registered with Zend\Db\Table to utilize.'
                     );
@@ -412,7 +412,7 @@ class DbTable implements AuthenticationAdapter
         }
 
         if (null !== $exception) {
-            throw new RuntimeException($exception);
+            throw new Exception\RuntimeException($exception);
         }
 
         $this->_authenticateResultInfo = array(
@@ -479,7 +479,7 @@ class DbTable implements AuthenticationAdapter
                 unset($origDbFetchMode);
             }
         } catch (\Exception $e) {
-            throw new RuntimeException('The supplied parameters to Zend\Authentication\Adapter\DbTable failed to '
+            throw new Exception\RuntimeException('The supplied parameters to Zend\Authentication\Adapter\DbTable failed to '
                                                 . 'produce a valid sql statement, please check table and column names '
                                                 . 'for validity.', 0, $e);
         }

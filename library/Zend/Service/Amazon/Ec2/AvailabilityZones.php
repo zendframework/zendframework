@@ -35,11 +35,7 @@ namespace Zend\Service\Amazon\Ec2;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-<<<<<<< HEAD:library/Zend/Service/Amazon/Ec2/Availabilityzones.php
-class Zend_Service_Amazon_Ec2_Availabilityzones extends Zend_Service_Amazon_Ec2_AbstractService
-=======
 class AvailabilityZones extends AbstractEc2
->>>>>>> merges/farazdagi:library/Zend/Service/Amazon/Ec2/AvailabilityZones.php
 {
     /**
      * Describes availability zones that are currently available to the account

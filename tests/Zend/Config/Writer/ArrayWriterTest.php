@@ -50,21 +50,21 @@ class ArrayWriterTest extends \PHPUnit_Framework_TestCase
     public function testNoFilenameSet()
     {
         $writer = new ArrayWriter(array('config' => new Config(array())));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No filename was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No filename was set');
         $writer->write();
     }
 
     public function testNoConfigSet()
     {
         $writer = new ArrayWriter(array('filename' => $this->_tempName));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No config was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No config was set');
         $writer->write();
     }
 
     public function testFileNotWritable()
     {
         $writer = new ArrayWriter(array('config' => new Config(array()), 'filename' => '/../../../'));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Could not write to file');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Could not write to file');
         $writer->write();
     }
 

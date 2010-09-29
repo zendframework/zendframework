@@ -111,7 +111,7 @@ class Repository implements \Countable
      * @param \Zend\Tool\Project\Context $context
      * @return \Zend\Tool\Project\Context\Repository
      */
-    public function addContext(Context $context)
+    public function addContext(Context\Context $context)
     {
         $isSystem       = ($context instanceof System);
         $isTopLevel     = ($context instanceof System\TopLevelRestrictable);
@@ -122,7 +122,7 @@ class Repository implements \Countable
         $normalName = $this->_normalizeName($context->getName());
 
         if (isset($this->_shortContextNames[$normalName]) && ($this->_contexts[$this->_shortContextNames[$normalName]]['isOverwritable'] === false) ) {
-            throw new Exception('Context ' . $context->getName() . ' is not overwriteable.');
+            throw new Exception\InvalidArgumentException('Context ' . $context->getName() . ' is not overwriteable.');
         }
 
         $this->_shortContextNames[$normalName] = $index;
@@ -140,7 +140,7 @@ class Repository implements \Countable
     public function getContext($name)
     {
         if (!$this->hasContext($name)) {
-            throw new Exception('Context by name ' . $name . ' does not exist in the registry.');
+            throw new Exception\InvalidArgumentException('Context by name ' . $name . ' does not exist in the registry.');
         }
 
         $name = $this->_normalizeName($name);

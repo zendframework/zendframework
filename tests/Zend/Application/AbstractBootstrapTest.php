@@ -107,7 +107,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorShouldRaiseExceptionForInvalidApplicationArgument()
     {
-        $this->setExpectedException('Zend\\Application\\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $bootstrap = new TestAsset\ZfAppBootstrap(new \stdClass);
     }
 
@@ -216,7 +216,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterPluginResourceShouldThrowExceptionForInvalidResourceType()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource(array());
     }
@@ -260,7 +260,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testAttemptingToUnregisterPluginResourcesUsingInvalidResourceTypeShouldThrowException()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->registerPluginResource('view');
         $bootstrap->unregisterPluginResource(array());
@@ -372,14 +372,14 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidResourceArgumentToBootstrapShouldThrowException()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap(new \stdClass);
     }
 
     public function testPassingUnknownResourceToBootstrapShouldThrowException()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->bootstrap('bazbat');
     }
@@ -393,14 +393,14 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 
     public function testCallShouldThrowExceptionForInvalidMethodCall()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\BadMethodCallException');
         $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
         $bootstrap->initFoo();
     }
 
     public function testDependencyTrackingShouldDetectCircularDependencies()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\RuntimeException');
         $bootstrap = new TestAsset\BootstrapBaseCircularDependency($this->application);
         $bootstrap->bootstrap();
     }
@@ -653,7 +653,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingSameBootstrapAsApplicationShouldNotCauseRecursion()
     {
-        $this->setExpectedException('Zend\Application\BootstrapException');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $bootstrap = new Application\Bootstrap($this->application);
         $bootstrap->setApplication($bootstrap);
     }

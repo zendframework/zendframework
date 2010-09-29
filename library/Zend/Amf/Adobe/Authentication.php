@@ -108,7 +108,7 @@ Roles file format:
         if (empty($this->_username) 
             || empty($this->_password)
         ) {
-            throw new Authentication\Adapter\Exception('Username/password should be set');
+            throw new Authentication\Adapter\Exception\InvalidArgumentException('Username/password should be set');
         }
 
         if (!isset($this->_users[$this->_username])) {

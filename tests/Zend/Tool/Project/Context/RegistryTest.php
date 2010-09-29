@@ -69,13 +69,13 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testRegistryThrowsExceptionOnUnallowedContextOverwrite()
     {
-        $this->setExpectedException('Zend\Tool\Project\Context\Exception');
+        $this->setExpectedException('Zend\Tool\Project\Context\Exception\InvalidArgumentException');
         Context\Repository::getInstance()->addContextClass('Zend\Tool\Project\Context\System\ProjectDirectory');
     }
 
     public function testRegistryThrowsExceptionOnUnknownContextRequest()
     {
-        $this->setExpectedException('Zend\Tool\Project\Context\Exception');
+        $this->setExpectedException('Zend\Tool\Project\Context\Exception\InvalidArgumentException');
         Context\Repository::getInstance()->getContext('somethingUnknown');
     }
 

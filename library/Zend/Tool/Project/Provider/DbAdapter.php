@@ -90,7 +90,7 @@ class DbAdapter
         $dsnVars = array();
         
         if (strpos($dsn, '=') === false) {
-            throw new Exception('At least one name value pair is expected, typcially '
+            throw new Exception\RuntimeException('At least one name value pair is expected, typcially '
                 . 'in the format of "adapter=Mysqli&username=uname&password=mypass&dbname=mydb"' 
                 );
         }

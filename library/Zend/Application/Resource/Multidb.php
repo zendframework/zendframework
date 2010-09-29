@@ -144,7 +144,7 @@ class Multidb extends AbstractResource
             return $this->_dbs[$db];
         }
         
-        throw new ResourceException(
+        throw new Exception\InitializationException(
             'A DB adapter was tried to retrieve, but was not configured'
         );
     }

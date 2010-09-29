@@ -177,7 +177,7 @@ class Digest implements AuthenticationAdapter
     /**
      * Defined by Zend_Auth_Adapter_Interface
      *
-     * @throws Zend\Authentication\Adapter\RuntimeException
+     * @throws Zend\Authentication\Adapter\Exception\RuntimeException
      * @return Zend\Authentication\Result
      */
     public function authenticate()
@@ -185,12 +185,12 @@ class Digest implements AuthenticationAdapter
         $optionsRequired = array('filename', 'realm', 'username', 'password');
         foreach ($optionsRequired as $optionRequired) {
             if (null === $this->{"_$optionRequired"}) {
-                throw new RuntimeException("Option '$optionRequired' must be set before authentication");
+                throw new Exception\RuntimeException("Option '$optionRequired' must be set before authentication");
             }
         }
 
         if (false === ($fileHandle = @fopen($this->_filename, 'r'))) {
-            throw new UnexpectedValueException("Cannot open '$this->_filename' for reading");
+            throw new Exception\UnexpectedValueException("Cannot open '$this->_filename' for reading");
         }
 
         $id       = "$this->_username:$this->_realm";

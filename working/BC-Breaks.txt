@@ -88,7 +88,7 @@ Zend_Filter:
    * Class loading always uses namespaces now
 
 Zend_Validate:
- * "Validate" broken into "ValidatorChain" and "StaticValidator"
+ * "Validate" broken into "AbstractValidator", "ValidatorChain" and "StaticValidator"
  * "Zend_Validate" prefix now becomes "Zend\Validator" namespace
  * "ValidatorInterface" moved to "Zend\Validator\Validator"
 

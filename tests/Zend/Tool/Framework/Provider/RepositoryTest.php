@@ -94,7 +94,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddProviderThrowsExceptionOnDuplicateName()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception\InvalidArgumentException');
         $this->_repository->addProvider(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
         $this->_repository->addProvider(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
     }

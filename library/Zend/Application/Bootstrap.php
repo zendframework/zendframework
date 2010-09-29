@@ -98,7 +98,7 @@ class Bootstrap
         $front   = $this->getResource('frontcontroller');
         $default = $front->getDefaultModule();
         if (null === $front->getControllerDirectory($default)) {
-            throw new BootstrapException(
+            throw new Exception\RuntimeException(
                 'No default controller directory registered with front controller'
             );
         }

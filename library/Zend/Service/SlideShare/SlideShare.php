@@ -36,12 +36,12 @@ use Zend\Http\Client;
  * @uses       Zend_Cache
  * @uses       Zend_Http_Client
  * @uses       Zend_Http_Client
- * @uses       Zend_Service_SlideShare_Exception
- * @uses       Zend_Service_SlideShare_SlideShow
+ * @uses       Zend\Service\SlideShare\Exception
+ * @uses       Zend\Service\SlideShare\SlideShow
  * @category   Zend
  * @package    Zend_Service
  * @subpackage SlideShare
- * @throws     Zend_Service_SlideShare_Exception
+ * @throws     Zend\Service\SlideShare\Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

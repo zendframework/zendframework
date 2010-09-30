@@ -79,7 +79,9 @@ class JSON
         if (function_exists('json_decode') && self::$useBuiltinEncoderDecoder !== true) {
             $decode = json_decode($encodedValue, $objectDecodeType);
 
-            switch ($jsonLastErr) {
+            switch (json_last_error()) {
+                case JSON_ERROR_NONE:
+                    break;
                 case JSON_ERROR_DEPTH:
                     throw new RuntimeException('Decoding failed: Maximum stack depth exceeded');
                 case JSON_ERROR_CTRL_CHAR:

@@ -23,7 +23,8 @@
  */
 namespace Zend\Json;
 
-use Zend\Json\Exception\JsonException;
+use Zend\Json\Exception\JsonException,
+    Zend\Json\Exception\InvalidArgumentException;
 
 /**
  * Encode PHP constructs to JSON
@@ -410,7 +411,7 @@ class Encoder
     {
         $cls = new \ReflectionClass($className);
         if (! $cls->isInstantiable()) {
-            throw new JsonException("$className must be instantiable");
+            throw new InvalidArgumentException("'{$className}' must be instantiable");
         }
 
         return "Class.create('$package$className',{"

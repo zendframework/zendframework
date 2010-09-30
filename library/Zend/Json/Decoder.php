@@ -39,19 +39,20 @@ use Zend\Json\Exception\JsonException,
  */
 class Decoder
 {
+
     /**
      * Parse tokens used to decode the JSON object. These are not
      * for public consumption, they are just used internally to the
      * class.
      */
-    const EOF         = 0;
-    const DATUM        = 1;
+    const EOF       = 0;
+    const DATUM     = 1;
     const LBRACE    = 2;
-    const LBRACKET    = 3;
-    const RBRACE     = 4;
-    const RBRACKET    = 5;
-    const COMMA       = 6;
-    const COLON        = 7;
+    const LBRACKET  = 3;
+    const RBRACE    = 4;
+    const RBRACKET  = 5;
+    const COMMA     = 6;
+    const COLON     = 7;
 
     /**
      * Use to maintain a "pointer" to the source being decoded
@@ -101,22 +102,20 @@ class Decoder
      */
     protected function __construct($source, $decodeType)
     {
-        if (!is_string($source)) {
-            throw new InvalidArgumentException('Can only decode JSON encoded strings');
-        }
-
         // Set defaults
         $this->_source       = self::decodeUnicodeString($source);
         $this->_sourceLength = strlen($this->_source);
         $this->_token        = self::EOF;
         $this->_offset       = 0;
 
-        // Normalize and set $decodeType
-        if (!in_array($decodeType, array(Json::TYPE_ARRAY, Json::TYPE_OBJECT)))
-        {
-            $decodeType = Json::TYPE_ARRAY;
+        switch ($decodeType) {
+            case Json::TYPE_ARRAY:
+            case Json::TYPE_OBJECT:
+                $this->_decodeType = $decodeType;
+                break;
+            default:
+                throw new InvalidArgumentException("Unknown decode type '{$decodeType}', please use one of the constants Json::TYPE_*");
         }
-        $this->_decodeType   = $decodeType;
 
         // Set pointer at first token
         $this->_getNextToken();
@@ -146,18 +145,12 @@ class Decoder
      * either or {@link Zend_Json::TYPE_ARRAY} or
      * {@link Zend_Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
      * @return mixed
-     * @throws Zend\Json\Exception\JsonException if the source string is null
      */
-    public static function decode($source = null, $objectDecodeType = Json::TYPE_ARRAY)
+    public static function decode($source, $objectDecodeType = Json::TYPE_ARRAY)
     {
-        if (null === $source) {
-            throw new JsonException('Must specify JSON encoded source for decoding');
-        }
-
         $decoder = new self($source, $objectDecodeType);
         return $decoder->_decodeValue();
     }
-
 
     /**
      * Recursive driving rountine for supported toplevel tops
@@ -279,7 +272,7 @@ class Decoder
         }
 
         $this->_getNextToken();
-        return($result);
+        return $result;
     }
 
 
@@ -454,7 +447,7 @@ class Decoder
             throw new JsonException('Illegal Token');
         }
 
-        return($this->_token);
+        return $this->_token;
     }
 
     /**

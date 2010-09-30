@@ -727,7 +727,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodingInvalidJSONShouldRaiseAnException()
     {
-        $this->setExpectedException('Zend\Json\Exception\JsonException');
+        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
         Json\Json::decode(' some string ');
     }
 

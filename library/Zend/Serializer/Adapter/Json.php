@@ -85,11 +85,6 @@ class Json extends AbstractAdapter
             throw new SerializerException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         }
 
-        // json_decode returns null for invalid JSON
-        if ($ret === null && $json !== 'null') {
-            throw new SerializerException('Invalid json data');
-        }
-
         return $ret;
     }
 }

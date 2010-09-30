@@ -127,7 +127,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
 
     public function testQueryingWithoutRegisteringDocumentShouldThrowException()
     {
-        $this->setExpectedException('\\Zend\\Dom\\Exception', 'no document');
+        $this->setExpectedException('\Zend\Dom\Exception\RuntimeException', 'no document');
         $this->query->execute('.foo');
     }
 

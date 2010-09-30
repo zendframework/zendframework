@@ -79,23 +79,15 @@ class JSON
         if (function_exists('json_decode') && self::$useBuiltinEncoderDecoder !== true) {
             $decode = json_decode($encodedValue, $objectDecodeType);
 
-            // php < 5.3
-            if (!function_exists('json_last_error')) {
-                if ($decode === $encodedValue) {
+            switch ($jsonLastErr) {
+                case JSON_ERROR_DEPTH:
+                    throw new RuntimeException('Decoding failed: Maximum stack depth exceeded');
+                case JSON_ERROR_CTRL_CHAR:
+                    throw new RuntimeException('Decoding failed: Unexpected control character found');
+                case JSON_ERROR_SYNTAX:
+                    throw new RuntimeException('Decoding failed: Syntax error');
+                default:
                     throw new RuntimeException('Decoding failed');
-                }
-            // php >= 5.3
-            } elseif (($jsonLastErr = json_last_error()) != JSON_ERROR_NONE) {
-                switch ($jsonLastErr) {
-                    case JSON_ERROR_DEPTH:
-                        throw new RuntimeException('Decoding failed: Maximum stack depth exceeded');
-                    case JSON_ERROR_CTRL_CHAR:
-                        throw new RuntimeException('Decoding failed: Unexpected control character found');
-                    case JSON_ERROR_SYNTAX:
-                        throw new RuntimeException('Decoding failed: Syntax error');
-                    default:
-                        throw new RuntimeException('Decoding failed');
-                }
             }
 
             return $decode;

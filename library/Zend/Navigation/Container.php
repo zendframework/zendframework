@@ -118,14 +118,14 @@ abstract class Container implements \RecursiveIterator, \Countable
     public function addPage($page)
     {
         if ($page === $this) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'A page cannot have itself as a parent');
         }
 
         if (is_array($page) || $page instanceof Config\Config) {
             $page = AbstractPage::factory($page);
         } elseif (!$page instanceof AbstractPage) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $page must be an instance of ' .
                     'Zend_Navigation_Page or Zend_Config, or an array');
         }
@@ -163,7 +163,7 @@ abstract class Container implements \RecursiveIterator, \Countable
         }
 
         if (!is_array($pages)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $pages must be an array or an ' .
                     'instance of Zend_Config');
         }
@@ -362,7 +362,7 @@ abstract class Container implements \RecursiveIterator, \Countable
             return $this->{$match[1]}($match[2], $arguments[0]);
         }
 
-        throw new InvalidArgumentException(sprintf(
+        throw new Exception\BadMethodCallException(sprintf(
                 'Bad method call: Unknown method %s::%s',
                 get_class($this),
                 $method));
@@ -405,7 +405,7 @@ abstract class Container implements \RecursiveIterator, \Countable
         if (isset($this->_pages[$hash])) {
             return $this->_pages[$hash];
         } else {
-            throw new InvalidArgumentException(
+            throw new Exception\OutOfBoundsException(
                     'Corruption detected in container; ' .
                     'invalid key found in internal iterator');
         }

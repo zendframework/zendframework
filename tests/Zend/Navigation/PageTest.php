@@ -162,8 +162,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setLabel($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-            } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+            } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $label', $e->getMessage());
             }
         }
@@ -186,8 +186,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setId($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-            } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+            } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $id', $e->getMessage());
             }
         }
@@ -220,8 +220,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setClass($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-            } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+            } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $class', $e->getMessage());
             }
         }
@@ -243,8 +243,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setTitle($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-            } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+            } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $title', $e->getMessage());
             }
         }
@@ -266,8 +266,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setTarget($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-            } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+            } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $target', $e->getMessage());
             }
         }
@@ -386,8 +386,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setOrder($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-            } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+            } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $order', $e->getMessage());
             }
         }
@@ -451,8 +451,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
         try {
             $page->setResource(0);
             $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-        } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $resource', $e->getMessage());
         }
     }
@@ -467,8 +467,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
         try {
             $page->setResource(new \stdClass());
             $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-        } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $resource', $e->getMessage());
         }
     }
@@ -722,7 +722,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         try {
             unset($page->uri);
             $this->fail('Should not be possible to unset native properties');
-        } catch (Navigation\InvalidArgumentException $e) {
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Unsetting native property', $e->getMessage());
         }
     }
@@ -956,8 +956,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
         try {
             $page->setRel('alternate');
             $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-        } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $relations', $e->getMessage());
         }
     }
@@ -1014,8 +1014,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
         try {
             $page->setRev('alternate');
             $this->fail('An invalid value was set, but a ' .
-                        'Zend\Navigation\InvalidArgumentException was not thrown');
-        } catch (Navigation\InvalidArgumentException $e) {
+                        'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $relations', $e->getMessage());
         }
     }

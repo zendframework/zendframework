@@ -229,9 +229,9 @@ class MvcTest extends \PHPUnit_Framework_TestCase
                 try {
                     $page->$setter($invalid);
                     $msg = "'$invalid' is invalid for $setter(), but no ";
-                    $msg .= 'Zend\Navigation\InvalidArgumentException was thrown';
+                    $msg .= 'Zend\Navigation\Exception\InvalidArgumentException was thrown';
                     $this->fail($msg);
-                } catch (Navigation\InvalidArgumentException $e) {
+                } catch (Navigation\Exception\InvalidArgumentException $e) {
 
                 }
             }
@@ -263,9 +263,9 @@ class MvcTest extends \PHPUnit_Framework_TestCase
                 try {
                     $page->$setter($invalid);
                     $msg = "'$invalid' is invalid for $setter(), but no ";
-                    $msg .= 'Zend\Navigation\InvalidArgumentException was thrown';
+                    $msg .= 'Zend\Navigation\Exception\InvalidArgumentException was thrown';
                     $this->fail($msg);
-                } catch (Navigation\InvalidArgumentException $e) {
+                } catch (Navigation\Exception\InvalidArgumentException $e) {
 
                 }
             }

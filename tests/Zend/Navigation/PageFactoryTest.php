@@ -129,7 +129,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
                 'type' => 'ZendTest\Navigation\TestAsset\InvalidPage',
                 'label' => 'My Invalid Page'
             ));
-        } catch(Navigation\InvalidArgumentException $e) {
+        } catch(Navigation\Exception\InvalidArgumentException $e) {
             return;
         }
 
@@ -145,7 +145,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
         try {
             $page = AbstractPage::factory($pageConfig);
-        } catch(Navigation\InvalidArgumentException $e) {
+        } catch(Navigation\Exception\InvalidArgumentException $e) {
             return;
         }
 
@@ -159,7 +159,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
             $page = AbstractPage::factory(array(
                 'label' => 'My Invalid Page'
             ));
-        } catch(Navigation\InvalidArgumentException $e) {
+        } catch(Navigation\Exception\InvalidArgumentException $e) {
             return;
         }
 

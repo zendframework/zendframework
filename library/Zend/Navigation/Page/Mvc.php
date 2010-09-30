@@ -26,7 +26,7 @@
 namespace Zend\Navigation\Page;
 
 use Zend\Navigation\AbstractPage,
-    Zend\Navigation\InvalidArgumentException;
+    Zend\Navigation\Exception\InvalidArgumentException;
 
 /**
  * Represents a page that is defined using module, controller, action, route

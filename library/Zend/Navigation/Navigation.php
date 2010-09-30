@@ -47,7 +47,7 @@ class Navigation extends Container
         if (is_array($pages) || $pages instanceof \Zend\Config\Config) {
             $this->addPages($pages);
         } elseif (null !== $pages) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $pages must be an array, an ' .
                     'instance of Zend_Config, or null');
         }

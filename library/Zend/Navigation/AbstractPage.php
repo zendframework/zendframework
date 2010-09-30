@@ -184,7 +184,7 @@ abstract class AbstractPage extends Container
         }
 
         if (!is_array($options)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: $options must be an array or Zend\Config\Config');
         }
 
@@ -201,12 +201,12 @@ abstract class AbstractPage extends Container
                 }
 
                 if (!class_exists($type, true)) {
-                    throw new InvalidArgumentException('Cannot find class ' . $type);
+                    throw new Exception\InvalidArgumentException('Cannot find class ' . $type);
                 }
 
                 $page = new $type($options);
                 if (!$page instanceof self) {
-                    throw new InvalidArgumentException(sprintf(
+                    throw new Exception\InvalidArgumentException(sprintf(
                             'Invalid argument: Detected type "%s", which ' .
                             'is not an instance of Zend_Navigation_Page',
                             $type));
@@ -224,7 +224,7 @@ abstract class AbstractPage extends Container
         } elseif ($hasUri) {
             return new Page\Uri($options);
         } else {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: Unable to determine class to instantiate');
         }
     }
@@ -302,7 +302,7 @@ abstract class AbstractPage extends Container
     public function setLabel($label)
     {
         if (null !== $label && !is_string($label)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $label must be a string or null');
         }
 
@@ -331,7 +331,7 @@ abstract class AbstractPage extends Container
     public function setId($id = null)
     {
         if (null !== $id && !is_string($id) && !is_numeric($id)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $id must be a string, number or null');
         }
 
@@ -361,7 +361,7 @@ abstract class AbstractPage extends Container
     public function setClass($class = null)
     {
         if (null !== $class && !is_string($class)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $class must be a string or null');
         }
 
@@ -390,7 +390,7 @@ abstract class AbstractPage extends Container
     public function setTitle($title = null)
     {
         if (null !== $title && !is_string($title)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $title must be a non-empty string');
         }
 
@@ -419,7 +419,7 @@ abstract class AbstractPage extends Container
     public function setTarget($target = null)
     {
         if (null !== $target && !is_string($target)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $target must be a string or null');
         }
 
@@ -459,7 +459,7 @@ abstract class AbstractPage extends Container
             }
 
             if (!is_array($relations)) {
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                         'Invalid argument: $relations must be an ' .
                         'array or an instance of Zend\Config');
             }
@@ -521,7 +521,7 @@ abstract class AbstractPage extends Container
             }
 
             if (!is_array($relations)) {
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                         'Invalid argument: $relations must be an ' .
                         'array or an instance of Zend\Config');
             }
@@ -580,7 +580,7 @@ abstract class AbstractPage extends Container
         }
 
         if (null !== $order && !is_int($order)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $order must be an integer or null, ' .
                     'or a string that casts to an integer');
         }
@@ -624,7 +624,7 @@ abstract class AbstractPage extends Container
             $resource instanceof \Zend\Acl\Resource) {
             $this->_resource = $resource;
         } else {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $resource must be null, a string, ' .
                     ' or an instance of Zend_Acl_Resource_Interface');
         }
@@ -773,7 +773,7 @@ abstract class AbstractPage extends Container
     public function setParent(Container $parent = null)
     {
         if ($parent === $this) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'A page cannot have itself as a parent');
         }
 
@@ -822,7 +822,7 @@ abstract class AbstractPage extends Container
     public function set($property, $value)
     {
         if (!is_string($property) || empty($property)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $property must be a non-empty string');
         }
 
@@ -852,7 +852,7 @@ abstract class AbstractPage extends Container
     public function get($property)
     {
         if (!is_string($property) || empty($property)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $property must be a non-empty string');
         }
 
@@ -933,7 +933,7 @@ abstract class AbstractPage extends Container
     {
         $method = 'set' . self::_normalizePropertyName($name);
         if (method_exists($this, $method)) {
-            throw new InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                     'Unsetting native property "%s" is not allowed',
                     $name));
         }

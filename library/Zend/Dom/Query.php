@@ -190,7 +190,7 @@ class Query
     public function queryXpath($xpathQuery, $query = null)
     {
         if (null === ($document = $this->getDocument())) {
-            throw new Exception('Cannot query; no document registered');
+            throw new Exception\RuntimeException('Cannot query; no document registered');
         }
 
         libxml_use_internal_errors(true);
@@ -214,7 +214,7 @@ class Query
         libxml_use_internal_errors(false);
 
         if (!$success) {
-            throw new Exception(sprintf('Error parsing document (type == %s)', $type));
+            throw new Exception\RuntimeException(sprintf('Error parsing document (type == %s)', $type));
         }
 
         $nodeList   = $this->_getNodeList($domDoc, $xpathQuery);

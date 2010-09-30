@@ -33,7 +33,7 @@ use Zend\Json;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_JSON
  */
-class JSONTest extends \PHPUnit_Framework_TestCase
+class JsonTest extends \PHPUnit_Framework_TestCase
 {
     private $_originalUseBuiltinEncoderDecoderValue;
 

@@ -23,15 +23,12 @@
  */
 namespace Zend\Json\Server;
 
-use Zend\Json\Exception\JsonException;
-
 /**
- * @uses       Zend\Json\Exception\JsonException
+ * @uses       Zend\Json\Exception
+ * @category   Zend
  * @package    Zend_Json
- * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends JsonException
-{
-}
+interface Exception extends \Zend\Json\Exception
+{}

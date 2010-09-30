@@ -23,15 +23,16 @@
  */
 namespace Zend\Json\Server\Smd;
 use Zend\Json\Server\Smd,
-    Zend\Json\Server;
+    Zend\Json\Server,
+    Zend\Json\Server\Exception\InvalidArgumentException;
 
 /**
  * Create Service Mapping Description for a method
  *
  * @todo       Revised method regex to allow NS; however, should SMD be revised to strip PHP NS instead when attaching functions?
- * @uses       \Zend\Json\Json
- * @uses       \Zend\Json\Server\Exception
- * @uses       \Zend\Json\Server\Smd\Smd
+ * @uses       Zend\Json\Json
+ * @uses       Zend\Json\Server\Exception\InvalidArgumentException
+ * @uses       Zend\Json\Server\Smd\Smd
  * @package    Zend_Json
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -124,7 +125,7 @@ class Service
      *
      * @param  string|array $spec
      * @return void
-     * @throws Zend\Json\Server\Exception if no name provided
+     * @throws Zend\Json\Server\Exception\InvalidArgumentException if no name provided
      */
     public function __construct($spec)
     {
@@ -135,7 +136,7 @@ class Service
         }
 
         if (null == $this->getName()) {
-            throw new Server\Exception('SMD service description requires a name; none provided');
+            throw new InvalidArgumentException('SMD service description requires a name; none provided');
         }
     }
 
@@ -165,13 +166,13 @@ class Service
      *
      * @param  string $name
      * @return Zend\Json\Server\Smd\Service
-     * @throws Zend\Json\Server\Exception
+     * @throws Zend\Json\Server\Exception\InvalidArgumentException
      */
     public function setName($name)
     {
         $name = (string) $name;
         if (!preg_match($this->_nameRegex, $name)) {
-            throw new Server\Exception(sprintf('Invalid name "%s" provided for service; must follow PHP method naming conventions', $name));
+            throw new InvalidArgumentException("Invalid name '{$name} provided for service; must follow PHP method naming conventions");
         }
         $this->_name = $name;
         return $this;
@@ -198,7 +199,7 @@ class Service
     public function setTransport($transport)
     {
         if (!in_array($transport, $this->_transportTypes)) {
-            throw new Server\Exception(sprintf('Invalid transport "%s"; please select one of (%s)', $transport, implode(', ', $this->_transportTypes)));
+            throw new InvalidArgumentException("Invalid transport '{$transport}'; please select one of (" . implode(', ', $this->_transportTypes) . ')');
         }
 
         $this->_transport = $transport;
@@ -246,7 +247,7 @@ class Service
     public function setEnvelope($envelopeType)
     {
         if (!in_array($envelopeType, $this->_envelopeTypes)) {
-            throw new Server\Exception(sprintf('Invalid envelope type "%s"; please specify one of (%s)', $envelopeType, implode(', ', $this->_envelopeTypes)));
+            throw new InvalidArgumentException("Invalid envelope type '{$envelopeType}'; please specify one of (" . implode(', ', $this->_envelopeTypes) . ')');
         }
 
         $this->_envelope = $envelopeType;
@@ -280,7 +281,7 @@ class Service
                 $type[$key] = $this->_validateParamType($paramType);
             }
         } else {
-            throw new Server\Exception('Invalid param type provided');
+            throw new InvalidArgumentException('Invalid param type provided');
         }
 
         $paramOptions = array(
@@ -383,7 +384,7 @@ class Service
                 $type[$key] = $this->_validateParamType($returnType, true);
             }
         } else {
-            throw new Server\Exception('Invalid param type provided ("' . gettype($type) .'")');
+            throw new InvalidArgumentException("Invalid param type provided ('" . gettype($type) . "')");
         }
         $this->_return = $type;
         return $this;
@@ -451,7 +452,7 @@ class Service
     protected function _validateParamType($type, $isReturn = false)
     {
         if (!is_string($type)) {
-            throw new Server\Exception('Invalid param type provided ("' . $type .'")');
+            throw new InvalidArgumentException("Invalid param type provided ('{$type}')");
         }
 
         if (!array_key_exists($type, $this->_paramMap)) {
@@ -460,7 +461,7 @@ class Service
 
         $paramType = $this->_paramMap[$type];
         if (!$isReturn && ('null' == $paramType)) {
-            throw new Server\Exception('Invalid param type provided ("' . $type . '")');
+            throw new InvalidArgumentException("Invalid param type provided ('{$type}')");
         }
 
         return $paramType;

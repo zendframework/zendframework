@@ -22,17 +22,17 @@
 /**
  * @namespace
  */
-namespace Zend\Dom;
+namespace Zend\Dom\Exception;
 
 /**
  * Zend_Dom Exceptions
  *
- * @uses       \Zend\Exception
+ * @uses       \Zend\Dom\Exception
  * @category   Zend
  * @package    Zend_Dom
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException extends \RuntimeException implements \Zend\Dom\Exception
 {
 }

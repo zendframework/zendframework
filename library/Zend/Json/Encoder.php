@@ -23,14 +23,15 @@
  */
 namespace Zend\Json;
 
-use Zend\Json\Exception\JsonException,
+use Zend\Json\Exception\RecursionException,
     Zend\Json\Exception\InvalidArgumentException;
 
 /**
  * Encode PHP constructs to JSON
  *
  * @uses       ReflectionClass
- * @uses       Zend\Json\Exception\JsonException
+ * @uses       Zend\Json\Exception\RecursionException
+ * @uses       Zend\Json\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -119,7 +120,8 @@ class Encoder
      *
      * @param $value object
      * @return string
-     * @throws Zend\Json\Exception\JsonException If recursive checks are enabled and the object has been serialized previously
+     * @throws Zend\Json\Exception\RecursionException If recursive checks are enabled
+     *                                                and the object has been serialized previously
      */
     protected function _encodeObject(&$value)
     {
@@ -132,7 +134,7 @@ class Encoder
                     return '"* RECURSION (' . str_replace('\\', '\\\\', get_class($value)) . ') *"';
 
                 } else {
-                    throw new JsonException(
+                    throw new RecursionException(
                         'Cycles not supported in JSON encoding, cycle introduced by '
                         . 'class "' . get_class($value) . '"'
                     );
@@ -405,7 +407,7 @@ class Encoder
      * @param $package string Optional package name appended to JavaScript
      * proxy class name
      * @return string The class2 (JavaScript) encoding of the class
-     * @throws Zend\Json\Exception\JsonException
+     * @throws Zend\Json\Exception\InvalidArgumentException
      */
     public static function encodeClass($className, $package = '')
     {

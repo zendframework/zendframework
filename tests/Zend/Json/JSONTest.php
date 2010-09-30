@@ -23,8 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Json;
-use Zend\Json,
-    Zend\Json\Exception\JsonException;
+use Zend\Json;
 
 /**
  * @category   Zend
@@ -303,37 +302,38 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests for ZF-504
-     *
-     * Three confirmed issues reported:
-     * - encoder improperly encoding empty arrays as structs
-     * - decoder happily decoding clearly borked JSON
-     * - decoder decoding octal values improperly (shouldn't decode them at all, as JSON does not support them)
+     * @group ZF-504
      */
-    public function testZf504()
+    public function testEncodeEmptyArrayAsStruct()
     {
-        $test = array();
-        $this->assertSame('[]', Json\Encoder::encode($test));
+        $this->assertSame('[]', Json\Encoder::encode(array()));
+    }
 
-        try {
-            $json = '[a"],["a],[][]';
-            $test = Json\Decoder::decode($json);
-            $this->fail("Should not be able to decode '$json'");
+    /**
+     * @group ZF-504
+     */
+    public function testDecodeBorkedJsonShouldThrowException1()
+    {
+        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
+        Json\Decoder::decode('[a"],["a],[][]');
+    }
 
-            $json = '[a"],["a]';
-            $test = Json\Decoder::decode($json);
-            $this->fail("Should not be able to decode '$json'");
-        } catch (JsonException $e) {
-            // success
-        }
+    /**
+     * @group ZF-504
+     */
+    public function testDecodeBorkedJsonShouldThrowException2()
+    {
+        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
+        Json\Decoder::decode('[a"],["a]');
+    }
 
-        try {
-            $expected = 010;
-            $test = Json\Decoder::decode('010');
-            $this->fail('Octal values are not supported in JSON notation');
-        } catch (JsonException $e) {
-            // sucess
-        }
+    /**
+     * @group ZF-504
+     */
+    public function testOctalValuesAreNotSupportedInJsonNotation()
+    {
+        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
+        Json\Decoder::decode('010');
     }
 
     /**
@@ -349,18 +349,12 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $everything['allItems'] = array($item1, $item2) ;
         $everything['currentItem'] = $item1 ;
 
-        try {
-            $encoded = Json\Encoder::encode($everything);
-        } catch (JsonException $e) {
-            $this->fail('Object cycling checks should check for recursion, not duplicate usage of an item');
-        }
+        // should not fail
+        $encoded = Json\Encoder::encode($everything);
 
-        try {
-            $encoded = Json\Encoder::encode($everything, true);
-            $this->fail('Object cycling not allowed when cycleCheck parameter is true');
-        } catch (JsonException $e) {
-            // success
-        }
+        // should fail
+        $this->setExpectedException('Zend\Json\Exception\RecursionException');
+        Json\Encoder::encode($everything, true);
     }
 
     /**

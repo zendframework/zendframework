@@ -23,7 +23,7 @@
  */
 namespace Zend\Json;
 
-use Zend\Json\Exception\JsonException,
+use Zend\Json\Exception\RuntimeException,
     Zend\Json\Exception\InvalidArgumentException;
 
 /**
@@ -31,7 +31,8 @@ use Zend\Json\Exception\JsonException,
  *
  * @uses       stdClass
  * @uses       Zend\Json\Json
- * @uses       Zend\Json\Exception\JsonException
+ * @uses       Zend\Json\Exception\RuntimeException
+ * @uses       Zend\Json\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -190,7 +191,7 @@ class Decoder
      * array.
      *
      * @return array|StdClass
-     * @throws Zend\Json\Exception\JsonException
+     * @throws Zend\Json\Exception\RuntimeException
      */
     protected function _decodeObject()
     {
@@ -199,14 +200,14 @@ class Decoder
 
         while ($tok && $tok != self::RBRACE) {
             if ($tok != self::DATUM || ! is_string($this->_tokenValue)) {
-                throw new JsonException('Missing key in object encoding: ' . $this->_source);
+                throw new RuntimeException('Missing key in object encoding: ' . $this->_source);
             }
 
             $key = $this->_tokenValue;
             $tok = $this->_getNextToken();
 
             if ($tok != self::COLON) {
-                throw new JsonException('Missing ":" in object encoding: ' . $this->_source);
+                throw new RuntimeException('Missing ":" in object encoding: ' . $this->_source);
             }
 
             $tok = $this->_getNextToken();
@@ -218,7 +219,7 @@ class Decoder
             }
 
             if ($tok != self::COMMA) {
-                throw new JsonException('Missing "," in object encoding: ' . $this->_source);
+                throw new RuntimeException('Missing "," in object encoding: ' . $this->_source);
             }
 
             $tok = $this->_getNextToken();
@@ -247,7 +248,7 @@ class Decoder
      *    [element, element2,...,elementN]
      *
      * @return array
-     * @throws Zend\Json\Exception\JsonException
+     * @throws Zend\Json\Exception\RuntimeException
      */
     protected function _decodeArray()
     {
@@ -265,7 +266,7 @@ class Decoder
             }
 
             if ($tok != self::COMMA) {
-                throw new JsonException('Missing "," in array encoding: ' . $this->_source);
+                throw new RuntimeException('Missing "," in array encoding: ' . $this->_source);
             }
 
             $tok = $this->_getNextToken();
@@ -298,7 +299,7 @@ class Decoder
      * Retrieves the next token from the source stream
      *
      * @return int Token constant value specified in class definition
-     * @throws Zend\Json\Exception\JsonException
+     * @throws Zend\Json\Exception\RuntimeException
      */
     protected function _getNextToken()
     {
@@ -379,8 +380,7 @@ class Decoder
                                 $result .= '\'';
                                 break;
                             default:
-                                throw new JsonException("Illegal escape "
-                                    .  "sequence '" . $chr . "'");
+                                throw new RuntimeException("Illegal escape sequence '{$chr}'");
                         }
                     } elseif($chr == '"') {
                         break;
@@ -430,21 +430,21 @@ class Decoder
 
                 if (is_numeric($datum)) {
                     if (preg_match('/^0\d+$/', $datum)) {
-                        throw new JsonException("Octal notation not supported by JSON (value: $datum)");
+                        throw new RuntimeException("Octal notation not supported by JSON (value: {$datum})");
                     } else {
                         $val  = intval($datum);
                         $fVal = floatval($datum);
                         $this->_tokenValue = ($val == $fVal ? $val : $fVal);
                     }
                 } else {
-                    throw new JsonException("Illegal number format: $datum");
+                    throw new RuntimeException("Illegal number format: {$datum}");
                 }
 
                 $this->_token = self::DATUM;
                 $this->_offset = $start + strlen($datum);
             }
         } else {
-            throw new JsonException('Illegal Token');
+            throw new RuntimeException('Illegal Token');
         }
 
         return $this->_token;

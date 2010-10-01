@@ -49,7 +49,7 @@ class Signals implements SignalSlot
      * 
      * @param  string $signal 
      * @param  mixed $argv All arguments besides the signal are passed as arguments to the handler
-     * @return void
+     * @return ResponseCollection All handler return values
      */
     public function emit($signal, $argv = null)
     {
@@ -72,7 +72,7 @@ class Signals implements SignalSlot
      * @param  Callable $callback 
      * @param  string $signal 
      * @param  mixed $argv All arguments besides the signal are passed as arguments to the handler
-     * @return mixed
+     * @return ResponseCollection All handler return values
      * @throws InvalidCallbackException if invalid callback provided
      */
     public function emitUntil($callback, $signal, $argv = null)
@@ -85,18 +85,18 @@ class Signals implements SignalSlot
             return;
         }
 
-        $return = null;
+        $responses = new ResponseCollection;
         if (!is_array($argv)) {
             $argv   = func_get_args();
             $argv   = array_slice($argv, 2);
         }
         foreach ($this->_signals[$signal] as $slot) {
-            $return = $slot->call($argv);
-            if (call_user_func($callback, $return)) {
+            $responses->push($slot->call($argv));
+            if (call_user_func($callback, $responses->last())) {
                 break;
             }
         }
-        return $return;
+        return $responses;
     }
 
     /**

@@ -257,7 +257,7 @@ class Client
         if (is_string($uri)) {
             try {
                 $uri = new Uri\Url($uri);
-            } catch (URI\Exception $e) {
+            } catch (Uri\Exception $e) {
                 throw new Client\Exception('Passed parameter is not a valid HTTP URI.');
             } 
         }

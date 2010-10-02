@@ -12,24 +12,27 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Exception
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Http;
+namespace Zend\Http\Exception;
 
 /**
- * @category   Zend
- * @package    Zend_Http
+ *
+ * @category  Zend
+ * @package   Zend_Application
+ * @uses      \Zend\Http\Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException
+    extends \RuntimeException
+    implements \Zend\Http\Exception
 {}

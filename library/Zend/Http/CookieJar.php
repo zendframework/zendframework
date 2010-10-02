@@ -132,7 +132,7 @@ class CookieJar implements \Countable, \IteratorAggregate
             $this->cookies[$domain][$path][$cookie->getName()] = $cookie;
             $this->_rawCookies[] = $cookie;
         } else {
-            throw new Exception('Supplient argument is not a valid cookie string or object');
+            throw new Exception\InvalidArgumentException('Supplient argument is not a valid cookie string or object');
         }
     }
 
@@ -146,7 +146,7 @@ class CookieJar implements \Countable, \IteratorAggregate
     public function addCookiesFromResponse($response, $ref_uri)
     {
         if (! $response instanceof Response) {
-            throw new Exception('$response is expected to be a Response object, ' .
+            throw new Exception\InvalidArgumentException('$response is expected to be a Response object, ' .
                 gettype($response) . ' was passed');
         }
 
@@ -189,12 +189,12 @@ class CookieJar implements \Countable, \IteratorAggregate
     {
         if (is_string($uri)) $uri = new Uri\Url($uri);
         if (! $uri instanceof Uri\Url) {
-            throw new Exception("Invalid URI string or object passed");
+            throw new Exception\InvalidArgumentException("Invalid URI string or object passed");
         }
 
         $host = $uri->getHost();
         if (empty($host)) {
-            throw new Exception('Invalid URI specified; does not contain a host');
+            throw new Exception\InvalidArgumentException('Invalid URI specified; does not contain a host');
         }
 
         // First, reduce the array of cookies to only those matching domain and path
@@ -229,12 +229,12 @@ class CookieJar implements \Countable, \IteratorAggregate
         }
 
         if (! $uri instanceof Uri\Url) {
-            throw new Exception('Invalid URI specified');
+            throw new Exception\InvalidArgumentException('Invalid URI specified');
         }
 
         $host = $uri->getHost();
         if (empty($host)) {
-            throw new Exception('Invalid URI specified; host missing');
+            throw new Exception\InvalidArgumentException('Invalid URI specified; host missing');
         }
 
         // Get correct cookie path
@@ -256,7 +256,7 @@ class CookieJar implements \Countable, \IteratorAggregate
                     break;
 
                 default:
-                    throw new Exception("Invalid value passed for \$ret_as: {$ret_as}");
+                    throw new Exception\InvalidArgumentException("Invalid value passed for \$ret_as: {$ret_as}");
                     break;
             }
         } else {

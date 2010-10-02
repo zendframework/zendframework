@@ -242,14 +242,14 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         try {
             $jar->getCookie('foo.com', 'foo');
             $this->fail('Expected getCookie to throw exception, invalid URI string passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
 
         try {
             $jar->getCookie(new \Zend\Uri\Url('mailto:nobody@dev.null.com'), 'foo');
             $this->fail('Expected getCookie to throw exception, invalid URI object passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
     }
@@ -404,14 +404,14 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         try {
             $cookies = $jar->getMatchingCookies('invalid.com', true, Http\CookieJar::COOKIE_STRING_ARRAY);
             $this->fail('Expected getMatchingCookies to throw exception, invalid URI string passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
 
         try {
             $cookies = $jar->getMatchingCookies(new \stdClass(), true, Http\CookieJar::COOKIE_STRING_ARRAY);
             $this->fail('Expected getCookie to throw exception, invalid URI object passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
     }

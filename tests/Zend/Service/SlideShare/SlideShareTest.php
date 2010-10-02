@@ -161,6 +161,22 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testUploadSlideShowInvalidFileException()
+    {
+        $this->setExpectedException('\Zend\Service\SlideShare\Exception\InvalidArgumentException', 
+                    'Specified Slideshow for upload not found or unreadable');
+
+        $ss = $this->_getSSObject();
+        $show = new SlideShare\SlideShow();
+        $show->setFilename('invalid_filename');
+        $show->setDescription('Unit Test');
+        $show->setTitle('title');
+        $show->setTags(array('unittest'));
+        $show->setID(0);
+
+        $result = $ss->uploadSlideShow($show, false);
+    }
+
     public function testUploadSlideShow()
     {
         $ss = $this->_getSSObject();

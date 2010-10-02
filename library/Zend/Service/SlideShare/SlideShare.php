@@ -301,6 +301,7 @@ class SlideShare
      *
      * @param Zend_Service_SlideShare_SlideShow $ss The slide show object representing the slide show to upload
      * @param boolean $make_src_public Determines if the the slide show's source file is public or not upon upload
+     * @throws \Zend\Service\SlideShare\Exception
      * @return Zend_Service_SlideShare_SlideShow The passed Slide show object, with the new assigned ID provided
      */
     public function uploadSlideShow(SlideShow $ss, $make_src_public = true)
@@ -321,7 +322,7 @@ class SlideShare
         $filename = $ss->getFilename();
 
         if(!file_exists($filename) || !is_readable($filename)) {
-            throw new Exception("Specified Slideshow for upload not found or unreadable");
+            throw new Exception\InvalidArgumentException("Specified Slideshow for upload not found or unreadable");
         }
 
         if(!empty($description)) {
@@ -349,7 +350,7 @@ class SlideShare
         try {
             $response = $client->request('POST');
         } catch(Client\Exception $e) {
-            throw new Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
+            throw new Client\Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
         }
 
         $sxe = simplexml_load_string($response->getBody());
@@ -357,11 +358,11 @@ class SlideShare
         if($sxe->getName() == "SlideShareServiceError") {
             $message = (string)$sxe->Message[0];
             list($code, $error_str) = explode(':', $message);
-            throw new Exception(trim($error_str), $code);
+            throw new Exception\RuntimeException(trim($error_str), $code);
         }
 
         if(!$sxe->getName() == "SlideShowUploaded") {
-            throw new Exception("Unknown XML Respons Received");
+            throw new Exception\RuntimeException("Unknown XML Respons Received");
         }
 
         $ss->setId((int)(string)$sxe->SlideShowID);

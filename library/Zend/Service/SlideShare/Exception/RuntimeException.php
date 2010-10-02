@@ -35,5 +35,5 @@ namespace Zend\Service\SlideShare\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements \Zend\Service\Slideshare\Exception
+    implements \Zend\Service\SlideShare\Exception
 {}

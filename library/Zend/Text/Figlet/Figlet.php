@@ -28,8 +28,7 @@ use Zend\Config;
 /**
  * Zend_Text_Figlet is a PHP implementation of FIGlet
  *
- * @uses      InvalidArgumentException
- * @uses      \Zend\Text\Figlet\Exception
+ * @uses      \Zend\Text\Figlet\Exception\InvalidArgumentException
  * @category  Zend
  * @package   Zend_Text_Figlet
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -428,14 +427,14 @@ class Figlet
      *
      * @param  string $text     Text to convert to a figlet text
      * @param  string $encoding Encoding of the input string
-     * @throws InvalidArgumentException When $text is not a string
-     * @throws \Zend\Text\Figlet\Exception    When $text it not properly encoded
+     * @throws \Zend\Text\Figlet\Exception\InvalidArgumentException When $text is not a string
+     * @throws \Zend\Text\Figlet\Exception\UnexpectedValueException When $text it not properly encoded
      * @return string
      */
     public function render($text, $encoding = 'UTF-8')
     {
         if (!is_string($text)) {
-            throw new \InvalidArgumentException('$text must be a string');
+            throw new Exception\InvalidArgumentException('$text must be a string');
         }
 
         if ($encoding !== 'UTF-8') {
@@ -455,7 +454,7 @@ class Figlet
         $textLength     = @iconv_strlen($text, 'UTF-8');
 
         if ($textLength === false) {
-            throw new Exception('$text is not encoded with ' . $encoding);
+            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);
         }
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {
@@ -966,22 +965,23 @@ class Figlet
      * Load the specified font
      *
      * @param  string $fontFile Font file to load
-     * @throws \Zend\Text\Figlet\Exception When font file was not found
-     * @throws \Zend\Text\Figlet\Exception When GZIP library is required but not found
-     * @throws \Zend\Text\Figlet\Exception When font file is not readable
+     * @throws \Zend\Text\Figlet\Exception\RuntimeException When font file was not found
+     * @throws \Zend\Text\Figlet\Exception\RuntimeException When GZIP library is required but not found
+     * @throws \Zend\Text\Figlet\Exception\RuntimeException When font file is not readable
+     * @throws \Zend\Text\Figlet\Exception\UnexpectedValueException When font file is not a FIGlet 2 font file
      * @return void
      */
     protected function _loadFont($fontFile)
     {
         // Check if the font file exists
         if (!file_exists($fontFile)) {
-            throw new Exception($fontFile . ': Font file not found');
+            throw new Exception\RuntimeException($fontFile . ': Font file not found');
         }
 
         // Check if gzip support is required
         if (substr($fontFile, -3) === '.gz') {
             if (!function_exists('gzcompress')) {
-                throw new Exception('GZIP library is required for '
+                throw new Exception\RuntimeException('GZIP library is required for '
                                                      . 'gzip compressed font files');
             }
 
@@ -994,7 +994,7 @@ class Figlet
         // Try to open the file
         $fp = fopen($fontFile, 'rb');
         if ($fp === false) {
-            throw new Exception($fontFile . ': Could not open file');
+            throw new Exception\RuntimeException($fontFile . ': Could not open file');
         }
 
         // If the file is not compressed, lock the stream
@@ -1017,7 +1017,7 @@ class Figlet
                            $this->_fontSmush);
 
         if ($magic !== self::FONTFILE_MAGIC_NUMBER || $numsRead < 5) {
-            throw new Exception($fontFile . ': Not a FIGlet 2 font file');
+            throw new Exception\UnexpectedValueException($fontFile . ': Not a FIGlet 2 font file');
         }
 
         // Set default right to left

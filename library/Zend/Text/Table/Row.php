@@ -117,13 +117,13 @@ class Row
     /**
      * Get the widths of all columns, which were rendered last
      *
-     * @throws \Zend\Text\Table\Exception\BadMethodCallException When no columns were rendered yet
+     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no columns were rendered yet
      * @return integer
      */
     public function getColumnWidths()
     {
         if ($this->_columnWidths === null) {
-            throw new Exception\BadMethodCallException('No columns were rendered yet');
+            throw new Exception\UnexpectedValueException('render() must be called before columnWidths can be populated');
         }
 
         return $this->_columnWidths;

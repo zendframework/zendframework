@@ -128,7 +128,7 @@ class Table
      *
      * @param  array             $columnsWidths List of all column widths
      * @param  \Zend\Config\Config|array $options       Configuration options
-     * @throws \Zend\Text\Table\Exception\BadMethodCallException When no columns widths were set
+     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no columns widths were set
      */
     public function __construct($options = null)
     {
@@ -137,12 +137,6 @@ class Table
             $this->setOptions($options);
         } else if ($options instanceof Config\Config) {
             $this->setConfig($options);
-        }
-
-        // Check if column widths were set
-        // @todo When column widths were not set, assume auto-sizing
-        if ($this->_columnWidths === null) {
-            throw new Exception\BadMethodCallException('You must define the column widths');
         }
 
         // If no decorator was given, use default unicode decorator
@@ -368,14 +362,14 @@ class Table
     /**
      * Render the table
      *
-     * @throws \Zend\Text\Table\Exception\BadMethodCallException When no rows were added to the table
+     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no rows were added to the table
      * @return string
      */
     public function render()
     {
         // There should be at least one row
         if (count($this->_rows) === 0) {
-            throw new Exception\BadMethodCallException('No rows were added to the table yet');
+            throw new Exception\UnexpectedValueException('No rows were added to the table yet');
         }
 
         // Initiate the result variable

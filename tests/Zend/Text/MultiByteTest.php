@@ -26,19 +26,6 @@
 namespace ZendTest\Text;
 use Zend\Text;
 
-// Call Zend_Text_MultiByteTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Text_MultiByteTest::main");
-}
-
-/**
- * Test helper
- */
-
-/**
- * Zend_Text_MultiByte
- */
-
 /**
  * @category   Zend
  * @package    Zend_Text
@@ -49,16 +36,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class MultiByteTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Text_MultiByteTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Standard cut tests
@@ -83,7 +60,7 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
 
     public function testWordWrapCutMultiLineWithPreviousNewlines()
     {
-        $line = Zend_Text_MultiByte::wordWrap("Ä very\nlong wöööööööööööörd.", 8, "\n", false);
+        $line = Text\MultiByte::wordWrap("Ä very\nlong wöööööööööööörd.", 8, "\n", false);
         $this->assertEquals("Ä very\nlong\nwöööööööööööörd.", $line);
     }
 
@@ -92,7 +69,7 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
      */
     public function testWordWrapLongBreak()
     {
-        $line = Zend_Text_MultiByte::wordWrap("Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false);
+        $line = Text\MultiByte::wordWrap("Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false);
         $this->assertEquals("Ä very<br>long<br>wöö<br>öööööööö<br>öörd.", $line);
     }
 
@@ -254,9 +231,4 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
         $text = Text\MultiByte::strPad('äääöö', 5, 'ö', STR_PAD_RIGHT);
         $this->assertEquals('äääöö', $text);
     }
-}
-
-// Call Zend_Text_MultiByteTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Text_MultiByteTest::main") {
-    \Zend_Text_MultiByteTest::main();
 }

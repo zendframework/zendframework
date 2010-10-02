@@ -202,7 +202,7 @@ class SocketTest extends CommonHttpTests
 
         try {
             $this->client->request();
-            $this->fail("Expected a timeout Zend_Http_Client_Adapter_Exception");
+            $this->fail("Expected a timeout Zend\Http\Client\Adapter\Exception");
         } catch (Adapter\Exception $e) {
             $this->assertEquals(Adapter\Exception\TimeoutException::READ_TIMEOUT, $e->getCode());
         }

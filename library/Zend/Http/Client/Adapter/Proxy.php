@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client;
+use Zend\Http\Client,
+    Zend\Http\Client\Adapter\Exception as AdapterException;
 
 /**
  * HTTP Proxy-supporting Zend_Http_Client adapter class, based on the default
@@ -120,14 +121,14 @@ class Proxy extends Socket
 
         // Make sure we're properly connected
         if (! $this->socket) {
-            throw new Exception("Trying to write but we are not connected");
+            throw new AdapterException\RuntimeException("Trying to write but we are not connected");
         }
 
         $host = $this->config['proxy_host'];
         $port = $this->config['proxy_port'];
 
         if ($this->connected_to[0] != "tcp://$host" || $this->connected_to[1] != $port) {
-            throw new Exception("Trying to write but we are connected to the wrong proxy server");
+            throw new AdapterException\RuntimeException("Trying to write but we are connected to the wrong proxy server");
         }
 
         // Add Proxy-Authorization header
@@ -172,12 +173,12 @@ class Proxy extends Socket
 
         // Send the request
         if (! @fwrite($this->socket, $request)) {
-            throw new Exception("Error writing request to proxy server");
+            throw new AdapterException\RuntimeException("Error writing request to proxy server");
         }
 
         if (is_resource($body)) {
             if(stream_copy_to_stream($body, $this->socket) == 0) {
-                throw new _Exception('Error writing request to server');
+                throw new AdapterException\RuntimeException('Error writing request to server');
             }
         }
         
@@ -213,7 +214,7 @@ class Proxy extends Socket
 
         // Send the request
         if (! @fwrite($this->socket, $request)) {
-            throw new Exception("Error writing request to proxy server");
+            throw new AdapterException\RuntimeException("Error writing request to proxy server");
         }
 
         // Read response headers only
@@ -229,7 +230,7 @@ class Proxy extends Socket
 
         // Check that the response from the proxy is 200
         if (\Zend\Http\Response::extractCode($response) != 200) {
-            throw new Exception("Unable to connect to HTTPS proxy. Server response: " . $response);
+            throw new AdapterException\RuntimeException("Unable to connect to HTTPS proxy. Server response: " . $response);
         }
 
         // If all is good, switch socket to secure mode. We have to fall back
@@ -248,7 +249,7 @@ class Proxy extends Socket
         }
 
         if (! $success) {
-                throw new Exception("Unable to connect to" .
+                throw new AdapterException\RuntimeException("Unable to connect to" .
                     " HTTPS server through proxy: could not negotiate secure connection.");
         }
     }

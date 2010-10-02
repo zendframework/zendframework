@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HTTPAdapter,
+use Zend\Http\Client\Adapter as HttpAdapter,
+    Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Response;
 
 /**
@@ -45,7 +46,7 @@ use Zend\Http\Client\Adapter as HTTPAdapter,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Test implements HTTPAdapter
+class Test implements HttpAdapter
 {
     /**
      * Parameters array
@@ -107,7 +108,7 @@ class Test implements HTTPAdapter
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            throw new Exception(
+            throw new AdapterException\InvalidArgumentException(
                 'Array or Zend_Config object expected, got ' . gettype($config)
             );
         }
@@ -131,7 +132,7 @@ class Test implements HTTPAdapter
     {
         if ($this->_nextRequestWillFail) {
             $this->_nextRequestWillFail = false;
-            throw new Exception('Request failed');
+            throw new AdapterException\RuntimeException('Request failed');
         }
     }
 
@@ -228,7 +229,7 @@ class Test implements HTTPAdapter
     public function setResponseIndex($index)
     {
         if ($index < 0 || $index >= count($this->responses)) {
-            throw new Exception(
+            throw new AdapterException\OutOfRangeException(
                 'Index out of range of response buffer size');
         }
         $this->responseIndex = $index;

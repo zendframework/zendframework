@@ -102,7 +102,7 @@ class Wddx extends AbstractAdapter
     {
         $ret = wddx_deserialize($wddx);
 
-        if ($ret === null) {
+        if ($ret === null && class_exists('SimpleXMLElement', false)) {
             // check if the returned NULL is valid
             // or based on an invalid wddx string
             try {
@@ -110,12 +110,10 @@ class Wddx extends AbstractAdapter
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null
                 }
-                $errMsg = 'Can\'t unserialize wddx string';
+                throw new RuntimeException('Invalid wddx string');
             } catch (\Exception $e) {
-                $errMsg = $e->getMessage();
+                throw new RuntimeException($e->getMessage(), 0, $e);
             }
-
-            throw new RuntimeException($errMsg);
         }
 
         return $ret;

@@ -350,7 +350,7 @@ class SlideShare
         try {
             $response = $client->request('POST');
         } catch(Client\Exception $e) {
-            throw new Client\Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
+            throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
         }
 
         $sxe = simplexml_load_string($response->getBody());
@@ -374,6 +374,7 @@ class SlideShare
      * Retrieves a slide show's information based on slide show ID
      *
      * @param int $ss_id The slide show ID
+     * @throws \Zend\Service\SlideShare\Exception
      * @return Zend_Service_SlideShare_SlideShow the Slideshow object
      */
     public function getSlideShow($ss_id)
@@ -398,7 +399,7 @@ class SlideShare
             try {
                 $response = $client->request('POST');
             } catch(Client\Exception $e) {
-                throw new Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
+                throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());
@@ -406,11 +407,11 @@ class SlideShare
             if($sxe->getName() == "SlideShareServiceError") {
                 $message = (string)$sxe->Message[0];
                 list($code, $error_str) = explode(':', $message);
-                throw new Exception(trim($error_str), $code);
+                throw new Exception\RuntimeException(trim($error_str), $code);
             }
 
             if(!$sxe->getName() == 'Slideshows') {
-                throw new Exception('Unknown XML Repsonse Received');
+                throw new Exception\RuntimeException('Unknown XML Repsonse Received');
             }
 
             $retval = $this->_slideShowNodeToObject(clone $sxe->Slideshow[0]);
@@ -478,6 +479,7 @@ class SlideShare
      * @param string $value The specific search query for the slide show type to look up
      * @param int $offset The offset of the list to start retrieving from
      * @param int $limit The maximum number of slide shows to retrieve
+     * @throws \Zend\Service\SlideShare\Exception
      * @return array An array of Zend_Service_SlideShare_SlideShow objects
      */
     protected function _getSlideShowsByType($key, $value, $offset = null, $limit = null)
@@ -499,7 +501,7 @@ class SlideShare
                 $queryUri = self::SERVICE_GET_SHOW_BY_TAG_URI;
                 break;
             default:
-                throw new Exception("Invalid SlideShare Query");
+                throw new Exception\RuntimeException("Invalid SlideShare Query");
         }
 
         $timestamp = time();
@@ -531,7 +533,7 @@ class SlideShare
             try {
                 $response = $client->request('POST');
             } catch(Client\Exception $e) {
-                throw new Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
+                throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());
@@ -539,11 +541,11 @@ class SlideShare
             if($sxe->getName() == "SlideShareServiceError") {
                 $message = (string)$sxe->Message[0];
                 list($code, $error_str) = explode(':', $message);
-                throw new Exception(trim($error_str), $code);
+                throw new Exception\RuntimeException(trim($error_str), $code);
             }
 
             if(!$sxe->getName() == $responseTag) {
-                throw new Exception('Unknown or Invalid XML Repsonse Received');
+                throw new Exception\RuntimeException('Unknown or Invalid XML Repsonse Received');
             }
 
             $retval = array();
@@ -565,6 +567,7 @@ class SlideShare
      * into a Zend_Service_SlideShare_SlideShow object
      *
      * @param SimpleXMLElement $node The input XML from the slideshare.net service
+     * @throws \Zend\Service\SlideShare\Exception
      * @return Zend_Service_SlideShare_SlideShow The resulting object
      */
     protected function _slideShowNodeToObject(\SimpleXMLElement $node)
@@ -598,6 +601,6 @@ class SlideShare
 
         }
 
-        throw new Exception("Was not provided the expected XML Node for processing");
+        throw new Exception\RuntimeException("Was not provided the expected XML Node for processing");
     }
 }

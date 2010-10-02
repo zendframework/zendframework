@@ -88,7 +88,6 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testGetSlideShow()
     {
 
@@ -160,6 +159,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($results[0] instanceof SlideShare\SlideShow);
 
     }
+
 
     public function testUploadSlideShowInvalidFileException()
     {

@@ -35,5 +35,5 @@ namespace Zend\Service\SlideShare\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\Service\Slideshare\Exception;
+    implements \Zend\Service\Slideshare\Exception
 {}

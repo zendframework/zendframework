@@ -22,15 +22,20 @@
 /**
  * @namespace
  */
-namespace Zend\Wildfire;
+namespace Zend\Wildfire\Channel\Exception;
+use Zend\Wildfire\Channel\Exception;
 
 /**
+ * Exception for Zend_Wildfire component.
+ *
+ * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Wildfire
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException
+    extends \RuntimeException
+    implements Exception
 {
 }
-

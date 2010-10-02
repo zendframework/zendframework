@@ -218,7 +218,7 @@ class Message
     public function setOption($key, $value)
     {
         if(!array_key_exists($key,$this->_options)) {
-            throw new Wildfire\Exception('Option with name "'.$key.'" does not exist!');
+            throw new Plugin\OutOfBoundsException('Option with name "'.$key.'" does not exist!');
         }
         $previous = $this->_options[$key];
         $this->_options[$key] = $value;
@@ -234,7 +234,7 @@ class Message
     public function getOption($key)
     {
         if(!array_key_exists($key,$this->_options)) {
-            throw new Wildfire\Exception('Option with name "'.$key.'" does not exist!');
+            throw new Plugin\OutOfBoundsException('Option with name "'.$key.'" does not exist!');
         }
         return $this->_options[$key];
     }

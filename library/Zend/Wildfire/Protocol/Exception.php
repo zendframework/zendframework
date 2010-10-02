@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Wildfire;
+namespace Zend\Wildfire\Protocol;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ namespace Zend\Wildfire;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+interface Exception extends \Zend\Wildfire\Exception
 {
 }
 

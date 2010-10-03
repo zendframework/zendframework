@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category  Zend
- * @package   Zend_Figlet
+ * @package   Zend_Text
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Text\Figlet;
+namespace Zend\Text\Figlet\Exception;
 
 /**
  * Exception class for Zend_Figlet
@@ -33,6 +33,8 @@ namespace Zend\Text\Figlet;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Text\Exception
+class RuntimeException 
+	extends \UnexpectedValueException 
+	implements \Zend\Text\Exception
 {
 }

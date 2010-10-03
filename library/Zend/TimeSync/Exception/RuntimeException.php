@@ -12,27 +12,30 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_TimeSync
+ * @category   Zend
+ * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @version    $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\TimeSync;
+namespace Zend\TimeSync\Exception;
+use Zend\TimeSync\Exception;
 
 /**
- * Exception class for Zend_TimeSync
+ * Exception for Zend_TimeSync component.
  *
- * @uses      \Zend\Exception
- * @category  Zend
- * @package   Zend_TimeSync
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @uses       Zend\Exception
+ * @category   Zend
+ * @package    Zend_TimeSync
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException
+    extends \RuntimeException
+    implements Exception
 {
 }

@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\TimeSync;
+use Zend\TimeSync\Exception;
 
 /**
  * Abstract class definition for all timeserver protocols
@@ -106,7 +107,7 @@ abstract class Protocol
         $socket = @fsockopen($this->_timeserver, $this->_port, $errno, $errstr,
                              TimeSync::$options['timeout']);
         if ($socket === false) {
-            throw new Exception('could not connect to ' .
+            throw new Exception\RuntimeException('could not connect to ' .
                 "'$this->_timeserver' on port '$this->_port', reason: '$errstr'");
         }
 

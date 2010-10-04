@@ -13,23 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json
+ * @package    Zend_Wildfire
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\Json\Server;
+namespace Zend\Wildfire\Plugin\Exception;
+use Zend\Wildfire\Plugin\Exception;
 
 /**
- * @uses       Zend\Json\Exception
+ * Exception for Zend_Wildfire component.
+ *
+ * @uses       Zend\Exception
  * @category   Zend
- * @package    Zend_Json
- * @subpackage Server
+ * @package    Zend_Wildfire
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Json\Exception
-{}
+class RuntimeException
+    extends \RuntimeException
+    implements Exception
+{
+}

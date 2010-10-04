@@ -21,15 +21,15 @@
 /**
  * @namespace
  */
-namespace Zend\Json\Server;
+namespace Zend\Json\Exception;
 
 /**
+ * @uses       InvalidArgumentException
  * @uses       Zend\Json\Exception
  * @category   Zend
  * @package    Zend_Json
- * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Json\Exception
+class InvalidArgumentException extends \InvalidArgumentException implements \Zend\Json\Exception
 {}

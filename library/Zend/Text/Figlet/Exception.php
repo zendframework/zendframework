@@ -12,24 +12,24 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Json
+ * @category  Zend
+ * @package   Zend_Text
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Json\Server;
+namespace Zend\Text\Figlet;
 
 /**
- * @uses       Zend\Json\Exception
+ * @uses       Zend\Exception
  * @category   Zend
- * @package    Zend_Json
- * @subpackage Server
+ * @package    Zend_Text
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Json\Exception
+interface Exception extends \Zend\Text\Exception
 {}

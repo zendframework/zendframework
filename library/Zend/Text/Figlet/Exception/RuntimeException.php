@@ -34,7 +34,7 @@ namespace Zend\Text\Figlet\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException 
-	extends \UnexpectedValueException 
-	implements \Zend\Text\Exception
+	extends \RuntimeException 
+	implements \Zend\Text\Figlet\Exception
 {
 }

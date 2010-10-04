@@ -22,19 +22,14 @@
 /**
  * @namespace
  */
-namespace Zend\Text\Figlet\Exception;
+namespace Zend\Text\Figlet;
 
 /**
- * Exception class for Zend_Figlet
- *
- * @uses      \Zend\Text\Exception
- * @category  Zend
- * @package   Zend_Text_Figlet
+ * @uses       Zend\Exception
+ * @category   Zend
+ * @package    Zend_Text
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException 
-	extends \RuntimeException 
-	implements \Zend\Text\Figlet\Exception
-{
-}
+interface Exception extends \Zend\Text\Exception
+{}

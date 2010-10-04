@@ -35,6 +35,6 @@ namespace Zend\Text\Figlet\Exception;
  */
 class UnexpectedValueException 
 	extends \UnexpectedValueException 
-	implements \Zend\Text\Exception
+	implements \Zend\Text\Figlet\Exception
 {
 }

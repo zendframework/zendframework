@@ -59,7 +59,7 @@ class AMF3 extends AbstractAdapter
             $serializer->writeTypeMarker($value);
             return $stream->getStream();
         } catch (\Exception $e) {
-            throw new RuntimeException('Serialization failed by previous error', 0, $e);
+            throw new RuntimeException('Serialization failed: ' . $e->getMessage(), 0, $e);
         }
     }
 
@@ -78,7 +78,7 @@ class AMF3 extends AbstractAdapter
             $deserializer = new AMFParser\Amf3\Deserializer($stream);
             return $deserializer->readTypeMarker();
         } catch (\Exception $e) {
-            throw new RuntimeException('Unserialization failed by previous error', 0, $e);
+            throw new RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         }
     }
 }

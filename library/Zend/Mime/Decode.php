@@ -23,7 +23,6 @@
  * @namespace
  */
 namespace Zend\Mime;
-use Zend;
 
 /**
  * @uses       \Zend\Exception

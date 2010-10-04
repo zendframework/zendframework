@@ -38,12 +38,8 @@ class ProgressBarTest extends \PHPUnit_Framework_TestCase
     
     public function testGreaterMin()
     {
-        try {
-            $progressBar = $this->_getProgressBar(1, 0);
-            $this->fail('An expected Zend_Console_Exception has not been raised');
-        } catch (\Zend\ProgressBar\Exception $expected) {
-            $this->assertContains('$max must be greater than $min', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\ProgressBar\Exception\OutOfRangeException', '$max must be greater than $min');
+        $progressBar = $this->_getProgressBar(1, 0);
     }
 
     public function testPersistence()

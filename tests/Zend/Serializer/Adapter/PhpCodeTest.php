@@ -144,7 +144,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\\Serializer\\Exception');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'eval failed: syntax error, unexpected T_STRING');
         $this->_adapter->unserialize($value);
     }
 

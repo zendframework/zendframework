@@ -217,7 +217,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         }
 
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\\Serializer\\Exception');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'foo');
         $this->_adapter->unserialize($value);
     }
 

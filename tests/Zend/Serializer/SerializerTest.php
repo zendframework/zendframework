@@ -73,13 +73,13 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryUnknownAdapter()
     {
-        $this->setExpectedException('Zend\\Serializer\\Exception','Can\'t load serializer adapter');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'Can\'t load serializer adapter');
         Serializer::factory('unknown');
     }
     
     public function testFactoryOnADummyClassAdapter()
     {
-        $this->setExpectedException('Zend\\Serializer\\Exception','must implement Zend\\Serializer\\Adapter');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'must implement Zend\\Serializer\\Adapter');
         Serializer::setAdapterLoader(new PluginLoader(array('ZendTest\\Serializer\\TestAsset' => __DIR__ . '/TestAsset')));
         Serializer::factory('dummy');
     }

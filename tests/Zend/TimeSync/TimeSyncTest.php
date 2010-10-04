@@ -122,7 +122,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitUnknownScheme()
     {
-        $this->setExpectedException('Zend\TimeSync\Exception');
+        $this->setExpectedException('Zend\TimeSync\Exception\RuntimeException');
         $server = new TimeSync\TimeSync('http://time.windows.com', 'windows_time');
     }
 
@@ -168,7 +168,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     public function testGetInvalidOptionKey()
     {
         $server = new TimeSync\TimeSync();
-        $this->setExpectedException('Zend\TimeSync\Exception');
+        $this->setExpectedException('Zend\TimeSync\Exception\OutOfBoundsException');
         $result = $server->getOptions('foobar');
     }
 
@@ -180,7 +180,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     public function testSetUnknownCurrent()
     {
         $server = new TimeSync\TimeSync();
-        $this->setExpectedException('Zend\TimeSync\Exception');
+        $this->setExpectedException('Zend\TimeSync\Exception\InvalidArgumentException');
         $server->setServer('unkown_alias');
     }
 
@@ -192,7 +192,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     public function testGetUnknownCurrent()
     {
         $server = new TimeSync\TimeSync();
-        $this->setExpectedException('Zend\TimeSync\Exception');
+        $this->setExpectedException('Zend\TimeSync\Exception\InvalidArgumentException');
         $result = $server->getServer();
     }
 
@@ -204,7 +204,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     public function testGetUnknownServer()
     {
         $server = new TimeSync\TimeSync();
-        $this->setExpectedException('Zend\TimeSync\Exception');
+        $this->setExpectedException('Zend\TimeSync\Exception\InvalidArgumentException');
         $result = $server->getServer('none_existing_server_alias');
     }
 
@@ -221,7 +221,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         try {
             $result = $server->getDate();
             $this->assertTrue($result instanceof \Zend\Date\Date);
-        } catch (TimeSync\Exception $e) {
+        } catch (TimeSync\Exception\InvalidArgumentException $e) {
             $this->assertContains('All timeservers are bogus', $e->getMessage());
         }
     }
@@ -238,7 +238,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         try {
             $result = $server->getDate();
             $this->assertTrue($result instanceof \Zend\Date\Date);
-        } catch (TimeSync\Exception $e) {
+        } catch (TimeSync\Exception\RuntimeException $e) {
             $this->assertContains('All timeservers are bogus', $e->getMessage());
         }
     }
@@ -255,7 +255,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         try {
             $result = $server->getDate();
             $this->assertTrue($result instanceof \Zend\Date\Date);
-        } catch (TimeSync\Exception $e) {
+        } catch (TimeSync\Exception\InvalidArgumentException $e) {
             $this->assertContains('All timeservers are bogus', $e->getMessage());
         }
     }

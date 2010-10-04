@@ -31,6 +31,7 @@ use Zend\Serializer\Exception\InvalidArgumentException,
 
 /**
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
+ * @uses       Zend\Serializer\Exception\InvalidArgumentException
  * @uses       Zend\Serializer\Exception\RuntimeException
  * @uses       Zend\Json\Json
  * @category   Zend

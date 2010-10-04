@@ -30,7 +30,8 @@ use Zend\Serializer\Exception\RuntimeException,
 
 /**
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\RuntimeException
+ * @uses       Zend\Serializer\Exception\ExtensionNotLoadedException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter

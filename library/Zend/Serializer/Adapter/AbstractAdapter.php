@@ -26,11 +26,11 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Adapter as SerializationAdapter,
-    Zend\Serializer\Exception\SerializerException;
+    Zend\Serializer\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Serializer\Adapter
- * @uses       \Zend\Serializer\Exception
+ * @uses       \Zend\Serializer\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -110,7 +110,7 @@ abstract class AbstractAdapter implements SerializationAdapter
     {
         $name = (string) $name;
         if (!array_key_exists($name, $this->_options)) {
-            throw new SerializerException('Unknown option name "'.$name.'"');
+            throw new InvalidArgumentException("Unknown option '{$name}'");
         }
 
         return $this->_options[$name];

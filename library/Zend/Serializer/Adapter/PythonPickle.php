@@ -35,7 +35,8 @@ use Zend\Serializer\Exception\InvalidArgumentException,
  * @link       http://pickle-js.googlecode.com
  * @uses       stdClass
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\InvalidArgumentException
+ * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter

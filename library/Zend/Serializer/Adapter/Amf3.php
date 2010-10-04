@@ -25,7 +25,7 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\SerializerException,
+use Zend\Serializer\Exception\RuntimeException,
     Zend\Amf\Parser as AMFParser;
 
 /**
@@ -34,7 +34,7 @@ use Zend\Serializer\Exception\SerializerException,
  * @uses       Zend\Amf\Parser\InputStream
  * @uses       Zend\Amf\Parser\OutputStream
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -59,7 +59,7 @@ class AMF3 extends AbstractAdapter
             $serializer->writeTypeMarker($value);
             return $stream->getStream();
         } catch (\Exception $e) {
-            throw new SerializerException('Serialization failed by previous error', 0, $e);
+            throw new RuntimeException('Serialization failed by previous error', 0, $e);
         }
     }
 
@@ -78,7 +78,7 @@ class AMF3 extends AbstractAdapter
             $deserializer = new AMFParser\Amf3\Deserializer($stream);
             return $deserializer->readTypeMarker();
         } catch (\Exception $e) {
-            throw new SerializerException('Unserialization failed by previous error', 0, $e);
+            throw new RuntimeException('Unserialization failed by previous error', 0, $e);
         }
     }
 }

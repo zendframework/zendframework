@@ -15,22 +15,27 @@
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\Mime;
+namespace Zend\Mime\Exception;
+use Zend\Mime\Exception;
 
 /**
- * @uses       \Zend\Exception
+ * Exception for Zend_Mime component.
+ *
+ * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-{}
-
+class RuntimeException
+    extends \RuntimeException
+    implements Exception
+{
+}

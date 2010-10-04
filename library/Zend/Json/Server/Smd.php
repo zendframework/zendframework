@@ -17,17 +17,19 @@
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Json\Server;
+use Zend\Json\Server\Exception\InvalidArgumentException,
+    Zend\Json\Server\Exception\RuntimeException;
 
 /**
  * @uses       Zend\Json\Json
- * @uses       Zend\Json\Server\Exception
+ * @uses       Zend\Json\Server\Exception\InvalidArgumentException
+ * @uses       Zend\Json\Server\Exception\RuntimeException
  * @uses       Zend\Json\Server\Smd\Service
  * @category   Zend
  * @package    Zend_Json
@@ -118,10 +120,9 @@ class SMD
      */
     public function setOptions(array $options)
     {
-        $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);
-            if (in_array($method, $methods)) {
+            if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
@@ -137,7 +138,7 @@ class SMD
     public function setTransport($transport)
     {
         if (!in_array($transport, $this->_transportTypes)) {
-            throw new Exception(sprintf('Invalid transport "%s" specified', $transport));
+            throw new InvalidArgumentException("Invalid transport '{$transport}' specified");
         }
         $this->_transport = $transport;
         return $this;
@@ -162,7 +163,7 @@ class SMD
     public function setEnvelope($envelopeType)
     {
         if (!in_array($envelopeType, $this->_envelopeTypes)) {
-            throw new Exception(sprintf('Invalid envelope type "%s"', $envelopeType));
+            throw new InvalidArgumentException("Invalid envelope type '{$envelopeType}'");
         }
         $this->_envelope = $envelopeType;
         return $this;
@@ -188,7 +189,7 @@ class SMD
     public function setContentType($type)
     {
         if (!preg_match($this->_contentTypeRegex, $type)) {
-            throw new Exception(sprintf('Invalid content type "%s" specified', $type));
+            throw new InvalidArgumentException("Invalid content type '{$type}' specified");
         }
         $this->_contentType = $type;
         return $this;
@@ -306,11 +307,11 @@ class SMD
             $service = new Smd\Service($service);
             $name = $service->getName();
         } else {
-            throw new Exception('Invalid service passed to addService()');
+            throw new InvalidArgumentException('Invalid service passed to addService()');
         }
 
         if (array_key_exists($name, $this->_services)) {
-            throw new Exception('Attempt to register a service already registered detected');
+            throw new RuntimeException('Attempt to register a service already registered detected');
         }
         $this->_services[$name] = $service;
         return $this;

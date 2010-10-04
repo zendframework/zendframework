@@ -53,6 +53,8 @@ class PhpSerialize extends AbstractAdapter
     {
         parent::__construct($opts);
 
+        // needed to check if a returned false is based on a serialize false
+        // or based on failure (igbinary can overwrite [un]serialize functions)
         if (self::$_serializedFalse === null) {
             self::$_serializedFalse = serialize(false);
         }
@@ -87,7 +89,6 @@ class PhpSerialize extends AbstractAdapter
      */
     public function unserialize($serialized, array $opts = array())
     {
-        // TODO: @see php.ini directive "unserialize_callback_func"
         $ret = @unserialize($serialized);
         if ($ret === false && $serialized !== self::$_serializedFalse) {
             $lastErr = error_get_last();

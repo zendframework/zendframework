@@ -25,7 +25,8 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException;
+use Zend\Serializer\Exception\InvalidArgumentException,
+    Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @link       http://www.python.org
@@ -131,7 +132,7 @@ class PythonPickle extends AbstractAdapter
      * @var array Default options
      */
     protected $_options = array(
-        'protocol'           => 0,
+        'protocol' => 0,
     );
 
     // process vars
@@ -174,6 +175,9 @@ class PythonPickle extends AbstractAdapter
         switch ($name) {
             case 'protocol':
                 $value = $this->_checkProtocolNumber($value);
+                if ($value === false) {
+                    throw new InvalidArgumentException("Invalid or unknown protocol version '{$number}'");
+                }
                 break;
         }
 
@@ -191,7 +195,7 @@ class PythonPickle extends AbstractAdapter
     {
         $int = (int) $number;
         if ($int < 0 || $int > 3) {
-            throw new RuntimeException('Invalid or unknown protocol version "'.$number.'"');
+            return false;
         }
         return $int;
     }
@@ -1363,7 +1367,7 @@ class PythonPickle extends AbstractAdapter
     {
         $proto = ord($this->_read(1));
         if ($proto < 2 || $proto > 3) {
-            throw new RuntimeException('Invalid protocol version detected');
+            throw new RuntimeException("Invalid or unknown protocol version '{$proto}' detected");
         }
         $this->_protocol = $proto;
     }

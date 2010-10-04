@@ -25,13 +25,14 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\SerializerException,
+use Zend\Serializer\Exception\InvalidArgumentException,
+    Zend\Serializer\Exception\RuntimeException,
     Zend\Json\Json as ZendJson;
 
 /**
- * @uses       Zend\Json\Json
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\RuntimeException
+ * @uses       Zend\Json\Json
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -63,8 +64,10 @@ class Json extends AbstractAdapter
 
         try  {
             return ZendJson::encode($value, $opts['cycleCheck'], $opts);
+        } catch (\InvalidArgumentException $e) {
+            throw new InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
-            throw new SerializerException('Serialization failed: ' . $e->getMessage(), 0, $e);
+            throw new RuntimeException('Serialization failed: ' . $e->getMessage(), 0, $e);
         }
     }
 
@@ -81,8 +84,10 @@ class Json extends AbstractAdapter
 
         try {
             $ret = ZendJson::decode($json, $opts['objectDecodeType']);
+        } catch (\InvalidArgumentException $e) {
+            throw new InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
-            throw new SerializerException('Unserialization failed: ' . $e->getMessage(), 0, $e);
+            throw new RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         }
 
         return $ret;

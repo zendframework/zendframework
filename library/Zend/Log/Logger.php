@@ -106,8 +106,7 @@ class Logger implements Factory
     protected $_timestampFormat        = 'c';
 
     /**
-     * Class constructor.  Create a new logger
-     *
+     * Class constructor.  Create a new logger     *
      * @param \Zend\Log\Writer\AbstractWriter|null  $writer  default writer
      */
     public function __construct(Writer $writer = null)

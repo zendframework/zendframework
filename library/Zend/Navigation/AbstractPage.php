@@ -31,7 +31,7 @@ use Zend\Config\Config;
  *
  * @uses      \Zend\Loader
  * @uses      \Zend\Navigation\Container
- * @uses      \Zend\Navigation\Exception
+ * @uses      \Zend\Navigation\InvalidArgumentException
  * @uses      \Zend\Navigation\Page\Mvc
  * @uses      \Zend\Navigation\Page\Uri
  * @category  Zend
@@ -163,16 +163,19 @@ abstract class AbstractPage extends Container
      *
      * @param  array|\Zend\Config\Config $options  options used for creating page
      * @return \Zend\Navigation\AbstractPage  a page instance
-     * @throws Zend_Navigation_Exception   if $options is not array/\Zend\Config\Config
-     * @throws \Zend\Exception              if 'type' is specified and
-     *                                     Zend_Loader is unable to load the
-     *                                     class
-     * @throws \Zend\Navigation\Exception   if something goes wrong during
-     *                                     instantiation of the page
-     * @throws \Zend\Navigation\Exception   if 'type' is given, and the specified
-     *                                     type does not extend this class
-     * @throws \Zend\Navigation\Exception   if unable to determine which class
-     *                                     to instantiate
+     * @throws \Zend\Navigation\InvalidArgumentException  if $options is not
+     *                                                   array/\Zend\Config\Config
+     * @throws \Zend\Navigation\InvalidArgumentException  if 'type' is specified
+     *                                                   and Zend_Loader is unable
+     *                                                   to load the class
+     * @throws \Zend\Navigation\InvalidArgumentException  if something goes wrong
+     *                                                   during instantiation of
+     *                                                   the page
+     * @throws \Zend\Navigation\InvalidArgumentException  if 'type' is given, and
+     *                                                   the specified type does
+     *                                                   not extend this class
+     * @throws \Zend\Navigation\InvalidArgumentException  if unable to determine
+     *                                                   which class to instantiate
      */
     public static function factory($options)
     {
@@ -181,7 +184,7 @@ abstract class AbstractPage extends Container
         }
 
         if (!is_array($options)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: $options must be an array or Zend\Config\Config');
         }
 
@@ -198,12 +201,12 @@ abstract class AbstractPage extends Container
                 }
 
                 if (!class_exists($type, true)) {
-                    throw new Exception('Cannot find class ' . $type);
+                    throw new Exception\InvalidArgumentException('Cannot find class ' . $type);
                 }
 
                 $page = new $type($options);
                 if (!$page instanceof self) {
-                    throw new Exception(sprintf(
+                    throw new Exception\InvalidArgumentException(sprintf(
                             'Invalid argument: Detected type "%s", which ' .
                             'is not an instance of Zend_Navigation_Page',
                             $type));
@@ -221,7 +224,7 @@ abstract class AbstractPage extends Container
         } elseif ($hasUri) {
             return new Page\Uri($options);
         } else {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: Unable to determine class to instantiate');
         }
     }
@@ -259,7 +262,7 @@ abstract class AbstractPage extends Container
      *
      * @param  \Zend\Config\Config $config        config object to get properties from
      * @return \Zend\Navigation\AbstractPage      fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid options are given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid options are given
      */
     public function setConfig(Config $config)
     {
@@ -276,7 +279,7 @@ abstract class AbstractPage extends Container
      *
      * @param  array $options             associative array of options to set
      * @return \Zend\Navigation\Page\Page       fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid options are given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid options are given
      */
     public function setOptions(array $options)
     {
@@ -294,12 +297,12 @@ abstract class AbstractPage extends Container
      *
      * @param  string $label              new page label
      * @return \Zend\Navigation\Page\Page       fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if empty/no string is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if empty/no string is given
      */
     public function setLabel($label)
     {
         if (null !== $label && !is_string($label)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $label must be a string or null');
         }
 
@@ -323,12 +326,12 @@ abstract class AbstractPage extends Container
      * @param  string|null $id            [optional] id to set. Default is null,
      *                                    which sets no id.
      * @return \Zend\Navigation\AbstractPage fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if not given string or null
+     * @throws \Zend\Navigation\InvalidArgumentException  if not given string or null
      */
     public function setId($id = null)
     {
         if (null !== $id && !is_string($id) && !is_numeric($id)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $id must be a string, number or null');
         }
 
@@ -353,12 +356,12 @@ abstract class AbstractPage extends Container
      * @param  string|null $class         [optional] CSS class to set. Default
      *                                    is null, which sets no CSS class.
      * @return \Zend\Navigation\AbstractPage       fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if not given string or null
+     * @throws \Zend\Navigation\InvalidArgumentException  if not given string or null
      */
     public function setClass($class = null)
     {
         if (null !== $class && !is_string($class)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $class must be a string or null');
         }
 
@@ -382,12 +385,12 @@ abstract class AbstractPage extends Container
      * @param  string $title              [optional] page title. Default is
      *                                    null, which sets no title.
      * @return \Zend\Navigation\AbstractPage       fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if not given string or null
+     * @throws \Zend\Navigation\InvalidArgumentException  if not given string or null
      */
     public function setTitle($title = null)
     {
         if (null !== $title && !is_string($title)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $title must be a non-empty string');
         }
 
@@ -411,12 +414,12 @@ abstract class AbstractPage extends Container
      * @param  string|null $target        [optional] target to set. Default is
      *                                    null, which sets no target.
      * @return \Zend\Navigation\AbstractPage       fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if target is not string or null
+     * @throws \Zend\Navigation\InvalidArgumentException  if target is not string or null
      */
     public function setTarget($target = null)
     {
         if (null !== $target && !is_string($target)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $target must be a string or null');
         }
 
@@ -456,7 +459,7 @@ abstract class AbstractPage extends Container
             }
 
             if (!is_array($relations)) {
-                throw new Exception(
+                throw new Exception\InvalidArgumentException(
                         'Invalid argument: $relations must be an ' .
                         'array or an instance of Zend\Config');
             }
@@ -518,7 +521,7 @@ abstract class AbstractPage extends Container
             }
 
             if (!is_array($relations)) {
-                throw new Exception(
+                throw new Exception\InvalidArgumentException(
                         'Invalid argument: $relations must be an ' .
                         'array or an instance of Zend\Config');
             }
@@ -565,7 +568,7 @@ abstract class AbstractPage extends Container
      *                                    Default is null, which sets no
      *                                    specific order.
      * @return \Zend\Navigation\AbstractPage       fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if order is not integer or null
+     * @throws \Zend\Navigation\InvalidArgumentException  if order is not integer or null
      */
     public function setOrder($order = null)
     {
@@ -577,7 +580,7 @@ abstract class AbstractPage extends Container
         }
 
         if (null !== $order && !is_int($order)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $order must be an integer or null, ' .
                     'or a string that casts to an integer');
         }
@@ -610,9 +613,9 @@ abstract class AbstractPage extends Container
      *                                                       page. Default is
      *                                                       null, which sets no
      *                                                       resource.
-     * @throws \Zend\Navigation\Exception                     if $resource if
+     * @throws \Zend\Navigation\InvalidArgumentException      if $resource is
      *                                                       invalid
-     * @return \Zend\Navigation\AbstractPage                          fluent interface,
+     * @return \Zend\Navigation\AbstractPage                  fluent interface,
      *                                                       returns self
      */
     public function setResource($resource = null)
@@ -621,7 +624,7 @@ abstract class AbstractPage extends Container
             $resource instanceof \Zend\Acl\Resource) {
             $this->_resource = $resource;
         } else {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $resource must be null, a string, ' .
                     ' or an instance of Zend_Acl_Resource_Interface');
         }
@@ -770,7 +773,7 @@ abstract class AbstractPage extends Container
     public function setParent(Container $parent = null)
     {
         if ($parent === $this) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'A page cannot have itself as a parent');
         }
 
@@ -814,12 +817,12 @@ abstract class AbstractPage extends Container
      * @param  string $property           property name
      * @param  mixed  $value              value to set
      * @return \Zend\Navigation\AbstractPage       fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if property name is invalid
+     * @throws \Zend\Navigation\InvalidArgumentException  if property name is invalid
      */
     public function set($property, $value)
     {
         if (!is_string($property) || empty($property)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $property must be a non-empty string');
         }
 
@@ -844,12 +847,12 @@ abstract class AbstractPage extends Container
      *
      * @param  string $property           property name
      * @return mixed                      the property's value or null
-     * @throws \Zend\Navigation\Exception  if property name is invalid
+     * @throws \Zend\Navigation\InvalidArgumentException  if property name is invalid
      */
     public function get($property)
     {
         if (!is_string($property) || empty($property)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                     'Invalid argument: $property must be a non-empty string');
         }
 
@@ -874,7 +877,7 @@ abstract class AbstractPage extends Container
      * @param  string $name               property name
      * @param  mixed  $value              value to set
      * @return void
-     * @throws \Zend\Navigation\Exception  if property name is invalid
+     * @throws \Zend\Navigation\InvalidArgumentException  if property name is invalid
      */
     public function __set($name, $value)
     {
@@ -888,7 +891,7 @@ abstract class AbstractPage extends Container
      *
      * @param  string $name               property name
      * @return mixed                      property value or null
-     * @throws \Zend\Navigation\Exception  if property name is invalid
+     * @throws \Zend\Navigation\InvalidArgumentException  if property name is invalid
      */
     public function __get($name)
     {
@@ -924,13 +927,13 @@ abstract class AbstractPage extends Container
      *
      * @param  string $name               property name
      * @return void
-     * @throws \Zend\Navigation\Exception  if the property is native
+     * @throws \Zend\Navigation\InvalidArgumentException  if the property is native
      */
     public function __unset($name)
     {
         $method = 'set' . self::_normalizePropertyName($name);
         if (method_exists($this, $method)) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                     'Unsetting native property "%s" is not allowed',
                     $name));
         }

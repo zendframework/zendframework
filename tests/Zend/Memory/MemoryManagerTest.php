@@ -53,7 +53,6 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
                  array('cache_dir' => __DIR__ . '/_files/'));
     }
 
-
     public function tearDown()
     {
         $this->_cache->clean(Cache::CLEANING_MODE_ALL);
@@ -93,7 +92,6 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($memoryManager->getMinSize(), 4*1024);
     }
 
-
     /**
      * tests the memory Objects creation
      */
@@ -117,7 +115,6 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($memObject4 instanceof Container\Locked);
         $this->assertEquals($memObject4->getRef(), '');
     }
-
 
     /**
      * tests the processing of data
@@ -161,5 +158,22 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
                 $this->assertEquals($memObjects[$count]->value[16], '_');
             }
         }
+    }
+
+    public function testNotEnoughSpaceThrowException()
+    {
+        $memoryManager = new Memory\MemoryManager($this->_cache);
+
+        $memoryManager->setMinSize(128);
+        $memoryManager->setMemoryLimit(1024);
+
+        $memObjects = array();
+        for ($count = 0; $count < 8; $count++) {
+            $memObject = $memoryManager->create(str_repeat((string)($count % 10), 128) /* 1K */);
+            $memObjects[] = $memObject;
+        }
+
+        $this->setExpectedException('Zend\Memory\Exception\RuntimeException');
+        $memoryManager->create('a');
     }
 }

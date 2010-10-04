@@ -33,33 +33,6 @@ namespace Zend\TimeSync;
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+interface Exception
 {
-    /**
-     * Contains array of exceptions thrown in queried server
-     *
-     * @var array
-     */
-    protected $_exceptions;
-
-    /**
-     * Adds an exception to the exception list
-     *
-     * @param  \Zend\TimeSync\Exception $exception New exteption to throw
-     * @return void
-     */
-    public function addException(Exception $exception)
-    {
-        $this->_exceptions[] = $exception;
-    }
-
-    /**
-     * Returns an array of exceptions that were thrown
-     *
-     * @return array
-     */
-    public function get()
-    {
-        return $this->_exceptions;
-    }
 }

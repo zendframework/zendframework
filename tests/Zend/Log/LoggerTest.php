@@ -96,7 +96,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoggerThrowsWhenNoWriters()
     {
-        $this->setExpectedException('Zend\Log\Exception', 'No writers');
+        $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'No writers');
         $logger = new Logger();
         $logger->log('message', Logger::INFO);
     }
@@ -125,7 +125,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger($this->writer);
 
-        $this->setExpectedException('Zend\Log\Exception', 'Bad log priority');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Bad log priority');
         $logger->log('foo', 42);
     }
 
@@ -133,13 +133,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger($this->writer);
 
-        $this->setExpectedException('Zend\Log\Exception', 'Bad log priority');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Bad log priority');
         $logger->nonexistantPriority('');
     }
 
     public function testAddingPriorityThrowsWhenOverridingBuiltinLogPriority()
     {
-        $this->setExpectedException('Zend\Log\Exception', 'Existing priorities');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Existing priorities');
         $logger = new Logger($this->writer);
         $logger->addPriority('BOB', 0);
     }
@@ -359,7 +359,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             $writer = array('writerName' => 'NotExtendedWriterAbstract');
             $logger->addWriter($writer);
         } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
             $this->assertRegExp('#^(Zend\\\\Log\\\\Writer\\\\NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
         }
     }
@@ -374,7 +374,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             $filter = array('filterName' => 'NotImplementsFilterInterface');
             $logger->addFilter($filter);
         } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
             $this->assertRegExp('#^(Zend\\\\Log\\\\Filter\\\\NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
         }
     }
@@ -405,7 +405,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             $logger->addPriority('emerg', 8);
             $this->fail();
         } catch(\Exception $e) {
-            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
             $this->assertEquals('Existing priorities cannot be overwritten', $e->getMessage());
         }
 
@@ -414,7 +414,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             $logger->log('clone zf10170', 8);
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception', $e);
+            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
             $this->assertEquals('Bad log priority', $e->getMessage());
         }
         $this->assertEquals(0, $mock->events[0]['priority']);

@@ -43,7 +43,6 @@ class ZendMonitor extends AbstractWriter
     protected $_isEnabled = true;
 
     /**
-     * @throws \Zend\Log\Exception if Zend Monitor extension not present
      */
     public function __construct()
     {
@@ -57,7 +56,6 @@ class ZendMonitor extends AbstractWriter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Syslog
-     * @throws \Zend\Log\Exception
      */
     static public function factory($config = array())
     {

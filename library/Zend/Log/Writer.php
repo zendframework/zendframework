@@ -26,7 +26,6 @@
 namespace Zend\Log;
 
 /**
- * @uses       \Zend\Log\Exception
  * @uses       \Zend\Log\FactoryInterface
  * @uses       \Zend\Log\Filter\Priority
  * @category   Zend

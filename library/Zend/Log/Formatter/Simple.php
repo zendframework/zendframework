@@ -27,7 +27,7 @@ namespace Zend\Log\Formatter;
 use \Zend\Log\Formatter;
 
 /**
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
  * @uses       \Zend\Log\Formatter\FormatterInterface
  * @category   Zend
  * @package    Zend_Log
@@ -49,7 +49,7 @@ class Simple implements Formatter
      * Class constructor
      *
      * @param  null|string  $format  Format specifier for log messages
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($format = null)
     {
@@ -58,7 +58,7 @@ class Simple implements Formatter
         }
 
         if (! is_string($format)) {
-            throw new \Zend\Log\Exception('Format must be a string');
+            throw new \Zend\Log\Exception\InvalidArgumentException('Format must be a string');
         }
 
         $this->_format = $format;

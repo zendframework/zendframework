@@ -215,7 +215,7 @@ class Logger implements Factory
 
         if (!is_array($config) || empty($config)) {
             throw new Exception\InvalidArgumentException(
-                'Configuration must be an array or instance of Zend\\Config\\Config'
+                'Configuration must be an array or instance of Zend\Config\Config'
             );
         }
 
@@ -443,7 +443,7 @@ class Logger implements Factory
 
         if (!$writer instanceof Writer) {
             throw new Exception\InvalidArgumentException(
-                'Writer must be an instance of Zend\\Log\\Writer'
+                'Writer must be an instance of Zend\Log\Writer'
                 . ' or you should pass a configuration array'
             );
         }

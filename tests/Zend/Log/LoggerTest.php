@@ -354,14 +354,11 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionConstructWriterFromConfig()
     {
-        try {
-            $logger = new Logger();
-            $writer = array('writerName' => 'NotExtendedWriterAbstract');
-            $logger->addWriter($writer);
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
-            $this->assertRegExp('#^(Zend\\\\Log\\\\Writer\\\\NotExtendedWriterAbstract|The\sspecified\swriter)#', $e->getMessage());
-        }
+        $logger = new Logger();
+        $writer = array('writerName' => 'NotExtendedWriterAbstract');
+        
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'The specified writer does not extend Zend\Log\Writer');
+        $logger->addWriter($writer);
     }
 
     /**
@@ -369,14 +366,11 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionConstructFilterFromConfig()
     {
-        try {
-            $logger = new Logger();
-            $filter = array('filterName' => 'NotImplementsFilterInterface');
-            $logger->addFilter($filter);
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
-            $this->assertRegExp('#^(Zend\\\\Log\\\\Filter\\\\NotImplementsFilterInterface|The\sspecified\sfilter)#', $e->getMessage());
-        }
+        $logger = new Logger();
+        $filter = array('filterName' => 'NotImplementsFilterInterface');
+        
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'The specified filter does not implement Zend\Log\Filter');
+        $logger->addFilter($filter);
     }
 
     /**
@@ -396,29 +390,31 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-10170
      */
-    public function testPriorityDuplicates()
+    public function testExceptionIsThrownOnPriorityDuplicates()
     {
         $logger   = new Logger();
         $mock     = new Log\Writer\Mock();
         $logger->addWriter($mock);
-        try {
-            $logger->addPriority('emerg', 8);
-            $this->fail();
-        } catch(\Exception $e) {
-            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
-            $this->assertEquals('Existing priorities cannot be overwritten', $e->getMessage());
-        }
-
-        try {
-            $logger->log('zf10170', 0);
-            $logger->log('clone zf10170', 8);
-            $this->fail();
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
-            $this->assertEquals('Bad log priority', $e->getMessage());
-        }
+        
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Existing priorities cannot be overwritten');
+        $logger->addPriority('emerg', 8);
+    }
+    
+    /**
+     * @group ZF-10170
+     */
+    public function testExceptionIsThrownOnInvalidLogPriority()
+    {
+        $logger   = new Logger();
+        $mock     = new Log\Writer\Mock();
+        $logger->addWriter($mock);
+        $logger->log('zf10170', 0);
+        
         $this->assertEquals(0, $mock->events[0]['priority']);
         $this->assertEquals('EMERG', $mock->events[0]['priorityName']);
         $this->assertFalse(array_key_exists(1, $mock->events));
+        
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Bad log priority');
+        $logger->log('clone zf10170', 8);
     }
 }

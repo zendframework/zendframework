@@ -129,7 +129,7 @@ class Mail extends AbstractWriter
      */
     static public function factory($config = array())
     {
-        throw new Log\Exception\NotImplementedException('Zend\\Log\\Writer\\Mail does not currently implement a factory');
+        throw new Log\Exception\NotImplementedException('Zend\Log\Writer\Mail does not currently implement a factory');
     }
 
     /**
@@ -195,7 +195,7 @@ class Mail extends AbstractWriter
         if (!$this->_layout) {
             throw new Log\Exception\InvalidArgumentException(
                 'cannot set formatter for layout; ' .
-                    'a Zend_Layout instance is not in use');
+                    'a Zend\Layout\Layout instance is not in use');
         }
 
         $this->_layoutFormatter = $formatter;

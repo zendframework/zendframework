@@ -54,7 +54,7 @@ abstract class AbstractFilter implements Filter, Factory
         }
 
         if (!is_array($config)) {
-            throw new \Zend\Log\Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\\Config\\Config');
+            throw new \Zend\Log\Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\Config\Config');
         }
 
         return $config;

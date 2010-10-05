@@ -36,7 +36,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorThrowsOnBadFormatString()
     {
-        $this->setExpectedException('\Zend\Log\Exception\InvalidArgumentException', 'must be a string');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be a string');
         new Simple(1);
     }
 

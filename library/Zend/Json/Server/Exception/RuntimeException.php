@@ -12,28 +12,25 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Text_Table
+ * @category   Zend
+ * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\Text\Table;
+namespace Zend\Json\Server\Exception;
 
 /**
- * Exception class for Zend_Text_Table
- *
- * @uses      \Zend\Text\Exception
- * @category  Zend
- * @package   Zend_Text_Table
- * @uses      \Zend\Text\Exception
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @uses       RuntimeException
+ * @uses       Zend\Json\Server\Exception
+ * @category   Zend
+ * @package    Zend_Json
+ * @subpackage Server
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Text\Exception
-{
-}
+class RuntimeException extends \RuntimeException implements \Zend\Json\Server\Exception
+{}

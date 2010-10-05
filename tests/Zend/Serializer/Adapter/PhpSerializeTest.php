@@ -142,7 +142,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\\Serializer\\Exception');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'unserialize(): Error at offset 0 of 23 bytes');
         $this->_adapter->unserialize($value);
     }
 

@@ -51,7 +51,6 @@ class Null extends AbstractWriter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Null
-     * @throws \Zend\Log\Exception
      */
     static public function factory($config = array())
     {

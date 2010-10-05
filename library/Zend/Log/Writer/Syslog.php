@@ -30,6 +30,7 @@ use Zend\Log;
  * Writes log messages to syslog
  *
  * @uses       \Zend\Log\Log
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
  * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
@@ -119,7 +120,6 @@ class Syslog extends AbstractWriter
      *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Syslog
-     * @throws \Zend\Log\Exception
      */
     static public function factory($config = array())
     {
@@ -179,7 +179,7 @@ class Syslog extends AbstractWriter
      *
      * @param  int $facility Syslog facility
      * @return void
-     * @throws Zend_Log_Exception for invalid log facility
+     * @throws \Zend\Log\Exception\InvalidArgumentException for invalid log facility
      */
     public function setFacility($facility)
     {
@@ -192,13 +192,15 @@ class Syslog extends AbstractWriter
         }
 
         if (!in_array($facility, $this->_validFacilities)) {
-            throw new Log\Exception('Invalid log facility provided; please see http://php.net/openlog for a list of valid facility values');
+            throw new Log\Exception\InvalidArgumentException(
+            	'Invalid log facility provided; please see http://php.net/openlog for a list of valid facility values'
+            );
         }
 
         if ('WIN' == strtoupper(substr(PHP_OS, 0, 3))
             && ($facility !== LOG_USER)
         ) {
-            throw new Log\Exception('Only LOG_USER is a valid log facility on Windows');
+            throw new Log\Exception\InvalidArgumentException('Only LOG_USER is a valid log facility on Windows');
         }
 
         $this->_facility = $facility;

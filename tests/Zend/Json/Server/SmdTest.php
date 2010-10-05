@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,18 +25,20 @@
 namespace ZendTest\Json\Server;
 use Zend\Json\Server\Smd,
     Zend\Json\Server,
+    Zend\Json\Server\Exception\InvalidArgumentException,
+    Zend\Json\Server\Exception\RuntimeException,
     Zend\Json;
 
 /**
  * Test class for Zend_JSON_Server_Smd
  *
  * @category   Zend
- * @package    Zend_JSON_Server
+ * @package    Zend_Json_Server
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_JSON
- * @group      Zend_JSON_Server
+ * @group      Zend_Json
+ * @group      Zend_Json_Server
  */
 class SmdTest extends \PHPUnit_Framework_TestCase
 {
@@ -69,7 +70,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
             try {
                 $this->smd->setTransport($transport);
                 $this->fail('Invalid transport should throw exception');
-            } catch (Server\Exception $e) {
+            } catch (InvalidArgumentException $e) {
                 $this->assertContains('Invalid transport', $e->getMessage());
             }
         }
@@ -95,7 +96,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
             try {
                 $this->smd->setEnvelope($env);
                 $this->fail('Invalid envelope type should throw exception');
-            } catch (Server\Exception $e) {
+            } catch (InvalidArgumentException $e) {
                 $this->assertContains('Invalid envelope', $e->getMessage());
             }
         }
@@ -120,7 +121,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
             try {
                 $this->smd->setContentType($type);
                 $this->fail('Invalid content type should raise exception');
-            } catch (Server\Exception $e) {
+            } catch (InvalidArgumentException $e) {
                 $this->assertContains('Invalid content type', $e->getMessage());
             }
         }
@@ -209,7 +210,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         try {
             $this->smd->addService($test);
             $this->fail('Adding service with existing service name should throw exception');
-        } catch (Server\Exception $e) {
+        } catch (RuntimeException $e) {
             $this->assertContains('already register', $e->getMessage());
         }
     }
@@ -220,7 +221,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
             try {
                 $this->smd->addService($service);
                 $this->fail('Attempt to register invalid service should throw exception');
-            } catch (Server\Exception $e) {
+            } catch (InvalidArgumentException $e) {
                 $this->assertContains('Invalid service', $e->getMessage());
             }
         }

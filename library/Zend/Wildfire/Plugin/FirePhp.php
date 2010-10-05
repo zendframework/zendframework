@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace Zend\Wildfire\Plugin;
-use Zend\Wildfire;
+use Zend\Wildfire,
+    Zend\Wildfire\Plugin\Exception;
 
 /**
  * Primary class for communicating with the FirePHP Firefox Extension.
@@ -174,17 +175,17 @@ class FirePhp implements Wildfire\Plugin
     public static function init($class = null)
     {
         if (self::$_instance !== null) {
-            throw new Wildfire\Exception('Singleton instance of Zend_Wildfire_Plugin_FirePhp already exists!');
+            throw new Exception\RuntimeException('Singleton instance of Zend_Wildfire_Plugin_FirePhp already exists!');
         }
         if ($class !== null) {
             if (!is_string($class)) {
-                throw new Wildfire\Exception('Third argument is not a class string');
+                throw new Exception\InvalidArgumentException('Third argument is not a class string');
             }
 
             self::$_instance = new $class();
             if (!self::$_instance instanceof self) {
                 self::$_instance = null;
-                throw new Wildfire\Exception('Invalid class to third argument. Must be subclass of Zend_Wildfire_Plugin_FirePhp.');
+                throw new Exception\InvalidArgumentException('Invalid class to third argument. Must be subclass of Zend_Wildfire_Plugin_FirePhp.');
             }
         } else {
             self::$_instance = new self();
@@ -267,7 +268,7 @@ class FirePhp implements Wildfire\Plugin
     public function setOption($key, $value)
     {
       if (!array_key_exists($key,$this->_options)) {
-        throw new Wildfire\Exception('Option with name "'.$key.'" does not exist!');
+        throw new Exception\OutOfBoundsException('Option with name "'.$key.'" does not exist!');
       }
       $previous = $this->_options[$key];
       $this->_options[$key] = $value;
@@ -283,7 +284,7 @@ class FirePhp implements Wildfire\Plugin
     public function getOption($key)
     {
       if (!array_key_exists($key,$this->_options)) {
-        throw new Wildfire\Exception('Option with name "'.$key.'" does not exist!');
+        throw new Exception\OutOfBoundsException('Option with name "'.$key.'" does not exist!');
       }
       return $this->_options[$key];
     }
@@ -458,7 +459,7 @@ class FirePhp implements Wildfire\Plugin
             case self::GROUP_END:
                 break;
             default:
-                throw new Wildfire\Exception('Log style "'.$meta['Type'].'" not recognized!');
+                throw new Exception\UnexpectedValueException('Log style "'.$meta['Type'].'" not recognized!');
                 break;
         }
 
@@ -523,10 +524,10 @@ class FirePhp implements Wildfire\Plugin
             case self::STRUCTURE_URI_DUMP:
 
                 if (!isset($data['key'])) {
-                    throw new Wildfire\Exception('You must supply a key.');
+                    throw new Exception\InvalidArgumentException('You must supply a key.');
                 }
                 if (!array_key_exists('data',$data)) {
-                    throw new Wildfire\Exception('You must supply data.');
+                    throw new Exception\InvalidArgumentException('You must supply data.');
                 }
 
                 $value = $data['data'];
@@ -545,10 +546,10 @@ class FirePhp implements Wildfire\Plugin
                     !is_array($data['meta']) ||
                     !array_key_exists('Type',$data['meta'])) {
 
-                    throw new Wildfire\Exception('You must supply a "Type" in the meta information.');
+                    throw new Exception\InvalidArgumentException('You must supply a "Type" in the meta information.');
                 }
                 if (!array_key_exists('data',$data)) {
-                    throw new Wildfire\Exception('You must supply data.');
+                    throw new Exception\InvalidArgumentException('You must supply data.');
                 }
 
                 $value = $data['data'];
@@ -563,7 +564,7 @@ class FirePhp implements Wildfire\Plugin
                                                $value));
 
             default:
-                throw new Wildfire\Exception('Structure of name "'.$structure.'" is not recognized.');
+                throw new Exception\InvalidArgumentException('Structure of name "'.$structure.'" is not recognized.');
                 break;
         }
         return false;

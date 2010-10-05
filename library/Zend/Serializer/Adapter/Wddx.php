@@ -25,14 +25,16 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException;
+use Zend\Serializer\Exception\RuntimeException,
+    Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
  * @link       http://en.wikipedia.org/wiki/WDDX
  * @uses       SimpleXMLElement
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\RuntimeException
+ * @uses       Zend\Serializer\Exception\ExtensionNotLoadedException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -58,7 +60,7 @@ class Wddx extends AbstractAdapter
     public function __construct($opts = array())
     {
         if (!extension_loaded('wddx')) {
-            throw new SerializationException('PHP extension "wddx" is required for this adapter');
+            throw new ExtensionNotLoadedException('PHP extension "wddx" is required for this adapter');
         }
 
         parent::__construct($opts);
@@ -84,7 +86,7 @@ class Wddx extends AbstractAdapter
 
         if ($wddx === false) {
             $lastErr = error_get_last();
-            throw new SerializationException($lastErr['message']);
+            throw new RuntimeException($lastErr['message']);
         }
         return $wddx;
     }
@@ -101,7 +103,7 @@ class Wddx extends AbstractAdapter
     {
         $ret = wddx_deserialize($wddx);
 
-        if ($ret === null) {
+        if ($ret === null && class_exists('SimpleXMLElement', false)) {
             // check if the returned NULL is valid
             // or based on an invalid wddx string
             try {
@@ -109,12 +111,10 @@ class Wddx extends AbstractAdapter
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null
                 }
-                $errMsg = 'Can\'t unserialize wddx string';
+                throw new RuntimeException('Invalid wddx string');
             } catch (\Exception $e) {
-                $errMsg = $e->getMessage();
+                throw new RuntimeException($e->getMessage(), 0, $e);
             }
-
-            throw new SerializationException($errMsg);
         }
 
         return $ret;

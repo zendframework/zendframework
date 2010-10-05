@@ -28,7 +28,7 @@ use Zend\Log\Factory,
     Zend\Log\Filter;
 
 /**
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
  * @uses       \Zend\Log\Filter\FilterInterface
  * @uses       \Zend\Log\FactoryInterface
  * @category   Zend
@@ -45,7 +45,7 @@ abstract class AbstractFilter implements Filter, Factory
      * 
      * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
      * @return array
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     static protected function _parseConfig($config)
     {
@@ -54,7 +54,7 @@ abstract class AbstractFilter implements Filter, Factory
         }
 
         if (!is_array($config)) {
-            throw new \Zend\Log\Exception('Configuration must be an array or instance of Zend\\Config\\Config');
+            throw new \Zend\Log\Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\Config\Config');
         }
 
         return $config;

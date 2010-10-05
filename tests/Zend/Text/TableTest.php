@@ -27,16 +27,6 @@ namespace ZendTest\Text;
 use Zend\Text\Table;
 use Zend\Text\Table\Decorator;
 
-// Call Zend_Text_FigletTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Text_TableTest::main");
-}
-
-/**
- * Test helper
- */
-
-
 /**
  * @category   Zend
  * @package    Zend_Text
@@ -47,16 +37,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class TableTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Text_TableTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function tearDown()
     {
@@ -152,43 +132,28 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testColumnSetContentInvalidArgument()
     {
-        try {
-            $column = new Table\Column(1);
-            $this->fail('An expected InvalidArgumentException has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('$content must be a string', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Table\Exception\UnexpectedValueException', 'must be a string');
+        $column = new Table\Column(1);
     }
 
     public function testColumnSetAlignInvalidArgument()
     {
-        try {
-            $column = new Table\Column(null, false);
-            $this->fail('An expected InvalidArgumentException has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('Invalid align supplied', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Table\Exception\OutOfBoundsException', 'Invalid align supplied');
+        $column = new Table\Column(null, false);
     }
 
     public function testColumnSetColSpanInvalidArgument()
     {
-        try {
-            $column = new Table\Column(null, null, 0);
-            $this->fail('An expected InvalidArgumentException has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('$colSpan must be an integer and greater than 0', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Table\Exception\InvalidArgumentException', 'must be an integer and greater than 0');
+        $column = new Table\Column(null, null, 0);
     }
 
     public function testColumnRenderInvalidArgument()
     {
-        try {
-            $column = new Table\Column();
-            $column->render(0);
-            $this->fail('An expected InvalidArgumentException has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('$columnWidth must be an integer and greater than 0', $expected->getMessage());
-        }
+        $column = new Table\Column();
+        
+        $this->setExpectedException('Zend\Text\Table\Exception\InvalidArgumentException', 'must be an integer and greater than 0');
+        $column->render(0);
     }
 
     public function testUnicodeStringPadding()
@@ -232,24 +197,16 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $row->appendColumn(new Table\Column());
         $row->appendColumn(new Table\Column());
 
-        try {
-            $row->render(array(10), $decorator);
-            $this->fail('An expected Zend_Text_Table_Exception has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('Too many columns', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Table\Exception\OverflowException', 'Too many columns');
+        $row->render(array(10), $decorator);
     }
 
     public function testRowGetColumnWidthsBeforeRendering()
     {
         $row = new Table\Row();
 
-        try {
-            $row->getColumnWidths();
-            $this->fail('An expected Zend_Text_Table_Exception has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('No columns were rendered yet', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Table\Exception\UnexpectedValueException', 'render() must be called');
+        $row->getColumnWidths();
     }
 
     public function testRowAutoInsertColumns()
@@ -273,24 +230,10 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($row->render(array(10, 10), $decorator), "│foo       │foobar    │\n│bar       │          │\n");
     }
 
-    public function testTableConstructInvalidColumnWidths()
-    {
-        try {
-            $table = new Table\Table(array('columnWidths' => array()));
-            $this->fail('An expected Zend_Text_Table_Exception has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('You must supply at least one column', $expected->getMessage());
-        }
-    }
-
     public function testTableConstructInvalidColumnWidthsItem()
     {
-        try {
-            $table = new Table\Table(array('columnWidths' => array('foo')));
-            $this->fail('An expected Zend_Text_Table_Exception has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('Column 0 has an invalid column width', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Table\Exception\InvalidArgumentException', 'invalid column width');
+        $table = new Table\Table(array('columnWidths' => array('foo')));
     }
 
     public function testTableDecoratorLoaderSimple()
@@ -379,12 +322,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
     {
         $table = new Table\Table(array('columnWidths' => array(10)));
 
-        try {
-            $table->render();
-            $this->fail('An expected Zend_Text_Table_Exception has not been raised');
-        } catch (Table\Exception $expected) {
-            $this->assertContains('No rows were added to the table yet', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Table\Exception\UnexpectedValueException', 'No rows were added');
+        $table->render();
     }
 
     public function testTableColSpanWithMultipleRows()

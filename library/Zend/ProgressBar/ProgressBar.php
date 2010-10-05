@@ -21,6 +21,7 @@
  * @namespace
  */
 namespace Zend\ProgressBar;
+use Zend\ProgressBar\Exception;
 
 /**
  * Zend_ProgressBar offers an interface for multiple enviroments.
@@ -96,7 +97,7 @@ class ProgressBar
     {
         // Check min/max values and set them
         if ($min > $max) {
-            throw new Exception('$max must be greater than $min');
+            throw new Exception\OutOfRangeException('$max must be greater than $min');
         }
 
         $this->_min     = (float) $min;

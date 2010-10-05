@@ -24,10 +24,12 @@
  * @namespace
  */
 namespace ZendTest\Tag;
-use Zend\Tag;
+
+use Zend\Tag,
+	Zend\Tag\Exception\InvalidArgumentException;
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Tag_ItemTest::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend\Tag\ItemTest::main');
 }
 
 /**
@@ -102,8 +104,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $tag = new Tag\Item(array('title' => 10, 'weight' => 1));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Title must be a string');
         }
     }
@@ -121,8 +123,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $tag = new Tag\Item(array('title' => 'foo', 'weight' => 'foobar'));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Weight must be numeric');
         }
     }
@@ -137,8 +139,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $tag = new Tag\Item('test');
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Invalid options provided to constructor');
         }
     }
@@ -147,8 +149,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $tag = new Tag\Item(array('weight' => 1));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Title was not set');
         }
     }
@@ -157,8 +159,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $tag = new Tag\Item(array('title' => 'foo'));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Weight was not set');
         }
     }

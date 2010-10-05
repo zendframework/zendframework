@@ -28,13 +28,14 @@ namespace Zend\Tag;
 use Zend\Config,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader\ShortNameLocater,
-    Zend\Loader\PluginLoader;
+    Zend\Loader\PluginLoader,
+    Zend\Tag\Exception\InvalidArgumentException;
 
 /**
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Tag\Cloud\Exception
  * @uses       \Zend\Tag\Item
  * @uses       \Zend\Tag\ItemList
+ * @uses       \Zend\Loader\PluginLoader
+ * @uses       \Zend\Tag\Cloud\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Tag
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -146,6 +147,7 @@ class Cloud
      * decorators.
      *
      * @param  array $tags
+     * @throws \Zend\Tag\Exception\InvalidArgumentException
      * @return \Zend\Tag\Cloud
      */
     public function setTags(array $tags)
@@ -159,7 +161,7 @@ class Cloud
             } else if (is_array($tag)) {
                 $itemList[] = new Item($tag);
             } else {
-                throw new Cloud\Exception('Tag must be an instance of Zend_Tag_Taggable or an array');
+                throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\Taggable or an array');
             }
         }
 
@@ -170,6 +172,7 @@ class Cloud
      * Append a single tag to the cloud
      *
      * @param  \Zend\Tag\Taggable|array $tag
+     * @throws \Zend\Tag\Exception\InvalidArgumentException
      * @return \Zend\Tag\Cloud
      */
     public function appendTag($tag)
@@ -180,7 +183,7 @@ class Cloud
         } else if (is_array($tag)) {
             $tags[] = new Item($tag);
         } else {
-            throw new Cloud\Exception('Tag must be an instance of Zend_Tag_Taggable or an array');
+            throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\Taggable or an array');
         }
 
         return $this;
@@ -217,6 +220,7 @@ class Cloud
      * Set the decorator for the cloud
      *
      * @param  mixed $decorator
+     * @throws \Zend\Tag\Exception\InvalidArgumentException
      * @return \Zend\Tag\Cloud
      */
     public function setCloudDecorator($decorator)
@@ -239,7 +243,7 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\Cloud)) {
-            throw new Cloud\Exception('Decorator is no instance of Zend_Tag_Cloud_Decorator_Cloud');
+            throw new InvalidArgumentException('Decorator is no instance of Zend\Tag\Cloud\Decorator\Cloud');
         }
 
         $this->_cloudDecorator = $decorator;
@@ -264,6 +268,7 @@ class Cloud
      * Set the decorator for the tags
      *
      * @param  mixed $decorator
+     * @throws \Zend\Tag\Exception\InvalidArgumentException
      * @return \Zend\Tag\Cloud
      */
     public function setTagDecorator($decorator)
@@ -286,7 +291,7 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\Tag)) {
-            throw new Cloud\Exception('Decorator is no instance of Zend_Tag_Cloud_Decorator_Tag');
+            throw new InvalidArgumentException('Decorator is no instance of Zend\Tag\Cloud\Decorator\Tag');
         }
 
         $this->_tagDecorator = $decorator;

@@ -24,10 +24,13 @@
  * @namespace
  */
 namespace ZendTest\Tag;
-use Zend\Tag;
+
+use Zend\Tag,
+	Zend\Tag\Exception\InvalidArgumentException,
+	Zend\Tag\Exception\OutOfBoundsException;
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Tag_ItemListTest::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend\Tag\ItemListTest::main');
 }
 
 /**
@@ -88,7 +91,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
         try {
             $list->seek(3);
             $this->fail('An expected OutOfBoundsException was not raised');
-        } catch (\OutOfBoundsException $e) {
+        } catch (OutOfBoundsException $e) {
             $this->assertEquals($e->getMessage(), 'Invalid seek position');
         }
     }
@@ -99,9 +102,9 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
 
         try {
             $list[] = 'test';
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Item must implement Zend_Tag_Taggable');
+            $this->fail('An expected Zend\Tag\Exception\OutOfBoundsException was not raised');
+        } catch (OutOfBoundsException $e) {
+            $this->assertEquals($e->getMessage(), 'Item must implement Zend\Tag\Taggable');
         }
     }
 
@@ -151,8 +154,8 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
 
         try {
             $list->spreadWeightValues(array());
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Value list may not be empty');
         }
     }
@@ -163,6 +166,6 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Tag_ItemListTest::main') {
-    \Zend_Tag_ItemListTest::main();
+if (PHPUnit_MAIN_METHOD == 'Zend\Tag\ItemListTest::main') {
+    \Zend\Tag\ItemListTest::main();
 }

@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Tag\Cloud;
-use Zend\Tag;
-use Zend\Tag\Cloud;
-use Zend\Loader\PluginLoader;
-use ZendTest\Tag\Cloud\TestAsset;
+use Zend\Tag,
+	Zend\Tag\Cloud,
+	Zend\Loader\PluginLoader,
+    Zend\Tag\Exception\InvalidArgumentException,
+    ZendTest\Tag\Cloud\TestAsset;
 
 /**
  * @category   Zend
@@ -74,9 +75,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->setCloudDecorator(new \stdClass());
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Decorator is no instance of Zend_Tag_Cloud_Decorator_Cloud', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Decorator is no instance of Zend\Tag\Cloud\Decorator\Cloud', $e->getMessage());
         }
     }
 
@@ -104,9 +105,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->setTagDecorator(new \stdClass());
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Decorator is no instance of Zend_Tag_Cloud_Decorator_Tag', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Decorator is no instance of Zend\Tag\Cloud\Decorator\Tag', $e->getMessage());
         }
     }
 
@@ -208,9 +209,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->appendTag('foo');
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Tag must be an instance of Zend_Tag_Taggable or an array', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Tag must be an instance of Zend\Tag\Taggable or an array', $e->getMessage());
         }
     }
 
@@ -256,9 +257,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->setTags(array('foo'));
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Tag must be an instance of Zend_Tag_Taggable or an array', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Tag must be an instance of Zend\Tag\Taggable or an array', $e->getMessage());
         }
     }
 
@@ -296,7 +297,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         $cloud    = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $expected = '<ul class="Zend_Tag_Cloud">'
+        $expected = '<ul class="Zend\Tag\Cloud">'
                   . '<li><a href="" style="font-size: 10px;">foo</a></li> '
                   . '<li><a href="" style="font-size: 20px;">bar</a></li>'
                   . '</ul>';
@@ -312,7 +313,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testRenderViaToString()
     {
         $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $expected = '<ul class="Zend_Tag_Cloud">'
+        $expected = '<ul class="Zend\Tag\Cloud">'
                   . '<li><a href="" style="font-size: 10px;">foo</a></li> '
                   . '<li><a href="" style="font-size: 20px;">bar</a></li>'
                   . '</ul>';

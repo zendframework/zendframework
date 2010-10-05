@@ -114,11 +114,14 @@ class CurlTest extends CommonHttpTests
     /**
      * Check that an exception is thrown when trying to set invalid config
      *
-     * @expectedException Zend\Http\Client\Adapter\Exception
      * @dataProvider invalidConfigProvider
      */
     public function testSetConfigInvalidConfig($config)
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
+            'Array or Zend\Config\Config object expected');
+
         $this->_adapter->setConfig($config);
     }
 
@@ -128,10 +131,14 @@ class CurlTest extends CommonHttpTests
      *
      * This should throw an exception.
      *
-     * @expectedException Zend\Http\Exception
+     * @sexpectedException Zend\Http\Exception
      */
     public function testSettingInvalidCurlOption()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Unknown or erroreous cURL option');
+
         $config = array(
             'adapter'     => 'Zend\Http\Client\Adapter\Curl',
             'curloptions' => array(CURLOPT_CLOSEPOLICY => true),
@@ -167,10 +174,13 @@ class CurlTest extends CommonHttpTests
      * Set CURLOPT_FOLLOWLOCATION = false for this type of request and let the Zend_Http_Client handle redirects
      * in his own loop.
      *
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testRedirectPostToGetWithCurlFollowLocationOptionLeadsToTimeout()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Error in cURL request: Operation timed out after 1000 milliseconds with 0 bytes received');
+
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
         $adapter->setConfig(array(

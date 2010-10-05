@@ -25,7 +25,8 @@
  */
 namespace ZendTest\Serializer\Adapter;
 
-use Zend\Serializer;
+use Zend\Serializer,
+    Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
  * @category   Zend
@@ -42,7 +43,11 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('igbinary')) {
-            $this->markTestSkipped('Zend\\Serializer IgBinary needs ext/igbinary');
+            try {
+                new Serializer\Adapter\IgBinary();
+                $this->fail("Zend\\Serializer\\Adapter\\IgBinary needs missing ext/igbinary but did't throw exception");
+            } catch (ExtensionNotLoadedException $e) {}
+            $this->markTestSkipped('Zend\\Serializer\\Adapter\\IgBinary needs ext/igbinary');
         }
         $this->_adapter = new Serializer\Adapter\IgBinary();
     }
@@ -145,7 +150,7 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = "\0\1\r\n";
-        $this->setExpectedException('Zend\\Serializer\\Exception');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'foo');
         $this->_adapter->unserialize($value);
     }
 

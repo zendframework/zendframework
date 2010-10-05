@@ -57,7 +57,7 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowExceptionValueNotPresentInFacilities()
     {
-        $this->setExpectedException('Zend\Log\Exception', 'Invalid log facility provided');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Invalid log facility provided');
         $writer = new SyslogWriter();
         $writer->setFacility(LOG_USER * 1000);
     }
@@ -70,7 +70,7 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
         if ('WIN' != strtoupper(substr(PHP_OS, 0, 3))) {
             $this->markTestSkipped('Run only in windows');
         }
-        $this->setExpectedException('Zend\Log\Exception', 'Only LOG_USER is a valid');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Only LOG_USER is a valid');
         $writer = new SyslogWriter();
         $writer->setFacility(LOG_AUTH);
     }

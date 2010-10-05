@@ -27,7 +27,8 @@ namespace Zend\Log\Writer;
 use Zend\Log;
 
 /**
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
+ * @uses       \Zend\Log\Exception\RuntimeException
  * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
@@ -76,7 +77,6 @@ class Db extends AbstractWriter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Db
-     * @throws \Zend\Log\Exception
      */
     static public function factory($config = array())
     {
@@ -100,10 +100,12 @@ class Db extends AbstractWriter
 
     /**
      * Formatting is not possible on this writer
+     * 
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function setFormatter(\Zend\Log\Formatter $formatter)
     {
-        throw new Log\Exception(get_class() . ' does not support formatting');
+        throw new Log\Exception\InvalidArgumentException(get_class() . ' does not support formatting');
     }
 
     /**
@@ -120,12 +122,13 @@ class Db extends AbstractWriter
      * Write a message to the log.
      *
      * @param  array  $event  event data
+     * @throws \Zend\Log\Exception\RuntimeException
      * @return void
      */
     protected function _write($event)
     {
         if ($this->_db === null) {
-            throw new Log\Exception('Database adapter is null');
+            throw new Log\Exception\RuntimeException('Database adapter is null');
         }
 
         if ($this->_columnMap === null) {

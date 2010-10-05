@@ -257,14 +257,14 @@ class Client
         if (is_string($uri)) {
             try {
                 $uri = new Uri\Url($uri);
-            } catch (URI\Exception $e) {
+            } catch (Uri\Exception $e) {
                 throw new Client\Exception('Passed parameter is not a valid HTTP URI.');
             } 
         }
 
         $scheme = strtolower($uri->getScheme());
         if (!empty($scheme) && !in_array($scheme, array('http', 'https'))) {
-            throw new Client\Exception('Passed parameter is not a valid HTTP URI.');
+            throw new Client\Exception\InvalidArgumentException('Passed parameter is not a valid HTTP URI.');
         }
 
         // Set auth if username and password has been specified in the uri
@@ -310,7 +310,7 @@ class Client
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            throw new Client\Exception('Array or Zend_Config object expected, got ' . gettype($config));
+            throw new Client\Exception\InvalidArgumentException('Array or Zend_Config object expected, got ' . gettype($config));
         }
 
         foreach ($config as $k => $v) {
@@ -339,7 +339,7 @@ class Client
     public function setMethod($method = self::GET)
     {
         if (! preg_match('/^[^\x00-\x1f\x7f-\xff\(\)<>@,;:\\\\"\/\[\]\?={}\s]+$/', $method)) {
-            throw new Client\Exception("'{$method}' is not a valid HTTP request method.");
+            throw new Client\Exception\InvalidArgumentException("'{$method}' is not a valid HTTP request method.");
         }
 
         if ($method == self::POST && $this->enctype === null) {
@@ -389,7 +389,7 @@ class Client
 
             // Make sure the name is valid if we are in strict mode
             if ($this->config['strict'] && (! preg_match('/^[a-zA-Z0-9-]+$/', $name))) {
-                throw new Client\Exception("{$name} is not a valid HTTP header name");
+                throw new Client\Exception\InvalidArgumentException("{$name} is not a valid HTTP header name");
             }
 
             $normalized_name = strtolower($name);
@@ -544,7 +544,7 @@ class Client
         } else {
             // Check we got a proper authentication type
             if (! defined('self::AUTH_' . strtoupper($type))) {
-                throw new Client\Exception("Invalid or not supported authentication type: '$type'");
+                throw new Client\Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
             }
 
             $this->auth = array(
@@ -576,7 +576,7 @@ class Client
         } elseif (! $cookiejar) {
             $this->cookiejar = null;
         } else {
-            throw new Client\Exception('Invalid parameter type passed as CookieJar');
+            throw new Client\Exception\InvalidArgumentException('Invalid parameter type passed as CookieJar');
         }
 
         return $this;
@@ -636,7 +636,7 @@ class Client
             }
 
             if (preg_match("/[=,; \t\r\n\013\014]/", $cookie)) {
-                throw new Client\Exception("Cookie name cannot contain these characters: =,; \t\r\n\013\014 ({$cookie})");
+                throw new Client\Exception\RuntimeException("Cookie name cannot contain these characters: =,; \t\r\n\013\014 ({$cookie})");
             }
 
             $value = addslashes($value);
@@ -674,7 +674,7 @@ class Client
     {
         if ($data === null) {
             if (($data = @file_get_contents($filename)) === false) {
-                throw new Client\Exception("Unable to read file '{$filename}' for upload");
+                throw new Client\Exception\RuntimeException("Unable to read file '{$filename}' for upload");
             }
 
             if (! $ctype) {
@@ -810,13 +810,13 @@ class Client
     {
         if (is_string($adapter)) {
             if (!class_exists($adapter)) {
-                throw new Client\Exception('Unable to locate adapter class "' . $adapter . '"');
+                throw new Client\Exception\InvalidArgumentException('Unable to locate adapter class "' . $adapter . '"');
             }
             $adapter = new $adapter;
         }
 
         if (! $adapter instanceof Client\Adapter) {
-            throw new Client\Exception('Passed adapter is not a HTTP connection adapter');
+            throw new Client\Exception\InvalidArgumentException('Passed adapter is not a HTTP connection adapter');
         }
 
         $this->adapter = $adapter;
@@ -874,7 +874,7 @@ class Client
                 if ($this->adapter instanceof Client\Adapter) {
                     $this->adapter->close();
                 }
-                throw new Client\Exception("Could not open temp file {$this->_stream_name}");
+                throw new Client\Exception\RuntimeException("Could not open temp file {$this->_stream_name}");
         }
 
         return $fp;
@@ -890,7 +890,7 @@ class Client
     public function request($method = null)
     {
         if (! $this->uri instanceof Uri\Url) {
-            throw new Client\Exception('No valid URI has been passed to the client');
+            throw new Client\Exception\RuntimeException('No valid URI has been passed to the client');
         }
 
         if ($method) {
@@ -923,7 +923,7 @@ class Client
 
             // check that adapter supports streaming before using it
             if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
-                throw new Client\Exception('Adapter does not support streaming');
+                throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
 
             // Open the connection, send the request and read the response
@@ -935,7 +935,7 @@ class Client
                     $stream = $this->_openTempStream();
                     $this->adapter->setOutputStream($stream);
                 } else {
-                    throw new Client\Exception('Adapter does not support streaming');
+                    throw new Client\Exception\RuntimeException('Adapter does not support streaming');
                 }
             }
 
@@ -944,7 +944,7 @@ class Client
 
             $response = $this->adapter->read();
             if (! $response) {
-                throw new Client\Exception('Unable to read response, or response is empty');
+                throw new Client\Exception\RuntimeException('Unable to read response, or response is empty');
             }
 
             if($this->config['output_stream']) {
@@ -1180,7 +1180,7 @@ class Client
                         mb_internal_encoding($mbIntEnc);
                     }
 
-                    throw new Client\Exception("Cannot handle content type '{$this->enctype}' automatically." .
+                    throw new Client\Exception\RuntimeException("Cannot handle content type '{$this->enctype}' automatically." .
                         " Please use Zend_Http_Client::setRawData to send this kind of content.");
                     break;
             }
@@ -1339,7 +1339,7 @@ class Client
             case self::AUTH_BASIC:
                 // In basic authentication, the user name cannot contain ":"
                 if (strpos($user, ':') !== false) {
-                    throw new Client\Exception("The user name cannot contain ':' in 'Basic' HTTP authentication");
+                    throw new Client\Exception\InvalidArgumentException("The user name cannot contain ':' in 'Basic' HTTP authentication");
                 }
 
                 $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
@@ -1352,7 +1352,7 @@ class Client
             //    break;
 
             default:
-                throw new Client\Exception("Not a supported HTTP authentication type: '$type'");
+                throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
         }
 
         return $authHeader;

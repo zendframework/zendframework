@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category  Zend
- * @package   Zend_Text_Table
+ * @package   Zend_Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
@@ -22,18 +22,17 @@
 /**
  * @namespace
  */
-namespace Zend\Text\Table;
+namespace Zend\Http\Exception;
 
 /**
- * Exception class for Zend_Text_Table
  *
- * @uses      \Zend\Text\Exception
  * @category  Zend
- * @package   Zend_Text_Table
- * @uses      \Zend\Text\Exception
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package   Zend_Application
+ * @uses      \Zend\Http\Exception
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Text\Exception
-{
-}
+class InvalidArgumentException
+    extends \InvalidArgumentException
+    implements \Zend\Http\Exception
+{}

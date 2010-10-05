@@ -21,6 +21,7 @@
  * @namespace
  */
 namespace Zend\ProgressBar\Adapter;
+use Zend\ProgressBar\Adapter\Exception;
 
 /**
  * Zend_ProgressBar_Adapter_Console offers a text-based progressbar for console
@@ -188,7 +189,7 @@ class Console extends AbstractAdapter
        $stream = @fopen($resource, 'w');
 
        if ($stream === false) {
-            throw new Exception('Unable to open stream');
+            throw new Exception\RuntimeException('Unable to open stream');
        }
 
        if ($this->_outputStream !== null) {
@@ -266,7 +267,7 @@ class Console extends AbstractAdapter
                                  self::ELEMENT_TEXT);
 
         if (count(array_diff($elements, $allowedElements)) > 0) {
-            throw new Exception('Invalid element found in $elements array');
+            throw new Exception\InvalidArgumentException('Invalid element found in $elements array');
         }
 
         $this->_elements = $elements;
@@ -286,7 +287,7 @@ class Console extends AbstractAdapter
     public function setBarLeftChar($char)
     {
         if (empty($char)) {
-            throw new Exception('Character may not be empty');
+            throw new Exception\InvalidArgumentException('Character may not be empty');
         }
 
         $this->_barLeftChar = (string) $char;
@@ -304,7 +305,7 @@ class Console extends AbstractAdapter
     public function setBarRightChar($char)
     {
         if (empty($char)) {
-            throw new Exception('Character may not be empty');
+            throw new Exception\InvalidArgumentException('Character may not be empty');
         }
 
         $this->_barRightChar = (string) $char;
@@ -364,7 +365,7 @@ class Console extends AbstractAdapter
                                 self::FINISH_ACTION_NONE);
 
         if (!in_array($action, $allowedActions)) {
-            throw new Exception('Invalid finish action specified');
+            throw new Exception\InvalidArgumentException('Invalid finish action specified');
         }
 
         $this->_finishAction = $action;

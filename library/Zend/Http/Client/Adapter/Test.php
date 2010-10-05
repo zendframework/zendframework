@@ -109,7 +109,7 @@ class Test implements HttpAdapter
 
         } elseif (! is_array($config)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend_Config object expected, got ' . gettype($config)
+                'Array or Zend\Config\Config object expected, got ' . gettype($config)
             );
         }
 

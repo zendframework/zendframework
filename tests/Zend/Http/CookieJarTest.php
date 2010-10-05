@@ -109,10 +109,13 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      * Test we get an exception in case of invalid response objects
      *
      * @dataProvider invalidResponseProvider
-     * @expectedException Zend\Http\Exception
      */
     public function testExceptAddCookiesInvalidResponse($resp)
     {
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            '$response is expected to be a Response object');
+
         $jar = new Http\CookieJar();
         $jar->addCookiesFromResponse($resp, 'http://www.example.com');
     }

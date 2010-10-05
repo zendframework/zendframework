@@ -130,23 +130,20 @@ class CurlTest extends CommonHttpTests
      * @link http://de2.php.net/manual/en/function.curl-setopt.php#84277
      *
      * This should throw an exception.
-     *
-     * @sexpectedException Zend\Http\Exception
      */
     public function testSettingInvalidCurlOption()
     {
-        $this->setExpectedException(
-            'Zend\Http\Client\Adapter\Exception\RuntimeException',
-            'Unknown or erroreous cURL option');
-
         $config = array(
             'adapter'     => 'Zend\Http\Client\Adapter\Curl',
             'curloptions' => array(CURLOPT_CLOSEPOLICY => true),
         );
         $this->client = new \Zend\Http\Client($this->client->getUri(true), $config);
 
+        $this->setExpectedException(
+        	'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Unknown or erroreous cURL option'
+            );
         $this->client->request('GET');
-        $this->fail();
     }
 
     public function testRedirectWithGetOnly()

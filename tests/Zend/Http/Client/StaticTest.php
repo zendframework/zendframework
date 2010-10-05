@@ -112,7 +112,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidUriStringException()
     {
-        $this->setExpectedException('Zend\\Http\\Exception');
+        $this->setExpectedException('Zend\Http\Client\Exception\InvalidArgumentException', 'Passed parameter is not a valid HTTP URI');
         $this->_client->setUri('httpp://__invalid__.com');
     }
 

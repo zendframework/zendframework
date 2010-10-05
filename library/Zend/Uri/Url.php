@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Uri;
-use Zend\Validator\Hostname;
+use Zend\Validator\Hostname,
+    Zend\Uri\Exception\InvalidArgumentException;
 
 /**
  * URL handler
@@ -81,7 +82,7 @@ class Url implements Uri
      * 
      * @param string $regexName
      * @param bool $allowUnwiseCharset
-     * @throws \Zend\Uri\InvalidArgumentException
+     * @throws \Zend\Uri\Exception\InvalidArgumentException
      */
     final protected static function _getRegex($regexName, $allowUnwiseCharset = false)
     {
@@ -344,7 +345,7 @@ class Url implements Uri
     /**
      * parse()
      * @param unknown_type $url
-     * @throws \Zend\Uri\InvalidArgumentException
+     * @throws \Zend\Uri\Exception\InvalidArgumentException
      */
     public function parse($url)
     {

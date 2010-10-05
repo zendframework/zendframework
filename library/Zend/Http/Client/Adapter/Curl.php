@@ -25,7 +25,8 @@
  * @namespace
  */
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HTTPAdapter,
+use Zend\Http\Client\Adapter as HttpAdapter,
+    Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Client;
 
 /**
@@ -44,7 +45,7 @@ use Zend\Http\Client\Adapter as HTTPAdapter,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Curl implements HTTPAdapter, Stream
+class Curl implements HttpAdapter, Stream
 {
     /**
      * Parameters array
@@ -99,7 +100,7 @@ class Curl implements HTTPAdapter, Stream
     public function __construct()
     {
         if (!extension_loaded('curl')) {
-            throw new Exception('cURL extension has to be loaded to use this Zend\Http\Client adapter');
+            throw new AdapterException\InitializationException('cURL extension has to be loaded to use this Zend\Http\Client adapter');
         }
         $this->_invalidOverwritableCurlOptions = array(
             CURLOPT_HTTPGET,
@@ -133,7 +134,7 @@ class Curl implements HTTPAdapter, Stream
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            throw new Exception(
+            throw new AdapterException\InvalidArgumentException(
                 'Array or Zend\Config\Config object expected, got ' . gettype($config)
             );
         }
@@ -227,7 +228,7 @@ class Curl implements HTTPAdapter, Stream
         if (!$this->_curl) {
             $this->close();
 
-            throw new Exception('Unable to Connect to ' .  $host . ':' . $port);
+            throw new AdapterException\RuntimeException('Unable to Connect to ' .  $host . ':' . $port);
         }
 
         if ($secure !== false) {
@@ -259,11 +260,11 @@ class Curl implements HTTPAdapter, Stream
     {
         // Make sure we're properly connected
         if (!$this->_curl) {
-            throw new Exception("Trying to write but we are not connected");
+            throw new AdapterException\RuntimeException("Trying to write but we are not connected");
         }
 
         if ($this->_connected_to[0] != $uri->getHost() || $this->_connected_to[1] != $uri->getPort()) {
-            throw new Exception("Trying to write but we are connected to the wrong host");
+            throw new AdapterException\RuntimeException("Trying to write but we are connected to the wrong host");
         }
 
         // set URL
@@ -299,7 +300,7 @@ class Curl implements HTTPAdapter, Stream
                     }
 
                     if (!isset($this->_config['curloptions'][CURLOPT_INFILESIZE])) {
-                        throw new Exception("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
+                        throw new AdapterException\RuntimeException("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
                     }
 
                     if(is_resource($body)) {
@@ -335,11 +336,11 @@ class Curl implements HTTPAdapter, Stream
 
             default:
                 // For now, through an exception for unsupported request methods
-                throw new Exception("Method currently not supported");
+                throw new AdapterException\InvalidArgumentException("Method currently not supported");
         }
 
         if(is_resource($body) && $curlMethod != CURLOPT_PUT) {
-            throw new Exception("Streaming requests are allowed only with PUT");
+            throw new AdapterException\RuntimeException("Streaming requests are allowed only with PUT");
         }
 
         // get http version to use
@@ -391,7 +392,7 @@ class Curl implements HTTPAdapter, Stream
             foreach ((array)$this->_config['curloptions'] as $k => $v) {
                 if (!in_array($k, $this->_invalidOverwritableCurlOptions)) {
                     if (curl_setopt($this->_curl, $k, $v) == false) {
-                        throw new Client\Exception(sprintf("Unknown or erroreous cURL option '%s' set", $k));
+                        throw new AdapterException\RuntimeException(sprintf("Unknown or erroreous cURL option '%s' set", $k));
                     }
                 }
             }
@@ -409,7 +410,7 @@ class Curl implements HTTPAdapter, Stream
         $request .= $body;
 
         if (empty($this->_response)) {
-            throw new Client\Exception("Error in cURL request: " . curl_error($this->_curl));
+            throw new AdapterException\RuntimeException("Error in cURL request: " . curl_error($this->_curl));
         }
 
         // cURL automatically decodes chunked-messages, this means we have to disallow the Zend\Http\Response to do it again

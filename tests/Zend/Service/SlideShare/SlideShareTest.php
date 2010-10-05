@@ -88,7 +88,6 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testGetSlideShow()
     {
 
@@ -159,6 +158,23 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($results) == 1);
         $this->assertTrue($results[0] instanceof SlideShare\SlideShow);
 
+    }
+
+
+    public function testUploadSlideShowInvalidFileException()
+    {
+        $this->setExpectedException('\Zend\Service\SlideShare\Exception\InvalidArgumentException', 
+                    'Specified Slideshow for upload not found or unreadable');
+
+        $ss = $this->_getSSObject();
+        $show = new SlideShare\SlideShow();
+        $show->setFilename('invalid_filename');
+        $show->setDescription('Unit Test');
+        $show->setTitle('title');
+        $show->setTags(array('unittest'));
+        $show->setID(0);
+
+        $result = $ss->uploadSlideShow($show, false);
     }
 
     public function testUploadSlideShow()
@@ -236,7 +252,8 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
      */
 	public function testSlideShareObjectHandlesUnicodeCharactersWell()
 	{
-		$slideShow = new Zend_Service_SlideShare_SlideShow();
+        $slideShow = new SlideShare\SlideShow();
+		
 		$slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
 
 		if (!extension_loaded('mbstring')) {

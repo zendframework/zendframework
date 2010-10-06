@@ -25,7 +25,9 @@
  */
 namespace ZendTest\Markup\Parser;
 
-use Zend\Markup\Parser,
+use Zend\Markup\Token,
+    Zend\Markup\TokenList,
+    Zend\Markup\Parser,
     Zend\Markup\Parser\Bbcode;
 
 /**
@@ -202,5 +204,67 @@ class BbcodeTest extends \PHPUnit_Framework_TestCase
                 'type'       => 'markup'
             )
         ), $this->_parser->tokenize('foo[b]bar[i]baz[abc]caz[/abc]naz[/i]booh[/b]'));
+    }
+
+    /**
+     * A simple test for the tree builder
+     *
+     * @return void
+     */
+    public function testBuildTreeSimple()
+    {
+        $input = array(
+            array(
+                'tag'  => 'foo',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[b]',
+                'name'       => 'b',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'bar',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[/b]',
+                'name'       => '/b',
+                'attributes' => array(),
+                'type'       => 'markup'
+            )
+        );
+
+        $tree = $this->_parser->buildTree($input);
+
+        // first check the root
+        $root = $tree->current();
+
+        $this->assertEquals($root->getName(), 'Zend_Markup_Root');
+
+        // now check the subtokens of the root
+        $children = $root->getChildren();
+
+        // the first one should be 'foo'
+        $this->assertEquals($children->current()->getContent(), 'foo');
+        $this->assertEquals($children->current()->getType(), Token::TYPE_NONE);
+
+        // the second one should be the [b] tag
+        $children->next();
+
+        $b = $children->current();
+
+        $this->assertEquals($b->getName(), 'b');
+        $this->assertEquals($b->getContent(), '[b]');
+        $this->assertEquals($b->getAttributes(), array());
+        $this->assertEquals($b->getType(), Token::TYPE_MARKUP);
+
+        // check the b tag's children
+        $children = $b->getChildren();
+
+        // the first child of b is bar
+        $this->assertEquals($children->current()->getContent(), 'bar');
+        $this->assertEquals($children->current()->getType(), Token::TYPE_NONE);
     }
 }

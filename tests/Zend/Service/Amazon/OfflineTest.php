@@ -371,8 +371,6 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     		$this->fail('Expected exception was not triggered');
     	} catch (Amazon\Exception $e) {
 			return;
-        } catch (Exception $e) {
-            exit;
         }
     }
 }

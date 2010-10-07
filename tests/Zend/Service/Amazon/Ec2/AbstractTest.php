@@ -56,6 +56,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testNoKeysThrowException()
     {
+        Amazon\AbstractAmazon::setKeys(null, null); // to make sure there's NO DEFAULTS
         try {
             $class = new TestAmazonAbstract();
             $this->fail('Exception should be thrown when no keys are passed in.');

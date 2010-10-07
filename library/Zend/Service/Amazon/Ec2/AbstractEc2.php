@@ -159,13 +159,13 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             ));
 
             $request->setUri($url);
-            $request->setMethod(\Zend\HTTP\Client::POST);
+            $request->setMethod(\Zend\Http\Client::POST);
             $request->setParameterPost($params);
 
             $httpResponse = $request->request();
 
 
-        } catch (\Zend\HTTP\Client\Exception $zhce) {
+        } catch (\Zend\Http\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
             throw new Exception($message, $zhce->getCode(), $zhce);
         }

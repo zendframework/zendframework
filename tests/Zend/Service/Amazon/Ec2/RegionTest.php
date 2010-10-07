@@ -55,8 +55,8 @@ class RegionTest extends \PHPUnit_Framework_TestCase
 
         $this->Zend_Service_Amazon_Ec2_Region = new Ec2\Region('access_key', 'secret_access_key');
 
-        $adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client = new \Zend\HTTP\Client(null, array(
+        $adapter = new \Zend\Http\Client\Adapter\Test();
+        $client = new \Zend\Http\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;

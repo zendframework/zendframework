@@ -26,7 +26,7 @@
 namespace ZendTest\Service\Amazon\S3;
 
 use Zend\Service\Amazon\S3;
-use Zend\HTTP\Response;
+use Zend\Http\Response;
 
 /**
  * @category   Zend
@@ -68,7 +68,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
                                                     constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
                                                     );
         $this->_nosuchbucket = "nonexistingbucketnamewhichnobodyshoulduse";
-        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
+        $this->_httpClientAdapterSocket = new \Zend\Http\Client\Adapter\Socket();
 
         $this->_bucket = constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
 
@@ -238,6 +238,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->_amazon->cleanBucket($this->_bucket);
         $this->_amazon->removeBucket($this->_bucket);
 
+        // otherwise amazon sends cached data
+        sleep(3);
         $this->assertFalse($this->_amazon->isBucketAvailable($this->_bucket));
         $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftest"));
         $this->assertFalse($this->_amazon->getObjectsByBucket($this->_bucket));
@@ -364,7 +366,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_amazon->isBucketAvailable("This is a Very Bad Name");
             $this->fail("Expected exception not thrown");
-        } catch(\Zend\HTTP\Client\Adapter\Exception $e) {
+        } catch(\Zend\Http\Client\Adapter\Exception $e) {
             $this->assertContains("Unable to Connect to", $e->getMessage());
         //@todo check why \Http\Client exception is thrown instead of \Zend\Uri\Exception
         } catch(\Zend\URI\Exception $e) {

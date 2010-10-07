@@ -68,7 +68,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
         $this->_queue_name = constant('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE');
 
-        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
+        $this->_httpClientAdapterSocket = new \Zend\Http\Client\Adapter\Socket();
 
         $this->_amazon->getHttpClient()
                       ->setAdapter($this->_httpClientAdapterSocket);

@@ -85,7 +85,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
             TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY
         );
 
-        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
+        $this->_httpClientAdapterSocket = new \Zend\Http\Client\Adapter\Socket();
 
         $this->_amazon->getRestClient()
                       ->getHttpClient()

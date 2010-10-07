@@ -25,12 +25,12 @@
  */
 namespace Zend\Tag\Cloud\Decorator;
 
-use Zend\Tag\Exception\InvalidArgumentException;
+use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
 
 /**
  * Simple HTML decorator for tags
  *
- * @uses      \Zend\Tag\Exception\InvalidArgumentException
+ * @uses      \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException
  * @uses      \Zend\Tag\Cloud\Decorator\Tag
  * @category  Zend
  * @package   Zend_Tag
@@ -94,8 +94,8 @@ class HTMLTag extends Tag
      * Set a list of classes to use instead of fontsizes
      *
      * @param  array $classList
-     * @throws \Zend\Tag\Exception\InvalidArgumentException When the classlist is empty
-     * @throws \Zend\Tag\Exception\InvalidArgumentException When the classlist contains an invalid classname
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When the classlist is empty
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When the classlist contains an invalid classname
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setClassList(array $classList = null)
@@ -154,7 +154,7 @@ class HTMLTag extends Tag
      * Possible values are: em, ex, px, in, cm, mm, pt, pc and %
      *
      * @param  string $fontSizeUnit
-     * @throws \Zend\Tag\Exception\InvalidArgumentException When an invalid fontsize unit is specified
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When an invalid fontsize unit is specified
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setFontSizeUnit($fontSizeUnit)
@@ -203,7 +203,7 @@ class HTMLTag extends Tag
      * Set maximum font size
      *
      * @param  integer $maxFontSize
-     * @throws \Zend\Tag\Exception\InvalidArgumentException When fontsize is not numeric
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When fontsize is not numeric
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setMaxFontSize($maxFontSize)
@@ -231,7 +231,7 @@ class HTMLTag extends Tag
      * Set minimum font size
      *
      * @param  int $minFontSize
-     * @throws \Zend\Tag\Exception\InvalidArgumentException When fontsize is not numeric
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When fontsize is not numeric
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setMinFontSize($minFontSize)

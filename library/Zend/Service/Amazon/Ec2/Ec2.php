@@ -72,7 +72,7 @@ class Ec2
                 $class = '\Zend\Service\Amazon\Ec2\Image';
                 break;
             case 'instance':
-                $class = '\Zend\Service\Amazon\Ec2\Instance\Instance';
+                $class = '\Zend\Service\Amazon\Ec2\Instance';
                 break;
             case 'security':
                 // break left out

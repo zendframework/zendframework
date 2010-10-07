@@ -12,24 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Service\Amazon;
+namespace Zend\Service\Amazon\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Service
+ * @subpackage Amazon
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException
+    extends \RuntimeException
+    implements \Zend\Service\Amazon\Exception
 {}
+

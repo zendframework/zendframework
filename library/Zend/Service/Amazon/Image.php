@@ -67,7 +67,7 @@ class Image
     {
         $xpath = new \DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
-        $this->Url = new \Zend\URI\URL($xpath->query('./az:URL/text()', $dom)->item(0)->data);
+        $this->Url = new \Zend\Uri\Url($xpath->query('./az:URL/text()', $dom)->item(0)->data);
         $this->Height = (int) $xpath->query('./az:Height/text()', $dom)->item(0)->data;
         $this->Width = (int) $xpath->query('./az:Width/text()', $dom)->item(0)->data;
     }

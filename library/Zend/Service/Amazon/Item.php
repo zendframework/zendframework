@@ -129,8 +129,11 @@ class Item
      * 
      * @group ZF-9547
      */
-    public function __construct(\DOMElement $dom)
+    public function __construct($dom)
     {
+        if (!$dom instanceof \DOMElement) {
+            throw new Exception('Item passed to Amazon\Item must be instace of DOMElement');
+        }
         $xpath = new \DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
         $this->ASIN = $xpath->query('./az:ASIN/text()', $dom)->item(0)->data;

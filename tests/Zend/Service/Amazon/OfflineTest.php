@@ -97,7 +97,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 'oops');
-            $this->fail('Expected Zend_Service_Exception not thrown');
+            $this->fail('Expected \Zend\Service\Amazon\Exception not thrown');
         } catch (\Zend\Service\Exception $e) {
             $this->assertContains('Unknown country code', $e->getMessage());
         }
@@ -348,7 +348,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     	} catch (Amazon\Exception $e) {
     		$this->fail('Unexpected exception was triggered');
     	}
-    	$this->assertType('Zend_Service_Amazon_Item', $currentItem);
+    	$this->assertType('Zend\Service\Amazon\Item', $currentItem);
     	$this->assertEquals('0754512673', $currentItem->ASIN);
     }
     
@@ -361,16 +361,18 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testAmazonComponentHandlesEmptyBookResults()
     {
     	$xml = file_get_contents(__DIR__."/_files/amazon-response-invalid.xml");
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXML($xml);
         
-    	$result = new Zend_Service_Amazon_ResultSet($dom);
+    	$result = new Amazon\ResultSet($dom);
 
     	try {
     		$result->current();
     		$this->fail('Expected exception was not triggered');
-    	} catch (Zend_Service_Amazon_Exception $e) {
+    	} catch (Amazon\Exception $e) {
 			return;
-    	}
+        } catch (Exception $e) {
+            exit;
+        }
     }
 }

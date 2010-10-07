@@ -29,15 +29,6 @@ use Zend\Tag,
 	Zend\Tag\Exception\InvalidArgumentException,
 	Zend\Tag\Exception\OutOfBoundsException;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend\Tag\ItemListTest::main');
-}
-
-/**
- * Test helper
- */
-
-
 /**
  * @category   Zend
  * @package    Zend_Tag
@@ -48,11 +39,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class ItemListTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function testArrayAccessAndCount()
     {
@@ -87,25 +73,28 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
 
         $list->seek(2);
         $this->assertEquals($list->current()->getTitle(), $values[2]);
+    }
+    
+    public function testSeektableIteratorThrowsBoundsException()
+    {
+        $list = new Tag\ItemList();
 
-        try {
-            $list->seek(3);
-            $this->fail('An expected OutOfBoundsException was not raised');
-        } catch (OutOfBoundsException $e) {
-            $this->assertEquals($e->getMessage(), 'Invalid seek position');
+        $values = array('foo', 'bar', 'baz');
+        foreach ($values as $value) {
+            $list[] = $this->_getItem($value);
         }
+        $list->seek(2);
+        
+        $this->setExpectedException('Zend\Tag\Exception\OutOfBoundsException', 'Invalid seek position');
+        $list->seek(3);
     }
 
     public function testInvalidItem()
     {
         $list = new Tag\ItemList();
 
-        try {
-            $list[] = 'test';
-            $this->fail('An expected Zend\Tag\Exception\OutOfBoundsException was not raised');
-        } catch (OutOfBoundsException $e) {
-            $this->assertEquals($e->getMessage(), 'Item must implement Zend\Tag\Taggable');
-        }
+        $this->setExpectedException('\Zend\Tag\Exception\OutOfBoundsException', 'Item must implement Zend\Tag\Taggable');
+        $list[] = 'test';
     }
 
     public function testSpreadWeightValues()
@@ -152,20 +141,12 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Tag\ItemList();
 
-        try {
-            $list->spreadWeightValues(array());
-            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Value list may not be empty');
-        }
+        $this->setExpectedException('Zend\Tag\Exception\InvalidArgumentException', 'Value list may not be empty');
+        $list->spreadWeightValues(array());
     }
 
     protected function _getItem($title = 'foo', $weight = 1)
     {
         return new Tag\Item(array('title' => $title, 'weight' => $weight));
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend\Tag\ItemListTest::main') {
-    \Zend\Tag\ItemListTest::main();
 }

@@ -718,7 +718,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     {
         if (is_int($value) && $value >= 1 && $value <= 5) {
             if (!extension_loaded('gd')) {
-                throw new ExtensionNotLoaded(
+                throw new ExtensionNotLoadedException(
                     'GD extension is required to use numeric font'
                 );
             }

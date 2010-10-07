@@ -421,7 +421,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * @param  Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'decorator' or 'element'
      * @return \Zend\Form\Form
-     * @throws \Zend\Form\Exception on invalid type
+     * @throws \Zend\Form\Exception\InvalidArgumentException on invalid type
      */
     public function setPluginLoader(PrefixPathMapper $loader, $type = null)
     {
@@ -432,7 +432,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                 $this->_loaders[$type] = $loader;
                 return $this;
             default:
-                throw new Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }
     }
 
@@ -463,7 +463,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                     $pathSegment   = 'Form/Element';
                     break;
                 default:
-                    throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                    throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
             $this->_loaders[$type] = new PluginLoader(
@@ -495,7 +495,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * @param  string $path
      * @param  string $type
      * @return \Zend\Form\Form
-     * @throws \Zend\Form\Exception for invalid type
+     * @throws \Zend\Form\Exception\InvalidArgumentException for invalid type
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
@@ -518,7 +518,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                 }
                 return $this;
             default:
-                throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
         }
     }
 
@@ -786,13 +786,13 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      *
      * @param  string $method
      * @return \Zend\Form\Form
-     * @throws \Zend\Form\Exception
+     * @throws \Zend\Form\Exception\InvalidArgumentException
      */
     public function setMethod($method)
     {
         $method = strtolower($method);
         if (!in_array($method, $this->_methods)) {
-            throw new Exception(sprintf('"%s" is an invalid form method', $method));
+            throw new Exception\InvalidArgumentException(sprintf('"%s" is an invalid form method', $method));
         }
         $this->setAttrib('method', $method);
         return $this;
@@ -864,7 +864,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     {
         $name = $this->filterName($name);
         if ('' === (string)$name) {
-            throw new Exception('Invalid name provided; must contain only valid variable characters and be non-empty');
+            throw new Exception\InvalidArgumentException('Invalid name provided; must contain only valid variable characters and be non-empty');
         }
 
         return $this->setAttrib('name', $name);
@@ -1028,7 +1028,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     {
         if (is_string($element)) {
             if (null === $name) {
-                throw new Exception('Elements specified by string must have an accompanying name');
+                throw new Exception\InvalidArgumentException('Elements specified by string must have an accompanying name');
             }
 
             if (is_array($this->_elementDecorators)) {
@@ -1083,11 +1083,11 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     public function createElement($type, $name, $options = null)
     {
         if (!is_string($type)) {
-            throw new Exception('Element type must be a string indicating type');
+            throw new Exception\InvalidArgumentException('Element type must be a string indicating type');
         }
 
         if (!is_string($name)) {
-            throw new Exception('Element name must be a string');
+            throw new Exception\InvalidArgumentException('Element name must be a string');
         }
 
         $prefixPaths              = array();
@@ -1790,7 +1790,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * @param  string $name
      * @param  array|\Zend\Config\Config $options
      * @return \Zend\Form\Form
-     * @throws \Zend\Form\Exception if no valid elements provided
+     * @throws \Zend\Form\Exception\InvalidArgumentException if no valid elements provided
      */
     public function addDisplayGroup(array $elements, $name, $options = null)
     {
@@ -1805,7 +1805,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
             }
         }
         if (empty($group)) {
-            throw new Exception('No valid elements specified for display group');
+            throw new Exception\InvalidArgumentException('No valid elements specified for display group');
         }
 
         $name = (string) $name;
@@ -1856,7 +1856,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         if (null === $name) {
             $name = $group->getName();
             if ('' === (string)$name) {
-                throw new Exception('Invalid display group added; requires name');
+                throw new Exception\InvalidArgumentException('Invalid display group added; requires name');
             }
         }
 
@@ -2220,7 +2220,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     public function isValid($data)
     {
         if (!is_array($data)) {
-            throw new Exception(__CLASS__ . '::' . __METHOD__ . ' expects an array');
+            throw new Exception\InvalidArgumentException(__CLASS__ . '::' . __METHOD__ . ' expects an array');
         }
         $translator = $this->getTranslator();
         $valid      = true;
@@ -2648,7 +2648,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                 break;
             }
             if (is_numeric($name)) {
-                throw new Exception('Invalid alias provided to addDecorator; must be alphanumeric string');
+                throw new Exception\InvalidArgumentException('Invalid alias provided to addDecorator; must be alphanumeric string');
             }
             if (is_string($spec)) {
                 $decorator = array(
@@ -2659,7 +2659,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                 $decorator = $spec;
             }
         } else {
-            throw new Exception('Invalid decorator provided to addDecorator; must be string or Zend\Form\Decorator');
+            throw new Exception\InvalidArgumentException('Invalid decorator provided to addDecorator; must be string or Zend\Form\Decorator');
         }
 
         $this->_decorators[$name] = $decorator;
@@ -2707,7 +2707,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                     }
                 }
             } else {
-                throw new Exception('Invalid decorator passed to addDecorators()');
+                throw new Exception\InvalidArgumentException('Invalid decorator passed to addDecorators()');
             }
         }
 
@@ -2937,7 +2937,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            throw new Exception('Invalid translator specified');
+            throw new Exception\InvalidArgumentException('Invalid translator specified');
         }
 
         return $this;
@@ -2958,7 +2958,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         } elseif ($translator instanceof Translator\Translator) {
             self::$_translatorDefault = $translator->getAdapter();
         } else {
-            throw new Exception('Invalid translator specified');
+            throw new Exception\InvalidArgumentException('Invalid translator specified');
         }
     }
 
@@ -3067,7 +3067,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * @param  string $name
      * @param  \Zend\Form\Form_Element|\Zend\Form\Form $value
      * @return void
-     * @throws \Zend\Form\Exception for invalid $value
+     * @throws \Zend\Form\Exception\InvalidArgumentException for invalid $value
      */
     public function __set($name, $value)
     {
@@ -3087,7 +3087,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         } else {
             $type = gettype($value);
         }
-        throw new Exception('Only form elements and groups may be overloaded; variable of type "' . $type . '" provided');
+        throw new Exception\InvalidArgumentException('Only form elements and groups may be overloaded; variable of type "' . $type . '" provided');
     }
 
     /**
@@ -3133,7 +3133,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * @param  string $method
      * @param  array $args
      * @return string
-     * @throws \Zend\Form\Exception for invalid decorator or invalid method call
+     * @throws \Zend\Form\Exception\BadMethodCallException for invalid decorator or invalid method call
      */
     public function __call($method, $args)
     {
@@ -3152,10 +3152,10 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                 return $decorator->render($seed);
             }
 
-            throw new Exception(sprintf('Decorator by name %s does not exist', $decoratorName));
+            throw new Exception\BadMethodCallException(sprintf('Decorator by name %s does not exist', $decoratorName));
         }
 
-        throw new Exception(sprintf('Method %s does not exist', $method));
+        throw new Exception\BadMethodCallException(sprintf('Method %s does not exist', $method));
     }
 
     // Interfaces: Iterator, Countable
@@ -3178,7 +3178,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         } elseif (isset($this->_displayGroups[$key])) {
             return $this->getDisplayGroup($key);
         } else {
-            throw new Exception(sprintf('Corruption detected in form; invalid key ("%s") found in internal iterator', (string) $key));
+            throw new Exception\UnexpectedValueException(sprintf('Corruption detected in form; invalid key ("%s") found in internal iterator', (string) $key));
         }
     }
 

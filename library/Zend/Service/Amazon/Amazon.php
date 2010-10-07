@@ -25,7 +25,7 @@
  */
 namespace Zend\Service\Amazon;
 use Zend\Service;
-use Zend\REST\Client;
+use Zend\Rest\Client;
 use Zend\Crypt;
 
 /**
@@ -183,7 +183,7 @@ class Amazon
     public function getRestClient()
     {
         if($this->_rest === null) {
-            $this->_rest = new Client\RESTClient();
+            $this->_rest = new Client\RestClient();
         }
         return $this->_rest;
     }
@@ -194,7 +194,7 @@ class Amazon
      * @param Zend_Rest_Client
      * @return Zend_Service_Amazon
      */
-    public function setRestClient(Client\RESTClient $client)
+    public function setRestClient(Client\RestClient $client)
     {
         $this->_rest = $client;
         return $this;

@@ -90,7 +90,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -104,7 +104,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('mbstring required');
         }
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'is not supported');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'is not supported');
         $this->_filter->setEncoding('aaaaa');
     }
 
@@ -124,7 +124,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -156,7 +156,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }

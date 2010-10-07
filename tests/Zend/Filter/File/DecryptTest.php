@@ -130,7 +130,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $filter = new FileDecrypt();
         $filter->setVector('testvect');
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         $filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 }

@@ -1193,7 +1193,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertType('Zend\Loader\PluginLoader', $loader,
             'Expected object of type Zend\Loader\PluginLoader, got ' , get_class($loader));
 
-        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'Invalid type');
         $loader = $input->getPluginLoader('foo');
     }
 
@@ -1212,7 +1212,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         $loader = new PluginLoader();
 
-        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid type');
         $input->setPluginLoader($loader, 'foo');
     }
 
@@ -1243,7 +1243,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         $input = new InputFilter(null, $validators, $data);
 
-        $this->setExpectedException('Zend\Filter\Exception', 'must implement');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'must implement');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1267,7 +1267,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
     {
         $input = new InputFilter(null, null);
 
-        $this->setExpectedException('Zend\Filter\Exception', 'does not implement');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'does not implement');
         $input->setDefaultEscapeFilter(new \StdClass());
     }
 
@@ -1409,7 +1409,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             'unknown' => 'xxx'
         );
 
-        $this->setExpectedException('Zend\Filter\Exception', 'Unknown option');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown option');
         $input = new InputFilter(null, null, null, $options);
     }
 
@@ -1597,7 +1597,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         try {
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\RuntimeException $e) {
             $this->assertEquals("Input has invalid fields", $e->getMessage());
             $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
             $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1629,7 +1629,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         try {
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\RuntimeException $e) {
             $this->assertEquals("Input has missing fields", $e->getMessage());
             $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
             $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1675,7 +1675,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         );
         $filter = new InputFilter($filters, $validators, $data, $options);
 
-        $this->setExpectedException('Zend\Filter\Exception', 'must implement');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'must implement');
         $filter->process();
     }
 

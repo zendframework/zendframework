@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Filter\File;
-use Zend\Filter;
+use Zend\Filter,
+    Zend\Filter\Exception;
 
 /**
  * Encrypts a given file and stores the encrypted file content
@@ -74,10 +75,10 @@ class Encrypt extends Filter\Encrypt
      * @param  string $value Full path of file to change
      * @return string The filename which has been set, or false when there were errors
      */
-    public function _invoke($value)
+    public function __invoke($value)
     {
         if (!file_exists($value)) {
-            throw new Filter\Exception("File '$value' not found");
+            throw new Exception\InvalidArgumentException("File '$value' not found");
         }
 
         if (!isset($this->_filename)) {
@@ -85,19 +86,19 @@ class Encrypt extends Filter\Encrypt
         }
 
         if (file_exists($this->_filename) and !is_writable($this->_filename)) {
-            throw new Filter\Exception("File '{$this->_filename}' is not writable");
+            throw new Exception\RuntimeException("File '{$this->_filename}' is not writable");
         }
 
         $content = file_get_contents($value);
         if (!$content) {
-            throw new Filter\Exception("Problem while reading file '$value'");
+            throw new Exception\RuntimeException("Problem while reading file '$value'");
         }
 
         $encrypted = parent::__invoke($content);
         $result    = file_put_contents($this->_filename, $encrypted);
 
         if (!$result) {
-            throw new Filter\Exception("Problem while writing file '{$this->_filename}'");
+            throw new Exception\RuntimeException("Problem while writing file '{$this->_filename}'");
         }
 
         return $this->_filename;

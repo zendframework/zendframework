@@ -61,7 +61,7 @@ class Gz extends AbstractCompressionAlgorithm
     public function __construct($options = null)
     {
         if (!extension_loaded('zlib')) {
-            throw new Exception('This filter needs the zlib extension');
+            throw new Exception\ExtensionNotLoadedException('This filter needs the zlib extension');
         }
         parent::__construct($options);
     }
@@ -85,7 +85,7 @@ class Gz extends AbstractCompressionAlgorithm
     public function setLevel($level)
     {
         if (($level < 0) || ($level > 9)) {
-            throw new Exception('Level must be between 0 and 9');
+            throw new Exception\InvalidArgumentException('Level must be between 0 and 9');
         }
 
         $this->_options['level'] = (int) $level;
@@ -110,7 +110,7 @@ class Gz extends AbstractCompressionAlgorithm
     public function setMode($mode)
     {
         if (($mode != 'compress') && ($mode != 'deflate')) {
-            throw new Exception('Given compression mode not supported');
+            throw new Exception\InvalidArgumentException('Given compression mode not supported');
         }
 
         $this->_options['mode'] = $mode;
@@ -151,7 +151,7 @@ class Gz extends AbstractCompressionAlgorithm
         if (!empty($archive)) {
             $file = gzopen($archive, 'w' . $this->getLevel());
             if (!$file) {
-                throw new Exception("Error opening the archive '" . $this->_options['archive'] . "'");
+                throw new Exception\RuntimeException("Error opening the archive '" . $this->_options['archive'] . "'");
             }
 
             gzwrite($file, $content);
@@ -164,7 +164,7 @@ class Gz extends AbstractCompressionAlgorithm
         }
 
         if (!$compressed) {
-            throw new Exception('Error during compression');
+            throw new Exception\RuntimeException('Error during compression');
         }
 
         return $compressed;
@@ -187,7 +187,7 @@ class Gz extends AbstractCompressionAlgorithm
         if (file_exists($archive)) {
             $handler = fopen($archive, "rb");
             if (!$handler) {
-                throw new Exception("Error opening the archive '" . $archive . "'");
+                throw new Exception\RuntimeException("Error opening the archive '" . $archive . "'");
             }
 
             fseek($handler, -4, SEEK_END);
@@ -206,7 +206,7 @@ class Gz extends AbstractCompressionAlgorithm
         }
 
         if (!$compressed) {
-            throw new Exception('Error during compression');
+            throw new Exception\RuntimeException('Error during compression');
         }
 
         return $compressed;

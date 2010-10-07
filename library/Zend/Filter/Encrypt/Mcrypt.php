@@ -74,7 +74,7 @@ class Mcrypt implements EncryptionAlgorithm
     public function __construct($options)
     {
         if (!extension_loaded('mcrypt')) {
-            throw new Exception('This filter needs the mcrypt extension');
+            throw new Exception\ExtensionNotLoadedException('This filter needs the mcrypt extension');
         }
 
         if ($options instanceof \Zend\Config\Config) {
@@ -82,7 +82,7 @@ class Mcrypt implements EncryptionAlgorithm
         } elseif (is_string($options)) {
             $options = array('key' => $options);
         } elseif (!is_array($options)) {
-            throw new Exception('Invalid options argument provided to filter');
+            throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
         }
 
         if (array_key_exists('compression', $options)) {
@@ -121,22 +121,22 @@ class Mcrypt implements EncryptionAlgorithm
         }
 
         if (!is_array($options)) {
-            throw new Exception('Invalid options argument provided to filter');
+            throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
         }
 
         $options = $options + $this->getEncryption();
         $algorithms = mcrypt_list_algorithms($options['algorithm_directory']);
         if (!in_array($options['algorithm'], $algorithms)) {
-            throw new Exception("The algorithm '{$options['algorithm']}' is not supported");
+            throw new Exception\InvalidArgumentException("The algorithm '{$options['algorithm']}' is not supported");
         }
 
         $modes = mcrypt_list_modes($options['mode_directory']);
         if (!in_array($options['mode'], $modes)) {
-            throw new Exception("The mode '{$options['mode']}' is not supported");
+            throw new Exception\InvalidArgumentException("The mode '{$options['mode']}' is not supported");
         }
 
         if (!mcrypt_module_self_test($options['algorithm'], $options['algorithm_directory'])) {
-            throw new Exception('The given algorithm can not be used due an internal mcrypt problem');
+            throw new Exception\InvalidArgumentException('The given algorithm can not be used due an internal mcrypt problem');
         }
 
         if (!isset($options['vector'])) {
@@ -183,7 +183,7 @@ class Mcrypt implements EncryptionAlgorithm
             }
             $vector = mcrypt_create_iv($size, $method);
         } else if (strlen($vector) != $size) {
-            throw new Exception('The given vector has a wrong size for the set algorithm');
+            throw new Exception\InvalidArgumentException('The given vector has a wrong size for the set algorithm');
         }
 
         $this->_encryption['vector'] = $vector;
@@ -293,7 +293,7 @@ class Mcrypt implements EncryptionAlgorithm
             $this->_encryption['mode_directory']);
 
         if ($cipher === false) {
-            throw new Exception('Mcrypt can not be opened with your settings');
+            throw new Exception\RuntimeException('Mcrypt can not be opened with your settings');
         }
 
         return $cipher;
@@ -327,12 +327,12 @@ class Mcrypt implements EncryptionAlgorithm
             $keysize = mcrypt_enc_get_key_size($cipher);
             $key     = substr(md5($key), 0, $keysize);
         } else if (!in_array(strlen($key), $keysizes)) {
-            throw new Exception('The given key has a wrong size for the set algorithm');
+            throw new Exception\RuntimeException('The given key has a wrong size for the set algorithm');
         }
 
         $result = mcrypt_generic_init($cipher, $key, $this->_encryption['vector']);
         if ($result < 0) {
-            throw new Exception('Mcrypt could not be initialize with the given setting');
+            throw new Exception\RuntimeException('Mcrypt could not be initialize with the given setting');
         }
 
         return $this;

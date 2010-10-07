@@ -277,7 +277,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingFalseType()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown');
         $this->_filter->setType(true);
     }
 

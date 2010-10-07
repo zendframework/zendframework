@@ -69,7 +69,7 @@ class Callback extends AbstractFilter
         }
 
         if (!array_key_exists('callback', $options)) {
-            throw new Exception('Missing callback to use');
+            throw new Exception\InvalidArgumentException('Missing callback to use');
         }
 
         $this->setCallback($options['callback']);
@@ -97,7 +97,7 @@ class Callback extends AbstractFilter
     public function setCallback($callback, $options = null)
     {
         if (!is_callable($callback)) {
-            throw new Exception('Callback can not be accessed');
+            throw new Exception\InvalidArgumentException('Callback can not be accessed');
         }
 
         $this->_callback = $callback;

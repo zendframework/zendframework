@@ -85,12 +85,12 @@ class StringToLower extends AbstractFilter
     {
         if ($encoding !== null) {
             if (!function_exists('mb_strtolower')) {
-                throw new Exception('mbstring is required for this feature');
+                throw new Exception\ExtensionNotLoadedException('mbstring is required for this feature');
             }
 
             $encoding = (string) $encoding;
             if (!in_array(strtolower($encoding), array_map('strtolower', mb_list_encodings()))) {
-                throw new Exception("The given encoding '$encoding' is not supported by mbstring");
+                throw new Exception\InvalidArgumentException("The given encoding '$encoding' is not supported by mbstring");
             }
         }
 

@@ -97,7 +97,7 @@ class Encrypt extends AbstractFilter
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithm) {
-            throw new Exception("Encoding adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithm");
+            throw new Exception\InvalidArgumentException("Encoding adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithm");
         }
 
         return $this;
@@ -113,7 +113,7 @@ class Encrypt extends AbstractFilter
     {
         $part = substr($method, 0, 3);
         if ((($part != 'get') and ($part != 'set')) or !method_exists($this->_adapter, $method)) {
-            throw new Exception("Unknown method '{$method}'");
+            throw new Exception\BadMethodCallException("Unknown method '{$method}'");
         }
 
         return call_user_func_array(array($this->_adapter, $method), $options);

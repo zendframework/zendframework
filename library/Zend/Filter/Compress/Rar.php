@@ -63,7 +63,7 @@ class Rar extends AbstractCompressionAlgorithm
     public function __construct($options = null)
     {
         if (!extension_loaded('rar')) {
-            throw new Exception('This filter needs the rar extension');
+            throw new Exception\ExtensionNotLoadedException('This filter needs the rar extension');
         }
         parent::__construct($options);
     }
@@ -87,7 +87,7 @@ class Rar extends AbstractCompressionAlgorithm
     public function setCallback($callback)
     {
         if (!is_callable($callback)) {
-            throw new Exception('Callback can not be accessed');
+            throw new Exception\InvalidArgumentException('Callback can not be accessed');
         }
 
         $this->_options['callback'] = $callback;
@@ -159,7 +159,7 @@ class Rar extends AbstractCompressionAlgorithm
     public function setTarget($target)
     {
         if (!file_exists(dirname($target))) {
-            throw new Exception("The directory '$target' does not exist");
+            throw new Exception\InvalidArgumentException("The directory '$target' does not exist");
         }
 
         $target = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $target);
@@ -177,7 +177,7 @@ class Rar extends AbstractCompressionAlgorithm
     {
         $callback = $this->getCallback();
         if ($callback === null) {
-            throw new Exception('No compression callback available');
+            throw new Exception\RuntimeException('No compression callback available');
         }
 
         $options = $this->getOptions();
@@ -185,7 +185,7 @@ class Rar extends AbstractCompressionAlgorithm
 
         $result = call_user_func($callback, $options, $content);
         if ($result !== true) {
-            throw new Exception('Error compressing the RAR Archive');
+            throw new Exception\RuntimeException('Error compressing the RAR Archive');
         }
 
         return $this->getArchive();
@@ -203,7 +203,7 @@ class Rar extends AbstractCompressionAlgorithm
         if (file_exists($content)) {
             $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
         } elseif (empty($archive) || !file_exists($archive)) {
-            throw new Exception('RAR Archive not found');
+            throw new Exception\RuntimeException('RAR Archive not found');
         }
 
         $password = $this->getPassword();
@@ -214,7 +214,7 @@ class Rar extends AbstractCompressionAlgorithm
         }
 
         if (!$archive) {
-            throw new Exception("Error opening the RAR Archive");
+            throw new Exception\RuntimeException("Error opening the RAR Archive");
         }
 
         $target = $this->getTarget();
@@ -224,7 +224,7 @@ class Rar extends AbstractCompressionAlgorithm
 
         $filelist = rar_list($archive);
         if (!$filelist) {
-            throw new Exception("Error reading the RAR Archive");
+            throw new Exception\RuntimeException("Error reading the RAR Archive");
         }
 
         foreach($filelist as $file) {

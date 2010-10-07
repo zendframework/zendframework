@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Filter\File;
-use Zend\Filter;
+use Zend\Filter,
+    Zend\Filter\Exception;
 
 /**
  * Decrypts a given file and stores the decrypted file content
@@ -77,7 +78,7 @@ class Decrypt extends Filter\Decrypt
     public function __invoke($value)
     {
         if (!file_exists($value)) {
-            throw new Filter\Exception("File '$value' not found");
+            throw new Exception\InvalidArgumentException("File '$value' not found");
         }
 
         if (!isset($this->_filename)) {
@@ -85,19 +86,19 @@ class Decrypt extends Filter\Decrypt
         }
 
         if (file_exists($this->_filename) and !is_writable($this->_filename)) {
-            throw new Filter\Exception("File '{$this->_filename}' is not writable");
+            throw new Exception\RuntimeException("File '{$this->_filename}' is not writable");
         }
 
         $content = file_get_contents($value);
         if (!$content) {
-            throw new Filter\Exception("Problem while reading file '$value'");
+            throw new Exception\RuntimeException("Problem while reading file '$value'");
         }
 
         $decrypted = parent::__invoke($content);
         $result    = file_put_contents($this->_filename, $decrypted);
 
         if (!$result) {
-            throw new Filter\Exception("Problem while writing file '{$this->_filename}'");
+            throw new Exception\RuntimeException("Problem while writing file '{$this->_filename}'");
         }
 
         return $this->_filename;

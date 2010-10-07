@@ -302,7 +302,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
             '?=##'
             );
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception');
+        $this->setExpectedException('\Zend\Filter\Exception\RuntimeException', 'perhaps a rule was not satisfied');
         $filtered = $inflector(array('controller' => 'FooBar'));
     }
 

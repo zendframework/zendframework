@@ -486,7 +486,7 @@ class Inflector extends AbstractFilter
         $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->_target);
 
         if ($this->_throwTargetExceptionsOn && (preg_match('#(?='.$pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
-            throw new Exception('A replacement identifier ' . $this->_targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
+            throw new Exception\RuntimeException('A replacement identifier ' . $this->_targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
         }
 
         return $inflectedTarget;
@@ -520,7 +520,7 @@ class Inflector extends AbstractFilter
         $className  = $this->getPluginLoader()->load($rule);
         $ruleObject = new $className();
         if (!$ruleObject instanceof Filter) {
-            throw new Exception('No class named ' . $rule . ' implementing Zend\\Filter\\Filter could be found');
+            throw new Exception\RuntimeException('No class named ' . $rule . ' implementing Zend\\Filter\\Filter could be found');
         }
 
         return $ruleObject;

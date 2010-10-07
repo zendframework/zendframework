@@ -110,8 +110,8 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $filter = new FileEncrypt();
         $filter->setVector('testvect');
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
-        $filter(dirname(__DIR__).'/_files/nofile.txt');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
+        echo $filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 
     /**

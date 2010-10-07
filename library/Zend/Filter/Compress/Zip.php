@@ -61,7 +61,7 @@ class Zip extends AbstractCompressionAlgorithm
     public function __construct($options = null)
     {
         if (!extension_loaded('zip')) {
-            throw new Exception('This filter needs the zip extension');
+            throw new Exception\ExtensionNotLoadedException('This filter needs the zip extension');
         }
         parent::__construct($options);
     }
@@ -109,7 +109,7 @@ class Zip extends AbstractCompressionAlgorithm
     public function setTarget($target)
     {
         if (!file_exists(dirname($target))) {
-            throw new Exception("The directory '$target' does not exist");
+            throw new Exception\InvalidArgumentException("The directory '$target' does not exist");
         }
 
         $target = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $target);
@@ -129,7 +129,7 @@ class Zip extends AbstractCompressionAlgorithm
         $res = $zip->open($this->getArchive(), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         if ($res !== true) {
-            throw new Exception($this->_errorString($res));
+            throw new Exception\RuntimeException($this->_errorString($res));
         }
 
         if (file_exists($content)) {
@@ -164,14 +164,14 @@ class Zip extends AbstractCompressionAlgorithm
                     foreach ($files as $file) {
                         $zip->addFile($current . $file, $local . $file);
                         if ($res !== true) {
-                            throw new Exception($this->_errorString($res));
+                            throw new Exception\RuntimeException($this->_errorString($res));
                         }
                     }
                 }
             } else {
                 $res = $zip->addFile($content, $basename);
                 if ($res !== true) {
-                    throw new Exception($this->_errorString($res));
+                    throw new Exception\RuntimeException($this->_errorString($res));
                 }
             }
         } else {
@@ -184,7 +184,7 @@ class Zip extends AbstractCompressionAlgorithm
 
             $res = $zip->addFromString($file, $content);
             if ($res !== true) {
-                throw new Exception($this->_errorString($res));
+                throw new Exception\RuntimeException($this->_errorString($res));
             }
         }
 
@@ -204,7 +204,7 @@ class Zip extends AbstractCompressionAlgorithm
         if (file_exists($content)) {
             $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
         } elseif (empty($archive) || !file_exists($archive)) {
-            throw new Exception('ZIP Archive not found');
+            throw new Exception\RuntimeException('ZIP Archive not found');
         }
 
         $zip = new \ZipArchive();
@@ -221,11 +221,11 @@ class Zip extends AbstractCompressionAlgorithm
         }
 
         if (empty($target) || !is_dir($target)) {
-            throw new Exception('No target for ZIP decompression set');
+            throw new Exception\RuntimeException('No target for ZIP decompression set');
         }
 
         if ($res !== true) {
-            throw new Exception($this->_errorString($res));
+            throw new Exception\RuntimeException($this->_errorString($res));
         }
 
         if (version_compare(PHP_VERSION, '5.2.8', '<')) {
@@ -237,7 +237,7 @@ class Zip extends AbstractCompressionAlgorithm
                     (substr($currName, 0, 4) == './..')
                     )
                 {
-                    throw new Exception('Upward directory traversal was detected inside ' . $archive
+                    throw new Exception\RuntimeException('Upward directory traversal was detected inside ' . $archive
                         . ' please use PHP 5.2.8 or greater to take advantage of path resolution features of '
                         . 'the zip extension in this decompress() method.'
                         );
@@ -247,7 +247,7 @@ class Zip extends AbstractCompressionAlgorithm
         
         $res = @$zip->extractTo($target);
         if ($res !== true) {
-            throw new Exception($this->_errorString($res));
+            throw new Exception\RuntimeException($this->_errorString($res));
         }
 
         $zip->close();

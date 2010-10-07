@@ -93,7 +93,7 @@ class StaticFilter
             try {
                 $className  = $loader->load($classBaseName);
             } catch (Loader\Exception $e) {
-                throw new Exception("Filter class not found from basename '$classBaseName'", null, $e);
+                throw new Exception\InvalidArgumentException("Filter class not found from basename '$classBaseName'", null, $e);
             }
         } else {
             $className = $classBaseName;
@@ -101,7 +101,7 @@ class StaticFilter
 
         $class = new \ReflectionClass($className);
         if (!$class->implementsInterface('Zend\Filter\Filter')) {
-            throw new Exception("Filter class not found from basename '$classBaseName'");
+            throw new Exception\InvalidArgumentException("Filter class not found from basename '$classBaseName'");
         }
 
         if ((0 < count($args)) && $class->hasMethod('__construct')) {

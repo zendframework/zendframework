@@ -185,12 +185,8 @@ class TarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Testfile.txt', $filter->getTarget());
         $this->assertEquals('Testfile.txt', $filter->getOptions('target'));
 
-        try {
-            $filter->setTarget('/unknown/path/to/file.txt');
-            $this->fail('Exception expected');
-        } catch(\Zend\Filter\Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'does not exist');
+        $filter->setTarget('/unknown/path/to/file.txt');
     }
 
     /**

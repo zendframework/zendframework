@@ -158,7 +158,7 @@ class Boolean extends AbstractFilter
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            throw new Exception('Unknown type');
+            throw new Exception\InvalidArgumentException('Unknown type');
         }
 
         $this->_type = $type;
@@ -189,12 +189,12 @@ class Boolean extends AbstractFilter
         } elseif ($locale instanceof Locale) {
             $locale = array($locale->toString());
         } elseif (!is_array($locale)) {
-            throw new Exception('Locale has to be string, array or an instance of Zend_Locale');
+            throw new Exception\InvalidArgumentException('Locale has to be string, array or an instance of Zend_Locale');
         }
 
         foreach ($locale as $single) {
             if (!Locale::isLocale($single)) {
-                throw new Exception("Unknown locale '$single'");
+                throw new Exception\InvalidArgumentException("Unknown locale '$single'");
             }
         }
 

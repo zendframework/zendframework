@@ -67,7 +67,7 @@ class Tar extends AbstractCompressionAlgorithm
             try {
                 \Zend\Loader::loadClass('Archive_Tar');
             } catch (\Zend\Exception $e) {
-                throw new Exception('This filter needs PEARs Archive_Tar', 0, $e);
+                throw new Exception\ExtensionNotLoadedException('This filter needs PEARs Archive_Tar', 0, $e);
             }
         }
 
@@ -117,7 +117,7 @@ class Tar extends AbstractCompressionAlgorithm
     public function setTarget($target)
     {
         if (!file_exists(dirname($target))) {
-            throw new Exception("The directory '$target' does not exist");
+            throw new Exception\InvalidArgumentException("The directory '$target' does not exist");
         }
 
         $target = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $target);
@@ -143,15 +143,15 @@ class Tar extends AbstractCompressionAlgorithm
     {
         $mode = ucfirst(strtolower($mode));
         if (($mode != 'Bz2') && ($mode != 'Gz')) {
-            throw new Exception("The mode '$mode' is unknown");
+            throw new Exception\InvalidArgumentException("The mode '$mode' is unknown");
         }
 
         if (($mode == 'Bz2') && (!extension_loaded('bz2'))) {
-            throw new Exception('This mode needs the bz2 extension');
+            throw new Exception\ExtensionNotLoadedException('This mode needs the bz2 extension');
         }
 
         if (($mode == 'Gz') && (!extension_loaded('zlib'))) {
-            throw new Exception('This mode needs the zlib extension');
+            throw new Exception\ExtensionNotLoadedException('This mode needs the zlib extension');
         }
     }
 
@@ -172,7 +172,7 @@ class Tar extends AbstractCompressionAlgorithm
 
             $result = file_put_contents($file, $content);
             if ($result === false) {
-                throw new Exception('Error creating the temporary file');
+                throw new Exception\RuntimeException('Error creating the temporary file');
             }
 
             $content = $file;
@@ -195,7 +195,7 @@ class Tar extends AbstractCompressionAlgorithm
 
         $result  = $archive->create($content);
         if ($result === false) {
-            throw new Exception('Error creating the Tar archive');
+            throw new Exception\RuntimeException('Error creating the Tar archive');
         }
 
         return $this->getArchive();
@@ -213,7 +213,7 @@ class Tar extends AbstractCompressionAlgorithm
         if (file_exists($content)) {
             $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
         } elseif (empty($archive) || !file_exists($archive)) {
-            throw new Exception('Tar Archive not found');
+            throw new Exception\RuntimeException('Tar Archive not found');
         }
 
         $archive = new \Archive_Tar($archive, $this->getMode());
@@ -224,7 +224,7 @@ class Tar extends AbstractCompressionAlgorithm
 
         $result = $archive->extract($target);
         if ($result === false) {
-            throw new Exception('Error while extracting the Tar archive');
+            throw new Exception\RuntimeException('Error while extracting the Tar archive');
         }
 
         return true;

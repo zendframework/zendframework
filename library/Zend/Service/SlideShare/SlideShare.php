@@ -29,19 +29,18 @@ use Zend\Cache\Frontend;
 use Zend\Http\Client;
 
 /**
- * The Zend_Service_SlideShare component is used to interface with the
+ * The Zend\Service\SlideShare component is used to interface with the
  * slideshare.net web server to retrieve slide shows hosted on the web site for
  * display or other processing.
  *
- * @uses       Zend_Cache
- * @uses       Zend_Http_Client
- * @uses       Zend_Http_Client
- * @uses       Zend_Service_SlideShare_Exception
- * @uses       Zend_Service_SlideShare_SlideShow
+ * @uses       Zend\Cache
+ * @uses       Zend\Http\Client
+ * @uses       Zend\Service\SlideShare\Exception
+ * @uses       Zend\Service\SlideShare\SlideShow
  * @category   Zend
  * @package    Zend_Service
  * @subpackage SlideShare
- * @throws     Zend_Service_SlideShare_Exception
+ * @throws     Zend\Service\SlideShare\Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -112,23 +111,23 @@ class SlideShare
     /**
      * The HTTP Client object to use to perform requests
      *
-     * @var Zend_Http_Client
+     * @var Zend\Http\Client
      */
     protected $_httpclient;
 
     /**
      * The Cache object to use to perform caching
      *
-     * @var Zend_Cache_Core
+     * @var Zend\Cache\Frontend\Core
      */
     protected $_cacheobject;
 
     /**
-     * Sets the Zend_Http_Client object to use in requests. If not provided a default will
+     * Sets the Zend\Http\Client object to use in requests. If not provided a default will
      * be used.
      *
-     * @param Zend_Http_Client $client The HTTP client instance to use
-     * @return Zend_Service_SlideShare
+     * @param Zend\Http\Client $client The HTTP client instance to use
+     * @return Zend\Service\SlideShare\SlideShare
      */
     public function setHttpClient(Http\Client $client)
     {
@@ -137,10 +136,10 @@ class SlideShare
     }
 
     /**
-     * Returns the instance of the Zend_Http_Client which will be used. Creates an instance
-     * of Zend_Http_Client if no previous client was set.
+     * Returns the instance of the Zend\Http\Client which will be used. Creates an instance
+     * of Zend\Http\Client if no previous client was set.
      *
-     * @return Zend_Http_Client The HTTP client which will be used
+     * @return Zend\Http\Client The HTTP client which will be used
      */
     public function getHttpClient()
     {
@@ -158,10 +157,10 @@ class SlideShare
     }
 
     /**
-     * Sets the Zend_Cache object to use to cache the results of API queries
+     * Sets the Zend\Cache\Frontend\Core object to use to cache the results of API queries
      *
-     * @param Zend_Cache_Core $cacheobject The Zend_Cache object used
-     * @return Zend_Service_SlideShare
+     * @param Zend\Cache\Frontend\Core $cacheobject The Zend\Cache\Frontend\Core object used
+     * @return Zend\Service\SlideShare\SlideShare
      */
     public function setCacheObject(Frontend\Core $cacheobject)
     {
@@ -170,11 +169,11 @@ class SlideShare
     }
 
     /**
-     * Gets the Zend_Cache object which will be used to cache API queries. If no cache object
+     * Gets the Zend\Cache object which will be used to cache API queries. If no cache object
      * was previously set the the default will be used (Filesystem caching in /tmp with a life
      * time of 43200 seconds)
      *
-     * @return Zend_Cache_Core The object used in caching
+     * @return Zend\Cache\Frontend\Core The object used in caching
      */
     public function getCacheObject()
     {
@@ -204,7 +203,7 @@ class SlideShare
      * Sets the user name to use for API calls
      *
      * @param string $un The username to use
-     * @return Zend_Service_SlideShare
+     * @return Zend\Service\SlideShare\SlideShare
      */
     public function setUserName($un)
     {
@@ -226,7 +225,7 @@ class SlideShare
      * Sets the password to use in API calls
      *
      * @param string $pw The password to use
-     * @return Zend_Service_SlideShare
+     * @return Zend\Service\SlideShare\SlideShare
      */
     public function setPassword($pw)
     {
@@ -248,7 +247,7 @@ class SlideShare
      * Sets the API key to be used in making API calls
      *
      * @param string $key The API key to use
-     * @return Zend_Service_SlideShare
+     * @return Zend\Service\SlideShare\SlideShare
      */
     public function setApiKey($key)
     {
@@ -270,7 +269,7 @@ class SlideShare
      * Sets the shared secret used in making API calls
      *
      * @param string $secret the shared secret
-     * @return Zend_Service_SlideShare
+     * @return Zend\Service\SlideShare\SlideShare
      */
     public function setSharedSecret($secret)
     {
@@ -299,9 +298,10 @@ class SlideShare
     /**
      * Uploads the specified Slide show the the server
      *
-     * @param Zend_Service_SlideShare_SlideShow $ss The slide show object representing the slide show to upload
+     * @param Zend\Service\SlideShare\SlideShow $ss The slide show object representing the slide show to upload
      * @param boolean $make_src_public Determines if the the slide show's source file is public or not upon upload
-     * @return Zend_Service_SlideShare_SlideShow The passed Slide show object, with the new assigned ID provided
+     * @throws \Zend\Service\SlideShare\Exception
+     * @return Zend\Service\SlideShare\SlideShow The passed Slide show object, with the new assigned ID provided
      */
     public function uploadSlideShow(SlideShow $ss, $make_src_public = true)
     {
@@ -321,7 +321,7 @@ class SlideShare
         $filename = $ss->getFilename();
 
         if(!file_exists($filename) || !is_readable($filename)) {
-            throw new Exception("Specified Slideshow for upload not found or unreadable");
+            throw new Exception\InvalidArgumentException("Specified Slideshow for upload not found or unreadable");
         }
 
         if(!empty($description)) {
@@ -349,7 +349,7 @@ class SlideShare
         try {
             $response = $client->request('POST');
         } catch(Client\Exception $e) {
-            throw new Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
+            throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
         }
 
         $sxe = simplexml_load_string($response->getBody());
@@ -357,11 +357,11 @@ class SlideShare
         if($sxe->getName() == "SlideShareServiceError") {
             $message = (string)$sxe->Message[0];
             list($code, $error_str) = explode(':', $message);
-            throw new Exception(trim($error_str), $code);
+            throw new Exception\RuntimeException(trim($error_str), $code);
         }
 
         if(!$sxe->getName() == "SlideShowUploaded") {
-            throw new Exception("Unknown XML Respons Received");
+            throw new Exception\RuntimeException("Unknown XML Respons Received");
         }
 
         $ss->setId((int)(string)$sxe->SlideShowID);
@@ -373,7 +373,8 @@ class SlideShare
      * Retrieves a slide show's information based on slide show ID
      *
      * @param int $ss_id The slide show ID
-     * @return Zend_Service_SlideShare_SlideShow the Slideshow object
+     * @throws \Zend\Service\SlideShare\Exception
+     * @return Zend\Service\SlideShare\SlideShow the Slideshow object
      */
     public function getSlideShow($ss_id)
     {
@@ -397,7 +398,7 @@ class SlideShare
             try {
                 $response = $client->request('POST');
             } catch(Client\Exception $e) {
-                throw new Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
+                throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());
@@ -405,11 +406,11 @@ class SlideShare
             if($sxe->getName() == "SlideShareServiceError") {
                 $message = (string)$sxe->Message[0];
                 list($code, $error_str) = explode(':', $message);
-                throw new Exception(trim($error_str), $code);
+                throw new Exception\RuntimeException(trim($error_str), $code);
             }
 
             if(!$sxe->getName() == 'Slideshows') {
-                throw new Exception('Unknown XML Repsonse Received');
+                throw new Exception\RuntimeException('Unknown XML Repsonse Received');
             }
 
             $retval = $this->_slideShowNodeToObject(clone $sxe->Slideshow[0]);
@@ -426,7 +427,7 @@ class SlideShare
      * @param string $username The username to retrieve slide shows from
      * @param int $offset The offset of the list to start retrieving from
      * @param int $limit The maximum number of slide shows to retrieve
-     * @return array An array of Zend_Service_SlideShare_SlideShow objects
+     * @return array An array of Zend\Service\SlideShare\SlideShow objects
      */
     public function getSlideShowsByUsername($username, $offset = null, $limit = null)
     {
@@ -439,7 +440,7 @@ class SlideShare
      * @param string $tag The tag to retrieve slide shows with
      * @param int $offset The offset of the list to start retrieving from
      * @param int $limit The maximum number of slide shows to retrieve
-     * @return array An array of Zend_Service_SlideShare_SlideShow objects
+     * @return array An array of Zend\Service\SlideShare\SlideShow objects
      */
     public function getSlideShowsByTag($tag, $offset = null, $limit = null)
     {
@@ -462,7 +463,7 @@ class SlideShare
      * @param string $group The group name to retrieve slide shows for
      * @param int $offset The offset of the list to start retrieving from
      * @param int $limit The maximum number of slide shows to retrieve
-     * @return array An array of Zend_Service_SlideShare_SlideShow objects
+     * @return array An array of Zend\Service\SlideShare\SlideShow objects
      */
     public function getSlideShowsByGroup($group, $offset = null, $limit = null)
     {
@@ -470,14 +471,15 @@ class SlideShare
     }
 
     /**
-     * Retrieves Zend_Service_SlideShare_SlideShow object arrays based on the type of
+     * Retrieves Zend\Service\SlideShare\SlideShow object arrays based on the type of
      * list desired
      *
      * @param string $key The type of slide show object to retrieve
      * @param string $value The specific search query for the slide show type to look up
      * @param int $offset The offset of the list to start retrieving from
      * @param int $limit The maximum number of slide shows to retrieve
-     * @return array An array of Zend_Service_SlideShare_SlideShow objects
+     * @throws \Zend\Service\SlideShare\Exception
+     * @return array An array of Zend\Service\SlideShare\SlideShow objects
      */
     protected function _getSlideShowsByType($key, $value, $offset = null, $limit = null)
     {
@@ -498,7 +500,7 @@ class SlideShare
                 $queryUri = self::SERVICE_GET_SHOW_BY_TAG_URI;
                 break;
             default:
-                throw new Exception("Invalid SlideShare Query");
+                throw new Exception\RuntimeException("Invalid SlideShare Query");
         }
 
         $timestamp = time();
@@ -530,7 +532,7 @@ class SlideShare
             try {
                 $response = $client->request('POST');
             } catch(Client\Exception $e) {
-                throw new Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
+                throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());
@@ -538,11 +540,11 @@ class SlideShare
             if($sxe->getName() == "SlideShareServiceError") {
                 $message = (string)$sxe->Message[0];
                 list($code, $error_str) = explode(':', $message);
-                throw new Exception(trim($error_str), $code);
+                throw new Exception\RuntimeException(trim($error_str), $code);
             }
 
             if(!$sxe->getName() == $responseTag) {
-                throw new Exception('Unknown or Invalid XML Repsonse Received');
+                throw new Exception\RuntimeException('Unknown or Invalid XML Repsonse Received');
             }
 
             $retval = array();
@@ -561,10 +563,11 @@ class SlideShare
 
     /**
      * Converts a SimpleXMLElement object representing a response from the service
-     * into a Zend_Service_SlideShare_SlideShow object
+     * into a Zend\Service\SlideShare\SlideShow object
      *
      * @param SimpleXMLElement $node The input XML from the slideshare.net service
-     * @return Zend_Service_SlideShare_SlideShow The resulting object
+     * @throws \Zend\Service\SlideShare\Exception
+     * @return Zend\Service\SlideShare\SlideShow The resulting object
      */
     protected function _slideShowNodeToObject(\SimpleXMLElement $node)
     {
@@ -597,6 +600,6 @@ class SlideShare
 
         }
 
-        throw new Exception("Was not provided the expected XML Node for processing");
+        throw new Exception\RuntimeException("Was not provided the expected XML Node for processing");
     }
 }

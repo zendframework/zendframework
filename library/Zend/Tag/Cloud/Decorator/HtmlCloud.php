@@ -48,7 +48,7 @@ class HTMLCloud extends Cloud
      * @var array
      */
     protected $_htmlTags = array(
-        'ul' => array('class' => 'Zend_Tag_Cloud')
+        'ul' => array('class' => 'Zend\Tag\Cloud')
     );
 
     /**
@@ -125,7 +125,7 @@ class HTMLCloud extends Cloud
     }
 
     /**
-     * Defined by Zend_Tag_Cloud_Decorator_Cloud
+     * Defined by Zend\Tag\Cloud\Decorator\Cloud
      *
      * @param  array $tags
      * @return string

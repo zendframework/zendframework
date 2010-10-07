@@ -26,7 +26,7 @@
 namespace Zend\Tag;
 
 /**
- * @uses       \Zend\Tag\Exception
+ * @uses       \Zend\Tag\Exception\InvalidArgumentException
  * @uses       \Zend\Tag\Taggable
  * @category   Zend
  * @package    Zend_Tag
@@ -71,9 +71,9 @@ class Item implements Taggable
      * Create a new tag according to the options
      *
      * @param  array|\Zend\Config\Config $options
-     * @throws \Zend\Tag\Exception When invalid options are provided
-     * @throws \Zend\Tag\Exception When title was not set
-     * @throws \Zend\Tag\Exception When weight was not set
+     * @throws \Zend\Tag\Exception\InvalidArgumentException When invalid options are provided
+     * @throws \Zend\Tag\Exception\InvalidArgumentException When title was not set
+     * @throws \Zend\Tag\Exception\InvalidArgumentException When weight was not set
      * @return void
      */
     public function __construct($options)
@@ -83,17 +83,17 @@ class Item implements Taggable
         }
 
         if (!is_array($options)) {
-            throw new Exception('Invalid options provided to constructor');
+            throw new Exception\InvalidArgumentException('Invalid options provided to constructor');
         }
 
         $this->setOptions($options);
 
         if ($this->_title === null) {
-            throw new Exception('Title was not set');
+            throw new Exception\InvalidArgumentException('Title was not set');
         }
 
         if ($this->_weight === null) {
-            throw new Exception('Weight was not set');
+            throw new Exception\InvalidArgumentException('Weight was not set');
         }
     }
 
@@ -120,7 +120,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend_Tag_Taggable
+     * Defined by Zend\Tag\Taggable
      *
      * @return string
      */
@@ -133,13 +133,13 @@ class Item implements Taggable
      * Set the title
      *
      * @param  string $title
-     * @throws \Zend\Tag\Exception When title is no string
+     * @throws \Zend\Tag\Exception\InvalidArgumentException When title is no string
      * @return \Zend\Tag\Item
      */
     public function setTitle($title)
     {
         if (!is_string($title)) {
-            throw new Exception('Title must be a string');
+            throw new Exception\InvalidArgumentException('Title must be a string');
         }
 
         $this->_title = (string) $title;
@@ -147,7 +147,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend_Tag_Taggable
+     * Defined by Zend\Tag\Taggable
      *
      * @return float
      */
@@ -160,13 +160,13 @@ class Item implements Taggable
      * Set the weight
      *
      * @param  float $weight
-     * @throws \Zend\Tag\Exception When weight is not numeric
+     * @throws \Zend\Tag\Exception\InvalidArgumentException When weight is not numeric
      * @return \Zend\Tag\Item
      */
     public function setWeight($weight)
     {
         if (!is_numeric($weight)) {
-            throw new Exception('Weight must be numeric');
+            throw new Exception\InvalidArgumentException('Weight must be numeric');
         }
 
         $this->_weight = (float) $weight;
@@ -189,7 +189,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend_Tag_Taggable
+     * Defined by Zend\Tag\Taggable
      *
      * @param  string $name
      * @param  mixed  $value
@@ -202,7 +202,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend_Tag_Taggable
+     * Defined by Zend\Tag\Taggable
      *
      * @param  string $name
      * @return mixed

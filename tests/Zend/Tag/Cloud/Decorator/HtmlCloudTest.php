@@ -36,48 +36,48 @@ use Zend\Tag\Cloud\Decorator;
  * @group      Zend_Tag
  * @group      Zend_Tag_Cloud
  */
-class HTMLCloudTest extends \PHPUnit_Framework_TestCase
+class HtmlCloudTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefaultOutput()
     {
-        $decorator = new Decorator\HTMLCloud();
+        $decorator = new Decorator\HtmlCloud();
 
-        $this->assertEquals('<ul class="Zend_Tag_Cloud">foo bar</ul>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<ul class="Zend\Tag\Cloud">foo bar</ul>', $decorator->render(array('foo', 'bar')));
     }
 
     public function testNestedTags()
     {
-        $decorator = new Decorator\HTMLCloud();
-        $decorator->setHTMLTags(array('span', 'div' => array('id' => 'tag-cloud')));
+        $decorator = new Decorator\HtmlCloud();
+        $decorator->setHtmlTags(array('span', 'div' => array('id' => 'tag-cloud')));
 
         $this->assertEquals('<div id="tag-cloud"><span>foo bar</span></div>', $decorator->render(array('foo', 'bar')));
     }
 
     public function testSeparator()
     {
-        $decorator = new Decorator\HTMLCloud();
+        $decorator = new Decorator\HtmlCloud();
         $decorator->setSeparator('-');
 
-        $this->assertEquals('<ul class="Zend_Tag_Cloud">foo-bar</ul>', $decorator->render(array('foo', 'bar')));
+        $this->assertEquals('<ul class="Zend\Tag\Cloud">foo-bar</ul>', $decorator->render(array('foo', 'bar')));
     }
 
     public function testConstructorWithArray()
     {
-        $decorator = new Decorator\HTMLCloud(array('htmlTags' => array('div'), 'separator' => ' '));
+        $decorator = new Decorator\HtmlCloud(array('htmlTags' => array('div'), 'separator' => ' '));
 
         $this->assertEquals('<div>foo bar</div>', $decorator->render(array('foo', 'bar')));
     }
 
     public function testConstructorWithConfig()
     {
-        $decorator = new Decorator\HTMLCloud(new \Zend\Config\Config(array('htmlTags' => array('div'), 'separator' => ' ')));
+        $decorator = new Decorator\HtmlCloud(new \Zend\Config\Config(array('htmlTags' => array('div'), 'separator' => ' ')));
 
         $this->assertEquals('<div>foo bar</div>', $decorator->render(array('foo', 'bar')));
     }
 
     public function testSetOptions()
     {
-        $decorator = new Decorator\HTMLCloud();
+        $decorator = new Decorator\HtmlCloud();
         $decorator->setOptions(array('htmlTags' => array('div'), 'separator' => ' '));
 
         $this->assertEquals('<div>foo bar</div>', $decorator->render(array('foo', 'bar')));
@@ -85,7 +85,7 @@ class HTMLCloudTest extends \PHPUnit_Framework_TestCase
 
     public function testSkipOptions()
     {
-        $decorator = new Decorator\HTMLCloud(array('options' => 'foobar'));
+        $decorator = new Decorator\HtmlCloud(array('options' => 'foobar'));
         // In case would fail due to an error
     }
 }

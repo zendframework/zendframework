@@ -23,13 +23,14 @@
  * @namespace
  */
 namespace Zend\Uri;
-use Zend\Validator\Hostname;
+use Zend\Validator\Hostname,
+    Zend\Uri\Exception\InvalidArgumentException;
 
 /**
  * URL handler
  *
  * @uses      \Zend\URI\URI
- * @uses      \Zend\URI\Exception
+ * @uses      \Zend\URI\Exception\InvalidArgumentException
  * @uses      \Zend\Validator\Hostname\Hostname
  * @category  Zend
  * @package   Zend_Uri
@@ -81,6 +82,7 @@ class Url implements Uri
      * 
      * @param string $regexName
      * @param bool $allowUnwiseCharset
+     * @throws \Zend\Uri\Exception\InvalidArgumentException
      */
     final protected static function _getRegex($regexName, $allowUnwiseCharset = false)
     {
@@ -107,7 +109,7 @@ class Url implements Uri
         }
         
         if (!array_key_exists($regexName, self::$_regex)) {
-            throw new \InvalidArgumentException('Requested regex ' . $regexName . ' is not a valid regexName');
+            throw new InvalidArgumentException('Requested regex ' . $regexName . ' is not a valid regexName');
         }
         
         switch ($regexName) {
@@ -134,7 +136,7 @@ class Url implements Uri
         }
         try {
             $url = new self($url);
-        } catch (\Exception $exception) {
+        } catch (InvalidArgumentException $exception) {
             return false;
         }
 
@@ -343,6 +345,7 @@ class Url implements Uri
     /**
      * parse()
      * @param unknown_type $url
+     * @throws \Zend\Uri\Exception\InvalidArgumentException
      */
     public function parse($url)
     {
@@ -350,7 +353,7 @@ class Url implements Uri
         $parts = parse_url($url);
         
         if ($parts === false) {
-            throw new Exception('The url provided ' . $url . ' is not parsable.');
+            throw new InvalidArgumentException('The url provided ' . $url . ' is not parsable.');
         }
         
         $options = array();

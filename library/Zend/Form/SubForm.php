@@ -24,7 +24,7 @@
 namespace Zend\Form;
 
 /**
- * Zend_Form_SubForm
+ * Zend\Form\SubForm
  *
  * @uses       \Zend\Form\Form
  * @category   Zend
@@ -44,7 +44,7 @@ class SubForm extends Form
     /**
      * Load the default decorators
      *
-     * @return Zend_Form_SubForm
+     * @return Zend\Form\SubForm
      */
     public function loadDefaultDecorators()
     {

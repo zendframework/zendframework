@@ -55,12 +55,12 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
 
         $this->Zend_Service_Amazon_Ec2_Availabilityzones = new Ec2\AvailabilityZones('access_key', 'secret_access_key');
 
-        $adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client = new \Zend\HTTP\Client(null, array(
+        $adapter = new \Zend\Http\Client\Adapter\Test();
+        $client = new \Zend\Http\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Ec2\AvailabilityZones::setDefaultHTTPClient($client);
+        Ec2\AvailabilityZones::setDefaultHttpClient($client);
 
     }
 

@@ -141,7 +141,7 @@ class NotEmpty extends AbstractValidator
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            throw new Exception('Unknown type');
+            throw new Exception\InvalidArgumentException('Unknown type');
         }
 
         $this->_type = $type;

@@ -204,12 +204,9 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator\CreditCard();
         $this->assertEquals(null, $validator->getService());
-        try {
-            $validator->setService(array('\ZendTest\Validator\CreditCardTest', 'nocallback'));
-            $this->fail('Exception expected');
-        } catch(\Zend\Exception $e) {
-            $this->assertContains('Invalid callback given', $e->getMessage());
-        }
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid callback given');
+        $validator->setService(array('\ZendTest\Validator\CreditCardTest', 'nocallback'));
     }
 
     /**

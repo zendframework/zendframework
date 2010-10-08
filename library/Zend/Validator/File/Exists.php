@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator;
+use Zend\Validator,
+    Zend\Validator\Exception;
 
 /**
  * Validator which checks if the file already exists in the directory
@@ -75,7 +76,7 @@ class Exists extends Validator\AbstractValidator
         } else if (is_string($directory)) {
             $directory = explode(',', $directory);
         } else if (!is_array($directory)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $this->setDirectory($directory);
@@ -124,7 +125,7 @@ class Exists extends Validator\AbstractValidator
         if (is_string($directory)) {
             $directory = explode(',', $directory);
         } else if (!is_array($directory)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         foreach ($directory as $content) {

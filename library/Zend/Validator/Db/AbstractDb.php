@@ -25,7 +25,7 @@
 namespace Zend\Validator\Db;
 
 use Zend\Validator\AbstractValidator,
-    Zend\Validator\Exception as ValidatorException,
+    Zend\Validator\Exception,
     Zend\Config\Config,
     Zend\Db\Db,
     Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
@@ -124,11 +124,11 @@ abstract class AbstractDb extends AbstractValidator
         }
 
         if (!array_key_exists('table', $options) && !array_key_exists('schema', $options)) {
-            throw new ValidatorException('Table or Schema option missing!');
+            throw new Exception\InvalidArgumentException('Table or Schema option missing!');
         }
 
         if (!array_key_exists('field', $options)) {
-            throw new ValidatorException('Field option missing!');
+            throw new Exception\InvalidArgumentException('Field option missing!');
         }
 
         if (array_key_exists('adapter', $options)) {
@@ -168,7 +168,7 @@ abstract class AbstractDb extends AbstractValidator
     public function setAdapter($adapter)
     {
         if (!($adapter instanceof AbstractdBAdapter)) {
-            throw new ValidatorException('Adapter option must be a database adapter!');
+            throw new Exception\InvalidArgumentException('Adapter option must be a database adapter!');
         }
 
         $this->_adapter = $adapter;
@@ -277,7 +277,7 @@ abstract class AbstractDb extends AbstractValidator
         if ($this->_adapter === null) {
             $this->_adapter = AbstractTable::getDefaultAdapter();
             if (null === $this->_adapter) {
-                throw new ValidatorException('No database adapter present');
+                throw new Exception\RuntimeException('No database adapter present');
             }
         }
 

@@ -74,7 +74,7 @@ class GreaterThan extends AbstractValidator
             if (array_key_exists('min', $min)) {
                 $min = $min['min'];
             } else {
-                throw new Exception("Missing option 'min'");
+                throw new Exception\InvalidArgumentException("Missing option 'min'");
             }
         }
 

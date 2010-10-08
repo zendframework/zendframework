@@ -55,16 +55,6 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     protected $_validator;
 
-    /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite('Zend_Validate_PostCodeTest');
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Creates a new Zend_Validate_PostCode object for each test method
@@ -118,12 +108,8 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingLocalesWithoutRegion()
     {
-        try {
-            $this->_validator->setLocale('de');
-            $this->fail();
-        } catch (Validator\Exception $e) {
-            $this->assertContains('Unable to detect a region', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Unable to detect a region');
+        $this->_validator->setLocale('de');
     }
 
     /**
@@ -131,12 +117,8 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingLocalesWithoutPostalCodes()
     {
-        try {
-            $this->_validator->setLocale('gez_ER');
-            $this->fail();
-        } catch (Validator\Exception $e) {
-            $this->assertContains('Unable to detect a postcode format', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Unable to detect a postcode format');
+        $this->_validator->setLocale('gez_ER');
     }
 
     /**
@@ -163,20 +145,18 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
 
         $this->_validator->setFormat('\d{1}$/');
         $this->assertEquals('/^\d{1}$/', $this->_validator->getFormat());
-
-        try {
-            $this->_validator->setFormat(null);
-            $this->fail();
-        } catch (Validator\Exception $e) {
-            $this->assertContains('A postcode-format string has to be given', $e->getMessage());
-        }
-
-        try {
-            $this->_validator->setFormat('');
-            $this->fail();
-        } catch (Validator\Exception $e) {
-            $this->assertContains('A postcode-format string has to be given', $e->getMessage());
-        }
+    }
+    
+    public function testSetGetFormatThrowsExceptionOnNullFormat()
+    {
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'A postcode-format string has to be given');
+        $this->_validator->setFormat(null);        
+    }
+    
+    public function testSetGetFormatThrowsExceptionOnEmptyFormat()
+    {
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'A postcode-format string has to be given');
+        $this->_validator->setFormat('');
     }
 
     /**
@@ -188,8 +168,4 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
         $message = $this->_validator->getMessages();
         $this->assertContains('not appear to be a postal code', $message['postcodeNoMatch']);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Validate_PostCodeTest::main') {
-    \Zend_Validate_PostCodeTest::main();
 }

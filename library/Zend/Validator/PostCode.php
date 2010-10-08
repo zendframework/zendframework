@@ -99,7 +99,7 @@ class PostCode extends AbstractValidator
 
         $format = $this->getFormat();
         if (empty($format)) {
-            throw new Exception("A postcode-format string has to be given for validation");
+            throw new Exception\InvalidArgumentException("A postcode-format string has to be given for validation");
         }
     }
 
@@ -127,7 +127,7 @@ class PostCode extends AbstractValidator
         $locale        = new Locale\Locale($this->_locale);
         $region        = $locale->getRegion();
         if (empty($region)) {
-            throw new Exception("Unable to detect a region for the locale '$locale'");
+            throw new Exception\InvalidArgumentException("Unable to detect a region for the locale '$locale'");
         }
 
         $format = Locale\Locale::getTranslation(
@@ -137,7 +137,7 @@ class PostCode extends AbstractValidator
         );
 
         if (empty($format)) {
-            throw new Exception("Unable to detect a postcode format for the region '{$locale->getRegion()}'");
+            throw new Exception\InvalidArgumentException("Unable to detect a postcode format for the region '{$locale->getRegion()}'");
         }
 
         $this->setFormat($format);
@@ -164,7 +164,7 @@ class PostCode extends AbstractValidator
     public function setFormat($format)
     {
         if (empty($format) || !is_string($format)) {
-            throw new Exception("A postcode-format string has to be given for validation");
+            throw new Exception\InvalidArgumentException("A postcode-format string has to be given for validation");
         }
 
         if ($format[0] !== '/') {

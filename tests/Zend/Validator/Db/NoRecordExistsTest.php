@@ -146,7 +146,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         AbstractTable::setDefaultAdapter(null);
         $validator = new NoRecordExistsValidator('users', 'field1', 'id != 1');
-        $this->setExpectedException('Zend\Validator\Exception');
+        $this->setExpectedException('Zend\Validator\Exception\RuntimeException', 'No database adapter present');
         $valid = $validator->isValid('nosuchvalue');
     }
 
@@ -187,12 +187,8 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         //clear the default adapter to ensure provided one is used
         AbstractTable::setDefaultAdapter(null);
-        try {
-            $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
-            $this->assertFalse($validator->isValid('value1'));
-        } catch (\Exception $e) {
-            $this->markTestSkipped('No database available');
-        }
+        $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
+        $this->assertFalse($validator->isValid('value1'));
     }
 
     /**
@@ -204,11 +200,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         //clear the default adapter to ensure provided one is used
         AbstractTable::setDefaultAdapter(null);
-        try {
-            $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterNoResult);
-            $this->assertTrue($validator->isValid('value1'));
-        } catch (\Exception $e) {
-            $this->markTestSkipped('No database available');
-        }
+        $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterNoResult);
+        $this->assertTrue($validator->isValid('value1'));
     }
 }

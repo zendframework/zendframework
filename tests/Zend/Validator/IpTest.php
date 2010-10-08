@@ -106,12 +106,8 @@ class IpTest extends \PHPUnit_Framework_TestCase
 
     public function testNoValidation()
     {
-        try {
-            $this->_validator->setOptions(array('allowipv4' => false, 'allowipv6' => false));
-            $this->fail();
-        } catch (\Zend\Validator\Exception $e) {
-            $this->assertContains('Nothing to validate', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Nothing to validate');
+        $this->_validator->setOptions(array('allowipv4' => false, 'allowipv6' => false));
     }
 
     public function testInvalidIpForZF4809()

@@ -77,7 +77,7 @@ class InArray extends AbstractValidator
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            throw new Exception('Array expected as parameter');
+            throw new Exception\InvalidArgumentException('Array expected as parameter');
         } else {
             $count = func_num_args();
             $temp  = array();

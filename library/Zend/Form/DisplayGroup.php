@@ -312,7 +312,7 @@ class DisplayGroup implements \Iterator,\Countable
     {
         $name = $this->filtername($name);
         if (('0' !== $name) && empty($name)) {
-            throw new Exception('Invalid name provided; must contain only valid variable characters and be non-empty');
+            throw new Exception\InvalidArgumentException('Invalid name provided; must contain only valid variable characters and be non-empty');
         }
 
         $this->_name = $name;
@@ -455,13 +455,13 @@ class DisplayGroup implements \Iterator,\Countable
      *
      * @param  array $elements
      * @return \Zend\Form\DisplayGroup
-     * @throws Zend_Form_Exception if any element is not a \Zend\Form\Element
+     * @throws Zend\Form\InvalidArgumentException if any element is not a \Zend\Form\Element
      */
     public function addElements(array $elements)
     {
         foreach ($elements as $element) {
             if (!$element instanceof Element) {
-                throw new Exception('elements passed via array to addElements() must be Zend\Form\Elements only');
+                throw new Exception\InvalidArgumentException('elements passed via array to addElements() must be Zend\Form\Elements only');
             }
             $this->addElement($element);
         }
@@ -688,7 +688,7 @@ class DisplayGroup implements \Iterator,\Countable
                 break;
             }
             if (is_numeric($name)) {
-                throw new Exception('Invalid alias provided to addDecorator; must be alphanumeric string');
+                throw new Exception\InvalidArgumentException('Invalid alias provided to addDecorator; must be alphanumeric string');
             }
             if (is_string($spec)) {
                 $decorator = array(
@@ -699,7 +699,7 @@ class DisplayGroup implements \Iterator,\Countable
                 $decorator = $spec;
             }
         } else {
-            throw new Exception('Invalid decorator provided to addDecorator; must be string or Zend_Form_Decorator_Interface');
+            throw new Exception\InvalidArgumentException('Invalid decorator provided to addDecorator; must be string or Zend_Form_Decorator_Interface');
         }
 
         $this->_decorators[$name] = $decorator;
@@ -746,7 +746,7 @@ class DisplayGroup implements \Iterator,\Countable
                     }
                 }
             } else {
-                throw new Exception('Invalid decorator passed to addDecorators()');
+                throw new Exception\InvalidArgumentException('Invalid decorator passed to addDecorators()');
             }
         }
 
@@ -919,7 +919,7 @@ class DisplayGroup implements \Iterator,\Countable
         } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            throw new Exception('Invalid translator specified');
+            throw new Exception\InvalidArgumentException('Invalid translator specified');
         }
         return $this;
     }
@@ -972,7 +972,7 @@ class DisplayGroup implements \Iterator,\Countable
      * @param  string $method
      * @param  array $args
      * @return string
-     * @throws \Zend\Form\Exception for invalid decorator or invalid method call
+     * @throws \Zend\Form\BadMethodCallException for invalid decorator or invalid method call
      */
     public function __call($method, $args)
     {
@@ -987,10 +987,10 @@ class DisplayGroup implements \Iterator,\Countable
                 return $decorator->render($seed);
             }
 
-            throw new Exception(sprintf('Decorator by name %s does not exist', $decoratorName));
+            throw new Exception\BadMethodCallException(sprintf('Decorator by name %s does not exist', $decoratorName));
         }
 
-        throw new Exception(sprintf('Method %s does not exist', $method));
+        throw new Exception\BadMethodCallException(sprintf('Method %s does not exist', $method));
     }
 
     // Interfaces: Iterator, Countable

@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace Zend\Service\Amazon;
-use Zend\Service;
-use Zend\Rest\Client;
-use Zend\Crypt;
+use Zend\Service,
+    Zend\Service\Amazon\Exception,
+    Zend\Rest\Client,
+    Zend\Crypt;
 
 /**
  * @uses       DOMDocument
@@ -35,7 +36,7 @@ use Zend\Crypt;
  * @uses       Zend_Rest_Client
  * @uses       Zend_Service_Amazon_Item
  * @uses       Zend_Service_Amazon_ResultSet
- * @uses       Zend_Service_Exception
+ * @uses       Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -86,8 +87,8 @@ class Amazon
      *
      * @param  string $appId       Developer's Amazon appid
      * @param  string $countryCode Country code for Amazon service; may be US, UK, DE, JP, FR, CA
-     * @throws Zend_Service_Exception
-     * @return Zend_Service_Amazon
+     * @throws \Zend\Service\Amazon\Exception
+     * @return \Zend\Service\Amazon
      */
     public function __construct($appId, $countryCode = 'US', $secretKey = null)
     {
@@ -96,7 +97,7 @@ class Amazon
 
         $countryCode = (string) $countryCode;
         if (!isset($this->_baseUriList[$countryCode])) {
-            throw new Service\Exception("Unknown country code: $countryCode");
+            throw new Exception\InvalidArgumentException("Unknown country code: $countryCode");
         }
 
         $this->_baseUri = $this->_baseUriList[$countryCode];
@@ -107,7 +108,7 @@ class Amazon
      * Search for Items
      *
      * @param  array $options Options to use for the Search Query
-     * @throws Zend_Service_Exception
+     * @throws \Zend\Service\Amazon\Exception
      * @return Zend_Service_Amazon_ResultSet
      * @see http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&v=2005-10-05&p=ApiReference/ItemSearchOperation
      */
@@ -122,7 +123,7 @@ class Amazon
         $response = $client->restGet('/onca/xml', $options);
 
         if ($response->isError()) {
-            throw new Service\Exception('An error occurred sending request. Status code: '
+            throw new Exception\RuntimeException('An error occurred sending request. Status code: '
                                            . $response->getStatus());
         }
 
@@ -140,7 +141,7 @@ class Amazon
      * @param  string $asin    Amazon ASIN ID
      * @param  array  $options Query Options
      * @see http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&v=2005-10-05&p=ApiReference/ItemLookupOperation
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Amazon\Exception
      * @return Zend_Service_Amazon_Item|Zend_Service_Amazon_ResultSet
      */
     public function itemLookup($asin, array $options = array())
@@ -155,7 +156,7 @@ class Amazon
         $response = $client->restGet('/onca/xml', $options);
 
         if ($response->isError()) {
-            throw new Service\Exception(
+            throw new Exception\RuntimeException(
                 'An error occurred sending request. Status code: ' . $response->getStatus()
             );
         }
@@ -279,7 +280,7 @@ class Amazon
      * Check result for errors
      *
      * @param  DOMDocument $dom
-     * @throws Zend_Service_Exception
+     * @throws Zend\Servicei\Amazon\Exception
      * @return void
      */
     protected static function _checkErrors(\DOMDocument $dom)
@@ -295,7 +296,7 @@ class Amazon
                 case 'AWS.ECommerceService.NoExactMatches':
                     break;
                 default:
-                    throw new Service\Exception("$message ($code)");
+                    throw new Exception\RuntimeException("$message ($code)");
             }
         }
     }

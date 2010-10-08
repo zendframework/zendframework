@@ -95,12 +95,11 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructExceptionCountryCodeInvalid()
     {
-        try {
-            $amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 'oops');
-            $this->fail('Expected \Zend\Service\Amazon\Exception not thrown');
-        } catch (\Zend\Service\Exception $e) {
-            $this->assertContains('Unknown country code', $e->getMessage());
-        }
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Exception\InvalidArgumentException',
+            'Unknown country code: oops'
+        );
+        $amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 'oops');
     }
 
     /**

@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Service\Amazon;
+use Zend\Service\Amazon\Exception;
 
 /**
  * @uses       DOMXPath
@@ -125,14 +126,14 @@ class Item
      *
      * @param  null|DOMElement $dom
      * @return void
-     * @throws	Zend_Service_Amazon_Exception
+     * @throws	\Zend\Service\Amazon\Exception
      * 
      * @group ZF-9547
      */
     public function __construct($dom)
     {
         if (!$dom instanceof \DOMElement) {
-            throw new Exception('Item passed to Amazon\Item must be instace of DOMElement');
+            throw new Exception\InvalidArgumentException('Item passed to Amazon\Item must be instace of DOMElement');
         }
         $xpath = new \DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');

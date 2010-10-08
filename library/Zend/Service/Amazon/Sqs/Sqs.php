@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon_Sqs
+ * @package    Zend_Service_Amazon
+ * @subpackage Sqs
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -32,7 +32,7 @@ use Zend\Crypt;
  * @uses       SimpleXMLElement
  * @uses       Zend_Crypt_Hmac
  * @uses       Zend_Service_Amazon_Abstract
- * @uses       Zend_Service_Amazon_Sqs_Exception
+ * @uses       \Zend\Service\Amazon\Sqs\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_Sqs

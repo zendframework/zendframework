@@ -23,7 +23,7 @@
  */
 namespace Zend\Form\Element;
 
-use Zend\Form\ElementException,
+use Zend\Form\Element\Exception,
     Zend\Form\Form,
     Zend\Form\Decorator\FileDecorator,
     Zend\Loader\PluginLoader,

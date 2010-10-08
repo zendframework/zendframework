@@ -246,7 +246,7 @@ class Element implements Validator
      * @param  string|array|\Zend\Config\Config $spec
      * @param  array|\Zend\Config\Config $options
      * @return void
-     * @throws \Zend\Form\Exception if no element name after initialization
+     * @throws \Zend\Form\Element\Exception if no element name after initialization
      */
     public function __construct($spec, $options = null)
     {
@@ -840,7 +840,7 @@ class Element implements Validator
      * @param  string $name
      * @param  mixed $value
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Exception for invalid $name values
+     * @throws \Zend\Form\Element\Exception for invalid $name values
      */
     public function setAttrib($name, $value)
     {
@@ -947,7 +947,7 @@ class Element implements Validator
      * @param  string $method
      * @param  array $args
      * @return string
-     * @throws \Zend\Form\Exception for invalid decorator or invalid method call
+     * @throws \Zend\Form\Element\Exception for invalid decorator or invalid method call
      */
     public function __call($method, $args)
     {
@@ -979,7 +979,7 @@ class Element implements Validator
      * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'decorator', 'filter', or 'validate'
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Exception on invalid type
+     * @throws \Zend\Form\Element\Exception on invalid type
      */
     public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
@@ -1044,7 +1044,7 @@ class Element implements Validator
      * @param  string $path
      * @param  string $type
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Exception for invalid type
+     * @throws \Zend\Form\Element\Exception for invalid type
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
@@ -1129,7 +1129,7 @@ class Element implements Validator
      * @param  bool $breakChainOnFailure
      * @param  array $options
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Exception if invalid validator type
+     * @throws \Zend\Form\Element\Exception if invalid validator type
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = array())
     {

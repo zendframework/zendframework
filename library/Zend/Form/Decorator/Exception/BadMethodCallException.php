@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @subpackage Element
+ * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -26,7 +26,7 @@
 namespace Zend\Form\Element\Exception;
 
 /**
- * @uses       Zend\Form\Element\Exception
+ * @uses       Zend\Form\Decorator\Exception
  * @uses       \BadMethodCallException
  * @category   Zend
  * @package    Zend_Form
@@ -36,5 +36,5 @@ namespace Zend\Form\Element\Exception;
  */
 class BadMethodCallException 
     extends \BadMethodCallException
-    implements \Zend\Form\Element\Exception
+    implements \Zend\Form\Decorator\Exception
 {}

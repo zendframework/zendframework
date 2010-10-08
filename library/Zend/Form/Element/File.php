@@ -190,7 +190,7 @@ class File extends Xhtml
             $class  = $loader->load($adapter);
             $this->_adapter = new $class;
         } else {
-            throw new InvalidArgumentException('Invalid adapter specified');
+            throw new Exception\InvalidArgumentException('Invalid adapter specified');
         }
 
         foreach (array('filter', 'validator') as $type) {
@@ -877,7 +877,7 @@ class File extends Xhtml
         }
 
         if (!$marker) {
-            throw new RunTimeException('No file decorator found... unable to render file element');
+            throw new Exception\RunTimeException('No file decorator found... unable to render file element');
         }
 
         return parent::render($view);

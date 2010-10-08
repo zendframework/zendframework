@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @subpackage Element
+ * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,18 +23,18 @@
 /**
  * @namespace
  */
-namespace Zend\Form\Element\Exception;
+namespace Zend\Form\Decorator\Exception;
 
 /**
- * @uses       Zend\Form\Element\Exception
- * @uses       \BadMethodCallException
+ * @uses       Zend\Form\Decorator\Exception
+ * @uses       \UnexcpectedValueException
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BadMethodCallException 
-    extends \BadMethodCallException
-    implements \Zend\Form\Element\Exception
+class UnexpectedValueException 
+    extends \UnexpectedValueException
+    implements \Zend\Form\Decorator\Exception
 {}

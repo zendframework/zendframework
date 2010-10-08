@@ -228,7 +228,7 @@ class ViewHelper extends AbstractDecorator
 
         $view = $element->getView();
         if (null === $view) {
-            throw new Exception('ViewHelper decorator cannot render without a registered view object');
+            throw new Exception\UnexpectedValueException('ViewHelper decorator cannot render without a registered view object');
         }
 
         if (method_exists($element, 'getMultiOptions')) {

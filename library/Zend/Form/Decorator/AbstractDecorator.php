@@ -187,7 +187,7 @@ abstract class AbstractDecorator implements Decorator
             && (!$element instanceof Form\Form)
             && (!$element instanceof Form\DisplayGroup))
         {
-            throw new Exception('Invalid element type passed to decorator');
+            throw new Exception\InvalidArgumentException('Invalid element type passed to decorator');
         }
 
         $this->_element = $element;
@@ -255,6 +255,6 @@ abstract class AbstractDecorator implements Decorator
      */
     public function render($content)
     {
-        throw new Exception('render() not implemented');
+        throw new Exception\RunTimeException('render() not implemented');
     }
 }

@@ -1872,7 +1872,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception');
         $html = $this->element->bogusMethodCall();
     }
 

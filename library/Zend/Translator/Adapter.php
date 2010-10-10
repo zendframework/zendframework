@@ -27,7 +27,7 @@ namespace Zend\Translator;
 
 use Zend\Log,
     Zend\Locale,
-    Zend\Translate\Exception\InvalidArgumentException;
+    Zend\Translator\Exception\InvalidArgumentException;
 
 /**
  * Basic adapter class for each translation source adapter

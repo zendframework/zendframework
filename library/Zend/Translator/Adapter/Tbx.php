@@ -25,13 +25,13 @@
 namespace Zend\Translator\Adapter;
 use Zend\Translator\Adapter as TranslationAdapter,
     Zend\Translator,
-    Zend\Translator\Adapter\Exception\RuntimeException,
+    Zend\Translator\Adapter\Exception\InvalidArgumentException,
     Zend\Translator\Adapter\Exception\InvalidFileTypeException;
 
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Adapter\Exception\RuntimeException
+ * @uses       \Zend\Translator\Adapter\Exception\InvalidArgumentException
  * @uses       \Zend\Translator\Adapter\Exception\InvalidFileTypeException
  * @category   Zend
  * @package    Zend_Translate
@@ -56,7 +56,7 @@ class Tbx extends TranslationAdapter
      * @param  string  $locale    Locale has no effect for TBX because TBX defines all languages within
      *                            the source file
      * @param  array   $option    OPTIONAL Options to use
-     * @throws \Zend\Translator\Adapter\Exception\RuntimeException
+     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException
      * @throws \Zend\Translator\Adapter\Exception\InvalidFileTypeException
      * @return array
      */
@@ -64,7 +64,7 @@ class Tbx extends TranslationAdapter
     {
         $this->_data = array();
         if (!is_readable($filename)) {
-            throw new RuntimeException('Translation file \'' . $filename . '\' is not readable.');
+            throw new InvalidArgumentException('Translation file \'' . $filename . '\' is not readable.');
         }
 
         $encoding = $this->_findEncoding($filename);

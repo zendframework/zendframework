@@ -26,13 +26,13 @@ namespace Zend\Translator\Adapter;
 use Zend\Translator\Adapter as TranslationAdapter,
     Zend\Translator,
     Zend\Locale,
-    Zend\Translator\Adapter\Exception\RuntimeException,
+    Zend\Translator\Adapter\Exception\InvalidArgumentException,
     Zend\Translator\Adapter\Exception\InvalidFileTypeException;
 
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Adapter\Exception\RuntimeException
+ * @uses       \Zend\Translator\Adapter\Exception\InvalidArgumentException
  * @uses       \Zend\Translator\Adapter\Exception\InvalidFileTypeException
  * @category   Zend
  * @package    Zend_Translate
@@ -58,7 +58,7 @@ class Tmx extends TranslationAdapter
      * @param  string  $locale    Locale has no effect for TMX because TMX defines all languages within
      *                            the source file
      * @param  array   $option    OPTIONAL Options to use
-     * @throws \Zend\Translator\Adapter\Exception\RuntimeException
+     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException
      * @throws \Zend\Translator\Adapter\Exception\InvalidFileTypeException
      * @return array
      */
@@ -66,7 +66,7 @@ class Tmx extends TranslationAdapter
     {
         $this->_data = array();
         if (!is_readable($filename)) {
-            throw new RuntimeException('Translation file \'' . $filename . '\' is not readable.');
+            throw new InvalidArgumentException('Translation file \'' . $filename . '\' is not readable.');
         }
 
         if (isset($options['useId'])) {

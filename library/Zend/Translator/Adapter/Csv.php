@@ -24,12 +24,13 @@
  */
 namespace Zend\Translator\Adapter;
 
-use Zend\Translator\Adapter as TranslationAdapter;
+use Zend\Translator\Adapter as TranslationAdapter,
+	Zend\Translator\Adapter\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Exception
+ * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -79,6 +80,7 @@ class Csv extends TranslationAdapter
      * @param  string        $locale    Locale/Language to add data for, identical with locale identifier,
      *                                  see Zend_Locale for more information
      * @param  array         $option    OPTIONAL Options to use
+     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException
      * @return array
      */
     protected function _loadTranslationData($filename, $locale, array $options = array())
@@ -87,7 +89,7 @@ class Csv extends TranslationAdapter
         $options     = $options + $this->_options;
         $this->_file = @fopen($filename, 'rb');
         if (!$this->_file) {
-            throw new \Zend\Translator\Exception('Error opening translation file \'' . $filename . '\'.');
+            throw new InvalidArgumentException('Error opening translation file \'' . $filename . '\'.');
         }
 
         while(($data = fgetcsv($this->_file, $options['length'], $options['delimiter'], $options['enclosure'])) !== false) {

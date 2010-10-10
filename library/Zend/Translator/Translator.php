@@ -24,9 +24,13 @@
  */
 namespace Zend\Translator;
 
+use Zend\Translator\Exception\InvalidArgumentException,
+	Zend\Translator\Exception\BadMethodCallException;
+
 /**
  * @uses       \Zend\Loader
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
+ * @uses       \Zend\Translator\Exception\BadMethodCallException
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

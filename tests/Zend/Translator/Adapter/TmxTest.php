@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Translator\Adapter;
+
 use Zend\Translator\Adapter;
 use Zend\Translator;
 use Zend\Locale;

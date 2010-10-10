@@ -24,12 +24,13 @@
  */
 namespace Zend\Translator\Adapter;
 
-use Zend\Translator\Adapter as TranslationAdapter;
+use Zend\Translator\Adapter as TranslationAdapter,
+	Zend\Translator\Adapter\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Exception
+ * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,6 +47,7 @@ class ArrayAdapter extends TranslationAdapter
      * @param  string        $locale  Locale/Language to add data for, identical with locale identifier,
      *                                see Zend_Locale for more information
      * @param  array         $options OPTIONAL Options to use
+     * @throws \Zend\Translator\Adapter\Exception
      * @return array
      */
     protected function _loadTranslationData($data, $locale, array $options = array())
@@ -59,7 +61,7 @@ class ArrayAdapter extends TranslationAdapter
             }
         }
         if (!is_array($data)) {
-            throw new \Zend\Translator\Exception("Error including array or file '".$data."'");
+            throw new InvalidArgumentException("Error including array or file '".$data."'");
         }
 
         if (!isset($this->_data[$locale])) {

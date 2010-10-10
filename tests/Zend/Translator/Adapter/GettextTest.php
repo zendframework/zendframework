@@ -65,14 +65,14 @@ class GettextTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter = new Adapter\Gettext(__DIR__ . '/_files/nofile.mo', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('Error opening translation file', $e->getMessage());
         }
 
         try {
             $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed.mo', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidFileTypeException $e) {
             $this->assertContains('is not a gettext file', $e->getMessage());
         }
     }
@@ -115,7 +115,7 @@ class GettextTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->addTranslation(__DIR__ . '/_files/translation_en2.mo', 'xx');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
@@ -173,7 +173,7 @@ class GettextTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->setLocale('nolocale');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
@@ -244,7 +244,7 @@ class GettextTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed2.mo', 'en');
             $this->fail('Exception expected');
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('is not a gettext file', $e->getMessage());
         }
     }

@@ -124,7 +124,7 @@ abstract class Adapter
      * Generates the adapter
      *
      * @param  array|Zend_Config $options Translation options for this adapter
-     * @throws Zend\Translate\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
      * @return void
      */
     public function __construct($options = array())
@@ -193,8 +193,8 @@ abstract class Adapter
      * language will be replaced and added otherwise
      *
      * @param  array|Zend_Config $options Options and translations to be added
-     * @throws Zend\Translate\Exception\InvalidArgumentException
-     * @return Zend\Translate\Adapter Provides fluent interface
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
+     * @return \Zend\Translator\Adapter Provides fluent interface
      */
     public function addTranslation($options = array())
     {

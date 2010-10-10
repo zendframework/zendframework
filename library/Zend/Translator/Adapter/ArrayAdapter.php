@@ -47,7 +47,7 @@ class ArrayAdapter extends TranslationAdapter
      * @param  string        $locale  Locale/Language to add data for, identical with locale identifier,
      *                                see Zend_Locale for more information
      * @param  array         $options OPTIONAL Options to use
-     * @throws \Zend\Translator\Adapter\Exception
+     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException
      * @return array
      */
     protected function _loadTranslationData($data, $locale, array $options = array())

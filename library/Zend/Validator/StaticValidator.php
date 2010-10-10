@@ -83,7 +83,7 @@ class StaticValidator
             try {
                 $className  = $loader->load($classBaseName);
             } catch (Loader\Exception $e) {
-                throw new Exception("Validator class not found from basename '$classBaseName'", null, $e);
+                throw new Exception\InvalidArgumentException("Validator class not found from basename '$classBaseName'", null, $e);
             }
         } else {
             $className = $classBaseName;
@@ -91,7 +91,7 @@ class StaticValidator
 
         $class = new \ReflectionClass($className);
         if (!$class->implementsInterface('Zend\Validator\Validator')) {
-            throw new Exception("Validator class not found from basename '$classBaseName'");
+            throw new Exception\RuntimeException("Validator class not found from basename '$classBaseName'");
         }
 
         if ((0 < count($args)) && $class->hasMethod('__construct')) {

@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Filter\File;
-use Zend\Filter;
+use Zend\Filter,
+    Zend\Filter\Exception;
 
 /**
  * @uses       Zend\Filter\Exception
@@ -61,7 +62,7 @@ class Rename extends Filter\AbstractFilter
         } elseif (is_string($options)) {
             $options = array('target' => $options);
         } elseif (!is_array($options)) {
-            throw new Filter\Exception('Invalid options argument provided to filter');
+            throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
         }
 
         if (1 < func_num_args()) {
@@ -124,7 +125,7 @@ class Rename extends Filter\AbstractFilter
         if (is_string($options)) {
             $options = array('target' => $options);
         } elseif (!is_array($options)) {
-            throw new Filter\Exception ('Invalid options to rename filter provided');
+            throw new Exception\InvalidArgumentException('Invalid options to rename filter provided');
         }
 
         $this->_convertOptions($options);
@@ -156,7 +157,7 @@ class Rename extends Filter\AbstractFilter
         }
 
         if (file_exists($file['target'])) {
-            throw new Filter\Exception(sprintf("File '%s' could not be renamed. It already exists.", $value));
+            throw new Exception\InvalidArgumentException(sprintf("File '%s' could not be renamed. It already exists.", $value));
         }
 
         if ($source) {
@@ -186,7 +187,7 @@ class Rename extends Filter\AbstractFilter
         $result = rename($file['source'], $file['target']);
 
         if ($result !== true) {
-            throw new Filter\Exception(sprintf("File '%s' could not be renamed. An error occured while processing the file.", $value));
+            throw new Exception\RuntimeException(sprintf("File '%s' could not be renamed. An error occured while processing the file.", $value));
         }
 
         return $file['target'];

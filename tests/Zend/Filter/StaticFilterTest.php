@@ -109,7 +109,7 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function testStaticFactoryClassNotFound()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         StaticFilter::execute('1234', 'UnknownFilter');
     }
 }

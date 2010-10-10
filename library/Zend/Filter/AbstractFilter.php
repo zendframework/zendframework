@@ -38,7 +38,7 @@ abstract class AbstractFilter implements Filter
      * Proxies to {@link filter()}
      *
      * @param  mixed $value
-     * @throws Zend\Filter\Exception If filtering $value is impossible
+     * @throws Zend\Filter\RuntimeException If filtering $value is impossible
      * @return mixed
      */
     public function __invoke($value)

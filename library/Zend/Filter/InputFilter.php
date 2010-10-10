@@ -249,7 +249,7 @@ class InputFilter
                 $this->_loaders[$type] = $loader;
                 return $this;
             default:
-                throw new Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }
 
         return $this;
@@ -283,7 +283,7 @@ class InputFilter
                     $pathSegment   = 'Zend/Validator/';
                     break;
                 default:
-                    throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                    throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
             $this->_loaders[$type] = new PluginLoader(
@@ -469,10 +469,10 @@ class InputFilter
     {
         $this->_process();
         if ($this->hasInvalid()) {
-            throw new Exception("Input has invalid fields");
+            throw new Exception\RuntimeException("Input has invalid fields");
         }
         if ($this->hasMissing()) {
-            throw new Exception("Input has missing fields");
+            throw new Exception\RuntimeException("Input has missing fields");
         }
 
         return $this;
@@ -510,7 +510,7 @@ class InputFilter
             $escapeFilter = $this->_getFilter($escapeFilter);
         }
         if (!$escapeFilter instanceof Filter) {
-            throw new Exception('Escape filter specified does not implement Zend\\Filter\\Filter');
+            throw new Exception\InvalidArgumentException('Escape filter specified does not implement Zend\Filter\Filter');
         }
         $this->_defaultEscapeFilter = $escapeFilter;
         return $escapeFilter;
@@ -563,7 +563,7 @@ class InputFilter
                     $this->_defaults[$option] = $value;
                     break;
                 default:
-                    throw new Exception("Unknown option '$option'");
+                    throw new Exception\InvalidArgumentException("Unknown option '$option'");
                     break;
             }
         }
@@ -584,7 +584,7 @@ class InputFilter
         } elseif ($translator instanceof Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            throw new Validator\Exception('Invalid translator specified');
+            throw new Validator\Exception\InvalidArgumentException('Invalid translator specified');
         }
 
         return $this;
@@ -1111,7 +1111,7 @@ class InputFilter
         $class = new \ReflectionClass($className);
 
         if (!$class->implementsInterface($interfaceName)) {
-            throw new Exception("Class '$className' based on basename '$classBaseName' must implement the '$interfaceName' interface");
+            throw new Exception\InvalidArgumentException("Class '$className' based on basename '$classBaseName' must implement the '$interfaceName' interface");
         }
 
         if ($class->hasMethod('__construct')) {

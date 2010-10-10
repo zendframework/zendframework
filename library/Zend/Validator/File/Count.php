@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator;
+use Zend\Validator,
+    Zend\Validator\Exception;
 
 /**
  * Validator for counting all given files
@@ -113,7 +114,7 @@ class Count extends Validator\AbstractValidator
         } elseif (is_string($options) || is_numeric($options)) {
             $options = array('max' => $options);
         } elseif (!is_array($options)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         if (1 < func_num_args()) {
@@ -154,12 +155,12 @@ class Count extends Validator\AbstractValidator
         }
 
         if (!is_string($min) and !is_numeric($min)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $min = (integer) $min;
         if (($this->_max !== null) && ($min > $this->_max)) {
-            throw new Validator\Exception("The minimum must be less than or equal to the maximum file count, but $min >"
+            throw new Exception\InvalidArgumentException("The minimum must be less than or equal to the maximum file count, but $min >"
                                             . " {$this->_max}");
         }
 
@@ -191,12 +192,12 @@ class Count extends Validator\AbstractValidator
         }
 
         if (!is_string($max) and !is_numeric($max)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $max = (integer) $max;
         if (($this->_min !== null) && ($max < $this->_min)) {
-            throw new Validator\Exception("The maximum must be greater than or equal to the minimum file count, but "
+            throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum file count, but "
                                             . "$max < {$this->_min}");
         }
 

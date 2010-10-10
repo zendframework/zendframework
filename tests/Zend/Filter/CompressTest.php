@@ -123,12 +123,8 @@ class CompressTest extends \PHPUnit_Framework_TestCase
         $filter->setBlocksize(6);
         $this->assertEquals(6, $filter->getOptions('blocksize'));
 
-        try {
-            $filter->setBlocksize(15);
-            $this->fail('Exception expected');
-        } catch(\Zend\Filter\Exception $e) {
-            $this->assertContains('must be between', $e->getMessage());
-        }
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'must be between');
+        $filter->setBlocksize(15);
     }
 
     /**
@@ -207,13 +203,11 @@ class CompressTest extends \PHPUnit_Framework_TestCase
         $filter = new CompressFilter();
         $this->assertEquals('Gz', $filter->getAdapterName());
 
-        try {
-            $filter->setAdapter('\\Zend\\Filter\\Alnum');
-            $adapter = $filter->getAdapter();
-            $this->fail('Invalid adapter should fail when retrieved');
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('does not implement', $e->getMessage());
-        }
+        
+        $filter->setAdapter('\Zend\Filter\Alnum');
+        
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'does not implement');
+        $adapter = $filter->getAdapter();
     }
 
     /**
@@ -243,11 +237,8 @@ class CompressTest extends \PHPUnit_Framework_TestCase
     public function testInvalidMethod()
     {
         $filter = new CompressFilter();
-        try {
-            $filter->invalidMethod();
-            $this->fail('Exception expected');
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('Unknown method', $e->getMessage());
-        }
+        
+        $this->setExpectedException('\Zend\Filter\Exception\BadMethodCallException', 'Unknown method');
+        $filter->invalidMethod();
     }
 }

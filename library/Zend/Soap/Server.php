@@ -167,7 +167,7 @@ class Server implements \Zend\Server\Server
     public function __construct($wsdl = null, array $options = null)
     {
         if (!extension_loaded('soap')) {
-            throw new ServerException('SOAP extension is not loaded.');
+            throw new Exception\ExtensionNotLoadedException('SOAP extension is not loaded.');
         }
 
         if (null !== $wsdl) {
@@ -280,7 +280,7 @@ class Server implements \Zend\Server\Server
     public function setEncoding($encoding)
     {
         if (!is_string($encoding)) {
-            throw new ServerException('Invalid encoding specified');
+            throw new Exception\InvalidArgumentException('Invalid encoding specified');
         }
 
         $this->_encoding = $encoding;
@@ -307,7 +307,7 @@ class Server implements \Zend\Server\Server
     public function setSoapVersion($version)
     {
         if (!in_array($version, array(SOAP_1_1, SOAP_1_2))) {
-            throw new ServerException('Invalid soap version specified');
+            throw new Exception\InvalidArgumentException('Invalid soap version specified');
         }
 
         $this->_soapVersion = $version;
@@ -335,7 +335,7 @@ class Server implements \Zend\Server\Server
     {
         $scheme = parse_url($urn, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            throw new ServerException('Invalid URN');
+            throw new Exception\InvalidArgumentException('Invalid URN');
         }
 
         return true;
@@ -402,11 +402,11 @@ class Server implements \Zend\Server\Server
     public function setClassmap($classmap)
     {
         if (!is_array($classmap)) {
-            throw new ServerException('Classmap must be an array');
+            throw new Exception\InvalidArgumentException('Classmap must be an array');
         }
         foreach ($classmap as $type => $class) {
             if (!class_exists($class)) {
-                throw new ServerException('Invalid class in class map');
+                throw new Exception\InvalidArgumentException('Invalid class in class map');
             }
         }
 
@@ -509,7 +509,7 @@ class Server implements \Zend\Server\Server
                 if (is_string($func) && function_exists($func)) {
                     $this->_functions[] = $func;
                 } else {
-                    throw new ServerException('One or more invalid functions specified in array');
+                    throw new Exception\InvalidArgumentException('One or more invalid functions specified in array');
                 }
             }
             $this->_functions = array_merge($this->_functions, $function);
@@ -518,7 +518,7 @@ class Server implements \Zend\Server\Server
         } elseif ($function == SOAP_FUNCTIONS_ALL) {
             $this->_functions = SOAP_FUNCTIONS_ALL;
         } else {
-            throw new ServerException('Invalid function specified');
+            throw new Exception\InvalidArgumentException('Invalid function specified');
         }
 
         if (is_array($this->_functions)) {
@@ -544,15 +544,15 @@ class Server implements \Zend\Server\Server
     public function setClass($class, $namespace = '', $argv = null)
     {
         if (isset($this->_class)) {
-            throw new ServerException('A class has already been registered with this soap server instance');
+            throw new Exception\InvalidArgumentException('A class has already been registered with this soap server instance');
         }
 
         if (!is_string($class)) {
-            throw new ServerException('Invalid class argument (' . gettype($class) . ')');
+            throw new Exception\InvalidArgumentException('Invalid class argument (' . gettype($class) . ')');
         }
 
         if (!class_exists($class)) {
-            throw new ServerException('Class "' . $class . '" does not exist');
+            throw new Exception\InvalidArgumentException('Class "' . $class . '" does not exist');
         }
 
         $this->_class = $class;
@@ -576,11 +576,11 @@ class Server implements \Zend\Server\Server
     public function setObject($object)
     {
         if(!is_object($object)) {
-            throw new ServerException('Invalid object argument ('.gettype($object).')');
+            throw new Exception\InvalidArgumentException('Invalid object argument ('.gettype($object).')');
         }
 
         if(isset($this->_object)) {
-            throw new ServerException('An object has already been registered with this soap server instance');
+            throw new Exception\InvalidArgumentException('An object has already been registered with this soap server instance');
         }
 
         $this->_object = $object;
@@ -619,7 +619,7 @@ class Server implements \Zend\Server\Server
      */
     public function loadFunctions($definition)
     {
-        throw new ServerException('Unimplemented');
+        throw new Exception\RuntimeException('Unimplemented method.');
     }
 
     /**
@@ -631,7 +631,7 @@ class Server implements \Zend\Server\Server
     public function setPersistence($mode)
     {
         if (!in_array($mode, array(SOAP_PERSISTENCE_SESSION, SOAP_PERSISTENCE_REQUEST))) {
-            throw new ServerException('Invalid persistence mode specified');
+            throw new Exception\InvalidArgumentException('Invalid persistence mode specified');
         }
 
         $this->_persistence = $mode;
@@ -678,7 +678,7 @@ class Server implements \Zend\Server\Server
 
             $dom = new \DOMDocument();
             if(strlen($xml) == 0 || !$dom->loadXML($xml)) {
-                throw new ServerException('Invalid XML');
+                throw new Exception\InvalidArgumentException('Invalid XML');
             }
         }
         $this->_request = $xml;

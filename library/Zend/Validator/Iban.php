@@ -161,7 +161,7 @@ class Iban extends AbstractValidator
         if ($locale !== false) {
             $locale = Locale\Locale::findLocale($locale);
             if (strlen($locale) < 4) {
-                throw new Exception('Region must be given for IBAN validation');
+                throw new Exception\InvalidArgumentException('Region must be given for IBAN validation');
             }
         }
 

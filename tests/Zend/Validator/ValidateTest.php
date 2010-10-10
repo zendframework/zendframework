@@ -136,11 +136,11 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
      *
      * @group  ZF-2724
      * @return void
-     * @expectedException Zend_Validate_Exception
      */
     public function testStaticFactoryClassNotFound()
     {
         $this->markTestSkipped('is() method should not try to implement its own plugin loader - refactor this');
+        $this->setExpectedException('Zend\Validate\Exception\RuntimeException', 'foo');
         Validator\ValidatorChain::execute('1234', 'UnknownValidator');
     }
 

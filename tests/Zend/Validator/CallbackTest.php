@@ -36,16 +36,6 @@ use Zend\Validator;
  */
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite('Zend_Validate_CallbackTest');
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Ensures that the validator follows expected behavior
@@ -90,12 +80,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testInvalidCallback()
     {
         $valid = new Validator\Callback(array($this, 'objectCallback'));
-        try {
-            $valid->setCallback('invalidcallback');
-            $this->fail('Exception expected');
-        } catch (\Zend\Exception $e) {
-            $this->assertContains('Invalid callback given', $e->getMessage());
-        }
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid callback given');
+        $valid->setCallback('invalidcallback');
     }
 
     public function testAddingValueOptions()

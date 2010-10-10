@@ -75,7 +75,7 @@ class Md5 extends Hash
         } elseif (is_scalar($options)) {
             $options = array('hash1' => $options);
         } elseif (!is_array($options)) {
-            throw new \Zend\Validator\Exception('Invalid options to validator provided');
+            throw new \Zend\Validator\Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $this->setMd5($options);

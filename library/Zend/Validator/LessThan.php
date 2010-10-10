@@ -73,7 +73,7 @@ class LessThan extends AbstractValidator
             if (array_key_exists('max', $max)) {
                 $max = $max['max'];
             } else {
-                throw new Exception("Missing option 'max'");
+                throw new Exception\InvalidArgumentException("Missing option 'max'");
             }
         }
 

@@ -66,18 +66,18 @@ class Transfer
      */
     public function setAdapter($adapter, $direction = false, $options = array())
     {
-        if (\Zend\Loader::isReadable('Zend/File/Transfer/Adapter/' . ucfirst($adapter). '.php')) {
-            $adapter = 'Zend\File\Transfer\Adapter\\' . ucfirst($adapter);
+        if (!is_string($adapter)) {
+            throw new Exception\InvalidArgumentException('Adapter must be a string');
         }
-
-        if (!class_exists($adapter)) {
-            \Zend\Loader::loadClass($adapter);
+        
+        if ($adapter[0] != '\\') {
+            $adapter = '\Zend\File\Transfer\Adapter\\' . ucfirst($adapter);
         }
 
         $direction = (integer) $direction;
         $this->_adapter[$direction] = new $adapter($options);
         if (!$this->_adapter[$direction] instanceof Adapter\AbstractAdapter) {
-            throw new Transfer\Exception("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter_Abstract");
+            throw new Exception\InvalidArgumentException("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter_Abstract");
         }
 
         return $this;
@@ -120,6 +120,6 @@ class Transfer
             return call_user_func_array(array($this->_adapter[$direction], $method), $options);
         }
 
-        throw new Transfer\Exception("Unknown method '" . $method . "' called!");
+        throw new Exception\BadMethodCallException("Unknown method '" . $method . "' called!");
     }
 }

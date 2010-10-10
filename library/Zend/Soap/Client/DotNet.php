@@ -26,7 +26,7 @@
 namespace Zend\Soap\Client;
 
 use Zend\Soap\Client as SOAPClient,
-    Zend\Soap\ClientException;
+    Zend\Soap\Exception;
 
 /**
  * .NET SOAP client
@@ -73,7 +73,7 @@ class DotNet extends SOAPClient
         if (count($arguments) > 1  ||
             (count($arguments) == 1  &&  !is_array(reset($arguments)))
            ) {
-            throw new ClientException('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
+            throw new Exception\RuntimeException('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
         }
 
         // Do nothing

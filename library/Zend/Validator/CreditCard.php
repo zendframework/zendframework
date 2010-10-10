@@ -230,7 +230,7 @@ class CreditCard extends AbstractValidator
     public function setService($service)
     {
         if (!is_callable($service)) {
-            throw new Exception('Invalid callback given');
+            throw new Exception\InvalidArgumentException('Invalid callback given');
         }
 
         $this->_service = $service;

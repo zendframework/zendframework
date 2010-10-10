@@ -98,7 +98,7 @@ class Barcode extends AbstractValidator
             if (array_key_exists('adapter', $adapter)) {
                 $adapter = $adapter['adapter'];
             } else {
-                throw new Exception("Missing option 'adapter'");
+                throw new Exception\InvalidArgumentException("Missing option 'adapter'");
             }
         }
 
@@ -135,12 +135,12 @@ class Barcode extends AbstractValidator
         }
 
         if (!class_exists($adapter)) {
-            throw new Exception('Barcode adapter matching "' . $adapter . '" not found');
+            throw new Exception\InvalidArgumentException('Barcode adapter matching "' . $adapter . '" not found');
         }
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Barcode\Adapter) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\Adapter"
             );
         }

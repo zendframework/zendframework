@@ -90,7 +90,7 @@ class Openssl implements EncryptionAlgorithm
     public function __construct($options = array())
     {
         if (!extension_loaded('openssl')) {
-            throw new Exception('This filter needs the openssl extension');
+            throw new Exception\ExtensionNotLoadedException('This filter needs the openssl extension');
         }
 
         if ($options instanceof \Zend\Config\Config) {
@@ -128,7 +128,7 @@ class Openssl implements EncryptionAlgorithm
     protected function _setKeys($keys)
     {
         if (!is_array($keys)) {
-            throw new Exception('Invalid options argument provided to filter');
+            throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
         }
 
         foreach ($keys as $type => $key) {
@@ -145,7 +145,7 @@ class Openssl implements EncryptionAlgorithm
                 case 'public':
                     $test = openssl_pkey_get_public($cert);
                     if ($test === false) {
-                        throw new Exception("Public key '{$cert}' not valid");
+                        throw new Exception\InvalidArgumentException("Public key '{$cert}' not valid");
                     }
 
                     openssl_free_key($test);
@@ -154,7 +154,7 @@ class Openssl implements EncryptionAlgorithm
                 case 'private':
                     $test = openssl_pkey_get_private($cert, $this->_passphrase);
                     if ($test === false) {
-                        throw new Exception("Private key '{$cert}' not valid");
+                        throw new Exception\InvalidArgumentException("Private key '{$cert}' not valid");
                     }
 
                     openssl_free_key($test);
@@ -359,7 +359,7 @@ class Openssl implements EncryptionAlgorithm
         $encryptedkeys = array();
 
         if (count($this->_keys['public']) == 0) {
-            throw new Exception('Openssl can not encrypt without public keys');
+            throw new Exception\RuntimeException('Openssl can not encrypt without public keys');
         }
 
         $keys         = array();
@@ -390,7 +390,7 @@ class Openssl implements EncryptionAlgorithm
         }
 
         if ($crypt === false) {
-            throw new Exception('Openssl was not able to encrypt your content with the given options');
+            throw new Exception\RuntimeException('Openssl was not able to encrypt your content with the given options');
         }
 
         $this->_keys['envelope'] = $encryptedkeys;
@@ -423,11 +423,11 @@ class Openssl implements EncryptionAlgorithm
         $envelope  = current($this->getEnvelopeKey());
 
         if (count($this->_keys['private']) !== 1) {
-            throw new Exception('Please give a private key for decryption with Openssl');
+            throw new Exception\RuntimeException('Please give a private key for decryption with Openssl');
         }
 
         if (!$this->_package && empty($envelope)) {
-            throw new Exception('Please give an envelope key for decryption with Openssl');
+            throw new Exception\RuntimeException('Please give an envelope key for decryption with Openssl');
         }
 
         foreach($this->_keys['private'] as $key => $cert) {
@@ -463,7 +463,7 @@ class Openssl implements EncryptionAlgorithm
         openssl_free_key($keys);
 
         if ($crypt === false) {
-            throw new Exception('Openssl was not able to decrypt you content with the given options');
+            throw new Exception\RuntimeException('Openssl was not able to decrypt you content with the given options');
         }
 
         // decompress after decryption
@@ -475,7 +475,7 @@ class Openssl implements EncryptionAlgorithm
         // decompress after decryption
         if (!empty($this->_compression)) {
             require_once 'Zend/Filter/Decompress.php';
-            $decompress = new Zend_Filter_Decompress($this->_compression);
+            $decompress = new \Zend\Filter\Decompress($this->_compression);
             $decrypted  = $decompress->filter($decrypted);
         }
 

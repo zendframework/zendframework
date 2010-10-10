@@ -90,7 +90,7 @@ class Callback extends AbstractValidator
         }
 
         if (null === ($initializedCallack = $this->getCallback())) {
-            throw new Exception('No callback registered');
+            throw new Exception\InvalidArgumentException('No callback registered');
         }
     }
 
@@ -113,7 +113,7 @@ class Callback extends AbstractValidator
     public function setCallback($callback)
     {
         if (!is_callable($callback)) {
-            throw new Exception('Invalid callback given');
+            throw new Exception\InvalidArgumentException('Invalid callback given');
         }
         $this->_callback = $callback;
         return $this;

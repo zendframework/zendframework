@@ -78,7 +78,7 @@ class Isbn extends AbstractValidator
             $options = $options->toArray();
         }
         if (!is_array($options)) {
-            throw new Exception('Invalid options provided.');
+            throw new Exception\InvalidArgumentException('Invalid options provided.');
         }
 
         // set type
@@ -222,7 +222,7 @@ class Isbn extends AbstractValidator
     {
         // check separator
         if (!in_array($separator, array('-', ' ', ''))) {
-            throw new Exception('Invalid ISBN separator.');
+            throw new Exception\InvalidArgumentException('Invalid ISBN separator.');
         }
 
         $this->_separator = $separator;
@@ -250,7 +250,7 @@ class Isbn extends AbstractValidator
     {
         // check type
         if (!in_array($type, array(self::AUTO, self::ISBN10, self::ISBN13))) {
-            throw new Exception('Invalid ISBN type');
+            throw new Exception\InvalidArgumentException('Invalid ISBN type');
         }
 
         $this->_type = $type;

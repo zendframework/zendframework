@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace ZendTest\Translator\Adapter;
+
 use Zend\Translator\Adapter;
 use Zend\Translator;
 use Zend\Locale;
@@ -54,14 +55,14 @@ class TmxTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter = new Adapter\Tmx(__DIR__ . '/_files/nofile.tmx', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('is not readable', $e->getMessage());
         }
 
         try {
             $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidFileTypeException $e) {
             $this->assertContains('Mismatched tag at line', $e->getMessage());
         }
     }
@@ -104,7 +105,7 @@ class TmxTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->addTranslation(__DIR__ . '/_files/translation_en.tmx', 'xx');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
@@ -162,7 +163,7 @@ class TmxTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->setLocale('nolocale');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 

@@ -24,12 +24,15 @@
  */
 namespace Zend\Translator\Adapter;
 use Zend\Translator\Adapter as TranslationAdapter,
-    Zend\Translator;
+    Zend\Translator,
+    Zend\Translator\Adapter\Exception\InvalidArgumentException,
+    Zend\Translator\Adapter\Exception\InvalidFileTypeException;
 
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Exception
+ * @uses       \Zend\Translator\Adapter\Exception\InvalidFileTypeException
+ * @uses	   \Zend\Translator\Adapter\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -56,14 +59,15 @@ class Qt extends TranslationAdapter
      *                            see Zend_Locale for more information
      * @param  string  $filename  QT file to add, full path must be given for access
      * @param  array   $option    OPTIONAL Options to use
-     * @throws Zend_Translation_Exception
+     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Adapter\Exception\InvalidFileTypeException
      * @return array
      */
     protected function _loadTranslationData($filename, $locale, array $options = array())
     {
         $this->_data = array();
         if (!is_readable($filename)) {
-            throw new Translator\Exception('Translation file \'' . $filename . '\' is not readable.');
+            throw new InvalidArgumentException('Translation file \'' . $filename . '\' is not readable.');
         }
 
         $this->_target = $locale;
@@ -80,7 +84,7 @@ class Qt extends TranslationAdapter
                           xml_error_string(xml_get_error_code($this->_file)),
                           xml_get_current_line_number($this->_file));
             xml_parser_free($this->_file);
-            throw new Translator\Exception($ex);
+            throw new InvalidFileTypeException($ex);
         }
 
         return $this->_data;

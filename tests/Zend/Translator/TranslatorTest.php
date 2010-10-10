@@ -40,7 +40,7 @@ use Zend\Log;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Translate
  */
-class TranslateTest extends \PHPUnit_Framework_TestCase
+class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -108,7 +108,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $lang->xxxFunction();
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\BadMethodCallException $e) {
             // success
         }
     }
@@ -252,7 +252,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $lang = new Translator\Translator('Zend\Locale', __DIR__ . '/../_files/test2', null, array('scan' => Translator\Translator::LOCALE_FILENAME));
             $this->fail('Exception due to false adapter class expected');
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist and cannot be loaded', $e->getMessage());
         }
     }
@@ -348,7 +348,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $lang->setOptions(array('log' => 'nolog'));
             $this->fail();
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('Instance of Zend_Log expected', $e->getMessage());
         }
     }

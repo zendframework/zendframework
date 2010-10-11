@@ -24,12 +24,14 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Analysis\Analyzer\Common;
-use Zend\Search\Lucene\Analysis;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene\Analysis,
+	Zend\Search\Lucene,
+	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * @uses       \Zend\Search\Lucene\Analysis\Token
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
@@ -55,13 +57,13 @@ class Utf8 extends AbstractCommon
     /**
      * Object constructor
      *
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function __construct()
     {
         if (@preg_match('/\pL/u', 'a') != 1) {
             // PCRE unicode support is turned off
-            throw new Lucene\Exception('Utf8 analyzer needs PCRE unicode support to be enabled.');
+            throw new RuntimeException('Utf8 analyzer needs PCRE unicode support to be enabled.');
         }
     }
 

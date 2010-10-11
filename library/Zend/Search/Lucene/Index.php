@@ -23,12 +23,18 @@
  * @namespace
  */
 namespace Zend\Search\Lucene;
-use Zend\Search\Lucene\Search\Similarity;
-use Zend\Search\Lucene\Storage\Directory;
+
+use Zend\Search\Lucene\Search\Similarity,
+	Zend\Search\Lucene\Storage\Directory,
+	Zend\Search\Lucene\Exception\InvalidArgumentException,
+	Zend\Search\Lucene\Exception\RuntimeException,
+	Zend\Search\Lucene\Exception\InvalidFileFormatException;
 
 /**
  * @uses       \Zend\Search\Lucene\Document
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
+ * @uses       \Zend\Search\Lucene\Exception\InvalidFileFormatException
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @uses       \Zend\Search\Lucene\Index
  * @uses       \Zend\Search\Lucene\SearchIndex
  * @uses       \Zend\Search\Lucene\LockManager
@@ -118,8 +124,8 @@ class Index implements SearchIndex
      * -1 means there are no segments files.
      *
      * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return integer
-     * @throws \Zend\Search\Lucene\Exception
      */
     public static function getActualGeneration(Directory $directory)
     {
@@ -140,7 +146,7 @@ class Index implements SearchIndex
 
                 $format = $genFile->readInt();
                 if ($format != (int)0xFFFFFFFE) {
-                    throw new Exception('Wrong segments.gen file format');
+                    throw new RuntimeException('Wrong segments.gen file format');
                 }
 
                 $gen1 = $genFile->readLong();
@@ -154,8 +160,8 @@ class Index implements SearchIndex
             }
 
             // All passes are failed
-            throw new Exception('Index is under processing now');
-        } catch (Exception $e) {
+            throw new RuntimeException('Index is under processing now');
+        } catch (\Exception $e) {
             if (strpos($e->getMessage(), 'is not readable') !== false) {
                 try {
                     // Try to open old style segments file
@@ -163,15 +169,15 @@ class Index implements SearchIndex
 
                     // It's pre-2.1 index
                     return 0;
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     if (strpos($e->getMessage(), 'is not readable') !== false) {
                         return -1;
                     } else {
-                        throw new Exception($e->getMessage(), $e->getCode(), $e);
+                        throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
                     }
                 }
             } else {
-                throw new Exception($e->getMessage(), $e->getCode(), $e);
+                throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -223,14 +229,14 @@ class Index implements SearchIndex
      * Index is converted to this format at the nearest upfdate time
      *
      * @param int $formatVersion
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      */
     public function setFormatVersion($formatVersion)
     {
         if ($formatVersion != self::FORMAT_PRE_2_1  &&
             $formatVersion != self::FORMAT_2_1  &&
             $formatVersion != self::FORMAT_2_3) {
-            throw new Exception('Unsupported index format');
+            throw new InvalidArgumentException('Unsupported index format');
         }
 
         $this->_formatVersion = $formatVersion;
@@ -239,7 +245,7 @@ class Index implements SearchIndex
     /**
      * Read segments file for pre-2.1 Lucene index format
      *
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      */
     private function _readPre21SegmentsFile()
     {
@@ -248,7 +254,7 @@ class Index implements SearchIndex
         $format = $segmentsFile->readInt();
 
         if ($format != (int)0xFFFFFFFF) {
-            throw new Exception('Wrong segments file format');
+            throw new InvalidFileFormatException('Wrong segments file format');
         }
 
         // read version
@@ -279,7 +285,8 @@ class Index implements SearchIndex
     /**
      * Read segments file
      *
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     private function _readSegmentsFile()
     {
@@ -292,7 +299,7 @@ class Index implements SearchIndex
         } else if ($format == (int)0xFFFFFFFD) {
             $this->_formatVersion = self::FORMAT_2_1;
         } else {
-            throw new Exception('Unsupported segments file format');
+            throw new InvalidFileFormatException('Unsupported segments file format');
         }
 
         // read version
@@ -339,7 +346,9 @@ class Index implements SearchIndex
                     $normGens[] = $segmentsFile->readLong();
                 }
 
-                throw new Exception('Separate norm files are not supported. Optimize index to use it with Zend_Search_Lucene.');
+                throw new RuntimeException(
+                	'Separate norm files are not supported. Optimize index to use it with Zend\Search\Lucene.'
+                );
             }
 
             $isCompoundByte     = $segmentsFile->readByte();
@@ -374,12 +383,13 @@ class Index implements SearchIndex
      * a string with a path to the index folder or a Directory object.
      *
      * @param \Zend\Search\Lucene\Storage\Directory\Filesystem|string $directory
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function __construct($directory = null, $create = false)
     {
         if ($directory === null) {
-            throw new Exception('No index directory specified');
+            throw new InvalidArgumentException('No index directory specified');
         }
 
         if (is_string($directory)) {
@@ -400,13 +410,13 @@ class Index implements SearchIndex
         if ($create) {
             try {
                 LockManager::obtainWriteLock($this->_directory);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 LockManager::releaseReadLock($this->_directory);
 
                 if (strpos($e->getMessage(), 'Can\'t obtain exclusive index lock') === false) {
-                    throw new Exception($e->getMessage(), $e->getCode(), $e);
+                    throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
                 } else {
-                    throw new Exception('Can\'t create index. It\'s under processing now', 0, $e);
+                    throw new RuntimeException('Can\'t create index. It\'s under processing now', 0, $e);
                 }
             }
 
@@ -429,7 +439,7 @@ class Index implements SearchIndex
         }
 
         if ($this->_generation == -1) {
-            throw new Exception('Index doesn\'t exists in the specified directory.');
+            throw new RuntimeException('Index doesn\'t exists in the specified directory.');
         } else if ($this->_generation == 0) {
             $this->_readPre21SegmentsFile();
         } else {
@@ -527,12 +537,12 @@ class Index implements SearchIndex
      *
      * @param integer $id
      * @return boolean
-     * @throws \Zend\Search\Lucene\Exception    Exception is thrown if $id is out of the range
+     * @throws \Zend\Search\Lucene\Exception\OutOfRangeException	is thrown if $id is out of the range
      */
     public function isDeleted($id)
     {
         if ($id >= $this->_docCount) {
-            throw new Exception('Document id is out of the range.');
+            throw new OutOfRangeException('Document id is out of the range.');
         }
 
         $segmentStartId = 0;
@@ -665,7 +675,8 @@ class Index implements SearchIndex
      *
      * @param \Zend\Search\Lucene\Search\QueryParser|string $query
      * @return array \Zend\Search\Lucene\Search\QueryHit
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function find($query)
     {
@@ -674,7 +685,7 @@ class Index implements SearchIndex
         }
 
         if (!$query instanceof Search\Query\AbstractQuery) {
-            throw new Exception('Query must be a string or Zend_Search_Lucene_Search_Query object');
+            throw new InvalidArgumentException('Query must be a string or Zend\Search\Lucene\Search\Query object');
         }
 
         $this->commit();
@@ -747,14 +758,14 @@ class Index implements SearchIndex
                 $fieldName = $argList[$count];
 
                 if (!is_string($fieldName)) {
-                    throw new Exception('Field name must be a string.');
+                    throw new RuntimeException('Field name must be a string.');
                 }
 
                 if (strtolower($fieldName) == 'score') {
                     $sortArgs[] = &$scores;
                 } else {
                     if (!in_array($fieldName, $fieldNames)) {
-                        throw new Exception('Wrong field name.');
+                        throw new RuntimeException('Wrong field name.');
                     }
 
                     if (!isset($sortFieldValues[$fieldName])) {
@@ -762,9 +773,9 @@ class Index implements SearchIndex
                         foreach ($hits as $hit) {
                             try {
                                 $value = $hit->getDocument()->getFieldValue($fieldName);
-                            } catch (Exception $e) {
+                            } catch (\Exception $e) {
                                 if (strpos($e->getMessage(), 'not found') === false) {
-                                    throw new Exception($e->getMessage(), $e->getCode(), $e);
+                                    throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
                                 } else {
                                     $value = null;
                                 }
@@ -840,17 +851,17 @@ class Index implements SearchIndex
      *
      * @param integer|\Zend\Search\Lucene\Search\QueryHit $id
      * @return \Zend\Search\Lucene\Document
-     * @throws \Zend\Search\Lucene\Exception    Exception is thrown if $id is out of the range
+     * @throws \Zend\Search\Lucene\OutOfRangeException    is thrown if $id is out of the range
      */
     public function getDocument($id)
     {
         if ($id instanceof Search\QueryHit) {
-            /* @var $id Zend_Search_Lucene_Search_QueryHit */
+            /* @var $id Zend\Search\Lucene\Search\QueryHit */
             $id = $id->id;
         }
 
         if ($id >= $this->_docCount) {
-            throw new Exception('Document id is out of the range.');
+            throw new OutOfRangeException('Document id is out of the range.');
         }
 
         $segmentStartId = 0;
@@ -1111,17 +1122,17 @@ class Index implements SearchIndex
      * $id is an internal document id
      *
      * @param integer|\Zend\Search\Lucene\Search\QueryHit $id
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\OutOfRangeException
      */
     public function delete($id)
     {
         if ($id instanceof Search\QueryHit) {
-            /* @var $id Zend_Search_Lucene_Search_QueryHit */
+            /* @var $id Zend\Search\Lucene\Search\QueryHit */
             $id = $id->id;
         }
 
         if ($id >= $this->_docCount) {
-            throw new Exception('Document id is out of the range.');
+            throw new OutOfRangeException('Document id is out of the range.');
         }
 
         $segmentStartId = 0;

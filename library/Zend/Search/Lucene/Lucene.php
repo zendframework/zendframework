@@ -24,8 +24,10 @@
  */
 namespace Zend\Search\Lucene;
 
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
  * @uses       \Zend\Search\Lucene\Storage\Directory
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -84,11 +86,11 @@ class Lucene
     }
 
     /**
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      */
     public function __construct()
     {
-        throw new Exception('\Zend\Search\Lucene class is the only container for static methods. Use Lucene::open() or Lucene::create() methods.');
+        throw new UnsupportedMethodCallException('\Zend\Search\Lucene class is the only container for static methods. Use Lucene::open() or Lucene::create() methods.');
     }
 
     /**

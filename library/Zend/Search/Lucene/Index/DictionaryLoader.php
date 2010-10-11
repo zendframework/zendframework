@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Index;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Exception\InvalidFileFormatException;
 
 /**
  * Dictionary loader
@@ -33,7 +35,7 @@ use Zend\Search\Lucene;
  * Manual "method inlining" is performed to increase dictionary index loading operation
  * which is major bottelneck for search performance.
  *
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidFileFormatException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
@@ -52,7 +54,7 @@ class DictionaryLoader
      *
      * @param string $data
      * @return array
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      */
     public static function load($data)
     {
@@ -65,7 +67,7 @@ class DictionaryLoader
         $pos += 4;
         if ($tiVersion != (int)0xFFFFFFFE /* pre-2.1 format */ &&
             $tiVersion != (int)0xFFFFFFFD /* 2.1+ format    */) {
-                throw new Lucene\Exception('Wrong TermInfoIndexFile file format');
+                throw new InvalidFileFormatException('Wrong TermInfoIndexFile file format');
         }
 
         // $indexTermCount = $tiiFile->readLong();
@@ -84,7 +86,7 @@ class DictionaryLoader
                 (ord($data[$pos+2])          != 0) ||
                 (ord($data[$pos+3])          != 0) ||
                 ((ord($data[$pos+4]) & 0x80) != 0)) {
-                    throw new Lucene\Exception('Largest supported segment size (for 32-bit mode) is 2Gb');
+                    throw new InvalidFileFormatException('Largest supported segment size (for 32-bit mode) is 2Gb');
                  }
 
             $indexTermCount = ord($data[$pos+4]) << 24  |
@@ -101,7 +103,7 @@ class DictionaryLoader
         $skipInterval = ord($data[$pos]) << 24 | ord($data[$pos+1]) << 16 | ord($data[$pos+2]) << 8  | ord($data[$pos+3]);
         $pos += 4;
         if ($indexTermCount < 1) {
-            throw new Lucene\Exception('Wrong number of terms in a term dictionary index');
+            throw new InvalidFileFormatException('Wrong number of terms in a term dictionary index');
         }
 
         if ($tiVersion == (int)0xFFFFFFFD /* 2.1+ format */) {
@@ -253,7 +255,7 @@ class DictionaryLoader
 
         // Check special index entry mark
         if ($termDictionary[0][0] != (int)0xFFFFFFFF) {
-            throw new Lucene\Exception('Wrong TermInfoIndexFile file format');
+            throw new InvalidFileFormatException('Wrong TermInfoIndexFile file format');
         }
 
         if (PHP_INT_SIZE > 4) {

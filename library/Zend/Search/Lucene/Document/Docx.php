@@ -24,14 +24,19 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Document;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Exception\ExtensionNotLoadedException,
+	Zend\Search\Lucene\Exception\RuntimeException,
+	Zend\Search\Luence\Document\Exception\InvalidArgumentException;
 
 /**
  * Docx document.
  *
- * @uses       \Zend\Search\Lucene\Document\Exception
+ * @uses       \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
+ * @uses	   \Zend\Search\Lucene\Exception\RuntimeException
+ * @uses	   \Zend\Search\Luence\Document\Exception\InvalidArgumentException
  * @uses       \Zend\Search\Lucene\Document\AbstractOpenXML
- * @uses       \Zend\Search\Lucene\Exception
  * @uses       \Zend\Search\Lucene\Document\Field
  * @uses       ZipArchive
  * @category   Zend
@@ -53,12 +58,15 @@ class Docx extends AbstractOpenXML {
      *
      * @param string  $fileName
      * @param boolean $storeContent
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     private function __construct($fileName, $storeContent)
     {
         if (!class_exists('ZipArchive', false)) {
-            throw new Lucene\Exception('MS Office documents processing functionality requires Zip extension to be loaded');
+            throw new ExtensionNotLoadedException(
+            	'MS Office documents processing functionality requires Zip extension to be loaded'
+            );
         }
 
         // Document data holders
@@ -72,7 +80,7 @@ class Docx extends AbstractOpenXML {
         // Read relations and search for officeDocument
         $relationsXml = $package->getFromName('_rels/.rels');
         if ($relationsXml === false) {
-            throw new Lucene\Exception('Invalid archive or corrupted .docx file.');
+            throw new RuntimeException('Invalid archive or corrupted .docx file.');
         }
         $relations = simplexml_load_string($relationsXml);
         foreach($relations->Relationship as $rel) {
@@ -144,13 +152,13 @@ class Docx extends AbstractOpenXML {
      *
      * @param string  $fileName
      * @param boolean $storeContent
+     * @throws \Zend\Search\Lucene\Document\Exception\InvalidArgumentException
      * @return \Zend\Search\Lucene\Document\Docx
-     * @throws \Zend\Search\Lucene\Document\Exception
      */
     public static function loadDocxFile($fileName, $storeContent = false)
     {
         if (!is_readable($fileName)) {
-            throw new Exception('Provided file \'' . $fileName . '\' is not readable.');
+            throw new InvalidArgumentException('Provided file \'' . $fileName . '\' is not readable.');
         }
 
         return new self($fileName, $storeContent);

@@ -42,17 +42,17 @@ class HelperBroker extends PluginBroker
     protected $defaultClassLoader = 'Zend\View\HelperLoader';
 
     /**
-     * @var Zend\View\View
+     * @var Zend\View\Renderer
      */
     protected $view;
 
     /**
      * Set view object
      * 
-     * @param  View $view 
+     * @param  Renderer $view 
      * @return HelperBroker
      */
-    public function setView(View $view)
+    public function setView(Renderer $view)
     {
         $this->view = $view;
         return $this;
@@ -61,7 +61,7 @@ class HelperBroker extends PluginBroker
     /**
      * Retrieve view instance
      * 
-     * @return null|View
+     * @return null|Renderer
      */
     public function getView()
     {

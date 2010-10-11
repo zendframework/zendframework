@@ -23,7 +23,7 @@
  */
 namespace Zend\View;
 
-use Zend\Filter\FilterChain,
+use Zend\Stdlib\FilterChain,
     ArrayAccess;
 
 /**
@@ -85,7 +85,6 @@ class PhpRenderer implements Renderer
      */
     public function __construct($config = array())
     {
-        $this->vars = new Variables();
         $this->init();
     }
 
@@ -178,6 +177,10 @@ class PhpRenderer implements Renderer
      */
     public function vars($key = null)
     {
+        if (null === $this->vars) {
+            $this->setVars(new Variables());
+        }
+
         if (null === $key) {
             return $this->vars;
         }
@@ -203,7 +206,7 @@ class PhpRenderer implements Renderer
         }
         if (!$broker instanceof HelperBroker) {
             throw new Exception(sprintf(
-                'Helper broker must extends Zend\View\HelperBroker; got type "%s" instead',
+                'Helper broker must extend Zend\View\HelperBroker; got type "%s" instead',
                 (is_object($broker) ? get_class($broker) : gettype($broker))
             ));
         }
@@ -221,7 +224,7 @@ class PhpRenderer implements Renderer
     public function broker($helper = null, array $options = null)
     {
         if (null === $this->helperBroker) {
-            $this->setHelperBroker(new HelperBroker());
+            $this->setBroker(new HelperBroker());
         }
         if (null === $helper) {
             return $this->helperBroker;
@@ -274,7 +277,7 @@ class PhpRenderer implements Renderer
         unset($vars); // remove $vars from local scope
 
         ob_start();
-        include func_get_arg($this->file);
+        include $this->file;
         $content = ob_get_clean();
 
         if (null !== $this->varsCache) {

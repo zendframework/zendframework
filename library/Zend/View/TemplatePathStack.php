@@ -70,7 +70,7 @@ class TemplatePathStack implements TemplateResolver
             }
         }
 
-        $this->paths         = new SplStack;
+        $this->paths = new SplStack;
         if (null !== $options) {
             $this->setOptions($options);
         }
@@ -97,10 +97,11 @@ class TemplatePathStack implements TemplateResolver
                     $this->setLfiProtection($value);
                     break;
                 case 'script_paths':
-                    $this->setPaths((array) $value);
+                    $this->addPaths($value);
                     break;
                 case 'use_stream_wrapper':
                     $this->setUseStreamWrapper($value);
+                    break;
                 default:
                     break;
             }
@@ -111,9 +112,9 @@ class TemplatePathStack implements TemplateResolver
      * Add many paths to the stack at once
      * 
      * @param  array $paths 
-     * @return ViewScriptPaths
+     * @return TemplatePathStack
      */
-    public function setPaths(array $paths)
+    public function addPaths(array $paths)
     {
         foreach ($paths as $path) {
             $this->addPath($path);
@@ -122,10 +123,37 @@ class TemplatePathStack implements TemplateResolver
     }
 
     /**
+     * Rest the path stack to the paths provided
+     * 
+     * @param  array $paths 
+     * @return TemplatePathStack
+     */
+    public function setPaths(array $paths)
+    {
+        $this->clearPaths();
+        $this->addPaths($paths);
+        return $this;
+    }
+
+    /**
+     * Normalize a path for insertion in the stack
+     * 
+     * @param  string $path 
+     * @return string
+     */
+    public static function normalizePath($path)
+    {
+        $path = rtrim($path, '/');
+        $path = rtrim($path, '\\');
+        $path .= DIRECTORY_SEPARATOR;
+        return $path;
+    }
+
+    /**
      * Add a single path to the stack
      * 
      * @param  string $path 
-     * @return ViewScriptPaths
+     * @return TemplatePathStack
      */
     public function addPath($path)
     {
@@ -135,7 +163,7 @@ class TemplatePathStack implements TemplateResolver
                 gettype($path)
             ));
         }
-        $this->paths[] = $path;
+        $this->paths[] = static::normalizePath($path);
         return $this;
     }
 
@@ -219,13 +247,13 @@ class TemplatePathStack implements TemplateResolver
             throw $e;
         }
 
-        if (!count($this->scriptPaths)) {
+        if (!count($this->paths)) {
             $e = new Exception('No view script directory set; unable to determine location for view script');
             throw $e;
         }
 
         $paths   = PATH_SEPARATOR;
-        foreach ($this->scriptPaths as $path) {
+        foreach ($this->paths as $path) {
             $file = new SplFileInfo($path . $name);
             if ($file->isReadable()) {
                 // Found! Return it.

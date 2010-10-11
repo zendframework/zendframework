@@ -114,7 +114,7 @@ abstract class AbstractFunction
         // testing here.
         if ((!$r instanceof \ReflectionFunction)
             && (!$r instanceof \ReflectionMethod)) {
-            throw new Exception('Invalid reflection class');
+            throw new Exception\InvalidArgumentException('Invalid reflection class');
         }
         $this->_reflection = $r;
 
@@ -334,7 +334,7 @@ abstract class AbstractFunction
         }
 
         if (count($paramTypesTmp) != $paramCount) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                'Variable number of arguments is not supported for services (except optional parameters). '
              . 'Number of function arguments must correspond to actual number of arguments described in a docblock.');
         }
@@ -365,7 +365,7 @@ abstract class AbstractFunction
             return call_user_func_array(array($this->_reflection, $method), $args);
         }
 
-        throw new Exception('Invalid reflection method ("' .$method. '")');
+        throw new Exception\BadMethodCallException('Invalid reflection method ("' .$method. '")');
     }
 
     /**
@@ -414,7 +414,7 @@ abstract class AbstractFunction
         }
 
         if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
-            throw new Exception('Invalid namespace');
+            throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
         $this->_namespace = $namespace;
@@ -439,7 +439,7 @@ abstract class AbstractFunction
     public function setDescription($string)
     {
         if (!is_string($string)) {
-            throw new Exception('Invalid description');
+            throw new Exception\InvalidArgumentException('Invalid description');
         }
 
         $this->_description = $string;

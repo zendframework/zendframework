@@ -122,7 +122,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
         $item = $this->_normalizeItem($item, $id);
 
         if ($this->hasItem($item['id'])) {
-            throw new Exception('Overwriting items using addItem() is not allowed');
+            throw new Exception\InvalidArgumentException('Overwriting items using addItem() is not allowed');
         }
 
         $this->_items[$item['id']] = $item['data'];
@@ -139,7 +139,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
     public function addItems($items)
     {
         if (!is_array($items) && (!is_object($items) || !($items instanceof \Traversable))) {
-            throw new Exception('Only arrays and Traversable objects may be added to ' . __CLASS__);
+            throw new Exception\InvalidArgumentException('Only arrays and Traversable objects may be added to ' . __CLASS__);
         }
 
         foreach ($items as $item) {
@@ -231,7 +231,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
         } elseif (is_numeric($identifier)) {
             $this->_identifier = (int) $identifier;
         } else {
-            throw new Exception('Invalid identifier; please use a string or integer');
+            throw new Exception\InvalidArgumentException('Invalid identifier; please use a string or integer');
         }
 
         return $this;
@@ -359,7 +359,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
     public function fromJson($json)
     {
         if (!is_string($json)) {
-            throw new Exception('fromJson() expects JSON input');
+            throw new Exception\InvalidArgumentException('fromJson() expects JSON input');
         }
         $data = Json::decode($json);
         return $this->fromArray($data);
@@ -373,7 +373,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
     public function toArray()
     {
         if (null === ($identifier = $this->getIdentifier())) {
-            throw new Exception('Serialization requires that an identifier be present in the object; first call setIdentifier()');
+            throw new Exception\RuntimeException('Serialization requires that an identifier be present in the object; first call setIdentifier()');
         }
 
         $array = array(
@@ -489,14 +489,14 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
      */
     protected function _normalizeItem($item, $id)
     {
-        if (null === ($identifier = $this->getIdentifier())) {
-            throw new Exception('You must set an identifier prior to adding items');
-        }
-
         if (!is_object($item) && !is_array($item)) {
-            throw new Exception('Only arrays and objects may be attached');
+            throw new Exception\InvalidArgumentException('Only arrays and objects may be attached');
         }
 
+        if (null === ($identifier = $this->getIdentifier())) {
+            throw new Exception\RuntimeException('You must set an identifier prior to adding items');
+        }
+        
         if (is_object($item)) {
             if (method_exists($item, 'toArray')) {
                 $item = $item->toArray();
@@ -506,7 +506,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
         }
 
         if ((null === $id) && !array_key_exists($identifier, $item)) {
-            throw new Exception('Item must contain a column matching the currently set identifier');
+            throw new Exception\InvalidArgumentException('Item must contain a column matching the currently set identifier');
         } elseif (null === $id) {
             $id = $item[$identifier];
         } else {

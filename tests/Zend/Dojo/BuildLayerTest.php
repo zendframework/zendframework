@@ -67,7 +67,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrievingDojoHelperShouldRaiseExceptionWhenNoViewPresent()
     {
-        $this->setExpectedException('Zend\Dojo\Exception');
+        $this->setExpectedException('Zend\Dojo\Exception\RuntimeException', 'View object not registered; cannot retrieve dojo helper');
         $build = new BuildLayer();
         $build->getDojoHelper();
     }
@@ -134,7 +134,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingLayerNameToInvalidFormatShouldRaiseException()
     {
-        $this->setExpectedException('Zend\Dojo\Exception');
+        $this->setExpectedException('Zend\Dojo\Exception\InvalidArgumentException', 'Invalid layer name provided');
         $build = new BuildLayer();
         $build->setLayerName('customFoo#bar');
     }

@@ -110,7 +110,7 @@ class BuildLayer
             if ($options instanceof Config) {
                 $options = $options->toArray();
             } elseif (!is_array($options)) {
-                throw new Exception('Invalid options provided to constructor');
+                throw new Exception\InvalidArgumentException('Invalid options provided to constructor');
             }
             $this->setOptions($options);
         }
@@ -182,7 +182,7 @@ class BuildLayer
     {
         if (null === $this->_dojo) {
             if (null === ($view = $this->getView())) {
-                throw new Exception('View object not registered; cannot retrieve dojo helper');
+                throw new Exception\RuntimeException('View object not registered; cannot retrieve dojo helper');
             }
             $helper = $view->getHelper('dojo');
             $this->setDojoHelper($view->dojo());
@@ -199,7 +199,7 @@ class BuildLayer
     public function setLayerName($name)
     {
         if (!preg_match('/^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$/i', $name)) {
-            throw new Exception('Invalid layer name provided; must be of form[a-z][a-z0-9_](\.[a-z][a-z0-9_])+');
+            throw new Exception\InvalidArgumentException('Invalid layer name provided; must be of form[a-z][a-z0-9_](\.[a-z][a-z0-9_])+');
         }
         $this->_layerName = $name;
         return $this;

@@ -17,7 +17,6 @@
  * @subpackage DiffieHellman
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -176,7 +175,7 @@ class DiffieHellman
      */
     public function getPublicKey($type = self::NUMBER)
     {
-        if ($this->_publicKey === null)) {
+        if ($this->_publicKey === null) {
             throw new DiffieHellmanException('A public key has not yet been generated using a prior call to generateKeys()');
         }
         if ($type == self::BINARY) {

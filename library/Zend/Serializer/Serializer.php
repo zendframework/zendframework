@@ -16,7 +16,6 @@
  * @package    Zend_Serializer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -123,7 +122,7 @@ class Serializer
     protected static function _getDefaultAdapterLoader()
     {
         $loader = new PluginLoader();
-        $loader->addPrefixPath('Zend\\Serializer\\Adapter\\', __DIR__ . '/Serializer/Adapter');
+        $loader->addPrefixPath('Zend\\Serializer\\Adapter\\', __DIR__ . DIRECTORY_SEPARATOR . 'Adapter');
         return $loader;
     }
 

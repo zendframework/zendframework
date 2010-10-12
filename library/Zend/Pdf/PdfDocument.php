@@ -16,7 +16,6 @@
  * @package    Zend_PDF
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -273,7 +272,7 @@ class PdfDocument
      */
     public function __construct($source = null, $revision = null, $load = false)
     {
-        $this->_objFactory = ObjectFactory\ElementFactory::createFactory(1);
+        $this->_objFactory = ObjectFactory::createFactory(1);
 
         if ($source !== null) {
             $this->_parser           = new PdfParser\StructureParser($source, $this->_objFactory, $load);

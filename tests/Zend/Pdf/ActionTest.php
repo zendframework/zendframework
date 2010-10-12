@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -304,7 +303,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals(18, $actionsCount);
 
-        $action->dumpAction(new ObjectFactory\ElementFactory(1));
+        $action->dumpAction(new ObjectFactory(1));
         $this->assertEquals(
             $action->getResource()->toString(),
             '<</Type /Action '
@@ -318,7 +317,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $action1 = Action\GoToAction::create('SomeNamedDestination');
         $action1->next[] = Action\GoToAction::create('AnotherNamedDestination');
 
-        $action1->dumpAction(new ObjectFactory\ElementFactory(1));
+        $action1->dumpAction(new ObjectFactory(1));
 
         $this->assertEquals($action1->getResource()->toString(),
                             '<</Type /Action /S /GoTo /D (SomeNamedDestination) /Next 1 0 R >>');
@@ -334,7 +333,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
         $action = Action\GoToAction::create($destination);
 
-        $action->dumpAction(new ObjectFactory\ElementFactory(1));
+        $action->dumpAction(new ObjectFactory(1));
 
         $this->assertEquals($action->getResource()->toString(),
                             '<</Type /Action /S /GoTo /D [4 0 R /Fit ] >>');

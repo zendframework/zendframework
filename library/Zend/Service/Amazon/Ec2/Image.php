@@ -17,7 +17,6 @@
  * @subpackage Ec2
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -36,11 +35,7 @@ namespace Zend\Service\Amazon\Ec2;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-<<<<<<< HEAD
-class Zend_Service_Amazon_Ec2_Image extends Zend_Service_Amazon_Ec2_AbstractService
-=======
 class Image extends AbstractEc2
->>>>>>> merges/farazdagi
 {
     /**
      * Registers an AMI with Amazon EC2. Images must be registered before

@@ -17,7 +17,6 @@
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -130,6 +129,39 @@ class ArrayObject extends AbstractTypeObject
         $outStr .= ']';
 
         return $outStr;
+    }
+
+    /**
+     * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
+     *
+     * @param \Zend\Pdf\ObjectFactory $factory  The factory to attach
+     * @param array &$processed List of already processed indirect objects, used to avoid objects duplication
+     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @returns \Zend\Pdf\InternalType\AbstractTypeObject
+     */
+    public function makeClone(Pdf\ObjectFactory $factory, array &$processed, $mode)
+    {
+        $newArray = new self();
+
+        foreach ($this->items as $key => $value) {
+            $newArray->items[$key] = $value->makeClone($factory, $processed, $mode);
+        }
+
+        return $newArray;
+    }
+
+    /**
+     * Set top level parent indirect object.
+     *
+     * @param \Zend\Pdf\InternalType\IndirectObject $parent
+     */
+    public function setParentObject(IndirectObject $parent)
+    {
+        parent::setParentObject($parent);
+
+        foreach ($this->items as $item) {
+            $item->setParentObject($parent);
+        }
     }
 
     /**

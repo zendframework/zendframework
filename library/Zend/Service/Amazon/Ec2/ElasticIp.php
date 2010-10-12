@@ -17,7 +17,6 @@
  * @subpackage Ec2
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -36,11 +35,7 @@ namespace Zend\Service\Amazon\Ec2;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-<<<<<<< HEAD:library/Zend/Service/Amazon/Ec2/Elasticip.php
-class Zend_Service_Amazon_Ec2_Elasticip extends Zend_Service_Amazon_Ec2_AbstractService
-=======
 class ElasticIp extends AbstractEc2
->>>>>>> merges/farazdagi:library/Zend/Service/Amazon/Ec2/ElasticIp.php
 {
     /**
      * Acquires an elastic IP address for use with your account

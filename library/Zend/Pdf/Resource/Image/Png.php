@@ -17,7 +17,6 @@
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -228,7 +227,7 @@ class Png extends AbstractImage
 
                 $colorSpace = new InternalType\NameObject('DeviceGray');
 
-                $decodingObjFactory = ObjectFactory\ElementFactory::createFactory(1);
+                $decodingObjFactory = ObjectFactory::createFactory(1);
                 $decodingStream = $decodingObjFactory->newStreamObject($imageData);
                 $decodingStream->dictionary->Filter      = new InternalType\NameObject('FlateDecode');
                 $decodingStream->dictionary->DecodeParms = new InternalType\DictionaryObject();
@@ -261,7 +260,7 @@ class Png extends AbstractImage
 
                 $colorSpace = new InternalType\NameObject('DeviceRGB');
 
-                $decodingObjFactory = ObjectFactory\ElementFactory::createFactory(1);
+                $decodingObjFactory = ObjectFactory::createFactory(1);
                 $decodingStream = $decodingObjFactory->newStreamObject($imageData);
                 $decodingStream->dictionary->Filter      = new InternalType\NameObject('FlateDecode');
                 $decodingStream->dictionary->DecodeParms = new InternalType\DictionaryObject();

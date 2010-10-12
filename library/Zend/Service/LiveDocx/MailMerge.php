@@ -929,7 +929,6 @@ class MailMerge extends AbstractLiveDocx
         return $ret;
     }
 
-
     /**
      * Return supported image formats from which can be imported (lowercase)
      *
@@ -998,7 +997,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 2.0
      */
     public function uploadImage($filename)
@@ -1028,7 +1027,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 2.0
      */
     public function downloadImage($filename)
@@ -1073,7 +1072,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend_Service_LiveDocx_Exception
+     * @throws Zend\Service\LiveDocx\Exception
      * @since  LiveDocx 2.0
      */
     public function deleteImage($filename)

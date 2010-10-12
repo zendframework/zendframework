@@ -379,7 +379,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     public function testGetImageFormats()
     {
         $expectedResults = array('bmp', 'gif', 'jpg', 'png', 'tiff');
-        $this->assertEquals($expectedResults, $this->mailMerge->getImageFormats());
+        $this->assertEquals($expectedResults, $this->mailMerge->getImageExportFormats());
     }
 
     // -------------------------------------------------------------------------
@@ -407,7 +407,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
         $this->mailMerge->assign($testValues);
         $this->mailMerge->createDocument();
-        foreach($this->mailMerge->getImageFormats() as $format) {
+        foreach($this->mailMerge->getImageExportFormats() as $format) {
             $bitmaps = $this->mailMerge->getBitmaps(1, 1, 20, $format);
             $this->assertEquals($expectedResults[$format], md5(serialize($bitmaps)));
         }
@@ -436,7 +436,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
         $this->mailMerge->assign($testValues);
         $this->mailMerge->createDocument();
-        foreach($this->mailMerge->getImageFormats() as $format) {
+        foreach($this->mailMerge->getImageExportFormats() as $format) {
             $bitmaps = $this->mailMerge->getAllBitmaps(20, $format);
             $this->assertEquals($expectedResults[$format], md5(serialize($bitmaps)));
         }

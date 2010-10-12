@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<who xmlns="http://schemas.google.com/g/2005" rel="http://schemas.google.com/g/2005#event.attendee" valueString="Jo" email="jo@nowhere.invalid">
-  <attendeeType value="http://schemas.google.com/g/2005#event.required"/>
-  <attendeeStatus value="http://schemas.google.com/g/2005#event.tentative"/>
-  <entryLink href="http://gmail.com/jo/contacts/Jo">
-  </entryLink>
-</who>

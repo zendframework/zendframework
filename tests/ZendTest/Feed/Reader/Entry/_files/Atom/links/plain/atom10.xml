@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <entry>
-        <link rel="alternate" type="text/html" href="http://www.example.com/entry"/>
-        <link rel="alternate" type="text/html" href="http://www.example.com/entry2"/>
-    </entry>
-</feed>

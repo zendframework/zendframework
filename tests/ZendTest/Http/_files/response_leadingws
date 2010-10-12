@@ -1,15 +1,0 @@
-HTTP/1.1 200 OK
-Date: Sun, 09 Sep 2007 12:52:56 GMT
-Server: Apache
-Last-Modified: Sun, 09 Sep 2007 12:51:35 GMT
-ETag: "b7aa5e-9-550283c0"
-Accept-Ranges: bytes
-Content-Length: 9
-Vary: User-Agent
-Keep-Alive: timeout=15, max=100
-Connection: Keep-Alive
-Content-Type: text/plain
-
-
-	  
-	x

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<rss version="0.93"
-    xmlns:dc="http://purl.org/dc/elements/1.0/">
-    <channel>
-        <item>
-            <dc:description>Entry Description</dc:description>
-        </item>
-    </channel>
-</rss>

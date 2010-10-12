@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <production>
-        <foo>bar</foo>
-    </production>
-    <testing extends="production"></testing>
-</config>

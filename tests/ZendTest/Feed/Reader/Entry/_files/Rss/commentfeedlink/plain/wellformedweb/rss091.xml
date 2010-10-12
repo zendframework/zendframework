@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<rss version="0.91"
-    xmlns:wfw="http://wellformedweb.org/CommentAPI/">
-    <channel>
-        <item>
-            <wfw:commentRss>http://www.example.com/entry/321/feed/rss/</wfw:commentRss>
-        </item>
-    </channel>
-</rss>

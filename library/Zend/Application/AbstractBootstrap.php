@@ -25,18 +25,9 @@
  */
 namespace Zend\Application;
 
-use Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater,
-    Zend\Loader\PluginLoader;
-
 /**
  * Abstract base class for bootstrap classes
  *
- * @uses       \Zend\Application\Bootstrapper
- * @uses       \Zend\Application\BootstrapException
- * @uses       \Zend\Application\ResourceBootstrapper
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Registry
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Bootstrap
@@ -80,14 +71,9 @@ abstract class AbstractBootstrap
     protected $_options = array();
 
     /**
-     * @var \Zend\Loader\ShortNameLocater
+     * @var \Zend\Application\ResourceBroker
      */
-    protected $_pluginLoader;
-
-    /**
-     * @var array Class-based resource plugins
-     */
-    protected $_pluginResources = array();
+    protected $_pluginBroker;
 
     /**
      * @var array Initializers that have been run
@@ -132,17 +118,6 @@ abstract class AbstractBootstrap
         $methods = get_class_methods($this);
         foreach ($methods as $key => $method) {
             $methods[$key] = strtolower($method);
-        }
-
-        if (array_key_exists('pluginpaths', $options)) {
-            $pluginLoader = $this->getPluginLoader();
-
-            if ($pluginLoader instanceof PrefixPathMapper) {
-                foreach ($options['pluginpaths'] as $prefix => $path) {
-                    $pluginLoader->addPrefixPath($prefix, $path);
-                }
-            }
-            unset($options['pluginpaths']);
         }
 
         foreach ($options as $key => $value) {

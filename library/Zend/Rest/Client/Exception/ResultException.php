@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Rest\Client;
+namespace Zend\Rest\Client\Exception;
 
 /**
  * REST client result exception
@@ -34,4 +34,7 @@ namespace Zend\Rest\Client;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResultException extends Exception{}
+class ResultException 
+	extends \Exception
+	implements \Zend\Rest\Client\Exception
+{}

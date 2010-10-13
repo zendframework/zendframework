@@ -289,7 +289,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidXmlInClientResultLeadsToException()
     {
-        $this->setExpectedException('Zend\\Rest\\Client\\ResultException');
+        $this->setExpectedException('Zend\\Rest\\Client\\Exception\\ResultException');
         $result = new Client\Result("invalidxml");
     }
 }

@@ -63,7 +63,7 @@ class CustomDijitTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperShouldRaiseExceptionIfNoDojoTypePassed()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception');
+        $this->setExpectedException('Zend\Dojo\View\Exception\InvalidArgumentException', 'No dojoType specified; cannot create dijit');
         $this->view->customDijit('foo');
     }
 

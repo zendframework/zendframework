@@ -101,25 +101,15 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     * Test input exceptions
-     *
-     * @return void
-     */
     public function testExceptionParserWrongInputType()
     {
-        $this->setExpectedException('Zend\Markup\Parser\Exception');
-
+        $this->setExpectedException('Zend\Markup\Parser\Exception\InvalidArgumentException', 'Value to parse should be a string');
         $this->_markup->getParser()->parse(array());
     }
 
-    /**
-     * Test exception
-     *
-     * @expectedException Zend\Markup\Parser\Exception
-     */
     public function testExceptionParserEmptyInput()
     {
+        $this->setExpectedException('Zend\Markup\Parser\Exception\InvalidArgumentException', 'Value to parse cannot be left empty');
         $this->_markup->getParser()->parse('');
     }
 

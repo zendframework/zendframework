@@ -107,11 +107,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('instance', $this->callback->getType());
     }
 
-    /**
-     * @expectedException \Zend\Server\Exception
-     */
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
+        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid method callback type');
         $this->callback->setType('bogus');
     }
 

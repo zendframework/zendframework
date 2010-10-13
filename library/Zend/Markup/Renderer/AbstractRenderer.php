@@ -206,7 +206,7 @@ abstract class AbstractRenderer
     public function addMarkup($name, $type, array $options)
     {
         if (!isset($options['group']) && ($type ^ self::TYPE_ALIAS)) {
-            throw new Exception("There is no render group defined.");
+            throw new Exception\InvalidArgumentException("There is no render group defined.");
         }
 
         // add the filter
@@ -227,7 +227,7 @@ abstract class AbstractRenderer
             // add a callback tag
             if (isset($options['callback'])) {
                 if (!($options['callback'] instanceof TokenConverter)) {
-                    throw new Exception("Not a valid markup callback.");
+                    throw new Exception\InvalidArgumentException("Not a valid markup callback.");
                 }
                 if (method_exists($options['callback'], 'setRenderer')) {
                     $options['callback']->setRenderer($this);
@@ -243,8 +243,7 @@ abstract class AbstractRenderer
         } elseif ($type & self::TYPE_ALIAS) {
             // add an alias
             if (empty($options['name'])) {
-                throw new Exception(
-                        'No alias was provided but markup was defined as such');
+                throw new Exception\InvalidArgumentException('No alias was provided but markup was defined as such');
             }
 
             $this->_markups[$name] = array(

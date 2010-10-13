@@ -25,7 +25,7 @@
  */
 namespace Zend\Dojo\View\Helper;
 
-use Zend\Dojo\View\Exception as DojoViewException;
+use Zend\Dojo\View\Exception;
 
 /**
  * Arbitrary dijit support
@@ -66,7 +66,7 @@ class CustomDijit extends DijitContainer
         if (!array_key_exists('dojoType', $params)
             && (null === $this->_defaultDojoType)
         ) {
-            throw new DojoViewException('No dojoType specified; cannot create dijit');
+            throw new Exception\InvalidArgumentException('No dojoType specified; cannot create dijit');
         } elseif (array_key_exists('dojoType', $params)) {
             $this->_dijit  = $params['dojoType'];
             $this->_module = $params['dojoType'];
@@ -100,7 +100,7 @@ class CustomDijit extends DijitContainer
         if (!array_key_exists('dojoType', $params)
             && (null === $this->_defaultDojoType)
         ) {
-            throw new DojoViewException('No dojoType specified; cannot create dijit');
+            throw new Exception\InvalidArgumentException('No dojoType specified; cannot create dijit');
         } elseif (array_key_exists('dojoType', $params)) {
             $this->_dijit  = $params['dojoType'];
             $this->_module = $params['dojoType'];

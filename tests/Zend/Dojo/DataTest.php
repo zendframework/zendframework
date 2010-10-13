@@ -76,7 +76,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
 
     public function testSetIdentifierShouldThrowExceptionOnInvalidType()
     {
-        $this->setExpectedException('Zend\Dojo\Exception');
+        $this->setExpectedException('Zend\Dojo\Exception\InvalidArgumentException', 'Invalid identifier; please use a string or integer');
         $this->dojoData->setIdentifier(true);
     }
 
@@ -106,7 +106,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'title' => 'foo',
             'url'   => 'http://www.example.com/',
         );
-        $this->setExpectedException('Zend\Dojo\Exception', 'identifier');
+        $this->setExpectedException('Zend\Dojo\Exception\RuntimeException', 'You must set an identifier prior to adding items');
         $this->dojoData->addItem($item);
     }
 
@@ -117,7 +117,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'url'   => 'http://www.example.com/',
         );
         $this->dojoData->setIdentifier('id');
-        $this->setExpectedException('Zend\Dojo\Exception', 'identifier');
+        $this->setExpectedException('Zend\Dojo\Exception\InvalidArgumentException', 'Item must contain a column matching the currently set identifier');
         $this->dojoData->addItem($item);
     }
 
@@ -160,7 +160,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
     public function testAddItemShouldThrowErrorOnInvalidItem()
     {
         $this->dojoData->setIdentifier('id');
-        $this->setExpectedException('Zend\Dojo\Exception', 'Only arrays and objects');
+        $this->setExpectedException('Zend\Dojo\Exception\InvalidArgumentException', 'Only arrays and objects');
         $this->dojoData->addItem('foo');
     }
 
@@ -190,7 +190,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'title' => 'foo',
             'url'   => 'http://www.example.com/',
         );
-        $this->setExpectedException('Zend\Dojo\Exception', 'Overwriting items using addItem()');
+        $this->setExpectedException('Zend\Dojo\Exception\InvalidArgumentException', 'Overwriting items using addItem()');
         $this->dojoData->addItem($item);
     }
 
@@ -264,7 +264,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
 
     public function testAddItemsShouldThrowExceptionForInvalidItems()
     {
-        $this->setExpectedException('Zend\Dojo\Exception');
+        $this->setExpectedException('Zend\Dojo\Exception\InvalidArgumentException', 'Only arrays and Traversable objects may be added to ');
         $this->dojoData->addItems('foo');
     }
 
@@ -357,7 +357,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
     {
         $this->testAddItemsShouldAcceptTraversableObject();
         $this->dojoData->setIdentifier(null);
-        $this->setExpectedException('Zend\Dojo\Exception', 'Serialization');
+        $this->setExpectedException('Zend\Dojo\Exception\RuntimeException', 'Serialization');
         $array = $this->dojoData->toArray();
     }
 
@@ -426,7 +426,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
 
     public function testFromJsonShouldThrowExceptionOnInvalidData()
     {
-        $this->setExpectedException('Zend\Dojo\Exception');
+        $this->setExpectedException('Zend\Dojo\Exception\InvalidArgumentException', 'fromJson() expects JSON input');
         $this->dojoData->fromJson(new \stdClass);
     }
 

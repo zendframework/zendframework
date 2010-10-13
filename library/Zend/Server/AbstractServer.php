@@ -147,7 +147,7 @@ abstract class AbstractServer implements Server
         $method     = empty($ns) ? $name : $ns . '.' . $name;
 
         if (!$this->_overwriteExistingMethods && $this->_table->hasMethod($method)) {
-            throw new Exception('Duplicate method registered: ' . $method);
+            throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
         }
 
         $definition = new Method\Definition();

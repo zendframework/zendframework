@@ -25,7 +25,7 @@
  */
 namespace Zend\Dojo\View\Helper\Dojo;
 
-use Zend\Dojo\View\Exception as DojoViewException,
+use Zend\Dojo\View\Exception,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Config\Config,
     Zend\View\ViewEngine as View,
@@ -299,14 +299,14 @@ class Container
     public function requireModule($modules)
     {
         if (!is_string($modules) && !is_array($modules)) {
-            throw new DojoViewException('Invalid module name specified; must be a string or an array of strings');
+            throw new Exception\InvalidArgumentException('Invalid module name specified; must be a string or an array of strings');
         }
 
         $modules = (array) $modules;
 
         foreach ($modules as $mod) {
             if (!preg_match('/^[a-z][a-z0-9._-]+$/i', $mod)) {
-                throw new DojoViewException(sprintf('Module name specified, "%s", contains invalid characters', (string) $mod));
+                throw new Exception\InvalidArgumentException(sprintf('Module name specified, "%s", contains invalid characters', (string) $mod));
             }
 
             if (!in_array($mod, $this->_modules)) {
@@ -582,7 +582,7 @@ class Container
     public function addStylesheetModule($module)
     {
         if (!preg_match('/^[a-z0-9]+\.[a-z0-9_-]+(\.[a-z0-9_-]+)*$/i', $module)) {
-            throw new DojoViewException('Invalid stylesheet module specified');
+            throw new Exception\InvalidArgumentException('Invalid stylesheet module specified');
         }
         if (!in_array($module, $this->_stylesheetModules)) {
             $this->_stylesheetModules[] = $module;
@@ -694,7 +694,7 @@ class Container
     public function onLoadCaptureStart()
     {
         if ($this->_captureLock) {
-            throw new DojoViewException('Cannot nest onLoad captures');
+            throw new Exception\RuntimeException('Cannot nest onLoad captures');
         }
 
         $this->_captureLock = true;
@@ -726,7 +726,7 @@ class Container
     public function addDijit($id, array $params)
     {
         if (array_key_exists($id, $this->_dijits)) {
-            throw new DojoViewException(sprintf('Duplicate dijit with id "%s" already registered', $id));
+            throw new Exception\InvalidArgumentException(sprintf('Duplicate dijit with id "%s" already registered', $id));
         }
 
         $this->_dijits[$id] = array(
@@ -929,7 +929,7 @@ EOJ;
     public function javascriptCaptureStart()
     {
         if ($this->_captureLock) {
-            throw new DojoViewException('Cannot nest captures');
+            throw new Exception\RuntimeException('Cannot nest captures');
         }
 
         $this->_captureLock = true;

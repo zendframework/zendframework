@@ -24,14 +24,22 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Search\Highlighter;
+
+use Zend\Search\Lucene\Index,
+	Zend\Search\Lucene,
+	Zend\Search\Lucene\Search\Highlighter,
+	Zend\Search\Lucene\Exception\InvalidArgumentException,
+	Zend\Search\Lucene\Exception\OutOfBoundsException,
+	Zend\Search\Lucene\Exception\UnsupportedMethodCallException,
+	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * @uses       \Zend\Search\Lucene\Index
  * @uses       \Zend\Search\Lucene\Analysis\Analyzer\Analyzer
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
+ * @uses	   \Zend\Search\Lucene\Exception\OutOfBoundsException
+ * @uses   	   \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
+ * @uses   	   \Zend\Search\Lucene\Exception\RuntimeException
  * @uses       \Zend\Search\Lucene\Index\Term
  * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
  * @uses       \Zend\Search\Lucene\Search\Query\Boolean
@@ -128,18 +136,18 @@ class Fuzzy extends AbstractQuery
      * @param \Zend\Search\Lucene\Index\Term $term
      * @param float   $minimumSimilarity
      * @param integer $prefixLength
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      */
     public function __construct(Index\Term $term, $minimumSimilarity = self::DEFAULT_MIN_SIMILARITY, $prefixLength = null)
     {
         if ($minimumSimilarity < 0) {
-            throw new Lucene\Exception('minimumSimilarity cannot be less than 0');
+            throw new InvalidArgumentException('minimumSimilarity cannot be less than 0');
         }
         if ($minimumSimilarity >= 1) {
-            throw new Lucene\Exception('minimumSimilarity cannot be greater than or equal to 1');
+            throw new InvalidArgumentException('minimumSimilarity cannot be greater than or equal to 1');
         }
         if ($prefixLength < 0) {
-            throw new Lucene\Exception('prefixLength cannot be less than 0');
+            throw new InvalidArgumentException('prefixLength cannot be less than 0');
         }
 
         $this->_term              = $term;
@@ -185,8 +193,8 @@ class Fuzzy extends AbstractQuery
      * Re-write query into primitive queries in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
+     * @throws \Zend\Search\Lucene\Exception\OutOfBoundsException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function rewrite(Lucene\SearchIndex $index)
     {
@@ -254,7 +262,7 @@ class Fuzzy extends AbstractQuery
                         $this->_scores[]   = ($similarity - $this->_minimumSimilarity)*$scaleFactor;
 
                         if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                            throw new Lucene\Exception('Terms per query limit is reached.');
+                            throw new OutOfBoundsException('Terms per query limit is reached.');
                         }
                     }
 
@@ -289,7 +297,7 @@ class Fuzzy extends AbstractQuery
                         $this->_scores[]   = ($similarity - $this->_minimumSimilarity)*$scaleFactor;
 
                         if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                            throw new Lucene\Exception('Terms per query limit is reached.');
+                            throw new OutOfBoundsException('Terms per query limit is reached.');
                         }
                     }
 
@@ -332,23 +340,24 @@ class Fuzzy extends AbstractQuery
      * Optimize query in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     public function optimize(Lucene\SearchIndex $index)
     {
-        throw new Lucene\Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
     }
 
     /**
      * Return query terms
      *
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return array
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function getQueryTerms()
     {
         if ($this->_matches === null) {
-            throw new Lucene\Exception('Search or rewrite operations have to be performed before.');
+            throw new RuntimeException('Search or rewrite operations have to be performed before.');
         }
 
         return $this->_matches;
@@ -358,12 +367,14 @@ class Fuzzy extends AbstractQuery
      * Constructs an appropriate Weight implementation for this query.
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Weight\Weight
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function createWeight(Lucene\SearchIndex $reader)
     {
-        throw new Lucene\Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException(
+        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+        );
     }
 
 
@@ -372,12 +383,14 @@ class Fuzzy extends AbstractQuery
      * It also initializes necessary internal structures
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
     {
-        throw new Lucene\Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException(
+        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+        );
     }
 
     /**
@@ -385,12 +398,14 @@ class Fuzzy extends AbstractQuery
      *
      * It's an array with document ids as keys (performance considerations)
      *
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return array
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function matchedDocs()
     {
-        throw new Lucene\Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException(
+        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+        );
     }
 
     /**
@@ -398,12 +413,14 @@ class Fuzzy extends AbstractQuery
      *
      * @param integer $docId
      * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return float
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function score($docId, Lucene\SearchIndex $reader)
     {
-        throw new Lucene\Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException(
+        	'Fuzzy query should not be directly used for search. Use $query->rewrite($index)'
+        );
     }
 
     /**

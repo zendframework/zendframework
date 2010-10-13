@@ -1,7 +1,7 @@
 <?php
 namespace Zend\Search\Lucene\Exception;
 
-class OutOfRangeException
-	extends \OutOfRangeException
+class UnexpectedValueException
+	extends \UnexpectedValueException
 	implements Exception
 {} 

@@ -24,15 +24,21 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Analysis\Analyzer;
-use Zend\Search\Lucene\Search\Highlighter;
+
+use Zend\Search\Lucene\Index,
+	Zend\Search\Lucene,
+	Zend\Search\Lucene\Analysis\Analyzer,
+	Zend\Search\Lucene\Search\Highlighter,
+	Zend\Search\Lucene\Exception\UnsupportedMethodCallException,
+	Zend\Search\Lucene\Exception\RuntimeException,
+	Zend\Search\Lucene\Exception\OutOfBoundsException;
 
 /**
  * @uses       \Zend\Search\Lucene\Index
  * @uses       \Zend\Search\Lucene\Analysis\Analyzer\Analyzer
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
+ * @uses       \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
+ * @uses       \Zend\Search\Lucene\Exception\OutOfBoundsException
  * @uses       \Zend\Search\Lucene\Index\Term
  * @uses       \Zend\Search\Lucene\Search\Query
  * @category   Zend
@@ -131,8 +137,9 @@ class Wildcard extends AbstractQuery
      * Re-write query into primitive queries in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
+     * @throws \Zend\Search\Lucene\Exception\OutOfBoundsException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function rewrite(Lucene\SearchIndex $index)
     {
@@ -150,7 +157,9 @@ class Wildcard extends AbstractQuery
         $matchExpression = '/^' . str_replace(array('\\?', '\\*'), array('.', '.*') , preg_quote($this->_pattern->text, '/')) . '$/';
 
         if ($prefixLength < self::$_minPrefixLength) {
-            throw new Lucene\Exception('At least ' . self::$_minPrefixLength . ' non-wildcard characters are required at the beginning of pattern.');
+            throw new RuntimeException(
+            	'At least ' . self::$_minPrefixLength . ' non-wildcard characters are required at the beginning of pattern.'
+            );
         }
 
         /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
@@ -174,7 +183,7 @@ class Wildcard extends AbstractQuery
                         $this->_matches[] = $index->currentTerm();
 
                         if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                            throw new Lucene\Exception('Terms per query limit is reached.');
+                            throw new OutOfBoundsException('Terms per query limit is reached.');
                         }
                     }
 
@@ -188,7 +197,7 @@ class Wildcard extends AbstractQuery
                         $this->_matches[] = $index->currentTerm();
 
                         if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                            throw new Lucene\Exception('Terms per query limit is reached.');
+                            throw new OutOfBoundsException('Terms per query limit is reached.');
                         }
                     }
 
@@ -218,11 +227,12 @@ class Wildcard extends AbstractQuery
      * Optimize query in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     public function optimize(Lucene\SearchIndex $index)
     {
-        throw new Lucene\Exception('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
     }
 
 
@@ -240,13 +250,13 @@ class Wildcard extends AbstractQuery
     /**
      * Return query terms
      *
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return array
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function getQueryTerms()
     {
         if ($this->_matches === null) {
-            throw new Lucene\Exception('Search has to be performed first to get matched terms');
+            throw new RuntimeException('Search has to be performed first to get matched terms');
         }
 
         return $this->_matches;
@@ -256,12 +266,12 @@ class Wildcard extends AbstractQuery
      * Constructs an appropriate Weight implementation for this query.
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Weight\Weight
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function createWeight(Lucene\SearchIndex $reader)
     {
-        throw new Lucene\Exception('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
     }
 
 
@@ -271,11 +281,11 @@ class Wildcard extends AbstractQuery
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      */
     public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
     {
-        throw new Lucene\Exception('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
     }
 
     /**
@@ -283,12 +293,14 @@ class Wildcard extends AbstractQuery
      *
      * It's an array with document ids as keys (performance considerations)
      *
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return array
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function matchedDocs()
     {
-        throw new Lucene\Exception('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException(
+        	'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
+        );
     }
 
     /**
@@ -296,12 +308,14 @@ class Wildcard extends AbstractQuery
      *
      * @param integer $docId
      * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return float
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function score($docId, Lucene\SearchIndex $reader)
     {
-        throw new Lucene\Exception('Wildcard query should not be directly used for search. Use $query->rewrite($index)');
+        throw new UnsupportedMethodCallException(
+        	'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
+        );
     }
 
     /**

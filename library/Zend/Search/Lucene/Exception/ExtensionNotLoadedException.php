@@ -3,5 +3,5 @@ namespace Zend\Search\Lucene\Exception;
 
 class ExtensionNotLoadedException
     extends \RuntimeException
-    implements Exception
+    implements \Zend\Search\Lucene\Exception
 {}

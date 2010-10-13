@@ -1,7 +1,7 @@
 <?php
-namespace Zend\Search\Lucene;
+namespace Zend\Search\Lucene\Exception;
 
 class RuntimeException
 	extends \RuntimeException
-	implements Exception
+	implements \Zend\Search\Lucene\Exception
 {} 

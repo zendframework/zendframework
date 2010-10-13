@@ -3,5 +3,5 @@ namespace Zend\Search\Lucene\Exception;
 
 class UnexpectedValueException
 	extends \UnexpectedValueException
-	implements Exception
+	implements \Zend\Search\Lucene\Exception
 {} 

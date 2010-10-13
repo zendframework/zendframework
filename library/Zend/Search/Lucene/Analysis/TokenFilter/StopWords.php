@@ -27,8 +27,8 @@ namespace Zend\Search\Lucene\Analysis\TokenFilter;
 use Zend\Search\Lucene,
     Zend\Search\Lucene\Analysis\TokenFilter,
     Zend\Search\Lucene\Analysis\Token,
-    Zend\Search\Exception\InvalidArgumentException,
-    Zend\Search\Lucene\Exception\RuntimeException
+    Zend\Search\Lucene\Exception\InvalidArgumentException,
+    Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Token filter that removes stop words. These words must be provided as array (set), example:

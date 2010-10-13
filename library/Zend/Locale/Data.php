@@ -33,7 +33,7 @@ use Zend\Cache\Cache,
  *
  * @uses       Zend\Cache\Cache
  * @uses       Zend\Locale
- * @uses       Zend\Exception
+ * @uses       Zend\Locale\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data
@@ -143,7 +143,6 @@ class Data
      * @param  string $attribute
      * @param  string $value
      * @param  array  $temp
-     * @throws \Zend\Exception
      * @access private
      */
     private static function _findRoute($locale, $path, $attribute, $value, &$temp)
@@ -153,7 +152,9 @@ class Data
         if (empty(self::$_ldml[(string) $locale])) {
             $filename = __DIR__ . '/Data/resources/' . $locale . '.xml';
             if (!file_exists($filename)) {
-                throw new Exception("Missing locale file '$filename' for '$locale' locale.");
+                throw new Exception\InvalidArgumentException(
+                	"Missing locale file '$filename' for '$locale' locale."
+                );
             }
 
             self::$_ldml[(string) $locale] = simplexml_load_file($filename);
@@ -283,7 +284,9 @@ class Data
         }
 
         if (!(Locale::isLocale((string) $locale, null, false))) {
-            throw new Exception("Locale (" . (string) $locale . ") is a unknown locale");
+            throw new Exception\InvalidArgumentException(
+            	"Locale (" . (string) $locale . ") is a unknown locale"
+            );
         }
 
         return (string) $locale;
@@ -295,8 +298,8 @@ class Data
      * @param  string $locale
      * @param  string $path
      * @param  string $value
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return array
-     * @access public
      */
     public static function getList($locale, $path, $value = false)
     {
@@ -898,7 +901,9 @@ class Data
                 break;
 
             default :
-                throw new Exception("Unknown list ($path) for parsing locale data.");
+                throw new Exception\InvalidArgumentException(
+                	"Unknown list ($path) for parsing locale data."
+                );
                 break;
         }
 
@@ -915,8 +920,8 @@ class Data
      * @param  string $locale
      * @param  string $path
      * @param  string $value
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return string
-     * @access public
      */
     public static function getContent($locale, $path, $value = false)
     {
@@ -1396,7 +1401,9 @@ class Data
                 break;
 
             default :
-                throw new Exception("Unknown detail ($path) for parsing locale data.");
+                throw new Exception\InvalidArgumentException(
+                	"Unknown detail ($path) for parsing locale data."
+                );
                 break;
         }
 

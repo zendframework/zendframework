@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\Sqs;
-use Zend\Crypt;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\Sqs\Exception,
+    Zend\Crypt;
 
 /**
  * Class for connecting to the Amazon Simple Queue Service (SQS)
@@ -90,7 +92,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      * @param  string  $queue_name queue name
      * @param  integer $timeout    default visibility timeout
      * @return string|boolean
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function create($queue_name, $timeout = null)
     {
@@ -114,7 +116,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
                     $retry = true;
                     $retry_count++;
                 } else {
-                    throw new Exception($result->Error->Code);
+                    throw new Exception\RuntimeException($result->Error->Code);
                 }
             } else {
                 return (string) $result->CreateQueueResult->QueueUrl;
@@ -132,14 +134,14 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      *
      * @param  string  $queue_url queue URL
      * @return boolean
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function delete($queue_url)
     {
         $result = $this->_makeRequest($queue_url, 'DeleteQueue');
 
         if ($result->Error->Code !== null) {
-            throw new Exception($result->Error->Code);
+            throw new Exception\RuntimeException($result->Error->Code);
         }
 
         return true;
@@ -149,14 +151,14 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      * Get an array of all available queues
      *
      * @return array
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function getQueues()
     {
         $result = $this->_makeRequest(null, 'ListQueues');
 
         if ($result->ListQueuesResult->QueueUrl === null) {
-            throw new Exception($result->Error->Code);
+            throw new Exception\RuntimeException($result->Error->Code);
         }
 
         $queues = array();
@@ -172,7 +174,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      *
      * @param  string  $queue_url Queue URL
      * @return integer
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function count($queue_url)
     {
@@ -185,7 +187,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      * @param  string $queue_url Queue URL
      * @param  string $message   Message to send to the queue
      * @return string            Message ID
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function send($queue_url, $message)
     {
@@ -197,9 +199,9 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
         $result = $this->_makeRequest($queue_url, 'SendMessage', $params);
 
         if ($result->SendMessageResult->MessageId === null) {
-            throw new Exception($result->Error->Code);
+            throw new Exception\RuntimeException($result->Error->Code);
         } else if ((string) $result->SendMessageResult->MD5OfMessageBody != $checksum) {
-            throw new Exception('MD5 of body does not match message sent');
+            throw new Exception\RuntimeException('MD5 of body does not match message sent');
         }
 
         return (string) $result->SendMessageResult->MessageId;
@@ -212,7 +214,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      * @param  integer $max_messages Maximum number of messages to return
      * @param  integer $timeout      Visibility timeout for these messages
      * @return array
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function receive($queue_url, $max_messages = null, $timeout = null)
     {
@@ -231,7 +233,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
         $result = $this->_makeRequest($queue_url, 'ReceiveMessage', $params);
 
         if ($result->ReceiveMessageResult->Message === null) {
-            throw new Exception($result->Error->Code);
+            throw new Exception\RuntimeException($result->Error->Code);
         }
 
         $data = array();
@@ -256,7 +258,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      * @param  string $queue_url  Queue URL
      * @param  string $handle     Message handle as returned by SQS
      * @return boolean
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function deleteMessage($queue_url, $handle)
     {
@@ -279,7 +281,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
      * @param  string $queue_url  Queue URL
      * @param  string $attribute
      * @return string
-     * @throws Zend_Service_Amazon_Sqs_Exception
+     * @throws Zend\Service\Amazon\Sqs\Exception
      */
     public function getAttribute($queue_url, $attribute = 'All')
     {
@@ -289,7 +291,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
         $result = $this->_makeRequest($queue_url, 'GetQueueAttributes', $params);
 
         if ($result->GetQueueAttributesResult->Attribute === null) {
-            throw new Exception($result->Error->Code);
+            throw new Exception\RuntimeException($result->Error->Code);
         }
         
         if(count($result->GetQueueAttributesResult->Attribute) > 1) {

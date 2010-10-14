@@ -25,8 +25,9 @@
  */
 namespace ZendTest\Service\Amazon\S3;
 
-use Zend\Service\Amazon\S3;
-use Zend\Http\Response;
+use Zend\Service\Amazon\S3,
+    Zend\Service\Amazon\S3\Exception,
+    Zend\Http\Response;
 
 /**
  * @category   Zend
@@ -290,19 +291,39 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->_fileTest($filedir."testdata.html", $this->_bucket."/zftestfile3.html", 'text/plain', 'text/plain', true);
     }
     
-    public function testPutNoFile()
+    /**
+     * Since exception post-condition is tested as well, 
+     * two tests are created for a given exception
+     * @see testPutNoFile
+     */
+    public function testPutNoFileException()
     {
         $filedir = __DIR__."/_files/";
 
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\RuntimeException', 
+            'Cannot read file ' . $filedir."nosuchfile");
+
+        $this->_amazon->putFile($filedir."nosuchfile", $this->_bucket."/zftestfile");
+    }
+
+    /**
+     * Since exception post-condition is tested as well, 
+     * two tests are created for a given exception
+     * @see testPutNoFileException
+     */
+    public function testPutNoFile()
+    {
+        $filedir = __DIR__."/_files/";
         try {
             $this->_amazon->putFile($filedir."nosuchfile", $this->_bucket."/zftestfile");
-            $this->fail("Expected exception not thrown");
-        } catch(S3\Exception $e) {
-            $this->assertContains("Cannot read", $e->getMessage());
-            $this->assertContains("nosuchfile", $e->getMessage());
+        } catch (\Zend\Service\Amazon\Sqs\Exception\RuntimeException $e) {
+            $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftestfile"));
+            return;
         }
-        $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftestfile"));
+        $this->fail('Expected exception not thrown');
     }
+
 
     /**
      * @depends testCreateBucket
@@ -355,41 +376,70 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("testdata123", $this->_amazon->getObject($this->_bucket."/это тоже тест!"));
     }
 
-    public function testBadNames()
+
+    public function testCreateBucketWithBadName()
     {
-        try {
-            $this->_amazon->createBucket("This is a Very Bad Name");
-            $this->fail("Expected exception not thrown");
-        } catch(S3\Exception $e) {
-            $this->assertContains("contains invalid characters", $e->getMessage());
-        }
-        try {
-            $this->_amazon->isBucketAvailable("This is a Very Bad Name");
-            $this->fail("Expected exception not thrown");
-        } catch(\Zend\Http\Client\Adapter\Exception $e) {
-            $this->assertContains("Unable to Connect to", $e->getMessage());
-        //@todo check why \Http\Client exception is thrown instead of \Zend\Uri\Exception
-        } catch(\Zend\URI\Exception $e) {
-            $this->assertContains("not a valid HTTP host", $e->getMessage());
-        }
-        try {
-            $this->_amazon->putObject("This is a Very Bad Name/And It Gets Worse", "testdata");
-            $this->fail("Expected exception not thrown");
-        } catch(S3\Exception $e) {
-            $this->assertContains("contains invalid characters", $e->getMessage());
-        }
-        try {
-            $this->_amazon->getObject("This is a Very Bad Name/And It Gets Worse");
-            $this->fail("Expected exception not thrown");
-        } catch(S3\Exception $e) {
-            $this->assertContains("contains invalid characters", $e->getMessage());
-        }
-        try {
-            $this->_amazon->getInfo("This is a Very Bad Name/And It Gets Worse");
-            $this->fail("Expected exception not thrown");
-        } catch(S3\Exception $e) {
-            $this->assertContains("contains invalid characters", $e->getMessage());
-        }
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            'Bucket name "This is a Very Bad Name" contains invalid characters');
+        $this->_amazon->createBucket("This is a Very Bad Name");
+    }
+
+    public function testBucketAvailabilityWithBadName()
+    {
+        $this->setExpectedException(
+            '\Zend\Http\Client\Adapter\Exception',
+            'Unable to Connect to tcp://This is a Very Bad Name.s3.amazonaws.com:80');
+        $this->_amazon->isBucketAvailable("This is a Very Bad Name");
+    }
+
+    public function testPutObjectWithBadName()
+    {
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            'Bucket name "This is a Very Bad Name" contains invalid characters');
+        $this->_amazon->putObject("This is a Very Bad Name/And It Gets Worse", "testdata");
+    }
+
+    public function testGetObjectWithBadName()
+    {
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            'Bucket name "This is a Very Bad Name" contains invalid characters');
+        $this->_amazon->getObject("This is a Very Bad Name/And It Gets Worse");
+    }
+
+    public function testGetInfoWithBadName()
+    {
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            'Bucket name "This is a Very Bad Name" contains invalid characters');
+        $this->_amazon->getInfo("This is a Very Bad Name/And It Gets Worse");
+    }
+
+    public function testSetEndpointWithBadName()
+    {
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            'Invalid endpoint supplied');
+        $this->_amazon->setEndpoint("This is a Very Bad Name/And It Gets Worse");
+    }
+
+    public function testBucketNameIsTooShort()
+    {
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            sprintf('Bucket name "%s" must be between 3 and 255 characters long', 'xx'));
+        $this->_amazon->createBucket('xx');
+    }
+
+    public function testBucketNameIsTooLong()
+    {
+        $bucketName = str_repeat('x', 256);
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            sprintf('Bucket name "%s" must be between 3 and 255 characters long', $bucketName));
+        $this->_amazon->createBucket($bucketName);
     }
 
     public function testAcl()
@@ -448,17 +498,31 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      *
      * ZF-6686
      */
-    public function testBucketIPMask()
+    public function testBucketIPMaskException()
+    {
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException',
+            'Bucket name "127.0.0.1" cannot be an IP address');
+        $this->_amazon->createBucket("127.0.0.1");
+    }
+
+    /**
+     * Test creating bucket with IP
+     *
+     * ZF-6686
+     */
+    public function testBucketIPMaskPostCondition()
     {
         try {
             $this->_amazon->createBucket("127.0.0.1");
-            $this->fail("Failed to throw expected exception");
-        } catch(S3\Exception $e) {
-            $this->assertContains("cannot be an IP address", $e->getMessage());
+        } catch(\Zend\Service\Amazon\Sqs\Exception\InvalidArgumentException $e) {
+            $this->_amazon->createBucket("123-456-789-123");
+            $this->assertTrue($this->_amazon->isBucketAvailable("123-456-789-123"));
+            $this->_amazon->removeBucket("123-456-789-123");
+            return;
         }
-        $this->_amazon->createBucket("123-456-789-123");
-        $this->assertTrue($this->_amazon->isBucketAvailable("123-456-789-123"));
-        $this->_amazon->removeBucket("123-456-789-123");
+        $this->fail("Failed to throw expected exception");
+
     }
 
     /**

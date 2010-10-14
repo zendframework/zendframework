@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2,
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
- * Zend_Service_Amazon_Ec2_Availabilityzones test case.
+ * Zend\Service\Amazon\Ec2\Availabilityzones test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -42,9 +43,9 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Availabilityzones
+     * @var Zend\Service\Amazon\Ec2\Availabilityzones
      */
-    private $Zend_Service_Amazon_Ec2_Availabilityzones;
+    private $availabilityZones;
 
     /**
      * Prepares the environment before running a test.
@@ -53,7 +54,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Availabilityzones = new Ec2\AvailabilityZones('access_key', 'secret_access_key');
+        $this->availabilityZones = new Ec2\AvailabilityZones('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
         $client = new \Zend\Http\Client(null, array(
@@ -71,7 +72,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->adapter);
 
-        $this->Zend_Service_Amazon_Ec2_Availabilityzones = null;
+        $this->availabilityZones = null;
 
         parent::tearDown();
     }
@@ -97,7 +98,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeAvailabilityZonesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Availabilityzones->describe('us-east-1a');
+        $response = $this->availabilityZones->describe('us-east-1a');
         $this->assertType('array', $response);
         $this->assertEquals('us-east-1a', $response[0]['zoneName']);
         $this->assertEquals('available', $response[0]['zoneState']);
@@ -132,7 +133,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeAvailabilityZonesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Availabilityzones->describe();
+        $response = $this->availabilityZones->describe();
 
         $this->assertType('array', $response);
 

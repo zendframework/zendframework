@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Service\Amazon\Sqs\Exception;
+namespace Zend\Service\Amazon\Exception;
 
 /**
  * @category   Zend
@@ -34,6 +34,6 @@ namespace Zend\Service\Amazon\Sqs\Exception;
  */
 class OutOfBoundsException
     extends \OutOfBoundsException
-    implements \Zend\Service\Amazon\Sqs\Exception
+    implements \Zend\Service\Amazon\Exception
 {}
 

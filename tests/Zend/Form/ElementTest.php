@@ -25,7 +25,6 @@ namespace ZendTest\Form;
 require_once __DIR__ . '/TestAsset/decorators/TableRow.php';
 
 use Zend\Form\Element,
-    Zend\Form\Exception as FormException,
     Zend\Form\Element\Exception as ElementException,
     Zend\Form\Form,
     Zend\Config\Config,

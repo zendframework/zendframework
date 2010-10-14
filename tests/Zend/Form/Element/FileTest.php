@@ -110,7 +110,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function testElementShouldThrowExceptionWhenAddingAdapterOfInvalidType()
     {
-        $this->setExpectedException('Zend\Form\Element\Exception');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element->setTransferAdapter(new \stdClass);
     }
 
@@ -360,7 +360,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->element->setDecorators(array('ViewHelper'));
         $this->assertEquals(1, count($this->element->getDecorators()));
 
-        $this->setExpectedException('Zend\Form\Element\Exception', 'No file decorator found');
+        $this->setExpectedException('Zend\Form\Element\Exception\RunTimeException', 'No file decorator found');
         $content = $this->element->render(new View());
     }
 

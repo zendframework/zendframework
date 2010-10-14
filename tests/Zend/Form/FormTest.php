@@ -538,7 +538,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setName('f%\o^&*)o\(%$b#@!.a}{;-,r');
         $this->assertEquals('foobar', $this->form->getName());
 
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid name provided');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid name provided');
             $this->form->setName('%\^&*)\(%$#@!.}{;-,');
     }
 
@@ -586,7 +586,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
             $this->form->setMethod($method);
             $this->assertEquals($method, $this->form->getMethod());
         }
-        $this->setExpectedException('Zend\Form\Exception', 'invalid');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'invalid');
         $this->form->setMethod('bogus');
     }
 
@@ -644,13 +644,13 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
     {
         $loader = new PluginLoader();
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid type');
         $this->form->setPluginLoader($loader, 'foo');
     }
 
     public function testPassingInvalidTypeToGetPluginLoaderThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid type');
         $this->form->getPluginLoader('foo');
     }
 
@@ -664,7 +664,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidTypeToAddPrefixPathThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid type');
         $this->form->addPrefixPath('Zend\Foo', 'Zend/Foo/', 'foo');
     }
 
@@ -789,7 +789,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testAddElementAsStringElementThrowsExceptionWhenNoNameProvided()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'must have');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'must have');
         $this->form->addElement('text');
     }
 
@@ -993,14 +993,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
         try {
             $this->form->foo = true;
             $this->fail('Overloading should not allow scalars');
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Exception\InvalidArgumentException $e) {
             $this->assertContains('Only form elements and groups may be overloaded', $e->getMessage());
         }
 
         try {
             $this->form->foo = new Config(array());
             $this->fail('Overloading should not allow arbitrary object types');
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Exception\InvalidArgumentException $e) {
             $this->assertContains('Only form elements and groups may be overloaded', $e->getMessage());
             $this->assertContains('Zend\Config', $e->getMessage());
         }
@@ -1802,7 +1802,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testDisplayGroupsMustContainAtLeastOneElement()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'No valid elements');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'No valid elements');
         $this->form->addDisplayGroup(array(), 'foo');
     }
 
@@ -1957,7 +1957,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testIsValidShouldThrowExceptionWithNonArrayArgument()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'expects an array');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'expects an array');
         $this->form->isValid(true);
     }
 
@@ -3380,7 +3380,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         try {
             foreach ($this->form as $item) {
             }
-        } catch (Exception $e) {
+        } catch (\Zend\Form\Exception\UnexpectedValueException $e) {
             $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: ' . $e->getMessage());
         }
 
@@ -3391,7 +3391,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         try {
             foreach ($this->form as $item) {
             }
-        } catch (Exception $e) {
+        } catch (Zend\Form\Exception\UnexpectedValueException $e) {
             $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: ' . $e->getMessage());
         }
 
@@ -3403,7 +3403,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         try {
             foreach ($this->form as $item) {
             }
-        } catch (\Exception $e) {
+        } catch (Zend\Form\Exception\UnexpectedValueException $e) {
             $this->fail('Exceptions should not be raised by iterator when elements are removed; error message: ' . $e->getMessage());
         }
     }
@@ -3420,7 +3420,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         try {
             foreach ($form as $item) {
             }
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Exception\UnexpectedValueException $e) {
             $message = "Clearing elements prior to iteration should not cause iteration to fail;\n"
                      . $e->getMessage();
             $this->fail($message);
@@ -3436,7 +3436,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         try {
             foreach ($form as $item) {
             }
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Exception\UnexpectedValueException $e) {
             $message = "Clearing display groups prior to iteration should not cause iteration to fail;\n"
                      . $e->getMessage();
             $this->fail($message);
@@ -3449,7 +3449,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         try {
             foreach ($form as $item) {
             }
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Exception\UnexpectedValueException $e) {
             $message = "Clearing sub forms prior to iteration should not cause iteration to fail;\n"
                      . $e->getMessage();
             $this->fail($message);
@@ -3886,7 +3886,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
-        $this->setExpectedException('Zend\Form\Exception');
+        $this->setExpectedException('Zend\Form\Exception\BadMethodCallException');
         $html = $this->form->bogusMethodCall();
     }
 

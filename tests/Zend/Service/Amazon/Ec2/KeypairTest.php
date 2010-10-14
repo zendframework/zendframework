@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2,
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
- * Zend_Service_Amazon_Ec2_Keypair test case.
+ * Zend\Service\Amazon\Ec2\Keypair test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -42,9 +43,9 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Keypair
+     * @var Zend\Service\Amazon\Ec2\Keypair
      */
-    private $Zend_Service_Amazon_Ec2_Keypair;
+    private $keypairInstance;
 
     /**
      * Prepares the environment before running a test.
@@ -53,7 +54,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Keypair = new Ec2\Keypair('access_key', 'secret_access_key');
+        $this->keypairInstance = new Ec2\Keypair('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
         $client = new \Zend\Http\Client(null, array(
@@ -72,22 +73,21 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->adapter);
 
-        $this->Zend_Service_Amazon_Ec2_Keypair = null;
+        $this->keypairInstance = null;
 
         parent::tearDown();
     }
 
     public function testCreateKeyPairNoNameThrowsException()
     {
-        try {
-            $this->Zend_Service_Amazon_Ec2_Keypair->create('');
-            $this->fail('An exception should be thrown if an empty keyname is passed in.');
-        } catch (Ec2\Exception $zsaee) {
-        }
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Ec2\Exception\InvalidArgumentException',
+            'Invalid Key Name');
+        $this->keypairInstance->create('');
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Keypair->create()
+     * Tests Zend\Service\Amazon\Ec2\Keypair->create()
      */
     public function testCreateKeyPair()
     {
@@ -130,7 +130,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "</CreateKeyPairResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Keypair->create('example-key-name');
+        $response = $this->keypairInstance->create('example-key-name');
 
         $this->assertType('array', $response);
 
@@ -160,7 +160,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeKeyPairsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Keypair->describe('example-key-name');
+        $response = $this->keypairInstance->describe('example-key-name');
         $this->assertEquals('example-key-name', $response[0]['keyName']);
     }
 
@@ -190,7 +190,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeKeyPairsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Keypair->describe(array('example-key-name', 'zend-test-key'));
+        $response = $this->keypairInstance->describe(array('example-key-name', 'zend-test-key'));
 
         $arrKeys = array(
             array(
@@ -210,11 +210,10 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteKeyPairNoNameThrowsException()
     {
-        try {
-            $this->Zend_Service_Amazon_Ec2_Keypair->delete('');
-            $this->fail('An exception should be thrown if an empty keyname is passed in.');
-        } catch (Ec2\Exception $zsaee) {
-        }
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Ec2\Exception\InvalidArgumentException',
+            'Invalid Key Name');
+        $this->keypairInstance->delete('');
     }
 
     public function testDeleteFailsOnNonValidKey()
@@ -234,7 +233,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "</DeleteKeyPair>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Keypair->delete('myfakekeyname');
+        $response = $this->keypairInstance->delete('myfakekeyname');
         $this->assertType('boolean', $response);
         $this->assertFalse($response);
     }
@@ -256,7 +255,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
                     . "</DeleteKeyPair>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Keypair->delete('example-key-name');
+        $response = $this->keypairInstance->delete('example-key-name');
         $this->assertType('boolean', $response);
         $this->assertTrue($response);
     }

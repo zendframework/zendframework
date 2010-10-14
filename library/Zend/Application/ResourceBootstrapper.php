@@ -39,17 +39,64 @@ use Zend\Loader\ShortNameLocater;
 interface ResourceBootstrapper
 {
     /**
-     * Set plugin broker to use to fetch resources
+     * Register a resource with the bootstrap
      *
-     * @param  \Zend\Application\ResourceBroker $broker
+     * @param  string|\Zend\Application\Resource $resource
+     * @param  null|array|\Zend\Config\Config                     $options
      * @return \Zend\Application\ResourceBootstrapper
      */
-    public function setPluginBroker(ResourceBroker $broker);
+    public function registerPluginResource($resource, $options = null);
 
     /**
-     * Retrieve plugin broker for resources
+     * Unregister a resource from the bootstrap
      *
-     * @return \Zend\Application\ResourceBroker
+     * @param  string|\Zend\Application\Resource $resource
+     * @return \Zend\Application\ResourceBootstrapper
      */
-    public function getPluginBroker();
+    public function unregisterPluginResource($resource);
+
+    /**
+     * Is the requested resource registered?
+     *
+     * @param  string $resource
+     * @return bool
+     */
+    public function hasPluginResource($resource);
+
+    /**
+     * Retrieve resource
+     *
+     * @param  string $resource
+     * @return \Zend\Application\Resource
+     */
+    public function getPluginResource($resource);
+
+    /**
+     * Get all resources
+     *
+     * @return array
+     */
+    public function getPluginResources();
+
+    /**
+     * Get just resource names
+     *
+     * @return array
+     */
+    public function getPluginResourceNames();
+
+    /**
+     * Set plugin loader to use to fetch resources
+     *
+     * @param  \Zend\Loader\ShortNameLocater $loader
+     * @return \Zend\Application\ResourceBootstrapper
+     */
+    public function setPluginLoader(ShortNameLocater $loader);
+
+    /**
+     * Retrieve plugin loader for resources
+     *
+     * @return \Zend\Loader\ShortNameLocater
+     */
+    public function getPluginLoader();
 }

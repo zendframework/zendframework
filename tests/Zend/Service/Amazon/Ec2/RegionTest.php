@@ -27,7 +27,7 @@ namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 
 /**
- * Zend_Service_Amazon_Ec2_Region test case.
+ * Zend\Service\Amazon\Ec\Region test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -44,7 +44,7 @@ class RegionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Zend_Service_Amazon_Ec2_Availabilityzones
      */
-    private $Zend_Service_Amazon_Ec2_Region;
+    private $regionInstance;
 
     /**
      * Prepares the environment before running a test.
@@ -53,7 +53,7 @@ class RegionTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Region = new Ec2\Region('access_key', 'secret_access_key');
+        $this->regionInstance = new Ec2\Region('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
         $client = new \Zend\Http\Client(null, array(
@@ -97,7 +97,7 @@ class RegionTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeRegionsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Region->describe('us-east-1');
+        $response = $this->regionInstance->describe('us-east-1');
 
         $arrRegion = array(
             array(
@@ -134,7 +134,7 @@ class RegionTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeRegionsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $response = $this->Zend_Service_Amazon_Ec2_Region->describe(array('us-east-1','us-west-1'));
+        $response = $this->regionInstance->describe(array('us-east-1','us-west-1'));
 
         $arrRegion = array(
             array(

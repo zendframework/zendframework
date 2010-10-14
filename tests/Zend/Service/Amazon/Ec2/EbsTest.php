@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,7 +26,7 @@ namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 
 /**
- * Zend_Service_Amazon_Ec2_Ebs test case.
+ * Zend\Service\Amazon\Ec2\Ebs test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -42,9 +41,9 @@ class EbsTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Ebs
+     * @var Zend\Service\Amazon\Ec2\Ebs
      */
-    private $Zend_Service_Amazon_Ec2_Ebs;
+    private $ebsInstance;
 
     /**
      * Prepares the environment before running a test.
@@ -52,7 +51,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->Zend_Service_Amazon_Ec2_Ebs = new Ec2\Ebs('access_key', 'secret_access_key');
+        $this->ebsInstance = new Ec2\Ebs('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
         $client = new \Zend\Http\Client(null, array(
@@ -68,7 +67,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->adapter);
-        $this->Zend_Service_Amazon_Ec2_Ebs = null;
+        $this->ebsInstance = null;
 
         parent::tearDown();
     }
@@ -93,7 +92,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</AttachVolumeResponse >";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->attachVolume('vol-4d826724', 'i-6058a509', '/dev/sdh');
+        $return = $this->ebsInstance->attachVolume('vol-4d826724', 'i-6058a509', '/dev/sdh');
 
         $arrAttach = array(
             'volumeId'  => 'vol-4d826724',
@@ -127,7 +126,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</CreateSnapshotResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->createSnapshot('vol-4d826724');
+        $return = $this->ebsInstance->createSnapshot('vol-4d826724');
 
         $arrCreateSnapShot = array(
             'snapshotId'  => 'snap-78a54011',
@@ -162,7 +161,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</CreateVolumeResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->createNewVolume(400, 'us-east-1a');
+        $return = $this->ebsInstance->createNewVolume(400, 'us-east-1a');
 
         $arrCreateNewVolume = array(
             'volumeId'  => 'vol-4d826724',
@@ -197,7 +196,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</CreateVolumeResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
+        $return = $this->ebsInstance->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
 
         $arrCreateNewVolume = array(
             'volumeId'  => 'vol-4d826724',
@@ -229,7 +228,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DeleteSnapshotResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->deleteSnapshot('snap-78a54011');
+        $return = $this->ebsInstance->deleteSnapshot('snap-78a54011');
 
         $this->assertTrue($return);
 
@@ -251,13 +250,13 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DeleteVolumeResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->deleteVolume('vol-4d826724');
+        $return = $this->ebsInstance->deleteVolume('vol-4d826724');
 
         $this->assertTrue($return);
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Ebs->describeSnapshot()
+     * Tests Zend\Service\Amazon\Ec2\Ebs->describeSnapshot()
      */
     public function testDescribeSingleSnapshot()
     {
@@ -283,7 +282,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeSnapshotsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->describeSnapshot('snap-78a54011');
+        $return = $this->ebsInstance->describeSnapshot('snap-78a54011');
 
         $arrSnapshot = array(array(
             'snapshotId'        => 'snap-78a54011',
@@ -329,7 +328,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeSnapshotsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->describeSnapshot(array('snap-78a54011', 'snap-78a54012'));
+        $return = $this->ebsInstance->describeSnapshot(array('snap-78a54011', 'snap-78a54012'));
 
         $arrSnapshots = array(
             array(
@@ -353,7 +352,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Ebs->describeVolume()
+     * Tests Zend\Service\Amazon\Ec2\Ebs->describeVolume()
      */
     public function testDescribeSingleVolume()
     {
@@ -390,7 +389,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeVolumesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->describeVolume('vol-4282672b');
+        $return = $this->ebsInstance->describeVolume('vol-4282672b');
 
         $arrVolumes = array(
             array(
@@ -453,7 +452,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeVolumesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->describeVolume(array('vol-4282672b', 'vol-42826775'));
+        $return = $this->ebsInstance->describeVolume(array('vol-4282672b', 'vol-42826775'));
 
         $arrVolumes = array(
             array(
@@ -521,7 +520,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeVolumesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->describeAttachedVolumes('i-6058a509');
+        $return = $this->ebsInstance->describeAttachedVolumes('i-6058a509');
 
         $arrVolumes = array(
             array(
@@ -543,7 +542,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Ebs->detachVolume()
+     * Tests Zend\Service\Amazon\Ec2\Ebs->detachVolume()
      */
     public function testDetachVolume()
     {
@@ -565,7 +564,7 @@ class EbsTest extends \PHPUnit_Framework_TestCase
                     . "</DetachVolumeResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Ebs->detachVolume('vol-4d826724');
+        $return = $this->ebsInstance->detachVolume('vol-4d826724');
 
         $arrVolume = array(
             'volumeId'      => 'vol-4d826724',

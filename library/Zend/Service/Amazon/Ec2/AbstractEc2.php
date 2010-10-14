@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Service\Amazon;
-use Zend\Crypt;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\Ec2\Exception,
+    Zend\Crypt;
 
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
@@ -34,8 +35,8 @@ use Zend\Crypt;
  * @uses       Zend_Crypt_Hmac
  * @uses       Zend_Http_Client
  * @uses       Zend_Service_Amazon_Abstract
- * @uses       Zend_Service_Amazon_Exception
- * @uses       Zend_Service_Amazon_Ec2_Exception
+ * @uses       Zend\Service\Amazon\Exception
+ * @uses       Zend\Service\Amazon\Ec2\Exception
  * @uses       Zend_Service_Amazon_Ec2_Response
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -102,7 +103,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         } else {
             // make rue the region is valid
             if(!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
-                throw new Amazon\Exception('Invalid Amazon Ec2 Region');
+                throw new Exception\InvalidArgumentException('Invalid Amazon Ec2 Region');
             }
         }
 
@@ -122,7 +123,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         if(in_array(strtolower($region), self::$_validEc2Regions, true)) {
             self::$_defaultRegion = $region;
         } else {
-            throw new Amazon\Exception('Invalid Amazon Ec2 Region');
+            throw new Exception\InvalidArgumentException('Invalid Amazon Ec2 Region');
         }
     }
 
@@ -141,7 +142,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
      *
      * @param array $params         List of parameters to send with the request
      * @return Zend_Service_Amazon_Ec2_Response
-     * @throws Zend_Service_Amazon_Ec2_Exception
+     * @throws Zend\Service\Amazon\Ec2\Exception
      */
     protected function sendRequest(array $params = array())
     {
@@ -167,7 +168,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
 
         } catch (\Zend\Http\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
-            throw new Exception($message, $zhce->getCode(), $zhce);
+            throw new Exception\RuntimeException($message, $zhce->getCode(), $zhce);
         }
         $response = new Response($httpResponse);
         $this->checkForErrors($response);
@@ -255,7 +256,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
      *
      * @return void
      *
-     * @throws Zend_Service_Amazon_Ec2_Exception if one or more errors are
+     * @throws Zend\Service\Amazon\Ec2\Exception if one or more errors are
      *         returned from Amazon.
      */
     private function checkForErrors(Response $response)
@@ -266,7 +267,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             $node    = $list->item(0);
             $code    = $xpath->evaluate('string(Code/text())', $node);
             $message = $xpath->evaluate('string(Message/text())', $node);
-            throw new Exception($message, 0, $code);
+            throw new Exception\RuntimeException($message, 0, $code);
         }
 
     }

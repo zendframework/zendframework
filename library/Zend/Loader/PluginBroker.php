@@ -56,8 +56,8 @@ class PluginBroker implements Broker
      * 
      * @param  string $plugin 
      * @param  array $options Options to pass to the plugin constructor
-     * @return Helper
-     * @throws Exception if helper not found
+     * @return object
+     * @throws Exception if plugin not found
      */
     public function load($plugin, array $options = null)
     {

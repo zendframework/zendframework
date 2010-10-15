@@ -99,6 +99,20 @@ class PluginSpecBroker extends PluginBroker implements LazyLoadingBroker
     }
 
     /**
+     * Unregister a plugin specification
+     * 
+     * @param  string $name 
+     * @return void
+     */
+    public function unregisterSpec($name)
+    {
+        $name = strtolower($name);
+        if (array_key_exists($name, $this->specs)) {
+            unset($this->specs[$name]);
+        }
+    }
+
+    /**
      * Load and return a plugin instance
      *
      * If the plugin was previously loaded, returns that instance.

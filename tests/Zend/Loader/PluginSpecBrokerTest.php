@@ -169,4 +169,11 @@ class PluginSpecBrokerTest extends \PHPUnit_Framework_TestCase
         $plugin = $this->broker->load('sample', array(array('bar' => 'baz')));
         $this->assertEquals(array('bar' => 'baz'), $plugin->options);
     }
+
+    public function testAllowsUnregisteringSpecificationsIndividually()
+    {
+        $this->broker->registerSpec('sample', array('foo'));
+        $this->broker->unregisterSpec('sample');
+        $this->assertFalse($this->broker->hasPlugin('sample'));
+    }
 }

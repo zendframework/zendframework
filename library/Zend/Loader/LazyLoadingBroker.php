@@ -56,6 +56,14 @@ interface LazyLoadingBroker extends Broker
     public function registerSpecs($specs);
 
     /**
+     * Unregister a plugin specification
+     * 
+     * @param  string $name 
+     * @return void
+     */
+    public function unregisterSpec($name);
+
+    /**
      * Retrieve a list of plugins and/or specs registered
      *
      * Differs from getPlugins() in that this will return true for both a 

@@ -83,6 +83,27 @@ class PluginBroker implements Broker
     }
 
     /**
+     * Get list of all loaded plugins
+     * 
+     * @return array
+     */
+    public function getPlugins()
+    {
+        return $this->plugins;
+    }
+
+    /**
+     * Whether or not a given plugin has been loaded
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function isLoaded($name)
+    {
+        return isset($this->plugins[$name]);
+    }
+
+    /**
      * Register a plugin object by name
      * 
      * @param  string $name 

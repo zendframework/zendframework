@@ -41,6 +41,21 @@ interface Broker
     public function load($plugin, array $options = null);
 
     /**
+     * Retrieve list of all loaded plugins
+     * 
+     * @return array
+     */
+    public function getPlugins();
+
+    /**
+     * Whether or not a given plugin has been loaded or registered
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function isLoaded($name);
+
+    /**
      * Register a named plugin
      * 
      * @param  string $name Name by which plugin will be registered

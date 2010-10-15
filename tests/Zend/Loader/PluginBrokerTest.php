@@ -172,4 +172,37 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $plugin2 = $this->broker->load('Sample');
         $this->assertSame($plugin1, $plugin2);
     }
+
+    public function testCanRetrieveAllLoadedPlugins()
+    {
+        $this->broker->register('sample', new TestAsset\SamplePlugin());
+        $this->broker->load('sample');
+        $plugins = $this->broker->getPlugins();
+        $this->assertType('array', $plugins);
+        $this->assertEquals(1, count($plugins));
+    }
+
+    public function testIsLoadedReturnsFalseForUnknownPluginNames()
+    {
+        $this->assertFalse($this->broker->isLoaded('__foo__'));
+    }
+
+    public function testIsLoadedReturnsFalseForUnloadedPlugin()
+    {
+        $this->broker->getClassLoader()->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+        $this->assertFalse($this->broker->isLoaded('sample'));
+    }
+
+    public function testIsLoadedReturnsTrueForLoadedPlugin()
+    {
+        $this->broker->getClassLoader()->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+        $this->broker->load('sample');
+        $this->assertTrue($this->broker->isLoaded('sample'));
+    }
+
+    public function testIsLoadedReturnsTrueForRegisteredPlugin()
+    {
+        $this->broker->register('sample', new TestAsset\SamplePlugin());
+        $this->assertTrue($this->broker->isLoaded('sample'));
+    }
 }

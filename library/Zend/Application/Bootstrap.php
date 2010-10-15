@@ -33,17 +33,13 @@ use Zend\Loader\ResourceAutoloader,
  *
  * Registers and utilizes Zend_Controller_Front by default.
  *
- * @uses       \Zend\Application\AbstractBootstrap
- * @uses       \Zend\Application\BootstrapException
- * @uses       \Zend\Application\Module\Autoloader
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bootstrap
-    extends AbstractBootstrap
+class Bootstrap extends AbstractBootstrap
 {
     /**
      * Application resource namespace

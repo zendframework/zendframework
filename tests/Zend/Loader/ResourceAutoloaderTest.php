@@ -21,8 +21,7 @@
  */
 
 namespace ZendTest\Loader;
-use \Zend\Loader\Autoloader,
-    \Zend\Loader\ResourceAutoloader;
+use Zend\Loader\ResourceAutoloader;
 
 /**
  * @category   Zend
@@ -47,9 +46,6 @@ class ResourceAutoloaderTest extends \PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
-
         // initialize 'error' member for tests that utilize error handling
         $this->error = null;
 
@@ -73,9 +69,6 @@ class ResourceAutoloaderTest extends \PHPUnit_Framework_TestCase
 
         // Retore original include_path
         set_include_path($this->includePath);
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testAutoloaderInstantiationShouldRaiseExceptionWithoutNamespace()

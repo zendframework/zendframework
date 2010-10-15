@@ -57,13 +57,13 @@ class SecurityTokenReference extends AbstractElement
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
         } else {
-            throw new Exception("Invalid Data provided to create instance");
+            throw new Exception\InvalidArgumentException("Invalid Data provided to create instance");
         }
 
         $sxe = simplexml_load_string($strXmlData);
 
         if($sxe->getName() != "SecurityTokenReference") {
-            throw new Exception("Invalid XML Block provided for SecurityTokenReference");
+            throw new Exception\InvalidArgumentException("Invalid XML Block provided for SecurityTokenReference");
         }
 
         return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\SecurityTokenReference');
@@ -81,7 +81,7 @@ class SecurityTokenReference extends AbstractElement
         list($keyident) = $this->xpath('//o:KeyIdentifier');
 
         if(!($keyident instanceof AbstractElement)) {
-            throw new Exception("Failed to retrieve Key Identifier");
+            throw new Exception\RuntimeException("Failed to retrieve Key Identifier");
         }
 
         return $keyident;
@@ -101,7 +101,7 @@ class SecurityTokenReference extends AbstractElement
         $dom = self::convertToDOM($keyident);
 
         if(!$dom->hasAttribute('ValueType')) {
-            throw new Exception("Key Identifier did not provide a type for the value");
+            throw new Exception\RuntimeException("Key Identifier did not provide a type for the value");
         }
 
         return $dom->getAttribute('ValueType');
@@ -122,7 +122,7 @@ class SecurityTokenReference extends AbstractElement
         $dom = self::convertToDOM($keyident);
 
         if(!$dom->hasAttribute('EncodingType')) {
-            throw new Exception("Unable to determine the encoding type for the key identifier");
+            throw new Exception\RuntimeException("Unable to determine the encoding type for the key identifier");
         }
 
         return $dom->getAttribute('EncodingType');
@@ -143,7 +143,7 @@ class SecurityTokenReference extends AbstractElement
         $encoded = $dom->nodeValue;
 
         if(empty($encoded)) {
-            throw new Exception("Could not find the Key Reference Encoded Value");
+            throw new Exception\InvalidArgumentException("Could not find the Key Reference Encoded Value");
         }
 
         if($decode) {
@@ -160,11 +160,11 @@ class SecurityTokenReference extends AbstractElement
 
                     break;
                 default:
-                    throw new Exception("Unknown Key Reference Encoding Type: {$this->getKeyThumbprintEncodingType()}");
+                    throw new Exception\RuntimeException("Unknown Key Reference Encoding Type: {$this->getKeyThumbprintEncodingType()}");
             }
 
             if(!$decoded || empty($decoded)) {
-                throw new Exception("Failed to decode key reference");
+                throw new Exception\RuntimeException("Failed to decode key reference");
             }
 
             return $decoded;

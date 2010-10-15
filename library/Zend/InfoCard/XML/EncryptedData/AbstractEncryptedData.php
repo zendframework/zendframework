@@ -70,13 +70,13 @@ abstract class AbstractEncryptedData extends AbstractElement
         list($encryption_method) = $this->xpath("//enc:EncryptionMethod");
 
         if(!($encryption_method instanceof AbstractElement)) {
-            throw new XML\Exception("Unable to find the enc:EncryptionMethod symmetric encryption block");
+            throw new XML\Exception\RuntimeException("Unable to find the enc:EncryptionMethod symmetric encryption block");
         }
 
         $dom = self::convertToDOM($encryption_method);
 
         if(!$dom->hasAttribute('Algorithm')) {
-            throw new XML\Exception("Unable to determine the encryption algorithm in the Symmetric enc:EncryptionMethod XML block");
+            throw new XML\Exception\RuntimeException("Unable to determine the encryption algorithm in the Symmetric enc:EncryptionMethod XML block");
         }
 
         return $dom->getAttribute('Algorithm');

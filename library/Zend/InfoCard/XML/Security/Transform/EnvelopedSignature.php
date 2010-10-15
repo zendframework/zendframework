@@ -25,7 +25,8 @@
  */
 namespace Zend\InfoCard\XML\Security\Transform;
 
-use Zend\InfoCard\XML\Security\Transform;
+use Zend\InfoCard\XML\Security\Transform,
+    Zend\InfoCard\XML\Security\Exception;
 
 /**
  * A object implementing the EnvelopedSignature XML Transform
@@ -52,7 +53,7 @@ class EnvelopedSignature implements Transform
         $sxe = simplexml_load_string($strXMLData);
 
         if(!$sxe->Signature) {
-            throw new Exception("Unable to locate Signature Block for EnvelopedSignature Transform");
+            throw new Exception\InvalidArgumentException("Unable to locate Signature Block for EnvelopedSignature Transform");
         }
 
         unset($sxe->Signature);

@@ -54,13 +54,13 @@ class XMLEnc extends AbstractEncryptedData
         list(,$cipherdata) = $this->xpath("//enc:CipherData");
 
         if(!($cipherdata instanceof AbstractElement)) {
-            throw new XML\Exception("Unable to find the enc:CipherData block");
+            throw new XML\Exception\RuntimeException("Unable to find the enc:CipherData block");
         }
 
         list(,$ciphervalue) = $cipherdata->xpath("//enc:CipherValue");
 
         if(!($ciphervalue instanceof AbstractElement)) {
-            throw new XML\Exception("Unable to fidn the enc:CipherValue block");
+            throw new XML\Exception\RuntimeException("Unable to fidn the enc:CipherValue block");
         }
 
         return (string)$ciphervalue;

@@ -161,7 +161,7 @@ class Claims
             }
         }
 
-        throw new Exception("At least one claim must exist in specified namespace to make it the default namespace");
+        throw new Exception\InvalidArgumentException("At least one claim must exist in specified namespace to make it the default namespace");
     }
 
     /**
@@ -208,7 +208,7 @@ class Claims
     public function setClaims(Array $claims)
     {
         if($this->_claims !== null) {
-            throw new Exception("Claim objects are read-only");
+            throw new Exception\InvalidArgumentException("Claim objects are read-only");
         }
 
         $this->_claims = $claims;
@@ -232,7 +232,7 @@ class Claims
                 return $this;
         }
 
-        throw new Exception("Attempted to set unknown error code");
+        throw new Exception\InvalidArgumentException("Attempted to set unknown error code");
     }
 
     /**
@@ -277,7 +277,7 @@ class Claims
      */
     public function __unset($k)
     {
-        throw new Exception("Claim objects are read-only");
+        throw new Exception\InvalidArgumentException("Claim objects are read-only");
     }
 
     /**
@@ -302,6 +302,6 @@ class Claims
      */
     public function __set($k, $v)
     {
-        throw new Exception("Claim objects are read-only");
+        throw new Exception\InvalidArgumentException("Claim objects are read-only");
     }
 }

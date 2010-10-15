@@ -97,7 +97,7 @@ class Cipher
                 break;
 
             default:
-                throw new Cipher\Exception("Unknown Cipher URI");
+                throw new Cipher\Exception\InvalidArgumentException("Unknown Cipher URI");
         }
     }
 }

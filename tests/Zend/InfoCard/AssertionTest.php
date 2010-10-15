@@ -68,23 +68,18 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testAssertionErrors()
+    public function testAssertionThrowsExceptionOnBadInput1()
     {
-        try {
-            Assertion\Factory::getInstance(10);
-            $this->fail("Exception Not Thrown as Expected");
-        } catch(\Exception $e) {
-            /* yay */
-        }
-
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Invalid Data provided to create instance');
+        Assertion\Factory::getInstance(10);
+    }
+    
+    public function testAssertionThrowsExceptionOnBadInput2()
+    {
         $doc = file_get_contents(__DIR__ . '/_files/signedToken_bad_type.xml');
 
-        try {
-            $assertions = Assertion\Factory::getInstance($doc);
-            $this->fail("Exception Not thrown as expected");
-        } catch(\Exception $e) {
-            /* yay */
-        }
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Unable to determine Assertion type by Namespace');
+        $assertions = Assertion\Factory::getInstance($doc);
     }
 }
 

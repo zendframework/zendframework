@@ -52,7 +52,7 @@ class XMLDSig extends AbstractKeyInfo implements KeyInfo
         list($encryptedkey) = $this->xpath('//e:EncryptedKey');
 
         if(!($encryptedkey instanceof \Zend\InfoCard\XML\AbstractElement)) {
-            throw new \Zend\InfoCard\XML\Exception("Failed to retrieve encrypted key");
+            throw new \Zend\InfoCard\XML\Exception\RuntimeException("Failed to retrieve encrypted key");
         }
 
         return \Zend\InfoCard\XML\EncryptedKey::getInstance($encryptedkey);

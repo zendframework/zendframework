@@ -70,7 +70,7 @@ abstract class AbstractAdapter implements \Zend\InfoCard\Cipher\PKI
                 $this->_padding = $padding;
                 break;
             default:
-                throw new \Zend\InfoCard\Cipher\Exception("Invalid Padding Type Provided");
+                throw new \Zend\InfoCard\Cipher\Exception\InvalidArgumentException("Invalid Padding Type Provided");
                 break;
         }
 

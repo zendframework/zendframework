@@ -27,7 +27,7 @@ namespace Zend\InfoCard\XML\Assertion;
 
 use Zend\InfoCard\XML\Assertion as XMLAssertion,
     Zend\InfoCard\XML\AbstractElement,
-    Zend\InfoCard\XML\Exception as XMLException;
+    Zend\InfoCard\XML\Exception;
 
 /**
  * A Xml Assertion Document in SAML Token format
@@ -142,7 +142,7 @@ class SAML extends AbstractElement implements XMLAssertion
      */
     public function getAssertionURI()
     {
-        return Assertion::TYPE_SAML;
+        return XMLAssertion\Factory::TYPE_SAML;
     }
 
     /**
@@ -207,7 +207,7 @@ class SAML extends AbstractElement implements XMLAssertion
         list($conditions) = $this->xpath("//saml:Conditions");
 
         if(!($conditions instanceof AbstractElement)) {
-            throw new XMLException("Unable to find the saml:Conditions block");
+            throw new Exception\RuntimeException("Unable to find the saml:Conditions block");
         }
 
         $retval = array();
@@ -243,7 +243,7 @@ class SAML extends AbstractElement implements XMLAssertion
          */
 
         if($this->getConfirmationMethod() == self::CONFIRMATION_BEARER) {
-            throw new XMLException("Cannot get Subject Key Info when Confirmation Method was Bearer");
+            throw new Exception\RuntimeException("Cannot get Subject Key Info when Confirmation Method was Bearer");
         }
     }
 

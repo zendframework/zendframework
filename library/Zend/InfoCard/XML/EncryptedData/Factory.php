@@ -64,7 +64,7 @@ final class Factory
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
         } else {
-            throw new XML\Exception("Invalid Data provided to create instance");
+            throw new XML\Exception\InvalidArgumentException("Invalid Data provided to create instance");
         }
 
         $sxe = simplexml_load_string($strXmlData);
@@ -73,7 +73,7 @@ final class Factory
             case 'http://www.w3.org/2001/04/xmlenc#Element':
                 return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\EncryptedData\XMLEnc');
             default:
-                throw new XML\Exception("Unknown EncryptedData type found");
+                throw new XML\Exception\InvalidArgumentException("Unknown EncryptedData type found");
                 break;
         }
     }

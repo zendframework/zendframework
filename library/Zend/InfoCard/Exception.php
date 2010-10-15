@@ -25,16 +25,6 @@
  */
 namespace Zend\InfoCard;
 
-if (class_exists('\Zend\Exception')) {
-    class Exception extends \Zend\Exception
-    {
-    }
-} else {
-    class Exception extends \Exception
-    {
-    }
-}
-
 /**
  * Base Exception class for the InfoCard component
  *
@@ -43,6 +33,6 @@ if (class_exists('\Zend\Exception')) {
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-//class Exception extends \Zend\InfoCard\Exception\Abstract
-//{
-//}
+interface Exception
+{
+}

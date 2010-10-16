@@ -511,7 +511,3 @@ class IteratorWithToArrayTestContainer
     }
 }
 
-// Call Zend_View_Helper_PartialLoopTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_PartialLoopTest::main") {
-    \Zend_View_Helper_PartialLoopTest::main();
-}

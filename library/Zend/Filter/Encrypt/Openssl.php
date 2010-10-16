@@ -474,7 +474,7 @@ class Openssl implements EncryptionAlgorithm
         // decompress after decryption
         if (!empty($this->_compression)) {
             require_once 'Zend/Filter/Decompress.php';
-            $decompress = new Zend_Filter_Decompress($this->_compression);
+            $decompress = new Decompress($this->_compression);
             $decrypted  = $decompress->filter($decrypted);
         }
 

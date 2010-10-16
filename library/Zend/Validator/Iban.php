@@ -169,8 +169,6 @@ class Iban extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if $value is a valid IBAN
      *
      * @param  string $value

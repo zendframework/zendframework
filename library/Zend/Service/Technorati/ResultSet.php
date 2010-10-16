@@ -180,7 +180,7 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
      * Implements SeekableIterator::current().
      *
      * @return  void
-     * @throws  Zend_Service_Exception
+     * @throws  Zend\Service\Exception
      * @abstract
      */
     // abstract public function current();

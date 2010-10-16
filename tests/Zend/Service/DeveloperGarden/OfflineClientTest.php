@@ -19,14 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_DeveloperGarden_CredentialTest::main');
-}
-
-/**
- * Test helper
- */
-
 /**
  * @see Zend_Service_DeveloperGarden_IpLocation
  */
@@ -37,6 +29,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @category   Zend
  * @package    Zend_Service_DeveloperGarden
  * @subpackage UnitTests
+ * @group      Zend_Service
+ * @group      Zend_Service_DeveloperGarden
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,12 +40,6 @@ class Zend_Service_DeveloperGarden_OfflineClientTest extends PHPUnit_Framework_T
      * @var Zend_Service_DeveloperGarden_OfflineCredential_Mock
      */
     protected $_service = null;
-
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -293,8 +281,4 @@ class Zend_Service_DeveloperGarden_OfflineClientIncompleteWsdlFileLocal_Mock
     extends Zend_Service_DeveloperGarden_IpLocation
 {
     protected $_wsdlFileLocal = null;
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_DeveloperGarden_OfflineCredentialTest::main') {
-    Zend_Service_DeveloperGarden_OfflineCredentialTest::main();
 }

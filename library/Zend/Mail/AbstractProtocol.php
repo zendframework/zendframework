@@ -78,7 +78,7 @@ abstract class AbstractProtocol
 
 
     /**
-     * Instance of Zend_Validate to check hostnames
+     * Instance of Zend\Validator\ValidatorChain to check hostnames
      * @var \Zend\Validator\ValidatorChain
      */
     protected $_validHost;

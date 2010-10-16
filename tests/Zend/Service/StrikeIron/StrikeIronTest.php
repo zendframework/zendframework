@@ -40,6 +40,7 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
 
     public function testFactoryThrowsOnBadName()
     {
+        $this->markTestIncomplete("TODO: redesign tests that throw exceptions");
         try {
             $this->strikeIron->getService(array('class' => 'BadServiceNameHere'));
             $this->fail();

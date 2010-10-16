@@ -94,8 +94,6 @@ class FilesSize extends Size
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the disk usage of all files is at least min and
      * not bigger than max (when max is not null).
      *

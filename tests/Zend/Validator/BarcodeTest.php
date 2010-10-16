@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -26,15 +26,15 @@ namespace ZendTest\Validator;
 use Zend\Validator\Barcode;
 
 /**
- * \Zend\Validate\Barcode
+ * \Zend\Validator\Barcode
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
- * @uses       Zend_Validate_Barcode
+ * @uses       Zend_Validator_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class BarcodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,8 +52,8 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     public function testNoneExisting()
     {
         try {
-            $barcode = new Barcode('\Zend\Validate\BarcodeTest\NonExistentClassName');
-            $this->fail("'\Zend\Validate\BarcodeTest\NonExistentClassName' is not a valid barcode type'");
+            $barcode = new Barcode('\Zend\Validator\BarcodeTest\NonExistentClassName');
+            $this->fail("'\Zend\Validator\BarcodeTest\NonExistentClassName' is not a valid barcode type'");
         } catch (\Exception $e) {
             $this->assertRegExp('#not found|No such file#', $e->getMessage());
         }

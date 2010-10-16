@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-
-
-
 /**
  * @category   Zend
  * @package    Zend_Service_Audioscrobbler
@@ -50,8 +47,8 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTestCase extends PHPUnit_Framewo
 
     public function setUp()
     {
-        $this->_httpTestAdapter = new Zend_Http_Client_Adapter_Test();
-        $this->_httpClient = new Zend_Http_Client();
+        $this->_httpTestAdapter = new Zend\Http\Client\Adapter\Test();
+        $this->_httpClient = new Zend\Http\Client();
         $this->_httpClient->setConfig(array('adapter' => $this->_httpTestAdapter));
         $this->_asService = new Zend_Service_Audioscrobbler();
         $this->_asService->setHttpClient($this->_httpClient);

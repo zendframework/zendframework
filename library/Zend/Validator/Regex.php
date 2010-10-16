@@ -114,8 +114,6 @@ class Regex extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value matches against the pattern option
      *
      * @param  string $value

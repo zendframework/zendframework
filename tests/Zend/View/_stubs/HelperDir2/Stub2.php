@@ -24,8 +24,6 @@
  */
 namespace Zend\View\Helper;
 
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 /**
  * @category   Zend
  * @package    Zend_View

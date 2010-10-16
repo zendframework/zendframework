@@ -25,15 +25,6 @@
 namespace ZendTest\Tag;
 use Zend\Tag;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Tag_ItemTest::main');
-}
-
-/**
- * Test helper
- */
-
-
 /**
  * @category   Zend
  * @package    Zend_Tag
@@ -44,12 +35,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testConstuctor()
     {
         $tag = new Tag\Item(array(
@@ -176,8 +161,4 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($tag->getParam('foo'));
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Tag_ItemTest::main') {
-    \Zend_Tag_ItemTest::main();
 }

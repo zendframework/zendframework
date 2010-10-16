@@ -20,32 +20,20 @@
  */
 
 /**
- * Test helpers
- */
-
-/**
  * @see Zend_Service_WindowsAzure_Storage_TableEntityQuery
  */
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_TableEntityQueryTest::main');
-}
 
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage UnitTests
+ * @group      Zend_Service
+ * @group      Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_TableEntityQueryTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-    
     /**
      * Test all records query
      */
@@ -177,9 +165,4 @@ class Zend_Service_WindowsAzure_TableEntityQueryTest extends PHPUnit_Framework_T
                
         $this->assertEquals('MyTable()?$filter=Name eq \'Maarten\' and Visible eq true', $target->__toString());
     }
-}
-
-// Call Zend_Service_WindowsAzure_TableEntityQueryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_TableEntityQueryTest::main") {
-    Zend_Service_WindowsAzure_TableEntityQueryTest::main();
 }

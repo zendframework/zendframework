@@ -74,8 +74,3 @@ class FunctionalTest extends \PHPUnit_Framework_TestCase // \Zend\Test\PHPUnit\C
     }
 
 }
-
-// Call Zend_Layout_FunctionalTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Layout_FunctionalTest::main") {
-    \Zend_Layout_FunctionalTest::main();
-}

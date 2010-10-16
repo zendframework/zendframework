@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate_File
+ * @package    Zend_Validator_File
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,44 +22,24 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validate\File;
+namespace ZendTest\Validator\File;
 use Zend\Validator\File;
 use Zend\Validator;
 
-// Call Zend_Validate_File_SizeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_SizeTest::main");
-}
-
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_File_Size
+ * @see Zend_Validator_File_Size
  */
 
 /**
  * @category   Zend
- * @package    Zend_Validate_File
+ * @package    Zend_Validator_File
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class SizeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Validate_File_SizeTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Ensures that the validator follows expected behavior
      *
@@ -222,9 +202,4 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('9999', current($messages));
         $this->assertContains('794', current($messages));
     }
-}
-
-// Call Zend_Validate_File_SizeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_SizeTest::main") {
-    \Zend_Validate_File_SizeTest::main();
 }

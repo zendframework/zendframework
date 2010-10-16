@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend_Validate_Ip
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

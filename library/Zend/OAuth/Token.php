@@ -36,7 +36,7 @@ interface Token
      * @param  HTTPUtility $utility 
      * @return void
      */
-    public function __construct($response = null, HTTPUtility $utility = null);
+    public function __construct(HTTPResponse $response = null, HTTPUtility $utility = null);
 
     /**
      * Retrieve an arbitrary named parameter from the token

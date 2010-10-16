@@ -22,7 +22,7 @@
 /**
  * @uses       Zend_Http_Client
  * @uses       Zend_Http_Client_Exception
- * @uses       Zend_Service_Exception
+ * @uses       Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Audioscrobbler
@@ -136,7 +136,7 @@ class Zend_Service_Audioscrobbler
      * @param  string $service name of Audioscrobbler service file we're accessing
      * @param  string $params  parameters that we send to the service if needded
      * @throws Zend_Http_Client_Exception
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Exception
      * @return SimpleXMLElement result set
      * @access protected
      */
@@ -166,7 +166,7 @@ class Zend_Service_Audioscrobbler
 
         if (!$simpleXmlElementResponse = simplexml_load_string($responseBody)) {
             restore_error_handler();
-            $exception = new Zend_Service_Exception('Response failed to load with SimpleXML');
+            $exception = new Zend\Service\Exception('Response failed to load with SimpleXML');
             $exception->error    = $this->_error;
             $exception->response = $responseBody;
             throw $exception;
@@ -639,14 +639,14 @@ class Zend_Service_Audioscrobbler
     public function __call($method, $args)
     {
         if(substr($method, 0, 3) !== "set") {
-            throw new Zend_Service_Exception(
+            throw new Zend\Service\Exception(
                 "Method ".$method." does not exist in class Zend_Service_Audioscrobbler."
             );
         }
         $field = strtolower(substr($method, 3));
 
         if(!is_array($args) || count($args) != 1) {
-            throw new Zend_Service_Exception(
+            throw new Zend\Service\Exception(
                 "A value is required for setting a parameter field."
             );
         }

@@ -153,8 +153,6 @@ class Date extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if $value is a valid date of the format YYYY-MM-DD
      * If optional $format or $locale is set the date format is checked
      * according to Zend_Date, see Zend_Date::isDate()

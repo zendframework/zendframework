@@ -27,11 +27,6 @@ use Zend\Http;
 use Zend\Http\Response;
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Http_CookieJar unit tests
  *
  * @category   Zend

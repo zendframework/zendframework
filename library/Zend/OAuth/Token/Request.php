@@ -46,7 +46,7 @@ class Request extends AbstractToken
      * @param null|Zend\OAuth\Http\Utility $utility
      */
     public function __construct(
-        $response = null,
+        HTTPResponse $response = null,
         HTTPUtility $utility = null
     ) {
         parent::__construct($response, $utility);

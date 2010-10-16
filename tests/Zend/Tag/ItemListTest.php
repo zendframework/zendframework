@@ -25,15 +25,6 @@
 namespace ZendTest\Tag;
 use Zend\Tag;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Tag_ItemListTest::main');
-}
-
-/**
- * Test helper
- */
-
-
 /**
  * @category   Zend
  * @package    Zend_Tag
@@ -44,12 +35,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class ItemListTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testArrayAccessAndCount()
     {
         $list = new Tag\ItemList();
@@ -160,8 +145,4 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
     {
         return new Tag\Item(array('title' => $title, 'weight' => $weight));
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Tag_ItemListTest::main') {
-    \Zend_Tag_ItemListTest::main();
 }

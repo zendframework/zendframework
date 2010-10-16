@@ -34,7 +34,7 @@ use Zend\Crypt;
  * @uses       Zend_Rest_Client
  * @uses       Zend_Service_Amazon_Item
  * @uses       Zend_Service_Amazon_ResultSet
- * @uses       Zend_Service_Exception
+ * @uses       Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -85,7 +85,7 @@ class Amazon
      *
      * @param  string $appId       Developer's Amazon appid
      * @param  string $countryCode Country code for Amazon service; may be US, UK, DE, JP, FR, CA
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Exception
      * @return Zend_Service_Amazon
      */
     public function __construct($appId, $countryCode = 'US', $secretKey = null)
@@ -106,7 +106,7 @@ class Amazon
      * Search for Items
      *
      * @param  array $options Options to use for the Search Query
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Exception
      * @return Zend_Service_Amazon_ResultSet
      * @see http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&v=2005-10-05&p=ApiReference/ItemSearchOperation
      */
@@ -139,7 +139,7 @@ class Amazon
      * @param  string $asin    Amazon ASIN ID
      * @param  array  $options Query Options
      * @see http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&v=2005-10-05&p=ApiReference/ItemLookupOperation
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Exception
      * @return Zend_Service_Amazon_Item|Zend_Service_Amazon_ResultSet
      */
     public function itemLookup($asin, array $options = array())
@@ -278,7 +278,7 @@ class Amazon
      * Check result for errors
      *
      * @param  DOMDocument $dom
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Exception
      * @return void
      */
     protected static function _checkErrors(\DOMDocument $dom)

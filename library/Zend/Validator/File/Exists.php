@@ -148,8 +148,6 @@ class Exists extends Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the file already exists in the set directories
      *
      * @param  string  $value Real file to check for existance

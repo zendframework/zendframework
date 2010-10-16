@@ -146,8 +146,6 @@ class Upload extends \Zend\Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the file was uploaded without errors
      *
      * @param  string $value Single file to check for upload errors, when giving null the $_FILES array

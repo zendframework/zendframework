@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -25,48 +25,29 @@
 namespace ZendTest\Validator;
 use Zend\Validator;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_PostCodeTest::main');
-}
-
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_PostCode
+ * @see Zend_Validator_PostCode
  */
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class PostCodeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_PostCode object
+     * Zend_Validator_PostCode object
      *
-     * @var Zend_Validate_PostCode
+     * @var Zend_Validator_PostCode
      */
     protected $_validator;
 
     /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite('Zend_Validate_PostCodeTest');
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
-     * Creates a new Zend_Validate_PostCode object for each test method
+     * Creates a new Zend_Validator_PostCode object for each test method
      *
      * @return void
      */
@@ -187,8 +168,4 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
         $message = $this->_validator->getMessages();
         $this->assertContains('not appear to be a postal code', $message['postcodeNoMatch']);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Validate_PostCodeTest::main') {
-    \Zend_Validate_PostCodeTest::main();
 }

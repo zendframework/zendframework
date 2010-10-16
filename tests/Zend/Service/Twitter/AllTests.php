@@ -19,15 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_Twitter_AllTests::main');
-}
-
-require_once 'Zend/Service/Twitter/TwitterTest.php';
-require_once 'Zend/Service/Twitter/TwitterSearchTest.php';
-
 /**
  * @category   Zend
  * @package    Zend_Service_Twitter
@@ -39,16 +30,6 @@ require_once 'Zend/Service/Twitter/TwitterSearchTest.php';
  */
 class Zend_Service_Twitter_AllTests
 {
-    /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
-    }
-
     /**
      * Creates and returns this test suite
      *
@@ -63,9 +44,4 @@ class Zend_Service_Twitter_AllTests
 
         return $suite;
     }
-}
-
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_Twitter_AllTests::main') {
-    Zend_Service_Twitter_AllTests::main();
 }

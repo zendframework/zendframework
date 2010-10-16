@@ -226,8 +226,6 @@ class Count extends Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the file count of all checked files is at least min and
      * not bigger than max (when max is not null). Attention: When checking with set min you
      * must give all files with the first call, otherwise you will get an false.

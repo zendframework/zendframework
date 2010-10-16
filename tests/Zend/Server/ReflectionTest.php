@@ -43,28 +43,28 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
     public function testReflectClass()
     {
         try {
-            $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
+            $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
             $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
         } catch (\Exception $e) {
             $this->fail('Failed to perform class reflection: ' . $e->getMessage());
         }
 
         try {
-            $reflection = Reflection\Reflection::reflectClass(new ReflectionTestClass());
+            $reflection = Reflection::reflectClass(new ReflectionTestClass());
             $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
         } catch (\Exception $e) {
             $this->fail('Failed to perform object reflection: ' . $e->getMessage());
         }
 
         try {
-            $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', 'string');
+            $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', 'string');
             $this->fail('Passing non-array for argv should fail');
         } catch (\Exception $e) {
             // do nothing
         }
 
         try {
-            $reflection = Reflection\Reflection::reflectClass(false);
+            $reflection = Reflection::reflectClass(false);
             $this->fail('Passing non-object/class should fail');
         } catch (\Exception $e) {
             // do nothing
@@ -76,7 +76,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectClass2()
     {
-        $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', false, 'zsr');
+        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
@@ -86,21 +86,21 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
     public function testReflectFunction()
     {
         try {
-            $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
+            $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
             $this->assertTrue($reflection instanceof Reflection\ReflectionFunction);
         } catch (\Exception $e) {
             $this->fail('Function reflection failed: ' . $e->getMessage());
         }
 
         try {
-            $reflection = Reflection\Reflection::reflectFunction(false);
+            $reflection = Reflection::reflectFunction(false);
             $this->fail('Function reflection should require valid function');
         } catch (\Exception $e) {
             // do nothing
         }
 
         try {
-            $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestClass', 'string');
+            $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestClass', 'string');
             $this->fail('Argv array should be an array');
         } catch (\Exception $e) {
             // do nothing
@@ -112,7 +112,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectFunction2()
     {
-        $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction', false, 'zsr');
+        $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 }

@@ -336,10 +336,10 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testAmazonComponentHandlesValidBookResults()
     {
     	$xml = file_get_contents(__DIR__."/_files/amazon-response-valid.xml");
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXML($xml);
         
-    	$result = new Zend_Service_Amazon_ResultSet($dom);
+    	$result = new Amazon\ResultSet($dom);
 
     	$currentItem = null;
     	try {
@@ -360,15 +360,15 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testAmazonComponentHandlesEmptyBookResults()
     {
     	$xml = file_get_contents(__DIR__."/_files/amazon-response-invalid.xml");
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXML($xml);
         
-    	$result = new Zend_Service_Amazon_ResultSet($dom);
+    	$result = new Amazon\ResultSet($dom);
 
     	try {
     		$result->current();
     		$this->fail('Expected exception was not triggered');
-    	} catch (Zend_Service_Amazon_Exception $e) {
+    	} catch (Amazon\Exception $e) {
 			return;
     	}
     }

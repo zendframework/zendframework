@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Crypt\Math;
+namespace Zend\Crypt;
 
 /**
  * @uses       Zend\Crypt\Math\BigInteger

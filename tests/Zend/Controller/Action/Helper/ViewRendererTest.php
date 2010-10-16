@@ -830,8 +830,3 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_Controller_Action_Helper_ViewRendererTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_ViewRendererTest::main") {
-    \Zend_Controller_Action_Helper_ViewRendererTest::main();
-}
-

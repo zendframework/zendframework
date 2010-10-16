@@ -141,7 +141,7 @@ class SAML extends AbstractElement implements XMLAssertion
      */
     public function getAssertionURI()
     {
-        return Assertion::TYPE_SAML;
+        return XMLAssertion\Factory::TYPE_SAML;
     }
 
     /**

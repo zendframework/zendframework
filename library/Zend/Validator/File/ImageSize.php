@@ -294,8 +294,6 @@ class ImageSize extends Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the imagesize of $value is at least min and
      * not bigger than max
      *

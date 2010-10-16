@@ -26,16 +26,6 @@ namespace ZendTest\Text;
 use Zend\Text\Table;
 use Zend\Text\Table\Decorator;
 
-// Call Zend_Text_FigletTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Text_TableTest::main");
-}
-
-/**
- * Test helper
- */
-
-
 /**
  * @category   Zend
  * @package    Zend_Text
@@ -46,17 +36,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class TableTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Text_TableTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function tearDown()
     {
         Table\Table::setInputCharset('utf-8');
@@ -489,9 +468,4 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($chars, '+++-++++|++');
     }
-}
-
-// Call Zend_Text_TableTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Text_TableTest::main") {
-    \Zend_Text_TableTest::main();
 }

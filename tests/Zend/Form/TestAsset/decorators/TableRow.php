@@ -23,9 +23,6 @@ namespace My\Decorator;
 
 use Zend\Form\Decorator\AbstractDecorator;
 
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-
 /**
  * Mock file for testbed
  *

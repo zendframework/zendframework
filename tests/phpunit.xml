@@ -6,6 +6,8 @@
     <groups>
         <exclude>
             <group>disable</group>
+            <group>Zend_Search_Lucene</group>
+            <group>Zend_Service_Technorati</group>
         </exclude>
     </groups>
 

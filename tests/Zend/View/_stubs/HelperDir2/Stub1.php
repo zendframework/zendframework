@@ -24,8 +24,6 @@
  */
 namespace ZendTest\View\_stubs\HelperDir2;
 
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 /**
  * @category   Zend
  * @package    Zend_View

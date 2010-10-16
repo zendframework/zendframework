@@ -25,11 +25,6 @@
 namespace ZendTest\Markup;
 use Zend\Markup;
 
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Markup_FactoryTest::main");
-}
-
-
 /**
  * @category   Zend
  * @package    Zend_Markup
@@ -49,9 +44,4 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         Markup\Markup::factory('MockParser', 'MockRenderer');
     }
 
-}
-
-// Call Zend_Markup_BbcodeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Markup_FactoryTest::main") {
-    \Zend_Markup_BbcodeTest::main();
 }

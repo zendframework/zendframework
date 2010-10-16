@@ -195,8 +195,6 @@ class Between extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is between min and max options, inclusively
      * if inclusive option is true.
      *

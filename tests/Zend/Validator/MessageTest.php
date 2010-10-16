@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -25,45 +25,29 @@
 namespace ZendTest\Validator;
 use Zend\Validator;
 
-// Call Zend_Validate_MessageTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_MessageTest::main');
-}
-
 /**
- * Test helper
+ * @see Zend_Validator_StringLength
  */
-
-/**
- * @see Zend_Validate_StringLength
- */
-
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Default instance created for all test methods
      *
-     * @var Zend_Validate_StringLength
+     * @var Zend_Validator_StringLength
      */
     protected $_validator;
 
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
-     * Creates a new Zend_Validate_StringLength object for each test method
+     * Creates a new Zend_Validator_StringLength object for each test method
      *
      * @return void
      */
@@ -316,9 +300,4 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('variables: %notvar% 4 8 ', current($messages));
     }
 
-}
-
-// Call Zend_Validate_MessageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_Validate_MessageTest::main') {
-    \Zend_Validate_MessageTest::main();
 }

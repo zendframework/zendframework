@@ -134,7 +134,3 @@ class Foo
 }
 
 
-// Call Zend_JSON_Server_CacheTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_JSON_Server_CacheTest::main") {
-    \Zend_JSON_Server_CacheTest::main();
-}

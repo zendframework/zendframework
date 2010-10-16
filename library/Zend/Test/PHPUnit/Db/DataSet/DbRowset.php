@@ -31,7 +31,7 @@ namespace Zend\Test\PHPUnit\Db\DataSet;
  * @uses       PHPUnit_Extensions_Database_DataSet_AbstractTable
  * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
  * @uses       \Zend\Db\Table\AbstractRowset
- * @uses       \Zend\Test\PHPUnit\Db\Exception
+ * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -53,7 +53,7 @@ class DbRowset extends \PHPUnit_Extensions_Database_DataSet_AbstractTable
             if($table !== null) {
                 $tableName = $table->info('name');
             } else {
-                throw new \Zend\Test\PHPUnit\Db\Exception(
+                throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
                     'No table name was given to Rowset Table and table name cannot be infered from the table, '.
                     'because the rowset is disconnected from database.'
                 );

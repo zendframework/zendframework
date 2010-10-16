@@ -33,7 +33,7 @@ use Zend\Db\Select;
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
  * @uses       \Zend\Db\Select
  * @uses       \Zend\Test\PHPUnit\Db\DataSet\QueryTable
- * @uses       \Zend\Test\PHPUnit\Db\Exception
+ * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -50,7 +50,9 @@ class QueryDataSet extends \PHPUnit_Extensions_Database_DataSet_QueryDataSet
     public function __construct(\PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
     {
         if( !($databaseConnection instanceof \Zend\Test\PHPUnit\Db\Connection) ) {
-            throw new \Zend\Test\PHPUnit\Db\Exception("Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-");
+            throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
+            	"Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-"
+            );
         }
         $this->databaseConnection = $databaseConnection;
     }

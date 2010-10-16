@@ -23,9 +23,11 @@
  * @namespace
  */
 namespace Zend\Test\PHPUnit;
-use Zend\Application;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Controller\Request;
+
+use Zend\Application,
+	Zend\Controller\Action\HelperBroker,
+	Zend\Controller\Request,
+	Zend\Test\PHPUnit\Exception\InvalidArgumentException;
 
 /**
  * Functional testing scaffold for MVC applications
@@ -37,7 +39,7 @@ use Zend\Controller\Request;
  * @uses       \Zend\Controller\Request\HttpTestCase
  * @uses       \Zend\Controller\Response\HttpTestCase
  * @uses       \Zend\Dom\Query
- * @uses       \Zend\Exception
+ * @uses       \Zend\Test\PHPUnit\Exception\InvalidArgumentException
  * @uses       \Zend\Layout\Layout
  * @uses       \Zend\Loader
  * @uses       \Zend\Registry
@@ -94,7 +96,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     public function __set($name, $value)
     {
         if (in_array($name, array('request', 'response', 'frontController'))) {
-            throw new \Zend\Exception(sprintf('Setting %s object manually is not allowed', $name));
+            throw new InvalidArgumentException(sprintf('Setting %s object manually is not allowed', $name));
         }
         $this->$name = $value;
     }

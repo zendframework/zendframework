@@ -173,7 +173,7 @@ class Server extends AbstractServer
     {
         $system = $this->getSystem();
         if (!method_exists($system, $method)) {
-            throw new Server\Exception('Unknown instance method called on server: ' . $method);
+            throw new Server\Exception\BadMethodCallException('Unknown instance method called on server: ' . $method);
         }
         return call_user_func_array(array($system, $method), $params);
     }
@@ -197,7 +197,7 @@ class Server extends AbstractServer
     public function addFunction($function, $namespace = '')
     {
         if (!is_string($function) && !is_array($function)) {
-            throw new Server\Exception('Unable to attach function; invalid', 611);
+            throw new Server\Exception\InvalidArgumentException('Unable to attach function; invalid', 611);
         }
 
         $argv = null;
@@ -209,9 +209,9 @@ class Server extends AbstractServer
         $function = (array) $function;
         foreach ($function as $func) {
             if (!is_string($func) || !function_exists($func)) {
-                throw new Server\Exception('Unable to attach function; invalid', 611);
+                throw new Server\Exception\InvalidArgumentException('Unable to attach function; invalid', 611);
             }
-            $reflection = Reflection::reflectFunction($func, $argv, $namespace);
+            $reflection = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
             $this->_buildSignature($reflection);
         }
     }
@@ -236,7 +236,7 @@ class Server extends AbstractServer
     public function setClass($class, $namespace = '', $argv = null)
     {
         if (is_string($class) && !class_exists($class)) {
-            throw new Server\Exception('Invalid method class', 610);
+            throw new Server\Exception\InvalidArgumentException('Invalid method class', 610);
         }
 
         $argv = null;
@@ -245,7 +245,7 @@ class Server extends AbstractServer
             $argv = array_slice($argv, 2);
         }
 
-        $dispatchable = Reflection::reflectClass($class, $argv, $namespace);
+        $dispatchable = Reflection\Reflection::reflectClass($class, $argv, $namespace);
         foreach ($dispatchable->getMethods() as $reflection) {
             $this->_buildSignature($reflection, $class);
         }
@@ -265,7 +265,7 @@ class Server extends AbstractServer
             if (empty($fault)) {
                 $fault = 'Unknown Error';
             }
-            $fault = new Server\Exception($fault, $code);
+            $fault = new Server\Exception\RuntimeException($fault, $code);
         }
 
         return Server\Fault::getInstance($fault);
@@ -323,7 +323,7 @@ class Server extends AbstractServer
             } else {
                 $type = gettype($definition);
             }
-            throw new Server\Exception('Unable to load server definition; must be an array or Zend_Server_Definition, received ' . $type, 612);
+            throw new Server\Exception\InvalidArgumentException('Unable to load server definition; must be an array or Zend_Server_Definition, received ' . $type, 612);
         }
 
         $this->_table->clearMethods();
@@ -386,11 +386,11 @@ class Server extends AbstractServer
         if (is_string($request) && class_exists($request)) {
             $request = new $request();
             if (!$request instanceof Request) {
-                throw new Server\Exception('Invalid request class');
+                throw new Server\Exception\InvalidArgumentException('Invalid request class');
             }
             $request->setEncoding($this->getEncoding());
         } elseif (!$request instanceof Request) {
-            throw new Server\Exception('Invalid request object');
+            throw new Server\Exception\InvalidArgumentException('Invalid request object');
         }
 
         $this->_request = $request;
@@ -418,7 +418,7 @@ class Server extends AbstractServer
         if (!class_exists($class) or
             ($c = new \ReflectionClass($class) and !$c->isSubclassOf('Zend\\XmlRpc\\Response'))) {
 
-            throw new Server\Exception('Invalid response class');
+            throw new Server\Exception\InvalidArgumentException('Invalid response class');
         }
         $this->_responseClass = $class;
         return true;
@@ -514,7 +514,7 @@ class Server extends AbstractServer
 
         // Check for valid method
         if (!$this->_table->hasMethod($method)) {
-            throw new Server\Exception('Method "' . $method . '" does not exist', 620);
+            throw new Server\Exception\RuntimeException('Method "' . $method . '" does not exist', 620);
         }
 
         $info     = $this->_table->getMethod($method);
@@ -546,7 +546,7 @@ class Server extends AbstractServer
             }
         }
         if (!$matched) {
-            throw new Server\Exception('Calling parameters do not match signature', 623);
+            throw new Server\Exception\RuntimeException('Calling parameters do not match signature', 623);
         }
 
         $return        = $this->_dispatch($info, $params);

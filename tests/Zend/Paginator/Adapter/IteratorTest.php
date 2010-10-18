@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,7 @@
  */
 namespace ZendTest\Paginator\Adapter;
 use Zend\Paginator\Adapter;
-
+use Zend\Paginator\Exception;
 
 /**
  * @category   Zend
@@ -93,12 +92,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     {
         $iterator = new \LimitIterator(new \ArrayIterator(range(1, 101)));
 
-        try {
-            new Adapter\Iterator($iterator);
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Paginator\Exception', $e);
-            $this->assertEquals('Iterator must implement Countable', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Paginator\Adapter\Exception\InvalidArgumentException', 'Iterator must implement Countable');
+        new Adapter\Iterator($iterator);
     }
 
     /**

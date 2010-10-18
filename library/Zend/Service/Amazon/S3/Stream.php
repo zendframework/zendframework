@@ -24,12 +24,14 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\S3;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\S3\Exception;
 
 /**
  * Amazon S3 PHP stream wrapper
  *
  * @uses       Zend_Service_Amazon_S3
- * @uses       Zend_Service_Amazon_S3_Exception
+ * @uses       Zend\Service\Amazon\S3\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3
@@ -85,12 +87,12 @@ class Stream
             $url = explode(':', $path);
 
             if (!$url) {
-                throw new Exception("Unable to parse URL $path");
+                throw new Exception\InvalidArgumentException("Unable to parse URL $path");
             }
 
             $this->_s3 = S3::getWrapperClient($url[0]);
             if (!$this->_s3) {
-                throw new Exception("Unknown client for wrapper {$url[0]}");
+                throw new Exception\RuntimeException("Unknown client for wrapper {$url[0]}");
             }
         }
 

@@ -71,7 +71,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->decorator->setCallback(true);
             $this->fail('Only string or array callbacks should be allowed');
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Decorator\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
 
@@ -79,21 +79,21 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             $o = new \stdClass;
             $this->decorator->setCallback($o);
             $this->fail('Only string or array callbacks should be allowed');
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Decorator\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
 
         try {
             $this->decorator->setCallback(array('foo', 'bar', 'baz'));
             $this->fail('Only arrays of two elements should be allowed as callbacks');
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Decorator\Exception\InvalidArgumentexception $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
 
         try {
             $this->decorator->setCallback(array('foo'));
             $this->fail('Only arrays of two elements should be allowed as callbacks');
-        } catch (\Zend\Form\Exception $e) {
+        } catch (\Zend\Form\Decorator\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid', $e->getMessage());
         }
     }

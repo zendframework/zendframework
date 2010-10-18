@@ -25,7 +25,7 @@ namespace ZendTest\Form;
 require_once __DIR__ . '/TestAsset/decorators/TableRow.php';
 
 use Zend\Form\Element,
-    Zend\Form\Exception as FormException,
+    Zend\Form\Element\Exception as ElementException,
     Zend\Form\Form,
     Zend\Config\Config,
     Zend\Controller\Action\HelperBroker,
@@ -71,17 +71,17 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $element = new Element(1);
             $this->fail('Zend\Form\Element constructor should not accept integer argument');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
         try {
             $element = new Element(true);
             $this->fail('Zend\Form\Element constructor should not accept boolean argument');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
 
         try {
             $element = new Element('foo');
-        } catch (\Exception $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
             $this->fail('Zend\Form\Element constructor should accept String values');
         }
 
@@ -89,13 +89,13 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $element = new Element($config);
             $this->fail('Zend\Form\Element constructor requires array with name element');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
 
         $config = array('name' => 'bar');
         try {
             $element = new Element($config);
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
             $this->fail('Zend\Form\Element constructor should accept array with name element');
         }
 
@@ -103,13 +103,13 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $element = new Element($config);
             $this->fail('Zend\Form\Element constructor requires Zend\Config object with name element');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
 
         $config = new Config(array('name' => 'bar'));
         try {
             $element = new Element($config);
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
             $this->fail('Zend_Form_Element constructor should accept Zend\Config with name element');
         }
     }
@@ -148,7 +148,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $this->element->setName('f%\o^&*)o\(%$b#@!.a}{;-,r');
         $this->assertEquals('foobar', $this->element->getName());
 
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid name provided');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid name provided');
         $this->element->setName('%\^&*)\(%$#@!.}{;-,');
     }
 
@@ -157,7 +157,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $this->element->setName(0);
             $this->assertSame('0', $this->element->getName());
-        } catch (FormException $e) {
+        } catch (ElementException\InvalidArgumentException $e) {
             $this->fail('Should allow zero as element name');
         }
     }
@@ -171,7 +171,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             try {
                 $this->element->setName($name);
                 $this->fail('setName() should not allow empty string');
-            } catch (FormException $e) {
+            } catch (ElementException\InvalidArgumentException $e) {
                 $this->assertContains('Invalid name', $e->getMessage());
             }
         }
@@ -398,7 +398,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAttribThrowsExceptionsForKeysWithLeadingUnderscores()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid attribute');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid attribute');
         $this->element->setAttrib('_foo', 'bar');
     }
 
@@ -447,7 +447,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrievingOverloadedValuesThrowsExceptionWithInvalidKey()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Cannot retrieve value for protected/private');
+        $this->setExpectedException('Zend\Form\Element\Exception\RunTimeException', 'Cannot retrieve value for protected/private');
         $name = $this->element->_name;
     }
 
@@ -498,13 +498,13 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
     {
         $loader = new PluginLoader();
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid type');
         $this->element->setPluginLoader($loader, 'foo');
     }
 
     public function testPassingInvalidTypeToGetPluginLoaderThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid type');
         $this->element->getPluginLoader('foo');
     }
 
@@ -526,7 +526,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidLoaderTypeToAddPrefixPathThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid type');
         $this->element->addPrefixPath('Zend_Foo', 'Zend/Foo/', 'foo');
     }
 
@@ -612,7 +612,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidValidatorToAddValidatorThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid validator');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid validator');
         $this->element->addValidator(123);
     }
 
@@ -649,7 +649,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->element->addValidator('Alnum', false, true);
-        } catch (Exception $e) {
+        } catch (ElementException\InvalidArgumentException $e) {
             $this->fail('Should be able to add non-array validator options');
         }
         $validator = $this->element->getValidator('Alnum');
@@ -1079,7 +1079,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingInvalidFilterTypeThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid filter');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid filter');
         $this->element->addFilter(123);
     }
 
@@ -1143,7 +1143,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->element->addFilter('Alnum', true);
-        } catch (Exception $e) {
+        } catch (ElementException\InvalidArgumentException $e) {
             $this->fail('Should be able to add non-array filter options');
         }
         $filter = $this->element->getFilter('Alnum');
@@ -1278,7 +1278,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingInvalidDecoratorThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid decorator');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid decorator');
         $this->element->addDecorator(123);
     }
 
@@ -1872,7 +1872,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\BadMethodCallException');
         $html = $this->element->bogusMethodCall();
     }
 

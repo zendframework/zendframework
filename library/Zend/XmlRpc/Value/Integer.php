@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\XmlRpc\Value;
+use Zend\XmlRpc\Exception;
 
 /**
  * @uses       \Zend\XmlRpc\Value\Exception
@@ -45,7 +46,7 @@ class Integer extends Scalar
     public function __construct($value)
     {
         if ($value > PHP_INT_MAX) {
-            throw new Exception('Overlong integer given');
+            throw new Exception\ValueException('Overlong integer given');
         }
 
         $this->_type = self::XMLRPC_TYPE_INTEGER;

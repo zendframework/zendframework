@@ -23,7 +23,7 @@
  */
 namespace Zend\Form\Element;
 
-use Zend\Form\ElementException,
+use Zend\Form\Element\Exception,
     Zend\Form\Form,
     Zend\Form\Decorator\FileDecorator,
     Zend\Loader\PluginLoader,
@@ -35,7 +35,7 @@ use Zend\Form\ElementException,
  * Zend_Form_Element
  *
  * @uses       \Zend\Form\Form
- * @uses       \Zend\Form\ElementException
+ * @uses       \Zend\Form\Element\Exception
  * @uses       \Zend\Form\Element\Xhtml
  * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
@@ -150,7 +150,7 @@ class File extends Xhtml
     /**
      * Add prefix path for plugin loader
      *
-     * @param  string $prefix
+     * @param  string $prefix:
      * @param  string $path
      * @param  string $type
      * @return \Zend\Form\Element\File
@@ -190,7 +190,7 @@ class File extends Xhtml
             $class  = $loader->load($adapter);
             $this->_adapter = new $class;
         } else {
-            throw new ElementException('Invalid adapter specified');
+            throw new Exception\InvalidArgumentException('Invalid adapter specified');
         }
 
         foreach (array('filter', 'validator') as $type) {
@@ -877,7 +877,7 @@ class File extends Xhtml
         }
 
         if (!$marker) {
-            throw new ElementException('No file decorator found... unable to render file element');
+            throw new Exception\RunTimeException('No file decorator found... unable to render file element');
         }
 
         return parent::render($view);

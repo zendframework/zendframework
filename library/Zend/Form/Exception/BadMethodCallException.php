@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,17 +22,17 @@
 /**
  * @namespace
  */
-namespace Zend\XmlRpc\Client;
+namespace Zend\Form\Exception;
 
 /**
- * Thrown by Zend_XmlRpc_Client when an XML-RPC fault response is returned.
- *
- * @uses       Zend\XmlRpc\Client\Exception
+ * @uses       Zend\Form\Exception
+ * @uses       \BadMethodCallException
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FaultException extends Exception
+class BadMethodCallException 
+    extends \BadMethodCallException
+    implements \Zend\Form\Exception
 {}

@@ -66,7 +66,7 @@ class ViewScriptTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderRaisesExceptionIfNoViewScriptRegistered()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'script');
+        $this->setExpectedException('Zend\Form\Decorator\Exception\UnexpectedValueException', 'script');
         $this->getElement();
         $this->decorator->render('');
     }

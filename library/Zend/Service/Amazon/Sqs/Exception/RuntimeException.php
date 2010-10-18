@@ -12,41 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @uses       \Zend\Service\Amazon\Sqs\Exception
  * @category   Zend
- * @package    Zend_Locale
+ * @package    Zend_Service_Amazon
+ * @subpackage Sqs
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\Locale;
+namespace Zend\Service\Amazon\Sqs\Exception;
 
 /**
- * @uses       \Zend\Locale\Exception
  * @category   Zend
- * @package    Zend_Locale
+ * @package    Zend_Service_Amazon
+ * @subpackage Sqs
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MathException extends Exception
-{
-    protected $op1 = null;
-    protected $op2 = null;
-    protected $result = null;
+class RuntimeException
+    extends \RuntimeException
+    implements \Zend\Service\Amazon\Sqs\Exception
+{}
 
-    public function __construct($message, $op1 = null, $op2 = null, $result = null)
-    {
-        $this->op1 = $op1;
-        $this->op2 = $op2;
-        $this->result = $result;
-        parent::__construct($message);
-    }
-
-    public function getResults()
-    {
-        return array($this->op1, $this->op2, $this->result);
-    }
-}

@@ -13,11 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Amazon_S3
+ * @package    Zend_Service_Amazon
+ * @subpackage S3
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,11 +25,13 @@
 namespace Zend\Service\Amazon\S3;
 
 /**
- * @uses       Zend_Service_Amazon_Exception
+ * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend_Service_Amazon
+ * @subpackage S3
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Service\Amazon\Exception
+interface Exception 
+    extends \Zend\Service\Amazon\Exception
 {}

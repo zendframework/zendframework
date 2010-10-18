@@ -28,7 +28,7 @@ namespace Zend\Rest\Client;
 use Zend\Uri;
 
 /**
- * @uses       Zend\Rest\Client\Exception
+ * @uses       Zend\Rest\Client\Exception\UnexpectedValueException
  * @uses       Zend\Rest\Client\Result
  * @uses       Zend\Service\AbstractService
  * @uses       Zend\Uri\Uri
@@ -97,14 +97,14 @@ class RestClient extends \Zend\Service\AbstractService
      * Call a remote REST web service URI and return the Zend_Http_Response object
      *
      * @param  string $path            The path to append to the URI
-     * @throws Zend\Rest\Client\Exception
+     * @throws Zend\Rest\Client\Exception\UnexpectedValueException
      * @return void
      */
     final private function _prepareRest($path)
     {
         // Get the URI object and configure it
         if (!$this->_uri instanceof URI\Uri) {
-            throw new Exception('URI object must be set before performing call');
+            throw new Exception\UnexpectedValueException('URI object must be set before performing call');
         }
 
         $uri = $this->_uri->generate();

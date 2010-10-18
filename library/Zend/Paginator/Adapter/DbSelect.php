@@ -16,7 +16,6 @@
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,14 +26,14 @@ namespace Zend\Paginator\Adapter;
 use Zend\Db\Select,
     Zend\Db,
     Zend\Paginator\Adapter,
-    Zend\Paginator\Exception as PaginatorException;
+    Zend\Paginator\Adapter\Exception;
 
 /**
  * @uses       \Zend\Db\Db
  * @uses       \Zend\Db\Expr
  * @uses       \Zend\Db\Select
  * @uses       \Zend\Paginator\Adapter
- * @uses       \Zend\Paginator\Exception
+ * @uses       Zend\Paginator\Adapter\Exception
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -93,7 +92,7 @@ class DbSelect implements Adapter
      * @param  \Zend\Db\Select|integer $totalRowCount Total row count integer
      *                                               or query
      * @return \Zend\Paginator\Adapter\DbSelect $this
-     * @throws \Zend\Paginator\Exception
+     * @throws \Zend\Paginator\Adapter\Exception
      */
     public function setRowCount($rowCount)
     {
@@ -110,7 +109,7 @@ class DbSelect implements Adapter
 
             // The select query can contain only one column, which should be the row count column
             if (false === strpos($countColumnPart, $rowCountColumn)) {
-                throw new PaginatorException('Row count column not found');
+                throw new Exception\InvalidArgumentException('Row count column not found');
             }
 
             $result = $rowCount->query(Db\Db::FETCH_ASSOC)->fetch();
@@ -119,7 +118,7 @@ class DbSelect implements Adapter
         } else if (is_integer($rowCount)) {
             $this->_rowCount = $rowCount;
         } else {
-            throw new PaginatorException('Invalid row count');
+            throw new Exception\InvalidArgumentException('Invalid row count');
         }
 
         return $this;

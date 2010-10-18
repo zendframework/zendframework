@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace Zend\Service\Amazon;
+use Zend\Service\Amazon\Exception;
 
 /**
  * @uses       Zend_Service_Amazon
- * @uses       Zend_Service_Exception
+ * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -55,7 +56,7 @@ class Query extends Amazon
      *
      * @param  string $method
      * @param  array  $args
-     * @throws Zend_Service_Exception
+     * @throws \Zend\Service\Amazon\Exception
      * @return Zend_Service_Amazon_Query Provides a fluent interface
      */
     public function __call($method, $args)
@@ -72,7 +73,7 @@ class Query extends Amazon
         } else if (isset($this->_search['SearchIndex']) || $this->_searchIndex !== null || $this->_searchIndex === 'asin') {
             $this->_search[$method] = $args[0];
         } else {
-            throw new \Zend\Service\Exception('You must set a category before setting the search parameters');
+            throw new Exception\RuntimeException('You must set a category before setting the search parameters');
         }
 
         return $this;

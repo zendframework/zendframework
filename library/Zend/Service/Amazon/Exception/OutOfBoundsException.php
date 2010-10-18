@@ -12,29 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Service
+ * @subpackage Amazon
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\XmlRpc\Client;
+namespace Zend\Service\Amazon\Exception;
 
 /**
- * Thrown by Zend_XmlRpc_Client when an HTTP error occurs during an
- * XML-RPC method call.
- *
- * @uses       Zend\XmlRpc\Client\Exception
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Service
+ * @subpackage Amazon
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HttpException extends Exception
+class OutOfBoundsException
+    extends \OutOfBoundsException
+    implements \Zend\Service\Amazon\Exception
 {}
+

@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ * @package    Zend_XmlRpc
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,18 +23,20 @@
 /**
  * @namespace
  */
-namespace Zend\Search\Lucene\Search;
+namespace Zend\XmlRpc\Client\Exception;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * Thrown by Zend_XmlRpc_Client when an HTTP error occurs during an
+ * XML-RPC method call.
+ *
+ * @uses       Zend\XmlRpc\Client\Exception
  * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Search
+ * @package    Zend_XmlRpc
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * Special exception type, which may be used to intercept wrong user input
  */
-class QueryParserException extends \Zend\Search\Lucene\Exception
+class HttpException
+    extends RuntimeException
+    implements \Zend\XmlRpc\Client\Exception
 {}
-

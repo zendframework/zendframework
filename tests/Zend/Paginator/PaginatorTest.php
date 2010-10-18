@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -30,6 +29,7 @@ use Zend\View\Helper;
 use Zend\View;
 use Zend\Config;
 use Zend\Paginator\Adapter;
+use Zend\Paginator\Exception;
 
 
 /**
@@ -118,7 +118,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         }
         unset($file, $dir); // required on windows to remove file handle
         if (!rmdir($path)) {
-            throw new \Exception('Unable to remove temporary directory ' . $path
+            throw new Exception('Unable to remove temporary directory ' . $path
                                 . '; perhaps it has a nested structure?');
         }
     }
@@ -182,22 +182,14 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryThrowsInvalidClassExceptionAdapter()
     {
-        try {
-            $paginator = Paginator\Paginator::factory(new \stdClass());
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Paginator\Exception', $e);
-            $this->assertContains('stdClass', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'No adapter for type stdClass');
+        $paginator = Paginator\Paginator::factory(new \stdClass());
     }
 
     public function testFactoryThrowsInvalidTypeExceptionAdapter()
     {
-        try {
-            $paginator = Paginator\Paginator::factory('invalid argument');
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Paginator\Exception', $e);
-            $this->assertContains('string', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'No adapter for type string');
+        $paginator = Paginator\Paginator::factory('invalid argument');
     }
 
     public function testAddsSingleScrollingStylePrefixPath()
@@ -561,22 +553,14 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     {
         $paginator = Paginator\Paginator::factory(array());
 
-        try {
-            $paginator->getItem(1);
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Paginator\Exception', $e);
-            $this->assertContains('Page 1 does not exist', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'Page 1 does not exist');
+        $paginator->getItem(1);
     }
 
     public function testThrowsExceptionWhenRetrievingNonexistentItemFromLastPage()
     {
-        try {
-            $this->_paginator->getItem(10, 11);
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Paginator\Exception', $e);
-            $this->assertContains('Page 11 does not contain item number 10', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'Page 11 does not contain item number 10');
+        $this->_paginator->getItem(10, 11);
     }
 
     public function testNormalizesPageNumber()
@@ -682,7 +666,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->_paginator->render(new View\View());
-        } catch (\Exception $e) {
+        } catch (View\Exception $e) {
             $this->assertType('Zend\View\Exception', $e);
             $this->assertEquals('No view partial provided and no default set', $e->getMessage());
         }

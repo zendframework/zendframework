@@ -27,7 +27,7 @@ namespace Zend\Search\Lucene\Search\QueryEntry;
 
 /**
  * @uses       \Zend\Search\Lucene\Search\QueryEntry\AbstractQueryEntry
- * @uses       \Zend\Search\Lucene\Search\QueryParserException
+ * @uses       \Zend\Search\Lucene\Search\Exception\QueryParserException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -57,11 +57,13 @@ class Subquery extends AbstractQueryEntry
      * Process modifier ('~')
      *
      * @param mixed $parameter
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      */
     public function processFuzzyProximityModifier($parameter = null)
     {
-        throw new \Zend\Search\Lucene\Search\QueryParserException('\'~\' sign must follow term or phrase');
+        throw new \Zend\Search\Lucene\Search\Exception\QueryParserException(
+        	'\'~\' sign must follow term or phrase'
+        );
     }
 
 

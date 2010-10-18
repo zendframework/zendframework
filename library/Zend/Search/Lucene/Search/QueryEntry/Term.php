@@ -101,7 +101,7 @@ class Term extends AbstractQueryEntry
      *
      * @param string $encoding
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      */
     public function getQuery($encoding)
     {

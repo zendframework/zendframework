@@ -188,11 +188,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $xml = $dom->saveXml();
 
-        try {
-            $parsed = $this->_request->loadXml($xml);
-        } catch (\Exception $e) {
-            $this->fail('Failed to parse XML: ' . $e->getMessage());
-        }
+        
+        $parsed = $this->_request->loadXml($xml);
         $this->assertTrue($parsed, $xml);
 
         $this->assertEquals('do.Something', $this->_request->getMethod());
@@ -200,11 +197,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $params = $this->_request->getParams();
         $this->assertSame($test, $params);
 
-        try {
-            $parsed = $this->_request->loadXml('foo');
-        } catch (\Exception $e) {
-            $this->fail('Failed to parse XML: ' . $e->getMessage());
-        }
+        $parsed = $this->_request->loadXml('foo');
         $this->assertFalse($parsed, 'Parsed non-XML string?');
     }
 
@@ -283,11 +276,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     protected function _testXmlRequest($xml, $argv)
     {
-        try {
-            $sx = new \SimpleXMLElement($xml);
-        } catch (\Exception $e) {
-            $this->fail('Invalid XML returned');
-        }
+        $sx = new \SimpleXMLElement($xml);
 
         $result = $sx->xpath('//methodName');
         $count = 0;
@@ -303,15 +292,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals(1, $count, $xml);
 
-        try {
-            $methodName = (string) $sx->methodName;
-            $params = array(
-                (string) $sx->params->param[0]->value->string,
-                (bool) $sx->params->param[1]->value->boolean
-            );
-        } catch (\Exception $e) {
-            $this->fail('One or more inconsistencies parsing generated XML: ' . $e->getMessage());
-        }
+        $methodName = (string) $sx->methodName;
+        $params = array(
+            (string) $sx->params->param[0]->value->string,
+            (bool) $sx->params->param[1]->value->boolean
+        );
 
         $this->assertEquals('do.Something', $methodName);
         $this->assertSame($argv, $params, $xml);

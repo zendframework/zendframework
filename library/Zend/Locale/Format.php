@@ -28,7 +28,8 @@ namespace Zend\Locale;
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Locale\Data
- * @uses       \Zend\Locale\Exception
+ * @uses       \Zend\Locale\Exception\InvalidArgumentException
+ * @usess      \Zend\Locale\Exception\UnsupportedTokenException
  * @uses       \Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Locale
@@ -62,7 +63,6 @@ class Format
      *
      * @param  array  $options  Array of options, keyed by option name: format_type = 'iso' | 'php', fix_date = true | false,
      *                          locale = Zend_Locale | locale string, precision = whole number between -1 and 30
-     * @throws \Zend\Locale\Exception
      * @return Options array if no option was given
      */
     public static function setOptions(array $options = array())
@@ -77,7 +77,7 @@ class Format
      *
      * @param  array  $options  Array of options, keyed by option name: format_type = 'iso' | 'php', fix_date = true | false,
      *                          locale = Zend_Locale | locale string, precision = whole number between -1 and 30
-     * @throws \Zend\Locale\Exception
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return Options array if no option was given
      */
     private static function _checkOptions(array $options = array())
@@ -102,8 +102,10 @@ class Format
                         }
                         $options['number_format'] = Data::getContent($locale, 'decimalnumber');
                     } else if ((gettype($value) !== 'string') and ($value !== NULL)) {
-                        throw new Exception("Unknown number format type '" . gettype($value) . "'. "
-                            . "Format '$value' must be a valid number format string.");
+                        throw new Exception\InvalidArgumentException(
+                        	"Unknown number format type '" . gettype($value) . "'. "
+                            . "Format '$value' must be a valid number format string."
+                        );
                     }
                     break;
 
@@ -115,8 +117,10 @@ class Format
                         }
                         $options['date_format'] = self::getDateFormat($locale);
                     } else if ((gettype($value) !== 'string') and ($value !== NULL)) {
-                        throw new Exception("Unknown dateformat type '" . gettype($value) . "'. "
-                            . "Format '$value' must be a valid ISO or PHP date format string.");
+                        throw new Exception\InvalidArgumentException(
+                        	"Unknown dateformat type '" . gettype($value) . "'. "
+                            . "Format '$value' must be a valid ISO or PHP date format string."
+                        );
                     } else {
                         if (((isset($options['format_type']) === true) and ($options['format_type'] == 'php')) or
                             ((isset($options['format_type']) === false) and (self::$_options['format_type'] == 'php'))) {
@@ -127,15 +131,19 @@ class Format
 
                 case 'format_type' :
                     if (($value != 'php') && ($value != 'iso')) {
-                        throw new Exception("Unknown date format type '$value'. Only 'iso' and 'php'"
-                           . " are supported.");
+                        throw new Exception\InvalidArgumentException(
+                        	"Unknown date format type '$value'. Only 'iso' and 'php'"
+                           . " are supported."
+                        );
                     }
                     break;
 
                 case 'fix_date' :
                     if (($value !== true) && ($value !== false)) {
-                        throw new Exception("Enabling correction of dates must be either true or false"
-                            . "(fix_date='$value').");
+                        throw new Exception\InvalidArgumentException(
+                        	"Enabling correction of dates must be either true or false"
+                            . "(fix_date='$value')."
+                        );
                     }
                     break;
 
@@ -159,12 +167,16 @@ class Format
                     }
 
                     if (($value < -1) || ($value > 30)) {
-                        throw new Exception("'$value' precision is not a whole number less than 30.");
+                        throw new Exception\InvalidArgumentException(
+                        	"'$value' precision is not a whole number less than 30."
+                       	);
                     }
                     break;
 
                 default:
-                    throw new Exception("Unknown option: '$name' = '$value'");
+                    throw new Exception\InvalidArgumentException(
+                    	"Unknown option: '$name' = '$value'"
+                    );
                     break;
 
             }
@@ -186,22 +198,26 @@ class Format
      * @param  string  $input  String to convert
      * @param  string  $from   Script to parse, see {@link Zend_Locale::getScriptList()} for details.
      * @param  string  $to     OPTIONAL Script to convert to
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return string  Returns the converted input
-     * @throws \Zend\Locale\Exception
      */
     public static function convertNumerals($input, $from, $to = null)
     {
         $from   = strtolower($from);
         $source = Data::getContent('en', 'numberingsystem', $from);
         if (empty($source)) {
-            throw new Exception("Unknown script '$from'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9.");
+            throw new Exception\InvalidArgumentException(
+            	"Unknown script '$from'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9."
+            );
         }
 
         if ($to !== null) {
             $to     = strtolower($to);
             $target = Data::getContent('en', 'numberingsystem', $to);
             if (empty($target)) {
-                throw new Exception("Unknown script '$to'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9.");
+                throw new Exception\InvalidArgumentException(
+                	"Unknown script '$to'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9."
+                );
             }
         } else {
             $target = '0123456789';
@@ -228,8 +244,8 @@ class Format
      *
      * @param  string $input    Input string to parse for numbers
      * @param  array  $options  Options: locale, precision. See {@link setOptions()} for details.
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return string Returns the extracted number
-     * @throws \Zend\Locale\Exception
      */
     public static function getNumber($input, array $options = array())
     {
@@ -239,7 +255,9 @@ class Format
         }
 
         if (!self::isNumber($input, $options)) {
-            throw new Exception('No localized value in ' . $input . ' found, or the given number does not match the localized format');
+            throw new Exception\InvalidArgumentException(
+            	'No localized value in ' . $input . ' found, or the given number does not match the localized format'
+            );
         }
 
         // Get correct signs for this locale
@@ -283,8 +301,8 @@ class Format
      *
      * @param   string  $input    Localized number string
      * @param   array   $options  Options: number_format, locale, precision. See {@link setOptions()} for details.
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return  string  locale formatted number
-     * @throws \Zend\Locale\Exception
      */
     public static function toNumber($value, array $options = array())
     {
@@ -332,7 +350,9 @@ class Format
 
         if (iconv_strpos($format, '0') === false) {
             iconv_set_encoding('internal_encoding', $oenc);
-            throw new Exception('Wrong format... missing 0');
+            throw new Exception\InvalidArgumentException(
+            	'Wrong format... missing 0'
+            );
         }
 
         // get number parts
@@ -512,6 +532,7 @@ class Format
      * Internal method to convert cldr number syntax into regex
      *
      * @param  string $type
+     * @throws \Zend\Locale\Exception\UnsupportedTokenException
      * @return string
      */
     private static function _getRegexForType($type, $options)
@@ -553,14 +574,14 @@ class Format
                             } else if (($parts[$key + 1]) == '##') {
                                 $regex[$pkey] .= '[0-9]{1,2}';
                             } else {
-                                throw new Exception('Unsupported token for numberformat (Pos 1):"' . $pattern . '"');
+                                throw new Exception\UnsupportedTokenException('Unsupported token for numberformat (Pos 1):"' . $pattern . '"');
                             }
                             break;
                         case '##':
                             if ($parts[$key + 1] == '##0') {
                                 $regex[$pkey] .=  '(\\' . $symbols['group'] . '{0,1}[0-9]{2})*';
                             } else {
-                                throw new Exception('Unsupported token for numberformat (Pos 2):"' . $pattern . '"');
+                                throw new Exception\UnsupportedTokenException('Unsupported token for numberformat (Pos 2):"' . $pattern . '"');
                             }
                             break;
                         case '##0':
@@ -569,14 +590,14 @@ class Format
                             } else if (($parts[$key - 1] == '#') || ($parts[$key - 1] == '-#')) {
                                 $regex[$pkey] .= '(\\' . $symbols['group'] . '{0,1}[0-9]{3})*';
                             } else {
-                                throw new Exception('Unsupported token for numberformat (Pos 3):"' . $pattern . '"');
+                                throw new Exception\UnsupportedTokenException('Unsupported token for numberformat (Pos 3):"' . $pattern . '"');
                             }
                             break;
                         case '#0':
                             if ($key == 0) {
                                 $regex[$pkey] .= '[0-9]*';
                             } else {
-                                throw new Exception('Unsupported token for numberformat (Pos 4):"' . $pattern . '"');
+                                throw new Exception\UnsupportedTokenException('Unsupported token for numberformat (Pos 4):"' . $pattern . '"');
                             }
                             break;
                     }
@@ -589,7 +610,7 @@ class Format
                 } else if (($pattern == '-#E0') || ($pattern == '-#E00')) {
                     $regex[$pkey] .= '[' . $symbols['minus']. '-]{0,1}[0-9]{1,}(\\' . $symbols['decimal'] . '[0-9]{1,})*[eE][' . $symbols['minus']. '-]{0,1}[0-9]{1,}';
                 } else {
-                    throw new Exception('Unsupported token for numberformat (Pos 5):"' . $pattern . '"');
+                    throw new Exception\UnsupportedTokenException('Unsupported token for numberformat (Pos 5):"' . $pattern . '"');
                 }
             }
 
@@ -599,7 +620,7 @@ class Format
                 } else if ($end == '###-') {
                     $regex[$pkey] .= '(\\' . $symbols['decimal'] . '{1}[0-9]{1,}){0,1}[' . $symbols['minus']. '-]';
                 } else {
-                    throw new Exception('Unsupported token for numberformat (Pos 6):"' . $pattern . '"');
+                    throw new Exception\UnsupportedTokenException('Unsupported token for numberformat (Pos 6):"' . $pattern . '"');
                 }
             }
 
@@ -744,12 +765,13 @@ class Format
      *
      * @param   string  $date     Date string to parse
      * @param   array   $options  Options: format_type, fix_date, locale, date_format. See {@link setOptions()} for details.
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return  array             Possible array members: day, month, year, hour, minute, second, fixed, format
      */
     private static function _parseDate($date, $options)
     {
         if (!is_string($date)) {
-            throw new Exception('Invalid date provided; must be string, ' . gettype($date) . ' provided');
+            throw new Exception\InvalidArgumentException('Invalid date provided; must be string, ' . gettype($date) . ' provided');
         }
         $options = self::_checkOptions($options) + self::$_options;
         $test = array('h', 'H', 'm', 's', 'y', 'Y', 'M', 'd', 'D', 'E', 'S', 'l', 'B', 'I',
@@ -830,7 +852,7 @@ class Format
 
         if (empty($parse)) {
             iconv_set_encoding('internal_encoding', $oenc);
-            throw new Exception("Unknown date format, neither date nor time in '" . $format . "' found");
+            throw new Exception\InvalidArgumentException("Unknown date format, neither date nor time in '" . $format . "' found");
         }
         ksort($parse);
 
@@ -849,7 +871,7 @@ class Format
 
         if (count($splitted[0]) == 0) {
             iconv_set_encoding('internal_encoding', $oenc);
-            throw new Exception("No date part in '$date' found.");
+            throw new Exception\InvalidArgumentException("No date part in '$date' found.");
         }
         if (count($splitted[0]) == 1) {
             $split = 0;
@@ -954,7 +976,7 @@ class Format
                                                (isset($result['year']) and (iconv_strpos($date, $result['year']) === false)))) {
                     if ($options['fix_date'] !== true) {
                         iconv_set_encoding('internal_encoding', $oenc);
-                        throw new Exception("Unable to parse date '$date' using '" . $format
+                        throw new Exception\InvalidArgumentException("Unable to parse date '$date' using '" . $format
                             . "' (false month, $position, $month)");
                     }
                     $temp = $result['day'];
@@ -969,7 +991,7 @@ class Format
                 if ($result['day'] > 31) {
                     if ($options['fix_date'] !== true) {
                         iconv_set_encoding('internal_encoding', $oenc);
-                        throw new Exception("Unable to parse date '$date' using '"
+                        throw new Exception\InvalidArgumentException("Unable to parse date '$date' using '"
                                                       . $format . "' (d <> y)");
                     }
                     $temp = $result['year'];
@@ -984,7 +1006,7 @@ class Format
                 if ($result['month'] > 31) {
                     if ($options['fix_date'] !== true) {
                         iconv_set_encoding('internal_encoding', $oenc);
-                        throw new Exception("Unable to parse date '$date' using '"
+                        throw new Exception\InvalidArgumentException("Unable to parse date '$date' using '"
                                                       . $format . "' (M <> y)");
                     }
                     $temp = $result['year'];
@@ -999,7 +1021,7 @@ class Format
                 if ($result['month'] > 12) {
                     if ($options['fix_date'] !== true || $result['month'] > 31) {
                         iconv_set_encoding('internal_encoding', $oenc);
-                        throw new Exception("Unable to parse date '$date' using '"
+                        throw new Exception\InvalidArgumentException("Unable to parse date '$date' using '"
                                                       . $format . "' (M <> d)");
                     }
                     $temp = $result['day'];
@@ -1059,14 +1081,14 @@ class Format
      * Returns the default date format for $locale.
      *
      * @param  string|\Zend\Locale\Locale  $locale  OPTIONAL Locale of $number, possibly in string form (e.g. 'de_AT')
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return string  format
-     * @throws \Zend\Locale\Exception  throws an exception when locale data is broken
      */
     public static function getDateFormat($locale = null)
     {
         $format = Data::getContent($locale, 'date');
         if (empty($format)) {
-            throw new Exception("failed to receive data from locale $locale");
+            throw new Exception\InvalidArgumentException("failed to receive data from locale $locale");
         }
 
         return $format;
@@ -1170,13 +1192,14 @@ class Format
      * Returns the default time format for $locale.
      *
      * @param  string|\Zend\Locale\Locale  $locale  OPTIONAL Locale of $number, possibly in string form (e.g. 'de_AT')
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return string  format
      */
     public static function getTimeFormat($locale = null)
     {
         $format = Data::getContent($locale, 'time');
         if (empty($format)) {
-            throw new Exception("failed to receive data from locale $locale");
+            throw new Exception\InvalidArgumentException("failed to receive data from locale $locale");
         }
         return $format;
     }
@@ -1207,13 +1230,14 @@ class Format
      * Returns the default datetime format for $locale.
      *
      * @param  string|\Zend\Locale\Locale  $locale  OPTIONAL Locale of $number, possibly in string form (e.g. 'de_AT')
+     * @throws \Zend\Locale\Exception\InvalidArgumentException
      * @return string  format
      */
     public static function getDateTimeFormat($locale = null)
     {
         $format = Data::getContent($locale, 'datetime');
         if (empty($format)) {
-            throw new Exception("failed to receive data from locale $locale");
+            throw new Exception\InvalidArgumentException("failed to receive data from locale $locale");
         }
         return $format;
     }

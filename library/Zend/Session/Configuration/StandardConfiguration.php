@@ -25,7 +25,7 @@
 namespace Zend\Session\Configuration;
 
 use Zend\Session\Configuration as Configurable,
-    Zend\Session\Exception as SessionException,
+    Zend\Session\Exception,
     Zend\Validator\Hostname as HostnameValidator,
     Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
 
@@ -132,7 +132,7 @@ class StandardConfiguration implements Configurable
     public function setSavePath($path)
     {
         if (!is_dir($path)) {
-            throw new SessionException('Invalid save_path provided');
+            throw new Exception\InvalidArgumentException('Invalid save_path provided');
         }
         $this->_savePath = $path;
         $this->setStorageOption('save_path', $path);
@@ -163,7 +163,7 @@ class StandardConfiguration implements Configurable
     {
         $this->_name = (string) $name;
         if (empty($this->_name)) {
-            throw new SessionException('Invalid session name; cannot be empty');
+            throw new Exception\InvalidArgumentException('Invalid session name; cannot be empty');
         }
         $this->setStorageOption('name', $this->_name);
         return $this;
@@ -192,11 +192,11 @@ class StandardConfiguration implements Configurable
     public function setGcProbability($gcProbability)
     {
         if (!is_numeric($gcProbability)) {
-            throw new SessionException('Invalid gc_probability; must be numeric');
+            throw new Exception\InvalidArgumentException('Invalid gc_probability; must be numeric');
         }
         $gcProbability = (int) $gcProbability;
         if (1 > $gcProbability || 100 < $gcProbability) {
-            throw new SessionException('Invalid gc_probability; must be a percentage');
+            throw new Exception\InvalidArgumentException('Invalid gc_probability; must be a percentage');
         }
         $this->setOption('gc_probability', $gcProbability);
         $this->setStorageOption('gc_probability', $gcProbability);
@@ -213,11 +213,11 @@ class StandardConfiguration implements Configurable
     public function setGcDivisor($gcDivisor)
     {
         if (!is_numeric($gcDivisor)) {
-            throw new SessionException('Invalid gc_divisor; must be numeric');
+            throw new Exception\InvalidArgumentException('Invalid gc_divisor; must be numeric');
         }
         $gcDivisor = (int) $gcDivisor;
         if (1 > $gcDivisor) {
-            throw new SessionException('Invalid gc_divisor; must be a positive integer');
+            throw new Exception\InvalidArgumentException('Invalid gc_divisor; must be a positive integer');
         }
         $this->setOption('gc_divisor', $gcDivisor);
         $this->setStorageOption('gc_divisor', $gcDivisor);
@@ -234,12 +234,12 @@ class StandardConfiguration implements Configurable
     public function setGcMaxlifetime($gcMaxlifetime)
     {
         if (!is_numeric($gcMaxlifetime)) {
-            throw new SessionException('Invalid gc_maxlifetime; must be numeric');
+            throw new Exception\InvalidArgumentException('Invalid gc_maxlifetime; must be numeric');
         }
 
         $gcMaxlifetime = (int) $gcMaxlifetime;
         if (1 > $gcMaxlifetime) {
-            throw new SessionException('Invalid gc_maxlifetime; must be a positive integer');
+            throw new Exception\InvalidArgumentException('Invalid gc_maxlifetime; must be a positive integer');
         }
 
         $this->setOption('gc_maxlifetime', $gcMaxlifetime);
@@ -257,10 +257,10 @@ class StandardConfiguration implements Configurable
     public function setCookieLifetime($cookieLifetime)
     {
         if (!is_numeric($cookieLifetime)) {
-            throw new SessionException('Invalid cookie_lifetime; must be numeric');
+            throw new Exception\InvalidArgumentException('Invalid cookie_lifetime; must be numeric');
         }
         if (0 > $cookieLifetime) {
-            throw new SessionException('Invalid cookie_lifetime; must be a positive integer or zero');
+            throw new Exception\InvalidArgumentException('Invalid cookie_lifetime; must be a positive integer or zero');
         }
 
         $this->_cookieLifetime = (int) $cookieLifetime;
@@ -294,7 +294,7 @@ class StandardConfiguration implements Configurable
 
         $test = parse_url($cookiePath, PHP_URL_PATH);
         if ($test != $cookiePath || '/' != $test[0]) {
-            throw new SessionException('Invalid cookie path');
+            throw new Exception\InvalidArgumentException('Invalid cookie path');
         }
 
         $this->_cookiePath = $cookiePath;
@@ -325,13 +325,13 @@ class StandardConfiguration implements Configurable
     public function setCookieDomain($cookieDomain)
     {
         if (!is_string($cookieDomain)) {
-            throw new SessionException('Invalid cookie domain: must be a string');
+            throw new Exception\InvalidArgumentException('Invalid cookie domain: must be a string');
         }
 
         $validator = new HostnameValidator(HostnameValidator::ALLOW_ALL);
 
         if (!empty($cookieDomain) && !$validator->isValid($cookieDomain)) {
-            throw new SessionException('Invalid cookie domain: ' . implode('; ', $validator->getMessages()));
+            throw new Exception\InvalidArgumentException('Invalid cookie domain: ' . implode('; ', $validator->getMessages()));
         }
 
         $this->_cookieDomain = $cookieDomain;
@@ -443,7 +443,7 @@ class StandardConfiguration implements Configurable
     public function setEntropyFile($path)
     {
         if (!file_exists($path) || is_dir($path) || !is_readable($path)) {
-            throw new SessionException('Invalid entropy_file provided');
+            throw new Exception\InvalidArgumentException('Invalid entropy_file provided');
         }
         $this->setOption('entropy_file', $path);
         $this->setStorageOption('entropy_file', $path);
@@ -460,10 +460,10 @@ class StandardConfiguration implements Configurable
     public function setEntropyLength($entropyLength)
     {
         if (!is_numeric($entropyLength)) {
-            throw new SessionException('Invalid entropy_length; must be numeric');
+            throw new Exception\InvalidArgumentException('Invalid entropy_length; must be numeric');
         }
         if (0 > $entropyLength) {
-            throw new SessionException('Invalid entropy_length; must be a positive integer or zero');
+            throw new Exception\InvalidArgumentException('Invalid entropy_length; must be a positive integer or zero');
         }
 
         $this->setOption('entropy_length', $entropyLength);
@@ -481,12 +481,12 @@ class StandardConfiguration implements Configurable
     public function setCacheExpire($cacheExpire)
     {
         if (!is_numeric($cacheExpire)) {
-            throw new SessionException('Invalid cache_expire; must be numeric');
+            throw new Exception\InvalidArgumentException('Invalid cache_expire; must be numeric');
         }
 
         $cacheExpire = (int) $cacheExpire;
         if (1 > $cacheExpire) {
-            throw new SessionException('Invalid cache_expire; must be a positive integer');
+            throw new Exception\InvalidArgumentException('Invalid cache_expire; must be a positive integer');
         }
 
         $this->setOption('cache_expire', $cacheExpire);
@@ -504,7 +504,7 @@ class StandardConfiguration implements Configurable
     public function setHashBitsPerCharacter($hashBitsPerCharacter)
     {
         if (!is_numeric($hashBitsPerCharacter)) {
-            throw new SessionException('Invalid hash bits per character provided');
+            throw new Exception\InvalidArgumentException('Invalid hash bits per character provided');
         }
         $hashBitsPerCharacter = (int) $hashBitsPerCharacter;
         $this->setOption('hash_bits_per_character', $hashBitsPerCharacter);
@@ -522,12 +522,12 @@ class StandardConfiguration implements Configurable
     public function setRememberMeSeconds($rememberMeSeconds)
     {
         if (!is_numeric($rememberMeSeconds)) {
-            throw new SessionException('Invalid remember_me_seconds; must be numeric');
+            throw new Exception\InvalidArgumentException('Invalid remember_me_seconds; must be numeric');
         }
 
         $rememberMeSeconds = (int) $rememberMeSeconds;
         if (1 > $rememberMeSeconds) {
-            throw new SessionException('Invalid remember_me_seconds; must be a positive integer');
+            throw new Exception\InvalidArgumentException('Invalid remember_me_seconds; must be a positive integer');
         }
 
         $this->_rememberMeSeconds = $rememberMeSeconds;
@@ -683,7 +683,7 @@ class StandardConfiguration implements Configurable
             $value  = array_shift($args);
             return $this->setOption($key, $value);
         }
-        throw new \BadMethodCallException(sprintf('Method "%s" does not exist', $method));
+        throw new Exception\BadMethodCallException(sprintf('Method "%s" does not exist', $method));
     }
 
     /**

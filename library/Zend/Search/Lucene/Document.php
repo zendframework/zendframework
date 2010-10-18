@@ -25,10 +25,12 @@
  */
 namespace Zend\Search\Lucene;
 
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+
 /**
  * A Document is a set of fields. Each field has a name and a textual value.
  *
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @uses       \Zend\Search\Lucene\Document\Field
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -97,12 +99,13 @@ class Document
      * Returns {@link \Zend\Search\Lucene\Document\Field} object for a named field in this document.
      *
      * @param string $fieldName
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @return \Zend\Search\Lucene\Document\Field
      */
     public function getField($fieldName)
     {
         if (!array_key_exists($fieldName, $this->_fields)) {
-            throw new Exception("Field name \"$fieldName\" not found in document.");
+            throw new InvalidArgumentException("Field name \"$fieldName\" not found in document.");
         }
         return $this->_fields[$fieldName];
     }

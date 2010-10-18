@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Rest
- * @subpackage Client
+ * @package    Zend_Form
+ * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,15 +23,18 @@
 /**
  * @namespace
  */
-namespace Zend\Rest\Client;
+namespace Zend\Form\Element\Exception;
 
 /**
- * REST client result exception
- *
- * @uses       Zend\Rest\Client\Exception
- * @package    Zend_Rest
- * @subpackage Client
+ * @uses       Zend\Form\Element\Exception
+ * @uses       \UnexcpectedValueException
+ * @category   Zend
+ * @package    Zend_Form
+ * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResultException extends Exception{}
+class UnexpectedValueException 
+    extends \UnexpectedValueException
+    implements \Zend\Form\Element\Exception
+{}

@@ -87,7 +87,7 @@ abstract class AbstractManager implements Manager
             }
         } elseif (is_string($config)) {
             if (!class_exists($config)) {
-                throw new Exception('Configuration class provided is invalid; not found');
+                throw new Exception\InvalidArgumentException('Configuration class provided is invalid; not found');
             }
             $config = new $config;
         }
@@ -121,7 +121,7 @@ abstract class AbstractManager implements Manager
             }
 
             if (!class_exists($class)) {
-                throw new Exception('Class provided for configuration is invalid; not found');
+                throw new Exception\InvalidArgumentException('Class provided for configuration is invalid; not found');
             }
 
             $options = $config;
@@ -131,7 +131,7 @@ abstract class AbstractManager implements Manager
         } 
         
         if (!$config instanceof Configuration) {
-            throw new Exception('Configuration type provided is invalid; must implement Zend\\Session\\Configuration');
+            throw new Exception\InvalidArgumentException('Configuration type provided is invalid; must implement Zend\\Session\\Configuration');
         }
         $this->_config = $config;
     }
@@ -163,13 +163,13 @@ abstract class AbstractManager implements Manager
 
         if (is_string($storage)) {
             if (!class_exists($storage)) {
-                throw new Exception('Class provided for Storage does not exist');
+                throw new Exception\InvalidArgumentException('Class provided for Storage does not exist');
             }
             $storage = new $storage();
         }
 
         if (!$storage instanceof Storage) {
-            throw new Exception('Storage type provided is invalid; must implement Zend\\Session\\Storage');
+            throw new Exception\InvalidArgumentException('Storage type provided is invalid; must implement Zend\\Session\\Storage');
         }
 
         $this->_storage = $storage;

@@ -138,47 +138,13 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     {
         $xml = $this->_createXml();
 
-        try {
-            $parsed = $this->_fault->loadXml($xml);
-        } catch (\Exception $e) {
-            $this->fail('Failed to parse XML: ' . $e->getMessage());
-        }
+        $parsed = $this->_fault->loadXml($xml);
         $this->assertTrue($parsed, $xml);
 
         $this->assertEquals(1000, $this->_fault->getCode());
         $this->assertEquals('Error string', $this->_fault->getMessage());
 
-        try {
-            $parsed = $this->_fault->loadXml('foo');
-            $this->fail('Should not parse invalid XML');
-        } catch (XmlRpc\Exception $e) {
-            // do nothing
-        }
-
         $this->assertFalse($this->_fault->loadXml('<wellformedButInvalid/>'));
-
-        try {
-            $this->assertFalse($this->_fault->loadXml('<methodResponse><fault/></methodResponse>'));
-            $this->fail('Should throw an exception. No value element in fault');
-        } catch (XmlRpc\Exception $e) {
-            $this->assertEquals('Invalid fault structure', $e->getMessage());
-            $this->assertSame(500, $e->getCode());
-        }
-
-        try {
-            $this->_fault->loadXml('<methodResponse><fault/></methodResponse>');
-            $this->fail('Should throw an exception. No struct element in //fault/value');
-        } catch (XmlRpc\Exception $e) {
-            $this->assertEquals('Invalid fault structure', $e->getMessage());
-            $this->assertSame(500, $e->getCode());
-        }
-
-        try {
-            $this->_fault->loadXml('<methodResponse><fault><value><struct/></value></fault></methodResponse>');
-            $this->fail('Should throw an exception. Empty fault code and string in //fault/value');
-        } catch (XmlRpc\Exception $e) {
-            $this->assertEquals('Fault code and string required', $e->getMessage());
-        }
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
                 . '<member><name>faultString</name><value><string>str</string></value></member>'
@@ -201,6 +167,30 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testLoadXmlThrowsExceptionOnInvalidInput()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Failed to parse XML fault: String could not be parsed as XML');
+        $parsed = $this->_fault->loadXml('foo');
+    }
+
+    public function testLoadXmlThrowsExceptionOnInvalidInput2()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Invalid fault structure');
+        $this->assertFalse($this->_fault->loadXml('<methodResponse><fault/></methodResponse>'));
+    }
+    
+    public function testLoadXmlThrowsExceptionOnInvalidInput3()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Invalid fault structure');
+        $this->_fault->loadXml('<methodResponse><fault/></methodResponse>');
+    }
+    
+    public function testLoadXmlThrowsExceptionOnInvalidInput4()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Fault code and string required');
+        $this->_fault->loadXml('<methodResponse><fault><value><struct/></value></fault></methodResponse>');
+    }
+    
     /**
      * Zend_XmlRpc_Fault::isFault() test
      */
@@ -221,11 +211,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     protected function _testXmlFault($xml)
     {
-        try {
-            $sx = new \SimpleXMLElement($xml);
-        } catch (\Exception $e) {
-            $this->fail('Unable to parse generated XML');
-        }
+        $sx = new \SimpleXMLElement($xml);
 
         $this->assertTrue($sx->fault ? true : false, $xml);
         $this->assertTrue($sx->fault->value ? true : false, $xml);
@@ -293,13 +279,8 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     {
         $xml = $this->_createNonStandardXml();
 
-        try {
-            $parsed = $this->_fault->loadXml($xml);
-        } catch (\Exception $e) {
-            $this->fail('Failed to parse XML: ' . $e->getMessage());
-        }
+        $parsed = $this->_fault->loadXml($xml);
         $this->assertTrue($parsed, $xml);
-
         $this->assertEquals('Error string', $this->_fault->getMessage());
     }
 }

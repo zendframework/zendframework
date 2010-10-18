@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace Zend\Service\Amazon;
+use Zend\Service\Amazon\Exception;
 
 /**
  * @uses       DOMXPath
- * @uses       OutOfBoundsException
+ * @uses       \Zend\Service\Amazon\OutOfBoundsException
  * @uses       SeekableIterator
  * @uses       Zend_Service_Amazon_Item
  * @category   Zend
@@ -146,7 +147,7 @@ class ResultSet implements \SeekableIterator
      * Implement SeekableIterator::seek()
      *
      * @param  int $index
-     * @throws OutOfBoundsException
+     * @throws \Zend\Service\Amazon\OutOfBoundsException
      * @return void
      */
     public function seek($index)
@@ -155,7 +156,7 @@ class ResultSet implements \SeekableIterator
         if ($indexInt >= 0 && (null === $this->_results || $indexInt < $this->_results->length)) {
             $this->_currentIndex = $indexInt;
         } else {
-            throw new \OutOfBoundsException("Illegal index '$index'");
+            throw new Exception\OutOfBoundsException("Illegal index '$index'");
         }
     }
 

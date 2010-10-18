@@ -24,14 +24,16 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Search\Query\Preprocessing;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Search\Query;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Search\Query,
+	Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
  * This type of query is not actually involved into query execution.
  *
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
  * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -58,22 +60,24 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      * Optimize query in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
+     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     public function optimize(Lucene\SearchIndex $index)
     {
-        throw new Lucene\Exception('This query is not intended to be executed.');
+        throw new UnsupportedMethodCallException('This query is not intended to be executed.');
     }
 
     /**
      * Constructs an appropriate Weight implementation for this query.
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
     public function createWeight(Lucene\SearchIndex $reader)
     {
-        throw new Lucene\Exception('This query is not intended to be executed.');
+        throw new UnsupportedMethodCallException('This query is not intended to be executed.');
     }
 
     /**
@@ -82,10 +86,11 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
+     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
      */
     public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
     {
-        throw new Lucene\Exception('This query is not intended to be executed.');
+        throw new UnsupportedMethodCallException('This query is not intended to be executed.');
     }
 
     /**
@@ -93,11 +98,12 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      *
      * It's an array with document ids as keys (performance considerations)
      *
+     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
      * @return array
      */
     public function matchedDocs()
     {
-        throw new Lucene\Exception('This query is not intended to be executed.');
+        throw new UnsupportedMethodCallException('This query is not intended to be executed.');
     }
 
     /**
@@ -105,20 +111,22 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      *
      * @param integer $docId
      * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
      * @return float
      */
     public function score($docId, Lucene\SearchIndex $reader)
     {
-        throw new Lucene\Exception('This query is not intended to be executed.');
+        throw new UnsupportedMethodCallException('This query is not intended to be executed.');
     }
 
     /**
      * Return query terms
      *
+     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
      * @return array
      */
     public function getQueryTerms()
     {
-        throw new Lucene\Exception('Rewrite operation has to be done before retrieving query terms.');
+        throw new UnsupportedMethodCallException('Rewrite operation has to be done before retrieving query terms.');
     }
 }

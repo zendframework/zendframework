@@ -24,7 +24,7 @@ namespace ZendTest\Locale;
 
 use \Zend\Locale\Math,
     \Zend\Locale\PhpMath,
-    \Zend\Locale\MathException;
+    \Zend\Locale\Exception\MathException;
 
 /**
  * @category   Zend

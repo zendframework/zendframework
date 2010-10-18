@@ -24,9 +24,12 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Search;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Analysis\Analyzer;
-use Zend\Search\Lucene\Index;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Analysis\Analyzer,
+	Zend\Search\Lucene\Index,
+	Zend\Search\Lucene\Search\Exception\QueryParserException,
+	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * @uses       \Zend\Search\Lucene\Analysis\Analyzer
@@ -35,6 +38,8 @@ use Zend\Search\Lucene\Index;
  * @uses       \Zend\Search\Lucene\Search
  * @uses       \Zend\Search\Lucene\Search\QueryEntry
  * @uses       \Zend\Search\Lucene\Search\Query
+ * @uses	   \Zend\Search\Lucene\Search\Exception\QueryParserException
+ * @uses	   \Zend\Search\Lucene\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -346,8 +351,9 @@ class QueryParser extends Lucene\AbstractFSM
      *
      * @param string $strQuery
      * @param string $encoding
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
      */
     public static function parse($strQuery, $encoding = null)
     {
@@ -380,7 +386,7 @@ class QueryParser extends Lucene\AbstractFSM
                         throw new QueryParserException( 'Syntax error at char position ' . $token->position . '.', 0, $e);
                     }
 
-                    throw new Lucene\Exception($e->getMessage(), $e->getCode(), $e);
+                    throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
                 }
             }
 
@@ -404,7 +410,7 @@ class QueryParser extends Lucene\AbstractFSM
 
                 return $query;
             } else {
-                throw new Lucene\Exception($e->getMessage(), $e->getCode(), $e);
+                throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
         }
     }
@@ -461,7 +467,8 @@ class QueryParser extends Lucene\AbstractFSM
     /**
      * Process modifier parameter
      *
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function processModifierParameter()
     {
@@ -480,7 +487,7 @@ class QueryParser extends Lucene\AbstractFSM
 
             default:
                 // It's not a user input exception
-                throw new Lucene\Exception('Lexeme modifier parameter must follow lexeme modifier. Char position 0.' );
+                throw new RuntimeException('Lexeme modifier parameter must follow lexeme modifier. Char position 0.' );
         }
     }
 
@@ -528,7 +535,7 @@ class QueryParser extends Lucene\AbstractFSM
     /**
      * Process last range query term (opened interval)
      *
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      */
     public function openedRQLastTerm()
     {
@@ -570,7 +577,7 @@ class QueryParser extends Lucene\AbstractFSM
     /**
      * Process last range query term (closed interval)
      *
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      */
     public function closedRQLastTerm()
     {

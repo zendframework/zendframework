@@ -162,7 +162,7 @@ class DbTable
         if ($config instanceof \Zend\Config\Config) {
             $config = $config->toArray();
         } else if (!is_array($config)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 '$config must be an instance of Zend\\Config or array of key/value pairs containing '
               . 'configuration options for Zend\\Session\\SaveHandler\\DbTable and Zend\\Db\\Table\\Abstract.');
         }
@@ -249,7 +249,7 @@ class DbTable
     public function setLifetime($lifetime, $overrideLifetime = null)
     {
         if ($lifetime < 0) {
-            throw new Exception();
+            throw new Exception\InvalidArgumentException('Lifetime must be greater than 0');
         } else if (empty($lifetime)) {
             $this->_lifetime = (int) ini_get('session.gc_maxlifetime');
         } else {
@@ -435,7 +435,7 @@ class DbTable
         $config = $this->getManager()->getConfig();
 
         if (empty($this->_name) && basename(($this->_name = $config->getSavePath())) != $this->_name) {
-            throw new Exception('session.save_path is a path and not a table name.');
+            throw new Exception\RuntimeException('session.save_path is a path and not a table name.');
         }
 
         if (strpos($this->_name, '.')) {
@@ -462,11 +462,11 @@ class DbTable
         }
 
         if (count($this->_primaryAssignment) !== count($this->_primary)) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 "Value for configuration option '" . self::PRIMARY_ASSIGNMENT . "' must have an assignment "
               . "for each session table primary key.");
         } else if (!in_array(self::PRIMARY_ASSIGNMENT_SESSION_ID, $this->_primaryAssignment)) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 "Value for configuration option '" . self::PRIMARY_ASSIGNMENT . "' must have an assignment "
               . "for the session id ('" . self::PRIMARY_ASSIGNMENT_SESSION_ID . "').");
         }
@@ -481,15 +481,15 @@ class DbTable
     protected function _checkRequiredColumns()
     {
         if ($this->_modifiedColumn === null) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 "Configuration must define '" . self::MODIFIED_COLUMN . "' which names the "
               . "session table last modification time column.");
         } else if ($this->_lifetimeColumn === null) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 "Configuration must define '" . self::LIFETIME_COLUMN . "' which names the "
               . "session table lifetime column.");
         } else if ($this->_dataColumn === null) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 "Configuration must define '" . self::DATA_COLUMN . "' which names the "
               . "session table data column.");
         }

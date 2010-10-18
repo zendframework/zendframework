@@ -23,10 +23,11 @@
 /**
  * @namespace
  */
-namespace Zend\XmlRpc\Client;
+namespace Zend\XmlRpc\Client\Exception;
 
 /**
- * Thrown by Zend_XmlRpc_Client_Introspection when any error occurs.
+ * Thrown by Zend_XmlRpc_Client when an HTTP error occurs during an
+ * XML-RPC method call.
  *
  * @uses       Zend\XmlRpc\Client\Exception
  * @category   Zend
@@ -35,5 +36,7 @@ namespace Zend\XmlRpc\Client;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class IntrospectException extends Exception
+class HttpException
+    extends RuntimeException
+    implements \Zend\XmlRpc\Client\Exception
 {}

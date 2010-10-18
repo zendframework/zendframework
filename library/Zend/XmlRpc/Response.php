@@ -204,7 +204,7 @@ class Response
 
         try {
             if (!isset($xml->params) || !isset($xml->params->param) || !isset($xml->params->param->value)) {
-                throw new Value\Exception('Missing XML-RPC value in XML');
+                throw new Exception\ValueException('Missing XML-RPC value in XML');
             }
             $valueXml = $xml->params->param->value->asXML();
             $value = Value::getXmlRpcValue($valueXml, Value::XML_STRING);

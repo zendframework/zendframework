@@ -124,7 +124,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testMarshalI4FromOverlongNativeThrowsException()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Value\\Exception', 'Overlong integer given');
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Overlong integer given');
         $x = Value::getXmlRpcValue(PHP_INT_MAX + 5000, Value::XMLRPC_TYPE_I4);
         var_dump($x);
     }
@@ -134,7 +134,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testMarshalIntegerFromOverlongNativeThrowsException()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Value\\Exception', 'Overlong integer given');
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Overlong integer given');
         Value::getXmlRpcValue(PHP_INT_MAX + 5000, Value::XMLRPC_TYPE_INTEGER);
     }
 
@@ -416,10 +416,10 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $native = array();
         $xml    = '<value><array/></value>';
 
-        $this->setExpectedException('Zend\\XmlRpc\\Value\\Exception',
-            'Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag');
-        $val = Value::getXmlRpcValue($xml,
-                                    Value::XML_STRING);
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException',
+        	'Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag'
+        	);
+        $val = Value::getXmlRpcValue($xml, Value::XML_STRING);
     }
 
     /**
@@ -639,8 +639,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testMarshalDateTimeFromInvalidString()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Value\\Exception',
-            "Cannot convert given value 'foobarbaz' to a timestamp");
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', "Cannot convert given value 'foobarbaz' to a timestamp");
         Value::getXmlRpcValue('foobarbaz', Value::XMLRPC_TYPE_DATETIME);
     }
 
@@ -824,12 +823,8 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryThrowsWhenInvalidTypeSpecified()
     {
-        try {
-            Value::getXmlRpcValue('', 'bad type here');
-            $this->fail();
-        } catch (\Exception $e) {
-            $this->assertRegexp('/given type is not/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Given type is not a Zend\XmlRpc\Value constant');
+        Value::getXmlRpcValue('', 'bad type here');
     }
 
     public function testPassingXmlRpcObjectReturnsTheSameObject()

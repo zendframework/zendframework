@@ -165,12 +165,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $rawResponse = <<<EOD
 <methodResponse><params><param><value><array><data><value><struct><member><name>id</name><value><string>1</string></value></member><member><name>name</name><value><string>birdy num num!</string></value></member><member><name>description</name><value><nil/></value></member></struct></value></data></array></value></param></params></methodResponse>
 EOD;
-        try {
-            $response = new Response();
-            $ret      = $response->loadXml($rawResponse);
-        } catch(\Exception $e) {
-            $this->fail("Parsing the response should not throw an exception.");
-        }
+
+        $response = new Response();
+        $ret      = $response->loadXml($rawResponse);
 
         $this->assertTrue($ret);
         $this->assertEquals(array(
@@ -190,11 +187,7 @@ EOD;
      */
     protected function _testXmlResponse($xml)
     {
-        try {
-            $sx = new \SimpleXMLElement($xml);
-        } catch (\Exception $e) {
-            $this->fail('Invalid XML returned');
-        }
+        $sx = new \SimpleXMLElement($xml);
 
         $this->assertTrue($sx->params ? true : false);
         $this->assertTrue($sx->params->param ? true : false);
@@ -238,21 +231,27 @@ EOD;
     public function testLoadXmlThrowsExceptionWithMissingNodes()
     {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params><param>foo</param></params></methodResponse>');
-        $this->_loadXml($sxl->asXML());
+        
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Missing XML-RPC value in XML');
+        $this->_response->loadXml($sxl->asXML());
+    }
+    
+    public function testLoadXmlThrowsExceptionWithMissingNodes2()
+    {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params>foo</params></methodResponse>');
-        $this->_loadXml($sxl->asXML());
+        
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Missing XML-RPC value in XML');
+        $this->_response->loadXml($sxl->asXML());
+    }
+    
+    public function testLoadXmlThrowsExceptionWithMissingNodes3()
+    {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><bar>foo</bar></methodResponse>');
-        $this->_loadXml($sxl->asXML());
+        
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Missing XML-RPC value in XML');
+        $this->_response->loadXml($sxl->asXML());
     }
 
-    protected function _loadXml($xml)
-    {
-        try {
-            $this->_response->loadXml($xml);
-            $this->fail('Invalid XML-RPC response should raise an exception');
-        } catch (\Exception $e) {
-        }
-    }
 
     public function trackError($error)
     {

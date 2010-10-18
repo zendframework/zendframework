@@ -45,7 +45,7 @@ namespace Zend\Form\Decorator;
  * the partial as local variables.
  *
  * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Exception
+ * @uses       \Zend\Form\Decorator\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -119,7 +119,7 @@ class ViewScript extends AbstractDecorator
 
         $viewScript = $this->getViewScript();
         if (empty($viewScript)) {
-            throw new Exception('No view script registered with ViewScript decorator');
+            throw new Exception\UnexpectedValueException('No view script registered with ViewScript decorator');
         }
 
         $separator = $this->getSeparator();

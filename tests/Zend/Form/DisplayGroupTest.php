@@ -82,7 +82,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
         $this->group->setName('f%\o^&*)o\(%$b#@!.a}{;-,r');
         $this->assertEquals('foobar', $this->group->getName());
 
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid name provided');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid name provided');
         $this->group->setName('%\^&*)\(%$#@!.}{;-,');
     }
 
@@ -122,7 +122,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function testPassingInvalidElementsToAddElementsThrowsException()
     {
         $elements = array('foo' => true);
-        $this->setExpectedException('Zend\Form\Exception', 'must be Zend\Form\Elements only');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'must be Zend\Form\Elements only');
         $this->group->addElements($elements);
     }
 
@@ -205,7 +205,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingInvalidDecoratorThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid decorator');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid decorator');
         $this->group->addDecorator(123);
     }
 
@@ -707,7 +707,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
-        $this->setExpectedException('Zend\Form\Exception');
+        $this->setExpectedException('Zend\Form\Exception\BadMethodCallException');
         $html = $this->group->bogusMethodCall();
     }
 

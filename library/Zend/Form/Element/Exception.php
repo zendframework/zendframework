@@ -14,51 +14,24 @@
  *
  * @category   Zend
  * @package    Zend_Form
+ * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Form;
+namespace Zend\Form\Element;
 
 /**
- * Zend\Form\SubForm
- *
- * @uses       \Zend\Form\Form
+ * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
+ * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-class SubForm extends Form
-{
-    /**
-     * Whether or not form elements are members of an array
-     * @var bool
-     */
-    protected $_isArray = true;
-
-    /**
-     * Load the default decorators
-     *
-     * @return Zend\Form\SubForm
-     */
-    public function loadDefaultDecorators()
-    {
-        if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return $this;
-        }
-
-        $decorators = $this->getDecorators();
-        if (empty($decorators)) {
-            $this->addDecorator('FormElements')
-                 ->addDecorator('HtmlTag', array('tag' => 'dl'))
-                 ->addDecorator('Fieldset')
-                 ->addDecorator('DtDdWrapper');
-        }
-        return $this;
-    }
-}
+interface Exception extends \Zend\Form\Exception
+{}

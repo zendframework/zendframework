@@ -40,7 +40,7 @@ namespace Zend\Form\Decorator;
  *
  * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @uses       \Zend\Form\Decorator\HtmlTag
- * @uses       \Zend\Form\Exception
+ * @uses       \Zend\Form\Decorator\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -195,7 +195,7 @@ class Label extends AbstractDecorator
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws \Zend\Form\Exception for unsupported methods
+     * @throws \Zend\Form\Decorator\Exception for unsupported methods
      */
     public function __call($method, $args)
     {
@@ -214,13 +214,13 @@ class Label extends AbstractDecorator
                     $key = 'optional' . $position;
                     break;
                 default:
-                    throw new Exception(sprintf('Invalid method "%s" called in Label decorator, and detected as type %s', $method, $type));
+                    throw new Exception\BadMethodCallException(sprintf('Invalid method "%s" called in Label decorator, and detected as type %s', $method, $type));
             }
 
             switch ($head) {
                 case 'set':
                     if (0 === count($args)) {
-                        throw new Exception(sprintf('Method "%s" requires at least one argument; none provided', $method));
+                        throw new Exception\InvalidArgumentException(sprintf('Method "%s" requires at least one argument; none provided', $method));
                     }
                     $value = array_shift($args);
                     $this->$key = $value;
@@ -238,7 +238,7 @@ class Label extends AbstractDecorator
             }
         }
 
-        throw new Exception(sprintf('Invalid method "%s" called in Label decorator', $method));
+        throw new Exception\BadMethodCallException(sprintf('Invalid method "%s" called in Label decorator', $method));
     }
 
     /**

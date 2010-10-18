@@ -30,7 +30,7 @@ namespace Zend\Service\Amazon;
  * Amazon offers
  *
  * @uses       Zend\Service\AbstractService
- * @uses       Zend_Service_Amazon_Exception
+ * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -90,7 +90,7 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
         }
 
         if(!$accessKey || !$secretKey) {
-            throw new Exception("AWS keys were not supplied");
+            throw new Exception\InvalidArgumentException("AWS keys were not supplied");
         }
         $this->_accessKey = $accessKey;
         $this->_secretKey = $secretKey;

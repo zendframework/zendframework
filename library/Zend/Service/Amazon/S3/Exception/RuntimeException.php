@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @uses       \Zend\Service\Amazon\S3\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage S3
@@ -22,16 +23,17 @@
 /**
  * @namespace
  */
-namespace Zend\Service\Amazon\S3;
+namespace Zend\Service\Amazon\S3\Exception;
 
 /**
- * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage S3
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception 
-    extends \Zend\Service\Amazon\Exception
+class RuntimeException
+    extends \RuntimeException
+    implements \Zend\Service\Amazon\S3\Exception
 {}
+

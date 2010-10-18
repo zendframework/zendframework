@@ -24,7 +24,9 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\S3;
-use Zend\Crypt;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\Sqs\Exception,
+    Zend\Crypt;
 
 /**
  * Amazon S3 PHP connection class
@@ -32,8 +34,8 @@ use Zend\Crypt;
  * @uses       SimpleXMLElement
  * @uses       Zend_Crypt_Hmac
  * @uses       Zend_Service_Amazon_Abstract
- * @uses       Zend_Service_Amazon_S3_Exception
- * @uses       Zend_Service_Amazon_S3_Stream
+ * @uses       Zend\Service\Amazon\S3\Exception
+ * @uses       Zend\Service\Amazon\S3\Stream
  * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Service
@@ -81,7 +83,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             $endpoint = new \Zend\Uri\Url($endpoint);
         }
         if (!$endpoint->isValid()) {
-            throw new Exception('Invalid endpoint supplied');
+            throw new Exception\InvalidArgumentException('Invalid endpoint supplied');
         }
         $this->_endpoint = $endpoint;
         return $this;
@@ -121,15 +123,15 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     {
         $len = strlen($bucket);
         if ($len < 3 || $len > 255) {
-            throw new Exception("Bucket name \"$bucket\" must be between 3 and 255 characters long");
+            throw new Exception\InvalidArgumentException("Bucket name \"$bucket\" must be between 3 and 255 characters long");
         }
 
         if (preg_match('/[^a-z0-9\._-]/', $bucket)) {
-            throw new Exception("Bucket name \"$bucket\" contains invalid characters");
+            throw new Exception\InvalidArgumentException("Bucket name \"$bucket\" contains invalid characters");
         }
 
         if (preg_match('/(\d){1,3}\.(\d){1,3}\.(\d){1,3}\.(\d){1,3}/', $bucket)) {
-            throw new Exception("Bucket name \"$bucket\" cannot be an IP address");
+            throw new Exception\InvalidArgumentException("Bucket name \"$bucket\" cannot be an IP address");
         }
         return true;
     }
@@ -424,7 +426,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     {
         $data = @file_get_contents($path);
         if ($data === false) {
-            throw new Exception("Cannot read file $path");
+            throw new Exception\RuntimeException("Cannot read file $path");
         }
 
         if (!is_array($meta)) {
@@ -450,7 +452,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     {
         $data = @fopen($path, "rb");
         if ($data === false) {
-            throw new Exception("Cannot open file $path");
+            throw new Exception\RuntimeException("Cannot open file $path");
         }
 
         if (!is_array($meta)) {
@@ -555,7 +557,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $headers['Date'] = gmdate(DATE_RFC1123, time());
 
         if(is_resource($data) && $method != 'PUT') {
-            throw new Exception("Only PUT request supports stream data");
+            throw new Exception\InvalidArgumentException("Only PUT request supports stream data");
         }
 
         // build the end point out

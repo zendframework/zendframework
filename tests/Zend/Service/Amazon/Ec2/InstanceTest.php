@@ -24,7 +24,8 @@
  * @namespace
  */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2\Instance;
+use Zend\Service\Amazon\Ec2\Instance,
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance test case.
@@ -55,8 +56,8 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
 
         $this->instance = new Instance('access_key', 'secret_access_key');
 
-        $adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client = new \Zend\HTTP\Client(null, array(
+        $adapter = new \Zend\Http\Client\Adapter\Test();
+        $client = new \Zend\Http\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
@@ -306,6 +307,9 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
 
     public function testRunThrowsExceptionWhenNoImageIdPassedIn()
     {
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Ec2\Exception\InvalidArgumentException',
+            'No Image Id Provided');
         $arrStart = array(
             'maxStart' => 3,
             'keyName'   => 'example-key-name',
@@ -318,12 +322,7 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
             'blockDeviceName'       => '/dev/sdv'
         );
 
-        try {
-            $return = $this->instance->run($arrStart);
-            $this->fail('Exception should be thrown when no image id is passed into the run commmand');
-        } catch (\Zend\Service\Amazon\Ec2\Exception $zsaee) {
-            $this->assertEquals('No Image Id Provided', $zsaee->getMessage());
-        }
+        $return = $this->instance->run($arrStart);
     }
 
     public function testRunOneSecurityGroup()

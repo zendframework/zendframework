@@ -70,14 +70,14 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingUnknownStringClassForConfigurationRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'invalid');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Configuration class provided is invalid; not found');
         $manager = new SessionManager('foobarbazbat');
     }
 
     public function testPassingInvalidStringClassForConfigurationRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'invalid');
-        $manager = new SessionManager('Zend\\Session\\Storage\\ArrayStorage');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Configuration type provided is invalid; must implement Zend\Session\Configuration');
+        $manager = new SessionManager('Zend\Session\Storage\ArrayStorage');
     }
 
     public function testPassingValidStringClassForConfigurationInstantiatesThatConfiguration()
@@ -96,7 +96,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidStringClassInClassKeyOfArrayConfigurationRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'invalid');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Class provided for configuration is invalid; not found');
         $manager = new SessionManager(array('class' => 'foobarbaz'));
     }
 
@@ -268,7 +268,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetNameRaisesExceptionOnInvalidName()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'invalid characters');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Name provided contains invalid characters; must be alphanumeric only');
         $this->manager->setName('foo bar!');
     }
 
@@ -299,7 +299,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingNameWhenAnActiveSessionExistsRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'already started');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Cannot set session name after a session has already started');
         $this->manager->start();
         $this->manager->setName('foobar');
     }
@@ -309,6 +309,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDestroyByDefaultSendsAnExpireCookie()
     {
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('Xdebug required for this test');
+        }
+        
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -330,6 +334,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendingFalseToSendExpireCookieWhenCallingDestroyShouldNotSendCookie()
     {
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('Xdebug required for this test');
+        }
+        
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -433,6 +441,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingIdAfterSessionStartedShouldSendExpireCookie()
     {
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('Xdebug required for this test');
+        }
+        
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -465,6 +477,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegeneratingIdAfterSessionStartedShouldSendExpireCookie()
     {
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('Xdebug required for this test');
+        }
+        
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -486,6 +502,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRememberMeShouldSendNewSessionCookieWithUpdatedTimestamp()
     {
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('Xdebug required for this test');
+        }
+        
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -513,6 +533,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRememberMeShouldSetTimestampBasedOnConfigurationByDefault()
     {
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('Xdebug required for this test');
+        }
+        
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $config->setRememberMeSeconds(3600);
@@ -544,6 +568,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testForgetMeShouldSendCookieWithZeroTimestamp()
     {
+        if (!extension_loaded('xdebug')) {
+            $this->markTestSkipped('Xdebug required for this test');
+        }
+        
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -565,11 +593,11 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testStartingSessionThatFailsAValidatorShouldRaiseException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'failed');
         $chain = $this->manager->getValidatorChain();
         $chain->connect('session.validate', function() {
              return false;
         });
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'xxx');
         $this->manager->start();
     }
 }

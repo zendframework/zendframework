@@ -25,7 +25,7 @@
 namespace Zend\Session\Configuration;
 
 use Zend\Validator\Hostname\Hostname as HostnameValidator,
-    Zend\Session\Exception as SessionException;
+    Zend\Session\Exception;
 
 /**
  * Session configuration proxying to session INI options 
@@ -178,7 +178,7 @@ class SessionConfiguration extends StandardConfiguration
         ini_set('session.save_handler', $saveHandler);
         restore_error_handler();
         if ($this->_phpErrorCode >= E_WARNING) {
-            throw new SessionException('Invalid save handler specified');
+            throw new Exception\InvalidArgumentException('Invalid save handler specified');
         }
 
         $this->setOption('save_handler', $saveHandler);
@@ -200,7 +200,7 @@ class SessionConfiguration extends StandardConfiguration
         ini_set('session.serialize_handler', $serializeHandler);
         restore_error_handler();
         if ($this->_phpErrorCode >= E_WARNING) {
-            throw new SessionException('Invalid serialize handler specified');
+            throw new Exception\InvalidArgumentException('Invalid serialize handler specified');
         }
 
         $this->_serializeHandler = (string) $serializeHandler;
@@ -213,7 +213,7 @@ class SessionConfiguration extends StandardConfiguration
     {
         $cacheLimiter = (string) $cacheLimiter;
         if (!in_array($cacheLimiter, $this->_validCacheLimiters)) {
-            throw new SessionException('Invalid cache limiter provided');
+            throw new Exception\InvalidArgumentException('Invalid cache limiter provided');
         }
         $this->setOption('cache_limiter', $cacheLimiter);
         ini_set('session.cache_limiter', $cacheLimiter);
@@ -250,7 +250,7 @@ class SessionConfiguration extends StandardConfiguration
         $hashFunction = (string) $hashFunction;
         $validHashFunctions = $this->_getHashFunctions();
         if (!in_array($hashFunction, $this->_getHashFunctions(), true)) {
-            throw new SessionException('Invalid hash function provided');
+            throw new Exception\InvalidArgumentException('Invalid hash function provided');
         }
 
         $this->setOption('hash_function', $hashFunction);
@@ -270,7 +270,7 @@ class SessionConfiguration extends StandardConfiguration
         if (!is_numeric($hashBitsPerCharacter)
             || !in_array($hashBitsPerCharacter, $this->_validHashBitsPerCharacters)
         ) {
-            throw new SessionException('Invalid hash bits per character provided');
+            throw new Exception\InvalidArgumentException('Invalid hash bits per character provided');
         }
 
         $hashBitsPerCharacter = (int) $hashBitsPerCharacter;

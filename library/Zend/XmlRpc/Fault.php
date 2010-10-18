@@ -197,14 +197,14 @@ class Fault
     public function loadXml($fault)
     {
         if (!is_string($fault)) {
-            throw new Exception('Invalid XML provided to fault');
+            throw new Exception\InvalidArgumentException('Invalid XML provided to fault');
         }
 
         try {
             $xml = new \SimpleXMLElement($fault);
         } catch (\Exception $e) {
             // Not valid XML
-            throw new Exception('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
+            throw new Exception\InvalidArgumentException('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
         }
 
         // Check for fault
@@ -215,7 +215,7 @@ class Fault
 
         if (!$xml->fault->value->struct) {
             // not a proper fault
-            throw new Exception('Invalid fault structure', 500);
+            throw new Exception\InvalidArgumentException('Invalid fault structure', 500);
         }
 
         $structXml = $xml->fault->value->asXML();
@@ -230,7 +230,7 @@ class Fault
         }
 
         if (empty($code) && empty($message)) {
-            throw new Exception('Fault code and string required');
+            throw new Exception\InvalidArgumentException('Fault code and string required');
         }
 
         if (empty($code)) {

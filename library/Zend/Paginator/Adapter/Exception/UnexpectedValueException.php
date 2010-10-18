@@ -13,44 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ * @package    Zend\Paginator\Adapter
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\Paginator\Adapter;
-use Zend\Paginator\Adapter;
+namespace Zend\Paginator\Adapter\Exception;
 
 /**
+ * @uses       Zend\Paginator\Adapter\Exception
  * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
+ * @package    Zend\Paginator\Adapter
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Paginator
  */
-class DbTableSelectTest extends \ZendTest\Paginator\Adapter\DbSelectTest
-{
-    /**
-     * @group ZF-3775
-     */
-    public function testSelectDoesReturnZendDbTableRowset()
-    {
-        $query   = $this->_table->select();
-        $adapter = new Adapter\DbTableSelect($query);
-        $items   = $adapter->getItems(0, 10);
-
-        $this->assertType('Zend\Db\Table\Rowset', $items);
-    }
-
-    public function testToJsonWithRowset()
-    {
-        $query   = $this->_table->select();
-        $paginator = new \Zend\Paginator\Paginator(new Adapter\DbTableSelect($query));
-        $this->assertGreaterThan(2, strlen($paginator->toJson()));
-    }
-}
+class UnexpectedValueException extends \UnexpectedValueException implements \Zend\Paginator\Adapter\Exception
+{}

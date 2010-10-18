@@ -16,7 +16,6 @@
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -28,7 +27,7 @@ use Zend\Paginator\Adapter;
 
 /**
  * @uses       \Zend\Paginator\Adapter
- * @uses       \Zend\Paginator\Exception
+ * @uses       \Zend\Paginator\Adapter\Exception
  * @uses       \Zend\Paginator\SerializableLimitIterator
  * @category   Zend
  * @package    Zend_Paginator
@@ -55,12 +54,12 @@ class Iterator implements Adapter
      * Constructor.
      *
      * @param  Iterator $iterator Iterator to paginate
-     * @throws \Zend\Paginator\Exception
+     * @throws \Zend\Paginator\Adapter\Exception
      */
     public function __construct(\Iterator $iterator)
     {
         if (!$iterator instanceof \Countable) {
-            throw new \Zend\Paginator\Exception('Iterator must implement Countable');
+            throw new Exception\InvalidArgumentException('Iterator must implement Countable');
         }
 
         $this->_iterator = $iterator;

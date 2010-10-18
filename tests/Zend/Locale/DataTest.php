@@ -23,7 +23,7 @@
 namespace ZendTest\Locale;
 
 use Zend\Locale\Data,
-    Zend\Locale\Exception as LocaleException,
+    Zend\Locale\Exception\InvalidArgumentException,
     Zend\Locale\Locale,
     Zend\Cache\Cache;
 
@@ -65,7 +65,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Data::getList('nolocale','language');
             $this->fail('locale should throw exception');
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -83,14 +83,14 @@ class DataTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Data::getContent('de','');
             $this->fail('content should throw an exception');
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
         try {
             $value = Data::getContent('de','xxxxxxx');
             $this->fail('content should throw an exception');
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
     }

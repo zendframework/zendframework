@@ -23,7 +23,7 @@
 namespace ZendTest\Locale;
 
 use \Zend\Locale\Format,
-    \Zend\Locale\Exception as LocaleException,
+    \Zend\Locale\Exception\InvalidArgumentException,
     \Zend\Locale\Locale,
     \Zend\Locale\Data;
 
@@ -143,7 +143,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getFloat('nocontent');
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -319,7 +319,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('no content');
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
         $this->assertTrue(is_array(Format::getDate('10.10.06')));
@@ -343,7 +343,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('2006.13.01', array('date_format' => 'dd.MM.yy'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -355,7 +355,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('2006.01.13', array('date_format' => 'dd.MM.yy'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -387,7 +387,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('November 10 2006', array('date_format' => 'dd.MMM.yy', 'locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -400,7 +400,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('Nov 10 2006', array('date_format' => 'dd.MMM.yy', 'locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -413,7 +413,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('2006 10 Nov', array('date_format' => 'dd.MMM.yy', 'locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -450,7 +450,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('2006.13.01', array('locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -462,7 +462,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('2006.01.13', array('locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -494,7 +494,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('November 10 2006', array('locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -506,7 +506,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('April 10 2006', array('locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -518,7 +518,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('Nov 10 2006', array('locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -531,7 +531,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('Nov 10 2006', array('locale' => 'de_AT'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->assertRegexp('/unable.to.parse/i', $e->getMessage());
             // success
         }
@@ -553,7 +553,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDate('13.2006.11', array('date_format' => 'dd.MM.yy'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -591,7 +591,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getTime('no content');
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -605,14 +605,14 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getTime('13:14:55', array('date_format' => 'nocontent'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
         try {
             $value = Format::getTime('13:14:55', array('date_format' => 'ZZZZ'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -684,14 +684,14 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::convertNumerals('١١٠', 'xxxx');
             $this->fail("no conversion expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
         try {
             $value = Format::convertNumerals('١١٠', 'Arab', 'xxxx');
             $this->fail("no conversion expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -757,13 +757,13 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $this->assertTrue(Format::setOptions(array('format_type' => 'xxx')));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
         try {
             $this->assertTrue(Format::setOptions(array('myformat' => 'xxx')));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -774,7 +774,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $this->assertFalse(Format::setOptions(array('number_format' => array('x' => 'x'))));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -785,13 +785,13 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $this->assertFalse(Format::setOptions(array('date_format' => array('x' => 'x'))));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
         try {
             $this->assertFalse(is_array(Format::setOptions(array('fix_date' => 'no'))));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -802,13 +802,13 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $this->assertFalse(is_array(Format::setOptions(array('locale' => 'nolocale'))));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
         try {
             $this->assertFalse(is_array(Format::setOptions(array('precision' => 50))));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
         // test interaction between class-wide default date format and using locale's default format
@@ -816,25 +816,25 @@ class FormatTest extends \PHPUnit_Framework_TestCase
             $result = array('date_format' => 'MMM d, y', 'locale' => 'en_US', 'month' => '7',
                     'day' => '4', 'year' => '2007');
             Format::setOptions(array('format_type' => 'iso', 'date_format' => 'MMM d, y', 'locale' => 'en_US')); // test setUp
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         try {
             // uses global date_format with global locale
             $this->assertSame($result, Format::getDate('July 4, 2007'));
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         try {
             // uses global date_format with given locale
             $this->assertSame($result, Format::getDate('July 4, 2007', array('locale' => 'en_US')));
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         try {
             // sets a new global date format
             Format::setOptions(array('date_format' => 'M-d-y'));
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         try {
@@ -844,7 +844,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
             $this->assertSame($expected['year'],  $result['year'] );
             $this->assertSame($expected['month'], $result['month']);
             $this->assertSame($expected['day'],   $result['day']  );
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         try {
@@ -852,7 +852,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
             // uses given local with standard format from this locale
             $this->assertSame($result,
                 Format::getDate('July 4, 2007', array('locale' => 'en_US', 'date_format' => null)));
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         try {
@@ -860,7 +860,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
             $this->assertSame($result,
                 Format::getDate('July 4, 2007',
                     array('locale' => 'en_US', 'date_format' => Format::STANDARD)));
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         try {
@@ -868,7 +868,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
             $expect = Format::getDate('July 4, 2007', array('locale' => Format::STANDARD));
             $testlocale = new Locale();
             $this->assertEquals($testlocale->toString(), $expect['locale']);
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->fail("exception expected");
         }
         Format::setOptions(array('date_format' => null, 'locale' => null)); // test tearDown
@@ -968,7 +968,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDateTime('no content');
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
@@ -982,14 +982,14 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         try {
             $value = Format::getDateTime('15.10.09 13:14:55', array('date_format' => 'nocontent'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 
         try {
             $value = Format::getDateTime('15.10.09 13:14:55', array('date_format' => 'ZZZZ'));
             $this->fail("exception expected");
-        } catch (LocaleException $e) {
+        } catch (InvalidArgumentException $e) {
             // success
         }
 

@@ -49,7 +49,7 @@ class ReflectionExtension extends \ReflectionExtension
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass($phpReflection->getName());
             if (!$instance instanceof ReflectionFunction) {
-                throw new Exception('Invalid reflection class provided; must extend Zend_Reflection_Function');
+                throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend_Reflection_Function');
             }
             $zendReflections[] = $instance;
             unset($phpReflection);
@@ -71,7 +71,7 @@ class ReflectionExtension extends \ReflectionExtension
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass($phpReflection->getName());
             if (!$instance instanceof ReflectionClass) {
-                throw new Exception('Invalid reflection class provided; must extend Zend_Reflection_Class');
+                throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend_Reflection_Class');
             }
             $zendReflections[] = $instance;
             unset($phpReflection);

@@ -45,11 +45,11 @@ class ReflectionFunction extends \ReflectionFunction
     public function getDocblock($reflectionClass = '\Zend\Reflection\ReflectionDocblock')
     {
         if ('' == ($comment = $this->getDocComment())) {
-            throw new Exception($this->getName() . ' does not have a docblock');
+            throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
         }
         $instance = new $reflectionClass($comment);
         if (!$instance instanceof ReflectionDocblock) {
-            throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionDocblock');
+            throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Reflection\ReflectionDocblock');
         }
         return $instance;
     }
@@ -102,7 +102,7 @@ class ReflectionFunction extends \ReflectionFunction
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass($this->getName(), $phpReflection->getName());
             if (!$instance instanceof ReflectionParameter) {
-                throw new Exception('Invalid reflection class provided; must extend Zend_Reflection_Parameter');
+                throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend_Reflection_Parameter');
             }
             $zendReflections[] = $instance;
             unset($phpReflection);
@@ -120,7 +120,7 @@ class ReflectionFunction extends \ReflectionFunction
     {
         $docblock = $this->getDocblock();
         if (!$docblock->hasTag('return')) {
-            throw new Exception('Function does not specify an @return annotation tag; cannot determine return type');
+            throw new Exception\InvalidArgumentException('Function does not specify an @return annotation tag; cannot determine return type');
         }
         $tag    = $docblock->getTag('return');
         $return = ReflectionDocblockTag::factory('@return ' . $tag->getDescription());

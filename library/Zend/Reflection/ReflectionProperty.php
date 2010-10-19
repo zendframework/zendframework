@@ -45,7 +45,7 @@ class ReflectionProperty extends \ReflectionProperty
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new $reflectionClass($phpReflection->getName());
         if (!$zendReflection instanceof ReflectionClass) {
-            throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionClass');
+            throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Reflection\ReflectionClass');
         }
         unset($phpReflection);
         return $zendReflection;
@@ -66,7 +66,7 @@ class ReflectionProperty extends \ReflectionProperty
 
         $r = new $reflectionClass($docblock);
         if (!$r instanceof ReflectionDocblock) {
-            throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionDocblock');
+            throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Reflection\ReflectionDocblock');
         }
         return $r;
     }

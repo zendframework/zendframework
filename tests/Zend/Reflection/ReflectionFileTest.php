@@ -44,14 +44,11 @@ class ReflectionFileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($reflectionFile), 'Zend\Reflection\ReflectionFile');
     }
 
-    /**
-     * @expectedException Zend\Reflection\Exception
-     */
     public function testFileConstructorThrowsExceptionOnNonExistentFile()
     {
         $nonExistentFile = 'Non/Existent/File.php';
+        $this->setExpectedException('Zend\Reflection\Exception\RuntimeException', 'File Non/Existent/File.php must be required before it can be reflected');
         $reflectionFile = new Reflection\ReflectionFile($nonExistentFile);
-        $this->fail('Exception should have been thrown');
     }
 
     public function testFileGetClassReturnsClassReflectionObject()
@@ -73,17 +70,15 @@ class ReflectionFileTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    /**
-     * @expectedException Zend\Reflection\Exception
-     */
     public function testFileGetClassThrowsExceptionOnNonExistentClassName()
     {
         $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';
         include_once $fileToReflect;
         $reflectionFile = new Reflection\ReflectionFile($fileToReflect);
         $nonExistentClass = 'Some_Non_Existent_Class';
+        
+        $this->setExpectedException('Zend\Reflection\Exception\InvalidArgumentException', 'Class by name Some_Non_Existent_Class not found');
         $reflectionFile->getClass($nonExistentClass);
-        $this->fail('Exception should have been thrown');
     }
 
     public function testFileReflectorRequiredFunctionsDoNothing()

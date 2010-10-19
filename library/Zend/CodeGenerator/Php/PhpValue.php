@@ -328,7 +328,7 @@ class PhpValue extends AbstractPhp
                 break;
             case self::TYPE_OTHER:
             default:
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     "Type '".get_class($value)."' is unknown or cannot be used as property default value."
                 );
         }

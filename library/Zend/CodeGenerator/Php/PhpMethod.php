@@ -135,7 +135,7 @@ class PhpMethod extends PhpMember\AbstractMember
         } elseif ($parameter instanceof PhpParameter) {
             $parameterName = $parameter->getName();
         } else {
-            throw new Exception('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
+            throw new Exception\InvalidArgumentException('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
         }
 
         $this->_parameters[$parameterName] = $parameter;

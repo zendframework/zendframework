@@ -149,7 +149,7 @@ class PhpDocblock extends AbstractPhp
         if (is_array($tag)) {
             $tag = new PhpDocblockTag($tag);
         } elseif (!$tag instanceof PhpDocblockTag) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'setTag() expects either an array of method options or an '
                 . 'instance of Zend_CodeGenerator_Php_Docblock_Tag'
                 );

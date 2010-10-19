@@ -180,7 +180,7 @@ class PhpClass extends AbstractPhp
         if (is_array($docblock)) {
             $docblock = new PhpDocblock($docblock);
         } elseif (!$docblock instanceof PhpDocblock) {
-            throw new Exception('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
+            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
 
         $this->_docblock = $docblock;
@@ -342,11 +342,11 @@ class PhpClass extends AbstractPhp
         } elseif ($property instanceof PhpProperty) {
             $propertyName = $property->getName();
         } else {
-            throw new Exception('setProperty() expects either an array of property options or an instance of Zend_CodeGenerator_Php_Property');
+            throw new Exception\InvalidArgumentException('setProperty() expects either an array of property options or an instance of Zend_CodeGenerator_Php_Property');
         }
 
         if (isset($this->_properties[$propertyName])) {
-            throw new Exception('A property by name ' . $propertyName . ' already exists in this class.');
+            throw new Exception\InvalidArgumentException('A property by name ' . $propertyName . ' already exists in this class.');
         }
 
         $this->_properties[$propertyName] = $property;
@@ -418,11 +418,11 @@ class PhpClass extends AbstractPhp
         } elseif ($method instanceof PhpMethod) {
             $methodName = $method->getName();
         } else {
-            throw new Exception('setMethod() expects either an array of method options or an instance of Zend\CodeGenerator\Php\Method');
+            throw new Exception\InvalidArgumentException('setMethod() expects either an array of method options or an instance of Zend\CodeGenerator\Php\Method');
         }
 
         if (isset($this->_methods[$methodName])) {
-            throw new Exception('A method by name ' . $methodName . ' already exists in this class.');
+            throw new Exception\InvalidArgumentException('A method by name ' . $methodName . ' already exists in this class.');
         }
 
         $this->_methods[$methodName] = $method;

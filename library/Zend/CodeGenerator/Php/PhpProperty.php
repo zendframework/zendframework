@@ -158,7 +158,7 @@ class PhpProperty extends PhpMember\AbstractMember
 
         if ($this->isConst()) {
             if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
-                throw new Exception('The property ' . $this->_name . ' is said to be '
+                throw new Exception\RuntimeException('The property ' . $this->_name . ' is said to be '
                     . 'constant but does not have a valid constant value.');
             }
             $output .= $this->_indentation . 'const ' . $name . ' = '

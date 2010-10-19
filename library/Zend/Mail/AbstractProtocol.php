@@ -133,7 +133,7 @@ abstract class AbstractProtocol
     public function __construct($host = '127.0.0.1', $port = null)
     {
         $this->_validHost = new Validator\ValidatorChain();
-        $this->_validHost->addValidator(new HostnameValidator\Hostname(HostnameValidator\Hostname::ALLOW_ALL));
+        $this->_validHost->addValidator(new HostnameValidator(HostnameValidator::ALLOW_ALL));
 
         if (!$this->_validHost->isValid($host)) {
             throw new Protocol\Exception(join(', ', $this->_validHost->getMessages()));

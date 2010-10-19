@@ -26,6 +26,7 @@
 namespace Zend\Mail\Storage\Folder;
 
 use Zend\Mail\Storage\MailFolder,
+    Zend\Mail\Storage\Folder,
     Zend\Mail\Storage;
 
 /**

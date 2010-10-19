@@ -370,23 +370,23 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Writable\Maildir($this->_params);
 
-        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN));
+        $mail->setFlags(1, array(Storage::FLAG_SEEN));
         $message = $mail->getMessage(1);
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_SEEN));
+        $this->assertFalse($message->hasFlag(Storage::FLAG_FLAGGED));
 
-        $mail->setFlags(1, array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_FLAGGED));
+        $mail->setFlags(1, array(Storage::FLAG_SEEN, Storage::FLAG_FLAGGED));
         $message = $mail->getMessage(1);
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_SEEN));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_FLAGGED));
 
-        $mail->setFlags(1, array(Storage\Storage::FLAG_FLAGGED));
+        $mail->setFlags(1, array(Storage::FLAG_FLAGGED));
         $message = $mail->getMessage(1);
-        $this->assertFalse($message->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertTrue($message->hasFlag(Storage\Storage::FLAG_FLAGGED));
+        $this->assertFalse($message->hasFlag(Storage::FLAG_SEEN));
+        $this->assertTrue($message->hasFlag(Storage::FLAG_FLAGGED));
 
         try {
-            $mail->setFlags(1, array(Storage\Storage::FLAG_RECENT));
+            $mail->setFlags(1, array(Storage::FLAG_RECENT));
         } catch (\Exception $e) {
             return; // ok
         }
@@ -399,7 +399,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         unlink($this->_params['dirname'] . 'cur/1000000000.P1.example.org:2,S');
 
         try {
-            $mail->setFlags(1, array(Storage\Storage::FLAG_FLAGGED));
+            $mail->setFlags(1, array(Storage::FLAG_FLAGGED));
         } catch (\Exception $e) {
             return; // ok
         }

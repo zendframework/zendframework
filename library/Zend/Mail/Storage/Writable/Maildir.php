@@ -187,7 +187,7 @@ class Maildir extends MaildirFolder implements Writable
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'tmp');
 
         $localName = $parent ? substr($folder, strlen($parent) + 1) : $folder;
-        $this->getFolders($parent)->$localName = new Folder\Folder($localName, $folder, true);
+        $this->getFolders($parent)->$localName = new Folder($localName, $folder, true);
 
         return $fulldir;
     }
@@ -420,7 +420,7 @@ class Maildir extends MaildirFolder implements Writable
     {
         // accessing keys is easier, faster and it removes duplicated flags
         $wanted_flags = array_flip($flags);
-        if (isset($wanted_flags[StorageStorage::FLAG_RECENT])) {
+        if (isset($wanted_flags[Storage::FLAG_RECENT])) {
             throw new StorageException('recent flag may not be set');
         }
 

@@ -37,6 +37,6 @@ namespace Zend\Test\PHPUnit\Constraint\Exception;
  */
 class ConstraintException 
 	extends \PHPUnit_Framework_ExpectationFailedException
-	implements \Zend\Test\PHPUnit\Contraint\Exception
+	implements \Zend\Test\PHPUnit\Constraint\Exception
 {
 }

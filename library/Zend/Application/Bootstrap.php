@@ -130,10 +130,12 @@ class Bootstrap extends AbstractBootstrap
         ) {
             $r    = new \ReflectionClass($this);
             $path = $r->getFileName();
-            $this->setResourceLoader(new ModuleAutoloader(array(
+            $autoloader = new ModuleAutoloader(array(
                 'namespace' => $namespace,
                 'basePath'  => dirname($path),
-            )));
+            ));
+            $autoloader->register();
+            $this->setResourceLoader$autoloader();
         }
         return $this->_resourceLoader;
     }

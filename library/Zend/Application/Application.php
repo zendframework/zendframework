@@ -188,6 +188,10 @@ class Application
                 }
 
                 $this->setBootstrap($path, $class);
+
+                if (isset($bootstrap['broker'])) {
+                    $this->getBootstrap()->setBroker($bootstrap['broker']);
+                }
             } else {
                 throw new Exception('Invalid bootstrap information provided');
             }

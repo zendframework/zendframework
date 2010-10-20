@@ -30,7 +30,7 @@ use Zend\Loader\PluginSpecBroker;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResourceBroker extends PluginSpecBroker
+class ResourceBroker extends PluginSpecBroker implements BootstrapAware
 {
     /**
      * @var string Default plugin loading strategy
@@ -50,7 +50,7 @@ class ResourceBroker extends PluginSpecBroker
      * @param  ResourceBootstrapper $bootstrap 
      * @return ResourceBroker
      */
-    public function setBootstrap(ResourceBootstrapper $bootstrap)
+    public function setBootstrap(Bootstrapper $bootstrap)
     {
         $this->bootstrap = $bootstrap;
         return $this;

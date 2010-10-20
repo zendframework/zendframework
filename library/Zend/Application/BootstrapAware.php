@@ -14,10 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Application
- * @subpackage Resource
+ * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,45 +25,28 @@
 namespace Zend\Application;
 
 /**
- * Interface for bootstrap resources
+ * Interface indicating a class is "bootstrap-aware"
  *
  * @category   Zend
  * @package    Zend_Application
- * @subpackage Resource
+ * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Resource extends BootstrapAware
+class BootstrapAware
 {
     /**
-     * Constructor
-     *
-     * Must take an optional single argument, $options.
-     *
-     * @param  mixed $options
-     * @return void
+     * Attach bootstrap instance
+     * 
+     * @param  Bootstrapper $bootstrap 
+     * @return BootstrapAware
      */
-    public function __construct($options = null);
+    public function setBootstrap(Bootstrapper $bootstrap);
 
     /**
-     * Set resource options
-     *
-     * @param  array $options
-     * @return \Zend\Application\Resource
+     * Retrieve attached bootstrap instance
+     * 
+     * @return null|Bootstrapper
      */
-    public function setOptions(array $options);
-
-    /**
-     * Retrieve resource options
-     *
-     * @return array
-     */
-    public function getOptions();
-
-    /**
-     * Strategy pattern: initialize resource
-     *
-     * @return mixed
-     */
-    public function init();
+    public function getBootstrap();
 }

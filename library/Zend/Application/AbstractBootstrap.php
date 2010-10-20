@@ -270,6 +270,21 @@ abstract class AbstractBootstrap
      */
     public function setBroker(ResourceBroker $broker)
     {
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception(sprintf(
+                    'Resource broker of class "%s" not found',
+                    $broker
+                ));
+            }
+            $broker = new $broker();
+        }
+        if (!$broker instanceof ResourceBroker) {
+            throw new Exception(sprintf(
+                'Broker must implement ResourceBroker; received "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
         $broker->setBootstrap($this);
         $this->broker = $broker;
         return $this;

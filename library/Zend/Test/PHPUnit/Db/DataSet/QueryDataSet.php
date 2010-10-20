@@ -51,7 +51,7 @@ class QueryDataSet extends \PHPUnit_Extensions_Database_DataSet_QueryDataSet
     {
         if( !($databaseConnection instanceof \Zend\Test\PHPUnit\Db\Connection) ) {
             throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
-            	"Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-"
+            	"Zend\Test\PHPUnit\Db\DataSet\QueryDataSet only works with Zend\Test\PHPUnit\Db\Connection connections-"
             );
         }
         $this->databaseConnection = $databaseConnection;

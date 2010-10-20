@@ -52,7 +52,7 @@ class QueryTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
     {
         if( !($databaseConnection instanceof \Zend\Test\PHPUnit\Db\Connection) ) {
             throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
-            	"Zend_Test_PHPUnit_Db_DataSet_QueryTable only works with Zend_Test_PHPUnit_Db_Connection connections-"
+            	"Zend\Test\PHPUnit\Db\DataSet\QueryTable only works with Zend\Test\PHPUnit\Db\Connection connections-"
             );
         }
         parent::__construct($tableName, $query, $databaseConnection);

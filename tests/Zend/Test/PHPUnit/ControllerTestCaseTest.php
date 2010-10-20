@@ -311,52 +311,52 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         try {
             $this->testCase->assertNotQuery('div#foo legend.bar');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertQuery('div#foo legend.bogus');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertNotQueryContentContains('legend.bat', 'La di da');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertQueryContentContains('legend.bat', 'La do da');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertNotQueryContentRegex('legend.bat', '/d[a|i]/i');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertQueryContentRegex('legend.bat', '/d[o|e]/i');
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertQueryCountMin('div#foo legend.bar', 3);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertQueryCount('div#foo legend.bar', 1);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertQueryCountMin('div#foo legend.bar', 3);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertQueryCountMax('div#foo legend.bar', 1);
             $this->fail('Invalid assertions should throw exceptions');
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
     }
 
@@ -385,52 +385,52 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         try {
             $this->testCase->assertNotXpath("//div[@id='foo']//legend[contains(@class, 'bar')]");
             $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertXpath("//div[@id='foo']//legend[contains(@class, 'bogus')]");
             $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bogus')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertNotXpathContentContains("//legend[contains(@class, 'bat')]", "La di da");
             $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertXpathContentContains("//legend[contains(@class, 'bat')]", 'La do da');
             $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertNotXpathContentRegex("//legend[contains(@class, 'bat')]", '/d[a|i]/i');
             $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertXpathContentRegex("//legend[contains(@class, 'bat')]", '/d[o|e]/i');
             $this->fail("Invalid assertions should throw exceptions; assertion against //legend[contains(@class, 'bat')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 3);
             $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertXpathCount("//div[@id='foo']//legend[contains(@class, 'bar')]", 1);
             $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertXpathCountMin("//div[@id='foo']//legend[contains(@class, 'bar')]", 3);
             $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
         try {
             $this->testCase->assertXpathCountMax("//div[@id='foo']//legend[contains(@class, 'bar')]", 1);
             $this->fail("Invalid assertions should throw exceptions; assertion against //div[@id='foo']//legend[contains(@class, 'bar')] failed");
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
         }
     }
 
@@ -469,49 +469,49 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         try {
             $this->testCase->assertResponseCode(500);
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotResponseCode(200);
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeader('Content-Type');
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeader('X-Bogus');
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeaderContains('Content-Type', 'my-foo');
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeaderContains('Content-Type', 'my-bar');
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertNotHeaderRegex('Content-Type', '#^[a-z-]+/[a-z-]+$#i');
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
         try {
             $this->testCase->assertHeaderRegex('Content-Type', '#^\d+#i');
             $this->fail();
-        } catch (Constraint\Exception $e) {
+        } catch (Constraint\Exception\ConstraintException $e) {
             $this->assertContains('Failed', $e->getMessage());
         }
     }

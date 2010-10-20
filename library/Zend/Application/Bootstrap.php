@@ -65,15 +65,21 @@ class Bootstrap extends AbstractBootstrap
     {
         parent::__construct($application);
 
+        $options = array();
         if ($application->hasOption('resourceloader')) {
-            $this->setOptions(array(
-                'resourceloader' => $application->getOption('resourceloader')
-            ));
+            $options['resourceloader'] = $application->getOption('resourceloader');
         }
+        if ($application->hasOption('resource_broker')) {
+            $options['broker'] = $application->getOption('resource_broker');
+        }
+
+        $this->setOptions($options);
+
         $this->getResourceLoader();
 
-        if (!$this->hasPluginResource('frontcontroller')) {
-            $this->registerPluginResource('frontcontroller');
+        $broker = $this->getBroker();
+        if (!$broker->hasPlugin('frontcontroller')) {
+            $broker->registerSpec('frontcontroller');
         }
     }
 
@@ -135,7 +141,7 @@ class Bootstrap extends AbstractBootstrap
                 'basePath'  => dirname($path),
             ));
             $autoloader->register();
-            $this->setResourceLoader$autoloader();
+            $this->setResourceLoader($autoloader);
         }
         return $this->_resourceLoader;
     }

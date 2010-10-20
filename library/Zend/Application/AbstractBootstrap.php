@@ -268,7 +268,7 @@ abstract class AbstractBootstrap
      * @param  ResourceBroker $broker 
      * @return AbstractBootstrap
      */
-    public function setBroker(ResourceBroker $broker)
+    public function setBroker($broker)
     {
         if (is_string($broker)) {
             if (!class_exists($broker)) {
@@ -279,9 +279,11 @@ abstract class AbstractBootstrap
             }
             $broker = new $broker();
         }
-        if (!$broker instanceof ResourceBroker) {
+        if (!$broker instanceof LazyLoadingBroker 
+            || !$broker instanceof BootstrapAware
+        ) {
             throw new Exception(sprintf(
-                'Broker must implement ResourceBroker; received "%s"',
+                'Broker must implement LazyLoadingBroker and BootstrapAware; received argument of type "%s"',
                 (is_object($broker) ? get_class($broker) : gettype($broker))
             ));
         }

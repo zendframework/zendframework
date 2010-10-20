@@ -41,10 +41,10 @@ interface ResourceBootstrapper
     /**
      * Set plugin broker to use to fetch resources
      *
-     * @param  \Zend\Loader\LazyLoadingBroker $loader
+     * @param  \Zend\Loader\LazyLoadingBroker $broker
      * @return \Zend\Application\ResourceBootstrapper
      */
-    public function setBroker(LazyLoadingBroker $loader);
+    public function setBroker($broker);
 
     /**
      * Retrieve plugin broker for resources

@@ -25,7 +25,6 @@
 namespace Zend\Application;
 
 /**
- * @uses       \Zend\Loader\Autoloader
  * @category   Zend
  * @package    Zend_Application
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -36,7 +35,7 @@ class Application
     /**
      * Autoloader to use
      *
-     * @var \Zend\Loader\Autoloader
+     * @var \Zend\Loader\SplAutoloader
      */
     protected $_autoloader;
 
@@ -83,8 +82,12 @@ class Application
     {
         $this->_environment = (string) $environment;
 
-        require_once 'Zend/Loader/Autoloader.php';
-        $this->_autoloader = \Zend\Loader\Autoloader::getInstance();
+        /**
+         * @todo Make this configurable?
+         */
+        require_once __DIR__ . '/../Loader/StandardAutoloader.php';
+        $this->_autoloader = new \Zend\Loader\StandardAutoloader();
+        $this->_autoloader->register();
 
         if (null !== $options) {
             if (is_string($options)) {
@@ -188,10 +191,6 @@ class Application
                 }
 
                 $this->setBootstrap($path, $class);
-
-                if (isset($bootstrap['broker'])) {
-                    $this->getBootstrap()->setBroker($bootstrap['broker']);
-                }
             } else {
                 throw new Exception('Invalid bootstrap information provided');
             }

@@ -86,8 +86,9 @@ class Application
          * @todo Make this configurable?
          */
         require_once __DIR__ . '/../Loader/StandardAutoloader.php';
-        $this->_autoloader = new \Zend\Loader\StandardAutoloader();
-        $this->_autoloader->register();
+        $autoloader = new \Zend\Loader\StandardAutoloader();
+        $autoloader->register();
+        $this->setAutoloader($autoloader);
 
         if (null !== $options) {
             if (is_string($options)) {
@@ -115,11 +116,23 @@ class Application
     /**
      * Retrieve autoloader instance
      *
-     * @return \Zend\Loader\Autoloader
+     * @return SplAutoloader
      */
     public function getAutoloader()
     {
         return $this->_autoloader;
+    }
+
+    /**
+     * Set autoloader
+     * 
+     * @param  \Zend\Loader\SplAutoloader $autoloader 
+     * @return Application
+     */
+    public function setAutoloader(\Zend\Loader\SplAutoloader $autoloader)
+    {
+        $this->_autoloader = $autoloader;
+        return $this;
     }
 
     /**

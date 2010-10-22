@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\SimpleDb;
+
+/**
  * @see Zend_Service_Amazon_Exception
  */
 require_once 'Zend/Service/Amazon/Exception.php';
@@ -33,7 +38,7 @@ require_once 'Zend/Service/Amazon/Exception.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_SimpleDb_Page
+class Page
 {
     /** @var string Page data */
     protected $_data;

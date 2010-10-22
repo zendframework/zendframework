@@ -20,6 +20,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\SimpleDb;
+use Zend\HTTP;
+use Zend\Crypt;
+
+/**
  * @see Zend_Service_Amazon_Abstract
  */
 require_once 'Zend/Service/Amazon/Abstract.php';
@@ -56,7 +63,7 @@ require_once 'Zend/Crypt/Hmac.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
+class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
 {
     /* Notes */
     // TODO SSL is required
@@ -108,12 +115,12 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
      */
     public function setEndpoint($endpoint)
     {
-    	if(!($endpoint instanceof Zend_Uri_Http)) {
-    		$endpoint = Zend_Uri::factory($endpoint);
+    	if(!($endpoint instanceof \Zend\URI\URL)) {
+    		$endpoint = \Zend\Uri\Uri::factory($endpoint);
     	}
     	if(!$endpoint->valid()) {
     		require_once 'Zend/Service/Amazon/SimpleDb/Exception.php';
-    		throw new Zend_Service_Amazon_SimpleDb_Exception("Invalid endpoint supplied");
+    		throw new \Zend\Service\Amazon\SimpleDb\Exception("Invalid endpoint supplied");
     	}
     	$this->_endpoint = $endpoint;
     	return $this;
@@ -169,7 +176,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
             if (isset($attributes[$name])) {
                 $attributes[$name]->addValue($data);    
             } else {
-                $attributes[$name] = new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $name, $data);
+                $attributes[$name] = new Attribute($itemName, $name, $data);
             }
         }
         return $attributes;
@@ -307,7 +314,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
         $nextToken     = (string)$nextTokenNode;
         $nextToken     = ''?null:$nextToken;
 
-        return new Zend_Service_Amazon_SimpleDb_Page($data, $nextToken);
+        return new Page($data, $nextToken);
     }
 
     /**
@@ -396,13 +403,13 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
                 foreach ($attribute->Value as $value) {
                     $values[] = (string)$value;
                 }
-                $attributes[$itemName][$attributeName] = new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName, $values);
+                $attributes[$itemName][$attributeName] = new Attribute($itemName, $attributeName, $values);
             }
         }
 
         $nextToken = (string)$xml->NextToken;
 
-        return new Zend_Service_Amazon_SimpleDb_Page($attributes, $nextToken);
+        return new Page($attributes, $nextToken);
     }
     
 	/**
@@ -429,7 +436,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     public function quoteName($name)
     {
     	if (preg_match('/^[a-z_$][a-z0-9_$-]*$/i', $name) == false) {
-    		throw new Zend_Service_Amazon_SimpleDb_Exception("Invalid name: can contain only alphanumeric characters, \$ and _");
+    		throw new \Zend\Service\Amazon\SimpleDb\Exception("Invalid name: can contain only alphanumeric characters, \$ and _");
     	}
     	return "`$name`";
     }
@@ -462,17 +469,17 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
 
 
             $request->setUri($this->getEndpoint());
-            $request->setMethod(Zend_Http_Client::POST);
+            $request->setMethod(HTTP\Client::POST);
             foreach ($params as $key => $value) {
                 $params_out[] = rawurlencode($key)."=".rawurlencode($value);
             }
-            $request->setRawData(join('&', $params_out), Zend_Http_Client::ENC_URLENCODED);
+            $request->setRawData(join('&', $params_out), HTTP\Client::ENC_URLENCODED);
             $httpResponse = $request->request();
-        } catch (Zend_Http_Client_Exception $zhce) {
+        } catch (HTTP\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
-            throw new Zend_Service_Amazon_SimpleDb_Exception($message, $zhce->getCode());
+            throw new \Zend\Service\Amazon\SimpleDb\Exception($message, $zhce->getCode());
         }
-        $response = new Zend_Service_Amazon_SimpleDb_Response($httpResponse);
+        $response = new Response($httpResponse);
         $this->_checkForErrors($response);
         return $response;
     }
@@ -548,7 +555,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
         $data .= implode('&', $arrData);
 
         require_once 'Zend/Crypt/Hmac.php';
-        $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Zend_Crypt_Hmac::BINARY);
+        $hmac = Crypt\HMAC::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\HMAC::BINARY);
 
         return base64_encode($hmac);
     }
@@ -564,15 +571,15 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
      * @throws Zend_Service_Amazon_SimpleDb_Exception if one or more errors are
      *         returned from Amazon.
      */
-    private function _checkForErrors(Zend_Service_Amazon_SimpleDb_Response $response)
+    private function _checkForErrors(Response $response)
     {
-        $xpath = new DOMXPath($response->getDocument());
+        $xpath = new \DOMXPath($response->getDocument());
         $list  = $xpath->query('//Error');
         if ($list->length > 0) {
             $node    = $list->item(0);
             $code    = $xpath->evaluate('string(Code/text())', $node);
             $message = $xpath->evaluate('string(Message/text())', $node);
-            throw new Zend_Service_Amazon_SimpleDb_Exception($message, 0, $code);
+            throw new \Zend\Service\Amazon\SimpleDb\Exception($message, 0, $code);
         }
     }
 }

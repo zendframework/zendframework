@@ -30,11 +30,6 @@ use Zend\Loader\LazyLoadingBroker;
 /**
  * Abstract base class for bootstrap classes
  *
- * @uses       \Zend\Application\Bootstrapper
- * @uses       \Zend\Application\BootstrapException
- * @uses       \Zend\Application\ResourceBootstrapper
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Registry
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Bootstrap
@@ -132,15 +127,25 @@ abstract class AbstractBootstrap
             $methods[$key] = strtolower($method);
         }
 
-        if (array_key_exists('pluginpaths', $options)) {
-            $pluginLoader = $this->getPluginLoader();
+        if (array_key_exists('broker', $options)) {
+            $brokerOption = $options['broker'];
+            unset($options['broker']);
 
-            if ($pluginLoader instanceof PrefixPathMapper) {
-                foreach ($options['pluginpaths'] as $prefix => $path) {
-                    $pluginLoader->addPrefixPath($prefix, $path);
+            if (is_array($brokerOption)) {
+                if (!isset($brokerOption['class'])) {
+                    throw new BootstrapException(
+                        'Broker option must contain a "class" key; none provided'
+                    );
                 }
+                $brokerClass   = $brokerOption['class'];
+                $brokerOptions = $brokerOption['options'] ?: array();
+                $brokerOption  = new $brokerClass($brokerOptions);
+                $this->setBroker($brokerOption);
+                unset($brokerClass, $brokerOptions);
+            } else {
+                $this->setBroker($brokerOption);
             }
-            unset($options['pluginpaths']);
+            unset($brokerOption);
         }
 
         foreach ($options as $key => $value) {
@@ -150,7 +155,7 @@ abstract class AbstractBootstrap
                 $this->$method($value);
             } elseif ('resources' == $key) {
                 foreach ($value as $resource => $resourceOptions) {
-                    $this->registerPluginResource($resource, $resourceOptions);
+                    $this->getBroker()->registerSpec($resource, $resourceOptions);
                 }
             }
         }

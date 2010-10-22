@@ -27,6 +27,7 @@ namespace Zend\Mail\Storage;
 
 use Zend\Mail\AbstractStorage,
     Zend\Mail\Storage,
+    Zend\Mail\Storage\Exception,
     Zend\Mail\Protocol;
 
 /**
@@ -93,7 +94,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     public function countMessages($flags = null)
     {
         if (!$this->_currentFolder) {
-            throw new Exception('No selected folder to count');
+            throw new Exception\RuntimeException('No selected folder to count');
         }
 
         if ($flags === null) {
@@ -162,7 +163,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
 
         // TODO: toplines
@@ -182,7 +183,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
 
         return $this->_protocol->fetch('RFC822.TEXT', $id);
@@ -215,13 +216,13 @@ class Imap extends AbstractStorage implements MailFolder, Writable
             try {
                 $this->selectFolder('INBOX');
             } catch(Exception $e) {
-                throw new Exception('cannot select INBOX, is this a valid transport?', 0, $e);
+                throw new Exception\RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
             }
             return;
         }
 
         if (!isset($params->user)) {
-            throw new Exception('need at least user in params');
+            throw new Exception\InvalidArgumentException('need at least user in params');
         }
 
         $host     = isset($params->host)     ? $params->host     : 'localhost';
@@ -232,7 +233,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
         $this->_protocol = new Protocol\Imap();
         $this->_protocol->connect($host, $port, $ssl);
         if (!$this->_protocol->login($params->user, $password)) {
-            throw new Exception('cannot login, user or password wrong');
+            throw new Exception\RuntimeException('cannot login, user or password wrong');
         }
         $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
     }
@@ -258,7 +259,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     public function noop()
     {
         if (!$this->_protocol->noop()) {
-            throw new Exception('could not do nothing');
+            throw new Exception\RuntimeException('could not do nothing');
         }
     }
 
@@ -274,11 +275,11 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     public function removeMessage($id)
     {
         if (!$this->_protocol->store(array(Storage::FLAG_DELETED), $id, null, '+')) {
-            throw new Exception('cannot set deleted flag');
+            throw new Exception\RuntimeException('cannot set deleted flag');
         }
         // TODO: expunge here or at close? we can handle an error here better and are more fail safe
         if (!$this->_protocol->expunge()) {
-            throw new Exception('message marked as deleted, but could not expunge');
+            throw new Exception\RuntimeException('message marked as deleted, but could not expunge');
         }
     }
 
@@ -320,7 +321,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
             }
         }
 
-        throw new Exception('unique id not found');
+        throw new Exception\InvalidArgumentException('unique id not found');
     }
 
 
@@ -336,7 +337,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     {
         $folders = $this->_protocol->listMailbox((string)$rootFolder);
         if (!$folders) {
-            throw new Exception('folder not found');
+            throw new Exception\InvalidArgumentException('folder not found');
         }
 
         ksort($folders, SORT_STRING);
@@ -370,7 +371,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
                 }
             } while ($stack);
             if (!$stack) {
-                throw new Exception('error while constructing folder tree');
+                throw new Exception\RuntimeException('error while constructing folder tree');
             }
         }
 
@@ -392,7 +393,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
         $this->_currentFolder = $globalName;
         if (!$this->_protocol->select($this->_currentFolder)) {
             $this->_currentFolder = '';
-            throw new Exception('cannot change folder, maybe it does not exist');
+            throw new Exception\RuntimeException('cannot change folder, maybe it does not exist');
         }
     }
 
@@ -431,7 +432,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
         }
 
         if (!$this->_protocol->create($folder)) {
-            throw new Exception('cannot create folder');
+            throw new Exception\RuntimeException('cannot create folder');
         }
     }
 
@@ -449,7 +450,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
         }
 
         if (!$this->_protocol->delete($name)) {
-            throw new Exception('cannot delete folder');
+            throw new Exception\RuntimeException('cannot delete folder');
         }
     }
 
@@ -470,7 +471,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
         }
 
         if (!$this->_protocol->rename($oldName, $newName)) {
-            throw new Exception('cannot rename folder');
+            throw new Exception\RuntimeException('cannot rename folder');
         }
     }
 
@@ -495,7 +496,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
 
         // TODO: handle class instances for $message
         if (!$this->_protocol->append($folder, $message, $flags)) {
-            throw new Exception('cannot create message, please check if the folder exists and your flags');
+            throw new Exception\RuntimeException('cannot create message, please check if the folder exists and your flags');
         }
     }
 
@@ -510,7 +511,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     public function copyMessage($id, $folder)
     {
         if (!$this->_protocol->copy($folder, $id)) {
-            throw new Exception('cannot copy message, does the folder exist?');
+            throw new Exception\RuntimeException('cannot copy message, does the folder exist?');
         }
     }
 
@@ -541,7 +542,7 @@ class Imap extends AbstractStorage implements MailFolder, Writable
     public function setFlags($id, $flags)
     {
         if (!$this->_protocol->store($flags, $id)) {
-            throw new Exception('cannot set flags, have you tried to set the recent flag or special chars?');
+            throw new Exception\RuntimeException('cannot set flags, have you tried to set the recent flag or special chars?');
         }
     }
 }

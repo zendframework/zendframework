@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Mail;
+use Zend\Mail\Exception;
 
 /**
  * @uses       \Zend\Mail\Exception
@@ -57,7 +58,7 @@ class Message extends Part implements MailMessage
             if (!is_resource($params['file'])) {
                 $params['raw'] = @file_get_contents($params['file']);
                 if ($params['raw'] === false) {
-                    throw new Exception('could not open file');
+                    throw new Exception\RuntimeException('could not open file');
                 }
             } else {
                 $params['raw'] = stream_get_contents($params['file']);

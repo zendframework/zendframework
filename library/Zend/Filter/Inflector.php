@@ -25,7 +25,7 @@
 namespace Zend\Filter;
 
 use Zend\Config,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader\ShortNameLocater;
 
@@ -107,7 +107,7 @@ class Inflector extends AbstractFilter
     public function getPluginLoader()
     {
         if (!$this->_pluginLoader instanceof ShortNameLocater) {
-            $this->_pluginLoader = new PluginLoader(array('Zend\Filter\\' => 'Zend/Filter/'), __CLASS__);
+            $this->_pluginLoader = new PrefixPathLoader(array('Zend\Filter\\' => __DIR__), __CLASS__);
         }
 
         return $this->_pluginLoader;

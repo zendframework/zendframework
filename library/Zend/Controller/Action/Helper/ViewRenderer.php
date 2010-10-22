@@ -63,12 +63,6 @@ use Zend\Filter;
  *
  * </code>
  *
- * @uses       \Zend\Controller\Action\Exception
- * @uses       \Zend\Controller\Action\Helper\AbstractHelper
- * @uses       \Zend\Filter\Inflector
- * @uses       \Zend\Filter\PregReplace
- * @uses       \Zend\Filter\Word\UnderscoreToSeparator
- * @uses       \Zend\View\View
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -77,7 +71,7 @@ use Zend\Filter;
 class ViewRenderer extends AbstractHelper
 {
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     public $view;
 
@@ -178,11 +172,11 @@ class ViewRenderer extends AbstractHelper
      *
      * Optionally set view object and options.
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @param  array               $options
      * @return void
      */
-    public function __construct(View\ViewEngine $view = null, array $options = array())
+    public function __construct(View\Renderer $view = null, array $options = array())
     {
         if (null !== $view) {
             $this->setView($view);
@@ -200,7 +194,7 @@ class ViewRenderer extends AbstractHelper
      */
     public function __clone()
     {
-        if (isset($this->view) && $this->view instanceof View\ViewEngine) {
+        if (isset($this->view) && $this->view instanceof View\Renderer) {
             $this->view = clone $this->view;
 
         }
@@ -209,10 +203,10 @@ class ViewRenderer extends AbstractHelper
     /**
      * Set the view object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Controller\Action\Helper\ViewRenderer Provides a fluent interface
      */
-    public function setView(View\ViewEngine $view)
+    public function setView(View\Renderer $view)
     {
         $this->view = $view;
         return $this;
@@ -443,7 +437,7 @@ class ViewRenderer extends AbstractHelper
     public function initView($path = null, $prefix = null, array $options = array())
     {
         if (null === $this->view) {
-            $this->setView(new View\View());
+            $this->setView(new View\PhpRenderer());
         }
 
         // Reset some flags every time
@@ -458,30 +452,23 @@ class ViewRenderer extends AbstractHelper
         // Get base view path
         if (empty($path)) {
             $path = $this->_getBasePath();
+            /*
+             * Commenting until we can refactor inflector
             if (empty($path)) {
                 throw new Action\Exception('ViewRenderer initialization failed: retrieved view base path is empty');
             }
+             */
         }
 
         if (null === $prefix) {
             $prefix = $this->_generateDefaultPrefix();
         }
 
-        // Determine if this path has already been registered
-        $currentPaths = $this->view->getScriptPaths();
-        $path         = str_replace(array('/', '\\'), '/', $path);
-        $pathExists   = false;
-        foreach ($currentPaths as $tmpPath) {
-            $tmpPath = str_replace(array('/', '\\'), '/', $tmpPath);
-            if (strstr($tmpPath, $path)) {
-                $pathExists = true;
-                break;
-            }
-        }
-        if (!$pathExists) {
-            $namespaced = (false !== strstr($prefix, '\\'));
-            $this->view->addBasePath($path, $prefix, $namespaced);
-        }
+        /**
+         * @todo resolver() is not in Renderer interface...
+         * @todo Should helpers/filters be added here as well?
+         */
+        $this->view->resolver()->addPath($path . '/scripts');
 
         // Register view with action controller (unless already registered)
         if ((null !== $this->_actionController) && (null === $this->_actionController->view)) {

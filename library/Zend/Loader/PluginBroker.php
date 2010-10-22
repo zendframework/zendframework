@@ -73,6 +73,8 @@ class PluginBroker implements Broker
 
         if (empty($options)) {
             $instance = new $class();
+        } elseif ($this->isAssocArray($options)) {
+            $instance = new $class($options);
         } else {
             $r = new \ReflectionClass($class);
             $instance = $r->newInstanceArgs($options);
@@ -203,6 +205,23 @@ class PluginBroker implements Broker
     {
         if (null !== ($validator = $this->getValidator())) {
             return call_user_func($validator, $plugin);
+        }
+        return true;
+    }
+
+    /**
+     * Is a value an associative array?
+     * 
+     * @param  mixed $value 
+     * @return bool
+     */
+    protected function isAssocArray($value)
+    {
+        if (!is_array($value)) {
+            return false;
+        }
+        if (array_keys($value) === range(0, count($value) - 1)) {
+            return false;
         }
         return true;
     }

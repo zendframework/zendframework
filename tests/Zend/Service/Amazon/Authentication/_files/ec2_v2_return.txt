@@ -1,0 +1,4 @@
+POST
+ec2.amazonaws.com
+/
+AWSAccessKeyId=0PN5J17HBGZHT7JJ3X82&Action=DescribeImages&ImageId.1=ami-2bb65342&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2009-11-11T13%3A52%3A38Z&Version=2009-07-15

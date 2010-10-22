@@ -19,6 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Authentication;
+use Zend\Crypt;
 
 /**
  * @see Zend_Service_Amazon_Authentication
@@ -37,7 +42,7 @@ require_once 'Zend/Crypt/Hmac.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authentication
+class S3 extends Authentication
 {
     /**
      * Add the S3 Authorization signature to the request headers
@@ -104,7 +109,7 @@ class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authenti
                     $sig_str .= '?torrent';
                 }
         
-        $signature = base64_encode(Zend_Crypt_Hmac::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Zend_Crypt_Hmac::BINARY));
+        $signature = base64_encode(Crypt\HMAC::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Crypt\HMAC::BINARY));
         $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . $signature;
 
         return $sig_str;

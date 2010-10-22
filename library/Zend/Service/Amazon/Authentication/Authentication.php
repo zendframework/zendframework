@@ -20,13 +20,18 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Amazon\Authentication;
+
+/**
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Authentication
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_Amazon_Authentication
+abstract class Authentication
 {
     protected $_accessKey;
     protected $_secretKey;

@@ -13,38 +13,42 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\View;
+namespace Zend\Paginator;
+
+use Zend\Loader\PluginBroker;
 
 /**
- * Exception for Zend_View class.
+ * Broker for pagination adapter instances
  *
- * @uses       \Zend\Exception
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+class AdapterBroker extends PluginBroker
 {
-    protected $view = null;
+    /**
+     * @var string Default plugin loading strategy
+     */
+    protected $defaultClassLoader = 'Zend\Paginator\AdapterLoader';
 
-    public function setView(Renderer $view = null)
+    /**
+     * Determine if we have a valid adapter
+     * 
+     * @param  mixed $plugin 
+     * @return true
+     * @throws Exception
+     */
+    protected function validatePlugin($plugin)
     {
-        $this->view = $view;
-        return $this;
-    }
-
-    public function getView()
-    {
-        return $this->view;
+        if (!$plugin instanceof Adapter) {
+            throw new Exception('Pagination adapters must implement Zend\Paginator\Adapter');
+        }
+        return true;
     }
 }

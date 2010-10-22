@@ -193,15 +193,18 @@ class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
                 (is_object($prefixPaths) ? get_class($prefixPaths) : gettype($prefixPaths))
             ));
         }
-        foreach ($prefixPaths as $spec) {
+        foreach ($prefixPaths as $prefix => $spec) {
             if (is_object($spec)) {
-                $prefix     = $spec->prefix ?: false;
+                $prefix     = $spec->prefix ?: $prefix;
                 $path       = $spec->path   ?: false;
                 $namespaced = isset($spec->namespaced) ? (bool) $spec->namespaced : true;
             } elseif (is_array($spec)) {
-                $prefix     = $spec['prefix'] ?: false;
+                $prefix     = $spec['prefix'] ?: $prefix;
                 $path       = $spec['path']   ?: false;
                 $namespaced = isset($spec['namespaced']) ? (bool) $spec['namespaced'] : true;
+            } elseif (is_string($spec)) {
+                $path       = $spec;
+                $namespaced = strstr($prefix, '_') ? false : true;
             } else {
                 throw new Exception\InvalidArgumentException(
                     'Invalid prefix path array specification; must be an array or object'

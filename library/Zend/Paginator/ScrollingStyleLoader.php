@@ -13,38 +13,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\View;
+namespace Zend\Paginator;
+
+use Zend\Loader\PluginClassLoader;
 
 /**
- * Exception for Zend_View class.
+ * Plugin Class Loader implementation for scrolling style adapters.
  *
- * @uses       \Zend\Exception
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+class ScrollingStyleLoader extends PluginClassLoader
 {
-    protected $view = null;
-
-    public function setView(Renderer $view = null)
-    {
-        $this->view = $view;
-        return $this;
-    }
-
-    public function getView()
-    {
-        return $this->view;
-    }
+    /**
+     * @var array Pre-aliased adapters 
+     */
+    protected $plugins = array(
+        'all'     => 'Zend\Paginator\ScrollingStyle\All',
+        'elastic' => 'Zend\Paginator\ScrollingStyle\Elastic',
+        'jumping' => 'Zend\Paginator\ScrollingStyle\Jumping',
+        'sliding' => 'Zend\Paginator\ScrollingStyle\Sliding',
+    );
 }

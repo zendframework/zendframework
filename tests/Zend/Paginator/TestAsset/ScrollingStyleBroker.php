@@ -13,38 +13,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\View;
+namespace ZendTest\Paginator\TestAsset;
+
+use Zend\Paginator\ScrollingStyleBroker as BaseScrollingStyleBroker;
 
 /**
- * Exception for Zend_View class.
- *
- * @uses       \Zend\Exception
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_Paginator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+class ScrollingStyleBroker extends BaseScrollingStyleBroker
 {
-    protected $view = null;
-
-    public function setView(Renderer $view = null)
-    {
-        $this->view = $view;
-        return $this;
-    }
-
-    public function getView()
-    {
-        return $this->view;
-    }
 }

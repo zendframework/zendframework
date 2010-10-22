@@ -28,8 +28,7 @@ namespace Zend\Controller\Action;
 use Zend\Controller\Action,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader\ShortNameLocater,
-    Zend\Loader\PluginLoaderException,
-    Zend\Loader\PluginLoader;
+    Zend\Loader\PrefixPathLoader;
 
 /**
  * @uses       \Zend\Controller\Action\Exception
@@ -88,8 +87,8 @@ class HelperBroker
     public static function getPluginLoader()
     {
         if (null === self::$_pluginLoader) {
-            self::$_pluginLoader = new PluginLoader(array(
-                'Zend\Controller\Action\Helper' => 'Zend/Controller/Action/Helper/',
+            self::$_pluginLoader = new PrefixPathLoader(array(
+                'Zend\Controller\Action\Helper' => __DIR__ . '/Helper/',
             ));
         }
         return self::$_pluginLoader;

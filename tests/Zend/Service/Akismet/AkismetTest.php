@@ -21,6 +21,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Akismet;
+
+use Zend\Service\Akismet,
+    Zend\Http;
+
+/**
  * @category   Zend
  * @package    Zend_Service_Akismet
  * @subpackage UnitTests
@@ -29,17 +37,17 @@
  * @group      Zend_Service
  * @group      Zend_Service_Akismet
  */
-class Zend_Service_AkismetTest extends PHPUnit_Framework_TestCase
+class AkismetTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->akismet = new Zend_Service_Akismet('somebogusapikey', 'http://framework.zend.com/wiki/');
-        $adapter = new Zend_Http_Client_Adapter_Test();
-        $client = new Zend_Http_Client(null, array(
+        $this->akismet = new Akismet\Akismet('somebogusapikey', 'http://framework.zend.com/wiki/');
+        $adapter = new Http\Client\Adapter\Test();
+        $client = new Http\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Zend_Service_Akismet::setDefaultHttpClient($client);
+        Akismet\Akismet::setDefaultHttpClient($client);
 
         $this->comment = array(
             'user_ip'         => '71.161.221.76',
@@ -85,7 +93,7 @@ class Zend_Service_AkismetTest extends PHPUnit_Framework_TestCase
 
     public function testUserAgentDefaultMatchesFrameworkVersion()
     {
-        $this->assertContains('Zend Framework/' . Zend_Version::VERSION, $this->akismet->getUserAgent());
+        $this->assertContains('Zend Framework/' . \Zend\Version::VERSION, $this->akismet->getUserAgent());
     }
 
     public function testVerifyKey()
@@ -129,7 +137,7 @@ class Zend_Service_AkismetTest extends PHPUnit_Framework_TestCase
         try {
             $this->akismet->isSpam($this->comment);
             $this->fail('Response of "invalid" should trigger exception');
-        } catch (Exception $e) {
+        } catch (Akismet\Exception $e) {
             // success
         }
     }
@@ -179,7 +187,7 @@ class Zend_Service_AkismetTest extends PHPUnit_Framework_TestCase
         try {
             $this->akismet->submitSpam($this->comment);
             $this->fail('Response of "invalid" should trigger exception');
-        } catch (Exception $e) {
+        } catch (Akismet\Exception $e) {
             // success
         }
     }

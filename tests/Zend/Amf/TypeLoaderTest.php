@@ -37,12 +37,6 @@ use Zend\Amf\Parser;
  */
 class TypeloaderTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Amf_ResponseTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * test that we can get the server name from the client name for deserialization.
      *

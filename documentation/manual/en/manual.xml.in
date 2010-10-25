@@ -1293,6 +1293,11 @@
                     <xi:include href="../en/module_specs/Zend_Mail-DifferentTransports.xml" />
                 </xi:fallback>
             </xi:include>
+            <xi:include href="module_specs/Zend_Mail-UsingFileTransport.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mail-UsingFileTransport.xml" />
+                </xi:fallback>
+            </xi:include>
             <xi:include href="module_specs/Zend_Mail-HtmlMails.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Mail-HtmlMails.xml" />

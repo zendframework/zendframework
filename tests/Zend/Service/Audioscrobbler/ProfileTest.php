@@ -20,16 +20,12 @@
  * @version    $Id$
  */
 
-
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Service\Audioscrobbler;
 
-/**
- * @see Zend_Service_Audioscrobbler
- */
-
-
+use Zend\Service\Audioscrobbler;
 
 /**
  * @category   Zend
@@ -40,11 +36,11 @@
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
+class ProfileTest extends AudioscrobblerTestCase
 {
     public function testConstructValid()
     {
-        $response = new Zend_Service_Audioscrobbler();
+        $response = new Audioscrobbler\Audioscrobbler();
         $this->assertNotNull($response);
     }
 
@@ -253,6 +249,8 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
      */
     public function testBadUserGetTopTagsForArtist()
     {
+        $this->setExpectedException('Zend\Service\Audioscrobbler\Exception\RuntimeException', 'SimpleXML');
+
         $testingResponse = "HTTP/1.1 200 OK\r\n"
                          . "Content-type: text/xml\r\n"
                          . "\r\n"
@@ -260,12 +258,7 @@ class Zend_Service_Audioscrobbler_ProfileTest extends Zend_Service_Audioscrobble
         $this->setAudioscrobblerResponse($testingResponse);
         $as = $this->getAudioscrobblerService();
 
-        try {
-            $response = $as->userGetTopTagsForArtist();
-            $this->fail('userGetTopTagsForArtist() did not throw exception based on bad parameters');
-        } catch (Zend_Service_Exception $e) {
-            $this->assertContains('SimpleXML', $e->getMessage());
-        }
+        $response = $as->userGetTopTagsForArtist();
     }
 
     public function testUserGetTopTagsForAlbum()

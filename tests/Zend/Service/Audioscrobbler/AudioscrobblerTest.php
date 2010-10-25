@@ -20,15 +20,12 @@
  * @version    $Id$
  */
 
-
 /**
- * Test helper
+ * @namespace
  */
+namespace ZendTest\Service\Audioscrobbler;
 
-/**
- * @see Zend_Service_Audioscrobbler
- */
-
+use Zend\Service\Audioscrobbler;
 
 /**
  * @category   Zend
@@ -39,34 +36,28 @@
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
+class AudioscrobblerTest extends AudioscrobblerTestCase
 {
-    public function testRequestThrowsHttpClientExceptionWithNoUserError()
+    public function testRequestThrowsRuntimeExceptionWithNoUserError()
     {
+        $this->setExpectedException('Zend\Service\Audioscrobbler\Exception\RuntimeException', 'No user exists with this name');
+
         $this->setAudioscrobblerResponse(self::readTestResponse('errorNoUserExists'));
         $as = $this->getAudioscrobblerService();
         $as->set('user', 'foobarfoo');
 
-        try {
-            $response = $as->userGetProfileInformation();
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch(Zend_Http_Client_Exception $e) {
-            $this->assertContains("No user exists with this name", $e->getMessage());
-        }
+        $response = $as->userGetProfileInformation();
     }
 
-    public function testRequestThrowsHttpClientExceptionWithoutSuccessfulResponse()
+    public function testRequestThrowsRuntimeExceptionWithoutSuccessfulResponse()
     {
+        $this->setExpectedException('Zend\Service\Audioscrobbler\Exception\RuntimeException', '404');
+
         $this->setAudioscrobblerResponse(self::readTestResponse('errorResponseStatusError'));
         $as = $this->getAudioscrobblerService();
         $as->set('user', 'foobarfoo');
 
-        try {
-            $response = $as->userGetProfileInformation();
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch(Zend_Http_Client_Exception $e) {
-            $this->assertContains("404", $e->getMessage());
-        }
+        $response = $as->userGetProfileInformation();
     }
 
     /**
@@ -74,7 +65,7 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
      */
     public function testSetViaCallIntercept()
     {
-        $as = new Zend_Service_Audioscrobbler();
+        $as = new Audioscrobbler\Audioscrobbler();
         $as->setUser("foobar");
         $as->setAlbum("Baz");
         $this->assertEquals("foobar", $as->get("user"));
@@ -86,9 +77,9 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
      */
     public function testUnknownMethodViaCallInterceptThrowsException()
     {
-        $this->setExpectedException("Zend_Service_Exception");
+        $this->setExpectedException("Zend\Service\Audioscrobbler\Exception\InvalidArgumentException", 'does not exist in class');
 
-        $as = new Zend_Service_Audioscrobbler();
+        $as = new Audioscrobbler\Audioscrobbler();
         $as->someInvalidMethod();
     }
 
@@ -97,9 +88,9 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTest extends Zend_Service_Audios
      */
     public function testCallInterceptMethodsRequireExactlyOneParameterAndThrowExceptionOtherwise()
     {
-        $this->setExpectedException("Zend_Service_Exception");
-
-        $as = new Zend_Service_Audioscrobbler();
+        $this->setExpectedException("Zend\Service\Audioscrobbler\Exception\InvalidArgumentException", 'A value is required for setting a parameter field');
+        
+        $as = new Audioscrobbler\Audioscrobbler();
         $as->setUser();
     }
 

@@ -25,6 +25,8 @@
  */
 namespace Zend\Test\PHPUnit\Db;
 
+use Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException;
+
 /**
  * Simple Tester for Database Tests when the Abstract Test Case cannot be used.
  *
@@ -33,7 +35,7 @@ namespace Zend\Test\PHPUnit\Db;
  * @uses       PHPUnit_Extensions_Database_DefaultTester
  * @uses       PHPUnit_Extensions_Database_Operation_Composite
  * @uses       PHPUnit_Extensions_Database_Operation_Factory
- * @uses       \Zend\Test\PHPUnit\Db\Exception
+ * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @uses       \Zend\Test\PHPUnit\Db\Operation\Insert
  * @uses       \Zend\Test\PHPUnit\Db\Operation\Truncate
  * @category   Zend
@@ -52,7 +54,7 @@ class SimpleTester extends \PHPUnit_Extensions_Database_DefaultTester
     public function __construct(\PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection)
     {
         if(!($connection instanceof Connection)) {
-            throw new Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
+            throw new InvalidArgumentException("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
         }
 
         $this->connection = $connection;

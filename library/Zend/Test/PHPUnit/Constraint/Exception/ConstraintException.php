@@ -23,8 +23,20 @@
 /**
  * @namespace
  */
-namespace Zend\Test\PHPUnit\Db;
+namespace Zend\Test\PHPUnit\Constraint\Exception;
 
-interface Exception extends \Zend\Test\PHPUnit\Exception
+/**
+ * Zend_Test_PHPUnit_Constraint_Exception
+ *
+ * @uses       PHPUnit_Framework_ExpectationFailedException
+ * @category   Zend
+ * @package    Zend_Test
+ * @subpackage PHPUnit
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class ConstraintException 
+	extends \PHPUnit_Framework_ExpectationFailedException
+	implements \Zend\Test\PHPUnit\Constraint\Exception
 {
 }

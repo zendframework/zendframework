@@ -74,18 +74,11 @@ class ProfileTest extends AudioscrobblerTestCase
     {
         $this->markTestSkipped('Invalid test, communicating with the outside world!');
 
-        $as = new Zend_Service_Audioscrobbler();
+        $as = new Audioscrobbler();
         $as->set('user', 'kljadsfjllkj');
 
-        try {
-            $response = $as->userGetProfileInformation();
-            $this->assertNull($response);
-
-        } catch (Exception $e) {
-            return;
-        }
-
-        $this->fail('Exception was not thrown when submitting bad user info');
+        $this->setExpectedException('Zend\Service\Audioscrobbler\Exception\RuntimeException', 'xxx');
+        $response = $as->userGetProfileInformation();
     }
 
     public function testUserGetTopArtists( )

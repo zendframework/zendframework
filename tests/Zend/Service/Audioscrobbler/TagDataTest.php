@@ -43,11 +43,11 @@ class TagDataTest extends AudioscrobblerTestCase
         $this->markTestSkipped('Invalid test, communicating with real-world service.');
 
         try {
-            $as = new Zend_Service_Audioscrobbler();
+            $as = $this->getAudioscrobblerService();
             $response = $as->tagGetTopTags();
             $this->assertNotNull(count($response->tag));
         } catch (Exception $e ) {
-                $this->fail("Exception: [" . $e->getMessage() . "] thrown by test");
+            $this->fail("Exception: [" . $e->getMessage() . "] thrown by test");
         }
     }
 

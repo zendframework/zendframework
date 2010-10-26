@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Audioscrobbler;
+
+use Zend\Http;
+
+/**
  * @uses       Zend_Http_Client
  * @uses       Zend_Http_Client_Exception
  * @uses       Zend_Service_Exception
@@ -30,16 +37,8 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Audioscrobbler
+class Audioscrobbler extends \Zend\Service\AbstractService
 {
-    /**
-     * Zend_Http_Client Object
-     *
-     * @var     Zend_Http_Client
-     * @access  protected
-     */
-    protected $_client;
-
     /**
      * Array that contains parameters being used by the webservice
      *
@@ -70,39 +69,6 @@ class Zend_Service_Audioscrobbler
     }
 
     /**
-     * Set Http Client
-     *
-     * @param Zend_Http_Client $client
-     */
-    public function setHttpClient(Zend_Http_Client $client)
-    {
-        $this->_client = $client;
-    }
-
-    /**
-     * Get current http client.
-     *
-     * @return Zend_Http_Client
-     */
-    public function getHttpClient()
-    {
-        if($this->_client == null) {
-            $this->lazyLoadHttpClient();
-        }
-        return $this->_client;
-    }
-
-    /**
-     * Lazy load Http Client if none is instantiated yet.
-     *
-     * @return void
-     */
-    protected function lazyLoadHttpClient()
-    {
-        $this->_client = new Zend_Http_Client();
-    }
-
-    /**
      * Returns a field value, or false if the named field does not exist
      *
      * @param  string $field
@@ -120,9 +86,9 @@ class Zend_Service_Audioscrobbler
     /**
      * Generic set action for a field in the parameters being used
      *
-     * @param  string $field name of field to set
-     * @param  string $value value to assign to the named field
-     * @return Zend_Service_Audioscrobbler Provides a fluent interface
+     * @param  string $field                              Name of field to set
+     * @param  string $value                              Value to assign to the named field
+     * @return Zend\Service\Audioscrobbler\Audioscrobbler Provides a fluent interface
      */
     public function set($field, $value)
     {
@@ -134,12 +100,10 @@ class Zend_Service_Audioscrobbler
     /**
      * Protected method that queries REST service and returns SimpleXML response set
      *
-     * @param  string $service name of Audioscrobbler service file we're accessing
-     * @param  string $params  parameters that we send to the service if needded
-     * @throws Zend_Http_Client_Exception
-     * @throws Zend_Service_Exception
-     * @return SimpleXMLElement result set
-     * @access protected
+     * @throws Zend\Service\Audioscrobbler\Exception
+     * @param  string $service  Name of Audioscrobbler service file we're accessing
+     * @param  string $params   Parameters that we send to the service if needded
+     * @return SimpleXMLElement Result set
      */
     protected function _getInfo($service, $params = null)
     {
@@ -156,18 +120,18 @@ class Zend_Service_Audioscrobbler
         $responseBody = $response->getBody();
 
         if (preg_match('/No such path/', $responseBody)) {
-            throw new Zend_Http_Client_Exception('Could not find: ' . $this->_client->getUri());
+            throw new Exception\RuntimeException('Could not find: ' . $this->getHttpClient()->getUri());
         } elseif (preg_match('/No user exists with this name/', $responseBody)) {
-            throw new Zend_Http_Client_Exception('No user exists with this name');
+            throw new Exception\RuntimeException('No user exists with this name');
         } elseif (!$response->isSuccessful()) {
-            throw new Zend_Http_Client_Exception('The web service ' . $this->_client->getUri() . ' returned the following status code: ' . $response->getStatus());
+            throw new Exception\RuntimeException('The web service ' . $this->getHttpClient()->getUri() . ' returned the following status code: ' . $response->getStatus());
         }
 
         set_error_handler(array($this, '_errorHandler'));
 
         if (!$simpleXmlElementResponse = simplexml_load_string($responseBody)) {
             restore_error_handler();
-            $exception = new Zend_Service_Exception('Response failed to load with SimpleXML');
+            $exception = new Exception\RuntimeException('Response failed to load with SimpleXML');
             $exception->error    = $this->_error;
             $exception->response = $responseBody;
             throw $exception;
@@ -640,14 +604,14 @@ class Zend_Service_Audioscrobbler
     public function __call($method, $args)
     {
         if(substr($method, 0, 3) !== "set") {
-            throw new Zend_Service_Exception(
-                "Method ".$method." does not exist in class Zend_Service_Audioscrobbler."
+            throw new Exception\InvalidArgumentException(
+                "Method ".$method." does not exist in class Audioscrobbler."
             );
         }
         $field = strtolower(substr($method, 3));
 
         if(!is_array($args) || count($args) != 1) {
-            throw new Zend_Service_Exception(
+            throw new Exception\InvalidArgumentException(
                 "A value is required for setting a parameter field."
             );
         }

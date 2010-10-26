@@ -20,15 +20,10 @@
  * @version    $Id$
  */
 
-
 /**
- * Test helper
+ * @namespace
  */
-
-/**
- * @see Zend_Service_Audioscrobbler
- */
-
+namespace ZendTest\Service\Audioscrobbler;
 
 /**
  * @category   Zend
@@ -39,7 +34,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
+class TagDataTest extends AudioscrobblerTestCase
 {
     var $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
 
@@ -48,11 +43,11 @@ class Zend_Service_Audioscrobbler_TagDataTest extends Zend_Service_Audioscrobble
         $this->markTestSkipped('Invalid test, communicating with real-world service.');
 
         try {
-            $as = new Zend_Service_Audioscrobbler();
+            $as = $this->getAudioscrobblerService();
             $response = $as->tagGetTopTags();
             $this->assertNotNull(count($response->tag));
         } catch (Exception $e ) {
-                $this->fail("Exception: [" . $e->getMessage() . "] thrown by test");
+            $this->fail("Exception: [" . $e->getMessage() . "] thrown by test");
         }
     }
 

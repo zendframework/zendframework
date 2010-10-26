@@ -20,8 +20,13 @@
  * @version    $Id$
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Audioscrobbler;
 
-
+use Zend\Http,
+    Zend\Service\Audioscrobbler;
 
 /**
  * @category   Zend
@@ -32,7 +37,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-class Zend_Service_Audioscrobbler_AudioscrobblerTestCase extends PHPUnit_Framework_TestCase
+class AudioscrobblerTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Zend_Http_Client
@@ -51,10 +56,10 @@ class Zend_Service_Audioscrobbler_AudioscrobblerTestCase extends PHPUnit_Framewo
 
     public function setUp()
     {
-        $this->_httpTestAdapter = new Zend_Http_Client_Adapter_Test();
-        $this->_httpClient = new Zend_Http_Client();
+        $this->_httpTestAdapter = new Http\Client\Adapter\Test();
+        $this->_httpClient = new Http\Client();
         $this->_httpClient->setConfig(array('adapter' => $this->_httpTestAdapter));
-        $this->_asService = new Zend_Service_Audioscrobbler();
+        $this->_asService = new Audioscrobbler\Audioscrobbler();
         $this->_asService->setHttpClient($this->_httpClient);
     }
 

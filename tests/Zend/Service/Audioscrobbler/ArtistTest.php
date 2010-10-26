@@ -20,16 +20,10 @@
  * @version    $Id$
  */
 
-
 /**
- * Test helper
+ * @namespace
  */
-
-/**
- * @see Zend_Service_Audioscrobbler
- */
-
-
+namespace ZendTest\Service\Audioscrobbler;
 
 /**
  * @category   Zend
@@ -40,7 +34,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-class Zend_Service_Audioscrobbler_ArtistTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
+class ArtistTest extends AudioscrobblerTestCase
 {
     private $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
 

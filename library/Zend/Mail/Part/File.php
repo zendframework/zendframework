@@ -25,7 +25,6 @@
 namespace Zend\Mail\Part;
 
 use Zend\Mail\Part,
-    Zend\Mail\Exception as MailException,
     Zend\Mime;
 
 /**
@@ -57,7 +56,7 @@ class File extends Part
     public function __construct(array $params)
     {
         if (empty($params['file'])) {
-            throw new MailException('no file given in params');
+            throw new Exception\InvalidArgumentException('no file given in params');
         }
 
         if (!is_resource($params['file'])) {
@@ -66,7 +65,7 @@ class File extends Part
             $this->_fh = $params['file'];
         }
         if (!$this->_fh) {
-            throw new MailException('could not open file');
+            throw new Exception\RuntimeException('could not open file');
         }
         if (isset($params['startPos'])) {
             fseek($this->_fh, $params['startPos']);
@@ -93,7 +92,7 @@ class File extends Part
 
         $boundary = $this->getHeaderField('content-type', 'boundary');
         if (!$boundary) {
-            throw new MailException('no boundary found in content type to split message');
+            throw new Exception\RuntimeException('no boundary found in content type to split message');
         }
 
         $part = array();
@@ -105,7 +104,7 @@ class File extends Part
                 if (feof($this->_fh)) {
                     break;
                 }
-                throw new MailException('error reading file');
+                throw new Exception\RuntimeException('error reading file');
             }
 
             $lastPos = $pos;
@@ -170,7 +169,7 @@ class File extends Part
     {
         --$num;
         if (!isset($this->_partPos[$num])) {
-            throw new MailException('part not found');
+            throw new Exception\RuntimeException('part not found');
         }
 
         return new self(array('file' => $this->_fh, 'startPos' => $this->_partPos[$num][0],

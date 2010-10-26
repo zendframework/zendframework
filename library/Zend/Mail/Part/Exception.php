@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Protocol;
+namespace Zend\Mail\Part;
 use Zend\Mail;
 
 /**

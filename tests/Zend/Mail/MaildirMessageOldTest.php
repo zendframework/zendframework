@@ -159,10 +159,10 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
-        $this->assertFalse($mail->getMessage(5)->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertTrue($mail->getMessage(5)->hasFlag(Storage\Storage::FLAG_RECENT));
-        $this->assertTrue($mail->getMessage(2)->hasFlag(Storage\Storage::FLAG_FLAGGED));
-        $this->assertFalse($mail->getMessage(2)->hasFlag(Storage\Storage::FLAG_ANSWERED));
+        $this->assertFalse($mail->getMessage(5)->hasFlag(Storage::FLAG_SEEN));
+        $this->assertTrue($mail->getMessage(5)->hasFlag(Storage::FLAG_RECENT));
+        $this->assertTrue($mail->getMessage(2)->hasFlag(Storage::FLAG_FLAGGED));
+        $this->assertFalse($mail->getMessage(2)->hasFlag(Storage::FLAG_ANSWERED));
     }
 
     public function testGetFlags()
@@ -170,8 +170,8 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
         $mail = new MaildirOldMessage(array('dirname' => $this->_maildir));
 
         $flags = $mail->getMessage(1)->getFlags();
-        $this->assertTrue(isset($flags[Storage\Storage::FLAG_SEEN]));
-        $this->assertTrue(in_array(Storage\Storage::FLAG_SEEN, $flags));
+        $this->assertTrue(isset($flags[Storage::FLAG_SEEN]));
+        $this->assertTrue(in_array(Storage::FLAG_SEEN, $flags));
     }
 
     public function testFetchPart()

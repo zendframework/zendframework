@@ -25,6 +25,7 @@
  */
 namespace Zend\Mail\Storage;
 use Zend\Mail\AbstractStorage,
+    Zend\Mail\Storage\Exception,
     Zend\Mail\Protocol,
     Zend\Mail,
     Zend\Mime;
@@ -108,7 +109,7 @@ class Pop3 extends AbstractStorage
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
 
         return $this->_protocol->top($id, 0, true);
@@ -127,7 +128,7 @@ class Pop3 extends AbstractStorage
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
 
         $content = $this->_protocol->retrieve($id);
@@ -167,7 +168,7 @@ class Pop3 extends AbstractStorage
         }
 
         if (!isset($params->user)) {
-            throw new Exception('need at least user in params');
+            throw new Exception\InvalidArgumentException('need at least user in params');
         }
 
         $host     = isset($params->host)     ? $params->host     : 'localhost';
@@ -265,7 +266,7 @@ class Pop3 extends AbstractStorage
             }
         }
 
-        throw new Exception('unique id not found');
+        throw new Exception\InvalidArgumentException('unique id not found');
     }
 
     /**

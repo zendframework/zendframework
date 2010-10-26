@@ -134,12 +134,9 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "invalid";
         $this->adapter->setResponse($response);
-        try {
-            $this->akismet->isSpam($this->comment);
-            $this->fail('Response of "invalid" should trigger exception');
-        } catch (Akismet\Exception $e) {
-            // success
-        }
+        
+        $this->setExpectedException('Zend\Service\Akismet\Exception\InvalidArgumentException', 'Invalid API key');
+        $this->akismet->isSpam($this->comment);
     }
 
     public function testIsSpam()
@@ -184,12 +181,9 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "invalid";
         $this->adapter->setResponse($response);
-        try {
-            $this->akismet->submitSpam($this->comment);
-            $this->fail('Response of "invalid" should trigger exception');
-        } catch (Akismet\Exception $e) {
-            // success
-        }
+        
+        $this->setExpectedException('Zend\Service\Akismet\Exception\InvalidArgumentException', 'Invalid API key');
+        $this->akismet->submitSpam($this->comment);
     }
 
     public function testSubmitSpam()
@@ -204,11 +198,8 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "Thanks for making the web a better place.";
         $this->adapter->setResponse($response);
-        try {
-            $this->akismet->submitSpam($this->comment);
-        } catch (Exception $e) {
-            $this->fail('Valid key should not throw exceptions');
-        }
+        
+        $this->akismet->submitSpam($this->comment);
     }
 
     public function testSubmitHam()
@@ -223,10 +214,7 @@ class AkismetTest extends \PHPUnit_Framework_TestCase
                   . "\r\n"
                   . "Thanks for making the web a better place.";
         $this->adapter->setResponse($response);
-        try {
-            $this->akismet->submitHam($this->comment);
-        } catch (Exception $e) {
-            $this->fail('Valid key should not throw exceptions');
-        }
+        
+        $this->akismet->submitHam($this->comment);
     }
 }

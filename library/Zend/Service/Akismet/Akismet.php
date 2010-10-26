@@ -178,7 +178,7 @@ class Akismet extends \Zend\Service\AbstractService
     public function setPort($port)
     {
         if (!is_int($port)) {
-            throw new Zend_Service_Exception('Invalid port');
+            throw new Exception\InvalidArgumentException('Invalid port');
         }
 
         $this->_port = $port;
@@ -209,7 +209,7 @@ class Akismet extends \Zend\Service\AbstractService
         if (!is_string($userAgent)
             || !preg_match(":^[^\n/]*/[^ ]* \| Akismet/[0-9\.]*$:i", $userAgent))
         {
-            throw new Zend_Service_Exception('Invalid User Agent string; must be of format "Application name/version | Akismet/version"');
+            throw new Exception\InvalidArgumentException('Invalid User Agent string; must be of format "Application name/version | Akismet/version"');
         }
 
         $this->_userAgent = $userAgent;
@@ -279,7 +279,7 @@ class Akismet extends \Zend\Service\AbstractService
     protected function _makeApiCall($path, $params)
     {
         if (empty($params['user_ip']) || empty($params['user_agent'])) {
-            throw new Zend_Service_Exception('Missing required Akismet fields (user_ip and user_agent are required)');
+            throw new Exception\InvalidArgumentException('Missing required Akismet fields (user_ip and user_agent are required)');
         }
 
         if (!isset($params['blog'])) {

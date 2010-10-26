@@ -24,7 +24,8 @@
  */
 namespace Zend\Paginator;
 
-use Zend\View,
+use Zend\Controller\Front as FrontController,
+    Zend\View,
     Zend\Json\Json;
 
 /**
@@ -794,7 +795,8 @@ class Paginator implements \Countable, \IteratorAggregate
     public function getView()
     {
         if ($this->_view === null) {
-            $viewRenderer = \Zend\Controller\Action\HelperBroker::getStaticHelper('viewRenderer');
+            $front = FrontController::getInstance();
+            $viewRenderer = $front->getHelperBroker()->load('viewRenderer');
             if ($viewRenderer->view === null) {
                 $viewRenderer->initView();
             }

@@ -118,6 +118,8 @@ class PluginBroker implements Broker
             throw new Exception\RuntimeException();
         }
 
+        $name = strtolower($name);
+
         $this->plugins[$name] = $plugin;
         return $this;
     }

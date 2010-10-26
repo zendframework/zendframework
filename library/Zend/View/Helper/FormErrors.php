@@ -81,7 +81,7 @@ class FormErrors extends FormElement
 
         if ($escape) {
             foreach ($errors as $key => $error) {
-                $errors[$key] = $this->view->escape($error);
+                $errors[$key] = $this->view->vars()->escape($error);
             }
         }
 

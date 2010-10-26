@@ -24,12 +24,12 @@
  * @namespace
  */
 namespace ZendTest\Controller\Action\Helper;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Layout;
-use Zend\Controller\Action\Helper;
-use Zend\Controller\Action;
-use Zend\Controller;
-use Zend\Config;
+
+use Zend\Layout,
+    Zend\Controller\Action\Helper,
+    Zend\Controller\Action,
+    Zend\Controller,
+    Zend\Config;
 
 /**
  * Test class for Zend_Controller_Action_Helper_ContextSwitch.
@@ -55,16 +55,16 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker::resetHelpers();
 
         $this->front = Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
+        $this->broker = $this->front->getHelperBroker();
 
         $this->layout = Layout\Layout::startMvc();
 
         $this->helper = new Helper\ContextSwitch();
-        HelperBroker::addHelper($this->helper);
+        $this->broker->register('contextswitch', $this->helper);
 
         $this->request = new \Zend\Controller\Request\Http();
         $this->response = new \Zend\Controller\Response\Cli();
@@ -73,8 +73,8 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
                     ->setResponse($this->response)
                     ->addControllerDirectory(__DIR__);
 
-        $this->view = new \Zend\View\View();
-        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $this->view = new \Zend\View\PhpRenderer();
+        $this->viewRenderer = $this->broker->load('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
         $this->controller = new ContextSwitchTestController(
@@ -82,6 +82,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
             $this->response,
             array()
         );
+        $this->controller->setHelperBroker($this->broker);
         $this->controller->setupContexts();
         $this->helper->setActionController($this->controller);
     }
@@ -668,7 +669,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
         $body = $this->response->getBody();
         $result = \Zend\Json\Json::decode($body);
         $this->assertTrue(is_array($result), var_export($body, 1));
-        $this->assertTrue(isset($result['foo']));
+        $this->assertTrue(isset($result['foo']), var_export($result, 1));
         $this->assertTrue(isset($result['bar']));
         $this->assertEquals('bar', $result['foo']);
         $this->assertEquals('baz', $result['bar']);
@@ -846,7 +847,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-3279
      */
-    public function testPostJsonContextThrowsExceptionWhenGetVarsMethodsDoesntExist()
+    public function testPostJsonContextThrowsExceptionWhenVarsMethodsDoesntExist()
     {
         $view = new CustomView();
         $this->viewRenderer->setView($view);
@@ -916,7 +917,7 @@ class ContextSwitchTestController extends Action
 
     public function setupContexts()
     {
-        $this->_helper->contextSwitch()->setActionContexts(array(
+        $this->broker('contextSwitch')->setActionContexts(array(
             'foo' => 'xml',
             'bar' => array('xml', 'json'),
             'all' => true
@@ -925,48 +926,23 @@ class ContextSwitchTestController extends Action
 
     public function postDispatch()
     {
-        $this->_helper->viewRenderer->setNoRender();
+        $this->broker('viewRenderer')->setNoRender();
     }
 
     public function barAction()
     {
-        $this->_helper->contextSwitch->initContext();
-        $this->view->foo = 'bar';
-        $this->view->bar = 'baz';
+        $this->broker('contextSwitch')->initContext();
+        $this->view->vars()->assign(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ));
     }
 }
 
 
-class CustomView implements \Zend\View\ViewEngine
+class CustomView implements \Zend\View\Renderer
 {
     public function getEngine()
-    {}
-
-    public function setScriptPath($path)
-    {}
-
-    public function getScriptPaths()
-    {}
-
-    public function setBasePath($path, $classPrefix = 'Zend_View')
-    {}
-
-    public function addBasePath($path, $classPrefix = 'Zend_View')
-    {}
-
-    public function __set($key, $val)
-    {}
-
-    public function __isset($key)
-    {}
-
-    public function __unset($key)
-    {}
-
-    public function assign($spec, $value = null)
-    {}
-
-    public function clearVars()
     {}
 
     public function render($name)

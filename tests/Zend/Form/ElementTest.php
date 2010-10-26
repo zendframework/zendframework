@@ -28,14 +28,14 @@ use Zend\Form\Element,
     Zend\Form\Exception as FormException,
     Zend\Form\Form,
     Zend\Config\Config,
-    Zend\Controller\Action\HelperBroker,
+    Zend\Controller\Front as FrontController,
     Zend\Json\Json,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Alpha as AlphaValidator,
-    Zend\View\View;
+    Zend\View\PhpRenderer;
 
 /**
  * @category   Zend
@@ -49,6 +49,10 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $front = FrontController::getInstance();
+        $front->resetInstance();
+        $this->broker = $front->getHelperBroker();
+
         Registry::_unsetInstance();
         Form::setDefaultTranslator(null);
 
@@ -57,12 +61,11 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->element = new Element('foo');
-        HelperBroker::resetHelpers();
     }
 
     public function getView()
     {
-        $view = new View();
+        $view = new PhpRenderer();
         return $view;
     }
 
@@ -460,7 +463,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultValidatorPluginLoader()
     {
         $loader = $this->element->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Validator');
         $this->assertTrue(is_array($paths), var_export($loader, 1));
         $this->assertTrue(0 < count($paths));
@@ -470,7 +473,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultFilterPluginLoader()
     {
         $loader = $this->element->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Filter');
         $this->assertTrue(is_array($paths));
         $this->assertTrue(0 < count($paths));
@@ -480,7 +483,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultDecoratorPluginLoader()
     {
         $loader = $this->element->getPluginLoader('decorator');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Form\Decorator');
         $this->assertTrue(is_array($paths));
         $this->assertTrue(0 < count($paths));
@@ -489,7 +492,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomValidatorPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->element->setPluginLoader($loader, 'validator');
         $test = $this->element->getPluginLoader('validator');
         $this->assertSame($loader, $test);
@@ -497,7 +500,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
         $this->element->setPluginLoader($loader, 'foo');
     }
@@ -510,7 +513,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomFilterPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->element->setPluginLoader($loader, 'filter');
         $test = $this->element->getPluginLoader('filter');
         $this->assertSame($loader, $test);
@@ -518,7 +521,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomDecoratorPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->element->setPluginLoader($loader, 'decorator');
         $test = $this->element->getPluginLoader('decorator');
         $this->assertSame($loader, $test);
@@ -589,9 +592,9 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanAddAllPluginLoaderPrefixPathsSimultaneously()
     {
-        $validatorLoader = new PluginLoader();
-        $filterLoader    = new PluginLoader();
-        $decoratorLoader = new PluginLoader();
+        $validatorLoader = new PrefixPathLoader();
+        $filterLoader    = new PrefixPathLoader();
+        $decoratorLoader = new PrefixPathLoader();
         $this->element->setPluginLoader($validatorLoader, 'validator')
                       ->setPluginLoader($filterLoader, 'filter')
                       ->setPluginLoader($decoratorLoader, 'decorator')
@@ -1206,7 +1209,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testGetViewReturnsViewRendererViewInstanceIfViewRendererActive()
     {
-        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = $this->broker->load('viewRenderer');
         $viewRenderer->initView();
         $view = $viewRenderer->view;
         $test = $this->element->getView();
@@ -1215,7 +1218,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetView()
     {
-        $view = new View();
+        $view = new PhpRenderer();
         $this->assertNull($this->element->getView());
         $this->element->setView($view);
         $received = $this->element->getView();

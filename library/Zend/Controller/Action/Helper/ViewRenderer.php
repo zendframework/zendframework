@@ -47,22 +47,6 @@ use Zend\Filter;
  * helper class prefix to 'Search_View_Helper' and the filter class prefix to ;
  * 'Search_View_Filter'.
  *
- * Usage:
- * <code>
- * // In your bootstrap:
- * Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_ViewRenderer());
- *
- * // In your action controller methods:
- * $viewHelper = $this->_helper->getHelper('view');
- *
- * // Don't use controller subdirectories
- * $viewHelper->setNoController(true);
- *
- * // Specify a different script to render:
- * $this->_helper->viewRenderer('form');
- *
- * </code>
- *
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

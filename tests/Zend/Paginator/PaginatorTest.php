@@ -25,12 +25,12 @@
  */
 namespace ZendTest\Paginator;
 
-use Zend\Paginator;
-use Zend\Controller\Action\HelperBroker;
-use Zend\View\Helper;
-use Zend\View;
-use Zend\Config;
-use Zend\Paginator\Adapter;
+use Zend\Paginator,
+    Zend\Controller\Front as FrontController,
+    Zend\View\Helper,
+    Zend\View,
+    Zend\Config,
+    Zend\Paginator\Adapter;
 
 
 /**
@@ -77,7 +77,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
         // get a fresh new copy of ViewRenderer in each tests
-        HelperBroker::resetHelpers();
+        $this->front = FrontController::getInstance();
+        $this->front->resetInstance();
+        $this->broker = $this->front->getHelperBroker();
 
         $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
         $bO = array('cache_dir'=> $this->_getTmpDir());
@@ -531,7 +533,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsViewFromViewRenderer()
     {
-        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = $this->broker->load('viewRenderer');
         $viewRenderer->setView(new View\PhpRenderer());
 
         $this->assertType('Zend\View\Renderer', $this->_paginator->getView());

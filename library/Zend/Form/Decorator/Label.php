@@ -310,7 +310,7 @@ class Label extends AbstractDecorator
 
         if (!empty($label)) {
             $options['class'] = $class;
-            $label = $view->formLabel($element->getFullyQualifiedName(), trim($label), $options);
+            $label = $view->broker('formLabel')->direct($element->getFullyQualifiedName(), trim($label), $options);
         } else {
             $label = '&#160;';
         }

@@ -25,7 +25,7 @@
 namespace Zend\File\Transfer\Adapter;
 
 use Zend\File\Transfer,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader\ShortNameLocater,
     Zend\Validator,
@@ -34,9 +34,6 @@ use Zend\File\Transfer,
 /**
  * Abstract class for file transfers (Downloads and Uploads)
  *
- * @uses      finfo
- * @uses      \Zend\File\Transfer\Exception
- * @uses      \Zend\Loader\PluginLoader
  * @category  Zend
  * @package   Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -234,7 +231,7 @@ abstract class AbstractAdapter
                         'Zend\\' . $prefixSegment . '\File' => 'Zend/' . $pathSegment . '/File',
                     );
 
-                    $this->_loaders[$type] = new PluginLoader($paths);
+                    $this->_loaders[$type] = new PrefixPathLoader($paths);
                 } else {
                     $loader = $this->_loaders[$type];
                     if ($loader instanceof PrefixPathMapper) {

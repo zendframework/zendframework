@@ -112,6 +112,13 @@ class PhpRenderer implements Renderer
     {
     }
 
+    /**
+     * Set script resolver
+     * 
+     * @param  string|TemplateResolver $resolver 
+     * @param  mixed $options 
+     * @return PhpRenderer
+     */
     public function setResolver($resolver, $options = null)
     {
         if (is_string($resolver)) {

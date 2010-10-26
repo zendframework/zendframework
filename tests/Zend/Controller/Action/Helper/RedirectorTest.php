@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Controller\Action\Helper;
-use Zend\Controller;
-use Zend\Controller\Action;
-use Zend\Controller\Router\Route;
+
+use Zend\Controller,
+    Zend\Controller\Action,
+    Zend\Controller\Router\Route;
 
 /**
  * Test class for Zend_Controller_Action_Helper_Redirector.
@@ -75,9 +76,11 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
     {
         $front = Controller\Front::getInstance();
         $front->resetInstance();
-        \Zend\Controller\Action\HelperBroker::removeHelper('viewRenderer');
+        $broker = $front->getHelperBroker();
 
         $this->redirector = new \Zend\Controller\Action\Helper\Redirector();
+        $this->redirector->setBroker($broker);
+
         $this->router     = $front->getRouter();
         $this->request    = new \Zend\Controller\Request\Http();
         $this->response   = new \Zend\Controller\Response\Http();

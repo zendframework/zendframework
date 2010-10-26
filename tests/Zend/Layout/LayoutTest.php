@@ -24,11 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Layout;
-use Zend\Controller;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Layout;
-use Zend\Config;
-use Zend\View;
+use Zend\Controller,
+    Zend\Layout,
+    Zend\Config,
+    Zend\View;
 
 /**
  * Test class for Zend_Layout.
@@ -53,12 +52,15 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         \Zend\Layout\Layout::resetMvcInstance();
 
-        Controller\Front::getInstance()->resetInstance();
-        if (HelperBroker::hasHelper('Layout')) {
-            HelperBroker::removeHelper('Layout');
+        $front = Controller\Front::getInstance();
+        $front->resetInstance();
+
+        $broker = $front->getHelperBroker();
+        if ($broker->hasPlugin('Layout')) {
+            $broker->unregister('Layout');
         }
-        if (HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker::removeHelper('viewRenderer');
+        if ($broker->hasPlugin('viewRenderer')) {
+            $broker->unregister('viewRenderer');
         }
     }
 
@@ -226,7 +228,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view = $layout->getView();
-        $this->assertTrue($view instanceof View\ViewEngine);
+        $this->assertTrue($view instanceof View\Renderer);
     }
 
     /**
@@ -235,8 +237,8 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testGetViewRetrievesViewFromViewRenderer()
     {
         $layout = new Layout\Layout();
-        $view = $layout->getView();
-        $vr = HelperBroker::getStaticHelper('viewRenderer');
+        $view   = $layout->getView();
+        $vr     = Controller\Front::getInstance()->getHelperBroker()->load('viewRenderer');
         $this->assertSame($vr->view, $view);
     }
 
@@ -246,7 +248,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testViewAccessorsAllowSettingView()
     {
         $layout = new Layout\Layout();
-        $view   = new View\View();
+        $view   = new View\PhpRenderer();
         $layout->setView($view);
         $received = $layout->getView();
         $this->assertSame($view, $received);
@@ -298,8 +300,10 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testHelperClassPassedToStartMvcIsUsed()
     {
         $layout = Layout\Layout::startMvc(array('helperClass' => 'ZendTest\Layout\TestAsset\MockActionHelper\Layout'));
-        $this->assertTrue(HelperBroker::hasHelper('layout'));
-        $helper = HelperBroker::getStaticHelper('layout');
+        $front  = Controller\Front::getInstance();
+        $broker = $front->getHelperBroker();
+        $this->assertTrue($broker->hasPlugin('layout'));
+        $helper = $broker->load('layout');
         $this->assertTrue($helper instanceof \ZendTest\Layout\TestAsset\MockActionHelper\Layout);
     }
 
@@ -368,7 +372,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithNoInflection()
     {
         $layout = new Layout\Layout();
-        $view   = new View\View();
+        $view   = new View\PhpRenderer();
         $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->disableInflector()
                ->setLayout('layout.phtml')
@@ -382,7 +386,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithDefaultInflection()
     {
         $layout = new Layout\Layout();
-        $view   = new View\View();
+        $view   = new View\PhpRenderer();
         $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setView($view);
         $layout->message = 'Rendered layout';
@@ -394,7 +398,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithCustomInflection()
     {
         $layout = new Layout\Layout();
-        $view   = new View\View();
+        $view   = new View\PhpRenderer();
         $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setView($view);
         $inflector = $layout->getInflector();
@@ -479,6 +483,11 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($layout->getInflectorTarget(), $inflector->getTarget());
     }
 
+    /**
+     * Disabled for now; idea of base paths is under question for Zend\View
+     *
+     * @group disable
+     */
     public function testLayoutWithViewBasePath()
     {
         $layout = new Layout\Layout(array(
@@ -495,7 +504,8 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         Layout\Layout::resetMvcInstance();
         $front = Controller\Front::getInstance();
         $this->assertFalse($front->hasPlugin('Zend_Layout_Controller_Plugin_Layout'), 'Plugin not unregistered');
-        $this->assertFalse(HelperBroker::hasHelper('Layout'), 'Helper not unregistered');
+        $broker = $front->getHelperBroker();
+        $this->assertFalse($broker->hasPlugin('Layout'), 'Helper not unregistered');
     }
 
     public function testResettingMvcInstanceRemovesMvcSingleton()

@@ -23,24 +23,17 @@
  */
 namespace Zend\Form;
 use Zend\Config\Config,
-    Zend\Loader\PluginLoader,
+    Zend\Controller\Front as FrontController,
+    Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
     Zend\Validator\AbstractValidator,
-    Zend\View\ViewEngine as View,
-    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
+    Zend\View\Renderer as View;
 
 /**
  * Zend_Form_Element
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Filter\FilterChain
- * @uses       \Zend\Form\Form
- * @uses       \Zend\Form\ElementException
- * @uses       \Zend\Form\Exception
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Validator\Validator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -1018,7 +1011,7 @@ class Element implements Validator
                     $pathSegment   = 'Form/Decorator';
                 }
                 if (!isset($this->_loaders[$type])) {
-                    $this->_loaders[$type] = new PluginLoader(
+                    $this->_loaders[$type] = new PrefixPathLoader(
                         array('Zend\\' . $prefixSegment . '\\' => 'Zend/' . $pathSegment . '/')
                     );
                 }
@@ -1786,7 +1779,8 @@ class Element implements Validator
     public function getView()
     {
         if (null === $this->_view) {
-            $viewRenderer = ActionHelperBroker::getStaticHelper('viewRenderer');
+            $front = FrontController::getInstance();
+            $viewRenderer = $front->getHelperBroker()->load('viewRenderer');
             $this->setView($viewRenderer->view);
         }
         return $this->_view;

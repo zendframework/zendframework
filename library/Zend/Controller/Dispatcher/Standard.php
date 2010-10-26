@@ -277,6 +277,16 @@ class Standard extends AbstractDispatcher
         }
 
         /**
+         * Inject helper broker
+         */
+        $controller->setHelperBroker($this->broker);
+
+        /**
+         * Call user-defined initialization
+         */
+        $controller->init();
+
+        /**
          * Retrieve the action name
          */
         $action = $this->getActionMethod($request);

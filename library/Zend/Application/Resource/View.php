@@ -25,13 +25,11 @@
  */
 namespace Zend\Application\Resource;
 
+use Zend\Controller\Action\Helper\ViewRenderer;
+
 /**
  * Resource for settings view options
  *
- * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Action\Helper\ViewRenderer
- * @uses       \Zend\View\View
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -52,11 +50,19 @@ class View extends AbstractResource
      */
     public function init()
     {
+        $front     = false;
+        $bootstrap = $this->getBootstrap();
+        if ($bootstrap->getBroker()->hasPlugin('frontcontroller')) {
+            $bootstrap->bootstrap('frontcontroller');
+            $front = $bootstrap->getResource('frontcontroller');
+        }
         $view = $this->getView();
 
-        $viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
-        $viewRenderer->setView($view);
-        \Zend\Controller\Action\HelperBroker::addHelper($viewRenderer);
+        if ($front) {
+            $viewRenderer = new ViewRenderer();
+            $viewRenderer->setView($view);
+            $front->getHelperBroker()->register('viewrenderer', $viewRenderer);
+        }
         return $view;
     }
 
@@ -69,10 +75,10 @@ class View extends AbstractResource
     {
         if (null === $this->_view) {
             $options = $this->getOptions();
-            $this->_view = new \Zend\View\View($options);
+            $this->_view = new \Zend\View\PhpRenderer($options);
 
             if(isset($options['doctype'])) {
-                $this->_view->doctype()->setDoctype(strtoupper($options['doctype']));
+                $this->_view->broker('doctype')->setDoctype(strtoupper($options['doctype']));
             }
         }
         return $this->_view;

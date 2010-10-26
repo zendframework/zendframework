@@ -28,9 +28,6 @@ namespace Zend\Application\Resource;
 /**
  * Front Controller resource
  *
- * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Front
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -123,10 +120,22 @@ class FrontController extends AbstractResource
                     $front->throwExceptions((bool) $value);
                     break;
 
-                case 'actionhelperpaths':
-                    if (is_array($value)) {
-                        foreach ($value as $helperPrefix => $helperPath) {
-                            \Zend\Controller\Action\HelperBroker::addPath($helperPath, $helperPrefix);
+                case 'action_helper':
+                case 'actionhelper':
+                    if (is_string($value)) {
+                        $front->setHelperBroker($value);
+                    } elseif (is_array($value)) {
+                        if (isset($value['class'])) {
+                            if (!class_exists($value['class'])) {
+                                throw new Exception(sprintf(
+                                    'Could not resolve action helper class "%s"',
+                                    $value['class']
+                                ));
+                            }
+                            $class = $value['class'];
+                            unset($value['class']);
+                            $broker = new $class($value);
+                            $front->setHelperBroker($broker);
                         }
                     }
                     break;

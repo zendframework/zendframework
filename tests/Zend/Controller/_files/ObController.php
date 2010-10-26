@@ -50,8 +50,8 @@ class ObController extends \Zend\Controller\Action
     public function exceptionAction()
     {
         echo "In exception action\n";
-        $view = new \Zend\View\View();
-        $view->addBasePath(dirname(__DIR__) . '/views');
+        $view = new \Zend\View\PhpRenderer();
+        $view->resolver()->addPath(dirname(__DIR__) . '/views');
         $view->render('ob.phtml');
     }
 

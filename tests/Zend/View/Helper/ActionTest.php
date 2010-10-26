@@ -24,11 +24,11 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Controller;
-use Zend\Controller\Request;
-use Zend\Controller\Response;
-use Zend\View\Helper;
-use Zend\Controller\Action\HelperBroker;
+
+use Zend\Controller,
+    Zend\Controller\Request,
+    Zend\Controller\Response,
+    Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_Action.
@@ -68,7 +68,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
               ->setResponse($this->response)
               ->addModuleDirectory(__DIR__ . '/_files/modules');
 
-        $this->view   = new \Zend\View\View();
+        $this->view   = new \Zend\View\PhpRenderer();
         $this->helper = new Helper\Action();
         $this->helper->setView($this->view);
     }
@@ -146,18 +146,12 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(empty($rawHeaders));
     }
 
-    /**
-     * @return void
-     */
     public function testActionReturnsContentFromDefaultModule()
     {
         $value = $this->helper->direct('bar', 'action-foo');
         $this->assertContains('In default module, FooController::barAction()', $value);
     }
 
-    /**
-     * @return void
-     */
     public function testActionReturnsContentFromSpecifiedModule()
     {
         $value = $this->helper->direct('bar', 'foo', 'foo');
@@ -252,7 +246,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testNestingActionsDoesNotBreakPlaceholderHelpers()
     {
         $html = $this->helper->direct('nest', 'foo', 'foo');
-        $title = $this->view->headTitle()->toString();
+        $title = $this->view->broker('headTitle')->toString();
         $this->assertContains(' - ', $title, $title);
         $this->assertContains('Foo Nest', $title);
         $this->assertContains('Nested Stuff', $title);
@@ -264,35 +258,39 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testActionWithPartialsUseOfViewRendererReturnsToOriginatingViewState()
     {
         $partial = new \Zend\View\Helper\Partial();
-        $this->view->setScriptPath(__DIR__ . '/_files/modules/application/views/scripts/');
+        $this->view->resolver()->addPath(__DIR__ . '/_files/modules/application/views/scripts/');
         $partial->setView($this->view);
 
-        HelperBroker::getStaticHelper('viewRenderer')->view = $this->view;
+        $front  = Controller\Front::getInstance();
+        $broker = $front->getHelperBroker();
+        $broker->load('viewRenderer')->view = $this->view;
 
         $partial->direct('partialActionCall.phtml');
 
-        $this->assertSame($this->view, HelperBroker::getStaticHelper('viewRenderer')->view);
+        $this->assertSame($this->view, $broker->load('viewRenderer')->view);
 
     }
 
     /**
      * Future ViewRenderer State issues should be included in this test.
      *
-     * @issue ZF-2846
+     * @group ZF-2846
      */
     public function testActionReturnsViewRendererToOriginalState()
     {
         /* Setup the VR as if we were inside an action controller */
         $viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
         $viewRenderer->init();
-        HelperBroker::addHelper($viewRenderer);
+        $front  = Controller\Front::getInstance();
+        $broker = $front->getHelperBroker();
+        $broker->register('viewRenderer', $viewRenderer);
 
         // make sure noRender is false
         $this->assertFalse($viewRenderer->getNoRender());
 
         $value = $this->helper->direct('bar', 'action-foo');
 
-        $viewRendererPostAction = HelperBroker::getStaticHelper('viewRenderer');
+        $viewRendererPostAction = $broker->load('viewRenderer');
 
         // ViewRenderer noRender should still be false
         $this->assertFalse($viewRendererPostAction->getNoRender());

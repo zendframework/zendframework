@@ -21,6 +21,13 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Akismet;
+use Zend\Http,
+    Zend\Uri;
+
+/**
  * Akismet REST service implementation
  *
  * @uses       Zend_Http_Client
@@ -34,7 +41,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Akismet extends \Zend\Service\AbstractService
+class Akismet extends \Zend\Service\AbstractService
 {
     /**
      * Akismet API key
@@ -77,7 +84,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
     {
         $this->setBlogUrl($blog)
              ->setApiKey($apiKey)
-             ->setUserAgent('Zend Framework/' . Zend_Version::VERSION . ' | Akismet/1.11');
+             ->setUserAgent('Zend Framework/' . \Zend\Version::VERSION . ' | Akismet/1.11');
     }
 
     /**
@@ -99,8 +106,8 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
      */
     public function setBlogUrl($blogUrl)
     {
-        if (!Zend_Uri::check($blogUrl)) {
-            throw new Zend_Service_Exception('Invalid url provided for blog');
+        if (!Uri\Url::validate($blogUrl)) {
+            throw new Exception\InvalidArgumentException('Invalid url provided for blog');
         }
 
         $this->_blogUrl = $blogUrl;
@@ -171,7 +178,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
     public function setPort($port)
     {
         if (!is_int($port)) {
-            throw new Zend_Service_Exception('Invalid port');
+            throw new Exception\InvalidArgumentException('Invalid port');
         }
 
         $this->_port = $port;
@@ -202,7 +209,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
         if (!is_string($userAgent)
             || !preg_match(":^[^\n/]*/[^ ]* \| Akismet/[0-9\.]*$:i", $userAgent))
         {
-            throw new Zend_Service_Exception('Invalid User Agent string; must be of format "Application name/version | Akismet/version"');
+            throw new Exception\InvalidArgumentException('Invalid User Agent string; must be of format "Application name/version | Akismet/version"');
         }
 
         $this->_userAgent = $userAgent;
@@ -232,7 +239,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
         ));
         $client->setParameterPost($params);
 
-        $client->setMethod(Zend_Http_Client::POST);
+        $client->setMethod(Http\Client::POST);
         return $client->request();
     }
 
@@ -272,7 +279,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
     protected function _makeApiCall($path, $params)
     {
         if (empty($params['user_ip']) || empty($params['user_agent'])) {
-            throw new Zend_Service_Exception('Missing required Akismet fields (user_ip and user_agent are required)');
+            throw new Exception\InvalidArgumentException('Missing required Akismet fields (user_ip and user_agent are required)');
         }
 
         if (!isset($params['blog'])) {
@@ -315,7 +322,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
         $return = trim($response->getBody());
 
         if ('invalid' == $return) {
-            throw new Zend_Service_Exception('Invalid API key');
+            throw new Exception\InvalidArgumentException('Invalid API key');
         }
 
         if ('true' == $return) {
@@ -343,7 +350,7 @@ class Zend_Service_Akismet extends \Zend\Service\AbstractService
         $response = $this->_makeApiCall('/1.1/submit-spam', $params);
         $value    = trim($response->getBody());
         if ('invalid' == $value) {
-            throw new Zend_Service_Exception('Invalid API key');
+            throw new Exception\InvalidArgumentException('Invalid API key');
         }
     }
 

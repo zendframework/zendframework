@@ -161,7 +161,7 @@ abstract class Image
                 $image = self::_extractJpegImage($dataSource);
                 break;
             default:
-                throw new Exception("Cannot create image resource. File extension not known or unsupported type.");
+                throw new pdf_except_4("Cannot create image resource. File extension not known or unsupported type.");
                 break;
         }
 
@@ -175,8 +175,8 @@ abstract class Image
         } else {
             /* The type of image could not be determined. Give up.
              */
-            throw new Exception("Cannot determine image type: $filePath",
-                                         Exception::CANT_DETERMINE_IMAGE_TYPE);
+            throw new pdf_except_4("Cannot determine image type: $filePath",
+                                         Pdf\Except_1::CANT_DETERMINE_IMAGE_TYPE);
          }
     }
 
@@ -197,7 +197,7 @@ abstract class Image
      */
     protected static function _extractJpegImage($dataSource)
     {
-        throw new Exception('Jpeg image fileparser is not implemented. Old styly implementation has to be used.');
+        throw new pdf_except_4('Jpeg image fileparser is not implemented. Old styly implementation has to be used.');
 
         $imageParser = new BinaryParser\Image\Jpeg($dataSource);
         $image       = new Resource\Image\Jpeg($imageParser);
@@ -232,7 +232,7 @@ abstract class Image
      */
     protected static function _extractTiffImage($dataSource)
     {
-        throw new Exception('Tiff image fileparser is not implemented. Old styly implementation has to be used.');
+        throw new pdf_except_4('Tiff image fileparser is not implemented. Old styly implementation has to be used.');
 
         $imageParser = new BinaryParser\Image\Tiff($dataSource);
         $image       = new Resource\Image\Tiff($imageParser);

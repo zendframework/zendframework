@@ -175,7 +175,7 @@ class TrimmedTable extends AbstractCmap
         $actualLength = strlen($cmapData);
         if ($actualLength < 9) {
             throw new Pdf\Exception('Insufficient table data',
-                                         Pdf\Exception::CMAP_TABLE_DATA_TOO_SMALL);
+                                         Pdf\Except_1::CMAP_TABLE_DATA_TOO_SMALL);
         }
 
         /* Sanity check: Make sure this is right data for this table type.
@@ -183,13 +183,13 @@ class TrimmedTable extends AbstractCmap
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != AbstractCmap::TYPE_TRIMMED_TABLE) {
             throw new Pdf\Exception('Wrong cmap table type',
-                                         Pdf\Exception::CMAP_WRONG_TABLE_TYPE);
+                                         Pdf\Except_1::CMAP_WRONG_TABLE_TYPE);
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
             throw new Pdf\Exception("Table length ($length) does not match actual length ($actualLength)",
-                                         Pdf\Exception::CMAP_WRONG_TABLE_LENGTH);
+                                         Pdf\Except_1::CMAP_WRONG_TABLE_LENGTH);
         }
 
         /* Mapping tables should be language-independent. The font may not work
@@ -208,7 +208,7 @@ class TrimmedTable extends AbstractCmap
         $expectedCount = ($length - 10) >> 1;
         if ($entryCount != $expectedCount) {
             throw new Pdf\Exception("Entry count is wrong; expected: $expectedCount; actual: $entryCount",
-                                         Pdf\Exception::CMAP_WRONG_ENTRY_COUNT);
+                                         Pdf\Except_1::CMAP_WRONG_ENTRY_COUNT);
         }
 
         $this->_endCode = $this->_startCode + $entryCount - 1;
@@ -223,7 +223,7 @@ class TrimmedTable extends AbstractCmap
          */
         if ($offset != $length) {
             throw new Pdf\Exception("Ending offset ($offset) does not match length ($length)",
-                                         Pdf\Exception::CMAP_FINAL_OFFSET_NOT_LENGTH);
+                                         Pdf\Except_1::CMAP_FINAL_OFFSET_NOT_LENGTH);
         }
     }
 }

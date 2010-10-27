@@ -163,7 +163,7 @@ abstract class AbstractCmap
 
             case self::TYPE_HIGH_BYTE_MAPPING:
                 throw new Pdf\Exception('High byte mapping cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
 
             case self::TYPE_SEGMENT_TO_DELTA:
                 return new SegmentToDelta($cmapData);
@@ -173,19 +173,19 @@ abstract class AbstractCmap
 
             case self::TYPE_MIXED_COVERAGE:
                 throw new Pdf\Exception('Mixed coverage cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
 
             case self::TYPE_TRIMMED_ARRAY:
                 throw new Pdf\Exception('Trimmed array cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
 
             case self::TYPE_SEGMENTED_COVERAGE:
                 throw new Pdf\Exception('Segmented coverage cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
 
             default:
                 throw new Pdf\Exception("Unknown cmap type: $cmapType",
-                                             Pdf\Exception::CMAP_UNKNOWN_TYPE);
+                                             Pdf\Except_1::CMAP_UNKNOWN_TYPE);
         }
     }
 
@@ -272,7 +272,7 @@ abstract class AbstractCmap
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
             throw new Pdf\Exception("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+                                         Pdf\Except_1::INDEX_OUT_OF_RANGE);
         }
         $number = ord($data[$index]);
         if (($number & 0x80) == 0x80) {    // negative
@@ -298,7 +298,7 @@ abstract class AbstractCmap
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
             throw new Pdf\Exception("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+                                         Pdf\Except_1::INDEX_OUT_OF_RANGE);
         }
         $number = (ord($data[$index]) << 8) | ord($data[++$index]);
         return $number;
@@ -324,7 +324,7 @@ abstract class AbstractCmap
     {
         if (($index < 0) | (($index + 3) > strlen($data))) {
             throw new Pdf\Exception("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+                                         Pdf\Except_1::INDEX_OUT_OF_RANGE);
         }
         $number = (ord($data[$index]) << 24) | (ord($data[++$index]) << 16) |
                   (ord($data[++$index]) << 8) | ord($data[++$index]);

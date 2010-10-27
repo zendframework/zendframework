@@ -155,7 +155,7 @@ class ByteEncoding extends AbstractCmap
         $actualLength = strlen($cmapData);
         if ($actualLength != 262) {
             throw new Pdf\Exception('Insufficient table data',
-                                         Pdf\Exception::CMAP_TABLE_DATA_TOO_SMALL);
+                                         Pdf\Except_1::CMAP_TABLE_DATA_TOO_SMALL);
         }
 
         /* Sanity check: Make sure this is right data for this table type.
@@ -163,13 +163,13 @@ class ByteEncoding extends AbstractCmap
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != AbstractCmap::TYPE_BYTE_ENCODING) {
             throw new Pdf\Exception('Wrong cmap table type',
-                                         Pdf\Exception::CMAP_WRONG_TABLE_TYPE);
+                                         Pdf\Except_1::CMAP_WRONG_TABLE_TYPE);
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
             throw new Pdf\Exception("Table length ($length) does not match actual length ($actualLength)",
-                                         Pdf\Exception::CMAP_WRONG_TABLE_LENGTH);
+                                         Pdf\Except_1::CMAP_WRONG_TABLE_LENGTH);
         }
 
         /* Mapping tables should be language-independent. The font may not work

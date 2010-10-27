@@ -66,7 +66,7 @@ class String extends AbstractDataSource
     {
         if (empty($string)) {
             throw new Pdf\Exception('String is empty',
-                                         Pdf\Exception::PARAMETER_VALUE_OUT_OF_RANGE);
+                                         Pdf\Except_1::PARAMETER_VALUE_OUT_OF_RANGE);
         }
         $this->_size = strlen($string);
         $this->_string = $string;
@@ -97,7 +97,7 @@ class String extends AbstractDataSource
     {
         if (($this->_offset + $byteCount) > $this->_size) {
             throw new Pdf\Exception("Insufficient data to read $byteCount bytes",
-                                         Pdf\Exception::INSUFFICIENT_DATA);
+                                         Pdf\Except_1::INSUFFICIENT_DATA);
         }
         $bytes = substr($this->_string, $this->_offset, $byteCount);
         $this->_offset += $byteCount;

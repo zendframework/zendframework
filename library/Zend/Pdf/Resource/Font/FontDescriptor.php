@@ -169,7 +169,7 @@ class FontDescriptor
                     $message = 'This font cannot be embedded in the PDF document. If you would like to use '
                              . 'it anyway, you must pass Zend_PDF_Font::EMBED_SUPPRESS_EMBED_EXCEPTION '
                              . 'in the $options parameter of the font constructor.';
-                    throw new Pdf\Exception($message, Pdf\Exception::FONT_CANT_BE_EMBEDDED);
+                    throw new Pdf\Exception($message, Pdf\Except_1::FONT_CANT_BE_EMBEDDED);
                 }
 
             } else {

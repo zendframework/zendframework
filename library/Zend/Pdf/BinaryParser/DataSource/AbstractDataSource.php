@@ -182,11 +182,11 @@ abstract class AbstractDataSource
         }
         if ($offset < 0) {
             throw new Pdf\Exception('Attempt to move before start of data source',
-                                         Pdf\Exception::MOVE_BEFORE_START_OF_FILE);
+                                         Pdf\Except_1::MOVE_BEFORE_START_OF_FILE);
         }
         if ($offset >= $this->_size) {    // Offsets are zero-based.
             throw new Pdf\Exception('Attempt to move beyond end of data source',
-                                         Pdf\Exception::MOVE_BEYOND_END_OF_FILE);
+                                         Pdf\Except_1::MOVE_BEYOND_END_OF_FILE);
         }
         $this->_offset = $offset;
     }

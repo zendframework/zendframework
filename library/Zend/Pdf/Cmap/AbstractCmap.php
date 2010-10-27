@@ -45,10 +45,10 @@ use Zend\Pdf;
  *  <li>{@link http://partners.adobe.com/public/developer/opentype/index_cmap.html}
  * </ul>
  *
- * @todo Write code for Zend_PDF_FontCMap_HighByteMapping class.
- * @todo Write code for Zend_PDF_FontCMap_MixedCoverage class.
- * @todo Write code for Zend_PDF_FontCMap_TrimmedArray class.
- * @todo Write code for Zend_PDF_FontCMap_SegmentedCoverage class.
+ * @todo Write code for \Zend\Pdf\Cmap\HighByteMapping class.
+ * @todo Write code for \Zend\Pdf\Cmap\MixedCoverage class.
+ * @todo Write code for \Zend\Pdf\Cmap\TrimmedArray class.
+ * @todo Write code for \Zend\Pdf\Cmap\SegmentedCoverage class.
  *
  * @uses       \Zend\Pdf\Cmap\ByteEncoding
  * @uses       \Zend\Pdf\Cmap\StaticByteEncoding

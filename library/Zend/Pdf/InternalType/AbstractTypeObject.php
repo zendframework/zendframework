@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -35,7 +35,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\InternalType\NumericObject
  * @uses       \Zend\Pdf\InternalType\StringObject
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -71,10 +71,10 @@ abstract class AbstractTypeObject
      *
      * $factory parameter defines operation context.
      *
-     * @param Zend_PDF_Factory $factory
+     * @param \Zend\Pdf\ObjectFactory $factory
      * @return string
      */
-    abstract public function toString($factory = null);
+    abstract public function toString(Pdf\ObjectFactory $factory = null);
 
 
     const CLONE_MODE_SKIP_PAGES    = 1; // Do not follow pages during deep copy process

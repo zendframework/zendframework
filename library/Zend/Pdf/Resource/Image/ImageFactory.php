@@ -27,7 +27,7 @@ namespace Zend\Pdf\Resource\Image;
 use Zend\Pdf;
 
 /**
- * Zend_PDF_ImageFactory
+ * \Zend\Pdf\Resource\Image\ImageFactory
  *
  * Helps manage the diverse set of supported image file types.
  *

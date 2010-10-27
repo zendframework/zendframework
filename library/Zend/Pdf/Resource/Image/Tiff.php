@@ -409,22 +409,23 @@ class Tiff extends AbstractImage
         $this->_resource->value = $imageDataBytes;
         $this->_resource->skipFilters();
     }
+
     /**
-     * Image width (defined in Zend_PDF_Resource_Image_Interface)
+     * Image width (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
     public function getPixelWidth() {
         return $this->_width;
     }
 
     /**
-     * Image height (defined in Zend_PDF_Resource_Image_Interface)
+     * Image height (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
     public function getPixelHeight() {
         return $this->_height;
     }
 
     /**
-     * Image properties (defined in Zend_PDF_Resource_Image_Interface)
+     * Image properties (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
     public function getProperties() {
         return $this->_imageProperties;

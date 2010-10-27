@@ -79,7 +79,7 @@ class Uri extends AbstractAction
     }
 
     /**
-     * Create new Zend_PDF_Action_Uri object using specified uri
+     * Create new \Zend\Pdf\Action\Uri object using specified uri
      *
      * @param string  $uri    The URI to resolve, encoded in 7-bit ASCII
      * @param boolean $isMap  A flag specifying whether to track the mouse position when the URI is resolved

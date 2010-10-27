@@ -31,7 +31,7 @@ use Zend\Pdf\Color,
 /**
  * HTML color implementation
  *
- * Factory class which vends Zend_PDF_Color objects from typical HTML
+ * Factory class which vends \Zend\Pdf\Color objects from typical HTML
  * representations.
  *
  * @uses       \Zend\Pdf\Color
@@ -90,7 +90,7 @@ class Html implements Color
     }
 
     /**
-     * Creates a Zend_PDF_Color object from the HTML representation.
+     * Creates a \Zend\Pdf\Color object from the HTML representation.
      *
      * @param string $color May either be a hexidecimal number of the form
      *    #rrggbb or one of the 140 well-known names (black, white, blue, etc.)
@@ -114,7 +114,7 @@ class Html implements Color
     }
 
     /**
-     * Creates a Zend_PDF_Color object from the named color.
+     * Creates a \Zend\Pdf\Color object from the named color.
      *
      * @param string $color One of the 140 well-known color names (black, white,
      *    blue, etc.)

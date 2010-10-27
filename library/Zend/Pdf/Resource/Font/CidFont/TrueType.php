@@ -54,7 +54,7 @@ class TrueType extends AbstractCidFont
     /**
      * Object constructor
      *
-     * @todo Joing this class with Zend_PDF_Resource_Font_Simple_Parsed_TrueType
+     * @todo Joing this class with \Zend\Pdf\Resource\Font\Simple\Parsed\TrueType
      *
      * @param \Zend\Pdf\BinaryParser\Font\OpenType\TrueType $fontParser Font parser
      *   object containing parsed TrueType file.

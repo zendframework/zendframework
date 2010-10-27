@@ -85,10 +85,10 @@ class Markup extends AbstractAnnotation
      * they display a pop-up window containing the text of the associated note.
      *
      * $subType parameter may contain
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_HIGHLIGHT
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_UNDERLINE
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_SQUIGGLY
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_STRIKEOUT
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_HIGHLIGHT
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_UNDERLINE
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_SQUIGGLY
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_STRIKEOUT
      * for for a highlight, underline, squiggly-underline, or strikeout annotation,
      * respectively.
      *

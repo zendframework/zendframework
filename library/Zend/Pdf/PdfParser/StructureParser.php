@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -38,7 +38,7 @@ use Zend\Pdf\Trailer;
  * @uses       \Zend\Pdf\PdfParser\DataParser
  * @uses       \Zend\Pdf\Trailer\Parsed
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -346,7 +346,7 @@ class StructureParser
      * @param mixed $source
      * @param \Zend\Pdf\ObjectFactory $factory
      * @param boolean $load
-     * @throws \Zend\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct($source, Pdf\ObjectFactory $factory, $load)
     {

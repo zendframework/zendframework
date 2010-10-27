@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -37,7 +37,7 @@ use Zend\Pdf\ObjectFactory;
  * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\Except_2
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -285,8 +285,8 @@ class DataParser
 
         /**
          * Note: readElement() method is a public method and could be invoked from other classes.
-         * If readElement() is used not by Zend_PDF_StringParser::getObject() method, then we should not care
-         * about _elements member management.
+         * We should care about _elements member management only if readElement() is invoked
+         * by self::getObject() method.
          */
         switch ($nextLexeme) {
             case '(':

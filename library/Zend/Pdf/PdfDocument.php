@@ -631,7 +631,7 @@ class PdfDocument
             if ($destination instanceof InternalStructure\NavigationTarget) {
                 $destArrayItems[] = $destination->getResource();
             } else {
-                throw new Exception('PDF named destinations must be a Zend_PDF_Target object.');
+                throw new Exception('PDF named destinations must be a \Zend\Pdf\InternalStructure\NavigationTarget object.');
             }
         }
         $destArray = $this->_objFactory->newObject(new InternalType\ArrayObject($destArrayItems));
@@ -724,14 +724,14 @@ class PdfDocument
      *    If $factory is null then it will be created and page must be attached to the document to be
      *    included into output.
      * ---------------------------------------------------------
-     * new Zend_Pdf_Page(string $pagesize);
+     * new \Zend\Pdf\Page(string $pagesize);
      * ---------------------------------------------------------
      *
      * 2. Create new page with a specified pagesize (in default user space units).
      *    If $factory is null then it will be created and page must be attached to the document to be
      *    included into output.
      * ---------------------------------------------------------
-     * new Zend_Pdf_Page(numeric $width, numeric $height);
+     * new \Zend\Pdf\Page(numeric $width, numeric $height);
      * ---------------------------------------------------------
      *
      * @param mixed $param1
@@ -790,7 +790,8 @@ class PdfDocument
 
     /**
      * Get open Action
-     * Returns Zend_PDF_Target (Zend_PDF_Destination or Zend_PDF_Action object)
+     * Returns \Zend\Pdf\InternalStructure\NavigationTarget
+     * (\Zend\Pdf\Destination\AbstractDestination or \Zend\Pdf\Action\AbstractAction object)
      *
      * @return \Zend\Pdf\InternalStructure\NavigationTarget
      */
@@ -804,7 +805,8 @@ class PdfDocument
     }
 
     /**
-     * Set open Action which is actually Zend_PDF_Destination or Zend_PDF_Action object
+     * Set open Action which is actually \Zend\Pdf\Destination\AbstractDestination or
+     * \Zend\Pdf\Action\AbstractAction object
      *
      * @param \Zend\Pdf\InternalStructure\NavigationTarget $openAction
      * @returns Zend_PDF
@@ -877,7 +879,7 @@ class PdfDocument
 
     /**
      * Pages collection hash:
-     * <page dictionary object hash id> => Zend_Pdf_Page
+     * <page dictionary object hash id> => \Zend\Pdf\Page
      *
      * @var SplObjectStorage
      */
@@ -885,7 +887,7 @@ class PdfDocument
 
     /**
      * Pages collection hash:
-     * <page number> => Zend_Pdf_Page
+     * <page number> => \Zend\Pdf\Page
      *
      * @var array
      */
@@ -913,7 +915,7 @@ class PdfDocument
     /**
      * Resolve destination.
      *
-     * Returns Zend_Pdf_Page page object or null if destination is not found within PDF document.
+     * Returns \Zend\Pdf\Page page object or null if destination is not found within PDF document.
      *
      * @param \Zend\Pdf\Destination\AbstractDestination $destination  Destination to resolve
      * @param boolean $refreshPagesHash  Refresh page collection hashes before processing
@@ -1013,7 +1015,7 @@ class PdfDocument
     /**
      * Extract fonts attached to the document
      *
-     * returns array of Zend_PDF_Resource_Font_Extracted objects
+     * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
      * @throws \Zend\Pdf\Except_3

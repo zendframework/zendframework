@@ -31,8 +31,8 @@ namespace Zend\Pdf;
  * caller, create a constant for it here and include it in the object being
  * thrown. Example:
  *
- *   throw new Zend_PDF_Exception('foo() is not yet implemented',
- *                                Zend_PDF_Exception::NOT_IMPLEMENTED);
+ *   throw new \Zend\Pdf\Exception('foo() is not yet implemented',
+ *                                \Zend\Pdf\Exception::NOT_IMPLEMENTED);
  *
  * This allows the caller to determine the specific type of exception that was
  * thrown without resorting to parsing the descriptive text.
@@ -43,7 +43,6 @@ namespace Zend\Pdf;
  * time. ALWAYS use the symbolic constant names, which are guaranteed never to
  * change, in logical checks! You have been warned.
  *
- * @uses       \Zend\Exception
  * @package    Zend_PDF
  * @subpackage Core
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

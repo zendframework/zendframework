@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -34,7 +34,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Except_2
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -140,10 +140,10 @@ class DictionaryObject extends AbstractTypeObject
     /**
      * Return object as string
      *
-     * @param Zend_PDF_Factory $factory
+     * @param \Zend\Pdf\ObjectFactory $factory
      * @return string
      */
-    public function toString($factory = null)
+    public function toString(Pdf\ObjectFactory $factory = null)
     {
         $outStr = '<<';
         $lastNL = 0;

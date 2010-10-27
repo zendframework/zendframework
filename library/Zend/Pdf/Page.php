@@ -183,8 +183,8 @@ class Page
      * 1. Load PDF page from a parsed PDF file.
      *    Object factory is created by PDF parser.
      * ---------------------------------------------------------
-     * new Zend_PDF_Page(\Zend\Pdf\InternalType\DictionaryObject $pageDict,
-     *                   \Zend\Pdf\ObjectFactory $factory);
+     * new \Zend\Pdf\Page(\Zend\Pdf\InternalType\DictionaryObject $pageDict,
+     *                    \Zend\Pdf\ObjectFactory $factory);
      * ---------------------------------------------------------
      *
      * 2. Make a copy of the PDF page.
@@ -192,22 +192,22 @@ class Page
      *    Thus it will be attached to the document, but need to be placed into Zend_Pdf::$pages array
      *    to be included into output.
      * ---------------------------------------------------------
-     * new Zend_PDF_Page(Zend_PDF_Page $page);
+     * new \Zend\Pdf\Page(\Zend\Pdf\Page $page);
      * ---------------------------------------------------------
      *
      * 3. Create new page with a specified pagesize.
      *    If $factory is null then it will be created and page must be attached to the document to be
      *    included into output.
      * ---------------------------------------------------------
-     * new Zend_PDF_Page(string $pagesize, \Zend\Pdf\ObjectFactory $factory = null);
+     * new \Zend\Pdf\Page(string $pagesize, \Zend\Pdf\ObjectFactory $factory = null);
      * ---------------------------------------------------------
      *
      * 4. Create new page with a specified pagesize (in default user space units).
      *    If $factory is null then it will be created and page must be attached to the document to be
      *    included into output.
      * ---------------------------------------------------------
-     * new Zend_PDF_Page(numeric $width, numeric $height,
-     *                   \Zend\Pdf\ObjectFactory $factory = null);
+     * new \Zend\Pdf\Page(numeric $width, numeric $height,
+     *                    \Zend\Pdf\ObjectFactory $factory = null);
      * ---------------------------------------------------------
      *
      *
@@ -763,7 +763,7 @@ class Page
     /**
      * Extract fonts attached to the page
      *
-     * returns array of Zend_PDF_Resource_Font_Extracted objects
+     * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
      * @throws \Zend\Pdf\Except_3
@@ -1092,7 +1092,7 @@ class Page
     }
 
     /**
-     * Draw a Zend_PDF_ContentStream at the specified position on the page
+     * Draw a \Zend\Pdf\ContentStream at the specified position on the page
      *
      * @param ZPDFContentStream $cs
      * @param float $x1
@@ -1342,8 +1342,8 @@ class Page
     /**
      * Draw a polygon.
      *
-     * If $fillType is Zend_PDF_Page::SHAPE_DRAW_FILL_AND_STROKE or
-     * Zend_PDF_Page::SHAPE_DRAW_FILL, then polygon is automatically closed.
+     * If $fillType is \Zend\Pdf\Page::SHAPE_DRAW_FILL_AND_STROKE or
+     * \Zend\Pdf\Page::SHAPE_DRAW_FILL, then polygon is automatically closed.
      * See detailed description of these methods in a PDF documentation
      * (section 4.4.2 Path painting Operators, Filling)
      *
@@ -1403,9 +1403,9 @@ class Page
      * Draw a rectangle.
      *
      * Fill types:
-     * Zend_PDF_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
-     * Zend_PDF_Page::SHAPE_DRAW_STROKE      - stroke rectangle
-     * Zend_PDF_Page::SHAPE_DRAW_FILL        - fill rectangle
+     * \Zend\Pdf\Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+     * \Zend\Pdf\Page::SHAPE_DRAW_STROKE      - stroke rectangle
+     * \Zend\Pdf\Page::SHAPE_DRAW_FILL        - fill rectangle
      *
      * @param float $x1
      * @param float $y1
@@ -1445,9 +1445,9 @@ class Page
      * Draw a rounded rectangle.
      *
      * Fill types:
-     * Zend_PDF_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
-     * Zend_PDF_Page::SHAPE_DRAW_STROKE      - stroke rectangle
-     * Zend_PDF_Page::SHAPE_DRAW_FILL        - fill rectangle
+     * \Zend\Pdf\Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+     * \Zend\Pdf\Page::SHAPE_DRAW_STROKE      - stroke rectangle
+     * \Zend\Pdf\Page::SHAPE_DRAW_FILL        - fill rectangle
      *
      * radius is an integer representing radius of the four corners, or an array
      * of four integers representing the radius starting at top left, going

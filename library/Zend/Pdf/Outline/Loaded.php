@@ -277,7 +277,7 @@ class Loaded extends AbstractOutline
             $this->_outlineDictionary->Dest = null;
             $this->_outlineDictionary->A    = $target->getResource();
         } else {
-            throw new Pdf\Exception('Outline target has to be Zend_PDF_Destination or Zend_PDF_Action object or string');
+            throw new Pdf\Exception('Outline target has to be \Zend\Pdf\Destination\AbstractDestination or \Zend\Pdf\AbstractAction object or string');
         }
 
         return $this;
@@ -287,14 +287,11 @@ class Loaded extends AbstractOutline
      * Set outline options
      *
      * @param array $options
-     * @return Zend_PDF_Actions_Traceable
-     * @throws \Zend\Pdf\Except_3
+     * @return \Zend\Pdf\Outline\AbstractOutline
      */
     public function setOptions(array $options)
     {
-        parent::setOptions($options);
-
-        return $this;
+        return parent::setOptions($options);
     }
 
 

@@ -70,7 +70,7 @@ class Zoom extends Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
-            throw new Pdf\Exception('Page entry must be a Zend_PDF_Page object or a page number.');
+            throw new Pdf\Exception('Page entry must be a \Zend\Pdf\Page object or a page number.');
         }
 
         $destinationArray->items[] = new InternalType\NameObject('XYZ');
@@ -110,7 +110,7 @@ class Zoom extends Explicit
      * Set left edge of the displayed page (null means viewer application 'current value')
      *
      * @param float $left
-     * @return Zend_PDF_Action_Zoom
+     * @return \Zend\Pdf\Action\Zoom
      */
     public function setLeftEdge($left)
     {
@@ -137,7 +137,7 @@ class Zoom extends Explicit
      * Set top edge of the displayed page (null means viewer application 'current viewer')
      *
      * @param float $top
-     * @return Zend_PDF_Action_Zoom
+     * @return \Zend\Pdf\Action\Zoom
      */
     public function setTopEdge($top)
     {
@@ -164,7 +164,7 @@ class Zoom extends Explicit
      * Set ZoomFactor of the displayed page (null or 0 means viewer application 'current viewer')
      *
      * @param float $zoom
-     * @return Zend_PDF_Action_Zoom
+     * @return \Zend\Pdf\Action\Zoom
      */
     public function setZoomFactor($zoom)
     {

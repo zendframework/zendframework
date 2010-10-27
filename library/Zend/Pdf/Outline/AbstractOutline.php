@@ -53,7 +53,7 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
     protected $_open = false;
 
     /**
-     * Array of child outlines (array of Zend_PDF_Outline objects)
+     * Array of child outlines (array of \Zend\Pdf\Outline\AbstractOutline objects)
      *
      * @var array
      */
@@ -223,17 +223,17 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
      *
      * It provides two forms of input parameters:
      *
-     * 1. Zend_PDF_Outline::create(string $title[, Zend_PDF_Target $target])
-     * 2. Zend_PDF_Outline::create(array $options)
+     * 1. \Zend\Pdf\Outline\AbstractOutline::create(string $title[, \Zend\Pdf\InternalStructure\NavigationTarget $target])
+     * 2. \Zend\Pdf\Outline\AbstractOutline::create(array $options)
      *
      * Second form allows to provide outline options as an array.
      * The followed options are supported:
      *   'title'  - string, outline title, required
      *   'open'   - boolean, true if outline entry is open (default value is false)
-     *   'color'  - Zend_PDF_Color_Rgb object, true if outline entry is open (default value is null - black)
+     *   'color'  - \Zend\Pdf\Color\Rgb object, true if outline entry is open (default value is null - black)
      *   'italic' - boolean, true if outline entry is displayed in italic (default value is false)
      *   'bold'   - boolean, true if outline entry is displayed in bold (default value is false)
-     *   'target' - Zend_PDF_Target object or string, outline item destination
+     *   'target' - \Zend\Pdf\InternalStructure\NavigationTarget object or string, outline item destination
      *
      * @return \Zend\Pdf\Outline\AbstractOutline
      * @throws \Zend\Pdf\Except_3
@@ -242,14 +242,14 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
     {
         if (is_string($param1)) {
             if ($param2 !== null  &&  !($param2 instanceof Pdf\InternalStructure\NavigationTarget  ||  is_string($param2))) {
-                throw new Pdf\Exception('Outline create method takes $title (string) and $target (Zend_PDF_Target or string) or an array as an input');
+                throw new Pdf\Exception('Outline create method takes $title (string) and $target (\Zend\Pdf\InternalStructure\NavigationTarget or string) or an array as an input');
             }
 
             return new Created(array('title'  => $param1,
                                      'target' => $param2));
         } else {
             if (!is_array($param1)  ||  $param2 !== null) {
-                throw new Pdf\Exception('Outline create method takes $title (string) and $destination (Zend_PDF_Destination) or an array as an input');
+                throw new Pdf\Exception('Outline create method takes $title (string) and $destination (\Zend\Pdf\InternalStructure\NavigationTarget) or an array as an input');
             }
 
             return new Created($param1);

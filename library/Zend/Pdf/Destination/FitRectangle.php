@@ -28,7 +28,7 @@ use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
 /**
- * Zend_PDF_Destination_FitRectangle explicit detination
+ * \Zend\Pdf\Destination\FitRectangle explicit detination
  *
  * Destination array: [page /FitR left bottom right top]
  *
@@ -70,7 +70,7 @@ class FitRectangle extends Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
-            throw new Pdf\Exception('Page entry must be a Zend_PDF_Page object or a page number.');
+            throw new Pdf\Exception('Page entry must be a \Zend\Pdf\Page object or a page number.');
         }
 
         $destinationArray->items[] = new InternalType\NameObject('FitR');

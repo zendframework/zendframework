@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -40,7 +40,7 @@ use Zend\Pdf\ObjectFactory\UpdateInfoContainer,
  * @uses       \Zend\Pdf\InternalType\StreamObject
  * @uses       \Zend\Pdf\Except_2
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -344,7 +344,7 @@ class ObjectFactory
 
     /**
      * Enumerate modified objects.
-     * Returns array of \Zend\PDF\ObjectFactory\UpdateInfoContainer
+     * Returns array of \Zend\Pdf\ObjectFactory\UpdateInfoContainer
      *
      * @param \Zend\Pdf\ObjectFactory $rootFactory
      * @return array

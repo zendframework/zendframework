@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter;
+use Zend\Pdf\Except_5;
 
 use Zend\Pdf\InternalType\StreamFilter,
     Zend\Pdf;

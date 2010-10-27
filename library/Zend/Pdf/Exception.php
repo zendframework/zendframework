@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Pdf;
+use Zend\Pdf\Except_5;
 
 /**
  * Exception interface for Zend\Pdf.

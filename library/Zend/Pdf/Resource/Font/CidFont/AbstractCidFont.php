@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Font\CidFont;
+use Zend\Pdf\Except_5;
 use Zend\Pdf\Resource\Font as FontResource;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;

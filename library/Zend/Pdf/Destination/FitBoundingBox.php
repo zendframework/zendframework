@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
+use Zend\Pdf\Except_5;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 

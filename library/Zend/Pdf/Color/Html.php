@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Color;
+use Zend\Pdf\Except_5;
 
 use Zend\Pdf\Color,
     Zend\Pdf;

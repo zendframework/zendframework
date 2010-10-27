@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\DataSource;
+use Zend\Pdf\Except_5;
 use Zend\Pdf;
 
 /**

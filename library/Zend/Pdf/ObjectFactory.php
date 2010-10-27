@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf;
+use Zend\Pdf\Except_5;
 
 use Zend\Pdf\ObjectFactory\UpdateInfoContainer,
     Zend\Pdf,

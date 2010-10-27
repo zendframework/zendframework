@@ -129,7 +129,7 @@ class Parsed extends AbstractTrailer
      * Get header of free objects list
      * Returns object number of last free object
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      * @return integer
      */
     public function getLastFreeObject()

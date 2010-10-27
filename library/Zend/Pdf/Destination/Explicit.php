@@ -58,7 +58,7 @@ abstract class Explicit extends AbstractDestination
      * Explicit destination object constructor
      *
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $destinationArray
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct(InternalType\AbstractTypeObject $destinationArray)
     {

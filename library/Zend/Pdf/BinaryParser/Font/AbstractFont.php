@@ -73,7 +73,7 @@ abstract class AbstractFont extends BinaryParser\AbstractBinaryParser
      * Validates the data source and enables debug logging if so configured.
      *
      * @param \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource $dataSource
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct(BinaryParser\DataSource\AbstractDataSource $dataSource)
     {
@@ -116,7 +116,7 @@ abstract class AbstractFont extends BinaryParser\AbstractBinaryParser
      *   omitted, uses big-endian.
      * @param string $characterSet (optional) --Ignored--
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function readStringUTF16($byteCount,
                                     $byteOrder = BinaryParser\AbstractBinaryParser::BYTE_ORDER_BIG_ENDIAN,
@@ -132,7 +132,7 @@ abstract class AbstractFont extends BinaryParser\AbstractBinaryParser
      * @param integer $byteCount Number of bytes (characters) to return.
      * @param string $characterSet (optional) --Ignored--
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function readStringMacRoman($byteCount, $characterSet = '')
     {
@@ -147,7 +147,7 @@ abstract class AbstractFont extends BinaryParser\AbstractBinaryParser
      * @param integer $lengthBytes (optional) Number of bytes that make up the
      *   length. Default is 1.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function readStringPascal($characterSet = '', $lengthBytes = 1)
     {

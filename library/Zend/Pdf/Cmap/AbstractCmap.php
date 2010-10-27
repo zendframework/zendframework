@@ -150,7 +150,7 @@ abstract class AbstractCmap
      * @param integer $cmapType Type of cmap.
      * @param mixed $cmapData CMap table data. Usually a string or array.
      * @return \Zend\Pdf\Cmap\AbstractCmap
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public static function cmapWithTypeData($cmapType, $cmapData)
     {
@@ -199,7 +199,7 @@ abstract class AbstractCmap
      * malformed.
      *
      * @param string $cmapData Raw binary cmap table data.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     abstract public function __construct($cmapData);
 
@@ -266,7 +266,7 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _extractInt2(&$data, $index)
     {
@@ -292,7 +292,7 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _extractUInt2(&$data, $index)
     {
@@ -318,7 +318,7 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _extractUInt4(&$data, $index)
     {

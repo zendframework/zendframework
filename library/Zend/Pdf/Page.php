@@ -214,7 +214,7 @@ class Page
      * @param mixed $param1
      * @param mixed $param2
      * @param mixed $param3
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct($param1, $param2 = null, $param3 = null)
     {
@@ -479,7 +479,7 @@ class Page
      *
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function flush()
     {
@@ -538,7 +538,7 @@ class Page
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
      * @param \Zend\Pdf\ObjectFactory $objFactory
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function render(ObjectFactory $objFactory)
     {
@@ -688,7 +688,7 @@ class Page
      *
      * @param float $alpha
      * @param string $mode
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      * @return \Zend\Pdf\Page
      */
     public function setAlpha($alpha, $mode = 'Normal')
@@ -766,7 +766,7 @@ class Page
      * returns array of Zend_PDF_Resource_Font_Extracted objects
      *
      * @return array
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function extractFonts()
     {
@@ -813,7 +813,7 @@ class Page
      * $fontName should be specified in UTF-8 encoding
      *
      * @return \Zend\Pdf\Resource\Font\Extracted|null
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function extractFont($fontName)
     {
@@ -888,7 +888,7 @@ class Page
      * any rotation/translation/scaling that has been applied.
      *
      * @todo check for the open paths
-     * @throws \Zend\Pdf\Exception    - if a save is performed with an open path
+     * @throws \Zend\Pdf\Except_3    - if a save is performed with an open path
      * @return \Zend\Pdf\Page
      */
     public function saveGS()
@@ -904,7 +904,7 @@ class Page
     /**
      * Restore the graphics state that was saved with the last call to saveGS().
      *
-     * @throws \Zend\Pdf\Exception   - if there is no previously saved state
+     * @throws \Zend\Pdf\Except_3   - if there is no previously saved state
      * @return \Zend\Pdf\Page
      */
     public function restoreGS()
@@ -1588,7 +1588,7 @@ class Page
      * @param float $y
      * @param string $charEncoding (optional) Character encoding of source text.
      *   Defaults to current locale.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      * @return \Zend\Pdf\Page
      */
     public function drawText($text, $x, $y, $charEncoding = '')
@@ -1664,7 +1664,7 @@ class Page
      /**
      * Close the path by drawing a straight line back to it's beginning.
      *
-     * @throws \Zend\Pdf\Exception    - if a path hasn't been started with pathMove()
+     * @throws \Zend\Pdf\Except_3    - if a path hasn't been started with pathMove()
      * @return \Zend\Pdf\Page
      */
     public function pathClose()

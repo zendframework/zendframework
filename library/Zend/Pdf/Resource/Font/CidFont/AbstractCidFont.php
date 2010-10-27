@@ -84,7 +84,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      * @param \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType $fontParser Font parser object
      *   containing OpenType file.
      * @param integer $embeddingOptions Options for font embedding.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct(Pdf\BinaryParser\Font\OpenType\AbstractOpenType $fontParser)
     {
@@ -408,7 +408,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param array &$glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function widthsForGlyphs($glyphNumbers)
     {
@@ -429,7 +429,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param integer $glyphNumber
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function widthForGlyph($glyphNumber)
     {
@@ -449,7 +449,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      * @param string $string
      * @param string $charEncoding Character encoding of source text.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function encodeString($string, $charEncoding)
     {
@@ -469,7 +469,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      * @param string $string
      * @param string $charEncoding Character encoding of resulting text.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function decodeString($string, $charEncoding)
     {

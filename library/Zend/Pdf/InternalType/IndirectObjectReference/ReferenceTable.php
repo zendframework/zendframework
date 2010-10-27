@@ -156,7 +156,7 @@ class ReferenceTable
      *
      * @param string $ref
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function getNextFree($ref)
     {

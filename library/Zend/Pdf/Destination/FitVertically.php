@@ -54,7 +54,7 @@ class FitVertically extends Explicit
      * @param \Zend\Pdf\Page|integer $page  Page object or page number
      * @param float $left  Left edge of displayed page
      * @return \Zend\Pdf\Destination\FitVertically
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public static function create($page, $left)
     {

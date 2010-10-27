@@ -56,7 +56,7 @@ class Link extends AbstractAnnotation
     /**
      * Annotation object constructor
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {

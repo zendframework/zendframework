@@ -71,7 +71,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private static function _getPredictorValue(&$params)
     {
@@ -94,7 +94,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private static function _getColorsValue(&$params)
     {
@@ -115,7 +115,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private static function _getBitsPerComponentValue(&$params)
     {
@@ -155,7 +155,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected static function _applyEncodeParams($data, $params) {
         $predictor        = self::_getPredictorValue($params);

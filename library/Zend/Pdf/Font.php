@@ -469,7 +469,7 @@ abstract class Font
      * @param string $name Full PostScript name of font.
      * @param integer $embeddingOptions (optional) Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\AbstractFont
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public static function fontWithName($name, $embeddingOptions = 0)
         {
@@ -581,7 +581,7 @@ abstract class Font
      * @param string $filePath Full path to the font file.
      * @param integer $embeddingOptions (optional) Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\AbstractFont
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public static function fontWithPath($filePath, $embeddingOptions = 0)
     {
@@ -684,7 +684,7 @@ abstract class Font
      * @param integer $embeddingOptions Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\OpenType\TrueType May also return null if
      *   the data source does not appear to contain a TrueType font.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected static function _extractTrueTypeFont($dataSource, $embeddingOptions)
     {

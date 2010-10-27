@@ -52,7 +52,7 @@ class Uri extends AbstractAction
      * @param \Zend\Pdf\InternalType\DictionaryObject $dictionary
      * @param SplObjectStorage      $processedActions  list of already processed action dictionaries,
      *                                                 used to avoid cyclic references
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions)
     {
@@ -68,7 +68,7 @@ class Uri extends AbstractAction
      *
      * @param string $uri
      * @return true
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected static function _validateUri($uri)
     {

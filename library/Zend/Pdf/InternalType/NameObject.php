@@ -51,7 +51,7 @@ class NameObject extends AbstractTypeObject
      * Object constructor
      *
      * @param string $val
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct($val)
     {

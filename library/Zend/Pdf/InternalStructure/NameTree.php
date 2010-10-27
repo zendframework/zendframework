@@ -56,7 +56,7 @@ class NameTree implements \ArrayAccess, \Iterator, \Countable
      * Object constructor
      *
      * @param $rootDictionary root of name dictionary
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct(InternalType\AbstractTypeObject $rootDictionary)
     {

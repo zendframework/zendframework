@@ -58,7 +58,7 @@ class Html implements Color
      * Class constructor.
      *
      * @param mixed $color
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct($color)
     {

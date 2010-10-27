@@ -59,7 +59,7 @@ class Zoom extends Explicit
      * @param float $top   Top edge of displayed page
      * @param float $zoom  Zoom factor
      * @return \Zend\Pdf\Destination\Zoom
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public static function create($page, $left = null, $top = null, $zoom = null)
     {

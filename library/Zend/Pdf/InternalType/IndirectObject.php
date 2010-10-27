@@ -76,7 +76,7 @@ class IndirectObject extends AbstractTypeObject
      * @param integer $objNum
      * @param integer $genNum
      * @param \Zend\Pdf\ObjectFactory $factory
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct(AbstractTypeObject $val,
                                 $objNum,

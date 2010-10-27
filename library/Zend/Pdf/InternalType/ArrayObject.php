@@ -54,7 +54,7 @@ class ArrayObject extends AbstractTypeObject
      * Object constructor
      *
      * @param array $val   - array of \Zend\Pdf\InternalType\AbstractTypeObject objects
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct($val = null)
     {
@@ -77,7 +77,7 @@ class ArrayObject extends AbstractTypeObject
      * Getter
      *
      * @param string $property
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __get($property)
     {
@@ -90,7 +90,7 @@ class ArrayObject extends AbstractTypeObject
      *
      * @param mixed $offset
      * @param mixed $value
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __set($property, $value)
     {

@@ -87,7 +87,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * NOTE: This method should be overridden in subclasses to check the
      * specific format and set $this->_isScreened!
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function screen()
     {
@@ -103,7 +103,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * NOTE: This method should be overridden in subclasses to add type-
      * specific parsing and set $this->isParsed.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function parse()
     {
@@ -152,7 +152,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * The table directory contains the identifier, checksum, byte offset, and
      * length of each of the information tables housed in the font file.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseTableDirectory()
     {
@@ -220,7 +220,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * The head table contains global information about the font such as the
      * revision number and global metrics.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseHeadTable()
     {
@@ -281,7 +281,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * The name table contains all of the identifying strings associated with
      * the font such as its name, copyright, trademark, license, etc.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseNameTable()
     {
@@ -376,7 +376,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * on PostScript printers. It also contains the preferred location and
      * thickness for an underline, which is used by our layout code.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parsePostTable()
     {
@@ -413,7 +413,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * contains some vertical layout information for Apple systems. The vertical
      * layout information for the PDF file is usually taken from the OS/2 table.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseHheaTable()
     {
@@ -463,7 +463,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * contains some vertical layout information for Apple systems. The vertical
      * layout information for the PDF file is usually taken from the OS/2 table.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseMaxpTable()
     {
@@ -491,7 +491,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * this table to determine most of the vertical layout and stylistic
      * information and for the font.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseOs2Table()
     {
@@ -726,7 +726,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * within the font. These are the critical values for horizontal layout of
      * text.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseHmtxTable()
     {
@@ -781,7 +781,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      *   are tolerable. Most specifically, since everything above this layer deals
      *   in Unicode, we need to be sure to only accept format 0 MacRoman tables.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _parseCMapTable()
     {
@@ -944,7 +944,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * is not recognized.
      *
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _readScalerType()
     {
@@ -985,7 +985,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * start of that table.
      *
      * @param string $tableName
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _jumpToTable($tableName)
     {
@@ -1005,7 +1005,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * @param float $minVersion Minimum compatible version number.
      * @param float $maxVertion Maximum compatible version number.
      * @return float Table version number.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     protected function _readTableVersion($minVersion, $maxVersion)
     {

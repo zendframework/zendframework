@@ -80,7 +80,7 @@ abstract class AbstractDataSource
      * If the data source cannot be opened for any reason (such as insufficient
      * permissions, missing file, etc.), will throw an appropriate exception.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     abstract public function __construct();
 
@@ -103,7 +103,7 @@ abstract class AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     abstract public function readBytes($byteCount);
 
@@ -173,7 +173,7 @@ abstract class AbstractDataSource
      * parent method.
      *
      * @param integer $offset Destination byte offset.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function moveToOffset($offset)
     {
@@ -200,7 +200,7 @@ abstract class AbstractDataSource
      * the end of the data source.
      *
      * @param integer $byteCount Number of bytes to skip.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function skipBytes($byteCount)
     {

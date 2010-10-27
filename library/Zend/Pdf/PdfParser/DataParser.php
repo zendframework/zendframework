@@ -275,7 +275,7 @@ class DataParser
      * Read elemental object from a PDF stream
      *
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function readElement($nextLexeme = null)
     {
@@ -344,7 +344,7 @@ class DataParser
      * Also reads trailing ')' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\StringObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private function _readString()
     {
@@ -390,7 +390,7 @@ class DataParser
      * Also reads trailing '>' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\BinaryStringObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private function _readBinaryString()
     {
@@ -418,7 +418,7 @@ class DataParser
      * Also reads trailing ']' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\ArrayObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private function _readArray()
     {
@@ -441,7 +441,7 @@ class DataParser
      * Also reads trailing '>>' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\DictionaryObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private function _readDictionary()
     {

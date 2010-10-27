@@ -50,7 +50,7 @@ class Jpeg extends AbstractImage
      * Object constructor
      *
      * @param string $imageFileName
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public function __construct($imageFileName)
     {

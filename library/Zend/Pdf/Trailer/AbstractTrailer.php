@@ -52,7 +52,7 @@ abstract class AbstractTrailer
      * Check if key is correct
      *
      * @param string $key
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     private function _checkDictKey($key)
     {

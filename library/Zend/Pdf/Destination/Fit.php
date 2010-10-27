@@ -55,7 +55,7 @@ class Fit extends Explicit
      *
      * @param \Zend\Pdf\Page|integer $page  Page object or page number
      * @return \Zend\Pdf\Destination\Fit
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      */
     public static function create($page)
     {

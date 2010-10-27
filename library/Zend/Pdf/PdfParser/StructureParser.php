@@ -100,7 +100,7 @@ class StructureParser
      * Load XReference table and referenced objects
      *
      * @param integer $offset
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Except_3
      * @return \Zend\Pdf\Trailer\Parsed
      */
     private function _loadXRefTable($offset)

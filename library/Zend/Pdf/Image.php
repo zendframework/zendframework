@@ -32,7 +32,7 @@ namespace Zend\Pdf;
  * the true base class ({@link \Zend\Pdf\Resource\Image\AbstractImage}) is not intuitive
  * for the end user.
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\BinaryParser\DataSource
  * @uses       \Zend\Pdf\BinaryParser\Image
  * @uses       \Zend\Pdf\Resource\Image

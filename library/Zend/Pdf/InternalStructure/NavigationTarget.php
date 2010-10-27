@@ -35,7 +35,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Action\AbstractAction
  * @uses       \Zend\Pdf\Destination\AbstractDestination
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

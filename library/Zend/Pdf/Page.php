@@ -30,7 +30,7 @@ namespace Zend\Pdf;
  * @uses       \Zend\Pdf\PdfDocument
  * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Resource\Font
  * @package    Zend_PDF
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

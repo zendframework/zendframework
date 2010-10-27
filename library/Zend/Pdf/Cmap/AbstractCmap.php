@@ -54,7 +54,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Cmap\StaticByteEncoding
  * @uses       \Zend\Pdf\Cmap\SegmentToDelta
  * @uses       \Zend\Pdf\Cmap\TrimmedTable
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

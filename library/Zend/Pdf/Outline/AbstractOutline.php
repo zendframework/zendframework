@@ -35,7 +35,7 @@ use Zend\Pdf\ObjectFactory;
  *
  * @uses       Countable
  * @uses       RecursiveIterator
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Outline\Created
  * @uses       \Zend\Pdf\ObjectFactory;
  * @package    Zend_PDF

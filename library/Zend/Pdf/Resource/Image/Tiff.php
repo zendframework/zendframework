@@ -33,7 +33,7 @@ use Zend\Pdf\InternalType;
  * @uses       \Zend\Pdf\InternalType\ArrayObject
  * @uses       \Zend\Pdf\InternalType\NameObject
  * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Resource\Image\AbstractImage
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image

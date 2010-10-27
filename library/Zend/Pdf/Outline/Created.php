@@ -41,7 +41,7 @@ use Zend\Pdf\ObjectFactory;
  * @uses       \Zend\Pdf\Destination
  * @uses       \Zend\Pdf\InternalType
  * @uses       \Zend\Pdf\InternalStructure
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\Outline\AbstractOutline
  * @package    Zend_PDF

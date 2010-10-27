@@ -29,7 +29,7 @@ use Zend\Pdf;
 /**
  * PDF file reference table
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @category   Zend
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal

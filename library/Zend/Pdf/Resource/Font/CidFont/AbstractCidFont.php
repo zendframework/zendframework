@@ -47,7 +47,7 @@ use Zend\Pdf;
  * {@link \Zend\Pdf\Font::fontWithName} and {@link \Zend\Pdf\Font::fontWithPath}.
  *
  * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Font
  * @uses       \Zend\Pdf\Resource\Font\AbstractFont
  * @package    Zend_PDF

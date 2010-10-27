@@ -41,7 +41,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Destination\Unknown
  * @uses       \Zend\Pdf\Destination\Zoom
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\InternalStructure\NavigationTarget
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination

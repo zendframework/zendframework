@@ -35,7 +35,7 @@ namespace Zend\Pdf;
  * the true base class ({@link \Zend\Pdf\Resource\Font\AbstractFont}) is not intuitive
  * for the end user.
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\BinaryParser\DataSource\File
  * @uses       \Zend\Pdf\Resource\Font\CidFont\TrueType
  * @uses       \Zend\Pdf\Resource\Font\OpenType\TrueType

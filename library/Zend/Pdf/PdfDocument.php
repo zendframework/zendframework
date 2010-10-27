@@ -37,7 +37,7 @@ use Zend\Memory;
  *
  * @uses       \Zend\Memory\MemoryManager
  * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Font
  * @uses       \Zend\Pdf\Image
  * @uses       \Zend\Pdf\InternalStructure

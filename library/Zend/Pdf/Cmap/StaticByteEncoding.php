@@ -33,7 +33,7 @@ use Zend\Pdf;
  * takes a predefined array of glyph numbers and can cover any Unicode character.
  *
  * @uses       \Zend\Pdf\Cmap\ByteEncoding
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -37,7 +37,7 @@ use Zend\Pdf\Color,
  * @uses       \Zend\Pdf\Color
  * @uses       \Zend\Pdf\Color\GrayScale
  * @uses       \Zend\Pdf\Color\Rgb
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Color

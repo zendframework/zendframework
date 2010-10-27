@@ -38,7 +38,7 @@ use Zend\Pdf\ObjectFactory\UpdateInfoContainer,
  * @uses       \Zend\Pdf\ObjectFactory\UpdateInfoContainer
  * @uses       \Zend\Pdf\InternalType\IndirectObject
  * @uses       \Zend\Pdf\InternalType\StreamObject
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

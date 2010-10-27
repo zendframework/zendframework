@@ -30,7 +30,7 @@ use Zend\Pdf;
  * Concrete subclass of {@link \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource}
  * that provides an interface to binary strings.
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser

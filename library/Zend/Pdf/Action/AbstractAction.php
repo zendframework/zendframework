@@ -55,7 +55,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Action\Uri
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\InternalStructure\NavigationTarget
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action

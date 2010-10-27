@@ -29,7 +29,7 @@ use Zend\Pdf;
 /**
  * LZW stream filter
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression\AbstractCompression
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal

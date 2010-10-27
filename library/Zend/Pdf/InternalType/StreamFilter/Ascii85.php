@@ -30,7 +30,7 @@ use Zend\Pdf\InternalType\StreamFilter;
 /**
  * ASCII85 stream filter
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal

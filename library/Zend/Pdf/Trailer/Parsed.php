@@ -31,7 +31,7 @@ use Zend\Pdf\InternalType;
  * PDF file trailer.
  * Stores and provides access to the trailer parced from a PDF file
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Trailer\AbstractTrailer
  * @uses       \Zend\Pdf\InternalType\DirctionaryObject
  * @uses       \Zend\Pdf\InternalType\IndirectObjectReference\Context

@@ -48,7 +48,7 @@ use Zend\Pdf\Cmap;
  * </ul>
  *
  * @uses       \Zend\Pdf\Cmap\AbstractCmap
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\BinaryParser\Font\AbstractFont
  * @uses       \Zend\Pdf\Font
  * @package    Zend_PDF

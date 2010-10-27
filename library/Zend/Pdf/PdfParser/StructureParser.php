@@ -34,7 +34,7 @@ use Zend\Pdf\Trailer;
  *
  * @uses       \Zend\Pdf\InternalType
  * @uses       \Zend\Pdf\InternalType\IndirectObjectReference
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\PdfParser\DataParser
  * @uses       \Zend\Pdf\Trailer\Parsed
  * @package    Zend_PDF

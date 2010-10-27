@@ -29,7 +29,7 @@ use Zend\Pdf;
 /**
  * Abstract base class for Image file parsers.
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\BinaryParser\Image\AbstractImage
  * @uses       \Zend\Pdf\Image
  * @package    Zend_PDF

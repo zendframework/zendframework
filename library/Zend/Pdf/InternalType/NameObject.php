@@ -30,7 +30,7 @@ use Zend\Pdf;
  * PDF file 'name' element implementation
  *
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @category   Zend
  * @package    Zend_PDF
  * @package    Zend_PDF_Internal

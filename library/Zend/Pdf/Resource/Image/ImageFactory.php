@@ -31,7 +31,7 @@ use Zend\Pdf;
  *
  * Helps manage the diverse set of supported image file types.
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Resource\Image\Jpeg
  * @uses       \Zend\Pdf\Resource\Image\Png
  * @uses       \Zend\Pdf\Resource\Image\Tiff

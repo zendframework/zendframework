@@ -42,7 +42,7 @@ use Zend\Pdf\ObjectFactory;
  * @uses       \Zend\Pdf\Color
  * @uses       \Zend\Pdf\Destination
  * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\Outline
  * @uses       \Zend\Pdf\ObjectFactory
  * @package    Zend_PDF

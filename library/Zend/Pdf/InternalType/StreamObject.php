@@ -36,7 +36,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\InternalType\NumericObject
  * @uses       \Zend\Pdf\InternalType\IndirectObject
  * @uses       \Zend\Pdf\InternalType\StreamContent
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression;
  * @category   Zend

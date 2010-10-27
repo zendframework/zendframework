@@ -34,7 +34,7 @@ use Zend\Pdf;
  * by {@link fopen()} (through URL wrappers). It may be used for local
  * filesystem objects only.
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser

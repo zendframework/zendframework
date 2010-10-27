@@ -29,7 +29,7 @@ use Zend\Pdf;
 /**
  * Parses an OpenType font file containing TrueType outlines.
  *
- * @uses       \Zend\Pdf\Exception
+ * @uses       \Zend\Pdf\Except_2
  * @uses       \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType
  * @uses       \Zend\Pdf\Font
  * @package    Zend_PDF

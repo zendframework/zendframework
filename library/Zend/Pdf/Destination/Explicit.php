@@ -63,18 +63,18 @@ abstract class Explicit extends AbstractDestination
     public function __construct(InternalType\AbstractTypeObject $destinationArray)
     {
         if ($destinationArray->getType() != InternalType\AbstractTypeObject::TYPE_ARRAY) {
-            throw new Pdf\Exception('Explicit destination resource Array must be a direct or an indirect array object.');
+            throw new pdf_except_4('Explicit destination resource Array must be a direct or an indirect array object.');
         }
 
         $this->_destinationArray = $destinationArray;
 
         switch (count($this->_destinationArray->items)) {
             case 0:
-                throw new Pdf\Exception('Destination array must contain a page reference.');
+                throw new pdf_except_4('Destination array must contain a page reference.');
                 break;
 
             case 1:
-                throw new Pdf\Exception('Destination array must contain a destination type name.');
+                throw new pdf_except_4('Destination array must contain a destination type name.');
                 break;
 
             default:
@@ -92,7 +92,7 @@ abstract class Explicit extends AbstractDestination
                 break;
 
             default:
-                throw new Pdf\Exception('Destination target must be a page number or page dictionary object.');
+                throw new pdf_except_4('Destination target must be a page number or page dictionary object.');
                 break;
         }
     }

@@ -61,7 +61,7 @@ class NameTree implements \ArrayAccess, \Iterator, \Countable
     public function __construct(InternalType\AbstractTypeObject $rootDictionary)
     {
         if ($rootDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('Name tree root must be a dictionary.');
+            throw new pdf_except_4('Name tree root must be a dictionary.');
         }
 
         $intermediateNodes = array();

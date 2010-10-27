@@ -84,15 +84,15 @@ class IndirectObject extends AbstractTypeObject
                                 ObjectFactory $factory)
     {
         if ($val instanceof self) {
-            throw new Pdf\Exception('Object number must not be an instance of \Zend\Pdf\InternalType\IndirectObject.');
+            throw new pdf_except_4('Object number must not be an instance of \Zend\Pdf\InternalType\IndirectObject.');
         }
 
         if ( !(is_integer($objNum) && $objNum > 0) ) {
-            throw new Pdf\Exception('Object number must be positive integer.');
+            throw new pdf_except_4('Object number must be positive integer.');
         }
 
         if ( !(is_integer($genNum) && $genNum >= 0) ) {
-            throw new Pdf\Exception('Generation number must be non-negative integer.');
+            throw new pdf_except_4('Generation number must be non-negative integer.');
         }
 
         $this->_value   = $val;

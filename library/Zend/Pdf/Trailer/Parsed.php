@@ -136,7 +136,7 @@ class Parsed extends AbstractTrailer
     {
         try {
             $this->_context->getRefTable()->getNextFree('0 65535 R');
-        } catch (Pdf\Exception $e) {
+        } catch (pdf_except_4 $e) {
             if ($e->getMessage() == 'Object not found.') {
                 /**
                  * Here is work around for some wrong generated PDFs.
@@ -146,7 +146,7 @@ class Parsed extends AbstractTrailer
                 return 0;
             }
 
-            throw new Pdf\Exception($e->getMessage(), $e->getCode(), $e);
+            throw new pdf_except_4($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

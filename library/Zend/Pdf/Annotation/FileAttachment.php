@@ -54,13 +54,13 @@ class FileAttachment extends AbstractAnnotation
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
         if ($annotationDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('Annotation dictionary resource has to be a dictionary.');
+            throw new pdf_except_4('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
             $annotationDictionary->Subtype->getType() != InternalType\AbstractTypeObject::TYPE_NAME  ||
             $annotationDictionary->Subtype->value != 'FileAttachment') {
-            throw new Pdf\Exception('Subtype => FileAttachment entry is requires');
+            throw new pdf_except_4('Subtype => FileAttachment entry is requires');
         }
 
         parent::__construct($annotationDictionary);

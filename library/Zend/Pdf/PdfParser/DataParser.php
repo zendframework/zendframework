@@ -317,7 +317,7 @@ class DataParser
             case '{':
                 // fall through to next case
             case '}':
-                throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X.',
+                throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X.',
                                                 $this->offset));
 
             default:
@@ -376,7 +376,7 @@ class DataParser
             $this->offset += strcspn($this->data, '()\\', $this->offset);
         }
         if ($openedBrackets != 0) {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Unexpected end of file while string reading. Offset - 0x%X. \')\' expected.', $start));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Unexpected end of file while string reading. Offset - 0x%X. \')\' expected.', $start));
         }
 
         return new InternalType\StringObject(InternalType\StringObject::unescape( substr($this->data,
@@ -399,11 +399,11 @@ class DataParser
         $this->offset += strspn($this->data, "\x00\t\n\f\r 0123456789abcdefABCDEF", $this->offset);
 
         if ($this->offset >= strlen($this->data) - 1) {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Unexpected end of file while reading binary string. Offset - 0x%X. \'>\' expected.', $start));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Unexpected end of file while reading binary string. Offset - 0x%X. \'>\' expected.', $start));
         }
 
         if ($this->data[$this->offset++] != '>') {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Unexpected character while binary string reading. Offset - 0x%X.', $this->offset));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Unexpected character while binary string reading. Offset - 0x%X.', $this->offset));
         }
 
         return new InternalType\BinaryStringObject(
@@ -432,7 +432,7 @@ class DataParser
             }
         }
 
-        throw new Pdf\Exception(sprintf('PDF file syntax error. Unexpected end of file while array reading. Offset - 0x%X. \']\' expected.', $this->offset));
+        throw new pdf_except_4(sprintf('PDF file syntax error. Unexpected end of file while array reading. Offset - 0x%X. \']\' expected.', $this->offset));
     }
 
 
@@ -455,7 +455,7 @@ class DataParser
                 $value = $this->readElement();
 
                 if (!$name instanceof InternalType\NameObject) {
-                    throw new Pdf\Exception(sprintf('PDF file syntax error. Name object expected while dictionary reading. Offset - 0x%X.', $nameStart));
+                    throw new pdf_except_4(sprintf('PDF file syntax error. Name object expected while dictionary reading. Offset - 0x%X.', $nameStart));
                 }
 
                 $dictionary->add($name, $value);
@@ -464,7 +464,7 @@ class DataParser
             }
         }
 
-        throw new Pdf\Exception(sprintf('PDF file syntax error. Unexpected end of file while dictionary reading. Offset - 0x%X. \'>>\' expected.', $this->offset));
+        throw new pdf_except_4(sprintf('PDF file syntax error. Unexpected end of file while dictionary reading. Offset - 0x%X. \'>>\' expected.', $this->offset));
     }
 
 
@@ -544,17 +544,17 @@ class DataParser
 
         $objNum = $this->readLexeme();
         if (!ctype_digit($objNum)) {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Object number expected.', $this->offset - strlen($objNum)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Object number expected.', $this->offset - strlen($objNum)));
         }
 
         $genNum = $this->readLexeme();
         if (!ctype_digit($genNum)) {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Object generation number expected.', $this->offset - strlen($genNum)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Object generation number expected.', $this->offset - strlen($genNum)));
         }
 
         $objKeyword = $this->readLexeme();
         if ($objKeyword != 'obj') {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. \'obj\' keyword expected.', $this->offset - strlen($objKeyword)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. \'obj\' keyword expected.', $this->offset - strlen($objKeyword)));
         }
 
         $objValue = $this->readElement();
@@ -582,11 +582,11 @@ class DataParser
          * It's a stream object
          */
         if ($nextLexeme != 'stream') {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. \'endobj\' or \'stream\' keywords expected.', $this->offset - strlen($nextLexeme)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. \'endobj\' or \'stream\' keywords expected.', $this->offset - strlen($nextLexeme)));
         }
 
         if (!$objValue instanceof InternalType\DictionaryObject) {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Stream extent must be preceded by stream dictionary.', $this->offset - strlen($nextLexeme)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Stream extent must be preceded by stream dictionary.', $this->offset - strlen($nextLexeme)));
         }
 
         /**
@@ -604,7 +604,7 @@ class DataParser
         } else if ($this->data[$this->offset] == "\n"    ) {
             $this->offset++;
         } else {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. \'stream\' must be followed by either cr-lf sequence or lf character only.', $this->offset - strlen($nextLexeme)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. \'stream\' must be followed by either cr-lf sequence or lf character only.', $this->offset - strlen($nextLexeme)));
         }
 
         $dataOffset = $this->offset;
@@ -613,12 +613,12 @@ class DataParser
 
         $nextLexeme = $this->readLexeme();
         if ($nextLexeme != 'endstream') {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. \'endstream\' keyword expected.', $this->offset - strlen($nextLexeme)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. \'endstream\' keyword expected.', $this->offset - strlen($nextLexeme)));
         }
 
         $nextLexeme = $this->readLexeme();
         if ($nextLexeme != 'endobj') {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. \'endobj\' keyword expected.', $this->offset - strlen($nextLexeme)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. \'endobj\' keyword expected.', $this->offset - strlen($nextLexeme)));
         }
 
         $obj = new InternalType\StreamObject(substr($this->data,

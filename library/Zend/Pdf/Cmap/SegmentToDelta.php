@@ -325,7 +325,7 @@ class SegmentToDelta extends AbstractCmap
          */
         $actualLength = strlen($cmapData);
         if ($actualLength < 23) {
-            throw new Pdf\Exception('Insufficient table data',
+            throw new pdf_except_4('Insufficient table data',
                                          Pdf\Except_1::CMAP_TABLE_DATA_TOO_SMALL);
         }
 
@@ -333,13 +333,13 @@ class SegmentToDelta extends AbstractCmap
          */
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != AbstractCmap::TYPE_SEGMENT_TO_DELTA) {
-            throw new Pdf\Exception('Wrong cmap table type',
+            throw new pdf_except_4('Wrong cmap table type',
                                          Pdf\Except_1::CMAP_WRONG_TABLE_TYPE);
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
-            throw new Pdf\Exception("Table length ($length) does not match actual length ($actualLength)",
+            throw new pdf_except_4("Table length ($length) does not match actual length ($actualLength)",
                                          Pdf\Except_1::CMAP_WRONG_TABLE_LENGTH);
         }
 
@@ -399,7 +399,7 @@ class SegmentToDelta extends AbstractCmap
          * of the table.
          */
         if ($offset != $length) {
-            throw new Pdf\Exception("Ending offset ($offset) does not match length ($length)",
+            throw new pdf_except_4("Ending offset ($offset) does not match length ($length)",
                                          Pdf\Except_1::CMAP_FINAL_OFFSET_NOT_LENGTH);
         }
     }

@@ -70,7 +70,7 @@ class FitRectangle extends Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
-            throw new Pdf\Exception('Page entry must be a \Zend\Pdf\Page object or a page number.');
+            throw new pdf_except_4('Page entry must be a \Zend\Pdf\Page object or a page number.');
         }
 
         $destinationArray->items[] = new InternalType\NameObject('FitR');

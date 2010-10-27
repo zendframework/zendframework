@@ -79,19 +79,19 @@ class File extends AbstractDataSource
     public function __construct($filePath)
     {
         if (! (is_file($filePath) || is_link($filePath))) {
-            throw new Pdf\Exception("Invalid file path: $filePath",
+            throw new pdf_except_4("Invalid file path: $filePath",
                                          Pdf\Except_1::BAD_FILE_PATH);
         }
         if (! is_readable($filePath)) {
-            throw new Pdf\Exception("File is not readable: $filePath",
+            throw new pdf_except_4("File is not readable: $filePath",
                                          Pdf\Except_1::NOT_READABLE);
         }
         if (($this->_size = @filesize($filePath)) === false) {
-            throw new Pdf\Exception("Error while obtaining file size: $filePath",
+            throw new pdf_except_4("Error while obtaining file size: $filePath",
                                          Pdf\Except_1::CANT_GET_FILE_SIZE);
         }
         if (($this->_fileResource = @fopen($filePath, 'rb')) === false) {
-            throw new Pdf\Exception("Cannot open file for reading: $filePath",
+            throw new pdf_except_4("Cannot open file for reading: $filePath",
                                          Pdf\Except_1::CANT_OPEN_FILE);
         }
         $this->_filePath = $filePath;
@@ -126,11 +126,11 @@ class File extends AbstractDataSource
     {
         $bytes = @fread($this->_fileResource, $byteCount);
         if ($bytes === false) {
-            throw new Pdf\Exception('Unexpected error while reading file',
+            throw new pdf_except_4('Unexpected error while reading file',
                                          Pdf\Except_1::ERROR_DURING_READ);
         }
         if (strlen($bytes) != $byteCount) {
-            throw new Pdf\Exception("Insufficient data to read $byteCount bytes",
+            throw new pdf_except_4("Insufficient data to read $byteCount bytes",
                                          Pdf\Except_1::INSUFFICIENT_DATA);
         }
         $this->_offset += $byteCount;
@@ -182,11 +182,11 @@ class File extends AbstractDataSource
         parent::moveToOffset($offset);
         $result = @fseek($this->_fileResource, $offset, SEEK_SET);
         if ($result !== 0) {
-            throw new Pdf\Exception('Error while setting new file position',
+            throw new pdf_except_4('Error while setting new file position',
                                          Pdf\Except_1::CANT_SET_FILE_POSITION);
         }
         if (feof($this->_fileResource)) {
-            throw new Pdf\Exception('Moved beyond the end of the file',
+            throw new pdf_except_4('Moved beyond the end of the file',
                                          Pdf\Except_1::MOVE_BEYOND_END_OF_FILE);
         }
     }

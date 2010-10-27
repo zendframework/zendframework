@@ -31,8 +31,8 @@ namespace Zend\Pdf;
  * caller, create a constant for it here and include it in the object being
  * thrown. Example:
  *
- *   throw new \Zend\Pdf\Exception('foo() is not yet implemented',
- *                                \Zend\Pdf\Exception::NOT_IMPLEMENTED);
+ *   throw new \Zend\pdf_except_4('foo() is not yet implemented',
+ *                                \Zend\pdf_except_4::NOT_IMPLEMENTED);
  *
  * This allows the caller to determine the specific type of exception that was
  * thrown without resorting to parsing the descriptive text.

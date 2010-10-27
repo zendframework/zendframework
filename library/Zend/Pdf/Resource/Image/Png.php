@@ -81,7 +81,7 @@ class Png extends AbstractImage
     public function __construct($imageFileName)
     {
         if (($imageFile = @fopen($imageFileName, 'rb')) === false ) {
-            throw new Pdf\Exception( "Can not open '$imageFileName' file for reading." );
+            throw new pdf_except_4( "Can not open '$imageFileName' file for reading." );
         }
 
         parent::__construct();
@@ -89,7 +89,7 @@ class Png extends AbstractImage
         //Check if the file is a PNG
         fseek($imageFile, 1, SEEK_CUR); //First signature byte (%)
         if ('PNG' != fread($imageFile, 3)) {
-            throw new Pdf\Exception('Image is not a PNG');
+            throw new pdf_except_4('Image is not a PNG');
         }
         fseek($imageFile, 12, SEEK_CUR); //Signature bytes (Includes the IHDR chunk) IHDR processed linerarly because it doesnt contain a variable chunk length
         $wtmp = unpack('Ni',fread($imageFile, 4)); //Unpack a 4-Byte Long
@@ -103,7 +103,7 @@ class Png extends AbstractImage
         $prefilter = ord(fread($imageFile,1));
 
         if (($interlacing = ord(fread($imageFile,1))) != self::PNG_INTERLACING_DISABLED) {
-            throw new Pdf\Exception( "Only non-interlaced images are currently supported." );
+            throw new pdf_except_4( "Only non-interlaced images are currently supported." );
         }
 
         $this->_width = $width;
@@ -176,7 +176,7 @@ class Png extends AbstractImage
                             // Fall through to the next case
 
                         case self::PNG_CHANNEL_RGB_ALPHA:
-                            throw new Pdf\Exception( "tRNS chunk illegal for Alpha Channel Images" );
+                            throw new pdf_except_4( "tRNS chunk illegal for Alpha Channel Images" );
                             break;
                     }
                     fseek($imageFile, 4, SEEK_CUR); //4 Byte Ending Sequence
@@ -206,7 +206,7 @@ class Png extends AbstractImage
 
             case self::PNG_CHANNEL_INDEXED:
                 if(empty($paletteData)) {
-                    throw new Pdf\Exception( "PNG Corruption: No palette data read for indexed type PNG." );
+                    throw new pdf_except_4( "PNG Corruption: No palette data read for indexed type PNG." );
                 }
                 $colorSpace = new InternalType\ArrayObject();
                 $colorSpace->items[] = new InternalType\NameObject('Indexed');
@@ -223,7 +223,7 @@ class Png extends AbstractImage
                  * will become the Shadow Mask (SMask).
                  */
                 if($bits > 8) {
-                    throw new Pdf\Exception("Alpha PNGs with bit depth > 8 are not yet supported");
+                    throw new pdf_except_4("Alpha PNGs with bit depth > 8 are not yet supported");
                 }
 
                 $colorSpace = new InternalType\NameObject('DeviceGray');
@@ -256,7 +256,7 @@ class Png extends AbstractImage
                  * will become the Shadow Mask (SMask).
                  */
                 if($bits > 8) {
-                    throw new Pdf\Exception("Alpha PNGs with bit depth > 8 are not yet supported");
+                    throw new pdf_except_4("Alpha PNGs with bit depth > 8 are not yet supported");
                 }
 
                 $colorSpace = new InternalType\NameObject('DeviceRGB');
@@ -284,11 +284,11 @@ class Png extends AbstractImage
                 break;
 
             default:
-                throw new Pdf\Exception( "PNG Corruption: Invalid color space." );
+                throw new pdf_except_4( "PNG Corruption: Invalid color space." );
         }
 
         if(empty($imageData)) {
-            throw new Pdf\Exception( "Corrupt PNG Image. Mandatory IDAT chunk not found." );
+            throw new pdf_except_4( "Corrupt PNG Image. Mandatory IDAT chunk not found." );
         }
 
         $imageDictionary = $this->_resource->dictionary;

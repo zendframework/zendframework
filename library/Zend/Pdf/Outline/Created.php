@@ -212,7 +212,7 @@ class Created extends AbstractOutline
         if ($target === null  ||  $target instanceof InternalStructure\NavigationTarget) {
             $this->_target = $target;
         } else {
-            throw new Pdf\Exception('Outline target has to be \Zend\Pdf\Destination or \Zend\Pdf\Action object or string');
+            throw new pdf_except_4('Outline target has to be \Zend\Pdf\Destination or \Zend\Pdf\Action object or string');
         }
 
         return $this;
@@ -228,7 +228,7 @@ class Created extends AbstractOutline
     public function __construct($options = array())
     {
         if (!isset($options['title'])) {
-            throw new Pdf\Exception('Title parameter is required.');
+            throw new pdf_except_4('Title parameter is required.');
         }
 
         $this->setOptions($options);
@@ -271,7 +271,7 @@ class Created extends AbstractOutline
         } else if ($target instanceof Action\AbstractAction) {
             $outlineDictionary->A    = $target->getResource();
         } else {
-            throw new Pdf\Exception('Outline target has to be \Zend\Pdf\Destination, \Zend\Pdf\Action object or null');
+            throw new pdf_except_4('Outline target has to be \Zend\Pdf\Destination, \Zend\Pdf\Action object or null');
         }
 
         $color = $this->getColor();
@@ -295,7 +295,7 @@ class Created extends AbstractOutline
         $lastChild = null;
         foreach ($this->childOutlines as $childOutline) {
             if ($processedOutlines->contains($childOutline)) {
-                throw new Pdf\Exception('Outlines cyclyc reference is detected.');
+                throw new pdf_except_4('Outlines cyclyc reference is detected.');
             }
 
             if ($lastChild === null) {

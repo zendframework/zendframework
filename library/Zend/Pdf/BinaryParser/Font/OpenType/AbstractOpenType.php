@@ -170,7 +170,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          * are defined, so use 50 as a practical limit.
          */
         if (($tableCount < 7) || ($tableCount > 50)) {
-            throw new Pdf\Exception('Table count not within expected range',
+            throw new pdf_except_4('Table count not within expected range',
                                          Pdf\Except_1::BAD_TABLE_COUNT);
         }
 
@@ -200,11 +200,11 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
              */
             $fileSize = $this->_dataSource->getSize();
             if (($tableOffset < 0) || ($tableOffset > $fileSize)) {
-                throw new Pdf\Exception("Table offset ($tableOffset) not within expected range",
+                throw new pdf_except_4("Table offset ($tableOffset) not within expected range",
                                              Pdf\Except_1::INDEX_OUT_OF_RANGE);
             }
             if (($tableLength < 0) || (($tableOffset + $tableLength) > $fileSize)) {
-                throw new Pdf\Exception("Table length ($tableLength) not within expected range",
+                throw new pdf_except_4("Table length ($tableLength) not within expected range",
                                              Pdf\Except_1::INDEX_OUT_OF_RANGE);
             }
 
@@ -236,7 +236,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
 
         $magicNumber = $this->readUInt(4);
         if ($magicNumber != 0x5f0f3cf5) {
-            throw new Pdf\Exception('Wrong magic number. Expected: 0x5f0f3cf5; actual: '
+            throw new pdf_except_4('Wrong magic number. Expected: 0x5f0f3cf5; actual: '
                                        . sprintf('%x', $magicNumber),
                                          Pdf\Except_1::BAD_MAGIC_NUMBER);
         }
@@ -296,7 +296,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          */
         $tableFormat = $this->readUInt(2);
         if ($tableFormat != 0) {
-            throw new Pdf\Exception("Unable to read format $tableFormat table",
+            throw new pdf_except_4("Unable to read format $tableFormat table",
                                          Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Format %d table', $tableFormat);
@@ -496,13 +496,13 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
     protected function _parseOs2Table()
     {
         if (! $this->numberHMetrics) {
-            throw new Pdf\Exception("hhea table must be parsed prior to calling this method",
+            throw new pdf_except_4("hhea table must be parsed prior to calling this method",
                                          Pdf\Except_1::PARSED_OUT_OF_ORDER);
         }
 
         try {
             $this->_jumpToTable('OS/2');
-        } catch (Pdf\Exception $e) {
+        } catch (pdf_except_4 $e) {
             /* This table is not always present. If missing, use default values.
              */
             if ($e->getCode() == Pdf\Except_1::REQUIRED_TABLE_NOT_FOUND) {
@@ -527,7 +527,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
                 /* Something else went wrong. Throw this exception higher up the chain.
                  */
                 throw $e;
-                throw new Pdf\Exception($e->getMessage(), $e->getCode(), $e);
+                throw new pdf_except_4($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -552,7 +552,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          */
         $tableVersion = $this->readUInt(2);
         if (($tableVersion < 0) || ($tableVersion > 3)) {
-            throw new Pdf\Exception("Unable to read version $tableVersion table",
+            throw new pdf_except_4("Unable to read version $tableVersion table",
                                          Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Version %d table', $tableVersion);
@@ -733,14 +733,14 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
         $this->_jumpToTable('hmtx');
 
         if (! $this->numberHMetrics) {
-            throw new Pdf\Exception("hhea table must be parsed prior to calling this method",
+            throw new pdf_except_4("hhea table must be parsed prior to calling this method",
                                          Pdf\Except_1::PARSED_OUT_OF_ORDER);
         }
 
         /* We only understand version 0 tables.
          */
         if ($this->metricDataFormat != 0) {
-            throw new Pdf\Exception("Unable to read format $this->metricDataFormat table.",
+            throw new pdf_except_4("Unable to read format $this->metricDataFormat table.",
                                          Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
         }
 
@@ -792,7 +792,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          */
         $tableVersion = $this->readUInt(2);
         if ($tableVersion != 0) {
-            throw new Pdf\Exception("Unable to read version $tableVersion table",
+            throw new pdf_except_4("Unable to read version $tableVersion table",
                                          Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Version %d table', $tableVersion);
@@ -920,7 +920,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
             break;
         }
         if ($cmapType == -1) {
-            throw new Pdf\Exception('Unable to find usable cmap table',
+            throw new pdf_except_4('Unable to find usable cmap table',
                                          Pdf\Except_1::CANT_FIND_GOOD_CMAP);
         }
 
@@ -970,11 +970,11 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
                 break;
 
             case 0x74797031:    // 'typ1'
-                throw new Pdf\Exception('Unsupported font type: PostScript in sfnt wrapper',
+                throw new pdf_except_4('Unsupported font type: PostScript in sfnt wrapper',
                                              Pdf\Except_1::WRONG_FONT_TYPE);
 
             default:
-                throw new Pdf\Exception('Not an OpenType font file',
+                throw new pdf_except_4('Not an OpenType font file',
                                              Pdf\Except_1::WRONG_FONT_TYPE);
         }
         return $this->_scalerType;
@@ -990,7 +990,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
     protected function _jumpToTable($tableName)
     {
         if (empty($this->_tableDirectory[$tableName])) {    // do not allow NULL or zero
-            throw new Pdf\Exception("Required table '$tableName' not found!",
+            throw new pdf_except_4("Required table '$tableName' not found!",
                                          Pdf\Except_1::REQUIRED_TABLE_NOT_FOUND);
         }
         $this->_debugLog("Parsing $tableName table...");
@@ -1011,7 +1011,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
     {
         $tableVersion = $this->readFixed(16, 16);
         if (($tableVersion < $minVersion) || ($tableVersion > $maxVersion)) {
-            throw new Pdf\Exception("Unable to read version $tableVersion table",
+            throw new pdf_except_4("Unable to read version $tableVersion table",
                                          Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Version %.2f table', $tableVersion);

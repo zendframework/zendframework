@@ -51,7 +51,7 @@ class Lzw extends AbstractCompression
             $earlyChange = $params['EarlyChange'];
 
             if ($earlyChange != 0  &&  $earlyChange != 1) {
-                throw new Pdf\Exception('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
+                throw new pdf_except_4('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
             }
             return $earlyChange;
         } else {
@@ -74,7 +74,7 @@ class Lzw extends AbstractCompression
             $data = self::_applyEncodeParams($data, $params);
         }
 
-        throw new Pdf\Exception('Not implemented yet');
+        throw new pdf_except_4('Not implemented yet');
     }
 
     /**
@@ -87,7 +87,7 @@ class Lzw extends AbstractCompression
      */
     public static function decode($data, $params = null)
     {
-        throw new Pdf\Exception('Not implemented yet');
+        throw new pdf_except_4('Not implemented yet');
 
         if ($params !== null) {
             return self::_applyDecodeParams($data, $params);

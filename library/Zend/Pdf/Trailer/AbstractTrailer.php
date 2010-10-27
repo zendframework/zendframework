@@ -58,7 +58,7 @@ abstract class AbstractTrailer
     {
         if ( !in_array($key, self::$_allowedKeys) ) {
             /** @todo Make warning (log entry) instead of an exception */
-            throw new Pdf\Exception("Unknown trailer dictionary key: '$key'.");
+            throw new pdf_except_4("Unknown trailer dictionary key: '$key'.");
         }
     }
 

@@ -154,7 +154,7 @@ class ByteEncoding extends AbstractCmap
          */
         $actualLength = strlen($cmapData);
         if ($actualLength != 262) {
-            throw new Pdf\Exception('Insufficient table data',
+            throw new pdf_except_4('Insufficient table data',
                                          Pdf\Except_1::CMAP_TABLE_DATA_TOO_SMALL);
         }
 
@@ -162,13 +162,13 @@ class ByteEncoding extends AbstractCmap
          */
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != AbstractCmap::TYPE_BYTE_ENCODING) {
-            throw new Pdf\Exception('Wrong cmap table type',
+            throw new pdf_except_4('Wrong cmap table type',
                                          Pdf\Except_1::CMAP_WRONG_TABLE_TYPE);
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
-            throw new Pdf\Exception("Table length ($length) does not match actual length ($actualLength)",
+            throw new pdf_except_4("Table length ($length) does not match actual length ($actualLength)",
                                          Pdf\Except_1::CMAP_WRONG_TABLE_LENGTH);
         }
 

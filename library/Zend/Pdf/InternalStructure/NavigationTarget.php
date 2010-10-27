@@ -60,7 +60,7 @@ abstract class NavigationTarget
                 // It's a destination
                 $resource = $resource->D;
             } else {
-                throw new Pdf\Exception('Wrong resource type.');
+                throw new pdf_except_4('Wrong resource type.');
             }
         }
 
@@ -70,7 +70,7 @@ abstract class NavigationTarget
             // Resource is an array, just treat it as an explicit destination array
             return Destination\AbstractDestination::load($resource);
         } else {
-            throw new Pdf\Exception('Wrong resource type.');
+            throw new pdf_except_4('Wrong resource type.');
         }
     }
 

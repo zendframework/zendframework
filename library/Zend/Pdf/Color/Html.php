@@ -406,7 +406,7 @@ class Html implements Color
                 $r = 0.604; $g = 0.804; $b = 0.196; break;
 
             default:
-                throw new Pdf\Exception('Unknown color name: ' . $color);
+                throw new pdf_except_4('Unknown color name: ' . $color);
         }
         if (($r == $g) && ($g == $b)) {
             return new GrayScale($r);

@@ -55,7 +55,7 @@ class FontDescriptor
      */
     public function __construct()
     {
-        throw new Pdf\Exception('\Zend\Pdf\Resource\Font\FontDescriptor is not intended to be instantiated');
+        throw new pdf_except_4('\Zend\Pdf\Resource\Font\FontDescriptor is not intended to be instantiated');
     }
 
     /**
@@ -169,7 +169,7 @@ class FontDescriptor
                     $message = 'This font cannot be embedded in the PDF document. If you would like to use '
                              . 'it anyway, you must pass \Zend\Pdf\Font::EMBED_SUPPRESS_EMBED_EXCEPTION '
                              . 'in the $options parameter of the font constructor.';
-                    throw new Pdf\Exception($message, Pdf\Except_1::FONT_CANT_BE_EMBEDDED);
+                    throw new pdf_except_4($message, Pdf\Except_1::FONT_CANT_BE_EMBEDDED);
                 }
 
             } else {

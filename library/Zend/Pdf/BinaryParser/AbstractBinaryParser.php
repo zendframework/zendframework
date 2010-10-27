@@ -121,7 +121,7 @@ abstract class AbstractBinaryParser
     public function __construct(DataSource\AbstractDataSource $dataSource)
     {
         if ($dataSource->getSize() == 0) {
-            throw new Pdf\Exception('The data source has not been properly initialized',
+            throw new pdf_except_4('The data source has not been properly initialized',
                                          Pdf\Except_1::BAD_DATA_SOURCE);
         }
         $this->_dataSource = $dataSource;
@@ -235,7 +235,7 @@ abstract class AbstractBinaryParser
     public function readInt($size, $byteOrder = self::BYTE_ORDER_BIG_ENDIAN)
     {
         if (($size < 1) || ($size > 4)) {
-            throw new Pdf\Exception("Invalid signed integer size: $size",
+            throw new pdf_except_4("Invalid signed integer size: $size",
                                          Pdf\Except_1::INVALID_INTEGER_SIZE);
         }
         $bytes = $this->_dataSource->readBytes($size);
@@ -280,7 +280,7 @@ abstract class AbstractBinaryParser
                 }
             }
         } else {
-            throw new Pdf\Exception("Invalid byte order: $byteOrder",
+            throw new pdf_except_4("Invalid byte order: $byteOrder",
                                          Pdf\Except_1::INVALID_BYTE_ORDER);
         }
         return $number;
@@ -308,7 +308,7 @@ abstract class AbstractBinaryParser
     public function readUInt($size, $byteOrder = self::BYTE_ORDER_BIG_ENDIAN)
     {
         if (($size < 1) || ($size > 4)) {
-            throw new Pdf\Exception("Invalid unsigned integer size: $size",
+            throw new pdf_except_4("Invalid unsigned integer size: $size",
                                          Pdf\Except_1::INVALID_INTEGER_SIZE);
         }
         $bytes = $this->_dataSource->readBytes($size);
@@ -326,7 +326,7 @@ abstract class AbstractBinaryParser
                 $number |= ord($bytes[$i]) << ($i * 8);
             }
         } else {
-            throw new Pdf\Exception("Invalid byte order: $byteOrder",
+            throw new pdf_except_4("Invalid byte order: $byteOrder",
                                          Pdf\Except_1::INVALID_BYTE_ORDER);
         }
         return $number;
@@ -368,7 +368,7 @@ abstract class AbstractBinaryParser
     {
         $bitsToRead = $mantissaBits + $fractionBits;
         if (($bitsToRead % 8) !== 0) {
-            throw new Pdf\Exception('Fixed-point numbers are whole bytes',
+            throw new pdf_except_4('Fixed-point numbers are whole bytes',
                                          Pdf\Except_1::BAD_FIXED_POINT_SIZE);
         }
         $number = $this->readInt(($bitsToRead >> 3), $byteOrder) / (1 << $fractionBits);
@@ -419,7 +419,7 @@ abstract class AbstractBinaryParser
             }
             return iconv('UTF-16LE', $characterSet, $bytes);
         } else {
-            throw new Pdf\Exception("Invalid byte order: $byteOrder",
+            throw new pdf_except_4("Invalid byte order: $byteOrder",
                                          Pdf\Except_1::INVALID_BYTE_ORDER);
         }
     }

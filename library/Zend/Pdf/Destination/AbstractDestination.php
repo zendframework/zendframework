@@ -64,10 +64,10 @@ abstract class AbstractDestination extends Pdf\InternalStructure\NavigationTarge
         }
 
         if ($resource->getType() != InternalType\AbstractTypeObject::TYPE_ARRAY) {
-            throw new Pdf\Exception('An explicit destination must be a direct or an indirect array object.');
+            throw new pdf_except_4('An explicit destination must be a direct or an indirect array object.');
         }
         if (count($resource->items) < 2) {
-            throw new Pdf\Exception('An explicit destination array must contain at least two elements.');
+            throw new pdf_except_4('An explicit destination array must contain at least two elements.');
         }
 
         switch ($resource->items[1]->value) {

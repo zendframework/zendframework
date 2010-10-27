@@ -61,7 +61,7 @@ class Markup extends AbstractAnnotation
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
         if ($annotationDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('Annotation dictionary resource has to be a dictionary.');
+            throw new pdf_except_4('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
@@ -71,7 +71,7 @@ class Markup extends AbstractAnnotation
                              self::SUBTYPE_UNDERLINE,
                              self::SUBTYPE_SQUIGGLY,
                              self::SUBTYPE_STRIKEOUT) )) {
-            throw new Pdf\Exception('Subtype => Markup entry is omitted or has wrong value.');
+            throw new pdf_except_4('Subtype => Markup entry is omitted or has wrong value.');
         }
 
         parent::__construct($annotationDictionary);
@@ -129,7 +129,7 @@ class Markup extends AbstractAnnotation
         $annotationDictionary->Contents = new InternalType\StringObject($text);
 
         if (!is_array($quadPoints)  ||  count($quadPoints) == 0  ||  count($quadPoints) % 8 != 0) {
-            throw new Pdf\Exception('$quadPoints parameter must be an array of 8xN numbers');
+            throw new pdf_except_4('$quadPoints parameter must be an array of 8xN numbers');
         }
         $points = new InternalType\ArrayObject();
         foreach ($quadPoints as $quadPoint) {

@@ -81,7 +81,7 @@ class Extracted extends AbstractFont
                 // Composite type 0 font
                 if (count($fontDictionary->DescendantFonts->items) != 1) {
                     // Multiple descendant fonts are not supported
-                    throw new Pdf\Exception(self::TYPE_NOT_SUPPORTED);
+                    throw new pdf_except_4(self::TYPE_NOT_SUPPORTED);
                 }
 
                 $fontDictionaryIterator = $fontDictionary->DescendantFonts->items->getIterator();
@@ -119,7 +119,7 @@ class Extracted extends AbstractFont
                 break;
 
             default:
-                throw new Pdf\Exception(self::TYPE_NOT_SUPPORTED);
+                throw new pdf_except_4(self::TYPE_NOT_SUPPORTED);
         }
 
         $this->_fontNames[Pdf\Font::NAME_POSTSCRIPT]['en'] = iconv('UTF-8', 'UTF-16BE', $fontDictionary->BaseFont->value);
@@ -150,7 +150,7 @@ class Extracted extends AbstractFont
      */
     public function glyphNumbersForCharacters($characterCodes)
     {
-        throw new Pdf\Exception(self::OPERATION_NOT_SUPPORTED);
+        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -167,7 +167,7 @@ class Extracted extends AbstractFont
      */
     public function glyphNumberForCharacter($characterCode)
     {
-        throw new Pdf\Exception(self::OPERATION_NOT_SUPPORTED);
+        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -190,7 +190,7 @@ class Extracted extends AbstractFont
      */
     public function getCoveredPercentage($string, $charEncoding = '')
     {
-        throw new Pdf\Exception(self::OPERATION_NOT_SUPPORTED);
+        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -207,7 +207,7 @@ class Extracted extends AbstractFont
      */
     public function widthsForGlyphs($glyphNumbers)
     {
-        throw new Pdf\Exception(self::OPERATION_NOT_SUPPORTED);
+        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -221,7 +221,7 @@ class Extracted extends AbstractFont
      */
     public function widthForGlyph($glyphNumber)
     {
-        throw new Pdf\Exception(self::OPERATION_NOT_SUPPORTED);
+        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -243,7 +243,7 @@ class Extracted extends AbstractFont
             return iconv($charEncoding, 'CP1252//IGNORE', $string);
         }
 
-        throw new Pdf\Exception(self::ENCODING_NOT_SUPPORTED);
+        throw new pdf_except_4(self::ENCODING_NOT_SUPPORTED);
     }
 
     /**
@@ -265,6 +265,6 @@ class Extracted extends AbstractFont
             return iconv('CP1252', $charEncoding, $string);
         }
 
-        throw new Pdf\Exception(self::ENCODING_NOT_SUPPORTED);
+        throw new pdf_except_4(self::ENCODING_NOT_SUPPORTED);
     }
 }

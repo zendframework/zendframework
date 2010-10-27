@@ -99,7 +99,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions)
     {
         if ($dictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('$dictionary mast be a direct or an indirect dictionary object.');
+            throw new pdf_except_4('$dictionary mast be a direct or an indirect dictionary object.');
         }
 
         $this->_actionDictionary = $dictionary;
@@ -120,7 +120,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
                     }
                 }
             } else {
-                throw new Pdf\Exception('PDF Action dictionary Next entry must be a dictionary or an array.');
+                throw new pdf_except_4('PDF Action dictionary Next entry must be a dictionary or an array.');
             }
         }
 
@@ -143,14 +143,14 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
         }
 
         if ($dictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('$dictionary mast be a direct or an indirect dictionary object.');
+            throw new pdf_except_4('$dictionary mast be a direct or an indirect dictionary object.');
         }
         if (isset($dictionary->Type)  &&  $dictionary->Type->value != 'Action') {
-            throw new Pdf\Exception('Action dictionary Type entry must be set to \'Action\'.');
+            throw new pdf_except_4('Action dictionary Type entry must be set to \'Action\'.');
         }
 
         if ($dictionary->S === null) {
-            throw new Pdf\Exception('Action dictionary must contain S entry');
+            throw new pdf_except_4('Action dictionary must contain S entry');
         }
 
         switch ($dictionary->S->value) {
@@ -260,7 +260,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
             $processedActions = new \SplObjectStorage();
         }
         if ($processedActions->contains($this)) {
-            throw new Pdf\Exception('Action chain cyclyc reference is detected.');
+            throw new pdf_except_4('Action chain cyclyc reference is detected.');
         }
         $processedActions->attach($this);
 

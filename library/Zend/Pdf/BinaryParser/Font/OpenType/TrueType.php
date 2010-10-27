@@ -65,7 +65,7 @@ class TrueType extends AbstractOpenType
                 break;
 
             default:
-                throw new Pdf\Exception('Not a TrueType font file',
+                throw new pdf_except_4('Not a TrueType font file',
                                              Pdf\Except_1::WRONG_FONT_TYPE);
         }
 

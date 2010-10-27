@@ -194,18 +194,18 @@ abstract class AbstractAnnotation
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
         if ($annotationDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('Annotation dictionary resource has to be a dictionary.');
+            throw new pdf_except_4('Annotation dictionary resource has to be a dictionary.');
         }
 
         $this->_annotationDictionary = $annotationDictionary;
 
         if ($this->_annotationDictionary->Type !== null  &&
             $this->_annotationDictionary->Type->value != 'Annot') {
-            throw new Pdf\Exception('Wrong resource type. \'Annot\' expected.');
+            throw new pdf_except_4('Wrong resource type. \'Annot\' expected.');
         }
 
         if ($this->_annotationDictionary->Rect === null) {
-            throw new Pdf\Exception('\'Rect\' dictionary entry is required.');
+            throw new pdf_except_4('\'Rect\' dictionary entry is required.');
         }
 
         if (count($this->_annotationDictionary->Rect->items) != 4 ||
@@ -213,7 +213,7 @@ abstract class AbstractAnnotation
             $this->_annotationDictionary->Rect->items[1]->getType() != InternalType\AbstractTypeObject::TYPE_NUMERIC ||
             $this->_annotationDictionary->Rect->items[2]->getType() != InternalType\AbstractTypeObject::TYPE_NUMERIC ||
             $this->_annotationDictionary->Rect->items[3]->getType() != InternalType\AbstractTypeObject::TYPE_NUMERIC ) {
-            throw new Pdf\Exception('\'Rect\' dictionary entry must be an array of four numeric elements.');
+            throw new pdf_except_4('\'Rect\' dictionary entry must be an array of four numeric elements.');
         }
     }
 

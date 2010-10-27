@@ -119,20 +119,20 @@ class StructureParser
             $this->_stringParser->skipWhiteSpace();
             while ( ($nextLexeme = $this->_stringParser->readLexeme()) != 'trailer' ) {
                 if (!ctype_digit($nextLexeme)) {
-                    throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Cross-reference table subheader values must contain only digits.', $this->_stringParser->offset-strlen($nextLexeme)));
+                    throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Cross-reference table subheader values must contain only digits.', $this->_stringParser->offset-strlen($nextLexeme)));
                 }
                 $objNum = (int)$nextLexeme;
 
                 $refCount = $this->_stringParser->readLexeme();
                 if (!ctype_digit($refCount)) {
-                    throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Cross-reference table subheader values must contain only digits.', $this->_stringParser->offset-strlen($refCount)));
+                    throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Cross-reference table subheader values must contain only digits.', $this->_stringParser->offset-strlen($refCount)));
                 }
 
                 $this->_stringParser->skipWhiteSpace();
                 while ($refCount > 0) {
                     $objectOffset = substr($this->_stringParser->data, $this->_stringParser->offset, 10);
                     if (!ctype_digit($objectOffset)) {
-                        throw new Pdf\Exception(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Offset must contain only digits.', $this->_stringParser->offset));
+                        throw new pdf_except_4(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Offset must contain only digits.', $this->_stringParser->offset));
                     }
                     // Force $objectOffset to be treated as decimal instead of octal number
                     for ($numStart = 0; $numStart < strlen($objectOffset)-1; $numStart++) {
@@ -144,13 +144,13 @@ class StructureParser
                     $this->_stringParser->offset += 10;
 
                     if (strpos("\x00\t\n\f\r ", $this->_stringParser->data[$this->_stringParser->offset]) === false) {
-                        throw new Pdf\Exception(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
+                        throw new pdf_except_4(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
                     }
                     $this->_stringParser->offset++;
 
                     $genNumber = substr($this->_stringParser->data, $this->_stringParser->offset, 5);
                     if (!ctype_digit($objectOffset)) {
-                        throw new Pdf\Exception(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Offset must contain only digits.', $this->_stringParser->offset));
+                        throw new pdf_except_4(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Offset must contain only digits.', $this->_stringParser->offset));
                     }
                     // Force $objectOffset to be treated as decimal instead of octal number
                     for ($numStart = 0; $numStart < strlen($genNumber)-1; $numStart++) {
@@ -162,7 +162,7 @@ class StructureParser
                     $this->_stringParser->offset += 5;
 
                     if (strpos("\x00\t\n\f\r ", $this->_stringParser->data[$this->_stringParser->offset]) === false) {
-                        throw new Pdf\Exception(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
+                        throw new pdf_except_4(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
                     }
                     $this->_stringParser->offset++;
 
@@ -187,11 +187,11 @@ class StructureParser
                     }
 
                     if ( !DataParser::isWhiteSpace(ord( $this->_stringParser->data[$this->_stringParser->offset] )) ) {
-                        throw new Pdf\Exception(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
+                        throw new pdf_except_4(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
                     }
                     $this->_stringParser->offset++;
                     if ( !DataParser::isWhiteSpace(ord( $this->_stringParser->data[$this->_stringParser->offset] )) ) {
-                        throw new Pdf\Exception(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
+                        throw new pdf_except_4(sprintf('PDF file cross-reference table syntax error. Offset - 0x%X. Value separator must be white space.', $this->_stringParser->offset));
                     }
                     $this->_stringParser->offset++;
 
@@ -203,21 +203,21 @@ class StructureParser
             $trailerDictOffset = $this->_stringParser->offset;
             $trailerDict = $this->_stringParser->readElement();
             if (!$trailerDict instanceof InternalType\DictionaryObject) {
-                throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X.  Dictionary expected after \'trailer\' keyword.', $trailerDictOffset));
+                throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X.  Dictionary expected after \'trailer\' keyword.', $trailerDictOffset));
             }
         } else {
             $xrefStream = $this->_stringParser->getObject($offset, $context);
 
             if (!$xrefStream instanceof InternalType\StreamObject) {
-                throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X.  Cross-reference stream expected.', $offset));
+                throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X.  Cross-reference stream expected.', $offset));
             }
 
             $trailerDict = $xrefStream->dictionary;
             if ($trailerDict->Type->value != 'XRef') {
-                throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X.  Cross-reference stream object must have /Type property assigned to /XRef.', $offset));
+                throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X.  Cross-reference stream object must have /Type property assigned to /XRef.', $offset));
             }
             if ($trailerDict->W === null  || $trailerDict->W->getType() != InternalType\AbstractTypeObject::TYPE_ARRAY) {
-                throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Cross reference stream dictionary doesn\'t have W entry or it\'s not an array.', $offset));
+                throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Cross reference stream dictionary doesn\'t have W entry or it\'s not an array.', $offset));
             }
 
             $entryField1Size = $trailerDict->W->items[0]->value;
@@ -225,14 +225,14 @@ class StructureParser
             $entryField3Size = $trailerDict->W->items[2]->value;
 
             if ($entryField2Size == 0 || $entryField3Size == 0) {
-                throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Wrong W dictionary entry. Only type field of stream entries has default value and could be zero length.', $offset));
+                throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Wrong W dictionary entry. Only type field of stream entries has default value and could be zero length.', $offset));
             }
 
             $xrefStreamData = $xrefStream->value;
 
             if ($trailerDict->Index !== null) {
                 if ($trailerDict->Index->getType() != InternalType\AbstractTypeObject::TYPE_ARRAY) {
-                    throw new Pdf\Exception(sprintf('PDF file syntax error. Offset - 0x%X. Cross reference stream dictionary Index entry must be an array.', $offset));
+                    throw new pdf_except_4(sprintf('PDF file syntax error. Offset - 0x%X. Cross reference stream dictionary Index entry must be an array.', $offset));
                 }
                 $sections = count($trailerDict->Index->items)/2;
             } else {
@@ -305,7 +305,7 @@ class StructureParser
 
             // $streamOffset . ' ' . strlen($xrefStreamData) . "\n";
             // "$entries\n";
-            throw new Pdf\Exception('Cross-reference streams are not supported yet.');
+            throw new pdf_except_4('Cross-reference streams are not supported yet.');
         }
 
 
@@ -352,7 +352,7 @@ class StructureParser
     {
         if ($load) {
             if (($pdfFile = @fopen($source, 'rb')) === false ) {
-                throw new Pdf\Exception( "Can not open '$source' file for reading." );
+                throw new pdf_except_4( "Can not open '$source' file for reading." );
             }
 
             $byteCount = filesize($source);
@@ -372,7 +372,7 @@ class StructureParser
 
         $pdfVersionComment = $this->_stringParser->readComment();
         if (substr($pdfVersionComment, 0, 5) != '%PDF-') {
-            throw new Pdf\Exception('File is not a PDF.');
+            throw new pdf_except_4('File is not a PDF.');
         }
 
         $pdfVersion = substr($pdfVersionComment, 5);
@@ -385,14 +385,14 @@ class StructureParser
              * Stream compression filter must be implemented (for compressed object streams).
              * Cross reference streams must be implemented
              */
-            throw new Pdf\Exception(sprintf('Unsupported PDF version. Zend_PDF supports PDF 1.0-1.4. Current version - \'%f\'', $pdfVersion));
+            throw new pdf_except_4(sprintf('Unsupported PDF version. Zend_PDF supports PDF 1.0-1.4. Current version - \'%f\'', $pdfVersion));
         }
         $this->_pdfVersion = $pdfVersion;
 
         $this->_stringParser->offset = strrpos($this->_stringParser->data, '%%EOF');
         if ($this->_stringParser->offset === false ||
             strlen($this->_stringParser->data) - $this->_stringParser->offset > 7) {
-            throw new Pdf\Exception('PDF file syntax error. End-of-fle marker expected at the end of file.');
+            throw new pdf_except_4('PDF file syntax error. End-of-fle marker expected at the end of file.');
         }
 
         $this->_stringParser->offset--;
@@ -424,12 +424,12 @@ class StructureParser
 
         $nextLexeme = $this->_stringParser->readLexeme();
         if ($nextLexeme != 'startxref') {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. \'startxref\' keyword expected. Offset - 0x%X.', $this->_stringParser->offset-strlen($nextLexeme)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. \'startxref\' keyword expected. Offset - 0x%X.', $this->_stringParser->offset-strlen($nextLexeme)));
         }
 
         $startXref = $this->_stringParser->readLexeme();
         if (!ctype_digit($startXref)) {
-            throw new Pdf\Exception(sprintf('PDF file syntax error. Cross-reference table offset must contain only digits. Offset - 0x%X.', $this->_stringParser->offset-strlen($nextLexeme)));
+            throw new pdf_except_4(sprintf('PDF file syntax error. Cross-reference table offset must contain only digits. Offset - 0x%X.', $this->_stringParser->offset-strlen($nextLexeme)));
         }
 
         $this->_trailer = $this->_loadXRefTable($startXref);

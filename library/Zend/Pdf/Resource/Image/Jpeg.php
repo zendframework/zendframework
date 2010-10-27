@@ -55,20 +55,20 @@ class Jpeg extends AbstractImage
     public function __construct($imageFileName)
     {
         if (!function_exists('gd_info')) {
-            throw new Pdf\Exception('Image extension is not installed.');
+            throw new pdf_except_4('Image extension is not installed.');
         }
 
         $gd_options = gd_info();
         if ( (!isset($gd_options['JPG Support'])  || $gd_options['JPG Support']  != true)  &&
              (!isset($gd_options['JPEG Support']) || $gd_options['JPEG Support'] != true)  ) {
-            throw new Pdf\Exception('JPG support is not configured properly.');
+            throw new pdf_except_4('JPG support is not configured properly.');
         }
 
         if (($imageInfo = getimagesize($imageFileName)) === false) {
-            throw new Pdf\Exception('Corrupted image or image doesn\'t exist.');
+            throw new pdf_except_4('Corrupted image or image doesn\'t exist.');
         }
         if ($imageInfo[2] != IMAGETYPE_JPEG && $imageInfo[2] != IMAGETYPE_JPEG2000) {
-            throw new Pdf\Exception('ImageType is not JPG');
+            throw new pdf_except_4('ImageType is not JPG');
         }
 
         parent::__construct();
@@ -97,7 +97,7 @@ class Jpeg extends AbstractImage
         }
 
         if (($imageFile = @fopen($imageFileName, 'rb')) === false ) {
-            throw new Pdf\Exception( "Can not open '$imageFileName' file for reading." );
+            throw new pdf_except_4( "Can not open '$imageFileName' file for reading." );
         }
         $byteCount = filesize($imageFileName);
         $this->_resource->value = '';

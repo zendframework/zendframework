@@ -59,7 +59,7 @@ class Uri extends AbstractAction
         parent::__construct($dictionary, $processedActions);
 
         if ($dictionary->URI === null) {
-            throw new Pdf\Exception('URI action dictionary entry is required');
+            throw new pdf_except_4('URI action dictionary entry is required');
         }
     }
 
@@ -74,7 +74,7 @@ class Uri extends AbstractAction
     {
         $scheme = parse_url((string)$uri, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            throw new Pdf\Exception('Invalid URI');
+            throw new pdf_except_4('Invalid URI');
         }
     }
 

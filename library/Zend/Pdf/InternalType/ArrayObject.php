@@ -63,12 +63,12 @@ class ArrayObject extends AbstractTypeObject
         if ($val !== null  &&  is_array($val)) {
             foreach ($val as $element) {
                 if (!$element instanceof AbstractTypeObject) {
-                    throw new Pdf\Exception('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
+                    throw new pdf_except_4('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
                 }
                 $this->items[] = $element;
             }
         } else if ($val !== null){
-            throw new Pdf\Exception('Argument must be an array');
+            throw new pdf_except_4('Argument must be an array');
         }
     }
 
@@ -81,7 +81,7 @@ class ArrayObject extends AbstractTypeObject
      */
     public function __get($property)
     {
-        throw new Pdf\Exception('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
+        throw new pdf_except_4('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
     }
 
 
@@ -94,7 +94,7 @@ class ArrayObject extends AbstractTypeObject
      */
     public function __set($property, $value)
     {
-        throw new Pdf\Exception('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
+        throw new pdf_except_4('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
     }
 
     /**

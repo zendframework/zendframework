@@ -61,13 +61,13 @@ class Link extends AbstractAnnotation
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
         if ($annotationDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('Annotation dictionary resource has to be a dictionary.');
+            throw new pdf_except_4('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
             $annotationDictionary->Subtype->getType() != InternalType\AbstractTypeObject::TYPE_NAME  ||
             $annotationDictionary->Subtype->value != 'Link') {
-            throw new Pdf\Exception('Subtype => Link entry is requires');
+            throw new pdf_except_4('Subtype => Link entry is requires');
         }
 
         parent::__construct($annotationDictionary);
@@ -89,7 +89,7 @@ class Link extends AbstractAnnotation
             $destination = Destination\Named::create($target);
         }
         if (!$target instanceof InternalStructure\NavigationTarget) {
-            throw new Pdf\Exception('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
+            throw new pdf_except_4('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
         }
 
         $annotationDictionary = new InternalType\DictionaryObject();
@@ -125,7 +125,7 @@ class Link extends AbstractAnnotation
             $destination = Destination\Named::create($target);
         }
         if (!$target instanceof InternalStructure\NavigationTarget) {
-            throw new Pdf\Exception('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
+            throw new pdf_except_4('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
         }
 
         $this->_annotationDictionary->touch();

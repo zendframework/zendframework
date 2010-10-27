@@ -285,7 +285,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new pdf_except_4('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -309,7 +309,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new pdf_except_4('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
 
@@ -419,7 +419,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new pdf_except_4('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -440,7 +440,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new pdf_except_4('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -460,7 +460,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new pdf_except_4('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -480,6 +480,6 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new pdf_except_4('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 }

@@ -101,7 +101,7 @@ class ReferenceTable
     {
         $refElements = explode(' ', $ref);
         if (!is_numeric($refElements[0]) || !is_numeric($refElements[1]) || $refElements[2] != 'R') {
-            throw new Pdf\Exception("Incorrect reference: '$ref'");
+            throw new pdf_except_4("Incorrect reference: '$ref'");
         }
         $objNum = (int)$refElements[0];
         $genNum = (int)$refElements[1];
@@ -161,7 +161,7 @@ class ReferenceTable
     public function getNextFree($ref)
     {
         if (isset($this->_inuse[$ref])) {
-            throw new Pdf\Exception('Object is not free');
+            throw new pdf_except_4('Object is not free');
         }
 
         if (isset($this->_free[$ref])) {
@@ -172,7 +172,7 @@ class ReferenceTable
             return $this->_parent->getNextFree($ref);
         }
 
-        throw new Pdf\Exception('Object not found.');
+        throw new pdf_except_4('Object not found.');
     }
 
 
@@ -185,7 +185,7 @@ class ReferenceTable
     public function getNewGeneration($objNum)
     {
         if (isset($this->_usedObjects[$objNum])) {
-            throw new Pdf\Exception('Object is not free');
+            throw new pdf_except_4('Object is not free');
         }
 
         if (isset($this->_generations[$objNum])) {
@@ -196,6 +196,6 @@ class ReferenceTable
             return $this->_parent->getNewGeneration($objNum);
         }
 
-        throw new Pdf\Exception('Object not found.');
+        throw new pdf_except_4('Object not found.');
     }
 }

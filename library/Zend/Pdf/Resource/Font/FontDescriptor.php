@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Font;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
@@ -42,7 +42,7 @@ use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
  * @uses       \Zend\Pdf\InternalType\DictionaryObject
  * @uses       \Zend\Pdf\InternalType\NameObject
  * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @subpackage Zend_PDF_Fonts
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -52,11 +52,11 @@ class FontDescriptor
 {
     /**
      * Object constructor
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct()
     {
-        throw new pdf_except_4('\Zend\Pdf\Resource\Font\FontDescriptor is not intended to be instantiated');
+        throw new Exception\CorruptedPdfException('\Zend\Pdf\Resource\Font\FontDescriptor is not intended to be instantiated');
     }
 
     /**
@@ -77,7 +77,7 @@ class FontDescriptor
      * @param \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType $fontParser Font parser object containing parsed TrueType file.
      * @param integer $embeddingOptions Options for font embedding.
      * @return \Zend\Pdf\InternalType\DictionaryObject
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     static public function factory(AbstractFont $font,
                                    OpenTypeFontParser\AbstractOpenType $fontParser,
@@ -170,7 +170,7 @@ class FontDescriptor
                     $message = 'This font cannot be embedded in the PDF document. If you would like to use '
                              . 'it anyway, you must pass \Zend\Pdf\Font::EMBED_SUPPRESS_EMBED_EXCEPTION '
                              . 'in the $options parameter of the font constructor.';
-                    throw new pdf_except_4($message, Pdf\Except_1::FONT_CANT_BE_EMBEDDED);
+                    throw new Exception\CorruptedPdfException($message, Pdf\Exception::FONT_CANT_BE_EMBEDDED);
                 }
 
             } else {

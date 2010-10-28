@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Action;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\ObjectFactory;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
@@ -56,7 +56,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Action\Uri
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalStructure\NavigationTarget
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
@@ -95,12 +95,12 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
      * @param \Zend\Pdf\InternalType\DictionaryObject $dictionary
      * @param SplObjectStorage      $processedActions  list of already processed action dictionaries,
      *                                                 used to avoid cyclic references
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions)
     {
         if ($dictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('$dictionary mast be a direct or an indirect dictionary object.');
+            throw new Exception\CorruptedPdfException('$dictionary mast be a direct or an indirect dictionary object.');
         }
 
         $this->_actionDictionary = $dictionary;
@@ -121,7 +121,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
                     }
                 }
             } else {
-                throw new pdf_except_4('PDF Action dictionary Next entry must be a dictionary or an array.');
+                throw new Exception\CorruptedPdfException('PDF Action dictionary Next entry must be a dictionary or an array.');
             }
         }
 
@@ -135,7 +135,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $dictionary (It's actually Dictionary or Dictionary Object or Reference to a Dictionary Object)
      * @param SplObjectStorage $processedActions  list of already processed action dictionaries, used to avoid cyclic references
      * @return \Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function load(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions = null)
     {
@@ -144,14 +144,14 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
         }
 
         if ($dictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('$dictionary mast be a direct or an indirect dictionary object.');
+            throw new Exception\CorruptedPdfException('$dictionary mast be a direct or an indirect dictionary object.');
         }
         if (isset($dictionary->Type)  &&  $dictionary->Type->value != 'Action') {
-            throw new pdf_except_4('Action dictionary Type entry must be set to \'Action\'.');
+            throw new Exception\CorruptedPdfException('Action dictionary Type entry must be set to \'Action\'.');
         }
 
         if ($dictionary->S === null) {
-            throw new pdf_except_4('Action dictionary must contain S entry');
+            throw new Exception\CorruptedPdfException('Action dictionary must contain S entry');
         }
 
         switch ($dictionary->S->value) {
@@ -261,7 +261,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
             $processedActions = new \SplObjectStorage();
         }
         if ($processedActions->contains($this)) {
-            throw new pdf_except_4('Action chain cyclyc reference is detected.');
+            throw new Exception\CorruptedPdfException('Action chain cyclyc reference is detected.');
         }
         $processedActions->attach($this);
 

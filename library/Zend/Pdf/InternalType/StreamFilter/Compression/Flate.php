@@ -24,13 +24,13 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter\Compression;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * Flate stream filter
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression\AbstractCompression
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -45,7 +45,7 @@ class Flate extends AbstractCompression
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function encode($data, $params = null)
     {
@@ -64,12 +64,12 @@ class Flate extends AbstractCompression
                 if (!isset($php_errormsg)) {
                     $php_errormsg = 'Error occured while compressing PDF data using gzcompress() function.';
                 }
-                throw new pdf_except_4($php_errormsg);
+                throw new Exception\CorruptedPdfException($php_errormsg);
             }
 
             ini_set('track_errors', $trackErrors);
         } else {
-            throw new pdf_except_4('Not implemented yet. You have to use zlib extension.');
+            throw new Exception\CorruptedPdfException('Not implemented yet. You have to use zlib extension.');
         }
 
         return $output;
@@ -81,7 +81,7 @@ class Flate extends AbstractCompression
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function decode($data, $params = null)
     {
@@ -96,12 +96,12 @@ class Flate extends AbstractCompression
                 if (!isset($php_errormsg)) {
                     $php_errormsg = 'Error occured while uncompressing PDF data using gzuncompress() function.';
                 }
-                throw new pdf_except_4($php_errormsg);
+                throw new Exception\CorruptedPdfException($php_errormsg);
             }
 
             ini_set('track_errors', $trackErrors);
         } else {
-            throw new pdf_except_4('Not implemented yet');
+            throw new Exception\CorruptedPdfException('Not implemented yet');
         }
 
         if ($params !== null) {

@@ -24,14 +24,14 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 
 use Zend\Pdf\InternalType\StreamFilter;
 
 /**
  * ASCII85 stream filter
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -46,7 +46,7 @@ class Ascii85 implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function encode($data, $params = null)
     {
@@ -117,7 +117,7 @@ class Ascii85 implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function decode($data, $params = null)
     {
@@ -128,7 +128,7 @@ class Ascii85 implements StreamFilter
         $data = str_replace($whiteSpace, '', $data);
 
         if (substr($data, -2) != '~>') {
-            throw new \Zend\pdf_except_4('Invalid EOF marker');
+            throw new \Zend\Exception\CorruptedPdfException('Invalid EOF marker');
             return '';
         }
 

@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalStructure;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -37,7 +37,7 @@ use Zend\Pdf;
  * @uses       Countable
  * @uses       Iterator
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -57,12 +57,12 @@ class NameTree implements \ArrayAccess, \Iterator, \Countable
      * Object constructor
      *
      * @param $rootDictionary root of name dictionary
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $rootDictionary)
     {
         if ($rootDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('Name tree root must be a dictionary.');
+            throw new Exception\CorruptedPdfException('Name tree root must be a dictionary.');
         }
 
         $intermediateNodes = array();

@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -42,7 +42,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Destination\Unknown
  * @uses       \Zend\Pdf\Destination\Zoom
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalStructure\NavigationTarget
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
@@ -65,10 +65,10 @@ abstract class AbstractDestination extends Pdf\InternalStructure\NavigationTarge
         }
 
         if ($resource->getType() != InternalType\AbstractTypeObject::TYPE_ARRAY) {
-            throw new pdf_except_4('An explicit destination must be a direct or an indirect array object.');
+            throw new Exception\CorruptedPdfException('An explicit destination must be a direct or an indirect array object.');
         }
         if (count($resource->items) < 2) {
-            throw new pdf_except_4('An explicit destination array must contain at least two elements.');
+            throw new Exception\CorruptedPdfException('An explicit destination array must contain at least two elements.');
         }
 
         switch ($resource->items[1]->value) {

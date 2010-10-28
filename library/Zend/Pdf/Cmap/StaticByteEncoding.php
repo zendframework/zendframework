@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Cmap;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -34,7 +34,7 @@ use Zend\Pdf;
  * takes a predefined array of glyph numbers and can cover any Unicode character.
  *
  * @uses       \Zend\Pdf\Cmap\ByteEncoding
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -52,13 +52,13 @@ class StaticByteEncoding extends ByteEncoding
      *
      * @param array $cmapData Array whose keys are Unicode character codes and
      *   values are glyph numbers.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($cmapData)
     {
         if (! is_array($cmapData)) {
-            throw new pdf_except_4('Constructor parameter must be an array',
-                                         Pdf\Except_1::BAD_PARAMETER_TYPE);
+            throw new Exception\CorruptedPdfException('Constructor parameter must be an array',
+                                         Pdf\Exception::BAD_PARAMETER_TYPE);
         }
         $this->_glyphIndexArray = $cmapData;
     }

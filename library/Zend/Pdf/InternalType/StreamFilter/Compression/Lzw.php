@@ -24,13 +24,13 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter\Compression;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * LZW stream filter
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression\AbstractCompression
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -44,7 +44,7 @@ class Lzw extends AbstractCompression
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private static function _getEarlyChangeValue($params)
     {
@@ -52,7 +52,7 @@ class Lzw extends AbstractCompression
             $earlyChange = $params['EarlyChange'];
 
             if ($earlyChange != 0  &&  $earlyChange != 1) {
-                throw new pdf_except_4('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
+                throw new Exception\CorruptedPdfException('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
             }
             return $earlyChange;
         } else {
@@ -67,7 +67,7 @@ class Lzw extends AbstractCompression
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function encode($data, $params = null)
     {
@@ -75,7 +75,7 @@ class Lzw extends AbstractCompression
             $data = self::_applyEncodeParams($data, $params);
         }
 
-        throw new pdf_except_4('Not implemented yet');
+        throw new Exception\CorruptedPdfException('Not implemented yet');
     }
 
     /**
@@ -84,11 +84,11 @@ class Lzw extends AbstractCompression
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function decode($data, $params = null)
     {
-        throw new pdf_except_4('Not implemented yet');
+        throw new Exception\CorruptedPdfException('Not implemented yet');
 
         if ($params !== null) {
             return self::_applyDecodeParams($data, $params);

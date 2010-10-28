@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Image;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Pdf;
  *
  * Helps manage the diverse set of supported image file types.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Resource\Image\Jpeg
  * @uses       \Zend\Pdf\Resource\Image\Png
  * @uses       \Zend\Pdf\Resource\Image\Tiff
@@ -46,7 +46,7 @@ class ImageFactory
 {
     public static function factory($filename) {
         if(!is_file($filename)) {
-            throw new pdf_except_4("Cannot create image resource. File not found.");
+            throw new Exception\CorruptedPdfException("Cannot create image resource. File not found.");
         }
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
         /*
@@ -70,7 +70,7 @@ class ImageFactory
                 return new Jpeg($filename);
                 break;
             default:
-                throw new pdf_except_4("Cannot create image resource. File extension not known or unsupported type.");
+                throw new Exception\CorruptedPdfException("Cannot create image resource. File extension not known or unsupported type.");
                 break;
         }
     }

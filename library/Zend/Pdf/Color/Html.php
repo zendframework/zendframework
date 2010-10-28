@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Color;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 
 use Zend\Pdf\Color,
     Zend\Pdf;
@@ -38,7 +38,7 @@ use Zend\Pdf\Color,
  * @uses       \Zend\Pdf\Color
  * @uses       \Zend\Pdf\Color\GrayScale
  * @uses       \Zend\Pdf\Color\Rgb
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Color
@@ -59,7 +59,7 @@ class Html implements Color
      * Class constructor.
      *
      * @param mixed $color
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($color)
     {
@@ -407,7 +407,7 @@ class Html implements Color
                 $r = 0.604; $g = 0.804; $b = 0.196; break;
 
             default:
-                throw new pdf_except_4('Unknown color name: ' . $color);
+                throw new Exception\CorruptedPdfException('Unknown color name: ' . $color);
         }
         if (($r == $g) && ($g == $b)) {
             return new GrayScale($r);

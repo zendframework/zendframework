@@ -52,7 +52,7 @@ class TrueType extends AbstractParsed
      * @param \Zend\Pdf\BinaryParser\Font\OpenType\TrueType $fontParser Font parser
      *   object containing parsed TrueType file.
      * @param integer $embeddingOptions Options for font embedding.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(OpenTypeFontParser\TrueType $fontParser, $embeddingOptions)
     {

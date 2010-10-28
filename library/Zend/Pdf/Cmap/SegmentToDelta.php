@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Cmap;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -35,7 +35,7 @@ use Zend\Pdf;
  * character set, with the exception of Unicode Surrogates (U+D800 - U+DFFF).
  *
  * @uses       \Zend\Pdf\Cmap\AbstractCmap
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -318,7 +318,7 @@ class SegmentToDelta extends AbstractCmap
      * malformed.
      *
      * @param string $cmapData Raw binary cmap table data.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($cmapData)
     {
@@ -326,22 +326,22 @@ class SegmentToDelta extends AbstractCmap
          */
         $actualLength = strlen($cmapData);
         if ($actualLength < 23) {
-            throw new pdf_except_4('Insufficient table data',
-                                         Pdf\Except_1::CMAP_TABLE_DATA_TOO_SMALL);
+            throw new Exception\CorruptedPdfException('Insufficient table data',
+                                         Pdf\Exception::CMAP_TABLE_DATA_TOO_SMALL);
         }
 
         /* Sanity check: Make sure this is right data for this table type.
          */
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != AbstractCmap::TYPE_SEGMENT_TO_DELTA) {
-            throw new pdf_except_4('Wrong cmap table type',
-                                         Pdf\Except_1::CMAP_WRONG_TABLE_TYPE);
+            throw new Exception\CorruptedPdfException('Wrong cmap table type',
+                                         Pdf\Exception::CMAP_WRONG_TABLE_TYPE);
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
-            throw new pdf_except_4("Table length ($length) does not match actual length ($actualLength)",
-                                         Pdf\Except_1::CMAP_WRONG_TABLE_LENGTH);
+            throw new Exception\CorruptedPdfException("Table length ($length) does not match actual length ($actualLength)",
+                                         Pdf\Exception::CMAP_WRONG_TABLE_LENGTH);
         }
 
         /* Mapping tables should be language-independent. The font may not work
@@ -400,8 +400,8 @@ class SegmentToDelta extends AbstractCmap
          * of the table.
          */
         if ($offset != $length) {
-            throw new pdf_except_4("Ending offset ($offset) does not match length ($length)",
-                                         Pdf\Except_1::CMAP_FINAL_OFFSET_NOT_LENGTH);
+            throw new Exception\CorruptedPdfException("Ending offset ($offset) does not match length ($length)",
+                                         Pdf\Exception::CMAP_FINAL_OFFSET_NOT_LENGTH);
         }
     }
 }

@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Pdf;
  *
  * @uses       ArrayObject
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -55,7 +55,7 @@ class ArrayObject extends AbstractTypeObject
      * Object constructor
      *
      * @param array $val   - array of \Zend\Pdf\InternalType\AbstractTypeObject objects
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($val = null)
     {
@@ -64,12 +64,12 @@ class ArrayObject extends AbstractTypeObject
         if ($val !== null  &&  is_array($val)) {
             foreach ($val as $element) {
                 if (!$element instanceof AbstractTypeObject) {
-                    throw new pdf_except_4('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
+                    throw new Exception\CorruptedPdfException('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
                 }
                 $this->items[] = $element;
             }
         } else if ($val !== null){
-            throw new pdf_except_4('Argument must be an array');
+            throw new Exception\CorruptedPdfException('Argument must be an array');
         }
     }
 
@@ -78,11 +78,11 @@ class ArrayObject extends AbstractTypeObject
      * Getter
      *
      * @param string $property
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __get($property)
     {
-        throw new pdf_except_4('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
+        throw new Exception\CorruptedPdfException('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
     }
 
 
@@ -91,11 +91,11 @@ class ArrayObject extends AbstractTypeObject
      *
      * @param mixed $offset
      * @param mixed $value
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __set($property, $value)
     {
-        throw new pdf_except_4('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
+        throw new Exception\CorruptedPdfException('Undefined property: \Zend\Pdf\InternalType\ArrayObject::$' . $property);
     }
 
     /**

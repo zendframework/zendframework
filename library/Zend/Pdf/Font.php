@@ -35,7 +35,7 @@ namespace Zend\Pdf;
  * the true base class ({@link \Zend\Pdf\Resource\Font\AbstractFont}) is not intuitive
  * for the end user.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\BinaryParser\DataSource\File
  * @uses       \Zend\Pdf\Resource\Font\CidFont\TrueType
  * @uses       \Zend\Pdf\Resource\Font\OpenType\TrueType
@@ -469,7 +469,7 @@ abstract class Font
      * @param string $name Full PostScript name of font.
      * @param integer $embeddingOptions (optional) Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\AbstractFont
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function fontWithName($name, $embeddingOptions = 0)
         {
@@ -548,8 +548,8 @@ abstract class Font
                 break;
 
             default:
-                throw new pdf_except_4("Unknown font name: $name",
-                                             Pdf\Except_1::BAD_FONT_NAME);
+                throw new Exception\CorruptedPdfException("Unknown font name: $name",
+                                             Pdf\Exception::BAD_FONT_NAME);
         }
 
         /* Add this new font to the cache array and return it for use.
@@ -581,7 +581,7 @@ abstract class Font
      * @param string $filePath Full path to the font file.
      * @param integer $embeddingOptions (optional) Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\AbstractFont
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function fontWithPath($filePath, $embeddingOptions = 0)
     {
@@ -658,8 +658,8 @@ abstract class Font
         } else {
             /* The type of font could not be determined. Give up.
              */
-            throw new pdf_except_4("Cannot determine font type: $filePath",
-                                         Pdf\Except_1::CANT_DETERMINE_FONT_TYPE);
+            throw new Exception\CorruptedPdfException("Cannot determine font type: $filePath",
+                                         Pdf\Exception::CANT_DETERMINE_FONT_TYPE);
          }
 
     }
@@ -684,7 +684,7 @@ abstract class Font
      * @param integer $embeddingOptions Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\OpenType\TrueType May also return null if
      *   the data source does not appear to contain a TrueType font.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected static function _extractTrueTypeFont($dataSource, $embeddingOptions)
     {
@@ -699,7 +699,7 @@ abstract class Font
                 $cidFont = new Resource\Font\CidFont\TrueType($fontParser, $embeddingOptions);
                 $font    = new Resource\Font\Type0($cidFont);
             }
-        } catch (pdf_except_4 $e) {
+        } catch (Exception\CorruptedPdfException $e) {
             /* The following exception codes suggest that this isn't really a
              * TrueType font. If we caught such an exception, simply return
              * null. For all other cases, it probably is a TrueType font but has
@@ -707,13 +707,13 @@ abstract class Font
              */
             $fontParser = null;
             switch ($e->getCode()) {
-                case Pdf\Except_1::WRONG_FONT_TYPE:    // break intentionally omitted
-                case Pdf\Except_1::BAD_TABLE_COUNT:    // break intentionally omitted
-                case Pdf\Except_1::BAD_MAGIC_NUMBER:
+                case Pdf\Exception::WRONG_FONT_TYPE:    // break intentionally omitted
+                case Pdf\Exception::BAD_TABLE_COUNT:    // break intentionally omitted
+                case Pdf\Exception::BAD_MAGIC_NUMBER:
                     return null;
 
                 default:
-                    throw new pdf_except_4($e->getMessage(), $e->getCode(), $e);
+                    throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
             }
         }
         return $font;

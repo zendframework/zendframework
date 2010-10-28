@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Annotation;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -38,7 +38,7 @@ use Zend\Pdf\InternalType;
  * @uses       \Zend\Pdf\InternalType\NameObject
  * @uses       \Zend\Pdf\InternalType\NumericObject
  * @uses       \Zend\Pdf\InternalType\StringObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Annotation
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -57,12 +57,12 @@ class Markup extends AbstractAnnotation
     /**
      * Annotation object constructor
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
         if ($annotationDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('Annotation dictionary resource has to be a dictionary.');
+            throw new Exception\CorruptedPdfException('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
@@ -72,7 +72,7 @@ class Markup extends AbstractAnnotation
                              self::SUBTYPE_UNDERLINE,
                              self::SUBTYPE_SQUIGGLY,
                              self::SUBTYPE_STRIKEOUT) )) {
-            throw new pdf_except_4('Subtype => Markup entry is omitted or has wrong value.');
+            throw new Exception\CorruptedPdfException('Subtype => Markup entry is omitted or has wrong value.');
         }
 
         parent::__construct($annotationDictionary);
@@ -111,7 +111,7 @@ class Markup extends AbstractAnnotation
      * @param string $subType
      * @param array $quadPoints  [x1 y1 x2 y2 x3 y3 x4 y4]
      * @return \Zend\Pdf\Annotation\Markup
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function create($x1, $y1, $x2, $y2, $text, $subType, $quadPoints)
     {
@@ -130,7 +130,7 @@ class Markup extends AbstractAnnotation
         $annotationDictionary->Contents = new InternalType\StringObject($text);
 
         if (!is_array($quadPoints)  ||  count($quadPoints) == 0  ||  count($quadPoints) % 8 != 0) {
-            throw new pdf_except_4('$quadPoints parameter must be an array of 8xN numbers');
+            throw new Exception\CorruptedPdfException('$quadPoints parameter must be an array of 8xN numbers');
         }
         $points = new InternalType\ArrayObject();
         foreach ($quadPoints as $quadPoint) {

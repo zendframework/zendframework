@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Pdf;
  *
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -54,22 +54,22 @@ class DictionaryObject extends AbstractTypeObject
      * Object constructor
      *
      * @param array $val   - array of \Zend\Pdf\InternalType\AbstractTypeObject objects
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($val = null)
     {
         if ($val === null) {
             return;
         } else if (!is_array($val)) {
-            throw new pdf_except_4('Argument must be an array');
+            throw new Exception\CorruptedPdfException('Argument must be an array');
         }
 
         foreach ($val as $name => $element) {
             if (!$element instanceof AbstractTypeObject) {
-                throw new pdf_except_4('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
+                throw new Exception\CorruptedPdfException('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
             }
             if (!is_string($name)) {
-                throw new pdf_except_4('Array keys must be strings');
+                throw new Exception\CorruptedPdfException('Array keys must be strings');
             }
             $this->_items[$name] = $element;
         }
@@ -81,7 +81,7 @@ class DictionaryObject extends AbstractTypeObject
      *
      * @name \Zend\Pdf\InternalType\NameObject $name
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $val   - \Zend\Pdf\InternalType\AbstractTypeObject object
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function add(NameObject $name, AbstractTypeObject $val)
     {
@@ -151,7 +151,7 @@ class DictionaryObject extends AbstractTypeObject
 
         foreach ($this->_items as $name => $element) {
             if (!is_object($element)) {
-                throw new pdf_except_4('Wrong data');
+                throw new Exception\CorruptedPdfException('Wrong data');
             }
 
             if (strlen($outStr) - $lastNL > 128)  {
@@ -174,7 +174,7 @@ class DictionaryObject extends AbstractTypeObject
      * @param array &$processed List of already processed indirect objects, used to avoid objects duplication
      * @param integer $mode  Cloning mode (defines filter for objects cloning)
      * @returns \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function makeClone(Pdf\ObjectFactory $factory, array &$processed, $mode)
     {

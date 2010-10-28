@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Cmap;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -55,7 +55,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Cmap\StaticByteEncoding
  * @uses       \Zend\Pdf\Cmap\SegmentToDelta
  * @uses       \Zend\Pdf\Cmap\TrimmedTable
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -151,7 +151,7 @@ abstract class AbstractCmap
      * @param integer $cmapType Type of cmap.
      * @param mixed $cmapData CMap table data. Usually a string or array.
      * @return \Zend\Pdf\Cmap\AbstractCmap
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function cmapWithTypeData($cmapType, $cmapData)
     {
@@ -163,8 +163,8 @@ abstract class AbstractCmap
                 return new StaticByteEncoding($cmapData);
 
             case self::TYPE_HIGH_BYTE_MAPPING:
-                throw new pdf_except_4('High byte mapping cmap currently unsupported',
-                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedPdfException('High byte mapping cmap currently unsupported',
+                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
 
             case self::TYPE_SEGMENT_TO_DELTA:
                 return new SegmentToDelta($cmapData);
@@ -173,20 +173,20 @@ abstract class AbstractCmap
                 return new TrimmedTable($cmapData);
 
             case self::TYPE_MIXED_COVERAGE:
-                throw new pdf_except_4('Mixed coverage cmap currently unsupported',
-                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedPdfException('Mixed coverage cmap currently unsupported',
+                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
 
             case self::TYPE_TRIMMED_ARRAY:
-                throw new pdf_except_4('Trimmed array cmap currently unsupported',
-                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedPdfException('Trimmed array cmap currently unsupported',
+                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
 
             case self::TYPE_SEGMENTED_COVERAGE:
-                throw new pdf_except_4('Segmented coverage cmap currently unsupported',
-                                             Pdf\Except_1::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedPdfException('Segmented coverage cmap currently unsupported',
+                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
 
             default:
-                throw new pdf_except_4("Unknown cmap type: $cmapType",
-                                             Pdf\Except_1::CMAP_UNKNOWN_TYPE);
+                throw new Exception\CorruptedPdfException("Unknown cmap type: $cmapType",
+                                             Pdf\Exception::CMAP_UNKNOWN_TYPE);
         }
     }
 
@@ -200,7 +200,7 @@ abstract class AbstractCmap
      * malformed.
      *
      * @param string $cmapData Raw binary cmap table data.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     abstract public function __construct($cmapData);
 
@@ -267,13 +267,13 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _extractInt2(&$data, $index)
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
-            throw new pdf_except_4("Index out of range: $index",
-                                         Pdf\Except_1::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedPdfException("Index out of range: $index",
+                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
         }
         $number = ord($data[$index]);
         if (($number & 0x80) == 0x80) {    // negative
@@ -293,13 +293,13 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _extractUInt2(&$data, $index)
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
-            throw new pdf_except_4("Index out of range: $index",
-                                         Pdf\Except_1::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedPdfException("Index out of range: $index",
+                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
         }
         $number = (ord($data[$index]) << 8) | ord($data[++$index]);
         return $number;
@@ -319,13 +319,13 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _extractUInt4(&$data, $index)
     {
         if (($index < 0) | (($index + 3) > strlen($data))) {
-            throw new pdf_except_4("Index out of range: $index",
-                                         Pdf\Except_1::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedPdfException("Index out of range: $index",
+                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
         }
         $number = (ord($data[$index]) << 24) | (ord($data[++$index]) << 16) |
                   (ord($data[++$index]) << 8) | ord($data[++$index]);

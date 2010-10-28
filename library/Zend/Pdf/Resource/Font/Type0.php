@@ -209,7 +209,7 @@ class Type0 extends AbstractFont
      *
      * @param array &$glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function widthsForGlyphs($glyphNumbers)
     {
@@ -223,7 +223,7 @@ class Type0 extends AbstractFont
      *
      * @param integer $glyphNumber
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function widthForGlyph($glyphNumber)
     {

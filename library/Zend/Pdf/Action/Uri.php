@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Action;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -39,7 +39,7 @@ use Zend\Pdf\InternalType;
  * @uses       \Zend\Pdf\InternalType\DictionaryObject
  * @uses       \Zend\Pdf\InternalType\NameObject
  * @uses       \Zend\Pdf\InternalType\StringObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -53,14 +53,14 @@ class Uri extends AbstractAction
      * @param \Zend\Pdf\InternalType\DictionaryObject $dictionary
      * @param SplObjectStorage      $processedActions  list of already processed action dictionaries,
      *                                                 used to avoid cyclic references
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions)
     {
         parent::__construct($dictionary, $processedActions);
 
         if ($dictionary->URI === null) {
-            throw new pdf_except_4('URI action dictionary entry is required');
+            throw new Exception\CorruptedPdfException('URI action dictionary entry is required');
         }
     }
 
@@ -69,13 +69,13 @@ class Uri extends AbstractAction
      *
      * @param string $uri
      * @return true
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected static function _validateUri($uri)
     {
         $scheme = parse_url((string)$uri, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            throw new pdf_except_4('Invalid URI');
+            throw new Exception\CorruptedPdfException('Invalid URI');
         }
     }
 

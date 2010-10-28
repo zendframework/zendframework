@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -33,7 +33,7 @@ use Zend\Pdf;
  *
  * @uses       \Zend\Pdf\Destination\AbstractDestination
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -59,23 +59,23 @@ abstract class Explicit extends AbstractDestination
      * Explicit destination object constructor
      *
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $destinationArray
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $destinationArray)
     {
         if ($destinationArray->getType() != InternalType\AbstractTypeObject::TYPE_ARRAY) {
-            throw new pdf_except_4('Explicit destination resource Array must be a direct or an indirect array object.');
+            throw new Exception\CorruptedPdfException('Explicit destination resource Array must be a direct or an indirect array object.');
         }
 
         $this->_destinationArray = $destinationArray;
 
         switch (count($this->_destinationArray->items)) {
             case 0:
-                throw new pdf_except_4('Destination array must contain a page reference.');
+                throw new Exception\CorruptedPdfException('Destination array must contain a page reference.');
                 break;
 
             case 1:
-                throw new pdf_except_4('Destination array must contain a destination type name.');
+                throw new Exception\CorruptedPdfException('Destination array must contain a destination type name.');
                 break;
 
             default:
@@ -93,7 +93,7 @@ abstract class Explicit extends AbstractDestination
                 break;
 
             default:
-                throw new pdf_except_4('Destination target must be a page number or page dictionary object.');
+                throw new Exception\CorruptedPdfException('Destination target must be a page number or page dictionary object.');
                 break;
         }
     }

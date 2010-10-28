@@ -24,13 +24,13 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\IndirectObjectReference;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * PDF file reference table
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -102,7 +102,7 @@ class ReferenceTable
     {
         $refElements = explode(' ', $ref);
         if (!is_numeric($refElements[0]) || !is_numeric($refElements[1]) || $refElements[2] != 'R') {
-            throw new pdf_except_4("Incorrect reference: '$ref'");
+            throw new Exception\CorruptedPdfException("Incorrect reference: '$ref'");
         }
         $objNum = (int)$refElements[0];
         $genNum = (int)$refElements[1];
@@ -157,12 +157,12 @@ class ReferenceTable
      *
      * @param string $ref
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function getNextFree($ref)
     {
         if (isset($this->_inuse[$ref])) {
-            throw new pdf_except_4('Object is not free');
+            throw new Exception\CorruptedPdfException('Object is not free');
         }
 
         if (isset($this->_free[$ref])) {
@@ -173,7 +173,7 @@ class ReferenceTable
             return $this->_parent->getNextFree($ref);
         }
 
-        throw new pdf_except_4('Object not found.');
+        throw new Exception\CorruptedPdfException('Object not found.');
     }
 
 
@@ -186,7 +186,7 @@ class ReferenceTable
     public function getNewGeneration($objNum)
     {
         if (isset($this->_usedObjects[$objNum])) {
-            throw new pdf_except_4('Object is not free');
+            throw new Exception\CorruptedPdfException('Object is not free');
         }
 
         if (isset($this->_generations[$objNum])) {
@@ -197,6 +197,6 @@ class ReferenceTable
             return $this->_parent->getNewGeneration($objNum);
         }
 
-        throw new pdf_except_4('Object not found.');
+        throw new Exception\CorruptedPdfException('Object not found.');
     }
 }

@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Action;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\Destination;
 use Zend\Pdf\InternalType;
@@ -38,7 +38,7 @@ use Zend\Pdf\InternalType;
  * @uses       \Zend\Pdf\Destination\Named
  * @uses       \Zend\Pdf\InternalType\DictionaryObject
  * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -81,7 +81,7 @@ class GoToAction extends AbstractAction
         }
 
         if (!$destination instanceof Destination\AbstractDestination) {
-            throw new pdf_except_4('$destination parameter must be a \Zend\Pdf\Destination object or string.');
+            throw new Exception\CorruptedPdfException('$destination parameter must be a \Zend\Pdf\Destination object or string.');
         }
 
         $dictionary       = new InternalType\DictionaryObject();

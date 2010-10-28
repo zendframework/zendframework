@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType\StreamFilter\Compression as CompressionFilter;
 use Zend\Pdf\ObjectFactory;
 use Zend\Pdf;
@@ -37,7 +37,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\InternalType\NumericObject
  * @uses       \Zend\Pdf\InternalType\IndirectObject
  * @uses       \Zend\Pdf\InternalType\StreamContent
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression;
  * @category   Zend
@@ -82,7 +82,7 @@ class StreamObject extends IndirectObject
      * @param integer $genNum
      * @param \Zend\Pdf\ObjectFactory $factory
      * @param \Zend\Pdf\InternalType\DictionaryObject|null $dictionary
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($val, $objNum, $genNum, ObjectFactory $factory, $dictionary = null)
     {
@@ -179,7 +179,7 @@ class StreamObject extends IndirectObject
     /**
      * Decode stream
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private function _decodeStream()
     {
@@ -193,7 +193,7 @@ class StreamObject extends IndirectObject
          */
         if (isset($this->_initialDictionaryData['F'])) {
             /** @todo Check, how external files can be processed. */
-            throw new pdf_except_4('External filters are not supported now.');
+            throw new Exception\CorruptedPdfException('External filters are not supported now.');
         }
 
         foreach ($this->_initialDictionaryData['Filter'] as $id => $filterName ) {
@@ -223,7 +223,7 @@ class StreamObject extends IndirectObject
                     break;
 
                 default:
-                    throw new pdf_except_4('Unknown stream filter: \'' . $filterName . '\'.');
+                    throw new Exception\CorruptedPdfException('Unknown stream filter: \'' . $filterName . '\'.');
             }
         }
 
@@ -233,7 +233,7 @@ class StreamObject extends IndirectObject
     /**
      * Encode stream
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private function _encodeStream()
     {
@@ -243,7 +243,7 @@ class StreamObject extends IndirectObject
          */
         if (isset($this->_initialDictionaryData['F'])) {
             /** @todo Check, how external files can be processed. */
-            throw new pdf_except_4('External filters are not supported now.');
+            throw new Exception\CorruptedPdfException('External filters are not supported now.');
         }
 
         $filters = array_reverse($this->_initialDictionaryData['Filter'], true);
@@ -275,7 +275,7 @@ class StreamObject extends IndirectObject
                     break;
 
                default:
-                    throw new pdf_except_4('Unknown stream filter: \'' . $filterName . '\'.');
+                    throw new Exception\CorruptedPdfException('Unknown stream filter: \'' . $filterName . '\'.');
             }
         }
 
@@ -287,7 +287,7 @@ class StreamObject extends IndirectObject
      *
      * @param string $property
      * @return mixed
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __get($property)
     {
@@ -310,7 +310,7 @@ class StreamObject extends IndirectObject
             return $this->_value->value->getRef();
         }
 
-        throw new pdf_except_4('Unknown stream object property requested.');
+        throw new Exception\CorruptedPdfException('Unknown stream object property requested.');
     }
 
 
@@ -332,7 +332,7 @@ class StreamObject extends IndirectObject
             return;
         }
 
-        throw new pdf_except_4('Unknown stream object property: \'' . $property . '\'.');
+        throw new Exception\CorruptedPdfException('Unknown stream object property: \'' . $property . '\'.');
     }
 
 
@@ -364,7 +364,7 @@ class StreamObject extends IndirectObject
             case 1:
                 return $this->_value->$method($args[0]);
             default:
-                throw new pdf_except_4('Unsupported number of arguments');
+                throw new Exception\CorruptedPdfException('Unsupported number of arguments');
         }
     }
 

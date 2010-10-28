@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Outline;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
@@ -36,7 +36,7 @@ use Zend\Pdf\ObjectFactory;
  *
  * @uses       Countable
  * @uses       RecursiveIterator
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Outline\Created
  * @uses       \Zend\Pdf\ObjectFactory;
  * @package    Zend_PDF
@@ -181,7 +181,7 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
      *
      * @param array $options
      * @return \Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function setOptions(array $options)
     {
@@ -211,7 +211,7 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
                     break;
 
                 default:
-                    throw new pdf_except_4("Unknown option name - '$key'.");
+                    throw new Exception\CorruptedPdfException("Unknown option name - '$key'.");
                     break;
             }
         }
@@ -237,20 +237,20 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
      *   'target' - \Zend\Pdf\InternalStructure\NavigationTarget object or string, outline item destination
      *
      * @return \Zend\Pdf\Outline\AbstractOutline
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function create($param1, $param2 = null)
     {
         if (is_string($param1)) {
             if ($param2 !== null  &&  !($param2 instanceof Pdf\InternalStructure\NavigationTarget  ||  is_string($param2))) {
-                throw new pdf_except_4('Outline create method takes $title (string) and $target (\Zend\Pdf\InternalStructure\NavigationTarget or string) or an array as an input');
+                throw new Exception\CorruptedPdfException('Outline create method takes $title (string) and $target (\Zend\Pdf\InternalStructure\NavigationTarget or string) or an array as an input');
             }
 
             return new Created(array('title'  => $param1,
                                      'target' => $param2));
         } else {
             if (!is_array($param1)  ||  $param2 !== null) {
-                throw new pdf_except_4('Outline create method takes $title (string) and $destination (\Zend\Pdf\InternalStructure\NavigationTarget) or an array as an input');
+                throw new Exception\CorruptedPdfException('Outline create method takes $title (string) and $destination (\Zend\Pdf\InternalStructure\NavigationTarget) or an array as an input');
             }
 
             return new Created($param1);

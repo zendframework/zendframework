@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Trailer;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -32,7 +32,7 @@ use Zend\Pdf\InternalType;
  * PDF file trailer
  *
  * @uses       \Zend\Pdf\InternalType\DictionaryObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -53,13 +53,13 @@ abstract class AbstractTrailer
      * Check if key is correct
      *
      * @param string $key
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private function _checkDictKey($key)
     {
         if ( !in_array($key, self::$_allowedKeys) ) {
             /** @todo Make warning (log entry) instead of an exception */
-            throw new pdf_except_4("Unknown trailer dictionary key: '$key'.");
+            throw new Exception\CorruptedPdfException("Unknown trailer dictionary key: '$key'.");
         }
     }
 

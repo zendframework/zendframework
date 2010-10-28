@@ -37,7 +37,7 @@ use Zend\Memory;
  *
  * @uses       \Zend\Memory\MemoryManager
  * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Font
  * @uses       \Zend\Pdf\Image
  * @uses       \Zend\Pdf\InternalStructure
@@ -239,12 +239,12 @@ class PdfDocument
      *
      * @param string $filename
      * @param boolean $updateOnly
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function save($filename, $updateOnly = false)
     {
         if (($file = @fopen($filename, $updateOnly ? 'ab':'wb')) === false ) {
-            throw new pdf_except_4( "Can not open '$filename' file for writing." );
+            throw new Exception\CorruptedPdfException( "Can not open '$filename' file for writing." );
         }
 
         $this->render($updateOnly, $file);
@@ -268,7 +268,7 @@ class PdfDocument
      *
      * @param string  $source - PDF file to load
      * @param integer $revision
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      * @return \Zend\Pdf\PdfDocument
      */
     public function __construct($source = null, $revision = null, $load = false)
@@ -280,7 +280,7 @@ class PdfDocument
             $this->_pdfHeaderVersion = $this->_parser->getPDFVersion();
             $this->_trailer          = $this->_parser->getTrailer();
             if ($this->_trailer->Encrypt !== null) {
-                throw new pdf_except_4('Encrypted document modification is not supported');
+                throw new Exception\CorruptedPdfException('Encrypted document modification is not supported');
             }
             if ($revision !== null) {
                 $this->rollback($revision);
@@ -409,7 +409,7 @@ class PdfDocument
     protected function _loadPages(InternalType\IndirectObjectReference $pages, $attributes = array())
     {
         if ($pages->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('Wrong argument');
+            throw new Exception\CorruptedPdfException('Wrong argument');
         }
 
         foreach ($pages->getKeys() as $property) {
@@ -450,7 +450,7 @@ class PdfDocument
      *
      * @param \Zend\Pdf\InternalType\IndirectObjectReference $root Document catalog entry
      * @param string $pdfHeaderVersion
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _loadNamedDestinations(InternalType\IndirectObjectReference $root, $pdfHeaderVersion)
     {
@@ -473,7 +473,7 @@ class PdfDocument
             // Look for Destinations sructure at Dest entry of document catalog
             if ($root->Dests !== null) {
                 if ($root->Dests->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-                    throw new pdf_except_4('Document catalog Dests entry must be a dictionary.');
+                    throw new Exception\CorruptedPdfException('Document catalog Dests entry must be a dictionary.');
                 }
 
                 foreach ($root->Dests->getKeys() as $destKey) {
@@ -495,11 +495,11 @@ class PdfDocument
         }
 
         if ($root->Outlines->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('Document catalog Outlines entry must be a dictionary.');
+            throw new Exception\CorruptedPdfException('Document catalog Outlines entry must be a dictionary.');
         }
 
         if ($root->Outlines->Type !== null  &&  $root->Outlines->Type->value != 'Outlines') {
-            throw new pdf_except_4('Outlines Type entry must be an \'Outlines\' string.');
+            throw new Exception\CorruptedPdfException('Outlines Type entry must be an \'Outlines\' string.');
         }
 
         if ($root->Outlines->First === null) {
@@ -569,7 +569,7 @@ class PdfDocument
                     unset($this->_namedTargets[$name]);
                 }
             } else {
-                throw new pdf_except_4('Wrong type of named targed (\'' . get_class($namedTarget) . '\').');
+                throw new Exception\CorruptedPdfException('Wrong type of named targed (\'' . get_class($namedTarget) . '\').');
             }
         }
 
@@ -591,7 +591,7 @@ class PdfDocument
                         $outline->setTarget(null);
                     }
                 } else {
-                    throw new pdf_except_4('Wrong outline target.');
+                    throw new Exception\CorruptedPdfException('Wrong outline target.');
                 }
             }
         }
@@ -610,7 +610,7 @@ class PdfDocument
                     $this->setOpenAction(null);
                 }
             } else {
-                throw new pdf_except_4('OpenAction has to be either PDF Action or Destination.');
+                throw new Exception\CorruptedPdfException('OpenAction has to be either PDF Action or Destination.');
             }
         }
     }
@@ -631,7 +631,7 @@ class PdfDocument
             if ($destination instanceof InternalStructure\NavigationTarget) {
                 $destArrayItems[] = $destination->getResource();
             } else {
-                throw new pdf_except_4('PDF named destinations must be a \Zend\Pdf\InternalStructure\NavigationTarget object.');
+                throw new Exception\CorruptedPdfException('PDF named destinations must be a \Zend\Pdf\InternalStructure\NavigationTarget object.');
             }
         }
         $destArray = $this->_objFactory->newObject(new InternalType\ArrayObject($destArrayItems));
@@ -867,7 +867,7 @@ class PdfDocument
         if ($destination !== null  &&
             !$destination instanceof Action\GoToAction  &&
             !$destination instanceof Destination\Explicit) {
-            throw new pdf_except_4('PDF named destination must refer an explicit destination or a GoTo PDF action.');
+            throw new Exception\CorruptedPdfException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
         }
 
         if ($destination !== null) {
@@ -920,7 +920,7 @@ class PdfDocument
      * @param \Zend\Pdf\Destination\AbstractDestination $destination  Destination to resolve
      * @param boolean $refreshPagesHash  Refresh page collection hashes before processing
      * @return \Zend\Pdf\Page|null
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function resolveDestination(Destination\AbstractDestination $destination, $refreshPageCollectionHashes = true)
     {
@@ -942,7 +942,7 @@ class PdfDocument
             }
 
             if (!$destination instanceof Destination\Explicit) {
-                throw new pdf_except_4('Named destination target has to be an explicit destination.');
+                throw new Exception\CorruptedPdfException('Named destination target has to be an explicit destination.');
             }
         }
 
@@ -1018,7 +1018,7 @@ class PdfDocument
      * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function extractFonts()
     {
@@ -1038,7 +1038,7 @@ class PdfDocument
 
                 if (! ($fontDictionary instanceof InternalType\IndirectObjectReference  ||
                        $fontDictionary instanceof InternalType\IndirectObject) ) {
-                    throw new pdf_except_4('Font dictionary has to be an indirect object or object reference.');
+                    throw new Exception\CorruptedPdfException('Font dictionary has to be an indirect object or object reference.');
                 }
 
                 $fontResourcesUnique[spl_object_hash($fontDictionary->getObject())] = $fontDictionary;
@@ -1052,7 +1052,7 @@ class PdfDocument
                 $extractedFont = new Resource\Font\Extracted($fontDictionary);
 
                 $fonts[$resourceId] = $extractedFont;
-            } catch (pdf_except_4 $e) {
+            } catch (Exception\CorruptedPdfException $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
                     throw $e;
                 }
@@ -1068,7 +1068,7 @@ class PdfDocument
      * $fontName should be specified in UTF-8 encoding
      *
      * @return \Zend\Pdf\Resource\Font\Extracted|null
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function extractFont($fontName)
     {
@@ -1088,7 +1088,7 @@ class PdfDocument
 
                 if (! ($fontDictionary instanceof InternalType\IndirectObjectReference  ||
                        $fontDictionary instanceof InternalType\IndirectObject) ) {
-                    throw new pdf_except_4('Font dictionary has to be an indirect object or object reference.');
+                    throw new Exception\CorruptedPdfException('Font dictionary has to be an indirect object or object reference.');
                 }
 
                 $resourceId = spl_object_hash($fontDictionary->getObject());
@@ -1106,7 +1106,7 @@ class PdfDocument
                 try {
                     // Try to extract font
                     return new Resource\Font\Extracted($fontDictionary);
-                } catch (pdf_except_4 $e) {
+                } catch (Exception\CorruptedPdfException $e) {
                     if ($e->getMessage() != 'Unsupported font type.') {
                         throw $e;
                     }
@@ -1125,7 +1125,7 @@ class PdfDocument
      * @param boolean $newSegmentOnly
      * @param resource $outputStream
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function render($newSegmentOnly = false, $outputStream = null)
     {
@@ -1150,7 +1150,7 @@ class PdfDocument
                                 break;
 
                             default:
-                                throw new pdf_except_4('Wrong Trapped document property vale: \'' . $value . '\'. Only true, false and null values are allowed.');
+                                throw new Exception\CorruptedPdfException('Wrong Trapped document property vale: \'' . $value . '\'. Only true, false and null values are allowed.');
                                 break;
                         }
 

@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\DataSource;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -40,7 +40,7 @@ use Zend\Pdf;
  * Subclasses should also override {@link moveToOffset()} and
  * {@link __toString()} as appropriate.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -81,7 +81,7 @@ abstract class AbstractDataSource
      * If the data source cannot be opened for any reason (such as insufficient
      * permissions, missing file, etc.), will throw an appropriate exception.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     abstract public function __construct();
 
@@ -104,7 +104,7 @@ abstract class AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     abstract public function readBytes($byteCount);
 
@@ -174,7 +174,7 @@ abstract class AbstractDataSource
      * parent method.
      *
      * @param integer $offset Destination byte offset.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function moveToOffset($offset)
     {
@@ -182,12 +182,12 @@ abstract class AbstractDataSource
             return;    // Not moving; do nothing.
         }
         if ($offset < 0) {
-            throw new pdf_except_4('Attempt to move before start of data source',
-                                         Pdf\Except_1::MOVE_BEFORE_START_OF_FILE);
+            throw new Exception\CorruptedPdfException('Attempt to move before start of data source',
+                                         Pdf\Exception::MOVE_BEFORE_START_OF_FILE);
         }
         if ($offset >= $this->_size) {    // Offsets are zero-based.
-            throw new pdf_except_4('Attempt to move beyond end of data source',
-                                         Pdf\Except_1::MOVE_BEYOND_END_OF_FILE);
+            throw new Exception\CorruptedPdfException('Attempt to move beyond end of data source',
+                                         Pdf\Exception::MOVE_BEYOND_END_OF_FILE);
         }
         $this->_offset = $offset;
     }
@@ -201,7 +201,7 @@ abstract class AbstractDataSource
      * the end of the data source.
      *
      * @param integer $byteCount Number of bytes to skip.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function skipBytes($byteCount)
     {

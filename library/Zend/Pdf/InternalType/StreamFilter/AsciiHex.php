@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 
 use Zend\Pdf\InternalType\StreamFilter,
     Zend\Pdf;
@@ -32,7 +32,7 @@ use Zend\Pdf\InternalType\StreamFilter,
 /**
  * AsciiHex stream filter
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -47,7 +47,7 @@ class AsciiHex implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function encode($data, $params = null)
     {
@@ -60,7 +60,7 @@ class AsciiHex implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function decode($data, $params = null)
     {
@@ -108,7 +108,7 @@ class AsciiHex implements StreamFilter
                     } else if ($charCode >= 0x61 /*'a'*/ && $charCode <= 0x66 /*'f'*/) {
                         $code = $charCode - 0x57/*0x61 - 0x0A*/;
                     } else {
-                        throw new pdf_except_4('Wrong character in a encoded stream');
+                        throw new Exception\CorruptedPdfException('Wrong character in a encoded stream');
                     }
 
                     if ($oddCode) {
@@ -129,7 +129,7 @@ class AsciiHex implements StreamFilter
 
         /* Check that stream is terminated by End Of Data marker */
         if ($data[$count] != '>') {
-            throw new pdf_except_4('Wrong encoded stream End Of Data marker.');
+            throw new Exception\CorruptedPdfException('Wrong encoded stream End Of Data marker.');
         }
 
         /* Last '0' character is omitted */

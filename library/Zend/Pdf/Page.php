@@ -30,7 +30,7 @@ namespace Zend\Pdf;
  * @uses       \Zend\Pdf\PdfDocument
  * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Resource\Font
  * @package    Zend_PDF
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -214,7 +214,7 @@ class Page
      * @param mixed $param1
      * @param mixed $param2
      * @param mixed $param3
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($param1, $param2 = null, $param3 = null)
     {
@@ -240,7 +240,7 @@ class Page
                     break;
 
                 default:
-                    throw new pdf_except_4('Unrecognized object type.');
+                    throw new Exception\CorruptedPdfException('Unrecognized object type.');
                     break;
 
             }
@@ -312,7 +312,7 @@ class Page
                  * @todo support of user defined pagesize notations, like:
                  *       "210x297mm", "595x842", "8.5x11in", "612x792"
                  */
-                throw new pdf_except_4('Wrong pagesize notation.');
+                throw new Exception\CorruptedPdfException('Wrong pagesize notation.');
             }
             /**
              * @todo support of pagesize recalculation to "default user space units"
@@ -332,7 +332,7 @@ class Page
             $pageHeight = $param2;
 
         } else {
-            throw new pdf_except_4('Unrecognized method signature, wrong number of arguments or wrong argument types.');
+            throw new Exception\CorruptedPdfException('Unrecognized method signature, wrong number of arguments or wrong argument types.');
         }
 
         $this->_pageDictionary = $this->_objFactory->newObject(new InternalType\DictionaryObject());
@@ -478,12 +478,12 @@ class Page
      *
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function flush()
     {
         if ($this->_saveCount != 0) {
-            throw new pdf_except_4('Saved graphics state is not restored');
+            throw new Exception\CorruptedPdfException('Saved graphics state is not restored');
         }
 
         if ($this->_contents == '') {
@@ -537,7 +537,7 @@ class Page
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
      * @param \Zend\Pdf\ObjectFactory $objFactory
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function render(ObjectFactory $objFactory)
     {
@@ -549,7 +549,7 @@ class Page
         }
 
         if ($this->_attached) {
-            throw new pdf_except_4('Page is attached to other documen. Use clone $page to get it context free.');
+            throw new Exception\CorruptedPdfException('Page is attached to other documen. Use clone $page to get it context free.');
         } else {
             $objFactory->attach($this->_objFactory);
         }
@@ -687,17 +687,17 @@ class Page
      *
      * @param float $alpha
      * @param string $mode
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      * @return \Zend\Pdf\Page
      */
     public function setAlpha($alpha, $mode = 'Normal')
     {
         if (!in_array($mode, array('Normal', 'Multiply', 'Screen', 'Overlay', 'Darken', 'Lighten', 'ColorDodge',
                                    'ColorBurn', 'HardLight', 'SoftLight', 'Difference', 'Exclusion'))) {
-            throw new pdf_except_4('Unsupported transparency mode.');
+            throw new Exception\CorruptedPdfException('Unsupported transparency mode.');
         }
         if (!is_numeric($alpha)  ||  $alpha < 0  ||  $alpha > 1) {
-            throw new pdf_except_4('Alpha value must be numeric between 0 (transparent) and 1 (opaque).');
+            throw new Exception\CorruptedPdfException('Alpha value must be numeric between 0 (transparent) and 1 (opaque).');
         }
 
         $this->_addProcSet('Text');
@@ -765,7 +765,7 @@ class Page
      * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function extractFonts()
     {
@@ -783,7 +783,7 @@ class Page
 
             if (! ($fontDictionary instanceof InternalType\IndirectObjectReference  ||
                    $fontDictionary instanceof InternalType\IndirectObject) ) {
-                throw new pdf_except_4('Font dictionary has to be an indirect object or object reference.');
+                throw new Exception\CorruptedPdfException('Font dictionary has to be an indirect object or object reference.');
             }
 
             $fontResourcesUnique[spl_object_hash($fontDictionary->getObject())] = $fontDictionary;
@@ -796,9 +796,9 @@ class Page
                 $extractedFont = new Resource\Font\Extracted($fontDictionary);
 
                 $fonts[$resourceId] = $extractedFont;
-            } catch (pdf_except_4 $e) {
+            } catch (Exception\CorruptedPdfException $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
-                    throw new pdf_except_4($e->getMessage(), $e->getCode(), $e);
+                    throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
                 }
             }
         }
@@ -812,7 +812,7 @@ class Page
      * $fontName should be specified in UTF-8 encoding
      *
      * @return \Zend\Pdf\Resource\Font\Extracted|null
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function extractFont($fontName)
     {
@@ -830,7 +830,7 @@ class Page
 
             if (! ($fontDictionary instanceof InternalType\IndirectObjectReference  ||
                    $fontDictionary instanceof InternalType\IndirectObject) ) {
-                throw new pdf_except_4('Font dictionary has to be an indirect object or object reference.');
+                throw new Exception\CorruptedPdfException('Font dictionary has to be an indirect object or object reference.');
             }
 
             $resourceId = spl_object_hash($fontDictionary->getObject());
@@ -848,9 +848,9 @@ class Page
             try {
                 // Try to extract font
                 return new Resource\Font\Extracted($fontDictionary);
-            } catch (pdf_except_4 $e) {
+            } catch (Exception\CorruptedPdfException $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
-                    throw new pdf_except_4($e->getMessage(), $e->getCode(), $e);
+                    throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
                 }
 
                 // Continue searhing font with specified name
@@ -887,7 +887,7 @@ class Page
      * any rotation/translation/scaling that has been applied.
      *
      * @todo check for the open paths
-     * @throws \Zend\Pdf\Except_3    - if a save is performed with an open path
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException    - if a save is performed with an open path
      * @return \Zend\Pdf\Page
      */
     public function saveGS()
@@ -903,13 +903,13 @@ class Page
     /**
      * Restore the graphics state that was saved with the last call to saveGS().
      *
-     * @throws \Zend\Pdf\Except_3   - if there is no previously saved state
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException   - if there is no previously saved state
      * @return \Zend\Pdf\Page
      */
     public function restoreGS()
     {
         if ($this->_saveCount-- <= 0) {
-            throw new pdf_except_4('Restoring graphics state which is not saved');
+            throw new Exception\CorruptedPdfException('Restoring graphics state which is not saved');
         }
         $this->_contents .= " Q\n";
 
@@ -1587,13 +1587,13 @@ class Page
      * @param float $y
      * @param string $charEncoding (optional) Character encoding of source text.
      *   Defaults to current locale.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      * @return \Zend\Pdf\Page
      */
     public function drawText($text, $x, $y, $charEncoding = '')
     {
         if ($this->_font === null) {
-            throw new pdf_except_4('Font has not been set');
+            throw new Exception\CorruptedPdfException('Font has not been set');
         }
 
         $this->_addProcSet('Text');
@@ -1663,7 +1663,7 @@ class Page
      /**
      * Close the path by drawing a straight line back to it's beginning.
      *
-     * @throws \Zend\Pdf\Except_3    - if a path hasn't been started with pathMove()
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException    - if a path hasn't been started with pathMove()
      * @return \Zend\Pdf\Page
      */
     public function pathClose()

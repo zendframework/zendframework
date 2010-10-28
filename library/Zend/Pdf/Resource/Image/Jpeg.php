@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Image;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -33,7 +33,7 @@ use Zend\Pdf\InternalType;
  *
  * @uses       \Zend\Pdf\InternalType\NameObject
  * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Resource\Image\AbstractImage
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
@@ -51,25 +51,25 @@ class Jpeg extends AbstractImage
      * Object constructor
      *
      * @param string $imageFileName
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($imageFileName)
     {
         if (!function_exists('gd_info')) {
-            throw new pdf_except_4('Image extension is not installed.');
+            throw new Exception\CorruptedPdfException('Image extension is not installed.');
         }
 
         $gd_options = gd_info();
         if ( (!isset($gd_options['JPG Support'])  || $gd_options['JPG Support']  != true)  &&
              (!isset($gd_options['JPEG Support']) || $gd_options['JPEG Support'] != true)  ) {
-            throw new pdf_except_4('JPG support is not configured properly.');
+            throw new Exception\CorruptedPdfException('JPG support is not configured properly.');
         }
 
         if (($imageInfo = getimagesize($imageFileName)) === false) {
-            throw new pdf_except_4('Corrupted image or image doesn\'t exist.');
+            throw new Exception\CorruptedPdfException('Corrupted image or image doesn\'t exist.');
         }
         if ($imageInfo[2] != IMAGETYPE_JPEG && $imageInfo[2] != IMAGETYPE_JPEG2000) {
-            throw new pdf_except_4('ImageType is not JPG');
+            throw new Exception\CorruptedPdfException('ImageType is not JPG');
         }
 
         parent::__construct();
@@ -98,7 +98,7 @@ class Jpeg extends AbstractImage
         }
 
         if (($imageFile = @fopen($imageFileName, 'rb')) === false ) {
-            throw new pdf_except_4( "Can not open '$imageFileName' file for reading." );
+            throw new Exception\CorruptedPdfException( "Can not open '$imageFileName' file for reading." );
         }
         $byteCount = filesize($imageFileName);
         $this->_resource->value = '';

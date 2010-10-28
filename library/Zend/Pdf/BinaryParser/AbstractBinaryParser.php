@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -39,7 +39,7 @@ use Zend\Pdf;
  * This allows the same parser code to work with many different data sources:
  * in-memory objects, filesystem files, etc.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -95,7 +95,7 @@ abstract class AbstractBinaryParser
      *
      * Must set $this->_isScreened to true if successful.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     abstract public function screen();
 
@@ -104,7 +104,7 @@ abstract class AbstractBinaryParser
      *
      * Must set $this->_isParsed to true if successful.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     abstract public function parse();
 
@@ -117,13 +117,13 @@ abstract class AbstractBinaryParser
      * Verifies that the data source has been properly initialized.
      *
      * @param \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource $dataSource
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(DataSource\AbstractDataSource $dataSource)
     {
         if ($dataSource->getSize() == 0) {
-            throw new pdf_except_4('The data source has not been properly initialized',
-                                         Pdf\Except_1::BAD_DATA_SOURCE);
+            throw new Exception\CorruptedPdfException('The data source has not been properly initialized',
+                                         Pdf\Exception::BAD_DATA_SOURCE);
         }
         $this->_dataSource = $dataSource;
     }
@@ -178,7 +178,7 @@ abstract class AbstractBinaryParser
      * Convenience wrapper for the data source object's moveToOffset() method.
      *
      * @param integer $offset Destination byte offset.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function moveToOffset($offset)
     {
@@ -198,7 +198,7 @@ abstract class AbstractBinaryParser
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readBytes($byteCount)
     {
@@ -209,7 +209,7 @@ abstract class AbstractBinaryParser
      * Convenience wrapper for the data source object's skipBytes() method.
      *
      * @param integer $byteCount Number of bytes to skip.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function skipBytes($byteCount)
     {
@@ -231,13 +231,13 @@ abstract class AbstractBinaryParser
      *   Use the BYTE_ORDER_ constants defined in {@link \Zend\Pdf\BinaryParser\AbstractBinaryParser}.
      *   If omitted, uses big-endian.
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readInt($size, $byteOrder = self::BYTE_ORDER_BIG_ENDIAN)
     {
         if (($size < 1) || ($size > 4)) {
-            throw new pdf_except_4("Invalid signed integer size: $size",
-                                         Pdf\Except_1::INVALID_INTEGER_SIZE);
+            throw new Exception\CorruptedPdfException("Invalid signed integer size: $size",
+                                         Pdf\Exception::INVALID_INTEGER_SIZE);
         }
         $bytes = $this->_dataSource->readBytes($size);
         /* unpack() will not work for this method because it always works in
@@ -281,8 +281,8 @@ abstract class AbstractBinaryParser
                 }
             }
         } else {
-            throw new pdf_except_4("Invalid byte order: $byteOrder",
-                                         Pdf\Except_1::INVALID_BYTE_ORDER);
+            throw new Exception\CorruptedPdfException("Invalid byte order: $byteOrder",
+                                         Pdf\Exception::INVALID_BYTE_ORDER);
         }
         return $number;
     }
@@ -304,13 +304,13 @@ abstract class AbstractBinaryParser
      *   Use the BYTE_ORDER_ constants defined in {@link \Zend\Pdf\BinaryParser\AbstractBinaryParser}.
      *   If omitted, uses big-endian.
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readUInt($size, $byteOrder = self::BYTE_ORDER_BIG_ENDIAN)
     {
         if (($size < 1) || ($size > 4)) {
-            throw new pdf_except_4("Invalid unsigned integer size: $size",
-                                         Pdf\Except_1::INVALID_INTEGER_SIZE);
+            throw new Exception\CorruptedPdfException("Invalid unsigned integer size: $size",
+                                         Pdf\Exception::INVALID_INTEGER_SIZE);
         }
         $bytes = $this->_dataSource->readBytes($size);
         /* unpack() is a bit heavyweight for this simple conversion. Just
@@ -327,8 +327,8 @@ abstract class AbstractBinaryParser
                 $number |= ord($bytes[$i]) << ($i * 8);
             }
         } else {
-            throw new pdf_except_4("Invalid byte order: $byteOrder",
-                                         Pdf\Except_1::INVALID_BYTE_ORDER);
+            throw new Exception\CorruptedPdfException("Invalid byte order: $byteOrder",
+                                         Pdf\Exception::INVALID_BYTE_ORDER);
         }
         return $number;
     }
@@ -362,15 +362,15 @@ abstract class AbstractBinaryParser
      *   Use the BYTE_ORDER_ constants defined in {@link \Zend\Pdf\BinaryParser\AbstractBinaryParser}.
      *   If omitted, uses big-endian.
      * @return float
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readFixed($mantissaBits, $fractionBits,
                               $byteOrder = self::BYTE_ORDER_BIG_ENDIAN)
     {
         $bitsToRead = $mantissaBits + $fractionBits;
         if (($bitsToRead % 8) !== 0) {
-            throw new pdf_except_4('Fixed-point numbers are whole bytes',
-                                         Pdf\Except_1::BAD_FIXED_POINT_SIZE);
+            throw new Exception\CorruptedPdfException('Fixed-point numbers are whole bytes',
+                                         Pdf\Exception::BAD_FIXED_POINT_SIZE);
         }
         $number = $this->readInt(($bitsToRead >> 3), $byteOrder) / (1 << $fractionBits);
         return $number;
@@ -399,7 +399,7 @@ abstract class AbstractBinaryParser
      *   You may use any character set supported by {@link iconv()}. If omitted,
      *   uses 'current locale'.
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readStringUTF16($byteCount,
                                     $byteOrder = self::BYTE_ORDER_BIG_ENDIAN,
@@ -420,8 +420,8 @@ abstract class AbstractBinaryParser
             }
             return iconv('UTF-16LE', $characterSet, $bytes);
         } else {
-            throw new pdf_except_4("Invalid byte order: $byteOrder",
-                                         Pdf\Except_1::INVALID_BYTE_ORDER);
+            throw new Exception\CorruptedPdfException("Invalid byte order: $byteOrder",
+                                         Pdf\Exception::INVALID_BYTE_ORDER);
         }
     }
 
@@ -439,7 +439,7 @@ abstract class AbstractBinaryParser
      *   You may use any character set supported by {@link iconv()}. If omitted,
      *   uses 'current locale'.
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readStringMacRoman($byteCount, $characterSet = '')
     {
@@ -469,7 +469,7 @@ abstract class AbstractBinaryParser
      * @param integer $lengthBytes (optional) Number of bytes that make up the
      *   length. Default is 1.
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readStringPascal($characterSet = '', $lengthBytes = 1)
     {

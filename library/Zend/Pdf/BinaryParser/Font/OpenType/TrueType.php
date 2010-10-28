@@ -24,13 +24,13 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\Font\OpenType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * Parses an OpenType font file containing TrueType outlines.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType
  * @uses       \Zend\Pdf\Font
  * @package    Zend_PDF
@@ -48,7 +48,7 @@ class TrueType extends AbstractOpenType
     /**
      * Verifies that the font file actually contains TrueType outlines.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function screen()
     {
@@ -66,8 +66,8 @@ class TrueType extends AbstractOpenType
                 break;
 
             default:
-                throw new pdf_except_4('Not a TrueType font file',
-                                             Pdf\Except_1::WRONG_FONT_TYPE);
+                throw new Exception\CorruptedPdfException('Not a TrueType font file',
+                                             Pdf\Exception::WRONG_FONT_TYPE);
         }
 
         $this->fontType = Pdf\Font::TYPE_TRUETYPE;

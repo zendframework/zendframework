@@ -24,14 +24,14 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * PDF file 'boolean' element implementation
  *
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -52,12 +52,12 @@ class BooleanObject extends AbstractTypeObject
      * Object constructor
      *
      * @param boolean $val
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($val)
     {
         if (! is_bool($val)) {
-            throw new pdf_except_4('Argument must be boolean.');
+            throw new Exception\CorruptedPdfException('Argument must be boolean.');
         }
 
         $this->value   = $val;

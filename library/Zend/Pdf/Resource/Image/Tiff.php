@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Image;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -34,7 +34,7 @@ use Zend\Pdf\InternalType;
  * @uses       \Zend\Pdf\InternalType\ArrayObject
  * @uses       \Zend\Pdf\InternalType\NameObject
  * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Resource\Image\AbstractImage
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
@@ -106,11 +106,11 @@ class Tiff extends AbstractImage
      *
      * @param int $type
      * @param string $bytes
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function unpackBytes($type, $bytes) {
         if(!isset($this->_endianType)) {
-            throw new pdf_except_4("The unpackBytes function can only be used after the endianness of the file is known");
+            throw new Exception\CorruptedPdfException("The unpackBytes function can only be used after the endianness of the file is known");
         }
         switch($type) {
             case self::UNPACK_TYPE_BYTE:
@@ -140,12 +140,12 @@ class Tiff extends AbstractImage
      * Object constructor
      *
      * @param string $imageFileName
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($imageFileName)
     {
         if (($imageFile = @fopen($imageFileName, 'rb')) === false ) {
-            throw new pdf_except_4( "Can not open '$imageFileName' file for reading." );
+            throw new Exception\CorruptedPdfException( "Can not open '$imageFileName' file for reading." );
         }
 
         $byteOrderIndicator = fread($imageFile, 2);
@@ -154,13 +154,13 @@ class Tiff extends AbstractImage
         } else if($byteOrderIndicator == 'MM') {
             $this->_endianType = self::TIFF_ENDIAN_BIG;
         } else {
-            throw new pdf_except_4( "Not a tiff file or Tiff corrupt. No byte order indication found" );
+            throw new Exception\CorruptedPdfException( "Not a tiff file or Tiff corrupt. No byte order indication found" );
         }
 
         $version = $this->unpackBytes(self::UNPACK_TYPE_SHORT, fread($imageFile, 2));
 
         if($version != 42) {
-            throw new pdf_except_4( "Not a tiff file or Tiff corrupt. Incorrect version number." );
+            throw new Exception\CorruptedPdfException( "Not a tiff file or Tiff corrupt. Incorrect version number." );
         }
         $ifdOffset = $this->unpackBytes(self::UNPACK_TYPE_LONG, fread($imageFile, 4));
 
@@ -175,7 +175,7 @@ class Tiff extends AbstractImage
 
         while($ifdOffset > 0) {
             if(fseek($imageFile, $ifdOffset, SEEK_SET) == -1 || $ifdOffset+2 >= $this->_fileSize) {
-                throw new pdf_except_4("Could not seek to the image file directory as indexed by the file. Likely cause is TIFF corruption. Offset: ". $ifdOffset);
+                throw new Exception\CorruptedPdfException("Could not seek to the image file directory as indexed by the file. Likely cause is TIFF corruption. Offset: ". $ifdOffset);
             }
 
             $numDirEntries = $this->unpackBytes(self::UNPACK_TYPE_SHORT, fread($imageFile, 2));
@@ -269,21 +269,21 @@ class Tiff extends AbstractImage
                                 //Fall through to next case
                             case self::TIFF_COMPRESSION_GROUP_4_FAX:
                                 $this->_filter = 'CCITTFaxDecode';
-                                throw new pdf_except_4("CCITTFaxDecode Compression Mode Not Currently Supported");
+                                throw new Exception\CorruptedPdfException("CCITTFaxDecode Compression Mode Not Currently Supported");
                                 break;
                             case self::TIFF_COMPRESSION_LZW:
                                 $this->_filter = 'LZWDecode';
-                                throw new pdf_except_4("LZWDecode Compression Mode Not Currently Supported");
+                                throw new Exception\CorruptedPdfException("LZWDecode Compression Mode Not Currently Supported");
                                 break;
                             case self::TIFF_COMPRESSION_JPEG:
                                 $this->_filter = 'DCTDecode'; //Should work, doesnt...
-                                throw new pdf_except_4("JPEG Compression Mode Not Currently Supported");
+                                throw new Exception\CorruptedPdfException("JPEG Compression Mode Not Currently Supported");
                                 break;
                             case self::TIFF_COMPRESSION_FLATE:
                                 //fall through to next case
                             case self::TIFF_COMPRESSION_FLATE_OBSOLETE_CODE:
                                 $this->_filter = 'FlateDecode';
-                                throw new pdf_except_4("ZIP/Flate Compression Mode Not Currently Supported");
+                                throw new Exception\CorruptedPdfException("ZIP/Flate Compression Mode Not Currently Supported");
                                 break;
                             case self::TIFF_COMPRESSION_PACKBITS:
                                 $this->_filter = 'RunLengthDecode';
@@ -318,7 +318,7 @@ class Tiff extends AbstractImage
                                 $this->_colorSpace = 'Lab';
                                 break;
                             default:
-                                throw new pdf_except_4('TIFF: Unknown or Unsupported Color Type: '. $value);
+                                throw new Exception\CorruptedPdfException('TIFF: Unknown or Unsupported Color Type: '. $value);
                         }
                         break;
                     case self::TIFF_TAG_STRIP_OFFSETS:
@@ -354,13 +354,13 @@ class Tiff extends AbstractImage
         }
 
         if(!isset($this->_imageDataOffset) || !isset($this->_imageDataLength)) {
-            throw new pdf_except_4("TIFF: The image processed did not contain image data as expected.");
+            throw new Exception\CorruptedPdfException("TIFF: The image processed did not contain image data as expected.");
         }
 
         $imageDataBytes = '';
         if(is_array($this->_imageDataOffset)) {
             if(!is_array($this->_imageDataLength)) {
-                throw new pdf_except_4("TIFF: The image contained multiple data offsets but not multiple data lengths. Tiff may be corrupt.");
+                throw new Exception\CorruptedPdfException("TIFF: The image contained multiple data offsets but not multiple data lengths. Tiff may be corrupt.");
             }
             foreach($this->_imageDataOffset as $idx => $offset) {
                 fseek($imageFile, $this->_imageDataOffset[$idx], SEEK_SET);
@@ -371,7 +371,7 @@ class Tiff extends AbstractImage
             $imageDataBytes = fread($imageFile, $this->_imageDataLength);
         }
         if($imageDataBytes === '') {
-            throw new pdf_except_4("TIFF: No data. Image Corruption");
+            throw new Exception\CorruptedPdfException("TIFF: No data. Image Corruption");
         }
 
         fclose($imageFile);
@@ -380,7 +380,7 @@ class Tiff extends AbstractImage
 
         $imageDictionary = $this->_resource->dictionary;
         if(!isset($this->_width) || !isset($this->_width)) {
-            throw new pdf_except_4("Problem reading tiff file. Tiff is probably corrupt.");
+            throw new Exception\CorruptedPdfException("Problem reading tiff file. Tiff is probably corrupt.");
         }
 
         $this->_imageProperties = array();

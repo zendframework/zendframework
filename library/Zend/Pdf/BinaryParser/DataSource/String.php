@@ -24,14 +24,14 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\DataSource;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * Concrete subclass of {@link \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource}
  * that provides an interface to binary strings.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
@@ -66,8 +66,8 @@ class String extends AbstractDataSource
     public function __construct($string)
     {
         if (empty($string)) {
-            throw new pdf_except_4('String is empty',
-                                         Pdf\Except_1::PARAMETER_VALUE_OUT_OF_RANGE);
+            throw new Exception\CorruptedPdfException('String is empty',
+                                         Pdf\Exception::PARAMETER_VALUE_OUT_OF_RANGE);
         }
         $this->_size = strlen($string);
         $this->_string = $string;
@@ -92,13 +92,13 @@ class String extends AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readBytes($byteCount)
     {
         if (($this->_offset + $byteCount) > $this->_size) {
-            throw new pdf_except_4("Insufficient data to read $byteCount bytes",
-                                         Pdf\Except_1::INSUFFICIENT_DATA);
+            throw new Exception\CorruptedPdfException("Insufficient data to read $byteCount bytes",
+                                         Pdf\Exception::INSUFFICIENT_DATA);
         }
         $bytes = substr($this->_string, $this->_offset, $byteCount);
         $this->_offset += $byteCount;

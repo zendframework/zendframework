@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Outline;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\Action;
 use Zend\Pdf\Color;
@@ -43,7 +43,7 @@ use Zend\Pdf\ObjectFactory;
  * @uses       \Zend\Pdf\Color
  * @uses       \Zend\Pdf\Destination
  * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Outline
  * @uses       \Zend\Pdf\ObjectFactory
  * @package    Zend_PDF
@@ -73,12 +73,12 @@ class Loaded extends AbstractOutline
      * Get outline title.
      *
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function getTitle()
     {
         if ($this->_outlineDictionary->Title === null) {
-            throw new pdf_except_4('Outline dictionary Title entry is required.');
+            throw new Exception\CorruptedPdfException('Outline dictionary Title entry is required.');
         }
         return $this->_outlineDictionary->Title->value;
     }
@@ -236,13 +236,13 @@ class Loaded extends AbstractOutline
      * Get outline target.
      *
      * @return \Zend\Pdf\InternalStructure\NavigationTarget
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function getTarget()
     {
         if ($this->_outlineDictionary->Dest !== null) {
             if ($this->_outlineDictionary->A !== null) {
-                throw new pdf_except_4('Outline dictionary may contain Dest or A entry, but not both.');
+                throw new Exception\CorruptedPdfException('Outline dictionary may contain Dest or A entry, but not both.');
             }
             return Destination\AbstractDestination::load($this->_outlineDictionary->Dest);
         } else if ($this->_outlineDictionary->A !== null) {
@@ -258,7 +258,7 @@ class Loaded extends AbstractOutline
      *
      * @param \Zend\Pdf\InternalStructure\NavigationTarget|string $target
      * @return \Zend\Pdf\Outline\AbstractOutline
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function setTarget($target = null)
     {
@@ -278,7 +278,7 @@ class Loaded extends AbstractOutline
             $this->_outlineDictionary->Dest = null;
             $this->_outlineDictionary->A    = $target->getResource();
         } else {
-            throw new pdf_except_4('Outline target has to be \Zend\Pdf\Destination\AbstractDestination or \Zend\Pdf\AbstractAction object or string');
+            throw new Exception\CorruptedPdfException('Outline target has to be \Zend\Pdf\Destination\AbstractDestination or \Zend\Pdf\AbstractAction object or string');
         }
 
         return $this;
@@ -306,12 +306,12 @@ class Loaded extends AbstractOutline
      * @param SplObjectStorage $processedOutlines  List of already processed Outline dictionaries,
      *                                             used to avoid cyclic references
      * @return \Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedDictionaries = null)
     {
         if ($dictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('$dictionary mast be an indirect dictionary object.');
+            throw new Exception\CorruptedPdfException('$dictionary mast be an indirect dictionary object.');
         }
 
         if ($processedDictionaries === null) {
@@ -323,7 +323,7 @@ class Loaded extends AbstractOutline
 
         if ($dictionary->Count !== null) {
             if ($dictionary->Count->getType() != InternalType\AbstractTypeObject::TYPE_NUMERIC) {
-                throw new pdf_except_4('Outline dictionary Count entry must be a numeric element.');
+                throw new Exception\CorruptedPdfException('Outline dictionary Count entry must be a numeric element.');
             }
 
             $childOutlinesCount = $dictionary->Count->value;
@@ -335,7 +335,7 @@ class Loaded extends AbstractOutline
             $childDictionary = $dictionary->First;
             for ($count = 0; $count < $childOutlinesCount; $count++) {
                 if ($childDictionary === null) {
-                    throw new pdf_except_4('Outline childs load error.');
+                    throw new Exception\CorruptedPdfException('Outline childs load error.');
                 }
 
                 if (!$processedDictionaries->contains($childDictionary)) {
@@ -346,7 +346,7 @@ class Loaded extends AbstractOutline
             }
 
             if ($childDictionary !== null) {
-                throw new pdf_except_4('Outline childs load error.');
+                throw new Exception\CorruptedPdfException('Outline childs load error.');
             }
 
             $this->_originalChildOutlines = $this->childOutlines;
@@ -365,7 +365,7 @@ class Loaded extends AbstractOutline
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $prev     Previous outline dictionary reference
      * @param SplObjectStorage $processedOutlines  List of already processed outlines
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function dumpOutline(ObjectFactory $factory,
                                               $updateNavigation,
@@ -409,7 +409,7 @@ class Loaded extends AbstractOutline
 
             foreach ($this->childOutlines as $childOutline) {
                 if ($processedOutlines->contains($childOutline)) {
-                    throw new pdf_except_4('Outlines cyclyc reference is detected.');
+                    throw new Exception\CorruptedPdfException('Outlines cyclyc reference is detected.');
                 }
 
                 if ($lastChild === null) {
@@ -434,7 +434,7 @@ class Loaded extends AbstractOutline
         } else {
             foreach ($this->childOutlines as $childOutline) {
                 if ($processedOutlines->contains($childOutline)) {
-                    throw new pdf_except_4('Outlines cyclyc reference is detected.');
+                    throw new Exception\CorruptedPdfException('Outlines cyclyc reference is detected.');
                 }
                 $lastChild = $childOutline->dumpOutline($factory, $updateChildNavigation, $this->_outlineDictionary, $lastChild, $processedOutlines);
             }

@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -44,7 +44,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\InternalType\NameObject
  * @uses       \Zend\Pdf\InternalType\NullObject
  * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -60,7 +60,7 @@ class Zoom extends Explicit
      * @param float $top   Top edge of displayed page
      * @param float $zoom  Zoom factor
      * @return \Zend\Pdf\Destination\Zoom
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public static function create($page, $left = null, $top = null, $zoom = null)
     {
@@ -71,7 +71,7 @@ class Zoom extends Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
-            throw new pdf_except_4('Page entry must be a \Zend\Pdf\Page object or a page number.');
+            throw new Exception\CorruptedPdfException('Page entry must be a \Zend\Pdf\Page object or a page number.');
         }
 
         $destinationArray->items[] = new InternalType\NameObject('XYZ');

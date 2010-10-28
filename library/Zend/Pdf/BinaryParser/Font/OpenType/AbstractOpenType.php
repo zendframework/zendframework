@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\Font\OpenType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\Cmap;
 
@@ -49,7 +49,7 @@ use Zend\Pdf\Cmap;
  * </ul>
  *
  * @uses       \Zend\Pdf\Cmap\AbstractCmap
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\BinaryParser\Font\AbstractFont
  * @uses       \Zend\Pdf\Font
  * @package    Zend_PDF
@@ -88,7 +88,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * NOTE: This method should be overridden in subclasses to check the
      * specific format and set $this->_isScreened!
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function screen()
     {
@@ -104,7 +104,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * NOTE: This method should be overridden in subclasses to add type-
      * specific parsing and set $this->isParsed.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function parse()
     {
@@ -153,7 +153,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * The table directory contains the identifier, checksum, byte offset, and
      * length of each of the information tables housed in the font file.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseTableDirectory()
     {
@@ -171,8 +171,8 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          * are defined, so use 50 as a practical limit.
          */
         if (($tableCount < 7) || ($tableCount > 50)) {
-            throw new pdf_except_4('Table count not within expected range',
-                                         Pdf\Except_1::BAD_TABLE_COUNT);
+            throw new Exception\CorruptedPdfException('Table count not within expected range',
+                                         Pdf\Exception::BAD_TABLE_COUNT);
         }
 
         /* Skip the next 6 bytes, which contain values to aid a binary search.
@@ -201,12 +201,12 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
              */
             $fileSize = $this->_dataSource->getSize();
             if (($tableOffset < 0) || ($tableOffset > $fileSize)) {
-                throw new pdf_except_4("Table offset ($tableOffset) not within expected range",
-                                             Pdf\Except_1::INDEX_OUT_OF_RANGE);
+                throw new Exception\CorruptedPdfException("Table offset ($tableOffset) not within expected range",
+                                             Pdf\Exception::INDEX_OUT_OF_RANGE);
             }
             if (($tableLength < 0) || (($tableOffset + $tableLength) > $fileSize)) {
-                throw new pdf_except_4("Table length ($tableLength) not within expected range",
-                                             Pdf\Except_1::INDEX_OUT_OF_RANGE);
+                throw new Exception\CorruptedPdfException("Table length ($tableLength) not within expected range",
+                                             Pdf\Exception::INDEX_OUT_OF_RANGE);
             }
 
             $this->_tableDirectory[$tableName]['offset'] = $tableOffset;
@@ -221,7 +221,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * The head table contains global information about the font such as the
      * revision number and global metrics.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseHeadTable()
     {
@@ -237,9 +237,9 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
 
         $magicNumber = $this->readUInt(4);
         if ($magicNumber != 0x5f0f3cf5) {
-            throw new pdf_except_4('Wrong magic number. Expected: 0x5f0f3cf5; actual: '
+            throw new Exception\CorruptedPdfException('Wrong magic number. Expected: 0x5f0f3cf5; actual: '
                                        . sprintf('%x', $magicNumber),
-                                         Pdf\Except_1::BAD_MAGIC_NUMBER);
+                                         Pdf\Exception::BAD_MAGIC_NUMBER);
         }
 
         /* Most of the flags we ignore, but there are a few values that are
@@ -282,7 +282,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * The name table contains all of the identifying strings associated with
      * the font such as its name, copyright, trademark, license, etc.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseNameTable()
     {
@@ -297,8 +297,8 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          */
         $tableFormat = $this->readUInt(2);
         if ($tableFormat != 0) {
-            throw new pdf_except_4("Unable to read format $tableFormat table",
-                                         Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
+            throw new Exception\CorruptedPdfException("Unable to read format $tableFormat table",
+                                         Pdf\Exception::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Format %d table', $tableFormat);
 
@@ -377,7 +377,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * on PostScript printers. It also contains the preferred location and
      * thickness for an underline, which is used by our layout code.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parsePostTable()
     {
@@ -414,7 +414,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * contains some vertical layout information for Apple systems. The vertical
      * layout information for the PDF file is usually taken from the OS/2 table.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseHheaTable()
     {
@@ -464,7 +464,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * contains some vertical layout information for Apple systems. The vertical
      * layout information for the PDF file is usually taken from the OS/2 table.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseMaxpTable()
     {
@@ -492,21 +492,21 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * this table to determine most of the vertical layout and stylistic
      * information and for the font.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseOs2Table()
     {
         if (! $this->numberHMetrics) {
-            throw new pdf_except_4("hhea table must be parsed prior to calling this method",
-                                         Pdf\Except_1::PARSED_OUT_OF_ORDER);
+            throw new Exception\CorruptedPdfException("hhea table must be parsed prior to calling this method",
+                                         Pdf\Exception::PARSED_OUT_OF_ORDER);
         }
 
         try {
             $this->_jumpToTable('OS/2');
-        } catch (pdf_except_4 $e) {
+        } catch (Exception\CorruptedPdfException $e) {
             /* This table is not always present. If missing, use default values.
              */
-            if ($e->getCode() == Pdf\Except_1::REQUIRED_TABLE_NOT_FOUND) {
+            if ($e->getCode() == Pdf\Exception::REQUIRED_TABLE_NOT_FOUND) {
                 $this->_debugLog('No OS/2 table found. Using default values');
                 $this->fontWeight         = Pdf\Font::WEIGHT_NORMAL;
                 $this->fontWidth          = Pdf\Font::WIDTH_NORMAL;
@@ -528,7 +528,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
                 /* Something else went wrong. Throw this exception higher up the chain.
                  */
                 throw $e;
-                throw new pdf_except_4($e->getMessage(), $e->getCode(), $e);
+                throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -553,8 +553,8 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          */
         $tableVersion = $this->readUInt(2);
         if (($tableVersion < 0) || ($tableVersion > 3)) {
-            throw new pdf_except_4("Unable to read version $tableVersion table",
-                                         Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
+            throw new Exception\CorruptedPdfException("Unable to read version $tableVersion table",
+                                         Pdf\Exception::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Version %d table', $tableVersion);
 
@@ -727,22 +727,22 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * within the font. These are the critical values for horizontal layout of
      * text.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseHmtxTable()
     {
         $this->_jumpToTable('hmtx');
 
         if (! $this->numberHMetrics) {
-            throw new pdf_except_4("hhea table must be parsed prior to calling this method",
-                                         Pdf\Except_1::PARSED_OUT_OF_ORDER);
+            throw new Exception\CorruptedPdfException("hhea table must be parsed prior to calling this method",
+                                         Pdf\Exception::PARSED_OUT_OF_ORDER);
         }
 
         /* We only understand version 0 tables.
          */
         if ($this->metricDataFormat != 0) {
-            throw new pdf_except_4("Unable to read format $this->metricDataFormat table.",
-                                         Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
+            throw new Exception\CorruptedPdfException("Unable to read format $this->metricDataFormat table.",
+                                         Pdf\Exception::DONT_UNDERSTAND_TABLE_VERSION);
         }
 
         /* The hmtx table has no header. For each glpyh in the font, it contains
@@ -782,7 +782,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      *   are tolerable. Most specifically, since everything above this layer deals
      *   in Unicode, we need to be sure to only accept format 0 MacRoman tables.
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _parseCMapTable()
     {
@@ -793,8 +793,8 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
          */
         $tableVersion = $this->readUInt(2);
         if ($tableVersion != 0) {
-            throw new pdf_except_4("Unable to read version $tableVersion table",
-                                         Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
+            throw new Exception\CorruptedPdfException("Unable to read version $tableVersion table",
+                                         Pdf\Exception::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Version %d table', $tableVersion);
 
@@ -921,8 +921,8 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
             break;
         }
         if ($cmapType == -1) {
-            throw new pdf_except_4('Unable to find usable cmap table',
-                                         Pdf\Except_1::CANT_FIND_GOOD_CMAP);
+            throw new Exception\CorruptedPdfException('Unable to find usable cmap table',
+                                         Pdf\Exception::CANT_FIND_GOOD_CMAP);
         }
 
         /* Now extract the subtable data and create a \Zend\Pdf\Cmap\AbstractCmap object.
@@ -945,7 +945,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * is not recognized.
      *
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _readScalerType()
     {
@@ -971,12 +971,12 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
                 break;
 
             case 0x74797031:    // 'typ1'
-                throw new pdf_except_4('Unsupported font type: PostScript in sfnt wrapper',
-                                             Pdf\Except_1::WRONG_FONT_TYPE);
+                throw new Exception\CorruptedPdfException('Unsupported font type: PostScript in sfnt wrapper',
+                                             Pdf\Exception::WRONG_FONT_TYPE);
 
             default:
-                throw new pdf_except_4('Not an OpenType font file',
-                                             Pdf\Except_1::WRONG_FONT_TYPE);
+                throw new Exception\CorruptedPdfException('Not an OpenType font file',
+                                             Pdf\Exception::WRONG_FONT_TYPE);
         }
         return $this->_scalerType;
     }
@@ -986,13 +986,13 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * start of that table.
      *
      * @param string $tableName
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _jumpToTable($tableName)
     {
         if (empty($this->_tableDirectory[$tableName])) {    // do not allow NULL or zero
-            throw new pdf_except_4("Required table '$tableName' not found!",
-                                         Pdf\Except_1::REQUIRED_TABLE_NOT_FOUND);
+            throw new Exception\CorruptedPdfException("Required table '$tableName' not found!",
+                                         Pdf\Exception::REQUIRED_TABLE_NOT_FOUND);
         }
         $this->_debugLog("Parsing $tableName table...");
         $this->moveToOffset($this->_tableDirectory[$tableName]['offset']);
@@ -1006,14 +1006,14 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
      * @param float $minVersion Minimum compatible version number.
      * @param float $maxVertion Maximum compatible version number.
      * @return float Table version number.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected function _readTableVersion($minVersion, $maxVersion)
     {
         $tableVersion = $this->readFixed(16, 16);
         if (($tableVersion < $minVersion) || ($tableVersion > $maxVersion)) {
-            throw new pdf_except_4("Unable to read version $tableVersion table",
-                                         Pdf\Except_1::DONT_UNDERSTAND_TABLE_VERSION);
+            throw new Exception\CorruptedPdfException("Unable to read version $tableVersion table",
+                                         Pdf\Exception::DONT_UNDERSTAND_TABLE_VERSION);
         }
         $this->_debugLog('Version %.2f table', $tableVersion);
         return $tableVersion;

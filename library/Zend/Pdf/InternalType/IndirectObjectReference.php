@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Pdf;
  *
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\InternalType\NullObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -90,7 +90,7 @@ class IndirectObjectReference extends AbstractTypeObject
      * @param integer $genNum
      * @param \Zend\Pdf\InternalType\IndirectObjectReference\Context $context
      * @param \Zend\Pdf\ObjectFactory $factory
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($objNum,
                                 $genNum = 0,
@@ -98,10 +98,10 @@ class IndirectObjectReference extends AbstractTypeObject
                                 Pdf\ObjectFactory $factory)
     {
         if ( !(is_integer($objNum) && $objNum > 0) ) {
-            throw new pdf_except_4('Object number must be positive integer');
+            throw new Exception\CorruptedPdfException('Object number must be positive integer');
         }
         if ( !(is_integer($genNum) && $genNum >= 0) ) {
-            throw new pdf_except_4('Generation number must be non-negative integer');
+            throw new Exception\CorruptedPdfException('Generation number must be non-negative integer');
         }
 
         $this->_objNum  = $objNum;
@@ -162,7 +162,7 @@ class IndirectObjectReference extends AbstractTypeObject
      * $value member of current PDF Reference object
      * $obj can be null
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private function _dereference()
     {
@@ -179,7 +179,7 @@ class IndirectObjectReference extends AbstractTypeObject
         }
 
         if ($obj->toString() != $this->_objNum . ' ' . $this->_genNum . ' R') {
-            throw new pdf_except_4('Incorrect reference to the object');
+            throw new Exception\CorruptedPdfException('Incorrect reference to the object');
         }
 
         $this->_ref = $obj;

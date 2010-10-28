@@ -24,13 +24,13 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\Image;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * Abstract base class for Image file parsers.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\BinaryParser\Image\AbstractImage
  * @uses       \Zend\Pdf\Image
  * @package    Zend_PDF
@@ -180,7 +180,7 @@ class Png extends AbstractImage
          while($size - $this->getOffset() >= 8) {
               $chunkLength = $this->readUInt(4);
               if($chunkLength < 0 || ($chunkLength + $this->getOffset() + 4) > $size) {
-                   throw new pdf_except_4("PNG Corrupt: Invalid Chunk Size In File.");
+                   throw new Exception\CorruptedPdfException("PNG Corrupt: Invalid Chunk Size In File.");
               }
 
               $chunkType = $this->readBytes(4);
@@ -210,14 +210,14 @@ class Png extends AbstractImage
               }
          }
          if(empty($this->_imageData)) {
-              throw new pdf_except_4 ( "This PNG is corrupt. All png must contain IDAT chunks." );
+              throw new Exception\CorruptedPdfException ( "This PNG is corrupt. All png must contain IDAT chunks." );
          }
     }
 
     protected function _parseIHDRChunk() {
          $this->moveToOffset(12); //IHDR must always start at offset 12 and run for 17 bytes
          if(!$this->readBytes(4) == 'IHDR') {
-              throw new pdf_except_4( "This PNG is corrupt. The first chunk in a PNG file must be IHDR." );
+              throw new Exception\CorruptedPdfException( "This PNG is corrupt. The first chunk in a PNG file must be IHDR." );
          }
          $this->_width = $this->readUInt(4);
          $this->_height = $this->readUInt(4);
@@ -227,7 +227,7 @@ class Png extends AbstractImage
          $this->_preFilter = $this->readInt(1);
          $this->_interlacing = $this->readInt(1);
          if($this->_interlacing != Pdf\Image::PNG_INTERLACING_DISABLED) {
-              throw new pdf_except_4( "Only non-interlaced images are currently supported." );
+              throw new Exception\CorruptedPdfException( "Only non-interlaced images are currently supported." );
          }
     }
 
@@ -319,7 +319,7 @@ class Png extends AbstractImage
              case Pdf\Image::PNG_CHANNEL_GRAY_ALPHA:
                   //Fall through to the next case
              case Pdf\Image::PNG_CHANNEL_RGB_ALPHA:
-                  throw new pdf_except_4( "tRNS chunk illegal for Alpha Channel Images" );
+                  throw new Exception\CorruptedPdfException( "tRNS chunk illegal for Alpha Channel Images" );
                   break;
          }
     }

@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -40,7 +40,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Destination\AbstractDestination
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\InternalType\StringObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -59,12 +59,12 @@ class Named extends AbstractDestination
      * Named destination object constructor
      *
      * @param $resource
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $resource)
     {
         if ($resource->getType() != InternalType\AbstractTypeObject::TYPE_NAME  &&  $resource->getType() != InternalType\AbstractTypeObject::TYPE_STRING) {
-            throw new pdf_except_4('Named destination resource must be a PDF name or a PDF string.');
+            throw new Exception\CorruptedPdfException('Named destination resource must be a PDF name or a PDF string.');
         }
 
         $this->_nameElement = $resource;

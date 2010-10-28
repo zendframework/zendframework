@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf\ObjectFactory;
 use Zend\Pdf;
 
@@ -33,7 +33,7 @@ use Zend\Pdf;
  *
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -77,7 +77,7 @@ class IndirectObject extends AbstractTypeObject
      * @param integer $objNum
      * @param integer $genNum
      * @param \Zend\Pdf\ObjectFactory $factory
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(AbstractTypeObject $val,
                                 $objNum,
@@ -85,15 +85,15 @@ class IndirectObject extends AbstractTypeObject
                                 ObjectFactory $factory)
     {
         if ($val instanceof self) {
-            throw new pdf_except_4('Object number must not be an instance of \Zend\Pdf\InternalType\IndirectObject.');
+            throw new Exception\CorruptedPdfException('Object number must not be an instance of \Zend\Pdf\InternalType\IndirectObject.');
         }
 
         if ( !(is_integer($objNum) && $objNum > 0) ) {
-            throw new pdf_except_4('Object number must be positive integer.');
+            throw new Exception\CorruptedPdfException('Object number must be positive integer.');
         }
 
         if ( !(is_integer($genNum) && $genNum >= 0) ) {
-            throw new pdf_except_4('Generation number must be non-negative integer.');
+            throw new Exception\CorruptedPdfException('Generation number must be non-negative integer.');
         }
 
         $this->_value   = $val;

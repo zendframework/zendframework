@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Trailer;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -32,7 +32,7 @@ use Zend\Pdf\InternalType;
  * PDF file trailer.
  * Stores and provides access to the trailer parced from a PDF file
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Trailer\AbstractTrailer
  * @uses       \Zend\Pdf\InternalType\DirctionaryObject
  * @uses       \Zend\Pdf\InternalType\IndirectObjectReference\Context
@@ -130,14 +130,14 @@ class Parsed extends AbstractTrailer
      * Get header of free objects list
      * Returns object number of last free object
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      * @return integer
      */
     public function getLastFreeObject()
     {
         try {
             $this->_context->getRefTable()->getNextFree('0 65535 R');
-        } catch (pdf_except_4 $e) {
+        } catch (Exception\CorruptedPdfException $e) {
             if ($e->getMessage() == 'Object not found.') {
                 /**
                  * Here is work around for some wrong generated PDFs.
@@ -147,7 +147,7 @@ class Parsed extends AbstractTrailer
                 return 0;
             }
 
-            throw new pdf_except_4($e->getMessage(), $e->getCode(), $e);
+            throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

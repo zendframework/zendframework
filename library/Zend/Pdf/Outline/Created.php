@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Outline;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\Action;
 use Zend\Pdf\Destination;
@@ -42,7 +42,7 @@ use Zend\Pdf\ObjectFactory;
  * @uses       \Zend\Pdf\Destination
  * @uses       \Zend\Pdf\InternalType
  * @uses       \Zend\Pdf\InternalStructure
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\ObjectFactory
  * @uses       \Zend\Pdf\Outline\AbstractOutline
  * @package    Zend_PDF
@@ -202,7 +202,7 @@ class Created extends AbstractOutline
      *
      * @param \Zend\Pdf\InternalStructure\NavigationTarget|string $target
      * @return \Zend\Pdf\Outline\AbstractOutline
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function setTarget($target = null)
     {
@@ -213,7 +213,7 @@ class Created extends AbstractOutline
         if ($target === null  ||  $target instanceof InternalStructure\NavigationTarget) {
             $this->_target = $target;
         } else {
-            throw new pdf_except_4('Outline target has to be \Zend\Pdf\Destination or \Zend\Pdf\Action object or string');
+            throw new Exception\CorruptedPdfException('Outline target has to be \Zend\Pdf\Destination or \Zend\Pdf\Action object or string');
         }
 
         return $this;
@@ -224,12 +224,12 @@ class Created extends AbstractOutline
      * Object constructor
      *
      * @param array $options
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($options = array())
     {
         if (!isset($options['title'])) {
-            throw new pdf_except_4('Title parameter is required.');
+            throw new Exception\CorruptedPdfException('Title parameter is required.');
         }
 
         $this->setOptions($options);
@@ -247,7 +247,7 @@ class Created extends AbstractOutline
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $prev     Previous outline dictionary reference
      * @param SplObjectStorage $processedOutlines  List of already processed outlines
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function dumpOutline(ObjectFactory $factory,
                                               $updateNavigation,
@@ -272,7 +272,7 @@ class Created extends AbstractOutline
         } else if ($target instanceof Action\AbstractAction) {
             $outlineDictionary->A    = $target->getResource();
         } else {
-            throw new pdf_except_4('Outline target has to be \Zend\Pdf\Destination, \Zend\Pdf\Action object or null');
+            throw new Exception\CorruptedPdfException('Outline target has to be \Zend\Pdf\Destination, \Zend\Pdf\Action object or null');
         }
 
         $color = $this->getColor();
@@ -296,7 +296,7 @@ class Created extends AbstractOutline
         $lastChild = null;
         foreach ($this->childOutlines as $childOutline) {
             if ($processedOutlines->contains($childOutline)) {
-                throw new pdf_except_4('Outlines cyclyc reference is detected.');
+                throw new Exception\CorruptedPdfException('Outlines cyclyc reference is detected.');
             }
 
             if ($lastChild === null) {

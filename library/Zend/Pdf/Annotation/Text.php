@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Annotation;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -33,7 +33,7 @@ use Zend\Pdf\InternalType;
  *
  * @uses       \Zend\Pdf\Annotation\AbstractAnnotation
  * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Annotation
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -44,18 +44,18 @@ class Text extends AbstractAnnotation
     /**
      * Annotation object constructor
      *
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
         if ($annotationDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new pdf_except_4('Annotation dictionary resource has to be a dictionary.');
+            throw new Exception\CorruptedPdfException('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
             $annotationDictionary->Subtype->getType() != InternalType\AbstractTypeObject::TYPE_NAME  ||
             $annotationDictionary->Subtype->value != 'Text') {
-            throw new pdf_except_4('Subtype => Text entry is requires');
+            throw new Exception\CorruptedPdfException('Subtype => Text entry is requires');
         }
 
         parent::__construct($annotationDictionary);

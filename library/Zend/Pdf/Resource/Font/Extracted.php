@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Font;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -33,7 +33,7 @@ use Zend\Pdf;
  * Thes class allows to extract fonts already mentioned within PDF document and use them
  * for text drawing.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\Resource\Font\AbstractFont
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
@@ -65,7 +65,7 @@ class Extracted extends AbstractFont
      * \Zend\Pdf\InternalType\IndirectObject object
      *
      * @param mixed $fontDictionary
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($fontDictionary)
     {
@@ -82,7 +82,7 @@ class Extracted extends AbstractFont
                 // Composite type 0 font
                 if (count($fontDictionary->DescendantFonts->items) != 1) {
                     // Multiple descendant fonts are not supported
-                    throw new pdf_except_4(self::TYPE_NOT_SUPPORTED);
+                    throw new Exception\CorruptedPdfException(self::TYPE_NOT_SUPPORTED);
                 }
 
                 $fontDictionaryIterator = $fontDictionary->DescendantFonts->items->getIterator();
@@ -120,7 +120,7 @@ class Extracted extends AbstractFont
                 break;
 
             default:
-                throw new pdf_except_4(self::TYPE_NOT_SUPPORTED);
+                throw new Exception\CorruptedPdfException(self::TYPE_NOT_SUPPORTED);
         }
 
         $this->_fontNames[Pdf\Font::NAME_POSTSCRIPT]['en'] = iconv('UTF-8', 'UTF-16BE', $fontDictionary->BaseFont->value);
@@ -151,7 +151,7 @@ class Extracted extends AbstractFont
      */
     public function glyphNumbersForCharacters($characterCodes)
     {
-        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
+        throw new Exception\CorruptedPdfException(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -168,7 +168,7 @@ class Extracted extends AbstractFont
      */
     public function glyphNumberForCharacter($characterCode)
     {
-        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
+        throw new Exception\CorruptedPdfException(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -191,7 +191,7 @@ class Extracted extends AbstractFont
      */
     public function getCoveredPercentage($string, $charEncoding = '')
     {
-        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
+        throw new Exception\CorruptedPdfException(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -204,11 +204,11 @@ class Extracted extends AbstractFont
      *
      * @param array $glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function widthsForGlyphs($glyphNumbers)
     {
-        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
+        throw new Exception\CorruptedPdfException(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -218,11 +218,11 @@ class Extracted extends AbstractFont
      *
      * @param integer $glyphNumber
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function widthForGlyph($glyphNumber)
     {
-        throw new pdf_except_4(self::OPERATION_NOT_SUPPORTED);
+        throw new Exception\CorruptedPdfException(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -244,7 +244,7 @@ class Extracted extends AbstractFont
             return iconv($charEncoding, 'CP1252//IGNORE', $string);
         }
 
-        throw new pdf_except_4(self::ENCODING_NOT_SUPPORTED);
+        throw new Exception\CorruptedPdfException(self::ENCODING_NOT_SUPPORTED);
     }
 
     /**
@@ -266,6 +266,6 @@ class Extracted extends AbstractFont
             return iconv('CP1252', $charEncoding, $string);
         }
 
-        throw new pdf_except_4(self::ENCODING_NOT_SUPPORTED);
+        throw new Exception\CorruptedPdfException(self::ENCODING_NOT_SUPPORTED);
     }
 }

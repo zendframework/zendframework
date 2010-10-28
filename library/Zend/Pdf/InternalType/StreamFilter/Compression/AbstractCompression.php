@@ -24,13 +24,13 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter\Compression;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * Abstract compression stream filter
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -72,7 +72,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private static function _getPredictorValue(&$params)
     {
@@ -82,7 +82,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
             if ($predictor != 1   &&  $predictor != 2   &&
                 $predictor != 10  &&  $predictor != 11  &&   $predictor != 12  &&
                 $predictor != 13  &&  $predictor != 14  &&   $predictor != 15) {
-                throw new pdf_except_4('Invalid value of \'Predictor\' decode param - ' . $predictor . '.' );
+                throw new Exception\CorruptedPdfException('Invalid value of \'Predictor\' decode param - ' . $predictor . '.' );
             }
             return $predictor;
         } else {
@@ -95,7 +95,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private static function _getColorsValue(&$params)
     {
@@ -103,7 +103,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
             $colors = $params['Colors'];
 
             if ($colors != 1  &&  $colors != 2  &&  $colors != 3  &&  $colors != 4) {
-                throw new pdf_except_4('Invalid value of \'Color\' decode param - ' . $colors . '.' );
+                throw new Exception\CorruptedPdfException('Invalid value of \'Color\' decode param - ' . $colors . '.' );
             }
             return $colors;
         } else {
@@ -116,7 +116,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     private static function _getBitsPerComponentValue(&$params)
     {
@@ -126,7 +126,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
             if ($bitsPerComponent != 1  &&  $bitsPerComponent != 2  &&
                 $bitsPerComponent != 4  &&  $bitsPerComponent != 8  &&
                 $bitsPerComponent != 16 ) {
-                throw new pdf_except_4('Invalid value of \'BitsPerComponent\' decode param - ' . $bitsPerComponent . '.' );
+                throw new Exception\CorruptedPdfException('Invalid value of \'BitsPerComponent\' decode param - ' . $bitsPerComponent . '.' );
             }
             return $bitsPerComponent;
         } else {
@@ -156,7 +156,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     protected static function _applyEncodeParams($data, $params) {
         $predictor        = self::_getPredictorValue($params);
@@ -171,7 +171,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
 
         /** TIFF Predictor 2 */
         if ($predictor == 2) {
-            throw new pdf_except_4('Not implemented yet' );
+            throw new Exception\CorruptedPdfException('Not implemented yet' );
         }
 
         /** Optimal PNG prediction */
@@ -190,7 +190,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
             $predictor -= 10;
 
             if($bitsPerComponent == 16) {
-                throw new pdf_except_4("PNG Prediction with bit depth greater than 8 not yet supported.");
+                throw new Exception\CorruptedPdfException("PNG Prediction with bit depth greater than 8 not yet supported.");
             }
 
             $bitsPerSample  = $bitsPerComponent*$colors;
@@ -201,7 +201,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
             $offset         = 0;
 
             if (!is_integer($rows)) {
-                throw new pdf_except_4('Wrong data length.');
+                throw new Exception\CorruptedPdfException('Wrong data length.');
             }
 
             switch ($predictor) {
@@ -279,7 +279,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
             return $output;
         }
 
-        throw new pdf_except_4('Unknown prediction algorithm - ' . $predictor . '.' );
+        throw new Exception\CorruptedPdfException('Unknown prediction algorithm - ' . $predictor . '.' );
     }
 
     /**
@@ -302,7 +302,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
 
         /** TIFF Predictor 2 */
         if ($predictor == 2) {
-            throw new pdf_except_4('Not implemented yet' );
+            throw new Exception\CorruptedPdfException('Not implemented yet' );
         }
 
         /**
@@ -377,12 +377,12 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
                         break;
 
                     default:
-                        throw new pdf_except_4('Unknown prediction tag.');
+                        throw new Exception\CorruptedPdfException('Unknown prediction tag.');
                 }
             }
             return $output;
         }
 
-        throw new pdf_except_4('Unknown prediction algorithm - ' . $predictor . '.' );
+        throw new Exception\CorruptedPdfException('Unknown prediction algorithm - ' . $predictor . '.' );
     }
 }

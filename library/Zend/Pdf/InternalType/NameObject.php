@@ -24,14 +24,14 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
  * PDF file 'name' element implementation
  *
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -52,13 +52,13 @@ class NameObject extends AbstractTypeObject
      * Object constructor
      *
      * @param string $val
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($val)
     {
         settype($val, 'string');
         if (strpos($val,"\x00") !== false) {
-            throw new pdf_except_4('Null character is not allowed in PDF Names');
+            throw new Exception\CorruptedPdfException('Null character is not allowed in PDF Names');
         }
         $this->value   = (string)$val;
     }

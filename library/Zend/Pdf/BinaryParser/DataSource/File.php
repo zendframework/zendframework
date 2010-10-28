@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\DataSource;
-use Zend\Pdf\Except_5;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -35,7 +35,7 @@ use Zend\Pdf;
  * by {@link fopen()} (through URL wrappers). It may be used for local
  * filesystem objects only.
  *
- * @uses       \Zend\Pdf\Except_2
+ * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
@@ -75,25 +75,25 @@ class File extends AbstractDataSource
      * Throws an exception if the file is missing or cannot be opened.
      *
      * @param string $filePath Fully-qualified path to the file.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function __construct($filePath)
     {
         if (! (is_file($filePath) || is_link($filePath))) {
-            throw new pdf_except_4("Invalid file path: $filePath",
-                                         Pdf\Except_1::BAD_FILE_PATH);
+            throw new Exception\CorruptedPdfException("Invalid file path: $filePath",
+                                         Pdf\Exception::BAD_FILE_PATH);
         }
         if (! is_readable($filePath)) {
-            throw new pdf_except_4("File is not readable: $filePath",
-                                         Pdf\Except_1::NOT_READABLE);
+            throw new Exception\CorruptedPdfException("File is not readable: $filePath",
+                                         Pdf\Exception::NOT_READABLE);
         }
         if (($this->_size = @filesize($filePath)) === false) {
-            throw new pdf_except_4("Error while obtaining file size: $filePath",
-                                         Pdf\Except_1::CANT_GET_FILE_SIZE);
+            throw new Exception\CorruptedPdfException("Error while obtaining file size: $filePath",
+                                         Pdf\Exception::CANT_GET_FILE_SIZE);
         }
         if (($this->_fileResource = @fopen($filePath, 'rb')) === false) {
-            throw new pdf_except_4("Cannot open file for reading: $filePath",
-                                         Pdf\Except_1::CANT_OPEN_FILE);
+            throw new Exception\CorruptedPdfException("Cannot open file for reading: $filePath",
+                                         Pdf\Exception::CANT_OPEN_FILE);
         }
         $this->_filePath = $filePath;
     }
@@ -121,18 +121,18 @@ class File extends AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function readBytes($byteCount)
     {
         $bytes = @fread($this->_fileResource, $byteCount);
         if ($bytes === false) {
-            throw new pdf_except_4('Unexpected error while reading file',
-                                         Pdf\Except_1::ERROR_DURING_READ);
+            throw new Exception\CorruptedPdfException('Unexpected error while reading file',
+                                         Pdf\Exception::ERROR_DURING_READ);
         }
         if (strlen($bytes) != $byteCount) {
-            throw new pdf_except_4("Insufficient data to read $byteCount bytes",
-                                         Pdf\Except_1::INSUFFICIENT_DATA);
+            throw new Exception\CorruptedPdfException("Insufficient data to read $byteCount bytes",
+                                         Pdf\Exception::INSUFFICIENT_DATA);
         }
         $this->_offset += $byteCount;
         return $bytes;
@@ -173,7 +173,7 @@ class File extends AbstractDataSource
      * moved beyond EOF (end of file).
      *
      * @param integer $offset Destination byte offset.
-     * @throws \Zend\Pdf\Except_3
+     * @throws \Zend\Pdf\Exception\CorruptedPdfException
      */
     public function moveToOffset($offset)
     {
@@ -183,12 +183,12 @@ class File extends AbstractDataSource
         parent::moveToOffset($offset);
         $result = @fseek($this->_fileResource, $offset, SEEK_SET);
         if ($result !== 0) {
-            throw new pdf_except_4('Error while setting new file position',
-                                         Pdf\Except_1::CANT_SET_FILE_POSITION);
+            throw new Exception\CorruptedPdfException('Error while setting new file position',
+                                         Pdf\Exception::CANT_SET_FILE_POSITION);
         }
         if (feof($this->_fileResource)) {
-            throw new pdf_except_4('Moved beyond the end of the file',
-                                         Pdf\Except_1::MOVE_BEYOND_END_OF_FILE);
+            throw new Exception\CorruptedPdfException('Moved beyond the end of the file',
+                                         Pdf\Exception::MOVE_BEYOND_END_OF_FILE);
         }
     }
 }

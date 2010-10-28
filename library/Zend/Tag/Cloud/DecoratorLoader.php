@@ -14,35 +14,34 @@
  *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage UnitTests
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Tag\Cloud\TestAsset;
+namespace Zend\Tag\Cloud;
+
+use Zend\Loader\PluginClassLoader;
 
 /**
+ * Plugin Class Loader implementation for decorators.
+ *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage UnitTests
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TagDummy extends \Zend\Tag\Cloud\Decorator\HtmlTag
+class DecoratorLoader extends PluginClassLoader
 {
-    protected $_foo;
-
-    public function setFoo($value)
-    {
-        $this->_foo = $value;
-    }
-
-    public function getFoo()
-    {
-        return $this->_foo;
-    }
+    /**
+     * @var array Pre-aliased decorators 
+     */
+    protected $plugins = array(
+        'html_cloud' => 'Zend\Tag\Cloud\Decorator\HtmlCloud',
+        'htmlcloud'  => 'Zend\Tag\Cloud\Decorator\HtmlCloud',
+        'html_tag'   => 'Zend\Tag\Cloud\Decorator\HtmlTag',
+        'htmltag'    => 'Zend\Tag\Cloud\Decorator\HtmlTag',
+        'tag'        => 'Zend\Tag\Cloud\Decorator\Tag',
+    );
 }

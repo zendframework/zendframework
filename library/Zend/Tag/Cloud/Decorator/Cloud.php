@@ -25,6 +25,8 @@
  */
 namespace Zend\Tag\Cloud\Decorator;
 
+use Zend\Tag\Cloud\Decorator;
+
 /**
  * Abstract class for cloud decorators
  *
@@ -33,7 +35,7 @@ namespace Zend\Tag\Cloud\Decorator;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Cloud
+abstract class Cloud implements Decorator
 {
     /**
      * Option keys to skip when calling setOptions()
@@ -82,12 +84,4 @@ abstract class Cloud
 
         return $this;
     }
-
-    /**
-     * Render a list of formatted tags
-     *
-     * @param  array $tags
-     * @return string
-     */
-    abstract public function render(array $tags);
 }

@@ -14,35 +14,43 @@
  *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage UnitTests
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Tag\Cloud\TestAsset;
+namespace Zend\Tag\Cloud;
+
+use Zend\Loader\PluginBroker;
 
 /**
+ * Broker for decorator instances
+ *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage UnitTests
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TagDummy extends \Zend\Tag\Cloud\Decorator\HtmlTag
+class DecoratorBroker extends PluginBroker
 {
-    protected $_foo;
+    /**
+     * @var string Default plugin loading strategy
+     */
+    protected $defaultClassLoader = 'Zend\Tag\Cloud\DecoratorLoader';
 
-    public function setFoo($value)
+    /**
+     * Determine if we have a valid decorator
+     * 
+     * @param  mixed $plugin 
+     * @return true
+     * @throws Exception
+     */
+    protected function validatePlugin($plugin)
     {
-        $this->_foo = $value;
-    }
-
-    public function getFoo()
-    {
-        return $this->_foo;
+        if (!$plugin instanceof Decorator) {
+            throw new Exception('Tag cloud decorators must implement Zend\Tag\Cloud\Decorator');
+        }
+        return true;
     }
 }

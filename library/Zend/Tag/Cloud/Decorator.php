@@ -14,35 +14,39 @@
  *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage UnitTests
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Tag\Cloud\TestAsset;
+namespace Zend\Tag\Cloud;
 
 /**
+ * Interface for decorators
+ *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage UnitTests
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TagDummy extends \Zend\Tag\Cloud\Decorator\HtmlTag
+interface Decorator
 {
-    protected $_foo;
+    /**
+     * Constructor
+     *
+     * Allow passing options to the constructor.
+     * 
+     * @param  mixed $options 
+     * @return void
+     */
+    public function __construct($options = null);
 
-    public function setFoo($value)
-    {
-        $this->_foo = $value;
-    }
-
-    public function getFoo()
-    {
-        return $this->_foo;
-    }
+    /**
+     * Render a list of tags
+     * 
+     * @param  mixed $tags 
+     * @return string
+     */
+    public function render($tags);
 }

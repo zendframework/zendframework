@@ -130,8 +130,14 @@ class HTMLCloud extends Cloud
      * @param  array $tags
      * @return string
      */
-    public function render(array $tags)
+    public function render($tags)
     {
+        if (!is_array($tags)) {
+            throw new Exception(sprintf(
+                'HtmlCloud::render() expects an array argument; received "%s"',
+                (is_object($tags) ? get_class($tags) : gettype($tags))
+            ));
+        }
         $cloudHTML = implode($this->getSeparator(), $tags);
 
         $enc = $this->getEncoding();

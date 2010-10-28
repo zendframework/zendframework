@@ -90,11 +90,11 @@ abstract class AbstractRenderer
     protected $_groups = array();
 
     /**
-     * Plugin loader for tags
+     * Plugin broker for tags
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\Broker
      */
-    protected $_pluginLoader;
+    protected $_pluginBroker;
 
     /**
      * The current token
@@ -165,11 +165,11 @@ abstract class AbstractRenderer
     /**
      * Get the plugin loader
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\Broker
      */
-    public function getPluginLoader()
+    public function getPluginBroker()
     {
-        return $this->_pluginLoader;
+        return $this->_pluginBroker;
     }
 
     /**
@@ -418,9 +418,7 @@ abstract class AbstractRenderer
         if (is_array($markup) && ($markup['type'] & self::TYPE_CALLBACK)) {
             // load the callback if the tag doesn't exist
             if (!($markup['callback'] instanceof TokenConverter)) {
-                $class = $this->getPluginLoader()->load($name);
-
-                $markup['callback'] = new $class;
+                $markup['callback'] = $this->getPluginBroker()->load($name);
 
                 if (method_exists($markup['callback'], 'setRenderer')) {
                     $markup['callback']->setRenderer($this);

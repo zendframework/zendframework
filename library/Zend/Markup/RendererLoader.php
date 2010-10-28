@@ -14,38 +14,28 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Markup;
-use Zend\Markup;
+namespace Zend\Markup;
+
+use Zend\Loader\PluginClassLoader;
 
 /**
+ * Plugin Class Loader implementation for markup renderers.
+ *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
- * @group      Zend_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class RendererLoader extends PluginClassLoader
 {
-
-    public function testFactory()
-    {
-        $parserBroker = Markup\Markup::getParserBroker();
-        $parserBroker->getClassLoader()->registerPlugin('mockparser', 'ZendTest\Markup\TestAsset\Parser\MockParser');
-
-        $rendererBroker = Markup\Markup::getRendererBroker();
-        $rendererBroker->getClassLoader()->registerPlugin('mockrenderer', 'ZendTest\Markup\TestAsset\Renderer\MockRenderer');
-
-        Markup\Markup::factory('MockParser', 'MockRenderer');
-    }
-
+    /**
+     * @var array Pre-aliased renderers 
+     */
+    protected $plugins = array(
+        'html'  => 'Zend\Markup\Renderer\Html',
+    );
 }

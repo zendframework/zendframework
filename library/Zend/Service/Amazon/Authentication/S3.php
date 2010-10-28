@@ -26,16 +26,6 @@ namespace Zend\Service\Amazon\Authentication;
 use Zend\Crypt;
 
 /**
- * @see Zend_Service_Amazon_Authentication
- */
-require_once 'Zend/Service/Amazon/Authentication.php';
-
-/**
- * @see Zend_Crypt_Hmac
- */
-require_once 'Zend/Crypt/Hmac.php';
-
-/**
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Authentication

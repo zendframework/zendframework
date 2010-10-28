@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -63,7 +64,7 @@ class Named extends AbstractDestination
     public function __construct(InternalType\AbstractTypeObject $resource)
     {
         if ($resource->getType() != InternalType\AbstractTypeObject::TYPE_NAME  &&  $resource->getType() != InternalType\AbstractTypeObject::TYPE_STRING) {
-            throw new Pdf\Exception('Named destination resource must be a PDF name or a PDF string.');
+            throw new Exception\CorruptedPdfException('Named destination resource must be a PDF name or a PDF string.');
         }
 
         $this->_nameElement = $resource;

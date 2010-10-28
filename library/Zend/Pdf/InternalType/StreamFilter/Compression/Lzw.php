@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter\Compression;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -32,7 +33,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression\AbstractCompression
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -51,7 +52,7 @@ class Lzw extends AbstractCompression
             $earlyChange = $params['EarlyChange'];
 
             if ($earlyChange != 0  &&  $earlyChange != 1) {
-                throw new Pdf\Exception('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
+                throw new Exception\CorruptedPdfException('Invalid value of \'EarlyChange\' decode param - ' . $earlyChange . '.' );
             }
             return $earlyChange;
         } else {
@@ -74,7 +75,7 @@ class Lzw extends AbstractCompression
             $data = self::_applyEncodeParams($data, $params);
         }
 
-        throw new Pdf\Exception('Not implemented yet');
+        throw new Exception\NotImplementedException('Not implemented yet');
     }
 
     /**
@@ -87,7 +88,7 @@ class Lzw extends AbstractCompression
      */
     public static function decode($data, $params = null)
     {
-        throw new Pdf\Exception('Not implemented yet');
+        throw new Exception\NotImplementedException('Not implemented yet');
 
         if ($params !== null) {
             return self::_applyDecodeParams($data, $params);

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter;
+use Zend\Pdf\Exception;
 
 use Zend\Pdf\InternalType\StreamFilter,
     Zend\Pdf;
@@ -34,7 +35,7 @@ use Zend\Pdf\InternalType\StreamFilter,
  * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -107,7 +108,7 @@ class AsciiHex implements StreamFilter
                     } else if ($charCode >= 0x61 /*'a'*/ && $charCode <= 0x66 /*'f'*/) {
                         $code = $charCode - 0x57/*0x61 - 0x0A*/;
                     } else {
-                        throw new Pdf\Exception('Wrong character in a encoded stream');
+                        throw new Exception\CorruptedPdfException('Wrong character in a encoded stream');
                     }
 
                     if ($oddCode) {
@@ -128,7 +129,7 @@ class AsciiHex implements StreamFilter
 
         /* Check that stream is terminated by End Of Data marker */
         if ($data[$count] != '>') {
-            throw new Pdf\Exception('Wrong encoded stream End Of Data marker.');
+            throw new Exception\CorruptedPdfException('Wrong encoded stream End Of Data marker.');
         }
 
         /* Last '0' character is omitted */

@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -66,7 +67,7 @@ class FitBoundingBoxHorizontally extends Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
-            throw new Pdf\Exception('Page entry must be a Zend_PDF_Page object or a page number.');
+            throw new Exception\InvalidArgumentException('$page parametr must be a \Zend\Pdf\Page object or a page number.');
         }
 
         $destinationArray->items[] = new InternalType\NameObject('FitBH');
@@ -89,7 +90,7 @@ class FitBoundingBoxHorizontally extends Explicit
      * Set top edge of the displayed page
      *
      * @param float $top
-     * @return Zend_PDF_Action_FitBoundingBoxHorizontally
+     * @return \Zend\Pdf\Action\FitBoundingBoxHorizontally
      */
     public function setTopEdge($top)
     {

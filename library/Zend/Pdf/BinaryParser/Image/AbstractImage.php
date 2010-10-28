@@ -27,7 +27,7 @@ namespace Zend\Pdf\BinaryParser\Image;
 use Zend\Pdf\BinaryParser;
 
 /**
- * FileParser for Zend_PDF_Image subclasses.
+ * \Zend\Pdf\Image related file parsers abstract class.
  *
  * @uses       \Zend\Pdf\BinaryParser\AbstractBinaryParser
  * @uses       \Zend\Pdf\Image

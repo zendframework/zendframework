@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Action;
+use Zend\Pdf\Exception;
 use Zend\Pdf\ObjectFactory;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
@@ -58,7 +59,6 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalStructure\NavigationTarget
  * @package    Zend_PDF
- * @subpackage Zend_PDF_Action
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -100,7 +100,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions)
     {
         if ($dictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('$dictionary mast be a direct or an indirect dictionary object.');
+            throw new Exception\CorruptedPdfException('$dictionary mast be a direct or an indirect dictionary object.');
         }
 
         $this->_actionDictionary = $dictionary;
@@ -121,7 +121,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
                     }
                 }
             } else {
-                throw new Pdf\Exception('PDF Action dictionary Next entry must be a dictionary or an array.');
+                throw new Exception\CorruptedPdfException('PDF Action dictionary Next entry must be a dictionary or an array.');
             }
         }
 
@@ -144,14 +144,14 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
         }
 
         if ($dictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('$dictionary mast be a direct or an indirect dictionary object.');
+            throw new Exception\CorruptedPdfException('$dictionary mast be a direct or an indirect dictionary object.');
         }
         if (isset($dictionary->Type)  &&  $dictionary->Type->value != 'Action') {
-            throw new Pdf\Exception('Action dictionary Type entry must be set to \'Action\'.');
+            throw new Exception\CorruptedPdfException('Action dictionary Type entry must be set to \'Action\'.');
         }
 
         if ($dictionary->S === null) {
-            throw new Pdf\Exception('Action dictionary must contain S entry');
+            throw new Exception\CorruptedPdfException('Action dictionary must contain S entry');
         }
 
         switch ($dictionary->S->value) {
@@ -261,7 +261,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
             $processedActions = new \SplObjectStorage();
         }
         if ($processedActions->contains($this)) {
-            throw new Pdf\Exception('Action chain cyclyc reference is detected.');
+            throw new Exception\CorruptedPdfException('Action chain cyclyc reference is detected.');
         }
         $processedActions->attach($this);
 

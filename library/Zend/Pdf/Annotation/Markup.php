@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Annotation;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -61,7 +62,7 @@ class Markup extends AbstractAnnotation
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
         if ($annotationDictionary->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Pdf\Exception('Annotation dictionary resource has to be a dictionary.');
+            throw new Exception\CorruptedPdfException('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
@@ -71,7 +72,7 @@ class Markup extends AbstractAnnotation
                              self::SUBTYPE_UNDERLINE,
                              self::SUBTYPE_SQUIGGLY,
                              self::SUBTYPE_STRIKEOUT) )) {
-            throw new Pdf\Exception('Subtype => Markup entry is omitted or has wrong value.');
+            throw new Exception\CorruptedPdfException('Subtype => Markup entry is omitted or has wrong value.');
         }
 
         parent::__construct($annotationDictionary);
@@ -85,10 +86,10 @@ class Markup extends AbstractAnnotation
      * they display a pop-up window containing the text of the associated note.
      *
      * $subType parameter may contain
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_HIGHLIGHT
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_UNDERLINE
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_SQUIGGLY
-     *     Zend_PDF_Annotation_Markup::SUBTYPE_STRIKEOUT
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_HIGHLIGHT
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_UNDERLINE
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_SQUIGGLY
+     *     \Zend\Pdf\Annotation\Markup::SUBTYPE_STRIKEOUT
      * for for a highlight, underline, squiggly-underline, or strikeout annotation,
      * respectively.
      *
@@ -129,7 +130,7 @@ class Markup extends AbstractAnnotation
         $annotationDictionary->Contents = new InternalType\StringObject($text);
 
         if (!is_array($quadPoints)  ||  count($quadPoints) == 0  ||  count($quadPoints) % 8 != 0) {
-            throw new Pdf\Exception('$quadPoints parameter must be an array of 8xN numbers');
+            throw new Exception\InvalidArgumentException('$quadPoints parameter must be an array of 8xN numbers');
         }
         $points = new InternalType\ArrayObject();
         foreach ($quadPoints as $quadPoint) {

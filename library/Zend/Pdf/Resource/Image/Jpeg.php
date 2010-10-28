@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Image;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -55,20 +56,23 @@ class Jpeg extends AbstractImage
     public function __construct($imageFileName)
     {
         if (!function_exists('gd_info')) {
-            throw new Pdf\Exception('Image extension is not installed.');
+            throw new Exception\RuntimeException('Image extension is not installed.');
         }
 
         $gd_options = gd_info();
         if ( (!isset($gd_options['JPG Support'])  || $gd_options['JPG Support']  != true)  &&
              (!isset($gd_options['JPEG Support']) || $gd_options['JPEG Support'] != true)  ) {
-            throw new Pdf\Exception('JPG support is not configured properly.');
+            throw new Exception\RuntimeException('JPG support is not configured properly.');
         }
 
+        if (!is_readable($imageFileName)) {
+            throw new Exception\IOException( "File '$imageFileName' is not readable." );
+        }
         if (($imageInfo = getimagesize($imageFileName)) === false) {
-            throw new Pdf\Exception('Corrupted image or image doesn\'t exist.');
+            throw new Exception\CorruptedImageException('Corrupted image.');
         }
         if ($imageInfo[2] != IMAGETYPE_JPEG && $imageInfo[2] != IMAGETYPE_JPEG2000) {
-            throw new Pdf\Exception('ImageType is not JPG');
+            throw new Exception\DomainException('ImageType is not JPG');
         }
 
         parent::__construct();
@@ -97,7 +101,7 @@ class Jpeg extends AbstractImage
         }
 
         if (($imageFile = @fopen($imageFileName, 'rb')) === false ) {
-            throw new Pdf\Exception( "Can not open '$imageFileName' file for reading." );
+            throw new Exception\IOException("Can not open '$imageFileName' file for reading.");
         }
         $byteCount = filesize($imageFileName);
         $this->_resource->value = '';

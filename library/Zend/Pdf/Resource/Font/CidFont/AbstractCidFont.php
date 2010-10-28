@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Resource\Font\CidFont;
+use Zend\Pdf\Exception;
 use Zend\Pdf\Resource\Font as FontResource;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
@@ -275,6 +276,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param array $characterCodes Array of Unicode character codes (code points).
      * @return array Array of glyph numbers.
+     * @throws \Zend\Pdf\Exception
      */
     public function glyphNumbersForCharacters($characterCodes)
     {
@@ -285,7 +287,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -299,6 +301,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param integer $characterCode Unicode character code (code point).
      * @return integer Glyph number.
+     * @throws \Zend\Pdf\Exception
      */
     public function glyphNumberForCharacter($characterCode)
     {
@@ -309,7 +312,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
 
@@ -419,7 +422,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -440,7 +443,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -460,7 +463,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -480,6 +483,6 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Pdf\Exception('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 }

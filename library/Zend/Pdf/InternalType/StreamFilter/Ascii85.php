@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter;
+use Zend\Pdf\Exception;
 
 use Zend\Pdf\InternalType\StreamFilter;
 
@@ -33,7 +34,7 @@ use Zend\Pdf\InternalType\StreamFilter;
  * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -127,7 +128,7 @@ class Ascii85 implements StreamFilter
         $data = str_replace($whiteSpace, '', $data);
 
         if (substr($data, -2) != '~>') {
-            throw new \Zend\Pdf\Exception('Invalid EOF marker');
+            throw new \Zend\Exception\CorruptedPdfException('Invalid EOF marker');
             return '';
         }
 

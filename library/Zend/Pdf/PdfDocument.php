@@ -23,6 +23,8 @@
  * @namespace
  */
 namespace Zend\Pdf;
+use Zend\Pdf\Exception;
+
 use Zend\Memory;
 
 /**
@@ -244,7 +246,7 @@ class PdfDocument
     public function save($filename, $updateOnly = false)
     {
         if (($file = @fopen($filename, $updateOnly ? 'ab':'wb')) === false ) {
-            throw new Exception( "Can not open '$filename' file for writing." );
+            throw new Exception\IOException( "Can not open '$filename' file for writing." );
         }
 
         $this->render($updateOnly, $file);
@@ -280,7 +282,7 @@ class PdfDocument
             $this->_pdfHeaderVersion = $this->_parser->getPDFVersion();
             $this->_trailer          = $this->_parser->getTrailer();
             if ($this->_trailer->Encrypt !== null) {
-                throw new Exception('Encrypted document modification is not supported');
+                throw new Exception\NotImplementedException('Encrypted document modification is not supported');
             }
             if ($revision !== null) {
                 $this->rollback($revision);
@@ -409,7 +411,7 @@ class PdfDocument
     protected function _loadPages(InternalType\IndirectObjectReference $pages, $attributes = array())
     {
         if ($pages->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Exception('Wrong argument');
+            throw new Exception\CorruptedPdfException('Wrong argument');
         }
 
         foreach ($pages->getKeys() as $property) {
@@ -473,7 +475,7 @@ class PdfDocument
             // Look for Destinations sructure at Dest entry of document catalog
             if ($root->Dests !== null) {
                 if ($root->Dests->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-                    throw new Exception('Document catalog Dests entry must be a dictionary.');
+                    throw new Exception\CorruptedPdfException('Document catalog Dests entry must be a dictionary.');
                 }
 
                 foreach ($root->Dests->getKeys() as $destKey) {
@@ -495,11 +497,11 @@ class PdfDocument
         }
 
         if ($root->Outlines->getType() != InternalType\AbstractTypeObject::TYPE_DICTIONARY) {
-            throw new Exception('Document catalog Outlines entry must be a dictionary.');
+            throw new Exception\CorruptedPdfException('Document catalog Outlines entry must be a dictionary.');
         }
 
         if ($root->Outlines->Type !== null  &&  $root->Outlines->Type->value != 'Outlines') {
-            throw new Exception('Outlines Type entry must be an \'Outlines\' string.');
+            throw new Exception\CorruptedPdfException('Outlines Type entry must be an \'Outlines\' string.');
         }
 
         if ($root->Outlines->First === null) {
@@ -569,7 +571,7 @@ class PdfDocument
                     unset($this->_namedTargets[$name]);
                 }
             } else {
-                throw new Exception('Wrong type of named targed (\'' . get_class($namedTarget) . '\').');
+                throw new Exception\RuntimeException('Wrong type of named targed (\'' . get_class($namedTarget) . '\').');
             }
         }
 
@@ -591,7 +593,7 @@ class PdfDocument
                         $outline->setTarget(null);
                     }
                 } else {
-                    throw new Exception('Wrong outline target.');
+                    throw new Exception\RuntimeException('Wrong outline target.');
                 }
             }
         }
@@ -610,7 +612,7 @@ class PdfDocument
                     $this->setOpenAction(null);
                 }
             } else {
-                throw new Exception('OpenAction has to be either PDF Action or Destination.');
+                throw new Exception\RuntimeException('OpenAction has to be either PDF Action or Destination.');
             }
         }
     }
@@ -631,7 +633,7 @@ class PdfDocument
             if ($destination instanceof InternalStructure\NavigationTarget) {
                 $destArrayItems[] = $destination->getResource();
             } else {
-                throw new Exception('PDF named destinations must be a Zend_PDF_Target object.');
+                throw new Exception\RuntimeException('PDF named destinations must be a \Zend\Pdf\InternalStructure\NavigationTarget object.');
             }
         }
         $destArray = $this->_objFactory->newObject(new InternalType\ArrayObject($destArrayItems));
@@ -724,14 +726,14 @@ class PdfDocument
      *    If $factory is null then it will be created and page must be attached to the document to be
      *    included into output.
      * ---------------------------------------------------------
-     * new Zend_Pdf_Page(string $pagesize);
+     * new \Zend\Pdf\Page(string $pagesize);
      * ---------------------------------------------------------
      *
      * 2. Create new page with a specified pagesize (in default user space units).
      *    If $factory is null then it will be created and page must be attached to the document to be
      *    included into output.
      * ---------------------------------------------------------
-     * new Zend_Pdf_Page(numeric $width, numeric $height);
+     * new \Zend\Pdf\Page(numeric $width, numeric $height);
      * ---------------------------------------------------------
      *
      * @param mixed $param1
@@ -790,7 +792,8 @@ class PdfDocument
 
     /**
      * Get open Action
-     * Returns Zend_PDF_Target (Zend_PDF_Destination or Zend_PDF_Action object)
+     * Returns \Zend\Pdf\InternalStructure\NavigationTarget
+     * (\Zend\Pdf\Destination\AbstractDestination or \Zend\Pdf\Action\AbstractAction object)
      *
      * @return \Zend\Pdf\InternalStructure\NavigationTarget
      */
@@ -804,7 +807,8 @@ class PdfDocument
     }
 
     /**
-     * Set open Action which is actually Zend_PDF_Destination or Zend_PDF_Action object
+     * Set open Action which is actually \Zend\Pdf\Destination\AbstractDestination or
+     * \Zend\Pdf\Action\AbstractAction object
      *
      * @param \Zend\Pdf\InternalStructure\NavigationTarget $openAction
      * @returns Zend_PDF
@@ -865,7 +869,7 @@ class PdfDocument
         if ($destination !== null  &&
             !$destination instanceof Action\GoToAction  &&
             !$destination instanceof Destination\Explicit) {
-            throw new Exception('PDF named destination must refer an explicit destination or a GoTo PDF action.');
+            throw new Exception\InvalidArgumentException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
         }
 
         if ($destination !== null) {
@@ -877,7 +881,7 @@ class PdfDocument
 
     /**
      * Pages collection hash:
-     * <page dictionary object hash id> => Zend_Pdf_Page
+     * <page dictionary object hash id> => \Zend\Pdf\Page
      *
      * @var SplObjectStorage
      */
@@ -885,7 +889,7 @@ class PdfDocument
 
     /**
      * Pages collection hash:
-     * <page number> => Zend_Pdf_Page
+     * <page number> => \Zend\Pdf\Page
      *
      * @var array
      */
@@ -913,7 +917,7 @@ class PdfDocument
     /**
      * Resolve destination.
      *
-     * Returns Zend_Pdf_Page page object or null if destination is not found within PDF document.
+     * Returns \Zend\Pdf\Page page object or null if destination is not found within PDF document.
      *
      * @param \Zend\Pdf\Destination\AbstractDestination $destination  Destination to resolve
      * @param boolean $refreshPagesHash  Refresh page collection hashes before processing
@@ -940,7 +944,7 @@ class PdfDocument
             }
 
             if (!$destination instanceof Destination\Explicit) {
-                throw new Exception('Named destination target has to be an explicit destination.');
+                throw new Exception\CorruptedPdfException('Named destination target has to be an explicit destination.');
             }
         }
 
@@ -1013,7 +1017,7 @@ class PdfDocument
     /**
      * Extract fonts attached to the document
      *
-     * returns array of Zend_PDF_Resource_Font_Extracted objects
+     * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
      * @throws \Zend\Pdf\Exception
@@ -1036,7 +1040,7 @@ class PdfDocument
 
                 if (! ($fontDictionary instanceof InternalType\IndirectObjectReference  ||
                        $fontDictionary instanceof InternalType\IndirectObject) ) {
-                    throw new Exception('Font dictionary has to be an indirect object or object reference.');
+                    throw new Exception\CorruptedPdfException('Font dictionary has to be an indirect object or object reference.');
                 }
 
                 $fontResourcesUnique[spl_object_hash($fontDictionary->getObject())] = $fontDictionary;
@@ -1050,7 +1054,7 @@ class PdfDocument
                 $extractedFont = new Resource\Font\Extracted($fontDictionary);
 
                 $fonts[$resourceId] = $extractedFont;
-            } catch (Exception $e) {
+            } catch (Exception\CorruptedPdfException $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
                     throw $e;
                 }
@@ -1086,7 +1090,7 @@ class PdfDocument
 
                 if (! ($fontDictionary instanceof InternalType\IndirectObjectReference  ||
                        $fontDictionary instanceof InternalType\IndirectObject) ) {
-                    throw new Exception('Font dictionary has to be an indirect object or object reference.');
+                    throw new Exception\CorruptedPdfException('Font dictionary has to be an indirect object or object reference.');
                 }
 
                 $resourceId = spl_object_hash($fontDictionary->getObject());
@@ -1104,7 +1108,7 @@ class PdfDocument
                 try {
                     // Try to extract font
                     return new Resource\Font\Extracted($fontDictionary);
-                } catch (Exception $e) {
+                } catch (Exception\CorruptedPdfException $e) {
                     if ($e->getMessage() != 'Unsupported font type.') {
                         throw $e;
                     }
@@ -1148,7 +1152,7 @@ class PdfDocument
                                 break;
 
                             default:
-                                throw new Exception('Wrong Trapped document property vale: \'' . $value . '\'. Only true, false and null values are allowed.');
+                                throw new Exception\LogicException('Wrong Trapped document property vale: \'' . $value . '\'. Only true, false and null values are allowed.');
                                 break;
                         }
 

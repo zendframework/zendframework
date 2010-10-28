@@ -397,7 +397,7 @@ class Symbol extends AbstractStandard
             if (isset($this->_toFontEncoding[$characterCode])) {
                 $encodedString .= $this->_toFontEncoding[$characterCode];
             } else {
-                /* For now, mimic the behavior in Zend_PDF_Font::encodeString()
+                /* For now, mimic the behavior in \Zend\Pdf\Font::encodeString()
                  * where unknown characters are removed completely. This is not
                  * perfect, but we should be consistent. In a future revision,
                  * we will use the well-known substitution character 0x1a
@@ -424,7 +424,7 @@ class Symbol extends AbstractStandard
             if (isset($this->_fromFontEncoding[$characterCode])) {
                 $decodedString .= $this->_fromFontEncoding[$characterCode];
             } else {
-                /* For now, mimic the behavior in Zend_PDF_Font::encodeString()
+                /* For now, mimic the behavior in \Zend\Pdf\Font::encodeString()
                  * where unknown characters are removed completely. This is not
                  * perfect, but we should be consistent. In a future revision,
                  * we will use the Unicode substitution character (U+FFFD).

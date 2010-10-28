@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -121,8 +122,7 @@ abstract class AbstractBinaryParser
     public function __construct(DataSource\AbstractDataSource $dataSource)
     {
         if ($dataSource->getSize() == 0) {
-            throw new Pdf\Exception('The data source has not been properly initialized',
-                                         Pdf\Exception::BAD_DATA_SOURCE);
+            throw new Exception\BinaryParserException('The data source has not been properly initialized');
         }
         $this->_dataSource = $dataSource;
     }
@@ -235,8 +235,7 @@ abstract class AbstractBinaryParser
     public function readInt($size, $byteOrder = self::BYTE_ORDER_BIG_ENDIAN)
     {
         if (($size < 1) || ($size > 4)) {
-            throw new Pdf\Exception("Invalid signed integer size: $size",
-                                         Pdf\Exception::INVALID_INTEGER_SIZE);
+            throw new Exception\BinaryParserException("Invalid signed integer size: $size");
         }
         $bytes = $this->_dataSource->readBytes($size);
         /* unpack() will not work for this method because it always works in
@@ -280,8 +279,7 @@ abstract class AbstractBinaryParser
                 }
             }
         } else {
-            throw new Pdf\Exception("Invalid byte order: $byteOrder",
-                                         Pdf\Exception::INVALID_BYTE_ORDER);
+            throw new Exception\BinaryParserException("Invalid byte order: $byteOrder");
         }
         return $number;
     }
@@ -308,8 +306,7 @@ abstract class AbstractBinaryParser
     public function readUInt($size, $byteOrder = self::BYTE_ORDER_BIG_ENDIAN)
     {
         if (($size < 1) || ($size > 4)) {
-            throw new Pdf\Exception("Invalid unsigned integer size: $size",
-                                         Pdf\Exception::INVALID_INTEGER_SIZE);
+            throw new Exception\BinaryParserException("Invalid unsigned integer size: $size");
         }
         $bytes = $this->_dataSource->readBytes($size);
         /* unpack() is a bit heavyweight for this simple conversion. Just
@@ -326,8 +323,7 @@ abstract class AbstractBinaryParser
                 $number |= ord($bytes[$i]) << ($i * 8);
             }
         } else {
-            throw new Pdf\Exception("Invalid byte order: $byteOrder",
-                                         Pdf\Exception::INVALID_BYTE_ORDER);
+            throw new Exception\BinaryParserException("Invalid byte order: $byteOrder");
         }
         return $number;
     }
@@ -368,8 +364,7 @@ abstract class AbstractBinaryParser
     {
         $bitsToRead = $mantissaBits + $fractionBits;
         if (($bitsToRead % 8) !== 0) {
-            throw new Pdf\Exception('Fixed-point numbers are whole bytes',
-                                         Pdf\Exception::BAD_FIXED_POINT_SIZE);
+            throw new Exception\BinaryParserException('Fixed-point numbers are whole bytes');
         }
         $number = $this->readInt(($bitsToRead >> 3), $byteOrder) / (1 << $fractionBits);
         return $number;
@@ -419,8 +414,7 @@ abstract class AbstractBinaryParser
             }
             return iconv('UTF-16LE', $characterSet, $bytes);
         } else {
-            throw new Pdf\Exception("Invalid byte order: $byteOrder",
-                                         Pdf\Exception::INVALID_BYTE_ORDER);
+            throw new Exception\BinaryParserException("Invalid byte order: $byteOrder");
         }
     }
 

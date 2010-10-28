@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -33,7 +34,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -56,7 +57,7 @@ class NumericObject extends AbstractTypeObject
     public function __construct($val)
     {
         if (!is_numeric($val)) {
-            throw new Pdf\Exception('Argument must be numeric');
+            throw new Exception\RuntimeException('Argument must be numeric');
         }
 
         $this->value = $val;
@@ -77,10 +78,10 @@ class NumericObject extends AbstractTypeObject
     /**
      * Return object as string
      *
-     * @param Zend_PDF_Factory $factory
+     * @param \Zend\Pdf\ObjectFactory $factory
      * @return string
      */
-    public function toString($factory = null)
+    public function toString(Pdf\ObjectFactory $factory = null)
     {
         if (is_integer($this->value)) {
             return (string)$this->value;

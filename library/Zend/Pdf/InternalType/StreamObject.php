@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType\StreamFilter\Compression as CompressionFilter;
 use Zend\Pdf\ObjectFactory;
 use Zend\Pdf;
@@ -41,7 +42,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression;
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -192,7 +193,7 @@ class StreamObject extends IndirectObject
          */
         if (isset($this->_initialDictionaryData['F'])) {
             /** @todo Check, how external files can be processed. */
-            throw new Pdf\Exception('External filters are not supported now.');
+            throw new Exception\NotImplementedException('External filters are not supported now.');
         }
 
         foreach ($this->_initialDictionaryData['Filter'] as $id => $filterName ) {
@@ -222,7 +223,7 @@ class StreamObject extends IndirectObject
                     break;
 
                 default:
-                    throw new Pdf\Exception('Unknown stream filter: \'' . $filterName . '\'.');
+                    throw new Exception\CorruptedPdfException('Unknown stream filter: \'' . $filterName . '\'.');
             }
         }
 
@@ -242,7 +243,7 @@ class StreamObject extends IndirectObject
          */
         if (isset($this->_initialDictionaryData['F'])) {
             /** @todo Check, how external files can be processed. */
-            throw new Pdf\Exception('External filters are not supported now.');
+            throw new Exception\NotImplementedException('External filters are not supported now.');
         }
 
         $filters = array_reverse($this->_initialDictionaryData['Filter'], true);
@@ -274,7 +275,7 @@ class StreamObject extends IndirectObject
                     break;
 
                default:
-                    throw new Pdf\Exception('Unknown stream filter: \'' . $filterName . '\'.');
+                    throw new Exception\CorruptedPdfException('Unknown stream filter: \'' . $filterName . '\'.');
             }
         }
 
@@ -309,7 +310,7 @@ class StreamObject extends IndirectObject
             return $this->_value->value->getRef();
         }
 
-        throw new Pdf\Exception('Unknown stream object property requested.');
+        throw new Exception\RuntimeException('Unknown stream object property requested.');
     }
 
 
@@ -331,7 +332,7 @@ class StreamObject extends IndirectObject
             return;
         }
 
-        throw new Pdf\Exception('Unknown stream object property: \'' . $property . '\'.');
+        throw new Exception\RuntimeException('Unknown stream object property: \'' . $property . '\'.');
     }
 
 
@@ -357,14 +358,7 @@ class StreamObject extends IndirectObject
             $this->_decodeStream();
         }
 
-        switch (count($args)) {
-            case 0:
-                return $this->_value->$method();
-            case 1:
-                return $this->_value->$method($args[0]);
-            default:
-                throw new Pdf\Exception('Unsupported number of arguments');
-        }
+        call_user_func_array(array($this->_value, $method), $args);
     }
 
     /**

@@ -24,12 +24,9 @@
  */
 namespace Zend\Serializer;
 
-use Zend\Loader\PluginLoader,
-    Zend\Loader\ShortNameLocater;
+use Zend\Loader\Broker;
 
 /**
- * @uses       Zend\Loader\PluginLoader
- * @uses       Zend\Serializer\Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -38,11 +35,11 @@ use Zend\Loader\PluginLoader,
 class Serializer
 {
     /**
-     * Plugin loader to load adapter.
+     * Broker for loading adapters
      *
-     * @var null|Zend\Loader\ShortNameLocater
+     * @var null|Zend\Loader\Broker
      */
-    private static $_adapterLoader = null;
+    private static $_adapterBroker = null;
 
     /**
      * The default adapter.
@@ -64,67 +61,53 @@ class Serializer
             return $adapterName; // $adapterName is already an adapter object
         }
 
-        $adapterLoader = self::getAdapterLoader();
-        try {
-            $adapterClass = $adapterLoader->load($adapterName);
-        } catch (\Exception $e) {
-            throw new Exception('Can\'t load serializer adapter "'.$adapterName.'"', 0, $e);
-        }
-
-        // ZF-8842:
-        // check that the loaded class implements Zend_Serializer_Adapter_AdapterInterface without execute code
-        if (!in_array('Zend\\Serializer\\Adapter', class_implements($adapterClass))) {
-            throw new Exception('The serializer adapter class "'.$adapterClass.'" must implement Zend\\Serializer\\Adapter');
-        }
-
-        return new $adapterClass($opts);
+        return self::getAdapterBroker()->load($adapterName, $opts);
     }
 
     /**
-     * Get the adapter plugin loader.
+     * Get the adapter broker
      *
-     * @return Zend\Loader\ShortNameLocater
+     * @return Zend\Loader\Broker
      */
-    public static function getAdapterLoader() 
+    public static function getAdapterBroker() 
     {
-        if (self::$_adapterLoader === null) {
-            self::$_adapterLoader = self::_getDefaultAdapterLoader();
+        if (self::$_adapterBroker === null) {
+            self::$_adapterBroker = self::_getDefaultAdapterBroker();
         }
-        return self::$_adapterLoader;
+        return self::$_adapterBroker;
     }
 
     /**
-     * Change the adapter plugin load.
+     * Change the adapter broker
      *
-     * @param  Zend\Loader\ShortNameLocater $pluginLoader
+     * @param  Zend\Loader\Broker $broker
      * @return void
      */
-    public static function setAdapterLoader(ShortNameLocater $pluginLoader) 
+    public static function setAdapterBroker(Broker $broker) 
     {
-        self::$_adapterLoader = $pluginLoader;
+        self::$_adapterBroker = $broker;
     }
     
     /**
-     * Resets the internal adapter plugin loader
+     * Resets the internal adapter broker
      *
-     * @return Zend\Loader\ShortNameLocater
+     * @return Zend\Loader\Broker
      */
-    public static function resetAdapterLoader()
+    public static function resetAdapterBroker()
     {
-        self::$_adapterLoader = self::_getDefaultAdapterLoader();
-        return self::$_adapterLoader;
+        self::$_adapterBroker = self::_getDefaultAdapterBroker();
+        return self::$_adapterBroker;
     }
     
     /**
-     * Returns a default adapter plugin loader
+     * Returns a default adapter broker
      *
-     * @return Zend\Loader\PluginLoader
+     * @return Zend\Loader\Broker
      */
-    protected static function _getDefaultAdapterLoader()
+    protected static function _getDefaultAdapterBroker()
     {
-        $loader = new PluginLoader();
-        $loader->addPrefixPath('Zend\\Serializer\\Adapter\\', __DIR__ . '/Serializer/Adapter');
-        return $loader;
+        $broker = new AdapterBroker();
+        return $broker;
     }
 
     /**

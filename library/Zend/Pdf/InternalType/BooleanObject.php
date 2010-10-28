@@ -57,7 +57,7 @@ class BooleanObject extends AbstractTypeObject
     public function __construct($val)
     {
         if (! is_bool($val)) {
-            throw new Exception\CorruptedPdfException('Argument must be boolean.');
+            throw new Exception\RuntimeException('Argument must be boolean.');
         }
 
         $this->value   = $val;

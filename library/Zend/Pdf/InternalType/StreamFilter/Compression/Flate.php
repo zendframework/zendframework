@@ -64,12 +64,12 @@ class Flate extends AbstractCompression
                 if (!isset($php_errormsg)) {
                     $php_errormsg = 'Error occured while compressing PDF data using gzcompress() function.';
                 }
-                throw new Exception\CorruptedPdfException($php_errormsg);
+                throw new Exception\RuntimeException($php_errormsg);
             }
 
             ini_set('track_errors', $trackErrors);
         } else {
-            throw new Exception\CorruptedPdfException('Not implemented yet. You have to use zlib extension.');
+            throw new Exception\NotImplementedException('Compression support requires zlib extension.');
         }
 
         return $output;
@@ -96,12 +96,12 @@ class Flate extends AbstractCompression
                 if (!isset($php_errormsg)) {
                     $php_errormsg = 'Error occured while uncompressing PDF data using gzuncompress() function.';
                 }
-                throw new Exception\CorruptedPdfException($php_errormsg);
+                throw new Exception\RuntimeException($php_errormsg);
             }
 
             ini_set('track_errors', $trackErrors);
         } else {
-            throw new Exception\CorruptedPdfException('Not implemented yet');
+            throw new Exception\NotImplementedException('Compression support requires zlib extension.');
         }
 
         if ($params !== null) {

@@ -326,22 +326,19 @@ class SegmentToDelta extends AbstractCmap
          */
         $actualLength = strlen($cmapData);
         if ($actualLength < 23) {
-            throw new Exception\CorruptedPdfException('Insufficient table data',
-                                         Pdf\Exception::CMAP_TABLE_DATA_TOO_SMALL);
+            throw new Exception\CorruptedFontException('Insufficient table data');
         }
 
         /* Sanity check: Make sure this is right data for this table type.
          */
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != AbstractCmap::TYPE_SEGMENT_TO_DELTA) {
-            throw new Exception\CorruptedPdfException('Wrong cmap table type',
-                                         Pdf\Exception::CMAP_WRONG_TABLE_TYPE);
+            throw new Exception\CorruptedFontException('Wrong cmap table type');
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
-            throw new Exception\CorruptedPdfException("Table length ($length) does not match actual length ($actualLength)",
-                                         Pdf\Exception::CMAP_WRONG_TABLE_LENGTH);
+            throw new Exception\CorruptedFontException("Table length ($length) does not match actual length ($actualLength)");
         }
 
         /* Mapping tables should be language-independent. The font may not work
@@ -400,8 +397,7 @@ class SegmentToDelta extends AbstractCmap
          * of the table.
          */
         if ($offset != $length) {
-            throw new Exception\CorruptedPdfException("Ending offset ($offset) does not match length ($length)",
-                                         Pdf\Exception::CMAP_FINAL_OFFSET_NOT_LENGTH);
+            throw new Exception\CorruptedFontException("Ending offset ($offset) does not match length ($length)");
         }
     }
 }

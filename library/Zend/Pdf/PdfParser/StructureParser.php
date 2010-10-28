@@ -306,7 +306,7 @@ class StructureParser
 
             // $streamOffset . ' ' . strlen($xrefStreamData) . "\n";
             // "$entries\n";
-            throw new Exception\CorruptedPdfException('Cross-reference streams are not supported yet.');
+            throw new Exception\NotImplementedException('Cross-reference streams are not supported yet.');
         }
 
 
@@ -353,7 +353,7 @@ class StructureParser
     {
         if ($load) {
             if (($pdfFile = @fopen($source, 'rb')) === false ) {
-                throw new Exception\CorruptedPdfException( "Can not open '$source' file for reading." );
+                throw new Exception\IOException( "Can not open '$source' file for reading." );
             }
 
             $byteCount = filesize($source);
@@ -386,7 +386,7 @@ class StructureParser
              * Stream compression filter must be implemented (for compressed object streams).
              * Cross reference streams must be implemented
              */
-            throw new Exception\CorruptedPdfException(sprintf('Unsupported PDF version. Zend_PDF supports PDF 1.0-1.4. Current version - \'%f\'', $pdfVersion));
+            throw new Exception\NotImplementedException(sprintf('Unsupported PDF version. Zend_PDF supports PDF 1.0-1.4. Current version - \'%f\'', $pdfVersion));
         }
         $this->_pdfVersion = $pdfVersion;
 

@@ -57,7 +57,7 @@ class NumericObject extends AbstractTypeObject
     public function __construct($val)
     {
         if (!is_numeric($val)) {
-            throw new Exception\CorruptedPdfException('Argument must be numeric');
+            throw new Exception\RuntimeException('Argument must be numeric');
         }
 
         $this->value = $val;

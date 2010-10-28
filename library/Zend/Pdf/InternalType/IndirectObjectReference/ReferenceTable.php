@@ -102,7 +102,7 @@ class ReferenceTable
     {
         $refElements = explode(' ', $ref);
         if (!is_numeric($refElements[0]) || !is_numeric($refElements[1]) || $refElements[2] != 'R') {
-            throw new Exception\CorruptedPdfException("Incorrect reference: '$ref'");
+            throw new Exception\InvalidArgumentException("Incorrect reference: '$ref'");
         }
         $objNum = (int)$refElements[0];
         $genNum = (int)$refElements[1];

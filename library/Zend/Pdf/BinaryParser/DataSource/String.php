@@ -66,8 +66,7 @@ class String extends AbstractDataSource
     public function __construct($string)
     {
         if (empty($string)) {
-            throw new Exception\CorruptedPdfException('String is empty',
-                                         Pdf\Exception::PARAMETER_VALUE_OUT_OF_RANGE);
+            throw new Exception\InvalidArgumentException('String is empty');
         }
         $this->_size = strlen($string);
         $this->_string = $string;
@@ -97,8 +96,7 @@ class String extends AbstractDataSource
     public function readBytes($byteCount)
     {
         if (($this->_offset + $byteCount) > $this->_size) {
-            throw new Exception\CorruptedPdfException("Insufficient data to read $byteCount bytes",
-                                         Pdf\Exception::INSUFFICIENT_DATA);
+            throw new Exception\LengthException("Insufficient data to read $byteCount bytes");
         }
         $bytes = substr($this->_string, $this->_offset, $byteCount);
         $this->_offset += $byteCount;

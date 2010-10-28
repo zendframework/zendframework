@@ -36,6 +36,12 @@ namespace Zend\Pdf;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+use Zend\Pdf\Resource\Font;
+
+use Zend\Acl;
+
+use Zend\Pdf\Exception;
+
 use Zend\Pdf\InternalType;
 
 class Page
@@ -312,7 +318,7 @@ class Page
                  * @todo support of user defined pagesize notations, like:
                  *       "210x297mm", "595x842", "8.5x11in", "612x792"
                  */
-                throw new Exception\CorruptedPdfException('Wrong pagesize notation.');
+                throw new Exception\Exception\InvalidArgumentException('Wrong pagesize notation.');
             }
             /**
              * @todo support of pagesize recalculation to "default user space units"
@@ -332,7 +338,7 @@ class Page
             $pageHeight = $param2;
 
         } else {
-            throw new Exception\CorruptedPdfException('Unrecognized method signature, wrong number of arguments or wrong argument types.');
+            throw new Exception\BadMethodCallException('Unrecognized method signature, wrong number of arguments or wrong argument types.');
         }
 
         $this->_pageDictionary = $this->_objFactory->newObject(new InternalType\DictionaryObject());
@@ -483,7 +489,7 @@ class Page
     public function flush()
     {
         if ($this->_saveCount != 0) {
-            throw new Exception\CorruptedPdfException('Saved graphics state is not restored');
+            throw new Exception\LogicException('Saved graphics state is not restored');
         }
 
         if ($this->_contents == '') {
@@ -549,7 +555,7 @@ class Page
         }
 
         if ($this->_attached) {
-            throw new Exception\CorruptedPdfException('Page is attached to other documen. Use clone $page to get it context free.');
+            throw new Exception\LogicException('Page is attached to other documen. Use clone $page to get it context free.');
         } else {
             $objFactory->attach($this->_objFactory);
         }
@@ -694,10 +700,10 @@ class Page
     {
         if (!in_array($mode, array('Normal', 'Multiply', 'Screen', 'Overlay', 'Darken', 'Lighten', 'ColorDodge',
                                    'ColorBurn', 'HardLight', 'SoftLight', 'Difference', 'Exclusion'))) {
-            throw new Exception\CorruptedPdfException('Unsupported transparency mode.');
+            throw new Exception\InvalidArgumentException('Unsupported transparency mode.');
         }
         if (!is_numeric($alpha)  ||  $alpha < 0  ||  $alpha > 1) {
-            throw new Exception\CorruptedPdfException('Alpha value must be numeric between 0 (transparent) and 1 (opaque).');
+            throw new Exception\InvalidArgumentException('Alpha value must be numeric between 0 (transparent) and 1 (opaque).');
         }
 
         $this->_addProcSet('Text');
@@ -796,9 +802,10 @@ class Page
                 $extractedFont = new Resource\Font\Extracted($fontDictionary);
 
                 $fonts[$resourceId] = $extractedFont;
-            } catch (Exception\CorruptedPdfException $e) {
-                if ($e->getMessage() != 'Unsupported font type.') {
-                    throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
+            } catch (Exception\NotImplementedException $e) {
+                // Just skip unsupported font types.
+                if ($e->getMessage() != Resource\Font\Font\Extracted::TYPE_NOT_SUPPORTED) {
+                    throw $e;
                 }
             }
         }
@@ -848,9 +855,10 @@ class Page
             try {
                 // Try to extract font
                 return new Resource\Font\Extracted($fontDictionary);
-            } catch (Exception\CorruptedPdfException $e) {
-                if ($e->getMessage() != 'Unsupported font type.') {
-                    throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
+            } catch (Exception\NotImplementedException $e) {
+                // Just skip unsupported font types.
+                if ($e->getMessage() != Resource\Font\Font\Extracted::TYPE_NOT_SUPPORTED) {
+                    throw $e;
                 }
 
                 // Continue searhing font with specified name
@@ -909,7 +917,7 @@ class Page
     public function restoreGS()
     {
         if ($this->_saveCount-- <= 0) {
-            throw new Exception\CorruptedPdfException('Restoring graphics state which is not saved');
+            throw new Exception\LogicException('Restoring graphics state which is not saved');
         }
         $this->_contents .= " Q\n";
 
@@ -1593,7 +1601,7 @@ class Page
     public function drawText($text, $x, $y, $charEncoding = '')
     {
         if ($this->_font === null) {
-            throw new Exception\CorruptedPdfException('Font has not been set');
+            throw new Exception\LogicException('Font has not been set');
         }
 
         $this->_addProcSet('Text');

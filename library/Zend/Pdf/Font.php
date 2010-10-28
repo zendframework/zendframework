@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract factory class which vends {@link \Zend\Pdf\Resource\Font\AbstractFont} objects.
@@ -47,6 +48,8 @@ namespace Zend\Pdf;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+use Zend\Pdf\Exception;
+
 abstract class Font
 {
     /**** Class Constants ****/
@@ -548,8 +551,7 @@ abstract class Font
                 break;
 
             default:
-                throw new Exception\CorruptedPdfException("Unknown font name: $name",
-                                             Pdf\Exception::BAD_FONT_NAME);
+                throw new Exception\InvalidArgumentException("Unknown font name: $name");
         }
 
         /* Add this new font to the cache array and return it for use.
@@ -658,8 +660,7 @@ abstract class Font
         } else {
             /* The type of font could not be determined. Give up.
              */
-            throw new Exception\CorruptedPdfException("Cannot determine font type: $filePath",
-                                         Pdf\Exception::CANT_DETERMINE_FONT_TYPE);
+            throw new Exception\DomainException("Cannot determine font type: $filePath");
          }
 
     }
@@ -699,23 +700,14 @@ abstract class Font
                 $cidFont = new Resource\Font\CidFont\TrueType($fontParser, $embeddingOptions);
                 $font    = new Resource\Font\Type0($cidFont);
             }
-        } catch (Exception\CorruptedPdfException $e) {
-            /* The following exception codes suggest that this isn't really a
-             * TrueType font. If we caught such an exception, simply return
-             * null. For all other cases, it probably is a TrueType font but has
-             * a problem; throw the exception again.
+        } catch (Exception\UnrecognizedFontException $e) {
+            /**
+             * This exception suggests that this isn't really a TrueType font.
+             * If we caught such an exception, simply return null.
              */
-            $fontParser = null;
-            switch ($e->getCode()) {
-                case Pdf\Exception::WRONG_FONT_TYPE:    // break intentionally omitted
-                case Pdf\Exception::BAD_TABLE_COUNT:    // break intentionally omitted
-                case Pdf\Exception::BAD_MAGIC_NUMBER:
-                    return null;
-
-                default:
-                    throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
-            }
+            return null;
         }
+
         return $font;
     }
 }

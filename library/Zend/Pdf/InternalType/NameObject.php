@@ -58,7 +58,7 @@ class NameObject extends AbstractTypeObject
     {
         settype($val, 'string');
         if (strpos($val,"\x00") !== false) {
-            throw new Exception\CorruptedPdfException('Null character is not allowed in PDF Names');
+            throw new Exception\RuntimeException('Null character is not allowed in PDF Names');
         }
         $this->value   = (string)$val;
     }

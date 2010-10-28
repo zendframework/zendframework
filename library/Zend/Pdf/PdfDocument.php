@@ -23,6 +23,8 @@
  * @namespace
  */
 namespace Zend\Pdf;
+use Zend\Pdf\Exception;
+
 use Zend\Memory;
 
 /**
@@ -244,7 +246,7 @@ class PdfDocument
     public function save($filename, $updateOnly = false)
     {
         if (($file = @fopen($filename, $updateOnly ? 'ab':'wb')) === false ) {
-            throw new Exception\CorruptedPdfException( "Can not open '$filename' file for writing." );
+            throw new Exception\IOException( "Can not open '$filename' file for writing." );
         }
 
         $this->render($updateOnly, $file);
@@ -280,7 +282,7 @@ class PdfDocument
             $this->_pdfHeaderVersion = $this->_parser->getPDFVersion();
             $this->_trailer          = $this->_parser->getTrailer();
             if ($this->_trailer->Encrypt !== null) {
-                throw new Exception\CorruptedPdfException('Encrypted document modification is not supported');
+                throw new Exception\NotImplementedException('Encrypted document modification is not supported');
             }
             if ($revision !== null) {
                 $this->rollback($revision);
@@ -569,7 +571,7 @@ class PdfDocument
                     unset($this->_namedTargets[$name]);
                 }
             } else {
-                throw new Exception\CorruptedPdfException('Wrong type of named targed (\'' . get_class($namedTarget) . '\').');
+                throw new Exception\RuntimeException('Wrong type of named targed (\'' . get_class($namedTarget) . '\').');
             }
         }
 
@@ -591,7 +593,7 @@ class PdfDocument
                         $outline->setTarget(null);
                     }
                 } else {
-                    throw new Exception\CorruptedPdfException('Wrong outline target.');
+                    throw new Exception\RuntimeException('Wrong outline target.');
                 }
             }
         }
@@ -610,7 +612,7 @@ class PdfDocument
                     $this->setOpenAction(null);
                 }
             } else {
-                throw new Exception\CorruptedPdfException('OpenAction has to be either PDF Action or Destination.');
+                throw new Exception\RuntimeException('OpenAction has to be either PDF Action or Destination.');
             }
         }
     }
@@ -631,7 +633,7 @@ class PdfDocument
             if ($destination instanceof InternalStructure\NavigationTarget) {
                 $destArrayItems[] = $destination->getResource();
             } else {
-                throw new Exception\CorruptedPdfException('PDF named destinations must be a \Zend\Pdf\InternalStructure\NavigationTarget object.');
+                throw new Exception\RuntimeException('PDF named destinations must be a \Zend\Pdf\InternalStructure\NavigationTarget object.');
             }
         }
         $destArray = $this->_objFactory->newObject(new InternalType\ArrayObject($destArrayItems));
@@ -867,7 +869,7 @@ class PdfDocument
         if ($destination !== null  &&
             !$destination instanceof Action\GoToAction  &&
             !$destination instanceof Destination\Explicit) {
-            throw new Exception\CorruptedPdfException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
+            throw new Exception\InvalidArgumentException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
         }
 
         if ($destination !== null) {
@@ -1150,7 +1152,7 @@ class PdfDocument
                                 break;
 
                             default:
-                                throw new Exception\CorruptedPdfException('Wrong Trapped document property vale: \'' . $value . '\'. Only true, false and null values are allowed.');
+                                throw new Exception\LogicException('Wrong Trapped document property vale: \'' . $value . '\'. Only true, false and null values are allowed.');
                                 break;
                         }
 

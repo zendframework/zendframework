@@ -98,10 +98,10 @@ class IndirectObjectReference extends AbstractTypeObject
                                 Pdf\ObjectFactory $factory)
     {
         if ( !(is_integer($objNum) && $objNum > 0) ) {
-            throw new Exception\CorruptedPdfException('Object number must be positive integer');
+            throw new Exception\RuntimeException('Object number must be positive integer');
         }
         if ( !(is_integer($genNum) && $genNum >= 0) ) {
-            throw new Exception\CorruptedPdfException('Generation number must be non-negative integer');
+            throw new Exception\RuntimeException('Generation number must be non-negative integer');
         }
 
         $this->_objNum  = $objNum;
@@ -179,7 +179,7 @@ class IndirectObjectReference extends AbstractTypeObject
         }
 
         if ($obj->toString() != $this->_objNum . ' ' . $this->_genNum . ' R') {
-            throw new Exception\CorruptedPdfException('Incorrect reference to the object');
+            throw new Exception\RuntimeException('Incorrect reference to the object');
         }
 
         $this->_ref = $obj;

@@ -211,7 +211,7 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
                     break;
 
                 default:
-                    throw new Exception\CorruptedPdfException("Unknown option name - '$key'.");
+                    throw new Exception\InvalidArgumentException("Unknown option name - '$key'.");
                     break;
             }
         }
@@ -243,14 +243,14 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
     {
         if (is_string($param1)) {
             if ($param2 !== null  &&  !($param2 instanceof Pdf\InternalStructure\NavigationTarget  ||  is_string($param2))) {
-                throw new Exception\CorruptedPdfException('Outline create method takes $title (string) and $target (\Zend\Pdf\InternalStructure\NavigationTarget or string) or an array as an input');
+                throw new Exception\InvalidArgumentException('Outline create method takes $title (string) and $target (\Zend\Pdf\InternalStructure\NavigationTarget or string) or an array as an input');
             }
 
             return new Created(array('title'  => $param1,
                                      'target' => $param2));
         } else {
             if (!is_array($param1)  ||  $param2 !== null) {
-                throw new Exception\CorruptedPdfException('Outline create method takes $title (string) and $destination (\Zend\Pdf\InternalStructure\NavigationTarget) or an array as an input');
+                throw new Exception\InvalidArgumentException('Outline create method takes $title (string) and $destination (\Zend\Pdf\InternalStructure\NavigationTarget) or an array as an input');
             }
 
             return new Created($param1);

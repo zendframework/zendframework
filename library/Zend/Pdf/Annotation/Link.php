@@ -90,7 +90,7 @@ class Link extends AbstractAnnotation
             $destination = Destination\Named::create($target);
         }
         if (!$target instanceof InternalStructure\NavigationTarget) {
-            throw new Exception\CorruptedPdfException('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
+            throw new Exception\InvalidArgumentException('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
         }
 
         $annotationDictionary = new InternalType\DictionaryObject();
@@ -126,7 +126,7 @@ class Link extends AbstractAnnotation
             $destination = Destination\Named::create($target);
         }
         if (!$target instanceof InternalStructure\NavigationTarget) {
-            throw new Exception\CorruptedPdfException('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
+            throw new Exception\InvalidArgumentException('$target parameter must be a \Zend\Pdf\InternalStructure\NavigationTarget object or a string.');
         }
 
         $this->_annotationDictionary->touch();

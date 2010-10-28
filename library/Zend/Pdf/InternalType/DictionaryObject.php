@@ -61,15 +61,15 @@ class DictionaryObject extends AbstractTypeObject
         if ($val === null) {
             return;
         } else if (!is_array($val)) {
-            throw new Exception\CorruptedPdfException('Argument must be an array');
+            throw new Exception\RuntimeException('Argument must be an array');
         }
 
         foreach ($val as $name => $element) {
             if (!$element instanceof AbstractTypeObject) {
-                throw new Exception\CorruptedPdfException('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
+                throw new Exception\RuntimeException('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
             }
             if (!is_string($name)) {
-                throw new Exception\CorruptedPdfException('Array keys must be strings');
+                throw new Exception\RuntimeException('Array keys must be strings');
             }
             $this->_items[$name] = $element;
         }
@@ -151,7 +151,7 @@ class DictionaryObject extends AbstractTypeObject
 
         foreach ($this->_items as $name => $element) {
             if (!is_object($element)) {
-                throw new Exception\CorruptedPdfException('Wrong data');
+                throw new Exception\RuntimeException('Wrong data');
             }
 
             if (strlen($outStr) - $lastNL > 128)  {

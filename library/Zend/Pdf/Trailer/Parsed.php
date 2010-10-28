@@ -24,9 +24,8 @@
  * @namespace
  */
 namespace Zend\Pdf\Trailer;
-use Zend\Pdf\Exception;
-use Zend\Pdf;
 use Zend\Pdf\InternalType;
+use Zend\Pdf\Exception;
 
 /**
  * PDF file trailer.
@@ -130,14 +129,14 @@ class Parsed extends AbstractTrailer
      * Get header of free objects list
      * Returns object number of last free object
      *
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      * @return integer
      */
     public function getLastFreeObject()
     {
         try {
             $this->_context->getRefTable()->getNextFree('0 65535 R');
-        } catch (Exception\CorruptedPdfException $e) {
+        } catch (Exception $e) {
             if ($e->getMessage() == 'Object not found.') {
                 /**
                  * Here is work around for some wrong generated PDFs.
@@ -147,7 +146,7 @@ class Parsed extends AbstractTrailer
                 return 0;
             }
 
-            throw new Exception\CorruptedPdfException($e->getMessage(), $e->getCode(), $e);
+            throw $e;
         }
     }
 }

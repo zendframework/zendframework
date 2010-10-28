@@ -75,7 +75,7 @@ class Lzw extends AbstractCompression
             $data = self::_applyEncodeParams($data, $params);
         }
 
-        throw new Exception\CorruptedPdfException('Not implemented yet');
+        throw new Exception\NotImplementedException('Not implemented yet');
     }
 
     /**
@@ -88,7 +88,7 @@ class Lzw extends AbstractCompression
      */
     public static function decode($data, $params = null)
     {
-        throw new Exception\CorruptedPdfException('Not implemented yet');
+        throw new Exception\NotImplementedException('Not implemented yet');
 
         if ($params !== null) {
             return self::_applyDecodeParams($data, $params);

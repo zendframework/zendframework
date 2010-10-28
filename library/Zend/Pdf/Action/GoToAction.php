@@ -81,7 +81,7 @@ class GoToAction extends AbstractAction
         }
 
         if (!$destination instanceof Destination\AbstractDestination) {
-            throw new Exception\CorruptedPdfException('$destination parameter must be a \Zend\Pdf\Destination object or string.');
+            throw new Exception\InvalidArgumentException('$destination parameter must be a \Zend\Pdf\Destination object or string.');
         }
 
         $dictionary       = new InternalType\DictionaryObject();

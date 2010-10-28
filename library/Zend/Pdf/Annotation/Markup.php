@@ -130,7 +130,7 @@ class Markup extends AbstractAnnotation
         $annotationDictionary->Contents = new InternalType\StringObject($text);
 
         if (!is_array($quadPoints)  ||  count($quadPoints) == 0  ||  count($quadPoints) % 8 != 0) {
-            throw new Exception\CorruptedPdfException('$quadPoints parameter must be an array of 8xN numbers');
+            throw new Exception\InvalidArgumentException('$quadPoints parameter must be an array of 8xN numbers');
         }
         $points = new InternalType\ArrayObject();
         foreach ($quadPoints as $quadPoint) {

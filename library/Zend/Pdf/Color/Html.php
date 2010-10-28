@@ -407,7 +407,7 @@ class Html implements Color
                 $r = 0.604; $g = 0.804; $b = 0.196; break;
 
             default:
-                throw new Exception\CorruptedPdfException('Unknown color name: ' . $color);
+                throw new Exception\InvalidArgumentException('Unknown color name: ' . $color);
         }
         if (($r == $g) && ($g == $b)) {
             return new GrayScale($r);

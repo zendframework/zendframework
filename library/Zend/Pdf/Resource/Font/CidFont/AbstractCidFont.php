@@ -276,6 +276,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param array $characterCodes Array of Unicode character codes (code points).
      * @return array Array of glyph numbers.
+     * @throws \Zend\Pdf\Exception\RuntimeException
      */
     public function glyphNumbersForCharacters($characterCodes)
     {
@@ -286,7 +287,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Exception\CorruptedPdfException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -300,6 +301,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param integer $characterCode Unicode character code (code point).
      * @return integer Glyph number.
+     * @throws \Zend\Pdf\Exception\RuntimeException
      */
     public function glyphNumberForCharacter($characterCode)
     {
@@ -310,7 +312,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Exception\CorruptedPdfException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
 
@@ -409,7 +411,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param array &$glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception\RuntimeException
      */
     public function widthsForGlyphs($glyphNumbers)
     {
@@ -420,7 +422,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Exception\CorruptedPdfException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -430,7 +432,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      *
      * @param integer $glyphNumber
      * @return integer
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception\RuntimeException
      */
     public function widthForGlyph($glyphNumber)
     {
@@ -441,7 +443,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Exception\CorruptedPdfException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -450,7 +452,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      * @param string $string
      * @param string $charEncoding Character encoding of source text.
      * @return string
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception\RuntimeException
      */
     public function encodeString($string, $charEncoding)
     {
@@ -461,7 +463,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Exception\CorruptedPdfException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 
     /**
@@ -470,7 +472,7 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
      * @param string $string
      * @param string $charEncoding Character encoding of resulting text.
      * @return string
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception\RuntimeException
      */
     public function decodeString($string, $charEncoding)
     {
@@ -481,6 +483,6 @@ abstract class AbstractCidFont extends FontResource\AbstractFont
          *
          * Throw an exception.
          */
-        throw new Exception\CorruptedPdfException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
+        throw new Exception\RuntimeException('CIDFont PDF objects could not be used as the operand of the text drawing operators');
     }
 }

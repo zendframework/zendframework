@@ -163,8 +163,7 @@ abstract class AbstractCmap
                 return new StaticByteEncoding($cmapData);
 
             case self::TYPE_HIGH_BYTE_MAPPING:
-                throw new Exception\CorruptedPdfException('High byte mapping cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('High byte mapping cmap currently unsupported');
 
             case self::TYPE_SEGMENT_TO_DELTA:
                 return new SegmentToDelta($cmapData);
@@ -173,20 +172,16 @@ abstract class AbstractCmap
                 return new TrimmedTable($cmapData);
 
             case self::TYPE_MIXED_COVERAGE:
-                throw new Exception\CorruptedPdfException('Mixed coverage cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('Mixed coverage cmap currently unsupported');
 
             case self::TYPE_TRIMMED_ARRAY:
-                throw new Exception\CorruptedPdfException('Trimmed array cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('Trimmed array cmap currently unsupported');
 
             case self::TYPE_SEGMENTED_COVERAGE:
-                throw new Exception\CorruptedPdfException('Segmented coverage cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('Segmented coverage cmap currently unsupported');
 
             default:
-                throw new Exception\CorruptedPdfException("Unknown cmap type: $cmapType",
-                                             Pdf\Exception::CMAP_UNKNOWN_TYPE);
+                throw new Exception\CorruptedFontException("Unknown cmap type: $cmapType");
         }
     }
 
@@ -272,8 +267,7 @@ abstract class AbstractCmap
     protected function _extractInt2(&$data, $index)
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
-            throw new Exception\CorruptedPdfException("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedFontException("Index out of range: $index");
         }
         $number = ord($data[$index]);
         if (($number & 0x80) == 0x80) {    // negative
@@ -298,8 +292,7 @@ abstract class AbstractCmap
     protected function _extractUInt2(&$data, $index)
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
-            throw new Exception\CorruptedPdfException("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedFontException("Index out of range: $index");
         }
         $number = (ord($data[$index]) << 8) | ord($data[++$index]);
         return $number;
@@ -324,8 +317,7 @@ abstract class AbstractCmap
     protected function _extractUInt4(&$data, $index)
     {
         if (($index < 0) | (($index + 3) > strlen($data))) {
-            throw new Exception\CorruptedPdfException("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedFontException("Index out of range: $index");
         }
         $number = (ord($data[$index]) << 24) | (ord($data[++$index]) << 16) |
                   (ord($data[++$index]) << 8) | ord($data[++$index]);

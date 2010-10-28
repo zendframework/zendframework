@@ -75,7 +75,7 @@ class Uri extends AbstractAction
     {
         $scheme = parse_url((string)$uri, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            throw new Exception\CorruptedPdfException('Invalid URI');
+            throw new Exception\InvalidArgumentException('Invalid URI');
         }
     }
 

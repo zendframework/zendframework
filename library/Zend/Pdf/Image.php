@@ -41,6 +41,8 @@ namespace Zend\Pdf;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+use Zend\Pdf\Exception;
+
 abstract class Image
 {
     /**** Class Constants ****/
@@ -161,7 +163,7 @@ abstract class Image
                 $image = self::_extractJpegImage($dataSource);
                 break;
             default:
-                throw new Exception\CorruptedPdfException("Cannot create image resource. File extension not known or unsupported type.");
+                throw new Exception\DomainException('Cannot create image resource. File extension not known or unsupported type.');
                 break;
         }
 
@@ -175,8 +177,7 @@ abstract class Image
         } else {
             /* The type of image could not be determined. Give up.
              */
-            throw new Exception\CorruptedPdfException("Cannot determine image type: $filePath",
-                                         Pdf\Exception::CANT_DETERMINE_IMAGE_TYPE);
+            throw new Exception\DomainException("Cannot determine image type: $filePath");
          }
     }
 
@@ -197,7 +198,7 @@ abstract class Image
      */
     protected static function _extractJpegImage($dataSource)
     {
-        throw new Exception\CorruptedPdfException('Jpeg image fileparser is not implemented. Old styly implementation has to be used.');
+        throw new Exception\Exception\NotImplementedException('Jpeg image fileparser is not implemented. Old styly implementation has to be used.');
 
         $imageParser = new BinaryParser\Image\Jpeg($dataSource);
         $image       = new Resource\Image\Jpeg($imageParser);
@@ -232,7 +233,7 @@ abstract class Image
      */
     protected static function _extractTiffImage($dataSource)
     {
-        throw new Exception\CorruptedPdfException('Tiff image fileparser is not implemented. Old styly implementation has to be used.');
+        throw new Exception\NotImplementedException('Tiff image fileparser is not implemented. Old styly implementation has to be used.');
 
         $imageParser = new BinaryParser\Image\Tiff($dataSource);
         $image       = new Resource\Image\Tiff($imageParser);

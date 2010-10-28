@@ -171,7 +171,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
 
         /** TIFF Predictor 2 */
         if ($predictor == 2) {
-            throw new Exception\CorruptedPdfException('Not implemented yet' );
+            throw new Exception\NotImplementedException('TIFF compression perediction is not implemented yet' );
         }
 
         /** Optimal PNG prediction */
@@ -302,7 +302,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
 
         /** TIFF Predictor 2 */
         if ($predictor == 2) {
-            throw new Exception\CorruptedPdfException('Not implemented yet' );
+            throw new Exception\NotImplementedException('TIFF compression perediction is not implemented yet' );
         }
 
         /**

@@ -57,8 +57,7 @@ class StaticByteEncoding extends ByteEncoding
     public function __construct($cmapData)
     {
         if (! is_array($cmapData)) {
-            throw new Exception\CorruptedPdfException('Constructor parameter must be an array',
-                                         Pdf\Exception::BAD_PARAMETER_TYPE);
+            throw new Exception\CorruptedFontException('Constructor parameter must be an array');
         }
         $this->_glyphIndexArray = $cmapData;
     }

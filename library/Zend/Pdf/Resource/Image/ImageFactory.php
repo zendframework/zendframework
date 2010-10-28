@@ -46,7 +46,7 @@ class ImageFactory
 {
     public static function factory($filename) {
         if(!is_file($filename)) {
-            throw new Exception\CorruptedPdfException("Cannot create image resource. File not found.");
+            throw new Exception\IOException("Cannot create image resource. File not found.");
         }
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
         /*
@@ -70,7 +70,7 @@ class ImageFactory
                 return new Jpeg($filename);
                 break;
             default:
-                throw new Exception\CorruptedPdfException("Cannot create image resource. File extension not known or unsupported type.");
+                throw new Exception\InvalidArgumentException('Cannot create image resource. File extension not known or unsupported type.');
                 break;
         }
     }

@@ -66,8 +66,7 @@ class TrueType extends AbstractOpenType
                 break;
 
             default:
-                throw new Exception\CorruptedPdfException('Not a TrueType font file',
-                                             Pdf\Exception::WRONG_FONT_TYPE);
+                throw new Exception\UnrecognizedFontException('Not a TrueType font file');
         }
 
         $this->fontType = Pdf\Font::TYPE_TRUETYPE;

@@ -213,7 +213,7 @@ class Created extends AbstractOutline
         if ($target === null  ||  $target instanceof InternalStructure\NavigationTarget) {
             $this->_target = $target;
         } else {
-            throw new Exception\CorruptedPdfException('Outline target has to be \Zend\Pdf\Destination or \Zend\Pdf\Action object or string');
+            throw new Exception\InvalidArgumentException('Outline target has to be \Zend\Pdf\Destination or \Zend\Pdf\Action object or string');
         }
 
         return $this;
@@ -229,7 +229,7 @@ class Created extends AbstractOutline
     public function __construct($options = array())
     {
         if (!isset($options['title'])) {
-            throw new Exception\CorruptedPdfException('Title parameter is required.');
+            throw new Exception\InvalidArgumentException('Title is required.');
         }
 
         $this->setOptions($options);

@@ -34,6 +34,9 @@ use Zend\Config\Config,
 /**
  * Zend_Form_Element
  *
+ * @todo       Modify to utilize ValidatorChain
+ * @todo       Modify to utilize FilterChain
+ * @todo       Modify to utilize PluginBroker for decorators (or remove decoration and move to view layer)
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

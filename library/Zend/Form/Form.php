@@ -35,6 +35,14 @@ use Zend\Config\Config,
 /**
  * Zend_Form
  *
+ * A rewrite on this component is planned. At the bare minimum, this class 
+ * will be refactored to utilize the new PluginBroker implementation with
+ * regards to loading elements and decorators (though decorators may be 
+ * either removed or pushed to a DecoratorChain). Potentially, it may be 
+ * modified to accept a Zend\Filter\InputFilter instance, from which it would 
+ * inject values and error messages into attached elements.
+ *
+ * @todo       Convert to PluginBroker usage
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

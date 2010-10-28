@@ -24,13 +24,9 @@
  */
 namespace Zend\Filter;
 
-use Zend\Loader;
+use Zend\Loader\Broker;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\Filter
- * @uses       \Zend\Loader
- * @uses       \Zend\Loader\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -39,34 +35,32 @@ use Zend\Loader;
 class StaticFilter
 {
     /**
-     * @var Loader\PrefixPathMapper
+     * @var Broker
      */
-    protected static $_pluginLoader;
+    protected static $broker;
 
     /**
-     * Set plugin loader for resolving filter classes
+     * Set broker for resolving filter classes
      * 
-     * @param  Loader\ShortNameLocater $loader 
+     * @param  Broker $broker 
      * @return void
      */
-    public static function setPluginLoader(Loader\ShortNameLocater $loader = null)
+    public static function setBroker(Broker $broker = null)
     {
-        self::$_pluginLoader = $loader;
+        self::$broker = $broker;
     }
 
     /**
-     * Get plugin loader for resolving filter classes
+     * Get broker for loading filter classes
      * 
-     * @return Loader\ShortNameLocater
+     * @return Broker
      */
-    public static function getPluginLoader()
+    public static function getBroker()
     {
-        if (null === self::$_pluginLoader) {
-            static::setPluginLoader(new Loader\PluginLoader(array(
-                'Zend\Filter' => 'Zend/Filter',
-            )));
+        if (null === self::$broker) {
+            static::setBroker(new FilterBroker());
         }
-        return self::$_pluginLoader;
+        return self::$broker;
     }
 
     /**
@@ -82,47 +76,19 @@ class StaticFilter
      * @param  mixed        $value
      * @param  string       $classBaseName
      * @param  array        $args          OPTIONAL
-     * @param  array|string $namespaces    OPTIONAL
      * @return mixed
      * @throws \Zend\Filter\Exception
      */
-    public static function execute($value, $classBaseName, array $args = array(), $namespaces = array())
+    public static function execute($value, $classBaseName, array $args = array())
     {
-        $loader = static::getPluginLoader();
-        if (!class_exists($classBaseName)) {
-            try {
-                $className  = $loader->load($classBaseName);
-            } catch (Loader\Exception $e) {
-                throw new Exception("Filter class not found from basename '$classBaseName'", null, $e);
-            }
-        } else {
-            $className = $classBaseName;
-        }
+        $broker = static::getBroker();
 
-        $class = new \ReflectionClass($className);
-        if (!$class->implementsInterface('Zend\Filter\Filter')) {
-            throw new Exception("Filter class not found from basename '$classBaseName'");
-        }
+        $filter = $broker->load($classBaseName, $args);
+        $filteredValue = $filter->filter($value);
 
-        if ((0 < count($args)) && $class->hasMethod('__construct')) {
-            $keys    = array_keys($args);
-            $numeric = false;
-            foreach($keys as $key) {
-                if (is_numeric($key)) {
-                    $numeric = true;
-                    break;
-                }
-            }
+        // Unregistering filter to allow different arguments on subsequent calls
+        $broker->unregister($classBaseName);
 
-            if ($numeric) {
-                $object = $class->newInstanceArgs($args);
-            } else {
-                $object = $class->newInstance($args);
-            }
-        } else {
-            $object = $class->newInstance();
-        }
-
-        return $object->filter($value);
+        return $filteredValue;
     }
 }

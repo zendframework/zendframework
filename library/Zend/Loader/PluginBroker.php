@@ -66,9 +66,15 @@ class PluginBroker implements Broker
             return $this->plugins[$pluginName];
         }
 
-        $class = $this->getClassLoader()->load($plugin);
-        if (empty($class)) {
-            throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+        if (class_exists($plugin)) {
+            // Allow loading fully-qualified class names via the broker
+            $class = $plugin;
+        } else {
+            // Unqualified class names are then passed to the class loader
+            $class = $this->getClassLoader()->load($plugin);
+            if (empty($class)) {
+                throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+            }
         }
 
         if (empty($options)) {
@@ -134,6 +140,7 @@ class PluginBroker implements Broker
      */
     public function unregister($name)
     {
+        $name = strtolower($name);
         if (isset($this->plugins[$name])) {
             unset($this->plugins[$name]);
             return true;

@@ -21,5 +21,5 @@ Testing layouts with custom inflection:
  * @version    $Id$
  */
 
-echo $this->placeholder('Zend\Layout\Layout')->message
+echo $this->broker('placeholder')->direct('Zend\Layout\Layout')->message
 ?>

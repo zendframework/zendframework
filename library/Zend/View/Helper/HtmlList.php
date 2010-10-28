@@ -64,7 +64,7 @@ class HtmlList extends FormElement
         foreach ($items as $item) {
             if (!is_array($item)) {
                 if ($escape) {
-                    $item = $this->view->escape($item);
+                    $item = $this->view->vars()->escape($item);
                 }
                 $list .= '<li>' . $item . '</li>' . self::EOL;
             } else {

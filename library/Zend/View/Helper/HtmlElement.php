@@ -91,7 +91,7 @@ abstract class HtmlElement extends AbstractHelper
     {
         $xhtml = '';
         foreach ((array) $attribs as $key => $val) {
-            $key = $this->view->escape($key);
+            $key = $this->view->vars()->escape($key);
 
             if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {
                 // Don't escape event attributes; _do_ substitute double quotes with singles
@@ -104,7 +104,7 @@ abstract class HtmlElement extends AbstractHelper
                 if (is_array($val)) {
                     $val = implode(' ', $val);
                 }
-                $val = $this->view->escape($val);
+                $val = $this->view->vars()->escape($val);
             }
 
             if ('id' == $key) {

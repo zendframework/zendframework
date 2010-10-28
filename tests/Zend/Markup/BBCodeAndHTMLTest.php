@@ -130,9 +130,8 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddTags()
     {
-        $this->_markup->getPluginLoader()->addPrefixPath(
-            'ZendTest\Markup\TestAsset\Renderer\Html',
-            'Zend/Markup/TestAsset/Renderer/Html'
+        $this->_markup->getPluginBroker()->getClassLoader()->registerPlugin(
+            'bar', 'ZendTest\Markup\TestAsset\Renderer\Html\Bar'
         );
 
         $this->_markup->addMarkup(

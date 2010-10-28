@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace ZendTest\Controller\Dispatcher;
-use Zend\Controller;
-use Zend\Controller\Request;
-use Zend\Controller\Response;
+
+use Zend\Controller,
+    Zend\Controller\Request,
+    Zend\Controller\Response;
 
 
 /**
@@ -49,12 +50,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         }
         $front = Controller\Front::getInstance();
         $front->resetInstance();
-        \Zend\Controller\Action\HelperBroker::removeHelper('viewRenderer');
+        $broker = $front->getHelperBroker();
         $this->_dispatcher = new \Zend\Controller\Dispatcher\Standard();
         $this->_dispatcher->setControllerDirectory(array(
             'application' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files',
             'admin'   => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin'
         ));
+        $this->_dispatcher->setHelperBroker($broker);
     }
 
     public function tearDown()
@@ -538,7 +540,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-2435
+     * @group ZF-2435
      */
     public function testCanRemoveControllerDirectory()
     {
@@ -553,7 +555,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-2693
+     * @group ZF-2693
      */
     public function testCamelCasedActionsNotRequestedWithWordSeparatorsShouldNotResolve()
     {
@@ -573,7 +575,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-2693
+     * @group ZF-2693
+     * @group disable
      */
     public function testCamelCasedActionsNotRequestedWithWordSeparatorsShouldResolveIfForced()
     {
@@ -603,7 +606,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2693
+     * @group ZF-2693
      */
     public function testForcingCamelCasedActionsNotRequestedWithWordSeparatorsShouldRaiseNotices()
     {
@@ -629,7 +632,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2887
+     * @group ZF-2887
      */
     public function testGetControllerClassThrowsExceptionIfNoDefaultModuleDefined()
     {

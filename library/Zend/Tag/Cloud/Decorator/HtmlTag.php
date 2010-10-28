@@ -25,6 +25,8 @@
  */
 namespace Zend\Tag\Cloud\Decorator;
 
+use Zend\Tag\ItemList;
+
 /**
  * Simple HTML decorator for tags
  *
@@ -259,8 +261,14 @@ class HTMLTag extends Tag
      * @param  \Zend\Tag\ItemList $tags
      * @return array
      */
-    public function render(\Zend\Tag\ItemList $tags)
+    public function render($tags)
     {
+        if (!$tags instanceof ItemList) {
+            throw new Exception(sprintf(
+                'HtmlTag::render() expects a Zend\Tag\ItemList argument; received "%s"',
+                (is_object($tags) ? get_class($tags) : gettype($tags))
+            ));
+        }
         if (null === ($weightValues = $this->getClassList())) {
             $weightValues = range($this->getMinFontSize(), $this->getMaxFontSize());
         }

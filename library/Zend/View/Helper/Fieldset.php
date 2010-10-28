@@ -56,7 +56,7 @@ class Fieldset extends FormElement
             $legendString = trim($attribs['legend']);
             if (!empty($legendString)) {
                 $legend = '<legend>'
-                        . (($escape) ? $this->view->escape($legendString) : $legendString)
+                        . (($escape) ? $this->view->vars()->escape($legendString) : $legendString)
                         . '</legend>' . PHP_EOL;
             }
             unset($attribs['legend']);
@@ -64,7 +64,7 @@ class Fieldset extends FormElement
 
         // get id
         if (!empty($id)) {
-            $id = ' id="' . $this->view->escape($id) . '"';
+            $id = ' id="' . $this->view->vars()->escape($id) . '"';
         } else {
             $id = '';
         }

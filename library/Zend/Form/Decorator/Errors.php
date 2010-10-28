@@ -60,7 +60,7 @@ class Errors extends AbstractDecorator
 
         $separator = $this->getSeparator();
         $placement = $this->getPlacement();
-        $errors    = $view->formErrors($errors, $this->getOptions());
+        $errors    = $view->broker('formErrors')->direct($errors, $this->getOptions());
 
         switch ($placement) {
             case self::APPEND:

@@ -26,15 +26,9 @@
 namespace Zend\Tag;
 
 use Zend\Config,
-    Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater,
-    Zend\Loader\PluginLoader;
+    Zend\Loader\Broker;
 
 /**
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Tag\Cloud\Exception
- * @uses       \Zend\Tag\Item
- * @uses       \Zend\Tag\ItemList
  * @category   Zend
  * @package    Zend_Tag
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -64,11 +58,11 @@ class Cloud
     protected $_tags = null;
 
     /**
-     * Plugin loader for decorators
+     * Plugin broker for decorators
      *
-     * @var \Zend\Loader\ShortNameLocater
+     * @var \Zend\Loader\Broker
      */
-    protected $_pluginLoader = null;
+    protected $_decoratorBroker = null;
 
     /**
      * Option keys to skip when calling setOptions()
@@ -234,8 +228,7 @@ class Cloud
         }
 
         if (is_string($decorator)) {
-            $classname = $this->getPluginLoader()->load($decorator);
-            $decorator = new $classname($options);
+            $decorator = $this->getDecoratorBroker()->load($decorator, $options);
         }
 
         if (!($decorator instanceof Cloud\Decorator\Cloud)) {
@@ -281,8 +274,7 @@ class Cloud
         }
 
         if (is_string($decorator)) {
-            $classname = $this->getPluginLoader()->load($decorator);
-            $decorator = new $classname($options);
+            $decorator = $this->getDecoratorBroker()->load($decorator, $options);
         }
 
         if (!($decorator instanceof Cloud\Decorator\Tag)) {
@@ -308,69 +300,29 @@ class Cloud
     }
 
     /**
-     * Set plugin loaders for use with decorators
+     * Set plugin broker for use with decorators
      *
-     * @param  \Zend\Loader\ShortNameLocater $loader
+     * @param  \Zend\Loader\Broker $broker
      * @return \Zend\Tag\Cloud
      */
-    public function setPluginLoader(ShortNameLocater $loader)
+    public function setDecoratorBroker(Broker $broker)
     {
-        $this->_pluginLoader = $loader;
+        $this->_decoratorBroker = $broker;
         return $this;
     }
 
     /**
-     * Get the plugin loader for decorators
+     * Get the plugin broker for decorators
      *
-     * @return \Zend\Loader\ShortNameLocater
+     * @return \Zend\Loader\Broker
      */
-    public function getPluginLoader()
+    public function getDecoratorBroker()
     {
-        if ($this->_pluginLoader === null) {
-            $prefix     = 'Zend\Tag\Cloud\Decorator\\';
-            $pathPrefix = 'Zend/Tag/Cloud/Decorator/';
-            $this->_pluginLoader = new PluginLoader(array($prefix => $pathPrefix));
+        if ($this->_decoratorBroker === null) {
+            $this->_decoratorBroker = new Cloud\DecoratorBroker();
         }
 
-        return $this->_pluginLoader;
-    }
-
-    /**
-     * Add many prefix paths at once
-     *
-     * @param  array $paths
-     * @return \Zend\Tag\Cloud
-     */
-    public function addPrefixPaths(array $paths)
-    {
-        if (isset($paths['prefix']) && isset($paths['path'])) {
-            return $this->addPrefixPath($paths['prefix'], $paths['path']);
-        }
-
-        foreach ($paths as $path) {
-            if (!isset($path['prefix']) || !isset($path['path'])) {
-                continue;
-            }
-
-            $this->addPrefixPath($path['prefix'], $path['path']);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add prefix path for plugin loader
-     *
-     * @param  string $prefix
-     * @param  string $path
-     * @return \Zend\Tag\Cloud
-     */
-    public function addPrefixPath($prefix, $path)
-    {
-        $loader = $this->getPluginLoader();
-        $loader->addPrefixPath($prefix, $path);
-
-        return $this;
+        return $this->_decoratorBroker;
     }
 
     /**

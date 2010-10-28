@@ -52,12 +52,117 @@ class PluginBroker implements Broker
     protected $validator;
 
     /**
+     * Constructor
+     *
+     * Allow configuration via options; see {@link setOptions()} for details.
+     * 
+     * @param  null|array|Traversable $options 
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if (null !== $options) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
+     * Configure plugin broker
+     * 
+     * @param  array|Traversable $options 
+     * @return PluginBroker
+     */
+    public function setOptions($options)
+    {
+        if (!is_array($options) && !$options instanceof \Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected an array or Traversable; received "%s"',
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
+        // Cache plugins until after a validator has been registered
+        $plugins = array();
+
+        foreach ($options as $key => $value) {
+            switch (strtolower($key)) {
+                case 'class_loader':
+                    if (is_string($value)) {
+                        if (!class_exists($value)) {
+                            throw new Exception\RuntimeException(sprintf(
+                                'Unknown class "%s" provided as class loader option',
+                                $value
+                            ));
+                        }
+                        $value = new $value;
+                    }
+                    if ($value instanceof ShortNameLocater) {
+                        $this->setClassLoader($value);
+                        break;
+                    } 
+
+                    if (!is_array($value) && !$value instanceof \Traversable) {
+                        throw new Exception\RuntimeException(sprintf(
+                            'Option passed for class loader (%s) is of an unknown type',
+                            (is_object($value) ? get_class($value) : gettype($value))
+                        ));
+                    }
+
+                    $class   = false;
+                    $options = null;
+                    foreach ($value as $k => $v) {
+                        switch (strtolower($k)) {
+                            case 'class':
+                                $class = $v;
+                                break;
+                            case 'options':
+                                $options = $v;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    if ($class) {
+                        $loader = new $class($options);
+                        $this->setClassLoader($loader);
+                    }
+                    break;
+                case 'plugins':
+                    if (!is_array($value) && !$value instanceof \Traversable) {
+                        throw new Exception\RuntimeException(sprintf(
+                            'Plugins option must be an array or Traversable; received "%s"',
+                            (is_object($value) ? get_class($value) : gettype($value))
+                        ));
+                    }
+
+                    // Aggregate plugins; register only after a validator has 
+                    // been registered
+                    $plugins = $value;
+                    break;
+                case 'validator':
+                    $this->setValidator($value);
+                    break;
+                default:
+                    // ignore unknown options
+                    break;
+            }
+        }
+
+        // Register any plugins discovered
+        foreach ($plugins as $name => $plugin) {
+            $this->register($name, $plugin);
+        }
+
+        return $this;
+    }
+
+    /**
      * Load and return a plugin instance
      * 
      * @param  string $plugin 
      * @param  array $options Options to pass to the plugin constructor
-     * @return Helper
-     * @throws Exception if helper not found
+     * @return object
+     * @throws Exception if plugin not found
      */
     public function load($plugin, array $options = null)
     {
@@ -66,13 +171,21 @@ class PluginBroker implements Broker
             return $this->plugins[$pluginName];
         }
 
-        $class = $this->getClassLoader()->load($plugin);
-        if (empty($class)) {
-            throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+        if (class_exists($plugin)) {
+            // Allow loading fully-qualified class names via the broker
+            $class = $plugin;
+        } else {
+            // Unqualified class names are then passed to the class loader
+            $class = $this->getClassLoader()->load($plugin);
+            if (empty($class)) {
+                throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+            }
         }
 
         if (empty($options)) {
             $instance = new $class();
+        } elseif ($this->isAssocArray($options)) {
+            $instance = new $class($options);
         } else {
             $r = new \ReflectionClass($class);
             $instance = $r->newInstanceArgs($options);
@@ -80,6 +193,27 @@ class PluginBroker implements Broker
 
         $this->register($pluginName, $instance);
         return $instance;
+    }
+
+    /**
+     * Get list of all loaded plugins
+     * 
+     * @return array
+     */
+    public function getPlugins()
+    {
+        return $this->plugins;
+    }
+
+    /**
+     * Whether or not a given plugin has been loaded
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function isLoaded($name)
+    {
+        return isset($this->plugins[$name]);
     }
 
     /**
@@ -95,6 +229,8 @@ class PluginBroker implements Broker
             throw new Exception\RuntimeException();
         }
 
+        $name = strtolower($name);
+
         $this->plugins[$name] = $plugin;
         return $this;
     }
@@ -109,6 +245,7 @@ class PluginBroker implements Broker
      */
     public function unregister($name)
     {
+        $name = strtolower($name);
         if (isset($this->plugins[$name])) {
             unset($this->plugins[$name]);
             return true;
@@ -182,6 +319,23 @@ class PluginBroker implements Broker
     {
         if (null !== ($validator = $this->getValidator())) {
             return call_user_func($validator, $plugin);
+        }
+        return true;
+    }
+
+    /**
+     * Is a value an associative array?
+     * 
+     * @param  mixed $value 
+     * @return bool
+     */
+    protected function isAssocArray($value)
+    {
+        if (!is_array($value)) {
+            return false;
+        }
+        if (array_keys($value) === range(0, count($value) - 1)) {
+            return false;
         }
         return true;
     }

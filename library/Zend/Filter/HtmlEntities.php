@@ -65,7 +65,7 @@ class HtmlEntities extends AbstractFilter
     {
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['quotestyle'] = array_shift($options);
             if (!empty($options)) {

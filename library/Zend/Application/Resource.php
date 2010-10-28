@@ -34,7 +34,7 @@ namespace Zend\Application;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Resource
+interface Resource extends BootstrapAware
 {
     /**
      * Constructor
@@ -45,21 +45,6 @@ interface Resource
      * @return void
      */
     public function __construct($options = null);
-
-    /**
-     * Set the bootstrap to which the resource is attached
-     *
-     * @param  \Zend\Application\Bootstrapper $bootstrap
-     * @return \Zend\Application\Resource
-     */
-    public function setBootstrap(Bootstrapper $bootstrap);
-
-    /**
-     * Retrieve the bootstrap to which the resource is attached
-     *
-     * @return \Zend\Application\Bootstrapper
-     */
-    public function getBootstrap();
 
     /**
      * Set resource options

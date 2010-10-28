@@ -87,11 +87,64 @@ $broker->register('url', $urlHelper);
     <sect2 id="zend.loader.plugin-broker.options">
         <title>Configuration Options</title>
 
+        <variablelist>
+            <title>PluginBroker Options</title>
 
-        <para>
-            This class has no constructor options, nor a <methodname>setOptions()</methodname>
-            method.
-        </para>
+            <varlistentry>
+                <term>class_loader</term>
+
+                <listitem>
+                    <para>
+                        The value of this option may be one of the following:
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <para>A string indicating a fully qualified class name to use for the
+                                class loader. The class must implement
+                                <interfacename>ShortNameLocater</interfacename>.</para>
+                        </listitem>
+
+                        <listitem>
+                            <para>An object implementing
+                                <interfacename>ShortNameLocater</interfacename>.</para>
+                        </listitem>
+
+                        <listitem>
+                            <para>An array or <interfacename>Traversable</interfacename> object
+                                containing the keys <varname>class</varname> and optionally
+                                <varname>options</varname>. An object of the type described in
+                                <varname>class</varname> will be instantiated, with the
+                                <varname>options</varname> provided, if any. The class must
+                                implement <interfacename>ShortNameLocater</interfacename>.</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>plugins</term>
+
+                <listitem>
+                    <para>
+                        The value of this option should be an array or
+                        <interfacename>Traversable</interfacename> object, containing plugin
+                        name/plugin object pairs.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>validator</term>
+
+                <listitem>
+                    <para>
+                        The value must be a valid callback, and will be used as a validator for
+                        loaded and registered plugins.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
     </sect2>
 
     <sect2 id="zend.loader.plugin-broker.methods">
@@ -185,6 +238,56 @@ $broker->register('url', $urlHelper);
                     previously loaded, that instance is removed from the registry. Note that this
                     does not prevent you from loading the plugin again; however, a new instance will
                     be returned in such a case.
+                </para>
+            </refsect1>
+        </refentry>
+
+        <refentry id="zend.loader.plugin-broker.methods.get-plugins">
+            <refnamediv>
+                <refname>getPlugins</refname>
+                <refpurpose>Retrieve all loaded plugins</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname>getPlugins</methodname>
+                    <methodparam>
+                        <funcparams></funcparams>
+                    </methodparam>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>getPlugins()</title>
+
+                <para>
+                    Retrieves a set of name/plugin pairs, indicating all currently loaded plugins.
+                </para>
+            </refsect1>
+        </refentry>
+
+        <refentry id="zend.loader.plugin-broker.methods.is-loaded">
+            <refnamediv>
+                <refname>isLoaded</refname>
+                <refpurpose>Determine if a given plugin has been loaded</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname>isLoaded</methodname>
+                    <methodparam>
+                        <funcparams>$name</funcparams>
+                    </methodparam>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>isLoaded()</title>
+
+                <para>
+                    Returns <constant>true</constant> if the plugin referenced by
+                    <varname>$name</varname> has been loaded by the broker previously,
+                    <constant>false</constant> otherwise.
                 </para>
             </refsect1>
         </refentry>

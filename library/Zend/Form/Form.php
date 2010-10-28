@@ -23,25 +23,26 @@
  */
 namespace Zend\Form;
 use Zend\Config\Config,
+    Zend\Controller\Front as FrontController,
     Zend\Registry,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader,
     Zend\Json\Json,
-    Zend\View\ViewEngine as View,
-    Zend\Translator,
-    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
+    Zend\View\Renderer as View,
+    Zend\Translator;
 
 /**
  * Zend_Form
  *
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
- * @uses       \Zend\Form\Exception
- * @uses       \Zend\Json\Json
- * @uses       \Zend\Loader
- * @uses       \Zend\Loader\PluginLoader
- * @uses       Zend\Registry
- * @uses       Zend\Validator\Validator
+ * A rewrite on this component is planned. At the bare minimum, this class 
+ * will be refactored to utilize the new PluginBroker implementation with
+ * regards to loading elements and decorators (though decorators may be 
+ * either removed or pushed to a DecoratorChain). Potentially, it may be 
+ * modified to accept a Zend\Filter\InputFilter instance, from which it would 
+ * inject values and error messages into attached elements.
+ *
+ * @todo       Convert to PluginBroker usage
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -229,7 +230,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -466,7 +467,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                     throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            $this->_loaders[$type] = new PluginLoader(
+            $this->_loaders[$type] = new PrefixPathLoader(
                 array('Zend\\' . $prefixSegment . '\\' => 'Zend/' . $pathSegment . '/')
             );
         }
@@ -2580,7 +2581,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Form\Form
      */
     public function setView(View $view = null)
@@ -2594,12 +2595,13 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      *
      * If none registered, attempts to pull from ViewRenderer.
      *
-     * @return \Zend\View\ViewEngine|null
+     * @return \Zend\View\Renderer|null
      */
     public function getView()
     {
         if (null === $this->_view) {
-            $viewRenderer = ActionHelperBroker::getStaticHelper('viewRenderer');
+            $front = FrontController::getInstance();
+            $viewRenderer = $front->getHelperBroker()->load('viewRenderer');
             $this->setView($viewRenderer->view);
         }
 
@@ -2880,7 +2882,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Render form
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     public function render(View $view = null)

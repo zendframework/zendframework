@@ -24,10 +24,11 @@
  * @namespace
  */
 namespace ZendTest\Controller\Action\Helper;
-use Zend\Controller\Action\Helper;
-use Zend\Controller\Action\HelperBroker;
-use Zend\View;
-use Zend\Filter;
+
+use Zend\Controller\Action\Helper,
+    Zend\Controller\Front as FrontController,
+    Zend\View,
+    Zend\Filter;
 
 require_once __DIR__ . '/../../_files/modules/foo/controllers/IndexController.php';
 require_once __DIR__ . '/../../_files/modules/bar/controllers/IndexController.php';
@@ -92,25 +93,15 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->front->addModuleDirectory($this->basePath . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules')
                     ->setRequest($this->request)
                     ->setResponse($this->response);
+        $this->broker   = $this->front->getHelperBroker();
 
         $this->helper   = new Helper\ViewRenderer();
-        HelperBroker::addHelper($this->helper);
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @access protected
-     */
-    protected function tearDown()
-    {
-        HelperBroker::resetHelpers();
+        $this->broker->register('viewRenderer', $this->helper);
     }
 
     public function testConstructorSetsViewWhenPassed()
     {
-        $view   = new View\View();
+        $view   = new View\PhpRenderer();
         $helper = new Helper\ViewRenderer($view);
         $this->assertNotNull(isset($helper->view));
         $this->assertSame($view, $helper->view);
@@ -137,7 +128,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testSetView()
     {
-        $view = new View\View();
+        $view = new View\PhpRenderer();
         $this->helper->setView($view);
         $this->assertSame($view, $this->helper->view);
     }
@@ -150,12 +141,14 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
     protected function _checkDefaults($module = 'foo', $count = 1)
     {
         $this->assertTrue(isset($this->helper->view));
-        $this->assertTrue($this->helper->view instanceof View\View);
+        $this->assertTrue($this->helper->view instanceof View\Renderer);
         $this->assertFalse($this->helper->getNeverRender());
         $this->assertFalse($this->helper->getNoRender());
         $this->assertNull($this->helper->getResponseSegment());
         $this->assertNull($this->helper->getScriptAction());
 
+        /*
+         * @todo determine how paths, helpers, and filters will be affected by view renderer
         $scriptPaths = $this->helper->view->getScriptPaths();
         $this->assertEquals($count, count($scriptPaths), var_export($scriptPaths, 1));
         $this->assertContains($module, $scriptPaths[0]);
@@ -181,6 +174,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
             }
         }
         $this->assertTrue($found, 'Did not find auto-initialized filter path: ' . var_export($filterPaths, 1));
+         */
     }
 
     public function testInitViewWithDefaults()
@@ -189,6 +183,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index');
 
         $controller = new \Foo\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
         $this->helper->initView();
         $this->_checkDefaults();
@@ -199,6 +194,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->request->setModuleName('foo')
                       ->setControllerName('index');
         $controller = new \Foo\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
 
         $this->helper->initView();
@@ -213,6 +209,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->request->setModuleName('foo')
                       ->setControllerName('index');
         $controller = new \Foo\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
 
         $this->helper->initView();
@@ -221,6 +218,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->request->setModuleName('bar')
                       ->setControllerName('index');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
         $this->helper->initView();
         $this->_checkDefaults('bar', 2);
@@ -231,6 +229,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->request->setModuleName('foo')
                       ->setControllerName('index');
         $controller = new \Foo\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
 
         $this->helper->preDispatch();
@@ -242,6 +241,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->request->setModuleName('foo')
                       ->setControllerName('index');
         $controller = new \Foo\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
 
         $viewDir = __DIR__ . str_repeat(DIRECTORY_SEPARATOR . '..', 2) . DIRECTORY_SEPARATOR . 'views';
@@ -261,13 +261,15 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $this->helper->getScriptAction());
         $this->assertEquals('baz', $this->helper->getResponseSegment());
 
-        $scriptPaths = $this->helper->view->getScriptPaths();
+        $scriptPaths = $this->helper->view->resolver()->getPaths();
         $scriptPath  = $scriptPaths[0];
         $this->assertContains(
             $this->_normalizePath($viewDir),
             $this->_normalizePath($scriptPath)
             );
 
+        /*
+         * @todo Determine how helpers and filters are affected by view renderer
         $helperPaths = $this->helper->view->getHelperPaths();
         $found       = false;
         foreach ($helperPaths as $prefix => $paths) {
@@ -285,6 +287,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
             }
         }
         $this->assertTrue($found, 'Filter prefix not set according to spec' . var_export($filterPaths, 1));
+         */
     }
 
     public function testNeverRenderFlag()
@@ -306,6 +309,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setActionName('test')
                       ->setDispatched(true);
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
         $this->helper->postDispatch();
 
@@ -384,6 +388,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setActionName('test')
                       ->setDispatched(true);
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
         $this->helper->postDispatch();
 
@@ -541,6 +546,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->renderScript('index/test.phtml');
         $body = $this->response->getBody();
         $this->assertContains('Rendered index/test.phtml in bar module', $body);
@@ -552,6 +558,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->renderScript('index/test.phtml', 'foo');
         $body = $this->response->getBody('foo');
         $this->assertContains('Rendered index/test.phtml in bar module', $body);
@@ -563,6 +570,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setResponseSegment('foo');
         $this->helper->renderScript('index/test.phtml');
         $body = $this->response->getBody('foo');
@@ -575,6 +583,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->render();
         $body = $this->response->getBody();
         $this->assertContains('Rendered index/test.phtml in bar module', $body);
@@ -586,6 +595,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('index');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->render('test');
         $body = $this->response->getBody();
         $this->assertContains('Rendered index/test.phtml in bar module', $body);
@@ -597,6 +607,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->render(null, null, true);
         $body = $this->response->getBody();
         $this->assertContains('Rendered test.phtml in bar module', $body);
@@ -608,6 +619,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->render(null, 'foo');
         $body = $this->response->getBody('foo');
         $this->assertContains('Rendered index/test.phtml in bar module', $body);
@@ -619,6 +631,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('index');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->renderBySpec('foo', array('controller' => 'test', 'suffix' => 'php'));
         $body = $this->response->getBody();
         $this->assertContains('Rendered test/foo.php', $body);
@@ -630,6 +643,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('index');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->renderBySpec('foo', array('controller' => 'test', 'suffix' => 'php'), 'foo');
         $body = $this->response->getBody('foo');
         $this->assertContains('Rendered test/foo.php', $body);
@@ -642,6 +656,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setActionName('index');
         $this->front->setParam('noViewRenderer', true);
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->assertNull($controller->view);
     }
 
@@ -652,6 +667,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setActionName('index');
         $this->front->setParam('noViewRenderer', true);
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->postDispatch();
         $body = $this->response->getBody();
         $this->assertTrue(empty($body));
@@ -663,6 +679,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('foo')
                       ->setActionName('myBar');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
         $scriptName = $this->helper->getViewScript();
         $this->assertEquals('foo/my-bar.phtml', $scriptName);
@@ -709,8 +726,9 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('index');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
 
-        $this->helper->view->addBasePath($this->basePath . '/_files/modules/bar/views');
+        $this->helper->view->resolver()->addPath($this->basePath . '/_files/modules/bar/views');
 
         $inflector = new Filter\Inflector('test.phtml');
         $inflector->addFilterRule(':controller', array('Word\CamelCaseToDash'));
@@ -727,8 +745,9 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('test');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
 
-        $this->helper->view->addBasePath($this->basePath . '/_files/modules/bar/views');
+        $this->helper->view->resolver()->addPath($this->basePath . '/_files/modules/bar/views');
 
 
         $inflector = new Filter\Inflector('test.phtml');
@@ -765,17 +784,18 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('index')
                       ->setActionName('admin');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
 
         $this->helper->setViewBasePathSpec(':moduleDir/:module');
         $this->helper->initView();
 
-        $viewScriptPaths = $this->helper->view->getAllPaths();
+        $viewScriptPaths = $this->helper->view->resolver()->getPaths();
 
         $expectedPathRegex = '#modules/bar/bar/scripts/$#';
         $this->assertRegExp(
             $expectedPathRegex,
-            $this->_normalizePath($viewScriptPaths['script'][0])
+            $this->_normalizePath($viewScriptPaths[0])
             );
         $this->assertEquals($this->helper->getViewScript(), 'index/admin.phtml');
     }
@@ -789,13 +809,14 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('car.bar')
                       ->setActionName('baz');
         $controller = new \Bar\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
         $this->helper->setActionController($controller);
-        $viewScriptPaths = $this->helper->view->getAllPaths();
+        $viewScriptPaths = $this->helper->view->resolver()->getPaths();
 
         $expectedPathRegex = '#modules/foo/views/scripts/$#';
         $this->assertRegExp(
             $expectedPathRegex,
-            $this->_normalizePath($viewScriptPaths['script'][0])
+            $this->_normalizePath($viewScriptPaths[0])
             );
         $this->assertEquals('car-bar/baz.phtml', $this->helper->getViewScript());
     }
@@ -807,6 +828,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
                       ->setControllerName('admin_index')
                       ->setActionName('use-helper');
         $controller = new \Foo\Admin\IndexController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
 
         $this->helper->render();
         $body = $this->response->getBody();
@@ -819,6 +841,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->request->setControllerName('admin_helper')
                       ->setActionName('render');
         $controller = new \Admin\HelperController($this->request, $this->response, array());
+        $controller->setHelperBroker($this->broker);
 
         $this->helper->render();
         $body = $this->response->getBody();

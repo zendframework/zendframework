@@ -24,11 +24,11 @@
  * @namespace
  */
 namespace Zend\Controller\Action\Helper;
-use Zend\Controller\Action\HelperBroker;
 
-use Zend\Config;
-use Zend\Controller\Action;
-use Zend\View;
+use Zend\Config,
+    Zend\Controller\Action,
+    Zend\Controller\Front as FrontController,
+    Zend\View;
 
 /**
  * Simplify context switching based on requested format
@@ -327,9 +327,9 @@ class ContextSwitch extends AbstractHelper
             return;
         }
 
-        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = $this->getBroker()->load('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\ViewEngine) {
+        if ($view instanceof View\Renderer) {
             $viewRenderer->setNoRender(true);
         }
     }
@@ -1070,14 +1070,15 @@ class ContextSwitch extends AbstractHelper
             return;
         }
 
-        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = $this->getBroker()->load('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\ViewEngine) {
-            if(method_exists($view, 'getVars')) {
-                $vars = \Zend\Json\Json::encode($view->getVars());
+        if ($view instanceof View\Renderer) {
+            if (method_exists($view, 'vars')) {
+                $vars = $view->vars()->getArrayCopy();
+                $vars = \Zend\Json\Json::encode($vars);
                 $this->getResponse()->setBody($vars);
             } else {
-                throw new Action\Exception('View does not implement the getVars() method needed to encode the view into JSON');
+                throw new Action\Exception('View does not implement the vars() method needed to encode the view into JSON');
             }
         }
     }
@@ -1332,10 +1333,25 @@ class ContextSwitch extends AbstractHelper
     protected function _getViewRenderer()
     {
         if (null === $this->_viewRenderer) {
-            $this->_viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+            $this->_viewRenderer = $this->getBroker()->load('viewRenderer');
         }
 
         return $this->_viewRenderer;
+    }
+
+    /**
+     * Retrieve broker
+     *
+     * Hack for now, until this can be refactored. Ensures a broker.
+     * 
+     * @return Broker
+     */
+    public function getBroker()
+    {
+        if (null === parent::getBroker()) {
+            $this->setBroker(FrontController::getInstance()->getHelperBroker());
+        }
+        return $this->broker;
     }
 }
 

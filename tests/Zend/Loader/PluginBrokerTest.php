@@ -172,4 +172,93 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $plugin2 = $this->broker->load('Sample');
         $this->assertSame($plugin1, $plugin2);
     }
+
+    public function testCanRetrieveAllLoadedPlugins()
+    {
+        $this->broker->register('sample', new TestAsset\SamplePlugin());
+        $this->broker->load('sample');
+        $plugins = $this->broker->getPlugins();
+        $this->assertType('array', $plugins);
+        $this->assertEquals(1, count($plugins));
+    }
+
+    public function testIsLoadedReturnsFalseForUnknownPluginNames()
+    {
+        $this->assertFalse($this->broker->isLoaded('__foo__'));
+    }
+
+    public function testIsLoadedReturnsFalseForUnloadedPlugin()
+    {
+        $this->broker->getClassLoader()->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+        $this->assertFalse($this->broker->isLoaded('sample'));
+    }
+
+    public function testIsLoadedReturnsTrueForLoadedPlugin()
+    {
+        $this->broker->getClassLoader()->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+        $this->broker->load('sample');
+        $this->assertTrue($this->broker->isLoaded('sample'));
+    }
+
+    public function testIsLoadedReturnsTrueForRegisteredPlugin()
+    {
+        $this->broker->register('sample', new TestAsset\SamplePlugin());
+        $this->assertTrue($this->broker->isLoaded('sample'));
+    }
+
+    /**
+     * Unsure if this is functionality we want to support; requires some form
+     * of efficient options hashing, which may negatively impact performance.
+     *
+     * @group disable
+     */
+    public function testLoadTakesIntoAccountPassedOptions()
+    {
+        $loader = $this->broker->getClassLoader();
+        $loader->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+
+        $sample1 = $this->broker->load('sample');
+        $sample2 = $this->broker->load('sample', 'foo');
+        $sample3 = $this->broker->load('sample', array('foo' => 'bar'));
+
+        $this->assertNotSame($sample1, $sample2);
+        $this->assertNotSame($sample1, $sample3);
+        $this->assertNotSame($sample2, $sample3);
+
+        $this->assertNull($sample1->options);
+        $this->assertEquals('foo', $sample2->options);
+        $this->assertEquals(array('foo' => 'bar'), $sample3->options);
+    }
+
+    public function testAllowsConfigurationViaConstructor()
+    {
+        $validator = function($plugin) {
+            return true;
+        };
+        $broker = new PluginBroker(array(
+            'class_loader' => array(
+                'class'   => 'Zend\Loader\PrefixPathLoader',
+                'options' => array(
+                    'ZendTest\UnusualNamespace' => __DIR__ . '/TestAsset',
+                )
+            ),
+            'plugins'      => array(
+                'test' => $this,
+            ),
+            'validator'    => $validator,
+        ));
+
+        $loader = $broker->getClassLoader();
+        $this->assertType('Zend\Loader\PrefixPathLoader', $loader);
+        $this->assertEquals('ZendTest\UnusualNamespace\ClassMappedClass', $loader->load('ClassMappedClass'));
+
+        $this->assertTrue($broker->isLoaded('test'));
+        $this->assertSame($validator, $broker->getValidator());
+
+        $broker = new PluginBroker(array(
+            'class_loader' => 'ZendTest\Loader\TestAsset\CustomClassLoader',
+        ));
+        $loader = $broker->getClassLoader();
+        $this->assertType('ZendTest\Loader\TestAsset\CustomClassLoader', $loader);
+    }
 }

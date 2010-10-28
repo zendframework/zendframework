@@ -40,20 +40,29 @@ abstract class AbstractHelper implements Helper
     /**
      * View object
      *
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
-    public $view = null;
+    protected $view = null;
 
     /**
      * Set the View object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\View\Helper\AbstractHelper
      */
-    public function setView(\Zend\View\ViewEngine $view)
+    public function setView(\Zend\View\Renderer $view)
     {
         $this->view = $view;
         return $this;
     }
 
+    /**
+     * Get the view object
+     * 
+     * @return null|AbstractHelper
+     */
+    public function getView()
+    {
+        return $this->view;
+    }
 }

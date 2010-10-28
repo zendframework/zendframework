@@ -52,7 +52,7 @@ class StaticByteEncoding extends ByteEncoding
      *
      * @param array $cmapData Array whose keys are Unicode character codes and
      *   values are glyph numbers.
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __construct($cmapData)
     {

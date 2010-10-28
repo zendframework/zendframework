@@ -91,7 +91,7 @@ class String extends AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function readBytes($byteCount)
     {

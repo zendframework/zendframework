@@ -41,7 +41,7 @@ interface StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function encode($data, $params = null);
 
@@ -51,7 +51,7 @@ interface StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function decode($data, $params = null);
 }

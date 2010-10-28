@@ -82,7 +82,7 @@ class StreamObject extends IndirectObject
      * @param integer $genNum
      * @param \Zend\Pdf\ObjectFactory $factory
      * @param \Zend\Pdf\InternalType\DictionaryObject|null $dictionary
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __construct($val, $objNum, $genNum, ObjectFactory $factory, $dictionary = null)
     {
@@ -179,7 +179,7 @@ class StreamObject extends IndirectObject
     /**
      * Decode stream
      *
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     private function _decodeStream()
     {
@@ -233,7 +233,7 @@ class StreamObject extends IndirectObject
     /**
      * Encode stream
      *
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     private function _encodeStream()
     {
@@ -287,7 +287,7 @@ class StreamObject extends IndirectObject
      *
      * @param string $property
      * @return mixed
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __get($property)
     {

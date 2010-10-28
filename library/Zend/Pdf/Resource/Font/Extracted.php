@@ -65,7 +65,7 @@ class Extracted extends AbstractFont
      * \Zend\Pdf\InternalType\IndirectObject object
      *
      * @param mixed $fontDictionary
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __construct($fontDictionary)
     {
@@ -204,7 +204,7 @@ class Extracted extends AbstractFont
      *
      * @param array $glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function widthsForGlyphs($glyphNumbers)
     {
@@ -218,7 +218,7 @@ class Extracted extends AbstractFont
      *
      * @param integer $glyphNumber
      * @return integer
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function widthForGlyph($glyphNumber)
     {

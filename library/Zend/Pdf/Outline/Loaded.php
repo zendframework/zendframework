@@ -73,7 +73,7 @@ class Loaded extends AbstractOutline
      * Get outline title.
      *
      * @return string
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function getTitle()
     {
@@ -236,7 +236,7 @@ class Loaded extends AbstractOutline
      * Get outline target.
      *
      * @return \Zend\Pdf\InternalStructure\NavigationTarget
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function getTarget()
     {
@@ -258,7 +258,7 @@ class Loaded extends AbstractOutline
      *
      * @param \Zend\Pdf\InternalStructure\NavigationTarget|string $target
      * @return \Zend\Pdf\Outline\AbstractOutline
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function setTarget($target = null)
     {
@@ -306,7 +306,7 @@ class Loaded extends AbstractOutline
      * @param SplObjectStorage $processedOutlines  List of already processed Outline dictionaries,
      *                                             used to avoid cyclic references
      * @return \Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedDictionaries = null)
     {
@@ -365,7 +365,7 @@ class Loaded extends AbstractOutline
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $prev     Previous outline dictionary reference
      * @param SplObjectStorage $processedOutlines  List of already processed outlines
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function dumpOutline(ObjectFactory $factory,
                                               $updateNavigation,

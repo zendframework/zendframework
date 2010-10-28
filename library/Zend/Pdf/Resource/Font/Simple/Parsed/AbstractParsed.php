@@ -49,7 +49,7 @@ abstract class AbstractParsed extends \Zend\Pdf\Resource\Font\Simple\AbstractSim
      * Object constructor
      *
      * @param \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType $fontParser Font parser object containing OpenType file.
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __construct(OpenTypeFontParser\AbstractOpenType $fontParser)
     {

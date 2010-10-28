@@ -56,7 +56,7 @@ class FitBoundingBoxHorizontally extends Explicit
      * @param \Zend\Pdf\Page|integer $page  Page object or page number
      * @param float $top   Top edge of displayed page
      * @return \Zend\Pdf\Destination\FitBoundingBoxHorizontally
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function create($page, $top)
     {

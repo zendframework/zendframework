@@ -181,7 +181,7 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
      *
      * @param array $options
      * @return \Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function setOptions(array $options)
     {
@@ -237,7 +237,7 @@ abstract class AbstractOutline implements \RecursiveIterator, \Countable
      *   'target' - \Zend\Pdf\InternalStructure\NavigationTarget object or string, outline item destination
      *
      * @return \Zend\Pdf\Outline\AbstractOutline
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function create($param1, $param2 = null)
     {

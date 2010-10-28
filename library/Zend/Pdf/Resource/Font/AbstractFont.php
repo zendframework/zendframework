@@ -470,7 +470,7 @@ abstract class AbstractFont extends Resource\AbstractResource
      *
      * @param array $glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     abstract public function widthsForGlyphs($glyphNumbers);
 
@@ -481,7 +481,7 @@ abstract class AbstractFont extends Resource\AbstractResource
      *
      * @param integer $glyphNumber
      * @return integer
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     abstract public function widthForGlyph($glyphNumber);
 

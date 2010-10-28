@@ -241,7 +241,7 @@ class PdfDocument
      *
      * @param string $filename
      * @param boolean $updateOnly
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function save($filename, $updateOnly = false)
     {
@@ -270,7 +270,7 @@ class PdfDocument
      *
      * @param string  $source - PDF file to load
      * @param integer $revision
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      * @return \Zend\Pdf\PdfDocument
      */
     public function __construct($source = null, $revision = null, $load = false)
@@ -452,7 +452,7 @@ class PdfDocument
      *
      * @param \Zend\Pdf\InternalType\IndirectObjectReference $root Document catalog entry
      * @param string $pdfHeaderVersion
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     protected function _loadNamedDestinations(InternalType\IndirectObjectReference $root, $pdfHeaderVersion)
     {
@@ -922,7 +922,7 @@ class PdfDocument
      * @param \Zend\Pdf\Destination\AbstractDestination $destination  Destination to resolve
      * @param boolean $refreshPagesHash  Refresh page collection hashes before processing
      * @return \Zend\Pdf\Page|null
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function resolveDestination(Destination\AbstractDestination $destination, $refreshPageCollectionHashes = true)
     {
@@ -1020,7 +1020,7 @@ class PdfDocument
      * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function extractFonts()
     {
@@ -1070,7 +1070,7 @@ class PdfDocument
      * $fontName should be specified in UTF-8 encoding
      *
      * @return \Zend\Pdf\Resource\Font\Extracted|null
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function extractFont($fontName)
     {
@@ -1127,7 +1127,7 @@ class PdfDocument
      * @param boolean $newSegmentOnly
      * @param resource $outputStream
      * @return string
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function render($newSegmentOnly = false, $outputStream = null)
     {

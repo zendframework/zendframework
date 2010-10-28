@@ -90,7 +90,7 @@ class IndirectObjectReference extends AbstractTypeObject
      * @param integer $genNum
      * @param \Zend\Pdf\InternalType\IndirectObjectReference\Context $context
      * @param \Zend\Pdf\ObjectFactory $factory
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __construct($objNum,
                                 $genNum = 0,
@@ -162,7 +162,7 @@ class IndirectObjectReference extends AbstractTypeObject
      * $value member of current PDF Reference object
      * $obj can be null
      *
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     private function _dereference()
     {

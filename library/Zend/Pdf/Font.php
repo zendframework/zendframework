@@ -48,8 +48,6 @@ use Zend\Pdf\Exception;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-use Zend\Pdf\Exception;
-
 abstract class Font
 {
     /**** Class Constants ****/
@@ -472,7 +470,7 @@ abstract class Font
      * @param string $name Full PostScript name of font.
      * @param integer $embeddingOptions (optional) Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\AbstractFont
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function fontWithName($name, $embeddingOptions = 0)
         {
@@ -583,7 +581,7 @@ abstract class Font
      * @param string $filePath Full path to the font file.
      * @param integer $embeddingOptions (optional) Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\AbstractFont
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function fontWithPath($filePath, $embeddingOptions = 0)
     {
@@ -685,7 +683,7 @@ abstract class Font
      * @param integer $embeddingOptions Options for font embedding.
      * @return \Zend\Pdf\Resource\Font\OpenType\TrueType May also return null if
      *   the data source does not appear to contain a TrueType font.
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     protected static function _extractTrueTypeFont($dataSource, $embeddingOptions)
     {

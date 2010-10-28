@@ -122,7 +122,7 @@ abstract class Image
      *
      * @param string $filePath Full path to the image file.
      * @return \Zend\Pdf\Resource\Image\AbstractImage
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function imageWithPath($filePath)
     {
@@ -194,7 +194,7 @@ abstract class Image
      * @param \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource $dataSource
      * @return \Zend\Pdf\Resource\Image\Jpeg May also return null if
      *   the data source does not appear to contain valid image data.
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     protected static function _extractJpegImage($dataSource)
     {
@@ -229,7 +229,7 @@ abstract class Image
      * @param \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource $dataSource
      * @return \Zend\Pdf\Resource\Image\Tiff May also return null if
      *   the data source does not appear to contain valid image data.
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     protected static function _extractTiffImage($dataSource)
     {

@@ -52,7 +52,7 @@ class FontDescriptor
 {
     /**
      * Object constructor
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public function __construct()
     {
@@ -77,7 +77,7 @@ class FontDescriptor
      * @param \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType $fontParser Font parser object containing parsed TrueType file.
      * @param integer $embeddingOptions Options for font embedding.
      * @return \Zend\Pdf\InternalType\DictionaryObject
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     static public function factory(AbstractFont $font,
                                    OpenTypeFontParser\AbstractOpenType $fontParser,

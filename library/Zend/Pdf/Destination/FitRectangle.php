@@ -60,7 +60,7 @@ class FitRectangle extends Explicit
      * @param float $right   Right edge of displayed page
      * @param float $top     Top edge of displayed page
      * @return \Zend\Pdf\Destination\FitRectangle
-     * @throws \Zend\Pdf\Exception\CorruptedPdfException
+     * @throws \Zend\Pdf\Exception
      */
     public static function create($page, $left, $bottom, $right, $top)
     {

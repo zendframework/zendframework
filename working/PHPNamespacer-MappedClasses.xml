@@ -12197,7 +12197,7 @@
       <originalClassName>Zend_Service_Amazon_SimpleDb</originalClassName>
       <newRelativeFilePath>Zend/Service/Amazon/SimpleDb/SimpleDb.php</newRelativeFilePath>
       <newNamespace>Zend\Service\Amazon\SimpleDb</newNamespace>
-      <newClassName>SimbleDb</newClassName>
+      <newClassName>SimpleDb</newClassName>
       <newFullyQualifiedName>Zend\Service\Amazon\SimpleDb\SimpleDb</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>

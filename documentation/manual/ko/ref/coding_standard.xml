@@ -695,7 +695,6 @@ switch ($numPeople) {
  *
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://www.zend.com/license/3_0.txt   PHP License 3.0
- * @version    $Id:$
  * @link       http://dev.zend.com/package/PackageName
  * @since      File available since Release 1.2.0
 */]]>

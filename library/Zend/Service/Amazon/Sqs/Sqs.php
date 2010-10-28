@@ -17,7 +17,6 @@
  * @subpackage Amazon_Sqs
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -40,11 +39,7 @@ use Zend\Crypt;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://aws.amazon.com/sqs/ Amazon Simple Queue Service
  */
-<<<<<<< HEAD:library/Zend/Service/Amazon/Sqs.php
-class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_AbstractService
-=======
 class Sqs extends \Zend\Service\Amazon\AbstractAmazon
->>>>>>> merges/farazdagi:library/Zend/Service/Amazon/Sqs/Sqs.php
 {
     /**
      * Default timeout for createQueue() function

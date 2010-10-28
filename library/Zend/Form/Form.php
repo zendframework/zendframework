@@ -47,7 +47,6 @@ use Zend\Config\Config,
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class Form implements \Iterator, \Countable, \Zend\Validator\Validator
 {
@@ -2233,7 +2232,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         }
         $context = $data;
         foreach ($this->getElements() as $key => $element) {
-            if (null !== $translator && !$element->hasTranslator()) {
+            if (null !== $translator && $this->hasTranslator()
+                    && !$element->hasTranslator()) {
                 $element->setTranslator($translator);
             }
             $check = $data;

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Form;
@@ -4065,7 +4064,39 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array('sub' => array('valid' => 1234)), $this->form->getValidValues($data));
     }
-        
+
+     /**
+     * @group ZF-9275
+     */
+    public function testElementTranslatorNotOverriddenbyGlobalTranslatorDuringValidation()
+    {
+        $translator = new Translator('ArrayAdapter', array('foo' => 'bar'));
+        Registry::set('Zend_Translate', $translator);
+
+        $this->form->addElement('text', 'foo');
+        $this->form->isValid(array());
+
+        $received = $this->form->foo->hasTranslator();
+        $this->assertSame(false, $received);
+    }
+
+    /**
+     * @group ZF-9275
+     */
+    public function testZendValidateDefaultTranslatorOverridesZendTranslateDefaultTranslatorAtElementLevel()
+    {
+        $translate = new Translator('ArrayAdapter', array('isEmpty' => 'translate'));
+        Registry::set('Zend_Translate', $translate);
+
+        $translateValidate = new Translator('ArrayAdapter', array('isEmpty' => 'validate'));
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($translateValidate);
+
+        $this->form->addElement('text', 'foo', array('required'=>1));
+        $this->form->isValid(array());
+
+        $this->assertSame(array('isEmpty' => 'validate'), $this->form->foo->getMessages());
+    }
+    
     /**
      * @group ZF-9494
      */

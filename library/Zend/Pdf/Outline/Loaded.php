@@ -17,7 +17,6 @@
  * @subpackage Zend_PDF_Outline
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -370,10 +369,10 @@ class Loaded extends AbstractOutline
      * @throws \Zend\Pdf\Exception
      */
     public function dumpOutline(ObjectFactory $factory,
-                                                                     $updateNavigation,
-                                     InternalType\AbstractTypeObject $parent,
-                                     InternalType\AbstractTypeObject $prev = null,
-                                                   \SplObjectStorage $processedOutlines = null)
+                                              $updateNavigation,
+              InternalType\AbstractTypeObject $parent,
+              InternalType\AbstractTypeObject $prev = null,
+                            \SplObjectStorage $processedOutlines = null)
     {
         if ($processedOutlines === null) {
             $processedOutlines = new \SplObjectStorage();

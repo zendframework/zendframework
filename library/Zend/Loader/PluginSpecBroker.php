@@ -38,6 +38,42 @@ class PluginSpecBroker extends PluginBroker implements LazyLoadingBroker
     protected $specs = array();
 
     /**
+     * Set object state
+     *
+     * Allows configuration of broker. Options are first passed to parent 
+     * method, and then scanned for a "specs" key; if found, it is used to
+     * configure plugin specifications.
+     * 
+     * @param  array|Traversable $options 
+     * @return PluginSpecBroker
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        foreach ($options as $key => $value) {
+            switch(strtolower($key)) {
+                case 'specs':
+                    if (!is_array($value) && !$value instanceof \Traversable) {
+                        throw new Exception\RuntimeException(sprintf(
+                            'Expected array or Traversable for specs option; received "%s"',
+                            (is_object($value) ? get_class($value) : gettype($value))
+                        ));
+                    }
+                    foreach ($value as $name => $pluginOptions) {
+                        $this->registerSpec($name, $pluginOptions);
+                    }
+                    break;
+                default:
+                    // ignore unknown options
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Register a plugin specification
      *
      * Registers a plugin "specification". Implementations should allow

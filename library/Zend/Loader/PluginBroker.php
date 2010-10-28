@@ -52,6 +52,111 @@ class PluginBroker implements Broker
     protected $validator;
 
     /**
+     * Constructor
+     *
+     * Allow configuration via options; see {@link setOptions()} for details.
+     * 
+     * @param  null|array|Traversable $options 
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if (null !== $options) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
+     * Configure plugin broker
+     * 
+     * @param  array|Traversable $options 
+     * @return PluginBroker
+     */
+    public function setOptions($options)
+    {
+        if (!is_array($options) && !$options instanceof \Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected an array or Traversable; received "%s"',
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
+        // Cache plugins until after a validator has been registered
+        $plugins = array();
+
+        foreach ($options as $key => $value) {
+            switch (strtolower($key)) {
+                case 'class_loader':
+                    if (is_string($value)) {
+                        if (!class_exists($value)) {
+                            throw new Exception\RuntimeException(sprintf(
+                                'Unknown class "%s" provided as class loader option',
+                                $value
+                            ));
+                        }
+                        $value = new $value;
+                    }
+                    if ($value instanceof ShortNameLocater) {
+                        $this->setClassLoader($value);
+                        break;
+                    } 
+
+                    if (!is_array($value) && !$value instanceof \Traversable) {
+                        throw new Exception\RuntimeException(sprintf(
+                            'Option passed for class loader (%s) is of an unknown type',
+                            (is_object($value) ? get_class($value) : gettype($value))
+                        ));
+                    }
+
+                    $class   = false;
+                    $options = null;
+                    foreach ($value as $k => $v) {
+                        switch (strtolower($k)) {
+                            case 'class':
+                                $class = $v;
+                                break;
+                            case 'options':
+                                $options = $v;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    if ($class) {
+                        $loader = new $class($options);
+                        $this->setClassLoader($loader);
+                    }
+                    break;
+                case 'plugins':
+                    if (!is_array($value) && !$value instanceof \Traversable) {
+                        throw new Exception\RuntimeException(sprintf(
+                            'Plugins option must be an array or Traversable; received "%s"',
+                            (is_object($value) ? get_class($value) : gettype($value))
+                        ));
+                    }
+
+                    // Aggregate plugins; register only after a validator has 
+                    // been registered
+                    $plugins = $value;
+                    break;
+                case 'validator':
+                    $this->setValidator($value);
+                    break;
+                default:
+                    // ignore unknown options
+                    break;
+            }
+        }
+
+        // Register any plugins discovered
+        foreach ($plugins as $name => $plugin) {
+            $this->register($name, $plugin);
+        }
+
+        return $this;
+    }
+
+    /**
      * Load and return a plugin instance
      * 
      * @param  string $plugin 

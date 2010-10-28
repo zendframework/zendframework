@@ -176,4 +176,43 @@ class PluginSpecBrokerTest extends \PHPUnit_Framework_TestCase
         $this->broker->unregisterSpec('sample');
         $this->assertFalse($this->broker->hasPlugin('sample'));
     }
+
+    public function testAllowsConfigurationViaConstructor()
+    {
+        $validator = function($plugin) {
+            return true;
+        };
+        $broker = new PluginSpecBroker(array(
+            'class_loader' => array(
+                'class'   => 'Zend\Loader\PrefixPathLoader',
+                'options' => array(
+                    'ZendTest\UnusualNamespace' => __DIR__ . '/TestAsset',
+                )
+            ),
+            'specs'        => array(
+                'ClassMappedClass' => array(array('foo' => 'bar')),
+            ),
+            'plugins'      => array(
+                'test' => $this,
+            ),
+            'validator'    => $validator,
+        ));
+
+        $loader = $broker->getClassLoader();
+        $this->assertType('Zend\Loader\PrefixPathLoader', $loader);
+        $this->assertEquals('ZendTest\UnusualNamespace\ClassMappedClass', $loader->load('ClassMappedClass'));
+
+        $this->assertTrue($broker->isLoaded('test'));
+        $this->assertSame($validator, $broker->getValidator());
+
+        $plugin = $broker->load('ClassMappedClass');
+        $this->assertType('ZendTest\UnusualNamespace\ClassMappedClass', $plugin);
+        $this->assertEquals(array('foo' => 'bar'), $plugin->options);
+
+        $broker = new PluginSpecBroker(array(
+            'class_loader' => 'ZendTest\Loader\TestAsset\CustomClassLoader',
+        ));
+        $loader = $broker->getClassLoader();
+        $this->assertType('ZendTest\Loader\TestAsset\CustomClassLoader', $loader);
+    }
 }

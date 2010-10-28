@@ -17,10 +17,11 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-namespace ZendTest\UnusualNamespace;
+namespace ZendTest\Loader\TestAsset;
+
+use Zend\Loader\PluginClassLoader;
 
 /**
  * @category   Zend
@@ -30,12 +31,6 @@ namespace ZendTest\UnusualNamespace;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-class ClassMappedClass
+class CustomClassLoader extends PluginClassLoader
 {
-    public $options;
-
-    public function __construct($options = null)
-    {
-        $this->options = $options;
-    }
 }

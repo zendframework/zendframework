@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -24,21 +23,13 @@
  */
 namespace Zend\Filter;
 
-use Zend\Loader\PluginLoader,
-    Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater,
+use Zend\Loader\Broker,
     Zend\Registry,
     Zend\Translator\Adapter as TranslationAdapter,
     Zend\Translator\Translator as Translator,
     Zend\Validator;
 
 /**
- * @uses       ReflectionClass
- * @uses       Zend\Filter\Filter
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Loader\PluginLoader
- * @uses       Zend\Registry
- * @uses       Zend\Validator\Validator
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -55,10 +46,8 @@ class InputFilter
     const FIELDS                = 'fields';
     const FILTER                = 'filter';
     const FILTER_CHAIN          = 'filterChain';
+    const FILTER_BROKER         = 'filterBroker';
     const MISSING_MESSAGE       = 'missingMessage';
-    const INPUT_NAMESPACE       = 'inputNamespace';
-    const VALIDATOR_NAMESPACE   = 'validatorNamespace';
-    const FILTER_NAMESPACE      = 'filterNamespace';
     const NOT_EMPTY_MESSAGE     = 'notEmptyMessage';
     const PRESENCE              = 'presence';
     const PRESENCE_OPTIONAL     = 'optional';
@@ -66,73 +55,74 @@ class InputFilter
     const RULE                  = 'rule';
     const RULE_WILDCARD         = '*';
     const VALIDATOR             = 'validator';
+    const VALIDATOR_BROKER      = 'validatorBroker';
     const VALIDATOR_CHAIN       = 'validatorChain';
     const VALIDATOR_CHAIN_COUNT = 'validatorChainCount';
 
     /**
      * @var array Input data, before processing.
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
      * @var array Association of rules to filters.
      */
-    protected $_filterRules = array();
+    protected $filterRules = array();
 
     /**
      * @var array Association of rules to validators.
      */
-    protected $_validatorRules = array();
+    protected $validatorRules = array();
 
     /**
      * @var array After processing data, this contains mapping of valid fields
      * to field values.
      */
-    protected $_validFields = array();
+    protected $validFields = array();
 
     /**
      * @var array After processing data, this contains mapping of validation
      * rules that did not pass validation to the array of messages returned
      * by the validator chain.
      */
-    protected $_invalidMessages = array();
+    protected $invalidMessages = array();
 
     /**
      * @var array After processing data, this contains mapping of validation
      * rules that did not pass validation to the array of error identifiers
      * returned by the validator chain.
      */
-    protected $_invalidErrors = array();
+    protected $invalidErrors = array();
 
     /**
      * @var array After processing data, this contains mapping of validation
      * rules in which some fields were missing to the array of messages
      * indicating which fields were missing.
      */
-    protected $_missingFields = array();
+    protected $missingFields = array();
 
     /**
      * @var array After processing, this contains a copy of $_data elements
      * that were not mentioned in any validation rule.
      */
-    protected $_unknownFields = array();
+    protected $unknownFields = array();
 
     /**
      * @var Zend\Filter\Filter The filter object that is run on values
      * returned by the getEscaped() method.
      */
-    protected $_defaultEscapeFilter = null;
+    protected $defaultEscapeFilter = null;
 
     /**
-     * Plugin loaders
+     * Plugin brokers
      * @var array
      */
-    protected $_loaders = array();
+    protected $brokers = array();
 
     /**
      * @var array Default values to use when processing filters and validators.
      */
-    protected $_defaults = array(
+    protected $defaults = array(
         self::ALLOW_EMPTY         => false,
         self::BREAK_CHAIN         => false,
         self::ESCAPE_FILTER       => 'HtmlEntities',
@@ -145,19 +135,19 @@ class InputFilter
      * @var boolean Set to False initially, this is set to True after the
      * input data have been processed.  Reset to False in setData() method.
      */
-    protected $_processed = false;
+    protected $processed = false;
 
     /**
      * Translation object
      * @var Zend\Translate\Translate
      */
-    protected $_translator;
+    protected $translator;
 
     /**
      * Is translation disabled?
      * @var Boolean
      */
-    protected $_translatorDisabled = false;
+    protected $translatorDisabled = false;
 
     /**
      * @param array $filterRules
@@ -171,8 +161,8 @@ class InputFilter
             $this->setOptions($options);
         }
 
-        $this->_filterRules = (array) $filterRules;
-        $this->_validatorRules = (array) $validatorRules;
+        $this->filterRules = (array) $filterRules;
+        $this->validatorRules = (array) $validatorRules;
 
         if ($data) {
             $this->setData($data);
@@ -180,118 +170,71 @@ class InputFilter
     }
 
     /**
-     * @param mixed $namespaces
-     * @return Zend\Filter\InputFilter
-     * @deprecated since 1.5.0RC1 - use addFilterPrefixPath() or addValidatorPrefixPath instead.
-     */
-    public function addNamespace($namespaces)
-    {
-        if (!is_array($namespaces)) {
-            $namespaces = array($namespaces);
-        }
-
-        foreach ($namespaces as $namespace) {
-            $prefix = $namespace;
-            $path = str_replace('\\', DIRECTORY_SEPARATOR, $prefix);
-            $this->addFilterPrefixPath($prefix, $path);
-            $this->addValidatorPrefixPath($prefix, $path);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add prefix path for all elements
+     * Set plugin brokers for use with validators and filters
      *
-     * @param  string $prefix
-     * @param  string $path
-     * @return Zend\Filter\InputFilter
+     * @param  Broker $broker
+     * @param  string $type 'filter' or 'validator'
+     * @return InputFilter
+     * @throws Exception on invalid type
      */
-    public function addFilterPrefixPath($prefix, $path)
-    {
-        $pluginLoader = $this->getPluginLoader(self::FILTER);
-        if ($pluginLoader instanceof PrefixPathMapper) {
-            $pluginLoader->addPrefixPath($prefix, $path);
-        }
-        return $this;
-    }
-
-    /**
-     * Add prefix path for all elements
-     *
-     * @param  string $prefix
-     * @param  string $path
-     * @return Zend\Filter\InputFilter
-     */
-    public function addValidatorPrefixPath($prefix, $path)
-    {
-        $pluginLoader = $this->getPluginLoader(self::VALIDATOR);
-        if ($pluginLoader instanceof PrefixPathMapper) {
-            $pluginLoader->addPrefixPath($prefix, $path);
-        }
-        return $this;
-    }
-
-    /**
-     * Set plugin loaders for use with decorators and elements
-     *
-     * @param  Zend\Loader\ShortNameLocater $loader
-     * @param  string $type 'filter' or 'validate'
-     * @return Zend\Filter\InputFilter
-     * @throws Zend\Filter\Exception on invalid type
-     */
-    public function setPluginLoader(ShortNameLocater $loader, $type)
+    public function setPluginBroker($broker, $type)
     {
         $type = strtolower($type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATOR:
-                $this->_loaders[$type] = $loader;
+                if (is_string($broker)) {
+                    if (!class_exists($broker)) {
+                        throw new Exception(sprintf('Broker class "%s" not found', $broker));
+                    }
+                    $broker = new $broker;
+                }
+                if (!$broker instanceof Broker) {
+                    throw new Exception(sprintf(
+                        'setPluginBroker() expects a class or object of type Zend\Loader\Broker; received "%s"',
+                        (is_object($broker) ? get_class($broker) : gettype($broker))
+                    ));
+                }
+                $this->brokers[$type] = $broker;
                 return $this;
             default:
-                throw new Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+                throw new Exception(sprintf('Invalid type "%s" provided to setPluginBroker()', $type));
         }
 
         return $this;
     }
 
     /**
-     * Retrieve plugin loader for given type
+     * Retrieve plugin broker for given type
      *
      * $type may be one of:
      * - filter
      * - validator
      *
-     * If a plugin loader does not exist for the given type, defaults are
+     * If a plugin broker does not exist for the given type, defaults are
      * created.
      *
-     * @param  string $type 'filter' or 'validate'
-     * @return Zend\Loader\ShortNameLocater
-     * @throws Zend\Filter\Exception on invalid type
+     * @param  string $type 'filter' or 'validator'
+     * @return Broker
+     * @throws Exception on invalid type
      */
-    public function getPluginLoader($type)
+    public function getPluginBroker($type)
     {
         $type = strtolower($type);
-        if (!isset($this->_loaders[$type])) {
+        if (!isset($this->brokers[$type])) {
             switch ($type) {
                 case self::FILTER:
-                    $prefixSegment = 'Zend\\Filter\\';
-                    $pathSegment   = 'Zend/Filter/';
+                    $this->setPluginBroker(new FilterBroker(), $type);
                     break;
                 case self::VALIDATOR:
-                    $prefixSegment = 'Zend\\Validator\\';
-                    $pathSegment   = 'Zend/Validator/';
+                    $this->setPluginBroker(new Validator\ValidatorBroker(), $type);
                     break;
                 default:
-                    throw new Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                    throw new Exception(sprintf('Invalid type "%s" provided to getPluginBroker()', $type));
             }
-
-            $this->_loaders[$type] = new PluginLoader(
-                array($prefixSegment => $pathSegment)
-            );
         }
 
-        return $this->_loaders[$type];
+        return $this->brokers[$type];
     }
 
     /**
@@ -300,7 +243,7 @@ class InputFilter
     public function getMessages()
     {
         $this->_process();
-        return array_merge($this->_invalidMessages, $this->_missingFields);
+        return array_merge($this->invalidMessages, $this->missingFields);
     }
 
     /**
@@ -309,7 +252,7 @@ class InputFilter
     public function getErrors()
     {
         $this->_process();
-        return $this->_invalidErrors;
+        return $this->invalidErrors;
     }
 
     /**
@@ -318,7 +261,7 @@ class InputFilter
     public function getInvalid()
     {
         $this->_process();
-        return $this->_invalidMessages;
+        return $this->invalidMessages;
     }
 
     /**
@@ -327,7 +270,7 @@ class InputFilter
     public function getMissing()
     {
         $this->_process();
-        return $this->_missingFields;
+        return $this->missingFields;
     }
 
     /**
@@ -336,7 +279,7 @@ class InputFilter
     public function getUnknown()
     {
         $this->_process();
-        return $this->_unknownFields;
+        return $this->unknownFields;
     }
 
     /**
@@ -349,10 +292,10 @@ class InputFilter
         $this->_getDefaultEscapeFilter();
 
         if ($fieldName === null) {
-            return $this->_escapeRecursive($this->_validFields);
+            return $this->_escapeRecursive($this->validFields);
         }
-        if (array_key_exists($fieldName, $this->_validFields)) {
-            return $this->_escapeRecursive($this->_validFields[$fieldName]);
+        if (array_key_exists($fieldName, $this->validFields)) {
+            return $this->_escapeRecursive($this->validFields[$fieldName]);
         }
         return null;
     }
@@ -385,10 +328,10 @@ class InputFilter
     {
         $this->_process();
         if ($fieldName === null) {
-            return $this->_validFields;
+            return $this->validFields;
         }
-        if (array_key_exists($fieldName, $this->_validFields)) {
-            return $this->_validFields[$fieldName];
+        if (array_key_exists($fieldName, $this->validFields)) {
+            return $this->validFields[$fieldName];
         }
         return null;
     }
@@ -408,7 +351,7 @@ class InputFilter
     public function hasInvalid()
     {
         $this->_process();
-        return !(empty($this->_invalidMessages));
+        return !(empty($this->invalidMessages));
     }
 
     /**
@@ -417,7 +360,7 @@ class InputFilter
     public function hasMissing()
     {
         $this->_process();
-        return !(empty($this->_missingFields));
+        return !(empty($this->missingFields));
     }
 
     /**
@@ -426,7 +369,7 @@ class InputFilter
     public function hasUnknown()
     {
         $this->_process();
-        return !(empty($this->_unknownFields));
+        return !(empty($this->unknownFields));
     }
 
     /**
@@ -435,7 +378,7 @@ class InputFilter
     public function hasValid()
     {
         $this->_process();
-        return !(empty($this->_validFields));
+        return !(empty($this->validFields));
     }
 
     /**
@@ -448,7 +391,7 @@ class InputFilter
         if ($fieldName === null) {
             return !($this->hasMissing() || $this->hasInvalid());
         }
-        return array_key_exists($fieldName, $this->_validFields);
+        return array_key_exists($fieldName, $this->validFields);
     }
 
     /**
@@ -458,7 +401,7 @@ class InputFilter
     public function __isset($fieldName)
     {
         $this->_process();
-        return isset($this->_validFields[$fieldName]);
+        return isset($this->validFields[$fieldName]);
     }
 
     /**
@@ -484,18 +427,18 @@ class InputFilter
      */
     public function setData(array $data)
     {
-        $this->_data = $data;
+        $this->data = $data;
 
         /**
          * Reset to initial state
          */
-        $this->_validFields = array();
-        $this->_invalidMessages = array();
-        $this->_invalidErrors = array();
-        $this->_missingFields = array();
-        $this->_unknownFields = array();
+        $this->validFields = array();
+        $this->invalidMessages = array();
+        $this->invalidErrors = array();
+        $this->missingFields = array();
+        $this->unknownFields = array();
 
-        $this->_processed = false;
+        $this->processed = false;
 
         return $this;
     }
@@ -512,7 +455,7 @@ class InputFilter
         if (!$escapeFilter instanceof Filter) {
             throw new Exception('Escape filter specified does not implement Zend\\Filter\\Filter');
         }
-        $this->_defaultEscapeFilter = $escapeFilter;
+        $this->defaultEscapeFilter = $escapeFilter;
         return $escapeFilter;
     }
 
@@ -525,45 +468,24 @@ class InputFilter
     {
         foreach ($options as $option => $value) {
             switch ($option) {
+                case self::FILTER_BROKER:
+                    $this->setPluginBroker($value, self::FILTER);
+                    break;
+                case self::VALIDATOR_BROKER:
+                    $this->setPluginBroker($value, self::VALIDATOR);
+                    break;
                 case self::ESCAPE_FILTER:
                     $this->setDefaultEscapeFilter($value);
-                    break;
-                case self::INPUT_NAMESPACE:
-                    $this->addNamespace($value);
-                    break;
-                case self::VALIDATOR_NAMESPACE:
-                    if(is_string($value)) {
-                        $value = array($value);
-                    }
-
-                    foreach($value AS $prefix) {
-                        $this->addValidatorPrefixPath(
-                                $prefix,
-                                str_replace('\\', DIRECTORY_SEPARATOR, $prefix)
-                        );
-                    }
-                    break;
-                case self::FILTER_NAMESPACE:
-                    if(is_string($value)) {
-                        $value = array($value);
-                    }
-
-                    foreach($value AS $prefix) {
-                        $this->addFilterPrefixPath(
-                                $prefix,
-                                str_replace('\\', DIRECTORY_SEPARATOR, $prefix)
-                        );
-                    }
                     break;
                 case self::ALLOW_EMPTY:
                 case self::BREAK_CHAIN:
                 case self::MISSING_MESSAGE:
                 case self::NOT_EMPTY_MESSAGE:
                 case self::PRESENCE:
-                    $this->_defaults[$option] = $value;
+                    $this->defaults[$option] = $value;
                     break;
                 default:
-                    throw new Exception("Unknown option '$option'");
+                    // ignore unknown options
                     break;
             }
         }
@@ -580,9 +502,9 @@ class InputFilter
     public function setTranslator($translator = null)
     {
         if ((null === $translator) || ($translator instanceof TranslationAdapter)) {
-            $this->_translator = $translator;
+            $this->translator = $translator;
         } elseif ($translator instanceof Translator) {
-            $this->_translator = $translator->getAdapter();
+            $this->translator = $translator->getAdapter();
         } else {
             throw new Validator\Exception('Invalid translator specified');
         }
@@ -601,7 +523,7 @@ class InputFilter
             return null;
         }
 
-        if ($this->_translator === null) {
+        if ($this->translator === null) {
             if (\Zend\Registry::isRegistered('Zend_Translate')) {
                 $translator = \Zend\Registry::get('Zend_Translate');
                 if ($translator instanceof TranslationAdapter) {
@@ -612,7 +534,7 @@ class InputFilter
             }
         }
 
-        return $this->_translator;
+        return $this->translator;
     }
 
     /**
@@ -623,7 +545,7 @@ class InputFilter
      */
     public function setDisableTranslator($flag)
     {
-        $this->_translatorDisabled = (bool) $flag;
+        $this->translatorDisabled = (bool) $flag;
         return $this;
     }
 
@@ -634,7 +556,7 @@ class InputFilter
      */
     public function translatorIsDisabled()
     {
-        return $this->_translatorDisabled;
+        return $this->translatorDisabled;
     }
 
     /*
@@ -646,7 +568,7 @@ class InputFilter
      */
     protected function _filter()
     {
-        foreach ($this->_filterRules as $ruleName => &$filterRule) {
+        foreach ($this->filterRules as $ruleName => &$filterRule) {
             /**
              * Make sure we have an array representing this filter chain.
              * Don't typecast to (array) because it might be a Zend\Filter\Filter object
@@ -693,7 +615,7 @@ class InputFilter
              * Else just process the field named by the rule.
              */
             if ($ruleName == self::RULE_WILDCARD) {
-                foreach (array_keys($this->_data) as $field)  {
+                foreach (array_keys($this->data) as $field)  {
                     $this->_filterRule(array_merge($filterRule, array(self::FIELDS => $field)));
                 }
             } else {
@@ -709,17 +631,17 @@ class InputFilter
     protected function _filterRule(array $filterRule)
     {
         $field = $filterRule[self::FIELDS];
-        if (!array_key_exists($field, $this->_data)) {
+        if (!array_key_exists($field, $this->data)) {
             return;
         }
-        if (is_array($this->_data[$field])) {
-            foreach ($this->_data[$field] as $key => $value) {
+        if (is_array($this->data[$field])) {
+            foreach ($this->data[$field] as $key => $value) {
                 $filterChain = $filterRule[self::FILTER_CHAIN];
-                $this->_data[$field][$key] = $filterChain($value);
+                $this->data[$field][$key] = $filterChain($value);
             }
         } else {
             $filterChain = $filterRule[self::FILTER_CHAIN];
-            $this->_data[$field] = $filterChain($this->_data[$field]);
+            $this->data[$field] = $filterChain($this->data[$field]);
         }
     }
 
@@ -728,10 +650,10 @@ class InputFilter
      */
     protected function _getDefaultEscapeFilter()
     {
-        if ($this->_defaultEscapeFilter !== null) {
-            return $this->_defaultEscapeFilter;
+        if ($this->defaultEscapeFilter !== null) {
+            return $this->defaultEscapeFilter;
         }
-        return $this->setDefaultEscapeFilter($this->_defaults[self::ESCAPE_FILTER]);
+        return $this->setDefaultEscapeFilter($this->defaults[self::ESCAPE_FILTER]);
     }
 
     /**
@@ -741,7 +663,7 @@ class InputFilter
      */
     protected function _getMissingMessage($rule, $field)
     {
-        $message = $this->_defaults[self::MISSING_MESSAGE];
+        $message = $this->defaults[self::MISSING_MESSAGE];
 
         if (null !== ($translator = $this->getTranslator())) {
             if ($translator->isTranslated(self::MISSING_MESSAGE)) {
@@ -761,7 +683,7 @@ class InputFilter
      */
     protected function _getNotEmptyMessage($rule, $field)
     {
-        $message = $this->_defaults[self::NOT_EMPTY_MESSAGE];
+        $message = $this->defaults[self::NOT_EMPTY_MESSAGE];
 
         if (null !== ($translator = $this->getTranslator())) {
             if ($translator->isTranslated(self::NOT_EMPTY_MESSAGE)) {
@@ -781,10 +703,10 @@ class InputFilter
      */
     protected function _process()
     {
-        if ($this->_processed === false) {
+        if ($this->processed === false) {
             $this->_filter();
             $this->_validate();
-            $this->_processed = true;
+            $this->processed = true;
         }
     }
 
@@ -796,13 +718,13 @@ class InputFilter
         /**
          * Special case: if there are no validators, treat all fields as valid.
          */
-        if (!$this->_validatorRules) {
-            $this->_validFields = $this->_data;
-            $this->_data = array();
+        if (!$this->validatorRules) {
+            $this->validFields = $this->data;
+            $this->data = array();
             return;
         }
 
-        foreach ($this->_validatorRules as $ruleName => &$validatorRule) {
+        foreach ($this->validatorRules as $ruleName => &$validatorRule) {
             /**
              * Make sure we have an array representing this validator chain.
              * Don't typecast to (array) because it might be a Zend_Validator object
@@ -830,13 +752,13 @@ class InputFilter
                 $validatorRule[self::FIELDS] = $ruleName;
             }
             if (!isset($validatorRule[self::BREAK_CHAIN])) {
-                $validatorRule[self::BREAK_CHAIN] = $this->_defaults[self::BREAK_CHAIN];
+                $validatorRule[self::BREAK_CHAIN] = $this->defaults[self::BREAK_CHAIN];
             }
             if (!isset($validatorRule[self::PRESENCE])) {
-                $validatorRule[self::PRESENCE] = $this->_defaults[self::PRESENCE];
+                $validatorRule[self::PRESENCE] = $this->defaults[self::PRESENCE];
             }
             if (!isset($validatorRule[self::ALLOW_EMPTY])) {
-                $validatorRule[self::ALLOW_EMPTY] = $this->_defaults[self::ALLOW_EMPTY];
+                $validatorRule[self::ALLOW_EMPTY] = $this->defaults[self::ALLOW_EMPTY];
             }
 
             if (!isset($validatorRule[self::MESSAGES])) {
@@ -876,7 +798,7 @@ class InputFilter
                         }
 
                         if ($validator instanceof Validator\NotEmpty) {
-                            $this->_defaults[self::NOT_EMPTY_MESSAGE] = $value;
+                            $this->defaults[self::NOT_EMPTY_MESSAGE] = $value;
                         }
                     }
 
@@ -891,7 +813,7 @@ class InputFilter
              * Else just process the field named by the rule.
              */
             if ($ruleName == self::RULE_WILDCARD) {
-                foreach (array_keys($this->_data) as $field)  {
+                foreach (array_keys($this->data) as $field)  {
                     $this->_validateRule(array_merge($validatorRule, array(self::FIELDS => $field)));
                 }
             } else {
@@ -904,19 +826,19 @@ class InputFilter
          * We have to wait until all rules have been processed because
          * a given field may be referenced by multiple rules.
          */
-        foreach (array_merge(array_keys($this->_missingFields), array_keys($this->_invalidMessages)) as $rule) {
-            foreach ((array) $this->_validatorRules[$rule][self::FIELDS] as $field) {
-                unset($this->_data[$field]);
+        foreach (array_merge(array_keys($this->missingFields), array_keys($this->invalidMessages)) as $rule) {
+            foreach ((array) $this->validatorRules[$rule][self::FIELDS] as $field) {
+                unset($this->data[$field]);
             }
         }
-        foreach ($this->_validFields as $field => $value) {
-            unset($this->_data[$field]);
+        foreach ($this->validFields as $field => $value) {
+            unset($this->data[$field]);
         }
 
         /**
          * Anything left over in $_data is an unknown field.
          */
-        $this->_unknownFields = $this->_data;
+        $this->unknownFields = $this->data;
     }
 
     /**
@@ -931,8 +853,8 @@ class InputFilter
          */
         $data = array();
         foreach ((array) $validatorRule[self::FIELDS] as $key => $field) {
-            if (array_key_exists($field, $this->_data)) {
-                $data[$field] = $this->_data[$field];
+            if (array_key_exists($field, $this->data)) {
+                $data[$field] = $this->data[$field];
             } else if (isset($validatorRule[self::DEFAULT_VALUE])) {
                 /** @todo according to this code default value can't be an array. It has to be reviewed */
                 if (!is_array($validatorRule[self::DEFAULT_VALUE])) {
@@ -945,12 +867,12 @@ class InputFilter
                     } else if ($validatorRule[self::PRESENCE] == self::PRESENCE_REQUIRED) {
                         // Default value array is provided, but it doesn't have an entry for current field
                         // and presence is required
-                        $this->_missingFields[$validatorRule[self::RULE]][] =
+                        $this->missingFields[$validatorRule[self::RULE]][] =
                            $this->_getMissingMessage($validatorRule[self::RULE], $field);
                     }
                 }
             } else if ($validatorRule[self::PRESENCE] == self::PRESENCE_REQUIRED) {
-                $this->_missingFields[$validatorRule[self::RULE]][] =
+                $this->missingFields[$validatorRule[self::RULE]][] =
                     $this->_getMissingMessage($validatorRule[self::RULE], $field);
             }
         }
@@ -958,7 +880,7 @@ class InputFilter
         /**
          * If any required fields are missing, break the loop.
          */
-        if (isset($this->_missingFields[$validatorRule[self::RULE]]) && count($this->_missingFields[$validatorRule[self::RULE]]) > 0) {
+        if (isset($this->missingFields[$validatorRule[self::RULE]]) && count($this->missingFields[$validatorRule[self::RULE]]) > 0) {
             return;
         }
 
@@ -989,15 +911,15 @@ class InputFilter
                 }
 
                 if ($emptyFieldsFound) {
-                    $this->_invalidMessages[$validatorRule[self::RULE]] = $messages;
-                    $this->_invalidErrors[$validatorRule[self::RULE]]   = array_unique(call_user_func_array('array_merge', $errorsList));
+                    $this->invalidMessages[$validatorRule[self::RULE]] = $messages;
+                    $this->invalidErrors[$validatorRule[self::RULE]]   = array_unique(call_user_func_array('array_merge', $errorsList));
                     return;
                 }
             }
 
             if (!$validatorRule[self::VALIDATOR_CHAIN]->isValid($data)) {
-                $this->_invalidMessages[$validatorRule[self::RULE]] = $validatorRule[self::VALIDATOR_CHAIN]->getMessages();
-                $this->_invalidErrors[$validatorRule[self::RULE]] = $validatorRule[self::VALIDATOR_CHAIN]->getErrors();
+                $this->invalidMessages[$validatorRule[self::RULE]] = $validatorRule[self::VALIDATOR_CHAIN]->getMessages();
+                $this->invalidErrors[$validatorRule[self::RULE]] = $validatorRule[self::VALIDATOR_CHAIN]->getErrors();
                 return;
             }
         } else if (count($data) > 0) {
@@ -1028,8 +950,8 @@ class InputFilter
                 }
 
                 if (!$validatorChain->isValid($value)) {
-                    if (isset($this->_invalidMessages[$validatorRule[self::RULE]])) {
-                        $collectedMessages = $this->_invalidMessages[$validatorRule[self::RULE]];
+                    if (isset($this->invalidMessages[$validatorRule[self::RULE]])) {
+                        $collectedMessages = $this->invalidMessages[$validatorRule[self::RULE]];
                     } else {
                         $collectedMessages = array();
                     }
@@ -1042,14 +964,14 @@ class InputFilter
                         }
                     }
 
-                    $this->_invalidMessages[$validatorRule[self::RULE]] = $collectedMessages;
-                    if (isset($this->_invalidErrors[$validatorRule[self::RULE]])) {
-                        $this->_invalidErrors[$validatorRule[self::RULE]] = array_merge($this->_invalidErrors[$validatorRule[self::RULE]],
+                    $this->invalidMessages[$validatorRule[self::RULE]] = $collectedMessages;
+                    if (isset($this->invalidErrors[$validatorRule[self::RULE]])) {
+                        $this->invalidErrors[$validatorRule[self::RULE]] = array_merge($this->invalidErrors[$validatorRule[self::RULE]],
                                                                                         $validatorChain->getErrors());
                     } else {
-                        $this->_invalidErrors[$validatorRule[self::RULE]] = $validatorChain->getErrors();
+                        $this->invalidErrors[$validatorRule[self::RULE]] = $validatorChain->getErrors();
                     }
-                    unset($this->_validFields[$fieldName]);
+                    unset($this->validFields[$fieldName]);
                     $failed = true;
                     if ($validatorRule[self::BREAK_CHAIN]) {
                         return;
@@ -1066,7 +988,7 @@ class InputFilter
          */
         foreach ((array) $validatorRule[self::FIELDS] as $field) {
             if (array_key_exists($field, $data)) {
-                $this->_validFields[$field] = $data[$field];
+                $this->validFields[$field] = $data[$field];
             }
         }
     }
@@ -1104,23 +1026,6 @@ class InputFilter
             $classBaseName = array_shift($args);
         }
 
-        $interfaceType = ucfirst($type);
-        $interfaceName = 'Zend\\' . $interfaceType . '\\' . $interfaceType;
-        $className = $this->getPluginLoader($type)->load(ucfirst($classBaseName));
-
-        $class = new \ReflectionClass($className);
-
-        if (!$class->implementsInterface($interfaceName)) {
-            throw new Exception("Class '$className' based on basename '$classBaseName' must implement the '$interfaceName' interface");
-        }
-
-        if ($class->hasMethod('__construct')) {
-            $object = $class->newInstanceArgs($args);
-        } else {
-            $object = $class->newInstance();
-        }
-
-        return $object;
+        return $this->getPluginBroker($type)->load($classBaseName, $args);
     }
-
 }

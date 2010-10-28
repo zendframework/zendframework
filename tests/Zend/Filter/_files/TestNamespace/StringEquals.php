@@ -24,8 +24,6 @@ namespace TestNamespace;
 
 use Zend\Validator\AbstractValidator;
 
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 /**
  * Mock file for testbed
  *

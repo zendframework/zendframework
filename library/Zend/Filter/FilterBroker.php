@@ -20,7 +20,7 @@
 
 namespace Zend\Filter;
 
-use Zend\Loader\PluginBroker;
+use Zend\Loader\PluginSpecBroker;
 
 /**
  * Broker for filter instances
@@ -30,7 +30,7 @@ use Zend\Loader\PluginBroker;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FilterBroker extends PluginBroker
+class FilterBroker extends PluginSpecBroker
 {
     /**
      * @var string Default plugin loading strategy

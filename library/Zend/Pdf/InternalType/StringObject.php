@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
+use Zend\Pdf;
 
 /**
  * PDF file 'string' element implementation

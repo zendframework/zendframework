@@ -289,21 +289,11 @@ class ProcessingTest extends \PHPUnit_Framework_TestCase
         unlink(__DIR__ . '/_files/output.pdf');
     }
 
-    public function testPageCloning()
+    public function testPageDuplicating()
     {
         $pdf = Pdf\PdfDocument::load(__DIR__ . '/_files/pdfarchiving.pdf');
 
         $srcPageCount = count($pdf->pages);
-
-        try {
-            $newPage = clone reset($pdf->pages);
-        } catch (Pdf\Exception $e) {
-            if (strpos($e->getMessage(), 'Cloning \Zend\Pdf\Page object using \'clone\' keyword is not supported.') !== 0) {
-                throw $e;
-            }
-
-            // Exception is thrown
-        }
 
         $outputPageSet = array();
         foreach ($pdf->pages as $srcPage){
@@ -340,6 +330,48 @@ class ProcessingTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($pdf1 instanceof Pdf\PdfDocument);
         $this->assertEquals($srcPageCount*2, count($pdf1->pages));
         unset($pdf1);
+
+        unlink(__DIR__ . '/_files/output.pdf');
+    }
+
+    public function testPageCloning()
+    {
+        $pdf  = Pdf\PdfDocument::load(__DIR__ . '/_files/pdfarchiving.pdf');
+        $pdf1 = new Pdf\PdfDocument();
+
+        $srcPageCount = count($pdf->pages);
+
+        $outputPageSet = array();
+        foreach ($pdf->pages as $srcPage){
+            $page = clone $srcPage;
+
+            $page->saveGS();
+
+            // Create new Style
+            $page->setFillColor(new Color\Rgb(0, 0, 0.9))
+                 ->setLineColor(new Color\GrayScale(0.2))
+                 ->setLineWidth(3)
+                 ->setLineDashingPattern(array(3, 2, 3, 4), 1.6)
+                 ->setFont(Pdf\Font::fontWithName(Pdf\Font::FONT_HELVETICA_BOLD), 32);
+
+
+            $page->rotate(0, 0, M_PI_2/3);
+            $page->drawText('Modified by Zend Framework!', 150, 0);
+            $page->restoreGS();
+
+            $pdf1->pages[] = $page;
+        }
+
+        $pdf1->save(__DIR__ . '/_files/output.pdf');
+
+        unset($pdf);
+        unset($pdf1);
+
+        $pdf2 = Pdf\PdfDocument::load(__DIR__ . '/_files/output.pdf');
+
+        $this->assertTrue($pdf2 instanceof Pdf\PdfDocument);
+        $this->assertEquals($srcPageCount, count($pdf2->pages));
+        unset($pdf2);
 
         unlink(__DIR__ . '/_files/output.pdf');
     }

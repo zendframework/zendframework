@@ -102,4 +102,12 @@ class Attribute
             $this->_values[] = $value;
         }
     }
+
+    public function setValues($values)
+    {
+        if (!is_array($values)) {
+            $values = array($values);
+        }
+        $this->_values = $values;
+    }
 }

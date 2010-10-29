@@ -134,7 +134,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         try {
             $arrayObj = new ZPDFPDFArray();
             $arrayObj->add(100.426);
-        } catch (Z\end\Pdf\Exception $e) {
+        } catch (Zend\Pdf\Exception $e) {
             $this->assertContains('must be \Zend\Pdf\InternalType', $e->getMessage());
             return;
         }

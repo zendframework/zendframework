@@ -23,12 +23,7 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\SimpleDb;
-use Zend\HTTP;
-
-/**
- * @see Zend_Http_Response
- */
-require_once 'Zend/Http/Response.php';
+use Zend\Http;
 
 /**
  * @category   Zend
@@ -49,7 +44,7 @@ class Response
      *
      * This contains the response body and headers.
      *
-     * @var Zend_Http_Response
+     * @var Zend\Http\Response
      */
     private $_httpResponse = null;
 
@@ -84,10 +79,10 @@ class Response
     /**
      * Creates a new high-level SimpleDB response object
      *
-     * @param  Zend_Http_Response $httpResponse the HTTP response.
+     * @param  Zend\Http\Response $httpResponse the HTTP response.
      * @return void
      */
-    public function __construct(HTTP\Response $httpResponse)
+    public function __construct(Http\Response $httpResponse)
     {
         $this->_httpResponse = $httpResponse;
     }
@@ -122,10 +117,9 @@ class Response
     {
         try {
             $body = $this->_httpResponse->getBody();
-        } catch (HTTP\Exception $e) {
+        } catch (Http\Exception $e) {
             $body = false;
         }
-
        
         return simplexml_load_string($body);
     }
@@ -133,7 +127,7 @@ class Response
     /**
      * Get HTTP response object
      * 
-     * @return Zend_Http_Response
+     * @return Zend\Http\Response
      */
     public function getHttpResponse() 
     {
@@ -149,7 +143,7 @@ class Response
     {
         try {
             $body = $this->_httpResponse->getBody();
-        } catch (HTTP\Exception $e) {
+        } catch (Http\Exception $e) {
             $body = false;
         }
 

@@ -23,38 +23,8 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\SimpleDb;
-use Zend\HTTP;
-use Zend\Crypt;
-
-/**
- * @see Zend_Service_Amazon_Abstract
- */
-require_once 'Zend/Service/Amazon/Abstract.php';
-
-/**
- * @see Zend_Service_Amazon_SimpleDb_Response
- */
-require_once 'Zend/Service/Amazon/SimpleDb/Response.php';
-
-/**
- * @see Zend_Service_Amazon_SimpleDb_Page
- */
-require_once 'Zend/Service/Amazon/SimpleDb/Page.php';
-
-/**
- * @see Zend_Service_Amazon_SimpleDb_Attribute
- */
-require_once 'Zend/Service/Amazon/SimpleDb/Attribute.php';
-
-/**
- * @see Zend_Service_Amazon_SimpleDb_Exception
- */
-require_once 'Zend/Service/Amazon/SimpleDb/Exception.php';
-
-/**
- * @see Zend_Crypt_Hmac
- */
-require_once 'Zend/Crypt/Hmac.php';
+use Zend\Http,
+    Zend\Crypt;
 
 /**
  * @category   Zend
@@ -63,7 +33,7 @@ require_once 'Zend/Crypt/Hmac.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
+class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 {
     /* Notes */
     // TODO SSL is required
@@ -71,7 +41,7 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * The HTTP query server
      */
-    protected $_sdbEndpoint = 'sdb.amazonaws.com';
+    protected $_sdbEndpoint = 'sdb.amazonaws.com/';
 
     /**
      * Period after which HTTP request will timeout in seconds
@@ -110,17 +80,16 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
 	/**
      * Set SimpleDB endpoint to use
      *
-     * @param string|Zend_Uri_Http $endpoint
-     * @return Zend_Service_Amazon_SimpleDb
+     * @param string|Zend\Uri\Http $endpoint
+     * @return Zend\Service\Amazon\SimpleDb\SimpleDb
      */
     public function setEndpoint($endpoint)
     {
-    	if(!($endpoint instanceof \Zend\URI\URL)) {
-    		$endpoint = \Zend\Uri\Uri::factory($endpoint);
+    	if(!($endpoint instanceof \Zend\Uri\Url)) {
+    		$endpoint = new \Zend\Uri\Url($endpoint);
     	}
-    	if(!$endpoint->valid()) {
-    		require_once 'Zend/Service/Amazon/SimpleDb/Exception.php';
-    		throw new \Zend\Service\Amazon\SimpleDb\Exception("Invalid endpoint supplied");
+    	if(!$endpoint->isValid()) {
+    		throw new Exception\InvalidArgumentException("Invalid endpoint supplied");
     	}
     	$this->_endpoint = $endpoint;
     	return $this;
@@ -129,7 +98,7 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Get SimpleDB endpoint
      *
-     * @return Zend_Uri_Http
+     * @return Zend\Uri\Http
      */
     public function getEndpoint() 
     {
@@ -238,17 +207,19 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
             $params['Item.' . $itemIndex . '.ItemName'] = $name;
             $attributeIndex = 0;
             foreach ($attributes as $attribute) {
-                $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Name'] = $attribute->getName();
-                if (isset($replace[$itemIndex]) 
-                    && isset($replace[$itemIndex][$attributeIndex]) 
-                    && $replace[$itemIndex][$attributeIndex]
-                ) {
-                    $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Replace'] = 'true';
-                }
+                // attribute value cannot be array, so when several items are passed
+                // they are treated as separate values with the same attribute name
                 foreach($attribute->getValues() as $value) {
+                    $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Name'] = $attribute->getName();
                     $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Value'] = $value;
+                    if (isset($replace[$name]) 
+                        && isset($replace[$name][$attribute->getName()]) 
+                        && $replace[$name][$attribute->getName()]
+                    ) {
+                        $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Replace'] = 'true';
+                    }
+                    $attributeIndex++;
                 }
-                $attributeIndex++;
             }
             $itemIndex++;
         }
@@ -312,7 +283,7 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
 
         $nextTokenNode = $response->getSimpleXMLDocument()->ListDomainsResult->NextToken;
         $nextToken     = (string)$nextTokenNode;
-        $nextToken     = ''?null:$nextToken;
+        $nextToken     = (trim($nextToken) === '') ? null : $nextToken;
 
         return new Page($data, $nextToken);
     }
@@ -377,7 +348,7 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
      *
      * @param  string $selectExpression
      * @param  null|string $nextToken
-     * @return Zend_Service_Amazon_SimpleDb_Page
+     * @return Zend\Service\Amazon\SimpleDb\Page
      */
 	public function select($selectExpression, $nextToken = null) 
 	{
@@ -436,17 +407,17 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
     public function quoteName($name)
     {
     	if (preg_match('/^[a-z_$][a-z0-9_$-]*$/i', $name) == false) {
-    		throw new \Zend\Service\Amazon\SimpleDb\Exception("Invalid name: can contain only alphanumeric characters, \$ and _");
+    		throw new Exception\InvalidArgumentException("Invalid name: can contain only alphanumeric characters, \$ and _");
     	}
     	return "`$name`";
     }
     
    /**
-     * Sends a HTTP request to the SimpleDB service using Zend_Http_Client
+     * Sends a HTTP request to the SimpleDB service using Zend\Http\Client
      *
      * @param array $params         List of parameters to send with the request
-     * @return Zend_Service_Amazon_SimpleDb_Response
-     * @throws Zend_Service_Amazon_SimpleDb_Exception
+     * @return Zend\Service\Amazon\SimpleDb\Response
+     * @throws Zend\Service\Amazon\SimpleDb\Exception
      */
     protected function _sendRequest(array $params = array())
     {
@@ -459,7 +430,6 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
         $params = $this->_addRequiredParameters($params);
 
         try {
-            /* @var $request Zend_Http_Client */
             $request = self::getHttpClient();
             $request->resetParameters();
 
@@ -469,16 +439,17 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
 
 
             $request->setUri($this->getEndpoint());
-            $request->setMethod(HTTP\Client::POST);
+            $request->setMethod(Http\Client::POST);
             foreach ($params as $key => $value) {
                 $params_out[] = rawurlencode($key)."=".rawurlencode($value);
             }
-            $request->setRawData(join('&', $params_out), HTTP\Client::ENC_URLENCODED);
+            $request->setRawData(join('&', $params_out), Http\Client::ENC_URLENCODED);
             $httpResponse = $request->request();
-        } catch (HTTP\Client\Exception $zhce) {
+        } catch (Http\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
-            throw new \Zend\Service\Amazon\SimpleDb\Exception($message, $zhce->getCode());
-        }
+            throw new Exception\RuntimeException($message, $zhce->getCode(), $zhce);
+        } 
+
         $response = new Response($httpResponse);
         $this->_checkForErrors($response);
         return $response;
@@ -554,8 +525,7 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        require_once 'Zend/Crypt/Hmac.php';
-        $hmac = Crypt\HMAC::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\HMAC::BINARY);
+        $hmac = Crypt\Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\Hmac::BINARY);
 
         return base64_encode($hmac);
     }
@@ -563,12 +533,12 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Checks for errors responses from Amazon
      *
-     * @param Zend_Service_Amazon_SimpleDb_Response $response the response object to
+     * @param Zend\Service\Amazon\SimpleDb\Response $response the response object to
      *                                                   check.
      *
      * @return void
      *
-     * @throws Zend_Service_Amazon_SimpleDb_Exception if one or more errors are
+     * @throws Zend\Service\Amazon\SimpleDb\Exception if one or more errors are
      *         returned from Amazon.
      */
     private function _checkForErrors(Response $response)
@@ -579,7 +549,7 @@ class SimbleDb extends \Zend\Service\Amazon\AbstractAmazon
             $node    = $list->item(0);
             $code    = $xpath->evaluate('string(Code/text())', $node);
             $message = $xpath->evaluate('string(Message/text())', $node);
-            throw new \Zend\Service\Amazon\SimpleDb\Exception($message, 0, $code);
+            throw new Exception\RuntimeException($message, (double)$code);
         }
     }
 }

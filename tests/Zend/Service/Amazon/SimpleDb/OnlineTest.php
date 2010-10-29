@@ -13,63 +13,44 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon_SimpleDb
+ * @package    Zend\Service\Amazon\SimpleDb
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: OnlineTest.php 11973 2008-10-15 16:00:56Z matthew $
+ * @version    $Id$
  */
 
 /**
- * Test helper
+ * @namespace
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+namespace ZendTest\Service\Amazon\SimpleDb;
 
-/**
- * @see Zend_Service_Amazon_SimpleDb
- */
-require_once 'Zend/Service/Amazon/SimpleDb.php';
+use Zend\Service\Amazon\SimpleDb,
+    Zend\Service\Amazon\SimpleDb\Exception,
+    Zend\Http\Client\Adapter\Socket,
+    Zend\Config\Ini as Config;
 
-/**
- * @see Zend_Service_Amazon_SimpleDb_Attribute
- */
-require_once 'Zend/Service/Amazon/SimpleDb/Attribute.php';
-
-/**
- * @see Zend_Service_Amazon_SimpleDb_Page
- */
-require_once 'Zend/Service/Amazon/SimpleDb/Page.php';
-
-/**
- * @see Zend_Http_Client_Adapter_Socket
- */
-require_once 'Zend/Http/Client/Adapter/Socket.php';
-
-/**
- * @see Zend_Config_Ini
- */
-require_once 'Zend/Config/Ini.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon_SimpleDb
+ * @package    Zend\Service\Amazon\SimpleDb
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
+class OnlineTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Reference to Amazon service consumer object
      *
-     * @var Zend_Service_Amazon_SimpleDb
+     * @var Zend\Service\Amazon\SimpleDb
      */
     protected $_amazon;
 
     /**
      * Socket based HTTP client adapter
      *
-     * @var Zend_Http_Client_Adapter_Socket
+     * @var Zend\Http\Client\Adapter\Socket
      */
     protected $_httpClientAdapterSocket;
 
@@ -81,7 +62,7 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
 
     // Because Amazon uses an eventual consistency model, this test period may
     // help avoid *but not guarantee* false negatives
-    protected $_testWaitPeriod = 5;
+    protected $_testWaitPeriod = 2;
 
     /**
      * Sets up this test case
@@ -90,12 +71,12 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_amazon = new Zend_Service_Amazon_SimpleDb(
+        $this->_amazon = new SimpleDb\SimpleDb(
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEY'),
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
         );
 
-        $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
+        $this->_httpClientAdapterSocket = new Socket();
 
         $this->_amazon->getHttpClient()
                       ->setAdapter($this->_httpClientAdapterSocket);
@@ -105,6 +86,8 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
         $this->_testItemNamePrefix = 'TestsZendServiceAmazonSimpleDbItem';
 
         $this->_testAttributeNamePrefix = 'TestsZendServiceAmazonSimpleDbAttribute';
+
+        $this->_wait();
     }
 
     public function testGetAttributes() {
@@ -118,12 +101,13 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
             $attributeValue1 = 'value1';
             $attributeValue2 = 'value2';
             $attributes = array(
-                $attributeName1 => new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName1, $attributeValue1),
-                $attributeName2 => new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName2, $attributeValue2)
+                $attributeName1 => new SimpleDb\Attribute($itemName, $attributeName1, $attributeValue1),
+                $attributeName2 => new SimpleDb\Attribute($itemName, $attributeName2, $attributeValue2)
             );
 
             // Now that everything's set up, test it
             $this->_amazon->putAttributes($domainName, $itemName, $attributes);
+            $this->_wait();
 
             // One attribute
             $results = $this->_amazon->getAttributes($domainName, $itemName, $attributeName1);
@@ -158,12 +142,13 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
             $attributeValue1 = 'value1';
             $attributeValue2 = 'value2';
             $attributes = array(
-                $attributeName1 => new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName1, $attributeValue1),
-                $attributeName2 => new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName2, $attributeValue2)
+                $attributeName1 => new SimpleDb\Attribute($itemName, $attributeName1, $attributeValue1),
+                $attributeName2 => new SimpleDb\Attribute($itemName, $attributeName2, $attributeValue2)
             );
 
             // Now that everything's set up, test it
             $this->_amazon->putAttributes($domainName, $itemName, $attributes);
+            $this->_wait(); // allow to propagate
 
             // Multiple attributes
             $results = $this->_amazon->getAttributes($domainName, $itemName);
@@ -197,11 +182,11 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
             $attributeValue5 = 'value5';
             $items = array(
                 $itemName1 => array(
-                    $attributeName1 => new Zend_Service_Amazon_SimpleDb_Attribute($itemName1, $attributeName1, $attributeValue1),
-                    $attributeName2 =>new Zend_Service_Amazon_SimpleDb_Attribute($itemName1, $attributeName2, $attributeValue2)),
+                    $attributeName1 => new SimpleDb\Attribute($itemName1, $attributeName1, $attributeValue1),
+                    $attributeName2 => new SimpleDb\Attribute($itemName1, $attributeName2, $attributeValue2)),
                 $itemName2 => array(
-                    $attributeName3 => new Zend_Service_Amazon_SimpleDb_Attribute($itemName2, $attributeName3, $attributeValue3),
-                    $attributeName4 => new Zend_Service_Amazon_SimpleDb_Attribute($itemName2, $attributeName4, array($attributeValue4, $attributeValue5)))
+                    $attributeName3 => new SimpleDb\Attribute($itemName2, $attributeName3, $attributeValue3),
+                    $attributeName4 => new SimpleDb\Attribute($itemName2, $attributeName4, array($attributeValue4, $attributeValue5)))
                 );
 
 
@@ -218,14 +203,17 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
 
             $this->assertEquals(array(), $this->_amazon->getAttributes($domainName, $itemName1));
             $this->_amazon->batchPutAttributes($items, $domainName, $replace);
-            $result = $this->_amazon->getAttributes($domainName, $itemName1, $attributeName1);
+            $this->_wait();
 
+            $result = $this->_amazon->getAttributes($domainName, $itemName1, $attributeName1);
             $this->assertTrue(array_key_exists($attributeName1, $result));
             $this->assertEquals($attributeName1, $result[$attributeName1]->getName());
             $this->assertEquals($attributeValue1, current($result[$attributeName1]->getValues()));
+
             $result = $this->_amazon->getAttributes($domainName, $itemName2, $attributeName4);
             $this->assertTrue(array_key_exists($attributeName4, $result));
             $this->assertEquals(2, count($result[$attributeName4]->getValues()));
+
             $result = $this->_amazon->getAttributes($domainName, $itemName2);
             $this->assertEquals(2, count($result));
             $this->assertTrue(array_key_exists($attributeName3, $result));
@@ -234,28 +222,35 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($attributeValue3, current($result[$attributeName3]->getValues()));
             $this->assertTrue(array_key_exists($attributeName4, $result));
             $this->assertEquals($attributeName4, $result[$attributeName4]->getName());
-            $this->assertEquals(2, $result[$attributeName4]->getValues());
+            $this->assertEquals(2, count($result[$attributeName4]->getValues()));
             $this->assertEquals(array($attributeValue4, $attributeValue5), $result[$attributeName4]->getValues());
 
             // Test replace
-            $oldItems = $items;
             $newAttributeValue1 = 'newValue1';
             $newAttributeValue4 = 'newValue4';
-            $items[$itemName1][$attributeName1] = array($newAttributeValue1);
-            $items[$itemName2][$attributeName4] = array($newAttributeValue4);
+            $items[$itemName1][$attributeName1]->setValues(array($newAttributeValue1));
+            $items[$itemName2][$attributeName4]->setValues(array($newAttributeValue4));
 
             $this->_amazon->batchPutAttributes($items, $domainName, $replace);
+            $this->_wait();
+
             $result = $this->_amazon->getAttributes($domainName, $itemName1, $attributeName1);
-            $this->assertEquals($oldItems[$itemName1][$attributeName1], $this->_amazon->getAttributes($domainName, $itemName1, $attributeName1));
-            $this->assertEquals($oldItems[$itemName2][$attributeName4], $this->_amazon->getAttributes($domainName, $itemName2, $attributeName4));
-            $this->assertEquals($oldItems[$itemName1], $this->_amazon->getAttributes($domainName, $itemName1));
+            $this->assertEquals(array($newAttributeValue1, $attributeValue1), $result[$attributeName1]->getValues());
+
+            $result = $this->_amazon->getAttributes($domainName, $itemName2, $attributeName4);
+            $this->assertEquals(array($newAttributeValue4, $attributeValue4, $attributeValue5), $result[$attributeName4]->getValues());
 
             $replace[$itemName1][$attributeName1] = true;
             $replace[$itemName2][$attributeName4] = true;
 
             $this->_amazon->batchPutAttributes($items, $domainName, $replace);
-            $this->assertEquals($items[$itemName1][$attributeName1], $this->_amazon->getAttributes($domainName, $itemName1, $attributeName1));
-            $this->assertEquals($items[$itemName2][$attributeName4], $this->_amazon->getAttributes($domainName, $itemName2, $attributeName4));
+            $this->_wait();
+
+            $result = $this->_amazon->getAttributes($domainName, $itemName1, $attributeName1);
+            $this->assertEquals($items[$itemName1][$attributeName1], $result[$attributeName1]);
+
+            $result = $this->_amazon->getAttributes($domainName, $itemName2, $attributeName4);
+            $this->assertEquals($items[$itemName2][$attributeName4], $result[$attributeName4]);
             $this->assertEquals($items[$itemName1], $this->_amazon->getAttributes($domainName, $itemName1));
 
             $this->_amazon->deleteDomain($domainName);
@@ -280,10 +275,10 @@ class Zend_Service_Amazon_SimpleDb_OnlineTest extends PHPUnit_Framework_TestCase
             $attributeValue3 = 'value3';
             $attributeValue4 = 'value4';
             $attributes = array(
-                new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName1, $attributeValue1),
-                new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName2, $attributeValue2),
-                new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName3, $attributeValue3),
-                new Zend_Service_Amazon_SimpleDb_Attribute($itemName, $attributeName4, $attributeValue4)
+                new SimpleDb\Attribute($itemName, $attributeName1, $attributeValue1),
+                new SimpleDb\Attribute($itemName, $attributeName2, $attributeValue2),
+                new SimpleDb\Attribute($itemName, $attributeName3, $attributeValue3),
+                new SimpleDb\Attribute($itemName, $attributeName4, $attributeValue4)
             );
 
             // Now that everything's set up, test it

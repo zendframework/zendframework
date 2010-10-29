@@ -21,9 +21,13 @@
  */
 
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Authentication;
 
-require_once 'Zend/Service/Amazon/Authentication/V1.php';
+use Zend\Service\Amazon\Authentication,
+    Zend\Service\Amazon\Authentication\Exception;
 
 /**
  * Amazon V1 authentication test case
@@ -34,13 +38,13 @@ require_once 'Zend/Service/Amazon/Authentication/V1.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Authentication_V1Test extends PHPUnit_Framework_TestCase
+class V1Test extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Authentication_V2
+     * @var Authentication\V1
      */
-    private $Zend_Service_Amazon_Authentication_V2;
+    private $_amazon;
 
     /**
      * Prepares the environment before running a test.
@@ -49,7 +53,7 @@ class Zend_Service_Amazon_Authentication_V1Test extends PHPUnit_Framework_TestCa
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Authentication_V1 = new Zend_Service_Amazon_Authentication_V1('0PN5J17HBGZHT7JJ3X82', 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o', '2007-12-01');
+        $this->_amazon = new Authentication\V1('0PN5J17HBGZHT7JJ3X82', 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o', '2007-12-01');
     }
 
     /**
@@ -57,13 +61,13 @@ class Zend_Service_Amazon_Authentication_V1Test extends PHPUnit_Framework_TestCa
      */
     protected function tearDown()
     {
-        $this->Zend_Service_Amazon_Authentication_V1 = null;
+        $this->_amazon = null;
 
         parent::tearDown();
     }
 
     /**
-     * Tests Zend_Service_Amazon_Authentication_V2::generateSignature()
+     * Tests Authentication\V1::generateSignature()
      */
     public function testGenerateDevPaySignature()
     {
@@ -72,7 +76,7 @@ class Zend_Service_Amazon_Authentication_V1Test extends PHPUnit_Framework_TestCa
         $params['Action'] = "ActivateHostedProduct";
         $params['Timestamp'] = "2009-11-11T13:52:38Z";
 
-        $ret = $this->Zend_Service_Amazon_Authentication_V1->generateSignature($url, $params);
+        $ret = $this->_amazon->generateSignature($url, $params);
 
         $this->assertEquals('31Q2YlgABM5X3GkYQpGErcL10Xc=', $params['Signature']);
         $this->assertEquals("ActionActivateHostedProductAWSAccessKeyId0PN5J17HBGZHT7JJ3X82SignatureVersion1Timestamp2009-11-11T13:52:38ZVersion2007-12-01", $ret);

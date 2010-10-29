@@ -20,10 +20,13 @@
  * @version    $Id: AllTests.php 11973 2008-10-15 16:00:56Z matthew $
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Amazon\Authentication;
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
-
-require_once 'Zend/Service/Amazon/Authentication/V2.php';
+use Zend\Service\Amazon\Authentication,
+    Zend\Service\Amazon\Authentication\Exception;
 
 /**
  * Amazon V2 authentication test case
@@ -34,13 +37,13 @@ require_once 'Zend/Service/Amazon/Authentication/V2.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Amazon_Authentication_V2Test extends PHPUnit_Framework_TestCase
+class V2Test extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Authentication_V2
+     * @var Authentication\V2
      */
-    private $Zend_Service_Amazon_Authentication_V2;
+    private $_amazon;
 
     /**
      * Prepares the environment before running a test.
@@ -49,7 +52,7 @@ class Zend_Service_Amazon_Authentication_V2Test extends PHPUnit_Framework_TestCa
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Authentication_V2 = new Zend_Service_Amazon_Authentication_V2('0PN5J17HBGZHT7JJ3X82', 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o', '2009-07-15');
+        $this->_amazon = new Authentication\V2('0PN5J17HBGZHT7JJ3X82', 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o', '2009-07-15');
     }
 
     /**
@@ -57,13 +60,13 @@ class Zend_Service_Amazon_Authentication_V2Test extends PHPUnit_Framework_TestCa
      */
     protected function tearDown()
     {
-        $this->Zend_Service_Amazon_Authentication_V2 = null;
+        $this->_amazon = null;
 
         parent::tearDown();
     }
 
     /**
-     * Tests Zend_Service_Amazon_Authentication_V2::generateSignature()
+     * Tests Authentication\V2::generateSignature()
      */
     public function testGenerateEc2PostSignature()
     {
@@ -73,7 +76,7 @@ class Zend_Service_Amazon_Authentication_V2Test extends PHPUnit_Framework_TestCa
         $params['ImageId.1'] = "ami-2bb65342";
         $params['Timestamp'] = "2009-11-11T13:52:38Z";
 
-        $ret = $this->Zend_Service_Amazon_Authentication_V2->generateSignature($url, $params);
+        $ret = $this->_amazon->generateSignature($url, $params);
 
         $this->assertEquals('8B2cxwK/dfezT49KEzD+wjo1ZbJCddyFOLA0RNZobbc=', $params['Signature']);
         $this->assertEquals(file_get_contents(dirname(__FILE__) . '/_files/ec2_v2_return.txt'), $ret);
@@ -88,8 +91,8 @@ class Zend_Service_Amazon_Authentication_V2Test extends PHPUnit_Framework_TestCa
         $params['Attribute.Value'] = "90";
         $params['Timestamp'] = "2009-11-11T13:52:38Z";
 
-        $this->Zend_Service_Amazon_Authentication_V2->setHttpMethod('GET');
-        $ret = $this->Zend_Service_Amazon_Authentication_V2->generateSignature($url, $params);
+        $this->_amazon->setHttpMethod('GET');
+        $ret = $this->_amazon->generateSignature($url, $params);
 
         $this->assertEquals('YSw7HXDqokM/A6DhLz8kG+sd+oD5eMjqx3a02A0+GkE=', $params['Signature']);
         $this->assertEquals(file_get_contents(dirname(__FILE__) . '/_files/sqs_v2_get_return.txt'), $ret);

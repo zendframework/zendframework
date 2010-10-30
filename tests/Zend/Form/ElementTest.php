@@ -30,6 +30,7 @@ use Zend\Form\Element,
     Zend\Controller\Front as FrontController,
     Zend\Json\Json,
     Zend\Loader\PrefixPathLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\Validator\AbstractValidator,
@@ -464,7 +465,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('validator');
         $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Validator');
-        $this->assertTrue(is_array($paths), var_export($loader, 1));
+        $this->assertType('SplStack', $paths);
         $this->assertTrue(0 < count($paths));
         $this->assertContains('Validator', $paths[0]);
     }
@@ -474,7 +475,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('filter');
         $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertTrue(0 < count($paths));
         $this->assertContains('Filter', $paths[0]);
     }
@@ -484,7 +485,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('decorator');
         $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Form\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertTrue(0 < count($paths));
         $this->assertContains('Decorator', $paths[0]);
     }
@@ -499,6 +500,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
     {
+        $loader = new PrefixPathLoader();
         $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
         $this->element->setPluginLoader($loader, 'foo');
     }
@@ -536,7 +538,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('validator');
         $this->element->addPrefixPath('Zend\Form', 'Zend/Form/', 'validator');
         $paths = $loader->getPaths('Zend\Form');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Form', $paths[0]);
     }
 
@@ -555,7 +557,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('validator');
         $this->element->addPrefixPath('Zend\Form', 'Zend/Form/', 'validator');
         $paths = $loader->getPaths('Zend\Form');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Form', $paths[0]);
     }
 
@@ -574,7 +576,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('decorator');
         $this->element->addPrefixPath('Zend\Foo', 'Zend/Foo/', 'decorator');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Foo', $paths[0]);
     }
 
@@ -599,15 +601,15 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                       ->addPrefixPath('Zend', 'Zend/');
 
         $paths = $filterLoader->getPaths('Zend\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Filter', $paths[0]);
 
         $paths = $validatorLoader->getPaths('Zend\Validator');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Validator', $paths[0]);
 
         $paths = $decoratorLoader->getPaths('Zend\Decorator');
-        $this->assertTrue(is_array($paths), var_export($paths, 1));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Decorator', $paths[0]);
     }
 
@@ -1757,8 +1759,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         foreach (array('validator', 'filter', 'decorator') as $type) {
             $loader = $this->element->getPluginLoader($type);
             $paths = $loader->getPaths('Zend\Foo\\' . ucfirst($type));
-            $this->assertTrue(is_array($paths), "Failed for type $type: " . var_export($paths, 1));
-            $this->assertFalse(empty($paths));
+            $this->assertType('SplStack', $paths);
+            $this->assertNotEquals(0, count($paths));
             $this->assertContains('Foo', $paths[0]);
         }
     }
@@ -1773,8 +1775,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $loader = $this->element->getPluginLoader('filter');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertFalse(empty($paths));
+        $this->assertType('SplStack', $paths);
+        $this->assertNotEquals(0, count($paths));
         $this->assertContains('Foo', $paths[0]);
     }
 
@@ -1788,8 +1790,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $loader = $this->element->getPluginLoader('decorator');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertFalse(empty($paths));
+        $this->assertType('SplStack', $paths);
+        $this->assertNotEquals(0, count($paths));
         $this->assertContains('Foo', $paths[0]);
     }
 

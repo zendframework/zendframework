@@ -22,6 +22,7 @@
  * @namespace
  */
 namespace Zend\Amf;
+
 use Zend\Amf\Exception,
     Zend\Authentication\AuthenticationService,
     Zend\Loader\Broker,
@@ -315,7 +316,7 @@ class Server implements \Zend\Server\Server
     {
         if (is_string($broker)) {
             if (!class_exists($broker)) {
-                throw new Exception(sprintf(
+                throw new Exception\InvalidArgumentException(sprintf(
                     'Invalid broker class ("") provided; could not resolve class',
                     $broker
                 ));
@@ -323,7 +324,7 @@ class Server implements \Zend\Server\Server
             $broker = new $broker;
         }
         if (!$broker instanceof Broker) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Broker must implement Zend\Loader\Broker; received ""',
                 (is_object($broker) ? get_class($broker) : gettype($broker))
             ));
@@ -790,7 +791,7 @@ class Server implements \Zend\Server\Server
 
         $this->_classAllowed[is_object($class) ? get_class($class) : $class] = true;
 
-        $this->_methods[] = Reflection::reflectClass($class, $argv, $namespace);
+        $this->_methods[] = Reflection\Reflection::reflectClass($class, $argv, $namespace);
         $this->_buildDispatchTable();
 
         return $this;
@@ -824,7 +825,7 @@ class Server implements \Zend\Server\Server
             if (!is_string($func) || !function_exists($func)) {
                 throw new Exception\InvalidArgumentException('Unable to attach function');
             }
-            $this->_methods[] = Reflection::reflectFunction($func, $argv, $namespace);
+            $this->_methods[] = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
         }
 
         $this->_buildDispatchTable();

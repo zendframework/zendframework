@@ -28,7 +28,7 @@ use Zend\Form\Element\Exception,
     Zend\Form\Decorator\FileDecorator,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\View\ViewEngine as View,
+    Zend\View\Renderer as View,
     Zend\File\Transfer\Adapter\AbstractAdapter as AbstractFileAdapter;
 
 /**

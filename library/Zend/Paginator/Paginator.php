@@ -196,7 +196,7 @@ class Paginator implements \Countable, \IteratorAggregate
                 $adapter = 'null';
             } else {
                 $type = (is_object($data)) ? get_class($data) : gettype($data);
-                throw new Exception('No adapter for type ' . $type);
+                throw new Exception\InvalidArgumentException('No adapter for type ' . $type);
             }
         }
 
@@ -215,7 +215,7 @@ class Paginator implements \Countable, \IteratorAggregate
     {
         if (is_string($broker)) {
             if (!class_exists($broker)) {
-                throw new Exception(sprintf(
+                throw new Exception\InvalidArgumentException(sprintf(
                     'Unable to locate adapter broker of class "%s"',
                     $broker
                 ));
@@ -223,7 +223,7 @@ class Paginator implements \Countable, \IteratorAggregate
             $broker = new $broker();
         }
         if (!$broker instanceof AdapterBroker) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Pagination adapter broker must extend AdapterBroker; received "%s"',
                 (is_object($broker) ? get_class($broker) : gettype($broker))
             ));
@@ -323,7 +323,7 @@ class Paginator implements \Countable, \IteratorAggregate
     {
         if (is_string($broker)) {
             if (!class_exists($broker)) {
-                throw new Exception(sprintf(
+                throw new Exception\InvalidArgumentException(sprintf(
                     'Unable to locate scrolling style broker of class "%s"',
                     $broker
                 ));
@@ -331,7 +331,7 @@ class Paginator implements \Countable, \IteratorAggregate
             $broker = new $broker();
         }
         if (!$broker instanceof ScrollingStyleBroker) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Pagination scrolling-style broker must extend ScrollingStyleBroker; received "%s"',
                 (is_object($broker) ? get_class($broker) : gettype($broker))
             ));

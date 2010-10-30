@@ -47,7 +47,7 @@ class ValidatorBroker extends PluginSpecBroker
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Validator) {
-            throw new Exception('Validators must implement Zend\Validator\Validator');
+            throw new Exception\RuntimeException('Validators must implement Zend\Validator\Validator');
         }
         return true;
     }

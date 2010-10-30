@@ -23,10 +23,12 @@
  * @namespace
  */
 namespace ZendTest\File\Transfer\Adapter;
-use Zend\Loader\PluginLoader;
-use Zend\Validator\File;
-use Zend\Filter;
-use Zend\File\Transfer;
+
+use Zend\Loader\PrefixPathLoader,
+    Zend\Loader\ShortNameLocater,
+    Zend\Validator\File,
+    Zend\Filter,
+    Zend\File\Transfer;
 
 /**
  * Test class for Zend_File_Transfer_Adapter_Abstract
@@ -81,19 +83,19 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForValidators()
     {
         $loader = $this->adapter->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathLoader);
     }
 
     public function testAdapterShouldAllowAddingCustomPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->adapter->setPluginLoader($loader, 'filter');
         $this->assertSame($loader, $this->adapter->getPluginLoader('filter'));
     }
 
     public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid type "BOGUS" provided to setPluginLoader');
         $this->adapter->setPluginLoader($loader, 'bogus');
@@ -104,7 +106,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $loader = $this->adapter->getPluginLoader('validator');
         $this->adapter->addPrefixPath('Foo_Valid', 'Foo/Valid/', 'validator');
         $paths = $loader->getPaths('Foo_Valid');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
     }
 
     public function testPassingNoTypeWhenAddingPrefixPathToAdapterShouldGeneratePathsForAllTypes()
@@ -113,9 +115,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $validateLoader = $this->adapter->getPluginLoader('validator');
         $filterLoader   = $this->adapter->getPluginLoader('filter');
         $paths = $validateLoader->getPaths('Foo\Validator');
-        $this->assertTrue(is_array($paths), var_export($paths, 1));
+        $this->assertType('SplStack', $paths);
         $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
     }
 
 
@@ -141,13 +143,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             array('type' => 'filter', 'prefix' => 'Bar\Filter', 'path' => 'Bar/Filter/'),
         ));
         $paths = $validatorLoader->getPaths('Foo\Valid');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $paths = $filterLoader->getPaths('Bar\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $paths = $filterLoader->getPaths('Baz\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertEquals(2, count($paths));
     }
 
@@ -155,9 +157,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $loader = $this->adapter->getPluginLoader('validator');
         $paths  = $loader->getPaths('Zend\Validator');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $paths  = $loader->getPaths('Zend\Validator\File');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
     }
 
     public function testAdapterShouldAllowAddingValidatorInstance()
@@ -348,16 +350,16 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForFilters()
     {
         $loader = $this->adapter->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof ShortNameLocater);
     }
 
     public function testFilterPluginLoaderShouldRegisterPathsForBaseAndFileFiltersByDefault()
     {
         $loader = $this->adapter->getPluginLoader('filter');
         $paths  = $loader->getPaths('Zend\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $paths  = $loader->getPaths('Zend\Filter\File');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
     }
 
     public function testAdapterShouldAllowAddingFilterInstance()

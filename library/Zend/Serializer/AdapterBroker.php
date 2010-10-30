@@ -47,7 +47,7 @@ class AdapterBroker extends PluginBroker
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Adapter) {
-            throw new Exception('Serializer adapters must implement Zend\Serializer\Adapter');
+            throw new Exception\RuntimeException('Serializer adapters must implement Zend\Serializer\Adapter');
         }
         return true;
     }

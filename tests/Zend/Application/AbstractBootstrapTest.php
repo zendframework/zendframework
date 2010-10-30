@@ -190,13 +190,6 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($resources, $test);
     }
 
-    public function testRegisterPluginResourceShouldThrowExceptionForInvalidResourceType()
-    {
-        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
-        $bootstrap = new TestAsset\ZfAppBootstrap($this->application);
-        $bootstrap->registerPluginResource(array());
-    }
-
     public function testShouldAllowRegisteringConcretePluginResources()
     {
         $bootstrap = new TestAsset\ZfAppBootstrap($this->application);

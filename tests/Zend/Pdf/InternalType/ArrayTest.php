@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -66,31 +65,25 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testPDFArrayBadInput1()
     {
-        try {
-            $arrayObj = new InternalType\ArrayObject(346);
-        } catch (Pdf\Exception $e) {
-            $this->assertContains('must be an array', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException('\Zend\Pdf\Exception\RuntimeException', 'Argument must be an array');
+        $arrayObj = new InternalType\ArrayObject(346);
     }
 
     public function testPDFArrayBadInput2()
     {
-        try {
-            $srcArray = array();
-            $srcArray[] = new InternalType\BooleanObject(false);
-            $srcArray[] = new InternalType\NumericObject(100.426);
-            $srcArray[] = new InternalType\NameObject('MyName');
-            $srcArray[] = new InternalType\StringObject('some text');
-            $srcArray[] = new InternalType\BinaryStringObject('some text');
-            $srcArray[] = 24;
-            $arrayObj = new InternalType\ArrayObject($srcArray);
-        } catch (Pdf\Exception $e) {
-            $this->assertContains('must be \Zend\Pdf\InternalType\AbstractTypeObject', $e->getMessage());
-            return;
-        }
-        $this->fail('No exception thrown.');
+        $this->setExpectedException(
+            '\Zend\Pdf\Exception\RuntimeException',
+            'Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects'
+        );
+
+        $srcArray = array();
+        $srcArray[] = new InternalType\BooleanObject(false);
+        $srcArray[] = new InternalType\NumericObject(100.426);
+        $srcArray[] = new InternalType\NameObject('MyName');
+        $srcArray[] = new InternalType\StringObject('some text');
+        $srcArray[] = new InternalType\BinaryStringObject('some text');
+        $srcArray[] = 24;
+        $arrayObj = new InternalType\ArrayObject($srcArray);
     }
 
     public function testGetType()
@@ -131,14 +124,13 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     /*
     public function testAddBadArgument()
     {
-        try {
-            $arrayObj = new ZPDFPDFArray();
-            $arrayObj->add(100.426);
-        } catch (Z\end\Pdf\Exception $e) {
-            $this->assertContains('must be \Zend\Pdf\InternalType', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException(
+            '\Zend\Pdf\Exception\RuntimeException',
+            'Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects'
+        );
+
+        $arrayObj = new ZPDFPDFArray();
+        $arrayObj->add(100.426);
     }
     //*/
 }

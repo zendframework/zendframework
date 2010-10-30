@@ -17,13 +17,13 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
+use Zend\Tool\Project\Context\Exception;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -71,7 +71,7 @@ class LayoutScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
         if ($layoutName = $this->_resource->getAttribute('layoutName')) {
             $this->_layoutName = $layoutName;
         } else {
-            throw new \Zend\Tool\Project\Exception('Either a forActionName or scriptName is required.');
+            throw new Exception\RuntimeException('Either a forActionName or scriptName is required.');
         }
 
         parent::init();

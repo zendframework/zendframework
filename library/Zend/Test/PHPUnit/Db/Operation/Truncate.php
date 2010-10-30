@@ -17,7 +17,6 @@
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -32,9 +31,8 @@ namespace Zend\Test\PHPUnit\Db\Operation;
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
  * @uses       PHPUnit_Extensions_Database_Operation_Exception
  * @uses       PHPUnit_Extensions_Database_Operation_IDatabaseOperation
- * @uses       \Zend\Exception
  * @uses       \Zend\Test\PHPUnit\Db\Connection
- * @uses       \Zend\Test\PHPUnit\Db\Exception
+ * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -52,7 +50,9 @@ class Truncate implements \PHPUnit_Extensions_Database_Operation_IDatabaseOperat
     public function execute(\PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, \PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
     {
         if(!($connection instanceof \Zend\Test\PHPUnit\Db\Connection)) {
-            throw new \Zend\Test\PHPUnit\Db\Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
+            throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
+            	"Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!"
+            );
         }
 
         foreach ($dataSet->getReverseIterator() AS $table) {
@@ -86,7 +86,7 @@ class Truncate implements \PHPUnit_Extensions_Database_Operation_IDatabaseOperat
             } else {
                 $db->query('IMPORT FROM /dev/null OF DEL REPLACE INTO '.$tableName);
             }*/
-            throw \Zend\Exception("IBM Db2 TRUNCATE not supported.");
+            throw \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException("IBM Db2 TRUNCATE not supported.");
         } else if($this->_isMssqlOrOracle($db)) {
             $db->query('TRUNCATE TABLE '.$tableName);
         } else if($db instanceof \Zend\Db\Adapter\Pdo\PgSql) {

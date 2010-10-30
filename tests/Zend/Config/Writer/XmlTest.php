@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Config\Writer;
@@ -52,7 +51,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Xml(array('config' => new Config(array())));
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No filename was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No filename was set');
         $writer->write();
     }
 
@@ -60,7 +59,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Xml(array('filename' => $this->_tempName));
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No config was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No config was set');
         $writer->write();
     }
 
@@ -68,7 +67,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Xml(array('config' => new Config(array()), 'filename' => '/../../../'));
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Could not write to file');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Could not write to file');
         $writer->write();
     }
 
@@ -165,7 +164,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Config(array('foo' => array('bar' => array('a', 'b', 'c' => 'd'))));
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Mixing of string and numeric keys is not allowed');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Mixing of string and numeric keys is not allowed');
         $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
     }

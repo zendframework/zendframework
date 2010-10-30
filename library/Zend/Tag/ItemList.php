@@ -17,7 +17,6 @@
  * @subpackage ItemList
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,12 +24,17 @@
  */
 namespace Zend\Tag;
 
+use Zend\Amf\Parser\Exception;
+
+use Zend\Tag\Exception\InvalidArgumentException,
+	Zend\Tag\Exception\OutOfBoundsException;
+
 /**
  * @uses       ArrayAccess
  * @uses       Countable
- * @uses       OutOfBoundsException
  * @uses       SeekableIterator
- * @uses       \Zend\Tag\Exception
+ * @uses       \Zend\Tag\Exception\InvalidArgumentException
+ * @uses       \Zend\Tag\Exception\OutOfBoundsException
  * @category   Zend
  * @package    Zend_Tag
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -59,14 +63,14 @@ class ItemList implements \Countable, \SeekableIterator, \ArrayAccess
      * Spread values in the items relative to their weight
      *
      * @param  array $values
-     * @throws \Zend\Tag\Exception When value list is empty
+     * @throws \Zend\Tag\Exception\InvalidArgumentException When value list is empty
      * @return void
      */
     public function spreadWeightValues(array $values)
     {
         // Don't allow an empty value list
         if (count($values) === 0) {
-            throw new Exception('Value list may not be empty');
+            throw new InvalidArgumentException('Value list may not be empty');
         }
 
         // Re-index the array
@@ -119,7 +123,7 @@ class ItemList implements \Countable, \SeekableIterator, \ArrayAccess
      * Seek to an absolute positio
      *
      * @param  integer $index
-     * @throws OutOfBoundsException When the seek position is invalid
+     * @throws \Zend\Tag\Exception\OutOfBoundsException When the seek position is invalid
      * @return void
      */
     public function seek($index)
@@ -133,7 +137,7 @@ class ItemList implements \Countable, \SeekableIterator, \ArrayAccess
         }
 
         if (!$this->valid()) {
-            throw new \OutOfBoundsException('Invalid seek position');
+            throw new OutOfBoundsException('Invalid seek position');
         }
     }
 
@@ -212,14 +216,14 @@ class ItemList implements \Countable, \SeekableIterator, \ArrayAccess
      *
      * @param  mixed          $offset
      * @param  \Zend\Tag\Taggable $item
-     * @throws OutOfBoundsException When item does not implement \Zend\Tag\Taggable
+     * @throws \Zend\Tag\Exception\OutOfBoundsException When item does not implement Zend\Tag\Taggable
      * @return void
      */
     public function offsetSet($offset, $item) {
         // We need to make that check here, as the method signature must be
         // compatible with ArrayAccess::offsetSet()
         if (!($item instanceof Taggable)) {
-            throw new Exception('Item must implement Zend_Tag_Taggable');
+            throw new OutOfBoundsException('Item must implement Zend\Tag\Taggable');
         }
 
         if ($offset === null) {

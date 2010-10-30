@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -54,7 +53,7 @@ class DefaultKeyInfo extends AbstractKeyInfo
         list($sectokenref) = $this->xpath('//o:SecurityTokenReference');
 
         if(!($sectokenref instanceof \Zend\InfoCard\XML\AbstractElement)) {
-            throw new \Zend\InfoCard\XML\Exception('Could not locate the Security Token Reference');
+            throw new \Zend\InfoCard\XML\Exception\RuntimeException('Could not locate the Security Token Reference');
         }
 
         return \Zend\InfoCard\XML\SecurityTokenReference::getInstance($sectokenref);

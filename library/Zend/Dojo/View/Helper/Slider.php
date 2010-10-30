@@ -17,7 +17,6 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,7 @@
  */
 namespace Zend\Dojo\View\Helper;
 
-use Zend\Dojo\View\Exception as DojoViewException;
+use Zend\Dojo\View\Exception;
 
 /**
  * Abstract class for Dojo Slider dijits
@@ -76,7 +75,7 @@ abstract class Slider extends Dijit
 
         foreach ($this->_requiredParams as $param) {
             if (!array_key_exists($param, $params)) {
-                throw new DojoViewException('prepareSlider() requires minimally the "minimum", "maximum", and "discreteValues" parameters');
+                throw new Exception\InvalidArgumentException('prepareSlider() requires minimally the "minimum", "maximum", and "discreteValues" parameters');
             }
         }
 
@@ -132,7 +131,7 @@ abstract class Slider extends Dijit
                 }
                 break;
             default:
-                throw new DojoViewException('Invalid slider type; slider must be horizontal or vertical');
+                throw new Exception\InvalidArgumentException('Invalid slider type; slider must be horizontal or vertical');
         }
 
         return $hidden . $this->_createLayoutContainer($id, $content, $params, $attribs);

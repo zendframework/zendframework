@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -67,7 +66,7 @@ class AES256CBC
         // Can't test for this
         // @codeCoverageIgnoreStart
         if(!extension_loaded('mcrypt')) {
-            throw new Cipher\Exception("Use of the AES256CBC Cipher requires the mcrypt extension");
+            throw new Cipher\Exception\ExtensionNoLoadedException("Use of the AES256CBC Cipher requires the mcrypt extension");
         }
         // @codeCoveregIgnoreEnd
     }
@@ -96,7 +95,7 @@ class AES256CBC
         $decrypted = mcrypt_decrypt(self::MCRYPT_CIPHER, $decryptionKey, $encryptedData, self::MCRYPT_MODE, $mcrypt_iv);
 
         if(!$decrypted) {
-            throw new Cipher\Exception("Failed to decrypt data using AES256CBC Algorithm");
+            throw new Cipher\Exception\RuntimeException("Failed to decrypt data using AES256CBC Algorithm");
         }
 
         $decryptedLength = strlen($decrypted);

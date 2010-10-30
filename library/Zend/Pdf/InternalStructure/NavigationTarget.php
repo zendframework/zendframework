@@ -14,16 +14,16 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\InternalStructure;
+use Zend\Pdf\Exception;
 use Zend\Pdf\Action;
 use Zend\Pdf\Destination;
 use Zend\Pdf\InternalType;
@@ -37,7 +37,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -60,7 +60,7 @@ abstract class NavigationTarget
                 // It's a destination
                 $resource = $resource->D;
             } else {
-                throw new Pdf\Exception('Wrong resource type.');
+                throw new Exception\CorruptedPdfException('Wrong resource type.');
             }
         }
 
@@ -70,7 +70,7 @@ abstract class NavigationTarget
             // Resource is an array, just treat it as an explicit destination array
             return Destination\AbstractDestination::load($resource);
         } else {
-            throw new Pdf\Exception('Wrong resource type.');
+            throw new Exception\CorruptedPdfException('Wrong resource type.');
         }
     }
 

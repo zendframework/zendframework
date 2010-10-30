@@ -17,7 +17,6 @@
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -254,7 +253,7 @@ class Client
             /**
              * Exception thrown when an HTTP error occurs
              */
-            throw new Client\HttpException(
+            throw new Client\Exception\HttpException(
                 $httpResponse->getMessage(),
                 $httpResponse->getStatus()
             );
@@ -335,8 +334,10 @@ class Client
             /**
              * Exception thrown when an XML-RPC fault is returned
              */
-            throw new Client\FaultException($fault->getMessage(),
-                                                        $fault->getCode());
+            throw new Client\Exception\FaultException(
+                $fault->getMessage(),
+                $fault->getCode()
+                );
         }
 
         return $this->_lastResponse->getReturnValue();

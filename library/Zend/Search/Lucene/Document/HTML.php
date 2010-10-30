@@ -17,7 +17,6 @@
  * @subpackage Document
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,7 +26,9 @@ namespace Zend\Search\Lucene\Document;
 
 use Zend\Search\Lucene\Document,
     Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\Analyzer;
+    Zend\Search\Lucene\Analysis\Analyzer,
+    Zend\Search\Lucene\Exception\RuntimeException,
+    Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
  * HTML document.
@@ -37,7 +38,8 @@ use Zend\Search\Lucene\Document,
  * @uses       \Zend\Search\Lucene\Analysis\Analyzer
  * @uses       \Zend\Search\Lucene\Document
  * @uses       \Zend\Search\Lucene\Document\Field
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document
@@ -291,7 +293,7 @@ class HTML extends Document
      * @param array   $wordsToHighlight
      * @param callback $callback   Callback method, used to transform (highlighting) text.
      * @param array    $params     Array of additionall callback parameters (first non-optional parameter is a text to transform)
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     protected function _highlightTextNode(\DOMText $node, $wordsToHighlight, $callback, $params)
     {
@@ -332,7 +334,7 @@ class HTML extends Document
                                        . $highlightedWordNodeSetHTML
                                        . '</body></html>');
             if (!$success) {
-                throw new Lucene\Exception("Error occured while loading highlighted text fragment: '$highlightedWordNodeSetHTML'.");
+                throw new RuntimeException("Error occured while loading highlighted text fragment: '$highlightedWordNodeSetHTML'.");
             }
             $highlightedWordNodeSetXpath = new \DOMXPath($highlightedWordNodeSetDomDocument);
             $highlightedWordNodeSet      = $highlightedWordNodeSetXpath->query('/html/body')->item(0)->childNodes;
@@ -414,8 +416,8 @@ class HTML extends Document
      * @param callback $callback   Callback method, used to transform (highlighting) text.
      * @param array    $params     Array of additionall callback parameters passed through into it
      *                             (first non-optional parameter is an HTML fragment for highlighting)
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @return string
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function highlightExtended($words, $callback, $params = array())
     {
@@ -440,7 +442,7 @@ class HTML extends Document
         }
 
         if (!is_callable($callback)) {
-            throw new Lucene\Exception('$viewHelper parameter mast be a View Helper name, View Helper object or callback.');
+            throw new InvalidArgumentException('$viewHelper parameter mast be a View Helper name, View Helper object or callback.');
         }
 
         $xpath = new \DOMXPath($this->_doc);

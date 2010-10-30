@@ -14,16 +14,16 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\InternalType\StreamFilter\Compression;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Exception
  * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression\AbstractCompression
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -63,12 +63,12 @@ class Flate extends AbstractCompression
                 if (!isset($php_errormsg)) {
                     $php_errormsg = 'Error occured while compressing PDF data using gzcompress() function.';
                 }
-                throw new Pdf\Exception($php_errormsg);
+                throw new Exception\RuntimeException($php_errormsg);
             }
 
             ini_set('track_errors', $trackErrors);
         } else {
-            throw new Pdf\Exception('Not implemented yet. You have to use zlib extension.');
+            throw new Exception\NotImplementedException('Compression support requires zlib extension.');
         }
 
         return $output;
@@ -95,12 +95,12 @@ class Flate extends AbstractCompression
                 if (!isset($php_errormsg)) {
                     $php_errormsg = 'Error occured while uncompressing PDF data using gzuncompress() function.';
                 }
-                throw new Pdf\Exception($php_errormsg);
+                throw new Exception\RuntimeException($php_errormsg);
             }
 
             ini_set('track_errors', $trackErrors);
         } else {
-            throw new Pdf\Exception('Not implemented yet');
+            throw new Exception\NotImplementedException('Compression support requires zlib extension.');
         }
 
         if ($params !== null) {

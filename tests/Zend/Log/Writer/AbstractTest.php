@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Log\Writer;
@@ -57,7 +56,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->_writer->addFilter(1);
         $this->_writer->addFilter(new MessageFilter('/mess/'));
-        $this->setExpectedException('Zend\Log\Exception');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
         $this->_writer->addFilter(new \StdClass());
     }
 

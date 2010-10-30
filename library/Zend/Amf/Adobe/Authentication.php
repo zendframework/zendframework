@@ -16,7 +16,6 @@
  * @package    Zend_Amf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -108,7 +107,7 @@ Roles file format:
         if (empty($this->_username) 
             || empty($this->_password)
         ) {
-            throw new Authentication\Adapter\Exception('Username/password should be set');
+            throw new Authentication\Adapter\Exception\InvalidArgumentException('Username/password should be set');
         }
 
         if (!isset($this->_users[$this->_username])) {

@@ -17,7 +17,6 @@
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,7 +26,7 @@ namespace Zend\Search\Lucene\Search;
 use Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\UnexpectedValueException
  * @uses       \Zend\Search\Lucene\AbstractFSM
  * @uses       \Zend\Search\Lucene\FSMAction
  * @uses       \Zend\Search\Lucene\Search\QueryParser
@@ -194,13 +193,13 @@ class BooleanExpressionRecognizer extends Lucene\AbstractFSM
      *        ...
      *      ) // end of structure
      *
+     * @throws \Zend\Search\Lucene\Exception\UnexpectedValueException
      * @return array
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function finishExpression()
     {
         if ($this->getState() != self::ST_LITERAL) {
-            throw new Lucene\Exception('Literal expected.');
+            throw new Lucene\Exception\UnexpectedValueException('Literal expected.');
         }
 
         $this->_conjunctions[] = $this->_currentConjunction;

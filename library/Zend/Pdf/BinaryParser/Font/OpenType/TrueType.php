@@ -17,13 +17,13 @@
  * @subpackage FileParser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\Font\OpenType;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -65,8 +65,7 @@ class TrueType extends AbstractOpenType
                 break;
 
             default:
-                throw new Pdf\Exception('Not a TrueType font file',
-                                             Pdf\Exception::WRONG_FONT_TYPE);
+                throw new Exception\UnrecognizedFontException('Not a TrueType font file');
         }
 
         $this->fontType = Pdf\Font::TYPE_TRUETYPE;

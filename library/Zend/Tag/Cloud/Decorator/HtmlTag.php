@@ -17,7 +17,6 @@
  * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,10 +24,13 @@
  */
 namespace Zend\Tag\Cloud\Decorator;
 
+use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException,
+    Zend\Tag\ItemList;
+
 /**
  * Simple HTML decorator for tags
  *
- * @uses      \Zend\Tag\Cloud\Decorator\Exception
+ * @uses      \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException
  * @uses      \Zend\Tag\Cloud\Decorator\Tag
  * @category  Zend
  * @package   Zend_Tag
@@ -92,20 +94,20 @@ class HTMLTag extends Tag
      * Set a list of classes to use instead of fontsizes
      *
      * @param  array $classList
-     * @throws \Zend\Tag\Cloud\Decorator\Exception When the classlist is empty
-     * @throws \Zend\Tag\Cloud\Decorator\Exception When the classlist contains an invalid classname
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When the classlist is empty
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When the classlist contains an invalid classname
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setClassList(array $classList = null)
     {
         if (is_array($classList)) {
             if (count($classList) === 0) {
-                throw new Exception('Classlist is empty');
+                throw new InvalidArgumentException('Classlist is empty');
             }
 
             foreach ($classList as $class) {
                 if (!is_string($class)) {
-                    throw new Exception('Classlist contains an invalid classname');
+                    throw new InvalidArgumentException('Classlist contains an invalid classname');
                 }
             }
         }
@@ -152,13 +154,13 @@ class HTMLTag extends Tag
      * Possible values are: em, ex, px, in, cm, mm, pt, pc and %
      *
      * @param  string $fontSizeUnit
-     * @throws \Zend\Tag\Cloud\Decorator\Exception When an invalid fontsize unit is specified
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When an invalid fontsize unit is specified
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setFontSizeUnit($fontSizeUnit)
     {
         if (!in_array($fontSizeUnit, $this->_alloweFontSizeUnits)) {
-            throw new Exception('Invalid fontsize unit specified');
+            throw new InvalidArgumentException('Invalid fontsize unit specified');
         }
 
         $this->_fontSizeUnit = (string) $fontSizeUnit;
@@ -201,13 +203,13 @@ class HTMLTag extends Tag
      * Set maximum font size
      *
      * @param  integer $maxFontSize
-     * @throws \Zend\Tag\Cloud\Decorator\Exception When fontsize is not numeric
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When fontsize is not numeric
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setMaxFontSize($maxFontSize)
     {
         if (!is_numeric($maxFontSize)) {
-            throw new Exception('Fontsize must be numeric');
+            throw new InvalidArgumentException('Fontsize must be numeric');
         }
 
         $this->_maxFontSize = (int) $maxFontSize;
@@ -229,13 +231,13 @@ class HTMLTag extends Tag
      * Set minimum font size
      *
      * @param  int $minFontSize
-     * @throws \Zend\Tag\Cloud\Decorator\Exception When fontsize is not numeric
+     * @throws \Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException When fontsize is not numeric
      * @return \Zend\Tag\Cloud\Decorator\HTMLTag
      */
     public function setMinFontSize($minFontSize)
     {
         if (!is_numeric($minFontSize)) {
-            throw new Exception('Fontsize must be numeric');
+            throw new InvalidArgumentException('Fontsize must be numeric');
         }
 
         $this->_minFontSize = (int) $minFontSize;
@@ -254,13 +256,19 @@ class HTMLTag extends Tag
     }
 
     /**
-     * Defined by Zend_Tag_Cloud_Decorator_Tag
+     * Defined by Zend\Tag\Cloud\Decorator\Tag
      *
      * @param  \Zend\Tag\ItemList $tags
      * @return array
      */
-    public function render(\Zend\Tag\ItemList $tags)
+    public function render($tags)
     {
+        if (!$tags instanceof ItemList) {
+            throw new Exception(sprintf(
+                'HtmlTag::render() expects a Zend\Tag\ItemList argument; received "%s"',
+                (is_object($tags) ? get_class($tags) : gettype($tags))
+            ));
+        }
         if (null === ($weightValues = $this->getClassList())) {
             $weightValues = range($this->getMinFontSize(), $this->getMaxFontSize());
         }

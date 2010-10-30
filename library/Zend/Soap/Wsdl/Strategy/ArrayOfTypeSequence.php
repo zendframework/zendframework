@@ -16,7 +16,6 @@
  * @package    Zend_Soap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -89,7 +88,6 @@ class ArrayOfTypeSequence extends DefaultComplexType
     /**
      * From a nested defintion with type[], get the singular xsd:type
      *
-     * @throws \Zend\Soap\WsdlException When no xsd:simpletype can be detected.
      * @param  string $type
      * @return string
      */

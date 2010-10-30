@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -146,7 +145,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         AbstractTable::setDefaultAdapter(null);
         $validator = new RecordExistsValidator('users', 'field1', 'id != 1');
-        $this->setExpectedException('Zend\Validator\Exception');
+        $this->setExpectedException('Zend\Validator\Exception\RuntimeException', 'No database adapter present');
         $valid = $validator->isValid('nosuchvalue');
     }
 
@@ -187,12 +186,8 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         //clear the default adapter to ensure provided one is used
         AbstractTable::setDefaultAdapter(null);
-        try {
-            $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
-            $this->assertTrue($validator->isValid('value1'));
-        } catch (\Zend\Exception $e) {
-            $this->markTestSkipped('No database available');
-        }
+        $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
+        $this->assertTrue($validator->isValid('value1'));
     }
 
     /**
@@ -204,12 +199,8 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         //clear the default adapter to ensure provided one is used
         AbstractTable::setDefaultAdapter(null);
-        try {
-            $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterNoResult);
-            $this->assertFalse($validator->isValid('value1'));
-        } catch (\Exception $e) {
-            $this->markTestSkipped('No database available');
-        }
+        $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterNoResult);
+        $this->assertFalse($validator->isValid('value1'));
     }
 
     /**

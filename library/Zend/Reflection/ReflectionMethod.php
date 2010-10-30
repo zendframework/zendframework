@@ -16,7 +16,6 @@
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -46,12 +45,12 @@ class ReflectionMethod extends \ReflectionMethod
     public function getDocblock($reflectionClass = '\Zend\Reflection\ReflectionDocblock')
     {
         if ('' == $this->getDocComment()) {
-            throw new Exception($this->getName() . ' does not have a docblock');
+            throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
         }
 
         $instance = new $reflectionClass($this);
         if (!$instance instanceof ReflectionDocblock) {
-            throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionDocblock');
+            throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Reflection\ReflectionDocblock');
         }
         return $instance;
     }
@@ -84,7 +83,7 @@ class ReflectionMethod extends \ReflectionMethod
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new $reflectionClass($phpReflection->getName());
         if (!$zendReflection instanceof ReflectionClass) {
-            throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionClass');
+            throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Reflection\ReflectionClass');
         }
         unset($phpReflection);
         return $zendReflection;
@@ -103,7 +102,7 @@ class ReflectionMethod extends \ReflectionMethod
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass(array($this->getDeclaringClass()->getName(), $this->getName()), $phpReflection->getName());
             if (!$instance instanceof ReflectionParameter) {
-                throw new Exception('Invalid reflection class provided; must extend Zend\Reflection\ReflectionParameter');
+                throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Reflection\ReflectionParameter');
             }
             $zendReflections[] = $instance;
             unset($phpReflection);

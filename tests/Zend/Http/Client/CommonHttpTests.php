@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,6 +26,7 @@ namespace ZendTest\Http\Client;
 use Zend\Http\Client as HTTPClient,
     Zend\Http,
     Zend\Http\Client\Adapter,
+    Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Response;
 
 
@@ -966,7 +966,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         
         $response = $this->client->request();
         if (! $response->isSuccessful()) {
-            throw new ErrorException("Error requesting test URL");
+            throw new AdapterException\RuntimeException("Error requesting test URL");
         }
         
         $clen = $response->getHeader('content-length');

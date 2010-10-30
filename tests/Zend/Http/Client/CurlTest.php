@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -114,11 +113,14 @@ class CurlTest extends CommonHttpTests
     /**
      * Check that an exception is thrown when trying to set invalid config
      *
-     * @expectedException Zend\Http\Client\Adapter\Exception
      * @dataProvider invalidConfigProvider
      */
     public function testSetConfigInvalidConfig($config)
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
+            'Array or Zend\Config\Config object expected');
+
         $this->_adapter->setConfig($config);
     }
 
@@ -127,8 +129,6 @@ class CurlTest extends CommonHttpTests
      * @link http://de2.php.net/manual/en/function.curl-setopt.php#84277
      *
      * This should throw an exception.
-     *
-     * @expectedException Zend\Http\Exception
      */
     public function testSettingInvalidCurlOption()
     {
@@ -138,8 +138,11 @@ class CurlTest extends CommonHttpTests
         );
         $this->client = new \Zend\Http\Client($this->client->getUri(true), $config);
 
+        $this->setExpectedException(
+        	'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Unknown or erroreous cURL option'
+            );
         $this->client->request('GET');
-        $this->fail();
     }
 
     public function testRedirectWithGetOnly()
@@ -167,10 +170,13 @@ class CurlTest extends CommonHttpTests
      * Set CURLOPT_FOLLOWLOCATION = false for this type of request and let the Zend_Http_Client handle redirects
      * in his own loop.
      *
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testRedirectPostToGetWithCurlFollowLocationOptionLeadsToTimeout()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Error in cURL request: Operation timed out after 1000 milliseconds with 0 bytes received');
+
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
         $adapter->setConfig(array(

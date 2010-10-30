@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -68,7 +67,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
         $this->_queue_name = constant('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE');
 
-        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
+        $this->_httpClientAdapterSocket = new \Zend\Http\Client\Adapter\Socket();
 
         $this->_amazon->getHttpClient()
                       ->setAdapter($this->_httpClientAdapterSocket);

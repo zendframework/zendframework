@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -99,13 +98,8 @@ class RegexTest extends \PHPUnit_Framework_TestCase
      */
     public function testBadPattern()
     {
-        try {
-            $validator = new Validator\Regex('/');
-            $validator->isValid('anything');
-            $this->fail('Expected Zend_Validate_Exception not thrown for bad pattern');
-        } catch (Validator\Exception $e) {
-            $this->assertContains('Internal error while', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Internal error while');
+        $validator = new Validator\Regex('/');
     }
 
     /**

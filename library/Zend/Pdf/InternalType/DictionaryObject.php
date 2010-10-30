@@ -14,16 +14,16 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -34,7 +34,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -60,15 +60,15 @@ class DictionaryObject extends AbstractTypeObject
         if ($val === null) {
             return;
         } else if (!is_array($val)) {
-            throw new Pdf\Exception('Argument must be an array');
+            throw new Exception\RuntimeException('Argument must be an array');
         }
 
         foreach ($val as $name => $element) {
             if (!$element instanceof AbstractTypeObject) {
-                throw new Pdf\Exception('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
+                throw new Exception\RuntimeException('Array elements must be \Zend\Pdf\InternalType\AbstractTypeObject objects');
             }
             if (!is_string($name)) {
-                throw new Pdf\Exception('Array keys must be strings');
+                throw new Exception\RuntimeException('Array keys must be strings');
             }
             $this->_items[$name] = $element;
         }
@@ -140,17 +140,17 @@ class DictionaryObject extends AbstractTypeObject
     /**
      * Return object as string
      *
-     * @param Zend_PDF_Factory $factory
+     * @param \Zend\Pdf\ObjectFactory $factory
      * @return string
      */
-    public function toString($factory = null)
+    public function toString(Pdf\ObjectFactory $factory = null)
     {
         $outStr = '<<';
         $lastNL = 0;
 
         foreach ($this->_items as $name => $element) {
             if (!is_object($element)) {
-                throw new Pdf\Exception('Wrong data');
+                throw new Exception\RuntimeException('Wrong data');
             }
 
             if (strlen($outStr) - $lastNL > 128)  {

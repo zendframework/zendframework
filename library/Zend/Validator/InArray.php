@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -77,7 +76,7 @@ class InArray extends AbstractValidator
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            throw new Exception('Array expected as parameter');
+            throw new Exception\InvalidArgumentException('Array expected as parameter');
         } else {
             $count = func_num_args();
             $temp  = array();

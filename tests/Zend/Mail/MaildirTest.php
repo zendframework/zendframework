@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -282,10 +281,10 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
-        $this->assertFalse($mail->getMessage(5)->hasFlag(Storage\Storage::FLAG_SEEN));
-        $this->assertTrue($mail->getMessage(5)->hasFlag(Storage\Storage::FLAG_RECENT));
-        $this->assertTrue($mail->getMessage(2)->hasFlag(Storage\Storage::FLAG_FLAGGED));
-        $this->assertFalse($mail->getMessage(2)->hasFlag(Storage\Storage::FLAG_ANSWERED));
+        $this->assertFalse($mail->getMessage(5)->hasFlag(Storage::FLAG_SEEN));
+        $this->assertTrue($mail->getMessage(5)->hasFlag(Storage::FLAG_RECENT));
+        $this->assertTrue($mail->getMessage(2)->hasFlag(Storage::FLAG_FLAGGED));
+        $this->assertFalse($mail->getMessage(2)->hasFlag(Storage::FLAG_ANSWERED));
     }
 
     public function testGetFlags()
@@ -293,8 +292,8 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
         $flags = $mail->getMessage(1)->getFlags();
-        $this->assertTrue(isset($flags[Storage\Storage::FLAG_SEEN]));
-        $this->assertTrue(in_array(Storage\Storage::FLAG_SEEN, $flags));
+        $this->assertTrue(isset($flags[Storage::FLAG_SEEN]));
+        $this->assertTrue(in_array(Storage::FLAG_SEEN, $flags));
     }
 
     public function testUniqueId()
@@ -401,12 +400,12 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     public function testCountFlags()
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_DELETED), 0);
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_RECENT), 1);
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_FLAGGED), 1);
-        $this->assertEquals($mail->countMessages(Storage\Storage::FLAG_SEEN), 4);
-        $this->assertEquals($mail->countMessages(array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_FLAGGED)), 1);
-        $this->assertEquals($mail->countMessages(array(Storage\Storage::FLAG_SEEN, Storage\Storage::FLAG_RECENT)), 0);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_DELETED), 0);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_RECENT), 1);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_FLAGGED), 1);
+        $this->assertEquals($mail->countMessages(Storage::FLAG_SEEN), 4);
+        $this->assertEquals($mail->countMessages(array(Storage::FLAG_SEEN, Storage::FLAG_FLAGGED)), 1);
+        $this->assertEquals($mail->countMessages(array(Storage::FLAG_SEEN, Storage::FLAG_RECENT)), 0);
     }
 
     public function testFetchPart()

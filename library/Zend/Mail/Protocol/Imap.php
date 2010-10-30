@@ -17,13 +17,13 @@
  * @subpackage Protocol
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Mail\Protocol;
+use Zend\Mail\Protocol\Exception;
 
 /**
  * @uses       \Zend\Mail\Protocol\Exception
@@ -98,19 +98,19 @@ class Imap
         $errstr = '';
         $this->_socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
         if (!$this->_socket) {
-            throw new Exception('cannot connect to host; error = ' . $errstr .
+            throw new Exception\RuntimeException('cannot connect to host; error = ' . $errstr .
                                                    ' (errno = ' . $errno . ' )');
         }
 
         if (!$this->_assumedNextLine('* OK')) {
-            throw new Exception('host doesn\'t allow connection');
+            throw new Exception\RuntimeException('host doesn\'t allow connection');
         }
 
         if ($ssl === 'TLS') {
             $result = $this->requestAndResponse('STARTTLS');
             $result = $result && stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
             if (!$result) {
-                throw new Exception('cannot enable TLS');
+                throw new Exception\RuntimeException('cannot enable TLS');
             }
         }
     }
@@ -125,7 +125,7 @@ class Imap
     {
         $line = @fgets($this->_socket);
         if ($line === false) {
-            throw new Exception('cannot read - connection closed?');
+            throw new Exception\RuntimeException('cannot read - connection closed?');
         }
 
         return $line;
@@ -331,10 +331,10 @@ class Imap
         foreach ($tokens as $token) {
             if (is_array($token)) {
                 if (@fputs($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
-                    throw new Exception('cannot write - connection closed?');
+                    throw new Exception\RuntimeException('cannot write - connection closed?');
                 }
                 if (!$this->_assumedNextLine('+ ')) {
-                    throw new Exception('cannot send literal string');
+                    throw new Exception\RuntimeException('cannot send literal string');
                 }
                 $line = $token[1];
             } else {
@@ -343,7 +343,7 @@ class Imap
         }
 
         if (@fputs($this->_socket, $line . "\r\n") === false) {
-            throw new Exception('cannot write - connection closed?');
+            throw new Exception\RuntimeException('cannot write - connection closed?');
         }
     }
 
@@ -603,7 +603,7 @@ class Imap
         }
 
         if ($to === null && !is_array($from)) {
-            throw new Exception('the single id was not found in response');
+            throw new Exception\RuntimeException('the single id was not found in response');
         }
 
         return $result;

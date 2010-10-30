@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id $
  */
 
 /**
@@ -107,16 +106,22 @@ class PhpClassTest extends \PHPUnit_Framework_TestCase
     {
         $codeGenClass = new Php\PhpClass();
         $codeGenClass->setProperty(array('name' => 'prop3'));
-        $this->setExpectedException('Zend\CodeGenerator\Php\Exception');
-
+        
+        $this->setExpectedException(
+            'Zend\CodeGenerator\Php\Exception\InvalidArgumentException',
+            'A property by name prop3 already exists in this class'
+            );
         $codeGenClass->setProperty(array('name' => 'prop3'));
     }
 
     public function testSetPropertyNoArrayOrPropertyThrowsException()
     {
-        $this->setExpectedException('Zend\CodeGenerator\Php\Exception');
-
         $codeGenClass = new Php\PhpClass();
+        
+        $this->setExpectedException(
+            'Zend\CodeGenerator\Php\Exception\InvalidArgumentException',
+            'setProperty() expects either an array of property options or an instance of Zend_CodeGenerator_Php_Property'
+            );
         $codeGenClass->setProperty("propertyName");
     }
 
@@ -143,9 +148,10 @@ class PhpClassTest extends \PHPUnit_Framework_TestCase
 
     public function testSetMethodNoMethodOrArrayThrowsException()
     {
-        $this->setExpectedException('Zend\CodeGenerator\Php\Exception',
+        $this->setExpectedException(
+            'Zend\CodeGenerator\Php\Exception',
             'setMethod() expects either an array of method options or an instance of Zend\CodeGenerator\Php\Method'
-        );
+            );
 
         $codeGenClass = new Php\PhpClass();
         $codeGenClass->setMethod("aMethodName");
@@ -161,7 +167,7 @@ class PhpClassTest extends \PHPUnit_Framework_TestCase
         $codeGenClass = new Php\PhpClass();
         $codeGenClass->setMethod($methodA);
 
-        $this->setExpectedException('Zend\CodeGenerator\Php\Exception', 'A method by name foo already exists in this class.');
+        $this->setExpectedException('Zend\CodeGenerator\Php\Exception\InvalidArgumentException', 'A method by name foo already exists in this class.');
 
         $codeGenClass->setMethod($methodB);
     }

@@ -16,19 +16,20 @@
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Search\Lucene;
-use Zend\Search\Lucene\Storage\Directory;
+
+use Zend\Search\Lucene\Storage\Directory,
+	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * This is an utility class which provides index locks processing functionality
  *
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @uses       \Zend\Search\Lucene\Storage\Directory
  * @uses       \Zend\Search\Lucene\Storage\File
  * @category   Zend
@@ -51,13 +52,13 @@ class LockManager
      *
      * @param \Zend\Search\Lucene\Storage\Directory $lockDirectory
      * @return \Zend\Search\Lucene\Storage\File
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public static function obtainWriteLock(Directory $lockDirectory)
     {
         $lock = $lockDirectory->createFile(self::WRITE_LOCK_FILE);
         if (!$lock->lock(LOCK_EX)) {
-            throw new Exception('Can\'t obtain exclusive index lock');
+            throw new RuntimeException('Can\'t obtain exclusive index lock');
         }
         return $lock;
     }
@@ -95,13 +96,13 @@ class LockManager
      *
      * @param \Zend\Search\Lucene\Storage\Directory $lockDirectory
      * @return \Zend\Search\Lucene\Storage\File
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     private static function _startReadLockProcessing(Directory $lockDirectory)
     {
         $lock = $lockDirectory->createFile(self::READ_LOCK_PROCESSING_LOCK_FILE);
         if (!$lock->lock(LOCK_EX)) {
-            throw new Exception('Can\'t obtain exclusive lock for the read lock processing file');
+            throw new RuntimeException('Can\'t obtain exclusive lock for the read lock processing file');
         }
         return $lock;
     }
@@ -128,13 +129,13 @@ class LockManager
      *
      * @param \Zend\Search\Lucene\Storage\Directory $defaultLockDirectory
      * @return \Zend\Search\Lucene\Storage\File
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public static function obtainReadLock(Directory $lockDirectory)
     {
         $lock = $lockDirectory->createFile(self::READ_LOCK_FILE);
         if (!$lock->lock(LOCK_SH)) {
-            throw new Exception('Can\'t obtain shared reading index lock');
+            throw new RuntimeException('Can\'t obtain shared reading index lock');
         }
         return $lock;
     }

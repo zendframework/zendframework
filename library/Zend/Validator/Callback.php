@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -90,7 +89,7 @@ class Callback extends AbstractValidator
         }
 
         if (null === ($initializedCallack = $this->getCallback())) {
-            throw new Exception('No callback registered');
+            throw new Exception\InvalidArgumentException('No callback registered');
         }
     }
 
@@ -113,7 +112,7 @@ class Callback extends AbstractValidator
     public function setCallback($callback)
     {
         if (!is_callable($callback)) {
-            throw new Exception('Invalid callback given');
+            throw new Exception\InvalidArgumentException('Invalid callback given');
         }
         $this->_callback = $callback;
         return $this;

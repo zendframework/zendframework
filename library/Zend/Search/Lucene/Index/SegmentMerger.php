@@ -17,18 +17,19 @@
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Search\Lucene\Index;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Document;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Document,
+	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @uses       \Zend\Search\Lucene\Document\Field
  * @uses       \Zend\Search\Lucene\Index\SegmentInfo
  * @uses       \Zend\Search\Lucene\Index\SegmentWriter\StreamWriter
@@ -112,16 +113,16 @@ class SegmentMerger
      * Returns number of documents in newly created segment
      *
      * @return \Zend\Search\Lucene\Index\SegmentInfo
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function merge()
     {
         if ($this->_mergeDone) {
-            throw new Lucene\Exception('Merge is already done.');
+            throw new RuntimeException('Merge is already done.');
         }
 
         if (count($this->_segmentInfos) < 1) {
-            throw new Lucene\Exception('Wrong number of segments to be merged ('
+            throw new RuntimeException('Wrong number of segments to be merged ('
                                                  . count($this->_segmentInfos)
                                                  . ').');
         }

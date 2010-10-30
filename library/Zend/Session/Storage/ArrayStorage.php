@@ -16,7 +16,6 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,7 @@
 namespace Zend\Session\Storage;
 
 use Zend\Session\Storage as Storable,
-    Zend\Session\Exception as SessionException;
+    Zend\Session\Exception;
 
 /**
  * Array session storage
@@ -87,10 +86,10 @@ class ArrayStorage extends \ArrayObject implements Storable
     public function offsetSet($key, $value)
     {
         if ($this->isImmutable()) {
-            throw new SessionException('Cannot set key "' . $key . '" as storage is marked immutable');
+            throw new Exception\RuntimeException('Cannot set key "' . $key . '" as storage is marked immutable');
         }
         if ($this->isLocked($key)) {
-            throw new SessionException('Cannot set key "' . $key . '" due to locking');
+            throw new Exception\RuntimeException('Cannot set key "' . $key . '" due to locking');
         }
         return parent::offsetSet($key, $value);
     }
@@ -215,7 +214,7 @@ class ArrayStorage extends \ArrayObject implements Storable
     public function setMetadata($key, $value, $overwriteArray = false)
     {
         if ($this->_immutable) {
-            throw new SessionException('Cannot set metadata key "' . $key . '" as storage is marked immutable');
+            throw new Exception\InvalidArgumentException('Cannot set metadata key "' . $key . '" as storage is marked immutable');
         }
 
         if (!isset($this['__ZF'])) {
@@ -286,7 +285,7 @@ class ArrayStorage extends \ArrayObject implements Storable
     public function clear($key = null)
     {
         if ($this->isImmutable()) {
-            throw new SessionException('Cannot clear storage as it is marked immutable');
+            throw new Exception\RuntimeException('Cannot clear storage as it is marked immutable');
         }
         if (null === $key) {
             $this->exchangeArray(array());

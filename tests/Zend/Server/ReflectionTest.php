@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
  */
 
 /**
@@ -43,35 +42,25 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectClass()
     {
-        try {
-            $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
-            $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
-        } catch (\Exception $e) {
-            $this->fail('Failed to perform class reflection: ' . $e->getMessage());
-        }
+        $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
+        $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
 
-        try {
-            $reflection = Reflection\Reflection::reflectClass(new ReflectionTestClass());
-            $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
-        } catch (\Exception $e) {
-            $this->fail('Failed to perform object reflection: ' . $e->getMessage());
-        }
-
-        try {
-            $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', 'string');
-            $this->fail('Passing non-array for argv should fail');
-        } catch (\Exception $e) {
-            // do nothing
-        }
-
-        try {
-            $reflection = Reflection\Reflection::reflectClass(false);
-            $this->fail('Passing non-object/class should fail');
-        } catch (\Exception $e) {
-            // do nothing
-        }
+        $reflection = Reflection\Reflection::reflectClass(new ReflectionTestClass());
+        $this->assertTrue($reflection instanceof Reflection\ReflectionClass);
+    }
+    
+    public function testReflectClassThrowsExceptionOnInvalidClass()
+    {
+        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid argv argument passed to reflectClass');
+        $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', 'string');
     }
 
+    public function testReflectClassThrowsExceptionOnInvalidParameter()
+    {
+        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid class or object passed to attachClass');
+        $reflection = Reflection\Reflection::reflectClass(false);
+    }
+    
     /**
      * reflectClass() test; test namespaces
      */
@@ -86,28 +75,22 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectFunction()
     {
-        try {
-            $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
-            $this->assertTrue($reflection instanceof Reflection\ReflectionFunction);
-        } catch (\Exception $e) {
-            $this->fail('Function reflection failed: ' . $e->getMessage());
-        }
-
-        try {
-            $reflection = Reflection\Reflection::reflectFunction(false);
-            $this->fail('Function reflection should require valid function');
-        } catch (\Exception $e) {
-            // do nothing
-        }
-
-        try {
-            $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestClass', 'string');
-            $this->fail('Argv array should be an array');
-        } catch (\Exception $e) {
-            // do nothing
-        }
+        $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
+        $this->assertTrue($reflection instanceof Reflection\ReflectionFunction);
+    }
+    
+    public function testReflectFunctionThrowsExceptionOnInvalidFunction()
+    {
+        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
+        $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestClass', 'string');
     }
 
+    public function testReflectFunctionThrowsExceptionOnInvalidParam()
+    {
+        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
+        $reflection = Reflection\Reflection::reflectFunction(false);
+    }
+    
     /**
      * reflectFunction() test; test namespaces
      */

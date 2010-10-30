@@ -17,7 +17,6 @@
  * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -57,13 +56,6 @@ abstract class AbstractRenderer
      * @var \Zend\Markup\Parser
      */
     protected $_parser;
-
-    /**
-     * Plugin loader for markups
-     *
-     * @var \Zend\Loader\PluginLoader
-     */
-    protected $_pluginLoader;
 
     /**
      * The current token
@@ -166,16 +158,6 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Get the plugin loader
-     *
-     * @return \Zend\Loader\PluginLoader
-     */
-    public function getPluginLoader()
-    {
-        return $this->_pluginLoader;
-    }
-
-    /**
      * Set the renderer's encoding
      *
      * @param string $encoding
@@ -214,21 +196,6 @@ abstract class AbstractRenderer
         $this->_markups[$name] = $markup;
 
         return $this;
-    }
-
-    /**
-     * Add a new markup by giving its plugin name
-     *
-     * @param string $name
-     * @param string $markup
-     *
-     * @return \Zend\Markup\Renderer\AbstractRenderer
-     */
-    public function addMarkupByName($name, $markup)
-    {
-        $markup = $this->_pluginLoader->load($markup);
-
-        $this->addMarkup($name, new $markup());
     }
 
     /**

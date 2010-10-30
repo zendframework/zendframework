@@ -17,7 +17,6 @@
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -32,7 +31,6 @@ namespace Zend\Log\Writer;
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class ZendMonitor extends AbstractWriter
 {
@@ -43,7 +41,6 @@ class ZendMonitor extends AbstractWriter
     protected $_isEnabled = true;
 
     /**
-     * @throws \Zend\Log\Exception if Zend Monitor extension not present
      */
     public function __construct()
     {
@@ -57,7 +54,6 @@ class ZendMonitor extends AbstractWriter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Syslog
-     * @throws \Zend\Log\Exception
      */
     static public function factory($config = array())
     {

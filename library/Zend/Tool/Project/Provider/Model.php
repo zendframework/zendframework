@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -40,7 +39,7 @@ class Model extends AbstractProvider
     public static function createResource(ProjectProfile $profile, $modelName, $moduleName = null)
     {
         if (!is_string($modelName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to create.');
         }
 
         if (!($modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName))) {
@@ -49,7 +48,7 @@ class Model extends AbstractProvider
             } else {
                 $exceptionMessage = 'A model directory was not found.';
             }
-            throw new Exception($exceptionMessage);
+            throw new Exception\RuntimeException($exceptionMessage);
         }
 
         $newModel = $modelsDirectory->createResource(
@@ -71,7 +70,7 @@ class Model extends AbstractProvider
     public static function hasResource(ProjectProfile $profile, $modelName, $moduleName = null)
     {
         if (!is_string($modelName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to check for existence.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to check for existence.');
         }
 
         $modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName);
@@ -118,11 +117,11 @@ class Model extends AbstractProvider
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
-            throw new Exception('Model names should be camel cased.');
+            throw new Exception\RuntimeException('Model names should be camel cased.');
         }
         
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
-            throw new Exception('This project already has a model named ' . $name);
+            throw new Exception\RuntimeException('This project already has a model named ' . $name);
         }
         
         // get request/response object

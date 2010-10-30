@@ -17,13 +17,13 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Framework\Metadata;
+
 use Zend\Tool\Framework\Metadata;
 
 /**
@@ -188,7 +188,7 @@ class Dynamic implements Metadata, Attributable
         } elseif (array_key_exists($name, $this->_dynamicAttributes)) {
             return $this->_dynamicAttributes[$name];
         } else {
-            throw new \Zend\Tool\Framework\Registry\Exception('Property ' . $name . ' was not located in this metadata.');
+            throw new \Zend\Tool\Framework\Exception\InvalidArgumentException('Property ' . $name . ' was not located in this metadata.');
         }
     }
 

@@ -17,7 +17,6 @@
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -96,8 +95,8 @@ class Phrase extends AbstractQueryEntry
      * Transform entry to a subquery
      *
      * @param string $encoding
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
      */
     public function getQuery($encoding)
     {

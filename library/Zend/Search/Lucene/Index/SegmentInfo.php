@@ -17,19 +17,24 @@
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Search\Lucene\Index;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Search\Similarity;
-use Zend\Search\Lucene\Storage\Directory;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Search\Similarity,
+	Zend\Search\Lucene\Storage\Directory,
+	Zend\Search\Lucene\Exception\RuntimeException,
+	Zend\Search\Lucene\Exception\InvalidFileFormatException,
+	Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
+ * @uses	   \Zend\Search\Lucene\Exception\InvalidArgumentException
+ * @uses       \Zend\Search\Lucene\Exception\InvalidFileFormatException
  * @uses       \Zend\Search\Lucene\Index\DictionaryLoader
  * @uses       \Zend\Search\Lucene\Index\FieldInfo
  * @uses       \Zend\Search\Lucene\Index\Term
@@ -219,6 +224,7 @@ class SegmentInfo implements TermsStream
      * @param array|null $docStoreOptions
      * @param boolean    $hasSingleNormFile
      * @param boolean    $isCompound
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function __construct(Directory $directory, $name, $docCount, $delGen = 0, $docStoreOptions = null, $hasSingleNormFile = false, $isCompound = null)
     {
@@ -276,7 +282,7 @@ class SegmentInfo implements TermsStream
                     // Compound file is not found or is not readable
                     $this->_isCompound = false;
                 } else {
-                    throw new Lucene\Exception($e->getMessage(), $e->getCode(), $e);
+                    throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
                 }
             }
         }
@@ -341,7 +347,6 @@ class SegmentInfo implements TermsStream
      * Returns bitset or an array depending on bitset extension availability
      *
      * @return mixed
-     * @throws \Zend\Search\Lucene\Exception
      */
     private function _loadDelFile()
     {
@@ -363,8 +368,8 @@ class SegmentInfo implements TermsStream
      *
      * Returns bitset or an array depending on bitset extension availability
      *
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return mixed
-     * @throws \Zend\Search\Lucene\Exception
      */
     private function _loadPre21DelFile()
     {
@@ -400,7 +405,7 @@ class SegmentInfo implements TermsStream
             }
         } catch(Lucene\Exception $e) {
             if (strpos($e->getMessage(), 'is not readable') === false) {
-                throw new Lucene\Exception($e->getMessage(), $e->getCode(), $e);
+                throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
             // There is no deletion file
             $this->_delGen = -1;
@@ -493,7 +498,7 @@ class SegmentInfo implements TermsStream
      *
      * @param string $extension
      * @param boolean $shareHandler
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      * @return \Zend\Search\Lucene\Storage\File
      */
     public function openCompoundFile($extension, $shareHandler = true)
@@ -521,11 +526,11 @@ class SegmentInfo implements TermsStream
             }
 
             if( !isset($this->_sharedDocStoreOptions['files'][$fdxFName]) ) {
-                throw new Lucene\Exception('Shared doc storage segment compound file doesn\'t contain '
+                throw new InvalidFileFormatException('Shared doc storage segment compound file doesn\'t contain '
                                        . $fdxFName . ' file.' );
             }
             if( !isset($this->_sharedDocStoreOptions['files'][$fdtFName]) ) {
-                throw new Lucene\Exception('Shared doc storage segment compound file doesn\'t contain '
+                throw new InvalidFileFormatException('Shared doc storage segment compound file doesn\'t contain '
                                        . $fdtFName . ' file.' );
             }
 
@@ -559,7 +564,7 @@ class SegmentInfo implements TermsStream
         }
 
         if( !isset($this->_segFiles[$filename]) ) {
-            throw new Lucene\Exception('Segment compound file doesn\'t contain '
+            throw new InvalidFileFormatException('Segment compound file doesn\'t contain '
                                        . $filename . ' file.' );
         }
 
@@ -572,6 +577,7 @@ class SegmentInfo implements TermsStream
      * Get compound file length
      *
      * @param string $extension
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      * @return integer
      */
     public function compoundFileLength($extension)
@@ -584,7 +590,7 @@ class SegmentInfo implements TermsStream
             }
 
             if( !isset($this->_sharedDocStoreOptions['fileSizes'][$filename]) ) {
-                throw new Lucene\Exception('Shared doc store compound file doesn\'t contain '
+                throw new InvalidFileFormatException('Shared doc store compound file doesn\'t contain '
                                            . $filename . ' file.' );
             }
 
@@ -600,7 +606,7 @@ class SegmentInfo implements TermsStream
         }
 
         if( !isset($this->_segFileSizes[$filename]) ) {
-            throw new Lucene\Exception('Index compound file doesn\'t contain '
+            throw new InvalidFileFormatException('Index compound file doesn\'t contain '
                                        . $filename . ' file.' );
         }
 
@@ -800,6 +806,7 @@ class SegmentInfo implements TermsStream
      * Scans terms dictionary and returns term info
      *
      * @param \Zend\Search\Lucene\Index\Term $term
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      * @return \Zend\Search\Lucene\Index\TermInfo
      */
     public function getTermInfo(Term $term)
@@ -870,7 +877,7 @@ class SegmentInfo implements TermsStream
         $tiVersion = $tisFile->readInt();
         if ($tiVersion != (int)0xFFFFFFFE /* pre-2.1 format */  &&
             $tiVersion != (int)0xFFFFFFFD /* 2.1+ format    */) {
-            throw new Lucene\Exception('Wrong TermInfoFile file format');
+            throw new InvalidFileFormatException('Wrong TermInfoFile file format');
         }
 
         $termCount     = $tisFile->readLong();
@@ -929,6 +936,7 @@ class SegmentInfo implements TermsStream
      * @param \Zend\Search\Lucene\Index\Term $term
      * @param integer $shift
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @return array
      */
     public function termDocs(Term $term, $shift = 0, $docsFilter = null)
@@ -949,7 +957,9 @@ class SegmentInfo implements TermsStream
 
         if ($docsFilter !== null) {
             if (!$docsFilter instanceof DocsFilter) {
-                throw new Lucene\Exception('Documents filter must be an instance of Zend_Search_Lucene_Index_DocsFilter or null.');
+                throw new InvalidArgumentException(
+                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
+                );
             }
 
             if (isset($docsFilter->segmentFilters[$this->_name])) {
@@ -1071,7 +1081,9 @@ class SegmentInfo implements TermsStream
 
         if ($docsFilter !== null) {
             if (!$docsFilter instanceof DocsFilter) {
-                throw new Lucene\Exception('Documents filter must be an instance of Zend_Search_Lucene_Index_DocsFilter or null.');
+                throw new InvalidArgumentException(
+                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
+                );
             }
 
             if (isset($docsFilter->segmentFilters[$this->_name])) {
@@ -1195,7 +1207,9 @@ class SegmentInfo implements TermsStream
 
         if ($docsFilter !== null) {
             if (!$docsFilter instanceof DocsFilter) {
-                throw new Lucene\Exception('Documents filter must be an instance of Zend_Search_Lucene_Index_DocsFilter or null.');
+                throw new InvalidArgumentException(
+                	'Documents filter must be an instance of Zend_Search_Lucene_Index_DocsFilter or null.'
+                );
             }
 
             if (isset($docsFilter->segmentFilters[$this->_name])) {
@@ -1352,7 +1366,7 @@ class SegmentInfo implements TermsStream
      * Load normalizatin factors from an index file
      *
      * @param integer $fieldNum
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      */
     private function _loadNorm($fieldNum)
     {
@@ -1363,7 +1377,7 @@ class SegmentInfo implements TermsStream
             $headerFormatVersion = $normfFile->readByte();
 
             if ($header != 'NRM'  ||  $headerFormatVersion != (int)0xFF) {
-                throw new  Lucene\Exception('Wrong norms file format.');
+                throw new InvalidFileFormatException('Wrong norms file format.');
             }
 
             foreach ($this->_fields as $fNum => $fieldInfo) {
@@ -1538,7 +1552,7 @@ class SegmentInfo implements TermsStream
      * so index Write lock has to be already obtained.
      *
      * @internal
-     * @throws Zend_Search_Lucene_Exceptions
+     * @throws Zend\Search\Lucene\Exception\RuntimeException
      */
     public function writeChanges()
     {
@@ -1559,7 +1573,9 @@ class SegmentInfo implements TermsStream
 
                 return;
             } else {
-                throw new Lucene\Exception('Delete file processing workflow is corrupted for the segment \'' . $this->_name . '\'.');
+                throw new RuntimeException(
+                	'Delete file processing workflow is corrupted for the segment \'' . $this->_name . '\'.'
+                );
             }
         }
 
@@ -1747,7 +1763,8 @@ class SegmentInfo implements TermsStream
      *
      * @param integer $startId
      * @param integer $mode
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      * @return integer
      */
     public function resetTermsStream(/** $startId = 0, $mode = self::SM_TERMS_ONLY */)
@@ -1759,7 +1776,7 @@ class SegmentInfo implements TermsStream
          */
         $argList = func_get_args();
         if (count($argList) > 2) {
-            throw new Lucene\Exception('Wrong number of arguments');
+            throw new InvalidArgumentException('Wrong number of arguments');
         } else if (count($argList) == 2) {
             $startId = $argList[0];
             $mode    = $argList[1];
@@ -1781,7 +1798,7 @@ class SegmentInfo implements TermsStream
         $tiVersion = $this->_tisFile->readInt();
         if ($tiVersion != (int)0xFFFFFFFE /* pre-2.1 format */  &&
             $tiVersion != (int)0xFFFFFFFD /* 2.1+ format    */) {
-            throw new Lucene\Exception('Wrong TermInfoFile file format');
+            throw new InvalidFileFormatException('Wrong TermInfoFile file format');
         }
 
         $this->_termCount     =
@@ -1828,7 +1845,7 @@ class SegmentInfo implements TermsStream
                 break;
 
             default:
-                throw new Lucene\Exception('Wrong terms scaning mode specified.');
+                throw new InvalidArgumentException('Wrong terms scaning mode specified.');
                 break;
         }
 
@@ -1846,7 +1863,6 @@ class SegmentInfo implements TermsStream
      * Prefix contains fully specified field info and portion of searched term
      *
      * @param \Zend\Search\Lucene\Index\Term $prefix
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function skipTo(Term $prefix)
     {

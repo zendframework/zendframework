@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Log\Filter;
@@ -57,7 +56,7 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsOnInvalidPriority()
     {
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'must be an integer');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be an integer');
         new Priority('foo');
     }
     
@@ -78,7 +77,7 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryRaisesExceptionWithInvalidPriority()
     {
-        $this->setExpectedException('\Zend\Log\Exception', 'must be an integer');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be an integer');
         $logger = Logger::factory(array('Null' => array(
             'writerName'   => 'Mock',
             'filterName'   => 'Priority',

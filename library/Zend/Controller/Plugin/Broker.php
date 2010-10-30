@@ -17,7 +17,6 @@
  * @subpackage Plugins
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -237,8 +236,10 @@ class Broker extends AbstractPlugin
      */
     public function routeStartup(Request\AbstractRequest $request)
     {
+        $broker = $this->getHelperBroker();
         foreach ($this->_plugins as $plugin) {
             try {
+                $plugin->setHelperBroker($broker);
                 $plugin->routeStartup($request);
             } catch (\Exception $e) {
                 if (Controller\Front::getInstance()->throwExceptions()) {
@@ -260,8 +261,10 @@ class Broker extends AbstractPlugin
      */
     public function routeShutdown(Request\AbstractRequest $request)
     {
+        $broker = $this->getHelperBroker();
         foreach ($this->_plugins as $plugin) {
             try {
+                $plugin->setHelperBroker($broker);
                 $plugin->routeShutdown($request);
             } catch (\Exception $e) {
                 if (Controller\Front::getInstance()->throwExceptions()) {
@@ -287,8 +290,10 @@ class Broker extends AbstractPlugin
      */
     public function dispatchLoopStartup(Request\AbstractRequest $request)
     {
+        $broker = $this->getHelperBroker();
         foreach ($this->_plugins as $plugin) {
             try {
+                $plugin->setHelperBroker($broker);
                 $plugin->dispatchLoopStartup($request);
             } catch (\Exception $e) {
                 if (Controller\Front::getInstance()->throwExceptions()) {
@@ -309,8 +314,10 @@ class Broker extends AbstractPlugin
      */
     public function preDispatch(Request\AbstractRequest $request)
     {
+        $broker = $this->getHelperBroker();
         foreach ($this->_plugins as $plugin) {
             try {
+                $plugin->setHelperBroker($broker);
                 $plugin->preDispatch($request);
             } catch (\Exception $e) {
                 if (Controller\Front::getInstance()->throwExceptions()) {
@@ -331,8 +338,10 @@ class Broker extends AbstractPlugin
      */
     public function postDispatch(Request\AbstractRequest $request)
     {
+        $broker = $this->getHelperBroker();
         foreach ($this->_plugins as $plugin) {
             try {
+                $plugin->setHelperBroker($broker);
                 $plugin->postDispatch($request);
             } catch (\Exception $e) {
                 if (Controller\Front::getInstance()->throwExceptions()) {
@@ -353,8 +362,10 @@ class Broker extends AbstractPlugin
      */
     public function dispatchLoopShutdown()
     {
+        $broker = $this->getHelperBroker();
        foreach ($this->_plugins as $plugin) {
            try {
+                $plugin->setHelperBroker($broker);
                 $plugin->dispatchLoopShutdown();
             } catch (\Exception $e) {
                 if (Controller\Front::getInstance()->throwExceptions()) {

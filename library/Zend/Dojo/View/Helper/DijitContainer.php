@@ -17,7 +17,6 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,7 @@
  */
 namespace Zend\Dojo\View\Helper;
 
-use Zend\Dojo\View\Exception as DojoViewException;
+use Zend\Dojo\View\Exception;
 
 /**
  * Dijit layout container base class
@@ -62,7 +61,7 @@ abstract class DijitContainer extends Dijit
     public function captureStart($id, array $params = array(), array $attribs = array())
     {
         if (array_key_exists($id, $this->_captureLock)) {
-            throw new DojoViewException(sprintf('Lock already exists for id "%s"', $id));
+            throw new Exception\RuntimeException(sprintf('Lock already exists for id "%s"', $id));
         }
 
         $this->_captureLock[$id] = true;
@@ -84,7 +83,7 @@ abstract class DijitContainer extends Dijit
     public function captureEnd($id)
     {
         if (!array_key_exists($id, $this->_captureLock)) {
-            throw new DojoViewException(sprintf('No capture lock exists for id "%s"; nothing to capture', $id));
+            throw new Exception\RuntimeException(sprintf('No capture lock exists for id "%s"; nothing to capture', $id));
         }
 
         $content = ob_get_clean();

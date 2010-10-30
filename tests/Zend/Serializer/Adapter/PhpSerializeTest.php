@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -142,7 +141,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\\Serializer\\Exception');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'unserialize(): Error at offset 0 of 23 bytes');
         $this->_adapter->unserialize($value);
     }
 

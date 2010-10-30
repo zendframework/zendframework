@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -52,13 +51,8 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
 
     public function testPDFBooleanBadArgument()
     {
-        try {
-            $boolObj = new InternalType\BooleanObject('some input');
-        } catch (\Zend\Pdf\Exception $e) {
-            $this->assertContains('must be boolean', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException('\Zend\Pdf\Exception\RuntimeException', 'must be boolean');
+        $boolObj = new InternalType\BooleanObject('some input');
     }
 
     public function testGetType()

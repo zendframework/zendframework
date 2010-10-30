@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,19 +24,6 @@
  */
 namespace ZendTest\Validate\File;
 use Zend\Validator\File;
-
-// Call Zend_Validate_File_UploadTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_UploadTest::main");
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_File_Upload
- */
 
 /**
  * @category   Zend
@@ -49,16 +35,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class UploadTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Validate_File_UploadTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Ensures that the validator follows expected behavior
@@ -215,12 +191,8 @@ class UploadTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($files, $validator->getFiles('test1'));
         $this->assertEquals($files1, $validator->getFiles('test3'));
 
-        try {
-            $this->assertEquals(array(), $validator->getFiles('test5'));
-            $this->fail("Missing exception");
-        } catch (\Zend\Validator\Exception $e) {
-            $this->assertContains("was not found", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'was not found');
+        $this->assertEquals(array(), $validator->getFiles('test5'));
     }
 
     /**
@@ -263,7 +235,3 @@ class UploadTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_Validate_File_UploadTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_UploadTest::main") {
-    \Zend_Validate_File_UploadTest::main();
-}

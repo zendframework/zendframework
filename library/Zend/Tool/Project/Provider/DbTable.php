@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -62,7 +61,7 @@ class DbTable
         $modelsDirectory = $profile->search($profileSearchParams);
         
         if (!($modelsDirectory instanceof ProjectProfile\Resource)) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'A models directory was not found' .
                 (($moduleName) ? ' for module ' . $moduleName . '.' : '.')
                 );
@@ -106,18 +105,18 @@ class DbTable
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
-            throw new Exception('DbTable names should be camel cased.');
+            throw new Exception\RuntimeException('DbTable names should be camel cased.');
         }
         
         $originalName = $name;
         $name = ucfirst($name);
         
         if ($actualTableName == '') {
-            throw new Exception('You must provide both the DbTable name as well as the actual db table\'s name.');
+            throw new Exception\RuntimeException('You must provide both the DbTable name as well as the actual db table\'s name.');
         }
         
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
-            throw new Exception('This project already has a DbTable named ' . $name);
+            throw new Exception\RuntimeException('This project already has a DbTable named ' . $name);
         }
 
         // get request/response object
@@ -166,7 +165,7 @@ class DbTable
         try {
             $zendApp->bootstrap('db');
         } catch (\Zend\Application\Exception $e) {
-            throw new Exception('Db resource not available, you might need to configure a DbAdapter.');
+            throw new Exception\RuntimeException('Db resource not available, you might need to configure a DbAdapter.');
             return;
         }
         
@@ -179,7 +178,7 @@ class DbTable
             $dbTableName = $this->_convertTableNameToClassName($actualTableName);
             
             if (!$forceOverwrite && self::hasResource($this->_loadedProfile, $dbTableName, $module)) {
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'This DbTable resource already exists, if you wish to overwrite it, '
                     . 'pass the "forceOverwrite" flag to this provider.'
                     );

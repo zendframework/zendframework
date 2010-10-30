@@ -16,7 +16,6 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @version    $Id$
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -25,7 +24,8 @@
  * @namespace
  */
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HTTPAdapter,
+use Zend\Http\Client\Adapter as HttpAdapter,
+    Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Response;
 
 /**
@@ -44,7 +44,7 @@ use Zend\Http\Client\Adapter as HTTPAdapter,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Socket implements HTTPAdapter, Stream
+class Socket implements HttpAdapter, Stream
 {
     /**
      * The socket for server connection
@@ -113,7 +113,7 @@ class Socket implements HTTPAdapter, Stream
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            throw new Exception(
+            throw new AdapterException\InvalidArgumentException(
                 'Array or Zend_Config object expected, got ' . gettype($config)
             );
         }
@@ -156,7 +156,7 @@ class Socket implements HTTPAdapter, Stream
 
         } else {
             // Invalid parameter
-            throw new Exception(
+            throw new AdapterException\InvalidArgumentException(
                 "Expecting either a stream context resource or array, got " . gettype($context)
             );
         }
@@ -204,13 +204,13 @@ class Socket implements HTTPAdapter, Stream
                 if ($this->config['sslcert'] !== null) {
                     if (! stream_context_set_option($context, 'ssl', 'local_cert',
                                                     $this->config['sslcert'])) {
-                        throw new Exception('Unable to set sslcert option');
+                        throw new AdapterException\RuntimeException('Unable to set sslcert option');
                     }
                 }
                 if ($this->config['sslpassphrase'] !== null) {
                     if (! stream_context_set_option($context, 'ssl', 'passphrase',
                                                     $this->config['sslpassphrase'])) {
-                        throw new Exception('Unable to set sslpassphrase option');
+                        throw new AdapterException\RuntimeException('Unable to set sslpassphrase option');
                     }
                 }
             }
@@ -227,13 +227,13 @@ class Socket implements HTTPAdapter, Stream
 
             if (! $this->socket) {
                 $this->close();
-                throw new Exception(
+                throw new AdapterException\RuntimeException(
                     'Unable to Connect to ' . $host . ':' . $port . '. Error #' . $errno . ': ' . $errstr);
             }
 
             // Set the stream timeout
             if (! stream_set_timeout($this->socket, (int) $this->config['timeout'])) {
-                throw new Exception('Unable to set the connection timeout');
+                throw new AdapterException\RuntimeException('Unable to set the connection timeout');
             }
 
             // Update connected_to
@@ -255,13 +255,13 @@ class Socket implements HTTPAdapter, Stream
     {
         // Make sure we're properly connected
         if (! $this->socket) {
-            throw new Exception('Trying to write but we are not connected');
+            throw new AdapterException\RuntimeException('Trying to write but we are not connected');
         }
 
         $host = $uri->getHost();
         $host = (strtolower($uri->getScheme()) == 'https' ? $this->config['ssltransport'] : 'tcp') . '://' . $host;
         if ($this->connected_to[0] != $host || $this->connected_to[1] != $uri->getPort()) {
-            throw new Exception('Trying to write but we are connected to the wrong host');
+            throw new AdapterException\RuntimeException('Trying to write but we are connected to the wrong host');
         }
 
         // Save request method for later
@@ -285,12 +285,12 @@ class Socket implements HTTPAdapter, Stream
         
         // Send the request
         if (! @fwrite($this->socket, $request)) {
-            throw new Exception('Error writing request to server');
+            throw new AdapterException\RuntimeException('Error writing request to server');
         }
         
         if(is_resource($body)) {
             if(stream_copy_to_stream($body, $this->socket) == 0) {
-                throw new Exception('Error writing request to server');
+                throw new AdapterException\RuntimeException('Error writing request to server');
             }
         }
 
@@ -356,7 +356,7 @@ class Socket implements HTTPAdapter, Stream
                     $chunksize = trim($line);
                     if (! ctype_xdigit($chunksize)) {
                         $this->close();
-                        throw new Exception('Invalid chunk size "' .
+                        throw new AdapterException\RuntimeException('Invalid chunk size "' .
                             $chunksize . '" unable to read chunked body');
                     }
 
@@ -394,7 +394,7 @@ class Socket implements HTTPAdapter, Stream
                 } while ($chunksize > 0);
             } else {
                 $this->close();
-                throw new Exception('Cannot handle "' .
+                throw new AdapterException\RuntimeException('Cannot handle "' .
                     $headers['transfer-encoding'] . '" transfer encoding');
             }
             
@@ -496,9 +496,9 @@ class Socket implements HTTPAdapter, Stream
             $timedout = $info['timed_out'];
             if ($timedout) {
                 $this->close();
-                throw new Exception(
+                throw new AdapterException\TimeoutException(
                     "Read timed out after {$this->config['timeout']} seconds",
-                    Exception::READ_TIMEOUT
+                    AdapterException\TimeoutException::READ_TIMEOUT
                 );
             }
         }

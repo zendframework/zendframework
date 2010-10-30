@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -36,7 +35,7 @@ use Zend\ProgressBar;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_File
  */
-class HTTPTest extends \PHPUnit_Framework_TestCase
+class HttpTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -84,19 +83,15 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($test instanceof \Zend\Validator\File\Upload);
     }
 
-    /**
-     * @expectedException Zend\File\Transfer\Exception
-     */
     public function testSendingFiles()
     {
+        $this->setExpectedException('Zend\File\Transfer\Exception\RuntimeException', 'not implemented');
         $this->adapter->send();
     }
 
-    /**
-     * @expectedException Zend\File\Transfer\Exception
-     */
     public function testFileIsSent()
     {
+        $this->setExpectedException('Zend\File\Transfer\Exception\RuntimeException', 'not implemented');
         $this->adapter->isSent();
     }
 
@@ -325,4 +320,6 @@ class HTTPTestMockAdapter extends \Zend\File\Transfer\Adapter\Http
         self::$_callbackApc = null;
         self::$_callbackUploadProgress = array('HTTPTestMockAdapter', 'uPTest');
     }
+    
+    
 }

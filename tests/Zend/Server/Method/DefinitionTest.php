@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -120,11 +119,9 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($object, $this->definition->getObject());
     }
 
-    /**
-     * @expectedException Zend\Server\Exception
-     */
     public function testSettingObjectToNonObjectShouldThrowException()
     {
+        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid object passed to');
         $this->definition->setObject('foo');
     }
 

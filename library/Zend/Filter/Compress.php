@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -108,7 +107,7 @@ class Compress extends AbstractFilter
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Compress\CompressionAlgorithm) {
-            throw new Exception("Compression adapter '" . $adapter . "' does not implement Zend\\Filter\\Compress\\CompressionAlgorithm");
+            throw new Exception\InvalidArgumentException("Compression adapter '" . $adapter . "' does not implement Zend\\Filter\\Compress\\CompressionAlgorithm");
         }
         return $this->_adapter;
     }
@@ -136,7 +135,7 @@ class Compress extends AbstractFilter
             return $this;
         }
         if (!is_string($adapter)) {
-            throw new Exception('Invalid adapter provided; must be string or instance of Zend\\Filter\\Compress\\CompressionAlgorithm');
+            throw new Exception\InvalidArgumentException('Invalid adapter provided; must be string or instance of Zend\\Filter\\Compress\\CompressionAlgorithm');
         }
         $this->_adapter = $adapter;
 
@@ -175,7 +174,7 @@ class Compress extends AbstractFilter
     {
         $adapter = $this->getAdapter();
         if (!method_exists($adapter, $method)) {
-            throw new Exception("Unknown method '{$method}'");
+            throw new Exception\BadMethodCallException("Unknown method '{$method}'");
         }
 
         return call_user_func_array(array($adapter, $method), $options);

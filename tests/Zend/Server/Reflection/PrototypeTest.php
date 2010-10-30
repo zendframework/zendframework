@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
  */
 
 /**
@@ -96,25 +95,23 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: void
      */
-    public function test__construct()
+    public function testConstructWorks()
     {
         $this->assertTrue($this->_r instanceof Reflection\Prototype);
-
-        try {
-            $r1 = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
-            $this->fail('Construction should only accept Z_S_R_Parameters');
-        } catch (\Exception $e) {
-            // do nothing
-        }
-
-        try {
-            $r1 = new Reflection\Prototype($this->_r->getReturnValue(), 'string');
-            $this->fail('Construction requires an array of parameters');
-        } catch (\Exception $e) {
-            // do nothing
-        }
+    }
+    
+    public function testConstructionThrowsExceptionOnInvalidParam()
+    {
+        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'One or more params are invalid');
+        $r1 = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
     }
 
+    public function testConstructionThrowsExceptionOnInvalidParamType()
+    {
+        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid parameters');
+        $r1 = new Reflection\Prototype($this->_r->getReturnValue(), 'string');
+    }
+    
     /**
      * getReturnType() test
      *

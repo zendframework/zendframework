@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -161,7 +160,7 @@ class Iban extends AbstractValidator
         if ($locale !== false) {
             $locale = Locale\Locale::findLocale($locale);
             if (strlen($locale) < 4) {
-                throw new Exception('Region must be given for IBAN validation');
+                throw new Exception\InvalidArgumentException('Region must be given for IBAN validation');
             }
         }
 

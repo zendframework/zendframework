@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -107,23 +106,26 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav = new Navigation\Navigation('ok');
             $this->fail('An invalid argument was given to the constructor, ' .
-                        'but a Zend_Navigation_Exception was not thrown');
-        } catch (Navigation\Exception $e) {
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
 
         try {
             $nav = new Navigation\Navigation(1337);
             $this->fail('An invalid argument was given to the constructor, ' .
-                        'but a Zend_Navigation_Exception was not thrown');
-        } catch (Navigation\Exception $e) {
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
 
         try {
             $nav = new Navigation\Navigation(new \stdClass());
             $this->fail('An invalid argument was given to the constructor, ' .
-                        'but a Zend_Navigation_Exception was not thrown');
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
         } catch (Navigation\Exception $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
@@ -381,8 +383,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav->addPages('this is a string');
             $this->fail('An invalid argument was given to addPages(), ' .
-                        'but a Zend_Navigation_Exception was not thrown');
-        } catch (Navigation\Exception $e) {
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
         }
     }
@@ -394,8 +397,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav->addPages($pages = new \stdClass());
             $this->fail('An invalid argument was given to addPages(), ' .
-                        'but a Zend_Navigation_Exception was not thrown');
-        } catch (Navigation\Exception $e) {
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
+        } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
         }
     }
@@ -898,8 +902,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $found = $nav->findSomeById('page_2_and_3');
             $this->fail('An invalid magic finder method was used, ' .
-                        'but a Zend_Navigation_Exception was not thrown');
-        } catch (Navigation\Exception $e) {
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
+        } catch (Navigation\Exception\BadMethodCallException $e) {
             $this->assertContains('Bad method call', $e->getMessage());
         }
     }
@@ -911,8 +916,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $found = $nav->getPagez();
             $this->fail('An invalid magic finder method was used, ' .
-                        'but a Zend_Navigation_Exception was not thrown');
-        } catch (Navigation\Exception $e) {
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
+        } catch (Navigation\Exception\BadMethodCallException $e) {
             $this->assertContains('Bad method call', $e->getMessage());
         }
     }
@@ -1003,8 +1009,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $page = $container->current();
             $this->fail('Container index is invalid, ' .
-                        'but a Zend_Navigation_Exception was not thrown');
-        } catch (Navigation\Exception $e) {
+                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                        'not thrown');
+        } catch (Navigation\Exception\OutOfBoundsException $e) {
             $this->assertContains('Corruption detected', $e->getMessage());
         }
     }

@@ -16,7 +16,6 @@
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,6 +24,7 @@
 namespace Zend\Acl\Role;
 
 use Zend\Acl\Role;
+use Zend\Acl;
 
 /**
  * @uses       Zend\Acl\Role
@@ -59,7 +59,7 @@ class Registry
      *
      * @param  Zend\Acl\Role              $role
      * @param  Zend\Acl\Role|string|array $parents
-     * @throws Zend\Acl\Role\Exception
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Role\Registry Provides a fluent interface
      */
     public function add(Role $role, $parents = null)
@@ -67,7 +67,7 @@ class Registry
         $roleId = $role->getRoleId();
 
         if ($this->has($roleId)) {
-            throw new Exception("Role id '$roleId' already exists in the registry");
+            throw new Acl\Exception\InvalidArgumentException("Role id '$roleId' already exists in the registry");
         }
 
         $roleParents = array();
@@ -85,7 +85,7 @@ class Registry
                     }
                     $roleParent = $this->get($roleParentId);
                 } catch (Exception $e) {
-                    throw new Exception("Parent Role id '$roleParentId' does not exist", 0, $e);
+                    throw new Acl\Exception\InvalidArgumentException("Parent Role id '$roleParentId' does not exist", 0, $e);
                 }
                 $roleParents[$roleParentId] = $roleParent;
                 $this->_roles[$roleParentId]['children'][$roleId] = $role;
@@ -107,7 +107,7 @@ class Registry
      * The $role parameter can either be a Role or a Role identifier.
      *
      * @param  Zend\Acl\Role|string $role
-     * @throws Zend\Acl\Role\Exception
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Role
      */
     public function get($role)
@@ -119,7 +119,7 @@ class Registry
         }
 
         if (!$this->has($role)) {
-            throw new Exception("Role '$roleId' not found");
+            throw new Acl\Exception\InvalidArgumentException("Role '$roleId' not found");
         }
 
         return $this->_roles[$roleId]['instance'];
@@ -177,7 +177,7 @@ class Registry
      * @param  Zend\Acl\Role|string $role
      * @param  Zend\Acl\Role|string $inherit
      * @param  boolean                        $onlyParents
-     * @throws Zend\Acl\Role\Exception
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return boolean
      */
     public function inherits($role, $inherit, $onlyParents = false)
@@ -186,7 +186,7 @@ class Registry
             $roleId    = $this->get($role)->getRoleId();
             $inheritId = $this->get($inherit)->getRoleId();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode(), $e);
+            throw new Acl\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         $inherits = isset($this->_roles[$roleId]['parents'][$inheritId]);
@@ -210,7 +210,7 @@ class Registry
      * The $role parameter can either be a Role or a Role identifier.
      *
      * @param  Zend\Acl\Role|string $role
-     * @throws Zend\Acl\Role\Exception
+     * @throws Zend\Acl\Exception\InvalidArgumentException
      * @return Zend\Acl\Role\Registry Provides a fluent interface
      */
     public function remove($role)
@@ -218,7 +218,7 @@ class Registry
         try {
             $roleId = $this->get($role)->getRoleId();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode(), $e);
+            throw new Acl\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         foreach ($this->_roles[$roleId]['children'] as $childId => $child) {

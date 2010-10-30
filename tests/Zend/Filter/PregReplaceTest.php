@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter;
@@ -102,7 +101,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $filter = $this->filter;
         $string = 'controller/action';
         $filter->setReplacement('foo/bar');
-        $this->setExpectedException('\\Zend\\Filter\\Exception');
+        $this->setExpectedException('\Zend\Filter\Exception\RuntimeException', 'does not have a valid MatchPattern set');
         $filtered = $filter($string);
     }
 

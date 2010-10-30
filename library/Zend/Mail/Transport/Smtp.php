@@ -17,7 +17,6 @@
  * @subpackage Transport
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,6 +25,7 @@
 namespace Zend\Mail\Transport;
 use Zend\Mail\AbstractProtocol,
     Zend\Mail\AbstractTransport,
+    Zend\Mail\Transport\Exception,
     Zend\Mail\Protocol\Smtp as SmtpProtocol,
     Zend\Mail\Protocol,
     Zend\Mime;
@@ -222,7 +222,7 @@ class Smtp extends AbstractTransport
     protected function _prepareHeaders($headers)
     {
         if (!$this->_mail) {
-            throw new Exception('_prepareHeaders requires a registered \Zend\Mail\Mail object');
+            throw new Exception\RuntimeException('_prepareHeaders requires a registered \Zend\Mail\Mail object');
         }
 
         unset($headers['Bcc']);

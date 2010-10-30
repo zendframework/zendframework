@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -101,25 +100,15 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     * Test input exceptions
-     *
-     * @return void
-     */
     public function testExceptionParserWrongInputType()
     {
-        $this->setExpectedException('Zend\Markup\Parser\Exception');
-
+        $this->setExpectedException('Zend\Markup\Parser\Exception\InvalidArgumentException', 'Value to parse should be a string');
         $this->_markup->getParser()->parse(array());
     }
 
-    /**
-     * Test exception
-     *
-     * @expectedException Zend\Markup\Parser\Exception
-     */
     public function testExceptionParserEmptyInput()
     {
+        $this->setExpectedException('Zend\Markup\Parser\Exception\InvalidArgumentException', 'Value to parse cannot be left empty');
         $this->_markup->getParser()->parse('');
     }
 
@@ -130,9 +119,8 @@ class BbcodeAndHtmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddTags()
     {
-        $this->_markup->getPluginLoader()->addPrefixPath(
-            'ZendTest\Markup\TestAsset\Renderer\Html',
-            'Zend/Markup/TestAsset/Renderer/Html'
+        $this->_markup->getPluginBroker()->getClassLoader()->registerPlugin(
+            'bar', 'ZendTest\Markup\TestAsset\Renderer\Html\Bar'
         );
 
         $this->_markup->addMarkup(

@@ -16,7 +16,6 @@
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -47,8 +46,8 @@ interface PrefixPathMapper extends ShortNameLocater
      * Remove a prefix (or prefixed-path) from the registry
      *
      * @param string $prefix
-     * @param string $path OPTIONAL
+     * @param string $path
      * @return \Zend\Loader\PrefixPathMapper
      */
-    public function removePrefixPath($prefix, $path = null);
+    public function removePrefixPath($prefix, $path);
 }

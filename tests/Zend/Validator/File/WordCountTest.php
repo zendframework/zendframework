@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,19 +25,6 @@
 namespace ZendTest\Validate\File;
 use Zend\Validator\File;
 use Zend\Validator;
-
-// Call Zend_Validate_File_WordCountTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_WordCountTest::main");
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_File_WordCount
- */
 
 /**
  * @category   Zend
@@ -50,16 +36,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class WordCountTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Validate_File_WordCountTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Ensures that the validator follows expected behavior
@@ -95,22 +71,8 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $validator = new File\WordCount(array('min' => 1, 'max' => 5));
         $this->assertEquals(1, $validator->getMin());
 
-        try {
-            $validator = new File\WordCount(array('min' => 5, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
-
-        $validator = new File\WordCount(array('min' => 1, 'max' => 5));
-        $this->assertEquals(1, $validator->getMin());
-
-        try {
-            $validator = new File\WordCount(array('min' => 5, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\WordCount(array('min' => 5, 'max' => 1));
     }
 
     /**
@@ -124,12 +86,8 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $validator->setMin(100);
         $this->assertEquals(100, $validator->getMin());
 
-        try {
-            $validator->setMin(20000);
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("less than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'less than or equal');
+        $validator->setMin(20000);
     }
 
     /**
@@ -142,12 +100,8 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $validator = new File\WordCount(array('min' => 1, 'max' => 100));
         $this->assertEquals(100, $validator->getMax());
 
-        try {
-            $validator = new File\WordCount(array('min' => 5, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\WordCount(array('min' => 5, 'max' => 1));
     }
 
     /**
@@ -164,9 +118,4 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $validator->setMin(100);
         $this->assertEquals(1000000, $validator->getMax());
     }
-}
-
-// Call Zend_Validate_File_WordCountTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_WordCountTest::main") {
-    \Zend_Validate_File_WordCountTest::main();
 }

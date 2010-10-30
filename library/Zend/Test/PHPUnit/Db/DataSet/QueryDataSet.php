@@ -17,7 +17,6 @@
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -33,7 +32,7 @@ use Zend\Db\Select;
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
  * @uses       \Zend\Db\Select
  * @uses       \Zend\Test\PHPUnit\Db\DataSet\QueryTable
- * @uses       \Zend\Test\PHPUnit\Db\Exception
+ * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -50,7 +49,9 @@ class QueryDataSet extends \PHPUnit_Extensions_Database_DataSet_QueryDataSet
     public function __construct(\PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
     {
         if( !($databaseConnection instanceof \Zend\Test\PHPUnit\Db\Connection) ) {
-            throw new \Zend\Test\PHPUnit\Db\Exception("Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-");
+            throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
+            	"Zend\Test\PHPUnit\Db\DataSet\QueryDataSet only works with Zend\Test\PHPUnit\Db\Connection connections-"
+            );
         }
         $this->databaseConnection = $databaseConnection;
     }

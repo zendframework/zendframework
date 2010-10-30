@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -111,10 +110,6 @@ class FrameworkRegistry implements Registry
         unset($this->_response);
     }
 
-//    public function __construct()
-//    {
-//        // no instantiation from outside
-//    }
 
     /**
      * Enter description here...
@@ -372,7 +367,7 @@ class FrameworkRegistry implements Registry
         if (method_exists($this, 'get' . $name)) {
             return $this->{'get' . $name}();
         } else {
-            throw new Exception('Property ' . $name . ' was not located in this registry.');
+            throw new Exception\InvalidArgumentException('Property ' . $name . ' was not located in this registry.');
         }
     }
 
@@ -388,7 +383,7 @@ class FrameworkRegistry implements Registry
             $this->{'set' . $name}($value);
             return;
         } else {
-            throw new Exception('Property ' . $name . ' was not located in this registry.');
+            throw new Exception\InvalidArgumentException('Property ' . $name . ' was not located in this registry.');
         }
     }
 
@@ -401,7 +396,7 @@ class FrameworkRegistry implements Registry
     public function isObjectRegistryEnablable($object)
     {
         if (!is_object($object)) {
-            throw new Exception('isObjectRegistryEnablable() expects an object.');
+            throw new Exception\InvalidArgumentException('isObjectRegistryEnablable() expects an object.');
         }
 
         return ($object instanceof RegistryEnabled);
@@ -416,7 +411,7 @@ class FrameworkRegistry implements Registry
     public function enableRegistryOnObject($object)
     {
         if (!$this->isObjectRegistryEnablable($object)) {
-            throw new Exception('Object provided is not registry enablable, check first with Zend_Tool_Framework_Registry::isObjectRegistryEnablable()');
+            throw new Exception\InvalidArgumentException('Object provided is not registry enablable, check first with Zend_Tool_Framework_Registry::isObjectRegistryEnablable()');
         }
 
         $object->setRegistry($this);

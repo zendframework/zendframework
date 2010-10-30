@@ -17,7 +17,6 @@
  * @package    Zend_Console
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -250,11 +249,11 @@ class Getopt
     {
         if (!isset($_SERVER['argv'])) {
             if (ini_get('register_argc_argv') == false) {
-                throw new GetoptException(
+                throw new Exception\InvalidArgumentException(
                     "argv is not available, because ini option 'register_argc_argv' is set Off"
                 );
             } else {
-                throw new GetoptException(
+                throw new Exception\InvalidArgumentException(
                     '$_SERVER["argv"] is not set, but Zend_Console_Getopt cannot work without this information.'
                 );
             }
@@ -356,8 +355,7 @@ class Getopt
     public function addArguments($argv)
     {
         if(!is_array($argv)) {
-            throw new GetoptException(
-                "Parameter #1 to addArguments should be an array");
+            throw new Exception\InvalidArgumentException("Parameter #1 to addArguments should be an array");
         }
         $this->_argv = array_merge($this->_argv, $argv);
         $this->_parsed = false;
@@ -375,8 +373,7 @@ class Getopt
     public function setArguments($argv)
     {
         if(!is_array($argv)) {
-            throw new GetoptException(
-                "Parameter #1 to setArguments should be an array");
+            throw new Exception\InvalidArgumentException("Parameter #1 to setArguments should be an array");
         }
         $this->_argv = $argv;
         $this->_parsed = false;
@@ -654,8 +651,7 @@ class Getopt
             $flag = $this->_ruleMap[$flag];
             if (isset($this->_rules[$alias]) || isset($this->_ruleMap[$alias])) {
                 $o = (strlen($alias) == 1 ? '-' : '--') . $alias;
-                throw new GetoptException(
-                    "Option \"$o\" is being defined more than once.");
+                throw new Exception\InvalidArgumentException("Option \"$o\" is being defined more than once.");
             }
             $this->_rules[$flag]['alias'][] = $alias;
             $this->_ruleMap[$alias] = $flag;
@@ -779,9 +775,10 @@ class Getopt
             $flag = strtolower($flag);
         }
         if (!isset($this->_ruleMap[$flag])) {
-            throw new GetoptException(
+            throw new Exception\RuntimeException(
                 "Option \"$flag\" is not recognized.",
-                $this->getUsageMessage());
+                $this->getUsageMessage()
+                );
         }
         $realFlag = $this->_ruleMap[$flag];
         switch ($this->_rules[$realFlag]['param']) {
@@ -790,9 +787,10 @@ class Getopt
                     $param = array_shift($argv);
                     $this->_checkParameterType($realFlag, $param);
                 } else {
-                    throw new GetoptException(
+                    throw new Exception\RuntimeException(
                         "Option \"$flag\" requires a parameter.",
-                        $this->getUsageMessage());
+                        $this->getUsageMessage()
+                        );
                 }
                 break;
             case 'optional':
@@ -828,14 +826,14 @@ class Getopt
         switch ($type) {
             case 'word':
                 if (preg_match('/\W/', $param)) {
-                    throw new GetoptException(
+                    throw new Exception\RuntimeException(
                         "Option \"$flag\" requires a single-word parameter, but was given \"$param\".",
                         $this->getUsageMessage());
                 }
                 break;
             case 'integer':
                 if (preg_match('/\D/', $param)) {
-                    throw new GetoptException(
+                    throw new Exception\RuntimeException(
                         "Option \"$flag\" requires an integer parameter, but was given \"$param\".",
                         $this->getUsageMessage());
                 }
@@ -911,19 +909,18 @@ class Getopt
             $mainFlag = $flags[0];
             foreach ($flags as $flag) {
                 if (empty($flag)) {
-                    throw new GetoptException(
-                        "Blank flag not allowed in rule \"$ruleCode\".");
+                    throw new Exception\InvalidArgumentException("Blank flag not allowed in rule \"$ruleCode\".");
                 }
                 if (strlen($flag) == 1) {
                     if (isset($this->_ruleMap[$flag])) {
-                        throw new GetoptException(
+                        throw new Exception\InvalidArgumentException(
                             "Option \"-$flag\" is being defined more than once.");
                     }
                     $this->_ruleMap[$flag] = $mainFlag;
                     $rule['alias'][] = $flag;
                 } else {
                     if (isset($this->_rules[$flag]) || isset($this->_ruleMap[$flag])) {
-                        throw new GetoptException(
+                        throw new Exception\InvalidArgumentException(
                             "Option \"--$flag\" is being defined more than once.");
                     }
                     $this->_ruleMap[$flag] = $mainFlag;

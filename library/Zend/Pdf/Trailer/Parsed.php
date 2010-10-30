@@ -14,18 +14,17 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Trailer;
-use Zend\Pdf;
 use Zend\Pdf\InternalType;
+use Zend\Pdf\Exception;
 
 /**
  * PDF file trailer.
@@ -36,7 +35,7 @@ use Zend\Pdf\InternalType;
  * @uses       \Zend\Pdf\InternalType\DirctionaryObject
  * @uses       \Zend\Pdf\InternalType\IndirectObjectReference\Context
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -136,7 +135,7 @@ class Parsed extends AbstractTrailer
     {
         try {
             $this->_context->getRefTable()->getNextFree('0 65535 R');
-        } catch (Pdf\Exception $e) {
+        } catch (Exception $e) {
             if ($e->getMessage() == 'Object not found.') {
                 /**
                  * Here is work around for some wrong generated PDFs.
@@ -146,7 +145,7 @@ class Parsed extends AbstractTrailer
                 return 0;
             }
 
-            throw new Pdf\Exception($e->getMessage(), $e->getCode(), $e);
+            throw $e;
         }
     }
 }

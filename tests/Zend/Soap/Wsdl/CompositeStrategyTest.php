@@ -16,7 +16,6 @@
  * @package    Zend_Soap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -75,12 +74,9 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
     public function testCompositeThrowsExceptionOnInvalidType()
     {
         $strategy = new Strategy\Composite();
-        try {
-            $strategy->connectTypeToStrategy(array(), 'strategy');
-            $this->fail();
-        } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WsdlException);
-        }
+        
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Invalid type given to Composite Type Map');
+        $strategy->connectTypeToStrategy(array(), 'strategy');
     }
 
     public function testCompositeThrowsExceptionOnInvalidStrategy()
@@ -88,20 +84,20 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
         $strategy = new Strategy\Composite(array(), 'invalid');
         $strategy->connectTypeToStrategy('Book', 'strategy');
 
-        try {
-            $book = $strategy->getStrategyOfType('Book');
-            $this->fail();
-        } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WsdlException);
-        }
-
-        try {
-            $book = $strategy->getStrategyOfType('Anything');
-            $this->fail();
-        } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WsdlException);
-        }
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Strategy for Complex Type \'Book\' is not a valid strategy');
+        $book = $strategy->getStrategyOfType('Book');
     }
+    
+    public function testCompositeThrowsExceptionOnInvalidStrategyPart2()
+    {
+        $strategy = new Strategy\Composite(array(), 'invalid');
+        $strategy->connectTypeToStrategy('Book', 'strategy');
+
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Default Strategy for Complex Types is not a valid strategy object');
+        $book = $strategy->getStrategyOfType('Anything');
+    }
+    
+    
 
     public function testCompositeDelegatesAddingComplexTypesToSubStrategies()
     {
@@ -120,12 +116,9 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
     public function testCompositeRequiresContextForAddingComplexTypesOtherwiseThrowsException()
     {
         $strategy = new Strategy\Composite();
-        try {
-            $strategy->addComplexType('Test');
-            $this->fail();
-        } catch(\Exception $e) {
-            $this->assertTrue($e instanceof WsdlException);
-        }
+        
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Cannot add complex type \'Test\'');
+        $strategy->addComplexType('Test');
     }
 }
 

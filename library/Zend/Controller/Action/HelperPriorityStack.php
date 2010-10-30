@@ -17,7 +17,6 @@
  * @subpackage Zend_Controller_Action
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -149,14 +148,12 @@ class HelperPriorityStack implements \IteratorAggregate, \ArrayAccess, \Countabl
         }
 
         if (array_key_exists($helper->getName(), $this->_helpersByNameRef)) {
-            // remove any object with the same name to retain BC compailitbility
-            // @todo At ZF 2.0 time throw an exception here.
+            // remove any object with the same name
             $this->offsetUnset($helper->getName());
         }
 
         if (array_key_exists($priority, $this->_helpersByPriority)) {
             $priority = $this->getNextFreeHigherPriority($priority);  // ensures LIFO
-            trigger_error("A helper with the same priority already exists, reassigning to $priority", E_USER_WARNING);
         }
 
         $this->_helpersByPriority[$priority] = $helper;

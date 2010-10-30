@@ -14,16 +14,16 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\InternalType\IndirectObjectReference;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -101,7 +101,7 @@ class ReferenceTable
     {
         $refElements = explode(' ', $ref);
         if (!is_numeric($refElements[0]) || !is_numeric($refElements[1]) || $refElements[2] != 'R') {
-            throw new Pdf\Exception("Incorrect reference: '$ref'");
+            throw new Exception\InvalidArgumentException("Incorrect reference: '$ref'");
         }
         $objNum = (int)$refElements[0];
         $genNum = (int)$refElements[1];
@@ -161,7 +161,7 @@ class ReferenceTable
     public function getNextFree($ref)
     {
         if (isset($this->_inuse[$ref])) {
-            throw new Pdf\Exception('Object is not free');
+            throw new Exception\CorruptedPdfException('Object is not free');
         }
 
         if (isset($this->_free[$ref])) {
@@ -172,7 +172,7 @@ class ReferenceTable
             return $this->_parent->getNextFree($ref);
         }
 
-        throw new Pdf\Exception('Object not found.');
+        throw new Exception\CorruptedPdfException('Object not found.');
     }
 
 
@@ -185,7 +185,7 @@ class ReferenceTable
     public function getNewGeneration($objNum)
     {
         if (isset($this->_usedObjects[$objNum])) {
-            throw new Pdf\Exception('Object is not free');
+            throw new Exception\CorruptedPdfException('Object is not free');
         }
 
         if (isset($this->_generations[$objNum])) {
@@ -196,6 +196,6 @@ class ReferenceTable
             return $this->_parent->getNewGeneration($objNum);
         }
 
-        throw new Pdf\Exception('Object not found.');
+        throw new Exception\CorruptedPdfException('Object not found.');
     }
 }

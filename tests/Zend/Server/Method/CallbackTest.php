@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -107,11 +106,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('instance', $this->callback->getType());
     }
 
-    /**
-     * @expectedException \Zend\Server\Exception
-     */
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
     {
+        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid method callback type');
         $this->callback->setType('bogus');
     }
 

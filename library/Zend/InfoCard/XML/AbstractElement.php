@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -65,7 +64,7 @@ abstract class AbstractElement extends \SimpleXMLElement implements Element
         if(!($dom instanceof \DOMElement)) {
             // Zend_InfoCard_Xml_Element extends SimpleXMLElement, so this should *never* fail
             // @codeCoverageIgnoreStart
-            throw new Exception("Failed to convert between SimpleXML and DOM");
+            throw new Exception\RuntimeException("Failed to convert between SimpleXML and DOM");
             // @codeCoverageIgnoreEnd
         }
 
@@ -86,10 +85,8 @@ abstract class AbstractElement extends \SimpleXMLElement implements Element
             \Zend\Loader::loadClass($classname);
         }
 
-        $reflection = new \ReflectionClass($classname);
-
-        if(!$reflection->isSubclassOf('Zend\InfoCard\XML\Element')) {
-            throw new Exception("DOM element must be converted to an instance of Zend_InfoCard_Xml_Element");
+        if(!is_subclass_of($classname, 'Zend\InfoCard\XML\Element')) {
+            throw new Exception\InvalidArgumentException("DOM element must be converted to an instance of Zend_InfoCard_Xml_Element");
         }
 
         $sxe = simplexml_import_dom($e, $classname);
@@ -97,7 +94,7 @@ abstract class AbstractElement extends \SimpleXMLElement implements Element
         if(!($sxe instanceof Element)) {
             // Since we just checked to see if this was a subclass of Zend_infoCard_Xml_Element this shoudl never fail
             // @codeCoverageIgnoreStart
-            throw new Exception("Failed to convert between DOM and SimpleXML");
+            throw new Exception\RuntimeException("Failed to convert between DOM and SimpleXML");
             // @codeCoverageIgnoreEnd
         }
 

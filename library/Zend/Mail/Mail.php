@@ -16,7 +16,6 @@
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -237,7 +236,7 @@ class Mail extends Mime\Message
             Mime\Mime::MULTIPART_RELATED,
         );
         if (!in_array($type, $allowed)) {
-            throw new Exception('Invalid content type "' . $type . '"');
+            throw new Exception\InvalidArgumentException('Invalid content type "' . $type . '"');
         }
 
         $this->_type = $type;
@@ -304,7 +303,7 @@ class Mail extends Mime\Message
             Mime\Mime::ENCODING_QUOTEDPRINTABLE
         );
         if (!in_array($encoding, $allowed)) {
-            throw new Exception('Invalid encoding "' . $encoding . '"');
+            throw new Exception\InvalidArgumentException('Invalid encoding "' . $encoding . '"');
         }
         $this->_headerEncoding = $encoding;
 
@@ -627,7 +626,7 @@ class Mail extends Mime\Message
     public function setFrom($email, $name = null)
     {
         if (null !== $this->_from) {
-            throw new Exception('From Header set twice');
+            throw new Exception\InvalidArgumentException('From Header set twice');
         }
 
         $email = $this->_filterEmail($email);
@@ -649,7 +648,7 @@ class Mail extends Mime\Message
     public function setReplyTo($email, $name = null)
     {
         if (null !== $this->_replyTo) {
-            throw new Exception('Reply-To Header set twice');
+            throw new Exception\InvalidArgumentException('Reply-To Header set twice');
         }
 
         $email = $this->_filterEmail($email);
@@ -746,7 +745,7 @@ class Mail extends Mime\Message
     public function setFromToDefaultFrom() {
         $from = self::getDefaultFrom();
         if($from === null) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'No default From Address set to use');
         }
 
@@ -795,7 +794,7 @@ class Mail extends Mime\Message
     public function setReplyToFromDefault() {
         $replyTo = self::getDefaultReplyTo();
         if($replyTo === null) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'No default Reply-To Address set to use');
         }
 
@@ -818,7 +817,7 @@ class Mail extends Mime\Message
             $this->_returnPath = $email;
             $this->_storeHeader('Return-Path', $email, false);
         } else {
-            throw new Exception('Return-Path Header set twice');
+            throw new Exception\InvalidArgumentException('Return-Path Header set twice');
         }
         return $this;
     }
@@ -866,7 +865,7 @@ class Mail extends Mime\Message
             $this->_subject = $this->_encodeHeader($subject);
             $this->_storeHeader('Subject', $this->_subject);
         } else {
-            throw new Exception('Subject set twice');
+            throw new Exception\InvalidArgumentException('Subject set twice');
         }
         return $this;
     }
@@ -911,20 +910,20 @@ class Mail extends Mime\Message
             } else if (is_string($date)) {
                 $date = strtotime($date);
                 if ($date === false || $date < 0) {
-                    throw new Exception('String representations of Date Header must be ' .
+                    throw new Exception\InvalidArgumentException('String representations of Date Header must be ' .
                                                   'strtotime()-compatible');
                 }
                 $date = date('r', $date);
             } else if ($date instanceof Date\Date) {
                 $date = $date->get(Date\Date::RFC_2822);
             } else {
-                throw new Exception(__METHOD__ . ' only accepts UNIX timestamps, Zend_Date objects, ' .
+                throw new Exception\InvalidArgumentException(__METHOD__ . ' only accepts UNIX timestamps, Zend_Date objects, ' .
                                               ' and strtotime()-compatible strings');
             }
             $this->_date = $date;
             $this->_storeHeader('Date', $date);
         } else {
-            throw new Exception('Date Header set twice');
+            throw new Exception\InvalidArgumentException('Date Header set twice');
         }
         return $this;
     }
@@ -976,7 +975,7 @@ class Mail extends Mime\Message
             $this->_messageId = $id;
             $this->_storeHeader('Message-Id', '<' . $this->_messageId . '>');
         } else {
-            throw new Exception('Message-ID set twice');
+            throw new Exception\InvalidArgumentException('Message-ID set twice');
         }
 
         return $this;
@@ -1056,7 +1055,7 @@ class Mail extends Mime\Message
                           'date', 'message-id',
                          );
         if (in_array(strtolower($name), $prohibit)) {
-            throw new Exception('Cannot set standard header from addHeader()');
+            throw new Exception\InvalidArgumentException('Cannot set standard header from addHeader()');
         }
 
         $value = $this->_filterOther($value);

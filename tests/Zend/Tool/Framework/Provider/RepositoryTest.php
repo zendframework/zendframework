@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -94,7 +93,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddProviderThrowsExceptionOnDuplicateName()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception\InvalidArgumentException');
         $this->_repository->addProvider(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
         $this->_repository->addProvider(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
     }

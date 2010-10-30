@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -51,7 +50,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
                                                     constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
                                                     );
         $this->_nosuchbucket = "nonexistingbucketnamewhichnobodyshoulduse";
-        $this->_httpClientAdapterSocket = new \Zend\HTTP\Client\Adapter\Socket();
+        $this->_httpClientAdapterSocket = new \Zend\Http\Client\Adapter\Socket();
 
         $this->_bucket = constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET');
         $this->_bucketName = "s3://".$this->_bucket;

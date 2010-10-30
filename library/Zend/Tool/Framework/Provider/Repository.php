@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -115,7 +114,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
             (array_key_exists($providerName, $this->_unprocessedProviders)
                 || array_key_exists($providerName, $this->_providers)))
         {
-            throw new Exception('A provider by the name ' . $providerName
+            throw new Exception\InvalidArgumentException('A provider by the name ' . $providerName
                 . ' is already registered and $overrideExistingProvider is set to false.');
         }
 

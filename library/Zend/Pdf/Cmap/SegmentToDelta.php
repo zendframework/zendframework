@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Cmap;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -325,22 +325,19 @@ class SegmentToDelta extends AbstractCmap
          */
         $actualLength = strlen($cmapData);
         if ($actualLength < 23) {
-            throw new Pdf\Exception('Insufficient table data',
-                                         Pdf\Exception::CMAP_TABLE_DATA_TOO_SMALL);
+            throw new Exception\CorruptedFontException('Insufficient table data');
         }
 
         /* Sanity check: Make sure this is right data for this table type.
          */
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != AbstractCmap::TYPE_SEGMENT_TO_DELTA) {
-            throw new Pdf\Exception('Wrong cmap table type',
-                                         Pdf\Exception::CMAP_WRONG_TABLE_TYPE);
+            throw new Exception\CorruptedFontException('Wrong cmap table type');
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
-            throw new Pdf\Exception("Table length ($length) does not match actual length ($actualLength)",
-                                         Pdf\Exception::CMAP_WRONG_TABLE_LENGTH);
+            throw new Exception\CorruptedFontException("Table length ($length) does not match actual length ($actualLength)");
         }
 
         /* Mapping tables should be language-independent. The font may not work
@@ -399,8 +396,7 @@ class SegmentToDelta extends AbstractCmap
          * of the table.
          */
         if ($offset != $length) {
-            throw new Pdf\Exception("Ending offset ($offset) does not match length ($length)",
-                                         Pdf\Exception::CMAP_FINAL_OFFSET_NOT_LENGTH);
+            throw new Exception\CorruptedFontException("Ending offset ($offset) does not match length ($length)");
         }
     }
 }

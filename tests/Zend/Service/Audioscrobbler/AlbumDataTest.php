@@ -17,18 +17,12 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
- */
-
-
-/**
- * Test helper
  */
 
 /**
- * @see Zend_Service_Audioscrobbler
+ * @namespace
  */
-
+namespace ZendTest\Service\Audioscrobbler;
 
 
 /**
@@ -40,7 +34,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-class Zend_Service_Audioscrobbler_AlbumDataTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
+class AlbumDataTest extends AudioscrobblerTestCase
 {
     public function testGetAlbumInfo()
     {

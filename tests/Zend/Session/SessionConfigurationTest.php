@@ -15,7 +15,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetSavePathErrorsOnInvalidPath()
     {
-        $this->setExpectedException('Zend\\Session\\Exception');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid save_path provided');
         $this->config->setSavePath(__DIR__ . '/foobarboguspath');
     }
 
@@ -76,7 +76,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidSaveHandlerRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'Invalid save handler');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid save handler specified');
         $this->config->setSaveHandler('foobar_bogus');
     }
 
@@ -101,26 +101,20 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidGcProbabilityRaisesException()
     {
-        try {
-            $this->config->setGcProbability('foobar_bogus');
-            $this->fail('Expected exception from string GC probability');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_probability; must be numeric');
+        $this->config->setGcProbability('foobar_bogus');
+    }
+    
+    public function testSettingInvalidGcProbabilityRaisesException2()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_probability; must be a percentage');
+        $this->config->setGcProbability(-1);
+    }
 
-        try {
-            $this->config->setGcProbability(-1);
-            $this->fail('Expected exception from negative GC probability');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
-
-        try {
-            $this->config->setGcProbability(101);
-            $this->fail('Expected exception from out-of-range GC probability');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+    public function testSettingInvalidGcProbabilityRaisesException3()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_probability; must be a percentage');
+        $this->config->setGcProbability(101);
     }
 
     // session.gc_divisor
@@ -144,19 +138,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidGcDivisorRaisesException()
     {
-        try {
-            $this->config->setGcDivisor('foobar_bogus');
-            $this->fail('Expected exception from string GC divisor');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
-
-        try {
-            $this->config->setGcDivisor(-1);
-            $this->fail('Expected exception from negative GC divisor');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_divisor; must be numeric');
+        $this->config->setGcDivisor('foobar_bogus');
+    }
+    
+    public function testSettingInvalidGcDivisorRaisesException2()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_divisor; must be a positive integer');
+        $this->config->setGcDivisor(-1);
     }
 
     // session.gc_maxlifetime
@@ -180,19 +169,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidGcMaxlifetimeRaisesException()
     {
-        try {
-            $this->config->setGcMaxlifetime('foobar_bogus');
-            $this->fail('Expected exception from string GC maxlifetime');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
-
-        try {
-            $this->config->setGcMaxlifetime(-1);
-            $this->fail('Expected exception from negative GC maxlifetime');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_maxlifetime; must be numeric');
+        $this->config->setGcMaxlifetime('foobar_bogus');
+    }
+    
+    public function testSettingInvalidGcMaxlifetimeRaisesException2()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_maxlifetime; must be a positive integer');
+        $this->config->setGcMaxlifetime(-1);
     }
 
     // session.serialize_handler
@@ -218,7 +202,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidSerializeHandlerRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'Invalid');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid serialize handler specified');
         $this->config->setSerializeHandler('foobar_bogus');
     }
 
@@ -249,19 +233,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidCookieLifetimeRaisesException()
     {
-        try {
-            $this->config->setCookieLifetime('foobar_bogus');
-            $this->fail('Expected exception from string cookie lifetime');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
-
-        try {
-            $this->config->setCookieLifetime(-1);
-            $this->fail('Expected exception from negative cookie lifetime');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cookie_lifetime; must be numeric');
+        $this->config->setCookieLifetime('foobar_bogus');
+    }
+    
+    public function testSettingInvalidCookieLifetimeRaisesException2()
+    {    
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cookie_lifetime; must be a positive integer or zero');
+        $this->config->setCookieLifetime(-1);
     }
 
     // session.cookie_path
@@ -285,26 +264,20 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidCookiePathRaisesException()
     {
-        try {
-            $this->config->setCookiePath(24);
-            $this->fail('Expected exception from string cookie path');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cookie path');
+        $this->config->setCookiePath(24);
+    }
+    
+    public function testSettingInvalidCookiePathRaisesException2()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cookie path');
+        $this->config->setCookiePath('foo');
+    }
 
-        try {
-            $this->config->setCookiePath('foo');
-            $this->fail('Expected exception from non-path cookie path');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
-
-        try {
-            $this->config->setCookiePath('D:\\WINDOWS\\System32\\drivers\\etc\\hosts');
-            $this->fail('Expected exception from malformed cookie path');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+    public function testSettingInvalidCookiePathRaisesException3()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cookie path');
+        $this->config->setCookiePath('D:\\WINDOWS\\System32\\drivers\\etc\\hosts');
     }
 
     // session.cookie_domain
@@ -334,19 +307,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidCookieDomainRaisesException()
     {
-        try {
-            $this->config->setCookieDomain(24);
-            $this->fail('Expected exception from string cookie domain');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
-
-        try {
-            $this->config->setCookieDomain('D:\\WINDOWS\\System32\\drivers\\etc\\hosts');
-            $this->fail('Expected exception from malformed cookie domain');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cookie domain: must be a string');
+        $this->config->setCookieDomain(24);
+    }
+    
+    public function testSettingInvalidCookieDomainRaisesException2()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'does not match the expected structure for a DNS hostname');
+        $this->config->setCookieDomain('D:\\WINDOWS\\System32\\drivers\\etc\\hosts');
     }
 
     // session.cookie_secure
@@ -462,13 +430,13 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetEntropyFileErrorsOnInvalidPath()
     {
-        $this->setExpectedException('Zend\\Session\\Exception');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_file provided');
         $this->config->setEntropyFile(__DIR__ . '/foobarboguspath');
     }
 
     public function testSetEntropyFileErrorsOnDirectory()
     {
-        $this->setExpectedException('Zend\\Session\\Exception');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_file provided');
         $this->config->setEntropyFile(__DIR__);
     }
 
@@ -516,19 +484,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidEntropyLengthRaisesException()
     {
-        try {
-            $this->config->setEntropyLength('foobar_bogus');
-            $this->fail('Expected exception from string entropy length');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
-
-        try {
-            $this->config->setEntropyLength(-1);
-            $this->fail('Expected exception from negative entropy length');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_length; must be numeric');
+        $this->config->setEntropyLength('foobar_bogus');
+    }
+    
+    public function testSettingInvalidEntropyLengthRaisesException2()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_length; must be a positive integer or zero');
+        $this->config->setEntropyLength(-1);
     }
 
     // session.cache_limiter
@@ -568,7 +531,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidCacheLimiterRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'Invalid');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cache limiter provided');
         $this->config->setCacheLimiter('foobar_bogus');
     }
 
@@ -593,19 +556,14 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidCacheExpireRaisesException()
     {
-        try {
-            $this->config->setCacheExpire('foobar_bogus');
-            $this->fail('Expected exception from string cache expiration');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cache_expire; must be numeric');
+        $this->config->setCacheExpire('foobar_bogus');
+    }
 
-        try {
-            $this->config->setCacheExpire(-1);
-            $this->fail('Expected exception from negative cache expiration');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('Invalid', $e->getMessage());
-        }
+    public function testSettingInvalidCacheExpireRaisesException2()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cache_expire; must be a positive integer');
+        $this->config->setCacheExpire(-1);
     }
 
     // session.use_trans_sid
@@ -666,7 +624,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidHashFunctionRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'Invalid');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid hash function provided');
         $this->config->setHashFunction('foobar_bogus');
     }
 
@@ -706,7 +664,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingInvalidHashBitsPerCharacterRaisesException()
     {
-        $this->setExpectedException('Zend\\Session\\Exception', 'Invalid');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid hash bits per character provided');
         $this->config->setHashBitsPerCharacter('foobar_bogus');
     }
 

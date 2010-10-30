@@ -16,7 +16,6 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  * @since      Preview Release 0.2
  */
 
@@ -31,7 +30,7 @@ namespace Zend\Session;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+interface Exception
 {
     /**
      * sessionStartError
@@ -39,7 +38,7 @@ class Exception extends \Zend\Exception
      * @see http://framework.zend.com/issues/browse/ZF-1325
      * @var string PHP Error Message
      */
-    static public $sessionStartError = null;
+    //static public $sessionStartError = null;
 
     /**
      * handleSessionStartError() - interface for set_error_handler()
@@ -49,10 +48,10 @@ class Exception extends \Zend\Exception
      * @param  string $errstr
      * @return void
      */
-    static public function handleSessionStartError($errno, $errstr, $errfile, $errline, $errcontext)
-    {
-        self::$sessionStartError = $errfile . '(Line:' . $errline . '): Error #' . $errno . ' ' . $errstr . ' ' . $errcontext;
-    }
+//    static public function handleSessionStartError($errno, $errstr, $errfile, $errline, $errcontext)
+//    {
+//        self::$sessionStartError = $errfile . '(Line:' . $errline . '): Error #' . $errno . ' ' . $errstr . ' ' . $errcontext;
+//    }
 
     /**
      * handleSilentWriteClose() - interface for set_error_handler()
@@ -62,9 +61,9 @@ class Exception extends \Zend\Exception
      * @param  string $errstr
      * @return void
      */
-    static public function handleSilentWriteClose($errno, $errstr, $errfile, $errline, $errcontext)
-    {
-        self::$sessionStartError .= PHP_EOL . $errfile . '(Line:' . $errline . '): Error #' . $errno . ' ' . $errstr . ' ' . $errcontext;
-    }
+//    static public function handleSilentWriteClose($errno, $errstr, $errfile, $errline, $errcontext)
+//    {
+//        self::$sessionStartError .= PHP_EOL . $errfile . '(Line:' . $errline . '): Error #' . $errno . ' ' . $errstr . ' ' . $errcontext;
+//    }
 }
 

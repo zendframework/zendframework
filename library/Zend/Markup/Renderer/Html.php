@@ -23,18 +23,14 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer;
-use Zend\Markup,
-    Zend\Loader\PluginLoader;
+
+use Zend\Markup\Token,
+    Zend\Loader\Broker,
+    Zend\Markup\Renderer\Markup\Html as Markup;
 
 /**
  * HTML renderer
  *
- * @uses       \Zend\Filter\FilterChain
- * @uses       \Zend\Filter\Callback
- * @uses       \Zend\Filter\HtmlEntities
- * @uses       \Zend\Filter\PregReplace
- * @uses       \Zend\Loader\PluginLoader\PluginLoader
- * @uses       \Zend\Markup\Renderer\RendererAbstract
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
@@ -51,10 +47,6 @@ class Html extends AbstractRenderer
      */
     protected function _loadDefaultConfig()
     {
-        $this->_pluginLoader = new PluginLoader(array(
-            'Zend\Markup\Renderer\Markup\Html' => 'Zend/Markup/Renderer/Markup/Html'
-        ));
-
         $this->_groups = array(
             'block'  => array('inline', 'block'),
             'inline' => array('inline')
@@ -62,8 +54,9 @@ class Html extends AbstractRenderer
 
         $this->_group  = 'block';
 
-        $this->addMarkupByName('code', 'code');
-        $this->addMarkupByName('img', 'img');
-        $this->addMarkupByName('url', 'url');
+        $this->addMarkup('code', new Markup\Code());
+        $this->addMarkup('img', new Markup\Img());
+        $this->addMarkup('url', new Markup\Url());
+        $this->addMarkup('b', new Markup\Replace('strong'));
     }
 }

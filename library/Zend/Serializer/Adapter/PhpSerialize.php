@@ -17,7 +17,6 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,11 +24,11 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException;
+use Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -39,7 +38,7 @@ use Zend\Serializer\Exception as SerializationException;
 class PhpSerialize extends AbstractAdapter
 {
     /**
-     *  @var null|string Serialized boolean false value
+     * @var null|string Serialized boolean false value
      */
     private static $_serializedFalse = null;
 
@@ -53,6 +52,8 @@ class PhpSerialize extends AbstractAdapter
     {
         parent::__construct($opts);
 
+        // needed to check if a returned false is based on a serialize false
+        // or based on failure (igbinary can overwrite [un]serialize functions)
         if (self::$_serializedFalse === null) {
             self::$_serializedFalse = serialize(false);
         }
@@ -71,7 +72,7 @@ class PhpSerialize extends AbstractAdapter
         $ret = serialize($value);
         if ($ret === false) {
             $lastErr = error_get_last();
-            throw new SerializationException($lastErr['message']);
+            throw new RuntimeException($lastErr['message']);
         }
         return $ret;
     }
@@ -87,11 +88,10 @@ class PhpSerialize extends AbstractAdapter
      */
     public function unserialize($serialized, array $opts = array())
     {
-        // TODO: @see php.ini directive "unserialize_callback_func"
         $ret = @unserialize($serialized);
         if ($ret === false && $serialized !== self::$_serializedFalse) {
             $lastErr = error_get_last();
-            throw new SerializationException($lastErr['message']);
+            throw new RuntimeException($lastErr['message']);
         }
         return $ret;
     }

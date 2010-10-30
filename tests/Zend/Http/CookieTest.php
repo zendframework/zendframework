@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -48,10 +47,13 @@ class CookieTest extends \PHPUnit_Framework_TestCase
      * Make sure we can't set invalid names
      *
      * @dataProvider invalidCookieNameCharProvider
-     * @expectedException Zend\Http\Exception
      */
     public function testSetInvalidName($char)
     {
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'Cookie name cannot contain these characters');
+
         $cookie = new Http\Cookie("cookie_$char", 'foo', 'example.com');
     }
 

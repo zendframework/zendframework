@@ -17,7 +17,6 @@
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -328,7 +327,7 @@ class PhpValue extends AbstractPhp
                 break;
             case self::TYPE_OTHER:
             default:
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     "Type '".get_class($value)."' is unknown or cannot be used as property default value."
                 );
         }

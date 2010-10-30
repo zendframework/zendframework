@@ -17,7 +17,6 @@
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,8 @@
  */
 namespace Zend\Amf\Parser\Amf3;
 use Zend\Amf\Parser\AbstractDeserializer,
-    Zend\Amf;
+    Zend\Amf,
+    Zend\Amf\Parse;
 
 /**
  * Read an AMF3 input stream and convert it into PHP data types.
@@ -113,7 +113,7 @@ class Deserializer extends AbstractDeserializer
             case Amf\Constants::AMF3_BYTEARRAY:
                  return $this->readString();
             default:
-                throw new Amf\Exception('Unsupported type marker: ' . $typeMarker);
+                throw new Parser\Exception\InvalidArgumentException('Unsupported type marker: ' . $typeMarker);
         }
     }
 
@@ -187,7 +187,7 @@ class Deserializer extends AbstractDeserializer
             // reference string
             $stringReference = $stringReference >> 1;
             if ($stringReference >= count($this->_referenceStrings)) {
-                throw new Amf\Exception('Undefined string reference: ' . $stringReference);
+                throw new Parser\Exception\OutOfBoundsException('Undefined string reference: ' . $stringReference);
             }
             // reference string found
             return $this->_referenceStrings[$stringReference];
@@ -220,7 +220,7 @@ class Deserializer extends AbstractDeserializer
         if (($dateReference & 0x01) == 0) {
             $dateReference = $dateReference >> 1;
             if ($dateReference>=count($this->_referenceObjects)) {
-                throw new Amf\Exception('Undefined date reference: ' . $dateReference);
+                throw new Parser\Exception\OutOfBoundsException('Undefined date reference: ' . $dateReference);
             }
             return $this->_referenceObjects[$dateReference];
         }
@@ -245,7 +245,7 @@ class Deserializer extends AbstractDeserializer
         if (($arrayReference & 0x01)==0) {
             $arrayReference = $arrayReference >> 1;
             if ($arrayReference >= count($this->_referenceObjects)) {
-                throw new Amf\Exception('Unknow array reference: ' . $arrayReference);
+                throw new Parser\Exception\OutOfBoundsException('Unknow array reference: ' . $arrayReference);
             }
             return $this->_referenceObjects[$arrayReference];
         }
@@ -287,7 +287,7 @@ class Deserializer extends AbstractDeserializer
         if ($storedObject) {
             $ref = $traitsInfo;
             if (!isset($this->_referenceObjects[$ref])) {
-                throw new Amf\Exception('Unknown Object reference: ' . $ref);
+                throw new Parser\Exception\OutOfBoundsException('Unknown Object reference: ' . $ref);
             }
             $returnObject = $this->_referenceObjects[$ref];
         } else {
@@ -297,7 +297,7 @@ class Deserializer extends AbstractDeserializer
             if ($storedClass) {
                 $ref = $traitsInfo;
                 if (!isset($this->_referenceDefinitions[$ref])) {
-                    throw new Amf\Exception('Unknows Definition reference: '. $ref);
+                    throw new Parser\Exception\OutOfBoundsException('Unknows Definition reference: '. $ref);
                 }
                 // Populate the reference attributes
                 $className     = $this->_referenceDefinitions[$ref]['className'];
@@ -323,7 +323,7 @@ class Deserializer extends AbstractDeserializer
                     $returnObject = new $loader();
                 } else {
                     //user defined typed object
-                    throw new Amf\Exception('Typed object not found: '. $className . ' ');
+                    throw new Parser\Exception\OutOfBoundsException('Typed object not found: '. $className . ' ');
                 }
             }
 

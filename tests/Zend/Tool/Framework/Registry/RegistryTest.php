@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -112,25 +111,25 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testMagicGetThrowsExceptionOnNonExistentItem()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Registry\Exception\InvalidArgumentException');
         $foo = $this->_registry->foo;
     }
 
     public function testMagicSetThrowsExceptionOnNonExistentItem()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Registry\Exception\InvalidArgumentException');
         $this->_registry->foo = 'foo';
     }
 
     public function testIsObjectRegistryEnablableWillThrowExceptionsOnNonObject()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Registry\Exception\InvalidArgumentException');
         $this->_registry->isObjectRegistryEnablable('foo');
     }
 
     public function testEnableRegistryOnObjectWillThrowExceptionsOnNonObject()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Registry\Exception\InvalidArgumentException');
         $this->_registry->enableRegistryOnObject(new \ArrayObject());
     }
 

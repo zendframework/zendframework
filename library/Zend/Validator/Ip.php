@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -106,7 +105,7 @@ class Ip extends AbstractValidator
         }
 
         if (!$this->_options['allowipv4'] && !$this->_options['allowipv6']) {
-            throw new Exception('Nothing to validate. Check your options');
+            throw new Exception\InvalidArgumentException('Nothing to validate. Check your options');
         }
 
         return $this;

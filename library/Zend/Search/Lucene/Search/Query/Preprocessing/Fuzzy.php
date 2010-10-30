@@ -17,19 +17,20 @@
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Search\Lucene\Search\Query\Preprocessing;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Search;
-use Zend\Search\Lucene\Analysis\Analyzer;
-use Zend\Search\Lucene\Search\Highlighter;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Search\Query,
+	Zend\Search\Lucene\Index,
+	Zend\Search\Lucene\Search,
+	Zend\Search\Lucene\Analysis\Analyzer,
+	Zend\Search\Lucene\Search\Highlighter,
+	Zend\Search\Lucence\Search\Exception\QueryParserException;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
@@ -38,7 +39,7 @@ use Zend\Search\Lucene\Search\Highlighter;
  * @uses       \Zend\Search\Lucene\Index
  * @uses       \Zend\Search\Lucene\Analysis\Analyzer
  * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Search\QueryParserException
+ * @uses       \Zend\Search\Lucene\Search\Exception\QueryParserException
  * @uses       \Zend\Search\Lucene\Search\Query\Boolean
  * @uses       \Zend\Search\Lucene\Search\Query\EmptyResult
  * @uses       \Zend\Search\Lucene\Search\Query\Fuzzy
@@ -106,6 +107,7 @@ class Fuzzy extends AbstractPreprocessing
      * Re-write query into primitive queries in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
+     * @throws \Zend\Search\Lucence\Search\Exception\QueryParserException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     public function rewrite(Lucene\SearchIndex $index)
@@ -186,7 +188,7 @@ class Fuzzy extends AbstractPreprocessing
             $subPatterns = preg_split('/[*?]/', $this->_word);
         }
         if (count($subPatterns) > 1) {
-            throw new Search\QueryParserException('Fuzzy search doesn\'t support wildcards (except within Keyword fields).');
+            throw new QueryParserException('Fuzzy search doesn\'t support wildcards (except within Keyword fields).');
         }
 
 
@@ -212,7 +214,7 @@ class Fuzzy extends AbstractPreprocessing
         }
 
         // Word is tokenized into several tokens
-        throw new Search\QueryParserException('Fuzzy search is supported only for non-multiple word terms');
+        throw new QueryParserException('Fuzzy search is supported only for non-multiple word terms');
     }
 
     /**

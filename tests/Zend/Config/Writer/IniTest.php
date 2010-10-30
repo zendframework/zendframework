@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Config\Writer;
@@ -51,14 +50,14 @@ class IniTest extends \PHPUnit_Framework_TestCase
     public function testNoFilenameSet()
     {
         $writer = new Ini(array('config' => new Config(array())));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No filename was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No filename was set');
         $writer->write();
     }
 
     public function testNoConfigSet()
     {
         $writer = new Ini(array('filename' => $this->_tempName));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No config was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No config was set');
         $writer->write();
     }
 
@@ -66,7 +65,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Ini(array('config' => new Config(array()), 'filename' => '/../../../'));
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Could not write to file');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Could not write to file');
         $writer->write();
     }
 
@@ -213,7 +212,7 @@ ECS;
     {
         $config = new Config(array('default' => array('test' => 'fo"o')));
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Value can not contain double quotes');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Value can not contain double quotes');
         $writer = new Ini(array('config' => $config, 'filename' => $this->_tempName));
         $writer->write();
     }

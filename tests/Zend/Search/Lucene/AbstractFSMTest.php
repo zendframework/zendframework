@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -61,7 +60,7 @@ class AbstractFSMTest extends \PHPUnit_Framework_TestCase
         $wrongStateExceptionCatched = false;
         try {
             $doorFSM->setState(testFSMClass::OPENED_AND_LOCKED);
-        } catch(Search\Exception $e) {
+        } catch(\Zend\Search\Lucene\Exception\InvalidArgumentException $e) {
             $wrongStateExceptionCatched = true;
         }
         $this->assertTrue($wrongStateExceptionCatched);
@@ -97,7 +96,7 @@ class AbstractFSMTest extends \PHPUnit_Framework_TestCase
         $wrongInputExceptionCatched = false;
         try {
             $doorFSM->process(testFSMClass::LOCK);
-        } catch(Search\Exception $e) {
+        } catch(\Zend\Search\Lucene\Exception $e) {
             $wrongInputExceptionCatched = true;
         }
         $this->assertTrue($wrongInputExceptionCatched);

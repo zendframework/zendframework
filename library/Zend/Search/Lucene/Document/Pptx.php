@@ -17,20 +17,23 @@
  * @subpackage Document
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Search\Lucene\Document;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Exception\ExtensionNotLoadedException,
+	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Pptx document.
  *
  * @uses       \Zend\Search\Lucene\Document\AbstractOpenXML
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
+ * @uses	   \Zend\Search\Lucene\Exception\RuntimeException
  * @uses       \Zend\Search\Lucene\Document\Field
  * @uses       ZipArchive
  * @category   Zend
@@ -74,12 +77,13 @@ class Pptx extends AbstractOpenXML
      *
      * @param string  $fileName
      * @param boolean $storeContent
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     private function __construct($fileName, $storeContent)
     {
         if (!class_exists('ZipArchive', false)) {
-            throw new Lucene\Exception('MS Office documents processing functionality requires Zip extension to be loaded');
+            throw new ExtensionNotLoadedException('MS Office documents processing functionality requires Zip extension to be loaded');
         }
 
         // Document data holders
@@ -95,7 +99,7 @@ class Pptx extends AbstractOpenXML
         // Read relations and search for officeDocument
         $relationsXml = $package->getFromName('_rels/.rels');
         if ($relationsXml === false) {
-            throw new Lucene\Exception('Invalid archive or corrupted .pptx file.');
+            throw new RuntimeException('Invalid archive or corrupted .pptx file.');
         }
         $relations = simplexml_load_string($relationsXml);
         foreach ($relations->Relationship as $rel) {

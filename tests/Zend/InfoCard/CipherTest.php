@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -45,11 +44,36 @@ class CipherTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The openssl extension is not loaded.');
         }
 
+        $obj = new Adapter\RSA();
+
+        $prv_key = file_get_Contents(__DIR__ . "/_files/ssl_private.cert");
+
+        $result = $obj->decrypt("foo", $prv_key, null, Adapter\AbstractAdapter::NO_PADDING);
+
+        // This is sort of werid, but since we don't have a real PK-encrypted string to test against for NO_PADDING
+        // mode we decrypt the string "foo" instead. Mathmatically we will always arrive at the same resultant
+        // string so if our hash doesn't match then something broke.
+        $this->assertSame(md5($result), "286c1991e1f7040229a6f223065b91b5");
+    }
+    
+    public function testPkiPaddingWithThrowExceptionOnBadInput()
+    {
+            if (!extension_loaded('openssl')) {
+            $this->markTestSkipped('The openssl extension is not loaded.');
+        }
+
         try {
             $obj = new Adapter\RSA("thiswillbreak");
             $this->fail("Exception not thrown as expected");
         } catch(\Exception $e) {
             /* yay */
+        }
+    }
+    
+    public function testPkiPaddingWithThrowExceptionOnBadInput2()
+    {
+        if (!extension_loaded('openssl')) {
+            $this->markTestSkipped('The openssl extension is not loaded.');
         }
 
         $obj = new Adapter\RSA();
@@ -63,15 +87,9 @@ class CipherTest extends \PHPUnit_Framework_TestCase
             /* yay */
         }
 
-        $result = $obj->decrypt("foo", $prv_key, null, Adapter\AbstractAdapter::NO_PADDING);
-
-        // This is sort of werid, but since we don't have a real PK-encrypted string to test against for NO_PADDING
-        // mode we decrypt the string "foo" instead. Mathmatically we will always arrive at the same resultant
-        // string so if our hash doesn't match then something broke.
-        $this->assertSame(md5($result), "286c1991e1f7040229a6f223065b91b5");
     }
-
-    public function testPKIDecryptBadKey()
+        
+    public function testPKIDecryptThrowsExceptionOnBadKey()
     {
         if (!extension_loaded('openssl')) {
             $this->markTestSkipped('The openssl extension is not loaded.');
@@ -79,13 +97,8 @@ class CipherTest extends \PHPUnit_Framework_TestCase
 
         $obj = new Adapter\RSA();
 
-        try {
-            $obj->decrypt("Foo", "bar");
-            $this->fail("Exception not thrown as expected");
-        } catch(\Exception $e) {
-            /* yay */
-        }
-
+        $this->setExpectedException('Zend\InfoCard\Cipher\Exception\RuntimeException', 'Failed to load private key');
+        $obj->decrypt("Foo", "bar");
     }
 
     public function testCipherFactory()
@@ -99,11 +112,12 @@ class CipherTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Cipher::getInstanceByURI(Cipher::ENC_RSA)
                           instanceof Adapter\RSA);
 
-        try {
-            Cipher::getInstanceByURI("Broken");
-            $this->fail("Exception not thrown as expected");
-        } catch(\Exception $e) {
-            /* yay */
-        }
     }
+    
+    public function testCipherFactoryThrowsExceptionOnBadInput()
+    {
+        $this->setExpectedException('Zend\InfoCard\Cipher\Exception\InvalidArgumentException', 'Unknown Cipher URI');
+        Cipher::getInstanceByURI("Broken");
+    }
+    
 }

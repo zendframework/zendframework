@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -78,7 +77,7 @@ class DeleteAllTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConnectionGivenThrowsException()
     {
-        $this->setExpectedException("Zend\Test\PHPUnit\Db\Exception");
+        $this->setExpectedException("Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException");
 
         $dataSet = $this->getMock('PHPUnit_Extensions_Database_DataSet_IDataSet');
         $connection = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');

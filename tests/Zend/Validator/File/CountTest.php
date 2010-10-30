@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -110,23 +109,12 @@ class CountTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\Count(array('min' => 1, 'max' => 5));
         $this->assertEquals(1, $validator->getMin());
-
-        try {
-            $validator = new File\Count(array('min' => 5, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
-
-        $validator = new File\Count(array('min' => 1, 'max' => 5));
-        $this->assertEquals(1, $validator->getMin());
-
-        try {
-            $validator = new File\Count(array('min' => 5, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
+    }
+    
+    public function testGetMinGreaterThanOrEqualThrowsException()
+    {
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\Count(array('min' => 5, 'max' => 1));
     }
 
     /**
@@ -140,12 +128,8 @@ class CountTest extends \PHPUnit_Framework_TestCase
         $validator->setMin(100);
         $this->assertEquals(100, $validator->getMin());
 
-        try {
-            $validator->setMin(20000);
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("less than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'less than or equal');
+        $validator->setMin(20000);
     }
 
     /**
@@ -158,12 +142,8 @@ class CountTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Count(array('min' => 1, 'max' => 100));
         $this->assertEquals(100, $validator->getMax());
 
-        try {
-            $validator = new File\Count(array('min' => 5, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\Count(array('min' => 5, 'max' => 1));
     }
 
     /**
@@ -180,9 +160,4 @@ class CountTest extends \PHPUnit_Framework_TestCase
         $validator->setMin(100);
         $this->assertEquals(1000000, $validator->getMax());
     }
-}
-
-// Call Zend_Validate_File_CountTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_CountTest::main") {
-    \Zend_Validate_File_CountTest::main();
 }

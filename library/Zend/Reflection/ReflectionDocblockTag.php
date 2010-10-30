@@ -16,7 +16,6 @@
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -107,7 +106,7 @@ class ReflectionDocblockTag implements \Reflector
     public function __call($methodName, $params)
     {
         if (strtolower(substr($methodName, 0, 3)) !== 'get') {
-            throw new \BadMethodCallException('Method ' . $methodName . ' is not supported');
+            throw new Exception\BadMethodCallException('Method ' . $methodName . ' is not supported');
         }
         
         $name = substr($methodName, 3);
@@ -127,7 +126,7 @@ class ReflectionDocblockTag implements \Reflector
     public function __get($name)
     {
         if (!$this->__isset($name)) {
-            throw new \InvalidArgumentException('Property by name ' . $name . ' does not exist');
+            throw new Exception\InvalidArgumentException('Property by name ' . $name . ' does not exist');
         }
         
         return $this->_values[strtolower($name)];
@@ -173,7 +172,7 @@ class ReflectionDocblockTag implements \Reflector
         }
 
         if (!$matches) {
-            throw new Exception('Could not parse the supplied tag line (' . $docblockLine . ')');
+            throw new Exception\RuntimeException('Could not parse the supplied tag line (' . $docblockLine . ')');
         }
 
         foreach ($matches as $name => $value) {

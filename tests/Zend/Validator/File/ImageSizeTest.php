@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,18 +26,6 @@ namespace ZendTest\Validate\File;
 use Zend\Validator\File;
 use Zend\Validator;
 
-// Call Zend_Validate_File_ImageSizeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_ImageSizeTest::main");
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_File_ImageSize
- */
 
 /**
  * @category   Zend
@@ -50,16 +37,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class ImageSizeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Validate_File_ImageSizeTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Ensures that the validator follows expected behavior
@@ -115,12 +92,8 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\ImageSize(array('minwidth' => 1, 'minheight' => 10, 'maxwidth' => 100, 'maxheight' => 1000));
         $this->assertEquals(array('minwidth' => 1, 'minheight' => 10), $validator->getImageMin());
 
-        try {
-            $validator = new File\ImageSize(array('minwidth' => 1000, 'minheight' => 100, 'maxwidth' => 10, 'maxheight' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\ImageSize(array('minwidth' => 1000, 'minheight' => 100, 'maxwidth' => 10, 'maxheight' => 1));
     }
 
     /**
@@ -137,12 +110,8 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator->setImageMin(array('minwidth' => 9, 'minheight' => 100));
         $this->assertEquals(array('minwidth' => 9, 'minheight' => 100), $validator->getImageMin());
 
-        try {
-            $validator->setImageMin(array('minwidth' => 20000, 'minheight' => 20000));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("less than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'less than or equal');
+        $validator->setImageMin(array('minwidth' => 20000, 'minheight' => 20000));
     }
 
     /**
@@ -155,12 +124,8 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\ImageSize(array('minwidth' => 10, 'minheight' => 100, 'maxwidth' => 1000, 'maxheight' => 10000));
         $this->assertEquals(array('maxwidth' => 1000, 'maxheight' => 10000), $validator->getImageMax());
 
-        try {
-            $validator = new File\ImageSize(array('minwidth' => 10000, 'minheight' => 1000, 'maxwidth' => 100, 'maxheight' => 10));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\ImageSize(array('minwidth' => 10000, 'minheight' => 1000, 'maxwidth' => 100, 'maxheight' => 10));
     }
 
     /**
@@ -183,12 +148,8 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator->setImageMax(array('maxwidth' => 120));
         $this->assertEquals(array('maxwidth' => 120, 'maxheight' => 1100), $validator->getImageMax());
 
-        try {
-            $validator->setImageMax(array('maxwidth' => 10000, 'maxheight' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator->setImageMax(array('maxwidth' => 10000, 'maxheight' => 1));
     }
 
     /**
@@ -213,12 +174,8 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator->setImageWidth(array('minwidth' => 2000, 'maxwidth' => 2200));
         $this->assertEquals(array('minwidth' => 2000, 'maxwidth' => 2200), $validator->getImageWidth());
 
-        try {
-            $validator->setImageWidth(array('minwidth' => 20000, 'maxwidth' => 200));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("less than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'less than or equal');
+        $validator->setImageWidth(array('minwidth' => 20000, 'maxwidth' => 200));
     }
 
     /**
@@ -243,11 +200,7 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator->setImageHeight(array('minheight' => 2000, 'maxheight' => 2200));
         $this->assertEquals(array('minheight' => 2000, 'maxheight' => 2200), $validator->getImageHeight());
 
-        try {
-            $validator->setImageHeight(array('minheight' => 20000, 'maxheight' => 200));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("less than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'less than or equal');
+        $validator->setImageHeight(array('minheight' => 20000, 'maxheight' => 200));
     }
 }

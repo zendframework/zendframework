@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -59,7 +58,7 @@ class Module
 
         // if there is a module directory already, except
         if ($modulesDirectory->search(array('moduleDirectory' => array('moduleName' => $moduleName)))) {
-            throw new Exception('A module named "' . $moduleName . '" already exists.');
+            throw new Exception\RuntimeException('A module named "' . $moduleName . '" already exists.');
         }
 
         // create the module directory

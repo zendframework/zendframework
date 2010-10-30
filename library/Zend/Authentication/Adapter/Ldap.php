@@ -17,7 +17,6 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -281,7 +280,7 @@ class Ldap implements AuthenticationAdapter
         foreach ($this->_options as $name => $options) {
 
             if (!is_array($options)) {
-                throw new Exception('Adapter options array not an array');
+                throw new InvalidArgumentException('Adapter options array not an array');
             }
             $adapterOptions = $this->_prepareOptions($ldap, $options);
             $dname = '';

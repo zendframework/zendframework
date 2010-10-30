@@ -16,7 +16,6 @@
  * @package   Zend_Text_Table
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -117,13 +116,13 @@ class Row
     /**
      * Get the widths of all columns, which were rendered last
      *
-     * @throws \Zend\Text\Table\Exception When no columns were rendered yet
+     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no columns were rendered yet
      * @return integer
      */
     public function getColumnWidths()
     {
         if ($this->_columnWidths === null) {
-            throw new Exception('No columns were rendered yet');
+            throw new Exception\UnexpectedValueException('render() must be called before columnWidths can be populated');
         }
 
         return $this->_columnWidths;
@@ -135,7 +134,7 @@ class Row
      * @param  array                               $columnWidths Width of all columns
      * @param  \Zend\Text\Table\Decorator $decorator    Decorator for the row borders
      * @param  integer                             $padding      Padding for the columns
-     * @throws \Zend\Text\Table\Exception When there are too many columns
+     * @throws \Zend\Text\Table\Exception\OverflowException When there are too many columns
      * @return string
      */
     public function render(array $columnWidths, Decorator $decorator, $padding = 0)
@@ -159,7 +158,7 @@ class Row
 
             // Verify if there are enough column widths defined
             if (($colNum + $colSpan) > count($columnWidths)) {
-                throw new Exception('Too many columns');
+                throw new Exception\OverflowException('Too many columns');
             }
 
             // Calculate the column width

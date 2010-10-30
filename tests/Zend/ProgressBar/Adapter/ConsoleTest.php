@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -99,14 +98,8 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidElement()
     {
-        try {
-            $adapter = new Stub(array('width' => 30, 'elements' => array('foo')));
-            $adapter->notify(0, 100, 0, 0, null, null);
-
-            $this->fail('An expected Zend_ProgressBar_Adapter_Exception has not been raised');
-        } catch (Adapter\Exception $expected) {
-            $this->assertContains('Invalid element found in $elements array', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException', 'Invalid element found');
+        $adapter = new Stub(array('width' => 30, 'elements' => array('foo')));
     }
 
     public function testCariageReturn()
@@ -244,13 +237,12 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('test1', MockupStream::$tests);
     }
 
-    public function testSetOutputStreamOpenFail() {
-        try {
-            $adapter = new Adapter\Console();
-            $adapter->setOutputStream(null);
-            $this->fail('Expected Zend_ProgressBar_Adapter_Exception');
-        } catch (Adapter\Exception $e) {
-        }
+    public function testSetOutputStreamOpenFail()
+    {
+        $adapter = new Adapter\Console();
+        
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\RuntimeException', 'Unable to open stream');
+        $adapter->setOutputStream(null);
     }
 
     public function testSetOutputStreamReplaceStream() {
@@ -291,34 +283,28 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', MockupStream::$tests['test7']);
     }
 
-    public function testSetBarLeftChar() {
-        try {
-            $adapter = new Adapter\Console();
-            $adapter->setBarLeftChar(null);
-            $this->fail('Expected Zend_ProgressBar_Adapter_Exception');
-        } catch (Adapter\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Character may not be empty');
-        }
+    public function testSetBarLeftChar()
+    {
+        $adapter = new Adapter\Console();
+        
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
+        $adapter->setBarLeftChar(null);
     }
 
-    public function testSetBarRightChar() {
-        try {
-            $adapter = new Adapter\Console();
-            $adapter->setBarRightChar(null);
-            $this->fail('Expected Zend_ProgressBar_Adapter_Exception');
-        } catch (Adapter\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Character may not be empty');
-        }
+    public function testSetBarRightChar()
+    {
+        $adapter = new Adapter\Console();
+        
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
+        $adapter->setBarRightChar(null);
     }
 
-    public function testSetInvalidFinishAction() {
-        try {
-            $adapter = new Adapter\Console();
-            $adapter->setFinishAction('CUSTOM_FINISH_ACTION');
-            $this->fail('Expected Zend_ProgressBar_Adapter_Exception');
-        } catch (Adapter\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Invalid finish action specified');
-        }
+    public function testSetInvalidFinishAction()
+    {
+        $adapter = new Adapter\Console();
+        
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Invalid finish action specified');
+        $adapter->setFinishAction('CUSTOM_FINISH_ACTION');
     }
 
 }

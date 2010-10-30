@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Dojo\View\Helper;
@@ -63,7 +62,7 @@ class CustomDijitTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperShouldRaiseExceptionIfNoDojoTypePassed()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception');
+        $this->setExpectedException('Zend\Dojo\View\Exception\InvalidArgumentException', 'No dojoType specified; cannot create dijit');
         $this->view->customDijit('foo');
     }
 

@@ -16,7 +16,6 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -114,7 +113,7 @@ class Upload extends \Zend\Validator\AbstractValidator
             }
 
             if (count($return) === 0) {
-                throw new \Zend\Validator\Exception("The file '$file' was not found");
+                throw new \Zend\Validator\Exception\InvalidArgumentException("The file '$file' was not found");
             }
 
             return $return;

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -106,12 +105,8 @@ class IpTest extends \PHPUnit_Framework_TestCase
 
     public function testNoValidation()
     {
-        try {
-            $this->_validator->setOptions(array('allowipv4' => false, 'allowipv6' => false));
-            $this->fail();
-        } catch (\Zend\Validator\Exception $e) {
-            $this->assertContains('Nothing to validate', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Nothing to validate');
+        $this->_validator->setOptions(array('allowipv4' => false, 'allowipv6' => false));
     }
 
     public function testInvalidIpForZF4809()

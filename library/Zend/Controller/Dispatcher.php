@@ -17,13 +17,14 @@
  * @subpackage Dispatcher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Controller;
+
+use Zend\Loader\Broker;
 
 /**
  * @package    Zend_Controller
@@ -198,4 +199,12 @@ interface Dispatcher
      * @return string
      */
     public function getDefaultAction();
+
+    /**
+     * Set helper broker
+     * 
+     * @param  Broker $broker 
+     * @return Dispatches
+     */
+    public function setHelperBroker(Broker $broker = null);
 }

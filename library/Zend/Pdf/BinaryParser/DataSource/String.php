@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\DataSource;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -65,8 +65,7 @@ class String extends AbstractDataSource
     public function __construct($string)
     {
         if (empty($string)) {
-            throw new Pdf\Exception('String is empty',
-                                         Pdf\Exception::PARAMETER_VALUE_OUT_OF_RANGE);
+            throw new Exception\InvalidArgumentException('String is empty');
         }
         $this->_size = strlen($string);
         $this->_string = $string;
@@ -96,8 +95,7 @@ class String extends AbstractDataSource
     public function readBytes($byteCount)
     {
         if (($this->_offset + $byteCount) > $this->_size) {
-            throw new Pdf\Exception("Insufficient data to read $byteCount bytes",
-                                         Pdf\Exception::INSUFFICIENT_DATA);
+            throw new Exception\LengthException("Insufficient data to read $byteCount bytes");
         }
         $bytes = substr($this->_string, $this->_offset, $byteCount);
         $this->_offset += $byteCount;

@@ -17,15 +17,15 @@
  * @subpackage Protocol
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Wildfire\Protocol;
-use Zend\Wildfire\Plugin;
-use Zend\Wildfire;
+use Zend\Wildfire\Plugin,
+    Zend\Wildfire\Protocol\Exception,
+    Zend\Wildfire;
 
 /**
  * Encodes messages into the Wildfire JSON Stream Communication Protocol.
@@ -160,7 +160,7 @@ class JsonStream
     public function getPayload(Wildfire\Channel $channel)
     {
         if (!$channel instanceof Wildfire\Channel\HttpHeaders) {
-            throw new Wildfire\Exception('The '.get_class($channel).' channel is not supported by the '.get_class($this).' protocol.');
+            throw new Exception\InvalidArgumentException('The '.get_class($channel).' channel is not supported by the '.get_class($this).' protocol.');
         }
 
         if ($this->_plugins) {
@@ -218,7 +218,7 @@ class JsonStream
                             $message_index++;
 
                             if ($message_index > 99999) {
-                                throw new Wildfire\Exception('Maximum number (99,999) of messages reached!');
+                                throw new Exception\OutOfRangeException('Maximum number (99,999) of messages reached!');
                             }
                         }
                     }

@@ -17,7 +17,6 @@
  * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -48,7 +47,7 @@ class HTMLCloud extends Cloud
      * @var array
      */
     protected $_htmlTags = array(
-        'ul' => array('class' => 'Zend_Tag_Cloud')
+        'ul' => array('class' => 'Zend\Tag\Cloud')
     );
 
     /**
@@ -125,13 +124,19 @@ class HTMLCloud extends Cloud
     }
 
     /**
-     * Defined by Zend_Tag_Cloud_Decorator_Cloud
+     * Defined by Zend\Tag\Cloud\Decorator\Cloud
      *
      * @param  array $tags
      * @return string
      */
-    public function render(array $tags)
+    public function render($tags)
     {
+        if (!is_array($tags)) {
+            throw new Exception(sprintf(
+                'HtmlCloud::render() expects an array argument; received "%s"',
+                (is_object($tags) ? get_class($tags) : gettype($tags))
+            ));
+        }
         $cloudHTML = implode($this->getSeparator(), $tags);
 
         $enc = $this->getEncoding();

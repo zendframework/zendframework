@@ -17,7 +17,6 @@
  * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,7 @@
  */
 namespace Zend\Application;
 
-use Zend\Loader\ShortNameLocater;
+use Zend\Loader\LazyLoadingBroker;
 
 /**
  * Interface for bootstrap classes that utilize resource plugins
@@ -39,64 +38,17 @@ use Zend\Loader\ShortNameLocater;
 interface ResourceBootstrapper
 {
     /**
-     * Register a resource with the bootstrap
+     * Set plugin broker to use to fetch resources
      *
-     * @param  string|\Zend\Application\Resource $resource
-     * @param  null|array|\Zend\Config\Config                     $options
+     * @param  \Zend\Loader\LazyLoadingBroker $broker
      * @return \Zend\Application\ResourceBootstrapper
      */
-    public function registerPluginResource($resource, $options = null);
+    public function setBroker($broker);
 
     /**
-     * Unregister a resource from the bootstrap
+     * Retrieve plugin broker for resources
      *
-     * @param  string|\Zend\Application\Resource $resource
-     * @return \Zend\Application\ResourceBootstrapper
+     * @return \Zend\Loader\LazyLoadingBroker
      */
-    public function unregisterPluginResource($resource);
-
-    /**
-     * Is the requested resource registered?
-     *
-     * @param  string $resource
-     * @return bool
-     */
-    public function hasPluginResource($resource);
-
-    /**
-     * Retrieve resource
-     *
-     * @param  string $resource
-     * @return \Zend\Application\Resource
-     */
-    public function getPluginResource($resource);
-
-    /**
-     * Get all resources
-     *
-     * @return array
-     */
-    public function getPluginResources();
-
-    /**
-     * Get just resource names
-     *
-     * @return array
-     */
-    public function getPluginResourceNames();
-
-    /**
-     * Set plugin loader to use to fetch resources
-     *
-     * @param  \Zend\Loader\ShortNameLocater $loader
-     * @return \Zend\Application\ResourceBootstrapper
-     */
-    public function setPluginLoader(ShortNameLocater $loader);
-
-    /**
-     * Retrieve plugin loader for resources
-     *
-     * @return \Zend\Loader\ShortNameLocater
-     */
-    public function getPluginLoader();
+    public function getBroker();
 }

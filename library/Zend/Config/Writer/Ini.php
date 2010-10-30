@@ -16,7 +16,6 @@
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -159,7 +158,7 @@ class Ini extends AbstractFileWriter
         } elseif (strpos($value, '"') === false) {
             return '"' . $value .  '"';
         } else {
-            throw new Config\Exception('Value can not contain double quotes "');
+            throw new Config\Exception\RuntimeException('Value can not contain double quotes "');
         }
     }
     

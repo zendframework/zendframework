@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -494,12 +493,8 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingFalseType()
     {
-        try {
-            $this->_validator->setType(true);
-            $this->fail();
-        } catch (\Zend\Exception $e) {
-            $this->assertContains('Unknown', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Unknown');
+        $this->_validator->setType(true);
     }
 
     /**

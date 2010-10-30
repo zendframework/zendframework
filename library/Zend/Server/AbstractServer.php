@@ -38,7 +38,6 @@ namespace Zend\Server;
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 abstract class AbstractServer implements Server
 {
@@ -147,7 +146,7 @@ abstract class AbstractServer implements Server
         $method     = empty($ns) ? $name : $ns . '.' . $name;
 
         if (!$this->_overwriteExistingMethods && $this->_table->hasMethod($method)) {
-            throw new Exception('Duplicate method registered: ' . $method);
+            throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
         }
 
         $definition = new Method\Definition();

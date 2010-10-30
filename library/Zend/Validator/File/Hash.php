@@ -16,14 +16,14 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator;
+use Zend\Validator,
+    Zend\Validator\Exception;
 
 /**
  * Validator for the hash of given files
@@ -74,7 +74,7 @@ class Hash extends Validator\AbstractValidator
         } elseif (is_scalar($options)) {
             $options = array('hash1' => $options);
         } elseif (!is_array($options)) {
-            throw new Validator\Exception('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         if (1 < func_num_args()) {
@@ -119,7 +119,7 @@ class Hash extends Validator\AbstractValidator
         if (is_string($options)) {
             $options = array($options);
         } else if (!is_array($options)) {
-            throw new Validator\Exception("False parameter given");
+            throw new Exception\InvalidArgumentException("False parameter given");
         }
 
         $known = hash_algos();
@@ -131,7 +131,7 @@ class Hash extends Validator\AbstractValidator
         }
 
         if (!in_array($algorithm, $known)) {
-            throw new Validator\Exception("Unknown algorithm '{$algorithm}'");
+            throw new Exception\InvalidArgumentException("Unknown algorithm '{$algorithm}'");
         }
 
         foreach ($options as $value) {

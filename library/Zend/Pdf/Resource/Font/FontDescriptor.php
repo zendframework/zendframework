@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Resource\Font;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
@@ -55,7 +55,7 @@ class FontDescriptor
      */
     public function __construct()
     {
-        throw new Pdf\Exception('\Zend\Pdf\Resource\Font\FontDescriptor is not intended to be instantiated');
+        throw new Exception\RuntimeException('\Zend\Pdf\Resource\Font\FontDescriptor is not intended to be instantiated');
     }
 
     /**
@@ -167,9 +167,9 @@ class FontDescriptor
                  */
                 if (!($embeddingOptions & Pdf\Font::EMBED_SUPPRESS_EMBED_EXCEPTION)) {
                     $message = 'This font cannot be embedded in the PDF document. If you would like to use '
-                             . 'it anyway, you must pass Zend_PDF_Font::EMBED_SUPPRESS_EMBED_EXCEPTION '
+                             . 'it anyway, you must pass \Zend\Pdf\Font::EMBED_SUPPRESS_EMBED_EXCEPTION '
                              . 'in the $options parameter of the font constructor.';
-                    throw new Pdf\Exception($message, Pdf\Exception::FONT_CANT_BE_EMBEDDED);
+                    throw new Exception\DomainException($message);
                 }
 
             } else {

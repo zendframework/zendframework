@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -64,10 +64,10 @@ abstract class AbstractDestination extends Pdf\InternalStructure\NavigationTarge
         }
 
         if ($resource->getType() != InternalType\AbstractTypeObject::TYPE_ARRAY) {
-            throw new Pdf\Exception('An explicit destination must be a direct or an indirect array object.');
+            throw new Exception\CorruptedPdfException('An explicit destination must be a direct or an indirect array object.');
         }
         if (count($resource->items) < 2) {
-            throw new Pdf\Exception('An explicit destination array must contain at least two elements.');
+            throw new Exception\CorruptedPdfException('An explicit destination array must contain at least two elements.');
         }
 
         switch ($resource->items[1]->value) {

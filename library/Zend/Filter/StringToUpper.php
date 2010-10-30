@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -85,12 +84,12 @@ class StringToUpper extends AbstractFilter
     {
         if ($encoding !== null) {
             if (!function_exists('mb_strtoupper')) {
-                throw new Exception('mbstring is required for this feature');
+                throw new Exception\ExtensionNotLoadedException('mbstring is required for this feature');
             }
 
             $encoding = (string) $encoding;
             if (!in_array(strtolower($encoding), array_map('strtolower', mb_list_encodings()))) {
-                throw new Exception("The given encoding '$encoding' is not supported by mbstring");
+                throw new Exception\InvalidArgumentException("The given encoding '$encoding' is not supported by mbstring");
             }
         }
 

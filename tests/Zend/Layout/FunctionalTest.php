@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -33,7 +32,7 @@ namespace ZendTest\Layout;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Layout
  */
-class FunctionalTest extends \PHPUnit_Framework_TestCase // \Zend\Test\PHPUnit\ControllerTestCase
+class FunctionalTest extends \Zend\Test\PHPUnit\ControllerTestCase
 {
 
 
@@ -68,15 +67,12 @@ class FunctionalTest extends \PHPUnit_Framework_TestCase // \Zend\Test\PHPUnit\C
 
     public function testMissingViewScriptDoesDoubleRender()
     {
-        \Zend\Controller\Action\HelperBroker::getStack()->offsetSet(-91, new \Zend\Controller\Action\Helper\ViewRenderer());
+        $broker       = $this->frontController->getHelperBroker();
+        $viewRenderer = $broker->load('viewRenderer');
+        $broker->getStack()->offsetSet(-91, $viewRenderer);
         // go to the test controller for this funcitonal test
         $this->dispatch('/zend-layout-functional-test-test/missing-view-script');
         $this->assertEquals(trim($this->response->getBody()), "[DEFAULT_LAYOUT_START]\n[DEFAULT_LAYOUT_START]\n[DEFAULT_LAYOUT_END]\n(ErrorController::errorAction output)[DEFAULT_LAYOUT_END]");
     }
-
 }
 
-// Call Zend_Layout_FunctionalTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Layout_FunctionalTest::main") {
-    \Zend_Layout_FunctionalTest::main();
-}

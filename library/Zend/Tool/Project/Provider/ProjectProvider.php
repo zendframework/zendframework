@@ -16,7 +16,6 @@
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -47,7 +46,7 @@ class ProjectProvider extends AbstractProvider
     {
 
         if (!is_string($projectProviderName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"projectProviderName\" is the name of a project provider resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Controller::createResource() expects \"projectProviderName\" is the name of a project provider resource to create.');
         }
 
         $profileSearchParams = array();

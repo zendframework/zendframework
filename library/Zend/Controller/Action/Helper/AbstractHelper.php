@@ -17,13 +17,14 @@
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Controller\Action\Helper;
+
+use Zend\Loader\Broker;
 
 /**
  * @category   Zend
@@ -40,6 +41,12 @@ abstract class AbstractHelper
      * @var \Zend\Controller\Action $_actionController
      */
     protected $_actionController = null;
+
+    /**
+     * Action HelperBroker instance
+     * @var Broker
+     */
+    protected $broker;
 
     /**
      * @var mixed $_frontController
@@ -66,6 +73,28 @@ abstract class AbstractHelper
     public function getActionController()
     {
         return $this->_actionController;
+    }
+
+    /**
+     * Set action helper broker
+     * 
+     * @param  Broker $broker 
+     * @return AbstractHelper
+     */
+    public function setBroker(Broker $broker)
+    {
+        $this->broker = $broker;
+        return $this;
+    }
+
+    /**
+     * Get action helper broker instance
+     * 
+     * @return null|Broker
+     */
+    public function getBroker()
+    {
+        return $this->broker;
     }
 
     /**
@@ -142,13 +171,14 @@ abstract class AbstractHelper
      */
     public function getName()
     {
-        $full_class_name = get_class($this);
+        $className = get_class($this);
 
-        if (strpos($full_class_name, '\\') !== false) {
-            $helper_name = strrchr($full_class_name, '\\');
-            return ltrim($helper_name, '\\');
+        if (strpos($className, '\\') !== false) {
+            $name  = ltrim(strrchr($className, '\\'), '\\');
+            $words = preg_split('/(?<=\\w)(?=[A-Z])/', $name);
+            return strtolower(implode('_', $words));
         } else {
-            return $full_class_name;
+            return $className;
         }
     }
 

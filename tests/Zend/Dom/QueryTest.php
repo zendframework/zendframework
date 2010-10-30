@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -127,7 +126,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
 
     public function testQueryingWithoutRegisteringDocumentShouldThrowException()
     {
-        $this->setExpectedException('\\Zend\\Dom\\Exception', 'no document');
+        $this->setExpectedException('\Zend\Dom\Exception\RuntimeException', 'no document');
         $this->query->execute('.foo');
     }
 

@@ -16,7 +16,6 @@
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -24,8 +23,10 @@
  */
 namespace Zend\Search\Lucene;
 
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
  * @uses       \Zend\Search\Lucene\Storage\Directory
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -84,11 +85,11 @@ class Lucene
     }
 
     /**
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      */
     public function __construct()
     {
-        throw new Exception('\Zend\Search\Lucene class is the only container for static methods. Use Lucene::open() or Lucene::create() methods.');
+        throw new UnsupportedMethodCallException('\Zend\Search\Lucene class is the only container for static methods. Use Lucene::open() or Lucene::create() methods.');
     }
 
     /**

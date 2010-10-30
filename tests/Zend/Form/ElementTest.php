@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Form;
@@ -25,17 +24,18 @@ namespace ZendTest\Form;
 require_once __DIR__ . '/TestAsset/decorators/TableRow.php';
 
 use Zend\Form\Element,
-    Zend\Form\Exception as FormException,
+    Zend\Form\Element\Exception as ElementException,
     Zend\Form\Form,
     Zend\Config\Config,
-    Zend\Controller\Action\HelperBroker,
+    Zend\Controller\Front as FrontController,
     Zend\Json\Json,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Alpha as AlphaValidator,
-    Zend\View\View;
+    Zend\View\PhpRenderer;
 
 /**
  * @category   Zend
@@ -49,6 +49,10 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $front = FrontController::getInstance();
+        $front->resetInstance();
+        $this->broker = $front->getHelperBroker();
+
         Registry::_unsetInstance();
         Form::setDefaultTranslator(null);
 
@@ -57,12 +61,11 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->element = new Element('foo');
-        HelperBroker::resetHelpers();
     }
 
     public function getView()
     {
-        $view = new View();
+        $view = new PhpRenderer();
         return $view;
     }
 
@@ -71,17 +74,17 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $element = new Element(1);
             $this->fail('Zend\Form\Element constructor should not accept integer argument');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
         try {
             $element = new Element(true);
             $this->fail('Zend\Form\Element constructor should not accept boolean argument');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
 
         try {
             $element = new Element('foo');
-        } catch (\Exception $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
             $this->fail('Zend\Form\Element constructor should accept String values');
         }
 
@@ -89,13 +92,13 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $element = new Element($config);
             $this->fail('Zend\Form\Element constructor requires array with name element');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
 
         $config = array('name' => 'bar');
         try {
             $element = new Element($config);
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
             $this->fail('Zend\Form\Element constructor should accept array with name element');
         }
 
@@ -103,13 +106,13 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $element = new Element($config);
             $this->fail('Zend\Form\Element constructor requires Zend\Config object with name element');
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
         }
 
         $config = new Config(array('name' => 'bar'));
         try {
             $element = new Element($config);
-        } catch (FormException $e) {
+        } catch (ElementException\UnexpectedValueException $e) {
             $this->fail('Zend_Form_Element constructor should accept Zend\Config with name element');
         }
     }
@@ -148,7 +151,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $this->element->setName('f%\o^&*)o\(%$b#@!.a}{;-,r');
         $this->assertEquals('foobar', $this->element->getName());
 
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid name provided');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid name provided');
         $this->element->setName('%\^&*)\(%$#@!.}{;-,');
     }
 
@@ -157,7 +160,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         try {
             $this->element->setName(0);
             $this->assertSame('0', $this->element->getName());
-        } catch (FormException $e) {
+        } catch (ElementException\InvalidArgumentException $e) {
             $this->fail('Should allow zero as element name');
         }
     }
@@ -171,7 +174,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             try {
                 $this->element->setName($name);
                 $this->fail('setName() should not allow empty string');
-            } catch (FormException $e) {
+            } catch (ElementException\InvalidArgumentException $e) {
                 $this->assertContains('Invalid name', $e->getMessage());
             }
         }
@@ -398,7 +401,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAttribThrowsExceptionsForKeysWithLeadingUnderscores()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid attribute');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid attribute');
         $this->element->setAttrib('_foo', 'bar');
     }
 
@@ -447,7 +450,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrievingOverloadedValuesThrowsExceptionWithInvalidKey()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Cannot retrieve value for protected/private');
+        $this->setExpectedException('Zend\Form\Element\Exception\RunTimeException', 'Cannot retrieve value for protected/private');
         $name = $this->element->_name;
     }
 
@@ -460,9 +463,9 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultValidatorPluginLoader()
     {
         $loader = $this->element->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Validator');
-        $this->assertTrue(is_array($paths), var_export($loader, 1));
+        $this->assertType('SplStack', $paths);
         $this->assertTrue(0 < count($paths));
         $this->assertContains('Validator', $paths[0]);
     }
@@ -470,9 +473,9 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultFilterPluginLoader()
     {
         $loader = $this->element->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertTrue(0 < count($paths));
         $this->assertContains('Filter', $paths[0]);
     }
@@ -480,16 +483,16 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultDecoratorPluginLoader()
     {
         $loader = $this->element->getPluginLoader('decorator');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Form\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertTrue(0 < count($paths));
         $this->assertContains('Decorator', $paths[0]);
     }
 
     public function testCanSetCustomValidatorPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->element->setPluginLoader($loader, 'validator');
         $test = $this->element->getPluginLoader('validator');
         $this->assertSame($loader, $test);
@@ -497,20 +500,20 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
         $this->element->setPluginLoader($loader, 'foo');
     }
 
     public function testPassingInvalidTypeToGetPluginLoaderThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid type');
         $this->element->getPluginLoader('foo');
     }
 
     public function testCanSetCustomFilterPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->element->setPluginLoader($loader, 'filter');
         $test = $this->element->getPluginLoader('filter');
         $this->assertSame($loader, $test);
@@ -518,7 +521,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomDecoratorPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->element->setPluginLoader($loader, 'decorator');
         $test = $this->element->getPluginLoader('decorator');
         $this->assertSame($loader, $test);
@@ -526,7 +529,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidLoaderTypeToAddPrefixPathThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid type');
         $this->element->addPrefixPath('Zend_Foo', 'Zend/Foo/', 'foo');
     }
 
@@ -535,7 +538,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('validator');
         $this->element->addPrefixPath('Zend\Form', 'Zend/Form/', 'validator');
         $paths = $loader->getPaths('Zend\Form');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Form', $paths[0]);
     }
 
@@ -554,7 +557,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('validator');
         $this->element->addPrefixPath('Zend\Form', 'Zend/Form/', 'validator');
         $paths = $loader->getPaths('Zend\Form');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Form', $paths[0]);
     }
 
@@ -573,7 +576,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('decorator');
         $this->element->addPrefixPath('Zend\Foo', 'Zend/Foo/', 'decorator');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Foo', $paths[0]);
     }
 
@@ -589,30 +592,30 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanAddAllPluginLoaderPrefixPathsSimultaneously()
     {
-        $validatorLoader = new PluginLoader();
-        $filterLoader    = new PluginLoader();
-        $decoratorLoader = new PluginLoader();
+        $validatorLoader = new PrefixPathLoader();
+        $filterLoader    = new PrefixPathLoader();
+        $decoratorLoader = new PrefixPathLoader();
         $this->element->setPluginLoader($validatorLoader, 'validator')
                       ->setPluginLoader($filterLoader, 'filter')
                       ->setPluginLoader($decoratorLoader, 'decorator')
                       ->addPrefixPath('Zend', 'Zend/');
 
         $paths = $filterLoader->getPaths('Zend\Filter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Filter', $paths[0]);
 
         $paths = $validatorLoader->getPaths('Zend\Validator');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Validator', $paths[0]);
 
         $paths = $decoratorLoader->getPaths('Zend\Decorator');
-        $this->assertTrue(is_array($paths), var_export($paths, 1));
+        $this->assertType('SplStack', $paths);
         $this->assertContains('Decorator', $paths[0]);
     }
 
     public function testPassingInvalidValidatorToAddValidatorThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid validator');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid validator');
         $this->element->addValidator(123);
     }
 
@@ -649,7 +652,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->element->addValidator('Alnum', false, true);
-        } catch (Exception $e) {
+        } catch (ElementException\InvalidArgumentException $e) {
             $this->fail('Should be able to add non-array validator options');
         }
         $validator = $this->element->getValidator('Alnum');
@@ -1079,7 +1082,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingInvalidFilterTypeThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid filter');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid filter');
         $this->element->addFilter(123);
     }
 
@@ -1143,7 +1146,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->element->addFilter('Alnum', true);
-        } catch (Exception $e) {
+        } catch (ElementException\InvalidArgumentException $e) {
             $this->fail('Should be able to add non-array filter options');
         }
         $filter = $this->element->getFilter('Alnum');
@@ -1206,7 +1209,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testGetViewReturnsViewRendererViewInstanceIfViewRendererActive()
     {
-        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = $this->broker->load('viewRenderer');
         $viewRenderer->initView();
         $view = $viewRenderer->view;
         $test = $this->element->getView();
@@ -1215,7 +1218,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetView()
     {
-        $view = new View();
+        $view = new PhpRenderer();
         $this->assertNull($this->element->getView());
         $this->element->setView($view);
         $received = $this->element->getView();
@@ -1278,7 +1281,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingInvalidDecoratorThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid decorator');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException', 'Invalid decorator');
         $this->element->addDecorator(123);
     }
 
@@ -1756,8 +1759,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         foreach (array('validator', 'filter', 'decorator') as $type) {
             $loader = $this->element->getPluginLoader($type);
             $paths = $loader->getPaths('Zend\Foo\\' . ucfirst($type));
-            $this->assertTrue(is_array($paths), "Failed for type $type: " . var_export($paths, 1));
-            $this->assertFalse(empty($paths));
+            $this->assertType('SplStack', $paths);
+            $this->assertNotEquals(0, count($paths));
             $this->assertContains('Foo', $paths[0]);
         }
     }
@@ -1772,8 +1775,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $loader = $this->element->getPluginLoader('filter');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertFalse(empty($paths));
+        $this->assertType('SplStack', $paths);
+        $this->assertNotEquals(0, count($paths));
         $this->assertContains('Foo', $paths[0]);
     }
 
@@ -1787,8 +1790,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $loader = $this->element->getPluginLoader('decorator');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertFalse(empty($paths));
+        $this->assertType('SplStack', $paths);
+        $this->assertNotEquals(0, count($paths));
         $this->assertContains('Foo', $paths[0]);
     }
 
@@ -1872,7 +1875,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\BadMethodCallException');
         $html = $this->element->bogusMethodCall();
     }
 

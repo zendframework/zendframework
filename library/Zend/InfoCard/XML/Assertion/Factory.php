@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -71,7 +70,7 @@ final class Factory
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
         } else {
-            throw new XML\Exception("Invalid Data provided to create instance");
+            throw new XML\Exception\InvalidArgumentException("Invalid Data provided to create instance");
         }
 
         $sxe = simplexml_load_string($strXmlData);
@@ -85,6 +84,6 @@ final class Factory
             }
         }
 
-        throw new XML\Exception("Unable to determine Assertion type by Namespace");
+        throw new XML\Exception\InvalidArgumentException("Unable to determine Assertion type by Namespace");
     }
 }

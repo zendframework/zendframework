@@ -17,7 +17,6 @@
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -89,7 +88,7 @@ class Session extends AbstractResource
         if (!$this->_saveHandler instanceof SaveHandler) {
             if (is_array($this->_saveHandler)) {
                 if (!array_key_exists('class', $this->_saveHandler)) {
-                    throw new ResourceException('Session save handler class not provided in options');
+                    throw new Exception\InitializationException('Session save handler class not provided in options');
                 }
                 $options = array();
                 if (array_key_exists('options', $this->_saveHandler)) {
@@ -102,7 +101,7 @@ class Session extends AbstractResource
             }
 
             if (!$this->_saveHandler instanceof SaveHandler) {
-                throw new ResourceException('Invalid session save handler');
+                throw new Exception\InitializationException('Invalid session save handler');
             }
 
             // Inject session manager

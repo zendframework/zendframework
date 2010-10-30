@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Dojo\View\Helper;
@@ -104,7 +103,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidModuleNameShouldThrowExceptionDuringRegistration()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception', 'invalid character');
+        $this->setExpectedException('Zend\Dojo\View\Exception\InvalidArgumentException', 'invalid character');
         $this->helper->requireModule('foo#$!bar');
     }
 
@@ -284,7 +283,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidStylesheetModuleNameShouldThrowException()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception', 'Invalid');
+        $this->setExpectedException('Zend\Dojo\View\Exception\InvalidArgumentException', 'Invalid');
         $this->helper->addStylesheetModule('foo/bar/baz');
     }
 
@@ -486,7 +485,7 @@ function() {
     public function testAddingDuplicateProgrammaticDijitsShouldRaiseExceptions()
     {
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.Form'));
-        $this->setExpectedException('Zend\Dojo\View\Exception');
+        $this->setExpectedException('Zend\Dojo\View\Exception\InvalidArgumentException', 'Duplicate dijit with id ');
         $this->helper->addDijit('foo', array('dojoType' => 'dijit.form.ComboBox'));
     }
 
@@ -732,7 +731,7 @@ function() {
 
     public function testCallingMethodThatDoesNotExistInContainerShouldRaiseException()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception');
+        $this->setExpectedException('Zend\Dojo\View\Exception\BadMethodCallException', 'Invalid method ');
         $dojo = new DojoHelper();
         $dojo->bogus();
     }

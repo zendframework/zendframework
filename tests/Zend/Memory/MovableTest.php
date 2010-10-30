@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -128,6 +127,22 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($memoryManager->processUpdatePassed);
         $this->assertTrue($memoryManager->processedObject === $memObject);
         $this->assertEquals($memoryManager->processedId, 10);
+    }
+
+    public function testInvalidGetThrowException()
+    {
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $this->setExpectedException('Zend\Memory\Exception\InvalidArgumentException');
+        $value = $memObject->unknowProperty;
+    }
+
+    public function testInvalidSetThrowException()
+    {
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $this->setExpectedException('Zend\Memory\Exception\InvalidArgumentException');
+        $memObject->unknowProperty = 5;
     }
 }
 

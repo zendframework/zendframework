@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -73,7 +72,7 @@ class LessThan extends AbstractValidator
             if (array_key_exists('max', $max)) {
                 $max = $max['max'];
             } else {
-                throw new Exception("Missing option 'max'");
+                throw new Exception\InvalidArgumentException("Missing option 'max'");
             }
         }
 

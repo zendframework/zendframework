@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -70,7 +69,7 @@ abstract class AbstractAdapter implements \Zend\InfoCard\Cipher\PKI
                 $this->_padding = $padding;
                 break;
             default:
-                throw new \Zend\InfoCard\Cipher\Exception("Invalid Padding Type Provided");
+                throw new \Zend\InfoCard\Cipher\Exception\InvalidArgumentException("Invalid Padding Type Provided");
                 break;
         }
 

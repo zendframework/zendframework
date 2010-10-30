@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -269,7 +268,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $docxDocument1 = Document\Docx::loadDocxFile(__DIR__ . '/_openXmlDocuments/dummy.docx', true);
 
             $this->fail('File not readable exception is expected.');
-        } catch (Document\Exception $e) {
+        } catch (Document\Exception\InvalidArgumentException $e) {
             if (strpos($e->getMessage(), 'is not readable') === false) {
                 // Passthrough exception
                 throw $e;

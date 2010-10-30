@@ -16,7 +16,6 @@
  * @package   Zend_Config
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -70,7 +69,7 @@ class Xml extends Config
     public function __construct($xml, $section = null, $options = false)
     {
         if (empty($xml)) {
-            throw new Exception('Filename is not set');
+            throw new Exception\InvalidArgumentException('Filename is not set');
         }
 
         $allowModifications = false;
@@ -95,7 +94,7 @@ class Xml extends Config
         restore_error_handler();
         // Check if there was a error while loading file
         if ($this->_loadFileErrorStr !== null) {
-            throw new Exception($this->_loadFileErrorStr);
+            throw new Exception\InvalidArgumentException($this->_loadFileErrorStr);
         }
 
         if ($section === null) {
@@ -109,7 +108,7 @@ class Xml extends Config
             $dataArray = array();
             foreach ($section as $sectionName) {
                 if (!isset($config->$sectionName)) {
-                    throw new Exception("Section '$sectionName' cannot be found in $xml");
+                    throw new Exception\InvalidArgumentException("Section '$sectionName' cannot be found in $xml");
                 }
 
                 $dataArray = array_merge($this->_processExtends($config, $sectionName), $dataArray);
@@ -118,7 +117,7 @@ class Xml extends Config
             parent::__construct($dataArray, $allowModifications);
         } else {
             if (!isset($config->$section)) {
-                throw new Exception("Section '$section' cannot be found in $xml");
+                throw new Exception\InvalidArgumentException("Section '$section' cannot be found in $xml");
             }
 
             $dataArray = $this->_processExtends($config, $section);
@@ -146,7 +145,7 @@ class Xml extends Config
     protected function _processExtends(\SimpleXMLElement $element, $section, array $config = array())
     {
         if (!isset($element->$section)) {
-            throw new Exception("Section '$section' cannot be found");
+            throw new Exception\RuntimeException("Section '$section' cannot be found");
         }
 
         $thisSection  = $element->$section;
@@ -202,7 +201,7 @@ class Xml extends Config
         // Search for local 'const' nodes and replace them
         if (count($xmlObject->children(self::XML_NAMESPACE)) > 0) {
             if (count($xmlObject->children()) > 0) {
-                throw new Exception("A node with a 'const' childnode may not have any other children");
+                throw new Exception\RuntimeException("A node with a 'const' childnode may not have any other children");
             }
 
             $dom                 = dom_import_simplexml($xmlObject);
@@ -220,13 +219,13 @@ class Xml extends Config
                 switch ($node->localName) {
                     case 'const':
                         if (!$node->hasAttributeNS(self::XML_NAMESPACE, 'name')) {
-                            throw new Exception("Misssing 'name' attribute in 'const' node");
+                            throw new Exception\RuntimeException("Misssing 'name' attribute in 'const' node");
                         }
 
                         $constantName = $node->getAttributeNS(self::XML_NAMESPACE, 'name');
 
                         if (!defined($constantName)) {
-                            throw new Exception("Constant with name '$constantName' was not defined");
+                            throw new Exception\RuntimeException("Constant with name '$constantName' was not defined");
                         }
 
                         $constantValue = constant($constantName);
@@ -235,7 +234,7 @@ class Xml extends Config
                         break;
 
                     default:
-                        throw new Exception("Unknown node with name '$node->localName' found");
+                        throw new Exception\RuntimeException("Unknown node with name '$node->localName' found");
                 }
             }
 

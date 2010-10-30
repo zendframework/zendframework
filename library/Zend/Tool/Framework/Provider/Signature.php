@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -252,7 +251,7 @@ class Signature implements RegistryEnabled
         if ($this->_providerReflection->hasMethod('getSpecialties')) {
             $specialties = $this->_provider->getSpecialties();
             if (!is_array($specialties)) {
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'Provider ' . get_class($this->_provider) . ' must return an array for method getSpecialties().'
                     );
             }
@@ -260,7 +259,7 @@ class Signature implements RegistryEnabled
             $defaultProperties = $this->_providerReflection->getDefaultProperties();
             $specialties = (isset($defaultProperties['_specialties'])) ? $defaultProperties['_specialties'] : array();
             if (!is_array($specialties)) {
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'Provider ' . get_class($this->_provider) . '\'s property $_specialties must be an array.'
                     );
             }

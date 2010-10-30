@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Action;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -59,7 +59,7 @@ class Uri extends AbstractAction
         parent::__construct($dictionary, $processedActions);
 
         if ($dictionary->URI === null) {
-            throw new Pdf\Exception('URI action dictionary entry is required');
+            throw new Exception\CorruptedPdfException('URI action dictionary entry is required');
         }
     }
 
@@ -74,12 +74,12 @@ class Uri extends AbstractAction
     {
         $scheme = parse_url((string)$uri, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            throw new Pdf\Exception('Invalid URI');
+            throw new Exception\InvalidArgumentException('Invalid URI');
         }
     }
 
     /**
-     * Create new Zend_PDF_Action_Uri object using specified uri
+     * Create new \Zend\Pdf\Action\Uri object using specified uri
      *
      * @param string  $uri    The URI to resolve, encoded in 7-bit ASCII
      * @param boolean $isMap  A flag specifying whether to track the mouse position when the URI is resolved

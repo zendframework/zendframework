@@ -16,14 +16,14 @@
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Memory\Container;
-use Zend\Memory;
+use Zend\Memory,
+    Zend\Memory\Exception;
 
 /**
  * Memory value container
@@ -139,7 +139,7 @@ class Movable extends AbstractContainer
     public function __get($property)
     {
         if ($property != 'value') {
-            throw new Memory\Exception('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
+            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
         }
 
         if ( !($this->_state & self::LOADED) ) {
@@ -160,7 +160,7 @@ class Movable extends AbstractContainer
     public function __set($property, $value)
     {
         if ($property != 'value') {
-            throw new Memory\Exception('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
+            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
         }
 
         $this->_state = self::LOADED;

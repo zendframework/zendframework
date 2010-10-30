@@ -16,7 +16,6 @@
  * @package    Zend_Application
  * @subpackage Module
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -45,7 +44,7 @@ class Autoloader extends ResourceAutoloader
      * @param  array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         parent::__construct($options);
         $this->initDefaultResourceTypes();

@@ -16,7 +16,6 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,16 +23,13 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend\View;
-use Zend\Controller\Action\HelperBroker;
+
+use Zend\View,
+    Zend\Controller\Front as FrontController;
 
 /**
  * Helper for rendering output of a controller action
  *
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -50,6 +46,11 @@ class Action extends AbstractHelper
      * @var \Zend\Controller\Dispatcher
      */
     public $dispatcher;
+
+    /**
+     * @var \Zend\Controller\Front
+     */
+    protected $front;
 
     /**
      * @var \Zend\Controller\Request\AbstractRequest
@@ -70,7 +71,7 @@ class Action extends AbstractHelper
      */
     public function __construct()
     {
-        $front   = \Zend\Controller\Front::getInstance();
+        $front   = $this->front = \Zend\Controller\Front::getInstance();
         $modules = $front->getControllerDirectory();
         if (empty($modules)) {
             $e = new View\Exception('Action helper depends on valid front controller instance');
@@ -80,6 +81,7 @@ class Action extends AbstractHelper
 
         $request  = $front->getRequest();
         $response = $front->getResponse();
+        $broker   = $front->getHelperBroker();
 
         if (empty($request) || empty($response)) {
             $e = new View\Exception('Action view helper requires both a registered request and response object in the front controller instance');
@@ -89,8 +91,9 @@ class Action extends AbstractHelper
 
         $this->request       = clone $request;
         $this->response      = clone $response;
-        $this->dispatcher    = clone $front->getDispatcher();
         $this->defaultModule = $front->getDefaultModule();
+        $this->dispatcher    = clone $front->getDispatcher();
+        $this->dispatcher->setHelperBroker($broker);
     }
 
     /**
@@ -133,8 +136,10 @@ class Action extends AbstractHelper
         }
 
         // clone the view object to prevent over-writing of view variables
-        $viewRendererObj = HelperBroker::getStaticHelper('viewRenderer');
-        HelperBroker::addHelper(clone $viewRendererObj);
+        $broker = $this->front->getHelperBroker();
+        $viewRenderer = $broker->load('viewRenderer');
+        $viewRendererClone = clone $viewRenderer;
+        $broker->register('viewRenderer', $viewRendererClone);
 
         $this->request->setParams($params)
                       ->setModuleName($module)
@@ -145,8 +150,7 @@ class Action extends AbstractHelper
         $this->dispatcher->dispatch($this->request, $this->response);
 
         // reset the viewRenderer object to it's original state
-        HelperBroker::addHelper($viewRendererObj);
-
+        $broker->register('viewRenderer', $viewRenderer);
 
         if (!$this->request->isDispatched()
             || $this->response->isRedirect())

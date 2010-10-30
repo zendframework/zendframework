@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Log\Writer;
@@ -43,7 +42,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
             new StreamWriter($resource);
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertType('\\Zend\\Log\\Exception', $e);
+            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
             $this->assertRegExp('/not a stream/i', $e->getMessage());
         }
         xml_parser_free($resource);
@@ -63,13 +62,13 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
     public function testConstructorThrowsWhenModeSpecifiedForExistingStream()
     {
         $stream = fopen('php://memory', 'w+');
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'existing stream');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'existing stream');
         new StreamWriter($stream, 'w+');
     }
 
     public function testConstructorThrowsWhenStreamCannotBeOpened()
     {
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'cannot be opened');
+        $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'cannot be opened');
         new StreamWriter('');
     }
 
@@ -94,7 +93,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
         $writer = new StreamWriter($stream);
         fclose($stream);
 
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'Unable to write');
+        $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'Unable to write');
         $writer->write(array('message' => 'foo'));
     }
 
@@ -105,7 +104,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
 
         $writer->shutdown();
 
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'Unable to write');
+        $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'Unable to write');
         $writer->write(array('message' => 'this write should fail'));
     }
 

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -153,21 +152,14 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($_ENV['MAGIC'], $mimetype);
         }
 
-        try {
-            $validator->setMagicFile('/unknown/magic/file');
-        } catch (Validator\Exception $e) {
-            $this->assertContains('can not be', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'can not be');
+        $validator->setMagicFile('/unknown/magic/file');
     }
 
     public function testSetMagicFileWithinConstructor()
     {
-        try {
-            $validator = new File\MimeType(array('image/gif', 'magicfile' => __FILE__));
-            $this->fail('Zend\Validator\File\MimeType should not accept invalid magic file.');
-        } catch (Validator\Exception $e) {
-            // @ZF-9320: False Magic File is not allowed to be set
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'The given magicfile is not accepted by finfo');
+        $validator = new File\MimeType(array('image/gif', 'magicfile' => __FILE__));
     }
 
     public function testOptionsAtConstructor()

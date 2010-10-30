@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -52,13 +51,8 @@ class NumericTest extends \PHPUnit_Framework_TestCase
 
     public function testPDFNumericBadArgument()
     {
-        try {
-            $intObj = new InternalType\NumericObject('some input');
-        } catch (\Zend\Pdf\Exception $e) {
-            $this->assertContains('must be numeric', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException('\Zend\Pdf\Exception\RuntimeException', 'must be numeric');
+        $intObj = new InternalType\NumericObject('some input');
     }
 
     public function testGetType()

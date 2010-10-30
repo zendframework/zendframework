@@ -17,7 +17,6 @@
  * @subpackage Plugin
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,6 +25,7 @@
 namespace Zend\Wildfire\Plugin\FirePhp;
 
 use Zend\Wildfire\Plugin\FirePhp,
+    Zend\Wildfire\Plugin\Exception,
     Zend\Wildfire;
 
 /**
@@ -114,7 +114,7 @@ class TableMessage extends Message
         $count = $this->getRowCount();
 
         if($index < 0 || $index > $count-1) {
-            throw new Wildfire\Exception('Row index('.$index.') out of bounds('.$count.')!');
+            throw new Exception\OutOfBoundsException('Row index('.$index.') out of bounds('.$count.')!');
         }
 
         return $this->_rows[$index];
@@ -132,7 +132,7 @@ class TableMessage extends Message
         $count = $this->getRowCount();
 
         if($index < 0 || $index > $count-1) {
-            throw new Wildfire\Exception('Row index('.$index.') out of bounds('.$count.')!');
+            throw new Exception\OutOfBoundsException('Row index('.$index.') out of bounds('.$count.')!');
         }
 
         $this->_rows[$index] = $row;
@@ -159,7 +159,7 @@ class TableMessage extends Message
         $count = $this->getRowCount();
 
         if($count==0) {
-            throw new Wildfire\Exception('Cannot get last row as no rows exist!');
+            throw new Exception\OutOfBoundsException('Cannot get last row as no rows exist!');
         }
 
         return $this->_rows[$count-1];

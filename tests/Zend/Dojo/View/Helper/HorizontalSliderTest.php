@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Dojo\View\Helper;
@@ -190,7 +189,7 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
 
     public function testSliderShouldRaiseExceptionIfMissingRequiredParameters()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception');
+        $this->setExpectedException('Zend\Dojo\View\Exception\InvalidArgumentException', 'prepareSlider() requires minimally the "minimum", "maximum", and "discreteValues" parameters');
         $this->helper->prepareSlider('foo', 4);
     }
 

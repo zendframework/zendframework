@@ -55,7 +55,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
     {
         $this->storage->foo = 'bar';
         $this->storage->lock();
-        $this->setExpectedException('Zend\\Session\\Exception', 'lock');
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'Cannot set key "foo" due to locking');
         $this->storage->foo = 'baz';
     }
 
@@ -73,18 +73,12 @@ class StorageTest extends \PHPUnit_Framework_TestCase
     {
         $this->storage->foo = 'bar';
         $this->storage->lock('foo');
-        try {
-            $this->storage->bar = 'baz';
-            $this->assertEquals('baz', $this->storage->bar);
-        } catch (\Zend\Session\Exception $e) {
-            $this->fail('Writing to key not specified in lock should be permitted');
-        }
-        try {
-            $this->storage->foo = 'baz';
-            $this->fail('Writing to locked key should not be permitted');
-        } catch (\Zend\Session\Exception $e) {
-            $this->assertContains('lock', $e->getMessage());
-        }
+        
+        $this->storage->bar = 'baz';
+        $this->assertEquals('baz', $this->storage->bar);
+
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'Cannot set key "foo" due to locking');
+        $this->storage->foo = 'baz';
     }
 
     public function testLockWithKeyMarksOnlyThatKeyLocked()
@@ -203,7 +197,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $this->storage->foo = 'bar';
         $this->storage->bar = 'baz';
         $this->storage->markImmutable();
-        $this->setExpectedException('Zend\\Session\\Exception', 'immutable');
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'Cannot clear storage as it is marked immutable');
         $this->storage->clear();
     }
 }

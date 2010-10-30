@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -276,7 +275,7 @@ class EmailAddress extends AbstractValidator
     public function setValidateMx($mx)
     {
         if ((bool) $mx && !$this->validateMxSupported()) {
-            throw new Exception('MX checking not available on this system');
+            throw new Exception\InvalidArgumentException('MX checking not available on this system');
         }
 
         $this->_options['mx'] = (bool) $mx;

@@ -16,7 +16,6 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -79,7 +78,7 @@ class FilesSize extends Size
         } elseif (is_scalar($options)) {
             $options = array('max' => $options);
         } elseif (!is_array($options)) {
-            throw new \Zend\Validator\Exception('Invalid options to validator provided');
+            throw new \Zend\Validator\Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         if (1 < func_num_args()) {

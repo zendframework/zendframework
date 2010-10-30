@@ -16,7 +16,6 @@
  * @package   Zend_ProgressBar
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -34,6 +33,6 @@ namespace Zend\ProgressBar\Adapter;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\ProgressBar\Exception
+interface Exception extends \Zend\ProgressBar\Exception
 {
 }

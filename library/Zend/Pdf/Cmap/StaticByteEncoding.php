@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Cmap;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -56,8 +56,7 @@ class StaticByteEncoding extends ByteEncoding
     public function __construct($cmapData)
     {
         if (! is_array($cmapData)) {
-            throw new Pdf\Exception('Constructor parameter must be an array',
-                                         Pdf\Exception::BAD_PARAMETER_TYPE);
+            throw new Exception\CorruptedFontException('Constructor parameter must be an array');
         }
         $this->_glyphIndexArray = $cmapData;
     }

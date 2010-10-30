@@ -14,16 +14,16 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Trailer;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 
@@ -33,7 +33,7 @@ use Zend\Pdf\InternalType;
  * @uses       \Zend\Pdf\InternalType\DictionaryObject
  * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -58,7 +58,7 @@ abstract class AbstractTrailer
     {
         if ( !in_array($key, self::$_allowedKeys) ) {
             /** @todo Make warning (log entry) instead of an exception */
-            throw new Pdf\Exception("Unknown trailer dictionary key: '$key'.");
+            throw new Exception\CorruptedPdfException("Unknown trailer dictionary key: '$key'.");
         }
     }
 

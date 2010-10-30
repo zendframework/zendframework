@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -308,7 +307,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $loader = new PluginLoader(array('ZendTest\Barcode\Renderer\TestAsset' => __DIR__ . '/Renderer/TestAsset'));
         Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::RENDERER);
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespace');
-        $this->assertTrue($renderer instanceof \Zend\Barcode\Renderer);
+        $this->assertTrue($renderer instanceof \Zend\Barcode\BarcodeRenderer);
     }
 
     public function testBarcodeFactoryWithNamespaceButWithoutExtendingRendererAbstract()
@@ -330,6 +329,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         if (! extension_loaded('gd')) {
             $this->markTestSkipped('GD extension is required to run this test');
         }
+        $resource = Barcode\Barcode::draw('code25', 'image', array('text' => '012345'));
+        $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
+        $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
+    }
+
+    public function testProxyBarcodeRendererDrawAsImageAutomaticallyRenderImageIfException()
+    {
+        if (! extension_loaded('gd')) {
+            $this->markTestSkipped('GD extension is required to run this test');
+        }
         $resource = Barcode\Barcode::draw('code25', 'image');
         $this->assertTrue(gettype($resource) == 'resource', 'Image must be a resource');
         $this->assertTrue(get_resource_type($resource) == 'gd', 'Image must be a GD resource');
@@ -338,8 +347,32 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testProxyBarcodeRendererDrawAsPdf()
     {
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        $resource = Barcode\Barcode::draw('code25', 'pdf', array('text' => '012345'));
+        $this->assertTrue($resource instanceof Pdf\PdfDocument);
+        Barcode\Barcode::setBarcodeFont('');
+    }
+
+    public function testProxyBarcodeRendererDrawAsPdfAutomaticallyRenderPdfIfException()
+    {
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'pdf');
         $this->assertTrue($resource instanceof Pdf\PdfDocument);
+        Barcode\Barcode::setBarcodeFont('');
+    }
+
+    public function testProxyBarcodeRendererDrawAsSvg()
+    {
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        $resource = Barcode\Barcode::draw('code25', 'svg', array('text' => '012345'));
+        $this->assertTrue($resource instanceof \DOMDocument);
+        Barcode\Barcode::setBarcodeFont('');
+    }
+
+    public function testProxyBarcodeRendererDrawAsSvgAutomaticallyRenderSvgIfException()
+    {
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        $resource = Barcode\Barcode::draw('code25', 'svg');
+        $this->assertTrue($resource instanceof \DOMDocument);
         Barcode\Barcode::setBarcodeFont('');
     }
 

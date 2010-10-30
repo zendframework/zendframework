@@ -17,7 +17,6 @@
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -149,7 +148,7 @@ class PhpDocblock extends AbstractPhp
         if (is_array($tag)) {
             $tag = new PhpDocblockTag($tag);
         } elseif (!$tag instanceof PhpDocblockTag) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'setTag() expects either an array of method options or an '
                 . 'instance of Zend_CodeGenerator_Php_Docblock_Tag'
                 );

@@ -16,26 +16,16 @@
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Controller;
-use Zend;
+use Zend,
+    Zend\Loader\Broker;
 
 /**
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Action\Helper\ViewRenderer
- * @uses       \Zend\Controller\Dispatcher\Standard
- * @uses       \Zend\Controller\Exception
- * @uses       \Zend\Controller\Plugin\Broker
- * @uses       \Zend\Controller\Plugin\ErrorHandler
- * @uses       \Zend\Controller\Request\Http
- * @uses       \Zend\Controller\Response\Http
- * @uses       \Zend\Controller\Router\Rewrite
- * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -61,6 +51,12 @@ class Front
      * @var \Zend\Controller\Dispatcher
      */
     protected $_dispatcher = null;
+
+    /**
+     * Helper broker to inject into action helpers
+     * @var Zend\Controller\Action\HelperBroker
+     */
+    protected $helperBroker = null;
 
     /**
      * Singleton instance
@@ -197,7 +193,6 @@ class Front
                     break;
             }
         }
-        Action\HelperBroker::resetHelpers();
     }
 
     /**
@@ -775,6 +770,46 @@ class Front
     }
 
     /**
+     * Set helper broker to inject in action controllers
+     * 
+     * @param  string|Broker $broker 
+     * @return Front
+     */
+    public function setHelperBroker($broker)
+    {
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception(sprintf(
+                    'Could not find Action HelperBroker by name of "%s"',
+                    $broker
+                ));
+            }
+            $broker = new $broker();
+        }
+        if (!$broker instanceof Broker) {
+            throw new Exception(sprintf(
+                'HelperBroker must implement Broker; received "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        $this->helperBroker = $broker;
+        return $this;
+    }
+
+    /**
+     * Retrieve action helper broker
+     * 
+     * @return Broker
+     */
+    public function getHelperBroker()
+    {
+        if (null === $this->helperBroker) {
+            $this->setHelperBroker(new Action\HelperBroker());
+        }
+        return $this->helperBroker;
+    }
+
+    /**
      * Set the throwExceptions flag and retrieve current status
      *
      * Set whether exceptions encounted in the dispatch loop should be thrown
@@ -830,13 +865,15 @@ class Front
      */
     public function dispatch(Request\AbstractRequest $request = null, Response\AbstractResponse $response = null)
     {
+        $helperBroker = $this->getHelperBroker();
         if (!$this->getParam('noErrorHandler') && !$this->_plugins->hasPlugin('\Zend\Controller\Plugin\ErrorHandler')) {
             // Register with stack index of 100
             $this->_plugins->registerPlugin(new Plugin\ErrorHandler(), 100);
         }
 
-        if (!$this->getParam('noViewRenderer') && !Action\HelperBroker::hasHelper('viewRenderer')) {
-            Action\HelperBroker::getStack()->offsetSet(-80, new Action\Helper\ViewRenderer());
+        if (!$this->getParam('noViewRenderer') && !$helperBroker->hasPlugin('viewRenderer')) {
+            $viewRenderer = $helperBroker->load('viewrenderer');
+            $helperBroker->getStack()->offsetSet(-80, $viewRenderer);
         }
 
         /**
@@ -873,7 +910,8 @@ class Front
          */
         $this->_plugins
              ->setRequest($this->_request)
-             ->setResponse($this->_response);
+             ->setResponse($this->_response)
+             ->setHelperBroker($helperBroker);
 
         /**
          * Initialize router
@@ -886,7 +924,8 @@ class Front
          */
         $dispatcher = $this->getDispatcher();
         $dispatcher->setParams($this->getParams())
-                   ->setResponse($this->_response);
+                   ->setResponse($this->_response)
+                   ->setHelperBroker($helperBroker);
 
         // Begin dispatch
         try {

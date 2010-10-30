@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -24,13 +23,9 @@
  */
 namespace Zend\Validator;
 
-use Zend\Loader;
+use Zend\Loader\Broker;
 
 /**
- * @uses       \Zend\Loader
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\Validator
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -39,34 +34,32 @@ use Zend\Loader;
 class StaticValidator
 {
     /**
-     * @var Zend\Loader\ShortNameLocater
+     * @var Zend\Loader\Broker
      */
-    protected static $_pluginLoader;
+    protected static $broker;
 
     /**
-     * Set plugin loader to use for locating validators
+     * Set plugin broker to use for locating validators
      * 
-     * @param  Loader\ShortNameLocater|null $loader 
+     * @param  Broker|null $broke 
      * @return void
      */
-    public static function setPluginLoader(Loader\ShortNameLocater $loader = null)
+    public static function setBroker(Broker $broker = null)
     {
-        self::$_pluginLoader = $loader;
+        self::$broker = $broker;
     }
 
     /**
-     * Get plugin loader for locating validators
+     * Get plugin broker for locating validators
      * 
-     * @return Loader\ShortNameLocater
+     * @return Broker
      */
-    public static function getPluginLoader()
+    public static function getBroker()
     {
-        if (null === self::$_pluginLoader) {
-            static::setPluginLoader(new Loader\PluginLoader(array(
-                'Zend\Validator' => 'Zend/Validator',
-            )));
+        if (null === self::$broker) {
+            static::setBroker(new ValidatorBroker());
         }
-        return self::$_pluginLoader;
+        return self::$broker;
     }
 
     /**
@@ -78,41 +71,14 @@ class StaticValidator
      */
     public static function execute($value, $classBaseName, array $args = array())
     {
-        $loader = static::getPluginLoader();
-        if (!class_exists($classBaseName)) {
-            try {
-                $className  = $loader->load($classBaseName);
-            } catch (Loader\Exception $e) {
-                throw new Exception\InvalidArgumentException("Validator class not found from basename '$classBaseName'", null, $e);
-            }
-        } else {
-            $className = $classBaseName;
-        }
+        $broker = static::getBroker();
 
-        $class = new \ReflectionClass($className);
-        if (!$class->implementsInterface('Zend\Validator\Validator')) {
-            throw new Exception\RuntimeException("Validator class not found from basename '$classBaseName'");
-        }
+        $validator = $broker->load($classBaseName, $args);
+        $result    = $validator->isValid($value);
 
-        if ((0 < count($args)) && $class->hasMethod('__construct')) {
-            $keys    = array_keys($args);
-            $numeric = false;
-            foreach($keys as $key) {
-                if (is_numeric($key)) {
-                    $numeric = true;
-                    break;
-                }
-            }
+        // Unregister validator in case different args are used on later invocation
+        $broker->unregister($classBaseName);
 
-            if ($numeric) {
-                $object = $class->newInstanceArgs($args);
-            } else {
-                $object = $class->newInstance($args);
-            }
-        } else {
-            $object = $class->newInstance();
-        }
-
-        return $object->isValid($value);
+        return $result;
     }
 }

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -33,7 +32,8 @@ $controller->setParam('foo', 'bar')
            ->registerPlugin($plugin)
            ->setRouter($router)
            ->setDispatcher($dispatcher);
-$viewRenderer = \Zend\Controller\Action\HelperBroker::getStaticHelper('ViewRenderer');
+$broker       = $controller->getHelperBroker();
+$viewRenderer = $broker->load('ViewRenderer');
 \Zend\Registry::set('router', $router);
 \Zend\Registry::set('dispatcher', $dispatcher);
 \Zend\Registry::set('plugin', $plugin);

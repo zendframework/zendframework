@@ -17,7 +17,6 @@
  * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -33,17 +32,13 @@ use Zend\Loader\ResourceAutoloader,
  *
  * Registers and utilizes Zend_Controller_Front by default.
  *
- * @uses       \Zend\Application\AbstractBootstrap
- * @uses       \Zend\Application\BootstrapException
- * @uses       \Zend\Application\Module\Autoloader
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bootstrap
-    extends AbstractBootstrap
+class Bootstrap extends AbstractBootstrap
 {
     /**
      * Application resource namespace
@@ -69,15 +64,21 @@ class Bootstrap
     {
         parent::__construct($application);
 
+        $options = array();
         if ($application->hasOption('resourceloader')) {
-            $this->setOptions(array(
-                'resourceloader' => $application->getOption('resourceloader')
-            ));
+            $options['resourceloader'] = $application->getOption('resourceloader');
         }
+        if ($application->hasOption('resource_broker')) {
+            $options['broker'] = $application->getOption('resource_broker');
+        }
+
+        $this->setOptions($options);
+
         $this->getResourceLoader();
 
-        if (!$this->hasPluginResource('frontcontroller')) {
-            $this->registerPluginResource('frontcontroller');
+        if (!$this->hasResource('frontcontroller')) {
+            $broker = $this->getBroker();
+            $broker->registerSpec('frontcontroller');
         }
     }
 
@@ -134,10 +135,12 @@ class Bootstrap
         ) {
             $r    = new \ReflectionClass($this);
             $path = $r->getFileName();
-            $this->setResourceLoader(new ModuleAutoloader(array(
+            $autoloader = new ModuleAutoloader(array(
                 'namespace' => $namespace,
                 'basePath'  => dirname($path),
-            )));
+            ));
+            $autoloader->register();
+            $this->setResourceLoader($autoloader);
         }
         return $this->_resourceLoader;
     }

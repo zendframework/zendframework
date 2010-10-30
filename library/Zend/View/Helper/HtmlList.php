@@ -17,7 +17,6 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -64,7 +63,7 @@ class HtmlList extends FormElement
         foreach ($items as $item) {
             if (!is_array($item)) {
                 if ($escape) {
-                    $item = $this->view->escape($item);
+                    $item = $this->view->vars()->escape($item);
                 }
                 $list .= '<li>' . $item . '</li>' . self::EOL;
             } else {

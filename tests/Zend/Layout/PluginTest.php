@@ -17,19 +17,18 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Layout;
-use Zend\Controller;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Layout;
-use Zend\Layout\Controller\Plugin;
-use Zend\Controller\Request;
-use Zend\Controller\Response;
+
+use Zend\Controller,
+    Zend\Layout,
+    Zend\Layout\Controller\Plugin,
+    Zend\Controller\Request,
+    Zend\Controller\Response;
 
 /**
  * Test class for Zend_Layout_Controller_Plugin_Layout
@@ -52,15 +51,17 @@ class PluginTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Controller\Front::getInstance()->resetInstance();
+        $front = Controller\Front::getInstance();
+        $front->resetInstance();
 
         \Zend\Layout\Layout::resetMvcInstance();
 
-        if (HelperBroker::hasHelper('Layout')) {
-            HelperBroker::removeHelper('Layout');
+        $broker = $front->getHelperBroker();
+        if ($broker->isLoaded('Layout')) {
+            $broker->unregister('Layout');
         }
-        if (HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker::removeHelper('viewRenderer');
+        if ($broker->isLoaded('viewRenderer')) {
+            $broker->unregister('viewRenderer');
         }
     }
 
@@ -123,7 +124,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                ->setLayout('plugin.phtml')
                ->disableInflector();
 
-        $helper = HelperBroker::getStaticHelper('layout');
+        $helper = $front->getHelperBroker()->load('layout');
         $plugin = $front->getPlugin('Zend\Layout\Controller\Plugin\Layout');
         $plugin->setResponse($response);
 

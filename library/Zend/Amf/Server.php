@@ -16,17 +16,16 @@
  * @package    Zend_Amf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Amf;
-use Zend\Amf\Exception;
-
-use Zend\Loader\PluginLoader,
+use Zend\Amf\Exception,
     Zend\Authentication\AuthenticationService,
+    Zend\Loader\Broker,
+    Zend\Loader\PluginBroker,
     Zend\Server\Reflection;
 
 /**
@@ -75,9 +74,9 @@ class Server implements \Zend\Server\Server
 
     /**
      * Loader for classes in added directories
-     * @var Zend\Loader\PluginLoader
+     * @var Zend\Loader\Broker
      */
-    protected $_loader;
+    protected $_broker;
 
     /**
      * @var bool Production flag; whether or not to return exception messages
@@ -146,7 +145,7 @@ class Server implements \Zend\Server\Server
      */
     public function __construct()
     {
-        Parser\TypeLoader::setResourceLoader(new PluginLoader(array("Zend\\Amf\\Parser\\Resource" => "Zend/AMF/Parser/Resource")));
+        Parser\TypeLoader::setResourceBroker(new Parser\ParserBroker());
     }
 
     /**
@@ -307,16 +306,43 @@ class Server implements \Zend\Server\Server
     }
 
     /**
-     * Get PluginLoader for the Server
-     *
-     * @return Zend\Loader\PluginLoader
+     * Set broker instance
+     * 
+     * @param  string|Broker $broker 
+     * @return Server
      */
-    protected function getLoader()
+    public function setBroker($broker)
     {
-        if (empty($this->_loader)) {
-            $this->_loader = new PluginLoader();
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception(sprintf(
+                    'Invalid broker class ("") provided; could not resolve class',
+                    $broker
+                ));
+            }
+            $broker = new $broker;
         }
-        return $this->_loader;
+        if (!$broker instanceof Broker) {
+            throw new Exception(sprintf(
+                'Broker must implement Zend\Loader\Broker; received ""',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        $this->_broker = $broker;
+        return $this;
+    }
+
+    /**
+     * Get PluginBroker for the Server
+     *
+     * @return Zend\Loader\PluginBroker
+     */
+    public function getBroker()
+    {
+        if (empty($this->_broker)) {
+            $this->setBroker(new PluginBroker());
+        }
+        return $this->_broker;
     }
 
     /**
@@ -341,11 +367,11 @@ class Server implements \Zend\Server\Server
             // if source is null a method that was not defined was called.
             if ($source) {
                 $className = str_replace(".", "\\", $source);
-                if(class_exists($className, false) && !isset($this->_classAllowed[$className])) {
+                if (class_exists($className, false) && !isset($this->_classAllowed[$className])) {
                     throw new Exception\RuntimeException('Can not call "' . $className . '" - use setClass()');
                 }
                 try {
-                    $this->getLoader()->load($className);
+                    $this->getBroker()->getClassLoader()->load($className);
                 } catch (\Exception $e) {
                     throw new Exception\RuntimeException('Class "' . $className . '" does not exist: '.$e->getMessage(), 0, $e);
                 }
@@ -803,28 +829,6 @@ class Server implements \Zend\Server\Server
 
         $this->_buildDispatchTable();
         return $this;
-    }
-
-
-    /**
-     * Creates an array of directories in which services can reside.
-     * TODO: add support for prefixes?
-     *
-     * @param string $dir
-     */
-    public function addDirectory($dir)
-    {
-        $this->getLoader()->addPrefixPath("", $dir);
-    }
-
-    /**
-     * Returns an array of directories that can hold services.
-     *
-     * @return array
-     */
-    public function getDirectory()
-    {
-        return $this->getLoader()->getPaths("");
     }
 
     /**

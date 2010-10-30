@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Form;
@@ -27,11 +26,11 @@ use Zend\Form\Form,
     Zend\Form\Decorator,
     Zend\Form\Element,
     Zend\Config\Config,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader as PluginLoader,
     Zend\Registry,
-    Zend\Controller\Action\HelperBroker as ActionHelperBroker,
+    Zend\Controller\Front as FrontController,
     Zend\Translator\Translator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * @category   Zend
@@ -52,7 +51,10 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
             unset($this->error);
         }
 
-        ActionHelperBroker::resetHelpers();
+        $front = FrontController::getInstance();
+        $front->resetInstance();
+        $this->broker = $front->getHelperBroker();
+
         $this->loader = new PluginLoader(
             array('Zend\Form\Decorator' => 'Zend/Form/Decorator')
         );
@@ -65,8 +67,6 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new View();
-        $libPath = __DIR__ . '/../../../library';
-        $view->addHelperPath($libPath . '/Zend/View/Helper');
         return $view;
     }
 
@@ -318,7 +318,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetViewShouldNotReturnNullWhenViewRendererIsActive()
     {
-        $viewRenderer = ActionHelperBroker::getStaticHelper('ViewRenderer');
+        $viewRenderer = $this->broker->load('ViewRenderer');
         $viewRenderer->initView();
         $view = $this->group->getView();
         $this->assertSame($viewRenderer->view, $view);

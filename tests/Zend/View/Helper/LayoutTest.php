@@ -17,16 +17,16 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Controller\Action\HelperBroker;
-use Zend\View\Helper;
-use Zend\Layout;
+
+use Zend\Controller\Front as FrontController,
+    Zend\View\Helper,
+    Zend\Layout;
 
 
 /**
@@ -51,12 +51,14 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        \Zend\Controller\Front::getInstance()->resetInstance();
-        if (HelperBroker::hasHelper('Layout')) {
-            HelperBroker::removeHelper('Layout');
+        $front = FrontController::getInstance();
+        $front->resetInstance();
+        $broker = $front->getHelperBroker();
+        if ($broker->hasPlugin('Layout')) {
+            $broker->unregister('Layout');
         }
-        if (HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker::removeHelper('viewRenderer');
+        if ($broker->hasPlugin('viewRenderer')) {
+            $broker->unregister('viewRenderer');
         }
 
         \Zend\Layout\Layout::resetMvcInstance();

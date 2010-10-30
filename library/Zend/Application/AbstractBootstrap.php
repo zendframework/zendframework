@@ -17,7 +17,6 @@
  * @subpackage Bootstrap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,18 +24,11 @@
  */
 namespace Zend\Application;
 
-use Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater,
-    Zend\Loader\PluginLoader;
+use Zend\Loader\LazyLoadingBroker;
 
 /**
  * Abstract base class for bootstrap classes
  *
- * @uses       \Zend\Application\Bootstrapper
- * @uses       \Zend\Application\BootstrapException
- * @uses       \Zend\Application\ResourceBootstrapper
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Registry
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Bootstrap
@@ -51,6 +43,11 @@ abstract class AbstractBootstrap
      * @var Zend\Application\Application|\Zend\Application\Bootstrapper
      */
     protected $_application;
+
+    /**
+     * @var ResourceBroker
+     */
+    protected $broker;
 
     /**
      * @var array Internal resource methods (resource/method pairs)
@@ -80,14 +77,9 @@ abstract class AbstractBootstrap
     protected $_options = array();
 
     /**
-     * @var \Zend\Loader\ShortNameLocater
+     * @var \Zend\Loader\LazyLoadingBroker
      */
-    protected $_pluginLoader;
-
-    /**
-     * @var array Class-based resource plugins
-     */
-    protected $_pluginResources = array();
+    protected $_pluginBroker;
 
     /**
      * @var array Initializers that have been run
@@ -134,15 +126,25 @@ abstract class AbstractBootstrap
             $methods[$key] = strtolower($method);
         }
 
-        if (array_key_exists('pluginpaths', $options)) {
-            $pluginLoader = $this->getPluginLoader();
+        if (array_key_exists('broker', $options)) {
+            $brokerOption = $options['broker'];
+            unset($options['broker']);
 
-            if ($pluginLoader instanceof PrefixPathMapper) {
-                foreach ($options['pluginpaths'] as $prefix => $path) {
-                    $pluginLoader->addPrefixPath($prefix, $path);
+            if (is_array($brokerOption)) {
+                if (!isset($brokerOption['class'])) {
+                    throw new BootstrapException(
+                        'Broker option must contain a "class" key; none provided'
+                    );
                 }
+                $brokerClass   = $brokerOption['class'];
+                $brokerOptions = $brokerOption['options'] ?: array();
+                $brokerOption  = new $brokerClass($brokerOptions);
+                $this->setBroker($brokerOption);
+                unset($brokerClass, $brokerOptions);
+            } else {
+                $this->setBroker($brokerOption);
             }
-            unset($options['pluginpaths']);
+            unset($brokerOption);
         }
 
         foreach ($options as $key => $value) {
@@ -152,7 +154,7 @@ abstract class AbstractBootstrap
                 $this->$method($value);
             } elseif ('resources' == $key) {
                 foreach ($value as $resource => $resourceOptions) {
-                    $this->registerPluginResource($resource, $resourceOptions);
+                    $this->getBroker()->registerSpec($resource, $resourceOptions);
                 }
             }
         }
@@ -265,176 +267,47 @@ abstract class AbstractBootstrap
     }
 
     /**
-     * Register a new resource plugin
-     *
-     * @param  string|\Zend\Application\Resource $resource
-     * @param  mixed  $options
-     * @return \Zend\Application\AbstractBootstrap
-     * @throws \Zend\Application\BootstrapException When invalid resource is provided
+     * Set resource plugin broker instance
+     * 
+     * @param  ResourceBroker $broker 
+     * @return AbstractBootstrap
      */
-    public function registerPluginResource($resource, $options = null)
+    public function setBroker($broker)
     {
-        if ($resource instanceof Resource) {
-            $resource->setBootstrap($this);
-            $pluginName = $this->_resolvePluginResourceName($resource);
-            $this->_pluginResources[$pluginName] = $resource;
-            return $this;
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Resource broker of class "%s" not found',
+                    $broker
+                ));
+            }
+            $broker = new $broker();
         }
-
-        if (!is_string($resource)) {
-            throw new Exception\InvalidArgumentException('Invalid resource provided to ' . __METHOD__);
+        if (!$broker instanceof LazyLoadingBroker 
+            || !$broker instanceof BootstrapAware
+        ) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Broker must implement LazyLoadingBroker and BootstrapAware; received argument of type "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
         }
-
-        $this->_pluginResources[$resource] = $options;
+        $broker->setBootstrap($this);
+        $this->broker = $broker;
         return $this;
     }
 
     /**
-     * Unregister a resource from the bootstrap
-     *
-     * @param  string|\Zend\Application\Resource $resource
-     * @return \Zend\Application\AbstractBootstrap
-     * @throws \Zend\Application\BootstrapException When unknown resource type is provided
+     * Get resource plugin broker instance
+     * 
+     * @todo   Should this allow using a default class name for lazy loading purposes?
+     * @return ResourceBroker
      */
-    public function unregisterPluginResource($resource)
+    public function getBroker()
     {
-        if ($resource instanceof Resource) {
-            if ($index = array_search($resource, $this->_pluginResources, true)) {
-                unset($this->_pluginResources[$index]);
-            }
-            return $this;
+        if (null === $this->broker) {
+            $this->setBroker(new ResourceBroker());
         }
-
-        if (!is_string($resource)) {
-            throw new Exception\InvalidArgumentException('Unknown resource type provided to ' . __METHOD__);
-        }
-
-        $resource = strtolower($resource);
-        if (array_key_exists($resource, $this->_pluginResources)) {
-            unset($this->_pluginResources[$resource]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Is the requested plugin resource registered?
-     *
-     * @param  string $resource
-     * @return bool
-     */
-    public function hasPluginResource($resource)
-    {
-        return (null !== $this->getPluginResource($resource));
-    }
-
-    /**
-     * Get a registered plugin resource
-     *
-     * @param  string $resourceName
-     * @return \Zend\Application\Resource
-     */
-    public function getPluginResource($resource)
-    {
-        if (array_key_exists(strtolower($resource), $this->_pluginResources)) {
-            $resource = strtolower($resource);
-            if (!$this->_pluginResources[$resource] instanceof Resource) {
-                $resourceName = $this->_loadPluginResource($resource, $this->_pluginResources[$resource]);
-                if (!$resourceName) {
-                    throw new Exception\RuntimeException(sprintf('Unable to resolve plugin "%s"; no corresponding plugin with that name', $resource));
-                }
-                $resource = $resourceName;
-            }
-            return $this->_pluginResources[$resource];
-        }
-
-        foreach ($this->_pluginResources as $plugin => $spec) {
-            if ($spec instanceof Resource) {
-                $pluginName = $this->_resolvePluginResourceName($spec);
-                if (0 === strcasecmp($resource, $pluginName)) {
-                    unset($this->_pluginResources[$plugin]);
-                    $this->_pluginResources[$pluginName] = $spec;
-                    return $spec;
-                }
-                continue;
-            }
-
-            if (false !== $pluginName = $this->_loadPluginResource($plugin, $spec)) {
-                if (0 === strcasecmp($resource, $pluginName)) {
-                    return $this->_pluginResources[$pluginName];
-                }
-                continue;
-            }
-
-            if (class_exists($plugin)) { //@SEE ZF-7550
-                $spec = (array) $spec;
-                $spec['bootstrap'] = $this;
-                $instance = new $plugin($spec);
-                $pluginName = $this->_resolvePluginResourceName($instance);
-                unset($this->_pluginResources[$plugin]);
-                $this->_pluginResources[$pluginName] = $instance;
-
-                if (0 === strcasecmp($resource, $pluginName)) {
-                    return $instance;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Retrieve all plugin resources
-     *
-     * @return array
-     */
-    public function getPluginResources()
-    {
-        foreach (array_keys($this->_pluginResources) as $resource) {
-            $this->getPluginResource($resource);
-        }
-        return $this->_pluginResources;
-    }
-
-    /**
-     * Retrieve plugin resource names
-     *
-     * @return array
-     */
-    public function getPluginResourceNames()
-    {
-        $this->getPluginResources();
-        return array_keys($this->_pluginResources);
-    }
-
-    /**
-     * Set plugin loader for loading resources
-     *
-     * @param  \Zend\Loader\ShortNameLocater $loader
-     * @return \Zend\Application\AbstractBootstrap
-     */
-    public function setPluginLoader(ShortNameLocater $loader)
-    {
-        $this->_pluginLoader = $loader;
-        return $this;
-    }
-
-    /**
-     * Get the plugin loader for resources
-     *
-     * @return \Zend\Loader\ShortNameLocater
-     */
-    public function getPluginLoader()
-    {
-        if ($this->_pluginLoader === null) {
-            $options = array(
-                'Zend\\Application\\Resource' => 'Zend/Application/Resource'
-            );
-
-            $this->setPluginLoader(new PluginLoader($options));
-        }
-
-        return $this->_pluginLoader;
+        return $this->broker;
     }
 
     /**
@@ -555,7 +428,7 @@ abstract class AbstractBootstrap
     }
 
     /**
-     * Implement PHP's magic to retrieve a ressource
+     * Implement PHP's magic to retrieve a resource
      * in the bootstrap
      *
      * @param string $prop
@@ -568,7 +441,7 @@ abstract class AbstractBootstrap
 
     /**
      * Implement PHP's magic to ask for the
-     * existence of a ressource in the bootstrap
+     * existence of a resource in the bootstrap
      *
      * @param string $prop
      * @return bool
@@ -633,7 +506,7 @@ abstract class AbstractBootstrap
                 $this->_executeResource($resource);
             }
 
-            foreach ($this->getPluginResourceNames() as $resource) {
+            foreach ($this->getBroker()->getRegisteredPlugins() as $resource) {
                 $this->_executeResource($resource);
             }
         } elseif (is_string($resource)) {
@@ -688,9 +561,10 @@ abstract class AbstractBootstrap
             return;
         }
 
-        if ($this->hasPluginResource($resource)) {
+        $broker = $this->getBroker();
+        if ($broker->hasPlugin($resource)) {
             $this->_started[$resourceName] = true;
-            $plugin = $this->getPluginResource($resource);
+            $plugin = $broker->load($resource);
             $return = $plugin->init();
             unset($this->_started[$resourceName]);
             $this->_markRun($resourceName);
@@ -706,36 +580,6 @@ abstract class AbstractBootstrap
     }
 
     /**
-     * Load a plugin resource
-     *
-     * @param  string $resource
-     * @param  array|object|null $options
-     * @return string|false
-     */
-    protected function _loadPluginResource($resource, $options)
-    {
-        $options   = (array) $options;
-        $options['bootstrap'] = $this;
-        $className = $this->getPluginLoader()->load(strtolower($resource), false);
-
-        if (!$className) {
-            return false;
-        }
-
-        $instance = new $className($options);
-
-        unset($this->_pluginResources[$resource]);
-
-        if (isset($instance->_explicitType)) {
-            $resource = $instance->_explicitType;
-        }
-        $resource = strtolower($resource);
-        $this->_pluginResources[$resource] = $instance;
-
-        return $resource;
-    }
-
-    /**
      * Mark a resource as having run
      *
      * @param  string $resource
@@ -746,38 +590,5 @@ abstract class AbstractBootstrap
         if (!in_array($resource, $this->_run)) {
             $this->_run[] = $resource;
         }
-    }
-
-    /**
-     * Resolve a plugin resource name
-     *
-     * Uses, in order of preference
-     * - $_explicitType property of resource
-     * - Short name of resource (if a matching prefix path is found)
-     * - class name (if none of the above are true)
-     *
-     * The name is then cast to lowercase.
-     *
-     * @param  \Zend\Application\Resource $resource
-     * @return string
-     */
-    protected function _resolvePluginResourceName($resource)
-    {
-        if (isset($resource->_explicitType)) {
-            $pluginName = $resource->_explicitType;
-        } else  {
-            $className  = get_class($resource);
-            $pluginName = $className;
-            $loader     = $this->getPluginLoader();
-            foreach ($loader->getPaths() as $prefix => $paths) {
-                if (0 === strpos($className, $prefix)) {
-                    $pluginName = substr($className, strlen($prefix));
-                    $pluginName = trim($pluginName, '_');
-                    break;
-                }
-            }
-        }
-        $pluginName = strtolower($pluginName);
-        return $pluginName;
     }
 }

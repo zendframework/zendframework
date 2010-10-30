@@ -17,7 +17,6 @@
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -282,7 +281,7 @@ class Textile implements Parser
                         $this->_temp = array(
                             'tag'        => '',
                             'name'       => 'p',
-                            'type'       => Markup\token::TYPE_TAG,
+                            'type'       => Markup\Token::TYPE_TAG,
                             'attributes' => array()
                         );
                     } else {

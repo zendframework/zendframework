@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.loader.plugin-class-locater">
+    <title>The PluginClassLocater interface</title>
+
+    <sect2 id="zend.loader.plugin-class-locater.intro">
+        <title>Overview</title>
+
+        <para>
+            The <interfacename>PluginClassLocater</interfacename> interface describes a component
+            capable of maintaining an internal map of plugin names to actual class names. Classes
+            implementing this interface can register and unregister plugin/class associations, and
+            return the entire map.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.loader.plugin-class-locater.quick-start">
+        <title>Quick Start</title>
+
+        <para>
+            Classes implementing the <interfacename>PluginClassLocater</interfacename> need to
+            implement only three methods, as illustrated below.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Zend\Loader;
+
+interface PluginClassLocater
+{
+    public function registerPlugin($shortName, $className);
+    public function unregisterPlugin($shortName);
+    public function getRegisteredPlugins();
+}
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.loader.plugin-class-locater.options">
+        <title>Configuration Options</title>
+
+        <para>
+            This component defines no configuration options, as it is an interface.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.loader.plugin-class-locater.methods">
+        <title>Available Methods</title>
+
+        <refentry id="zend.loader.plugin-class-locater.methods.register-plugin">
+            <refnamediv>
+                <refname>registerPlugin</refname>
+                <refpurpose>Register a mapping of plugin name to class name</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname>registerPlugin</methodname>
+                    <methodparam>
+                        <funcparams>$shortName, $className</funcparams>
+                    </methodparam>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>registerPlugin()</title>
+
+                <para>
+                    Implement this method to add or overwrite plugin name/class name associations in
+                    the internal plugin map. <varname>$shortName</varname> will be aliased to
+                    <varname>$className</varname>.
+                </para>
+            </refsect1>
+        </refentry>
+
+        <refentry id="zend.loader.plugin-class-locater.methods.unregister-plugin">
+            <refnamediv>
+                <refname>unregisterPlugin</refname>
+                <refpurpose>Remove a plugin/class name association</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname>unregisterPlugin</methodname>
+                    <methodparam>
+                        <funcparams>$shortName</funcparams>
+                    </methodparam>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>unregisterPlugin()</title>
+
+                <para>
+                    Implement this to allow removing an existing plugin mapping corresponding to
+                    <varname>$shortName</varname>.
+                </para>
+            </refsect1>
+        </refentry>
+
+        <refentry id="zend.loader.plugin-class-locater.methods.get-registered-plugins">
+            <refnamediv>
+                <refname>getRegisteredPlugins</refname>
+                <refpurpose>Retrieve the map of plugin name/class name associations</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname>getRegisteredPlugins</methodname>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>getRegisteredPlugins()</title>
+
+                <para>
+                    Implement this to allow returning the plugin name/class name map.
+                </para>
+            </refsect1>
+        </refentry>
+
+    </sect2>
+
+    <sect2 id="zend.loader.plugin-class-locater.examples">
+        <title>Examples</title>
+
+
+        <para>
+            Please see the <link linkend="zend.loader.plugin-class-locater.quick-start">Quick
+                Start</link> for the interface specification.
+        </para>
+    </sect2>
+</sect1>

@@ -17,7 +17,6 @@
  * @subpackage Dispatcher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -275,6 +274,16 @@ class Standard extends AbstractDispatcher
                 'Controller "' . $className . '" is not an instance of Zend\Controller\ActionController'
             );
         }
+
+        /**
+         * Inject helper broker
+         */
+        $controller->setHelperBroker($this->broker);
+
+        /**
+         * Call user-defined initialization
+         */
+        $controller->init();
 
         /**
          * Retrieve the action name

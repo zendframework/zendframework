@@ -23,18 +23,11 @@
  */
 namespace Zend\Paginator;
 
-use Zend\Loader\PluginLoader,
-    Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater,
+use Zend\Controller\Front as FrontController,
     Zend\View,
-    Zend\Json;
+    Zend\Json\Json;
 
 /**
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Json\Json
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Paginator\Exception
- * @uses       \Zend\View\Exception
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -56,11 +49,11 @@ class Paginator implements \Countable, \IteratorAggregate
     const CACHE_TAG_PREFIX = 'Zend_Paginator_';
 
     /**
-     * Adapter plugin loader
+     * Adapter broker
      *
-     * @var \Zend\Loader\ShortNameLocater
+     * @var AdapterBroker
      */
-    protected static $_adapterLoader = null;
+    protected static $_adapterBroker = null;
 
     /**
      * Configuration file
@@ -86,9 +79,9 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Scrolling style plugin loader
      *
-     * @var \Zend\Loader\ShortNameLocater
+     * @var ScrollingStyleBroker
      */
-    protected static $_scrollingStyleLoader = null;
+    protected static $_scrollingStyleBroker = null;
 
     /**
      * Cache object
@@ -171,89 +164,9 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * View instance used for self rendering
      *
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view = null;
-
-    /**
-     * Adds an adapter prefix path to the plugin loader.
-     *
-     * @param string $prefix
-     * @param string $path
-     */
-    public static function addAdapterPrefixPath($prefix, $path)
-    {
-        self::getAdapterLoader()->addPrefixPath($prefix, $path);
-    }
-
-    /**
-     * Adds an array of adapter prefix paths to the plugin
-     * loader.
-     *
-     * <code>
-     * $prefixPaths = array(
-     *     'My_Paginator_Adapter'   => 'My/Paginator/Adapter/',
-     *     'Your_Paginator_Adapter' => 'Your/Paginator/Adapter/'
-     * );
-     * </code>
-     *
-     * @param array $prefixPaths
-     */
-    public static function addAdapterPrefixPaths(array $prefixPaths)
-    {
-        if (isset($prefixPaths['prefix']) && isset($prefixPaths['path'])) {
-            self::addAdapterPrefixPath($prefixPaths['prefix'], $prefixPaths['path']);
-        } else {
-            foreach ($prefixPaths as $prefix => $path) {
-                if (is_array($path) && isset($path['prefix']) && isset($path['path'])) {
-                    $prefix = $path['prefix'];
-                    $path   = $path['path'];
-                }
-
-                self::addAdapterPrefixPath($prefix, $path);
-            }
-        }
-    }
-
-    /**
-     * Adds a scrolling style prefix path to the plugin loader.
-     *
-     * @param string $prefix
-     * @param string $path
-     */
-    public static function addScrollingStylePrefixPath($prefix, $path)
-    {
-        self::getScrollingStyleLoader()->addPrefixPath($prefix, $path);
-    }
-
-    /**
-     * Adds an array of scrolling style prefix paths to the plugin
-     * loader.
-     *
-     * <code>
-     * $prefixPaths = array(
-     *     'My_Paginator_ScrollingStyle'   => 'My/Paginator/ScrollingStyle/',
-     *     'Your_Paginator_ScrollingStyle' => 'Your/Paginator/ScrollingStyle/'
-     * );
-     * </code>
-     *
-     * @param array $prefixPaths
-     */
-    public static function addScrollingStylePrefixPaths(array $prefixPaths)
-    {
-        if (isset($prefixPaths['prefix']) && isset($prefixPaths['path'])) {
-            self::addScrollingStylePrefixPath($prefixPaths['prefix'], $prefixPaths['path']);
-        } else {
-            foreach ($prefixPaths as $prefix => $path) {
-                if (is_array($path) && isset($path['prefix']) && isset($path['path'])) {
-                    $prefix = $path['prefix'];
-                    $path   = $path['path'];
-                }
-
-                self::addScrollingStylePrefixPath($prefix, $path);
-            }
-        }
-    }
 
     /**
      * Factory.
@@ -268,63 +181,68 @@ class Paginator implements \Countable, \IteratorAggregate
     {
         if ($data instanceof AdapterAggregate) {
             return new self($data->getPaginatorAdapter());
-        } else {
-            if ($adapter == self::INTERNAL_ADAPTER) {
-                if (is_array($data)) {
-                    $adapter = 'ArrayAdapter';
-                } else if ($data instanceof \Zend\Db\Table\Select) {
-                    $adapter = 'DbTableSelect';
-                } else if ($data instanceof \Zend\Db\Select) {
-                    $adapter = 'DbSelect';
-                } else if ($data instanceof \Iterator) {
-                    $adapter = 'Iterator';
-                } else if (is_integer($data)) {
-                    $adapter = 'Null';
-                } else {
-                    $type = (is_object($data)) ? get_class($data) : gettype($data);
-                    throw new Exception\InvalidArgumentException('No adapter for type ' . $type);
-                }
-            }
-
-            $pluginLoader = self::getAdapterLoader();
-
-            if (null !== $prefixPaths && $pluginLoader instanceof PrefixPathMapper) {
-                foreach ($prefixPaths as $prefix => $path) {
-                    $pluginLoader->addPrefixPath($prefix, $path);
-                }
-            }
-
-            $adapterClassName = $pluginLoader->load($adapter);
-
-            return new self(new $adapterClassName($data));
         }
+
+        if ($adapter == self::INTERNAL_ADAPTER) {
+            if (is_array($data)) {
+                $adapter = 'array';
+            } else if ($data instanceof \Zend\Db\Table\Select) {
+                $adapter = 'db_table_select';
+            } else if ($data instanceof \Zend\Db\Select) {
+                $adapter = 'db_select';
+            } else if ($data instanceof \Iterator) {
+                $adapter = 'iterator';
+            } else if (is_integer($data)) {
+                $adapter = 'null';
+            } else {
+                $type = (is_object($data)) ? get_class($data) : gettype($data);
+                throw new Exception('No adapter for type ' . $type);
+            }
+        }
+
+        $broker  = self::getAdapterBroker();
+        $adapter = $broker->load($adapter, array($data));
+        return new self($adapter);
     }
 
     /**
-     * Set the adapter loader
+     * Set the adapter broker
      * 
-     * @param  PluginLoader\ShortNameLocater $loader 
+     * @param  Broker $broker 
      * @return void
      */
-    public static function setAdapterLoader(ShortNameLocater $loader)
+    public static function setAdapterBroker($broker)
     {
-        self::$_adapterLoader = $loader;
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception(sprintf(
+                    'Unable to locate adapter broker of class "%s"',
+                    $broker
+                ));
+            }
+            $broker = new $broker();
+        }
+        if (!$broker instanceof AdapterBroker) {
+            throw new Exception(sprintf(
+                'Pagination adapter broker must extend AdapterBroker; received "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        self::$_adapterBroker = $broker;
     }
 
     /**
-     * Returns the adapter loader.  If it doesn't exist it's created.
+     * Returns the adapter broker.  If it doesn't exist it's created.
      *
-     * @return \Zend\Loader\ShortNameLocater
+     * @return AdapterBroker
      */
-    public static function getAdapterLoader()
+    public static function getAdapterBroker()
     {
-        if (self::$_adapterLoader === null) {
-            self::setAdapterLoader(new PluginLoader(
-                array('Zend\Paginator\Adapter' => 'Zend/Paginator/Adapter')
-            ));
+        if (self::$_adapterBroker === null) {
+            self::setAdapterBroker(new AdapterBroker());
         }
 
-        return self::$_adapterLoader;
+        return self::$_adapterBroker;
     }
 
     /**
@@ -336,19 +254,15 @@ class Paginator implements \Countable, \IteratorAggregate
     {
         self::$_config = $config;
 
-        $adapterPaths = $config->get('adapterpaths');
-
-        if ($adapterPaths != null) {
-            self::addAdapterPrefixPaths($adapterPaths->adapterpath->toArray());
+        if (null !== ($broker = $config->get('adapter_broker'))) {
+            self::setAdapterBroker($broker);
         }
 
-        $prefixPaths = $config->get('prefixpaths');
-
-        if ($prefixPaths != null) {
-            self::addScrollingStylePrefixPaths($prefixPaths->prefixpath->toArray());
+        if (null !== ($broker = $config->get('scrolling_style_broker'))) {
+            self::setScrollingStyleBroker($broker);
         }
 
-        $scrollingStyle = $config->get('scrollingstyle');
+        $scrollingStyle = $config->get('scrolling_style');
 
         if ($scrollingStyle != null) {
             self::setDefaultScrollingStyle($scrollingStyle);
@@ -405,21 +319,39 @@ class Paginator implements \Countable, \IteratorAggregate
         self::$_defaultScrollingStyle = $scrollingStyle;
     }
 
+    public static function setScrollingStyleBroker($broker)
+    {
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception(sprintf(
+                    'Unable to locate scrolling style broker of class "%s"',
+                    $broker
+                ));
+            }
+            $broker = new $broker();
+        }
+        if (!$broker instanceof ScrollingStyleBroker) {
+            throw new Exception(sprintf(
+                'Pagination scrolling-style broker must extend ScrollingStyleBroker; received "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        self::$_scrollingStyleBroker = $broker;
+    }
+
     /**
-     * Returns the scrolling style loader.  If it doesn't exist it's
+     * Returns the scrolling style broker.  If it doesn't exist it's
      * created.
      *
-     * @return \Zend\Loader\ShortNameLocater
+     * @return ScrollingStyleBroker
      */
-    public static function getScrollingStyleLoader()
+    public static function getScrollingStyleBroker()
     {
-        if (self::$_scrollingStyleLoader === null) {
-            self::$_scrollingStyleLoader = new PluginLoader(
-                array('Zend\Paginator\ScrollingStyle' => 'Zend/Paginator/ScrollingStyle')
-            );
+        if (self::$_scrollingStyleBroker === null) {
+            self::$_scrollingStyleBroker = new ScrollingStyleBroker();
         }
 
-        return self::$_scrollingStyleLoader;
+        return self::$_scrollingStyleBroker;
     }
 
     /**
@@ -861,12 +793,13 @@ class Paginator implements \Countable, \IteratorAggregate
      * Retrieves the view instance.  If none registered, attempts to pull f
      * rom ViewRenderer.
      *
-     * @return \Zend\View\ViewEngine|null
+     * @return \Zend\View\Renderer|null
      */
     public function getView()
     {
         if ($this->_view === null) {
-            $viewRenderer = \Zend\Controller\Action\HelperBroker::getStaticHelper('viewRenderer');
+            $front = FrontController::getInstance();
+            $viewRenderer = $front->getHelperBroker()->load('viewRenderer');
             if ($viewRenderer->view === null) {
                 $viewRenderer->initView();
             }
@@ -879,10 +812,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Sets the view object.
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Paginator\Paginator
      */
-    public function setView(View\ViewEngine $view = null)
+    public function setView(View\Renderer $view = null)
     {
         $this->_view = $view;
 
@@ -936,10 +869,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Renders the paginator.
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
-    public function render(View\ViewEngine $view = null)
+    public function render(View\Renderer $view = null)
     {
         if (null !== $view) {
             $this->setView($view);
@@ -947,7 +880,7 @@ class Paginator implements \Countable, \IteratorAggregate
 
         $view = $this->getView();
 
-        return $view->paginationControl($this);
+        return $view->broker('paginationControl')->direct($this);
     }
 
     /**
@@ -960,9 +893,9 @@ class Paginator implements \Countable, \IteratorAggregate
         $currentItems = $this->getCurrentItems();
 
         if ($currentItems instanceof \Zend\Db\Table\AbstractRowset) {
-            return Json\Json::encode($currentItems->toArray());
+            return Json::encode($currentItems->toArray());
         } else {
-            return Json\Json::encode($currentItems);
+            return Json::encode($currentItems);
         }
     }
 
@@ -1088,16 +1021,14 @@ class Paginator implements \Countable, \IteratorAggregate
                 return $scrollingStyle;
 
             case 'string':
-                $className = self::getScrollingStyleLoader()->load($scrollingStyle);
-
-                return new $className();
+                return self::getScrollingStyleBroker()->load($scrollingStyle);
 
             case 'null':
                 // Fall through to default case
 
             default:
                 throw new View\Exception('Scrolling style must be a class ' .
-                    'name or object implementing Zend_Paginator_ScrollingStyle_Interface');
+                    'name or object implementing Zend\Paginator\ScrollingStyle');
         }
     }
 }

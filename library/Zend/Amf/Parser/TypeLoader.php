@@ -17,7 +17,6 @@
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,8 +24,7 @@
  */
 namespace Zend\Amf\Parser;
 
-use Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater;
+use Zend\Loader\PluginBroker;
 
 /**
  * Loads a local class and executes the instantiation of that class.
@@ -75,9 +73,9 @@ final class TypeLoader
     );
 
     /**
-     * @var \Zend\Loader\ShortNameLocater
+     * @var \Zend\Loader\PluginBroker
      */
-    protected static $_resourceLoader = null;
+    protected static $_resourceBroker = null;
 
 
     /**
@@ -150,38 +148,25 @@ final class TypeLoader
     /**
      * Set loader for resource type handlers
      *
-     * @param \Zend\Loader\ShortNameLocater $loader
+     * @param \Zend\Loader\PluginBroker $loader
      */
-    public static function setResourceLoader(ShortNameLocater $loader)
+    public static function setResourceBroker(PluginBroker $broker)
     {
-        self::$_resourceLoader = $loader;
-    }
-
-    /**
-     * Add directory to the list of places where to look for resource handlers
-     *
-     * @param string $prefix
-     * @param string $dir
-     */
-    public static function addResourceDirectory($prefix, $dir)
-    {
-        if(self::$_resourceLoader && self::$_resourceLoader instanceof PrefixPathMapper) {
-            self::$_resourceLoader->addPrefixPath($prefix, $dir);
-        }
+        self::$_resourceBroker = $broker;
     }
 
     /**
      * Get plugin class that handles this resource
      *
      * @param resource $resource Resource type
-     * @return string Class name
+     * @return object Resource class
      */
     public static function getResourceParser($resource)
     {
-        if(self::$_resourceLoader) {
+        if (self::$_resourceBroker) {
             $type = preg_replace("/[^A-Za-z0-9_]/", " ", get_resource_type($resource));
             $type = str_replace(" ","", ucwords($type));
-            return self::$_resourceLoader->load($type);
+            return self::$_resourceBroker->load($type);
         }
         return false;
     }
@@ -194,21 +179,13 @@ final class TypeLoader
      */
     public static function handleResource($resource)
     {
-        if(!self::$_resourceLoader) {
-            throw new Exception\InvalidArgumentException('Unable to handle resources - resource plugin loader not set');
+        if (!self::$_resourceBroker) {
+            throw new Exception\InvalidArgumentException('Unable to handle resources - resource plugin broker not set');
         }
         try {
             while (is_resource($resource)) {
-                $resclass = self::getResourceParser($resource);
-                if (!$resclass) {
-                    throw new Exception\RuntimeException('Can not serialize resource type: '. get_resource_type($resource));
-                }
-                $parser = new $resclass();
-                if(is_callable(array($parser, 'parse'))) {
-                    $resource = $parser->parse($resource);
-                } else {
-                    throw new Exception\RuntimeException("Could not call parse() method on class $resclass");
-                }
+                $parser   = self::getResourceParser($resource);
+                $resource = $parser->parse($resource);
             }
             return $resource;
         } catch(Exception $e) {

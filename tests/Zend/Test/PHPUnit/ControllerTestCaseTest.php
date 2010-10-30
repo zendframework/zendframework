@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,7 +25,7 @@
 namespace ZendTest\Test\PHPUnit;
 use Zend\Application,
     Zend\Controller,
-    Zend\Controller\Action\HelperBroker,
+    Zend\Controller\Front as FrontController,
     Zend\Controller\Dispatcher,
     Zend\Controller\Plugin,
     Zend\Controller\Request,
@@ -197,14 +196,19 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
                    ->registerPlugin($plugin)
                    ->setRouter($router)
                    ->setDispatcher($dispatcher);
-        $viewRenderer = HelperBroker::getStaticHelper('ViewRenderer');
+
+        $broker       = $controller->getHelperBroker();
+        $viewRenderer = $broker->load('ViewRenderer');
+
         $this->testCase->reset();
         $test = $controller->getRouter();
         $this->assertNotSame($router, $test);
         $test = $controller->getDispatcher();
         $this->assertNotSame($dispatcher, $test);
         $this->assertFalse($controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
-        $test = HelperBroker::getStaticHelper('ViewRenderer');
+
+        $broker = $controller->getHelperBroker();
+        $test   = $broker->load('ViewRenderer');
         $this->assertNotSame($viewRenderer, $test);
         $this->assertNull($controller->getRequest());
         $this->assertNull($controller->getResponse());
@@ -227,10 +231,11 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $this->testCase->bootstrap = __DIR__ . '/_files/bootstrap.php';
         $this->testCase->bootstrap();
         $controller = $this->testCase->getFrontController();
+        $broker     = $controller->getHelperBroker();
         $this->assertSame(Registry::get('router'), $controller->getRouter());
         $this->assertSame(Registry::get('dispatcher'), $controller->getDispatcher());
         $this->assertSame(Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
-        $this->assertSame(Registry::get('viewRenderer'), HelperBroker::getStaticHelper('ViewRenderer'));
+        $this->assertSame(Registry::get('viewRenderer'), $broker->load('ViewRenderer'));
     }
 
     public function testBootstrapShouldInvokeCallbackSpecifiedInPublicBootstrapProperty()
@@ -238,10 +243,11 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $this->testCase->bootstrap = array($this, 'bootstrapCallback');
         $this->testCase->bootstrap();
         $controller = $this->testCase->getFrontController();
+        $broker     = $controller->getHelperBroker();
         $this->assertSame(Registry::get('router'), $controller->getRouter());
         $this->assertSame(Registry::get('dispatcher'), $controller->getDispatcher());
         $this->assertSame(Registry::get('plugin'), $controller->getPlugin('Zend\Controller\Plugin\ErrorHandler'));
-        $this->assertSame(Registry::get('viewRenderer'), HelperBroker::getStaticHelper('ViewRenderer'));
+        $this->assertSame(Registry::get('viewRenderer'), $broker->load('ViewRenderer'));
     }
 
     public function bootstrapCallback()
@@ -254,7 +260,10 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
                    ->registerPlugin($plugin)
                    ->setRouter($router)
                    ->setDispatcher($dispatcher);
-        $viewRenderer = HelperBroker::getStaticHelper('ViewRenderer');
+
+        $broker       = $controller->getHelperBroker();
+        $viewRenderer = $broker->load('ViewRenderer');
+
         Registry::set('router', $router);
         Registry::set('dispatcher', $dispatcher);
         Registry::set('plugin', $plugin);
@@ -623,10 +632,15 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($request, $test);
     }
 
+    /**
+     * Disabled until view and dojo API are solidified
+     * @group disable
+     */
     public function testResetResponseShouldClearAllViewPlaceholders()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
-        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $controller = $this->testCase->getFrontController();
+        $controller->setControllerDirectory(__DIR__ . '/_files/application/controllers');
+        $viewRenderer = $controller->getHelperBroker()->load('viewRenderer');
         $viewRenderer->initView();
         $view = $viewRenderer->view;
         $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');

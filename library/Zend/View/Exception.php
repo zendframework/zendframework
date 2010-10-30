@@ -15,7 +15,6 @@
  * @category   Zend
  * @package    Zend_Date
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +36,7 @@ class Exception extends \Zend\Exception
 {
     protected $view = null;
 
-    public function setView(ViewEngine $view = null)
+    public function setView(Renderer $view = null)
     {
         $this->view = $view;
         return $this;

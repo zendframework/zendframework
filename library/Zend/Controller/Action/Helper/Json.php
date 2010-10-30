@@ -17,7 +17,6 @@
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -28,9 +27,6 @@ namespace Zend\Controller\Action\Helper;
 /**
  * Simplify AJAX context switching based on requested format
  *
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Action\Helper\AbstractHelper
- * @uses       \Zend\View\Helper\Json
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
@@ -70,7 +66,7 @@ class Json extends AbstractHelper
         $data = $jsonHelper->direct($data, $keepLayouts);
 
         if (!$keepLayouts) {
-            \Zend\Controller\Action\HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+            $this->getBroker()->load('viewRenderer')->setNoRender(true);
         }
 
         return $data;

@@ -45,7 +45,6 @@ use Zend\Form\Element;
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class ViewHelper extends AbstractDecorator
 {
@@ -243,12 +242,12 @@ class ViewHelper extends AbstractDecorator
         $id            = $element->getId();
         $attribs['id'] = $id;
 
-        $helperObject  = $view->getHelper($helper);
+        $helperObject  = $view->broker($helper);
         if (method_exists($helperObject, 'setTranslator')) {
             $helperObject->setTranslator($element->getTranslator());
         }
 
-        $elementContent = $view->$helper($name, $value, $attribs, $element->options);
+        $elementContent = $view->broker($helper)->direct($name, $value, $attribs, $element->options);
         switch ($this->getPlacement()) {
             case self::APPEND:
                 return $content . $separator . $elementContent;

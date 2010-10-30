@@ -16,7 +16,6 @@
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,7 +25,7 @@ namespace Zend\Controller;
 
 use Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Response\AbstractResponse,
-    Zend\Controller\Action\HelperBroker,
+    Zend\Loader\Broker,
     Zend\View;
 
 /**
@@ -44,6 +43,12 @@ use Zend\Controller\Request\AbstractRequest,
  */
 abstract class Action implements ActionController
 {
+    /**
+     * Helper broker instance 
+     * @var Broker
+     */
+    protected $broker;
+
     /**
      * @var array of existing class methods
      */
@@ -94,13 +99,6 @@ abstract class Action implements ActionController
     public $view;
 
     /**
-     * Helper Broker to assist in routing help requests to the proper object
-     *
-     * @var \Zend\Controller\Action\HelperBroker
-     */
-    protected $_helper = null;
-
-    /**
      * Class constructor
      *
      * The request and response objects should be registered with the
@@ -131,8 +129,21 @@ abstract class Action implements ActionController
         $this->setRequest($request)
              ->setResponse($response)
              ->_setInvokeArgs($invokeArgs);
-        $this->_helper = new HelperBroker($this);
-        $this->init();
+    }
+
+    /**
+     * Set Helper Broker instance
+     * 
+     * @param  Broker $broker 
+     * @return Action
+     */
+    public function setHelperBroker(Broker $broker)
+    {
+        $this->broker = $broker;
+        if ($broker instanceof Action\HelperBroker) {
+            $broker->setActionController($this);
+        }
+        return $this;
     }
 
     /**
@@ -164,11 +175,12 @@ abstract class Action implements ActionController
      */
     public function initView()
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
+        $broker = $this->broker();
+        if (!$this->getInvokeArg('noViewRenderer') && $broker && $broker->hasPlugin('viewRenderer')) {
             return $this->view;
         }
 
-        if (isset($this->view) && ($this->view instanceof View\ViewEngine)) {
+        if (isset($this->view) && ($this->view instanceof View\Renderer)) {
             return $this->view;
         }
 
@@ -183,7 +195,8 @@ abstract class Action implements ActionController
             throw new Exception('Missing base view directory ("' . $baseDir . '")');
         }
 
-        $this->view = new View\View(array('basePath' => $baseDir));
+        $this->view = new View\PhpRenderer();
+        $this->view->resolver()->addPath($baseDir . '/scripts');
 
         return $this->view;
     }
@@ -207,8 +220,9 @@ abstract class Action implements ActionController
      */
     public function render($action = null, $name = null, $noController = false)
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
-            return $this->_helper->viewRenderer->render($action, $name, $noController);
+        $broker = $this->broker();
+        if (!$this->getInvokeArg('noViewRenderer') && $broker && $broker->hasPlugin('viewRenderer')) {
+            return $broker->load('viewRenderer')->render($action, $name, $noController);
         }
 
         $view   = $this->initView();
@@ -238,8 +252,9 @@ abstract class Action implements ActionController
      */
     public function renderScript($script, $name = null)
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
-            return $this->_helper->viewRenderer->renderScript($script, $name);
+        $broker = $this->broker();
+        if (!$this->getInvokeArg('noViewRenderer') && $broker && $broker->hasPlugin('viewRenderer')) {
+            return $broker->load('viewRenderer')->renderScript($script, $name);
         }
 
         $view = $this->initView();
@@ -261,8 +276,9 @@ abstract class Action implements ActionController
      */
     public function getViewScript($action = null, $noController = null)
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
-            $viewRenderer = $this->_helper->getHelper('viewRenderer');
+        $broker = $this->broker();
+        if (!$this->getInvokeArg('noViewRenderer') && $broker && $broker->hasPlugin('viewRenderer')) {
+            $viewRenderer = $broker->load('viewRenderer');
             if (null !== $noController) {
                 $viewRenderer->setNoController($noController);
             }
@@ -378,25 +394,16 @@ abstract class Action implements ActionController
     }
 
     /**
-     * Get a helper by name
+     * Get the helper broker or a helper instance
      *
-     * @param  string $helperName
-     * @return \Zend\Controller\Action\Helper\AbstractHelper
+     * @return Broker|Action\Helper\AbstractHelper
      */
-    public function getHelper($helperName)
+    public function broker($name = null)
     {
-        return $this->_helper->{$helperName};
-    }
-
-    /**
-     * Get a clone of a helper by name
-     *
-     * @param  string $helperName
-     * @return \Zend\Controller\Action\Helper\AbstractHelper
-     */
-    public function getHelperCopy($helperName)
-    {
-        return clone $this->_helper->{$helperName};
+        if (null === $name) {
+            return $this->broker;
+        }
+        return $this->broker->load($name);
     }
 
     /**
@@ -494,7 +501,10 @@ abstract class Action implements ActionController
     public function dispatch($action)
     {
         // Notify helpers of action preDispatch state
-        $this->_helper->notifyPreDispatch();
+        $broker = $this->broker();
+        if ($broker instanceof Action\HelperBroker) {
+            $broker->notifyPreDispatch();
+        }
 
         $this->preDispatch();
         if ($this->getRequest()->isDispatched()) {
@@ -517,7 +527,9 @@ abstract class Action implements ActionController
         // whats actually important here is that this action controller is
         // shutting down, regardless of dispatching; notify the helpers of this
         // state
-        $this->_helper->notifyPostDispatch();
+        if ($broker instanceof Action\HelperBroker) {
+            $broker->notifyPostDispatch();
+        }
     }
 
     /**
@@ -680,6 +692,7 @@ abstract class Action implements ActionController
      */
     protected function _redirect($url, array $options = array())
     {
-        $this->_helper->redirector->gotoUrl($url, $options);
+        $redirector = $this->broker('redirector');
+        $redirector->gotoUrl($url, $options);
     }
 }

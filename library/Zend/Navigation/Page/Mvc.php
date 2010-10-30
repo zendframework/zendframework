@@ -17,7 +17,6 @@
  * @subpackage Page
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,16 +25,13 @@
 namespace Zend\Navigation\Page;
 
 use Zend\Navigation\AbstractPage,
-    Zend\Navigation\Exception\InvalidArgumentException;
+    Zend\Navigation\Exception\InvalidArgumentException,
+    Zend\Controller\Front as FrontController;
 
 /**
  * Represents a page that is defined using module, controller, action, route
  * name and route params to assemble the href
  *
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\Navigation\InvalidArgumentException
- * @uses       \Zend\Navigation\Page\Page
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
@@ -124,7 +120,7 @@ class Mvc extends AbstractPage
     public function isActive($recursive = false)
     {
         if (!$this->_active) {
-            $front = \Zend\Controller\Front::getInstance();
+            $front = FrontController::getInstance();
             $reqParams = $front->getRequest()->getParams();
 
             if (!array_key_exists('module', $reqParams)) {
@@ -176,8 +172,9 @@ class Mvc extends AbstractPage
         }
 
         if (null === self::$_urlHelper) {
-            self::$_urlHelper =
-                \Zend\Controller\Action\HelperBroker::getStaticHelper('url');
+            $front  = FrontController::getInstance();
+            $broker = $front->getHelperBroker();
+            self::$_urlHelper = $broker->load('url');
         }
 
         $params = $this->getParams();

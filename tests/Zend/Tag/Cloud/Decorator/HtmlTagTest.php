@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -28,10 +27,6 @@ namespace ZendTest\Tag\Cloud\Decorator;
 use	Zend\Tag,
     Zend\Tag\Cloud\Decorator,
 	Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend\Tag\Cloud\Decorator\HtmlTagTest::main');
-}
 
 /**
  * Test helper
@@ -207,6 +202,3 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend\Tag\Cloud\Decorator\HtmlTagTest::main') {
-    \Zend\Tag\Cloud\Decorator\HtmlTagTest::main();
-}

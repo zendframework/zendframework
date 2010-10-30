@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,9 +24,7 @@
 namespace Zend\Filter;
 
 use Zend\Config,
-    Zend\Loader\PluginLoader,
-    Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater;
+    Zend\Loader\Broker;
 
 /**
  * Filter chain for string inflection
@@ -40,9 +37,9 @@ use Zend\Config,
 class Inflector extends AbstractFilter
 {
     /**
-     * @var \Zend\Loader\ShortNameLocater
+     * @var \Zend\Loader\Broker
      */
-    protected $_pluginLoader = null;
+    protected $_pluginBroker = null;
 
     /**
      * @var string
@@ -100,28 +97,28 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * Retreive PluginLoader
+     * Retreive plugin broker
      *
-     * @return \Zend\Loader\ShortNameLocater
+     * @return \Zend\Loader\Broker
      */
-    public function getPluginLoader()
+    public function getPluginBroker()
     {
-        if (!$this->_pluginLoader instanceof ShortNameLocater) {
-            $this->_pluginLoader = new PluginLoader(array('Zend\Filter\\' => 'Zend/Filter/'), __CLASS__);
+        if (!$this->_pluginBroker instanceof Broker) {
+            $this->setPluginBroker(new FilterBroker());
         }
 
-        return $this->_pluginLoader;
+        return $this->_pluginBroker;
     }
 
     /**
-     * Set PluginLoader
+     * Set plugin broker
      *
-     * @param \Zend\Loader\ShortNameLocater $pluginLoader
+     * @param \Zend\Loader\Broker $broker
      * @return \Zend\Filter\Inflector
      */
-    public function setPluginLoader(ShortNameLocater $pluginLoader)
+    public function setPluginBroker(Broker $broker)
     {
-        $this->_pluginLoader = $pluginLoader;
+        $this->_pluginBroker = $broker;
         return $this;
     }
 
@@ -149,13 +146,12 @@ class Inflector extends AbstractFilter
             $options = $options->toArray();
         }
 
-        // Set Präfix Path
-        if (array_key_exists('filterPrefixPath', $options)) {
-            if (!is_scalar($options['filterPrefixPath'])) {
-                foreach ($options['filterPrefixPath'] as $prefix => $path) {
-                    $this->addFilterPrefixPath($prefix, $path);
-                }
-            }
+        // Set broker
+        if (array_key_exists('pluginBroker', $options)) {
+            if (is_scalar($options['pluginBroker']) && class_exists($options['pluginBroker'])) {
+                $options['pluginBroker'] = new $options['pluginBroker'];
+            } 
+            $this->setPluginBroker($broker);
         }
 
         if (array_key_exists('throwTargetExceptionsOn', $options)) {
@@ -174,22 +170,6 @@ class Inflector extends AbstractFilter
             $this->addRules($options['rules']);
         }
 
-        return $this;
-    }
-
-    /**
-     * Convienence method to add prefix and path to PluginLoader
-     *
-     * @param string $prefix
-     * @param string $path
-     * @return \Zend\Filter\Inflector
-     */
-    public function addFilterPrefixPath($prefix, $path)
-    {
-        $pluginLoader = $this->getPluginLoader();
-        if ($pluginLoader instanceof PrefixPathMapper) {
-            $pluginLoader->addPrefixPath($prefix, $path);
-        }
         return $this;
     }
 
@@ -516,13 +496,6 @@ class Inflector extends AbstractFilter
         }
 
         $rule = (string) $rule;
-
-        $className  = $this->getPluginLoader()->load($rule);
-        $ruleObject = new $className();
-        if (!$ruleObject instanceof Filter) {
-            throw new Exception\RuntimeException('No class named ' . $rule . ' implementing Zend\\Filter\\Filter could be found');
-        }
-
-        return $ruleObject;
+        return $this->getPluginBroker()->load($rule);
     }
 }

@@ -26,7 +26,7 @@ namespace Zend\Form\Element;
 use Zend\Form\Element\Exception,
     Zend\Form\Form,
     Zend\Form\Decorator\FileDecorator,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\View\ViewEngine as View,
     Zend\File\Transfer\Adapter\AbstractAdapter as AbstractFileAdapter;
@@ -34,16 +34,11 @@ use Zend\Form\Element\Exception,
 /**
  * Zend_Form_Element
  *
- * @uses       \Zend\Form\Form
- * @uses       \Zend\Form\Element\Exception
- * @uses       \Zend\Form\Element\Xhtml
- * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class File extends Xhtml
 {
@@ -138,7 +133,7 @@ class File extends Xhtml
         }
 
         if (!array_key_exists($type, $this->_loaders)) {
-            $loader = new PluginLoader(array(
+            $loader = new PrefixPathLoader(array(
                 'Zend\File\Transfer\Adapter' => 'Zend/File/Transfer/Adapter/',
             ));
             $this->setPluginLoader($loader, self::TRANSFER_ADAPTER);

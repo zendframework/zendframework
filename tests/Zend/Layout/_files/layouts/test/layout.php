@@ -18,8 +18,7 @@ Testing layouts with custom inflection:
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-echo $this->placeholder('Zend\Layout\Layout')->message
+echo $this->broker('placeholder')->direct('Zend\Layout\Layout')->message
 ?>

@@ -16,7 +16,6 @@
  * @package    Zend_Application
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,6 @@
 namespace Zend\Application;
 
 /**
- * @uses       \Zend\Loader\Autoloader
  * @category   Zend
  * @package    Zend_Application
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -36,7 +34,7 @@ class Application
     /**
      * Autoloader to use
      *
-     * @var \Zend\Loader\Autoloader
+     * @var \Zend\Loader\SplAutoloader
      */
     protected $_autoloader;
 
@@ -83,8 +81,13 @@ class Application
     {
         $this->_environment = (string) $environment;
 
-        require_once 'Zend/Loader/Autoloader.php';
-        $this->_autoloader = \Zend\Loader\Autoloader::getInstance();
+        /**
+         * @todo Make this configurable?
+         */
+        require_once __DIR__ . '/../Loader/StandardAutoloader.php';
+        $autoloader = new \Zend\Loader\StandardAutoloader();
+        $autoloader->register();
+        $this->setAutoloader($autoloader);
 
         if (null !== $options) {
             if (is_string($options)) {
@@ -112,11 +115,23 @@ class Application
     /**
      * Retrieve autoloader instance
      *
-     * @return \Zend\Loader\Autoloader
+     * @return SplAutoloader
      */
     public function getAutoloader()
     {
         return $this->_autoloader;
+    }
+
+    /**
+     * Set autoloader
+     * 
+     * @param  \Zend\Loader\SplAutoloader $autoloader 
+     * @return Application
+     */
+    public function setAutoloader(\Zend\Loader\SplAutoloader $autoloader)
+    {
+        $this->_autoloader = $autoloader;
+        return $this;
     }
 
     /**

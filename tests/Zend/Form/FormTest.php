@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Form;
@@ -30,13 +29,13 @@ use Zend\Form\Form,
     Zend\Config\Config,
     Zend\Config\Ini as IniConfig,
     Zend\Config\Xml as XmlConfig,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Json\Json,
     Zend\Translator\Translator,
     Zend\Validator\Validator,
     Zend\View,
-    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
+    Zend\Controller\Front as FrontController;
 
 /**
  * @category   Zend
@@ -63,6 +62,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $front = FrontController::getInstance();
+        $front->resetInstance();
+        $this->broker = $front->getHelperBroker();
+
         $this->clearRegistry();
         Form::setDefaultTranslator(null);
 
@@ -70,7 +73,6 @@ class FormTest extends \PHPUnit_Framework_TestCase
             unset($this->error);
         }
 
-        ActionHelperBroker::resetHelpers();
         $this->form = new Form();
     }
 
@@ -561,7 +563,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->testActionDefaultsToEmptyString();
         $this->form->setAction('/foo.php?bar')
-                   ->setView(new View\View);
+                   ->setView(new View\PhpRenderer);
         $html = $this->form->render();
 
         $this->assertContains('action="/foo.php?bar"', $html);
@@ -633,7 +635,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testGetPluginLoaderRetrievesDefaultDecoratorPluginLoader()
     {
         $loader = $this->form->getPluginLoader('decorator');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathLoader);
         $paths = $loader->getPaths('Zend\Form\Decorator');
         $this->assertTrue(is_array($paths), var_export($loader, 1));
         $this->assertTrue(0 < count($paths));
@@ -643,8 +645,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
     {
-        $loader = new PluginLoader();
-        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid type');
+        $loader = new PrefixPathLoader();
+        $this->setExpectedException('Zend\Form\Exception', 'Invalid type');
         $this->form->setPluginLoader($loader, 'foo');
     }
 
@@ -656,7 +658,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomDecoratorPluginLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->form->setPluginLoader($loader, 'decorator');
         $test = $this->form->getPluginLoader('decorator');
         $this->assertSame($loader, $test);
@@ -732,7 +734,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetCustomDecoratorElementLoader()
     {
-        $loader = new PluginLoader();
+        $loader = new PrefixPathLoader();
         $this->form->setPluginLoader($loader, 'element');
         $test = $this->form->getPluginLoader('element');
         $this->assertSame($loader, $test);
@@ -749,8 +751,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testAddAllPluginLoaderPrefixPathsSimultaneously()
     {
-        $decoratorLoader = new PluginLoader();
-        $elementLoader   = new PluginLoader();
+        $decoratorLoader = new PrefixPathLoader();
+        $elementLoader   = new PrefixPathLoader();
         $this->form->setPluginLoader($decoratorLoader, 'decorator')
                    ->setPluginLoader($elementLoader, 'element')
                    ->addPrefixPath('Zend', 'Zend/');
@@ -1117,7 +1119,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
                 ->addDisplayGroup(array('bar', 'baz'), 'barbaz');
         $this->form->addSubForm($subForm, 'sub')
                    ->setElementsBelongTo('myform')
-                   ->setView(new View\View);
+                   ->setView(new View\PhpRenderer);
         $html = $this->form->render();
         foreach (array('foo', 'bar', 'baz', 'bat') as $test) {
             $this->assertContains('id="myform-sub-' . $test . '"', $html);
@@ -2825,15 +2827,13 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\View();
-        $libPath = __DIR__ . '/../../../library';
-        $view->addHelperPath($libPath . '/Zend/View/Helper');
+        $view = new View\PhpRenderer();
         return $view;
     }
 
     public function testGetViewRetrievesFromViewRendererByDefault()
     {
-        $viewRenderer = ActionHelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = $this->broker->load('viewRenderer');
         $viewRenderer->initView();
         $view = $viewRenderer->view;
         $test = $this->form->getView();
@@ -2847,7 +2847,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetView()
     {
-        $view = new View\View();
+        $view = new View\PhpRenderer();
         $this->assertNull($this->form->getView());
         $this->form->setView($view);
         $received = $this->form->getView();
@@ -3961,7 +3961,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $subForm = new \Zend\Form\SubForm();
         $subForm->addElement('file', 'txt');
         $this->form->addSubForm($subForm, 'page1')
-                   ->setView(new View\View);
+                   ->setView(new View\PhpRenderer);
         $html = $this->form->render();
 
         $this->assertContains('id="txt"', $html);
@@ -3976,7 +3976,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->form->addElement('file', 'txt')
                    ->addDisplayGroup(array('txt'), 'txtdisplay')
-                   ->setView(new View\View);
+                   ->setView(new View\PhpRenderer);
         $html = $this->form->render();
 
         $this->assertContains('id="txt"', $html);

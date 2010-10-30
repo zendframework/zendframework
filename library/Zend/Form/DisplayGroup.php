@@ -25,23 +25,17 @@ namespace Zend\Form;
 use Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
+    Zend\Controller\Front as FrontController,
     Zend\Translator,
-    Zend\View\ViewEngine as View,
-    Zend\Controller\Action\HelperBroker as ActionHelperBroker;
+    Zend\View\Renderer as View;
 
 /**
  * Zend_Form_DisplayGroup
  *
- * @uses       Countable
- * @uses       Iterator
- * @uses       \Zend\Controller\Action\HelperBroker\HelperBroker
- * @uses       \Zend\Form\Form
- * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class DisplayGroup implements \Iterator,\Countable
 {
@@ -865,7 +859,8 @@ class DisplayGroup implements \Iterator,\Countable
     public function getView()
     {
         if (null === $this->_view) {
-            $viewRenderer = ActionHelperBroker::getStaticHelper('viewRenderer');
+            $front = FrontController::getInstance();
+            $viewRenderer = $front->getHelperBroker()->load('viewRenderer');
             $this->setView($viewRenderer->view);
         }
 

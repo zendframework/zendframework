@@ -17,7 +17,6 @@
  * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,8 @@
  */
 namespace Zend\Tag\Cloud\Decorator;
 
-use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
+use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException,
+    Zend\Tag\ItemList;
 
 /**
  * Simple HTML decorator for tags
@@ -261,8 +261,14 @@ class HTMLTag extends Tag
      * @param  \Zend\Tag\ItemList $tags
      * @return array
      */
-    public function render(\Zend\Tag\ItemList $tags)
+    public function render($tags)
     {
+        if (!$tags instanceof ItemList) {
+            throw new Exception(sprintf(
+                'HtmlTag::render() expects a Zend\Tag\ItemList argument; received "%s"',
+                (is_object($tags) ? get_class($tags) : gettype($tags))
+            ));
+        }
         if (null === ($weightValues = $this->getClassList())) {
             $weightValues = range($this->getMinFontSize(), $this->getMaxFontSize());
         }

@@ -27,7 +27,8 @@ namespace Zend\Markup\Renderer;
 use Zend\Markup\Token,
     Zend\Markup\TokenList,
     Zend\Markup\Parser,
-    Zend\Markup\Renderer\Markup;
+    Zend\Markup\Renderer\Markup,
+    Zend\Config\Config;
 
 /**
  * Defines the basic rendering functionality
@@ -78,6 +79,34 @@ abstract class AbstractRenderer
      */
     protected $_encoding = 'UTF-8';
 
+    /**
+     * Groups configuration
+     *
+     * An example of the format for this array:
+     *
+     * <code>
+     * array(
+     *     'block'  => array('inline', 'block'),
+     *     'inline' => array('inline')
+     * )
+     * </code>
+     *
+     * This example shows two groups, block and inline. Elements who are in the
+     * block group, allow elements from the inline and block groups inside
+     * them. But elements from the inline group, only allow elements from the
+     * inline group inside them.
+     *
+     * @var array
+     */
+    protected $_groups = array();
+
+    /**
+     * The current group
+     *
+     * @var string
+     */
+    protected $_group;
+
 
     /**
      * Constructor
@@ -90,7 +119,7 @@ abstract class AbstractRenderer
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
         }
 
@@ -257,6 +286,30 @@ abstract class AbstractRenderer
     }
 
     /**
+     * Render the content of a token.
+     *
+     * This method renders a token, and sets the correct group and filter.
+     *
+     * @todo Apply setting of the correct filters.
+     *
+     * @param \Zend\Markup\Token $token
+     * @param \Zend\Markup\Renderer\Markup $markup
+     *
+     * @return string
+     */
+    protected function _renderContent(Token $token, Markup $markup)
+    {
+        $oldGroup     = $this->_group;
+        $this->_group = $markup->getGroup();
+
+        $value = $this->_render($token);
+
+        $this->_group = $oldGroup;
+
+        return $value;
+    }
+
+    /**
      * Execute the token
      *
      * @param  \Zend\Markup\Token $token
@@ -267,14 +320,20 @@ abstract class AbstractRenderer
     {
         switch ($token->getType()) {
             case Token::TYPE_MARKUP:
-                if (isset($this->_markups[$token->getName()])) {
-                    $markup = $this->_markups[$token->getName()];
-
-                    return $markup($token, $this->_render($token));
+                if (!isset($this->_markups[$token->getName()])) {
+                    // TODO: apply filters
+                    return $token->getContent() . $this->_render($token) . $token->getStopper();
                 }
 
-                // TODO: apply filters
-                return $token->getContent() . $this->_render($token) . $token->getStopper();
+                $markup = $this->_markups[$token->getName()];
+
+                // check if the markup is allowed here
+                if (!in_array($markup->getGroup(), $this->_groups[$this->_group])) {
+                    // TODO: apply filters
+                    return $token->getContent() . $this->_render($token) . $token->getStopper();
+                }
+
+                return $markup($token, $this->_renderContent($token, $markup));
                 break;
             case Token::TYPE_NONE:
             default:

@@ -43,6 +43,14 @@ class Img extends AbstractHtml
 {
 
     /**
+     * Markup group
+     *
+     * @var string
+     */
+    protected $_group = 'inline';
+
+
+    /**
      * Convert the token
      *
      * @param \Zend\Markup\Token $token

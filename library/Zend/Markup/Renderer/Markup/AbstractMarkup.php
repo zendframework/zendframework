@@ -55,6 +55,28 @@ abstract class AbstractMarkup implements Markup
      */
     protected $_encoding;
 
+    /**
+     * The group
+     *
+     * @var string
+     */
+    protected $_group;
+
+
+    /**
+     * Get this markup's group
+     *
+     * @return string
+     */
+    public function getGroup()
+    {
+        if (empty($this->_group)) {
+            // TODO: figure out which exception to throw
+            throw new \Exception('This markup doesn\'t have a group.');
+        }
+
+        return $this->_group;
+    }
 
     /**
      * Set the encoding on this markup

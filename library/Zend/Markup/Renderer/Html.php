@@ -73,6 +73,12 @@ class Html extends AbstractRenderer
      */
     protected function _defineDefaultMarkups()
     {
+        $this->_groups = array(
+            'block'  => array('inline', 'block'),
+            'inline' => array('inline')
+        );
+        $this->_group  = 'block';
+
         $this->addMarkupByName('code', 'code');
         $this->addMarkupByName('img', 'img');
         $this->addMarkupByName('url', 'url');

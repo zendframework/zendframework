@@ -57,6 +57,7 @@ class Html extends AbstractRenderer
         $this->addMarkup('code', new Markup\Code());
         $this->addMarkup('img', new Markup\Img());
         $this->addMarkup('url', new Markup\Url());
-        $this->addMarkup('b', new Markup\Replace('strong'));
+        $this->addMarkup('b', new Markup\Replace('strong', 'inline'));
+        $this->addMarkup('i', new Markup\Replace('em', 'inline'));
     }
 }

@@ -45,38 +45,21 @@ class Html extends AbstractRenderer
 {
 
     /**
-     * Constructor
-     *
-     * @param array|\Zend\Config\Config $options
+     * Load the default configuration for this renderer
      *
      * @return void
      */
-    public function __construct($options = array())
+    protected function _loadDefaultConfig()
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        }
-
         $this->_pluginLoader = new PluginLoader(array(
             'Zend\Markup\Renderer\Markup\Html' => 'Zend/Markup/Renderer/Markup/Html'
         ));
 
-        $this->_defineDefaultMarkups();
-
-        parent::__construct($options);
-    }
-
-    /**
-     * Define the default markups
-     *
-     * @return void
-     */
-    protected function _defineDefaultMarkups()
-    {
         $this->_groups = array(
             'block'  => array('inline', 'block'),
             'inline' => array('inline')
         );
+
         $this->_group  = 'block';
 
         $this->addMarkupByName('code', 'code');

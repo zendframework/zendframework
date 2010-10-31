@@ -103,7 +103,9 @@ class Bbcode implements Parser
 
 
     /**
-     * Prepare the parsing of a bbcode string, the real parsing is done in {@link _parse()}
+     * Parse a BBCode string, this simply sources out the lexical analysis to
+     * the {@link tokenize()} method, and the syntactical analysis to the
+     * {@link buildTree()} method.
      *
      * @param  string $value
      * @return \Zend\Markup\TokenList
@@ -276,7 +278,7 @@ class Bbcode implements Parser
                 return $this->_createTree($tokens);
                 break;
             default:
-                // TODO: throw exception for this case
+                throw new Exception\InvalidArgumentException("There is no treebuilding strategy called '$strategy'.");
                 break;
         }
     }

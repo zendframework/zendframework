@@ -149,7 +149,10 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = "\0\1\r\n";
-        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'foo');
+        $this->setExpectedException(
+            'Zend\Serializer\Exception\RuntimeException',
+            'syntax error'
+        );
         $this->_adapter->unserialize($value);
     }
 

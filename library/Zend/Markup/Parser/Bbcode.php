@@ -24,7 +24,8 @@
  */
 namespace Zend\Markup\Parser;
 use Zend\Markup\Parser,
-    Zend\Markup;
+    Zend\Markup\Token,
+    Zend\Markup\TokenList;
 
 /**
  * @uses       \Zend\Markup\Parser\Exception
@@ -203,12 +204,12 @@ class Bbcode implements Parser
                 if (!empty($buffer)) {
                     $tokens[] = array(
                         'tag' => $buffer,
-                        'type' => Markup\Token::TYPE_NONE
+                        'type' => Token::TYPE_NONE
                     );
                     $buffer = '';
                 }
                 $temp['tag'] .= $matches['end'];
-                $temp['type'] = Markup\Token::TYPE_MARKUP;
+                $temp['type'] = Token::TYPE_MARKUP;
 
                 $tokens[] = $temp;
                 $temp     = array();
@@ -253,7 +254,7 @@ class Bbcode implements Parser
         if (!empty($buffer)) {
             $tokens[] = array(
                 'tag'  => $buffer,
-                'type' => Markup\Token::TYPE_NONE
+                'type' => Token::TYPE_NONE
             );
         }
 
@@ -291,10 +292,10 @@ class Bbcode implements Parser
     {
         // variable initialization for treebuilder
         $this->_searchedStoppers = array();
-        $this->_tree             = new Markup\TokenList();
-        $this->_current          = new Markup\Token(
+        $this->_tree             = new TokenList();
+        $this->_current          = new Token(
             '',
-            Markup\Token::TYPE_NONE,
+            Token::TYPE_NONE,
             'Zend_Markup_Root'
         );
 
@@ -326,21 +327,21 @@ class Bbcode implements Parser
                     }
                 }
             } else {
-                if ($token['type'] == Markup\Token::TYPE_MARKUP) {
+                if ($token['type'] == Token::TYPE_MARKUP) {
                     if ($token['tag'] == self::NEWLINE) {
                         // this is a newline tag, add it as a token
-                        $this->_current->addChild(new Markup\Token(
+                        $this->_current->addChild(new Token(
                             "\n",
-                            Markup\Token::TYPE_NONE,
+                            Token::TYPE_NONE,
                             '',
                             array(),
                             $this->_current
                         ));
                     } elseif (isset($token['name']) && ($token['name'][0] == '/')) {
                         // this is a stopper, add it as a empty token
-                        $this->_current->addChild(new Markup\Token(
+                        $this->_current->addChild(new Token(
                             $token['tag'],
-                            Markup\Token::TYPE_NONE,
+                            Token::TYPE_NONE,
                             '',
                             array(),
                             $this->_current
@@ -348,16 +349,16 @@ class Bbcode implements Parser
                     } elseif (isset($this->_tags[$this->_current->getName()]['parse_inside'])
                         && !$this->_tags[$this->_current->getName()]['parse_inside']
                     ) {
-                        $this->_current->addChild(new Markup\Token(
+                        $this->_current->addChild(new Token(
                             $token['tag'],
-                            Markup\Token::TYPE_NONE,
+                            Token::TYPE_NONE,
                             '',
                             array(),
                             $this->_current
                         ));
                     } else {
                         // add the tag
-                        $child = new Markup\Token(
+                        $child = new Token(
                             $token['tag'],
                             $token['type'],
                             $token['name'],
@@ -375,9 +376,9 @@ class Bbcode implements Parser
                     }
                 } else {
                     // no tag, just add it as a simple token
-                    $this->_current->addChild(new Markup\Token(
+                    $this->_current->addChild(new Token(
                         $token['tag'],
-                        Markup\Token::TYPE_NONE,
+                        Token::TYPE_NONE,
                         '',
                         array(),
                         $this->_current
@@ -444,7 +445,7 @@ class Bbcode implements Parser
      * @param  \Zend\Markup\Token $token
      * @return void
      */
-    protected function _addToSearchedStoppers(Markup\Token $token)
+    protected function _addToSearchedStoppers(Token $token)
     {
         $this->_checkTagDeclaration($token->getName());
 
@@ -462,7 +463,7 @@ class Bbcode implements Parser
      * @param  \Zend\Markup\Token $token
      * @return void
      */
-    protected function _removeFromSearchedStoppers(Markup\Token $token)
+    protected function _removeFromSearchedStoppers(Token $token)
     {
         $this->_checkTagDeclaration($token->getName());
 

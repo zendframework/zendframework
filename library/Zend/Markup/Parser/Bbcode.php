@@ -25,7 +25,8 @@
 namespace Zend\Markup\Parser;
 use Zend\Markup\Parser,
     Zend\Markup\Token,
-    Zend\Markup\TokenList;
+    Zend\Markup\TokenList,
+    Zend\Config\Config;
 
 /**
  * @uses       \Zend\Markup\Parser\Exception
@@ -78,19 +79,6 @@ class Bbcode implements Parser
         'Zend_Markup_Root' => array(
             'type'     => self::TYPE_DEFAULT,
             'stoppers' => array(),
-        ),
-        '*' => array(
-            'type'     => self::TYPE_DEFAULT,
-            'stoppers' => array(self::NEWLINE, '[/*]', '[/]'),
-        ),
-        'hr' => array(
-            'type'     => self::TYPE_SINGLE,
-            'stoppers' => array(),
-        ),
-        'code' => array(
-            'type'         => self::TYPE_DEFAULT,
-            'stoppers'     => array('[/code]', '[/]'),
-            'parse_inside' => false
         )
     );
 
@@ -100,6 +88,47 @@ class Bbcode implements Parser
      * @var array
      */
     protected $_tokens = array();
+
+
+    /**
+     * Constructor
+     *
+     * @param \Zend\Config\Config|array $config
+     *
+     * @return array
+     */
+    public function __construct($options = array())
+    {
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        }
+
+        if (isset($options['loadDefaultConfig']) && $options['loadDefaultConfig']) {
+            $this->_loadDefaultConfig();
+        }
+    }
+
+    /**
+     * Load default configuration
+     *
+     * @return void
+     */
+    public function _loadDefaultConfig()
+    {
+        //$this->_tags['*'] = array(
+        //    'type'     => self::TYPE_DEFAULT,
+        //    'stoppers' => array(self::NEWLINE, '[/*]', '[/]'),
+        //);
+        //$this->_tags['hr'] = array(
+        //    'type'     => self::TYPE_SINGLE,
+        //    'stoppers' => array(),
+        //);
+        $this->_tags['code'] = array(
+            'type'         => self::TYPE_DEFAULT,
+            'stoppers'     => array('[/code]', '[/]'),
+            'parse_inside' => false
+        );
+    }
 
 
     /**
@@ -348,9 +377,8 @@ class Bbcode implements Parser
                             array(),
                             $this->_current
                         ));
-                    } elseif (isset($this->_tags[$this->_current->getName()]['parse_inside'])
-                        && !$this->_tags[$this->_current->getName()]['parse_inside']
-                    ) {
+                    } elseif ($this->_checkTagAllowed($token)) {
+                        // TODO: expand this to using groups for the context-awareness
                         $this->_current->addChild(new Token(
                             $token['tag'],
                             Token::TYPE_NONE,
@@ -393,6 +421,26 @@ class Bbcode implements Parser
     }
 
     /**
+     * Check if a tag is allowed in the current context
+     *
+     * @todo Use groups to determine if tags are allowed in the current context
+     *
+     * @param array $token
+     *
+     * @return bool
+     */
+    protected function _checkTagAllowed(array $token)
+    {
+        if (!isset($this->_tags[$this->_current->getName()]['parse_inside'])
+            || $this->_tags[$this->_current->getName()]['parse_inside']
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Check if there is a tag declaration, and if it isnt there, add it
      *
      * @param string $name
@@ -411,6 +459,7 @@ class Bbcode implements Parser
             );
         }
     }
+
     /**
      * Check the tag's type
      *

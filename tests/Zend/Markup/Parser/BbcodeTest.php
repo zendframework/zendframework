@@ -56,7 +56,9 @@ class BbcodeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_parser = new Bbcode();
+        $this->_parser = new Bbcode(array(
+            'loadDefaultConfig' => true
+        ));
     }
 
     /**
@@ -265,6 +267,85 @@ class BbcodeTest extends \PHPUnit_Framework_TestCase
 
         // the first child of b is bar
         $this->assertEquals($children->current()->getContent(), 'bar');
+        $this->assertEquals($children->current()->getType(), Token::TYPE_NONE);
+    }
+
+    /**
+     * Test if group definitions work with the treebuilder
+     *
+     * @return void
+     */
+    public function testGroups()
+    {
+        $input = array(
+            array(
+                'tag'        => '[code]',
+                'name'       => 'code',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'        => '[b]',
+                'name'       => 'url',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'  => 'bar',
+                'type' => 'none'
+            ),
+            array(
+                'tag'        => '[/b]',
+                'name'       => '/b',
+                'attributes' => array(),
+                'type'       => 'markup'
+            ),
+            array(
+                'tag'        => '[/code]',
+                'name'       => '/code',
+                'attributes' => array(),
+                'type'       => 'markup'
+            )
+        );
+
+        $tree = $this->_parser->buildTree($input);
+
+        // first check the root
+        $root = $tree->current();
+
+        $this->assertEquals($root->getName(), 'Zend_Markup_Root');
+
+        // now check the subtokens of the root
+        $children = $root->getChildren();
+
+
+        // the [code] tag
+        $code = $children->current();
+
+        $this->assertEquals($code->getName(), 'code');
+        $this->assertEquals($code->getContent(), '[code]');
+        $this->assertEquals($code->getStopper(), '[/code]');
+        $this->assertEquals($code->getAttributes(), array());
+        $this->assertEquals($code->getType(), Token::TYPE_MARKUP);
+
+        // check the code tag's children
+        $children = $code->getChildren();
+
+        // the first child of the code tag should have the content [b]
+        // but in this case the [b] tag should not have been parsed as tag
+        $this->assertEquals($children->current()->getContent(), '[b]');
+        $this->assertEquals($children->current()->getType(), Token::TYPE_NONE);
+
+        $this->assertNotNull($children->next());
+
+        // now we just have simple content
+        $this->assertEquals($children->current()->getContent(), 'bar');
+        $this->assertEquals($children->current()->getType(), Token::TYPE_NONE);
+
+        $this->assertNotNull($children->next());
+
+        // and now we have the end of the [/b] tag, which isn't parsed of course
+        $this->assertEquals($children->current()->getContent(), '[/b]');
         $this->assertEquals($children->current()->getType(), Token::TYPE_NONE);
     }
 }

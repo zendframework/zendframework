@@ -89,6 +89,34 @@ class Bbcode implements Parser
      */
     protected $_tokens = array();
 
+    /**
+     * Groups configuration
+     *
+     * An example of the format for this array:
+     *
+     * <code>
+     * array(
+     *     'block'  => array('inline', 'block'),
+     *     'inline' => array('inline')
+     * )
+     * </code>
+     *
+     * This example shows two groups, block and inline. Elements who are in the
+     * block group, allow elements from the inline and block groups inside
+     * them. But elements from the inline group, only allow elements from the
+     * inline group inside them.
+     *
+     * @var array
+     */
+    protected $_groups = array();
+
+    /**
+     * The current group
+     *
+     * @var string
+     */
+    protected $_group;
+
 
     /**
      * Constructor
@@ -125,8 +153,7 @@ class Bbcode implements Parser
         //);
         $this->_tags['code'] = array(
             'type'         => self::TYPE_DEFAULT,
-            'stoppers'     => array('[/code]', '[/]'),
-            'parse_inside' => false
+            'stoppers'     => array('[/code]', '[/]')
         );
     }
 
@@ -431,13 +458,7 @@ class Bbcode implements Parser
      */
     protected function _checkTagAllowed(array $token)
     {
-        if (!isset($this->_tags[$this->_current->getName()]['parse_inside'])
-            || $this->_tags[$this->_current->getName()]['parse_inside']
-        ) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
     /**

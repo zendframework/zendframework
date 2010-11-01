@@ -215,7 +215,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $array = array('__className' => 'stdClass', 'one' => 1, 'two' => 2);
 
         $encoded = Json\Encoder::encode($value);
-        $this->assertSame($array, Json\Decoder::decode($encoded));
+        $this->assertSame($array, Json\Decoder::decode($encoded, Json\Json::TYPE_ARRAY));
     }
 
     /**
@@ -242,7 +242,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $value = '[{"id":1},{"foo":2}]';
         $expect = array(array('id' => 1), array('foo' => 2));
-        $this->assertEquals($expect, Json\Decoder::decode($value));
+        $this->assertEquals($expect, Json\Decoder::decode($value, Json\Json::TYPE_ARRAY));
     }
 
     /**
@@ -260,7 +260,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
             346 => array(64, 'francois'),
             21  => array(12, 'paul')
         );
-        $this->assertEquals($expect, Json\Decoder::decode($value));
+        $this->assertEquals($expect, Json\Decoder::decode($value, Json\Json::TYPE_ARRAY));
     }
 
     /**
@@ -271,8 +271,26 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         foreach ($values as $value) {
             $encoded = Json\Encoder::encode($value);
-            $this->assertEquals($value, Json\Decoder::decode($encoded));
+
+            if (is_array($value) || is_object($value)) {
+                $this->assertEquals($this->_toArray($value), Json\Decoder::decode($encoded, Json\Json::TYPE_ARRAY));
+            } else {
+                $this->assertEquals($value, Json\Decoder::decode($encoded));
+            }
         }
+    }
+
+    protected function _toArray($value)
+    {
+        if (!is_array($value) || !is_object($value)) {
+            return $value;
+        }
+
+        $array = array();
+        foreach ((array)$value as $k => $v) {
+            $array[$k] = $this->_toArray($v);
+        }
+        return $array;
     }
 
     /**
@@ -295,10 +313,10 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $expected = array('data' => array(1, 2, 3, 4));
 
         $json = '{"data":[1,2,3,4' . "\n]}";
-        $this->assertEquals($expected, Json\Decoder::decode($json));
+        $this->assertEquals($expected, Json\Decoder::decode($json, Json\Json::TYPE_ARRAY));
 
         $json = '{"data":[1,2,3,4 ]}';
-        $this->assertEquals($expected, Json\Decoder::decode($json));
+        $this->assertEquals($expected, Json\Decoder::decode($json, Json\Json::TYPE_ARRAY));
     }
 
     /**
@@ -732,8 +750,9 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9416
      * Encoding an iterator using the internal encoder should handle undefined keys
+     *
+     * @group ZF-9416
      */
     public function testIteratorWithoutDefinedKey()
     {
@@ -742,6 +761,17 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $expectedDecoding = '{"__className":"ArrayIterator",0:"foo"}';
         $this->assertEquals($expectedDecoding, $encoded);
     }
+
+    /**
+     * The default json decode type should be TYPE_OBJECT
+     *
+     * @group ZF-8618
+     */
+    public function testDefaultTypeObject()
+    {
+        $this->assertType('stdClass', Json\Decoder::decode('{"var":"value"}'));
+    }
+
 }
 
 /**

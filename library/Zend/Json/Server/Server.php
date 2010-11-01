@@ -22,7 +22,7 @@
  * @namespace
  */
 namespace Zend\Json\Server;
-use Zend\Server\Reflection,
+use Zend\Server\Reflection\Reflection,
     Zend\Server\Method;
 
 /**

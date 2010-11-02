@@ -209,14 +209,31 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserialzeInvalid()
+    public function testUnserialzeInvalidXml()
     {
         if (!class_exists('SimpleXMLElement', false)) {
             $this->markTestSkipped('Skipped by missing ext/simplexml');
         }
 
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'foo');
+        $this->setExpectedException(
+            'Zend\Serializer\Exception\RuntimeException',
+            'String could not be parsed as XML'
+        );
+        $this->_adapter->unserialize($value);
+    }
+
+    public function testUnserialzeInvalidWddx()
+    {
+        if (!class_exists('SimpleXMLElement', false)) {
+            $this->markTestSkipped('Skipped by missing ext/simplexml');
+        }
+
+        $value = '<wddxPacket version=\'1.0\'><header /></wddxPacket>';
+        $this->setExpectedException(
+            'Zend\Serializer\Exception\RuntimeException',
+            'Invalid wddx'
+        );
         $this->_adapter->unserialize($value);
     }
 

@@ -110,7 +110,7 @@ class Wddx extends AbstractAdapter
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null
                 }
-                throw new RuntimeException('Invalid wddx string');
+                throw new RuntimeException('Invalid wddx');
             } catch (\Exception $e) {
                 throw new RuntimeException($e->getMessage(), 0, $e);
             }

@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
-use Zend\CodeGenerator\Php;
+use Zend\CodeGenerator\PHP;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -31,9 +31,9 @@ use Zend\CodeGenerator\Php;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpClass
- * @uses       \Zend\CodeGenerator\Php\PhpFile
- * @uses       \Zend\CodeGenerator\Php\PhpProperty
+ * @uses       \Zend\CodeGenerator\PHP\PHPClass
+ * @uses       \Zend\CodeGenerator\PHP\PHPFile
+ * @uses       \Zend\CodeGenerator\PHP\PHPProperty
  * @uses       \Zend\Tool\Project\Context\Zf\AbstractClassFile
  * @category   Zend
  * @package    Zend_Tool
@@ -76,18 +76,18 @@ class DbTableFile extends AbstractClassFile
 
     public function getContents()
     {
-        $className = $this->getFullClassName($this->_dbTableName, 'Model\DbTable');
+        $className = $this->getFullClassName($this->_dbTableName, 'Model_DbTable');
         
-        $codeGenFile = new Php\PhpFile(array(
+        $codeGenFile = new PHP\PHPFile(array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new Php\PhpClass(array(
+                new PHP\PHPClass(array(
                     'name' => $className,
-                    'extendedClass' => '\Zend\Db\Table\AbstractTable',
+                    'extendedClass' => 'Zend_Db_Table_Abstract',
                     'properties' => array(
-                        new Php\PhpProperty(array(
+                        new PHP\PHPProperty(array(
                             'name' => '_name',
-                            'visibility' => Php\PhpProperty::VISIBILITY_PROTECTED,
+                            'visibility' => PHP\PHPProperty::VISIBILITY_PROTECTED,
                             'defaultValue' => $this->_actualTableName
                             ))
                         ),

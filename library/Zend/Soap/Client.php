@@ -962,10 +962,11 @@ class Client
     public function _doRequest(Client\Common $client, $request, $location, $action, $version, $one_way = null)
     {
         // Perform request as is
-        if ($one_way === null) {
-            return $client->__doRequest($request, $location, $action, $version);
+        if ($one_way == null) {
+            return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version);
+        } else {
+            return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version, $one_way);
         }
-        return $client->__doRequest($request, $location, $action, $version, $one_way);
     }
 
     /**

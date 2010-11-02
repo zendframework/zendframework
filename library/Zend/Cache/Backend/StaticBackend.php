@@ -558,6 +558,6 @@ class StaticBackend extends AbstractBackend implements Backend
      */
     protected function _decodeId($id)
     {
-        return pack('H*', $id);
+        return pack('H*', $id);;
     }
 }

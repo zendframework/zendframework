@@ -89,7 +89,7 @@ class Fault extends \Zend\XmlRpc\Fault
         // Notify exception observers, if present
         if (!empty(self::$_observers)) {
             foreach (array_keys(self::$_observers) as $observer) {
-                $observer::observe($this);
+                call_user_func(array($observer, 'observe'), $this);
             }
         }
     }

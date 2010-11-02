@@ -30,13 +30,6 @@ INSTALLATION
 
 Please see INSTALL.txt.
 
-CONTRIBUTING
-------------
-
-If you wish to contribute to Zend Framework 2.0, please make sure you have
-signed a CLA (http://framework.zend.com/cla), and please read both the
-README-DEV.txt and README-GIT.txt file.
-
 QUESTIONS AND FEEDBACK
 ----------------------
 

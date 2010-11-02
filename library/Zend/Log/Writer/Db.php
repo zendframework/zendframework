@@ -101,7 +101,7 @@ class Db extends AbstractWriter
      * 
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
-    public function setFormatter(\Zend\Log\Formatter $formatter)
+    public function setFormatter(Zend_Log_Formatter_Interface $formatter)
     {
         throw new Log\Exception\InvalidArgumentException(get_class() . ' does not support formatting');
     }

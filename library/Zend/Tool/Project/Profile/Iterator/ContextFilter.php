@@ -182,13 +182,13 @@ class ContextFilter extends \RecursiveFilterIterator
         }
 
         foreach ($this->_acceptTypes as $acceptType) {
-            if ($currentItem->getContent() instanceof $acceptType) {
+            if ($currentItem->getContent() instanceof \$acceptType) {
                 return true;
             }
         }
 
         foreach ($this->_denyTypes as $denyType) {
-            if ($currentItem->getContext() instanceof $denyType) {
+            if ($currentItem->getContext() instanceof \$denyType) {
                 return false;
             }
         }

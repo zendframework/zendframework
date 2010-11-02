@@ -30,9 +30,9 @@ namespace Zend\Tool\Project\Context\Zf;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpClass
- * @uses       \Zend\CodeGenerator\Php\PhpFile
- * @uses       \Zend\CodeGenerator\Php\PhpMethod
+ * @uses       \Zend\CodeGenerator\PHP\PHPClass
+ * @uses       \Zend\CodeGenerator\PHP\PHPFile
+ * @uses       \Zend\CodeGenerator\PHP\PHPMethod
  * @uses       \Zend\Tool\Project\Context\Zf\AbstractClassFile
  * @category   Zend
  * @package    Zend_Tool
@@ -95,14 +95,14 @@ class FormFile extends AbstractClassFile
         
         $className = $this->getFullClassName($this->_formName, 'Form');
         
-        $codeGenFile = new \Zend\CodeGenerator\Php\PhpFile(array(
+        $codeGenFile = new \Zend\CodeGenerator\PHP\PHPFile(array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new \Zend\CodeGenerator\Php\PhpClass(array(
+                new \Zend\CodeGenerator\PHP\PHPClass(array(
                     'name' => $className,
-                    'extendedClass' => '\Zend\Form\Form',
+                    'extendedClass' => 'Zend_Form',
                     'methods' => array(
-                        new \Zend\CodeGenerator\Php\PhpMethod(array(
+                        new \Zend\CodeGenerator\PHP\PHPMethod(array(
                             'name' => 'init',
                             'body' => '/* Form Elements & Other Definitions Here ... */',
                             ))

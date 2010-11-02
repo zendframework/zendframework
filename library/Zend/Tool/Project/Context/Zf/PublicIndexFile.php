@@ -30,7 +30,7 @@ namespace Zend\Tool\Project\Context\Zf;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\CodeGenerator\PHP\PHPFile
  * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
  * @package    Zend_Tool
@@ -62,7 +62,7 @@ class PublicIndexFile extends \Zend\Tool\Project\Context\Filesystem\File
      */
     public function getContents()
     {
-        $codeGenerator = new \Zend\CodeGenerator\Php\PhpFile(array(
+        $codeGenerator = new \Zend\CodeGenerator\PHP\PHPFile(array(
             'body' => <<<'EOS'
 // Define path to application directory
 defined('APPLICATION_PATH')

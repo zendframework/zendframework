@@ -69,7 +69,7 @@ class Module
             $targetModuleResource,
             array(
                 'denyNames' => array('ModulesDirectory', 'ViewControllerScriptsDirectory'),
-                'denyType'  => 'Zend\Tool\Project\Context\Filesystem\File'
+                'denyType'  => 'Zend_Tool_Project_Context_Filesystem_File'
                 )
             );
 
@@ -80,7 +80,6 @@ class Module
         $currentDepth = 0;
         $parentResources = array();
         $currentResource = $moduleDirectory;
-        $currentChildResource = null;
 
         // loop through the target module skeleton
         foreach ($targetIterator as $targetSubResource) {

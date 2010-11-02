@@ -164,7 +164,7 @@ class File extends AbstractFilesystem
         if ($this->_resource->hasAttribute('defaultContentCallback')) {
             $contentFunc = $this->_resource->getAttribute('defaultContentCallback');
             if (is_callable($contentFunc)) {
-                $this->_content = call_user_func($contentFunc, $this);
+                $this->_content = call_user_func_array($contentFunc, array($this));
             }
         }
         if ($this->_filesystemName == null) {

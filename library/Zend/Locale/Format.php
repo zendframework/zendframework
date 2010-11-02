@@ -806,16 +806,13 @@ class Format
         if ($day !== false) {
             $parse[$day]   = 'd';
             if (!empty($options['locale']) && ($options['locale'] !== 'root') &&
-                (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))
-            ) {
+                (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))) {
                 // erase day string
-                $daylist = Data::getList($options['locale'], 'day');
-                if (is_scalar($number)) {
-                    foreach($daylist as $key => $name) {
-                        if (iconv_strpos($number, $name) !== false) {
-                            $number = str_replace($name, "EEEE", $number);
-                            break;
-                        }
+                    $daylist = Data::getList($options['locale'], 'day');
+                foreach($daylist as $key => $name) {
+                    if (iconv_strpos($number, $name) !== false) {
+                        $number = str_replace($name, "EEEE", $number);
+                        break;
                     }
                 }
             }
@@ -1064,7 +1061,7 @@ class Format
         // If no $locale was given, or $locale was invalid, do not use this identity mapping to normalize.
         // Otherwise, translate locale aware month names in $number to their numeric equivalents.
         $position = false;
-        if ($monthlist && $monthlist[1] != 1 && is_scalar($number)) {
+        if ($monthlist && $monthlist[1] != 1) {
             foreach($monthlist as $key => $name) {
                 if (($position = iconv_strpos($number, $name, 0, 'UTF-8')) !== false) {
                     $number   = str_ireplace($name, $key, $number);

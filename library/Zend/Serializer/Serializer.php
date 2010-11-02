@@ -45,7 +45,7 @@ class Serializer
      *
      * @var string|Zend\Serializer\Adapter
      */
-    protected static $_defaultAdapter = 'PhpSerialize';
+    protected static $_defaultAdapter = 'PHPSerialize';
 
     /**
      * Create a serializer adapter instance.

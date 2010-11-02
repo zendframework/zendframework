@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\Amazon\S3;
 use Zend\Service\Amazon,
-    Zend\Service\Amazon\Sqs\Exception,
+    Zend\Service\Amazon\S3\Exception,
     Zend\Crypt;
 
 /**

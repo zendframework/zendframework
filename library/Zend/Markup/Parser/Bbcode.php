@@ -117,6 +117,13 @@ class Bbcode implements Parser
      */
     protected $_group;
 
+    /**
+     * Default group for unknown tags
+     *
+     * @var string
+     */
+    protected $_defaultGroup;
+
 
     /**
      * Constructor
@@ -143,18 +150,19 @@ class Bbcode implements Parser
      */
     public function _loadDefaultConfig()
     {
-        //$this->_tags['*'] = array(
-        //    'type'     => self::TYPE_DEFAULT,
-        //    'stoppers' => array(self::NEWLINE, '[/*]', '[/]'),
-        //);
-        //$this->_tags['hr'] = array(
-        //    'type'     => self::TYPE_SINGLE,
-        //    'stoppers' => array(),
-        //);
         $this->_tags['code'] = array(
             'type'         => self::TYPE_DEFAULT,
-            'stoppers'     => array('[/code]', '[/]')
+            'stoppers'     => array('[/code]', '[/]'),
+            'group'        => 'blockignore'
         );
+
+        $this->_groups = array(
+            'block'       => array('block', 'blockignore', 'inline'),
+            'inline'      => array('inline'),
+            'blockignore' => array()
+        );
+        $this->_group        = 'block';
+        $this->_defaultGroup = 'block';
     }
 
 
@@ -349,6 +357,7 @@ class Bbcode implements Parser
     protected function _createTree($tokens)
     {
         // variable initialization for treebuilder
+        $groupStack              = array($this->_group);
         $this->_searchedStoppers = array();
         $this->_tree             = new TokenList();
         $this->_current          = new Token(
@@ -368,12 +377,16 @@ class Bbcode implements Parser
                 while (!in_array($token['tag'], $this->_tags[$this->_current->getName()]['stoppers'])) {
                     $oldItems[]     = clone $this->_current;
                     $this->_current = $this->_current->getParent();
+
+                    // use a lower level group
+                    $this->_group = array_pop($groupStack);
                 }
 
                 // we found the stopper, so stop the tag
                 $this->_current->setStopper($token['tag']);
                 $this->_removeFromSearchedStoppers($this->_current);
                 $this->_current = $this->_current->getParent();
+                $this->_group   = array_pop($groupStack);
 
                 // add the old items again if there are any
                 if (!empty($oldItems)) {
@@ -382,6 +395,10 @@ class Bbcode implements Parser
                         $this->_current->addChild($item);
                         $item->setParent($this->_current);
                         $this->_current = $item;
+
+                        // re-add the group
+                        $groupStack[] = $this->_group;
+                        $this->_group = $this->_getGroup($item->getName());
                     }
                 }
             } else {
@@ -404,7 +421,7 @@ class Bbcode implements Parser
                             array(),
                             $this->_current
                         ));
-                    } elseif ($this->_checkTagAllowed($token)) {
+                    } elseif (!$this->_checkTagAllowed($token)) {
                         // TODO: expand this to using groups for the context-awareness
                         $this->_current->addChild(new Token(
                             $token['tag'],
@@ -423,6 +440,10 @@ class Bbcode implements Parser
                             $this->_current
                         );
                         $this->_current->addChild($child);
+
+                        // set the new group
+                        $groupStack[] = $this->_group;
+                        $this->_group = $this->_getGroup($token['name']);
 
                         // add stoppers for this tag, if its has stoppers
                         if ($this->_getType($token['name']) == self::TYPE_DEFAULT) {
@@ -448,20 +469,6 @@ class Bbcode implements Parser
     }
 
     /**
-     * Check if a tag is allowed in the current context
-     *
-     * @todo Use groups to determine if tags are allowed in the current context
-     *
-     * @param array $token
-     *
-     * @return bool
-     */
-    protected function _checkTagAllowed(array $token)
-    {
-        return false;
-    }
-
-    /**
      * Check if there is a tag declaration, and if it isnt there, add it
      *
      * @param string $name
@@ -476,9 +483,43 @@ class Bbcode implements Parser
                 'stoppers' => array(
                     '[/' . $name . ']',
                     '[/]'
-                )
+                ),
+                'group' => $this->_defaultGroup
             );
         }
+    }
+
+    /**
+     * Get the group for a token
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function _getGroup($name)
+    {
+        $this->_checkTagDeclaration($name);
+
+        return $this->_tags[$name]['group'];
+    }
+
+    /**
+     * Check if a tag is allowed in the current context
+     *
+     * @todo Use groups to determine if tags are allowed in the current context
+     *
+     * @param array $token
+     *
+     * @return bool
+     */
+    protected function _checkTagAllowed(array $token)
+    {
+        if (in_array($this->_getGroup($token['name']), $this->_groups[$this->_group])) {
+            return true;
+        }
+
+        // fallback for not allowed
+        return false;
     }
 
     /**

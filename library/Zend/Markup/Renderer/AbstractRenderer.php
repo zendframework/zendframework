@@ -71,34 +71,6 @@ abstract class AbstractRenderer
      */
     protected $_encoding = 'UTF-8';
 
-    /**
-     * Groups configuration
-     *
-     * An example of the format for this array:
-     *
-     * <code>
-     * array(
-     *     'block'  => array('inline', 'block'),
-     *     'inline' => array('inline')
-     * )
-     * </code>
-     *
-     * This example shows two groups, block and inline. Elements who are in the
-     * block group, allow elements from the inline and block groups inside
-     * them. But elements from the inline group, only allow elements from the
-     * inline group inside them.
-     *
-     * @var array
-     */
-    protected $_groups = array();
-
-    /**
-     * The current group
-     *
-     * @var string
-     */
-    protected $_group;
-
 
     /**
      * Constructor
@@ -263,30 +235,6 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Render the content of a token.
-     *
-     * This method renders a token, and sets the correct group and filter.
-     *
-     * @todo Apply setting of the correct filters.
-     *
-     * @param \Zend\Markup\Token $token
-     * @param \Zend\Markup\Renderer\Markup $markup
-     *
-     * @return string
-     */
-    protected function _renderContent(Token $token, Markup $markup)
-    {
-        $oldGroup     = $this->_group;
-        $this->_group = $markup->getGroup();
-
-        $value = $this->_render($token);
-
-        $this->_group = $oldGroup;
-
-        return $value;
-    }
-
-    /**
      * Execute the token
      *
      * @param  \Zend\Markup\Token $token
@@ -304,13 +252,7 @@ abstract class AbstractRenderer
 
                 $markup = $this->_markups[$token->getName()];
 
-                // check if the markup is allowed here
-                if (!in_array($markup->getGroup(), $this->_groups[$this->_group])) {
-                    // TODO: apply filters
-                    return $token->getContent() . $this->_render($token) . $token->getStopper();
-                }
-
-                return $markup($token, $this->_renderContent($token, $markup));
+                return $markup($token, $this->_render($token));
                 break;
             case Token::TYPE_NONE:
             default:

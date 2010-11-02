@@ -47,17 +47,10 @@ class Html extends AbstractRenderer
      */
     protected function _loadDefaultConfig()
     {
-        $this->_groups = array(
-            'block'  => array('inline', 'block'),
-            'inline' => array('inline')
-        );
-
-        $this->_group  = 'block';
-
         $this->addMarkup('code', new Markup\Code());
         $this->addMarkup('img', new Markup\Img());
         $this->addMarkup('url', new Markup\Url());
-        $this->addMarkup('b', new Markup\Replace('strong', 'inline'));
-        $this->addMarkup('i', new Markup\Replace('em', 'inline'));
+        $this->addMarkup('b', new Markup\Replace('strong'));
+        $this->addMarkup('i', new Markup\Replace('em'));
     }
 }

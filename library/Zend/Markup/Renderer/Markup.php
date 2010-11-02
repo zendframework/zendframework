@@ -40,13 +40,6 @@ interface Markup
 {
 
     /**
-     * Get the group of this markup
-     *
-     * @return string
-     */
-    public function getGroup();
-
-    /**
      * Set the encoding on this markup
      *
      * @param string $encoding

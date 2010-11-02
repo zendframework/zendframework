@@ -96,7 +96,6 @@ abstract class AbstractHtml extends AbstractMarkup
      * Render some attributes
      *
      * @param  \Zend\Markup\Token $token
-     * @param  array $attributes
      * @return string
      */
     public function renderAttributes(Markup\Token $token)

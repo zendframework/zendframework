@@ -54,10 +54,9 @@ class Replace extends AbstractHtml
      * 
      * @return void
      */
-    public function __construct($replace, $group)
+    public function __construct($replace)
     {
         $this->_replace = $replace;
-        $this->_group   = $group;
     }
 
     /**

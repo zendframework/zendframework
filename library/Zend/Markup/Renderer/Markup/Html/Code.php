@@ -40,14 +40,6 @@ class Code extends AbstractHtml
 {
 
     /**
-     * Markup group
-     *
-     * @var string
-     */
-    protected $_group = 'block';
-
-
-    /**
      * Convert the token
      *
      * @param \Zend\Markup\Token $token

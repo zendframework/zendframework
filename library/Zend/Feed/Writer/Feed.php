@@ -36,7 +36,7 @@ use Zend\Date;
 * @uses \Zend\Feed\Writer\Feed\FeedAbstract
 * @uses \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
 * @uses \Zend\Feed\Writer\Renderer\Feed\RSS
-* @uses \Zend\Uri\Uri
+* @uses \Zend\Uri\Url
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

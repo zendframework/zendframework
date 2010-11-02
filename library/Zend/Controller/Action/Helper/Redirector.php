@@ -298,7 +298,7 @@ class Redirector extends AbstractHelper
         $params['action']     = $action;
 
         $router = $this->getFrontController()->getRouter();
-        $url    = $router->assemble($params, 'default', true);
+        $url    = $router->assemble($params, 'application', true);
 
         $this->_redirect($url);
     }
@@ -476,13 +476,6 @@ class Redirector extends AbstractHelper
      */
     public function redirectAndExit()
     {
-        if ($this->getCloseSessionOnExit()) {
-            // Close session, if started
-            if (isset($_SESSION) && !empty($_SESSION)) {
-                session_write_close();
-            }
-        }
-
         $this->getResponse()->sendHeaders();
         exit();
     }

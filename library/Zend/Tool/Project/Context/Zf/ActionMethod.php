@@ -23,7 +23,6 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
-
 use Zend\Tool\Project\Context\Context,
     Zend\CodeGenerator\Php,
     Zend\Tool\Project\Context\Exception;
@@ -34,7 +33,7 @@ use Zend\Tool\Project\Context\Context,
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\PHP\PHPFile
+ * @uses       \Zend\CodeGenerator\Php\PhpFile
  * @uses       \Zend\Reflection\ReflectionFile
  * @uses       \Zend\Tool\Project\Context\Exception
  * @uses       \Zend\Tool\Project\Context
@@ -185,7 +184,7 @@ class ActionMethod implements Context
             return false;
         }
 
-        $controllerCodeGenFile = PHP\PHPFile::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile = Php\PhpFile::fromReflectedFileName($controllerPath, true, true);
         $controllerCodeGenFile->getClass()->setMethod(array(
             'name' => $actionName . 'Action',
             'body' => $body
@@ -208,7 +207,7 @@ class ActionMethod implements Context
             return false;
         }
 
-        $controllerCodeGenFile = PHP\PHPFile::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile = Php\PhpFile::fromReflectedFileName($controllerPath, true, true);
         return $controllerCodeGenFile->getClass()->hasMethod($actionName . 'Action');
     }
 

@@ -26,7 +26,7 @@ printf("Supported DOCUMENT file formats (output) : %s%s",
     Helper::arrayDecorator($mailMerge->getDocumentFormats()), PHP_EOL);
 
 printf("Supported IMAGE file formats (output)    : %s%s",
-    Helper::arrayDecorator($mailMerge->getImageExportFormats()), PHP_EOL);
+    Helper::arrayDecorator($mailMerge->getImageFormats()), PHP_EOL);
 
 print PHP_EOL;
     

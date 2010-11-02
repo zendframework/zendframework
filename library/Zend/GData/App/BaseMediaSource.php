@@ -113,7 +113,7 @@ abstract class BaseMediaSource implements MediaSource
     {
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method));
+            return $this->$method();
         } else if (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
@@ -131,12 +131,13 @@ abstract class BaseMediaSource implements MediaSource
      *
      * @param string $name
      * @param string $value
+     * @return void
      */
     public function __set($name, $val)
     {
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method), $val);
+            $this->$method($val);
         } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {

@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
-use Zend\CodeGenerator\PHP;
+use Zend\CodeGenerator\Php;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -31,9 +31,9 @@ use Zend\CodeGenerator\PHP;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\PHP\PHPClass
- * @uses       \Zend\CodeGenerator\PHP\PHPFile
- * @uses       \Zend\CodeGenerator\PHP\PHPMethod
+ * @uses       \Zend\CodeGenerator\Php\PhpClass
+ * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\CodeGenerator\Php\PhpMethod
  * @uses       \Zend\Filter\Word\DashToCamelCase
  * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
@@ -84,20 +84,20 @@ class TestLibraryFile extends \Zend\Tool\Project\Context\Filesystem\File
 
         $className = $filter->filter($this->_forClassName) . 'Test';
 
-        $codeGenFile = new PHP\PHPFile(array(
+        $codeGenFile = new Php\PhpFile(array(
             'requiredFiles' => array(
                 'PHPUnit/Framework/TestCase.php'
                 ),
             'classes' => array(
-                new PHP\PHPClass(array(
+                new Php\PhpClass(array(
                     'name' => $className,
                     'extendedClass' => 'PHPUnit_Framework_TestCase',
                     'methods' => array(
-                        new PHP\PHPMethod(array(
+                        new Php\PhpMethod(array(
                             'name' => 'setUp',
                             'body' => '        /* Setup Routine */'
                             )),
-                        new PHP\PHPMethod(array(
+                        new Php\PhpMethod(array(
                             'name' => 'tearDown',
                             'body' => '        /* Tear Down Routine */'
                             ))

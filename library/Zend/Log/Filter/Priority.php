@@ -53,7 +53,7 @@ class Priority extends AbstractFilter
      * @param  string   $operator  Comparison operator
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
-    public function __construct($priority, $operator = \NULL)
+    public function __construct($priority, $operator = null)
     {
         if (! is_integer($priority)) {
             throw new \Zend\Log\Exception\InvalidArgumentException('Priority must be an integer');
@@ -88,7 +88,7 @@ class Priority extends AbstractFilter
         }
         
         return new self(
-            $config['priority'], 
+            (int) $config['priority'], 
             $config['operator']
         );
     }

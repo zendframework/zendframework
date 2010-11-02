@@ -24,6 +24,7 @@
 namespace Zend\Feed\Writer;
 use Zend\Uri;
 use Zend\Date;
+use Zend\Validator;
 
 /**
 * @uses \Zend\Date\Date
@@ -31,8 +32,9 @@ use Zend\Date;
 * @uses \Zend\Feed\Writer\Writer
 * @uses \Zend\Feed\Writer\Entry
 * @uses \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
-* @uses \Zend\Feed\Writer\Renderer\Feed\RSS
-* @uses \Zend\Uri\Uri
+* @uses \Zend\Feed\Writer\Renderer\Feed\Rss
+* @uses \Zend\Uri\Url
+* @uses \Zend\Validator\EmailAddress
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -266,10 +268,43 @@ class AbstractFeed
     public function setId($id)
     {
         if ((empty($id) || !is_string($id) || !Uri\Url::validate($id)) &&
-        !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $id)) {
+        !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $id)
+        && !$this->_validateTagUri($id)) {
             throw new Exception('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->_data['id'] = $id;
+    }
+    
+    /**
+     * Validate a URI using the tag scheme (RFC 4151)
+     *
+     * @param string $id
+     * @return bool
+     */
+    protected function _validateTagUri($id)
+    {
+        if (preg_match('/^tag:(?<name>.*),(?<date>\d{4}-?\d{0,2}-?\d{0,2}):(?<specific>.*)(.*:)*$/', $id, $matches)) {
+            $dvalid = false;
+            $nvalid = false;
+            $date = $matches['date'];
+            $d6 = strtotime($date);
+            if ((strlen($date) == 4) && $date <= date('Y')) {
+                $dvalid = true;
+            } elseif ((strlen($date) == 7) && ($d6 < strtotime("now"))) {
+                $dvalid = true;
+            } elseif ((strlen($date) == 10) && ($d6 < strtotime("now"))) {
+                $dvalid = true;
+            }
+            $validator = new Validator\EmailAddress;
+            if ($validator->isValid($matches['name'])) {
+                $nvalid = true;
+            } else {
+                $nvalid = $validator->isValid('info@' . $matches['name']);
+            }
+            return $dvalid && $nvalid;
+
+        }
+        return false;
     }
 
     /**

@@ -93,7 +93,7 @@ class Markup
      * @param  array $options
      * @return \Zend\Markup\Renderer\AbstractRenderer
      */
-    public static function factory($parser, $renderer = 'HTML', array $options = array())
+    public static function factory($parser, $renderer = 'Html', array $options = array())
     {
         $parser         = self::getParserBroker()->load($parser);
         $rendererBroker = self::getRendererBroker();

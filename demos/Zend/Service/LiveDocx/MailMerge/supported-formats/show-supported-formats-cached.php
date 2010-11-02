@@ -47,7 +47,7 @@ if (! $formats = $cache->load($cacheId)) {
     
     $formats->template = $mailMerge->getTemplateFormats();
     $formats->document = $mailMerge->getDocumentFormats();
-    $formats->image    = $mailMerge->getImageExportFormats();
+    $formats->image    = $mailMerge->getImageFormats();
     
     $cache->save($formats, $cacheId);
     

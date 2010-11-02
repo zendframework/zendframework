@@ -30,9 +30,9 @@ namespace Zend\Tool\Project\Context\Zf;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\PHP\PHPClass
- * @uses       \Zend\CodeGenerator\PHP\PHPFile
- * @uses       \Zend\CodeGenerator\PHP\PHPMethod
+ * @uses       \Zend\CodeGenerator\Php\PhpClass
+ * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\CodeGenerator\Php\PhpMethod
  * @uses       \Zend\Filter\Word\DashToCamelCase
  * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
@@ -120,14 +120,14 @@ class ProjectProviderFile extends \Zend\Tool\Project\Context\Filesystem\File
 
         $className = $filter->filter($this->_projectProviderName) . 'Provider';
 
-        $class = new \Zend\CodeGenerator\PHP\PHPClass(array(
+        $class = new \Zend\CodeGenerator\Php\PhpClass(array(
             'name' => $className,
-            'extendedClass' => 'Zend_Tool_Project_Provider_Abstract'
+            'extendedClass' => '\Zend\Tool\Project\Provider\AbstractProvider'
             ));
 
         $methods = array();
         foreach ($this->_actionNames as $actionName) {
-            $methods[] = new \Zend\CodeGenerator\PHP\PHPMethod(array(
+            $methods[] = new \Zend\CodeGenerator\Php\PhpMethod(array(
                 'name' => $actionName,
                 'body' => '        /** @todo Implementation */'
                 ));
@@ -137,11 +137,7 @@ class ProjectProviderFile extends \Zend\Tool\Project\Context\Filesystem\File
             $class->setMethods($methods);
         }
 
-        $codeGenFile = new \Zend\CodeGenerator\PHP\PHPFile(array(
-            'requiredFiles' => array(
-                'Zend/Tool/Project/Provider/Abstract.php',
-                'Zend/Tool/Project/Provider/Exception.php'
-                ),
+        $codeGenFile = new \Zend\CodeGenerator\Php\PhpFile(array(
             'classes' => array($class)
             ));
 

@@ -227,7 +227,7 @@ $errorMessage = null;
 
 try {
     $microtime = microtime(true);
-    $mailMerge = new MailMerge(
+    $mailMerge = new Zend_Service_LiveDocx_MailMerge(
         array (
             'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
             'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD

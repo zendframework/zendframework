@@ -296,6 +296,7 @@ abstract class Action implements ActionController
             $dispatcher = Front::getInstance()->getDispatcher();
             $wordDelimiters = $dispatcher->getWordDelimiter();
             $pathDelimiters = $dispatcher->getPathDelimiter();
+			$pathDelimiters = array($pathDelimiters, '_');
             $this->_delimiters = array_unique(array_merge($wordDelimiters, (array) $pathDelimiters));
         }
 

@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Controller\Action\Helper;
-use Zend\Session;
+use Zend\Session,
+    Zend\Stdlib\SplQueue;
 
 /**
  * Flash Messenger - implement session-based messages
@@ -76,8 +77,15 @@ class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Coun
     {
         if (!self::$_session instanceof Session\Container) {
             self::$_session = new Session\Container($this->getName());
+
+            // Should not modify the iterator while iterating; aggregate 
+            // namespaces so they may be deleted after retrieving messages.
+            $namespaces = array();
             foreach (self::$_session as $namespace => $messages) {
                 self::$_messages[$namespace] = $messages;
+                $namespaces[] = $namespace;
+            }
+            foreach ($namespaces as $namespace) {
                 unset(self::$_session->{$namespace});
             }
         }
@@ -132,11 +140,13 @@ class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Coun
             self::$_session->setExpirationHops(1, null, true);
         }
 
-        if (!is_array(self::$_session->{$this->_namespace})) {
-            self::$_session->{$this->_namespace} = array();
+        if (!isset(self::$_session->{$this->_namespace})
+            || !(self::$_session->{$this->_namespace} instanceof SplQueue)
+        ) {
+            self::$_session->{$this->_namespace} = new SplQueue();
         }
 
-        self::$_session->{$this->_namespace}[] = $message;
+        self::$_session->{$this->_namespace}->push($message);
 
         return $this;
     }
@@ -159,7 +169,7 @@ class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Coun
     public function getMessages()
     {
         if ($this->hasMessages()) {
-            return self::$_messages[$this->_namespace];
+            return self::$_messages[$this->_namespace]->toArray();
         }
 
         return array();
@@ -200,7 +210,7 @@ class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Coun
     public function getCurrentMessages()
     {
         if ($this->hasCurrentMessages()) {
-            return self::$_session->{$this->_namespace};
+            return self::$_session->{$this->_namespace}->toArray();
         }
 
         return array();

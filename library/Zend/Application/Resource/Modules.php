@@ -71,7 +71,7 @@ class Modules extends AbstractResource
         $default = $front->getDefaultModule();
         $curBootstrapClass = get_class($bootstrap);
         foreach ($modules as $module => $moduleDirectory) {
-            $bootstrapClass = $this->_formatModuleName($module) . '_Bootstrap';
+            $bootstrapClass = $this->_formatModuleName($module) . '\Bootstrap';
             if (!class_exists($bootstrapClass, false)) {
                 $bootstrapPath  = dirname($moduleDirectory) . '/Bootstrap.php';
                 if (file_exists($bootstrapPath)) {

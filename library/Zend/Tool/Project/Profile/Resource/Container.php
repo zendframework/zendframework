@@ -184,7 +184,7 @@ class Container implements \RecursiveIterator, \Countable
             throw new Exception\InvalidArgumentException('Context must be of type string or Zend_Tool_Project_Context_Interface.');
         }
 
-        $newResource = new Resource($context);
+        $newResource = new Profile\Resource($context);
 
         if ($attributes) {
             $newResource->setAttributes($attributes);

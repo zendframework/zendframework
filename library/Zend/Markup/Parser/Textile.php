@@ -560,4 +560,28 @@ class Textile implements Parser
         return $attributes;
     }
 
+    /**
+     * Build a tree with a certain strategy
+     *
+     * @todo IMPLEMENT
+     * @param array $tokens
+     * @param string $strategy
+     *
+     * @return \Zend\Markup\TokenList
+     */
+    public function buildTree(array $tokens, $strategy = 'default')
+    {
+    }
+
+    /**
+     * Tokenize a string
+     *
+     * @param string $value
+     *
+     * @todo IMPLEMENT
+     * @return array
+     */
+    public function tokenize($value)
+    {
+    }
 }

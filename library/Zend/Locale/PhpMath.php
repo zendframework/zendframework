@@ -40,15 +40,15 @@ class PhpMath extends Math
     public static function disable()
     {
         self::$_bcmathDisabled = true;
-        self::$add   = 'Zend\\Locale\\PhpMath::Add';
-        self::$sub   = 'Zend\\Locale\\PhpMath::Sub';
-        self::$pow   = 'Zend\\Locale\\PhpMath::Pow';
-        self::$mul   = 'Zend\\Locale\\PhpMath::Mul';
-        self::$div   = 'Zend\\Locale\\PhpMath::Div';
-        self::$comp  = 'Zend\\Locale\\PhpMath::Comp';
-        self::$sqrt  = 'Zend\\Locale\\PhpMath::Sqrt';
-        self::$mod   = 'Zend\\Locale\\PhpMath::Mod';
-        self::$scale = 'Zend\\Locale\\PhpMath::Scale';
+        self::$add   = 'Zend\Locale\PhpMath::Add';
+        self::$sub   = 'Zend\Locale\PhpMath::Sub';
+        self::$pow   = 'Zend\Locale\PhpMath::Pow';
+        self::$mul   = 'Zend\Locale\PhpMath::Mul';
+        self::$div   = 'Zend\Locale\PhpMath::Div';
+        self::$comp  = 'Zend\Locale\PhpMath::Comp';
+        self::$sqrt  = 'Zend\Locale\PhpMath::Sqrt';
+        self::$mod   = 'Zend\Locale\PhpMath::Mod';
+        self::$scale = 'Zend\Locale\PhpMath::Scale';
 
         self::$defaultScale     = 0;
         self::$defaultPrecision = 1;

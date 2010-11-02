@@ -370,7 +370,7 @@ class ReflectionFile implements \Reflector
                 // Name of something
                 case T_STRING:
                     if ($functionTrapped) {
-                        $this->_functions[] = ($this->_namespace) ? $this->_namespace . $value : $value;;
+                        $this->_functions[] = ($this->_namespace) ? $this->_namespace . $value : $value;
                         $functionTrapped = false;
                     } elseif ($classTrapped) {
                         $this->_classes[] = ($this->_namespace) ? $this->_namespace . $value : $value;

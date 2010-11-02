@@ -145,7 +145,7 @@ class DiffieHellmanTest extends \PHPUnit_Framework_TestCase
 
     public function testGenerateKeysWithUnsetPrivateKey()
     {
-        $dh = new Zend_Crypt_DiffieHellman(563, 5);
+        $dh = new DiffieHellman(563, 5);
         $dh->generateKeys();
         $privateKey = $dh->getPrivateKey();
         $this->assertNotNull($privateKey);

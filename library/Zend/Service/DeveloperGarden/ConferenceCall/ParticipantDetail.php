@@ -20,7 +20,7 @@
  */
 
 /**
- * @uses       Zend_Validate_EmailAddress
+ * @uses       Zend\Validator\EmailAddress
  * @uses       Zend_Service_DeveloperGarden_Exception
  * @category   Zend
  * @package    Zend_Service
@@ -158,7 +158,7 @@ class Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
      */
     public function setEmail($email)
     {
-        $validator = new Zend_Validate_EmailAddress();
+        $validator = new Zend\Validator\EmailAddress();
 
         if (!$validator->isValid($email)) {
             throw new Zend_Service_DeveloperGarden_Exception('Not a valid e-mail address.');

@@ -206,8 +206,6 @@ class StringLength extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the string length of $value is at least the min option and
      * no greater than the max option (when the max option is not null).
      *

@@ -31,7 +31,7 @@ use Zend\Http,
  *
  * @uses       Zend_Http_Client
  * @uses       Zend\Service\AbstractService
- * @uses       Zend_Service_Exception
+ * @uses       Zend\Service\Exception
  * @uses       Zend_Uri
  * @uses       Zend_Version
  * @category   Zend
@@ -101,7 +101,7 @@ class Akismet extends \Zend\Service\AbstractService
      *
      * @param string $blogUrl
      * @return Zend_Service_Akismet
-     * @throws Zend_Service_Exception if invalid URL provided
+     * @throws Zend\Service\Exception if invalid URL provided
      */
     public function setBlogUrl($blogUrl)
     {
@@ -172,7 +172,7 @@ class Akismet extends \Zend\Service\AbstractService
      *
      * @param int $port
      * @return Zend_Service_Akismet
-     * @throws Zend_Service_Exception if non-integer value provided
+     * @throws Zend\Service\Exception if non-integer value provided
      */
     public function setPort($port)
     {
@@ -201,7 +201,7 @@ class Akismet extends \Zend\Service\AbstractService
      *
      * @param string $userAgent
      * @return Zend_Service_Akismet
-     * @throws Zend_Service_Exception with invalid user agent string
+     * @throws Zend\Service\Exception with invalid user agent string
      */
     public function setUserAgent($userAgent)
     {
@@ -273,7 +273,7 @@ class Akismet extends \Zend\Service\AbstractService
      * @param string $path
      * @param array $params
      * @return Zend_Http_Response
-     * @throws Zend_Service_Exception if missing user_ip or user_agent fields
+     * @throws Zend\Service\Exception if missing user_ip or user_agent fields
      */
     protected function _makeApiCall($path, $params)
     {
@@ -312,7 +312,7 @@ class Akismet extends \Zend\Service\AbstractService
      *
      * @param array $params
      * @return boolean
-     * @throws Zend_Service_Exception with invalid API key
+     * @throws Zend\Service\Exception with invalid API key
      */
     public function isSpam($params)
     {
@@ -342,7 +342,7 @@ class Akismet extends \Zend\Service\AbstractService
      *
      * @param array $params
      * @return void
-     * @throws Zend_Service_Exception with invalid API key
+     * @throws Zend\Service\Exception with invalid API key
      */
     public function submitSpam($params)
     {

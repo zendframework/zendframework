@@ -19,31 +19,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * Test helpers
- */
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_SharedKeyCredentialsTest::main');
-}
-
 /** Zend_Service_WindowsAzure_Credentials_SharedKey */
 
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage UnitTests
+ * @group      Zend_Service
+ * @group      Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_WindowsAzure_Credentials_SharedKeyTest extends PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_Credentials_SharedKeyTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Test signing for devstore with root path
      */
@@ -157,9 +145,4 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyTest extends PHPUnit_Framew
         $this->assertEquals(2, count($signedHeaders));
         $this->assertEquals("SharedKey testing:TEYBENKs+6laykL+zCxlIbUT9v019rtMWECYwgP/OuU=", $signedHeaders["Authorization"]);
     }
-}
-
-// Call Zend_Service_WindowsAzure_Credentials_SharedKeyTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_Credentials_SharedKeyTest::main") {
-    Zend_Service_WindowsAzure_Credentials_SharedKeyTest::main();
 }

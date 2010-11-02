@@ -49,12 +49,6 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      */
     protected $_server;
 
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Amf_AuthTest");
-        \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         $this->_server = new Amf\Server();

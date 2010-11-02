@@ -25,7 +25,7 @@
 namespace Zend\Service\Delicious;
 
 /**
- * @uses       Zend_Service_Exception
+ * @uses       Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious

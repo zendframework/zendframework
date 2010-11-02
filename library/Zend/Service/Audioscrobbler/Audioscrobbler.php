@@ -29,7 +29,7 @@ use Zend\Http;
 /**
  * @uses       Zend_Http_Client
  * @uses       Zend_Http_Client_Exception
- * @uses       Zend_Service_Exception
+ * @uses       Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Audioscrobbler

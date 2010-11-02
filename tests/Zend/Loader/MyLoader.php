@@ -20,12 +20,6 @@
  */
 
 /**
- * @see Zend_Loader
- */
-
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-/**
  * Static methods for loading classes and files.
  *
  * @category   Zend
@@ -34,7 +28,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Loader_MyLoader extends Zend_Loader
 {
     public static function loadClass($class, $dirs = null)

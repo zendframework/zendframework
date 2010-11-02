@@ -31,7 +31,7 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_DeveloperGarden_Client_Soap extends Zend_Soap_Client
+class Zend_Service_DeveloperGarden_Client_Soap extends Zend\Soap\Client
 {
     /**
      * class with credential interface

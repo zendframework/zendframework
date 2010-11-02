@@ -438,7 +438,3 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_View_Helper_HeadLinkTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadLinkTest::main") {
-    \Zend_View_Helper_HeadLinkTest::main();
-}

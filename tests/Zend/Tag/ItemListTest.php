@@ -38,7 +38,6 @@ use Zend\Tag,
  */
 class ItemListTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testArrayAccessAndCount()
     {
         $list = new Tag\ItemList();

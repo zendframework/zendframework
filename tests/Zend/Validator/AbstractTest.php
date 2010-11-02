@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -28,26 +28,14 @@ use Zend\Translator;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
+ * @group      Zend_Validator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
  */
 class AbstractTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs this test suite
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite('Zend_Validate_AbstractTest');
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-
     /**
      * Creates a new validation object for each test method
      *

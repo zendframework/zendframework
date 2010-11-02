@@ -25,8 +25,6 @@
 namespace ZendTest\Db\TestUtil;
 use Zend\DB;
 
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 /**
  * @category   Zend
  * @package    Zend_Db

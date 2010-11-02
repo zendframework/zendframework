@@ -156,8 +156,3 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('<ul class="custom-class"><li></li></ul>', $acutallHtml);
     }
 }
-
-// Call Zend_View_Helper_FormErrorsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormErrorsTest::main") {
-    \Zend_View_Helper_FormErrorsTest::main();
-}

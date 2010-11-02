@@ -179,8 +179,6 @@ class PostCode extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is a valid postalcode
      *
      * @param  string $value

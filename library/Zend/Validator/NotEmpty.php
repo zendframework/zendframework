@@ -148,8 +148,6 @@ class NotEmpty extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is not an empty value.
      *
      * @param  string $value

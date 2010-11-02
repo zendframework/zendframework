@@ -37,7 +37,6 @@ use Zend\Tag,
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testConstuctor()
     {
         $tag = new Tag\Item(array(

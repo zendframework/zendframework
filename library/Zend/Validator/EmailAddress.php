@@ -116,8 +116,8 @@ class EmailAddress extends AbstractValidator
      * Instantiates hostname validator for local use
      *
      * The following option keys are supported:
-     * 'hostname' => A hostname validator, see Zend_Validate_Hostname
-     * 'allow'    => Options for the hostname validator, see Zend_Validate_Hostname::ALLOW_*
+     * 'hostname' => A hostname validator, see Zend\Validator\Hostname
+     * 'allow'    => Options for the hostname validator, see Zend\Validator\Hostname::ALLOW_*
      * 'mx'       => If MX check should be enabled, boolean
      * 'deep'     => If a deep MX check should be done, boolean
      *

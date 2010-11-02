@@ -88,7 +88,7 @@ abstract class AbstractDb extends AbstractValidator
     protected $_adapter = null;
 
     /**
-     * Provides basic configuration for use with Zend_Validate_Db Validators
+     * Provides basic configuration for use with Zend\Validator\Db Validators
      * Setting $exclude allows a single record to be excluded from matching.
      * Exclude can either be a String containing a where clause, or an array with `field` and `value` keys
      * to define the where clause added to the sql.

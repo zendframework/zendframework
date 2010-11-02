@@ -258,8 +258,3 @@ class FigletTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($compareString, $output);
     }
 }
-
-// Call Zend_Text_FigletTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Text_FigletTest::main") {
-    \Zend_Text_FigletTest::main();
-}

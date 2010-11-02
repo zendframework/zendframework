@@ -35,7 +35,6 @@ use Zend\Text;
  */
 class MultiByteTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Standard cut tests
      */

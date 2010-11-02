@@ -436,7 +436,3 @@ document.write(bar.strlen());');
     }
 }
 
-// Call Zend_View_Helper_HeadScriptTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadScriptTest::main") {
-    \Zend_View_Helper_HeadScriptTest::main();
-}

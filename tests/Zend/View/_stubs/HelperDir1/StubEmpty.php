@@ -24,6 +24,4 @@
  */
 namespace ZendTest\View\_stubs\HelperDir1;
 
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 // used to test when helper file is loaded but class is not within

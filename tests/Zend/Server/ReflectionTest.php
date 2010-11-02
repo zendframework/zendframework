@@ -66,7 +66,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectClass2()
     {
-        $reflection = Reflection\Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', false, 'zsr');
+        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
@@ -96,7 +96,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectFunction2()
     {
-        $reflection = Reflection\Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction', false, 'zsr');
+        $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 }

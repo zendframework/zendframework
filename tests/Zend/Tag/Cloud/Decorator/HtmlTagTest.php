@@ -29,11 +29,6 @@ use	Zend\Tag,
 	Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Tag
  * @subpackage UnitTests
@@ -44,12 +39,6 @@ use	Zend\Tag,
  */
 class HtmlTagTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testDefaultOutput()
     {
         $decorator = new Decorator\HtmlTag();
@@ -201,4 +190,3 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
         return $list;
     }
 }
-

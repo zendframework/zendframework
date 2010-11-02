@@ -1,5 +1,9 @@
 <?php
 /**
+ * @todo: Shouldn't this assign copyright to Zend?
+ */
+
+/**
  * Phly - PHp LibrarY
  * 
  * @category   Phly
@@ -15,6 +19,14 @@ use Zend\SignalSlot\GlobalSignals as SignalSlot,
     Zend\SignalSlot\ResponseCollection,
     Zend\Stdlib\SignalHandler;
 
+/**
+ * @category   Zend
+ * @package    Zend_SignalSlot
+ * @subpackage UnitTests
+ * @group      Zend_SignalSlot
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()

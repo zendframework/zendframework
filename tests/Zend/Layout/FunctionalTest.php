@@ -75,4 +75,3 @@ class FunctionalTest extends \Zend\Test\PHPUnit\ControllerTestCase
         $this->assertEquals(trim($this->response->getBody()), "[DEFAULT_LAYOUT_START]\n[DEFAULT_LAYOUT_START]\n[DEFAULT_LAYOUT_END]\n(ErrorController::errorAction output)[DEFAULT_LAYOUT_END]");
     }
 }
-

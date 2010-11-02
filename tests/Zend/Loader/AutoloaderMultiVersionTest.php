@@ -23,6 +23,9 @@ namespace ZendTest\Loader;
 
 use Zend\Loader\Autoloader;
 
+require_once "PHPUnit/Framework/Error/Notice.php";
+require_once "PHPUnit/Framework/TestFailure.php";
+
 /**
  * @category   Zend
  * @package    Zend_Loader

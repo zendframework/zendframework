@@ -287,9 +287,3 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
        $this->assertNotContains('checked="checked"', $test);
    }
 }
-
-// Call Zend_View_Helper_FormCheckboxTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormCheckboxTest::main") {
-    \Zend_View_Helper_FormCheckboxTest::main();
-}
-

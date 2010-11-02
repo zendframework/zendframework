@@ -36,7 +36,6 @@ use Zend\Text\Table\Decorator;
  */
 class TableTest extends \PHPUnit_Framework_TestCase
 {
-
     public function tearDown()
     {
         Table\Table::setInputCharset('utf-8');
@@ -428,9 +427,4 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($chars, '+++-++++|++');
     }
-}
-
-// Call Zend_Text_TableTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Text_TableTest::main") {
-    \Zend_Text_TableTest::main();
 }

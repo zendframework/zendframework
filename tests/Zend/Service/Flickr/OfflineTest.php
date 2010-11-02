@@ -91,12 +91,12 @@ class Zend_Service_Flickr_OfflineTest extends PHPUnit_Framework_TestCase
         /**
          * @see Zend_Http_Client_Adapter_Socket
          */
-        $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
+        $this->_httpClientAdapterSocket = new Zend\Http\Client\Adapter\Socket();
 
         /**
          * @see Zend_Http_Client_Adapter_Test
          */
-        $this->_httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
+        $this->_httpClientAdapterTest = new Zend\Http\Client\Adapter\Test();
     }
 
     /**

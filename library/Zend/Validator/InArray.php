@@ -172,8 +172,6 @@ class InArray extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is contained in the haystack option. If the strict
      * option is true, then the type of $value is also checked.
      *

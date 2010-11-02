@@ -149,8 +149,6 @@ class Sha1 extends Hash
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the given file confirms the set hash
      *
      * @param  string $value Filename to check for hash

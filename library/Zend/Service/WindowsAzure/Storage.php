@@ -20,8 +20,8 @@
  */
 
 /**
- * @uses       Zend_Http_Client
- * @uses       Zend_Http_Response
+ * @uses       Zend\Http\Client
+ * @uses       Zend\Http\Response
  * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
  * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
  * @uses       Zend_Service_WindowsAzure_Exception
@@ -186,7 +186,7 @@ class Zend_Service_WindowsAzure_Storage
 		
 		// Setup default Zend_Http_Client channel
 		$options = array(
-			'adapter' => 'Zend_Http_Client_Adapter_Proxy'
+			'adapter' => 'Zend\\Http\\Client\\Adapter\\Proxy'
 		);
 		if (function_exists('curl_init')) {
 			// Set cURL options if cURL is used afterwards
@@ -195,7 +195,7 @@ class Zend_Service_WindowsAzure_Storage
 					CURLOPT_TIMEOUT => 120,
 			);
 		}
-		$this->_httpClientChannel = new Zend_Http_Client(null, $options);
+		$this->_httpClientChannel = new Zend\Http\Client(null, $options);
 	}
 	
 	/**
@@ -203,7 +203,7 @@ class Zend_Service_WindowsAzure_Storage
 	 * 
 	 * @param Zend_Http_Client_Adapter_Interface|string $adapterInstance Adapter instance or adapter class name.
 	 */
-	public function setHttpClientChannel($adapterInstance = 'Zend_Http_Client_Adapter_Proxy')
+	public function setHttpClientChannel($adapterInstance = 'Zend\\Http\\Client\\Adapter\\Proxy')
 	{
 		$this->_httpClientChannel->setAdapter($adapterInstance);
 	}
@@ -320,7 +320,7 @@ class Zend_Service_WindowsAzure_Storage
 	protected function _performRequest(
 		$path = '/',
 		$queryString = '',
-		$httpVerb = Zend_Http_Client::GET,
+		$httpVerb = Zend\Http\Client::GET,
 		$headers = array(),
 		$forTableStorage = false,
 		$rawData = null,
@@ -380,7 +380,7 @@ class Zend_Service_WindowsAzure_Storage
 	 * @return object
 	 * @throws Zend_Service_WindowsAzure_Exception
 	 */
-	protected function _parseResponse(Zend_Http_Response $response = null)
+	protected function _parseResponse(Zend\Http\Response $response = null)
 	{
 		if ($response === null) {
 			throw new Zend_Service_WindowsAzure_Exception('Response should not be null.');

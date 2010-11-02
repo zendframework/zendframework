@@ -84,7 +84,7 @@ class Zend_Service_Nirvanix_Namespace_Base
         }
 
         if (! isset($options['httpClient'])) {
-            $options['httpClient'] = new Zend_Http_Client();
+            $options['httpClient'] = new Zend\Http\Client();
         }
         $this->_httpClient = $options['httpClient'];
     }
@@ -120,7 +120,7 @@ class Zend_Service_Nirvanix_Namespace_Base
         $this->_httpClient->resetParameters();
         $this->_httpClient->setParameterPost($params);
 
-        $httpResponse = $this->_httpClient->request(Zend_Http_Client::POST);
+        $httpResponse = $this->_httpClient->request(Zend\Http\Client::POST);
         return $this->_wrapResponse($httpResponse);
     }
 

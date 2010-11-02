@@ -141,8 +141,6 @@ class Callback extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the set callback returns
      * for the provided $value
      *

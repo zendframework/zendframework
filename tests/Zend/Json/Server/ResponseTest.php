@@ -114,7 +114,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
                        ->setId('foo')
                        ->setVersion('2.0');
         $json = $this->response->toJSON();
-        $test = Json\Json::decode($json);
+        $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
         $this->assertTrue(is_array($test));
         $this->assertTrue(array_key_exists('result', $test));
@@ -136,7 +136,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
                        ->setResult(true)
                        ->setError($error);
         $json = $this->response->toJSON();
-        $test = Json\Json::decode($json);
+        $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
         $this->assertTrue(is_array($test));
         $this->assertTrue(array_key_exists('result', $test));
@@ -153,7 +153,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->response->setResult(true)
                        ->setId('foo');
         $json = $this->response->__toString();
-        $test = Json\Json::decode($json);
+        $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
         $this->assertTrue(is_array($test));
         $this->assertTrue(array_key_exists('result', $test));

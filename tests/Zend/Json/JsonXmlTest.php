@@ -109,7 +109,7 @@ EOT;
         $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
 
         // Convert the JSON string into a PHP array.
-        $phpArray = Json\Json::decode($jsonContents);
+        $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 1 is NULL");
         // Test for one of the expected fields in the JSON result.
@@ -158,7 +158,7 @@ EOT;
         $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
 
         // Convert the JSON string into a PHP array.
-        $phpArray = Json\Json::decode($jsonContents);
+        $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 2 is NULL");
         // Test for one of the expected fields in the JSON result.
@@ -238,7 +238,7 @@ EOT;
         $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
 
         // Convert the JSON string into a PHP array.
-        $phpArray = Json\Json::decode($jsonContents);
+        $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 3 is NULL");
         // Test for one of the expected fields in the JSON result.
@@ -344,7 +344,7 @@ EOT;
         $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
 
         // Convert the JSON string into a PHP array.
-        $phpArray = Json\Json::decode($jsonContents);
+        $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 4 is NULL");
         // Test for one of the expected fields in the JSON result.
@@ -389,7 +389,7 @@ EOT;
         $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
 
         // Convert the JSON string into a PHP array.
-        $phpArray = Json\Json::decode($jsonContents);
+        $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 5 is NULL");
         // Test for one of the expected CDATA fields in the JSON result.
@@ -464,7 +464,7 @@ EOT;
         $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
 
         // Convert the JSON string into a PHP array.
-        $phpArray = Json\Json::decode($jsonContents);
+        $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 6 is NULL");
         // Test for one of the expected fields in the JSON result.

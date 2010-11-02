@@ -73,7 +73,7 @@ class JSON
      * @return mixed
      * @throws Zend\Json\Exception\RuntimeException
      */
-    public static function decode($encodedValue, $objectDecodeType = self::TYPE_ARRAY)
+    public static function decode($encodedValue, $objectDecodeType = self::TYPE_OBJECT)
     {
         $encodedValue = (string) $encodedValue;
         if (function_exists('json_decode') && self::$useBuiltinEncoderDecoder !== true) {

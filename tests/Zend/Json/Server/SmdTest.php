@@ -340,7 +340,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->toJSON();
-        $smd  = Json\Json::decode($json);
+        $smd  = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
         $this->validateServiceArray($smd, $options);
     }
 
@@ -349,7 +349,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->__toString();
-        $smd  = Json\Json::decode($json);
+        $smd  = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
         $this->validateServiceArray($smd, $options);
     }
 

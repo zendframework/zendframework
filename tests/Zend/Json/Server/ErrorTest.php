@@ -151,14 +151,14 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupError();
         $json = $this->error->toJSON();
-        $this->validateArray(Json\Json::decode($json));
+        $this->validateArray(Json\Json::decode($json, Json\Json::TYPE_ARRAY));
     }
 
     public function testCastingToStringShouldCastToJSON()
     {
         $this->setupError();
         $json = $this->error->__toString();
-        $this->validateArray(Json\Json::decode($json));
+        $this->validateArray(Json\Json::decode($json, Json\Json::TYPE_ARRAY));
     }
 
     public function setupError()

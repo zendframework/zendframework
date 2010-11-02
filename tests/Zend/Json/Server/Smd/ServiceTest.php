@@ -286,7 +286,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupSmdValidationObject();
         $json = $this->service->toJSON();
-        $smd  = \Zend\Json\Json::decode($json);
+        $smd  = \Zend\Json\Json::decode($json, \Zend\Json\Json::TYPE_ARRAY);
 
         $this->assertTrue(array_key_exists('foo', $smd));
         $this->assertTrue(is_array($smd['foo']));

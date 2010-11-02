@@ -147,7 +147,7 @@ class Decoder
      * {@link Zend_Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
      * @return mixed
      */
-    public static function decode($source, $objectDecodeType = Json::TYPE_ARRAY)
+    public static function decode($source, $objectDecodeType = Json::TYPE_OBJECT)
     {
         $decoder = new self($source, $objectDecodeType);
         return $decoder->_decodeValue();

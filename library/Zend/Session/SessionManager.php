@@ -333,13 +333,13 @@ class SessionManager extends AbstractManager
     public function isValid()
     {
         $validator = $this->getValidatorChain();
-        $return    = $validator->emitUntil(function($test) {
+        $responses = $validator->emitUntil(function($test) {
             return !$test;
         }, 'session.validate');
-        if (null === $return) {
+        if (null === $responses->last()) {
             return true;
         }
-        return (bool) $return;
+        return (bool) $responses->last();
     }
 
     /**

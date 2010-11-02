@@ -12,6 +12,7 @@
 
 namespace ZendTest\SignalSlot;
 use Zend\SignalSlot\GlobalSignals as SignalSlot,
+    Zend\SignalSlot\ResponseCollection,
     Zend\Stdlib\SignalHandler;
 
 class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
@@ -100,12 +101,13 @@ class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
     {
         SignalSlot::connect('foo.bar', 'strpos');
         SignalSlot::connect('foo.bar', 'strstr');
-        $value = SignalSlot::emitUntil(
+        $responses = SignalSlot::emitUntil(
             function ($value) { return (!$value); },
             'foo.bar',
             'foo', 'f'
         );
-        $this->assertSame(0, $value);
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertSame(0, $responses->last());
     }
 
     public function handleTestTopic($message)

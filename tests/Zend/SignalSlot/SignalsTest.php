@@ -9,6 +9,7 @@
 
 namespace ZendTest\SignalSlot;
 use Zend\SignalSlot\Signals,
+    Zend\SignalSlot\ResponseCollection,
     Zend\Stdlib\SignalHandler;
 
 /**
@@ -90,24 +91,38 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test message', $this->message);
     }
 
-    public function testEmitShouldReturnTheReturnValueOfTheLastInvokedHandler()
+    public function testEmitShouldReturnAllHandlerReturnValues()
     {
         $this->signals->connect('string.transform', 'trim');
         $this->signals->connect('string.transform', 'str_rot13');
-        $value = $this->signals->emit('string.transform', ' foo ');
-        $this->assertEquals(\str_rot13(' foo '), $value);
+        $responses = $this->signals->emit('string.transform', ' foo ');
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertEquals(2, $responses->count());
+        $this->assertEquals('foo', $responses->first());
+        $this->assertEquals(\str_rot13(' foo '), $responses->last());
     }
 
     public function testEmitUntilShouldReturnAsSoonAsCallbackReturnsTrue()
     {
         $this->signals->connect('foo.bar', 'strpos');
         $this->signals->connect('foo.bar', 'strstr');
-        $value = $this->signals->emitUntil(
+        $responses = $this->signals->emitUntil(
             array($this, 'evaluateStringCallback'), 
             'foo.bar',
             'foo', 'f'
         );
-        $this->assertSame(0, $value);
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertSame(0, $responses->last());
+    }
+
+    public function testEmitResponseCollectionContains()
+    {
+        $this->signals->connect('string.transform', 'trim');
+        $this->signals->connect('string.transform', 'str_rot13');
+        $responses = $this->signals->emit('string.transform', ' foo ');
+        $this->assertTrue($responses->contains('foo'));
+        $this->assertTrue($responses->contains(\str_rot13(' foo ')));
+        $this->assertFalse($responses->contains(' foo '));
     }
 
     public function handleTestSignal($message)

@@ -46,14 +46,14 @@ class File extends AbstractTransport
      *
      * @var string
      */
-    protected $_path;
+    protected $path;
 
     /**
      * Callback function generating a file name
      *
      * @var string|array|Closure
      */
-    protected $_callback;
+    protected $callback;
 
     /**
      * Constructor
@@ -89,10 +89,10 @@ class File extends AbstractTransport
     public function setOptions(array $options)
     {
         if (isset($options['path'])) {
-            $this->_path = $options['path'];
+            $this->path = $options['path'];
         }
         if (isset($options['callback'])) {
-            $this->_callback = $options['callback'];
+            $this->callback = $options['callback'];
         }
     }
 
@@ -105,29 +105,51 @@ class File extends AbstractTransport
      */
     protected function _sendMail()
     {
-        $file = $this->_path . DIRECTORY_SEPARATOR . call_user_func($this->_callback, $this);
+        $file = $this->getPath() . DIRECTORY_SEPARATOR . call_user_func($this->getCallback(), $this);
 
         if (!is_writable(dirname($file))) {
-            throw new Exception('Target directory ' . dirname($file)
-                . ' does not exist or not writable ');
+            throw new Exception\RuntimeException(sprintf(
+                'Target directory "%s" does not exist or is not writable',
+                dirname($file)
+            ));
         }
 
         $email = $this->header . $this->EOL . $this->body;
 
         if (!file_put_contents($file, $email)) {
-            throw new Exception('Unable to send mail');
+            throw new Exception\RuntimeException('Unable to send mail');
         }
     }
 
     /**
      * Returns the default callback for generating file names
      *
-     * @return Closure
+     * @return callback
      */
     public function getDefaultCallback()
     {
         return function($transport) {
             return 'ZendMail_' . time() . '_' . mt_rand() . '.tmp';
         };
+    }
+
+    /**
+     * Retrieve registered path
+     * 
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Get the registered callback for generating file names
+     * 
+     * @return callback
+     */
+    public function getCallback()
+    {
+        return $this->callback;
     }
 }

@@ -81,20 +81,19 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function testTransportSetup()
     {
-        try {
-            $transport = new Mail\Transport\File();
-        } catch (\Exception $e) {
-            $this->fail('Exception raised while creating file transport with no params');
-        }
+        $transport = new Mail\Transport\File();
 
-        try {
-            $transport = new Mail\Transport\File(array(
-                'path' => $this->_tmpdir,
-                'callback' => function(){return 'test';}
-            ));
-        } catch (\Exception $e) {
-            $this->fail('Exception raised while creating file transport with params');
-        }
+        $callback = function() {
+            return 'test';
+        };
+
+        $transport = new Mail\Transport\File(array(
+            'path'     => $this->_tmpdir,
+            'callback' => $callback,
+        ));
+
+        $this->assertEquals($this->_tmpdir, $transport->getPath());
+        $this->assertSame($callback, $transport->getCallback());
     }
 
     protected function _prepareMail()
@@ -110,18 +109,14 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function testNotWritablePathFailure()
     {
-        try {
-            $transport = new Mail\Transport\File(array(
-                'path' => $this->_tmpdir . '/not_existing/directory'
-            ));
+        $transport = new Mail\Transport\File(array(
+            'path' => $this->_tmpdir . '/not_existing/directory'
+        ));
 
-            $mail = $this->_prepareMail();
-            $mail->send($transport);
+        $mail = $this->_prepareMail();
 
-        } catch (Mail\Transport\Exception $e) {
-            return; // test is ok
-        }
-        $this->fail('No exception raised with not writable path set');
+        $this->setExpectedException('Zend\Mail\Transport\Exception\RuntimeException', 'not writable');
+        $mail->send($transport);
     }
 
     public function testTransportSendMail()

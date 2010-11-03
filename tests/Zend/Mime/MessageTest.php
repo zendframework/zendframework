@@ -26,10 +26,6 @@ namespace ZendTest\Mime;
 use Zend\Mime;
 
 /**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Mime
  * @subpackage UnitTests

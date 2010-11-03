@@ -96,56 +96,40 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFunction()
     {
-        try {
-            $this->_server->addFunction('ZendTest\\XmlRpc\\testFunction', 'zsr');
-        } catch (XmlRpc\Exception $e) {
-            $this->fail('Attachment should have worked');
-        }
+        
+        $this->_server->addFunction('ZendTest\\XmlRpc\\testFunction', 'zsr');
 
         $methods = $this->_server->listMethods();
         $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction', $methods), var_export($methods, 1));
 
-        try {
-            $this->_server->addFunction('nosuchfunction');
-            $this->fail('nosuchfunction() should not exist and should throw an exception');
-        } catch (XmlRpc\Exception $e) {
-            // do nothing
-        }
-
-        $server = new Server();
-        try {
-            $server->addFunction(
-                array(
-                    'ZendTest\\XmlRpc\\testFunction',
-                    'ZendTest\\XmlRpc\\testFunction2',
-                ),
-                'zsr'
-            );
-        } catch (XmlRpc\Exception $e) {
-            $this->fail('Error attaching array of functions: ' . $e->getMessage());
-        }
-        $methods = $server->listMethods();
+        $methods = $this->_server->listMethods();
         $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction', $methods));
         $this->assertTrue(in_array('zsr.ZendTest\\XmlRpc\\testFunction2', $methods));
     }
-
+    
+    public function testAddFunctionThrowsExceptionOnInvalidInput()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to attach function; invalid');
+        $this->_server->addFunction('nosuchfunction');
+    }
+    
+    public function testAddFunctionThrowsExceptionOnInvalidArrayInput()
+    {
+        //$this->setExpectedException('XXX', 'xxx');
+        $this->_server->addFunction(
+            array(
+                'ZendTest\\XmlRpc\\testFunction',
+                'ZendTest\\XmlRpc\\testFunction2',
+            ),
+            'zsr'
+        );
+    }
+    
     /**
      * get/loadFunctions() test
      */
     public function testFunctions()
     {
-        try {
-            $this->_server->addFunction(
-                array(
-                    'ZendTest\\XmlRpc\\testFunction',
-                    'ZendTest\\XmlRpc\\testFunction2',
-                ),
-                'zsr'
-            );
-        } catch (XmlRpc\Exception $e) {
-            $this->fail('Error attaching functions: ' . $e->getMessage());
-        }
-
         $expected = $this->_server->listMethods();
 
         $functions = $this->_server->getFunctions();
@@ -211,7 +195,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(411, $fault->getCode());
         $this->assertEquals('This is a fault', $fault->getMessage());
 
-        $fault = $this->_server->fault(new Server\Exception('Exception fault', 511));
+        $fault = $this->_server->fault(new Server\Exception\RuntimeException('Exception fault', 511));
         $this->assertTrue($fault instanceof Server\Fault);
         $this->assertEquals(511, $fault->getCode());
         $this->assertEquals('Exception fault', $fault->getMessage());
@@ -336,7 +320,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($sig));
         $this->assertEquals(1, count($sig), var_export($sig, 1));
 
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception', 'Method "foo" does not exist');
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception', 'Method "foo" does not exist');
         $this->_server->methodSignature('foo');
     }
 
@@ -452,40 +436,32 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testAddFunctionThrowsExceptionWithBadData()
     {
         $o = new \stdClass();
-        try {
-            $this->_server->addFunction($o);
-            $this->fail('addFunction() should not accept objects');
-        } catch (XmlRpc\Exception $e) {
-            // success
-        }
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to attach function; invalid');
+        $this->_server->addFunction($o);
     }
 
     public function testLoadFunctionsThrowsExceptionWithBadData()
     {
         $o = new \stdClass();
-        try {
-            $this->_server->loadFunctions($o);
-            $this->fail('loadFunctions() should not accept objects');
-        } catch (XmlRpc\Exception $e) {
-            // success
-        }
-
-        try {
-            $this->_server->loadFunctions('foo');
-            $this->fail('loadFunctions() should not accept primitive values');
-        } catch (Server\Exception $e) {
-            // success
-        }
-
-        $o = array($o);
-        try {
-            $this->_server->loadFunctions($o);
-            $this->fail('loadFunctions() should not allow non-reflection objects in an array');
-        } catch (\Zend\Server\Exception $e) {
-            $this->assertSame('Invalid method provided', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to load server definition; must be an array or Zend_Server_Definition, received stdClass');
+        $this->_server->loadFunctions($o);
+    }
+    
+    public function testLoadFunctionsThrowsExceptionsWithBadData2()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to load server definition; must be an array or Zend_Server_Definition, received string');
+        $this->_server->loadFunctions('foo');
     }
 
+    public function testLoadFunctionsThrowsExceptionsWithBadData3()
+    {
+        $o = new \stdClass();
+        $o = array($o);
+        
+        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid method provided');
+        $this->_server->loadFunctions($o);
+    }
+    
     public function testLoadFunctionsReadsMethodsFromServerDefinitionObjects()
     {
         $mockedMethod = $this->getMock('Zend\\Server\\Method\\Definition', array(), array(), '', false,
@@ -499,11 +475,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetClassThrowsExceptionWithInvalidClass()
     {
-        try {
-            $this->_server->setClass('mybogusclass');
-            $this->fail('setClass() should not allow invalid classes');
-        } catch (XmlRpc\Exception $e) {
-        }
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Invalid method class');
+        $this->_server->setClass('mybogusclass');
     }
 
     public function testSetRequestUsingString()
@@ -514,26 +487,18 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @outputBuffering enabled
+     * ////////@outputBuffering enabled
      */
-    public function testSetRequestThrowsExceptionOnBadClass()
+    public function testSetRequestThrowsExceptionOnBadClassName()
     {
-        set_error_handler(array($this, 'suppressNotFoundWarnings'), E_WARNING);
-        try {
-            $this->_server->setRequest('ZendTest\\XmlRpc\\TestRequest2');
-            restore_error_handler();
-            $this->fail('Invalid request class should throw exception');
-        } catch (XmlRpc\Exception $e) {
-            // success
-        }
-        restore_error_handler();
-
-        try {
-            $this->_server->setRequest($this);
-            $this->fail('Invalid request object should throw exception');
-        } catch (XmlRpc\Exception $e) {
-            // success
-        }
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Invalid request object');
+        $this->_server->setRequest('ZendTest\\XmlRpc\\TestRequest2');
+    }
+    
+    public function testSetRequestThrowsExceptionOnBadObject()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Invalid request object');
+        $this->_server->setRequest($this);
     }
 
     public function testHandleObjectMethod()

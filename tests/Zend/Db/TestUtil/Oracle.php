@@ -26,13 +26,6 @@ namespace ZendTest\Db\TestUtil;
 use Zend\DB;
 
 /**
- * @see Zend_Db_TestUtil_Pdo_Oci
- * @see Zend_Db_TestUtil_Common
- */
-
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-/**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests

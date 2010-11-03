@@ -24,7 +24,8 @@
  */
 namespace Zend\Amf\Parser\Amf0;
 use Zend\Amf\Parser\AbstractDeserializer,
-    Zend\Amf;
+    Zend\Amf,
+    Zend\Amf\Parser\Exception as ParserException;
 
 /**
  * Read an AMF0 input stream and convert it into PHP data types
@@ -136,7 +137,7 @@ class Deserializer extends AbstractDeserializer
                 return $this->readAmf3TypeMarker();
 
             default:
-                throw new Amf\Exception('Unsupported marker type: ' . $typeMarker);
+                throw new ParserException\InvalidArgumentException('Unsupported marker type: ' . $typeMarker);
         }
     }
 
@@ -185,7 +186,7 @@ class Deserializer extends AbstractDeserializer
     {
         $key = $this->_stream->readInt();
         if (!array_key_exists($key, $this->_reference)) {
-            throw new Amf\Exception('Invalid reference key: '. $key);
+            throw new ParserException\OutOfBoundsException('Invalid reference key: '. $key);
         }
         return $this->_reference[$key];
     }

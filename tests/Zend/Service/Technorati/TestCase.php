@@ -19,27 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-
-/**
- * Test helper
- */
-
-/**
- * Exclude from code coverage report
- */
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 /**
  * Patch for default timezone in PHP >= 5.1.0
  */
 if (!ini_get('date.timezone')) {
     date_default_timezone_set(@date_default_timezone_get());
 }
-
-/**
- * @see Zend_Service_Technorati
- */
-
 
 /**
  * @category   Zend

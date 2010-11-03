@@ -25,24 +25,18 @@
 namespace ZendTest\Validator;
 use Zend\Validator;
 
-// Call Zend_Validate_IdenticalTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Validate_IdenticalTest::main');
-}
-
-
-/** Zend_Validate_Identical */
+/** Zend_Validator_Identical */
 
 /**
- * Zend_Validate_Identical
+ * Zend_Validator_Identical
  *
  * @category   Zend
  * @package    Zend
  * @subpackage UnitTests
- * @uses       Zend_Validate_Identical
+ * @uses       Zend_Validator_Identical
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class IdenticalTest extends \PHPUnit_Framework_TestCase
 {

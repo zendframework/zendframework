@@ -20,5 +20,5 @@ Testing layouts with custom inflection:
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-echo $this->placeholder('Zend\Layout\Layout')->message
+echo $this->broker('placeholder')->direct('Zend\Layout\Layout')->message
 ?>

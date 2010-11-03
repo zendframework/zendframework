@@ -76,7 +76,7 @@ class InArray extends AbstractValidator
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            throw new Exception('Array expected as parameter');
+            throw new Exception\InvalidArgumentException('Array expected as parameter');
         } else {
             $count = func_num_args();
             $temp  = array();
@@ -172,8 +172,6 @@ class InArray extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is contained in the haystack option. If the strict
      * option is true, then the type of $value is also checked.
      *

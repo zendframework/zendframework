@@ -32,7 +32,9 @@ use Zend\Log;
  * Zend_Mail object.  Note that this class only sends the email upon
  * completion, so any log entries accumulated are sent in a single email.
  *
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
+ * @uses       \Zend\Log\Exception\NotImplementedException
+ * @uses       \Zend\Log\Exception\RuntimeException
  * @uses       \Zend\Log\Formatter\Simple
  * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
@@ -121,11 +123,11 @@ class Mail extends AbstractWriter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Mail
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\NotImplementedException
      */
     static public function factory($config = array())
     {
-        throw new Log\Exception('Zend\\Log\\Writer\\Mail does not currently implement a factory');
+        throw new Log\Exception\NotImplementedException('Zend\Log\Writer\Mail does not currently implement a factory');
     }
 
     /**
@@ -184,14 +186,14 @@ class Mail extends AbstractWriter
      *
      * @param  \Zend\Log\Formatter\FormatterInterface $formatter
      * @return \Zend\Log\Writer\Mail
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function setLayoutFormatter(Log\Formatter $formatter)
     {
         if (!$this->_layout) {
-            throw new Log\Exception(
+            throw new Log\Exception\InvalidArgumentException(
                 'cannot set formatter for layout; ' .
-                    'a Zend_Layout instance is not in use');
+                    'a Zend\Layout\Layout instance is not in use');
         }
 
         $this->_layoutFormatter = $formatter;
@@ -208,12 +210,13 @@ class Mail extends AbstractWriter
      * subject set.
      *
      * @param  string $subject Subject prepend text.
+     * @throws \Zend\Log\Exception\RuntimeException
      * @return \Zend\Log\Writer\Mail
      */
     public function setSubjectPrependText($subject)
     {
         if ($this->_mail->getSubject()) {
-            throw new Log\Exception(
+            throw new Log\Exception\RuntimeException(
                 'subject already set on mail; ' .
                     'cannot set subject prepend text');
         }

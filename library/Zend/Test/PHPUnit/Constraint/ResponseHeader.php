@@ -29,7 +29,7 @@ use Zend\Controller\Response;
  * Response header PHPUnit Constraint
  *
  * @uses       PHPUnit_Framework_Constraint
- * @uses       \Zend\Test\PHPUnit\Constraint\Exception
+ * @uses       \Zend\Test\PHPUnit\Constraint\Exception\ConstraintException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -115,7 +115,7 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
     public function evaluate($other, $assertType = null)
     {
         if (!$other instanceof Response\AbstractResponse) {
-            throw new Exception('Header constraint assertions require a response object');
+            throw new Exception\ConstraintException('Header constraint assertions require a response object');
         }
 
         if (strstr($assertType, 'Not')) {
@@ -124,7 +124,7 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
         }
 
         if (!in_array($assertType, $this->_assertTypes)) {
-            throw new Exception(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
+            throw new Exception\ConstraintException(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
         }
 
         $this->_assertType = $assertType;
@@ -136,7 +136,7 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
         switch ($assertType) {
             case self::ASSERT_RESPONSE_CODE:
                 if (3 > $argc) {
-                    throw new Exception('No response code provided against which to match');
+                    throw new Exception\ConstraintException('No response code provided against which to match');
                 }
                 $this->_code = $code = $argv[2];
                 return ($this->_negate)
@@ -144,7 +144,7 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
                     : $this->_code($response, $code);
             case self::ASSERT_HEADER:
                 if (3 > $argc) {
-                    throw new Exception('No header provided against which to match');
+                    throw new Exception\ConstraintException('No header provided against which to match');
                 }
                 $this->_header = $header = $argv[2];
                 return ($this->_negate)
@@ -152,7 +152,7 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
                     : $this->_header($response, $header);
             case self::ASSERT_HEADER_CONTAINS:
                 if (4 > $argc) {
-                    throw new Exception('Both a header name and content to match are required for ' . __FUNCTION__);
+                    throw new Exception\ConstraintException('Both a header name and content to match are required for ' . __FUNCTION__);
                 }
                 $this->_header = $header = $argv[2];
                 $this->_match  = $match  = $argv[3];
@@ -161,7 +161,7 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
                     : $this->_headerContains($response, $header, $match);
             case self::ASSERT_HEADER_REGEX:
                 if (4 > $argc) {
-                    throw new Exception('Both a header name and content to match are required for ' . __FUNCTION__);
+                    throw new Exception\ConstraintException('Both a header name and content to match are required for ' . __FUNCTION__);
                 }
                 $this->_header = $header = $argv[2];
                 $this->_match  = $match  = $argv[3];
@@ -169,7 +169,7 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
                     ? $this->_notHeaderRegex($response, $header, $match)
                     : $this->_headerRegex($response, $header, $match);
             default:
-                throw new Exception('Invalid assertion type ' . __FUNCTION__);
+                throw new Exception\ConstraintException('Invalid assertion type ' . __FUNCTION__);
         }
     }
 
@@ -215,14 +215,14 @@ class ResponseHeader extends \PHPUnit_Framework_Constraint
                 $failure = sprintf($failure, $this->_header, $this->_match);
                 break;
             default:
-                throw new Exception('Invalid assertion type ' . __FUNCTION__);
+                throw new Exception\ConstraintException('Invalid assertion type ' . __FUNCTION__);
         }
 
         if (!empty($description)) {
             $failure = $description . "\n" . $failure;
         }
 
-        throw new Exception($failure);
+        throw new Exception\ConstraintException($failure);
     }
 
     /**

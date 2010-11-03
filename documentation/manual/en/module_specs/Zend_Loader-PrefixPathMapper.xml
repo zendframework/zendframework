@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.loader.prefix-path-mapper">
+    <title>The PrefixPathMapper Interface</title>
+
+    <sect2 id="zend.loader.prefix-path-mapper.intro">
+        <title>Overview</title>
+
+        <para>
+            One approach to resolving plugin names to class names utilizes prefix/path pairs. In
+            this methodology, the developer specifies one or more directories containing plugins
+            that have a common namespace or prefix. When resolving a plugin, the mapper will loop
+            through these prefixes, and look for a class file matching the requested plugin; if
+            found, that plugin class is loaded from the file and used. The
+            <interfacename>PrefixPathMapper</interfacename> interface defines a common interface for
+            specifying and modifying a map of prefix/path pairs.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.loader.prefix-path-mapper.quick-start">
+        <title>Quick Start</title>
+
+        <para>
+            The <interfacename>PrefixPathMapper</interfacename> provides simply two methods: one for
+            registering a prefix path, and another for removing one.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Zend\Loader;
+
+interface PrefixPathMapper
+{
+    public function addPrefixPath($prefix, $path);
+    public function removePrefixPath($prefix, $path);
+}
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.loader.prefix-path-mapper.options">
+        <title>Configuration Options</title>
+
+        <para>
+            This component defines no configuration options, as it is an interface.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.loader.prefix-path-mapper.methods">
+        <title>Available Methods</title>
+
+        <refentry id="zend.loader.prefix-path-mapper.methods.add-prefix-path">
+            <refnamediv>
+                <refname>addPrefixPath</refname>
+                <refpurpose>Register a prefix/path association</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname>addPrefixPath</methodname>
+                    <methodparam>
+                        <funcparams>$prefix, $path</funcparams>
+                    </methodparam>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>addPrefixPath()</title>
+
+                <para>
+                    Implement this method to allow registering a prefix/path pair. The prefix may be
+                    either an older, PHP 5.2-style vendor prefix or a true PHP 5.3 namespace; the
+                    path should be a path to a directory of files using the given prefix or
+                    namespace. The implemenation should determine whether or not to aggregate paths
+                    for each namespace, or simply maintain a 1:1 association.
+                </para>
+            </refsect1>
+        </refentry>
+
+        <refentry id="zend.loader.prefix-path-mapper.methods.remove-prefix-path">
+            <refnamediv>
+                <refname>removePrefixPath</refname>
+                <refpurpose>Remove a prefix/path association</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <methodsynopsis>
+                    <methodname>removePrefixPath</methodname>
+                    <methodparam>
+                        <funcparams>$prefix, $path</funcparams>
+                    </methodparam>
+                </methodsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>removePrefixPath()</title>
+
+                <para>
+                    Implement this method to remove a prefix/path association from the internal map.
+                </para>
+            </refsect1>
+        </refentry>
+
+    </sect2>
+
+    <sect2 id="zend.loader.prefix-path-mapper.examples">
+        <title>Examples</title>
+
+        <para>
+            Please see the <link linkend="zend.loader.prefix-path-mapper.quick-start">Quick
+                Start</link> for the interface specification.
+        </para>
+    </sect2>
+</sect1>

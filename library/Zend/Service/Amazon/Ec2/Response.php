@@ -83,7 +83,7 @@ class Response
      *
      * @param Zend_Http_Response $httpResponse the HTTP response.
      */
-    public function __construct(\Zend\HTTP\Response $httpResponse)
+    public function __construct(\Zend\Http\Response $httpResponse)
     {
         $this->_httpResponse = $httpResponse;
     }
@@ -118,7 +118,7 @@ class Response
     {
         try {
             $body = $this->_httpResponse->getBody();
-        } catch (\Zend\HTTP\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             $body = false;
         }
 

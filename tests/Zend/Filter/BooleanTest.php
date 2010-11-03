@@ -759,7 +759,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingFalseType()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown');
         $this->_filter->setType(true);
     }
 
@@ -780,7 +780,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingFalseLocaleType()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Locale has to be');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Locale has to be');
         $this->_filter->setLocale(true);
     }
 
@@ -791,7 +791,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingUnknownLocale()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown locale');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown locale');
         $this->_filter->setLocale('yy');
     }
 }

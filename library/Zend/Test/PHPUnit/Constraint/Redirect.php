@@ -28,7 +28,7 @@ namespace Zend\Test\PHPUnit\Constraint;
  * Redirection constraints
  *
  * @uses       PHPUnit_Framework_Constraint
- * @uses       \Zend\Test\PHPUnit\Constraint\Exception
+ * @uses       \Zend\Test\PHPUnit\Constraint\Exception\ConstraintException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -103,7 +103,7 @@ class Redirect extends \PHPUnit_Framework_Constraint
     public function evaluate($other, $assertType = null)
     {
         if (!$other instanceof \Zend\Controller\Response\AbstractResponse) {
-            throw new Exception('Redirect constraint assertions require a response object');
+            throw new Exception\ConstraintException('Redirect constraint assertions require a response object');
         }
 
         if (strstr($assertType, 'Not')) {
@@ -112,7 +112,7 @@ class Redirect extends \PHPUnit_Framework_Constraint
         }
 
         if (!in_array($assertType, $this->_assertTypes)) {
-            throw new Exception(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
+            throw new Exception\ConstraintException(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
         }
 
         $this->_assertType = $assertType;
@@ -124,7 +124,7 @@ class Redirect extends \PHPUnit_Framework_Constraint
         switch ($assertType) {
             case self::ASSERT_REDIRECT_TO:
                 if (3 > $argc) {
-                    throw new Exception('No redirect URL provided against which to match');
+                    throw new Exception\ConstraintException('No redirect URL provided against which to match');
                 }
                 $this->_match = $match = $argv[2];
                 return ($this->_negate)
@@ -132,7 +132,7 @@ class Redirect extends \PHPUnit_Framework_Constraint
                     : $this->_match($response, $match);
             case self::ASSERT_REDIRECT_REGEX:
                 if (3 > $argc) {
-                    throw new Exception('No pattern provided against which to match redirect');
+                    throw new Exception\ConstraintException('No pattern provided against which to match redirect');
                 }
                 $this->_match = $match = $argv[2];
                 return ($this->_negate)
@@ -184,7 +184,7 @@ class Redirect extends \PHPUnit_Framework_Constraint
             $failure = $description . "\n" . $failure;
         }
 
-        throw new Exception($failure);
+        throw new Exception\ConstraintException($failure);
     }
 
     /**

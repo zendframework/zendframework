@@ -47,8 +47,6 @@ class NotExists extends Exists
     );
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the file does not exist in the set destinations
      *
      * @param  string  $value Real file to check for

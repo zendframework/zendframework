@@ -20,7 +20,7 @@
  */
 
 /**
- * @uses       Zend_Validate_Ip
+ * @uses       Zend\Validator\Ip
  * @uses       Zend_Service_DeveloperGarden_Exception
  * @category   Zend
  * @package    Zend_Service
@@ -75,7 +75,7 @@ class Zend_Service_DeveloperGarden_IpLocation_IpAddress
      */
     public function setIp($ip)
     {
-        $validator = new Zend_Validate_Ip();
+        $validator = new Zend\Validator\Ip();
 
         if (!$validator->isValid($ip)) {
             $message = $validator->getMessages();

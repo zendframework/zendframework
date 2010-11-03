@@ -24,12 +24,14 @@
  */
 namespace ZendTest\Serializer\Adapter;
 
-use Zend\Serializer;
+use Zend\Serializer,
+    Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
+ * @group      Zend_Serializer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -44,7 +46,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
             try {
                 new Serializer\Adapter\Wddx();
                 $this->fail("Zend\\Serializer\\Adapter\\Wddx needs missing ext/wddx but did't throw exception");
-            } catch (Serializer\Exception $e) {}
+            } catch (ExtensionNotLoadedException $e) {}
             $this->markTestSkipped('Zend\\Serializer\\Adapter\\Wddx needs ext/wddx');
         }
         $this->_adapter = new \Zend\Serializer\Adapter\Wddx();
@@ -208,25 +210,32 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserialzeInvalid()
+    public function testUnserialzeInvalidXml()
     {
+        if (!class_exists('SimpleXMLElement', false)) {
+            $this->markTestSkipped('Skipped by missing ext/simplexml');
+        }
+
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\\Serializer\\Exception');
+        $this->setExpectedException(
+            'Zend\Serializer\Exception\RuntimeException',
+            'String could not be parsed as XML'
+        );
         $this->_adapter->unserialize($value);
     }
 
-    /**
-     * ZF-8911 and PHP-Bug #46496
-     * This bug effects php < 5.2.7
-     *
-     * No workaround implemented !!! - This test failes on php < 5.2.7
-     */
-    public function testSerializeStringUtf8() {
-        $value    = "\xc2\xbf"; // &Xi;
-        $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . "<data><string>\xc2\xbf</string></data></wddxPacket>";
-        $data = $this->_adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+    public function testUnserialzeInvalidWddx()
+    {
+        if (!class_exists('SimpleXMLElement', false)) {
+            $this->markTestSkipped('Skipped by missing ext/simplexml');
+        }
+
+        $value = '<wddxPacket version=\'1.0\'><header /></wddxPacket>';
+        $this->setExpectedException(
+            'Zend\Serializer\Exception\RuntimeException',
+            'Invalid wddx'
+        );
+        $this->_adapter->unserialize($value);
     }
 
 }

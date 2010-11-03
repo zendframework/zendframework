@@ -26,11 +26,11 @@ use Zend\Form\Form,
     Zend\Form\Decorator,
     Zend\Form\Element,
     Zend\Config\Config,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader as PluginLoader,
     Zend\Registry,
-    Zend\Controller\Action\HelperBroker as ActionHelperBroker,
+    Zend\Controller\Front as FrontController,
     Zend\Translator\Translator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * @category   Zend
@@ -51,7 +51,10 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
             unset($this->error);
         }
 
-        ActionHelperBroker::resetHelpers();
+        $front = FrontController::getInstance();
+        $front->resetInstance();
+        $this->broker = $front->getHelperBroker();
+
         $this->loader = new PluginLoader(
             array('Zend\Form\Decorator' => 'Zend/Form/Decorator')
         );
@@ -64,8 +67,6 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new View();
-        $libPath = __DIR__ . '/../../../library';
-        $view->addHelperPath($libPath . '/Zend/View/Helper');
         return $view;
     }
 
@@ -81,7 +82,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
         $this->group->setName('f%\o^&*)o\(%$b#@!.a}{;-,r');
         $this->assertEquals('foobar', $this->group->getName());
 
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid name provided');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid name provided');
         $this->group->setName('%\^&*)\(%$#@!.}{;-,');
     }
 
@@ -121,7 +122,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
     public function testPassingInvalidElementsToAddElementsThrowsException()
     {
         $elements = array('foo' => true);
-        $this->setExpectedException('Zend\Form\Exception', 'must be Zend\Form\Elements only');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'must be Zend\Form\Elements only');
         $this->group->addElements($elements);
     }
 
@@ -204,7 +205,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingInvalidDecoratorThrowsException()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid decorator');
+        $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException', 'Invalid decorator');
         $this->group->addDecorator(123);
     }
 
@@ -317,7 +318,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetViewShouldNotReturnNullWhenViewRendererIsActive()
     {
-        $viewRenderer = ActionHelperBroker::getStaticHelper('ViewRenderer');
+        $viewRenderer = $this->broker->load('ViewRenderer');
         $viewRenderer->initView();
         $view = $this->group->getView();
         $this->assertSame($viewRenderer->view, $view);
@@ -706,7 +707,7 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverloadingToInvalidMethodsShouldThrowAnException()
     {
-        $this->setExpectedException('Zend\Form\Exception');
+        $this->setExpectedException('Zend\Form\Exception\BadMethodCallException');
         $html = $this->group->bogusMethodCall();
     }
 

@@ -128,6 +128,22 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($memoryManager->processedObject === $memObject);
         $this->assertEquals($memoryManager->processedId, 10);
     }
+
+    public function testInvalidGetThrowException()
+    {
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $this->setExpectedException('Zend\Memory\Exception\InvalidArgumentException');
+        $value = $memObject->unknowProperty;
+    }
+
+    public function testInvalidSetThrowException()
+    {
+        $memoryManager = new DummyMemoryManager();
+        $memObject = new Container\Movable($memoryManager, 10, '0123456789');
+        $this->setExpectedException('Zend\Memory\Exception\InvalidArgumentException');
+        $memObject->unknowProperty = 5;
+    }
 }
 
 /**

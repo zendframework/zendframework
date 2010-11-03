@@ -24,6 +24,8 @@
  */
 namespace Zend\Controller;
 
+use Zend\Loader\Broker;
+
 /**
  * @package    Zend_Controller
  * @subpackage Dispatcher
@@ -197,4 +199,12 @@ interface Dispatcher
      * @return string
      */
     public function getDefaultAction();
+
+    /**
+     * Set helper broker
+     * 
+     * @param  Broker $broker 
+     * @return Dispatches
+     */
+    public function setHelperBroker(Broker $broker = null);
 }

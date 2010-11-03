@@ -23,15 +23,17 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Search\Weight;
-use Zend\Search\Lucene\Search\Highlighter;
 
+use Zend\Search\Lucene\Index,
+	Zend\Search\Lucene,
+	Zend\Search\Lucene\Search\Weight,
+	Zend\Search\Lucene\Search\Highlighter,
+	Zend\Search\Lucene\Exception\InvalidArgumentException;
+	
 /**
  * A Query that matches documents containing a particular sequence of terms.
  *
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @uses       \Zend\Search\Lucene\Index\Term
  * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
  * @uses       \Zend\Search\Lucene\Search\Query\Boolean
@@ -104,7 +106,7 @@ class Phrase extends AbstractQuery
      * @param string $field    Field to search.
      * @param array  $terms    Terms to search Array of strings.
      * @param array  $offsets  Relative term positions. Array of integers.
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      */
     public function __construct($terms = null, $offsets = null, $field = null)
     {
@@ -119,12 +121,12 @@ class Phrase extends AbstractQuery
         } else if ($terms === null) {
             $this->_terms = array();
         } else {
-            throw new Lucene\Exception('terms argument must be array of strings or null');
+            throw new InvalidArgumentException('terms argument must be array of strings or null');
         }
 
         if (is_array($offsets)) {
             if (count($this->_terms) != count($offsets)) {
-                throw new Lucene\Exception('terms and offsets arguments must have the same size.');
+                throw new InvalidArgumentException('terms and offsets arguments must have the same size.');
             }
             $this->_offsets = $offsets;
         } else if ($offsets === null) {
@@ -134,7 +136,7 @@ class Phrase extends AbstractQuery
                 $this->_offsets[$termId] = $position;
             }
         } else {
-            throw new Lucene\Exception('offsets argument must be array of strings or null');
+            throw new InvalidArgumentException('offsets argument must be array of strings or null');
         }
     }
 
@@ -167,10 +169,11 @@ class Phrase extends AbstractQuery
      *
      * @param \Zend\Search\Lucene\Index\Term $term
      * @param integer $position
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      */
     public function addTerm(Index\Term $term, $position = null) {
         if ((count($this->_terms) != 0)&&(end($this->_terms)->field != $term->field)) {
-            throw new Lucene\Exception('All phrase terms must be in the same field: ' .
+            throw new InvalidArgumentException('All phrase terms must be in the same field: ' .
                                                    $term->field . ':' . $term->text);
         }
 

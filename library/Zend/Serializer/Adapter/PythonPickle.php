@@ -24,7 +24,8 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException;
+use Zend\Serializer\Exception\InvalidArgumentException,
+    Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @link       http://www.python.org
@@ -33,7 +34,8 @@ use Zend\Serializer\Exception as SerializationException;
  * @link       http://pickle-js.googlecode.com
  * @uses       stdClass
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\InvalidArgumentException
+ * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -130,7 +132,7 @@ class PythonPickle extends AbstractAdapter
      * @var array Default options
      */
     protected $_options = array(
-        'protocol'           => 0,
+        'protocol' => 0,
     );
 
     // process vars
@@ -173,6 +175,9 @@ class PythonPickle extends AbstractAdapter
         switch ($name) {
             case 'protocol':
                 $value = $this->_checkProtocolNumber($value);
+                if ($value === false) {
+                    throw new InvalidArgumentException("Invalid or unknown protocol version '{$number}'");
+                }
                 break;
         }
 
@@ -190,7 +195,7 @@ class PythonPickle extends AbstractAdapter
     {
         $int = (int) $number;
         if ($int < 0 || $int > 3) {
-            throw new SerializationException('Invalid or unknown protocol version "'.$number.'"');
+            return false;
         }
         return $int;
     }
@@ -261,7 +266,7 @@ class PythonPickle extends AbstractAdapter
         } elseif (is_object($value)) {
             $this->_writeObject($value);
         } else {
-            throw new SerializationException(
+            throw new RuntimeException(
                 'PHP-Type "'.gettype($value).'" isn\'t serializable with '.get_class($this)
             );
         }
@@ -626,7 +631,7 @@ class PythonPickle extends AbstractAdapter
         }
 
         if (!count($this->_stack)) {
-            throw new SerializationException('No data found');
+            throw new RuntimeException('No data found');
         }
 
         $ret = array_pop($this->_stack);
@@ -769,7 +774,7 @@ class PythonPickle extends AbstractAdapter
                 $this->_loadProto();
                 break;
             default:
-                throw new SerializationException('Invalid or unknown opcode "'.$op.'"');
+                throw new RuntimeException('Invalid or unknown opcode "'.$op.'"');
         }
     }
 
@@ -785,7 +790,7 @@ class PythonPickle extends AbstractAdapter
 
         $lastStack = count($this->_stack)-1;
         if (!isset($this->_stack[$lastStack])) {
-            throw new SerializationException('No stack exist');
+            throw new RuntimeException('No stack exist');
         }
         $this->_memo[$id] = & $this->_stack[$lastStack];
     }
@@ -802,7 +807,7 @@ class PythonPickle extends AbstractAdapter
 
         $lastStack = count($this->_stack)-1;
         if (!isset($this->_stack[$lastStack])) {
-            throw new SerializationException('No stack exist');
+            throw new RuntimeException('No stack exist');
         }
         $this->_memo[$id] = & $this->_stack[$lastStack];
     }
@@ -823,7 +828,7 @@ class PythonPickle extends AbstractAdapter
 
         $lastStack = count($this->_stack)-1;
         if (!isset($this->_stack[$lastStack])) {
-            throw new SerializationException('No stack exist');
+            throw new RuntimeException('No stack exist');
         }
         $this->_memo[$id] = & $this->_stack[$lastStack];
     }
@@ -839,7 +844,7 @@ class PythonPickle extends AbstractAdapter
         $id = (int)$this->_readline();
 
         if (!array_key_exists($id, $this->_memo)) {
-            throw new SerializationException('Get id "' . $id . '" not found in momo');
+            throw new RuntimeException('Get id "' . $id . '" not found in memo');
         }
         $this->_stack[] = & $this->_memo[$id];
     }
@@ -855,7 +860,7 @@ class PythonPickle extends AbstractAdapter
         $id = ord($this->_read(1));
 
         if (!array_key_exists($id, $this->_memo)) {
-            throw new SerializationException('Get id "' . $id . '" not found in momo');
+            throw new RuntimeException('Get id "' . $id . '" not found in memo');
         }
         $this->_stack[] = & $this->_memo[$id];
     }
@@ -875,7 +880,7 @@ class PythonPickle extends AbstractAdapter
         list(, $id) = unpack('l', $bin);
 
         if (!array_key_exists($id, $this->_memo)) {
-            throw new SerializationException('Get id "' . $id . '" not found in momo');
+            throw new RuntimeException('Get id "' . $id . '" not found in memo');
         }
         $this->_stack[] = & $this->_memo[$id];
     }
@@ -1151,7 +1156,7 @@ class PythonPickle extends AbstractAdapter
                        . chr(0x80 | $uniCode >> 6 & 0x3F)
                        . chr(0x80 | $uniCode & 0x3F);
         } else {
-            throw new SerializationException('Unsupported unicode character found "' . dechex($uniCode) . '"');
+            throw new RuntimeException('Unsupported unicode character found "' . dechex($uniCode) . '"');
         }
 
         return $utf8Char;
@@ -1362,7 +1367,7 @@ class PythonPickle extends AbstractAdapter
     {
         $proto = ord($this->_read(1));
         if ($proto < 2 || $proto > 3) {
-            throw new SerializationException('Invalid protocol version detected');
+            throw new RuntimeException("Invalid or unknown protocol version '{$proto}' detected");
         }
         $this->_protocol = $proto;
     }
@@ -1379,7 +1384,7 @@ class PythonPickle extends AbstractAdapter
     protected function _read($len)
     {
         if (($this->_pos + $len) > $this->_pickleLen) {
-            throw new SerializationException('End of data');
+            throw new RuntimeException('End of data');
         }
 
         $this->_pos+= $len;
@@ -1402,7 +1407,7 @@ class PythonPickle extends AbstractAdapter
         }
 
         if ($eolPos === false) {
-            throw new SerializationException('No new line found');
+            throw new RuntimeException('No new line found');
         }
         $ret        = substr($this->_pickle, $this->_pos, $eolPos-$this->_pos);
         $this->_pos = $eolPos + $eolLen;

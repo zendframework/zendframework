@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Mail;
+use Zend\Mail\Storage;
 
 /**
  * @uses       ArrayAccess
@@ -87,7 +88,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
             return isset($this->_has[$var]) ? $this->_has[$var] : null;
         }
 
-        throw new Storage\Exception($var . ' not found');
+        throw new Storage\Exception\InvalidArgumentException($var . ' not found');
     }
 
 
@@ -265,7 +266,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
       */
      public function offsetSet($id, $value)
      {
-        throw new Storage\Exception('cannot write mail messages via array access');
+        throw new Storage\Exception\RuntimeException('cannot write mail messages via array access');
      }
 
 
@@ -358,7 +359,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
         }
 
         if ($pos > $this->_iterationMax) {
-            throw new \OutOfBoundsException('this position does not exist');
+            throw new Exception\OutOfBoundsException('this position does not exist');
         }
         $this->_iterationPos = $pos;
      }

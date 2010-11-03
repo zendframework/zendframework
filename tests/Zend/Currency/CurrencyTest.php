@@ -69,7 +69,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency = new Currency\Currency();
             $this->assertTrue($currency instanceof Currency\Currency);
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
 
@@ -88,34 +88,34 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency = new Currency\Currency('de_XX');
             $this->fail("Locale without region should not been recognised");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
 
         try {
             $currency = new Currency\Currency('xx_XX');
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
 
         try {
             $currency = new Currency\Currency(array('currency' => 'EUR'));
             $this->assertTrue($currency instanceof Currency\Currency);
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
 
         try {
             $currency = new Currency\Currency(array('currency' => 'USD'));
             $this->assertTrue($currency instanceof Currency\Currency);
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
 
         try {
             $currency = new Currency\Currency(array('currency' => 'AWG'));
             $this->assertTrue($currency instanceof Currency\Currency);
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
     }
@@ -150,7 +150,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency = new Currency\Currency('EUR', 'xx_YY');
             $this->fail("unknown locale should not have been recognised");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
     }
@@ -173,19 +173,19 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency = new Currency\Currency('XXX', 'Latin', $locale);
             $this->fail("unknown shortname should not have been recognised");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
         try {
             $currency = new Currency\Currency('USD', 'Xyzz', $locale);
             $this->fail("unknown script should not have been recognised");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
         try {
             $currency = new Currency\Currency('USD', 'Latin', 'xx_YY');
             $this->fail("unknown locale should not have been recognised");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
 
@@ -232,26 +232,26 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency = new Currency\Currency('de_AT', 'en_US');
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
         try {
             $currency = new Currency\Currency('USD', 'EUR');
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
         try {
             $currency = new Currency\Currency('Arab', 'Latn');
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
         try {
             $currency = new Currency\Currency('EUR');
             $currency->toCurrency('value');
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
 
@@ -263,7 +263,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
             $currency = new Currency\Currency('EUR');
             $currency->setFormat(array('format' => 'xy_ZY'));
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
     }
@@ -291,7 +291,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $this->assertSame('$ 53,292.18', $USD->toCurrency('nocontent'));
             $this->fail("No currency expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("has to be numeric", $e->getMessage());
         }
 
@@ -370,28 +370,28 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $USD->setFormat(array('position' => 'unknown'));
             $this->fail("Exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("Unknown position", $e->getMessage());
         }
 
         try {
             $USD->setFormat(array('format' => 'unknown'));
             $this->fail("Exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("is no format token", $e->getMessage());
         }
 
         try {
             $USD->setFormat(array('display' => -14));
             $this->fail("Exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("Unknown display", $e->getMessage());
         }
 
         try {
             $USD->setFormat(array('script' => 'unknown'));
             $this->fail("Exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("Unknown script", $e->getMessage());
         }
 
@@ -400,7 +400,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $USD->setFormat(array('precision' => -14));
             $this->fail("Exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("precision has to be between", $e->getMessage());
         }
     }
@@ -422,7 +422,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency->getSymbol('EGP', 'de_XX');
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
     }
@@ -445,7 +445,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency->getName('EGP', 'xy_XY');
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
     }
@@ -467,7 +467,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency->getShortName('EUR', 'xy_ZT');
             $this->fail("exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             // success
         }
     }
@@ -488,7 +488,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $currency = new Currency\Currency(array('currency' => 'USD'));
             $this->assertTrue(is_array($currency->getRegionList()));
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
 
@@ -497,7 +497,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         try {
             $this->assertEquals('US', $currency->getRegionList());
             $this->fail("Exception expected");
-        } catch (Currency\Exception $e) {
+        } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("No currency defined", $e->getMessage());
         }
 

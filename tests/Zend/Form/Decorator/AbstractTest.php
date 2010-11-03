@@ -102,7 +102,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testSetElementThrowsExceptionWithInvalidElementTypes()
     {
         $config = new Config(array());
-        $this->setExpectedException('Zend\Form\Exception', 'Invalid element');
+        $this->setExpectedException('Zend\Form\Decorator\Exception\InvalidArgumentException', 'Invalid element');
         $this->decorator->setElement($config);
     }
 

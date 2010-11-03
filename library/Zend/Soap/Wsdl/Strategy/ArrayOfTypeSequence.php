@@ -88,7 +88,6 @@ class ArrayOfTypeSequence extends DefaultComplexType
     /**
      * From a nested defintion with type[], get the singular xsd:type
      *
-     * @throws \Zend\Soap\WsdlException When no xsd:simpletype can be detected.
      * @param  string $type
      * @return string
      */

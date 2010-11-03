@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * @category   Zend
@@ -55,10 +56,11 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testNoKeysThrowException()
     {
-        try {
-            $class = new TestAmazonAbstract();
-            $this->fail('Exception should be thrown when no keys are passed in.');
-        } catch(Amazon\Exception $zsae) {}
+        Amazon\AbstractAmazon::setKeys(null, null); // to make sure there's NO DEFAULTS
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Exception\InvalidArgumentException',
+            'AWS keys were not supplied');
+        $class = new TestAmazonAbstract();
     }
 
     public function testSetRegion()
@@ -71,12 +73,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testSetInvalidRegionThrowsException()
     {
-        try {
-            TestAmazonAbstract::setRegion('eu-west-1a');
-            $this->fail('Invalid Region Set with no Exception Thrown');
-        } catch (Amazon\Exception $zsae) {
-            // do nothing
-        }
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Ec2\Exception\InvalidArgumentException',
+            'Invalid Amazon Ec2 Region');
+        TestAmazonAbstract::setRegion('eu-west-1a');
     }
     
     public function testSignParamsWithSpaceEncodesWithPercentInsteadOfPlus()

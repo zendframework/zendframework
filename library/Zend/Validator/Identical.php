@@ -122,7 +122,7 @@ class Identical extends AbstractValidator
     /**
      * Sets the strict parameter
      *
-     * @param Zend_Validate_Identical
+     * @param Zend\Validator\Identical
      */
     public function setStrict($strict)
     {
@@ -131,8 +131,6 @@ class Identical extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if a token has been set and the provided value
      * matches that token.
      *

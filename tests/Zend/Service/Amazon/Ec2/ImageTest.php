@@ -23,10 +23,11 @@
  * @namespace
  */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2, 
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
- * Zend_Service_Amazon_Ec2_Image test case.
+ * Zend\Service\Amazon\Ec2\Image test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -41,9 +42,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Image
+     * @var Zend\Service\Amazon\Ec2\Image
      */
-    private $Zend_Service_Amazon_Ec2_Image;
+    private $ec2ImageInstance;
 
     /**
      * Prepares the environment before running a test.
@@ -52,10 +53,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Image = new Ec2\Image('access_key', 'secret_access_key');
+        $this->ec2ImageInstance = new Ec2\Image('access_key', 'secret_access_key');
 
-        $adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client = new \Zend\HTTP\Client(null, array(
+        $adapter = new \Zend\Http\Client\Adapter\Test();
+        $client = new \Zend\Http\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
@@ -64,7 +65,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        $this->Zend_Service_Amazon_Ec2_Image = null;
+        $this->ec2ImageInstance = null;
 
         parent::tearDown();
     }
@@ -85,7 +86,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DeregisterImageResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->deregister('ami-61a54008');
+        $return = $this->ec2ImageInstance->deregister('ami-61a54008');
 
         $this->assertTrue($return);
 
@@ -130,7 +131,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImagesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describe(array('ami-be3adfd7', 'ami-be3adfd6'));
+        $return = $this->ec2ImageInstance->describe(array('ami-be3adfd7', 'ami-be3adfd6'));
 
         $arrImage = array(
             array(
@@ -190,7 +191,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImagesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describe('ami-be3adfd7');
+        $return = $this->ec2ImageInstance->describe('ami-be3adfd7');
 
         $arrImage = array(
             array(
@@ -249,7 +250,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImagesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describe(null, array('2060296256884', '206029621532'));
+        $return = $this->ec2ImageInstance->describe(null, array('2060296256884', '206029621532'));
 
         $arrImage = array(
             array(
@@ -309,7 +310,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImagesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describe(null, '206029621532');
+        $return = $this->ec2ImageInstance->describe(null, '206029621532');
 
         $arrImage = array(
             array(
@@ -368,7 +369,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImagesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describe(null, null, array('46361432890', '432432265322'));
+        $return = $this->ec2ImageInstance->describe(null, null, array('46361432890', '432432265322'));
 
         $arrImage = array(
             array(
@@ -428,7 +429,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImagesResponse>";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describe(null, null, '46361432890');
+        $return = $this->ec2ImageInstance->describe(null, null, '46361432890');
 
         $arrImage = array(
             array(
@@ -469,7 +470,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describeAttribute('ami-61a54008', 'launchPermission');
+        $return = $this->ec2ImageInstance->describeAttribute('ami-61a54008', 'launchPermission');
 
         $this->assertEquals('ami-61a54008', $return['imageId']);
         $this->assertEquals('495219933132', $return['launchPermission'][0]);
@@ -496,7 +497,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->describeAttribute('ami-61a54008', 'productCodes');
+        $return = $this->ec2ImageInstance->describeAttribute('ami-61a54008', 'productCodes');
 
         $this->assertEquals('ami-61a54008', $return['imageId']);
         $this->assertEquals('774F4FF8', $return['productCodes'][0]);
@@ -518,7 +519,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</ModifyImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->modifyAttribute('ami-61a54008', 'launchPermission', 'add', '495219933132', 'all');
+        $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'launchPermission', 'add', '495219933132', 'all');
         $this->assertTrue($return);
     }
 
@@ -538,16 +539,16 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</ModifyImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->modifyAttribute('ami-61a54008', 'launchPermission', 'add', array('495219933132', '495219933133'), array('all', 'all'));
+        $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'launchPermission', 'add', array('495219933132', '495219933133'), array('all', 'all'));
         $this->assertTrue($return);
     }
 
     public function testModifyAttributeThrowsExceptionOnInvalidAttribute()
     {
-        try {
-            $return = $this->Zend_Service_Amazon_Ec2_Image->modifyAttribute('ami-61a54008', 'invalidPermission', 'add', '495219933132', 'all');
-            $this->fail('An exception should be throw if you are modifying an invalid attirubte');
-        } catch (Ec2\Exception $zsaee) {}
+        $this->setExpectedException(
+            'Zend\Service\Amazon\Ec2\Exception\InvalidArgumentException', 
+            'Invalid attribute passed in.');
+        $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'invalidPermission', 'add', '495219933132', 'all');
     }
 
     public function testModifyAttributeProuctCodes()
@@ -566,7 +567,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</ModifyImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->modifyAttribute('ami-61a54008', 'productCodes', null, null, null, '774F4FF8');
+        $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'productCodes', null, null, null, '774F4FF8');
 
         $this->assertTrue($return);
 
@@ -588,7 +589,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</RegisterImageResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->register('mybucket-myimage.manifest.xml');
+        $return = $this->ec2ImageInstance->register('mybucket-myimage.manifest.xml');
 
         $this->assertEquals('ami-61a54008', $return);
 
@@ -610,7 +611,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "</ResetImageAttributeResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Image->resetAttribute('ami-61a54008', 'launchPermission');
+        $return = $this->ec2ImageInstance->resetAttribute('ami-61a54008', 'launchPermission');
 
         $this->assertTrue($return);
 

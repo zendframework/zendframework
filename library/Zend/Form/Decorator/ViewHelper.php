@@ -227,7 +227,7 @@ class ViewHelper extends AbstractDecorator
 
         $view = $element->getView();
         if (null === $view) {
-            throw new Exception('ViewHelper decorator cannot render without a registered view object');
+            throw new Exception\UnexpectedValueException('ViewHelper decorator cannot render without a registered view object');
         }
 
         if (method_exists($element, 'getMultiOptions')) {
@@ -242,12 +242,12 @@ class ViewHelper extends AbstractDecorator
         $id            = $element->getId();
         $attribs['id'] = $id;
 
-        $helperObject  = $view->getHelper($helper);
+        $helperObject  = $view->broker($helper);
         if (method_exists($helperObject, 'setTranslator')) {
             $helperObject->setTranslator($element->getTranslator());
         }
 
-        $elementContent = $view->$helper($name, $value, $attribs, $element->options);
+        $elementContent = $view->broker($helper)->direct($name, $value, $attribs, $element->options);
         switch ($this->getPlacement()) {
             case self::APPEND:
                 return $content . $separator . $elementContent;

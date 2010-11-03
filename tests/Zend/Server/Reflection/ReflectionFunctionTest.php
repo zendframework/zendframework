@@ -44,12 +44,6 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($r instanceof Reflection\ReflectionFunction);
         $this->assertTrue($r instanceof Reflection\AbstractFunction);
         $params = $r->getParameters();
-        try {
-            $r = new Reflection\ReflectionFunction($params[0]);
-            $this->fail('Should not be able to construct with non-function');
-        } catch (\Exception $e) {
-            // do nothing
-        }
 
         $r = new Reflection\ReflectionFunction($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -62,6 +56,16 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $prototypes = $r->getPrototypes();
         $this->assertTrue(is_array($prototypes));
         $this->assertTrue(0 < count($prototypes));
+    }
+    
+    public function testConstructorThrowsExceptionOnNonFunction()
+    {
+        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $r = new Reflection\ReflectionFunction($function);
+        $params = $r->getParameters();
+        
+        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid reflection class');
+        $r = new Reflection\ReflectionFunction($params[0]);
     }
 
     public function test__getSet()

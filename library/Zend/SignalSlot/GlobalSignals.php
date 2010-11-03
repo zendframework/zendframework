@@ -70,7 +70,7 @@ class GlobalSignals implements StaticSignalSlot
      * 
      * @param  string $topic 
      * @param  mixed $args All arguments besides the topic are passed as arguments to the slot
-     * @return void
+     * @return ResponseCollection All handler return values 
      */
     public static function emit($signal, $args = null)
     {
@@ -90,7 +90,7 @@ class GlobalSignals implements StaticSignalSlot
      * @param  Callable $callback 
      * @param  string $signal 
      * @param  mixed $argv All arguments besides the topic are passed as arguments to the slot
-     * @return mixed
+     * @return ResponseCollection All handler return values
      * @throws InvalidCallbackException if invalid callback provided
      */
     public static function emitUntil($callback, $signal, $args = null)

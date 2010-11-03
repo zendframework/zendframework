@@ -166,7 +166,10 @@ EOS;
             'defaultValue' => new \stdClass(),
         ));
 
-        $this->setExpectedException('Zend\CodeGenerator\Php\Exception');
+        $this->setExpectedException(
+            'Zend\CodeGenerator\Php\Exception\RuntimeException',
+            'Type \'stdClass\' is unknown or cannot be used as property default value'
+            );
 
         $codeGenProperty->generate();
     }

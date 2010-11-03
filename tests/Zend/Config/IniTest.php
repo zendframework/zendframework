@@ -107,7 +107,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorNoExtendsSection()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'cannot be found');
         $config = new Ini($this->_iniFileConfig, 'extendserror');
     }
 
@@ -118,7 +118,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
             try {
                 $config = new Ini($this->_iniFileConfig, $section);
                 $this->fail('An expected Zend\\Config\\Exception has not been raised');
-            } catch (\Zend\Config\Exception $expected) {
+            } catch (\Zend\Config\Exception\RuntimeException $expected) {
                 $this->assertContains('Invalid key', $expected->getMessage());
             }
         }
@@ -126,7 +126,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
 
     public function testZF426()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Cannot create sub-key for');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Cannot create sub-key for');
         $config = new Ini($this->_iniFileConfig, 'zf426');
     }
 
@@ -163,32 +163,32 @@ class IniTest extends \PHPUnit_Framework_TestCase
 
     public function testZF415()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'circular inheritance');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'circular inheritance');
         $config = new Ini($this->_iniFileCircularConfig, null);
     }
 
     public function testErrorNoFile()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Filename is not set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Filename is not set');
         $config = new Ini('','');
     }
 
     public function testErrorMultipleExensions()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'may not extend multiple sections');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'may not extend multiple sections');
         $config = new Ini($this->_iniFileMultipleInheritanceConfig, 'three');
         zend::dump($config);
     }
 
     public function testErrorNoSectionFound()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'cannot be found');
         $config = new Ini($this->_iniFileConfig,'notthere');
     }
 
     public function testErrorNoSectionFoundWhenMultipleSectionsProvided()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'cannot be found');
         $config = new Ini($this->_iniFileConfig,array('all', 'notthere'));
     }
 
@@ -216,7 +216,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
         try {
             $config = new Ini($this->_iniFileInvalid);
             $this->fail('An expected Zend\Config\Exception has not been raised');
-        } catch (\Zend\Config\Exception $expected) {
+        } catch (\Zend\Config\Exception\RuntimeException $expected) {
             $this->assertRegexp('/(Error parsing|syntax error, unexpected)/', $expected->getMessage());
         }
 

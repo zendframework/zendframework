@@ -26,7 +26,8 @@ namespace Zend\Controller\Dispatcher;
 
 use Zend\Controller\Dispatcher,
     Zend\Controller\Front as FrontController,
-    Zend\Controller\Response\AbstractResponse;
+    Zend\Controller\Response\AbstractResponse,
+    Zend\Loader\Broker;
 
 /**
  * @uses       \Zend\Controller\Dispatcher\Exception
@@ -40,6 +41,12 @@ use Zend\Controller\Dispatcher,
  */
 abstract class AbstractDispatcher implements Dispatcher
 {
+    /**
+     * Helper broker instance
+     * @var Broker
+     */
+    protected $broker;
+
     /**
      * Default action
      * @var string
@@ -440,5 +447,17 @@ abstract class AbstractDispatcher implements Dispatcher
     public function getDefaultModule()
     {
         return $this->_defaultModule;
+    }
+
+    /**
+     * Set helper broker instance
+     * 
+     * @param  Broker $broker 
+     * @return AbstractDispatcher
+     */
+    public function setHelperBroker(Broker $broker = null)
+    {
+        $this->broker = $broker;
+        return $this;
     }
 }

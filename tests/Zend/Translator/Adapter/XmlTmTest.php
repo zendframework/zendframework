@@ -53,14 +53,14 @@ class XmlTmTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter = new Adapter\XmlTm(__DIR__ . '/_files/nofile.xmltm', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('is not readable', $e->getMessage());
         }
 
         try {
             $adapter = new Adapter\XmlTm(__DIR__ . '/_files/failed.xmltm', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidFileTypeException $e) {
             $this->assertContains('Mismatched tag at line', $e->getMessage());
         }
     }
@@ -103,7 +103,7 @@ class XmlTmTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->addTranslation(__DIR__ . '/_files/translation_en.xmltm', 'xx');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
@@ -161,7 +161,7 @@ class XmlTmTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->setLocale('nolocale');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 

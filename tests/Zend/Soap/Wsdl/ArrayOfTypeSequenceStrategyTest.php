@@ -150,7 +150,7 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('\Zend\Soap\WsdlException');
+        $this->setExpectedException('\Zend\Soap\Exception\InvalidArgumentException', 'Cannot add a complex type');
         $this->wsdl->addComplexType('ZendTest\Soap\Wsdl\UnknownClass[]');
     }
 }

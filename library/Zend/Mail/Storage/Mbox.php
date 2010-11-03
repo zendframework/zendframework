@@ -24,7 +24,8 @@
  */
 namespace Zend\Mail\Storage;
 
-use Zend\Mail\AbstractStorage;
+use Zend\Mail\AbstractStorage,
+    Zend\Mail\Storage\Exception;
 
 /**
  * @uses       \Zend\Mail\Message\File
@@ -112,7 +113,7 @@ class Mbox extends AbstractStorage
     protected function _getPos($id)
     {
         if (!isset($this->_positions[$id - 1])) {
-            throw new Exception('id does not exist');
+            throw new Exception\InvalidArgumentException('id does not exist');
         }
 
         return $this->_positions[$id - 1];
@@ -164,7 +165,7 @@ class Mbox extends AbstractStorage
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
         $messagePos = $this->_getPos($id);
         // TODO: toplines
@@ -184,7 +185,7 @@ class Mbox extends AbstractStorage
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
         $messagePos = $this->_getPos($id);
         return stream_get_contents($this->_fh, $messagePos['end'] - $messagePos['separator'], $messagePos['separator']);
@@ -205,7 +206,7 @@ class Mbox extends AbstractStorage
         }
 
         if (!isset($params->filename)) {
-            throw new Exception('no valid filename given in params');
+            throw new Exception\InvalidArgumentException('no valid filename given in params');
         }
 
         $this->_openMboxFile($params->filename);
@@ -262,14 +263,14 @@ class Mbox extends AbstractStorage
 
         $this->_fh = @fopen($filename, 'r');
         if (!$this->_fh) {
-            throw new Exception('cannot open mbox file');
+            throw new Exception\RuntimeException('cannot open mbox file');
         }
         $this->_filename = $filename;
         $this->_filemtime = filemtime($this->_filename);
 
         if (!$this->_isMboxFile($this->_fh, false)) {
             @fclose($this->_fh);
-            throw new Exception('file is not a valid mbox format');
+            throw new Exception\InvalidArgumentException('file is not a valid mbox format');
         }
 
         $messagePos = array('start' => ftell($this->_fh), 'separator' => 0, 'end' => 0);
@@ -326,7 +327,7 @@ class Mbox extends AbstractStorage
      */
     public function removeMessage($id)
     {
-        throw new Exception('mbox is read-only');
+        throw new Exception\RuntimeException('mbox is read-only');
     }
 
     /**
@@ -398,7 +399,7 @@ class Mbox extends AbstractStorage
         } else {
             $this->_fh = @fopen($this->_filename, 'r');
             if (!$this->_fh) {
-                throw new Exception('cannot open mbox file');
+                throw new Exception\RuntimeException('cannot open mbox file');
             }
         }
     }

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Db\Select;
 use Zend\DB;
 use Zend\Db\Select;
@@ -30,6 +27,7 @@ use Zend\Db\Select;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
+ * @group      Zend_Db
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

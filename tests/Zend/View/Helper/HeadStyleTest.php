@@ -425,7 +425,3 @@ a {
     }
 }
 
-// Call Zend_View_Helper_HeadStyleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_HeadStyleTest::main") {
-    \Zend_View_Helper_HeadStyleTest::main();
-}

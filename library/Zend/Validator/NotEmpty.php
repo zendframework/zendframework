@@ -140,7 +140,7 @@ class NotEmpty extends AbstractValidator
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            throw new Exception('Unknown type');
+            throw new Exception\InvalidArgumentException('Unknown type');
         }
 
         $this->_type = $type;
@@ -148,8 +148,6 @@ class NotEmpty extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is not an empty value.
      *
      * @param  string $value

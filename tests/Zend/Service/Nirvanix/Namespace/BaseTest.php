@@ -20,12 +20,10 @@
  */
 
 /**
- * @see Zend_Service_Nirvanix_Namespace_Base
+ * @todo: temporary fix because test autoloader doesn't load Zend_* classes
+ * from test tree
  */
-
-/**
- * @see Zend_Service_Nirvanix_FunctionalTestCase
- */
+require_once("Zend/Service/Nirvanix/FunctionalTestCase.php");
 
 /**
  * @category   Zend

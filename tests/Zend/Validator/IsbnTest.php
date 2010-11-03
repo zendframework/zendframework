@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,19 +24,12 @@
 namespace ZendTest\Validator;
 use Zend\Validator;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_Isbn
- */
-
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
+ * @group      Zend_Validator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -81,33 +74,17 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator\Isbn();
 
-        try {
-            $validator->setType(Validator\Isbn::AUTO);
-            $this->assertTrue($validator->getType() == Validator\Isbn::AUTO);
-        } catch (\Exception $e) {
-            $this->fail("Should accept type 'auto'");
-        }
+        $validator->setType(Validator\Isbn::AUTO);
+        $this->assertTrue($validator->getType() == Validator\Isbn::AUTO);
 
-        try {
-            $validator->setType(Validator\Isbn::ISBN10);
-            $this->assertTrue($validator->getType() == Validator\Isbn::ISBN10);
-        } catch (\Exception $e) {
-            $this->fail("Should accept type 'ISBN-10'");
-        }
+        $validator->setType(Validator\Isbn::ISBN10);
+        $this->assertTrue($validator->getType() == Validator\Isbn::ISBN10);
 
-        try {
-            $validator->setType(Validator\Isbn::ISBN13);
-            $this->assertTrue($validator->getType() == Validator\Isbn::ISBN13);
-        } catch (\Exception $e) {
-            $this->fail("Should accept type 'ISBN-13'");
-        }
+        $validator->setType(Validator\Isbn::ISBN13);
+        $this->assertTrue($validator->getType() == Validator\Isbn::ISBN13);
 
-        try {
-            $validator->setType('X');
-            $this->fail("Should not accept type 'X'");
-        } catch (\Exception $e) {
-            // success
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid ISBN type');
+        $validator->setType('X');
     }
 
     /**
@@ -118,35 +95,20 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     public function testSeparator()
     {
         $validator = new Validator\Isbn();
+    
+        $validator->setSeparator('-');
+        $this->assertTrue($validator->getSeparator() == '-');
+        
+        $validator->setSeparator(' ');
+        $this->assertTrue($validator->getSeparator() == ' ');
 
-        try {
-            $validator->setSeparator('-');
-            $this->assertTrue($validator->getSeparator() == '-');
-        } catch (\Exception $e) {
-            $this->fail("Should accept separator '-'");
-        }
+        $validator->setSeparator('');
+        $this->assertTrue($validator->getSeparator() == '');
 
-        try {
-            $validator->setSeparator(' ');
-            $this->assertTrue($validator->getSeparator() == ' ');
-        } catch (\Exception $e) {
-            $this->fail("Should accept separator ' '");
-        }
-
-        try {
-            $validator->setSeparator('');
-            $this->assertTrue($validator->getSeparator() == '');
-        } catch (\Exception $e) {
-            $this->fail("Should accept empty separator");
-        }
-
-        try {
-            $validator->setSeparator('X');
-            $this->fail("Should not accept separator 'X'");
-        } catch (\Exception $e) {
-            // success
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid ISBN separator');
+        $validator->setSeparator('X');
     }
+        
 
     /**
      * Ensures that __construct() works as expected

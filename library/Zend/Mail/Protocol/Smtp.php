@@ -25,7 +25,8 @@
  */
 namespace Zend\Mail\Protocol;
 
-use Zend\Mail\AbstractProtocol;
+use Zend\Mail\AbstractProtocol,
+    Zend\Mail\Protocol\Exception;
 
 /**
  * Smtp implementation of Zend_Mail_Protocol_Abstract
@@ -133,7 +134,7 @@ class Smtp extends AbstractProtocol
                     break;
 
                 default:
-                    throw new Exception($config['ssl'] . ' is unsupported SSL type');
+                    throw new Exception\InvalidArgumentException($config['ssl'] . ' is unsupported SSL type');
                     break;
             }
         }
@@ -171,12 +172,12 @@ class Smtp extends AbstractProtocol
     {
         // Respect RFC 2821 and disallow HELO attempts if session is already initiated.
         if ($this->_sess === true) {
-            throw new Exception('Cannot issue HELO to existing session');
+            throw new Exception\RuntimeException('Cannot issue HELO to existing session');
         }
 
         // Validate client hostname
         if (!$this->_validHost->isValid($host)) {
-            throw new Exception(join(', ', $this->_validHost->getMessages()));
+            throw new Exception\RuntimeException(join(', ', $this->_validHost->getMessages()));
         }
 
         // Initiate helo sequence
@@ -188,7 +189,7 @@ class Smtp extends AbstractProtocol
             $this->_send('STARTTLS');
             $this->_expect(220, 180);
             if (!stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-                throw new Exception('Unable to connect via TLS');
+                throw new Exception\RuntimeException('Unable to connect via TLS');
             }
             $this->_ehlo($host);
         }
@@ -230,7 +231,7 @@ class Smtp extends AbstractProtocol
     public function mail($from)
     {
         if ($this->_sess !== true) {
-            throw new Exception('A valid session has not been started');
+            throw new Exception\RuntimeException('A valid session has not been started');
         }
 
         $this->_send('MAIL FROM:<' . $from . '>');
@@ -253,7 +254,7 @@ class Smtp extends AbstractProtocol
     public function rcpt($to)
     {
         if ($this->_mail !== true) {
-            throw new Exception('No sender reverse path has been supplied');
+            throw new Exception\RuntimeException('No sender reverse path has been supplied');
         }
 
         // Set rcpt to true, as per 4.1.1.3 of RFC 2821
@@ -274,7 +275,7 @@ class Smtp extends AbstractProtocol
     {
         // Ensure recipients have been set
         if ($this->_rcpt !== true) {
-            throw new Exception('No recipient forward path has been supplied');
+            throw new Exception\RuntimeException('No recipient forward path has been supplied');
         }
 
         $this->_send('DATA');
@@ -368,7 +369,7 @@ class Smtp extends AbstractProtocol
     public function auth()
     {
         if ($this->_auth === true) {
-            throw new Exception('Already authenticated for this session');
+            throw new Exception\RuntimeException('Already authenticated for this session');
         }
     }
 

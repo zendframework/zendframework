@@ -25,6 +25,7 @@
 namespace Zend\Mail\Storage\Folder;
 
 use Zend\Mail\Storage\MailFolder,
+    Zend\Mail\Storage\Exception,
     Zend\Mail\Storage;
 
 /**
@@ -77,11 +78,11 @@ class Mbox extends Storage\Mbox implements MailFolder
         }
 
         if (isset($params->filename)) {
-            throw new Storage\Exception('use \Zend\Mail\Storage\Mbox for a single file');
+            throw new Exception\InvalidArgumentException('use \Zend\Mail\Storage\Mbox for a single file');
         }
 
         if (!isset($params->dirname) || !is_dir($params->dirname)) {
-            throw new Storage\Exception('no valid dirname given in params');
+            throw new Exception\InvalidArgumentException('no valid dirname given in params');
         }
 
         $this->_rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -113,7 +114,7 @@ class Mbox extends Storage\Mbox implements MailFolder
 
         $dh = @opendir($currentDir);
         if (!$dh) {
-            throw new Storage\Exception("can't read dir $currentDir");
+            throw new Exception\InvalidArgumentException("can't read dir $currentDir");
         }
         while (($entry = readdir($dh)) !== false) {
             // ignore hidden files for mbox
@@ -161,7 +162,7 @@ class Mbox extends Storage\Mbox implements MailFolder
         }
 
         if ($currentFolder->getGlobalName() != DIRECTORY_SEPARATOR . trim($rootFolder, DIRECTORY_SEPARATOR)) {
-            throw new Storage\Exception("folder $rootFolder not found");
+            throw new Exception\InvalidArgumentException("folder $rootFolder not found");
         }
         return $currentFolder;
     }
@@ -187,11 +188,11 @@ class Mbox extends Storage\Mbox implements MailFolder
         } catch(Storage\Exception $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
-                throw new Storage\Exception("{$this->_currentFolder} is not selectable", 0, $e);
+                throw new Exception\RuntimeException("{$this->_currentFolder} is not selectable", 0, $e);
             }
             // seems like file has vanished; rebuilding folder tree - but it's still an exception
             $this->_buildFolderTree($this->_rootdir);
-            throw new Storage\Exception('seems like the mbox file has vanished, I\'ve rebuild the ' .
+            throw new Exception\RuntimeException('seems like the mbox file has vanished, I\'ve rebuild the ' .
                                                          'folder tree, search for an other folder and try again', 0, $e);
         }
     }

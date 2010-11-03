@@ -44,7 +44,7 @@ namespace Zend\Form\Decorator;
  * defaults to append content.
  *
  * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Exception
+ * @uses       \Zend\Form\Decorator\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -64,12 +64,12 @@ class Callback extends AbstractDecorator
      *
      * @param  callback $callback
      * @return \Zend\Form\Decorator\Callback
-     * @throws \Zend\Form\Exception
+     * @throws \Zend\Form\Decorator\Exception
      */
     public function setCallback($callback)
     {
         if (!is_callable($callback)) {
-            throw new Exception('Invalid callback provided to callback decorator');
+            throw new Exception\InvalidArgumentException('Invalid callback provided to callback decorator');
         }
         $this->_callback = $callback;
         return $this;

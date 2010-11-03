@@ -128,7 +128,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
                 'type' => 'ZendTest\Navigation\TestAsset\InvalidPage',
                 'label' => 'My Invalid Page'
             ));
-        } catch(Navigation\Exception $e) {
+        } catch(Navigation\Exception\InvalidArgumentException $e) {
             return;
         }
 
@@ -144,11 +144,11 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
         try {
             $page = AbstractPage::factory($pageConfig);
-        } catch(\Zend\Exception $e) {
+        } catch(Navigation\Exception\InvalidArgumentException $e) {
             return;
         }
 
-        $msg = 'A Zend_Exception has not been thrown for non-existant class';
+        $msg = 'An exception has not been thrown for non-existant class';
         $this->fail($msg);
     }
 
@@ -158,7 +158,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
             $page = AbstractPage::factory(array(
                 'label' => 'My Invalid Page'
             ));
-        } catch(Navigation\Exception $e) {
+        } catch(Navigation\Exception\InvalidArgumentException $e) {
             return;
         }
 

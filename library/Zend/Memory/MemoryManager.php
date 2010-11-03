@@ -405,9 +405,8 @@ class MemoryManager
             }
         }
 
-        throw new Exception('Memory manager can\'t get enough space.');
+        throw new Exception\RuntimeException('Memory manager can\'t get enough space.');
     }
-
 
     /**
      * Swap object data to disk

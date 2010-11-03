@@ -119,11 +119,9 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($object, $this->definition->getObject());
     }
 
-    /**
-     * @expectedException Zend\Server\Exception
-     */
     public function testSettingObjectToNonObjectShouldThrowException()
     {
+        $this->setExpectedException('Zend\Server\Exception\InvalidArgumentException', 'Invalid object passed to');
         $this->definition->setObject('foo');
     }
 

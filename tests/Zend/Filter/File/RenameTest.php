@@ -371,12 +371,9 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             array('source'    => $this->_oldFile,
                   'target'    => $this->_newFile,
                   'overwrite' => false)), $filter->getFile());
-        try {
-            $this->assertEquals($this->_newFile, $filter->getNewName($this->_oldFile));
-            $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('could not be renamed', $e->getMessage());
-        }
+        
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'could not be renamed');
+        $this->assertEquals($this->_newFile, $filter->getNewName($this->_oldFile));
     }
 
     /**
@@ -420,7 +417,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
     public function testAddFileWithInvalidOption()
     {
         $filter = new FileRename($this->_oldFile);
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Invalid options');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
         $filter->addFile(1234);
     }
 
@@ -429,7 +426,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidContruction()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Invalid options');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
         $filter = new FileRename(1234);
     }
 }

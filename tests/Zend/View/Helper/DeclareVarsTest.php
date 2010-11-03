@@ -24,13 +24,6 @@
  */
 namespace ZendTest\View\Helper;
 
-// Call Zend_View_Helper_DeclareVarsTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_DeclareVarsTest::main");
-}
-
-
-
 /**
  * @category   Zend
  * @package    Zend_View
@@ -42,19 +35,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class DeclareVarsTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_View_Helper_DeclareVarsTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         $view = new \Zend\View\View();
@@ -112,9 +92,4 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('myValue', $this->view->varName3);
         $this->assertEquals('additionalValue', $this->view->varName5);
     }
-}
-
-// Call Zend_View_Helper_DeclareVarsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_DeclareVarsTest::main") {
-    \Zend_View_Helper_DeclareVarsTest::main();
 }

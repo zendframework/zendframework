@@ -27,11 +27,6 @@ use Zend\Http;
 use Zend\Http\Response;
 
 /**
- * Test helper
- */
-
-
-/**
  * Zend_Http_CookieJar unit tests
  *
  * @category   Zend
@@ -108,10 +103,13 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      * Test we get an exception in case of invalid response objects
      *
      * @dataProvider invalidResponseProvider
-     * @expectedException Zend\Http\Exception
      */
     public function testExceptAddCookiesInvalidResponse($resp)
     {
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            '$response is expected to be a Response object');
+
         $jar = new Http\CookieJar();
         $jar->addCookiesFromResponse($resp, 'http://www.example.com');
     }
@@ -241,14 +239,14 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         try {
             $jar->getCookie('foo.com', 'foo');
             $this->fail('Expected getCookie to throw exception, invalid URI string passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
 
         try {
             $jar->getCookie(new \Zend\Uri\Url('mailto:nobody@dev.null.com'), 'foo');
             $this->fail('Expected getCookie to throw exception, invalid URI object passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
     }
@@ -403,14 +401,14 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         try {
             $cookies = $jar->getMatchingCookies('invalid.com', true, Http\CookieJar::COOKIE_STRING_ARRAY);
             $this->fail('Expected getMatchingCookies to throw exception, invalid URI string passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
 
         try {
             $cookies = $jar->getMatchingCookies(new \stdClass(), true, Http\CookieJar::COOKIE_STRING_ARRAY);
             $this->fail('Expected getCookie to throw exception, invalid URI object passed');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
     }

@@ -65,49 +65,38 @@ class DictionaryTest extends \PHPUnit_Framework_TestCase
 
     public function testPDFDictionaryBadInput1()
     {
-        try {
-            $arrayObj = new InternalType\DictionaryObject(346);
-        } catch (Pdf\Exception $e) {
-            $this->assertContains('must be an array', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException('\Zend\Pdf\Exception\RuntimeException', 'must be an array');
+        $dictionaryObj = new InternalType\DictionaryObject(346);
     }
 
     public function testPDFDictionaryBadInput2()
     {
-        try {
-            $srcArray = array();
-            $srcArray['Bool'] = new InternalType\BooleanObject(false);
-            $srcArray['Number'] = new InternalType\NumericObject(100.426);
-            $srcArray['Name'] = new InternalType\NameObject('MyName');
-            $srcArray['Text'] = new InternalType\StringObject('some text');
-            $srcArray['BinaryText'] = new InternalType\BinaryStringObject('some text');
-            $srcArray['bad value'] = 24;
-            $dictionaryObj = new InternalType\DictionaryObject($srcArray);
-        } catch (Pdf\Exception $e) {
-            $this->assertContains('must be \Zend\Pdf\InternalType', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException(
+            '\Zend\Pdf\Exception\RuntimeException',
+            'must be \Zend\Pdf\InternalType\AbstractTypeObject'
+        );
+
+        $srcArray = array();
+        $srcArray['Bool'] = new InternalType\BooleanObject(false);
+        $srcArray['Number'] = new InternalType\NumericObject(100.426);
+        $srcArray['Name'] = new InternalType\NameObject('MyName');
+        $srcArray['Text'] = new InternalType\StringObject('some text');
+        $srcArray['BinaryText'] = new InternalType\BinaryStringObject('some text');
+        $srcArray['bad value'] = 24;
+        $dictionaryObj = new InternalType\DictionaryObject($srcArray);
     }
 
     public function testPDFDictionaryBadInput3()
     {
-        try {
-            $srcArray = array();
-            $srcArray['Bool'] = new InternalType\BooleanObject(false);
-            $srcArray['Number'] = new InternalType\NumericObject(100.426);
-            $srcArray['Name'] = new InternalType\NameObject('MyName');
-            $srcArray['Text'] = new InternalType\StringObject('some text');
-            $srcArray['BinaryText'] = new InternalType\BinaryStringObject('some text');
-            $srcArray[5] = new InternalType\StringObject('bad name');
-            $dictionaryObj = new InternalType\DictionaryObject($srcArray);
-        } catch (Pdf\Exception $e) {
-            $this->assertContains('keys must be strings', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException('\Zend\Pdf\Exception\RuntimeException', 'keys must be strings');
+        $srcArray = array();
+        $srcArray['Bool'] = new InternalType\BooleanObject(false);
+        $srcArray['Number'] = new InternalType\NumericObject(100.426);
+        $srcArray['Name'] = new InternalType\NameObject('MyName');
+        $srcArray['Text'] = new InternalType\StringObject('some text');
+        $srcArray['BinaryText'] = new InternalType\BinaryStringObject('some text');
+        $srcArray[5] = new InternalType\StringObject('bad name');
+        $dictionaryObj = new InternalType\DictionaryObject($srcArray);
     }
 
     public function testGetType()

@@ -42,7 +42,7 @@ class Lzf implements CompressionAlgorithm
     public function __construct()
     {
         if (!extension_loaded('lzf')) {
-            throw new Exception('This filter needs the lzf extension');
+            throw new Exception\ExtensionNotLoadedException('This filter needs the lzf extension');
         }
     }
 
@@ -56,7 +56,7 @@ class Lzf implements CompressionAlgorithm
     {
         $compressed = lzf_compress($content);
         if (!$compressed) {
-            throw new Exception('Error during compression');
+            throw new Exception\RuntimeException('Error during compression');
         }
 
         return $compressed;
@@ -72,7 +72,7 @@ class Lzf implements CompressionAlgorithm
     {
         $compressed = lzf_decompress($content);
         if (!$compressed) {
-            throw new Exception('Error during compression');
+            throw new Exception\RuntimeException('Error during compression');
         }
 
         return $compressed;

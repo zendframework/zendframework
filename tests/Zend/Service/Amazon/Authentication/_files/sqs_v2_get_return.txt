@@ -1,0 +1,4 @@
+GET
+queue.amazonaws.com
+/770098461991/queue2
+AWSAccessKeyId=0PN5J17HBGZHT7JJ3X82&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2009-11-11T13%3A52%3A38Z&Version=2009-07-15

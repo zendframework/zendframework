@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Barcode\Object;
-use Zend\Validator\Barcode as BarcodeValidator;
+use Zend\Validator\Barcode as BarcodeValidator,
+    Zend\Barcode\Object\Exception\BarcodeValidationException;
 
 /**
  * Class for generate Ean8 barcode
@@ -162,7 +163,7 @@ class Ean8 extends Ean13
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
-            throw new Exception($message);
+            throw new BarcodeValidationException($message);
         }
     }
 }

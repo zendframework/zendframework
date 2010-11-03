@@ -22,8 +22,9 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Inflector as InflectorFilter,
-    Zend\Loader\PrefixPathMapper,
-    Zend\Loader\PluginLoader;
+    Zend\Filter\FilterBroker,
+    Zend\Loader\Broker,
+    Zend\Loader\PluginBroker;
 
 /**
  * Test class for Zend_Filter_Inflector.
@@ -46,45 +47,23 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->inflector = new InflectorFilter();
-        $this->loader    = $this->inflector->getPluginLoader();
+        $this->broker    = $this->inflector->getPluginBroker();
     }
 
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
+    public function testGetPluginBrokerReturnsFilterBrokerByDefault()
     {
-        $this->loader->clearPaths();
+        $broker = $this->inflector->getPluginBroker();
+        $this->assertTrue($broker instanceof FilterBroker);
     }
 
-    public function testGetPluginLoaderReturnsLoaderByDefault()
+    public function testSetPluginBrokerAllowsSettingAlternatePluginBroker()
     {
-        $loader = $this->inflector->getPluginLoader();
-        $this->assertTrue($loader instanceof PrefixPathMapper);
-        $paths = $loader->getPaths();
-        $this->assertEquals(1, count($paths));
-        $this->assertTrue(array_key_exists('Zend\\Filter\\', $paths));
-    }
-
-    public function testSetPluginLoaderAllowsSettingAlternatePluginLoader()
-    {
-        $defaultLoader = $this->inflector->getPluginLoader();
-        $loader = new PluginLoader();
-        $this->inflector->setPluginLoader($loader);
-        $receivedLoader = $this->inflector->getPluginLoader();
-        $this->assertNotSame($defaultLoader, $receivedLoader);
-        $this->assertSame($loader, $receivedLoader);
-    }
-
-    public function testAddFilterPrefixPathAddsPathsToPluginLoader()
-    {
-        $this->inflector->addFilterPrefixPath('Foo\\Bar', 'Zend/View/');
-        $loader = $this->inflector->getPluginLoader();
-        $paths  = $loader->getPaths();
-        $this->assertTrue(array_key_exists('Foo\\Bar\\', $paths));
+        $defaultBroker = $this->inflector->getPluginBroker();
+        $broker = new PluginBroker();
+        $this->inflector->setPluginBroker($broker);
+        $receivedBroker = $this->inflector->getPluginBroker();
+        $this->assertNotSame($defaultBroker, $receivedBroker);
+        $this->assertSame($broker, $receivedBroker);
     }
 
     public function testTargetAccessorsWork()
@@ -301,7 +280,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
             '?=##'
             );
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception');
+        $this->setExpectedException('\Zend\Filter\Exception\RuntimeException', 'perhaps a rule was not satisfied');
         $filtered = $inflector(array('controller' => 'FooBar'));
     }
 
@@ -356,16 +335,11 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     protected function _testOptions($inflector)
     {
         $options = $this->getOptions();
-        $loader  = $inflector->getPluginLoader();
+        $broker  = $inflector->getPluginBroker();
         $this->assertEquals($options['target'], $inflector->getTarget());
 
-        $viewFilterPath = $loader->getPaths('Zend\\View\\Filter');
-        $this->assertEquals($options['filterPrefixPath']['Zend\\View\\Filter'], $viewFilterPath[0]);
-        $fooFilterPath = $loader->getPaths('Foo\\Filter');
-        $this->assertEquals($options['filterPrefixPath']['Foo\\Filter'], $fooFilterPath[0]);
-
+        $this->assertType('Zend\Filter\FilterBroker', $broker);
         $this->assertTrue($inflector->isThrowTargetExceptionsOn());
-
         $this->assertEquals($options['targetReplacementIdentifier'], $inflector->getTargetReplacementIdentifier());
 
         $rules = $inflector->getRules();

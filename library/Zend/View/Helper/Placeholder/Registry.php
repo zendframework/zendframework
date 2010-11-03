@@ -50,7 +50,7 @@ class Registry
      * Default container class
      * @var string
      */
-    protected $_containerClass = '\Zend\View\Helper\Placeholder\Container';
+    protected $_containerClass = 'Zend\View\Helper\Placeholder\Container';
 
     /**
      * Placeholder containers

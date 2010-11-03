@@ -137,7 +137,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
 
         // Expect a Zend_Log_Exception because the subject prepend text cannot
         // be set of the Zend_Mail object already has a subject line set.
-        $this->setExpectedException('Zend\Log\Exception');
+        $this->setExpectedException('Zend\Log\Exception\RuntimeException');
 
         // Set a subject line so the setSubjectPrependText() call triggers an
         // exception.
@@ -188,7 +188,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         list(, $writer) = $this->_getSimpleLogger();
 
         // If Zend_Layout is not being used, a formatter cannot be set for it.
-        $this->setExpectedException('Zend\Log\Exception');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
         $writer->setLayoutFormatter(new SimpleFormatter());
     }
 

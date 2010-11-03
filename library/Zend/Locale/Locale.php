@@ -22,6 +22,7 @@
  * @namespace
  */
 namespace Zend\Locale;
+
 use Zend\Registry;
 
 /**
@@ -29,7 +30,8 @@ use Zend\Registry;
  *
  * @uses      \Zend\Locale\Data
  * @uses      \Zend\Locale\Data\Translation
- * @uses      \Zend\Locale\Exception
+ * @uses      \Zend\Locale\Exception\UnexpectedValueException
+ * @uses      \Zend\Locale\Exception\InvalidArgumentException
  * @uses      \Zend\Registry
  * @category  Zend
  * @package   Zend_Locale
@@ -252,7 +254,7 @@ class Locale
      *  4. Framework Standard
      *
      * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for parsing input
-     * @throws \Zend\Locale\Exception When autodetection has been failed
+     * @throws \Zend\Locale\Exception\UnexpectedValueException When autodetection has been failed
      */
     public function __construct($locale = null)
     {
@@ -323,19 +325,19 @@ class Locale
      *
      * @param  string|\Zend\Locale\Locale $locale  Locale to set
      * @param  float              $quality The quality to set from 0 to 1
-     * @throws \Zend\Locale\Exception When a autolocale was given
-     * @throws \Zend\Locale\Exception When a unknown locale was given
+     * @throws \Zend\Locale\Exception\InvalidArgumentException When a autolocale was given
+     * @throws \Zend\Locale\Exception\InvalidArgumentException When a unknown locale was given
      * @return void
      */
     public static function setDefault($locale, $quality = 1)
     {
         if (($locale === 'auto') or ($locale === 'root') or ($locale === 'default') or
             ($locale === 'environment') or ($locale === 'browser')) {
-            throw new Exception('Only fully qualified locales can be used as default!');
+            throw new Exception\InvalidArgumentException('Only fully qualified locales can be used as default!');
         }
 
         if (($quality < 0.1) or ($quality > 100)) {
-            throw new Exception("Quality must be between 0.1 and 100");
+            throw new Exception\InvalidArgumentException("Quality must be between 0.1 and 100");
         }
 
         if ($quality > 1) {
@@ -350,7 +352,7 @@ class Locale
             if (isset(self::$_localeData[$elocale[0]]) === true) {
                 self::$_default = array($elocale[0] => $quality);
             } else {
-                throw new Exception("Unknown locale '" . (string) $locale . "' can not be set as default!");
+                throw new Exception\InvalidArgumentException("Unknown locale '" . (string) $locale . "' can not be set as default!");
             }
         }
 
@@ -827,7 +829,7 @@ class Locale
 
         try {
             $locale = self::_prepareLocale($locale, $strict);
-        } catch (Exception $e) {
+        } catch (Exception\UnexpectedValueException $e) {
             return false;
         }
 
@@ -862,7 +864,7 @@ class Locale
      * Returns the found locale as string
      *
      * @param string $locale
-     * @throws \Zend\Locale\Exception When the given locale is no locale or the autodetection fails
+     * @throws \Zend\Locale\Exception\InvalidArgumentException When the given locale is no locale or the autodetection fails
      * @return string
      */
     public static function findLocale($locale = null)
@@ -882,7 +884,7 @@ class Locale
                 $locale = Locale::getLocaleToTerritory($locale);
 
                 if (empty($locale)) {
-                    throw new Exception("The locale '$locale' is no known locale");
+                    throw new Exception\InvalidArgumentException("The locale '$locale' is no known locale");
                 }
             } else {
                 $locale = new self($locale);
@@ -995,7 +997,7 @@ class Locale
      *
      * @param  string|\Zend\Locale\Locale $locale (Optional) Locale to work on
      * @param  boolean            $strict (Optional) Strict preparation
-     * @throws \Zend\Locale\Exception When no locale is set which is only possible when the class was wrong extended
+     * @throws \Zend\Locale\Exception\UnexpectedValueException When no locale is set which is only possible when the class was wrong extended
      * @return string
      */
     private static function _prepareLocale($locale, $strict = false)
@@ -1037,9 +1039,9 @@ class Locale
             }
         }
 
-        // This can only happen when someone extends Zend_Locale and erases the default
+        // This can only happen when someone extends Zend\Locale and erases the default
         if ($locale === null) {
-            throw new Exception('Autodetection of Locale has been failed!');
+            throw new Exception\UnexpectedValueException('Autodetection of Locale has been failed!');
         }
 
         if (strpos($locale, '-') !== false) {

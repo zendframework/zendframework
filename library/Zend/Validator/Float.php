@@ -98,8 +98,6 @@ class Float extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is a floating-point value
      *
      * @param  string $value

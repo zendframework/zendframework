@@ -26,7 +26,7 @@ namespace Zend\Rest\Client;
 
 /**
  * @uses       IteratorAggregate
- * @uses       \Zend\Rest\Client\ResultException
+ * @uses       \Zend\Rest\Client\Exception\ResultException
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
@@ -50,6 +50,7 @@ class Result implements \IteratorAggregate
      * Constructor
      *
      * @param string $data XML Result
+     * @throws \Zend\Rest\Client\Exception\ResultException
      * @return void
      */
     public function __construct($data)
@@ -64,7 +65,7 @@ class Result implements \IteratorAggregate
                 $message = "REST Response Error: " . $this->_errstr;
                 $this->_errstr = null;
             }
-            throw new ResultException($message);
+            throw new Exception\ResultException($message);
         }
     }
 

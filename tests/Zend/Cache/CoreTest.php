@@ -521,6 +521,10 @@ class CoreTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('File Zend/Log.php already included');
         }
 
+        if (!class_exists('Zend_Cache_Core', true)) {
+            $this->markTestIncomplete('File Zend/Cache/Core.php cannot be found');
+        }
+
         $cacheCore = new Zend_Cache_Core(
             array('logging' => true)
         );

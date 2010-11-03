@@ -102,12 +102,12 @@ class ServerIntrospection
         if (! is_array($serverSignatures)) {
             $type = gettype($serverSignatures);
             $error = "Multicall return is malformed.  Expected array, got $type";
-            throw new IntrospectException($error);
+            throw new Exception\IntrospectException($error);
         }
 
         if (count($serverSignatures) != count($methods)) {
             $error = 'Bad number of signatures received from multicall';
-            throw new IntrospectException($error);
+            throw new Exception\IntrospectException($error);
         }
 
         // Create a new signatures array with the methods name as keys and the signature as value
@@ -151,7 +151,7 @@ class ServerIntrospection
         $signature = $this->_system->methodSignature($method);
         if (!is_array($signature)) {
             $error = 'Invalid signature for method "' . $method . '"';
-            throw new IntrospectException($error);
+            throw new Exception\IntrospectException($error);
         }
         return $signature;
     }

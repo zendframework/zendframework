@@ -254,7 +254,7 @@ class Request
      */
     public function loadJson($json)
     {
-        $options = Json\Json::decode($json);
+        $options = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
         $this->setOptions($options);
     }
 

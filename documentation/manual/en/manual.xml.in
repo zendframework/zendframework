@@ -1196,9 +1196,29 @@
                     <xi:include href="../en/module_specs/Zend_Loader.xml" />
                 </xi:fallback>
             </xi:include>
-            <xi:include href="module_specs/Zend_Loader-Autoloader.xml">
+            <xi:include href="module_specs/Zend_Loader-SplAutoloader.xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Loader-Autoloader.xml" />
+                    <xi:include href="../en/module_specs/Zend_Loader-SplAutoloader.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-AutoloaderFactory.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-AutoloaderFactory.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-StandardAutoloader.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-StandardAutoloader.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-ClassMapAutoloader.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-ClassMapAutoloader.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-Classmap_Generator.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-Classmap_Generator.xml" />
                 </xi:fallback>
             </xi:include>
             <xi:include href="module_specs/Zend_Loader-Autoloader-Resource.xml">
@@ -1206,9 +1226,39 @@
                     <xi:include href="../en/module_specs/Zend_Loader-Autoloader-Resource.xml" />
                 </xi:fallback>
             </xi:include>
-            <xi:include href="module_specs/Zend_Loader-PluginLoader.xml">
+            <xi:include href="module_specs/Zend_Loader-ShortNameLocater.xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Loader-PluginLoader.xml" />
+                    <xi:include href="../en/module_specs/Zend_Loader-ShortNameLocater.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-PluginClassLocater.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-PluginClassLocater.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-PluginClassLoader.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-PluginClassLoader.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-PrefixPathMapper.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-PrefixPathMapper.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-PrefixPathLoader.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-PrefixPathLoader.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-Broker.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-Broker.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Loader-PluginBroker.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Loader-PluginBroker.xml" />
                 </xi:fallback>
             </xi:include>
         </chapter>
@@ -1291,6 +1341,11 @@
             <xi:include href="module_specs/Zend_Mail-DifferentTransports.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Mail-DifferentTransports.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Mail-UsingFileTransport.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mail-UsingFileTransport.xml" />
                 </xi:fallback>
             </xi:include>
             <xi:include href="module_specs/Zend_Mail-HtmlMails.xml">

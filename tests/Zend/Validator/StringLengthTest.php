@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -30,28 +30,28 @@ use Zend\Validator;
  */
 
 /**
- * @see Zend_Validate_StringLength
+ * @see Zend_Validator_StringLength
  */
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class StringLengthTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Default instance created for all test methods
      *
-     * @var Zend_Validate_StringLength
+     * @var Zend_Validator_StringLength
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_StringLength object for each test method
+     * Creates a new Zend_Validator_StringLength object for each test method
      *
      * @return void
      */
@@ -133,15 +133,9 @@ class StringLengthTest extends \PHPUnit_Framework_TestCase
     {
         $max = 1;
         $min = 2;
-        try {
-            $this->_validator->setMax($max)->setMin($min);
-            $this->fail('Expected Zend_Validate_Exception not thrown');
-        } catch (Validator\Exception $e) {
-            $this->assertEquals(
-                "The minimum must be less than or equal to the maximum length, but $min > $max",
-                $e->getMessage()
-                );
-        }
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'The minimum must be less than or equal to the maximum length, but');
+        $this->_validator->setMax($max)->setMin($min);
     }
 
     /**
@@ -153,15 +147,9 @@ class StringLengthTest extends \PHPUnit_Framework_TestCase
     {
         $max = 1;
         $min = 2;
-        try {
-            $this->_validator->setMin($min)->setMax($max);
-            $this->fail('Expected Zend_Validate_Exception not thrown');
-        } catch (Validator\Exception $e) {
-            $this->assertEquals(
-                "The maximum must be greater than or equal to the minimum length, but $max < $min",
-                $e->getMessage()
-                );
-        }
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'The maximum must be greater than or equal to the minimum length, but ');
+        $this->_validator->setMin($min)->setMax($max);
     }
 
     /**

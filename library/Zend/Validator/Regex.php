@@ -77,7 +77,7 @@ class Regex extends AbstractValidator
             if (array_key_exists('pattern', $pattern)) {
                 $pattern = $pattern['pattern'];
             } else {
-                throw new Exception("Missing option 'pattern'");
+                throw new Exception\InvalidArgumentException("Missing option 'pattern'");
             }
         }
 
@@ -107,15 +107,13 @@ class Regex extends AbstractValidator
         $status         = @preg_match($this->_pattern, "Test");
 
         if (false === $status) {
-             throw new Exception("Internal error while using the pattern '$this->_pattern'");
+             throw new Exception\InvalidArgumentException("Internal error while using the pattern '$this->_pattern'");
         }
 
         return $this;
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value matches against the pattern option
      *
      * @param  string $value

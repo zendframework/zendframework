@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Paginator
+ * @package    Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,25 +22,19 @@
  * @namespace
  */
 namespace Zend\Paginator;
+      use \Countable;
 
 /**
  * Interface for pagination adapters.
  *
  * @uses       Countable
  * @category   Zend
- * @package    Zend_Paginator
+ * @package    Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter extends \Countable
+interface Adapter extends Countable
 {
-    /**
-     * Returns the total number of rows in the collection.
-     *
-     * @return integer
-     */
-    //public function count();
-
     /**
      * Returns an collection of items for a page.
      *

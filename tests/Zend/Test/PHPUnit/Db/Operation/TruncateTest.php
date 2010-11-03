@@ -81,7 +81,7 @@ class TruncateTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConnectionGivenThrowsException()
     {
-        $this->setExpectedException("Zend\Test\PHPUnit\Db\Exception");
+        $this->setExpectedException("Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException");
 
         $dataSet = $this->getMock('PHPUnit_Extensions_Database_DataSet_IDataSet');
         $connection = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');

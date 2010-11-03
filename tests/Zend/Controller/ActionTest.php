@@ -23,11 +23,12 @@
  * @namespace
  */
 namespace ZendTest\Controller;
-use Zend\Controller;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Controller\Request;
-use Zend\Controller\Response;
-use Zend\Controller\Action\Helper;
+
+use Zend\Controller,
+    Zend\Controller\Front as FrontController,
+    Zend\Controller\Request,
+    Zend\Controller\Response,
+    Zend\Controller\Action\Helper;
 
 /**
  * @category   Zend
@@ -42,10 +43,10 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        HelperBroker::reset();
-        $front = Controller\Front::getInstance();
+        $front = FrontController::getInstance();
         $front->resetInstance();
         $front->setControllerDirectory('.', 'default');
+        $this->broker = $front->getHelperBroker();
 
         $this->_controller = new TestController(
             new Request\Http(),
@@ -55,8 +56,9 @@ class ActionTest extends \PHPUnit_Framework_TestCase
                 'bar' => 'baz'
             )
         );
+        $this->_controller->setHelperBroker($this->broker);
 
-        $redirector = $this->_controller->getHelper('redirector');
+        $redirector = $this->_controller->broker('redirector');
         $redirector->setExit(false);
     }
 
@@ -67,6 +69,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testInit()
     {
+        $this->_controller->init();
         $this->assertEquals('bar', $this->_controller->initArgs['foo']);
         $this->assertEquals('baz', $this->_controller->initArgs['bar']);
     }
@@ -267,10 +270,17 @@ class ActionTest extends \PHPUnit_Framework_TestCase
             new Response\Cli()
         );
         $view = $controller->initView();
-        $this->assertTrue($view instanceof \Zend\View\View);
-        $scriptPath = $view->getScriptPaths();
-        $this->assertTrue(is_array($scriptPath));
-        $this->assertEquals(__DIR__ . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts/', $scriptPath[0]);
+        $this->assertTrue($view instanceof \Zend\View\Renderer);
+        $scriptPath = $view->resolver()->getPaths();
+
+        $found = false;
+        $expected = new \SplFileInfo(__DIR__ . '/views/scripts/');
+        foreach ($scriptPath as $path) {
+            if (rtrim($path, DIRECTORY_SEPARATOR) == $expected->getPathname()) {
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
     }
 
     public function testRender()
@@ -358,13 +368,14 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testGetViewScriptDoesNotOverwriteNoControllerFlagWhenNullPassed()
     {
         Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
-        $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer = $this->broker->load('viewRenderer');
 
         $request    = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('test');
         $response   = new Response\Cli();
         $controller = new \ViewController($request, $response);
+        $controller->setHelperBroker($this->broker);
 
         $this->assertSame($viewRenderer->getActionController(), $controller);
         $viewRenderer->setNoController(true);
@@ -405,34 +416,27 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetHelper()
     {
-        $redirector = $this->_controller->getHelper('redirector');
+        $redirector = $this->_controller->broker('redirector');
         $this->assertTrue($redirector instanceof Helper\AbstractHelper);
         $this->assertTrue($redirector instanceof Helper\Redirector);
     }
 
-    public function testGetHelperCopy()
-    {
-        $redirector = $this->_controller->getHelper('redirector');
-        $copy       = $this->_controller->getHelperCopy('redirector');
-        $this->assertNotSame($redirector, $copy);
-        $this->assertTrue($copy instanceof Helper\Redirector);
-    }
-
     public function testViewInjectionUsingViewRenderer()
     {
-        HelperBroker::addHelper(new Helper\ViewRenderer());
+        $this->broker->register('viewRenderer', new Helper\ViewRenderer());
         $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('script');
         $response = new Response\Cli();
         Controller\Front::getInstance()->setControllerDirectory(__DIR__ . DIRECTORY_SEPARATOR . '_files');
         $controller = new \ViewController($request, $response);
+        $controller->setHelperBroker($this->broker);
         $this->assertNotNull($controller->view);
     }
 
     public function testRenderUsingViewRenderer()
     {
-        HelperBroker::addHelper(new Helper\ViewRenderer());
+        $this->broker->register('viewRenderer', new Helper\ViewRenderer());
         $request = new Request\Http();
         $request->setControllerName('view')
                 ->setActionName('script');

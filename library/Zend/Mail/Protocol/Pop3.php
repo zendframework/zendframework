@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Mail\Protocol;
-
+use Zend\Mail\Protocol\Exception;
 /**
  * @uses       \Zend\Mail\Protocol\Exception
  * @category   Zend
@@ -105,7 +105,7 @@ class Pop3
         $errstr = '';
         $this->_socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
         if (!$this->_socket) {
-            throw new Exception('cannot connect to host; error = ' . $errstr
+            throw new Exception\RuntimeException('cannot connect to host; error = ' . $errstr
                                 . ' (errno = ' . $errno . ' )');
         }
 
@@ -123,7 +123,7 @@ class Pop3
             $this->request('STLS');
             $result = stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
             if (!$result) {
-                throw new Exception('cannot enable TLS');
+                throw new Exception\RuntimeException('cannot enable TLS');
             }
         }
 
@@ -142,7 +142,7 @@ class Pop3
     {
         $result = @fputs($this->_socket, $request . "\r\n");
         if (!$result) {
-            throw new Exception('send failed - connection closed?');
+            throw new Exception\RuntimeException('send failed - connection closed?');
         }
     }
 
@@ -158,7 +158,7 @@ class Pop3
     {
         $result = @fgets($this->_socket);
         if (!is_string($result)) {
-            throw new Exception('read failed - connection closed?');
+            throw new Exception\RuntimeException('read failed - connection closed?');
         }
 
         $result = trim($result);
@@ -170,7 +170,7 @@ class Pop3
         }
 
         if ($status != '+OK') {
-            throw new Exception('last request failed');
+            throw new Exception\RuntimeException('last request failed');
         }
 
         if ($multiline) {
@@ -358,7 +358,7 @@ class Pop3
             if ($fallback) {
                 return $this->retrieve($msgno);
             } else {
-                throw new Exception('top not supported and no fallback wanted');
+                throw new Exception\RuntimeException('top not supported and no fallback wanted');
             }
         }
         $this->hasTop = true;

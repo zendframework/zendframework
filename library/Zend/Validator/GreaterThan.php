@@ -73,7 +73,7 @@ class GreaterThan extends AbstractValidator
             if (array_key_exists('min', $min)) {
                 $min = $min['min'];
             } else {
-                throw new Exception("Missing option 'min'");
+                throw new Exception\InvalidArgumentException("Missing option 'min'");
             }
         }
 
@@ -103,8 +103,6 @@ class GreaterThan extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is greater than min option
      *
      * @param  mixed $value

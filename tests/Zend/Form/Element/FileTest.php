@@ -27,10 +27,11 @@ use Zend\Form\Element\File as FileElement,
     Zend\Form\Form,
     Zend\Form\Decorator,
     Zend\Form\SubForm,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
+    Zend\Loader\PrefixPathMapper,
     Zend\Registry,
     Zend\Translator\Translator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_File
@@ -63,9 +64,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $loader = $this->element->getPluginLoader('decorator');
         $paths = $loader->getPaths('Zend\Form\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
 
-        $loader = new PluginLoader;
+        $loader = new PrefixPathLoader;
         $this->element->setPluginLoader($loader, 'decorator');
         $test = $this->element->getPluginLoader('decorator');
         $this->assertSame($loader, $test);
@@ -76,7 +77,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->element->addPrefixPath('Foo\Decorator', 'Foo/Decorator/', 'decorator');
         $loader = $this->element->getPluginLoader('decorator');
         $paths = $loader->getPaths('Foo\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
     }
 
     public function testElementShouldAddToAllPluginLoadersWhenAddingNullPrefixPath()
@@ -89,7 +90,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
             $string = str_replace(' ', '\\', $string);
             $prefix = 'Foo\\' . $string;
             $paths  = $loader->getPaths($prefix);
-            $this->assertTrue(is_array($paths), "Failed asserting paths found for prefix $prefix");
+            $this->assertType('SplStack', $paths);
+            $this->assertNotEquals(0, count($paths));
         }
     }
 
@@ -109,16 +111,16 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function testElementShouldThrowExceptionWhenAddingAdapterOfInvalidType()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element->setTransferAdapter(new \stdClass);
     }
 
     public function testShouldRegisterPluginLoaderWithFileTransferAdapterPathByDefault()
     {
         $loader = $this->element->getPluginLoader('transfer\\adapter');
-        $this->assertTrue($loader instanceof PluginLoader);
+        $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\File\Transfer\Adapter');
-        $this->assertTrue(is_array($paths));
+        $this->assertType('SplStack', $paths);
     }
 
     public function testElementShouldAllowSpecifyingAdapterUsingPluginLoader()
@@ -214,8 +216,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
         $form->setView(new View());
         $output = (string) $form;
-        $this->assertContains('name="file1"', $output);
-        $this->assertContains('name="file2"', $output);
+        $this->assertContains('name="file1"', $output, $output);
+        $this->assertContains('name="file2"', $output, $output);
     }
 
     public function testMultiFileInSubSubSubform()
@@ -236,7 +238,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
         $form->setView(new View());
         $output = (string) $form;
-        $this->assertContains('name="file[]"', $output);
+        $this->assertContains('name="file[]"', $output, $output);
         $this->assertEquals(2, substr_count($output, 'file[]'));
     }
 
@@ -359,7 +361,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->element->setDecorators(array('ViewHelper'));
         $this->assertEquals(1, count($this->element->getDecorators()));
 
-        $this->setExpectedException('Zend\Form\ElementException', 'No file decorator found');
+        $this->setExpectedException('Zend\Form\Element\Exception\RunTimeException', 'No file decorator found');
         $content = $this->element->render(new View());
     }
 

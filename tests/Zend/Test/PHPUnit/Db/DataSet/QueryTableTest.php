@@ -40,7 +40,7 @@ class QueryTableTest extends DataSetTestCase
     {
         $connectionMock = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');
 
-        $this->setExpectedException('Zend\Test\PHPUnit\Db\Exception');
+        $this->setExpectedException('Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException');
         $queryTable = new DataSet\QueryTable("foo", "SELECT * FROM foo", $connectionMock);
     }
 

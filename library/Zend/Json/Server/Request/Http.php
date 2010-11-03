@@ -23,7 +23,7 @@
  */
 namespace Zend\Json\Server\Request;
 
-use Zend\Json\Server\Request as JSONRequest;
+use Zend\Json\Server\Request as JsonRequest;
 
 /**
  * @uses       \Zend\Json\Server\Request\Request
@@ -32,7 +32,7 @@ use Zend\Json\Server\Request as JSONRequest;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Http extends JSONRequest
+class Http extends JsonRequest
 {
     /**
      * Raw JSON pulled from POST body
@@ -61,7 +61,7 @@ class Http extends JSONRequest
      *
      * @return string
      */
-    public function getRawJSON()
+    public function getRawJson()
     {
         return $this->_rawJson;
     }

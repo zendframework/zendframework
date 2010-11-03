@@ -24,7 +24,7 @@
  */
 namespace ZendTest\Paginator\Adapter;
 use Zend\Paginator\Adapter;
-
+use Zend\Paginator\Exception;
 
 /**
  * @category   Zend
@@ -92,12 +92,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     {
         $iterator = new \LimitIterator(new \ArrayIterator(range(1, 101)));
 
-        try {
-            new Adapter\Iterator($iterator);
-        } catch (\Exception $e) {
-            $this->assertType('Zend\Paginator\Exception', $e);
-            $this->assertEquals('Iterator must implement Countable', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Paginator\Adapter\Exception\InvalidArgumentException', 'Iterator must implement Countable');
+        new Adapter\Iterator($iterator);
     }
 
     /**

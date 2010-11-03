@@ -67,7 +67,7 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
         $this->_db = \Zend\Db\DB::factory('Pdo\Sqlite',
                                array('dbname' => ':memory:',
                                      'profiler' => $this->_profiler));
-        $this->_db->getConnection()->exec('CREATE TABLE foo (
+        $this->_db->getConnection()->exec('CREATE TEMP TABLE foo (
                                               id      INTEGNER NOT NULL,
                                               col1    VARCHAR(10) NOT NULL
                                             )');
@@ -75,12 +75,8 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if (extension_loaded('pdo_sqlite')) {
-            $this->_db->getConnection()->exec('DROP TABLE foo');
-        }
-
         Channel\HttpHeaders::destroyInstance();
-        FirePhp\FirePhp::destroyInstance();
+        FirePhp::destroyInstance();
     }
 
     public function testEnable()

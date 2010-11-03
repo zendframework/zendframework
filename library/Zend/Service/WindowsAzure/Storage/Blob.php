@@ -20,8 +20,8 @@
  */
 
 /**
- * @uses       Zend_Http_Client
- * @uses       Zend_Http_Response
+ * @uses       Zend\Http\Client
+ * @uses       Zend\Http\Response
  * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
  * @uses       Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
  * @uses       Zend_Service_WindowsAzure_Exception
@@ -174,7 +174,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata));
 		
 		// Perform request
-		$response = $this->_performRequest($containerName, '?restype=container', Zend_Http_Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);			
+		$response = $this->_performRequest($containerName, '?restype=container', Zend\Http\Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);			
 		if ($response->isSuccessful()) {
 		    return new Zend_Service_WindowsAzure_Storage_BlobContainer(
 		        $containerName,
@@ -205,7 +205,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		}
 
 		// Perform request
-		$response = $this->_performRequest($containerName, '?restype=container&comp=acl', Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
+		$response = $this->_performRequest($containerName, '?restype=container&comp=acl', Zend\Http\Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
 		if ($response->isSuccessful()) {
 		    if ($signedIdentifiers == false)  {
 		        // Only public/private
@@ -285,7 +285,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		}
 		
 		// Perform request
-		$response = $this->_performRequest($containerName, '?restype=container&comp=acl', Zend_Http_Client::PUT, array('x-ms-prop-publicaccess' => $acl), false, $policies, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($containerName, '?restype=container&comp=acl', Zend\Http\Client::PUT, array('x-ms-prop-publicaccess' => $acl), false, $policies, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if (!$response->isSuccessful()) {
 		    throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
@@ -308,7 +308,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		}
 		    
 		// Perform request
-		$response = $this->_performRequest($containerName, '?restype=container', Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);	
+		$response = $this->_performRequest($containerName, '?restype=container', Zend\Http\Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);	
 		if ($response->isSuccessful()) {
 		    // Parse metadata
 		    $metadata = $this->_parseMetadataHeaders($response->getHeaders());
@@ -379,7 +379,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		}
 		
 		// Perform request
-		$response = $this->_performRequest($containerName, '?restype=container&comp=metadata', Zend_Http_Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($containerName, '?restype=container&comp=metadata', Zend\Http\Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if (!$response->isSuccessful()) {
 		    throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
@@ -408,7 +408,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		}
 		
 		// Perform request
-		$response = $this->_performRequest($containerName, '?restype=container', Zend_Http_Client::DELETE, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($containerName, '?restype=container', Zend\Http\Client::DELETE, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if (!$response->isSuccessful()) {
 		    throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
@@ -439,7 +439,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 	    }
 	        
 		// Perform request
-		$response = $this->_performRequest('', $queryString, Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_LIST);	
+		$response = $this->_performRequest('', $queryString, Zend\Http\Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_LIST);	
 		if ($response->isSuccessful()) {
 			$xmlContainers = $this->_parseResponse($response)->Containers->Container;
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
@@ -523,7 +523,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$resourceName = self::createResourceName($containerName , $blobName);
 		
 		// Perform request
-		$response = $this->_performRequest($resourceName, '', Zend_Http_Client::PUT, $headers, false, $fileContents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);	
+		$response = $this->_performRequest($resourceName, '', Zend\Http\Client::PUT, $headers, false, $fileContents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);	
 		if ($response->isSuccessful()) {
 			return new Zend_Service_WindowsAzure_Storage_BlobInstance(
 				$containerName,
@@ -651,7 +651,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$resourceName = self::createResourceName($containerName , $blobName);
 		
     	// Upload
-		$response = $this->_performRequest($resourceName, '?comp=block&blockid=' . base64_encode($identifier), Zend_Http_Client::PUT, null, false, $contents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($resourceName, '?comp=block&blockid=' . base64_encode($identifier), Zend\Http\Client::PUT, null, false, $contents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if (!$response->isSuccessful()) {
 		    throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
@@ -712,7 +712,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$resourceName = self::createResourceName($containerName , $blobName);
 		
 		// Perform request
-		$response = $this->_performRequest($resourceName, '?comp=blocklist', Zend_Http_Client::PUT, $headers, false, $fileContents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($resourceName, '?comp=blocklist', Zend\Http\Client::PUT, $headers, false, $fileContents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if (!$response->isSuccessful()) {
 		    throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
@@ -755,7 +755,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$resourceName = self::createResourceName($containerName , $blobName);
 			
 		// Perform request
-		$response = $this->_performRequest($resourceName, '?comp=blocklist&blocklisttype=' . $blockListType, Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
+		$response = $this->_performRequest($resourceName, '?comp=blocklist&blocklisttype=' . $blockListType, Zend\Http\Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
 		if ($response->isSuccessful()) {
 		    // Parse response
 		    $blockList = $this->_parseResponse($response);
@@ -841,7 +841,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$headers["x-ms-copy-source"] = '/' . $this->_accountName . '/' . $sourceResourceName;
 
 		// Perform request
-		$response = $this->_performRequest($destinationResourceName, '', Zend_Http_Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($destinationResourceName, '', Zend\Http\Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if ($response->isSuccessful()) {
 			return new Zend_Service_WindowsAzure_Storage_BlobInstance(
 				$destinationContainerName,
@@ -895,7 +895,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$resourceName = self::createResourceName($containerName , $blobName);
 		
 		// Perform request
-		$response = $this->_performRequest($resourceName, '', Zend_Http_Client::GET, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
+		$response = $this->_performRequest($resourceName, '', Zend\Http\Client::GET, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
 		if ($response->isSuccessful()) {
 			file_put_contents($localFileName, $response->getBody());
 		} else {
@@ -937,7 +937,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$resourceName = self::createResourceName($containerName , $blobName);
 		    
 		// Perform request
-		$response = $this->_performRequest($resourceName, '', Zend_Http_Client::HEAD, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
+		$response = $this->_performRequest($resourceName, '', Zend\Http\Client::HEAD, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ);
 		if ($response->isSuccessful()) {
 		    // Parse metadata
 		    $metadata = $this->_parseMetadataHeaders($response->getHeaders());
@@ -1026,7 +1026,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		}
 		
 		// Perform request
-		$response = $this->_performRequest($containerName . '/' . $blobName, '?comp=metadata', Zend_Http_Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($containerName . '/' . $blobName, '?comp=metadata', Zend\Http\Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if (!$response->isSuccessful()) {
 		    throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
@@ -1065,7 +1065,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$resourceName = self::createResourceName($containerName , $blobName);
 		
 		// Perform request
-		$response = $this->_performRequest($resourceName, '', Zend_Http_Client::DELETE, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
+		$response = $this->_performRequest($resourceName, '', Zend\Http\Client::DELETE, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_WRITE);
 		if (!$response->isSuccessful()) {
 		    throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
@@ -1108,7 +1108,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 	    }
 
 	    // Perform request
-		$response = $this->_performRequest($containerName, $queryString, Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_LIST);
+		$response = $this->_performRequest($containerName, $queryString, Zend\Http\Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_LIST);
 		if ($response->isSuccessful()) {
 		    // Return value
 		    $blobs = array();
@@ -1321,13 +1321,13 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
     }
     
 	/**
-	 * Get error message from Zend_Http_Response
+	 * Get error message from Zend\Http\Response
 	 * 
-	 * @param Zend_Http_Response $response Repsonse
+	 * @param Zend\Http\Response $response Repsonse
 	 * @param string $alternativeError Alternative error message
 	 * @return string
 	 */
-	protected function _getErrorMessage(Zend_Http_Response $response, $alternativeError = 'Unknown error.')
+	protected function _getErrorMessage(Zend\Http\Response $response, $alternativeError = 'Unknown error.')
 	{
 		$response = $this->_parseResponse($response);
 		if ($response && $response->Message) {

@@ -136,7 +136,6 @@ interface File
      * and advances the file pointer.
      *
      * @return integer|float
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function readLong();
 
@@ -144,7 +143,6 @@ interface File
      * Writes long integer to the end of file
      *
      * @param integer $value
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function writeLong($value);
 
@@ -175,7 +173,6 @@ interface File
      * Writes a string to the end of file.
      *
      * @param string $str
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function writeString($str);
 

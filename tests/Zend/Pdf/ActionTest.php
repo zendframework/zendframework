@@ -387,12 +387,9 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $dictionary->S    = new InternalType\NameObject('URI');
 
 
-        try {
-            $action = Action\AbstractAction::load($dictionary);
-            $this->fail("exception expected");
-        } catch (Pdf\Exception $e) {
-            $this->assertContains('URI action dictionary entry is required', $e->getMessage());
-        }
+        $this->setExpectedException('\Zend\Pdf\Exception\CorruptedPdfException', 'URI action dictionary entry is required');
+        $action = Action\AbstractAction::load($dictionary);
+
     }
 
     public function testActionURICreate()
@@ -432,15 +429,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testPhpVersionBug()
     {
-        try {
-            $file = __DIR__ . '/_files/ZF-8462.pdf';
-            $pdf = Pdf\PdfDocument::load($file);
-        } catch (Pdf\Exception $e) {
-            if (strpos($e->getMessage(), 'Cross-reference streams are not supported yet.') !== false) {
-                // Skip expected exception
-                return;
-            }
-            throw $e;
-        }
+        $this->setExpectedException(
+            '\Zend\Pdf\Exception\NotImplementedException',
+            'Cross-reference streams are not supported yet'
+        );
+
+        $pdf = Pdf\PdfDocument::load(__DIR__ . '/_files/ZF-8462.pdf');
     }
 }

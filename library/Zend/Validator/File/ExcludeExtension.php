@@ -50,8 +50,6 @@ class ExcludeExtension extends Extension
     );
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the fileextension of $value is not included in the
      * set extension list
      *

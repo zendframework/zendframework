@@ -59,7 +59,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructionShouldRequireCaptchaDetails()
     {
-        $this->setExpectedException('Zend\Form\Exception');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element = new CaptchaElement('foo');
     }
 

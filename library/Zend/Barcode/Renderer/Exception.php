@@ -22,7 +22,6 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
-use Zend\Barcode;
 
 /**
  * \Zend\Barcode\Renderer\Exception
@@ -33,6 +32,6 @@ use Zend\Barcode;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends Barcode\Exception
+interface Exception extends \Zend\Barcode\Exception
 {
 }

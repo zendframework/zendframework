@@ -51,7 +51,7 @@ class RSA extends AbstractAdapter implements Cipher\PKI\RSA
         // Can't test this..
         // @codeCoverageIgnoreStart
         if(!extension_loaded('openssl')) {
-            throw new Cipher\Exception("Use of this PKI RSA Adapter requires the openssl extension loaded");
+            throw new Cipher\Exception\ExtensionNotLoadedException("Use of this PKI RSA Adapter requires the openssl extension loaded");
         }
         // @codeCoverageIgnoreEnd
 
@@ -73,7 +73,7 @@ class RSA extends AbstractAdapter implements Cipher\PKI\RSA
         $private_key = openssl_pkey_get_private(array($privateKey, $password));
 
         if(!$private_key) {
-            throw new Cipher\Exception("Failed to load private key");
+            throw new Cipher\Exception\RuntimeException("Failed to load private key");
         }
 
         if($padding !== null) {
@@ -99,7 +99,7 @@ class RSA extends AbstractAdapter implements Cipher\PKI\RSA
         openssl_free_key($private_key);
 
         if(!$result) {
-            throw new Cipher\Exception("Unable to Decrypt Value using provided private key");
+            throw new Cipher\Exception\RuntimeException("Unable to Decrypt Value using provided private key");
         }
 
         if($this->getPadding() == self::NO_PADDING) {

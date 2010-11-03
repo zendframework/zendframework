@@ -25,18 +25,6 @@
 namespace ZendTest\Db\Adapter\_files\Test;
 
 /**
- * PHPUnit_Util_Filter
- */
-
-
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-
-/**
- * @see Zend_Db_Statement_Mysqli
- */
-
-/**
  * Test Class for extending base Zend_Db_Statements
  *
  * @category   Zend

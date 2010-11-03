@@ -19,15 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-
 /**
- * Test helper
+ * @namespace
  */
-
-/**
- * @see Zend_Service_Audioscrobbler
- */
-
+namespace ZendTest\Service\Audioscrobbler;
 
 
 /**
@@ -39,7 +34,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Audioscrobbler
  */
-class Zend_Service_Audioscrobbler_AlbumDataTest extends Zend_Service_Audioscrobbler_AudioscrobblerTestCase
+class AlbumDataTest extends AudioscrobblerTestCase
 {
     public function testGetAlbumInfo()
     {

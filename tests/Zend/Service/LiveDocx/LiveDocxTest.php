@@ -27,10 +27,6 @@ namespace ZendTest\Service;
 namespace Zend\Service\LiveDocx;
 use Zend\Validator;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_LiveDocx_LiveDocxTest::main');
-}
-
 
 /**
  * Zend_Service_LiveDocx test case
@@ -46,12 +42,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 class LiveDocxTest extends \PHPUnit_Framework_TestCase
 {
     public $mailMerge;
-
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -126,8 +116,4 @@ class LiveDocxTest extends \PHPUnit_Framework_TestCase
         unset($mailMerge);
     }
 
-}
-
-if (PHPUnit_MAIN_METHOD == 'LiveDocxTest::main') {
-    LiveDocxTest::main();
 }

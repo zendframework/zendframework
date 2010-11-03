@@ -19,18 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Db\Table\Table;
 use Zend\Db\Table;
 use Zend\Cache;
-
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
+ * @group      Zend_Db
+ * @group      Zend_Db_Table
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

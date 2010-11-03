@@ -348,7 +348,7 @@ class Bbcode implements Parser
         }
 
         // after checking everything, add the tag
-        $this->_tag[$name] = array(
+        $this->_tags[$name] = array(
             'type'     => $type,
             'group'    => $group,
             'stoppers' => $stoppers
@@ -390,7 +390,12 @@ class Bbcode implements Parser
      */
     public function clearTags()
     {
-        $this->_tags = array();
+        $this->_tags = array(
+            'Zend_Markup_Root' => array(
+                'type'     => self::TYPE_DEFAULT,
+                'stoppers' => array()
+            )
+        );
 
         return $this;
     }

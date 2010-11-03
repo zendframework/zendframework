@@ -57,7 +57,18 @@ class BbcodeTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_parser = new Bbcode(array(
-            'loadDefaultConfig' => true
+            'groups' => array(
+                'block'       => array('block', 'blockignore', 'inline'),
+                'inline'      => array('inline'),
+                'blockignore' => array()
+            ),
+            'default_group' => 'block',
+            'initial_group' => 'block',
+            'tags' => array(
+                'code' => array(
+                    'group' => 'blockignore'
+                )
+            )
         ));
     }
 

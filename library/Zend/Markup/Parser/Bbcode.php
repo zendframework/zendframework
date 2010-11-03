@@ -52,14 +52,14 @@ class Bbcode implements Parser
     /**
      * Token tree
      *
-     * @var \Zend\Markup\TokenList
+     * @var TokenList
      */
     protected $_tree;
 
     /**
      * Current token
      *
-     * @var \Zend\Markup\Token
+     * @var Token
      */
     protected $_current;
 
@@ -73,12 +73,18 @@ class Bbcode implements Parser
     /**
      * Tag information
      *
+     * Contains the following information about every tag:
+     *
+     * - type:     single or default
+     * - stoppers: how to end this tag
+     * - group:    in which group the tag lives
+     *
      * @var array
      */
     protected $_tags = array(
         'Zend_Markup_Root' => array(
             'type'     => self::TYPE_DEFAULT,
-            'stoppers' => array(),
+            'stoppers' => array()
         )
     );
 
@@ -147,6 +153,9 @@ class Bbcode implements Parser
         if (isset($options['initial_group'])) {
             $this->setInitialGroup($options['initial_group']);
         }
+        if (isset($options['tags'])) {
+            $this->setTags($options['tags']);
+        }
     }
 
     /**
@@ -155,7 +164,7 @@ class Bbcode implements Parser
      * @param string $group
      * @param array $allowed
      *
-     * @return \Zend\Markup\Parser\Bbcode
+     * @return Bbcode
      */
     public function addGroup($group, array $allowed)
     {
@@ -181,7 +190,7 @@ class Bbcode implements Parser
      *
      * @param array $groups
      *
-     * @return \Zend\Markup\Parser\Bbcode
+     * @return Bbcode
      */
     public function addGroups(array $groups)
     {
@@ -195,7 +204,7 @@ class Bbcode implements Parser
     /**
      * Clear the groups.
      *
-     * @return \Zend\Markup\Parser\Bbcode
+     * @return Bbcode
      */
     public function clearGroups()
     {
@@ -221,7 +230,7 @@ class Bbcode implements Parser
      *
      * @param array $groups
      *
-     * @return \Zend\Markup\Parser\Bbcode
+     * @return Bbcode
      */
     public function setGroups(array $groups)
     {
@@ -270,6 +279,104 @@ class Bbcode implements Parser
         }
 
         $this->_group = $group;
+
+        return $this;
+    }
+
+    /**
+     * Add a definition for a tag
+     *
+     * @param string $name
+     * @param string $group
+     * @param string $type Either Bbcode::TYPE_DEFAULT or Bbcode::TYPE_SINGLE
+     * @param array $stoppers
+     *
+     * @throws Exception\InvalidArgumentException If the given group doesn't exist
+     * @throws Exception\InvalidArgumentException If the type isn't correct
+     * @throws Exception\InvalidArgumentException If the stoppers argument isn't correct
+     *
+     * @return Bbcode
+     */
+    public function addTag($name, $group = null, $type = self::TYPE_DEFAULT, $stoppers = null)
+    {
+        if (null === $group) {
+            $group = $this->_defaultGroup;
+        } elseif (!isset($this->_groups[$group])) {
+            throw new Exception\InvalidArgumentException("There is no group with the name '$group'.");
+        }
+        if (($type != self::TYPE_DEFAULT) && ($type != self::TYPE_SINGLE)) {
+            throw new Exception\InvalidArgumentException("You can only use the types 'default' and 'single'");
+        }
+        if (null === $stoppers) {
+            $stoppers = array(
+                '[/' . $name . ']',
+                '[/]'
+            );
+        } elseif (is_string($stoppers)) {
+            $stoppers = array($stoppers);
+        } elseif (!is_array($stoppers)) {
+            throw new Exception\InvalidArgumentException("Invalid stoppers argument provided.");
+        }
+
+        $this->_tag[$name] = array(
+            'type'     => $type,
+            'group'    => $group,
+            'stoppers' => $stoppers
+        );
+
+        return $this;
+    }
+
+    /**
+     * Add multiple tag definitions at once
+     *
+     * @param array $tags
+     *
+     * @return Bbcode
+     */
+    public function addTags(array $tags)
+    {
+        foreach ($tags as $name => $tag) {
+            if (!isset($tag['group'])) {
+                $tag['group'] = null;
+            }
+            if (!isset($tag['type'])) {
+                $tag['type'] = self::TYPE_DEFAULT;
+            }
+            if (!isset($tag['stoppers'])) {
+                $tag['stoppers'] = null;
+            }
+
+            $this->addTag($name, $tag['group'], $tag['type'], $tag['stoppers']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Clear the tags
+     *
+     * @return Bbcode
+     */
+    public function clearTags()
+    {
+        $this->_tags = array();
+
+        return $this;
+    }
+
+    /**
+     * Override the current tags
+     *
+     * @param array $tags
+     *
+     * @return Bbcode
+     */
+    public function setTags(array $tags)
+    {
+        $this->clearTags();
+
+        $this->addTags($tags);
 
         return $this;
     }

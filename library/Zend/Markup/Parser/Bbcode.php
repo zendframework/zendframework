@@ -159,16 +159,45 @@ class Bbcode implements Parser
     }
 
     /**
-     * Add a group.
+     * Allow a group inside another group
      *
      * @param string $group
-     * @param array $allowed
+     * @param string $inside
      *
      * @return Bbcode
      */
-    public function addGroup($group, array $allowed)
+    public function allowInside($group, $inside)
     {
-        $this->_groups[$group] = $allowed;
+        if (!isset($this->_groups[$group])) {
+            throw new Exception\InvalidArgumentException("There is no group with the name '$group'.");
+        }
+        if (!isset($this->_groups[$inside])) {
+            throw new Exception\InvalidArgumentException("There is no group with the name '$inside'.");
+        }
+
+        $this->_groups[$inside][] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Add a group.
+     *
+     * @param string $group
+     * @param array $allows
+     * @param array $allowedInside
+     *
+     * @throws Exception\InvalidArgumentException If a group in $allowedInside does not exist
+     *
+     * @return Bbcode
+     */
+    public function addGroup($group, array $allows, array $allowedInside = array())
+    {
+        $this->_groups[$group] = $allows;
+
+        foreach ($allowedInside as $inside) {
+            $this->allowedInside($group, $inside);
+        }
 
         return $this;
     }
@@ -318,6 +347,7 @@ class Bbcode implements Parser
             throw new Exception\InvalidArgumentException("Invalid stoppers argument provided.");
         }
 
+        // after checking everything, add the tag
         $this->_tag[$name] = array(
             'type'     => $type,
             'group'    => $group,
@@ -394,7 +424,6 @@ class Bbcode implements Parser
         if (!is_string($value)) {
             throw new Exception\InvalidArgumentException('Value to parse should be a string.');
         }
-
         if (empty($value)) {
             throw new Exception\InvalidArgumentException('Value to parse cannot be left empty.');
         }

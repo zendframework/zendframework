@@ -138,33 +138,141 @@ class Bbcode implements Parser
             $options = $options->toArray();
         }
 
-        if (isset($options['loadDefaultConfig']) && $options['loadDefaultConfig']) {
-            $this->_loadDefaultConfig();
+        if (isset($options['groups'])) {
+            $this->setGroups($options['groups']);
+        }
+        if (isset($options['default_group'])) {
+            $this->setDefaultGroup($options['default_group']);
+        }
+        if (isset($options['initial_group'])) {
+            $this->setInitialGroup($options['initial_group']);
         }
     }
 
     /**
-     * Load default configuration
+     * Add a group.
      *
-     * @return void
+     * @param string $group
+     * @param array $allowed
+     *
+     * @return \Zend\Markup\Parser\Bbcode
      */
-    public function _loadDefaultConfig()
+    public function addGroup($group, array $allowed)
     {
-        $this->_tags['code'] = array(
-            'type'         => self::TYPE_DEFAULT,
-            'stoppers'     => array('[/code]', '[/]'),
-            'group'        => 'blockignore'
-        );
+        $this->_groups[$group] = $allowed;
 
-        $this->_groups = array(
-            'block'       => array('block', 'blockignore', 'inline'),
-            'inline'      => array('inline'),
-            'blockignore' => array()
-        );
-        $this->_group        = 'block';
-        $this->_defaultGroup = 'block';
+        return $this;
     }
 
+    /**
+     * Add multiple groups.
+     *
+     * The groups should be defined with the group as key, and the groups
+     * allowed inside as value.
+     *
+     * An example for the $groups parameter.
+     *
+     * <code>
+     * array(
+     *     'block'  => array('block', 'inline'),
+     *     'inline' => array('inline')
+     * )
+     * </code>
+     *
+     * @param array $groups
+     *
+     * @return \Zend\Markup\Parser\Bbcode
+     */
+    public function addGroups(array $groups)
+    {
+        foreach ($groups as $group => $allowed) {
+            $this->addGroup($group, $allowed);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Clear the groups.
+     *
+     * @return \Zend\Markup\Parser\Bbcode
+     */
+    public function clearGroups()
+    {
+        $this->_groups = array();
+
+        return $this;
+    }
+
+    /**
+     * Overwrite the current groups definitions.
+     *
+     * The groups should be defined with the group as key, and the groups
+     * allowed inside as value.
+     *
+     * An example for the $groups parameter.
+     *
+     * <code>
+     * array(
+     *     'block'  => array('block', 'inline'),
+     *     'inline' => array('inline')
+     * )
+     * </code>
+     *
+     * @param array $groups
+     *
+     * @return \Zend\Markup\Parser\Bbcode
+     */
+    public function setGroups(array $groups)
+    {
+        $this->clearGroups();
+
+        $this->addGroups($groups);
+
+        return $this;
+    }
+
+    /**
+     * Set the default group for all tags.
+     *
+     * @param string $group
+     *
+     * @throws Exception\InvalidArgumentException If $group doesn't exist
+     *
+     * @return Bbcode
+     */
+    public function setDefaultGroup($group)
+    {
+        if (!isset($this->_groups[$group])) {
+            throw new Exception\InvalidArgumentException("There is no group with the name '$group'.");
+        }
+
+        $this->_defaultGroup = $group;
+
+        return $this;
+    }
+
+    /**
+     * Set the initial group.
+     *
+     * The initial group is the group that contains all elements.
+     *
+     * @param string $group
+     *
+     * @throws Exception\InvalidArgumentException If $group doesn't exist
+     *
+     * @return Bbcode
+     */
+    public function setInitialGroup($group)
+    {
+        if (!isset($this->_groups[$group])) {
+            throw new Exception\InvalidArgumentException("There is no group with the name '$group'.");
+        }
+
+        $this->_group = $group;
+
+        return $this;
+    }
 
     /**
      * Parse a BBCode string, this simply sources out the lexical analysis to
@@ -333,10 +441,24 @@ class Bbcode implements Parser
      * @param array $tokens
      * @param string $strategy
      *
+     * @throws Exception\RuntimeException If there are no groups defined
+     * @throws Exception\RuntimeException If there is no initial group defined
+     * @throws Exception\RuntimeException If there is no default group defined
+     *
      * @return \Zend\Markup\TokenList/
      */
     public function buildTree(array $tokens, $strategy = 'default')
     {
+        if (empty($this->_groups)) {
+            throw new Exception\RuntimeException("There are no groups defined.");
+        }
+        if (null === $this->_groups) {
+            throw new Exception\RuntimeException("There is no initial group defined.");
+        }
+        if (null === $this->_defaultGroup) {
+            throw new Exception\RuntimeException("There is no default group defined.");
+        }
+
         switch ($strategy) {
             case 'default':
                 return $this->_createTree($tokens);

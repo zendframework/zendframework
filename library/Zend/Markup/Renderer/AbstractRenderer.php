@@ -87,9 +87,6 @@ abstract class AbstractRenderer
             $options = $options->toArray();
         }
 
-        if (isset($options['loadDefaultConfig']) && $options['loadDefaultConfig']) {
-            $this->_loadDefaultConfig();
-        }
         if (isset($options['encoding'])) {
             $this->setEncoding($options['encoding']);
         }
@@ -97,13 +94,6 @@ abstract class AbstractRenderer
             $this->setParser($options['parser']);
         }
     }
-
-    /**
-     * Load the default configuration for this renderer
-     *
-     * @return void
-     */
-    abstract protected function _loadDefaultConfig();
 
     /**
      * Set the parser

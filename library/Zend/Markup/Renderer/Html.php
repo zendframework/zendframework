@@ -24,10 +24,6 @@
  */
 namespace Zend\Markup\Renderer;
 
-use Zend\Markup\Token,
-    Zend\Loader\Broker,
-    Zend\Markup\Renderer\Markup\Html as Markup;
-
 /**
  * HTML renderer
  *
@@ -39,18 +35,4 @@ use Zend\Markup\Token,
  */
 class Html extends AbstractRenderer
 {
-
-    /**
-     * Load the default configuration for this renderer
-     *
-     * @return void
-     */
-    protected function _loadDefaultConfig()
-    {
-        $this->addMarkup('code', new Markup\Code());
-        $this->addMarkup('img', new Markup\Img());
-        $this->addMarkup('url', new Markup\Url());
-        $this->addMarkup('b', new Markup\Replace('strong'));
-        $this->addMarkup('i', new Markup\Replace('em'));
-    }
 }

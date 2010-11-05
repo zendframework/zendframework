@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -33,11 +33,11 @@ use Zend\Translator\Adapter as TranslationAdapter,
  * @uses       \Zend\Translator\Adapter\Adapter
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Gettext extends TranslationAdapter 
+class Gettext extends TranslationAdapter
 {
     // Internal variables
     private $_bigEndian   = false;

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -31,7 +31,7 @@ use Zend\Translator\Exception\InvalidArgumentException,
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @uses       \Zend\Translator\Exception\BadMethodCallException
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -64,7 +64,7 @@ class Translator
     /**
      * Generates the standard translation object
      *
-     * @param  array|Zend_Config $options Options to use
+     * @param  array|\Zend\Config $options Options to use
      * @throws \Zend\Translate\Exception\InvalidArgumentException
      */
     public function __construct($options = array())
@@ -97,7 +97,7 @@ class Translator
     /**
      * Sets a new adapter
      *
-     * @param  array|Zend_Config $options Options to use
+     * @param  array|\Zend\Config $options Options to use
      * @throws \Zend\Translate\Exception\InvalidArgumentException
      */
     public function setAdapter($options = array())

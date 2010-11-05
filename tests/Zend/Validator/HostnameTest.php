@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -27,23 +27,23 @@ use Zend\Validator\Hostname;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class HostnameTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Default instance created for all test methods
      *
-     * @var Zend_Validate_Hostname
+     * @var Zend_Validator_Hostname
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Hostname object for each test method
+     * Creates a new Zend_Validator_Hostname object for each test method
      *
      * @return void
      */
@@ -380,5 +380,22 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testInvalidDoubledIdn()
     {
         $this->assertFalse($this->_validator->isValid('test.com / http://www.test.com'));
+    }
+
+    /**
+     * @group ZF-10267
+     */
+    public function testURI()
+    {
+        $valuesExpected = array(
+            array(Hostname::ALLOW_URI, true, array('localhost', 'example.com', '~ex%20ample')),
+            array(Hostname::ALLOW_URI, false, array('§bad', 'don?t.know', 'thisisaverylonghostnamewhichextendstwohundredfiftysixcharactersandthereforshouldnotbeallowedbythisvalidatorbecauserfc3986limitstheallowedcharacterstoalimitoftwohunderedfiftysixcharactersinsumbutifthistestwouldfailthenitshouldreturntruewhichthrowsanexceptionbytheunittest')),
+        );
+        foreach ($valuesExpected as $element) {
+            $validator = new Hostname($element[0]);
+            foreach ($element[2] as $input) {
+                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+            }
+        }
     }
 }

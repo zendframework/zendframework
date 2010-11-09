@@ -13,8 +13,9 @@ if (!strstr($incPath, $libPath)) {
 }
 
 // Setup autoloading
-require_once 'Zend/Loader/Autoloader.php';
-Zend\Loader\Autoloader::getInstance();
+$loader = new Zend\Loader\StandardAutoloader();
+require_once 'Zend/Loader/StandardAutoloader.php';
+$loader->register();
 
 $rules = array(
     'help|h'        => 'Get usage message',

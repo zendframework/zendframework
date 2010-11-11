@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+use Zend\Tool\Project\Profile\Profile as ProjectProfile;
 
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
@@ -41,7 +41,7 @@ class Test extends AbstractProvider
     /**
      * isTestingEnabled()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @return bool
      */
     public static function isTestingEnabled(ProjectProfile $profile)
@@ -55,11 +55,11 @@ class Test extends AbstractProvider
     /**
      * createApplicationResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $controllerName
      * @param string $actionName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function createApplicationResource(ProjectProfile $profile, $controllerName, $actionName, $moduleName = null)
     {
@@ -94,9 +94,9 @@ class Test extends AbstractProvider
     /**
      * createLibraryResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $libraryClassName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function createLibraryResource(ProjectProfile $profile, $libraryClassName)
     {

@@ -41,7 +41,7 @@ class ReflectionFunction extends \ReflectionFunction
      * @param  string $reflectionClass Name of reflection class to use
      * @return Zend_Reflection_Docblock
      */
-    public function getDocblock($reflectionClass = '\Zend\Reflection\ReflectionDocblock')
+    public function getDocblock($reflectionClass = 'Zend\Reflection\ReflectionDocblock')
     {
         if ('' == ($comment = $this->getDocComment())) {
             throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
@@ -94,7 +94,7 @@ class ReflectionFunction extends \ReflectionFunction
      * @param  string $reflectionClass Name of reflection class to use
      * @return array Array of \Zend\Reflection\ReflectionParameter
      */
-    public function getParameters($reflectionClass = '\Zend\Reflection\ReflectionParameter')
+    public function getParameters($reflectionClass = 'Zend\Reflection\ReflectionParameter')
     {
         $phpReflections  = parent::getParameters();
         $zendReflections = array();

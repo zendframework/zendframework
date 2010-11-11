@@ -24,6 +24,8 @@
  */
 namespace Zend\Tool\Project\Context\Filesystem;
 
+use Zend\Tool\Project\Profile\Resource\Resource;
+
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
@@ -57,7 +59,7 @@ class Directory extends AbstractFilesystem
     public function create()
     {
         // check to ensure the parent exists, if not, call it and create it
-        if (($parentResource = $this->_resource->getParentResource()) instanceof \Zend\Tool\Project\Profile\Resource) {
+        if (($parentResource = $this->_resource->getParentResource()) instanceof Resource) {
             if ((($parentContext = $parentResource->getContext()) instanceof AbstractFilesystem)
                 && (!$parentContext->exists())) {
                 $parentResource->create();

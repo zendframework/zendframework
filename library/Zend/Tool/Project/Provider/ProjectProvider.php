@@ -23,6 +23,8 @@
  */
 namespace Zend\Tool\Project\Provider;
 
+use Zend\Tool\Project\Profile\Profile as ProjectProfile;
+
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
  * @uses       \Zend\Tool\Project\Provider\Exception
@@ -37,16 +39,16 @@ class ProjectProvider extends AbstractProvider
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $projectProviderName
      * @param string $actionNames
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
-    public static function createResource(\Zend\Tool\Project\Profile $profile, $projectProviderName, $actionNames = null)
+    public static function createResource(ProjectProfile $profile, $projectProviderName, $actionNames = null)
     {
 
         if (!is_string($projectProviderName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Controller::createResource() expects \"projectProviderName\" is the name of a project provider resource to create.');
+            throw new Exception\RuntimeException('Zend\Tool\Project\Provider\Controller::createResource() expects \"projectProviderName\" is the name of a project provider resource to create.');
         }
 
         $profileSearchParams = array();

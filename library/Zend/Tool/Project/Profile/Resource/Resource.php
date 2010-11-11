@@ -39,12 +39,12 @@ class Resource extends Container
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile
+     * @var \Zend\Tool\Project\Profile\Profile
      */
     protected $_profile = null;
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_parentResource = null;
 
@@ -84,7 +84,7 @@ class Resource extends Container
      * setContext()
      *
      * @param string|\Zend\Tool\Project\Context $context
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function setContext($context)
     {
@@ -123,8 +123,8 @@ class Resource extends Container
     /**
      * setProfile()
      *
-     * @param \Zend\Tool\Project\Profile $profile
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @param \Zend\Tool\Project\Profile\Profile $profile
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function setProfile(\Zend\Tool\Project\Profile\Profile $profile)
     {
@@ -135,7 +135,7 @@ class Resource extends Container
     /**
      * getProfile
      *
-     * @return \Zend\Tool\Project\Profile
+     * @return \Zend\Tool\Project\Profile\Profile
      */
     public function getProfile()
     {
@@ -160,7 +160,7 @@ class Resource extends Container
      * setEnabled()
      *
      * @param bool $enabled
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function setEnabled($enabled = true)
     {
@@ -183,7 +183,7 @@ class Resource extends Container
      * setDeleted()
      *
      * @param bool $deleted
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function setDeleted($deleted = true)
     {
@@ -194,7 +194,7 @@ class Resource extends Container
     /**
      * isDeleted()
      *
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function isDeleted()
     {
@@ -204,7 +204,7 @@ class Resource extends Container
     /**
      * initializeContext()
      *
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function initializeContext()
     {
@@ -242,7 +242,7 @@ class Resource extends Container
      *
      * @param string $method
      * @param array $arguments
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function __call($method, $arguments)
     {

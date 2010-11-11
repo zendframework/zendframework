@@ -52,7 +52,7 @@ class ProjectProfileFile
     protected $_filesystemName = '.zfproject.xml';
 
     /**
-     * @var \Zend\Tool\Project\Profile
+     * @var \Zend\Tool\Project\Profile\Profile
      */
     protected $_profile = null;
     
@@ -69,7 +69,7 @@ class ProjectProfileFile
     /**
      * setProfile()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @return \Zend\Tool\Project\Context\System\ProjectProfileFile
      */
     public function setProfile($profile)

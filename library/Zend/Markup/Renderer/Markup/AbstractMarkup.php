@@ -25,7 +25,9 @@
 namespace Zend\Markup\Renderer\Markup;
 
 use Zend\Markup\Renderer\Markup,
-    Zend\Markup\Renderer\AbstractRenderer;
+    Zend\Markup\Renderer\AbstractRenderer,
+    Zend\Filter\Filter,
+    Zend\Filter\FilterChain;
 
 /**
  * Abstract markup
@@ -120,7 +122,52 @@ abstract class AbstractMarkup implements Markup
      */
     public function getFilterChain()
     {
+        if (null === $this->_filter) {
+            $this->_filter = new FilterChain();
+        }
+
         return $this->_filter;
+    }
+
+    /**
+     * Adds a filter to the chain
+     *
+     * @param  \Zend\Filter\Filter $filter
+     * @param  string $placement
+     *
+     * @return \Zend\Markup\Renderer\AbstractMarkup
+     */
+    public function addFilter(Filter $filter, $placement = FilterChain::CHAIN_APPEND)
+    {
+        $this->getFilterChain()->addFilter($filter, $placement);
+
+        return $this;
+    }
+
+    /**
+     * Add a filter to the end of the chain
+     *
+     * @param  \Zend\Filter\Filter $filter
+     *
+     * @return \Zend\Markup\Renderer\AbstractMarkup
+     */
+    public function appendFilter(Filter $filter)
+    {
+        $this->getFilterchain()->appendFilter($filter);
+
+        return $this;
+    }
+
+    /**
+     * Add a filter to the start of the chain
+     *
+     * @param  \Zend\Filter\Filter $filter
+     *
+     * @return \Zend\Markup\Renderer\AbstractMarkup
+     */
+    public function prependFilter(Filter $filter)
+    {
+        $this->getFilterchain()->prependFilter($filter);
     }
 
     /**
@@ -132,6 +179,8 @@ abstract class AbstractMarkup implements Markup
      */
     public function filter($value)
     {
-        return $this->_filter($value);
+        // ok, __invoke() simply looks confusing in this case, better use the
+        // filter() method on the Filter Chain
+        return $this->getFilterChain()->filter($value);
     }
 }

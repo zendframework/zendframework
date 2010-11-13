@@ -24,6 +24,8 @@
  */
 namespace Zend\Tool\Project\Context\Filesystem;
 
+use Zend\Tool\Project\Profile\Resource\Resource;
+
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
@@ -40,7 +42,7 @@ abstract class AbstractFilesystem implements \Zend\Tool\Project\Context\Context
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_resource = null;
 
@@ -69,10 +71,10 @@ abstract class AbstractFilesystem implements \Zend\Tool\Project\Context\Context
     /**
      * setResource()
      *
-     * @param \Zend\Tool\Project\Profile\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
      * @return \Zend\Tool\Project\Context\Filesystem\AbstractFilesystem
      */
-    public function setResource(\Zend\Tool\Project\Profile\Resource\Resource $resource)
+    public function setResource(Resource $resource)
     {
         $this->_resource = $resource;
         return $this;

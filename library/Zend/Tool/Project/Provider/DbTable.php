@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile;
 
 /**
  * @uses       \Zend\Filter\FilterChain

@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       \Zend\Tool\Framework\Provider\Pretendable
@@ -47,10 +49,10 @@ class Controller
      * profile.  NOTE: it is your job to execute the create() method on the resource, as well as
      * store the profile when done.
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function createResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
@@ -78,10 +80,10 @@ class Controller
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function hasResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
@@ -90,15 +92,15 @@ class Controller
         }
 
         $controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName);
-        return (($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof ProjectProfile\Resource);
+        return (($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof Resource);
     }
 
     /**
      * _getControllersDirectoryResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected static function _getControllersDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {

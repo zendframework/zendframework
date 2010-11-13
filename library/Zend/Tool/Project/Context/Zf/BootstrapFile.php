@@ -50,12 +50,12 @@ class BootstrapFile extends \Zend\Tool\Project\Context\Filesystem\File
     protected $_filesystemName = 'Bootstrap.php';
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_applicationConfigFile = null;
     
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_applicationDirectory = null;
     

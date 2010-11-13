@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+use Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
@@ -62,10 +63,10 @@ class Model extends AbstractProvider
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $modelName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function hasResource(ProjectProfile $profile, $modelName, $moduleName = null)
     {
@@ -74,15 +75,15 @@ class Model extends AbstractProvider
         }
 
         $modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName);
-        return (($modelsDirectory->search(array('modelFile' => array('modelName' => $modelName)))) instanceof ProjectProfile\Resource);
+        return (($modelsDirectory->search(array('modelFile' => array('modelName' => $modelName)))) instanceof Resource);
     }
     
     /**
      * _getModelsDirectoryResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected static function _getModelsDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {

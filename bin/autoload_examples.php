@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../library/Zend/_autoload.php';
+require_once __DIR__ . '/../library/Zend/.classmap.php';
 if (!class_exists('Zend\Controller\Action')) {
     echo "Could not find action class?\n";
 } else {

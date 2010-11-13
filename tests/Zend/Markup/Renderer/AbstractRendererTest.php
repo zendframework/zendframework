@@ -13,17 +13,17 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json
+ * @package    Zend_Markup
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\Markup;
-use Zend\Markup;
+namespace ZendTest\Markup\Renderer;
 
 /**
  * @category   Zend
@@ -33,33 +33,6 @@ use Zend\Markup;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ParserIntegrityTest extends \PHPUnit_Framework_TestCase
+class AbstractRendererTest extends \PHPUnit_Framework_TestCase
 {
-    public function testBbcodeParser()
-    {
-        $parser = Markup\Markup::factory('bbcode')->getParser();
-
-        $value  = '[b][s][i]foobar[/i][/s][/b]';
-        $output = '';
-
-        $tree = $parser->parse($value);
-
-        // iterate trough the tree and check if we can generate the original value
-        $iterator = new \RecursiveIteratorIterator($tree, \RecursiveIteratorIterator::SELF_FIRST);
-
-        foreach ($iterator as $token) {
-            $output .= $token->getTag();
-
-            if ($token->getStopper() != '') {
-                $token->addChild(new Markup\Token(
-                    $token->getStopper(),
-                    Markup\Token::TYPE_NONE,
-                    '', array(), $token)
-                );
-            }
-        }
-
-        $this->assertEquals($value, $output);
-    }
-
 }

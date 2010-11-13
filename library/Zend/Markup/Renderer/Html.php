@@ -24,6 +24,8 @@
  */
 namespace Zend\Markup\Renderer;
 
+use Zend\Markup\Renderer\Markup\Html\Root as RootMarkup;
+
 /**
  * HTML renderer
  *
@@ -35,4 +37,30 @@ namespace Zend\Markup\Renderer;
  */
 class Html extends AbstractRenderer
 {
+
+    /**
+     * Constructor
+     *
+     * @param array|\Zend\Config\Config $options
+     *
+     * @todo make constructor compliant with new configuration standards
+     *
+     * @return void
+     */
+    public function __construct($options = array())
+    {
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        }
+
+        if (isset($options['markups'])) {
+            if (!isset($options['markups']['Zend_Markup_Root'])) {
+                $options['markups'] = array(
+                    'Zend_Markup_Root' => new RootMarkup()
+                );
+            }
+        }
+
+        parent::__construct($options);
+    }
 }

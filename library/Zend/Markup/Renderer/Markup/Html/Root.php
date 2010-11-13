@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer\Markup\Html;
-use Zend\Markup;
+
+use Zend\Markup\Token;
 
 /**
  * Simple replace markup for HTML
@@ -40,37 +41,15 @@ class Replace extends AbstractHtml
 {
 
     /**
-     * Markup's replacement
-     *
-     * @var string
-     */
-    protected $_replace;
-
-
-    /**
-     * Constructor
-     *
-     * @param string $replace
-     * 
-     * @return void
-     */
-    public function __construct($replace)
-    {
-        $this->_replace = $replace;
-
-        parent::__construct();
-    }
-
-    /**
      * Invoke the markup on the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param Token $token
      * @param string $text
      *
      * @return string
      */
-    public function __invoke(Markup\Token $token, $text)
+    public function __invoke(Token $token, $text)
     {
-        return "<{$this->_replace}>{$text}</{$this->_replace}>";
+        return $text;
     }
 }

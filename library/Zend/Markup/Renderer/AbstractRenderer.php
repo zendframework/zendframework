@@ -51,6 +51,13 @@ abstract class AbstractRenderer
     protected $_markups = array();
 
     /**
+     * The current markup
+     *
+     * @var Markup
+     */
+    protected $_markup;
+
+    /**
      * Parser
      *
      * @var \Zend\Markup\Parser
@@ -92,6 +99,9 @@ abstract class AbstractRenderer
         }
         if (isset($options['parser'])) {
             $this->setParser($options['parser']);
+        }
+        if (isset($options['markups'])) {
+            $this->addMarkups($options['markups']);
         }
     }
 
@@ -144,12 +154,26 @@ abstract class AbstractRenderer
     }
 
     /**
+     * Add multiple markups
+     *
+     * @param array $markups
+     *
+     * @return AbstractRenderer
+     */
+    public function addMarkups(array $markups)
+    {
+        foreach ($markups as $name => $markup) {
+            $this->addMarkup($name, $markup);
+        }
+    }
+
+    /**
      * Add a new markup
      *
      * @param string $name
-     * @param \Zend\Markup\Renderer\Markup $markup
+     * @param Markup $markup
      *
-     * @return \Zend\Markup\Renderer\AbstractRenderer
+     * @return AbstractRenderer
      */
     public function addMarkup($name, Markup $markup)
     {
@@ -205,10 +229,15 @@ abstract class AbstractRenderer
      *
      * @param  \Zend\Markup\TokenList|string $tokenList
      *
+     * @throws Exception\RuntimeException when there is no root markup given
      * @return string
      */
     public function render($value)
     {
+        if (!isset($this->_markups['Zend_Markup_Root'])) {
+            throw new Exception\RuntimeException("There is no Zend_Markup_Root markup.");
+        }
+
         if ($value instanceof TokenList) {
             $tokenList = $value;
         } else {
@@ -216,6 +245,9 @@ abstract class AbstractRenderer
         }
 
         $root = $tokenList->current();
+
+        // set the default markup
+        $this->_markup = $this->_markups['Zend_Markup_Root'];
 
         return $this->_render($root);
     }
@@ -258,17 +290,27 @@ abstract class AbstractRenderer
             case Token::TYPE_MARKUP:
                 if (!isset($this->_markups[$token->getName()])) {
                     // TODO: apply filters
-                    return $token->getContent() . $this->_render($token) . $token->getStopper();
+                    return $this->_markup->filter($token->getContent())
+                         . $this->_render($token)
+                         . $this->_markup->filter($token->getStopper());
                 }
 
                 $markup = $this->_markups[$token->getName()];
 
-                return $markup($token, $this->_render($token));
+                // change the rendering environiment
+                $oldMarkup     = $this->_markup;
+                $this->_markup = $markup;
+
+                $value = $markup($token, $this->_render($token));
+
+                // and change the rendering environiment back
+                $this->_markup = $oldMarkup;
+
+                return $value;
                 break;
             case Token::TYPE_NONE:
             default:
-                // TODO: apply filters
-                return $token->getContent();
+                return $this->_markup->filter($token->getContent());
                 break;
         }
     }

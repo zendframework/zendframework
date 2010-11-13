@@ -60,6 +60,7 @@ class AbstractRendererTest extends \PHPUnit_Framework_TestCase
         $this->_renderer = new SimpleRenderer();
 
         $this->_renderer->addMarkup('test', new ReplaceMarkup('foo', 'bar'));
+        $this->_renderer->addMarkup('Zend_Markup_Root', new ReplaceMarkup('', ''));
     }
 
     /**

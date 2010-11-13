@@ -161,6 +161,24 @@ abstract class AbstractRenderer
     }
 
     /**
+     * Get a markup
+     *
+     * @param string $name
+     *
+     * @throws Exception\RuntimeException if the markup doesn't exist
+     *
+     * @return Markup
+     */
+    public function getMarkup($name)
+    {
+        if (!isset($this->_markups[$name])) {
+            throw new Exception\RuntimeException("The markup with name '$name' doesn't exist");
+        }
+
+        return $this->_markups[$name];
+    }
+
+    /**
      * Remove a markup
      *
      * @param string $name

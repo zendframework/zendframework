@@ -55,6 +55,13 @@ abstract class AbstractMarkup implements Markup
      */
     protected $_encoding;
 
+    /**
+     * Chain filter
+     *
+     * @var \Zend\Filter\FilterChain
+     */
+    protected $_filter;
+
 
     /**
      * Set the encoding on this markup
@@ -104,5 +111,27 @@ abstract class AbstractMarkup implements Markup
     public function getRenderer()
     {
         return $this->_renderer;
+    }
+
+    /**
+     * Get the filter chain
+     *
+     * @return \Zend\Filter\FilterChain
+     */
+    public function getFilterChain()
+    {
+        return $this->_filter;
+    }
+
+    /**
+     * Filter
+     * 
+     * @param string $value
+     *
+     * @return string
+     */
+    public function filter($value)
+    {
+        return $this->_filter($value);
     }
 }

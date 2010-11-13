@@ -153,7 +153,7 @@ abstract class AbstractMarkup implements Markup
      */
     public function appendFilter(Filter $filter)
     {
-        $this->getFilterchain()->appendFilter($filter);
+        $this->getFilterChain()->appendFilter($filter);
 
         return $this;
     }
@@ -167,7 +167,7 @@ abstract class AbstractMarkup implements Markup
      */
     public function prependFilter(Filter $filter)
     {
-        $this->getFilterchain()->prependFilter($filter);
+        $this->getFilterChain()->prependFilter($filter);
     }
 
     /**

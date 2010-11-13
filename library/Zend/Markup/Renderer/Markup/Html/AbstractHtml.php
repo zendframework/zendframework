@@ -25,7 +25,9 @@
 namespace Zend\Markup\Renderer\Markup\Html;
 
 use Zend\Markup\Renderer\Markup\AbstractMarkup,
-    Zend\Markup;
+    Zend\Markup,
+    Zend\Filter\HtmlEntities as HtmlEntitiesFilter,
+    Zend\Filter\Callback as CallbackFilter;
 
 /**
  * Abstract markup
@@ -40,6 +42,20 @@ use Zend\Markup\Renderer\Markup\AbstractMarkup,
  */
 abstract class AbstractHtml extends AbstractMarkup
 {
+
+    /**
+     * Constructor, adds default filters for the filter chain
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->appendFilter(new HtmlEntitiesFilter(array(
+            'encoding'   => $this->getEncoding(),
+            'quotestyle' => ENT_QUOTES
+        )));
+        $this->appendFilter(new CallbackFilter('nl2br'));
+    }
 
     /**
      * Attributes for this markup

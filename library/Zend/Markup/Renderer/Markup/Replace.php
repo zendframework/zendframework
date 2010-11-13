@@ -78,6 +78,6 @@ class Replace extends AbstractMarkup
      */
     public function __invoke(Token $token, $text)
     {
-        return "{$this->_start}{$text}{$this->_end}";
+        return $this->_start . $text . $this->_end;
     }
 }

@@ -212,6 +212,7 @@ abstract class AbstractRenderer
     {
         $return = '';
 
+        $oldToken     = $this->_token;
         $this->_token = $token;
 
         // if this markup has children, execute them
@@ -220,6 +221,8 @@ abstract class AbstractRenderer
                 $return .= $this->_execute($child);
             }
         }
+
+        $this->_token = $oldToken;
 
         return $return;
     }

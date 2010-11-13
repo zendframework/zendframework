@@ -55,7 +55,7 @@ abstract class AbstractMarkup implements Markup
      *
      * @var string
      */
-    protected $_encoding;
+    protected $_encoding = 'UTF-8';
 
     /**
      * Chain filter

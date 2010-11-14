@@ -160,7 +160,7 @@ class Iban extends AbstractValidator
         if ($locale !== false) {
             $locale = Locale\Locale::findLocale($locale);
             if (strlen($locale) < 4) {
-                throw new Exception('Region must be given for IBAN validation');
+                throw new Exception\InvalidArgumentException('Region must be given for IBAN validation');
             }
         }
 
@@ -169,8 +169,6 @@ class Iban extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if $value is a valid IBAN
      *
      * @param  string $value

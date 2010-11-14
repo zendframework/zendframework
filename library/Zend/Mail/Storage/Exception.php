@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,15 +22,15 @@
  * @namespace
  */
 namespace Zend\Mail\Storage;
+use Zend\Mail;
 
 /**
- * @uses       \Zend\Mail\Exception
+ * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Mail\Exception
-{}
-
+interface Exception extends Mail\Exception
+{
+}

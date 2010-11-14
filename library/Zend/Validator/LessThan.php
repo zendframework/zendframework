@@ -72,7 +72,7 @@ class LessThan extends AbstractValidator
             if (array_key_exists('max', $max)) {
                 $max = $max['max'];
             } else {
-                throw new Exception("Missing option 'max'");
+                throw new Exception\InvalidArgumentException("Missing option 'max'");
             }
         }
 
@@ -102,8 +102,6 @@ class LessThan extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is less than max option
      *
      * @param  mixed $value

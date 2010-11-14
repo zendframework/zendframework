@@ -619,12 +619,9 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     public function testSetNonStringNonZendUriUriThrowsException()
     {
         $server = new AutoDiscover();
-        try {
-            $server->setUri(array("bogus"));
-            $this->fail();
-        } catch(AutoDiscoverException $e) {
-
-        }
+        
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'No uri given to');
+        $server->setUri(array("bogus"));
     }
 
     /**
@@ -676,29 +673,29 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, substr_count($wsdlOutput, '<message name="testFuncOut">'));
     }
 
-    public function testUnusedFunctionsOfAutoDiscoverThrowException()
+    public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnBadPersistence()
     {
         $server = new AutoDiscover();
-        try {
-            $server->setPersistence("bogus");
-            $this->fail();
-        } catch(AutoDiscoverException $e) {
+        
+        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Function has no use in AutoDiscover');
+        $server->setPersistence("bogus");
+    }
 
-        }
-
-        try {
-            $server->fault();
-            $this->fail();
-        } catch(AutoDiscoverException $e) {
-
-        }
-
-        try {
-            $server->loadFunctions("bogus");
-            $this->fail();
-        } catch(AutoDiscoverException $e) {
-
-        }
+    
+    public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnFault()
+    {
+        $server = new AutoDiscover();
+        
+        $this->setExpectedException('Zend\Soap\Exception\UnexpectedValueException', 'Function has no use in AutoDiscover');
+        $server->fault();
+    }
+    
+    public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnLoadFunctionsCall()
+    {
+        $server = new AutoDiscover();
+        
+        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Function has no use in AutoDiscover');
+        $server->loadFunctions("bogus");
     }
 
     public function testGetFunctions()
@@ -808,22 +805,23 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-5330
      */
-    public function testDumpOrXmlOnlyAfterGeneratedAutoDiscoverWsdl()
+    public function testDumpOnlyAfterGeneratedAutoDiscoverWsdl()
     {
         $server = new AutoDiscover();
-        try {
-            $server->dump(false);
-            $this->fail();
-        } catch(\Exception $e) {
-            $this->assertTrue($e instanceof AutoDiscoverException);
-        }
-
-        try {
-            $server->toXml();
-            $this->fail();
-        } catch(\Exception $e) {
-            $this->assertTrue($e instanceof AutoDiscoverException);
-        }
+        
+        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Cannot dump autodiscovered contents');
+        $server->dump(false);
+    }
+    
+    /**
+     * @group ZF-5330
+     */
+    public function testXmlOnlyAfterGeneratedAutoDiscoverWsdl()
+    {
+        $server = new AutoDiscover();
+        
+        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Cannot return autodiscovered contents');
+        $server->toXml();
     }
 
     /**

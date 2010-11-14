@@ -60,7 +60,7 @@ class CsvTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter = new Adapter\Csv(__DIR__ . '/_files/nofile.csv', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('Error opening translation file', $e->getMessage());
         }
 
@@ -107,7 +107,7 @@ class CsvTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->addTranslation(__DIR__ . '/_files/translation_en.csv', 'xx');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
@@ -168,7 +168,7 @@ class CsvTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->setLocale('nolocale');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 

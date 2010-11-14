@@ -29,11 +29,6 @@ use Zend\Locale;
 use Zend\Cache;
 use Zend\Cache\Frontend;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Translate_Adapter_ArrayTest::main');
-}
-
-
 /**
  * Zend_Translate_Adapter_Array
  */
@@ -81,14 +76,14 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter = new Adapter\ArrayAdapter('hastofail', 'en');
             $this->fail('Exception expected');
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('Error including array or file', $e->getMessage());
         }
 
         try {
             $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/failed.php', 'en');
             $this->fail('Exception expected');
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('Error including array or file', $e->getMessage());
         }
     }
@@ -135,7 +130,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->addTranslation(__DIR__ . '/_files/translation_en.php', 'xx');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
@@ -339,9 +334,4 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     {
         $this->_errorOccurred = true;
     }
-}
-
-// Call Zend_Translate_Adapter_ArrayTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Translate_Adapter_ArrayTest::main") {
-    \Zend_Translate_Adapter_ArrayTest::main();
 }

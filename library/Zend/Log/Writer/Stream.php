@@ -26,7 +26,7 @@ namespace Zend\Log\Writer;
 use Zend\Log;
 
 /**
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
  * @uses       \Zend\Log\Formatter\Simple
  * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
@@ -48,6 +48,8 @@ class Stream extends AbstractWriter
      *
      * @param  streamOrUrl     Stream or URL to open as a stream
      * @param  mode            Mode, only applicable if a URL is given
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Excpeiton\RuntimeException
      */
     public function __construct($streamOrUrl, $mode = \NULL)
     {
@@ -58,11 +60,11 @@ class Stream extends AbstractWriter
 
         if (is_resource($streamOrUrl)) {
             if (get_resource_type($streamOrUrl) != 'stream') {
-                throw new Log\Exception('Resource is not a stream');
+                throw new Log\Exception\InvalidArgumentException('Resource is not a stream');
             }
 
             if ($mode != 'a') {
-                throw new Log\Exception('Mode cannot be changed on existing streams');
+                throw new Log\Exception\InvalidArgumentException('Mode cannot be changed on existing streams');
             }
 
             $this->_stream = $streamOrUrl;
@@ -73,7 +75,7 @@ class Stream extends AbstractWriter
 
             if (! $this->_stream = @fopen($streamOrUrl, $mode, false)) {
                 $msg = "\"$streamOrUrl\" cannot be opened with mode \"$mode\"";
-                throw new Log\Exception($msg);
+                throw new Log\Exception\RuntimeException($msg);
             }
         }
 
@@ -85,7 +87,6 @@ class Stream extends AbstractWriter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Mock
-     * @throws \Zend\Log\Exception
      */
     public static function factory($config = array())
     {
@@ -119,6 +120,7 @@ class Stream extends AbstractWriter
      * Write a message to the log.
      *
      * @param  array  $event  event data
+     * @throws \Zend\Log\Exception\RuntimeException
      * @return void
      */
     protected function _write($event)
@@ -126,7 +128,7 @@ class Stream extends AbstractWriter
         $line = $this->_formatter->format($event);
 
         if (false === @fwrite($this->_stream, $line)) {
-            throw new Log\Exception("Unable to write to stream");
+            throw new Log\Exception\RuntimeException("Unable to write to stream");
         }
     }
 }

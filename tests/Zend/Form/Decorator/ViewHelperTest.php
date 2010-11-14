@@ -109,7 +109,7 @@ class ViewHelperTest extends \PHPUnit_Framework_TestCase
     {
         $element = $this->getElement();
         $content = 'test content';
-        $this->setExpectedException('Zend\Form\Exception', 'ViewHelper decorator cannot render');
+        $this->setExpectedException('Zend\Form\Decorator\Exception\UnexpectedValueException', 'ViewHelper decorator cannot render');
         $test = $this->decorator->render($content);
     }
 

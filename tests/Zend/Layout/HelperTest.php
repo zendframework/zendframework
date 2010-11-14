@@ -23,9 +23,10 @@
  * @namespace
  */
 namespace ZendTest\Layout;
-use Zend\Layout;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Layout\Controller\Action\Helper;
+
+use Zend\Layout,
+    Zend\Controller\Front as FrontController,
+    Zend\Layout\Controller\Action\Helper;
 
 
 /**
@@ -44,12 +45,15 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         \Zend\Layout\Layout::resetMvcInstance();
-        \Zend\Controller\Front::getInstance()->resetInstance();
-        if (HelperBroker::hasHelper('Layout')) {
-            HelperBroker::removeHelper('Layout');
+        $front = FrontController::getInstance();
+        $front->resetInstance();
+
+        $broker = $front->getHelperBroker();
+        if ($broker->hasPlugin('Layout')) {
+            $broker->unregister('Layout');
         }
-        if (HelperBroker::hasHelper('viewRenderer')) {
-            HelperBroker::removeHelper('viewRenderer');
+        if ($broker->hasPlugin('viewRenderer')) {
+            $broker->unregister('viewRenderer');
         }
     }
 

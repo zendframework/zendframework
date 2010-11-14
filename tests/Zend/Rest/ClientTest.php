@@ -88,7 +88,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $rest = new Client\RestClient();
 
-        $this->setExpectedException('Zend\\Rest\\Client\\Exception');
+        $this->setExpectedException('Zend\Rest\Client\Exception\UnexpectedValueException', 'URI object must be set before performing call');
         $response = $rest->restGet('/rest/');
     }
 
@@ -288,7 +288,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidXmlInClientResultLeadsToException()
     {
-        $this->setExpectedException('Zend\\Rest\\Client\\ResultException');
+        $this->setExpectedException('Zend\Rest\Client\Exception\ResultException', 'REST Response Error');
         $result = new Client\Result("invalidxml");
     }
 }

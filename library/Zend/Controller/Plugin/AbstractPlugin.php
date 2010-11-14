@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Controller\Plugin;
-use Zend\Controller\Request;
+
+use Zend\Controller\Request,
+    Zend\Loader\Broker;
 
 /**
  * @category   Zend
@@ -35,6 +37,13 @@ use Zend\Controller\Request;
 abstract class AbstractPlugin
 {
     /**
+     * Helper Broker instance
+     * 
+     * @var \Zend\Loader\Broker
+     */
+    protected $broker;
+
+    /**
      * @var \Zend\Controller\Request\AbstractRequest
      */
     protected $_request;
@@ -43,6 +52,28 @@ abstract class AbstractPlugin
      * @var \Zend\Controller\Response\AbstractResponse
      */
     protected $_response;
+
+    /**
+     * Set the action helper broker instance
+     * 
+     * @param  null|Broker $broker 
+     * @return AbstractPlugin
+     */
+    public function setHelperBroker(Broker $broker = null)
+    {
+        $this->broker = $broker;
+        return $this;
+    }
+
+    /**
+     * Get the action helper broker instance
+     * 
+     * @return null|Broker
+     */
+    public function getHelperBroker()
+    {
+        return $this->broker;
+    }
 
     /**
      * Set request object

@@ -24,6 +24,7 @@
  */
 namespace Zend\Mail\Transport;
 use Zend\Config,
+    Zend\Mail\Transport\Exception,
     Zend\Mail\AbstractTransport;
 
 /**
@@ -112,7 +113,7 @@ class Sendmail extends AbstractTransport
 	             * Exception is thrown here because
 	             * $parameters is a public property
 	             */
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'Parameters were set but are not a string'
                 );
             }
@@ -128,7 +129,7 @@ class Sendmail extends AbstractTransport
         }
 
         if ($this->_errstr !== null || !$result) {
-            throw new Exception('Unable to send mail. ' . $this->_errstr);
+            throw new Exception\RuntimeException('Unable to send mail. ' . $this->_errstr);
         }
     }
 
@@ -148,7 +149,7 @@ class Sendmail extends AbstractTransport
     protected function _prepareHeaders($headers)
     {
         if (!$this->_mail) {
-            throw new Exception('_prepareHeaders requires a registered \Zend\Mail\Mail object');
+            throw new Exception\RuntimeException('_prepareHeaders requires a registered \Zend\Mail\Mail object');
         }
 
         // mail() uses its $to parameter to set the To: header, and the $subject
@@ -156,12 +157,12 @@ class Sendmail extends AbstractTransport
         if (0 === strpos(PHP_OS, 'WIN')) {
             // If the current recipients list is empty, throw an error
             if (empty($this->recipients)) {
-                throw new Exception('Missing To addresses');
+                throw new Exception\RuntimeException('Missing To addresses');
             }
         } else {
             // All others, simply grab the recipients and unset the To: header
             if (!isset($headers['To'])) {
-                throw new Exception('Missing To header');
+                throw new Exception\RuntimeException('Missing To header');
             }
 
             unset($headers['To']['append']);

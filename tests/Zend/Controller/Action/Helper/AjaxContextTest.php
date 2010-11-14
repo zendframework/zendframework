@@ -23,8 +23,9 @@
  * @namespace
  */
 namespace ZendTest\Controller\Action\Helper;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Layout;
+
+use Zend\Controller\Front as FrontController,
+    Zend\Layout;
 
 /**
  * Test class for Zend_Controller_Action_Helper_AjaxContext.
@@ -55,12 +56,11 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
         }
 
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker::resetHelpers();
-        HelperBroker::addPrefix('Zend\Controller\Action\Helper');
 
         $this->front = \Zend\Controller\Front::getInstance();
         $this->front->resetInstance();
         $this->front->addModuleDirectory(__DIR__ . '/../../_files/modules');
+        $this->broker = $this->front->getHelperBroker();
 
         $this->layout = Layout\Layout::startMvc();
 
@@ -70,9 +70,8 @@ class AjaxContextTest extends \PHPUnit_Framework_TestCase
         $this->response = new \Zend\Controller\Response\Cli();
 
         $this->front->setRequest($this->request)->setResponse($this->response);
-        $this->view = new \Zend\View\View();
-        $this->view->addHelperPath(__DIR__ . '/../../../../../library/Zend/View/Helper/');
-        $this->viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+        $this->view = new \Zend\View\PhpRenderer();
+        $this->viewRenderer = $this->broker->load('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
         $this->controller = new AjaxContextTestController(

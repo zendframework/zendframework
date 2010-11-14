@@ -106,8 +106,6 @@ class ValidatorChain implements Validator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns array of validation failure messages
      *
      * @return array
@@ -118,8 +116,6 @@ class ValidatorChain implements Validator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns array of validation failure message codes
      *
      * @return array

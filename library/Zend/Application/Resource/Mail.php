@@ -137,7 +137,7 @@ class Mail extends AbstractResource
             if(!Loader\Autoloader::autoload($transportName)) {
                 $transportName = 'Zend\\Mail\\Transport\\' . $transportName;
                 if(!Loader\Autoloader::autoload($transportName)) {
-                    throw new ResourceException(
+                    throw new Exception\InitializationException(
                         "Specified Mail Transport '{$transportName}'"
                         . 'could not be found'
                     );
@@ -150,7 +150,7 @@ class Mail extends AbstractResource
         switch($transportName) {
             case 'Zend\\Mail\\Transport\\Smtp':
                 if(!isset($options['host'])) {
-                    throw new ResourceException(
+                    throw new Exception\InitializationException(
                         'A host is necessary for smtp transport,'
                         .' but none was given');
                 }

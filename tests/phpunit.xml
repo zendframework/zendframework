@@ -1,4 +1,4 @@
-<phpunit bootstrap="./Bootstrap.php">
+<phpunit bootstrap="./Bootstrap.php" colors="true">
     <testsuite name="Zend Framework Test Suite">
         <directory>./</directory>
     </testsuite>
@@ -6,6 +6,8 @@
     <groups>
         <exclude>
             <group>disable</group>
+            <group>Zend_Search_Lucene</group>
+            <group>Zend_Service_Technorati</group>
         </exclude>
     </groups>
 

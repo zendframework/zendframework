@@ -32,7 +32,7 @@ namespace Zend\Test\PHPUnit\Db\Operation;
  * @uses       PHPUnit_Extensions_Database_Operation_Exception
  * @uses       PHPUnit_Extensions_Database_Operation_IDatabaseOperation
  * @uses       \Zend\Test\PHPUnit\Db\Connection
- * @uses       \Zend\Test\PHPUnit\Db\Exception
+ * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -48,7 +48,9 @@ class DeleteAll implements \PHPUnit_Extensions_Database_Operation_IDatabaseOpera
     public function execute(\PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, \PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
     {
         if(!($connection instanceof \Zend\Test\PHPUnit\Db\Connection)) {
-            throw new \Zend\Test\PHPUnit\Db\Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
+            throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
+            	"Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!"
+            );
         }
 
         foreach ($dataSet as $table) {

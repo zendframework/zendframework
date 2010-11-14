@@ -152,7 +152,7 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $resource->setOptions($this->_dbOptions);
         $res = $resource->init();
 
-        $this->setExpectedException('Zend\\Application\\ResourceException', 'A DB adapter was tried to retrieve, but was not configured');
+        $this->setExpectedException('Zend\Application\Resource\Exception\InitializationException', 'A DB adapter was tried to retrieve, but was not configured');
         $res->getDb('foobar');
     }
 

@@ -108,7 +108,7 @@ class ReflectionClass
             return call_user_func_array(array($this->_reflection, $method), $args);
         }
 
-        throw new Exception('Invalid reflection method');
+        throw new Exception\BadMethodCallException('Invalid reflection method');
     }
 
     /**
@@ -178,7 +178,7 @@ class ReflectionClass
         }
 
         if (!is_string($namespace) || !preg_match('/[a-z0-9_\.]+/i', $namespace)) {
-            throw new Exception('Invalid namespace');
+            throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
         $this->_namespace = $namespace;

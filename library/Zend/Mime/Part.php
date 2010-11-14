@@ -93,7 +93,7 @@ class Part {
     public function getEncodedStream()
     {
         if (!$this->_isStream) {
-            throw new Exception('Attempt to get a stream from a string part');
+            throw new Exception\RuntimeException('Attempt to get a stream from a string part');
         }
 
         //stream_filter_remove(); // ??? is that right?
@@ -109,7 +109,7 @@ class Part {
                     )
                 );
                 if (!is_resource($filter)) {
-                    throw new Exception('Failed to append quoted-printable filter');
+                    throw new Exception\RuntimeException('Failed to append quoted-printable filter');
                 }
                 break;
             case Mime::ENCODING_BASE64:
@@ -123,7 +123,7 @@ class Part {
                     )
                 );
                 if (!is_resource($filter)) {
-                    throw new Exception('Failed to append base64 filter');
+                    throw new Exception\RuntimeException('Failed to append base64 filter');
                 }
                 break;
             default:

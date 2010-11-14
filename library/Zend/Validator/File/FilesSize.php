@@ -78,7 +78,7 @@ class FilesSize extends Size
         } elseif (is_scalar($options)) {
             $options = array('max' => $options);
         } elseif (!is_array($options)) {
-            throw new \Zend\Validator\Exception('Invalid options to validator provided');
+            throw new \Zend\Validator\Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         if (1 < func_num_args()) {
@@ -94,8 +94,6 @@ class FilesSize extends Size
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the disk usage of all files is at least min and
      * not bigger than max (when max is not null).
      *

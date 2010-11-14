@@ -132,7 +132,7 @@ class Definition
         if (is_array($callback)) {
             $callback = new Callback($callback);
         } elseif (!$callback instanceof Callback) {
-            throw new Server\Exception('Invalid method callback provided');
+            throw new Server\Exception\InvalidArgumentException('Invalid method callback provided');
         }
         $this->_callback = $callback;
         return $this;
@@ -159,7 +159,7 @@ class Definition
         if (is_array($prototype)) {
             $prototype = new Prototype($prototype);
         } elseif (!$prototype instanceof Prototype) {
-            throw new Server\Exception('Invalid method prototype provided');
+            throw new Server\Exception\InvalidArgumentException('Invalid method prototype provided');
         }
         $this->_prototypes[] = $prototype;
         return $this;
@@ -233,7 +233,7 @@ class Definition
     public function setObject($object)
     {
         if (!is_object($object) && (null !== $object)) {
-            throw new Server\Exception('Invalid object passed to ' . __CLASS__ . '::' . __METHOD__);
+            throw new Server\Exception\InvalidArgumentException('Invalid object passed to ' . __CLASS__ . '::' . __METHOD__);
         }
         $this->_object = $object;
         return $this;

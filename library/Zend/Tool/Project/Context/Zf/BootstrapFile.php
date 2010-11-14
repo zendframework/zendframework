@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
+use Zend\Tool\Project\Context\Exception;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -49,12 +50,12 @@ class BootstrapFile extends \Zend\Tool\Project\Context\Filesystem\File
     protected $_filesystemName = 'Bootstrap.php';
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_applicationConfigFile = null;
     
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_applicationDirectory = null;
     
@@ -82,7 +83,7 @@ class BootstrapFile extends \Zend\Tool\Project\Context\Filesystem\File
         $this->_applicationDirectory = $this->_resource->getProfile()->search('ApplicationDirectory');
 
         if (($this->_applicationConfigFile === false) || ($this->_applicationDirectory === false)) {
-            throw new \Zend\Tool\Project\Exception('To use the BootstrapFile context, your project requires the use of both the "ApplicationConfigFile" and "ApplicationDirectory" contexts.');
+            throw new Exception\RuntimeException('To use the BootstrapFile context, your project requires the use of both the "ApplicationConfigFile" and "ApplicationDirectory" contexts.');
         }
 
 

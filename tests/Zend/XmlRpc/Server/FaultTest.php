@@ -42,7 +42,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstance()
     {
-        $e = new Server\Exception('Testing fault', 411);
+        $e = new Server\Exception\RuntimeException('Testing fault', 411);
         $fault = Server\Fault::getInstance($e);
 
         $this->assertTrue($fault instanceof Server\Fault);
@@ -132,7 +132,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     public function testAttachObserver()
     {
         Server\Fault::attachObserver('ZendTest\\XmlRpc\\Server\\Observer');
-        $e = new Server\Exception('Checking observers', 411);
+        $e = new Server\Exception\RuntimeException('Checking observers', 411);
         $fault = Server\Fault::getInstance($e);
         $observed = Observer::getObserved();
         Observer::clearObserved();
@@ -153,12 +153,12 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     public function testDetachObserver()
     {
         Server\Fault::attachObserver('ZendTest\\XmlRpc\\Server\\Observer');
-        $e = new Server\Exception('Checking observers', 411);
+        $e = new Server\Exception\RuntimeException('Checking observers', 411);
         $fault = Server\Fault::getInstance($e);
         Observer::clearObserved();
         Server\Fault::detachObserver('ZendTest\\XmlRpc\\Server\\Observer');
 
-        $e = new Server\Exception('Checking observers', 411);
+        $e = new Server\Exception\RuntimeException('Checking observers', 411);
         $fault = Server\Fault::getInstance($e);
         $observed = Observer::getObserved();
         $this->assertTrue(empty($observed));
@@ -171,7 +171,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCode()
     {
-        $e = new Server\Exception('Testing fault', 411);
+        $e = new Server\Exception\RuntimeException('Testing fault', 411);
         $fault = Server\Fault::getInstance($e);
 
         $this->assertEquals(411, $fault->getCode());
@@ -182,7 +182,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetException()
     {
-        $e = new Server\Exception('Testing fault', 411);
+        $e = new Server\Exception\RuntimeException('Testing fault', 411);
         $fault = Server\Fault::getInstance($e);
 
         $this->assertSame($e, $fault->getException());
@@ -193,7 +193,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessage()
     {
-        $e = new Server\Exception('Testing fault', 411);
+        $e = new Server\Exception\RuntimeException('Testing fault', 411);
         $fault = Server\Fault::getInstance($e);
 
         $this->assertEquals('Testing fault', $fault->getMessage());
@@ -222,7 +222,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
 
         $xml = $dom->saveXML();
 
-        $e = new Server\Exception('Testing fault', 411);
+        $e = new Server\Exception\RuntimeException('Testing fault', 411);
         $fault = Server\Fault::getInstance($e);
 
         $this->assertEquals(trim($xml), trim($fault->__toString()));

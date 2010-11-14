@@ -24,7 +24,8 @@
 namespace Zend\File\Transfer\Adapter;
 
 use Zend\File\Transfer,
-    Zend\Loader\PluginLoader,
+    Zend\File\Transfer\Exception,
+    Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader\ShortNameLocater,
     Zend\Validator,
@@ -33,12 +34,16 @@ use Zend\File\Transfer,
 /**
  * Abstract class for file transfers (Downloads and Uploads)
  *
- * @uses      finfo
- * @uses      \Zend\File\Transfer\Exception
- * @uses      \Zend\Loader\PluginLoader
+ * This class needs a full rewrite. It re-implements functionality present in 
+ * Zend_Filter_Input and/or Zend_Form_Element, and in a way that's inconsistent
+ * with either one. Additionally, plugin loader usage is now deprecated -- but
+ * modifying that should be done in tandem with a rewrite to utilize validator 
+ * and filter chains instead.
+ *
+ * @todo      Rewrite
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter
@@ -179,15 +184,42 @@ abstract class AbstractAdapter
     abstract public function isFiltered($files = null);
 
     /**
-     * Retrieve progress of transfer
+     * Adds one or more files
      *
-     * @return float
+     * @param  string|array $file      File to add
+     * @param  string|array $validator Validators to use for this file, must be set before
+     * @param  string|array $filter    Filters to use for this file, must be set before
+     * @return \Zend\File\Transfer\Adapter\AbstractAdapter
+     * @throws \Zend\File\Transfer\Exception Not implemented
      */
-    public static function getProgress()
-    {
-        throw new Transfer\Exception('Method must be implemented within the adapter');
-    }
+    //abstract public function addFile($file, $validator = null, $filter = null);
 
+    /**
+     * Returns all set types
+     *
+     * @return array List of set types
+     * @throws \Zend\File\Transfer\Exception Not implemented
+     */
+    //abstract public function getType();
+
+    /**
+     * Adds one or more type of files
+     *
+     * @param  string|array $type Type of files to add
+     * @param  string|array $validator Validators to use for this file, must be set before
+     * @param  string|array $filter    Filters to use for this file, must be set before
+     * @return \Zend\File\Transfer\Adapter\AbstractAdapter
+     * @throws \Zend\File\Transfer\Exception Not implemented
+     */
+    //abstract public function addType($type, $validator = null, $filter = null);
+    
+    /**
+     * Returns all set files
+     *
+     * @return array List of set files
+     */
+    //abstract public function getFile();
+    
     /**
      * Set plugin loader to use for validator or filter chain
      *
@@ -205,7 +237,7 @@ abstract class AbstractAdapter
                 $this->_loaders[$type] = $loader;
                 return $this;
             default:
-                throw new Transfer\Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }
     }
 
@@ -233,7 +265,7 @@ abstract class AbstractAdapter
                         'Zend\\' . $prefixSegment . '\File' => 'Zend/' . $pathSegment . '/File',
                     );
 
-                    $this->_loaders[$type] = new PluginLoader($paths);
+                    $this->_loaders[$type] = new PrefixPathLoader($paths);
                 } else {
                     $loader = $this->_loaders[$type];
                     if ($loader instanceof PrefixPathMapper) {
@@ -245,7 +277,7 @@ abstract class AbstractAdapter
                 }
                 return $this->_loaders[$type];
             default:
-                throw new Transfer\Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
         }
     }
 
@@ -290,7 +322,7 @@ abstract class AbstractAdapter
                 }
                 return $this;
             default:
-                throw new Transfer\Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
         }
     }
 
@@ -362,7 +394,7 @@ abstract class AbstractAdapter
                 unset($options['messages']);
             }
         } else {
-            throw new Transfer\Exception('Invalid validator provided to addValidator; must be string or Zend_VALIDATOR_Interface');
+            throw new Exception\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend_VALIDATOR_Interface');
         }
 
         $this->_validators[$name] = $validator;
@@ -443,7 +475,7 @@ abstract class AbstractAdapter
                     }
                 }
             } else {
-                throw new Transfer\Exception('Invalid validator passed to addValidators()');
+                throw new Exception\InvalidArgumentException('Invalid validator passed to addValidators()');
             }
         }
 
@@ -591,7 +623,7 @@ abstract class AbstractAdapter
                             break;
 
                         default:
-                            throw new Transfer\Exception("Unknown option: $name = $value");
+                            throw new Exception\InvalidArgumentException("Unknown option: $name = $value");
                     }
                 }
             }
@@ -766,7 +798,7 @@ abstract class AbstractAdapter
             $class  = $this->getPluginLoader(self::FILTER)->load($filter);
             $filter = new $class($options);
         } else {
-            throw new Transfer\Exception('Invalid filter specified');
+            throw new Exception\InvalidArgumentException('Invalid filter specified');
         }
 
         $this->_filters[$class] = $filter;
@@ -933,17 +965,6 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Returns all set files
-     *
-     * @return array List of set files
-     * @throws \Zend\File\Transfer\Exception Not implemented
-     */
-    public function getFile()
-    {
-        throw new Transfer\Exception('Method not implemented');
-    }
-
-    /**
      * Retrieves the filename of transferred files.
      *
      * @param  string  $fileelement (Optional) Element to return the filename for
@@ -986,45 +1007,6 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Adds one or more files
-     *
-     * @param  string|array $file      File to add
-     * @param  string|array $validator Validators to use for this file, must be set before
-     * @param  string|array $filter    Filters to use for this file, must be set before
-     * @return \Zend\File\Transfer\Adapter\AbstractAdapter
-     * @throws \Zend\File\Transfer\Exception Not implemented
-     */
-    public function addFile($file, $validator = null, $filter = null)
-    {
-        throw new Transfer\Exception('Method not implemented');
-    }
-
-    /**
-     * Returns all set types
-     *
-     * @return array List of set types
-     * @throws \Zend\File\Transfer\Exception Not implemented
-     */
-    public function getType()
-    {
-        throw new Transfer\Exception('Method not implemented');
-    }
-
-    /**
-     * Adds one or more type of files
-     *
-     * @param  string|array $type Type of files to add
-     * @param  string|array $validator Validators to use for this file, must be set before
-     * @param  string|array $filter    Filters to use for this file, must be set before
-     * @return \Zend\File\Transfer\Adapter\AbstractAdapter
-     * @throws \Zend\File\Transfer\Exception Not implemented
-     */
-    public function addType($type, $validator = null, $filter = null)
-    {
-        throw new Transfer\Exception('Method not implemented');
-    }
-
-    /**
      * Sets a new destination for the given files
      *
      * @deprecated Will be changed to be a filter!!!
@@ -1038,11 +1020,11 @@ abstract class AbstractAdapter
         $orig = $files;
         $destination = rtrim($destination, "/\\");
         if (!is_dir($destination)) {
-            throw new Transfer\Exception('The given destination is not a directory or does not exist');
+            throw new Exception\InvalidArgumentException('The given destination is not a directory or does not exist');
         }
 
         if (!is_writable($destination)) {
-            throw new Transfer\Exception('The given destination is not writeable');
+            throw new Exception\InvalidArgumentException('The given destination is not writeable');
         }
 
         if ($files === null) {
@@ -1078,7 +1060,7 @@ abstract class AbstractAdapter
             if (isset($this->_files[$orig]['destination'])) {
                 $destinations[$orig] = $this->_files[$orig]['destination'];
             } else {
-                throw new Transfer\Exception(sprintf('The file transfer adapter can not find "%s"', $orig));
+                throw new Exception\InvalidArgumentException(sprintf('The file transfer adapter can not find "%s"', $orig));
             }
         }
 
@@ -1116,7 +1098,7 @@ abstract class AbstractAdapter
         } elseif ($translator instanceof \Zend\Translator\Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            throw new Transfer\Exception('Invalid translator specified');
+            throw new Exception\InvalidArgumentException('Invalid translator specified');
         }
 
         return $this;
@@ -1169,7 +1151,7 @@ abstract class AbstractAdapter
     public function getHash($hash = 'crc32', $files = null)
     {
         if (!in_array($hash, hash_algos())) {
-            throw new Transfer\Exception('Unknown hash algorithm');
+            throw new Exception\InvalidArgumentException('Unknown hash algorithm');
         }
 
         $files  = $this->_getFiles($files);
@@ -1180,7 +1162,7 @@ abstract class AbstractAdapter
             } else if (file_exists($value['tmp_name'])) {
                 $result[$key] = hash_file($hash, $value['tmp_name']);
             } else if (empty($value['options']['ignoreNoFile'])) {
-                throw new Transfer\Exception("The file '{$value['name']}' does not exist");
+                throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             }
         }
 
@@ -1210,7 +1192,7 @@ abstract class AbstractAdapter
                     $result[$key] = $value['size'];
                 }
             } else if (empty($value['options']['ignoreNoFile'])) {
-                throw new Transfer\Exception("The file '{$value['name']}' does not exist");
+                throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             } else {
                 continue;
             }
@@ -1258,7 +1240,7 @@ abstract class AbstractAdapter
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 $result[$key] = $value['type'];
             } else if (empty($value['options']['ignoreNoFile'])) {
-                throw new Transfer\Exception("the file '{$value['name']}' does not exist");
+                throw new Exception\InvalidArgumentException("the file '{$value['name']}' does not exist");
             } else {
                 continue;
             }
@@ -1408,7 +1390,7 @@ abstract class AbstractAdapter
                     $this->_tmpDir = realpath(dirname($tempFile));
                     unlink($tempFile);
                 } else {
-                    throw new Transfer\Exception('Could not determine a temporary directory');
+                    throw new Exception\RuntimeException('Could not determine a temporary directory');
                 }
             }
 
@@ -1490,7 +1472,7 @@ abstract class AbstractAdapter
                         return array();
                     }
 
-                    throw new Transfer\Exception(sprintf('The file transfer adapter can not find "%s"', $find));
+                    throw new Exception\RuntimeException(sprintf('The file transfer adapter can not find "%s"', $find));
                 }
 
                 foreach ($found as $checked) {

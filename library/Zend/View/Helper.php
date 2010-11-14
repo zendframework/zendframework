@@ -36,15 +36,15 @@ interface Helper
     /**
      * Set the View object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\View\Helper
      */
-    public function setView(\Zend\View\ViewEngine $view);
+    public function setView(Renderer $view);
 
     /**
-     * Strategy pattern: helper method to invoke
+     * Get the View object
      *
-     * @return mixed
+     * @return \Zend\View\Renderer
      */
-    public function direct();
+    public function getView();
 }

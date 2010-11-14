@@ -27,10 +27,6 @@ namespace Zend\Service\LiveDocx;
 
 use \Zend\Soap\Client\Client;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'MailMergeTest::main');
-}
-
 
 /**
  * Zend_Service_LiveDocx test case
@@ -53,12 +49,6 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     public $mailMerge;
 
     // -------------------------------------------------------------------------
-
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -628,8 +618,4 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $actualResults = MailMerge::multiAssocArrayToArrayOfArrayOfString($testValues);
         $this->assertEquals($expectedResults, $actualResults);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'MailMergeTest::main') {
-    MailMergeTest::main();
 }

@@ -76,7 +76,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
     public function testIsLocale()
     {
         foreach ($this->_languages as $lang) {
-            if (!Zend_Locale::isLocale($lang, true, false)) {
+            if (!Zend\Locale\Locale::isLocale($lang, true, false)) {
                 $this->fail("Language directory '{$lang}' not a valid locale");
             }
         }

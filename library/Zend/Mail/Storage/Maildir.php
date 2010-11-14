@@ -25,6 +25,7 @@
 namespace Zend\Mail\Storage;
 
 use Zend\Mail\AbstractStorage,
+    Zend\Mail\Storage\Exception,
     Zend\Mail\Storage;
 
 /**
@@ -113,7 +114,7 @@ class Maildir extends AbstractStorage
     protected function _getFileData($id, $field = null)
     {
         if (!isset($this->_files[$id - 1])) {
-            throw new Exception('id does not exist');
+            throw new Exception\InvalidArgumentException('id does not exist');
         }
 
         if (!$field) {
@@ -121,7 +122,7 @@ class Maildir extends AbstractStorage
         }
 
         if (!isset($this->_files[$id - 1][$field])) {
-            throw new Exception('field does not exist');
+            throw new Exception\InvalidArgumentException('field does not exist');
         }
 
         return $this->_files[$id - 1][$field];
@@ -183,7 +184,7 @@ class Maildir extends AbstractStorage
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
 
         $fh = fopen($this->_getFileData($id, 'filename'), 'r');
@@ -213,7 +214,7 @@ class Maildir extends AbstractStorage
     {
         if ($part !== null) {
             // TODO: implement
-            throw new Exception('not implemented');
+            throw new Exception\RuntimeException('not implemented');
         }
 
         $fh = fopen($this->_getFileData($id, 'filename'), 'r');
@@ -245,11 +246,11 @@ class Maildir extends AbstractStorage
         }
 
         if (!isset($params->dirname) || !is_dir($params->dirname)) {
-            throw new Exception('no valid dirname given in params');
+            throw new Exception\InvalidArgumentException('no valid dirname given in params');
         }
 
         if (!$this->_isMaildir($params->dirname)) {
-            throw new Exception('invalid maildir given');
+            throw new Exception\InvalidArgumentException('invalid maildir given');
         }
 
         $this->_has['top'] = true;
@@ -289,7 +290,7 @@ class Maildir extends AbstractStorage
 
         $dh = @opendir($dirname . '/cur/');
         if (!$dh) {
-            throw new Exception('cannot open maildir');
+            throw new Exception\RuntimeException('cannot open maildir');
         }
         $this->_getMaildirFiles($dh, $dirname . '/cur/');
         closedir($dh);
@@ -299,7 +300,7 @@ class Maildir extends AbstractStorage
             $this->_getMaildirFiles($dh, $dirname . '/new/', array(Storage::FLAG_RECENT));
             closedir($dh);
         } else if (file_exists($dirname . '/new/')) {
-            throw new Exception('cannot read recent mails in maildir');
+            throw new Exception\RuntimeException('cannot read recent mails in maildir');
         }
     }
 
@@ -381,7 +382,7 @@ class Maildir extends AbstractStorage
      */
     public function removeMessage($id)
     {
-        throw new Exception('maildir is (currently) read-only');
+        throw new Exception\RuntimeException('maildir is (currently) read-only');
     }
 
     /**
@@ -424,6 +425,6 @@ class Maildir extends AbstractStorage
             }
         }
 
-        throw new Exception('unique id not found');
+        throw new Exception\InvalidArgumentException('unique id not found');
     }
 }

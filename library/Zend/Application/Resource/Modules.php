@@ -24,8 +24,6 @@
  */
 namespace Zend\Application\Resource;
 
-use Zend\Application\Exception as Exception;
-
 /**
  * Module bootstrapping resource
  *
@@ -82,14 +80,14 @@ class Modules extends AbstractResource
                     if (($default != $module)
                         && !class_exists($bootstrapClass, false)
                     ) {
-                        throw new Exception(sprintf(
+                        throw new Exception\InitializationException(sprintf(
                             $eMsgTpl, $module, $bootstrapClass
                         ));
                     } elseif ($default == $module) {
                         if (!class_exists($bootstrapClass, false)) {
                             $bootstrapClass = 'Bootstrap';
                             if (!class_exists($bootstrapClass, false)) {
-                                throw new Exception(sprintf(
+                                throw new Exception\InitializationException(sprintf(
                                     $eMsgTpl, $module, $bootstrapClass
                                 ));
                             }

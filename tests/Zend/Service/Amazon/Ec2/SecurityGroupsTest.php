@@ -26,7 +26,7 @@ namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 
 /**
- * Zend_Service_Amazon_Ec2_Securitygroups test case.
+ * Zend\Service\Amazon\Ec2\Securitygroups test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -41,9 +41,9 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Securitygroups
+     * @var Zend\Service\Amazon\Ec2\Securitygroups
      */
-    private $Zend_Service_Amazon_Ec2_Securitygroups;
+    private $securitygroupsInstance;
 
     /**
      * Prepares the environment before running a test.
@@ -52,10 +52,10 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->Zend_Service_Amazon_Ec2_Securitygroups = new Ec2\SecurityGroups('access_key', 'secret_access_key');
+        $this->securitygroupsInstance = new Ec2\SecurityGroups('access_key', 'secret_access_key');
 
-        $adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client = new \Zend\HTTP\Client(null, array(
+        $adapter = new \Zend\Http\Client\Adapter\Test();
+        $client = new \Zend\Http\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
@@ -70,13 +70,13 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->adapter);
 
-        $this->Zend_Service_Amazon_Ec2_Securitygroups = null;
+        $this->securitygroupsInstance = null;
 
         parent::tearDown();
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Securitygroups->authorize()
+     * Tests Zend\Service\Amazon\Ec2\Securitygroups->authorize()
      */
     public function testAuthorizeSinglePort()
     {
@@ -95,7 +95,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->authorizeIp('MyGroup', 'tcp', '80', '80', '0.0.0.0/0');
+        $return = $this->securitygroupsInstance->authorizeIp('MyGroup', 'tcp', '80', '80', '0.0.0.0/0');
         $this->assertTrue($return);
 
     }
@@ -117,7 +117,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->authorizeIp('MyGroup', 'tcp', '6000', '7000', '0.0.0.0/0');
+        $return = $this->securitygroupsInstance->authorizeIp('MyGroup', 'tcp', '6000', '7000', '0.0.0.0/0');
         $this->assertTrue($return);
 
     }
@@ -139,13 +139,13 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->authorizeGroup('MyGroup', 'groupname', '15333848');
+        $return = $this->securitygroupsInstance->authorizeGroup('MyGroup', 'groupname', '15333848');
         $this->assertTrue($return);
 
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Securitygroups->create()
+     * Tests Zend\Service\Amazon\Ec2\Securitygroups->create()
      */
     public function testCreate()
     {
@@ -165,14 +165,14 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</CreateSecurityGroupResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->create('MyGroup', 'My Security Grup');
+        $return = $this->securitygroupsInstance->create('MyGroup', 'My Security Grup');
 
         $this->assertTrue($return);
 
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Securitygroups->delete()
+     * Tests Zend\Service\Amazon\Ec2\Securitygroups->delete()
      */
     public function testDelete()
     {
@@ -191,14 +191,14 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</DeleteSecurityGroupResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->delete('MyGroup');
+        $return = $this->securitygroupsInstance->delete('MyGroup');
 
         $this->assertTrue($return);
 
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Securitygroups->describe()
+     * Tests Zend\Service\Amazon\Ec2\Securitygroups->describe()
      */
     public function testDescribeMultipleSecruityGroups()
     {
@@ -253,7 +253,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeSecurityGroupsResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->describe(array('WebServers','RangedPortsBySource'));
+        $return = $this->securitygroupsInstance->describe(array('WebServers','RangedPortsBySource'));
 
         $this->assertEquals(2, count($return));
 
@@ -321,7 +321,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeSecurityGroupsResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->describe('WebServers');
+        $return = $this->securitygroupsInstance->describe('WebServers');
 
         $this->assertEquals(1, count($return));
 
@@ -381,7 +381,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</DescribeSecurityGroupsResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->describe('WebServers');
+        $return = $this->securitygroupsInstance->describe('WebServers');
 
         $this->assertEquals(1, count($return));
 
@@ -407,7 +407,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_Securitygroups->revoke()
+     * Tests Zend\Service\Amazon\Ec2\Securitygroups->revoke()
      */
     public function testRevokeSinglePort()
     {
@@ -426,7 +426,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->revokeIp('MyGroup', 'tcp', '80', '80', '0.0.0.0/0');
+        $return = $this->securitygroupsInstance->revokeIp('MyGroup', 'tcp', '80', '80', '0.0.0.0/0');
         $this->assertTrue($return);
 
     }
@@ -448,7 +448,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->revokeIp('MyGroup', 'tcp', '6000', '7000', '0.0.0.0/0');
+        $return = $this->securitygroupsInstance->revokeIp('MyGroup', 'tcp', '6000', '7000', '0.0.0.0/0');
         $this->assertTrue($return);
 
     }
@@ -471,7 +471,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_Securitygroups->revokeGroup('MyGroup', 'groupname', '15333848');
+        $return = $this->securitygroupsInstance->revokeGroup('MyGroup', 'groupname', '15333848');
         $this->assertTrue($return);
 
     }

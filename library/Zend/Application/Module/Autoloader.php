@@ -44,7 +44,7 @@ class Autoloader extends ResourceAutoloader
      * @param  array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         parent::__construct($options);
         $this->initDefaultResourceTypes();

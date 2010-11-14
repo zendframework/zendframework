@@ -133,20 +133,12 @@ EOT;
 
     public function testCanPassInMethodAndParams()
     {
-        try {
-            $request = new Request\Http('foo', array('bar', 'baz'));
-        } catch (\Exception $e) {
-            $this->fail('Should be able to pass in methods and params to request');
-        }
+        $request = new Request\Http('foo', array('bar', 'baz'));
     }
 
     public function testExtendingClassShouldBeAbleToReceiveMethodAndParams()
     {
-        try {
-            $request = new HTTPTestExtension('foo', array('bar', 'baz'));
-        } catch (\Exception $e) {
-            $this->fail('Should be able to pass in methods and params to request');
-        }
+        $request = new HTTPTestExtension('foo', array('bar', 'baz'));
         $this->assertEquals('foo', $request->method);
         $this->assertEquals(array('bar', 'baz'), $request->params);
     }

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -29,29 +29,29 @@ namespace ZendTest\Validator;
  */
 
 /**
- * @see Zend_Validate_Hex
+ * @see Zend_Validator_Hex
  */
 
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class HexTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Hex object
+     * Zend_Validator_Hex object
      *
-     * @var Zend_Validate_Hex
+     * @var Zend_Validator_Hex
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Hex object for each test method
+     * Creates a new Zend_Validator_Hex object for each test method
      *
      * @return void
      */

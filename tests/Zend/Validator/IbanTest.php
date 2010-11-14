@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -26,20 +26,12 @@ namespace ZendTest\Validator;
 use Zend\Validator;
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_Iban
- */
-
-/**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class IbanTest extends \PHPUnit_Framework_TestCase
 {
@@ -66,15 +58,13 @@ class IbanTest extends \PHPUnit_Framework_TestCase
     public function testSettingAndGettingLocale()
     {
         $validator = new Validator\Iban();
-        try {
-            $validator->setLocale('de_QA');
-            $this->fail();
-        } catch (Validator\Exception $e) {
-            $this->assertContains('IBAN validation', $e->getMessage());
-        }
-
+        
         $validator->setLocale('de_DE');
         $this->assertEquals('de_DE', $validator->getLocale());
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'IBAN validation');
+        $validator->setLocale('de_QA');
+        
     }
 
     public function testInstanceWithLocale()

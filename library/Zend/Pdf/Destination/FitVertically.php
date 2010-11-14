@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -64,7 +65,7 @@ class FitVertically extends Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
-            throw new Pdf\Exception('Page entry must be a Zend_PDF_Page object or page number.');
+            throw new Exception\InvalidArgumentException('$page parametr must be a \Zend\Pdf\Page object or a page number.');
         }
 
         $destinationArray->items[] = new InternalType\NameObject('FitV');
@@ -87,7 +88,7 @@ class FitVertically extends Explicit
      * Set left edge of the displayed page
      *
      * @param float $left
-     * @return Zend_PDF_Action_FitVertically
+     * @return \Zend\Pdf\Action\FitVertically
      */
     public function setLeftEdge($left)
     {

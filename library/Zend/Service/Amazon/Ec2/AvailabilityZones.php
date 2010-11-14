@@ -23,6 +23,8 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * An Amazon EC2 interface to query which Availibity Zones your account has access to.

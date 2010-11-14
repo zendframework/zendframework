@@ -22,7 +22,8 @@
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator;
+use Zend\Validator,
+    Zend\Validator\Exception;
 
 /**
  * Validator for the mime type of a file
@@ -128,7 +129,7 @@ class MimeType extends Validator\AbstractValidator
         } elseif (is_string($mimetype)) {
             $mimetype = explode(',', $mimetype);
         } elseif (!is_array($mimetype)) {
-            throw new Validator\Exception("Invalid options to validator provided");
+            throw new Exception\InvalidArgumentException("Invalid options to validator provided");
         }
 
         if (isset($mimetype['magicfile'])) {
@@ -191,15 +192,15 @@ class MimeType extends Validator\AbstractValidator
             $this->_magicfile = null;
         } else if (!(class_exists('finfo', false))) {
             $this->_magicfile = null;
-            throw new Validator\Exception('Magicfile can not be set. There is no finfo extension installed');
+            throw new Exception\InvalidArgumentException('Magicfile can not be set. There is no finfo extension installed');
         } else if (!is_readable($file)) {
-            throw new Validator\Exception('The given magicfile can not be read');
+            throw new Exception\InvalidArgumentException('The given magicfile can not be read');
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             $this->_finfo = @finfo_open($const, $file);
             if (empty($this->_finfo)) {
                 $this->_finfo = null;
-                throw new Validator\Exception('The given magicfile is not accepted by finfo');
+                throw new Exception\InvalidArgumentException('The given magicfile is not accepted by finfo');
             } else {
                 $this->_magicfile = $file;
             }
@@ -274,7 +275,7 @@ class MimeType extends Validator\AbstractValidator
         if (is_string($mimetype)) {
             $mimetype = explode(',', $mimetype);
         } elseif (!is_array($mimetype)) {
-            throw new Validator\Exception("Invalid options to validator provided");
+            throw new Exception\InvalidArgumentException("Invalid options to validator provided");
         }
 
         if (isset($mimetype['magicfile'])) {

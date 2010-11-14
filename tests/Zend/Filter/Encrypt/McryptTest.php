@@ -73,12 +73,8 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         $filter->setVector('testvect');
         $this->assertEquals('testvect', $filter->getVector());
 
-        try {
-            $filter->setVector('1');
-            $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('wrong size', $e->getMessage());
-        }
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'wrong size');
+        $filter->setVector('1');
     }
 
     /**
@@ -158,12 +154,8 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructionWithInteger()
     {
-        try {
-            $filter = new McryptEncryption(1234);
-            $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('Invalid options argument', $e->getMessage());
-        }
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options argument');
+        $filter = new McryptEncryption(1234);
     }
 
     /**
@@ -188,21 +180,21 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         try {
             $filter->setEncryption(1234);
             $filter->fail();
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid options argument', $e->getMessage());
         }
 
         try {
             $filter->setEncryption(array('algorithm' => 'unknown'));
             $filter->fail();
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\InvalidArgumentException $e) {
             $this->assertContains('The algorithm', $e->getMessage());
         }
 
         try {
             $filter->setEncryption(array('mode' => 'unknown'));
             $filter->fail();
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\InvalidArgumentException $e) {
             $this->assertContains('The mode', $e->getMessage());
         }
     }
@@ -227,7 +219,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This adapter needs the bz2 extension');
         }
 
-        $filter = new Zend_Filter_Encrypt_Mcrypt(array('key' => 'testkey'));
+        $filter = new McryptEncryption(array('key' => 'testkey'));
         $filter->setVector('testvect');
         $filter->setCompression('bz2');
         $output = $filter->encrypt('teststring');

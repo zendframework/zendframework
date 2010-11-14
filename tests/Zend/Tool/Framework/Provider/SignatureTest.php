@@ -110,17 +110,19 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadPropertyValue()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception');
         $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeaturedBadSpecialties());
         $signature->setRegistry($this->_registry);
+
+        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception\RuntimeException');
         $signature->process();
     }
 
     public function testGetSpecialtiesReturnsParsedSpecialtiesThrowsExceptionOnBadReturnValue()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception');
         $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderFullFeaturedBadSpecialties2());
         $signature->setRegistry($this->_registry);
+        
+        $this->setExpectedException('Zend\Tool\Framework\Provider\Exception\RuntimeException');
         $signature->process();
     }
 

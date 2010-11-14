@@ -40,8 +40,8 @@ class Zend_Service_Nirvanix_FunctionalTestCase extends PHPUnit_Framework_TestCas
 {
     public function setUp()
     {
-        $this->httpAdapter = new Zend_Http_Client_Adapter_Test();
-        $this->httpClient = new Zend_Http_Client('http://foo',
+        $this->httpAdapter = new Zend\Http\Client\Adapter\Test();
+        $this->httpClient = new Zend\Http\Client('http://foo',
                                     array('adapter' => $this->httpAdapter));
 
         $this->auth = array('username' => 'foo', 'password' => 'bar', 'appKey' => 'baz');

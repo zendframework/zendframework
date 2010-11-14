@@ -56,8 +56,6 @@ class Digits extends AbstractValidator
     );
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value only contains digit characters
      *
      * @param  string $value

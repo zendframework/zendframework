@@ -46,8 +46,8 @@ interface PrefixPathMapper extends ShortNameLocater
      * Remove a prefix (or prefixed-path) from the registry
      *
      * @param string $prefix
-     * @param string $path OPTIONAL
+     * @param string $path
      * @return \Zend\Loader\PrefixPathMapper
      */
-    public function removePrefixPath($prefix, $path = null);
+    public function removePrefixPath($prefix, $path);
 }

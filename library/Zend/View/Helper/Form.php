@@ -50,7 +50,7 @@ class Form extends FormElement
         extract($info);
 
         if (!empty($id)) {
-            $id = ' id="' . $this->view->escape($id) . '"';
+            $id = ' id="' . $this->view->vars()->escape($id) . '"';
         } else {
             $id = '';
         }

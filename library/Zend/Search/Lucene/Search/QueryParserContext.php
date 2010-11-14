@@ -23,10 +23,14 @@
  * @namespace
  */
 namespace Zend\Search\Lucene\Search;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Exception\UnexpectedValueException,
+	Zend\Search\Lucene\Search\Exception\QueryParserException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\UnexpectedValueException
+ * @uses 	   \Zend\Search\Lucene\Search\Exception\QueryParserException
  * @uses       \Zend\Search\Lucene\Search\Query
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -139,7 +143,8 @@ class QueryParserContext
      * Set sign for next entry
      *
      * @param integer $sign
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
+     * @throws \Zend\Search\Lucene\Exception\UnexpectedValueException
      */
     public function setNextEntrySign($sign)
     {
@@ -154,7 +159,7 @@ class QueryParserContext
         } else if ($sign == QueryToken::TT_PROHIBITED) {
             $this->_nextEntrySign = false;
         } else {
-            throw new Lucene\Exception('Unrecognized sign type.');
+            throw new UnexpectedValueException('Unrecognized sign type.');
         }
     }
 
@@ -180,7 +185,7 @@ class QueryParserContext
     /**
      * Process fuzzy search or proximity search modifier
      *
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      */
     public function processFuzzyProximityModifier($parameter = null)
     {
@@ -205,6 +210,7 @@ class QueryParserContext
      * Set boost factor to the entry
      *
      * @param float $boostFactor
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      */
     public function boost($boostFactor)
     {
@@ -229,6 +235,7 @@ class QueryParserContext
      * Process logical operator
      *
      * @param integer $operator
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      */
     public function addLogicalOperator($operator)
     {
@@ -271,8 +278,8 @@ class QueryParserContext
      * Generate 'boolean style' query from the context
      * 'term1 and term2   or   term3 and (<subquery1>) and not (<subquery2>)'
      *
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
-     * @throws \Zend\Search\Lucene\Index
      */
     private function _booleanExpressionQuery()
     {
@@ -307,13 +314,13 @@ class QueryParserContext
                             break;
 
                         default:
-                            throw new Lucene\Exception('Boolean expression error. Unknown operator type.');
+                            throw new UnexpectedValueException('Boolean expression error. Unknown operator type.');
                     }
                 }
             }
 
             $conjuctions = $expressionRecognizer->finishExpression();
-        } catch (\Zend\Search\Exception $e) {
+        } catch (\Zend\Search\Lucene\Exception $e) {
             // It's query syntax error message and it should be user friendly. So FSM message is omitted
             throw new QueryParserException('Boolean expression error.', 0, $e);
         }

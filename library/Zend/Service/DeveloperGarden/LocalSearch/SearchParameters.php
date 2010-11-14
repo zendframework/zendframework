@@ -21,9 +21,9 @@
 
 /**
  * @uses       Zend_Service_DeveloperGarden_LocalSearch_Exception
- * @uses       Zend_Validate_Between
- * @uses       Zend_Validate_Int
- * @uses       Zend_Validate_NotEmpty
+ * @uses       Zend\Validator\Between
+ * @uses       Zend\Validator\Int
+ * @uses       Zend\Validator\NotEmpty
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -178,7 +178,7 @@ class Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
      */
     public function setHits($hits = 10)
     {
-        $validator = new Zend_Validate_Between(0, 1000);
+        $validator = new Zend\Validator\Between(0, 1000);
         if (!$validator->isValid($hits)) {
             $message = $validator->getMessages();
             throw new Zend_Service_DeveloperGarden_LocalSearch_Exception(current($message));
@@ -221,7 +221,7 @@ class Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
      */
     public function setWhere($where)
     {
-        $validator = new Zend_Validate_NotEmpty();
+        $validator = new Zend\Validator\NotEmpty();
         if (!$validator->isValid($where)) {
             $message = $validator->getMessages();
             throw new Zend_Service_DeveloperGarden_LocalSearch_Exception(current($message));
@@ -270,7 +270,7 @@ class Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
      */
     public function setRadius($radius)
     {
-        $validator = new Zend_Validate_Int();
+        $validator = new Zend\Validator\Int();
         if (!$validator->isValid($radius)) {
             $message = $validator->getMessages();
             throw new Zend_Service_DeveloperGarden_LocalSearch_Exception(current($message));

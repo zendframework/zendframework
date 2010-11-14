@@ -26,13 +26,6 @@ namespace ZendTest\Json\Server;
 use Zend\Json\Server;
 use Zend\Json;
 
-// Call Zend_JSON_Server_ErrorTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_JSON_Server_ErrorTest::main");
-}
-
-
-
 /**
  * Test class for Zend_JSON_Server_Error
  *
@@ -46,18 +39,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class ErrorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_JSON_Server_ErrorTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -151,14 +132,14 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupError();
         $json = $this->error->toJSON();
-        $this->validateArray(Json\Json::decode($json));
+        $this->validateArray(Json\Json::decode($json, Json\Json::TYPE_ARRAY));
     }
 
     public function testCastingToStringShouldCastToJSON()
     {
         $this->setupError();
         $json = $this->error->__toString();
-        $this->validateArray(Json\Json::decode($json));
+        $this->validateArray(Json\Json::decode($json, Json\Json::TYPE_ARRAY));
     }
 
     public function setupError()
@@ -183,9 +164,4 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->error->getMessage(), $error['message']);
         $this->assertSame($this->error->getData(), $error['data']);
     }
-}
-
-// Call Zend_JSON_Server_ErrorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_JSON_Server_ErrorTest::main") {
-    \Zend_JSON_Server_ErrorTest::main();
 }

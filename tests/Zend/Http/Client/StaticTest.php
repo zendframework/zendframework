@@ -111,7 +111,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidUriStringException()
     {
-        $this->setExpectedException('Zend\\Http\\Exception');
+        $this->setExpectedException('Zend\Http\Client\Exception\InvalidArgumentException', 'Passed parameter is not a valid HTTP URI');
         $this->_client->setUri('httpp://__invalid__.com');
     }
 
@@ -157,10 +157,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     /**
      * Make sure an exception is thrown if an invalid header name is used
      *
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testInvalidHeaderExcept()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\InvalidArgumentException',
+            'Ina_lid* Hea%der is not a valid HTTP header name');
+
         $this->_client->setHeaders('Ina_lid* Hea%der', 'is not good');
     }
 
@@ -210,10 +213,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * Test setAuth (dynamic method) fails when trying to use an unsupported
      * authentication scheme
      *
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testExceptUnsupportedAuthDynamic()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\InvalidArgumentException',
+            'Invalid or not supported authentication type: \'SuperStrongAlgo\'');
+
         $this->_client->setAuth('shahar', '1234', 'SuperStrongAlgo');
     }
 
@@ -221,10 +227,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * Test encodeAuthHeader (static method) fails when trying to use an
      * unsupported authentication scheme
      *
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testExceptUnsupportedAuthStatic()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\InvalidArgumentException',
+            'Not a supported HTTP authentication type: \'SuperStrongAlgo\'');
+
         HTTPClient::encodeAuthHeader('shahar', '1234', 'SuperStrongAlgo');
     }
 
@@ -285,10 +294,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     /**
      * Make sure using an invalid cookie jar object throws an exception
      *
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testSetInvalidCookieJar()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\InvalidArgumentException',
+            'Invalid parameter type passed as CookieJar');
+
         $this->_client->setCookieJar('cookiejar');
     }
 
@@ -341,10 +353,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * Test that passing invalid variables to setConfig() causes an exception
      *
      * @dataProvider      invalidConfigProvider
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testConfigSetInvalid($config)
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\InvalidArgumentException',
+            'Array or Zend_Config object expected');
+
         $this->_client->setConfig($config);
     }
 
@@ -414,10 +429,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * Check we get an exception when trying to send a POST request with an
      * invalid content-type header
      *
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testInvalidPostContentType()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\RuntimeException',
+            'Cannot handle content type \'x-foo/something-fake\' automatically');
+
         $this->_client->setEncType('x-foo/something-fake');
         $this->_client->setParameterPost('parameter', 'value');
 
@@ -428,10 +446,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     /**
      * Check we get an exception if there's an error in the socket
      *
-     * @expectedException Zend\Http\Client\Adapter\Exception
      */
     public function testSocketErrorException()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Unable to Connect to tcp://255.255.255.255:80');
+
         // Try to connect to an invalid host
         $this->_client->setUri('http://255.255.255.255');
 
@@ -461,10 +482,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * the request method.
      *
      * @dataProvider invalidMethodProvider
-     * @expectedException Zend\Http\Client\Exception
      */
     public function testSettingInvalidMethodThrowsException($method)
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\InvalidArgumentException',
+            sprintf('\'%s\' is not a valid HTTP request method', $method));
+
         $this->_client->setMethod($method);
     }
 
@@ -569,10 +593,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * Testing if the connection can be closed
      * 
      * @group ZF-9685
-     * @expectedException \Zend\Http\Client\Exception
      */
     public function testOpenTempStreamWithBogusFileClosesTheConnection()
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Exception\RuntimeException',
+            'Could not open temp file /path/to/bogus/file.ext');
+
         $url = 'http://www.example.com';
         $config = array (
             'output_stream' => '/path/to/bogus/file.ext',

@@ -113,7 +113,7 @@ class Upload extends \Zend\Validator\AbstractValidator
             }
 
             if (count($return) === 0) {
-                throw new \Zend\Validator\Exception("The file '$file' was not found");
+                throw new \Zend\Validator\Exception\InvalidArgumentException("The file '$file' was not found");
             }
 
             return $return;
@@ -146,8 +146,6 @@ class Upload extends \Zend\Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the file was uploaded without errors
      *
      * @param  string $value Single file to check for upload errors, when giving null the $_FILES array

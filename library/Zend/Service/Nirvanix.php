@@ -53,7 +53,7 @@ class Zend_Service_Nirvanix
     {
         // merge options with default options
         $defaultOptions = array('defaults'   => array(),
-                                'httpClient' => new Zend_Http_Client(),
+                                'httpClient' => new Zend\Http\Client(),
                                 'host'       => 'http://services.nirvanix.com');
         $this->_options = array_merge($defaultOptions, $options);
 

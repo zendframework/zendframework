@@ -25,14 +25,6 @@
 namespace ZendTest\Tool\Framework\Client;
 
 /**
- * @see TestHelper.php
- */
-
-/**
- * @see Zend_Tool_Framework_Client_Request
- */
-
-/**
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage UnitTests

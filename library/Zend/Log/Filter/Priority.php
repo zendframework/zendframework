@@ -25,7 +25,7 @@
 namespace Zend\Log\Filter;
 
 /**
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
  * @uses       \Zend\Log\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Log
@@ -51,12 +51,12 @@ class Priority extends AbstractFilter
      *
      * @param  integer  $priority  Priority
      * @param  string   $operator  Comparison operator
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($priority, $operator = null)
     {
         if (! is_integer($priority)) {
-            throw new \Zend\Log\Exception('Priority must be an integer');
+            throw new \Zend\Log\Exception\InvalidArgumentException('Priority must be an integer');
         }
 
         $this->_priority = $priority;
@@ -68,7 +68,7 @@ class Priority extends AbstractFilter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Filter\Priority
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     static public function factory($config = array()) 
     {
@@ -84,7 +84,7 @@ class Priority extends AbstractFilter
         }
 
         if (!is_numeric($config['priority'])) {
-        	throw new \Zend\Log\Exception('Priority must be an integer.');
+        	throw new \Zend\Log\Exception\InvalidArgumentException('Priority must be an integer.');
         }
         
         return new self(

@@ -25,13 +25,16 @@
 namespace ZendTest\Serializer;
 
 use Zend\Serializer\Serializer,
-    Zend\Loader\PluginLoader,
-    Zend\Serializer\Adapter;
+    Zend\Serializer\AdapterBroker,
+    Zend\Serializer\Adapter,
+    Zend\Loader\Broker,
+    Zend\Loader\PluginBroker;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
+ * @group      Zend_Serializer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -43,19 +46,19 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Serializer::resetAdapterLoader();
+        Serializer::resetAdapterBroker();
     }
 
-    public function testGetDefaultAdapterLoader()
+    public function testGetDefaultAdapterBroker()
     {
-        $this->assertTrue(Serializer::getAdapterLoader() instanceof PluginLoader);
+        $this->assertTrue(Serializer::getAdapterBroker() instanceof AdapterBroker);
     }
 
-    public function testChangeAdapterLoader()
+    public function testChangeAdapterBroker()
     {
-        $newLoader = new PluginLoader();
-        Serializer::setAdapterLoader($newLoader);
-        $this->assertTrue(Serializer::getAdapterLoader() === $newLoader);
+        $newBroker = new PluginBroker();
+        Serializer::setAdapterBroker($newBroker);
+        $this->assertTrue(Serializer::getAdapterBroker() === $newBroker);
     }
 
     public function testDefaultAdapter()
@@ -72,14 +75,16 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryUnknownAdapter()
     {
-        $this->setExpectedException('Zend\\Serializer\\Exception','Can\'t load serializer adapter');
+        $this->setExpectedException('Zend\Loader\Exception\RuntimeException', 'locate class');
         Serializer::factory('unknown');
     }
     
     public function testFactoryOnADummyClassAdapter()
     {
         $this->setExpectedException('Zend\\Serializer\\Exception','must implement Zend\\Serializer\\Adapter');
-        Serializer::setAdapterLoader(new PluginLoader(array('ZendTest\\Serializer\\TestAsset' => __DIR__ . '/TestAsset')));
+        $broker = new AdapterBroker();
+        $broker->getClassLoader()->registerPlugin('dummy', 'ZendTest\Serializer\TestAsset\Dummy');
+        Serializer::setAdapterBroker($broker);
         Serializer::factory('dummy');
     }
 

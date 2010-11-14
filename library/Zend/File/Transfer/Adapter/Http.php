@@ -22,9 +22,10 @@
  * @namespace
  */
 namespace Zend\File\Transfer\Adapter;
-use Zend\File\Transfer;
-use Zend\ProgressBar\Adapter;
-use Zend\ProgressBar;
+use Zend\File\Transfer,
+    Zend\File\Transfer\Exception,
+    Zend\ProgressBar\Adapter,
+    Zend\ProgressBar;
 
 /**
  * File transfer adapter class for the HTTP protocol
@@ -50,7 +51,7 @@ class Http extends AbstractAdapter
     public function __construct($options = array())
     {
         if (ini_get('file_uploads') == false) {
-            throw new Transfer\Exception('File uploads are not allowed in your php config!');
+            throw new Exception\PhpEnvironmentException('File uploads are not allowed in your php config!');
         }
 
         $this->setOptions($options);
@@ -109,7 +110,7 @@ class Http extends AbstractAdapter
      */
     public function send($options = null)
     {
-        throw new Transfer\Exception('Method not implemented');
+        throw new Exception\RuntimeException('Method not implemented');
     }
 
     /**
@@ -227,7 +228,7 @@ class Http extends AbstractAdapter
      */
     public function isSent($files = null)
     {
-        throw new Transfer\Exception('Method not implemented');
+        throw new Exception\RuntimeException('Method not implemented');
     }
 
     /**
@@ -305,7 +306,7 @@ class Http extends AbstractAdapter
     public static function getProgress($id = null)
     {
         if (!function_exists('apc_fetch') and !function_exists('uploadprogress_get_info')) {
-            throw new Transfer\Exception('Neither APC nor uploadprogress extension installed');
+            throw new Exception\PhpEnvironmentException('Neither APC nor uploadprogress extension installed');
         }
 
         $session = 'Zend\File\Transfer\Adapter\Http\ProgressBar';
@@ -386,7 +387,7 @@ class Http extends AbstractAdapter
             }
 
             if (!($adapter instanceof ProgressBar\ProgressBar)) {
-                throw new Transfer\Exception('Unknown Adapter given');
+                throw new Exception\RuntimeException('Unknown Adapter given');
             }
 
             if ($status['done']) {

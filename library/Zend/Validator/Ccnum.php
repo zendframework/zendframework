@@ -66,8 +66,6 @@ class Ccnum extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value follows the Luhn algorithm (mod-10 checksum)
      *
      * @param  string $value

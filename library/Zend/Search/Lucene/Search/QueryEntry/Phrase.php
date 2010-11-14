@@ -95,8 +95,8 @@ class Phrase extends AbstractQueryEntry
      * Transform entry to a subquery
      *
      * @param string $encoding
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
-     * @throws \Zend\Search\Lucene\Search\QueryParserException
      */
     public function getQuery($encoding)
     {

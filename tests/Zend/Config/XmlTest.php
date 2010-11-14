@@ -86,19 +86,19 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorNoInitialSection()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found in');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'cannot be found in');
         $config = @new Xml($this->_xmlFileConfig, 'notthere');
     }
 
     public function testErrorNoInitialSectionWhenArrayOfSectionsSpecified()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found in');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'cannot be found in');
         $config = @new Xml($this->_xmlFileConfig, array('notthere', 'all'));
     }
 
     public function testErrorNoExtendsSection()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'cannot be found');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'cannot be found');
         $config = new Xml($this->_xmlFileConfig, 'extendserror');
     }
 
@@ -134,13 +134,13 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function testZF415()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'circular inheritance');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'circular inheritance');
         $config = new Xml($this->_xmlFileCircularConfig, null);
     }
 
     public function testErrorNoFile()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Filename is not set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Filename is not set');
         $config = new Xml('',null);
     }
 
@@ -184,7 +184,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidXmlFile()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'parser error');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'parser error');
         $config = new Xml($this->_xmlFileInvalid);
     }
 
@@ -193,7 +193,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testMissingXmlFile()
     {
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'failed to load');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'failed to load');
         $config = new Xml('I/dont/exist');
     }
 
@@ -250,7 +250,7 @@ EOT;
 </config>
 EOT;
 
-        $this->setExpectedException('\\Zend\\Config\\Exception', "Constant with name 'ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT' was not defined");
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', "Constant with name 'ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT' was not defined");
         $config = new Xml($string, 'all');
     }
 

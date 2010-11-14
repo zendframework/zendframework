@@ -85,7 +85,7 @@ class Definition implements \Countable, \Iterator
         if (is_array($method)) {
             $method = new Method\Definition($method);
         } elseif (!$method instanceof Method\Definition) {
-            throw new Exception('Invalid method provided');
+            throw new Exception\InvalidArgumentException('Invalid method provided');
         }
 
         if (is_numeric($name)) {
@@ -97,11 +97,11 @@ class Definition implements \Countable, \Iterator
             $name = $method->getName();
         }
         if (null === $name) {
-            throw new Exception('No method name provided');
+            throw new Exception\InvalidArgumentException('No method name provided');
         }
 
         if (!$this->_overwriteExistingMethods && array_key_exists($name, $this->_methods)) {
-            throw new Exception(sprintf('Method by name of "%s" already exists', $name));
+            throw new Exception\InvalidArgumentException(sprintf('Method by name of "%s" already exists', $name));
         }
         $this->_methods[$name] = $method;
         return $this;

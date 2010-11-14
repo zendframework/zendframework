@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate_File
+ * @package    Zend_Validator_File
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,44 +22,20 @@
 /**
  * @namespace
  */
-namespace ZendTest\Validate\File;
+namespace ZendTest\Validator\File;
 use Zend\Validator\File;
 use Zend\Validator;
 
-// Call Zend_Validate_File_FilesSizeTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Validate_File_FilesSizeTest::main");
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validate_File_FilesSize
- */
-
 /**
  * @category   Zend
- * @package    Zend_Validate_File
+ * @package    Zend_Validator_File
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class FilesSizeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Validate_File_FilesSizeTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         $this->multipleOptionsDetected = false;
@@ -123,15 +99,11 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\FilesSize(array('min' => 1, 'max' => 100));
         $this->assertEquals('1B', $validator->getMin());
 
-        try {
-            $validator = new File\FilesSize(array('min' => 100, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
-
         $validator = new File\FilesSize(array('min' => 1, 'max' => 100));
         $this->assertEquals('1B', $validator->getMin());
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\FilesSize(array('min' => 100, 'max' => 1));
     }
 
     /**
@@ -145,12 +117,8 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $validator->setMin(100);
         $this->assertEquals('100B', $validator->getMin());
 
-        try {
-            $validator->setMin(20000);
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("less than or equal", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'less than or equal');
+        $validator->setMin(20000);
     }
 
     /**
@@ -163,13 +131,6 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\FilesSize(array('min' => 1, 'max' => 100));
         $this->assertEquals('100B', $validator->getMax());
 
-        try {
-            $validator = new File\FilesSize(array('min' => 100, 'max' => 1));
-            $this->fail("Missing exception");
-        } catch (Validator\Exception $e) {
-            $this->assertContains("greater than or equal", $e->getMessage());
-        }
-
         $validator = new File\FilesSize(array('min' => 1, 'max' => 100000));
         $this->assertEquals('97.66kB', $validator->getMax());
 
@@ -177,6 +138,9 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $validator->setUseByteString(false);
         $test = $validator->getMax();
         $this->assertEquals('2000', $test);
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
+        $validator = new File\FilesSize(array('min' => 100, 'max' => 1));
     }
 
     /**
@@ -235,9 +199,4 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
             $this->multipleOptionsDetected = true;
         }
     }
-}
-
-// Call Zend_Validate_File_FilesSizeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Validate_File_FilesSizeTest::main") {
-    \Zend_Validate_File_FilesSizeTest::main();
 }

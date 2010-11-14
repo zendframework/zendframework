@@ -23,12 +23,14 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
  *
  * @uses       Zend_Loader
- * @uses       Zend_Service_Amazon_Ec2_Exception
+ * @uses       Zend\Service\Amazon\Ec2\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -43,7 +45,7 @@ class Ec2
      * @param string $section           Create the method that you want to work with
      * @param string $key               Override the default aws key
      * @param string $secret_key        Override the default aws secretkey
-     * @throws Zend_Service_Amazon_Ec2_Exception
+     * @throws Zend\Service\Amazon\Ec2\Exception
      * @return object
      */
     public static function factory($section, $key = null, $secret_key = null)
@@ -71,7 +73,7 @@ class Ec2
                 $class = '\Zend\Service\Amazon\Ec2\Image';
                 break;
             case 'instance':
-                $class = '\Zend\Service\Amazon\Ec2\Instance\Instance';
+                $class = '\Zend\Service\Amazon\Ec2\Instance';
                 break;
             case 'security':
                 // break left out
@@ -79,7 +81,7 @@ class Ec2
                 $class = '\Zend\Service\Amazon\Ec2\SecurityGroups';
                 break;
             default:
-                throw new Exception('Invalid Section: ' . $section);
+                throw new Exception\RuntimeException('Invalid Section: ' . $section);
                 break;
         }
 

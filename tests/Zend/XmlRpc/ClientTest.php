@@ -315,7 +315,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $response = $this->makeHttpResponseFrom($body, $status, $message);
         $this->httpAdapter->setResponse($response);
 
-        $this->setExpectedException('Zend\\XmlRpc\\Client\\HttpException', $message, $status);
+        $this->setExpectedException('Zend\XmlRpc\Client\Exception\HttpException', $message, $status);
         $this->xmlrpcClient->call('foo');
     }
 
@@ -330,7 +330,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $response = $this->makeHttpResponseFrom($xml);
         $this->httpAdapter->setResponse($response);
 
-        $this->setExpectedException('Zend\\XmlRpc\\Client\\FaultException', $message, $code);
+        $this->setExpectedException('Zend\XmlRpc\Client\Exception\FaultException', $message, $code);
         $this->xmlrpcClient->call('foo');
     }
 
@@ -508,11 +508,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $i = $this->xmlrpcClient->getIntrospector();
 
-        try {
-            $i->getSignatureForEachMethodByMulticall();
-        } catch (Client\IntrospectException $e) {
-            $this->assertRegexp('/bad number/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\XmlRpc\Client\Exception\IntrospectException', 'Bad number of signatures received from multicall');
+        $i->getSignatureForEachMethodByMulticall();
     }
 
     public function testGettingAllMethodSignaturesByMulticallThrowsOnBadType()
@@ -530,11 +527,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $i = $this->xmlrpcClient->getIntrospector();
 
-        try {
-            $i->getSignatureForEachMethodByMulticall();
-        } catch (Client\IntrospectException $e) {
-            $this->assertRegexp('/got integer/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\XmlRpc\Client\Exception\IntrospectException', 'Multicall return is malformed.  Expected array, got integer');
+        $i->getSignatureForEachMethodByMulticall();
     }
 
     public function testGettingAllMethodSignaturesDefaultsToMulticall()
@@ -659,20 +653,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testPythonSimpleXMLRPCServerWithUnsupportedMethodSignatures()
     {
-        try
-        {
-        	$introspector = new Client\ServerIntrospection(
-                new TestClient('http://localhost/')
+    	$introspector = new Client\ServerIntrospection(
+            new TestClient('http://localhost/')
             );
-            
-            $signature = $introspector->getMethodSignature('add');
-            if (!is_array($signature)) {
-                $this->fail('Expected exception has not been thrown');
-            }
-        }
-        catch (Client\IntrospectException $e) {
-            $this->assertEquals('Invalid signature for method "add"', $e->getMessage());
-        }
+        
+        $this->setExpectedException('Zend\XmlRpc\Client\Exception\IntrospectException', 'Invalid signature for method "add"');
+        $signature = $introspector->getMethodSignature('add');
     }
 
     // Helpers

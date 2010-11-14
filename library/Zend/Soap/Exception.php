@@ -29,6 +29,6 @@ namespace Zend\Soap;
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */
-class Exception extends \Zend\Exception
+interface Exception
 {
 }

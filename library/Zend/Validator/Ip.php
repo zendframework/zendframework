@@ -105,15 +105,13 @@ class Ip extends AbstractValidator
         }
 
         if (!$this->_options['allowipv4'] && !$this->_options['allowipv6']) {
-            throw new Exception('Nothing to validate. Check your options');
+            throw new Exception\InvalidArgumentException('Nothing to validate. Check your options');
         }
 
         return $this;
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is a valid IP address
      *
      * @param  mixed $value

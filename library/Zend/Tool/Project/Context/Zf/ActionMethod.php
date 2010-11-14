@@ -23,8 +23,11 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
-use Zend\Tool\Project\Context;
-use Zend\CodeGenerator\Php;
+
+use Zend\Tool\Project\Context\Context,
+    Zend\CodeGenerator\Php,
+    Zend\Tool\Project\Context\Exception,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -45,12 +48,12 @@ class ActionMethod implements Context
 {
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_resource = null;
 
     /**
-     * @var \Zend\Tool\Project\Profile\Resource
+     * @var \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected $_controllerResource = null;
 
@@ -76,7 +79,7 @@ class ActionMethod implements Context
         $this->_resource->setAppendable(false);
         $this->_controllerResource = $this->_resource->getParentResource();
         if (!$this->_controllerResource->getContext() instanceof ControllerFile) {
-            throw new Context\Exception('ActionMethod must be a sub resource of a ControllerFile');
+            throw new Exception\RuntimeException('ActionMethod must be a sub resource of a ControllerFile');
         }
         // make the ControllerFile node appendable so we can tack on the actionMethod.
         $this->_resource->getParentResource()->setAppendable(true);
@@ -111,10 +114,10 @@ class ActionMethod implements Context
     /**
      * setResource()
      *
-     * @param \Zend\Tool\Project\Profile\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
      * @return \Zend\Tool\Project\Context\Zf\ActionMethod
      */
-    public function setResource(\Zend\Tool\Project\Profile\Resource $resource)
+    public function setResource(Resource $resource)
     {
         $this->_resource = $resource;
         return $this;
@@ -150,7 +153,7 @@ class ActionMethod implements Context
     public function create()
     {
         if (self::createActionMethod($this->_controllerPath, $this->_actionName) === false) {
-            throw new Context\Exception(
+            throw new Exception\RuntimeException(
                 'Could not create action within controller ' . $this->_controllerPath
                 . ' with action name ' . $this->_actionName
                 );

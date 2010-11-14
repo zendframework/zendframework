@@ -37,7 +37,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageFilterRecognizesInvalidRegularExpression()
     {
-        $this->setExpectedException('\\Zend\\Log\\Exception', 'invalid reg');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'invalid reg');
         $filter = new Message('invalid regexp');
     }
 

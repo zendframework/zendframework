@@ -23,7 +23,8 @@
  */
 namespace Zend\Mail;
 
-use Zend\Mime;
+use Zend\Mime,
+    Zend\Mail\Exception;
 
 /**
  * @uses       RecursiveIterator
@@ -104,10 +105,10 @@ class Part implements \RecursiveIterator, MailPart
     {
         if (isset($params['handler'])) {
             if (!$params['handler'] instanceof AbstractStorage) {
-                throw new Exception('handler is not a valid mail handler');
+                throw new Exception\InvalidArgumentException('handler is not a valid mail handler');
             }
             if (!isset($params['id'])) {
-                throw new Exception('need a message id with a handler');
+                throw new Exception\InvalidArgumentException('need a message id with a handler');
             }
 
             $this->_mail       = $params['handler'];
@@ -165,7 +166,7 @@ class Part implements \RecursiveIterator, MailPart
         if ($this->_mail) {
             return $this->_mail->getRawContent($this->_messageNum);
         } else {
-            throw new Exception('no content');
+            throw new Exception\RuntimeException('no content');
         }
     }
 
@@ -201,7 +202,7 @@ class Part implements \RecursiveIterator, MailPart
         // split content in parts
         $boundary = $this->getHeaderField('content-type', 'boundary');
         if (!$boundary) {
-            throw new Exception('no boundary found in content type to split message');
+            throw new Exception\RuntimeException('no boundary found in content type to split message');
         }
         $parts = Mime\Decode::splitMessageStruct($this->_content, $boundary);
         if ($parts === null) {
@@ -227,7 +228,7 @@ class Part implements \RecursiveIterator, MailPart
         }
 
         if (!$this->_mail && $this->_content === null) {
-            throw new Exception('part not found');
+            throw new Exception\RuntimeException('part not found');
         }
 
         if ($this->_mail && $this->_mail->hasFetchPart) {
@@ -238,7 +239,7 @@ class Part implements \RecursiveIterator, MailPart
         $this->_cacheContent();
 
         if (!isset($this->_parts[$num])) {
-            throw new Exception('part not found');
+            throw new Exception\RuntimeException('part not found');
         }
 
         return $this->_parts[$num];
@@ -317,7 +318,7 @@ class Part implements \RecursiveIterator, MailPart
         if ($this->headerExists($name) == false) {
             $lowerName = strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $name));
             if($this->headerExists($lowerName) == false) {
-                throw new Exception("no Header with Name $name or $lowerName found");
+                throw new Exception\InvalidArgumentException("no Header with Name $name or $lowerName found");
             }
         }
         $name = $lowerName;

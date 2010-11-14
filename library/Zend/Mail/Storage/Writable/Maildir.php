@@ -24,9 +24,9 @@
  */
 namespace Zend\Mail\Storage\Writable;
 
-use Zend\Mail\Exception as MailException,
-    Zend\Mail\Storage,
-    Zend\Mail\Storage\Exception as StorageException,
+use Zend\Mail\Storage,
+    Zend\Mail\Storage\Exception,
+    Zend\Mail\Exception as MailException,
     Zend\Mail\Storage\Folder,
     Zend\Mail\Storage\Folder\Maildir as MaildirFolder,
     Zend\Mail\Storage\Maildir as MaildirStorage,
@@ -69,17 +69,17 @@ class Maildir extends MaildirFolder implements Writable
     {
         if (file_exists($dir)) {
             if (!is_dir($dir)) {
-                throw new StorageException('maildir must be a directory if already exists');
+                throw new Exception\InvalidArgumentException('maildir must be a directory if already exists');
             }
         } else {
             if (!mkdir($dir)) {
                 $dir = dirname($dir);
                 if (!file_exists($dir)) {
-                    throw new StorageException("parent $dir not found");
+                    throw new Exception\InvalidArgumentException("parent $dir not found");
                 } else if (!is_dir($dir)) {
-                    throw new StorageException("parent $dir not a directory");
+                    throw new Exception\InvalidArgumentException("parent $dir not a directory");
                 } else {
-                    throw new StorageException('cannot create maildir');
+                    throw new Exception\RuntimeException('cannot create maildir');
                 }
             }
         }
@@ -88,7 +88,7 @@ class Maildir extends MaildirFolder implements Writable
             if (!@mkdir($dir . DIRECTORY_SEPARATOR . $subdir)) {
                 // ignore if dir exists (i.e. was already valid maildir or two processes try to create one)
                 if (!file_exists($dir . DIRECTORY_SEPARATOR . $subdir)) {
-                    throw new StorageException('could not create subdir ' . $subdir);
+                    throw new Exception\RuntimeException('could not create subdir ' . $subdir);
                 }
             }
         }
@@ -146,11 +146,11 @@ class Maildir extends MaildirFolder implements Writable
             // ok
         }
         if ($exists) {
-            throw new StorageException('folder already exists');
+            throw new Exception\RuntimeException('folder already exists');
         }
 
         if (strpos($folder, $this->_delim . $this->_delim) !== false) {
-            throw new StorageException('invalid name - folder parts may not be empty');
+            throw new Exception\RuntimeException('invalid name - folder parts may not be empty');
         }
 
         if (strpos($folder, 'INBOX' . $this->_delim) === 0) {
@@ -162,7 +162,7 @@ class Maildir extends MaildirFolder implements Writable
         // check if we got tricked and would create a dir outside of the rootdir or not as direct child
         if (strpos($folder, DIRECTORY_SEPARATOR) !== false || strpos($folder, '/') !== false
             || dirname($fulldir) . DIRECTORY_SEPARATOR != $this->_rootdir) {
-            throw new StorageException('invalid name - no directory seprator allowed in folder name');
+            throw new Exception\RuntimeException('invalid name - no directory seprator allowed in folder name');
         }
 
         // has a parent folder?
@@ -179,14 +179,14 @@ class Maildir extends MaildirFolder implements Writable
         }
 
         if (!@mkdir($fulldir) || !@mkdir($fulldir . DIRECTORY_SEPARATOR . 'cur')) {
-            throw new StorageException('error while creating new folder, may be created incompletly');
+            throw new Exception\RuntimeException('error while creating new folder, may be created incompletly');
         }
 
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'new');
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'tmp');
 
         $localName = $parent ? substr($folder, strlen($parent) + 1) : $folder;
-        $this->getFolders($parent)->$localName = new Folder\Folder($localName, $folder, true);
+        $this->getFolders($parent)->$localName = new Folder($localName, $folder, true);
 
         return $fulldir;
     }
@@ -217,15 +217,15 @@ class Maildir extends MaildirFolder implements Writable
 
         // check if folder exists and has no children
         if (!$this->getFolders($name)->isLeaf()) {
-            throw new StorageException('delete children first');
+            throw new Exception\RuntimeException('delete children first');
         }
 
         if ($name == 'INBOX' || $name == DIRECTORY_SEPARATOR || $name == '/') {
-            throw new StorageException('wont delete INBOX');
+            throw new Exception\RuntimeException('wont delete INBOX');
         }
 
         if ($name == $this->getCurrentFolder()) {
-            throw new StorageException('wont delete selected folder');
+            throw new Exception\RuntimeException('wont delete selected folder');
         }
 
         foreach (array('tmp', 'new', 'cur', '.') as $subdir) {
@@ -235,20 +235,20 @@ class Maildir extends MaildirFolder implements Writable
             }
             $dh = opendir($dir);
             if (!$dh) {
-                throw new StorageException("error opening $subdir");
+                throw new Exception\RuntimeException("error opening $subdir");
             }
             while (($entry = readdir($dh)) !== false) {
                 if ($entry == '.' || $entry == '..') {
                     continue;
                 }
                 if (!unlink($dir . DIRECTORY_SEPARATOR . $entry)) {
-                    throw new StorageException("error cleaning $subdir");
+                    throw new Exception\RuntimeException("error cleaning $subdir");
                 }
             }
             closedir($dh);
             if ($subdir !== '.') {
                 if (!rmdir($dir)) {
-                    throw new StorageException("error removing $subdir");
+                    throw new Exception\RuntimeException("error removing $subdir");
                 }
             }
         }
@@ -256,7 +256,7 @@ class Maildir extends MaildirFolder implements Writable
         if (!rmdir($this->_rootdir . '.' . $name)) {
             // at least we should try to make it a valid maildir again
             mkdir($this->_rootdir . '.' . $name . DIRECTORY_SEPARATOR . 'cur');
-            throw new StorageException("error removing maindir");
+            throw new Exception\RuntimeException("error removing maindir");
         }
 
         $parent = strpos($name, $this->_delim) ? substr($name, 0, strrpos($name, $this->_delim)) : null;
@@ -293,18 +293,18 @@ class Maildir extends MaildirFolder implements Writable
         }
 
         if (strpos($newName, $oldName . $this->_delim) === 0) {
-            throw new StorageException('new folder cannot be a child of old folder');
+            throw new Exception\RuntimeException('new folder cannot be a child of old folder');
         }
 
         // check if folder exists and has no children
         $folder = $this->getFolders($oldName);
 
         if ($oldName == 'INBOX' || $oldName == DIRECTORY_SEPARATOR || $oldName == '/') {
-            throw new StorageException('wont rename INBOX');
+            throw new Exception\RuntimeException('wont rename INBOX');
         }
 
         if ($oldName == $this->getCurrentFolder()) {
-            throw new StorageException('wont rename selected folder');
+            throw new Exception\RuntimeException('wont rename selected folder');
         }
 
         $newdir = $this->createFolder($newName);
@@ -323,7 +323,7 @@ class Maildir extends MaildirFolder implements Writable
             }
             // using copy or moving files would be even better - but also much slower
             if (!rename($olddir . $subdir, $newdir . $subdir)) {
-                throw new StorageException('error while moving ' . $subdir);
+                throw new Exception\RuntimeException('error while moving ' . $subdir);
             }
         }
         // create a dummy if removing fails - otherwise we can't read it next time
@@ -374,7 +374,7 @@ class Maildir extends MaildirFolder implements Writable
         }
         if (!file_exists($tmpdir)) {
             if (!mkdir($tmpdir)) {
-                throw new StorageException('problems creating tmp dir');
+                throw new Exception\RuntimeException('problems creating tmp dir');
             }
         }
 
@@ -392,7 +392,7 @@ class Maildir extends MaildirFolder implements Writable
                 // to mark the filename as taken
                 $fh = fopen($tmpdir . $uniq, 'w');
                 if (!$fh) {
-                    throw new StorageException('could not open temp file');
+                    throw new Exception\RuntimeException('could not open temp file');
                 }
                 break;
             }
@@ -400,7 +400,7 @@ class Maildir extends MaildirFolder implements Writable
         }
 
         if (!$fh) {
-            throw new StorageException("tried $max_tries unique ids for a temp file, but all were taken"
+            throw new Exception\RuntimeException("tried $max_tries unique ids for a temp file, but all were taken"
                                                 . ' - giving up');
         }
 
@@ -419,8 +419,8 @@ class Maildir extends MaildirFolder implements Writable
     {
         // accessing keys is easier, faster and it removes duplicated flags
         $wanted_flags = array_flip($flags);
-        if (isset($wanted_flags[StorageStorage::FLAG_RECENT])) {
-            throw new StorageException('recent flag may not be set');
+        if (isset($wanted_flags[Storage::FLAG_RECENT])) {
+            throw new Exception\InvalidArgumentException('recent flag may not be set');
         }
 
         $info = ':2,';
@@ -436,7 +436,7 @@ class Maildir extends MaildirFolder implements Writable
 
         if (!empty($wanted_flags)) {
             $wanted_flags = implode(', ', array_keys($wanted_flags));
-            throw new StorageException('unknown flag(s): ' . $wanted_flags);
+            throw new Exception\InvalidArgumentException('unknown flag(s): ' . $wanted_flags);
         }
 
         return $info;
@@ -456,7 +456,7 @@ class Maildir extends MaildirFolder implements Writable
     public function appendMessage($message, $folder = null, $flags = null, $recent = false)
     {
         if ($this->_quota && $this->checkQuota()) {
-            throw new StorageException('storage is over quota!');
+            throw new Exception\RuntimeException('storage is over quota!');
         }
 
         if ($folder === null) {
@@ -494,7 +494,7 @@ class Maildir extends MaildirFolder implements Writable
         $exception = null;
 
         if (!link($temp_file['filename'], $new_filename)) {
-            $exception = new StorageException('cannot link message file to final dir');
+            $exception = new Exception\RuntimeException('cannot link message file to final dir');
         }
         @unlink($temp_file['filename']);
 
@@ -521,7 +521,7 @@ class Maildir extends MaildirFolder implements Writable
     public function copyMessage($id, $folder)
     {
         if ($this->_quota && $this->checkQuota()) {
-            throw new StorageException('storage is over quota!');
+            throw new Exception\RuntimeException('storage is over quota!');
         }
 
         if (!($folder instanceof Folder)) {
@@ -555,9 +555,9 @@ class Maildir extends MaildirFolder implements Writable
         $exception = null;
 
         if (!copy($old_file, $temp_file['filename'])) {
-            $exception = new StorageException('cannot copy message file');
+            $exception = new Exception\RuntimeException('cannot copy message file');
         } else if (!link($temp_file['filename'], $new_file)) {
-            $exception = new StorageException('cannot link message file to final dir');
+            $exception = new Exception\RuntimeException('cannot link message file to final dir');
         }
         @unlink($temp_file['filename']);
 
@@ -593,7 +593,7 @@ class Maildir extends MaildirFolder implements Writable
 
         if ($folder->getGlobalName() == $this->_currentFolder
             || ($this->_currentFolder == 'INBOX' && $folder->getGlobalName() == '/')) {
-            throw new Storage\Exception('target is current folder');
+            throw new Exception\RuntimeException('target is current folder');
         }
 
         $filedata = $this->_getFileData($id);
@@ -622,7 +622,7 @@ class Maildir extends MaildirFolder implements Writable
         $exception = null;
 
         if (!rename($old_file, $new_file)) {
-            $exception = new StorageException('cannot move message file');
+            $exception = new Exception\RuntimeException('cannot move message file');
         }
         @unlink($temp_file['filename']);
 
@@ -654,7 +654,7 @@ class Maildir extends MaildirFolder implements Writable
         $new_filename = dirname(dirname($filedata['filename'])) . DIRECTORY_SEPARATOR . 'cur' . DIRECTORY_SEPARATOR . "$filedata[uniq]$info";
 
         if (!@rename($filedata['filename'], $new_filename)) {
-            throw new StorageException('cannot rename file');
+            throw new Exception\RuntimeException('cannot rename file');
         }
 
         $filedata['flags']    = $flags;
@@ -679,7 +679,7 @@ class Maildir extends MaildirFolder implements Writable
         }
 
         if (!@unlink($filename)) {
-            throw new StorageException('cannot remove message');
+            throw new Exception\RuntimeException('cannot remove message');
         }
         unset($this->_files[$id - 1]);
         // remove the gap
@@ -717,7 +717,7 @@ class Maildir extends MaildirFolder implements Writable
         if ($fromStorage) {
             $fh = @fopen($this->_rootdir . 'maildirsize', 'r');
             if (!$fh) {
-                throw new StorageException('cannot open maildirsize');
+                throw new Exception\RuntimeException('cannot open maildirsize');
             }
             $definition = fgets($fh);
             fclose($fh);
@@ -750,8 +750,8 @@ class Maildir extends MaildirFolder implements Writable
         } else {
             try {
                 $quota = $this->getQuota(true);
-            } catch (StorageException $e) {
-                throw new StorageException('no quota definition found', 0, $e);
+            } catch (Exception $e) {
+                throw new Exception\RuntimeException('no quota definition found', 0, $e);
             }
         }
 

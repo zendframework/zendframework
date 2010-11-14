@@ -26,7 +26,8 @@ namespace Zend\Search\Lucene\Storage\File;
 use Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @uses       \Zend\Search\Lucene\Storage\File
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -49,6 +50,8 @@ class Filesystem extends AbstractFile
      *
      * @param string $filename
      * @param string $mode
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function __construct($filename, $mode='r+b')
     {
@@ -56,7 +59,7 @@ class Filesystem extends AbstractFile
 
         if (strpos($mode, 'w') === false  &&  !is_readable($filename)) {
             // opening for reading non-readable file
-            throw new Lucene\Exception('File \'' . $filename . '\' is not readable.');
+            throw new Lucene\Exception\InvalidArgumentException('File \'' . $filename . '\' is not readable.');
         }
 
         $trackErrors = ini_get('track_errors');
@@ -66,7 +69,7 @@ class Filesystem extends AbstractFile
 
         if ($this->_fileHandle === false) {
             ini_set('track_errors', $trackErrors);
-            throw new Lucene\Exception($php_errormsg);
+            throw new Lucene\Exception\RuntimeException($php_errormsg);
         }
 
         ini_set('track_errors', $trackErrors);

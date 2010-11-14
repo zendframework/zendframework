@@ -252,12 +252,8 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt');
         $filter->setAdapter('Mcrypt');
         $this->assertEquals('Mcrypt', $filter->getAdapter());
 
-        try {
-            $filter->setAdapter('\\ZendTest\\Filter\\TestAdapter');
-            $this->fail('Exception expected on setting a non adapter');
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithm', $e->getMessage());
-        }
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'does not implement');
+        $filter->setAdapter('\\ZendTest\\Filter\\TestAdapter');
     }
 
     /**
@@ -269,7 +265,7 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt');
             $this->markTestSkipped('Mcrypt extension not installed');
         }
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown method');
+        $this->setExpectedException('\Zend\Filter\Exception\BadMethodCallException', 'Unknown method');
         $filter = new DecryptFilter();
         $filter->getUnknownMethod();
     }

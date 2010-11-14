@@ -98,7 +98,7 @@ class SessionManager extends AbstractManager
         }
         session_start();
         if (!$this->isValid()) {
-            throw new Exception('Session failed validation');
+            throw new Exception\RuntimeException('Session failed validation');
         }
         $storage = $this->getStorage();
 
@@ -199,12 +199,12 @@ class SessionManager extends AbstractManager
     public function setName($name)
     {
         if ($this->sessionExists()) {
-            throw new Exception('Cannot set session name after a session has already started');
+            throw new Exception\InvalidArgumentException('Cannot set session name after a session has already started');
         }
 
         $validator = new AlnumValidator();
         if (!$validator->isValid($name)) {
-            throw new Exception('Name provided contains invalid characters; must be alphanumeric only');
+            throw new Exception\InvalidArgumentException('Name provided contains invalid characters; must be alphanumeric only');
         }
 
         $this->_name = $name;
@@ -333,13 +333,13 @@ class SessionManager extends AbstractManager
     public function isValid()
     {
         $validator = $this->getValidatorChain();
-        $return    = $validator->emitUntil(function($test) {
+        $responses = $validator->emitUntil(function($test) {
             return !$test;
         }, 'session.validate');
-        if (null === $return) {
+        if (null === $responses->last()) {
             return true;
         }
-        return (bool) $return;
+        return (bool) $responses->last();
     }
 
     /**

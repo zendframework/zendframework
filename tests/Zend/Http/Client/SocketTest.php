@@ -105,11 +105,14 @@ class SocketTest extends CommonHttpTests
     /**
      * Check that an exception is thrown when trying to set invalid config
      *
-     * @expectedException Zend\Http\Client\Adapter\Exception
      * @dataProvider invalidConfigProvider
      */
     public function testSetConfigInvalidConfig($config)
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
+            'Array or Zend_Config object expected');
+
         $this->_adapter->setConfig($config);
     }
 
@@ -157,10 +160,13 @@ class SocketTest extends CommonHttpTests
      * Test that setting invalid options / context causes an exception
      *
      * @dataProvider      invalidContextProvider
-     * @expectedException Zend\Http\Client\Adapter\Exception
      */
     public function testSetInvalidContextOptions($invalid)
     {
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
+            'Expecting either a stream context resource or array');
+
         $adapter = new $this->config['adapter'];
         $adapter->setStreamContext($invalid);
     }
@@ -201,9 +207,9 @@ class SocketTest extends CommonHttpTests
 
         try {
             $this->client->request();
-            $this->fail("Expected a timeout Zend_Http_Client_Adapter_Exception");
+            $this->fail("Expected a timeout Zend\Http\Client\Adapter\Exception");
         } catch (Adapter\Exception $e) {
-            $this->assertEquals(Adapter\Exception::READ_TIMEOUT, $e->getCode());
+            $this->assertEquals(Adapter\Exception\TimeoutException::READ_TIMEOUT, $e->getCode());
         }
 
         $time = (microtime(true) - $start);

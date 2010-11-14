@@ -32,10 +32,6 @@ use Zend\Locale;
  */
 
 /**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage UnitTests
@@ -45,17 +41,6 @@ use Zend\Locale;
  */
 class QtTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Translate_Adapter_QtTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testCreate()
     {
         $adapter = new Adapter\Qt(__DIR__ . '/_files/translation_en.ts');
@@ -64,14 +49,14 @@ class QtTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter = new Adapter\Qt(__DIR__ . '/_files/nofile.ts', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
             $this->assertContains('is not readable', $e->getMessage());
         }
 
         try {
             $adapter = new Adapter\Qt(__DIR__ . '/_files/failed.ts', 'en');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Adapter\Exception\InvalidFileTypeException $e) {
             $this->assertContains('Mismatched tag at line', $e->getMessage());
         }
     }
@@ -114,7 +99,7 @@ class QtTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->addTranslation(__DIR__ . '/_files/translation_en.ts', 'xx');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 
@@ -172,7 +157,7 @@ class QtTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->setLocale('nolocale');
             $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
+        } catch (Translator\Exception\InvalidArgumentException $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
 

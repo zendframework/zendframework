@@ -135,7 +135,7 @@ class StringLength extends AbstractValidator
     public function setMin($min)
     {
         if (null !== $this->_max && $min > $this->_max) {
-            throw new Exception("The minimum must be less than or equal to the maximum length, but $min >"
+            throw new Exception\InvalidArgumentException("The minimum must be less than or equal to the maximum length, but $min >"
                                             . " $this->_max");
         }
         $this->_min = max(0, (integer) $min);
@@ -164,7 +164,7 @@ class StringLength extends AbstractValidator
         if (null === $max) {
             $this->_max = null;
         } else if ($max < $this->_min) {
-            throw new Exception("The maximum must be greater than or equal to the minimum length, but "
+            throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum length, but "
                                             . "$max < $this->_min");
         } else {
             $this->_max = (integer) $max;
@@ -195,7 +195,7 @@ class StringLength extends AbstractValidator
             $orig   = iconv_get_encoding('internal_encoding');
             $result = iconv_set_encoding('internal_encoding', $encoding);
             if (!$result) {
-                throw new Exception('Given encoding not supported on this OS!');
+                throw new Exception\InvalidArgumentException('Given encoding not supported on this OS!');
             }
 
             iconv_set_encoding('internal_encoding', $orig);
@@ -206,8 +206,6 @@ class StringLength extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the string length of $value is at least the min option and
      * no greater than the max option (when the max option is not null).
      *

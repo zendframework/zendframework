@@ -22,6 +22,7 @@
  * @namespace
  */
 namespace Zend\TimeSync;
+use Zend\TimeSync\Exception;
 
 /**
  * NTP Protocol handling class
@@ -210,7 +211,7 @@ class Ntp extends Protocol
 
         if ($info['timed_out'] === true) {
             fclose($this->_socket);
-            throw new Exception('could not connect to ' .
+            throw new Exception\RuntimeException('could not connect to ' .
                 "'$this->_timeserver' on port '$this->_port', reason: 'server timed out'");
         }
 

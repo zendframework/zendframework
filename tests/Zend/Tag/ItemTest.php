@@ -23,16 +23,9 @@
  * @namespace
  */
 namespace ZendTest\Tag;
-use Zend\Tag;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Tag_ItemTest::main');
-}
-
-/**
- * Test helper
- */
-
+use Zend\Tag,
+	Zend\Tag\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
@@ -44,12 +37,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testConstuctor()
     {
         $tag = new Tag\Item(array(
@@ -99,12 +86,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidTitle()
     {
-        try {
-            $tag = new Tag\Item(array('title' => 10, 'weight' => 1));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Title must be a string');
-        }
+        $this->setExpectedException('\Zend\Tag\Exception\InvalidArgumentException', 'Title must be a string');
+        $tag = new Tag\Item(array('title' => 10, 'weight' => 1));
     }
 
     public function testSetWeight()
@@ -118,12 +101,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidWeight()
     {
-        try {
-            $tag = new Tag\Item(array('title' => 'foo', 'weight' => 'foobar'));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Weight must be numeric');
-        }
+        $this->setExpectedException('\Zend\Tag\Exception\InvalidArgumentException', 'Weight must be numeric');
+        $tag = new Tag\Item(array('title' => 'foo', 'weight' => 'foobar'));
     }
 
     public function testSkipOptions()
@@ -134,32 +113,20 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidOptions()
     {
-        try {
-            $tag = new Tag\Item('test');
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Invalid options provided to constructor');
-        }
+        $this->setExpectedException('\Zend\Tag\Exception\InvalidArgumentException', 'Invalid options provided to constructor');
+        $tag = new Tag\Item('test');
     }
 
     public function testMissingTitle()
     {
-        try {
-            $tag = new Tag\Item(array('weight' => 1));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Title was not set');
-        }
+        $this->setExpectedException('\Zend\Tag\Exception\InvalidArgumentException', 'Title was not set');
+        $tag = new Tag\Item(array('weight' => 1));
     }
 
     public function testMissingWeight()
     {
-        try {
-            $tag = new Tag\Item(array('title' => 'foo'));
-            $this->fail('An expected Zend_Tag_Exception was not raised');
-        } catch (Tag\Exception $e) {
-            $this->assertEquals($e->getMessage(), 'Weight was not set');
-        }
+        $this->setExpectedException('\Zend\Tag\Exception\InvalidArgumentException', 'Weight was not set');
+        $tag = new Tag\Item(array('title' => 'foo'));
     }
 
     public function testConfigOptions()
@@ -176,8 +143,4 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($tag->getParam('foo'));
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Tag_ItemTest::main') {
-    \Zend_Tag_ItemTest::main();
 }

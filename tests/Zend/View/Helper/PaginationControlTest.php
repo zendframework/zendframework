@@ -201,7 +201,3 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_View_Helper_PaginationControlTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_PaginationControlTest::main") {
-    \Zend_View_Helper_PaginationControlTest::main();
-}

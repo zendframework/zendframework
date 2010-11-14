@@ -29,7 +29,7 @@ namespace Zend\Test\PHPUnit\Constraint;
  *
  * @uses       PHPUnit_Framework_Constraint
  * @uses       \Zend\Dom\Query
- * @uses       \Zend\Test\PHPUnit\Constraint\Exception
+ * @uses       \Zend\Test\PHPUnit\Constraint\Exception\ConstraintException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -152,7 +152,7 @@ class DomQuery extends \PHPUnit_Framework_Constraint
         }
 
         if (!in_array($assertType, $this->_assertTypes)) {
-            throw new Exception(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
+            throw new Exception\ConstraintException(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
         }
 
         $this->_assertType = $assertType;
@@ -167,7 +167,7 @@ class DomQuery extends \PHPUnit_Framework_Constraint
         switch ($assertType) {
             case self::ASSERT_CONTENT_CONTAINS:
                 if (3 > $argc) {
-                    throw new Exception('No content provided against which to match');
+                    throw new Exception\ConstraintException('No content provided against which to match');
                 }
                 $this->_content = $content = $argv[2];
                 return ($this->_negate)
@@ -175,7 +175,7 @@ class DomQuery extends \PHPUnit_Framework_Constraint
                     : $this->_matchContent($result, $content);
             case self::ASSERT_CONTENT_REGEX:
                 if (3 > $argc) {
-                    throw new Exception('No pattern provided against which to match');
+                    throw new Exception\ConstraintException('No pattern provided against which to match');
                 }
                 $this->_content = $content = $argv[2];
                 return ($this->_negate)
@@ -185,7 +185,7 @@ class DomQuery extends \PHPUnit_Framework_Constraint
             case self::ASSERT_CONTENT_COUNT_MIN:
             case self::ASSERT_CONTENT_COUNT_MAX:
                 if (3 > $argc) {
-                    throw new Exception('No count provided against which to compare');
+                    throw new Exception\ConstraintException('No count provided against which to compare');
                 }
                 $this->_content = $content = $argv[2];
                 return $this->_countContent($result, $content, $assertType);
@@ -255,7 +255,7 @@ class DomQuery extends \PHPUnit_Framework_Constraint
             $failure = $description . "\n" . $failure;
         }
 
-        throw new Exception($failure);
+        throw new Exception\ConstraintException($failure);
     }
 
     /**

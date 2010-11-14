@@ -98,7 +98,7 @@ class LowerCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testFileNotFoundException()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         $filter = new FileLowerCase();
         $filter($this->_newFile . 'unknown');
     }
@@ -113,7 +113,7 @@ class LowerCaseTest extends \PHPUnit_Framework_TestCase
             $filter = new FileLowerCase('ISO-8859-1');
             $filter($this->_newFile);
             $this->assertContains('this is a file', file_get_contents($this->_newFile));
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -129,7 +129,7 @@ class LowerCaseTest extends \PHPUnit_Framework_TestCase
             $filter->setEncoding('ISO-8859-1');
             $filter($this->_newFile);
             $this->assertContains('this is a file', file_get_contents($this->_newFile));
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }

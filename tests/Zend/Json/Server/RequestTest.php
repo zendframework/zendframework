@@ -263,7 +263,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
     public function validateJSON($json, array $options)
     {
-        $test = Json\Json::decode($json);
+        $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
         $this->assertTrue(is_array($test), var_export($json, 1));
 
         $this->assertTrue(array_key_exists('id', $test));

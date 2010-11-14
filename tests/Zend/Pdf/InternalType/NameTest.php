@@ -51,13 +51,8 @@ class NameTest extends \PHPUnit_Framework_TestCase
 
     public function testPDFNameBadString()
     {
-        try {
-            $nameObj = new InternalType\NameObject("MyName\x00");
-        } catch (\Zend\Pdf\Exception $e) {
-            $this->assertContains('Null character is not allowed', $e->getMessage());
-            return;
-        }
-        $this->fail('Expected \Zend\Pdf\Exception to be thrown');
+        $this->setExpectedException('\Zend\Pdf\Exception\RuntimeException', 'Null character is not allowed');
+        $nameObj = new InternalType\NameObject("MyName\x00");
     }
 
     public function testGetType()

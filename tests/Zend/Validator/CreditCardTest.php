@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -31,16 +31,16 @@ use Zend\Config;
  */
 
 /**
- * @see Zend_Validate_CreditCard
+ * @see Zend_Validator_CreditCard
  */
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class CreditCardTest extends \PHPUnit_Framework_TestCase
 {
@@ -203,12 +203,9 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator\CreditCard();
         $this->assertEquals(null, $validator->getService());
-        try {
-            $validator->setService(array('\ZendTest\Validator\CreditCardTest', 'nocallback'));
-            $this->fail('Exception expected');
-        } catch(\Zend\Exception $e) {
-            $this->assertContains('Invalid callback given', $e->getMessage());
-        }
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid callback given');
+        $validator->setService(array('\ZendTest\Validator\CreditCardTest', 'nocallback'));
     }
 
     /**

@@ -24,6 +24,8 @@
  */
 namespace Zend\Tool\Project\Provider;
 
+use Zend\Tool\Project\Profile\Profile as ProjectProfile;
+
 /**
  * @uses       \Zend\Tool\Framework\Provider\Pretendable
  * @uses       \Zend\Tool\Project\Exception
@@ -38,7 +40,7 @@ class Layout
     implements \Zend\Tool\Framework\Provider\Pretendable
 {
     
-    public static function createResource(\Zend\Tool\Project\Profile $profile, $layoutName = 'layout')
+    public static function createResource(ProjectProfile $profile, $layoutName = 'layout')
     {
         $applicationDirectory = $profile->search('applicationDirectory');
         $layoutDirectory = $applicationDirectory->search('layoutsDirectory');

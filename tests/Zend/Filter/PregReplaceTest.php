@@ -101,7 +101,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $filter = $this->filter;
         $string = 'controller/action';
         $filter->setReplacement('foo/bar');
-        $this->setExpectedException('\\Zend\\Filter\\Exception');
+        $this->setExpectedException('\Zend\Filter\Exception\RuntimeException', 'does not have a valid MatchPattern set');
         $filtered = $filter($string);
     }
 

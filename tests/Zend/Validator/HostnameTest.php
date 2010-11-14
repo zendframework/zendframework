@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -27,23 +27,23 @@ use Zend\Validator\Hostname;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class HostnameTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Default instance created for all test methods
      *
-     * @var Zend_Validate_Hostname
+     * @var Zend_Validator_Hostname
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Hostname object for each test method
+     * Creates a new Zend_Validator_Hostname object for each test method
      *
      * @return void
      */

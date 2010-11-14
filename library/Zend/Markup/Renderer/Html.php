@@ -25,18 +25,13 @@
 namespace Zend\Markup\Renderer;
 
 use Zend\Markup\Token,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\Broker,
+    Zend\Loader\PluginBroker,
     Zend\Filter\PregReplace as PregReplaceFilter;
 
 /**
  * HTML renderer
  *
- * @uses       \Zend\Filter\FilterChain
- * @uses       \Zend\Filter\Callback
- * @uses       \Zend\Filter\HtmlEntities
- * @uses       \Zend\Filter\PregReplace
- * @uses       \Zend\Loader\PluginLoader
- * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
@@ -94,9 +89,7 @@ class Html extends AbstractRenderer
             $options = $options->toArray();
         }
 
-        $this->_pluginLoader = new PluginLoader(array(
-            'Zend\Markup\Renderer\Markup\Html' => 'Zend/Markup/Renderer/Markup/Html/'
-        ));
+        $this->_pluginBroker = new MarkupBroker();
 
         if (!isset($options['useDefaultMarkups']) && isset($options['useDefaultTags'])) {
             $options['useDefaultMarkups'] = $options['useDefaultTags'];

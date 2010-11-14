@@ -721,7 +721,7 @@ class Uri
      */
     static public function validatePath($path)
     {
-        throw new Exception("Implelemt me!");
+        throw new \Exception("Implelemt me!");
     }
 
     /**
@@ -771,7 +771,7 @@ class Uri
      */
     static public function encodePath($path)
     {
-        throw new Exception("Implelemt me!");
+        throw new \Exception("Implelemt me!");
     }
     
     /**

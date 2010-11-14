@@ -196,7 +196,7 @@ class Uri
         // Capture scheme
         if (($scheme = self::parseScheme($uri)) != null) {  
             $this->setScheme($scheme);
-            $uri = substr($uri, strlen($scheme));
+            $uri = substr($uri, strlen($scheme) + 1);
         }
         
         // Capture authority part

@@ -193,10 +193,10 @@ class Uri
      */
     public function parse($uri)
     {
-        // Capture scheme 
-        if (preg_match('/^([A-Za-z][A-Za-z0-9\.\+\-]*):/', $uri, $match)) {
-            $this->setScheme($match[1]);
-            $uri = substr($uri, strlen($match[0]));
+        // Capture scheme
+        if (($scheme = self::parseScheme($uri)) != null) {  
+            $this->setScheme($scheme);
+            $uri = substr($uri, strlen($scheme));
         }
         
         // Capture authority part
@@ -790,6 +790,33 @@ class Uri
         };
         
         return preg_replace_callback($regex, $replace, $input);
+    }
+    
+    /**
+     * Extract only the scheme part out of a URI string. 
+     * 
+     * This is used by the parse() method, but is useful as a standalone public
+     * method if one wants to test a URI string for it's scheme before doing
+     * anything with it.
+     * 
+     * Will return the scmeme if found, or NULL if no scheme found (URI may 
+     * still be valid, but not full)
+     * 
+     * @param  string $uriString
+     * @return string | null
+     * @throws InvalidArgumentException
+     */
+    static public function parseScheme($uriString)
+    {
+        if (! is_string($uriString)) {
+            throw new \InvalidArgumentException("Expecting a string, got " . gettype($uriString));
+        }
+        
+        if (preg_match('/^([A-Za-z][A-Za-z0-9\.\+\-]*):/', $uriString, $match)) {
+            return $match[1];
+        } else {
+            return null;
+        }
     }
     
     /**

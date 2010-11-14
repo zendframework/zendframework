@@ -75,6 +75,23 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
         
     /**
+     * Test the parseScheme static method to extract the scheme part
+     * 
+     * @param string $uriString
+     * @param array  $parts
+     * @dataProvider uriWithPartsProvider
+     */
+    public function testParseScheme($uriString, $parts)
+    {
+        $scheme = Uri::parseScheme($uriString);
+        if (! isset($parts['scheme'])) { 
+            $parts['scheme'] = null;
+        }
+        
+        $this->assertEquals($parts['scheme'], $scheme);
+    }
+    
+    /**
      * Accessor Tests
      */
     
@@ -249,7 +266,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * 
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
-     * @expectedException \Zend\Uri\InvalidSchemeException
+     * @expectedException \Zend\Uri\Exception\InvalidUriPartException
      */
     public function testSetInvalidScheme($scheme)
     {

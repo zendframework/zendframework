@@ -36,7 +36,7 @@ use Zend\Uri\Http as HttpUri;
  * @group      Zend_Uri_Http
  * @group      Zend_Http
  */
-class HTTPTest extends \PHPUnit_Framework_TestCase
+class HttpTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test that specific schemes are valid for this class
@@ -56,7 +56,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      * 
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
-     * @expectedException \Zend\Uri\InvalidSchemeException
+     * @expectedException \Zend\Uri\Exception\InvalidUriPartException
      */
     public function testInvalidScheme($scheme)
     {

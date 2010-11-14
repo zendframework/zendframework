@@ -253,7 +253,7 @@ class Uri
     public function toString()
     {
         if (! $this->isValid()) {
-            throw new InvalidURIException("URI is not valid and cannot be converted into a string");
+            throw new Exception\InvalidUriException("URI is not valid and cannot be converted into a string");
         }
         
         $uri = '';
@@ -339,8 +339,7 @@ class Uri
         
         /* @var $baseUrl \Zend\Uri\Uri */
         if (! $baseUri instanceof static) {
-            /** @todo create an exception type for this */ 
-            throw new Exception("Provided base URL is not an instance of " . get_class($this));
+            throw new Exception\InvalidUriTypeException("Provided base URL is not an instance of " . get_class($this));
         }
         
         // Merging starts here...
@@ -498,13 +497,16 @@ class Uri
 	 * validateScheme() method. 
 	 * 
      * @param  string $scheme
-     * @throws \Zend\Uri\InvalidSchemeException
+     * @throws \Zend\Uri\Exception\InvalidUriPartException
      * @return \Zend\Uri\Uri
      */
     public function setScheme($scheme)
     {
         if ($scheme !== null && (! self::validateScheme($scheme))) {
-            throw new InvalidSchemeException("Scheme '$scheme' is not a valid URI scheme or is not accepted by " . get_class($this));
+            throw new Exception\InvalidUriPartException(
+            	"Scheme '$scheme' is not valid or is not accepted by " . get_class($this), 
+                Exception\InvalidUriPartException::INVALID_SCHEME
+            );
         }
         
         $this->_scheme = $scheme;

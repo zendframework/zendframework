@@ -613,7 +613,11 @@ class Uri
      */
 	public function __toString()
     {
-        return $this->toString();
+        try {
+            return $this->toString();
+        } catch (\Exception $ex) { 
+            return '';
+        }
     }
     
     /**

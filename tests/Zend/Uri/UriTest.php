@@ -37,7 +37,7 @@ use Zend\Uri\Uri;
  * @group      Zend_Uri
  */
 class UriTest extends \PHPUnit_Framework_TestCase
-{   
+{
     /**
      * General composing / parsing tests
      */ 

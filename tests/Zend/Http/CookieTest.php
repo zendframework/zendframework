@@ -359,7 +359,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
 
     static public function domainMatchTestProvider()
     {
-        $uri = new Uri\Url('http://www.foo.com/some/file.txt');
+        $uri = new Uri\Uri('http://www.foo.com/some/file.txt');
 
         return array(
             array('foo=bar; domain=.example.com;', 'http://www.example.com/foo/bar.php', true),
@@ -507,11 +507,11 @@ class CookieTest extends \PHPUnit_Framework_TestCase
     static public function refUrlProvider()
     {
         return array(
-            array(new Uri\Url('http://example.com/')),
-            array(new Uri\Url('http://www.example.com/foo/bar/')),
-            array(new Uri\Url('http://some.really.deep.domain.com')),
-            array(new Uri\Url('http://localhost/path/to/very/deep/file.php')),
-            array(new Uri\Url('http://arr.gr/some%20path/text%2Ffile'))
+            array(new Uri\Uri('http://example.com/')),
+            array(new Uri\Uri('http://www.example.com/foo/bar/')),
+            array(new Uri\Uri('http://some.really.deep.domain.com')),
+            array(new Uri\Uri('http://localhost/path/to/very/deep/file.php')),
+            array(new Uri\Uri('http://arr.gr/some%20path/text%2Ffile'))
         );
     }
 

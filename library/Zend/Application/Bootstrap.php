@@ -78,7 +78,9 @@ class Bootstrap extends AbstractBootstrap
 
         if (!$this->hasResource('frontcontroller')) {
             $broker = $this->getBroker();
-            $broker->registerSpec('frontcontroller');
+            if (!$broker->hasPlugin('frontcontroller')) {
+                $broker->registerSpec('frontcontroller');
+            }
         }
     }
 

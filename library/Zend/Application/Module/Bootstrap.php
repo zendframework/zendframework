@@ -56,9 +56,9 @@ abstract class Bootstrap
     {
         $this->setApplication($application);
 
-        // Use same plugin loader as parent bootstrap
+        // Use same plugin broker as parent bootstrap
         if ($application instanceof \Zend\Application\ResourceBootstrapper) {
-            $this->setPluginLoader($application->getPluginLoader());
+            $this->setBroker($application->getBroker());
         }
 
         $key = strtolower($this->getModuleName());
@@ -74,14 +74,18 @@ abstract class Bootstrap
         }
         $this->initResourceLoader();
 
+        $broker = $this->getBroker();
+
         // ZF-6545: ensure front controller resource is loaded
-        if (!$this->hasPluginResource('frontcontroller')) {
-            $this->registerPluginResource('frontcontroller');
+        if (!$broker->hasPlugin('frontcontroller')) {
+            $broker->registerSpec('frontcontroller');
         }
 
         // ZF-6545: prevent recursive registration of modules
-        if ($this->hasPluginResource('modules')) {
-            $this->unregisterPluginResource('modules');
+        if ($broker->hasPlugin('modules')) {
+            // Both unregister the resource and spec
+            $broker->unregister('modules');
+            $broker->unregisterSpec('modules');
         }
     }
 

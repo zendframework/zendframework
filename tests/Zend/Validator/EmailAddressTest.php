@@ -498,7 +498,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     {
         $messages = $this->_validator->getMessageTemplates();
         $this->assertNotEquals('TestMessage', $messages[Validator\EmailAddress::INVALID]);
-        $this->_validator->setMessage('TestMessage');
+        $this->_validator->setMessage('TestMessage', Validator\EmailAddress::INVALID);
         $messages = $this->_validator->getMessageTemplates();
         $this->assertEquals('TestMessage', $messages[Validator\EmailAddress::INVALID]);
     }
@@ -529,6 +529,20 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     public function testGetDeepMxCheck()
     {
         $this->assertFalse($this->_validator->getDeepMxCheck());
+    }
+
+    /**
+     * Testing setMessage for all messages
+     *
+     * @group ZF-10690
+     */
+    public function testSetMultipleMessages()
+    {
+        $messages = $this->_validator->getMessageTemplates();
+        $this->assertNotEquals('TestMessage', $messages[Validator\EmailAddress::INVALID]);
+        $this->_validator->setMessage('TestMessage');
+        $messages = $this->_validator->getMessageTemplates();
+        $this->assertEquals('TestMessage', $messages[Validator\EmailAddress::INVALID]);
     }
 
     /**

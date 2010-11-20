@@ -202,17 +202,17 @@ class EmailAddress extends AbstractValidator
      */
     public function setMessage($messageString, $messageKey = null)
     {
-        $messageKeys = $messageKey;
         if ($messageKey === null) {
-            $keys = array_keys($this->_messageTemplates);
-            $messageKeys = current($keys);
+            $this->_options['hostname']->setMessage($messageString);
+            parent::setMessage($messageString);
+            return $this;
         }
 
-        if (!isset($this->_messageTemplates[$messageKeys])) {
+        if (!isset($this->_messageTemplates[$messageKey])) {
             $this->_options['hostname']->setMessage($messageString, $messageKey);
         }
 
-        $this->_messageTemplates[$messageKeys] = $messageString;
+        $this->_messageTemplates[$messageKey] = $messageString;
         return $this;
     }
 

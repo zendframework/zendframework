@@ -194,14 +194,6 @@ class Locale
     const ZFDEFAULT   = 'default';
 
     /**
-     * Defines if old behaviour should be supported
-     * Old behaviour throws notices and will be deleted in future releases
-     *
-     * @var boolean
-     */
-    public static $compatibilityMode = false;
-
-    /**
      * Internal variable
      *
      * @var boolean
@@ -299,21 +291,6 @@ class Locale
      */
     public static function getDefault()
     {
-        if ((self::$compatibilityMode === true) or (func_num_args() > 0)) {
-            if (!self::$_breakChain) {
-                self::$_breakChain = true;
-                trigger_error('You are running Zend\\Locale in compatibility mode... please migrate your scripts', E_USER_NOTICE);
-                $params = func_get_args();
-                $param = null;
-                if (isset($params[0])) {
-                    $param = $params[0];
-                }
-                return self::getOrder($param);
-            }
-
-            self::$_breakChain = false;
-        }
-
         return self::$_default;
     }
 
@@ -812,10 +789,9 @@ class Locale
      *
      * @param  string|\Zend\Locale\Locale $locale     Locale to check for
      * @param  boolean            $strict     (Optional) If true, no rerouting will be done when checking
-     * @param  boolean            $compatible (DEPRECATED) Only for internal usage, brakes compatibility mode
      * @return boolean If the locale is known dependend on the settings
      */
-    public static function isLocale($locale, $strict = false, $compatible = true)
+    public static function isLocale($locale, $strict = false)
     {
         if (($locale instanceof Locale)
             || (is_string($locale) && array_key_exists($locale, self::$_localeData))
@@ -833,24 +809,12 @@ class Locale
             return false;
         }
 
-        if (($compatible === true) and (self::$compatibilityMode === true)) {
-            trigger_error('You are running Zend_Locale in compatibility mode... please migrate your scripts', E_USER_NOTICE);
-            if (isset(self::$_localeData[$locale]) === true) {
-                return $locale;
-            } else if (!$strict) {
-                $locale = explode('_', $locale);
-                if (isset(self::$_localeData[$locale[0]]) === true) {
-                    return $locale[0];
-                }
-            }
-        } else {
-            if (isset(self::$_localeData[$locale]) === true) {
+        if (isset(self::$_localeData[$locale]) === true) {
+            return true;
+        } else if (!$strict) {
+            $locale = explode('_', $locale);
+            if (isset(self::$_localeData[$locale[0]]) === true) {
                 return true;
-            } else if (!$strict) {
-                $locale = explode('_', $locale);
-                if (isset(self::$_localeData[$locale[0]]) === true) {
-                    return true;
-                }
             }
         }
 
@@ -879,8 +843,8 @@ class Locale
             $locale = new Locale();
         }
 
-        if (!Locale::isLocale($locale, true, false)) {
-            if (!Locale::isLocale($locale, false, false)) {
+        if (!Locale::isLocale($locale, true)) {
+            if (!Locale::isLocale($locale, false)) {
                 $locale = Locale::getLocaleToTerritory($locale);
 
                 if (empty($locale)) {

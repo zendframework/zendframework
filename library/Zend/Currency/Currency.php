@@ -97,7 +97,7 @@ class Currency
         if (is_array($options)) {
             $this->setLocale($locale);
             $this->setFormat($options);
-        } else if (Locale\Locale::isLocale($options, false, false)) {
+        } else if (Locale\Locale::isLocale($options, false)) {
             $this->setLocale($options);
             $options = $locale;
         } else {
@@ -176,7 +176,7 @@ class Currency
         $locale = $options['locale'];
         if (empty($format)) {
             $format = Data::getContent($locale, 'currencynumber');
-        } else if (Locale\Locale::isLocale($format, true, false)) {
+        } else if (Locale\Locale::isLocale($format, true)) {
             $locale = $format;
             $format = Data::getContent($format, 'currencynumber');
         }
@@ -298,14 +298,14 @@ class Currency
     {
         // Manage the params
         if ((empty($locale)) and (!empty($currency)) and
-            (Locale\Locale::isLocale($currency, true, false))) {
+            (Locale\Locale::isLocale($currency, true))) {
             $locale   = $currency;
             $currency = null;
         }
 
         // Validate the locale and get the country short name
         $country = null;
-        if ((Locale\Locale::isLocale($locale, true, false)) and (strlen($locale) > 4)) {
+        if ((Locale\Locale::isLocale($locale, true)) and (strlen($locale) > 4)) {
             $country = substr($locale, (strpos($locale, '_') + 1));
         } else {
             throw new Exception\InvalidArgumentException("No region found within the locale '" . (string) $locale . "'");
@@ -830,7 +830,7 @@ class Currency
                     break;
 
                 case 'format':
-                    if ((empty($value) === false) and (Locale\Locale::isLocale($value, null, false) === false)) {
+                    if ((empty($value) === false) and (Locale\Locale::isLocale($value) === false)) {
                         if (!is_string($value) || (strpos($value, '0') === false)) {
                             throw new Exception\InvalidArgumentException('\''
                                               . ((gettype($value) === 'object') ? get_class($value) : $value)

@@ -25,10 +25,10 @@ namespace Zend\Reflection;
 
 /**
  * @uses       ReflectionMethod
- * @uses       \Zend\Reflection\ReflectionClass
+ * @uses       Zend\Reflection\ReflectionClass
  * @uses       Zend_Reflection_Docblock
- * @uses       \Zend\Reflection\Exception
- * @uses       \Zend\Reflection\ReflectionParameter
+ * @uses       Zend\Reflection\Exception
+ * @uses       Zend\Reflection\ReflectionParameter
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -42,7 +42,7 @@ class ReflectionMethod extends \ReflectionMethod
      * @return Zend_Reflection_Docblock
      * @throws \Zend\Reflection\Exception
      */
-    public function getDocblock($reflectionClass = '\Zend\Reflection\ReflectionDocblock')
+    public function getDocblock($reflectionClass = 'Zend\Reflection\ReflectionDocblock')
     {
         if ('' == $this->getDocComment()) {
             throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
@@ -78,7 +78,7 @@ class ReflectionMethod extends \ReflectionMethod
      * @param  string $reflectionClass Name of reflection class to use
      * @return \Zend\Reflection\ReflectionClass
      */
-    public function getDeclaringClass($reflectionClass = '\Zend\Reflection\ReflectionClass')
+    public function getDeclaringClass($reflectionClass = 'Zend\Reflection\ReflectionClass')
     {
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new $reflectionClass($phpReflection->getName());
@@ -95,7 +95,7 @@ class ReflectionMethod extends \ReflectionMethod
      * @param  string $reflectionClass Name of reflection class to use
      * @return array of \Zend\Reflection\ReflectionParameter objects
      */
-    public function getParameters($reflectionClass = '\Zend\Reflection\ReflectionParameter')
+    public function getParameters($reflectionClass = 'Zend\Reflection\ReflectionParameter')
     {
         $phpReflections  = parent::getParameters();
         $zendReflections = array();

@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Filesystem;
+
 use Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
@@ -106,7 +107,7 @@ class File extends AbstractFilesystem
     /**
      * getResource()
      * 
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function getResource()
     {

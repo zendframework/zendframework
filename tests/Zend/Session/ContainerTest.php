@@ -493,4 +493,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertSame($expected, $test);
     }
+
+    /**
+     * @group ZF-10706
+     */
+    public function testValidationShouldNotRaiseErrorForMissingResponseObject()
+    {
+        $session = new Container('test');
+        $session->test = 42;
+        $this->assertEquals(42, $session->test);
+    }
 }

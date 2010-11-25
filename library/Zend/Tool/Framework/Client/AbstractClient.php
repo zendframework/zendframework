@@ -28,15 +28,6 @@ use Zend\Log,
     Zend\Tool\Framework\RegistryEnabled;
 
 /**
- * @uses       \Zend\Loader\Autoloader
- * @uses       \Zend\Log\Logger
- * @uses       \Zend\Log\Writer\Null
- * @uses       \Zend\Tool\Framework\Client\Exception
- * @uses       \Zend\Tool\Framework\Client\Interactive\InputHandler
- * @uses       \Zend\Tool\Framework\Client\Interactive\InteractiveInput
- * @uses       \Zend\Tool\Framework\Client\Manifest
- * @uses       \Zend\Tool\Framework\Registry
- * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -68,7 +59,8 @@ abstract class AbstractClient implements RegistryEnabled
     public function __construct($options = array())
     {
         // require autoloader 
-        \Zend\Loader\Autoloader::getInstance();
+        $loader = new \Zend\Loader\StandardAutoloader();
+        $loader->register();
 
         // this might look goofy, but this is setting up the
         // registry for dependency injection into the client

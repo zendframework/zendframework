@@ -24,6 +24,8 @@
  */
 namespace Zend\Tool\Project\Provider;
 
+use Zend\Tool\Project\Profile\Profile as ProjectProfile;
+
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
  * @uses       \Zend\Tool\Project\Provider\Exception
@@ -38,13 +40,13 @@ class View extends AbstractProvider
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
-    public static function createResource(\Zend\Tool\Project\Profile $profile, $actionName, $controllerName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
         if (!is_string($actionName)) {
             throw new Exception\RuntimeException('Zend_Tool_Project_Provider_View::createResource() expects \"actionName\" is the name of a controller resource to create.');

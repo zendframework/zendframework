@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
@@ -63,10 +65,10 @@ class Form extends AbstractProvider
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $formName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function hasResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
@@ -75,15 +77,15 @@ class Form extends AbstractProvider
         }
 
         $formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName);
-        return (($formsDirectory->search(array('formFile' => array('formName' => $formName)))) instanceof ProjectProfile\Resource);
+        return (($formsDirectory->search(array('formFile' => array('formName' => $formName)))) instanceof Resource);
     }
     
     /**
      * _getFormsDirectoryResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected static function _getFormsDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {

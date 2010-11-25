@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       \Zend\Tool\Framework\Provider\Pretendable
@@ -43,11 +45,11 @@ class Action
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function createResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
@@ -70,11 +72,11 @@ class Action
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function hasResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
@@ -92,16 +94,16 @@ class Action
             throw new Exception\RuntimeException('Controller ' . $controllerName . ' was not found.');
         }
        
-        return (($controllerFile->search(array('actionMethod' => array('actionName' => $actionName)))) instanceof ProjectProfile\Resource);
+        return (($controllerFile->search(array('actionMethod' => array('actionName' => $actionName)))) instanceof Resource);
     }
 
     /**
      * _getControllerFileResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected static function _getControllerFileResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {

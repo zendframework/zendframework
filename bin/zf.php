@@ -383,14 +383,14 @@ class ZF
     protected function _tryClientLoad()
     {
         $this->_clientLoaded = false;
-        $fh = @fopen('Zend/Loader/Autoloader.php', 'r', true);
+        $fh = @fopen('Zend/Loader/StandardAutoloader.php', 'r', true);
         if (!$fh) {
             return $this->_clientLoaded; // false
         } else {
             fclose($fh);
             unset($fh);
-            include 'Zend/Loader/Autoloader.php';
-            $this->_clientLoaded = class_exists('Zend\Loader\Autoloader', false);
+            include 'Zend/Loader/StandardAutoloader.php';
+            $this->_clientLoaded = class_exists('Zend\Loader\StandardAutoloader', false);
         }
         
         return $this->_clientLoaded;
@@ -604,7 +604,8 @@ EOS;
 	    // ensure that zf.php loads the Zend_Tool_Project features
 	    $configOptions['classesToLoad'] = 'Zend\Tool\Project\Provider\Manifest';
 	    
-	    Zend\Loader\Autoloader::getInstance();
+        $autoloader = new Zend\Loader\StandardAutoloader();
+        $autoloader->register();
 	    
 	    $console = new Zend\Tool\Framework\Client\Console\Console($configOptions);
 	    $console->dispatch();

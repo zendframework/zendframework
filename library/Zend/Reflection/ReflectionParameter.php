@@ -44,7 +44,7 @@ class ReflectionParameter extends \ReflectionParameter
      * @param  string $reflectionClass Reflection class to use
      * @return \Zend\Reflection\ReflectionClass
      */
-    public function getDeclaringClass($reflectionClass = '\Zend\Reflection\ReflectionClass')
+    public function getDeclaringClass($reflectionClass = 'Zend\Reflection\ReflectionClass')
     {
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new $reflectionClass($phpReflection->getName());
@@ -61,7 +61,7 @@ class ReflectionParameter extends \ReflectionParameter
      * @param  string $reflectionClass Reflection class to use
      * @return \Zend\Reflection\ReflectionClass
      */
-    public function getClass($reflectionClass = '\Zend\Reflection\ReflectionClass')
+    public function getClass($reflectionClass = 'Zend\Reflection\ReflectionClass')
     {
         $phpReflection  = parent::getClass();
         if($phpReflection == null) {
@@ -86,13 +86,13 @@ class ReflectionParameter extends \ReflectionParameter
     {
         $phpReflection = parent::getDeclaringFunction();
         if ($phpReflection instanceof \ReflectionMethod) {
-            $baseClass = '\Zend\Reflection\ReflectionMethod';
+            $baseClass = 'Zend\Reflection\ReflectionMethod';
             if (null === $reflectionClass) {
                 $reflectionClass = $baseClass;
             }
             $zendReflection = new $reflectionClass($this->getDeclaringClass()->getName(), $phpReflection->getName());
         } else {
-            $baseClass = '\Zend\Reflection\ReflectionFunction';
+            $baseClass = 'Zend\Reflection\ReflectionFunction';
             if (null === $reflectionClass) {
                 $reflectionClass = $baseClass;
             }

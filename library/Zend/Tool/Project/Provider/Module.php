@@ -24,6 +24,11 @@
  */
 namespace Zend\Tool\Project\Provider;
 
+use Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Profile\Iterator\ContextFilter,
+    Zend\Tool\Project\Profile\Iterator\EnabledResourceFilter,
+    Zend\Tool\Project\Profile\Resource\Resource;
+
 /**
  * @uses       RecursiveIteratorIterator
  * @uses       \Zend\Tool\Framework\Provider\Pretendable
@@ -41,7 +46,7 @@ class Module
     implements \Zend\Tool\Framework\Provider\Pretendable
 {
 
-    public static function createResources(\Zend\Tool\Project\Profile $profile, $moduleName, \Zend\Tool\Project\Profile\Resource $targetModuleResource = null)
+    public static function createResources(ProjectProfile $profile, $moduleName, Resource $targetModuleResource = null)
     {
 
         // find the appliction directory, it will serve as our module skeleton
@@ -65,7 +70,7 @@ class Module
         $moduleDirectory = $modulesDirectory->createResource('moduleDirectory', array('moduleName' => $moduleName));
 
         // create a context filter so that we can pull out only what we need from the module skeleton
-        $moduleContextFilterIterator = new \Zend\Tool\Project\Profile\Iterator\ContextFilter(
+        $moduleContextFilterIterator = new ContextFilter(
             $targetModuleResource,
             array(
                 'denyNames' => array('ModulesDirectory', 'ViewControllerScriptsDirectory'),
@@ -140,7 +145,7 @@ class Module
             }
         } else {
             $response->appendContent('Creating the following module and artifacts:');
-            $enabledFilter = new \Zend\Tool\Project\Profile\Iterator\EnabledResourceFilter($resources);
+            $enabledFilter = new EnabledResourceFilter($resources);
             foreach (new \RecursiveIteratorIterator($enabledFilter, \RecursiveIteratorIterator::SELF_FIRST) as $resource) {
                 $response->appendContent($resource->getContext()->getPath());
                 $resource->create();

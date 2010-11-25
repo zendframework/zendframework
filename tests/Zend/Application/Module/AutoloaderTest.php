@@ -20,8 +20,7 @@
  */
 
 namespace ZendTest\Application\Module;
-use \Zend\Application\Module\Autoloader as ModuleAutoloader,
-    \Zend\Loader\Autoloader;
+use \Zend\Application\Module\Autoloader as ModuleAutoloader;
 
 /**
  * @category   Zend
@@ -46,9 +45,6 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
-
         // initialize 'error' member for tests that utilize error handling
         $this->error = null;
 
@@ -72,9 +68,6 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
 
         // Retore original include_path
         set_include_path($this->includePath);
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testDbTableResourceTypeShouldBeLoadedByDefault()

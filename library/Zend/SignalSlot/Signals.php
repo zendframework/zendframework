@@ -81,11 +81,12 @@ class Signals implements SignalSlot
             throw new InvalidCallbackException('Invalid callback provided');
         }
 
+        $responses = new ResponseCollection;
+
         if (empty($this->_signals[$signal])) {
-            return;
+            return $responses;
         }
 
-        $responses = new ResponseCollection;
         if (!is_array($argv)) {
             $argv   = func_get_args();
             $argv   = array_slice($argv, 2);

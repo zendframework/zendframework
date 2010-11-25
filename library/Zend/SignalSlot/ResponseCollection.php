@@ -49,10 +49,16 @@ class ResponseCollection extends \SplStack
     /**
      * Convenient access to the last handler return value.
      *
+     * If the collection is empty, returns null. Otherwise, returns value
+     * returned by last handler.
+     *
      * @return mixed The last handler return value
      */
     public function last()
     {
+        if (count($this) === 0) {
+            return null;
+        }
         return parent::top();
     }
 

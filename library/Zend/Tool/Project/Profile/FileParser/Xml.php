@@ -34,9 +34,9 @@ use Zend\Tool\Project\Profile\Profile,
  * @uses       SimpleXMLElement
  * @uses       SimpleXMLIterator
  * @uses       \Zend\Tool\Project\Context\Repository
- * @uses       \Zend\Tool\Project\Profile
+ * @uses       \Zend\Tool\Project\Profile\Profile
  * @uses       \Zend\Tool\Project\Profile\FileParser
- * @uses       \Zend\Tool\Project\Profile\Resource
+ * @uses       \Zend\Tool\Project\Profile\Resource\Resource
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -192,7 +192,7 @@ class Xml implements FileParser
      * as needed to *unserialize* the profile from an xmlIterator
      *
      * @param SimpleXMLIterator $xmlIterator
-     * @param \Zend\Tool\Project\Profile\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
      */
     protected function _unserializeRecurser(\SimpleXMLIterator $xmlIterator, Resource $resource = null)
     {

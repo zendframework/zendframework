@@ -40,6 +40,19 @@ class Code extends AbstractHtml
 {
 
     /**
+     * Constructor
+     *
+     * Since we don't want any filters on this markup (since they will collide
+     * with PHP's highlight_string() function), we simply override the
+     * constructor.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Convert the token
      *
      * @param \Zend\Markup\Token $token

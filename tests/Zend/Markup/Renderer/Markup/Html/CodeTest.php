@@ -56,4 +56,21 @@ class CodeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(highlight_string('<?= "bar" ?>', true), $code($token, '<?= "bar" ?>'));
         $this->assertEquals(highlight_string('<?php foobar(); ?>', true), $code($token, '<?php foobar(); ?>'));
     }
+
+    /**
+     * Test the filters for Code
+     *
+     * @return void
+     */
+    public function testFilters()
+    {
+        $code = new CodeMarkup();
+
+        // we simply make sure that the code isn't filtered
+        // especially with the HtmlEntities filter and nl2br
+        $this->assertEquals('foobar', $code->filter('foobar'));
+        $this->assertEquals("foo\nbar", $code->filter("foo\nbar"));
+        $this->assertEquals("foo<bar>", $code->filter("foo<bar>"));
+        $this->assertEquals("foo\nbar<strong>baz", $code->filter("foo\nbar<strong>baz"));
+    }
 }

@@ -54,4 +54,22 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('<strong>foo</strong>', $markup($token, 'foo'));
     }
+
+    /**
+     * Test the default HTML filtering
+     *
+     * @return void
+     */
+    public function testFilter()
+    {
+        $markup = new ReplaceMarkup('strong');
+
+        $token = new Token('strong', Token::TYPE_MARKUP, 'strong', array());
+
+        $token->setStopper('endstrong');
+
+        $this->assertEquals('foo&lt;bar&gt;', $markup->filter('foo<bar>'));
+        $this->assertEquals("foo<br />\nbar", $markup->filter("foo\nbar"));
+        $this->assertEquals("foo<br />\n&lt;bar&gt;", $markup->filter("foo\n<bar>"));
+    }
 }

@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer\Markup\Html;
-use Zend\Markup;
+use Zend\Markup\Token;
 
 /**
  * Code markup for HTML
@@ -55,12 +55,12 @@ class Code extends AbstractHtml
     /**
      * Convert the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param Token $token
      * @param string $text
      *
      * @return string
      */
-    public function __invoke(Markup\Token $token, $text)
+    public function __invoke(Token $token, $text)
     {
         return highlight_string($text, true);
     }

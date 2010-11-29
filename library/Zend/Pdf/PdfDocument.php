@@ -525,7 +525,7 @@ class PdfDocument
     }
 
     /**
-     * Orginize pages to tha pages tree structure.
+     * Organize pages to the pages tree structure.
      *
      * @todo atomatically attach page to the document, if it's not done yet.
      * @todo check, that page is attached to the current document

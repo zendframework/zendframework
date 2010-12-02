@@ -149,26 +149,26 @@ switch ($errors->type) {
 
         // 404 error -- controller or action not found
         $this->getResponse()->setHttpResponseCode(404);
-        $this->view->message = 'Page not found';
+        $this->view->vars()->message = 'Page not found';
         break;
     default:
         // application error
         $this->getResponse()->setHttpResponseCode(500);
-        $this->view->message = 'Application error';
+        $this->view->vars()->message = 'Application error';
         break;
 }
 
 // Log exception, if logger available
 if (($log = $this->getLog())) {
-    $log->crit($this->view->message, $errors->exception);
+    $log->crit($this->view->vars()->message, $errors->exception);
 }
 
 // conditionally display exceptions
 if ($this->getInvokeArg('displayExceptions') == true) {
-    $this->view->exception = $errors->exception;
+    $this->view->vars()->exception = $errors->exception;
 }
 
-$this->view->request = $errors->request;
+$this->view->vars()->request = $errors->request;
 EOS
                                 )),
                             new Php\PhpMethod(array(

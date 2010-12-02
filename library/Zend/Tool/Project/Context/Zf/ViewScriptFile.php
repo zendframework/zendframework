@@ -128,21 +128,21 @@ class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
 </head>
 <body>
   <h1>An error occurred</h1>
-  <h2><?php echo $this->message ?></h2>
+  <h2><?php echo $this->vars('message') ?></h2>
 
-  <?php if (isset($this->exception)): ?>
+  <?php if ($this->vars('exception')): ?>
 
   <h3>Exception information:</h3>
   <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+      <b>Message:</b> <?php echo $this->vars('exception')->getMessage() ?>
   </p>
 
   <h3>Stack trace:</h3>
-  <pre><?php echo $this->exception->getTraceAsString() ?>
+  <pre><?php echo $this->vars('exception')->getTraceAsString() ?>
   </pre>
 
   <h3>Request Parameters:</h3>
-  <pre><?php echo var_export($this->request->getParams(), true) ?>
+  <pre><?php echo var_export($this->vars('request')->getParams(), true) ?>
   </pre>
   <?php endif ?>
 

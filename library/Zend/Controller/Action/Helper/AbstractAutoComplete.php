@@ -17,7 +17,6 @@
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,8 +24,7 @@
  */
 namespace Zend\Controller\Action\Helper;
 
-use Zend\Controller\Action\HelperBroker,
-    Zend\Layout\Layout;
+use Zend\Layout\Layout;
 
 /**
  * Create and send autocompletion lists
@@ -77,7 +75,7 @@ abstract class AbstractAutoComplete extends AbstractHelper
             $layout->disableLayout();
         }
 
-        HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+        $this->getBroker()->load('viewRenderer')->setNoRender(true);
 
         return $this;
     }
@@ -93,7 +91,7 @@ abstract class AbstractAutoComplete extends AbstractHelper
     public function encodeJson($data, $keepLayouts = false)
     {
         if ($this->validateData($data)) {
-            return HelperBroker::getStaticHelper('Json')->encodeJson($data, $keepLayouts);
+            return $this->getBroker()->load('json')->encodeJson($data, $keepLayouts);
         }
 
         throw new \Zend\Controller\Action\Exception('Invalid data passed for autocompletion');

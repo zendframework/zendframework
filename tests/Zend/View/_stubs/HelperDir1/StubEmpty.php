@@ -17,14 +17,11 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\View\_stubs\HelperDir1;
-
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 // used to test when helper file is loaded but class is not within

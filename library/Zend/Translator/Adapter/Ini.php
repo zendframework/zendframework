@@ -15,7 +15,6 @@
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,12 +23,13 @@
  */
 namespace Zend\Translator\Adapter;
 
-use Zend\Translator\Adapter as TranslationAdapter;
+use Zend\Translator\Adapter as TranslationAdapter,
+	Zend\Translator\Adapter\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Exception
+ * @uses       \Zend\Translator\Adapter\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,14 +46,14 @@ class Ini extends TranslationAdapter
      * @param  string        $locale  Locale/Language to add data for, identical with locale identifier,
      *                                see Zend_Locale for more information
      * @param  array         $options OPTIONAL Options to use
-     * @throws \Zend\Translator\Exception Ini file not found
+     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException when Ini file not found
      * @return array
      */
     protected function _loadTranslationData($data, $locale, array $options = array())
     {
         $this->_data = array();
         if (!file_exists($data)) {
-            throw new \Zend\Translator\Exception("Ini file '".$data."' not found");
+            throw new InvalidArgumentException("Ini file '".$data."' not found");
         }
 
         $inidata = parse_ini_file($data, false);

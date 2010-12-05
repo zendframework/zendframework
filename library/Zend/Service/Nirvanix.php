@@ -17,7 +17,6 @@
  * @subpackage Nirvanix
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -54,7 +53,7 @@ class Zend_Service_Nirvanix
     {
         // merge options with default options
         $defaultOptions = array('defaults'   => array(),
-                                'httpClient' => new Zend_Http_Client(),
+                                'httpClient' => new Zend\Http\Client(),
                                 'host'       => 'http://services.nirvanix.com');
         $this->_options = array_merge($defaultOptions, $options);
 

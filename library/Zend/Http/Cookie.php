@@ -17,7 +17,6 @@
  * @package    Zend_Http
  * @subpackage Cookie
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -113,15 +112,15 @@ class Cookie
     public function __construct($name, $value, $domain, $expires = null, $path = null, $secure = false)
     {
         if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {
-            throw new Exception("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
+            throw new Exception\InvalidArgumentException("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
         }
 
         if (! $this->name = (string) $name) {
-            throw new Exception('Cookies must have a name');
+            throw new Exception\InvalidArgumentException('Cookies must have a name');
         }
 
         if (! $this->domain = (string) $domain) {
-            throw new Exception('Cookies must have a domain');
+            throw new Exception\InvalidArgumentException('Cookies must have a domain');
         }
 
         $this->value = (string) $value;
@@ -234,7 +233,7 @@ class Cookie
 
         // Make sure we have a valid Zend_Uri_Http object
         if (! ($uri->isValid() && ($uri->getScheme() == 'http' || $uri->getScheme() =='https'))) {
-            throw new Exception('Passed URI is not a valid HTTP or HTTPS URI');
+            throw new Exception\InvalidArgumentException('Passed URI is not a valid HTTP or HTTPS URI');
         }
 
         // Check that the cookie is secure (if required) and not expired
@@ -372,11 +371,11 @@ class Cookie
     public static function matchCookieDomain($cookieDomain, $host)
     {
         if (! $cookieDomain) {
-            throw new Exception("\$cookieDomain is expected to be a cookie domain");
+            throw new Exception\InvalidArgumentException("\$cookieDomain is expected to be a cookie domain");
         }
 
         if (! $host) {
-            throw new Exception("\$host is expected to be a host name");
+            throw new Exception\InvalidArgumentException("\$host is expected to be a host name");
         }
 
         $cookieDomain = strtolower($cookieDomain);
@@ -403,11 +402,11 @@ class Cookie
     public static function matchCookiePath($cookiePath, $path)
     {
         if (! $cookiePath) {
-            throw new Exception("\$cookiePath is expected to be a cookie path");
+            throw new Exception\InvalidArgumentException("\$cookiePath is expected to be a cookie path");
         }
 
         if ((null !== $path) && (!is_scalar($path) || is_numeric($path) || is_bool($path))) {
-            throw new Exception("\$path is expected to be a cookie path");
+            throw new Exception\InvalidArgumentException("\$path is expected to be a cookie path");
         }
         $path = (string) $path;
         if (empty($path)) {

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: $
  */
 
 namespace ZendTest\Filter\Compress;
@@ -113,12 +112,8 @@ class GzTest extends \PHPUnit_Framework_TestCase
         $filter->setLevel(6);
         $this->assertEquals(6, $filter->getOptions('level'));
 
-        try {
-            $filter->setLevel(15);
-            $this->fail('Exception expected');
-        } catch(\Zend\Filter\Exception $e) {
-            $this->assertContains('must be between', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
+        $filter->setLevel(15);
     }
 
     /**
@@ -133,12 +128,8 @@ class GzTest extends \PHPUnit_Framework_TestCase
         $filter->setMode('deflate');
         $this->assertEquals('deflate', $filter->getOptions('mode'));
 
-        try {
-            $filter->setMode('unknown');
-            $this->fail('Exception expected');
-        } catch(\Zend\Filter\Exception $e) {
-            $this->assertContains('mode not supported', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'mode not supported');
+        $filter->setMode('unknown');
     }
 
     /**

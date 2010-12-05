@@ -17,13 +17,14 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile;
 
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
@@ -39,20 +40,20 @@ class View extends AbstractProvider
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
-    public static function createResource(\Zend\Tool\Project\Profile $profile, $actionName, $controllerName, $moduleName = null)
+    public static function createResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
         if (!is_string($actionName)) {
-            throw new Exception('Zend_Tool_Project_Provider_View::createResource() expects \"actionName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_View::createResource() expects \"actionName\" is the name of a controller resource to create.');
         }
 
         if (!is_string($controllerName)) {
-            throw new Exception('Zend_Tool_Project_Provider_View::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_View::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $profileSearchParams = array();
@@ -68,7 +69,7 @@ class View extends AbstractProvider
         $profileSearchParams[] = 'viewScriptsDirectory';
 
         if (($viewScriptsDirectory = $profile->search($profileSearchParams, $noModuleSearch)) === false) {
-            throw new Exception('This project does not have a viewScriptsDirectory resource.');
+            throw new Exception\RuntimeException('This project does not have a viewScriptsDirectory resource.');
         }
 
         $profileSearchParams['viewControllerScriptsDirectory'] = array('forControllerName' => $controllerName);
@@ -93,7 +94,7 @@ class View extends AbstractProvider
     {
 
         if ($controllerName == '' || $actionNameOrSimpleName == '') {
-            throw new Exception('ControllerName and/or ActionName are empty.');
+            throw new Exception\RuntimeException('ControllerName and/or ActionName are empty.');
         }
 
         $profile = $this->_loadProfile();

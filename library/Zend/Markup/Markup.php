@@ -16,15 +16,14 @@
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Markup;
-use Zend\Loader\PluginLoader,
-    Zend\Loader\PrefixPathMapper;
+
+use Zend\Loader\Broker;
 
 /**
  * @category   Zend
@@ -39,18 +38,18 @@ class Markup
 
 
     /**
-     * The parser loader
+     * The parser broker
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\Broker
      */
-    protected static $_parserLoader;
+    protected static $parserBroker;
 
     /**
-     * The renderer loader
+     * The renderer broker
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\Broker
      */
-    protected static $_rendererLoader;
+    protected static $rendererBroker;
 
 
     /**
@@ -59,59 +58,31 @@ class Markup
     private function __construct() { }
 
     /**
-     * Get the parser loader
+     * Get the parser broker
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\Broker
      */
-    public static function getParserLoader()
+    public static function getParserBroker()
     {
-        if (!(self::$_parserLoader instanceof PrefixPathMapper)) {
-            self::$_parserLoader = new PluginLoader(array(
-                'Zend\Markup\Parser' => 'Zend/Markup/Parser/',
-            ));
+        if (!self::$parserBroker instanceof Broker) {
+            self::$parserBroker = new ParserBroker();
         }
 
-        return self::$_parserLoader;
+        return self::$parserBroker;
     }
 
     /**
-     * Get the renderer loader
+     * Get the renderer broker
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\Broker
      */
-    public static function getRendererLoader()
+    public static function getRendererBroker()
     {
-        if (!(self::$_rendererLoader instanceof PrefixPathMapper)) {
-            self::$_rendererLoader = new PluginLoader(array(
-                'Zend\Markup\Renderer' => 'Zend/Markup/Renderer/',
-            ));
+        if (!self::$rendererBroker instanceof Broker) {
+            self::$rendererBroker = new RendererBroker();
         }
 
-        return self::$_rendererLoader;
-    }
-
-    /**
-     * Add a parser path
-     *
-     * @param  string $prefix
-     * @param  string $path
-     * @return \Zend\Loader\PrefixPathMapper
-     */
-    public static function addParserPath($prefix, $path)
-    {
-        return self::getParserLoader()->addPrefixPath($prefix, $path);
-    }
-
-    /**
-     * Add a renderer path
-     *
-     * @param  string $prefix
-     * @param  string $path
-     * @return \Zend\Loader\PrefixPathMapper
-     */
-    public static function addRendererPath($prefix, $path)
-    {
-        return self::getRendererLoader()->addPrefixPath($prefix, $path);
+        return self::$rendererBroker;
     }
 
     /**
@@ -124,12 +95,10 @@ class Markup
      */
     public static function factory($parser, $renderer = 'Html', array $options = array())
     {
-        $parserClass   = self::getParserLoader()->load($parser);
-        $rendererClass = self::getRendererLoader()->load($renderer);
-
-        $parser            = new $parserClass();
-        $options['parser'] = $parser;
-        $renderer          = new $rendererClass($options);
+        $parser         = self::getParserBroker()->load($parser);
+        $rendererBroker = self::getRendererBroker();
+        $rendererBroker->setParser($parser);
+        $renderer       = $rendererBroker->load($renderer, $options);
 
         return $renderer;
     }

@@ -14,13 +14,13 @@
  * @package    Zend_ProgressBar
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\ProgressBar;
+use Zend\ProgressBar\Exception;
 
 /**
  * Zend_ProgressBar offers an interface for multiple enviroments.
@@ -96,7 +96,7 @@ class ProgressBar
     {
         // Check min/max values and set them
         if ($min > $max) {
-            throw new Exception('$max must be greater than $min');
+            throw new Exception\OutOfRangeException('$max must be greater than $min');
         }
 
         $this->_min     = (float) $min;

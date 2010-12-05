@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Xml_Security
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -64,7 +63,7 @@ class TransformChain
             case 'http://www.w3.org/2001/10/xml-exc-c14n#':
                 return 'Zend\InfoCard\XML\Security\Transform\XMLExcC14N';
             default:
-                throw new Security\Exception("Unknown or Unsupported Transformation Requested");
+                throw new Security\Exception\InvalidArgumentException("Unknown or Unsupported Transformation Requested");
         }
     }
 
@@ -111,7 +110,7 @@ class TransformChain
             // We can't really test this check because it would require logic changes in the component itself
             // @codeCoverageIgnoreStart
             if(!($transformer instanceof Transform)) {
-                throw new Security\Exception("Transforms must implement the Transform Interface");
+                throw new Security\Exception\RuntimeExcpetion("Transforms must implement the Transform Interface");
             }
             // @codeCoverageIgnoreEnd
 

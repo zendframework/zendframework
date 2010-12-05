@@ -12161,6 +12161,70 @@
       <newFullyQualifiedName>Zend\Service\Amazon\Sqs\Sqs</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/Authentication.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_Authentication</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/Authentication/Authentication.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\Authentication</newNamespace>
+      <newClassName>Authentication</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Authentication\Authentication</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/Authentication/S3.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_Authentication_S3</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/Authentication/S3.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\Authentication</newNamespace>
+      <newClassName>S3</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Authentication\S3</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/Authentication/V1.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_Authentication_V1</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/Authentication/V1.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\Authentication</newNamespace>
+      <newClassName>V1</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Authentication\V1</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/Authentication/V2.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_Authentication_V2</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/Authentication/V2.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\Authentication</newNamespace>
+      <newClassName>V2</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\Authentication\V2</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/SimpleDb.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_SimpleDb</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/SimpleDb/SimpleDb.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\SimpleDb</newNamespace>
+      <newClassName>SimpleDb</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\SimpleDb\SimpleDb</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/SimpleDb/Attribute.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_SimpleDb_Attribute</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/SimpleDb/Attribute.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\SimpleDb</newNamespace>
+      <newClassName>Attribute</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\SimpleDb\Attribute</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/SimpleDb/Page.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_SimpleDb_Page</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/SimpleDb/Page.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\SimpleDb</newNamespace>
+      <newClassName>Page</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\SimpleDb\Page</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
+      <originalRelativeFilePath>Zend/Service/Amazon/SimpleDb/Response.php</originalRelativeFilePath>
+      <originalClassName>Zend_Service_Amazon_SimpleDb_Response</originalClassName>
+      <newRelativeFilePath>Zend/Service/Amazon/SimpleDb/Response.php</newRelativeFilePath>
+      <newNamespace>Zend\Service\Amazon\SimpleDb</newNamespace>
+      <newClassName>Response</newClassName>
+      <newFullyQualifiedName>Zend\Service\Amazon\SimpleDb\Response</newFullyQualifiedName>
+   </mappedClass>
+   <mappedClass>
       <originalRelativeFilePath>Zend/Service/Amazon.php</originalRelativeFilePath>
       <originalClassName>Zend_Service_Amazon</originalClassName>
       <newRelativeFilePath>Zend/Service/Amazon/Amazon.php</newRelativeFilePath>

@@ -17,14 +17,14 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Filesystem;
-use Zend\Tool\Project\Profile\Resource;
+
+use Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -107,7 +107,7 @@ class File extends AbstractFilesystem
     /**
      * getResource()
      * 
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public function getResource()
     {

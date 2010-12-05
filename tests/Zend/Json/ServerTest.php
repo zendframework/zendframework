@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -401,7 +400,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->server->handle();
         $buffer = ob_get_clean();
 
-        $decoded = Json\Json::decode($buffer);
+        $decoded = Json\Json::decode($buffer, Json\Json::TYPE_ARRAY);
         $this->assertTrue(is_array($decoded));
         $this->assertTrue(array_key_exists('result', $decoded));
         $this->assertTrue(array_key_exists('id', $decoded));

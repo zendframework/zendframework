@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Form\Decorator;
@@ -110,7 +109,7 @@ class ViewHelperTest extends \PHPUnit_Framework_TestCase
     {
         $element = $this->getElement();
         $content = 'test content';
-        $this->setExpectedException('Zend\Form\Exception', 'ViewHelper decorator cannot render');
+        $this->setExpectedException('Zend\Form\Decorator\Exception\UnexpectedValueException', 'ViewHelper decorator cannot render');
         $test = $this->decorator->render($content);
     }
 

@@ -13,34 +13,33 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\Validate\Sitemap;
+namespace ZendTest\Validator\Sitemap;
 
 /**
- * Tests Zym_Validate_Sitemap_Changefreq
+ * Tests Zym_Validator_Sitemap_Changefreq
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class ChangefreqTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Validator
      *
-     * @var Zend_Validate_Sitemap_Changefreq
+     * @var Zend_Validator_Sitemap_Changefreq
      */
     protected $_validator;
 

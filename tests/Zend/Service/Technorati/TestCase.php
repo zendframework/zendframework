@@ -17,18 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-
-
-/**
- * Test helper
- */
-
-/**
- * Exclude from code coverage report
- */
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**
  * Patch for default timezone in PHP >= 5.1.0
@@ -36,11 +25,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 if (!ini_get('date.timezone')) {
     date_default_timezone_set(@date_default_timezone_get());
 }
-
-/**
- * @see Zend_Service_Technorati
- */
-
 
 /**
  * @category   Zend

@@ -24,14 +24,13 @@
 namespace Zend\Form;
 
 /**
- * Zend_Form_SubForm
+ * Zend\Form\SubForm
  *
  * @uses       \Zend\Form\Form
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class SubForm extends Form
 {
@@ -44,7 +43,7 @@ class SubForm extends Form
     /**
      * Load the default decorators
      *
-     * @return Zend_Form_SubForm
+     * @return Zend\Form\SubForm
      */
     public function loadDefaultDecorators()
     {

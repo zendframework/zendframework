@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -38,7 +37,7 @@ abstract class AbstractFilter implements Filter
      * Proxies to {@link filter()}
      *
      * @param  mixed $value
-     * @throws Zend\Filter\Exception If filtering $value is impossible
+     * @throws Zend\Filter\RuntimeException If filtering $value is impossible
      * @return mixed
      */
     public function __invoke($value)

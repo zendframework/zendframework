@@ -5,6 +5,6 @@ class ErrorController extends ActionController
 {
     public function errorAction()
     {
-        $this->_helper->getHelper('ViewRenderer')->setNoRender(true);
+        $this->broker('ViewRenderer')->setNoRender(true);
     }
 }

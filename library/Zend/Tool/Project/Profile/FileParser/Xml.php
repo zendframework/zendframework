@@ -17,16 +17,15 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Profile\FileParser;
-use Zend\Tool\Project\Profile\FileParser,
-    Zend\Tool\Project\Profile,
-    Zend\Tool\Project\Profile\Resource;
+use Zend\Tool\Project\Profile\Profile,
+    Zend\Tool\Project\Profile\Exception,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       DOMDocument
@@ -35,9 +34,9 @@ use Zend\Tool\Project\Profile\FileParser,
  * @uses       SimpleXMLElement
  * @uses       SimpleXMLIterator
  * @uses       \Zend\Tool\Project\Context\Repository
- * @uses       \Zend\Tool\Project\Profile
+ * @uses       \Zend\Tool\Project\Profile\Profile
  * @uses       \Zend\Tool\Project\Profile\FileParser
- * @uses       \Zend\Tool\Project\Profile\Resource
+ * @uses       \Zend\Tool\Project\Profile\Resource\Resource
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -113,7 +112,7 @@ class Xml implements FileParser
     public function unserialize($data, Profile $profile)
     {
         if ($data == null) {
-            throw new \Exception('contents not available to unserialize.');
+            throw new Exception\InvalidArgumentException('contents not available to unserialize.');
         }
 
         $this->_profile = $profile;
@@ -121,7 +120,7 @@ class Xml implements FileParser
         $xmlDataIterator = new \SimpleXMLIterator($data);
 
         if ($xmlDataIterator->getName() != 'projectProfile') {
-            throw new \Exception('Profiles must start with a projectProfile node');
+            throw new Exception\RuntimeException('Profiles must start with a projectProfile node');
         }
         
         if (isset($xmlDataIterator['type'])) {
@@ -193,7 +192,7 @@ class Xml implements FileParser
      * as needed to *unserialize* the profile from an xmlIterator
      *
      * @param SimpleXMLIterator $xmlIterator
-     * @param \Zend\Tool\Project\Profile\Resource $resource
+     * @param \Zend\Tool\Project\Profile\Resource\Resource $resource
      */
     protected function _unserializeRecurser(\SimpleXMLIterator $xmlIterator, Resource $resource = null)
     {

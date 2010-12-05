@@ -17,7 +17,6 @@
  * @subpackage PHPUnit
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -28,7 +27,7 @@ namespace Zend\Test\PHPUnit\Db\DataSet;
 /**
  * Aggregate several Zend_Db_Table instances into a dataset.
  *
- * @uses       InvalidArgumentException
+ * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableIterator
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryDataSet
  * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
@@ -85,7 +84,9 @@ class DbTableDataSet extends \PHPUnit_Extensions_Database_DataSet_AbstractDataSe
     public function getTable($tableName)
     {
         if (!isset($this->tables[$tableName])) {
-            throw new \InvalidArgumentException("$tableName is not a table in the current database.");
+            throw new \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException(
+            	"$tableName is not a table in the current database."
+            );
         }
 
         return $this->tables[$tableName];

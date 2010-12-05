@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id:$
  */
 
 /**
@@ -25,11 +24,6 @@
  */
 namespace ZendTest\Navigation;
 use Zend\Navigation\Page;
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_NavigationTest::main');
-}
-
 
 /**
  * Zend_Navigation
@@ -60,16 +54,6 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     {
         $this->_navigation = null;
         parent::tearDown();
-    }
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_NavigationTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**

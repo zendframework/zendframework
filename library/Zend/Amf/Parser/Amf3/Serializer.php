@@ -17,7 +17,6 @@
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -117,7 +116,7 @@ class Serializer extends AbstractSerializer
                     $this->writeXml($data);
                     break;
                 default:
-                    throw new Amf\Exception('Unknown Type Marker: ' . $markerType);
+                    throw new Parser\Exception\OutOfBoundsException('Unknown Type Marker: ' . $markerType);
             }
         } else {
             // Detect Type Marker
@@ -164,7 +163,7 @@ class Serializer extends AbstractSerializer
                     }
                     break;
                 default:
-                    throw new Amf\Exception('Unsupported data type: ' . gettype($data));
+                    throw new Parser\Exception\OutOfBoundsException('Unsupported data type: ' . gettype($data));
              }
             $this->writeTypeMarker($data, $markerType);
         }
@@ -262,7 +261,7 @@ class Serializer extends AbstractSerializer
         } elseif ($data instanceof Value\ByteArray) {
             $data = $data->getData();
         } else {
-            throw new Amf\Exception('Invalid ByteArray specified; must be a string or Zend_Amf_Value_ByteArray');
+            throw new Parser\Exception\OutOfBoundsException('Invalid ByteArray specified; must be a string or Zend_Amf_Value_ByteArray');
         }
 
         $this->writeBinaryString($data);
@@ -289,7 +288,7 @@ class Serializer extends AbstractSerializer
         } elseif ($xml instanceof \SimpleXMLElement) {
             $xml = $xml->asXML();
         } else {
-            throw new Amf\Exception('Invalid xml specified; must be a DOMDocument or SimpleXMLElement');
+            throw new Parser\Exception\OutOfBoundsException('Invalid xml specified; must be a DOMDocument or SimpleXMLElement');
         }
 
         $this->writeBinaryString($xml);
@@ -314,7 +313,7 @@ class Serializer extends AbstractSerializer
         } elseif ($date instanceof Date\Date) {
             $dateString = $date->toString('U') * 1000;
         } else {
-            throw new Amf\Exception('Invalid date specified; must be a string DateTime or Zend_Date object');
+            throw new Parser\Exception\OutOfBoundsException('Invalid date specified; must be a string DateTime or Zend_Date object');
         }
 
         $this->writeInteger(0x01);
@@ -500,13 +499,13 @@ class Serializer extends AbstractSerializer
                     $this->writeString($this->_strEmpty);
                     break;
                 case Amf\Constants::ET_EXTERNAL:
-                    throw new Amf\Exception('External Object Encoding not implemented');
+                    throw new Parser\Exception\OutOfBoundsException('External Object Encoding not implemented');
                     break;
                 default:
-                    throw new Amf\Exception('Unknown Object Encoding type: ' . $encoding);
+                    throw new Parser\Exception\OutOfBoundsException('Unknown Object Encoding type: ' . $encoding);
             }
         } catch (\Exception $e) {
-            throw new Amf\Exception('Unable to writeObject output: ' . $e->getMessage(), 0, $e);
+            throw new Parser\Exception\OutOfBoundsException('Unable to writeObject output: ' . $e->getMessage(), 0, $e);
         }
 
         return $this;

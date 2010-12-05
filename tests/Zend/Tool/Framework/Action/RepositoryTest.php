@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -79,13 +78,13 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->_repository->addAction(new \ZendTest\Tool\Framework\Action\TestAsset\Foo());
         
-        $this->setExpectedException('\Zend\Tool\Framework\Action\Exception');
+        $this->setExpectedException('\Zend\Tool\Framework\Exception\InvalidArgumentException');
         $this->_repository->addAction(new \ZendTest\Tool\Framework\Action\TestAsset\Foo());
     }
 
     public function testAddActionThrowsExceptionOnActionWithNoName()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Action\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Exception\InvalidArgumentException');
         $this->_repository->addAction(new Action\Base());
     }
 

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -86,12 +85,8 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     {
         $figlet = new Figlet\Figlet();
 
-        try {
-            $figlet->render(1);
-            $this->fail('An expected InvalidArgumentException has not been raised');
-        } catch (\InvalidArgumentException $expected) {
-            $this->assertContains('$text must be a string', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Figlet\Exception\InvalidArgumentException', 'must be a string');
+        $figlet->render(1);
     }
 
     public function testCorrectEncodingUTF8()
@@ -113,12 +108,11 @@ class FigletTest extends \PHPUnit_Framework_TestCase
         $this->_equalAgainstFile($figlet->render($isoText, 'ISO-8859-15'), 'CorrectEncoding.figlet');
     }
 
-    /**
-     * @expectedException Zend_Text_Figlet_Exception
-     */
     public function testIncorrectEncoding()
     {
         $this->markTestSkipped('Test case not reproducible on all setups');
+        
+        $this->setExpectedException('Zend\Text\Figlet\Exception\RuntimeException');
         $figlet  = new Figlet\Figlet();
 
         if (PHP_OS == 'AIX') {
@@ -132,22 +126,15 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistentFont()
     {
-        try {
-            $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/NonExistentFont.flf'));
-            $this->fail('An expected Zend_Text_Figlet_Exception has not been raised');
-        } catch (Figlet\Exception $expected) {
-            $this->assertContains('Font file not found', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Figlet\Exception\RuntimeException', 'not found');
+        $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/NonExistentFont.flf'));
+        
     }
 
     public function testInvalidFont()
     {
-        try {
-            $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/InvalidFont.flf'));
-            $this->fail('An expected Zend_Text_Figlet_Exception has not been raised');
-        } catch (Figlet\Exception $expected) {
-            $this->assertContains('Not a FIGlet 2 font file', $expected->getMessage());
-        }
+        $this->setExpectedException('Zend\Text\Figlet\Exception\UnexpectedValueException', 'Not a FIGlet');
+        $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/InvalidFont.flf'));
     }
 
     public function testGzippedFont()
@@ -270,9 +257,4 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($compareString, $output);
     }
-}
-
-// Call Zend_Text_FigletTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Text_FigletTest::main") {
-    \Zend_Text_FigletTest::main();
 }

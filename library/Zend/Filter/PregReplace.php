@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -166,7 +165,7 @@ class PregReplace extends AbstractFilter
     public function filter($value)
     {
         if ($this->_matchPattern == null) {
-            throw new Exception(get_class($this) . ' does not have a valid MatchPattern set.');
+            throw new Exception\RuntimeException(get_class($this) . ' does not have a valid MatchPattern set.');
         }
 
         return preg_replace($this->_matchPattern, $this->_replacement, $value);

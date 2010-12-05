@@ -45,7 +45,6 @@ use Zend\Form as ZendForm;
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class FormDecorator extends AbstractDecorator
 {
@@ -135,6 +134,6 @@ class FormDecorator extends AbstractDecorator
         $attribs       = $this->getOptions();
         $name          = $form->getFullyQualifiedName();
         $attribs['id'] = $form->getId();
-        return $view->$helper($name, $attribs, $content);
+        return $view->broker($helper)->direct($name, $attribs, $content);
     }
 }

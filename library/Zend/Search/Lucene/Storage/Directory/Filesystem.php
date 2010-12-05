@@ -17,7 +17,6 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -32,7 +31,8 @@ use Zend\Search\Lucene\Storage\Directory,
 /**
  * FileSystem implementation of Directory abstraction.
  *
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @uses       \Zend\Search\Lucene\Storage\Directory
  * @uses       \Zend\Search\Lucene\Storage\File\Filesystem
  * @category   Zend
@@ -117,16 +117,20 @@ class Filesystem implements Directory
      * Checks if $path is a directory or tries to create it.
      *
      * @param string $path
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      */
     public function __construct($path)
     {
         if (!is_dir($path)) {
             if (file_exists($path)) {
-                throw new Lucene\Exception('Path exists, but it\'s not a directory');
+                throw new Lucene\Exception\InvalidArgumentException(
+                	'Path exists, but it\'s not a directory'
+                );
             } else {
                 if (!self::mkdirs($path)) {
-                    throw new Lucene\Exception("Can't create directory '$path'.");
+                    throw new Lucene\Exception\InvalidArgumentException(
+                    	"Can't create directory '$path'."
+                    );
                 }
             }
         }
@@ -177,7 +181,6 @@ class Filesystem implements Directory
      *
      * @param string $filename
      * @return \Zend\Search\Lucene\Storage\File
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function createFile($filename)
     {
@@ -199,8 +202,8 @@ class Filesystem implements Directory
      * Removes an existing $filename in the directory.
      *
      * @param string $filename
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return void
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function deleteFile($filename)
     {
@@ -213,7 +216,7 @@ class Filesystem implements Directory
         $trackErrors = ini_get('track_errors'); ini_set('track_errors', '1');
         if (!@unlink($this->_dirPath . '/' . $filename)) {
             ini_set('track_errors', $trackErrors);
-            throw new Lucene\Exception('Can\'t delete file: ' . $php_errormsg);
+            throw new Lucene\Exception\RuntimeException('Can\'t delete file: ' . $php_errormsg);
         }
         ini_set('track_errors', $trackErrors);
     }
@@ -280,8 +283,8 @@ class Filesystem implements Directory
      *
      * @param string $from
      * @param string $to
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return void
-     * @throws \Zend\Search\Lucene\Exception
      */
     public function renameFile($from, $to)
     {
@@ -299,7 +302,9 @@ class Filesystem implements Directory
 
         if (file_exists($this->_dirPath . '/' . $to)) {
             if (!unlink($this->_dirPath . '/' . $to)) {
-                throw new Lucene\Exception('Delete operation failed');
+                throw new Lucene\Exception\RuntimeException(
+                	'Delete operation failed'
+                );
             }
         }
 
@@ -309,7 +314,7 @@ class Filesystem implements Directory
         $success = @rename($this->_dirPath . '/' . $from, $this->_dirPath . '/' . $to);
         if (!$success) {
             ini_set('track_errors', $trackErrors);
-            throw new Lucene\Exception($php_errormsg);
+            throw new Lucene\Exception\RuntimeException($php_errormsg);
         }
 
         ini_set('track_errors', $trackErrors);

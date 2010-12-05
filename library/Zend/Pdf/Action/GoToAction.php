@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Action;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 use Zend\Pdf\Destination;
 use Zend\Pdf\InternalType;
@@ -68,7 +68,7 @@ class GoToAction extends AbstractAction
     }
 
     /**
-     * Create new Zend_PDF_Action_GoTo object using specified destination
+     * Create new \Zend\Pdf\Action\GoToAction object using specified destination
      *
      * @param \Zend\Pdf\Destination\AbstractDestination|string $destination
      * @return \Zend\Pdf\Action\GoToAction
@@ -80,7 +80,7 @@ class GoToAction extends AbstractAction
         }
 
         if (!$destination instanceof Destination\AbstractDestination) {
-            throw new Pdf\Exception('$destination parameter must be a Zend_PDF_Destination object or string.');
+            throw new Exception\InvalidArgumentException('$destination parameter must be a \Zend\Pdf\Destination object or string.');
         }
 
         $dictionary       = new InternalType\DictionaryObject();

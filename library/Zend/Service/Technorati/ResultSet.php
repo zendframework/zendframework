@@ -17,7 +17,6 @@
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -181,7 +180,7 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
      * Implements SeekableIterator::current().
      *
      * @return  void
-     * @throws  Zend_Service_Exception
+     * @throws  Zend\Service\Exception
      * @abstract
      */
     // abstract public function current();

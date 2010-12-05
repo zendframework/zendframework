@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -564,35 +563,28 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
             $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', '\Zend\Soap\Wsdl\Strategy\UnknownStrategyType');
             restore_error_handler();
             $this->fail();
-        } catch(WsdlException $e) {
+        } catch(\Zend\Soap\Exception\InvalidArgumentException $e) {
         }
         restore_error_handler();
     }
 
     function testSettingInvalidStrategyObjectThrowsException()
     {
-        try {
-            $strategy = new TestAsset\WsdlTestClass();
-            $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', $strategy);
-            $this->fail();
-        } catch(WsdlException $e) {
-
-        }
+        $strategy = new TestAsset\WsdlTestClass();
+        
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Set a strategy that is not of type \'Zend\Soap\Wsdl\Strategy\'');
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', $strategy);
     }
 
     function testAddingSameComplexTypeMoreThanOnceIsIgnored()
     {
-        try {
-            $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-            $wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:SomeTypeName');
-            $wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:AnotherTypeName');
-            $types = $wsdl->getTypes();
-            $this->assertEquals(1, count($types));
-            $this->assertEquals(array('\ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:SomeTypeName'),
-                                $types);
-        } catch(WsdlException $e) {
-            $this->fail();
-        }
+        $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
+        $wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:SomeTypeName');
+        $wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:AnotherTypeName');
+        $types = $wsdl->getTypes();
+        $this->assertEquals(1, count($types));
+        $this->assertEquals(array('\ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:SomeTypeName'),
+                            $types);
     }
 
     function testUsingSameComplexTypeTwiceLeadsToReuseOfDefinition()

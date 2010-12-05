@@ -5,35 +5,9 @@
         <pagerange>10</pagerange>
     </default>
     <testing>
-	    <scrollingstyle>Scrolling</scrollingstyle>
-	    <prefixpaths>
-	        <prefixpath>
-	            <prefix>prefix6</prefix>
-	            <path>path6</path>
-	        </prefixpath>
-	        <prefixpath>
-	            <prefix>prefix7</prefix>
-	            <path>path7</path>
-	        </prefixpath>
-	        <prefixpath>
-	            <prefix>prefix8</prefix>
-	            <path>path8</path>
-	        </prefixpath>
-	    </prefixpaths>
-		<adapterpaths>
-	        <adapterpath>
-	            <prefix>prefix6</prefix>
-	            <path>path6</path>
-	        </adapterpath>
-	        <adapterpath>
-	            <prefix>prefix7</prefix>
-	            <path>path7</path>
-	        </adapterpath>
-	        <adapterpath>
-	            <prefix>prefix8</prefix>
-	            <path>path8</path>
-	        </adapterpath>
-	    </adapterpaths>
+	    <scrolling_style>Scrolling</scrolling_style>
+        <scrolling_style_broker>ZendTest\Paginator\TestAsset\ScrollingStyleBroker</scrolling_style_broker>
+        <adapter_broker>ZendTest\Paginator\TestAsset\AdapterBroker</adapter_broker>
 	    <itemcountperpage>3</itemcountperpage>
 	    <pagerange>7</pagerange>
     </testing>

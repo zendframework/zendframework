@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter\File;
@@ -110,8 +109,8 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $filter = new FileEncrypt();
         $filter->setVector('testvect');
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
-        $filter(dirname(__DIR__).'/_files/nofile.txt');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
+        echo $filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 
     /**

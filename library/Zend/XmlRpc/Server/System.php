@@ -17,7 +17,6 @@
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -77,7 +76,7 @@ class System
     {
         $table = $this->_server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            throw new Exception('Method "' . $method . '" does not exist', 640);
+            throw new Exception\InvalidArgumentException('Method "' . $method . '" does not exist', 640);
         }
 
         return $table->getMethod($method)->getMethodHelp();
@@ -93,7 +92,7 @@ class System
     {
         $table = $this->_server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            throw new Exception('Method "' . $method . '" does not exist', 640);
+            throw new Exception\InvalidArgumentException('Method "' . $method . '" does not exist', 640);
         }
         $method = $table->getMethod($method)->toArray();
         return $method['prototypes'];

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,12 +24,14 @@
  */
 namespace ZendTest\Serializer\Adapter;
 
-use Zend\Serializer;
+use Zend\Serializer,
+    Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
+ * @group      Zend_Serializer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -42,7 +43,11 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('igbinary')) {
-            $this->markTestSkipped('Zend\\Serializer IgBinary needs ext/igbinary');
+            try {
+                new Serializer\Adapter\IgBinary();
+                $this->fail("Zend\\Serializer\\Adapter\\IgBinary needs missing ext/igbinary but did't throw exception");
+            } catch (ExtensionNotLoadedException $e) {}
+            $this->markTestSkipped('Zend\\Serializer\\Adapter\\IgBinary needs ext/igbinary');
         }
         $this->_adapter = new Serializer\Adapter\IgBinary();
     }
@@ -145,7 +150,10 @@ class IgbinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserialzeInvalid()
     {
         $value = "\0\1\r\n";
-        $this->setExpectedException('Zend\\Serializer\\Exception');
+        $this->setExpectedException(
+            'Zend\Serializer\Exception\RuntimeException',
+            'syntax error'
+        );
         $this->_adapter->unserialize($value);
     }
 

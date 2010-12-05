@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter\File;
@@ -130,7 +129,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $filter = new FileDecrypt();
         $filter->setVector('testvect');
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         $filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 }

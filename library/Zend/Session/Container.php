@@ -16,7 +16,6 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -73,7 +72,7 @@ class Container extends ArrayObject
     public function __construct($name = 'Default', $manager = null)
     {
         if (!preg_match('/^[a-z][a-z0-9_]+$/i', $name)) {
-            throw new Exception('Name passed to container is invalid; must consist of alphanumerics and underscores only');
+            throw new Exception\InvalidArgumentException('Name passed to container is invalid; must consist of alphanumerics and underscores only');
         }
         $this->_name = $name;
         $this->_setManager($manager);
@@ -109,7 +108,7 @@ class Container extends ArrayObject
         if (null === self::$_defaultManager) {
             $manager = new self::$_managerDefaultClass();
             if (!$manager instanceof Manager) {
-                throw new Exception('Invalid manager type provided; must implement Manager');
+                throw new Exception\InvalidArgumentException('Invalid manager type provided; must implement Manager');
             }
             self::$_defaultManager = $manager;
         }
@@ -148,7 +147,7 @@ class Container extends ArrayObject
             $manager = self::getDefaultManager();
         }
         if (!$manager instanceof Manager) {
-            throw new Exception('Manager provided is invalid; must implement Manager interface');
+            throw new Exception\InvalidArgumentException('Manager provided is invalid; must implement Manager interface');
         }
         $this->_manager = $manager;
         return $this;
@@ -199,7 +198,7 @@ class Container extends ArrayObject
             $storage[$name] = $this->_createContainer();
         }
         if (!is_array($storage[$name]) && !$storage[$name] instanceof ArrayObject) {
-            throw new Exception('Container cannot write to storage due to type mismatch');
+            throw new Exception\RuntimeException('Container cannot write to storage due to type mismatch');
         }
         return $storage;
     }
@@ -488,7 +487,7 @@ class Container extends ArrayObject
             // Create metadata array to merge in
             $data = array('EXPIRE_KEYS' => $expires);
         } else {
-            throw new Exception('Unknown data provided as second argument to ' . __METHOD__);
+            throw new Exception\InvalidArgumentException('Unknown data provided as second argument to ' . __METHOD__);
         }
 
         $storage->setMetadata(
@@ -534,7 +533,7 @@ class Container extends ArrayObject
             // Create metadata array to merge in
             $data = array('EXPIRE_HOPS_KEYS' => $expires);
         } else {
-            throw new Exception('Unknown data provided as second argument to ' . __METHOD__);
+            throw new Exception\InvalidArgumentException('Unknown data provided as second argument to ' . __METHOD__);
         }
 
         $storage->setMetadata(

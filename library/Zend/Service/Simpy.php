@@ -17,14 +17,13 @@
  * @subpackage Simpy
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @uses       DOMDocument
  * @uses       DOMXPath
  * @uses       Zend_Http_Client
- * @uses       Zend_Service_Exception
+ * @uses       Zend\Service\Exception
  * @uses       Zend_Service_Simpy_LinkSet
  * @uses       Zend_Service_Simpy_NoteSet
  * @uses       Zend_Service_Simpy_TagSet
@@ -82,7 +81,7 @@ class Zend_Service_Simpy
      *
      * @param  string $op    Name of the operation for the request
      * @param  array  $query Query data for the request (optional)
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Exception
      * @return DOMDocument Parsed XML response
      */
     protected function _makeRequest($op, $query = null)
@@ -107,14 +106,14 @@ class Zend_Service_Simpy
                 if ($code != 0) {
                     $list = $xpath->query('/status/message');
                     $message = $list->item(0)->nodeValue;
-                    throw new Zend_Service_Exception($message, $code);
+                    throw new Zend\Service\Exception($message, $code);
                 }
             }
 
             return $doc;
         }
 
-        throw new Zend_Service_Exception($response->getMessage(), $response->getStatus());
+        throw new Zend\Service\Exception($response->getMessage(), $response->getStatus());
     }
 
     /**
@@ -123,7 +122,7 @@ class Zend_Service_Simpy
      *
      * @param  int $limit Limits the number of tags returned (optional)
      * @link   http://www.simpy.com/doc/api/rest/GetTags
-     * @throws Zend_Service_Exception
+     * @throws Zend\Service\Exception
      * @return Zend_Service_Simpy_TagSet
      */
     public function getTags($limit = null)

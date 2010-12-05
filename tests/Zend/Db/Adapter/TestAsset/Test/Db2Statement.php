@@ -17,25 +17,12 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Db\Adapter\_files\Test;
-
-/**
- * PHPUnit_Util_Filter
- */
-
-
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-
-/**
- * @see Zend_Db_Statement_Db2
- */
 
 /**
  * Test Class for extending base Zend_Db_Statements

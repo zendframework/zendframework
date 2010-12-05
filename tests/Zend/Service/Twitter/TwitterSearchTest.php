@@ -17,26 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_Twitter_TwitterSearchTest::main');
-}
-
-/**
- * Test helper
- */
-require_once __DIR__ . '/../../../TestHelper.php';
-
-/** Zend_Service_Twitter_Search */
-require_once 'Zend/Service/Twitter/Search.php';
-
-/** Zend_Http_Client */
-require_once 'Zend/Http/Client.php';
-
-/** Zend_Http_Client_Adapter_Test */
-require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
  * @category   Zend
@@ -49,17 +30,6 @@ require_once 'Zend/Http/Client/Adapter/Test.php';
  */
 class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -178,8 +148,4 @@ class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Zend_Feed_Atom);
 
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_TwitterSearchTest::main') {
-    Zend_Service_TwitterSearchTest::main();
 }

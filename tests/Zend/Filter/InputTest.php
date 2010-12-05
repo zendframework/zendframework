@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter
@@ -26,7 +25,7 @@ namespace ZendTest\Filter
 use Zend\Filter\InputFilter,
     Zend\Filter,
     Zend\Validator,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PluginBroker,
     Zend\Translator;
 
 /**
@@ -365,6 +364,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatorMultiField()
     {
+        require_once __DIR__ . '/_files/TestNamespace/ValidatorBroker.php';
         $data = array(
             'password1' => 'EREIAMJH',
             'password2' => 'EREIAMJH',
@@ -381,13 +381,8 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             )
         );
         $options = array(
-            InputFilter::INPUT_NAMESPACE => 'TestNamespace'
+            InputFilter::VALIDATOR_BROKER => 'TestNamespace\ValidatorBroker',
         );
-
-        $ip    = get_include_path();
-        $dir   = __DIR__ . DIRECTORY_SEPARATOR . '_files';
-        $newIp = $dir . PATH_SEPARATOR . $ip;
-        set_include_path($newIp);
 
         $input = new InputFilter(null, $validators, $data, $options);
 
@@ -396,7 +391,6 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
-        set_include_path($ip);
         $messages = $input->getMessages();
         $this->assertType('array', $messages);
         $this->assertEquals(array('rule2'), array_keys($messages));
@@ -409,6 +403,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatorMultiFieldAllowEmptyProcessing()
     {
+        require_once __DIR__ . '/_files/TestNamespace/ValidatorBroker.php';
         $data = array(
             'password1' => 'EREIAMJH',
             'password2' => 'EREIAMJH',
@@ -432,13 +427,8 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             )
         );
         $options = array(
-            InputFilter::INPUT_NAMESPACE => 'TestNamespace'
+            InputFilter::VALIDATOR_BROKER => 'TestNamespace\ValidatorBroker',
         );
-
-        $ip    = get_include_path();
-        $dir   = __DIR__ . DIRECTORY_SEPARATOR . '_files';
-        $newIp = $dir . PATH_SEPARATOR . $ip;
-        set_include_path($newIp);
 
         $input = new InputFilter(null, $validators, $data, $options);
 
@@ -447,7 +437,6 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
-        set_include_path($ip);
         $messages = $input->getMessages();
         $this->assertType('array', $messages);
         $this->assertEquals(array('rule2', 'rule3'), array_keys($messages));
@@ -1149,71 +1138,39 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->isValid('field2'));
     }
 
-    public function testAddNamespace()
-    {
-        $data = array(
-            'field1' => 'abc',
-            'field2' => '123',
-            'field3' => '123'
-        );
-        $validators = array(
-            'field1' => 'MyDigits',
-            'field2' => 'MyDigits',
-            'field3' => 'digits'
-        );
-
-        $ip    = get_include_path();
-        $dir   = __DIR__ . DIRECTORY_SEPARATOR . '_files';
-        $newIp = $dir . PATH_SEPARATOR . $ip;
-        set_include_path($newIp);
-
-        $input = new InputFilter(null, $validators, $data);
-        $input->addNamespace('TestNamespace');
-
-        $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
-        $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
-        $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
-        $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
-        set_include_path($ip);
-
-        $this->assertEquals('123', (string) $input->field2);
-        $this->assertEquals('123', (string) $input->field3);
-
-        $messages = $input->getMessages();
-        $this->assertType('array', $messages);
-        $this->assertThat($messages, $this->arrayHasKey('field1'));
-        $this->assertEquals("'abc' must contain only digits", current($messages['field1']));
-    }
-
-    public function testGetPluginLoader()
+    public function testGetPluginBroker()
     {
         $input = new InputFilter(null, null);
 
-        $loader = $input->getPluginLoader(InputFilter::VALIDATOR);
-        $this->assertType('Zend\Loader\PluginLoader', $loader,
-            'Expected object of type Zend\Loader\PluginLoader, got ' , get_class($loader));
+        $broker = $input->getPluginBroker(InputFilter::VALIDATOR);
+        $this->assertType('Zend\Validator\ValidatorBroker', $broker,
+            'Expected object of type Zend\Validator\ValidatorBroker, got ' , get_class($broker));
+
+        $broker = $input->getPluginBroker(InputFilter::FILTER);
+        $this->assertType('Zend\Filter\FilterBroker', $broker,
+            'Expected object of type Zend\Filter\FilterBroker, got ' , get_class($broker));
 
         $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
-        $loader = $input->getPluginLoader('foo');
+        $loader = $input->getPluginBroker('foo');
     }
 
-    public function testSetPluginLoader()
+    public function testSetPluginBroker()
+    {
+        $input  = new InputFilter(null, null);
+
+        $broker = new PluginBroker();
+
+        $input->setPluginBroker($broker, InputFilter::VALIDATOR);
+    }
+
+    public function testSetPluginBrokerInvalidType()
     {
         $input = new InputFilter(null, null);
 
-        $loader = new PluginLoader();
-
-        $input->setPluginLoader($loader, InputFilter::VALIDATOR);
-    }
-
-    public function testSetPluginLoaderInvalidType()
-    {
-        $input = new InputFilter(null, null);
-
-        $loader = new PluginLoader();
+        $loader = new PluginBroker();
 
         $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
-        $input->setPluginLoader($loader, 'foo');
+        $input->setPluginBroker($loader, 'foo');
     }
 
     public function testNamespaceExceptionClassNotFound()
@@ -1227,7 +1184,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         // Do not add namespace on purpose, so MyDigits will not be found
         $input = new InputFilter(null, $validators, $data);
 
-        $this->setExpectedException('Zend\Loader\Exception', 'not found');
+        $this->setExpectedException('Zend\Loader\Exception', 'locate class');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1236,14 +1193,17 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'field1' => 'abc'
         );
-        // Zend_Validate_Exception exists, but does not implement the needed interface
+        // Zend\Validator\Exception exists, but does not implement the needed interface
+        $broker = new Validator\ValidatorBroker();
+        $broker->getClassLoader()->registerPlugin('exception', 'Zend\Validator\Exception');
         $validators = array(
             'field1' => 'Exception'
         );
 
         $input = new InputFilter(null, $validators, $data);
+        $input->setPluginBroker($broker, InputFilter::VALIDATOR);
 
-        $this->setExpectedException('Zend\Filter\Exception', 'must implement');
+        $this->setExpectedException('Zend\Validator\Exception', 'must implement');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1267,7 +1227,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
     {
         $input = new InputFilter(null, null);
 
-        $this->setExpectedException('Zend\Filter\Exception', 'does not implement');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'does not implement');
         $input->setDefaultEscapeFilter(new \StdClass());
     }
 
@@ -1339,8 +1299,9 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ab&c', $input->field1);
     }
 
-    public function testOptionNamespace()
+    public function testBrokerOptions()
     {
+        require_once __DIR__ . '/_files/TestNamespace/ValidatorBroker.php';
         $data = array(
             'field1' => 'abc',
             'field2' => '123',
@@ -1352,13 +1313,8 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             'field3' => 'digits'
         );
         $options = array(
-            InputFilter::INPUT_NAMESPACE => 'TestNamespace'
+            InputFilter::VALIDATOR_BROKER => 'TestNamespace\ValidatorBroker',
         );
-
-        $ip    = get_include_path();
-        $dir   = __DIR__ . DIRECTORY_SEPARATOR . '_files';
-        $newIp = $dir . PATH_SEPARATOR . $ip;
-        set_include_path($newIp);
 
         $input = new InputFilter(null, $validators, $data, $options);
 
@@ -1366,7 +1322,6 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
         $this->assertFalse($input->hasUnknown(), 'Expected hasUnknown() to return false');
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
-        set_include_path($ip);
 
         $this->assertEquals('123', (string) $input->field2);
         $this->assertEquals('123', (string) $input->field3);
@@ -1401,16 +1356,6 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertType('array', $missing);
         $this->assertEquals(array('field2'), array_keys($missing));
         $this->assertEquals("Field 'field2' is required by rule 'field2', but the field is missing", $missing['field2'][0]);
-    }
-
-    public function testOptionExceptionUnknown()
-    {
-        $options = array(
-            'unknown' => 'xxx'
-        );
-
-        $this->setExpectedException('Zend\Filter\Exception', 'Unknown option');
-        $input = new InputFilter(null, null, null, $options);
     }
 
     public function testGetEscaped()
@@ -1597,7 +1542,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         try {
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\RuntimeException $e) {
             $this->assertEquals("Input has invalid fields", $e->getMessage());
             $this->assertFalse($input->hasMissing(), 'Expected hasMissing() to return false');
             $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
@@ -1629,7 +1574,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         try {
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\RuntimeException $e) {
             $this->assertEquals("Input has missing fields", $e->getMessage());
             $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
             $this->assertFalse($input->hasInvalid(), 'Expected hasInvalid() to return false');
@@ -1675,43 +1620,8 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         );
         $filter = new InputFilter($filters, $validators, $data, $options);
 
-        $this->setExpectedException('Zend\Filter\Exception', 'must implement');
+        $this->setExpectedException('Zend\Loader\Exception', 'locate class');
         $filter->process();
-    }
-
-    /**
-     * @group ZF-3100
-     */
-    public function testPluginLoaderWithFilterValidateNamespaceWithSameNameFilterAndValidatorWorksPerfectly()
-    {
-        // Array
-        $filters = array(
-            'date1' => array('Date')
-        );
-        $validators = array(
-            'date1' => array('Date')
-        );
-        $data = array(
-            'date1' => '1990-01-01'
-        );
-        $options = array(
-            'filterNamespace' => array('ZendTest\Filter\TestClasses\Filter'),
-            'validatorNamespace' => array('ZendTest\Filter\TestClasses\Validator'),
-        );
-        $filter = new InputFilter($filters, $validators, $data, $options);
-
-        $filter->process();
-        $this->assertEquals("2000-01-01", $filter->date1);
-
-        // String notation
-        $options = array(
-            'filterNamespace' => 'ZendTest\Filter\TestClasses\Filter',
-            'validatorNamespace' => 'ZendTest\Filter\TestClasses\Validate',
-        );
-        $filter = new InputFilter($filters, $validators, $data, $options);
-
-        $filter->process();
-        $this->assertEquals("2000-01-01", $filter->date1);
     }
 
     /**

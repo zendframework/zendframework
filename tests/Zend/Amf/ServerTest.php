@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -966,8 +965,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     }
 
-
-
     /**
      * Check that when using server->setSession you get an amf header that has an append to gateway sessionID
      * @group ZF-5381
@@ -1005,88 +1002,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         // Zend_Session::stop();
     }
 
-    public function testAddDirectory()
-    {
-        $this->_server->addDirectory(__DIR__."/TestAsset/services");
-        $this->_server->addDirectory(__DIR__."/TestAsset/");
-        $dirs = $this->_server->getDirectory();
-        $this->assertContains(__DIR__."/TestAsset/services/", $dirs);
-        $this->assertContains(__DIR__."/TestAsset/", $dirs);
-    }
-
-    public function testAddDirectoryService()
-    {
-        $this->_server->addDirectory(__DIR__."/TestAsset/services");
-        // should take it from the path above, not include path
-        $origPath = get_include_path();
-        set_include_path($origPath.PATH_SEPARATOR.__DIR__);
-        // create a mock remoting message
-        $message = new Messaging\RemotingMessage();
-        $message->operation = 'getMenu';
-        $message->source = 'ServiceC';
-        $message->body = array();
-        // create a mock message body to place th remoting message inside
-        $newBody = new Value\MessageBody(null,"/1", $message);
-        $request = new Request\StreamRequest();
-        // at the requested service to a request
-        $request->addAmfBody($newBody);
-        $request->setObjectEncoding(0x03);
-        // let the server handle mock request
-        $this->_server->handle($request);
-        set_include_path($origPath);
-        $response = $this->_server->getResponse()->getAMFBodies();
-        $this->assertTrue($response[0]->getData() instanceof Messaging\AcknowledgeMessage);
-        $this->assertEquals("Service: MenuC", $response[0]->getData()->body);
-    }
-
-    public function testAddDirectoryService2()
-    {
-        $this->_server->addDirectory(__DIR__."/TestAsset/services");
-        // create a mock remoting message
-        $message = new Messaging\RemotingMessage();
-        $message->operation = 'getMenu';
-        $message->source = 'My.ServiceA';
-        $message->body = array();
-        // create a mock message body to place th remoting message inside
-        $newBody = new Value\MessageBody(null,"/1", $message);
-        $request = new Request\StreamRequest();
-        // at the requested service to a request
-        $request->addAmfBody($newBody);
-        $request->setObjectEncoding(0x03);
-        // let the server handle mock request
-        $this->_server->handle($request);
-        $response = $this->_server->getResponse()->getAMFBodies();
-        $this->assertTrue($response[0]->getData() instanceof Messaging\AcknowledgeMessage);
-        $this->assertEquals("Service: myMenuA", $response[0]->getData()->body);
-    }
-
-    /*
-     * See ZF-6625
-     */
-    public function testAddDirectoryServiceNotFound()
-    {
-        $this->_server->addDirectory(__DIR__."/TestAsset/services");
-        // create a mock remoting message
-        $message = new Messaging\RemotingMessage();
-        $message->operation = 'encode';
-        $message->source = 'Zend\\Json\\Json';
-        $message->body = array("123");
-        // create a mock message body to place th remoting message inside
-        $newBody = new Value\MessageBody(null,"/1", $message);
-        $request = new Request\StreamRequest();
-        // at the requested service to a request
-        $request->addAmfBody($newBody);
-        $request->setObjectEncoding(0x03);
-        // let the server handle mock request
-        $this->_server->handle($request);
-        $response = $this->_server->getResponse()->getAMFBodies();
-        $this->assertTrue($response[0]->getData() instanceof Messaging\ErrorMessage);
-        // test the same while ensuring Zend\Json\Json is loaded
-        $this->_server->handle($request);
-        $response = $this->_server->getResponse()->getAMFBodies();
-        $this->assertTrue($response[0]->getData() instanceof Messaging\ErrorMessage);
-    }
-
     /* See ZF-7102 */
     public function testCtorExcection()
     {
@@ -1109,4 +1024,28 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("Oops, exception!", $response[0]->getData()->faultString);
     }
 
+    public function testAcceptsStringArgumentToSetBroker()
+    {
+        $this->_server->setBroker('Zend\View\HelperBroker');
+        $this->assertType('Zend\View\HelperBroker', $this->_server->getBroker());
+    }
+
+    public function testAcceptsBrokerObjectToSetBroker()
+    {
+        $broker = new \Zend\View\HelperBroker();
+        $this->_server->setBroker($broker);
+        $this->assertSame($broker, $this->_server->getBroker());
+    }
+
+    public function testRaisesExceptionOnNonClassStringBrokerArgument()
+    {
+        $this->setExpectedException('Zend\Amf\Exception', 'could not resolve');
+        $this->_server->setBroker('__foo__');
+    }
+
+    public function testRaisesExceptionOnNonBrokerObjectArgument()
+    {
+        $this->setExpectedException('Zend\Amf\Exception', 'implement');
+        $this->_server->setBroker($this);
+    }
 }

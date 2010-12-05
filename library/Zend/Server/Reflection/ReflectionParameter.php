@@ -17,7 +17,6 @@
  * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -89,7 +88,7 @@ class ReflectionParameter
             return call_user_func_array(array($this->_reflection, $method), $args);
         }
 
-        throw new Exception('Invalid reflection method');
+        throw new Exception\BadMethodCallException('Invalid reflection method');
     }
 
     /**
@@ -111,7 +110,7 @@ class ReflectionParameter
     public function setType($type)
     {
         if (!is_string($type) && (null !== $type)) {
-            throw new Exception('Invalid parameter type');
+            throw new Exception\InvalidArgumentException('Invalid parameter type');
         }
 
         $this->_type = $type;
@@ -136,7 +135,7 @@ class ReflectionParameter
     public function setDescription($description)
     {
         if (!is_string($description) && (null !== $description)) {
-            throw new Exception('Invalid parameter description');
+            throw new Exception\InvalidArgumentException('Invalid parameter description');
         }
 
         $this->_description = $description;

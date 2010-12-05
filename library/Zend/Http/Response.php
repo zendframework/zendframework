@@ -15,7 +15,6 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Response
- * @version    $Id$
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -158,14 +157,14 @@ class Response
     {
         // Make sure the response code is valid and set it
         if (self::responseCodeAsText($code) === null) {
-            throw new Exception("{$code} is not a valid HTTP response code");
+            throw new Exception\InvalidArgumentException("{$code} is not a valid HTTP response code");
         }
 
         $this->code = $code;
 
         // Make sure we got valid headers and set them
         if (! is_array($headers)) {
-            throw new Exception('No valid headers were passed');
+            throw new Exception\InvalidArgumentException('No valid headers were passed');
     }
 
         foreach ($headers as $name => $value) {
@@ -180,7 +179,7 @@ class Response
 
         // Set the HTTP version
         if (! preg_match('|^\d\.\d$|', $version)) {
-            throw new Exception("Invalid HTTP response version: $version");
+            throw new Exception\InvalidArgumentException("Invalid HTTP response version: $version");
         }
 
         $this->version = $version;
@@ -576,7 +575,7 @@ class Response
 
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
-                throw new Exception("Error parsing body - doesn't seem to be a chunked message");
+                throw new Exception\RuntimeException("Error parsing body - doesn't seem to be a chunked message");
             }
 
             $length = hexdec(trim($m[1]));
@@ -603,7 +602,7 @@ class Response
     public static function decodeGzip($body)
     {
         if (! function_exists('gzinflate')) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'zlib extension is required in order to decode "gzip" encoding'
             );
         }
@@ -622,7 +621,7 @@ class Response
     public static function decodeDeflate($body)
     {
         if (! function_exists('gzuncompress')) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'zlib extension is required in order to decode "deflate" encoding'
             );
         }

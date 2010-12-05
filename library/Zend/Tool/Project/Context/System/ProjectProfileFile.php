@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -53,7 +52,7 @@ class ProjectProfileFile
     protected $_filesystemName = '.zfproject.xml';
 
     /**
-     * @var \Zend\Tool\Project\Profile
+     * @var \Zend\Tool\Project\Profile\Profile
      */
     protected $_profile = null;
     
@@ -70,7 +69,7 @@ class ProjectProfileFile
     /**
      * setProfile()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @return \Zend\Tool\Project\Context\System\ProjectProfileFile
      */
     public function setProfile($profile)

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 
@@ -92,12 +91,12 @@ class Zend_Service_Flickr_OfflineTest extends PHPUnit_Framework_TestCase
         /**
          * @see Zend_Http_Client_Adapter_Socket
          */
-        $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
+        $this->_httpClientAdapterSocket = new Zend\Http\Client\Adapter\Socket();
 
         /**
          * @see Zend_Http_Client_Adapter_Test
          */
-        $this->_httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
+        $this->_httpClientAdapterTest = new Zend\Http\Client\Adapter\Test();
     }
 
     /**

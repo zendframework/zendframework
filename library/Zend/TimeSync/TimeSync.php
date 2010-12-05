@@ -16,7 +16,6 @@
  * @category   Zend
  * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,6 +23,7 @@
  * @namespace
  */
 namespace Zend\TimeSync;
+use Zend\TimeSync\Exception;
 
 /**
  * @uses       \Zend\Date\Date
@@ -167,7 +167,7 @@ class TimeSync implements \IteratorAggregate
         if (isset($this->_timeservers[$alias]) === true) {
             $this->_current = $this->_timeservers[$alias];
         } else {
-            throw new Exception("'$alias' does not point to valid timeserver");
+            throw new Exception\InvalidArgumentException("'$alias' does not point to valid timeserver");
         }
     }
 
@@ -187,7 +187,7 @@ class TimeSync implements \IteratorAggregate
         if (isset(self::$options[$key]) === true) {
             return self::$options[$key];
         } else {
-            throw new Exception("'$key' does not point to valid option");
+            throw new Exception\OutOfBoundsException("'$key' does not point to valid option");
         }
     }
 
@@ -205,13 +205,13 @@ class TimeSync implements \IteratorAggregate
             if (isset($this->_current) && $this->_current !== false) {
                 return $this->_current;
             } else {
-                throw new Exception('there is no timeserver set');
+                throw new Exception\InvalidArgumentException('there is no timeserver set');
             }
         }
         if (isset($this->_timeservers[$alias]) === true) {
             return $this->_timeservers[$alias];
         } else {
-            throw new Exception("'$alias' does not point to valid timeserver");
+            throw new Exception\InvalidArgumentException("'$alias' does not point to valid timeserver");
         }
     }
 
@@ -244,13 +244,14 @@ class TimeSync implements \IteratorAggregate
                 return $server->getDate($locale);
             } catch (Exception $e) {
                 if (!isset($masterException)) {
-                    $masterException = new Exception('all timeservers are bogus');
+                    $masterException = new Exception\RuntimeException($e->getMessage(), $e->getCode());
+                } else {
+                    $masterException = new Exception\RuntimeException($e->getMessage(), $e->getCode(), $masterException);
                 }
-                $masterException->addException($e);
             }
         }
 
-        throw $masterException;
+        throw new Exception\RuntimeException('All timeservers are bogus', 0, $masterException);
     }
 
     /**
@@ -286,7 +287,7 @@ class TimeSync implements \IteratorAggregate
 
         $protocol = ucfirst(strtolower($protocol));
         if (!in_array($protocol, $this->_allowedSchemes)) {
-            throw new Exception("'$protocol' is not a supported protocol");
+            throw new Exception\RuntimeException("'$protocol' is not a supported protocol");
         }
 
         $className = 'Zend\\TimeSync\\' . $protocol;

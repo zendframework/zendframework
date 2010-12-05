@@ -17,15 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
- */
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_DeveloperGarden_SecurityTokenServerTest::main');
-}
-
-/**
- * Test helper
  */
 
 /**
@@ -42,9 +33,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @category   Zend
  * @package    Zend_Service_DeveloperGarden
  * @subpackage UnitTests
+ * @group      Zend_Service
+ * @group      Zend_Service_DeveloperGarden
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUnit_Framework_TestCase
 {
@@ -52,12 +44,6 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
      * @var Zend_Service_DeveloperGarden_OfflineSecurityTokenServer_Mock
      */
     protected $_service = null;
-
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -230,24 +216,24 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
 
     public function testTokenCacheSetCache()
     {
-        $cache = Zend_Cache::factory('Core', 'File', array(), array());
+        $cache = Zend\Cache\Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
         $this->assertType(
-            'Zend_Cache_Core',
+            'Zend\\Cache\\Frontend\\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
     }
 
     public function testTokenCacheRemoveCache()
     {
-        $cache = Zend_Cache::factory('Core', 'File', array(), array());
+        $cache = Zend\Cache\Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
         $this->assertType(
-            'Zend_Cache_Core',
+            'Zend\\Cache\\Frontend\\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
 
@@ -259,12 +245,12 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
 
     public function testTokenCacheClearCache()
     {
-        $cache = Zend_Cache::factory('Core', 'File', array(), array());
+        $cache = Zend\Cache\Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
         $this->assertType(
-            'Zend_Cache_Core',
+            'Zend\\Cache\\Frontend\\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
 
@@ -278,12 +264,12 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
             'getTokens'
         );
 
-        $cache = Zend_Cache::factory('Core', 'File', array(), array());
+        $cache = Zend\Cache\Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
         $this->assertType(
-            'Zend_Cache_Core',
+            'Zend\\Cache\\Frontend\\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
 
@@ -301,8 +287,4 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServer_Mock
     extends Zend_Service_DeveloperGarden_SecurityTokenServer
 {
 
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest::main') {
-    Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest::main();
 }

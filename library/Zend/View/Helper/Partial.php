@@ -16,7 +16,6 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +35,7 @@ namespace Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Partial extends \Zend\View\Helper\AbstractHelper
+class Partial extends AbstractHelper
 {
     /**
      * Variable to which object will be assigned
@@ -93,14 +92,14 @@ class Partial extends \Zend\View\Helper\AbstractHelper
 
         if (!empty($model)) {
             if (is_array($model)) {
-                $view->assign($model);
+                $view->vars()->assign($model);
             } elseif (is_object($model)) {
                 if (null !== ($objectKey = $this->getObjectKey())) {
-                    $view->assign($objectKey, $model);
+                    $view->vars()->assign($objectKey, $model);
                 } elseif (method_exists($model, 'toArray')) {
-                    $view->assign($model->toArray());
+                    $view->vars()->assign($model->toArray());
                 } else {
-                    $view->assign(get_object_vars($model));
+                    $view->vars()->assign(get_object_vars($model));
                 }
             }
         }
@@ -116,7 +115,7 @@ class Partial extends \Zend\View\Helper\AbstractHelper
     public function cloneView()
     {
         $view = clone $this->view;
-        $view->clearVars();
+        $view->vars()->clear();
         return $view;
     }
 

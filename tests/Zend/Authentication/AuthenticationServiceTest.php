@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id $
  */
 
 /**
@@ -36,7 +35,7 @@ use Zend\Authentication\AuthenticationService,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Auth
  */
-class AuthTest extends \PHPUnit_Framework_TestCase
+class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

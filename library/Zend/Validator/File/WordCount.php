@@ -16,7 +16,6 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -54,8 +53,6 @@ class WordCount extends Count
     );
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the counted words are at least min and
      * not bigger than max (when max is not null).
      *

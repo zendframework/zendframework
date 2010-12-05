@@ -16,7 +16,6 @@
  * @package   Zend_Date
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -255,17 +254,17 @@ class Date extends DateObject
                 switch($name) {
                     case 'format_type' :
                         if ((strtolower($value) != 'php') && (strtolower($value) != 'iso')) {
-                            throw new Exception("Unknown format type ($value) for dates, only 'iso' and 'php' supported", 0, null, $value);
+                            throw new Exception\InvalidArgumentException("Unknown format type ($value) for dates, only 'iso' and 'php' supported"); /*, 0, null, $value */
                         }
                         break;
                     case 'fix_dst' :
                         if (!is_bool($value)) {
-                            throw new Exception("'fix_dst' has to be boolean", 0, null, $value);
+                            throw new Exception\InvalidArgumentException("'fix_dst' has to be boolean"); /* , 0, null, $value */
                         }
                         break;
                     case 'extend_month' :
                         if (!is_bool($value)) {
-                            throw new Exception("'extend_month' has to be boolean", 0, null, $value);
+                            throw new Exception\InvalidArgumentException("'extend_month' has to be boolean"); /* ); */
                         }
                         break;
                     case 'cache' :
@@ -273,7 +272,7 @@ class Date extends DateObject
                             parent::$_cache = null;
                         } else {
                             if (!$value instanceof \Zend\Cache\Frontend) {
-                                throw new Exception("Instance of Zend_Cache expected");
+                                throw new Exception\InvalidArgumentException("Instance of Zend_Cache expected");
                             }
 
                             parent::$_cache = $value;
@@ -285,7 +284,7 @@ class Date extends DateObject
                             parent::$_defaultOffset = 0;
                         } else {
                             if (!$value instanceof TimeSync\Protocol) {
-                                throw new Exception("Instance of Zend_TimeSync expected");
+                                throw new Exception\InvalidArgumentException("Instance of Zend_TimeSync expected for option timesync");
                             }
 
                             $date = $value->getInfo();
@@ -296,7 +295,7 @@ class Date extends DateObject
                 self::$_options[$name] = $value;
             }
             else {
-                throw new Exception("Unknown option: $name = $value");
+                throw new Exception\InvalidArgumentException("Unknown option: $name = $value");
             }
         }
     }
@@ -334,7 +333,7 @@ class Date extends DateObject
             if (isset($stamp['timestamp']) === true) {
                 $stamp = $stamp['timestamp'];
             } else {
-                throw new Exception('no timestamp given in array');
+                throw new Exception\RuntimeException('no timestamp given in array');
             }
         }
 
@@ -1031,7 +1030,7 @@ class Date extends DateObject
                 return 12;
 
             default:
-                throw new Exception('Month ($name) is not a known month');
+                throw new Exception\InvalidArgumentException('Month ($name) is not a known month');
         }
     }
 
@@ -1288,7 +1287,7 @@ class Date extends DateObject
     private function _calculate($calc, $date, $part, $locale)
     {
         if ($date === null) {
-            throw new Exception('parameter $date must be set, null is not allowed');
+            throw new Exception\RuntimeException('parameter $date must be set, null is not allowed');
         }
 
         if (($part !== null) && (strlen($part) !== 2) && (Locale::isLocale($part, null, false))) {
@@ -1406,7 +1405,7 @@ class Date extends DateObject
                         }
                         break;
                     default:
-                        throw new Exception("datepart for part ($part) not found in array");
+                        throw new Exception\RuntimeException("datepart for part ($part) not found in array");
                         break;
                 }
             } else {
@@ -1449,7 +1448,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, 1, 1 + intval($day), 1970, true), $hour);
                 }
 
-                throw new Exception("invalid date ($date) operand, day expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, day expected");
                 break;
 
             case self::WEEKDAY_SHORT:
@@ -1472,7 +1471,7 @@ class Date extends DateObject
                 }
 
                 // Weekday not found
-                throw new Exception("invalid date ($date) operand, weekday expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, weekday expected");
                 break;
 
             case self::DAY_SHORT:
@@ -1481,7 +1480,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, 1, 1 + intval($day), 1970, true), $hour);
                 }
 
-                throw new Exception("invalid date ($date) operand, day expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, day expected");
                 break;
 
             case self::WEEKDAY:
@@ -1504,7 +1503,7 @@ class Date extends DateObject
                 }
 
                 // Weekday not found
-                throw new Exception("invalid date ($date) operand, weekday expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, weekday expected");
                 break;
 
             case self::WEEKDAY_8601:
@@ -1515,11 +1514,11 @@ class Date extends DateObject
                 }
 
                 // Weekday not found
-                throw new Exception("invalid date ($date) operand, weekday expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, weekday expected");
                 break;
 
             case self::DAY_SUFFIX:
-                throw new Exception('day suffix not supported', 0, null, $date);
+                throw new Exception\RuntimeException('day suffix not supported');
                 break;
 
             case self::WEEKDAY_DIGIT:
@@ -1530,7 +1529,7 @@ class Date extends DateObject
                 }
 
                 // Weekday not found
-                throw new Exception("invalid date ($date) operand, weekday expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, weekday expected");
                 break;
 
             case self::DAY_OF_YEAR:
@@ -1545,7 +1544,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, $month, $day, $year, true), $hour);
                 }
 
-                throw new Exception("invalid date ($date) operand, day expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, day expected");
                 break;
 
             case self::WEEKDAY_NARROW:
@@ -1567,7 +1566,7 @@ class Date extends DateObject
                 }
 
                 // Weekday not found
-                throw new Exception("invalid date ($date) operand, weekday expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, weekday expected");
                 break;
 
             case self::WEEKDAY_NAME:
@@ -1589,7 +1588,7 @@ class Date extends DateObject
                 }
 
                 // Weekday not found
-                throw new Exception("invalid date ($date) operand, weekday expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, weekday expected");
                 break;
 
             // week formats
@@ -1600,7 +1599,7 @@ class Date extends DateObject
                                                  parent::mktime(0, 0, 0, 1, 1 + ($week * 7), 1970, true), $hour);
                 }
 
-                throw new Exception("invalid date ($date) operand, week expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, week expected");
                 break;
 
             // month formats
@@ -1643,7 +1642,7 @@ class Date extends DateObject
                 }
 
                 // Monthname not found
-                throw new Exception("invalid date ($date) operand, month expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, month expected");
                 break;
 
             case self::MONTH:
@@ -1672,7 +1671,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, $month, $day, $year, true), $hour);
                 }
 
-                throw new Exception("invalid date ($date) operand, month expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, month expected");
                 break;
 
             case self::MONTH_NAME_SHORT:
@@ -1714,7 +1713,7 @@ class Date extends DateObject
                 }
 
                 // Monthname not found
-                throw new Exception("invalid date ($date) operand, month expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, month expected");
                 break;
 
             case self::MONTH_SHORT:
@@ -1744,11 +1743,11 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, $month, $day,           $year, true), $hour);
                 }
 
-                throw new Exception("invalid date ($date) operand, month expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, month expected");
                 break;
 
             case self::MONTH_DAYS:
-                throw new Exception('month days not supported', 0, null, $date);
+                throw new Exception\RuntimeException('month days not supported');
                 break;
 
             case self::MONTH_NAME_NARROW:
@@ -1790,12 +1789,12 @@ class Date extends DateObject
                 }
 
                 // Monthname not found
-                throw new Exception("invalid date ($date) operand, month expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, month expected");
                 break;
 
             // year formats
             case self::LEAPYEAR:
-                throw new Exception('leap year not supported', 0, null, $date);
+                throw new Exception\RuntimeException('leap year not supported');
                 break;
 
             case self::YEAR_8601:
@@ -1812,7 +1811,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, $month, $day, $year,         true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, year expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, year expected");
                 break;
 
             case self::YEAR:
@@ -1829,7 +1828,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, $month, $day, $year,         true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, year expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, year expected");
                 break;
 
             case self::YEAR_SHORT:
@@ -1850,7 +1849,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, $month, $day, $year, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, year expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, year expected");
                 break;
 
             case self::YEAR_SHORT_8601:
@@ -1871,12 +1870,12 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, 0, $month, $day, $year, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, year expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, year expected");
                 break;
 
             // time formats
             case self::MERIDIEM:
-                throw new Exception('meridiem not supported', 0, null, $date);
+                throw new Exception\RuntimeException('meridiem not supported');
                 break;
 
             case self::SWATCH:
@@ -1891,7 +1890,7 @@ class Date extends DateObject
                                                  $this->mktime($hour,  $minute,  $second,  1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, swatchstamp expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, swatchstamp expected");
                 break;
 
             case self::HOUR_SHORT_AM:
@@ -1900,7 +1899,7 @@ class Date extends DateObject
                                                  $this->mktime($hour,         0, 0, 1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, hour expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, hour expected");
                 break;
 
             case self::HOUR_SHORT:
@@ -1909,7 +1908,7 @@ class Date extends DateObject
                                                  $this->mktime($hour,         0, 0, 1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, hour expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, hour expected");
                 break;
 
             case self::HOUR_AM:
@@ -1918,7 +1917,7 @@ class Date extends DateObject
                                                  $this->mktime($hour,         0, 0, 1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, hour expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, hour expected");
                 break;
 
             case self::HOUR:
@@ -1927,7 +1926,7 @@ class Date extends DateObject
                                                  $this->mktime($hour,         0, 0, 1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, hour expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, hour expected");
                 break;
 
             case self::MINUTE:
@@ -1936,7 +1935,7 @@ class Date extends DateObject
                                                  $this->mktime(0, $minute,       0, 1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, minute expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, minute expected");
                 break;
 
             case self::SECOND:
@@ -1945,7 +1944,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, $second,       1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, second expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, second expected");
                 break;
 
             case self::MILLISECOND:
@@ -1965,7 +1964,7 @@ class Date extends DateObject
                     return $this->compareMillisecond($date);
                 }
 
-                throw new Exception("invalid date ($date) operand, milliseconds expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, milliseconds expected");
                 break;
 
             case self::MINUTE_SHORT:
@@ -1974,7 +1973,7 @@ class Date extends DateObject
                                                  $this->mktime(0, $minute,       0, 1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, minute expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, minute expected");
                 break;
 
             case self::SECOND_SHORT:
@@ -1983,7 +1982,7 @@ class Date extends DateObject
                                                  $this->mktime(0, 0, $second,       1, 1, 1970, true), false);
                 }
 
-                throw new Exception("invalid date ($date) operand, second expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, second expected");
                 break;
 
             // timezone formats
@@ -1991,16 +1990,16 @@ class Date extends DateObject
             case self::TIMEZONE_NAME:
             case self::TIMEZONE:
             case self::TIMEZONE_SECS:
-                throw new Exception('timezone not supported', 0, null, $date);
+                throw new Exception\RuntimeException('timezone not supported');
                 break;
 
             case self::DAYLIGHT:
-                throw new Exception('daylight not supported', 0, null, $date);
+                throw new Exception\RuntimeException('daylight not supported');
                 break;
 
             case self::GMT_DIFF:
             case self::GMT_DIFF_SEP:
-                throw new Exception('gmtdiff not supported', 0, null, $date);
+                throw new Exception\RuntimeException('gmtdiff not supported');
                 break;
 
             // date strings
@@ -2033,7 +2032,7 @@ class Date extends DateObject
                     preg_match('/[T,\s]{0,1}(\d{2})(\d{2})(\d{2})/', $tmpdate, $timematch);
                 }
                 if (empty($datematch) and empty($timematch)) {
-                    throw new Exception("unsupported ISO8601 format ($date)", 0, null, $date);
+                    throw new Exception\RuntimeException("unsupported ISO8601 format ($date)");
                 }
                 if (!empty($timematch)) {
                     $timeMatchCharCount = iconv_strlen($timematch[0], 'UTF-8');
@@ -2070,7 +2069,7 @@ class Date extends DateObject
             case self::RFC_2822:
                 $result = preg_match('/^\w{3},\s(\d{1,2})\s(\w{3})\s(\d{4})\s(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]{1}\d{4})$/', $date, $match);
                 if (!$result) {
-                    throw new Exception("no RFC 2822 format ($date)", 0, null, $date);
+                    throw new Exception\RuntimeException("no RFC 2822 format ($date)");
                 }
 
                 $months  = $this->_getDigitFromName($match[2]);
@@ -2092,14 +2091,14 @@ class Date extends DateObject
                     return $this->_assign($calc, $date, $this->getUnixTimestamp());
                 }
 
-                throw new Exception("invalid date ($date) operand, timestamp expected", 0, null, $date);
+                throw new Exception\RuntimeException("invalid date ($date) operand, timestamp expected");
                 break;
 
             // additional formats
             // break intentionally omitted
             case self::ERA:
             case self::ERA_NAME:
-                throw new Exception('era not supported', 0, null, $date);
+                throw new Exception\RuntimeException('era not supported');
                 break;
 
             case self::DATES:
@@ -2118,7 +2117,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime(0, 0, 0, 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime(0, 0, 0, 1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2138,7 +2137,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime(0, 0, 0, 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime(0, 0, 0, 1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2158,7 +2157,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime(0, 0, 0, 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime(0, 0, 0, 1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2178,7 +2177,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime(0, 0, 0, 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime(0, 0, 0, 1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2200,7 +2199,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime(0, 0, 0, 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime(0, 0, 0, 1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2215,7 +2214,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], $month, $day, $year, true),
                                                  $this->mktime($hour,           $minute,           $second,           $month, $day, $year, true), false);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2236,7 +2235,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], $month, $day, $year, true),
                                                  $this->mktime($hour,           $minute,           $second,           $month, $day, $year, true), false);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2252,7 +2251,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], $month, $day, $year, true),
                                                  $this->mktime($hour,           $minute,           $second,           $month, $day, $year, true), false);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2268,7 +2267,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], $month, $day, $year, true),
                                                  $this->mktime($hour,           $minute,           $second,           $month, $day, $year, true), false);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2289,7 +2288,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], $month, $day, $year, true),
                                                  $this->mktime($hour,           $minute,           $second,           $month, $day, $year, true), false);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2307,7 +2306,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime($hour,           $minute,           $second,           1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2332,7 +2331,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime($hour,           $minute,           $second,           1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2352,7 +2351,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime($hour,           $minute,           $second,           1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2371,7 +2370,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime($hour,           $minute,           $second,           1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2398,7 +2397,7 @@ class Date extends DateObject
                     return $this->_assign($calc, $this->mktime($parsed['hour'], $parsed['minute'], $parsed['second'], 1 + $parsed['month'], 1 + $parsed['day'], 1970 + $parsed['year'], true),
                                                  $this->mktime($hour,           $minute,           $second,           1 + $month,           1 + $day,           1970 + $year,           true), $hour);
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e, $date);
+                    throw new Exception\RuntimeException($e->getMessage());
                 }
                 break;
 
@@ -2407,7 +2406,7 @@ class Date extends DateObject
             case self::RFC_3339:
                 $result = preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\d{0,4}([+-]{1}\d{2}:\d{2}|Z)$/', $date, $match);
                 if (!$result) {
-                    throw new Exception("invalid date ($date) operand, ATOM format expected", 0, null, $date);
+                    throw new Exception\RuntimeException("invalid date ($date) operand, ATOM format expected");
                 }
 
                 if (($calc == 'set') || ($calc == 'cmp')) {
@@ -2425,7 +2424,7 @@ class Date extends DateObject
             case self::COOKIE:
                 $result = preg_match("/^\w{6,9},\s(\d{2})-(\w{3})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\s.{3,20}$/", $date, $match);
                 if (!$result) {
-                    throw new Exception("invalid date ($date) operand, COOKIE format expected", 0, null, $date);
+                    throw new Exception\RuntimeException("invalid date ($date) operand, COOKIE format expected");
                 }
                 $matchStartPos = iconv_strpos($match[0], ' ', 0, 'UTF-8') + 1;
                 $match[0] = iconv_substr($match[0],
@@ -2453,7 +2452,7 @@ class Date extends DateObject
                 // new RFC 822 format, identical to RFC 1036 standard
                 $result = preg_match('/^\w{0,3},{0,1}\s{0,1}(\d{1,2})\s(\w{3})\s(\d{2})\s(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]{1}\d{4}|\w{1,20})$/', $date, $match);
                 if (!$result) {
-                    throw new Exception("invalid date ($date) operand, RFC 822 date format expected", 0, null, $date);
+                    throw new Exception\RuntimeException("invalid date ($date) operand, RFC 822 date format expected");
                 }
 
                 $months    = $this->_getDigitFromName($match[2]);
@@ -2474,7 +2473,7 @@ class Date extends DateObject
             case self::RFC_850:
                 $result = preg_match('/^\w{6,9},\s(\d{2})-(\w{3})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\s.{3,21}$/', $date, $match);
                 if (!$result) {
-                    throw new Exception("invalid date ($date) operand, RFC 850 date format expected", 0, null, $date);
+                    throw new Exception\RuntimeException("invalid date ($date) operand, RFC 850 date format expected");
                 }
 
                 $months    = $this->_getDigitFromName($match[2]);
@@ -2495,7 +2494,7 @@ class Date extends DateObject
             case self::RFC_1123:
                 $result = preg_match('/^\w{0,3},{0,1}\s{0,1}(\d{1,2})\s(\w{3})\s(\d{2,4})\s(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]{1}\d{4}|\w{1,20})$/', $date, $match);
                 if (!$result) {
-                    throw new Exception("invalid date ($date) operand, RFC 1123 date format expected", 0, null, $date);
+                    throw new Exception\RuntimeException("invalid date ($date) operand, RFC 1123 date format expected");
                 }
 
                 $months  = $this->_getDigitFromName($match[2]);
@@ -2515,7 +2514,7 @@ class Date extends DateObject
             case self::RSS:
                 $result = preg_match('/^\w{3},\s(\d{2})\s(\w{3})\s(\d{2,4})\s(\d{1,2}):(\d{2}):(\d{2})\s.{1,21}$/', $date, $match);
                 if (!$result) {
-                    throw new Exception("invalid date ($date) operand, RSS date format expected", 0, null, $date);
+                    throw new Exception\RuntimeException("invalid date ($date) operand, RSS date format expected");
                 }
 
                 $months  = $this->_getDigitFromName($match[2]);
@@ -2536,7 +2535,7 @@ class Date extends DateObject
             case self::W3C:
                 $result = preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})[+-]{1}\d{2}:\d{2}$/', $date, $match);
                 if (!$result) {
-                    throw new Exception("invalid date ($date) operand, W3C date format expected", 0, null, $date);
+                    throw new Exception\RuntimeException("invalid date ($date) operand, W3C date format expected");
                 }
 
                 if (($calc == 'set') || ($calc == 'cmp')) {
@@ -2594,7 +2593,7 @@ class Date extends DateObject
                             false), $this->getUnixTimestamp(), false);
                     } catch (\Zend\Locale\Exception $e) {
                         if (!is_numeric($date)) {
-                            throw new Exception($e->getMessage(), 0, $e, $date);
+                            throw new Exception\RuntimeException($e->getMessage(), 0, $e);
                         }
                     }
                 }
@@ -2703,7 +2702,7 @@ class Date extends DateObject
     private function _time($calc, $time, $format, $locale)
     {
         if ($time === null) {
-            throw new Exception('parameter $time must be set, null is not allowed');
+            throw new Exception\InvalidArgumentException('parameter $time must be set, null is not allowed');
         }
 
         if ($time instanceof Date) {
@@ -2715,7 +2714,7 @@ class Date extends DateObject
                     (isset($time['second']) === true)) {
                     $parsed = $time;
                 } else {
-                    throw new Exception("no hour, minute or second given in array");
+                    throw new Exception\InvalidArgumentException("no hour, minute or second given in array");
                 }
             } else {
                 if (self::$_options['format_type'] == 'php') {
@@ -2728,7 +2727,7 @@ class Date extends DateObject
 
                     $parsed = Format::getTime($time, array('date_format' => $format, 'locale' => $locale, 'format_type' => 'iso'));
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e);
+                    throw new Exception\InvalidArgumentException($e->getMessage(), 0, $e);
                 }
             }
 
@@ -2862,7 +2861,7 @@ class Date extends DateObject
     private function _date($calc, $date, $format, $locale)
     {
         if ($date === null) {
-            throw new Exception('parameter $date must be set, null is not allowed');
+            throw new Exception\InvalidArgumentException('parameter $date must be set, null is not allowed');
         }
 
         if ($date instanceof Date) {
@@ -2874,7 +2873,7 @@ class Date extends DateObject
                     (isset($date['day']) === true)) {
                     $parsed = $date;
                 } else {
-                    throw new Exception("no day,month or year given in array");
+                    throw new Exception\InvalidArgumentException("no day,month or year given in array");
                 }
             } else {
                 if ((self::$_options['format_type'] == 'php') && !defined($format)) {
@@ -2890,7 +2889,7 @@ class Date extends DateObject
                         $parsed['year'] = self::getFullYear($parsed['year']);
                     }
                 } catch (\Zend\Locale\Exception $e) {
-                    throw new Exception($e->getMessage(), 0, $e);
+                    throw new Exception\InvalidArgumentException($e->getMessage(), 0, $e);
                 }
             }
 
@@ -3173,13 +3172,13 @@ class Date extends DateObject
     private function _checkLocation($location)
     {
         if (!isset($location['longitude']) or !isset($location['latitude'])) {
-            throw new Exception('Location must include \'longitude\' and \'latitude\'', 0, null, $location);
+            throw new Exception\InvalidArgumentException('Location must include \'longitude\' and \'latitude\'');
         }
         if (($location['longitude'] > 180) or ($location['longitude'] < -180)) {
-            throw new Exception('Longitude must be between -180 and 180', 0, null, $location);
+            throw new Exception\InvalidArgumentException('Longitude must be between -180 and 180');
         }
         if (($location['latitude'] > 90) or ($location['latitude'] < -90)) {
-            throw new Exception('Latitude must be between -90 and 90', 0, null, $location);
+            throw new Exception\InvalidArgumentException('Latitude must be between -90 and 90');
         }
 
         if (!isset($location['horizon'])){
@@ -3300,12 +3299,12 @@ class Date extends DateObject
             if (isset($year['year']) === true) {
                 $year = $year['year'];
             } else {
-                throw new Exception("no year given in array");
+                throw new Exception\InvalidArgumentException("no year given in array");
             }
         }
 
         if (!is_numeric($year)) {
-            throw new Exception("year ($year) has to be integer for checkLeapYear()", 0, null, $year);
+            throw new Exception\InvalidArgumentException("year ($year) has to be integer for checkLeapYear()");
         }
 
         return (bool) parent::isYearLeapYear($year);
@@ -3428,7 +3427,7 @@ class Date extends DateObject
     private function _calcvalue($calc, $value, $type, $parameter, $locale)
     {
         if ($value === null) {
-            throw new Exception("parameter $type must be set, null is not allowed");
+            throw new Exception\InvalidArgumentException("parameter $type must be set, null is not allowed");
         }
 
         if ($locale === null) {
@@ -3439,7 +3438,7 @@ class Date extends DateObject
             // extract value from object
             $value = $value->toString($parameter, 'iso', $locale);
         } else if (!is_array($value) && !is_numeric($value) && ($type != 'iso') && ($type != 'arpa')) {
-            throw new Exception("invalid $type ($value) operand", 0, null, $value);
+            throw new Exception\InvalidArgumentException("invalid $type ($value) operand");
         }
 
         $return = $this->_calcdetail($calc, $value, $parameter, $locale);
@@ -3573,7 +3572,7 @@ class Date extends DateObject
     private function _month($calc, $month, $locale)
     {
         if ($month === null) {
-            throw new Exception('parameter $month must be set, null is not allowed');
+            throw new Exception\InvalidArgumentException('parameter $month must be set, null is not allowed');
         }
 
         if ($locale === null) {
@@ -3590,7 +3589,7 @@ class Date extends DateObject
                 if (isset($month['month']) === true) {
                     $month = $month['month'];
                 } else {
-                    throw new Exception("no month given in array");
+                    throw new Exception\InvalidArgumentException("no month given in array");
                 }
             } else {
                 $monthlist  = Data::getList($locale, 'month');
@@ -3616,7 +3615,7 @@ class Date extends DateObject
                     }
                 }
                 if ($found == 0) {
-                    throw new Exception("unknown month name ($month)", 0, null, $month);
+                    throw new Exception\InvalidArgumentException("unknown month name ($month)");
                 }
             }
         }
@@ -3725,7 +3724,7 @@ class Date extends DateObject
     private function _day($calc, $day, $locale)
     {
         if ($day === null) {
-            throw new Exception('parameter $day must be set, null is not allowed');
+            throw new Exception\InvalidArgumentException('parameter $day must be set, null is not allowed');
         }
 
         if ($locale === null) {
@@ -3743,7 +3742,7 @@ class Date extends DateObject
                 $day = $day['day'];
                 $type = self::WEEKDAY;
             } else {
-                throw new Exception("no day given in array");
+                throw new Exception\InvalidArgumentException("no day given in array");
             }
         } else {
             switch (iconv_strlen($day, 'UTF-8')) {
@@ -3873,7 +3872,7 @@ class Date extends DateObject
     private function _weekday($calc, $weekday, $locale)
     {
         if ($weekday === null) {
-            throw new Exception('parameter $weekday must be set, null is not allowed');
+            throw new Exception\InvalidArgumentException('parameter $weekday must be set, null is not allowed');
         }
 
         if ($locale === null) {
@@ -3891,7 +3890,7 @@ class Date extends DateObject
                 $weekday = $weekday['weekday'];
                 $type = self::WEEKDAY;
             } else {
-                throw new Exception("no weekday given in array");
+                throw new Exception\InvalidArgumentException("no weekday given in array");
             }
         } else {
             switch(iconv_strlen($weekday, 'UTF-8')) {
@@ -4350,7 +4349,7 @@ class Date extends DateObject
     public function setFractionalPrecision($precision)
     {
         if (!intval($precision) or ($precision < 0) or ($precision > 9)) {
-            throw new Exception("precision ($precision) must be a positive integer less than 10", 0, null, $precision);
+            throw new Exception\InvalidArgumentException("precision ($precision) must be a positive integer less than 10");
         }
 
         $this->_precision = (int) $precision;
@@ -4390,7 +4389,7 @@ class Date extends DateObject
             $milli = intval($milli);
             $precision = 6;
         } else if (!is_numeric($milli)) {
-            throw new Exception("invalid milli second ($milli) operand", 0, null, $milli);
+            throw new Exception\InvalidArgumentException("invalid milli second ($milli) operand");
         }
 
         if ($precision === null) {
@@ -4398,7 +4397,7 @@ class Date extends DateObject
         }
 
         if (!is_int($precision) || $precision < 1 || $precision > 9) {
-            throw new Exception("precision ($precision) must be a positive integer less than 10", 0, null, $precision);
+            throw new Exception\InvalidArgumentException("precision ($precision) must be a positive integer less than 10");
         }
 
         $this->_fractional = 0;
@@ -4420,7 +4419,7 @@ class Date extends DateObject
             list($milli, $time) = explode(" ", microtime());
             $milli = intval($milli);
         } else if (!is_numeric($milli)) {
-            throw new Exception("invalid milli second ($milli) operand", 0, null, $milli);
+            throw new Exception\InvalidArgumentException("invalid milli second ($milli) operand");
         }
 
         if ($precision === null) {
@@ -4431,7 +4430,7 @@ class Date extends DateObject
         }
 
         if (!is_int($precision) || $precision < 1 || $precision > 9) {
-            throw new Exception("precision ($precision) must be a positive integer less than 10", 0, null, $precision);
+            throw new Exception\InvalidArgumentException("precision ($precision) must be a positive integer less than 10");
         }
 
         $this->_fractional += $milli;
@@ -4488,17 +4487,17 @@ class Date extends DateObject
             list($milli, $time) = explode(" ", microtime());
             $milli = intval($milli);
         } else if (is_numeric($milli) === false) {
-            throw new Exception("invalid milli second ($milli) operand", 0, null, $milli);
+            throw new Exception\InvalidArgumentException("invalid milli second ($milli) operand");
         }
 
         if ($precision === null) {
             $precision = strlen($milli);
         } else if (!is_int($precision) || $precision < 1 || $precision > 9) {
-            throw new Exception("precision ($precision) must be a positive integer less than 10", 0, null, $precision);
+            throw new Exception\InvalidArgumentException("precision ($precision) must be a positive integer less than 10");
         }
 
         if ($precision === 0) {
-            throw new Exception('precision is 0');
+            throw new Exception\InvalidArgumentException('precision is 0');
         }
 
         if ($precision != $this->_precision) {
@@ -4614,7 +4613,7 @@ class Date extends DateObject
         try {
             $this->_locale = Locale::findLocale($locale);
         } catch (\Zend\Locale\Exception $e) {
-            throw new Exception($e->getMessage(), 0, $e);
+            throw new Exception\InvalidArgumentException($e->getMessage(), 0, $e);
         }
 
         return $this;

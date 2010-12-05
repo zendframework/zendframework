@@ -17,19 +17,20 @@
  * @subpackage Ec2
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon,
+    Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * An Amazon EC2 interface to create, delete and describe Ec2 KeyPairs.
  *
- * @uses       Zend_Service_Amazon_Ec2_Abstract
- * @uses       Zend_Service_Amazon_Ec2_Exception
+ * @uses       Zend\Service\Amazon\AbstractEc2
+ * @uses       Zend\Service\Amazon\Ec2\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -43,7 +44,7 @@ class Keypair extends AbstractEc2
      * be used to reference this key pair when launching new instances.
      *
      * @param string $keyName           A unique name for the key pair.
-     * @throws Zend_Service_Amazon_Ec2_Exception
+     * @throws Zend\Service\Amazon\Ec2\Exception
      * @return array
      */
     public function create($keyName)
@@ -53,7 +54,7 @@ class Keypair extends AbstractEc2
         $params['Action'] = 'CreateKeyPair';
 
         if(!$keyName) {
-            throw new Exception('Invalid Key Name');
+            throw new Exception\InvalidArgumentException('Invalid Key Name');
         }
 
         $params['KeyName'] = $keyName;
@@ -112,7 +113,7 @@ class Keypair extends AbstractEc2
      * Deletes a key pair
      *
      * @param string $keyName           Name of the key pair to delete.
-     * @throws Zend_Service_Amazon_Ec2_Exception
+     * @throws Zend\Service\Amazon\Ec2\Exception
      * @return boolean                  Return true or false from the deletion.
      */
     public function delete($keyName)
@@ -122,7 +123,7 @@ class Keypair extends AbstractEc2
         $params['Action'] = 'DeleteKeyPair';
 
         if(!$keyName) {
-            throw new Exception('Invalid Key Name');
+            throw new Exception\InvalidArgumentException('Invalid Key Name');
         }
 
         $params['KeyName'] = $keyName;

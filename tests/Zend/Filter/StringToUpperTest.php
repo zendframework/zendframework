@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter;
@@ -90,7 +89,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -104,7 +103,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('mbstring required');
         }
 
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'is not supported');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'is not supported');
         $this->_filter->setEncoding('aaaaa');
     }
 
@@ -124,7 +123,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -156,7 +155,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }

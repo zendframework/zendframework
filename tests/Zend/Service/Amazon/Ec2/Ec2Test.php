@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,7 +26,7 @@ namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 
 /**
- * Zend_Service_Amazon_Ec2 test case.
+ * Zend\Service\Amazon\Ec2 test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -42,9 +41,9 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2
+     * @var Zend\Service\Amazon\Ec2
      */
-    private $Zend_Service_Amazon_Ec2;
+    private $ec2Instance;
 
     /**
      * Prepares the environment before running a test.

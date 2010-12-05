@@ -12,19 +12,21 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend_Cache
- * @package    UnitTests
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Cache;
 use Zend\Cache;
 
 /**
- * @category   Zend_Cache
- * @package    UnitTests
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage UnitTests
+ * @group      Zend_Cache
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

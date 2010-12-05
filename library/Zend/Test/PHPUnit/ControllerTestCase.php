@@ -16,35 +16,21 @@
  * @package    Zend_Test
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Test\PHPUnit;
-use Zend\Application;
-use Zend\Controller\Action\HelperBroker;
-use Zend\Controller\Request;
+
+use Zend\Application,
+    Zend\Controller\Front as FrontController,
+	Zend\Controller\Request,
+	Zend\Test\PHPUnit\Exception\InvalidArgumentException;
 
 /**
  * Functional testing scaffold for MVC applications
  *
- * @uses       PHPUnit_Framework_TestCase
- * @uses       PHPUnit_Runner_Version
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\Controller\Request\HttpTestCase
- * @uses       \Zend\Controller\Response\HttpTestCase
- * @uses       \Zend\Dom\Query
- * @uses       \Zend\Exception
- * @uses       \Zend\Layout\Layout
- * @uses       \Zend\Loader
- * @uses       \Zend\Registry
- * @uses       \Zend\Session\Manager
- * @uses       \Zend\Test\PHPUnit\Constraint\DomQuery
- * @uses       \Zend\Test\PHPUnit\Constraint\Redirect
- * @uses       \Zend\Test\PHPUnit\Constraint\ResponseHeader
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -94,7 +80,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
     public function __set($name, $value)
     {
         if (in_array($name, array('request', 'response', 'frontController'))) {
-            throw new \Zend\Exception(sprintf('Setting %s object manually is not allowed', $name));
+            throw new InvalidArgumentException(sprintf('Setting %s object manually is not allowed', $name));
         }
         $this->$name = $value;
     }
@@ -177,12 +163,15 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
      */
     public function dispatch($url = null)
     {
+        $controller   = $this->getFrontController();
+        $helperBroker = $controller->getHelperBroker();
+
         // redirector should not exit
-        $redirector = HelperBroker::getStaticHelper('redirector');
+        $redirector = $helperBroker->load('redirector');
         $redirector->setExit(false);
 
         // json helper should not exit
-        $json = HelperBroker::getStaticHelper('json');
+        $json = $helperBroker->load('json');
         $json->suppressExit = true;
 
         $request    = $this->getRequest();
@@ -191,17 +180,15 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
         }
         $request->setPathInfo(null);
 
-        $controller = $this->getFrontController();
-        $this->frontController
-             ->setRequest($request)
-             ->setResponse($this->getResponse())
-             ->throwExceptions(false)
-             ->returnResponse(false);
+        $controller->setRequest($request)
+                   ->setResponse($this->getResponse())
+                   ->throwExceptions(false)
+                   ->returnResponse(false);
 
         if ($this->bootstrap instanceof Application\Application) {
             $this->bootstrap->run();
         } else {
-            $this->frontController->dispatch();
+            $controller->dispatch();
         }
     }
 
@@ -223,9 +210,7 @@ abstract class ControllerTestCase extends \PHPUnit_Framework_TestCase
         $this->resetRequest();
         $this->resetResponse();
         \Zend\Layout\Layout::resetMvcInstance();
-        HelperBroker::resetHelpers();
         $this->frontController->resetInstance();
-        //\Zend\Session\Manager::$_unitTestEnabled = true;
     }
 
     /**

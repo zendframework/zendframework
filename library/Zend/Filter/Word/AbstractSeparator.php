@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -58,7 +57,7 @@ abstract class AbstractSeparator extends \Zend\Filter\PregReplace
     public function setSeparator($separator)
     {
         if ($separator == null) {
-            throw new \Zend\Filter\Exception('"' . $separator . '" is not a valid separator.');
+            throw new \Zend\Filter\Exception\InvalidArgumentException('"' . $separator . '" is not a valid separator.');
         }
         $this->_separator = $separator;
         return $this;

@@ -16,7 +16,6 @@
  * @package    Zend_Layout
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -226,8 +225,9 @@ class Layout
                 $front->unregisterPlugin($pluginClass);
             }
 
-            if (HelperBroker::hasHelper('layout')) {
-                HelperBroker::removeHelper('layout');
+            $broker = $front->getHelperBroker();
+            if ($broker->hasPlugin('layout')) {
+                $broker->unregister('layout');
             }
 
             unset($layout);
@@ -297,11 +297,14 @@ class Layout
     protected function _initHelper()
     {
         $helperClass = $this->getHelperClass();
-        if (!HelperBroker::hasHelper('layout')) {
-            if (!class_exists($helperClass)) {
-                \Zend\Loader::loadClass($helperClass);
+        $front       = Controller\Front::getInstance();
+        $broker      = $front->getHelperBroker();
+        if (!$broker->hasPlugin('layout')) {
+            $helper = new $helperClass($this);
+            $broker->register('layout', $helper);
+            if ($broker instanceof Controller\Action\HelperBroker) {
+                $broker->getStack()->offsetSet(-90, $helper);
             }
-            HelperBroker::getStack()->offsetSet(-90, new $helperClass($this));
         }
     }
 
@@ -510,7 +513,7 @@ class Layout
      * @param  \Zend\View\ViewEngine $view
      * @return \Zend\Layout\Layout
      */
-    public function setView(\Zend\View\ViewEngine $view)
+    public function setView(\Zend\View\Renderer $view)
     {
         $this->_view = $view;
         return $this;
@@ -571,7 +574,9 @@ class Layout
     public function getView()
     {
         if (null === $this->_view) {
-            $viewRenderer = HelperBroker::getStaticHelper('viewRenderer');
+            $front  = Controller\Front::getInstance();
+            $broker = $front->getHelperBroker();
+            $viewRenderer = $broker->load('viewRenderer');
             if (null === $viewRenderer->view) {
                 $viewRenderer->initView();
             }
@@ -789,13 +794,13 @@ class Layout
         $view = $this->getView();
 
         if (null !== ($path = $this->getViewScriptPath())) {
-            if (method_exists($view, 'addScriptPath')) {
-                $view->addScriptPath($path);
-            } else {
-                $view->setScriptPath($path);
+            if ($view instanceof \Zend\View\PhpRenderer) {
+                $view->resolver()->addPath($path);
             }
         } elseif (null !== ($path = $this->getViewBasePath())) {
-            $view->addBasePath($path, $this->_viewBasePrefix);
+            if ($view instanceof \Zend\View\PhpRenderer) {
+                $view->resolver()->addPath($path . '/scripts');
+            }
         }
 
         return $view->render($name);

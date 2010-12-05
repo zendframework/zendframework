@@ -16,7 +16,6 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -118,7 +117,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
     protected function _separatorToSeparatorFilter($value)
     {
         if ($this->_searchSeparator == null) {
-            throw new \Zend\Filter\Exception('You must provide a search separator for this filter to work.');
+            throw new \Zend\Filter\Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }
 
         $this->setMatchPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');

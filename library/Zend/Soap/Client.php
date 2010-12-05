@@ -17,7 +17,6 @@
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -143,7 +142,7 @@ class Client
     public function __construct($wsdl = null, $options = null)
     {
         if (!extension_loaded('soap')) {
-            throw new ClientException('SOAP extension is not loaded.');
+            throw new Exception\ExtensionNotLoadedException('SOAP extension is not loaded.');
         }
 
         if ($wsdl !== null) {
@@ -269,7 +268,7 @@ class Client
                 //    break;
 
                 default:
-                    throw new ClientException('Unknown SOAP client option');
+                    throw new Exception\InvalidArgumentException('Unknown SOAP client option');
                     break;
             }
         }
@@ -338,7 +337,7 @@ class Client
     public function setSoapVersion($version)
     {
         if (!in_array($version, array(SOAP_1_1, SOAP_1_2))) {
-            throw new ClientException('Invalid soap version specified. Use SOAP_1_1 or SOAP_1_2 constants.');
+            throw new Exception\InvalidArgumentException('Invalid soap version specified. Use SOAP_1_1 or SOAP_1_2 constants.');
         }
         $this->_soapVersion = $version;
 
@@ -368,7 +367,7 @@ class Client
     {
         foreach ($classmap as $type => $class) {
             if (!class_exists($class)) {
-                throw new ClientException('Invalid class in class map');
+                throw new Exception\InvalidArgumentException('Invalid class in class map');
             }
         }
 
@@ -430,7 +429,7 @@ class Client
     {
         $scheme = parse_url($urn, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            throw new ClientException('Invalid URN');
+            throw new Exception\InvalidArgumentException('Invalid URN');
         }
 
         return true;
@@ -505,7 +504,7 @@ class Client
     public function setStyle($style)
     {
         if (!in_array($style, array(SOAP_RPC, SOAP_DOCUMENT))) {
-            throw new ClientException('Invalid request style specified. Use SOAP_RPC or SOAP_DOCUMENT constants.');
+            throw new Exception\InvalidArgumentException('Invalid request style specified. Use SOAP_RPC or SOAP_DOCUMENT constants.');
         }
 
         $this->_style = $style;
@@ -535,7 +534,7 @@ class Client
     public function setEncodingMethod($use)
     {
         if (!in_array($use, array(SOAP_ENCODED, SOAP_LITERAL))) {
-            throw new ClientException('Invalid message encoding method. Use SOAP_ENCODED or SOAP_LITERAL constants.');
+            throw new Exception\InvalidArgumentException('Invalid message encoding method. Use SOAP_ENCODED or SOAP_LITERAL constants.');
         }
 
         $this->_use = $use;
@@ -705,7 +704,7 @@ class Client
     public function setHttpsCertificate($localCert)
     {
         if (!is_readable($localCert)) {
-            throw new ClientException('Invalid HTTPS client certificate path.');
+            throw new Exception\InvalidArgumentException('Invalid HTTPS client certificate path.');
         }
 
         $this->_local_cert = $localCert;
@@ -793,7 +792,7 @@ class Client
     public function setStreamContext($context)
     {
         if(!is_resource($context) || get_resource_type($context) !== "stream-context") {
-            throw new ClientException('Invalid stream context resource given.');
+            throw new Exception\InvalidArgumentException('Invalid stream context resource given.');
         }
 
         $this->_stream_context = $context;
@@ -981,17 +980,17 @@ class Client
 
         if ($wsdl == null) {
             if (!isset($options['location'])) {
-                throw new ClientException('\'location\' parameter is required in non-WSDL mode.');
+                throw new Exception\UnexpectedValueException('\'location\' parameter is required in non-WSDL mode.');
             }
             if (!isset($options['uri'])) {
-                throw new ClientException('\'uri\' parameter is required in non-WSDL mode.');
+                throw new Exception\UnexpectedValueException('\'uri\' parameter is required in non-WSDL mode.');
             }
         } else {
             if (isset($options['use'])) {
-                throw new ClientException('\'use\' parameter only works in non-WSDL mode.');
+                throw new Exception\UnexpectedValueException('\'use\' parameter only works in non-WSDL mode.');
             }
             if (isset($options['style'])) {
-                throw new ClientException('\'style\' parameter only works in non-WSDL mode.');
+                throw new Exception\UnexpectedValueException('\'style\' parameter only works in non-WSDL mode.');
             }
         }
         unset($options['wsdl']);
@@ -1103,7 +1102,7 @@ class Client
     public function getFunctions()
     {
         if ($this->getWSDL() == null) {
-            throw new ClientException('\'getFunctions\' method is available only in WSDL mode.');
+            throw new Exception\UnexpectedValueException(__METHOD__ . ' is available only in WSDL mode.');
         }
 
         $soapClient = $this->getSoapClient();
@@ -1126,7 +1125,7 @@ class Client
     public function getTypes()
     {
         if ($this->getWSDL() == null) {
-            throw new ClientException('\'getTypes\' method is available only in WSDL mode.');
+            throw new Exception\UnexpectedValueException(__METHOD__ . ' method is available only in WSDL mode.');
         }
 
         $soapClient = $this->getSoapClient();

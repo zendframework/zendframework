@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Cmap;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -45,10 +45,10 @@ use Zend\Pdf;
  *  <li>{@link http://partners.adobe.com/public/developer/opentype/index_cmap.html}
  * </ul>
  *
- * @todo Write code for Zend_PDF_FontCMap_HighByteMapping class.
- * @todo Write code for Zend_PDF_FontCMap_MixedCoverage class.
- * @todo Write code for Zend_PDF_FontCMap_TrimmedArray class.
- * @todo Write code for Zend_PDF_FontCMap_SegmentedCoverage class.
+ * @todo Write code for \Zend\Pdf\Cmap\HighByteMapping class.
+ * @todo Write code for \Zend\Pdf\Cmap\MixedCoverage class.
+ * @todo Write code for \Zend\Pdf\Cmap\TrimmedArray class.
+ * @todo Write code for \Zend\Pdf\Cmap\SegmentedCoverage class.
  *
  * @uses       \Zend\Pdf\Cmap\ByteEncoding
  * @uses       \Zend\Pdf\Cmap\StaticByteEncoding
@@ -162,8 +162,7 @@ abstract class AbstractCmap
                 return new StaticByteEncoding($cmapData);
 
             case self::TYPE_HIGH_BYTE_MAPPING:
-                throw new Pdf\Exception('High byte mapping cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('High byte mapping cmap currently unsupported');
 
             case self::TYPE_SEGMENT_TO_DELTA:
                 return new SegmentToDelta($cmapData);
@@ -172,20 +171,16 @@ abstract class AbstractCmap
                 return new TrimmedTable($cmapData);
 
             case self::TYPE_MIXED_COVERAGE:
-                throw new Pdf\Exception('Mixed coverage cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('Mixed coverage cmap currently unsupported');
 
             case self::TYPE_TRIMMED_ARRAY:
-                throw new Pdf\Exception('Trimmed array cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('Trimmed array cmap currently unsupported');
 
             case self::TYPE_SEGMENTED_COVERAGE:
-                throw new Pdf\Exception('Segmented coverage cmap currently unsupported',
-                                             Pdf\Exception::CMAP_TYPE_UNSUPPORTED);
+                throw new Exception\CorruptedFontException('Segmented coverage cmap currently unsupported');
 
             default:
-                throw new Pdf\Exception("Unknown cmap type: $cmapType",
-                                             Pdf\Exception::CMAP_UNKNOWN_TYPE);
+                throw new Exception\CorruptedFontException("Unknown cmap type: $cmapType");
         }
     }
 
@@ -271,8 +266,7 @@ abstract class AbstractCmap
     protected function _extractInt2(&$data, $index)
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
-            throw new Pdf\Exception("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedFontException("Index out of range: $index");
         }
         $number = ord($data[$index]);
         if (($number & 0x80) == 0x80) {    // negative
@@ -297,8 +291,7 @@ abstract class AbstractCmap
     protected function _extractUInt2(&$data, $index)
     {
         if (($index < 0) | (($index + 1) > strlen($data))) {
-            throw new Pdf\Exception("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedFontException("Index out of range: $index");
         }
         $number = (ord($data[$index]) << 8) | ord($data[++$index]);
         return $number;
@@ -323,8 +316,7 @@ abstract class AbstractCmap
     protected function _extractUInt4(&$data, $index)
     {
         if (($index < 0) | (($index + 3) > strlen($data))) {
-            throw new Pdf\Exception("Index out of range: $index",
-                                         Pdf\Exception::INDEX_OUT_OF_RANGE);
+            throw new Exception\CorruptedFontException("Index out of range: $index");
         }
         $number = (ord($data[$index]) << 24) | (ord($data[++$index]) << 16) |
                   (ord($data[++$index]) << 8) | ord($data[++$index]);

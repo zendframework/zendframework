@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf;
 
@@ -65,7 +65,7 @@ class FitHorizontally extends Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
-            throw new Pdf\Exception('Page entry must be a Zend_PDF_Page object or a page number.');
+            throw new Exception\InvalidArgumentException('$page parametr must be a \Zend\Pdf\Page object or a page number.');
         }
 
         $destinationArray->items[] = new InternalType\NameObject('FitH');
@@ -88,7 +88,7 @@ class FitHorizontally extends Explicit
      * Set top edge of the displayed page
      *
      * @param float $top
-     * @return Zend_PDF_Action_FitHorizontally
+     * @return \Zend\Pdf\Action\FitHorizontally
      */
     public function setTopEdge($top)
     {

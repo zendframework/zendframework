@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: $
  */
 
 namespace ZendTest\Filter\Compress;
@@ -111,12 +110,8 @@ class Bz2Test extends \PHPUnit_Framework_TestCase
         $filter->setBlocksize(6);
         $this->assertEquals(6, $filter->getOptions('blocksize'));
 
-        try {
-            $filter->setBlocksize(15);
-            $this->fail('Exception expected');
-        } catch(\Zend\Filter\Exception $e) {
-            $this->assertContains('must be between', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
+        $filter->setBlocksize(15);
     }
 
     /**

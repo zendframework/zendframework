@@ -17,21 +17,22 @@
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Search\Weight;
-use Zend\Search\Lucene\Search\Highlighter;
+
+use Zend\Search\Lucene,
+	Zend\Search\Lucene\Index,
+	Zend\Search\Lucene\Search\Weight,
+	Zend\Search\Lucene\Search\Highlighter,
+	Zend\Search\Lucence\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Search\Lucene\Index
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @uses       \Zend\Search\Lucene\Index\DocsFilter
  * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
  * @uses       \Zend\Search\Lucene\Search\Query\Boolean
@@ -114,13 +115,13 @@ class MultiTerm extends AbstractQuery
      *
      * @param array $terms    Array of \Zend\Search\Lucene\Index\Term objects
      * @param array $signs    Array of signs.  Sign is boolean|null.
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      */
     public function __construct($terms = null, $signs = null)
     {
         if (is_array($terms)) {
             if (count($terms) > Lucene\Lucene::getTermsPerQueryLimit()) {
-                throw new Lucene\Exception('Terms per query limit is reached.');
+                throw new InvalidArgumentException('Terms per query limit is reached.');
             }
 
             $this->_terms = $terms;

@@ -16,7 +16,6 @@
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +24,7 @@
  */
 namespace Zend\Dojo\View\Helper;
 
-use Zend\Dojo\View\Exception as DojoViewException,
+use Zend\Dojo\View\Exception,
     Zend\Registry,
     Zend\View\ViewEngine as View,
     Zend\View\Helper\AbstractHelper as AbstractViewHelper;
@@ -120,7 +119,7 @@ class Dojo extends AbstractViewHelper
     public function __call($method, $args)
     {
         if (!method_exists($this->_container, $method)) {
-            throw new DojoViewException(sprintf('Invalid method "%s" called on dojo view helper', $method));
+            throw new Exception\BadMethodCallException(sprintf('Invalid method "%s" called on dojo view helper', $method));
         }
 
         return call_user_func_array(array($this->_container, $method), $args);

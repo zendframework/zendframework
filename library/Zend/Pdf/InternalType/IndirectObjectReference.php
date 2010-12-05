@@ -14,16 +14,16 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\InternalType;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -34,7 +34,7 @@ use Zend\Pdf;
  * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
- * @package    Zend_PDF_Internal
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -97,10 +97,10 @@ class IndirectObjectReference extends AbstractTypeObject
                                 Pdf\ObjectFactory $factory)
     {
         if ( !(is_integer($objNum) && $objNum > 0) ) {
-            throw new Pdf\Exception('Object number must be positive integer');
+            throw new Exception\RuntimeException('Object number must be positive integer');
         }
         if ( !(is_integer($genNum) && $genNum >= 0) ) {
-            throw new Pdf\Exception('Generation number must be non-negative integer');
+            throw new Exception\RuntimeException('Generation number must be non-negative integer');
         }
 
         $this->_objNum  = $objNum;
@@ -139,10 +139,10 @@ class IndirectObjectReference extends AbstractTypeObject
     /**
      * Return reference to the object
      *
-     * @param Zend_PDF_Factory $factory
+     * @param \Zend\Pdf\ObjectFactory $factory
      * @return string
      */
-    public function toString($factory = null)
+    public function toString(Pdf\ObjectFactory $factory = null)
     {
         if ($factory === null) {
             $shift = 0;
@@ -178,7 +178,7 @@ class IndirectObjectReference extends AbstractTypeObject
         }
 
         if ($obj->toString() != $this->_objNum . ' ' . $this->_genNum . ' R') {
-            throw new Pdf\Exception('Incorrect reference to the object');
+            throw new Exception\RuntimeException('Incorrect reference to the object');
         }
 
         $this->_ref = $obj;

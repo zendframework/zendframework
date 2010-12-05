@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Cache;
@@ -520,6 +519,10 @@ class CoreTest extends \PHPUnit_Framework_TestCase
     {
         if (class_exists('Zend_Log', false)) {
             $this->markTestSkipped('File Zend/Log.php already included');
+        }
+
+        if (!class_exists('Zend_Cache_Core', true)) {
+            $this->markTestIncomplete('File Zend/Cache/Core.php cannot be found');
         }
 
         $cacheCore = new Zend_Cache_Core(

@@ -17,18 +17,19 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Framework\Client;
+
+use Zend\Tool\Framework\Client,
+    Zend\Tool\Project\Profile\Profile as ProjectProfile;
 
 /**
  * @uses       \Zend\Tool\Framework\Client\Exception
- * @uses       \Zend\Tool\Project\Profile
+ * @uses       \Zend\Tool\Project\Profile\Profile
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
  * @category   Zend
  * @package    Zend_Tool
@@ -84,7 +85,7 @@ class Project
             $profileData = $this->_getDefaultProfile();
         }
 
-        $newProfile = new \Zend\Tool\Project\Profile(array(
+        $newProfile = new ProjectProfile(array(
             'projectDirectory' => $path,
             'profileData' => $profileData
             ));

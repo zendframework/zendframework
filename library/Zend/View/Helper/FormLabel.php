@@ -17,7 +17,6 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -60,9 +59,9 @@ class FormLabel extends FormElement
             return  '';
         }
 
-        $value = ($escape) ? $this->view->escape($value) : $value;
+        $value = ($escape) ? $this->view->vars()->escape($value) : $value;
         $for   = (empty($attribs['disableFor']) || !$attribs['disableFor'])
-               ? ' for="' . $this->view->escape($id) . '"'
+               ? ' for="' . $this->view->vars()->escape($id) . '"'
                : '';
         if (array_key_exists('disableFor', $attribs)) {
             unset($attribs['disableFor']);

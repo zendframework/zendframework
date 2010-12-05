@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -156,9 +155,4 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
         $acutallHtml = $this->helper->direct(array(), $options);
         $this->assertEquals('<ul class="custom-class"><li></li></ul>', $acutallHtml);
     }
-}
-
-// Call Zend_View_Helper_FormErrorsTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_View_Helper_FormErrorsTest::main") {
-    \Zend_View_Helper_FormErrorsTest::main();
 }

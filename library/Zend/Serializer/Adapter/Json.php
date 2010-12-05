@@ -17,7 +17,6 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,13 +24,15 @@
  */
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception as SerializationException,
+use Zend\Serializer\Exception\InvalidArgumentException,
+    Zend\Serializer\Exception\RuntimeException,
     Zend\Json\Json as ZendJson;
 
 /**
- * @uses       Zend\Json\Json
  * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception
+ * @uses       Zend\Serializer\Exception\InvalidArgumentException
+ * @uses       Zend\Serializer\Exception\RuntimeException
+ * @uses       Zend\Json\Json
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -55,7 +56,7 @@ class Json extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws \Zend\Serializer\Exception on JSON encoding exception
+     * @throws Zend\Serializer\Exception on JSON encoding exception
      */
     public function serialize($value, array $opts = array())
     {
@@ -63,8 +64,10 @@ class Json extends AbstractAdapter
 
         try  {
             return ZendJson::encode($value, $opts['cycleCheck'], $opts);
+        } catch (\InvalidArgumentException $e) {
+            throw new InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
-            throw new SerializationException('Serialization failed', 0, $e);
+            throw new RuntimeException('Serialization failed: ' . $e->getMessage(), 0, $e);
         }
     }
 
@@ -81,13 +84,10 @@ class Json extends AbstractAdapter
 
         try {
             $ret = ZendJson::decode($json, $opts['objectDecodeType']);
+        } catch (\InvalidArgumentException $e) {
+            throw new InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
-            throw new SerializationException('Unserialization failed by previous error', 0, $e);
-        }
-
-        // json_decode returns null for invalid JSON
-        if ($ret === null && $json !== 'null') {
-            throw new SerializationException('Invalid json data');
+            throw new RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         }
 
         return $ret;

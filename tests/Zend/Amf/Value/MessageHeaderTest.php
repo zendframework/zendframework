@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,11 +24,6 @@
  */
 namespace ZendTest\Amf\Value;
 use Zend\Amf\Value;
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Amf_Value_MessageHeaderTest::main');
-}
-
 
 /**
  * Test case for Zend_Amf_Value_MessageHeader
@@ -43,17 +37,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class MessageHeaderTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Amf_Value_MessageHeaderTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testConstructorShouldSetMessageHeaderName()
     {
         $messageHeader = new Value\MessageHeader('foo', true, 'content');
@@ -96,8 +79,4 @@ class MessageHeaderTest extends \PHPUnit_Framework_TestCase
         $messageHeader = new Value\MessageHeader('foo', 'foo', 'content', '2');
         $this->assertSame(2, $messageHeader->length);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Amf_Value_MessageHeaderTest::main') {
-    \Zend_Amf_Value_MessageHeaderTest::main();
 }

@@ -17,14 +17,15 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       \Zend\Tool\Framework\Provider\Pretendable
@@ -44,21 +45,21 @@ class Action
     /**
      * createResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function createResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
 
         if (!is_string($actionName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Action::createResource() expects \"actionName\" is the name of a action resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"actionName\" is the name of a action resource to create.');
         }
 
         if (!is_string($controllerName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllerFile = self::_getControllerFileResource($profile, $controllerName, $moduleName);
@@ -71,38 +72,38 @@ class Action
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $actionName
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function hasResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
         if (!is_string($actionName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Action::createResource() expects \"actionName\" is the name of a action resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"actionName\" is the name of a action resource to create.');
         }
 
         if (!is_string($controllerName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllerFile = self::_getControllerFileResource($profile, $controllerName, $moduleName);
 
         if ($controllerFile == null) {
-            throw new Exception('Controller ' . $controllerName . ' was not found.');
+            throw new Exception\RuntimeException('Controller ' . $controllerName . ' was not found.');
         }
        
-        return (($controllerFile->search(array('actionMethod' => array('actionName' => $actionName)))) instanceof ProjectProfile\Resource);
+        return (($controllerFile->search(array('actionMethod' => array('actionName' => $actionName)))) instanceof Resource);
     }
 
     /**
      * _getControllerFileResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected static function _getControllerFileResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
@@ -133,7 +134,7 @@ class Action
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
-            throw new Exception('Action names should be camel cased.');
+            throw new Exception\RuntimeException('Action names should be camel cased.');
         }
         
         $originalName = $name;
@@ -146,7 +147,7 @@ class Action
         $controllerName = ucfirst($controllerName);
         
         if (self::hasResource($this->_loadedProfile, $name, $controllerName, $module)) {
-            throw new Exception('This controller (' . $controllerName . ') already has an action named (' . $name . ')');
+            throw new Exception\RuntimeException('This controller (' . $controllerName . ') already has an action named (' . $name . ')');
         }
         
         $actionMethod = self::createResource($this->_loadedProfile, $name, $controllerName, $module);

@@ -17,7 +17,6 @@
  * @subpackage AutoDiscover
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -122,7 +121,7 @@ class AutoDiscover implements \Zend\Server\Server
     public function setUri($uri)
     {
         if(!is_string($uri) && !($uri instanceof Uri\Uri)) {
-            throw new AutoDiscoverException(
+            throw new Exception\InvalidArgumentException(
                 'No uri given to \Zend\Soap\AutoDiscover::setUri as string or \Zend\Uri\Uri instance.'
             );
         }
@@ -165,7 +164,7 @@ class AutoDiscover implements \Zend\Server\Server
     public function setWsdlClass($wsdlClass)
     {
         if(!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend\Soap\Wsdl')) {
-            throw new AutoDiscoverException(
+            throw new Exception\InvalidArgumentException(
                 'No \Zend\Soap\Wsdl subclass given to Zend\Soap\AutoDiscover::setWsdlClass as string.'
             );
         }
@@ -196,7 +195,7 @@ class AutoDiscover implements \Zend\Server\Server
     public function setOperationBodyStyle(array $operationStyle=array())
     {
         if(!isset($operationStyle['use'])) {
-            throw new AutoDiscoverException("Key 'use' is required in Operation soap:body style.");
+            throw new Exception\InvalidArgumentException("Key 'use' is required in Operation soap:body style.");
         }
         $this->_operationBodyStyle = $operationStyle;
         return $this;
@@ -386,7 +385,7 @@ class AutoDiscover implements \Zend\Server\Server
             }
         }
         if ($prototype === null) {
-            throw new AutoDiscoverException("No prototypes could be found for the '" . $function->getName() . "' function");
+            throw new Exception\InvalidArgumentException("No prototypes could be found for the '" . $function->getName() . "' function");
         }
 
         $functionName = Wsdl::translateType($function->getName());
@@ -482,7 +481,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function fault($fault = null, $code = null)
     {
-        throw new AutoDiscoverException('Function has no use in AutoDiscover.');
+        throw new Exception\UnexpectedValueException('Function has no use in AutoDiscover.');
     }
 
     /**
@@ -508,7 +507,7 @@ class AutoDiscover implements \Zend\Server\Server
         if($this->_wsdl !== null) {
             return $this->_wsdl->dump($filename);
         } else {
-            throw new AutoDiscoverException('Cannot dump autodiscovered contents, WSDL file has not been generated yet.');
+            throw new Exception\RuntimeException('Cannot dump autodiscovered contents, WSDL file has not been generated yet.');
         }
     }
 
@@ -520,7 +519,7 @@ class AutoDiscover implements \Zend\Server\Server
         if($this->_wsdl !== null) {
             return $this->_wsdl->toXml();
         } else {
-            throw new AutoDiscoverException('Cannot return autodiscovered contents, WSDL file has not been generated yet.');
+            throw new Exception\RuntimeException('Cannot return autodiscovered contents, WSDL file has not been generated yet.');
         }
     }
 
@@ -541,7 +540,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function loadFunctions($definition)
     {
-        throw new AutoDiscoverException('Function has no use in AutoDiscover.');
+        throw new Exception\RuntimeException('Function has no use in AutoDiscover.');
     }
 
     /**
@@ -551,7 +550,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function setPersistence($mode)
     {
-        throw new AutoDiscoverException('Function has no use in AutoDiscover.');
+        throw new Exception\RuntimeException('Function has no use in AutoDiscover.');
     }
 
     /**

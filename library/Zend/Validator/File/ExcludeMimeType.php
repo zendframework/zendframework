@@ -16,7 +16,6 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -42,8 +41,6 @@ class ExcludeMimeType extends MimeType
     const NOT_READABLE = 'fileExcludeMimeTypeNotReadable';
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if the mimetype of the file does not matche the given ones. Also parts
      * of mimetypes can be checked. If you give for example "image" all image
      * mime types will not be accepted like "image/gif", "image/jpeg" and so on.

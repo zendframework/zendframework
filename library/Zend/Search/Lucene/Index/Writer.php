@@ -17,20 +17,23 @@
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Storage\Directory;
-use Zend\Search\Lucene\Document;
-use Zend\Search\Lucene;
+
+use Zend\Search\Lucene\Storage\Directory,
+	Zend\Search\Lucene\Document,
+	Zend\Search\Lucene,
+	Zend\Search\Lucene\Exception\RuntimeException,
+	Zend\Search\Lucene\Exception\InvalidFileFormatException;
 
 /**
  * @uses       \Zend\Search\Lucene\Index
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
+ * @uses	   \Zend\Search\Lucene\Exception\InvalidFileFormatException
  * @uses       \Zend\Search\Lucene\LockManager
  * @uses       \Zend\Search\Lucene\Index\SegmentInfo
  * @uses       \Zend\Search\Lucene\Index\SegmentMerger
@@ -397,7 +400,8 @@ class Writer
     /**
      * Update segments file by adding current segment to a list
      *
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
+     * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
      */
     private function _updateSegments()
     {
@@ -420,7 +424,7 @@ class Writer
             if (strpos($e->getMessage(), 'is not readable') !== false) {
                 $genFile = $this->_directory->createFile('segments.gen');
             } else {
-                throw new Lucene\Exception($e->getMessage(), $e->getCode(), $e);
+                throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -445,7 +449,7 @@ class Writer
             } else if ($format == (int)0xFFFFFFFC) {
                 $srcFormat = Lucene\Index::FORMAT_2_3;
             } else {
-                throw new Lucene\Exception('Unsupported segments file format');
+                throw new InvalidFileFormatException('Unsupported segments file format');
             }
 
             $version = $segmentsFile->readLong() + $this->_versionUpdate;
@@ -550,7 +554,7 @@ class Writer
                         // Release index write lock
                         Lucene\LockManager::releaseWriteLock($this->_directory);
 
-                        throw new Lucene\Exception('Index conversion to lower format version is not supported.');
+                        throw new RuntimeException('Index conversion to lower format version is not supported.');
                     }
 
                     $newSegmentFile->writeByte($hasSingleNormFile);
@@ -605,7 +609,7 @@ class Writer
             Lucene\LockManager::releaseWriteLock($this->_directory);
 
             // Throw the exception
-            throw new Lucene\Exception($e->getMessage(), $e->getCode(), $e);
+            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
         // Write generation (second copy)
@@ -718,7 +722,7 @@ class Writer
                     if (strpos($e->getMessage(), 'Can\'t delete file') === false) {
                         // That's not "file is under processing or already deleted" exception
                         // Pass it through
-                        throw new Lucene\Exception($e->getMessage(), $e->getCode(), $e);
+                        throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
                     }
                 }
             }

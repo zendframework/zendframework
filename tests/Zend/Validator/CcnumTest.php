@@ -13,11 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -30,29 +29,29 @@ namespace ZendTest\Validator;
  */
 
 /**
- * @see Zend_Validate_Ccnum
+ * @see Zend_Validator_Ccnum
  */
 
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class CcnumTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Ccnum object
+     * Zend_Validator_Ccnum object
      *
-     * @var Zend_Validate_Ccnum
+     * @var Zend_Validator_Ccnum
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Ccnum object for each test method
+     * Creates a new Zend_Validator_Ccnum object for each test method
      *
      * @return void
      */

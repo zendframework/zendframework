@@ -16,24 +16,24 @@
  * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Log;
+
 use Zend\Config\Config;
 
 /**
  * @uses       \Zend\Loader
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
+ * @uses       \Zend\Log\Exception\RuntimeException
  * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
  * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class Logger implements Factory
 {
@@ -104,8 +104,7 @@ class Logger implements Factory
     protected $_timestampFormat        = 'c';
 
     /**
-     * Class constructor.  Create a new logger
-     *
+     * Class constructor.  Create a new logger     *
      * @param \Zend\Log\Writer\AbstractWriter|null  $writer  default writer
      */
     public function __construct(Writer $writer = null)
@@ -123,6 +122,7 @@ class Logger implements Factory
      * based on the configuration array
      *
      * @param  array|\Zend\Config\Config Array or instance of \Zend\Config\Config
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return \Zend\Log\Logger
      */
     static public function factory($config = array())
@@ -132,7 +132,7 @@ class Logger implements Factory
         }
 
         if (!is_array($config) || empty($config)) {
-            throw new Exception('Configuration must be an array or instance of Zend\\Config\\Config');
+            throw new Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\\Config\\Config');
         }
 
         $log = new self;
@@ -153,6 +153,7 @@ class Logger implements Factory
      * Construct a writer object based on a configuration array
      *
      * @param  array $spec config array with writer spec
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return \Zend\Log\Writer\AbstractWriter
      */
     protected function _constructWriterFromConfig($config)
@@ -163,7 +164,7 @@ class Logger implements Factory
             $writerName = is_object($writer)
                         ? get_class($writer)
                         : 'The specified writer';
-            throw new Exception("{$writerName} does not extend Zend\\Log\\Writer!");
+            throw new Exception\InvalidArgumentException("{$writerName} does not extend Zend\\Log\\Writer!");
         }
 
         if (isset($config['filterName'])) {
@@ -178,6 +179,7 @@ class Logger implements Factory
      * Construct filter object from configuration array or Zend_Config object
      *
      * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return \Zend\Log\Filter
      */
     protected function _constructFilterFromConfig($config)
@@ -188,7 +190,7 @@ class Logger implements Factory
              $filterName = is_object($filter)
                          ? get_class($filter)
                          : 'The specified filter';
-            throw new Exception("{$filterName} does not implement Zend\\Log\\Filter");
+            throw new Exception\InvalidArgumentException("{$filterName} does not implement Zend\\Log\\Filter");
         }
 
         return $filter;
@@ -200,6 +202,7 @@ class Logger implements Factory
      * @param string $type 'writer' of 'filter'
      * @param mixed $config \Zend\Config\Config or Array
      * @param string $namespace
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return object
      */
     protected function _constructFromConfig($type, $config, $namespace)
@@ -209,8 +212,8 @@ class Logger implements Factory
         }
 
         if (!is_array($config) || empty($config)) {
-            throw new Exception(
-                'Configuration must be an array or instance of Zend\\Config\\Config'
+            throw new Exception\InvalidArgumentException(
+                'Configuration must be an array or instance of Zend\Config\Config'
             );
         }
 
@@ -222,7 +225,7 @@ class Logger implements Factory
 
         $reflection = new \ReflectionClass($className);
         if (!$reflection->implementsInterface('Zend\Log\Factory')) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Driver does not implement Zend\Log\Factory and can not be constructed from config.'
             );
         }
@@ -236,12 +239,13 @@ class Logger implements Factory
      * @param array $config
      * @param string $type filter|writer
      * @param string $defaultNamespace
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return string full classname
      */
     protected function getClassName($config, $type, $defaultNamespace)
     {
         if (!isset($config[ $type . 'Name' ])) {
-            throw new Exception("Specify {$type}Name in the configuration array");
+            throw new Exception\InvalidArgumentException("Specify {$type}Name in the configuration array");
         }
         $className = $config[ $type . 'Name' ];
 
@@ -294,7 +298,7 @@ class Logger implements Factory
      * @param  string  $method  priority name
      * @param  string  $params  message to log
      * @return void
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __call($method, $params)
     {
@@ -302,7 +306,7 @@ class Logger implements Factory
         if (($priority = array_search($priority, $this->_priorities)) !== false) {
             switch (count($params)) {
                 case 0:
-                    throw new Exception('Missing log message');
+                    throw new Exception\InvalidArgumentException('Missing log message');
                 case 1:
                     $message = array_shift($params);
                     $extras = null;
@@ -314,7 +318,7 @@ class Logger implements Factory
             }
             $this->log($message, $priority, $extras);
         } else {
-            throw new Exception('Bad log priority');
+            throw new Exception\InvalidArgumentException('Bad log priority');
         }
     }
 
@@ -324,18 +328,19 @@ class Logger implements Factory
      * @param  string   $message   Message to log
      * @param  integer  $priority  Priority of message
      * @param  mixed    $extras    Extra information to log in event
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\RuntimeException
      * @return void
-     * @throws \Zend\Log\Exception
      */
     public function log($message, $priority, $extras = null)
     {
         // sanity checks
         if (empty($this->_writers)) {
-            throw new Exception('No writers were added');
+            throw new Exception\RuntimeException('No writers were added');
         }
 
         if (! isset($this->_priorities[$priority])) {
-            throw new Exception('Bad log priority');
+            throw new Exception\InvalidArgumentException('Bad log priority');
         }
 
         // pack into event required by filters and writers
@@ -378,7 +383,8 @@ class Logger implements Factory
      *
      * @param  string   $name      Name of priority
      * @param  integer  $priority  Numeric priority
-     * @throws Zend_Log_InvalidArgumentException
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return \Zend\Log\Logger
      */
     public function addPriority($name, $priority)
     {
@@ -387,7 +393,7 @@ class Logger implements Factory
 
         if (isset($this->_priorities[$priority])
             || false !== array_search($name, $this->_priorities)) {
-            throw new Exception('Existing priorities cannot be overwritten');
+            throw new Exception\InvalidArgumentException('Existing priorities cannot be overwritten');
         }
 
         $this->_priorities[$priority] = $name;
@@ -400,6 +406,7 @@ class Logger implements Factory
      * must be accepted by all filters added with this method.
      *
      * @param  int|\Zend\Log\Filter\FilterInterface $filter
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return void
      */
     public function addFilter($filter)
@@ -411,7 +418,7 @@ class Logger implements Factory
             $filter = $this->_constructFilterFromConfig($filter);
 
         } elseif(! $filter instanceof Filter) {
-            throw new Exception('Invalid filter provided');
+            throw new Exception\InvalidArgumentException('Invalid filter provided');
         }
 
         $this->_filters[] = $filter;
@@ -423,6 +430,7 @@ class Logger implements Factory
      * message and writing it out to storage.
      *
      * @param  mixed $writer \Zend\Log\Writer\AbstractWriter or Config array
+     * @throws \Zend\Log\Exception\InvalidArgumentException 
      * @return void
      */
     public function addWriter($writer)
@@ -432,8 +440,8 @@ class Logger implements Factory
         }
 
         if (!$writer instanceof Writer) {
-            throw new Exception(
-                'Writer must be an instance of Zend\\Log\\Writer'
+            throw new Exception\InvalidArgumentException(
+                'Writer must be an instance of Zend\Log\Writer'
                 . ' or you should pass a configuration array'
             );
         }

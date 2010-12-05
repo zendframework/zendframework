@@ -17,13 +17,13 @@
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Pdf\BinaryParser\DataSource;
+use Zend\Pdf\Exception;
 use Zend\Pdf;
 
 /**
@@ -79,20 +79,16 @@ class File extends AbstractDataSource
     public function __construct($filePath)
     {
         if (! (is_file($filePath) || is_link($filePath))) {
-            throw new Pdf\Exception("Invalid file path: $filePath",
-                                         Pdf\Exception::BAD_FILE_PATH);
+            throw new Exception\IOException('Invalid file path: ' . $filePath);
         }
         if (! is_readable($filePath)) {
-            throw new Pdf\Exception("File is not readable: $filePath",
-                                         Pdf\Exception::NOT_READABLE);
+            throw new Exception\IOException('File is not readable: ' . $filePath);
         }
         if (($this->_size = @filesize($filePath)) === false) {
-            throw new Pdf\Exception("Error while obtaining file size: $filePath",
-                                         Pdf\Exception::CANT_GET_FILE_SIZE);
+            throw new Exception\IOException('Error while obtaining file size: ' . $filePath);
         }
         if (($this->_fileResource = @fopen($filePath, 'rb')) === false) {
-            throw new Pdf\Exception("Cannot open file for reading: $filePath",
-                                         Pdf\Exception::CANT_OPEN_FILE);
+            throw new Exception\IOException('Cannot open file for reading: ' . $filePath);
         }
         $this->_filePath = $filePath;
     }
@@ -126,12 +122,10 @@ class File extends AbstractDataSource
     {
         $bytes = @fread($this->_fileResource, $byteCount);
         if ($bytes === false) {
-            throw new Pdf\Exception('Unexpected error while reading file',
-                                         Pdf\Exception::ERROR_DURING_READ);
+            throw new Exception\IOException('Unexpected error while reading file');
         }
         if (strlen($bytes) != $byteCount) {
-            throw new Pdf\Exception("Insufficient data to read $byteCount bytes",
-                                         Pdf\Exception::INSUFFICIENT_DATA);
+            throw new Exception\IOException('Insufficient data to read ' . $byteCount . ' bytes');
         }
         $this->_offset += $byteCount;
         return $bytes;
@@ -182,12 +176,10 @@ class File extends AbstractDataSource
         parent::moveToOffset($offset);
         $result = @fseek($this->_fileResource, $offset, SEEK_SET);
         if ($result !== 0) {
-            throw new Pdf\Exception('Error while setting new file position',
-                                         Pdf\Exception::CANT_SET_FILE_POSITION);
+            throw new Exception\IOException('Error while setting new file position');
         }
         if (feof($this->_fileResource)) {
-            throw new Pdf\Exception('Moved beyond the end of the file',
-                                         Pdf\Exception::MOVE_BEYOND_END_OF_FILE);
+            throw new Exception\IOException('Moved beyond the end of the file');
         }
     }
 }

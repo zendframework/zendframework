@@ -17,7 +17,6 @@
  * @subpackage Channel
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -45,8 +44,8 @@ use Zend\Controller;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HttpHeaders 
-    extends Controller\Plugin\AbstractPlugin 
+class HttpHeaders
+    extends Controller\Plugin\AbstractPlugin
     implements Wildfire\Channel
 {
     /**
@@ -83,18 +82,18 @@ class HttpHeaders
     public static function init($class = null)
     {
         if (self::$_instance !== null) {
-            throw new Wildfire\Exception('Singleton instance of Zend_Wildfire_Channel_HttpHeaders already exists!');
+            throw new Exception\RuntimeException('Singleton instance of Zend_Wildfire_Channel_HttpHeaders already exists!');
         }
         if ($class !== null) {
             if (!is_string($class)) {
-                throw new Wildfire\Exception('Third argument is not a class string');
+                throw new Exception\InvalidArgumentException('Third argument is not a class string');
             }
 
             self::$_instance = new $class();
 
             if (!self::$_instance instanceof HttpHeaders) {
                 self::$_instance = null;
-                throw new Wildfire\Exception('Invalid class to third argument. Must be subclass of Zend_Wildfire_Channel_HttpHeaders.');
+                throw new Exception\InvalidArgumentException('Invalid class to third argument. Must be subclass of Zend_Wildfire_Channel_HttpHeaders.');
             }
         } else {
             self::$_instance = new self();
@@ -160,7 +159,7 @@ class HttpHeaders
             case Protocol\JsonStream::PROTOCOL_URI;
                 return new Protocol\JsonStream();
         }
-        throw new Wildfire\Exception('Tyring to initialize unknown protocol for URI "'.$uri.'".');
+        throw new Channel\InvalidArgumentException('Tyring to initialize unknown protocol for URI "'.$uri.'".');
     }
 
 
@@ -260,7 +259,7 @@ class HttpHeaders
         ) {
             return true;
         }
-        
+
         return ($this->getResponse()->canSendHeaders()
                 && (preg_match_all(
                         '/\s?FirePHP\/([\.\d]*)\s?/si',
@@ -301,7 +300,7 @@ class HttpHeaders
             $this->setRequest($controller->getRequest());
         }
         if (!$this->_request) {
-            throw new Wildfire\Exception('Request objects not initialized.');
+            throw new Channel\RuntimeException('Request objects not initialized.');
         }
         return $this->_request;
     }
@@ -321,7 +320,7 @@ class HttpHeaders
             }
         }
         if (!$this->_response) {
-            throw new Wildfire\Exception('Response objects not initialized.');
+            throw new Channel\RuntimeException('Response objects not initialized.');
         }
         return $this->_response;
     }

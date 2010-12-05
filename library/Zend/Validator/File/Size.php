@@ -16,14 +16,14 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator;
+use Zend\Validator,
+    Zend\Validator\Exception;
 
 /**
  * Validator for the maximum size of a file up to a max of 2GB
@@ -111,7 +111,7 @@ class Size extends Validator\AbstractValidator
         } elseif (is_string($options) || is_numeric($options)) {
             $options = array('max' => $options);
         } elseif (!is_array($options)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         if (1 < func_num_args()) {
@@ -184,13 +184,13 @@ class Size extends Validator\AbstractValidator
     public function setMin($min)
     {
         if (!is_string($min) and !is_numeric($min)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $min = (integer) $this->_fromByteString($min);
         $max = $this->getMax(true);
         if (($max !== null) && ($min > $max)) {
-            throw new Validator\Exception("The minimum must be less than or equal to the maximum filesize, but $min >"
+            throw new Exception\InvalidArgumentException("The minimum must be less than or equal to the maximum filesize, but $min >"
                                             . " $max");
         }
 
@@ -224,13 +224,13 @@ class Size extends Validator\AbstractValidator
     public function setMax($max)
     {
         if (!is_string($max) && !is_numeric($max)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $max = (integer) $this->_fromByteString($max);
         $min = $this->getMin(true);
         if (($min !== null) && ($max < $min)) {
-            throw new Validator\Exception("The maximum must be greater than or equal to the minimum filesize, but "
+            throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum filesize, but "
                                             . "$max < $min");
         }
 
@@ -261,8 +261,6 @@ class Size extends Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the filesize of $value is at least min and
      * not bigger than max (when max is not null).
      *

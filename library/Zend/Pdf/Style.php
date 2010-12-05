@@ -16,7 +16,6 @@
  * @package    Zend_PDF
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -28,7 +27,7 @@ namespace Zend\Pdf;
  * Style object.
  * Style object doesn't directly correspond to any PDF file object.
  * It's utility class, used as a container for style information.
- * It's used by Zend_PDF_Page class in draw operations.
+ * It's used by \Zend\Pdf\Page class for draw operations.
  *
  * @uses       \Zend\Pdf\Color\
  * @uses       \Zend\Pdf\InternalType

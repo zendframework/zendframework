@@ -89,7 +89,7 @@ if ($validator->isValid($ip)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Ip(array('allowipv6' => false);
+$validator = new Zend_Validate_Ip(array('allowipv6' => false));
 if ($validator->isValid($ip)) {
     // ip appears to be valid ipv4 address
 } else {

@@ -13,11 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -32,23 +31,23 @@ use Zend\Date;
  */
 
 /**
- * @see Zend_Validate_Date
+ * @see Zend_Validator_Date
  */
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class DateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Date object
+     * Zend_Validator_Date object
      *
-     * @var Zend_Validate_Date
+     * @var Zend_Validator_Date
      */
     protected $_validator;
 
@@ -60,7 +59,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     protected $_errorOccurred = false;
 
     /**
-     * Creates a new Zend_Validate_Date object for each test method
+     * Creates a new Zend_Validator_Date object for each test method
      *
      * @return void
      */

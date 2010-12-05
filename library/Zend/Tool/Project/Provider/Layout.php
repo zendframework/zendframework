@@ -17,13 +17,14 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile;
 
 /**
  * @uses       \Zend\Tool\Framework\Provider\Pretendable
@@ -39,7 +40,7 @@ class Layout
     implements \Zend\Tool\Framework\Provider\Pretendable
 {
     
-    public static function createResource(\Zend\Tool\Project\Profile $profile, $layoutName = 'layout')
+    public static function createResource(ProjectProfile $profile, $layoutName = 'layout')
     {
         $applicationDirectory = $profile->search('applicationDirectory');
         $layoutDirectory = $applicationDirectory->search('layoutsDirectory');

@@ -16,7 +16,6 @@
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -37,7 +36,7 @@ interface Token
      * @param  HTTPUtility $utility 
      * @return void
      */
-    public function __construct($response = null, HTTPUtility $utility = null);
+    public function __construct(HTTPResponse $response = null, HTTPUtility $utility = null);
 
     /**
      * Retrieve an arbitrary named parameter from the token

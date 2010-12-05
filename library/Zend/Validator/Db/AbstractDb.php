@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,7 @@
 namespace Zend\Validator\Db;
 
 use Zend\Validator\AbstractValidator,
-    Zend\Validator\Exception as ValidatorException,
+    Zend\Validator\Exception,
     Zend\Config\Config,
     Zend\Db\Db,
     Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
@@ -89,7 +88,7 @@ abstract class AbstractDb extends AbstractValidator
     protected $_adapter = null;
 
     /**
-     * Provides basic configuration for use with Zend_Validate_Db Validators
+     * Provides basic configuration for use with Zend\Validator\Db Validators
      * Setting $exclude allows a single record to be excluded from matching.
      * Exclude can either be a String containing a where clause, or an array with `field` and `value` keys
      * to define the where clause added to the sql.
@@ -124,11 +123,11 @@ abstract class AbstractDb extends AbstractValidator
         }
 
         if (!array_key_exists('table', $options) && !array_key_exists('schema', $options)) {
-            throw new ValidatorException('Table or Schema option missing!');
+            throw new Exception\InvalidArgumentException('Table or Schema option missing!');
         }
 
         if (!array_key_exists('field', $options)) {
-            throw new ValidatorException('Field option missing!');
+            throw new Exception\InvalidArgumentException('Field option missing!');
         }
 
         if (array_key_exists('adapter', $options)) {
@@ -168,7 +167,7 @@ abstract class AbstractDb extends AbstractValidator
     public function setAdapter($adapter)
     {
         if (!($adapter instanceof AbstractdBAdapter)) {
-            throw new ValidatorException('Adapter option must be a database adapter!');
+            throw new Exception\InvalidArgumentException('Adapter option must be a database adapter!');
         }
 
         $this->_adapter = $adapter;
@@ -277,7 +276,7 @@ abstract class AbstractDb extends AbstractValidator
         if ($this->_adapter === null) {
             $this->_adapter = AbstractTable::getDefaultAdapter();
             if (null === $this->_adapter) {
-                throw new ValidatorException('No database adapter present');
+                throw new Exception\RuntimeException('No database adapter present');
             }
         }
 

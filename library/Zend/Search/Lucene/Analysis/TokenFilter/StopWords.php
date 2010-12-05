@@ -17,7 +17,6 @@
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,7 +25,9 @@
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
 use Zend\Search\Lucene,
     Zend\Search\Lucene\Analysis\TokenFilter,
-    Zend\Search\Lucene\Analysis\Token;
+    Zend\Search\Lucene\Analysis\Token,
+    Zend\Search\Lucene\Exception\InvalidArgumentException,
+    Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Token filter that removes stop words. These words must be provided as array (set), example:
@@ -35,7 +36,8 @@ use Zend\Search\Lucene,
  * We do recommend to provide all words in lowercase and concatenate this class after the lowercase filter.
  *
  * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
- * @uses       \Zend\Search\Lucene\Exception
+ * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
+ * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
@@ -80,15 +82,16 @@ class StopWords implements TokenFilter
      * You can call this method one or more times. New stopwords are always added to current set.
      *
      * @param string $filepath full path for text file with stopwords
-     * @throws \Zend\Search\Exception When the file doesn`t exists or is not readable.
+     * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
+     * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public function loadFromFile($filepath = null) {
         if (! $filepath || ! file_exists($filepath)) {
-            throw new Lucene\Exception('You have to provide valid file path');
+            throw new InvalidArgumentException('You have to provide valid file path');
         }
         $fd = fopen($filepath, "r");
         if (! $fd) {
-            throw new Lucene\Exception('Cannot open file ' . $filepath);
+            throw new RuntimeException('Cannot open file ' . $filepath);
         }
         while (!feof ($fd)) {
             $buffer = trim(fgets($fd));
@@ -97,7 +100,7 @@ class StopWords implements TokenFilter
             }
         }
         if (!fclose($fd)) {
-            throw new Lucene\Exception('Cannot close file ' . $filepath);
+            throw new RuntimeException('Cannot close file ' . $filepath);
         }
     }
 }

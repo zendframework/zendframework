@@ -16,14 +16,14 @@
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Reflection\Docblock\Tag;
-use Zend\Reflection;
+use Zend\Reflection,
+    Zend\Reflection\Exception;
 
 /**
  * @uses       \Zend\Reflection\ReflectionDocblockTag
@@ -55,11 +55,11 @@ class Param extends Reflection\ReflectionDocblockTag
         $matches = array();
 
         if (!preg_match('#^@(\w+)\s+([\w|\\\]+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocblockLine, $matches)) {
-            throw new Reflection\Exception('Provided docblock line is does not contain a valid tag');
+            throw new Exception\InvalidArgumentException('Provided docblock line is does not contain a valid tag');
         }
 
         if ($matches[1] != 'param') {
-            throw new Reflection\Exception('Provided docblock line is does not contain a valid @param tag');
+            throw new Exception\InvalidArgumentException('Provided docblock line is does not contain a valid @param tag');
         }
 
         $this->_name = 'param';

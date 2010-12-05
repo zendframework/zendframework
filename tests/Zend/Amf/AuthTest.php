@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -49,12 +48,6 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      * @var Zend_Amf_Server
      */
     protected $_server;
-
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Amf_AuthTest");
-        \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {

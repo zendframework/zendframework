@@ -17,7 +17,6 @@
  * @subpackage Page
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,16 +25,13 @@
 namespace Zend\Navigation\Page;
 
 use Zend\Navigation\AbstractPage,
-    Zend\Navigation\Exception as NavigationException;
+    Zend\Navigation\Exception\InvalidArgumentException,
+    Zend\Controller\Front as FrontController;
 
 /**
  * Represents a page that is defined using module, controller, action, route
  * name and route params to assemble the href
  *
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\Navigation\Exception
- * @uses       \Zend\Navigation\Page\Page
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
@@ -124,7 +120,7 @@ class Mvc extends AbstractPage
     public function isActive($recursive = false)
     {
         if (!$this->_active) {
-            $front = \Zend\Controller\Front::getInstance();
+            $front = FrontController::getInstance();
             $reqParams = $front->getRequest()->getParams();
 
             if (!array_key_exists('module', $reqParams)) {
@@ -176,8 +172,9 @@ class Mvc extends AbstractPage
         }
 
         if (null === self::$_urlHelper) {
-            self::$_urlHelper =
-                \Zend\Controller\Action\HelperBroker::getStaticHelper('url');
+            $front  = FrontController::getInstance();
+            $broker = $front->getHelperBroker();
+            self::$_urlHelper = $broker->load('url');
         }
 
         $params = $this->getParams();
@@ -208,12 +205,12 @@ class Mvc extends AbstractPage
      *
      * @param  string $action             action name
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid $action is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid $action is given
      */
     public function setAction($action)
     {
         if (null !== $action && !is_string($action)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                     'Invalid argument: $action must be a string or null');
         }
 
@@ -241,12 +238,12 @@ class Mvc extends AbstractPage
      *
      * @param  string|null $controller    controller name
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid controller name is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid controller name is given
      */
     public function setController($controller)
     {
         if (null !== $controller && !is_string($controller)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                     'Invalid argument: $controller must be a string or null');
         }
 
@@ -274,12 +271,12 @@ class Mvc extends AbstractPage
      *
      * @param  string|null $module        module name
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid module name is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid module name is given
      */
     public function setModule($module)
     {
         if (null !== $module && !is_string($module)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                     'Invalid argument: $module must be a string or null');
         }
 
@@ -341,12 +338,12 @@ class Mvc extends AbstractPage
      *
      * @param  string $route              route name to use when assembling URL
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception  if invalid $route is given
+     * @throws \Zend\Navigation\InvalidArgumentException  if invalid $route is given
      */
     public function setRoute($route)
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
-            throw new NavigationException(
+            throw new InvalidArgumentException(
                  'Invalid argument: $route must be a non-empty string or null');
         }
 

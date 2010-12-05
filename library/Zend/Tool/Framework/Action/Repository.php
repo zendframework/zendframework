@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,8 +24,9 @@
  */
 namespace Zend\Tool\Framework\Action;
 
-use Zend\Tool\Framework\Action,
-    Zend\Tool\Framework\RegistryEnabled;
+use \Zend\Tool\Framework\Action,
+    \Zend\Tool\Framework\RegistryEnabled,
+    \Zend\Tool\Framework\Exception;
 
 /**
  * @uses       ArrayIterator
@@ -73,11 +73,11 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
         $actionName = $action->getName();
 
         if ($actionName == '' || $actionName == 'Base') {
-            throw new Exception('An action name for the provided action could not be determined.');
+            throw new Exception\InvalidArgumentException('An action name for the provided action could not be determined.');
         }
 
         if (!$overrideExistingAction && array_key_exists(strtolower($actionName), $this->_actions)) {
-            throw new Exception('An action by the name ' . $actionName
+            throw new Exception\InvalidArgumentException('An action by the name ' . $actionName
                 . ' is already registered and $overrideExistingAction is set to false.');
         }
 

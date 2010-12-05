@@ -17,14 +17,14 @@
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\CodeGenerator\Php\PhpMember;
-use Zend\CodeGenerator\Php;
+use Zend\CodeGenerator\Php,
+    Zend\CodeGenerator\Php\Exception;
 
 /**
  * @uses       \Zend\CodeGenerator\Php\AbstractPhp
@@ -91,7 +91,7 @@ abstract class AbstractMember extends Php\AbstractPhp
         if (is_array($docblock)) {
             $docblock = new Php\PhpDocblock($docblock);
         } elseif (!$docblock instanceof Php\PhpDocblock) {
-            throw new Php\Exception('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
+            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
 
         $this->_docblock = $docblock;

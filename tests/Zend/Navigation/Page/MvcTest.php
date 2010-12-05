@@ -17,16 +17,17 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Navigation\Page;
-use Zend\Controller\Request;
-use Zend\Navigation\Page;
-use Zend\Navigation;
+
+use Zend\Controller\Front as FrontController,
+    Zend\Controller\Request,
+    Zend\Navigation\Page,
+    Zend\Navigation;
 
 /**
  * Tests the class Zend_Navigation_Page_Mvc
@@ -229,9 +230,9 @@ class MvcTest extends \PHPUnit_Framework_TestCase
                 try {
                     $page->$setter($invalid);
                     $msg = "'$invalid' is invalid for $setter(), but no ";
-                    $msg .= 'Zend_Navigation_Exception was thrown';
+                    $msg .= 'Zend\Navigation\Exception\InvalidArgumentException was thrown';
                     $this->fail($msg);
-                } catch (Navigation\Exception $e) {
+                } catch (Navigation\Exception\InvalidArgumentException $e) {
 
                 }
             }
@@ -263,9 +264,9 @@ class MvcTest extends \PHPUnit_Framework_TestCase
                 try {
                     $page->$setter($invalid);
                     $msg = "'$invalid' is invalid for $setter(), but no ";
-                    $msg .= 'Zend_Navigation_Exception was thrown';
+                    $msg .= 'Zend\Navigation\Exception\InvalidArgumentException was thrown';
                     $this->fail($msg);
-                } catch (Navigation\Exception $e) {
+                } catch (Navigation\Exception\InvalidArgumentException $e) {
 
                 }
             }
@@ -359,7 +360,8 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $expected = \ZendTest\Navigation\TestAsset\UrlHelper::RETURN_URL;
         $actual = $page->getHref();
 
-        $old = \Zend\Controller\Action\HelperBroker::getStaticHelper('URL');
+        $front = FrontController::getInstance();
+        $old = $front->getHelperBroker()->load('URL');
         Page\Mvc::setUrlHelper($old);
 
         $this->assertEquals($expected, $actual);

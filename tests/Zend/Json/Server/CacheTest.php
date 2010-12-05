@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -135,7 +134,3 @@ class Foo
 }
 
 
-// Call Zend_JSON_Server_CacheTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_JSON_Server_CacheTest::main") {
-    \Zend_JSON_Server_CacheTest::main();
-}

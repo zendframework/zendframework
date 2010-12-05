@@ -13,11 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -32,29 +31,29 @@ use Zend\Locale;
  */
 
 /**
- * @see Zend_Validate_Int
+ * @see Zend_Validator_Int
  */
 
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class IntTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate_Int object
+     * Zend_Validator_Int object
      *
-     * @var Zend_Validate_Int
+     * @var Zend_Validator_Int
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate_Int object for each test method
+     * Creates a new Zend_Validator_Int object for each test method
      *
      * @return void
      */

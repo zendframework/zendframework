@@ -16,7 +16,6 @@
  * @package    Zend_Application
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,6 @@
 namespace Zend\Application;
 
 /**
- * @uses       \Zend\Loader\Autoloader
  * @category   Zend
  * @package    Zend_Application
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -36,7 +34,7 @@ class Application
     /**
      * Autoloader to use
      *
-     * @var \Zend\Loader\Autoloader
+     * @var \Zend\Loader\SplAutoloader
      */
     protected $_autoloader;
 
@@ -83,8 +81,13 @@ class Application
     {
         $this->_environment = (string) $environment;
 
-        require_once 'Zend/Loader/Autoloader.php';
-        $this->_autoloader = \Zend\Loader\Autoloader::getInstance();
+        /**
+         * @todo Make this configurable?
+         */
+        require_once __DIR__ . '/../Loader/StandardAutoloader.php';
+        $autoloader = new \Zend\Loader\StandardAutoloader();
+        $autoloader->register();
+        $this->setAutoloader($autoloader);
 
         if (null !== $options) {
             if (is_string($options)) {
@@ -92,7 +95,7 @@ class Application
             } elseif ($options instanceof \Zend\Config\Config) {
                 $options = $options->toArray();
             } elseif (!is_array($options)) {
-                throw new Exception('Invalid options provided; must be location of config file, a config object, or an array');
+                throw new Exception\InvalidArgumentException('Invalid options provided; must be location of config file, a config object, or an array');
             }
 
             $this->setOptions($options);
@@ -112,11 +115,23 @@ class Application
     /**
      * Retrieve autoloader instance
      *
-     * @return \Zend\Loader\Autoloader
+     * @return SplAutoloader
      */
     public function getAutoloader()
     {
         return $this->_autoloader;
+    }
+
+    /**
+     * Set autoloader
+     * 
+     * @param  \Zend\Loader\SplAutoloader $autoloader 
+     * @return Application
+     */
+    public function setAutoloader(\Zend\Loader\SplAutoloader $autoloader)
+    {
+        $this->_autoloader = $autoloader;
+        return $this;
     }
 
     /**
@@ -177,7 +192,7 @@ class Application
                 $this->setBootstrap($bootstrap);
             } elseif (is_array($bootstrap)) {
                 if (empty($bootstrap['path'])) {
-                    throw new Exception('No bootstrap path provided');
+                    throw new Exception\InvalidArgumentException('No bootstrap path provided');
                 }
 
                 $path  = $bootstrap['path'];
@@ -189,7 +204,7 @@ class Application
 
                 $this->setBootstrap($path, $class);
             } else {
-                throw new Exception('Invalid bootstrap information provided');
+                throw new Exception\InvalidArgumentException('Invalid bootstrap information provided');
             }
         }
 
@@ -325,13 +340,13 @@ class Application
         if (!class_exists($class, false)) {
             require_once $path;
             if (!class_exists($class, false)) {
-                throw new Exception('Bootstrap class not found');
+                throw new Exception\InvalidArgumentException('Bootstrap class not found');
             }
         }
         $this->_bootstrap = new $class($this);
 
         if (!$this->_bootstrap instanceof Bootstrapper) {
-            throw new Exception('Bootstrap class does not implement Zend\\Application\\Bootstrapper');
+            throw new Exception\InvalidArgumentException('Bootstrap class does not implement Zend\\Application\\Bootstrapper');
         }
 
         return $this;
@@ -397,13 +412,13 @@ class Application
             case 'inc':
                 $config = include $file;
                 if (!is_array($config)) {
-                    throw new Exception('Invalid configuration file provided; PHP file does not return array value');
+                    throw new Exception\InvalidArgumentException('Invalid configuration file provided; PHP file does not return array value');
                 }
                 return $config;
                 break;
 
             default:
-                throw new Exception('Invalid configuration file provided; unknown config type');
+                throw new Exception\InvalidArgumentException('Invalid configuration file provided; unknown config type');
         }
 
         return $config->toArray();

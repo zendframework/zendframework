@@ -17,7 +17,6 @@
  * @subpackage Dispatcher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -277,6 +276,16 @@ class Standard extends AbstractDispatcher
         }
 
         /**
+         * Inject helper broker
+         */
+        $controller->setHelperBroker($this->broker);
+
+        /**
+         * Call user-defined initialization
+         */
+        $controller->init();
+
+        /**
          * Retrieve the action name
          */
         $action = $this->getActionMethod($request);
@@ -446,7 +455,7 @@ class Standard extends AbstractDispatcher
             } else {
                 $moduleDir = $controllerDirs[$module];
                 $fileSpec  = $moduleDir . DIRECTORY_SEPARATOR . $this->classToFilename($default);
-                if (end\Loader::isReadable($fileSpec)) {
+                if (\Zend\Loader::isReadable($fileSpec)) {
                     $found = true;
                     $this->_curDirectory = $moduleDir;
                 }

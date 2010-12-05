@@ -17,7 +17,6 @@
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -28,7 +27,7 @@ namespace Zend\Soap\Wsdl\Strategy;
 use Zend\Soap;
 
 use Zend\Soap\Wsdl;
-use Zend\Soap\WsdlException;
+use Zend\Soap\Exception;
 
 /**
  * ArrayOfTypeComplex strategy
@@ -64,7 +63,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
             // The following blocks define the Array of Object structure
             return $this->_addArrayOfComplexType($singularType, $type);
         } else {
-            throw new WsdlException(
+            throw new Exception\InvalidArgumentException(
                 'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than '
               . 'one level. Use array object properties to return deep nested data.'
             );

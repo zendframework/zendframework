@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter;
@@ -760,7 +759,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingFalseType()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown');
         $this->_filter->setType(true);
     }
 
@@ -781,7 +780,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingFalseLocaleType()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Locale has to be');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Locale has to be');
         $this->_filter->setLocale(true);
     }
 
@@ -792,7 +791,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingUnknownLocale()
     {
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'Unknown locale');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Unknown locale');
         $this->_filter->setLocale('yy');
     }
 }

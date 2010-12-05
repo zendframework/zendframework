@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -117,8 +116,8 @@ class EmailAddress extends AbstractValidator
      * Instantiates hostname validator for local use
      *
      * The following option keys are supported:
-     * 'hostname' => A hostname validator, see Zend_Validate_Hostname
-     * 'allow'    => Options for the hostname validator, see Zend_Validate_Hostname::ALLOW_*
+     * 'hostname' => A hostname validator, see Zend\Validator\Hostname
+     * 'allow'    => Options for the hostname validator, see Zend\Validator\Hostname::ALLOW_*
      * 'mx'       => If MX check should be enabled, boolean
      * 'deep'     => If a deep MX check should be done, boolean
      *
@@ -276,7 +275,7 @@ class EmailAddress extends AbstractValidator
     public function setValidateMx($mx)
     {
         if ((bool) $mx && !$this->validateMxSupported()) {
-            throw new Exception('MX checking not available on this system');
+            throw new Exception\InvalidArgumentException('MX checking not available on this system');
         }
 
         $this->_options['mx'] = (bool) $mx;

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -47,11 +46,10 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_cache = Cache::factory('Core', 'File',
+        $this->_cache = \Zend\Cache\Cache::factory('Core', 'File',
                  array('lifetime' => 1, 'automatic_serialization' => true),
                  array('cache_dir' => __DIR__ . '/_files/'));
     }
-
 
     public function tearDown()
     {

@@ -17,13 +17,13 @@
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\XmlRpc\Value;
+use Zend\XmlRpc\Exception;
 
 /**
  * @uses       Zend\XmlRpc\Value\Exception
@@ -71,7 +71,7 @@ class DateTime extends Scalar
         } else {
             $timestamp = strtotime($value);
             if ($timestamp === false || $timestamp == -1) { // cannot convert the value to a timestamp
-                throw new Exception('Cannot convert given value \''. $value .'\' to a timestamp');
+                throw new Exception\ValueException('Cannot convert given value \''. $value .'\' to a timestamp');
             }
 
             $this->_value = date($this->_phpFormatString, $timestamp); // Convert the timestamp to iso8601 format

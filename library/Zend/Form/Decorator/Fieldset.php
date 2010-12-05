@@ -35,7 +35,6 @@ namespace Zend\Form\Decorator;
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class Fieldset extends AbstractDecorator
 {
@@ -153,6 +152,6 @@ class Fieldset extends AbstractDecorator
             }
         }
 
-        return $view->fieldset($name, $content, $attribs);
+        return $view->broker('fieldset')->direct($name, $content, $attribs);
     }
 }

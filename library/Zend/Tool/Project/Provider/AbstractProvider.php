@@ -17,23 +17,17 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Context;
+
+use Zend\Tool\Project\Context,
+    Zend\Tool\Project\Profile\Profile as ProjectProfile;
 
 /**
- * @uses       \Zend\Tool\Framework\Provider\AbstractProvider
- * @uses       \Zend\Tool\Framework\Registry\FrameworkRegistry
- * @uses       \Zend\Tool\Project\Context\Content\Engine
- * @uses       \Zend\Tool\Project\Context\Repository
- * @uses       \Zend\Tool\Project\Profile
- * @uses       \Zend\Tool\Project\Profile\FileParser\Xml
- * @uses       \Zend\Tool\Project\Provider\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -53,7 +47,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
     protected $_projectPath = null;
 
     /**
-     * @var \Zend\Tool\Project\Profile
+     * @var \Zend\Tool\Project\Profile\Profile
      */
     protected $_loadedProfile = null;
 
@@ -99,7 +93,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
      * @param $loadProfileFlag bool Whether or not to throw an exception when no profile is found
      * @param $projectDirectory string The project directory to use to search
      * @param $searchParentDirectories bool Whether or not to search upper level direcotries
-     * @return \Zend\Tool\Project\Profile
+     * @return \Zend\Tool\Project\Profile\Profile
      */
     protected function _loadProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION, $projectDirectory = null, $searchParentDirectories = true)
     {
@@ -107,10 +101,10 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
         if ($projectDirectory == null) {
             $projectDirectory = getcwd();
         } elseif (realpath($projectDirectory) == false) {
-            throw new Exception('The $projectDirectory supplied does not exist.');
+            throw new Exception\InvalidArgumentException('The $projectDirectory supplied does not exist.');
         }
 
-        $profile = new \Zend\Tool\Project\Profile();
+        $profile = new ProjectProfile();
 
         $parentDirectoriesArray = explode(DIRECTORY_SEPARATOR, ltrim($projectDirectory, DIRECTORY_SEPARATOR));
         while ($parentDirectoriesArray) {
@@ -139,7 +133,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
 
         if ($this->_loadedProfile == null) {
             if ($loadProfileFlag == self::NO_PROFILE_THROW_EXCEPTION) {
-                throw new Exception('A project profile was not found.');
+                throw new Exception\RuntimeException('A project profile was not found.');
             } elseif ($loadProfileFlag == self::NO_PROFILE_RETURN_FALSE) {
                 return false;
             }
@@ -151,13 +145,13 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
     /**
      * Load the project profile from the current working directory, if not throw exception
      *
-     * @return \Zend\Tool\Project\Profile
+     * @return \Zend\Tool\Project\Profile\Profile
      */
     protected function _loadProfileRequired()
     {
         $profile = $this->_loadProfile();
         if ($profile === false) {
-            throw new Exception('A project profile was not found in the current working directory.');
+            throw new Exception\RuntimeException('A project profile was not found in the current working directory.');
         }
         return $profile;
     }
@@ -165,7 +159,7 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
     /**
      * Return the currently loaded profile
      *
-     * @return \Zend\Tool\Project\Profile
+     * @return \Zend\Tool\Project\Profile\Profile
      */
     protected function _getProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION)
     {

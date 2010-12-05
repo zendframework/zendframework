@@ -18,7 +18,6 @@
  * @subpackage Protocol
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,7 +26,8 @@
 namespace Zend\Mail;
 
 use Zend\Validator\Hostname as HostnameValidator,
-    Zend\Validator;
+    Zend\Validator,
+    Zend\Mail\Protocol;
 
 /**
  * Zend_Mail_Protocol_Abstract
@@ -42,7 +42,6 @@ use Zend\Validator\Hostname as HostnameValidator,
  * @subpackage Protocol
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  * @todo Implement proxy settings
  */
 abstract class AbstractProtocol
@@ -80,7 +79,7 @@ abstract class AbstractProtocol
 
 
     /**
-     * Instance of Zend_Validate to check hostnames
+     * Instance of Zend\Validator\ValidatorChain to check hostnames
      * @var \Zend\Validator\ValidatorChain
      */
     protected $_validHost;
@@ -133,10 +132,10 @@ abstract class AbstractProtocol
     public function __construct($host = '127.0.0.1', $port = null)
     {
         $this->_validHost = new Validator\ValidatorChain();
-        $this->_validHost->addValidator(new HostnameValidator\Hostname(HostnameValidator\Hostname::ALLOW_ALL));
+        $this->_validHost->addValidator(new HostnameValidator(HostnameValidator::ALLOW_ALL));
 
         if (!$this->_validHost->isValid($host)) {
-            throw new Protocol\Exception(join(', ', $this->_validHost->getMessages()));
+            throw new Protocol\Exception\RuntimeException(join(', ', $this->_validHost->getMessages()));
         }
 
         $this->_host = $host;
@@ -264,11 +263,11 @@ abstract class AbstractProtocol
             if ($errorNum == 0) {
                 $errorStr = 'Could not open socket';
             }
-            throw new Protocol\Exception($errorStr);
+            throw new Protocol\Exception\RuntimeException($errorStr);
         }
 
         if (($result = stream_set_timeout($this->_socket, self::TIMEOUT_CONNECTION)) === false) {
-            throw new Protocol\Exception('Could not set stream timeout');
+            throw new Protocol\Exception\RuntimeException('Could not set stream timeout');
         }
 
         return $result;
@@ -298,7 +297,7 @@ abstract class AbstractProtocol
     protected function _send($request)
     {
         if (!is_resource($this->_socket)) {
-            throw new Protocol\Exception('No connection has been established to ' . $this->_host);
+            throw new Protocol\Exception\RuntimeException('No connection has been established to ' . $this->_host);
         }
 
         $this->_request = $request;
@@ -309,7 +308,7 @@ abstract class AbstractProtocol
         $this->_addLog($request . self::EOL);
 
         if ($result === false) {
-            throw new Protocol\Exception('Could not send request to ' . $this->_host);
+            throw new Protocol\Exception\RuntimeException('Could not send request to ' . $this->_host);
         }
 
         return $result;
@@ -326,7 +325,7 @@ abstract class AbstractProtocol
     protected function _receive($timeout = null)
     {
         if (!is_resource($this->_socket)) {
-            throw new Protocol\Exception('No connection has been established to ' . $this->_host);
+            throw new Protocol\Exception\RuntimeException('No connection has been established to ' . $this->_host);
         }
 
         // Adapters may wish to supply per-commend timeouts according to appropriate RFC
@@ -344,11 +343,11 @@ abstract class AbstractProtocol
         $info = stream_get_meta_data($this->_socket);
 
         if (!empty($info['timed_out'])) {
-            throw new Protocol\Exception($this->_host . ' has timed out');
+            throw new Protocol\Exception\RuntimeException($this->_host . ' has timed out');
         }
 
         if ($reponse === false) {
-            throw new Protocol\Exception('Could not read from ' . $this->_host);
+            throw new Protocol\Exception\RuntimeException('Could not read from ' . $this->_host);
         }
 
         return $reponse;
@@ -390,7 +389,7 @@ abstract class AbstractProtocol
         } while (strpos($more, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
 
         if ($errMsg !== '') {
-            throw new Protocol\Exception($errMsg);
+            throw new Protocol\Exception\RuntimeException($errMsg);
         }
 
         return $msg;

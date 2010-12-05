@@ -17,15 +17,17 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Framework\Loader;
+
 use Zend\Tool\Framework\Loader,
-    Zend\Tool\Framework\RegistryEnabled;
+    Zend\Tool\Framework\Exception,
+    Zend\Tool\Framework\RegistryEnabled,
+    Zend\Loader\StandardAutoloader;
 
 /**
  * @uses       ReflectionClass
@@ -46,6 +48,8 @@ class BasicLoader implements Loader, RegistryEnabled
      */
     protected $_registry = null;
 
+    protected $loader;
+
     /**
      * @var array
      */
@@ -56,6 +60,10 @@ class BasicLoader implements Loader, RegistryEnabled
         if ($options) {
             $this->setOptions($options);
         }
+
+        // use for resolving classes not handled by autoloading
+        $this->loader = new StandardAutoloader();
+        $this->loader->setFallbackAutoloader(true);
     }
     
     public function setOptions(Array $options)
@@ -101,8 +109,10 @@ class BasicLoader implements Loader, RegistryEnabled
         // loop through the loaded classes and ensure that
         foreach ($this->_classesToLoad as $class) {
             
-            if (!class_exists($class)) {
-                \Zend\Loader::loadClass($class);
+            if (!class_exists($class)
+                && !$this->loader->autoload($class)
+            ) {
+                throw new Exception\RuntimeException(sprintf('Unable to resolve class "%s"', $class));
             }
 
             // reflect class to see if its something we want to load

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Config\Writer;
@@ -50,21 +49,21 @@ class ArrayWriterTest extends \PHPUnit_Framework_TestCase
     public function testNoFilenameSet()
     {
         $writer = new ArrayWriter(array('config' => new Config(array())));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No filename was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No filename was set');
         $writer->write();
     }
 
     public function testNoConfigSet()
     {
         $writer = new ArrayWriter(array('filename' => $this->_tempName));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'No config was set');
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No config was set');
         $writer->write();
     }
 
     public function testFileNotWritable()
     {
         $writer = new ArrayWriter(array('config' => new Config(array()), 'filename' => '/../../../'));
-        $this->setExpectedException('\\Zend\\Config\\Exception', 'Could not write to file');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Could not write to file');
         $writer->write();
     }
 

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,7 +26,7 @@ namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 
 /**
- * Zend_Service_Amazon_Ec2_CloudWatch test case.
+ * Zend\Service\Amazon\Ec2\CloudWatch test case.
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -42,9 +41,9 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_CloudWatch
+     * @var Zend\Service\Amazon\Ec2\CloudWatch
      */
-    private $Zend_Service_Amazon_Ec2_CloudWatch;
+    private $cloudWatchInstance;
 
     /**
      * Prepares the environment before running a test.
@@ -52,9 +51,9 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->Zend_Service_Amazon_Ec2_CloudWatch = new Ec2\CloudWatch('access_key', 'secret_access_key');
-        $adapter = new \Zend\HTTP\Client\Adapter\Test();
-        $client = new \Zend\HTTP\Client(null, array(
+        $this->cloudWatchInstance = new Ec2\CloudWatch('access_key', 'secret_access_key');
+        $adapter = new \Zend\Http\Client\Adapter\Test();
+        $client = new \Zend\Http\Client(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
@@ -67,13 +66,13 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->adapter);
-        $this->Zend_Service_Amazon_Ec2_CloudWatch = null;
+        $this->cloudWatchInstance = null;
 
         parent::tearDown();
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics()
+     * Tests Zend\Service\Amazon\Ec2\CloudWatch->getMetricStatistics()
      */
     public function testGetMetricStatistics()
     {
@@ -107,7 +106,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."</GetMetricStatisticsResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics(array('MeasureName' => 'NetworkIn', 'Statistics' => array('Average')));
+        $return = $this->cloudWatchInstance->getMetricStatistics(array('MeasureName' => 'NetworkIn', 'Statistics' => array('Average')));
 
         $arrReturn = array(
             'label'         => 'NetworkIn',
@@ -132,7 +131,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Zend_Service_Amazon_Ec2_CloudWatch->listMetrics()
+     * Tests Zend\Service\Amazon\Ec2\CloudWatch->listMetrics()
      */
     public function testListMetrics()
     {
@@ -178,7 +177,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."</ListMetricsResponse>\r\n";
         $this->adapter->setResponse($rawHttpResponse);
 
-        $return = $this->Zend_Service_Amazon_Ec2_CloudWatch->listMetrics();
+        $return = $this->cloudWatchInstance->listMetrics();
 
         $arrReturn = array(
             array(
@@ -261,7 +260,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."</GetMetricStatisticsResponse>";
         $this->adapter->setResponse($rawHttpResponse);
         
-        $return = $this->Zend_Service_Amazon_Ec2_CloudWatch->getMetricStatistics(
+        $return = $this->cloudWatchInstance->getMetricStatistics(
             array(
                 'MeasureName' => 'CPUUtilization',
                 'Statistics' =>  array('Average'),

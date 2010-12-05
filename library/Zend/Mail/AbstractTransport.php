@@ -17,7 +17,6 @@
  * @subpackage Transport
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,8 @@
  */
 namespace Zend\Mail;
 
-use Zend\Mime;
+use Zend\Mime,
+    Zend\Mail\Transport;
 
 /**
  * Abstract for sending eMails through different
@@ -183,7 +183,7 @@ abstract class AbstractTransport
     protected function _prepareHeaders($headers)
     {
         if (!$this->_mail) {
-            throw new Exception('Missing \Zend\Mail\Mail object in _mail property');
+            throw new Transport\Exception\RuntimeException('Missing \Zend\Mail\Mail object in _mail property');
         }
 
         $this->header = '';
@@ -208,7 +208,7 @@ abstract class AbstractTransport
             }
         }
         if (!$sane) {
-            throw new Exception('At least one mail header line is too long');
+            throw new Transport\Exception\RuntimeException('At least one mail header line is too long');
         }
     }
 
@@ -271,7 +271,7 @@ abstract class AbstractTransport
         }
 
         if (!$body) {
-            throw new Exception('No body specified');
+            throw new Transport\Exception\RuntimeException('No body specified');
         }
 
         // Get headers
@@ -306,7 +306,7 @@ abstract class AbstractTransport
         $count    = count($this->_parts);
         $boundary = null;
         if ($count < 1) {
-            throw new Exception('Empty mail cannot be sent');
+            throw new Transport\Exception\RuntimeException('Empty mail cannot be sent');
         }
 
         if ($count > 1) {

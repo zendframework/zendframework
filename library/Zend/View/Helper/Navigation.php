@@ -17,7 +17,6 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,7 +24,9 @@
  */
 namespace Zend\View\Helper;
 
-use Zend\Navigation\Container,
+use Zend\Loader\ShortNameLocater,
+    Zend\Loader\PluginClassLoader,
+    Zend\Navigation\Container,
     Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
     Zend\View\Helper\Navigation\Helper as NavigationHelper;
 
@@ -48,6 +49,11 @@ class Navigation extends AbstractNavigationHelper
      * @var string
      */
     const NS = 'Zend\View\Helper\Navigation';
+
+    /**
+     * @var ShortNameLocater
+     */
+    protected $loader;
 
     /**
      * Default proxy to use in {@link render()}
@@ -138,6 +144,34 @@ class Navigation extends AbstractNavigationHelper
     }
 
     /**
+     * Set plugin loader for retrieving navigation helpers
+     * 
+     * @param ShortNameLocater $loader 
+     * @return void
+     */
+    public function setPluginLoader(ShortNameLocater $loader)
+    {
+        $this->loader = $loader;
+        return $this;
+    }
+
+    /**
+     * Retrieve plugin loader for navigation helpers
+     *
+     * Lazy-loads an instance of Navigation\HelperLoader if none currently 
+     * registered.
+     * 
+     * @return ShortNameLocater
+     */
+    public function getPluginLoader()
+    {
+        if (null === $this->loader) {
+            $this->setPluginLoader(new Navigation\HelperLoader());
+        }
+        return $this->loader;
+    }
+
+    /**
      * Returns the helper matching $proxy
      *
      * The helper must implement the interface
@@ -161,18 +195,14 @@ class Navigation extends AbstractNavigationHelper
             return $this->_helpers[$proxy];
         }
 
-        if (!$this->view->getPluginLoader('helper')->getPaths(self::NS)) {
-            $this->view->addHelperPath(
-                    str_replace('\\', '/', self::NS),
-                    self::NS);
-        }
+        $loader = $this->getPluginLoader();
 
         if ($strict) {
-            $helper = $this->view->getHelper($proxy);
+            $helper = $loader->load($proxy);
         } else {
             try {
-                $helper = $this->view->getHelper($proxy);
-            } catch (\Zend\Loader\PluginLoader\Exception $e) {
+                $helper = $loader->load($proxy);
+            } catch (\Zend\Loader\Exception $e) {
                 return null;
             }
         }
@@ -190,6 +220,7 @@ class Navigation extends AbstractNavigationHelper
             return null;
         }
 
+        $helper->setView($this->view);
         $this->_inject($helper);
         $this->_helpers[$proxy] = $helper;
 

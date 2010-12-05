@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,13 +24,6 @@
  */
 namespace ZendTest\Controller\Request;
 use Zend\Controller\Request;
-
-// Call Zend_Controller_Request_Apache404Test::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_Apache404Test::main");
-}
-
-
 
 /**
  * Test class for Zend_Controller_Request_Apache404.
@@ -52,19 +44,6 @@ class Apache404Test extends \PHPUnit_Framework_TestCase
      * @var array
      */
     protected $_server;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Controller_Request_Apache404Test");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function setUp()
     {
@@ -102,7 +81,3 @@ class Apache404Test extends \PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_Controller_Request_Apache404Test::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_Apache404Test::main") {
-    \Zend_Controller_Request_Apache404Test::main();
-}

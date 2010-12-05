@@ -16,7 +16,6 @@
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -30,7 +29,7 @@ namespace Zend\Locale;
  * Sampling of PHP environments and platforms suggests that at least 80% to 90% support bcmath.
  * This file should only be loaded for the 10% to 20% lacking access to the bcmath extension.
  *
- * @uses       \Zend\Locale\MathException
+ * @uses       \Zend\Locale\Exception\MathException
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -75,7 +74,7 @@ class PhpMath extends Math
         $op2 = self::normalize($op2);
         $result = $op1 + $op2;
         if (is_infinite($result)  or  (abs($result - $op2 - $op1) > $precision)) {
-            throw new MathException("addition overflow: $op1 + $op2 != $result", $op1, $op2, $result);
+            throw new Exception\MathException("addition overflow: $op1 + $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -97,7 +96,7 @@ class PhpMath extends Math
         $op2  = self::normalize($op2);
         $result = $op1 - $op2;
         if (is_infinite($result)  or  (abs($result + $op2 - $op1) > $precision)) {
-            throw new MathException("subtraction overflow: $op1 - $op2 != $result", $op1, $op2, $result);
+            throw new Exception\MathException("subtraction overflow: $op1 - $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -118,7 +117,7 @@ class PhpMath extends Math
 
         $result = pow($op1, $op2);
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new MathException("power overflow: $op1 ^ $op2", $op1, $op2, $result);
+            throw new Exception\MathException("power overflow: $op1 ^ $op2", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -137,7 +136,7 @@ class PhpMath extends Math
         $op2 = self::normalize($op2);
         $result = $op1 * $op2;
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new MathException("multiplication overflow: $op1 * $op2 != $result", $op1, $op2, $result);
+            throw new Exception\MathException("multiplication overflow: $op1 * $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -150,7 +149,7 @@ class PhpMath extends Math
         }
 
         if (empty($op2)) {
-            throw new MathException("can not divide by zero", $op1, $op2, null);
+            throw new Exception\MathException("can not divide by zero", $op1, $op2, null);
         }
         if (empty($op1)) {
             $op1 = 0;
@@ -159,7 +158,7 @@ class PhpMath extends Math
         $op2 = self::normalize($op2);
         $result = $op1 / $op2;
         if (is_infinite($result)  or  is_nan($result)) {
-            throw new MathException("division overflow: $op1 / $op2 != $result", $op1, $op2, $result);
+            throw new Exception\MathException("division overflow: $op1 / $op2 != $result", $op1, $op2, $result);
         }
 
         return self::round(self::normalize($result), $scale);
@@ -198,7 +197,7 @@ class PhpMath extends Math
         }
         $result = $op1 % $op2;
         if (is_nan($result)  or  (($op1 - $result) % $op2 != 0)) {
-            throw new MathException("modulus calculation error: $op1 % $op2 != $result", $op1, $op2, $result);
+            throw new Exception\MathException("modulus calculation error: $op1 % $op2 != $result", $op1, $op2, $result);
         }
 
         return self::normalize($result);
@@ -233,7 +232,7 @@ class PhpMath extends Math
     public static function Scale($scale)
     {
         if ($scale > 9) {
-            throw new MathException("can not scale to precision $scale", $scale, null, null);
+            throw new Exception\MathException("can not scale to precision $scale", $scale, null, null);
         }
         self::$defaultScale     = $scale;
         self::$defaultPrecision = pow(10, -$scale);

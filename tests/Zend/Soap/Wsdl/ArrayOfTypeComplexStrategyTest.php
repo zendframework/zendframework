@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -52,13 +51,13 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testNestingObjectsDeepMakesNoSenseThrowingException()
     {
-        $this->setExpectedException('Zend\Soap\WsdlException');
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than one level');
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTest[][]');
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('Zend\Soap\WsdlException');
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Cannot add a complex type \ZendTest\Soap\TestAsset\UnknownClass that is not an object or where class');
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\UnknownClass[]');
     }
 
@@ -184,14 +183,11 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-5149
      */
-    public function testArrayOfComplexNestedObjectsIsCoveredByStrategyAndNotThrowingException()
+    public function testArrayOfComplexNestedObjectsIsCoveredByStrategy()
     {
-        try {
-            $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTypeA');
-            $wsdl = $this->wsdl->toXml();
-        } catch(\Exception $e) {
-            $this->fail("Adding object with nested structure should not throw exception.");
-        }
+        $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTypeA');
+        $wsdl = $this->wsdl->toXml();
+        $this->assertTrue(is_string($wsdl)); // no exception was thrown
     }
 
     /**
@@ -225,7 +221,7 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
         $this->markTestSkipped('It seems, it\'s obsolete.');
         return;
 
-        $this->setExpectedException('Zend\Soap\WsdlException', 'Infinite recursion');
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Infinite recursion');
         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\Recursion');
     }
 }

@@ -16,7 +16,6 @@
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -117,7 +116,7 @@ class ReflectionDocblock implements \Reflector
         if ($commentOrReflector instanceof \Reflector) {
             $this->_reflector = $commentOrReflector;
             if (!method_exists($commentOrReflector, 'getDocComment')) {
-                throw new Exception('Reflector must contain method "getDocComment"');
+                throw new Exception\InvalidArgumentException('Reflector must contain method "getDocComment"');
             }
             $docComment = $commentOrReflector->getDocComment();
 
@@ -129,11 +128,11 @@ class ReflectionDocblock implements \Reflector
         } elseif (is_string($commentOrReflector)) {
             $docComment = $commentOrReflector;
         } else {
-            throw new Exception(get_class($this) . ' must have a (string) DocComment or a Reflector in the constructor');
+            throw new Exception\InvalidArgumentException(get_class($this) . ' must have a (string) DocComment or a Reflector in the constructor');
         }
 
         if ($docComment == '') {
-            throw new Exception('DocComment cannot be empty');
+            throw new Exception\InvalidArgumentException('DocComment cannot be empty');
         }
 
         $this->_docComment = $docComment;

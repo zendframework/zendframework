@@ -16,7 +16,6 @@
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -24,9 +23,13 @@
  */
 namespace Zend\Translator;
 
+use Zend\Translator\Exception\InvalidArgumentException,
+	Zend\Translator\Exception\BadMethodCallException;
+
 /**
  * @uses       \Zend\Loader
- * @uses       \Zend\Translator\Exception
+ * @uses       \Zend\Translator\Exception\InvalidArgumentException
+ * @uses       \Zend\Translator\Exception\BadMethodCallException
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -62,7 +65,7 @@ class Translator
      * Generates the standard translation object
      *
      * @param  array|Zend_Config $options Options to use
-     * @throws Zend_Translate_Exception
+     * @throws \Zend\Translate\Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -95,7 +98,7 @@ class Translator
      * Sets a new adapter
      *
      * @param  array|Zend_Config $options Options to use
-     * @throws Zend_Translate_Exception
+     * @throws \Zend\Translate\Exception\InvalidArgumentException
      */
     public function setAdapter($options = array())
     {
@@ -126,7 +129,7 @@ class Translator
         }
 
         if (!class_exists($options['adapter'])) {
-            throw new Exception("Adapter " . $options['adapter'] . " does not exist and cannot be loaded");
+            throw new InvalidArgumentException("Adapter " . $options['adapter'] . " does not exist and cannot be loaded");
         }
 
         if (array_key_exists('cache', $options)) {
@@ -137,7 +140,7 @@ class Translator
         unset($options['adapter']);
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Adapter) {
-            throw new Exception("Adapter " . $adapter . " does not extend Zend\Translate\Adapter");
+            throw new InvalidArgumentException("Adapter " . $adapter . " does not extend Zend\Translate\Adapter");
         }
     }
 
@@ -205,12 +208,13 @@ class Translator
 
     /**
      * Calls all methods from the adapter
+     * @throws \Zend\Translator\Exception\BadMethodCallException
      */
     public function __call($method, array $options)
     {
         if (method_exists($this->_adapter, $method)) {
             return call_user_func_array(array($this->_adapter, $method), $options);
         }
-        throw new Exception("Unknown method '" . $method . "' called!");
+        throw new BadMethodCallException("Unknown method '" . $method . "' called!");
     }
 }

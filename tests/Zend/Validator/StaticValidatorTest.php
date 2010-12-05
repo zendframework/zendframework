@@ -13,28 +13,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Validator;
+
 use Zend\Validator,
-    Zend\Loader,
+    Zend\Validator\ValidatorBroker,
+    Zend\Loader\Broker,
+    Zend\Loader\PluginBroker,
     Zend\Translator;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -55,7 +57,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->clearRegistry();
         Validator\AbstractValidator::setDefaultTranslator(null);
-        Validator\StaticValidator::setPluginLoader(null);
+        Validator\StaticValidator::setBroker(null);
         $this->validator = new Validator\Alpha();
     }
     
@@ -155,33 +157,26 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     
     /* plugin loading */
 
-    public function testLazyLoadsPluginLoaderByDefault()
+    public function testLazyLoadsValidatorBrokerByDefault()
     {
-        $loader = Validator\StaticValidator::getPluginLoader();
-        $this->assertType('Zend\Loader\PluginLoader', $loader);
+        $broker = Validator\StaticValidator::getBroker();
+        $this->assertType('Zend\Validator\ValidatorBroker', $broker);
     }
 
-    public function testLazyLoadedPluginLoaderRegistersZendValidatorNamespace()
+    public function testCanSetCustomPluginBroker()
     {
-        $loader = Validator\StaticValidator::getPluginLoader();
-        $paths = $loader->getPaths('Zend\Validator');
-        $this->assertEquals(1, count($paths));
+        $broker = new PluginBroker();
+        Validator\StaticValidator::setBroker($broker);
+        $this->assertSame($broker, Validator\StaticValidator::getBroker());
     }
 
-    public function testCanSetCustomPluginLoader()
+    public function testPassingNullWhenSettingBrokerResetsBroker()
     {
-        $loader = new Loader\PluginLoader();
-        Validator\StaticValidator::setPluginLoader($loader);
-        $this->assertSame($loader, Validator\StaticValidator::getPluginLoader());
-    }
-
-    public function testPassingNullWhenSettingPluginLoaderResetsPluginLoader()
-    {
-        $loader = new Loader\PluginLoader();
-        Validator\StaticValidator::setPluginLoader($loader);
-        $this->assertSame($loader, Validator\StaticValidator::getPluginLoader());
-        Validator\StaticValidator::setPluginLoader(null);
-        $this->assertNotSame($loader, Validator\StaticValidator::getPluginLoader());
+        $broker = new PluginBroker();
+        Validator\StaticValidator::setBroker($broker);
+        $this->assertSame($broker, Validator\StaticValidator::getBroker());
+        Validator\StaticValidator::setBroker(null);
+        $this->assertNotSame($broker, Validator\StaticValidator::getBroker());
     }
     
     public function testExecuteValidWithParameters()

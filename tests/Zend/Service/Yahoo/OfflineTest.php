@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 
@@ -34,11 +33,11 @@
  */
 
 /**
- * @see Zend_Http_Client_Adapter_Socket
+ * @see Zend\Http\Client\Adapter\Socket
  */
 
 /**
- * @see Zend_Http_Client_Adapter_Test
+ * @see Zend\Http\Client\Adapter\Test
  */
 
 /**
@@ -86,9 +85,9 @@ class Zend_Service_Yahoo_OfflineTest extends PHPUnit_Framework_TestCase
     {
         $this->_yahoo = new Zend_Service_Yahoo(constant('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID'));
 
-        $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
+        $this->_httpClientAdapterSocket = new Zend\Http\Client\Adapter\Socket();
 
-        $this->_httpClientAdapterTest = new Zend_Http_Client_Adapter_Test();
+        $this->_httpClientAdapterTest = new Zend\Http\Client\Adapter\Test();
     }
 
     /**

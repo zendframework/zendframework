@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -105,7 +104,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddManifestThrowsExceptionOnBadGetProviders()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Manifest\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Manifest\Exception\InvalidArgumentException');
         $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestBadProvider());
     }
 
@@ -123,7 +122,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testProcessThrowsExceptionOnBadMetadata()
     {
-        $this->setExpectedException('Zend\Tool\Framework\Manifest\Exception');
+        $this->setExpectedException('Zend\Tool\Framework\Manifest\Exception\RuntimeException');
         $this->_repository->addManifest(new \ZendTest\Tool\Framework\Manifest\TestAsset\ManifestBadMetadata());
         $this->_repository->process();
     }

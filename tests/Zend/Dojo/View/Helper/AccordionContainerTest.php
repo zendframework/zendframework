@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Dojo\View\Helper;
@@ -112,20 +111,18 @@ class AccordionContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testCapturingShouldRaiseErrorWhenDuplicateIdDiscovered()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception');
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
         $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
+        
+        $this->setExpectedException('Zend\Dojo\View\Exception\RuntimeException', 'Lock already exists for id ');
         $this->view->accordionPane()->captureStart('bar', array('title' => 'Captured Pane'));
-        echo 'Captured Content';
-        echo $this->view->accordionPane()->captureEnd('bar');
-        echo $this->view->accordionPane()->captureEnd('bar');
-        $html = $this->helper->captureEnd('foo');
     }
 
     public function testCapturingShouldRaiseErrorWhenNonexistentIdPassedToEnd()
     {
-        $this->setExpectedException('Zend\Dojo\View\Exception');
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
+        
+        $this->setExpectedException('Zend\Dojo\View\Exception\RuntimeException', 'No capture lock exists for id ');
         $html = $this->helper->captureEnd('bar');
     }
 }

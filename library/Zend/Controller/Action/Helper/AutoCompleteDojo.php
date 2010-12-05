@@ -17,26 +17,19 @@
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Controller\Action\Helper;
-use Zend\Controller\Action\HelperBroker,
-    Zend\Controller\Front as FrontController,
+use Zend\Controller\Front as FrontController,
     Zend\Dojo\Data as DojoData,
     Zend\Layout\Layout;
 
 /**
  * Create and send Dojo-compatible autocompletion lists
  *
- * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\Action\Helper\AbstractAutoComplete
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\Dojo\Data
- * @uses       \Zend\Layout\Layout
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
@@ -76,7 +69,7 @@ class AutoCompleteDojo extends AbstractAutoComplete
         }
 
         if (!$keepLayouts) {
-            HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+            $this->getBroker()->load('viewRenderer')->setNoRender(true);
             $layout = Layout::getMvcInstance();
             if ($layout instanceof Layout) {
                 $layout->disableLayout();

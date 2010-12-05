@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -164,7 +163,7 @@ abstract class AbstractValidator implements Validator
         }
 
         if (!isset($this->_messageTemplates[$messageKey])) {
-            throw new Exception("No message template exists for key '$messageKey'");
+            throw new Exception\InvalidArgumentException("No message template exists for key '$messageKey'");
         }
 
         $this->_messageTemplates[$messageKey] = $messageString;
@@ -202,7 +201,7 @@ abstract class AbstractValidator implements Validator
         if (array_key_exists($property, $this->_messageVariables)) {
             return $this->{$this->_messageVariables[$property]};
         }
-        throw new Exception("No property exists by the name '$property'");
+        throw new Exception\InvalidArgumentException("No property exists by the name '$property'");
     }
 
     /**
@@ -338,7 +337,7 @@ abstract class AbstractValidator implements Validator
         } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            throw new Exception('Invalid translator specified');
+            throw new Exception\InvalidArgumentException('Invalid translator specified');
         }
         return $this;
     }
@@ -384,7 +383,7 @@ abstract class AbstractValidator implements Validator
         } elseif ($translator instanceof Translator\Translator) {
             self::$_defaultTranslator = $translator->getAdapter();
         } else {
-            throw new Exception('Invalid translator specified');
+            throw new Exception\InvalidArgumentException('Invalid translator specified');
         }
     }
 

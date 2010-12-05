@@ -17,7 +17,6 @@
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -102,7 +101,7 @@ class PhpFile extends AbstractPhp
         }
 
         if ($fileName == '') {
-            throw new Exception('FileName does not exist.');
+            throw new Exception\InvalidArgumentException('FileName does not exist.');
         }
 
         // cannot use realpath since the file might not exist, but we do need to have the index
@@ -128,7 +127,7 @@ class PhpFile extends AbstractPhp
 
         if ($realpath === false) {
             if ( ($realpath = Reflection\file::findRealpathInIncludePath($filePath)) === false) {
-                throw new Exception('No file for ' . $realpath . ' was found.');
+                throw new Exception\InvalidArgumentException('No file for ' . $realpath . ' was found.');
             }
         }
 
@@ -235,7 +234,7 @@ class PhpFile extends AbstractPhp
         if (is_array($docblock)) {
             $docblock = new PhpDocblock($docblock);
         } elseif (!$docblock instanceof PhpDocblock) {
-            throw new Exception('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
+            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
 
         $this->_docblock = $docblock;
@@ -396,7 +395,7 @@ class PhpFile extends AbstractPhp
         } elseif ($class instanceof PhpClass) {
             $className = $class->getName();
         } else {
-            throw new Exception('Expecting either an array or an instance of Zend_CodeGenerator_Php_Class');
+            throw new Exception\InvalidArgumentException('Expecting either an array or an instance of Zend_CodeGenerator_Php_Class');
         }
 
         // @todo check for dup here
@@ -564,7 +563,7 @@ class PhpFile extends AbstractPhp
     public function write()
     {
         if ($this->_filename == '' || !is_writable(dirname($this->_filename))) {
-            throw new Exception('This code generator object is not writable.');
+            throw new Exception\RuntimeException('This code generator object is not writable.');
         }
         file_put_contents($this->_filename, $this->generate());
         return $this;

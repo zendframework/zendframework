@@ -17,7 +17,6 @@
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -134,10 +133,10 @@ class Textile implements Parser
     public function parse($value)
     {
         if (!is_string($value)) {
-            throw new Exception('Value to parse should be a string.');
+            throw new Exception\InvalidArgumentException('Value to parse should be a string.');
         }
         if (empty($value)) {
-            throw new Exception('Value to parse cannot be left empty.');
+            throw new Exception\InvalidArgumentException('Value to parse cannot be left empty.');
         }
 
         // first make we only have LF newlines, also trim the value
@@ -282,7 +281,7 @@ class Textile implements Parser
                         $this->_temp = array(
                             'tag'        => '',
                             'name'       => 'p',
-                            'type'       => Markup\token::TYPE_TAG,
+                            'type'       => Markup\Token::TYPE_TAG,
                             'attributes' => array()
                         );
                     } else {

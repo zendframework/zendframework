@@ -17,13 +17,14 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
+
+use Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project
@@ -58,7 +59,7 @@ abstract class AbstractClassFile
                 $containingResource = $currentResource;
                 break;
             }
-        } while ($currentResource instanceof \Zend\Tool\Project\Profile\Resource
+        } while ($currentResource instanceof Resource
             && $currentResource = $currentResource->getParentResource());
         
         $fullClassName = '';

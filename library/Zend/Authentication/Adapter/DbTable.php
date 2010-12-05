@@ -17,7 +17,6 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -172,7 +171,10 @@ class DbTable implements AuthenticationAdapter
         if(null === $this->_zendDb) {
             $this->_zendDb = AbstractTable::getDefaultAdapter();
             if (null === $this->_zendDb) {
-                throw new Exception('No database adapter present');
+                throw new Exception\RuntimeException(
+                    'Null was provided for the adapter but there is no default'
+                    . ' adatper registered with Zend\Db\Table to utilize.'
+                    );
             }
         }
         
@@ -409,7 +411,7 @@ class DbTable implements AuthenticationAdapter
         }
 
         if (null !== $exception) {
-            throw new Exception($exception);
+            throw new Exception\RuntimeException($exception);
         }
 
         $this->_authenticateResultInfo = array(
@@ -476,7 +478,7 @@ class DbTable implements AuthenticationAdapter
                 unset($origDbFetchMode);
             }
         } catch (\Exception $e) {
-            throw new Exception('The supplied parameters to Zend\\Authentication\\Adapter\\DbTable failed to '
+            throw new Exception\RuntimeException('The supplied parameters to Zend\Authentication\Adapter\DbTable failed to '
                                                 . 'produce a valid sql statement, please check table and column names '
                                                 . 'for validity.', 0, $e);
         }

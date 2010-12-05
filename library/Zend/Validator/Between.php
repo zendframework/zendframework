@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -117,7 +116,7 @@ class Between extends AbstractValidator
         }
 
         if (!array_key_exists('min', $options) || !array_key_exists('max', $options)) {
-            throw new Exception("Missing option. 'min' and 'max' has to be given");
+            throw new Exception\InvalidArgumentException("Missing option. 'min' and 'max' has to be given");
         }
 
         if (!array_key_exists('inclusive', $options)) {
@@ -196,8 +195,6 @@ class Between extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value is between min and max options, inclusively
      * if inclusive option is true.
      *

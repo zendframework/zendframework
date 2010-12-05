@@ -17,16 +17,13 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
- * @see Zend_Service_Nirvanix_Namespace_Base
+ * @todo: temporary fix because test autoloader doesn't load Zend_* classes
+ * from test tree
  */
-
-/**
- * @see Zend_Service_Nirvanix_FunctionalTestCase
- */
+require_once("Zend/Service/Nirvanix/FunctionalTestCase.php");
 
 /**
  * @category   Zend

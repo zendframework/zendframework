@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -230,7 +229,7 @@ class CreditCard extends AbstractValidator
     public function setService($service)
     {
         if (!is_callable($service)) {
-            throw new Exception('Invalid callback given');
+            throw new Exception\InvalidArgumentException('Invalid callback given');
         }
 
         $this->_service = $service;
@@ -238,8 +237,6 @@ class CreditCard extends AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if $value follows the Luhn algorithm (mod-10 checksum)
      *
      * @param  string $value

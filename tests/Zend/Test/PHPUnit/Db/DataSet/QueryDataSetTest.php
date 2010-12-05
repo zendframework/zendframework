@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -39,7 +38,7 @@ class QueryDataSetTest extends DataSetTestCase
     public function testCreateQueryDataSetWithoutZendDbAdapterThrowsException()
     {
         $connectionMock = $this->getMock('PHPUnit_Extensions_Database_DB_IDatabaseConnection');
-        $this->setExpectedException('Zend\Test\PHPUnit\Db\Exception');
+        $this->setExpectedException('Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException');
         $queryDataSet = new DataSet\QueryDataSet($connectionMock);
     }
 

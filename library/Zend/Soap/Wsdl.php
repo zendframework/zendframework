@@ -16,7 +16,6 @@
  * @package    Zend_Soap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -104,7 +103,7 @@ class Wsdl
                     xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'></definitions>";
         $this->_dom = new \DOMDocument();
         if (!$this->_dom->loadXML($wsdl)) {
-            throw new WsdlException('Unable to create DomDocument');
+            throw new Exception\RuntimeException('Unable to create DomDocument');
         } else {
             $this->_wsdl = $this->_dom->documentElement;
         }
@@ -154,14 +153,14 @@ class Wsdl
             if(class_exists($strategy)) {
                 $strategy = new $strategy();
             } else {
-                throw new WsdlException(
+                throw new Exception\InvalidArgumentException(
                     sprintf("Strategy with name '%s does not exist.", $strategy
                 ));
             }
         }
 
         if(!($strategy instanceof Wsdl\Strategy)) {
-            throw new WsdlException('Set a strategy that is not of type \'Zend\Soap\Wsdl\Strategy\'');
+            throw new Exception\InvalidArgumentException('Set a strategy that is not of type \'Zend\Soap\Wsdl\Strategy\'');
         }
         $this->_strategy = $strategy;
         return $this;
@@ -629,7 +628,7 @@ class Wsdl
     private function _parseElement($element)
     {
         if (!is_array($element)) {
-            throw new WsdlException("The 'element' parameter needs to be an associative array.");
+            throw new Exception\RuntimeException("The 'element' parameter needs to be an associative array.");
         }
 
         $elementXml = $this->_dom->createElement('xsd:element');

@@ -17,7 +17,6 @@
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -85,7 +84,6 @@ class Firebug extends AbstractWriter
      * 
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Firebug
-     * @throws \Zend\Log\Exception
      */
     static public function factory($config = array())
     {

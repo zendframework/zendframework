@@ -16,7 +16,6 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -107,8 +106,6 @@ class ValidatorChain implements Validator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns array of validation failure messages
      *
      * @return array
@@ -119,8 +116,6 @@ class ValidatorChain implements Validator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns array of validation failure message codes
      *
      * @return array

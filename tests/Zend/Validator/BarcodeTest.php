@@ -13,11 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -27,15 +26,15 @@ namespace ZendTest\Validator;
 use Zend\Validator\Barcode;
 
 /**
- * \Zend\Validate\Barcode
+ * \Zend\Validator\Barcode
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
- * @uses       Zend_Validate_Barcode
+ * @uses       Zend_Validator_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class BarcodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,12 +51,8 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
 
     public function testNoneExisting()
     {
-        try {
-            $barcode = new Barcode('\Zend\Validate\BarcodeTest\NonExistentClassName');
-            $this->fail("'\Zend\Validate\BarcodeTest\NonExistentClassName' is not a valid barcode type'");
-        } catch (\Exception $e) {
-            $this->assertRegExp('#not found|No such file#', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'not found');
+        $barcode = new Barcode('\Zend\Validate\BarcodeTest\NonExistentClassName');
     }
 
     public function testSetAdapter()
@@ -146,13 +141,10 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     public function testInvalidAdapter()
     {
         $barcode = new Barcode('Ean13');
-        try {
-            require_once __DIR__ . "/_files/MyBarcode5.php";
-            $barcode->setAdapter('MyBarcode5');
-            $this->fails('Exception expected');
-        } catch (\Exception $e) {
-            $this->assertContains('does not implement', $e->getMessage());
-        }
+        
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'does not implement');
+        require_once __DIR__ . "/_files/MyBarcode5.php";
+        $barcode->setAdapter('MyBarcode5');
     }
 
     public function testArrayConstructAdapter()
@@ -164,12 +156,8 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidArrayConstructAdapter()
     {
-        try {
-            $barcode = new Barcode(array('options' => 'unknown', 'checksum' => false));
-            $this->fails('Exception expected');
-        } catch (\Exception $e) {
-            $this->assertContains('Missing option', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Missing option');
+        $barcode = new Barcode(array('options' => 'unknown', 'checksum' => false));
     }
 
     public function testConfigConstructAdapter()

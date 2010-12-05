@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter\File;
@@ -100,7 +99,7 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
     public function testFileNotFoundException()
     {
         $filter = new FileUpperCase();
-        $this->setExpectedException('\\Zend\\Filter\\Exception', 'not found');
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         $filter($this->_newFile . 'unknown');
     }
 
@@ -114,7 +113,7 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
             $filter = new FileUpperCase('ISO-8859-1');
             $filter($this->_newFile);
             $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
@@ -130,7 +129,7 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
             $filter->setEncoding('ISO-8859-1');
             $filter($this->_newFile);
             $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }

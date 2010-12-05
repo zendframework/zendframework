@@ -16,7 +16,6 @@
  * @package   Zend_Text_Table
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -128,7 +127,7 @@ class Table
      *
      * @param  array             $columnsWidths List of all column widths
      * @param  \Zend\Config\Config|array $options       Configuration options
-     * @throws \Zend\Text\Table\Exception When no columns widths were set
+     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no columns widths were set
      */
     public function __construct($options = null)
     {
@@ -137,12 +136,6 @@ class Table
             $this->setOptions($options);
         } else if ($options instanceof Config\Config) {
             $this->setConfig($options);
-        }
-
-        // Check if column widths were set
-        // @todo When column widths were not set, assume auto-sizing
-        if ($this->_columnWidths === null) {
-            throw new Exception('You must define the column widths');
         }
 
         // If no decorator was given, use default unicode decorator
@@ -192,19 +185,19 @@ class Table
      * Set column widths
      *
      * @param  array $columnWidths Widths of all columns
-     * @throws \Zend\Text\Table\Exception When no columns were supplied
-     * @throws \Zend\Text\Table\Exception When a column has an invalid width
+     * @throws \Zend\Text\Table\Exception\InvalidArgumentException When no columns were supplied
+     * @throws \Zend\Text\Table\Exception\InvalidArgumentException When a column has an invalid width
      * @return \Zend\Text\Table\Table
      */
     public function setColumnWidths(array $columnWidths)
     {
         if (count($columnWidths) === 0) {
-            throw new Exception('You must supply at least one column');
+            throw new Exception\InvalidArgumentException('You must supply at least one column');
         }
 
         foreach ($columnWidths as $columnNum => $columnWidth) {
             if (is_int($columnWidth) === false or $columnWidth < 1) {
-                throw new Exception('Column ' . $columnNum . ' has an invalid'
+                throw new Exception\InvalidArgumentException('Column ' . $columnNum . ' has an invalid'
                                                     . ' column width');
             }
         }
@@ -330,19 +323,19 @@ class Table
      * Append a row to the table
      *
      * @param  array|\Zend\Text\Table\Row $row The row to append to the table
-     * @throws Zend_Text_Table_Exception When $row is neither an array nor Zend_Zext_Table_Row
-     * @throws \Zend\Text\Table\Exception When a row contains too many columns
+     * @throws Zend_Text_Table_Exception\InvalidArgumentException When $row is neither an array nor Zend_Zext_Table_Row
+     * @throws \Zend\Text\Table\Exception\OverflowException When a row contains too many columns
      * @return \Zend\Text\Table\Table
      */
     public function appendRow($row)
     {
         if (!is_array($row) && !($row instanceof Row)) {
-            throw new Exception('$row must be an array or instance of Zend_Text_Table_Row');
+            throw new Exception\InvalidArgumentException('$row must be an array or instance of Zend_Text_Table_Row');
         }
 
         if (is_array($row)) {
             if (count($row) > count($this->_columnWidths)) {
-                throw new Exception('Row contains too many columns');
+                throw new Exception\OverflowException('Row contains too many columns');
             }
 
             $data   = $row;
@@ -368,14 +361,14 @@ class Table
     /**
      * Render the table
      *
-     * @throws \Zend\Text\Table\Exception When no rows were added to the table
+     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no rows were added to the table
      * @return string
      */
     public function render()
     {
         // There should be at least one row
         if (count($this->_rows) === 0) {
-            throw new Exception('No rows were added to the table yet');
+            throw new Exception\UnexpectedValueException('No rows were added to the table yet');
         }
 
         // Initiate the result variable

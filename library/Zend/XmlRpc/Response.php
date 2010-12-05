@@ -36,7 +36,6 @@ namespace Zend\XmlRpc;
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class Response
 {
@@ -204,7 +203,7 @@ class Response
 
         try {
             if (!isset($xml->params) || !isset($xml->params->param) || !isset($xml->params->param->value)) {
-                throw new Value\Exception('Missing XML-RPC value in XML');
+                throw new Exception\ValueException('Missing XML-RPC value in XML');
             }
             $valueXml = $xml->params->param->value->asXML();
             $value = Value::getXmlRpcValue($valueXml, Value::XML_STRING);

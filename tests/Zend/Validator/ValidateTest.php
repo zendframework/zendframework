@@ -13,11 +13,10 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -29,23 +28,23 @@ use Zend\Validator;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
-class ValidateTest extends \PHPUnit_Framework_TestCase
+class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validate object
+     * Zend_Validator object
      *
-     * @var Zend_Validate
+     * @var Zend_Validator
      */
     protected $_validator;
 
     /**
-     * Creates a new Zend_Validate object for each test method
+     * Creates a new Zend_Validator object for each test method
      *
      * @return void
      */
@@ -136,11 +135,10 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
      *
      * @group  ZF-2724
      * @return void
-     * @expectedException Zend_Validate_Exception
      */
     public function testStaticFactoryClassNotFound()
     {
-        $this->markTestSkipped('is() method should not try to implement its own plugin loader - refactor this');
+        $this->setExpectedException('Zend\Validate\Exception\RuntimeException', 'foo');
         Validator\ValidatorChain::execute('1234', 'UnknownValidator');
     }
 

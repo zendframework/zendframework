@@ -17,13 +17,12 @@
  * @subpackage Math
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Crypt\Math;
+namespace Zend\Crypt;
 
 /**
  * @uses       Zend\Crypt\Math\BigInteger
@@ -71,7 +70,7 @@ class Math extends Math\BigInteger
      * @param string $long
      * @return string
      */
-    public function btwoc($long) 
+    public function btwoc($long)
     {
         if (ord($long[0]) > 127) {
             return "\x00" . $long;
@@ -85,7 +84,7 @@ class Math extends Math\BigInteger
      * @param string $binary
      * @return string
      */
-    public function fromBinary($binary) 
+    public function fromBinary($binary)
     {
         return $this->_math->binaryToInteger($binary);
     }

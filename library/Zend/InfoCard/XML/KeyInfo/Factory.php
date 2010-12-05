@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -65,7 +64,7 @@ class Factory
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
         } else {
-            throw new XML\Exception("Invalid Data provided to create instance");
+            throw new XML\Exception\InvalidArgumentException("Invalid Data provided to create instance");
         }
 
         $sxe = simplexml_load_string($strXmlData);
@@ -78,7 +77,7 @@ class Factory
                     case 'http://www.w3.org/2000/09/xmldsig#':
                         return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\KeyInfo\XMLDSig');
                     default:
-                        throw new XML\Exception("Unknown KeyInfo Namespace provided");
+                        throw new XML\Exception\RuntimeExcpetion("Unknown KeyInfo Namespace provided");
                     // We are ignoring these lines, as XDebug reports each as a "non executed" line
                     // which breaks my coverage %
                     // @codeCoverageIgnoreStart

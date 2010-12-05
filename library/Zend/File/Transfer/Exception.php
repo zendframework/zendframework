@@ -16,7 +16,6 @@
  * @package   Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -33,24 +32,24 @@ namespace Zend\File\Transfer;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+interface Exception
 {
-    protected $_fileerror = null;
-
-    public function __construct($message, $fileerror = 0)
-    {
-        $this->_fileerror = $fileerror;
-        parent::__construct($message);
-    }
-
-    /**
-     * Returns the transfer error code for the exception
-     * This is not the exception code !!!
-     *
-     * @return integer
-     */
-    public function getFileError()
-    {
-        return $this->_fileerror;
-    }
+//    protected $_fileerror = null;
+//
+//    public function __construct($message, $fileerror = 0)
+//    {
+//        $this->_fileerror = $fileerror;
+//        parent::__construct($message);
+//    }
+//
+//    /**
+//     * Returns the transfer error code for the exception
+//     * This is not the exception code !!!
+//     *
+//     * @return integer
+//     */
+//    public function getFileError()
+//    {
+//        return $this->_fileerror;
+//    }
 }

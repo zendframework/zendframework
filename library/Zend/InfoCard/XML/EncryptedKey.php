@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -55,13 +54,13 @@ class EncryptedKey extends AbstractElement implements KeyInfo
         } else if (is_string($xmlData)) {
             $strXmlData = $xmlData;
         } else {
-            throw new Exception("Invalid Data provided to create instance");
+            throw new Exception\InvalidArgumentException("Invalid Data provided to create instance");
         }
 
         $sxe = simplexml_load_string($strXmlData);
 
         if($sxe->getName() != "EncryptedKey") {
-            throw new Exception("Invalid XML Block provided for EncryptedKey");
+            throw new Exception\InvalidArgumentException("Invalid XML Block provided for EncryptedKey");
         }
 
         return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\EncryptedKey');
@@ -80,13 +79,13 @@ class EncryptedKey extends AbstractElement implements KeyInfo
         list($encryption_method) = $this->xpath("//e:EncryptionMethod");
 
         if(!($encryption_method instanceof AbstractElement)) {
-            throw new Exception("Unable to find the e:EncryptionMethod KeyInfo encryption block");
+            throw new Exception\RuntimeException("Unable to find the e:EncryptionMethod KeyInfo encryption block");
         }
 
         $dom = self::convertToDOM($encryption_method);
 
         if(!$dom->hasAttribute('Algorithm')) {
-            throw new Exception("Unable to determine the encryption algorithm in the Symmetric enc:EncryptionMethod XML block");
+            throw new Exception\RuntimeException("Unable to determine the encryption algorithm in the Symmetric enc:EncryptionMethod XML block");
         }
 
         return $dom->getAttribute('Algorithm');
@@ -105,17 +104,17 @@ class EncryptedKey extends AbstractElement implements KeyInfo
         list($encryption_method) = $this->xpath("//e:EncryptionMethod");
 
         if(!($encryption_method instanceof AbstractElement)) {
-            throw new Exception("Unable to find the e:EncryptionMethod KeyInfo encryption block");
+            throw new Exception\RuntimeException("Unable to find the e:EncryptionMethod KeyInfo encryption block");
         }
 
         if(!($encryption_method->DigestMethod instanceof AbstractElement)) {
-            throw new Exception("Unable to find the DigestMethod block");
+            throw new Exception\RuntimeException("Unable to find the DigestMethod block");
         }
 
         $dom = self::convertToDOM($encryption_method->DigestMethod);
 
         if(!$dom->hasAttribute('Algorithm')) {
-            throw new Exception("Unable to determine the digest algorithm for the symmetric Keyinfo");
+            throw new Exception\RuntimeException("Unable to determine the digest algorithm for the symmetric Keyinfo");
         }
 
         return $dom->getAttribute('Algorithm');
@@ -135,7 +134,7 @@ class EncryptedKey extends AbstractElement implements KeyInfo
             return KeyInfo\Factory::getInstance($this->KeyInfo);
         }
 
-        throw new Exception("Unable to locate a KeyInfo block");
+        throw new Exception\RuntimeException("Unable to locate a KeyInfo block");
     }
 
     /**
@@ -152,14 +151,14 @@ class EncryptedKey extends AbstractElement implements KeyInfo
         list($cipherdata) = $this->xpath("//e:CipherData");
 
         if(!($cipherdata instanceof AbstractElement)) {
-            throw new Exception("Unable to find the e:CipherData block");
+            throw new Exception\RuntimeException("Unable to find the e:CipherData block");
         }
 
         $cipherdata->registerXPathNameSpace('enc', 'http://www.w3.org/2001/04/xmlenc#');
         list($ciphervalue) = $cipherdata->xpath("//enc:CipherValue");
 
         if(!($ciphervalue instanceof AbstractElement)) {
-            throw new Exception("Unable to fidn the enc:CipherValue block");
+            throw new Exception\RuntimeException("Unable to fidn the enc:CipherValue block");
         }
 
         return (string)$ciphervalue;

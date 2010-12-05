@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Filter\Encrypt;
@@ -139,14 +138,13 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
     public function testSetPublicKey()
     {
         $filter = new OpensslEncryption();
-        try {
-            $filter->setPublicKey(123);
-            $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('not valid', $e->getMessage());
-        }
 
-        $filter->setPublicKey(array('private' => __DIR__ . '/../_files/publickey.pem'));
+        $r = $filter->setPublicKey(array('private' => __DIR__ . '/../_files/publickey.pem'));
+        $this->assertSame($filter, $r);
+        
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not valid');
+        $filter->setPublicKey(123);
+
     }
 
     /**
@@ -155,13 +153,7 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
     public function testSetPrivateKey()
     {
         $filter = new OpensslEncryption();
-        try {
-            $filter->setPrivateKey(123);
-            $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('not valid', $e->getMessage());
-        }
-
+        
         $filter->setPrivateKey(array('public' => __DIR__ . '/../_files/privatekey.pem'));
         $test = $filter->getPrivateKey();
         $this->assertEquals(array(
@@ -181,6 +173,11 @@ cAkcoMuBcgWhIn/46C1PAkEAzLK/ibrdMQLOdO4SuDgj/2nc53NZ3agl61ew8Os6
 d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
 -----END RSA PRIVATE KEY-----
 '), $test);
+            
+            
+        $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not valid');
+        $filter->setPrivateKey(123);
+
     }
 
     /**
@@ -201,7 +198,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         try {
             $filter->decrypt('unknown');
             $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\RuntimeException $e) {
             $this->assertContains('Please give a private key', $e->getMessage());
         }
 
@@ -209,7 +206,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         try {
             $filter->decrypt('unknown');
             $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\RuntimeException $e) {
             $this->assertContains('Please give an envelope key', $e->getMessage());
         }
 
@@ -217,7 +214,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         try {
             $filter->decrypt('unknown');
             $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
+        } catch (\Zend\Filter\Exception\RuntimeException $e) {
             $this->assertContains('was not able to decrypt', $e->getMessage());
         }
     }
@@ -228,12 +225,9 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
     public function testEncryptionWithoutPublicKey()
     {
         $filter = new OpensslEncryption();
-        try {
-            $filter->encrypt('unknown');
-            $this->fail();
-        } catch (\Zend\Filter\Exception $e) {
-            $this->assertContains('without public key', $e->getMessage());
-        }
+        
+        $this->setExpectedException('\Zend\Filter\Exception\RuntimeException', 'without public key');
+        $filter->encrypt('unknown');
     }
 
     /**

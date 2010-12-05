@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -97,7 +96,7 @@ class Cipher
                 break;
 
             default:
-                throw new Cipher\Exception("Unknown Cipher URI");
+                throw new Cipher\Exception\InvalidArgumentException("Unknown Cipher URI");
         }
     }
 }

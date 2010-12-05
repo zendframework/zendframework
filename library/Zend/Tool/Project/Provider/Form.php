@@ -17,14 +17,15 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Project\Provider;
-use Zend\Tool\Project\Profile as ProjectProfile;
+
+use Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Profile\Resource\Resource;
 
 /**
  * @uses       \Zend\Tool\Project\Provider\AbstractProvider
@@ -41,7 +42,7 @@ class Form extends AbstractProvider
     public static function createResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to create.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to create.');
         }
 
         if (!($formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName))) {
@@ -50,7 +51,7 @@ class Form extends AbstractProvider
             } else {
                 $exceptionMessage = 'A form directory was not found.';
             }
-            throw new Exception($exceptionMessage);
+            throw new Exception\RuntimeException($exceptionMessage);
         }
 
         $newForm = $formsDirectory->createResource(
@@ -64,27 +65,27 @@ class Form extends AbstractProvider
     /**
      * hasResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $formName
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     public static function hasResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
-            throw new Exception('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to check for existence.');
+            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to check for existence.');
         }
 
         $formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName);
-        return (($formsDirectory->search(array('formFile' => array('formName' => $formName)))) instanceof ProjectProfile\Resource);
+        return (($formsDirectory->search(array('formFile' => array('formName' => $formName)))) instanceof Resource);
     }
     
     /**
      * _getFormsDirectoryResource()
      *
-     * @param \Zend\Tool\Project\Profile $profile
+     * @param \Zend\Tool\Project\Profile\Profile $profile
      * @param string $moduleName
-     * @return \Zend\Tool\Project\Profile\Resource
+     * @return \Zend\Tool\Project\Profile\Resource\Resource
      */
     protected static function _getFormsDirectoryResource(ProjectProfile $profile, $moduleName = null)
     {
@@ -113,12 +114,12 @@ class Form extends AbstractProvider
         $testingEnabled = Test::isTestingEnabled($this->_loadedProfile);
 
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
-            throw new Exception('This project already has a form named ' . $name);
+            throw new Exception\RuntimeException('This project already has a form named ' . $name);
         }
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
-            throw new Exception('Form names should be camel cased.');
+            throw new Exception\RuntimeException('Form names should be camel cased.');
         }
         
         $name = ucwords($name);

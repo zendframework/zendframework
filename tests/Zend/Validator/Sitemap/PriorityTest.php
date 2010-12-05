@@ -17,30 +17,29 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\Validate\Sitemap;
+namespace ZendTest\Validator\Sitemap;
 
 /**
- * Tests Zend_Validate_Sitemap_Priority
+ * Tests Zend_Validator_Sitemap_Priority
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
+ * @group      Zend_Validator
  */
 class PriorityTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Validator
      *
-     * @var Zend_Validate_Sitemap_Priority
+     * @var Zend_Validator_Sitemap_Priority
      */
     protected $_validator;
 

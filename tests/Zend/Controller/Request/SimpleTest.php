@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,13 +24,6 @@
  */
 namespace ZendTest\Controller\Request;
 use Zend\Controller\Request;
-
-// Call Zend_Controller_Request_SimpleTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_SimpleTest::main");
-}
-
-
 
 /**
  * Test class for Zend_Controller_Request_Simple.
@@ -46,19 +38,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class SimpleTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-
-        $suite  = new \PHPUnit_Framework_TestSuite("Zend_Controller_Request_SimpleTest");
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testSimpleRequestIsOfAbstractRequestType()
     {
         $request = new Request\Simple();
@@ -74,9 +53,4 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($request->getParam('test4'), 'test5');
     }
 
-}
-
-// Call Zend_Controller_Request_SimpleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Request_SimpleTest::main") {
-    \Zend_Controller_Request_SimpleTest::main();
 }

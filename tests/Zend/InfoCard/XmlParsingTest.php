@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -52,25 +51,20 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
         $this->_xmlDocument = file_get_contents($this->tokenDocument);
     }
 
-    public function testEncryptedDataType()
+    public function testEncryptedDataTypeThrowsExceptionOnInvalidInput()
     {
-            $doc = file_get_contents(__DIR__ . '/_files/encryptedtoken_bad_type.xml');
+        $doc = file_get_contents(__DIR__ . '/_files/encryptedtoken_bad_type.xml');
 
-            try {
-                $encryptedData = EncryptedData\Factory::getInstance($doc);
-                $this->fail("Exception not thrown as expected");
-            } catch(\Exception $e) {
-                /* yay */
-            }
-
-            try {
-                $encryptedData = EncryptedData\Factory::getInstance(10);
-                $this->fail("Exception not thrown as expected");
-            } catch(\Exception $e) {
-                /* yay */
-            }
-
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Unknown EncryptedData type found');
+        $encryptedData = EncryptedData\Factory::getInstance($doc);
     }
+    
+    public function testEncryptedDataTypeThrowsExceptionOnInvalidInput2()
+    {
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Invalid Data provided to create instance');
+        $encryptedData = EncryptedData\Factory::getInstance(10);
+    }
+    
     public function testEncryptedData()
     {
         $encryptedData = EncryptedData\Factory::getInstance($this->_xmlDocument);
@@ -147,80 +141,60 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($sectoken->getKeyReference(false), '/OCqQ7Np25sOiA+4OsFh1R6qIeY=');
     }
 
-    public function testEncryptedKeyErrors()
+    public function testEncryptedKeyFactoryThrowsExceptionOnInvalidInput1()
     {
-        try {
-            XML\EncryptedKey::getInstance(10);
-            $this->fail("Expected Exception Not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
-
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Invalid Data provided to create instance');
+        XML\EncryptedKey::getInstance(10);
+    }
+    
+    public function testEncryptedKeyFactoryThrowsExceptionOnInvalidInput2()
+    {
         $doc = file_get_contents(__DIR__ . "/_files/encryptedkey_bad_block.xml");
 
-        try {
-            XML\EncryptedKey::getInstance($doc);
-            $this->fail("Expected Exception not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
-
-
-
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Invalid XML Block provided for EncryptedKey');
+        XML\EncryptedKey::getInstance($doc);
+    }
+    
+    public function testEncryptedKeyThrowsExceptionOnGetEncryptionMethodWithBadXml()
+    {
         $doc = file_get_contents(__DIR__ . "/_files/encryptedkey_missing_enc_algo.xml");
         $ek = XML\EncryptedKey::getInstance($doc);
 
-        try {
-            $ek->getEncryptionMethod();
-            $this->fail("Expected Exception not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
-
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\RuntimeException', 'Unable to determine the encryption algorithm in the');
+        $ek->getEncryptionMethod();
     }
 
-    public function testKeyInfo()
+    public function testKeyInfoThrowsExceptionOnInvalidInput()
     {
-        try {
-            KeyInfo\Factory::getInstance("<foo/>");
-            $this->fail("Expected Exception Not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
-
-        try {
-            KeyInfo\Factory::getInstance(10);
-            $this->fail("Expected Exception Not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\RuntimeExcpetion', 'Invalid Data provided to create instance');
+        KeyInfo\Factory::getInstance("<foo/>");
+    }
+    
+    public function testKeyInfoThrowsExceptionOnInvalidInput2()
+    {
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Invalid Data provided to create instance');
+        KeyInfo\Factory::getInstance(10);
     }
 
-    public function testSecurityTokenReferenceErrors()
+    public function testSecurityTokenReferenceThrowsExceptionsOnInvalidInput1()
     {
-        try {
-            XML\SecurityTokenReference::getInstance("<foo/>");
-            $this->fail("Expected Exception Not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Invalid XML Block provided for SecurityTokenReference');
+        XML\SecurityTokenReference::getInstance("<foo/>");
+    }
 
-        try {
-            XML\SecurityTokenReference::getInstance(10);
-            $this->fail("Expected Exception Not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
-
+    public function testSecurityTokenReferenceThrowsExceptionsOnInvalidInput2()
+    {
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\InvalidArgumentException', 'Invalid Data provided to create instance');
+        XML\SecurityTokenReference::getInstance(10);
+    }
+    
+    public function testSecurityTokenReferenceThrowsExceptionsOnKeyReferenceRetrievalWithInvalidXml()
+    {
         $doc = file_get_contents(__DIR__ . "/_files/security_token_bad_keyref.xml");
 
-        try {
-            $si = XML\SecurityTokenReference::getInstance($doc);
-            $si->getKeyReference();
-            $this->fail("Expected Exception Not thrown");
-        } catch(\Exception $e) {
-            /* yay */
-        }
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\RuntimeException', 'Unknown Key Reference Encoding Type:');
+        $si = XML\SecurityTokenReference::getInstance($doc);
+        $si->getKeyReference();
     }
 
 }

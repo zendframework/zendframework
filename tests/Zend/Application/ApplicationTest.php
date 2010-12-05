@@ -17,14 +17,13 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Application;
 
-use Zend\Loader\Autoloader,
-    Zend\Application,
-    Zend\Config\Ini as IniConfig;
+use Zend\Application,
+    Zend\Config\Ini as IniConfig,
+    Zend\Loader\StandardAutoloader;
 
 /**
  * @category   Zend
@@ -49,9 +48,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
-
         $this->application = new Application\Application('testing');
 
         $this->iniOptions = array();
@@ -72,9 +68,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         foreach ($this->iniOptions as $key) {
             ini_restore($key);
         }
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testConstructorSetsEnvironment()
@@ -85,7 +78,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function testConstructorInstantiatesAutoloader()
     {
         $autoloader = $this->application->getAutoloader();
-        $this->assertTrue($autoloader instanceof Autoloader);
+        $this->assertTrue($autoloader instanceof StandardAutoloader);
     }
 
     public function testConstructorShouldSetOptionsWhenProvided()
@@ -130,13 +123,14 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingAutoloaderNamespaceOptionsShouldProxyToAutoloader()
     {
-        $autoloader = $this->autoloader;
+        $autoloader = new TestAsset\Autoloader();
+        $this->application->setAutoloader($autoloader);
         $this->application->setOptions(array(
             'autoloaderNamespaces' => array(
                 'Foo',
             ),
         ));
-        $namespaces = $this->autoloader->getRegisteredNamespaces();
+        $namespaces = $autoloader->getNamespaces();
         $this->assertContains('Foo', $namespaces);
     }
 
@@ -220,7 +214,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingArrayBootstrapWithoutPathOptionShouldRaiseException()
     {
-        $this->setExpectedException('Zend\\Application\\Exception');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $this->application->setOptions(array(
             'bootstrap' => array(
                 'class' => 'ZfAppBootstrap',
@@ -231,7 +225,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidBootstrapOptionShouldRaiseException()
     {
-        $this->setExpectedException('Zend\\Application\\Exception');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $this->application->setOptions(array(
             'bootstrap' => new \stdClass(),
         ));
@@ -240,7 +234,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidOptionsArgumentToConstructorShouldRaiseException()
     {
-        $this->setExpectedException('Zend\\Application\\Exception');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $application = new Application\Application('testing', new \stdClass());
     }
 
@@ -287,7 +281,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidStringOptionToConstructorShouldRaiseException()
     {
-        $this->setExpectedException('Zend\\Application\\Exception');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig');
     }
 
@@ -313,7 +307,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testApplicationShouldRaiseExceptionIfBootstrapFileDoesNotContainBootstrapClass()
     {
-        $this->setExpectedException('Zend\\Application\\Exception');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $this->application->setOptions(array(
             'bootstrap' => array(
                 'path'  => __DIR__ . '/TestAsset/ZfAppNoBootstrap.php',
@@ -325,7 +319,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testApplicationShouldRaiseExceptionWhenBootstrapClassNotOfCorrectType()
     {
-        $this->setExpectedException('Zend\\Application\\Exception');
+        $this->setExpectedException('Zend\Application\Exception\InvalidArgumentException');
         $this->application->setOptions(array(
             'bootstrap' => array(
                 'path'  => __DIR__ . '/TestAsset/ZfAppBadBootstrap.php',

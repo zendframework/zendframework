@@ -17,7 +17,6 @@
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -29,7 +28,7 @@ use \Zend\Log\Factory,
     \Zend\Log\Writer;
 
 /**
- * @uses       \Zend\Log\Exception
+ * @uses       \Zend\Log\Exception\InvalidArgumentException
  * @uses       \Zend\Log\Factory
  * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
@@ -37,7 +36,6 @@ use \Zend\Log\Factory,
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 abstract class AbstractWriter implements Writer, Factory
 {
@@ -56,6 +54,7 @@ abstract class AbstractWriter implements Writer, Factory
      * Add a filter specific to this writer.
      *
      * @param  \Zend\Log\Filter  $filter
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return void
      */
     public function addFilter($filter)
@@ -65,7 +64,7 @@ abstract class AbstractWriter implements Writer, Factory
         }
 
         if (!$filter instanceof \Zend\Log\Filter) {
-            throw new \Zend\Log\Exception('Invalid filter provided');
+            throw new \Zend\Log\Exception\InvalidArgumentException('Invalid filter provided');
         }
 
         $this->_filters[] = $filter;
@@ -123,7 +122,7 @@ abstract class AbstractWriter implements Writer, Factory
      *
      * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
      * @return array
-     * @throws \Zend\Log\Exception
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     static protected function _parseConfig($config)
     {
@@ -132,8 +131,8 @@ abstract class AbstractWriter implements Writer, Factory
         }
 
         if (!is_array($config)) {
-            throw new \Zend\Log\Exception(
-				'Configuration must be an array or instance of Zend\\Config\\Config'
+            throw new \Zend\Log\Exception\InvalidArgumentException(
+				'Configuration must be an array or instance of Zend\Config\Config'
 			);
         }
 

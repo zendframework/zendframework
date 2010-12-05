@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -60,7 +59,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('LDAP is not enabled');
         }
         $this->_adapter->setLdap(new \Zend\Ldap\Ldap());
-        $this->assertType('Zend_Ldap', $this->_adapter->getLdap());
+        $this->assertType('Zend\Ldap\Ldap', $this->_adapter->getLdap());
     }
 
     public function testUsernameIsNullIfNotSet()

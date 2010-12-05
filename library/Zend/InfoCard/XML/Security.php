@@ -17,7 +17,6 @@
  * @subpackage Zend_InfoCard_Xml_Security
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -90,29 +89,29 @@ class Security
     static public function validateXMLSignature($strXMLInput)
     {
         if(!extension_loaded('openssl')) {
-            throw new Security\Exception("You must have the openssl extension installed to use this class");
+            throw new Security\Exception\ExtensionNotLoadedException("You must have the openssl extension installed to use this class");
         }
 
         $sxe = simplexml_load_string($strXMLInput);
 
         if(!isset($sxe->Signature)) {
-            throw new Security\Exception("Could not identify XML Signature element");
+            throw new Security\Exception\InvalidArgumentException("Could not identify XML Signature element");
         }
 
         if(!isset($sxe->Signature->SignedInfo)) {
-            throw new Security\Exception("Signature is missing a SignedInfo block");
+            throw new Security\Exception\InvalidArgumentException("Signature is missing a SignedInfo block");
         }
 
         if(!isset($sxe->Signature->SignatureValue)) {
-            throw new Security\Exception("Signature is missing a SignatureValue block");
+            throw new Security\Exception\InvalidArgumentException("Signature is missing a SignatureValue block");
         }
 
         if(!isset($sxe->Signature->KeyInfo)) {
-            throw new Security\Exception("Signature is missing a KeyInfo block");
+            throw new Security\Exception\InvalidArgumentException("Signature is missing a KeyInfo block");
         }
 
         if(!isset($sxe->Signature->KeyInfo->KeyValue)) {
-            throw new Security\Exception("Signature is missing a KeyValue block");
+            throw new Security\Exception\InvalidArgumentException("Signature is missing a KeyValue block");
         }
 
         switch((string)$sxe->Signature->SignedInfo->CanonicalizationMethod['Algorithm']) {
@@ -120,7 +119,7 @@ class Security
                 $cMethod = (string)$sxe->Signature->SignedInfo->CanonicalizationMethod['Algorithm'];
                 break;
             default:
-                throw new Security\Exception("Unknown or unsupported CanonicalizationMethod Requested");
+                throw new Security\Exception\InvalidArgumentException("Unknown or unsupported CanonicalizationMethod Requested");
                 break;
         }
 
@@ -129,7 +128,7 @@ class Security
                 $sMethod = (string)$sxe->Signature->SignedInfo->SignatureMethod['Algorithm'];
                 break;
             default:
-                throw new Security\Exception("Unknown or unsupported SignatureMethod Requested");
+                throw new Security\Exception\InvalidArgumentException("Unknown or unsupported SignatureMethod Requested");
                 break;
         }
 
@@ -138,7 +137,7 @@ class Security
                 $dMethod = (string)$sxe->Signature->SignedInfo->Reference->DigestMethod['Algorithm'];
                 break;
             default:
-                throw new Security\Exception("Unknown or unsupported DigestMethod Requested");
+                throw new Security\Exception\InvalidArgumentException("Unknown or unsupported DigestMethod Requested");
                 break;
         }
 
@@ -156,7 +155,7 @@ class Security
             $signatureValue = base64_decode((string)$sxe->Signature->SignatureValue);
         }
 
-        $transformer = new Transform\TransformChain();
+        $transformer = new Security\Transform\TransformChain();
 
         foreach($sxe->Signature->SignedInfo->Reference->Transforms->children() as $transform) {
             $transformer->addTransform((string)$transform['Algorithm']);
@@ -167,7 +166,7 @@ class Security
         $transformed_xml_binhash = pack("H*", sha1($transformed_xml));
 
         if($transformed_xml_binhash != $dValue) {
-            throw new Security\Exception("Locally Transformed XML does not match XML Document. Cannot Verify Signature");
+            throw new Security\Exception\RuntimeException("Locally Transformed XML does not match XML Document. Cannot Verify Signature");
         }
 
         $public_key = null;
@@ -185,7 +184,7 @@ class Security
                 $public_key = openssl_pkey_get_public($pem);
 
                 if(!$public_key) {
-                    throw new Security\Exception("Unable to extract and prcoess X509 Certificate from KeyValue");
+                    throw new Security\Exception\RuntimeException("Unable to extract and prcoess X509 Certificate from KeyValue");
                 }
 
                 break;
@@ -193,7 +192,7 @@ class Security
 
                 if(!isset($sxe->Signature->KeyInfo->KeyValue->RSAKeyValue->Modulus) ||
                    !isset($sxe->Signature->KeyInfo->KeyValue->RSAKeyValue->Exponent)) {
-                       throw new Security\Exception("RSA Key Value not in Modulus/Exponent form");
+                       throw new Security\Exception\InvalidArgumentException("RSA Key Value not in Modulus/Exponent form");
                 }
 
                 $modulus = base64_decode((string)$sxe->Signature->KeyInfo->KeyValue->RSAKeyValue->Modulus);
@@ -205,10 +204,10 @@ class Security
 
                 break;
             default:
-                throw new Security\Exception("Unable to determine or unsupported representation of the KeyValue block");
+                throw new Security\Exception\RuntimeException("Unable to determine or unsupported representation of the KeyValue block");
         }
 
-        $transformer = new Transform\TransformChain();
+        $transformer = new Security\Transform\TransformChain();
         $transformer->addTransform((string)$sxe->Signature->SignedInfo->CanonicalizationMethod['Algorithm']);
 
         // The way we are doing our XML processing requires that we specifically add this
@@ -283,9 +282,9 @@ class Security
             case ($len < 0x010000):
                 return sprintf("%c%c%c%c%s", $type, 0x82, $len / 0x0100, $len % 0x0100, $data);
             default:
-                throw new Security\Exception("Could not encode value");
+                throw new Security\Exception\RuntimeException("Could not encode value");
         }
 
-        throw new Security\Exception("Invalid code path");
+        throw new Security\Exception\RuntimeException("Invalid code path");
     }
 }

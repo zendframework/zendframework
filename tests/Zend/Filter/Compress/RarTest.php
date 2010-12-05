@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: $
  */
 
 namespace ZendTest\Filter\Compress;
@@ -199,12 +198,8 @@ class RarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Testfile.txt', $filter->getTarget());
         $this->assertEquals('Testfile.txt', $filter->getOptions('target'));
 
-        try {
-            $filter->setTarget('/unknown/path/to/file.txt');
-            $this->fails('Exception expected');
-        } catch(\Zend\Filter\Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'does not exist');
+        $filter->setTarget('/unknown/path/to/file.txt');
     }
 
     /**
@@ -216,24 +211,26 @@ class RarTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new RarCompression();
 
-        try {
-            $filter->compress('test.txt');
-            $this->fails('Exception expected');
-        } catch (\Exception $e) {
-            $this->assertContains('No compression callback', $e->getMessage());
-        }
-
-        try {
-            $filter->setCallback('invalidCallback');
-            $this->fails('Exception expected');
-        } catch (\Exception $e) {
-            $this->assertContains('Callback can not be accessed', $e->getMessage());
-        }
-
         $callback = array(__CLASS__, 'rarCompress');
         $filter->setCallback($callback);
         $this->assertEquals($callback, $filter->getCallback());
 
+    }
+    
+    public function testSettingCallbackThrowsExceptionOnMissingCallback()
+    {
+        $filter = new RarCompression();
+        
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
+        $filter->compress('test.txt');
+    }
+    
+    public function testSettingCallbackThrowsExceptionOnInvalidCallback()
+    {
+        $filter = new RarCompression();
+        
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
+        $filter->setCallback('invalidCallback');
     }
 
     /**

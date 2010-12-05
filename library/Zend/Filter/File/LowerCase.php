@@ -16,14 +16,14 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Filter\File;
-use Zend\Filter;
+use Zend\Filter,
+    Zend\Filter\Exception;
 
 /**
  * @uses       \Zend\Filter\Exception
@@ -59,23 +59,23 @@ class LowerCase extends Filter\StringToLower
     public function __invoke($value)
     {
         if (!file_exists($value)) {
-            throw new Filter\Exception("File '$value' not found");
+            throw new Exception\InvalidArgumentException("File '$value' not found");
         }
 
         if (!is_writable($value)) {
-            throw new Filter\Exception("File '$value' is not writable");
+            throw new Exception\RuntimeException("File '$value' is not writable");
         }
 
         $content = file_get_contents($value);
         if (!$content) {
-            throw new Filter\Exception("Problem while reading file '$value'");
+            throw new Exception\RuntimeException("Problem while reading file '$value'");
         }
 
         $content = parent::__invoke($content);
         $result  = file_put_contents($value, $content);
 
         if (!$result) {
-            throw new Filter\Exception("Problem while writing file '$value'");
+            throw new Exception\RuntimeException("Problem while writing file '$value'");
         }
 
         return $value;

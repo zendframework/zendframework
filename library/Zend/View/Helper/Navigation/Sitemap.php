@@ -17,7 +17,6 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -171,7 +170,7 @@ class Sitemap extends AbstractHelper
     }
 
     /**
-     * Sets whether sitemap should be validated using Zend_Validate_Sitemap_*
+     * Sets whether sitemap should be validated using Zend\Validate\Sitemap_*
      *
      * @param  bool $useSitemapValidators           whether sitemap validators
      *                                              should be used
@@ -185,7 +184,7 @@ class Sitemap extends AbstractHelper
     }
 
     /**
-     * Returns whether sitemap should be validated using Zend_Validate_Sitemap_*
+     * Returns whether sitemap should be validated using Zend\Validate\Sitemap_*
      *
      * @return bool  whether sitemap should be validated using validators
      */

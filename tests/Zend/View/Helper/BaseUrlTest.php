@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -187,9 +186,4 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
         $helper = new Helper\BaseUrl();
         $this->assertEquals('/mybar', $helper->getBaseUrl());
     }
-}
-
-// Call Zend_View_Helper_BaseUrlTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'Zend_View_Helper_BaseUrlTest::main') {
-    \Zend_View_Helper_BaseUrlTest::main();
 }

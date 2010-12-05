@@ -17,7 +17,6 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,6 +25,8 @@
 namespace Zend\Mail\Storage\Folder;
 
 use Zend\Mail\Storage\MailFolder,
+    Zend\Mail\Storage\Folder,
+    Zend\Mail\Storage\Exception,
     Zend\Mail\Storage;
 
 /**
@@ -82,7 +83,7 @@ class Maildir extends Storage\Maildir implements MailFolder
         }
 
         if (!isset($params->dirname) || !is_dir($params->dirname)) {
-            throw new Storage\Exception('no valid dirname given in params');
+            throw new Exception\InvalidArgumentException('no valid dirname given in params');
         }
 
         $this->_rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -111,7 +112,7 @@ class Maildir extends Storage\Maildir implements MailFolder
 
         $dh = @opendir($this->_rootdir);
         if (!$dh) {
-            throw new Storage\Exception("can't read folders in maildir");
+            throw new Exception\RuntimeException("can't read folders in maildir");
         }
         $dirs = array();
         while (($entry = readdir($dh)) !== false) {
@@ -136,7 +137,7 @@ class Maildir extends Storage\Maildir implements MailFolder
                 if (strpos($dir, $parent) === 0) {
                     $local = substr($dir, strlen($parent));
                     if (strpos($local, $this->_delim) !== false) {
-                        throw new Storage\Exception('error while reading maildir');
+                        throw new Exception\RuntimeException('error while reading maildir');
                     }
                     array_push($stack, $parent);
                     $parent = $dir . $this->_delim;
@@ -151,7 +152,7 @@ class Maildir extends Storage\Maildir implements MailFolder
                 }
             } while ($stack);
             if (!$stack) {
-                throw new Storage\Exception('error while reading maildir');
+                throw new Exception\RuntimeException('error while reading maildir');
             }
         }
     }
@@ -184,7 +185,7 @@ class Maildir extends Storage\Maildir implements MailFolder
         }
 
         if ($currentFolder->getGlobalName() != rtrim($rootFolder, $this->_delim)) {
-            throw new Storage\Exception("folder $rootFolder not found");
+            throw new Exception\InvalidArgumentException("folder $rootFolder not found");
         }
         return $currentFolder;
     }
@@ -210,11 +211,11 @@ class Maildir extends Storage\Maildir implements MailFolder
         } catch(Storage\Exception $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
-                throw new Storage\Exception("{$this->_currentFolder} is not selectable", 0, $e);
+                throw new Exception\RuntimeException("{$this->_currentFolder} is not selectable", 0, $e);
             }
             // seems like file has vanished; rebuilding folder tree - but it's still an exception
             $this->_buildFolderTree($this->_rootdir);
-            throw new Storage\Exception('seems like the maildir has vanished, I\'ve rebuild the ' .
+            throw new Exception\RuntimeException('seems like the maildir has vanished, I\'ve rebuild the ' .
                                                          'folder tree, search for an other folder and try again', 0, $e);
         }
     }

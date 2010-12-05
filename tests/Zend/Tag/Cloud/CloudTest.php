@@ -17,17 +17,20 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Tag\Cloud;
-use Zend\Tag;
-use Zend\Tag\Cloud;
-use Zend\Loader\PluginLoader;
-use ZendTest\Tag\Cloud\TestAsset;
+
+use Zend\Tag,
+    Zend\Tag\Cloud,
+    Zend\Tag\Cloud\DecoratorBroker,
+    Zend\Loader\Broker,
+    Zend\Loader\PluginBroker,
+    Zend\Tag\Exception\InvalidArgumentException,
+    ZendTest\Tag\Cloud\TestAsset;
 
 /**
  * @category   Zend
@@ -74,9 +77,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->setCloudDecorator(new \stdClass());
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Decorator is no instance of Zend_Tag_Cloud_Decorator_Cloud', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Decorator is no instance of Zend\Tag\Cloud\Decorator\Cloud', $e->getMessage());
         }
     }
 
@@ -104,82 +107,25 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->setTagDecorator(new \stdClass());
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Decorator is no instance of Zend_Tag_Cloud_Decorator_Tag', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Decorator is no instance of Zend\Tag\Cloud\Decorator\Tag', $e->getMessage());
         }
     }
 
-    public function testSetPrefixPathViaOptions()
+    public function testSetDecoratorBroker()
     {
-        $cloud = $this->_getCloud(array(
-            'prefixPath' => array(
-                'prefix' => 'ZendTest\Tag\Cloud\TestAsset',
-                'path' => __DIR__ . '/TestAsset'
-            ),
-            'cloudDecorator' => array(
-                'decorator' => 'CloudDummy1',
-                'options'   => array(
-                    'foo' => 'bar'
-                )
-            )
-        ), false);
-
-        $this->assertTrue($cloud->getCloudDecorator() instanceof TestAsset\CloudDummy1);
-        $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
-    }
-
-    public function testSetPrefixPathsViaOptions()
-    {
-        $cloud = $this->_getCloud(array(
-            'prefixPath' => array(
-                array(
-                    'prefix' => 'ZendTest\Tag\Cloud\TestAsset',
-                    'path' => __DIR__ . '/TestAsset'
-                )
-            ),
-            'cloudDecorator' => array(
-                'decorator' => 'CloudDummy2',
-                'options'   => array(
-                    'foo' => 'bar'
-                )
-            )
-        ), false);
-
-        $this->assertTrue($cloud->getCloudDecorator() instanceof TestAsset\CloudDummy2);
-        $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
-    }
-
-    public function testSetPrefixPathsSkip()
-    {
-        $cloud = $this->_getCloud(array(
-            'prefixPath' => array(
-                array(
-                    'prefix' => 'foobar',
-                )
-            ),
-        ), false);
-
-        $this->assertEquals(1, count($cloud->getPluginLoader()->getPaths()));
-    }
-
-    public function testSetPluginLoader()
-    {
-        $loader = new PluginLoader(array('foo_' => 'bar/'));
+        $broker = new PluginBroker();
         $cloud  = $this->_getCloud(array(), null);
-        $cloud->setPluginLoader($loader);
-        $paths  = $cloud->getPluginLoader()->getPaths();
-
-        $this->assertEquals('bar/', $paths['foo_\\'][0]); // this might be an issue
+        $cloud->setDecoratorBroker($broker);
+        $this->assertSame($broker, $cloud->getDecoratorBroker());
     }
 
-    public function testSetPluginLoaderViaOptions()
+    public function testSetDecoratorBrokerViaOptions()
     {
-        $loader = new PluginLoader(array('foo_' => 'bar/'));
-        $cloud  = $this->_getCloud(array('pluginLoader' => $loader), null);
-        $paths  = $cloud->getPluginLoader()->getPaths();
-
-        $this->assertEquals('bar/', $paths['foo_\\'][0]); // this might be an issue
+        $broker = new PluginBroker();
+        $cloud  = $this->_getCloud(array('decoratorBroker' => $broker), null);
+        $this->assertSame($broker, $cloud->getDecoratorBroker());
     }
 
     public function testAppendTagAsArray()
@@ -208,9 +154,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->appendTag('foo');
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Tag must be an instance of Zend_Tag_Taggable or an array', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Tag must be an instance of Zend\Tag\Taggable or an array', $e->getMessage());
         }
     }
 
@@ -256,9 +202,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         try {
             $cloud->setTags(array('foo'));
-            $this->fail('An expected Zend_Tag_Cloud_Exception was not raised');
-        } catch (Cloud\Exception $e) {
-            $this->assertEquals('Tag must be an instance of Zend_Tag_Taggable or an array', $e->getMessage());
+            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
+        } catch (InvalidArgumentException $e) {
+            $this->assertEquals('Tag must be an instance of Zend\Tag\Taggable or an array', $e->getMessage());
         }
     }
 
@@ -296,7 +242,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         $cloud    = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $expected = '<ul class="Zend_Tag_Cloud">'
+        $expected = '<ul class="Zend\Tag\Cloud">'
                   . '<li><a href="" style="font-size: 10px;">foo</a></li> '
                   . '<li><a href="" style="font-size: 20px;">bar</a></li>'
                   . '</ul>';
@@ -312,19 +258,25 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testRenderViaToString()
     {
         $cloud = $this->_getCloud(array('tags' => array(array('title' => 'foo', 'weight' => 1), array('title' => 'bar', 'weight' => 3))));
-        $expected = '<ul class="Zend_Tag_Cloud">'
+        $expected = '<ul class="Zend\Tag\Cloud">'
                   . '<li><a href="" style="font-size: 10px;">foo</a></li> '
                   . '<li><a href="" style="font-size: 20px;">bar</a></li>'
                   . '</ul>';
         $this->assertEquals($expected, (string) $cloud);
     }
 
-    protected function _getCloud($options = null, $setPluginLoader = true)
+    protected function _getCloud($options = null, $setDecoratorBroker = true)
     {
         $cloud = new Tag\Cloud($options);
 
-        if ($setPluginLoader) {
-            $cloud->getPluginLoader()->addPrefixPath('ZendTest\Tag\Cloud\TestAsset', __DIR__ . '/TestAsset');
+        if ($setDecoratorBroker) {
+            $loader = $cloud->getDecoratorBroker()->getClassLoader();
+            $loader->registerPlugins(array(
+                'clouddummy'  => 'ZendTest\Tag\Cloud\TestAsset\CloudDummy',
+                'clouddummy1' => 'ZendTest\Tag\Cloud\TestAsset\CloudDummy1',
+                'clouddummy2' => 'ZendTest\Tag\Cloud\TestAsset\CloudDummy2',
+                'tagdummy'    => 'ZendTest\Tag\Cloud\TestAsset\TagDummy',
+            ));
         }
 
         return $cloud;

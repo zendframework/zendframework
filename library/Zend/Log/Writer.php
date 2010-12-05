@@ -17,7 +17,6 @@
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -26,7 +25,6 @@
 namespace Zend\Log;
 
 /**
- * @uses       \Zend\Log\Exception
  * @uses       \Zend\Log\FactoryInterface
  * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
@@ -34,7 +32,6 @@ namespace Zend\Log;
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 interface Writer
 {

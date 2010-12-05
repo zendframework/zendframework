@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Form\Decorator;
@@ -66,7 +65,7 @@ class ViewScriptTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderRaisesExceptionIfNoViewScriptRegistered()
     {
-        $this->setExpectedException('Zend\Form\Exception', 'script');
+        $this->setExpectedException('Zend\Form\Decorator\Exception\UnexpectedValueException', 'script');
         $this->getElement();
         $this->decorator->render('');
     }

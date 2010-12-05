@@ -16,7 +16,6 @@
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -86,11 +85,11 @@ class InfoCard
         $this->_keyPairs = array();
 
         if(!extension_loaded('mcrypt')) {
-            throw new Exception("Use of the Zend_InfoCard component requires the mcrypt extension to be enabled in PHP");
+            throw new Exception\ExtensionNotLoadedException("Use of the Zend_InfoCard component requires the mcrypt extension to be enabled in PHP");
         }
 
         if(!extension_loaded('openssl')) {
-            throw new Exception("Use of the Zend_InfoCard component requires the openssl extension to be enabled in PHP");
+            throw new Exception\ExtensionNotLoadedException("Use of the Zend_InfoCard component requires the openssl extension to be enabled in PHP");
         }
     }
 
@@ -177,7 +176,7 @@ class InfoCard
     {
 
         if(!key_exists($key_id, $this->_keyPairs)) {
-            throw new Exception("Attempted to remove unknown key id: $key_id");
+            throw new Exception\InvalidArgumentException("Attempted to remove unknown key id: $key_id");
         }
 
         unset($this->_keyPairs[$key_id]);
@@ -198,18 +197,18 @@ class InfoCard
     {
         if(!file_exists($private_key_file) ||
            !file_exists($public_key_file)) {
-            throw new Exception("Could not locate the public and private certificate pair files: $private_key_file, $public_key_file");
+            throw new Exception\InvalidArgumentException("Could not locate the public and private certificate pair files: $private_key_file, $public_key_file");
         }
 
         if(!is_readable($private_key_file) ||
            !is_readable($public_key_file)) {
-            throw new Exception("Could not read the public and private certificate pair files (check permissions): $private_key_file, $public_key_file");
+            throw new Exception\InvalidArgumentException("Could not read the public and private certificate pair files (check permissions): $private_key_file, $public_key_file");
         }
 
         $key_id = md5($private_key_file.$public_key_file);
 
         if(key_exists($key_id, $this->_keyPairs)) {
-            throw new Exception("Attempted to add previously existing certificate pair: $private_key_file, $public_key_file");
+            throw new Exception\InvalidArgumentException("Attempted to add previously existing certificate pair: $private_key_file, $public_key_file");
         }
 
         switch($type) {
@@ -228,7 +227,7 @@ class InfoCard
                 return $key_id;
                 break;
             default:
-                throw new Exception("Invalid Certificate Pair Type specified: $type");
+                throw new Exception\InvalidArgumentException("Invalid Certificate Pair Type specified: $type");
         }
     }
 
@@ -246,7 +245,7 @@ class InfoCard
             return $this->_keyPairs[$key_id];
         }
 
-        throw new Exception("Invalid Certificate Pair ID provided: $key_id");
+        throw new Exception\InvalidArgumentException("Invalid Certificate Pair ID provided: $key_id");
     }
 
     /**
@@ -272,7 +271,7 @@ class InfoCard
                 $digest_retval = sha1($certificateData, true);
                 break;
             default:
-                throw new Exception("Invalid Digest Type Provided: $digestMethod");
+                throw new Exception\InvalidArgumentException("Invalid Digest Type Provided: $digestMethod");
         }
 
         return $digest_retval;
@@ -318,7 +317,7 @@ class InfoCard
             case Cipher::ENC_AES256CBC:
                 break;
             default:
-                throw new Exception("Unknown Encryption Method used in the secure token");
+                throw new Exception\RuntimeException("Unknown Encryption Method used in the secure token");
         }
 
         // Figure out the Key we are using to decrypt the token
@@ -326,7 +325,7 @@ class InfoCard
         $keyinfo = $encryptedData->getKeyInfo();
 
         if(!($keyinfo instanceof XML\KeyInfo\XMLDSig)) {
-            throw new Exception("Expected a XML digital signature KeyInfo, but was not found");
+            throw new Exception\RuntimeException("Expected a XML digital signature KeyInfo, but was not found");
         }
 
 
@@ -337,7 +336,7 @@ class InfoCard
             case Cipher::ENC_RSA_OAEP_MGF1P:
                 break;
             default:
-                throw new Exception("Unknown Key Encryption Method used in secure token");
+                throw new Exception\RuntimeException("Unknown Key Encryption Method used in secure token");
         }
 
         $securityTokenRef = $encryptedKey->getKeyInfo()->getSecurityTokenReference();
@@ -345,7 +344,7 @@ class InfoCard
         $key_id = $this->_findCertifiatePairByDigest($securityTokenRef->getKeyReference());
 
         if(!$key_id) {
-            throw new Exception("Unable to find key pair used to encrypt symmetric InfoCard Key");
+            throw new Exception\RuntimeException("Unable to find key pair used to encrypt symmetric InfoCard Key");
         }
 
         $certificate_pair = $this->getCertificatePair($key_id);
@@ -353,7 +352,7 @@ class InfoCard
         // Santity Check
 
         if($certificate_pair['type_uri'] != $encryptedKey->getEncryptionMethod()) {
-            throw new Exception("Certificate Pair which matches digest is not of same algorithm type as document, check addCertificate()");
+            throw new Exception\RuntimeException("Certificate Pair which matches digest is not of same algorithm type as document, check addCertificate()");
         }
 
         $PKcipher = Cipher::getInstanceByURI($encryptedKey->getEncryptionMethod());
@@ -414,7 +413,7 @@ class InfoCard
         }
 
         if(!($assertions instanceof XML\Assertion)) {
-            throw new Exception("Invalid Assertion Object returned");
+            throw new Exception\RuntimeException("Invalid Assertion Object returned");
         }
 
         if(!($reference_id = XML\Security::validateXMLSignature($assertions->asXML()))) {

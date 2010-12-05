@@ -17,7 +17,6 @@
  * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -90,11 +89,11 @@ abstract class AbstractRenderer
     protected $_groups = array();
 
     /**
-     * Plugin loader for tags
+     * Plugin broker for tags
      *
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var \Zend\Loader\Broker
      */
-    protected $_pluginLoader;
+    protected $_pluginBroker;
 
     /**
      * The current token
@@ -165,11 +164,11 @@ abstract class AbstractRenderer
     /**
      * Get the plugin loader
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return \Zend\Loader\Broker
      */
-    public function getPluginLoader()
+    public function getPluginBroker()
     {
-        return $this->_pluginLoader;
+        return $this->_pluginBroker;
     }
 
     /**
@@ -206,7 +205,7 @@ abstract class AbstractRenderer
     public function addMarkup($name, $type, array $options)
     {
         if (!isset($options['group']) && ($type ^ self::TYPE_ALIAS)) {
-            throw new Exception("There is no render group defined.");
+            throw new Exception\InvalidArgumentException("There is no render group defined.");
         }
 
         // add the filter
@@ -227,7 +226,7 @@ abstract class AbstractRenderer
             // add a callback tag
             if (isset($options['callback'])) {
                 if (!($options['callback'] instanceof TokenConverter)) {
-                    throw new Exception("Not a valid markup callback.");
+                    throw new Exception\InvalidArgumentException("Not a valid markup callback.");
                 }
                 if (method_exists($options['callback'], 'setRenderer')) {
                     $options['callback']->setRenderer($this);
@@ -243,8 +242,7 @@ abstract class AbstractRenderer
         } elseif ($type & self::TYPE_ALIAS) {
             // add an alias
             if (empty($options['name'])) {
-                throw new Exception(
-                        'No alias was provided but markup was defined as such');
+                throw new Exception\InvalidArgumentException('No alias was provided but markup was defined as such');
             }
 
             $this->_markups[$name] = array(
@@ -418,9 +416,7 @@ abstract class AbstractRenderer
         if (is_array($markup) && ($markup['type'] & self::TYPE_CALLBACK)) {
             // load the callback if the tag doesn't exist
             if (!($markup['callback'] instanceof TokenConverter)) {
-                $class = $this->getPluginLoader()->load($name);
-
-                $markup['callback'] = new $class;
+                $markup['callback'] = $this->getPluginBroker()->load($name);
 
                 if (method_exists($markup['callback'], 'setRenderer')) {
                     $markup['callback']->setRenderer($this);

@@ -16,7 +16,6 @@
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -406,9 +405,8 @@ class MemoryManager
             }
         }
 
-        throw new Exception('Memory manager can\'t get enough space.');
+        throw new Exception\RuntimeException('Memory manager can\'t get enough space.');
     }
-
 
     /**
      * Swap object data to disk

@@ -16,14 +16,14 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator;
+use Zend\Validator,
+    Zend\Validator\Exception;
 
 /**
  * Validator which checks if the file already exists in the directory
@@ -75,7 +75,7 @@ class Exists extends Validator\AbstractValidator
         } else if (is_string($directory)) {
             $directory = explode(',', $directory);
         } else if (!is_array($directory)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $this->setDirectory($directory);
@@ -124,7 +124,7 @@ class Exists extends Validator\AbstractValidator
         if (is_string($directory)) {
             $directory = explode(',', $directory);
         } else if (!is_array($directory)) {
-            throw new Validator\Exception ('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         foreach ($directory as $content) {
@@ -149,8 +149,6 @@ class Exists extends Validator\AbstractValidator
     }
 
     /**
-     * Defined by Zend_Validate_Interface
-     *
      * Returns true if and only if the file already exists in the set directories
      *
      * @param  string  $value Real file to check for existance

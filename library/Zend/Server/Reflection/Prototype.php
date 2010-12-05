@@ -17,7 +17,6 @@
  * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -53,13 +52,13 @@ class Prototype
         $this->_return = $return;
 
         if (!is_array($params) && (null !== $params)) {
-            throw new Exception('Invalid parameters');
+            throw new Exception\InvalidArgumentException('Invalid parameters');
         }
 
         if (is_array($params)) {
             foreach ($params as $param) {
                 if (!$param instanceof ReflectionParameter) {
-                    throw new Exception('One or more params are invalid');
+                    throw new Exception\InvalidArgumentException('One or more params are invalid');
                 }
             }
         }

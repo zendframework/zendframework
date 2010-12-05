@@ -17,15 +17,16 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace ZendTest\Controller\Action\Helper;
-use Zend\Json;
-use Zend\Layout;
+
+use Zend\Json,
+    Zend\Controller\Front as FrontController,
+    Zend\Layout;
 
 
 /**
@@ -56,13 +57,15 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->response = new \Zend\Controller\Response\Http();
         $this->response->headersSentThrowsException = false;
 
-        $front = \Zend\Controller\Front::getInstance();
+        $front = FrontController::getInstance();
         $front->resetInstance();
         $front->setResponse($this->response);
+        $broker = $front->getHelperBroker();
 
         $this->viewRenderer = new \Zend\Controller\Action\Helper\ViewRenderer();
-        \Zend\Controller\Action\HelperBroker::addHelper($this->viewRenderer);
+        $broker->register('viewrenderer', $this->viewRenderer);
         $this->helper = new \Zend\Controller\Action\Helper\Json();
+        $this->helper->setBroker($broker);
         $this->helper->suppressExit = true;
     }
 

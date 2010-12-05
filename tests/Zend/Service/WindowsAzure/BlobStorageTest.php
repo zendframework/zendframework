@@ -15,29 +15,21 @@
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage UnitTests
- * @version    $Id: BlobStorageTest.php 35709 2009-12-14 14:14:14Z unknown $
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 
 /**
- * Test helpers
- */
-
-/**
  * @see Zend_Service_WindowsAzure_Storage_Blob 
  */
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_BlobStorageTest::main');
-}
 
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage UnitTests
- * @version    $Id: BlobStorageTest.php 35709 2009-12-14 14:14:14Z unknown $
+ * @group      Zend_Service
+ * @group      Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -48,12 +40,6 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
     public function __construct()
     {
         self::$path = __DIR__.'/_files/';
-    }
-
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_BlobStorageTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -478,9 +464,4 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
         fclose($fp);
         return $fileName;
     }
-}
-
-// Call Zend_Service_WindowsAzure_BlobStorageTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Service_WindowsAzure_BlobStorageTest::main") {
-    Zend_Service_WindowsAzure_BlobStorageTest::main();
 }

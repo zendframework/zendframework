@@ -17,17 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_DeveloperGarden_AllTests::main');
-}
-
-/**
- * Test helper
- */
-
 
 /**
  * Zend_Service_DeveloperGarden test suite
@@ -37,15 +27,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 class Zend_Service_DeveloperGarden_AllOfflineTests
 {
-    public static function main()
-    {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
-    }
-
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service - DeveloperGarden - Offline');
@@ -60,8 +44,4 @@ class Zend_Service_DeveloperGarden_AllOfflineTests
 
         return $suite;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_DeveloperGarden_AllOfflineTests::main') {
-    Zend_Service_DeveloperGarden_AllOfflineTests::main();
 }

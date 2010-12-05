@@ -17,13 +17,14 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
  * @namespace
  */
 namespace Zend\Tool\Framework\Client;
+
+use Zend\Tool\Framework\Exception;
 
 /**
  * @uses       \Zend\Config\Config
@@ -78,7 +79,7 @@ class Config
     public function setConfigFilepath($configFilepath)
     {
         if (!file_exists($configFilepath)) {
-            throw new Exception('Provided path to config ' . $configFilepath . ' does not exist');
+            throw new Exception\InvalidArgumentException('Provided path to config ' . $configFilepath . ' does not exist');
         }
 
         $this->_configFilepath = $configFilepath;
@@ -107,7 +108,7 @@ class Config
                 $this->_config = new \Zend\Config\Config(include $configFilepath, true);
                 break;
             default:
-                throw new Exception('Unknown config file type '
+                throw new Exception\InvalidArgumentException('Unknown config file type '
                     . $suffix . ' at location ' . $configFilepath
                     );
         }

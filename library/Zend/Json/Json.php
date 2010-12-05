@@ -16,7 +16,6 @@
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -24,13 +23,17 @@
  */
 namespace Zend\Json;
 
+use Zend\Json\Exception\RuntimeException,
+    Zend\Json\Exception\RecursionException;
+
 /**
  * Class for encoding to and decoding from JSON.
  *
- * @uses       \Zend\Json\Decoder
- * @uses       \Zend\Json\Encoder
- * @uses       \Zend\Json\Exception
- * @uses       \Zend\Json\Expr
+ * @uses       Zend\Json\Decoder
+ * @uses       Zend\Json\Encoder
+ * @uses       Zend\Json\Exception\RuntimeException
+ * @uses       Zend\Json\Exception\RecursionException
+ * @uses       Zend\Json\Expr
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -68,30 +71,25 @@ class JSON
      * @param int $objectDecodeType Optional; flag indicating how to decode
      * objects. See {@link Zend_Json_Decoder::decode()} for details.
      * @return mixed
+     * @throws Zend\Json\Exception\RuntimeException
      */
-    public static function decode($encodedValue, $objectDecodeType = self::TYPE_ARRAY)
+    public static function decode($encodedValue, $objectDecodeType = self::TYPE_OBJECT)
     {
         $encodedValue = (string) $encodedValue;
         if (function_exists('json_decode') && self::$useBuiltinEncoderDecoder !== true) {
             $decode = json_decode($encodedValue, $objectDecodeType);
 
-            // php < 5.3
-            if (!function_exists('json_last_error')) {
-                if ($decode === $encodedValue) {
-                    throw new Exception('Decoding failed');
-                }
-            // php >= 5.3
-            } elseif (($jsonLastErr = json_last_error()) != JSON_ERROR_NONE) {
-                switch ($jsonLastErr) {
-                    case JSON_ERROR_DEPTH:
-                        throw new Exception('Decoding failed: Maximum stack depth exceeded');
-                    case JSON_ERROR_CTRL_CHAR:
-                        throw new Exception('Decoding failed: Unexpected control character found');
-                    case JSON_ERROR_SYNTAX:
-                        throw new Exception('Decoding failed: Syntax error');
-                    default:
-                        throw new Exception('Decoding failed');
-                }
+            switch (json_last_error()) {
+                case JSON_ERROR_NONE:
+                    break;
+                case JSON_ERROR_DEPTH:
+                    throw new RuntimeException('Decoding failed: Maximum stack depth exceeded');
+                case JSON_ERROR_CTRL_CHAR:
+                    throw new RuntimeException('Decoding failed: Unexpected control character found');
+                case JSON_ERROR_SYNTAX:
+                    throw new RuntimeException('Decoding failed: Syntax error');
+                default:
+                    throw new RuntimeException('Decoding failed');
             }
 
             return $decode;
@@ -157,7 +155,7 @@ class JSON
             }
         }
 
-         return $encodedResult;
+        return $encodedResult;
     }
 
     /**
@@ -214,7 +212,6 @@ class JSON
      * calling a recursive (protected static) function in this class. Then, it
      * converts that PHP array into JSON by calling the "encode" static funcion.
      *
-     * Throws a Zend_Json_Exception if the input not a XML formatted string.
      * NOTE: Encoding native javascript expressions via Zend_Json_Expr is not possible.
      *
      * @static
@@ -223,7 +220,7 @@ class JSON
      * @param boolean $ignoreXmlAttributes Include or exclude XML attributes in
      * the xml2json conversion process.
      * @return mixed - JSON formatted string on success
-     * @throws \Zend\Json\Exception
+     * @throws \Zend\Json\Exception\RuntimeException if the input not a XML formatted string
      */
     public static function fromXml ($xmlStringContents, $ignoreXmlAttributes=true) {
         // Load the XML formatted string into a Simple XML Element object.
@@ -231,7 +228,7 @@ class JSON
 
         // If it is not a valid XML content, throw an exception.
         if ($simpleXmlElementObject == null) {
-            throw new Exception('Function fromXml was called with an invalid XML formatted string.');
+            throw new RuntimeException('Function fromXml was called with an invalid XML formatted string.');
         } // End of if ($simpleXmlElementObject == null)
 
         $resultArray = null;
@@ -243,7 +240,7 @@ class JSON
         // It is just that simple.
         $jsonStringOutput = self::encode($resultArray);
         return($jsonStringOutput);
-    } // End of function fromXml.
+    }
 
     /**
      * _processXml - Contains the logic for xml2json
@@ -259,8 +256,6 @@ class JSON
      * calling a recursive (protected static) function in this class. Once all
      * the XML elements are stored in the PHP array, it is returned to the caller.
      *
-     * Throws a Zend_Json_Exception if the XML tree is deeper than the allowed limit.
-     *
      * @static
      * @access protected
      * @param SimpleXMLElement $simpleXmlElementObject XML element to be converted
@@ -268,13 +263,13 @@ class JSON
      * the xml2json conversion process.
      * @param int $recursionDepth Current recursion depth of this function
      * @return mixed - On success, a PHP associative array of traversed XML elements
-     * @throws \Zend\Json\Exception
+     * @throws Zend\Json\Exception\RecursionException if the XML tree is deeper than the allowed limit
      */
     protected static function _processXml ($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth=0) {
         // Keep an eye on how deeply we are involved in recursion.
         if ($recursionDepth > self::$maxRecursionDepthAllowed) {
             // XML tree is too deep. Exit now by throwing an exception.
-            throw new Exception(
+            throw new RecursionException(
                 "Function _processXml exceeded the allowed recursion depth of " .
                 self::$maxRecursionDepthAllowed);
         } // End of if ($recursionDepth > self::$maxRecursionDepthAllowed)
@@ -341,7 +336,7 @@ class JSON
             // if it matches, we return a new Zend_Json_Expr instead of a text node
             $pattern = '/^[\s]*new Zend_Json_Expr[\s]*\([\s]*[\"\']{1}(.*)[\"\']{1}[\s]*\)[\s]*$/';
             $matchings = array();
-            $match = preg_match ($pattern, $simpleXmlElementObject, $matchings);
+            $match = preg_match($pattern, $simpleXmlElementObject, $matchings);
             if ($match) {
                 return new Expr($matchings[1]);
             } else {

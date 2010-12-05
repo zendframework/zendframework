@@ -16,7 +16,6 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -51,7 +50,7 @@ class Form extends FormElement
         extract($info);
 
         if (!empty($id)) {
-            $id = ' id="' . $this->view->escape($id) . '"';
+            $id = ' id="' . $this->view->vars()->escape($id) . '"';
         } else {
             $id = '';
         }

@@ -17,7 +17,6 @@
  * @subpackage Zend_Server_Method
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -173,7 +172,7 @@ class Callback
     public function setType($type)
     {
         if (!in_array($type, $this->_types)) {
-            throw new Server\Exception('Invalid method callback type "' . $type . '" passed to ' . __CLASS__ . '::' . __METHOD__);
+            throw new Server\Exception\InvalidArgumentException('Invalid method callback type "' . $type . '" passed to ' . __CLASS__ . '::' . __METHOD__);
         }
         $this->_type = $type;
         return $this;

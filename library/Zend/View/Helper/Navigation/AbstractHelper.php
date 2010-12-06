@@ -679,7 +679,7 @@ abstract class AbstractHelper
         );
 
         return '<a' . $this->_htmlAttribs($attribs) . '>'
-             . $this->view->escape($label)
+             . $this->view->vars()->escape($label)
              . '</a>';
     }
 

@@ -98,8 +98,8 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         $this->_nav2 = new Navigation\Navigation($config->get('nav_test2'));
 
         // setup view
-        $view = new \Zend\View\View();
-        $view->setScriptPath($cwd . '/_files/mvc/views');
+        $view = new \Zend\View\PhpRenderer();
+        $view->resolver()->addPath($cwd . '/_files/mvc/views');
 
         // setup front
         $front = Controller\Front::getInstance();

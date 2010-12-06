@@ -198,14 +198,16 @@ class Navigation extends AbstractNavigationHelper
         $loader = $this->getPluginLoader();
 
         if ($strict) {
-            $helper = $loader->load($proxy);
+            $class = $loader->load($proxy);
         } else {
             try {
-                $helper = $loader->load($proxy);
+                $class = $loader->load($proxy);
             } catch (\Zend\Loader\Exception $e) {
                 return null;
             }
         }
+
+        $helper = new $class();
 
         if (!$helper instanceof AbstractNavigationHelper) {
             if ($strict) {

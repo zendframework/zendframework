@@ -32,7 +32,7 @@ use Zend\Loader\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BadMethodCallException
-    extends \BadMethodCallException;
+    extends \BadMethodCallException
     implements Exception
 {
 }

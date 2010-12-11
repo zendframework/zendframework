@@ -469,7 +469,7 @@ abstract class Adapter
     public function getList()
     {
         $list = array_keys($this->_translate);
-        $result = null;
+        $result = array();
         foreach($list as $value) {
             if (!empty($this->_translate[$value])) {
                 $result[$value] = $value;

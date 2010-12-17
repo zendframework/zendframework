@@ -222,7 +222,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $tagCacheConfig['backend']['options']['cache_dir'] = $this->getTmpDir();
         $manager->setTemplateOptions('pagetag', $tagCacheConfig);
         $tagCache = $manager->getCache('page')->getBackend()->getOption('tag_cache');
-        $this->assertTrue($tagCache instanceof Cache\Core);
+        $this->assertTrue($tagCache instanceof Cache\Frontend\Core);
     }
 
     // Helper Methods

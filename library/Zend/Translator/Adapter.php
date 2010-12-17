@@ -267,7 +267,7 @@ abstract class Adapter
 
                 if ($info->isDir()) {
                     // pathname as locale
-                    if (($options['scan'] === self::LOCALE_DIRECTORY) and (Locale\Locale::isLocale($file, true, false))) {
+                    if (($options['scan'] === self::LOCALE_DIRECTORY) and (Locale\Locale::isLocale($file, true))) {
                         $options['locale'] = $file;
                         $prev              = (string) $options['locale'];
                     }
@@ -277,7 +277,7 @@ abstract class Adapter
                         $filename = explode('.', $file);
                         array_pop($filename);
                         $filename = implode('.', $filename);
-                        if (Locale\Locale::isLocale((string) $filename, true, false)) {
+                        if (Locale\Locale::isLocale((string) $filename, true)) {
                             $options['locale'] = (string) $filename;
                         } else {
                             $parts  = explode('.', $file);
@@ -294,7 +294,7 @@ abstract class Adapter
                             $parts = array_unique($parts);
                             $prev  = '';
                             foreach($parts as $token) {
-                                if (Locale\Locale::isLocale($token, true, false)) {
+                                if (Locale\Locale::isLocale($token, true)) {
                                     if (strlen($prev) <= strlen($token)) {
                                         $options['locale'] = $token;
                                         $prev              = $token;
@@ -706,8 +706,8 @@ abstract class Adapter
             }
         }
 
-        if (!Locale\Locale::isLocale($locale, true, false)) {
-            if (!Locale\Locale::isLocale($locale, false, false)) {
+        if (!Locale\Locale::isLocale($locale, true)) {
+            if (!Locale\Locale::isLocale($locale, false)) {
                 // language does not exist, return original string
                 $this->_log($messageId, $locale);
                 // use rerouting when enabled
@@ -862,8 +862,8 @@ abstract class Adapter
             $locale = $this->_options['locale'];
         }
 
-        if (!Locale\Locale::isLocale($locale, true, false)) {
-            if (!Locale\Locale::isLocale($locale, false, false)) {
+        if (!Locale\Locale::isLocale($locale, true)) {
+            if (!Locale\Locale::isLocale($locale, false)) {
                 // language does not exist, return original string
                 return false;
             }

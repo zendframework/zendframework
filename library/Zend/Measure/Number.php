@@ -145,7 +145,7 @@ class Number extends AbstractMeasure
      */
     public function __construct($value, $type, $locale = null)
     {
-        if (($type !== null) and (Locale\Locale::isLocale($type, null, false))) {
+        if (($type !== null) and (Locale\Locale::isLocale($type))) {
             $locale = $type;
             $type = null;
         }
@@ -154,8 +154,8 @@ class Number extends AbstractMeasure
             $locale = new Locale\Locale();
         }
 
-        if (!Locale\Locale::isLocale($locale, true, false)) {
-            if (!Locale\Locale::isLocale($locale, true, false)) {
+        if (!Locale\Locale::isLocale($locale, true)) {
+            if (!Locale\Locale::isLocale($locale, false)) {
                 throw new Exception("Language (" . (string) $locale . ") is unknown");
             }
 

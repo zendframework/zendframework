@@ -36,7 +36,7 @@
 
         <programlisting language="php"><![CDATA[
 // Use the default blowfish settings
-$filter = new Zend_Filter_Decrypt('myencryptionkey');
+$filter = new Zend_Filter_Decrypt(array('key' => 'myencryptionkey'));
 
 // Set the vector with which the content was encrypted
 $filter->setVector('myvector');

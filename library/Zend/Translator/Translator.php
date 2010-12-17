@@ -24,7 +24,7 @@
 namespace Zend\Translator;
 
 use Zend\Translator\Exception\InvalidArgumentException,
-	Zend\Translator\Exception\BadMethodCallException;
+    Zend\Translator\Exception\BadMethodCallException;
 
 /**
  * @uses       \Zend\Loader
@@ -122,6 +122,10 @@ class Translator
             }
         } else if (!is_array($options)) {
             $options = array('adapter' => $options);
+        }
+
+        if (empty($options['adapter'])) {
+            throw new InvalidArgumentException("No adapter given");
         }
 
         if (\Zend\Loader::isReadable('Zend/Translator/Adapter/' . ucfirst($options['adapter']). '.php')) {

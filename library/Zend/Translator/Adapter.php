@@ -227,7 +227,7 @@ abstract class Adapter
 
 
         try {
-            if (!($options['content'] instanceof Translator\Translator) && !($options['content'] instanceof Adapter)) {
+            if (!($options['content'] instanceof \Zend\Translator\Translator) && !($options['content'] instanceof \Zend\Translator\Adapter)) {
                 if (empty($options['locale'])) {
                     $options['locale'] = null;
                 }
@@ -337,7 +337,7 @@ abstract class Adapter
         foreach ($options as $key => $option) {
             if ($key == 'locale') {
                 $locale = $option;
-            } else if ((isset($this->_options[$key]) and ($this->_options[$key] != $option)) or
+            } else if ((isset($this->_options[$key]) and ($this->_options[$key] !== $option)) or
                     !isset($this->_options[$key])) {
                 if (($key == 'log') && !($option instanceof \Zend\Log\Logger)) {
                     throw new InvalidArgumentException('Instance of Zend_Log expected for option log');

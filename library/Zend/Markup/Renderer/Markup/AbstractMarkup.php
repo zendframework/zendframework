@@ -25,7 +25,9 @@
 namespace Zend\Markup\Renderer\Markup;
 
 use Zend\Markup\Renderer\Markup,
-    Zend\Markup\Renderer\AbstractRenderer;
+    Zend\Markup\Renderer\AbstractRenderer,
+    Zend\Filter\Filter,
+    Zend\Filter\FilterChain;
 
 /**
  * Abstract markup
@@ -53,7 +55,14 @@ abstract class AbstractMarkup implements Markup
      *
      * @var string
      */
-    protected $_encoding;
+    protected $_encoding = 'UTF-8';
+
+    /**
+     * Chain filter
+     *
+     * @var \Zend\Filter\FilterChain
+     */
+    protected $_filter;
 
 
     /**
@@ -104,5 +113,74 @@ abstract class AbstractMarkup implements Markup
     public function getRenderer()
     {
         return $this->_renderer;
+    }
+
+    /**
+     * Get the filter chain
+     *
+     * @return \Zend\Filter\FilterChain
+     */
+    public function getFilterChain()
+    {
+        if (null === $this->_filter) {
+            $this->_filter = new FilterChain();
+        }
+
+        return $this->_filter;
+    }
+
+    /**
+     * Adds a filter to the chain
+     *
+     * @param  \Zend\Filter\Filter $filter
+     * @param  string $placement
+     *
+     * @return \Zend\Markup\Renderer\AbstractMarkup
+     */
+    public function addFilter(Filter $filter, $placement = FilterChain::CHAIN_APPEND)
+    {
+        $this->getFilterChain()->addFilter($filter, $placement);
+
+        return $this;
+    }
+
+    /**
+     * Add a filter to the end of the chain
+     *
+     * @param  \Zend\Filter\Filter $filter
+     *
+     * @return \Zend\Markup\Renderer\AbstractMarkup
+     */
+    public function appendFilter(Filter $filter)
+    {
+        $this->getFilterChain()->appendFilter($filter);
+
+        return $this;
+    }
+
+    /**
+     * Add a filter to the start of the chain
+     *
+     * @param  \Zend\Filter\Filter $filter
+     *
+     * @return \Zend\Markup\Renderer\AbstractMarkup
+     */
+    public function prependFilter(Filter $filter)
+    {
+        $this->getFilterChain()->prependFilter($filter);
+    }
+
+    /**
+     * Filter
+     * 
+     * @param string $value
+     *
+     * @return string
+     */
+    public function filter($value)
+    {
+        // ok, __invoke() simply looks confusing in this case, better use the
+        // filter() method on the Filter Chain
+        return $this->getFilterChain()->filter($value);
     }
 }

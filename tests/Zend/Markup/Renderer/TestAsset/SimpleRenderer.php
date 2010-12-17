@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,32 +22,19 @@
 /**
  * @namespace
  */
-namespace ZendTest\Markup;
-use Zend\Markup;
+namespace ZendTest\Markup\Renderer\TestAsset;
+
+use Zend\Markup\Renderer\AbstractRenderer;
 
 /**
+ * HTML renderer
+ *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
- * @group      Zend_Markup
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class SimpleRenderer extends AbstractRenderer
 {
-
-    public function testFactory()
-    {
-        $parserBroker = Markup\Markup::getParserBroker();
-        $parserBroker->getClassLoader()->registerPlugin('mockparser', 'ZendTest\Markup\TestAsset\Parser\MockParser');
-
-        $rendererBroker = Markup\Markup::getRendererBroker();
-        $rendererBroker->getClassLoader()->registerPlugin('mockrenderer', 'ZendTest\Markup\TestAsset\Renderer\MockRenderer');
-
-        $renderer = Markup\Markup::factory('MockParser', 'MockRenderer');
-
-        $this->assertType('ZendTest\Markup\TestAsset\Renderer\MockRenderer', $renderer);
-        $this->assertType('ZendTest\Markup\TestAsset\Parser\MockParser', $renderer->getParser());
-    }
-
 }

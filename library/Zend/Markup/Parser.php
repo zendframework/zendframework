@@ -33,6 +33,16 @@ namespace Zend\Markup;
  */
 interface Parser
 {
+
+    /**
+     * Constructor
+     *
+     * @param \Zend\Config\Config|array $options
+     *
+     * @return array
+     */
+    public function __construct($options = array());
+
     /**
      * Parse a string
      *

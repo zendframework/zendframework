@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,32 +22,34 @@
 /**
  * @namespace
  */
-namespace ZendTest\Markup;
-use Zend\Markup;
+namespace Zend\Markup\Renderer\Markup\Html;
+
+use Zend\Markup\Token;
 
 /**
+ * Simple replace markup for HTML
+ *
+ * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
+ * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
- * @group      Zend_Markup
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class Replace extends AbstractHtml
 {
 
-    public function testFactory()
+    /**
+     * Invoke the markup on the token
+     *
+     * @param Token $token
+     * @param string $text
+     *
+     * @return string
+     */
+    public function __invoke(Token $token, $text)
     {
-        $parserBroker = Markup\Markup::getParserBroker();
-        $parserBroker->getClassLoader()->registerPlugin('mockparser', 'ZendTest\Markup\TestAsset\Parser\MockParser');
-
-        $rendererBroker = Markup\Markup::getRendererBroker();
-        $rendererBroker->getClassLoader()->registerPlugin('mockrenderer', 'ZendTest\Markup\TestAsset\Renderer\MockRenderer');
-
-        $renderer = Markup\Markup::factory('MockParser', 'MockRenderer');
-
-        $this->assertType('ZendTest\Markup\TestAsset\Renderer\MockRenderer', $renderer);
-        $this->assertType('ZendTest\Markup\TestAsset\Parser\MockParser', $renderer->getParser());
+        return $text;
     }
-
 }

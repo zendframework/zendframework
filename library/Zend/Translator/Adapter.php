@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage Zend_Translate_Adapter
+ * @package    Zend_Translator
+ * @subpackage Zend_Translator_Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,12 +38,12 @@ use Zend\Log,
  * @uses       \Zend\Translator\Plural
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage Zend_Translate_Adapter
+ * @package    Zend_Translator
+ * @subpackage Zend_Translator_Adapter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Adapter 
+abstract class Adapter
 {
     /**
      * Shows if locale detection is in automatic level
@@ -221,8 +221,8 @@ abstract class Adapter
             $originate = (string) $options['locale'];
         }
 
-        if ((array_key_exists('log', $options)) && !($options['log'] instanceof Zend\Log\Logger)) {
-            throw new InvalidArgumentException('Instance of Zend\Log\Logger expected for option log');
+        if ((array_key_exists('log', $options)) && !($options['log'] instanceof \Zend\Log\Logger)) {
+            throw new InvalidArgumentException('Instance of Zend_Log_Logger expected for option log');
         }
 
 
@@ -339,7 +339,7 @@ abstract class Adapter
                 $locale = $option;
             } else if ((isset($this->_options[$key]) and ($this->_options[$key] != $option)) or
                     !isset($this->_options[$key])) {
-                if (($key == 'log') && !($option instanceof Log\Logger)) {
+                if (($key == 'log') && !($option instanceof \Zend\Log\Logger)) {
                     throw new InvalidArgumentException('Instance of Zend_Log expected for option log');
                 }
 
@@ -483,7 +483,7 @@ abstract class Adapter
      * If no locale is given, the actual language will be used
      *
      * @param  string             $message Message to get the key for
-     * @param  string|Zend\Locale\Locale $locale (optional) Language to return the message ids from
+     * @param  string|\Zend\Locale\Locale $locale (optional) Language to return the message ids from
      * @return string|array|false
      */
     public function getMessageId($message, $locale = null)
@@ -564,9 +564,9 @@ abstract class Adapter
      * language is replaced and added otherwise
      *
      * @see    Zend_Locale
-     * @param  array|Zend_Config $content Translation data to add
-     * @throws Zend\Translate\Exception\InvalidArgumentException
-     * @return Zend\Translate\Adapter Provides fluent interface
+     * @param  array|\Zend\Config $content Translation data to add
+     * @throws \Zend\Translate\Exception\InvalidArgumentException
+     * @return \Zend\Translate\Adapter Provides fluent interface
      */
     private function _addTranslationData($options = array())
     {
@@ -968,7 +968,7 @@ abstract class Adapter
     private static function _getTagSupportForCache()
     {
         $backend = self::$_cache->getBackend();
-        if ($backend instanceof Zend_Cache_Backend_ExtendedInterface) {
+        if ($backend instanceof \Zend\Cache\Backend\ExtendedInterface) {
             $cacheOptions = $backend->getCapabilities();
             self::$_cacheTags = $cacheOptions['tags'];
         } else {

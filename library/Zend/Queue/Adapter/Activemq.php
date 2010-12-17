@@ -53,6 +53,11 @@ class Activemq extends AbstractAdapter
     private $_client = null;
 
     /**
+     * @var array
+     */
+    private $_subscribed = array();
+
+    /**
      * Constructor
      *
      * @param  array|\Zend\Config\Config $config An array having configuration data
@@ -172,6 +177,33 @@ class Activemq extends AbstractAdapter
     }
 
     /**
+     * Checks if the client is subscribed to the queue
+     *
+     * @param  \Zend\Queue\Queue $queue
+     * @return boolean
+     */
+    protected function isSubscribed(Queue\Queue $queue)
+    {
+        return isset($this->_subscribed[$queue->getName()]);
+    }
+
+    /**
+     * Subscribes the client to the queue.
+     *
+     * @param  \Zend\Queue\Queue $queue
+     * @return void
+     */
+    protected function subscribe(Queue\Queue $queue)
+    {
+        $frame = $this->_client->createFrame();
+        $frame->setCommand('SUBSCRIBE');
+        $frame->setHeader('destination', $queue->getName());
+        $frame->setHeader('ack','client');
+        $this->_client->send($frame);
+        $this->_subscribed[$queue->getName()] = TRUE;
+    }
+
+    /**
      * Return the first element in the queue
      *
      * @param  integer    $maxMessages
@@ -195,11 +227,9 @@ class Activemq extends AbstractAdapter
         $data = array();
 
         // signal that we are reading
-        $frame = $this->_client->createFrame();
-        $frame->setCommand('SUBSCRIBE');
-        $frame->setHeader('destination', $queue->getName());
-        $frame->setHeader('ack','client');
-        $this->_client->send($frame);
+        if(!$this->isSubscribed($queue)) {
+            $this->subscribe($queue);
+        }
 
         if ($maxMessages > 0) {
             if ($this->_client->canRead()) {

@@ -586,59 +586,6 @@ class Locale
     }
 
     /**
-     * Returns an array with the name of all languages translated to the given language
-     *
-     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for language translation
-     * @return array
-     * @deprecated
-     */
-    public static function getLanguageTranslationList($locale = null)
-    {
-        trigger_error("The method getLanguageTranslationList is deprecated. Use getTranslationList('language', $locale) instead", E_USER_NOTICE);
-        return self::getTranslationList('language', $locale);
-    }
-
-    /**
-     * Returns an array with the name of all scripts translated to the given language
-     *
-     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for script translation
-     * @return array
-     * @deprecated
-     */
-    public static function getScriptTranslationList($locale = null)
-    {
-        trigger_error("The method getScriptTranslationList is deprecated. Use getTranslationList('script', $locale) instead", E_USER_NOTICE);
-        return self::getTranslationList('script', $locale);
-    }
-
-    /**
-     * Returns an array with the name of all countries translated to the given language
-     *
-     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for country translation
-     * @return array
-     * @deprecated
-     */
-    public static function getCountryTranslationList($locale = null)
-    {
-        trigger_error("The method getCountryTranslationList is deprecated. Use getTranslationList('territory', $locale, 2) instead", E_USER_NOTICE);
-        return self::getTranslationList('territory', $locale, 2);
-    }
-
-    /**
-     * Returns an array with the name of all territories translated to the given language
-     * All territories contains other countries.
-     *
-     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for territory translation
-     * @return array
-     * @deprecated
-     */
-    public static function getTerritoryTranslationList($locale = null)
-    {
-        trigger_error("The method getTerritoryTranslationList is deprecated. Use getTranslationList('territory', $locale, 1) instead", E_USER_NOTICE);
-        return self::getTranslationList('territory', $locale, 1);
-    }
-
-    /**
      * Returns a localized information string, supported are several types of informations.
      * For detailed information about the types look into the documentation
      *
@@ -656,63 +603,6 @@ class Locale
         }
 
         return $result;
-    }
-
-    /**
-     * Returns the localized language name
-     *
-     * @param  string $value  Name to get detailed information about
-     * @param  string $locale (Optional) Locale for language translation
-     * @return array
-     * @deprecated
-     */
-    public static function getLanguageTranslation($value, $locale = null)
-    {
-        trigger_error("The method getLanguageTranslation is deprecated. Use getTranslation($value, 'language', $locale) instead", E_USER_NOTICE);
-        return self::getTranslation($value, 'language', $locale);
-    }
-
-    /**
-     * Returns the localized script name
-     *
-     * @param  string $value  Name to get detailed information about
-     * @param  string $locale (Optional) locale for script translation
-     * @return array
-     * @deprecated
-     */
-    public static function getScriptTranslation($value, $locale = null)
-    {
-        trigger_error("The method getScriptTranslation is deprecated. Use getTranslation($value, 'script', $locale) instead", E_USER_NOTICE);
-        return self::getTranslation($value, 'script', $locale);
-    }
-
-    /**
-     * Returns the localized country name
-     *
-     * @param  string             $value  Name to get detailed information about
-     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for country translation
-     * @return array
-     * @deprecated
-     */
-    public static function getCountryTranslation($value, $locale = null)
-    {
-        trigger_error("The method getCountryTranslation is deprecated. Use getTranslation($value, 'country', $locale) instead", E_USER_NOTICE);
-        return self::getTranslation($value, 'country', $locale);
-    }
-
-    /**
-     * Returns the localized territory name
-     * All territories contains other countries.
-     *
-     * @param  string             $value  Name to get detailed information about
-     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for territory translation
-     * @return array
-     * @deprecated
-     */
-    public static function getTerritoryTranslation($value, $locale = null)
-    {
-        trigger_error("The method getTerritoryTranslation is deprecated. Use getTranslation($value, 'territory', $locale) instead", E_USER_NOTICE);
-        return self::getTranslation($value, 'territory', $locale);
     }
 
     /**

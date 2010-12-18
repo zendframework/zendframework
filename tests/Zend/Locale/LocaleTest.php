@@ -234,115 +234,115 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test getLanguageTranslationList
+     * test getTranslationList('language')
      * expected true
      */
     public function testgetLanguageTranslationList()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $list = LocaleTestHelper::getLanguageTranslationList();
+        $list = LocaleTestHelper::getTranslationList('language');
         $this->assertTrue(is_array($list));
-        $list = LocaleTestHelper::getLanguageTranslationList('de');
+        $list = LocaleTestHelper::getTranslationList('language', 'de');
         $this->assertTrue(is_array($list));
         restore_error_handler();
     }
 
     /**
-     * test getLanguageTranslation
+     * test getTranslation('language')
      * expected true
      */
     public function testgetLanguageTranslation()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $this->assertEquals('Deutsch', LocaleTestHelper::getLanguageTranslation('de', 'de_AT'));
-        $this->assertEquals('German',  LocaleTestHelper::getLanguageTranslation('de', 'en'));
-        $this->assertFalse(LocaleTestHelper::getLanguageTranslation('xyz'));
-        $this->assertTrue(is_string(LocaleTestHelper::getLanguageTranslation('de', 'auto')));
+        $this->assertEquals('Deutsch', LocaleTestHelper::getTranslation('de', 'language', 'de_AT'));
+        $this->assertEquals('German',  LocaleTestHelper::getTranslation('de', 'language', 'en'));
+        $this->assertFalse(LocaleTestHelper::getTranslation('xyz', 'language'));
+        $this->assertTrue(is_string(LocaleTestHelper::getTranslation('de', 'language', 'auto')));
         restore_error_handler();
     }
 
     /**
-     * test getScriptTranslationList
+     * test getTranslationList('script')
      * expected true
      */
     public function testgetScriptTranslationList()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $list = LocaleTestHelper::getScriptTranslationList();
+        $list = LocaleTestHelper::getTranslationList('script');
         $this->assertTrue(is_array($list));
 
-        $list = LocaleTestHelper::getScriptTranslationList('de');
+        $list = LocaleTestHelper::getTranslationList('script', 'de');
         $this->assertTrue(is_array($list));
         restore_error_handler();
     }
 
     /**
-     * test getScriptTranslationList
+     * test getTranslation('script')
      * expected true
      */
     public function testgetScriptTranslation()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $this->assertEquals('Arabisch', LocaleTestHelper::getScriptTranslation('Arab', 'de_AT'));
-        $this->assertEquals('Arabic', LocaleTestHelper::getScriptTranslation('Arab', 'en'));
-        $this->assertFalse(LocaleTestHelper::getScriptTranslation('xyz'));
+        $this->assertEquals('Arabisch', LocaleTestHelper::getTranslation('Arab', 'script', 'de_AT'));
+        $this->assertEquals('Arabic', LocaleTestHelper::getTranslation('Arab', 'script', 'en'));
+        $this->assertFalse(LocaleTestHelper::getTranslation('xyz', 'script'));
         restore_error_handler();
     }
 
     /**
-     * test getCountryTranslationList
+     * test getTranslationList('country')
      * expected true
      */
     public function testgetCountryTranslationList()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $list = LocaleTestHelper::getCountryTranslationList();
+        $list = LocaleTestHelper::getTranslationList('territory');
         $this->assertTrue(is_array($list));
 
-        $list = LocaleTestHelper::getCountryTranslationList('de');
+        $list = LocaleTestHelper::getTranslationList('territory', 'de');
         $this->assertEquals("Vereinigte Staaten", $list['US']);
         restore_error_handler();
     }
 
     /**
-     * test getCountryTranslation
+     * test getTranslation('country')
      * expected true
      */
     public function testgetCountryTranslation()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $this->assertEquals('Deutschland', LocaleTestHelper::getCountryTranslation('DE', 'de_DE'));
-        $this->assertEquals('Germany', LocaleTestHelper::getCountryTranslation('DE', 'en'));
-        $this->assertFalse(LocaleTestHelper::getCountryTranslation('xyz'));
+        $this->assertEquals('Deutschland', LocaleTestHelper::getTranslation('DE', 'country', 'de_DE'));
+        $this->assertEquals('Germany', LocaleTestHelper::getTranslation('DE', 'country', 'en'));
+        $this->assertFalse(LocaleTestHelper::getTranslation('xyz', 'country'));
         restore_error_handler();
     }
 
     /**
-     * test getTerritoryTranslationList
+     * test getTranslationList('territory')
      * expected true
      */
     public function testgetTerritoryTranslationList()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $list = LocaleTestHelper::getTerritoryTranslationList();
+        $list = LocaleTestHelper::getTranslationList('territory');
         $this->assertTrue(is_array($list));
 
-        $list = LocaleTestHelper::getTerritoryTranslationList('de');
+        $list = LocaleTestHelper::getTranslationList('territory', 'de');
         $this->assertTrue(is_array($list));
         restore_error_handler();
     }
 
     /**
-     * test getTerritoryTranslation
+     * test getTranslation('territory')
      * expected true
      */
     public function testgetTerritoryTranslation()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $this->assertEquals('Afrika', LocaleTestHelper::getTerritoryTranslation('002', 'de_AT'));
-        $this->assertEquals('Africa', LocaleTestHelper::getTerritoryTranslation('002', 'en'));
-        $this->assertFalse(LocaleTestHelper::getTerritoryTranslation('xyz'));
-        $this->assertTrue(is_string(LocaleTestHelper::getTerritoryTranslation('002', 'auto')));
+        $this->assertEquals('Afrika', LocaleTestHelper::getTranslation('002', 'territory', 'de_AT'));
+        $this->assertEquals('Africa', LocaleTestHelper::getTranslation('002', 'territory', 'en'));
+        $this->assertFalse(LocaleTestHelper::getTranslation('xyz', 'territory'));
+        $this->assertTrue(is_string(LocaleTestHelper::getTranslation('002', 'territory', 'auto')));
         restore_error_handler();
     }
 

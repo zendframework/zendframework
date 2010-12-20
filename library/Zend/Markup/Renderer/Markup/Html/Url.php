@@ -61,10 +61,10 @@ class Url extends AbstractHtml
         }
 
         // check if the URL is valid
-        // TODO: use the new Zend\Uri for this
-        if (!\Zend\Markup\Renderer\Html::isValidUri($uri)) {
-            return $text;
-        }
+        // TODO: re-implement this (probably with the new \Zend\Uri)
+        //if (!\Zend\Markup\Renderer\Html::isValidUri($uri)) {
+        //   return $text;
+        //}
 
         $attributes = $this->renderAttributes($token);
 

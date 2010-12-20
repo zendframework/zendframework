@@ -152,7 +152,7 @@ class Data
             $filename = __DIR__ . '/Data/resources/' . $locale . '.xml';
             if (!file_exists($filename)) {
                 throw new Exception\InvalidArgumentException(
-                	"Missing locale file '$filename' for '$locale' locale."
+                  "Missing locale file '$filename' for '$locale' locale."
                 );
             }
 
@@ -282,9 +282,9 @@ class Data
             $locale = new Locale();
         }
 
-        if (!(Locale::isLocale((string) $locale, null, false))) {
+        if (!(Locale::isLocale((string) $locale))) {
             throw new Exception\InvalidArgumentException(
-            	"Locale (" . (string) $locale . ") is a unknown locale"
+              "Locale (" . (string) $locale . ") is a unknown locale"
             );
         }
 
@@ -901,7 +901,7 @@ class Data
 
             default :
                 throw new Exception\InvalidArgumentException(
-                	"Unknown list ($path) for parsing locale data."
+                  "Unknown list ($path) for parsing locale data."
                 );
                 break;
         }
@@ -1401,7 +1401,7 @@ class Data
 
             default :
                 throw new Exception\InvalidArgumentException(
-                	"Unknown detail ($path) for parsing locale data."
+                  "Unknown detail ($path) for parsing locale data."
                 );
                 break;
         }

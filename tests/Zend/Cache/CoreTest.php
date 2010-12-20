@@ -517,17 +517,13 @@ class CoreTest extends \PHPUnit_Framework_TestCase
      */
     public function testIfFileZendLogWasIncluded()
     {
-        if (class_exists('Zend_Log', false)) {
-            $this->markTestSkipped('File Zend/Log.php already included');
+        if (class_exists('Zend_Log_Logger', false)) {
+            $this->markTestSkipped('File Zend/Log/Logger.php already included');
         }
 
-        if (!class_exists('Zend_Cache_Core', true)) {
-            $this->markTestIncomplete('File Zend/Cache/Core.php cannot be found');
-        }
-
-        $cacheCore = new Zend_Cache_Core(
+        $cacheCore = new \Zend\Cache\Frontend\Core(
             array('logging' => true)
         );
-        $this->assertTrue($cacheCore->getOption('logger') instanceof Zend_Log);
+        $this->assertTrue($cacheCore->getOption('logger') instanceof \Zend\Log\Logger);
     }
 }

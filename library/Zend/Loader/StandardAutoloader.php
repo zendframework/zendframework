@@ -28,10 +28,10 @@ require_once __DIR__ . '/SplAutoloader.php';
 /**
  * PSR-0 compliant autoloader
  *
- * Allows autoloading both namespaced and vendor-prefixed classes. Class 
+ * Allows autoloading both namespaced and vendor-prefixed classes. Class
  * lookups are performed on the filesystem. If a class file for the referenced
  * class is not found, a PHP warning will be raised by include().
- * 
+ *
  * @package    Zend_Loader
  * @license New BSD {@link http://framework.zend.com/license/new-bsd}
  */
@@ -60,8 +60,8 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Constructor
-     * 
-     * @param  null|array|Traversable $options 
+     *
+     * @param  null|array|Traversable $options
      * @return void
      */
     public function __construct($options = null)
@@ -76,7 +76,7 @@ class StandardAutoloader implements SplAutoloader
     /**
      * Configure autoloader
      *
-     * Allows specifying both "namespace" and "prefix" pairs, using the 
+     * Allows specifying both "namespace" and "prefix" pairs, using the
      * following structure:
      * <code>
      * array(
@@ -90,8 +90,8 @@ class StandardAutoloader implements SplAutoloader
      *     'fallback_autoloader' => true,
      * )
      * </code>
-     * 
-     * @param  array|Traversable $options 
+     *
+     * @param  array|Traversable $options
      * @return StandardAutoloader
      */
     public function setOptions($options)
@@ -125,8 +125,8 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Set flag indicating fallback autoloader status
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return StandardAutoloader
      */
     public function setFallbackAutoloader($flag)
@@ -137,7 +137,7 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Is this autoloader acting as a fallback autoloader?
-     * 
+     *
      * @return bool
      */
     public function isFallbackAutoloader()
@@ -147,9 +147,9 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Register a namespace/directory pair
-     * 
-     * @param  string $namespace 
-     * @param  string $directory 
+     *
+     * @param  string $namespace
+     * @param  string $directory
      * @return StandardAutoloader
      */
     public function registerNamespace($namespace, $directory)
@@ -161,8 +161,8 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Register many namespace/directory pairs at once
-     * 
-     * @param  array $namespaces 
+     *
+     * @param  array $namespaces
      * @return StandardAutoloader
      */
     public function registerNamespaces($namespaces)
@@ -180,9 +180,9 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Register a prefix/directory pair
-     * 
-     * @param  string $prefix 
-     * @param  string $directory 
+     *
+     * @param  string $prefix
+     * @param  string $directory
      * @return StandardAutoloader
      */
     public function registerPrefix($prefix, $directory)
@@ -194,8 +194,8 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Register many namespace/directory pairs at once
-     * 
-     * @param  array $prefixes 
+     *
+     * @param  array $prefixes
      * @return StandardAutoloader
      */
     public function registerPrefixes($prefixes)
@@ -213,8 +213,8 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Defined by Autoloadable; autoload a class
-     * 
-     * @param  string $class 
+     *
+     * @param  string $class
      * @return false|string
      */
     public function autoload($class)
@@ -242,7 +242,7 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Register the autoloader with spl_autoload
-     * 
+     *
      * @return void
      */
     public function register()
@@ -252,17 +252,17 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Transform the class name to a filename
-     * 
-     * @param  string $class 
-     * @param  string $directory 
+     *
+     * @param  string $class
+     * @param  string $directory
      * @return string
      */
     protected function transformClassNameToFilename($class, $directory)
     {
         return $directory
             . str_replace(
-                array(self::NS_SEPARATOR, self::PREFIX_SEPARATOR), 
-                DIRECTORY_SEPARATOR, 
+                array(self::NS_SEPARATOR, self::PREFIX_SEPARATOR),
+                DIRECTORY_SEPARATOR,
                 $class
             )
             . '.php';
@@ -270,9 +270,9 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Load a class, based on its type (namespaced or prefixed)
-     * 
-     * @param  string $class 
-     * @param  string $type 
+     *
+     * @param  string $class
+     * @param  string $type
      * @return void
      */
     protected function loadClass($class, $type)
@@ -285,8 +285,9 @@ class StandardAutoloader implements SplAutoloader
         // Fallback autoloading
         if ($type === self::ACT_AS_FALLBACK) {
             // create filename
-            $filename = $this->transformClassNameToFilename($class, '');
-            if (false !== ($resolvedName = $this->fileExists($filename))) {
+            $filename     = $this->transformClassNameToFilename($class, '');
+            $resolvedName = stream_resolve_include_path($filename);
+            if ($resolvedName !== false) {
                 return include $resolvedName;
             }
             return false;
@@ -311,8 +312,8 @@ class StandardAutoloader implements SplAutoloader
 
     /**
      * Normalize the directory to include a trailing directory separator
-     * 
-     * @param  string $directory 
+     *
+     * @param  string $directory
      * @return string
      */
     protected function normalizeDirectory($directory)
@@ -326,33 +327,4 @@ class StandardAutoloader implements SplAutoloader
         return $directory;
     }
 
-    /**
-     * Determine if a file exists
-     *
-     * For PHP versions >= 5.3.2, utilizes stream_resolve_include_path(). 
-     * Otherwise, loops through the elements of the include_path, prefixing 
-     * them to the filename; if a match is found, it is returned. Otherwise, 
-     * returns boolean false.
-     * 
-     * @param mixed $filename 
-     * @return string|false
-     */
-    protected function fileExists($filename)
-    {
-        if (version_compare(PHP_VERSION, '5.3.2', '>=')) {
-            return stream_resolve_include_path($filename);
-        }
-
-        if (file_exists($filename)) {
-            return $filename;
-        }
-
-        foreach (explode(PATH_SEPARATOR, get_include_path()) as $path) {
-            $resolvedName = $path . DIRECTORY_SEPARATOR . $filename;
-            if (file_exists($resolvedName)) {
-                return $resolvedName;
-            }
-        }
-        return false;
-    }
 }

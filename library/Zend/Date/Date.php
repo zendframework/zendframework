@@ -3166,8 +3166,8 @@ class Date extends DateObject
     /**
      * Check if location is supported
      *
-     * @param $location array - locations array
-     * @return $horizon float
+     * @param  array $location Locations array
+     * @return float Horizon
      */
     private function _checkLocation($location)
     {
@@ -3206,7 +3206,7 @@ class Date extends DateObject
      * Returns the time of sunrise for this date and a given location as new date object
      * For a list of cities and correct locations use the class Zend_Date_Cities
      *
-     * @param  $location array - location of sunrise
+     * @param array $location Location of sunrise
      *                   ['horizon']   -> civil, nautic, astronomical, effective (default)
      *                   ['longitude'] -> longitude of location
      *                   ['latitude']  -> latitude of location
@@ -3226,7 +3226,7 @@ class Date extends DateObject
      * Returns the time of sunset for this date and a given location as new date object
      * For a list of cities and correct locations use the class Zend_Date_Cities
      *
-     * @param  $location array - location of sunset
+     * @param array $location Location of sunset
      *                   ['horizon']   -> civil, nautic, astronomical, effective (default)
      *                   ['longitude'] -> longitude of location
      *                   ['latitude']  -> latitude of location
@@ -3246,7 +3246,7 @@ class Date extends DateObject
      * Returns an array with the sunset and sunrise dates for all horizon types
      * For a list of cities and correct locations use the class Zend_Date_Cities
      *
-     * @param  $location array - location of suninfo
+     * @param array $location Location of suninfo
      *                   ['horizon']   -> civil, nautic, astronomical, effective (default)
      *                   ['longitude'] -> longitude of location
      *                   ['latitude']  -> latitude of location
@@ -3704,7 +3704,7 @@ class Date extends DateObject
      * Returns the day as new date object
      * Example: 20.May.1986 -> 20.Jan.1970 00:00:00
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getDay($locale = null)
@@ -3716,9 +3716,9 @@ class Date extends DateObject
     /**
      * Returns the calculated day
      *
-     * @param $calc    string                    Type of calculation to make
-     * @param $day     string|integer|\Zend\Date\Date  Day to calculate, when null the actual day is calculated
-     * @param $locale  string|\Zend\Locale\Locale        Locale for parsing input
+     * @param string $calc                           Type of calculation to make
+     * @param string|integer|\Zend\Date\Date $day    Day to calculate, when null the actual day is calculated
+     * @param string|\Zend\Locale\Locale     $locale Locale for parsing input
      * @return \Zend\Date\Date|integer
      */
     private function _day($calc, $day, $locale)
@@ -3845,7 +3845,7 @@ class Date extends DateObject
      * Weekday is always from 1-7
      * Example: 09-Jan-2007 -> 2 = Tuesday -> 02-Jan-1970 (when 02.01.1970 is also Tuesday)
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param  string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getWeekday($locale = null)
@@ -3863,9 +3863,9 @@ class Date extends DateObject
     /**
      * Returns the calculated weekday
      *
-     * @param  $calc     string                          Type of calculation to make
-     * @param  $weekday  string|integer|array|\Zend\Date\Date  Weekday to calculate, when null the actual weekday is calculated
-     * @param  $locale   string|\Zend\Locale\Locale              Locale for parsing input
+     * @param  string                               $calc    Type of calculation to make
+     * @param  string|integer|array|\Zend\Date\Date $weekday Weekday to calculate, when null the actual weekday is calculated
+     * @param  string|\Zend\Locale\Locale           $locale  Locale for parsing input
      * @return \Zend\Date\Date|integer
      * @throws \Zend\Date\Exception
      */
@@ -4080,7 +4080,7 @@ class Date extends DateObject
      * Returns the hour as new date object
      * Example: 02.Feb.1986 10:30:25 -> 01.Jan.1970 10:00:00
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param  string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getHour($locale = null)
@@ -4523,7 +4523,7 @@ class Date extends DateObject
      * Returns the week as new date object using monday as begining of the week
      * Example: 12.Jan.2007 -> 08.Jan.1970 00:00:00
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getWeek($locale = null)

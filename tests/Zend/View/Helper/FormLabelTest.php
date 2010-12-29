@@ -71,7 +71,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
     public function testFormLabelWithInputNeedingEscapesUsesViewEscaping()
     {
         $label = $this->helper->direct('<&foo', '</bar>');
-        $expected = '<label for="' . $this->view->escape('<&foo') . '">' . $this->view->escape('</bar>') . '</label>';
+        $expected = '<label for="' . $this->view->vars()->escape('<&foo') . '">' . $this->view->vars()->escape('</bar>') . '</label>';
         $this->assertEquals($expected, $label);
     }
 

@@ -72,7 +72,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testFormWithInputNeedingEscapesUsesViewEscaping()
     {
         $form = $this->helper->direct('<&foo');
-        $this->assertContains($this->view->escape('<&foo'), $form);
+        $this->assertContains($this->view->vars()->escape('<&foo'), $form);
     }
 
     public function testPassingIdAsAttributeShouldRenderIdAttribAndNotName()

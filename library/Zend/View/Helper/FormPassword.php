@@ -71,7 +71,7 @@ class FormPassword extends FormElement
         $valueString = ' value=""';
         if (array_key_exists('renderPassword', $attribs)) {
             if ($attribs['renderPassword']) {
-                $valueString = ' value="' . $this->view->escape($value) . '"';
+                $valueString = ' value="' . $this->view->vars()->escape($value) . '"';
             }
             unset($attribs['renderPassword']);
         }
@@ -84,8 +84,8 @@ class FormPassword extends FormElement
 
         // render the element
         $xhtml = '<input type="password"'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
+                . ' name="' . $this->view->vars()->escape($name) . '"'
+                . ' id="' . $this->view->vars()->escape($id) . '"'
                 . $valueString
                 . $disabled
                 . $this->_htmlAttribs($attribs)

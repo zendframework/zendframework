@@ -1126,14 +1126,14 @@ EOJ;
         $modulePaths = $this->getModulePaths();
         if (!empty($modulePaths)) {
             foreach ($modulePaths as $module => $path) {
-                $js[] =  'dojo.registerModulePath("' . $this->view->escape($module) . '", "' . $this->view->escape($path) . '");';
+                $js[] =  'dojo.registerModulePath("' . $this->view->vars()->escape($module) . '", "' . $this->view->vars()->escape($path) . '");';
             }
         }
 
         $modules = $this->getModules();
         if (!empty($modules)) {
             foreach ($modules as $module) {
-                $js[] = 'dojo.require("' . $this->view->escape($module) . '");';
+                $js[] = 'dojo.require("' . $this->view->vars()->escape($module) . '");';
             }
         }
 

@@ -61,16 +61,16 @@ class FormImage extends FormElement
 
         // Determine if we should use the value or the src attribute
         if (isset($attribs['src'])) {
-            $src = ' src="' . $this->view->escape($attribs['src']) . '"';
+            $src = ' src="' . $this->view->vars()->escape($attribs['src']) . '"';
             unset($attribs['src']);
         } else {
-            $src = ' src="' . $this->view->escape($value) . '"';
+            $src = ' src="' . $this->view->vars()->escape($value) . '"';
             unset($value);
         }
 
         // Do we have a value?
         if (isset($value) && !empty($value)) {
-            $value = ' value="' . $this->view->escape($value) . '"';
+            $value = ' value="' . $this->view->vars()->escape($value) . '"';
         } else {
             $value = '';
         }
@@ -89,8 +89,8 @@ class FormImage extends FormElement
 
         // build the element
         $xhtml = '<input type="image"'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
+                . ' name="' . $this->view->vars()->escape($name) . '"'
+                . ' id="' . $this->view->vars()->escape($id) . '"'
                 . $src
                 . $value
                 . $disabled

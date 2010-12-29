@@ -95,11 +95,11 @@ class FormTextarea extends FormElement
         }
 
         // build the element
-        $xhtml = '<textarea name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
+        $xhtml = '<textarea name="' . $this->view->vars()->escape($name) . '"'
+                . ' id="' . $this->view->vars()->escape($id) . '"'
                 . $disabled
                 . $this->_htmlAttribs($attribs) . '>'
-                . $this->view->escape($value) . '</textarea>';
+                . $this->view->vars()->escape($value) . '</textarea>';
 
         return $xhtml;
     }

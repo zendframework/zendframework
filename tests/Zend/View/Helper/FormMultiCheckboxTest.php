@@ -114,7 +114,7 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
 
     public function testCanRendersAsXHtml()
     {
-        $this->view->doctype('XHTML1_STRICT');
+        $this->view->broker('doctype')->direct('XHTML1_STRICT');
         $options = array(
             'foo' => 'Foo',
             'bar' => 'Bar',

@@ -350,7 +350,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testLinkRendersAsPlainHtmlIfDoctypeNotXhtml()
     {
-        $this->view->doctype('HTML4_STRICT');
+        $this->view->broker('doctype')->direct('HTML4_STRICT');
         $this->helper->direct(array('rel' => 'icon', 'src' => '/foo/bar'))
                      ->direct(array('rel' => 'foo', 'href' => '/bar/baz'));
         $test = $this->helper->toString();

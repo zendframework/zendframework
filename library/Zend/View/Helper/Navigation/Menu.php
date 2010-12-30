@@ -244,7 +244,7 @@ class Menu extends AbstractHelper
         }
 
         return '<' . $element . $this->_htmlAttribs($attribs) . '>'
-             . $this->view->escape($label)
+             . $this->view->vars()->escape($label)
              . '</' . $element . '>';
     }
 

@@ -33,8 +33,8 @@ namespace Zend\Markup;
  */
 class Token
 {
-    const TYPE_NONE    = 'none';
-    const TYPE_TAG     = 'tag';
+    const TYPE_NONE   = 'none';
+    const TYPE_MARKUP = 'markup';
 
     /**
      * Children of this token
@@ -44,35 +44,35 @@ class Token
     protected $_children;
 
     /**
-     * The complete tag
+     * The content
      *
      * @var string
      */
-    protected $_tag;
+    protected $_content;
 
     /**
-     * The tag's type
+     * The token's type
      *
      * @var string
      */
     protected $_type;
 
     /**
-     * Tag name
+     * Token name
      *
      * @var string
      */
     protected $_name = '';
 
     /**
-     * Tag attributes
+     * Token attributes
      *
      * @var array
      */
     protected $_attributes = array();
 
     /**
-     * The used tag stopper (empty when none is found)
+     * The used token stopper (empty when none is found)
      *
      * @var string
      */
@@ -89,7 +89,7 @@ class Token
     /**
      * Construct the token
      *
-     * @param  string $tag
+     * @param  string $content
      * @param  string $type
      * @param  string $name
      * @param  array $attributes
@@ -97,13 +97,13 @@ class Token
      * @return void
      */
     public function __construct(
-        $tag,
+        $content,
         $type,
         $name = '',
         array $attributes = array(),
         Token $parent = null
     ) {
-        $this->_tag        = $tag;
+        $this->_content    = $content;
         $this->_type       = $type;
         $this->_name       = $name;
         $this->_attributes = $attributes;
@@ -156,13 +156,13 @@ class Token
     }
 
     /**
-     * Get the complete tag
+     * Get the token contents
      *
      * @return string
      */
-    public function getTag()
+    public function getContent()
     {
-        return $this->_tag;
+        return $this->_content;
     }
 
     /**
@@ -301,6 +301,6 @@ class Token
     {
         $this->_parent   = null;
         $this->_children = null;
-        $this->_tag      = '';
+        $this->_content  = '';
     }
 }

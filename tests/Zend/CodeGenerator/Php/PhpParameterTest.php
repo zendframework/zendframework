@@ -86,7 +86,7 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo $bar = 15', $this->_parameter->generate());
 
         $this->_parameter->setDefaultValue('foo');
-        $this->assertEquals('Foo $bar = \'foo\'', $this->_parameter->generate());
+        $this->assertEquals('Foo $bar = \'foo\';', $this->_parameter->generate());
     }
 
     public function testFromReflectionGetParameterName()

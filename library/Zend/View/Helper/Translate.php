@@ -82,7 +82,7 @@ class Translate extends AbstractHelper
         $count  = count($options);
         $locale = null;
         if ($count > 0) {
-            if (\Zend\Locale\Locale::isLocale($options[($count - 1)], null, false) !== false) {
+            if (\Zend\Locale\Locale::isLocale($options[($count - 1)]) !== false) {
                 $locale = array_pop($options);
             }
         }

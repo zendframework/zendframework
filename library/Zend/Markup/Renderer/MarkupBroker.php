@@ -40,7 +40,7 @@ class MarkupBroker extends PluginBroker
     protected $defaultClassLoader = 'Zend\Markup\Renderer\MarkupLoader';
 
     /**
-     * Determine if we have a valid converter
+     * Determine if we have a valid markup
      * 
      * @param  mixed $plugin 
      * @return true

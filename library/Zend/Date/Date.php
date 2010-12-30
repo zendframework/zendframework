@@ -154,11 +154,11 @@ class Date extends DateObject
         }
 
         if (($date !== null) and !is_array($date) and !($date instanceof TimeSync\Protocol) and
-            !($date instanceof Date) and !defined($date) and Locale::isLocale($date, true, false)) {
+            !($date instanceof Date) and !defined($date) and Locale::isLocale($date, true)) {
             $locale = $date;
             $date   = null;
             $part   = null;
-        } else if (($part !== null) and !defined($part) and Locale::isLocale($part, true, false)) {
+        } else if (($part !== null) and !defined($part) and Locale::isLocale($part, true)) {
             $locale = $part;
             $part   = null;
         }
@@ -438,16 +438,16 @@ class Date extends DateObject
             }
         }
 
-        if (($format !== null) && !defined($format) 
+        if (($format !== null) && !defined($format)
             && ($format != 'ee') && ($format != 'ss') && ($format != 'GG') && ($format != 'MM') && ($format != 'EE') && ($format != 'TT')
-            && Locale::isLocale($format, null, false)
+            && Locale::isLocale($format)
         ) {
             $locale = $format;
             $format = null;
         }
 
         if (($type !== null) and ($type != 'php') and ($type != 'iso') and
-            Locale::isLocale($type, null, false)) {
+            Locale::isLocale($type)) {
             $locale = $type;
             $type = null;
         }
@@ -531,7 +531,7 @@ class Date extends DateObject
 
         if (($part !== null) && !defined($part)
             && ($part != 'ee') && ($part != 'ss') && ($part != 'GG') && ($part != 'MM') && ($part != 'EE') && ($part != 'TT')
-            && Locale::isLocale($part, null, false)
+            && Locale::isLocale($part)
         ) {
             $locale = $part;
             $part = null;
@@ -1290,7 +1290,7 @@ class Date extends DateObject
             throw new Exception\RuntimeException('parameter $date must be set, null is not allowed');
         }
 
-        if (($part !== null) && (strlen($part) !== 2) && (Locale::isLocale($part, null, false))) {
+        if (($part !== null) && (strlen($part) !== 2) && (Locale::isLocale($part))) {
             $locale = $part;
             $part   = null;
         }
@@ -4649,7 +4649,7 @@ class Date extends DateObject
         }
 
         if (($format !== null) && ($format != 'ee') && ($format != 'ss') && ($format != 'GG') && ($format != 'MM') && ($format != 'EE') && ($format != 'TT')
-            && (Locale::isLocale($format, null, false))
+            && (Locale::isLocale($format))
         ) {
             $locale = $format;
             $format = null;

@@ -155,7 +155,7 @@ $filter->setAdapter('openssl');
 
         <programlisting language="php"><![CDATA[
 // Use the default blowfish settings
-$filter = new Zend_Filter_Encrypt('myencryptionkey');
+$filter = new Zend_Filter_Encrypt(array('key' => 'myencryptionkey'));
 
 // Set a own vector, otherwise you must call getVector()
 // and store this vector for later decryption

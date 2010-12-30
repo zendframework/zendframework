@@ -161,21 +161,20 @@ class Router
     }
 
     /**
-     * Match a request
+     * Route a request
      *
      * @param  HttpRequest $request
      * @return RouterMatch
      */
-    public function match(HttpRequest $request)
+    public function route(HttpRequest $request)
     {
-        $match = null;
-
         foreach ($this->_routes as $route) {
             if (($result = $route->match($request)) !== null) {
+                return $match;
             }
         }
 
-        return $match;
+        return null;
     }
 
     /**

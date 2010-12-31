@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4991 $"/>
+		<generation date="$Date: 2010-06-29 18:54:25 -0500 (Tue, 29 Jun 2010) $"/>
+		<language type="tl"/>
+		<territory type="PH"/>
+	</identity>
+	<alias source="fil_PH" path="//ldml"/>
+</ldml>

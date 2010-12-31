@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4975 $"/>
+		<generation date="$Date: 2010-06-09 17:36:15 -0500 (Wed, 09 Jun 2010) $"/>
+		<language type="sr"/> 
+	</identity>
+	<collations  validSubLocales="sr_Cyrl sr_Cyrl_BA sr_Cyrl_ME sr_Cyrl_RS">
+		<collation type="standard">
+			<suppress_contractions>[АаӘәГгЕеЖжЗзИиІіОоӨөКкУуЧчЫыЭэѴѵ]</suppress_contractions>
+        </collation>
+    </collations>
+</ldml>

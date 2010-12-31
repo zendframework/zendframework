@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5005 $"/>
+		<generation date="$Date: 2010-08-05 10:23:29 -0500 (Thu, 05 Aug 2010) $"/>
+		<language type="th" /> 
+	</identity>
+	<collations validSubLocales="th_TH">
+		<collation type="standard">
+			<settings normalization="on" />
+				<rules>
+				<reset before="primary">๏</reset>
+					<p>ฯ</p>
+					<p>ๆ</p>
+				<reset>๎</reset>
+					<s>์</s>
+				<reset>ฮ</reset>
+					<p>ํ</p>
+				<reset>า</reset>
+					<t>ๅ</t>
+				<reset>ไ</reset>
+					<p>ฺ</p>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

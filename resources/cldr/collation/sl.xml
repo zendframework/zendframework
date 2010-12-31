@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5022 $" />
+		<generation date="$Date: 2010-08-20 14:51:39 -0500 (Fri, 20 Aug 2010) $" />
+		<language type="sl" />
+	</identity>
+	<collations validSubLocales="sl_SI">
+		<collation type="standard">
+			<rules>
+				<reset>C</reset>
+				<p>č</p>
+				<t>Č</t>
+				<p>ć</p>
+				<t>Ć</t>
+				<reset>D</reset>
+				<p>đ</p>
+				<t>Đ</t>
+				<reset>S</reset>
+				<p>š</p>
+				<t>Š</t>
+				<reset>Z</reset>
+				<p>ž</p>
+				<t>Ž</t>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

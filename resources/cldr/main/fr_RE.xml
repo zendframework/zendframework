@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4590 $"/>
+		<generation date="$Date: 2010-02-05 13:10:28 -0600 (Fri, 05 Feb 2010) $"/>
+		<language type="fr"/>
+		<territory type="RE"/>
+	</identity>
+</ldml>

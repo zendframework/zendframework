@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4126 $"/>
+		<generation date="$Date: 2009-05-05 18:33:13 -0500 (Tue, 05 May 2009) $"/>
+		<language type="pl" /> 
+	</identity>
+	<collations  validSubLocales="pl_PL">
+		<collation type="standard" >
+			<rules>
+				<reset>A</reset>
+				<p>ą</p>
+				<t>Ą</t>
+				<reset>C</reset>
+				<p>ć</p>
+				<t>Ć</t>
+				<reset>E</reset>
+				<p>ę</p>
+				<t>Ę</t>
+				<reset>L</reset>
+				<p>ł</p>
+				<t>Ł</t>
+				<reset>N</reset>
+				<p>ń</p>
+				<t>Ń</t>
+				<reset>O</reset>
+				<p>ó</p>
+				<t>Ó</t>
+				<reset>S</reset>
+				<p>ś</p>
+				<t>Ś</t>
+				<reset>Z</reset>
+				<p>ź</p>
+				<t>Ź</t>
+				<p>ż</p>
+				<t>Ż</t>
+			</rules>
+		</collation  >
+	</collations>
+</ldml>

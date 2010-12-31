@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5204 $"/>
+		<generation date="$Date: 2010-11-18 08:59:56 -0600 (Thu, 18 Nov 2010) $"/>
+		<language type="en"/>
+		<territory type="US"/>
+		<variant type="POSIX"/>
+	</identity>
+		<collations>
+			<collation type="standard" >
+				<rules>
+					<reset>A</reset>
+					<pc>&#x20;&#x21;&#x22;&#x23;&#x24;&#x25;&#x26;&#x27;&#x28;&#x29;&#x2a;&#x2b;&#x2c;&#x2d;&#x2e;&#x2f;</pc>
+					<pc>0123456789&#x3a;&#x3b;&#x3c;&#x3d;&#x3e;&#x3f;&#x40;</pc>
+					<pc>ABCDEFGHIJKLMNOPQRSTUVWXYZ</pc>
+					<pc>&#x5b;&#x5c;&#x5d;&#x5e;&#x5f;&#x60;</pc>					
+					<pc>abcdefghijklmnopqrstuvwxyz</pc>
+					<pc>&#x7b;&#x7c;&#x7d;&#x7e;&#x7f;</pc>					
+				</rules>
+			</collation>
+		</collations>
+</ldml>

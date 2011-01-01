@@ -149,7 +149,7 @@ class Data
         // load locale file if not already in cache
         // needed for alias tag when referring to other locale
         if (empty(self::$_ldml[(string) $locale])) {
-            $filename = __DIR__ . '/Data/resources/' . $locale . '.xml';
+            $filename = __DIR__ . '/../../../resources/cldr/main/' . $locale . '.xml';
             if (!file_exists($filename)) {
                 throw new Exception\InvalidArgumentException(
                   "Missing locale file '$filename' for '$locale' locale."

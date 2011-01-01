@@ -130,7 +130,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetOrder()
     {
-        LocaleTestHelper::setDefault('de');
+        LocaleTestHelper::setFallback('de');
         $value = new LocaleTestHelper();
         $default = $value->getOrder();
         $this->assertTrue(array_key_exists('de', $default));
@@ -141,7 +141,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $default = $value->getOrder(Locale::ENVIRONMENT);
         $this->assertTrue(is_array($default));
 
-        $default = $value->getOrder(Locale::ZFDEFAULT);
+        $default = $value->getOrder(Locale::FALLBACK);
         $this->assertTrue(is_array($default));
     }
 
@@ -632,20 +632,20 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test setDefault
+     * test setFallback
      * expected true
      */
-    public function testsetDefault()
+    public function testsetFallback()
     {
         try {
-            LocaleTestHelper::setDefault('auto');
+            LocaleTestHelper::setFallback('auto');
             $this->fail();
         } catch (InvalidArgumentException $e) {
             $this->assertContains("fully qualified locale", $e->getMessage());
         }
 
         try {
-            LocaleTestHelper::setDefault('de_XX');
+            LocaleTestHelper::setFallback('de_XX');
             $locale = new LocaleTestHelper();
             $this->assertTrue($locale instanceof Locale); // should defer to 'de' or any other standard locale
         } catch (InvalidArgumentException $e) {
@@ -653,21 +653,21 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            LocaleTestHelper::setDefault('xy_ZZ');
+            LocaleTestHelper::setFallback('xy_ZZ');
             $this->fail();
         } catch (InvalidArgumentException $e) {
             $this->assertContains("Unknown locale", $e->getMessage());
         }
 
         try {
-            LocaleTestHelper::setDefault('de', 101);
+            LocaleTestHelper::setFallback('de', 101);
             $this->fail();
         } catch (InvalidArgumentException $e) {
             $this->assertContains("Quality must be between", $e->getMessage());
         }
 
         try {
-            LocaleTestHelper::setDefault('de', 90);
+            LocaleTestHelper::setFallback('de', 90);
             $locale = new LocaleTestHelper();
             $this->assertTrue($locale instanceof Locale); // should defer to 'de' or any other standard locale
         } catch (InvalidArgumentException $e) {
@@ -675,7 +675,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            LocaleTestHelper::setDefault('de-AT', 90);
+            LocaleTestHelper::setFallback('de-AT', 90);
             $locale = new LocaleTestHelper();
             $this->assertTrue($locale instanceof Locale);
         } catch (InvalidArgumentException $e) {
@@ -684,12 +684,12 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getDefault
+     * Test getFallback
      */
-    public function testgetDefault()
+    public function testgetFallback()
     {
-        LocaleTestHelper::setDefault('de');
-        $this->assertTrue(array_key_exists('de', LocaleTestHelper::getDefault()));
+        LocaleTestHelper::setFallback('de');
+        $this->assertTrue(array_key_exists('de', LocaleTestHelper::getFallback()));
     }
 
     /**

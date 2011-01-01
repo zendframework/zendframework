@@ -229,12 +229,115 @@ class Locale
     );
 
     /**
+     * Locale Translation for Full Named Locales
+     *
+     * @var array $_languageTranslation
+     */
+    private static $_languageTranslation = array(
+        'Afrikaans'         => 'af',      'Albanian'         => 'sq',      'Amharic'          => 'am',
+        'Arabic'            => 'ar',      'Armenian'         => 'hy',      'Assamese'         => 'as',
+        'Azeri'             => 'az',      'Azeri Latin'      => 'az_Latn', 'Azeri Cyrillic'   => 'az_Cyrl',
+        'Basque'            => 'eu',      'Belarusian'       => 'be',      'Bengali'          => 'bn',
+        'Bengali Latin'     => 'bn_Latn', 'Bosnian'          => 'bs',      'Bulgarian'        => 'bg',
+        'Burmese'           => 'my',      'Catalan'          => 'ca',      'Cherokee'         => 'chr',
+        'Chinese'           => 'zh',      'Croatian'         => 'hr',      'Czech'            => 'cs',
+        'Danish'            => 'da',      'Divehi'           => 'dv',      'Dutch'            => 'nl',
+        'English'           => 'en',      'Estonian'         => 'et',      'Faroese'          => 'fo',
+        'Faeroese'          => 'fo',      'Farsi'            => 'fa',      'Filipino'         => 'fil',
+        'Finnish'           => 'fi',      'French'           => 'fr',      'Frisian'          => 'fy',
+        'Macedonian'        => 'mk',      'Gaelic'           => 'gd',      'Galician'         => 'gl',
+        'Georgian'          => 'ka',      'German'           => 'de',      'Greek'            => 'el',
+        'Guarani'           => 'gn',      'Gujarati'         => 'gu',      'Hausa'            => 'ha',
+        'Hawaiian'          => 'haw',     'Hebrew'           => 'he',      'Hindi'            => 'hi',
+        'Hungarian'         => 'hu',      'Icelandic'        => 'is',      'Igbo'             => 'ig',
+        'Indonesian'        => 'id',      'Inuktitut'        => 'iu',      'Italian'          => 'it',
+        'Japanese'          => 'ja',      'Kannada'          => 'kn',      'Kanuri'           => 'kr',
+        'Kashmiri'          => 'ks',      'Kazakh'           => 'kk',      'Khmer'            => 'km',
+        'Konkani'           => 'kok',     'Korean'           => 'ko',      'Kyrgyz'           => 'ky',
+        'Lao'               => 'lo',      'Latin'            => 'la',      'Latvian'          => 'lv',
+        'Lithuanian'        => 'lt',      'Macedonian'       => 'mk',      'Malay'            => 'ms',
+        'Malayalam'         => 'ml',      'Maltese'          => 'mt',      'Manipuri'         => 'mni',
+        'Maori'             => 'mi',      'Marathi'          => 'mr',      'Mongolian'        => 'mn',
+        'Nepali'            => 'ne',      'Norwegian'        => 'no',      'Norwegian Bokmal' => 'nb',
+        'Norwegian Nynorsk' => 'nn',      'Oriya'            => 'or',      'Oromo'            => 'om',
+        'Papiamentu'        => 'pap',     'Pashto'           => 'ps',      'Polish'           => 'pl',
+        'Portuguese'        => 'pt',      'Punjabi'          => 'pa',      'Quecha'           => 'qu',
+        'Quechua'           => 'qu',      'Rhaeto-Romanic'   => 'rm',      'Romanian'         => 'ro',
+        'Russian'           => 'ru',      'Sami'             => 'smi',     'Sami Inari'       => 'smn',
+        'Sami Lule'         => 'smj',     'Sami Northern'    => 'se',      'Sami Skolt'       => 'sms',
+        'Sami Southern'     => 'sma',     'Sanskrit'         => 'sa',      'Serbian'          => 'sr',
+        'Serbian Latin'     => 'sr_Latn', 'Serbian Cyrillic' => 'sr_Cyrl', 'Sindhi'           => 'sd',
+        'Sinhalese'         => 'si',      'Slovak'           => 'sk',      'Slovenian'        => 'sl',
+        'Somali'            => 'so',      'Sorbian'          => 'wen',     'Spanish'          => 'es',
+        'Swahili'           => 'sw',      'Swedish'          => 'sv',      'Syriac'           => 'syr',
+        'Tajik'             => 'tg',      'Tamazight'        => 'tmh',     'Tamil'            => 'ta',
+        'Tatar'             => 'tt',      'Telugu'           => 'te',      'Thai'             => 'th',
+        'Tibetan'           => 'bo',      'Tigrigna'         => 'ti',      'Tsonga'           => 'ts',
+        'Tswana'            => 'tn',      'Turkish'          => 'tr',      'Turkmen'          => 'tk',
+        'Uighur'            => 'ug',      'Ukrainian'        => 'uk',      'Urdu'             => 'ur',
+        'Uzbek'             => 'uz',      'Uzbek Latin'      => 'uz_Latn', 'Uzbek Cyrillic'   => 'uz_Cyrl',
+        'Venda'             => 've',      'Vietnamese'       => 'vi',      'Welsh'            => 'cy',
+        'Xhosa'             => 'xh',      'Yiddish'          => 'yi',      'Yoruba'           => 'yo',
+        'Zulu'              => 'zu',
+    );
+
+    /**
+     * Region Translation for Full Named Locales
+     *
+     * @var array $_regionTranslation
+     */
+    public static $_regionTranslation = array(
+        'Albania'            => 'AL', 'Algeria'       => 'DZ', 'Argentina'                  => 'AR',
+        'Armenia'            => 'AM', 'Australia'     => 'AU', 'Austria'                    => 'AT',
+        'Bahrain'            => 'BH', 'Bangladesh'    => 'BD', 'Belgium'                    => 'BE',
+        'Belize'             => 'BZ', 'Bhutan'        => 'BT', 'Bolivia'                    => 'BO',
+        'Bosnia Herzegovina' => 'BA', 'Brazil'        => 'BR', 'Brazilian'                  => 'BR',
+        'Brunei Darussalam'  => 'BN', 'Cameroon'      => 'CM', 'Canada'                     => 'CA',
+        'Chile'              => 'CL', 'China'         => 'CN', 'Colombia'                   => 'CO',
+        'Costa Rica'         => 'CR', "Cote d'Ivoire" => 'CI', 'Czech Republic'             => 'CZ',
+        'Dominican Republic' => 'DO', 'Denmark'       => 'DK', 'Ecuador'                    => 'EC',
+        'Egypt'              => 'EG', 'El Salvador'   => 'SV', 'Eritrea'                    => 'ER',
+        'Ethiopia'           => 'ET', 'Finland'       => 'FI', 'France'                     => 'FR',
+        'Germany'            => 'DE', 'Greece'        => 'GR', 'Guatemala'                  => 'GT',
+        'Haiti'              => 'HT', 'Honduras'      => 'HN', 'Hong Kong'                  => 'HK',
+        'Hong Kong SAR'      => 'HK', 'Hungary'       => 'HU', 'Iceland'                    => 'IS',
+        'India'              => 'IN', 'Indonesia'     => 'ID', 'Iran'                       => 'IR',
+        'Iraq'               => 'IQ', 'Ireland'       => 'IE', 'Italy'                      => 'IT',
+        'Jamaica'            => 'JM', 'Japan'         => 'JP', 'Jordan'                     => 'JO',
+        'Korea'              => 'KR', 'Kuwait'        => 'KW', 'Lebanon'                    => 'LB',
+        'Libya'              => 'LY', 'Liechtenstein' => 'LI', 'Luxembourg'                 => 'LU',
+        'Macau'              => 'MO', 'Macao SAR'     => 'MO', 'Malaysia'                   => 'MY',
+        'Mali'               => 'ML', 'Mexico'        => 'MX', 'Moldava'                    => 'MD',
+        'Monaco'             => 'MC', 'Morocco'       => 'MA', 'Netherlands'                => 'NL',
+        'New Zealand'        => 'NZ', 'Nicaragua'     => 'NI', 'Nigeria'                    => 'NG',
+        'Norway'             => 'NO', 'Oman'          => 'OM', 'Pakistan'                   => 'PK',
+        'Panama'             => 'PA', 'Paraguay'      => 'PY', "People's Republic of China" => 'CN',
+        'Peru'               => 'PE', 'Philippines'   => 'PH', 'Poland'                     => 'PL',
+        'Portugal'           => 'PT', 'PRC'           => 'CN', 'Puerto Rico'                => 'PR',
+        'Qatar'              => 'QA', 'Reunion'       => 'RE', 'Russia'                     => 'RU',
+        'Saudi Arabia'       => 'SA', 'Senegal'       => 'SN', 'Singapore'                  => 'SG',
+        'Slovakia'           => 'SK', 'South Africa'  => 'ZA', 'Spain'                      => 'ES',
+        'Sri Lanka'          => 'LK', 'Sweden'        => 'SE', 'Switzerland'                => 'CH',
+        'Syria'              => 'SY', 'Taiwan'        => 'TW', 'The Netherlands'            => 'NL',
+        'Trinidad'           => 'TT', 'Tunisia'       => 'TN', 'UAE'                        => 'AE',
+        'United Kingdom'     => 'GB', 'United States' => 'US', 'Uruguay'                    => 'UY',
+        'Venezuela'          => 'VE', 'Yemen'         => 'YE', 'Zimbabwe'                   => 'ZW',
+    );
+
+    /**
      * Autosearch constants
      */
     const BROWSER     = 'browser';
     const ENVIRONMENT = 'environment';
     const FALLBACK    = 'fallback';
     const FIXED       = 'fixed';
+
+    /**
+     * Path to CLDR data
+     *
+     * @var string
+     */
+    protected $_datapath = '../../resources/cldr/';
 
     /**
      * Actual set locale
@@ -389,7 +492,15 @@ class Locale
         return self::$_fixed;
     }
 
-    public static function setFixed()
+    /**
+     * Sets a fixed locale which will be used independently from the user or environments settings
+     *
+     * @param  string|\Zend\Locale\Locale $locale  Locale to set
+     * @throws \Zend\Locale\Exception\InvalidArgumentException When a autolocale was given
+     * @throws \Zend\Locale\Exception\InvalidArgumentException When a unknown locale was given
+     * @return void
+     */
+    public static function setFixed($locale)
     {
         if (($locale === 'auto') or ($locale === 'root') or ($locale === 'fallback') or
             ($locale === 'fixed') or ($locale === 'environment') or ($locale === 'browser')) {
@@ -444,14 +555,14 @@ class Locale
                 }
 
                 $language = str_ireplace(
-                    array_keys(Data\Translation::$languageTranslation),
-                    array_values(Data\Translation::$languageTranslation),
+                    array_keys(self::$_languageTranslation),
+                    array_values(self::$_languageTranslation),
                     (string) $language
                 );
 
                 $language = str_ireplace(
-                    array_keys(Data\Translation::$regionTranslation),
-                    array_values(Data\Translation::$regionTranslation),
+                    array_keys(self::$_regionTranslation),
+                    array_values(self::$_regionTranslation),
                     $language
                 );
 

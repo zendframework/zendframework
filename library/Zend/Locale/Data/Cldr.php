@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Locale
- * @subpackage Data
+ * @subpackage Cldr
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,10 +22,12 @@
 /**
  * @namespace
  */
-namespace Zend\Locale;
+namespace Zend\Locale\Data;
 
 use Zend\Cache\Cache,
-    Zend\Cache\Frontend as CacheFrontend;
+    Zend\Cache\Frontend as CacheFrontend,
+    Zend\Locale\Locale,
+    Zend\Locale\Exception;
 
 /**
  * Locale data reader, handles the CLDR
@@ -39,7 +41,7 @@ use Zend\Cache\Cache,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Data
+class Cldr extends AbstractLocale
 {
     /**
      * Locale files
@@ -149,7 +151,7 @@ class Data
         // load locale file if not already in cache
         // needed for alias tag when referring to other locale
         if (empty(self::$_ldml[(string) $locale])) {
-            $filename = __DIR__ . '/../../../resources/cldr/main/' . $locale . '.xml';
+            $filename = __DIR__ . '/../../../../resources/cldr/main/' . $locale . '.xml';
             if (!file_exists($filename)) {
                 throw new Exception\InvalidArgumentException(
                   "Missing locale file '$filename' for '$locale' locale."
@@ -283,7 +285,7 @@ class Data
         }
 
         if (!(Locale::isLocale((string) $locale))) {
-            throw new Exception\InvalidArgumentException(
+            throw new InvalidArgumentException(
               "Locale (" . (string) $locale . ") is a unknown locale"
             );
         }
@@ -1414,71 +1416,5 @@ class Data
         }
 
         return $temp;
-    }
-
-    /**
-     * Returns the set cache
-     *
-     * @return \Zend\Cache\Core The set cache
-     */
-    public static function getCache()
-    {
-        return self::$_cache;
-    }
-
-    /**
-     * Set a cache for Zend_Locale_Data
-     *
-     * @param \Zend\Cache\Frontend $cache A cache frontend
-     */
-    public static function setCache(CacheFrontend $cache)
-    {
-        self::$_cache = $cache;
-    }
-
-    /**
-     * Returns true when a cache is set
-     *
-     * @return boolean
-     */
-    public static function hasCache()
-    {
-        if (self::$_cache !== null) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Removes any set cache
-     *
-     * @return void
-     */
-    public static function removeCache()
-    {
-        self::$_cache = null;
-    }
-
-    /**
-     * Clears all set cache data
-     *
-     * @return void
-     */
-    public static function clearCache()
-    {
-        if (self::$_cache !== null) {
-            self::$_cache->clean();
-        }
-    }
-
-    /**
-     * Disables the cache
-     *
-     * @param unknown_type $flag
-     */
-    public static function disableCache($flag)
-    {
-        self::$_cacheDisabled = (boolean) $flag;
     }
 }

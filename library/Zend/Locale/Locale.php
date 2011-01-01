@@ -28,8 +28,7 @@ use Zend\Registry;
 /**
  * Base class for localization
  *
- * @uses      \Zend\Locale\Data
- * @uses      \Zend\Locale\Data\Translation
+ * @uses      \Zend\Locale\Data\Cldr
  * @uses      \Zend\Locale\Exception\UnexpectedValueException
  * @uses      \Zend\Locale\Exception\InvalidArgumentException
  * @uses      \Zend\Registry
@@ -331,13 +330,6 @@ class Locale
     const ENVIRONMENT = 'environment';
     const FALLBACK    = 'fallback';
     const FIXED       = 'fixed';
-
-    /**
-     * Path to CLDR data
-     *
-     * @var string
-     */
-    protected $_datapath = '../../resources/cldr/';
 
     /**
      * Actual set locale
@@ -763,7 +755,7 @@ class Locale
     public static function getTranslationList($path = null, $locale = null, $value = null)
     {
         $locale = self::findLocale($locale);
-        $result = Data::getList($locale, $path, $value);
+        $result = Data\Cldr::getList($locale, $path, $value);
         if (empty($result) === true) {
             return false;
         }
@@ -836,7 +828,7 @@ class Locale
     public static function getTranslation($value = null, $path = null, $locale = null)
     {
         $locale = self::findLocale($locale);
-        $result = Data::getContent($locale, $path, $value);
+        $result = Data\Cldr::getContent($locale, $path, $value);
         if (empty($result) === true) {
             return false;
         }
@@ -910,7 +902,7 @@ class Locale
     public static function getQuestion($locale = null)
     {
         $locale            = self::findLocale($locale);
-        $quest             = Data::getList($locale, 'question');
+        $quest             = Data\Cldr::getList($locale, 'question');
         $yes               = explode(':', $quest['yes']);
         $no                = explode(':', $quest['no']);
         $quest['yes']      = $yes[0];
@@ -1072,9 +1064,6 @@ class Locale
     {
         $list = self::$_localeData;
         unset($list['root']);
-        unset($list['auto']);
-        unset($list['browser']);
-        unset($list['environment']);
         return $list;
     }
 
@@ -1085,7 +1074,7 @@ class Locale
      */
     public static function getCache()
     {
-        $cache = Data::getCache();
+        $cache = Data\Cldr::getCache();
 
         return $cache;
     }
@@ -1098,7 +1087,7 @@ class Locale
      */
     public static function setCache(\Zend\Cache\Frontend $cache)
     {
-        Data::setCache($cache);
+        Data\Cldr::setCache($cache);
     }
 
     /**
@@ -1108,7 +1097,7 @@ class Locale
      */
     public static function hasCache()
     {
-        return Data::hasCache();
+        return Data\Cldr::hasCache();
     }
 
     /**
@@ -1118,7 +1107,7 @@ class Locale
      */
     public static function removeCache()
     {
-        Data::removeCache();
+        Data\Cldr::removeCache();
     }
 
     /**
@@ -1128,7 +1117,7 @@ class Locale
      */
     public static function clearCache()
     {
-        Data::clearCache();
+        Data\Cldr::clearCache();
     }
 
     /**
@@ -1139,7 +1128,7 @@ class Locale
      */
     public static function disableCache($flag)
     {
-        Data::disableCache($flag);
+        Data\Cldr::disableCache($flag);
     }
 
     /**

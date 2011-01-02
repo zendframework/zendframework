@@ -25,7 +25,9 @@
 namespace Zend\Locale\Data;
 
 use Zend\Cache\Cache,
-    Zend\Cache\Frontend as CacheFrontend;
+    Zend\Cache\Frontend as CacheFrontend,
+    Zend\Locale\Locale,
+    Zend\Locale\Exception\InvalidArgumentException;
 
 /**
  * Locale data reader, handles the CLDR
@@ -74,217 +76,20 @@ abstract class AbstractLocale
     protected static $_cacheDisabled = false;
 
     /**
-     * Read the content from locale
-     *
-     * Can be called like:
-     * <ldml>
-     *     <delimiter>test</delimiter>
-     *     <second type='myone'>content</second>
-     *     <second type='mysecond'>content2</second>
-     *     <third type='mythird' />
-     * </ldml>
-     *
-     * Case 1: _readFile('ar','/ldml/delimiter')             -> returns [] = test
-     * Case 1: _readFile('ar','/ldml/second[@type=myone]')   -> returns [] = content
-     * Case 2: _readFile('ar','/ldml/second','type')         -> returns [myone] = content; [mysecond] = content2
-     * Case 3: _readFile('ar','/ldml/delimiter',,'right')    -> returns [right] = test
-     * Case 4: _readFile('ar','/ldml/third','type','myone')  -> returns [myone] = mythird
-     *
-     * @param  string $locale
-     * @param  string $path
-     * @param  string $attribute
-     * @param  string $value
-     * @access private
-     * @return array
-     */
-    private static function _readFile($locale, $path, $attribute, $value, $temp)
-    {
-        // without attribute - read all values
-        // with attribute    - read only this value
-        if (!empty(self::$_ldml[(string) $locale])) {
-
-            $result = self::$_ldml[(string) $locale]->xpath($path);
-            if (!empty($result)) {
-                foreach ($result as &$found) {
-
-                    if (empty($value)) {
-
-                        if (empty($attribute)) {
-                            // Case 1
-                            $temp[] = (string) $found;
-                        } else if (empty($temp[(string) $found[$attribute]])){
-                            // Case 2
-                            $temp[(string) $found[$attribute]] = (string) $found;
-                        }
-
-                    } else if (empty ($temp[$value])) {
-
-                        if (empty($attribute)) {
-                            // Case 3
-                            $temp[$value] = (string) $found;
-                        } else {
-                            // Case 4
-                            $temp[$value] = (string) $found[$attribute];
-                        }
-
-                    }
-                }
-            }
-        }
-        return $temp;
-    }
-
-    /**
-     * Find possible routing to other path or locale
-     *
-     * @param  string $locale
-     * @param  string $path
-     * @param  string $attribute
-     * @param  string $value
-     * @param  array  $temp
-     * @access private
-     */
-    private static function _findRoute($locale, $path, $attribute, $value, &$temp)
-    {
-        // load locale file if not already in cache
-        // needed for alias tag when referring to other locale
-        if (empty(self::$_ldml[(string) $locale])) {
-            $filename = __DIR__ . '/../../../resources/cldr/main/' . $locale . '.xml';
-            if (!file_exists($filename)) {
-                throw new Exception\InvalidArgumentException(
-                  "Missing locale file '$filename' for '$locale' locale."
-                );
-            }
-
-            self::$_ldml[(string) $locale] = simplexml_load_file($filename);
-        }
-
-        // search for 'alias' tag in the search path for redirection
-        $search = '';
-        $tok = strtok($path, '/');
-
-        // parse the complete path
-        if (!empty(self::$_ldml[(string) $locale])) {
-            while ($tok !== false) {
-                $search .=  '/' . $tok;
-                if (strpos($search, '[@') !== false) {
-                    while (strrpos($search, '[@') > strrpos($search, ']')) {
-                        $tok = strtok('/');
-                        if (empty($tok)) {
-                            $search .= '/';
-                        }
-                        $search = $search . '/' . $tok;
-                    }
-                }
-                $result = self::$_ldml[(string) $locale]->xpath($search . '/alias');
-
-                // alias found
-                if (!empty($result)) {
-
-                    $source = $result[0]['source'];
-                    $newpath = $result[0]['path'];
-
-                    // new path - path //ldml is to ignore
-                    if ($newpath != '//ldml') {
-                        // other path - parse to make real path
-
-                        while (substr($newpath,0,3) == '../') {
-                            $newpath = substr($newpath, 3);
-                            $search = substr($search, 0, strrpos($search, '/'));
-                        }
-
-                        // truncate ../ to realpath otherwise problems with alias
-                        $path = $search . '/' . $newpath;
-                        while (($tok = strtok('/'))!== false) {
-                            $path = $path . '/' . $tok;
-                        }
-                    }
-
-                    // reroute to other locale
-                    if ($source != 'locale') {
-                        $locale = $source;
-                    }
-
-                    $temp = self::_getFile($locale, $path, $attribute, $value, $temp);
-                    return false;
-                }
-
-                $tok = strtok('/');
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Read the right LDML file
-     *
-     * @param  string $locale
-     * @param  string $path
-     * @param  string $attribute
-     * @param  string $value
-     * @access private
-     */
-    private static function _getFile($locale, $path, $attribute = false, $value = false, $temp = array())
-    {
-        $result = self::_findRoute($locale, $path, $attribute, $value, $temp);
-        if ($result) {
-            $temp = self::_readFile($locale, $path, $attribute, $value, $temp);
-        }
-
-        // parse required locales reversive
-        // example: when given zh_Hans_CN
-        // 1. -> zh_Hans_CN
-        // 2. -> zh_Hans
-        // 3. -> zh
-        // 4. -> root
-        if (($locale != 'root') && ($result)) {
-            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
-            if (!empty($locale)) {
-                $temp = self::_getFile($locale, $path, $attribute, $value, $temp);
-            } else {
-                $temp = self::_getFile('root', $path, $attribute, $value, $temp);
-            }
-        }
-        return $temp;
-    }
-
-    /**
-     * Find the details for supplemental calendar datas
-     *
-     * @param  string $locale Locale for Detaildata
-     * @param  array  $list   List to search
-     * @return string         Key for Detaildata
-     */
-    private static function _calendarDetail($locale, $list)
-    {
-        $ret = "001";
-        foreach ($list as $key => $value) {
-            if (strpos($locale, '_') !== false) {
-                $locale = substr($locale, strpos($locale, '_') + 1);
-            }
-            if (strpos($key, $locale) !== false) {
-                $ret = $key;
-                break;
-            }
-        }
-        return $ret;
-    }
-
-    /**
      * Internal function for checking the locale
      *
      * @param string|\Zend\Locale $locale Locale to check
      * @return string
      */
-    private static function _checkLocale($locale)
+    protected static function _checkLocale($locale)
     {
         if (empty($locale)) {
             $locale = new Locale();
         }
 
         if (!(Locale::isLocale((string) $locale))) {
-            throw new Exception\InvalidArgumentException(
-              "Locale (" . (string) $locale . ") is a unknown locale"
+            throw new InvalidArgumentException(
+              "Locale (" . (string) $locale . ") is no known locale"
             );
         }
 

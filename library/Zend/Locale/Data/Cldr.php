@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Locale
- * @subpackage Cldr
+ * @subpackage Data
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -30,7 +30,7 @@ use Zend\Cache\Cache,
     Zend\Locale\Exception\InvalidArgumentException;
 
 /**
- * Locale data reader, handles the CLDR
+ * Locale data provider, handles CLDR
  *
  * @uses       Zend\Cache\Cache
  * @uses       Zend\Locale
@@ -43,12 +43,12 @@ use Zend\Cache\Cache,
  */
 class Cldr extends AbstractLocale
 {
-  /**
-   * Internal path to CLDR resources
-   */
-  protected static $_path = '../../../../resources/cldr/';
+    /**
+     * Internal path to CLDR resources
+     */
+    protected static $_path = '../../../../resources/cldr/';
 
-  /**
+    /**
      * Locale files
      *
      * @var ressource
@@ -259,27 +259,6 @@ class Cldr extends AbstractLocale
             }
         }
         return $ret;
-    }
-
-    /**
-     * Internal function for checking the locale
-     *
-     * @param string|\Zend\Locale $locale Locale to check
-     * @return string
-     */
-    private static function _checkLocale($locale)
-    {
-        if (empty($locale)) {
-            $locale = new Locale();
-        }
-
-        if (!(Locale::isLocale((string) $locale))) {
-            throw new InvalidArgumentException(
-              "Locale (" . (string) $locale . ") is a unknown locale"
-            );
-        }
-
-        return (string) $locale;
     }
 
     /**

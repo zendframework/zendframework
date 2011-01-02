@@ -26,7 +26,7 @@ namespace Zend\Locale;
 
 /**
  * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Locale\Data
+ * @uses       \Zend\Locale\Data\Cldr
  * @uses       \Zend\Locale\Exception\InvalidArgumentException
  * @usess      \Zend\Locale\Exception\UnsupportedTokenException
  * @uses       \Zend\Locale\Math
@@ -99,10 +99,10 @@ class Format
                         if (isset($options['locale'])) {
                             $locale = $options['locale'];
                         }
-                        $options['number_format'] = Data::getContent($locale, 'decimalnumber');
+                        $options['number_format'] = Cldr::getContent($locale, 'decimalnumber');
                     } else if ((gettype($value) !== 'string') and ($value !== NULL)) {
                         throw new Exception\InvalidArgumentException(
-                        	"Unknown number format type '" . gettype($value) . "'. "
+                          "Unknown number format type '" . gettype($value) . "'. "
                             . "Format '$value' must be a valid number format string."
                         );
                     }
@@ -117,7 +117,7 @@ class Format
                         $options['date_format'] = self::getDateFormat($locale);
                     } else if ((gettype($value) !== 'string') and ($value !== NULL)) {
                         throw new Exception\InvalidArgumentException(
-                        	"Unknown dateformat type '" . gettype($value) . "'. "
+                          "Unknown dateformat type '" . gettype($value) . "'. "
                             . "Format '$value' must be a valid ISO or PHP date format string."
                         );
                     } else {
@@ -131,7 +131,7 @@ class Format
                 case 'format_type' :
                     if (($value != 'php') && ($value != 'iso')) {
                         throw new Exception\InvalidArgumentException(
-                        	"Unknown date format type '$value'. Only 'iso' and 'php'"
+                          "Unknown date format type '$value'. Only 'iso' and 'php'"
                            . " are supported."
                         );
                     }
@@ -140,7 +140,7 @@ class Format
                 case 'fix_date' :
                     if (($value !== true) && ($value !== false)) {
                         throw new Exception\InvalidArgumentException(
-                        	"Enabling correction of dates must be either true or false"
+                          "Enabling correction of dates must be either true or false"
                             . "(fix_date='$value')."
                         );
                     }
@@ -152,12 +152,12 @@ class Format
 
                 case 'cache' :
                     if ($value instanceof \Zend\Cache\Core) {
-                        Data::setCache($value);
+                        Cldr::setCache($value);
                     }
                     break;
 
                 case 'disablecache' :
-                    Data::disableCache($value);
+                    Cldr::disableCache($value);
                     break;
 
                 case 'precision' :
@@ -167,14 +167,14 @@ class Format
 
                     if (($value < -1) || ($value > 30)) {
                         throw new Exception\InvalidArgumentException(
-                        	"'$value' precision is not a whole number less than 30."
-                       	);
+                          "'$value' precision is not a whole number less than 30."
+                         );
                     }
                     break;
 
                 default:
                     throw new Exception\InvalidArgumentException(
-                    	"Unknown option: '$name' = '$value'"
+                      "Unknown option: '$name' = '$value'"
                     );
                     break;
 
@@ -203,19 +203,19 @@ class Format
     public static function convertNumerals($input, $from, $to = null)
     {
         $from   = strtolower($from);
-        $source = Data::getContent('en', 'numberingsystem', $from);
+        $source = Cldr::getContent('en', 'numberingsystem', $from);
         if (empty($source)) {
             throw new Exception\InvalidArgumentException(
-            	"Unknown script '$from'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9."
+              "Unknown script '$from'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9."
             );
         }
 
         if ($to !== null) {
             $to     = strtolower($to);
-            $target = Data::getContent('en', 'numberingsystem', $to);
+            $target = Cldr::getContent('en', 'numberingsystem', $to);
             if (empty($target)) {
                 throw new Exception\InvalidArgumentException(
-                	"Unknown script '$to'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9."
+                  "Unknown script '$to'. Use 'Latn' for digits 0,1,2,3,4,5,6,7,8,9."
                 );
             }
         } else {
@@ -255,12 +255,12 @@ class Format
 
         if (!self::isNumber($input, $options)) {
             throw new Exception\InvalidArgumentException(
-            	'No localized value in ' . $input . ' found, or the given number does not match the localized format'
+              'No localized value in ' . $input . ' found, or the given number does not match the localized format'
             );
         }
 
         // Get correct signs for this locale
-        $symbols = Data::getList($options['locale'],'symbols');
+        $symbols = Cldr::getList($options['locale'],'symbols');
         // Change locale input to be default number
         if ((strpos($input, $symbols['minus']) !== false) ||
             (strpos($input, '-') !== false)) {
@@ -311,14 +311,14 @@ class Format
         $options['locale'] = (string) $options['locale'];
 
         // Get correct signs for this locale
-        $symbols = Data::getList($options['locale'], 'symbols');
+        $symbols = Cldr::getList($options['locale'], 'symbols');
         $oenc = iconv_get_encoding('internal_encoding');
         iconv_set_encoding('internal_encoding', 'UTF-8');
 
         // Get format
         $format = $options['number_format'];
         if ($format === null) {
-            $format  = Data::getContent($options['locale'], 'decimalnumber');
+            $format  = Cldr::getContent($options['locale'], 'decimalnumber');
             $format  = self::_seperateFormat($format, $value, $options['precision']);
 
             if ($options['precision'] !== null) {
@@ -350,7 +350,7 @@ class Format
         if (iconv_strpos($format, '0') === false) {
             iconv_set_encoding('internal_encoding', $oenc);
             throw new Exception\InvalidArgumentException(
-            	'Wrong format... missing 0'
+              'Wrong format... missing 0'
             );
         }
 
@@ -510,7 +510,7 @@ class Format
         $options = self::_checkOptions($options) + self::$_options;
 
         // Get correct signs for this locale
-        $symbols = Data::getList($options['locale'],'symbols');
+        $symbols = Cldr::getList($options['locale'],'symbols');
 
         $regexs = self::_getRegexForType('decimalnumber', $options);
         $regexs = array_merge($regexs, self::_getRegexForType('scientificnumber', $options));
@@ -536,7 +536,7 @@ class Format
      */
     private static function _getRegexForType($type, $options)
     {
-        $decimal  = Data::getContent($options['locale'], $type);
+        $decimal  = Cldr::getContent($options['locale'], $type);
         $decimal  = preg_replace('/[^#0,;\.\-Ee]/u', '',$decimal);
         $patterns = explode(';', $decimal);
 
@@ -544,7 +544,7 @@ class Format
             $patterns[1] = '-' . $patterns[0];
         }
 
-        $symbols = Data::getList($options['locale'],'symbols');
+        $symbols = Cldr::getList($options['locale'],'symbols');
 
         foreach($patterns as $pkey => $pattern) {
             $regex[$pkey]  = '/^';
@@ -809,7 +809,7 @@ class Format
                 (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))
             ) {
                 // erase day string
-                $daylist = Data::getList($options['locale'], 'day');
+                $daylist = Cldr::getList($options['locale'], 'day');
                 if (is_scalar($number)) {
                     foreach($daylist as $key => $name) {
                         if (iconv_strpos($number, $name) !== false) {
@@ -828,10 +828,10 @@ class Format
                 (!is_object($options['locale']) || ((string) $options['locale'] !== 'root'))) {
                     // prepare to convert month name to their numeric equivalents, if requested,
                     // and we have a $options['locale']
-                    $position = self::_replaceMonth($number, Data::getList($options['locale'],
+                    $position = self::_replaceMonth($number, Cldr::getList($options['locale'],
                         'month'));
                 if ($position === false) {
-                    $position = self::_replaceMonth($number, Data::getList($options['locale'],
+                    $position = self::_replaceMonth($number, Cldr::getList($options['locale'],
                         'month', array('gregorian', 'format', 'abbreviated')));
                 }
             }
@@ -857,9 +857,9 @@ class Format
 
         // get daytime
         if (iconv_strpos($format, 'a') !== false) {
-            if (iconv_strpos(strtoupper($number), strtoupper(Data::getContent($options['locale'], 'am'))) !== false) {
+            if (iconv_strpos(strtoupper($number), strtoupper(Cldr::getContent($options['locale'], 'am'))) !== false) {
                 $am = true;
-            } else if (iconv_strpos(strtoupper($number), strtoupper(Data::getContent($options['locale'], 'pm'))) !== false) {
+            } else if (iconv_strpos(strtoupper($number), strtoupper(Cldr::getContent($options['locale'], 'pm'))) !== false) {
                 $am = false;
             }
         }
@@ -1085,7 +1085,7 @@ class Format
      */
     public static function getDateFormat($locale = null)
     {
-        $format = Data::getContent($locale, 'date');
+        $format = Cldr::getContent($locale, 'date');
         if (empty($format)) {
             throw new Exception\InvalidArgumentException("failed to receive data from locale $locale");
         }
@@ -1141,14 +1141,14 @@ class Format
         $options = self::_checkOptions($options) + self::$_options;
 
         // day expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'd', 0, 'UTF-8') !== false) 
+        if ((iconv_strpos($options['date_format'], 'd', 0, 'UTF-8') !== false)
             and (!isset($date['day']) or ($date['day'] === ""))
         ) {
             return false;
         }
 
         // month expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'M', 0, 'UTF-8') !== false) 
+        if ((iconv_strpos($options['date_format'], 'M', 0, 'UTF-8') !== false)
             and (!isset($date['month']) or ($date['month'] === ""))
         ) {
             return false;
@@ -1156,21 +1156,21 @@ class Format
 
         // year expected but not parsed
         if (((iconv_strpos($options['date_format'], 'Y', 0, 'UTF-8') !== false) or
-            (iconv_strpos($options['date_format'], 'y', 0, 'UTF-8') !== false)) 
+            (iconv_strpos($options['date_format'], 'y', 0, 'UTF-8') !== false))
             and (!isset($date['year']) or ($date['year'] === ""))
         ) {
             return false;
         }
 
         // second expected but not parsed
-        if ((iconv_strpos($options['date_format'], 's', 0, 'UTF-8') !== false) 
+        if ((iconv_strpos($options['date_format'], 's', 0, 'UTF-8') !== false)
             and (!isset($date['second']) or ($date['second'] === ""))
         ) {
             return false;
         }
 
         // minute expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'm', 0, 'UTF-8') !== false) 
+        if ((iconv_strpos($options['date_format'], 'm', 0, 'UTF-8') !== false)
             and (!isset($date['minute']) or ($date['minute'] === ""))
         ) {
             return false;
@@ -1178,7 +1178,7 @@ class Format
 
         // hour expected but not parsed
         if (((iconv_strpos($options['date_format'], 'H', 0, 'UTF-8') !== false) or
-            (iconv_strpos($options['date_format'], 'h', 0, 'UTF-8') !== false)) 
+            (iconv_strpos($options['date_format'], 'h', 0, 'UTF-8') !== false))
             and (!isset($date['hour']) or ($date['hour'] === ""))
         ) {
             return false;
@@ -1196,7 +1196,7 @@ class Format
      */
     public static function getTimeFormat($locale = null)
     {
-        $format = Data::getContent($locale, 'time');
+        $format = Cldr::getContent($locale, 'time');
         if (empty($format)) {
             throw new Exception\InvalidArgumentException("failed to receive data from locale $locale");
         }
@@ -1234,7 +1234,7 @@ class Format
      */
     public static function getDateTimeFormat($locale = null)
     {
-        $format = Data::getContent($locale, 'datetime');
+        $format = Cldr::getContent($locale, 'datetime');
         if (empty($format)) {
             throw new Exception\InvalidArgumentException("failed to receive data from locale $locale");
         }

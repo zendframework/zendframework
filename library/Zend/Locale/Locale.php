@@ -471,7 +471,9 @@ class Locale
             }
         }
 
-        self::$_auto = self::getBrowser() + self::getEnvironment() + self::getFallback();
+        if (empty(self::$_fixed)) {
+            self::$_auto = self::getBrowser() + self::getEnvironment() + self::getFallback();
+        }
     }
 
     /**
@@ -1132,12 +1134,12 @@ class Locale
     }
 
     /**
-     * Internal function, returns a single locale on detection
+     * Internal function, returns a locale fallback list on detection
      *
      * @param  string|\Zend\Locale\Locale $locale (Optional) Locale to work on
      * @param  boolean            $strict (Optional) Strict preparation
      * @throws \Zend\Locale\Exception\UnexpectedValueException When no locale is set which is only possible when the class was wrong extended
-     * @return string
+     * @return array
      */
     private static function _prepareLocale($locale, $strict = false)
     {
@@ -1149,7 +1151,7 @@ class Locale
             return '';
         }
 
-        if (empty(self::$_auto) === true) {
+        if (empty(self::$_auto)) {
             self::$_browser     = self::getBrowser();
             self::$_environment = self::getEnvironment();
             self::$_auto        = self::getBrowser() + self::getEnvironment() + self::getFallback();

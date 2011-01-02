@@ -24,7 +24,7 @@
 namespace Zend\Currency;
 use Zend\Cache\Frontend;
 use Zend\Locale;
-use Zend\Locale\Data;
+use Zend\Locale\Data\Cldr;
 
 /**
  * Class for handling currency notations
@@ -32,7 +32,7 @@ use Zend\Locale\Data;
  * @uses      Zend\Cache\Frontend;
  * @uses      Zend\Locale
  * @uses      Zend\Locale\Format
- * @uses      Zend\Locale\Data
+ * @uses      Zend\Locale\Data\Cldr
  * @category  Zend
  * @package   Zend_Currency
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -175,10 +175,10 @@ class Currency
         $format = $options['format'];
         $locale = $options['locale'];
         if (empty($format)) {
-            $format = Data::getContent($locale, 'currencynumber');
+            $format = Cldr::getContent($locale, 'currencynumber');
         } else if (Locale\Locale::isLocale($format, true)) {
             $locale = $format;
-            $format = Data::getContent($format, 'currencynumber');
+            $format = Cldr::getContent($format, 'currencynumber');
         }
 
         $original = $value;
@@ -312,7 +312,7 @@ class Currency
         }
 
         // Get the available currencies for this country
-        $data = Data::getContent($locale, 'currencytoregion', $country);
+        $data = Cldr::getContent($locale, 'currencytoregion', $country);
         if ((empty($currency) === false) and (empty($data) === false)) {
             $abbreviation = $currency;
         } else {
@@ -339,9 +339,9 @@ class Currency
         $params = self::_checkParams($currency, $locale);
 
         // Get the symbol
-        $symbol = Data::getContent($params['locale'], 'currencysymbol', $params['currency']);
+        $symbol = Cldr::getContent($params['locale'], 'currencysymbol', $params['currency']);
         if (empty($symbol) === true) {
-            $symbol = Data::getContent($params['locale'], 'currencysymbol', $params['name']);
+            $symbol = Cldr::getContent($params['locale'], 'currencysymbol', $params['name']);
         }
 
         if (empty($symbol) === true) {
@@ -371,9 +371,9 @@ class Currency
             return $params['name'];
         }
 
-        $list = Data::getContent($params['locale'], 'currencytoname', $params['currency']);
+        $list = Cldr::getContent($params['locale'], 'currencytoname', $params['currency']);
         if (empty($list) === true) {
-            $list = Data::getContent($params['locale'], 'nametocurrency', $params['currency']);
+            $list = Cldr::getContent($params['locale'], 'nametocurrency', $params['currency']);
             if (empty($list) === false) {
                 $list = $params['currency'];
             }
@@ -402,9 +402,9 @@ class Currency
         $params = self::_checkParams($currency, $locale);
 
         // Get the name
-        $name = Data::getContent($params['locale'], 'nametocurrency', $params['currency']);
+        $name = Cldr::getContent($params['locale'], 'nametocurrency', $params['currency']);
         if (empty($name) === true) {
-            $name = Data::getContent($params['locale'], 'nametocurrency', $params['name']);
+            $name = Cldr::getContent($params['locale'], 'nametocurrency', $params['name']);
         }
 
         if (empty($name) === true) {
@@ -431,7 +431,7 @@ class Currency
             throw new Exception\InvalidArgumentException('No currency defined');
         }
 
-        $data = Data::getContent('', 'regiontocurrency', $currency);
+        $data = Cldr::getContent('', 'regiontocurrency', $currency);
 
         $result = explode(' ', $data);
         return $result;
@@ -453,7 +453,7 @@ class Currency
             }
         }
 
-        return Data::getList('', 'regiontocurrency', $region);
+        return Cldr::getList('', 'regiontocurrency', $region);
     }
 
     /**
@@ -483,7 +483,7 @@ class Currency
      */
     public static function getCache()
     {
-        return Data::getCache();
+        return Cldr::getCache();
     }
 
     /**
@@ -494,7 +494,7 @@ class Currency
      */
     public static function setCache(Frontend $cache)
     {
-        Data::setCache($cache);
+        Cldr::setCache($cache);
     }
 
     /**
@@ -504,7 +504,7 @@ class Currency
      */
     public static function hasCache()
     {
-        return Data::hasCache();
+        return Cldr::hasCache();
     }
 
     /**
@@ -514,7 +514,7 @@ class Currency
      */
     public static function removeCache()
     {
-        Data::removeCache();
+        Cldr::removeCache();
     }
 
     /**
@@ -524,7 +524,7 @@ class Currency
      */
     public static function clearCache()
     {
-        Data::clearCache();
+        Cldr::clearCache();
     }
 
     /**

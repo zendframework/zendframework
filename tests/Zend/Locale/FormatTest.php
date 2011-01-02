@@ -24,7 +24,7 @@ namespace ZendTest\Locale;
 use \Zend\Locale\Format,
     \Zend\Locale\Exception\InvalidArgumentException,
     \Zend\Locale\Locale,
-    \Zend\Locale\Data;
+    \Zend\Locale\Data\Cldr;
 
 /**
  * @category   Zend
@@ -767,7 +767,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         }
 
         $format = Format::setOptions(array('locale' => 'de', 'number_format' => Format::STANDARD));
-        $test   = Data::getContent('de', 'decimalnumber');
+        $test   = Cldr::getContent('de', 'decimalnumber');
         $this->assertEquals($test, $format['number_format']);
 
         try {

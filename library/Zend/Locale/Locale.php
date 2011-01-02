@@ -1204,32 +1204,4 @@ class Locale
         $locale = implode('_', $parts);
         return (string) $locale;
     }
-
-    /**
-     * Search the locale automatically and return all used locales
-     * ordered by quality
-     *
-     * Standard Searchorder is Browser, Environment, Fallback
-     *
-     * @param  string  $searchorder (Optional) Searchorder
-     * @return array Returns an array of all detected locales
-     */
-    public static function getOrder($order = null)
-    {
-        switch ($order) {
-            case self::ENVIRONMENT:
-                $languages         = self::getEnvironment() + self::getBrowser() + self::getFallback();
-                break;
-
-            case self::FALLBACK:
-                $languages         = self::getFallback() + self::getEnvironment() + self::getBrowser();
-                break;
-
-            default:
-                $languages         = self::getBrowser() + self::getEnvironment() + self::getFallback();
-                break;
-        }
-
-        return $languages;
-    }
 }

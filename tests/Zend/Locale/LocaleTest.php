@@ -125,27 +125,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test getOrder
-     * expected true
-     */
-    public function testgetOrder()
-    {
-        LocaleTestHelper::setFallback('de');
-        $value = new LocaleTestHelper();
-        $default = $value->getOrder();
-        $this->assertTrue(array_key_exists('de', $default));
-
-        $default = $value->getOrder(Locale::BROWSER);
-        $this->assertTrue(is_array($default));
-
-        $default = $value->getOrder(Locale::ENVIRONMENT);
-        $this->assertTrue(is_array($default));
-
-        $default = $value->getOrder(Locale::FALLBACK);
-        $this->assertTrue(is_array($default));
-    }
-
-    /**
      * test getEnvironment
      * expected true
      */

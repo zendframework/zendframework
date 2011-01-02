@@ -27,7 +27,7 @@ namespace Zend\Locale\Data;
 use Zend\Cache\Cache,
     Zend\Cache\Frontend as CacheFrontend,
     Zend\Locale\Locale,
-    Zend\Locale\Exception;
+    Zend\Locale\Exception\InvalidArgumentException;
 
 /**
  * Locale data reader, handles the CLDR
@@ -43,7 +43,12 @@ use Zend\Cache\Cache,
  */
 class Cldr extends AbstractLocale
 {
-    /**
+  /**
+   * Internal path to CLDR resources
+   */
+  protected static $_path = '../../../../resources/cldr/';
+
+  /**
      * Locale files
      *
      * @var ressource
@@ -58,22 +63,6 @@ class Cldr extends AbstractLocale
      * @access private
      */
     private static $_list = array();
-
-    /**
-     * Internal cache for ldml values
-     *
-     * @var \Zend\Cache\Core
-     * @access private
-     */
-    private static $_cache = null;
-
-    /**
-     * Internal option, cache disabled
-     *
-     * @var    boolean
-     * @access private
-     */
-    private static $_cacheDisabled = false;
 
     /**
      * Read the content from locale
@@ -151,10 +140,10 @@ class Cldr extends AbstractLocale
         // load locale file if not already in cache
         // needed for alias tag when referring to other locale
         if (empty(self::$_ldml[(string) $locale])) {
-            $filename = __DIR__ . '/../../../../resources/cldr/main/' . $locale . '.xml';
+            $filename = __DIR__ . '/' . self::$_path . $locale . '.xml';
             if (!file_exists($filename)) {
-                throw new Exception\InvalidArgumentException(
-                  "Missing locale file '$filename' for '$locale' locale."
+                throw new InvalidArgumentException(
+                  "Missing locale file '$filename'"
                 );
             }
 
@@ -239,12 +228,12 @@ class Cldr extends AbstractLocale
         // 2. -> zh_Hans
         // 3. -> zh
         // 4. -> root
-        if (($locale != 'root') && ($result)) {
+        if (($locale != 'main/root') && ($result)) {
             $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
             if (!empty($locale)) {
                 $temp = self::_getFile($locale, $path, $attribute, $value, $temp);
             } else {
-                $temp = self::_getFile('root', $path, $attribute, $value, $temp);
+                $temp = self::_getFile('main/root', $path, $attribute, $value, $temp);
             }
         }
         return $temp;
@@ -328,15 +317,15 @@ class Cldr extends AbstractLocale
         $temp = array();
         switch(strtolower($path)) {
             case 'language':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/languages/language', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/languages/language', 'type');
                 break;
 
             case 'script':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/scripts/script', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/scripts/script', 'type');
                 break;
 
             case 'territory':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/territories/territory', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/territories/territory', 'type');
                 if ($value === 1) {
                     foreach($temp as $key => $value) {
                         if ((is_numeric($key) === false) and ($key != 'QO') and ($key != 'QU')) {
@@ -353,173 +342,173 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'variant':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/variants/variant', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/variants/variant', 'type');
                 break;
 
             case 'key':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/keys/key', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/keys/key', 'type');
                 break;
 
             case 'type':
                 if (empty($type)) {
-                    $temp = self::_getFile($locale, '/ldml/localeDisplayNames/types/type', 'type');
+                    $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/types/type', 'type');
                 } else {
                     if (($value == 'calendar') or
                         ($value == 'collation') or
                         ($value == 'currency')) {
-                        $temp = self::_getFile($locale, '/ldml/localeDisplayNames/types/type[@key=\'' . $value . '\']', 'type');
+                        $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/types/type[@key=\'' . $value . '\']', 'type');
                     } else {
-                        $temp = self::_getFile($locale, '/ldml/localeDisplayNames/types/type[@type=\'' . $value . '\']', 'type');
+                        $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/types/type[@type=\'' . $value . '\']', 'type');
                     }
                 }
                 break;
 
             case 'layout':
-                $temp  = self::_getFile($locale, '/ldml/layout/orientation',                 'lines',      'lines');
-                $temp += self::_getFile($locale, '/ldml/layout/orientation',                 'characters', 'characters');
-                $temp += self::_getFile($locale, '/ldml/layout/inList',                      '',           'inList');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'currency\']',  '',           'currency');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'dayWidth\']',  '',           'dayWidth');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'fields\']',    '',           'fields');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'keys\']',      '',           'keys');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'languages\']', '',           'languages');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'long\']',      '',           'long');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'measurementSystemNames\']', '', 'measurementSystemNames');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'monthWidth\']',   '',        'monthWidth');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'quarterWidth\']', '',        'quarterWidth');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'scripts\']',   '',           'scripts');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'territories\']',  '',        'territories');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'types\']',     '',           'types');
-                $temp += self::_getFile($locale, '/ldml/layout/inText[@type=\'variants\']',  '',           'variants');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/layout/orientation',                 'lines',      'lines');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/orientation',                 'characters', 'characters');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inList',                      '',           'inList');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'currency\']',  '',           'currency');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'dayWidth\']',  '',           'dayWidth');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'fields\']',    '',           'fields');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'keys\']',      '',           'keys');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'languages\']', '',           'languages');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'long\']',      '',           'long');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'measurementSystemNames\']', '', 'measurementSystemNames');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'monthWidth\']',   '',        'monthWidth');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'quarterWidth\']', '',        'quarterWidth');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'scripts\']',   '',           'scripts');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'territories\']',  '',        'territories');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'types\']',     '',           'types');
+                $temp += self::_getFile('main/' . $locale, '/ldml/layout/inText[@type=\'variants\']',  '',           'variants');
                 break;
 
             case 'characters':
-                $temp  = self::_getFile($locale, '/ldml/characters/exemplarCharacters',                           '', 'characters');
-                $temp += self::_getFile($locale, '/ldml/characters/exemplarCharacters[@type=\'auxiliary\']',      '', 'auxiliary');
-                $temp += self::_getFile($locale, '/ldml/characters/exemplarCharacters[@type=\'currencySymbol\']', '', 'currencySymbol');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/characters/exemplarCharacters',                           '', 'characters');
+                $temp += self::_getFile('main/' . $locale, '/ldml/characters/exemplarCharacters[@type=\'auxiliary\']',      '', 'auxiliary');
+                $temp += self::_getFile('main/' . $locale, '/ldml/characters/exemplarCharacters[@type=\'currencySymbol\']', '', 'currencySymbol');
                 break;
 
             case 'delimiters':
-                $temp  = self::_getFile($locale, '/ldml/delimiters/quotationStart',          '', 'quoteStart');
-                $temp += self::_getFile($locale, '/ldml/delimiters/quotationEnd',            '', 'quoteEnd');
-                $temp += self::_getFile($locale, '/ldml/delimiters/alternateQuotationStart', '', 'quoteStartAlt');
-                $temp += self::_getFile($locale, '/ldml/delimiters/alternateQuotationEnd',   '', 'quoteEndAlt');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/delimiters/quotationStart',          '', 'quoteStart');
+                $temp += self::_getFile('main/' . $locale, '/ldml/delimiters/quotationEnd',            '', 'quoteEnd');
+                $temp += self::_getFile('main/' . $locale, '/ldml/delimiters/alternateQuotationStart', '', 'quoteStartAlt');
+                $temp += self::_getFile('main/' . $locale, '/ldml/delimiters/alternateQuotationEnd',   '', 'quoteEndAlt');
                 break;
 
             case 'measurement':
-                $temp  = self::_getFile('supplementalData', '/supplementalData/measurementData/measurementSystem[@type=\'metric\']', 'territories', 'metric');
-                $temp += self::_getFile('supplementalData', '/supplementalData/measurementData/measurementSystem[@type=\'US\']',     'territories', 'US');
-                $temp += self::_getFile('supplementalData', '/supplementalData/measurementData/paperSize[@type=\'A4\']',             'territories', 'A4');
-                $temp += self::_getFile('supplementalData', '/supplementalData/measurementData/paperSize[@type=\'US-Letter\']',      'territories', 'US-Letter');
+                $temp  = self::_getFile('supplemental/supplementalData', '/supplementalData/measurementData/measurementSystem[@type=\'metric\']', 'territories', 'metric');
+                $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/measurementData/measurementSystem[@type=\'US\']',     'territories', 'US');
+                $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/measurementData/paperSize[@type=\'A4\']',             'territories', 'A4');
+                $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/measurementData/paperSize[@type=\'US-Letter\']',      'territories', 'US-Letter');
                 break;
 
             case 'months':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/default', 'choice', 'context');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/default', 'choice', 'default');
-                $temp['format']['abbreviated'] = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/monthWidth[@type=\'abbreviated\']/month', 'type');
-                $temp['format']['narrow']      = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/monthWidth[@type=\'narrow\']/month', 'type');
-                $temp['format']['wide']        = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/monthWidth[@type=\'wide\']/month', 'type');
-                $temp['stand-alone']['abbreviated']  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'stand-alone\']/monthWidth[@type=\'abbreviated\']/month', 'type');
-                $temp['stand-alone']['narrow']       = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'stand-alone\']/monthWidth[@type=\'narrow\']/month', 'type');
-                $temp['stand-alone']['wide']         = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'stand-alone\']/monthWidth[@type=\'wide\']/month', 'type');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/default', 'choice', 'context');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/default', 'choice', 'default');
+                $temp['format']['abbreviated'] = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/monthWidth[@type=\'abbreviated\']/month', 'type');
+                $temp['format']['narrow']      = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/monthWidth[@type=\'narrow\']/month', 'type');
+                $temp['format']['wide']        = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/monthWidth[@type=\'wide\']/month', 'type');
+                $temp['stand-alone']['abbreviated']  = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'stand-alone\']/monthWidth[@type=\'abbreviated\']/month', 'type');
+                $temp['stand-alone']['narrow']       = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'stand-alone\']/monthWidth[@type=\'narrow\']/month', 'type');
+                $temp['stand-alone']['wide']         = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'stand-alone\']/monthWidth[@type=\'wide\']/month', 'type');
                 break;
 
             case 'month':
                 if (empty($value)) {
                     $value = array("gregorian", "format", "wide");
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/months/monthContext[@type=\'' . $value[1] . '\']/monthWidth[@type=\'' . $value[2] . '\']/month', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/months/monthContext[@type=\'' . $value[1] . '\']/monthWidth[@type=\'' . $value[2] . '\']/month', 'type');
                 break;
 
             case 'days':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/default', 'choice', 'context');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/default', 'choice', 'default');
-                $temp['format']['abbreviated'] = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/dayWidth[@type=\'abbreviated\']/day', 'type');
-                $temp['format']['narrow']      = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/dayWidth[@type=\'narrow\']/day', 'type');
-                $temp['format']['wide']        = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/dayWidth[@type=\'wide\']/day', 'type');
-                $temp['stand-alone']['abbreviated']  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'stand-alone\']/dayWidth[@type=\'abbreviated\']/day', 'type');
-                $temp['stand-alone']['narrow']       = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'stand-alone\']/dayWidth[@type=\'narrow\']/day', 'type');
-                $temp['stand-alone']['wide']         = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'stand-alone\']/dayWidth[@type=\'wide\']/day', 'type');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/default', 'choice', 'context');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/default', 'choice', 'default');
+                $temp['format']['abbreviated'] = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/dayWidth[@type=\'abbreviated\']/day', 'type');
+                $temp['format']['narrow']      = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/dayWidth[@type=\'narrow\']/day', 'type');
+                $temp['format']['wide']        = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/dayWidth[@type=\'wide\']/day', 'type');
+                $temp['stand-alone']['abbreviated']  = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'stand-alone\']/dayWidth[@type=\'abbreviated\']/day', 'type');
+                $temp['stand-alone']['narrow']       = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'stand-alone\']/dayWidth[@type=\'narrow\']/day', 'type');
+                $temp['stand-alone']['wide']         = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'stand-alone\']/dayWidth[@type=\'wide\']/day', 'type');
                 break;
 
             case 'day':
                 if (empty($value)) {
                     $value = array("gregorian", "format", "wide");
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/days/dayContext[@type=\'' . $value[1] . '\']/dayWidth[@type=\'' . $value[2] . '\']/day', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/days/dayContext[@type=\'' . $value[1] . '\']/dayWidth[@type=\'' . $value[2] . '\']/day', 'type');
                 break;
 
             case 'week':
-                $minDays   = self::_calendarDetail($locale, self::_getFile('supplementalData', '/supplementalData/weekData/minDays', 'territories'));
-                $firstDay  = self::_calendarDetail($locale, self::_getFile('supplementalData', '/supplementalData/weekData/firstDay', 'territories'));
-                $weekStart = self::_calendarDetail($locale, self::_getFile('supplementalData', '/supplementalData/weekData/weekendStart', 'territories'));
-                $weekEnd   = self::_calendarDetail($locale, self::_getFile('supplementalData', '/supplementalData/weekData/weekendEnd', 'territories'));
+                $minDays   = self::_calendarDetail('main/' . $locale, self::_getFile('supplemental/supplementalData', '/supplementalData/weekData/minDays', 'territories'));
+                $firstDay  = self::_calendarDetail('main/' . $locale, self::_getFile('supplemental/supplementalData', '/supplementalData/weekData/firstDay', 'territories'));
+                $weekStart = self::_calendarDetail('main/' . $locale, self::_getFile('supplemental/supplementalData', '/supplementalData/weekData/weekendStart', 'territories'));
+                $weekEnd   = self::_calendarDetail('main/' . $locale, self::_getFile('supplemental/supplementalData', '/supplementalData/weekData/weekendEnd', 'territories'));
 
-                $temp  = self::_getFile('supplementalData', "/supplementalData/weekData/minDays[@territories='" . $minDays . "']", 'count', 'minDays');
-                $temp += self::_getFile('supplementalData', "/supplementalData/weekData/firstDay[@territories='" . $firstDay . "']", 'day', 'firstDay');
-                $temp += self::_getFile('supplementalData', "/supplementalData/weekData/weekendStart[@territories='" . $weekStart . "']", 'day', 'weekendStart');
-                $temp += self::_getFile('supplementalData', "/supplementalData/weekData/weekendEnd[@territories='" . $weekEnd . "']", 'day', 'weekendEnd');
+                $temp  = self::_getFile('supplemental/supplementalData', "/supplementalData/weekData/minDays[@territories='" . $minDays . "']", 'count', 'minDays');
+                $temp += self::_getFile('supplemental/supplementalData', "/supplementalData/weekData/firstDay[@territories='" . $firstDay . "']", 'day', 'firstDay');
+                $temp += self::_getFile('supplemental/supplementalData', "/supplementalData/weekData/weekendStart[@territories='" . $weekStart . "']", 'day', 'weekendStart');
+                $temp += self::_getFile('supplemental/supplementalData', "/supplementalData/weekData/weekendEnd[@territories='" . $weekEnd . "']", 'day', 'weekendEnd');
                 break;
 
             case 'quarters':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp['format']['abbreviated'] = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'format\']/quarterWidth[@type=\'abbreviated\']/quarter', 'type');
-                $temp['format']['narrow']      = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'format\']/quarterWidth[@type=\'narrow\']/quarter', 'type');
-                $temp['format']['wide']        = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'format\']/quarterWidth[@type=\'wide\']/quarter', 'type');
-                $temp['stand-alone']['abbreviated']  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'stand-alone\']/quarterWidth[@type=\'abbreviated\']/quarter', 'type');
-                $temp['stand-alone']['narrow']       = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'stand-alone\']/quarterWidth[@type=\'narrow\']/quarter', 'type');
-                $temp['stand-alone']['wide']         = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'stand-alone\']/quarterWidth[@type=\'wide\']/quarter', 'type');
+                $temp['format']['abbreviated'] = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'format\']/quarterWidth[@type=\'abbreviated\']/quarter', 'type');
+                $temp['format']['narrow']      = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'format\']/quarterWidth[@type=\'narrow\']/quarter', 'type');
+                $temp['format']['wide']        = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'format\']/quarterWidth[@type=\'wide\']/quarter', 'type');
+                $temp['stand-alone']['abbreviated']  = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'stand-alone\']/quarterWidth[@type=\'abbreviated\']/quarter', 'type');
+                $temp['stand-alone']['narrow']       = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'stand-alone\']/quarterWidth[@type=\'narrow\']/quarter', 'type');
+                $temp['stand-alone']['wide']         = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/quarters/quarterContext[@type=\'stand-alone\']/quarterWidth[@type=\'wide\']/quarter', 'type');
                 break;
 
             case 'quarter':
                 if (empty($value)) {
                     $value = array("gregorian", "format", "wide");
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/quarters/quarterContext[@type=\'' . $value[1] . '\']/quarterWidth[@type=\'' . $value[2] . '\']/quarter', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/quarters/quarterContext[@type=\'' . $value[1] . '\']/quarterWidth[@type=\'' . $value[2] . '\']/quarter', 'type');
                 break;
 
             case 'eras':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp['names']       = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/eras/eraNames/era', 'type');
-                $temp['abbreviated'] = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/eras/eraAbbr/era', 'type');
-                $temp['narrow']      = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/eras/eraNarrow/era', 'type');
+                $temp['names']       = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/eras/eraNames/era', 'type');
+                $temp['abbreviated'] = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/eras/eraAbbr/era', 'type');
+                $temp['narrow']      = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/eras/eraNarrow/era', 'type');
                 break;
 
             case 'era':
                 if (empty($value)) {
                     $value = array("gregorian", "Abbr");
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/eras/era' . $value[1] . '/era', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/eras/era' . $value[1] . '/era', 'type');
                 break;
 
             case 'date':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'full\']/dateFormat/pattern', '', 'full');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'long\']/dateFormat/pattern', '', 'long');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'medium\']/dateFormat/pattern', '', 'medium');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'short\']/dateFormat/pattern', '', 'short');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'full\']/dateFormat/pattern', '', 'full');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'long\']/dateFormat/pattern', '', 'long');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'medium\']/dateFormat/pattern', '', 'medium');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'short\']/dateFormat/pattern', '', 'short');
                 break;
 
             case 'time':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp  = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'full\']/timeFormat/pattern', '', 'full');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'long\']/timeFormat/pattern', '', 'long');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'medium\']/timeFormat/pattern', '', 'medium');
-                $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'short\']/timeFormat/pattern', '', 'short');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'full\']/timeFormat/pattern', '', 'full');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'long\']/timeFormat/pattern', '', 'long');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'medium\']/timeFormat/pattern', '', 'medium');
+                $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'short\']/timeFormat/pattern', '', 'short');
                 break;
 
             case 'datetime':
@@ -527,20 +516,20 @@ class Cldr extends AbstractLocale
                     $value = "gregorian";
                 }
 
-                $timefull = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'full\']/timeFormat/pattern', '', 'full');
-                $timelong = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'long\']/timeFormat/pattern', '', 'long');
-                $timemedi = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'medium\']/timeFormat/pattern', '', 'medi');
-                $timeshor = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'short\']/timeFormat/pattern', '', 'shor');
+                $timefull = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'full\']/timeFormat/pattern', '', 'full');
+                $timelong = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'long\']/timeFormat/pattern', '', 'long');
+                $timemedi = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'medium\']/timeFormat/pattern', '', 'medi');
+                $timeshor = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/timeFormatLength[@type=\'short\']/timeFormat/pattern', '', 'shor');
 
-                $datefull = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'full\']/dateFormat/pattern', '', 'full');
-                $datelong = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'long\']/dateFormat/pattern', '', 'long');
-                $datemedi = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'medium\']/dateFormat/pattern', '', 'medi');
-                $dateshor = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'short\']/dateFormat/pattern', '', 'shor');
+                $datefull = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'full\']/dateFormat/pattern', '', 'full');
+                $datelong = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'long\']/dateFormat/pattern', '', 'long');
+                $datemedi = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'medium\']/dateFormat/pattern', '', 'medi');
+                $dateshor = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/dateFormatLength[@type=\'short\']/dateFormat/pattern', '', 'shor');
 
-                $full = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'full\']/dateTimeFormat/pattern', '', 'full');
-                $long = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'long\']/dateTimeFormat/pattern', '', 'long');
-                $medi = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'medium\']/dateTimeFormat/pattern', '', 'medi');
-                $shor = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'short\']/dateTimeFormat/pattern', '', 'shor');
+                $full = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'full\']/dateTimeFormat/pattern', '', 'full');
+                $long = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'long\']/dateTimeFormat/pattern', '', 'long');
+                $medi = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'medium\']/dateTimeFormat/pattern', '', 'medi');
+                $shor = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'short\']/dateTimeFormat/pattern', '', 'shor');
 
                 $temp['full']   = str_replace(array('{0}', '{1}'), array($timefull['full'], $datefull['full']), $full['full']);
                 $temp['long']   = str_replace(array('{0}', '{1}'), array($timelong['long'], $datelong['long']), $long['long']);
@@ -552,9 +541,9 @@ class Cldr extends AbstractLocale
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $_temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/availableFormats/dateFormatItem', 'id');
+                $_temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/availableFormats/dateFormatItem', 'id');
                 foreach($_temp as $key => $found) {
-                    $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/availableFormats/dateFormatItem[@id=\'' . $key . '\']', '', $key);
+                    $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/availableFormats/dateFormatItem[@id=\'' . $key . '\']', '', $key);
                 }
                 break;
 
@@ -562,9 +551,9 @@ class Cldr extends AbstractLocale
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $_temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/intervalFormats/intervalFormatItem', 'id');
+                $_temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/intervalFormats/intervalFormatItem', 'id');
                 foreach($_temp as $key => $found) {
-                    $temp[$key] = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/intervalFormats/intervalFormatItem[@id=\'' . $key . '\']/greatestDifference', 'id');
+                    $temp[$key] = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateTimeFormats/intervalFormats/intervalFormatItem[@id=\'' . $key . '\']/greatestDifference', 'id');
                 }
                 break;
 
@@ -572,9 +561,9 @@ class Cldr extends AbstractLocale
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp2 = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/fields/field', 'type');
+                $temp2 = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/fields/field', 'type');
                 foreach ($temp2 as $key => $keyvalue) {
-                    $temp += self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/fields/field[@type=\'' . $key . '\']/displayName', '', $key);
+                    $temp += self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/fields/field[@type=\'' . $key . '\']/displayName', '', $key);
                 }
                 break;
 
@@ -582,35 +571,35 @@ class Cldr extends AbstractLocale
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/fields/field/relative', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/fields/field/relative', 'type');
                 break;
 
             case 'symbols':
-                $temp  = self::_getFile($locale, '/ldml/numbers/symbols/decimal',         '', 'decimal');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/group',           '', 'group');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/list',            '', 'list');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/percentSign',     '', 'percent');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/nativeZeroDigit', '', 'zero');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/patternDigit',    '', 'pattern');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/plusSign',        '', 'plus');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/minusSign',       '', 'minus');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/exponential',     '', 'exponent');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/perMille',        '', 'mille');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/infinity',        '', 'infinity');
-                $temp += self::_getFile($locale, '/ldml/numbers/symbols/nan',             '', 'nan');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/numbers/symbols/decimal',         '', 'decimal');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/group',           '', 'group');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/list',            '', 'list');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/percentSign',     '', 'percent');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/nativeZeroDigit', '', 'zero');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/patternDigit',    '', 'pattern');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/plusSign',        '', 'plus');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/minusSign',       '', 'minus');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/exponential',     '', 'exponent');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/perMille',        '', 'mille');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/infinity',        '', 'infinity');
+                $temp += self::_getFile('main/' . $locale, '/ldml/numbers/symbols/nan',             '', 'nan');
                 break;
 
             case 'nametocurrency':
-                $_temp = self::_getFile($locale, '/ldml/numbers/currencies/currency', 'type');
+                $_temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency', 'type');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile($locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/displayName', '', $key);
+                    $temp += self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/displayName', '', $key);
                 }
                 break;
 
             case 'currencytoname':
-                $_temp = self::_getFile($locale, '/ldml/numbers/currencies/currency', 'type');
+                $_temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency', 'type');
                 foreach ($_temp as $key => $keyvalue) {
-                    $val = self::_getFile($locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/displayName', '', $key);
+                    $val = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/displayName', '', $key);
                     if (!isset($val[$key])) {
                         continue;
                     }
@@ -623,42 +612,42 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'currencysymbol':
-                $_temp = self::_getFile($locale, '/ldml/numbers/currencies/currency', 'type');
+                $_temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency', 'type');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile($locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/symbol', '', $key);
+                    $temp += self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/symbol', '', $key);
                 }
                 break;
 
             case 'question':
-                $temp  = self::_getFile($locale, '/ldml/posix/messages/yesstr',  '', 'yes');
-                $temp += self::_getFile($locale, '/ldml/posix/messages/nostr',   '', 'no');
+                $temp  = self::_getFile('main/' . $locale, '/ldml/posix/messages/yesstr',  '', 'yes');
+                $temp += self::_getFile('main/' . $locale, '/ldml/posix/messages/nostr',   '', 'no');
                 break;
 
             case 'currencyfraction':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/currencyData/fractions/info', 'iso4217');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/fractions/info', 'iso4217');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $key . '\']', 'digits', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $key . '\']', 'digits', $key);
                 }
                 break;
 
             case 'currencyrounding':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/currencyData/fractions/info', 'iso4217');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/fractions/info', 'iso4217');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $key . '\']', 'rounding', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $key . '\']', 'rounding', $key);
                 }
                 break;
 
             case 'currencytoregion':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/currencyData/region', 'iso3166');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/region', 'iso3166');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $key . '\']/currency', 'iso4217', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $key . '\']/currency', 'iso4217', $key);
                 }
                 break;
 
             case 'regiontocurrency':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/currencyData/region', 'iso3166');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/region', 'iso3166');
                 foreach ($_temp as $key => $keyvalue) {
-                    $val = self::_getFile('supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $key . '\']/currency', 'iso4217', $key);
+                    $val = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $key . '\']/currency', 'iso4217', $key);
                     if (!isset($val[$key])) {
                         continue;
                     }
@@ -671,17 +660,17 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'regiontoterritory':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/territoryContainment/group', 'type');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/territoryContainment/group', 'type');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $key . '\']', 'contains', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $key . '\']', 'contains', $key);
                 }
                 break;
 
             case 'territorytoregion':
-                $_temp2 = self::_getFile('supplementalData', '/supplementalData/territoryContainment/group', 'type');
+                $_temp2 = self::_getFile('supplemental/supplementalData', '/supplementalData/territoryContainment/group', 'type');
                 $_temp = array();
                 foreach ($_temp2 as $key => $found) {
-                    $_temp += self::_getFile('supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $key . '\']', 'contains', $key);
+                    $_temp += self::_getFile('supplemental/supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $key . '\']', 'contains', $key);
                 }
                 foreach($_temp as $key => $found) {
                     $_temp3 = explode(" ", $found);
@@ -696,9 +685,9 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'scripttolanguage':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/languageData/language', 'type');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language', 'type');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'scripts', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'scripts', $key);
                     if (empty($temp[$key])) {
                         unset($temp[$key]);
                     }
@@ -706,10 +695,10 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'languagetoscript':
-                $_temp2 = self::_getFile('supplementalData', '/supplementalData/languageData/language', 'type');
+                $_temp2 = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language', 'type');
                 $_temp = array();
                 foreach ($_temp2 as $key => $found) {
-                    $_temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'scripts', $key);
+                    $_temp += self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'scripts', $key);
                 }
                 foreach($_temp as $key => $found) {
                     $_temp3 = explode(" ", $found);
@@ -727,9 +716,9 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'territorytolanguage':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/languageData/language', 'type');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language', 'type');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'territories', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'territories', $key);
                     if (empty($temp[$key])) {
                         unset($temp[$key]);
                     }
@@ -737,10 +726,10 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'languagetoterritory':
-                $_temp2 = self::_getFile('supplementalData', '/supplementalData/languageData/language', 'type');
+                $_temp2 = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language', 'type');
                 $_temp = array();
                 foreach ($_temp2 as $key => $found) {
-                    $_temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'territories', $key);
+                    $_temp += self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'territories', $key);
                 }
                 foreach($_temp as $key => $found) {
                     $_temp3 = explode(" ", $found);
@@ -758,45 +747,45 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'timezonetowindows':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/mapTimezones[@type=\'windows\']/mapZone', 'other');
+                $_temp = self::_getFile('supplemental/windowsZones', '/supplementalData/windowsZones/mapTimezones/mapZone', 'other');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/timezoneData/mapTimezones[@type=\'windows\']/mapZone[@other=\'' . $key . '\']', 'type', $key);
+                    $temp += self::_getFile('supplemental/windowsZones', '/supplementalData/windowsZones/mapTimezones/mapZone[@other=\'' . $key . '\']', 'type', $key);
                 }
                 break;
 
             case 'windowstotimezone':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/mapTimezones[@type=\'windows\']/mapZone', 'type');
+                $_temp = self::_getFile('supplemental/windowsZones', '/supplementalData/windowsZones/mapTimezones/mapZone', 'type');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/timezoneData/mapTimezones[@type=\'windows\']/mapZone[@type=\'' .$key . '\']', 'other', $key);
+                    $temp += self::_getFile('supplemental/windowsZones', '/supplementalData/windowsZones/mapTimezones/mapZone[@type=\'' .$key . '\']', 'other', $key);
                 }
                 break;
 
             case 'territorytotimezone':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem', 'type');
+                $_temp = self::_getFile('supplemental/metaZones', '/supplementalData/metaZones/mapTimezones/mapZone', 'type');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem[@type=\'' . $key . '\']', 'territory', $key);
+                    $temp += self::_getFile('supplemental/metaZones', '/supplementalData/metaZones/mapTimezones/mapZone[@type=\'' . $key . '\']', 'territory', $key);
                 }
                 break;
 
             case 'timezonetoterritory':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem', 'territory');
+                $_temp = self::_getFile('supplemental/metaZones', '/supplementalData/metaZones/mapTimezones/mapZone', 'territory');
                 foreach ($_temp as $key => $found) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem[@territory=\'' . $key . '\']', 'type', $key);
+                    $temp += self::_getFile('supplemental/metaZones', '/supplementalData/metaZones/mapTimezones/mapZone[@territory=\'' . $key . '\']', 'type', $key);
                 }
                 break;
 
             case 'citytotimezone':
-                $_temp = self::_getFile($locale, '/ldml/dates/timeZoneNames/zone', 'type');
+                $_temp = self::_getFile('main/' . $locale, '/ldml/dates/timeZoneNames/zone', 'type');
                 foreach($_temp as $key => $found) {
-                    $temp += self::_getFile($locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $key . '\']/exemplarCity', '', $key);
+                    $temp += self::_getFile('main/' . $locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $key . '\']/exemplarCity', '', $key);
                 }
                 break;
 
             case 'timezonetocity':
-                $_temp  = self::_getFile($locale, '/ldml/dates/timeZoneNames/zone', 'type');
+                $_temp  = self::_getFile('main/' . $locale, '/ldml/dates/timeZoneNames/zone', 'type');
                 $temp = array();
                 foreach($_temp as $key => $found) {
-                    $temp += self::_getFile($locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $key . '\']/exemplarCity', '', $key);
+                    $temp += self::_getFile('main/' . $locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $key . '\']/exemplarCity', '', $key);
                     if (!empty($temp[$key])) {
                         $temp[$temp[$key]] = $key;
                     }
@@ -805,16 +794,16 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'phonetoterritory':
-                $_temp = self::_getFile('telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory', 'territory');
+                $_temp = self::_getFile('supplemental/telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory', 'territory');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $key . '\']/telephoneCountryCode', 'code', $key);
+                    $temp += self::_getFile('supplemental/telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $key . '\']/telephoneCountryCode', 'code', $key);
                 }
                 break;
 
             case 'territorytophone':
-                $_temp = self::_getFile('telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory', 'territory');
+                $_temp = self::_getFile('supplemental/telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory', 'territory');
                 foreach ($_temp as $key => $keyvalue) {
-                    $val = self::_getFile('telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $key . '\']/telephoneCountryCode', 'code', $key);
+                    $val = self::_getFile('supplemental/telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $key . '\']/telephoneCountryCode', 'code', $key);
                     if (!isset($val[$key])) {
                         continue;
                     }
@@ -827,44 +816,44 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'numerictoterritory':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes', 'type');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes', 'type');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\'' . $key . '\']', 'numeric', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\'' . $key . '\']', 'numeric', $key);
                 }
                 break;
 
             case 'territorytonumeric':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes', 'numeric');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes', 'numeric');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@numeric=\'' . $key . '\']', 'type', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@numeric=\'' . $key . '\']', 'type', $key);
                 }
                 break;
 
             case 'alpha3toterritory':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes', 'type');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes', 'type');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\'' . $key . '\']', 'alpha3', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\'' . $key . '\']', 'alpha3', $key);
                 }
                 break;
 
             case 'territorytoalpha3':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes', 'alpha3');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes', 'alpha3');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@alpha3=\'' . $key . '\']', 'type', $key);
+                    $temp += self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@alpha3=\'' . $key . '\']', 'type', $key);
                 }
                 break;
 
             case 'postaltoterritory':
-                $_temp = self::_getFile('postalCodeData', '/supplementalData/postalCodeData/postCodeRegex', 'territoryId');
+                $_temp = self::_getFile('supplemental/postalCodeData', '/supplementalData/postalCodeData/postCodeRegex', 'territoryId');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('postalCodeData', '/supplementalData/postalCodeData/postCodeRegex[@territoryId=\'' . $key . '\']', 'territoryId');
+                    $temp += self::_getFile('supplemental/postalCodeData', '/supplementalData/postalCodeData/postCodeRegex[@territoryId=\'' . $key . '\']', 'territoryId');
                 }
                 break;
 
             case 'numberingsystem':
-                $_temp = self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem', 'id');
+                $_temp = self::_getFile('supplemental/numberingSystems', '/supplementalData/numberingSystems/numberingSystem', 'id');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . $key . '\']', 'digits', $key);
+                    $temp += self::_getFile('supplemental/numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . $key . '\']', 'digits', $key);
                     if (empty($temp[$key])) {
                         unset($temp[$key]);
                     }
@@ -872,37 +861,37 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'chartofallback':
-                $_temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character', 'value');
+                $_temp = self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character', 'value');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp2 = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
+                    $temp2 = self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
                     $temp[current($temp2)] = $key;
                 }
                 break;
 
             case 'fallbacktochar':
-                $_temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character', 'value');
+                $_temp = self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character', 'value');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
+                    $temp += self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
                 }
                 break;
 
             case 'localeupgrade':
-                $_temp = self::_getFile('likelySubtags', '/supplementalData/likelySubtags/likelySubtag', 'from');
+                $_temp = self::_getFile('supplemental/likelySubtags', '/supplementalData/likelySubtags/likelySubtag', 'from');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp += self::_getFile('likelySubtags', '/supplementalData/likelySubtags/likelySubtag[@from=\'' . $key . '\']', 'to', $key);
+                    $temp += self::_getFile('supplemental/likelySubtags', '/supplementalData/likelySubtags/likelySubtag[@from=\'' . $key . '\']', 'to', $key);
                 }
                 break;
 
             case 'unit':
-                $_temp = self::_getFile($locale, '/ldml/units/unit', 'type');
+                $_temp = self::_getFile('main/' . $locale, '/ldml/units/unit', 'type');
                 foreach($_temp as $key => $keyvalue) {
-                    $_temp2 = self::_getFile($locale, '/ldml/units/unit[@type=\'' . $key . '\']/unitPattern', 'count');
+                    $_temp2 = self::_getFile('main/' . $locale, '/ldml/units/unit[@type=\'' . $key . '\']/unitPattern', 'count');
                     $temp[$key] = $_temp2;
                 }
                 break;
 
             default :
-                throw new Exception\InvalidArgumentException(
+                throw new InvalidArgumentException(
                   "Unknown list ($path) for parsing locale data."
                 );
                 break;
@@ -948,42 +937,42 @@ class Cldr extends AbstractLocale
 
         switch(strtolower($path)) {
             case 'language':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/languages/language[@type=\'' . $value . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/languages/language[@type=\'' . $value . '\']', 'type');
                 break;
 
             case 'script':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/scripts/script[@type=\'' . $value . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/scripts/script[@type=\'' . $value . '\']', 'type');
                 break;
 
             case 'country':
             case 'territory':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/territories/territory[@type=\'' . $value . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/territories/territory[@type=\'' . $value . '\']', 'type');
                 break;
 
             case 'variant':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/variants/variant[@type=\'' . $value . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/variants/variant[@type=\'' . $value . '\']', 'type');
                 break;
 
             case 'key':
-                $temp = self::_getFile($locale, '/ldml/localeDisplayNames/keys/key[@type=\'' . $value . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/keys/key[@type=\'' . $value . '\']', 'type');
                 break;
 
             case 'defaultcalendar':
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/default', 'choice', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/default', 'choice', 'default');
                 break;
 
             case 'monthcontext':
                 if (empty ($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/default', 'choice', 'context');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/default', 'choice', 'context');
                 break;
 
             case 'defaultmonth':
                 if (empty ($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/default', 'choice', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/months/monthContext[@type=\'format\']/default', 'choice', 'default');
                 break;
 
             case 'month':
@@ -991,21 +980,21 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", "format", "wide", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/months/monthContext[@type=\'' . $value[1] . '\']/monthWidth[@type=\'' . $value[2] . '\']/month[@type=\'' . $value[3] . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/months/monthContext[@type=\'' . $value[1] . '\']/monthWidth[@type=\'' . $value[2] . '\']/month[@type=\'' . $value[3] . '\']', 'type');
                 break;
 
             case 'daycontext':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/default', 'choice', 'context');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/default', 'choice', 'context');
                 break;
 
             case 'defaultday':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/default', 'choice', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/days/dayContext[@type=\'format\']/default', 'choice', 'default');
                 break;
 
             case 'day':
@@ -1013,7 +1002,7 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", "format", "wide", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/days/dayContext[@type=\'' . $value[1] . '\']/dayWidth[@type=\'' . $value[2] . '\']/day[@type=\'' . $value[3] . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/days/dayContext[@type=\'' . $value[1] . '\']/dayWidth[@type=\'' . $value[2] . '\']/day[@type=\'' . $value[3] . '\']', 'type');
                 break;
 
             case 'quarter':
@@ -1021,21 +1010,21 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", "format", "wide", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/quarters/quarterContext[@type=\'' . $value[1] . '\']/quarterWidth[@type=\'' . $value[2] . '\']/quarter[@type=\'' . $value[3] . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/quarters/quarterContext[@type=\'' . $value[1] . '\']/quarterWidth[@type=\'' . $value[2] . '\']/quarter[@type=\'' . $value[3] . '\']', 'type');
                 break;
 
             case 'am':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/am', '', 'am');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/am', '', 'am');
                 break;
 
             case 'pm':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/pm', '', 'pm');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/pm', '', 'pm');
                 break;
 
             case 'era':
@@ -1043,14 +1032,14 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", "Abbr", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/eras/era' . $value[1] . '/era[@type=\'' . $value[2] . '\']', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/eras/era' . $value[1] . '/era[@type=\'' . $value[2] . '\']', 'type');
                 break;
 
             case 'defaultdate':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/default', 'choice', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/dateFormats/default', 'choice', 'default');
                 break;
 
             case 'date':
@@ -1061,14 +1050,14 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateFormats/dateFormatLength[@type=\'' . $value[1] . '\']/dateFormat/pattern', '', 'pattern');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateFormats/dateFormatLength[@type=\'' . $value[1] . '\']/dateFormat/pattern', '', 'pattern');
                 break;
 
             case 'defaulttime':
                 if (empty($value)) {
                     $value = "gregorian";
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/default', 'choice', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value . '\']/timeFormats/default', 'choice', 'default');
                 break;
 
             case 'time':
@@ -1079,7 +1068,7 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/timeFormats/timeFormatLength[@type=\'' . $value[1] . '\']/timeFormat/pattern', '', 'pattern');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/timeFormats/timeFormatLength[@type=\'' . $value[1] . '\']/timeFormat/pattern', '', 'pattern');
                 break;
 
             case 'datetime':
@@ -1091,9 +1080,9 @@ class Cldr extends AbstractLocale
                     $value = array("gregorian", $temp);
                 }
 
-                $date     = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateFormats/dateFormatLength[@type=\'' . $value[1] . '\']/dateFormat/pattern', '', 'pattern');
-                $time     = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/timeFormats/timeFormatLength[@type=\'' . $value[1] . '\']/timeFormat/pattern', '', 'pattern');
-                $datetime = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'' . $value[1] . '\']/dateTimeFormat/pattern', '', 'pattern');
+                $date     = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateFormats/dateFormatLength[@type=\'' . $value[1] . '\']/dateFormat/pattern', '', 'pattern');
+                $time     = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/timeFormats/timeFormatLength[@type=\'' . $value[1] . '\']/timeFormat/pattern', '', 'pattern');
+                $datetime = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/dateTimeFormatLength[@type=\'' . $value[1] . '\']/dateTimeFormat/pattern', '', 'pattern');
                 $temp = str_replace(array('{0}', '{1}'), array(current($time), current($date)), current($datetime));
                 break;
 
@@ -1105,7 +1094,7 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/availableFormats/dateFormatItem[@id=\'' . $value[1] . '\']', '');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/availableFormats/dateFormatItem[@id=\'' . $value[1] . '\']', '');
                 break;
 
             case 'dateinterval':
@@ -1116,7 +1105,7 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", $temp, $temp[0]);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/intervalFormats/intervalFormatItem[@id=\'' . $value[1] . '\']/greatestDifference[@id=\'' . $value[2] . '\']', '');
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/dateTimeFormats/intervalFormats/intervalFormatItem[@id=\'' . $value[1] . '\']/greatestDifference[@id=\'' . $value[2] . '\']', '');
                 break;
 
             case 'field':
@@ -1124,7 +1113,7 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/fields/field[@type=\'' . $value[1] . '\']/displayName', '', $value[1]);
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/fields/field[@type=\'' . $value[1] . '\']/displayName', '', $value[1]);
                 break;
 
             case 'relative':
@@ -1132,35 +1121,35 @@ class Cldr extends AbstractLocale
                     $temp = $value;
                     $value = array("gregorian", $temp);
                 }
-                $temp = self::_getFile($locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/fields/field/relative[@type=\'' . $value[1] . '\']', '', $value[1]);
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/calendars/calendar[@type=\'' . $value[0] . '\']/fields/field/relative[@type=\'' . $value[1] . '\']', '', $value[1]);
                 break;
 
             case 'decimalnumber':
-                $temp = self::_getFile($locale, '/ldml/numbers/decimalFormats/decimalFormatLength/decimalFormat/pattern', '', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/numbers/decimalFormats/decimalFormatLength/decimalFormat/pattern', '', 'default');
                 break;
 
             case 'scientificnumber':
-                $temp = self::_getFile($locale, '/ldml/numbers/scientificFormats/scientificFormatLength/scientificFormat/pattern', '', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/numbers/scientificFormats/scientificFormatLength/scientificFormat/pattern', '', 'default');
                 break;
 
             case 'percentnumber':
-                $temp = self::_getFile($locale, '/ldml/numbers/percentFormats/percentFormatLength/percentFormat/pattern', '', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/numbers/percentFormats/percentFormatLength/percentFormat/pattern', '', 'default');
                 break;
 
             case 'currencynumber':
-                $temp = self::_getFile($locale, '/ldml/numbers/currencyFormats/currencyFormatLength/currencyFormat/pattern', '', 'default');
+                $temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencyFormats/currencyFormatLength/currencyFormat/pattern', '', 'default');
                 break;
 
             case 'nametocurrency':
-                $temp = self::_getFile($locale, '/ldml/numbers/currencies/currency[@type=\'' . $value . '\']/displayName', '', $value);
+                $temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency[@type=\'' . $value . '\']/displayName', '', $value);
                 break;
 
             case 'currencytoname':
-                $temp = self::_getFile($locale, '/ldml/numbers/currencies/currency[@type=\'' . $value . '\']/displayName', '', $value);
-                $_temp = self::_getFile($locale, '/ldml/numbers/currencies/currency', 'type');
+                $temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency[@type=\'' . $value . '\']/displayName', '', $value);
+                $_temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency', 'type');
                 $temp = array();
                 foreach ($_temp as $key => $keyvalue) {
-                    $val = self::_getFile($locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/displayName', '', $key);
+                    $val = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency[@type=\'' . $key . '\']/displayName', '', $key);
                     if (!isset($val[$key]) or ($val[$key] != $value)) {
                         continue;
                     }
@@ -1173,36 +1162,36 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'currencysymbol':
-                $temp = self::_getFile($locale, '/ldml/numbers/currencies/currency[@type=\'' . $value . '\']/symbol', '', $value);
+                $temp = self::_getFile('main/' . $locale, '/ldml/numbers/currencies/currency[@type=\'' . $value . '\']/symbol', '', $value);
                 break;
 
             case 'question':
-                $temp = self::_getFile($locale, '/ldml/posix/messages/' . $value . 'str',  '', $value);
+                $temp = self::_getFile('main/' . $locale, '/ldml/posix/messages/' . $value . 'str',  '', $value);
                 break;
 
             case 'currencyfraction':
                 if (empty($value)) {
                     $value = "DEFAULT";
                 }
-                $temp = self::_getFile('supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $value . '\']', 'digits', 'digits');
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $value . '\']', 'digits', 'digits');
                 break;
 
             case 'currencyrounding':
                 if (empty($value)) {
                     $value = "DEFAULT";
                 }
-                $temp = self::_getFile('supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $value . '\']', 'rounding', 'rounding');
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/fractions/info[@iso4217=\'' . $value . '\']', 'rounding', 'rounding');
                 break;
 
             case 'currencytoregion':
-                $temp = self::_getFile('supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $value . '\']/currency', 'iso4217', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $value . '\']/currency', 'iso4217', $value);
                 break;
 
             case 'regiontocurrency':
-                $_temp = self::_getFile('supplementalData', '/supplementalData/currencyData/region', 'iso3166');
+                $_temp = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/region', 'iso3166');
                 $temp = array();
                 foreach ($_temp as $key => $keyvalue) {
-                    $val = self::_getFile('supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $key . '\']/currency', 'iso4217', $key);
+                    $val = self::_getFile('supplemental/supplementalData', '/supplementalData/currencyData/region[@iso3166=\'' . $key . '\']/currency', 'iso4217', $key);
                     if (!isset($val[$key]) or ($val[$key] != $value)) {
                         continue;
                     }
@@ -1215,14 +1204,14 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'regiontoterritory':
-                $temp = self::_getFile('supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $value . '\']', 'contains', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $value . '\']', 'contains', $value);
                 break;
 
             case 'territorytoregion':
-                $_temp2 = self::_getFile('supplementalData', '/supplementalData/territoryContainment/group', 'type');
+                $_temp2 = self::_getFile('supplemental/supplementalData', '/supplementalData/territoryContainment/group', 'type');
                 $_temp = array();
                 foreach ($_temp2 as $key => $found) {
-                    $_temp += self::_getFile('supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $key . '\']', 'contains', $key);
+                    $_temp += self::_getFile('supplemental/supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $key . '\']', 'contains', $key);
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
@@ -1241,14 +1230,14 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'scripttolanguage':
-                $temp = self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $value . '\']', 'scripts', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $value . '\']', 'scripts', $value);
                 break;
 
             case 'languagetoscript':
-                $_temp2 = self::_getFile('supplementalData', '/supplementalData/languageData/language', 'type');
+                $_temp2 = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language', 'type');
                 $_temp = array();
                 foreach ($_temp2 as $key => $found) {
-                    $_temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'scripts', $key);
+                    $_temp += self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'scripts', $key);
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
@@ -1267,14 +1256,14 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'territorytolanguage':
-                $temp = self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $value . '\']', 'territories', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $value . '\']', 'territories', $value);
                 break;
 
             case 'languagetoterritory':
-                $_temp2 = self::_getFile('supplementalData', '/supplementalData/languageData/language', 'type');
+                $_temp2 = self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language', 'type');
                 $_temp = array();
                 foreach ($_temp2 as $key => $found) {
-                    $_temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'territories', $key);
+                    $_temp += self::_getFile('supplemental/supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'territories', $key);
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
@@ -1293,30 +1282,30 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'timezonetowindows':
-                $temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/mapTimezones[@type=\'windows\']/mapZone[@other=\''.$value.'\']', 'type', $value);
+                $temp = self::_getFile('supplemental/windowsZones', '/supplementalData/windowsZones/mapTimezones/mapZone[@other=\''.$value.'\']', 'type', $value);
                 break;
 
             case 'windowstotimezone':
-                $temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/mapTimezones[@type=\'windows\']/mapZone[@type=\''.$value.'\']', 'other', $value);
+                $temp = self::_getFile('supplemental/windowsZones', '/supplementalData/windowsZones/mapTimezones/mapZone[@type=\''.$value.'\']', 'other', $value);
                 break;
 
             case 'territorytotimezone':
-                $temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem[@type=\'' . $value . '\']', 'territory', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem[@type=\'' . $value . '\']', 'territory', $value);
                 break;
 
             case 'timezonetoterritory':
-                $temp = self::_getFile('supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem[@territory=\'' . $value . '\']', 'type', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/timezoneData/zoneFormatting/zoneItem[@territory=\'' . $value . '\']', 'type', $value);
                 break;
 
             case 'citytotimezone':
-                $temp = self::_getFile($locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $value . '\']/exemplarCity', '', $value);
+                $temp = self::_getFile('main/' . $locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $value . '\']/exemplarCity', '', $value);
                 break;
 
             case 'timezonetocity':
-                $_temp  = self::_getFile($locale, '/ldml/dates/timeZoneNames/zone', 'type');
+                $_temp  = self::_getFile('main/' . $locale, '/ldml/dates/timeZoneNames/zone', 'type');
                 $temp = array();
                 foreach($_temp as $key => $found) {
-                    $temp += self::_getFile($locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $key . '\']/exemplarCity', '', $key);
+                    $temp += self::_getFile('main/' . $locale, '/ldml/dates/timeZoneNames/zone[@type=\'' . $key . '\']/exemplarCity', '', $key);
                     if (!empty($temp[$key])) {
                         if ($temp[$key] == $value) {
                             $temp[$temp[$key]] = $key;
@@ -1327,14 +1316,14 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'phonetoterritory':
-                $temp = self::_getFile('telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $value . '\']/telephoneCountryCode', 'code', $value);
+                $temp = self::_getFile('supplemental/telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $value . '\']/telephoneCountryCode', 'code', $value);
                 break;
 
             case 'territorytophone':
-                $_temp2 = self::_getFile('telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory', 'territory');
+                $_temp2 = self::_getFile('supplemental/telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory', 'territory');
                 $_temp = array();
                 foreach ($_temp2 as $key => $found) {
-                    $_temp += self::_getFile('telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $key . '\']/telephoneCountryCode', 'code', $key);
+                    $_temp += self::_getFile('supplemental/telephoneCodeData', '/supplementalData/telephoneCodeData/codesByTerritory[@territory=\'' . $key . '\']/telephoneCountryCode', 'code', $key);
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
@@ -1353,56 +1342,56 @@ class Cldr extends AbstractLocale
                 break;
 
             case 'numerictoterritory':
-                $temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\''.$value.'\']', 'numeric', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\''.$value.'\']', 'numeric', $value);
                 break;
 
             case 'territorytonumeric':
-                $temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@numeric=\''.$value.'\']', 'type', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@numeric=\''.$value.'\']', 'type', $value);
                 break;
 
             case 'alpha3toterritory':
-                $temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\''.$value.'\']', 'alpha3', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@type=\''.$value.'\']', 'alpha3', $value);
                 break;
 
             case 'territorytoalpha3':
-                $temp = self::_getFile('supplementalData', '/supplementalData/codeMappings/territoryCodes[@alpha3=\''.$value.'\']', 'type', $value);
+                $temp = self::_getFile('supplemental/supplementalData', '/supplementalData/codeMappings/territoryCodes[@alpha3=\''.$value.'\']', 'type', $value);
                 break;
 
             case 'postaltoterritory':
-                $temp = self::_getFile('postalCodeData', '/supplementalData/postalCodeData/postCodeRegex[@territoryId=\'' . $value . '\']', 'territoryId');
+                $temp = self::_getFile('supplemental/postalCodeData', '/supplementalData/postalCodeData/postCodeRegex[@territoryId=\'' . $value . '\']', 'territoryId');
                 break;
 
             case 'numberingsystem':
-                $temp = self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . strtolower($value) . '\']', 'digits', $value);
+                $temp = self::_getFile('supplemental/numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . strtolower($value) . '\']', 'digits', $value);
                 break;
 
             case 'chartofallback':
-                $_temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character', 'value');
+                $_temp = self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character', 'value');
                 foreach ($_temp as $key => $keyvalue) {
-                    $temp2 = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
+                    $temp2 = self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $key . '\']/substitute', '', $key);
                     if (current($temp2) == $value) {
                         $temp = $key;
                     }
                 }
                 break;
 
-                $temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $value . '\']/substitute', '', $value);
+                $temp = self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $value . '\']/substitute', '', $value);
                 break;
 
             case 'fallbacktochar':
-                $temp = self::_getFile('characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $value . '\']/substitute', '');
+                $temp = self::_getFile('supplemental/characters', '/supplementalData/characters/character-fallback/character[@value=\'' . $value . '\']/substitute', '');
                 break;
 
             case 'localeupgrade':
-                $temp = self::_getFile('likelySubtags', '/supplementalData/likelySubtags/likelySubtag[@from=\'' . $value . '\']', 'to', $value);
+                $temp = self::_getFile('supplemental/likelySubtags', '/supplementalData/likelySubtags/likelySubtag[@from=\'' . $value . '\']', 'to', $value);
                 break;
 
             case 'unit':
-                $temp = self::_getFile($locale, '/ldml/units/unit[@type=\'' . $value[0] . '\']/unitPattern[@count=\'' . $value[1] . '\']', '');
+                $temp = self::_getFile('main/' . $locale, '/ldml/units/unit[@type=\'' . $value[0] . '\']/unitPattern[@count=\'' . $value[1] . '\']', '');
                 break;
 
             default :
-                throw new Exception\InvalidArgumentException(
+                throw new InvalidArgumentException(
                   "Unknown detail ($path) for parsing locale data."
                 );
                 break;

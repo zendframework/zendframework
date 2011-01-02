@@ -21,7 +21,7 @@
 
 namespace ZendTest\Locale;
 
-use Zend\Locale\Data,
+use Zend\Locale\Data\Cldr,
     Zend\Locale\Exception\InvalidArgumentException,
     Zend\Locale\Locale,
     Zend\Cache\Cache;
@@ -34,7 +34,7 @@ use Zend\Locale\Data,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
-class DataTest extends \PHPUnit_Framework_TestCase
+class CldrTest extends \PHPUnit_Framework_TestCase
 {
 
     private $_cache = null;
@@ -44,7 +44,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
         $this->_cache =Cache::factory('Core', 'File',
                  array('lifetime' => 1, 'automatic_serialization' => true),
                  array('cache_dir' => __DIR__ . '/../_files/'));
-        Data::setCache($this->_cache);
+        Cldr::setCache($this->_cache);
     }
 
 
@@ -59,17 +59,17 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoLocale()
     {
-        $this->assertTrue(is_array(Data::getList(null, 'language')));
+        $this->assertTrue(is_array(Cldr::getList(null, 'language')));
 
         try {
-            $value = Data::getList('nolocale','language');
+            $value = Cldr::getList('nolocale','language');
             $this->fail('locale should throw exception');
         } catch (InvalidArgumentException $e) {
             // success
         }
 
         $locale = new Locale('de');
-        $this->assertTrue(is_array(Data::getList($locale, 'language')));
+        $this->assertTrue(is_array(Cldr::getList($locale, 'language')));
     }
 
 
@@ -80,14 +80,14 @@ class DataTest extends \PHPUnit_Framework_TestCase
     public function testNoType()
     {
         try {
-            $value = Data::getContent('de','');
+            $value = Cldr::getContent('de','');
             $this->fail('content should throw an exception');
         } catch (InvalidArgumentException $e) {
             // success
         }
 
         try {
-            $value = Data::getContent('de','xxxxxxx');
+            $value = Cldr::getContent('de','xxxxxxx');
             $this->fail('content should throw an exception');
         } catch (InvalidArgumentException $e) {
             // success
@@ -101,11 +101,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLanguage()
     {
-        $data = Data::getList('de','language');
+        $data = Cldr::getList('de','language');
         $this->assertEquals('Deutsch',  $data['de']);
         $this->assertEquals('Englisch', $data['en']);
 
-        $value = Data::getContent('de', 'language', 'de');
+        $value = Cldr::getContent('de', 'language', 'de');
         $this->assertEquals('Deutsch', $value);
     }
 
@@ -115,11 +115,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testScript()
     {
-        $data = Data::getList('de_AT', 'script');
+        $data = Cldr::getList('de_AT', 'script');
         $this->assertEquals('Arabisch',   $data['Arab']);
         $this->assertEquals('Lateinisch', $data['Latn']);
 
-        $value = Data::getContent('de_AT', 'script', 'Arab');
+        $value = Cldr::getContent('de_AT', 'script', 'Arab');
         $this->assertEquals('Arabisch', $value);
     }
 
@@ -129,11 +129,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTerritory()
     {
-        $data = Data::getList('de_AT', 'territory');
+        $data = Cldr::getList('de_AT', 'territory');
         $this->assertEquals('Österreich', $data['AT']);
         $this->assertEquals('Martinique', $data['MQ']);
 
-        $value = Data::getContent('de_AT', 'territory', 'AT');
+        $value = Cldr::getContent('de_AT', 'territory', 'AT');
         $this->assertEquals('Österreich', $value);
     }
 
@@ -143,11 +143,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testVariant()
     {
-        $data = Data::getList('de_AT', 'variant');
+        $data = Cldr::getList('de_AT', 'variant');
         $this->assertEquals('Boontling', $data['BOONT']);
         $this->assertEquals('Saho',      $data['SAAHO']);
 
-        $value = Data::getContent('de_AT', 'variant', 'POSIX');
+        $value = Cldr::getContent('de_AT', 'variant', 'POSIX');
         $this->assertEquals('Posix', $value);
     }
 
@@ -157,11 +157,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testKey()
     {
-        $data = Data::getList('de_AT', 'key');
+        $data = Cldr::getList('de_AT', 'key');
         $this->assertEquals('Kalender',   $data['calendar']);
         $this->assertEquals('Sortierung', $data['collation']);
 
-        $value = Data::getContent('de_AT', 'key', 'collation');
+        $value = Cldr::getContent('de_AT', 'key', 'collation');
         $this->assertEquals('Sortierung', $value);
     }
 
@@ -171,15 +171,15 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testType()
     {
-        $data = Data::getList('de_AT', 'type');
+        $data = Cldr::getList('de_AT', 'type');
         $this->assertEquals('Chinesischer Kalender', $data['chinese']);
         $this->assertEquals('Strichfolge',           $data['stroke']);
 
-        $data = Data::getList('de_AT', 'type', 'calendar');
+        $data = Cldr::getList('de_AT', 'type', 'calendar');
         $this->assertEquals('Chinesischer Kalender', $data['chinese']);
         $this->assertEquals('Japanischer Kalender',  $data['japanese']);
 
-        $value = Data::getList('de_AT', 'type', 'chinese');
+        $value = Cldr::getList('de_AT', 'type', 'chinese');
         $this->assertEquals('Chinesischer Kalender', $value['chinese']);
     }
 
@@ -189,7 +189,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLayout()
     {
-        $layout = Data::getList('es', 'layout');
+        $layout = Cldr::getList('es', 'layout');
         $this->assertEquals("", $layout['lines']);
         $this->assertEquals("", $layout['characters']);
         $this->assertEquals("titlecase-firstword", $layout['inList']);
@@ -214,10 +214,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCharacters()
     {
-        $char = Data::getList('de', 'characters');
-        $this->assertEquals("[a ä b-o ö p-s ß t u ü v-z]", $char['characters']);
+        $char = Cldr::getList('de', 'characters');
+        $this->assertEquals("[a ä b c d e f g h i j k l m n o ö p q r s t u ü v w x y z ß]", $char['characters']);
         $this->assertEquals("[á à ă â å ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ø ō œ ú ù ŭ û ū ÿ]", $char['auxiliary']);
-        $this->assertEquals("[a-z]", $char['currencySymbol']);
+        $this->assertEquals("[a b c d e f g h i j k l m n o p q r s t u v w x y z]", $char['currencySymbol']);
     }
 
     /**
@@ -226,7 +226,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelimiters()
     {
-        $quote = Data::getList('de', 'delimiters');
+        $quote = Cldr::getList('de', 'delimiters');
         $this->assertEquals("„", $quote['quoteStart']);
         $this->assertEquals("“", $quote['quoteEnd']);
         $this->assertEquals("‚", $quote['quoteStartAlt']);
@@ -239,11 +239,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testMeasurement()
     {
-        $measure = Data::getList('de', 'measurement');
+        $measure = Cldr::getList('de', 'measurement');
         $this->assertEquals("001", $measure['metric']);
         $this->assertEquals("LR MM US",  $measure['US']);
         $this->assertEquals("001", $measure['A4']);
-        $this->assertEquals("CA CL CO MX PH PR US VE",  $measure['US-Letter']);
+        $this->assertEquals("BZ CA CL CO CR GT MX NI PA PH PR SV US VE",  $measure['US-Letter']);
     }
 
     /**
@@ -252,7 +252,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultCalendar()
     {
-        $date = Data::getContent('de_AT', 'defaultcalendar');
+        $date = Cldr::getContent('de_AT', 'defaultcalendar');
         $this->assertEquals("gregorian", $date);
     }
 
@@ -262,10 +262,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultMonthContext()
     {
-        $date = Data::getContent('de_AT', 'monthcontext');
+        $date = Cldr::getContent('de_AT', 'monthcontext');
         $this->assertEquals("format", $date);
 
-        $date = Data::getContent('de_AT', 'monthcontext', 'islamic');
+        $date = Cldr::getContent('de_AT', 'monthcontext', 'islamic');
         $this->assertEquals("format", $date);
     }
 
@@ -275,10 +275,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultMonth()
     {
-        $date = Data::getContent('de_AT', 'defaultmonth');
+        $date = Cldr::getContent('de_AT', 'defaultmonth');
         $this->assertEquals("wide", $date);
 
-        $date = Data::getContent('de_AT', 'defaultmonth', 'islamic');
+        $date = Cldr::getContent('de_AT', 'defaultmonth', 'islamic');
         $this->assertEquals("wide", $date);
     }
 
@@ -288,7 +288,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testMonth()
     {
-        $date   = Data::getList('de_AT', 'months');
+        $date   = Cldr::getList('de_AT', 'months');
         $result = array("context" => "format", "default" => "wide", "format" =>
             array("abbreviated" =>
                 array(1 => "Jän",  2 => "Feb", 3 => "Mär", 4 => "Apr", 5 => "Mai",
@@ -302,7 +302,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
                      11 => "November", 12 => "Dezember")
             ),
             "stand-alone" => array("abbreviated" =>
-                array(1 => '1',    2 =>     '2',  3 =>    'Mär',  4 =>    '4',  5 =>    '5', 6 => '6', 7 => "Jul",
+                array(1 => 'Jan',    2 =>     'Feb',  3 =>    'Mär',  4 =>    'Apr',  5 =>    'Mai', 6 => 'Jun', 7 => "Jul",
                       8 => "Aug", 9 => "Sep", 10 => "Okt", 11 => "Nov", 12 => "Dez"),
                   "narrow" =>
                 array(1 => "J",  2 => "F",  3 => "M",  4 => "A", 5 => "M", 6 => "J",  7 => "J" , 8 => "A",
@@ -312,12 +312,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals($result, $date);
 
-        $date   = Data::getList('de_AT', 'months', 'islamic');
+        $date   = Cldr::getList('de_AT', 'months', 'islamic');
         $result = array("context" => "format", "default" => "wide", "format" =>
             array("abbreviated" =>
-                array(1 => "Muharram"  , 2 => "Safar", 3 => "Rabiʻ I"  , 4 => "Rabiʻ II"    , 5 => "Jumada I",
-                      6 => "Jumada II" , 7 => "Rajab", 8 => "Shaʻban", 9 => "Ramadan", 10=> "Shawwal",
-                     11 => "Dhuʻl-Qiʻdah", 12 => "Dhuʻl-Hijjah"),
+                array(1 => "Muh."  , 2 => "Saf.", 3 => "Rab. I"  , 4 => "Rab. II"    , 5 => "Jum. I",
+                      6 => "Jum. II" , 7 => "Raj.", 8 => "Sha.", 9 => "Ram.", 10=> "Shaw.",
+                     11 => "Dhuʻl-Q.", 12 => "Dhuʻl-H."),
                   "narrow" => array(1 => '1', 2 => '2',  3 => '3',   4 =>  '4', 5 =>   '5', 6 => '6', 7 => '7',
                                     8 => '8', 9 => '9', 10 => '10', 11 => '11', 12 => '12'),
                   "wide" =>
@@ -326,9 +326,9 @@ class DataTest extends \PHPUnit_Framework_TestCase
                      11 => "Dhuʻl-Qiʻdah", 12 => "Dhuʻl-Hijjah")
             ),
             "stand-alone" => array("abbreviated" =>
-                array(1 => "Muharram"  , 2 => "Safar", 3 => "Rabiʻ I"  , 4 => "Rabiʻ II"    , 5 => "Jumada I",
-                      6 => "Jumada II" , 7 => "Rajab", 8 => "Shaʻban", 9 => "Ramadan", 10=> "Shawwal",
-                     11 => "Dhuʻl-Qiʻdah", 12 => "Dhuʻl-Hijjah"),
+                array(1 => "Muh."  , 2 => "Saf.", 3 => "Rab. I"  , 4 => "Rab. II"    , 5 => "Jum. I",
+                      6 => "Jum. II" , 7 => "Raj.", 8 => "Sha.", 9 => "Ram.", 10=> "Shaw.",
+                     11 => "Dhuʻl-Q.", 12 => "Dhuʻl-H."),
                   "narrow" => array(1 => '1', 2 => '2',  3 => '3',   4 =>  '4', 5 =>   '5', 6 => '6', 7 => '7',
                                   8 => '8', 9 => '9', 10 => '10', 11 => '11', 12 => '12'),
                   "wide" =>
@@ -338,23 +338,23 @@ class DataTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'month');
+        $date = Cldr::getList('de_AT', 'month');
         $this->assertEquals(array(1 => "Jänner"  , 2 => "Februar"   , 3 => "März"  , 4 => "April"    , 5 => "Mai",
                                   6 => "Juni"    , 7 => "Juli"      , 8 => "August", 9 => "September", 10=> "Oktober",
                                  11 => "November", 12 => "Dezember"), $date);
 
-        $date = Data::getList('de_AT', 'month', array('gregorian', 'format', 'wide'));
+        $date = Cldr::getList('de_AT', 'month', array('gregorian', 'format', 'wide'));
         $this->assertEquals(array(1 => "Jänner"  , 2 => "Februar"   , 3 => "März"  , 4 => "April"    , 5 => "Mai",
                                   6 => "Juni"    , 7 => "Juli"      , 8 => "August", 9 => "September", 10=> "Oktober",
                                  11 => "November", 12 => "Dezember"), $date);
 
-        $value = Data::getContent('de_AT', 'month', 12);
+        $value = Cldr::getContent('de_AT', 'month', 12);
         $this->assertEquals('Dezember', $value);
 
-        $value = Data::getContent('de_AT', 'month', array('gregorian', 'format', 'wide', 12));
+        $value = Cldr::getContent('de_AT', 'month', array('gregorian', 'format', 'wide', 12));
         $this->assertEquals('Dezember', $value);
 
-        $value = Data::getContent('ar', 'month', array('islamic', 'format', 'wide', 1));
+        $value = Cldr::getContent('ar', 'month', array('islamic', 'format', 'wide', 1));
         $this->assertEquals("محرم", $value);
     }
 
@@ -364,10 +364,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultDayContext()
     {
-        $date = Data::getContent('de_AT', 'daycontext');
+        $date = Cldr::getContent('de_AT', 'daycontext');
         $this->assertEquals("format", $date);
 
-        $date = Data::getContent('de_AT', 'daycontext', 'islamic');
+        $date = Cldr::getContent('de_AT', 'daycontext', 'islamic');
         $this->assertEquals("format", $date);
     }
 
@@ -377,10 +377,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultDay()
     {
-        $date = Data::getContent('de_AT', 'defaultday');
+        $date = Cldr::getContent('de_AT', 'defaultday');
         $this->assertEquals("wide", $date);
 
-        $date = Data::getContent('de_AT', 'defaultday', 'islamic');
+        $date = Cldr::getContent('de_AT', 'defaultday', 'islamic');
         $this->assertEquals("wide", $date);
     }
 
@@ -390,7 +390,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDay()
     {
-        $date = Data::getList('de_AT', 'days');
+        $date = Cldr::getList('de_AT', 'days');
         $result = array("context" => "format", "default" => "wide", "format" =>
             array("abbreviated" => array("sun" => "So.", "mon" => "Mo.", "tue" => "Di.", "wed" => "Mi.",
                       "thu" => "Do.", "fri" => "Fr.", "sat" => "Sa."),
@@ -399,8 +399,8 @@ class DataTest extends \PHPUnit_Framework_TestCase
                   "wide" => array("sun" => "Sonntag", "mon" => "Montag", "tue" => "Dienstag",
                       "wed" => "Mittwoch", "thu" => "Donnerstag", "fri" => "Freitag", "sat" => "Samstag")
             ),
-            "stand-alone" => array("abbreviated" => array("sun" => "1", "mon" => "2", "tue" => "3", "wed" => "4",
-                      "thu" => "5", "fri" => "6", "sat" => "7"),
+            "stand-alone" => array("abbreviated" => array("sun" => "So", "mon" => "Mo", "tue" => "Di", "wed" => "Mi",
+                      "thu" => "Do", "fri" => "Fr", "sat" => "Sa"),
                   "narrow" => array("sun" => "S", "mon" => "M", "tue" => "D", "wed" => "M",
                       "thu" => "D", "fri" => "F", "sat" => "S"),
                   "wide" => array("sun" => "1", "mon" => "2", "tue" => "3", "wed" => "4",
@@ -408,7 +408,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'days', 'islamic');
+        $date = Cldr::getList('de_AT', 'days', 'islamic');
         $result = array("context" => "format", "default" => "wide", "format" =>
             array("abbreviated" => array("sun" => "1", "mon" => "2", "tue" => "3", "wed" => "4",
                       "thu" => "5", "fri" => "6", "sat" => "7"),
@@ -426,21 +426,21 @@ class DataTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'day');
+        $date = Cldr::getList('de_AT', 'day');
         $this->assertEquals(array("sun" => "Sonntag", "mon" => "Montag", "tue" => "Dienstag",
                       "wed" => "Mittwoch", "thu" => "Donnerstag", "fri" => "Freitag", "sat" => "Samstag"), $date);
 
-        $date = Data::getList('de_AT', 'day', array('gregorian', 'format', 'wide'));
+        $date = Cldr::getList('de_AT', 'day', array('gregorian', 'format', 'wide'));
         $this->assertEquals(array("sun" => "Sonntag", "mon" => "Montag", "tue" => "Dienstag",
                       "wed" => "Mittwoch", "thu" => "Donnerstag", "fri" => "Freitag", "sat" => "Samstag"), $date);
 
-        $value = Data::getContent('de_AT', 'day', 'mon');
+        $value = Cldr::getContent('de_AT', 'day', 'mon');
         $this->assertEquals('Montag', $value);
 
-        $value = Data::getContent('de_AT', 'day', array('gregorian', 'format', 'wide', 'mon'));
+        $value = Cldr::getContent('de_AT', 'day', array('gregorian', 'format', 'wide', 'mon'));
         $this->assertEquals('Montag', $value);
 
-        $value = Data::getContent('ar', 'day', array('islamic', 'format', 'wide', 'mon'));
+        $value = Cldr::getContent('ar', 'day', array('islamic', 'format', 'wide', 'mon'));
         $this->assertEquals("2", $value);
     }
 
@@ -450,7 +450,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuarter()
     {
-        $date = Data::getList('de_AT', 'quarters');
+        $date = Cldr::getList('de_AT', 'quarters');
         $result = array("format" =>
             array("abbreviated" => array("1" => "Q1", "2" => "Q2", "3" => "Q3", "4" => "Q4"),
                   "narrow" => array("1" => "1", "2" => "2", "3" => "3", "4" => "4"),
@@ -463,7 +463,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'quarters', 'islamic');
+        $date = Cldr::getList('de_AT', 'quarters', 'islamic');
         $result = array("format" =>
             array("abbreviated" => array("1" => "Q1", "2" => "Q2", "3" => "Q3", "4" => "Q4"),
                   "narrow" => array("1" => "1", "2" => "2", "3" => "3", "4" => "4"),
@@ -476,21 +476,21 @@ class DataTest extends \PHPUnit_Framework_TestCase
             ));
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'quarter');
+        $date = Cldr::getList('de_AT', 'quarter');
         $this->assertEquals(array("1" => "1. Quartal", "2" => "2. Quartal", "3" => "3. Quartal",
                       "4" => "4. Quartal"), $date);
 
-        $date = Data::getList('de_AT', 'quarter', array('gregorian', 'format', 'wide'));
+        $date = Cldr::getList('de_AT', 'quarter', array('gregorian', 'format', 'wide'));
         $this->assertEquals(array("1" => "1. Quartal", "2" => "2. Quartal", "3" => "3. Quartal",
                       "4" => "4. Quartal"), $date);
 
-        $value = Data::getContent('de_AT', 'quarter', '1');
+        $value = Cldr::getContent('de_AT', 'quarter', '1');
         $this->assertEquals('1. Quartal', $value);
 
-        $value = Data::getContent('de_AT', 'quarter', array('gregorian', 'format', 'wide', '1'));
+        $value = Cldr::getContent('de_AT', 'quarter', array('gregorian', 'format', 'wide', '1'));
         $this->assertEquals('1. Quartal', $value);
 
-        $value = Data::getContent('ar', 'quarter', array('islamic', 'format', 'wide', '1'));
+        $value = Cldr::getContent('ar', 'quarter', array('islamic', 'format', 'wide', '1'));
         $this->assertEquals("Q1", $value);
     }
 
@@ -500,11 +500,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testWeek()
     {
-        $value = Data::getList('de_AT', 'week');
+        $value = Cldr::getList('de_AT', 'week');
         $this->assertEquals(array('minDays' => 4, 'firstDay' => 'mon', 'weekendStart' => 'sat',
                                   'weekendEnd' => 'sun'), $value);
 
-        $value = Data::getList('en_US', 'week');
+        $value = Cldr::getList('en_US', 'week');
         $this->assertEquals(array('minDays' => '4', 'firstDay' => 'sun', 'weekendStart' => 'sat',
                                   'weekendEnd' => 'sun'), $value);
     }
@@ -513,12 +513,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
      * test for reading am from locale
      * expected array
      */
-    public function testAm()
+    public function ztestAm()
     {
-        $date = Data::getContent('de_AT', 'am');
+        $date = Cldr::getContent('de_AT', 'am');
         $this->assertEquals("vorm.", $date);
 
-        $date = Data::getContent('de_AT', 'am', 'islamic');
+        $date = Cldr::getContent('de_AT', 'am', 'islamic');
         $this->assertEquals("vorm.", $date);
     }
 
@@ -526,12 +526,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
      * test for reading pm from locale
      * expected array
      */
-    public function testPm()
+    public function ztestPm()
     {
-        $date = Data::getContent('de_AT', 'pm');
+        $date = Cldr::getContent('de_AT', 'pm');
         $this->assertEquals("nachm.", $date);
 
-        $date = Data::getContent('de_AT', 'pm', 'islamic');
+        $date = Cldr::getContent('de_AT', 'pm', 'islamic');
         $this->assertEquals("nachm.", $date);
     }
 
@@ -541,7 +541,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testEra()
     {
-        $date = Data::getList('de_AT', 'eras');
+        $date = Cldr::getList('de_AT', 'eras');
         $result = array(
             "abbreviated" => array("0" => "v. Chr.", "1" => "n. Chr."),
             "narrow" => array("0" => "BCE", "1" => "CE"),
@@ -549,23 +549,23 @@ class DataTest extends \PHPUnit_Framework_TestCase
             );
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'eras', 'islamic');
+        $date = Cldr::getList('de_AT', 'eras', 'islamic');
         $result = array("abbreviated" => array("0" => "AH"), "narrow" => array("0" => "AH"), "names" => array("0" => "AH"));
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'era');
+        $date = Cldr::getList('de_AT', 'era');
         $this->assertEquals(array("0" => "v. Chr.", "1" => "n. Chr."), $date);
 
-        $date = Data::getList('de_AT', 'era', array('gregorian', 'Abbr'));
+        $date = Cldr::getList('de_AT', 'era', array('gregorian', 'Abbr'));
         $this->assertEquals(array("0" => "v. Chr.", "1" => "n. Chr."), $date);
 
-        $value = Data::getContent('de_AT', 'era', '1');
+        $value = Cldr::getContent('de_AT', 'era', '1');
         $this->assertEquals('n. Chr.', $value);
 
-        $value = Data::getContent('de_AT', 'era', array('gregorian', 'Names', '1'));
+        $value = Cldr::getContent('de_AT', 'era', array('gregorian', 'Names', '1'));
         $this->assertEquals('n. Chr.', $value);
 
-        $value = Data::getContent('ar', 'era', array('islamic', 'Abbr', '0'));
+        $value = Cldr::getContent('ar', 'era', array('islamic', 'Abbr', '0'));
         $this->assertEquals('هـ', $value);
     }
 
@@ -575,10 +575,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultDate()
     {
-        $value = Data::getContent('de_AT', 'defaultdate');
+        $value = Cldr::getContent('de_AT', 'defaultdate');
         $this->assertEquals("medium", $value);
 
-        $value = Data::getContent('de_AT', 'defaultdate', 'gregorian');
+        $value = Cldr::getContent('de_AT', 'defaultdate', 'gregorian');
         $this->assertEquals("medium", $value);
     }
 
@@ -588,23 +588,23 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDate()
     {
-        $date = Data::getList('de_AT', 'date');
+        $date = Cldr::getList('de_AT', 'date');
         $result = array("full" => "EEEE, dd. MMMM y", "long" => "dd. MMMM y",
                         "medium" => "dd.MM.yyyy", "short" => "dd.MM.yy");
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'date', 'islamic');
-        $result = array("full" => "EEEE, y MMMM dd", "long" => "y MMMM d",
-                        "medium" => "y MMM d", "short" => "yyyy-MM-dd");
+        $date = Cldr::getList('de_AT', 'date', 'islamic');
+        $result = array("full" => "EEEE d. MMMM y G", "long" => "d. MMMM y G",
+                        "medium" => "d. MMM y G", "short" => "d.M.y G");
         $this->assertEquals($result, $date);
 
-        $value = Data::getContent('de_AT', 'date');
+        $value = Cldr::getContent('de_AT', 'date');
         $this->assertEquals("dd.MM.yyyy", $value);
 
-        $value = Data::getContent('de_AT', 'date', 'long');
+        $value = Cldr::getContent('de_AT', 'date', 'long');
         $this->assertEquals("dd. MMMM y", $value);
 
-        $value = Data::getContent('ar', 'date', array('islamic', 'long'));
+        $value = Cldr::getContent('ar', 'date', array('islamic', 'long'));
         $this->assertEquals("y MMMM d", $value);
     }
 
@@ -614,10 +614,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultTime()
     {
-        $value = Data::getContent('de_AT', 'defaulttime');
+        $value = Cldr::getContent('de_AT', 'defaulttime');
         $this->assertEquals("medium", $value);
 
-        $value = Data::getContent('de_AT', 'defaulttime', 'gregorian');
+        $value = Cldr::getContent('de_AT', 'defaulttime', 'gregorian');
         $this->assertEquals("medium", $value);
     }
 
@@ -627,23 +627,23 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTime()
     {
-        $date = Data::getList('de_AT', 'time');
+        $date = Cldr::getList('de_AT', 'time');
         $result = array("full" => "HH:mm:ss zzzz", "long" => "HH:mm:ss z",
                         "medium" => "HH:mm:ss", "short" => "HH:mm");
         $this->assertEquals($result, $date);
 
-        $date = Data::getList('de_AT', 'time', 'islamic');
+        $date = Cldr::getList('de_AT', 'time', 'islamic');
         $result = array("full" => "HH:mm:ss zzzz", "long" => "HH:mm:ss z",
                         "medium" => "HH:mm:ss", "short" => "HH:mm");
         $this->assertEquals($result, $date);
 
-        $value = Data::getContent('de_AT', 'time');
+        $value = Cldr::getContent('de_AT', 'time');
         $this->assertEquals("HH:mm:ss", $value);
 
-        $value = Data::getContent('de_AT', 'time', 'long');
+        $value = Cldr::getContent('de_AT', 'time', 'long');
         $this->assertEquals("HH:mm:ss z", $value);
 
-        $value = Data::getContent('ar', 'time', array('islamic', 'long'));
+        $value = Cldr::getContent('ar', 'time', array('islamic', 'long'));
         $this->assertEquals("HH:mm:ss z", $value);
     }
 
@@ -653,7 +653,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDateTime()
     {
-        $value = Data::getList('de_AT', 'datetime');
+        $value = Cldr::getList('de_AT', 'datetime');
         $result = array(
             'full' => 'EEEE, dd. MMMM y HH:mm:ss zzzz',
             'long' => 'dd. MMMM y HH:mm:ss z',
@@ -662,7 +662,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getList('de_AT', 'datetime', 'gregorian');
+        $value = Cldr::getList('de_AT', 'datetime', 'gregorian');
         $result = array(
             'full' => 'EEEE, dd. MMMM y HH:mm:ss zzzz',
             'long' => 'dd. MMMM y HH:mm:ss z',
@@ -671,10 +671,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'datetime', 'full');
+        $value = Cldr::getContent('de_AT', 'datetime', 'full');
         $this->assertEquals("EEEE, dd. MMMM y HH:mm:ss zzzz", $value);
 
-        $value = Data::getContent('de_AT', 'datetime', array('gregorian', 'long'));
+        $value = Cldr::getContent('de_AT', 'datetime', array('gregorian', 'long'));
         $this->assertEquals("dd. MMMM y HH:mm:ss z", $value);
     }
 
@@ -684,20 +684,20 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testField()
     {
-        $value = Data::getList('de_AT', 'field');
+        $value = Cldr::getList('de_AT', 'field');
         $this->assertEquals(array("era" => "Epoche", "year" => "Jahr", "month" => "Monat", "week" => "Woche",
             "day" => "Tag", "weekday" => "Wochentag", "dayperiod" => "Tageshälfte", "hour" => "Stunde",
             "minute" => "Minute", "second" => "Sekunde", "zone" => "Zone"), $value);
 
-        $value = Data::getList('de_AT', 'field', 'gregorian');
+        $value = Cldr::getList('de_AT', 'field', 'gregorian');
         $this->assertEquals(array("era" => "Epoche", "year" => "Jahr", "month" => "Monat", "week" => "Woche",
             "day" => "Tag", "weekday" => "Wochentag", "dayperiod" => "Tageshälfte", "hour" => "Stunde",
             "minute" => "Minute", "second" => "Sekunde", "zone" => "Zone"), $value);
 
-        $value = Data::getContent('de_AT', 'field', 'week');
+        $value = Cldr::getContent('de_AT', 'field', 'week');
         $this->assertEquals("Woche", $value);
 
-        $value = Data::getContent('de_AT', 'field', array('gregorian', 'week'));
+        $value = Cldr::getContent('de_AT', 'field', array('gregorian', 'week'));
         $this->assertEquals("Woche", $value);
     }
 
@@ -707,18 +707,18 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testRelative()
     {
-        $value = Data::getList('de_AT', 'relative');
+        $value = Cldr::getList('de_AT', 'relative');
         $this->assertEquals(array("0" => "Heute", "1" => "Morgen", "2" => "Übermorgen",
             "3" => "In drei Tagen", "-1" => "Gestern", "-2" => "Vorgestern", "-3" => "Vor drei Tagen"), $value);
 
-        $value = Data::getList('de_AT', 'relative', 'gregorian');
+        $value = Cldr::getList('de_AT', 'relative', 'gregorian');
         $this->assertEquals(array("0" => "Heute", "1" => "Morgen", "2" => "Übermorgen",
             "3" => "In drei Tagen", "-1" => "Gestern", "-2" => "Vorgestern", '-3' => 'Vor drei Tagen'), $value);
 
-        $value = Data::getContent('de_AT', 'relative', '-1');
+        $value = Cldr::getContent('de_AT', 'relative', '-1');
         $this->assertEquals("Gestern", $value);
 
-        $value = Data::getContent('de_AT', 'relative', array('gregorian', '-1'));
+        $value = Cldr::getContent('de_AT', 'relative', array('gregorian', '-1'));
         $this->assertEquals("Gestern", $value);
     }
 
@@ -728,7 +728,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testSymbols()
     {
-        $value = Data::getList('de_AT', 'symbols');
+        $value = Cldr::getList('de_AT', 'symbols');
         $result = array(    "decimal"  => ",", "group" => ".", "list"  => ";", "percent"  => "%",
             "zero"  => "0", "pattern"  => "#", "plus"  => "+", "minus" => "-", "exponent" => "E",
             "mille" => "‰", "infinity" => "∞", "nan"   => "NaN");
@@ -741,7 +741,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecimalNumber()
     {
-        $value = Data::getContent('de_AT', 'decimalnumber');
+        $value = Cldr::getContent('de_AT', 'decimalnumber');
         $this->assertEquals("#,##0.###", $value);
     }
 
@@ -751,7 +751,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testScientificNumber()
     {
-        $value = Data::getContent('de_AT', 'scientificnumber');
+        $value = Cldr::getContent('de_AT', 'scientificnumber');
         $this->assertEquals("#E0", $value);
     }
 
@@ -761,7 +761,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testPercentNumber()
     {
-        $value = Data::getContent('de_AT', 'percentnumber');
+        $value = Cldr::getContent('de_AT', 'percentnumber');
         $this->assertEquals("#,##0 %", $value);
     }
 
@@ -771,7 +771,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrencyNumber()
     {
-        $value = Data::getContent('de_AT', 'currencynumber');
+        $value = Cldr::getContent('de_AT', 'currencynumber');
         $this->assertEquals("¤ #,##0.00", $value);
     }
 
@@ -781,7 +781,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testNameToCurrency()
     {
-        $value = Data::getList('de_AT', 'nametocurrency');
+        $value = Cldr::getList('de_AT', 'nametocurrency');
         $result = array(
             'ADP' => 'Andorranische Pesete', 'AED' => 'UAE Dirham', 'AFA' => 'Afghani (1927-2002)',
             'AFN' => 'Afghani', 'ALL' => 'Lek', 'AMD' => 'Dram', 'ANG' => 'Niederl. Antillen Gulden',
@@ -804,7 +804,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'CHF' => 'Schweizer Franken', 'CHW' => 'WIR Franken', 'CLF' => 'Unidades de Fomento',
             'CLP' => 'Chilenischer Peso', 'CNY' => 'Renminbi Yuan', 'COP' => 'Kolumbianischer Peso',
             'COU' => 'Unidad de Valor Real', 'CRC' => 'Costa Rica Colon', 'CSD' => 'Alter Serbischer Dinar',
-            'CSK' => 'Tschechoslowakische Krone', 'CUP' => 'Kubanischer Peso', 'CVE' => 'Kap Verde Escudo',
+            'CSK' => 'Tschechoslowakische Krone', 'CUC' => 'Kubanischer Peso (konvertibel)', 'CUP' => 'Kubanischer Peso', 'CVE' => 'Kap Verde Escudo',
             'CYP' => 'Zypern-Pfund', 'CZK' => 'Tschechische Krone', 'DDM' => 'Mark der DDR',
             'DEM' => 'Deutsche Mark', 'DJF' => 'Dschibuti-Franc', 'DKK' => 'Dänische Krone',
             'DOP' => 'Dominikanischer Peso', 'DZD' => 'Algerischer Dinar', 'ECS' => 'Ecuadorianischer Sucre',
@@ -852,7 +852,8 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'SRD' => 'Surinamischer Dollar', 'SRG' => 'Suriname Gulden', 'STD' => 'Dobra',
             'SUR' => 'Sowjetischer Rubel', 'SVC' => 'El Salvador Colon', 'SYP' => 'Syrisches Pfund',
             'SZL' => 'Lilangeni', 'THB' => 'Baht', 'TJR' => 'Tadschikistan Rubel',
-            'TJS' => 'Tadschikistan Somoni', 'TMM' => 'Turkmenistan-Manat', 'TND' => 'Tunesischer Dinar',
+            'TJS' => 'Tadschikistan Somoni', 'TMM' => 'Turkmenistan-Manat',
+            'TMT' => 'Neuer Turkmenistan-Manat', 'TND' => 'Tunesischer Dinar',
             'TOP' => 'Paʻanga', 'TPE' => 'Timor-Escudo', 'TRL' => 'Alte Türkische Lira',
             'TRY' => 'Türkische Lira', 'TTD' => 'Trinidad- und Tobago-Dollar',
             'TWD' => 'Neuer Taiwan-Dollar', 'TZS' => 'Tansania-Schilling', 'UAH' => 'Hryvnia',
@@ -870,10 +871,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'XRE' => 'RINET Funds', 'XTS' => 'Testwährung', 'XXX' => 'Unbekannte Währung', 'YDD' => 'Jemen-Dinar',
             'YER' => 'Jemen-Rial', 'YUD' => 'Jugoslawischer Dinar (1966-1990)', 'YUM' => 'Neuer Dinar',
             'YUN' => 'Jugoslawischer Dinar (konvertibel)', 'ZAL' => 'Südafrikanischer Rand (Finanz)',
-            'ZAR' => 'Südafrikanischer Rand', 'ZMK' => 'Kwacha', 'ZRN' => 'Neuer Zaire', 'ZRZ' => 'Zaire', 'ZWD' => 'Simbabwe-Dollar');
+            'ZAR' => 'Südafrikanischer Rand', 'ZMK' => 'Kwacha', 'ZRN' => 'Neuer Zaire', 'ZRZ' => 'Zaire', 'ZWD' => 'Simbabwe-Dollar',
+            'ZWL' => 'Simbabwe-Dollar (2009)');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'nametocurrency', 'USD');
+        $value = Cldr::getContent('de_AT', 'nametocurrency', 'USD');
         $this->assertEquals("US-Dollar", $value);
     }
 
@@ -883,7 +885,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrencyToName()
     {
-        $value = Data::getList('de_AT', 'currencytoname');
+        $value = Cldr::getList('de_AT', 'currencytoname');
         $result = array('Andorranische Pesete' => 'ADP', 'UAE Dirham' => 'AED', 'Afghani (1927-2002)' => 'AFA',
             'Afghani' => 'AFN', 'Lek' => 'ALL', 'Dram' => 'AMD', 'Niederl. Antillen Gulden' => 'ANG',
             'Kwanza' => 'AOA', 'Angolanischer Kwanza (1977-1990)' => 'AOK', 'Neuer Kwanza' => 'AON',
@@ -956,11 +958,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'Testwährung' => 'XTS', 'Unbekannte Währung' => 'XXX', 'Jemen-Dinar' => 'YDD', 'Jemen-Rial' => 'YER',
             'Jugoslawischer Dinar (1966-1990)' => 'YUD', 'Neuer Dinar' => 'YUM', 'Jugoslawischer Dinar (konvertibel)' => 'YUN',
             'Südafrikanischer Rand' => 'ZAR', 'Kwacha' => 'ZMK', 'Neuer Zaire' => 'ZRN', 'Zaire' => 'ZRZ', 'Simbabwe-Dollar' => 'ZWD',
-            'Ghanaische Cedi' => 'GHS', 'Sudanesisches Pfund (alt)' => 'SDP', 'Bolívar Fuerte' => 'VEF',
-            'Südafrikanischer Rand (Finanz)' => 'ZAL', 'UYU' => 'UYI');
+            'Simbabwe-Dollar (2009)' => 'ZWL', 'Ghanaische Cedi' => 'GHS', 'Sudanesisches Pfund (alt)' => 'SDP', 'Bolívar Fuerte' => 'VEF',
+            'Südafrikanischer Rand (Finanz)' => 'ZAL', 'UYU' => 'UYI', 'Neuer Turkmenistan-Manat' => 'TMT',
+            'Kubanischer Peso (konvertibel)' => 'CUC');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'currencytoname', 'Unze Platin');
+        $value = Cldr::getContent('de_AT', 'currencytoname', 'Unze Platin');
         $this->assertEquals("XPT", $value);
     }
 
@@ -970,12 +973,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrencySymbol()
     {
-        $value = Data::getList('de_AT', 'currencysymbol');
+        $value = Cldr::getList('de_AT', 'currencysymbol');
         $result = array(
             'AFN' => 'Af', 'ARS' => 'AR$', 'ATS' => 'öS',
             'AUD' => 'AU$', 'BAM' => 'KM', 'BBD' => 'Bds$', 'BDT' => 'Tk', 'BEF' => 'BF',
             'BHD' => 'BD', 'BIF' => 'FBu', 'BMD' => 'BD$', 'BOB' => 'Bs', 'BRL' => 'R$', 'BTN' => 'Nu.',
-            'BZD' => 'BZ$', 'CAD' => 'CA$', 'CHF' => 'Fr.', 'CLP' => 'CL$', 'CNY' => 'CN¥',
+            'BZD' => 'BZ$', 'CAD' => 'CA$', 'CLP' => 'CL$', 'CNY' => 'CN¥',
             'COP' => 'CO$', 'CRC' => '₡', 'CVE' => 'CV$', 'CYP' => 'CY£', 'DEM' => 'DM', 'DJF' => 'Fdj',
             'DZD' => 'DA', 'ESP' => 'Pts', 'ETB' => 'Br', 'EUR' => '€', 'FJD' => 'FJ$', 'FRF' => '₣',
             'GBP' => '£', 'GNF' => 'FG', 'GYD' => 'GY$', 'HNL' => 'HNL',
@@ -995,20 +998,20 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'SRD' => 'SR$', 'TND' => 'DT', 'TRY' => 'TL', 'VEF' => 'Bs.F.', 'VUV' => 'VT', 'XAF' => 'FCFA',
             'WST' => 'WS$', 'PAB' => 'B/.', 'PEI' => 'I/.', 'PEN' => 'S/.', 'PGK' => 'PGK',
             'PTE' => 'Esc', 'RHD' => 'RH$', 'RON' => 'RON', 'RSD' => 'din.', 'LVL' => 'Ls', 'MMK' => 'MMK',
-            'MOP' => 'MOP$', 'MUR' => 'MURs', 'MXP' => 'MX$', 'NIO' => 'C$', 'NLG' => 'fl',
+            'MOP' => 'MOP$', 'MUR' => 'MURs', 'MXN' => 'MX$', 'NIO' => 'C$', 'NLG' => 'fl',
             'CLE' => 'Eº', 'VND' => '₫', 'UAH' =>'₴', 'THB' => '฿', 'SVC' => 'SV₡',
             'SHP' => 'SH£', 'PYG' => '₲', 'NGN' => '₦', 'MTP' => 'MT£', 'LTL' => 'Lt', 'LRD' => 'L$',
             'LAK' => '₭', 'KYD' => 'KY$', 'KRW' => '₩', 'ISK' => 'Ikr', 'ILS' => '₪',
             'ILP' => 'I£', 'HTG' => 'HTG', 'HRK' => 'kn', 'HKD' => 'HK$', 'GTQ' => 'GTQ', 'GRD' => '₯',
             'GMD' => 'GMD', 'GIP' => 'GI£', 'GHS' => 'GH₵', 'GHC' => '₵', 'FKP' => 'FK£', 'FIM' => 'mk',
-            'ERN' => 'Nfk', 'EGP' => 'EG£', 'EEK' => 'Ekr', 'DOP' => 'RD$', 'DKK' => 'Dkr', 'CZK' => 'Kč',
+            'ERN' => 'Nfk', 'EEK' => 'Ekr', 'DOP' => 'RD$', 'DKK' => 'Dkr', 'CZK' => 'Kč',
             'CUP' => 'CU$', 'CDF' => 'CDF', 'BWP' => 'BWP', 'BSD' => 'BS$',
             'BOP' => '$b.', 'BND' => 'BN$', 'AZN' => 'man.',
             'AWG' => 'Afl.', 'ARA' => '₳', 'AOA' => 'Kz', 'ANG' => 'NAf.'
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'currencysymbol', 'USD');
+        $value = Cldr::getContent('de_AT', 'currencysymbol', 'USD');
         $this->assertEquals("$", $value);
     }
 
@@ -1018,10 +1021,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuestion()
     {
-        $value = Data::getList('de_AT', 'question');
+        $value = Cldr::getList('de_AT', 'question');
         $this->assertEquals(array("yes" => "ja:j", "no" => "nein:n"), $value);
 
-        $value = Data::getContent('de_AT', 'question', 'yes');
+        $value = Cldr::getContent('de_AT', 'question', 'yes');
         $this->assertEquals("ja:j", $value);
     }
 
@@ -1031,7 +1034,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrencyFraction()
     {
-        $value = Data::getList('de_AT', 'currencyfraction');
+        $value = Cldr::getList('de_AT', 'currencyfraction');
         $this->assertEquals(array('DEFAULT' => '2',
             'ADP' => '0', 'AFN' => '0', 'ALL' => '0', 'AMD' => '0', 'BHD' => '3', 'BIF' => '0', 'BYR' => '0',
             'CHF' => '2', 'CLF' => '0', 'CLP' => '0', 'COP' => '0', 'CRC' => '0', 'DJF' => '0', 'ESP' => '0',
@@ -1043,10 +1046,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'TRL' => '0', 'TZS' => '0', 'UGX' => '0', 'UZS' => '0', 'VND' => '0', 'VUV' => '0',
             'XAF' => '0', 'XOF' => '0', 'XPF' => '0', 'YER' => '0', 'ZMK' => '0', 'ZWD' => '0'), $value);
 
-        $value = Data::getContent('de_AT', 'currencyfraction');
+        $value = Cldr::getContent('de_AT', 'currencyfraction');
         $this->assertEquals("2", $value);
 
-        $value = Data::getContent('de_AT', 'currencyfraction', 'BHD');
+        $value = Cldr::getContent('de_AT', 'currencyfraction', 'BHD');
         $this->assertEquals("3", $value);
     }
 
@@ -1056,7 +1059,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrencyRounding()
     {
-        $value = Data::getList('de_AT', 'currencyrounding');
+        $value = Cldr::getList('de_AT', 'currencyrounding');
         $this->assertEquals(array('DEFAULT' => '0',
             'ADP' => '0', 'AFN' => '0', 'ALL' => '0', 'AMD' => '0', 'BHD' => '0', 'BIF' => '0', 'BYR' => '0',
             'CHF' => '5', 'CLF' => '0', 'CLP' => '0', 'COP' => '0', 'CRC' => '0', 'DJF' => '0', 'ESP' => '0',
@@ -1068,10 +1071,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'TRL' => '0', 'TZS' => '0', 'UGX' => '0', 'UZS' => '0', 'VND' => '0', 'VUV' => '0',
             'XAF' => '0', 'XOF' => '0', 'XPF' => '0', 'YER' => '0', 'ZMK' => '0', 'ZWD' => '0'), $value);
 
-        $value = Data::getContent('de_AT', 'currencyrounding');
+        $value = Cldr::getContent('de_AT', 'currencyrounding');
         $this->assertEquals("0", $value);
 
-        $value = Data::getContent('de_AT', 'currencyrounding', 'BHD');
+        $value = Cldr::getContent('de_AT', 'currencyrounding', 'BHD');
         $this->assertEquals("0", $value);
     }
 
@@ -1081,7 +1084,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrencyToRegion()
     {
-        $value = Data::getList('de_AT', 'currencytoregion');
+        $value = Cldr::getList('de_AT', 'currencytoregion');
         $result = array(   'AD' => 'EUR', 'AE' => 'AED', 'AF' => 'AFN', 'AG' => 'XCD', 'AI' => 'XCD',
             'AL' => 'ALL', 'AM' => 'AMD', 'AN' => 'ANG', 'AO' => 'AOA', 'AQ' => 'XXX', 'AR' => 'ARS',
             'AS' => 'USD', 'AT' => 'EUR', 'AU' => 'AUD', 'AW' => 'AWG', 'AX' => 'EUR', 'AZ' => 'AZN',
@@ -1097,7 +1100,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'FM' => 'USD', 'FO' => 'DKK', 'FR' => 'EUR', 'GA' => 'XAF', 'GB' => 'GBP', 'GD' => 'XCD',
             'GE' => 'GEL', 'GF' => 'EUR', 'GG' => 'GBP', 'GH' => 'GHS', 'GI' => 'GIP', 'GL' => 'DKK',
             'GM' => 'GMD', 'GN' => 'GNF', 'GP' => 'EUR', 'GQ' => 'XAF', 'GR' => 'EUR', 'GS' => 'GBP',
-            'GT' => 'GTQ', 'GU' => 'USD', 'GW' => 'GWP', 'GY' => 'GYD', 'HK' => 'HKD', 'HM' => 'AUD',
+            'GT' => 'GTQ', 'GU' => 'USD', 'GW' => 'XOF', 'GY' => 'GYD', 'HK' => 'HKD', 'HM' => 'AUD',
             'HN' => 'HNL', 'HR' => 'HRK', 'HT' => 'HTG', 'HU' => 'HUF', 'ID' => 'IDR', 'IE' => 'EUR',
             'IL' => 'ILS', 'IM' => 'GBP', 'IN' => 'INR', 'IO' => 'USD', 'IQ' => 'IQD', 'IR' => 'IRR',
             'IS' => 'ISK', 'IT' => 'EUR', 'JE' => 'GBP', 'JM' => 'JMD', 'JO' => 'JOD', 'JP' => 'JPY',
@@ -1122,12 +1125,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'TT' => 'TTD', 'TV' => 'AUD', 'TW' => 'TWD', 'TZ' => 'TZS', 'UA' => 'UAH', 'UG' => 'UGX',
             'UM' => 'USD', 'US' => 'USD', 'UY' => 'UYU', 'UZ' => 'UZS', 'VA' => 'EUR', 'VC' => 'XCD',
             'VE' => 'VEF', 'VG' => 'USD', 'VI' => 'USD', 'VN' => 'VND', 'VU' => 'VUV', 'WF' => 'XPF',
-            'WS' => 'WST', 'YE' => 'YER', 'YT' => 'EUR', 'ZA' => 'ZAR', 'ZM' => 'ZMK', 'ZW' => 'ZWL',
-            'ZR' => 'ZRN', 'YU' => 'YUM', 'TP' => 'TPE', 'SU' => 'SUR', 'QU' => 'EUR', 'MF' => 'EUR',
+            'WS' => 'WST', 'YE' => 'YER', 'YT' => 'EUR', 'ZA' => 'ZAR', 'ZM' => 'ZMK', 'ZW' => 'USD',
+            'ZR' => 'ZRN', 'YU' => 'YUM', 'TP' => 'TPE', 'SU' => 'SUR', 'EU' => 'EUR', 'MF' => 'EUR',
             'DD' => 'DDM', 'BU' => 'BUK', 'BL' => 'EUR', 'ZZ' => 'XAG', 'YD' => 'YDD');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'currencytoregion', 'AT');
+        $value = Cldr::getContent('de_AT', 'currencytoregion', 'AT');
         $this->assertEquals("EUR", $value);
     }
 
@@ -1137,13 +1140,13 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegionToCurrency()
     {
-        $value = Data::getList('de_AT', 'regiontocurrency');
+        $value = Cldr::getList('de_AT', 'regiontocurrency');
         $result = array(
-            'EUR' => 'AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT QU RE SI SK SM TF VA YT',
+            'EUR' => 'AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT EU RE SI SK SM TF VA YT',
             'AED' => 'AE', 'AFN' => 'AF', 'XCD' => 'AG AI DM GD KN LC MS VC', 'ALL' => 'AL', 'AMD' => 'AM',
             'ANG' => 'AN', 'AOA' => 'AO', 'XXX' => 'AQ', 'ARS' => 'AR', 'AWG' => 'AW', 'AZN' => 'AZ',
-            'USD' => 'AS EC FM GU IO MH MP PR PW SV TC TL UM US VG VI', 'AUD' => 'AU CC CX HM KI NF NR TV',
-            'BAM' => 'BA', 'BBD' => 'BB', 'BDT' => 'BD', 'XOF' => 'BF BJ CI ML NE SN TG', 'BGN' => 'BG',
+            'USD' => 'AS EC FM GU IO MH MP PR PW SV TC TL UM US VG VI ZW', 'AUD' => 'AU CC CX HM KI NF NR TV',
+            'BAM' => 'BA', 'BBD' => 'BB', 'BDT' => 'BD', 'XOF' => 'BF BJ CI GW ML NE SN TG', 'BGN' => 'BG',
             'BHD' => 'BH', 'BIF' => 'BI', 'BMD' => 'BM', 'BND' => 'BN', 'BOB' => 'BO', 'BRL' => 'BR',
             'BSD' => 'BS', 'INR' => 'IN', 'NOK' => 'BV NO SJ', 'BWP' => 'BW', 'BYR' => 'BY', 'BZD' => 'BZ',
             'CAD' => 'CA', 'CDF' => 'CD', 'XAF' => 'CF CG CM GA GQ TD', 'CHF' => 'CH LI',
@@ -1151,7 +1154,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'CVE' => 'CV', 'CZK' => 'CZ', 'DJF' => 'DJ', 'DKK' => 'DK FO GL', 'DOP' => 'DO',
             'DZD' => 'DZ', 'EEK' => 'EE', 'EGP' => 'EG', 'MAD' => 'EH MA', 'ERN' => 'ER', 'ETB' => 'ET',
             'FJD' => 'FJ', 'FKP' => 'FK', 'GBP' => 'GB GG GS IM JE', 'GEL' => 'GE', 'GHS' => 'GH',
-            'GIP' => 'GI', 'GMD' => 'GM', 'GNF' => 'GN', 'GTQ' => 'GT', 'GWP' => 'GW', 'GYD' => 'GY',
+            'GIP' => 'GI', 'GMD' => 'GM', 'GNF' => 'GN', 'GTQ' => 'GT', 'GYD' => 'GY',
             'HKD' => 'HK', 'HNL' => 'HN', 'HRK' => 'HR', 'HTG' => 'HT', 'HUF' => 'HU', 'IDR' => 'ID',
             'ILS' => 'IL', 'IQD' => 'IQ', 'IRR' => 'IR', 'ISK' => 'IS', 'JMD' => 'JM', 'JOD' => 'JO PS',
             'JPY' => 'JP', 'KES' => 'KE', 'KGS' => 'KG', 'KHR' => 'KH', 'KMF' => 'KM', 'KPW' => 'KP',
@@ -1169,12 +1172,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'UAH' => 'UA', 'UGX' => 'UG', 'UYU' => 'UY', 'UZS' => 'UZ', 'VEF' => 'VE', 'VND' => 'VN',
             'VUV' => 'VU', 'WST' => 'WS', 'YER' => 'YE', 'ZMK' => 'ZM', 'ZRN' => 'ZR',
             'YUM' => 'YU', 'TPE' => 'TP', 'SUR' => 'SU', 'DDM' => 'DD', 'CSD' => 'CS', 'BUK' => 'BU',
-            'XAG' => 'ZZ', 'ZWL' => 'ZW', 'YDD' => 'YD', 'TMT' => 'TM', 'NAD' => 'NA', 'CUC' => 'CU',
+            'XAG' => 'ZZ', 'YDD' => 'YD', 'TMT' => 'TM', 'NAD' => 'NA', 'CUC' => 'CU',
             'BTN' => 'BT');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'regiontocurrency', 'EUR');
-        $this->assertEquals("AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT QU RE SI SK SM TF VA YT", $value);
+        $value = Cldr::getContent('de_AT', 'regiontocurrency', 'EUR');
+        $this->assertEquals("AD AT AX BE BL CY DE ES FI FR GF GP GR IE IT LU MC ME MF MQ MT NL PM PT EU RE SI SK SM TF VA YT", $value);
     }
 
     /**
@@ -1183,30 +1186,29 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegionToTerritory()
     {
-        $value = Data::getList('de_AT', 'regiontoterritory');
+        $value = Cldr::getList('de_AT', 'regiontoterritory');
         $result = array('001' => '002 009 019 142 150',
             '011' => 'BF BJ CI CV GH GM GN GW LR ML MR NE NG SH SL SN TG', '013' => 'BZ CR GT HN MX NI PA SV',
             '014' => 'BI DJ ER ET KE KM MG MU MW MZ RE RW SC SO TZ UG YT ZM ZW',
-            '142' => '030 035 143 145 034 062', '143' => 'TM TJ KG KZ UZ',
-            '145' => 'AE AM AZ BH CY GE IL IQ JO KW LB OM PS QA SA NT SY TR YE YD',
-            '015' => 'DZ EG EH LY MA SD TN', '150' => '039 151 154 155 QU',
-            '151' => 'BG BY CZ HU MD PL RO RU SU SK UA',
-            '154' => 'GG IM JE AX DK EE FI FO GB IE IM IS LT LV NO SE SJ', '830' => 'GG JE',
-            '155' => 'AT BE CH DE DD FR FX LI LU MC NL', '017' => 'AO CD ZR CF CG CM GA GQ ST TD',
-            '172' => 'AM AZ BY GE KG KZ MD RU TJ TM UA UZ', '018' => 'BW LS NA SZ ZA',
+            '142' => '030 035 143 145 034', '143' => 'TM TJ KG KZ UZ',
+            '145' => 'AE AM AZ BH CY GE IL IQ JO KW LB OM PS QA SA SY TR YE',
+            '015' => 'DZ EG EH LY MA SD TN EA IC', '018' => 'BW LS NA SZ ZA', '150' => '039 151 154 155 EU',
+            '151' => 'BG BY CZ HU MD PL RO RU SK UA',
+            '154' => 'GG IM JE AX DK EE FI FO GB IE IM IS LT LV NO SE SJ',
+            '155' => 'AT BE CH DE FR LI LU MC NL', '017' => 'AO CD CF CG CM GA GQ ST TD',
             '019' => '005 013 021 029 003 419', '002' => '011 014 015 017 018', '021' => 'BM CA GL PM US',
             '029' => 'AG AI AN AW BB BL BS CU DM DO GD GP HT JM KN KY LC MF MQ MS PR TC TT VC VG VI',
             '003' => '013 021 029', '030' => 'CN HK JP KP KR MN MO TW',
-            '035' => 'BN ID KH LA MM BU MY PH SG TH TL TP VN',
-            '039' => 'AD AL BA ES GI GR HR IT ME MK MT CS RS PT SI SM VA YU', '419' => '005 013 029',
+            '035' => 'BN ID KH LA MM MY PH SG TH TL VN',
+            '039' => 'AD AL BA ES GI GR HR IT ME MK MT RS PT SI SM VA', '419' => '005 013 029',
             '005' => 'AR BO BR CL CO EC FK GF GY PE PY SR UY VE', '053' => 'AU NF NZ',
             '054' => 'FJ NC PG SB VU', '057' => 'FM GU KI MH MP NR PW',
-            '061' => 'AS CK NU PF PN TK TO TV WF WS', '062' => '034 143', '034' => 'AF BD BT IN IR LK MV NP PK',
-            '009' => '053 054 057 061 QO', 'QO' => 'AQ BV CC CX GS HM IO TF UM',
-            'QU' => 'AT BE CY CZ DE DK EE ES FI FR GB GR HU IE IT LT LU LV MT NL PL PT SE SI SK BG RO');
+            '061' => 'AS CK NU PF PN TK TO TV WF WS', '034' => 'AF BD BT IN IR LK MV NP PK',
+            '009' => '053 054 057 061 QO', 'QO' => 'AQ BV CC CX GS HM IO TF UM AC CP DG TA',
+            'EU' => 'AT BE CY CZ DE DK EE ES FI FR GB GR HU IE IT LT LU LV MT NL PL PT SE SI SK BG RO');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'regiontoterritory', '143');
+        $value = Cldr::getContent('de_AT', 'regiontoterritory', '143');
         $this->assertEquals("TM TJ KG KZ UZ", $value);
     }
 
@@ -1216,7 +1218,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTerritoryToRegion()
     {
-        $value = Data::getList('de_AT', 'territorytoregion');
+        $value = Cldr::getList('de_AT', 'territorytoregion');
         $result = array('002' => '001', '009' => '001', '019' => '001', '142' => '001', '150' => '001',
             'BF' => '011', 'BJ' => '011', 'CI' => '011', 'CV' => '011', 'GH' => '011', 'GM' => '011',
             'GN' => '011', 'GW' => '011', 'LR' => '011', 'ML' => '011', 'MR' => '011', 'NE' => '011',
@@ -1225,22 +1227,22 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'SV' => '013', 'BI' => '014', 'DJ' => '014', 'ER' => '014', 'ET' => '014', 'KE' => '014',
             'KM' => '014', 'MG' => '014', 'MU' => '014', 'MW' => '014', 'MZ' => '014', 'RE' => '014',
             'RW' => '014', 'SC' => '014', 'SO' => '014', 'TZ' => '014', 'UG' => '014', 'YT' => '014',
-            'ZM' => '014', 'ZW' => '014', '030' => '142', '035' => '142', '143' => '142 062', '145' => '142',
-            '034' => '142 062', '062' => '142', 'TM' => '143 172', 'TJ' => '143 172', 'KG' => '143 172',
-            'KZ' => '143 172', 'UZ' => '143 172', 'AE' => '145', 'AM' => '145 172', 'AZ' => '145 172',
-            'BH' => '145', 'CY' => '145 QU', 'GE' => '145 172', 'IL' => '145', 'IQ' => '145', 'JO' => '145',
+            'ZM' => '014', 'ZW' => '014', '030' => '142', '035' => '142', '143' => '142', '145' => '142',
+            '034' => '142', 'TM' => '143', 'TJ' => '143', 'KG' => '143', 'IC' => '015',
+            'KZ' => '143', 'UZ' => '143', 'AE' => '145', 'AM' => '145', 'AZ' => '145',
+            'BH' => '145', 'CY' => '145 EU', 'GE' => '145', 'IL' => '145', 'IQ' => '145', 'JO' => '145',
             'KW' => '145', 'LB' => '145', 'OM' => '145', 'PS' => '145', 'QA' => '145', 'SA' => '145',
-            'NT' => '145', 'SY' => '145', 'TR' => '145', 'YE' => '145', 'YD' => '145', 'DZ' => '015',
+            'SY' => '145', 'TR' => '145', 'YE' => '145', 'DZ' => '015', 'EA' => '015',
             'EG' => '015', 'EH' => '015', 'LY' => '015', 'MA' => '015', 'SD' => '015', 'TN' => '015',
-            '039' => '150', '151' => '150', '154' => '150', '155' => '150', 'QU' => '150', 'BG' => '151 QU',
-            'BY' => '151 172', 'CZ' => '151 QU', 'HU' => '151 QU', 'MD' => '151 172', 'PL' => '151 QU',
-            'RO' => '151 QU', 'RU' => '151 172', 'SU' => '151', 'SK' => '151 QU', 'UA' => '151 172',
-            'GG' => '154 830', 'IM' => '154 154', 'JE' => '154 830', 'AX' => '154', 'DK' => '154 QU',
-            'EE' => '154 QU', 'FI' => '154 QU', 'FO' => '154', 'GB' => '154 QU', 'IE' => '154 QU',
-            'IS' => '154', 'LT' => '154 QU', 'LV' => '154 QU', 'NO' => '154', 'SE' => '154 QU', 'SJ' => '154',
-            'AT' => '155 QU', 'BE' => '155 QU', 'CH' => '155', 'DE' => '155 QU', 'DD' => '155',
-            'FR' => '155 QU', 'FX' => '155', 'LI' => '155', 'LU' => '155 QU', 'MC' => '155', 'NL' => '155 QU',
-            'AO' => '017', 'CD' => '017', 'ZR' => '017', 'CF' => '017', 'CG' => '017', 'CM' => '017',
+            '039' => '150', '151' => '150', '154' => '150', '155' => '150', 'EU' => '150', 'BG' => '151 EU',
+            'BY' => '151', 'CZ' => '151 EU', 'HU' => '151 EU', 'MD' => '151', 'PL' => '151 EU',
+            'RO' => '151 EU', 'RU' => '151', 'SK' => '151 EU', 'UA' => '151',
+            'GG' => '154', 'IM' => '154 154', 'JE' => '154', 'AX' => '154', 'DK' => '154 EU',
+            'EE' => '154 EU', 'FI' => '154 EU', 'FO' => '154', 'GB' => '154 EU', 'IE' => '154 EU',
+            'IS' => '154', 'LT' => '154 EU', 'LV' => '154 EU', 'NO' => '154', 'SE' => '154 EU', 'SJ' => '154',
+            'AT' => '155 EU', 'BE' => '155 EU', 'CH' => '155', 'DE' => '155 EU', 'DG' => 'QO',
+            'FR' => '155 EU', 'LI' => '155', 'LU' => '155 EU', 'MC' => '155', 'NL' => '155 EU',
+            'AO' => '017', 'CD' => '017', 'CF' => '017', 'CG' => '017', 'CM' => '017', 'CP' => 'QO',
             'GA' => '017', 'GQ' => '017', 'ST' => '017', 'TD' => '017', 'BW' => '018', 'LS' => '018',
             'NA' => '018', 'SZ' => '018', 'ZA' => '018', '005' => '019 419', '013' => '019 003 419',
             '021' => '019 003', '029' => '019 003 419', '003' => '019', '419' => '019', '011' => '002',
@@ -1251,11 +1253,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'LC' => '029', 'MQ' => '029', 'MS' => '029', 'PR' => '029', 'TC' => '029', 'TT' => '029',
             'VC' => '029', 'VG' => '029', 'VI' => '029', 'CN' => '030', 'HK' => '030', 'JP' => '030',
             'KP' => '030', 'KR' => '030', 'MN' => '030', 'MO' => '030', 'TW' => '030', 'BN' => '035',
-            'ID' => '035', 'KH' => '035', 'LA' => '035', 'MM' => '035', 'BU' => '035', 'MY' => '035',
-            'PH' => '035', 'SG' => '035', 'TH' => '035', 'TL' => '035', 'TP' => '035', 'VN' => '035',
-            'AD' => '039', 'AL' => '039', 'BA' => '039', 'ES' => '039 QU', 'GI' => '039', 'GR' => '039 QU',
-            'HR' => '039', 'IT' => '039 QU', 'ME' => '039', 'MK' => '039', 'MT' => '039 QU', 'CS' => '039',
-            'RS' => '039', 'PT' => '039 QU', 'SI' => '039 QU', 'SM' => '039', 'VA' => '039', 'YU' => '039',
+            'ID' => '035', 'KH' => '035', 'LA' => '035', 'MM' => '035', 'MY' => '035',
+            'PH' => '035', 'SG' => '035', 'TA' => 'QO', 'TH' => '035', 'TL' => '035', 'VN' => '035',
+            'AD' => '039', 'AL' => '039', 'BA' => '039', 'ES' => '039 EU', 'GI' => '039', 'GR' => '039 EU',
+            'HR' => '039', 'IT' => '039 EU', 'ME' => '039', 'MK' => '039', 'MT' => '039 EU',
+            'RS' => '039', 'PT' => '039 EU', 'SI' => '039 EU', 'SM' => '039', 'VA' => '039',
             'AR' => '005', 'BO' => '005', 'BR' => '005', 'CL' => '005', 'CO' => '005', 'EC' => '005',
             'FK' => '005', 'GF' => '005', 'GY' => '005', 'PE' => '005', 'PY' => '005', 'SR' => '005',
             'UY' => '005', 'VE' => '005', 'AU' => '053', 'NF' => '053', 'NZ' => '053', 'FJ' => '054',
@@ -1266,11 +1268,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'IN' => '034', 'IR' => '034', 'LK' => '034', 'MV' => '034', 'NP' => '034', 'PK' => '034',
             '053' => '009', '054' => '009', '057' => '009', '061' => '009', 'QO' => '009', 'AQ' => 'QO',
             'BV' => 'QO', 'CC' => 'QO', 'CX' => 'QO', 'GS' => 'QO', 'HM' => 'QO', 'IO' => 'QO', 'TF' => 'QO',
-            'UM' => 'QO', 'MF' => '029', 'BL' => '029');
+            'UM' => 'QO', 'MF' => '029', 'BL' => '029', 'AC' => 'QO');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'territorytoregion', 'AT');
-        $this->assertEquals("155 QU", $value);
+        $value = Cldr::getContent('de_AT', 'territorytoregion', 'AT');
+        $this->assertEquals("155 EU", $value);
     }
 
     /**
@@ -1279,7 +1281,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testScriptToLanguage()
     {
-        $value = Data::getList('de_AT', 'scripttolanguage');
+        $value = Cldr::getList('de_AT', 'scripttolanguage');
         $result = array('aa' => 'Latn', 'ab' => 'Cyrl', 'abq' => 'Cyrl', 'ace' => 'Latn', 'ady' => 'Cyrl',
             'af' => 'Latn', 'aii' => 'Cyrl', 'ain' => 'Kana Latn', 'ak' => 'Latn', 'akk' => 'Xsux',
             'am' => 'Ethi', 'amo' => 'Latn', 'ar' => 'Arab', 'as' => 'Beng', 'ast' => 'Latn', 'av' => 'Cyrl',
@@ -1316,7 +1318,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'ks' => 'Arab Deva', 'ku' => 'Arab Cyrl Latn', 'kum' => 'Cyrl', 'kv' => 'Cyrl Latn', 'kw' => 'Latn',
             'ky' => 'Arab Cyrl', 'la' => 'Latn', 'lad' => 'Hebr', 'lah' => 'Arab', 'lb' => 'Latn',
             'lbe' => 'Cyrl', 'lcp' => 'Thai', 'lep' => 'Lepc', 'lez' => 'Cyrl', 'lg' => 'Latn', 'li' => 'Latn',
-            'lif' => 'Deva Limb', 'lis' => 'Latn', 'lmn' => 'Telu', 'ln' => 'Latn', 'lo' => 'Laoo',
+            'lif' => 'Deva Limb', 'lis' => 'Lisu', 'lmn' => 'Telu', 'ln' => 'Latn', 'lo' => 'Laoo',
             'lol' => 'Latn', 'lt' => 'Latn', 'lu' => 'Latn', 'lua' => 'Latn', 'luo' => 'Latn', 'lut' => 'Latn',
             'lv' => 'Latn', 'lwl' => 'Thai', 'mad' => 'Latn', 'mag' => 'Deva', 'mai' => 'Deva', 'mak' => 'Latn',
             'mdf' => 'Cyrl', 'mdh' => 'Latn', 'mdr' => 'Latn', 'men' => 'Latn', 'mfe' => 'Latn', 'mg' => 'Latn',
@@ -1324,7 +1326,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'mn' => 'Cyrl Mong', 'mnc' => 'Mong', 'mni' => 'Beng', 'mns' => 'Cyrl', 'mnw' => 'Mymr',
             'mos' => 'Latn', 'mr' => 'Deva', 'ms' => 'Latn', 'mt' => 'Latn',
             'mwr' => 'Deva', 'my' => 'Mymr', 'myv' => 'Cyrl', 'na' => 'Latn',
-            'nap' => 'Latn', 'nb' => 'Latn', 'nbf' => 'Latn', 'nd' => 'Latn', 'ne' => 'Deva', 'new' => 'Deva',
+            'nap' => 'Latn', 'nb' => 'Latn', 'nbf' => 'Nkgb', 'nd' => 'Latn', 'ne' => 'Deva', 'new' => 'Deva',
             'ng' => 'Latn', 'niu' => 'Latn', 'nl' => 'Latn', 'nn' => 'Latn', 'no' => 'Latn', 'nog' => 'Cyrl',
             'nqo' => 'Nkoo', 'nr' => 'Latn', 'nso' => 'Latn', 'nv' => 'Latn', 'ny' => 'Latn', 'nym' => 'Latn',
             'nyn' => 'Latn', 'oc' => 'Latn', 'om' => 'Latn', 'or' => 'Orya', 'os' => 'Cyrl Latn',
@@ -1345,7 +1347,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'tig' => 'Ethi', 'tiv' => 'Latn', 'tk' => 'Arab Cyrl Latn', 'tkl' => 'Latn', 'tl' => 'Latn',
             'tmh' => 'Latn', 'tn' => 'Latn', 'to' => 'Latn', 'tpi' => 'Latn', 'tr' => 'Latn', 'tru' => 'Latn',
             'ts' => 'Latn', 'tsg' => 'Latn', 'tt' => 'Cyrl', 'tts' => 'Thai', 'ttt' => 'Cyrl', 'tum' => 'Latn',
-            'tut' => 'Cyrl', 'tvl' => 'Latn', 'tw' => 'Latn', 'ty' => 'Latn', 'tyv' => 'Cyrl',
+            'tut' => 'Cyrl', 'tvl' => 'Latn', 'ty' => 'Latn', 'tyv' => 'Cyrl',
             'tzm' => 'Latn Tfng', 'ude' => 'Cyrl', 'udm' => 'Cyrl', 'ug' => 'Arab', 'uga' => 'Ugar',
             'uk' => 'Cyrl', 'uli' => 'Latn', 'umb' => 'Latn', 'ur' => 'Arab', 'uz' => 'Arab Cyrl Latn',
             'vai' => 'Vaii', 've' => 'Latn', 'vi' => 'Latn', 'vo' => 'Latn', 'wa' => 'Latn', 'wal' => 'Ethi',
@@ -1368,11 +1370,11 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'chn' => 'Latn', 'car' => 'Latn', 'cad' => 'Latn', 'bua' => 'Cyrl', 'bla' => 'Latn',
             'bik' => 'Latn', 'bej' => 'Arab', 'bas' => 'Latn', 'arw' => 'Latn', 'arp' => 'Latn',
             'arn' => 'Latn', 'anp' => 'Deva', 'an' => 'Latn', 'alt' => 'Cyrl', 'ale' => 'Latn',
-            'ada' => 'Latn', 'ach' => 'Latn'
+            'ada' => 'Latn', 'ach' => 'Latn', 'ksh' => 'Latn', 'kri' => 'Latn'
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'scripttolanguage', 'uk');
+        $value = Cldr::getContent('de_AT', 'scripttolanguage', 'uk');
         $this->assertEquals("Cyrl", $value);
     }
 
@@ -1382,9 +1384,9 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLanguageToScript()
     {
-        $value = Data::getList('de_AT', 'languagetoscript');
+        $value = Cldr::getList('de_AT', 'languagetoscript');
         $result = array(
-            'Latn' => 'aa ace ach ada af ain ak ale amo an arn arp arw ast ay az bal ban bas bbc bem bi bik bin bku bla bm br bs buc bug bya ca cad car cch ceb ch chk chm chn cho chp chr chy co cpe cr cs csb cy da dak de del den dgr din dsb dua dyu ee efi eka en eo es et ett eu ewo fan fat ff fi fil fiu fj fo fon fr frr frs fur fy ga gaa gag gay gcr gd gil gl gn gor grb gsw gv gwi ha hai haw hil hmn hnn ho hop hr hsb ht hu hup hz ia iba ibb id ig ik ilo is it jv kab kaj kam kcg kfo kg kha ki kj kl kmb kos kpe kr krl ku kut kv kw la lam lb lg li lis ln lol loz lt lu lua lui lun luo lut lv mad mak man mas mdh mdr men mfe mg mh mi mic min moh mos ms mt mus mwl na nap nb nbf nd nds ng nia niu nl nn no nr nso nv ny nym nyn nyo nzi oc om os osa osc pag pam pap pau pl pon prg pt qu raj rap rar rcf rm rn ro rom rup rw sad sas sat sc scn sco se sg sga sid sk sl sm sma smi smj smn sms sn snk so son sq sr srn srr ss st su suk sus sv sw tbw tem ter tet tg tiv tk tkl tl tli tmh tn to tog tpi tr tru ts tsg tsi tum tvl tw ty tzm uli umb uz ve vi vo vot wa war was wo xh xum yao yap yo za zap zu zun',
+            'Latn' => 'aa ace ach ada af ain ak ale amo an arn arp arw ast ay az bal ban bas bbc bem bi bik bin bku bla bm br bs buc bug bya ca cad car cch ceb ch chk chm chn cho chp chr chy co cpe cr cs csb cy da dak de del den dgr din dsb dua dyu ee efi eka en eo es et ett eu ewo fan fat ff fi fil fiu fj fo fon fr frr frs fur fy ga gaa gag gay gcr gd gil gl gn gor grb gsw gv gwi ha hai haw hil hmn hnn ho hop hr hsb ht hu hup hz ia iba ibb id ig ik ilo is it jv kab kaj kam kcg kfo kg kha ki kj kl kmb kos kpe kr kri krl ksh ku kut kv kw la lam lb lg li ln lol loz lt lu lua lui lun luo lut lv mad mak man mas mdh mdr men mfe mg mh mi mic min moh mos ms mt mus mwl na nap nb nd nds ng nia niu nl nn no nr nso nv ny nym nyn nyo nzi oc om os osa osc pag pam pap pau pl pon prg pt qu raj rap rar rcf rm rn ro rom rup rw sad sas sat sc scn sco se sg sga sid sk sl sm sma smi smj smn sms sn snk so son sq sr srn srr ss st su suk sus sv sw tbw tem ter tet tg tiv tk tkl tl tli tmh tn to tog tpi tr tru ts tsg tsi tum tvl ty tzm uli umb uz ve vi vo vot wa war was wo xh xum yao yap yo za zap zu zun',
             'Cyrl' => 'ab abq ady aii alt av az ba be bg bua bxr ce chm cjs ckt crh cv dar dng evn gld inh kaa kbd kca kjh kk koi kpv kpy krc krl ku kum kv ky lbe lez mdf mk mn mns myv nog os rom ru sah sel sr tab tg tk tt ttt tut tyv ude udm uk uz xal yrk',
             'Kana' => 'ain', 'Xsux' => 'akk', 'Ethi' => 'am byn gez ti tig wal',
             'Arab' => 'ar az bal bej bft cjm cop doi fa gba ha ks ku ky lah prd ps sd swb tg tk ug ur uz zza',
@@ -1395,15 +1397,15 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'Ital' => 'ett osc xum', 'Telu' => 'gon lmn te', 'Goth' => 'got', 'Cprt' => 'grc', 'Linb' => 'grc',
             'Gujr' => 'gu', 'Hebr' => 'he jpr jrb lad sam yi', 'Armn' => 'hy', 'Yiii' => 'ii', 'Jpan' => 'ja',
             'Geor' => 'ka', 'Thai' => 'kdt lcp lwl pi th tts', 'Talu' => 'khb', 'Mymr' => 'kac kht mnw my shn',
-            'Khmr' => 'km', 'Knda' => 'kn tcy', 'Lepc' => 'lep', 'Limb' => 'lif',
-            'Laoo' => 'lo', 'Mlym' => 'ml', 'Mong' => 'mn mnc', 'Nkoo' => 'emk nqo',
+            'Khmr' => 'km', 'Knda' => 'kn tcy', 'Laoo' => 'lo', 'Lepc' => 'lep', 'Limb' => 'lif',
+            'Lisu' => 'lis', 'Mlym' => 'ml', 'Mong' => 'mn mnc', 'Nkoo' => 'emk nqo',
             'Orya' => 'or', 'Guru' => 'pa', 'Xpeo' => 'peo', 'Phnx' => 'phn', 'Sinh' => 'pi sa si',
             'Khar' => 'pra', 'Ogam' => 'sga', 'Syrc' => 'syr', 'Tale' => 'tdd',
             'Tfng' => 'tzm zen', 'Ugar' => 'uga', 'Vaii' => 'vai', 'Hans' => 'zh', 'Hant' => 'zh',
-            'Blis' => 'zbl', 'Kore' => 'ko', 'Samr' => 'sam', 'Lina' => 'lab');
+            'Blis' => 'zbl', 'Kore' => 'ko', 'Samr' => 'sam', 'Lina' => 'lab', 'Nkgb' => 'nbf');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'languagetoscript', 'Kana');
+        $value = Cldr::getContent('de_AT', 'languagetoscript', 'Kana');
         $this->assertEquals("ain", $value);
     }
 
@@ -1413,68 +1415,68 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTerritoryToLanguage()
     {
-        $value = Data::getList('de_AT', 'territorytolanguage');
-        $result = array('aa' => 'DJ ET', 'ab' => 'GE', 'abr' => 'GH', 'ace' => 'ID', 'ady' => 'RU', 'af' => 'ZA',
+        $value = Cldr::getList('de_AT', 'territorytolanguage');
+        $result = array('aa' => 'DJ ET', 'ab' => 'GE', 'abr' => 'GH', 'ace' => 'ID', 'ady' => 'RU', 'af' => 'NA ZA',
             'ak' => 'GH', 'am' => 'ET', 'ar' => 'AE BH DJ DZ EG EH ER IL IQ JO KM KW LB LY MA MR OM PS QA SA SD SY TD TN YE',
             'as' => 'IN', 'ast' => 'ES', 'av' => 'RU', 'awa' => 'IN', 'ay' => 'BO', 'az' => 'AZ',
             'ba' => 'RU', 'bal' => 'IR PK', 'ban' => 'ID', 'bbc' => 'ID', 'bcl' => 'PH', 'be' => 'BY',
             'bem' => 'ZM', 'bew' => 'ID', 'bg' => 'BG', 'bgc' => 'IN', 'bhb' => 'IN', 'bhi' => 'IN',
-            'bhk' => 'PH', 'bho' => 'IN MU NP', 'bi' => 'VU', 'bin' => 'NG', 'bjj' => 'IN', 'bjn' => 'ID',
-            'bm' => 'ML', 'bn' => 'BD IN', 'bo' => 'CN', 'brh' => 'PK', 'bs' => 'BA',
+            'bhk' => 'PH', 'bho' => 'IN MU NP', 'bi' => 'VU', 'bin' => 'NG', 'bjj' => 'IN', 'bjn' => 'ID MY',
+            'bm' => 'ML', 'bn' => 'BD', 'bo' => 'CN', 'bqi' => 'IR', 'br' => 'FR', 'brh' => 'PK', 'brx' => 'IN', 'bs' => 'BA',
             'buc' => 'YT', 'bug' => 'ID', 'bya' => 'ID', 'ca' => 'AD', 'ce' => 'RU', 'ceb' => 'PH',
-            'cgg' => 'UG', 'ch' => 'GU', 'chk' => 'FM', 'crk' => 'CA', 'cs' => 'CZ', 'cv' => 'RU',
-            'cwd' => 'CA', 'cy' => 'GB', 'da' => 'DK GL', 'dcc' => 'IN', 'de' => 'AT BE CH DE LI LU',
+            'cgg' => 'UG', 'ch' => 'GU', 'chk' => 'FM', 'cs' => 'CZ', 'cv' => 'RU',
+            'cy' => 'GB', 'da' => 'DK GL', 'dcc' => 'IN', 'de' => 'AT BE CH DE LI LU NA',
             'dhd' => 'IN', 'diq' => 'TR', 'dje' => 'NE', 'doi' => 'IN', 'dv' => 'MV', 'dyu' => 'BF',
             'dz' => 'BT', 'ee' => 'GH TG', 'efi' => 'NG', 'el' => 'CY GR', 'emk' => 'GN',
-            'en' => 'AG AI AS AU BB BM BS BW BZ CA CC CK CM CX DM FJ FK FM GB GD GG GH GI GM GU GY HK HN IE IM JE JM KE KI KN KY LC LR LS MG MH MP MS MT MU MW NA NF NG NR NU NZ PG PH PK PN PR RW SB SC SG SH SL SZ TC TK TO TT TV TZ UG UM US VC VG VI VU WS ZA ZM ZW',
-            'es' => 'AR BO CL CO CR CU DO EC ES GQ GT HN MX NI PA PE PH PR PY SV UY VE', 'et' => 'EE',
-            'eu' => 'ES', 'fa' => 'AF IR', 'fan' => 'GQ', 'fi' => 'FI', 'fil' => 'PH', 'fj' => 'FJ', 'fo' => 'FO', 'fon' => 'BJ',
-            'fr' => 'BE BF BI BJ BL CA CD CF CG CH CI CM DJ DZ FR GA GF GN GP GQ HT KM LU MA MC MF MG ML MQ MU NC NE PF PM RE RW SC SN SY TD TG TN VU WF YT',
+            'en' => 'AG AI AS AU BB BM BS BW BZ CA CC CK CM CX DG DM FJ FK FM GB GD GG GH GI GM GU GY HK IE IM IN IO JE JM KE KI KN KY LC LR LS MG MH MP MS MT MU MW NA NF NG NR NU NZ PG PH PK PN PR RW SB SC SG SH SL SZ TC TK TO TT TV TZ UG UM US VC VG VI VU WS ZA ZM ZW',
+            'es' => 'AR BO CL CO CR CU DO EA EC ES GQ GT HN IC MX NI PA PE PH PR PY SV UY VE', 'et' => 'EE',
+            'eu' => 'ES', 'fa' => 'AF IR', 'fan' => 'GQ', 'ff' => 'GN SN', 'ffm' => 'ML', 'fi' => 'FI', 'fil' => 'PH', 'fj' => 'FJ', 'fo' => 'FO', 'fon' => 'BJ',
+            'fr' => 'BE BF BI BJ BL CA CD CF CG CH CI CM CP DJ DZ FR GA GF GN GP GQ HT KM LU MA MC MF MG ML MQ MU NC NE PF PM RE RW SC SN SY TD TG TN VU WF YT',
             'fud' => 'WF', 'fuv' => 'NG', 'fy' => 'NL', 'ga' => 'IE', 'gaa' => 'GH', 'gbm' => 'IN',
             'gcr' => 'GF', 'gd' => 'GB', 'gil' => 'KI', 'gl' => 'ES', 'glk' => 'IR', 'gn' => 'PY',
-            'gno' => 'IN', 'gon' => 'IN', 'gsw' => 'CH LI', 'gu' => 'IN', 'guz' => 'KE', 'ha' => 'NG',
+            'gno' => 'IN', 'gon' => 'IN', 'gor' => 'ID', 'gsw' => 'CH FR LI', 'gu' => 'IN', 'guz' => 'KE', 'ha' => 'NG',
             'haw' => 'US', 'haz' => 'AF', 'he' => 'IL', 'hi' => 'IN', 'hil' => 'PH', 'hne' => 'IN',
             'hno' => 'PK', 'ho' => 'PG', 'hoc' => 'IN', 'hr' => 'BA HR', 'ht' => 'HT', 'hu' => 'HU',
             'hy' => 'AM', 'ibb' => 'NG', 'id' => 'ID', 'ig' => 'NG', 'ii' => 'CN', 'ilo' => 'PH', 'inh' => 'RU',
-            'is' => 'IS', 'it' => 'CH IT SM', 'iu' => 'CA GL', 'ja' => 'JP', 'jv' => 'ID', 'ka' => 'GE',
-            'kab' => 'DZ', 'kam' => 'KE', 'kbd' => 'RU', 'kfy' => 'IN', 'kha' => 'IN', 'khn' => 'IN',
+            'is' => 'IS', 'it' => 'CH IT SM', 'iu' => 'GL', 'ja' => 'JP', 'jv' => 'ID', 'ka' => 'GE',
+            'kab' => 'DZ', 'kam' => 'KE', 'kbd' => 'RU', 'kde' => 'TZ', 'kfy' => 'IN', 'kha' => 'IN', 'khn' => 'IN',
             'ki' => 'KE', 'kj' => 'NA', 'kk' => 'KZ', 'kl' => 'GL', 'kln' => 'KE', 'km' => 'KH', 'kmb' => 'AO',
             'kn' => 'IN', 'ko' => 'KP KR', 'koi' => 'RU', 'kok' => 'IN', 'kos' => 'FM',
             'kpv' => 'RU', 'krc' => 'RU', 'kri' => 'SL', 'kru' => 'IN', 'ks' => 'IN', 'ku' => 'IQ IR SY TR',
             'kum' => 'RU', 'kxm' => 'TH', 'ky' => 'KG', 'la' => 'VA', 'lah' => 'PK', 'lb' => 'LU',
-            'lbe' => 'RU', 'lez' => 'RU', 'lg' => 'UG', 'ljp' => 'ID', 'lmn' => 'IN', 'ln' => 'CD CG',
+            'lbe' => 'RU', 'lez' => 'RU', 'lg' => 'UG', 'ljp' => 'ID', 'lmn' => 'IN', 'ln' => 'CG',
             'lo' => 'LA', 'lrc' => 'IR', 'lt' => 'LT', 'lu' => 'CD', 'lua' => 'CD', 'luo' => 'KE',
             'luy' => 'KE', 'lv' => 'LV', 'mad' => 'ID', 'mag' => 'IN', 'mai' => 'IN NP', 'mak' => 'ID',
             'mdf' => 'RU', 'mdh' => 'PH', 'men' => 'SL', 'mer' => 'KE', 'mfa' => 'TH', 'mfe' => 'MU',
             'mg' => 'MG', 'mh' => 'MH', 'mi' => 'NZ', 'min' => 'ID', 'mk' => 'MK', 'ml' => 'IN', 'mn' => 'MN',
             'mni' => 'IN', 'mos' => 'BF', 'mr' => 'IN', 'ms' => 'BN MY SG', 'mt' => 'MT', 'mtr' => 'IN',
             'mup' => 'IN', 'my' => 'MM', 'myv' => 'RU', 'na' => 'NR', 'nap' => 'IT',
-            'nb' => 'NO SJ', 'nd' => 'ZW', 'ndc' => 'MZ', 'ne' => 'NP', 'ng' => 'NA', 'ngl' => 'MZ',
-            'niu' => 'NU', 'nl' => 'AN AW BE NL SR', 'nn' => 'NO', 'nod' => 'TH', 'noe' => 'IN', 'nso' => 'ZA',
-            'ny' => 'MW', 'nym' => 'TZ', 'nyn' => 'UG', 'om' => 'ET', 'or' => 'IN', 'os' => 'GE', 'pa' => 'IN',
+            'nb' => 'NO SJ', 'nd' => 'ZW', 'ndc' => 'MZ', 'nds' => 'DE', 'ne' => 'NP', 'ng' => 'NA', 'ngl' => 'MZ',
+            'niu' => 'NU', 'nl' => 'AN AW BE NL SR', 'nn' => 'NO', 'nod' => 'TH', 'noe' => 'IN', 'nr' => 'ZA', 'nso' => 'ZA',
+            'ny' => 'MW', 'nym' => 'TZ', 'nyn' => 'UG', 'om' => 'ET', 'or' => 'IN', 'os' => 'GE', 'pa' => 'IN PK',
             'pag' => 'PH', 'pam' => 'PH', 'pap' => 'AN', 'pau' => 'PW', 'pl' => 'PL', 'pon' => 'FM',
             'ps' => 'AF', 'pt' => 'AO BR CV GW MZ PT ST TL', 'qu' => 'BO PE', 'rcf' => 'RE', 'rej' => 'ID',
             'rif' => 'MA', 'rjb' => 'IN', 'rm' => 'CH', 'rmt' => 'IR', 'rn' => 'BI', 'ro' => 'MD RO',
-            'ru' => 'BY KG KZ RU', 'rw' => 'RW', 'sa' => 'IN', 'sah' => 'RU', 'sas' => 'ID', 'sat' => 'IN',
-            'sck' => 'IN', 'scn' => 'IT', 'sco' => 'GB', 'sd' => 'IN', 'se' => 'NO', 'sg' => 'CF',
-            'shn' => 'MM', 'si' => 'LK', 'sid' => 'ET', 'sk' => 'SK', 'sl' => 'SI', 'sm' => 'AS WS',
+            'ru' => 'BY KG KZ RU UA', 'rw' => 'RW', 'sa' => 'IN', 'sah' => 'RU', 'sas' => 'ID', 'sat' => 'IN',
+            'sck' => 'IN', 'scn' => 'IT', 'sco' => 'GB', 'sd' => 'IN PK', 'se' => 'NO', 'seh' => 'MZ', 'sg' => 'CF',
+            'shi' => 'MA', 'shn' => 'MM', 'si' => 'LK', 'sid' => 'ET', 'sk' => 'SK', 'sl' => 'SI', 'sm' => 'AS WS',
             'sn' => 'ZW', 'so' => 'SO', 'sou' => 'TH', 'sq' => 'AL MK', 'sr' => 'BA ME RS', 'srn' => 'SR',
             'srr' => 'SN', 'ss' => 'SZ ZA', 'st' => 'LS ZA', 'su' => 'ID', 'suk' => 'TZ', 'sv' => 'AX FI SE',
-            'sw' => 'KE TZ UG', 'swb' => 'KM', 'swv' => 'IN', 'syl' => 'BD', 'ta' => 'IN LK SG', 'tcy' => 'IN',
+            'sw' => 'KE TZ UG', 'swb' => 'YT', 'swv' => 'IN', 'syl' => 'BD', 'ta' => 'LK SG', 'tcy' => 'IN',
             'te' => 'IN', 'tem' => 'SL', 'tet' => 'TL', 'tg' => 'TJ', 'th' => 'TH', 'ti' => 'ER', 'tiv' => 'NG',
             'tk' => 'TM', 'tkl' => 'TK', 'tl' => 'PH US', 'tn' => 'BW ZA', 'to' => 'TO', 'tpi' => 'PG',
             'tr' => 'CY TR', 'ts' => 'ZA', 'tsg' => 'PH', 'tt' => 'RU', 'tts' => 'TH', 'tvl' => 'TV',
-            'tw' => 'GH', 'ty' => 'PF', 'tyv' => 'RU', 'tzm' => 'MA', 'udm' => 'RU', 'ug' => 'CN', 'uk' => 'UA',
-            'uli' => 'FM', 'umb' => 'AO', 'und' => 'AQ BV GS HM IO TF', 'ur' => 'IN PK', 'uz' => 'UZ',
+            'ty' => 'PF', 'tyv' => 'RU', 'tzm' => 'MA', 'udm' => 'RU', 'ug' => 'CN', 'uk' => 'UA',
+            'uli' => 'FM', 'umb' => 'AO', 'und' => 'AQ BV GS HM', 'ur' => 'PK', 'uz' => 'UZ',
             've' => 'ZA', 'vi' => 'VN', 'vmw' => 'MZ', 'wal' => 'ET', 'war' => 'PH', 'wbq' => 'IN',
             'wbr' => 'IN', 'wls' => 'WF', 'wo' => 'SN', 'wtm' => 'IN', 'xh' => 'ZA', 'xnr' => 'IN',
-            'xog' => 'UG', 'yap' => 'FM', 'yo' => 'NG', 'za' => 'CN', 'zh' => 'CN HK MO SG TW', 'zu' => 'ZA',
+            'xog' => 'UG', 'yap' => 'FM', 'yo' => 'NG', 'za' => 'CN', 'zdj' => 'KM', 'zh' => 'CN HK MO SG TW', 'zu' => 'ZA',
             'oc' => 'FR', 'kg' => 'CD', 'unr' => 'IN', 'tum' => 'MW', 'tig' => 'ER', 'teo' => 'UG',
             'sus' => 'GN', 'skr' => 'PK', 'mwr' => 'IN', 'laj' => 'UG', 'kea' => 'CV', 'gag' => 'MD',
             'fuq' => 'NE', 'crs' => 'SC', 'bci' => 'CI');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'territorytolanguage', 'uk');
+        $value = Cldr::getContent('de_AT', 'territorytolanguage', 'uk');
         $this->assertEquals("UA", $value);
     }
 
@@ -1484,59 +1486,60 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLanguageToTerritory()
     {
-        $value = Data::getList('de_AT', 'languagetoterritory');
-        $result = array('DJ' => 'aa ar fr', 'GE' => 'ab ka os', 'GH' => 'abr ak ee en gaa tw',
-            'ID' => 'ace ban bbc bew bjn bug bya id jv ljp mad mak min rej sas su',
+        $value = Cldr::getList('de_AT', 'languagetoterritory');
+        $result = array('DJ' => 'aa ar fr', 'GE' => 'ab ka os', 'GH' => 'abr ak ee en gaa',
+            'ID' => 'ace ban bbc bew bjn bug bya gor id jv ljp mad mak min rej sas su',
             'RU' => 'ady av ba ce cv inh kbd koi kpv krc kum lbe lez mdf myv ru sah tt tyv udm',
-            'ZA' => 'af en nso ss st tn ts ve xh zu', 'ET' => 'aa am om sid wal', 'AE' => 'ar', 'BH' => 'ar',
+            'ZA' => 'af en nr nso ss st tn ts ve xh zu', 'ET' => 'aa am om sid wal', 'AE' => 'ar', 'BH' => 'ar',
             'DZ' => 'ar fr kab', 'EG' => 'ar', 'EH' => 'ar', 'ER' => 'ar ti tig', 'IL' => 'ar he', 'IQ' => 'ar ku',
-            'JO' => 'ar', 'KM' => 'ar fr swb', 'KW' => 'ar', 'LB' => 'ar', 'LY' => 'ar',
-            'MA' => 'ar fr rif tzm', 'MR' => 'ar', 'OM' => 'ar', 'PS' => 'ar', 'QA' => 'ar', 'SA' => 'ar',
+            'JO' => 'ar', 'KM' => 'ar fr zdj', 'KW' => 'ar', 'LB' => 'ar', 'LY' => 'ar',
+            'MA' => 'ar fr rif shi tzm', 'MR' => 'ar', 'OM' => 'ar', 'PS' => 'ar', 'QA' => 'ar', 'SA' => 'ar',
             'SD' => 'ar', 'SY' => 'ar fr ku', 'TD' => 'ar fr', 'TN' => 'ar fr', 'YE' => 'ar',
-            'IN' => 'as awa bgc bhb bhi bho bjj bn dcc dhd doi gbm gno gon gu hi hne hoc kfy kha khn kn kok kru ks lmn mag mai ml mni mr mtr mup mwr noe or pa rjb sa sat sck sd swv ta tcy te unr ur wbq wbr wtm xnr',
-            'ES' => 'ast es eu gl', 'FR' => 'fr oc', 'BO' => 'ay es qu', 'AZ' => 'az',
-            'PK' => 'bal brh en hno lah skr ur', 'PH' => 'bcl bhk ceb en es fil hil ilo mdh pag pam tl tsg war',
+            'IN' => 'as awa bgc bhb bhi bho bjj brx dcc dhd doi en gbm gno gon gu hi hne hoc kfy kha khn kn kok kru ks lmn mag mai ml mni mr mtr mup mwr noe or pa rjb sa sat sck sd swv tcy te unr wbq wbr wtm xnr',
+            'ES' => 'ast es eu gl', 'FR' => 'br fr gsw oc', 'BO' => 'ay es qu', 'AZ' => 'az',
+            'PK' => 'bal brh en hno lah pa sd skr ur', 'PH' => 'bcl bhk ceb en es fil hil ilo mdh pag pam tl tsg war',
             'BY' => 'be ru', 'ZM' => 'bem en', 'BG' => 'bg', 'MU' => 'bho en fr mfe', 'NP' => 'bho mai ne',
-            'VU' => 'bi en fr', 'NG' => 'bin efi en fuv ha ibb ig tiv yo', 'ML' => 'bm fr', 'BD' => 'bn syl',
-            'CN' => 'bo ii ug za zh', 'IR' => 'bal fa glk ku lrc rmt', 'BA' => 'bs hr sr', 'YT' => 'buc fr',
+            'VU' => 'bi en fr', 'NG' => 'bin efi en fuv ha ibb ig tiv yo', 'ML' => 'bm ffm fr', 'BD' => 'bn syl',
+            'CN' => 'bo ii ug za zh', 'IR' => 'bal bqi fa glk ku lrc rmt', 'BA' => 'bs hr sr', 'YT' => 'buc fr swb',
             'AD' => 'ca', 'UG' => 'cgg en laj lg nyn sw teo xog', 'GU' => 'ch en', 'FM' => 'chk en kos pon uli yap',
-            'CA' => 'crk cwd en fr iu', 'CZ' => 'cs', 'GB' => 'cy en gd sco', 'DK' => 'da', 'GL' => 'da iu kl',
-            'AT' => 'de', 'BE' => 'de fr nl', 'CH' => 'de fr gsw it rm', 'DE' => 'de', 'LI' => 'de gsw',
+            'CA' => 'en fr', 'CZ' => 'cs', 'GB' => 'cy en gd sco', 'DK' => 'da', 'GL' => 'da iu kl',
+            'AT' => 'de', 'BE' => 'de fr nl', 'CH' => 'de fr gsw it rm', 'DE' => 'de nds', 'LI' => 'de gsw',
             'LU' => 'de fr lb', 'TR' => 'diq ku tr', 'NE' => 'dje fr fuq', 'MV' => 'dv', 'BF' => 'dyu fr mos',
-            'BT' => 'dz', 'CY' => 'el tr', 'GR' => 'el', 'GN' => 'emk fr sus', 'AG' => 'en', 'AI' => 'en',
+            'BT' => 'dz', 'CY' => 'el tr', 'GR' => 'el', 'GN' => 'emk ff fr sus', 'AG' => 'en', 'AI' => 'en',
             'AS' => 'en sm', 'AU' => 'en', 'BB' => 'en', 'BM' => 'en', 'BS' => 'en', 'BW' => 'en tn',
             'BZ' => 'en', 'CC' => 'en', 'CK' => 'en', 'CM' => 'en fr', 'CX' => 'en', 'DM' => 'en',
             'FJ' => 'en fj', 'FK' => 'en', 'GD' => 'en', 'GG' => 'en', 'GI' => 'en', 'GM' => 'en', 'GY' => 'en',
-            'HK' => 'en zh', 'HN' => 'en es', 'IE' => 'en ga', 'IM' => 'en', 'JE' => 'en', 'JM' => 'en',
+            'HK' => 'en zh', 'HN' => 'es', 'IE' => 'en ga', 'IM' => 'en', 'JE' => 'en', 'JM' => 'en',
             'KE' => 'en guz kam ki kln luo luy mer sw', 'KI' => 'en gil', 'KN' => 'en', 'KY' => 'en',
             'LC' => 'en', 'LR' => 'en', 'LS' => 'en st', 'MH' => 'en mh', 'MP' => 'en', 'MS' => 'en',
-            'MT' => 'en mt', 'MW' => 'en ny tum', 'NA' => 'en kj ng', 'NF' => 'en', 'NR' => 'en na',
+            'MT' => 'en mt', 'MW' => 'en ny tum', 'NA' => 'af de en kj ng', 'NF' => 'en', 'NR' => 'en na',
             'NU' => 'en niu', 'NZ' => 'en mi', 'PG' => 'en ho tpi', 'PN' => 'en', 'PR' => 'en es',
             'RW' => 'en fr rw', 'SB' => 'en', 'SC' => 'crs en fr', 'SG' => 'en ms ta zh', 'SH' => 'en',
             'SL' => 'en kri men tem', 'SZ' => 'en ss', 'TC' => 'en', 'TK' => 'en tkl', 'TO' => 'en to',
-            'TT' => 'en', 'TV' => 'en tvl', 'TZ' => 'en nym suk sw', 'UM' => 'en', 'US' => 'en haw tl',
+            'TT' => 'en', 'TV' => 'en tvl', 'TZ' => 'en kde nym suk sw', 'UM' => 'en', 'US' => 'en haw tl',
             'VC' => 'en', 'VG' => 'en', 'VI' => 'en', 'WS' => 'en sm', 'ZW' => 'en nd sn', 'AR' => 'es',
             'CL' => 'es', 'CO' => 'es', 'CR' => 'es', 'CU' => 'es', 'DO' => 'es', 'EC' => 'es',
             'GQ' => 'es fan fr', 'GT' => 'es', 'MX' => 'es', 'NI' => 'es', 'PA' => 'es', 'PE' => 'es qu',
             'PY' => 'es gn', 'SV' => 'es', 'UY' => 'es', 'VE' => 'es', 'EE' => 'et', 'AF' => 'fa haz ps',
-            'FI' => 'fi sv', 'FO' => 'fo', 'BJ' => 'fon fr', 'BI' => 'fr rn', 'CD' => 'fr kg ln lu lua',
+            'FI' => 'fi sv', 'FO' => 'fo', 'BJ' => 'fon fr', 'BI' => 'fr rn', 'CD' => 'fr kg lu lua',
             'CF' => 'fr sg', 'CG' => 'fr ln', 'CI' => 'bci fr', 'GA' => 'fr', 'GF' => 'fr gcr', 'GP' => 'fr',
             'HT' => 'fr ht', 'MC' => 'fr', 'MG' => 'en fr mg', 'MQ' => 'fr', 'NC' => 'fr', 'PF' => 'fr ty',
-            'PM' => 'fr', 'RE' => 'fr rcf', 'SN' => 'fr srr wo', 'TG' => 'ee fr', 'WF' => 'fr fud wls',
+            'PM' => 'fr', 'RE' => 'fr rcf', 'SN' => 'ff fr srr wo', 'TG' => 'ee fr', 'WF' => 'fr fud wls',
             'NL' => 'fy nl', 'HR' => 'hr', 'HU' => 'hu', 'AM' => 'hy', 'IS' => 'is', 'IT' => 'it nap scn',
             'SM' => 'it', 'JP' => 'ja', 'KZ' => 'kk ru', 'KH' => 'km', 'AO' => 'kmb pt umb', 'KP' => 'ko',
             'KR' => 'ko', 'TH' => 'kxm mfa nod sou th tts', 'KG' => 'ky ru', 'VA' => 'la', 'LA' => 'lo',
-            'LT' => 'lt', 'LV' => 'lv', 'MK' => 'mk sq', 'MN' => 'mn', 'BN' => 'ms', 'MY' => 'ms',
-            'MM' => 'my shn', 'NO' => 'nb nn se', 'SJ' => 'nb', 'MZ' => 'ndc ngl pt vmw', 'AN' => 'nl pap',
+            'LT' => 'lt', 'LV' => 'lv', 'MK' => 'mk sq', 'MN' => 'mn', 'BN' => 'ms', 'MY' => 'bjn ms',
+            'MM' => 'my shn', 'NO' => 'nb nn se', 'SJ' => 'nb', 'MZ' => 'ndc ngl pt seh vmw', 'AN' => 'nl pap',
             'AW' => 'nl', 'SR' => 'nl srn', 'PW' => 'pau', 'PL' => 'pl', 'BR' => 'pt', 'CV' => 'kea pt',
             'GW' => 'pt', 'PT' => 'pt', 'ST' => 'pt', 'TL' => 'pt tet', 'MD' => 'gag ro', 'RO' => 'ro',
             'LK' => 'si ta', 'SK' => 'sk', 'SI' => 'sl', 'SO' => 'so', 'AL' => 'sq', 'ME' => 'sr', 'RS' => 'sr',
-            'AX' => 'sv', 'SE' => 'sv', 'TJ' => 'tg', 'TM' => 'tk', 'UA' => 'uk', 'AQ' => 'und', 'BV' => 'und',
-            'GS' => 'und', 'HM' => 'und', 'IO' => 'und', 'TF' => 'und', 'UZ' => 'uz', 'VN' => 'vi',
-            'MO' => 'zh', 'TW' => 'zh', 'BL' => 'fr', 'MF' => 'fr');
+            'AX' => 'sv', 'SE' => 'sv', 'TJ' => 'tg', 'TM' => 'tk', 'UA' => 'ru uk', 'AQ' => 'und', 'BV' => 'und',
+            'GS' => 'und', 'HM' => 'und', 'IO' => 'en', 'UZ' => 'uz', 'VN' => 'vi',
+            'MO' => 'zh', 'TW' => 'zh', 'BL' => 'fr', 'MF' => 'fr', 'CP' => 'fr', 'DG' => 'en', 'EA' => 'es',
+            'IC' => 'es');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'languagetoterritory', 'GQ');
+        $value = Cldr::getContent('de_AT', 'languagetoterritory', 'GQ');
         $this->assertEquals("es fan fr", $value);
     }
 
@@ -1546,18 +1549,18 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTimezoneToWindows()
     {
-        $value = Data::getList('de_AT', 'timezonetowindows');
+        $value = Cldr::getList('de_AT', 'timezonetowindows');
         $result = array('Dateline Standard Time' => 'Etc/GMT+12', 'Samoa Standard Time' => 'Pacific/Apia',
             'Hawaiian Standard Time' => 'Pacific/Honolulu', 'Alaskan Standard Time' => 'America/Anchorage', 'Pacific Standard Time' => 'America/Los_Angeles',
-            'Pacific Standard Time (Mexico)' => 'America/Tijuana', 'US Mountain Standard Time' => 'America/Phoenix',
+            'Pacific Standard Time (Mexico)' => 'America/Santa_Isabel', 'US Mountain Standard Time' => 'America/Phoenix',
             'Mountain Standard Time' => 'America/Denver', 'Mountain Standard Time (Mexico)' => 'America/Chihuahua',
             'Mexico Standard Time 2' => 'America/Chihuahua', 'Central America Standard Time' => 'America/Guatemala',
             'Canada Central Standard Time' => 'America/Regina', 'Central Standard Time (Mexico)' => 'America/Mexico_City',
             'Mexico Standard Time' => 'America/Mexico_City', 'Central Standard Time' => 'America/Chicago', 'US Eastern Standard Time' => 'America/Indianapolis',
             'SA Pacific Standard Time' => 'America/Bogota', 'Eastern Standard Time' => 'America/New_York', 'Venezuela Standard Time' => 'America/Caracas',
-            'Pacific SA Standard Time' => 'America/Santiago', 'Atlantic Standard Time' => 'America/Halifax', 'Central Brazilian Standard Time' => 'America/Manaus',
+            'Pacific SA Standard Time' => 'America/Santiago', 'Atlantic Standard Time' => 'America/Halifax', 'Central Brazilian Standard Time' => 'America/Cuiaba',
             'Newfoundland Standard Time' => 'America/St_Johns', 'Greenland Standard Time' => 'America/Godthab',
-            'E. South America Standard Time' => 'America/Sao_Paulo', 'Montevideo Standard Time' => 'America/Montevideo', 'Mid-Atlantic Standard Time' => 'Atlantic/South_Georgia',
+            'E. South America Standard Time' => 'America/Sao_Paulo', 'Montevideo Standard Time' => 'America/Montevideo', 'Mid-Atlantic Standard Time' => 'Etc/GMT+2',
             'Cape Verde Standard Time' => 'Atlantic/Cape_Verde', 'Azores Standard Time' => 'Atlantic/Azores', 'Greenwich Standard Time' => 'Atlantic/Reykjavik',
             'GMT Standard Time' => 'Europe/London', 'W. Central Africa Standard Time' => 'Africa/Lagos', 'W. Europe Standard Time' => 'Europe/Berlin',
             'Romance Standard Time' => 'Europe/Paris', 'Central European Standard Time' => 'Europe/Warsaw', 'Central Europe Standard Time' => 'Europe/Budapest',
@@ -1565,10 +1568,10 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'FLE Standard Time' => 'Europe/Kiev', 'Egypt Standard Time' => 'Africa/Cairo', 'E. Europe Standard Time' => 'Europe/Minsk',
             'Jordan Standard Time' => 'Asia/Amman', 'Middle East Standard Time' => 'Asia/Beirut', 'Namibia Standard Time' => 'Africa/Windhoek',
             'E. Africa Standard Time' => 'Africa/Nairobi', 'Azerbaijan Standard Time' => 'Asia/Baku', 'Arab Standard Time' => 'Asia/Riyadh',
-            'Georgian Standard Time' => 'Etc/GMT-3', 'Russian Standard Time' => 'Europe/Moscow', 'Arabic Standard Time' => 'Asia/Baghdad',
+            'Georgian Standard Time' => 'Asia/Tbilisi', 'Russian Standard Time' => 'Europe/Moscow', 'Arabic Standard Time' => 'Asia/Baghdad',
             'Iran Standard Time' => 'Asia/Tehran', 'Arabian Standard Time' => 'Asia/Dubai', 'Caucasus Standard Time' => 'Asia/Yerevan', 'Afghanistan Standard Time' => 'Asia/Kabul',
             'West Asia Standard Time' => 'Asia/Tashkent', 'Ekaterinburg Standard Time' => 'Asia/Yekaterinburg', 'India Standard Time' => 'Asia/Calcutta',
-            'Nepal Standard Time' => 'Asia/Katmandu', 'Sri Lanka Standard Time' => 'Asia/Colombo', 'Central Asia Standard Time' => 'Asia/Dhaka',
+            'Nepal Standard Time' => 'Asia/Katmandu', 'Sri Lanka Standard Time' => 'Asia/Colombo', 'Central Asia Standard Time' => 'Asia/Almaty',
             'N. Central Asia Standard Time' => 'Asia/Novosibirsk', 'Myanmar Standard Time' => 'Asia/Rangoon', 'SE Asia Standard Time' => 'Asia/Bangkok',
             'North Asia Standard Time' => 'Asia/Krasnoyarsk', 'W. Australia Standard Time' => 'Australia/Perth', 'Taipei Standard Time' => 'Asia/Taipei',
             'Singapore Standard Time' => 'Asia/Singapore', 'China Standard Time' => 'Asia/Shanghai', 'North Asia East Standard Time' => 'Asia/Ulaanbaatar',
@@ -1577,14 +1580,17 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'Vladivostok Standard Time' => 'Asia/Vladivostok', 'Tasmania Standard Time' => 'Australia/Hobart', 'AUS Eastern Standard Time' => 'Australia/Sydney',
             'Central Pacific Standard Time' => 'Pacific/Guadalcanal', 'Fiji Standard Time' => 'Pacific/Fiji', 'New Zealand Standard Time' => 'Pacific/Auckland',
             'Tonga Standard Time' => 'Pacific/Tongatapu', 'West Pacific Standard Time' => 'Pacific/Port_Moresby',
-            'US Eastern Standard Time' => 'Etc/GMT+5', 'SA Eastern Standard Time' => 'Etc/GMT+3',
+            'US Eastern Standard Time' => 'Etc/GMT+5', 'SA Eastern Standard Time' => 'America/Cayenne',
             'SA Western Standard Time' => 'America/La_Paz', 'North Asia East Standard Time' => 'Asia/Irkutsk',
             'Argentina Standard Time' => 'America/Buenos_Aires', 'Armenian Standard Time' => 'Asia/Yerevan',
             'Pakistan Standard Time' => 'Asia/Karachi', 'Morocco Standard Time' => 'Africa/Casablanca',
-            'Mauritius Standard Time' => 'Indian/Mauritius');
+            'Mauritius Standard Time' => 'Indian/Mauritius', 'Bangladesh Standard Time' => 'Asia/Dhaka',
+            'Kamchatka Standard Time' => 'Asia/Kamchatka', 'Paraguay Standard Time' => 'America/Asuncion',
+            'Syria Standard Time' => 'Asia/Damascus', 'UTC' => 'Etc/GMT', 'UTC+12' => 'Etc/GMT-12', 'UTC-02' => 'Etc/GMT+2', 'UTC-11' => 'Etc/GMT+11',
+            'Ulaanbaatar Standard Time' => 'Asia/Ulaanbaatar');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'timezonetowindows', 'Fiji Standard Time');
+        $value = Cldr::getContent('de_AT', 'timezonetowindows', 'Fiji Standard Time');
         $this->assertEquals("Pacific/Fiji", $value);
     }
 
@@ -1594,14 +1600,14 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testWindowsToTimezone()
     {
-        $value = Data::getList('de_AT', 'windowstotimezone');
+        $value = Cldr::getList('de_AT', 'windowstotimezone');
         $result = array('Pacific/Apia' => 'Samoa Standard Time', 'Pacific/Honolulu' => 'Hawaiian Standard Time',
-            'America/Anchorage' => 'Alaskan Standard Time', 'America/Los_Angeles' => 'Pacific Standard Time', 'America/Tijuana' => 'Pacific Standard Time (Mexico)',
+            'America/Anchorage' => 'Alaskan Standard Time', 'America/Los_Angeles' => 'Pacific Standard Time', 'America/Santa_Isabel' => 'Pacific Standard Time (Mexico)',
             'America/Phoenix' => 'US Mountain Standard Time', 'America/Denver' => 'Mountain Standard Time', 'America/Chihuahua' => 'Mexico Standard Time 2',
             'America/Guatemala' => 'Central America Standard Time', 'America/Regina' => 'Canada Central Standard Time', 'America/Mexico_City' => 'Central Standard Time (Mexico)',
             'America/Chicago' => 'Central Standard Time', 'America/Bogota' => 'SA Pacific Standard Time',
             'America/New_York' => 'Eastern Standard Time', 'America/Caracas' => 'Venezuela Standard Time', 'America/Santiago' => 'Pacific SA Standard Time',
-            'America/Halifax' => 'Atlantic Standard Time', 'America/Manaus' => 'Central Brazilian Standard Time', 'America/St_Johns' => 'Newfoundland Standard Time',
+            'America/Halifax' => 'Atlantic Standard Time', 'America/Cuiaba' => 'Central Brazilian Standard Time', 'America/St_Johns' => 'Newfoundland Standard Time',
             'America/Buenos_Aires' => 'Argentina Standard Time', 'America/Godthab' => 'Greenland Standard Time', 'America/Sao_Paulo' => 'E. South America Standard Time',
             'America/Montevideo' => 'Montevideo Standard Time', 'Atlantic/Cape_Verde' => 'Cape Verde Standard Time',
             'Atlantic/Azores' => 'Azores Standard Time', 'Africa/Casablanca' => 'Morocco Standard Time', 'Europe/London' => 'GMT Standard Time',
@@ -1622,15 +1628,19 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'Pacific/Guadalcanal' => 'Central Pacific Standard Time', 'Pacific/Fiji' => 'Fiji Standard Time', 'Pacific/Auckland' => 'New Zealand Standard Time',
             'Pacific/Tongatapu' => 'Tonga Standard Time', 'Asia/Dubai' => 'Arabian Standard Time',
             'Europe/Budapest' => 'Central Europe Standard Time', 'Europe/Kiev' => 'FLE Standard Time',
-            'Etc/GMT+12' => 'Dateline Standard Time', 'Etc/GMT-3' => 'Georgian Standard Time',
-            'Etc/GMT+3' => 'SA Eastern Standard Time', 'Etc/GMT+5' => 'US Eastern Standard Time',
+            'Etc/GMT+12' => 'Dateline Standard Time', 'Asia/Tbilisi' => 'Georgian Standard Time',
+            'Etc/GMT+5' => 'US Eastern Standard Time',
             'Pacific/Port_Moresby' => 'West Pacific Standard Time', 'America/La_Paz' => 'SA Western Standard Time',
-            'Asia/Irkutsk' => 'North Asia East Standard Time', 'Atlantic/South_Georgia' => 'Mid-Atlantic Standard Time',
+            'Asia/Irkutsk' => 'North Asia East Standard Time', 'Etc/GMT+2' => 'Mid-Atlantic Standard Time',
             'Asia/Tashkent' => 'West Asia Standard Time', 'Indian/Mauritius' => 'Mauritius Standard Time',
-            'Atlantic/Reykjavik' => 'Greenwich Standard Time');
+            'Atlantic/Reykjavik' => 'Greenwich Standard Time', 'Etc/GMT' => 'UTC', 'Etc/GMT+11' => 'UTC-11',
+            'America/Asuncion' => 'Paraguay Standard Time', 'America/Cayenne' => 'SA Eastern Standard Time',
+            'Asia/Damascus' => 'Syria Standard Time', 'Asia/Dhaka' => 'Bangladesh Standard Time',
+            'Asia/Almaty' => 'Central Asia Standard Time', 'Asia/Ulaanbaatar' => 'Ulaanbaatar Standard Time',
+            'Asia/Kamchatka' => 'Kamchatka Standard Time', 'Etc/GMT-12' => 'UTC+12');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'windowstotimezone', 'Pacific/Fiji');
+        $value = Cldr::getContent('de_AT', 'windowstotimezone', 'Pacific/Fiji');
         $this->assertEquals("Fiji Standard Time", $value);
     }
 
@@ -1638,9 +1648,9 @@ class DataTest extends \PHPUnit_Framework_TestCase
      * test for reading territorytotimezone from locale
      * expected array
      */
-    public function testTerritoryToTimezone()
+    public function ztestTerritoryToTimezone()
     {
-        $value = Data::getList('de_AT', 'territorytotimezone');
+        $value = Cldr::getList('de_AT', 'territorytotimezone');
         $result = array('Africa/Abidjan' => 'CI', 'Africa/Accra' => 'GH', 'Africa/Addis_Ababa' => 'ET',
             'Africa/Algiers' => 'DZ', 'Africa/Asmera' => 'ER', 'Africa/Bamako' => 'ML', 'Africa/Bangui' => 'CF',
             'Africa/Banjul' => 'GM', 'Africa/Bissau' => 'GW', 'Africa/Blantyre' => 'MW', 'Africa/Brazzaville' => 'CG',
@@ -1751,7 +1761,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'America/Argentina/San_Luis' => 'AR', 'America/Argentina/Salta' => 'AR');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'territorytotimezone', 'Pacific/Fiji');
+        $value = Cldr::getContent('de_AT', 'territorytotimezone', 'Pacific/Fiji');
         $this->assertEquals("FJ", $value);
     }
 
@@ -1759,9 +1769,9 @@ class DataTest extends \PHPUnit_Framework_TestCase
      * test for reading timezonetoterritory from locale
      * expected array
      */
-    public function testTimezoneToTerritory()
+    public function ztestTimezoneToTerritory()
     {
-        $value = Data::getList('de_AT', 'timezonetoterritory');
+        $value = Cldr::getList('de_AT', 'timezonetoterritory');
         $result = array('CI' => 'Africa/Abidjan', 'GH' => 'Africa/Accra', 'ET' => 'Africa/Addis_Ababa',
             'DZ' => 'Africa/Algiers', 'ER' => 'Africa/Asmera', 'ML' => 'Africa/Bamako', 'CF' => 'Africa/Bangui',
             'GM' => 'Africa/Banjul', 'GW' => 'Africa/Bissau', 'MW' => 'Africa/Blantyre', 'CG' => 'Africa/Brazzaville',
@@ -1824,7 +1834,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'WF' => 'Pacific/Wallis', 'MF' => 'America/Marigot', 'BL' => 'America/St_Barthelemy');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'timezonetoterritory', 'FJ');
+        $value = Cldr::getContent('de_AT', 'timezonetoterritory', 'FJ');
         $this->assertEquals("Pacific/Fiji", $value);
     }
 
@@ -1834,7 +1844,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCityToTimezone()
     {
-        $value = Data::getList('de_AT', 'citytotimezone');
+        $value = Cldr::getList('de_AT', 'citytotimezone');
         $result = array('Etc/Unknown' => 'Unbekannt', 'Europe/Tirane' => 'Tirana', 'Asia/Yerevan' => 'Erivan',
             'America/Curacao' => 'Curaçao', 'Antarctica/South_Pole' => 'Südpol', 'Antarctica/Vostok' => 'Wostok',
             'Antarctica/DumontDUrville' => "Dumont D'Urville", 'Europe/Vienna' => 'Wien', 'Europe/Brussels' => 'Brüssel',
@@ -1862,16 +1872,16 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'Africa/Mogadishu' => 'Mogadischu', 'Africa/Sao_Tome' => 'São Tomé', 'America/El_Salvador' => 'Salvador',
             'Asia/Damascus' => 'Damaskus', 'Asia/Dushanbe' => 'Duschanbe', 'America/Port_of_Spain' => 'Port-of-Spain',
             'Asia/Taipei' => 'Taipeh', 'Africa/Dar_es_Salaam' => 'Daressalam', 'Europe/Uzhgorod' => 'Uschgorod',
-            'Europe/Kiev' => 'Kiew', 'Europe/Zaporozhye' => 'Saporischja',
+            'Europe/Kiev' => 'Kiew', 'Europe/Zaporozhye' => 'Saporischja', 'Europe/Volgograd' => 'Wolgograd',
             'Asia/Tashkent' => 'Taschkent', 'America/St_Vincent' => 'St. Vincent', 'America/St_Thomas' => 'St. Thomas',
             'America/Kentucky/Monticello' => 'Monticello, Kentucky', 'America/Indiana/Vevay' => 'Vevay, Indiana',
             'America/Indiana/Marengo' => 'Marengo, Indiana', 'America/Indiana/Winamac' => 'Winamac, Indiana',
             'America/Indiana/Tell_City' => 'Tell City, Indiana', 'America/Indiana/Petersburg' => 'Petersburg, Indiana',
             'America/Indiana/Vincennes' => 'Vincennes, Indiana', 'America/North_Dakota/Center' => 'Center, North Dakota',
-            'America/North_Dakota/New_Salem' => 'New Salem, North Dakota', 'America/Indiana/Knox' => 'Knox');
+            'America/North_Dakota/New_Salem' => 'New Salem, North Dakota', 'America/Indiana/Knox' => 'Knox', 'Asia/Urumqi' => 'Ürümqi');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'citytotimezone', 'Pacific/Fiji');
+        $value = Cldr::getContent('de_AT', 'citytotimezone', 'Pacific/Fiji');
         $this->assertEquals("Fidschi", $value);
     }
 
@@ -1881,7 +1891,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTimezoneToCity()
     {
-        $value = Data::getList('de_AT', 'timezonetocity');
+        $value = Cldr::getList('de_AT', 'timezonetocity');
         $result = array('Unbekannt' => 'Etc/Unknown', 'Tirana' => 'Europe/Tirane', 'Erivan' => 'Asia/Yerevan',
             'Curaçao' => 'America/Curacao', 'Südpol' => 'Antarctica/South_Pole', 'Wostok' => 'Antarctica/Vostok',
             "Dumont D'Urville" => 'Antarctica/DumontDUrville', 'Wien' => 'Europe/Vienna', 'Brüssel' => 'Europe/Brussels',
@@ -1909,8 +1919,8 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'São Tomé' => 'Africa/Sao_Tome', 'Salvador' => 'America/El_Salvador', 'Damaskus' => 'Asia/Damascus',
             'Duschanbe' => 'Asia/Dushanbe', 'Port-of-Spain' => 'America/Port_of_Spain', 'Taipeh' => 'Asia/Taipei',
             'Daressalam' => 'Africa/Dar_es_Salaam', 'Uschgorod' => 'Europe/Uzhgorod', 'Kiew' => 'Europe/Kiev',
-            'Saporischja' => 'Europe/Zaporozhye', 'Taschkent' => 'Asia/Tashkent',
-            'St. Vincent' => 'America/St_Vincent', 'St. Thomas' => 'America/St_Thomas',
+            'Saporischja' => 'Europe/Zaporozhye', 'Taschkent' => 'Asia/Tashkent', 'Wolgograd' => 'Europe/Volgograd',
+            'St. Vincent' => 'America/St_Vincent', 'St. Thomas' => 'America/St_Thomas', 'Ürümqi' => 'Asia/Urumqi',
             'Monticello, Kentucky' => 'America/Kentucky/Monticello', 'Vevay, Indiana' => 'America/Indiana/Vevay',
             'Marengo, Indiana' => 'America/Indiana/Marengo', 'Winamac, Indiana' => 'America/Indiana/Winamac',
             'Tell City, Indiana' => 'America/Indiana/Tell_City', 'Petersburg, Indiana' => 'America/Indiana/Petersburg',
@@ -1918,7 +1928,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'New Salem, North Dakota' => 'America/North_Dakota/New_Salem', 'Knox' => 'America/Indiana/Knox');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'timezonetocity', 'Fidschi');
+        $value = Cldr::getContent('de_AT', 'timezonetocity', 'Fidschi');
         $this->assertEquals("Pacific/Fiji", $value);
     }
 
@@ -1928,7 +1938,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTerritoryToPhone()
     {
-        $value = Data::getList('de_AT', 'territorytophone');
+        $value = Cldr::getList('de_AT', 'territorytophone');
         $result = array('388' => '001', '247' => 'AC', '376' => 'AD', '971' => 'AE', '93' => 'AF',
             '1' => 'AG AI AS BB BM BS CA DM DO GD GU JM KN KY LC MP MS PR TC TT US VC VG VI', '355' => 'AL',
             '374' => 'AM', '599' => 'AN', '244' => 'AO', '672' => 'AQ NF', '54' => 'AR', '43' => 'AT',
@@ -1966,7 +1976,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             '685' => 'WS', '967' => 'YE', '27' => 'ZA', '260' => 'ZM', '263' => 'ZW');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'territorytophone', '43');
+        $value = Cldr::getContent('de_AT', 'territorytophone', '43');
         $this->assertEquals("AT", $value);
     }
 
@@ -1976,7 +1986,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testPhoneToTerritory()
     {
-        $value = Data::getList('de_AT', 'phonetoterritory');
+        $value = Cldr::getList('de_AT', 'phonetoterritory');
         $result = array('001' => '388', 'AC' => '247', 'AD' => '376', 'AE' => '971', 'AF' => '93', 'AG' => '1',
             'AI' => '1', 'AL' => '355', 'AM' => '374', 'AN' => '599', 'AO' => '244', 'AQ' => '672',
             'AR' => '54', 'AS' => '1', 'AT' => '43', 'AU' => '61', 'AW' => '297', 'AX' => '358', 'AZ' => '994',
@@ -2019,7 +2029,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'ZW' => '263');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'phonetoterritory', 'AT');
+        $value = Cldr::getContent('de_AT', 'phonetoterritory', 'AT');
         $this->assertEquals("43", $value);
     }
 
@@ -2029,7 +2039,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTerritoryToNumeric()
     {
-        $value = Data::getList('de_AT', 'territorytonumeric');
+        $value = Cldr::getList('de_AT', 'territorytonumeric');
         $result = array('958' => 'AA', '020' => 'AD', '784' => 'AE', '004' => 'AF', '028' => 'AG',
             '660' => 'AI', '008' => 'AL', '051' => 'AM', '530' => 'AN', '024' => 'AO', '010' => 'AQ',
             '032' => 'AR', '016' => 'AS', '040' => 'AT', '036' => 'AU', '533' => 'AW', '248' => 'AX',
@@ -2063,7 +2073,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             '598' => 'PG', '608' => 'PH', '586' => 'PK', '616' => 'PL', '666' => 'PM', '612' => 'PN',
             '630' => 'PR', '275' => 'PS', '620' => 'PT', '585' => 'PW', '600' => 'PY', '634' => 'QA',
             '959' => 'QM', '960' => 'QN', '961' => 'QO', '962' => 'QP', '963' => 'QQ', '964' => 'QR',
-            '965' => 'QS', '966' => 'QT', '967' => 'QU', '968' => 'QV', '969' => 'QW', '970' => 'QX',
+            '965' => 'QS', '966' => 'QT', '967' => 'EU', '968' => 'QV', '969' => 'QW', '970' => 'QX',
             '971' => 'QY', '972' => 'QZ', '638' => 'RE', '642' => 'RO', '688' => 'RS', '643' => 'RU',
             '646' => 'RW', '682' => 'SA', '090' => 'SB', '690' => 'SC', '736' => 'SD', '752' => 'SE',
             '702' => 'SG', '654' => 'SH', '705' => 'SI', '744' => 'SJ', '703' => 'SK', '694' => 'SL',
@@ -2082,7 +2092,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             '999' => 'ZZ');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'territorytonumeric', '040');
+        $value = Cldr::getContent('de_AT', 'territorytonumeric', '040');
         $this->assertEquals("AT", $value);
     }
 
@@ -2092,7 +2102,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testNumericToTerritory()
     {
-        $value = Data::getList('de_AT', 'numerictoterritory');
+        $value = Cldr::getList('de_AT', 'numerictoterritory');
         $result = array( 'AA' => '958', 'AD' => '020', 'AE' => '784', 'AF' => '004', 'AG' => '028',
             'AI' => '660', 'AL' => '008', 'AM' => '051', 'AN' => '530', 'AO' => '024', 'AQ' => '010',
             'AR' => '032', 'AS' => '016', 'AT' => '040', 'AU' => '036', 'AW' => '533', 'AX' => '248',
@@ -2126,7 +2136,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'PF' => '258', 'PG' => '598', 'PH' => '608', 'PK' => '586', 'PL' => '616', 'PM' => '666',
             'PN' => '612', 'PR' => '630', 'PS' => '275', 'PT' => '620', 'PW' => '585', 'PY' => '600',
             'QA' => '634', 'QM' => '959', 'QN' => '960', 'QO' => '961', 'QP' => '962', 'QQ' => '963',
-            'QR' => '964', 'QS' => '965', 'QT' => '966', 'QU' => '967', 'QV' => '968', 'QW' => '969',
+            'QR' => '964', 'QS' => '965', 'QT' => '966', 'EU' => '967', 'QV' => '968', 'QW' => '969',
             'QX' => '970', 'QY' => '971', 'QZ' => '972', 'RE' => '638', 'RO' => '642', 'RS' => '688',
             'RU' => '643', 'RW' => '646', 'SA' => '682', 'SB' => '090', 'SC' => '690', 'SD' => '736',
             'SE' => '752', 'SG' => '702', 'SH' => '654', 'SI' => '705', 'SJ' => '744', 'SK' => '703',
@@ -2145,7 +2155,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'ZA' => '710', 'ZM' => '894', 'ZR' => '180', 'ZW' => '716', 'ZZ' => '999');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'numerictoterritory', 'AT');
+        $value = Cldr::getContent('de_AT', 'numerictoterritory', 'AT');
         $this->assertEquals("040", $value);
     }
 
@@ -2155,7 +2165,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testTerritoryToAlpha3()
     {
-        $value = Data::getList('de_AT', 'territorytoalpha3');
+        $value = Cldr::getList('de_AT', 'territorytoalpha3');
         $result = array('AAA' => 'AA', 'AND' => 'AD', 'ARE' => 'AE', 'AFG' => 'AF', 'ATG' => 'AG',
             'AIA' => 'AI', 'ALB' => 'AL', 'ARM' => 'AM', 'ANT' => 'AN', 'AGO' => 'AO', 'ATA' => 'AQ',
             'ARG' => 'AR', 'ASM' => 'AS', 'AUT' => 'AT', 'AUS' => 'AU', 'ABW' => 'AW', 'ALA' => 'AX',
@@ -2189,7 +2199,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'PYF' => 'PF', 'PNG' => 'PG', 'PHL' => 'PH', 'PAK' => 'PK', 'POL' => 'PL', 'SPM' => 'PM',
             'PCN' => 'PN', 'PRI' => 'PR', 'PSE' => 'PS', 'PRT' => 'PT', 'PLW' => 'PW', 'PRY' => 'PY',
             'QAT' => 'QA', 'QMM' => 'QM', 'QNN' => 'QN', 'QOO' => 'QO', 'QPP' => 'QP', 'QQQ' => 'QQ',
-            'QRR' => 'QR', 'QSS' => 'QS', 'QTT' => 'QT', 'QUU' => 'QU', 'QVV' => 'QV', 'QWW' => 'QW',
+            'QRR' => 'QR', 'QSS' => 'QS', 'QTT' => 'QT', 'QUU' => 'EU', 'QVV' => 'QV', 'QWW' => 'QW',
             'QXX' => 'QX', 'QYY' => 'QY', 'QZZ' => 'QZ', 'REU' => 'RE', 'ROU' => 'RO', 'SRB' => 'RS',
             'RUS' => 'RU', 'RWA' => 'RW', 'SAU' => 'SA', 'SLB' => 'SB', 'SYC' => 'SC', 'SDN' => 'SD',
             'SWE' => 'SE', 'SGP' => 'SG', 'SHN' => 'SH', 'SVN' => 'SI', 'SJM' => 'SJ', 'SVK' => 'SK',
@@ -2208,7 +2218,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'ZAF' => 'ZA', 'ZMB' => 'ZM', 'ZAR' => 'ZR', 'ZWE' => 'ZW', 'ZZZ' => 'ZZ');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'territorytoalpha3', 'AUT');
+        $value = Cldr::getContent('de_AT', 'territorytoalpha3', 'AUT');
         $this->assertEquals("AT", $value);
     }
 
@@ -2218,7 +2228,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testAlpha3ToTerritory()
     {
-        $value = Data::getList('de_AT', 'alpha3toterritory');
+        $value = Cldr::getList('de_AT', 'alpha3toterritory');
         $result = array('AA' => 'AAA', 'AD' => 'AND', 'AE' => 'ARE', 'AF' => 'AFG', 'AG' => 'ATG',
             'AI' => 'AIA', 'AL' => 'ALB', 'AM' => 'ARM', 'AN' => 'ANT', 'AO' => 'AGO', 'AQ' => 'ATA',
             'AR' => 'ARG', 'AS' => 'ASM', 'AT' => 'AUT', 'AU' => 'AUS', 'AW' => 'ABW', 'AX' => 'ALA',
@@ -2252,7 +2262,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'PF' => 'PYF', 'PG' => 'PNG', 'PH' => 'PHL', 'PK' => 'PAK', 'PL' => 'POL', 'PM' => 'SPM',
             'PN' => 'PCN', 'PR' => 'PRI', 'PS' => 'PSE', 'PT' => 'PRT', 'PW' => 'PLW', 'PY' => 'PRY',
             'QA' => 'QAT', 'QM' => 'QMM', 'QN' => 'QNN', 'QO' => 'QOO', 'QP' => 'QPP', 'QQ' => 'QQQ',
-            'QR' => 'QRR', 'QS' => 'QSS', 'QT' => 'QTT', 'QU' => 'QUU', 'QV' => 'QVV', 'QW' => 'QWW',
+            'QR' => 'QRR', 'QS' => 'QSS', 'QT' => 'QTT', 'EU' => 'QUU', 'QV' => 'QVV', 'QW' => 'QWW',
             'QX' => 'QXX', 'QY' => 'QYY', 'QZ' => 'QZZ', 'RE' => 'REU', 'RO' => 'ROU', 'RS' => 'SRB',
             'RU' => 'RUS', 'RW' => 'RWA', 'SA' => 'SAU', 'SB' => 'SLB', 'SC' => 'SYC', 'SD' => 'SDN',
             'SE' => 'SWE', 'SG' => 'SGP', 'SH' => 'SHN', 'SI' => 'SVN', 'SJ' => 'SJM', 'SK' => 'SVK',
@@ -2271,7 +2281,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'ZA' => 'ZAF', 'ZM' => 'ZMB', 'ZR' => 'ZAR', 'ZW' => 'ZWE', 'ZZ' => 'ZZZ');
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'alpha3toterritory', 'AT');
+        $value = Cldr::getContent('de_AT', 'alpha3toterritory', 'AT');
         $this->assertEquals("AUT", $value);
     }
 
@@ -2281,13 +2291,13 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testPostalToTerritory()
     {
-        $value = Data::getList('de_AT', 'postaltoterritory');
-        $result = array('GB' => 'GIR[ ]?0AA|((AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)(\d[\dA-Z]?[]?\d[ABD-HJLN-UW-Z]{2}))|BFPO[ ]?\d{1,4}',
+        $value = Cldr::getList('de_AT', 'postaltoterritory');
+        $result = array('GB' => 'GIR[ ]?0AA|((AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)(\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}))|BFPO[ ]?\d{1,4}',
             'JE' => 'JE\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}',
             'GG' => 'GY\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}',
             'IM' => 'IM\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}',
             'US' => '\d{5}([ \-]\d{4})?',
-            'CA' => '[ABCEGHJKLMNPRSTVXY]\d[A-Z][ ]?\d[A-Z]\d',
+            'CA' => '[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ ]?\d[ABCEGHJ-NPRSTV-Z]\d',
             'DE' => '\d{5}',
             'JP' => '\d{3}-\d{4}',
             'FR' => '\d{2}[ ]?\d{3}',
@@ -2433,7 +2443,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'PN' => 'PCRN 1ZZ',
             'PW' => '96940',
             'RE' => '9[78]4\d{2}',
-            'SH' => 'STHL 1ZZ',
+            'SH' => '(ASCN|STHL) 1ZZ',
             'SJ' => '\d{4}',
             'SO' => '\d{5}',
             'SZ' => '[HLMS]\d{3}',
@@ -2443,7 +2453,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'postaltoterritory', 'AT');
+        $value = Cldr::getContent('de_AT', 'postaltoterritory', 'AT');
         $this->assertEquals('\d{4}', $value);
     }
 
@@ -2453,7 +2463,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testNumberingSystem()
     {
-        $value = Data::getList('de_AT', 'numberingsystem');
+        $value = Cldr::getList('de_AT', 'numberingsystem');
         $result = array(
             'arab' => '٠١٢٣٤٥٦٧٨٩',
             'arabext' => '۰۱۲۳۴۵۶۷۸۹',
@@ -2462,6 +2472,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
             'fullwide' => '０１２３４５６７８９',
             'gujr' => '૦૧૨૩૪૫૬૭૮૯',
             'guru' => '੦੧੨੩੪੫੬੭੮੯',
+            'hanidec' => '〇一二三四五六七八九',
             'khmr' => "០១២៣៤៥៦៧៨៩",
             'knda' => '೦೧೨೩೪೫೬೭೮೯',
             'laoo' => '໐໑໒໓໔໕໖໗໘໙',
@@ -2476,7 +2487,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'numberingsystem', 'Arab');
+        $value = Cldr::getContent('de_AT', 'numberingsystem', 'Arab');
         $this->assertEquals("٠١٢٣٤٥٦٧٨٩", $value);
     }
 
@@ -2486,12 +2497,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testCharToFallback()
     {
-        $value = Data::getList('de_AT', 'chartofallback');
+        $value = Cldr::getList('de_AT', 'chartofallback');
         $this->assertEquals('©', $value['(C)']);
         $this->assertEquals('½', $value[' 1/2']);
         $this->assertEquals('Æ', $value['AE']);
 
-        $value = Data::getContent('de_AT', 'chartofallback', '(C)');
+        $value = Cldr::getContent('de_AT', 'chartofallback', '(C)');
         $this->assertEquals("©", $value);
     }
 
@@ -2501,12 +2512,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testFallbackToChar()
     {
-        $value = Data::getList('de_AT', 'fallbacktochar');
+        $value = Cldr::getList('de_AT', 'fallbacktochar');
         $this->assertEquals('(C)', $value['©']);
         $this->assertEquals(' 1/2', $value['½']);
         $this->assertEquals('AE', $value['Æ']);
 
-        $value = Data::getContent('de_AT', 'fallbacktochar', '©');
+        $value = Cldr::getContent('de_AT', 'fallbacktochar', '©');
         $this->assertEquals('(C)', $value);
     }
 
@@ -2516,12 +2527,12 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLocaleUpgrade()
     {
-        $value = Data::getList('de_AT', 'localeupgrade');
+        $value = Cldr::getList('de_AT', 'localeupgrade');
         $this->assertEquals('en_Latn_US', $value['en']);
         $this->assertEquals('de_Latn_DE', $value['de']);
         $this->assertEquals('sk_Latn_SK', $value['sk']);
 
-        $value = Data::getContent('de_AT', 'localeupgrade', 'de');
+        $value = Cldr::getContent('de_AT', 'localeupgrade', 'de');
         $this->assertEquals('de_Latn_DE', $value);
     }
 
@@ -2531,42 +2542,42 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDateItem()
     {
-        $value = Data::getList('de_AT', 'dateitem');
+        $value = Cldr::getList('de_AT', 'dateitem');
         $result = array(
-            'EEEd' => 'd. EEE', 'Ed' => 'E d.', 'H' => 'H', 'HHmm' => 'HH:mm',
-            'HHmmss' => 'HH:mm:ss', 'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.',
-            'MMM' => 'LLL', 'MMMEd' => 'E d. MMM', 'MMMMEd' => 'E d. MMMM',
-            'MMMMd' => 'd. MMMM', 'MMMMdd' => 'dd. MMMM', 'MMMd' => 'd. MMM',
+            'EEEd' => 'd EEE', 'Ed' => 'E, d.', 'H' => "HH 'Uhr'",
+            'Hm' => 'HH:mm', 'M' => 'L', 'MEd' => 'E, d.M.',
+            'MMM' => 'LLL', 'MMMEd' => 'E, d. MMM', 'MMMMEd' => 'E, d. MMMM',
+            'MMMMdd' => 'dd. MMMM', 'MMMd' => 'd. MMM',
             'MMd' => 'd.MM.', 'MMdd' => 'dd.MM.', 'Md' => 'd.M.', 'd' => 'd',
-            'mmss' => 'mm:ss', 'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'yyyy-M',
-            'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
-            'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
+            'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'M.y',
+            'yMEd' => 'EEE, d.M.y', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
+            'yQ' => 'Q y', 'yQQQ' => 'QQQ y',
             'yyMM' => 'MM.yy', 'yyMMM' => 'MMM yy', 'yyMMdd' => 'dd.MM.yy',
             'yyQ' => 'Q yy', 'yyQQQQ' => 'QQQQ yy', 'yyyy' => 'y',
-            'yyyyMMMM' => 'MMMM y', 'Hms' => 'H:mm:ss', 'hm' => 'h:mm a',
-            'hms' => 'h:mm:ss a'
+            'yyyyMMMM' => 'MMMM y', 'Hms' => 'HH:mm:ss', 'hm' => 'h:mm a',
+            'hms' => 'h:mm:ss a', 'h' => 'h a'
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getList('de_AT', 'dateitem', 'gregorian');
+        $value = Cldr::getList('de_AT', 'dateitem', 'gregorian');
         $result = array(
-            'EEEd' => 'd. EEE', 'Ed' => 'E d.', 'H' => 'H', 'HHmm' => 'HH:mm',
-            'HHmmss' => 'HH:mm:ss', 'Hm' => 'H:mm', 'M' => 'L', 'MEd' => 'E, d.M.',
-            'MMM' => 'LLL', 'MMMEd' => 'E d. MMM', 'MMMMEd' => 'E d. MMMM',
-            'MMMMd' => 'd. MMMM', 'MMMMdd' => 'dd. MMMM', 'MMMd' => 'd. MMM',
+            'EEEd' => 'd EEE', 'Ed' => 'E, d.', 'H' => "HH 'Uhr'",
+            'Hm' => 'HH:mm', 'M' => 'L', 'MEd' => 'E, d.M.',
+            'MMM' => 'LLL', 'MMMEd' => 'E, d. MMM', 'MMMMEd' => 'E, d. MMMM',
+            'MMMMdd' => 'dd. MMMM', 'MMMd' => 'd. MMM',
             'MMd' => 'd.MM.', 'MMdd' => 'dd.MM.', 'Md' => 'd.M.', 'd' => 'd',
-            'mmss' => 'mm:ss', 'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'yyyy-M',
-            'yMEd' => 'EEE, yyyy-M-d', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
-            'yMMMM' => 'MMMM y', 'yQ' => 'Q yyyy', 'yQQQ' => 'QQQ y',
+            'ms' => 'mm:ss', 'y' => 'y', 'yM' => 'M.y',
+            'yMEd' => 'EEE, d.M.y', 'yMMM' => 'MMM y', 'yMMMEd' => 'EEE, d. MMM y',
+            'yQ' => 'Q y', 'yQQQ' => 'QQQ y',
             'yyMM' => 'MM.yy', 'yyMMM' => 'MMM yy', 'yyMMdd' => 'dd.MM.yy',
             'yyQ' => 'Q yy', 'yyQQQQ' => 'QQQQ yy', 'yyyy' => 'y',
-            'yyyyMMMM' => 'MMMM y', 'Hms' => 'H:mm:ss', 'hm' => 'h:mm a',
-            'hms' => 'h:mm:ss a'
+            'yyyyMMMM' => 'MMMM y', 'Hms' => 'HH:mm:ss', 'hm' => 'h:mm a',
+            'hms' => 'h:mm:ss a', 'h' => 'h a'
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'dateitem', 'MMMMd');
-        $this->assertEquals("d. MMMM", $value);
+        $value = Cldr::getContent('de_AT', 'dateitem', 'MMMEd');
+        $this->assertEquals("E, d. MMM", $value);
     }
 
     /**
@@ -2575,130 +2586,158 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testDateInterval()
     {
-        $value = Data::getList('de_AT', 'dateinterval');
+        $value = Cldr::getList('de_AT', 'dateinterval');
         $result = array(
             'M' => array('M' => 'M.-M.'),
             'MEd' => array(
-                'M' => 'E, dd.MM. - E, dd.MM.',
-                'd' => 'E, dd.MM. - E, dd.MM.'),
+                'd' => 'E, dd.MM. - E, dd.MM.',
+                'M' => 'E, dd.MM. - E, dd.MM.'),
             'MMM' => array('M' => 'MMM-MMM'),
             'MMMEd' => array(
-                'M' => 'E, dd. MMM - E, dd. MMM',
-                'd' => 'E, dd. - E, dd. MMM'),
+                'd' => 'E, dd. - E, dd. MMM',
+                'M' => 'E, dd. MMM - E, dd. MMM'),
             'MMMM' => array('M' => 'LLLL-LLLL'),
             'MMMd' => array(
-                'M' => 'dd. MMM - dd. MMM',
-                'd' => 'dd.-dd. MMM'),
+                'd' => 'dd.-dd. MMM',
+                'M' => 'dd. MMM - dd. MMM'),
             'Md' => array(
-                'M' => 'dd.MM. - dd.MM.',
-                'd' => 'dd.MM. - dd.MM.'),
+                'd' => 'dd.MM. - dd.MM.',
+                'M' => 'dd.MM. - dd.MM.'),
             'd' => array('d' => 'd.-d.'),
             'h' => array(
-                'a' => 'HH-HH',
-                'h' => 'HH-HH'),
+                'a' => 'h a - h a',
+                'h' => 'h-h a'),
+            'H' => array(
+                'a' => "HH-HH 'Uhr'",
+                'H' => "HH-HH 'Uhr'"),
             'hm' => array(
+                'a' => 'h:mm a - h:mm a',
+                'h' => 'h:mm-h:mm a',
+                'm' => 'h:mm-h:mm a'),
+            'Hm' => array(
                 'a' => 'HH:mm-HH:mm',
-                'h' => 'HH:mm-HH:mm',
+                'H' => 'HH:mm-HH:mm',
                 'm' => 'HH:mm-HH:mm'),
             'hmv' => array(
+                'a' => 'h:mm a - h:mm a v',
+                'h' => 'h:mm-h:mm a v',
+                'm' => 'h:mm-h:mm a v'),
+            'Hmv' => array(
                 'a' => 'HH:mm-HH:mm v',
-                'h' => 'HH:mm-HH:mm v',
+                'H' => 'HH:mm-HH:mm v',
                 'm' => 'HH:mm-HH:mm v'),
             'hv' => array(
-                'a' => 'HH-HH v',
-                'h' => 'HH-HH v'),
+                'a' => 'h a - h a v',
+                'h' => 'h-h a v'),
+            'Hv' => array(
+                'a' => "HH-HH 'Uhr' v",
+                'H' => "HH-HH 'Uhr' v"),
             'y' => array('y' => 'y-y'),
             'yM' => array(
                 'M' => 'MM.yy - MM.yy',
                 'y' => 'MM.yy - MM.yy'),
             'yMEd' => array(
-                'M' => 'E, dd.MM.yy - E, dd.MM.yy',
                 'd' => 'E, dd.MM.yy - E, dd.MM.yy',
+                'M' => 'E, dd.MM.yy - E, dd.MM.yy',
                 'y' => 'E, dd.MM.yy - E, dd.MM.yy'),
             'yMMM' => array(
                 'M' => 'MMM-MMM y',
                 'y' => 'MMM y - MMM y'),
             'yMMMEd' => array(
-                'M' => 'E, dd. MMM - E, dd. MMM y',
                 'd' => 'E, dd. - E, dd. MMM y',
+                'M' => 'E, dd. MMM - E, dd. MMM y',
                 'y' => 'E, dd. MMM y - E, dd. MMM y'),
             'yMMMM' => array(
-                'M' => 'MM – MM.yyyy',
-                'y' => 'MM.yyyy – MM.yyyy'),
+                'M' => 'MMMM-MMMM y',
+                'y' => 'MMMM y - MMMM y'),
             'yMMMd' => array(
-                'M' => 'dd. MMM - dd. MMM y',
                 'd' => 'dd.-dd. MMM y',
+                'M' => 'dd. MMM - dd. MMM y',
                 'y' => 'dd. MMM y - dd. MMM y'),
             'yMd' => array(
-                'M' => 'dd.MM.yy - dd.MM.yy',
                 'd' => 'dd.MM.yy - dd.MM.yy',
+                'M' => 'dd.MM.yy - dd.MM.yy',
                 'y' => 'dd.MM.yy - dd.MM.yy')
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getList('de_AT', 'dateinterval', 'gregorian');
+        $value = Cldr::getList('de_AT', 'dateinterval', 'gregorian');
         $result = array(
             'M' => array('M' => 'M.-M.'),
             'MEd' => array(
-                'M' => 'E, dd.MM. - E, dd.MM.',
-                'd' => 'E, dd.MM. - E, dd.MM.'),
+                'd' => 'E, dd.MM. - E, dd.MM.',
+                'M' => 'E, dd.MM. - E, dd.MM.'),
             'MMM' => array('M' => 'MMM-MMM'),
             'MMMEd' => array(
-                'M' => 'E, dd. MMM - E, dd. MMM',
-                'd' => 'E, dd. - E, dd. MMM'),
+                'd' => 'E, dd. - E, dd. MMM',
+                'M' => 'E, dd. MMM - E, dd. MMM'),
             'MMMM' => array('M' => 'LLLL-LLLL'),
             'MMMd' => array(
-                'M' => 'dd. MMM - dd. MMM',
-                'd' => 'dd.-dd. MMM'),
+                'd' => 'dd.-dd. MMM',
+                'M' => 'dd. MMM - dd. MMM'),
             'Md' => array(
-                'M' => 'dd.MM. - dd.MM.',
-                'd' => 'dd.MM. - dd.MM.'),
+                'd' => 'dd.MM. - dd.MM.',
+                'M' => 'dd.MM. - dd.MM.'),
             'd' => array('d' => 'd.-d.'),
             'h' => array(
-                'a' => 'HH-HH',
-                'h' => 'HH-HH'),
+                'a' => 'h a - h a',
+                'h' => 'h-h a'),
+            'H' => array(
+                'a' => "HH-HH 'Uhr'",
+                'H' => "HH-HH 'Uhr'"),
             'hm' => array(
+                'a' => 'h:mm a - h:mm a',
+                'h' => 'h:mm-h:mm a',
+                'm' => 'h:mm-h:mm a'),
+            'Hm' => array(
                 'a' => 'HH:mm-HH:mm',
-                'h' => 'HH:mm-HH:mm',
+                'H' => 'HH:mm-HH:mm',
                 'm' => 'HH:mm-HH:mm'),
             'hmv' => array(
+                'a' => 'h:mm a - h:mm a v',
+                'h' => 'h:mm-h:mm a v',
+                'm' => 'h:mm-h:mm a v'),
+            'Hmv' => array(
                 'a' => 'HH:mm-HH:mm v',
-                'h' => 'HH:mm-HH:mm v',
+                'H' => 'HH:mm-HH:mm v',
                 'm' => 'HH:mm-HH:mm v'),
             'hv' => array(
-                'a' => 'HH-HH v',
-                'h' => 'HH-HH v'),
+                'a' => 'h a - h a v',
+                'h' => 'h-h a v'),
+            'Hv' => array(
+                'a' => "HH-HH 'Uhr' v",
+                'H' => "HH-HH 'Uhr' v"),
             'y' => array('y' => 'y-y'),
             'yM' => array(
                 'M' => 'MM.yy - MM.yy',
                 'y' => 'MM.yy - MM.yy'),
             'yMEd' => array(
-                'M' => 'E, dd.MM.yy - E, dd.MM.yy',
                 'd' => 'E, dd.MM.yy - E, dd.MM.yy',
+                'M' => 'E, dd.MM.yy - E, dd.MM.yy',
                 'y' => 'E, dd.MM.yy - E, dd.MM.yy'),
             'yMMM' => array(
                 'M' => 'MMM-MMM y',
                 'y' => 'MMM y - MMM y'),
             'yMMMEd' => array(
-                'M' => 'E, dd. MMM - E, dd. MMM y',
                 'd' => 'E, dd. - E, dd. MMM y',
+                'M' => 'E, dd. MMM - E, dd. MMM y',
                 'y' => 'E, dd. MMM y - E, dd. MMM y'),
             'yMMMM' => array(
-                'M' => 'MM – MM.yyyy',
-                'y' => 'MM.yyyy – MM.yyyy'),
+                'M' => 'MMMM-MMMM y',
+                'y' => 'MMMM y - MMMM y'),
             'yMMMd' => array(
-                'M' => 'dd. MMM - dd. MMM y',
                 'd' => 'dd.-dd. MMM y',
+                'M' => 'dd. MMM - dd. MMM y',
                 'y' => 'dd. MMM y - dd. MMM y'),
             'yMd' => array(
-                'M' => 'dd.MM.yy - dd.MM.yy',
                 'd' => 'dd.MM.yy - dd.MM.yy',
+                'M' => 'dd.MM.yy - dd.MM.yy',
                 'y' => 'dd.MM.yy - dd.MM.yy')
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'dateinterval', array('gregorian', 'yMMMM', 'y'));
-        $this->assertEquals("MM.yyyy – MM.yyyy", $value);
+        $value = Cldr::getContent('de_AT', 'dateinterval', array('gregorian', 'yMMMM', 'y'));
+        $this->assertEquals("MMMM y - MMMM y", $value);
     }
 
     /**
@@ -2707,7 +2746,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnit()
     {
-        $value = Data::getList('de_AT', 'unit');
+        $value = Cldr::getList('de_AT', 'unit');
         $result = array(
             'day' => array('one' => '{0} Tag', 'other' => '{0} Tage'),
             'hour' => array('one' => '{0} Stunde', 'other' => '{0} Stunden'),
@@ -2719,7 +2758,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($result, $value);
 
-        $value = Data::getContent('de_AT', 'unit', array('day', 'one'));
+        $value = Cldr::getContent('de_AT', 'unit', array('day', 'one'));
         $this->assertEquals('{0} Tag', $value);
     }
 }

@@ -24,7 +24,7 @@ use Zend\SignalSlot\GlobalSignals as SignalSlot,
  * @package    Zend_SignalSlot
  * @subpackage UnitTests
  * @group      Zend_SignalSlot
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GlobalSignalsTest extends \PHPUnit_Framework_TestCase

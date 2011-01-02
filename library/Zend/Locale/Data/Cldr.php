@@ -877,7 +877,11 @@ class Cldr extends AbstractLocale
         }
 
         if (isset(self::$_cache)) {
-            self::$_cache->save( serialize($temp), $id);
+          if (self::$_cacheTags) {
+                self::$_cache->save( serialize($temp), $id, array('Zend_Locale'));
+          } else {
+                self::$_cache->save( serialize($temp), $id);
+          }
         }
 
         return $temp;
@@ -1379,9 +1383,12 @@ class Cldr extends AbstractLocale
         if (is_array($temp)) {
             $temp = current($temp);
         }
-        if (isset(self::$_cache)) {
+
+        if (self::$_cacheTags) {
+            self::$_cache->save( serialize($temp), $id, array('Zend_Locale'));
+      } else {
             self::$_cache->save( serialize($temp), $id);
-        }
+      }
 
         return $temp;
     }

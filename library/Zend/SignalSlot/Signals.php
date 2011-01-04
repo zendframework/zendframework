@@ -94,6 +94,7 @@ class Signals implements SignalSlot
         foreach ($this->_signals[$signal] as $slot) {
             $responses->push($slot->call($argv));
             if (call_user_func($callback, $responses->last())) {
+                $responses->setStopped(true);
                 break;
             }
         }

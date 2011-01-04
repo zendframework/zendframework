@@ -36,6 +36,30 @@ use Zend\Stdlib\SignalHandler;
  */
 class ResponseCollection extends \SplStack 
 {
+    protected $stopped = false;
+
+    /**
+     * Did the last response provided trigger a short circuit of the stack?
+     * 
+     * @return bool
+     */
+    public function stopped()
+    {
+        return $this->stopped;
+    }
+
+    /**
+     * Mark the collection as stopped (or its opposite)
+     * 
+     * @param  bool $flag 
+     * @return ResponseCollection
+     */
+    public function setStopped($flag)
+    {
+        $this->stopped = (bool) $flag;
+        return $this;
+    }
+
     /**
      * Convenient access to the first handler return value.
      *

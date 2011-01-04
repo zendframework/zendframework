@@ -148,4 +148,48 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
     {
         return (!$value);
     }
+
+    public function testEmitUntilShouldMarkResponseCollectionStoppedWhenConditionMet()
+    {
+        $this->signals->connect('foo.bar', function () { return 'bogus'; });
+        $this->signals->connect('foo.bar', function () { return 'nada'; });
+        $this->signals->connect('foo.bar', function () { return 'found'; });
+        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $responses = $this->signals->emitUntil(function ($result) {
+            return ($result === 'found');
+        }, 'foo.bar');
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertTrue($responses->stopped());
+        $result = $responses->last();
+        $this->assertEquals('found', $result);
+        $this->assertFalse($responses->contains('zero'));
+    }
+
+    public function testEmitUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastHandler()
+    {
+        $this->signals->connect('foo.bar', function () { return 'bogus'; });
+        $this->signals->connect('foo.bar', function () { return 'nada'; });
+        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $this->signals->connect('foo.bar', function () { return 'found'; });
+        $responses = $this->signals->emitUntil(function ($result) {
+            return ($result === 'found');
+        }, 'foo.bar');
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertTrue($responses->stopped());
+        $this->assertEquals('found', $responses->last());
+    }
+
+    public function testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByEmitUntil()
+    {
+        $this->signals->connect('foo.bar', function () { return 'bogus'; });
+        $this->signals->connect('foo.bar', function () { return 'nada'; });
+        $this->signals->connect('foo.bar', function () { return 'found'; });
+        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $responses = $this->signals->emitUntil(function ($result) {
+            return ($result === 'never found');
+        }, 'foo.bar');
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertFalse($responses->stopped());
+        $this->assertEquals('zero', $responses->last());
+    }
 }

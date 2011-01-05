@@ -104,24 +104,24 @@ class GlobalSignals implements StaticSignalSlot
     /**
      * Attach a slot to a signal
      * 
-     * @param  string $signal 
+     * @param  string|SignalAggregate $signal 
      * @param  string|object $context Function name, class name, or object instance
      * @param  null|string $handler If $context is a class or object, the name of the method to call
      * @return Handler Pub-Sub handle (to allow later unsubscribe)
      */
-    public static function connect($signal, $context, $handler = null)
+    public static function connect($signalOrAggregate, $context = null, $handler = null)
     {
         $signals = self::getInstance();
-        return $signals->connect($signal, $context, $handler);
+        return $signals->connect($signalOrAggregate, $context, $handler);
     }
 
     /**
      * Detach a slot from a signal 
      * 
-     * @param  SignalHandler $handle 
+     * @param  SignalAggregate|SignalHandler $handle 
      * @return bool Returns true if signal and slot found, and unsubscribed; returns false if either signal or slot not found
      */
-    public static function detach(SignalHandler $slot)
+    public static function detach($slot)
     {
         $signals = self::getInstance();
         return $signals->detach($slot);

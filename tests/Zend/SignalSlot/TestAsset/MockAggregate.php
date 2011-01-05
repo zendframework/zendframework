@@ -14,30 +14,39 @@
  *
  * @category   Zend
  * @package    Zend_SignalSlot
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\SignalSlot;
+namespace ZendTest\SignalSlot\TestAsset;
+
+use Zend\SignalSlot\SignalSlot,
+    Zend\SignalSlot\SignalAggregate;
 
 /**
- * Interface for messengers
- *
  * @category   Zend
  * @package    Zend_SignalSlot
+ * @subpackage UnitTests
+ * @group      Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SignalSlot
+class MockAggregate implements SignalAggregate
 {
-    public function emit($signal, $argv = null);
-    public function emitUntil($callback, $signal, $argv = null);
-    public function connect($signalOrAggregate, $context = null, $handler = null);
-    public function detach($handle);
-    public function getSignals();
-    public function getHandlers($signal);
-    public function clearHandlers($signal);
+    public function connect(SignalSlot $signals)
+    {
+        $signals->connect('foo.bar', $this, 'fooBar');
+        $signals->connect('foo.baz', $this, 'fooBaz');
+    }
+
+    public function fooBar()
+    {
+        return __METHOD__;
+    }
+
+    public function fooBaz()
+    {
+        return __METHOD__;
+    }
 }

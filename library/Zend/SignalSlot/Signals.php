@@ -103,14 +103,53 @@ class Signals implements SignalSlot
 
     /**
      * Subscribe to a signal
+     *
+     * If a SignalAggregate is provided as the first argument (as either a class
+     * name or instance), this method will call the aggregate's connect() 
+     * method, passing itself as the argument. Once done, the SignalAggregate
+     * instance will be returned.
+     *
+     * Otherwise, the assumption is that the first argument is the signal, and 
+     * that the next arguments describe a callback that will respond to that
+     * signal. A SignalHandler instance describing the signal/handler 
+     * combination will be returned.
      * 
-     * @param  string $signal 
-     * @param  string|object $context Function name, class name, or object instance
+     * @param  string|SignalAggregate $signalOrAggregate
+     * @param  null|string|object $context Function name, class name, or object instance
      * @param  null|string $handler If $context is a class or object, the name of the method to call
-     * @return SignalHandler (to allow later unsubscribe)
+     * @return SignalAggregate|SignalHandler (to allow later unsubscribe)
      */
-    public function connect($signal, $context, $handler = null)
+    public function connect($signalOrAggregate, $context = null, $handler = null)
     {
+        if (null === $context) {
+            // Assuming we have an aggregate that will self-register
+            if (is_string($signalOrAggregate)) {
+                // Class name?
+                if (!class_exists($signalOrAggregate)) {
+                    // Class doesn't exist; probably didn't provide a context
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        'No context provided for signal "%s"',
+                        $signalOrAggregate
+                    ));
+                }
+                // Create instance
+                $signalOrAggregate = new $signalOrAggregate();
+            }
+            if (!$signalOrAggregate instanceof SignalAggregate) {
+                // Not a SignalAggregate? We don't know how to handle it.
+                throw new Exception\InvalidArgumentException(
+                    'Invalid class or object provided as signal aggregate; must implement SignalAggregate'
+                );
+            }
+
+            // Have the signal aggregate wire itself, and return it.
+            $signalOrAggregate->connect($this);
+            return $signalOrAggregate;
+        }
+
+        // Handle normal signals
+        $signal = $signalOrAggregate;
+
         if (empty($this->_signals[$signal])) {
             $this->_signals[$signal] = array();
         }
@@ -125,20 +164,23 @@ class Signals implements SignalSlot
     /**
      * Unsubscribe a slot from a signal 
      * 
-     * @param  SignalHandler $slot 
+     * @param  SignalAggregate|SignalHandler $slot 
      * @return bool Returns true if signal and handle found, and unsubscribed; returns false if either signal or handle not found
      */
-    public function detach(SignalHandler $slot)
+    public function detach($slot)
     {
-        $signal = $slot->getSignal();
-        if (empty($this->_signals[$signal])) {
-            return false;
+        if (!$slot instanceof SignalAggregate && !$slot instanceof SignalHandler) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected SignalHandler or SignalAggregate; received "%s"',
+                (is_object($slot) ? get_class($slot) : gettype($slot))
+            ));
         }
-        if (false === ($index = array_search($slot, $this->_signals[$signal]))) {
-            return false;
+
+        if ($slot instanceof SignalAggregate) {
+            return $this->detachAggregate($slot);
         }
-        unset($this->_signals[$signal][$index]);
-        return true;
+
+        return $this->detachHandler($slot);
     }
 
     /**
@@ -176,5 +218,52 @@ class Signals implements SignalSlot
         if (!empty($this->_signals[$signal])) {
             unset($this->_signals[$signal]);
         }
+    }
+
+    /**
+     * Detach a SignalAggregate
+     *
+     * Iterates through all signals, testing handlers to determine if they
+     * represent the provided SignalAggregate; if so, they are then removed.
+     * 
+     * @param  SignalAggregate $aggregate 
+     * @return true
+     */
+    protected function detachAggregate(SignalAggregate $aggregate)
+    {
+        foreach ($this->_signals as $signal => $handlers) {
+            foreach ($handlers as $key => $handler) {
+                $callback = $handler->getCallback();
+                if (is_object($callback)) {
+                    if ($callback === $aggregate) {
+                        $this->detachHandler($handler);
+                    }
+                } elseif (is_array($callback)) {
+                    if ($callback[0] === $aggregate) {
+                        $this->detachHandler($handler);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Detach a SignalHandler
+     * 
+     * @param  SignalHandler $slot 
+     * @return bool
+     */
+    protected function detachHandler(SignalHandler $slot)
+    {
+        $signal = $slot->getSignal();
+        if (empty($this->_signals[$signal])) {
+            return false;
+        }
+        if (false === ($index = array_search($slot, $this->_signals[$signal]))) {
+            return false;
+        }
+        unset($this->_signals[$signal][$index]);
+        return true;
     }
 }

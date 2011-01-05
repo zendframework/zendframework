@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id:$
  */
 
 namespace ZendTest\SignalSlot;
@@ -191,5 +190,67 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertFalse($responses->stopped());
         $this->assertEquals('zero', $responses->last());
+    }
+
+    public function testConnectAllowsPassingASignalAggregateInstance()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->signals->connect($aggregate);
+        $signals = $this->signals->getSignals();
+        foreach (array('foo.bar', 'foo.baz') as $signal) {
+            $this->assertContains($signal, $signals);
+        }
+    }
+
+    public function testPassingSignalAggregateInstanceToConnectReturnsSignalAggregate()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $test      = $this->signals->connect($aggregate);
+        $this->assertSame($aggregate, $test);
+    }
+
+    public function testConnectAllowsPassingASignalAggregateClassName()
+    {
+        $this->signals->connect('ZendTest\SignalSlot\TestAsset\MockAggregate');
+        $signals = $this->signals->getSignals();
+        foreach (array('foo.bar', 'foo.baz') as $signal) {
+            $this->assertContains($signal, $signals);
+        }
+    }
+
+    public function testPassingSignalAggregateClassNameToConnectReturnsSignalAggregateInstance()
+    {
+        $test = $this->signals->connect('ZendTest\SignalSlot\TestAsset\MockAggregate');
+        $this->assertInstanceOf('ZendTest\SignalSlot\TestAsset\MockAggregate', $test);
+    }
+
+    public function testCanDetachSignalAggregates()
+    {
+        // setup some other signal handlers, to ensure appropriate items are detached
+        $handlerFooBar1 = $this->signals->connect('foo.bar', function(){ return true; });
+        $handlerFooBar2 = $this->signals->connect('foo.bar', function(){ return true; });
+        $handlerFooBaz1 = $this->signals->connect('foo.baz', function(){ return true; });
+        $handlerOther   = $this->signals->connect('other', function(){ return true; });
+
+        $aggregate = new TestAsset\MockAggregate();
+        $this->signals->connect($aggregate);
+        $this->signals->detach($aggregate);
+        $signals = $this->signals->getSignals();
+        foreach (array('foo.bar', 'foo.baz', 'other') as $signal) {
+            $this->assertContains($signal, $signals);
+        }
+
+        $handlers = $this->signals->getHandlers('foo.bar');
+        $this->assertEquals(2, count($handlers));
+        $this->assertContains($handlerFooBar1, $handlers);
+        $this->assertContains($handlerFooBar2, $handlers);
+
+        $handlers = $this->signals->getHandlers('foo.baz');
+        $this->assertEquals(1, count($handlers));
+        $this->assertContains($handlerFooBaz1, $handlers);
+
+        $handlers = $this->signals->getHandlers('other');
+        $this->assertEquals(1, count($handlers));
+        $this->assertContains($handlerOther, $handlers);
     }
 }

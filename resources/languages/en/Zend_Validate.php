@@ -20,7 +20,7 @@
  */
 
 /**
- * EN-Revision: 22668
+ * EN-Revision: 05.Jan.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -190,6 +190,7 @@ return array(
     "'%value%' has not only hexadecimal digit characters" => "'%value%' has not only hexadecimal digit characters",
 
     // Zend_Validate_Hostname
+        self::INVALID_URI             => "'%value%' does not appear to be a valid URI hostname",
     "Invalid type given. String expected" => "Invalid type given. String expected",
     "'%value%' appears to be an IP address, but IP addresses are not allowed" => "'%value%' appears to be an IP address, but IP addresses are not allowed",
     "'%value%' appears to be a DNS hostname but cannot match TLD against known list" => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
@@ -200,6 +201,7 @@ return array(
     "'%value%' does not appear to be a valid local network name" => "'%value%' does not appear to be a valid local network name",
     "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' appears to be a local network name but local network names are not allowed",
     "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded",
+    "'%value%' does not appear to be a valid URI hostname" => "'%value%' does not appear to be a valid URI hostname",
 
     // Zend_Validate_Iban
     "Unknown country within the IBAN '%value%'" => "Unknown country within the IBAN '%value%'",

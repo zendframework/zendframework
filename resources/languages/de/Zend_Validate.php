@@ -20,7 +20,7 @@
  */
 
 /**
- * EN-Revision: 22668
+ * EN-Revision: 06.Jan.2011
  */
 return array(
     // Zend_Validate_Alnum

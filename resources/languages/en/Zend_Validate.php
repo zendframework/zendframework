@@ -20,7 +20,7 @@
  */
 
 /**
- * EN-Revision: 05.Jan.2011
+ * EN-Revision: 06.Jan.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -190,7 +190,6 @@ return array(
     "'%value%' has not only hexadecimal digit characters" => "'%value%' has not only hexadecimal digit characters",
 
     // Zend_Validate_Hostname
-        self::INVALID_URI             => "'%value%' does not appear to be a valid URI hostname",
     "Invalid type given. String expected" => "Invalid type given. String expected",
     "'%value%' appears to be an IP address, but IP addresses are not allowed" => "'%value%' appears to be an IP address, but IP addresses are not allowed",
     "'%value%' appears to be a DNS hostname but cannot match TLD against known list" => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",

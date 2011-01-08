@@ -23,6 +23,8 @@
  */
 namespace Zend\Stdlib;
 
+use Serializable;
+
 /**
  * Serializable version of SplPriorityQueue
  *
@@ -31,13 +33,8 @@ namespace Zend\Stdlib;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SplPriorityQueue extends \SplPriorityQueue
+class SplPriorityQueue extends \SplPriorityQueue implements Serializable
 {
-    /**
-     * @var array Used for serialization
-     */
-    private $_data = array();
-
     /**
      * Serialize to an array
      *
@@ -72,36 +69,36 @@ class SplPriorityQueue extends \SplPriorityQueue
     /**
      * Serialize
      * 
-     * @return array
+     * @return string
      */
-    public function __sleep()
+    public function serialize()
     {
-        $this->_data = array();
+        $data = array();
         $this->setExtractFlags(self::EXTR_BOTH);
         while ($this->valid()) {
-            $this->_data[] = $this->current();
+            $data[] = $this->current();
             $this->next();
         }
         $this->setExtractFlags(self::EXTR_DATA);
 
         // Iterating through a priority queue removes items
-        foreach ($this->_data as $item) {
+        foreach ($data as $item) {
             $this->insert($item['data'], $item['priority']);
         }
 
-        return array('_data');
+        return serialize($data);
     }
 
     /**
      * Deserialize
      * 
+     * @param  string $data
      * @return void
      */
-    public function __wakeup()
+    public function unserialize($data)
     {
-        foreach ($this->_data as $item) {
+        foreach (unserialize($data) as $item) {
             $this->insert($item['data'], $item['priority']);
         }
-        $this->_data = array();
     }
 }

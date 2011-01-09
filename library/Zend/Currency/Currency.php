@@ -81,7 +81,8 @@ class Currency
         'symbol'    => null,
         'locale'    => null,
         'value'     => 0,
-        'service'   => null
+        'service'   => null,
+        'tag'       => 'Zend_Locale'
     );
 
     /**
@@ -431,7 +432,7 @@ class Currency
             throw new Exception\InvalidArgumentException('No currency defined');
         }
 
-        $data = Cldr::getContent('', 'regiontocurrency', $currency);
+        $data = Cldr::getContent($this->_options['locale'], 'regiontocurrency', $currency);
 
         $result = explode(' ', $data);
         return $result;
@@ -453,7 +454,10 @@ class Currency
             }
         }
 
-        return Cldr::getList('', 'regiontocurrency', $region);
+        $data = Zend_Locale_Data::getContent($this->_options['locale'], 'currencytoregion', $region);
+
+        $result = explode(' ', $data);
+        return $result;
     }
 
     /**
@@ -522,9 +526,9 @@ class Currency
      *
      * @return void
      */
-    public static function clearCache()
+    public static function clearCache($tag = null)
     {
-        Cldr::clearCache();
+        Cldr::clearCache($tag);
     }
 
     /**

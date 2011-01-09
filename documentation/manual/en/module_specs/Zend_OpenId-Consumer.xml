@@ -712,10 +712,10 @@ if ($consumer->verify($_GET, $id, $sreg)) {
             Zend Framework provides a special class to support user
             authentication: <classname>Zend_Auth</classname>. This class can be used together
             with <classname>Zend_OpenId_Consumer</classname>. The following example shows how
-            <code>OpenIdAdapter</code> implements
+            <classname>OpenIdAdapter</classname> implements
             the <classname>Zend_Auth_Adapter_Interface</classname> with the
-            <code>authenticate</code> method. This performs an authentication query and
-            verification.
+            <methodname>authenticate()</methodname> method. This performs an authentication query
+            and verification.
         </para>
 
         <para>

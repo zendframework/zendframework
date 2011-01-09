@@ -1076,9 +1076,7 @@ class Locale
      */
     public static function getCache()
     {
-        $cache = Data\Cldr::getCache();
-
-        return $cache;
+        return Data\Cldr::getCache();
     }
 
     /**
@@ -1115,11 +1113,12 @@ class Locale
     /**
      * Clears all set cache data
      *
+     * @param string $tag Tag to clear when the default tag name is not used
      * @return void
      */
-    public static function clearCache()
+    public static function clearCache($tag)
     {
-        Data\Cldr::clearCache();
+        Data\Cldr::clearCache($tag);
     }
 
     /**

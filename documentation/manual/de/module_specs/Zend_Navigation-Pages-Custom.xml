@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 22762 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.custom">
     <title>Erstellung eigener Seiten Typen</title>
@@ -12,12 +12,12 @@
         Objekt, welches an <methodname>setOptions()</methodname> oder an
         <methodname>setConfig()</methodname> übergeben wird. Diese Methoden rufen dann die
         <methodname>set()</methodname> Methode auf, welche Optionen in native oder eigene
-        Eigenschaften mappt. Wenn die Option <code>internal_id</code> angegeben wird, dann wird
-        zuerst nach einer Methode geschaut die <methodname>setInternalId()</methodname> heißt und
-        die Option wird an diese Methode übergeben wenn Sie existiert. Wenn die Methode nicht
+        Eigenschaften mappt. Wenn die Option <property>internal_id</property> angegeben wird, dann
+        wird zuerst nach einer Methode geschaut die <methodname>setInternalId()</methodname> heißt
+        und die Option wird an diese Methode übergeben wenn Sie existiert. Wenn die Methode nicht
         existiert, wird die Option als eigene Eigenschaft der Seite gesetzt, und ist über
-        <code>$internalId = $page->internal_id;</code> oder
-        <code>$internalId = $page->get('internal_id');</code> erreichbar.
+        <command>$internalId = $page->internal_id;</command> oder
+        <command>$internalId = $page->get('internal_id');</command> erreichbar.
     </para>
 
     <example id="zend.navigation.custom.example.simple">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: 21829 -->
+<!-- EN-Revision: 22760 -->
+<!-- Reviewed: 22760 -->
 <sect1 id="zend.translate.using">
     <title>Verwendung der Übersetzungsadapter</title>
 
@@ -118,9 +118,9 @@ printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
 
     <para>
         Statt <methodname>print()</methodname> wird die <methodname>printf()</methodname> Funktion
-        benutzt und alle variablen Parameter mit <code>%1\$s</code> Blöcken ersetzt.
-        Der erste ist <code>%1\$s</code>, der zweite ist <code>%2\$s</code>, und so weiter.
-        Auf diesen Weg kann übersetzt werden, ohne den exakten Wert zu wissen. In unserem
+        benutzt und alle variablen Parameter mit <emphasis>%1\$s</emphasis> Blöcken ersetzt.
+        Der erste ist <emphasis>%1\$s</emphasis>, der zweite ist <emphasis>%2\$s</emphasis>, und so
+        weiter. Auf diesen Weg kann übersetzt werden, ohne den exakten Wert zu wissen. In unserem
         Beispiel ist das Datum immer der aktuelle Tag, aber der String kann übersetzt
         werden, ohne über den aktuellen Tag Bescheid zu wissen.
     </para>

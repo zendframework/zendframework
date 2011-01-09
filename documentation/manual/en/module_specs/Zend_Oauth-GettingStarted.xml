@@ -59,8 +59,8 @@ $consumer = new Zend_Oauth_Consumer($config);
         In addition, you should note several other configuration values not
         explicitly used: requestMethod and requestScheme. By default,
         <classname>Zend_Oauth_Consumer</classname> sends requests as POST (except for a
-        redirect which uses GET). The customised client (see later) also includes its
-        authorization by way of a header. Some services may, at their discretion,
+        redirect which uses <constant>GET</constant>). The customised client (see later) also
+        includes its authorization by way of a header. Some services may, at their discretion,
         require alternatives. You can reset the requestMethod (which defaults
         to Zend_Oauth::POST) to Zend_Oauth::GET, for example, and reset the
         requestScheme from its default of Zend_Oauth::REQUEST_SCHEME_HEADER to one

@@ -275,7 +275,8 @@ class Date extends DateObject
                                 throw new Exception\InvalidArgumentException("Instance of Zend_Cache expected");
                             }
 
-                            parent::$_cache = $value;
+                            parent::$_cache     = $value;
+                            parent::$_cacheTags = Zend_Date_DateObject::_getTagSupportForCache();
                             Cldr::setCache($value);
                         }
                         break;
@@ -558,7 +559,7 @@ class Date extends DateObject
         $comment = false;
         $format  = '';
         $orig    = '';
-        for ($i = 0; $i < strlen($part); ++$i) {
+        for ($i = 0; isset($part[$i]); ++$i) {
             if ($part[$i] == "'") {
                 $comment = $comment ? false : true;
                 if (isset($part[$i+1]) && ($part[$i+1] == "'")) {

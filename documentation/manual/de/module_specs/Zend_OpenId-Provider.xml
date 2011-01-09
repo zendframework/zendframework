@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 22757 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
@@ -18,7 +18,7 @@
         <para>
             Das folgende Beispiel beinhaltet Code für das Erstellen eines Benutzerzugang indem
             <classname>Zend_OpenId_Provider::register</classname> verwendet wird. Das Link-Element
-            mit <code>rel="openid.server"</code> zeigt auf das eigene Serverscript. Wenn diese
+            mit <command>rel="openid.server"</command> zeigt auf das eigene Serverscript. Wenn diese
             Identität zu einer OpenID-aktivierten Seite übertragen wird, wird eine Authentifizierung
             zu diesem Server durchgeführt.
         </para>
@@ -254,7 +254,7 @@ ihre Identitäts URL ist.
             Es ist möglich alle Provider Funktionalitäten in einem Skript zusammen zu kombinieren.
             In diesem Fall werden Login und Vertraute <acronym>URL</acronym>s unterdrückt, und
             <classname>Zend_OpenId_Provider</classname> nimmt an das diese auf die gleiche Seite
-            zeigen mit einem zusätzlichen "openid.action" GET Argument.
+            zeigen mit einem zusätzlichen "openid.action" <constant>GET</constant> Argument.
         </para>
 
         <note>
@@ -302,7 +302,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             Wenn man dieses Beispiel mit den vorherigen Beispielen vergleicht, die in einzelne
             Seiten aufgeteilt sind, sieht man zusätzlich zum Dispatch Code, nur einen Unterschied:
             <methodname>unset($_GET['openid_action'])</methodname>. Dieser Aufruf von
-            <code>unset</code> ist notwendig um die nächste Anfrage zum Haupthandler zu routen.
+            <methodname>unset()</methodname> ist notwendig um die nächste Anfrage zum Haupthandler
+            zu routen.
         </para>
     </sect2>
 

@@ -44,7 +44,6 @@ print $filter->filter(' This is (my) content: ');
             The above example returns 'This is (my) content:'. Notice that the whitespace characters
             have been removed.
         </para>
-
     </sect3>
 
     <sect3 id="zend.filter.set.stringtrim.types">
@@ -66,7 +65,6 @@ print $filter->filter(' This is (my) content:');
             The <methodname>getCharList()</methodname> return the values set for charlist.
         </para>
     </sect3>
-
 </sect2>
 <!--
 vim:se ts=4 sw=4 et:

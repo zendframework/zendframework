@@ -41,8 +41,9 @@
 
         <listitem>
             <para>
-                <emphasis><property>defaultMetadataCache</property></emphasis>: the name of the cache 
-                template or an instance of Zend_Cache_Core to use as metadata cache for Zend_Db_Table.
+                <emphasis><property>defaultMetadataCache</property></emphasis>: the name of the
+                cache template or an instance of <classname>Zend_Cache_Core</classname> to use as
+                metadata cache for <classname>Zend_Db_Table</classname>.
             </para>
         </listitem>
     </itemizedlist>

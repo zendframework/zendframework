@@ -7,7 +7,8 @@
         <classname>Zend_Application_Resource_Locale</classname> can be used to
         set an application-wide locale which is then used in all classes and components
         which work with localization or internationalization. By default the locale is
-        saved in a Zend_Registry entry with key 'Zend_Locale'.
+        saved in a <classname>Zend_Registry</classname> entry with key
+        '<property>Zend_Locale</property>'.
     </para>
 
     <para>

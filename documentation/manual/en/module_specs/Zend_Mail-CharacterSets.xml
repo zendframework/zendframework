@@ -6,9 +6,10 @@
     <para>
         <classname>Zend_Mail</classname> does not check for the correct character set of the mail
         parts. When instantiating <classname>Zend_Mail</classname>, a charset for the e-mail itself
-        may be given. It defaults to <code>iso-8859-1</code>. The application has to make sure that
-        all parts added to that mail object have their content encoded in the correct character set.
-        When creating a new mail part, a different charset can be given for each part.
+        may be given. It defaults to <emphasis>iso-8859-1</emphasis>. The application has to make
+        sure that all parts added to that mail object have their content encoded in the correct
+        character set. When creating a new mail part, a different charset can be given for each
+        part.
     </para>
 
     <note>

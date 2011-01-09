@@ -119,8 +119,8 @@ printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
 
     <para>
         Instead of <methodname>print()</methodname>, use the <methodname>printf()</methodname>
-        function and replace all parameters with <code>%1\$s</code> parts.
-        The first is <code>%1\$s</code>, the second is <code>%2\$s</code>,
+        function and replace all parameters with <emphasis>%1\$s</emphasis> parts.
+        The first is <emphasis>%1\$s</emphasis>, the second is <emphasis>%2\$s</emphasis>,
         and so on. This way a translation can be done without knowing
         the exact value. In our example, the date is always the actual day,
         but the string can be translated without the knowledge of the actual

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22159 -->
+<!-- EN-Revision: 22756 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.edit">
     <title>Manipulation von Maßeinheiten</title>
@@ -14,38 +14,37 @@
     <itemizedlist>
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.convert"><code>Konvertieren</code></link>
+                <link linkend="zend.measure.edit.convert">Konvertieren</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.add"><code>Addieren und Subtrahieren</code></link>
+                <link linkend="zend.measure.edit.add">Addieren und Subtrahieren</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.equal"><code>Identität Vergleichen</code></link>
+                <link linkend="zend.measure.edit.equal">Identität Vergleichen</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.compare"><code>Werte Vergleichen</code></link>
+                <link linkend="zend.measure.edit.compare">Werte Vergleichen</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.changevalue"><code>Werte per Hand
-                    ändern</code></link>
+                <link linkend="zend.measure.edit.changevalue">Werte per Hand ändern</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.changetype"><code>Typ per Hand ändern</code></link>
+                <link linkend="zend.measure.edit.changetype">Typ per Hand ändern</link>
             </para>
         </listitem>
     </itemizedlist>
@@ -63,9 +62,9 @@
         </para>
 
         <para>
-            Die <code>convertTo</code> Methode akzeptiert einen optionalen Parameter. Mit diesem
-            Parameter kann eine Genauigkeit, für den zurückgegebenen Wert, definiert werden. Die
-            Standardgenauigkeit ist '<code>2</code>'.
+            Die <methodname>convertTo()</methodname> Methode akzeptiert einen optionalen Parameter.
+            Mit diesem Parameter kann eine Genauigkeit, für den zurückgegebenen Wert, definiert
+            werden. Die Standardgenauigkeit ist '2'.
         </para>
 
         <example id="zend.measure.edit.convert.example-1">

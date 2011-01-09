@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
+<!-- EN-Revision: 22747 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Json</title>
@@ -43,8 +43,8 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ]]></programlisting>
 
         <para>
-            Jedes dekodierte Objekte wird als <code>StdClass</code> Objekt mit Eigenschaften
-            entsprechend der Schlüssel/Wert Paare der <acronym>JSON</acronym> Notation
+            Jedes dekodierte Objekte wird als <classname>StdClass</classname> Objekt mit
+            Eigenschaften entsprechend der Schlüssel/Wert Paare der <acronym>JSON</acronym> Notation
             zuürckgegeben.
         </para>
 
@@ -112,9 +112,10 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             Wert-Objekt Pattern und ist nicht änderbar. Man kann den Javascript Ausdruck als erstes
             Argument des Konstruktors setzen. Standardmäßig kodiert
             <classname>Zend_Json::encode</classname> keine Javascript Callbacks, wenn man die Option
-            <code>'enableJsonExprFinder' = true</code> in der <code>encode</code> Funktion übergibt.
-            Aktiviert, unterstützt arbeiten Ausdrücke für alle enthaltenen Ausdrücke in großen
-            Objektstrukturen. Ein Verwendungsbeispiel würde wie folgt aussehen:
+            <property>enableJsonExprFinder</property> auf <constant>TRUE</constant> setzt und der
+            <methodname>encode()</methodname> Funktion übergibt. Aktiviert, unterstützt arbeiten
+            Ausdrücke für alle enthaltenen Ausdrücke in großen Objektstrukturen. Ein
+            Verwendungsbeispiel würde wie folgt aussehen:
         </para>
 
         <programlisting language="php"><![CDATA[

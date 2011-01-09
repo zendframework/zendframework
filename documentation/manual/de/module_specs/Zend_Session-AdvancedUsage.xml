@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
     <title>Fortgeschrittene Benutzung</title>
@@ -136,9 +136,9 @@ php_value session.auto_start 0
                     irgendeine Ausgabe (z.B. <ulink
                         url="http://www.php.net/headers_sent">HTTP headers</ulink> ) von
                     <acronym>PHP</acronym> an den Client gesendet wird, wenn standardmäßige,
-                    Cookie-basierte Sessions verwendet werden (sehr empfehlenswert). Siehe <xref
-                        linkend="zend.session.global_session_management.headers_sent" /> für
-                    weitere Informationen.
+                    Cookie-basierte Sessions verwendet werden (sehr empfehlenswert). Siehe <link
+                        linkend="zend.session.global_session_management.headers_sent">dieses
+                        Kapitel</link> für weitere Informationen.
                 </para>
             </listitem>
         </orderedlist>
@@ -331,8 +331,9 @@ try {
             wärend des selben Requests benötigt wird. Zum Beispiel, könnte ein Entwickler die
             Referenz in einer statischen Variable speichern, die Referenz zu einer <ulink
                 url="http://www.martinfowler.com/eaaCatalog/registry.html">Registry</ulink>
-            hinzufügen (siehe <xref linkend="zend.registry" />), oder diese andernfalls für andere
-            Methoden verfügbar zu machen die Zugriff auf den Namensraum der Session benötigen.
+            hinzufügen (siehe <link linkend="zend.registry">Zend_Registry</link>), oder diese
+            andernfalls für andere Methoden verfügbar zu machen die Zugriff auf den Namensraum der
+            Session benötigen.
         </para>
     </sect2>
 

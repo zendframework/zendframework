@@ -38,6 +38,7 @@ abstract class DateObject {
      */
     private   $_unixTimestamp;
     protected static $_cache         = null;
+    protected static $_cacheTags     = false;
     protected static $_defaultOffset = 0;
 
     /**
@@ -258,7 +259,11 @@ abstract class DateObject {
         }
 
         if (isset(self::$_cache)) {
-            self::$_cache->save( serialize($date), $id);
+          if (self::$_cacheTags) {
+            self::$_cache->save( serialize($date), $id, array('Zend_Date'));
+          } else {
+                self::$_cache->save( serialize($date), $id);
+          }
         }
 
         return $date;
@@ -344,7 +349,11 @@ abstract class DateObject {
             }
 
             if (isset(self::$_cache)) {
-                self::$_cache->save( serialize($timestamp), $idstamp);
+              if (self::$_cacheTags) {
+                self::$_cache->save( serialize($timestamp), $idstamp, array('Zend_Date'));
+              } else {
+                    self::$_cache->save( serialize($timestamp), $idstamp);
+              }
             }
         }
 
@@ -832,7 +841,11 @@ abstract class DateObject {
         }
 
         if (isset(self::$_cache)) {
-            self::$_cache->save( serialize($array), $id);
+          if (self::$_cacheTags) {
+            self::$_cache->save( serialize($array), $id, array('Zend_Date'));
+          } else {
+                self::$_cache->save( serialize($array), $id);
+          }
         }
 
         return $array;
@@ -877,7 +890,7 @@ abstract class DateObject {
      * @param float $a - value to correct
      * @param float $b - maximum range to set
      */
-    private function _range($a, $b) 
+    private function _range($a, $b)
     {
         while ($a < 0) {
             $a += $b;
@@ -1058,5 +1071,23 @@ abstract class DateObject {
         date_default_timezone_set($zone);
 
         return $offset;
+    }
+
+    /**
+     * Internal method to check if the given cache supports tags
+     *
+     * @param Zend_Cache $cache
+     */
+    protected static function _getTagSupportForCache()
+    {
+        $backend = self::$_cache->getBackend();
+        if ($backend instanceof \Zend\Cache\Backend\ExtendedInterface) {
+            $cacheOptions = $backend->getCapabilities();
+            self::$_cacheTags = $cacheOptions['tags'];
+        } else {
+            self::$_cacheTags = false;
+        }
+
+        return self::$_cacheTags;
     }
 }

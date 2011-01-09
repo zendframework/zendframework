@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21123 -->
+<!-- EN-Revision: 22784 -->
 <!-- Reviewed: no -->
-<sect1 id="zend.service.windowsazure" xmlns:xi="http://www.w3.org/2001/XInclude">
+<sect1 id="zend.service.windowsazure">
     <title>Zend_Service_WindowsAzure</title>
 
     <sect2 id="zend.service.windowsazure.introduction">
@@ -44,7 +44,7 @@
 
         <para>
             Der erste Fall benötigt die Installation der <ulink
-                url="http://www.microsoft.com/downloads/details.aspx?FamilyID=6967ff37-813e-47c7-b987-889124b43abd&amp;displaylang=en">Windows
+                url="http://www.microsoft.com/downloads/details.aspx?FamilyID=6967ff37-813e-47c7-b987-889124b43abd&displaylang=en">Windows
                 Azure SDK</ulink> auf der Entwicklungsmaschine. Sie ist aktuell nur für Windows
             Umgebungen vorhanden; es gibt Fortschritte für eine Java-basierende Version der
             <acronym>SDK</acronym> welche auf jeder Plattform ausgeführt werden kann.
@@ -116,8 +116,4 @@
             auf einem unabhängigen Web Server gehostet wird.
         </para>
     </sect2>
-
-    <xi:include href="Zend_Service_WindowsAzure_Blob.xml" />
-    <xi:include href="Zend_Service_WindowsAzure_Table.xml" />
-    <xi:include href="Zend_Service_WindowsAzure_Queue.xml" />
 </sect1>

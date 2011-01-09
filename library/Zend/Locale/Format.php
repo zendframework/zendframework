@@ -202,7 +202,11 @@ class Format
      */
     public static function convertNumerals($input, $from, $to = null)
     {
-        $from   = strtolower($from);
+        if (!self::_getUniCodeSupport()) {
+            trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
+        }
+
+      $from   = strtolower($from);
         $source = Cldr::getContent('en', 'numberingsystem', $from);
         if (empty($source)) {
             throw new Exception\InvalidArgumentException(
@@ -507,7 +511,11 @@ class Format
      */
     public static function isNumber($input, array $options = array())
     {
-        $options = self::_checkOptions($options) + self::$_options;
+        if (!self::_getUniCodeSupport()) {
+            trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
+        }
+
+      $options = self::_checkOptions($options) + self::$_options;
 
         // Get correct signs for this locale
         $symbols = Cldr::getList($options['locale'],'symbols');
@@ -769,7 +777,11 @@ class Format
      */
     private static function _parseDate($date, $options)
     {
-        if (!is_string($date)) {
+        if (!self::_getUniCodeSupport()) {
+            trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
+        }
+
+      if (!is_string($date)) {
             throw new Exception\InvalidArgumentException('Invalid date provided; must be string, ' . gettype($date) . ' provided');
         }
         $options = self::_checkOptions($options) + self::$_options;
@@ -1261,5 +1273,16 @@ class Format
             $options['date_format'] = self::getDateTimeFormat($options['locale']);
         }
         return self::_parseDate($datetime, $options);
+    }
+
+    /**
+     * Internal method to detect of Unicode supports UTF8
+     * which should be enabled within vanilla php installations
+     *
+     * @return boolean
+     */
+    protected static function _getUniCodeSupport()
+    {
+        return (@preg_match('/\pL/u', 'a')) ? true : false;
     }
 }

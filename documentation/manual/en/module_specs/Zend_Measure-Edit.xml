@@ -13,42 +13,40 @@
     <itemizedlist>
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.convert"><code>Convert</code></link>
+                <link linkend="zend.measure.edit.convert">Convert</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.add"><code>Add and subtract</code></link>
+                <link linkend="zend.measure.edit.add">Add and subtract</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link linkend="zend.measure.edit.equal"><code>Compare to boolean</code></link>
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                <link
-                    linkend="zend.measure.edit.compare"><code>Compare to
-                    greater/smaller</code></link>
+                <link linkend="zend.measure.edit.equal">Compare to boolean</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <link
-                    linkend="zend.measure.edit.changevalue"><code>Manually change
-                    values</code></link>
+                    linkend="zend.measure.edit.compare">Compare to greater/smaller</link>
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <link
-                    linkend="zend.measure.edit.changetype"><code>Manually change types</code></link>
+                    linkend="zend.measure.edit.changevalue">Manually change values</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link
+                    linkend="zend.measure.edit.changetype">Manually change types</link>
             </para>
         </listitem>
     </itemizedlist>
@@ -66,9 +64,9 @@
         </para>
 
         <para>
-            The <code>convertTo</code> method accepts an optional parameter. With this parameter you
-            can define an precision for the returned output. The standard precision is
-            '<code>2</code>'.
+            The <methodname>convertTo()</methodname> method accepts an optional parameter. With
+            this parameter you can define an precision for the returned output. The standard
+            precision is '2'.
         </para>
 
         <example id="zend.measure.edit.convert.example-1">

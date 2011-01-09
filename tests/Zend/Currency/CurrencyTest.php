@@ -487,7 +487,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
         try {
             $currency = new Currency\Currency(array('currency' => 'USD'));
-            $this->assertTrue(is_array($currency->getRegionList()));
+            $this->assertTrue(in_array('US', $currency->getRegionList()));
         } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
@@ -495,7 +495,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency\Currency(array('currency' => 'USD'), 'en_US');
         $currency->setFormat(array('currency' => null));
         try {
-            $this->assertEquals('US', $currency->getRegionList());
+            $this->assertTrue(in_array('US', $currency->getRegionList()));
             $this->fail("Exception expected");
         } catch (Currency\Exception\InvalidArgumentException $e) {
             $this->assertContains("No currency defined", $e->getMessage());
@@ -520,7 +520,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         }
 
         $currency = new Currency\Currency('ar_EG');
-        $this->assertTrue(array_key_exists('EGP', $currency->getCurrencyList()));
+        $this->assertTrue(in_array('EGP', $currency->getCurrencyList()));
     }
 
     /**

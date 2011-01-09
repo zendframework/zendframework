@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -243,7 +242,14 @@ class StripTags extends AbstractFilter
             $pos   = strrpos($value, '<!--');
             $start = substr($value, 0, $pos);
             $value = substr($value, $pos);
-            $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value);
+
+            // If there is no comment closing tag, strip whole text
+            if (!preg_match('/--\s*>/s', $value)) {
+                $value = '';
+            } else {
+                $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value);
+            }
+
             $value = $start . $value;
         }
 

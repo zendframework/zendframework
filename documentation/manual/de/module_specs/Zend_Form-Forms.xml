@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22147 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -1087,8 +1087,8 @@ $name = $form->getName();
 
         <para>
             Um die Aktion (URL zu der die Form übermittelt) und Methode (Methode mit der
-            übermittelt werden soll, 'POST' oder 'GET') zu setzen, können die Zugriffsmethoden für
-            action und method verwendet werden:
+            übermittelt werden soll, 'POST' oder '<constant>GET</constant>') zu setzen, können die
+            Zugriffsmethoden für action und method verwendet werden:
         </para>
 
         <programlisting language="php"><![CDATA[

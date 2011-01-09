@@ -216,8 +216,8 @@ $translate = new Zend_Translate(
         </para>
 
         <para>
-            If you want to have only specified languages from the source translated
-            you can set the option '<code>defined_language</code>' to <constant>TRUE</constant>.
+            If you want to have only specified languages from the source translated you can
+            set the option <property>defined_language</property>' to <constant>TRUE</constant>.
             With this option you can add the wished languages explicitly with
             <methodname>addLanguage()</methodname>. The default value for this option is to add all
             languages.
@@ -283,26 +283,26 @@ $translate->addTranslation(
 
         <para>
             There are three different options for the CSV adapter.
-            You can set '<code>delimiter</code>', '<code>limit</code>' and
-            '<code>enclosure</code>'.
+            You can set <property>delimiter</property>, <property>limit</property> and
+            <property>enclosure</property>.
         </para>
 
         <para>
-            The default delimiter for CSV string is '<code>;</code>', but
-            with the option '<code>delimiter</code>'
+            The default delimiter for CSV string is '<emphasis>;</emphasis>', but
+            with the option <property>delimiter</property>
             you can decide to use another one.
         </para>
 
         <para>
-            The default limit for a line within a CSV file is '<code>0</code>'. This means
+            The default limit for a line within a CSV file is '<emphasis>0</emphasis>'. This means
             that the end of a CSV line is searched automatically. If you set
-            '<code>limit</code>' to any value, then the CSV file will be
+            <property>limit</property> to any value, then the CSV file will be
             read faster, but any line exceeding this limit will be truncated.
         </para>
 
         <para>
-            The default enclosure to use for CSV files is '<code>"</code>'. You can
-            set a different one using the option '<code>enclosure</code>'.
+            The default enclosure to use for CSV files is '<emphasis>"</emphasis>. You can
+            set a different one using the option <emphasis>enclosure</emphasis>.
         </para>
 
         <example id="zend.translate.sourcecreation.csv.example2">
@@ -383,14 +383,14 @@ $translate->addTranslation(
         <para>
             <acronym>INI</acronym> files have several restrictions. If a value in the
             <acronym>INI</acronym> file contains any non-alphanumeric characters it needs to be
-            enclosed in double-quotes (<code>"</code>). There are also reserved words which must not
-            be used as keys for <acronym>INI</acronym> files. These include:
-            <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>,
-            and <constant>FALSE</constant>. Values <constant>NULL</constant>, <code>no</code> and
-            <constant>FALSE</constant> results in <code>""</code>, <code>yes</code> and
-            <constant>TRUE</constant> results in <code>1</code>. Characters
-            <code>{}|&amp;~![()"</code> must not be used anywhere in the key and have a special
-            meaning in the value. Do not use them as it will produce unexpected behaviour.
+            enclosed in double-quotes (<emphasis>"</emphasis>). There are also reserved words which
+            must not be used as keys for <acronym>INI</acronym> files. These include:
+            <constant>NULL</constant>, yes, no, <constant>TRUE</constant>, and
+            <constant>FALSE</constant>. Values <constant>NULL</constant>, <emphasis>no</emphasis>
+            and <constant>FALSE</constant> results in <emphasis>""</emphasis>,
+            <emphasis>yes</emphasis> and <constant>TRUE</constant> results in '1'. Characters
+            <emphasis>{}|&amp;~![()"</emphasis> must not be used anywhere in the key and have a
+            special meaning in the value. Do not use them as it will produce unexpected behaviour.
         </para>
     </sect2>
 </sect1>

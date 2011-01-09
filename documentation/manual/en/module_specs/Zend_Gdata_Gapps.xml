@@ -134,8 +134,9 @@ $user = $gdata->insertUser($user);
 
             <para>
                 The user's password should normally be provided as cleartext.
-                Optionally, the password can be provided as an SHA-1 digest if
-                <command>login->passwordHashFunction</command> is set to 'SHA-1'.
+                Optionally, the password can be provided as an <acronym>SHA-1</acronym> digest if
+                <command>login->passwordHashFunction</command> is set to
+                '<property>SHA-1</property>'.
             </para>
         </sect3>
 
@@ -189,8 +190,8 @@ echo 'Has Agreed To Terms: ' .
                 If the specified user cannot be located a ServiceException
                 will be thrown with an error code of
                 <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>.
-                ServiceExceptions will be covered in <xref
-                linkend="zend.gdata.gapps.exceptions" />.
+                ServiceExceptions will be covered in <link
+                linkend="zend.gdata.gapps.exceptions">the exceptions chapter</link>.
             </para>
         </sect3>
 
@@ -220,8 +221,8 @@ foreach ($feed as $user) {
                 Alternatively, call <methodname>getUserFeed()</methodname> with no
                 options. Keep in mind that on larger
                 domains this feed may be paged by the server. For more
-                information on paging, see <xref
-                linkend="zend.gdata.introduction.paging" />.
+                information on paging, see <link
+                linkend="zend.gdata.introduction.paging">the paging chapter</link>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -457,8 +458,8 @@ echo 'Owner: ' . $nickname->login->username . "\n";
                 As with users, if no corresponding nickname is found a
                 ServiceException will be thrown with an error code of
                 <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>. Again, these
-                will be discussed in <xref linkend="zend.gdata.gapps.exceptions"
-                />.
+                will be discussed in <link
+                    linkend="zend.gdata.gapps.exceptions">the exceptions chapter</link>.
             </para>
         </sect3>
 
@@ -568,7 +569,7 @@ $gdata->deleteNickname('bar');
 
         <para>
             Google Groups allows people to post messages like an email list. Google
-            is depreciating the Email List API. Google Groups provides some neat
+            is depreciating the Email List <acronym>API</acronym>. Google Groups provides some neat
             features like nested groups and group owners. If you want to start
             a new email lst, it is advisable to use Google Groups instead.
             Google's Email List is not compatible with Google Groups. So if you
@@ -595,7 +596,7 @@ $gdata->createGroup('friends', 'The Friends Group');
 
             <para>
                 Groups can also be created by instantiating
-                GroupEntry, providing a group id and name for the group, 
+                GroupEntry, providing a group id and name for the group,
                 then calling <methodname>insertGroup()</methodname> on a service
                 object to upload the entry to the server.
             </para>
@@ -634,7 +635,7 @@ foreach ($entry->property as $p) {
 ]]></programlisting>
 
             <para>
-                This will create a <classname>Zend_Gdata_Gapps_GroupEntry</classname> 
+                This will create a <classname>Zend_Gdata_Gapps_GroupEntry</classname>
                 object which holds the properties about the group.
             </para>
 
@@ -678,7 +679,7 @@ foreach ($feed->entry as $entry) {
 ]]></programlisting>
 
             <para>
-                This will create a <classname>Zend_Gdata_Gapps_GroupFeed</classname> 
+                This will create a <classname>Zend_Gdata_Gapps_GroupFeed</classname>
                 object which holds each group on the domain.
             </para>
 
@@ -704,7 +705,8 @@ foreach ($feed->entry as $entry) {
             <title>Deleting a group</title>
 
             <para>
-                To delete a group, call the deleteGroup() convenience method:
+                To delete a group, call the <methodname>deleteGroup()</methodname> convenience
+                method:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -786,7 +788,7 @@ foreach ($feed->entry as $entry) {
 
         <para>
             Each member subscribed to a group is represented by an
-            instance of <classname>Zend_Gdata_Gapps_MemberEntry</classname>. 
+            instance of <classname>Zend_Gdata_Gapps_MemberEntry</classname>.
             Through this class, individual recipients can be added and removed
             from groups.
         </para>
@@ -857,8 +859,8 @@ foreach ($feed as $member) {
 ]]></programlisting>
 
             <para>
-                Alternatively, construct a new MemberQuery, set its groupId 
-                property to match the desired group id, and call 
+                Alternatively, construct a new MemberQuery, set its groupId
+                property to match the desired group id, and call
                 <methodname>getMemberFeed()</methodname> on a service object.
             </para>
 
@@ -887,8 +889,8 @@ foreach ($feed as $member) {
 
         <para>
             Each owner associated with a group is represented by an
-            instance of <classname>Zend_Gdata_Gapps_OwnerEntry</classname>. 
-            Through this class, individual owners can be added and removed 
+            instance of <classname>Zend_Gdata_Gapps_OwnerEntry</classname>.
+            Through this class, individual owners can be added and removed
             from groups.
         </para>
 
@@ -925,8 +927,8 @@ foreach ($feed as $owner) {
 ]]></programlisting>
 
             <para>
-                Alternatively, construct a new OwnerQuery, set its groupId 
-                property to match the desired group id, and call 
+                Alternatively, construct a new OwnerQuery, set its groupId
+                property to match the desired group id, and call
                 <methodname>getOwnerFeed()</methodname> on a service object.
             </para>
 
@@ -953,7 +955,7 @@ foreach ($feed as $owner) {
             <title>Check to see if an email is the owner of a group</title>
 
             <para>
-                To check to see if an email is the owner of a group, simply call 
+                To check to see if an email is the owner of a group, simply call
                 the <methodname>isOwner()</methodname> convenience method:
             </para>
 
@@ -1103,7 +1105,7 @@ foreach ($feed as $list) {
             <title>Deleting an email list</title>
 
             <para>
-                To delete an email list, call the deleteEmailList()
+                To delete an email list, call the <methodname>deleteEmailList()</methodname>
                 convenience method:
             </para>
 
@@ -1206,7 +1208,7 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
             Each ServiceException instance may hold one or more Error objects.
             Each of these objects contains an error code, reason, and
             (optionally) the input which triggered the exception. A complete
-            list of known error codes is provided in the Zend Framework <acronym>API</acronym>
+            list of known error codes is provided in Zend Framework's <acronym>API</acronym>
             documentation under <classname>Zend_Gdata_Gapps_Error</classname>. Additionally, the
             authoritative error list is available online at <ulink
                 url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google

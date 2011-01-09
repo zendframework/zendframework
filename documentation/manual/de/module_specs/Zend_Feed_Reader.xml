@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22392 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -44,7 +44,7 @@
             (nicht persistent) damit wiederholte <acronym>API</acronym> Aufrufe für den gleichen
             Feed eine zusätzliche Verwendung von <acronym>DOM</acronym> oder XPath verhindert.
             Drittens erlaubt das Importieren von Feeds von einer <acronym>URI</acronym> den
-            Vorteil von konditionellen <acronym>HTTP</acronym> <acronym>GET</acronym> Anfragen
+            Vorteil von konditionellen <acronym>HTTP</acronym> <constant>GET</constant> Anfragen
             welche es Servern erlauben eine leere 304 Anfrage auszulösen wenn der angefragte Feed
             seit der Zeit zu der er das letzte Mal angefragt wurde, nicht verändert wurde. Im
             letzten Fall hält eine Instanz von <classname>Zend_Cache</classname> den zuletzt
@@ -73,7 +73,7 @@
             String, einer Datei, <acronym>URI</acronym> oder einer Instanz des Typs
             <classname>Zend_Feed_Abstract</classname> importiert werden. Das importieren von einer
             <acronym>URI</acronym> kann zusätzlich eine konditionelle <acronym>HTTP</acronym>
-            <acronym>GET</acronym> Anfrage benützen. Wenn das importieren fehlschlägt, wird eine
+            <constant>GET</constant> Anfrage benützen. Wenn das importieren fehlschlägt, wird eine
             Exception geworfen. Das Endergebnis wird ein Objekt des Typs
             <classname>Zend_Feed_Reader_FeedInterface</classname> sein, die Core Implementation
             von <classname>Zend_Feed_Reader_Feed_Rss</classname> und
@@ -284,7 +284,7 @@ Zend_Feed_Reader::setCache($cache);
             <para>
                 Die große Frage wenn man ofters einen Feed importiert, ist ob er sich geändert hat.
                 Wenn ein Cache aktiviert ist, kann man die Unterstützung für <acronym>HTTP</acronym>
-                Conditional <acronym>GET</acronym> hinzufügen um diese Frage zu beantworten.
+                Conditional <constant>GET</constant> hinzufügen um diese Frage zu beantworten.
             </para>
 
             <para>
@@ -326,7 +326,7 @@ $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 
             <para>
                 Im obige Beispiel werden, bei aktivierten <acronym>HTTP</acronym> Conditional
-                <acronym>GET</acronym> Anfragen, die Werte der Antwort Header für ETag und
+                <constant>GET</constant> Anfragen, die Werte der Antwort Header für ETag und
                 Last-Modified mit dem Feed gecacht. Für die nächsten 24 Stunden (die Lebenszeit des
                 Caches) werden Feed am Cache nur dann aktualisiert wenn eine nicht-304 Antwort
                 empfangen wird, die ein gültiges <acronym>RSS</acronym> oder Atom

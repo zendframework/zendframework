@@ -33,26 +33,26 @@
         <para>
             <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
             Objects can be added to a given <classname>Zend_Mime_Message</classname> object by
-            calling <code>-&gt;addPart($part)</code>
+            calling <methodname>-&gt;addPart($part)</methodname>
         </para>
 
         <para>
             An array with all <link
                 linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
-            objects in the <classname>Zend_Mime_Message</classname> is returned
-            from the method <code>-&gt;getParts()</code>. The <classname>Zend_Mime_Part</classname>
+            objects in the <classname>Zend_Mime_Message</classname> is returned from the method
+            <methodname>getParts()</methodname>. The <classname>Zend_Mime_Part</classname>
             objects can then be changed since they are stored in the array as references. If
             parts are added to the array or the sequence is changed, the array needs
             to be given back to the <link
                 linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
-            object by calling <code>-&gt;setParts($partsArray)</code>.
+            object by calling <methodname>setParts($partsArray)</methodname>.
         </para>
 
         <para>
-            The function <code>-&gt;isMultiPart()</code> will return <constant>TRUE</constant> if
-            more than one part is registered with the <classname>Zend_Mime_Message</classname>
-            object and thus the object would generate a Multipart-Mime-Message when generating the
-            actual output.
+            The function <methodname>isMultiPart()</methodname> will return
+            <constant>TRUE</constant> if more than one part is registered with the
+            <classname>Zend_Mime_Message</classname> object and thus the object would generate a
+            Multipart-Mime-Message when generating the actual output.
         </para>
     </sect2>
 
@@ -66,20 +66,20 @@
             object used by <classname>Zend_Mime_Message</classname>, you can instantiate the
             <classname>Zend_Mime</classname> object yourself and then register it to
             <classname>Zend_Mime_Message</classname>. Usually you will not need to do this.
-            <code>-&gt;setMime(Zend_Mime $mime)</code> sets a special instance of
+            <methodname>setMime(Zend_Mime $mime)</methodname> sets a special instance of
             <classname>Zend_Mime</classname> to be used by this
             <classname>Zend_Mime_Message</classname>
         </para>
 
         <para>
-            <code>-&gt;getMime()</code> returns the instance of
+            <methodname>getMime()</methodname> returns the instance of
             <classname>Zend_Mime</classname> that will be used to render the message when
             <methodname>generateMessage()</methodname> is called.
         </para>
 
         <para>
-            <code>-&gt;generateMessage()</code> renders the <classname>Zend_Mime_Message</classname>
-            content to a string.
+            <methodname>generateMessage()</methodname> renders the
+            <classname>Zend_Mime_Message</classname> content to a string.
         </para>
     </sect2>
 
@@ -96,7 +96,7 @@
         <para>
             <methodname>Zend_Mime_Message::createFromMessage($str, $boundary)</methodname>
             decodes the given string and returns a <classname>Zend_Mime_Message</classname>
-            Object that can then be examined using <code>-&gt;getParts()</code>
+            Object that can then be examined using <methodname>getParts()</methodname>
         </para>
     </sect2>
 </sect1>

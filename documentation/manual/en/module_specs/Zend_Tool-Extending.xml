@@ -861,10 +861,10 @@ class Zend_Tool_Framework_Client_Storage
             <para>
                 Project specific providers are created in the same fashion as plain framework
                 providers, with one exception: project providers must extend the
-                <code>Zend_Tool_Project_Provider_Abstract</code>. This class comes with some
-                significant functionality that helps developers load existing project, obtian the
-                profile object, and be able to search the profile, then later store any changes to
-                the current project profile.
+                <classname>Zend_Tool_Project_Provider_Abstract</classname>. This class comes with
+                some significant functionality that helps developers load existing project, obtian
+                the profile object, and be able to search the profile, then later store any changes
+                to the current project profile.
             </para>
 
             <programlisting language="php"><![CDATA[

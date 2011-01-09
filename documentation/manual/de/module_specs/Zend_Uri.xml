@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22081 -->
+<!-- EN-Revision: 22761 -->
 <!-- Reviewed: 20115 -->
 <sect1 id="zend.uri.chapter">
     <title>Zend_Uri</title>
@@ -21,9 +21,10 @@
             <classname>Zend_Uri</classname> stellt eine Fabrik (Factory) bereit, die eine
             Unterklasse von sich selber zurück gibt, die auf das entsprechende Schema spezialisiert
             ist. Diese Unterklasse heißt <classname>Zend_Uri_&lt;scheme&gt;</classname>, wobei
-            <code>&lt;scheme&gt;</code> das Schema in Kleinbuchstaben mit einem Großbuchstaben am
-            Anfang darstellt. Eine Ausnahme dieser Regel ist <acronym>HTTPS</acronym>, das auch von
-            <classname>Zend_Uri_Http</classname> verarbeitet wird.
+            <emphasis>&lt;scheme&gt;</emphasis> das Schema in Kleinbuchstaben mit einem
+            Großbuchstaben am Anfang darstellt. Eine Ausnahme dieser Regel ist
+            <acronym>HTTPS</acronym>, das auch von <classname>Zend_Uri_Http</classname> verarbeitet
+            wird.
         </para>
     </sect2>
 
@@ -156,9 +157,9 @@ $valid = Zend_Uri::check('http://uri.in.question');
 
             <para>
                 Standardmäßig wird <classname>Zend_Uri</classname> die folgenden Zeichen nicht
-                akzepzieren: <code>"{", "}", "|", "\", "^", "`"</code>. Diese Zeichen sind durch die
-                <acronym>RFC</acronym> als "unwise" definiert und deshalb ungültig; trotzdem,
-                akzeptieren viele Implementierungen diese Zeichen als gültig.
+                akzepzieren: <emphasis>"{", "}", "|", "\", "^", "`"</emphasis>. Diese Zeichen sind
+                durch die <acronym>RFC</acronym> als "unwise" definiert und deshalb ungültig;
+                trotzdem, akzeptieren viele Implementierungen diese Zeichen als gültig.
             </para>
 
             <para>
@@ -212,8 +213,8 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
 
             <para>
                 Das Schema der <acronym>URI</acronym> ist der Teil der <acronym>URI</acronym> vor
-                dem Doppelpunkt. Zum Beispiel ist <code>http</code> das Schema von
-                <code>http://www.zend.com</code>.
+                dem Doppelpunkt. Zum Beispiel ist 'http' das Schema von
+                <filename>http://www.zend.com</filename>.
             </para>
 
             <example id="zend.uri.instance-methods.getscheme.example-1">

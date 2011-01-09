@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22433 -->
+<!-- EN-Revision: 22755 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
     <title>Zend_Locale verwenden</title>
@@ -17,7 +17,7 @@
             Verwende <ulink url="http://php.net/language.oop5.cloning">Klonen von Objekten</ulink>
             um Gebietsschema Objekte exakt und effizient zu duplizieren. Die meisten lokalisierbaren
             Methoden akzeptieren auch eine Zeichenkette welche das Gebietsschema repräsentiert.
-            Dieser entspricht dem Ergebnis von <code>$locale->toString()</code>.
+            Dieser entspricht dem Ergebnis von <command>$locale->toString()</command>.
         </para>
 
         <example id="zend.locale.copying.example-1">
@@ -82,7 +82,7 @@ if ($locale->equals($mylocale)) {
                 linkend="zend.locale.selection">(<constant>BROWSER</constant>,
                 <constant>ENVIRONMENT</constant>, oder <constant>FRAMEWORK)</constant></link>. Der
             zweite Parameter wechselt zwischen der Rückgabe aller gefundenen Gebietsschemata
-            oder nur dem ersten/besten Gebietsschema. Lokalisierbare Komponenten benutzen
+            oder nur dem ersten oder besten Gebietsschema. Lokalisierbare Komponenten benutzen
             normalerweise nur das erste Gebietsschema. Wenn vorhanden, wird eine Bewertung der
             Qualität mit angegeben.
         </para>
@@ -1089,12 +1089,12 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             als Ganzzahlwert angegeben werden. Er muß zwischen 1 und 12 sein. Wenn
                             man die Daten für andere Kalender, Kontexte oder Formate empfangen will,
                             muß ein Array statt einem Ganzzahlwert mit dem erwarteten Wert angegeben
-                            werden. Das Array muß wie folgt aussehen: <code>array('calendar',
-                            'context', 'format', 'month number')</code>. Wenn nur ein Ganzzahlwert
-                            angegeben wird, sind die Standardwerte der 'gregorian' (Gregorianische)
-                            Kalender, der Kontext 'format' und das Format 'wide'. Der Einfachheit
-                            halber sollte <link linkend="zend.date.introduction">Zend_Date</link>
-                            verwendet werden
+                            werden. Das Array muß wie folgt aussehen: <command>array('calendar',
+                                'context', 'format', 'month number')</command>. Wenn nur ein
+                            Ganzzahlwert angegeben wird, sind die Standardwerte der 'gregorian'
+                            (Gregorianische) Kalender, der Kontext 'format' und das Format 'wide'.
+                            Der Einfachheit halber sollte <link
+                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -1190,10 +1190,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Epoche als Ganzzahl oder String angegeben werden. Wenn man die Daten
                             für andere Kalender oder Formate empfangen will, muß ein Array statt
                             einem Ganzzahlwert mit dem erwarteten Wert angegeben werden. Das Array
-                            muß wie folgt aussehen: <code>array('calendar', 'format',
-                            'era number')</code>. Wenn nur ein String angegeben wird, sind die
-                            Standardwerte der 'gregorian' (Gregorianische) Kalender und das Format
-                            'abbr'
+                            muß wie folgt aussehen: <command>array('calendar', 'format',
+                                'era number')</command>. Wenn nur ein String angegeben wird, sind
+                            die Standardwerte der 'gregorian' (Gregorianische) Kalender und das
+                            Format 'abbr'
                         </entry>
                     </row>
 
@@ -1844,9 +1844,9 @@ echo $locale->getLanguageTranslation($frenchCode, 'es');
             <methodname>getCountryTranslationList()</methodname> und
             <methodname>getCountryTranslation()</methodname> benutzt werden um eine Tabelle zu
             erhalten die Namen für Muttersprachen einer Region und Namen für Regionen in einer
-            anderen Sprache zu erhalten. Man muß einen <code>try .. catch</code> Block benutzen um
-            Ausnahmen abzufangen die auftreten wenn ein Gebietsschema benutzt wird das nicht
-            existiert. Nicht alle Sprachen sind auch ein Gebietsschema. Im Beispiel werden die
+            anderen Sprache zu erhalten. Man muß einen <command>try .. catch</command> Block
+            benutzen um Ausnahmen abzufangen die auftreten wenn ein Gebietsschema benutzt wird das
+            nicht existiert. Nicht alle Sprachen sind auch ein Gebietsschema. Im Beispiel werden die
             Ausnahmen ignoriert um einen frühen Abbruch zu verhindern.
         </para>
 
@@ -1991,16 +1991,17 @@ if (Zend_Locale::isLocale($input)) {
         <para>
             Man sollte auch beachten das jeder angegebene Gebietsschema String automatisch
             degradiert wird wenn der Regionsabschnitt für dieses Gebietsschema nicht existiert. In
-            unserem vorherigen Beispiel existiert die Region <code>'RU'</code> nicht für die Sprache
-            <code>'to'</code>, aber es wird trotzdem <constant>TRUE</constant> zurückgegeben da
-            <classname>Zend_Locale</classname> mit der vorhandenen Eingabe arbeiten kann.
+            unserem vorherigen Beispiel existiert die Region '<property>RU</property>' nicht für die
+            Sprache '<property>to</property>', aber es wird trotzdem <constant>TRUE</constant>
+            zurückgegeben da <classname>Zend_Locale</classname> mit der vorhandenen Eingabe arbeiten
+            kann.
         </para>
 
         <para>
             Trotzdem ist es manchmal nützlich diese automatische Degradierung zu verhindern, und
             hier kommt der zweite Parameter von <methodname>isLocale()</methodname> zu Tragen. Der
-            <code>strict</code> Parameter ist Standardmäßig <constant>FALSE</constant> und kann
-            verwendet werden um die automatische Degradierung zu verhindern wenn er auf
+            <property>strict</property> Parameter ist Standardmäßig <constant>FALSE</constant> und
+            kann verwendet werden um die automatische Degradierung zu verhindern wenn er auf
             <constant>TRUE</constant> gesetzt wird.
         </para>
 

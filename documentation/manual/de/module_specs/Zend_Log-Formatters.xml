@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22755 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.formatters">
     <title>Formatter</title>
 
     <para>
-        Ein Formatter ist ein Objekt das dafür zuständig ist ein <code>event</code> Array anzunehmen
-        welches ein Log Event beschreibt und einen String auszugeben mit einer formatierten
-        Logzeile.
+        Ein Formatter ist ein Objekt das dafür zuständig ist ein <property>event</property> Array
+        anzunehmen welches ein Log Event beschreibt und einen String auszugeben mit einer
+        formatierten Logzeile.
     </para>
 
     <para>
@@ -52,10 +52,10 @@ $logger->info('dort');
         <para>
             Der Konstruktor von <classname>Zend_Log_Formatter_Simple</classname> akzeptiert einen
             einzelnen Parameter: Den Format String. Dieser String enthält Schlüssel die durch
-            Prozentzeichen begrenzt sind (z.B. <code>%message%</code>). Der Format String kann jeden
-            Schlüssel des Event Data Arrays enthalten. Die Standardschlüssel können durch Verwendung
-            der DEFAULT_FORMAT Konstante von <classname>Zend_Log_Formatter_Simple</classname>
-            empfangen werden.
+            Prozentzeichen begrenzt sind (z.B. <command>%message%</command>). Der Format String kann
+            jeden Schlüssel des Event Data Arrays enthalten. Die Standardschlüssel können durch
+            Verwendung der DEFAULT_FORMAT Konstante von
+            <classname>Zend_Log_Formatter_Simple</classname> empfangen werden.
         </para>
     </sect2>
 
@@ -116,9 +116,9 @@ $logger->info('Informative Nachricht');
 ]]></programlisting>
 
         <para>
-            Der obige Code ändert das Root Element von seinem Standard <code>logEntry</code> zu
-            <code>log</code>. Er mappt auch das Element <code>msg</code> zum Event Daten Element
-            <code>message</code>. Das ergibt die folgende Ausgabe:
+            Der obige Code ändert das Root Element von seinem Standard <property>logEntry</property>
+            zu <property>log</property>. Er mappt auch das Element <property>msg</property> zum
+            Event Daten Element <property>message</property>. Das ergibt die folgende Ausgabe:
         </para>
 
         <programlisting language="xml"><![CDATA[

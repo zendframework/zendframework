@@ -88,10 +88,10 @@
                 The <classname>Zend_Gdata</classname> library provides support for all three
                 authentication schemes. The rest of this chapter will assume that you are familiar
                 the authentication schemes available and how to create an appropriate authenticated
-                connection. For more information, please see section <xref
-                    linkend="zend.gdata.introduction.authentication" /> or the <ulink
-                    url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the
-                    Google Data <acronym>API</acronym> Developer's Guide</ulink>.
+                connection. For more information, please see the <link
+                    linkend="zend.gdata.introduction.authentication">authentication section</link>
+                or the <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication
+                    Overview in the Google Data <acronym>API</acronym> Developer's Guide</ulink>.
             </para>
         </sect3>
 

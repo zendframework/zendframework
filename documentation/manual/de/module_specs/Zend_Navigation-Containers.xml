@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 22762 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.containers">
     <title>Container</title>
@@ -459,8 +459,8 @@ $container->setPages($pages);
             Das Löschen von Seiten kann mit <methodname>removePage()</methodname> oder
             <methodname>removePages()</methodname> durchgeführt werden. Die ersten Methode
             akzeptiert eine Instanz einer Seite, oder ein Integer. Der Integer korrespondiert mit
-            der <code>order</code> welche die Seite hat. Die letztere Methode entfernt alle Seiten
-            vom Container.
+            der <property>order</property> welche die Seite hat. Die letztere Methode entfernt alle
+            Seiten vom Container.
         </para>
 
         <example id="zend.navigation.containers.removing.example">
@@ -508,7 +508,7 @@ $container->removePages();      // Entfernt alle Seiten
             <methodname>findAllBy($property, $value)</methodname> und
             <methodname>findBy($property, $value, $all = false)</methodname>. Diese Methoden
             durchsuchen rekursiv den Container nach Seiten die dem angegebenen
-            <code>$page->$property == $value</code> entsprechen. Die erste Methode,
+            <command>$page->$property == $value</command> entsprechen. Die erste Methode,
             <methodname>findOneBy()</methodname>, gibt eine einzelne Seite zurück die der
             angegebenen Eigenschaft mit dem angegebenen Wert entspricht, oder
             <constant>NULL</constant> wenn Sie nicht gefunden werden kann. Die zweite Methode wird
@@ -519,10 +519,10 @@ $container->removePages();      // Entfernt alle Seiten
 
         <para>
             Die Finder Methoden können auch magisch verwendet werden indem der Name der
-            Eigenschaft an <code>findBy</code>, <code>findOneBy</code> oder
-            <code>findAllBy</code> angehängt wird, z.B.
+            Eigenschaft an <property>findBy</property>, <property>findOneBy</property> oder
+            <property>findAllBy</property> angehängt wird, z.B.
             <methodname>findOneByLabel('Home')</methodname> um die erste passende Seite mit dem
-            Label <code>Home</code> zu finden. Andere Kombinationen sind
+            Label 'Home' zu finden. Andere Kombinationen sind
             <methodname>findByLabel(...)</methodname>, <methodname>findOnyByTitle(...)</methodname>,
             <methodname>findAllByController(...)</methodname>, usw. Finder Methoden funktionieren
             auch mit eigenen Eigenschaften, so wie z.B. <methodname>findByFoo('bar')</methodname>.
@@ -682,7 +682,7 @@ foreach ($it as $page) {
             Die Methode <methodname>hasPage(Zend_Navigation_Page $page)</methodname> prüft ob der
             Container die angegebene Seite besitzt. Die Methode <methodname>hasPages()</methodname>
             prüft ob irgendeine Seite im Container existiert, und ist gleich mit
-            <code>count($container) > 1</code>.
+            <command>count($container) > 1</command>.
         </para>
 
         <para>

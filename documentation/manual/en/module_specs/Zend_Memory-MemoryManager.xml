@@ -38,7 +38,7 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
         </para>
 
         <para>
-            You may use the special name '<code>None</code>' as a backend name,
+            You may use the special name 'None' as a backend name,
             in addition to standard <classname>Zend_Cache</classname> backends.
         </para>
 
@@ -47,14 +47,14 @@ $memoryManager = Zend_Memory::factory('None');
 ]]></programlisting>
 
         <para>
-            If you use '<code>None</code>' as the backend name, then the memory
+            If you use 'None' as the backend name, then the memory
             manager never swaps memory blocks. This is useful if you know that
             memory is not limited or the overall size of objects never reaches
             the memory limit.
         </para>
 
         <para>
-            The '<code>None</code>' backend doesn't need any option specified.
+            The 'None' backend doesn't need any option specified.
         </para>
     </sect2>
 
@@ -178,8 +178,8 @@ $memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
 
             <para>
                 The default value is two-thirds of the value of
-                '<code>memory_limit</code>' in php.ini or 'no limit' (-1)
-                if '<code>memory_limit</code>' is not set in php.ini.
+                'memory_limit' in php.ini or 'no limit' (-1)
+                if 'memory_limit' is not set in php.ini.
             </para>
         </sect3>
 

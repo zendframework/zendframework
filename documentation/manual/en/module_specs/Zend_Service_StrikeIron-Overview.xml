@@ -10,18 +10,24 @@
 
     <para>
         <itemizedlist>
-            <listitem><para><xref linkend="zend.service.strikeiron" /></para></listitem>
-        </itemizedlist>
-
-        <itemizedlist>
             <listitem>
-                <para><xref linkend="zend.service.strikeiron.bundled-services" /></para>
+                <para><link linkend="zend.service.strikeiron">Zend_Service_StrikeIron</link></para>
             </listitem>
         </itemizedlist>
 
         <itemizedlist>
             <listitem>
-                <para><xref linkend="zend.service.strikeiron.advanced-uses" /></para>
+                <para>
+                    <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <link linkend="zend.service.strikeiron.advanced-uses">Advanced Use</link>
+                </para>
             </listitem>
         </itemizedlist>
     </para>
@@ -184,7 +190,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
         <para>
             The <methodname>getService()</methodname> method will return a client for any
             StrikeIron service by the name of its <acronym>PHP</acronym> wrapper class. In this
-            case, the name <code>SalesUseTaxBasic</code> refers to the wrapper class
+            case, the name 'SalesUseTaxBasic' refers to the wrapper class
             <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>. Wrappers are
             included for three services and described in
             <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>.
@@ -238,7 +244,7 @@ echo $rateInfo->GST;
 
         <para>
             The result from <methodname>getTaxRateCanada()</methodname> is stored in
-            <varname>$rateInfo</varname> and has properties like <code>province</code>
+            <varname>$rateInfo</varname> and has properties like <property>province</property>
             and <constant>GST</constant>.
         </para>
 
@@ -294,23 +300,25 @@ Zend_Service_StrikeIron_Decorator Object
 
         <para>
             In the output above, we see that the decorator (<varname>$rateInfo</varname>) wraps an
-            object named <code>GetTaxRateCanadaResult</code>, the result of the call to
+            object named <classname>GetTaxRateCanadaResult</classname>, the result of the call to
             <methodname>getTaxRateCanada()</methodname>.
         </para>
 
         <para>
             This means that <varname>$rateInfo</varname> has public properties like
-            <code>abbreviation</code>, <code>province</code>, and <constant>GST</constant>. These
-            are accessed like <code>$rateInfo->province</code>.
+            <property>abbreviation</property>, <property>province</property>>, and
+            <constant>GST</constant>. These are accessed like
+            <command>$rateInfo->province</command>.
         </para>
 
         <tip>
             <para>
                 StrikeIron result properties sometimes start with an uppercase letter such as
-                <code>Foo</code> or <code>Bar</code> where most <acronym>PHP</acronym> object
-                properties normally start with a lowercase letter as in <code>foo</code> or
-                <code>bar</code>. The decorator will automatically do this inflection so you
-                may read a property <code>Foo</code> as <code>foo</code>.
+                <property>Foo</property> or <property>Bar</property> where most
+                <acronym>PHP</acronym> object properties normally start with a lowercase letter as
+                in <property>foo</property> or <property>bar</property>. The decorator will
+                automatically do this inflection so you may read a property <property>Foo</property>
+                as <property>foo</property>.
             </para>
         </tip>
 
@@ -367,7 +375,7 @@ try {
             the network going down or your subscription expiring.
             Failed method calls that are a common occurrence,
             such as <methodname>getTaxRateCanada()</methodname> not finding the
-            <code>province</code> you supplied, will not result an in exception.
+            <property>province</property> you supplied, will not result an in exception.
         </para>
 
         <note>
@@ -392,7 +400,7 @@ try {
         </para>
 
         <para>
-            Each StrikeIron client returned by the <code>getService</code> method
+            Each StrikeIron client returned by the <methodname>getService()</methodname> method
             has the ability to check the subscription status for that service using
             the <methodname>getSubscriptionInfo()</methodname> method of the client:
         </para>
@@ -411,7 +419,7 @@ echo $subscription->remainingHits;
 
         <para>
             The <methodname>getSubscriptionInfo()</methodname> method will return an object
-            that typically has a <code>remainingHits</code> property. It's
+            that typically has a <property>remainingHits</property> property. It's
             important to check the status on each service that you are using. If
             a method call is made to StrikeIron after the remaining hits have been
             used up, an exception will occur.

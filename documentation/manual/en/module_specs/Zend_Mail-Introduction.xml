@@ -52,7 +52,7 @@ $mail->send();
 
         <para>
             For security reasons, <classname>Zend_Mail</classname> filters all header fields to
-            prevent header injection with newline (<code>\n</code>) characters.
+            prevent header injection with newline (<emphasis>\n</emphasis>) characters.
             Double quotation is changed to single quotation and angle brackets to square brackets in
             the name of sender and recipients. If the marks are in email address, the marks will be
             removed.

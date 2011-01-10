@@ -20,7 +20,7 @@
  */
 
 namespace ZendTest\SignalSlot;
-use Zend\SignalSlot\GlobalSignals as SignalSlot,
+use Zend\SignalSlot\StaticSignalSlot as SignalSlot,
     Zend\SignalSlot\ResponseCollection,
     Zend\Stdlib\CallbackHandler;
 
@@ -32,7 +32,7 @@ use Zend\SignalSlot\GlobalSignals as SignalSlot,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
+class StaticSignalSlotTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

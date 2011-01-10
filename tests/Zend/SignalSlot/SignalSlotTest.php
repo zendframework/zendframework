@@ -20,7 +20,7 @@
  */
 
 namespace ZendTest\SignalSlot;
-use Zend\SignalSlot\Signals,
+use Zend\SignalSlot\SignalSlot,
     Zend\SignalSlot\ResponseCollection,
     Zend\Stdlib\CallbackHandler;
 
@@ -32,14 +32,14 @@ use Zend\SignalSlot\Signals,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SignalsTest extends \PHPUnit_Framework_TestCase
+class SignalSlotTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         if (isset($this->message)) {
             unset($this->message);
         }
-        $this->signals = new Signals;
+        $this->signals = new SignalSlot;
     }
 
     public function testConnectShouldReturnCallbackHandler()

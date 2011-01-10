@@ -26,13 +26,12 @@ namespace Zend\SignalSlot;
 /**
  * Static version of Signals
  *
- * @uses       Zend\SignalSlot\StaticSignalSlot
  * @category   Zend
  * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GlobalSignals implements StaticSignalManager
+class StaticSignalSlot implements StaticSignalManager
 {
     /**
      * @var Signals
@@ -42,18 +41,18 @@ class GlobalSignals implements StaticSignalManager
     /**
      * Retrieve signals instance
      * 
-     * @return Signals
+     * @return SignalSlot
      */
     public static function getInstance()
     {
         if (null === self::$_instance) {
-            self::setInstance(new Signals());
+            self::setInstance(new SignalSlot());
         }
         return self::$_instance;
     }
 
     /**
-     * Set Signals instance
+     * Set signal slot instance
      * 
      * @param  SignalManager|null $provider 
      * @return void

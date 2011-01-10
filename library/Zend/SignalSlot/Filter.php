@@ -36,7 +36,7 @@ use Zend\Stdlib\CallbackHandler;
 interface Filter
 {
     public function filter($value);
-    public function connect($context, $handler = null);
+    public function connect($callback);
     public function detach(CallbackHandler $filter);
     public function getFilters();
     public function clearFilters();

@@ -23,7 +23,8 @@
  */
 namespace Zend\SignalSlot;
 
-use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\CallbackHandler,
+    Zend\Stdlib\PriorityQueue;
 
 /**
  * Signals: notification system
@@ -42,7 +43,7 @@ class SignalSlot implements SignalManager
     /**
      * Subscribed signals and their slots
      */
-    protected $_signals = array();
+    protected $signals = array();
 
     /**
      * Publish to all slots for a given signal
@@ -83,7 +84,7 @@ class SignalSlot implements SignalManager
 
         $responses = new ResponseCollection;
 
-        if (empty($this->_signals[$signal])) {
+        if (empty($this->signals[$signal])) {
             return $responses;
         }
 
@@ -91,7 +92,7 @@ class SignalSlot implements SignalManager
             $argv   = func_get_args();
             $argv   = array_slice($argv, 2);
         }
-        foreach ($this->_signals[$signal] as $slot) {
+        foreach ($this->signals[$signal] as $slot) {
             $responses->push($slot->call($argv));
             if (call_user_func($callback, $responses->last())) {
                 $responses->setStopped(true);
@@ -115,13 +116,13 @@ class SignalSlot implements SignalManager
      * combination will be returned.
      * 
      * @param  string|SignalAggregate $signalOrAggregate
-     * @param  null|string|object $context Function name, class name, or object instance
-     * @param  null|string $handler If $context is a class or object, the name of the method to call
+     * @param  null|callback $callback PHP callback
+     * @param  null|int $priority If provided, the priority at which to register the callback 
      * @return SignalAggregate|CallbackHandler (to allow later unsubscribe)
      */
-    public function connect($signalOrAggregate, $context = null, $handler = null)
+    public function connect($signalOrAggregate, $callback = null, $priority = 1)
     {
-        if (null === $context) {
+        if (null === $callback) {
             // Assuming we have an aggregate that will self-register
             if (is_string($signalOrAggregate)) {
                 // Class name?
@@ -150,14 +151,11 @@ class SignalSlot implements SignalManager
         // Handle normal signals
         $signal = $signalOrAggregate;
 
-        if (empty($this->_signals[$signal])) {
-            $this->_signals[$signal] = array();
+        if (empty($this->signals[$signal])) {
+            $this->signals[$signal] = new PriorityQueue();
         }
-        $slot = new CallbackHandler($signal, $context, $handler);
-        if ($index = array_search($slot, $this->_signals[$signal])) {
-            return $this->_signals[$signal][$index];
-        }
-        $this->_signals[$signal][] = $slot;
+        $slot = new CallbackHandler($signal, $callback, array('priority' => $priority));
+        $this->signals[$signal]->insert($slot, $priority);
         return $slot;
     }
 
@@ -190,21 +188,21 @@ class SignalSlot implements SignalManager
      */
     public function getSignals()
     {
-        return array_keys($this->_signals);
+        return array_keys($this->signals);
     }
 
     /**
      * Retrieve all slots for a given signal
      * 
      * @param  string $signal 
-     * @return \Zend\Stdlib\CallbackHandler[]
+     * @return PriorityQueue
      */
     public function getHandlers($signal)
     {
-        if (empty($this->_signals[$signal])) {
-            return array();
+        if (empty($this->signals[$signal])) {
+            return new PriorityQueue();
         }
-        return $this->_signals[$signal];
+        return $this->signals[$signal];
     }
 
     /**
@@ -215,8 +213,8 @@ class SignalSlot implements SignalManager
      */
     public function clearHandlers($signal)
     {
-        if (!empty($this->_signals[$signal])) {
-            unset($this->_signals[$signal]);
+        if (!empty($this->signals[$signal])) {
+            unset($this->signals[$signal]);
         }
     }
 
@@ -231,7 +229,7 @@ class SignalSlot implements SignalManager
      */
     protected function detachAggregate(SignalAggregate $aggregate)
     {
-        foreach ($this->_signals as $signal => $handlers) {
+        foreach ($this->signals as $signal => $handlers) {
             foreach ($handlers as $key => $handler) {
                 $callback = $handler->getCallback();
                 if (is_object($callback)) {
@@ -257,13 +255,9 @@ class SignalSlot implements SignalManager
     protected function detachHandler(CallbackHandler $slot)
     {
         $signal = $slot->getSignal();
-        if (empty($this->_signals[$signal])) {
+        if (empty($this->signals[$signal])) {
             return false;
         }
-        if (false === ($index = array_search($slot, $this->_signals[$signal]))) {
-            return false;
-        }
-        unset($this->_signals[$signal][$index]);
-        return true;
+        return $this->signals[$signal]->remove($slot);
     }
 }

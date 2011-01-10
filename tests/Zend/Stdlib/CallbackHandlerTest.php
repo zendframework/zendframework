@@ -20,7 +20,7 @@
  * @version    $Id:$
  */
 
-namespace ZendTest\SignalSlot;
+namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\CallbackHandler;
 
@@ -55,13 +55,13 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallbackShouldBeArrayIfHandlerPassedToConstructor()
     {
-        $handler = new CallbackHandler('foo', '\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test');
+        $handler = new CallbackHandler('foo', array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'));
         $this->assertSame(array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'), $handler->getCallback());
     }
 
     public function testCallShouldInvokeCallbackWithSuppliedArguments()
     {
-        $handler = new CallbackHandler('foo', $this, 'handleCall');
+        $handler = new CallbackHandler('foo', array( $this, 'handleCall' ));
         $args   = array('foo', 'bar', 'baz');
         $handler->call($args);
         $this->assertSame($args, $this->args);
@@ -76,7 +76,7 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallShouldReturnTheReturnValueOfTheCallback()
     {
-        $handler = new CallbackHandler('foo', '\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test');
+        $handler = new CallbackHandler('foo', array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'));
         if (!is_callable(array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'))) {
             echo "\nClass exists? " . var_export(class_exists('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback'), 1) . "\n";
             echo "Include path: " . get_include_path() . "\n";
@@ -99,13 +99,13 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallbackConsistingOfStringContextWithNonStaticMethodShouldInstantiateContext()
     {
-        $handler = new CallbackHandler('foo', 'ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod', 'callable');
+        $handler = new CallbackHandler('foo', array( 'ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod', 'callable' ));
         $this->assertEquals('callable', $handler->call());
     }
 
     public function testCallbackToClassImplementingOverloadingShouldSucceed()
     {
-        $handler = new CallbackHandler('foo', '\\ZendTest\\Stdlib\\SignalHandlers\\Overloadable', 'foo');
+        $handler = new CallbackHandler('foo', array( '\\ZendTest\\Stdlib\\SignalHandlers\\Overloadable', 'foo' ));
         $this->assertEquals('foo', $handler->call());
     }
 

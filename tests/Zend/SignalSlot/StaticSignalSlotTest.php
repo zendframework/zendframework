@@ -54,13 +54,13 @@ class StaticSignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testConnectShouldReturnCallbackHandler()
     {
-        $handle = SignalSlot::connect('test', $this, __METHOD__);
+        $handle = SignalSlot::connect('test', array($this, __METHOD__));
         $this->assertTrue($handle instanceof CallbackHandler);
     }
 
     public function testConnectShouldAddCallbackHandlerToSignal()
     {
-        $handle = SignalSlot::connect('test', $this, __METHOD__);
+        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
         $handles = SignalSlot::getHandlers('test');
         $this->assertEquals(1, count($handles));
         $this->assertContains($handle, $handles);
@@ -70,7 +70,7 @@ class StaticSignalSlotTest extends \PHPUnit_Framework_TestCase
     {
         $signals = SignalSlot::getSignals();
         $this->assertTrue(empty($signals), var_export($signals, 1));
-        $handle = SignalSlot::connect('test', $this, __METHOD__);
+        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
         $signals = SignalSlot::getSignals();
         $this->assertFalse(empty($signals));
         $this->assertContains('test', $signals);
@@ -78,7 +78,7 @@ class StaticSignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldRemoveCallbackHandlerFromSignal()
     {
-        $handle = SignalSlot::connect('test', $this, __METHOD__);
+        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
         $handles = SignalSlot::getHandlers('test');
         $this->assertContains($handle, $handles);
         SignalSlot::detach($handle);
@@ -88,28 +88,28 @@ class StaticSignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldReturnFalseIfSignalDoesNotExist()
     {
-        $handle = SignalSlot::connect('test', $this, __METHOD__);
+        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
         SignalSlot::clearHandlers('test');
         $this->assertFalse(SignalSlot::detach($handle));
     }
 
     public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
     {
-        $handle1 = SignalSlot::connect('test', $this, __METHOD__);
+        $handle1 = SignalSlot::connect('test', array( $this, __METHOD__ ));
         SignalSlot::clearHandlers('test');
-        $handle2 = SignalSlot::connect('test', $this, 'handleTestTopic');
+        $handle2 = SignalSlot::connect('test', array( $this, 'handleTestTopic' ));
         $this->assertFalse(SignalSlot::detach($handle1));
     }
 
     public function testRetrievingAttachedCallbackHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
     {
         $handles = SignalSlot::getHandlers('test');
-        $this->assertTrue(empty($handles));
+        $this->assertEquals(0, count($handles));
     }
 
     public function testEmitShouldEmitAttachedHandlers()
     {
-        $handle = SignalSlot::connect('test', $this, 'handleTestTopic');
+        $handle = SignalSlot::connect('test', array($this, 'handleTestTopic'));
         SignalSlot::emit('test', 'test message');
         $this->assertEquals('test message', $this->message);
     }

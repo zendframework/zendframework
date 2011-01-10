@@ -44,13 +44,13 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testConnectShouldReturnCallbackHandler()
     {
-        $handle = $this->signals->connect('test', $this, __METHOD__);
+        $handle = $this->signals->connect('test', array($this, __METHOD__));
         $this->assertTrue($handle instanceof CallbackHandler);
     }
 
     public function testConnectShouldAddHandlerToSignal()
     {
-        $handle = $this->signals->connect('test', $this, __METHOD__);
+        $handle = $this->signals->connect('test', array($this, __METHOD__));
         $handles = $this->signals->getHandlers('test');
         $this->assertEquals(1, count($handles));
         $this->assertContains($handle, $handles);
@@ -60,7 +60,7 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
     {
         $signals = $this->signals->getSignals();
         $this->assertTrue(empty($signals), var_export($signals, 1));
-        $handle  = $this->signals->connect('test', $this, __METHOD__);
+        $handle  = $this->signals->connect('test', array($this, __METHOD__));
         $signals = $this->signals->getSignals();
         $this->assertFalse(empty($signals));
         $this->assertContains('test', $signals);
@@ -68,7 +68,7 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldRemoveHandlerFromSignal()
     {
-        $handle = $this->signals->connect('test', $this, __METHOD__);
+        $handle = $this->signals->connect('test', array($this, __METHOD__));
         $handles = $this->signals->getHandlers('test');
         $this->assertContains($handle, $handles);
         $this->signals->detach($handle);
@@ -78,28 +78,28 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldReturnFalseIfSignalDoesNotExist()
     {
-        $handle = $this->signals->connect('test', $this, __METHOD__);
+        $handle = $this->signals->connect('test', array($this, __METHOD__));
         $this->signals->clearHandlers('test');
         $this->assertFalse($this->signals->detach($handle));
     }
 
     public function testDetachShouldReturnFalseIfHandlerDoesNotExist()
     {
-        $handle1 = $this->signals->connect('test', $this, __METHOD__);
+        $handle1 = $this->signals->connect('test', array($this, __METHOD__));
         $this->signals->clearHandlers('test');
-        $handle2 = $this->signals->connect('test', $this, 'handleTestSignal');
+        $handle2 = $this->signals->connect('test', array($this, 'handleTestSignal'));
         $this->assertFalse($this->signals->detach($handle1));
     }
 
     public function testRetrievingConnectedHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
     {
         $handles = $this->signals->getHandlers('test');
-        $this->assertTrue(empty($handles));
+        $this->assertEquals(0, count($handles));
     }
 
     public function testEmitShouldEmitConnectedHandlers()
     {
-        $handle = $this->signals->connect('test', $this, 'handleTestSignal');
+        $handle = $this->signals->connect('test', array($this, 'handleTestSignal'));
         $this->signals->emit('test', 'test message');
         $this->assertEquals('test message', $this->message);
     }
@@ -150,10 +150,10 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testEmitUntilShouldMarkResponseCollectionStoppedWhenConditionMet()
     {
-        $this->signals->connect('foo.bar', function () { return 'bogus'; });
-        $this->signals->connect('foo.bar', function () { return 'nada'; });
-        $this->signals->connect('foo.bar', function () { return 'found'; });
-        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $this->signals->connect('foo.bar', function () { return 'bogus'; }, 4);
+        $this->signals->connect('foo.bar', function () { return 'nada'; }, 3);
+        $this->signals->connect('foo.bar', function () { return 'found'; }, 2);
+        $this->signals->connect('foo.bar', function () { return 'zero'; }, 1);
         $responses = $this->signals->emitUntil(function ($result) {
             return ($result === 'found');
         }, 'foo.bar');
@@ -180,10 +180,10 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByEmitUntil()
     {
-        $this->signals->connect('foo.bar', function () { return 'bogus'; });
-        $this->signals->connect('foo.bar', function () { return 'nada'; });
-        $this->signals->connect('foo.bar', function () { return 'found'; });
-        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $this->signals->connect('foo.bar', function () { return 'bogus'; }, 4);
+        $this->signals->connect('foo.bar', function () { return 'nada'; }, 3);
+        $this->signals->connect('foo.bar', function () { return 'found'; }, 2);
+        $this->signals->connect('foo.bar', function () { return 'zero'; }, 1);
         $responses = $this->signals->emitUntil(function ($result) {
             return ($result === 'never found');
         }, 'foo.bar');

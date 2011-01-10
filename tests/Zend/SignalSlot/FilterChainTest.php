@@ -44,13 +44,13 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testSubscribeShouldReturnCallbackHandler()
     {
-        $handle = $this->filterchain->connect($this, __METHOD__);
+        $handle = $this->filterchain->connect(array( $this, __METHOD__ ));
         $this->assertTrue($handle instanceof CallbackHandler);
     }
 
     public function testSubscribeShouldAddCallbackHandlerToSubscribers()
     {
-        $handler  = $this->filterchain->connect($this, __METHOD__);
+        $handler  = $this->filterchain->connect(array($this, __METHOD__));
         $handlers = $this->filterchain->getFilters();
         $this->assertEquals(1, count($handlers));
         $this->assertContains($handler, $handlers);
@@ -58,7 +58,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsubscribeShouldRemoveCallbackHandlerFromSubscribers()
     {
-        $handle = $this->filterchain->connect($this, __METHOD__);
+        $handle = $this->filterchain->connect(array( $this, __METHOD__ ));
         $handles = $this->filterchain->getFilters();
         $this->assertContains($handle, $handles);
         $this->filterchain->detach($handle);
@@ -68,16 +68,16 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsubscribeShouldReturnFalseIfCallbackHandlerDoesNotExist()
     {
-        $handle1 = $this->filterchain->connect($this, __METHOD__);
+        $handle1 = $this->filterchain->connect(array( $this, __METHOD__ ));
         $this->filterchain->clearFilters();
-        $handle2 = $this->filterchain->connect($this, 'handleTestTopic');
+        $handle2 = $this->filterchain->connect(array( $this, 'handleTestTopic' ));
         $this->assertFalse($this->filterchain->detach($handle1));
     }
 
     public function testRetrievingSubscribedFiltersShouldReturnEmptyArrayWhenNoSubscribersExist()
     {
         $handles = $this->filterchain->getFilters();
-        $this->assertTrue(empty($handles));
+        $this->assertEquals(0, count($handles));
     }
 
     public function testFilterShouldPassReturnValueOfEachSubscriberToNextSubscriber()
@@ -90,8 +90,8 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterShouldAllowMultipleArgumentsButFilterOnlyFirst()
     {
-        $this->filterchain->connect($this, 'filterTestCallback1');
-        $this->filterchain->connect($this, 'filterTestCallback2');
+        $this->filterchain->connect(array( $this, 'filterTestCallback1' ));
+        $this->filterchain->connect(array( $this, 'filterTestCallback2' ));
         $obj = (object) array('foo' => 'bar', 'bar' => 'baz');
         $value = $this->filterchain->filter('', $obj);
         $this->assertEquals('foo:bar;bar:baz;', $value);

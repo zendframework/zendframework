@@ -54,22 +54,24 @@ class CallbackHandler
     protected $isValidCallback = false;
 
     /**
+     * Callback options, if any
+     * @var array
+     */
+    protected $options;
+
+    /**
      * Constructor
      * 
      * @param  string $signal Signal to which slot is subscribed
-     * @param  string|object $context Function name, class name, or object instance
-     * @param  string|null $handler Method name, if $context is a class or object
+     * @param  string|array|object $callback PHP callback (first element may be )
+     * @param  array $options Options used by the callback handler (e.g., priority)
      * @return void
      */
-    public function __construct($signal, $context, $handler = null)
+    public function __construct($signal, $callback, array $options = array())
     {
-        $this->signal = $signal;
-
-        if (null === $handler) {
-            $this->callback = $context;
-        } else {
-            $this->callback = array($context, $handler);
-        }
+        $this->signal   = $signal;
+        $this->callback = $callback;
+        $this->options  = $options;
     }
 
     /**
@@ -118,6 +120,30 @@ class CallbackHandler
     {
         $callback = $this->getCallback();
         return call_user_func_array($callback, $args);
+    }
+
+    /**
+     * Get all callback options
+     * 
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Retrieve a single option
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function getOption($name)
+    {
+        if (array_key_exists($name, $this->options)) {
+            return $this->options[$name];
+        }
+        return null;
     }
 
     /**

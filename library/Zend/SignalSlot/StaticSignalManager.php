@@ -35,7 +35,7 @@ interface StaticSignalManager
 {
     public static function emit($signal, $args = null);
     public static function emitUntil($callback, $signal, $args = null);
-    public static function connect($signalOrAggregate, $context = null, $handler = null);
+    public static function connect($signalOrAggregate, $callback = null, $priority = 1);
     public static function detach($handle);
     public static function getSignals();
     public static function getHandlers($signal);

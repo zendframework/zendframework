@@ -24,6 +24,7 @@
 namespace Zend\SignalSlot;
 
 use Zend\Stdlib\CallbackHandler,
+    Zend\Stdlib\PriorityQueue,
     Zend\Stdlib\Exception\InvalidCallbackException;
 
 /**
@@ -37,9 +38,21 @@ use Zend\Stdlib\CallbackHandler,
 class FilterChain implements Filter
 {
     /**
-     * @var array All filters
+     * @var PriorityQueue All filters
      */
-    protected $_filters = array();
+    protected $filters;
+
+    /**
+     * Constructor
+     *
+     * Initialize priority queue used to store filters.
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->filters = new PriorityQueue();
+    }
 
     /**
      * Filter a value
@@ -60,7 +73,7 @@ class FilterChain implements Filter
             $argv = array_slice($argv, 1);
         }
 
-        foreach ($this->_filters as $filter) {
+        foreach ($this->filters as $filter) {
             $callbackArgs = $argv;
             array_unshift($callbackArgs, $value);
             $value = $filter->call($callbackArgs);
@@ -71,20 +84,17 @@ class FilterChain implements Filter
     /**
      * Subscribe
      * 
-     * @param  string|object $context Function name, class name, or object instance
-     * @param  null|string $handler If $context is a class or object, the name of the method to call
-     * @return Handler Pub-Sub handle (to allow later unsubscribe)
+     * @param  callback $callback PHP Callback
+     * @param  int $priority Priority in the queue at which to execute
+     * @return CallbackHandler Pub-Sub handle (to allow later unsubscribe)
      */
-    public function connect($context, $handler = null)
+    public function connect($callback, $priority = 1)
     {
-        if (empty($context)) {
+        if (empty($callback)) {
             throw new InvalidCallbackException('No callback provided');
         }
-        $filter = new CallbackHandler(null, $context, $handler);
-        if ($index = array_search($filter, $this->_filters)) {
-            return $this->_filters[$index];
-        }
-        $this->_filters[] = $filter;
+        $filter = new CallbackHandler(null, $callback, array('priority' => $priority));
+        $this->filters->insert($filter, $priority);
         return $filter;
     }
 
@@ -96,21 +106,17 @@ class FilterChain implements Filter
      */
     public function detach(CallbackHandler $filter)
     {
-        if (false === ($index = array_search($filter, $this->_filters))) {
-            return false;
-        }
-        unset($this->_filters[$index]);
-        return true;
+        return $this->filters->remove($filter);
     }
 
     /**
      * Retrieve all filters
      * 
-     * @return CallbackHandler[]
+     * @return PriorityQueue
      */
     public function getFilters()
     {
-        return $this->_filters;
+        return $this->filters;
     }
 
     /**
@@ -120,6 +126,6 @@ class FilterChain implements Filter
      */
     public function clearFilters()
     {
-        $this->_filters = array();
+        $this->filters = new PriorityQueue();
     }
 }

@@ -102,14 +102,14 @@ class StaticSignalSlot implements StaticSignalManager
      * Attach a slot to a signal
      * 
      * @param  string|SignalAggregate $signal 
-     * @param  string|object $context Function name, class name, or object instance
-     * @param  null|string $handler If $context is a class or object, the name of the method to call
-     * @return Handler Pub-Sub handle (to allow later unsubscribe)
+     * @param  null|callback $callback PHP Callback
+     * @param  int $priority Priority at which slot should execute
+     * @return CallbackHandler Pub-Sub handle (to allow later unsubscribe)
      */
-    public static function connect($signalOrAggregate, $context = null, $handler = null)
+    public static function connect($signalOrAggregate, $callback = null, $priority = 1)
     {
         $signals = self::getInstance();
-        return $signals->connect($signalOrAggregate, $context, $handler);
+        return $signals->connect($signalOrAggregate, $callback, $priority);
     }
 
     /**

@@ -1,23 +1,28 @@
 <?php
 /**
- * @todo: Shouldn't this assign copyright to Zend?
- */
-
-/**
- * Phly - PHp LibrarY
- * 
- * @category   Phly
- * @package    Phly_PubSub
- * @subpackage Test
- * @copyright  Copyright (C) 2008 - Present, Matthew Weier O'Phinney
- * @author     Matthew Weier O'Phinney <mweierophinney@gmail.com> 
- * @license    New BSD {@link http://www.opensource.org/licenses/bsd-license.php}
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_SignalSlot
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\SignalSlot;
 use Zend\SignalSlot\GlobalSignals as SignalSlot,
     Zend\SignalSlot\ResponseCollection,
-    Zend\Stdlib\SignalHandler;
+    Zend\Stdlib\CallbackHandler;
 
 /**
  * @category   Zend
@@ -47,13 +52,13 @@ class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
         SignalSlot::setInstance();
     }
 
-    public function testConnectShouldReturnSignalHandler()
+    public function testConnectShouldReturnCallbackHandler()
     {
         $handle = SignalSlot::connect('test', $this, __METHOD__);
-        $this->assertTrue($handle instanceof SignalHandler);
+        $this->assertTrue($handle instanceof CallbackHandler);
     }
 
-    public function testConnectShouldAddSignalHandlerToSignal()
+    public function testConnectShouldAddCallbackHandlerToSignal()
     {
         $handle = SignalSlot::connect('test', $this, __METHOD__);
         $handles = SignalSlot::getHandlers('test');
@@ -71,7 +76,7 @@ class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $signals);
     }
 
-    public function testDetachShouldRemoveSignalHandlerFromSignal()
+    public function testDetachShouldRemoveCallbackHandlerFromSignal()
     {
         $handle = SignalSlot::connect('test', $this, __METHOD__);
         $handles = SignalSlot::getHandlers('test');
@@ -88,7 +93,7 @@ class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(SignalSlot::detach($handle));
     }
 
-    public function testDetachShouldReturnFalseIfSignalHandlerDoesNotExist()
+    public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
     {
         $handle1 = SignalSlot::connect('test', $this, __METHOD__);
         SignalSlot::clearHandlers('test');
@@ -96,7 +101,7 @@ class GlobalSignalsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(SignalSlot::detach($handle1));
     }
 
-    public function testRetrievingAttachedSignalHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
+    public function testRetrievingAttachedCallbackHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
     {
         $handles = SignalSlot::getHandlers('test');
         $this->assertTrue(empty($handles));

@@ -23,7 +23,7 @@
  */
 namespace Zend\SignalSlot;
 
-use Zend\Stdlib\SignalHandler;
+use Zend\Stdlib\CallbackHandler;
 
 /**
  * Signals: notification system
@@ -111,13 +111,13 @@ class Signals implements SignalSlot
      *
      * Otherwise, the assumption is that the first argument is the signal, and 
      * that the next arguments describe a callback that will respond to that
-     * signal. A SignalHandler instance describing the signal/handler 
+     * signal. A CallbackHandler instance describing the signal/handler 
      * combination will be returned.
      * 
      * @param  string|SignalAggregate $signalOrAggregate
      * @param  null|string|object $context Function name, class name, or object instance
      * @param  null|string $handler If $context is a class or object, the name of the method to call
-     * @return SignalAggregate|SignalHandler (to allow later unsubscribe)
+     * @return SignalAggregate|CallbackHandler (to allow later unsubscribe)
      */
     public function connect($signalOrAggregate, $context = null, $handler = null)
     {
@@ -153,7 +153,7 @@ class Signals implements SignalSlot
         if (empty($this->_signals[$signal])) {
             $this->_signals[$signal] = array();
         }
-        $slot = new SignalHandler($signal, $context, $handler);
+        $slot = new CallbackHandler($signal, $context, $handler);
         if ($index = array_search($slot, $this->_signals[$signal])) {
             return $this->_signals[$signal][$index];
         }
@@ -164,14 +164,14 @@ class Signals implements SignalSlot
     /**
      * Unsubscribe a slot from a signal 
      * 
-     * @param  SignalAggregate|SignalHandler $slot 
+     * @param  SignalAggregate|CallbackHandler $slot 
      * @return bool Returns true if signal and handle found, and unsubscribed; returns false if either signal or handle not found
      */
     public function detach($slot)
     {
-        if (!$slot instanceof SignalAggregate && !$slot instanceof SignalHandler) {
+        if (!$slot instanceof SignalAggregate && !$slot instanceof CallbackHandler) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Expected SignalHandler or SignalAggregate; received "%s"',
+                'Expected CallbackHandler or SignalAggregate; received "%s"',
                 (is_object($slot) ? get_class($slot) : gettype($slot))
             ));
         }
@@ -197,7 +197,7 @@ class Signals implements SignalSlot
      * Retrieve all slots for a given signal
      * 
      * @param  string $signal 
-     * @return SignalHandler[]
+     * @return \Zend\Stdlib\CallbackHandler[]
      */
     public function getHandlers($signal)
     {
@@ -249,12 +249,12 @@ class Signals implements SignalSlot
     }
 
     /**
-     * Detach a SignalHandler
+     * Detach a signal handler
      * 
-     * @param  SignalHandler $slot 
+     * @param  CallbackHandler $slot 
      * @return bool
      */
-    protected function detachHandler(SignalHandler $slot)
+    protected function detachHandler(CallbackHandler $slot)
     {
         $signal = $slot->getSignal();
         if (empty($this->_signals[$signal])) {

@@ -22,7 +22,7 @@
 namespace ZendTest\SignalSlot;
 use Zend\SignalSlot\Signals,
     Zend\SignalSlot\ResponseCollection,
-    Zend\Stdlib\SignalHandler;
+    Zend\Stdlib\CallbackHandler;
 
 /**
  * @category   Zend
@@ -42,10 +42,10 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
         $this->signals = new Signals;
     }
 
-    public function testConnectShouldReturnSignalHandler()
+    public function testConnectShouldReturnCallbackHandler()
     {
         $handle = $this->signals->connect('test', $this, __METHOD__);
-        $this->assertTrue($handle instanceof SignalHandler);
+        $this->assertTrue($handle instanceof CallbackHandler);
     }
 
     public function testConnectShouldAddHandlerToSignal()

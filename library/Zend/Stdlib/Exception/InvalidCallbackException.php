@@ -21,21 +21,23 @@
 /**
  * @namespace
  */
-namespace Zend\Stdlib;
+namespace Zend\Stdlib\Exception;
+
+use Zend\Stdlib\Exception,
+    DomainException;
 
 /**
- * Interface for filters
+ * Invalid callback exception
  *
+ * @uses       Exception
+ * @uses       Zend\Stdlib\Exception
  * @category   Zend
  * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Filter
+class InvalidCallbackException
+    extends DomainException
+    implements Exception
 {
-    public function filter($value);
-    public function connect($context, $handler = null);
-    public function detach(SignalHandler $filter);
-    public function getFilters();
-    public function clearFilters();
 }

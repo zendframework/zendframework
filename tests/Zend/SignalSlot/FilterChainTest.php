@@ -21,8 +21,8 @@
  */
 
 namespace ZendTest\Stdlib;
-use Zend\Stdlib\FilterChain,
-    Zend\Stdlib\SignalHandler;
+use Zend\SignalSlot\FilterChain,
+    Zend\Stdlib\CallbackHandler;
 
 /**
  * @category   Zend
@@ -42,13 +42,13 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->filterchain = new FilterChain;
     }
 
-    public function testSubscribeShouldReturnSignalHandler()
+    public function testSubscribeShouldReturnCallbackHandler()
     {
         $handle = $this->filterchain->connect($this, __METHOD__);
-        $this->assertTrue($handle instanceof SignalHandler);
+        $this->assertTrue($handle instanceof CallbackHandler);
     }
 
-    public function testSubscribeShouldAddSignalHandlerToSubscribers()
+    public function testSubscribeShouldAddCallbackHandlerToSubscribers()
     {
         $handler  = $this->filterchain->connect($this, __METHOD__);
         $handlers = $this->filterchain->getFilters();
@@ -56,7 +56,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($handler, $handlers);
     }
 
-    public function testUnsubscribeShouldRemoveSignalHandlerFromSubscribers()
+    public function testUnsubscribeShouldRemoveCallbackHandlerFromSubscribers()
     {
         $handle = $this->filterchain->connect($this, __METHOD__);
         $handles = $this->filterchain->getFilters();
@@ -66,7 +66,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains($handle, $handles);
     }
 
-    public function testUnsubscribeShouldReturnFalseIfSignalHandlerDoesNotExist()
+    public function testUnsubscribeShouldReturnFalseIfCallbackHandlerDoesNotExist()
     {
         $handle1 = $this->filterchain->connect($this, __METHOD__);
         $this->filterchain->clearFilters();

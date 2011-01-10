@@ -67,11 +67,9 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($args, $this->args);
     }
 
-    /**
-     * @expectedException \Zend\Stdlib\InvalidCallbackException
-     */
     public function testPassingInvalidCallbackShouldRaiseInvalidCallbackExceptionDuringCall()
     {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
         $handler = new CallbackHandler('Invokable', 'boguscallback');
         $handler->call();
     }
@@ -92,11 +90,9 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('__invoke', $handler->call(), var_export($handler->getCallback(), 1));
     }
 
-    /**
-     * @expectedException \Zend\Stdlib\InvalidCallbackException
-     */
     public function testStringCallbackReferringToClassWithoutDefinedInvokeShouldRaiseException()
     {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
         $handler = new CallbackHandler('foo', '\\ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod');
         $handler->call();
     }

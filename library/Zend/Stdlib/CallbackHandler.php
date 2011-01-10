@@ -86,7 +86,7 @@ class CallbackHandler
      * Retrieve registered callback
      * 
      * @return Callback
-     * @throws InvalidCallbackException
+     * @throws Exception\InvalidCallbackException
      */
     public function getCallback()
     {
@@ -105,7 +105,7 @@ class CallbackHandler
             $this->isValidCallback = true;
             return $callback;
         }
-        throw new InvalidCallbackException('Invalid callback provided; not callable');
+        throw new Exception\InvalidCallbackException('Invalid callback provided; not callable');
     }
 
     /**
@@ -128,7 +128,7 @@ class CallbackHandler
      * 
      * @param  string $callback 
      * @return Callback
-     * @throws InvalidCallbackException
+     * @throws Exception\InvalidCallbackException
      */
     protected function validateStringCallback($callback)
     {
@@ -138,12 +138,12 @@ class CallbackHandler
         }
 
         if (!class_exists($callback)) {
-            throw new InvalidCallbackException('Provided callback is not a function or a class');
+            throw new Exception\InvalidCallbackException('Provided callback is not a function or a class');
         }
 
         // check __invoke before instantiating
         if (!method_exists($callback, '__invoke')) {
-            throw new InvalidCallbackException('Class provided as a callback does not implement __invoke');
+            throw new Exception\InvalidCallbackException('Class provided as a callback does not implement __invoke');
         }
         $object = new $callback();
 
@@ -157,7 +157,7 @@ class CallbackHandler
      * 
      * @param  array $callback 
      * @return callback
-     * @throws InvalidCallbackException
+     * @throws Exception\InvalidCallbackException
      */
     protected function validateArrayCallback(array $callback)
     {
@@ -168,7 +168,7 @@ class CallbackHandler
             // Dealing with a class/method callback, and class provided is a string classname
             
             if (!class_exists($context)) {
-                throw new InvalidCallbackException('Class provided in callback does not exist');
+                throw new Exception\InvalidCallbackException('Class provided in callback does not exist');
             }
 
             // We need to determine if we need to instantiate the class first
@@ -176,7 +176,7 @@ class CallbackHandler
             if (!$r->hasMethod($method)) {
                 // Explicit method does not exist
                 if (!$r->hasMethod('__callStatic') && !$r->hasMethod('__call')) {
-                    throw new InvalidCallbackException('Class provided in callback does not define the method requested');
+                    throw new Exception\InvalidCallbackException('Class provided in callback does not define the method requested');
                 }
 
                 if ($r->hasMethod('__callStatic')) {
@@ -213,6 +213,6 @@ class CallbackHandler
         }
 
 
-        throw new InvalidCallbackException('Method provided in callback does not exist in object');
+        throw new Exception\InvalidCallbackException('Method provided in callback does not exist in object');
     }
 }

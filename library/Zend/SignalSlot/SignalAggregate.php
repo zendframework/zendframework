@@ -38,5 +38,5 @@ namespace Zend\SignalSlot;
  */
 interface SignalAggregate
 {
-    public function connect(SignalSlot $signals);
+    public function connect(SignalManager $signals);
 }

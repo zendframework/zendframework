@@ -32,7 +32,7 @@ namespace Zend\SignalSlot;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GlobalSignals implements StaticSignalSlot
+class GlobalSignals implements StaticSignalManager
 {
     /**
      * @var Signals
@@ -55,10 +55,10 @@ class GlobalSignals implements StaticSignalSlot
     /**
      * Set Signals instance
      * 
-     * @param  SignalSlot|null $provider 
+     * @param  SignalManager|null $provider 
      * @return void
      */
-    public static function setInstance(SignalSlot $signals = null)
+    public static function setInstance(SignalManager $signals = null)
     {
         self::$_instance = $signals;
     }

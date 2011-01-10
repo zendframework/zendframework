@@ -24,20 +24,20 @@
 namespace Zend\SignalSlot;
 
 /**
- * Interface for messengers
+ * Interface for global (static) message delivery
  *
  * @category   Zend
  * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SignalSlot
+interface StaticSignalManager
 {
-    public function emit($signal, $argv = null);
-    public function emitUntil($callback, $signal, $argv = null);
-    public function connect($signalOrAggregate, $context = null, $handler = null);
-    public function detach($handle);
-    public function getSignals();
-    public function getHandlers($signal);
-    public function clearHandlers($signal);
+    public static function emit($signal, $args = null);
+    public static function emitUntil($callback, $signal, $args = null);
+    public static function connect($signalOrAggregate, $context = null, $handler = null);
+    public static function detach($handle);
+    public static function getSignals();
+    public static function getHandlers($signal);
+    public static function clearHandlers($signal);
 }

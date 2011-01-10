@@ -21,7 +21,7 @@
 
 namespace ZendTest\SignalSlot\TestAsset;
 
-use Zend\SignalSlot\SignalSlot,
+use Zend\SignalSlot\SignalManager,
     Zend\SignalSlot\SignalAggregate;
 
 /**
@@ -34,7 +34,7 @@ use Zend\SignalSlot\SignalSlot,
  */
 class MockAggregate implements SignalAggregate
 {
-    public function connect(SignalSlot $signals)
+    public function connect(SignalManager $signals)
     {
         $signals->connect('foo.bar', $this, 'fooBar');
         $signals->connect('foo.baz', $this, 'fooBaz');

@@ -88,7 +88,7 @@ class FilterChain implements Filter
      * @param  int $priority Priority in the queue at which to execute
      * @return CallbackHandler Pub-Sub handle (to allow later unsubscribe)
      */
-    public function connect($callback, $priority = 1)
+    public function connect($callback, $priority = 1000)
     {
         if (empty($callback)) {
             throw new InvalidCallbackException('No callback provided');

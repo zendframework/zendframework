@@ -106,7 +106,7 @@ class StaticSignalSlot implements StaticSignalManager
      * @param  int $priority Priority at which slot should execute
      * @return CallbackHandler Pub-Sub handle (to allow later unsubscribe)
      */
-    public static function connect($signalOrAggregate, $callback = null, $priority = 1)
+    public static function connect($signalOrAggregate, $callback = null, $priority = 1000)
     {
         $signals = self::getInstance();
         return $signals->connect($signalOrAggregate, $callback, $priority);

@@ -111,16 +111,20 @@ class SignalSlot implements SignalManager
      * instance will be returned.
      *
      * Otherwise, the assumption is that the first argument is the signal, and 
-     * that the next arguments describe a callback that will respond to that
+     * that the next argument describes a callback that will respond to that
      * signal. A CallbackHandler instance describing the signal/handler 
      * combination will be returned.
+     *
+     * The last argument indicates a priority at which the signal should be 
+     * executed. By default, this value is 1000; however, you may set it for any
+     * integer value. Higher values have higher priority (i.e., execute first).
      * 
      * @param  string|SignalAggregate $signalOrAggregate
      * @param  null|callback $callback PHP callback
      * @param  null|int $priority If provided, the priority at which to register the callback 
      * @return SignalAggregate|CallbackHandler (to allow later unsubscribe)
      */
-    public function connect($signalOrAggregate, $callback = null, $priority = 1)
+    public function connect($signalOrAggregate, $callback = null, $priority = 1000)
     {
         if (null === $callback) {
             // Assuming we have an aggregate that will self-register

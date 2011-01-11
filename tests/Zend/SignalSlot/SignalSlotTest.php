@@ -48,10 +48,10 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($handle instanceof CallbackHandler);
     }
 
-    public function testConnectShouldAddHandlerToSignal()
+    public function testConnectShouldAddSlotToSignal()
     {
         $handle = $this->signals->connect('test', array($this, __METHOD__));
-        $handles = $this->signals->getHandlers('test');
+        $handles = $this->signals->getSlots('test');
         $this->assertEquals(1, count($handles));
         $this->assertContains($handle, $handles);
     }
@@ -66,45 +66,45 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $signals);
     }
 
-    public function testDetachShouldRemoveHandlerFromSignal()
+    public function testDetachShouldRemoveSlotFromSignal()
     {
         $handle = $this->signals->connect('test', array($this, __METHOD__));
-        $handles = $this->signals->getHandlers('test');
+        $handles = $this->signals->getSlots('test');
         $this->assertContains($handle, $handles);
         $this->signals->detach($handle);
-        $handles = $this->signals->getHandlers('test');
+        $handles = $this->signals->getSlots('test');
         $this->assertNotContains($handle, $handles);
     }
 
     public function testDetachShouldReturnFalseIfSignalDoesNotExist()
     {
         $handle = $this->signals->connect('test', array($this, __METHOD__));
-        $this->signals->clearHandlers('test');
+        $this->signals->clearSlots('test');
         $this->assertFalse($this->signals->detach($handle));
     }
 
-    public function testDetachShouldReturnFalseIfHandlerDoesNotExist()
+    public function testDetachShouldReturnFalseIfSlotDoesNotExist()
     {
         $handle1 = $this->signals->connect('test', array($this, __METHOD__));
-        $this->signals->clearHandlers('test');
+        $this->signals->clearSlots('test');
         $handle2 = $this->signals->connect('test', array($this, 'handleTestSignal'));
         $this->assertFalse($this->signals->detach($handle1));
     }
 
-    public function testRetrievingConnectedHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
+    public function testRetrievingConnectedSlotsShouldReturnEmptyArrayWhenSignalDoesNotExist()
     {
-        $handles = $this->signals->getHandlers('test');
+        $handles = $this->signals->getSlots('test');
         $this->assertEquals(0, count($handles));
     }
 
-    public function testEmitShouldEmitConnectedHandlers()
+    public function testEmitShouldEmitConnectedSlots()
     {
         $handle = $this->signals->connect('test', array($this, 'handleTestSignal'));
         $this->signals->emit('test', 'test message');
         $this->assertEquals('test message', $this->message);
     }
 
-    public function testEmitShouldReturnAllHandlerReturnValues()
+    public function testEmitShouldReturnAllSlotReturnValues()
     {
         $this->signals->connect('string.transform', 'trim');
         $this->signals->connect('string.transform', 'str_rot13');
@@ -164,7 +164,7 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($responses->contains('zero'));
     }
 
-    public function testEmitUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastHandler()
+    public function testEmitUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastSlot()
     {
         $this->signals->connect('foo.bar', function () { return 'bogus'; });
         $this->signals->connect('foo.bar', function () { return 'nada'; });
@@ -240,16 +240,16 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
             $this->assertContains($signal, $signals);
         }
 
-        $handlers = $this->signals->getHandlers('foo.bar');
+        $handlers = $this->signals->getSlots('foo.bar');
         $this->assertEquals(2, count($handlers));
         $this->assertContains($handlerFooBar1, $handlers);
         $this->assertContains($handlerFooBar2, $handlers);
 
-        $handlers = $this->signals->getHandlers('foo.baz');
+        $handlers = $this->signals->getSlots('foo.baz');
         $this->assertEquals(1, count($handlers));
         $this->assertContains($handlerFooBaz1, $handlers);
 
-        $handlers = $this->signals->getHandlers('other');
+        $handlers = $this->signals->getSlots('other');
         $this->assertEquals(1, count($handlers));
         $this->assertContains($handlerOther, $handlers);
     }

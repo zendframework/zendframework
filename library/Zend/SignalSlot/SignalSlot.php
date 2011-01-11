@@ -42,8 +42,29 @@ class SignalSlot implements SignalManager
 {
     /**
      * Subscribed signals and their slots
+     * @var array Array of PriorityQueue objects
      */
     protected $signals = array();
+
+    /**
+     * Identifier, used to pull static signals from StaticSignalManager
+     * @var null|string
+     */
+    protected $identifier;
+
+    /**
+     * Constructor
+     *
+     * Allows optionally specifying an identifier to use to pull signals from a 
+     * StaticSignalManager.
+     * 
+     * @param  null|string|int $identifier 
+     * @return void
+     */
+    public function __construct($identifier = null)
+    {
+        $this->identifier = $identifier;
+    }
 
     /**
      * Publish to all slots for a given signal
@@ -85,7 +106,7 @@ class SignalSlot implements SignalManager
         $responses = new ResponseCollection;
 
         if (empty($this->signals[$signal])) {
-            return $responses;
+            return $this->emitStaticSignals($callback, $signal, $argv, $responses);
         }
 
         if (!is_array($argv)) {
@@ -98,6 +119,9 @@ class SignalSlot implements SignalManager
                 $responses->setStopped(true);
                 break;
             }
+        }
+        if (!$responses->stopped()) {
+            $this->emitStaticSignals($callback, $signal, $argv, $responses);
         }
         return $responses;
     }
@@ -182,7 +206,7 @@ class SignalSlot implements SignalManager
             return $this->detachAggregate($slot);
         }
 
-        return $this->detachHandler($slot);
+        return $this->detachSlot($slot);
     }
 
     /**
@@ -201,9 +225,9 @@ class SignalSlot implements SignalManager
      * @param  string $signal 
      * @return PriorityQueue
      */
-    public function getHandlers($signal)
+    public function getSlots($signal)
     {
-        if (empty($this->signals[$signal])) {
+        if (!array_key_exists($signal, $this->signals)) {
             return new PriorityQueue();
         }
         return $this->signals[$signal];
@@ -215,7 +239,7 @@ class SignalSlot implements SignalManager
      * @param  string $signal 
      * @return void
      */
-    public function clearHandlers($signal)
+    public function clearSlots($signal)
     {
         if (!empty($this->signals[$signal])) {
             unset($this->signals[$signal]);
@@ -233,16 +257,16 @@ class SignalSlot implements SignalManager
      */
     protected function detachAggregate(SignalAggregate $aggregate)
     {
-        foreach ($this->signals as $signal => $handlers) {
-            foreach ($handlers as $key => $handler) {
-                $callback = $handler->getCallback();
+        foreach ($this->signals as $signal => $slots) {
+            foreach ($slots as $key => $slot) {
+                $callback = $slot->getCallback();
                 if (is_object($callback)) {
                     if ($callback === $aggregate) {
-                        $this->detachHandler($handler);
+                        $this->detachSlot($slot);
                     }
                 } elseif (is_array($callback)) {
                     if ($callback[0] === $aggregate) {
-                        $this->detachHandler($handler);
+                        $this->detachSlot($slot);
                     }
                 }
             }
@@ -256,12 +280,27 @@ class SignalSlot implements SignalManager
      * @param  CallbackHandler $slot 
      * @return bool
      */
-    protected function detachHandler(CallbackHandler $slot)
+    protected function detachSlot(CallbackHandler $slot)
     {
         $signal = $slot->getSignal();
         if (empty($this->signals[$signal])) {
             return false;
         }
         return $this->signals[$signal]->remove($slot);
+    }
+
+    protected function emitStaticSignals($callback, $signal, array $argv, ResponseCollection $responses)
+    {
+        if (!$slots = StaticSignalSlot::getInstance()->getSlots($this->identifier, $signal)) {
+            return $responses;
+        }
+        foreach ($slots as $slot) {
+            $responses->push($slot->call($argv));
+            if (call_user_func($callback, $responses->last())) {
+                $responses->setStopped(true);
+                break;
+            }
+        }
+        return $responses;
     }
 }

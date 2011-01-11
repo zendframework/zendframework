@@ -14,30 +14,41 @@
  *
  * @category   Zend
  * @package    Zend_SignalSlot
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\SignalSlot;
+namespace ZendTest\SignalSlot\TestAsset;
+
+use Zend\SignalSlot\SignalSlot,
+    Zend\SignalSlot\SignalManager;
 
 /**
- * Interface for messengers
- *
  * @category   Zend
  * @package    Zend_SignalSlot
+ * @subpackage UnitTests
+ * @group      Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SignalManager
+class ClassWithSignals
 {
-    public function emit($signal, $argv = null);
-    public function emitUntil($callback, $signal, $argv = null);
-    public function connect($signalOrAggregate, $callback = null, $priority = 1);
-    public function detach($handle);
-    public function getSignals();
-    public function getSlots($signal);
-    public function clearSlots($signal);
+    protected $signals;
+
+    public function signals(SignalManager $signals = null)
+    {
+        if (null !== $signals) {
+            $this->signals = $signals;
+        }
+        if (null === $this->signals) {
+            $this->signals = new SignalSlot(__CLASS__);
+        }
+        return $this->signals;
+    }
+
+    public function foo()
+    {
+        $this->signals()->emit(__FUNCTION__, $this, array());
+    }
 }

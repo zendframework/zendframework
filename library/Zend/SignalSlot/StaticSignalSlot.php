@@ -34,9 +34,24 @@ namespace Zend\SignalSlot;
 class StaticSignalSlot implements StaticSignalManager
 {
     /**
-     * @var Signals
+     * @var StaticSignalSlot
      */
-    protected static $_instance;
+    protected static $instance;
+
+    /**
+     * Identifiers with signal connections
+     * @var array
+     */
+    protected $identifiers = array();
+
+    /**
+     * Singleton
+     * 
+     * @return void
+     */
+    protected function __construct()
+    {
+    }
 
     /**
      * Retrieve signals instance
@@ -45,117 +60,125 @@ class StaticSignalSlot implements StaticSignalManager
      */
     public static function getInstance()
     {
-        if (null === self::$_instance) {
-            self::setInstance(new SignalSlot());
+        if (null === self::$instance) {
+            self::$instance = new self();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     /**
-     * Set signal slot instance
+     * Reset the singleton instance
      * 
-     * @param  SignalManager|null $provider 
      * @return void
      */
-    public static function setInstance(SignalManager $signals = null)
+    public static function resetInstance()
     {
-        self::$_instance = $signals;
-    }
-
-    /**
-     * Notify all slots for a given topic
-     * 
-     * @param  string $topic 
-     * @param  mixed $args All arguments besides the topic are passed as arguments to the slot
-     * @return ResponseCollection All handler return values 
-     */
-    public static function emit($signal, $args = null)
-    {
-        $signals = self::getInstance();
-        $args    = func_get_args();
-        $args    = array_slice($args, 1);
-        return $signals->emit($signal, $args);
-    }
-
-    /**
-     * Notify subscribers until return value of one causes a callback to 
-     * evaluate to true
-     *
-     * Publishes subscribers until the provided callback evaluates the return 
-     * value of one as true, or until all subscribers have been executed.
-     * 
-     * @param  Callable $callback 
-     * @param  string $signal 
-     * @param  mixed $argv All arguments besides the topic are passed as arguments to the slot
-     * @return ResponseCollection All handler return values
-     * @throws InvalidCallbackException if invalid callback provided
-     */
-    public static function emitUntil($callback, $signal, $args = null)
-    {
-        $signals = self::getInstance();
-        $args    = func_get_args();
-        $args    = array_slice($args, 2);
-        return $signals->emitUntil($callback, $signal, $args);
+        self::$instance = null;
     }
 
     /**
      * Attach a slot to a signal
+     *
+     * Allows attaching a callback to a signal offerred by one or more 
+     * identifying components. As an example, the following connects to the 
+     * "getAll" signal of both an AbstractResource and EntityResource:
+     *
+     * <code>
+     * StaticSignalSlot::getInstance()->connect(
+     *     array('My\Resource\AbstractResource', 'My\Resource\EntityResource'),
+     *     'getOne',
+     *     function ($resource, array $params) use ($cache) {
+     *         $id = $params['id'] ?: false;
+     *         if (!$id) {
+     *             return;
+     *         }
+     *         if (!$data = $cache->load(get_class($resource) . '::getOne::' . $id )) {
+     *             return;
+     *         }
+     *         return $data;
+     *     }
+     * );
+     * </code>
      * 
+     * @param  string|array $id Identifier(s) for signal emitting component(s)
      * @param  string|SignalAggregate $signal 
      * @param  null|callback $callback PHP Callback
      * @param  int $priority Priority at which slot should execute
-     * @return CallbackHandler Pub-Sub handle (to allow later unsubscribe)
+     * @return void
      */
-    public static function connect($signalOrAggregate, $callback = null, $priority = 1000)
+    public function connect($id, $signalOrAggregate, $callback = null, $priority = 1000)
     {
-        $signals = self::getInstance();
-        return $signals->connect($signalOrAggregate, $callback, $priority);
+        $ids = (array) $id;
+        foreach ($ids as $id) {
+            if (!array_key_exists($id, $this->identifiers)) {
+                $this->identifiers[$id] = new SignalSlot();
+            }
+            $this->identifiers[$id]->connect($signalOrAggregate, $callback, $priority);
+        }
     }
 
     /**
-     * Detach a slot from a signal 
+     * Detach a slot from a signal offered by a given resource
      * 
-     * @param  SignalAggregate|\Zend\Stdlib\CallbackHandler $handle 
+     * @param  string|int $id
+     * @param  SignalAggregate|\Zend\Stdlib\CallbackHandler $slot 
      * @return bool Returns true if signal and slot found, and unsubscribed; returns false if either signal or slot not found
      */
-    public static function detach($slot)
+    public function detach($id, $slot)
     {
-        $signals = self::getInstance();
-        return $signals->detach($slot);
+        if (!array_key_exists($id, $this->identifiers)) {
+            return false;
+        }
+        return $this->identifiers[$id]->detach($slot);
     }
 
     /**
      * Retrieve all registered signals
      * 
+     * @param  string|int $id
      * @return array
      */
-    public static function getSignals()
+    public function getSignals($id)
     {
-        $signals = self::getInstance();
-        return $signals->getSignals();
+        if (!array_key_exists($id, $this->identifiers)) {
+            return false;
+        }
+        return $this->identifiers[$id]->getSignals();
     }
 
     /**
-     * Retrieve all slots for a given signal
+     * Retrieve all slots for a given identifier and signal
      * 
-     * @param  string $signal 
-     * @return \Zend\Stdlib\SignalHandler[]
+     * @param  string|int $id
+     * @param  string|int $signal 
+     * @return false|\Zend\Stdlib\PriorityQueue
      */
-    public static function getHandlers($signal)
+    public function getSlots($id, $signal)
     {
-        $signals = self::getInstance();
-        return $signals->getHandlers($signal);
+        if (!array_key_exists($id, $this->identifiers)) {
+            return false;
+        }
+        return $this->identifiers[$id]->getSlots($signal);
     }
 
     /**
-     * Clear all slots for a given signal
+     * Clear all slots for a given identifier, optionally for a specific signal
      * 
-     * @param  string $signal 
-     * @return void
+     * @param  string|int $id 
+     * @param  null|string $signal 
+     * @return bool
      */
-    public static function clearHandlers($signal)
+    public function clearSlots($id, $signal = null)
     {
-        $signals = self::getInstance();
-        return $signals->clearHandlers($signal);
+        if (!array_key_exists($id, $this->identifiers)) {
+            return false;
+        }
+
+        if (null === $signal) {
+            unset($this->identifiers[$id]);
+            return true;
+        }
+
+        return $this->identifiers[$id]->clearSlots($signal);
     }
 }

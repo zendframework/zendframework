@@ -20,9 +20,8 @@
  */
 
 namespace ZendTest\SignalSlot;
-use Zend\SignalSlot\StaticSignalSlot as SignalSlot,
-    Zend\SignalSlot\ResponseCollection,
-    Zend\Stdlib\CallbackHandler;
+use Zend\SignalSlot\StaticSignalSlot,
+    PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend
@@ -32,103 +31,129 @@ use Zend\SignalSlot\StaticSignalSlot as SignalSlot,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StaticSignalSlotTest extends \PHPUnit_Framework_TestCase
+class StaticSignalSlotTest extends TestCase
 {
     public function setUp()
     {
-        if (isset($this->message)) {
-            unset($this->message);
-        }
-        $this->clearAllTopics();
+        StaticSignalSlot::resetInstance();
     }
 
     public function tearDown()
     {
-        $this->clearAllTopics();
+        StaticSignalSlot::resetInstance();
     }
 
-    public function clearAllTopics()
+    public function testOperatesAsASingleton()
     {
-        SignalSlot::setInstance();
+        $expected = StaticSignalSlot::getInstance();
+        $test     = StaticSignalSlot::getInstance();
+        $this->assertSame($expected, $test);
     }
 
-    public function testConnectShouldReturnCallbackHandler()
+    public function testCanResetInstance()
     {
-        $handle = SignalSlot::connect('test', array($this, __METHOD__));
-        $this->assertTrue($handle instanceof CallbackHandler);
+        $original = StaticSignalSlot::getInstance();
+        StaticSignalSlot::resetInstance();
+        $test = StaticSignalSlot::getInstance();
+        $this->assertNotSame($original, $test);
     }
 
-    public function testConnectShouldAddCallbackHandlerToSignal()
+    public function testSingletonInstanceIsInstanceOfClass()
     {
-        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
-        $handles = SignalSlot::getHandlers('test');
-        $this->assertEquals(1, count($handles));
-        $this->assertContains($handle, $handles);
+        $this->assertInstanceOf('Zend\SignalSlot\StaticSignalSlot', StaticSignalSlot::getInstance());
     }
 
-    public function testConnectShouldAddSignalIfItDoesNotExist()
+    public function testCanConnectCallbackToSignal()
     {
-        $signals = SignalSlot::getSignals();
-        $this->assertTrue(empty($signals), var_export($signals, 1));
-        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
-        $signals = SignalSlot::getSignals();
-        $this->assertFalse(empty($signals));
-        $this->assertContains('test', $signals);
+        $signals = StaticSignalSlot::getInstance();
+        $signals->connect('foo', 'bar', array($this, __FUNCTION__));
+        $this->assertContains('bar', $signals->getSignals('foo'));
+        $expected = array($this, __FUNCTION__);
+        $found    = false;
+        $slots    = $signals->getSlots('foo', 'bar');
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $slots);
+        $this->assertTrue(0 < count($slots), 'Empty slots!');
+        foreach ($slots as $slot) {
+            if ($expected === $slot->getCallback()) {
+                $found = true;
+                break;
+            }
+        }
+        $this->assertTrue($found, 'Did not find slot!');
     }
 
-    public function testDetachShouldRemoveCallbackHandlerFromSignal()
+    public function testCanConnectSameSignalToMultipleResourcesAtOnce()
     {
-        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
-        $handles = SignalSlot::getHandlers('test');
-        $this->assertContains($handle, $handles);
-        SignalSlot::detach($handle);
-        $handles = SignalSlot::getHandlers('test');
-        $this->assertNotContains($handle, $handles);
+        $signals = StaticSignalSlot::getInstance();
+        $signals->connect(array('foo', 'test'), 'bar', array($this, __FUNCTION__));
+        $this->assertContains('bar', $signals->getSignals('foo'));
+        $this->assertContains('bar', $signals->getSignals('test'));
+        $expected = array($this, __FUNCTION__);
+        foreach (array('foo', 'test') as $id) {
+            $found    = false;
+            $slots    = $signals->getSlots($id, 'bar');
+            $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $slots);
+            $this->assertTrue(0 < count($slots), 'Empty slots!');
+            foreach ($slots as $slot) {
+                if ($expected === $slot->getCallback()) {
+                    $found = true;
+                    break;
+                }
+            }
+            $this->assertTrue($found, 'Did not find slot!');
+        }
     }
 
-    public function testDetachShouldReturnFalseIfSignalDoesNotExist()
+    public function testCanDetachSlotFromResource()
     {
-        $handle = SignalSlot::connect('test', array( $this, __METHOD__ ));
-        SignalSlot::clearHandlers('test');
-        $this->assertFalse(SignalSlot::detach($handle));
+        $signals = StaticSignalSlot::getInstance();
+        $signals->connect('foo', 'bar', array($this, __FUNCTION__));
+        foreach ($signals->getSlots('foo', 'bar') as $slot) {
+            // only one; retrieving it so we can detach
+        }
+        $signals->detach('foo', $slot);
+        $slots = $signals->getSlots('foo', 'bar');
+        $this->assertEquals(0, count($slots));
     }
 
-    public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
+    public function testCanGetSignalsByResource()
     {
-        $handle1 = SignalSlot::connect('test', array( $this, __METHOD__ ));
-        SignalSlot::clearHandlers('test');
-        $handle2 = SignalSlot::connect('test', array( $this, 'handleTestTopic' ));
-        $this->assertFalse(SignalSlot::detach($handle1));
+        $signals = StaticSignalSlot::getInstance();
+        $signals->connect('foo', 'bar', array($this, __FUNCTION__));
+        $this->assertEquals(array('bar'), $signals->getSignals('foo'));
     }
 
-    public function testRetrievingAttachedCallbackHandlersShouldReturnEmptyArrayWhenSignalDoesNotExist()
+    public function testCanGetSlotsByResourceAndSignal()
     {
-        $handles = SignalSlot::getHandlers('test');
-        $this->assertEquals(0, count($handles));
+        $signals = StaticSignalSlot::getInstance();
+        $signals->connect('foo', 'bar', array($this, __FUNCTION__));
+        $slots = $signals->getSlots('foo', 'bar');
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $slots);
+        $this->assertEquals(1, count($slots));
     }
 
-    public function testEmitShouldEmitAttachedHandlers()
+    public function testCanClearSlotsByResource()
     {
-        $handle = SignalSlot::connect('test', array($this, 'handleTestTopic'));
-        SignalSlot::emit('test', 'test message');
-        $this->assertEquals('test message', $this->message);
+        $signals = StaticSignalSlot::getInstance();
+        $signals->connect('foo', 'bar', array($this, __FUNCTION__));
+        $signals->connect('foo', 'baz', array($this, __FUNCTION__));
+        $signals->clearSlots('foo');
+        $this->assertFalse($signals->getSlots('foo', 'bar'));
+        $this->assertFalse($signals->getSlots('foo', 'baz'));
     }
 
-    public function testEmitUntilShouldReturnAsSoonAsCallbackReturnsTrue()
+    public function testCanClearSlotsByResourceAndSignal()
     {
-        SignalSlot::connect('foo.bar', 'strpos');
-        SignalSlot::connect('foo.bar', 'strstr');
-        $responses = SignalSlot::emitUntil(
-            function ($value) { return (!$value); },
-            'foo.bar',
-            'foo', 'f'
-        );
-        $this->assertTrue($responses instanceof ResponseCollection);
-        $this->assertSame(0, $responses->last());
-    }
-
-    public function handleTestTopic($message)
-    {
-        $this->message = $message;
+        $signals = StaticSignalSlot::getInstance();
+        $signals->connect('foo', 'bar', array($this, __FUNCTION__));
+        $signals->connect('foo', 'baz', array($this, __FUNCTION__));
+        $signals->connect('foo', 'bat', array($this, __FUNCTION__));
+        $signals->clearSlots('foo', 'baz');
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $signals->getSlots('foo', 'baz'));
+        $this->assertEquals(0, count($signals->getSlots('foo', 'baz')));
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $signals->getSlots('foo', 'bar'));
+        $this->assertEquals(1, count($signals->getSlots('foo', 'bar')));
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $signals->getSlots('foo', 'bat'));
+        $this->assertEquals(1, count($signals->getSlots('foo', 'bat')));
     }
 }

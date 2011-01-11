@@ -108,7 +108,7 @@ class FormSubmitTest extends \PHPUnit_Framework_TestCase
 
     public function testCanRendersAsXHtml()
     {
-        $this->view->doctype('XHTML1_STRICT');
+        $this->view->broker('doctype')->direct('XHTML1_STRICT');
         $test = $this->helper->direct('foo', 'bar');
         $this->assertContains(' />', $test);
     }

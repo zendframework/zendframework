@@ -24,20 +24,13 @@
 namespace Zend\SignalSlot;
 
 /**
- * Interface for messengers
+ * Base exception interface
  *
  * @category   Zend
  * @package    Zend_SignalSlot
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SignalSlot
+interface Exception
 {
-    public function emit($signal, $argv = null);
-    public function emitUntil($callback, $signal, $argv = null);
-    public function connect($signalOrAggregate, $context = null, $handler = null);
-    public function detach($handle);
-    public function getSignals();
-    public function getHandlers($signal);
-    public function clearHandlers($signal);
 }

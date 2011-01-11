@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id:$
  */
 
 namespace ZendTest\SignalSlot;
@@ -147,5 +146,111 @@ class SignalsTest extends \PHPUnit_Framework_TestCase
     public function evaluateStringCallback($value)
     {
         return (!$value);
+    }
+
+    public function testEmitUntilShouldMarkResponseCollectionStoppedWhenConditionMet()
+    {
+        $this->signals->connect('foo.bar', function () { return 'bogus'; });
+        $this->signals->connect('foo.bar', function () { return 'nada'; });
+        $this->signals->connect('foo.bar', function () { return 'found'; });
+        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $responses = $this->signals->emitUntil(function ($result) {
+            return ($result === 'found');
+        }, 'foo.bar');
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertTrue($responses->stopped());
+        $result = $responses->last();
+        $this->assertEquals('found', $result);
+        $this->assertFalse($responses->contains('zero'));
+    }
+
+    public function testEmitUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastHandler()
+    {
+        $this->signals->connect('foo.bar', function () { return 'bogus'; });
+        $this->signals->connect('foo.bar', function () { return 'nada'; });
+        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $this->signals->connect('foo.bar', function () { return 'found'; });
+        $responses = $this->signals->emitUntil(function ($result) {
+            return ($result === 'found');
+        }, 'foo.bar');
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertTrue($responses->stopped());
+        $this->assertEquals('found', $responses->last());
+    }
+
+    public function testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByEmitUntil()
+    {
+        $this->signals->connect('foo.bar', function () { return 'bogus'; });
+        $this->signals->connect('foo.bar', function () { return 'nada'; });
+        $this->signals->connect('foo.bar', function () { return 'found'; });
+        $this->signals->connect('foo.bar', function () { return 'zero'; });
+        $responses = $this->signals->emitUntil(function ($result) {
+            return ($result === 'never found');
+        }, 'foo.bar');
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertFalse($responses->stopped());
+        $this->assertEquals('zero', $responses->last());
+    }
+
+    public function testConnectAllowsPassingASignalAggregateInstance()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->signals->connect($aggregate);
+        $signals = $this->signals->getSignals();
+        foreach (array('foo.bar', 'foo.baz') as $signal) {
+            $this->assertContains($signal, $signals);
+        }
+    }
+
+    public function testPassingSignalAggregateInstanceToConnectReturnsSignalAggregate()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $test      = $this->signals->connect($aggregate);
+        $this->assertSame($aggregate, $test);
+    }
+
+    public function testConnectAllowsPassingASignalAggregateClassName()
+    {
+        $this->signals->connect('ZendTest\SignalSlot\TestAsset\MockAggregate');
+        $signals = $this->signals->getSignals();
+        foreach (array('foo.bar', 'foo.baz') as $signal) {
+            $this->assertContains($signal, $signals);
+        }
+    }
+
+    public function testPassingSignalAggregateClassNameToConnectReturnsSignalAggregateInstance()
+    {
+        $test = $this->signals->connect('ZendTest\SignalSlot\TestAsset\MockAggregate');
+        $this->assertInstanceOf('ZendTest\SignalSlot\TestAsset\MockAggregate', $test);
+    }
+
+    public function testCanDetachSignalAggregates()
+    {
+        // setup some other signal handlers, to ensure appropriate items are detached
+        $handlerFooBar1 = $this->signals->connect('foo.bar', function(){ return true; });
+        $handlerFooBar2 = $this->signals->connect('foo.bar', function(){ return true; });
+        $handlerFooBaz1 = $this->signals->connect('foo.baz', function(){ return true; });
+        $handlerOther   = $this->signals->connect('other', function(){ return true; });
+
+        $aggregate = new TestAsset\MockAggregate();
+        $this->signals->connect($aggregate);
+        $this->signals->detach($aggregate);
+        $signals = $this->signals->getSignals();
+        foreach (array('foo.bar', 'foo.baz', 'other') as $signal) {
+            $this->assertContains($signal, $signals);
+        }
+
+        $handlers = $this->signals->getHandlers('foo.bar');
+        $this->assertEquals(2, count($handlers));
+        $this->assertContains($handlerFooBar1, $handlers);
+        $this->assertContains($handlerFooBar2, $handlers);
+
+        $handlers = $this->signals->getHandlers('foo.baz');
+        $this->assertEquals(1, count($handlers));
+        $this->assertContains($handlerFooBaz1, $handlers);
+
+        $handlers = $this->signals->getHandlers('other');
+        $this->assertEquals(1, count($handlers));
+        $this->assertContains($handlerOther, $handlers);
     }
 }

@@ -200,8 +200,8 @@ class HeadMeta extends Placeholder\Container\Standalone
         }
 
         if (!isset($item->content)
-        && (! $this->view->doctype()->isHtml5()
-        || (! $this->view->doctype()->isHtml5() && $item->type !== 'charset'))) {
+        && (! $this->view->broker('doctype')->isHtml5()
+        || (! $this->view->broker('doctype')->isHtml5() && $item->type !== 'charset'))) {
             return false;
         }
 
@@ -326,7 +326,7 @@ class HeadMeta extends Placeholder\Container\Standalone
 
         $modifiersString = '';
         foreach ($item->modifiers as $key => $value) {
-            if ($this->view->doctype()->isHtml5()
+            if ($this->view->broker('doctype')->isHtml5()
             && $key == 'scheme') {
                 throw new View\Exception('Invalid modifier '
                 . '"scheme" provided; not supported by HTML5');
@@ -338,12 +338,12 @@ class HeadMeta extends Placeholder\Container\Standalone
         }
 
         if ($this->view instanceof View\AbstractView) {
-            if ($this->view->doctype()->isHtml5()
+            if ($this->view->broker('doctype')->isHtml5()
             && $type == 'charset') {
-				$tpl = ($this->view->doctype()->isXhtml())
+				$tpl = ($this->view->broker('doctype')->isXhtml())
 					? '<meta %s="%s"/>'
 					: '<meta %s="%s">';
-            } elseif ($this->view->doctype()->isXhtml()) {
+            } elseif ($this->view->broker('doctype')->isXhtml()) {
                 $tpl = '<meta %s="%s" content="%s" %s/>';
             } else {
                 $tpl = '<meta %s="%s" content="%s" %s>';

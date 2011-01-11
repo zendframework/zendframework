@@ -23,8 +23,6 @@
  */
 namespace Zend\SignalSlot;
 
-use Zend\Stdlib\SignalHandler;
-
 /**
  * Interface for global (static) message delivery
  *
@@ -37,8 +35,8 @@ interface StaticSignalSlot
 {
     public static function emit($signal, $args = null);
     public static function emitUntil($callback, $signal, $args = null);
-    public static function connect($signal, $context, $handler = null);
-    public static function detach(SignalHandler $handle);
+    public static function connect($signalOrAggregate, $context = null, $handler = null);
+    public static function detach($handle);
     public static function getSignals();
     public static function getHandlers($signal);
     public static function clearHandlers($signal);

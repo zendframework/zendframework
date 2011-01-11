@@ -64,7 +64,7 @@ class FormReset extends FormElement
 
         // get closing tag
         $endTag = '>';
-        if ($this->view->doctype()->isXhtml()) {
+        if ($this->view->broker('doctype')->isXhtml()) {
             $endTag = ' />';
         }
 

@@ -3,7 +3,8 @@ namespace ZendTest\Session\TestAsset;
 
 use Zend\Session\AbstractManager,
     Zend\Session\Configuration as SessionConfiguration,
-    Zend\Session\Storage as SessionStorage;
+    Zend\Session\Storage as SessionStorage,
+    Zend\SignalSlot\SignalManager;
 
 class TestManager extends AbstractManager
 {
@@ -52,7 +53,7 @@ class TestManager extends AbstractManager
     {}
 
 
-    public function setValidatorChain(\Zend\SignalSlot\SignalSlot $chain)
+    public function setValidatorChain(SignalManager $chain)
     {}
 
     public function getValidatorChain()

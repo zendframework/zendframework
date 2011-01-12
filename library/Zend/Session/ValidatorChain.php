@@ -23,7 +23,7 @@
  */
 namespace Zend\Session;
 
-use Zend\SignalSlot\Signals;
+use Zend\SignalSlot\SignalSlot;
 
 /**
  * Zend_Session_Validator_Interface
@@ -33,7 +33,7 @@ use Zend\SignalSlot\Signals;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain extends Signals
+class ValidatorChain extends SignalSlot
 {
     /**
      * @var Storage
@@ -68,15 +68,27 @@ class ValidatorChain extends Signals
      * @param  null|string $handler 
      * @return Zend\Stdlib\SignalHandler
      */
-    public function connect($topic, $context, $handler = null)
+    public function connect($signalOrAggregate, $callback = null, $priority = 1000)
     {
+        $context = null;
+        if (null === $callback) {
+            $context = $signalOrAggregate;
+        } elseif ($callback instanceof Validator) {
+            $context = $callback;
+        } elseif (is_array($callback)) {
+            $test = array_shift($callback);
+            if ($test instanceof Validator) {
+                $context = $test;
+            }
+            array_unshift($callback, $test);
+        }
         if ($context instanceof Validator) {
             $data = $context->getData();
             $name = $context->getName();
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::connect($topic, $context, $handler);
+        $handle = parent::connect($signalOrAggregate, $callback, $priority);
         return $handle;
     }
 

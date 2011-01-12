@@ -70,18 +70,15 @@ class SignalSlot implements SignalManager
      * Publish to all slots for a given signal
      * 
      * @param  string $signal 
-     * @param  mixed $argv All arguments besides the signal are passed as arguments to the handler
+     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name) 
+     * @param  array $argv Array of arguments; typically, should be associative
      * @return ResponseCollection All handler return values
      */
-    public function emit($signal, $argv = null)
+    public function emit($signal, $context, array $argv = array())
     {
-        if (!is_array($argv)) {
-            $argv = func_get_args();
-            $argv = array_slice($argv, 1);
-        }
         return $this->emitUntil(function(){
             return false;
-        }, $signal, $argv);
+        }, $signal, $context, $argv);
     }
 
     /**
@@ -93,11 +90,11 @@ class SignalSlot implements SignalManager
      * 
      * @param  Callable $callback 
      * @param  string $signal 
-     * @param  mixed $argv All arguments besides the signal are passed as arguments to the handler
-     * @return ResponseCollection All handler return values
+     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name) 
+     * @param  array $argv Array of arguments; typically, should be associative
      * @throws InvalidCallbackException if invalid callback provided
      */
-    public function emitUntil($callback, $signal, $argv = null)
+    public function emitUntil($callback, $signal, $context, array $argv = array())
     {
         if (!is_callable($callback)) {
             throw new InvalidCallbackException('Invalid callback provided');
@@ -106,22 +103,18 @@ class SignalSlot implements SignalManager
         $responses = new ResponseCollection;
 
         if (empty($this->signals[$signal])) {
-            return $this->emitStaticSignals($callback, $signal, $argv, $responses);
+            return $this->emitStaticSignals($callback, $signal, $context, $argv, $responses);
         }
 
-        if (!is_array($argv)) {
-            $argv   = func_get_args();
-            $argv   = array_slice($argv, 2);
-        }
         foreach ($this->signals[$signal] as $slot) {
-            $responses->push($slot->call($argv));
+            $responses->push(call_user_func($slot->getCallback(), $context, $argv));
             if (call_user_func($callback, $responses->last())) {
                 $responses->setStopped(true);
                 break;
             }
         }
         if (!$responses->stopped()) {
-            $this->emitStaticSignals($callback, $signal, $argv, $responses);
+            $this->emitStaticSignals($callback, $signal, $context, $argv, $responses);
         }
         return $responses;
     }
@@ -289,13 +282,13 @@ class SignalSlot implements SignalManager
         return $this->signals[$signal]->remove($slot);
     }
 
-    protected function emitStaticSignals($callback, $signal, array $argv, ResponseCollection $responses)
+    protected function emitStaticSignals($callback, $signal, $context, array $argv, ResponseCollection $responses)
     {
         if (!$slots = StaticSignalSlot::getInstance()->getSlots($this->identifier, $signal)) {
             return $responses;
         }
         foreach ($slots as $slot) {
-            $responses->push($slot->call($argv));
+            $responses->push(call_user_func($slot->getCallback(), $context, $argv));
             if (call_user_func($callback, $responses->last())) {
                 $responses->setStopped(true);
                 break;

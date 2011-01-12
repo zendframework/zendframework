@@ -100,15 +100,19 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
     public function testEmitShouldEmitConnectedSlots()
     {
         $handle = $this->signals->connect('test', array($this, 'handleTestSignal'));
-        $this->signals->emit('test', 'test message');
+        $this->signals->emit('test', $this, array('message' => 'test message'));
         $this->assertEquals('test message', $this->message);
     }
 
     public function testEmitShouldReturnAllSlotReturnValues()
     {
-        $this->signals->connect('string.transform', 'trim');
-        $this->signals->connect('string.transform', 'str_rot13');
-        $responses = $this->signals->emit('string.transform', ' foo ');
+        $this->signals->connect('string.transform', function ($context, array $params) {
+            return trim(array_shift($params));
+        });
+        $this->signals->connect('string.transform', function ($context, array $params) {
+            return str_rot13(array_shift($params));
+        });
+        $responses = $this->signals->emit('string.transform', $this, array('string' => ' foo '));
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertEquals(2, $responses->count());
         $this->assertEquals('foo', $responses->first());
@@ -117,12 +121,21 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testEmitUntilShouldReturnAsSoonAsCallbackReturnsTrue()
     {
-        $this->signals->connect('foo.bar', 'strpos');
-        $this->signals->connect('foo.bar', 'strstr');
+        $this->signals->connect('foo.bar', function ($context, array $params) {
+            $string = isset($params['string']) ? $params['string'] : '';
+            $search = isset($params['search']) ? $params['search'] : '?';
+            return strpos($string, $search);
+        });
+        $this->signals->connect('foo.bar', function ($context, array $params) {
+            $string = isset($params['string']) ? $params['string'] : '';
+            $search = isset($params['search']) ? $params['search'] : '?';
+            return strstr($string, $search);
+        });
         $responses = $this->signals->emitUntil(
             array($this, 'evaluateStringCallback'), 
             'foo.bar',
-            'foo', 'f'
+            $this,
+            array('string' => 'foo', 'search' => 'f')
         );
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertSame(0, $responses->last());
@@ -130,16 +143,21 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testEmitResponseCollectionContains()
     {
-        $this->signals->connect('string.transform', 'trim');
-        $this->signals->connect('string.transform', 'str_rot13');
-        $responses = $this->signals->emit('string.transform', ' foo ');
+        $this->signals->connect('string.transform', function ($context, array $params) {
+            return trim(array_shift($params));
+        });
+        $this->signals->connect('string.transform', function ($context, array $params) {
+            return str_rot13(array_shift($params));
+        });
+        $responses = $this->signals->emit('string.transform', $this, array('string' => ' foo '));
         $this->assertTrue($responses->contains('foo'));
         $this->assertTrue($responses->contains(\str_rot13(' foo ')));
         $this->assertFalse($responses->contains(' foo '));
     }
 
-    public function handleTestSignal($message)
+    public function handleTestSignal($context, array $params)
     {
+        $message = $params['message'] ?: '__NOT_FOUND__';
         $this->message = $message;
     }
 
@@ -156,7 +174,7 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->signals->connect('foo.bar', function () { return 'zero'; }, 1);
         $responses = $this->signals->emitUntil(function ($result) {
             return ($result === 'found');
-        }, 'foo.bar');
+        }, 'foo.bar', $this);
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertTrue($responses->stopped());
         $result = $responses->last();
@@ -172,7 +190,7 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->signals->connect('foo.bar', function () { return 'found'; });
         $responses = $this->signals->emitUntil(function ($result) {
             return ($result === 'found');
-        }, 'foo.bar');
+        }, 'foo.bar', $this);
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('found', $responses->last());
@@ -186,7 +204,7 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->signals->connect('foo.bar', function () { return 'zero'; }, 1);
         $responses = $this->signals->emitUntil(function ($result) {
             return ($result === 'never found');
-        }, 'foo.bar');
+        }, 'foo.bar', $this);
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertFalse($responses->stopped());
         $this->assertEquals('zero', $responses->last());

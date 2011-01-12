@@ -253,6 +253,38 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
     }
 
     /**
+     * Does the queue contain the given datum?
+     * 
+     * @param  mixed $datum 
+     * @return bool
+     */
+    public function contains($datum)
+    {
+        foreach ($this->items as $item) {
+            if ($item['data'] === $datum) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Does the queue have an item with the given priority?
+     * 
+     * @param  int $priority 
+     * @return bool
+     */
+    public function hasPriority($priority)
+    {
+        foreach ($this->items as $item) {
+            if ($item['priority'] === $priority) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Get the inner priority queue instance
      * 
      * @return SplPriorityQueue

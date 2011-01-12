@@ -120,4 +120,16 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals($expected, $test);
     }
+
+    public function testCanTestForExistenceOfItemInQueue()
+    {
+        $this->assertTrue($this->queue->contains('foo'));
+        $this->assertFalse($this->queue->contains('foobar'));
+    }
+
+    public function testCanTestForExistenceOfPriorityInQueue()
+    {
+        $this->assertTrue($this->queue->hasPriority(3));
+        $this->assertFalse($this->queue->hasPriority(1000));
+    }
 }

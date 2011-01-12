@@ -24,11 +24,10 @@
 namespace Zend\SignalSlot;
 
 use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\PriorityQueue,
     Zend\Stdlib\Exception\InvalidCallbackException;
 
 /**
- * FilterChain: subject/observer filter chain system
+ * FilterChain: intercepting filter manager
  *
  * @category   Zend
  * @package    Zend_SignalSlot
@@ -38,55 +37,53 @@ use Zend\Stdlib\CallbackHandler,
 class FilterChain implements Filter
 {
     /**
-     * @var PriorityQueue All filters
+     * @var Filter\FilterIterator All filters
      */
     protected $filters;
 
     /**
      * Constructor
      *
-     * Initialize priority queue used to store filters.
+     * Initializes Filter\FilterIterator in which filters will be aggregated
      * 
      * @return void
      */
     public function __construct()
     {
-        $this->filters = new PriorityQueue();
+        $this->filters = new Filter\FilterIterator();
     }
 
     /**
-     * Filter a value
+     * Apply the filters
      *
-     * Notifies all subscribers passes the single value provided
-     * as an argument. Each subsequent subscriber is passed the return value
-     * of the previous subscriber, and the value of the last subscriber is 
-     * returned.
+     * Begins iteration of the filters.
      * 
-     * @param  mixed $value Value to filter
-     * @param  mixed $argv Any additional arguments
+     * @param  mixed $context Object under observation
+     * @param  mixed $argv Associative array of arguments
      * @return mixed
      */
-    public function filter($value, $argv = null)
+    public function run($context, array $argv = array())
     {
-        if (!is_array($argv)) {
-            $argv = func_get_args();
-            $argv = array_slice($argv, 1);
+        $chain = clone $this->getFilters();
+
+        if ($chain->isEmpty()) {
+            return;
         }
 
-        foreach ($this->filters as $filter) {
-            $callbackArgs = $argv;
-            array_unshift($callbackArgs, $value);
-            $value = $filter->call($callbackArgs);
+        $next = $chain->extract();
+        if (!$next instanceof CallbackHandler) {
+            return;
         }
-        return $value;
+
+        return call_user_func($next->getCallback(), $context, $argv, $chain);
     }
 
     /**
-     * Subscribe
+     * Connect a filter to the chain
      * 
      * @param  callback $callback PHP Callback
-     * @param  int $priority Priority in the queue at which to execute
-     * @return CallbackHandler Pub-Sub handle (to allow later unsubscribe)
+     * @param  int $priority Priority in the queue at which to execute; defaults to 1000 (higher numbers == higher priority)
+     * @return CallbackHandler (to allow later unsubscribe)
      */
     public function connect($callback, $priority = 1000)
     {
@@ -112,7 +109,7 @@ class FilterChain implements Filter
     /**
      * Retrieve all filters
      * 
-     * @return PriorityQueue
+     * @return FilterIterator
      */
     public function getFilters()
     {
@@ -126,6 +123,19 @@ class FilterChain implements Filter
      */
     public function clearFilters()
     {
-        $this->filters = new PriorityQueue();
+        $this->filters = new Filter\FilterIterator();
+    }
+
+    /**
+     * Return current responses
+     *
+     * Only available while the chain is still being iterated. Returns the 
+     * current ResponseCollection.
+     * 
+     * @return null|ResponseCollection
+     */
+    public function getResponses()
+    {
+        return $this->responses;
     }
 }

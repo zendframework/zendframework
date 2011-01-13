@@ -33,7 +33,6 @@ use Zend\Log;
  * completion, so any log entries accumulated are sent in a single email.
  *
  * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Exception\NotImplementedException
  * @uses       \Zend\Log\Exception\RuntimeException
  * @uses       \Zend\Log\Formatter\Simple
  * @uses       \Zend\Log\Writer\AbstractWriter
@@ -101,6 +100,18 @@ class Mail extends AbstractWriter
     protected $_subjectPrependText;
 
     /**
+     * MethodMap for \Zend\Mail\Mail's headers
+     *
+     * @var array
+     */
+    protected static $_methodMapHeaders = array(
+    	'from' => 'setFrom',
+        'to' => 'addTo',
+        'cc' => 'addCc',
+        'bcc' => 'addBcc',
+    );
+
+    /**
      * Class constructor.
      *
      * Constructs the mail writer; requires a Zend_Mail instance, and takes an
@@ -113,21 +124,135 @@ class Mail extends AbstractWriter
      */
     public function __construct(\Zend\Mail\Mail $mail, \Zend\Layout\Layout $layout = null)
     {
-        $this->_mail      = $mail;
-        $this->_layout    = $layout;
+        $this->_mail = $mail;
+        if (null !== $layout) {
+            $this->setLayout($layout);
+        }
         $this->_formatter = new Log\Formatter\Simple();
     }
-    
+
     /**
      * Create a new instance of Zend_Log_Writer_Mail
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Mail
-     * @throws \Zend\Log\Exception\NotImplementedException
      */
     static public function factory($config = array())
     {
-        throw new Log\Exception\NotImplementedException('Zend\Log\Writer\Mail does not currently implement a factory');
+        $config = self::_parseConfig($config);
+        $mail = self::_constructMailFromConfig($config);
+        $writer = new self($mail);
+
+        if (isset($config['layout']) || isset($config['layoutOptions'])) {
+            $writer->setLayout($config);
+        }
+        if (isset($config['layoutFormatter'])) {
+        	$layoutFormatter = new $config['layoutFormatter'];
+            $writer->setLayoutFormatter($layoutFormatter);
+        }
+        if (isset($config['subjectPrependText'])) {
+            $writer->setSubjectPrependText($config['subjectPrependText']);
+        }
+
+        return $writer;
+    }
+
+    /**
+     * Set the layout
+     *
+     * @param \Zend\Layout\Layout|array $layout
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return \Zend\Log\Writer\Mail
+     */
+    public function setLayout($layout)
+    {
+        if (is_array($layout)) {
+            $layout = $this->_constructLayoutFromConfig($layout);
+        }
+
+        if (!$layout instanceof \Zend\Layout\Layout) {
+            require_once 'Zend/Log/Exception.php';
+            throw new Log\Exception\InvalidArgumentException(
+                'Mail must be an instance of \Zend\Layout\Layout or an array'
+            );
+        }
+        $this->_layout = $layout;
+
+        return $this;
+    }
+
+    /**
+     * Construct a \Zend\Mail\Mail instance based on a configuration array
+     *
+     * @param array $config
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return \Zend\Mail\Mail
+     */
+    protected static function _constructMailFromConfig(array $config)
+    {
+        $mailClass = 'Zend\Mail\Mail';
+        if (isset($config['mail'])) {
+            $mailClass = $config['mail'];
+        }
+
+        if (!array_key_exists('charset', $config)) {
+            $config['charset'] = null;
+        }
+        $mail = new $mailClass($config['charset']);
+        if (!$mail instanceof \Zend\Mail\Mail) {
+            throw new Log\Exception\InvalidArgumentException($mail . 'must extend \Zend\Mail\Mail');
+        }
+
+        if (isset($config['subject'])) {
+            $mail->setSubject($config['subject']);
+        }
+
+        $headerAddresses = array_intersect_key($config, self::$_methodMapHeaders);
+        if (count($headerAddresses)) {
+            foreach ($headerAddresses as $header => $address) {
+                $method = self::$_methodMapHeaders[$header];
+                if (is_array($address) && isset($address['name'])
+                    && !is_numeric($address['name'])
+                ) {
+                    $params = array(
+                    	$address['email'],
+                    	$address['name']
+                    );
+                } else if (is_array($address) && isset($address['email'])) {
+                    $params = array($address['email']);
+                } else {
+                    $params = array($address);
+                }
+                call_user_func_array(array($mail, $method), $params);
+            }
+        }
+
+        return $mail;
+    }
+
+    /**
+     * Construct a \Zend\Layout\Layout instance based on a configuration array
+     *
+     * @param array $config
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return \Zend\Layout\Layout
+     */
+    protected function _constructLayoutFromConfig(array $config)
+    {
+        $config = array_merge(array(
+            'layout' => 'Zend\Layout\Layout',
+            'layoutOptions' => null
+        ), $config);
+
+        $layoutClass = $config['layout'];
+        $layout = new $layoutClass($config['layoutOptions']);
+        if (!$layout instanceof \Zend\Layout\Layout) {
+            throw new Log\Exception\InvalidArgumentException(
+                $layout . 'must extend \Zend\Layout\Layout'
+            );
+        }
+
+        return $layout;
     }
 
     /**

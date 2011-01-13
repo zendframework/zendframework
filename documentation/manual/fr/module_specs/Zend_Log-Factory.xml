@@ -171,11 +171,154 @@ $logger = Zend_Log::factory(array(
         <sect3 id="zend.log.factory.writer-options.mail">
             <title>Zend_Log_Writer_Mail Options</title>
 
-            <para>
-                <classname>Zend_Log_Writer_Mail</classname> actuellement (en 1.10) n'implémente pas la
-                fabrique, et renverra une exception si vous tentez de l'utiliser via
-                <methodname>Zend_Log::factory()</methodname>.
-            </para>
+            <table id="zend.log.factory.writer-options.mail.table">
+                <title>Zend_Log_Writer_Mail Options</title>
+
+                <tgroup cols="4">
+                    <thead>
+                        <row>
+                            <entry>Option</entry>
+                            <entry>Type de données</entry>
+                            <entry>Valeur par défaut</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry><emphasis>mail</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><classname>Zend_Mail</classname></entry>
+
+                            <entry>
+                                Une instance de <classname>Zend_Mail</classname>
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>charset</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry>iso-8859-1</entry>
+
+                            <entry>
+                                L'encodage pour le courriel
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>from</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Expéditeur du courriel.
+
+                                Les paramètres pour un type <type>Array</type> sont :
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>
+                                            <property>email</property> : adresse de l'expéditeur
+                                        </para>
+                                    </listitem>
+
+                                    <listitem>
+                                        <para>
+                                            <property>name</property> : nom de l'expéditeur
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>to</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Destinataire(s) du courriel
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>cc</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Destinataire(s) en copie(s) du courriel
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>bcc</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Destinataire(s) en copie(s) cachée(s) du courriel
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>subject</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Sujet du courriel
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>subjectPrependText</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Un résumé du nombre de chaque niveau d'erreurs sera ajouté
+                                à la suite du sujet du courriel
+                            </entry>
+                        </row>
+                    
+                        <row>
+                            <entry><emphasis>layout</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Une instance de <classname>Zend_Layout</classname>
+                            </entry>
+                        </row>
+                    
+                        <row>
+                            <entry><emphasis>layoutOptions</emphasis></entry>
+                            <entry><type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Voir la section <xref linked="zend.layout.options" />
+                            </entry>
+                        </row>
+                    
+                        <row>
+                            <entry><emphasis>layoutFormatter</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Une instance de <classname>Zend_Log_Formatter_Interface</classname>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+            <note>
+                <para>
+                    
+                </para>
+            </note>
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.mock">

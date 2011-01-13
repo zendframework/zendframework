@@ -175,12 +175,149 @@ $logger = Zend_Log::factory(array(
 
         <sect3 id="zend.log.factory.writer-options.mail">
             <title>Zend_Log_Writer_Mail Options</title>
+    
+            <table id="zend.log.factory.writer-options.mail.table">
+                <title>Zend_Log_Writer_Mail Options</title>
 
-            <para>
-                <classname>Zend_Log_Writer_Mail</classname> currently (as of 1.10) does not
-                implement a factory, and will raise an exception if you attempt to instantiate it
-                via <methodname>Zend_Log::factory()</methodname>.
-            </para>
+                <tgroup cols="4">
+                    <thead>
+                        <row>
+                            <entry>Option</entry>
+                            <entry>Data Type</entry>
+                            <entry>Default Value</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry><emphasis>mail</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><classname>Zend_Mail</classname></entry>
+
+                            <entry>
+                                An <classname>Zend_Mail</classname> instance
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>charset</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry>iso-8859-1</entry>
+
+                            <entry>
+                                Charset of the mail
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>from</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Sender of the mail
+
+                                The parameters for <type>Array</type> type are :
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>
+                                            <property>email</property> : address of sender
+                                        </para>
+                                    </listitem>
+
+                                    <listitem>
+                                        <para>
+                                            <property>name</property> : name of sender
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>to</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Recipient(s) of the mail
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>cc</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Carbon copy recipient(s) of the mail
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>bcc</emphasis></entry>
+                            <entry><type>String</type> or <type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Blind carbon copy recipient(s) of the mail
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>subject</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                Subject of the mail
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><emphasis>subjectPrependText</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                A summary of number of errors per priority is appended to the 
+                                subject of the mail
+                            </entry>
+                        </row>
+                    
+                        <row>
+                            <entry><emphasis>layout</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                An <classname>Zend_Layout</classname> instance
+                            </entry>
+                        </row>
+                    
+                        <row>
+                            <entry><emphasis>layoutOptions</emphasis></entry>
+                            <entry><type>Array</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                See the section <xref linked="zend.layout.options" />
+                            </entry>
+                        </row>
+                    
+                        <row>
+                            <entry><emphasis>layoutFormatter</emphasis></entry>
+                            <entry><type>String</type></entry>
+                            <entry><constant>NULL</constant></entry>
+
+                            <entry>
+                                An <classname>Zend_Log_Formatter_Interface</classname> instance
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.mock">

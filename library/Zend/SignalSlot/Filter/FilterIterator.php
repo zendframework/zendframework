@@ -24,7 +24,7 @@
 namespace Zend\SignalSlot\Filter;
 
 use Zend\Stdlib\CallbackHandler,
-    SplPriorityQueue;
+    Zend\Stdlib\SplPriorityQueue;
 
 /**
  * Specialized priority queue implementation for use with an intercepting 

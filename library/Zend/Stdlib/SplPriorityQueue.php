@@ -28,6 +28,9 @@ use Serializable;
 /**
  * Serializable version of SplPriorityQueue
  *
+ * Also, provides predictable heap order for datums added with the same priority
+ * (i.e., they will be emitted in the same order they are enqueued).
+ *
  * @category   Zend
  * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -35,6 +38,29 @@ use Serializable;
  */
 class SplPriorityQueue extends \SplPriorityQueue implements Serializable
 {
+    /**
+     * @var int Seed used to ensure queue order for items of the same priority
+     */
+    protected $serial = PHP_INT_MAX;
+
+    /**
+     * Insert a value with a given priority
+     *
+     * Utilizes {@var $serial} to ensure that values of equal priority are 
+     * emitted in the same order in which they are inserted.
+     * 
+     * @param  mixed $datum 
+     * @param  mixed $priority 
+     * @return void
+     */
+    public function insert($datum, $priority)
+    {
+        if (!is_array($priority)) {
+            $priority = array($priority, $this->serial--);
+        }
+        parent::insert($datum, $priority);
+    }
+
     /**
      * Serialize to an array
      *
@@ -60,7 +86,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
         // Return only the data
         $return = array();
         foreach ($array as $item) {
-            $return[$item['priority']] = $item['data'];
+            $return[] = $item['data'];
         }
 
         return $return;

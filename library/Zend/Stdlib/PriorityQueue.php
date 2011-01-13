@@ -54,7 +54,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * Inner queue class to use for iteration
      * @var string
      */
-    protected $queueClass = 'SplPriorityQueue';
+    protected $queueClass = 'Zend\Stdlib\SplPriorityQueue';
 
     /**
      * Actual items aggregated in the priority queue. Each item is an array

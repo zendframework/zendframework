@@ -132,10 +132,10 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
             return strstr($string, $search);
         });
         $responses = $this->signals->emitUntil(
-            array($this, 'evaluateStringCallback'), 
             'foo.bar',
             $this,
-            array('string' => 'foo', 'search' => 'f')
+            array('string' => 'foo', 'search' => 'f'),
+            array($this, 'evaluateStringCallback')
         );
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertSame(0, $responses->last());
@@ -172,9 +172,9 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->signals->connect('foo.bar', function () { return 'nada'; }, 3);
         $this->signals->connect('foo.bar', function () { return 'found'; }, 2);
         $this->signals->connect('foo.bar', function () { return 'zero'; }, 1);
-        $responses = $this->signals->emitUntil(function ($result) {
+        $responses = $this->signals->emitUntil('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
-        }, 'foo.bar', $this);
+        });
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertTrue($responses->stopped());
         $result = $responses->last();
@@ -188,9 +188,9 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->signals->connect('foo.bar', function () { return 'nada'; });
         $this->signals->connect('foo.bar', function () { return 'zero'; });
         $this->signals->connect('foo.bar', function () { return 'found'; });
-        $responses = $this->signals->emitUntil(function ($result) {
+        $responses = $this->signals->emitUntil('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
-        }, 'foo.bar', $this);
+        });
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('found', $responses->last());
@@ -202,9 +202,9 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->signals->connect('foo.bar', function () { return 'nada'; }, 3);
         $this->signals->connect('foo.bar', function () { return 'found'; }, 2);
         $this->signals->connect('foo.bar', function () { return 'zero'; }, 1);
-        $responses = $this->signals->emitUntil(function ($result) {
+        $responses = $this->signals->emitUntil('foo.bar', $this, array(), function ($result) {
             return ($result === 'never found');
-        }, 'foo.bar', $this);
+        });
         $this->assertTrue($responses instanceof ResponseCollection);
         $this->assertFalse($responses->stopped());
         $this->assertEquals('zero', $responses->last());

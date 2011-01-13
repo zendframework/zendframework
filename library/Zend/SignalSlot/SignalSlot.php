@@ -76,9 +76,9 @@ class SignalSlot implements SignalManager
      */
     public function emit($signal, $context, array $argv = array())
     {
-        return $this->emitUntil(function(){
+        return $this->emitUntil($signal, $context, $argv, function(){
             return false;
-        }, $signal, $context, $argv);
+        });
     }
 
     /**
@@ -94,7 +94,7 @@ class SignalSlot implements SignalManager
      * @param  array $argv Array of arguments; typically, should be associative
      * @throws InvalidCallbackException if invalid callback provided
      */
-    public function emitUntil($callback, $signal, $context, array $argv = array())
+    public function emitUntil($signal, $context, array $argv, $callback)
     {
         if (!is_callable($callback)) {
             throw new InvalidCallbackException('Invalid callback provided');

@@ -41,17 +41,27 @@ class ZendMonitor extends AbstractWriter
     protected $_isEnabled = true;
 
     /**
+     * Is this for a Zend Server intance?
+     * @var bool
+     */
+    protected $_isZendServer = false;
+
+    /**
+     * Class constructor
      */
     public function __construct()
     {
         if (!function_exists('monitor_custom_event')) {
             $this->_isEnabled = false;
         }
+        if (function_exists('zend_monitor_custom_event')) {
+            $this->_isZendServer = true;
+        }
     }
 
     /**
      * Create a new instance of Zend_Log_Writer_ZendMonitor
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Syslog
      */
@@ -102,7 +112,17 @@ class ZendMonitor extends AbstractWriter
         unset($event['priority'], $event['message']);
 
         if (!empty($event)) {
-            monitor_custom_event($priority, $message, false, $event);
+            if ($this->_isZendServer) {
+                // On Zend Server; third argument should be the event
+                zend_monitor_custom_event($priority, $message, $event);
+            } else {
+                // On Zend Platform; third argument is severity -- either 
+                // 0 or 1 -- and fourth is optional (event)
+                // Severity is either 0 (normal) or 1 (severe); classifying
+                // notice, info, and debug as "normal", and all others as 
+                // "severe"
+                monitor_custom_event($priority, $message, ($priority > 4) ? 0 : 1, $event);
+            }
         } else {
             monitor_custom_event($priority, $message);
         }

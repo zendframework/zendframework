@@ -34,45 +34,52 @@ use Zend\Filter\FilterChain,
  */
 class FilterChainTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Ensures expected return value from empty filter chain
-     *
-     * @return void
-     */
-    public function testEmpty()
+    public function testEmptyFilterChainReturnsOriginalValue()
     {
-        $filter = new FilterChain();
-        $value  = 'something';
-        $this->assertEquals($value, $filter($value));
+        $chain = new FilterChain();
+        $value = 'something';
+        $this->assertEquals($value, $chain->filter($value));
     }
 
-    /**
-     * Ensures that filters are executed in the expected order (FIFO)
-     *
-     * @return void
-     */
-    public function testFilterOrder()
+    public function testFiltersAreExecutedInFifoOrder()
     {
-        $filter = new FilterChain();
-        $filter->addFilter(new LowerCase())
-               ->addFilter(new StripUpperCase());
+        $chain = new FilterChain();
+        $chain->connect(new LowerCase())
+              ->connect(new StripUpperCase());
         $value = 'AbC';
         $valueExpected = 'abc';
-        $this->assertEquals($valueExpected, $filter($value));
+        $this->assertEquals($valueExpected, $chain->filter($value));
     }
 
-    /**
-     * Ensures that filters can be prepended and will be executed in the
-     * expected order
-     */
-    public function testFilterPrependOrder()
+    public function testFiltersAreExecutedAccordingToPriority()
     {
-        $filter = new FilterChain();
-        $filter->appendFilter(new StripUpperCase())
-               ->prependFilter(new LowerCase());
+        $chain = new FilterChain();
+        $chain->connect(new StripUpperCase())
+              ->connect(new LowerCase, 100);
         $value = 'AbC';
+        $valueExpected = 'b';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testAllowsConnectingArbitraryCallbacks()
+    {
+        $chain = new FilterChain();
+        $chain->connect(function($value) {
+            return strtolower($value);
+        });
+        $value = 'AbC';
+        $this->assertEquals('abc', $chain->filter($value));
+    }
+
+    public function testAllowsConnectingViaClassShortName()
+    {
+        $chain = new FilterChain();
+        $chain->connectByName('string_trim', array('encoding' => 'utf-8'), 100)
+              ->connectByName('strip_tags')
+              ->connectByName('string_to_lower', array('encoding' => 'utf-8'), 900);
+        $value = '<a name="foo"> ABC </a>';
         $valueExpected = 'abc';
-        $this->assertEquals($valueExpected, $filter($value));
+        $this->assertEquals($valueExpected, $chain->filter($value));
     }
 }
 

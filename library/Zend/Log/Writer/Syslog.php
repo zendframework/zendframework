@@ -105,7 +105,7 @@ class Syslog extends AbstractWriter
 
         $runInitializeSyslog = true;
         if (isset($params['facility'])) {
-            $this->_facility = $this->setFacility($params['facility']);
+            $this->setFacility($params['facility']);
             $runInitializeSyslog = false;
         }
 

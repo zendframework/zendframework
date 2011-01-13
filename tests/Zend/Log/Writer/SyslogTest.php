@@ -85,4 +85,21 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($instance instanceof SyslogWriter);
     }
+
+    /**
+     * @group ZF-10769
+     */
+    public function testPastFacilityViaConstructor()
+    {
+        $writer = new SyslogWriterCustom(array('facility' => LOG_USER));
+        $this->assertEquals(LOG_USER, $writer->getFacility());
+    }
+}
+
+class SyslogWriterCustom extends SyslogWriter
+{
+    public function getFacility()
+    {
+        return $this->_facility;
+    }
 }

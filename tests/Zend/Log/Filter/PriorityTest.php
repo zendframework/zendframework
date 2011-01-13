@@ -59,16 +59,16 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be an integer');
         new Priority('foo');
     }
-    
+
     public function testFactory()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName' => "Mock", 
-            'filterName' => "Priority", 
+            'writerName' => "Mock",
+            'filterName' => "Priority",
             'filterParams' => array(
-                'priority' => '\Zend\Log\Logger::CRIT', 
+                'priority' => '\Zend\Log\Logger::CRIT',
                 'operator' => "<="
-             ),        
+             ),
         )));
 
         $logger = Logger::factory($cfg['log']);
@@ -84,6 +84,6 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
             'filterParams' => array(
                 'priority' => 'somestring',
             ),
-        )));            
+        )));
     }
 }

@@ -29,8 +29,6 @@
  */
 class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
 {
-
-
     protected $_controller = null;
     protected $_request = null;
     protected $_response = null;
@@ -252,7 +250,7 @@ class Zend_Log_Writer_FirebugTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(serialize($qued_messages),
                             serialize($messages));
     }
-    
+
     public function testFactory()
     {
         $cfg = array('log' => array('memory' => array(

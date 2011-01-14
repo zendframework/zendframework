@@ -38,6 +38,11 @@ use Zend\Loader\Broker,
 class FilterChain extends AbstractFilter
 {
     /**
+     * Default priority at which filters are added
+     */
+    const DEFAULT_PRIORITY = 1000;
+
+    /**
      * @var Broker
      */
     protected $broker;
@@ -54,9 +59,52 @@ class FilterChain extends AbstractFilter
      * 
      * @return void
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         $this->filters = new SplPriorityQueue();
+
+        if (null !== $options) {
+            $this->setOptions($options);
+        }
+    }
+
+    public function setOptions($options)
+    {
+        if (!is_array($options) && !$options instanceof \Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected array or Traversable; received "%s"',
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
+        foreach ($options as $key => $value) {
+            switch (strtolower($key)) {
+                case 'callbacks':
+                    foreach ($value as $spec) {
+                        $callback = isset($spec['callback']) ? $spec['callback'] : false;
+                        $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
+                        if ($callback) {
+                            $this->connect($callback, $priority);
+                        }
+                    }
+                    break;
+                case 'filters':
+                    foreach ($value as $spec) {
+                        $name     = isset($spec['name'])     ? $spec['name']     : false;
+                        $options  = isset($spec['options'])  ? $spec['options']  : array();
+                        $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
+                        if ($name) {
+                            $this->connectByName($name, $options, $priority);
+                        }
+                    }
+                    break;
+                default:
+                    // ignore other options
+                    break;
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -102,7 +150,7 @@ class FilterChain extends AbstractFilter
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */
-    public function connect($callback, $priority = 1000)
+    public function connect($callback, $priority = self::DEFAULT_PRIORITY)
     {
         if (!is_callable($callback)) {
             if (!$callback instanceof Filter) {
@@ -128,7 +176,7 @@ class FilterChain extends AbstractFilter
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */
-    public function connectByName($name, $options = array(), $priority = 1000)
+    public function connectByName($name, $options = array(), $priority = self::DEFAULT_PRIORITY)
     {
         if (!is_array($options)) {
             $options = (array) $options;

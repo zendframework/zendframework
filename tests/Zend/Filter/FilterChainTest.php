@@ -81,6 +81,55 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $valueExpected = 'abc';
         $this->assertEquals($valueExpected, $chain->filter($value));
     }
+
+    public function testAllowsConfiguringFilters()
+    {
+        $config = $this->getChainConfig();
+        $chain  = new FilterChain();
+        $chain->setOptions($config);
+        $value = '<a name="foo"> abc </a>';
+        $valueExpected = 'ABC';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testAllowsConfiguringFiltersViaConstructor()
+    {
+        $config = $this->getChainConfig();
+        $chain  = new FilterChain($config);
+        $value = '<a name="foo"> abc </a>';
+        $valueExpected = 'ABC';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testConfigurationAllowsTraversableObjects()
+    {
+        $config = $this->getChainConfig();
+        $config = new \ArrayIterator($config);
+        $chain  = new FilterChain($config);
+        $value = '<a name="foo"> abc </a>';
+        $valueExpected = 'ABC';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    protected function getChainConfig()
+    {
+        return array(
+            'callbacks' => array(
+                array('callback' => __CLASS__ . '::staticUcaseFilter'),
+                array('priority' => 10000, 'callback' => function($value) {
+                    return trim($value);
+                }),
+            ),
+            'filters' => array(
+                array('name' => 'strip_tags', 'options' => array('encoding' => 'utf-8'), 'priority' => 10100),
+            ),
+        );
+    }
+
+    public static function staticUcaseFilter($value)
+    {
+        return strtoupper($value);
+    }
 }
 
 

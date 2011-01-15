@@ -132,8 +132,8 @@ abstract class AbstractWriter implements Writer, Factory
 
         if (!is_array($config)) {
             throw new \Zend\Log\Exception\InvalidArgumentException(
-				'Configuration must be an array or instance of Zend\Config\Config'
-			);
+                'Configuration must be an array or instance of Zend\Config\Config'
+            );
         }
 
         return $config;

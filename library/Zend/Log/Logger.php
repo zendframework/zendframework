@@ -430,7 +430,7 @@ class Logger implements Factory
      * message and writing it out to storage.
      *
      * @param  mixed $writer \Zend\Log\Writer\AbstractWriter or Config array
-     * @throws \Zend\Log\Exception\InvalidArgumentException 
+     * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return void
      */
     public function addWriter($writer)
@@ -482,7 +482,7 @@ class Logger implements Factory
     {
         // Only register once.  Avoids loop issues if it gets registered twice.
         if ($this->_registeredErrorHandler) {
-        	return $this;
+            return $this;
         }
 
         $this->_origErrorHandler = set_error_handler(array($this, 'errorHandler'));
@@ -501,7 +501,7 @@ class Logger implements Factory
             E_RECOVERABLE_ERROR => self::ERR,
             E_STRICT            => self::DEBUG,
         );
-        
+
         $this->_errorHandlerMap['E_DEPRECATED'] = self::DEBUG;
         $this->_errorHandlerMap['E_USER_DEPRECATED'] = self::DEBUG;
         $this->_registeredErrorHandler = true;

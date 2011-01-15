@@ -105,7 +105,7 @@ class Mail extends AbstractWriter
      * @var array
      */
     protected static $_methodMapHeaders = array(
-    	'from' => 'setFrom',
+        'from' => 'setFrom',
         'to' => 'addTo',
         'cc' => 'addCc',
         'bcc' => 'addBcc',
@@ -147,7 +147,7 @@ class Mail extends AbstractWriter
             $writer->setLayout($config);
         }
         if (isset($config['layoutFormatter'])) {
-        	$layoutFormatter = new $config['layoutFormatter'];
+            $layoutFormatter = new $config['layoutFormatter'];
             $writer->setLayoutFormatter($layoutFormatter);
         }
         if (isset($config['subjectPrependText'])) {
@@ -215,8 +215,8 @@ class Mail extends AbstractWriter
                     && !is_numeric($address['name'])
                 ) {
                     $params = array(
-                    	$address['email'],
-                    	$address['name']
+                        $address['email'],
+                        $address['name']
                     );
                 } else if (is_array($address) && isset($address['email'])) {
                     $params = array($address['email']);

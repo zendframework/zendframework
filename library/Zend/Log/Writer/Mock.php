@@ -67,11 +67,11 @@ class Mock extends AbstractWriter
 
     /**
      * Create a new instance of Zend_Log_Writer_Mock
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Mock
      */
-    static public function factory($config = array()) 
+    static public function factory($config = array())
     {
         return new self();
     }

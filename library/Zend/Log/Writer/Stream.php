@@ -81,10 +81,10 @@ class Stream extends AbstractWriter
 
         $this->_formatter = new Log\Formatter\Simple();
     }
-    
+
     /**
      * Create a new instance of Zend_Log_Writer_Mock
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Mock
      */
@@ -92,18 +92,18 @@ class Stream extends AbstractWriter
     {
         $config = self::_parseConfig($config);
         $config = array_merge(array(
-            'stream' => null, 
+            'stream' => null,
             'mode'   => null,
         ), $config);
 
-        $streamOrUrl = isset($config['url']) ? $config['url'] : $config['stream']; 
-        
+        $streamOrUrl = isset($config['url']) ? $config['url'] : $config['stream'];
+
         return new self(
-            $streamOrUrl, 
+            $streamOrUrl,
             $config['mode']
         );
     }
-    
+
     /**
      * Close the stream resource.
      *

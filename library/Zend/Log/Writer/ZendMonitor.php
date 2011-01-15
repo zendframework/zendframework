@@ -116,10 +116,10 @@ class ZendMonitor extends AbstractWriter
                 // On Zend Server; third argument should be the event
                 zend_monitor_custom_event($priority, $message, $event);
             } else {
-                // On Zend Platform; third argument is severity -- either 
+                // On Zend Platform; third argument is severity -- either
                 // 0 or 1 -- and fourth is optional (event)
                 // Severity is either 0 (normal) or 1 (severe); classifying
-                // notice, info, and debug as "normal", and all others as 
+                // notice, info, and debug as "normal", and all others as
                 // "severe"
                 monitor_custom_event($priority, $message, ($priority > 4) ? 0 : 1, $event);
             }

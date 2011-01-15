@@ -65,16 +65,16 @@ class Priority extends AbstractFilter
 
     /**
      * Create a new instance of Zend_Log_Filter_Priority
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Filter\Priority
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
-    static public function factory($config = array()) 
+    static public function factory($config = array())
     {
         $config = self::_parseConfig($config);
         $config = array_merge(array(
-            'priority' => null, 
+            'priority' => null,
             'operator' => null,
         ), $config);
 
@@ -86,9 +86,9 @@ class Priority extends AbstractFilter
         if (!is_numeric($config['priority'])) {
         	throw new \Zend\Log\Exception\InvalidArgumentException('Priority must be an integer.');
         }
-        
+
         return new self(
-            (int) $config['priority'], 
+            (int) $config['priority'],
             $config['operator']
         );
     }

@@ -40,7 +40,7 @@ abstract class AbstractFilter implements Filter, Factory
 {
     /**
      * Validate and optionally convert the config to array
-     * 
+     *
      * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
      * @return array
      * @throws \Zend\Log\Exception\InvalidArgumentException

@@ -78,10 +78,10 @@ class Firebug extends AbstractWriter
 
         $this->_formatter = new Log\Formatter\Firebug();
     }
-   
+
     /**
      * Create a new instance of Zend_Log_Writer_Firebug
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Firebug
      */

@@ -21,7 +21,9 @@
 
 namespace ZendTest\Log\Writer;
 
-use Zend\Log\Writer\Syslog as SyslogWriter;
+use Zend\Log\Writer\Syslog as SyslogWriter,
+    \Zend\Log\Logger,
+    \Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend
@@ -93,6 +95,23 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new SyslogWriterCustom(array('facility' => LOG_USER));
         $this->assertEquals(LOG_USER, $writer->getFacility());
+    }
+
+    /**
+     * @group ZF-8382
+     */
+    public function testWriteWithFormatter()
+    {
+        $event = array(
+        	'message' => 'tottakai',
+            'priority' => Logger::ERR
+        );
+
+        $writer = SyslogWriter::factory(array());
+        $formatter = new SimpleFormatter('%message% (this is a test)');
+        $writer->setFormatter($formatter);
+
+        $writer->write($event);
     }
 }
 

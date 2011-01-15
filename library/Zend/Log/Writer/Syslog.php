@@ -30,6 +30,7 @@ use Zend\Log;
  *
  * @uses       \Zend\Log\Log
  * @uses       \Zend\Log\Exception\InvalidArgumentException
+ * @uses       \Zend\Log\Formatter
  * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
@@ -253,6 +254,11 @@ class Syslog extends AbstractWriter
             $this->_initializeSyslog();
         }
 
-        syslog($priority, $event['message']);
+        $message = $event['message'];
+        if ($this->_formatter instanceof Log\Formatter) {
+            $message = $this->_formatter->format($event);
+        }
+
+        syslog($priority, $message);
     }
 }

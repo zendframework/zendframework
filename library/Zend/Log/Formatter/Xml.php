@@ -39,12 +39,12 @@ use \Zend\Log\Formatter;
 class Xml implements Formatter
 {
     /**
-     * @var Relates XML elements to log data field keys.
+     * @var string Name of root element
      */
     protected $_rootElement;
 
     /**
-     * @var Relates XML elements to log data field keys.
+     * @var array Relates XML elements to log data field keys.
      */
     protected $_elementMap;
 
@@ -57,8 +57,9 @@ class Xml implements Formatter
      * Class constructor
      *
      * @param string $rootElement Name of root element
-     * @param array $elementMap
+     * @param array $elementMap Relates XML elements to log data field keys
      * @param string $encoding Encoding to use (defaults to UTF-8)
+     * @return void
      */
     public function __construct($rootElement = 'logEntry', $elementMap = null, $encoding = 'UTF-8')
     {

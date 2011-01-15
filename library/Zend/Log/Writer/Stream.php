@@ -39,6 +39,7 @@ class Stream extends AbstractWriter
 {
     /**
      * Holds the PHP stream to log to.
+     *
      * @var null|stream
      */
     protected $_stream = null;
@@ -46,15 +47,16 @@ class Stream extends AbstractWriter
     /**
      * Class Constructor
      *
-     * @param  streamOrUrl     Stream or URL to open as a stream
-     * @param  mode            Mode, only applicable if a URL is given
+     * @param array|string|resource $streamOrUrl Stream or URL to open as a stream
+     * @param string|null $mode Mode, only applicable if a URL is given
+     * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Excpeiton\RuntimeException
      */
-    public function __construct($streamOrUrl, $mode = \NULL)
+    public function __construct($streamOrUrl, $mode = null)
     {
         // Setting the default
-        if ($mode === NULL) {
+        if (null === $mode) {
             $mode = 'a';
         }
 
@@ -83,10 +85,10 @@ class Stream extends AbstractWriter
     }
 
     /**
-     * Create a new instance of Zend_Log_Writer_Mock
+     * Create a new instance of Zend_Log_Writer_Stream
      *
      * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Mock
+     * @return \Zend\Log\Writer\Stream
      */
     public static function factory($config = array())
     {

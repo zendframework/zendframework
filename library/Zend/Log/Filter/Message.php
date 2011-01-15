@@ -44,6 +44,7 @@ class Message extends AbstractFilter
      * Filter out any log messages not matching $regexp.
      *
      * @param  string  $regexp     Regular expression to test the log message
+     * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($regexp)

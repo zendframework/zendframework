@@ -41,9 +41,9 @@ use Zend\Wildfire\Plugin\FirePhp;
  */
 class Firebug extends AbstractWriter
 {
-
     /**
      * Maps logging priorities to logging display styles
+     *
      * @var array
      */
     protected $_priorityStyles = array(Log\Logger::EMERG  => FirePhp::ERROR,
@@ -57,18 +57,22 @@ class Firebug extends AbstractWriter
 
     /**
      * The default logging style for un-mapped priorities
+     *
      * @var string
      */
     protected $_defaultPriorityStyle = FirePhp::LOG;
 
     /**
      * Flag indicating whether the log writer is enabled
+     *
      * @var boolean
      */
     protected $_enabled = true;
 
     /**
      * Class constructor
+     *
+     * @return void
      */
     public function __construct()
     {

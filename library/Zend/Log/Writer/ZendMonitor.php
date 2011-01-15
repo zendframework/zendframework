@@ -36,18 +36,20 @@ class ZendMonitor extends AbstractWriter
 {
     /**
      * Is Zend Monitor enabled?
-     * @var bool
+     *
+     * @var boolean
      */
     protected $_isEnabled = true;
 
     /**
      * Is this for a Zend Server intance?
-     * @var bool
+     *
+     * @var boolean
      */
     protected $_isZendServer = false;
 
     /**
-     * Class constructor
+     * @return void
      */
     public function __construct()
     {
@@ -63,7 +65,7 @@ class ZendMonitor extends AbstractWriter
      * Create a new instance of Zend_Log_Writer_ZendMonitor
      *
      * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Syslog
+     * @return \Zend\Log\Writer\ZendMonitor
      */
     static public function factory($config = array())
     {
@@ -77,7 +79,7 @@ class ZendMonitor extends AbstractWriter
      * fail silently. You can query this method to determine if the log
      * writer is enabled.
      *
-     * @return bool
+     * @return boolean
      */
     public function isEnabled()
     {
@@ -87,7 +89,7 @@ class ZendMonitor extends AbstractWriter
     /**
      * Log a message to this writer.
      *
-     * @param  array $event  log data event
+     * @param  array $event log data event
      * @return void
      */
     public function write($event)
@@ -102,7 +104,7 @@ class ZendMonitor extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param  array  $event  log data event
+     * @param  array  $event log data event
      * @return void
      */
     protected function _write($event)

@@ -93,7 +93,7 @@ class Logger implements Factory
 
     /**
      *
-     * @var array
+     * @var array|boolean
      */
     protected $_errorHandlerMap        = false;
 
@@ -106,6 +106,7 @@ class Logger implements Factory
     /**
      * Class constructor.  Create a new logger     *
      * @param \Zend\Log\Writer\AbstractWriter|null  $writer  default writer
+     * @return void
      */
     public function __construct(Writer $writer = null)
     {
@@ -264,7 +265,7 @@ class Logger implements Factory
      * @param  string   $message   Message to log
      * @param  integer  $priority  Priority of message
      * @return array Event array
-     **/
+     */
     protected function _packEvent($message, $priority)
     {
         return array_merge(array(
@@ -405,13 +406,13 @@ class Logger implements Factory
      * Before a message will be received by any of the writers, it
      * must be accepted by all filters added with this method.
      *
-     * @param  int|\Zend\Log\Filter\FilterInterface $filter
+     * @param  int|\Zend\Config\Config|\Zend\Log\Filter\FilterInterface $filter
      * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return void
+     * @return \Zend\Log\Logger
      */
     public function addFilter($filter)
     {
-        if (is_integer($filter)) {
+        if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
 
         } elseif ($filter instanceof Config || is_array($filter)) {
@@ -431,7 +432,7 @@ class Logger implements Factory
      *
      * @param  mixed $writer \Zend\Log\Writer\AbstractWriter or Config array
      * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return void
+     * @return \Zend\Log\Logger
      */
     public function addWriter($writer)
     {
@@ -455,7 +456,7 @@ class Logger implements Factory
      *
      * @param  $name    Name of the field
      * @param  $value   Value of the field
-     * @return void
+     * @return \Zend\Log\Logger
      */
     public function setEventItem($name, $value)
     {

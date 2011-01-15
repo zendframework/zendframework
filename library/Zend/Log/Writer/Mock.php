@@ -36,11 +36,15 @@ class Mock extends AbstractWriter
 {
     /**
      * array of log events
+     *
+     * @var array
      */
     public $events = array();
 
     /**
      * shutdown called?
+     *
+     * @var boolean
      */
     public $shutdown = false;
 

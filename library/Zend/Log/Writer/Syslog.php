@@ -42,6 +42,7 @@ class Syslog extends AbstractWriter
 {
     /**
      * Maps Zend_Log priorities to PHP's syslog priorities
+     *
      * @var array
      */
     protected $_priorities = array(
@@ -57,36 +58,41 @@ class Syslog extends AbstractWriter
 
     /**
      * The default log priority - for unmapped custom priorities
+     *
      * @var string
      */
     protected $_defaultPriority = LOG_NOTICE;
 
     /**
      * Last application name set by a syslog-writer instance
+     *
      * @var string
      */
     protected static $_lastApplication;
 
     /**
      * Last facility name set by a syslog-writer instance
+     *
      * @var string
      */
     protected static $_lastFacility;
 
     /**
      * Application name used by this syslog-writer instance
+     *
      * @var string
      */
     protected $_application = 'Zend_Log';
 
     /**
      * Facility used by this syslog-writer instance
+     *
      * @var int
      */
     protected $_facility = LOG_USER;
 
     /**
-     * _validFacilities
+     * Types of program available to logging of message
      *
      * @var array
      */
@@ -95,7 +101,7 @@ class Syslog extends AbstractWriter
     /**
      * Class constructor
      *
-     * @param  array $options Array of options; may include "application" and "facility" keys
+     * @param  array $params Array of options; may include "application" and "facility" keys
      * @return void
      */
     public function __construct(array $params = array())
@@ -178,7 +184,7 @@ class Syslog extends AbstractWriter
      * Set syslog facility
      *
      * @param  int $facility Syslog facility
-     * @return void
+     * @return \Zend\Log\Writer\Syslog
      * @throws \Zend\Log\Exception\InvalidArgumentException for invalid log facility
      */
     public function setFacility($facility)
@@ -212,7 +218,7 @@ class Syslog extends AbstractWriter
      * Set application name
      *
      * @param  string $application Application name
-     * @return void
+     * @return \Zend\Log\Writer\Syslog
      */
     public function setApplicationName($application)
     {
@@ -237,7 +243,7 @@ class Syslog extends AbstractWriter
     /**
      * Write a message to syslog.
      *
-     * @param  array $event  event data
+     * @param  array $event event data
      * @return void
      */
     protected function _write($event)

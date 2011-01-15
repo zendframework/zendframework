@@ -47,6 +47,7 @@ class Simple implements Formatter
      * Class constructor
      *
      * @param  null|string  $format  Format specifier for log messages
+     * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($format = null)

@@ -60,7 +60,7 @@ abstract class AbstractWriter implements Writer, Factory
      */
     public function addFilter($filter)
     {
-        if (is_integer($filter)) {
+        if (is_int($filter)) {
             $filter = new \Zend\Log\Filter\Priority($filter);
         }
 

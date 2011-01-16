@@ -248,15 +248,10 @@ class Getopt
     public function __construct($rules, $argv = null, $getoptConfig = array())
     {
         if (!isset($_SERVER['argv'])) {
-            if (ini_get('register_argc_argv') == false) {
-                throw new Exception\InvalidArgumentException(
-                    "argv is not available, because ini option 'register_argc_argv' is set Off"
-                );
-            } else {
-                throw new Exception\InvalidArgumentException(
-                    '$_SERVER["argv"] is not set, but Zend_Console_Getopt cannot work without this information.'
-                );
-            }
+            $errorDescription = (ini_get('register_argc_argv') == false)
+                ? "argv is not available, because ini option 'register_argc_argv' is set Off"
+                : '$_SERVER["argv"] is not set, but Zend_Console_Getopt cannot work without this information.';
+            throw new Exception\InvalidArgumentException($errorDescription);
         }
 
         $this->_progname = $_SERVER['argv'][0];

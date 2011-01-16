@@ -81,6 +81,12 @@ class Logger implements Factory
 
     /**
      *
+     * @var string
+     */
+    protected $_defaultFormatterNamespace = 'Zend\Log\Formatter';
+
+    /**
+     *
      * @var callback
      */
     protected $_origErrorHandler       = null;
@@ -173,6 +179,11 @@ class Logger implements Factory
             $writer->addFilter($filter);
         }
 
+        if (isset($config['formatterName'])) {
+            $formatter = $this->_constructFormatterFromConfig($config);
+            $writer->setFormatter($formatter);
+        }
+
         return $writer;
     }
 
@@ -195,6 +206,27 @@ class Logger implements Factory
         }
 
         return $filter;
+    }
+
+   /**
+     * Construct formatter object from configuration array or Zend_Config object
+     *
+     * @param  array|Zend\Config\Config $config \Zend\Config\Config or Array
+     * @return \Zend\Log\Formatter
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     */
+    protected function _constructFormatterFromConfig($config)
+    {
+        $formatter = $this->_constructFromConfig('formatter', $config, $this->_defaultFormatterNamespace);
+
+        if (!$formatter instanceof Formatter) {
+             $formatterName = is_object($formatter)
+                         ? get_class($formatter)
+                         : 'The specified formatter';
+            throw new Exception\InvalidArgumentException($formatterName . ' does not implement Zend\Log\Formatter');
+        }
+
+        return $formatter;
     }
 
     /**
@@ -227,7 +259,7 @@ class Logger implements Factory
         $reflection = new \ReflectionClass($className);
         if (!$reflection->implementsInterface('Zend\Log\Factory')) {
             throw new Exception\InvalidArgumentException(
-                'Driver does not implement Zend\Log\Factory and can not be constructed from config.'
+                $className . ' does not implement Zend\Log\Factory and can not be constructed from config.'
             );
         }
 

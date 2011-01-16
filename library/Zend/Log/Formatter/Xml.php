@@ -24,19 +24,20 @@
  */
 namespace Zend\Log\Formatter;
 
-use \Zend\Log\Formatter;
+use \Zend\Log\Formatter,
+    \Zend\Config\Config;
 
 /**
  * @uses       DOMDocument
  * @uses       DOMElement
- * @uses       \Zend\Log\Formatter\FormatterInterface
+ * @uses       \Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml implements Formatter
+class Xml extends AbstractFormatter
 {
     /**
      * @var string Name of root element
@@ -55,17 +56,56 @@ class Xml implements Formatter
 
     /**
      * Class constructor
+     * (the default encoding is UTF-8)
      *
-     * @param string $rootElement Name of root element
-     * @param array $elementMap Relates XML elements to log data field keys
-     * @param string $encoding Encoding to use (defaults to UTF-8)
+     * @param array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($rootElement = 'logEntry', $elementMap = null, $encoding = 'UTF-8')
+    public function __construct($options = array())
     {
-        $this->_rootElement = $rootElement;
-        $this->_elementMap  = $elementMap;
-        $this->setEncoding($encoding);
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        } elseif (!is_array($options)) {
+            $args = func_get_args();
+
+            $options = array(
+            	'rootElement' => array_shift($args)
+            );
+
+            if (count($args)) {
+                $options['elementMap'] = array_shift($args);
+            }
+
+            if (count($args)) {
+                $options['encoding'] = array_shift($args);
+            }
+        }
+
+        if (!array_key_exists('rootElement', $options)) {
+            $options['rootElement'] = 'logEntry';
+        }
+
+        if (!array_key_exists('encoding', $options)) {
+            $options['encoding'] = 'UTF-8';
+        }
+
+        $this->_rootElement = $options['rootElement'];
+        $this->setEncoding($options['encoding']);
+
+        if (array_key_exists('elementMap', $options)) {
+            $this->_elementMap  = $options['elementMap'];
+        }
+    }
+
+    /**
+	 * Factory for Zend_Log_Formatter_Xml classe
+	 *
+	 * @param array|\Zend\Config\Config $options
+	 * @return \Zend\Log\Formatter\Xml
+     */
+    public static function factory($options = array())
+    {
+        return new self($options);
     }
 
     /**

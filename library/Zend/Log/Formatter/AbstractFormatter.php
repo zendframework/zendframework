@@ -14,46 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage UnitTests
+ * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-namespace ZendTest\Log\Formatter;
-
-use Zend\Log\Formatter\Firebug;
 
 /**
+ * @namespace
+ */
+namespace Zend\Log\Formatter;
+use \Zend\Log\Factory,
+    \Zend\Log\Formatter;
+
+/**
+ * @uses       \Zend\Log\Factory
+ * @uses       \Zend\Log\Formatter
  * @category   Zend
  * @package    Zend_Log
- * @subpackage UnitTests
+ * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Log
  */
-class FirebugTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractFormatter implements Formatter, Factory
 {
-    public function testFormat()
-    {
-        $event = array(
-            'timestamp' => date('c'),
-        	'message' => 'tottakai',
-            'priority' => 2,
-        	'priorityName' => 'CRIT'
-        );
-        $formatter = new Firebug();
-        $output = $formatter->format($event);
-
-        $this->assertEquals('tottakai', $output);
-    }
-
-    /**
-     * @group ZF-9176
-     */
-    public function testFactory()
-    {
-        $options = array();
-        $formatter = Firebug::factory($options);
-        $this->assertType('Zend\Log\Formatter\Firebug', $formatter);
-    }
 }

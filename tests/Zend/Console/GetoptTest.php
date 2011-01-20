@@ -525,4 +525,15 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($fooValue, $opts->foo);
     }
+
+    public function testGetoptIgnoreCumulativeParamsByDefault()
+    {
+        $opts = new Getopt(
+            array('colors|c' => 'Colors-option'),
+            array(
+                '--colors', 'red',
+                '--colors', 'green',
+                '--colors', 'blue'));
+        $this->assertEquals('blue', $opts->colors, 'Should be equal to last variable');
+    }
 }

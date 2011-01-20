@@ -163,6 +163,7 @@ class Getopt
     const CONFIG_DASHDASH                   = 'dashDash';
     const CONFIG_IGNORECASE                 = 'ignoreCase';
     const CONFIG_PARSEALL                   = 'parseAll';
+    const CONFIG_CUMULATIVE_PARAMETERS      = 'cumulativeParameters';
 
     /**
      * Defaults for getopt configuration are:
@@ -172,10 +173,11 @@ class Getopt
      * parseAll is enabled.
      */
     protected $_getoptConfig = array(
-        self::CONFIG_RULEMODE   => self::MODE_ZEND,
-        self::CONFIG_DASHDASH   => true,
-        self::CONFIG_IGNORECASE => false,
-        self::CONFIG_PARSEALL   => true,
+        self::CONFIG_RULEMODE                => self::MODE_ZEND,
+        self::CONFIG_DASHDASH                => true,
+        self::CONFIG_IGNORECASE              => false,
+        self::CONFIG_PARSEALL                => true,
+        self::CONFIG_CUMULATIVE_PARAMETERS   => false,
     );
 
     /**
@@ -799,7 +801,31 @@ class Getopt
             default:
                 $param = true;
         }
-        $this->_options[$realFlag] = $param;
+
+        $this->_setSingleOptionValue($realFlag, $param);
+    }
+
+    /**
+     * Add relative to options' flag value
+     * 
+     * If options list already has current flag as key
+     * and parser should follow cumulative params by configuration,
+     * we should to add new param to array, not to overwrite
+     *
+     * @param  string $flag
+     * @param  string $value
+     * @return null
+     */
+    protected function _setSingleOptionValue($flag, $value)
+    {
+        if (!array_key_exists($flag, $this->_options)) {
+            $this->_options[$flag] = $value;
+        } else if($this->_getoptConfig[self::CONFIG_CUMULATIVE_PARAMETERS]) {
+            $this->_options[$flag] = (array)$this->_options[$flag];
+            $this->_options[$flag][] = $value;
+        } else {
+            $this->_options[$flag] = $value;
+        }
     }
 
     /**

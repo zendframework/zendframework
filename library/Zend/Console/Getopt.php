@@ -170,7 +170,9 @@ class Getopt
      * ruleMode is 'zend' format,
      * dashDash (--) token is enabled,
      * ignoreCase is not enabled,
-     * parseAll is enabled.
+     * parseAll is enabled,
+     * cumulative parameters are disabled,
+     * this means that subsequent options overwrite the parameter value.
      */
     protected $_getoptConfig = array(
         self::CONFIG_RULEMODE                => self::MODE_ZEND,

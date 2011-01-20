@@ -95,7 +95,7 @@ namespace Zend\Console;
  *        If this config value is null or empty string, do not split values
  *        into arrays.  Default separator is comma (',').
  *
- * @todo  Handle params with multiple values specified with separate options
+ * @todo  [Done] Handle params with multiple values specified with separate options
  *        e.g. --colors red --colors green --colors blue should give one
  *        option with an array(red, green, blue).
  *        Enable with Zend_Console_Getopt::CONFIG_CUMULATIVE_PARAMETERS.
@@ -821,8 +821,8 @@ class Getopt
         if (!array_key_exists($flag, $this->_options)) {
             $this->_options[$flag] = $value;
         } else if($this->_getoptConfig[self::CONFIG_CUMULATIVE_PARAMETERS]) {
-            $this->_options[$flag] = (array)$this->_options[$flag];
-            $this->_options[$flag][] = $value;
+            $this->_options[$flag] = (array) $this->_options[$flag];
+            array_push($this->_options[$flag], $value);
         } else {
             $this->_options[$flag] = $value;
         }

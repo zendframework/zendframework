@@ -106,11 +106,13 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testEmitShouldReturnAllSlotReturnValues()
     {
-        $this->signals->connect('string.transform', function ($context, array $params) {
-            return trim(array_shift($params));
+        $this->signals->connect('string.transform', function ($e) {
+            $string = $e->getParam('string', '__NOT_FOUND__');
+            return trim($string);
         });
-        $this->signals->connect('string.transform', function ($context, array $params) {
-            return str_rot13(array_shift($params));
+        $this->signals->connect('string.transform', function ($e) {
+            $string = $e->getParam('string', '__NOT_FOUND__');
+            return str_rot13($string);
         });
         $responses = $this->signals->emit('string.transform', $this, array('string' => ' foo '));
         $this->assertTrue($responses instanceof ResponseCollection);
@@ -121,14 +123,14 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testEmitUntilShouldReturnAsSoonAsCallbackReturnsTrue()
     {
-        $this->signals->connect('foo.bar', function ($context, array $params) {
-            $string = isset($params['string']) ? $params['string'] : '';
-            $search = isset($params['search']) ? $params['search'] : '?';
+        $this->signals->connect('foo.bar', function ($e) {
+            $string = $e->getParam('string', '');
+            $search = $e->getParam('search', '?');
             return strpos($string, $search);
         });
-        $this->signals->connect('foo.bar', function ($context, array $params) {
-            $string = isset($params['string']) ? $params['string'] : '';
-            $search = isset($params['search']) ? $params['search'] : '?';
+        $this->signals->connect('foo.bar', function ($e) {
+            $string = $e->getParam('string', '');
+            $search = $e->getParam('search', '?');
             return strstr($string, $search);
         });
         $responses = $this->signals->emitUntil(
@@ -143,11 +145,13 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
 
     public function testEmitResponseCollectionContains()
     {
-        $this->signals->connect('string.transform', function ($context, array $params) {
-            return trim(array_shift($params));
+        $this->signals->connect('string.transform', function ($e) {
+            $string = $e->getParam('string', '');
+            return trim($string);
         });
-        $this->signals->connect('string.transform', function ($context, array $params) {
-            return str_rot13(array_shift($params));
+        $this->signals->connect('string.transform', function ($e) {
+            $string = $e->getParam('string', '');
+            return str_rot13($string);
         });
         $responses = $this->signals->emit('string.transform', $this, array('string' => ' foo '));
         $this->assertTrue($responses->contains('foo'));
@@ -155,9 +159,9 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($responses->contains(' foo '));
     }
 
-    public function handleTestSignal($context, array $params)
+    public function handleTestSignal($e)
     {
-        $message = $params['message'] ?: '__NOT_FOUND__';
+        $message = $e->getParam('message', '__NOT_FOUND__');
         $this->message = $message;
     }
 
@@ -270,5 +274,44 @@ class SignalSlotTest extends \PHPUnit_Framework_TestCase
         $handlers = $this->signals->getSlots('other');
         $this->assertEquals(1, count($handlers));
         $this->assertContains($handlerOther, $handlers);
+    }
+
+    public function testCallingSignalsStopPropagationMethodHaltsSignalEmission()
+    {
+        $this->signals->connect('foo.bar', function ($e) { return 'bogus'; }, 4);
+        $this->signals->connect('foo.bar', function ($e) { $e->stopPropagation(true); return 'nada'; }, 3);
+        $this->signals->connect('foo.bar', function ($e) { return 'found'; }, 2);
+        $this->signals->connect('foo.bar', function ($e) { return 'zero'; }, 1);
+        $responses = $this->signals->emit('foo.bar', $this, array());
+        $this->assertTrue($responses instanceof ResponseCollection);
+        $this->assertTrue($responses->stopped());
+        $this->assertEquals('nada', $responses->last());
+        $this->assertTrue($responses->contains('bogus'));
+        $this->assertFalse($responses->contains('found'));
+        $this->assertFalse($responses->contains('zero'));
+    }
+
+    public function testCanAlterParametersWithinASignal()
+    {
+        $this->signals->connect('foo.bar', function ($e) { $e->setParam('foo', 'bar'); });
+        $this->signals->connect('foo.bar', function ($e) { $e->setParam('bar', 'baz'); });
+        $this->signals->connect('foo.bar', function ($e) {
+            $foo = $e->getParam('foo', '__NO_FOO__');
+            $bar = $e->getParam('bar', '__NO_BAR__');
+            return $foo . ":" . $bar;
+        });
+        $responses = $this->signals->emit('foo.bar', $this, array());
+        $this->assertEquals('bar:baz', $responses->last());
+    }
+
+    public function testParametersArePassedToSignalByReference()
+    {
+        $params = array( 'foo' => 'bar', 'bar' => 'baz');
+        $args   = $this->signals->prepareArgs($params);
+        $this->signals->connect('foo.bar', function ($e) { $e->setParam('foo', 'FOO'); });
+        $this->signals->connect('foo.bar', function ($e) { $e->setParam('bar', 'BAR'); });
+        $responses = $this->signals->emit('foo.bar', $this, $args);
+        $this->assertEquals('FOO', $args['foo']);
+        $this->assertEquals('BAR', $args['bar']);
     }
 }

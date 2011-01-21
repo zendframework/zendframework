@@ -33,8 +33,8 @@ namespace Zend\SignalSlot;
  */
 interface SignalManager
 {
-    public function emit($signal, $context, array $argv = array());
-    public function emitUntil($signal, $context, array $argv, $callback);
+    public function emit($signal, $context, $argv = array());
+    public function emitUntil($signal, $context, $argv, $callback);
     public function connect($signalOrAggregate, $callback = null, $priority = 1);
     public function detach($handle);
     public function getSignals();

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,20 +21,19 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\EventManager;
 
-use Zend\Stdlib\SignalHandler;
+use SplStack;
 
 /**
  * Collection of signal handler return values
  *
- * @uses       Zend\SignalSlot\SignalSlot
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResponseCollection extends \SplStack 
+class ResponseCollection extends SplStack 
 {
     protected $stopped = false;
 

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,23 +21,17 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\EventManager;
 
 /**
- * Interface for messengers
+ * Interface for global (static) message delivery
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SignalManager
+interface StaticEventDispatcher
 {
-    public function emit($signal, $context, $argv = array());
-    public function emitUntil($signal, $context, $argv, $callback);
-    public function connect($signalOrAggregate, $callback = null, $priority = 1);
-    public function detach($handle);
-    public function getSignals();
-    public function getSlots($signal);
-    public function clearSlots($signal);
+    public function getHandlers($id, $event);
 }

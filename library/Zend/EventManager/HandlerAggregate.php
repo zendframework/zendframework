@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,24 +21,22 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
-
-use Zend\Stdlib\CallbackHandler;
+namespace Zend\EventManager;
 
 /**
- * Interface for filters
+ * Interface for self-registering event handlers.
+ *
+ * Classes implementing this interface may be registered by name or instance
+ * with an EventManager, without an event name. The {@link connect()} method will
+ * then be called with the current EventManager instance, allowing the class to
+ * wire up one or more handlers.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Filter
+interface HandlerAggregate
 {
-    public function run($context, array $params = array());
-    public function connect($callback);
-    public function detach(CallbackHandler $filter);
-    public function getFilters();
-    public function clearFilters();
-    public function getResponses();
+    public function connect(EventDispatcher $events);
 }

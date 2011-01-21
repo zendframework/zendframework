@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,16 +21,19 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\EventManager\Exception;
+
+use Zend\EventManager\Exception;
 
 /**
- * Base exception interface
+ * Invalid argument exception
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class InvalidArgumentException 
+    extends \InvalidArgumentException implements Exception
 {
 }

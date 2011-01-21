@@ -13,30 +13,40 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\SignalSlot;
+namespace ZendTest\EventManager\TestAsset;
+
+use Zend\EventManager\EventDispatcher,
+    Zend\EventManager\HandlerAggregate;
 
 /**
- * Interface for self-registering signal handlers.
- *
- * Classes implementing this interface may be registered by name or instance
- * with a SignalSlot, without a signal name. The {@link connect()} method will
- * then be called with the current SignalSlot instance, allowing the class to
- * wire up one or more handlers.
- *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
+ * @subpackage UnitTests
+ * @group      Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SignalAggregate
+class MockAggregate implements HandlerAggregate
 {
-    public function connect(SignalManager $signals);
+    public function connect(EventDispatcher $signals)
+    {
+        $signals->connect('foo.bar', array( $this, 'fooBar' ));
+        $signals->connect('foo.baz', array( $this, 'fooBaz' ));
+    }
+
+    public function fooBar()
+    {
+        return __METHOD__;
+    }
+
+    public function fooBaz()
+    {
+        return __METHOD__;
+    }
 }

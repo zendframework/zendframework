@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,34 +21,33 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\EventManager;
 
 /**
- * Representation of a signal
+ * Representation of an event
  *
  * Encapsulates the target context and parameters passed, and provides some 
- * behavior for interacting with the signal manager.
+ * behavior for interacting with the event manager.
  *
- * @uses       Zend\SignalSlot\SignalSlot
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Signal
+class Event
 {
     /**
-     * @var string Signal name
+     * @var string Event name
      */
     protected $name;
 
     /**
-     * @var string|object The signal target
+     * @var string|object The event target
      */
     protected $target;
 
     /**
-     * @var array|ArrayAccess The signal parameters
+     * @var array|ArrayAccess The event parameters
      */
     protected $params = array();
 
@@ -62,7 +61,7 @@ class Signal
      *
      * Accept a target and its parameters.
      * 
-     * @param  string $name Signal name
+     * @param  string $name Event name
      * @param  string|object $target 
      * @param  array|ArrayAccess $params 
      * @return void
@@ -75,7 +74,7 @@ class Signal
     }
 
     /**
-     * Get signal name
+     * Get event name
      * 
      * @return string
      */
@@ -85,7 +84,7 @@ class Signal
     }
 
     /**
-     * Get the signal target
+     * Get the event target
      *
      * This may be either an object, or the name of a static method.
      * 
@@ -102,13 +101,13 @@ class Signal
      * Overwrites parameters
      * 
      * @param  array|ArrayAccess $params 
-     * @return Signal
+     * @return Event
      */
     public function setParams($params)
     {
         if (!is_array($params) && !$params instanceof \ArrayAccess) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Signal parameters must be an array or implement ArrayAccess; received "%s"',
+                'Event parameters must be an array or implement ArrayAccess; received "%s"',
                 (is_object($params) ? get_class($params) : gettype($params))
             ));
         }
@@ -150,7 +149,7 @@ class Signal
      * 
      * @param  string|int $name 
      * @param  mixed $value 
-     * @return Signal
+     * @return Event
      */
     public function setParam($name, $value)
     {
@@ -159,7 +158,7 @@ class Signal
     }
 
     /**
-     * Stop further signal propagation
+     * Stop further event propagation
      * 
      * @param  bool $flag 
      * @return void

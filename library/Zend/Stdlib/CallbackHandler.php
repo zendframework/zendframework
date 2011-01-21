@@ -26,7 +26,7 @@ namespace Zend\Stdlib;
 /**
  * CallbackHandler
  *
- * A handler for a signal, event, filterchain, etc. Abstracts PHP callbacks,
+ * A handler for a event, event, filterchain, etc. Abstracts PHP callbacks,
  * primarily to allow for lazy-loading and ensuring availability of default
  * arguments (currying).
  *
@@ -43,9 +43,9 @@ class CallbackHandler
     protected $callback;
 
     /**
-     * @var string Signal to which this handle is subscribed
+     * @var string Event to which this handle is subscribed
      */
-    protected $signal;
+    protected $event;
 
     /**
      * Until callback has been validated, mark as invalid
@@ -62,26 +62,26 @@ class CallbackHandler
     /**
      * Constructor
      * 
-     * @param  string $signal Signal to which slot is subscribed
+     * @param  string $event Event to which slot is subscribed
      * @param  string|array|object $callback PHP callback (first element may be )
      * @param  array $options Options used by the callback handler (e.g., priority)
      * @return void
      */
-    public function __construct($signal, $callback, array $options = array())
+    public function __construct($event, $callback, array $options = array())
     {
-        $this->signal   = $signal;
+        $this->event    = $event;
         $this->callback = $callback;
         $this->options  = $options;
     }
 
     /**
-     * Get signal to which slot is subscribed
+     * Get event to which handler is subscribed
      * 
      * @return string
      */
-    public function getSignal()
+    public function getEvent()
     {
-        return $this->signal;
+        return $this->event;
     }
 
     /**

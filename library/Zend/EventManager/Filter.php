@@ -13,40 +13,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
- * @subpackage UnitTests
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-namespace ZendTest\SignalSlot\TestAsset;
-
-use Zend\SignalSlot\SignalManager,
-    Zend\SignalSlot\SignalAggregate;
 
 /**
+ * @namespace
+ */
+namespace Zend\EventManager;
+
+use Zend\Stdlib\CallbackHandler;
+
+/**
+ * Interface for intercepting filter chains
+ *
  * @category   Zend
- * @package    Zend_SignalSlot
- * @subpackage UnitTests
- * @group      Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockAggregate implements SignalAggregate
+interface Filter
 {
-    public function connect(SignalManager $signals)
-    {
-        $signals->connect('foo.bar', array( $this, 'fooBar' ));
-        $signals->connect('foo.baz', array( $this, 'fooBaz' ));
-    }
-
-    public function fooBar()
-    {
-        return __METHOD__;
-    }
-
-    public function fooBaz()
-    {
-        return __METHOD__;
-    }
+    public function run($context, array $params = array());
+    public function connect($callback);
+    public function detach(CallbackHandler $filter);
+    public function getFilters();
+    public function clearFilters();
+    public function getResponses();
 }

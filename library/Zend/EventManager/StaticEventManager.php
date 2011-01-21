@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,25 +21,25 @@
 /**
  * @namespace
  */
-namespace Zend\SignalSlot;
+namespace Zend\EventManager;
 
 /**
- * Static version of Signals
+ * Static version of EventManager
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StaticSignalSlot implements StaticSignalManager
+class StaticEventManager implements StaticEventDispatcher
 {
     /**
-     * @var StaticSignalSlot
+     * @var StaticEventManager
      */
     protected static $instance;
 
     /**
-     * Identifiers with signal connections
+     * Identifiers with event connections
      * @var array
      */
     protected $identifiers = array();
@@ -54,9 +54,9 @@ class StaticSignalSlot implements StaticSignalManager
     }
 
     /**
-     * Retrieve signals instance
+     * Retrieve instance
      * 
-     * @return SignalSlot
+     * @return EventManager
      */
     public static function getInstance()
     {
@@ -77,19 +77,18 @@ class StaticSignalSlot implements StaticSignalManager
     }
 
     /**
-     * Attach a slot to a signal
+     * Attach a handler to an event
      *
-     * Allows attaching a callback to a signal offerred by one or more 
+     * Allows attaching a callback to an event offerred by one or more 
      * identifying components. As an example, the following connects to the 
-     * "getAll" signal of both an AbstractResource and EntityResource:
+     * "getAll" event of both an AbstractResource and EntityResource:
      *
      * <code>
-     * StaticSignalSlot::getInstance()->connect(
+     * StaticEventManager::getInstance()->connect(
      *     array('My\Resource\AbstractResource', 'My\Resource\EntityResource'),
      *     'getOne',
-     *     function ($resource, array $params) use ($cache) {
-     *         $id = $params['id'] ?: false;
-     *         if (!$id) {
+     *     function ($e) use ($cache) {
+     *         if (!$id = $e->getParam('id', false)) {
      *             return;
      *         }
      *         if (!$data = $cache->load(get_class($resource) . '::getOne::' . $id )) {
@@ -100,85 +99,85 @@ class StaticSignalSlot implements StaticSignalManager
      * );
      * </code>
      * 
-     * @param  string|array $id Identifier(s) for signal emitting component(s)
-     * @param  string|SignalAggregate $signal 
+     * @param  string|array $id Identifier(s) for event emitting component(s)
+     * @param  string|HandlerAggregate $event 
      * @param  null|callback $callback PHP Callback
-     * @param  int $priority Priority at which slot should execute
+     * @param  int $priority Priority at which handler should execute
      * @return void
      */
-    public function connect($id, $signalOrAggregate, $callback = null, $priority = 1000)
+    public function connect($id, $eventOrAggregate, $callback = null, $priority = 1000)
     {
         $ids = (array) $id;
         foreach ($ids as $id) {
             if (!array_key_exists($id, $this->identifiers)) {
-                $this->identifiers[$id] = new SignalSlot();
+                $this->identifiers[$id] = new EventManager();
             }
-            $this->identifiers[$id]->connect($signalOrAggregate, $callback, $priority);
+            $this->identifiers[$id]->connect($eventOrAggregate, $callback, $priority);
         }
     }
 
     /**
-     * Detach a slot from a signal offered by a given resource
+     * Detach a handler from an event offered by a given resource
      * 
      * @param  string|int $id
-     * @param  SignalAggregate|\Zend\Stdlib\CallbackHandler $slot 
-     * @return bool Returns true if signal and slot found, and unsubscribed; returns false if either signal or slot not found
+     * @param  HandlerAggregate|\Zend\Stdlib\CallbackHandler $handler 
+     * @return bool Returns true if event and handler found, and unsubscribed; returns false if either event or handler not found
      */
-    public function detach($id, $slot)
+    public function detach($id, $handler)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
-        return $this->identifiers[$id]->detach($slot);
+        return $this->identifiers[$id]->detach($handler);
     }
 
     /**
-     * Retrieve all registered signals
+     * Retrieve all registered events for a given resource
      * 
      * @param  string|int $id
      * @return array
      */
-    public function getSignals($id)
+    public function getEvents($id)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
-        return $this->identifiers[$id]->getSignals();
+        return $this->identifiers[$id]->getEvents();
     }
 
     /**
-     * Retrieve all slots for a given identifier and signal
+     * Retrieve all handlers for a given identifier and event
      * 
      * @param  string|int $id
-     * @param  string|int $signal 
+     * @param  string|int $event 
      * @return false|\Zend\Stdlib\PriorityQueue
      */
-    public function getSlots($id, $signal)
+    public function getHandlers($id, $event)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
-        return $this->identifiers[$id]->getSlots($signal);
+        return $this->identifiers[$id]->getHandlers($event);
     }
 
     /**
-     * Clear all slots for a given identifier, optionally for a specific signal
+     * Clear all handlers for a given identifier, optionally for a specific event
      * 
      * @param  string|int $id 
-     * @param  null|string $signal 
+     * @param  null|string $event 
      * @return bool
      */
-    public function clearSlots($id, $signal = null)
+    public function clearHandlers($id, $event = null)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
 
-        if (null === $signal) {
+        if (null === $event) {
             unset($this->identifiers[$id]);
             return true;
         }
 
-        return $this->identifiers[$id]->clearSlots($signal);
+        return $this->identifiers[$id]->clearHandlers($event);
     }
 }

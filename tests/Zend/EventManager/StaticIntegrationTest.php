@@ -13,23 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\SignalSlot;
+namespace ZendTest\EventManager;
 
-use Zend\SignalSlot\SignalSlot,
-    Zend\SignalSlot\StaticSignalSlot,
+use Zend\EventManager\EventManager,
+    Zend\EventManager\StaticEventManager,
     PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend
- * @package    Zend_SignalSlot
+ * @package    Zend_EventManager
  * @subpackage UnitTests
- * @group      Zend_SignalSlot
+ * @group      Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -37,61 +37,61 @@ class StaticIntegrationTest extends TestCase
 {
     public function setUp()
     {
-        StaticSignalSlot::resetInstance();
+        StaticEventManager::resetInstance();
     }
 
-    public function testCanConnectStaticallyToClassWithSignals()
+    public function testCanConnectStaticallyToClassWithEvents()
     {
         $counter = (object) array('count' => 0);
-        StaticSignalSlot::getInstance()->connect(
-            'ZendTest\SignalSlot\TestAsset\ClassWithSignals', 
+        StaticEventManager::getInstance()->connect(
+            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
-            function ($context, array $params) use ($counter) {
+            function ($e) use ($counter) {
                 $counter->count++;
             }
         );
-        $class = new TestAsset\ClassWithSignals();
+        $class = new TestAsset\ClassWithEvents();
         $class->foo();
         $this->assertEquals(1, $counter->count);
     }
 
-    public function testLocalSlotsAreExecutedPriorToStaticSlots()
+    public function testLocalHandlersAreExecutedPriorToStaticHandlers()
     {
         $test = (object) array('results' => array());
-        StaticSignalSlot::getInstance()->connect(
-            'ZendTest\SignalSlot\TestAsset\ClassWithSignals', 
+        StaticEventManager::getInstance()->connect(
+            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
-            function ($context, array $params) use ($test) {
+            function ($e) use ($test) {
                 $test->results[] = 'static';
             }
         );
-        $class = new TestAsset\ClassWithSignals();
-        $class->signals()->connect('foo', function ($context, array $params) use ($test) {
+        $class = new TestAsset\ClassWithEvents();
+        $class->events()->connect('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         });
         $class->foo();
         $this->assertEquals(array('local', 'static'), $test->results);
     }
 
-    public function testLocalSlotsAreExecutedPriorToStaticSlotsRegardlessOfPriority()
+    public function testLocalHandlersAreExecutedPriorToStaticHandlersRegardlessOfPriority()
     {
         $test = (object) array('results' => array());
-        StaticSignalSlot::getInstance()->connect(
-            'ZendTest\SignalSlot\TestAsset\ClassWithSignals', 
+        StaticEventManager::getInstance()->connect(
+            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
-            function ($context, array $params) use ($test) {
+            function ($e) use ($test) {
                 $test->results[] = 'static';
             },
             10000 // high priority
         );
-        $class = new TestAsset\ClassWithSignals();
-        $class->signals()->connect('foo', function ($context, array $params) use ($test) {
+        $class = new TestAsset\ClassWithEvents();
+        $class->events()->connect('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         }, 1); // low priority
-        $class->signals()->connect('foo', function ($context, array $params) use ($test) {
+        $class->events()->connect('foo', function ($e) use ($test) {
             $test->results[] = 'local2';
         }, 1000); // medium priority
-        $class->signals()->connect('foo', function ($context, array $params) use ($test) {
+        $class->events()->connect('foo', function ($e) use ($test) {
             $test->results[] = 'local3';
         }, 15000); // highest priority
         $class->foo();

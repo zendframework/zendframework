@@ -23,17 +23,17 @@
  */
 namespace Zend\Session;
 
-use Zend\SignalSlot\SignalSlot;
+use Zend\EventManager\EventManager;
 
 /**
- * Zend_Session_Validator_Interface
+ * Validator chain for validating sessions
  *
  * @category   Zend
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain extends SignalSlot
+class ValidatorChain extends EventManager
 {
     /**
      * @var Storage
@@ -63,16 +63,16 @@ class ValidatorChain extends SignalSlot
     /**
      * Attach a handler to the session validator chain
      * 
-     * @param  string $topic 
+     * @param  string|\Zend\EventManager\HandlerAggregate $eventOrAggregate
      * @param  string|object|Closure $context 
      * @param  null|string $handler 
      * @return Zend\Stdlib\SignalHandler
      */
-    public function connect($signalOrAggregate, $callback = null, $priority = 1000)
+    public function connect($eventOrAggregate, $callback = null, $priority = 1000)
     {
         $context = null;
         if (null === $callback) {
-            $context = $signalOrAggregate;
+            $context = $eventOrAggregate;
         } elseif ($callback instanceof Validator) {
             $context = $callback;
         } elseif (is_array($callback)) {
@@ -88,7 +88,7 @@ class ValidatorChain extends SignalSlot
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::connect($signalOrAggregate, $callback, $priority);
+        $handle = parent::connect($eventOrAggregate, $callback, $priority);
         return $handle;
     }
 

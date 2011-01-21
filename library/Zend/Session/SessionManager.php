@@ -24,7 +24,7 @@
 namespace Zend\Session;
 
 use Zend\Validator\Alnum as AlnumValidator,
-    Zend\SignalSlot\SignalManager;
+    Zend\EventManager\EventDispatcher;
 
 /**
  * Session Manager implementation utilizing ext/session
@@ -63,7 +63,7 @@ class SessionManager extends AbstractManager
     protected $_name;
 
     /**
-     * @var SignalManager Validation chain to determine if session is valid
+     * @var EventDispatcher Validation chain to determine if session is valid
      */
     protected $_validatorChain;
 
@@ -298,10 +298,10 @@ class SessionManager extends AbstractManager
      *
      * In most cases, you should use an instance of {@link ValidatorChain}.
      * 
-     * @param  SignalManager $chain 
+     * @param  EventDispatcher $chain 
      * @return SessionManager
      */
-    public function setValidatorChain(SignalManager $chain)
+    public function setValidatorChain(EventDispatcher $chain)
     {
         $this->_validatorChain = $chain;
         return $this;

@@ -276,7 +276,7 @@ class Date extends DateObject
                             }
 
                             parent::$_cache     = $value;
-                            parent::$_cacheTags = Zend_Date_DateObject::_getTagSupportForCache();
+                            parent::$_cacheTags = Zend_Date_DateObject::hasCacheTagSupport();
                             Cldr::setCache($value);
                         }
                         break;

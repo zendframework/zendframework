@@ -44,22 +44,6 @@ use Zend\Cache\Cache,
 abstract class AbstractLocale
 {
     /**
-     * Locale files
-     *
-     * @var ressource
-     * @access private
-     */
-    private static $_ldml = array();
-
-    /**
-     * List of values which are collected
-     *
-     * @var array
-     * @access private
-     */
-    private static $_list = array();
-
-    /**
      * Internal cache for ldml values
      *
      * @var \Zend\Cache\Core
@@ -81,27 +65,6 @@ abstract class AbstractLocale
      * @var boolean
      */
     protected static $_cacheTags = false;
-
-    /**
-     * Internal function for checking the locale
-     *
-     * @param string|\Zend\Locale $locale Locale to check
-     * @return string
-     */
-    protected static function _checkLocale($locale)
-    {
-        if (empty($locale)) {
-            $locale = new Locale();
-        }
-
-        if (!(Locale::isLocale((string) $locale))) {
-            throw new InvalidArgumentException(
-              "Locale (" . (string) $locale . ") is no known locale"
-            );
-        }
-
-        return (string) $locale;
-    }
 
     /**
      * Returns the set cache
@@ -170,7 +133,7 @@ abstract class AbstractLocale
     /**
      * Disables the cache
      *
-     * @param unknown_type $flag
+     * @param boolean $flag
      */
     public static function disableCache($flag)
     {
@@ -178,11 +141,31 @@ abstract class AbstractLocale
     }
 
     /**
+     * Returns true when the cache is disabled
+     *
+     * @return boolean
+     */
+    public static function isCacheDisabled()
+    {
+        return self::$_cacheDisabled;
+    }
+
+    /**
+     * Returns true when the actual set cache supports tags
+     *
+     * @return boolean
+     */
+    public static function hasCacheTagSupport()
+    {
+      return self::$_cacheTags;
+    }
+
+    /**
      * Internal method to check if the given cache supports tags
      *
      * @return false|string
      */
-    private static function _getTagSupportForCache()
+    protected static function _getTagSupportForCache()
     {
         $backend = self::$_cache->getBackend();
         if ($backend instanceof \Zend\Cache\Backend\ExtendedInterface) {
@@ -193,5 +176,47 @@ abstract class AbstractLocale
         }
 
         return self::$_cacheTags;
+    }
+
+    /**
+     * Returns detailed informations from the language table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale  Normalized locale
+     * @param boolean $reverse Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getLanguage($locale, $invert = false, $detail = null)
+    {
+        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+    }
+
+    /**
+     * Returns detailed informations from the script table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale Normalized locale
+     * @param boolean $invert Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getScript($locale, $invert = false, $detail = null)
+    {
+        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+    }
+
+    /**
+     * Returns detailed informations from the territory table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale Normalized locale
+     * @param boolean $invert Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getTerritory($locale, $invert = false, $detail = null)
+    {
+        throw new UnsupportedMethod('This implementation does not support the selected locale information');
     }
 }

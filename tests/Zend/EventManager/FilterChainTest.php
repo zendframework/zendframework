@@ -21,7 +21,7 @@
  */
 
 namespace ZendTest\Stdlib;
-use Zend\SignalSlot\FilterChain,
+use Zend\EventManager\FilterChain,
     Zend\Stdlib\CallbackHandler;
 
 /**
@@ -149,6 +149,6 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function filterReceivalCallback($context, array $params, $chain)
     {
-        $this->assertInstanceOf('Zend\SignalSlot\Filter\FilterIterator', $chain);
+        $this->assertInstanceOf('Zend\EventManager\Filter\FilterIterator', $chain);
     }
 }

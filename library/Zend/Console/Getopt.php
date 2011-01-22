@@ -824,10 +824,8 @@ class Getopt
     protected function _setSingleOptionValue($flag, $value)
     {
         if (true === $value && $this->_getoptConfig[self::CONFIG_CUMULATIVE_FLAGS]) {
-            $this->_options[$flag] = array_key_exists($flag, $this->_options)
-                                   ? (int) $this->_options[$flag] + 1 : true;
-
-            return;
+            // For boolean values we have to create new flag, or increase number of flags' usage count
+            return $this->_setBooleanFlagValue($flag);
         }
 
         if (!array_key_exists($flag, $this->_options)) {
@@ -838,6 +836,20 @@ class Getopt
         } else {
             $this->_options[$flag] = $value;
         }
+    }
+
+    /**
+     * Set TRUE value to given flag, if this option does not exist yet
+     * In other case increase value to show count of flags' usage
+     *
+     * @param  string $flag
+     * @return null
+     */
+    protected function _setBooleanFlagValue($flag)
+    {
+        $this->_options[$flag] = array_key_exists($flag, $this->_options)
+                               ? (int) $this->_options[$flag] + 1
+                               : true;
     }
 
     /**

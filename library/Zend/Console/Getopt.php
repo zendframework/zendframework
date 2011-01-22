@@ -823,6 +823,13 @@ class Getopt
      */
     protected function _setSingleOptionValue($flag, $value)
     {
+        if (true === $value && $this->_getoptConfig[self::CONFIG_CUMULATIVE_FLAGS]) {
+            $this->_options[$flag] = array_key_exists($flag, $this->_options)
+                                   ? (int) $this->_options[$flag] + 1 : true;
+
+            return;
+        }
+
         if (!array_key_exists($flag, $this->_options)) {
             $this->_options[$flag] = $value;
         } else if($this->_getoptConfig[self::CONFIG_CUMULATIVE_PARAMETERS]) {

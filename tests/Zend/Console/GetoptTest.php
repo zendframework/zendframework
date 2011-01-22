@@ -548,4 +548,15 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $this->assertType('array', $opts->colors, 'Colors value should be an array');
         $this->assertEquals('red,green,blue', implode(',', $opts->colors));
     }
+
+    public function testGetoptIgnoreCumulativeFlagsByDefault()
+    {
+        $opts = new Getopt(
+            'v',
+            array('-v', '-v', '-v')
+        );
+
+        $this->assertEquals(true, $opts->v);
+    }
+
 }

@@ -164,6 +164,7 @@ class Getopt
     const CONFIG_IGNORECASE                 = 'ignoreCase';
     const CONFIG_PARSEALL                   = 'parseAll';
     const CONFIG_CUMULATIVE_PARAMETERS      = 'cumulativeParameters';
+    const CONFIG_CUMULATIVE_FLAGS           = 'cumulativeFlags';
 
     /**
      * Defaults for getopt configuration are:
@@ -172,7 +173,8 @@ class Getopt
      * ignoreCase is not enabled,
      * parseAll is enabled,
      * cumulative parameters are disabled,
-     * this means that subsequent options overwrite the parameter value.
+     * this means that subsequent options overwrite the parameter value,
+     * cumulative flags are disable.
      */
     protected $_getoptConfig = array(
         self::CONFIG_RULEMODE                => self::MODE_ZEND,
@@ -180,6 +182,7 @@ class Getopt
         self::CONFIG_IGNORECASE              => false,
         self::CONFIG_PARSEALL                => true,
         self::CONFIG_CUMULATIVE_PARAMETERS   => false,
+        self::CONFIG_CUMULATIVE_FLAGS        => false
     );
 
     /**

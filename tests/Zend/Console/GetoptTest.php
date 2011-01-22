@@ -559,4 +559,14 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $opts->v);
     }
 
+    public function testGetoptWithCumulativeFlagsOptionHandleCountOfEqualFlags()
+    {
+        $opts = new Getopt(
+            'v',
+            array('-v', '-v', '-v'),
+            array(Getopt::CONFIG_CUMULATIVE_FLAGS => true)
+        );
+
+        $this->assertEquals(3, $opts->v);
+    }
 }

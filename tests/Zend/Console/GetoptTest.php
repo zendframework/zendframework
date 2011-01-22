@@ -552,7 +552,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testGetoptIgnoreCumulativeFlagsByDefault()
     {
         $opts = new Getopt('v', array('-v', '-v', '-v'));
-
+        
         $this->assertEquals(true, $opts->v);
     }
 
@@ -562,5 +562,15 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
                            array(Getopt::CONFIG_CUMULATIVE_FLAGS => true));
 
         $this->assertEquals(3, $opts->v);
+    }
+
+    public function testGetoptIgnoreParamsWithMultipleValuesByDefault()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('--colors=red,green,blue')
+        );
+
+        $this->assertEquals('red,green,blue', $opts->colors);
     }
 }

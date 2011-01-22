@@ -582,6 +582,6 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array(Getopt::CONFIG_PARAMETER_SEPARATOR => ',')
         );
 
-        $this->assertEquals('red:green:blue', implode(':', $opt->colors));
+        $this->assertEquals('red:green:blue', implode(':', $opts->colors));
     }
 }

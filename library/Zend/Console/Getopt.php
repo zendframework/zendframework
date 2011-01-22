@@ -89,11 +89,15 @@ namespace Zend\Console;
  * @version    Release: @package_version@
  * @since      Class available since Release 0.6.0
  *
- * @todo  Handle params with multiple values, e.g. --colors=red,green,blue
+ * @todo  [Done] Handle params with multiple values, e.g. --colors=red,green,blue
  *        Set value of parameter to the array of values.  Allow user to specify
  *        the separator with Zend_Console_Getopt::CONFIG_PARAMETER_SEPARATOR.
  *        If this config value is null or empty string, do not split values
  *        into arrays.  Default separator is comma (',').
+ *
+ *        @todo  Analyze what to do in case, when Getopt::CONFIG_PARAMETER_SEPARATOR not empty
+ *               and Getopt::CONFIG_CUMULATIVE_PARAMETERS is true - do we have to return array
+ *               of arrays, or just merge all values in one list?
  *
  * @todo  [Done] Handle params with multiple values specified with separate options
  *        e.g. --colors red --colors green --colors blue should give one
@@ -165,6 +169,7 @@ class Getopt
     const CONFIG_PARSEALL                   = 'parseAll';
     const CONFIG_CUMULATIVE_PARAMETERS      = 'cumulativeParameters';
     const CONFIG_CUMULATIVE_FLAGS           = 'cumulativeFlags';
+    const CONFIG_PARAMETER_SEPARATOR        = 'parameterSeparator';
 
     /**
      * Defaults for getopt configuration are:
@@ -182,7 +187,8 @@ class Getopt
         self::CONFIG_IGNORECASE              => false,
         self::CONFIG_PARSEALL                => true,
         self::CONFIG_CUMULATIVE_PARAMETERS   => false,
-        self::CONFIG_CUMULATIVE_FLAGS        => false
+        self::CONFIG_CUMULATIVE_FLAGS        => false,
+        self::CONFIG_PARAMETER_SEPARATOR     => null
     );
 
     /**
@@ -826,6 +832,13 @@ class Getopt
         if (true === $value && $this->_getoptConfig[self::CONFIG_CUMULATIVE_FLAGS]) {
             // For boolean values we have to create new flag, or increase number of flags' usage count
             return $this->_setBooleanFlagValue($flag);
+        }
+
+        // Split multiple values, if necessary
+        // Filter empty values from splited array
+        $separator = $this->_getoptConfig[self::CONFIG_PARAMETER_SEPARATOR];
+        if (is_string($value) && !empty($separator) && is_string($separator) && substr_count($value, $separator)) {
+            $value = array_filter(explode($separator, $value));
         }
 
         if (!array_key_exists($flag, $this->_options)) {

@@ -101,7 +101,7 @@ namespace Zend\Console;
  *        Enable with Zend_Console_Getopt::CONFIG_CUMULATIVE_PARAMETERS.
  *        Default is that subsequent options overwrite the parameter value.
  *
- * @todo  Handle flags occurring multiple times, e.g. -v -v -v
+ * @todo  [Done] Handle flags occurring multiple times, e.g. -v -v -v
  *        Set value of the option's parameter to the integer count of instances
  *        instead of a boolean.
  *        Enable with Zend_Console_Getopt::CONFIG_CUMULATIVE_FLAGS.

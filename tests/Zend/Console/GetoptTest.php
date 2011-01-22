@@ -573,4 +573,15 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('red,green,blue', $opts->colors);
     }
+
+    public function testGetoptWithNotEmptyParameterSeparatorSplitMultipleValues()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('--colors=red,green,blue'),
+            array(Getopt::CONFIG_PARAMETER_SEPARATOR => ',')
+        );
+
+        $this->assertEquals('red:green:blue', implode(':', $opt->colors));
+    }
 }

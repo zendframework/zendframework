@@ -486,8 +486,8 @@ class Logger implements Factory
     /**
      * Set an extra item to pass to the log writers.
      *
-     * @param  $name    Name of the field
-     * @param  $value   Value of the field
+     * @param  string $name    Name of the field
+     * @param  string $value   Value of the field
      * @return \Zend\Log\Logger
      */
     public function setEventItem($name, $value)

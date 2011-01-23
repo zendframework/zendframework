@@ -22,6 +22,10 @@ $logger = Zend_Log::factory(array(
         'writerParams' => array(
             'stream'   => '/tmp/zend.log',
         ),
+        'formatterName' => 'Simple',
+        'filterParams' => array(
+            'format'   => '%timestamp%: %message% -- %info%',
+        ),
         'filterName'   => 'Priority',
         'filterParams' => array(
             'priority' => Zend_Log::WARN,
@@ -80,6 +84,42 @@ $logger = Zend_Log::factory(array(
                     The class prefix/namespace to use when constructing the final log writer
                     classname. By default, if this is not provided, "Zend_Log_Writer" is assumed;
                     however, you can pass your own namespace if you are using a custom log writer.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>formatterName (optional)</term>
+
+            <listitem>
+                <para>
+                    The "short" name of a formatter to use with the given log writer; the name of the
+                    formatter minus the leading class prefix/namespace. See the "formatterNamespace" 
+                    entry below for more details. Examples: "Simple", "Xml".
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>formatterParams (optional)</term>
+
+            <listitem>
+                <para>
+                    An associative array of parameters to use when instantiating the log formatter.
+                    Each log formatter's <methodname>factory()</methodname> method will map these to
+                    constructor arguments, as noted below.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>formatterNamespace (optional)</term>
+
+            <listitem>
+                <para>
+                    The class prefix/namespace to use when constructing the final log formatter
+                    classname. By default, if this is not provided, "Zend_Log_Formatter" is assumed;
+                    however, you can pass your own namespace if you are using a custom log formatter.
                 </para>
             </listitem>
         </varlistentry>

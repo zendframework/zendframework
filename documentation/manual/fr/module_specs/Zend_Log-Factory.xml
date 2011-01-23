@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 22970 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.factory">
     <title>Utiliser la fabrique pour créer des logs</title>
@@ -297,7 +297,7 @@ $logger = Zend_Log::factory(array(
                             <entry><constant>NULL</constant></entry>
 
                             <entry>
-                                Voir la section <xref linked="zend.layout.options" />
+                                Voir la section <xref linkend="zend.layout.options" />
                             </entry>
                         </row>
                     
@@ -313,12 +313,6 @@ $logger = Zend_Log::factory(array(
                     </tbody>
                 </tgroup>
             </table>
-
-            <note>
-                <para>
-                    
-                </para>
-            </note>
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.mock">
@@ -346,7 +340,7 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            Un identifiant de flux PHP valide vers lequel journaliser.
+                            Un identifiant de flux <acronym>PHP</acronym> valide vers lequel journaliser.
                         </para>
                     </listitem>
                 </varlistentry>

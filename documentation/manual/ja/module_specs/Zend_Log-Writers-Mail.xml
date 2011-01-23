@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17875 -->
+<!-- EN-Revision: 21825 -->
 <sect2 id="zend.log.writers.mail">
     <title>Email への書き込み</title>
 
@@ -67,17 +67,17 @@ $log->error('unable to connect to database');
 
         <para>
             <classname>Zend_Layout</classname> のインスタンスを使用して、
-            マルチパートメールの HTML 部を作成することができます。
+            マルチパートメールの <acronym>HTML</acronym> 部を作成できます。
             <classname>Zend_Layout</classname> のインスタンスが用いられた場合、
-            <classname>Zend_Log_Writer_Mail</classname> は HTML をレンダリングするものとみなし、
+            <classname>Zend_Log_Writer_Mail</classname> は <acronym>HTML</acronym> をレンダリングするものとみなし、
             <classname>Zend_Layout</classname> がレンダリングした値をメッセージの本文
-            HTML として設定します。
+            <acronym>HTML</acronym> として設定します。
         </para>
 
         <para>
             <classname>Zend_Log_Writer_Mail</classname> で
             <classname>Zend_Layout</classname> のインスタンスを使う場合には、
-            <methodname>setLayoutFormatter()</methodname> メソッドで独自のフォーマッタを指定することができます。
+            <methodname>setLayoutFormatter()</methodname> メソッドで独自のフォーマッタを指定できます。
             <classname>Zend_Layout</classname> 用のエントリフォーマッタを指定しなかった場合は、
             現在使用中のものをそのまま使います。
             <classname>Zend_Layout</classname> で独自のフォーマッタを使用する方法を以下に示します。

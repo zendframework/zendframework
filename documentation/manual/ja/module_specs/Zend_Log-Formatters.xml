@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 21824 -->
 <sect1 id="zend.log.formatters">
   <title>フォーマッタ</title>
   <para>
@@ -61,7 +61,7 @@ $logger->info('there');
   <sect2 id="zend.log.formatters.xml">
     <title>XML へのフォーマット</title>
     <para>
-      <classname>Zend_Log_Formatter_Xml</classname> は、ログのデータを XML 文字列に変換します。
+      <classname>Zend_Log_Formatter_Xml</classname> は、ログのデータを <acronym>XML</acronym> 文字列に変換します。
       デフォルトでは、イベントデータ配列のすべての項目を自動的に記録します。
 
       <programlisting language="php"><![CDATA[
@@ -77,7 +77,7 @@ $logger->info('通知メッセージ');
     </para>
 
     <para>
-      上のコードの出力は、次のような XML になります (可読性を確保するため空白を補っています)。
+      上のコードの出力は、次のような <acronym>XML</acronym> になります (可読性を確保するため空白を補っています)。
 
       <programlisting language="xml"><![CDATA[
 <logEntry>
@@ -90,7 +90,7 @@ $logger->info('通知メッセージ');
     </para>
 
     <para>
-      ルート要素を変更したり、XML の要素名とイベントデータ配列の項目名の対応を指定したりすることも可能です。
+      ルート要素を変更したり、<acronym>XML</acronym> の要素名とイベントデータ配列の項目名の対応を指定したりすることも可能です。
       <classname>Zend_Log_Formatter_Xml</classname> のコンストラクタの最初のパラメータには、
       ルート要素の名前を指定します。また、
       二番目のパラメータには要素名の対応を表す連想配列を指定します。

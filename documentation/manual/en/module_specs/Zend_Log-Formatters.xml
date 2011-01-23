@@ -4,7 +4,7 @@
     <title>Formatters</title>
 
     <para>
-        A Formatter is an object that is responsible for taking an <code>event</code> array
+        A Formatter is an object that is responsible for taking an <property>event</property> array
         describing a log event and outputting a string with a formatted log line.
     </para>
 
@@ -50,7 +50,7 @@ $logger->info('there');
         <para>
             The constructor of <classname>Zend_Log_Formatter_Simple</classname> accepts a single
             parameter: the format string. This string contains keys surrounded by
-            percent signs (e.g. <code>%message%</code>). The format string may
+            percent signs (e.g. <command>%message%</command>). The format string may
             contain any key from the event data array.
             You can retrieve the default keys by using the DEFAULT_FORMAT constant from
             <classname>Zend_Log_Formatter_Simple</classname>.
@@ -114,8 +114,8 @@ $logger->info('informational message');
 
         <para>
             The code above changes the root element from its default of
-            <code>logEntry</code> to <code>log</code>. It also maps the element
-            <code>msg</code> to the event data item <code>message</code>. This
+            <property>logEntry</property> to <property>log</property>. It also maps the element
+            <property>msg</property> to the event data item <property>message</property>. This
             results in the following output:
         </para>
 

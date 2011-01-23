@@ -18,8 +18,8 @@
 
         <para>
             To write log data to the <acronym>PHP</acronym> output buffer, use the URL
-            <code>php://output</code>. Alternatively, you can send log data directly to a stream
-            like <constant>STDERR</constant> (<code>php://stderr</code>).
+            <filename>php://output</filename>. Alternatively, you can send log data directly to a
+            stream like <constant>STDERR</constant> (<filename>php://stderr</filename>).
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -43,7 +43,7 @@ $logger->info('Informational message');
 ]]></programlisting>
 
         <para>
-            By default, the stream opens in the append mode (<code>"a"</code>).
+            By default, the stream opens in the append mode ("a").
             To open it with a different mode, the <classname>Zend_Log_Writer_Stream</classname>
             constructor accepts an optional second parameter for the mode.
         </para>
@@ -99,9 +99,8 @@ $logger->info('Informational message');
 
         <para>
             The example above writes a single row of log data to the database table named
-            <code>log_table_name</code> table. The database column named <code>lvl</code>
-            receives the priority number and the column named <code>msg</code> receives the
-            log message.
+            'log_table_name' table. The database column named 'lvl'
+            receives the priority number and the column named 'msg' receives the log message.
         </para>
     </sect2>
 
@@ -153,7 +152,8 @@ var_dump($mock->events[0]);
 ]]></programlisting>
 
         <para>
-            To clear the events logged by the mock, simply set <code>$mock->events = array()</code>.
+            To clear the events logged by the mock, simply set
+            <command>$mock->events = array()</command>.
         </para>
     </sect2>
 

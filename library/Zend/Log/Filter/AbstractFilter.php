@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
+ * @subpackage Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -28,11 +28,11 @@ use Zend\Log\Factory,
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Filter\FilterInterface
- * @uses       \Zend\Log\FactoryInterface
+ * @uses       \Zend\Log\Filter
+ * @uses       \Zend\Log\Factory
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
+ * @subpackage Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -25,11 +24,8 @@
 namespace Zend\Log;
 
 /**
- * @uses       \Zend\Log\FactoryInterface
- * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -37,31 +33,31 @@ interface Writer
 {
     /**
      * Add a log filter to the writer
-     * 
-     * @param  int|\Zend\Log\Filter $filter 
+     *
+     * @param  int|\Zend\Log\Filter $filter
      * @return Writer
      */
     public function addFilter($filter);
 
     /**
      * Set a message formatter for the writer
-     * 
-     * @param  \Zend\Log\Formatter|Callable $formatter 
+     *
+     * @param  \Zend\Log\Formatter|Callable $formatter
      * @return Writer
      */
     public function setFormatter(Formatter $formatter);
 
     /**
      * Write a log message
-     * 
-     * @param  array|mixed $event 
+     *
+     * @param  array|mixed $event
      * @return Writer
      */
     public function write($event);
 
     /**
      * Perform shutdown activities
-     * 
+     *
      * @return void
      */
     public function shutdown();

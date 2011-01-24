@@ -58,7 +58,7 @@ class Logger implements Factory
     protected $_writers = array();
 
     /**
-     * @var array of \Zend\Log\Filter\FilterInterface
+     * @var array of \Zend\Log\Filter
      */
     protected $_filters = array();
 
@@ -110,7 +110,8 @@ class Logger implements Factory
     protected $_timestampFormat        = 'c';
 
     /**
-     * Class constructor.  Create a new logger     *
+     * Class constructor.  Create a new logger
+     *
      * @param \Zend\Log\Writer\AbstractWriter|null  $writer  default writer
      * @return void
      */
@@ -438,7 +439,7 @@ class Logger implements Factory
      * Before a message will be received by any of the writers, it
      * must be accepted by all filters added with this method.
      *
-     * @param  int|\Zend\Config\Config|\Zend\Log\Filter\FilterInterface $filter
+     * @param  int|\Zend\Config\Config|\Zend\Log\Filter $filter
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @return \Zend\Log\Logger
      */
@@ -575,7 +576,7 @@ class Logger implements Factory
      * Set timestamp format for log entries.
      *
      * @param string $format
-     * @return Zend\Log\Logger
+     * @return \Zend\Log\Logger
      */
     public function setTimestampFormat($format)
     {

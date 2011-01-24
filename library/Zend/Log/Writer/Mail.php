@@ -309,7 +309,7 @@ class Mail extends AbstractWriter
      * Zend_Layout.  In the event that Zend_Layout is not being used, this
      * formatter cannot be set, so an exception will be thrown.
      *
-     * @param  \Zend\Log\Formatter\FormatterInterface $formatter
+     * @param  \Zend\Log\Formatter $formatter
      * @return \Zend\Log\Writer\Mail
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */

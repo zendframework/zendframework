@@ -170,6 +170,7 @@ class Getopt
     const CONFIG_CUMULATIVE_PARAMETERS      = 'cumulativeParameters';
     const CONFIG_CUMULATIVE_FLAGS           = 'cumulativeFlags';
     const CONFIG_PARAMETER_SEPARATOR        = 'parameterSeparator';
+    const CONFIG_FREEFORM_FLAGS             = 'freeformFlags';
 
     /**
      * Defaults for getopt configuration are:
@@ -179,7 +180,8 @@ class Getopt
      * parseAll is enabled,
      * cumulative parameters are disabled,
      * this means that subsequent options overwrite the parameter value,
-     * cumulative flags are disable.
+     * cumulative flags are disable,
+     * freeform flags are disable.
      */
     protected $_getoptConfig = array(
         self::CONFIG_RULEMODE                => self::MODE_ZEND,
@@ -188,7 +190,8 @@ class Getopt
         self::CONFIG_PARSEALL                => true,
         self::CONFIG_CUMULATIVE_PARAMETERS   => false,
         self::CONFIG_CUMULATIVE_FLAGS        => false,
-        self::CONFIG_PARAMETER_SEPARATOR     => null
+        self::CONFIG_PARAMETER_SEPARATOR     => null,
+        self::CONFIG_FREEFORM_FLAGS          => false
     );
 
     /**
@@ -783,34 +786,43 @@ class Getopt
             $flag = strtolower($flag);
         }
         if (!isset($this->_ruleMap[$flag])) {
-            throw new Exception\RuntimeException(
-                "Option \"$flag\" is not recognized.",
-                $this->getUsageMessage()
-                );
-        }
-        $realFlag = $this->_ruleMap[$flag];
-        switch ($this->_rules[$realFlag]['param']) {
-            case 'required':
-                if (count($argv) > 0) {
-                    $param = array_shift($argv);
-                    $this->_checkParameterType($realFlag, $param);
-                } else {
-                    throw new Exception\RuntimeException(
-                        "Option \"$flag\" requires a parameter.",
-                        $this->getUsageMessage()
-                        );
-                }
-                break;
-            case 'optional':
-                if (count($argv) > 0 && substr($argv[0], 0, 1) != '-') {
-                    $param = array_shift($argv);
-                    $this->_checkParameterType($realFlag, $param);
-                } else {
+            // Don't throw Exception for flag-like param in case when freeform flags are allowed
+            if ((count($argv) > 0 && substr($argv[0], 0, 1) != '-')
+                    || !$this->_getoptConfig[self::CONFIG_FREEFORM_FLAGS]) {
+                throw new Exception\RuntimeException(
+                    "Option \"$flag\" is not recognized.",
+                    $this->getUsageMessage()
+                    );
+            }
+
+            // Magic methods in future will use this mark as real flag value
+            $this->_ruleMap[$flag]  = $flag;
+            list($realFlag, $param) = array($flag, true);
+        } else {
+            $realFlag = $this->_ruleMap[$flag];
+            switch ($this->_rules[$realFlag]['param']) {
+                case 'required':
+                    if (count($argv) > 0) {
+                        $param = array_shift($argv);
+                        $this->_checkParameterType($realFlag, $param);
+                    } else {
+                        throw new Exception\RuntimeException(
+                            "Option \"$flag\" requires a parameter.",
+                            $this->getUsageMessage()
+                            );
+                    }
+                    break;
+                case 'optional':
+                    if (count($argv) > 0 && substr($argv[0], 0, 1) != '-') {
+                        $param = array_shift($argv);
+                        $this->_checkParameterType($realFlag, $param);
+                    } else {
+                        $param = true;
+                    }
+                    break;
+                default:
                     $param = true;
-                }
-                break;
-            default:
-                $param = true;
+            }
         }
 
         $this->_setSingleOptionValue($realFlag, $param);

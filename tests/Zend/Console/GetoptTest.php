@@ -595,4 +595,15 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $opts->freeform);
     }
+
+    public function testGetoptWithFreeformFlagOptionRecognizeFlagsWithValue()
+    {
+        $opts = new Getopt(
+            array('colors' => 'Colors-option'),
+            array('color', '--freeform', 'test', 'zend'),
+            array(Getopt::CONFIG_FREEFORM_FLAGS => true)
+        );
+
+        $this->assertEquals('test', $opts->freeform);
+    }
 }

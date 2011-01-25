@@ -787,8 +787,7 @@ class Getopt
         }
         if (!isset($this->_ruleMap[$flag])) {
             // Don't throw Exception for flag-like param in case when freeform flags are allowed
-            if ((count($argv) > 0 && substr($argv[0], 0, 1) != '-')
-                    || !$this->_getoptConfig[self::CONFIG_FREEFORM_FLAGS]) {
+            if (!$this->_getoptConfig[self::CONFIG_FREEFORM_FLAGS]) {
                 throw new Exception\RuntimeException(
                     "Option \"$flag\" is not recognized.",
                     $this->getUsageMessage()
@@ -796,33 +795,35 @@ class Getopt
             }
 
             // Magic methods in future will use this mark as real flag value
-            $this->_ruleMap[$flag]  = $flag;
-            list($realFlag, $param) = array($flag, true);
+            $this->_ruleMap[$flag] = $flag;
+            $realFlag = $flag;
+            $this->_rules[$realFlag] = array('param' => 'optional');
         } else {
             $realFlag = $this->_ruleMap[$flag];
-            switch ($this->_rules[$realFlag]['param']) {
-                case 'required':
-                    if (count($argv) > 0) {
-                        $param = array_shift($argv);
-                        $this->_checkParameterType($realFlag, $param);
-                    } else {
-                        throw new Exception\RuntimeException(
-                            "Option \"$flag\" requires a parameter.",
-                            $this->getUsageMessage()
-                            );
-                    }
-                    break;
-                case 'optional':
-                    if (count($argv) > 0 && substr($argv[0], 0, 1) != '-') {
-                        $param = array_shift($argv);
-                        $this->_checkParameterType($realFlag, $param);
-                    } else {
-                        $param = true;
-                    }
-                    break;
-                default:
+        }
+        
+        switch ($this->_rules[$realFlag]['param']) {
+            case 'required':
+                if (count($argv) > 0) {
+                    $param = array_shift($argv);
+                    $this->_checkParameterType($realFlag, $param);
+                } else {
+                    throw new Exception\RuntimeException(
+                        "Option \"$flag\" requires a parameter.",
+                        $this->getUsageMessage()
+                        );
+                }
+                break;
+            case 'optional':
+                if (count($argv) > 0 && substr($argv[0], 0, 1) != '-') {
+                    $param = array_shift($argv);
+                    $this->_checkParameterType($realFlag, $param);
+                } else {
                     $param = true;
-            }
+                }
+                break;
+            default:
+                $param = true;
         }
 
         $this->_setSingleOptionValue($realFlag, $param);

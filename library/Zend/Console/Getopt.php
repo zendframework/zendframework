@@ -114,7 +114,7 @@ namespace Zend\Console;
  *
  * @todo  Handle flags that implicitly print usage message, e.g. --help
  *
- * @todo  Handle freeform options, e.g. --set-variable
+ * @todo  [Done] Handle freeform options, e.g. --set-variable
  *        Enable with Zend_Console_Getopt::CONFIG_FREEFORM_FLAGS
  *        All flag-like syntax is recognized, no flag generates an exception.
  *

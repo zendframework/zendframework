@@ -606,4 +606,15 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('test', $opts->freeform);
     }
+
+    public function testGetoptRaiseExceptionForNumericOptionsByDefault()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('red', 'green', '-3')
+        );
+
+        $this->setExpectedException('\Zend\Console\Exception\RuntimeException', 'not recognized');
+        $opts->parse();
+    }
 }

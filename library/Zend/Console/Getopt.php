@@ -118,10 +118,13 @@ namespace Zend\Console;
  *        Enable with Zend_Console_Getopt::CONFIG_FREEFORM_FLAGS
  *        All flag-like syntax is recognized, no flag generates an exception.
  *
- * @todo  Handle numeric options, e.g. -1, -2, -3, -1000
+ * @todo  [Done] Handle numeric options, e.g. -1, -2, -3, -1000
  *        Enable with Zend_Console_Getopt::CONFIG_NUMERIC_FLAGS
  *        The rule must specify a named flag and the '#' symbol as the
  *        parameter type. e.g.,  'lines=#'
+ *
+ *        @todo  Clerify situation when user will put several # sign. For ex.,
+ *               lines=#, limit=# (now the system will overwrite first param by last one)
  *
  * @todo  Enable user to specify header and footer content in the help message.
  *

@@ -171,6 +171,7 @@ class Getopt
     const CONFIG_CUMULATIVE_FLAGS           = 'cumulativeFlags';
     const CONFIG_PARAMETER_SEPARATOR        = 'parameterSeparator';
     const CONFIG_FREEFORM_FLAGS             = 'freeformFlags';
+    const CONFIG_NUMERIC_FLAGS              = 'numericFlags';
 
     /**
      * Defaults for getopt configuration are:
@@ -191,7 +192,8 @@ class Getopt
         self::CONFIG_CUMULATIVE_PARAMETERS   => false,
         self::CONFIG_CUMULATIVE_FLAGS        => false,
         self::CONFIG_PARAMETER_SEPARATOR     => null,
-        self::CONFIG_FREEFORM_FLAGS          => false
+        self::CONFIG_FREEFORM_FLAGS          => false,
+        self::CONFIG_NUMERIC_FLAGS           => false
     );
 
     /**

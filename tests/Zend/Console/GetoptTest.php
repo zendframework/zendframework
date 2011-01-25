@@ -617,4 +617,15 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Zend\Console\Exception\RuntimeException', 'not recognized');
         $opts->parse();
     }
+
+    public function testGetoptCanRecognizeNumericOprions()
+    {
+        $opts = new Getopt(
+            array('lines=#' => 'Lines-option'),
+            array('other', 'arguments', '-5'),
+            array(Getopt::CONFIG_NUMERIC_FLAGS => true)
+        );
+
+        $this->assertEquals(5, $opts->lines);
+    }
 }

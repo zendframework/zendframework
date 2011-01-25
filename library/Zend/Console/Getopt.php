@@ -154,6 +154,7 @@ class Getopt
     const TYPE_STRING                       = 's';
     const TYPE_WORD                         = 'w';
     const TYPE_INTEGER                      = 'i';
+    const TYPE_NUMERIC_FLAG                 = '#';
 
     /**
      * These are constants for optional behavior of this class.
@@ -787,6 +788,12 @@ class Getopt
         if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
             $flag = strtolower($flag);
         }
+
+        // Check if this option is numeric one
+        if (preg_match('/^\d+$/', $flag)) {
+            return $this->_setNumericOptionValue($flag);
+        }
+
         if (!isset($this->_ruleMap[$flag])) {
             // Don't throw Exception for flag-like param in case when freeform flags are allowed
             if (!$this->_getoptConfig[self::CONFIG_FREEFORM_FLAGS]) {
@@ -831,6 +838,29 @@ class Getopt
         $this->_setSingleOptionValue($realFlag, $param);
     }
 
+
+    /**
+     * Set given value as value of numeric option
+     *
+     * Throw runtime exception if this action is deny by configuration
+     * or no one numeric option handlers is defined
+     *
+     * @param  int $value
+     * @return void
+     */
+    protected function _setNumericOptionValue($value)
+    {
+        if (!$this->_getoptConfig[self::CONFIG_NUMERIC_FLAGS]) {
+            throw new Exception\RuntimeException("Using of numeric flags are deny by configuration");
+        }
+
+        if (empty($this->_getoptConfig['numericFlagsOption'])) {
+            throw new Exception\RuntimeException("Any option for handling numeric flags are specified");
+        }
+
+        return $this->_setSingleOptionValue($this->_getoptConfig['numericFlagsOption'], $value);
+    }
+    
     /**
      * Add relative to options' flag value
      * 
@@ -1015,6 +1045,10 @@ class Getopt
                         break;
                     case self::TYPE_INTEGER:
                         $rule['paramType'] = 'integer';
+                        break;
+                    case self::TYPE_NUMERIC_FLAG:
+                        $rule['paramType'] = 'numericFlag';
+                        $this->_getoptConfig['numericFlagsOption'] = $mainFlag;
                         break;
                     case self::TYPE_STRING:
                     default:

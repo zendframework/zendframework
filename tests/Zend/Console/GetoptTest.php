@@ -614,7 +614,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array('red', 'green', '-3')
         );
 
-        $this->setExpectedException('\Zend\Console\Exception\RuntimeException', 'not recognized');
+        $this->setExpectedException('\Zend\Console\Exception\RuntimeException');
         $opts->parse();
     }
 
@@ -627,5 +627,17 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(5, $opts->lines);
+    }
+
+    public function testGetoptRaiseExceptionForNumericOptionsIfAneHandlerIsSpecified()
+    {
+        $opts = new Getopt(
+            array('lines=s' => 'Lines-option'),
+            array('other', 'arguments', '-5'),
+            array(Getopt::CONFIG_NUMERIC_FLAGS => true)
+        );
+
+        $this->setExpectedException('\Zend\Console\Exception\RuntimeException');
+        $opts->parse();
     }
 }

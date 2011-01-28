@@ -58,6 +58,12 @@ class EventManager implements EventDispatcher
     protected $identifier;
 
     /**
+     * Static connections
+     * @var false|null|StaticEventDispatcher
+     */
+    protected $staticConnections = null;
+
+    /**
      * Constructor
      *
      * Allows optionally specifying an identifier to use to pull signals from a 
@@ -81,6 +87,35 @@ class EventManager implements EventDispatcher
     {
         $this->eventClass = $class;
         return $this;
+    }
+
+    /**
+     * Set static connections container
+     * 
+     * @param  null|StaticEventDispatcher $connections 
+     * @return void
+     */
+    public function setStaticConnections(StaticEventDispatcher $connections = null)
+    {
+        if (null === $connections) {
+            $this->staticConnections = false;
+        } else {
+            $this->staticConnections = $connections;
+        }
+        return $this;
+    }
+
+    /**
+     * Get static connections container
+     * 
+     * @return false|StaticEventDispatcher
+     */
+    public function getStaticConnections()
+    {
+        if (null === $this->staticConnections) {
+            $this->setStaticConnections(StaticEventManager::getInstance());
+        }
+        return $this->staticConnections;
     }
 
     /**
@@ -329,7 +364,10 @@ class EventManager implements EventDispatcher
      */
     protected function emitStaticHandlers($callback, Event $event, ResponseCollection $responses)
     {
-        if (!$handlers = StaticEventManager::getInstance()->getHandlers($this->identifier, $event->getName())) {
+        if (!$staticConnections = $this->getStaticConnections()) {
+            return $responses;
+        }
+        if (!$handlers = $staticConnections->getHandlers($this->identifier, $event->getName())) {
             return $responses;
         }
         foreach ($handlers as $handler) {

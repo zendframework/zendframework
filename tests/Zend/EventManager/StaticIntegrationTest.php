@@ -97,4 +97,38 @@ class StaticIntegrationTest extends TestCase
         $class->foo();
         $this->assertEquals(array('local3', 'local2', 'local', 'static'), $test->results);
     }
+
+    public function testPassingNullValueToSetStaticConnectionsDisablesStaticConnections()
+    {
+        $counter = (object) array('count' => 0);
+        StaticEventManager::getInstance()->connect(
+            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
+            'foo', 
+            function ($e) use ($counter) {
+                $counter->count++;
+            }
+        );
+        $class = new TestAsset\ClassWithEvents();
+        $class->events()->setStaticConnections(null);
+        $class->foo();
+        $this->assertEquals(0, $counter->count);
+    }
+
+    public function testCanPassAlternateStaticConnectionsHolder()
+    {
+        $counter = (object) array('count' => 0);
+        StaticEventManager::getInstance()->connect(
+            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
+            'foo', 
+            function ($e) use ($counter) {
+                $counter->count++;
+            }
+        );
+        $mockStaticEvents = new TestAsset\StaticEventsMock();
+        $class = new TestAsset\ClassWithEvents();
+        $class->events()->setStaticConnections($mockStaticEvents);
+        $this->assertSame($mockStaticEvents, $class->events()->getStaticConnections());
+        $class->foo();
+        $this->assertEquals(0, $counter->count);
+    }
 }

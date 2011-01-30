@@ -13,62 +13,40 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Stdlib;
+namespace ZendTest\EventManager\TestAsset;
 
-use Serializable;
+use Zend\EventManager\EventDispatcher,
+    Zend\EventManager\HandlerAggregate;
 
 /**
- * Serializable version of SplStack
- *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
+ * @subpackage UnitTests
+ * @group      Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SplStack extends \SplStack implements Serializable
+class MockAggregate implements HandlerAggregate
 {
-    /**
-     * Serialize to an array representing the stack
-     * 
-     * @return void
-     */
-    public function toArray()
+    public function connect(EventDispatcher $signals)
     {
-        $array = array();
-        foreach ($this as $item) {
-            $array[] = $item;
-        }
-        return $array;
+        $signals->connect('foo.bar', array( $this, 'fooBar' ));
+        $signals->connect('foo.baz', array( $this, 'fooBaz' ));
     }
 
-    /**
-     * Serialize
-     * 
-     * @return string
-     */
-    public function serialize()
+    public function fooBar()
     {
-        return serialize($this->toArray());
+        return __METHOD__;
     }
 
-    /**
-     * Unserialize
-     * 
-     * @param  string $data
-     * @return void
-     */
-    public function unserialize($data)
+    public function fooBaz()
     {
-        foreach (unserialize($data) as $item) {
-            $this->unshift($item);
-        }
+        return __METHOD__;
     }
 }

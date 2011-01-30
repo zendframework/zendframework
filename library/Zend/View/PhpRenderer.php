@@ -23,7 +23,7 @@
  */
 namespace Zend\View;
 
-use Zend\Stdlib\FilterChain,
+use Zend\Filter\FilterChain,
     ArrayAccess;
 
 /**

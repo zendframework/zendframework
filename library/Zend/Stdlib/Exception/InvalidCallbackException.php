@@ -21,54 +21,23 @@
 /**
  * @namespace
  */
-namespace Zend\Stdlib;
+namespace Zend\Stdlib\Exception;
 
-use Serializable;
+use Zend\Stdlib\Exception,
+    DomainException;
 
 /**
- * Serializable version of SplStack
+ * Invalid callback exception
  *
+ * @uses       Exception
+ * @uses       Zend\Stdlib\Exception
  * @category   Zend
  * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SplStack extends \SplStack implements Serializable
+class InvalidCallbackException
+    extends DomainException
+    implements Exception
 {
-    /**
-     * Serialize to an array representing the stack
-     * 
-     * @return void
-     */
-    public function toArray()
-    {
-        $array = array();
-        foreach ($this as $item) {
-            $array[] = $item;
-        }
-        return $array;
-    }
-
-    /**
-     * Serialize
-     * 
-     * @return string
-     */
-    public function serialize()
-    {
-        return serialize($this->toArray());
-    }
-
-    /**
-     * Unserialize
-     * 
-     * @param  string $data
-     * @return void
-     */
-    public function unserialize($data)
-    {
-        foreach (unserialize($data) as $item) {
-            $this->unshift($item);
-        }
-    }
 }

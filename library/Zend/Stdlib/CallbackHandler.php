@@ -24,9 +24,9 @@
 namespace Zend\Stdlib;
 
 /**
- * SignalHandler
+ * CallbackHandler
  *
- * A handler for a signal, event, filterchain, etc. Abstracts PHP callbacks,
+ * A handler for a event, event, filterchain, etc. Abstracts PHP callbacks,
  * primarily to allow for lazy-loading and ensuring availability of default
  * arguments (currying).
  *
@@ -35,77 +35,79 @@ namespace Zend\Stdlib;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SignalHandler
+class CallbackHandler
 {
     /**
      * @var string|array PHP callback to invoke
      */
-    protected $_callback;
+    protected $callback;
 
     /**
-     * @var string Signal to which this handle is subscribed
+     * @var string Event to which this handle is subscribed
      */
-    protected $_signal;
+    protected $event;
 
     /**
      * Until callback has been validated, mark as invalid
      * @var bool
      */
-    protected $_isValidCallback = false;
+    protected $isValidCallback = false;
+
+    /**
+     * Callback options, if any
+     * @var array
+     */
+    protected $options;
 
     /**
      * Constructor
      * 
-     * @param  string $signal Signal to which slot is subscribed
-     * @param  string|object $context Function name, class name, or object instance
-     * @param  string|null $handler Method name, if $context is a class or object
+     * @param  string $event Event to which slot is subscribed
+     * @param  string|array|object $callback PHP callback (first element may be )
+     * @param  array $options Options used by the callback handler (e.g., priority)
      * @return void
      */
-    public function __construct($signal, $context, $handler = null)
+    public function __construct($event, $callback, array $options = array())
     {
-        $this->_signal = $signal;
-
-        if (null === $handler) {
-            $this->_callback = $context;
-        } else {
-            $this->_callback = array($context, $handler);
-        }
+        $this->event    = $event;
+        $this->callback = $callback;
+        $this->options  = $options;
     }
 
     /**
-     * Get signal to which slot is subscribed
+     * Get event to which handler is subscribed
      * 
      * @return string
      */
-    public function getSignal()
+    public function getEvent()
     {
-        return $this->_signal;
+        return $this->event;
     }
 
     /**
      * Retrieve registered callback
      * 
      * @return Callback
-     * @throws InvalidCallbackException
+     * @throws Exception\InvalidCallbackException
      */
     public function getCallback()
     {
-        if ($this->_isValidCallback) {
-            return $this->_callback;
+        if ($this->isValidCallback) {
+            return $this->callback;
         }
 
-        $callback = $this->_callback;
+        $callback = $this->callback;
         if (is_string($callback)) {
-            return $this->_validateStringCallback($callback);
+            return $this->validateStringCallback($callback);
         }
         if (is_array($callback)) {
-            return $this->_validateArrayCallback($callback);
+            return $this->validateArrayCallback($callback);
         }
         if (is_callable($callback)) {
-            $this->_isValidCallback = true;
+            $this->isValidCallback = true;
             return $callback;
         }
-        throw new InvalidCallbackException('Invalid callback provided; not callable');
+        throw new Exception\InvalidCallbackException('Invalid callback provided; not callable');
     }
 
     /**
@@ -121,6 +123,30 @@ class SignalHandler
     }
 
     /**
+     * Get all callback options
+     * 
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Retrieve a single option
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function getOption($name)
+    {
+        if (array_key_exists($name, $this->options)) {
+            return $this->options[$name];
+        }
+        return null;
+    }
+
+    /**
      * Validate a string callback
      *
      * Check first if the string provided is callable. If not see if it is a 
@@ -128,27 +154,27 @@ class SignalHandler
      * 
      * @param  string $callback 
      * @return Callback
-     * @throws InvalidCallbackException
+     * @throws Exception\InvalidCallbackException
      */
-    protected function _validateStringCallback($callback)
+    protected function validateStringCallback($callback)
     {
         if (is_callable($callback)) {
-            $this->_isValidCallback = true;
+            $this->isValidCallback = true;
             return $callback;
         }
 
         if (!class_exists($callback)) {
-            throw new InvalidCallbackException('Provided callback is not a function or a class');
+            throw new Exception\InvalidCallbackException('Provided callback is not a function or a class');
         }
 
         // check __invoke before instantiating
         if (!method_exists($callback, '__invoke')) {
-            throw new InvalidCallbackException('Class provided as a callback does not implement __invoke');
+            throw new Exception\InvalidCallbackException('Class provided as a callback does not implement __invoke');
         }
         $object = new $callback();
 
-        $this->_callback        = $object;
-        $this->_isValidCallback = true;
+        $this->callback        = $object;
+        $this->isValidCallback = true;
         return $object;
     }
 
@@ -157,9 +183,9 @@ class SignalHandler
      * 
      * @param  array $callback 
      * @return callback
-     * @throws InvalidCallbackException
+     * @throws Exception\InvalidCallbackException
      */
-    protected function _validateArrayCallback(array $callback)
+    protected function validateArrayCallback(array $callback)
     {
         $context = $callback[0];
         $method  = $callback[1];
@@ -168,7 +194,7 @@ class SignalHandler
             // Dealing with a class/method callback, and class provided is a string classname
             
             if (!class_exists($context)) {
-                throw new InvalidCallbackException('Class provided in callback does not exist');
+                throw new Exception\InvalidCallbackException('Class provided in callback does not exist');
             }
 
             // We need to determine if we need to instantiate the class first
@@ -176,43 +202,43 @@ class SignalHandler
             if (!$r->hasMethod($method)) {
                 // Explicit method does not exist
                 if (!$r->hasMethod('__callStatic') && !$r->hasMethod('__call')) {
-                    throw new InvalidCallbackException('Class provided in callback does not define the method requested');
+                    throw new Exception\InvalidCallbackException('Class provided in callback does not define the method requested');
                 }
 
                 if ($r->hasMethod('__callStatic')) {
                     // We have a __callStatic defined, so the original callback is valid
-                    $this->_isValidCallback = true;
+                    $this->isValidCallback = true;
                     return $callback;
                 }
 
                 // We have __call defined, so we need to instantiate the class 
                 // first, and redefine the callback
                 $object                 = new $context();
-                $this->_callback        = array($object, $method);
-                $this->_isValidCallback = true;
-                return $this->_callback;
+                $this->callback        = array($object, $method);
+                $this->isValidCallback = true;
+                return $this->callback;
             }
 
             // Explicit method exists
             $rMethod = $r->getMethod($method);
             if ($rMethod->isStatic()) {
                 // Method is static, so original callback is fine
-                $this->_isValidCallback = true;
+                $this->isValidCallback = true;
                 return $callback;
             }
 
             // Method is an instance method; instantiate object and redefine callback
             $object                 = new $context();
-            $this->_callback        = array($object, $method);
-            $this->_isValidCallback = true;
-            return $this->_callback;
+            $this->callback        = array($object, $method);
+            $this->isValidCallback = true;
+            return $this->callback;
         } elseif (is_callable($callback)) {
             // The 
-            $this->_isValidCallback = true;
+            $this->isValidCallback = true;
             return $callback;
         }
 
 
-        throw new InvalidCallbackException('Method provided in callback does not exist in object');
+        throw new Exception\InvalidCallbackException('Method provided in callback does not exist in object');
     }
 }

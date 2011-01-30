@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,20 +21,16 @@
 /**
  * @namespace
  */
-namespace Zend\Stdlib;
+namespace Zend\EventManager;
 
 /**
- * Invalid callback exception
+ * Base exception interface
  *
- * @uses       Exception
- * @uses       Zend\Stdlib\Exception
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidCallbackException
-    extends \Exception
-    implements Exception
+interface Exception
 {
 }

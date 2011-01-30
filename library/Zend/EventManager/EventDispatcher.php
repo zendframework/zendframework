@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,54 +21,23 @@
 /**
  * @namespace
  */
-namespace Zend\Stdlib;
-
-use Serializable;
+namespace Zend\EventManager;
 
 /**
- * Serializable version of SplStack
+ * Interface for messengers
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SplStack extends \SplStack implements Serializable
+interface EventDispatcher
 {
-    /**
-     * Serialize to an array representing the stack
-     * 
-     * @return void
-     */
-    public function toArray()
-    {
-        $array = array();
-        foreach ($this as $item) {
-            $array[] = $item;
-        }
-        return $array;
-    }
-
-    /**
-     * Serialize
-     * 
-     * @return string
-     */
-    public function serialize()
-    {
-        return serialize($this->toArray());
-    }
-
-    /**
-     * Unserialize
-     * 
-     * @param  string $data
-     * @return void
-     */
-    public function unserialize($data)
-    {
-        foreach (unserialize($data) as $item) {
-            $this->unshift($item);
-        }
-    }
+    public function emit($event, $context, $argv = array());
+    public function emitUntil($event, $context, $argv, $callback);
+    public function connect($eventOrAggregate, $callback = null, $priority = 1);
+    public function detach($handle);
+    public function getEvents();
+    public function getHandlers($event);
+    public function clearHandlers($event);
 }

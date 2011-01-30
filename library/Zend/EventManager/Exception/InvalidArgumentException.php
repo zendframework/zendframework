@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,54 +21,19 @@
 /**
  * @namespace
  */
-namespace Zend\Stdlib;
+namespace Zend\EventManager\Exception;
 
-use Serializable;
+use Zend\EventManager\Exception;
 
 /**
- * Serializable version of SplStack
+ * Invalid argument exception
  *
  * @category   Zend
- * @package    Zend_Stdlib
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SplStack extends \SplStack implements Serializable
+class InvalidArgumentException 
+    extends \InvalidArgumentException implements Exception
 {
-    /**
-     * Serialize to an array representing the stack
-     * 
-     * @return void
-     */
-    public function toArray()
-    {
-        $array = array();
-        foreach ($this as $item) {
-            $array[] = $item;
-        }
-        return $array;
-    }
-
-    /**
-     * Serialize
-     * 
-     * @return string
-     */
-    public function serialize()
-    {
-        return serialize($this->toArray());
-    }
-
-    /**
-     * Unserialize
-     * 
-     * @param  string $data
-     * @return void
-     */
-    public function unserialize($data)
-    {
-        foreach (unserialize($data) as $item) {
-            $this->unshift($item);
-        }
-    }
 }

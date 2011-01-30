@@ -45,14 +45,14 @@ class StringTrim extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  string|array|\Zend\Config\Config $charList
+     * @param  string|array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($charList = null)
+    public function __construct($options = null)
     {
-        if ($charList instanceof \Zend\Config\Config) {
-            $charList = $charList->toArray();
-        } else if (!is_array($charList)) {
+        if ($options instanceof \Zend\Config\Config) {
+            $options = $options->toArray();
+        } elseif (!is_array($options)) {
             $options          = func_get_args();
             $temp['charlist'] = array_shift($options);
             $options          = $temp;

@@ -68,12 +68,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      * @see    http://matthewturland.com/2010/08/19/process-isolation-in-phpunit/
      * @param  PHPUnit_Framework_TestResult $result 
      * @return void
-     */
     public function run(\PHPUnit_Framework_TestResult $result = NULL)
     {
         $this->setPreserveGlobalState(false);
         return parent::run($result);
     }
+     */
 
     public function testInstantiationStartsSession()
     {
@@ -151,11 +151,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($manager, Container::getDefaultManager());
     }
 
-    /**
-     * Run in separate process due to usage of session_* methods
-     *
-     * @runInSeparateProcess
-     */
     public function testDefaultManagerUsedWhenNoManagerProvided()
     {
         $manager = Container::getDefaultManager();
@@ -163,11 +158,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($manager, $container->getManager());
     }
 
-    /**
-     * Run in separate process due to usage of session_* methods
-     *
-     * @runInSeparateProcess
-     */
     public function testContainerInstantiatesManagerWithDefaultsWhenNotInjected()
     {
         $container = new Container();

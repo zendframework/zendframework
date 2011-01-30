@@ -23,17 +23,17 @@
  */
 namespace Zend\Session;
 
-use Zend\SignalSlot\Signals;
+use Zend\EventManager\EventManager;
 
 /**
- * Zend_Session_Validator_Interface
+ * Validator chain for validating sessions
  *
  * @category   Zend
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain extends Signals
+class ValidatorChain extends EventManager
 {
     /**
      * @var Storage
@@ -63,20 +63,32 @@ class ValidatorChain extends Signals
     /**
      * Attach a handler to the session validator chain
      * 
-     * @param  string $topic 
+     * @param  string|\Zend\EventManager\HandlerAggregate $eventOrAggregate
      * @param  string|object|Closure $context 
      * @param  null|string $handler 
      * @return Zend\Stdlib\SignalHandler
      */
-    public function connect($topic, $context, $handler = null)
+    public function connect($eventOrAggregate, $callback = null, $priority = 1000)
     {
+        $context = null;
+        if (null === $callback) {
+            $context = $eventOrAggregate;
+        } elseif ($callback instanceof Validator) {
+            $context = $callback;
+        } elseif (is_array($callback)) {
+            $test = array_shift($callback);
+            if ($test instanceof Validator) {
+                $context = $test;
+            }
+            array_unshift($callback, $test);
+        }
         if ($context instanceof Validator) {
             $data = $context->getData();
             $name = $context->getName();
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::connect($topic, $context, $handler);
+        $handle = parent::connect($eventOrAggregate, $callback, $priority);
         return $handle;
     }
 

@@ -82,10 +82,10 @@ class FilterChain implements Filter
      * Connect a filter to the chain
      * 
      * @param  callback $callback PHP Callback
-     * @param  int $priority Priority in the queue at which to execute; defaults to 1000 (higher numbers == higher priority)
+     * @param  int $priority Priority in the queue at which to execute; defaults to 1 (higher numbers == higher priority)
      * @return CallbackHandler (to allow later unsubscribe)
      */
-    public function connect($callback, $priority = 1000)
+    public function attach($callback, $priority = 1)
     {
         if (empty($callback)) {
             throw new InvalidCallbackException('No callback provided');
@@ -96,7 +96,7 @@ class FilterChain implements Filter
     }
 
     /**
-     * Unsubscribe a filter
+     * Detach a filter from the chain
      * 
      * @param  CallbackHandler $filter 
      * @return bool Returns true if filter found and unsubscribed; returns false otherwise

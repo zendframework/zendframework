@@ -38,7 +38,7 @@ use Zend\Stdlib\CallbackHandler,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EventManager implements EventDispatcher
+class EventManager implements EventCollection
 {
     /**
      * Subscribed events and their handlers
@@ -59,7 +59,7 @@ class EventManager implements EventDispatcher
 
     /**
      * Static connections
-     * @var false|null|StaticEventDispatcher
+     * @var false|null|StaticEventCollection
      */
     protected $staticConnections = null;
 
@@ -92,10 +92,10 @@ class EventManager implements EventDispatcher
     /**
      * Set static connections container
      * 
-     * @param  null|StaticEventDispatcher $connections 
+     * @param  null|StaticEventCollection $connections 
      * @return void
      */
-    public function setStaticConnections(StaticEventDispatcher $connections = null)
+    public function setStaticConnections(StaticEventCollection $connections = null)
     {
         if (null === $connections) {
             $this->staticConnections = false;
@@ -108,7 +108,7 @@ class EventManager implements EventDispatcher
     /**
      * Get static connections container
      * 
-     * @return false|StaticEventDispatcher
+     * @return false|StaticEventCollection
      */
     public function getStaticConnections()
     {
@@ -119,34 +119,34 @@ class EventManager implements EventDispatcher
     }
 
     /**
-     * Publish to all handlers for a given event
+     * Trigger all handlers for a given event
      * 
      * @param  string $event 
      * @param  string|object $context Object calling emit, or symbol describing context (such as static method name) 
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @return ResponseCollection All handler return values
      */
-    public function emit($event, $context, $argv = array())
+    public function trigger($event, $context, $argv = array())
     {
-        return $this->emitUntil($event, $context, $argv, function(){
+        return $this->triggerUntil($event, $context, $argv, function(){
             return false;
         });
     }
 
     /**
-     * Notify handlers until return value of one causes a callback to 
+     * Trigger handlers until return value of one causes a callback to 
      * evaluate to true
      *
-     * Publishes handlers until the provided callback evaluates the return 
+     * Triggers handlers until the provided callback evaluates the return 
      * value of one as true, or until all handlers have been executed.
      * 
-     * @param  Callable $callback 
      * @param  string $event 
      * @param  string|object $context Object calling emit, or symbol describing context (such as static method name) 
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
+     * @param  Callable $callback 
      * @throws InvalidCallbackException if invalid callback provided
      */
-    public function emitUntil($event, $context, $argv, $callback)
+    public function triggerUntil($event, $context, $argv, $callback)
     {
         if (!is_callable($callback)) {
             throw new InvalidCallbackException('Invalid callback provided');
@@ -156,7 +156,7 @@ class EventManager implements EventDispatcher
         $e         = new $this->eventClass($event, $context, $argv);
 
         if (empty($this->events[$event])) {
-            return $this->emitStaticHandlers($callback, $e, $responses);
+            return $this->triggerStaticHandlers($callback, $e, $responses);
         }
 
         foreach ($this->events[$event] as $handler) {
@@ -171,64 +171,29 @@ class EventManager implements EventDispatcher
             }
         }
         if (!$responses->stopped()) {
-            $this->emitStaticHandlers($callback, $e, $responses);
+            $this->triggerStaticHandlers($callback, $e, $responses);
         }
         return $responses;
     }
 
     /**
-     * Subscribe to an event
+     * Attach a handler to an event
      *
-     * If an HandlerAggregate is provided as the first argument (as either a class
-     * name or instance), this method will call the aggregate's connect() 
-     * method, passing itself as the argument. Once done, the HandlerAggregate
-     * instance will be returned.
-     *
-     * Otherwise, the assumption is that the first argument is the event, and 
-     * that the next argument describes a callback that will respond to that
-     * event. A CallbackHandler instance describing the event handler 
-     * combination will be returned.
+     * The first argument is the event, and the next argument describes a 
+     * callback that will respond to that event. A CallbackHandler instance 
+     * describing the event handler combination will be returned.
      *
      * The last argument indicates a priority at which the event should be 
-     * executed. By default, this value is 1000; however, you may set it for any
+     * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
      * 
-     * @param  string|HandlerAggregate $eventOrAggregate
-     * @param  null|callback $callback PHP callback
-     * @param  null|int $priority If provided, the priority at which to register the callback 
+     * @param  string $event
+     * @param  callback $callback PHP callback
+     * @param  int $priority If provided, the priority at which to register the callback 
      * @return HandlerAggregate|CallbackHandler (to allow later unsubscribe)
      */
-    public function connect($eventOrAggregate, $callback = null, $priority = 1000)
+    public function attach($event, $callback, $priority = 1)
     {
-        if (null === $callback) {
-            // Assuming we have an aggregate that will self-register
-            if (is_string($eventOrAggregate)) {
-                // Class name?
-                if (!class_exists($eventOrAggregate)) {
-                    // Class doesn't exist; probably didn't provide a context
-                    throw new Exception\InvalidArgumentException(sprintf(
-                        'No context provided for event "%s"',
-                        $eventOrAggregate
-                    ));
-                }
-                // Create instance
-                $eventOrAggregate = new $eventOrAggregate();
-            }
-            if (!$eventOrAggregate instanceof HandlerAggregate) {
-                // Not an HandlerAggregate? We don't know how to handle it.
-                throw new Exception\InvalidArgumentException(
-                    'Invalid class or object provided as event aggregate; must implement HandlerAggregate'
-                );
-            }
-
-            // Have the event aggregate wire itself, and return it.
-            $eventOrAggregate->connect($this);
-            return $eventOrAggregate;
-        }
-
-        // Handle normal events
-        $event = $eventOrAggregate;
-
         if (empty($this->events[$event])) {
             $this->events[$event] = new PriorityQueue();
         }
@@ -238,25 +203,83 @@ class EventManager implements EventDispatcher
     }
 
     /**
+     * Attach a handler aggregate
+     *
+     * Handler aggregates accept an EventCollection instance, and call attach()
+     * one or more times, typically to attach to multiple events using local 
+     * methods.
+     * 
+     * @param  HandlerAggregate|string $aggregate 
+     * @return HandlerAggregate
+     */
+    public function attachAggregate($aggregate)
+    {
+        if (is_string($aggregate)) {
+            // Class name?
+            if (!class_exists($aggregate)) {
+                // Class doesn't exist; probably didn't provide a context
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'No context provided for event "%s"',
+                    $aggregate
+                ));
+            }
+            // Create instance
+            $aggregate = new $aggregate();
+        }
+        if (!$aggregate instanceof HandlerAggregate) {
+            // Not an HandlerAggregate? We don't know how to handle it.
+            throw new Exception\InvalidArgumentException(
+                'Invalid class or object provided as event aggregate; must implement HandlerAggregate'
+            );
+        }
+
+        // Have the event aggregate wire itself, and return it.
+        $aggregate->attach($this);
+        return $aggregate;
+    }
+
+    /**
      * Unsubscribe a handler from an event
      * 
      * @param  HandlerAggregate|CallbackHandler $handler 
      * @return bool Returns true if event and handle found, and unsubscribed; returns false if either event or handle not found
      */
-    public function detach($handler)
+    public function detach(CallbackHandler $handler)
     {
-        if (!$handler instanceof HandlerAggregate && !$handler instanceof CallbackHandler) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected CallbackHandler or HandlerAggregate; received "%s"',
-                (is_object($handler) ? get_class($handler) : gettype($handler))
-            ));
+        $event = $handler->getEvent();
+        if (empty($this->events[$event])) {
+            return false;
         }
+        return $this->events[$event]->remove($handler);
+    }
 
-        if ($handler instanceof HandlerAggregate) {
-            return $this->detachAggregate($handler);
+    /**
+     * Detach a callback aggregate
+     *
+     * Loops through all handlers of all events to identify handlers that are
+     * represented by the aggregate; for all matches, the handlers will be 
+     * removed.
+     * 
+     * @param  HandlerAggregate $aggregate 
+     * @return bool
+     */
+    public function detachAggregate(HandlerAggregate $aggregate)
+    {
+        foreach ($this->events as $event => $handlers) {
+            foreach ($handlers as $key => $handler) {
+                $callback = $handler->getCallback();
+                if (is_object($callback)) {
+                    if ($callback === $aggregate) {
+                        $this->detach($handler);
+                    }
+                } elseif (is_array($callback)) {
+                    if ($callback[0] === $aggregate) {
+                        $this->detach($handler);
+                    }
+                }
+            }
         }
-
-        return $this->detachHandler($handler);
+        return true;
     }
 
     /**
@@ -301,7 +324,7 @@ class EventManager implements EventDispatcher
      *
      * Use this method if you want to be able to modify arguments from within a
      * handler. It returns an ArrayObject of the arguments, which may then be 
-     * passed to emit() or emitUntil().
+     * passed to trigger() or triggerUntil().
      * 
      * @param  array $args 
      * @return ArrayObject
@@ -312,49 +335,6 @@ class EventManager implements EventDispatcher
     }
 
     /**
-     * Detach a HandlerAggregate
-     *
-     * Iterates through all events, testing handlers to determine if they
-     * represent the provided HandlerAggregate; if so, they are then removed.
-     * 
-     * @param  HandlerAggregate $aggregate 
-     * @return true
-     */
-    protected function detachAggregate(HandlerAggregate $aggregate)
-    {
-        foreach ($this->events as $event => $handlers) {
-            foreach ($handlers as $key => $handler) {
-                $callback = $handler->getCallback();
-                if (is_object($callback)) {
-                    if ($callback === $aggregate) {
-                        $this->detachHandler($handler);
-                    }
-                } elseif (is_array($callback)) {
-                    if ($callback[0] === $aggregate) {
-                        $this->detachHandler($handler);
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Detach an event handler
-     * 
-     * @param  CallbackHandler $handler 
-     * @return bool
-     */
-    protected function detachHandler(CallbackHandler $handler)
-    {
-        $event = $handler->getEvent();
-        if (empty($this->events[$event])) {
-            return false;
-        }
-        return $this->events[$event]->remove($handler);
-    }
-
-    /**
      * Emit handlers matching the current identifier found in the static handler
      * 
      * @param  callback $callback 
@@ -362,7 +342,7 @@ class EventManager implements EventDispatcher
      * @param  ResponseCollection $responses 
      * @return ResponseCollection
      */
-    protected function emitStaticHandlers($callback, Event $event, ResponseCollection $responses)
+    protected function triggerStaticHandlers($callback, Event $event, ResponseCollection $responses)
     {
         if (!$staticConnections = $this->getStaticConnections()) {
             return $responses;

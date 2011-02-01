@@ -43,7 +43,7 @@ class StaticIntegrationTest extends TestCase
     public function testCanConnectStaticallyToClassWithEvents()
     {
         $counter = (object) array('count' => 0);
-        StaticEventManager::getInstance()->connect(
+        StaticEventManager::getInstance()->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($counter) {
@@ -58,7 +58,7 @@ class StaticIntegrationTest extends TestCase
     public function testLocalHandlersAreExecutedPriorToStaticHandlers()
     {
         $test = (object) array('results' => array());
-        StaticEventManager::getInstance()->connect(
+        StaticEventManager::getInstance()->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($test) {
@@ -66,7 +66,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->connect('foo', function ($e) use ($test) {
+        $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         });
         $class->foo();
@@ -76,7 +76,7 @@ class StaticIntegrationTest extends TestCase
     public function testLocalHandlersAreExecutedPriorToStaticHandlersRegardlessOfPriority()
     {
         $test = (object) array('results' => array());
-        StaticEventManager::getInstance()->connect(
+        StaticEventManager::getInstance()->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($test) {
@@ -85,13 +85,13 @@ class StaticIntegrationTest extends TestCase
             10000 // high priority
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->connect('foo', function ($e) use ($test) {
+        $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         }, 1); // low priority
-        $class->events()->connect('foo', function ($e) use ($test) {
+        $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local2';
         }, 1000); // medium priority
-        $class->events()->connect('foo', function ($e) use ($test) {
+        $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local3';
         }, 15000); // highest priority
         $class->foo();
@@ -101,7 +101,7 @@ class StaticIntegrationTest extends TestCase
     public function testPassingNullValueToSetStaticConnectionsDisablesStaticConnections()
     {
         $counter = (object) array('count' => 0);
-        StaticEventManager::getInstance()->connect(
+        StaticEventManager::getInstance()->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($counter) {
@@ -117,7 +117,7 @@ class StaticIntegrationTest extends TestCase
     public function testCanPassAlternateStaticConnectionsHolder()
     {
         $counter = (object) array('count' => 0);
-        StaticEventManager::getInstance()->connect(
+        StaticEventManager::getInstance()->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($counter) {

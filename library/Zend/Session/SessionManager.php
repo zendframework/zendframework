@@ -24,7 +24,7 @@
 namespace Zend\Session;
 
 use Zend\Validator\Alnum as AlnumValidator,
-    Zend\EventManager\EventDispatcher;
+    Zend\EventManager\EventCollection;
 
 /**
  * Session Manager implementation utilizing ext/session
@@ -63,7 +63,7 @@ class SessionManager extends AbstractManager
     protected $_name;
 
     /**
-     * @var EventDispatcher Validation chain to determine if session is valid
+     * @var EventCollection Validation chain to determine if session is valid
      */
     protected $_validatorChain;
 
@@ -298,10 +298,10 @@ class SessionManager extends AbstractManager
      *
      * In most cases, you should use an instance of {@link ValidatorChain}.
      * 
-     * @param  EventDispatcher $chain 
+     * @param  EventCollection $chain 
      * @return SessionManager
      */
-    public function setValidatorChain(EventDispatcher $chain)
+    public function setValidatorChain(EventCollection $chain)
     {
         $this->_validatorChain = $chain;
         return $this;
@@ -333,13 +333,15 @@ class SessionManager extends AbstractManager
     public function isValid()
     {
         $validator = $this->getValidatorChain();
-        $responses = $validator->emitUntil(function($test) {
+        $responses = $validator->triggerUntil('session.validate', $this, array($this), function($test) {
             return !$test;
-        }, 'session.validate', $this);
-        if (null === $responses->last()) {
-            return true;
+        });
+        if ($responses->stopped()) {
+            // If execution was halted, validation failed
+            return false;
         }
-        return (bool) $responses->last();
+        // Otherwise, we're good to go
+        return true;
     }
 
     /**

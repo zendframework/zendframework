@@ -241,7 +241,7 @@ class EventManager implements EventCollection
     /**
      * Unsubscribe a handler from an event
      * 
-     * @param  HandlerAggregate|CallbackHandler $handler 
+     * @param  CallbackHandler $handler 
      * @return bool Returns true if event and handle found, and unsubscribed; returns false if either event or handle not found
      */
     public function detach(CallbackHandler $handler)
@@ -250,7 +250,14 @@ class EventManager implements EventCollection
         if (empty($this->events[$event])) {
             return false;
         }
-        return $this->events[$event]->remove($handler);
+        $return = $this->events[$event]->remove($handler);
+        if (!$return) {
+            return false;
+        }
+        if (!count($this->events[$event])) {
+            unset($this->events[$event]);
+        }
+        return true;
     }
 
     /**

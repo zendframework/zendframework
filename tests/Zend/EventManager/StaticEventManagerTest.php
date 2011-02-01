@@ -21,6 +21,7 @@
 
 namespace ZendTest\EventManager;
 use Zend\EventManager\StaticEventManager,
+    Zend\EventManager\EventManager,
     PHPUnit_Framework_TestCase as TestCase;
 
 /**
@@ -155,5 +156,28 @@ class StaticEventManagerTest extends TestCase
         $this->assertEquals(1, count($events->getHandlers('foo', 'bar')));
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getHandlers('foo', 'bat'));
         $this->assertEquals(1, count($events->getHandlers('foo', 'bat')));
+    }
+
+    public function testCanPassArrayOfIdentifiersToConstructor()
+    {
+        $identifiers = array('foo', 'bar');
+        $manager = new EventManager($identifiers);
+    }
+
+    public function testHandlersAttachedToAnyIdentifierProvidedToEventManagerWillBeTriggered()
+    {
+        $identifiers = array('foo', 'bar');
+        $manager = new EventManager($identifiers);
+        $events  = StaticEventManager::getInstance();
+        $test    = new \stdClass;
+        $test->triggered = 0;
+        $events->attach('foo', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $events->attach('bar', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $manager->trigger('bar', $this, array());
+        $this->assertEquals(2, $test->triggered);
     }
 }

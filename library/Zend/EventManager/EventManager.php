@@ -354,20 +354,26 @@ class EventManager implements EventCollection
         if (!$staticConnections = $this->getStaticConnections()) {
             return $responses;
         }
-        if (!$handlers = $staticConnections->getHandlers($this->identifier, $event->getName())) {
-            return $responses;
-        }
-        foreach ($handlers as $handler) {
-            $responses->push(call_user_func($handler->getCallback(), $event));
-            if ($event->propagationIsStopped()) {
-                $responses->setStopped(true);
-                break;
+
+        $identifiers = (array) $this->identifier;
+
+        foreach ($identifiers as $id) {
+            if (!$handlers = $staticConnections->getHandlers($id, $event->getName())) {
+                continue;
             }
-            if (call_user_func($callback, $responses->last())) {
-                $responses->setStopped(true);
-                break;
+            foreach ($handlers as $handler) {
+                $responses->push(call_user_func($handler->getCallback(), $event));
+                if ($event->propagationIsStopped()) {
+                    $responses->setStopped(true);
+                    break;
+                }
+                if (call_user_func($callback, $responses->last())) {
+                    $responses->setStopped(true);
+                    break;
+                }
             }
         }
+
         return $responses;
     }
 }

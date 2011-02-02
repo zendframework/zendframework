@@ -170,7 +170,7 @@ $counter ++;
 
 // -----------------------------------------------------------------------------
 
-$geoData = @file_get_contents('http://ipinfodb.com/ip_query.php');
+$geoData = @file_get_contents('http://api.ipinfodb.com/v2/ip_query.php?key=b6b5ccde0d3a885c979c6583d93ffa4fa854b8cfd5bbf505a94c3179fae37281');
 
 $keys = array (
     'Ip'          => 'IP address',

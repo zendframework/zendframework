@@ -38,5 +38,5 @@ namespace Zend\EventManager;
  */
 interface HandlerAggregate
 {
-    public function connect(EventDispatcher $events);
+    public function attach(EventCollection $events);
 }

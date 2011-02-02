@@ -21,7 +21,7 @@
 
 namespace ZendTest\EventManager\TestAsset;
 
-use Zend\EventManager\EventDispatcher,
+use Zend\EventManager\EventCollection,
     Zend\EventManager\HandlerAggregate;
 
 /**
@@ -34,10 +34,10 @@ use Zend\EventManager\EventDispatcher,
  */
 class MockAggregate implements HandlerAggregate
 {
-    public function connect(EventDispatcher $signals)
+    public function attach(EventCollection $events)
     {
-        $signals->connect('foo.bar', array( $this, 'fooBar' ));
-        $signals->connect('foo.baz', array( $this, 'fooBaz' ));
+        $events->attach('foo.bar', array( $this, 'fooBar' ));
+        $events->attach('foo.baz', array( $this, 'fooBaz' ));
     }
 
     public function fooBar()

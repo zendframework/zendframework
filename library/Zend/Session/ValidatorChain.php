@@ -63,17 +63,15 @@ class ValidatorChain extends EventManager
     /**
      * Attach a handler to the session validator chain
      * 
-     * @param  string|\Zend\EventManager\HandlerAggregate $eventOrAggregate
-     * @param  string|object|Closure $context 
-     * @param  null|string $handler 
-     * @return Zend\Stdlib\SignalHandler
+     * @param  string $event
+     * @param  callback $context 
+     * @param  int $priority 
+     * @return Zend\Stdlib\CallbackHandler
      */
-    public function connect($eventOrAggregate, $callback = null, $priority = 1000)
+    public function attach($event, $callback, $priority = 1)
     {
         $context = null;
-        if (null === $callback) {
-            $context = $eventOrAggregate;
-        } elseif ($callback instanceof Validator) {
+        if ($callback instanceof Validator) {
             $context = $callback;
         } elseif (is_array($callback)) {
             $test = array_shift($callback);
@@ -88,7 +86,7 @@ class ValidatorChain extends EventManager
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::connect($eventOrAggregate, $callback, $priority);
+        $handle = parent::connect($event, $callback, $priority);
         return $handle;
     }
 

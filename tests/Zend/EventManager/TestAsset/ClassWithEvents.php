@@ -21,7 +21,7 @@
 
 namespace ZendTest\EventManager\TestAsset;
 
-use Zend\EventManager\EventDispatcher,
+use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
 /**
@@ -36,7 +36,7 @@ class ClassWithEvents
 {
     protected $events;
 
-    public function events(EventDispatcher $events = null)
+    public function events(EventCollection $events = null)
     {
         if (null !== $events) {
             $this->events = $events;
@@ -49,6 +49,6 @@ class ClassWithEvents
 
     public function foo()
     {
-        $this->events()->emit(__FUNCTION__, $this, array());
+        $this->events()->trigger(__FUNCTION__, $this, array());
     }
 }

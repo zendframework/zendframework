@@ -24,20 +24,14 @@
 namespace Zend\EventManager;
 
 /**
- * Interface for messengers
+ * Interface for global (static) event handler collections
  *
  * @category   Zend
  * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface EventDispatcher
+interface StaticEventCollection
 {
-    public function emit($event, $context, $argv = array());
-    public function emitUntil($event, $context, $argv, $callback);
-    public function connect($eventOrAggregate, $callback = null, $priority = 1);
-    public function detach($handle);
-    public function getEvents();
-    public function getHandlers($event);
-    public function clearHandlers($event);
+    public function getHandlers($id, $event);
 }

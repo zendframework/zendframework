@@ -44,13 +44,13 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testSubscribeShouldReturnCallbackHandler()
     {
-        $handle = $this->filterchain->connect(array( $this, __METHOD__ ));
+        $handle = $this->filterchain->attach(array( $this, __METHOD__ ));
         $this->assertTrue($handle instanceof CallbackHandler);
     }
 
     public function testSubscribeShouldAddCallbackHandlerToFilters()
     {
-        $handler  = $this->filterchain->connect(array($this, __METHOD__));
+        $handler  = $this->filterchain->attach(array($this, __METHOD__));
         $handlers = $this->filterchain->getFilters();
         $this->assertEquals(1, count($handlers));
         $this->assertTrue($handlers->contains($handler));
@@ -58,7 +58,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldRemoveCallbackHandlerFromFilters()
     {
-        $handle = $this->filterchain->connect(array( $this, __METHOD__ ));
+        $handle = $this->filterchain->attach(array( $this, __METHOD__ ));
         $handles = $this->filterchain->getFilters();
         $this->assertTrue($handles->contains($handle));
         $this->filterchain->detach($handle);
@@ -68,13 +68,13 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
     {
-        $handle1 = $this->filterchain->connect(array( $this, __METHOD__ ));
+        $handle1 = $this->filterchain->attach(array( $this, __METHOD__ ));
         $this->filterchain->clearFilters();
-        $handle2 = $this->filterchain->connect(array( $this, 'handleTestTopic' ));
+        $handle2 = $this->filterchain->attach(array( $this, 'handleTestTopic' ));
         $this->assertFalse($this->filterchain->detach($handle1));
     }
 
-    public function testRetrievingConnectedFiltersShouldReturnEmptyArrayWhenNoFiltersExist()
+    public function testRetrievingAttachedFiltersShouldReturnEmptyArrayWhenNoFiltersExist()
     {
         $handles = $this->filterchain->getFilters();
         $this->assertEquals(0, count($handles));
@@ -82,14 +82,14 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterChainShouldReturnLastResponse()
     {
-        $this->filterchain->connect(function($context, $params, $chain) {
+        $this->filterchain->attach(function($context, $params, $chain) {
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
             $return =  $chain->next($context, $params, $chain);
             return $return;
         });
-        $this->filterchain->connect(function($context, array $params) {
+        $this->filterchain->attach(function($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
             return str_rot13($string);
         });
@@ -99,7 +99,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterIsPassedContextAndArguments()
     {
-        $this->filterchain->connect(array( $this, 'filterTestCallback1' ));
+        $this->filterchain->attach(array( $this, 'filterTestCallback1' ));
         $obj = (object) array('foo' => 'bar', 'bar' => 'baz');
         $value = $this->filterchain->run($this, array('object' => $obj));
         $this->assertEquals('filtered', $value);
@@ -109,23 +109,23 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testInterceptingFilterShouldReceiveChain()
     {
-        $this->filterchain->connect(array($this, 'filterReceivalCallback'));
+        $this->filterchain->attach(array($this, 'filterReceivalCallback'));
         $this->filterchain->run($this);
     }
 
     public function testFilteringStopsAsSoonAsAFilterFailsToCallNext()
     {
-        $this->filterchain->connect(function($context, $params, $chain) {
+        $this->filterchain->attach(function($context, $params, $chain) {
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
             return $chain->next($context, $params, $chain);
         }, 10000);
-        $this->filterchain->connect(function($context, array $params) {
+        $this->filterchain->attach(function($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
             return str_rot13($string);
         }, 1000);
-        $this->filterchain->connect(function($context, $params, $chain) {
+        $this->filterchain->attach(function($context, $params, $chain) {
             $string = isset($params['string']) ? $params['string'] : '';
             return hash('md5', $string);
         }, 100);

@@ -14,24 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_EventManager
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\EventManager;
+namespace ZendTest\EventManager\TestAsset;
+
+use Zend\EventManager\StaticEventCollection;
 
 /**
- * Interface for global (static) message delivery
- *
  * @category   Zend
  * @package    Zend_EventManager
+ * @subpackage UnitTests
+ * @group      Zend_EventManager
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface StaticEventDispatcher
+class StaticEventsMock implements StaticEventCollection
 {
-    public function getHandlers($id, $event);
+    public function getHandlers($id, $event)
+    {
+        return array();
+    }
 }

@@ -23,6 +23,8 @@
  */
 namespace Zend\EventManager;
 
+use ArrayAccess;
+
 /**
  * Representation of an event
  *
@@ -47,7 +49,7 @@ class Event
     protected $target;
 
     /**
-     * @var array|ArrayAccess The event parameters
+     * @var array|ArrayAccess|object The event parameters
      */
     protected $params = array();
 
@@ -100,14 +102,14 @@ class Event
      *
      * Overwrites parameters
      * 
-     * @param  array|ArrayAccess $params 
+     * @param  array|ArrayAccess|object $params 
      * @return Event
      */
     public function setParams($params)
     {
-        if (!is_array($params) && !$params instanceof \ArrayAccess) {
+        if (!is_array($params) && !is_object($params)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Event parameters must be an array or implement ArrayAccess; received "%s"',
+                'Event parameters must be an array or object; received "%s"',
                 (is_object($params) ? get_class($params) : gettype($params))
             ));
         }
@@ -119,7 +121,7 @@ class Event
     /**
      * Get all parameters
      * 
-     * @return array|ArrayAccess
+     * @return array|object|ArrayAccess
      */
     public function getParams()
     {
@@ -137,11 +139,20 @@ class Event
      */
     public function getParam($name, $default = null)
     {
-        if (!isset($this->params[$name])) {
-            return $default;
+        // Check in params that are arrays or implement array access
+        if (is_array($this->params) || $this->params instanceof ArrayAccess) {
+            if (!isset($this->params[$name])) {
+                return $default;
+            }
+
+            return $this->params[$name];
         }
 
-        return $this->params[$name];
+        // Check in normal objects
+        if (!isset($this->params->{$name})) {
+            return $default;
+        }
+        return $this->params->{$name};
     }
 
     /**
@@ -153,7 +164,13 @@ class Event
      */
     public function setParam($name, $value)
     {
-        $this->params[$name] = $value;
+        if (is_array($this->params) || $this->params instanceof ArrayAccess) {
+            // Arrays or objects implementing array access
+            $this->params[$name] = $value;
+        } else {
+            // Objects
+            $this->params->{$name} = $value;
+        }
         return $this;
     }
 

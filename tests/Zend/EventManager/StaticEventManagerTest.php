@@ -21,6 +21,7 @@
 
 namespace ZendTest\EventManager;
 use Zend\EventManager\StaticEventManager,
+    Zend\EventManager\EventManager,
     PHPUnit_Framework_TestCase as TestCase;
 
 /**
@@ -63,10 +64,10 @@ class StaticEventManagerTest extends TestCase
         $this->assertInstanceOf('Zend\EventManager\StaticEventManager', StaticEventManager::getInstance());
     }
 
-    public function testCanConnectCallbackToEvent()
+    public function testCanAttachCallbackToEvent()
     {
         $events = StaticEventManager::getInstance();
-        $events->connect('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $this->assertContains('bar', $events->getEvents('foo'));
         $expected = array($this, __FUNCTION__);
         $found    = false;
@@ -82,10 +83,10 @@ class StaticEventManagerTest extends TestCase
         $this->assertTrue($found, 'Did not find handler!');
     }
 
-    public function testCanConnectSameEventToMultipleResourcesAtOnce()
+    public function testCanAttachSameEventToMultipleResourcesAtOnce()
     {
         $events = StaticEventManager::getInstance();
-        $events->connect(array('foo', 'test'), 'bar', array($this, __FUNCTION__));
+        $events->attach(array('foo', 'test'), 'bar', array($this, __FUNCTION__));
         $this->assertContains('bar', $events->getEvents('foo'));
         $this->assertContains('bar', $events->getEvents('test'));
         $expected = array($this, __FUNCTION__);
@@ -107,7 +108,7 @@ class StaticEventManagerTest extends TestCase
     public function testCanDetachHandlerFromResource()
     {
         $events = StaticEventManager::getInstance();
-        $events->connect('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', array($this, __FUNCTION__));
         foreach ($events->getHandlers('foo', 'bar') as $handler) {
             // only one; retrieving it so we can detach
         }
@@ -119,14 +120,14 @@ class StaticEventManagerTest extends TestCase
     public function testCanGetEventsByResource()
     {
         $events = StaticEventManager::getInstance();
-        $events->connect('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $this->assertEquals(array('bar'), $events->getEvents('foo'));
     }
 
     public function testCanGetHandlersByResourceAndEvent()
     {
         $events = StaticEventManager::getInstance();
-        $events->connect('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $handlers = $events->getHandlers('foo', 'bar');
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $handlers);
         $this->assertEquals(1, count($handlers));
@@ -135,8 +136,8 @@ class StaticEventManagerTest extends TestCase
     public function testCanClearHandlersByResource()
     {
         $events = StaticEventManager::getInstance();
-        $events->connect('foo', 'bar', array($this, __FUNCTION__));
-        $events->connect('foo', 'baz', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'baz', array($this, __FUNCTION__));
         $events->clearHandlers('foo');
         $this->assertFalse($events->getHandlers('foo', 'bar'));
         $this->assertFalse($events->getHandlers('foo', 'baz'));
@@ -145,9 +146,9 @@ class StaticEventManagerTest extends TestCase
     public function testCanClearHandlersByResourceAndEvent()
     {
         $events = StaticEventManager::getInstance();
-        $events->connect('foo', 'bar', array($this, __FUNCTION__));
-        $events->connect('foo', 'baz', array($this, __FUNCTION__));
-        $events->connect('foo', 'bat', array($this, __FUNCTION__));
+        $events->attach('foo', 'bar', array($this, __FUNCTION__));
+        $events->attach('foo', 'baz', array($this, __FUNCTION__));
+        $events->attach('foo', 'bat', array($this, __FUNCTION__));
         $events->clearHandlers('foo', 'baz');
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getHandlers('foo', 'baz'));
         $this->assertEquals(0, count($events->getHandlers('foo', 'baz')));
@@ -155,5 +156,28 @@ class StaticEventManagerTest extends TestCase
         $this->assertEquals(1, count($events->getHandlers('foo', 'bar')));
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getHandlers('foo', 'bat'));
         $this->assertEquals(1, count($events->getHandlers('foo', 'bat')));
+    }
+
+    public function testCanPassArrayOfIdentifiersToConstructor()
+    {
+        $identifiers = array('foo', 'bar');
+        $manager = new EventManager($identifiers);
+    }
+
+    public function testHandlersAttachedToAnyIdentifierProvidedToEventManagerWillBeTriggered()
+    {
+        $identifiers = array('foo', 'bar');
+        $manager = new EventManager($identifiers);
+        $events  = StaticEventManager::getInstance();
+        $test    = new \stdClass;
+        $test->triggered = 0;
+        $events->attach('foo', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $events->attach('bar', 'bar', function($e) use ($test) {
+            $test->triggered++;
+        });
+        $manager->trigger('bar', $this, array());
+        $this->assertEquals(2, $test->triggered);
     }
 }

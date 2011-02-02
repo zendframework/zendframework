@@ -35,10 +35,49 @@ use Zend\Stdlib\CallbackHandler;
  */
 interface Filter
 {
+    /**
+     * Execute the filter chain
+     * 
+     * @param  string|object $context 
+     * @param  array $params 
+     * @return mixed
+     */
     public function run($context, array $params = array());
-    public function connect($callback);
+
+    /**
+     * Attach an intercepting filter
+     * 
+     * @param  callback $callback 
+     * @return CallbackHandler
+     */
+    public function attach($callback);
+
+    /**
+     * Detach an intercepting filter
+     * 
+     * @param  CallbackHandler $filter 
+     * @return bool
+     */
     public function detach(CallbackHandler $filter);
+
+    /**
+     * Get all intercepting filters
+     * 
+     * @return array
+     */
     public function getFilters();
+
+    /**
+     * Clear all filters
+     * 
+     * @return void
+     */
     public function clearFilters();
+
+    /**
+     * Get all filter responses
+     * 
+     * @return ResponseCollection
+     */
     public function getResponses();
 }

@@ -23,6 +23,8 @@
  */
 namespace Zend\EventManager;
 
+use Zend\Stdlib\CallbackHandler;
+
 /**
  * Static version of EventManager
  *
@@ -31,7 +33,7 @@ namespace Zend\EventManager;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StaticEventManager implements StaticEventDispatcher
+class StaticEventManager implements StaticEventCollection
 {
     /**
      * @var StaticEventManager
@@ -100,19 +102,19 @@ class StaticEventManager implements StaticEventDispatcher
      * </code>
      * 
      * @param  string|array $id Identifier(s) for event emitting component(s)
-     * @param  string|HandlerAggregate $event 
-     * @param  null|callback $callback PHP Callback
+     * @param  string $event 
+     * @param  callback $callback PHP Callback
      * @param  int $priority Priority at which handler should execute
      * @return void
      */
-    public function connect($id, $eventOrAggregate, $callback = null, $priority = 1000)
+    public function attach($id, $event, $callback, $priority = 1000)
     {
         $ids = (array) $id;
         foreach ($ids as $id) {
             if (!array_key_exists($id, $this->identifiers)) {
                 $this->identifiers[$id] = new EventManager();
             }
-            $this->identifiers[$id]->connect($eventOrAggregate, $callback, $priority);
+            $this->identifiers[$id]->attach($event, $callback, $priority);
         }
     }
 
@@ -120,10 +122,10 @@ class StaticEventManager implements StaticEventDispatcher
      * Detach a handler from an event offered by a given resource
      * 
      * @param  string|int $id
-     * @param  HandlerAggregate|\Zend\Stdlib\CallbackHandler $handler 
+     * @param  CallbackHandler $handler 
      * @return bool Returns true if event and handler found, and unsubscribed; returns false if either event or handler not found
      */
-    public function detach($id, $handler)
+    public function detach($id, CallbackHandler $handler)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;

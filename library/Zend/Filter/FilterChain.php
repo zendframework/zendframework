@@ -84,7 +84,7 @@ class FilterChain extends AbstractFilter
                         $callback = isset($spec['callback']) ? $spec['callback'] : false;
                         $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
                         if ($callback) {
-                            $this->connect($callback, $priority);
+                            $this->attach($callback, $priority);
                         }
                     }
                     break;
@@ -94,7 +94,7 @@ class FilterChain extends AbstractFilter
                         $options  = isset($spec['options'])  ? $spec['options']  : array();
                         $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
                         if ($name) {
-                            $this->connectByName($name, $options, $priority);
+                            $this->attachByName($name, $options, $priority);
                         }
                     }
                     break;
@@ -144,13 +144,13 @@ class FilterChain extends AbstractFilter
     }
 
     /**
-     * Connect a filter to the chain
+     * Attach a filter to the chain
      * 
      * @param  callback|Filter $callback A Filter implementation or valid PHP callback
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */
-    public function connect($callback, $priority = self::DEFAULT_PRIORITY)
+    public function attach($callback, $priority = self::DEFAULT_PRIORITY)
     {
         if (!is_callable($callback)) {
             if (!$callback instanceof Filter) {
@@ -166,9 +166,9 @@ class FilterChain extends AbstractFilter
     }
 
     /**
-     * Connect a filter to the chain using a short name
+     * Attach a filter to the chain using a short name
      *
-     * Retrieves the filter from the attached plugin broker, and then calls connect() 
+     * Retrieves the filter from the attached plugin broker, and then calls attach() 
      * with the retrieved instance.
      * 
      * @param  string $name 
@@ -176,7 +176,7 @@ class FilterChain extends AbstractFilter
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */
-    public function connectByName($name, $options = array(), $priority = self::DEFAULT_PRIORITY)
+    public function attachByName($name, $options = array(), $priority = self::DEFAULT_PRIORITY)
     {
         if (!is_array($options)) {
             $options = (array) $options;
@@ -186,7 +186,7 @@ class FilterChain extends AbstractFilter
             }
         }
         $filter = $this->broker($name, $options);
-        return $this->connect($filter, $priority);
+        return $this->attach($filter, $priority);
     }
 
     /**

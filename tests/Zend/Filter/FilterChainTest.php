@@ -44,8 +44,8 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testFiltersAreExecutedInFifoOrder()
     {
         $chain = new FilterChain();
-        $chain->connect(new LowerCase())
-              ->connect(new StripUpperCase());
+        $chain->attach(new LowerCase())
+              ->attach(new StripUpperCase());
         $value = 'AbC';
         $valueExpected = 'abc';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -54,8 +54,8 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testFiltersAreExecutedAccordingToPriority()
     {
         $chain = new FilterChain();
-        $chain->connect(new StripUpperCase())
-              ->connect(new LowerCase, 100);
+        $chain->attach(new StripUpperCase())
+              ->attach(new LowerCase, 100);
         $value = 'AbC';
         $valueExpected = 'b';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -64,7 +64,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testAllowsConnectingArbitraryCallbacks()
     {
         $chain = new FilterChain();
-        $chain->connect(function($value) {
+        $chain->attach(function($value) {
             return strtolower($value);
         });
         $value = 'AbC';
@@ -74,9 +74,9 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testAllowsConnectingViaClassShortName()
     {
         $chain = new FilterChain();
-        $chain->connectByName('string_trim', array('encoding' => 'utf-8'), 100)
-              ->connectByName('strip_tags')
-              ->connectByName('string_to_lower', array('encoding' => 'utf-8'), 900);
+        $chain->attachByName('string_trim', array('encoding' => 'utf-8'), 100)
+              ->attachByName('strip_tags')
+              ->attachByName('string_to_lower', array('encoding' => 'utf-8'), 900);
         $value = '<a name="foo"> ABC </a>';
         $valueExpected = 'abc';
         $this->assertEquals($valueExpected, $chain->filter($value));

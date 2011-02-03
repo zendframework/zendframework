@@ -605,7 +605,7 @@ class InputFilter
                     if (is_string($filter) || is_array($filter)) {
                         $filter = $this->_getFilter($filter);
                     }
-                    $filterRule[self::FILTER_CHAIN]->addFilter($filter);
+                    $filterRule[self::FILTER_CHAIN]->attach($filter);
                 }
             }
 

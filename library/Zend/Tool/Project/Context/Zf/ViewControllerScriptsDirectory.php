@@ -90,8 +90,8 @@ class ViewControllerScriptsDirectory extends \Zend\Tool\Project\Context\Filesyst
     protected function _convertControllerNameToFilesystemName($controllerName)
     {
         $filter = new \Zend\Filter\FilterChain();
-        $filter->addFilter(new \Zend\Filter\Word\CamelCaseToDash())
-            ->addFilter(new \Zend\Filter\StringToLower());
+        $filter->attach(new \Zend\Filter\Word\CamelCaseToDash())
+               ->attach(new \Zend\Filter\StringToLower());
         return $filter->filter($controllerName);
     }
 

@@ -88,7 +88,7 @@ class Manifest implements RegistryEnabled, MetadataManifestable
 
         // setup the camelCase to dashed filter to use since cli expects dashed named
         $lowerFilter = new \Zend\Filter\FilterChain();
-        $lowerFilter->addFilter(new \Zend\Filter\StringToLower());
+        $lowerFilter->attach(new \Zend\Filter\StringToLower());
 
         // get the registry to get the action and provider repository
         $actionRepository   = $this->_registry->getActionRepository();

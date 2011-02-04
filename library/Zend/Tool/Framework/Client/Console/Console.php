@@ -281,8 +281,8 @@ class Console
     {
         if (!$this->_filterToClientNaming) {
             $filter = new \Zend\Filter\FilterChain();
-            $filter->addFilter(new \Zend\Filter\Word\CamelCaseToDash());
-            $filter->addFilter(new \Zend\Filter\StringToLower());
+            $filter->attach(new \Zend\Filter\Word\CamelCaseToDash());
+            $filter->attach(new \Zend\Filter\StringToLower());
 
             $this->_filterToClientNaming = $filter;
         }

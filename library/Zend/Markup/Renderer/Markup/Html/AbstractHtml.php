@@ -50,11 +50,11 @@ abstract class AbstractHtml extends AbstractMarkup
      */
     public function __construct()
     {
-        $this->appendFilter(new HtmlEntitiesFilter(array(
+        $this->addFilter(new HtmlEntitiesFilter(array(
             'encoding'   => $this->getEncoding(),
             'quotestyle' => ENT_QUOTES
         )));
-        $this->appendFilter(new CallbackFilter('nl2br'));
+        $this->addFilter(new CallbackFilter('nl2br'));
     }
 
     /**

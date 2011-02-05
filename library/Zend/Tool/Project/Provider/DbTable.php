@@ -222,7 +222,7 @@ class DbTable
         if ($this->_nameFilter == null) {
             $this->_nameFilter = new \Zend\Filter\FilterChain();
             $this->_nameFilter
-                ->addFilter(new \Zend\Filter\Word\UnderscoreToCamelCase());
+                 ->attach(new \Zend\Filter\Word\UnderscoreToCamelCase());
         }
         
         return $this->_nameFilter->filter($tableName);

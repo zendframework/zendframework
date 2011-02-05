@@ -123,7 +123,7 @@ class AbstractRendererTest extends \PHPUnit_Framework_TestCase
         $testMarkup->addChild(new Token('booh', Token::TYPE_NONE, '', array(), $testMarkup));
 
         // add a filter to the test markup
-        $this->_renderer->getMarkup('test')->appendFilter(new StringToUpperFilter());
+        $this->_renderer->getMarkup('test')->addFilter(new StringToUpperFilter(), -1);
 
         $this->assertEquals('baz fooBOOHbar', $this->_renderer->render($tokenList));
     }

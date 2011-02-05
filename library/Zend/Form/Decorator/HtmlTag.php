@@ -115,8 +115,8 @@ class HtmlTag extends AbstractDecorator
     {
         if (!isset($this->_tagFilter)) {
             $this->_tagFilter = new Filter\FilterChain();
-            $this->_tagFilter->addFilter(new Filter\Alnum())
-                             ->addFilter(new Filter\StringToLower());
+            $this->_tagFilter->attach(new Filter\Alnum())
+                             ->attach(new Filter\StringToLower());
         }
         return $this->_tagFilter->filter($tag);
     }

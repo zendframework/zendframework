@@ -187,7 +187,7 @@ abstract class AbstractLocale
      * @param string|array $detail Detail to return information for
      * @return array
      */
-    public static function getLanguage($locale, $invert = false, $detail = null)
+    public static function getDisplayLanguage($locale, $invert = false, $detail = null)
     {
         throw new UnsupportedMethod('This implementation does not support the selected locale information');
     }
@@ -201,7 +201,7 @@ abstract class AbstractLocale
      * @param string|array $detail Detail to return information for
      * @return array
      */
-    public static function getScript($locale, $invert = false, $detail = null)
+    public static function getDisplayScript($locale, $invert = false, $detail = null)
     {
         throw new UnsupportedMethod('This implementation does not support the selected locale information');
     }
@@ -215,7 +215,21 @@ abstract class AbstractLocale
      * @param string|array $detail Detail to return information for
      * @return array
      */
-    public static function getTerritory($locale, $invert = false, $detail = null)
+    public static function getDisplayRegion($locale, $invert = false, $detail = null)
+    {
+        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+    }
+
+    /**
+     * Returns detailed informations from the variant table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale Normalized locale
+     * @param boolean $invert Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getDisplayVariant($locale, $invert = false, $detail = null)
     {
         throw new UnsupportedMethod('This implementation does not support the selected locale information');
     }

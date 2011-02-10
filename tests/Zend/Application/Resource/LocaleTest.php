@@ -38,17 +38,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        // Store original autoloaders
-        $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no
-            // autoloaders registered...
-            $this->loaders = array();
-        }
-
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
-
         $this->application = new Application\Application('testing');
 
         $this->bootstrap = new Application\Bootstrap($this->application);
@@ -58,18 +47,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        // Restore original autoloaders
-        $loaders = spl_autoload_functions();
-        foreach ($loaders as $loader) {
-            spl_autoload_unregister($loader);
-        }
-
-        foreach ($this->loaders as $loader) {
-            spl_autoload_register($loader);
-        }
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesLocaleObject()
@@ -103,7 +80,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Registry::isRegistered('Foo_Bar'));
         $this->assertSame(Registry::get('Foo_Bar'), $locale);
     }
-    
+
     public function testOptionsPassedToResourceAreUsedToSetLocaleState1()
     {
         $this->markTestSkipped('Skipped until Zend\Locale and the Resource can be further examined. Logic in the resource and in Locale do not match up.');

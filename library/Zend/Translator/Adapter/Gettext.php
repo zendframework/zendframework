@@ -43,7 +43,6 @@ class Gettext extends TranslationAdapter
     private $_bigEndian   = false;
     private $_file        = false;
     private $_adapterInfo = array();
-    private $_data        = array();
 
     /**
      * Read values from the MO file
@@ -72,7 +71,7 @@ class Gettext extends TranslationAdapter
      */
     protected function _loadTranslationData($filename, $locale, array $options = array())
     {
-        $this->_data      = array();
+        $result           = array();
         $this->_bigEndian = false;
         $this->_file      = @fopen($filename, 'rb');
         if (!$this->_file) {
@@ -126,26 +125,26 @@ class Gettext extends TranslationAdapter
                 $translate = fread($this->_file, $transtemp[$count * 2 + 1]);
                 $translate = explode("\0", $translate);
                 if ((count($original) > 1) && (count($translate) > 1)) {
-                    $this->_data[$locale][$original[0]] = $translate;
+                    $result[$locale][$original[0]] = $translate;
                     array_shift($original);
                     foreach ($original as $orig) {
-                        $this->_data[$locale][$orig] = '';
+                        $result[$locale][$orig] = '';
                     }
                 } else {
-                    $this->_data[$locale][$original[0]] = $translate[0];
+                    $result[$locale][$original[0]] = $translate[0];
                 }
             }
         }
 
-        $this->_data[$locale][''] = trim($this->_data[$locale]['']);
-        if (empty($this->_data[$locale][''])) {
+        $result[$locale][''] = trim($result[$locale]['']);
+        if (empty($result[$locale][''])) {
             $this->_adapterInfo[$filename] = 'No adapter information available';
         } else {
-            $this->_adapterInfo[$filename] = $this->_data[$locale][''];
+            $this->_adapterInfo[$filename] = $result[$locale][''];
         }
 
-        unset($this->_data[$locale]['']);
-        return $this->_data;
+        unset($result[$locale]['']);
+        return $result;
     }
 
     /**

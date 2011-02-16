@@ -24,7 +24,7 @@
 namespace Zend\Translator\Adapter;
 
 use Zend\Translator\Adapter as TranslationAdapter,
-	Zend\Translator\Adapter\Exception\InvalidArgumentException;
+    Zend\Translator\Adapter\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
@@ -37,8 +37,6 @@ use Zend\Translator\Adapter as TranslationAdapter,
  */
 class Ini extends TranslationAdapter
 {
-    private $_data = array();
-
     /**
      * Load translation data
      *
@@ -51,18 +49,14 @@ class Ini extends TranslationAdapter
      */
     protected function _loadTranslationData($data, $locale, array $options = array())
     {
-        $this->_data = array();
+        $result[$locale] = array();
         if (!file_exists($data)) {
             throw new InvalidArgumentException("Ini file '".$data."' not found");
         }
 
-        $inidata = parse_ini_file($data, false);
-        if (!isset($this->_data[$locale])) {
-            $this->_data[$locale] = array();
-        }
-
-        $this->_data[$locale] = array_merge($this->_data[$locale], $inidata);
-        return $this->_data;
+        $inidata         = parse_ini_file($data, false);
+        $result[$locale] = array_merge($result[$locale], $inidata);
+        return $result;
     }
 
     /**

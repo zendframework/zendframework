@@ -107,7 +107,7 @@ class Intl extends AbstractLocale
      * @param string|array $detail Detail to return information for
      * @return array
      */
-    public static function getDisplayRegion($locale, $invert = false, $detail = null)
+    public static function getDisplayTerritory($locale, $invert = false, $detail = null)
     {
         if ($detail !== null) {
             return Locale::getDisplayRegion($locale);

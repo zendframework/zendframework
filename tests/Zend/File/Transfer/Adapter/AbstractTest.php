@@ -95,7 +95,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $loader = $this->adapter->getPluginLoader('validator');
         $this->adapter->addPrefixPath('Foo_Valid', 'Foo/Valid/', 'validator');
         $paths = $loader->getPaths('Foo_Valid');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testPassingNoTypeWhenAddingPrefixPathToAdapterShouldGeneratePathsForAllTypes()
@@ -104,9 +104,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $validateLoader = $this->adapter->getPluginLoader('validator');
         $filterLoader   = $this->adapter->getPluginLoader('filter');
         $paths = $validateLoader->getPaths('Foo\Validator');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
 
@@ -132,13 +132,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             array('type' => 'filter', 'prefix' => 'Bar\Filter', 'path' => 'Bar/Filter/'),
         ));
         $paths = $validatorLoader->getPaths('Foo\Valid');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Bar\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Baz\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $this->assertEquals(2, count($paths));
     }
 
@@ -146,9 +146,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $loader = $this->adapter->getPluginLoader('validator');
         $paths  = $loader->getPaths('Zend\Validator');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths  = $loader->getPaths('Zend\Validator\File');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testAdapterShouldAllowAddingValidatorInstance()
@@ -346,9 +346,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $loader = $this->adapter->getPluginLoader('filter');
         $paths  = $loader->getPaths('Zend\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths  = $loader->getPaths('Zend\Filter\File');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testAdapterShouldAllowAddingFilterInstance()

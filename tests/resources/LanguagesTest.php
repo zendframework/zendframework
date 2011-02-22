@@ -27,7 +27,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
+class resources_LanguagesTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_langDir      = null;
@@ -36,7 +36,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_langDir = dirname(dirname(dirname(__DIR__)))
+        $this->_langDir = dirname(dirname(__DIR__))
                         . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages';
         if (!is_readable($this->_langDir)) {
             throw new Exception('Language resource directory "'.$this->_langDir.'" not readable.');

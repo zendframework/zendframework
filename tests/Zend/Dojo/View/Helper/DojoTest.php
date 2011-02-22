@@ -25,8 +25,8 @@ use Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
     Zend\Json\Json,
     Zend\Registry,
-    Zend\View\View,
-    Zend\View\ViewEngine;
+    Zend\View\PhpRenderer,
+    Zend\View\Renderer;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Dojo.
@@ -59,7 +59,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -72,7 +72,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToSetViewProperty()
     {
-        $this->assertTrue($this->helper->view instanceof ViewEngine);
+        $this->assertTrue($this->helper->view instanceof Renderer);
     }
 
     public function testNoModulesShouldBeRegisteredByDefault()
@@ -362,9 +362,9 @@ function() {
     public function testHelperStorageShouldPersistBetweenViewObjects()
     {
         $view1 = $this->getView();
-        $dojo1 = $view1->getHelper('dojo');
+        $dojo1 = $view1->broker('dojo');
         $view2 = $this->getView();
-        $dojo2 = $view1->getHelper('dojo');
+        $dojo2 = $view1->broker('dojo');
         $this->assertSame($dojo1, $dojo2);
     }
 
@@ -415,7 +415,7 @@ function() {
     public function testStringSerializationShouldBeDoctypeAware()
     {
         $view = $this->getView();
-        $view->doctype('HTML4_LOOSE');
+        $view->broker('doctype')->direct('HTML4_LOOSE');
         $this->helper->setView($view);
         $this->setupDojo();
         $html = $this->helper->__toString();
@@ -423,7 +423,7 @@ function() {
         $this->assertRegexp('|<script [^>]*>[\r\n]+\s*//<!--|', $html);
 
         $this->helper = new DojoHelper();
-        $view->doctype('XHTML1_STRICT');
+        $view->broker('doctype')->direct('XHTML1_STRICT');
         $this->helper->setView($view);
         $this->setupDojo();
         $html = $this->helper->__toString();
@@ -441,7 +441,7 @@ function() {
 
         $view = $this->getView();
         $this->assertNotSame($this->view, $view);
-        $helper = $view->dojo();
+        $helper = $view->broker('dojo')->direct();
         $this->assertSame($this->helper, $helper);
     }
 
@@ -583,9 +583,9 @@ function() {
 
         $keys  = array();
         foreach ($array as $dijit) {
-            $keys[] = $dijit['id'];
-            $this->assertTrue(array_key_exists('params', $dijit));
-            $this->assertTrue(is_array($dijit['params']));
+            $keys[] = $dijit->id;
+            $this->assertTrue(isset($dijit->params));
+            $this->assertTrue(is_object($dijit->params));
         }
         $this->assertSame(array('foo', 'bar'), $keys);
     }
@@ -798,7 +798,7 @@ function() {
     public function testZendDijitOnLoadMarkupShouldPrecedeAllOtherOnLoadEvents()
     {
         $this->helper->addOnLoad('zend.custom');
-        $this->view->textBox('foo', 'bar');
+        $this->view->broker('textbox')->direct('foo', 'bar');
         $test = $this->helper->__toString();
         $this->assertRegexp('/zendDijits.*?(zend\.custom)/s', $test, 'Generated markup: ' . $test);
     }

@@ -25,7 +25,7 @@
 namespace Zend\Dojo\View\Helper;
 
 use Zend\Json\Json,
-    Zend\View\ViewEngine as View,
+    Zend\View\Renderer as View,
     Zend\View\Helper\HtmlElement;
 
 /**
@@ -87,7 +87,7 @@ abstract class Dijit extends HtmlElement
     public function setView(View $view)
     {
         parent::setView($view);
-        $this->dojo = $this->view->dojo();
+        $this->dojo = $this->view->broker('dojo');
         $this->dojo->enable();
         return $this;
     }

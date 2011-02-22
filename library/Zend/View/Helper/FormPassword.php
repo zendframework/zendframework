@@ -78,7 +78,7 @@ class FormPassword extends FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof \Zend\View\AbstractView) && !$this->view->broker('doctype')->isXhtml()) {
+        if (($this->view instanceof \Zend\View\PhpRenderer) && !$this->view->broker('doctype')->isXhtml()) {
             $endTag= '>';
         }
 

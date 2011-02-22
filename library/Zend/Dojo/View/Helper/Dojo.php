@@ -26,7 +26,7 @@ namespace Zend\Dojo\View\Helper;
 
 use Zend\Dojo\View\Exception,
     Zend\Registry,
-    Zend\View\ViewEngine as View,
+    Zend\View\Renderer as View,
     Zend\View\Helper\AbstractHelper as AbstractViewHelper;
 
 /**

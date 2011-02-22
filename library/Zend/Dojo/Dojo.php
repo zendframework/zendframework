@@ -23,7 +23,8 @@
  */
 namespace Zend\Dojo;
 
-use Zend\View\ViewEngine as View;
+use Zend\View\Renderer,
+    Zend\View\PhpRenderer;
 
 /**
  * Enable Dojo components
@@ -80,14 +81,15 @@ class Dojo
     /**
      * Dojo-enable a view instance
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return void
      */
-    public static function enableView(View $view)
+    public static function enableView(Renderer $view)
     {
-        if (false === $view->getPluginLoader('helper')->getPaths('Zend\Dojo\View\Helper')) {
-            $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');
+        if (!$view instanceof PhpRenderer) {
+            return;
         }
+        $view->broker()->getClassLoader()->registerPlugins(new View\HelperLoader());
     }
 }
 

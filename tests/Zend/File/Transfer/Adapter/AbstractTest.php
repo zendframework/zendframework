@@ -85,7 +85,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
     {
         $loader = new PrefixPathLoader();
-        
+
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid type "BOGUS" provided to setPluginLoader');
         $this->adapter->setPluginLoader($loader, 'bogus');
     }
@@ -561,12 +561,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $files = $this->adapter->getFileInfo('unknown');
     }
 
-    public function testGetUnknownOption()
-    {
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Unknown option: unknownOption = unknown');
-        $this->adapter->setOptions(array('unknownOption' => 'unknown'));
-    }
-
     public function testAdapterShouldAllowRetrievingFileName()
     {
         $path = __DIR__
@@ -694,7 +688,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $directory = __DIR__;
         $this->adapter->setDestination($directory, 'nonexisting');
         $this->assertEquals($directory, $this->adapter->getDestination('nonexisting'));
-        
+
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'not find');
         $this->assertTrue(is_string($this->adapter->getDestination('reallynonexisting')));
     }

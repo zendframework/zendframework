@@ -834,6 +834,20 @@ class File extends Xhtml
     }
 
     /**
+     * Set object state from options array
+     *
+     * @param  array $options
+     * @return \Zend\Form\Element\File
+     */
+    public function setOptions(array $options)
+    {
+        parent::setOptions($options);
+        $adapter = $this->getTransferAdapter();
+        $adapter->setOptions($options);
+        return $this;
+    }
+
+    /**
      * Returns the filesize for this file element
      *
      * @return string|array Filesize

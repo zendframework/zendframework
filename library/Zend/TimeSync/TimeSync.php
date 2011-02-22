@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -232,9 +231,9 @@ class TimeSync implements \IteratorAggregate
      * facade and will try to return the date from the first server that
      * returns a valid result.
      *
-     * @param   $locale - OPTIONAL locale
-     * @return  object
-     * @throws  \Zend\TimeSync\Exception
+     * @param  Zend_Locale $locale OPTIONAL locale
+     * @return Zend_TimeSync
+     * @throws \Zend\TimeSync\Exception
      */
     public function getDate($locale = null)
     {

@@ -1713,10 +1713,10 @@ print_r(Zend_Locale::getTranslationList('country', 'de'));
             <title>Converting country name in one language to another</title>
 
             <programlisting language="php"><![CDATA[
-$code2name = Zend_Locale::getLanguageTranslationList('en_US');
+$code2name = Zend_Locale::getTranslationList('language', 'en_US');
 $name2code = array_flip($code2name);
 $frenchCode = $name2code['French'];
-echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
+echo Zend_Locale::getTranslation($frenchCode, 'language', 'de_AT');
 // output is the German name of the French language
 ]]></programlisting>
         </example>
@@ -1724,8 +1724,8 @@ echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
         <para>
             To generate a list of all languages known by <classname>Zend_Locale</classname>, with
             each language name shown in its own language, try the example below in a web page.
-            Similarly, <methodname>getCountryTranslationList()</methodname> and
-            <methodname>getCountryTranslation()</methodname> could be used to create a table mapping
+            Similarly, <methodname>getTranslationList()</methodname> and
+            <methodname>getTranslation()</methodname> could be used to create a table mapping
             your native language names for regions to the names of the regions shown in another
             language. Use a <code>try .. catch</code> block to handle exceptions that occur when
             using a locale that does not exist. Not all languages are also locales. In the example,
@@ -1736,11 +1736,11 @@ echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
             <title>All Languages written in their native language</title>
 
             <programlisting language="php"><![CDATA[
-$list = Zend_Locale::getLanguageTranslationList('auto');
+$list = Zend_Locale::getTranslationList('language', 'auto');
 
 foreach($list as $language => $content) {
     try {
-        $output = Zend_Locale::getLanguageTranslation($language, $language);
+        $output = Zend_Locale::getTranslation($language, 'language', $language);
         if (is_string($output)) {
             print "\n<br>[".$language."] ".$output;
         }

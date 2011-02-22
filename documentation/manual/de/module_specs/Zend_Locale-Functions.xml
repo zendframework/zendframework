@@ -1829,10 +1829,10 @@ print_r(Zend_Locale::getTranslationList('country', 'fr'));
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en_US');
-$code2name = $locale->getLanguageTranslationList();
+$code2name = $locale->getTranslationList('language');
 $name2code = array_flip($code2name);
 $frenchCode = $name2code['French'];
-echo $locale->getLanguageTranslation($frenchCode, 'es');
+echo $locale->getTranslation($frenchCode, 'language', 'es');
 // Ausgegeben wird der Spanische Name der Fransösischen Sprache
 ]]></programlisting>
         </example>
@@ -1841,8 +1841,8 @@ echo $locale->getLanguageTranslation($frenchCode, 'es');
             Um von <classname>Zend_Locale</classname> eine Liste aller bekannten Sprachen zu
             bekommen wobei jede Sprache in Ihrer eigenen Sprache geschrieben wird, kann das untere
             Beispiel in einer Web Seite benutzt werden. Genauso können
-            <methodname>getCountryTranslationList()</methodname> und
-            <methodname>getCountryTranslation()</methodname> benutzt werden um eine Tabelle zu
+            <methodname>getTranslationList()</methodname> und
+            <methodname>getTranslation()</methodname> benutzt werden um eine Tabelle zu
             erhalten die Namen für Muttersprachen einer Region und Namen für Regionen in einer
             anderen Sprache zu erhalten. Man muß einen <code>try .. catch</code> Block benutzen um
             Ausnahmen abzufangen die auftreten wenn ein Gebietsschema benutzt wird das nicht
@@ -1854,11 +1854,11 @@ echo $locale->getLanguageTranslation($frenchCode, 'es');
             <title>Alle Sprachen geschrieben in Ihrer Muttersprache</title>
 
             <programlisting language="php"><![CDATA[
-$list = Zend_Locale::getLanguageTranslationList('auto');
+$list = Zend_Locale::getTranslationList('language', 'auto');
 
 foreach($list as $language => $content) {
     try {
-        $output = Zend_Locale::getLanguageTranslation($language, $language);
+        $output = Zend_Locale::getTranslation($language, 'language', $language);
         if (is_string($output)) {
             print "\n<br>[".$language."] ".$output;
         }

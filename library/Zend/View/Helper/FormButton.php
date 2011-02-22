@@ -83,16 +83,16 @@ class FormButton extends FormElement
             $attribs['disabled'] = 'disabled';
         }
 
-        $content = ($escape) ? $this->view->escape($content) : $content;
+        $content = ($escape) ? $this->view->vars()->escape($content) : $content;
 
         $xhtml = '<button'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
+                . ' name="' . $this->view->vars()->escape($name) . '"'
+                . ' id="' . $this->view->vars()->escape($id) . '"'
                 . ' type="' . $type . '"';
 
         // add a value if one is given
         if (!empty($value)) {
-            $xhtml .= ' value="' . $this->view->escape($value) . '"';
+            $xhtml .= ' value="' . $this->view->vars()->escape($value) . '"';
         }
 
         // add attributes and close start tag

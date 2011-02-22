@@ -143,8 +143,10 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsReadableShouldNotLockWhenTestingForNonExistantFileInPhar()
     {
-        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-            $this->markTestSkipped();
+        if (ini_get('phar.readonly')) {
+            $this->markTestSkipped(
+                "creating phar archive is disabled by the php.ini setting 'phar.readonly'"
+            );
         }
 
         $pharFile = __DIR__ . '/_files/LoaderTest.phar';

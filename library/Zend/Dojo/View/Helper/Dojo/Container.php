@@ -27,7 +27,7 @@ namespace Zend\Dojo\View\Helper\Dojo;
 use Zend\Dojo\View\Exception,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Config\Config,
-    Zend\View\ViewEngine as View,
+    Zend\View\Renderer as View,
     Zend\Json\Json;
 
 /**

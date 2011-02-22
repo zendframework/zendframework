@@ -46,7 +46,7 @@ class FormButtonTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\View();
+        $this->view = new \Zend\View\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormButton();
         $this->helper->setView($this->view);
     }

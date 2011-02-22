@@ -47,7 +47,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\View();
+        $this->view = new \Zend\View\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormLabel();
         $this->helper->setView($this->view);
     }
@@ -77,9 +77,9 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
 
     public function testViewIsSetAndSameAsCallingViewObject()
     {
-        $this->assertTrue(isset($this->helper->view));
-        $this->assertTrue($this->helper->view instanceof \Zend\View\ViewEngine);
-        $this->assertSame($this->view, $this->helper->view);
+        $view = $this->helper->getView();
+        $this->assertTrue($view instanceof \Zend\View\Renderer);
+        $this->assertSame($this->view, $view);
     }
 
     public function testAttribsAreSet()

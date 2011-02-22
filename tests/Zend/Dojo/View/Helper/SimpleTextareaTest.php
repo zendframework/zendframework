@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 use Zend\Dojo\View\Helper\SimpleTextarea as SimpleTextareaHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_SimpleTextarea.
@@ -83,7 +83,7 @@ class SimpleTextareaTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<textarea[^>]*(dojoType="dijit.form.SimpleTextarea")/', $html);
-        $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
+        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
     }
 
     public function testPassingIdAsAttributeShouldOverrideUsingNameAsId()

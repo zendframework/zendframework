@@ -193,7 +193,7 @@ class MultiDb extends AbstractResource
         if (is_string($cache)) {
             $bootstrap = $this->getBootstrap();
             if ($bootstrap instanceof \Zend\Application\ResourceBootstrapper 
-                && $bootstrap->hasPluginResource('CacheManager')
+                && $bootstrap->getBroker()->hasPlugin('CacheManager')
             ) {
                 $cacheManager = $bootstrap->bootstrap('CacheManager')
                     ->getResource('CacheManager');

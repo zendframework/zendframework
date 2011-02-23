@@ -49,9 +49,12 @@ class SessionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Session\Manager', $sessionManager);
     }
 
+    /**
+     * @group disable
+     */
     public function testSetSaveHandler()
     {
-        $saveHandler = $this->getMock('Zend\\Session\\SaveHandler');
+        $saveHandler = $this->getMock('Zend\Session\SaveHandler');
 
         $this->resource->setSaveHandler($saveHandler);
         $this->assertSame($saveHandler, $this->resource->getSaveHandler());

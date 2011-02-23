@@ -21,8 +21,7 @@
 
 namespace ZendTest\Application\Resource;
 
-use Zend\Loader\Autoloader,
-    Zend\Application\Resource\Multidb as MultidbResource,
+use Zend\Application\Resource\MultiDb as MultidbResource,
     Zend\Application,
     Zend\Controller\Front as FrontController,
     Zend\Db\Table\Table as DBTable,
@@ -63,8 +62,6 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
             $this->loaders = array();
         }
 
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
         $this->application = new Application\Application('testing');
         $this->bootstrap = new Application\Bootstrap($this->application);
 
@@ -84,9 +81,6 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         foreach ($this->loaders as $loader) {
             spl_autoload_register($loader);
         }
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesResourcePluginObject()
@@ -202,7 +196,7 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
         $options['defaultMetadataCache'] = $cache;
         $resource = new MultidbResource($options);
         $resource->init();
-        $this->assertType('Zend\Cache\Frontend\Core', DBTable::getDefaultMetadataCache());
+        $this->assertInstanceOf('Zend\Cache\Frontend\Core', DBTable::getDefaultMetadataCache());
     }
 
     /**
@@ -224,13 +218,13 @@ class MultidbResourceTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        $this->bootstrap->registerPluginResource('cachemanager', $configCache);
+        $this->bootstrap->getBroker()->registerSpec('cachemanager', $configCache);
 
         $options = $this->_dbOptions;
         $options['defaultMetadataCache'] = 'database';
         $resource = new MultidbResource($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $this->assertType('Zend\Cache\Frontend\Core', DBTable::getDefaultMetadataCache());
+        $this->assertInstanceOf('Zend\Cache\Frontend\Core', DBTable::getDefaultMetadataCache());
     }
 }

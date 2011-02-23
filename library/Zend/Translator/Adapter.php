@@ -427,7 +427,7 @@ abstract class Adapter
             if (!isset($this->_translate[$temp[0]]) and !isset($this->_translate[$locale])) {
                 if (!$this->_options['disableNotices']) {
                     if ($this->_options['log']) {
-                        $this->_options['log']->log("The language '{$locale}' has to be added before it can be used.", $this->_options['logPriority']););
+                        $this->_options['log']->log("The language '{$locale}' has to be added before it can be used.", $this->_options['logPriority']);
                     } else {
                         trigger_error("The language '{$locale}' has to be added before it can be used.", E_USER_NOTICE);
                     }
@@ -440,7 +440,7 @@ abstract class Adapter
         if (empty($this->_translate[$locale])) {
             if (!$this->_options['disableNotices']) {
                 if ($this->_options['log']) {
-                    $this->_options['log']->log("No translation for the language '{$locale}' available.", $this->_options['logPriority']););
+                    $this->_options['log']->log("No translation for the language '{$locale}' available.", $this->_options['logPriority']);
                 } else {
                     trigger_error("No translation for the language '{$locale}' available.", E_USER_NOTICE);
                 }
@@ -820,7 +820,7 @@ abstract class Adapter
             $message = str_replace('%message%', $message, $this->_options['logMessage']);
             $message = str_replace('%locale%', $locale, $message);
             if ($this->_options['log']) {
-                $this->_options['log']->log($message, $this->_options['logPriority']););
+                $this->_options['log']->log($message, $this->_options['logPriority']);
             } else {
                 trigger_error($message, E_USER_NOTICE);
             }

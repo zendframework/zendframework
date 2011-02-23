@@ -118,4 +118,21 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $filter = $this->_filter;
         $this->assertEquals('/', $filter('/'));
     }
+
+    /**
+     * @ZF-10891
+     */
+    public function testZF10891()
+    {
+        $filter = $this->_filter;
+        $this->assertEquals('Зенд', $filter('   Зенд   '));
+        $this->assertEquals('Зенд', $filter('Зенд   '));
+        $this->assertEquals('Зенд', $filter('   Зенд'));
+
+        $trim_charlist = " \t\n\r\x0B・。";
+        $filter = new StringTrimFilter($trim_charlist);
+        $this->assertEquals('Зенд', $filter->filter('。  Зенд  。'));
+
+
+    }
 }

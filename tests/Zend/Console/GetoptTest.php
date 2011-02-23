@@ -525,4 +525,119 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($fooValue, $opts->foo);
     }
+
+    public function testGetoptIgnoreCumulativeParamsByDefault()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('--colors=red', '--colors=green', '--colors=blue')
+        );
+        
+        $this->assertType('string', $opts->colors);
+        $this->assertEquals('blue', $opts->colors, 'Should be equal to last variable');
+    }
+
+    public function testGetoptWithCumulativeParamsOptionHandleArrayValues()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('--colors=red', '--colors=green', '--colors=blue'),
+            array(Getopt::CONFIG_CUMULATIVE_PARAMETERS => true)
+        );
+
+        $this->assertType('array', $opts->colors, 'Colors value should be an array');
+        $this->assertEquals('red,green,blue', implode(',', $opts->colors));
+    }
+
+    public function testGetoptIgnoreCumulativeFlagsByDefault()
+    {
+        $opts = new Getopt('v', array('-v', '-v', '-v'));
+        
+        $this->assertEquals(true, $opts->v);
+    }
+
+    public function testGetoptWithCumulativeFlagsOptionHandleCountOfEqualFlags()
+    {
+        $opts = new Getopt('v', array('-v', '-v', '-v'),
+                           array(Getopt::CONFIG_CUMULATIVE_FLAGS => true));
+
+        $this->assertEquals(3, $opts->v);
+    }
+
+    public function testGetoptIgnoreParamsWithMultipleValuesByDefault()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('--colors=red,green,blue')
+        );
+
+        $this->assertEquals('red,green,blue', $opts->colors);
+    }
+
+    public function testGetoptWithNotEmptyParameterSeparatorSplitMultipleValues()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('--colors=red,green,blue'),
+            array(Getopt::CONFIG_PARAMETER_SEPARATOR => ',')
+        );
+
+        $this->assertEquals('red:green:blue', implode(':', $opts->colors));
+    }
+
+    public function testGetoptWithFreeformFlagOptionRecognizeAllFlags()
+    {
+        $opts = new Getopt(
+            array('colors' => 'Colors-option'),
+            array('--freeform'),
+            array(Getopt::CONFIG_FREEFORM_FLAGS => true)
+        );
+
+        $this->assertEquals(true, $opts->freeform);
+    }
+
+    public function testGetoptWithFreeformFlagOptionRecognizeFlagsWithValue()
+    {
+        $opts = new Getopt(
+            array('colors' => 'Colors-option'),
+            array('color', '--freeform', 'test', 'zend'),
+            array(Getopt::CONFIG_FREEFORM_FLAGS => true)
+        );
+
+        $this->assertEquals('test', $opts->freeform);
+    }
+
+    public function testGetoptRaiseExceptionForNumericOptionsByDefault()
+    {
+        $opts = new Getopt(
+            array('colors=s' => 'Colors-option'),
+            array('red', 'green', '-3')
+        );
+
+        $this->setExpectedException('\Zend\Console\Exception\RuntimeException');
+        $opts->parse();
+    }
+
+    public function testGetoptCanRecognizeNumericOprions()
+    {
+        $opts = new Getopt(
+            array('lines=#' => 'Lines-option'),
+            array('other', 'arguments', '-5'),
+            array(Getopt::CONFIG_NUMERIC_FLAGS => true)
+        );
+
+        $this->assertEquals(5, $opts->lines);
+    }
+
+    public function testGetoptRaiseExceptionForNumericOptionsIfAneHandlerIsSpecified()
+    {
+        $opts = new Getopt(
+            array('lines=s' => 'Lines-option'),
+            array('other', 'arguments', '-5'),
+            array(Getopt::CONFIG_NUMERIC_FLAGS => true)
+        );
+
+        $this->setExpectedException('\Zend\Console\Exception\RuntimeException');
+        $opts->parse();
+    }
 }

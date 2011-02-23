@@ -423,5 +423,19 @@ a {
 
         $this->assertEquals($expected, $test);
     }
-}
 
+    /**
+     * @group ZF-9532
+     */
+    public function testRenderConditionalCommentsShouldNotContainHtmlEscaping()
+    {
+        $style = 'a{display:none;}';
+        $this->helper->appendStyle($style, array(
+        	'conditional' => 'IE 8'
+        ));
+        $value = $this->helper->toString();
+
+        $this->assertNotContains('<!--' . PHP_EOL, $value);
+        $this->assertNotContains(PHP_EOL . '-->', $value);
+    }
+}

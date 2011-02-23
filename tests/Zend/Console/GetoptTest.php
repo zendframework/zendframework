@@ -533,7 +533,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array('--colors=red', '--colors=green', '--colors=blue')
         );
         
-        $this->assertType('string', $opts->colors);
+        $this->assertInternalType('string', $opts->colors);
         $this->assertEquals('blue', $opts->colors, 'Should be equal to last variable');
     }
 
@@ -545,7 +545,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array(Getopt::CONFIG_CUMULATIVE_PARAMETERS => true)
         );
 
-        $this->assertType('array', $opts->colors, 'Colors value should be an array');
+        $this->assertInternalType('array', $opts->colors, 'Colors value should be an array');
         $this->assertEquals('red,green,blue', implode(',', $opts->colors));
     }
 

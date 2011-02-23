@@ -449,15 +449,6 @@ abstract class Adapter
 
         if ($this->_options['locale'] != $locale) {
             $this->_options['locale'] = $locale;
-
-            if (isset(self::$_cache)) {
-                $id = 'Zend_Translate_' . $this->toString() . '_Options';
-                if (self::$_cacheTags) {
-                    self::$_cache->save($this->_options, $id, array($this->_options['tag']));
-                } else {
-                    self::$_cache->save($this->_options, $id);
-                }
-            }
         }
 
         return $this;

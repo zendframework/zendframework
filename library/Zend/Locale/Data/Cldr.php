@@ -27,7 +27,8 @@ namespace Zend\Locale\Data;
 use Zend\Cache\Cache,
     Zend\Cache\Frontend as CacheFrontend,
     Zend\Locale\Locale,
-    Zend\Locale\Exception\InvalidArgumentException;
+    Zend\Locale\Exception\InvalidArgumentException,
+    Zend\Locale\Exception\UnexpectedValueException;
 
 /**
  * Locale data provider, handles CLDR
@@ -46,7 +47,12 @@ class Cldr extends AbstractLocale
     /**
      * Internal path to CLDR resources
      */
-    protected static $_path = '../../../../resources/cldr/';
+    protected static $_path;
+
+    /**
+     * Internal return value
+     */
+    protected static $_result = array();
 
     /**
      * Locale files
@@ -295,31 +301,6 @@ class Cldr extends AbstractLocale
 
         $temp = array();
         switch(strtolower($path)) {
-            case 'language':
-                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/languages/language', 'type');
-                break;
-
-            case 'script':
-                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/scripts/script', 'type');
-                break;
-
-            case 'territory':
-                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/territories/territory', 'type');
-                if ($value === 1) {
-                    foreach($temp as $key => $value) {
-                        if ((is_numeric($key) === false) and ($key != 'QO') and ($key != 'QU')) {
-                            unset($temp[$key]);
-                        }
-                    }
-                } else if ($value === 2) {
-                    foreach($temp as $key => $value) {
-                        if (is_numeric($key) or ($key == 'QO') or ($key == 'QU')) {
-                            unset($temp[$key]);
-                        }
-                    }
-                }
-                break;
-
             case 'variant':
                 $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/variants/variant', 'type');
                 break;
@@ -919,19 +900,6 @@ class Cldr extends AbstractLocale
         }
 
         switch(strtolower($path)) {
-            case 'language':
-                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/languages/language[@type=\'' . $value . '\']', 'type');
-                break;
-
-            case 'script':
-                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/scripts/script[@type=\'' . $value . '\']', 'type');
-                break;
-
-            case 'country':
-            case 'territory':
-                $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/territories/territory[@type=\'' . $value . '\']', 'type');
-                break;
-
             case 'variant':
                 $temp = self::_getFile('main/' . $locale, '/ldml/localeDisplayNames/variants/variant[@type=\'' . $value . '\']', 'type');
                 break;
@@ -1392,4 +1360,413 @@ class Cldr extends AbstractLocale
 
         return $temp;
     }
+
+    /**
+     * Internal function for checking the locale
+     *
+     * @param string|\Zend\Locale $locale Locale to check
+     * @return string
+     */
+    protected static function _checkLocale($locale)
+    {
+        if (empty($locale)) {
+            $locale = new Locale();
+        }
+
+        if (!(Locale::isLocale((string) $locale))) {
+            throw new InvalidArgumentException(
+              "Locale (" . (string) $locale . ") is no known locale"
+            );
+        }
+
+        return (string) $locale;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Returns the path to CLDR
+     *
+     * @return string
+     */
+    public static function getPath()
+    {
+        if (empty(self::$_path)) {
+            self::setDefaultPath();
+        }
+
+        return self::$_path;
+    }
+
+    /**
+     * Sets the path to CLDR
+     *
+     * @param  string $path Path to CLDR files
+     * @throws Exception\UnexpectedValueException When CLDR files can not be found
+     * @return void
+     */
+    public static function setPath($path)
+    {
+        if (!is_dir($path)) {
+            throw new UnexpectedValueException('The given path needs to be a directory');
+        }
+
+        if (!file_exists($path . '/main/root.xml')) {
+            throw new UnexpectedValueException('Unable to find locale files within the given path');
+        }
+
+        if (!file_exists($path . '/supplemental/supplementalData.xml')) {
+            throw new UnexpectedValueException('Unable to find supplemental files within the given path');
+        }
+
+        self::$_path = $path;
+    }
+
+    protected static function setDefaultPath()
+    {
+        self::setPath(__DIR__ . '/../../../../resources/cldr');
+    }
+
+    /**
+     * Sets the default cache
+     *
+     * @return void
+     */
+    protected static function setDefaultCache()
+    {
+        if (!is_dir(self::getPath() . '/cache')) {
+            mkdir(self::getPath() . '/cache', 0, true);
+        }
+
+        if (!is_dir(self::getPath() . '/cache')) {
+            // caching impossible... throw notice
+            return false;
+        }
+
+        self::setCache(Cache::factory(
+            'Core',
+            'File',
+            array(
+                'automatic_serialization'   => true,
+                'automatic_cleaning_factor' => 0,
+                'lifetime'                  => null,
+            ),
+            array(
+                'cache_dir'         => self::getPath() . '/cache',
+                'read_control_type' => 'strlen',
+            )
+        ));
+
+        self::_getTagSupportForCache();
+    }
+
+    /**
+     * Internal method to read CLDR details
+     *
+     * @param  string $file
+     * @param  string $keyPath
+     * @param  string $keyAttrib
+     * @param  string $valuePath
+     * @param  string $valueAttrib
+     * @return string|array
+     */
+    protected static function readCldrDetail($filePath, $locale, $keyPath, $keyAttrib, $valuePath, $valueAttrib)
+    {
+        if (!file_exists($filePath . '/' . $locale . '.xml')) {
+            // TODO: Throw warning on non-existing locale file
+        }
+
+        $file   = simplexml_load_file($filePath . '/' . $locale . '.xml');
+        $result = $file->xpath($keyPath);
+        if (!empty($result)) {
+            foreach($result as $element) {
+                if ($keyAttrib === null) {
+                    $keys[] = (string) $element;
+                } else {
+                    $keys[] = (string) $element[$keyAttrib];
+                }
+            }
+
+            $result = $file->xpath($valuePath);
+            foreach($result as $element) {
+                if ($valueAttrib === null) {
+                    $values[] = (string) $element;
+                } else {
+                    $values[] = (string) $element[$valueAttrib];
+                }
+            }
+
+            foreach($keys as $index => $key) {
+                if (!array_key_exists($key, self::$_result)) {
+                    self::$_result[$key] = $values[$index];
+                }
+            }
+            self::$_result = self::$_result + array_combine($keys, $values);
+        } else {
+            $result = $file->xpath($keyPath . '/alias');
+            if (!empty($result)) {
+                $source = $result[0]['source'];
+                $path   = $result[0]['path'];
+
+                if ($source !== 'locale') {
+                    $locale = $source;
+                }
+
+                self::readCldrFile($filePath, $locale, $keyPath . '/' . $source, $keyAttrib, $valuePath, $valueAttrib);
+            }
+        }
+    }
+
+    /**
+     * Internal method to read CLDR files by defined inheritance
+     * and return an array with the requested informations
+     *
+     * @param  string $filePath
+     * @param  string $locale
+     * @param  string $keyPath
+     * @param  string $keyAttrib
+     * @param  string $valuePath
+     * @param  string $valueAttrib
+     * @throws Exception\UnexpectedValueException When filepath is no directory
+     * @return string|array
+     */
+    protected static function readCldrFile($filePath, $locale, $keyPath, $keyAttrib, $valuePath, $valueAttrib)
+    {
+        self::readCldrDetail($filePath, $locale, $keyPath, $keyAttrib, $valuePath, $valueAttrib);
+
+        if ($locale !== 'root') {
+            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
+
+            if (empty($locale)) {
+                $locale = 'root';
+            }
+
+            self::readCldrFile($filePath, $locale, $keyPath, $keyAttrib, $valuePath, $valueAttrib);
+        }
+    }
+
+    /**
+     * Returns informations from CLDR
+     *
+     * @param  string $filePath
+     * @param  string $locale
+     * @param  string $cacheId
+     * @param  string $keyPath
+     * @param  string $keyAttrib
+     * @param  string $valuePath
+     * @param  string $valueAttrib
+     * @param  string $detail
+     * @throws Exception\UnexpectedValueException When filepath is no directory
+     * @return string|array
+     */
+    protected static function readCldr($filePath, $locale, $cacheId, $keyPath, $keyAttrib, $valuePath, $valueAttrib, $detail)
+    {
+        if (self::getCache() === null && !self::isCacheDisabled()) {
+            self::setDefaultCache();
+        }
+
+        if (!is_dir($filePath)) {
+            throw new UnexpectedValueException('The given path needs to be a directory');
+        }
+
+        if (self::getCache() !== null && !self::isCacheDisabled()) {
+            if ($result = self::getCache()->load($cacheId)) {
+                if ($detail !== null) {
+                    $result = unserialize($result);
+                    return $result[$detail];
+                }
+
+                return unserialize($result);
+            }
+        }
+
+        self::$_result = array();
+        self::readCldrFile($filePath, $locale, $keyPath, $keyAttrib, $valuePath, $valueAttrib);
+        ksort(self::$_result);
+
+        if (self::hasCacheTagSupport()) {
+            self::getCache()->save(serialize(self::$_result), $cacheId, array('Zend_Locale'));
+        } else {
+            self::getCache()->save(serialize(self::$_result), $cacheId);
+        }
+
+        if ($detail !== null) {
+            return self::$_result[$detail];
+        }
+
+        return self::$_result;
+    }
+
+    /**
+     * Returns detailed informations from the language table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale Normalized locale
+     * @param boolean $invert Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getDisplayLanguage($locale, $invert = false, $detail = null)
+    {
+        if (!$invert) {
+            return self::readCldr(
+                self::getPath() . '/main', (string) $locale, 'CldrLanguage0',
+                '//ldml/localeDisplayNames/languages/language', 'type',
+                '//ldml/localeDisplayNames/languages/language', null,
+                $detail
+            );
+        } else {
+            return self::readCldr(
+                self::getPath() . '/main',(string) $locale, 'CldrLanguage1',
+                '//ldml/localeDisplayNames/languages/language', null,
+                '//ldml/localeDisplayNames/languages/language', 'type',
+                $detail
+            );
+        }
+    }
+
+    /**
+     * Returns detailed informations from the script table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale Normalized locale
+     * @param boolean $invert Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getDisplayScript($locale, $invert = false, $detail = null)
+    {
+        if (!$invert) {
+            return self::readCldr(
+                self::getPath() . '/main', (string) $locale, 'CldrScript0',
+                '//ldml/localeDisplayNames/scripts/script', 'type',
+                '//ldml/localeDisplayNames/scripts/script', null,
+                $detail
+            );
+        } else {
+            return self::readCldr(
+                self::getPath() . '/main',(string) $locale, 'CldrScript1',
+                '//ldml/localeDisplayNames/scripts/script', null,
+                '//ldml/localeDisplayNames/scripts/script', 'type',
+                $detail
+            );
+        }
+    }
+
+    /**
+     * Returns detailed informations from the territory table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale Normalized locale
+     * @param boolean $invert Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getDisplayTerritory($locale, $invert = false, $detail = null)
+    {
+        if (!$invert) {
+            return self::readCldr(
+                self::getPath() . '/main', (string) $locale, 'CldrTerritory0',
+                '//ldml/localeDisplayNames/territories/territory', 'type',
+                '//ldml/localeDisplayNames/territories/territory', null,
+                $detail
+            );
+        } else {
+            return self::readCldr(
+                self::getPath() . '/main',(string) $locale, 'CldrTerritory1',
+                '//ldml/localeDisplayNames/territories/territory', null,
+                '//ldml/localeDisplayNames/territories/territory', 'type',
+                $detail
+            );
+        }
+    }
+
+    /**
+     * Returns detailed informations from the variant table
+     * If no detail is given a complete table is returned
+     *
+     * @param string  $locale Normalized locale
+     * @param boolean $invert Invert output of the data
+     * @param string|array $detail Detail to return information for
+     * @return array
+     */
+    public static function getDisplayVariant($locale, $invert = false, $detail = null)
+    {
+        if (!$invert) {
+            return self::readCldr(
+                self::getPath() . '/main', (string) $locale, 'CldrVariant0',
+                '//ldml/localeDisplayNames/variants/variant', 'type',
+                '//ldml/localeDisplayNames/variants/variant', null,
+                $detail
+            );
+        } else {
+            return self::readCldr(
+                self::getPath() . '/main',(string) $locale, 'CldrVariant1',
+                '//ldml/localeDisplayNames/variants/variant', null,
+                '//ldml/localeDisplayNames/variants/variant', 'type',
+                $detail
+            );
+        }
+    }
+
+// Formatierungen in Klassen integrieren
+// Mathklassen überarbeiten
+// Get SHORT types
+
+// getLocaleDisplayPattern
+// getKey
+// getType (Key)
+// getTransformName
+// getMeasurementSystemName
+// getCodePattern
+// getExemplarCharacter
+// getDelimiter
+// getDateFormat (calendar)
+// getDateTimeFormat (calendar) - length
+// getMonth (calendar, context, width) -
+// getDay (calendar, context, width)
+//
 }

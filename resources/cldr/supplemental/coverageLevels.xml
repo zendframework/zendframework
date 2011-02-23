@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<supplementalData>
+	<version number="$Revision: 5003 $"/>
+	<generation date="$Date: 2010-08-05 09:56:49 -0500 (Thu, 05 Aug 2010) $"/>
+	<coverageLevels>
+		<coverageLevel value="01" match="characters/exemplarCharacters"/>
+		<coverageLevel value="02" match="numbers/symbols/decimal"/>
+		<coverageLevel value="03" match="numbers/symbols/group"/>
+		<coverageLevel value="10" match="posix/messages/(yes|no)str"/>
+		<coverageLevel value="11" match="numbers/decimalFormats/decimalFormatLength/decimalFormat.*"/>
+		<coverageLevel value="12" match="numbers/symbols/(plus|minus|percent)Sign"/>
+		<coverageLevel value="13" match="numbers/currencyFormats/currencyFormatLength/currencyFormat.*"/>
+		<coverageLevel value="14" match="numbers/percentFormats/percentFormatLength/percentFormat.*"/>
+		<coverageLevel value="18" match="numbers/scientificFormats/scientificFormatLength/scientificFormat.*"/>
+		<coverageLevel value="19" match="numbers/symbols/(list|exponential|perMille|infinity|nan)"/>
+	</coverageLevels>
+</supplementalData>

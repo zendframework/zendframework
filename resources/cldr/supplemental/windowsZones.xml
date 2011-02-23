@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<supplementalData>
+	<version number="$Revision: 5040 $"/>
+	<generation date="$Date: 2010-09-02 00:22:16 -0500 (Thu, 02 Sep 2010) $"/>
+
+	<windowsZones>
+		<mapTimezones>
+			<mapZone other="AUS Central Standard Time" type="Australia/Darwin"/> 
+			<mapZone other="AUS Eastern Standard Time" type="Australia/Sydney"/> 
+			<mapZone other="Afghanistan Standard Time" type="Asia/Kabul"/> 
+			<mapZone other="Alaskan Standard Time" type="America/Anchorage"/> 
+			<mapZone other="Arab Standard Time" type="Asia/Riyadh"/> 
+			<mapZone other="Arabian Standard Time" type="Asia/Dubai"/> 
+			<mapZone other="Arabic Standard Time" type="Asia/Baghdad"/> 
+			<mapZone other="Argentina Standard Time" type="America/Buenos_Aires"/> 
+			<mapZone other="Armenian Standard Time" type="Asia/Yerevan"/> 
+			<mapZone other="Atlantic Standard Time" type="America/Halifax"/> 
+			<mapZone other="Azerbaijan Standard Time" type="Asia/Baku"/> 
+			<mapZone other="Azores Standard Time" type="Atlantic/Azores"/> 
+			<mapZone other="Bangladesh Standard Time" type="Asia/Dhaka"/> 
+			<mapZone other="Canada Central Standard Time" type="America/Regina"/> 
+			<mapZone other="Cape Verde Standard Time" type="Atlantic/Cape_Verde"/> 
+			<mapZone other="Caucasus Standard Time" type="Asia/Yerevan"/> 
+			<mapZone other="Cen. Australia Standard Time" type="Australia/Adelaide"/> 
+			<mapZone other="Central America Standard Time" type="America/Guatemala"/> 
+			<mapZone other="Central Asia Standard Time" type="Asia/Almaty"/> 
+			<mapZone other="Central Brazilian Standard Time" type="America/Cuiaba"/> 
+			<mapZone other="Central Europe Standard Time" type="Europe/Budapest"/> 
+			<mapZone other="Central European Standard Time" type="Europe/Warsaw"/> 
+			<mapZone other="Central Pacific Standard Time" type="Pacific/Guadalcanal"/> 
+			<mapZone other="Central Standard Time" type="America/Chicago"/> 
+			<mapZone other="Central Standard Time (Mexico)" type="America/Mexico_City"/> 
+			<mapZone other="China Standard Time" type="Asia/Shanghai"/> 
+			<mapZone other="Dateline Standard Time" type="Etc/GMT+12"/> 
+			<mapZone other="E. Africa Standard Time" type="Africa/Nairobi"/> 
+			<mapZone other="E. Australia Standard Time" type="Australia/Brisbane"/> 
+			<mapZone other="E. Europe Standard Time" type="Europe/Minsk"/> 
+			<mapZone other="E. South America Standard Time" type="America/Sao_Paulo"/> 
+			<mapZone other="Eastern Standard Time" type="America/New_York"/> 
+			<mapZone other="Egypt Standard Time" type="Africa/Cairo"/> 
+			<mapZone other="Ekaterinburg Standard Time" type="Asia/Yekaterinburg"/> 
+			<mapZone other="FLE Standard Time" type="Europe/Kiev"/> 
+			<mapZone other="Fiji Standard Time" type="Pacific/Fiji"/> 
+			<mapZone other="GMT Standard Time" type="Europe/London"/> 
+			<mapZone other="GTB Standard Time" type="Europe/Istanbul"/> 
+			<mapZone other="Georgian Standard Time" type="Asia/Tbilisi"/> 
+			<mapZone other="Greenland Standard Time" type="America/Godthab"/> 
+			<mapZone other="Greenwich Standard Time" type="Atlantic/Reykjavik"/> 
+			<mapZone other="Hawaiian Standard Time" type="Pacific/Honolulu"/> 
+			<mapZone other="India Standard Time" type="Asia/Calcutta"/> 
+			<mapZone other="Iran Standard Time" type="Asia/Tehran"/> 
+			<mapZone other="Israel Standard Time" type="Asia/Jerusalem"/> 
+			<mapZone other="Jordan Standard Time" type="Asia/Amman"/> 
+			<mapZone other="Kamchatka Standard Time" type="Asia/Kamchatka"/> 
+			<mapZone other="Korea Standard Time" type="Asia/Seoul"/> 
+			<mapZone other="Mauritius Standard Time" type="Indian/Mauritius"/> 
+			<mapZone other="Mexico Standard Time" type="America/Mexico_City"/> 
+			<mapZone other="Mexico Standard Time 2" type="America/Chihuahua"/> 
+			<mapZone other="Mid-Atlantic Standard Time" type="Etc/GMT+2"/> 
+			<mapZone other="Middle East Standard Time" type="Asia/Beirut"/> 
+			<mapZone other="Montevideo Standard Time" type="America/Montevideo"/> 
+			<mapZone other="Morocco Standard Time" type="Africa/Casablanca"/> 
+			<mapZone other="Mountain Standard Time" type="America/Denver"/> 
+			<mapZone other="Mountain Standard Time (Mexico)" type="America/Chihuahua"/> 
+			<mapZone other="Myanmar Standard Time" type="Asia/Rangoon"/> 
+			<mapZone other="N. Central Asia Standard Time" type="Asia/Novosibirsk"/> 
+			<mapZone other="Namibia Standard Time" type="Africa/Windhoek"/> 
+			<mapZone other="Nepal Standard Time" type="Asia/Katmandu"/> 
+			<mapZone other="New Zealand Standard Time" type="Pacific/Auckland"/> 
+			<mapZone other="Newfoundland Standard Time" type="America/St_Johns"/> 
+			<mapZone other="North Asia East Standard Time" type="Asia/Irkutsk"/> 
+			<mapZone other="North Asia Standard Time" type="Asia/Krasnoyarsk"/> 
+			<mapZone other="Pacific SA Standard Time" type="America/Santiago"/> 
+			<mapZone other="Pacific Standard Time" type="America/Los_Angeles"/> 
+			<mapZone other="Pacific Standard Time (Mexico)" type="America/Santa_Isabel"/> 
+			<mapZone other="Pakistan Standard Time" type="Asia/Karachi"/> 
+			<mapZone other="Paraguay Standard Time" type="America/Asuncion"/> 
+			<mapZone other="Romance Standard Time" type="Europe/Paris"/> 
+			<mapZone other="Russian Standard Time" type="Europe/Moscow"/> 
+			<mapZone other="SA Eastern Standard Time" type="America/Cayenne"/> 
+			<mapZone other="SA Pacific Standard Time" type="America/Bogota"/> 
+			<mapZone other="SA Western Standard Time" type="America/La_Paz"/> 
+			<mapZone other="SE Asia Standard Time" type="Asia/Bangkok"/> 
+			<mapZone other="Samoa Standard Time" type="Pacific/Apia"/> 
+			<mapZone other="Singapore Standard Time" type="Asia/Singapore"/> 
+			<mapZone other="South Africa Standard Time" type="Africa/Johannesburg"/> 
+			<mapZone other="Sri Lanka Standard Time" type="Asia/Colombo"/> 
+			<mapZone other="Syria Standard Time" type="Asia/Damascus"/> 
+			<mapZone other="Taipei Standard Time" type="Asia/Taipei"/> 
+			<mapZone other="Tasmania Standard Time" type="Australia/Hobart"/> 
+			<mapZone other="Tokyo Standard Time" type="Asia/Tokyo"/> 
+			<mapZone other="Tonga Standard Time" type="Pacific/Tongatapu"/> 
+			<mapZone other="US Eastern Standard Time" type="Etc/GMT+5"/> 
+			<mapZone other="US Mountain Standard Time" type="America/Phoenix"/> 
+			<mapZone other="UTC" type="Etc/GMT"/> 
+			<mapZone other="UTC+12" type="Etc/GMT-12"/> 
+			<mapZone other="UTC-02" type="Etc/GMT+2"/> 
+			<mapZone other="UTC-11" type="Etc/GMT+11"/> 
+			<mapZone other="Ulaanbaatar Standard Time" type="Asia/Ulaanbaatar"/> 
+			<mapZone other="Venezuela Standard Time" type="America/Caracas"/> 
+			<mapZone other="Vladivostok Standard Time" type="Asia/Vladivostok"/> 
+			<mapZone other="W. Australia Standard Time" type="Australia/Perth"/> 
+			<mapZone other="W. Central Africa Standard Time" type="Africa/Lagos"/> 
+			<mapZone other="W. Europe Standard Time" type="Europe/Berlin"/> 
+			<mapZone other="West Asia Standard Time" type="Asia/Tashkent"/> 
+			<mapZone other="West Pacific Standard Time" type="Pacific/Port_Moresby"/> 
+			<mapZone other="Yakutsk Standard Time" type="Asia/Yakutsk"/> 
+		</mapTimezones>
+	</windowsZones>
+</supplementalData>

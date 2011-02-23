@@ -1,0 +1,1370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4763 $"/>
+		<generation date="$Date: 2010-02-27 01:03:37 -0600 (Sat, 27 Feb 2010) $"/>
+		<language type="ksh"/>
+	</identity>
+	<fallback>de_DE nl nds en</fallback>
+	<localeDisplayNames>
+		<localeDisplayPattern>
+			<localePattern>{0} en {1}</localePattern>
+			<localeSeparator> uß </localeSeparator>
+		</localeDisplayPattern>
+		<languages>
+			<language type="ab">Apchaasesch</language>
+			<language type="af">Afrikaans</language>
+			<language type="am">Amhaaresch</language>
+			<language type="ar">Arabesch</language>
+			<language type="as">Aßameesesch</language>
+			<language type="ay">Aimaresch</language>
+			<language type="az">Assebaidschaanesch</language>
+			<language type="be">Wiißrußesch</language>
+			<language type="bg">Bulljaaresch</language>
+			<language type="bn">Bängjaalesch</language>
+			<language type="bo">Tibeetesch</language>
+			<language type="bs">Boßnesch</language>
+			<language type="ca">Kattalanesch</language>
+			<language type="cs">Tschäschesch</language>
+			<language type="cy">Walliisesch</language>
+			<language type="da">Dänesch</language>
+			<language type="de">Deutsch</language>
+			<language type="de_AT">Deutsch uß Ößterich</language>
+			<language type="de_CH">Deutsch uß dä Schweijz</language>
+			<language type="dv">Divehesch</language>
+			<language type="dz">Butanesch</language>
+			<language type="efi">Efik</language>
+			<language type="el">Jriischesch</language>
+			<language type="en">Änglesch</language>
+			<language type="en_CA">Änglesch uß Kannaada</language>
+			<language type="en_GB">Brittesch Änglesch</language>
+			<language type="en_US">Amärreskaanesch Änglesch</language>
+			<language type="eo">Esperanto</language>
+			<language type="es">Schpaanesch</language>
+			<language type="es_419">Schpaanesch uß Lattein-Ammärrika</language>
+			<language type="es_ES">Schpaanesch uß Schpaaneje</language>
+			<language type="et">Äßnesch</language>
+			<language type="eu">Baskesch</language>
+			<language type="fa">Pärsesch</language>
+			<language type="fi">Finnesch</language>
+			<language type="fil">Fillipiinesch</language>
+			<language type="fj">Fidschesch</language>
+			<language type="fr">Franzüüsesch</language>
+			<language type="fr_CA">Franzüüsesch uß Kannada</language>
+			<language type="fr_CH">Franzüüsesch uß de Schweijz</language>
+			<language type="ga">Ieresch</language>
+			<language type="gl">Jalliizesch</language>
+			<language type="gn">Juwaraanesch</language>
+			<language type="gsw">Schwitzerdütsch</language>
+			<language type="gu">Gutscharatesch</language>
+			<language type="ha">Haußa</language>
+			<language type="haw">Hauajaanesch</language>
+			<language type="he">Hebrähesch</language>
+			<language type="hi">Hindi</language>
+			<language type="hr">Krowatesch</language>
+			<language type="ht">Ha'iitesch</language>
+			<language type="hu">Unjarresch</language>
+			<language type="hy">Areenesch</language>
+			<language type="id">Indoneesesch</language>
+			<language type="ig">Igbo</language>
+			<language type="is">Ißländesch</language>
+			<language type="it">Etalljänesch</language>
+			<language type="ja">Japaanesch</language>
+			<language type="jv">Javaanesch</language>
+			<language type="ka">Je'orjesch</language>
+			<language type="kk">Kassakesch</language>
+			<language type="km">Khmer</language>
+			<language type="kn">Kannada</language>
+			<language type="ko">Korrejaanesch</language>
+			<language type="ks">Kschamieresch</language>
+			<language type="ku">Kurdesch</language>
+			<language type="ky">Kirjiisesch</language>
+			<language type="la">Lateijnesch</language>
+			<language type="lah">de Landa-Schprooche</language>
+			<language type="lb">Luxemborjesch</language>
+			<language type="ln">Lingjalla</language>
+			<language type="lo">Lahootesch</language>
+			<language type="lt">Littouesch</language>
+			<language type="lv">Lättesch</language>
+			<language type="mg">Madajaßesch</language>
+			<language type="mi">Maahori</language>
+			<language type="mk">Mazedoonesch</language>
+			<language type="ml">Mallajalam</language>
+			<language type="mn">Mongjolesch</language>
+			<language type="mr">Marraatesch</language>
+			<language type="ms">Mallaijesch</language>
+			<language type="mt">Malteesesch</language>
+			<language type="mul">-ongerscheidlijje Schprooche-</language>
+			<language type="my">Burmessesch</language>
+			<language type="nb">Norrweejesch Bokmål</language>
+			<language type="nd">Nood-Ndebele</language>
+			<language type="ne">Nepallessesch</language>
+			<language type="nl">Holländesch</language>
+			<language type="nl_BE">Flämesch</language>
+			<language type="nn">Neu-Norrweejesch</language>
+			<language type="no">Norrweejesch</language>
+			<language type="nso">Nood-Sooto</language>
+			<language type="ny">Schi-Schewa</language>
+			<language type="or">Oriija</language>
+			<language type="os">Oßeetesch</language>
+			<language type="pa">Panschaabesch</language>
+			<language type="pl">Pollnesch</language>
+			<language type="ps">Paschtunesch</language>
+			<language type="pt">Pochtojiesesch</language>
+			<language type="pt_BR">Brasilljaanesch Pochtojiesesch</language>
+			<language type="pt_PT">Pochtojiisesch uß Pochtojall</language>
+			<language type="qu">Kättschowa</language>
+			<language type="rm">Räto-Romaanesch</language>
+			<language type="rn">K-Rundesch</language>
+			<language type="ro">Rumänesch</language>
+			<language type="ru">Rußesch</language>
+			<language type="rw">Kinja-Ruandesch</language>
+			<language type="sa">Sanskrit</language>
+			<language type="sd">Sinndi</language>
+			<language type="se">Nood-Lappländesch</language>
+			<language type="sg">Sangjo</language>
+			<language type="sh">Särbokowatesch</language>
+			<language type="si">Singjaleesesch</language>
+			<language type="sk">ßlovakesch</language>
+			<language type="sl">ßloveenesch</language>
+			<language type="sm">Sammohanesch</language>
+			<language type="sn">Schi-Schona</language>
+			<language type="so">Somaalesch</language>
+			<language type="sq">Albaanesch</language>
+			<language type="sr">Särbesch</language>
+			<language type="ss">Si-Swatesch</language>
+			<language type="st">Söd-Sooto</language>
+			<language type="su">Sindaneesesch</language>
+			<language type="sv">Schweedesch</language>
+			<language type="sw">Suaheelesch</language>
+			<language type="swb">Kommooresch</language>
+			<language type="ta">Tamiilesch</language>
+			<language type="te">Telluuju</language>
+			<language type="tet">Tetumsch</language>
+			<language type="tg">Tadschiikesch</language>
+			<language type="th">Tailändesch</language>
+			<language type="ti">Tigrinianesch</language>
+			<language type="tk">Törkmeenesch</language>
+			<language type="tl">Tagalog</language>
+			<language type="tn">Se-Zwaanesch</language>
+			<language type="to">Tongjaanesch</language>
+			<language type="tpi">Took Pisin</language>
+			<language type="tr">Törkesch</language>
+			<language type="ts">Xi-Zongjanesch</language>
+			<language type="ty">Tahitesch</language>
+			<language type="ug">Uj'juuersch</language>
+			<language type="uk">Ukrainesch</language>
+			<language type="und">-onbikannt-</language>
+			<language type="ur">Urdu/Hindi</language>
+			<language type="uz">Ußbeekesch</language>
+			<language type="ve">Wenda</language>
+			<language type="vi">Vijätnammessesch</language>
+			<language type="wo">Woloff</language>
+			<language type="xh">Isi-Khoosa</language>
+			<language type="yo">Joruuba</language>
+			<language type="yue">Kanton-Schineesesch</language>
+			<language type="zh">Schineesesch</language>
+			<language type="zh_Hans">Schineesesch en de eijfacher Schreff</language>
+			<language type="zh_Hant">Schineesesch en de tradizjonälle Schreff</language>
+			<language type="zu">Suulu</language>
+			<language type="zxx">-kein Schprooch-</language>
+		</languages>
+		<scripts>
+			<script type="Arab">arraabesche Schreff</script>
+			<script type="Armn">armeenesche Schreff</script>
+			<script type="Beng">bängjaalesche Schreff</script>
+			<script type="Bopo">schineeseche Ömschreff Bopomofo</script>
+			<script type="Brai">Blindeschreff</script>
+			<script type="Cyrl">kürrellesche Schreff</script>
+			<script type="Deva">indesche Devanajari-Schreff</script>
+			<script type="Ethi">ätejoopesche Schreff</script>
+			<script type="Geor">je'orrjesche Schreff</script>
+			<script type="Grek">jriischesche Schreff</script>
+			<script type="Gujr">jujaraatesche Schreff</script>
+			<script type="Guru">indesche Gurmukhi-Schreff</script>
+			<script type="Hang">korrejaanesche Schreff</script>
+			<script type="Hani">en schineesesche Schreff</script>
+			<script type="Hans">eijfacher schineesesche Schreff</script>
+			<script type="Hant">tradizjonäll schineesesche Schreff</script>
+			<script type="Hebr">hebrääjesche Schreff</script>
+			<script type="Hira">japaanesche Hiddajaana-Schreff</script>
+			<script type="Jpan">en japaanesche Schreff</script>
+			<script type="Kana">japaanesche Kattakaana-Schreff</script>
+			<script type="Khmr">Khmer-Schreff</script>
+			<script type="Knda">indesche Kannada-Schreff</script>
+			<script type="Kore">korrejaanesche Schreff udder en schineesesche Schreff</script>
+			<script type="Laoo">lahootesche Schreff</script>
+			<script type="Latn">lateinesche Schreff</script>
+			<script type="Mlym">indesche Malajalam-Schreff</script>
+			<script type="Mong">mongjoolesche Schreff</script>
+			<script type="Mymr">birmaanesche Schreff</script>
+			<script type="Orya">indesche Orija-Schreff</script>
+			<script type="Sinh">singjaleesesche Schreff</script>
+			<script type="Taml">tamiilesche Schreff</script>
+			<script type="Telu">indesche Telugu-Schreff</script>
+			<script type="Thaa">malledivesche Taana-Schreff</script>
+			<script type="Thai">tailändesche Schreff</script>
+			<script type="Tibt">tibeetesche Schreff</script>
+			<script type="Zsym">-Zeiche ävver kein Schreff-</script>
+			<script type="Zxxx">-jaa keij Schreff-</script>
+			<script type="Zyyy">-öhnß en Schreff-</script>
+			<script type="Zzzz">-onbikannte Schreff-</script>
+		</scripts>
+		<territories>
+			<territory type="001">Ääd</territory>
+			<territory type="002">Affrika</territory>
+			<territory type="003">Nood-Amärrika</territory>
+			<territory type="005">Söd-Amärrika</territory>
+			<territory type="009">Ozejaanije</territory>
+			<territory type="011">Wäß-Affrika</territory>
+			<territory type="013">Meddelammärrika</territory>
+			<territory type="014">Oß-Affrika</territory>
+			<territory type="015">Nood-Affrika</territory>
+			<territory type="017">Meddel-Affrika</territory>
+			<territory type="018">Söd-Affrika</territory>
+			<territory type="019">Ammärrika</territory>
+			<territory type="021">Norde vun Amärrika</territory>
+			<territory type="029">Karribik</territory>
+			<territory type="030">Oß-Aasije</territory>
+			<territory type="034">Söd-Aasije</territory>
+			<territory type="035">Söd-Oß-Aasije</territory>
+			<territory type="039">Söd-Europpa</territory>
+			<territory type="053">Rejjohn Austraalije</territory>
+			<territory type="054">Mellaneesije</territory>
+			<territory type="057">Mikroneesesche Rejohn</territory>
+			<territory type="061">Polineesije</territory>
+			<territory type="062">Söd-Meddel-Aasije</territory>
+			<territory type="142">Aasije</territory>
+			<territory type="143">Meddelaasije</territory>
+			<territory type="145">Wäß-Aasije</territory>
+			<territory type="150">Europpa</territory>
+			<territory type="151">Oß-Europpa</territory>
+			<territory type="154">Nood-Europpa</territory>
+			<territory type="155">Wäß-Europpa</territory>
+			<territory type="172">dä Kommenwälth</territory>
+			<territory type="419">Lateinamärrika un de Karribik</territory>
+			<territory type="AC">Aßension</territory>
+			<territory type="AD">Andorra</territory>
+			<territory type="AE">Vereinschte Arrabesche Emmirate</territory>
+			<territory type="AF">Afjaanistahn</territory>
+			<territory type="AG">Antigwa un Barbuda</territory>
+			<territory type="AI">Anggwilla</territory>
+			<territory type="AL">Albaanije</territory>
+			<territory type="AM">Arrmeenije</territory>
+			<territory type="AN">Nederlängsche Antille</territory>
+			<territory type="AO">Angjoola</territory>
+			<territory type="AQ">Södpol</territory>
+			<territory type="AR">Ajjentiinije</territory>
+			<territory type="AS">Ammerikaanesch Sammoha</territory>
+			<territory type="AT">Öösterisch</territory>
+			<territory type="AU">Austraalije</territory>
+			<territory type="AW">Aruba</territory>
+			<territory type="AX">Ohland-Enselle</territory>
+			<territory type="AZ">Asserbaidschahn</territory>
+			<territory type="BA">Boßnije</territory>
+			<territory type="BB">Ensel Barbados</territory>
+			<territory type="BD">Bangladesch</territory>
+			<territory type="BE">Bellje</territory>
+			<territory type="BF">Bukkinna-Faase</territory>
+			<territory type="BG">Bulljaarije</territory>
+			<territory type="BH">Bachrain</territory>
+			<territory type="BI">Burundi</territory>
+			<territory type="BJ">Benin</territory>
+			<territory type="BL">de Zint Battälmi-Enselle</territory>
+			<territory type="BM">Bermudas</territory>
+			<territory type="BN">Brunei</territory>
+			<territory type="BO">Bolliivije</territory>
+			<territory type="BR">Brasilije</territory>
+			<territory type="BS">Bahamas</territory>
+			<territory type="BT">Buttaan</territory>
+			<territory type="BV">Buvee-Ensel</territory>
+			<territory type="BW">Bozwaana</territory>
+			<territory type="BY">Wießrußland</territory>
+			<territory type="BZ">Belize</territory>
+			<territory type="CA">Kannada</territory>
+			<territory type="CC">Kokkos-Enselle</territory>
+			<territory type="CD">Konggo-Kinshasa</territory>
+			<territory type="CD" alt="variant">Demmokraatesche Republik Konggo</territory>
+			<territory type="CF">Zetraalaffrikanesche Republik</territory>
+			<territory type="CG">Konggo (Brassavill)</territory>
+			<territory type="CG" alt="variant">Republik Konggo</territory>
+			<territory type="CH">Schweiz</territory>
+			<territory type="CI">Älfebeijn-Köß</territory>
+			<territory type="CK">Kuuk-Enselle</territory>
+			<territory type="CL">Schiile</territory>
+			<territory type="CM">Kammeruhn</territory>
+			<territory type="CN">Schiina</territory>
+			<territory type="CO">Kolumbije</territory>
+			<territory type="CP">Klipperton-Ensel</territory>
+			<territory type="CR">Kostarika</territory>
+			<territory type="CU">Kuba</territory>
+			<territory type="CV">Kapvärdesche Enselle</territory>
+			<territory type="CX">Weihnaachs-Ensel</territory>
+			<territory type="CY">Züppere</territory>
+			<territory type="CZ">Tschäschei</territory>
+			<territory type="DE">Doütschland</territory>
+			<territory type="DG">Diego-Garcia-Ensel</territory>
+			<territory type="DJ">Dschibutti</territory>
+			<territory type="DK">Dänemark</territory>
+			<territory type="DM">Dominnika</territory>
+			<territory type="DO">Dommenekaanesche Reppublik</territory>
+			<territory type="DZ">Alljeerije</territory>
+			<territory type="EA">Ze'uta un Meliija</territory>
+			<territory type="EC">Äkwador</territory>
+			<territory type="EE">Äßland</territory>
+			<territory type="EG">Äjüpte</territory>
+			<territory type="EH">Wäß-Sahara</territory>
+			<territory type="ER">Äritreja</territory>
+			<territory type="ES">Schpaanije</territory>
+			<territory type="ET">Ättijoopije</territory>
+			<territory type="EU">Eurppäesche Unijon</territory>
+			<territory type="FI">Finnland</territory>
+			<territory type="FJ">Fischei-Endelle</territory>
+			<territory type="FK">Falkland-Enselle</territory>
+			<territory type="FM">Mikroneesije</territory>
+			<territory type="FO">Färrör-Enselle</territory>
+			<territory type="FR">Frankrisch</territory>
+			<territory type="GA">Jabuhn</territory>
+			<territory type="GB">Jruußbrettannije</territory>
+			<territory type="GD">Jrenaada</territory>
+			<territory type="GE">Jeorrjije</territory>
+			<territory type="GF">Franzüüsesch Jujaana</territory>
+			<territory type="GG">Jöönsei</territory>
+			<territory type="GH">Jaana</territory>
+			<territory type="GI">Jibralltaa</territory>
+			<territory type="GL">Jröhnland</territory>
+			<territory type="GM">Jambija</territory>
+			<territory type="GN">Jinneha</territory>
+			<territory type="GP">Juadelupp</territory>
+			<territory type="GQ">Äquatorial Jineeja</territory>
+			<territory type="GR">Jriescheland</territory>
+			<territory type="GS">Söd-Jeorjie un de södlijje Botteramms-Enselle</territory>
+			<territory type="GT">Juwatemaala</territory>
+			<territory type="GU">Juham</territory>
+			<territory type="GW">Jinneha_Bißau</territory>
+			<territory type="GY">Jujaana</territory>
+			<territory type="HK">Hong-Kong</territory>
+			<territory type="HM">de Heart Ensel un de McDonal-Enselle</territory>
+			<territory type="HN">Honduras</territory>
+			<territory type="HR">Krowazije</territory>
+			<territory type="HT">Ha'itti</territory>
+			<territory type="HU">Unjann</territory>
+			<territory type="IC">Kannaresche Enselle</territory>
+			<territory type="ID">Indoneesije</territory>
+			<territory type="IE">Irrland</territory>
+			<territory type="IL">Ißraäl</territory>
+			<territory type="IM">Ensel Män</territory>
+			<territory type="IN">Indije</territory>
+			<territory type="IO">Brettesche Besezunge em indesche Oozejahn</territory>
+			<territory type="IQ">Irak</territory>
+			<territory type="IR">Persije</territory>
+			<territory type="IS">Ißland</territory>
+			<territory type="IT">Itaalije</territory>
+			<territory type="JE">Jööseh</territory>
+			<territory type="JM">Jammaika</territory>
+			<territory type="JO">Jordaanija</territory>
+			<territory type="JP">Japan</territory>
+			<territory type="KE">Keenija</territory>
+			<territory type="KG">Kirrjiisije</territory>
+			<territory type="KH">Kambodscha</territory>
+			<territory type="KI">Kiribati</territory>
+			<territory type="KM">Kommoore</territory>
+			<territory type="KN">Zimt Kitts un Nevis</territory>
+			<territory type="KP">Nood-Koreja</territory>
+			<territory type="KR">Söd-Koreja</territory>
+			<territory type="KW">Kuweit</territory>
+			<territory type="KY">Kaiman-Enselle</territory>
+			<territory type="KZ">Kassakstahn</territory>
+			<territory type="LA">La'os</territory>
+			<territory type="LB">Libbannon</territory>
+			<territory type="LC">Zint-Lutscha-Ensel</territory>
+			<territory type="LI">Lischtestein</territory>
+			<territory type="LK">Sri Lanka</territory>
+			<territory type="LR">Libeerija</territory>
+			<territory type="LS">Lesooto</territory>
+			<territory type="LT">Lizzaue</territory>
+			<territory type="LU">Luxembursch</territory>
+			<territory type="LV">Lätland</territory>
+			<territory type="LY">Libbija</territory>
+			<territory type="MA">Marokko</territory>
+			<territory type="MC">Monakko</territory>
+			<territory type="MD">Moldaavije</territory>
+			<territory type="ME">Monteneejro</territory>
+			<territory type="MF">Sint-Määtes-Ensel</territory>
+			<territory type="MG">Maddajaska</territory>
+			<territory type="MH">Machschall-Enselle</territory>
+			<territory type="MK">Mazedoonije</territory>
+			<territory type="ML">Maali</territory>
+			<territory type="MM">Birma</territory>
+			<territory type="MN">Mongjolei</territory>
+			<territory type="MO">Makau</territory>
+			<territory type="MP">de nöödlijje Marijanne-Enselle</territory>
+			<territory type="MQ">Machtinik</territory>
+			<territory type="MR">Mautitaanije</territory>
+			<territory type="MS">Mongßerrat</territory>
+			<territory type="MT">Malta</territory>
+			<territory type="MU">Maurizijus</territory>
+			<territory type="MV">Mallediive</territory>
+			<territory type="MW">Malawi</territory>
+			<territory type="MX">Mexico</territory>
+			<territory type="MY">Malaisije</territory>
+			<territory type="MZ">Mosambik</territory>
+			<territory type="NA">Namiibije</territory>
+			<territory type="NC">Neuschottland</territory>
+			<territory type="NE">Nijer</territory>
+			<territory type="NF">Noofok-Ensel</territory>
+			<territory type="NG">Nikaraagua</territory>
+			<territory type="NI">Nikaraaguwa</territory>
+			<territory type="NL">Nederläng</territory>
+			<territory type="NO">Norrweeje</territory>
+			<territory type="NP">Nepall</territory>
+			<territory type="NR">Nauru</territory>
+			<territory type="NU">Niue</territory>
+			<territory type="NZ">Neuseeland</territory>
+			<territory type="OM">Oman</territory>
+			<territory type="PA">Pannama</territory>
+			<territory type="PE">Perruh</territory>
+			<territory type="PF">Franzüüsesch Pollineesije</territory>
+			<territory type="PG">Papuwa Neujineeja</territory>
+			<territory type="PH">Fillipiine</territory>
+			<territory type="PK">Pakistahn</territory>
+			<territory type="PL">Pole</territory>
+			<territory type="PM">Zint Pjäär un Mikelong</territory>
+			<territory type="PN">Pitkärn-Ensel</territory>
+			<territory type="PR">Pochtoriko</territory>
+			<territory type="PS">Palästina</territory>
+			<territory type="PT">Pochtojall</territory>
+			<territory type="PW">Pallau</territory>
+			<territory type="PY">Parraguwai</territory>
+			<territory type="QA">Kataa</territory>
+			<territory type="QO">Ozejaanije ußerhallef</territory>
+			<territory type="RE">Rehunjohn</territory>
+			<territory type="RO">Romäänije</territory>
+			<territory type="RS">Serbije</territory>
+			<territory type="RU">Rußland</territory>
+			<territory type="RW">Ruanda</territory>
+			<territory type="SA">Saudi Arraabije</territory>
+			<territory type="SB">de Solomone-Enselle</territory>
+			<territory type="SC">Seischälle</territory>
+			<territory type="SD">Sudan</territory>
+			<territory type="SE">Schweede</territory>
+			<territory type="SG">Singjapuur</territory>
+			<territory type="SH">Sint-Hellena-Ensel</territory>
+			<territory type="SI">ßloveenije</territory>
+			<territory type="SJ">de Enselle Svalbard un Jan Mayen</territory>
+			<territory type="SK">ßlovakei</territory>
+			<territory type="SL">Sjärra Lejone</territory>
+			<territory type="SM">San-Marino</territory>
+			<territory type="SN">Sennejall</territory>
+			<territory type="SO">Somaalije</territory>
+			<territory type="SR">Sürinamm</territory>
+			<territory type="ST">Zint Tommeh un Printschipe</territory>
+			<territory type="SV">Äl Slavadoor</territory>
+			<territory type="SY">Sürije</territory>
+			<territory type="SZ">ßwaasiland</territory>
+			<territory type="TA">Tristan da Cunja</territory>
+			<territory type="TC">Turks un Kaikos Enselle</territory>
+			<territory type="TD">Tschad</territory>
+			<territory type="TF">Franzüüsesche Södsee-Enselle</territory>
+			<territory type="TG">Toojo</territory>
+			<territory type="TH">Tailand</territory>
+			<territory type="TJ">Tadschikistahn</territory>
+			<territory type="TK">Tokelau</territory>
+			<territory type="TL">Oß-Timor</territory>
+			<territory type="TM">Turkmenistahn</territory>
+			<territory type="TN">Tuneesije</territory>
+			<territory type="TO">Tongga</territory>
+			<territory type="TR">Türkei</territory>
+			<territory type="TT">Trinidad un Tobääjo</territory>
+			<territory type="TV">Tuvalu</territory>
+			<territory type="TW">Taiwan</territory>
+			<territory type="TZ">Tansanija</territory>
+			<territory type="UA">Ukra'iine</territory>
+			<territory type="UG">Ujanda</territory>
+			<territory type="UM">De Vereineschte Schtaate vun Amärrika ier klein Enselsche ußerhallef</territory>
+			<territory type="US">Vereineschte Schtaate vun Ammärrika</territory>
+			<territory type="UY">Urruguwai</territory>
+			<territory type="UZ">Ußbeekistahn</territory>
+			<territory type="VA">Vattikahn</territory>
+			<territory type="VC">Zint Vinzänz un de Jrenadines-Enselle</territory>
+			<territory type="VE">Venezuela</territory>
+			<territory type="VG">Brettesche Juffer-Enselle</territory>
+			<territory type="VI">Ammärrikahnesche Juffer-Enselle</territory>
+			<territory type="VN">Vijätnamm</territory>
+			<territory type="VU">Vanuatu</territory>
+			<territory type="WF">Wallis un Futuna</territory>
+			<territory type="WS">Sammoha</territory>
+			<territory type="YE">Jämmen</territory>
+			<territory type="YT">Majott</territory>
+			<territory type="ZA">Södaffrika</territory>
+			<territory type="ZM">Sambija</territory>
+			<territory type="ZW">Simbabwe</territory>
+			<territory type="ZZ">Jääjend onbikannt</territory>
+		</territories>
+		<variants>
+			<variant type="1901">Schriefwiiß vun 1901 aff</variant>
+			<variant type="1994">resijanesch schtandatt Schriefwiiß vun 1994</variant>
+			<variant type="1996">Schriefwiiß vun 1996 aff</variant>
+			<variant type="1606NICT">späätmeddelfranzüüsesch vör 1606</variant>
+			<variant type="1694ACAD">fröhneufranzüüsesch aff 1694</variant>
+			<variant type="1959ACAD">akademesche Schriefwiiß vun 1959</variant>
+			<variant type="AREVELA">oß-armeensch</variant>
+			<variant type="AREVMDA">wäß-armeenesch</variant>
+			<variant type="BAKU1926">eijheijtlesch törkesch lateijnesch Allfabeet</variant>
+			<variant type="BISKE">zint jorjo'sche uder bila'sche reijanesche Dijaläk</variant>
+			<variant type="BOONT">boontlingsche Dijaläk</variant>
+			<variant type="FONIPA">IPA-Loutschreff</variant>
+			<variant type="FONUPA">UPA-Loutschreff</variant>
+			<variant type="KKCOR">jemeinsam widderbeläf kornesche Schriefwiiß</variant>
+			<variant type="LIPAW">lipovazesch resijanesche Dijaläk</variant>
+			<variant type="MONOTON">monnotoonesch</variant>
+			<variant type="NEDIS">natisonesche Dijaläk</variant>
+			<variant type="NJIVA">gniva'sche uder njiva'sche reijanesche Dijaläk</variant>
+			<variant type="OSOJS">oseacco'sche uder osojanesche reijanesche Dijaläk</variant>
+			<variant type="PINYIN">Pinjin-Ömschreff</variant>
+			<variant type="POLYTON">pollütoonesch</variant>
+			<variant type="REVISED">neu opjelate Schriefwiiß</variant>
+			<variant type="ROZAJ">resijanesche Dijaläk</variant>
+			<variant type="SCOTLAND">schottesche Dijaläk</variant>
+			<variant type="SCOUSE">scouse Dijaläk</variant>
+			<variant type="SOLBA">stolvizanesche uder solbizanesch reijanesche Dijaläk</variant>
+			<variant type="TARASK">Taraskijeviza-Schriefwiiß</variant>
+			<variant type="UCCOR">eijheijtlesch Schriefwiiß</variant>
+			<variant type="UCRCOR">eijheijtlesch, neu opjelate Schriefwiiß</variant>
+			<variant type="VALENCIA">valenzijaanesche Dijaläk</variant>
+			<variant type="WADEGILE">lateijnesch Ömschreff noh Wade-Giles</variant>
+		</variants>
+		<keys>
+			<key type="calendar">dä Kalländer</key>
+			<key type="collation">de Reijefollsch zom Zotiere</key>
+			<key type="currency">de Zoot Jeld</key>
+		</keys>
+		<types>
+			<type type="big5han" key="collation">zoteert nohm tradizjonäll schineesesch Big5</type>
+			<type type="buddhist" key="calendar">buddistesche Kaländer</type>
+			<type type="chinese" key="calendar">schineesesche Kaländer</type>
+			<type type="direct" key="collation">diräk zoteert</type>
+			<type type="gb2312han" key="collation">zoteert nohm eijfacher schineesesch GB2312</type>
+			<type type="gregorian" key="calendar">jrejorejaanesche Kaländer</type>
+			<type type="hebrew" key="calendar">jüdesche Kaländer</type>
+			<type type="indian" key="calendar">indesche Nazjonahl-Kaländer</type>
+			<type type="islamic" key="calendar">ißlaamesche Kaländer</type>
+			<type type="islamic-civil" key="calendar">wältlesche islaamesche kaländer</type>
+			<type type="japanese" key="calendar">japaanesche Kaländer</type>
+			<type type="phonebook" key="collation">zotteert wi em Tellefoonbooch</type>
+			<type type="pinyin" key="collation">zoteert noh de Pinjin Ömschreff vum eijfacher schineesesch</type>
+			<type type="roc" key="calendar">rotschineesesche Kaländer</type>
+			<type type="stroke" key="collation">zoteert noh de Stresche vum tradizjonäll schineesesch</type>
+			<type type="traditional" key="collation">tradizjonäll zoteert</type>
+		</types>
+		<measurementSystemNames>
+			<measurementSystemName type="metric">europpäjesch</measurementSystemName>
+			<measurementSystemName type="US">ammärekaanesch</measurementSystemName>
+		</measurementSystemNames>
+		<codePatterns>
+			<codePattern type="language">de Schprooch afjekööz met „{0}“</codePattern>
+			<codePattern type="script">de Schreff afjekööz met „{0}“</codePattern>
+			<codePattern type="territory">de Jääjend afjekööz met „{0}“</codePattern>
+		</codePatterns>
+	</localeDisplayNames>
+	<characters>
+		<exemplarCharacters>[\u0328 a å ä æ b c d e ë ė f g h i j k l m n o ö œ p q r s t u ů ü v w x y z]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[á à ă â å ä ã ā æ ç é è ĕ ê ë ē ğ í ì ĭ î ï ī ĳ ı ł ñ ó ò ŏ ô ö ø ō œ ú ù ŭ û ü ū ÿ]</exemplarCharacters>
+		<exemplarCharacters type="currencySymbol">[a b c č d e f g h i j k l ł m n o p q r s t u v w x y z]</exemplarCharacters>
+		<exemplarCharacters type="index">[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z]</exemplarCharacters>
+	</characters>
+	<delimiters>
+		<quotationStart>„</quotationStart>
+		<quotationEnd>“</quotationEnd>
+		<alternateQuotationStart>‚</alternateQuotationStart>
+		<alternateQuotationEnd>‘</alternateQuotationEnd>
+	</delimiters>
+	<dates>
+		<calendars>
+			<calendar type="buddhist">
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE, d. MMMM y G</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+			</calendar>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">Jan.</month>
+							<month type="2">Fäb.</month>
+							<month type="3">Mar.</month>
+							<month type="4">Apr.</month>
+							<month type="5">Mäi</month>
+							<month type="6">Jun.</month>
+							<month type="7">Jul.</month>
+							<month type="8">Oug.</month>
+							<month type="9">Säp.</month>
+							<month type="10">Okt.</month>
+							<month type="11">Nov.</month>
+							<month type="12">Dez.</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">Jannewa</month>
+							<month type="2">Fäbrowa</month>
+							<month type="3">Määz</month>
+							<month type="4">Aprell</month>
+							<month type="5">Mäi</month>
+							<month type="6">Juuni</month>
+							<month type="7">Juuli</month>
+							<month type="8">Oujoß</month>
+							<month type="9">Septämber</month>
+							<month type="10">Oktoober</month>
+							<month type="11">Novämber</month>
+							<month type="12">Dezämber</month>
+						</monthWidth>
+					</monthContext>
+					<monthContext type="stand-alone">
+						<monthWidth type="narrow">
+							<month type="1">J</month>
+							<month type="2">F</month>
+							<month type="3">M</month>
+							<month type="4">A</month>
+							<month type="5">M</month>
+							<month type="6">J</month>
+							<month type="7">J</month>
+							<month type="8">A</month>
+							<month type="9">S</month>
+							<month type="10">O</month>
+							<month type="11">N</month>
+							<month type="12">D</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">Su.</day>
+							<day type="mon">Mo.</day>
+							<day type="tue">Di.</day>
+							<day type="wed">Me.</day>
+							<day type="thu">Du.</day>
+							<day type="fri">Fr.</day>
+							<day type="sat">Sa.</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">Sunndaach</day>
+							<day type="mon">Moondaach</day>
+							<day type="tue">Dinnsdaach</day>
+							<day type="wed">Metwoch</day>
+							<day type="thu">Dunnersdaach</day>
+							<day type="fri">Friidaach</day>
+							<day type="sat">Samsdaach</day>
+						</dayWidth>
+					</dayContext>
+					<dayContext type="stand-alone">
+						<dayWidth type="narrow">
+							<day type="sun">S</day>
+							<day type="mon">M</day>
+							<day type="tue">D</day>
+							<day type="wed">M</day>
+							<day type="thu">D</day>
+							<day type="fri">F</day>
+							<day type="sat">S</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<quarters>
+					<quarterContext type="format">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">1.Q.</quarter>
+							<quarter type="2">2.Q.</quarter>
+							<quarter type="3">3.Q.</quarter>
+							<quarter type="4">4.Q.</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">1. Quattaal</quarter>
+							<quarter type="2">2. Quattaal</quarter>
+							<quarter type="3">3. Quattaal</quarter>
+							<quarter type="4">4. Quattaal</quarter>
+						</quarterWidth>
+					</quarterContext>
+				</quarters>
+				<dayPeriods>
+					<dayPeriodContext type="format">
+						<dayPeriodWidth type="abbreviated">
+							<dayPeriod type="am">v.m.</dayPeriod>
+							<dayPeriod type="pm">n.m.</dayPeriod>
+						</dayPeriodWidth>
+						<dayPeriodWidth type="wide">
+							<dayPeriod type="am">Uhr des vormittags</dayPeriod>
+							<dayPeriod type="pm">Uhr des nachmittags</dayPeriod>
+						</dayPeriodWidth>
+					</dayPeriodContext>
+					<dayPeriodContext type="stand-alone">
+						<dayPeriodWidth type="wide">
+							<dayPeriod type="am">Vormittag</dayPeriod>
+							<dayPeriod type="pm">Nachmittag</dayPeriod>
+						</dayPeriodWidth>
+					</dayPeriodContext>
+				</dayPeriods>
+				<eras>
+					<eraNames>
+						<era type="0">vür Chrestus</era>
+						<era type="1">noh Chrestus</era>
+					</eraNames>
+					<eraAbbr>
+						<era type="0">v.Ch.</era>
+						<era type="1">n.Ch.</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE, 'dä' d. MMMM y</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>d. MMMM y</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="medium">
+						<dateFormat>
+							<pattern>d. MMM y</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern>d. M. yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+				<timeFormats>
+					<timeFormatLength type="full">
+						<timeFormat>
+							<pattern>HH:mm:ss zzzz</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="long">
+						<timeFormat>
+							<pattern>HH:mm:ss z</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="medium">
+						<timeFormat>
+							<pattern>HH:mm:ss</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="short">
+						<timeFormat>
+							<pattern>HH:mm</pattern>
+						</timeFormat>
+					</timeFormatLength>
+				</timeFormats>
+				<dateTimeFormats>
+					<availableFormats>
+						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="EEEd">EEE, 'dä' d.</dateFormatItem>
+						<dateFormatItem id="hm">H:mm</dateFormatItem>
+						<dateFormatItem id="Hm">H:mm</dateFormatItem>
+						<dateFormatItem id="hms">H:mm:ss</dateFormatItem>
+						<dateFormatItem id="Hms">H:mm:ss</dateFormatItem>
+						<dateFormatItem id="M">L</dateFormatItem>
+						<dateFormatItem id="MMM">LLL</dateFormatItem>
+						<dateFormatItem id="MMMd">d. MMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d. MMMM</dateFormatItem>
+						<dateFormatItem id="ms">mm:ss</dateFormatItem>
+						<dateFormatItem id="y">y</dateFormatItem>
+						<dateFormatItem id="yMMM">y MMM</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM y</dateFormatItem>
+					</availableFormats>
+					<intervalFormats>
+						<intervalFormatItem id="d">
+							<greatestDifference id="d">d–d</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hm">
+							<greatestDifference id="m">H:mm–H:mm</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M–M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="d">dd. - dd. MM.</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">LLL–LLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMM">
+							<greatestDifference id="M">LLLL–LLLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="y">
+							<greatestDifference id="y">y–y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMM">
+							<greatestDifference id="M">MMMM–MMMM y</greatestDifference>
+							<greatestDifference id="y">MMMM–MMMM y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMM">
+							<greatestDifference id="M">MMMM–MMMM y</greatestDifference>
+							<greatestDifference id="y">MMMM y – MMMM y</greatestDifference>
+						</intervalFormatItem>
+					</intervalFormats>
+				</dateTimeFormats>
+				<fields>
+					<field type="era">
+						<displayName>Ära</displayName>
+					</field>
+					<field type="year">
+						<displayName>Johr</displayName>
+					</field>
+					<field type="month">
+						<displayName>Mohnd</displayName>
+					</field>
+					<field type="week">
+						<displayName>Woch</displayName>
+					</field>
+					<field type="day">
+						<displayName>Daach</displayName>
+						<relative type="-3">vörvörjestere</relative>
+						<relative type="-2">Vörjestere</relative>
+						<relative type="-1">jestere</relative>
+						<relative type="0">hück</relative>
+						<relative type="1">morje</relative>
+						<relative type="2">övvermorje</relative>
+						<relative type="3">övverövvermorje</relative>
+					</field>
+					<field type="weekday">
+						<displayName>Wochedaach</displayName>
+					</field>
+					<field type="dayperiod">
+						<displayName>v.m./n.m.</displayName>
+					</field>
+					<field type="hour">
+						<displayName>Schtund</displayName>
+					</field>
+					<field type="minute">
+						<displayName>Menutt</displayName>
+					</field>
+					<field type="second">
+						<displayName>Sekund</displayName>
+					</field>
+					<field type="zone">
+						<displayName>Zickzon</displayName>
+					</field>
+				</fields>
+			</calendar>
+		</calendars>
+		<timeZoneNames>
+			<hourFormat>+HH:mm;−HH:mm</hourFormat>
+			<gmtFormat>GMT{0}</gmtFormat>
+			<regionFormat>Zick vun {0}</regionFormat>
+			<fallbackFormat>{1} ({0})</fallbackFormat>
+			<zone type="Etc/Unknown">
+				<exemplarCity>- weße mer nit -</exemplarCity>
+			</zone>
+			<zone type="Antarctica/South_Pole">
+				<exemplarCity>Södpol</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Syowa">
+				<exemplarCity>Schoowa-Schtazjohn op dä Ensel Onjul</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Vostok">
+				<exemplarCity>Wostok</exemplarCity>
+			</zone>
+			<zone type="Antarctica/DumontDUrville">
+				<exemplarCity>Dumont-d'Urville-Schtazjohn</exemplarCity>
+			</zone>
+			<zone type="America/St_Johns">
+				<exemplarCity>Zint John's</exemplarCity>
+			</zone>
+			<zone type="Asia/Urumqi">
+				<exemplarCity>Urrumptschi</exemplarCity>
+			</zone>
+			<zone type="Pacific/Galapagos">
+				<exemplarCity>Jalapagos</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Canary">
+				<exemplarCity>Kannaare</exemplarCity>
+			</zone>
+			<zone type="Asia/Aqtobe">
+				<exemplarCity>Aqtöbe</exemplarCity>
+			</zone>
+			<zone type="Asia/Qyzylorda">
+				<exemplarCity>Qysylorda</exemplarCity>
+			</zone>
+			<zone type="Asia/Ulaanbaatar">
+				<exemplarCity>Ulan Bator</exemplarCity>
+			</zone>
+			<zone type="America/Mexico_City">
+				<exemplarCity>Schtadt Mexiko</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Azores">
+				<exemplarCity>Azoore</exemplarCity>
+			</zone>
+			<zone type="Europe/Moscow">
+				<exemplarCity>Moskau</exemplarCity>
+			</zone>
+			<zone type="Europe/Volgograd">
+				<exemplarCity>Wolgograd</exemplarCity>
+			</zone>
+			<zone type="Asia/Yekaterinburg">
+				<exemplarCity>Jekaterinburg</exemplarCity>
+			</zone>
+			<zone type="Asia/Krasnoyarsk">
+				<exemplarCity>Krasnojarsk</exemplarCity>
+			</zone>
+			<zone type="Asia/Yakutsk">
+				<exemplarCity>Jakutsk</exemplarCity>
+			</zone>
+			<zone type="Asia/Vladivostok">
+				<exemplarCity>Wladiwostok</exemplarCity>
+			</zone>
+			<zone type="Asia/Kamchatka">
+				<exemplarCity>Kamschattka</exemplarCity>
+			</zone>
+			<zone type="Europe/Uzhgorod">
+				<exemplarCity>Uschjorod</exemplarCity>
+			</zone>
+			<zone type="Europe/Zaporozhye">
+				<exemplarCity>Saporischschja</exemplarCity>
+			</zone>
+			<zone type="Pacific/Honolulu">
+				<exemplarCity>Honululu</exemplarCity>
+			</zone>
+			<zone type="America/North_Dakota/New_Salem">
+				<exemplarCity>Neu Salem en Nood Dakota</exemplarCity>
+			</zone>
+			<zone type="America/North_Dakota/Center">
+				<exemplarCity>Zenter in Nord-Dakota</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Vincennes">
+				<exemplarCity>Vincennes en Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Petersburg">
+				<exemplarCity>Petersburg en Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Tell_City">
+				<exemplarCity>Tell City en Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Knox">
+				<exemplarCity>Knox en Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Winamac">
+				<exemplarCity>Winamac en Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Marengo">
+				<exemplarCity>Marengo en Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Indiana/Vevay">
+				<exemplarCity>Vevay en Indiana</exemplarCity>
+			</zone>
+			<zone type="America/Kentucky/Monticello">
+				<exemplarCity>Monticello en Kentucky</exemplarCity>
+			</zone>
+			<metazone type="Azores">
+				<commonlyUsed>false</commonlyUsed>
+			</metazone>
+			<metazone type="Cape_Verde">
+				<commonlyUsed>false</commonlyUsed>
+			</metazone>
+			<metazone type="Chamorro">
+				<long>
+					<generic>Zick vun de Nood-Marijanne-Enselle</generic>
+				</long>
+				<short>
+					<generic>Zick vun de Nood-Marijanne-Enselle</generic>
+				</short>
+			</metazone>
+			<metazone type="Europe_Central">
+				<long>
+					<standard>Zick vun Meddel-Europpa</standard>
+					<daylight>Meddel-Europpa sing Summerzick</daylight>
+				</long>
+				<short>
+					<standard>MEZ</standard>
+					<daylight>MESZ</daylight>
+				</short>
+			</metazone>
+			<metazone type="Europe_Eastern">
+				<long>
+					<standard>Zick vun Oß-Europpa</standard>
+					<daylight>Summerzick vun Oß-Europpa</daylight>
+				</long>
+				<short>
+					<standard>OEZ</standard>
+					<daylight>OESZ</daylight>
+				</short>
+			</metazone>
+			<metazone type="Europe_Western">
+				<long>
+					<standard>Weß-Europpa sing Zick</standard>
+					<daylight>Weß-Europpa sing Summerzick</daylight>
+				</long>
+				<short>
+					<standard>WEZ</standard>
+					<daylight>WESZ</daylight>
+				</short>
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+			<metazone type="GMT">
+				<long>
+					<standard>Greenwich Standat-Zick</standard>
+				</long>
+				<commonlyUsed>true</commonlyUsed>
+			</metazone>
+		</timeZoneNames>
+	</dates>
+	<numbers>
+		<symbols>
+			<decimal>,</decimal>
+			<group> </group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<patternDigit>#</patternDigit>
+			<plusSign>+</plusSign>
+			<minusSign>−</minusSign>
+			<exponential>×10^</exponential>
+			<perMille>‰</perMille>
+			<infinity>∞</infinity>
+			<nan>¤¤¤</nan>
+		</symbols>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<scientificFormats>
+			<scientificFormatLength>
+				<scientificFormat>
+					<pattern>#E0</pattern>
+				</scientificFormat>
+			</scientificFormatLength>
+		</scientificFormats>
+		<percentFormats>
+			<percentFormatLength>
+				<percentFormat>
+					<pattern>#,##0 %</pattern>
+				</percentFormat>
+			</percentFormatLength>
+		</percentFormats>
+		<currencyFormats>
+			<currencyFormatLength>
+				<currencyFormat>
+					<pattern>#,##0.00 ¤</pattern>
+				</currencyFormat>
+			</currencyFormatLength>
+			<unitPattern count="other">{0} {1}</unitPattern>
+		</currencyFormats>
+		<currencies>
+			<currency type="AED">
+				<displayName>de vereineschte arraabesche Emiraate ier Dirham</displayName>
+			</currency>
+			<currency type="AFN">
+				<displayName>Afjahni</displayName>
+			</currency>
+			<currency type="ALL">
+				<displayName>albaanesche Lek</displayName>
+			</currency>
+			<currency type="ANG">
+				<displayName>neederlängsch antillesche Jullde</displayName>
+			</currency>
+			<currency type="ARS">
+				<displayName>ajentiinesche Peeso</displayName>
+			</currency>
+			<currency type="AUD">
+				<displayName>austraalesche Dollaa</displayName>
+			</currency>
+			<currency type="AWG">
+				<displayName>arubesche Florin</displayName>
+			</currency>
+			<currency type="BBD">
+				<displayName>Barbados-Dollaa</displayName>
+			</currency>
+			<currency type="BGN">
+				<displayName>buljaaresche Lev</displayName>
+			</currency>
+			<currency type="BIF">
+				<displayName>burundesche Franke</displayName>
+			</currency>
+			<currency type="BMD">
+				<displayName>Bermuuda-Dollaa</displayName>
+			</currency>
+			<currency type="BND">
+				<displayName>Brunei-Dollaaa</displayName>
+			</currency>
+			<currency type="BOB">
+				<displayName>Bollivijano</displayName>
+			</currency>
+			<currency type="BRL">
+				<displayName>Real</displayName>
+			</currency>
+			<currency type="BSD">
+				<displayName>bahama'sche Dollaa</displayName>
+			</currency>
+			<currency type="BYR">
+				<displayName>wiißrußesche Rubel</displayName>
+			</currency>
+			<currency type="CAD">
+				<displayName>kannaadesche Dollaa</displayName>
+			</currency>
+			<currency type="CDF">
+				<displayName>kongjoleesesche Frang</displayName>
+			</currency>
+			<currency type="CHF">
+				<displayName>schweijzer Fränkli</displayName>
+			</currency>
+			<currency type="CLP">
+				<displayName>schileenesche Peesos</displayName>
+			</currency>
+			<currency type="CNY">
+				<displayName>schineesesche Yuan Renminbi</displayName>
+			</currency>
+			<currency type="COP">
+				<displayName>kolumbesche Pesos</displayName>
+			</currency>
+			<currency type="CUP">
+				<displayName>kubaanesche Peeso</displayName>
+			</currency>
+			<currency type="CVE">
+				<displayName>kapverdesche Eskuudos</displayName>
+			</currency>
+			<currency type="CZK">
+				<displayName>tschäschesche Kruhne</displayName>
+			</currency>
+			<currency type="DKK">
+				<displayName>dänesche Kruhne</displayName>
+			</currency>
+			<currency type="DZD">
+				<displayName>aljeresche Denaa</displayName>
+			</currency>
+			<currency type="EEK">
+				<displayName>Äßnesche Kruhne</displayName>
+			</currency>
+			<currency type="EGP">
+				<displayName>äjiptesche Pongk</displayName>
+			</currency>
+			<currency type="EUR">
+				<displayName>Euro</displayName>
+			</currency>
+			<currency type="GBP">
+				<displayName>brittesche £</displayName>
+			</currency>
+			<currency type="GIP">
+				<displayName>jibraltaa'sche Pongk</displayName>
+			</currency>
+			<currency type="HKD">
+				<displayName>Hong Kong Dollar</displayName>
+			</currency>
+			<currency type="HUF">
+				<displayName>Forint</displayName>
+			</currency>
+			<currency type="IDR">
+				<displayName>indoneesesche Ruupije</displayName>
+			</currency>
+			<currency type="INR">
+				<displayName>indesche Ruupije</displayName>
+			</currency>
+			<currency type="IQD">
+				<displayName>iraakesche Denaa</displayName>
+			</currency>
+			<currency type="IRR">
+				<displayName>persesche Rial</displayName>
+			</currency>
+			<currency type="ISK">
+				<displayName>ißländesche Kruhne</displayName>
+			</currency>
+			<currency type="JMD">
+				<displayName>jamaikaanesche Dollaa</displayName>
+			</currency>
+			<currency type="JOD">
+				<displayName>Jordaanesche Dollaa</displayName>
+			</currency>
+			<currency type="JPY">
+				<displayName>japaanesche Jen</displayName>
+			</currency>
+			<currency type="KES">
+				<displayName>Kenjaanesche Schillinge</displayName>
+			</currency>
+			<currency type="KMF">
+				<displayName>kommooresche Frangke</displayName>
+			</currency>
+			<currency type="KWD">
+				<displayName>kuwaitesche Denaa</displayName>
+			</currency>
+			<currency type="KYD">
+				<displayName>Kaimann-Dollaa</displayName>
+			</currency>
+			<currency type="LBP">
+				<displayName>Libaneesesche Pongk</displayName>
+			</currency>
+			<currency type="LKR">
+				<displayName>schri-lankesche Ruupije</displayName>
+			</currency>
+			<currency type="LRD">
+				<displayName>liberijaanesche Dollaa</displayName>
+			</currency>
+			<currency type="LYD">
+				<displayName>libesche Denaa</displayName>
+			</currency>
+			<currency type="MAD">
+				<displayName>marrokaanesche Dirhamm</displayName>
+			</currency>
+			<currency type="MKD">
+				<displayName>mazedoonesche Denaa</displayName>
+			</currency>
+			<currency type="MUR">
+				<displayName>maurizjahnesche Ruupije</displayName>
+			</currency>
+			<currency type="MXN">
+				<displayName>mexekaanesche Peeso</displayName>
+			</currency>
+			<currency type="NAD">
+				<displayName>namiibesche Dollaa</displayName>
+			</currency>
+			<currency type="NOK">
+				<displayName>Norrweejesche Kruhne</displayName>
+			</currency>
+			<currency type="NPR">
+				<displayName>nepaleesesche Ruupije</displayName>
+			</currency>
+			<currency type="NZD">
+				<displayName>neuseeländesche Dollaa</displayName>
+			</currency>
+			<currency type="OMR">
+				<displayName>ommaanesche Rijal</displayName>
+			</currency>
+			<currency type="PHP">
+				<displayName>fillipiinesche Pseos</displayName>
+			</currency>
+			<currency type="PKR">
+				<displayName>pakestaanesche Ruupije</displayName>
+			</currency>
+			<currency type="PLN">
+				<displayName>Zloti</displayName>
+			</currency>
+			<currency type="QAR">
+				<displayName>Kataaresche Rijal</displayName>
+			</currency>
+			<currency type="RSD">
+				<displayName>särbesche Denaare</displayName>
+			</currency>
+			<currency type="RUB">
+				<displayName>russesche Ruubel</displayName>
+			</currency>
+			<currency type="RWF">
+				<displayName>ruandesche Frang</displayName>
+			</currency>
+			<currency type="SAR">
+				<displayName>saudesche Rijal</displayName>
+			</currency>
+			<currency type="SCR">
+				<displayName>seischellesche Ruupije</displayName>
+			</currency>
+			<currency type="SDG">
+				<displayName>sudaneesesche Pongk</displayName>
+			</currency>
+			<currency type="SEK">
+				<displayName>schweedesche Kruhne</displayName>
+			</currency>
+			<currency type="SGD">
+				<displayName>singjapurejaanesche Dollaa</displayName>
+			</currency>
+			<currency type="SKK">
+				<displayName>ßlovaakesche Kruhne</displayName>
+			</currency>
+			<currency type="SOS">
+				<displayName>somaalesche Schillenge</displayName>
+			</currency>
+			<currency type="SRD">
+				<displayName>Sürinameesesche Dollaa</displayName>
+			</currency>
+			<currency type="SYP">
+				<displayName>süüresche Pund</displayName>
+			</currency>
+			<currency type="THB">
+				<displayName>tailändesche Baht</displayName>
+			</currency>
+			<currency type="TND">
+				<displayName>tuneesesche Denaa</displayName>
+			</currency>
+			<currency type="TRY">
+				<displayName>törkesche Liire</displayName>
+			</currency>
+			<currency type="TWD">
+				<displayName>neu taiwaneesesche Dollaa</displayName>
+			</currency>
+			<currency type="TZS">
+				<displayName>tansaanesche Schillenge</displayName>
+			</currency>
+			<currency type="UGX">
+				<displayName>ujandesche Schillenge</displayName>
+			</currency>
+			<currency type="USD">
+				<displayName>US$</displayName>
+			</currency>
+			<currency type="UYU">
+				<displayName>urrujuwaische Peeso</displayName>
+			</currency>
+			<currency type="XAG">
+				<displayName>Sellver</displayName>
+			</currency>
+			<currency type="XAU">
+				<displayName>Jold</displayName>
+			</currency>
+			<currency type="XCD">
+				<displayName>oß-karribbesche Dollaa</displayName>
+			</currency>
+			<currency type="XXX">
+				<displayName>xxx</displayName>
+			</currency>
+			<currency type="YER">
+				<displayName>jemenitesche Rijal</displayName>
+			</currency>
+			<currency type="ZAR">
+				<displayName>Rand</displayName>
+			</currency>
+			<currency type="ZWD">
+				<displayName>simbabwesche Dollaa</displayName>
+			</currency>
+		</currencies>
+	</numbers>
+	<units>
+		<unit type="day">
+			<unitPattern count="other">{0} Dääsch</unitPattern>
+		</unit>
+		<unit type="hour">
+			<unitPattern count="other">{0} Schtunde</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="other">{0}  Menutte</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="other">{0} Mohnde</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="other">{0} Sekunde</unitPattern>
+		</unit>
+		<unit type="week">
+			<unitPattern count="other">{0} Woche</unitPattern>
+		</unit>
+		<unit type="year">
+			<unitPattern count="other">{0} Johre</unitPattern>
+		</unit>
+	</units>
+	<listPatterns>
+		<listPattern>
+			<listPatternPart type="2">{0} un {1}</listPatternPart>
+			<listPatternPart type="end">{0} un {1}</listPatternPart>
+		</listPattern>
+	</listPatterns>
+	<posix>
+		<messages>
+			<yesstr>jo:joh:joo:j</yesstr>
+			<nostr>nä:nää:näh:n</nostr>
+		</messages>
+	</posix>
+</ldml>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4208 $"/>
+		<generation date="$Date: 2009-07-03 13:17:21 -0500 (Fri, 03 Jul 2009) $"/>
+		<language type="cy" /> 
+	</identity>
+	<collations  validSubLocales="cy_GB">
+		<collation type="standard">
+                	<rules>
+				<reset>C</reset>
+					<p>ch</p>
+					<t>Ch</t>
+					<t>CH</t>
+				<reset>D</reset>
+					<p>dd</p>
+					<t>Dd</t>
+					<t>DD</t>
+				<reset>F</reset>
+					<p>ff</p>
+					<t>Ff</t>
+					<t>FF</t>
+				<reset>G</reset>
+					<p>ng</p>
+					<t>Ng</t>
+					<t>NG</t>
+				<reset>L</reset>
+					<p>ll</p>
+					<t>Ll</t>
+					<t>LL</t>
+				<reset>P</reset>
+					<p>ph</p>
+					<t>Ph</t>
+					<t>PH</t>
+				<reset>R</reset>
+					<p>rh</p>
+					<t>Rh</t>
+					<t>RH</t>
+				<reset>T</reset>
+					<p>th</p>
+					<t>Th</t>
+					<t>TH</t>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

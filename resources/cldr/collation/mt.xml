@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4944 $"/>
+		<generation date="$Date: 2010-05-27 16:25:15 -0500 (Thu, 27 May 2010) $"/>
+		<language type="mt" /> 
+	</identity>
+		<collations  validSubLocales="mt_MT">
+			<collation type="standard">
+				<settings caseFirst="upper"/>
+				<rules>
+					<reset before="primary">c</reset>
+					<p>Ċ</p>
+					<t>ċ</t>
+					<reset before="primary">g</reset>
+					<p>Ġ</p>
+					<t>ġ</t>
+					<reset before="primary">h</reset>
+					<p>GĦ</p>
+					<t>Għ</t>
+					<t>gĦ</t>
+					<t>għ</t>
+					<reset before="primary">i</reset>
+					<p>Ħ</p>
+					<t>ħ</t>
+					<reset before="primary">z</reset>
+					<p>Ż</p>
+					<t>ż</t>
+				</rules>
+			</collation>
+		</collations>
+</ldml>

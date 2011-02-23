@@ -25,7 +25,7 @@
 namespace ZendTest\Measure;
 use Zend\Measure;
 use Zend\Registry;
-use Zend\Locale\Data;
+use Zend\Locale\Data\Cldr;
 
 /**
  * @category   Zend
@@ -43,7 +43,7 @@ class TemperatureTest extends \PHPUnit_Framework_TestCase
             $registry = Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        Data::removeCache();
+        Cldr::removeCache();
 
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');

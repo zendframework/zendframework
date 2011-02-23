@@ -46,7 +46,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
     public function testReturnsSessionManager()
     {
         $sessionManager = $this->resource->init();
-        $this->assertType('Zend\Session\Manager', $sessionManager);
+        $this->assertInstanceOf('Zend\Session\Manager', $sessionManager);
     }
 
     public function testSetSaveHandler()
@@ -63,7 +63,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
         $this->resource->setSaveHandler($saveHandlerClassName);
 
-        $this->assertType($saveHandlerClassName, $this->resource->getSaveHandler());
+        $this->assertInstanceOf($saveHandlerClassName, $this->resource->getSaveHandler());
     }
 
     public function testSetSaveHandlerArray()
@@ -72,7 +72,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
         $this->resource->setSaveHandler(array('class' => $saveHandlerClassName));
 
-        $this->assertType($saveHandlerClassName, $this->resource->getSaveHandler());
+        $this->assertInstanceOf($saveHandlerClassName, $this->resource->getSaveHandler());
     }
 
     public function testSetOptions()

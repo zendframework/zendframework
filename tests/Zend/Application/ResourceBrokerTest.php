@@ -58,7 +58,7 @@ class ResourceBrokerTest extends \PHPUnit_Framework_TestCase
     {
         $this->broker->registerSpec('view');
         $view = $this->broker->load('view');
-        $this->assertType('Zend\Application\Resource\View', $view);
+        $this->assertInstanceOf('Zend\Application\Resource\View', $view);
         $this->assertNull($view->getBootstrap());
     }
 
@@ -67,7 +67,7 @@ class ResourceBrokerTest extends \PHPUnit_Framework_TestCase
         $this->broker->setBootstrap($this->bootstrap);
         $this->broker->registerSpec('view');
         $view = $this->broker->load('view');
-        $this->assertType('Zend\Application\Resource\View', $view);
+        $this->assertInstanceOf('Zend\Application\Resource\View', $view);
         $this->assertSame($this->bootstrap, $view->getBootstrap());
     }
 

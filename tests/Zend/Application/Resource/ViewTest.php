@@ -40,14 +40,6 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        // Store original autoloaders
-        $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no
-            // autoloaders registered...
-            $this->loaders = array();
-        }
-
         $this->application = new Application('testing', array(
             'resources' => array('frontcontroller' => array()),
         ));
@@ -60,15 +52,6 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        // Restore original autoloaders
-        $loaders = spl_autoload_functions();
-        foreach ($loaders as $loader) {
-            spl_autoload_unregister($loader);
-        }
-
-        foreach ($this->loaders as $loader) {
-            spl_autoload_register($loader);
-        }
     }
 
     public function testInitializationInitializesViewObject()

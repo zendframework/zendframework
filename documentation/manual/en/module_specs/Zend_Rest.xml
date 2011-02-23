@@ -7,7 +7,7 @@
         REST Web Services use service-specific <acronym>XML</acronym> formats. These ad-hoc
         standards mean that the manner for accessing a REST web service is
         different for each service. REST web services typically use <acronym>URL</acronym>
-        parameters (GET data) or path information for requesting data and POST
+        parameters (<constant>GET</constant> data) or path information for requesting data and POST
         data for sending data.
     </para>
 

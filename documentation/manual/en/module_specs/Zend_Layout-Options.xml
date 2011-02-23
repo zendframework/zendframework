@@ -102,8 +102,8 @@
         <title>helperClass and pluginClass must be passed to startMvc()</title>
 
         <para>
-            In order for the <code>helperClass</code> and
-            <code>pluginClass</code> settings to have effect, they must be
+            In order for the <property>helperClass</property> and
+            <property>pluginClass</property> settings to have effect, they must be
             passed in as options to <methodname>startMvc()</methodname>; if set later, they
             have no affect.
         </para>
@@ -197,7 +197,7 @@ $layout->setConfig($options);
 
             <para>
                 Note, however, that certain options, such as
-                <code>pluginClass</code> and <code>helperClass</code>, will have
+                <property>pluginClass</property> and <property>helperClass</property>, will have
                 no affect when passed using this method; they need to be passed
                 to the constructor or <methodname>startMvc()</methodname> method.
             </para>

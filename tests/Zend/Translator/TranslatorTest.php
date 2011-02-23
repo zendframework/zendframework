@@ -841,6 +841,38 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @ZF-10051
+     */
+    public function testSettingLogPriorityForLog()
+    {
+        $stream = fopen('php://memory', 'w+');
+        require_once 'Zend/Log/Writer/Stream.php';
+        $writer = new Zend_Log_Writer_Stream($stream);
+        require_once 'Zend/Log.php';
+        $log    = new Zend_Log($writer);
+
+        $lang = new Zend_Translate(array(
+            'adapter'     => Zend_Translate::AN_CSV,
+            'content'     => dirname(__FILE__) . '/Translate/Adapter/_files',
+            'locale'      => 'en',
+            'delimiter'   => ',',
+            'logPriority' => 3,
+            'log'         => $log)
+        );
+
+        $lang->setLocale('ru');
+
+        rewind($stream);
+        $this->assertContains('ERR (3)', stream_get_contents($stream));
+
+        $lang->setOptions(array('logPriority' => 1));
+        $lang->setLocale('sv');
+
+        rewind($stream);
+        $this->assertContains('ALERT (1)', stream_get_contents($stream));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

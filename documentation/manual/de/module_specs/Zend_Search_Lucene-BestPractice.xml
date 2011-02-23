@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22757 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Die besten Anwendungen</title>
@@ -14,14 +14,15 @@
         <para>
             Trotzdem ist es eine gute Idee die '<emphasis>id</emphasis>' und
             '<emphasis>score</emphasis>' Namen nicht zu verwenden um Doppeldeutigkeiten in den Namen
-            der <code>QueryHit</code> Eigenschaften zu verhindern.
+            der <classname>QueryHit</classname> Eigenschaften zu verhindern.
         </para>
 
         <para>
-            Die <classname>Zend_Search_Lucene_Search_QueryHit</classname> <code>id</code> und
-            <code>score</code> Eigenschaften referieren immer zur internen Lucene Dokumenten Id und
-            Treffer- <link linkend="zend.search.lucene.searching.results-scoring">Anzahl</link>.
-            Wenn ein indiziertes Dokument die gleichen Felder gespeichert hat, muß die
+            Die <classname>Zend_Search_Lucene_Search_QueryHit</classname> <property>id</property>
+            und <property>score</property> Eigenschaften referieren immer zur internen Lucene
+            Dokumenten Id und Treffer- <link
+                linkend="zend.search.lucene.searching.results-scoring">Anzahl</link>. Wenn ein
+            indiziertes Dokument die gleichen Felder gespeichert hat, muß die
             <methodname>getDocument()</methodname> Methode verwendet werden um auf Sie zuzugreifen:
         </para>
 

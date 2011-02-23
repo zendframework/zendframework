@@ -159,4 +159,16 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
+
+    /**
+     * @group ZF-9854
+     */
+    public function testDetectMbInternalEncoding()
+    {
+        if (!function_exists('mb_internal_encoding')) {
+            $this->markTestSkipped("Function 'mb_internal_encoding' not available");
+        }
+
+        $this->assertEquals(mb_internal_encoding(), $this->_filter->getEncoding());
+    }
 }

@@ -6,9 +6,10 @@
     <para>
         To send an e-mail in <acronym>HTML</acronym> format, set the body using the method
         <methodname>setBodyHTML()</methodname> instead of <methodname>setBodyText()</methodname>.
-        The <acronym>MIME</acronym> content type will automatically be set to <code>text/html</code>
-        then. If you use both <acronym>HTML</acronym> and Text bodies, a multipart/alternative
-        <acronym>MIME</acronym> message will automatically be generated:
+        The <acronym>MIME</acronym> content type will automatically be set to
+        <property>text/html</property> then. If you use both <acronym>HTML</acronym> and Text
+        bodies, a multipart/alternative <acronym>MIME</acronym> message will automatically be
+        generated:
     </para>
 
     <example id="zend.mail.html-mails.example-1">

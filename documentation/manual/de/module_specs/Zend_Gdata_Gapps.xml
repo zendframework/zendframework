@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22627 -->
+<!-- EN-Revision: 22742 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -22,7 +22,7 @@
 
     <para>
         Für weitere Information zur Google Apps Provisionierungs <acronym>API</acronym>, inklusive
-        Anleitungen für das einschalten des <acronym>API</acronym> Zugriffs, kann in die <ulink
+        Anleitungen für das Einschalten des <acronym>API</acronym> Zugriffs, kann in die <ulink
             url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisionierungs
             <acronym>API</acronym> V2.0 Referenz</ulink> gesehen werden.
     </para>
@@ -134,8 +134,9 @@ $user = $gdata->insertUser($user);
 
             <para>
                 Das Passwort den Benutzers sollte normalerweise als Klartext angegeben werden.
-                Operional kann das Passwort als SHA-1 Schlüssel angegeben werden wenn
-                <command>login->passwordHashFunction</command> auf 'SHA-1' gesetzt ist.
+                Operional kann das Passwort als <acronym>SHA-1</acronym> Schlüssel angegeben werden
+                wenn <command>login->passwordHashFunction</command> auf '<property>SHA-1</property>'
+                gesetzt ist.
             </para>
         </sect3>
 
@@ -189,7 +190,8 @@ echo 'Hat den Regeln zugestimmt: ' .
                 Wenn der spezifizierte Benutzer nicht gefunden werden kann wird eine
                 ServiceException mit einem Fehlercode von
                 <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant> geworfen.
-                ServiceExceptions werden in <xref linkend="zend.gdata.gapps.exceptions" />
+                ServiceExceptions werden in <link
+                    linkend="zend.gdata.gapps.exceptions">dem Kapitel über Exceptions</link>
                 behandelt.
             </para>
         </sect3>
@@ -220,7 +222,7 @@ foreach ($feed as $user) {
                 Alternativ kann <methodname>getUserFeed()</methodname> ohne Optionen aufgerufen
                 werden. Es ist zu beachten das dieser Feed bei größeren Domains durch den Server in
                 Seiten ausgegeben werden kann. Über weitere Informationen der Ausgabe in Seiten
-                siehe <xref linkend="zend.gdata.introduction.paging" />.
+                siehe <link linkend="zend.gdata.introduction.paging">das Kapitel über Seiten</link>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -453,7 +455,8 @@ echo 'Eigentümer: ' . $nickname->login->username . "\n";
                 Genau wie bei den Benutzern wird eine ServiceException geworfen wenn kein
                 entsprechender Spitzname gefunden wurde und ein Fehlercode von
                 <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant> zurückgegeben.
-                Auch das wird in <xref linkend="zend.gdata.gapps.exceptions" /> beschrieben.
+                Auch das wird in <link linkend="zend.gdata.gapps.exceptions">dem Kapitel über
+                    Exceptions</link> beschrieben.
             </para>
         </sect3>
 
@@ -562,12 +565,12 @@ $gdata->deleteNickname('bar');
 
         <para>
             Google Gruppen erlauben es Personen Nachrichten zu senden so wie eine Email Liste.
-            Google missbilligt die API der Email Listen. Google Gruppen bieten einige nette
-            Features wie verschachtelte Gruppen und Gruppen Besitzer. Wenn man mit einer neuen
-            Email Liste beginnen will, ist es empfehlenswert statt dessen Google Gruppen zu
-            verwenden. Google's Email Liste ist nicht mit Google Gruppen kompatibel. Wenn man also
-            eine Email Liste erstellt, scheint Sie nicht als Gruppe auf. Das Gegenteil ist natürlich
-            genauso wahr.
+            Google missbilligt die <acronym>API</acronym> der Email Listen. Google Gruppen bieten
+            einige nette Features wie verschachtelte Gruppen und Gruppen Besitzer. Wenn man mit
+            einer neuen Email Liste beginnen will, ist es empfehlenswert statt dessen Google Gruppen
+            zu verwenden. Google's Email Liste ist nicht mit Google Gruppen kompatibel. Wenn man
+            also eine Email Liste erstellt, scheint Sie nicht als Gruppe auf. Das Gegenteil ist
+            natürlich genauso wahr.
         </para>
 
         <para>
@@ -699,7 +702,7 @@ foreach ($feed->entry as $entry) {
 
             <para>
                 Um eine Gruppe zu löschen kann die bequeme Methode
-                deleteGroup() aufgerufen werden:
+                <methodname>deleteGroup()</methodname> aufgerufen werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1096,8 +1099,8 @@ foreach ($feed as $list) {
             <title>Löschen einer Email Liste</title>
 
             <para>
-                Um eine Email Liste zu löschen, muß die bequeme deleteEmailList() Methode aufgerufen
-                werden:
+                Um eine Email Liste zu löschen, muß die bequeme
+                <methodname>deleteEmailList()</methodname> Methode aufgerufen werden:
             </para>
 
             <programlisting language="php"><![CDATA[

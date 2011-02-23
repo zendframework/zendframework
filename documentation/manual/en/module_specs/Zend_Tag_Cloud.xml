@@ -20,31 +20,31 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>cloudDecorator</code>: defines the decorator for the
+                <property>cloudDecorator</property>: defines the decorator for the
                 cloud. Can either be the name of the class which should be
                 loaded by the pluginloader, an instance of
                 <classname>Zend_Tag_Cloud_Decorator_Cloud</classname> or an array
-                containing the string <code>decorator</code> and optionally
-                an array <code>options</code>, which will be passed to the
+                containing the string 'decorator' and optionally
+                an array 'options', which will be passed to the
                 decorators constructor.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>tagDecorator</code>: defines the decorator for individual
+                <property>tagDecorator</property>: defines the decorator for individual
                 tags. This can either be the name of the class which should be
                 loaded by the pluginloader, an instance of
                 <classname>Zend_Tag_Cloud_Decorator_Tag</classname> or an array
-                containing the string <code>decorator</code> and optionally
-                an array <code>options</code>, which will be passed to the
+                containing the string 'decorator' and optionally
+                an array 'options', which will be passed to the
                 decorators constructor.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>pluginLoader</code>: a different plugin loader to use.
+                <property>pluginLoader</property>: a different plugin loader to use.
                 Must be an instance of
                 <classname>Zend_Loader_PluginLoader_Interface</classname>.
             </para>
@@ -52,7 +52,7 @@
 
         <listitem>
             <para>
-                <code>prefixPath</code>: prefix paths to add to the plugin
+                <property>prefixPath</property>: prefix paths to add to the plugin
                 loader. Must be an array containing the keys prefix and path or
                 multiple arrays containing the keys prefix and path. Invalid
                 elements will be skipped.
@@ -61,14 +61,14 @@
 
         <listitem>
             <para>
-                <code>itemList</code>: a different item list to use. Must be an
+                <property>itemList</property>: a different item list to use. Must be an
                 instance of <classname>Zend_Tag_ItemList</classname>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>tags</code>: a list of tags to assign to the cloud. Each
+                <property>tags</property>: a list of tags to assign to the cloud. Each
                 tag must either implement <classname>Zend_Tag_Taggable</classname> or be
                 an array which can be used to instantiate
                 <classname>Zend_Tag_Item</classname>.
@@ -150,7 +150,7 @@ echo $cloud;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>fontSizeUnit</code>: defines the font-size unit
+                        <property>fontSizeUnit</property>: defines the font-size unit
                         used for all font-sizes. The possible values are:
                         em, ex, px, in, cm, mm, pt, pc and &#37;.
                     </para>
@@ -158,29 +158,29 @@ echo $cloud;
 
                 <listitem>
                     <para>
-                        <code>minFontSize</code>: the minimum font-size
+                        <property>minFontSize</property>: the minimum font-size
                         distributed through the tags (must be an integer).
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>maxFontSize</code>: the maximum font-size
+                        <property>maxFontSize</property>: the maximum font-size
                         distributed through the tags (must be an integer).
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>classList</code>: an arry of classes distributed
+                        <property>classList</property>: an arry of classes distributed
                         through the tags.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>htmlTags</code>: an array of <acronym>HTML</acronym> tags surounding
-                        the anchor. Each element can either be a string, which
+                        <property>htmlTags</property>: an array of <acronym>HTML</acronym> tags
+                        surounding the anchor. Each element can either be a string, which
                         is used as element type then, or an array containing
                         an attribute list for the element, defined as key/value
                         pair. In this case, the array key is used as element
@@ -203,15 +203,15 @@ echo $cloud;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>separator</code>: defines the separator which
+                        <property>separator</property>: defines the separator which
                         is placed between all tags.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>htmlTags</code>: an array of <acronym>HTML</acronym> tags surounding
-                        all tags. Each element can either be a string, which
+                        <property>htmlTags</property>: an array of <acronym>HTML</acronym> tags
+                        surounding all tags. Each element can either be a string, which
                         is used as element type then, or an array containing
                         an attribute list for the element, defined as key/value
                         pair. In this case, the array key is used as element type.

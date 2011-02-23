@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.oauth.introduction.getting-started">
     <title>Beginnen</title>
@@ -61,14 +61,14 @@ $consumer = new Zend_Oauth_Consumer($config);
         Zusätzlich sollte beachtet werden das verschiedene andere Konfigurationswerte nicht explizit
         verwendet werden: requestMethod und requestScheme. Standardmäßig sendet
         <classname>Zend_Oauth_Consumer</classname> Anfragen als POST (ausgenommen bei einer
-        Weiterleitung welche GET verwendet). Der konsumierende Client (siehe später) enthält auch
-        seine Authorisierung in Art eines Headers. Einige Services können, zu Ihrer Diskretion,
-        Alternativen benötigen. Man kann requestMethod (welche standardmäßig Zend_Oauth::POST ist)
-        zum Beispiel auf Zend_Oauth::GET zurückgesetzt, und requestScheme von seinem Standardwert
-        Zend_Oauth::REQUEST_SCHEME_HEADER entweder auf Zend_Oauth::REQUEST_SCHEME_POSTBODY oder auf
-        Zend_Oauth::REQUEST_SCHEME_QUERYSTRING. Typischerweise sollten die Standardwerte bis auf ein
-        paar bestimmte Ausnahmen problemlos funktionieren. Für Details sehen Sie bitte in die
-        Dokumentation des Service Providers.
+        Weiterleitung welche <constant>GET</constant> verwendet). Der konsumierende Client (siehe
+        später) enthält auch seine Authorisierung in Art eines Headers. Einige Services können, zu
+        Ihrer Diskretion, Alternativen benötigen. Man kann requestMethod (welche standardmäßig
+        Zend_Oauth::POST ist) zum Beispiel auf Zend_Oauth::GET zurückgesetzt, und requestScheme von
+        seinem Standardwert Zend_Oauth::REQUEST_SCHEME_HEADER entweder auf
+        Zend_Oauth::REQUEST_SCHEME_POSTBODY oder auf Zend_Oauth::REQUEST_SCHEME_QUERYSTRING.
+        Typischerweise sollten die Standardwerte bis auf ein paar bestimmte Ausnahmen problemlos
+        funktionieren. Für Details sehen Sie bitte in die Dokumentation des Service Providers.
     </para>
 
     <para>

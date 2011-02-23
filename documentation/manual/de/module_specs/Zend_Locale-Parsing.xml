@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 22755 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.parsing">
     <title>Normalisierung und Lokalisierung</title>
@@ -73,16 +73,17 @@ print $number; // wird 13524.678 zurückgeben
                 Da <methodname>getNumber($value, array $options = array())</methodname> extrem lange
                 Nummern lokalisieren kann, sollte das Ergebnis sorgfältig geprüft werden bevor
                 endlich genaue Berechnungen wie normale mathematische <acronym>PHP</acronym>
-                Operationen gemacht werden. Zum Beispiel <code>if ((string)int_val($number) !=
-                    $number) { benutze <ulink url="http://www.php.net/bc">BCMath</ulink> oder
-                    <ulink url="http://www.php.net/gmp">GMP</ulink></code>. Die meisten PHP
+                Operationen gemacht werden. Zum Beispiel
+                <command>if ((string)int_val($number) != $number) { </command> benutze <ulink
+                    url="http://www.php.net/bc">BCMath</ulink> oder
+                    <ulink url="http://www.php.net/gmp">GMP</ulink>. Die meisten PHP
                 Installationen unterstützen die BCMath Erweiterung.
             </para>
 
             <para>
                 Auch die Genauigkeit des dezimalen Ergebnisses kann zu einer gewünschten Länge
                 abgerundet werden bei <methodname>getNumber()</methodname> mit der Option
-                <code>'precision'</code>. Wenn keine Genauigkeit angegeben wurde, wird nicht
+                '<property>precision</property>'. Wenn keine Genauigkeit angegeben wurde, wird nicht
                 abgerundet. Für die Angabe der Genauigkeit dürfen nur <acronym>PHP</acronym> Integer
                 Zahlen verwendet werden. Das Ergebnis wird nicht gerundet. Deswegen wird "1.6" auch
                 "1" und nicht "2" zurückgeben, wenn als Genauigkeit null angegeben wurde.
@@ -90,11 +91,12 @@ print $number; // wird 13524.678 zurückgeben
 
             <para>
                 Wenn das dezimale Ergebnis zu einer gewünschten Länge abgeschnitten statt gerundet
-                werden soll kann stattdessen die Option <code>'number_format'</code> verwendet
-                werden. Die Länge des gewünschten dezimalen Ergebnisses kann mit der gewünschten
-                Länge von Nullen bestimmt werden. Das Ergebnis wird dann nicht gerundet. Wenn also
-                die definierte Genauigkeit innerhalb von <code>number_format</code> Null ist wird
-                "1.6" den Wert "1" und nicht "2" zurückgeben. Siehe das folgende Beispiel:
+                werden soll kann stattdessen die Option '<property>number_format</property>'
+                verwendet werden. Die Länge des gewünschten dezimalen Ergebnisses kann mit der
+                gewünschten Länge von Nullen bestimmt werden. Das Ergebnis wird dann nicht gerundet.
+                Wenn also die definierte Genauigkeit innerhalb von
+                <property>number_format</property> Null ist wird "1.6" den Wert "1" und nicht "2"
+                zurückgeben. Siehe das folgende Beispiel:
             </para>
 
             <example id="zend.locale.number.normalize.precision.example-1">

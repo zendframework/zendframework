@@ -58,6 +58,10 @@ class StringToUpper extends AbstractFilter
             $options = $temp;
         }
 
+        if (!array_key_exists('encoding', $options) && function_exists('mb_internal_encoding')) {
+            $options['encoding'] = mb_internal_encoding();
+        }
+
         if (array_key_exists('encoding', $options)) {
             $this->setEncoding($options['encoding']);
         }

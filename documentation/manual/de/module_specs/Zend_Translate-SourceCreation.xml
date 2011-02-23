@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
-<!-- Reviewed: 21992 -->
+<!-- EN-Revision: 22767 -->
+<!-- Reviewed: 22767 -->
 <sect1 id="zend.translate.sourcecreation">
     <title>Erstellen von Quelldateien</title>
 
@@ -213,9 +213,10 @@ $translate = new Zend_Translate(
 
         <para>
             Wenn man nur spezielle Sprachen aus der Quelle übersetzen will, kann die Option
-            '<code>defined_language</code>' auf <constant>TRUE</constant> gesetzt werden. Mit dieser
-            Option können gewünschte Sprachen explizit mit <methodname>addLanguage()</methodname>
-            hinzugefügt werden. Der Standardwert für diese Option fügt alle Sprachen hinzu.
+            <property>defined_language</property> auf <constant>TRUE</constant> gesetzt werden. Mit
+            dieser Option können gewünschte Sprachen explizit mit
+            <methodname>addLanguage()</methodname> hinzugefügt werden. Der Standardwert für diese
+            Option fügt alle Sprachen hinzu.
         </para>
 
         <note>
@@ -278,27 +279,27 @@ $translate->addTranslation(
 
         <para>
             Es gibt drei verschiedene Optionen für den CSV-Adapter. Es können
-            '<code>delimiter</code>', '<code>limit</code>' und '<code>enclosure</code>' gesetzt
-            werden.
+            <property>delimiter</property>, <property>limit</property> und
+            <property>enclosure</property> gesetzt werden.
         </para>
 
         <para>
-            Das Standardtrennzeichen für CSV-Strings ist '<code>;</code>, aber es muss nicht dieses
-            Zeichen sein. Mit der Option '<code>delimiter</code>' kann ein anderes verwendet
-            werden.
+            Das Standardtrennzeichen für CSV-Strings ist '<emphasis>;</emphasis>', aber es muss
+            nicht dieses Zeichen sein. Mit der Option <property>delimiter</property> kann ein
+            anderes verwendet werden.
         </para>
 
         <para>
-            Das Standardlimit für eine Zeile in einer CSV-Datei ist '<code>0</code>'. Das bedeutet,
-            dass das Ende der CSV-Zeile automatisch gesucht wird. Wenn '<code>limit</code>' auf
-            irgendeinen Wert gesetzt wird, dann wird die CSV-Datei schneller gelesen, aber jede
-            Zeile, die dieses Limit überschreitet, wird abgeschnitten.
+            Das Standardlimit für eine Zeile in einer CSV-Datei ist '<emphasis>0</emphasis>'. Das
+            bedeutet, dass das Ende der CSV-Zeile automatisch gesucht wird. Wenn
+            <property>limit</property> auf irgendeinen Wert gesetzt wird, dann wird die CSV-Datei
+            schneller gelesen, aber jede Zeile, die dieses Limit überschreitet, wird abgeschnitten.
         </para>
 
         <para>
             Das standardmäßige Anführungszeichen für die Verwendung mit CSV-Dateien ist
-            '<code>"</code>'. Man kann ein anderes setzen, indem die Option '<code>enclosure</code>'
-            verwendet wird.
+            '<emphasis>"</emphasis>'. Man kann ein anderes setzen, indem die Option
+            <property>enclosure</property> verwendet wird.
         </para>
 
         <example id="zend.translate.sourcecreation.csv.example2">
@@ -379,15 +380,16 @@ $translate->addTranslation(
         <para>
             <acronym>INI</acronym>-Dateien haben verschiedene Einschränkungen. Wenn ein Wert in
             einer <acronym>INI</acronym>-Datei irgendein nicht alphanumerisches Zeichen enthält,
-            muss er in doppelte Anführungszeichen (<code>"</code>) eingeschlossen werden. Es gibt
-            auch reservierte Wörter, welche nicht als Schlüssel für <acronym>INI</acronym>-Dateien
-            verwendet werden dürfen. Diese enthalten: <constant>NULL</constant>, <code>yes</code>,
-            <code>no</code>, <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
-            <constant>NULL</constant>, <code>no</code> und <constant>FALSE</constant> führen zu
-            <code>""</code>, <code>yes</code> und <constant>TRUE</constant> resultieren in
-            <code>1</code>. Die Zeichen <code>{}|&amp;~![()"</code> dürfen nirgendwo im Schlüssel
-            verwendet werden und haben im Wert eine spezielle Bedeutung. Diese sollten nicht
-            verwendet werden, da sie zu unerwartetem Verhalten führen.
+            muss er in doppelte Anführungszeichen (<emphasis>"</emphasis>) eingeschlossen werden. Es
+            gibt auch reservierte Wörter, welche nicht als Schlüssel für
+            <acronym>INI</acronym>-Dateien verwendet werden dürfen. Diese enthalten:
+            <constant>NULL</constant>, <emphasis>yes</emphasis>, <emphasis>no</emphasis>,
+            <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
+            <constant>NULL</constant>, <emphasis>no</emphasis> und <constant>FALSE</constant> führen
+            zu <emphasis>""</emphasis>, <emphasis>yes</emphasis> und <constant>TRUE</constant>
+            resultieren in '1'. Die Zeichen <emphasis>{}|&amp;~![()"</emphasis> dürfen nirgendwo im
+            Schlüssel verwendet werden und haben im Wert eine spezielle Bedeutung. Diese sollten
+            nicht verwendet werden, da sie zu unerwartetem Verhalten führen.
         </para>
     </sect2>
 </sect1>

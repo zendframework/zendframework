@@ -37,7 +37,7 @@
 
         <para>
             If you've ever used the SPL interface <ulink
-                url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
+                url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html">Countable</ulink>,
             you're familiar with <methodname>count()</methodname>. As used with
             <classname>Zend_Paginator</classname>, this is the total number of items
             in the data collection.
@@ -234,8 +234,8 @@ interface Zend_Paginator_AdapterAggregate
         <para>
             The interface is fairly small and only expects you to return an instance of
             <classname>Zend_Paginator_Adapter_Abstract</classname>. An Adapter Aggregate instance is
-            then recognized by both <code>Zend_Paginator::factory</code> and the constructor of
-            <classname>Zend_Paginator</classname> and handled accordingly.
+            then recognized by both <methodname>Zend_Paginator::factory()</methodname> and the
+            constructor of <classname>Zend_Paginator</classname> and handled accordingly.
         </para>
     </sect2>
 </sect1>

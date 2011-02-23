@@ -76,11 +76,25 @@ $progressBar->finish();
 
             <itemizedlist mark="opencircle">
                 <listitem>
-                    <para><xref linkend="zend.progressbar.adapter.console" /></para>
+                    <para>
+                        <link
+                            linkend="zend.progressbar.adapter.console">Zend_Progressbar_Adapter_Console</link>
+                    </para>
                 </listitem>
 
-                <listitem><para><xref linkend="zend.progressbar.adapter.jspush" /></para></listitem>
-                <listitem><para><xref linkend="zend.progressbar.adapter.jspull" /></para></listitem>
+                <listitem>
+                    <para>
+                        <link
+                            linkend="zend.progressbar.adapter.jspush">Zend_Progressbar_Adapter_JsPush</link>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <link
+                            linkend="zend.progressbar.adapter.jspull">Zend_ProgressBar_Adapter_JsPull</link>
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
 

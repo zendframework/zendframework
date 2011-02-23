@@ -5,53 +5,86 @@
 
     <para>
         These two filters are capable of compressing and decompressing strings, files, and
-        directories. They make use of adapters and support the following compression formats:
+        directories.
     </para>
 
-    <itemizedlist>
-        <listitem>
-            <para>
-                <emphasis>Bz2</emphasis>
-            </para>
-        </listitem>
+    <sect3 id="zend.filter.set.compress.options">
+        <title>Supported options for Zend_Filter_Compress and Zend_Filter_Decompress</title>
 
-        <listitem>
-            <para>
-                <emphasis>Gz</emphasis>
-            </para>
-        </listitem>
+        <para>
+            The following options are supported for <classname>Zend_Filter_Compress</classname>
+            and <classname>Zend_Filter_Decompress</classname>:
+        </para>
 
-        <listitem>
-            <para>
-                <emphasis>Lzf</emphasis>
-            </para>
-        </listitem>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>adapter</property></emphasis>: The compression adapter which
+                    should be used. It defaults to <property>Gz</property>.
+                </para>
+            </listitem>
 
-        <listitem>
-            <para>
-                <emphasis>Rar</emphasis>
-            </para>
-        </listitem>
+            <listitem>
+                <para>
+                    <emphasis><property>options</property></emphasis>: Additional options which are
+                    given to the adapter at initiation. Each adapter supports it&apos;s own options.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
-        <listitem>
-            <para>
-                <emphasis>Tar</emphasis>
-            </para>
-        </listitem>
+    <sect3 id="zend.filter.set.compress.basic">
+        <title>Supported compression adapters</title>
 
-        <listitem>
-            <para>
-                <emphasis>Zip</emphasis>
-            </para>
-        </listitem>
-    </itemizedlist>
+        <para>
+            The following compression formats are supported by their own adapter:
+        </para>
 
-    <para>
-        Each compression format has different capabilities as described below. All compression
-        filters may be used in approximately the same ways, and differ primarily in the options
-        available and the type of compression they offer (both algorithmically as well as string vs.
-        file vs. directory)
-    </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Bz2</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Gz</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Lzf</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Rar</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Tar</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Zip</emphasis>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Each compression format has different capabilities as described below. All compression
+            filters may be used in approximately the same ways, and differ primarily in the options
+            available and the type of compression they offer (both algorithmically as well as string
+            vs. file vs. directory)
+        </para>
+    </sect3>
 
     <sect3 id="zend.filter.set.compress.generic">
         <title>Generic handling</title>

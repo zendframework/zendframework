@@ -16,7 +16,7 @@
             Use <ulink url="http://php.net/language.oop5.cloning">object cloning</ulink> to
             duplicate a locale object exactly and efficiently. Most locale-aware methods also accept
             string representations of locales, such as the result of
-            <code>$locale->toString()</code>.
+            <command>$locale->toString()</command>.
         </para>
 
         <example id="zend.locale.copying.example-1">
@@ -77,10 +77,10 @@ if ($locale->equals($mylocale)) {
             for <classname>Zend_Locale</classname>, the first parameter selects a preference of
             which information to consider <link
                 linkend="zend.locale.selection">(<constant>BROWSER</constant>,
-                <constant>ENVIRONMENT</constant>, or <code>FRAMEWORK)</code></link> first. The
-            second parameter toggles between returning all matching locales or only the first/best
-            match. Locale-aware components normally use only the first locale. A quality rating is
-            included, when available.
+                <constant>ENVIRONMENT</constant>, or <constant>FRAMEWORK)</constant></link> first.
+            The second parameter toggles between returning all matching locales or only the
+            first or best match. Locale-aware components normally use only the first locale. A
+            quality rating is included, when available.
         </para>
 
         <example id="zend.locale.getdefault.example-1">
@@ -1031,11 +1031,11 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             month as integer value. It has to be between 1 and 12. If you want to
                             receive data for other calendars, contexts or formats, then you must
                             give an array instead of an integer with the expected values. The array
-                            has to look like this:
-                            <code>array( 'calendar', 'context', 'format', 'month number')</code>. If
-                            you give only an integer then the default values are the 'gregorian'
-                            calendar, the context 'format' and the format 'wide'. Use
-                            <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            has to look like this: <command>array( 'calendar', 'context', 'format',
+                                'month number')</command>. If you give only an integer then the
+                            default values are the 'gregorian' calendar, the context 'format' and
+                            the format 'wide'. Use <link
+                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1727,9 +1727,9 @@ echo Zend_Locale::getTranslation($frenchCode, 'language', 'de_AT');
             Similarly, <methodname>getTranslationList()</methodname> and
             <methodname>getTranslation()</methodname> could be used to create a table mapping
             your native language names for regions to the names of the regions shown in another
-            language. Use a <code>try .. catch</code> block to handle exceptions that occur when
-            using a locale that does not exist. Not all languages are also locales. In the example,
-            below exceptions are ignored to prevent early termination.
+            language. Use a <command>try .. catch</command> block to handle exceptions that occur
+            when using a locale that does not exist. Not all languages are also locales. In the
+            example, below exceptions are ignored to prevent early termination.
         </para>
 
         <example id="zend.locale.getdata.example-6">
@@ -1888,16 +1888,16 @@ if (Zend_Locale::isLocale($input)) {
         <para>
             You should also note that any given locale string will automatically be degraded if the
             region part does not exist for this locale. In our previous example the language
-            <code>'to'</code> does not exist in the region <code>'RU'</code>, but you will still get
-            <constant>TRUE</constant> returned as <classname>Zend_Locale</classname> can work with
-            the given input.
+            '<property>to</property>' does not exist in the region '<property>RU</property>, but
+            you will still get <constant>TRUE</constant> returned as
+            <classname>Zend_Locale</classname> can work with the given input.
         </para>
 
         <para>
             Still it's sometimes useful to prevent this automatic degrading, and this is where the
             second parameter of <methodname>isLocale()</methodname> comes in place. The
-            <code>strict</code> parameter defaults to <constant>FALSE</constant> and can be used to
-            prevent degrading when set to <constant>TRUE</constant>.
+            <property>strict</property> parameter defaults to <constant>FALSE</constant> and can be
+            used to prevent degrading when set to <constant>TRUE</constant>.
         </para>
 
         <example id="zend.locale.detection.example-2">

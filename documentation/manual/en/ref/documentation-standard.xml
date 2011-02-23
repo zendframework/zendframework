@@ -629,18 +629,11 @@ $render = "xxx";
             </para>
 
             <para>
-                Linking to other sections of the manual may be done using either the
-                <emphasis>&lt;xref&gt;</emphasis> tag (which will substitute the section title for
-                the link text) or the <emphasis>&lt;link&gt;</emphasis> tag (to which you must
-                provide link text).
+                Linking to other sections of the manual may be done using the
+                <emphasis>&lt;link&gt;</emphasis> tag (to which you must provide link text).
             </para>
 
             <programlisting language="xml"><![CDATA[
-<para>
-    "Xref" links to a section: <xref
-        linkend="doc-standard.recommendations.links" />.
-</para>
-
 <para>
     "Link" links to a section, using descriptive text: <link
         linkend="doc-standard.recommendations.links">documentation on

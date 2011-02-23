@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21241 -->
+<!-- EN-Revision: 22767 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
     <title>Email Adresse</title>
@@ -31,7 +31,7 @@ if ($validator->isValid($email)) {
 
         <para>
             Das prüft die Email Adresse <varname>$email</varname> und gibt bei einem Fehler über
-            <code>$validator->getMessages()</code> eine nützliche Fehlermeldung aus.
+            <methodname>getMessages()</methodname> eine nützliche Fehlermeldung aus.
         </para>
     </sect3>
 
@@ -109,8 +109,9 @@ $validator->setOptions(array('domain' => false));
         <para>
             <classname>Zend_Validate_EmailAdress</classname> prüft jede gültige Email Adresse mit
             RFC2822. Gültige Email Adressen sind zum Beispiel
-            <code>bob@domain.com</code>, <code>bob+jones@domain.us</code>,
-            <code>"bob@jones"@domain.com</code> und <code>"bob jones"@domain.com</code>
+            <emphasis>bob@domain.com</emphasis>, <emphasis>bob+jones@domain.us</emphasis>,
+            <emphasis>"bob@jones"@domain.com</emphasis> und
+            <emphasis>"bob jones"@domain.com</emphasis>.
         </para>
 
         <para>
@@ -142,9 +143,9 @@ $validator->setOptions(array('domain' => FALSE));
         <para>
             Der Teil des Hostnamens einer Email Adresse wird mit <link
                 linkend="zend.validate.set.hostname"><classname>Zend_Validate_Host</classname></link>
-            geprüft. Standardmäßig werden nur DNS Hostnamen in der Form <code>domain.com</code>
-            akzeptiert, aber wenn es gewünscht ist, können auch IP Adressen und lokale Hostnamen
-            auch akzeptiert werden.
+            geprüft. Standardmäßig werden nur DNS Hostnamen in der Form
+            <filename>domain.com</filename> akzeptiert, aber wenn es gewünscht ist, können auch IP
+            Adressen und lokale Hostnamen auch akzeptiert werden.
         </para>
 
         <para>
@@ -208,7 +209,7 @@ $validator = new Zend_Validate_EmailAddress(
 
         <para>
             Alternativ kann entweder <constant>TRUE</constant> oder <constant>FALSE</constant> an
-            <code>$validator->setValidateMx()</code> übergeben werden um die MX Prüfung ein- oder
+            <methodname>setValidateMx()</methodname> übergeben werden um die MX Prüfung ein- oder
             auszuschalten.
         </para>
 

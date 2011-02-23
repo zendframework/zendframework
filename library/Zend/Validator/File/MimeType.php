@@ -193,7 +193,7 @@ class MimeType extends Validator\AbstractValidator
         } else if (!(class_exists('finfo', false))) {
             $this->_magicfile = null;
             throw new Exception\InvalidArgumentException('Magicfile can not be set. There is no finfo extension installed');
-        } else if (!is_readable($file)) {
+        } else if (!is_file($file) || !is_readable($file)) {
             throw new Exception\InvalidArgumentException('The given magicfile can not be read');
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;

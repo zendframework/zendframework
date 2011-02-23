@@ -129,7 +129,7 @@ if ($validator->isValid($username)) {
         </para>
 
         <para>
-            When providing an array for the exclude clause, the <code>!=</code>
+            When providing an array for the exclude clause, the <emphasis>!=</emphasis>
             operator is used, so you can check the rest of a table for a value
             before altering a record (for example on a user profile form)
         </para>
@@ -161,13 +161,13 @@ if ($validator->isValid($username)) {
 
         <para>
             The above example will check the table to ensure no records other
-            than the one where <code>id = $user_id</code> contains the value
+            than the one where <command>id = $user_id</command> contains the value
             $username.
         </para>
 
         <para>
             You can also provide a string to the exclude clause so you can use
-            an operator other than <code>!=</code>. This can be useful for
+            an operator other than <emphasis>!=</emphasis>. This can be useful for
             testing against composite keys.
         </para>
 
@@ -194,8 +194,8 @@ if ($validator->isValid($username)) {
 ]]></programlisting>
 
         <para>
-            The above example will check the <code>posts_categories</code> table
-            to ensure that a record with the <code>post_id</code> has a value
+            The above example will check the 'posts_categories' table
+            to ensure that a record with the 'post_id' has a value
             matching <varname>$category_id</varname>
         </para>
     </sect3>
@@ -226,7 +226,7 @@ $validator = new Zend_Validate_Db_RecordExists(
         <para>
             You can specify a schema within your database for adapters such as
             PostgreSQL and DB/2 by simply supplying an array with
-            <code>table</code> and <code>schema</code> keys. As in the example
+            <property>table</property> and <property>schema</property> keys. As in the example
             below:
         </para>
 

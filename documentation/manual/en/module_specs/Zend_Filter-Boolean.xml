@@ -8,6 +8,39 @@
         useful when working with databases or when processing form values.
     </para>
 
+    <sect3 id="zend.filter.set.boolean.options">
+        <title>Supported options for Zend_Filter_Boolean</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Filter_Boolean</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>casting</property></emphasis>: When this option is set to
+                    <constant>TRUE</constant> then any given input will be casted to boolean. This
+                    option defaults to <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>locale</property></emphasis>: This option sets the locale
+                    which will be used to detect localized input.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>type</property></emphasis>: The <property>type</property>
+                    option sets the boolean type which should be used. Read the following for
+                    details.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.filter.set.boolean.default">
         <title>Default behaviour for Zend_Filter_Boolean</title>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <appendix id="doc-standard">
     <title>Zend Framework Dokumentations Standard</title>
@@ -650,17 +650,11 @@ $render = "xxx";
 
             <para>
                 Die Verlinkung zu anderen Sektionen des Handbuchs kann durchgeführt werden indem
-                das <emphasis>&lt;xref&gt;</emphasis> Tag verwendet wird (welches den Titel der
-                Sektion für den Link Text verwendet) oder das <emphasis>&lt;link&gt;</emphasis>
-                Tag (für welches man den Link Text selbst angeben muß).
+                das <emphasis>&lt;link&gt;</emphasis> Tag verwendet wird (für welches man den Link
+                Text selbst angeben muß).
             </para>
 
             <programlisting language="xml"><![CDATA[
-<para>
-    "Xref" verweist zu einer Sektion: <xref
-        linkend="doc-standard.recommendations.links" />.
-</para>
-
 <para>
     "Link" verweist zu einer Sektion, und verwendet beschreibenden Text: <link
         linkend="doc-standard.recommendations.links">Dokumentation zum

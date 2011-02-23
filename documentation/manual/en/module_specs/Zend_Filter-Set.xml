@@ -13,39 +13,20 @@
     <xi:include href="Zend_Filter-Boolean.xml" />
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml" />
-    <xi:include href="Zend_Filter-Decryption.xml" />
     <xi:include href="Zend_Filter-Digits.xml" />
     <xi:include href="Zend_Filter-Dir.xml" />
     <xi:include href="Zend_Filter-Encryption.xml" />
     <xi:include href="Zend_Filter-HtmlEntities.xml" />
     <xi:include href="Zend_Filter-Int.xml" />
     <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
-    <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
     <xi:include href="Zend_Filter-Null.xml" />
     <xi:include href="Zend_Filter-PregReplace.xml" />
     <xi:include href="Zend_Filter-RealPath.xml" />
     <xi:include href="Zend_Filter-StringToLower.xml" />
     <xi:include href="Zend_Filter-StringToUpper.xml" />
     <xi:include href="Zend_Filter-StringTrim.xml" />
-
-    <sect2 id="zend.filter.set.stripnewlines">
-        <title>StripNewlines</title>
-
-        <para>
-            Returns the string <varname>$value</varname> without any newline control characters.
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.striptags">
-        <title>StripTags</title>
-
-        <para>
-            This filter returns the input string, with all <acronym>HTML</acronym> and
-            <acronym>PHP</acronym> tags stripped from it, except those that have been explicitly
-            allowed. In addition to the ability to specify which tags are allowed, developers can
-            specify which attributes are allowed across all allowed tags and for specific tags only.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Filter-StripNewLines.xml" />
+    <xi:include href="Zend_Filter-StripTags.xml" />
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

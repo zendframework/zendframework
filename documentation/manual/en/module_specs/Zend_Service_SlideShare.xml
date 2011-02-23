@@ -252,8 +252,8 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     You can retrieve slide shows which contain one or more specific tags by using
-                    the <code>getSlideShowsByTag</code> method and providing one or more tags which
-                    the slide show must have assigned to it in order to be retrieved
+                    the <methodname>getSlideShowsByTag()</methodname> method and providing one or
+                    more tags which the slide show must have assigned to it in order to be retrieved
                 </para>
             </listitem>
 
@@ -264,8 +264,8 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     You can retrieve slide shows which are a member of a specific group using the
-                    <code>getSlideShowsByGroup</code> method and providing the name of the group
-                    which the slide show must belong to in order to be retrieved
+                    <methodname>getSlideShowsByGroup()</methodname> method and providing the name of
+                    the group which the slide show must belong to in order to be retrieved
                 </para>
             </listitem>
         </itemizedlist>
@@ -302,10 +302,10 @@ foreach($ss_user as $slideshow) {
 
         <para>
             By default, <classname>Zend_Service_SlideShare</classname> will cache any request
-            against the web service automatically to the filesystem (default path <code>/tmp</code>)
-            for 12 hours. If you desire to change this behavior, you must provide your own
-            <xref linkend="zend.cache" /> object using the <code>setCacheObject</code> method as
-            shown:
+            against the web service automatically to the filesystem (default path
+            <filename>/tmp</filename>) for 12 hours. If you desire to change this behavior, you
+            must provide your own <link linkend="zend.cache">Zend_Cache</link> object using the
+            <methodname>setCacheObject()</methodname> method as shown:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -337,8 +337,9 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
             If for whatever reason you would like to change the behavior of the
             <acronym>HTTP</acronym> client when making the web service request, you can do so by
             creating your own instance of the <classname>Zend_Http_Client</classname> object (see
-            <xref linkend="zend.http" />). This is useful for instance when it is desirable to set
-            the timeout for the connection to something other then default as shown:
+            <link linkend="zend.http">Zend_Http</link>). This is useful for instance when it is
+            desirable to set the timeout for the connection to something other then default as
+            shown:
         </para>
 
         <programlisting language="php"><![CDATA[

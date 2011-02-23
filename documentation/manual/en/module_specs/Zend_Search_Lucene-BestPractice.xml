@@ -12,15 +12,15 @@
 
         <para>
             Nevertheless it's a good idea not to use '<emphasis>id</emphasis>' and
-            '<emphasis>score</emphasis>' names to avoid ambiguity in <code>QueryHit</code>
+            '<emphasis>score</emphasis>' names to avoid ambiguity in <classname>QueryHit</classname>
             properties names.
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Search_QueryHit</classname> <code>id</code> and
-            <code>score</code> properties always refer to internal Lucene document id and hit <link
-                linkend="zend.search.lucene.searching.results-scoring">score</link>. If the indexed
-            document has the same stored fields, you have to use the
+            The <classname>Zend_Search_Lucene_Search_QueryHit</classname> <property>id</property>
+            and <property>score</property> properties always refer to internal Lucene document id
+            and hit <link linkend="zend.search.lucene.searching.results-scoring">score</link>. If
+            the indexed document has the same stored fields, you have to use the
             <methodname>getDocument()</methodname> method to access them:
         </para>
 

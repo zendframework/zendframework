@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
+<!-- EN-Revision: 22745 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
     <title>Die Registry verwenden</title>
@@ -99,7 +99,7 @@ foreach ($registry as $index => $value) {
         </para>
 
         <para>
-            Der traditionelle <code>new</code> Operator kann verwendet werden um
+            Der traditionelle <emphasis>new</emphasis> Operator kann verwendet werden um
             <classname>Zend_Registry</classname> zu initiieren. Das Initiieren von
             <classname>Zend_Registry</classname> mit seinem Konstruktor initiiert auch die Einträge
             in der Registry einfach durch die Verwendung eines assoziativen Arrays als Argument.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: 21825 -->
+<!-- EN-Revision: 22761 -->
+<!-- Reviewed: 22761 -->
 <sect1 id="zend.tag.cloud">
     <title>Zend_Tag_Cloud</title>
 
@@ -21,37 +21,35 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>cloudDecorator</code>: definiert den Dekorator für die Wolke. Das kann
+                <property>cloudDecorator</property>: definiert den Dekorator für die Wolke. Das kann
                 entweder der Name der Klasse sein, die vom PluginLoader geladen werden soll, eine
                 Instanz von <classname>Zend_Tag_Cloud_Decorator_Cloud</classname>, oder ein Array
-                das den String <code>decorator</code> enthält, und optional ein
-                <code>options</code> Array, welches an den Contructor des Dekorators übergeben
-                wird.
+                das den String 'decorator' enthält, und optional ein 'options' Array, welches an den
+                Contructor des Dekorators übergeben wird.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>tagDecorator</code>: definiert den Dekorator für individuelle Tags. Das kann
-                entweder der Name der Klasse sein, die vom PluginLoader geladen werden soll, eine
-                Instanz von <classname>Zend_Tag_Cloud_Decorator_Tag</classname>, oder ein Array
-                das den String <code>decorator</code> enthält, und optional ein
-                <code>options</code> Array, welches an den Contructor des Dekorators übergeben
-                wird.
+                <property>tagDecorator</property>: definiert den Dekorator für individuelle Tags.
+                Das kann entweder der Name der Klasse sein, die vom PluginLoader geladen werden
+                soll, eine Instanz von <classname>Zend_Tag_Cloud_Decorator_Tag</classname>, oder ein
+                Array das den String 'decorator' enthält, und optional ein 'options' Array, welches
+                an den Contructor des Dekorators übergeben wird.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>pluginLoader</code>: ein anderer Plugin Loader der zu verwenden ist. Muß eine
-                Instanz von <classname>Zend_Loader_PluginLoader_Interface</classname> sein.
+                <property>pluginLoader</property>: ein anderer Plugin Loader der zu verwenden ist.
+                Muß eine Instanz von <classname>Zend_Loader_PluginLoader_Interface</classname> sein.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>prefixPath</code>: Präfix Pfade die dem Plugin Loader hinzugefügt werden.
-                Muß ein Array sein das die Schlüssel prefix und path oder mehrere Arrays
+                <property>prefixPath</property>: Präfix Pfade die dem Plugin Loader hinzugefügt
+                werden. Muß ein Array sein das die Schlüssel prefix und path oder mehrere Arrays
                 enthält, welche die Schlüssel prefix und path enthalten. Ungültige Elemente
                 werden übersprungen.
             </para>
@@ -59,15 +57,15 @@
 
         <listitem>
             <para>
-                <code>pluginLoader</code>: ein anderer Plugin Loader der verwendet wird. Muß eine
-                Instanz von <classname>Zend_Loader_PluginLoader_Interface</classname> sein.
+                <property>pluginLoader</property>: ein anderer Plugin Loader der verwendet wird. Muß
+                eine Instanz von <classname>Zend_Loader_PluginLoader_Interface</classname> sein.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>prefixPath</code>: Präfix Pfad der dem Plugin Loader hinzugefügt wird. Muß
-                ein Array sein das die Schlüssel prefix und path enthält, oder mehrere Array
+                <property>prefixPath</property>: Präfix Pfad der dem Plugin Loader hinzugefügt wird.
+                Muß ein Array sein das die Schlüssel prefix und path enthält, oder mehrere Array
                 welche die Schlüssel prefix und path enthalten. Ungültige Elemente werden
                 übersprungen.
             </para>
@@ -75,16 +73,16 @@
 
         <listitem>
             <para>
-                <code>itemList</code>: eine andere Liste von Elementen die verwendet wird. Muß
-                eine Instanz von <classname>Zend_Tag_ItemList</classname> sein.
+                <property>itemList</property>: eine andere Liste von Elementen die verwendet wird.
+                Muß eine Instanz von <classname>Zend_Tag_ItemList</classname> sein.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>tags</code>: eine Liste von Tags die der Wolke zugeordnet werden. Jedes Tag
-                muß entweder <classname>Zend_Tag_Taggable</classname> implementieren oder ein
-                Array sein welches verwendet werden kann um <classname>Zend_Tag_Item</classname>
+                <property>tags</property>: eine Liste von Tags die der Wolke zugeordnet werden.
+                Jedes Tag muß entweder <classname>Zend_Tag_Taggable</classname> implementieren oder
+                ein Array sein welches verwendet werden kann um <classname>Zend_Tag_Item</classname>
                 implementieren.
             </para>
         </listitem>
@@ -163,39 +161,39 @@ echo $cloud;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>fontSizeUnit</code>: definiert die Einheit die für alle Schriftgrößen
-                        verwendet wird. Die möglichen Werte sind:
+                        <property>fontSizeUnit</property>: definiert die Einheit die für alle
+                        Schriftgrößen verwendet wird. Die möglichen Werte sind:
                         em, ex, px, in, cm, mm, pt, pc und &#37;.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>minFontSize</code>: definiert die minimale Schriftgröße der Tags (muß
-                        ein Integer sein).
+                        <property>minFontSize</property>: definiert die minimale Schriftgröße der
+                        Tags (muß ein Integer sein).
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>maxFontSize</code>: definiert die maximale Schriftgröße der Tags (muß
-                        ein Integer sein).
+                        <property>maxFontSize</property>: definiert die maximale Schriftgröße der
+                        Tags (muß ein Integer sein).
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>classList</code>: ein Array von Klassen die an die Tags vergeben
-                        werden soll.
+                        <property>classList</property>: ein Array von Klassen die an die Tags
+                        vergeben werden soll.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>htmlTags</code>: ein Array von <acronym>HTML</acronym> Tags die den
-                        Anker umgeben. Jedes Element kann entweder ein String sein, welches als
-                        Elementtyp verwendet wird, oder ein Array das eine Liste von Attributen für
-                        das Element enthält, welches wiederum als Schlüssel/Werte Paar definiert
+                        <property>htmlTags</property>: ein Array von <acronym>HTML</acronym> Tags
+                        die den Anker umgeben. Jedes Element kann entweder ein String sein, welches
+                        als Elementtyp verwendet wird, oder ein Array das eine Liste von Attributen
+                        für das Element enthält, welches wiederum als Schlüssel/Werte Paar definiert
                         ist. In diesem Fall wird der Array Schlüssel als Elementtyp verwendet.
                     </para>
                 </listitem>
@@ -215,18 +213,18 @@ echo $cloud;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>separator</code>: definiert das Trennzeichen welches zwischen alle
-                        Tags platziert wird.
+                        <property>separator</property>: definiert das Trennzeichen welches zwischen
+                        alle Tags platziert wird.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>htmlTags</code>: ein Array von <acronym>HTML</acronym> Tags, welche
-                        alle Tags umgeben. Jedes Element kann entweder ein String sein, welches als
-                        Elementtyp verwendet wird, oder ein Array das eine Liste von Attributen für
-                        das Element enthält, und als Schlüssel/Werte Paar definiert ist. In diesem
-                        Fall wird der Arrayschlüssel als Elementtyp verwendet.
+                        <property>htmlTags</property>: ein Array von <acronym>HTML</acronym> Tags,
+                        welche alle Tags umgeben. Jedes Element kann entweder ein String sein,
+                        welches als Elementtyp verwendet wird, oder ein Array das eine Liste von
+                        Attributen für das Element enthält, und als Schlüssel/Werte Paar definiert
+                        ist. In diesem Fall wird der Arrayschlüssel als Elementtyp verwendet.
                     </para>
                 </listitem>
             </itemizedlist>

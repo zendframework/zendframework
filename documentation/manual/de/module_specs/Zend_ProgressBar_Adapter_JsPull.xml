@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 22757 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspull">
     <title>Zend_ProgressBar_Adapter_JsPull</title>
@@ -10,23 +10,24 @@
         sollte man den Adapter mit der Persistenz Option auf <classname>Zend_ProgressBar</classname>
         verwenden. Bei der Benachrichtigung sendet der Adapter einen <acronym>JSON</acronym> String
         zum Browser, der exakt wie der JSON String aussieht der vom jsPush Adapter gesendet wird.
-        Der einzige Unterschied ist, das er einen zusätzlichen Parameter <code>finished</code>
-        enthält, der entweder <constant>FALSE</constant> ist, wenn <methodname>update()</methodname>
-        aufgerufen wurde, oder <constant>TRUE</constant> wenn <methodname>finish()</methodname>
-        aufgerufen wurde.
+        Der einzige Unterschied ist, das er einen zusätzlichen Parameter
+        <property>finished</property> enthält, der entweder <constant>FALSE</constant> ist, wenn
+        <methodname>update()</methodname> aufgerufen wurde, oder <constant>TRUE</constant> wenn
+        <methodname>finish()</methodname> aufgerufen wurde.
     </para>
 
     <para>
-        Die Adapteroptionen kann man entweder über die <code>set*</code> Methoden oder durch die
-        Übergabe eines Arrays oder einer Instanz von <classname>Zend_Config</classname> mit den
-        Optionen als ersten Parameter an den Constructor setzen. Die vorhandenen Optionen sind:
+        Die Adapteroptionen kann man entweder über die <methodname>set*()</methodname> Methoden oder
+        durch die Übergabe eines Arrays oder einer Instanz von <classname>Zend_Config</classname>
+        mit den Optionen als ersten Parameter an den Constructor setzen. Die vorhandenen Optionen
+        sind:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>exitAfterSend</code>: Beendet die aktuelle Anfrage nachdem die Daten an den
-                Browser gesendet wurden. Der Standardwert ist <constant>TRUE</constant>.
+                <property>exitAfterSend</property>: Beendet die aktuelle Anfrage nachdem die Daten
+                an den Browser gesendet wurden. Der Standardwert ist <constant>TRUE</constant>.
             </para>
         </listitem>
     </itemizedlist>

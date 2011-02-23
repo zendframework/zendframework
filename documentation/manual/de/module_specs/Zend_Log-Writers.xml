@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22756 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Writer</title>
@@ -19,8 +19,9 @@
 
         <para>
             Um Log Daten in den <acronym>PHP</acronym> Ausgabebuffer zu schreiben, muß die URL
-            <code>php://output</code> verwendet werden. Alternativ können Log Daten direkt an einen
-            Stream wie z.B. <constant>STDERR</constant> (<code>php://stderr</code>) gesendet werden.
+            <filename>php://output</filename> verwendet werden. Alternativ können Log Daten direkt
+            an einen Stream wie z.B. <constant>STDERR</constant> (<filename>php://stderr</filename>)
+            gesendet werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -44,7 +45,7 @@ $logger->info('Informative Nachricht');
 ]]></programlisting>
 
         <para>
-            Standardmäßig wird der Stream im Anhänge-Modus geöffnet (<code>"a"</code>). Um Ihn in
+            Standardmäßig wird der Stream im Anhänge-Modus geöffnet ("a"). Um Ihn in
             einem anderen Modus zu öffnen, akzeptiert der
             <classname>Zend_Log_Writer_Stream</classname> Konstruktor einen optionalen zweiten
             Parameter für den Modus.
@@ -101,9 +102,9 @@ $logger->info('Informative Nachricht');
 
         <para>
             Das obige Beispiel schreibt eine einzelne Zeile von Log Daten in einem Datenbanktabelle
-            welche <code>log_table_name</code> Tabelle benannt wird. Die Datenbankspalte welche
-            <code>lvl</code> benannt ist empfängt die Nummer der Priorität und die Spalte welche
-            <code>msg</code> benannt ist empfängt die Log Nachricht.
+            welche 'log_table_name' Tabelle benannt wird. Die Datenbankspalte welche 'lvl' benannt
+            ist empfängt die Nummer der Priorität und die Spalte welche 'msg' benannt ist empfängt
+            die Log Nachricht.
         </para>
     </sect2>
 
@@ -158,7 +159,7 @@ var_dump($mock->events[0]);
 
         <para>
             Um die Events die von der Attrappe protokolliert wurden zu entfernen, muß einfach
-            <code>$mock->events = array()</code> gesetzt werden.
+            <command>$mock->events = array()</command> gesetzt werden.
         </para>
     </sect2>
 

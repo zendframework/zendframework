@@ -210,12 +210,12 @@ Array
         <para>
             Since <methodname>getDate()</methodname> is "locale-aware", specifying the
             <varname>$locale</varname> is sufficient for date strings adhering to that locale's
-            format. The option '<code>fix_date</code>' uses simple tests to determine if the day or
-            month is not valid, and then applies heuristics to try and correct any detected
+            format. The option '<property>fix_date</property>' uses simple tests to determine if the
+            day or month is not valid, and then applies heuristics to try and correct any detected
             problems. Note the use of '<constant>Zend_Locale_Format::STANDARD</constant>' as the
-            value for '<code>date_format</code>' to prevent the use of a class-wide default date
-            format set using <methodname>setOptions()</methodname>. This forces getDate to use the
-            default date format for <varname>$locale</varname>.
+            value for '<property>date_format</property>' to prevent the use of a class-wide default
+            date format set using <methodname>setOptions()</methodname>. This forces getDate to use
+            the default date format for <varname>$locale</varname>.
         </para>
 
         <example id="zend.locale.date.normalize.example-2">
@@ -374,10 +374,10 @@ print_r ($date);
         </note>
 
         <para>
-            The option '<code>fix_date</code>' uses simple tests to determine if the day or month is
-            not valid, and then applies heuristics to try and correct any detected problems.
-            <methodname>getDate()</methodname> automatically detects and corrects some kinds of
-            problems with input, such as misplacing the year:
+            The option '<property>fix_date</property>' uses simple tests to determine if the day or
+            month is not valid, and then applies heuristics to try and correct any detected
+            problems. <methodname>getDate()</methodname> automatically detects and corrects some
+            kinds of problems with input, such as misplacing the year:
         </para>
 
         <example id="zend.locale.date.normalize.example-5">
@@ -402,11 +402,11 @@ print_r ($date);
             Use <methodname>checkDateFormat($inputString, array('date_format' => $format,
                 $locale))</methodname> to check if a given string contains all expected date parts.
             The <methodname>checkDateFormat()</methodname> method uses
-            <methodname>getDate()</methodname>, but without the option <code>'fixdate'</code> to
-            avoid returning <constant>TRUE</constant> when the input fails to conform to the date
-            format. If errors are detected in the input, such as swapped values for months and days,
-            the option <code>'fixdate'</code> method will apply heuristics to "correct" dates before
-            determining their validity.
+            <methodname>getDate()</methodname>, but without the option
+            '<property>fixdate</property>' to avoid returning <constant>TRUE</constant> when the
+            input fails to conform to the date format. If errors are detected in the input, such as
+            swapped values for months and days, the option '<property>fixdate</property>' method
+            will apply heuristics to "correct" dates before determining their validity.
         </para>
 
         <example id="zend.locale.date.test.example-1">
@@ -461,7 +461,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
         <para>
             Use <methodname>checkDateFormat()</methodname> to check if a given string contains a
             proper time. The usage is exact the same as with checking Dates, only
-            <code>date_format</code> should contain the parts which you expect to have.
+            <property>date_format</property> should contain the parts which you expect to have.
         </para>
 
         <example id="zend.locale.time.test.example-1">

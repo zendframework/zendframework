@@ -9,6 +9,23 @@
         <constant>NULL</constant> value instead of a boolean or any other type.
     </para>
 
+    <sect3 id="zend.filter.set.null.options">
+        <title>Supported options for Zend_Filter_Null</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Filter_Null</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>type</property></emphasis>: The variable type which should
+                    be supported.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.filter.set.null.default">
         <title>Default behaviour for Zend_Filter_Null</title>
 

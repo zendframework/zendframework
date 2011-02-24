@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 22752 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.pluginloader">
     <title>Plugins laden</title>
@@ -7,19 +7,19 @@
     <para>
         Eine Anzahl von Zend Framework Komponenten ist steckbar, und erlaubt es Funktionen dynamisch
         zu laden durch die Angabe eines Klassenpräfixes und einem Pfad zu den Klassendaten die nicht
-        notwendigerweise im <code>include_path</code> sind, oder nicht notwendigerweise den
+        notwendigerweise im <property>include_path</property> sind, oder nicht notwendigerweise den
         traditionellen Namenskonventionen folgen. <classname>Zend_Loader_PluginLoader</classname>
         bietet übliche Funktionalitäten für diesen Prozess.
     </para>
 
     <para>
-        Die grundsätzliche Verwendung vom <code>PluginLoader</code> folgt den Namenskonventionen vom
-        Zend Framework mit einer Klasse pro Datei, der Verwendung von Unterstrichen als
-        Verzeichnistrenner bei der Auflösung von Pfaden. Es erlaubt die Übergabe eines optionalen
-        Klasenpräfixes der vorangestellt wird, wenn eine bestimmte Pluginklasse geladen wird.
-        Zusätzlich können Pfade in LIFO Reihenfolge durchsucht werden. Die LIFO Suche und der
-        Klassen Präfix erlaubt es für die Plugins Namensräumen zu definieren, und auf diese Weise
-        Plugins zu überladen die vorher registriert wurden.
+        Die grundsätzliche Verwendung vom <classname>PluginLoader</classname> folgt den
+        Namenskonventionen vom Zend Framework mit einer Klasse pro Datei, der Verwendung von
+        Unterstrichen als Verzeichnistrenner bei der Auflösung von Pfaden. Es erlaubt die Übergabe
+        eines optionalen Klasenpräfixes der vorangestellt wird, wenn eine bestimmte Pluginklasse
+        geladen wird. Zusätzlich können Pfade in LIFO Reihenfolge durchsucht werden. Die LIFO Suche
+        und der Klassen Präfix erlaubt es für die Plugins Namensräumen zu definieren, und auf diese
+        Weise Plugins zu überladen die vorher registriert wurden.
     </para>
 
     <sect2 id="zend.loader.pluginloader.usage">
@@ -126,8 +126,9 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 ]]></programlisting>
 
         <para>
-            Andere Komponenten die den <code>PluginLoader</code> instanziieren un dden gleichen
-            Registry Namen verwenden haben dann Zugriff auf bereits geladene Pfade und Plugins.
+            Andere Komponenten die den <classname>PluginLoader</classname> instanziieren un den
+            gleichen Registry Namen verwenden haben dann Zugriff auf bereits geladene Pfade und
+            Plugins.
         </para>
     </sect2>
 
@@ -180,8 +181,8 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </para>
 
         <para>
-            Ein anderer üblicher Fall für das <code>PluginLoader</code> ist das eruieren des voll
-            qualifizierten Plugin Klassennamens von geladenen Klassen;
+            Ein anderer üblicher Fall für das <classname>PluginLoader</classname> ist das eruieren
+            des voll qualifizierten Plugin Klassennamens von geladenen Klassen;
             <methodname>getClassName()</methodname> bietet diese Funktionalität. Typischerweise wird
             dieses in Verbindung mit <methodname>isLoaded()</methodname> verwendet:
         </para>

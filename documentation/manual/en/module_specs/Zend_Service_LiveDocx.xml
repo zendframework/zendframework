@@ -328,7 +328,7 @@
             <para>
                 Using this dialog, you can insert the required merge fields into your document.
                 Below is a screenshot of a license agreement in Microsoft Word 2007. The merge
-                fields are marked as <code>{ MERGEFIELD FieldName }</code>:
+                fields are marked as <command>{ MERGEFIELD FieldName }</command>:
             </para>
 
             <para>

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\Log;
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Translate
  */
@@ -838,6 +838,38 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $return = Translator\Translator::getCache();
         $this->assertTrue($return instanceof Cache\Frontend);
         $this->assertTrue(Translator\Translator::hasCache());
+    }
+
+    /**
+     * @ZF-10051
+     */
+    public function testSettingLogPriorityForLog()
+    {
+        $stream = fopen('php://memory', 'w+');
+        require_once 'Zend/Log/Writer/Stream.php';
+        $writer = new Zend_Log_Writer_Stream($stream);
+        require_once 'Zend/Log.php';
+        $log    = new Zend_Log($writer);
+
+        $lang = new Zend_Translate(array(
+            'adapter'     => Zend_Translate::AN_CSV,
+            'content'     => dirname(__FILE__) . '/Translate/Adapter/_files',
+            'locale'      => 'en',
+            'delimiter'   => ',',
+            'logPriority' => 3,
+            'log'         => $log)
+        );
+
+        $lang->setLocale('ru');
+
+        rewind($stream);
+        $this->assertContains('ERR (3)', stream_get_contents($stream));
+
+        $lang->setOptions(array('logPriority' => 1));
+        $lang->setLocale('sv');
+
+        rewind($stream);
+        $this->assertContains('ALERT (1)', stream_get_contents($stream));
     }
 
     /**

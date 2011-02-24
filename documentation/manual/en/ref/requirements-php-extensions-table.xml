@@ -476,7 +476,7 @@
                 </entry>
             </row>
             <row>
-                <entry morerows="7" valign="middle">
+                <entry morerows="9" valign="middle">
                     <emphasis>
                         <ulink
                             url="&php.manual.link;/ref.iconv.php">iconv</ulink>
@@ -535,6 +535,22 @@
                     <ulink
                         url="&zf.manual.link;/zend.service.flickr.html">
                         <classname>Zend_Service_Flickr</classname>
+                    </ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.validate.hostname.html">
+                        <classname>Zend_Validate_Hostname</classname>
+                    </ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.validate.stringlength.html">
+                        <classname>Zend_Validate_StringLength</classname>
                     </ulink>
                 </entry>
             </row>

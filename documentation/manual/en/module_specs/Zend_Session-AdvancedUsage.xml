@@ -129,8 +129,8 @@ php_value session.auto_start 0
                     any output (e.g., <ulink url="http://www.php.net/headers_sent">HTTP
                         headers</ulink>) has been sent by <acronym>PHP</acronym> to the client, if
                     you are using the default, cookie-based sessions (strongly recommended). See
-                    <xref linkend="zend.session.global_session_management.headers_sent" /> for more
-                    information.
+                    <link linkend="zend.session.global_session_management.headers_sent">this
+                        section</link> for more information.
                 </para>
             </listitem>
         </orderedlist>
@@ -317,8 +317,8 @@ try {
             session namespace is needed at a later time during the same request. For example, a
             developer may store the reference in a static variable, add the reference to a <ulink
                 url="http://www.martinfowler.com/eaaCatalog/registry.html">registry</ulink> (see
-            <xref linkend="zend.registry" />), or otherwise make it available to other methods that
-            may need access to the session namespace.
+            <link linkend="zend.registry">Zend_Registry</link>), or otherwise make it available to
+            other methods that may need access to the session namespace.
         </para>
     </sect2>
 

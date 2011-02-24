@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Date
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,7 @@ namespace Zend\Date;
 use Zend\TimeSync;
 use Zend\Locale\Locale;
 use Zend\Locale\Format;
-use Zend\Locale\Data;
+use Zend\Locale\Data\Cldr;
 use Zend\Locale\Math;
 
 /**
@@ -36,7 +36,7 @@ use Zend\Locale\Math;
  * @uses      \Zend\Locale\Math
  * @category  Zend
  * @package   Zend_Date
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Date extends DateObject
@@ -275,8 +275,9 @@ class Date extends DateObject
                                 throw new Exception\InvalidArgumentException("Instance of Zend_Cache expected");
                             }
 
-                            parent::$_cache = $value;
-                            Data::setCache($value);
+                            parent::$_cache     = $value;
+                            parent::$_cacheTags = Zend_Date_DateObject::hasCacheTagSupport();
+                            Cldr::setCache($value);
                         }
                         break;
                     case 'timesync' :
@@ -558,7 +559,7 @@ class Date extends DateObject
         $comment = false;
         $format  = '';
         $orig    = '';
-        for ($i = 0; $i < strlen($part); ++$i) {
+        for ($i = 0; isset($part[$i]); ++$i) {
             if ($part[$i] == "'") {
                 $comment = $comment ? false : true;
                 if (isset($part[$i+1]) && ($part[$i+1] == "'")) {
@@ -601,7 +602,7 @@ class Date extends DateObject
 
             case self::WEEKDAY_SHORT :
                 $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
-                $day     = Data::getContent($locale, 'day', array('gregorian', 'format', 'wide', $weekday));
+                $day     = Cldr::getContent($locale, 'day', array('gregorian', 'format', 'wide', $weekday));
                 return $this->_toComment(iconv_substr($day, 0, 3, 'UTF-8'));
                 break;
 
@@ -611,7 +612,7 @@ class Date extends DateObject
 
             case self::WEEKDAY :
                 $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
-                return $this->_toComment(Data::getContent($locale, 'day', array('gregorian', 'format', 'wide', $weekday)));
+                return $this->_toComment(Cldr::getContent($locale, 'day', array('gregorian', 'format', 'wide', $weekday)));
                 break;
 
             case self::WEEKDAY_8601 :
@@ -645,13 +646,13 @@ class Date extends DateObject
             case self::WEEKDAY_NARROW :
             case 'EEEEE' :
                 $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
-                $day = Data::getContent($locale, 'day', array('gregorian', 'format', 'abbreviated', $weekday));
+                $day = Cldr::getContent($locale, 'day', array('gregorian', 'format', 'abbreviated', $weekday));
                 return $this->_toComment(iconv_substr($day, 0, 1, 'UTF-8'));
                 break;
 
             case self::WEEKDAY_NAME :
                 $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
-                return $this->_toComment(Data::getContent($locale, 'day', array('gregorian', 'format', 'abbreviated', $weekday)));
+                return $this->_toComment(Cldr::getContent($locale, 'day', array('gregorian', 'format', 'abbreviated', $weekday)));
                 break;
 
             case 'w' :
@@ -665,7 +666,7 @@ class Date extends DateObject
 
             case self::MONTH_NAME :
                 $month = $this->date('n', $this->getUnixTimestamp(), false);
-                return $this->_toComment(Data::getContent($locale, 'month', array('gregorian', 'format', 'wide', $month)));
+                return $this->_toComment(Cldr::getContent($locale, 'month', array('gregorian', 'format', 'wide', $month)));
                 break;
 
             case self::MONTH :
@@ -674,7 +675,7 @@ class Date extends DateObject
 
             case self::MONTH_NAME_SHORT :
                 $month = $this->date('n', $this->getUnixTimestamp(), false);
-                return $this->_toComment(Data::getContent($locale, 'month', array('gregorian', 'format', 'abbreviated', $month)));
+                return $this->_toComment(Cldr::getContent($locale, 'month', array('gregorian', 'format', 'abbreviated', $month)));
                 break;
 
             case self::MONTH_SHORT :
@@ -687,7 +688,7 @@ class Date extends DateObject
 
             case self::MONTH_NAME_NARROW :
                 $month = $this->date('n', $this->getUnixTimestamp(), false);
-                $mon = Data::getContent($locale, 'month', array('gregorian', 'format', 'abbreviated', $month));
+                $mon = Cldr::getContent($locale, 'month', array('gregorian', 'format', 'abbreviated', $month));
                 return $this->_toComment(iconv_substr($mon, 0, 1, 'UTF-8'));
                 break;
 
@@ -714,10 +715,10 @@ class Date extends DateObject
             case self::MERIDIEM :
                 $am = $this->date('a', $this->getUnixTimestamp(), false);
                 if ($am == 'am') {
-                    return $this->_toComment(Data::getContent($locale, 'am'));
+                    return $this->_toComment(Cldr::getContent($locale, 'am'));
                 }
 
-                return $this->_toComment(Data::getContent($locale, 'pm'));
+                return $this->_toComment(Cldr::getContent($locale, 'pm'));
                 break;
 
             case self::SWATCH :
@@ -807,28 +808,28 @@ class Date extends DateObject
             case 'GGG' :
                 $year = $this->date('Y', $this->getUnixTimestamp(), false);
                 if ($year < 0) {
-                    return $this->_toComment(Data::getContent($locale, 'era', array('gregorian', 'Abbr', '0')));
+                    return $this->_toComment(Cldr::getContent($locale, 'era', array('gregorian', 'Abbr', '0')));
                 }
 
-                return $this->_toComment(Data::getContent($locale, 'era', array('gregorian', 'Abbr', '1')));
+                return $this->_toComment(Cldr::getContent($locale, 'era', array('gregorian', 'Abbr', '1')));
                 break;
 
             case self::ERA_NARROW :
                 $year = $this->date('Y', $this->getUnixTimestamp(), false);
                 if ($year < 0) {
-                    return $this->_toComment(iconv_substr(Data::getContent($locale, 'era', array('gregorian', 'Abbr', '0')), 0, 1, 'UTF-8')) . '.';
+                    return $this->_toComment(iconv_substr(Cldr::getContent($locale, 'era', array('gregorian', 'Abbr', '0')), 0, 1, 'UTF-8')) . '.';
                 }
 
-                return $this->_toComment(iconv_substr(Data::getContent($locale, 'era', array('gregorian', 'Abbr', '1')), 0, 1, 'UTF-8')) . '.';
+                return $this->_toComment(iconv_substr(Cldr::getContent($locale, 'era', array('gregorian', 'Abbr', '1')), 0, 1, 'UTF-8')) . '.';
                 break;
 
             case self::ERA_NAME :
                 $year = $this->date('Y', $this->getUnixTimestamp(), false);
                 if ($year < 0) {
-                    return $this->_toComment(Data::getContent($locale, 'era', array('gregorian', 'Names', '0')));
+                    return $this->_toComment(Cldr::getContent($locale, 'era', array('gregorian', 'Names', '0')));
                 }
 
-                return $this->_toComment(Data::getContent($locale, 'era', array('gregorian', 'Names', '1')));
+                return $this->_toComment(Cldr::getContent($locale, 'era', array('gregorian', 'Names', '1')));
                 break;
 
             case self::DATES :
@@ -836,19 +837,19 @@ class Date extends DateObject
                 break;
 
             case self::DATE_FULL :
-                return $this->_toToken(Data::getContent($locale, 'date', array('gregorian', 'full')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'date', array('gregorian', 'full')), $locale);
                 break;
 
             case self::DATE_LONG :
-                return $this->_toToken(Data::getContent($locale, 'date', array('gregorian', 'long')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'date', array('gregorian', 'long')), $locale);
                 break;
 
             case self::DATE_MEDIUM :
-                return $this->_toToken(Data::getContent($locale, 'date', array('gregorian', 'medium')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'date', array('gregorian', 'medium')), $locale);
                 break;
 
             case self::DATE_SHORT :
-                return $this->_toToken(Data::getContent($locale, 'date', array('gregorian', 'short')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'date', array('gregorian', 'short')), $locale);
                 break;
 
             case self::TIMES :
@@ -856,19 +857,19 @@ class Date extends DateObject
                 break;
 
             case self::TIME_FULL :
-                return $this->_toToken(Data::getContent($locale, 'time', 'full'), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'time', 'full'), $locale);
                 break;
 
             case self::TIME_LONG :
-                return $this->_toToken(Data::getContent($locale, 'time', 'long'), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'time', 'long'), $locale);
                 break;
 
             case self::TIME_MEDIUM :
-                return $this->_toToken(Data::getContent($locale, 'time', 'medium'), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'time', 'medium'), $locale);
                 break;
 
             case self::TIME_SHORT :
-                return $this->_toToken(Data::getContent($locale, 'time', 'short'), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'time', 'short'), $locale);
                 break;
 
             case self::DATETIME :
@@ -876,19 +877,19 @@ class Date extends DateObject
                 break;
 
             case self::DATETIME_FULL :
-                return $this->_toToken(Data::getContent($locale, 'datetime', array('gregorian', 'full')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'datetime', array('gregorian', 'full')), $locale);
                 break;
 
             case self::DATETIME_LONG :
-                return $this->_toToken(Data::getContent($locale, 'datetime', array('gregorian', 'long')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'datetime', array('gregorian', 'long')), $locale);
                 break;
 
             case self::DATETIME_MEDIUM :
-                return $this->_toToken(Data::getContent($locale, 'datetime', array('gregorian', 'medium')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'datetime', array('gregorian', 'medium')), $locale);
                 break;
 
             case self::DATETIME_SHORT :
-                return $this->_toToken(Data::getContent($locale, 'datetime', array('gregorian', 'short')), $locale);
+                return $this->_toToken(Cldr::getContent($locale, 'datetime', array('gregorian', 'short')), $locale);
                 break;
 
             case self::ATOM :
@@ -1452,7 +1453,7 @@ class Date extends DateObject
                 break;
 
             case self::WEEKDAY_SHORT:
-                $daylist = Data::getList($locale, 'day');
+                $daylist = Cldr::getList($locale, 'day');
                 $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
 
@@ -1484,7 +1485,7 @@ class Date extends DateObject
                 break;
 
             case self::WEEKDAY:
-                $daylist = Data::getList($locale, 'day');
+                $daylist = Cldr::getList($locale, 'day');
                 $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
 
@@ -1548,7 +1549,7 @@ class Date extends DateObject
                 break;
 
             case self::WEEKDAY_NARROW:
-                $daylist = Data::getList($locale, 'day', array('gregorian', 'format', 'abbreviated'));
+                $daylist = Cldr::getList($locale, 'day', array('gregorian', 'format', 'abbreviated'));
                 $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
                 foreach ($daylist as $key => $value) {
@@ -1570,7 +1571,7 @@ class Date extends DateObject
                 break;
 
             case self::WEEKDAY_NAME:
-                $daylist = Data::getList($locale, 'day', array('gregorian', 'format', 'abbreviated'));
+                $daylist = Cldr::getList($locale, 'day', array('gregorian', 'format', 'abbreviated'));
                 $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
                 foreach ($daylist as $key => $value) {
@@ -1604,7 +1605,7 @@ class Date extends DateObject
 
             // month formats
             case self::MONTH_NAME:
-                $monthlist = Data::getList($locale, 'month');
+                $monthlist = Cldr::getList($locale, 'month');
                 $cnt = 0;
                 foreach ($monthlist as $key => $value) {
                     if (strtoupper($value) == strtoupper($date)) {
@@ -1675,7 +1676,7 @@ class Date extends DateObject
                 break;
 
             case self::MONTH_NAME_SHORT:
-                $monthlist = Data::getList($locale, 'month', array('gregorian', 'format', 'abbreviated'));
+                $monthlist = Cldr::getList($locale, 'month', array('gregorian', 'format', 'abbreviated'));
                 $cnt = 0;
                 foreach ($monthlist as $key => $value) {
                     if (strtoupper($value) == strtoupper($date)) {
@@ -1751,7 +1752,7 @@ class Date extends DateObject
                 break;
 
             case self::MONTH_NAME_NARROW:
-                $monthlist = Data::getList($locale, 'month', array('gregorian', 'stand-alone', 'narrow'));
+                $monthlist = Cldr::getList($locale, 'month', array('gregorian', 'stand-alone', 'narrow'));
                 $cnt       = 0;
                 foreach ($monthlist as $key => $value) {
                     if (strtoupper($value) === strtoupper($date)) {
@@ -2123,7 +2124,7 @@ class Date extends DateObject
 
             case self::DATE_FULL:
                 try {
-                    $format = Data::getContent($locale, 'date', array('gregorian', 'full'));
+                    $format = Cldr::getContent($locale, 'date', array('gregorian', 'full'));
                     $parsed = Format::getDate($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
 
                     if (($calc == 'set') || ($calc == 'cmp')) {
@@ -2143,7 +2144,7 @@ class Date extends DateObject
 
             case self::DATE_LONG:
                 try {
-                    $format = Data::getContent($locale, 'date', array('gregorian', 'long'));
+                    $format = Cldr::getContent($locale, 'date', array('gregorian', 'long'));
                     $parsed = Format::getDate($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
 
                     if (($calc == 'set') || ($calc == 'cmp')){
@@ -2163,7 +2164,7 @@ class Date extends DateObject
 
             case self::DATE_MEDIUM:
                 try {
-                    $format = Data::getContent($locale, 'date', array('gregorian', 'medium'));
+                    $format = Cldr::getContent($locale, 'date', array('gregorian', 'medium'));
                     $parsed = Format::getDate($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
 
                     if (($calc == 'set') || ($calc == 'cmp')) {
@@ -2183,7 +2184,7 @@ class Date extends DateObject
 
             case self::DATE_SHORT:
                 try {
-                    $format = Data::getContent($locale, 'date', array('gregorian', 'short'));
+                    $format = Cldr::getContent($locale, 'date', array('gregorian', 'short'));
                     $parsed = Format::getDate($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
 
                     $parsed['year'] = self::getFullYear($parsed['year']);
@@ -2220,7 +2221,7 @@ class Date extends DateObject
 
             case self::TIME_FULL:
                 try {
-                    $format = Data::getContent($locale, 'time', array('gregorian', 'full'));
+                    $format = Cldr::getContent($locale, 'time', array('gregorian', 'full'));
                     $parsed = Format::getTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
                     if ($calc != 'set') {
                         $month = 1;
@@ -2241,7 +2242,7 @@ class Date extends DateObject
 
             case self::TIME_LONG:
                 try {
-                    $format = Data::getContent($locale, 'time', array('gregorian', 'long'));
+                    $format = Cldr::getContent($locale, 'time', array('gregorian', 'long'));
                     $parsed = Format::getTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
                     if ($calc != 'set') {
                         $month = 1;
@@ -2257,7 +2258,7 @@ class Date extends DateObject
 
             case self::TIME_MEDIUM:
                 try {
-                    $format = Data::getContent($locale, 'time', array('gregorian', 'medium'));
+                    $format = Cldr::getContent($locale, 'time', array('gregorian', 'medium'));
                     $parsed = Format::getTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
                     if ($calc != 'set') {
                         $month = 1;
@@ -2273,7 +2274,7 @@ class Date extends DateObject
 
             case self::TIME_SHORT:
                 try {
-                    $format = Data::getContent($locale, 'time', array('gregorian', 'short'));
+                    $format = Cldr::getContent($locale, 'time', array('gregorian', 'short'));
                     $parsed = Format::getTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
                     if ($calc != 'set') {
                         $month = 1;
@@ -2312,7 +2313,7 @@ class Date extends DateObject
 
             case self::DATETIME_FULL:
                 try {
-                    $format = Data::getContent($locale, 'datetime', array('gregorian', 'full'));
+                    $format = Cldr::getContent($locale, 'datetime', array('gregorian', 'full'));
                     $parsed = Format::getDateTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
 
                     if (($calc == 'set') || ($calc == 'cmp')) {
@@ -2337,7 +2338,7 @@ class Date extends DateObject
 
             case self::DATETIME_LONG:
                 try {
-                    $format = Data::getContent($locale, 'datetime', array('gregorian', 'long'));
+                    $format = Cldr::getContent($locale, 'datetime', array('gregorian', 'long'));
                     $parsed = Format::getDateTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
 
                     if (($calc == 'set') || ($calc == 'cmp')){
@@ -2357,7 +2358,7 @@ class Date extends DateObject
 
             case self::DATETIME_MEDIUM:
                 try {
-                    $format = Data::getContent($locale, 'datetime', array('gregorian', 'medium'));
+                    $format = Cldr::getContent($locale, 'datetime', array('gregorian', 'medium'));
                     $parsed = Format::getDateTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
                     if (($calc == 'set') || ($calc == 'cmp')) {
                         --$parsed['month'];
@@ -2376,7 +2377,7 @@ class Date extends DateObject
 
             case self::DATETIME_SHORT:
                 try {
-                    $format = Data::getContent($locale, 'datetime', array('gregorian', 'short'));
+                    $format = Cldr::getContent($locale, 'datetime', array('gregorian', 'short'));
                     $parsed = Format::getDateTime($date, array('date_format' => $format, 'format_type' => 'iso', 'locale' => $locale));
 
                     $parsed['year'] = self::getFullYear($parsed['year']);
@@ -3166,8 +3167,8 @@ class Date extends DateObject
     /**
      * Check if location is supported
      *
-     * @param $location array - locations array
-     * @return $horizon float
+     * @param  array $location Locations array
+     * @return float Horizon
      */
     private function _checkLocation($location)
     {
@@ -3206,7 +3207,7 @@ class Date extends DateObject
      * Returns the time of sunrise for this date and a given location as new date object
      * For a list of cities and correct locations use the class Zend_Date_Cities
      *
-     * @param  $location array - location of sunrise
+     * @param array $location Location of sunrise
      *                   ['horizon']   -> civil, nautic, astronomical, effective (default)
      *                   ['longitude'] -> longitude of location
      *                   ['latitude']  -> latitude of location
@@ -3226,7 +3227,7 @@ class Date extends DateObject
      * Returns the time of sunset for this date and a given location as new date object
      * For a list of cities and correct locations use the class Zend_Date_Cities
      *
-     * @param  $location array - location of sunset
+     * @param array $location Location of sunset
      *                   ['horizon']   -> civil, nautic, astronomical, effective (default)
      *                   ['longitude'] -> longitude of location
      *                   ['latitude']  -> latitude of location
@@ -3246,7 +3247,7 @@ class Date extends DateObject
      * Returns an array with the sunset and sunrise dates for all horizon types
      * For a list of cities and correct locations use the class Zend_Date_Cities
      *
-     * @param  $location array - location of suninfo
+     * @param array $location Location of suninfo
      *                   ['horizon']   -> civil, nautic, astronomical, effective (default)
      *                   ['longitude'] -> longitude of location
      *                   ['latitude']  -> latitude of location
@@ -3592,8 +3593,8 @@ class Date extends DateObject
                     throw new Exception\InvalidArgumentException("no month given in array");
                 }
             } else {
-                $monthlist  = Data::getList($locale, 'month');
-                $monthlist2 = Data::getList($locale, 'month', array('gregorian', 'format', 'abbreviated'));
+                $monthlist  = Cldr::getList($locale, 'month');
+                $monthlist2 = Cldr::getList($locale, 'month', array('gregorian', 'format', 'abbreviated'));
 
                 $monthlist = array_merge($monthlist, $monthlist2);
                 $found = 0;
@@ -3704,7 +3705,7 @@ class Date extends DateObject
      * Returns the day as new date object
      * Example: 20.May.1986 -> 20.Jan.1970 00:00:00
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getDay($locale = null)
@@ -3716,9 +3717,9 @@ class Date extends DateObject
     /**
      * Returns the calculated day
      *
-     * @param $calc    string                    Type of calculation to make
-     * @param $day     string|integer|\Zend\Date\Date  Day to calculate, when null the actual day is calculated
-     * @param $locale  string|\Zend\Locale\Locale        Locale for parsing input
+     * @param string $calc                           Type of calculation to make
+     * @param string|integer|\Zend\Date\Date $day    Day to calculate, when null the actual day is calculated
+     * @param string|\Zend\Locale\Locale     $locale Locale for parsing input
      * @return \Zend\Date\Date|integer
      */
     private function _day($calc, $day, $locale)
@@ -3845,7 +3846,7 @@ class Date extends DateObject
      * Weekday is always from 1-7
      * Example: 09-Jan-2007 -> 2 = Tuesday -> 02-Jan-1970 (when 02.01.1970 is also Tuesday)
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param  string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getWeekday($locale = null)
@@ -3863,9 +3864,9 @@ class Date extends DateObject
     /**
      * Returns the calculated weekday
      *
-     * @param  $calc     string                          Type of calculation to make
-     * @param  $weekday  string|integer|array|\Zend\Date\Date  Weekday to calculate, when null the actual weekday is calculated
-     * @param  $locale   string|\Zend\Locale\Locale              Locale for parsing input
+     * @param  string                               $calc    Type of calculation to make
+     * @param  string|integer|array|\Zend\Date\Date $weekday Weekday to calculate, when null the actual weekday is calculated
+     * @param  string|\Zend\Locale\Locale           $locale  Locale for parsing input
      * @return \Zend\Date\Date|integer
      * @throws \Zend\Date\Exception
      */
@@ -4080,7 +4081,7 @@ class Date extends DateObject
      * Returns the hour as new date object
      * Example: 02.Feb.1986 10:30:25 -> 01.Jan.1970 10:00:00
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param  string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getHour($locale = null)
@@ -4523,7 +4524,7 @@ class Date extends DateObject
      * Returns the week as new date object using monday as begining of the week
      * Example: 12.Jan.2007 -> 08.Jan.1970 00:00:00
      *
-     * @param $locale  string|\Zend\Locale\Locale  OPTIONAL Locale for parsing input
+     * @param string|\Zend\Locale\Locale $locale OPTIONAL Locale for parsing input
      * @return \Zend\Date\Date
      */
     public function getWeek($locale = null)
@@ -4794,49 +4795,49 @@ class Date extends DateObject
                 return "EEE, dd MMM yyyy HH:mm:ss";
                 break;
             case self::DATES :
-                return Data::getContent($locale, 'date');
+                return Cldr::getContent($locale, 'date');
                 break;
             case self::DATE_FULL :
-                return Data::getContent($locale, 'date', array('gregorian', 'full'));
+                return Cldr::getContent($locale, 'date', array('gregorian', 'full'));
                 break;
             case self::DATE_LONG :
-                return Data::getContent($locale, 'date', array('gregorian', 'long'));
+                return Cldr::getContent($locale, 'date', array('gregorian', 'long'));
                 break;
             case self::DATE_MEDIUM :
-                return Data::getContent($locale, 'date', array('gregorian', 'medium'));
+                return Cldr::getContent($locale, 'date', array('gregorian', 'medium'));
                 break;
             case self::DATE_SHORT :
-                return Data::getContent($locale, 'date', array('gregorian', 'short'));
+                return Cldr::getContent($locale, 'date', array('gregorian', 'short'));
                 break;
             case self::TIMES :
-                return Data::getContent($locale, 'time');
+                return Cldr::getContent($locale, 'time');
                 break;
             case self::TIME_FULL :
-                return Data::getContent($locale, 'time', array('gregorian', 'full'));
+                return Cldr::getContent($locale, 'time', array('gregorian', 'full'));
                 break;
             case self::TIME_LONG :
-                return Data::getContent($locale, 'time', array('gregorian', 'long'));
+                return Cldr::getContent($locale, 'time', array('gregorian', 'long'));
                 break;
             case self::TIME_MEDIUM :
-                return Data::getContent($locale, 'time', array('gregorian', 'medium'));
+                return Cldr::getContent($locale, 'time', array('gregorian', 'medium'));
                 break;
             case self::TIME_SHORT :
-                return Data::getContent($locale, 'time', array('gregorian', 'short'));
+                return Cldr::getContent($locale, 'time', array('gregorian', 'short'));
                 break;
             case self::DATETIME :
-                return Data::getContent($locale, 'datetime');
+                return Cldr::getContent($locale, 'datetime');
                 break;
             case self::DATETIME_FULL :
-                return Data::getContent($locale, 'datetime', array('gregorian', 'full'));
+                return Cldr::getContent($locale, 'datetime', array('gregorian', 'full'));
                 break;
             case self::DATETIME_LONG :
-                return Data::getContent($locale, 'datetime', array('gregorian', 'long'));
+                return Cldr::getContent($locale, 'datetime', array('gregorian', 'long'));
                 break;
             case self::DATETIME_MEDIUM :
-                return Data::getContent($locale, 'datetime', array('gregorian', 'medium'));
+                return Cldr::getContent($locale, 'datetime', array('gregorian', 'medium'));
                 break;
             case self::DATETIME_SHORT :
-                return Data::getContent($locale, 'datetime', array('gregorian', 'short'));
+                return Cldr::getContent($locale, 'datetime', array('gregorian', 'short'));
                 break;
             case self::ATOM :
             case self::RFC_3339 :

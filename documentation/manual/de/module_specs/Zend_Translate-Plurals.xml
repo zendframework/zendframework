@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
-<!-- Reviewed: 21661 -->
+<!-- EN-Revision: 22760 -->
+<!-- Reviewed: 22760 -->
 <sect1 id="zend.translate.plurals">
     <title>Schreibweisen von Pluralformen für Übersetzungen</title>
 
@@ -244,8 +244,8 @@ array(
 ]]></programlisting>
 
             <para>
-                Im obigen Beispiel sind <code>plural_0</code> und <code>plural_1</code> die
-                Pluraldefinitionen des Quellcodes. Und im Array <code>plural_0</code>
+                Im obigen Beispiel sind 'plural_0' und 'plural_1' die
+                Pluraldefinitionen des Quellcodes. Und im Array 'plural_0'
                 sind alle übersetzten Pluralformen verfügbar. Sehen Sie sich das folgende
                 Beispiel an, das tatsächlichen Inhalt und die Übersetzung von einer englischen Quelle
                 ins Deutsche beinhaltet.

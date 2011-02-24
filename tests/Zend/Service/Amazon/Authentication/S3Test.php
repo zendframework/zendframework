@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Amazon_Authentication
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: AllTests.php 11973 2008-10-15 16:00:56Z matthew $
  */
@@ -34,7 +34,7 @@ use Zend\Service\Amazon\Authentication,
  * @category   Zend
  * @package    Zend_Service_Amazon_Authentication
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class S3Test extends \PHPUnit_Framework_TestCase

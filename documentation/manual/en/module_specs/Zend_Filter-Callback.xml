@@ -9,23 +9,52 @@
         have a method which does the job.
     </para>
 
-    <para>
-        Let's expect we want to create a filter which reverses a string.
-    </para>
+    <sect3 id="zend.filter.set.callback.options">
+        <title>Supported options for Zend_Filter_Callback</title>
 
-    <programlisting language="php"><![CDATA[
+        <para>
+            The following options are supported for <classname>Zend_Filter_Callback</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>callback</property></emphasis>: This sets the callback
+                    which should be used.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>options</property></emphasis>: This property sets the
+                    options which are used when the callback is processed.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.filter.set.callback.basic">
+        <title>Basic usage</title>
+
+        <para>
+            The usage of this filter is quite simple. Let&apos;s expect we want to create a filter which
+            reverses a string.
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback('strrev');
 
 print $filter->filter('Hello!');
 // returns "!olleH"
 ]]></programlisting>
 
-    <para>
-        As you can see it's really simple to use a callback to define a own filter. It is also
-        possible to use a method, which is defined within a class, by giving an array as callback.
-    </para>
+        <para>
+            As you can see it's really simple to use a callback to define a own filter. It is also
+            possible to use a method, which is defined within a class, by giving an array as
+            callback.
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Our classdefinition
 class MyClass
 {
@@ -37,18 +66,31 @@ $filter = new Zend_Filter_Callback(array('MyClass', 'Reverse'));
 print $filter->filter('Hello!');
 ]]></programlisting>
 
-    <para>
-        To get the actual set callback use <methodname>getCallback()</methodname> and to set
-        another callback use <methodname>setCallback()</methodname>.
-    </para>
+        <para>
+            To get the actual set callback use <methodname>getCallback()</methodname> and to set
+            another callback use <methodname>setCallback()</methodname>.
+        </para>
 
-    <para>
-        It is also possible to define default parameters, which are given to the called method
-        as array when the filter is executed. This array will be concatenated with the value which
-        will be filtered.
-    </para>
+        <note>
+            <title>Possible exceptions</title>
 
-    <programlisting language="php"><![CDATA[
+            <para>
+                You should note that defining a callback method which can not be called will raise
+                an exception.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.callback.parameters">
+        <title>Default parameters within a callback</title>
+
+        <para>
+            It is also possible to define default parameters, which are given to the called method
+            as array when the filter is executed. This array will be concatenated with the value
+            which will be filtered.
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback(
     array(
         'callback' => 'MyMethod',
@@ -58,18 +100,12 @@ $filter = new Zend_Filter_Callback(
 $filter->filter(array('value' => 'Hello'));
 ]]></programlisting>
 
-    <para>
-        When you would call the above method definition manually it would look like this:
-    </para>
+        <para>
+            When you would call the above method definition manually it would look like this:
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $value = MyMethod('Hello', 'param1', 'param2');
 ]]></programlisting>
-
-    <note>
-        <para>
-            You should note that defining a callback method which can not be called will raise
-            an exception.
-        </para>
-    </note>
+    </sect3>
 </sect2>

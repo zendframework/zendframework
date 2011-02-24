@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_File
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use Zend\Loader\PrefixPathLoader,
  * @category   Zend
  * @package    Zend_File
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_File
  */
@@ -85,7 +85,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
     {
         $loader = new PrefixPathLoader();
-        
+
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid type "BOGUS" provided to setPluginLoader');
         $this->adapter->setPluginLoader($loader, 'bogus');
     }
@@ -95,7 +95,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $loader = $this->adapter->getPluginLoader('validator');
         $this->adapter->addPrefixPath('Foo_Valid', 'Foo/Valid/', 'validator');
         $paths = $loader->getPaths('Foo_Valid');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testPassingNoTypeWhenAddingPrefixPathToAdapterShouldGeneratePathsForAllTypes()
@@ -104,9 +104,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $validateLoader = $this->adapter->getPluginLoader('validator');
         $filterLoader   = $this->adapter->getPluginLoader('filter');
         $paths = $validateLoader->getPaths('Foo\Validator');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
 
@@ -132,13 +132,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             array('type' => 'filter', 'prefix' => 'Bar\Filter', 'path' => 'Bar/Filter/'),
         ));
         $paths = $validatorLoader->getPaths('Foo\Valid');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Foo\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Bar\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths = $filterLoader->getPaths('Baz\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $this->assertEquals(2, count($paths));
     }
 
@@ -146,9 +146,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $loader = $this->adapter->getPluginLoader('validator');
         $paths  = $loader->getPaths('Zend\Validator');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths  = $loader->getPaths('Zend\Validator\File');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testAdapterShouldAllowAddingValidatorInstance()
@@ -346,9 +346,9 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $loader = $this->adapter->getPluginLoader('filter');
         $paths  = $loader->getPaths('Zend\Filter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $paths  = $loader->getPaths('Zend\Filter\File');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testAdapterShouldAllowAddingFilterInstance()
@@ -561,12 +561,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $files = $this->adapter->getFileInfo('unknown');
     }
 
-    public function testGetUnknownOption()
-    {
-        $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Unknown option: unknownOption = unknown');
-        $this->adapter->setOptions(array('unknownOption' => 'unknown'));
-    }
-
     public function testAdapterShouldAllowRetrievingFileName()
     {
         $path = __DIR__
@@ -694,7 +688,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $directory = __DIR__;
         $this->adapter->setDestination($directory, 'nonexisting');
         $this->assertEquals($directory, $this->adapter->getDestination('nonexisting'));
-        
+
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'not find');
         $this->assertTrue(is_string($this->adapter->getDestination('reallynonexisting')));
     }

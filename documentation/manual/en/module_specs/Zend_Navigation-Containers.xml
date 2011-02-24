@@ -462,7 +462,7 @@ $container->setPages($pages);
             Removing pages can be done with <methodname>removePage()</methodname> or
             <methodname>removePages()</methodname>. The first method accepts a an instance
             of a page, or an integer. The integer corresponds to the
-            <code>order</code> a page has. The latter method will remove all
+            <property>order</property> a page has. The latter method will remove all
             pages in the container.
         </para>
 
@@ -511,7 +511,7 @@ $container->removePages();      // removes all pages
             <methodname>findAllBy($property, $value)</methodname>, and
             <methodname>findBy($property, $value, $all = false)</methodname>.
             Those methods will recursively search the container for
-            pages matching the given <code>$page->$property == $value</code>.
+            pages matching the given <command>$page->$property == $value</command>.
             The first method, <methodname>findOneBy()</methodname>, will return a
             single page matching the property with the given value, or
             <constant>NULL</constant> if it cannot be found. The second method will return
@@ -522,9 +522,9 @@ $container->removePages();      // removes all pages
 
         <para>
             The finder methods can also be used magically by appending the
-            property name to <code>findBy</code>, <code>findOneBy</code>, or
-            <code>findAllBy</code>, e.g. <methodname>findOneByLabel('Home')</methodname> to
-            return the first matching page with label <code>Home</code>.
+            property name to <property>findBy</property>, <property>findOneBy</property>, or
+            <property>findAllBy</property>, e.g. <methodname>findOneByLabel('Home')</methodname> to
+            return the first matching page with label 'Home'.
             Other combinations are <methodname>findByLabel(...)</methodname>,
             <methodname>findOnyByTitle(...)</methodname>,
             <methodname>findAllByController(...)</methodname>, etc. Finder
@@ -686,7 +686,7 @@ foreach ($it as $page) {
             The method <methodname>hasPage(Zend_Navigation_Page $page)</methodname> checks
             if the container has the given page. The method <methodname>hasPages()</methodname>
             checks if there are any pages in the container, and is equivalent
-            to <code>count($container) > 1</code>.
+            to <command>count($container) > 1</command>.
         </para>
 
         <para>

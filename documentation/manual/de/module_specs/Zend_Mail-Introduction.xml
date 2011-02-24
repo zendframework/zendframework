@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22745 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
     <title>Einführung</title>
@@ -57,7 +57,7 @@ $mail->send();
         <para>
             Aus Sicherheitsgründen filtert <classname>Zend_Mail</classname> alle Felder des
             Nachrichtenkopfs, um eine "Header Injection" mittels Zeilenvorschubzeichen
-            (<code>\n</code>) zu verhindern. Doppelte Anführungszeichen werden zu einzelnen
+            (<emphasis>\n</emphasis>) zu verhindern. Doppelte Anführungszeichen werden zu einzelnen
             gewechselt und runde Klammern zu eckigen sowohl im Namen des Senders als auch des
             Empfängers. Wenn die Marken in Emailadressen sind, werden diese Marken entfernt.
         </para>

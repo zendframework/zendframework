@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22756 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.overview">
     <title>Übersicht</title>
@@ -98,9 +98,9 @@ $logger->log('Informative Nachricht', Zend_Log::INFO);
 
         <para>
             Der erste Parameter der <methodname>log()</methodname> Methode ist ein
-            <code>message</code> String und der zweite Parameter ist ein <code>priority</code>
-            Integerwert. Die Priorität muß eine der Prioritäten sein die von der Log Instanz erkannt
-            wird. Das wird in der nächsten Sektion beschrieben.
+            <property>message</property> String und der zweite Parameter ist ein
+            <property>priority</property> Integerwert. Die Priorität muß eine der Prioritäten sein
+            die von der Log Instanz erkannt wird. Das wird in der nächsten Sektion beschrieben.
         </para>
 
         <para>
@@ -161,7 +161,7 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
         </para>
 
         <para>
-            Die Prioritäten sind nicht beliebig. Die kommen vom BSD <code>syslog</code> Protokoll,
+            Die Prioritäten sind nicht beliebig. Die kommen vom BSD syslog Protokoll,
             welches in <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink> beschrieben
             wird. Die Namen und korrespondierenden Prioritätennummern sind auch mit einem anderen
             <acronym>PHP</acronym> Logging Systeme kompatibel, <ulink
@@ -193,7 +193,7 @@ $logger->addPriority('FOO', 8);
 
         <para>
             Das obige Codeschnipsel erstellt eine neue Priorität, <constant>FOO</constant>, dessen
-            Wert <code>8</code> ist. Die neue Priorität steht für die Protokollierung zur Verfügung:
+            Wert '8' ist. Die neue Priorität steht für die Protokollierung zur Verfügung:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -213,14 +213,15 @@ $logger->foo('Foo Nachricht');
             Wenn die <methodname>log()</methodname> Methode oder eine Ihrer Abkürzungen aufgerufen
             wird, wird ein Log Event erstellt. Das ist einfach ein assoziatives Array mit Daten
             welche das Event beschreiben das an die Writer übergeben wird. Die folgenden Schlüssel
-            werden immer in diesem Array erstellt: <code>timestamp</code>, <code>message</code>,
-            <code>priority</code>, und <code>priorityName</code>.
+            werden immer in diesem Array erstellt: <property>timestamp</property>,
+            <property>message</property>, <property>priority</property>, und
+            <property>priorityName</property>.
         </para>
 
         <para>
-            Die Erstellung des <code>event</code> Arrays ist komplett transparent. Trotzdem wird das
-            Wissen über das <code>event</code> Array für das Hinzufügen von Elementen benötigt, die
-            in dem obigen Standardset nicht existieren.
+            Die Erstellung des <property>event</property> Arrays ist komplett transparent. Trotzdem
+            wird das Wissen über das <property>event</property> Array für das Hinzufügen von
+            Elementen benötigt, die in dem obigen Standardset nicht existieren.
         </para>
 
         <para>
@@ -234,7 +235,7 @@ $logger->setEventItem('pid', getmypid());
 ]]></programlisting>
 
         <para>
-            Das obige Beispiel setzt ein neues Element welches <code>pid</code> heißt und
+            Das obige Beispiel setzt ein neues Element welches <property>pid</property> heißt und
             veröffentlicht es mit der PID des aktuellen Prozesses. Wenn einmal ein neues Element
             gesetzt wurde, wird es automatisch für alle Writer verfügbar, zusammen mit allen anderen
             Daten der Eventdaten wärend des Protokollierens. Ein Element kann jederzeit

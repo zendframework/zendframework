@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 22762 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.introduction">
     <title>Einführung</title>
@@ -26,7 +26,8 @@
                 <classname>Zend_Navigation</classname> - in seiner einfachsten Form - ein Objekt
                 das einen Pointer zu einer Webseite enthält. Zusätzlich zum Pointer selbst, enthält
                 das Seitenobjekt eine Anzahl von anderen Eigenschaften die typischerweise für die
-                Navigation relevant sind, wie z.B. <code>label</code>, <code>title</code> usw.
+                Navigation relevant sind, wie z.B. <property>label</property>,
+                <property>title</property> usw.
             </para>
 
             <para>
@@ -71,7 +72,8 @@
             von Navigationselementen. Die Darstellung wird von den Navigations View Helfern
             durchgeführt. Trotzdem enthalten Seiten Informationen die von den View Helfern bei der
             Darstellung verwendet wird wie z.B.: Label, <acronym>CSS</acronym> Klasse, Titel,
-            <code>lastmod</code> und <code>priority</code> Eigenschaften für Sitemaps, usw.
+            <property>lastmod</property> und <property>priority</property> Eigenschaften für
+            Sitemaps, usw.
         </para>
 
         <para>

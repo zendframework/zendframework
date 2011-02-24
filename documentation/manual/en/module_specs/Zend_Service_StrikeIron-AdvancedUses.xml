@@ -21,8 +21,8 @@
 
         <para>
             To try a StrikeIron service that does not have a wrapper class available,
-            give the <code>wsdl</code> option to <methodname>getService()</methodname>
-            instead of the <code>class</code> option:
+            give the <property>wsdl</property> option to <methodname>getService()</methodname>
+            instead of the <property>class</property> option:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -70,23 +70,24 @@ echo $result->listingName;
             Every StrikeIron client (subclass of
             <classname>Zend_Service_StrikeIron_Base</classname>) contains a
             <methodname>getSoapClient()</methodname> method to return the underlying instance of
-            <code>SOAPClient</code> used to communicate with StrikeIron.
+            <classname>SOAPClient</classname> used to communicate with StrikeIron.
         </para>
 
         <para>
             <acronym>PHP</acronym>' <ulink
                 url="http://www.php.net/manual/en/function.soap-soapclient-construct.php">SOAPClient</ulink>
-            has a <code>trace</code> option that causes it to remember the <acronym>XML</acronym>
-            exchanged during the last transaction. <classname>Zend_Service_StrikeIron</classname>
-            does not enable the <code>trace</code> option by default but this can easily by changed
-            by specifying the options that will be passed to the <code>SOAPClient</code>
+            has a <property>trace</property> option that causes it to remember the
+            <acronym>XML</acronym> exchanged during the last transaction.
+            <classname>Zend_Service_StrikeIron</classname> does not enable the
+            <property>trace</property> option by default but this can easily by changed
+            by specifying the options that will be passed to the <classname>SOAPClient</classname>
             constructor.
         </para>
 
         <para>
             To view a SOAP transaction, call the <methodname>getSoapClient()</methodname> method
-            to get the <code>SOAPClient</code> instance and then call the appropriate methods like
-            <ulink
+            to get the <classname>SOAPClient</classname> instance and then call the appropriate
+            methods like <ulink
                 url="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
             and <ulink
                 url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:

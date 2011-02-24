@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4765 $"/>
+		<generation date="$Date: 2010-02-27 18:03:30 -0600 (Sat, 27 Feb 2010) $"/>
+		<language type="ve"/>
+	</identity>
+	<localeDisplayNames>
+		<languages>
+			<language type="ve">Tshivenḓa</language>
+		</languages>
+	</localeDisplayNames>
+	<characters>
+		<exemplarCharacters>[a b d ḓ e f g h i k l ḽ m n ṅ ṋ o p r s t ṱ u v w x y z]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[c j q]</exemplarCharacters>
+		<exemplarCharacters type="index">[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z]</exemplarCharacters>
+	</characters>
+	<delimiters>
+		<quotationStart>‘</quotationStart>
+		<quotationEnd>’</quotationEnd>
+		<alternateQuotationStart>“</alternateQuotationStart>
+		<alternateQuotationEnd>”</alternateQuotationEnd>
+	</delimiters>
+	<dates>
+		<calendars>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">Pha</month>
+							<month type="2">Luh</month>
+							<month type="3">Ṱha</month>
+							<month type="4">Lam</month>
+							<month type="5">Shu</month>
+							<month type="6">Lwi</month>
+							<month type="7">Lwa</month>
+							<month type="8">Ṱha</month>
+							<month type="9">Khu</month>
+							<month type="10">Tsh</month>
+							<month type="11">Ḽar</month>
+							<month type="12">Nye</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">Phando</month>
+							<month type="2">Luhuhi</month>
+							<month type="3">Ṱhafamuhwe</month>
+							<month type="4">Lambamai</month>
+							<month type="5">Shundunthule</month>
+							<month type="6">Fulwi</month>
+							<month type="7">Fulwana</month>
+							<month type="8">Ṱhangule</month>
+							<month type="9">Khubvumedzi</month>
+							<month type="10">Tshimedzi</month>
+							<month type="11">Ḽara</month>
+							<month type="12">Nyendavhusiku</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">Swo</day>
+							<day type="mon">Mus</day>
+							<day type="tue">Vhi</day>
+							<day type="wed">Rar</day>
+							<day type="thu">Ṋa</day>
+							<day type="fri">Ṱan</day>
+							<day type="sat">Mug</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">Swondaha</day>
+							<day type="mon">Musumbuluwo</day>
+							<day type="tue">Ḽavhuvhili</day>
+							<day type="wed">Ḽavhuraru</day>
+							<day type="thu">Ḽavhuṋa</day>
+							<day type="fri">Ḽavhuṱanu</day>
+							<day type="sat">Mugivhela</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<quarters>
+					<quarterContext type="format">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">K1</quarter>
+							<quarter type="2">K2</quarter>
+							<quarter type="3">K3</quarter>
+							<quarter type="4">K4</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">Kotara ya u thoma</quarter>
+							<quarter type="2">Kotara ya vhuvhili</quarter>
+							<quarter type="3">Kotara ya vhuraru</quarter>
+							<quarter type="4">Kotara ya vhuṋa</quarter>
+						</quarterWidth>
+					</quarterContext>
+				</quarters>
+			</calendar>
+		</calendars>
+	</dates>
+	<numbers>
+		<symbols>
+			<decimal>,</decimal>
+			<group> </group>
+		</symbols>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<scientificFormats>
+			<scientificFormatLength>
+				<scientificFormat>
+					<pattern>#E0</pattern>
+				</scientificFormat>
+			</scientificFormatLength>
+		</scientificFormats>
+		<percentFormats>
+			<percentFormatLength>
+				<percentFormat>
+					<pattern>#,##0%</pattern>
+				</percentFormat>
+			</percentFormatLength>
+		</percentFormats>
+		<currencyFormats>
+			<currencyFormatLength>
+				<currencyFormat>
+					<pattern>¤#,##0.00</pattern>
+				</currencyFormat>
+			</currencyFormatLength>
+		</currencyFormats>
+	</numbers>
+</ldml>
+

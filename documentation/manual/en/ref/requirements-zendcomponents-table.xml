@@ -1243,6 +1243,36 @@
                 <entry>
                     <emphasis>
                         <ulink
+                            url="&zf.manual.link;/zend.validate.hostname.html">
+                            <classname>Zend_Validate_Hostname</classname>
+                        </ulink>
+                    </emphasis>
+                </entry>
+                <entry>&requirements.hard;</entry>
+                <entry>
+                    <ulink
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <emphasis>
+                        <ulink
+                            url="&zf.manual.link;/zend.validate.stringlength.html">
+                            <classname>Zend_Validate_StringLength</classname>
+                        </ulink>
+                    </emphasis>
+                </entry>
+                <entry>&requirements.hard;</entry>
+                <entry>
+                    <ulink
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <emphasis>
+                        <ulink
                             url="&zf.manual.link;/zend.version.html">
                             <classname>Zend_Version</classname>
                         </ulink>

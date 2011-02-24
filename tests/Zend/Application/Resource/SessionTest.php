@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Loader\Autoloader,
  * @package    Zend_Application
  * @subpackage UnitTests
  * @group      Zend_Application
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SessionTest extends \PHPUnit_Framework_TestCase
@@ -46,12 +46,15 @@ class SessionTest extends \PHPUnit_Framework_TestCase
     public function testReturnsSessionManager()
     {
         $sessionManager = $this->resource->init();
-        $this->assertType('Zend\Session\Manager', $sessionManager);
+        $this->assertInstanceOf('Zend\Session\Manager', $sessionManager);
     }
 
+    /**
+     * @group disable
+     */
     public function testSetSaveHandler()
     {
-        $saveHandler = $this->getMock('Zend\\Session\\SaveHandler');
+        $saveHandler = $this->getMock('Zend\Session\SaveHandler');
 
         $this->resource->setSaveHandler($saveHandler);
         $this->assertSame($saveHandler, $this->resource->getSaveHandler());
@@ -63,7 +66,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
         $this->resource->setSaveHandler($saveHandlerClassName);
 
-        $this->assertType($saveHandlerClassName, $this->resource->getSaveHandler());
+        $this->assertInstanceOf($saveHandlerClassName, $this->resource->getSaveHandler());
     }
 
     public function testSetSaveHandlerArray()
@@ -72,7 +75,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
         $this->resource->setSaveHandler(array('class' => $saveHandlerClassName));
 
-        $this->assertType($saveHandlerClassName, $this->resource->getSaveHandler());
+        $this->assertInstanceOf($saveHandlerClassName, $this->resource->getSaveHandler());
     }
 
     public function testSetOptions()

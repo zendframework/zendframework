@@ -98,7 +98,7 @@
                 Twitter API (except for public timeline). This must be accomplished using OAuth since
                 Twitter has disabled it's basic HTTP authentication as of August 2010.
             </para>
-            
+
             <para>
                 There are two options to establishing authorization. The first is to implement the
                 workflow of <classname>Zend_Oauth</classname> via <classname>Zend_Service_Twitter</classname>
@@ -130,7 +130,7 @@
  * We assume $serializedToken is the serialized token retrieved from a database
  * or even $_SESSION (if following the simple Zend_Oauth documented example)
  */
-$token = unserialize($serializedToken);            
+$token = unserialize($serializedToken);
 
 $twitter = new Zend_Service_Twitter(array(
     'username' => 'johndoe',
@@ -146,7 +146,7 @@ $response = $twitter->account->verifyCredentials();
             <para>
                 In order to authenticate with Twitter, ALL applications MUST be registered with
                 Twitter in order to receive a Consumer Key and Consumer Secret to be used when
-                authenticating with OAuth. This can not be reused across multiple applications - 
+                authenticating with OAuth. This can not be reused across multiple applications -
                 you must register each new application separately. Twitter access tokens have
                 no expiry date, so storing them to a database is advised (they can, of course,
                 be refreshed simply be repeating the OAuth authorization process). This can only

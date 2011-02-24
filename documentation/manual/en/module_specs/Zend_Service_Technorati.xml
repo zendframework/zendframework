@@ -132,9 +132,9 @@ $topTags = $technorati->topTags();
             <classname>Zend_Service_Technorati_*ResultSet</classname> objects. A result set object
             is basically a collection of result objects. It extends the basic
             <classname>Zend_Service_Technorati_ResultSet</classname> class and implements the
-            <code>SeekableIterator</code> <acronym>PHP</acronym> interface. The best way to consume
-            a result set object is to loop over it with the <acronym>PHP</acronym>
-            <code>foreach</code> statement.
+            <classname>SeekableIterator</classname> <acronym>PHP</acronym> interface. The best way
+            to consume a result set object is to loop over it with the <acronym>PHP</acronym>
+            <methodname>foreach()</methodname> statement.
         </para>
 
         <example id="zend.service.technorati.consuming-results.example-1">
@@ -158,8 +158,8 @@ foreach ($resultSet as $result) {
 
         <para>
             Because <classname>Zend_Service_Technorati_ResultSet</classname> implements the
-            <code>SeekableIterator</code> interface, you can seek a specific result object using its
-            position in the result collection.
+            <classname>SeekableIterator</classname> interface, you can seek a specific result
+            object using its position in the result collection.
         </para>
 
         <example id="zend.service.technorati.consuming-results.example-2">
@@ -182,9 +182,9 @@ $result = $resultSet->current();
 
         <note>
             <para>
-                <code>SeekableIterator</code> works as an array and counts positions starting from
-                index 0. Fetching position number 1 means getting the second result in the
-                collection.
+                <classname>SeekableIterator</classname> works as an array and counts positions
+                starting from index 0. Fetching position number 1 means getting the second result
+                in the collection.
             </para>
         </note>
 
@@ -245,7 +245,7 @@ echo "</ol>";
         </para>
 
         <para>
-            You should always wrap a Technorati query with a <code>try</code>...<code>catch</code>
+            You should always wrap a Technorati query with a <command>try ... catch</command>
             block.
         </para>
 
@@ -307,55 +307,55 @@ echo "Daily Usage: " . $key->getApiQueries() . "/" .
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.cosmos"><code>Cosmos</code></link>
+                            linkend="zend.service.technorati.queries.cosmos">Cosmos</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.search"><code>Search</code></link>
+                            linkend="zend.service.technorati.queries.search">Search</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <link linkend="zend.service.technorati.queries.tag"><code>Tag</code></link>
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <link
-                            linkend="zend.service.technorati.queries.dailycounts"><code>DailyCounts</code></link>
+                        <link linkend="zend.service.technorati.queries.tag">Tag</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.toptags"><code>TopTags</code></link>
+                            linkend="zend.service.technorati.queries.dailycounts">DailyCounts</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.bloginfo"><code>BlogInfo</code></link>
+                            linkend="zend.service.technorati.queries.toptags">TopTags</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.blogposttags"><code>BlogPostTags</code></link>
+                            linkend="zend.service.technorati.queries.bloginfo">BlogInfo</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.getinfo"><code>GetInfo</code></link>
+                            linkend="zend.service.technorati.queries.blogposttags">BlogPostTags</link>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <link
+                            linkend="zend.service.technorati.queries.getinfo">GetInfo</link>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -629,8 +629,8 @@ echo "</ol>";
             result set which can be easily iterated, with each result being contained in a type
             result object. All result set classes extend
             <classname>Zend_Service_Technorati_ResultSet</classname> class and implement the
-            <code>SeekableIterator</code> interface, allowing for easy iteration and seeking to a
-            specific result.
+            <classname>SeekableIterator</classname> interface, allowing for easy iteration and
+            seeking to a specific result.
 
             <itemizedlist>
                 <listitem>
@@ -778,8 +778,9 @@ echo "</ol>";
 
             <para>
                 <classname>Zend_Service_Technorati_ResultSet</classname> implements the
-                <acronym>PHP</acronym> <code>SeekableIterator</code> interface, and you can iterate
-                all result objects via the <acronym>PHP</acronym> <code>foreach</code> statement.
+                <acronym>PHP</acronym> <classname>SeekableIterator</classname> interface, and you
+                can iterate all result objects via the <acronym>PHP</acronym>
+                <methodname>foreach()</methodname> statement.
             </para>
 
             <example id="zend.service.technorati.classes.resultset.example-1">

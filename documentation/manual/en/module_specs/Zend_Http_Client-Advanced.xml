@@ -16,10 +16,10 @@
             According to the <acronym>HTTP</acronym>/1.1 RFC, <acronym>HTTP</acronym> 301 and 302
             responses should be treated by the client by resending the same request to the
             specified location - using the same request method. However, most
-            clients to not implement this and always use a GET request when
+            clients to not implement this and always use a <constant>GET</constant> request when
             redirecting. By default, <classname>Zend_Http_Client</classname> does the same - when
-            redirecting on a 301 or 302 response, all GET and POST parameters
-            are reset, and a GET request is sent to the new location. This
+            redirecting on a 301 or 302 response, all <constant>GET</constant> and POST parameters
+            are reset, and a <constant>GET</constant> request is sent to the new location. This
             behavior can be changed by setting the 'strictredirects' configuration
             parameter to boolean <constant>TRUE</constant>:
             <example id="zend.http.client.redirections.example-1">
@@ -68,7 +68,7 @@ $client->setCookie($cookie);
             </example>
 
             For more information about <classname>Zend_Http_Cookie</classname> objects, see
-            <xref linkend="zend.http.cookies" />.
+            <link linkend="zend.http.cookies">this section</link>.
         </para>
 
         <para>
@@ -103,7 +103,7 @@ $client->request('GET');
             </example>
 
             For more information about the <classname>Zend_Http_CookieJar</classname> class, see
-            <xref linkend="zend.http.cookies.cookiejar" />.
+            <link linkend="zend.http.cookies.cookiejar">this section</link>.
         </para>
     </sect2>
 
@@ -313,7 +313,7 @@ $client->setUri('http://christer:secret@example.com');
         <para>
             When you perform several requests with the same client, but want
             to make sure all the request-specific parameters are cleared, you
-            should use the resetParameters() method. This ensures that GET and
+            should use the resetParameters() method. This ensures that <constant>GET</constant> and
             POST parameters, request body and request-specific headers are
             reset and are not reused in the next request.
         </para>

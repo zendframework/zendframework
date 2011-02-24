@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -53,7 +53,7 @@ use Zend\Memory;
  * @uses       \Zend\Pdf\Util
  * @category   Zend
  * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PdfDocument
@@ -525,7 +525,7 @@ class PdfDocument
     }
 
     /**
-     * Orginize pages to tha pages tree structure.
+     * Organize pages to the pages tree structure.
      *
      * @todo atomatically attach page to the document, if it's not done yet.
      * @todo check, that page is attached to the current document

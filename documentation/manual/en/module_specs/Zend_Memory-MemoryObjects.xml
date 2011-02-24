@@ -65,7 +65,7 @@ $memObject = $memoryManager->createLocked($data);
         <title>Memory container 'value' property</title>
 
         <para>
-            Use the memory container (movable or locked) '<code>value</code>'
+            Use the memory container (movable or locked) '<property>value</property>'
             property to operate with memory object data:
         </para>
 

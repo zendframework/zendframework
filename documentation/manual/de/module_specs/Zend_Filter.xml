@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22389 -->
+<!-- EN-Revision: 22722 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
     <title>Einführung</title>
@@ -184,5 +184,42 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                 </listitem>
             </itemizedlist>
         </sect3>
+    </sect2>
+
+    <sect2 id="zend.filter.introduction.caveats">
+        <title>Doppelt filtern</title>
+
+        <para>
+            Wenn zwei Filter nacheinander verwendet werden muss man bedenken dass es oft nicht
+            möglich ist die originale Ausgabe zu erhalten indem der gegensätzliche Filter verwendet
+            wird. Nehmen wir das folgende Beispiel:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$original = "my_original_content";
+
+// Einen Filter anwenden
+$filter   = new Zend_Filter_Word_UnderscoreToCamelCase();
+$filtered = $filter->filter($original);
+
+// Sein gegenstück verwenden
+$filter2  = new Zend_Filter_Word_CamelCaseToUnderscore();
+$filtered = $filter2->filter($filtered)
+]]></programlisting>
+
+        <para>
+            Das oben stehende Code Beispiel könnte zur Vermutung führen dass man die originale
+            Ausgabe erhält nachdem der zweite Filter angewendet wurde. Aber bei logischer
+            Betrachtung ist dies nicht der Fall. Nachdem der erste Filter angewendet wurde, wird
+            <emphasis>my_original_content</emphasis> zu <emphasis>MyOriginalContent</emphasis>
+            geändert. Aber nachdem der zweite Filter angewendet wurde ist das Ergebnis
+            <emphasis>My_Original_Content</emphasis>.
+        </para>
+
+        <para>
+            Wie man sieht ist es nicht immer möglich die originale Ausgabe zu erhalten indem ein
+            Filter angewendet wird der das Gegenteil zu sein scheint. Das hängt vom Filter und auch
+            von der angegebenen Inhalt ab.
+        </para>
     </sect2>
 </sect1>

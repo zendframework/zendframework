@@ -6,9 +6,9 @@
     <para>
         When creating a measurement object, <classname>Zend_Measure_*</classname> methods expect the
         input/original measurement data value as the first parameter. This can be a
-        <link linkend="zend.measure.creation.number"><code>numeric argument</code></link>, a
+        <link linkend="zend.measure.creation.number">numeric argument</link>, a
         <link linkend="zend.measure.creation.string"><type>String</type></link> without units, or a
-        <link linkend="zend.measure.creation.localized"><code>localized string</code> with unit(s)
+        <link linkend="zend.measure.creation.localized">localized string with unit(s)
             specified.</link> The second parameter defines the type of the measurement. Both
         parameters are mandatory. The language may optionally be specified as the third parameter.
     </para>

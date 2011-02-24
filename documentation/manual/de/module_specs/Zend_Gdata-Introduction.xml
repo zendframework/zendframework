@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22511 -->
+<!-- EN-Revision: 22744 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.introduction">
     <title>Einführung</title>
@@ -145,9 +145,10 @@
                         <methodname>setStartIndex()</methodname>, und
                         <methodname>getPublishedMin()</methodname>. Die Abfrage Klassen haben auch
                         eine Methode um eine <acronym>URL</acronym> zu erhalten welche die erstellte
-                        Abfrage repräsentieren. -- <code>getQueryUrl</code>. Alternativ kann man die
-                        Abfrage String Komponente der <acronym>URL</acronym> erhalten indem die
-                        <methodname>getQueryString()</methodname> Methode verwendet wird.
+                        Abfrage repräsentieren. -- <methodname>getQueryUrl()</methodname>.
+                        Alternativ kann man die Abfrage String Komponente der <acronym>URL</acronym>
+                        erhalten indem die <methodname>getQueryString()</methodname> Methode
+                        verwendet wird.
                     </para>
                 </listitem>
 
@@ -175,10 +176,11 @@
                         zur Möglichkeit die Eigenschaften eines Eintrages (wie den Zellen Wert der
                         Tabellenkalkulation) zu setzen, kann das Objekt des Eintrages verwendet
                         werden um Aktualisierungs- oder Löschanfragen an ein Service zu senden. Zum
-                        Beispiel kann <code>$entry->save()</code> aufgerufen werden um Änderungen
-                        die an einem Eintrage durchgeführt wurden zu einem Service zurück zu
-                        speichern von welche der Eintrag initiiert wurde, oder
-                        <code>$entry->delete()</code> um einen Eintrag von einem Server zu löschen.
+                        Beispiel kann <command>$entry->save()</command> aufgerufen werden um
+                        Änderungen die an einem Eintrage durchgeführt wurden zu einem Service zurück
+                        zu Speichern von welche der Eintrag initiiert wurde, oder
+                        <command>$entry->delete()</command> um einen Eintrag von einem Server zu
+                        Löschen.
                     </para>
                 </listitem>
 
@@ -224,9 +226,9 @@
 
         <para>
             Achtung: Ein komplettes Beispiel davon wie mit <classname>Zend_Gdata</classname>
-            gearbeitet werden kann ist im <code>demos/Zend/Gdata</code> Verzeichnis vorhanden.
-            Dieses Beispiel läuft von der Kommandozeile aus, aber die enthaltenen Methoden sind
-            einfach in einem Web Anwendung zu portieren.
+            gearbeitet werden kann ist im <filename>demos/Zend/Gdata</filename> Verzeichnis
+            vorhanden. Dieses Beispiel läuft von der Kommandozeile aus, aber die enthaltenen
+            Methoden sind einfach in einem Web Anwendung zu portieren.
         </para>
     </sect2>
 
@@ -236,11 +238,11 @@
         <para>
             Der Zend Framework Namensstandard erzwingt das alle Klassen nach der Verzeichnis
             Struktur benannt werden in welcher sie vorhanden sind. Zum Beispiel eine Erweiterung die
-            zu Tabellenkalkulation gehört und in <code>Zend/Gdata/Spreadsheets/Extension/...</code>
-            gespeichert ist, muß als Ergebnis
-            <classname>Zend_Gdata_Spreadsheets_Extension_...</classname> benannt werden. Das
-            verursacht eine Menge an Tipparbeit wenn versucht wird eine neue Instanz eines Zellen
-            Elements zu erstellen!
+            zu Tabellenkalkulation gehört und in
+            <filename>Zend/Gdata/Spreadsheets/Extension/...</filename> gespeichert ist, muß als
+            Ergebnis <classname>Zend_Gdata_Spreadsheets_Extension_...</classname> benannt werden.
+            Das verursacht eine Menge an Tipparbeit wenn versucht wird eine neue Instanz eines
+            Zellen Elements zu erstellen!
         </para>
 
         <para>
@@ -248,9 +250,9 @@
             <classname>Zend_Gdata_App</classname>, <classname>Zend_Gdata</classname>,
             <classname>Zend_Gdata_Spreadsheets</classname>) implementiert welche die Erstellung
             neuer Instanzen von Daten Modellen, Abfragen und anderen Klassen viel einfacher macht.
-            Diese magische Fabriksmethode ist durch die Verwendung der magischen <code>__call</code>
-            Methode implementiert um auf alle Versuche
-            <code>$service->newXXX(arg1, arg2, ...)</code> aufzurufen, angewendet zu werden.
+            Diese magische Fabriksmethode ist durch die Verwendung der magischen
+            <methodname>__call()</methodname> Methode implementiert um auf alle Versuche
+            <command>$service->newXXX(arg1, arg2, ...)</command> aufzurufen, angewendet zu werden.
             Basieren auf dem Wert von XXX, wird eine Suche in allen registrierten 'Paketen', für die
             gewünschte Klasse, durchgeführt. Hier sind einige Beispiele:
         </para>
@@ -388,8 +390,8 @@ $gdata->setMinorProtocolVersion(null);
         <itemizedlist>
             <listitem>
                 <para>
-                    Der <code>q</code> Parameter spezifiziert eine komplette Textabfrage. Der Wert
-                    dieses Parameters ist ein String.
+                    Der <property>q</property> Parameter spezifiziert eine komplette Textabfrage.
+                    Der Wert dieses Parameters ist ein String.
                 </para>
 
                 <para>
@@ -400,12 +402,12 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    Der <code>alt</code> Parameter spezifiziert den Feed Typ. Der Wert dieses
-                    Parameters kann <code>atom</code>, <code>rss</code>, <code>json</code>, oder
-                    <code>json-in-script</code> sein. Wenn dieser Parameter nicht spezifiziert wird,
-                    ist der Standard Feedtyp <code>atom</code>.
-                    <classname>Zend_Http_Client</classname> könnte verwendet werden um Feeds in
-                    anderen Formaten zu empfangen, indem die von der
+                    Der <property>alt</property> Parameter spezifiziert den Feed Typ. Der Wert
+                    dieses Parameters kann <property>atom</property>, <property>rss</property>,
+                    <property>json</property>, oder <property>json-in-script</property> sein. Wenn
+                    dieser Parameter nicht spezifiziert wird, ist der Standard Feedtyp
+                    <property>atom</property>. <classname>Zend_Http_Client</classname> könnte
+                    verwendet werden um Feeds in anderen Formaten zu empfangen, indem die von der
                     <classname>Zend_Gdata_Query</classname> Klasse oder deren Subklassen erzeugten
                     Abfrage <acronym>URL</acronym>s verwendet werden.
                 </para>
@@ -418,9 +420,9 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    Der <code>maxResults</code> Parameter begrenzt die Anzahl an Einträgen im Feed.
-                    Der Wert dieses Parameters ist ein Integer. Die zurückgegebene Anzahl an
-                    Einträgen im Feed wird diesen Wert nicht überschreiten.
+                    Der <property>maxResults</property> Parameter begrenzt die Anzahl an Einträgen
+                    im Feed. Der Wert dieses Parameters ist ein Integer. Die zurückgegebene Anzahl
+                    an Einträgen im Feed wird diesen Wert nicht überschreiten.
                 </para>
 
                 <para>
@@ -431,8 +433,8 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    Der <code>startIndex</code> Parameter spezifiziert die ordinale Nummer des
-                    ersten Eintrags der im Feed zurückgegeben wird. Einträge vor dieser Nummer
+                    Der <property>startIndex</property> Parameter spezifiziert die ordinale Nummer
+                    des ersten Eintrags der im Feed zurückgegeben wird. Einträge vor dieser Nummer
                     werden übergangen.
                 </para>
 
@@ -444,12 +446,12 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    Die Parameter <code>updatedMin</code> und <code>updatedMax</code> spezifizieren
-                    Grenzen für das Datum der Einträge. Wenn ein Wert für <code>updatedMin</code>
-                    spezifiziert wird, werden keine Einträge die vor dem spezifizierten Datum
-                    aktualisiert wurden, im Feed inkludiert. Genauso werden keine Einträge
-                    inkludiert die nach einem Datum aktualisiert wurden wenn
-                    <code>updatedMax</code> spezifiziert wird.
+                    Die Parameter <property>updatedMin</property> und
+                    <property>updatedMax</property> spezifizieren Grenzen für das Datum der
+                    Einträge. Wenn ein Wert für <property>updatedMin</property> spezifiziert wird,
+                    werden keine Einträge die vor dem spezifizierten Datum aktualisiert wurden, im
+                    Feed inkludiert. Genauso werden keine Einträge inkludiert die nach einem Datum
+                    aktualisiert wurden wenn <property>updatedMax</property> spezifiziert wird.
                 </para>
 
                 <para>
@@ -465,7 +467,8 @@ $gdata->setMinorProtocolVersion(null);
         </itemizedlist>
 
         <para>
-            Es gibt eine <code>get</code> Funktion für jede <code>set</code> Funktion.
+            Es gibt eine <methodname>get*()</methodname> Funktion für jede
+            <methodname>set*()</methodname> Funktion.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -683,8 +686,8 @@ echo 'Die <id> des resultierenden Eintrages ist: ' . $entryResult->id->text;
         </para>
 
         <para>
-            Option 2: Alternativ kann <code>$entry->delete()</code> an einem Eintrag der von einem
-            Google Service empfangen wurde, aufgerufen werden.
+            Option 2: Alternativ kann <command>$entry->delete()</command> an einem Eintrag der von
+            einem Google Service empfangen wurde, aufgerufen werden.
         </para>
 
         <programlisting language="php"><![CDATA[

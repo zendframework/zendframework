@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
+<!-- EN-Revision: 22784 -->
 <!-- Reviewed: no -->
-<sect2 id="zend.service.windowsazure.storage.blob">
+<sect1 id="zend.service.windowsazure.storage.blob">
     <title>Zend_Service_WindowsAzure_Storage_Blob</title>
 
     <para>
@@ -17,7 +17,7 @@
         <acronym>PHP</acronym> Interface zum Speicher Account zu bieten.
     </para>
 
-    <sect3 id="zend.service.windowsazure.storage.blob.api">
+    <sect2 id="zend.service.windowsazure.storage.blob.api">
         <title>API Beispiele</title>
 
         <para>
@@ -27,7 +27,7 @@
             dieser Features.
         </para>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.api.create-container">
+        <sect3 id="zend.service.windowsazure.storage.blob.api.create-container">
             <title>Erstellung einer Speicher Containers</title>
 
             <para>
@@ -45,9 +45,9 @@ $result = $storageClient->createContainer('testcontainer');
 echo 'Der Name des Containers ist: ' . $result->Name;
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.api.delete-container">
+        <sect3 id="zend.service.windowsazure.storage.blob.api.delete-container">
             <title>Löschen eines Speicher Containers</title>
 
             <para>
@@ -63,9 +63,9 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 $storageClient->deleteContainer('testcontainer');
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.api.storing-blob">
+        <sect3 id="zend.service.windowsazure.storage.blob.api.storing-blob">
             <title>Speichern eines Blobs</title>
 
             <para>
@@ -88,9 +88,9 @@ $result = $storageClient->putBlob(
 echo 'Der Name des Blobs ist: ' . $result->Name;
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.api.copy-blob">
+        <sect3 id="zend.service.windowsazure.storage.blob.api.copy-blob">
             <title>Kopieren eines Blobs</title>
 
             <para>
@@ -115,9 +115,9 @@ $result = $storageClient->copyBlob(
 echo 'Der Name des kopierten Blobs ist: ' . $result->Name;
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.api.download-blob">
+        <sect3 id="zend.service.windowsazure.storage.blob.api.download-blob">
             <title>Herunterladen eines Blobs</title>
 
             <para>
@@ -139,9 +139,9 @@ $storageClient->getBlob(
 );
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.api.public-blob">
+        <sect3 id="zend.service.windowsazure.storage.blob.api.public-blob">
             <title>Einen Blob öffentlich verfügbar machen</title>
 
             <para>
@@ -165,23 +165,24 @@ $storageClient->getBlob(
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
 // Den Container öffentlich zugänglich machen
+// (alle Blobs durchgehen und Blob Daten lesen)
 $storageClient->setContainerAcl(
     'testcontainer',
-    Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC
+    Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC_CONTAINER
 );
 ]]></programlisting>
             </example>
-        </sect4>
-    </sect3>
+        </sect3>
+    </sect2>
 
-    <sect3 id="zend.service.windowsazure.storage.blob.root">
+    <sect2 id="zend.service.windowsazure.storage.blob.root">
         <title>Stamm Container</title>
 
         <para>
             Der Windows Azure Blob Speicher bietet Unterstützung für die Arbeit mit einem "Stamm
             Container" (root). Das bedeutet das ein Blob im Stamm des Speicher Containers
             gespeichert werden kann, z.B.
-            <code>http://myaccount.blob.core.windows.net/somefile.txt</code>.
+            <filename>http://myaccount.blob.core.windows.net/somefile.txt</filename>.
         </para>
 
         <para>
@@ -191,9 +192,9 @@ $storageClient->setContainerAcl(
             Stamm Container sollten ausgeführt werden indem der Containernamen auf
             <varname>$root</varname> gesetzt wird.
         </para>
-    </sect3>
+    </sect2>
 
-    <sect3 id="zend.service.windowsazure.storage.blob.wrapper">
+    <sect2 id="zend.service.windowsazure.storage.blob.wrapper">
         <title>Blob Speicher Stream Wrapper</title>
 
         <para>
@@ -243,9 +244,9 @@ $storageClient->registerStreamWrapper('blob://');
             Um den Stream Wrapper zu deregistrieren kann die Methode
             <methodname>unregisterStreamWrapper()</methodname> verwendet werden.
         </para>
-    </sect3>
+    </sect2>
 
-    <sect3 id="zend.service.windowsazure.storage.blob.sharedaccesssig">
+    <sect2 id="zend.service.windowsazure.storage.blob.sharedaccesssig">
         <title>Shared Access Signaturen</title>
 
         <para>
@@ -271,7 +272,7 @@ http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A0
             Accounts "phpstorage".
         </para>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.sharedaccesssig.generate">
+        <sect3 id="zend.service.windowsazure.storage.blob.sharedaccesssig.generate">
             <title>Erstellen einer Shared Access Signature</title>
 
             <para>
@@ -326,9 +327,9 @@ $sharedAccessUrl = $storageClient->generateSharedAccessUrl(
 );
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.blob.sharedaccesssig.consume">
+        <sect3 id="zend.service.windowsazure.storage.blob.sharedaccesssig.consume">
             <title>Arbeiten mit Shared Access Signaturen von anderen</title>
 
             <para>
@@ -377,6 +378,6 @@ $storageClient->putBlob(
                 <acronym>SDK</acronym> für <acronym>PHP</acronym> diese Zugriffsrechte ausgewählt um
                 die Anfrage auf den Windows Azure Blob Speicher durchzuführen.
             </para>
-        </sect4>
-    </sect3>
-</sect2>
+        </sect3>
+    </sect2>
+</sect1>

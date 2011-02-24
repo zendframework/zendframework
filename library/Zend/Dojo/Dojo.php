@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Dojo
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,13 +23,14 @@
  */
 namespace Zend\Dojo;
 
-use Zend\View\ViewEngine as View;
+use Zend\View\Renderer,
+    Zend\View\PhpRenderer;
 
 /**
  * Enable Dojo components
  *
  * @package    Zend_Dojo
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Dojo
@@ -80,14 +81,15 @@ class Dojo
     /**
      * Dojo-enable a view instance
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return void
      */
-    public static function enableView(View $view)
+    public static function enableView(Renderer $view)
     {
-        if (false === $view->getPluginLoader('helper')->getPaths('Zend\Dojo\View\Helper')) {
-            $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');
+        if (!$view instanceof PhpRenderer) {
+            return;
         }
+        $view->broker()->getClassLoader()->registerPlugins(new View\HelperLoader());
     }
 }
 

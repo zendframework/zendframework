@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage View
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ namespace Zend\Dojo\View\Helper\Dojo;
 use Zend\Dojo\View\Exception,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Config\Config,
-    Zend\View\ViewEngine as View,
+    Zend\View\Renderer as View,
     Zend\Json\Json;
 
 /**
@@ -39,7 +39,7 @@ use Zend\Dojo\View\Exception,
  * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @subpackage View
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Container
@@ -1126,14 +1126,14 @@ EOJ;
         $modulePaths = $this->getModulePaths();
         if (!empty($modulePaths)) {
             foreach ($modulePaths as $module => $path) {
-                $js[] =  'dojo.registerModulePath("' . $this->view->escape($module) . '", "' . $this->view->escape($path) . '");';
+                $js[] =  'dojo.registerModulePath("' . $this->view->vars()->escape($module) . '", "' . $this->view->vars()->escape($path) . '");';
             }
         }
 
         $modules = $this->getModules();
         if (!empty($modules)) {
             foreach ($modules as $module) {
-                $js[] = 'dojo.require("' . $this->view->escape($module) . '");';
+                $js[] = 'dojo.require("' . $this->view->vars()->escape($module) . '");';
             }
         }
 

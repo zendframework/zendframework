@@ -17,9 +17,9 @@
 
         <para>
             <classname>Zend_Text_Figlet</classname> supports gzipped fonts. This means that
-            you can take an <code>.flf</code> file and gzip it. To allow
+            you can take an <filename>.flf</filename> file and gzip it. To allow
             <classname>Zend_Text_Figlet</classname> to recognize this, the gzipped font
-            must have the extension <code>.gz</code>. Further, to be able to use
+            must have the extension <filename>.gz</filename>. Further, to be able to use
             gzipped fonts, you have to have enabled the GZIP extension of <acronym>PHP</acronym>.
         </para>
     </note>
@@ -42,7 +42,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>font</code> - Defines the font which should be used
+                    <property>font</property> - Defines the font which should be used
                     for rendering. If not defines, the built-in font will be
                     used.
                 </para>
@@ -50,7 +50,7 @@
 
             <listitem>
                 <para>
-                    <code>outputWidth</code> - Defines the maximum width of the
+                    <property>outputWidth</property> - Defines the maximum width of the
                     output string. This is used for word-wrap as well as
                     justification. Beware of too small values, they may result
                     in an undefined behaviour. The default value is 80.
@@ -59,7 +59,7 @@
 
             <listitem>
                 <para>
-                    <code>handleParagraphs</code> - A boolean which indicates,
+                    <property>handleParagraphs</property> - A boolean which indicates,
                     how new lines are handled. When set to <constant>TRUE</constant>, single new
                     lines are ignored and instead treated as single spaces. Only multiple
                     new lines will be handled as such. The default value is
@@ -69,18 +69,18 @@
 
             <listitem>
                 <para>
-                    <code>justification</code> - May be one of the values of
+                    <property>justification</property> - May be one of the values of
                     <classname>Zend_Text_Figlet::JUSTIFICATION_*</classname>. There is
                     <constant>JUSTIFICATION_LEFT</constant>,
                     <constant>JUSTIFICATION_CENTER</constant> and
                     <constant>JUSTIFICATION_RIGHT</constant> The default justification
-                    is defined by the <code>rightToLeft</code> value.
+                    is defined by the <property>rightToLeft</property> value.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>rightToLeft</code> - Defines in which direction the
+                    <property>rightToLeft</property> - Defines in which direction the
                     text is written. May be either
                     <constant>Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT</constant> or
                     <constant>Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT</constant>. By
@@ -92,7 +92,7 @@
 
             <listitem>
                 <para>
-                    <code>smushMode</code> - An integer bitfield which defines,
+                    <property>smushMode</property> - An integer bitfield which defines,
                     how the single characters are smushed together. Can be the
                     sum of multiple values from <classname>Zend_Text_Figlet::SM_*</classname>.
                     There are the following smush modes: SM_EQUAL, SM_LOWLINE,

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Translator
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,7 +24,7 @@
 namespace Zend\Translator\Adapter;
 
 use Zend\Translator\Adapter as TranslationAdapter,
-	Zend\Translator\Adapter\Exception\InvalidArgumentException;
+    Zend\Translator\Adapter\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
@@ -32,13 +32,11 @@ use Zend\Translator\Adapter as TranslationAdapter,
  * @uses       \Zend\Translator\Adapter\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translator
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Ini extends TranslationAdapter
 {
-    private $_data = array();
-
     /**
      * Load translation data
      *
@@ -51,18 +49,14 @@ class Ini extends TranslationAdapter
      */
     protected function _loadTranslationData($data, $locale, array $options = array())
     {
-        $this->_data = array();
+        $result[$locale] = array();
         if (!file_exists($data)) {
             throw new InvalidArgumentException("Ini file '".$data."' not found");
         }
 
-        $inidata = parse_ini_file($data, false);
-        if (!isset($this->_data[$locale])) {
-            $this->_data[$locale] = array();
-        }
-
-        $this->_data[$locale] = array_merge($this->_data[$locale], $inidata);
-        return $this->_data;
+        $inidata         = parse_ini_file($data, false);
+        $result[$locale] = array_merge($result[$locale], $inidata);
+        return $result;
     }
 
     /**

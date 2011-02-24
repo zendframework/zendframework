@@ -147,7 +147,7 @@
                         <methodname>setStartIndex()</methodname>, and
                         <methodname>getPublishedMin()</methodname>. The query classes also
                         have a method to generate a <acronym>URL</acronym> representing the
-                        constructed query -- <code>getQueryUrl</code>.
+                        constructed query -- <methodname>getQueryUrl()</methodname>.
                         Alternatively, the query string component of the <acronym>URL</acronym>
                         can be retrieved used the <methodname>getQueryString()</methodname>
                         method.
@@ -179,9 +179,9 @@
                         properties of an entry (such as the spreadsheet cell
                         value), you can use an entry object to send update
                         or delete requests to a service. For example,
-                        you can call <code>$entry->save()</code> to save
+                        you can call <command>$entry->save()</command> to save
                         changes made to an entry back to service from which
-                        the entry initiated, or <code>$entry->delete()</code>
+                        the entry initiated, or <command>$entry->delete()</command>
                         to delete an entry from the server.
                     </para>
                 </listitem>
@@ -232,7 +232,7 @@
 
         <para>
             Note: A full example of working with <classname>Zend_Gdata</classname> is available in
-            the <code>demos/Zend/Gdata</code> directory. This example is runnable
+            the <filename>demos/Zend/Gdata</filename> directory. This example is runnable
             from the command-line, but the methods contained within are easily
             portable to a web application.
         </para>
@@ -245,7 +245,7 @@
             The Zend Framework naming standards require that all classes be
             named based upon the directory structure in which they are located.
             For instance, extensions related to Spreadsheets are stored in:
-            <code>Zend/Gdata/Spreadsheets/Extension/...</code> and, as a result
+            <filename>Zend/Gdata/Spreadsheets/Extension/...</filename> and, as a result
             of this, are named
             <classname>Zend_Gdata_Spreadsheets_Extension_...</classname>.
             This causes a lot of typing if you're trying to construct a new
@@ -257,8 +257,8 @@
             (such as <classname>Zend_Gdata_App</classname>, <classname>Zend_Gdata</classname>,
             <classname>Zend_Gdata_Spreadsheets</classname>) that should make constructing new
             instances of data model, query and other classes much easier. This magic factory is
-            implemented by using the magic <code>__call</code> method to intercept all attempts
-            to call <code>$service->newXXX(arg1, arg2, ...)</code>. Based off
+            implemented by using the magic <methodname>__call()</methodname> method to intercept all
+            attempts to call <command>$service->newXXX(arg1, arg2, ...)</command>. Based off
             the value of XXX, a search is performed in all registered 'packages'
             for the desired class. Here's some examples:
         </para>
@@ -396,7 +396,7 @@ $gdata->setMinorProtocolVersion(null);
         <itemizedlist>
             <listitem>
                 <para>
-                    The <code>q</code> parameter specifies a full-text
+                    The <property>q</property> parameter specifies a full-text
                     query. The value of the parameter is a string.
                 </para>
 
@@ -408,14 +408,12 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    The <code>alt</code> parameter specifies the feed type.
-                    The value of the parameter can be
-                    <code>atom</code>,
-                    <code>rss</code>,
-                    <code>json</code>,
-                    or <code>json-in-script</code>.
+                    The <property>alt</property> parameter specifies the feed type.
+                    The value of the parameter can be <property>atom</property>,
+                    <property>rss</property>, <property>json</property>,
+                    or <property>json-in-script</property>.
                     If you don't specify this parameter, the default feed type
-                    is <code>atom</code>. NOTE: Only the output of the
+                    is <property>atom</property>. NOTE: Only the output of the
                     atom feed format can be processed using
                     <classname>Zend_Gdata</classname>.
                     The <classname>Zend_Http_Client</classname> could be used to retrieve
@@ -431,7 +429,7 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    The <code>maxResults</code> parameter limits the number
+                    The <property>maxResults</property> parameter limits the number
                     of entries in the feed. The value of the parameter is
                     an integer. The number of entries returned in the feed
                     will not exceed this value.
@@ -444,7 +442,7 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    The <code>startIndex</code> parameter specifies the
+                    The <property>startIndex</property> parameter specifies the
                     ordinal number of the first entry returned in the feed.
                     Entries before this number are skipped.
                 </para>
@@ -457,13 +455,13 @@ $gdata->setMinorProtocolVersion(null);
 
             <listitem>
                 <para>
-                    The <code>updatedMin</code> and <code>updatedMax</code>
+                    The <property>updatedMin</property> and <property>updatedMax</property>
                     parameters specify bounds on the entry date.
-                    If you specify a value for <code>updatedMin</code>,
+                    If you specify a value for <property>updatedMin</property>,
                     no entries that were updated earlier than the date
                     you specify are included in the feed. Likewise
                     no entries updated after the date specified by
-                    <code>updatedMax</code> are included.
+                    <property>updatedMax</property> are included.
                 </para>
 
                 <para>
@@ -480,7 +478,8 @@ $gdata->setMinorProtocolVersion(null);
         </itemizedlist>
 
         <para>
-            There is a <code>get</code> function for each <code>set</code> function.
+            There is a <methodname>get*()</methodname> function for each
+            <methodname>set*()</methodname> function.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -702,7 +701,7 @@ echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
         </para>
 
         <para>
-            Option 2: Alternatively, you can call <code>$entry->delete()</code>
+            Option 2: Alternatively, you can call <command>$entry->delete()</command>
             on an entry retrieved from a Google service.
         </para>
 

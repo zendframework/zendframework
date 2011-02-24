@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22397 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base verwenden</title>
@@ -89,9 +89,9 @@
                 Die <classname>Zend_Gdata</classname> Bibliothek bietet Unterstützung für alle drei
                 Authentifizierungs Schemata. Im Rest dieses Kapitels wird angenommen das man mit den
                 Authentifizierungs Schemata umgehen kann und wie eine notwendige Authentifizierte
-                Verbindung erstellt wird. Für weitere Informationen kann in das Kapitel <xref
-                    linkend="zend.gdata.introduction.authentication" /> oder die <ulink
-                    url="http://code.google.com/apis/gdata/auth.html">Übersicht der
+                Verbindung erstellt wird. Für weitere Informationen kann in das Kapitel <link
+                    linkend="zend.gdata.introduction.authentication">Authentifizierung</link> oder
+                die <ulink url="http://code.google.com/apis/gdata/auth.html">Übersicht der
                     Authentifizierung im Entwickler Guide der Google Data
                     <acronym>API</acronym></ulink> gesehen werden.
             </para>

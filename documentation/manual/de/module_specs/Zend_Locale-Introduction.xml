@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21816 -->
+<!-- EN-Revision: 22755 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
     <title>Einführung</title>
@@ -21,9 +21,9 @@
         mehr die Benutzung von Systemen für die spezielle Benutzung durch eindeutige Gruppen wie zum
         Beispiel Sprachübersetzung, Unterstützung von lokalen Konventionen für Plurale, Daten,
         Zeiten, Währungen, Namen, Symbolen, Sortierungen, Reihungen und viele mehr.
-        <code>L10n</code> und <code>I18n</code> sind einander sehr ähnlich. Zend Framework bietet
-        Unterstützung für diese Konventionen durch eine Kombination von Komponenten wie
-        <classname>Zend_Locale</classname>, <classname>Zend_Date</classname>,
+        <emphasis>L10n</emphasis> und <emphasis>I18n</emphasis> sind einander sehr ähnlich. Zend
+        Framework bietet Unterstützung für diese Konventionen durch eine Kombination von Komponenten
+        wie <classname>Zend_Locale</classname>, <classname>Zend_Date</classname>,
         <classname>Zend_Measure</classname>, <classname>Zend_Translate</classname>,
         <classname>Zend_Currency</classname> und <classname>Zend_TimeSync</classname>.
     </para>
@@ -105,12 +105,6 @@
                         url="http://unicode.org/cldr/">mehr aus der <acronym>CLDR</acronym></ulink>.
                 </para>
             </listitem>
-
-            <listitem>
-                <para>
-                    <code>TODO</code> - Lokalisierung von Sammlungen
-                </para>
-            </listitem>
         </itemizedlist>
     </sect2>
 
@@ -121,8 +115,8 @@
             Jeder Computer benutzt Gebietsschemata, selbst wenn Sie es nicht wissen. Anwendungen
             welche keine Unterstützung für Lokalisierung bieten, unterstützen zumindest genau ein
             Gebietsschema (das Gebietsschema des Authors). Wenn eine Klasse oder Funktion
-            Lokalisierung verwendet sagen wir sie ist <code>Lokalisierbar</code>. Aber wie weiß der
-            Code welches Gebietsschema ein Benutzer erwartet ?
+            Lokalisierung verwendet sagen wir sie ist <emphasis>Lokalisierbar</emphasis>. Aber wie
+            weiß der Code welches Gebietsschema ein Benutzer erwartet ?
         </para>
 
         <para>
@@ -142,8 +136,8 @@
             und die bevorzugte/primäre geographische Region (z.B. Staat oder Region von seinem
             Zuhause oder Arbeitsplatz). Die Gebietsschema Zeichenkette welche im Zend Framework
             benutzt werden sind international definierte Standard Abkürzungen von Sprachen und
-            Regionen. Sie werden geschrieben als <code>sprache_REGION</code>. Beide Teile, sowohl
-            Sprache als auch Region, werden mit Buchstaben, <acronym>ASCII</acronym> Zeichen,
+            Regionen. Sie werden geschrieben als <emphasis>sprache_REGION</emphasis>. Beide Teile,
+            sowohl Sprache als auch Region, werden mit Buchstaben, <acronym>ASCII</acronym> Zeichen,
             abgekürzt.
         </para>
 
@@ -159,10 +153,10 @@
         </note>
 
         <para>
-            Ein Benutzer von den USA würde die Sprache <code>Englisch</code> und die Region
+            Ein Benutzer von den USA würde die Sprache Englisch und die Region
             <constant>USA</constant> erwarten, beschrieben durch das Gebietsschema "en_US". Ein
-            Benutzer von Deutschland würde die Sprache <code>Deutsch</code> und die Region
-            <code>Deutschland</code> erwarten, beschrieben durch das Gebietsschema "de_DE". Hier
+            Benutzer von Deutschland würde die Sprache Deutsch und die Region
+            Deutschland erwarten, beschrieben durch das Gebietsschema "de_DE". Hier
             findest Du eine <ulink
                 url="http://unicode.org/cldr/data/diff/supplemental/languages_and_territories.html">Liste
                 von vordefinierten Sprachen und Kombinationen von Regionen</ulink> wenn ein
@@ -178,7 +172,7 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
         </example>
 
         <para>
-            Ein deutscher Benutzer in Amerika würde die Sprache <code>Deutsch</code> und die region
+            Ein deutscher Benutzer in Amerika würde die Sprache Deutsch und die Region
             <constant>USA</constant> erwarten, aber diese nicht-standardmäßigen Mischungen werden
             nicht als direkt als "Gebietsschema" unterstützt und erkannt. Wird stattdessen eine
             ungültige Kombination benutzt, dann wird Sie automatisch gekürzt, indem die Region
@@ -212,11 +206,11 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
         <title>Auswahl des richtigen Gebietsschemas</title>
 
         <para>
-            In den meisten Situationen wird <code>new Zend_Locale()</code> automatisch das richtige
-            Gebietsschema auswählen, wobei die Informationen benutzt werden welche der Webbrowser
-            des Benutzers zur Verfügung stellt. Wenn statt dessen
-            <code>new Zend_Locale(Zend_Locale::ENVIRONMENT</code> benutzt wird, dann werden die
-            Informationen vom Betriebsystem des hostenden Servers, wie anbei beschrieben, dafür
+            In den meisten Situationen wird <command>new Zend_Locale()</command> automatisch das
+            richtige Gebietsschema auswählen, wobei die Informationen benutzt werden welche der
+            Webbrowser des Benutzers zur Verfügung stellt. Wenn statt dessen
+            <command>new Zend_Locale(Zend_Locale::ENVIRONMENT</command> benutzt wird, dann werden
+            die Informationen vom Betriebsystem des hostenden Servers, wie anbei beschrieben, dafür
             genommen.
         </para>
 
@@ -301,8 +295,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
             <orderedlist>
                 <listitem>
                     <para>
-                        <code>'browser'</code> - <classname>Zend_Locale</classname> soll mit den
-                        Informationen arbeiten die durch den Web Browser des Benutzers geliefert
+                        '<property>browser</property>' - <classname>Zend_Locale</classname> soll mit
+                        den Informationen arbeiten die durch den Web Browser des Benutzers geliefert
                         werden. Sie werden von <acronym>PHP</acronym> in der globalen Variable
                         <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant> veröffentlicht.
                     </para>
@@ -312,15 +306,15 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         wird <classname>Zend_Locale</classname> das erste gefundene Gebietsschema
                         verwenden. Wenn der Benutzer kein Gebietsschema liefert oder das Skript von
                         der Kommandozeile aufgerufen wird, wird automatisch das Gebietsschema
-                        <code>'environment'</code> verwendet und zurückgegeben.
+                        '<property>environment</property>' verwendet und zurückgegeben.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>'environment'</code> - <classname>Zend_Locale</classname> soll mit den
-                        Informationen arbeiten welche vom Host Server geliefert werden. Sie werden
-                        vom <acronym>PHP</acronym> über die interne Funktion
+                        '<property>environment</property>' - <classname>Zend_Locale</classname> soll
+                        mit den Informationen arbeiten welche vom Host Server geliefert werden. Sie
+                        werden vom <acronym>PHP</acronym> über die interne Funktion
                         <methodname>setlocale()</methodname> veröffentlicht.
                     </para>
 
@@ -328,16 +322,17 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         Wenn eine Umgebung mehr als ein Gebietsschema anbietet, wird
                         <classname>Zend_Locale</classname> das erste gefundene Gebietsschema
                         verwenden. Wenn der Host kein Gebietsschema anbietet wird automatisch das
-                        Gebietsschema <code>'browser'</code> verwendet und zurückgegeben.
+                        Gebietsschema '<property>browser</property>' verwendet und zurückgegeben.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>'auto'</code> - <classname>Zend_Locale</classname> soll automatisch
-                        jedes beliebige Gebietsschema erkennen mit dem gearbeitet werden kann.
-                        Zuerst wird nach dem Gebietsschema des Benutzers gesucht und anschließend,
-                        wenn das nicht erfolgreich war, nach dem Gebietsschema des Hosts.
+                        '<property>auto</property>' - <classname>Zend_Locale</classname> soll
+                        automatisch jedes beliebige Gebietsschema erkennen mit dem gearbeitet werden
+                        kann. Zuerst wird nach dem Gebietsschema des Benutzers gesucht und
+                        anschließend, wenn das nicht erfolgreich war, nach dem Gebietsschema des
+                        Hosts.
                     </para>
 
                     <para>
@@ -530,8 +525,8 @@ echo $date->getDate();
             <acronym>PHP</acronym>'s date() Definitionen. Die Option 'fix_date' erlaubt oder
             verhindert eine Automatik welche versucht falsche Daten zu korrigieren. Die Option
             'number_format' definiert ein Standard Format für Nummern bei Verwendung der Funktion
-            <methodname>toNumber()</methodname>. (siehe <xref
-                linkend= "zend.locale.number.localize"/>
+            <methodname>toNumber()</methodname>. (siehe <link
+                linkend= "zend.locale.number.localize">diesen Abschnitt</link>
             ).
         </para>
 
@@ -557,10 +552,10 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
             Um mit den Standarddefinitionen eines Gebietsschemas zu arbeiten kann die Konstante
             <constant>Zend_Locale_Format::STANDARD</constant> verwendet werden. Das Setzen der
             Konstante <constant>Zend_Locale_Format::STANDARD</constant> für
-            '<code>date_format</code>' benutzt die Standarddefinition des aktuellen Gebietsschemas.
-            Das Setzen für 'number_format' benutzt das Standard Nummernformat dieses Gebietsschemas.
-            Und das Setzen für 'locale' verwendet das Standard Gebietsschema des Servers oder
-            Browsers.
+            <property>date_format</property> benutzt die Standarddefinition des aktuellen
+            Gebietsschemas. Das Setzen für <property>number_format</property> benutzt das Standard
+            Nummernformat dieses Gebietsschemas. Und das Setzen für 'locale' verwendet das Standard
+            Gebietsschema des Servers oder Browsers.
         </para>
 
         <example id="zend.locale.formatoptions.example-2">
@@ -589,7 +584,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
             <classname>Zend_Cache</classname> schneller gemacht werden. Man sollte die statische
             Methode <methodname>Zend_Locale::setCache($cache)</methodname> verwenden wenn man
             <classname>Zend_Locale</classname> benutzt. <classname>Zend_Locale_Format</classname>
-            kann schneller gemacht werden indem die Option <code>cache</code> innerhalb von
+            kann schneller gemacht werden indem die Option <property>cache</property> innerhalb von
             <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>
             aufgerufen wird. Wenn beide Klassen verwendet werden sollte nur für
             <classname>Zend_Locale</classname> ein Cache gesetzt werden, da der zuletzt gesetzte

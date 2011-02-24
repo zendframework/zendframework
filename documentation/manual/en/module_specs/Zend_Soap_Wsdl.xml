@@ -44,7 +44,8 @@
                         <varname>$extractComplexTypes</varname> before version 1.7 and can still be
                         set as a boolean for backwards compatibility. By default the 1.6 detection
                         behaviour is set. To read more on complex type detection strategies go to
-                        the section: <xref linkend="zend.soap.wsdl.types.add_complex" />.
+                        the section: <link linkend="zend.soap.wsdl.types.add_complex">Add complex
+                            types</link>.
                     </simpara>
                 </listitem>
             </orderedlist>
@@ -385,7 +386,7 @@
                 <listitem>
                     <para>
                         <acronym>PHP</acronym> class &lt;-&gt; based on complex type strategy (See:
-                        <xref linkend="zend.soap.wsdl.types.add_complex" />)
+                        <link linkend="zend.soap.wsdl.types.add_complex">this section</link>)
 
                         <footnote>
                             <para>

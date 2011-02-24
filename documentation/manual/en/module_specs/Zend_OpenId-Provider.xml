@@ -17,7 +17,7 @@
         <para>
             The following example includes code for creating a user account
             using <classname>Zend_OpenId_Provider::register</classname>. The link element with
-            <code>rel="openid.server"</code> points to our own server script. If you
+            <command>rel="openid.server"</command> points to our own server script. If you
             submit this identity to an OpenID-enabled site, it will perform
             authentication on this server.
         </para>
@@ -252,7 +252,7 @@ is your identity URL.
             It is possible to combine all provider functionality in one script. In
             this case login and trust <acronym>URL</acronym>s are omitted, and
             <classname>Zend_OpenId_Provider</classname> assumes that they point to the same page
-            with the additional "openid.action" GET argument.
+            with the additional "openid.action" <constant>GET</constant> argument.
         </para>
 
         <note>
@@ -300,8 +300,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             If you compare this example with previous examples split in to
             separate pages, you will see only the one
             difference besides the dispatch code:
-            <methodname>unset($_GET['openid_action'])</methodname>. This call to <code>unset</code>
-            is necessary to route the next request to main handler.
+            <methodname>unset($_GET['openid_action'])</methodname>. This call to
+            <methodname>unset()</methodname> is necessary to route the next request to main handler.
         </para>
     </sect2>
 

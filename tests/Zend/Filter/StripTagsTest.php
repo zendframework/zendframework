@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\Filter\StripTags as StripTagsFilter;
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
@@ -604,5 +604,15 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $input    = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
         $expected = '<img width="10" height="10" src=\'wont_be_matched.jpg\'>';
         $this->assertEquals($expected, $filter->filter($input));
+    }
+
+     /**
+     * @group ZF-10256
+     */
+    public function testNotClosedHtmlCommentAtEndOfString()
+    {
+        $input    = 'text<!-- not closed comment at the end';;
+        $expected =  'text';
+        $this->assertEquals($expected, $this->_filter->filter($input));
     }
 }

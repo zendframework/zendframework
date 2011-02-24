@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5060 $"/>
+		<generation date="$Date: 2010-09-12 17:15:40 -0500 (Sun, 12 Sep 2010) $"/>
+		<language type="ro" /> 
+	</identity>
+		<collations validSubLocales="ro_RO ro_MD">
+			<collation type="standard">
+				<rules>
+					<reset>A</reset>
+					<p>ă</p>
+					<t>Ă</t>
+					<p>â</p>
+					<t>Â</t>
+					<reset>I</reset>
+					<p>î</p>
+					<t>Î</t>
+					<reset>S</reset>
+					<p>ş</p>
+					<i>ș</i>
+					<t>Ş</t>
+					<i>Ș</i>
+					<reset>T</reset>
+					<p>ţ</p>
+					<i>ț</i>
+					<t>Ţ</t>
+					<i>Ț</i>
+				</rules>
+			</collation>
+		</collations>
+</ldml>

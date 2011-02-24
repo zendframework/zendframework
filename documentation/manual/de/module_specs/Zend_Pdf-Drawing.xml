@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
+<!-- EN-Revision: 22745 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Zeichnen</title>
@@ -267,9 +267,9 @@ $pdfPage->drawText('Hello world!', 72, 720);
             Datenbank erhalten wurde), kannst du die Zeichenkodierung zum Zeitpunkt des Zeichnens
             angeben und <classname>Zend_Pdf</classname> wird die Konvertierung für dich durchführen.
             Du kannst Quellstrings in jeder Kodierungsmethode übergeben, die von
-            <acronym>PHP</acronym>'s <code><ulink
-                url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code>
-            Funktion unterstützt wird.
+            <acronym>PHP</acronym>'s <ulink
+                url="http://www.php.net/manual/function.iconv.php">iconv()</ulink> Funktion
+            unterstützt wird.
         </para>
 
         <example id="zend.pdf.drawing.text-drawing.example-2">

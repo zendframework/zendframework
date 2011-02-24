@@ -165,9 +165,9 @@
                 </para>
 
                 <para>
-                    Additionally, when using persistent connections it is
-                    recommended to enable Keep-Alive <acronym>HTTP</acronym> requests as described
-                    in <xref linkend="zend.http.client.configuration" /> -
+                    Additionally, when using persistent connections it is recommended to enable
+                    Keep-Alive <acronym>HTTP</acronym> requests as described in <link
+                        linkend="zend.http.client.configuration">the configuration section</link> -
                     otherwise persistent connections might have little or no
                     effect.
                 </para>
@@ -441,9 +441,9 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             <para>
                 Since the proxy adapter inherits from
                 <classname>Zend_Http_Client_Adapter_Socket</classname>, you can use the stream
-                context access method (see <xref
-                    linkend="zend.http.client.adapters.socket.streamcontext" />) to set stream
-                context options on Proxy connections as demonstrated above.
+                context access method (see <link
+                    linkend="zend.http.client.adapters.socket.streamcontext">this section</link>)
+                to set stream context options on Proxy connections as demonstrated above.
             </para>
         </note>
     </sect2>

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,7 @@ namespace Zend;
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Loader
@@ -93,43 +93,12 @@ class Loader
      * This function uses the PHP include_path, where PHP's is_readable()
      * does not.
      *
-     * Note from ZF-2900:
-     * If you use custom error handler, please check whether return value
-     *  from error_reporting() is zero or not.
-     * At mark of fopen() can not suppress warning if the handler is used.
-     *
      * @param string   $filename
      * @return boolean
      */
     public static function isReadable($filename)
     {
-        if (is_readable($filename)) {
-            // Return early if the filename is readable without needing the 
-            // include_path
-            return true;
-        }
-
-        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN'
-            && preg_match('/^[a-z]:/i', $filename)
-        ) {
-            // If on windows, and path provided is clearly an absolute path, 
-            // return false immediately
-            return false;
-        }
-
-        foreach (self::explodeIncludePath() as $path) {
-            if ($path == '.') {
-                if (is_readable($filename)) {
-                    return true;
-                }
-                continue;
-            }
-            $file = $path . '/' . $filename;
-            if (is_readable($file)) {
-                return true;
-            }
-        }
-        return false;
+        return (bool)stream_resolve_include_path($filename);
     }
 
     /**
@@ -137,8 +106,8 @@ class Loader
      *
      * If no path provided, uses current include_path. Works around issues that
      * occur when the path includes stream schemas.
-     * 
-     * @param  string|null $path 
+     *
+     * @param  string|null $path
      * @return array
      */
     public static function explodeIncludePath($path = null)
@@ -148,7 +117,7 @@ class Loader
         }
 
         if (PATH_SEPARATOR == ':') {
-            // On *nix systems, include_paths which include paths with a stream 
+            // On *nix systems, include_paths which include paths with a stream
             // schema cannot be safely explode'd, so we have to be a bit more
             // intelligent in the approach.
             $paths = preg_split('#:(?!//)#', $path);

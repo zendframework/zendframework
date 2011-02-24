@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ldml>
+  <identity>
+    <version number="$Revision: 4126 $"/>
+    <generation date="$Date: 2009-05-05 18:33:13 -0500 (Tue, 05 May 2009) $"/>
+    <language type="ln"/>
+  </identity>
+  <collations validSubLocales="ln_CD ln_CG">
+        <default type="alphanumeric"/>
+    <collation type="alphanumeric">
+      <rules>
+        <reset>E</reset>
+        <p>ɛ</p>
+        <t>Ɛ</t>
+        <reset>O</reset>
+        <s>ɔ</s>
+        <t>Ɔ</t>
+      </rules>
+    </collation>
+    <collation type="phonemic">
+      <rules>
+        <reset>E</reset>
+        <p>ɛ</p>
+        <t>Ɛ</t>
+        <reset>O</reset>
+        <s>ɔ</s>
+        <t>Ɔ</t>
+        <reset>G</reset>
+        <p>gb</p>
+        <t>gB</t>
+        <t>Gb</t>
+        <t>GB</t>
+        <reset>K</reset>
+        <p>kp</p>
+        <t>kP</t>
+        <t>Kp</t>
+        <t>KP</t>
+        <reset>M</reset>
+        <p>mb</p>
+        <t>mB</t>
+        <t>Mb</t>
+        <t>MB</t>
+        <p>mf</p>
+        <t>mF</t>
+        <t>Mf</t>
+        <t>MF</t>
+        <p>mp</p>
+        <t>mP</t>
+        <t>Mp</t>
+        <t>MP</t>
+        <p>mv</p>
+        <t>mV</t>
+        <t>Mv</t>
+        <t>MV</t>
+        <reset>N</reset>
+        <p>nd</p>
+        <t>nD</t>
+        <t>Nd</t>
+        <t>ND</t>
+        <p>ng</p>
+        <t>nG</t>
+        <t>Ng</t>
+        <t>NG</t>
+        <p>ngb</p>
+        <t>ngB</t>
+        <t>nGb</t>
+        <t>nGB</t>
+        <t>Ngb</t>
+        <t>NgB</t>
+        <t>NGB</t>
+        <p>nk</p>
+        <t>nK</t>
+        <t>Nk</t>
+        <t>NK</t>
+        <p>ns</p>
+        <t>nS</t>
+        <t>Ns</t>
+        <t>NS</t>
+        <p>nt</p>
+        <t>nT</t>
+        <t>Nt</t>
+        <t>NT</t>
+        <p>ny</p>
+        <t>nY</t>
+        <t>Ny</t>
+        <t>NY</t>
+        <p>nz</p>
+        <t>nZ</t>
+        <t>Nz</t>
+        <t>NZ</t>
+        <reset>S</reset>
+        <p>sh</p>
+        <t>sH</t>
+        <t>Sh</t>
+        <t>SH</t>
+        <reset>T</reset>
+        <p>ts</p>
+        <t>tS</t>
+        <t>Ts</t>
+        <t>TS</t>
+      </rules>
+    </collation>
+  </collations>
+</ldml>
+
+

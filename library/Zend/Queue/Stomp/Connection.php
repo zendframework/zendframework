@@ -77,14 +77,14 @@ class Connection implements StompConnection
             throw new QueueException("Unable to connect to $str; error = $errstr ( errno = $errno )");
         }
 
-        stream_set_blocking($this->_socket, 0); // non blocking
-
         if (!isset($options['timeout_sec'])) {
             $options['timeout_sec'] = self::READ_TIMEOUT_DEFAULT_SEC;
         }
         if (! isset($options['timeout_usec'])) {
             $options['timeout_usec'] = self::READ_TIMEOUT_DEFAULT_USEC;
         }
+
+        stream_set_timeout($this->_socket, $options['timeout_sec'], $options['timeout_usec']);
 
         $this->_options = $options;
 
@@ -178,8 +178,8 @@ class Connection implements StompConnection
             $read,
             $write,
             $except,
-            $this->_options['timeout_sec'],
-            $this->_options['timeout_usec']
+            0,
+            100000
         ) == 1;
         // see http://us.php.net/manual/en/function.stream-select.php
     }
@@ -203,6 +203,8 @@ class Connection implements StompConnection
             $response .= $line;
             if (rtrim($line) === '') break;
         }
+
+        $this->_checkSocketReadTimeout();
 
         // to differenciate between a byte message and
         // non-byte message, check content-length header
@@ -315,9 +317,9 @@ class Connection implements StompConnection
         $info = stream_get_meta_data($this->_socket);
         $timedout = $info['timed_out'];
         if ($timedout) {
-            $this->disconnect();
+            $this->close();
             throw new QueueException(
-                "Read timed out after {$this->_config['timeout']} seconds"
+                "Read timed out after {$this->_options['timeout_sec']} seconds"
             );
         }
     }

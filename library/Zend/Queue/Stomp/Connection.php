@@ -251,8 +251,7 @@ class Connection implements StompConnection
             return false;
         }
 
-        // we already have headers create frame here, do prevent extracting the
-        // headers again
+        // we already have headers, prevent extracting the headers again
         $frame = $this->createFrame();
         $frame->setCommand(Frame::extractCommand($response))
               ->setHeaders($headers)

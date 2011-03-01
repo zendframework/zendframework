@@ -195,34 +195,66 @@ class Connection implements StompConnection
         $this->ping();
 
         $response = '';
-        $prev     = '';
+        // as per protocol COMMAND is 1st \n terminated then headers also \n terminated
+        // COMMAND and header block are seperated by a blank line.
 
-        // while not end of file.
-        while (!feof($this->_socket)) {
-            // read in one character until "\0\n" is found
-            $data = fread($this->_socket, 1);
+        // read command and headers
+        while (($line = @fgets($this->_socket)) !== false) {
+            $response .= $line;
+            if (rtrim($line) === '') break;
+        }
 
-            // check to make sure that the connection is not lost.
-            if ($data === false) {
-                throw new QueueException('Connection lost');
+        // to differenciate between a byte message and
+        // non-byte message, check content-length header
+        $headers = Frame::extractHeaders($response);
+        if (!isset($headers[Frame::CONTENT_LENGTH])) {
+            // read till we hit the end of frame marker
+            do {
+                $chunk = @fgets($this->_socket);
+                if ( $chunk === false || strlen($chunk) === 0) {
+                    $this->_checkSocketReadTimeout();
+                    break;
+                }
+                if (substr($chunk, -2) === Frame::END_OF_FRAME) {
+                    // add the chunk above to the result before returning
+                    $response .= $chunk;
+                    break;
+                }
+                $response .= $chunk;
+            } while (feof($this->_socket) === false);
+        } else {
+            // we have a content-length header set
+            $contentLength = $headers[Frame::CONTENT_LENGTH] + 2;
+            $current_pos = ftell($this->_socket);
+            $chunk = '';
+
+            for ($read_to = $current_pos + $contentLength;
+                $read_to > $current_pos;
+                $current_pos = ftell($this->_socket)
+            ) {
+                $chunk = fread($this->_socket, $read_to - $current_pos);
+                if ($chunk === false || strlen($chunk) === 0) {
+                    $this->_checkSocketReadTimeout();
+                    break;
+                }
+                $response .= $chunk;
+                // Break if the connection ended prematurely
+                if (feof($this->_socket)) {
+                    break;
+                }
             }
-
-            // append last character read to $response
-            $response .= $data;
-
-            // is this \0 (prev) \n (data)? END_OF_FRAME
-            if (ord($data) == 10 && ord($prev) == 0) {
-                break;
-            }
-            $prev = $data;
         }
 
         if ($response === '') {
             return false;
         }
 
+        // we already have headers create frame here, do prevent extracting the
+        // headers again
         $frame = $this->createFrame();
-        $frame->fromFrame($response);
+        $frame->setCommand(Frame::extractCommand($response))
+              ->setHeaders($headers)
+              ->setBody(Frame::extractBody($response));
         return $frame;
     }
 
@@ -268,5 +300,25 @@ class Connection implements StompConnection
         }
 
         return $frame;
+    }
+
+    /**
+     * Check if the connection has timed out
+     *
+     * @throws Zend\Queue\Exception if the connection has timed out
+     */
+    protected function _checkSocketReadTimeout()
+    {
+        if (!is_resource($this->_socket)) {
+            return;
+        }
+        $info = stream_get_meta_data($this->_socket);
+        $timedout = $info['timed_out'];
+        if ($timedout) {
+            $this->disconnect();
+            throw new QueueException(
+                "Read timed out after {$this->_config['timeout']} seconds"
+            );
+        }
     }
 }

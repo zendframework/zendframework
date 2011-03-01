@@ -306,6 +306,67 @@ class Frame implements StompFrame
     }
 
     /**
+     * Extract the Command from a response string frame or returns false
+     *
+     * @param string $frame - a stomp frame
+     * @return string|false
+     */
+    public static function extractCommand($frame)
+    {
+        // todo: Commands are in caps per spec, this is not checked here
+        if (preg_match("|^([A-Z]+)\n|i", $frame, $m) == 1) {
+            return $m[1];
+        }
+        return false;
+    }
+
+    /**
+     * Extract the headers from a response string
+     *
+     * @param string $frame - a stromp frame
+     * @return array
+     */
+    public static function extractHeaders($frame)
+    {
+        $parts = preg_split('|(?:\r?\n){2}\n|m', $frame, 2);
+        if (!isset($parts[0])) {
+            return array();
+        }
+
+        if (!preg_match_all("|([\w-]+):\s*(.+)\n|", $parts[0], $m, PREG_SET_ORDER)) {
+            return array();
+        }
+
+        $headers = array();
+        foreach ($m as $header) {
+            $headers[mb_strtolower($header[1])] = $header[2];
+        }
+
+        return $headers;
+    }
+
+    /**
+     * Extract the body from a response string
+     *
+     * @param string $frame - a stomp frame
+     * @return string
+     * @throws \Zend\Queue\Exception when the body is badly formatted
+     */
+    public static function extractBody($frame)
+    {
+        $parts = preg_split('|(?:\r?\n){2}|m', $frame, 2);
+
+        if (!isset($parts[1])) {
+            return '';
+        }
+        if (substr($parts[1], -2) != self::END_OF_FRAME) {
+            throw new QueueException('badly formatted body not frame terminated');
+        }
+        return substr($parts[1], 0, -2);
+    }
+
+
+    /**
      * Accepts a frame and deconstructs the frame into its component parts
      *
      * @param  string $frame - a stomp frame
@@ -317,41 +378,10 @@ class Frame implements StompFrame
             throw new QueueException('$frame is not a string');
         }
 
-        $headers = array();
-        $body    = null;
-        $command = false;
-        $header  = '';
+        $this->setCommand(self::extractCommand($frame));
+        $this->setHeaders(self::extractHeaders($frame));
+        $this->setBody(self::extractBody($frame));
 
-        // separate the headers and the body
-        $match = self::EOL . self::EOL;
-        if (preg_match('/' . $match . '/', $frame)) {
-            list ($header, $body) = explode($match, $frame, 2);
-        } else {
-            $header = $frame;
-        }
-
-        // blow up headers
-        $headers = explode(self::EOL, $header);
-        unset($header);
-
-        // get the command (first line)
-        $this->setCommand(array_shift($headers));
-
-        // set each of the headers.
-        foreach ($headers as $header) {
-            if (strpos($header, ':') > 0) {
-                list($name, $value) = explode(':', $header, 2);
-                $this->setHeader($name, $value);
-            }
-        }
-
-        // crop the body if content-length is present
-        if ($this->getHeader(self::CONTENT_LENGTH) !== false ) {
-            $length = (int) $this->getHeader(self::CONTENT_LENGTH);
-            $body   = substr($body, 0, $length);
-        }
-
-        $this->setBody($body);
         return $this;
     }
 }

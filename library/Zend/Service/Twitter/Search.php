@@ -147,7 +147,7 @@ class Search extends Rest\Client\RestClient
 
         switch($this->_responseType) {
             case 'json':
-                return Json::decode($response->getBody());
+                return Json\Json::decode($response->getBody());
                 break;
             case 'atom':
                 return Feed\Reader::importString($response->getBody());

@@ -44,7 +44,8 @@ $logger = Zend_Log::factory(array(
 
     <para>
         Le code ci-dessus instancie un objet journal et 2 objets d'écriture dont un vers un
-        fichier local, puis un vers Firebug. Chacun possède un filtre.
+        fichier local, puis un vers Firebug. Chacun possède un filtre sur la priorité avec
+        un niveau maximum différent.
     </para>
 
     <para>

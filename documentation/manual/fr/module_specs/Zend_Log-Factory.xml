@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 23675 -->
+<!-- EN-Revision: 23739 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.factory">
     <title>Utiliser la fabrique pour créer des logs</title>
@@ -24,7 +24,7 @@ $logger = Zend_Log::factory(array(
             'stream'   => '/tmp/zend.log',
         ),
         'formatterName' => 'Simple',
-        'filterParams' => array(
+        'formatterParams' => array(
             'format'   => '%timestamp%: %message% -- %info%',
         ),
         'filterName'   => 'Priority',

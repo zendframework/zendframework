@@ -23,7 +23,7 @@ $logger = Zend_Log::factory(array(
             'stream'   => '/tmp/zend.log',
         ),
         'formatterName' => 'Simple',
-        'filterParams' => array(
+        'formatterParams' => array(
             'format'   => '%timestamp%: %message% -- %info%',
         ),
         'filterName'   => 'Priority',

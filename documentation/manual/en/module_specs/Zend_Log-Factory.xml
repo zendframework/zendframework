@@ -17,6 +17,7 @@
 
     <programlisting language="php"><![CDATA[
 $logger = Zend_Log::factory(array(
+    'timestampFormat' => 'Y-m-d',
     array(
         'writerName'   => 'Stream',
         'writerParams' => array(
@@ -45,6 +46,11 @@ $logger = Zend_Log::factory(array(
         The above will instantiate a logger with two writers, one for writing to a local file,
         another for sending data to Firebug. Each has an attached priority filter, with different
         maximum priorities.
+    </para>
+
+    <para>
+        By default, events are logged with the ISO 8601 date format. You can choose your own format
+        with the option <emphasis>timestampFormat</emphasis>.
     </para>
 
     <para>

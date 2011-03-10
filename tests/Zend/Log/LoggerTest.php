@@ -456,6 +456,38 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $logger = Logger::factory($config['log']);
         $logger->log('custom message', Logger::INFO);
     }
+
+    /**
+     * @group ZF-10990
+     */
+    public function testFactoryShouldSetTimestampFormat()
+    {
+        $config = array(
+            'timestampFormat' => 'Y-m-d',
+            'mock' => array(
+                'writerName' => 'Mock'
+            )
+        );
+        $logger = Logger::factory($config);
+
+        $this->assertEquals('Y-m-d', $logger->getTimestampFormat());
+    }
+
+    /**
+     * @group ZF-10990
+     */
+    public function testFactoryShouldKeepDefaultTimestampFormat()
+    {
+        $config = array(
+            'timestampFormat' => '',
+            'mock' => array(
+                'writerName' => 'Mock'
+            )
+        );
+        $logger = Logger::factory($config);
+
+        $this->assertEquals('c', $logger->getTimestampFormat());
+    }
 }
 
 class MockFormatter implements Log\Formatter, Log\Factory

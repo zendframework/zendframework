@@ -240,6 +240,13 @@ class Json extends Config
             if (is_object($value)) {
                 $value = $this->flattenObjects($value);
             }
+            if (is_array($value)) {
+                foreach ($value as $k => $v) {
+                    if (is_object($v)) {
+                        $value[$k] = $this->flattenObjects($v);
+                    }
+                }
+            }
             $flattened[$key] = $value;
         }
         return $flattened;

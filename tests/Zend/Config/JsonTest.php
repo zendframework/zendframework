@@ -276,4 +276,11 @@ EOJ;
         $this->setExpectedException('Zend\Json\Exception', 'Syntax');
         $config = new JsonConfig($json, null, array('ignore_constants' => true));
     }
+
+    public function testNestedConfigSetsAreArrays()
+    {
+        $config = new JsonConfig(__DIR__ . '/_files/nested.json', 'testing');
+        $array  = $config->toArray();
+        $this->assertInternalType('array', $array['definitions'][0]);
+    }
 }

@@ -26,6 +26,7 @@ debug:
     no: 
     null: 
     false: 
+    zero: 0
   _extends: all
 other_staging: 
   only_in: otherStaging

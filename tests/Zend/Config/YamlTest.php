@@ -89,6 +89,8 @@ class YamlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $config->special->null);
         $this->assertInternalType('string', $config->special->false);
         $this->assertEquals('', $config->special->false);
+        $this->assertInternalType('string', $config->special->zero);
+        $this->assertEquals('0', $config->special->zero);
     }
 
     public function testMultiDepthExtends()

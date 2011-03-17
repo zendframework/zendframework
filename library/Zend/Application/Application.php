@@ -321,8 +321,10 @@ class Application
 
         foreach ($namespaces as $namespace => $directory) {
             $autoloader->registerNamespace($namespace, $directory);
-        }
-
+        }        
+		
+		$autoloader->register();		
+		
         return $this;
     }
 	
@@ -339,7 +341,9 @@ class Application
         foreach ($prefixes as $prefix => $directory) {
             $autoloader->registerPrefix($prefix, $directory);
         }
-
+		
+		$autoloader->register();
+		
         return $this;
 	}
 

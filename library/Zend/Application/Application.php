@@ -173,6 +173,10 @@ class Application
         if (!empty($options['autoloadernamespaces'])) {
             $this->setAutoloaderNamespaces($options['autoloadernamespaces']);
         }
+		
+		if (!empty($option['autoloaderprefixes'])) {
+		
+		}
 
         if (!empty($options['autoloaderzfpath'])) {
             $autoloader = $this->getAutoloader();
@@ -315,12 +319,29 @@ class Application
     {
         $autoloader = $this->getAutoloader();
 
-        foreach ($namespaces as $namespace) {
-            $autoloader->registerNamespace($namespace);
+        foreach ($namespaces as $namespace => $directory) {
+            $autoloader->registerNamespace($namespace, $directory);
         }
 
         return $this;
     }
+	
+	/**
+	 * Set autoloader prefixes
+	 *
+	 * @param array $prefixes
+	 * @return \Zend\Application\Application
+	 */
+	public function setAutoloaderPrefixes(array $prefixes)
+	{
+        $autoloader = $this->getAutoloader();
+
+        foreach ($prefixes as $prefix => $directory) {
+            $autoloader->registerPrefix($prefix, $directory);
+        }
+
+        return $this;
+	}
 
     /**
      * Set bootstrap path/class

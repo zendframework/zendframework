@@ -327,25 +327,25 @@ class Application
 		
         return $this;
     }
-	
-	/**
-	 * Set autoloader prefixes
-	 *
-	 * @param array $prefixes
-	 * @return \Zend\Application\Application
-	 */
-	public function setAutoloaderPrefixes(array $prefixes)
-	{
+
+    /**
+     * Set autoloader prefixes
+     *
+     * @param array $prefixes
+     * @return \Zend\Application\Application
+     */
+    public function setAutoloaderPrefixes(array $prefixes)
+    {
         $autoloader = $this->getAutoloader();
 
         foreach ($prefixes as $prefix => $directory) {
             $autoloader->registerPrefix($prefix, $directory);
         }
-		
-		$autoloader->register();
-		
+
+        $autoloader->register();
+
         return $this;
-	}
+    }
 
     /**
      * Set bootstrap path/class

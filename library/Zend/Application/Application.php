@@ -174,9 +174,9 @@ class Application
             $this->setAutoloaderNamespaces($options['autoloadernamespaces']);
         }
 		
-		if (!empty($option['autoloaderprefixes'])) {
-		
-		}
+        if (!empty($option['autoloaderprefixes'])) {
+	    $this->setAutoloaderPrefixes($options['autoloaderprefixes']);
+        }
 
         if (!empty($options['autoloaderzfpath'])) {
             $autoloader = $this->getAutoloader();

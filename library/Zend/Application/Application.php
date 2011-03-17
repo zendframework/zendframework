@@ -323,7 +323,7 @@ class Application
             $autoloader->registerNamespace($namespace, $directory);
         }        
 		
-		$autoloader->register();		
+        $autoloader->register();		
 		
         return $this;
     }

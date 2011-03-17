@@ -33,7 +33,7 @@ interface Factory
 {
     /**
      * Construct a Zend_Log driver
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Factory
      */

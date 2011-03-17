@@ -66,9 +66,9 @@ class SuppressFilter extends AbstractFilter
 
     /**
      * Create a new instance of Zend_Log_Filter_Suppress
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Filter\Suppress
+     * @return \Zend\Log\Filter\SuppressFilter
      */
     static public function factory($config = array())
     {

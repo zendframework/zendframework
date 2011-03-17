@@ -96,9 +96,21 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
+
+    /**
+     * @group ZF-9176
+     */
+    public function testFactory()
+    {
+        $options = array(
+            'format' => '%timestamp% [%priority%]: %message% -- %info%'
+        );
+        $formatter = Simple::factory($options);
+        $this->assertType('Zend\Log\Formatter\Simple', $formatter);
+    }
 }
 
-class SimpleTest_TestObject1 
+class SimpleTest_TestObject1
 {
     public function __toString()
     {
@@ -106,6 +118,6 @@ class SimpleTest_TestObject1
     }
 }
 
-class SimpleTest_TestObject2 
+class SimpleTest_TestObject2
 {
 }

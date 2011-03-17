@@ -27,14 +27,14 @@ use \Zend\Log\Formatter;
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Formatter\FormatterInterface
+ * @uses       \Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Simple implements Formatter
+class Simple extends AbstractFormatter
 {
     /**
      * @var string
@@ -47,6 +47,7 @@ class Simple implements Formatter
      * Class constructor
      *
      * @param  null|string  $format  Format specifier for log messages
+     * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($format = null)
@@ -55,11 +56,33 @@ class Simple implements Formatter
             $format = self::DEFAULT_FORMAT . PHP_EOL;
         }
 
-        if (! is_string($format)) {
+        if (!is_string($format)) {
             throw new \Zend\Log\Exception\InvalidArgumentException('Format must be a string');
         }
 
         $this->_format = $format;
+    }
+
+    /**
+	 * Factory for Zend_Log_Formatter_Simple classe
+	 *
+	 * @param array|\Zend\Config\Config $options
+	 * @return \Zend\Log\Formatter\Simple
+     */
+    public static function factory($options = array())
+    {
+        $format = null;
+        if (null !== $options) {
+            if ($options instanceof Zend\Config\Config) {
+                $options = $options->toArray();
+            }
+
+            if (array_key_exists('format', $options)) {
+                $format = $options['format'];
+            }
+        }
+
+        return new self($format);
     }
 
     /**
@@ -71,16 +94,17 @@ class Simple implements Formatter
     public function format($event)
     {
         $output = $this->_format;
+
         foreach ($event as $name => $value) {
-
             if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)) {
-
+                || is_array($value)
+            ) {
                 $value = gettype($value);
             }
 
             $output = str_replace("%$name%", $value, $output);
         }
+
         return $output;
     }
 }

@@ -114,4 +114,42 @@ class LogTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
     }
+
+    /**
+     * @group ZF-9790
+     */
+    public function testInitializationWithFilterAndFormatter()
+    {
+        $stream = fopen('php://memory', 'w+');
+        $options = array(
+            'memory' => array(
+                'writerName' => 'Stream',
+                'writerParams' => array(
+                     'stream' => $stream,
+                ),
+                'filterName' => 'Priority',
+                'filterParams' => array(
+                    'priority' => \Zend\Log\Logger::INFO,
+                ),
+                'formatterName' => 'Simple',
+                'formatterParams' => array(
+                    'format' => '%timestamp%: %message%',
+                )
+            )
+        );
+        $message = 'tottakai';
+
+        $resource = new LogResource($options);
+        $resource->setBootstrap($this->bootstrap);
+        $log = $resource->init();
+
+        $this->assertType('Zend\Log\Logger', $log);
+
+        $log->log($message, \Zend\Log\Logger::INFO);
+        rewind($stream);
+        $contents = stream_get_contents($stream);
+
+        $this->assertStringEndsWith($message, $contents);
+        $this->assertRegexp('/\d\d:\d\d:\d\d/', $contents);
+    }
 }

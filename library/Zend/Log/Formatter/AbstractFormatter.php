@@ -14,28 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Formatter
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\Log;
+namespace Zend\Log\Formatter;
+use \Zend\Log\Factory,
+    \Zend\Log\Formatter;
 
 /**
+ * @uses       \Zend\Log\Factory
+ * @uses       \Zend\Log\Formatter
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Formatter
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Formatter
+abstract class AbstractFormatter implements Formatter, Factory
 {
-    /**
-     * Formats data into a single line to be written by the writer.
-     *
-     * @param  array    $event    event data
-     * @return string             formatted line to write to the log
-     */
-    public function format($event);
 }

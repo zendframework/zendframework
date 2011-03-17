@@ -47,15 +47,15 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($filter->accept(array('message' => 'foo accept bar')));
         $this->assertFalse($filter->accept(array('message' => 'foo reject bar')));
     }
-    
+
     public function testFactory()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName'   => "Mock", 
-            'filterName'   => "Message", 
+            'writerName'   => "Mock",
+            'filterName'   => "Message",
             'filterParams' => array(
-                'regexp'   => "/42/" 
-             ),        
+                'regexp'   => "/42/"
+             ),
         )));
 
         $logger = Logger::factory($cfg['log']);
@@ -65,11 +65,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithConfig()
     {
         $config = new Config(array('log' => array('memory' => array(
-            'writerName'   => "Mock", 
-            'filterName'   => "Message", 
+            'writerName'   => "Mock",
+            'filterName'   => "Message",
             'filterParams' => array(
-                'regexp'   => "/42/" 
-             ),        
+                'regexp'   => "/42/"
+             ),
         ))));
 
         $filter = Message::factory($config->log->memory->filterParams);

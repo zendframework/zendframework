@@ -46,6 +46,7 @@ abstract class AbstractWriter implements Writer, Factory
 
     /**
      * Formats the log message before writing.
+     *
      * @var \Zend\Log\Formatter
      */
     protected $_formatter;
@@ -55,11 +56,11 @@ abstract class AbstractWriter implements Writer, Factory
      *
      * @param  \Zend\Log\Filter  $filter
      * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return void
+     * @return \Zend\Log\Writer\AbstractWriter
      */
     public function addFilter($filter)
     {
-        if (is_integer($filter)) {
+        if (is_int($filter)) {
             $filter = new \Zend\Log\Filter\Priority($filter);
         }
 
@@ -74,7 +75,7 @@ abstract class AbstractWriter implements Writer, Factory
     /**
      * Log a message to this writer.
      *
-     * @param  array     $event  log data event
+     * @param  array $event log data event
      * @return void
      */
     public function write($event)
@@ -93,7 +94,7 @@ abstract class AbstractWriter implements Writer, Factory
      * Set a new formatter for this writer
      *
      * @param  \Zend\Log\Formatter $formatter
-     * @return void
+     * @return \Zend\Log\Writer\AbstractWriter
      */
     public function setFormatter(\Zend\Log\Formatter $formatter)
     {
@@ -132,8 +133,8 @@ abstract class AbstractWriter implements Writer, Factory
 
         if (!is_array($config)) {
             throw new \Zend\Log\Exception\InvalidArgumentException(
-				'Configuration must be an array or instance of Zend\Config\Config'
-			);
+                'Configuration must be an array or instance of Zend\Config\Config'
+            );
         }
 
         return $config;

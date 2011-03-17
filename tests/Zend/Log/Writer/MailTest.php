@@ -24,7 +24,7 @@ namespace ZendTest\Log\Writer;
 use Zend\Log\Logger,
     Zend\Log\Writer\Mail as MailWriter,
     Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Mail\Transport\Exception as TransportException,
+    Zend\Mail\Transport\Exception\RuntimeException as TransportException,
     Zend\View\Exception as ViewException;
 
 /**
@@ -37,6 +37,20 @@ use Zend\Log\Logger,
  */
 class MailTest extends \PHPUnit_Framework_TestCase
 {
+	protected function setUp()
+    {
+        $this->_transport = $this->getMockForAbstractClass(
+            'Zend\Mail\AbstractTransport',
+            array()
+        );
+        \Zend\Mail\Mail::setDefaultTransport($this->_transport);
+    }
+
+    protected function tearDown()
+    {
+        \Zend\Mail\Mail::clearDefaultTransport();
+    }
+
     /**
      * Tests normal logging, but with multiple messages for a level.
      *
@@ -253,6 +267,162 @@ class MailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-9990
+     */
+    public function testFactory()
+    {
+    	$config = array(
+    		'from' => array(
+    		    'email' => 'log@test.framework.zend.com'
+    	    ),
+    		'to' => 'admin@domain.com',
+    		'subject' => '[error] exceptions on my application'
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$this->assertType('Zend\Log\Writer\Mail', $writer);
+
+    	$writer->write($this->_getEvent());
+    	$writer->shutdown();
+
+    	$this->assertEquals('admin@domain.com', $this->_transport->recipients);
+    	$this->assertContains('an info message', $this->_transport->body);
+    	$this->assertContains('From: log@test.framework.zend.com', $this->_transport->header);
+    	$this->assertContains('To: admin@domain.com', $this->_transport->header);
+    	$this->assertContains('Subject: [error] exceptions on my application', $this->_transport->header);
+    }
+
+    /**
+     * @group ZF-9990
+     */
+    public function testFactoryShouldSetSubjectPrependText()
+    {
+    	$config = array(
+    		'subjectPrependText' => '[error] exceptions on my application'
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$writer->write($this->_getEvent());
+    	$writer->shutdown();
+
+    	$this->assertContains('Subject: [error] exceptions on my application (INFO=1)', $this->_transport->header);
+    }
+
+    /**
+     * @group ZF-9990
+     */
+    public function testFactoryShouldAcceptCustomMailClass()
+    {
+        $this->getMock('Zend\Mail\Mail', array(), array(), 'StubMailCustom');
+        $config = array(
+            'class' => 'StubMailCustom'
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$this->assertType('Zend\Log\Writer\Mail', $writer);
+    }
+
+    /**
+     * @group ZF-9990
+     */
+    public function testFactoryShouldSetCharsetForMail()
+    {
+        $config = array(
+            'charset' => 'UTF-8'
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$writer->write($this->_getEvent());
+    	$writer->shutdown();
+
+    	$this->assertContains('Content-Type: text/plain; charset=UTF-8', $this->_transport->header);
+    }
+
+    /**
+     * @group ZF-9990
+     */
+    public function testFactoryShouldAllowToSetMultipleRecipientsInArray()
+    {
+    	$config = array(
+    		'to' => array(
+    		    'John Doe' => 'admin1@domain.com',
+    	        'admin2@domain.com'
+    	    ),
+    	    'cc' => array(
+    	        'bug@domain.com',
+    		    'project' => 'projectname@domain.com'
+    	    )
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$writer->write($this->_getEvent());
+    	$writer->shutdown();
+
+    	$this->assertContains('admin1@domain.com', $this->_transport->recipients);
+    	$this->assertContains('admin2@domain.com', $this->_transport->recipients);
+    	$this->assertContains('bug@domain.com', $this->_transport->recipients);
+    	$this->assertContains('projectname@domain.com', $this->_transport->recipients);
+    	$this->assertContains('To: John Doe <admin1@domain.com>', $this->_transport->header);
+    	$this->assertContains('admin2@domain.com', $this->_transport->header);
+    	$this->assertContains('Cc: bug@domain.com', $this->_transport->header);
+    	$this->assertContains('project <projectname@domain.com>', $this->_transport->header);
+    }
+
+    /**
+     * @group ZF-9990
+     */
+    public function testFactoryWithLayout()
+    {
+    	$config = array(
+    	    'layoutOptions' => array(
+    	        'layoutPath' => dirname(__FILE__) . '/../_files'
+    	    )
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$writer->write($this->_getEvent());
+    	$writer->shutdown();
+
+        $this->assertFalse(empty($this->_transport->boundary));
+        $this->assertContains('Content-Type: multipart/', $this->_transport->header);
+        $this->assertContains('boundary=', $this->_transport->header);
+        $this->assertContains('Content-Type: text/plain', $this->_transport->body);
+        $this->assertContains('Content-Type: text/html', $this->_transport->body);
+        $this->assertContains($this->_transport->boundary, $this->_transport->body);
+        $this->assertEquals(2, substr_count($this->_transport->body, 'an info message'));
+    }
+
+    /**
+     * @group ZF-9990
+     */
+    public function testFactoryShouldSetLayoutFormatter()
+    {
+    	$config = array(
+    	    'layoutOptions' => array(
+    	        'layoutPath' => '/path/to/layout/scripts'
+    	    ),
+    	    'layoutFormatter' => 'Zend\Log\Formatter\Simple'
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$this->assertType('Zend\Log\Formatter\Simple', $writer->getLayoutFormatter());
+    }
+
+    /**
+     * @group ZF-9990
+     */
+    public function testFactoryWithCustomLayoutClass()
+    {
+        $this->getMock('Zend\Layout\Layout', null, array(), 'StubLayoutCustom');
+    	$config = array(
+    	    'layout' => 'StubLayoutCustom'
+    	);
+
+    	$writer = MailWriter::factory($config);
+    	$this->assertType('Zend\Log\Writer\Mail', $writer);
+    }
+
+    /**
      * Returns an array of the Zend_Mail mock object, Zend_Log_Writer_Mail
      * object, and Zend_Log objects.
      *
@@ -289,5 +459,20 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $log->addWriter($writer);
 
         return array($mail, $writer, $log, $layout);
+    }
+
+    /**
+     * Returns a sample of an event
+     *
+     * @return array
+     */
+    protected function _getEvent()
+    {
+        return array(
+    	    'timestamp'    => date('c'),
+            'message'      => 'an info message',
+            'priority'     => 6,
+            'priorityName' => 'INFO'
+    	);
     }
 }

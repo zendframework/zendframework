@@ -44,6 +44,7 @@ class Message extends AbstractFilter
      * Filter out any log messages not matching $regexp.
      *
      * @param  string  $regexp     Regular expression to test the log message
+     * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($regexp)
@@ -56,11 +57,11 @@ class Message extends AbstractFilter
 
     /**
      * Create a new instance of Zend_Log_Filter_Message
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Filter\Message
      */
-    static public function factory($config = array()) 
+    static public function factory($config = array())
     {
         $config = self::_parseConfig($config);
         $config = array_merge(array(

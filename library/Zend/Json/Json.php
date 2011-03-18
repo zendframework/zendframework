@@ -39,7 +39,7 @@ use Zend\Json\Exception\RuntimeException,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class JSON
+class Json
 {
     /**
      * How objects should be encoded -- arrays or as StdClass. TYPE_ARRAY is 1

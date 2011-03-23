@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace ZendTest\CodeGenerator\Php;
+
 use Zend\CodeGenerator\Php;
 
 /**
@@ -69,7 +70,7 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
     {
         $value = new Php\PhpParameterDefaultValue(array('value'=>'Foo','type'=>'constant'));
         $this->_parameter->setDefaultValue($value);
-        $this->assertEquals('Foo;', (string) $this->_parameter->getDefaultValue());
+        $this->assertEquals('Foo', (string) $this->_parameter->getDefaultValue());
     }
 
     public function testPositionGetterAndSetterPersistValue()
@@ -86,7 +87,7 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo $bar = 15', $this->_parameter->generate());
 
         $this->_parameter->setDefaultValue('foo');
-        $this->assertEquals('Foo $bar = \'foo\';', $this->_parameter->generate());
+        $this->assertEquals('Foo $bar = \'foo\'', $this->_parameter->generate());
     }
 
     public function testFromReflectionGetParameterName()
@@ -119,7 +120,7 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
         $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
 
         $defaultValue = $codeGenParam->getDefaultValue();
-        $this->assertEquals('\'foo\';', (string) $defaultValue);
+        $this->assertEquals('\'foo\'', (string) $defaultValue);
     }
 
     public function testFromReflectionGetArrayHint()

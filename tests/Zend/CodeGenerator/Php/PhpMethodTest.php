@@ -196,4 +196,25 @@ EOS;
         $this->assertEquals($expected, $codeGenProperty->generate());
     }
 
+    /**
+     * @group ZF-7268
+     */
+    public function testDefaultValueGenerationDoesNotIncludeTrailingSemicolon()
+    {
+        $method = new Php\PhpMethod(array(
+            'name' => 'setOptions',
+        ));
+        $default = new Php\PhpParameterDefaultValue();
+        $default->setValue(array());
+
+        $param   = new Php\PhpParameter(array(
+            'name' => 'options',
+            'type' => 'array',
+        ));
+        $param->setDefaultValue($default);
+
+        $method->setParameter($param);
+        $generated = $method->generate();
+        $this->assertRegexp('/array \$options = array\(\)\)/', $generated, $generated);
+    }
 }

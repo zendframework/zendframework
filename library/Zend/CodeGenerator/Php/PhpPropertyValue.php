@@ -35,4 +35,14 @@ namespace Zend\CodeGenerator\Php;
 class PhpPropertyValue extends PhpValue
 {
     protected $_topMostValue = true;
+
+    /**
+     * generate()
+     *
+     * @return string
+     */
+    public function generate()
+    {
+        return parent::generate() . ';';
+    }
 }

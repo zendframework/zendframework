@@ -43,10 +43,10 @@ class Null extends AbstractWriter
     protected function _write($event)
     {
     }
-    
+
     /**
      * Create a new instance of Zend_Log_Writer_Null
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Null
      */

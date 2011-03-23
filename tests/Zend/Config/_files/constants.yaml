@@ -1,0 +1,3 @@
+production:
+    env:  ZEND_CONFIG_YAML_ENV
+    path: ZEND_CONFIG_YAML_ENV_PATH/test/this

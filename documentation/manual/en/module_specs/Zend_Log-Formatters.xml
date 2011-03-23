@@ -50,7 +50,7 @@ $logger->info('there');
         <para>
             The constructor of <classname>Zend_Log_Formatter_Simple</classname> accepts a single
             parameter: the format string. This string contains keys surrounded by
-            percent signs (e.g. <property>%message%</property>). The format string may
+            percent signs (e.g. <command>%message%</command>). The format string may
             contain any key from the event data array.
             You can retrieve the default keys by using the DEFAULT_FORMAT constant from
             <classname>Zend_Log_Formatter_Simple</classname>.

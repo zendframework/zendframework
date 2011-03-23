@@ -1,0 +1,9 @@
+A: 
+  someKey: value_A
+  _extends: C
+B: 
+  someKey: value_B
+  _extends: A
+C: 
+  someKey: value_C
+  _extends: B

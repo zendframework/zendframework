@@ -100,8 +100,7 @@ $logger->info('Informational message');
         <para>
             The example above writes a single row of log data to the database table named
             'log_table_name' table. The database column named 'lvl'
-            receives the priority number and the column named 'msg' receives the
-            log message.
+            receives the priority number and the column named 'msg' receives the log message.
         </para>
     </sect2>
 

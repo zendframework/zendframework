@@ -158,7 +158,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     // Fields
 
-    public function testLogWritesStandardFields() 
+    public function testLogWritesStandardFields()
     {
         $logger = new Logger($mock = new Log\Writer\Mock);
         $logger->info('foo');
@@ -170,7 +170,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), array_diff_key($event, $standardFields));
     }
 
-    public function testLogWritesAndOverwritesExtraFields() 
+    public function testLogWritesAndOverwritesExtraFields()
     {
         $logger = new Logger($mock = new Log\Writer\Mock);
         $logger->setEventItem('foo', 42);
@@ -355,7 +355,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger();
         $writer = array('writerName' => 'NotExtendedWriterAbstract');
-        
+
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'The specified writer does not extend Zend\Log\Writer');
         $logger->addWriter($writer);
     }
@@ -367,7 +367,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger();
         $filter = array('filterName' => 'NotImplementsFilterInterface');
-        
+
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'The specified filter does not implement Zend\Log\Filter');
         $logger->addFilter($filter);
     }
@@ -394,11 +394,11 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $logger   = new Logger();
         $mock     = new Log\Writer\Mock();
         $logger->addWriter($mock);
-        
+
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Existing priorities cannot be overwritten');
         $logger->addPriority('emerg', 8);
     }
-    
+
     /**
      * @group ZF-10170
      */
@@ -408,12 +408,96 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $mock     = new Log\Writer\Mock();
         $logger->addWriter($mock);
         $logger->log('zf10170', 0);
-        
+
         $this->assertEquals(0, $mock->events[0]['priority']);
         $this->assertEquals('EMERG', $mock->events[0]['priorityName']);
         $this->assertFalse(array_key_exists(1, $mock->events));
-        
+
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Bad log priority');
         $logger->log('clone zf10170', 8);
+    }
+
+    /**
+     * @group ZF-9176
+     */
+    public function testLogConstructFromConfigFormatter()
+    {
+        $config = array(
+            'log' => array(
+                'test' => array(
+                    'writerName'    => 'Mock',
+                    'formatterName' => 'Simple',
+                    'formatterParams' => array(
+                        'format' => '%timestamp% (%priorityName%): %message%'
+                    )
+                )
+            )
+        );
+
+        $logger = Logger::factory($config['log']);
+        $logger->log('custom message', Logger::INFO);
+    }
+
+    /**
+     * @group ZF-9176
+     */
+    public function testLogConstructFromConfigCustomFormatter()
+    {
+        $config = array(
+            'log' => array(
+                'test' => array(
+                    'writerName'    => 'Mock',
+                    'formatterName' => 'MockFormatter',
+                    'formatterNamespace' => 'ZendTest\Log'
+                )
+            )
+        );
+
+        $logger = Logger::factory($config['log']);
+        $logger->log('custom message', Logger::INFO);
+    }
+
+    /**
+     * @group ZF-10990
+     */
+    public function testFactoryShouldSetTimestampFormat()
+    {
+        $config = array(
+            'timestampFormat' => 'Y-m-d',
+            'mock' => array(
+                'writerName' => 'Mock'
+            )
+        );
+        $logger = Logger::factory($config);
+
+        $this->assertEquals('Y-m-d', $logger->getTimestampFormat());
+    }
+
+    /**
+     * @group ZF-10990
+     */
+    public function testFactoryShouldKeepDefaultTimestampFormat()
+    {
+        $config = array(
+            'timestampFormat' => '',
+            'mock' => array(
+                'writerName' => 'Mock'
+            )
+        );
+        $logger = Logger::factory($config);
+
+        $this->assertEquals('c', $logger->getTimestampFormat());
+    }
+}
+
+class MockFormatter implements Log\Formatter, Log\Factory
+{
+    public static function factory($config = array())
+    {
+        return new self;
+    }
+
+    public function format($event)
+    {
     }
 }

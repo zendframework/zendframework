@@ -39,12 +39,14 @@ class Db extends AbstractWriter
 {
     /**
      * Database adapter instance
+     *
      * @var Zend_Db_Adapter
      */
     private $_db;
 
     /**
      * Name of the log table in the database
+     *
      * @var string
      */
     private $_table;
@@ -62,6 +64,7 @@ class Db extends AbstractWriter
      * @param Zend_Db_Adapter $db   Database adapter instance
      * @param string $table         Log table in database
      * @param array $columnMap
+     * @return void
      */
     public function __construct($db, $table, $columnMap = null)
     {
@@ -72,7 +75,7 @@ class Db extends AbstractWriter
 
     /**
      * Create a new instance of Zend_Log_Writer_Db
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Db
      */
@@ -98,8 +101,9 @@ class Db extends AbstractWriter
 
     /**
      * Formatting is not possible on this writer
-     * 
+     *
      * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return void
      */
     public function setFormatter(\Zend\Log\Formatter $formatter)
     {

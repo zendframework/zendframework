@@ -67,11 +67,11 @@ class SuppressFilterTest extends \PHPUnit_Framework_TestCase
         $this->filter->suppress(true);
         $this->assertFalse($this->filter->accept(array()));
     }
-    
+
     public function testFactory()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName' => "Mock", 
+            'writerName' => "Mock",
             'filterName' => "SuppressFilter"
         )));
 

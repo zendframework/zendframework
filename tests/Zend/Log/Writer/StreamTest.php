@@ -124,7 +124,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains($expected, $contents);
     }
-    
+
     public function testFactoryStream()
     {
         $cfg = array('log' => array('memory' => array(
@@ -138,7 +138,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
         $logger = Logger::factory($cfg['log']);
         $this->assertTrue($logger instanceof Logger);
     }
-    
+
     public function testFactoryUrl()
     {
         $cfg = array('log' => array('memory' => array(

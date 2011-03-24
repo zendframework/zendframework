@@ -23,9 +23,9 @@
  * @namespace
  */
 namespace Zend\Wildfire\Channel;
-use Zend\Wildfire;
-use Zend\Wildfire\Protocol;
-use Zend\Controller;
+use Zend\Wildfire,
+    Zend\Wildfire\Protocol,
+    Zend\Controller;
 
 /**
  * Implements communication via HTTP request and response headers for Wildfire Protocols.

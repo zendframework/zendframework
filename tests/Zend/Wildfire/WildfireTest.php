@@ -25,7 +25,8 @@
 namespace ZendTest\Wildfire;
 use Zend\Wildfire\Channel,
     Zend\Wildfire\Plugin\FirePhp,
-    Zend\Controller;
+    Zend\Controller,
+    Zend\Controller\Request\Simple as SimpleRequest;
 
 /**
  * @category   Zend
@@ -115,13 +116,13 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->_request->setUserAgentExtensionEnabled(false);
 
         $this->assertFalse($channel->isReady(true));
-        
+
         $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
-        
+
         $this->assertTrue($channel->isReady(true));
 
         $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
-        
+
         $this->assertTrue($channel->isReady(true));
     }
 
@@ -138,11 +139,11 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($channel->isReady());
 
         $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
-        
+
         $this->assertTrue($channel->isReady());
 
         $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
-        
+
         $this->assertTrue($channel->isReady());
     }
 
@@ -933,6 +934,25 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                             '[{"Type":"TABLE","Label":"Label"},[["Col1","Col2"],[{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":"** Max Object Depth (2) **"}},{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":"** Max Object Depth (2) **"}}]]]');
     }
 
+    /**
+     * @group ZF-10526
+     */
+    public function testNonHTTPRequest()
+    {
+        $this->_request = new SimpleRequest();
+        $this->_response = new Response();
+
+        $channel = Channel\HttpHeaders::getInstance();
+        $channel->setRequest($this->_request);
+        $channel->setResponse($this->_response);
+
+        // this should not fail with: PHP Fatal error:  Call to undefined method Zend_Controller_Request_Simple::getHeader()
+        $this->assertFalse($channel->isReady());
+
+        // this should not fail with: PHP Fatal error:  Call to undefined method Zend_Controller_Request_Simple::getHeader()
+        $firephp = FirePhp::getInstance();
+        $firephp->send('This is a log message!');
+    }
 }
 
 class TestObject1

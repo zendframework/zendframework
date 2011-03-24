@@ -260,6 +260,11 @@ class HttpHeaders
             return true;
         }
 
+        // use is_a() instead of 'instanceof' to avoid having to load the class
+        if (!is_a($this->getRequest(), 'Zend\Controller\Request\Http')) {
+            return false;
+        }
+
         return ($this->getResponse()->canSendHeaders()
                 && (preg_match_all(
                         '/\s?FirePHP\/([\.\d]*)\s?/si',

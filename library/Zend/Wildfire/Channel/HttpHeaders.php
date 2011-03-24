@@ -25,7 +25,8 @@
 namespace Zend\Wildfire\Channel;
 use Zend\Wildfire,
     Zend\Wildfire\Protocol,
-    Zend\Controller;
+    Zend\Controller,
+    Zend\Controller\Request\Http as HttpRequest;
 
 /**
  * Implements communication via HTTP request and response headers for Wildfire Protocols.
@@ -260,8 +261,7 @@ class HttpHeaders
             return true;
         }
 
-        // use is_a() instead of 'instanceof' to avoid having to load the class
-        if (!is_a($this->getRequest(), 'Zend\Controller\Request\Http')) {
+        if (!($this->getRequest() instanceof HttpRequest)) {
             return false;
         }
 

@@ -21,7 +21,8 @@
 
 namespace ZendTest\Log\Formatter;
 
-use \Zend\Log\Formatter\Simple;
+use ZendTest\Log\TestAsset\StringObject,
+    \Zend\Log\Formatter\Simple;
 
 /**
  * @category   Zend
@@ -88,11 +89,11 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('array', $line);
 
-        $fields['message'] = new SimpleTest_TestObject1();
+        $fields['message'] = new StringObject();
         $line = $f->format($fields);
         $this->assertContains($fields['message']->__toString(), $line);
 
-        $fields['message'] = new SimpleTest_TestObject2();
+        $fields['message'] = new \stdClass();
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
@@ -108,16 +109,4 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $formatter = Simple::factory($options);
         $this->assertType('Zend\Log\Formatter\Simple', $formatter);
     }
-}
-
-class SimpleTest_TestObject1
-{
-    public function __toString()
-    {
-        return 'Hello World';
-    }
-}
-
-class SimpleTest_TestObject2
-{
 }

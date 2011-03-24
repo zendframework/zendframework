@@ -24,7 +24,8 @@ namespace ZendTest\Log;
 require_once __DIR__ . '/TestAsset/NotExtendedWriterAbstract.php';
 require_once __DIR__ . '/TestAsset/NotImplementsFilterInterface.php';
 
-use \Zend\Log\Logger,
+use ZendTest\Log\TestAsset\MockFormatter,
+    \Zend\Log\Logger,
     \Zend\Log;
 
 /**
@@ -448,7 +449,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
                 'test' => array(
                     'writerName'    => 'Mock',
                     'formatterName' => 'MockFormatter',
-                    'formatterNamespace' => 'ZendTest\Log'
+                    'formatterNamespace' => 'ZendTest\Log\TestAsset'
                 )
             )
         );
@@ -487,17 +488,5 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $logger = Logger::factory($config);
 
         $this->assertEquals('c', $logger->getTimestampFormat());
-    }
-}
-
-class MockFormatter implements Log\Formatter, Log\Factory
-{
-    public static function factory($config = array())
-    {
-        return new self;
-    }
-
-    public function format($event)
-    {
     }
 }

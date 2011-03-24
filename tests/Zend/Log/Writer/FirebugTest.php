@@ -24,7 +24,10 @@ namespace ZendTest\Log\Writer;
 use Zend\Log\Writer\Firebug as FirebugWriter,
     Zend\Log\Logger,
     Zend\Wildfire\Channel,
-    Zend\Wildfire\Plugin\FirePhp;
+    Zend\Wildfire\Plugin\FirePhp,
+    ZendTest\Log\TestAsset\FirePhpHeader,
+    ZendTest\Log\TestAsset\MockHttpResponse,
+    ZendTest\Log\TestAsset\CustomFirebugFormatter;
 
 /**
  * @category   Zend
@@ -53,8 +56,8 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
         // registered request/response objects
         \Zend\Controller\Front::getInstance()->resetInstance();
 
-        $this->_request = new Zend_Log_Writer_FirebugTest_Request();
-        $this->_response = new Zend_Log_Writer_FirebugTest_Response();
+        $this->_request = new FirePhpHeader();
+        $this->_response = new MockHttpResponse();
 
         $channel = Channel\HttpHeaders::getInstance();
         $channel->setRequest($this->_request);
@@ -108,7 +111,7 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
 
         $this->_logger->log('Test Message 1', Logger::INFO);
 
-        $formatter = new Zend_Log_Writer_FirebugTest_Formatter();
+        $formatter = new CustomFirebugFormatter();
         $this->_writer->setFormatter($formatter);
 
         $this->_logger->setEventItem('testLabel', 'Test Label');
@@ -265,71 +268,3 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($logger instanceof Logger);
     }
 }
-
-/*
-class Zend_Log_Writer_FirebugTest_Formatter extends \Zend\Log\Formatter\Firebug
-{
-    public function format($event)
-    {
-        return $event['testLabel'].' : '.$event['message'];
-    }
-}
-
-class Zend_Log_Writer_FirebugTest_Request extends \Zend\Controller\Request\Http
-{
-    public function getHeader($header)
-    {
-        if ($header == 'User-Agent') {
-            return 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14 FirePHP/0.1.0';
-        }
-    }
-}
-
-class Zend_Log_Writer_FirebugTest_Response extends \Zend\Controller\Response\Http
-{
-    public function canSendHeaders($throw = false)
-    {
-        return true;
-    }
-
-    public function verifyHeaders($headers)
-    {
-        $response_headers = $this->getHeaders();
-        if (!$response_headers) {
-            return false;
-        }
-
-        $keys1 = array_keys($headers);
-        sort($keys1);
-        $keys1 = serialize($keys1);
-
-        $keys2 = array();
-        foreach ($response_headers as $header ) {
-            $keys2[] = $header['name'];
-        }
-        sort($keys2);
-        $keys2 = serialize($keys2);
-
-        if ($keys1 != $keys2) {
-            return false;
-        }
-
-        $values1 = array_values($headers);
-        sort($values1);
-        $values1 = serialize($values1);
-
-        $values2 = array();
-        foreach ($response_headers as $header ) {
-            $values2[] = $header['value'];
-        }
-        sort($values2);
-        $values2 = serialize($values2);
-
-        if ($values1 != $values2) {
-            return false;
-        }
-
-        return true;
-    }
-}
- */

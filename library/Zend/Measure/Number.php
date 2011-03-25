@@ -294,7 +294,7 @@ class Number extends AbstractMeasure
 
             $split = preg_split('//', strrev($input), -1, PREG_SPLIT_NO_EMPTY);
 
-            for ($x =0; $x < sizeof($split); $x++) {
+            for ($x =0; $x < count($split); $x++) {
                 if ($split[$x] == '/') {
                     continue;
                 }

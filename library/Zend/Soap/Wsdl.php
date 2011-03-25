@@ -192,7 +192,7 @@ class Wsdl
 
         $message->setAttribute('name', $name);
 
-        if (sizeof($parts) > 0) {
+        if (count($parts) > 0) {
             foreach ($parts as $name => $type) {
                 $part = $this->_dom->createElement('part');
                 $part->setAttribute('name', $name);

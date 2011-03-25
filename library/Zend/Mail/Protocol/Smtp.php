@@ -177,7 +177,7 @@ class Smtp extends AbstractProtocol
 
         // Validate client hostname
         if (!$this->_validHost->isValid($host)) {
-            throw new Exception\RuntimeException(join(', ', $this->_validHost->getMessages()));
+            throw new Exception\RuntimeException(implode(', ', $this->_validHost->getMessages()));
         }
 
         // Initiate helo sequence

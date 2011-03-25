@@ -443,7 +443,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
             foreach ($params as $key => $value) {
                 $params_out[] = rawurlencode($key)."=".rawurlencode($value);
             }
-            $request->setRawData(join('&', $params_out), Http\Client::ENC_URLENCODED);
+            $request->setRawData(implode('&', $params_out), Http\Client::ENC_URLENCODED);
             $httpResponse = $request->request();
         } catch (Http\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();

@@ -282,7 +282,7 @@ class Page extends Core
             if ($doNotDie) {
                 return true;
             }
-            die();
+            exit();
         }
         ob_start(array($this, '_flush'));
         ob_implicit_flush(false);

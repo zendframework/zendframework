@@ -330,7 +330,7 @@ class Imap
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                if (@fputs($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
+                if (@fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
                     throw new Exception\RuntimeException('cannot write - connection closed?');
                 }
                 if (!$this->_assumedNextLine('+ ')) {
@@ -342,7 +342,7 @@ class Imap
             }
         }
 
-        if (@fputs($this->_socket, $line . "\r\n") === false) {
+        if (@fwrite($this->_socket, $line . "\r\n") === false) {
             throw new Exception\RuntimeException('cannot write - connection closed?');
         }
     }

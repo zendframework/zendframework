@@ -127,7 +127,7 @@ class MultiByte
      * @param  string  $charset
      * @return string
      */
-    public static function strPad($input, $padLength, $padString = ' ', $padType = \STR\PAD\RIGHT, $charset = 'UTF-8')
+    public static function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT, $charset = 'UTF-8')
     {
         $return          = '';
         $lengthOfPadding = $padLength - iconv_strlen($input, $charset);

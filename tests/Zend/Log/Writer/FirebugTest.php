@@ -36,7 +36,6 @@ use Zend\Log\Writer\Firebug as FirebugWriter,
  */
 class FirebugTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_controller = null;
     protected $_request = null;
     protected $_response = null;
     protected $_writer = null;
@@ -44,9 +43,6 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->markTestIncomplete('Not testing until MVC converted to namespaces');
-        /*
-
         date_default_timezone_set('America/Los_Angeles');
 
         // Reset front controller to reset registered plugins and
@@ -69,15 +65,12 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
         $this->_logger = new Logger($this->_writer);
 
         FirePhp::getInstance()->setOption('includeLineNumbers', false);
-         */
     }
 
     public function tearDown()
     {
-        /*
         Channel\HttpHeaders::destroyInstance();
         FirePhp::destroyInstance();
-         */
     }
 
     /**

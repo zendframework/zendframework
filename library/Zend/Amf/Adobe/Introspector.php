@@ -23,6 +23,9 @@
  */
 namespace Zend\Amf\Adobe;
 
+use Zend\Amf\Exception,
+    SplFileInfo;
+
 /**
  * This class implements a service for generating AMF service descriptions as XML.
  *
@@ -91,7 +94,9 @@ class Introspector
 
         // Introspect!
         if (!class_exists($serviceClass)) {
-            \Zend\Loader::loadClass($serviceClass, $this->_getServicePath());
+            if (!$this->_loadClass($serviceClass)) {
+                return $this->_returnError('Invalid service name; class does not exist');
+            }
         }
 
         $serv = $this->_xml->createElement('service-description');
@@ -306,6 +311,25 @@ class Introspector
      */
     protected function _returnError($msg)
     {
-        return 'ERROR: $msg';
+        return "ERROR: $msg";
+    }
+
+    /**
+     * Load a service class from the service path
+     * 
+     * @param  string $class 
+     * @return bool
+     */
+    protected function _loadClass($class)
+    {
+        $file = str_replace(array('\\', '_'), DIRECTORY_SEPARATOR, $class) . '.php';
+        foreach ($this->_getServicePath() as $path) {
+            $fileinfo = new SplFileInfo($path . DIRECTORY_SEPARATOR . $file);
+            if ($fileinfo->isReadable()) {
+                require_once $fileinfo->getRealPath();
+                return true;
+            }
+        }
+        return false;
     }
 }

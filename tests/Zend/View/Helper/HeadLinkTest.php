@@ -23,9 +23,11 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\View\Helper\Placeholder\Registry;
-use Zend\View\Helper;
-use Zend\View;
+use Zend\Registry,
+    Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
+    Zend\View\Helper,
+    Zend\View\PhpRenderer as View,
+    Zend\View\Exception as ViewException;
 
 /**
  * Test class for Zend_View_Helper_HeadLink.
@@ -58,14 +60,14 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        foreach (array(Registry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
-            if (\Zend\Registry::isRegistered($key)) {
-                $registry = \Zend\Registry::getInstance();
+        foreach (array(PlaceholderRegistry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
+            if (Registry::isRegistered($key)) {
+                $registry = Registry::getInstance();
                 unset($registry[$key]);
             }
         }
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->view = new View\View();
+        $this->view = new View();
         $this->helper = new Helper\HeadLink();
         $this->helper->setView($this->view);
     }
@@ -83,7 +85,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
     {
-        $registry = Registry::getRegistry();
+        $registry = PlaceholderRegistry::getRegistry();
         if ($registry->containerExists('Zend_View_Helper_HeadLink')) {
             $registry->deleteContainer('Zend_View_Helper_HeadLink');
         }
@@ -100,38 +102,26 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testPrependThrowsExceptionWithoutArrayArgument()
     {
-        try {
-            $this->helper->prepend('foo');
-            $this->fail('prepend should raise exception without array argument');
-        } catch (\Exception $e) {
-        }
+        $this->setExpectedException('Zend\View\Exception');
+        $this->helper->prepend('foo');
     }
 
     public function testAppendThrowsExceptionWithoutArrayArgument()
     {
-        try {
-            $this->helper->append('foo');
-            $this->fail('append should raise exception without array argument');
-        } catch (\Exception $e) {
-        }
+        $this->setExpectedException('Zend\View\Exception');
+        $this->helper->append('foo');
     }
 
     public function testSetThrowsExceptionWithoutArrayArgument()
     {
-        try {
-            $this->helper->set('foo');
-            $this->fail('set should raise exception without array argument');
-        } catch (\Exception $e) {
-        }
+        $this->setExpectedException('Zend\View\Exception');
+        $this->helper->set('foo');
     }
 
     public function testOffsetSetThrowsExceptionWithoutArrayArgument()
     {
-        try {
-            $this->helper->offsetSet(1, 'foo');
-            $this->fail('set should raise exception without array argument');
-        } catch (\Exception $e) {
-        }
+        $this->setExpectedException('Zend\View\Exception');
+        $this->helper->offsetSet(1, 'foo');
     }
 
     public function testCreatingLinkStackViaHeadScriptCreatesAppropriateOutput()
@@ -249,10 +239,8 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingThrowsExceptionWithNoArguments()
     {
-        try {
-            $this->helper->appendStylesheet();
-            $this->fail('Helper should expect at least one argument');
-        } catch (View\Exception $e) {}
+        $this->setExpectedException('Zend\View\Exception');
+        $this->helper->appendStylesheet();
     }
 
     public function testOverloadingShouldAllowSingleArrayArgument()
@@ -264,10 +252,8 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingUsingSingleArrayArgumentWithInvalidValuesThrowsException()
     {
-        try {
-            $this->helper->setStylesheet(array('bogus' => 'unused'));
-            $this->fail('Invalid attribute values should raise exception');
-        } catch (View\Exception $e) { }
+        $this->setExpectedException('Zend\View\Exception');
+        $this->helper->setStylesheet(array('bogus' => 'unused'));
     }
 
     public function testOverloadingOffsetSetWorks()
@@ -281,10 +267,8 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingThrowsExceptionWithInvalidMethod()
     {
-        try {
-            $this->helper->bogusMethod();
-            $this->fail('Invalid method should raise exception');
-        } catch (View\Exception $e) { }
+        $this->setExpectedException('Zend\View\Exception');
+        $this->helper->bogusMethod();
     }
 
     public function testStylesheetAttributesGetSet()
@@ -330,11 +314,11 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setAlternate('foo');
             $this->fail('Setting alternate with fewer than 3 args should raise exception');
-        } catch (View\Exception $e) { }
+        } catch (ViewException $e) { }
         try {
             $this->helper->setAlternate('foo', 'bar');
             $this->fail('Setting alternate with fewer than 3 args should raise exception');
-        } catch (View\Exception $e) { }
+        } catch (ViewException $e) { }
     }
 
     public function testIndentationIsHonored()

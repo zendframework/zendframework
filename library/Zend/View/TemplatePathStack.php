@@ -191,7 +191,7 @@ class TemplatePathStack implements TemplateResolver
      * Set LFI protection flag
      *
      * @param  bool $flag
-     * @return \Zend\View\AbstractView
+     * @return \Zend\View\TemplatePathStack
      */
     public function setLfiProtection($flag)
     {

@@ -24,8 +24,7 @@
  */
 namespace Zend\Form\Decorator;
 
-use Zend\Filter,
-    Zend\View\AbstractView;
+use Zend\Filter;
 
 /**
  * Zend_Form_Decorator_Element_HtmlTag
@@ -247,9 +246,7 @@ class HtmlTag extends AbstractDecorator
             $this->_encoding = 'UTF-8';
         } elseif (null === ($view = $element->getView())) {
             $this->_encoding = 'UTF-8';
-        } elseif (!$view instanceof AbstractView
-            && !method_exists($view, 'getEncoding')
-        ) {
+        } elseif (!method_exists($view, 'getEncoding')) {
             $this->_encoding = 'UTF-8';
         } else {
             $this->_encoding = $view->getEncoding();

@@ -57,6 +57,6 @@ class ZendMonitorTest extends \PHPUnit_Framework_TestCase
     public function testIsEnabled()
     {
         $writer = new \Zend\Log\Writer\ZendMonitor();
-        $this->assertType('boolean', $writer->isEnabled());
+        $this->assertInternalType('boolean', $writer->isEnabled());
     }
 }

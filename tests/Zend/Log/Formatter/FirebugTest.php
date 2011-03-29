@@ -54,6 +54,6 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
     {
         $options = array();
         $formatter = Firebug::factory($options);
-        $this->assertType('Zend\Log\Formatter\Firebug', $formatter);
+        $this->assertInstanceOf('Zend\Log\Formatter\Firebug', $formatter);
     }
 }

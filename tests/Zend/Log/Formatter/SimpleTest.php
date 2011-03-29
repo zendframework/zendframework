@@ -107,6 +107,6 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             'format' => '%timestamp% [%priority%]: %message% -- %info%'
         );
         $formatter = Simple::factory($options);
-        $this->assertType('Zend\Log\Formatter\Simple', $formatter);
+        $this->assertInstanceOf('Zend\Log\Formatter\Simple', $formatter);
     }
 }

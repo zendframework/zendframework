@@ -124,8 +124,8 @@ class Application
 
     /**
      * Set autoloader
-     * 
-     * @param  \Zend\Loader\SplAutoloader $autoloader 
+     *
+     * @param  \Zend\Loader\SplAutoloader $autoloader
      * @return Application
      */
     public function setAutoloader(\Zend\Loader\SplAutoloader $autoloader)
@@ -314,10 +314,7 @@ class Application
     public function setAutoloaderNamespaces(array $namespaces)
     {
         $autoloader = $this->getAutoloader();
-
-        foreach ($namespaces as $namespace) {
-            $autoloader->registerNamespace($namespace);
-        }
+        $autoloader->registerNamespaces($namespaces);
 
         return $this;
     }

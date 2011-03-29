@@ -100,7 +100,7 @@ class Introspector
         $this->_types = $this->_xml->createElement('types');
         $this->_ops   = $this->_xml->createElement('operations');
 
-        $r = \Zend\Server\Reflection::reflectClass($serviceClass);
+        $r = \Zend\Server\Reflection\Reflection::reflectClass($serviceClass);
         $this->_addService($r, $this->_ops);
 
         $serv->appendChild($this->_types);

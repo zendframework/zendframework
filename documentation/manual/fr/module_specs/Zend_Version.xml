@@ -29,4 +29,17 @@
 $cmp = Zend_Version::compareVersion('2.0.0');
 ]]></programlisting>
     </example>
+
+    <para>
+        La méthode statique <methodname>Zend_Version::getLatest()</methodname> permet d'obtenir le 
+        numéro de version de la dernière release stable disponible au téléchargement sur le site 
+        <ulink linked="http://framework.zend.com/download/latest">Zend Framework</ulink>.
+    </para>
+
+    <example id="zend.version.latest.example">
+        <programlisting language="php"><![CDATA[
+// retourne 1.11.0 (ou une version ultérieure)
+echo Zend_Version::getLatest();
+]]></programlisting>
+    </example>
 </sect1>

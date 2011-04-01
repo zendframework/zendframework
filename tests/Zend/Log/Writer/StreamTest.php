@@ -42,7 +42,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
             new StreamWriter($resource);
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
+            $this->assertInstanceOf('Zend\Log\Exception\InvalidArgumentException', $e);
             $this->assertRegExp('/not a stream/i', $e->getMessage());
         }
         xml_parser_free($resource);

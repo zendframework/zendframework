@@ -42,21 +42,21 @@ class Db extends AbstractWriter
      *
      * @var Zend_Db_Adapter
      */
-    private $_db;
+    protected $_db;
 
     /**
      * Name of the log table in the database
      *
      * @var string
      */
-    private $_table;
+    protected $_table;
 
     /**
      * Relates database columns names to log data field keys.
      *
      * @var null|array
      */
-    private $_columnMap;
+    protected $_columnMap;
 
     /**
      * Class constructor

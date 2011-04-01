@@ -96,7 +96,7 @@ class PhpPropertyValueTest extends \PHPUnit_Framework_TestCase
                     'baz2'
                     )
                 ),
-            new Php\PhpPropertyValue(array('value' => 'PHP_EOL', 'type' => 'constant'))
+            new Php\PhpValue(array('value' => 'PHP_EOL', 'type' => 'constant'))
             );
 
         $expectedSource = <<<EOS

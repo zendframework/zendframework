@@ -284,7 +284,7 @@ class HeadLink extends Placeholder\Container\Standalone
             }
         }
 
-        if ($this->view instanceof View\AbstractView) {
+        if (method_exists($this->view, 'broker')) {
             $link .= ($this->view->broker('doctype')->isXhtml()) ? '/>' : '>';
         } else {
             $link .= '/>';

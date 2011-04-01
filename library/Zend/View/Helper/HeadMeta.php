@@ -337,7 +337,7 @@ class HeadMeta extends Placeholder\Container\Standalone
             $modifiersString .= $key . '="' . $this->_escape($value) . '" ';
         }
 
-        if ($this->view instanceof View\AbstractView) {
+        if (method_exists($this->view, 'broker')) {
             if ($this->view->broker('doctype')->isHtml5()
             && $type == 'charset') {
 				$tpl = ($this->view->broker('doctype')->isXhtml())

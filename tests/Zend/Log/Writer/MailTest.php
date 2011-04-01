@@ -280,7 +280,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
     	);
 
     	$writer = MailWriter::factory($config);
-    	$this->assertType('Zend\Log\Writer\Mail', $writer);
+    	$this->assertInstanceOf('Zend\Log\Writer\Mail', $writer);
 
     	$writer->write($this->_getEvent());
     	$writer->shutdown();
@@ -319,7 +319,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
     	);
 
     	$writer = MailWriter::factory($config);
-    	$this->assertType('Zend\Log\Writer\Mail', $writer);
+    	$this->assertInstanceOf('Zend\Log\Writer\Mail', $writer);
     }
 
     /**
@@ -405,7 +405,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
     	);
 
     	$writer = MailWriter::factory($config);
-    	$this->assertType('Zend\Log\Formatter\Simple', $writer->getLayoutFormatter());
+    	$this->assertInstanceOf('Zend\Log\Formatter\Simple', $writer->getLayoutFormatter());
     }
 
     /**
@@ -419,7 +419,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
     	);
 
     	$writer = MailWriter::factory($config);
-    	$this->assertType('Zend\Log\Writer\Mail', $writer);
+    	$this->assertInstanceOf('Zend\Log\Writer\Mail', $writer);
     }
 
     /**

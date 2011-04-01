@@ -190,4 +190,26 @@ EOS;
         $this->assertEquals(';', $lines[2]{$targetLength-1});
     }
 
+    /**
+     * @group ZF-11218
+     */
+    public function testGeneratesUseStatements()
+    {
+        $file = new Php\PhpFile();
+        $file->setUse('My\Baz')
+             ->setUses(array(
+                 array('Your\Bar', 'bar'),
+             ));
+        $generated = $file->generate();
+        $this->assertContains('use My\\Baz;', $generated);
+        $this->assertContains('use Your\\Bar as bar;', $generated);
+    }
+
+    public function testGeneratesNamespaceStatements()
+    {
+        $file = new Php\PhpFile();
+        $file->setNamespace('Foo\Bar');
+        $generated = $file->generate();
+        $this->assertContains('namespace Foo\\Bar', $generated, $generated);
+    }
 }

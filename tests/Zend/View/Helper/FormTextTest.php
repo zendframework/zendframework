@@ -24,6 +24,10 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\Registry,
+    Zend\View\PhpRenderer as View,
+    Zend\View\Helper\FormText as FormTextHelper;
+
 /**
  * Zend_View_Helper_FormTextTest
  *
@@ -47,12 +51,12 @@ class FormTextTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        if (\Zend\Registry::isRegistered('Zend_View_Helper_Doctype')) {
-            $registry = \Zend\Registry::getInstance();
+        if (Registry::isRegistered('Zend_View_Helper_Doctype')) {
+            $registry = Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view = new \Zend\View\View();
-        $this->helper = new \Zend\View\Helper\FormText();
+        $this->view = new View();
+        $this->helper = new FormTextHelper();
         $this->helper->setView($this->view);
     }
 

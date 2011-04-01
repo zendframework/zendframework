@@ -63,7 +63,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $line = $f->format(array('message' => 'foo', 'priority' => 42));
 
         $sxml = @simplexml_load_string($line);
-        $this->assertType('SimpleXMLElement', $sxml, 'Formatted XML is invalid');
+        $this->assertInstanceOf('SimpleXMLElement', $sxml, 'Formatted XML is invalid');
     }
 
     /**
@@ -125,6 +125,6 @@ class XmlTest extends \PHPUnit_Framework_TestCase
             )
         );
         $formatter = XmlFormatter::factory($options);
-        $this->assertType('Zend\Log\Formatter\Xml', $formatter);
+        $this->assertInstanceOf('Zend\Log\Formatter\Xml', $formatter);
     }
 }

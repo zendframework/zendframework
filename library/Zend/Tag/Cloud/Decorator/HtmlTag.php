@@ -38,7 +38,7 @@ use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException,
  * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HTMLTag extends Tag
+class HtmlTag extends Tag
 {
     /**
      * List of tags which get assigned to the inner element instead of

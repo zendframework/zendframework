@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 22970 -->
 <sect1 id="zend.version.reading">
 
     <title>Zend Framework のバージョンの取得</title>
@@ -31,6 +31,20 @@ $cmp = Zend_Version::compareVersion('2.0.0');
 ]]></programlisting>
     </example>
 
+    <para>
+        The static method <methodname>Zend_Version::getLatest()</methodname> provides the version 
+        number of the last stable release available for download on the site 
+        <ulink url="http://framework.zend.com/download/latest">Zend Framework</ulink>.
+    </para>
+
+    <example id="zend.version.latest.example">
+        <title>Example of the getLatest() Method</title>
+
+        <programlisting language="php"><![CDATA[
+// returns 1.11.0 (or a later version)
+echo Zend_Version::getLatest();
+]]></programlisting>
+    </example>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

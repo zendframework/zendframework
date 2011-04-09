@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 22790 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
     <title>Obtendo a Versão do Zend Framework</title>
@@ -26,6 +26,21 @@
         <programlisting language="php"><![CDATA[
 // retorna -1, 0 ou 1
 $cmp = Zend_Version::compareVersion('2.0.0');
+]]></programlisting>
+    </example>
+
+    <para>
+        O método estático <methodname>Zend_Version::getLatest()</methodname> fornece o número da
+        última versão estável disponível para download no site <ulink
+            url="http://framework.zend.com/download/latest">Zend Framework</ulink>.
+    </para>
+
+    <example id="zend.version.latest.example">
+        <title>Exemplo do método getLatest()</title>
+
+        <programlisting language="php"><![CDATA[
+// retorna 1.11.0 (ou uma versão posterior)
+echo Zend_Version::getLatest();
 ]]></programlisting>
     </example>
 </sect1>

@@ -30,8 +30,8 @@ $cmp = Zend_Version::compareVersion('2.0.0');
     </example>
 
     <para>
-        The static method <methodname>Zend_Version::getLatest()</methodname> provides the version 
-        number of the last stable release available for download on the site 
+        The static method <methodname>Zend_Version::getLatest()</methodname> provides the version
+        number of the last stable release available for download on the site
         <ulink url="http://framework.zend.com/download/latest">Zend Framework</ulink>.
     </para>
 

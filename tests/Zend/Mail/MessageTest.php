@@ -162,7 +162,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         try {
             Mime\Decode::splitMessageStruct("--xxx\n", 'xxx');
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             return; // ok
         }
 
@@ -173,7 +173,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $message = new Message(array('handler' => 1));
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             return; // ok
         }
 
@@ -187,7 +187,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $message = new Message(array('handler' => $mail));
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             return; // ok
         }
 
@@ -230,7 +230,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $header = '';
         try {
             Mime\Decode::splitHeaderField($header);
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             return; // ok
         }
 
@@ -268,7 +268,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $message->getContent();
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             return; // ok
         }
 
@@ -284,7 +284,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $subject = null;
         try {
             $subject = $message->subject;
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             // ok
         }
         if ($subject) {
@@ -298,7 +298,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $part = null;
         try {
             $part = $message->getPart(1);
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             // ok
         }
         if ($part) {
@@ -329,7 +329,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $message->getPart(1);
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Mime\Exception $e) {
             return; // ok
         }
         $this->fail('no exception raised while getting part from message without boundary');

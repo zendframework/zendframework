@@ -24,7 +24,7 @@
 namespace Zend\Mime;
 
 /**
- * @uses       \Zend\Exception
+ * @uses       \Zend\Mime\Exception\RuntimeException
  * @uses       \Zend\Mime\Mime
  * @uses       \Zend\Mime\Decode
  * @uses       \Zend\Mime\Part

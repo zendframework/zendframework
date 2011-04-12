@@ -95,7 +95,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
@@ -188,7 +188,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
                 throw new Statement\Exception('dummy');
             }
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
@@ -210,7 +210,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
                 throw new Statement\Exception('dummy');
             }
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
@@ -322,7 +322,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             // invalid value
             $stmt->setFetchMode(-999);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertRegExp('#invalid fetch mode#i', $e->getMessage());
@@ -437,7 +437,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $result = $stmt->fetchAll(-99);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
@@ -580,7 +580,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $result = $stmt->fetch(-99);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
@@ -820,7 +820,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $stmt->nextRowset();
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals('nextRowset() is not implemented', $e->getMessage());
@@ -837,13 +837,13 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $value = 'value';
         try {
             $stmt->setAttribute(1234, $value);
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertContains('This driver doesn\'t support setting attributes', $e->getMessage());
         }
 
         try {
             $this->assertEquals($value, $stmt->getAttribute(1234), "Expected '$value' #1");
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertContains('This driver doesn\'t support getting attributes', $e->getMessage());
             return;
         }

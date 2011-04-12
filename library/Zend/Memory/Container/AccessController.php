@@ -143,7 +143,6 @@ class AccessController implements Container
      *
      * @param string $property
      * @param  string $value
-     * @throws \Zend\Exception
      */
     public function __set($property, $value)
     {

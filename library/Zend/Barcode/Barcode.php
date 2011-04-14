@@ -22,8 +22,8 @@
  * @namespace
  */
 namespace Zend\Barcode;
-use Zend\Loader\PluginLoader,
-    Zend\Loader\ShortNameLocater,
+use Zend\Loader\PrefixPathLoader,
+    Zend\Loader\ShortNameLocator,
     Zend\Config\Config,
     Zend,
     Zend\Barcode\Exception\RendererCreationException,
@@ -64,12 +64,12 @@ class Barcode
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\ShortNameLocater $loader
+     * @param  \Zend\Loader\ShortNameLocator $loader
      * @param  string $type 'object', or 'renderer'
      * @return \Zend\Form\Element
      * @throws \Zend\Form\Exception on invalid type
      */
-    public static function setPluginLoader(ShortNameLocater $loader, $type)
+    public static function setPluginLoader(ShortNameLocator $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -89,7 +89,7 @@ class Barcode
      * 'decorator', 'filter', or 'validate' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\ShortNameLocater
+     * @return \Zend\Loader\ShortNameLocator
      * @throws \Zend\Loader\Exception on invalid type.
      */
     public static function getPluginLoader($type)
@@ -101,7 +101,7 @@ class Barcode
                 $prefixSegment = ucfirst(strtolower($type));
                 $pathSegment   = $prefixSegment;
                 if (!isset(self::$_loaders[$type])) {
-                    self::$_loaders[$type] = new PluginLoader(
+                    self::$_loaders[$type] = new PrefixPathLoader(
                         array('Zend\\Barcode\\' . $prefixSegment . '\\' => 'Zend/Barcode/' . $pathSegment . '/')
                     );
                 }
@@ -230,6 +230,12 @@ class Barcode
 
         $barcodeName = self::getPluginLoader(self::OBJECT)->load($barcode);
 
+        if (!class_exists($barcodeName)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid Barcode "%s"; does not resolve to a valid class', $barcode
+            ));
+        }
+
         /*
          * Create an instance of the barcode class.
          * Pass the config to the barcode class constructor.
@@ -295,6 +301,12 @@ class Barcode
         }
 
         $rendererName = self::getPluginLoader(self::RENDERER)->load($renderer);
+
+        if (!class_exists($rendererName)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid renderer "%s"; does not resolve to a valid class', $renderer
+            ));
+        }
 
         /*
          * Create an instance of the barcode class.

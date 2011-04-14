@@ -16,10 +16,10 @@ use DirectoryIterator,
  * @package    Zend_File
  * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
-class ClassFileLocater extends FilterIterator
+class ClassFileLocator extends FilterIterator
 {
     /**
-     * Create an instance of the locater iterator
+     * Create an instance of the locator iterator
      * 
      * Expects either a directory, or a DirectoryIterator (or its recursive variant) 
      * instance.

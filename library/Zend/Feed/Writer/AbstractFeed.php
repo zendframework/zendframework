@@ -22,9 +22,10 @@
 * @namespace
 */
 namespace Zend\Feed\Writer;
-use Zend\Uri;
-use Zend\Date;
-use Zend\Validator;
+
+use Zend\Uri,
+    Zend\Date,
+    Zend\Validator;
 
 /**
 * @uses \Zend\Date\Date
@@ -785,7 +786,9 @@ class AbstractFeed
         $all = Writer::getExtensions();
         $exts = $all['feed'];
         foreach ($exts as $ext) {
-            $className = Writer::getPluginLoader()->getClassName($ext);
+            if (!$className = Writer::getPluginLoader()->getClassName($ext)) {
+                throw new Exception(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
+            }
             $this->_extensions[$ext] = new $className();
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }

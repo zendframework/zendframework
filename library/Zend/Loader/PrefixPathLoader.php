@@ -36,7 +36,7 @@ use Zend\Stdlib\ArrayStack,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PrefixPathLoader implements ShortNameLocater, PrefixPathMapper
+class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
 {
     /**
      * Map of class names to files

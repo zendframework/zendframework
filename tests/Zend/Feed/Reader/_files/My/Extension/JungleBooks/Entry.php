@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace My\FeedReader\Extension\JungleBooks;
+namespace My\Extension\JungleBooks;
 use Zend\Feed\Reader\Extension;
 
 /**

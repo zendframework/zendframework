@@ -16,7 +16,6 @@
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 /**
@@ -25,37 +24,36 @@
 namespace Zend\Loader;
 
 /**
- * Plugin class locater interface
+ * Short name locator interface
  *
  * @category   Zend
  * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface PluginClassLocater extends ShortNameLocater, \IteratorAggregate
+interface ShortNameLocator
 {
     /**
-     * Register a class to a given short name
-     * 
-     * @param  string $shortName 
-     * @param  string $className 
-     * @return PluginClassLocater
+     * Whether or not a Helper by a specific name
+     *
+     * @param  string $name
+     * @return bool
      */
-    public function registerPlugin($shortName, $className);
+    public function isLoaded($name);
 
     /**
-     * Unregister a short name lookup
-     * 
-     * @param mixed $shortName 
-     * @return void
+     * Return full class name for a named helper
+     *
+     * @param  string $name
+     * @return string
      */
-    public function unregisterPlugin($shortName);
+    public function getClassName($name);
 
     /**
-     * Get a list of all registered plugins
-     * 
-     * @return array|Traversable
+     * Load a helper via the name provided
+     *
+     * @param  string $name
+     * @return string
      */
-    public function getRegisteredPlugins();
+    public function load($name);
 }
-

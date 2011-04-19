@@ -113,6 +113,20 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that we can parse a malformed URI
+     * 
+     * @link http://framework.zend.com/issues/browse/ZF-11286
+     */
+    public function testCanParseMalformedUrlZF11286()
+    {
+        $urlString = 'http://example.org/SitePages/file has spaces.html?foo=bar';
+        $uri = new Uri($urlString);
+        $fixedUri = new Uri($uri->toString());
+        
+        $this->assertEquals('/SitePages/file%20has%20spaces.html', $fixedUri->getPath());
+    }
+    
+    /**
      * Accessor Tests
      */
     

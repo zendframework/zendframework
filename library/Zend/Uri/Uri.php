@@ -276,7 +276,7 @@ class Uri
         }
 
         if ($this->_path) {
-            $uri .= $this->_path;
+            $uri .= self::encodePath($this->_path);
         } elseif ($this->_host && ($this->_query || $this->_fragment)) {
             $uri .= '/';
         }

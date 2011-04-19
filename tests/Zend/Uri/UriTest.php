@@ -92,6 +92,27 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that __toString() (magic) returns an empty string if URI is invalid
+     * 
+     * @dataProvider invalidUriObjectProvider
+     */
+    public function testMagicToStringEmptyIfInvalid(Uri $uri)
+    {
+        $this->assertEquals('', (string) $uri);
+    }
+    
+    /**
+     * Test that toString() (not magic) throws an exception if URI is invalid
+     * 
+     * @dataProvider invalidUriObjectProvider
+     * @expectedException \Zend\Uri\Exception\InvalidUriException
+     */
+    public function testToStringThrowsExceptionIfInvalid(Uri $uri)
+    {
+        echo $uri->toString();
+    }
+    
+    /**
      * Accessor Tests
      */
     
@@ -545,6 +566,31 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     
     /**
+     * Test that the copy constructor works
+     * 
+     * @dataProvider validUriStringProvider
+     */
+    public function testConstructorCopyExistingObject($uriString)
+    {
+        $uri = new Uri($uriString);
+        $uri2 = new Uri($uri);
+        
+        $this->assertEquals($uri, $uri2);
+    }
+    
+    /**
+     * Test that the constructor throws an exception on invalid input
+     * 
+     * @param mixed $input
+     * @dataProvider invalidConstructorInputProvider
+     * @expectedException \Zend\Uri\Exception\InvalidArgumentException
+     */
+    public function testConstructorInvalidInput($input)
+    {
+        $uri = new Uri($input);
+    }
+    
+    /**
      * Test the fluent interface
      * 
      * @param string $method
@@ -957,6 +1003,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
         return array(
             array('/a/b/c/./../../g',   '/a/g'),
             array('mid/content=5/../6', 'mid/6')
+        );
+    }
+    
+    static public function invalidConstructorInputProvider()
+    {
+        return array(
+            array(new \stdClass()),
+            array(false),
+            array(true),
+            array(array('scheme' => 'http')),
+            array(12)
         );
     }
 }

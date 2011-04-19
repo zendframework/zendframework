@@ -152,7 +152,7 @@ class Uri
             /**
              * @todo use a proper Exception class for Zend\Uri
              */
-            throw new \InvalidArgumentException('expecting a string or a URI object, got ' . gettype($uri));
+            throw new Exception\InvalidArgumentException('expecting a string or a URI object, got ' . gettype($uri));
         }
     }
 

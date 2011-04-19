@@ -25,7 +25,7 @@
 namespace ZendTest\File\Transfer\Adapter;
 
 use Zend\Loader\PrefixPathLoader,
-    Zend\Loader\ShortNameLocater,
+    Zend\Loader\ShortNameLocator,
     Zend\Validator\File,
     Zend\Filter,
     Zend\File\Transfer;
@@ -339,7 +339,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForFilters()
     {
         $loader = $this->adapter->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof ShortNameLocater);
+        $this->assertTrue($loader instanceof ShortNameLocator);
     }
 
     public function testFilterPluginLoaderShouldRegisterPathsForBaseAndFileFiltersByDefault()

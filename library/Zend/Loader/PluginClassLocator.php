@@ -13,23 +13,49 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
+ * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend;
+namespace Zend\Loader;
 
 /**
- * @uses       Exception
+ * Plugin class locator interface
+ *
  * @category   Zend
- * @package    Zend
+ * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Exception
+interface PluginClassLocator extends ShortNameLocator, \IteratorAggregate
 {
+    /**
+     * Register a class to a given short name
+     * 
+     * @param  string $shortName 
+     * @param  string $className 
+     * @return PluginClassLocator
+     */
+    public function registerPlugin($shortName, $className);
+
+    /**
+     * Unregister a short name lookup
+     * 
+     * @param mixed $shortName 
+     * @return void
+     */
+    public function unregisterPlugin($shortName);
+
+    /**
+     * Get a list of all registered plugins
+     * 
+     * @return array|Traversable
+     */
+    public function getRegisteredPlugins();
 }
+

@@ -21,10 +21,11 @@
 
 namespace ZendTest\File;
 
-use Zend\File\ClassFileLocater;
+use Zend\File\ClassFileLocator,
+    PHPUnit_Framework_TestCase as TestCase;
 
 /**
- * Test class for Zend\File\ClassFileLocater
+ * Test class for Zend\File\ClassFileLocator
  *
  * @category   Zend
  * @package    Zend_File
@@ -33,36 +34,36 @@ use Zend\File\ClassFileLocater;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_File
  */
-class ClassFileLocaterTest extends \PHPUnit_Framework_TestCase
+class ClassFileLocatorTest extends TestCase
 {
 
     public function testConstructorThrowsInvalidArgumentExceptionForInvalidStringDirectory()
     {
         $this->setExpectedException('Zend\File\Exception\InvalidArgumentException');
-        $locater = new ClassFileLocater('__foo__');
+        $locator = new ClassFileLocator('__foo__');
     }
 
     public function testConstructorThrowsInvalidArgumentExceptionForNonDirectoryIteratorArgument()
     {
         $iterator = new \ArrayIterator(array());
         $this->setExpectedException('Zend\File\Exception\InvalidArgumentException');
-        $locater = new ClassFileLocater($iterator);
+        $locator = new ClassFileLocator($iterator);
     }
 
     public function testIterationShouldReturnOnlyPhpFiles()
     {
-        $locater = new ClassFileLocater(__DIR__);
-        foreach ($locater as $file) {
+        $locator = new ClassFileLocator(__DIR__);
+        foreach ($locator as $file) {
             $this->assertRegexp('/\.php$/', $file->getFilename());
         }
     }
 
     public function testIterationShouldReturnOnlyPhpFilesContainingClasses()
     {
-        $locater = new ClassFileLocater(__DIR__);
+        $locator = new ClassFileLocator(__DIR__);
         $found = false;
-        foreach ($locater as $file) {
-            if (preg_match('/locater-should-skip-this\.php$/', $file->getFilename())) {
+        foreach ($locator as $file) {
+            if (preg_match('/locator-should-skip-this\.php$/', $file->getFilename())) {
                 $found = true;
             }
         }
@@ -71,30 +72,30 @@ class ClassFileLocaterTest extends \PHPUnit_Framework_TestCase
 
     public function testIterationShouldReturnInterfaces()
     {
-        $locater = new ClassFileLocater(__DIR__);
+        $locator = new ClassFileLocator(__DIR__);
         $found = false;
-        foreach ($locater as $file) {
-            if (preg_match('/LocaterShouldFindThis\.php$/', $file->getFilename())) {
+        foreach ($locator as $file) {
+            if (preg_match('/LocatorShouldFindThis\.php$/', $file->getFilename())) {
                 $found = true;
             }
         }
-        $this->assertTrue($found, "Locater skipped an interface?");
+        $this->assertTrue($found, "Locator skipped an interface?");
     }
 
     public function testIterationShouldInjectNamespaceInFoundItems()
     {
-        $locater = new ClassFileLocater(__DIR__);
+        $locator = new ClassFileLocator(__DIR__);
         $found = false;
-        foreach ($locater as $file) {
+        foreach ($locator as $file) {
             $this->assertTrue(isset($file->namespace));
         }
     }
 
     public function testIterationShouldInjectClassInFoundItems()
     {
-        $locater = new ClassFileLocater(__DIR__);
+        $locator = new ClassFileLocator(__DIR__);
         $found = false;
-        foreach ($locater as $file) {
+        foreach ($locator as $file) {
             $this->assertTrue(isset($file->classname));
         }
     }

@@ -65,7 +65,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testGetAndSetCloudDecorator()
     {
         $cloud = $this->_getCloud();
-        $this->assertTrue($cloud->getCloudDecorator() instanceof \Zend\Tag\Cloud\Decorator\HTMLCloud);
+        $this->assertTrue($cloud->getCloudDecorator() instanceof \Zend\Tag\Cloud\Decorator\HtmlCloud);
 
         $cloud->setCloudDecorator(new TestAsset\CloudDummy());
         $this->assertTrue($cloud->getCloudDecorator() instanceof TestAsset\CloudDummy);
@@ -95,7 +95,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testGetAndSetTagDecorator()
     {
         $cloud = $this->_getCloud();
-        $this->assertTrue($cloud->getTagDecorator() instanceof \Zend\Tag\Cloud\Decorator\HTMLTag);
+        $this->assertTrue($cloud->getTagDecorator() instanceof \Zend\Tag\Cloud\Decorator\HtmlTag);
 
         $cloud->setTagDecorator(new TestAsset\TagDummy());
         $this->assertTrue($cloud->getTagDecorator() instanceof TestAsset\TagDummy);

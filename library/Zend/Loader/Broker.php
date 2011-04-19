@@ -75,15 +75,15 @@ interface Broker
     /**
      * Set class loader to use when resolving plugin names to classes
      * 
-     * @param  ShortNameLocater $loader 
+     * @param  ShortNameLocator $loader 
      * @return void
      */
-    public function setClassLoader(ShortNameLocater $loader);
+    public function setClassLoader(ShortNameLocator $loader);
 
     /**
      * Retrieve the plugin class loader
      * 
-     * @return ShortNameLocater
+     * @return ShortNameLocator
      */
     public function getClassLoader();
 }

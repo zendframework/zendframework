@@ -83,7 +83,7 @@ class Partial extends AbstractHelper
                 throw $e;
             }
             $viewsDir = dirname($moduleDir) . '/views';
-            $view->addBasePath($viewsDir);
+            $view->resolver()->addPath($viewsDir . '/scripts');
         } elseif ((null == $model) && (null !== $module)
             && (is_array($module) || is_object($module)))
         {

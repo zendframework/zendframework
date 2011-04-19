@@ -303,10 +303,10 @@ class Breadcrumbs extends AbstractHelper
                 throw $e;
             }
 
-            return $this->view->partial($partial[0], $partial[1], $model);
+            return $this->view->broker('partial')->direct($partial[0], $partial[1], $model);
         }
 
-        return $this->view->partial($partial, null, $model);
+        return $this->view->broker('partial')->direct($partial, null, $model);
     }
 
     // Zend\View\Helper\Navigation\Helper:

@@ -22,7 +22,11 @@
 * @namespace
 */
 namespace Zend\Feed\Writer;
-use Zend\Loader;
+
+use Zend\Loader\ShortNameLocator,
+    Zend\Loader\PrefixPathLoader,
+    Zend\Loader\PrefixPathMapper,
+    Zend\Loader\Exception\PluginLoaderException;
 
 /**
 * @uses \Zend\Feed\Exception
@@ -64,7 +68,7 @@ class Writer
     /**
      * PluginLoader instance used by component
      *
-     * @var \Zend\Loader\ShortNameLocater
+     * @var \Zend\Loader\ShortNameLocator
      */
     protected static $_pluginLoader = null;
 
@@ -92,9 +96,9 @@ class Writer
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  \Zend\Loader\ShortNameLocater
+     * @param  \Zend\Loader\ShortNameLocator
      */
-    public static function setPluginLoader(ShortNameLocater $loader)
+    public static function setPluginLoader(ShortNameLocator $loader)
     {
         self::$_pluginLoader = $loader;
     }
@@ -102,12 +106,12 @@ class Writer
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  \Zend\Loader\ShortNameLocater
+     * @return  \Zend\Loader\ShortNameLocator
      */
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            self::$_pluginLoader = new Loader\PluginLoader(array(
+            self::$_pluginLoader = new PrefixPathLoader(array(
                 'Zend\\Feed\\Writer\\Extension\\' => 'Zend/Feed/Writer/Extension/',
             ));
         }
@@ -124,7 +128,7 @@ class Writer
     public static function addPrefixPath($prefix, $path)
     {
         $pluginLoader = self::getPluginLoader();
-        if (!$pluginLoader instanceof Loader\PrefixPathMapper)  {
+        if (!$pluginLoader instanceof PrefixPathMapper)  {
             return;
         }
         $prefix = rtrim($prefix, '\\');
@@ -141,7 +145,7 @@ class Writer
     public static function addPrefixPaths(array $spec)
     {
         $pluginLoader = self::getPluginLoader();
-        if (!$pluginLoader instanceof Loader\PrefixPathMapper)  {
+        if (!$pluginLoader instanceof PrefixPathMapper)  {
             return;
         }
         if (isset($spec['prefix']) && isset($spec['path'])) {
@@ -163,46 +167,43 @@ class Writer
      */
     public static function registerExtension($name)
     {
-        $feedName  = $name . '\\Feed';
-        $entryName = $name . '\\Entry';
-        $feedRendererName  = $name . '\\Renderer\\Feed';
-        $entryRendererName = $name . '\\Renderer\\Entry';
+        $feedName          = $name . '\Feed';
+        $entryName         = $name . '\Entry';
+        $feedRendererName  = $name . '\Renderer\Feed';
+        $entryRendererName = $name . '\Renderer\Entry';
+        $loader            = self::getPluginLoader();
         if (self::isRegistered($name)) {
-            if (self::getPluginLoader()->isLoaded($feedName)
-                || self::getPluginLoader()->isLoaded($entryName)
-                || self::getPluginLoader()->isLoaded($feedRendererName)
-                || self::getPluginLoader()->isLoaded($entryRendererName)
+            if ($loader->isLoaded($feedName)
+                || $loader->isLoaded($entryName)
+                || $loader->isLoaded($feedRendererName)
+                || $loader->isLoaded($entryRendererName)
             ) {
                 return;
             }
         }
-        try {
-            self::getPluginLoader()->load($feedName);
-            self::$_extensions['feed'][] = $feedName;
-        } catch (Loader\PluginLoaderException $e) {
-        }
-        try {
-            self::getPluginLoader()->load($entryName);
-            self::$_extensions['entry'][] = $entryName;
-        } catch (Loader\PluginLoaderException $e) {
-        }
-        try {
-            self::getPluginLoader()->load($feedRendererName);
-            self::$_extensions['feedRenderer'][] = $feedRendererName;
-        } catch (Loader\PluginLoaderException $e) {
-        }
-        try {
-            self::getPluginLoader()->load($entryRendererName);
-            self::$_extensions['entryRenderer'][] = $entryRendererName;
-        } catch (Loader\PluginLoaderException $e) {
-        }
-        if (!self::getPluginLoader()->isLoaded($feedName)
-            && !self::getPluginLoader()->isLoaded($entryName)
-            && !self::getPluginLoader()->isLoaded($feedRendererName)
-            && !self::getPluginLoader()->isLoaded($entryRendererName)
+        $loader->load($feedName);
+        $loader->load($entryName);
+        $loader->load($feedRendererName);
+        $loader->load($entryRendererName);
+        if (!$loader->isLoaded($feedName)
+            && !$loader->isLoaded($entryName)
+            && !$loader->isLoaded($feedRendererName)
+            && !$loader->isLoaded($entryRendererName)
         ) {
             throw new Exception('Could not load extension: ' . $name
                 . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
+        }
+        if ($loader->isLoaded($feedName)) {
+            self::$_extensions['feed'][] = $feedName;
+        }
+        if ($loader->isLoaded($entryName)) {
+            self::$_extensions['entry'][] = $entryName;
+        }
+        if ($loader->isLoaded($feedRendererName)) {
+            self::$_extensions['feedRenderer'][] = $feedRendererName;
+        }
+        if ($loader->isLoaded($entryRendererName)) {
+            self::$_extensions['entryRenderer'][] = $entryRendererName;
         }
     }
 

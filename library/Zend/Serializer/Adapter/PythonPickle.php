@@ -174,10 +174,11 @@ class PythonPickle extends AbstractAdapter
     {
         switch ($name) {
             case 'protocol':
-                $value = $this->_checkProtocolNumber($value);
-                if ($value === false) {
-                    throw new InvalidArgumentException("Invalid or unknown protocol version '{$number}'");
+                $number = $this->_checkProtocolNumber($value);
+                if ($number === false) {
+                    throw new InvalidArgumentException("Invalid or unknown protocol version '{$value}'");
                 }
+                $value = $number;
                 break;
         }
 

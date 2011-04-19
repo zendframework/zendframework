@@ -1,10 +1,10 @@
 <?php
-$isContainer = $this->container instanceof \Zend\Navigation\Container
+$isContainer = $this->vars('container') instanceof \Zend\Navigation\Container
              ? 'yes'
              : 'no';
 
 $pages = array();
-foreach ($this->container as $page) {
+foreach ($this->vars('container') as $page) {
     $pages[] = $page->getLabel();
 }
 $pages = implode(', ', $pages);

@@ -724,19 +724,6 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Data provider for invalid URIs 
-     * 
-     * @return array
-     */
-    static public function invalidUriStringProvider()
-    {
-        return array(
-            array(':path'),
-            array(null)
-        );
-    }
-    
-    /**
      * Data provider for invalid URI objects
      * 
      * @return array

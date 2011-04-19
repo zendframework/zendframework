@@ -354,7 +354,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
      */
-    public function testValidSchemeInvalid($scheme)
+    public function testValidateSchemeInvalid($scheme)
     {
         $this->assertFalse(Uri::validateScheme($scheme));
     }
@@ -379,6 +379,51 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testValiteHostInvalid($host)
     {
         $this->assertFalse(Uri::validateHost($host));
+    }
+    
+    /**
+     * Check that valid paths are valid according to validatePath()
+     * 
+     * @param string $path
+     * @dataProvider validPathProvider
+     */
+    public function testValidatePathValid($path)
+    {
+        $this->assertTrue(Uri::validatePath($path));
+    }
+    
+    /**
+     * Check that invalid paths are invalid according to validatePath()
+     * 
+     * @param string $path
+     * @dataProvider invalidPathProvider
+     */
+    public function testValidatePathInvalid($path)
+    {
+        $this->assertFalse(Uri::validatePath($path));
+    }
+    
+    /**
+     * Test that valid path parts are unchanged by the 'encode' function
+     * 
+     * @param string $path
+     * @dataProvider validPathProvider
+     */
+    public function testEncodePathValid($path)
+    {
+        $this->assertEquals($path, Uri::encodePath($path));
+    }
+    
+    /**
+     * Test that invalid path parts are properly encoded by the 'encode' function
+     * 
+     * @param string $path
+     * @param string $exp
+     * @dataProvider invalidPathProvider
+     */
+    public function testEncodePathInvalid($path, $exp)
+    {
+        $this->assertEquals($exp, Uri::encodePath($path));
     }
     
     /**
@@ -876,6 +921,34 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('with space'),
             array('[]'),
             array('[12:34'),
+        );
+    }
+    
+    static public function validPathProvider()
+    {
+        return array(
+            array(''),
+            array('/'),
+            array(':'),
+            array('/foo/bar'),
+            array('foo/bar'),
+            array('/foo;arg2=1&arg2=2/bar;baz/bla'),
+            array('foo'),
+            array('example.com'),
+            array('some-path'),
+            array('foo:bar'),
+            array('C:/Program%20Files/Zend'),
+        );
+    }
+    
+    static public function invalidPathProvider()
+    {
+        return array(
+            array('?', '%3F'),
+            array('/#', '/%23'),
+            
+            // See http://framework.zend.com/issues/browse/ZF-11286
+            array('Giri%C5%9F Sayfas%C4%B1.aspx', 'Giri%C5%9F%20Sayfas%C4%B1.aspx') 
         );
     }
     

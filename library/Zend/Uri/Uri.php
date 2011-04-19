@@ -729,7 +729,10 @@ class Uri
      */
     static public function validatePath($path)
     {
-        throw new \Exception("Implelemt me!");
+        $pchar = '(?:[' . self::CHAR_UNRESERVED . ':@&=\+\$,]+|%[A-Fa-f0-9]{2})*';
+        $segment = $pchar . "(?:;{$pchar})*";
+        $regex = "/^{$segment}(?:\/{$segment})*$/";
+        return (boolean) preg_match($regex, $path);
     }
 
     /**
@@ -773,13 +776,26 @@ class Uri
     
     /**
      * Encode the path
+     * 
+     * Will replace all characters which are not strictly allowed in the path
+     * part with percent-encoded representation
      *  
      * @param  string $path
      * @return string
      */
     static public function encodePath($path)
     {
-        throw new \Exception("Implelemt me!");
+        if (! is_string($path)) {
+            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($path));
+        }   
+        
+        $regex = '/(?:[^' . self::CHAR_UNRESERVED . ':@&=\+\$,\/;%]+|%(?![A-Fa-f0-9]{2}))/';
+         
+        $replace = function($match) {
+            return rawurlencode($match[0]);
+        };
+        
+        return preg_replace_callback($regex, $replace, $path);
     }
     
     /**

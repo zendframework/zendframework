@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5060 $"/>
+		<generation date="$Date: 2010-09-12 17:15:40 -0500 (Sun, 12 Sep 2010) $" />
+		<language type="haw" /> 
+	</identity>
+		<collations validSubLocales="haw_US">
+			<collation type="standard" >
+				<rules>
+					<reset>a</reset>
+					<pc>eiouhklmnpwʻ</pc>
+					<reset>a</reset>
+					<t>A</t>
+					<reset>e</reset>
+					<t>E</t>
+					<reset>i</reset>
+					<t>I</t>
+					<reset>o</reset>
+					<t>O</t>
+					<reset>u</reset>
+					<t>U</t>
+					<reset>h</reset>
+					<t>H</t>
+					<reset>k</reset>
+					<t>K</t>
+					<reset>l</reset>
+					<t>L</t>
+					<reset>m</reset>
+					<t>M</t>
+					<reset>n</reset>
+					<t>N</t>
+					<reset>p</reset>
+					<t>P</t>
+					<reset>w</reset>
+					<t>W</t>
+				</rules>
+			</collation>
+		</collations>
+</ldml>

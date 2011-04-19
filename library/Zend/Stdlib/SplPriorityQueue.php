@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,20 +23,43 @@
  */
 namespace Zend\Stdlib;
 
+use Serializable;
+
 /**
  * Serializable version of SplPriorityQueue
  *
+ * Also, provides predictable heap order for datums added with the same priority
+ * (i.e., they will be emitted in the same order they are enqueued).
+ *
  * @category   Zend
  * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SplPriorityQueue extends \SplPriorityQueue
+class SplPriorityQueue extends \SplPriorityQueue implements Serializable
 {
     /**
-     * @var array Used for serialization
+     * @var int Seed used to ensure queue order for items of the same priority
      */
-    private $_data = array();
+    protected $serial = PHP_INT_MAX;
+
+    /**
+     * Insert a value with a given priority
+     *
+     * Utilizes {@var $serial} to ensure that values of equal priority are 
+     * emitted in the same order in which they are inserted.
+     * 
+     * @param  mixed $datum 
+     * @param  mixed $priority 
+     * @return void
+     */
+    public function insert($datum, $priority)
+    {
+        if (!is_array($priority)) {
+            $priority = array($priority, $this->serial--);
+        }
+        parent::insert($datum, $priority);
+    }
 
     /**
      * Serialize to an array
@@ -63,7 +86,7 @@ class SplPriorityQueue extends \SplPriorityQueue
         // Return only the data
         $return = array();
         foreach ($array as $item) {
-            $return[$item['priority']] = $item['data'];
+            $return[] = $item['data'];
         }
 
         return $return;
@@ -72,36 +95,36 @@ class SplPriorityQueue extends \SplPriorityQueue
     /**
      * Serialize
      * 
-     * @return array
+     * @return string
      */
-    public function __sleep()
+    public function serialize()
     {
-        $this->_data = array();
+        $data = array();
         $this->setExtractFlags(self::EXTR_BOTH);
         while ($this->valid()) {
-            $this->_data[] = $this->current();
+            $data[] = $this->current();
             $this->next();
         }
         $this->setExtractFlags(self::EXTR_DATA);
 
         // Iterating through a priority queue removes items
-        foreach ($this->_data as $item) {
+        foreach ($data as $item) {
             $this->insert($item['data'], $item['priority']);
         }
 
-        return array('_data');
+        return serialize($data);
     }
 
     /**
      * Deserialize
      * 
+     * @param  string $data
      * @return void
      */
-    public function __wakeup()
+    public function unserialize($data)
     {
-        foreach ($this->_data as $item) {
+        foreach (unserialize($data) as $item) {
             $this->insert($item['data'], $item['priority']);
         }
-        $this->_data = array();
     }
 }

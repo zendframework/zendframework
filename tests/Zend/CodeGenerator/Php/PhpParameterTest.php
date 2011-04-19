@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,13 +23,14 @@
  * @namespace
  */
 namespace ZendTest\CodeGenerator\Php;
+
 use Zend\CodeGenerator\Php;
 
 /**
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group Zend_CodeGenerator
@@ -69,7 +70,7 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
     {
         $value = new Php\PhpParameterDefaultValue(array('value'=>'Foo','type'=>'constant'));
         $this->_parameter->setDefaultValue($value);
-        $this->assertEquals('Foo;', (string) $this->_parameter->getDefaultValue());
+        $this->assertEquals('Foo', (string) $this->_parameter->getDefaultValue());
     }
 
     public function testPositionGetterAndSetterPersistValue()
@@ -119,7 +120,7 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
         $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
 
         $defaultValue = $codeGenParam->getDefaultValue();
-        $this->assertEquals('\'foo\';', (string) $defaultValue);
+        $this->assertEquals('\'foo\'', (string) $defaultValue);
     }
 
     public function testFromReflectionGetArrayHint()

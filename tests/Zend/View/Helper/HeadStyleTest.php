@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ use Zend\View;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -423,5 +423,19 @@ a {
 
         $this->assertEquals($expected, $test);
     }
-}
 
+    /**
+     * @group ZF-9532
+     */
+    public function testRenderConditionalCommentsShouldNotContainHtmlEscaping()
+    {
+        $style = 'a{display:none;}';
+        $this->helper->appendStyle($style, array(
+        	'conditional' => 'IE 8'
+        ));
+        $value = $this->helper->toString();
+
+        $this->assertNotContains('<!--' . PHP_EOL, $value);
+        $this->assertNotContains(PHP_EOL . '-->', $value);
+    }
+}

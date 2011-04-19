@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_HTML
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,9 @@
 namespace Zend\Markup\Renderer\Markup\Html;
 
 use Zend\Markup\Renderer\Markup\AbstractMarkup,
-    Zend\Markup;
+    Zend\Markup,
+    Zend\Filter\HtmlEntities as HtmlEntitiesFilter,
+    Zend\Filter\Callback as CallbackFilter;
 
 /**
  * Abstract markup
@@ -35,11 +37,25 @@ use Zend\Markup\Renderer\Markup\AbstractMarkup,
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractHtml extends AbstractMarkup
 {
+
+    /**
+     * Constructor, adds default filters for the filter chain
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->addFilter(new HtmlEntitiesFilter(array(
+            'encoding'   => $this->getEncoding(),
+            'quotestyle' => ENT_QUOTES
+        )));
+        $this->addFilter(new CallbackFilter('nl2br'));
+    }
 
     /**
      * Attributes for this markup
@@ -96,7 +112,6 @@ abstract class AbstractHtml extends AbstractMarkup
      * Render some attributes
      *
      * @param  \Zend\Markup\Token $token
-     * @param  array $attributes
      * @return string
      */
     public function renderAttributes(Markup\Token $token)

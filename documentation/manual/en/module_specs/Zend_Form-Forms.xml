@@ -1217,7 +1217,7 @@ $name = $form->getName();
 
         <para>
             To set the action (url to which the form submits) and method (method
-            by which it should submit, e.g., 'POST' or 'GET'), use the action
+            by which it should submit, e.g., 'POST' or '<constant>GET</constant>'), use the action
             and method accessors:
         </para>
 

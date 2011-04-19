@@ -1,0 +1,1 @@
+{"A":{"_extends":"C","someKey":"value_A"},"B":{"_extends":"A","someKey":"value_B"},"C":{"_extends":"B","someKey":"value_C"}}

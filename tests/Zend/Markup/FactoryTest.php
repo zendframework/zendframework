@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Markup;
  * @package    Zend_Markup
  * @subpackage UnitTests
  * @group      Zend_Markup
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FactoryTest extends \PHPUnit_Framework_TestCase
@@ -44,7 +44,10 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $rendererBroker = Markup\Markup::getRendererBroker();
         $rendererBroker->getClassLoader()->registerPlugin('mockrenderer', 'ZendTest\Markup\TestAsset\Renderer\MockRenderer');
 
-        Markup\Markup::factory('MockParser', 'MockRenderer');
+        $renderer = Markup\Markup::factory('MockParser', 'MockRenderer');
+
+        $this->assertType('ZendTest\Markup\TestAsset\Renderer\MockRenderer', $renderer);
+        $this->assertType('ZendTest\Markup\TestAsset\Parser\MockParser', $renderer->getParser());
     }
 
 }

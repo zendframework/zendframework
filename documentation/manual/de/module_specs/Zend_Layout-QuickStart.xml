@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22432 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout Schnellstart</title>
@@ -121,7 +121,8 @@ Zend_Layout::startMvc();
         <para>
             <methodname>startMvc()</methodname> kann ein optionales Array von Optionen oder ein
             <classname>Zend_Config</classname> Objekt entgegennehmen um die Instanz anzupassen;
-            diese Optionen werden detailiert in <xref linkend="zend.layout.options" /> beschrieben.
+            diese Optionen werden detailiert in <link linkend="zend.layout.options">diesem
+                Abschnitt</link> beschrieben.
         </para>
 
         <para>

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use \Zend\Log\Logger,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -47,15 +47,15 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($filter->accept(array('message' => 'foo accept bar')));
         $this->assertFalse($filter->accept(array('message' => 'foo reject bar')));
     }
-    
+
     public function testFactory()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName'   => "Mock", 
-            'filterName'   => "Message", 
+            'writerName'   => "Mock",
+            'filterName'   => "Message",
             'filterParams' => array(
-                'regexp'   => "/42/" 
-             ),        
+                'regexp'   => "/42/"
+             ),
         )));
 
         $logger = Logger::factory($cfg['log']);
@@ -65,11 +65,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithConfig()
     {
         $config = new Config(array('log' => array('memory' => array(
-            'writerName'   => "Mock", 
-            'filterName'   => "Message", 
+            'writerName'   => "Mock",
+            'filterName'   => "Message",
             'filterParams' => array(
-                'regexp'   => "/42/" 
-             ),        
+                'regexp'   => "/42/"
+             ),
         ))));
 
         $filter = Message::factory($config->log->memory->filterParams);

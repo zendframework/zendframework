@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend_Translator
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,21 +24,19 @@
 namespace Zend\Translator\Adapter;
 
 use Zend\Translator\Adapter as TranslationAdapter,
-	Zend\Translator\Adapter\Exception\InvalidArgumentException;
+    Zend\Translator\Adapter\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Translator\Adapter\Adapter
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
- * @package    Zend_Translate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend_Translator
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Csv extends TranslationAdapter
 {
-    private $_data    = array();
-
     /**
      * Generates the adapter
      *
@@ -84,7 +82,7 @@ class Csv extends TranslationAdapter
      */
     protected function _loadTranslationData($filename, $locale, array $options = array())
     {
-        $this->_data = array();
+        $result = array();
         $options     = $options + $this->_options;
         $this->_file = @fopen($filename, 'rb');
         if (!$this->_file) {
@@ -101,14 +99,14 @@ class Csv extends TranslationAdapter
             }
 
             if (count($data) == 2) {
-                $this->_data[$locale][$data[0]] = $data[1];
+                $result[$locale][$data[0]] = $data[1];
             } else {
                 $singular = array_shift($data);
-                $this->_data[$locale][$singular] = $data;
+                $result[$locale][$singular] = $data;
             }
         }
 
-        return $this->_data;
+        return $result;
     }
 
     /**

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Loader\Broker,
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InputFilter
@@ -605,7 +605,7 @@ class InputFilter
                     if (is_string($filter) || is_array($filter)) {
                         $filter = $this->_getFilter($filter);
                     }
-                    $filterRule[self::FILTER_CHAIN]->addFilter($filter);
+                    $filterRule[self::FILTER_CHAIN]->attach($filter);
                 }
             }
 

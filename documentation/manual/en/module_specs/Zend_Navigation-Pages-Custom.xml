@@ -12,12 +12,12 @@
         <methodname>setOptions()</methodname> or <methodname>setConfig()</methodname> respectively.
         Those methods will in turn call <methodname>set()</methodname> method, which
         will map options to native or custom properties. If the option
-        <code>internal_id</code> is given, the method will first look for a
+        <property>internal_id</property> is given, the method will first look for a
         method named <methodname>setInternalId()</methodname>, and pass the option to this
         method if it exists. If the method does not exist, the option will be
         set as a custom property of the page, and be accessible via
-        <code>$internalId = $page->internal_id;</code> or
-        <code>$internalId = $page->get('internal_id');</code>.
+        <command>$internalId = $page->internal_id;</command> or
+        <command>$internalId = $page->get('internal_id');</command>.
     </para>
 
     <example id="zend.navigation.custom.example.simple">

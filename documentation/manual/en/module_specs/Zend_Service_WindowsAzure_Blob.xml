@@ -173,7 +173,7 @@ $storageClient->setContainerAcl(
         <para>
             Windows Azure Blob Storage provides support to work with a "root container".
             This means that a blob can be stored in the root of your storage account,
-            i.e. <code>http://myaccount.blob.core.windows.net/somefile.txt</code>.
+            i.e. <filename>http://myaccount.blob.core.windows.net/somefile.txt</filename>.
         </para>
 
         <para>

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Application,
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
@@ -165,5 +165,24 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->bootstrap->run();
         $this->assertTrue($result instanceof \Zend\Controller\Response\AbstractResponse);
+    }
+
+    public function testFrontControllerSpecShouldNotBeOverwrittenByBootstrap()
+    {
+        $application = new Application\Application('testing', array(
+            'resources' => array(
+                'frontcontroller' => array(
+                    'controllerDirectory' => __DIR__ . '/TestAsset/modules/application/controllers',
+                    'moduleDirectory' => __DIR__ . '/TestAsset/modules',
+                ),
+                'modules' => array(),
+            ),
+        ));
+        $bootstrap = new Application\Bootstrap($application);
+        $bootstrap->bootstrap();
+        $front  = $bootstrap->getResource('frontcontroller');
+        $module = $front->getDefaultModule();
+        $dir    = $front->getControllerDirectory($module);
+        $this->assertNotNull($dir);
     }
 }

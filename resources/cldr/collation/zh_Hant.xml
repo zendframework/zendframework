@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4126 $"/>
+		<generation date="$Date: 2009-05-05 18:33:13 -0500 (Tue, 05 May 2009) $"/>
+		<language type="zh" /> 
+		<script type="Hant" /> 
+	</identity>
+		<collations validSubLocales="zh_Hant_HK zh_Hant_MO zh_Hant_TW">
+			<default type="stroke"/>
+		</collations>
+</ldml>

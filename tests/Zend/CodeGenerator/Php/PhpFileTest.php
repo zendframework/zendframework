@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Reflection;
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group Zend_CodeGenerator
@@ -128,11 +128,10 @@ EOS;
 <?php
 /**
  * File header here
- * 
+ *
  * @author Ralph Schindler <ralph.schindler@zend.com>
- * 
+ *
  */
-
 
 /**
  * @namespace
@@ -141,18 +140,18 @@ namespace ZendTest\CodeGenerator\Php\TestAsset;
 
 /**
  * class docblock
- * 
+ *
  * @package Zend_Reflection_TestSampleSingleClass
- * 
+ *
  */
 class TestSampleSingleClass
 {
 
     /**
      * Enter description here...
-     * 
+     *
      * @return bool
-     * 
+     *
      */
     public function someMethod()
     {
@@ -167,12 +166,8 @@ class TestSampleSingleClass
 }
 
 
-
-
 EOS;
-
         $this->assertEquals($expectedOutput, $codeGenFileFromDisk->generate());
-
     }
 
     public function testFileLineEndingsAreAlwaysLineFeed()
@@ -195,4 +190,26 @@ EOS;
         $this->assertEquals(';', $lines[2]{$targetLength-1});
     }
 
+    /**
+     * @group ZF-11218
+     */
+    public function testGeneratesUseStatements()
+    {
+        $file = new Php\PhpFile();
+        $file->setUse('My\Baz')
+             ->setUses(array(
+                 array('Your\Bar', 'bar'),
+             ));
+        $generated = $file->generate();
+        $this->assertContains('use My\\Baz;', $generated);
+        $this->assertContains('use Your\\Bar as bar;', $generated);
+    }
+
+    public function testGeneratesNamespaceStatements()
+    {
+        $file = new Php\PhpFile();
+        $file->setNamespace('Foo\Bar');
+        $generated = $file->generate();
+        $this->assertContains('namespace Foo\\Bar', $generated, $generated);
+    }
 }

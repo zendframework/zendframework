@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormReset extends FormElement
@@ -64,19 +64,19 @@ class FormReset extends FormElement
 
         // get closing tag
         $endTag = '>';
-        if ($this->view->doctype()->isXhtml()) {
+        if ($this->view->broker('doctype')->isXhtml()) {
             $endTag = ' />';
         }
 
         // Render button
         $xhtml = '<input type="reset"'
-               . ' name="' . $this->view->escape($name) . '"'
-               . ' id="' . $this->view->escape($id) . '"'
+               . ' name="' . $this->view->vars()->escape($name) . '"'
+               . ' id="' . $this->view->vars()->escape($id) . '"'
                . $disabled;
 
         // add a value if one is given
         if (! empty($value)) {
-            $xhtml .= ' value="' . $this->view->escape($value) . '"';
+            $xhtml .= ' value="' . $this->view->vars()->escape($value) . '"';
         }
 
         // add attributes, close, and return

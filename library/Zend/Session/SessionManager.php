@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,14 +24,14 @@
 namespace Zend\Session;
 
 use Zend\Validator\Alnum as AlnumValidator,
-    Zend\SignalSlot\SignalSlot;
+    Zend\EventManager\EventCollection;
 
 /**
  * Session Manager implementation utilizing ext/session
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SessionManager extends AbstractManager
@@ -63,7 +63,7 @@ class SessionManager extends AbstractManager
     protected $_name;
 
     /**
-     * @var SignalSlot Validation chain to determine if session is valid
+     * @var EventCollection Validation chain to determine if session is valid
      */
     protected $_validatorChain;
 
@@ -298,10 +298,10 @@ class SessionManager extends AbstractManager
      *
      * In most cases, you should use an instance of {@link ValidatorChain}.
      * 
-     * @param  SignalSlot $chain 
+     * @param  EventCollection $chain 
      * @return SessionManager
      */
-    public function setValidatorChain(SignalSlot $chain)
+    public function setValidatorChain(EventCollection $chain)
     {
         $this->_validatorChain = $chain;
         return $this;
@@ -333,13 +333,15 @@ class SessionManager extends AbstractManager
     public function isValid()
     {
         $validator = $this->getValidatorChain();
-        $responses = $validator->emitUntil(function($test) {
+        $responses = $validator->triggerUntil('session.validate', $this, array($this), function($test) {
             return !$test;
-        }, 'session.validate');
-        if (null === $responses->last()) {
-            return true;
+        });
+        if ($responses->stopped()) {
+            // If execution was halted, validation failed
+            return false;
         }
-        return (bool) $responses->last();
+        // Otherwise, we're good to go
+        return true;
     }
 
     /**

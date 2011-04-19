@@ -14,15 +14,17 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
  
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Feed;
-use Zend\Feed\Reader;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Exception;
 
 /**
 * @uses \Zend\Feed\Exception
@@ -30,7 +32,7 @@ use Zend\Feed\Reader;
 * @uses \Zend\Feed\Reader\Feed
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 abstract class AbstractFeed implements Reader\Feed
@@ -291,13 +293,18 @@ abstract class AbstractFeed implements Reader\Feed
 
     protected function _loadExtensions()
     {
-        $all = Reader\Reader::getExtensions();
+        $all  = Reader\Reader::getExtensions();
         $feed = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
-            $className = Reader\Reader::getPluginLoader()->getClassName($extension);
+            if (!$className = Reader\Reader::getPluginLoader()->getClassName($extension)) {
+                continue;
+            }
+            if (!class_exists($className)) {
+                throw new Exception(sprintf('Unable to load extension "%s"; cannot find class', $extension));
+            }
             $this->_extensions[$extension] = new $className(
                 $this->getDomDocument(), $this->_data['type'], $this->_xpath
             );

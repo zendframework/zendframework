@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5060 $"/>
+		<generation date="$Date: 2010-09-12 17:15:40 -0500 (Sun, 12 Sep 2010) $"/>
+		<language type="el" /> 
+	</identity>
+		<collations  validSubLocales="el_CY el_GR">
+			<collation type="standard" >
+				<settings normalization="on"  />
+			</collation  >
+		</collations>
+</ldml>

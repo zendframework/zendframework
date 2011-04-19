@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\Cache;
  * @package    Zend_Cache
  * @subpackage UnitTests
  * @group      Zend_Cache
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ManagerTest extends \PHPUnit_Framework_TestCase
@@ -222,7 +222,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $tagCacheConfig['backend']['options']['cache_dir'] = $this->getTmpDir();
         $manager->setTemplateOptions('pagetag', $tagCacheConfig);
         $tagCache = $manager->getCache('page')->getBackend()->getOption('tag_cache');
-        $this->assertTrue($tagCache instanceof Cache\Core);
+        $this->assertTrue($tagCache instanceof Cache\Frontend\Core);
     }
 
     // Helper Methods

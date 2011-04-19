@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,9 @@
 namespace Zend\Markup\Renderer\Markup;
 
 use Zend\Markup\Renderer\Markup,
-    Zend\Markup\Renderer\AbstractRenderer;
+    Zend\Markup\Renderer\AbstractRenderer,
+    Zend\Filter\Filter,
+    Zend\Filter\FilterChain;
 
 /**
  * Abstract markup
@@ -35,7 +37,7 @@ use Zend\Markup\Renderer\Markup,
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractMarkup implements Markup
@@ -53,7 +55,14 @@ abstract class AbstractMarkup implements Markup
      *
      * @var string
      */
-    protected $_encoding;
+    protected $_encoding = 'UTF-8';
+
+    /**
+     * Chain filter
+     *
+     * @var \Zend\Filter\FilterChain
+     */
+    protected $_filter;
 
 
     /**
@@ -104,5 +113,47 @@ abstract class AbstractMarkup implements Markup
     public function getRenderer()
     {
         return $this->_renderer;
+    }
+
+    /**
+     * Get the filter chain
+     *
+     * @return \Zend\Filter\FilterChain
+     */
+    public function getFilterChain()
+    {
+        if (null === $this->_filter) {
+            $this->_filter = new FilterChain();
+        }
+
+        return $this->_filter;
+    }
+
+    /**
+     * Adds a filter to the chain
+     *
+     * @param  \Zend\Filter\Filter $filter
+     * @param  int $priority Priority at which to add filter; higher numbers are executed earlier. Defaults to 0
+     * @return \Zend\Markup\Renderer\AbstractMarkup
+     */
+    public function addFilter(Filter $filter, $priority = 0)
+    {
+        $this->getFilterChain()->attach($filter, $priority);
+
+        return $this;
+    }
+
+    /**
+     * Filter
+     * 
+     * @param string $value
+     *
+     * @return string
+     */
+    public function filter($value)
+    {
+        // ok, __invoke() simply looks confusing in this case, better use the
+        // filter() method on the Filter Chain
+        return $this->getFilterChain()->filter($value);
     }
 }

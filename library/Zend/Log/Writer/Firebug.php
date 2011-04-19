@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,14 +36,14 @@ use Zend\Wildfire\Plugin\FirePhp;
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Firebug extends AbstractWriter
 {
-
     /**
      * Maps logging priorities to logging display styles
+     *
      * @var array
      */
     protected $_priorityStyles = array(Log\Logger::EMERG  => FirePhp::ERROR,
@@ -57,18 +57,22 @@ class Firebug extends AbstractWriter
 
     /**
      * The default logging style for un-mapped priorities
+     *
      * @var string
      */
     protected $_defaultPriorityStyle = FirePhp::LOG;
 
     /**
      * Flag indicating whether the log writer is enabled
+     *
      * @var boolean
      */
     protected $_enabled = true;
 
     /**
      * Class constructor
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -78,10 +82,10 @@ class Firebug extends AbstractWriter
 
         $this->_formatter = new Log\Formatter\Firebug();
     }
-   
+
     /**
      * Create a new instance of Zend_Log_Writer_Firebug
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Firebug
      */

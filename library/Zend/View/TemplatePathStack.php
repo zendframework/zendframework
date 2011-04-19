@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use SplFileInfo,
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TemplatePathStack implements TemplateResolver
@@ -191,7 +191,7 @@ class TemplatePathStack implements TemplateResolver
      * Set LFI protection flag
      *
      * @param  bool $flag
-     * @return \Zend\View\AbstractView
+     * @return \Zend\View\TemplatePathStack
      */
     public function setLfiProtection($flag)
     {

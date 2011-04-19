@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -45,7 +45,7 @@ use Zend\Pdf\Cmap;
  * @uses       \Zend\Pdf\Resource\Font\Simple\Standard\AbstractStandard
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HelveticaOblique extends AbstractStandard

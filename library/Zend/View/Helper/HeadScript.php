@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\View;
  * @uses       \Zend\View\Helper\Placeholder\Container\Standalone
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HeadScript extends Placeholder\Container\Standalone
@@ -454,7 +454,7 @@ class HeadScript extends Placeholder\Container\Standalone
                 : $this->getIndent();
 
         if ($this->view) {
-            $useCdata = $this->view->doctype()->isXhtml() ? true : false;
+            $useCdata = $this->view->broker('doctype')->isXhtml() ? true : false;
         } else {
             $useCdata = $this->useCdata ? true : false;
         }

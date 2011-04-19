@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22585 -->
+<!-- EN-Revision: 22725 -->
 <!-- Reviewed: 22141 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
@@ -184,6 +184,20 @@ $translate->addTranslation(
 
                         <entry>
                             <emphasis>Untranslated message within '%locale%': %message%</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>logPriority</entry>
+                        <entry>Alle</entry>
+
+                        <entry>
+                            Die Priorität welche verwendet wird wenn eine Nachricht in das Log
+                            geschrieben wird
+                        </entry>
+
+                        <entry>
+                            <emphasis>5</emphasis>
                         </entry>
                     </row>
 
@@ -1192,6 +1206,38 @@ $translate->setOptions(
 );
 
 $translate->translate('unknown string');
+]]></programlisting>
+        </example>
+
+        <para>
+            Zusätzlich kann man auch die Priorität ändern welche verwendet wird um eine Nachricht
+            in das Log zu schreiben. Standardmäßig wird die Priorität
+            <emphasis>Zend_Log::NOTICE</emphasis> verwendet. Sie ist identisch mit dem Wert
+            <emphasis>5</emphasis>. Wenn man die Priorität verändern will kann man jede von
+            <classname>Zend_Log</classname>'s Prioritäten verwenden. Siehe das folgende Beispiel:
+        </para>
+
+        <example id="zend.translate.additional.logging.example3">
+            <title>Selbst definierte Log Priorität</title>
+
+            <programlisting language="php"><![CDATA[
+// Eine Log Instanz erstellen
+$writer = new Zend_Log_Writer_Stream('/path/to/file.log');
+$log    = new Zend_Log($writer);
+
+$translate = new Zend_Translate(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de',
+        'log'             => $log,
+        'logMessage'      => "'%message%' fehlt im Gebietsschema '%locale%'",
+        'logPriority'     => Zend_Log::ALERT,
+        'logUntranslated' => true
+    )
+);
+
+$translate->translate('unbekannter String');
 ]]></programlisting>
         </example>
     </sect2>

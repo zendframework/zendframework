@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
+<!-- EN-Revision: 22747 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
@@ -47,10 +47,8 @@ $response = Zend_Http_Response::fromString($str);
         </para>
 
         <para>
-            <code>
-                public function __construct($code, $headers, $body = null, $version = '1.1',
-                $message = null)
-            </code>
+            <command>public function __construct($code, $headers, $body = null, $version = '1.1',
+                $message = null)</command>
         </para>
 
         <itemizedlist>
@@ -103,7 +101,7 @@ $response = Zend_Http_Response::fromString($str);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>Boolean isSuccessful()</code>: Ob die Anfrage erfolgreoch war oder
+                        <methodname>isSuccessful()</methodname>: Ob die Anfrage erfolgreoch war oder
                         nicht. Gibt <constant>TRUE</constant> für <acronym>HTTP</acronym> 1xx und
                         2xx Antwortcodes zurück.
                     </para>
@@ -111,7 +109,7 @@ $response = Zend_Http_Response::fromString($str);
 
                 <listitem>
                     <para>
-                        <code>Boolean isError()</code>: Ob der Antwortcode auf einen Fehler
+                        <methodname>isError()</methodname>: Ob der Antwortcode auf einen Fehler
                         rückschließen lässt oder nicht. Gibt <constant>TRUE</constant> für
                         <acronym>HTTP</acronym> 4xx (Client Fehler) und 5xx (Server Fehler)
                         Antwortcodes zurück.
@@ -120,7 +118,7 @@ $response = Zend_Http_Response::fromString($str);
 
                 <listitem>
                     <para>
-                        <code>Boolean isRedirect()</code>: Ob die Antwort eine Weiterleitung ist
+                        <methodname>isRedirect()</methodname>: Ob die Antwort eine Weiterleitung ist
                         oder nicht. Gibt <constant>TRUE</constant> für <acronym>HTTP</acronym> 3xx
                         Antwortcodes zurück.
                     </para>
@@ -152,28 +150,28 @@ if ($response->isError()) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>int getStatus()</code>: Erhalte den <acronym>HTTP</acronym>
+                        <methodname>getStatus()</methodname>: Erhalte den <acronym>HTTP</acronym>
                         Antwortstatuscode (z.B. 200, 504, etc.) zurück
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string getMessage()</code>: Erhalte die <acronym>HTTP</acronym>
+                        <methodname>getMessage()</methodname>: Erhalte die <acronym>HTTP</acronym>
                         Antwortstatus Meldung (z.B. "Not Found", "Authorization Required") zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string getBody()</code>: Erhalte den kompletten dekodierten Hauptteil
-                        der <acronym>HTTP</acronym> Antwort zurück
+                        <methodname>getBody()</methodname>: Erhalte den kompletten dekodierten
+                        Hauptteil der <acronym>HTTP</acronym> Antwort zurück
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string getRawBody()</code>: Erhalte die rohen, möglicherweise
+                        <methodname>getRawBody()</methodname>: Erhalte die rohen, möglicherweise
                         kodierten Hauptteil der <acronym>HTTP</acronym> Antwort zurück. Wenn der
                         Hauptteil z.B. mittels GZIP kodiert wurde, wird er nicht dekodiert.
                     </para>
@@ -181,14 +179,15 @@ if ($response->isError()) {
 
                 <listitem>
                     <para>
-                        <code>array getHeaders()</code>: Erhalte die <acronym>HTTP</acronym> Antwort
-                        Header als assoziatives Array (z.B. 'Content-type' => 'text/html') zurück.
+                        <methodname>getHeaders()</methodname>: Erhalte die <acronym>HTTP</acronym>
+                        Antwort Header als assoziatives Array (z.B. 'Content-type' => 'text/html')
+                        zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string|array getHeader($header)</code>: Erhalte einen spezifischen
+                        <methodname>getHeader($header)</methodname>: Erhalte einen spezifischen
                         <acronym>HTTP</acronym> Antwort Header zurück, der durch $header angegeben
                         wird.
                     </para>
@@ -196,21 +195,24 @@ if ($response->isError()) {
 
                 <listitem>
                     <para>
-                        <code>string getHeadersAsString($status_line = true, $br = "\n")</code>:
-                        Erhalte den kompletten Header Satz als String zurück. Wenn $status_line
-                        auf <constant>TRUE</constant> gesetzt ist (Standardwert), wird die erste
-                        Statuszeile (z.B. "HTTP/1.1 200 OK") ebenfalls zurück gegeben. Die Zeilen
-                        werden durch den $br Parameter umgebrochen (kann z.B. "&lt;br /&gt;" sein).
+                        <methodname>getHeadersAsString($status_line, $br)</methodname>:
+                        Erhalte den kompletten Header Satz als String zurück. Wenn
+                        <varname>$status_line</varname> auf <constant>TRUE</constant> gesetzt ist
+                        (Standardwert), wird die erste Statuszeile (z.B. "HTTP/1.1 200 OK")
+                        ebenfalls zurück gegeben. Die Zeilen werden durch den <varname>$br</varname>
+                        Parameter umgebrochen (kann z.B. "&lt;br /&gt;" sein. Standardwert ist
+                        "\n").
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string asString($br = "\n")</code>: Erhalte die komplette Rückantwort
+                        <methodname>asString($br)</methodname>: Erhalte die komplette Rückantwort
                         als String zurück. Die Zeilen werden durch den $br Parameter umgebrochen
-                        (kann z.B. "&lt;br /&gt;" sein). Man kann auch die matische __toString()
-                        Methode verwenden wenn man das Objekt in einen String casten will. Diese
-                        wird dann auf asString() weiterleiten
+                        (kann z.B. "&lt;br /&gt;" sein. Standardwert ist "\n"). Man kann auch die
+                        magische <methodname>__toString()</methodname> Methode verwenden wenn man
+                        das Objekt in einen String casten will. Diese wird dann auf
+                        <methodname>asString()</methodname> weiterleiten
                     </para>
                 </listitem>
             </itemizedlist>
@@ -271,55 +273,56 @@ echo $body;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>int Zend_Http_Response::extractCode($response_str)</code>: Extrahiere
-                        den <acronym>HTTP</acronym> Antwortcode (z.B. 200 oder 404) von
-                        $response_str und gebe ihn zurück.
+                        <methodname>Zend_Http_Response::extractCode($response_str)</methodname>:
+                        Extrahiere den <acronym>HTTP</acronym> Antwortcode (z.B. 200 oder 404) von
+                        <varname>$response_str</varname> und gebe ihn zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::extractMessage($response_str)</code>:
+                        <methodname>Zend_Http_Response::extractMessage($response_str)</methodname>:
                         Extrahiere die <acronym>HTTP</acronym> Rückantwort (z.B. "OK" oder
-                        "File Not Found") von $response_str und gebe sie zurück.
+                        "File Not Found") von <varname>$response_str</varname> und gebe sie zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::extractVersion($response_str)</code>: :
+                        <methodname>Zend_Http_Response::extractVersion($response_str)</methodname>:
                         Extrahiere die <acronym>HTTP</acronym> Version (z.B. 1.1 oder 1.0) von
-                        $response_str und gebe sie zurück.
+                        <varname>$response_str</varname> und gebe sie zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>array Zend_Http_Response::extractHeaders($response_str)</code>:
-                        Extrahiere die <acronym>HTTP</acronym> Antwort Header von response_str und
-                        gebe sie in einem Array zurück.
+                        <methodname>Zend_Http_Response::extractHeaders($response_str)</methodname>:
+                        Extrahiere die <acronym>HTTP</acronym> Antwort Header von
+                        <varname>$response_str</varname> und gebe sie in einem Array zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::extractBody($response_str)</code>:
-                        Extrahiere den <acronym>HTTP</acronym> Antworthauptteil aus $response_str
-                        und gebe ihn zurück.
+                        <methodname>Zend_Http_Response::extractBody($response_str)</methodname>:
+                        Extrahiere den <acronym>HTTP</acronym> Antworthauptteil aus
+                        <varname>$response_str</varname> und gebe ihn zurück.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 =
-                        true)</code>: Erhalte die Standard <acronym>HTTP</acronym> Rückantwort für
-                        einen Antwortcode $code. Zum Beispiel wird "Internal Server Error"
-                        zurückgegeben, wenn $code gleich 500 ist. Wenn $http11 gleich
-                        <constant>TRUE</constant> ist (Standard), werden die
-                        <acronym>HTTP</acronym>/1.1 Standardantworten zurück gegeben, andernfalls
-                        die <acronym>HTTP</acronym>/1.0 Antworten. Wird $code nicht angegeben, wird
-                        diese Methode alle bekannten <acronym>HTTP</acronym> Antwortcodes als
-                        assoziatives Array (code => message) zurückgeben.
+                        <methodname>Zend_Http_Response::responseCodeAsText($code,
+                            $http11)</methodname>: Erhalte die Standard <acronym>HTTP</acronym>
+                        Rückantwort für einen Antwortcode $code. Zum Beispiel wird "Internal Server
+                        Error" zurückgegeben, wenn <varname>$code</varname> gleich 500 ist. Wenn
+                        <varname>$http11</varname> gleich <constant>TRUE</constant> ist (Standard),
+                        werden die <acronym>HTTP</acronym>/1.1 Standardantworten zurück gegeben,
+                        andernfalls die <acronym>HTTP</acronym>/1.0 Antworten. Wird
+                        <varname>$code</varname> nicht angegeben, wird diese Methode alle bekannten
+                        <acronym>HTTP</acronym> Antwortcodes als assoziatives Array (code =>
+                        message) zurückgeben.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -332,21 +335,21 @@ echo $body;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::decodeChunkedBody($body)</code>: Dekodiere
-                        einen kompletten "Content-Transfer-Encoding: Chunked" Hauptteil
+                        <methodname>Zend_Http_Response::decodeChunkedBody($body)</methodname>:
+                        Dekodiere einen kompletten "Content-Transfer-Encoding: Chunked" Hauptteil
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::decodeGzip($body)</code>: Dekodiere
+                        <methodname>Zend_Http_Response::decodeGzip($body)</methodname>: Dekodiere
                         einen "Content-Encoding: gzip" Hauptteil
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::decodeDeflate($body)</code>: Dekodiere
+                        <methodname>Zend_Http_Response::decodeDeflate($body)</methodname>: Dekodiere
                         einen "Content-Encoding: deflate" Hauptteil
                     </para>
                 </listitem>

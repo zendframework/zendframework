@@ -7,23 +7,54 @@
         This filter converts any input to be uppercased.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <sect3 id="zend.filter.set.stringtoupper.options">
+        <title>Supported options for Zend_Filter_StringToUpper</title>
+
+        <para>
+            The following options are supported for
+            <classname>Zend_Filter_StringToUpper</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>encoding</property></emphasis>: This option can be used to
+                    set an encoding which has to be used.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.filter.set.stringtoupper.basic">
+        <title>Basic usage</title>
+
+        <para>
+            This is a basic example for using the <classname>StringToUpper</classname> filter:
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringToUpper();
 
 print $filter->filter('Sample');
 // returns "SAMPLE"
 ]]></programlisting>
 
-    <para>
-        Like the <classname>StringToLower</classname> filter, this filter handles
-        only characters from the actual locale of your server. Using different
-        character sets works the same as with <classname>StringToLower</classname>.
-    </para>
+    </sect3>
 
-    <programlisting language="php"><![CDATA[
+    <sect3 id="zend.filter.set.stringtoupper.encoding">
+        <title>Different encoded strings</title>
+
+        <para>
+            Like the <classname>StringToLower</classname> filter, this filter handles
+            only characters from the actual locale of your server. Using different
+            character sets works the same as with <classname>StringToLower</classname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));
 
 // or do this afterwards
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
+    </sect3>
 </sect2>

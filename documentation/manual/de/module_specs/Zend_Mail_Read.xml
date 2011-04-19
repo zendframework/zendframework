@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22756 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.read">
     <title>Lesen von Mail Nachrichten</title>
@@ -351,8 +351,8 @@ echo '</pre>';
             ist die Basisklasse von <classname>Zend_Mail_Message</classname>, sie hat also die
             gleichen Methoden: <methodname>getHeader()</methodname>,
             <methodname>getHeaders()</methodname>, <methodname>getContent()</methodname>,
-            <methodname>getPart()</methodname>, <code>isMultipart</code> und die Eigenschaften der
-            Kopfzeilen.
+            <methodname>getPart()</methodname>, <methodname>isMultipart()</methodname> und die
+            Eigenschaften der Kopfzeilen.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -368,8 +368,8 @@ echo $part->getContent();
 
         <para>
             <classname>Zend_Mail_Part</classname> implementiert auch den
-            <code>RecursiveIterator</code>, welcher es sehr einfach macht alle Teile zu durchsuchen.
-            Und für die einfache Ausgabe wurde auch die magische Methode
+            <classname>RecursiveIterator</classname>, welcher es sehr einfach macht alle Teile zu
+            durchsuchen. Und für die einfache Ausgabe wurde auch die magische Methode
             <methodname>__toString()</methodname> implementiert, welche den Inhalt zurückgibt.
         </para>
 
@@ -471,15 +471,15 @@ if (!$message->hasFlag('$SpamTested')) {
             Alle Speicher, ausser Pop3, unterstützen Ordner, welche Mailboxen genannt werden. Das
             Interface das von allen Speichern implementiert wurde und Ordner unterstützt heißt
             <classname>Zend_Mail_Storage_Folder_Interface</classname>. Alle diese Klassen besitzen
-            auch einen zusätzlichen optionalen Parameter welcher <code>folder</code> heißt, was der
-            ausgewählt Ordner nach dem Login, im Konstruktor ist.
+            auch einen zusätzlichen optionalen Parameter welcher <property>folder</property> heißt,
+            was der ausgewählt Ordner nach dem Login, im Konstruktor ist.
         </para>
 
         <para>
             Für den lokalen Speicher müssen die eigenen Klassen
             <classname>Zend_Mail_Storage_Folder_Mbox</classname> oder
             <classname>Zend_Mail_Storage_Folder_Maildir</classname> genannt verwendet werden. Beide
-            benötigen einen Parameter der <code>dirname</code> heißt mit dem Namen des
+            benötigen einen Parameter der <property>dirname</property> heißt mit dem Namen des
             Basisverzeichnisses. Das Format für Maildir ist wie in Maildir++ definiert (mit einem
             Punkt als Standardbegrenzer), Mbox ist eine Verzeichnisstruktur mit Mbox Dateien. Wenn
             im Mbox Basisverzeichnis keine Mbox Datei vorhanden ist die INBOX heißt, muß ein anderer
@@ -522,12 +522,12 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             Mit der Methode getFolders($root = null) kann die Verzeichnisstruktur beginnend mit dem
             Basisverzeichnis oder einem angegebenen Ordner ausgegeben werden. Sie wird als Instanz
             von <classname>Zend_Mail_Storage_Folder</classname> zurückgegeben, welche
-            <code>RecursiveIterator</code> implementiert und alle Kinder sind genauso Instanzen von
-            <classname>Zend_Mail_Storage_Folder</classname>. Jede dieser Instanzenhat einen lokalen
-            und einen globalen Namen der durch die Methoden <methodname>getLocalName()</methodname>
-            und <methodname>getGlobalName()</methodname> zurückgegeben wird. Der globale Name ist
-            der absolute Name des Basisordners (inklusive Begrenzer), der lokale Name ist der Name
-            im Elternordner.
+            <classname>RecursiveIterator</classname> implementiert und alle Kinder sind genauso
+            Instanzen von <classname>Zend_Mail_Storage_Folder</classname>. Jede dieser Instanzen hat
+            einen lokalen und einen globalen Namen der durch die Methoden
+            <methodname>getLocalName()</methodname> und <methodname>getGlobalName()</methodname>
+            zurückgegeben wird. Der globale Name ist der absolute Name des Basisordners (inklusive
+            Begrenzer), der lokale Name ist der Name im Elternordner.
         </para>
 
         <table id="zend.mail.read-folders.table-1">

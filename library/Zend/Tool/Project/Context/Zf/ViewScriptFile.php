@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage Framework
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ namespace Zend\Tool\Project\Context\Zf;
  * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
  * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
@@ -128,21 +128,21 @@ class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
 </head>
 <body>
   <h1>An error occurred</h1>
-  <h2><?php echo $this->message ?></h2>
+  <h2><?php echo $this->vars('message') ?></h2>
 
-  <?php if (isset($this->exception)): ?>
+  <?php if ($this->vars('exception')): ?>
 
   <h3>Exception information:</h3>
   <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+      <b>Message:</b> <?php echo $this->vars('exception')->getMessage() ?>
   </p>
 
   <h3>Stack trace:</h3>
-  <pre><?php echo $this->exception->getTraceAsString() ?>
+  <pre><?php echo $this->vars('exception')->getTraceAsString() ?>
   </pre>
 
   <h3>Request Parameters:</h3>
-  <pre><?php echo var_export($this->request->getParams(), true) ?>
+  <pre><?php echo var_export($this->vars('request')->getParams(), true) ?>
   </pre>
   <?php endif ?>
 
@@ -208,8 +208,8 @@ EOS;
     protected function _convertActionNameToFilesystemName($actionName)
     {
         $filter = new \Zend\Filter\FilterChain();
-        $filter->addFilter(new \Zend\Filter\Word\CamelCaseToDash())
-        ->addFilter(new \Zend\Filter\StringToLower());
+        $filter->attach(new \Zend\Filter\Word\CamelCaseToDash())
+               ->attach(new \Zend\Filter\StringToLower());
         return $filter->filter($actionName);
     }
 

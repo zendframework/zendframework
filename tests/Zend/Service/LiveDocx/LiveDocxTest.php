@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_LiveDocx
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,11 @@
  */
 namespace ZendTest\Service;
 namespace Zend\Service\LiveDocx;
-use Zend\Validator;
+
+
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Service_LiveDocx_LiveDocxTest::main');
+}
 
 
 /**
@@ -36,12 +40,18 @@ use Zend\Validator;
  * @subpackage UnitTests
  * @group      Zend_Service
  * @group      Zend_Service_LiveDocx
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class LiveDocxTest extends \PHPUnit_Framework_TestCase
 {
     public $mailMerge;
+
+    public static function main()
+    {
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
+    }
 
     public function setUp()
     {
@@ -106,7 +116,7 @@ class LiveDocxTest extends \PHPUnit_Framework_TestCase
 
         $mailMerge = new MailMerge();
 
-        $soapClient = new \Zend\Soap\Client\Client();
+        $soapClient = new \Zend\Soap\Client();
         $soapClient->setWSDL($wsdl);
 
         $mailMerge->setSoapClient($soapClient);
@@ -116,4 +126,8 @@ class LiveDocxTest extends \PHPUnit_Framework_TestCase
         unset($mailMerge);
     }
 
+}
+
+if (PHPUnit_MAIN_METHOD == 'LiveDocxTest::main') {
+    LiveDocxTest::main();
 }

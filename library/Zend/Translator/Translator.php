@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend_Translator
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,15 +24,15 @@
 namespace Zend\Translator;
 
 use Zend\Translator\Exception\InvalidArgumentException,
-	Zend\Translator\Exception\BadMethodCallException;
+    Zend\Translator\Exception\BadMethodCallException;
 
 /**
  * @uses       \Zend\Loader
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @uses       \Zend\Translator\Exception\BadMethodCallException
  * @category   Zend
- * @package    Zend_Translate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend_Translator
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Translator
@@ -64,7 +64,7 @@ class Translator
     /**
      * Generates the standard translation object
      *
-     * @param  array|Zend_Config $options Options to use
+     * @param  array|\Zend\Config $options Options to use
      * @throws \Zend\Translate\Exception\InvalidArgumentException
      */
     public function __construct($options = array())
@@ -97,7 +97,7 @@ class Translator
     /**
      * Sets a new adapter
      *
-     * @param  array|Zend_Config $options Options to use
+     * @param  array|\Zend\Config $options Options to use
      * @throws \Zend\Translate\Exception\InvalidArgumentException
      */
     public function setAdapter($options = array())
@@ -122,6 +122,10 @@ class Translator
             }
         } else if (!is_array($options)) {
             $options = array('adapter' => $options);
+        }
+
+        if (empty($options['adapter'])) {
+            throw new InvalidArgumentException("No adapter given");
         }
 
         if (\Zend\Loader::isReadable('Zend/Translator/Adapter/' . ucfirst($options['adapter']). '.php')) {

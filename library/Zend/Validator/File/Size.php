@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category  Zend
- * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package   Zend_Validator
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,18 +33,17 @@ use Zend\Validator,
  * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Size extends Validator\AbstractValidator
 {
-    /**#@+
+    /**
      * @const string Error constants
      */
     const TOO_BIG   = 'fileSizeTooBig';
     const TOO_SMALL = 'fileSizeTooSmall';
     const NOT_FOUND = 'fileSizeNotFound';
-    /**#@-*/
 
     /**
      * @var array Error message templates
@@ -177,7 +176,11 @@ class Size extends Validator\AbstractValidator
     /**
      * Sets the minimum filesize
      *
-     * @param  integer $min The minimum filesize
+     * Filesize can be an integer or an byte string
+     * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
+     * For example: 2000, 2MB, 0.2GB
+     *
+     * @param  integer|string $min The minimum filesize
      * @throws \Zend\Validator\Exception When min is greater than max
      * @return \Zend\Validator\File\Size Provides a fluent interface
      */
@@ -217,9 +220,13 @@ class Size extends Validator\AbstractValidator
     /**
      * Sets the maximum filesize
      *
-     * @param  integer $max The maximum filesize
+     * Filesize can be an integer or an byte string
+     * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
+     * For example: 2000, 2MB, 0.2GB
+     *
+     * @param  integer|string $max The maximum filesize
      * @throws \Zend\Validator\Exception When max is smaller than min
-     * @return \Zend\Validator\StringLength Provides a fluent interface
+     * @return \Zend\Validator\File\Size Provides a fluent interface
      */
     public function setMax($max)
     {

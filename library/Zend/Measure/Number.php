@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Measure
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Locale\Math;
  * @uses       Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Measure
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Number extends AbstractMeasure
@@ -145,7 +145,7 @@ class Number extends AbstractMeasure
      */
     public function __construct($value, $type, $locale = null)
     {
-        if (($type !== null) and (Locale\Locale::isLocale($type, null, false))) {
+        if (($type !== null) and (Locale\Locale::isLocale($type))) {
             $locale = $type;
             $type = null;
         }
@@ -154,8 +154,8 @@ class Number extends AbstractMeasure
             $locale = new Locale\Locale();
         }
 
-        if (!Locale\Locale::isLocale($locale, true, false)) {
-            if (!Locale\Locale::isLocale($locale, true, false)) {
+        if (!Locale\Locale::isLocale($locale, true)) {
+            if (!Locale\Locale::isLocale($locale, false)) {
                 throw new Exception("Language (" . (string) $locale . ") is unknown");
             }
 

@@ -225,7 +225,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
             Also, the <classname>Zend_Filter_Input</classname> class allows you to
             instantiate and run multiple filter and validator classes on demand
             to process sets of input data. See
-            <xref linkend="zend.filter.input" />.
+            <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
         <sect3 id="zend.validate.introduction.static.namespaces">

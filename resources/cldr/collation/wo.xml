@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4208 $"/>
+		<generation date="$Date: 2009-07-03 13:17:21 -0500 (Fri, 03 Jul 2009) $"/>
+		<language type="wo"/> 
+	</identity>
+	<collations  validSubLocales="wo_Latn_SN">
+		<collation type="standard">
+			<settings normalization="on"/>
+                	<rules>
+				<reset>A</reset>
+					<p>à</p>
+					<t>À</t>
+				<reset>E</reset>
+					<p>é</p>
+					<t>É</t>
+					<p>ë</p>
+					<t>Ë</t>
+				<reset>N</reset>
+					<p>ñ</p>
+					<t>Ñ</t>
+					<p>ŋ</p>
+					<t>Ŋ</t>
+				<reset>O</reset>
+					<p>ó</p>
+					<t>Ó</t>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

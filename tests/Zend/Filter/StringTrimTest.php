@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\Filter\StringTrim as StringTrimFilter;
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
@@ -117,5 +117,22 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $this->assertEquals('/', $filter('/'));
+    }
+
+    /**
+     * @ZF-10891
+     */
+    public function testZF10891()
+    {
+        $filter = $this->_filter;
+        $this->assertEquals('Зенд', $filter('   Зенд   '));
+        $this->assertEquals('Зенд', $filter('Зенд   '));
+        $this->assertEquals('Зенд', $filter('   Зенд'));
+
+        $trim_charlist = " \t\n\r\x0B・。";
+        $filter = new StringTrimFilter($trim_charlist);
+        $this->assertEquals('Зенд', $filter->filter('。  Зенд  。'));
+
+
     }
 }

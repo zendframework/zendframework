@@ -37,14 +37,14 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         <para>
             Because these examples use custom code, we need to register the namespace prefixes for
             that code with our configuration; this is done with the
-            <code>autoloaderNamespaces</code> configuration key, which is an array.
+            <property>autoloaderNamespaces</property> configuration key, which is an array.
         </para>
 
         <para>
             Additionally, to ensure that custom plugin resources are discovered, we need to register
-            a plugin prefix path with the bootstrap. This is done with the <code>pluginpaths</code>
-            configuration key, which is an associative array, with keys denoting the prefix to use,
-            and values denoting the path related to that prefix.
+            a plugin prefix path with the bootstrap. This is done with the
+            <property>pluginpaths</property> configuration key, which is an associative array, with
+            keys denoting the prefix to use, and values denoting the path related to that prefix.
         </para>
     </note>
 

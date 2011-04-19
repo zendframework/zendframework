@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Loader
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use \stdClass,
  * @package    Loader
  * @subpackage UnitTests
  * @group      Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class LoaderTest extends \PHPUnit_Framework_TestCase
@@ -143,8 +143,10 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsReadableShouldNotLockWhenTestingForNonExistantFileInPhar()
     {
-        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-            $this->markTestSkipped();
+        if (ini_get('phar.readonly')) {
+            $this->markTestSkipped(
+                "creating phar archive is disabled by the php.ini setting 'phar.readonly'"
+            );
         }
 
         $pharFile = __DIR__ . '/_files/LoaderTest.phar';

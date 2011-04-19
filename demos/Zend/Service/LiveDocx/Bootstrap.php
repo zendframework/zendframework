@@ -1,7 +1,6 @@
 <?php
 
 // Set used namespaces
-use Zend\Loader\Autoloader;
 use Zend\Locale\Locale;
 use Zend\Registry;
 use Zend\Service\LiveDocx\Helper;
@@ -9,15 +8,15 @@ use Zend\Service\LiveDocx\Helper;
 // Turn up error reporting
 error_reporting(E_ALL | E_STRICT);
 
-// Set path to libraries
-set_include_path(
-    __DIR__ . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR .
-    dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 'library'
-);
+// Set up autoloader
+$base = dirname(dirname(dirname(dirname(__DIR__))));
+require_once "{$base}/library/Zend/Loader/StandardAutoloader.php";
+$loader = new \Zend\Loader\StandardAutoloader();
+$loader->registerNamespace('Zend', "{$base}/library/Zend");
+$loader->register();
 
-// Set autoloader to autoload libraries
-require_once 'Zend/Loader/Autoloader.php';
-Autoloader::getInstance();
+// Include utility class
+require_once "{$base}/demos/Zend/Service/LiveDocx/library/Zend/Service/LiveDocx/Helper.php";
 
 // Set default locale
 Locale::setDefault(Helper::LOCALE);
@@ -29,3 +28,5 @@ if (false === Helper::credentialsAvailable()) {
     Helper::printLine(Helper::credentialsHowTo());
     exit();
 }
+
+unset($base);

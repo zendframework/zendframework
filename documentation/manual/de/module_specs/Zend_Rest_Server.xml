@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
@@ -52,12 +52,12 @@ $server->handle();
         <title>Aufruf eines Zend_Rest_Server Services</title>
 
         <para>
-            Um ein <classname>Zend_Rest_Server</classname> Service aufzurufen, muß ein GET/POST
-            <code>method</code> Argument mit einem Wert angegeben werden, welcher der Methode
-            entspricht, die aufgerufen werden soll. Es können anschließend beliebig viele Argumente
-            folgen, die entweder den Namen des Arguments verwenden (z.B. "wer"), oder man kann
-            <code>arg</code> verwenden, gefolgt von der nummerischen Position des Arguments (z.B.
-            "arg1").
+            Um ein <classname>Zend_Rest_Server</classname> Service aufzurufen, muß ein
+            <constant>GET</constant>/POST <code>method</code> Argument mit einem Wert angegeben
+            werden, welcher der Methode entspricht, die aufgerufen werden soll. Es können
+            anschließend beliebig viele Argumente folgen, die entweder den Namen des Arguments
+            verwenden (z.B. "wer"), oder man kann <code>arg</code> verwenden, gefolgt von der
+            nummerischen Position des Arguments (z.B. "arg1").
         </para>
 
         <note>

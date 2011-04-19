@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ namespace Zend\Validator;
  * @uses       \Zend\Validator\Hostname
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EmailAddress extends AbstractValidator
@@ -202,17 +202,17 @@ class EmailAddress extends AbstractValidator
      */
     public function setMessage($messageString, $messageKey = null)
     {
-        $messageKeys = $messageKey;
         if ($messageKey === null) {
-            $keys = array_keys($this->_messageTemplates);
-            $messageKeys = current($keys);
+            $this->_options['hostname']->setMessage($messageString);
+            parent::setMessage($messageString);
+            return $this;
         }
 
-        if (!isset($this->_messageTemplates[$messageKeys])) {
+        if (!isset($this->_messageTemplates[$messageKey])) {
             $this->_options['hostname']->setMessage($messageString, $messageKey);
         }
 
-        $this->_messageTemplates[$messageKeys] = $messageString;
+        $this->_messageTemplates[$messageKey] = $messageString;
         return $this;
     }
 

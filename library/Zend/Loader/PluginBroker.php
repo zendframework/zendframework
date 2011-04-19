@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -26,7 +26,7 @@ namespace Zend\Loader;
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PluginBroker implements Broker
@@ -37,7 +37,7 @@ class PluginBroker implements Broker
     protected $defaultClassLoader = 'Zend\Loader\PluginClassLoader';
 
     /**
-     * @var ShortNameLocater Plugin class loader used by this instance
+     * @var ShortNameLocator Plugin class loader used by this instance
      */
     protected $classLoader;
 
@@ -96,7 +96,7 @@ class PluginBroker implements Broker
                         }
                         $value = new $value;
                     }
-                    if ($value instanceof ShortNameLocater) {
+                    if ($value instanceof ShortNameLocator) {
                         $this->setClassLoader($value);
                         break;
                     } 
@@ -256,10 +256,10 @@ class PluginBroker implements Broker
     /**
      * Set class loader to use when resolving plugin names to class names
      * 
-     * @param  ShortNameLocater $loader 
+     * @param  ShortNameLocator $loader 
      * @return PluginBroker
      */
-    public function setClassLoader(ShortNameLocater $loader)
+    public function setClassLoader(ShortNameLocator $loader)
     {
         $this->classLoader = $loader;
         return $this;
@@ -268,9 +268,9 @@ class PluginBroker implements Broker
     /**
      * Retrieve the class loader
      *
-     * Lazy-loads an instance of PluginClassLocater if no loader is registered.
+     * Lazy-loads an instance of PluginClassLocator if no loader is registered.
      * 
-     * @return ShortNameLocater
+     * @return ShortNameLocator
      */
     public function getClassLoader()
     {

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -26,7 +26,7 @@ namespace Zend\Loader;
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Broker
@@ -75,15 +75,15 @@ interface Broker
     /**
      * Set class loader to use when resolving plugin names to classes
      * 
-     * @param  ShortNameLocater $loader 
+     * @param  ShortNameLocator $loader 
      * @return void
      */
-    public function setClassLoader(ShortNameLocater $loader);
+    public function setClassLoader(ShortNameLocator $loader);
 
     /**
      * Retrieve the plugin class loader
      * 
-     * @return ShortNameLocater
+     * @return ShortNameLocator
      */
     public function getClassLoader();
 }

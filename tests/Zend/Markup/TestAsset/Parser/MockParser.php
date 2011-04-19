@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Parser
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,62 +24,24 @@
  */
 namespace ZendTest\Markup\TestAsset\Parser;
 
-use Zend\Markup\Parser,
-    Zend\Markup\Token,
-    Zend\Markup\TokenList;
+use Zend\Markup\Parser;
 
 /**
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Parser
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MockParser implements Parser
 {
 
-    /**
-     * Parse a string
-     *
-     * @param  string $value
-     * @return Zend_Markup_TokenList
-     */
+    public function __construct($options = array())
+    {
+    }
+
     public function parse($value)
     {
-        if (!is_string($value)) {
-            /**
-             * @see Zend_Markup_Parser_Exception
-             */
-            throw new Parser\Exception('Value to parse should be a string.');
-        }
-
-        if (empty($value)) {
-            /**
-             * @see Zend_Markup_Parser_Exception
-             */
-            throw new Parser\Exception('Value to parse cannot be left empty.');
-        }
-
-        // initialize variables
-        $tree    = new TokenList();
-        $current = new Token(
-            '',
-            Token::TYPE_NONE,
-            'Zend_Markup_Root'
-        );
-
-        $tree->addChild($current);
-
-        $token = new Token(
-            $value,
-            Token::TYPE_NONE,
-            '',
-            array(),
-            $current
-        );
-        $current->addChild($token);
-
-        return $tree;
     }
 
     public function buildTree(array $tokens, $strategy = 'default')

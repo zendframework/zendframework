@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use Zend\Navigation\Container,
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Menu extends AbstractHelper
@@ -244,7 +244,7 @@ class Menu extends AbstractHelper
         }
 
         return '<' . $element . $this->_htmlAttribs($attribs) . '>'
-             . $this->view->escape($label)
+             . $this->view->vars()->escape($label)
              . '</' . $element . '>';
     }
 
@@ -613,10 +613,10 @@ class Menu extends AbstractHelper
                 throw $e;
             }
 
-            return $this->view->partial($partial[0], $partial[1], $model);
+            return $this->view->broker('partial')->direct($partial[0], $partial[1], $model);
         }
 
-        return $this->view->partial($partial, null, $model);
+        return $this->view->broker('partial')->direct($partial, null, $model);
     }
 
     // Zend\View\Helper\Navigation\Helper:

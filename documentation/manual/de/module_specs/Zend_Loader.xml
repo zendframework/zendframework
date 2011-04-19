@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 22752 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
     <title>Dynamisches Laden von Dateien und Klassen</title>
@@ -56,9 +56,9 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <para>
             Das <varname>$dirs</varname> Argument definiert das Verzeichnis in welchem
             nach der Datei gesucht werden soll. Wenn der Wert <constant>NULL</constant> ist, wird
-            nur anhand vom <code>include_path</code> gesucht. Wenn der Wert Zeichenkette
-            oder ein Array ist, wird das definierte Verzeichnis oder
-            die Verzeichnisse durchsucht, gefolgt vom <code>include_path</code>.
+            nur anhand vom include_path gesucht. Wenn der Wert Zeichenkette oder ein Array ist, wird
+            das definierte Verzeichnis oder die Verzeichnisse durchsucht, gefolgt vom
+            <property>include_path</property>.
         </para>
 
         <para>
@@ -105,7 +105,8 @@ Zend_Loader::loadClass('Container_Tree',
             <methodname>Zend_Loader::loadClass()</methodname> die Verzeichnisse in der
             angegebenen Reihenfolge. Die erste passende Datei wird geladen. Wenn die
             Datei in den definierten Verzeichnissen <varname>$dirs</varname> nicht existiert
-            wird der <code>include_path</code> der <acronym>PHP</acronym> Umgebung durchsucht.
+            wird der <property>include_path</property> der <acronym>PHP</acronym> Umgebung
+            durchsucht.
         </para>
 
         <para>
@@ -214,8 +215,8 @@ if (Zend_Loader::isReadable($filename)) {
             geprüft werden soll. Er darf Pfadinformationen enthalten. Diese Methode
             ist ein Wrapper für die <acronym>PHP</acronym> Funktion
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
-            Diese <acronym>PHP</acronym> Funktion durchsucht den <code>include_path</code> nicht,
-            wärend <methodname>Zend_Loader::isReadable()</methodname> dies macht.
+            Diese <acronym>PHP</acronym> Funktion durchsucht den <property>include_path</property>
+            nicht, wärend <methodname>Zend_Loader::isReadable()</methodname> dies macht.
         </para>
     </sect2>
 
@@ -229,8 +230,8 @@ if (Zend_Loader::isReadable($filename)) {
             Vereinfachung bietet <classname>Zend_Loader</classname> die
             <methodname>registerAutoload()</methodname> Funktion welche die
             <methodname>autoload()</methodname> Methode registriert. Wenn die
-            <code>spl_autoload</code> Erweiterung in der <acronym>PHP</acronym> Umgebung nicht
-            vorhanden ist wird die <methodname>registerAutoload()</methodname> Methode eine
+            <property>spl_autoload</property> Erweiterung in der <acronym>PHP</acronym> Umgebung
+            nicht vorhanden ist wird die <methodname>registerAutoload()</methodname> Methode eine
             <classname>Zend_Exception</classname> werfen.
         </para>
 

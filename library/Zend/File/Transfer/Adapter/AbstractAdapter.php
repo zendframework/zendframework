@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,23 +27,23 @@ use Zend\File\Transfer,
     Zend\File\Transfer\Exception,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater,
+    Zend\Loader\ShortNameLocator,
     Zend\Validator,
     Zend\Filter;
 
 /**
  * Abstract class for file transfers (Downloads and Uploads)
  *
- * This class needs a full rewrite. It re-implements functionality present in 
+ * This class needs a full rewrite. It re-implements functionality present in
  * Zend_Filter_Input and/or Zend_Form_Element, and in a way that's inconsistent
  * with either one. Additionally, plugin loader usage is now deprecated -- but
- * modifying that should be done in tandem with a rewrite to utilize validator 
+ * modifying that should be done in tandem with a rewrite to utilize validator
  * and filter chains instead.
  *
  * @todo      Rewrite
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter
@@ -212,23 +212,23 @@ abstract class AbstractAdapter
      * @throws \Zend\File\Transfer\Exception Not implemented
      */
     //abstract public function addType($type, $validator = null, $filter = null);
-    
+
     /**
      * Returns all set files
      *
      * @return array List of set files
      */
     //abstract public function getFile();
-    
+
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocator $loader
      * @param  string $type 'filter', or 'validator'
      * @return \Zend\File\Transfer\Adapter\AbstractAdapter
      * @throws \Zend\File\Transfer\Exception on invalid type
      */
-    public function setPluginLoader(ShortNameLocater $loader, $type)
+    public function setPluginLoader(ShortNameLocator $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -248,7 +248,7 @@ abstract class AbstractAdapter
      * 'filter' or 'validator' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\ShortNameLocater
+     * @return \Zend\Loader\ShortNameLocator
      * @throws \Zend\File\Transfer\Exception on invalid type.
      */
     public function getPluginLoader($type)
@@ -623,7 +623,7 @@ abstract class AbstractAdapter
                             break;
 
                         default:
-                            throw new Exception\InvalidArgumentException("Unknown option: $name = $value");
+                            continue;
                     }
                 }
             }

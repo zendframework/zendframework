@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 22748 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.introduction">
     <title>Einführung</title>
@@ -39,18 +39,18 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         <classname>Zend_Measure_&lt;TYP&gt;::NAME_DER_EINHEIT</classname>, wobei &lt;TYP&gt;
         identisch ist mit einer bekannten physikalischen oder nummerischen Einheit. Jede Maßeinheit
         besteht aus einem Faktor für die Konvertierung und einer Darstellungseinheit. Eine
-        detailierte Liste kann im Kapitel <link linkend="zend.measure.types"><code>Arten von
-            Maßeinheiten</code></link> gefunden werden.
+        detailierte Liste kann im Kapitel <link linkend="zend.measure.types">Arten von
+            Maßeinheiten</link> gefunden werden.
     </para>
 
     <example id="zend.measure.introduction.example-2">
         <title>Die Maßeinheit meter</title>
 
         <para>
-            Der <code>meter</code> wird für das Abmessen von Längen verwendet und kann in der Klasse
-            <code>Length</code> gefunden werden. Um auf diese Maßeinheit zu verweisen muß die
-            Schreibweise <constant>Length::METER</constant> verwendet werden. Die
-            Darstellungseinheit ist <code>m</code>.
+            Der <emphasis>Meter</emphasis> wird für das Abmessen von Längen verwendet und kann in
+            der Klasse <classname>Length</classname> gefunden werden. Um auf diese Maßeinheit zu
+            verweisen muß die Schreibweise <constant>Length::METER</constant> verwendet werden. Die
+            Darstellungseinheit ist <emphasis>m</emphasis>.
         </para>
 
         <programlisting language="php"><![CDATA[

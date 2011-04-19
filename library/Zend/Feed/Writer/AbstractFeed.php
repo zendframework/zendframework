@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -22,9 +22,10 @@
 * @namespace
 */
 namespace Zend\Feed\Writer;
-use Zend\Uri;
-use Zend\Date;
-use Zend\Validator;
+
+use Zend\Uri,
+    Zend\Date,
+    Zend\Validator;
 
 /**
 * @uses \Zend\Date\Date
@@ -37,7 +38,7 @@ use Zend\Validator;
 * @uses \Zend\Validator\EmailAddress
 * @category Zend
 * @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class AbstractFeed
@@ -785,7 +786,9 @@ class AbstractFeed
         $all = Writer::getExtensions();
         $exts = $all['feed'];
         foreach ($exts as $ext) {
-            $className = Writer::getPluginLoader()->getClassName($ext);
+            if (!$className = Writer::getPluginLoader()->getClassName($ext)) {
+                throw new Exception(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
+            }
             $this->_extensions[$ext] = new $className();
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }

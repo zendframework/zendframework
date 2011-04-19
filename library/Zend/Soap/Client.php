@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ namespace Zend\Soap;
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Client
@@ -963,9 +963,9 @@ class Client
     {
         // Perform request as is
         if ($one_way === null) {
-            return $client->__doRequest($request, $location, $action, $version);
+        	return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version);
         }
-        return $client->__doRequest($request, $location, $action, $version, $one_way);
+        return call_user_func(array($client, 'SoapClient::__doRequest'), $request, $location, $action, $version, $one_way);
     }
 
     /**

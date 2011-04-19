@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use Zend\Form\Element\Exception,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class File extends Xhtml
@@ -831,6 +831,20 @@ class File extends Xhtml
     {
         $adapter = $this->getTransferAdapter();
         return $adapter->getHash($hash, $this->getName());
+    }
+
+    /**
+     * Set object state from options array
+     *
+     * @param  array $options
+     * @return \Zend\Form\Element\File
+     */
+    public function setOptions(array $options)
+    {
+        parent::setOptions($options);
+        $adapter = $this->getTransferAdapter();
+        $adapter->setOptions($options);
+        return $this;
     }
 
     /**

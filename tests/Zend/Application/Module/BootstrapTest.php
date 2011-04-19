@@ -15,14 +15,13 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Application\Module;
 
 use Zend\Application\Module\Bootstrap as ModuleBootstrap,
-    Zend\Loader\Autoloader,
     Zend\Loader\ResourceAutoloader,
     Zend\Application\Application,
     Zend\Controller\Front as FrontController,
@@ -34,7 +33,7 @@ require_once __DIR__ . '/../TestAsset/ZfModuleBootstrap.php';
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
@@ -49,9 +48,6 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
             // autoloaders registered...
             $this->loaders = array();
         }
-
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
 
         $this->application = new Application('testing');
 
@@ -69,9 +65,6 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         foreach ($this->loaders as $loader) {
             spl_autoload_register($loader);
         }
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testConstructorShouldInitializeModuleResourceLoaderWithModulePrefix()
@@ -120,7 +113,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     public function testFrontControllerPluginResourceShouldBeRegistered()
     {
         $bootstrap = new \ZfModule\Bootstrap($this->application);
-        $this->assertTrue($bootstrap->hasPluginResource('FrontController'));
+        $this->assertTrue($bootstrap->getBroker()->hasPlugin('FrontController'));
     }
 
     /**
@@ -178,19 +171,18 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $appBootstrap->bootstrap('Modules');
         $modules = $appBootstrap->getResource('Modules');
         foreach ($modules as $module => $bootstrap) {
-            if ($module == 'application') {
+            if (in_array($module, array('application', 'default'))) {
                 // "default" module gets lumped in, and is not a Module_Bootstrap
                 continue;
             }
-            $resources = $bootstrap->getPluginResourceNames();
-            $this->assertFalse($bootstrap->hasPluginResource('Modules'));
+            $this->assertFalse($bootstrap->getBroker()->hasPlugin('Modules'));
         }
     }
 
     /**
      * @group ZF-6567
      */
-    public function testModuleBootstrapShouldInheritApplicationBootstrapPluginPaths()
+    public function testModuleBootstrapShouldInheritApplicationBootstrapPluginBroker()
     {
         $this->application->setOptions(array(
             'resources' => array(
@@ -209,12 +201,17 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $appBootstrap = $this->application->getBootstrap();
+        $appBroker    = $appBootstrap->getBroker();
         $appBootstrap->bootstrap('Modules');
         $modules = $appBootstrap->getResource('Modules');
         foreach ($modules as $bootstrap) {
-            $loader = $bootstrap->getPluginLoader();
-            $paths  = $loader->getPaths();
-            $this->assertTrue(array_key_exists('ZfModule\\Bootstrap\\Resource\\', $paths));
+            // Skip the default bootstrap
+            if ('Bootstrap' === get_class($bootstrap)) {
+                continue;
+            }
+
+            $broker = $bootstrap->getBroker();
+            $this->assertSame($appBroker, $broker);
         }
     }
 }

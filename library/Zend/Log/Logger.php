@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Config\Config;
  * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Logger implements Factory
@@ -58,7 +58,7 @@ class Logger implements Factory
     protected $_writers = array();
 
     /**
-     * @var array of \Zend\Log\Filter\FilterInterface
+     * @var array of \Zend\Log\Filter
      */
     protected $_filters = array();
 
@@ -81,6 +81,12 @@ class Logger implements Factory
 
     /**
      *
+     * @var string
+     */
+    protected $_defaultFormatterNamespace = 'Zend\Log\Formatter';
+
+    /**
+     *
      * @var callback
      */
     protected $_origErrorHandler       = null;
@@ -93,7 +99,7 @@ class Logger implements Factory
 
     /**
      *
-     * @var array
+     * @var array|boolean
      */
     protected $_errorHandlerMap        = false;
 
@@ -104,8 +110,10 @@ class Logger implements Factory
     protected $_timestampFormat        = 'c';
 
     /**
-     * Class constructor.  Create a new logger     *
+     * Class constructor.  Create a new logger
+     *
      * @param \Zend\Log\Writer\AbstractWriter|null  $writer  default writer
+     * @return void
      */
     public function __construct(Writer $writer = null)
     {
@@ -136,6 +144,13 @@ class Logger implements Factory
         }
 
         $log = new self;
+
+        if (array_key_exists('timestampFormat', $config)) {
+            if (null != $config['timestampFormat'] && '' != $config['timestampFormat']) {
+                $log->setTimestampFormat($config['timestampFormat']);
+            }
+            unset($config['timestampFormat']);
+        }
 
         if (!is_array(current($config))) {
             $log->addWriter(current($config));
@@ -172,6 +187,11 @@ class Logger implements Factory
             $writer->addFilter($filter);
         }
 
+        if (isset($config['formatterName'])) {
+            $formatter = $this->_constructFormatterFromConfig($config);
+            $writer->setFormatter($formatter);
+        }
+
         return $writer;
     }
 
@@ -194,6 +214,27 @@ class Logger implements Factory
         }
 
         return $filter;
+    }
+
+   /**
+     * Construct formatter object from configuration array or Zend_Config object
+     *
+     * @param  array|Zend\Config\Config $config \Zend\Config\Config or Array
+     * @return \Zend\Log\Formatter
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     */
+    protected function _constructFormatterFromConfig($config)
+    {
+        $formatter = $this->_constructFromConfig('formatter', $config, $this->_defaultFormatterNamespace);
+
+        if (!$formatter instanceof Formatter) {
+             $formatterName = is_object($formatter)
+                         ? get_class($formatter)
+                         : 'The specified formatter';
+            throw new Exception\InvalidArgumentException($formatterName . ' does not implement Zend\Log\Formatter');
+        }
+
+        return $formatter;
     }
 
     /**
@@ -226,7 +267,7 @@ class Logger implements Factory
         $reflection = new \ReflectionClass($className);
         if (!$reflection->implementsInterface('Zend\Log\Factory')) {
             throw new Exception\InvalidArgumentException(
-                'Driver does not implement Zend\Log\Factory and can not be constructed from config.'
+                $className . ' does not implement Zend\Log\Factory and can not be constructed from config.'
             );
         }
 
@@ -264,7 +305,7 @@ class Logger implements Factory
      * @param  string   $message   Message to log
      * @param  integer  $priority  Priority of message
      * @return array Event array
-     **/
+     */
     protected function _packEvent($message, $priority)
     {
         return array_merge(array(
@@ -405,13 +446,13 @@ class Logger implements Factory
      * Before a message will be received by any of the writers, it
      * must be accepted by all filters added with this method.
      *
-     * @param  int|\Zend\Log\Filter\FilterInterface $filter
+     * @param  int|\Zend\Config\Config|\Zend\Log\Filter $filter
      * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return void
+     * @return \Zend\Log\Logger
      */
     public function addFilter($filter)
     {
-        if (is_integer($filter)) {
+        if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
 
         } elseif ($filter instanceof Config || is_array($filter)) {
@@ -430,8 +471,8 @@ class Logger implements Factory
      * message and writing it out to storage.
      *
      * @param  mixed $writer \Zend\Log\Writer\AbstractWriter or Config array
-     * @throws \Zend\Log\Exception\InvalidArgumentException 
-     * @return void
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return \Zend\Log\Logger
      */
     public function addWriter($writer)
     {
@@ -453,9 +494,9 @@ class Logger implements Factory
     /**
      * Set an extra item to pass to the log writers.
      *
-     * @param  $name    Name of the field
-     * @param  $value   Value of the field
-     * @return void
+     * @param  string $name    Name of the field
+     * @param  string $value   Value of the field
+     * @return \Zend\Log\Logger
      */
     public function setEventItem($name, $value)
     {
@@ -482,7 +523,7 @@ class Logger implements Factory
     {
         // Only register once.  Avoids loop issues if it gets registered twice.
         if ($this->_registeredErrorHandler) {
-        	return $this;
+            return $this;
         }
 
         $this->_origErrorHandler = set_error_handler(array($this, 'errorHandler'));
@@ -501,7 +542,7 @@ class Logger implements Factory
             E_RECOVERABLE_ERROR => self::ERR,
             E_STRICT            => self::DEBUG,
         );
-        
+
         $this->_errorHandlerMap['E_DEPRECATED'] = self::DEBUG;
         $this->_errorHandlerMap['E_USER_DEPRECATED'] = self::DEBUG;
         $this->_registeredErrorHandler = true;
@@ -542,7 +583,7 @@ class Logger implements Factory
      * Set timestamp format for log entries.
      *
      * @param string $format
-     * @return Zend\Log\Logger
+     * @return \Zend\Log\Logger
      */
     public function setTimestampFormat($format)
     {

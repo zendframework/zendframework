@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,74 +23,180 @@
  */
 namespace Zend\Filter;
 
+use Zend\Loader\Broker,
+    Zend\Stdlib\SplPriorityQueue;
+
 /**
  * @uses       Zend\Filter\Exception
  * @uses       Zend\Filter\AbstractFilter
  * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FilterChain extends AbstractFilter
 {
-    const CHAIN_APPEND  = 'append';
-    const CHAIN_PREPEND = 'prepend';
+    /**
+     * Default priority at which filters are added
+     */
+    const DEFAULT_PRIORITY = 1000;
+
+    /**
+     * @var Broker
+     */
+    protected $broker;
 
     /**
      * Filter chain
      *
-     * @var array
+     * @var SplPriorityQueue
      */
-    protected $_filters = array();
+    protected $filters;
 
     /**
-     * Adds a filter to the chain
-     *
-     * @param  \Zend\Filter\Filter $filter
-     * @param  string $placement
-     * @return \Zend\Filter\FilterChain Provides a fluent interface
+     * Initialize filter chain
+     * 
+     * @return void
      */
-    public function addFilter(Filter $filter, $placement = self::CHAIN_APPEND)
+    public function __construct($options = null)
     {
-        if ($placement == self::CHAIN_PREPEND) {
-            array_unshift($this->_filters, $filter);
-        } else {
-            $this->_filters[] = $filter;
+        $this->filters = new SplPriorityQueue();
+
+        if (null !== $options) {
+            $this->setOptions($options);
         }
+    }
+
+    public function setOptions($options)
+    {
+        if (!is_array($options) && !$options instanceof \Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected array or Traversable; received "%s"',
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
+        foreach ($options as $key => $value) {
+            switch (strtolower($key)) {
+                case 'callbacks':
+                    foreach ($value as $spec) {
+                        $callback = isset($spec['callback']) ? $spec['callback'] : false;
+                        $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
+                        if ($callback) {
+                            $this->attach($callback, $priority);
+                        }
+                    }
+                    break;
+                case 'filters':
+                    foreach ($value as $spec) {
+                        $name     = isset($spec['name'])     ? $spec['name']     : false;
+                        $options  = isset($spec['options'])  ? $spec['options']  : array();
+                        $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
+                        if ($name) {
+                            $this->attachByName($name, $options, $priority);
+                        }
+                    }
+                    break;
+                default:
+                    // ignore other options
+                    break;
+            }
+        }
+
         return $this;
     }
 
     /**
-     * Add a filter to the end of the chain
+     * Plugin Broker
      *
-     * @param  \Zend\Filter\Filter $filter
-     * @return \Zend\Filter\FilterChain Provides a fluent interface
+     * Set or retrieve the plugin broker, or retrieve a specific plugin from it.
+     *
+     * If $name is null, the broker instance is returned; it will be lazy-loaded
+     * if not already present.
+     *
+     * If $name is a Broker instance, this broker instance will replace or set 
+     * the internal broker, and the instance will be returned.
+     *
+     * If $name is a string, $name and $options will be passed to the broker's 
+     * load() method.
+     * 
+     * @param  null|Broker|string $name 
+     * @param array $options 
+     * @return Broker|Filter
      */
-    public function appendFilter(Filter $filter)
+    public function broker($name = null, $options = array())
     {
-        return $this->addFilter($filter, self::CHAIN_APPEND);
+        if ($name instanceof Broker) {
+            $this->broker = $broker;
+            return $this->broker;
+        } 
+
+        if (null === $this->broker) {
+            $this->broker = new FilterBroker();
+        }
+
+        if (null === $name) {
+            return $this->broker;
+        }
+
+        return $this->broker->load($name, $options);
     }
 
     /**
-     * Add a filter to the start of the chain
-     *
-     * @param  \Zend\Filter\Filter $filter
-     * @return \Zend\Filter\FilterChain Provides a fluent interface
+     * Attach a filter to the chain
+     * 
+     * @param  callback|Filter $callback A Filter implementation or valid PHP callback
+     * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
+     * @return FilterChain
      */
-    public function prependFilter(Filter $filter)
+    public function attach($callback, $priority = self::DEFAULT_PRIORITY)
     {
-        return $this->addFilter($filter, self::CHAIN_PREPEND);
+        if (!is_callable($callback)) {
+            if (!$callback instanceof Filter) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Expected a valid PHP callback; received "%s"',
+                    (is_object($callback) ? get_class($callback) : gettype($callback))
+                ));
+            }
+            $callback = array($callback, 'filter');
+        }
+        $this->filters->insert($callback, $priority);
+        return $this;
+    }
+
+    /**
+     * Attach a filter to the chain using a short name
+     *
+     * Retrieves the filter from the attached plugin broker, and then calls attach() 
+     * with the retrieved instance.
+     * 
+     * @param  string $name 
+     * @param  mixed $options 
+     * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
+     * @return FilterChain
+     */
+    public function attachByName($name, $options = array(), $priority = self::DEFAULT_PRIORITY)
+    {
+        if (!is_array($options)) {
+            $options = (array) $options;
+        } else {
+            if (range(0, count($options) - 1) != array_keys($options)) {
+                $options = array($options);
+            }
+        }
+        $filter = $this->broker($name, $options);
+        return $this->attach($filter, $priority);
     }
 
     /**
      * Get all the filters
      *
-     * @return Filter[]
+     * @return SplPriorityQueue
      */
     public function getFilters()
     {
-        return $this->_filters;
+        return $this->filters;
     }
 
     /**
@@ -103,10 +209,13 @@ class FilterChain extends AbstractFilter
      */
     public function filter($value)
     {
+        $chain = clone $this->filters;
+
         $valueFiltered = $value;
-        foreach ($this->_filters as $filter) {
-            $valueFiltered = $filter->filter($valueFiltered);
+        foreach ($chain as $filter) {
+            $valueFiltered = call_user_func($filter, $valueFiltered);
         }
+
         return $valueFiltered;
     }
 }

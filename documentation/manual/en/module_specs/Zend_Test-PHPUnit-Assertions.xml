@@ -36,7 +36,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>assertQuery($path, $message = '')</methodname>: assert that
+                    <methodname>assertQuery($path, $message)</methodname>: assert that
                     one or more DOM elements matching the given <acronym>CSS</acronym> selector are
                     present. If a <varname>$message</varname> is present, it will be
                     prepended to any failed assertion message.
@@ -45,43 +45,39 @@
 
             <listitem>
                 <para>
-                    <code>assertQueryContentContains($path, $match, $message =
-                        '')</code>: assert that one or more DOM elements matching
-                    the given <acronym>CSS</acronym> selector are present, and that at least one
-                    contains the content provided in <varname>$match</varname>. If a
-                    <varname>$message</varname> is present, it will be prepended to any
-                    failed assertion message.
+                    <methodname>assertQueryContentContains($path, $match, $message)</methodname>:
+                    assert that one or more DOM elements matching the given <acronym>CSS</acronym>
+                    selector are present, and that at least one contains the content provided in
+                    <varname>$match</varname>. If a <varname>$message</varname> is present, it will
+                    be prepended to any failed assertion message.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryContentRegex($path, $pattern, $message =
-                        '')</code>: assert that one or more DOM elements matching
-                    the given <acronym>CSS</acronym> selector are present, and that at least one
-                    matches the regular expression provided in
-                    <varname>$pattern</varname>. If a <varname>$message</varname> is present,
-                    it will be prepended to any failed assertion message.
+                    <methodname>assertQueryContentRegex($path, $pattern, $message)</methodname>:
+                    assert that one or more DOM elements matching the given <acronym>CSS</acronym>
+                    selector are present, and that at least one matches the regular expression
+                    provided in <varname>$pattern</varname>. If a <varname>$message</varname> is
+                    present, it will be prepended to any failed assertion message.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryCount($path, $count, $message =
-                        '')</code>: assert that there are exactly
-                    <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
-                    selector present. If a <varname>$message</varname> is present, it
-                    will be prepended to any failed assertion message.
+                    <methodname>assertQueryCount($path, $count, $message)</methodname>: assert that
+                    there are exactly <varname>$count</varname> DOM elements matching the given
+                    <acronym>CSS</acronym> selector present. If a <varname>$message</varname> is
+                    present, it will be prepended to any failed assertion message.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertQueryCountMin($path, $count, $message =
-                        '')</code>: assert that there are at least
-                    <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
-                    selector present. If a <varname>$message</varname> is present, it
-                    will be prepended to any failed assertion message.
+                    <methodname>assertQueryCountMin($path, $count, $message)</methodname>: assert
+                    that there are at least <varname>$count</varname> DOM elements matching the
+                    given <acronym>CSS</acronym> selector present. If a <varname>$message</varname>
+                    is present, it will be prepended to any failed assertion message.
                     <emphasis>Note:</emphasis> specifying a value of 1 for
                     <varname>$count</varname> is the same as simply using
                     <methodname>assertQuery()</methodname>.
@@ -90,11 +86,10 @@
 
             <listitem>
                 <para>
-                    <code>assertQueryCountMax($path, $count, $message =
-                        '')</code>: assert that there are no more than
-                    <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
-                    selector present. If a <varname>$message</varname> is present, it
-                    will be prepended to any failed assertion message.
+                    <methodname>assertQueryCountMax($path, $count, $message)</methodname>: assert
+                    that there are no more than <varname>$count</varname> DOM elements matching the
+                    given <acronym>CSS</acronym> selector present. If a <varname>$message</varname>
+                    is present, it will be prepended to any failed assertion message.
                     <emphasis>Note:</emphasis> specifying a value of 1 for
                     <varname>$count</varname> is the same as simply using
                     <methodname>assertQuery()</methodname>.
@@ -277,17 +272,17 @@
 
             <listitem>
                 <para>
-                    <code>assertHeaderContains($header, $match, $message = '')</code>: assert that
-                    the response contains the given header and that its content contains the given
-                    string.
+                    <methodname>assertHeaderContains($header, $match, $message)</methodname>: assert
+                    that the response contains the given header and that its content contains the
+                    given string.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>assertHeaderRegex($header, $pattern, $message = '')</code>: assert that
-                    the response contains the given header and that its content matches the given
-                    regex.
+                    <methodname>assertHeaderRegex($header, $pattern, $message)</methodname>: assert
+                    that the response contains the given header and that its content matches the
+                    given regex.
                 </para>
             </listitem>
         </itemizedlist>

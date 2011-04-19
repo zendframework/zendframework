@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4935 $" />
+		<generation date="$Date: 2010-05-27 15:54:56 -0500 (Thu, 27 May 2010) $" />
+		<language type="lt" />
+	</identity>
+	<collations validSubLocales="lt_LT">
+		<collation type="standard">
+			<rules>
+				<reset>̀</reset>
+				<i>̇̀</i>
+				<reset>́</reset>
+				<i>̇́</i>
+				<reset>̃</reset>
+				<i>̇̃</i>
+				<reset>A</reset>
+				<s>ą</s>
+				<t>Ą</t>
+				<reset>C</reset>
+				<p>č</p>
+				<t>Č</t>
+				<reset>E</reset>
+				<s>ę</s>
+				<t>Ę</t>
+				<s>ė</s>
+				<t>Ė</t>
+				<reset>I</reset>
+				<s>į</s>
+				<t>Į</t>
+				<s>y</s>
+				<t>Y</t>
+				<reset>S</reset>
+				<p>š</p>
+				<t>Š</t>
+				<reset>U</reset>
+				<s>ų</s>
+				<t>Ų</t>
+				<s>ū</s>
+				<t>Ū</t>
+				<reset>Z</reset>
+				<p>ž</p>
+				<t>Ž</t>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

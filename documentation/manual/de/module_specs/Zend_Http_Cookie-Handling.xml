@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
+<!-- EN-Revision: 22744 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie und Zend_Http_CookieJar</title>
@@ -26,7 +26,7 @@
             gespeichert werden. Bei einer neuen Anfrage seitens des Clients wird nach allen Cookies,
             die auf diese Anfrage zutreffen, gesucht. Diese werden automatisch
             zum Anfrage-Header hinzugefügt, was besonders nützlich ist, wenn man
-            eine Benutzersession über aufeinanderfolgende <acronym>HTTP</acronym> Anfragen
+            eine Benutzersession über aufeinander folgende <acronym>HTTP</acronym> Anfragen
             beibehalten muss; die Session-ID wird automatisch gesendet, wenn es notwendig ist.
             Ferner ist es möglich, <classname>Zend_Http_CookieJar</classname> Objekte zu
             serialisieren und, wenn nötig, in $_SESSION zu speichern.
@@ -43,9 +43,9 @@
                 <listitem>
                     <para>
                         Mithilfe des Konstruktors und der folgenden Syntax:
-                        <code>new <classname>Zend_Http_Cookie</classname>(string $name, string
+                        <command>new <classname>Zend_Http_Cookie</classname>(string $name, string
                             $value, string $domain, [int $expires, [string $path, [boolean
-                            $secure]]]);</code>
+                            $secure]]]);</command>
                     </para>
 
                     <itemizedlist>
@@ -72,7 +72,7 @@
                             <para>
                                 <varname>$expires</varname>: Ablaufzeit des Cookies als UNIX
                                 Zeitstempel (optional, standardmäßig <constant>FALSE</constant>).
-                                Ein Nichtsetzen führt zu einer Behandlung als 'Session-Cookie', das
+                                Ein Nicht setzen führt zu einer Behandlung als 'Session-Cookie', das
                                 keine Ablaufzeit enthält.
                             </para>
                         </listitem>
@@ -107,7 +107,8 @@
                     </para>
 
                     <para>
-                        Die Methode <code>fromString</code> akzeptiert die folgenden Parameter:
+                        Die Methode <methodname>fromString()</methodname> akzeptiert die folgenden
+                        Parameter:
                     </para>
 
                     <itemizedlist>
@@ -132,7 +133,7 @@
                             <para>
                                 <varname>$encodeValue</varname>: Ob der Wert über urldecode
                                 übergeben werden soll.Hat auch Einfluss auf der Verhalten des
-                                Cookies wenn es in einen Cookie String zurückkonvertiert wird.
+                                Cookies wenn es in einen Cookie String zurück konvertiert wird.
                                 (Optional ist er standardmäßig true)
                             </para>
                         </listitem>
@@ -217,34 +218,34 @@ echo $cookie;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>string getName()</code>: Gibt den Namen des Cookies zurück
+                        <methodname>getName()</methodname>: Gibt den Namen des Cookies zurück
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string getValue()</code>: Gibt den wirklichen, also nicht kodierten,
-                        Inhalt zurück
+                        <methodname>getValue()</methodname>: Gibt den wirklichen, also nicht
+                        kodierten, Inhalt zurück
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string getDomain()</code>: Gibt die Domain des Cookies zurück
+                        <methodname>getDomain()</methodname>: Gibt die Domain des Cookies zurück
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>string getPath()</code>: Gibt den Pfad des Cookies zurück; dessen
+                        <methodname>getPath()</methodname>: Gibt den Pfad des Cookies zurück; dessen
                         Standardwert ist '/'
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>int getExpiryTime()</code>: Gibt die Ablaufzeit des Cookies als
-                        UNIX-Timestamp zurück. Falls der Cookie keine Ablaufzeit besitzt, wird
+                        <methodname>getExpiryTime()</methodname>: Gibt die Ablaufzeit des Cookies
+                        als UNIX-Timestamp zurück. Falls der Cookie keine Ablaufzeit besitzt, wird
                         <constant>NULL</constant> zurückgegeben.
                     </para>
                 </listitem>
@@ -252,13 +253,13 @@ echo $cookie;
         </para>
 
         <para>
-            Zusätzlich gibt es einige boolesche tester-Methoden:
+            Zusätzlich gibt es einige boolesche Tester-Methoden:
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>boolean isSecure()</code>: Gibt zurück, ob der Cookie nur über sichere
-                        Verbindungen gesendet werden kann. Wenn <constant>TRUE</constant>
+                        <methodname>isSecure()</methodname>: Gibt zurück, ob der Cookie nur über
+                        sichere Verbindungen gesendet werden kann. Wenn <constant>TRUE</constant>
                         zurückgegeben wird, wird der Cookie also nur über <acronym>HTTPS</acronym>
                         versendet.
                     </para>
@@ -266,17 +267,17 @@ echo $cookie;
 
                 <listitem>
                     <para>
-                        <code>boolean isExpired(int $time = null)</code>: Überprüft, ob der Cookie
-                        bereits abgelaufen ist. Wenn der Cookie keine Ablaufzeit besitzt, wird diese
-                        Methode immer <constant>FALSE</constant> zurückgegeben. Wenn $time übergeben
-                        wurde, wird der aktuelle Zeitstempel überschrieben und der übergebene
-                        Zeitstempel zur Überprüfung genutzt.
+                        <methodname>isExpired(int $time = null)</methodname>: Überprüft, ob der
+                        Cookie bereits abgelaufen ist. Wenn der Cookie keine Ablaufzeit besitzt,
+                        wird diese Methode immer <constant>FALSE</constant> zurückgegeben. Wenn
+                        $time übergeben wurde, wird der aktuelle Zeitstempel überschrieben und der
+                        übergebene Zeitstempel zur Überprüfung genutzt.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>boolean isSessionCookie()</code>: Überprüft, ob der Cookie ein
+                        <methodname>isSessionCookie()</methodname>: Überprüft, ob der Cookie ein
                         "Session-Cookie" ist, der keine Ablaufzeit besitzt und erst abläuft, wenn
                         die Session beendet wird.
                     </para>
@@ -326,13 +327,13 @@ echo ($cookie->isSessionCookie() ? 'Ja' : 'Nein');
             befindet sich in der match()-Methode. Sie wird genutzt um zu Überprüfen, ob ein Cookie
             auf eine <acronym>HTTP</acronym> Anfrage zutrifft, um zu entscheiden, ob der Cookie in
             der Anfrage gesendet werden soll. Die Methode hat folgende Syntax und Parameter:
-            <code>boolean Zend_Http_Cookie->match(mixed $uri, [boolean $matchSessionCookies,
-                [int $now]]);</code>
+            <command>Zend_Http_Cookie->match(mixed $uri, [boolean $matchSessionCookies,
+                [int $now]]);</command>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>mixed $uri</code>: Ein zu überprüfendes
+                        <varname>$uri</varname>: Ein zu überprüfendes
                         <classname>Zend_Uri_Http</classname> Objekt mit einer Domain und einem Pfad.
                         Wahlweise kann stattdessen jedoch auch ein String, der einen validen
                         <acronym>HTTP</acronym> <acronym>URL</acronym> darstellt, übergeben werden.
@@ -343,7 +344,7 @@ echo ($cookie->isSessionCookie() ? 'Ja' : 'Nein');
 
                 <listitem>
                     <para>
-                        <code>boolean $matchSessionCookies</code>: Gibt an, ob Session-Cookies
+                        <varname>$matchSessionCookies</varname>: Gibt an, ob Session-Cookies
                         zutreffen sollen. Standardmäßig ist dieser Parameter
                         <constant>TRUE</constant>. Wenn <constant>FALSE</constant> stattdessen
                         übergeben wird, werden Cookies ohne Ablaufzeit nie zutreffen.
@@ -352,7 +353,7 @@ echo ($cookie->isSessionCookie() ? 'Ja' : 'Nein');
 
                 <listitem>
                     <para>
-                        <code>int $now</code>: Ablaufzeit (in Form eines UNIX-Zeitstempels) auf
+                        <varname>$now</varname>: Ablaufzeit (in Form eines UNIX-Zeitstempels) auf
                         welche der Cookie überprüft wird. Wenn sie nicht angegeben wird, wird die
                         gegenwärtige Zeit genutzt.
                     </para>
@@ -605,8 +606,8 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                             </listitem>
                         </itemizedlist>
 
-                        Mehr über das Zutreffen von Cookies gibt es hier:
-                        <xref linkend="zend.http.cookies.cookie.matching" />.
+                        Mehr über das Zutreffen von Cookies gibt es in
+                        <link linkend="zend.http.cookies.cookie.matching">diesem Abschnitt</link>.
                     </para>
                 </listitem>
             </itemizedlist>

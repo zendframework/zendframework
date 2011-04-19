@@ -495,7 +495,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 Unsubscribing from a Topic follows the exact same pattern as the previous example,
                 with the exception that we should call <methodname>unsubscribeAll()</methodname>
                 instead. The parameters included are identical to a subscription request with the
-                exception that "hub.mode" is set to "unsubscribe".
+                exception that "<property>hub.mode</property>" is set to "unsubscribe".
             </para>
 
             <para>

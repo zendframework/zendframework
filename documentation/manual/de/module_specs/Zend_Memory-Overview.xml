@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22748 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.overview">
     <title>Übersicht</title>
@@ -96,14 +96,14 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             <title>Memory Container</title>
 
             <para>
-                Der Memory Container hat einen virtuellen oder aktuellen
-                <code>Wert</code>, Attribut oder Zeichenketten Typ. Dieses
+                Der Memory Container hat ein virtuelles oder aktuelles Attribut
+                <property>value</property> vom Typ String. Dieses
                 Attribut enthält Datenwerte die bei der Erstellung des
                 Memory Objektes definiert werden.
             </para>
 
             <para>
-                Es kann mit <code>Wert</code> Attributen wie auch mit
+                Es kann mit <property>value</property> Attributen wie auch mit
                 Objekt Eigenschaften gearbeitet werden.
             </para>
 
@@ -153,7 +153,7 @@ $memObject->value = substr($memObject->value, $start, $length);
                 Der Memory Manager swappt keine Objekte die eine kleinere Größe
                 als das definierte Minimum besitzen, und zwar aus Gründen der
                 Geschwindigkeit. Siehe
-                <xref linkend="zend.memory.memory-manager.settings.min-size" />
+                <link linkend="zend.memory.memory-manager.settings.min-size">diesen Abschnitt</link>
                 für mehr Details.
             </para>
         </sect3>

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\CodeGenerator\Php;
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group Zend_CodeGenerator
@@ -96,7 +96,7 @@ class PhpPropertyValueTest extends \PHPUnit_Framework_TestCase
                     'baz2'
                     )
                 ),
-            new Php\PhpPropertyValue(array('value' => 'PHP_EOL', 'type' => 'constant'))
+            new Php\PhpValue(array('value' => 'PHP_EOL', 'type' => 'constant'))
             );
 
         $expectedSource = <<<EOS

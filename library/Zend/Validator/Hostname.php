@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend_Validator
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,37 +36,39 @@ namespace Zend\Validator;
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Ip
  * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend_Validator
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Hostname extends AbstractValidator
 {
-    const INVALID                 = 'hostnameInvalid';
-    const IP_ADDRESS_NOT_ALLOWED  = 'hostnameIpAddressNotAllowed';
-    const UNKNOWN_TLD             = 'hostnameUnknownTld';
-    const INVALID_DASH            = 'hostnameDashCharacter';
-    const INVALID_HOSTNAME_SCHEMA = 'hostnameInvalidHostnameSchema';
-    const UNDECIPHERABLE_TLD      = 'hostnameUndecipherableTld';
-    const INVALID_HOSTNAME        = 'hostnameInvalidHostname';
-    const INVALID_LOCAL_NAME      = 'hostnameInvalidLocalName';
-    const LOCAL_NAME_NOT_ALLOWED  = 'hostnameLocalNameNotAllowed';
     const CANNOT_DECODE_PUNYCODE  = 'hostnameCannotDecodePunycode';
+    const INVALID                 = 'hostnameInvalid';
+    const INVALID_DASH            = 'hostnameDashCharacter';
+    const INVALID_HOSTNAME        = 'hostnameInvalidHostname';
+    const INVALID_HOSTNAME_SCHEMA = 'hostnameInvalidHostnameSchema';
+    const INVALID_LOCAL_NAME      = 'hostnameInvalidLocalName';
+    const INVALID_URI             = 'hostnameInvalidUri';
+    const IP_ADDRESS_NOT_ALLOWED  = 'hostnameIpAddressNotAllowed';
+    const LOCAL_NAME_NOT_ALLOWED  = 'hostnameLocalNameNotAllowed';
+    const UNDECIPHERABLE_TLD      = 'hostnameUndecipherableTld';
+    const UNKNOWN_TLD             = 'hostnameUnknownTld';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID                 => "Invalid type given. String expected",
-        self::IP_ADDRESS_NOT_ALLOWED  => "'%value%' appears to be an IP address, but IP addresses are not allowed",
-        self::UNKNOWN_TLD             => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
-        self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash in an invalid position",
-        self::INVALID_HOSTNAME_SCHEMA => "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'",
-        self::UNDECIPHERABLE_TLD      => "'%value%' appears to be a DNS hostname but cannot extract TLD part",
-        self::INVALID_HOSTNAME        => "'%value%' does not match the expected structure for a DNS hostname",
-        self::INVALID_LOCAL_NAME      => "'%value%' does not appear to be a valid local network name",
-        self::LOCAL_NAME_NOT_ALLOWED  => "'%value%' appears to be a local network name but local network names are not allowed",
         self::CANNOT_DECODE_PUNYCODE  => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded",
+        self::INVALID                 => "Invalid type given. String expected",
+        self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash in an invalid position",
+        self::INVALID_HOSTNAME        => "'%value%' does not match the expected structure for a DNS hostname",
+        self::INVALID_HOSTNAME_SCHEMA => "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'",
+        self::INVALID_LOCAL_NAME      => "'%value%' does not appear to be a valid local network name",
+        self::INVALID_URI             => "'%value%' does not appear to be a valid URI hostname",
+        self::IP_ADDRESS_NOT_ALLOWED  => "'%value%' appears to be an IP address, but IP addresses are not allowed",
+        self::LOCAL_NAME_NOT_ALLOWED  => "'%value%' appears to be a local network name but local network names are not allowed",
+        self::UNDECIPHERABLE_TLD      => "'%value%' appears to be a DNS hostname but cannot extract TLD part",
+        self::UNKNOWN_TLD             => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
     );
 
     /**
@@ -95,6 +97,11 @@ class Hostname extends AbstractValidator
      * Allows all types of hostnames
      */
     const ALLOW_ALL   = 7;
+
+    /**
+     * Allows all types of hostnames
+     */
+    const ALLOW_URI = 8;
 
     /**
      * Array of valid top-level-domains
@@ -192,7 +199,7 @@ class Hostname extends AbstractValidator
         'CH'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿœ]{1,63}$/iu'),
         'CL'  => array(1 => '/^[\x{002d}0-9a-záéíñóúü]{1,63}$/iu'),
         'CN'  => 'Hostname/Cn.php',
-        'COM' => 'Zend/Validator/Hostname/Com.php',
+        'COM' => 'Hostname/Com.php',
         'DE'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿăąāćĉčċďđĕěėęēğĝġģĥħĭĩįīıĵķĺľļłńňņŋŏőōœĸŕřŗśŝšşťţŧŭůűũųūŵŷźžż]{1,63}$/iu'),
         'DK'  => array(1 => '/^[\x{002d}0-9a-zäéöü]{1,63}$/iu'),
         'ES'  => array(1 => '/^[\x{002d}0-9a-zàáçèéíïñòóúü·]{1,63}$/iu'),
@@ -204,7 +211,7 @@ class Hostname extends AbstractValidator
             6 => '/^[\x{002d}0-9a-zἀ-ἇἐ-ἕἠ-ἧἰ-ἷὀ-ὅὐ-ὗὠ-ὧὰ-ώᾀ-ᾇᾐ-ᾗᾠ-ᾧᾰ-ᾴᾶᾷῂῃῄῆῇῐ-ΐῖῗῠ-ῧῲῳῴῶῷ]{1,63}$/iu'),
         'FI'  => array(1 => '/^[\x{002d}0-9a-zäåö]{1,63}$/iu'),
         'GR'  => array(1 => '/^[\x{002d}0-9a-zΆΈΉΊΌΎ-ΡΣ-ώἀ-ἕἘ-Ἕἠ-ὅὈ-Ὅὐ-ὗὙὛὝὟ-ώᾀ-ᾴᾶ-ᾼῂῃῄῆ-ῌῐ-ΐῖ-Ίῠ-Ῥῲῳῴῶ-ῼ]{1,63}$/iu'),
-        'HK'  => 'Zend/Validator/Hostname/Cn.php',
+        'HK'  => 'Hostname/Cn.php',
         'HU'  => array(1 => '/^[\x{002d}0-9a-záéíóöúüőű]{1,63}$/iu'),
         'INFO'=> array(1 => '/^[\x{002d}0-9a-zäåæéöøü]{1,63}$/iu',
             2 => '/^[\x{002d}0-9a-záéíóöúüőű]{1,63}$/iu',
@@ -216,15 +223,15 @@ class Hostname extends AbstractValidator
             8 => '/^[\x{002d}0-9a-záéíñóúü]{1,63}$/iu'),
         'IO'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿăąāćĉčċďđĕěėęēğĝġģĥħĭĩįīıĵķĺľļłńňņŋŏőōœĸŕřŗśŝšşťţŧŭůűũųūŵŷźžż]{1,63}$/iu'),
         'IS'  => array(1 => '/^[\x{002d}0-9a-záéýúíóþæöð]{1,63}$/iu'),
-        'JP'  => 'Zend/Validator/Hostname/Jp.php',
+        'JP'  => 'Hostname/Jp.php',
         'KR'  => array(1 => '/^[\x{AC00}-\x{D7A3}]{1,17}$/iu'),
         'LI'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿœ]{1,63}$/iu'),
         'LT'  => array(1 => '/^[\x{002d}0-9ąčęėįšųūž]{1,63}$/iu'),
         'MD'  => array(1 => '/^[\x{002d}0-9ăâîşţ]{1,63}$/iu'),
         'MUSEUM' => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿāăąćċčďđēėęěğġģħīįıķĺļľłńņňŋōőœŕŗřśşšţťŧūůűųŵŷźżžǎǐǒǔ\x{01E5}\x{01E7}\x{01E9}\x{01EF}ə\x{0292}ẁẃẅỳ]{1,63}$/iu'),
-        'NET' => 'Zend/Validator/Hostname/Com.php',
+        'NET' => 'Hostname/Com.php',
         'NO'  => array(1 => '/^[\x{002d}0-9a-zàáä-éêñ-ôöøüčđńŋšŧž]{1,63}$/iu'),
-        'NU'  => 'Zend/Validator/Hostname/Com.php',
+        'NU'  => 'Hostname/Com.php',
         'ORG' => array(1 => '/^[\x{002d}0-9a-záéíñóúü]{1,63}$/iu',
             2 => '/^[\x{002d}0-9a-zóąćęłńśźż]{1,63}$/iu',
             3 => '/^[\x{002d}0-9a-záäåæéëíðóöøúüýþ]{1,63}$/iu',
@@ -275,14 +282,25 @@ class Hostname extends AbstractValidator
         'SJ'  => array(1 => '/^[\x{002d}0-9a-zàáä-éêñ-ôöøüčđńŋšŧž]{1,63}$/iu'),
         'TH'  => array(1 => '/^[\x{002d}0-9a-z\x{0E01}-\x{0E3A}\x{0E40}-\x{0E4D}\x{0E50}-\x{0E59}]{1,63}$/iu'),
         'TM'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿāăąćĉċčďđēėęěĝġģĥħīįĵķĺļľŀłńņňŋőœŕŗřśŝşšţťŧūŭůűųŵŷźżž]{1,63}$/iu'),
-        'TW'  => 'Zend/Validator/Hostname/Cn.php',
+        'TW'  => 'Hostname/Cn.php',
         'TR'  => array(1 => '/^[\x{002d}0-9a-zğıüşöç]{1,63}$/iu'),
         'VE'  => array(1 => '/^[\x{002d}0-9a-záéíóúüñ]{1,63}$/iu'),
         'VN'  => array(1 => '/^[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯư\x{1EA0}-\x{1EF9}]{1,63}$/iu'),
-        'ایران' => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
-        '中国' => 'Zend/Validator/Hostname/Cn.php',
-        '公司' => 'Zend/Validator/Hostname/Cn.php',
-        '网络' => 'Zend/Validator/Hostname/Cn.php'
+        '中国' => 'Hostname/Cn.php',
+        '中國' => 'Hostname/Cn.php',
+        'ලංකා' => array(1 => '/^[\x{0d80}-\x{0dff}]{1,63}$/iu'),
+        '香港' => 'Hostname/Cn.php',
+        '台湾' => 'Hostname/Cn.php',
+        '台灣' => 'Hostname/Cn.php',
+        'امارات'   => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
+        'الاردن'    => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
+        'السعودية' => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
+        'ไทย' => array(1 => '/^[\x{002d}0-9a-z\x{0E01}-\x{0E3A}\x{0E40}-\x{0E4D}\x{0E50}-\x{0E59}]{1,63}$/iu'),
+        'рф' => array(1 => '/^[\x{002d}0-9а-яё]{1,63}$/iu'),
+        'تونس' => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
+        'مصر' => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
+        'இலங்கை' => array(1 => '/^[\x{0b80}-\x{0bff}]{1,63}$/iu'),
+        'فلسطين' => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
     );
 
     protected $_idnLength = array(
@@ -295,10 +313,17 @@ class Hostname extends AbstractValidator
         'NET' => array(3 => 17, 5 => 20),
         'ORG' => array(6 => 17),
         'TW'  => array(1 => 20),
-        'ایران' => array(1 => 30),
+        'امارات' => array(1 => 30),
+        'الاردن' => array(1 => 30),
+        'السعودية' => array(1 => 30),
+        'تونس' => array(1 => 30),
+        'مصر' => array(1 => 30),
+        'فلسطين' => array(1 => 30),
         '中国' => array(1 => 20),
-        '公司' => array(1 => 20),
-        '网络' => array(1 => 20),
+        '中國' => array(1 => 20),
+        '香港' => array(1 => 20),
+        '台湾' => array(1 => 20),
+        '台灣' => array(1 => 20),
     );
 
     protected $_options = array(
@@ -311,9 +336,9 @@ class Hostname extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param integer          $allow       OPTIONAL Set what types of hostname to allow (default ALLOW_DNS)
-     * @param boolean          $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
-     * @param boolean          $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
+     * @param integer           $allow       OPTIONAL Set what types of hostname to allow (default ALLOW_DNS)
+     * @param boolean           $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
+     * @param boolean           $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
      * @param \Zend\Validator\Ip $ipValidator OPTIONAL
      * @return void
      * @see http://www.iana.org/cctld/specifications-policies-cctlds-01apr02.htm  Technical Specifications for ccTLDs
@@ -474,6 +499,8 @@ class Hostname extends AbstractValidator
     }
 
     /**
+     * Defined by \Zend\Validator\Interface
+     *
      * Returns true if and only if the $value is a valid hostname with respect to the current allow option
      *
      * @param  string $value
@@ -510,9 +537,7 @@ class Hostname extends AbstractValidator
                 // First check TLD
                 $matches = array();
                 if (preg_match('/([^.]{2,10})$/i', end($domainParts), $matches) ||
-                    (end($domainParts) == 'ایران') || (end($domainParts) == '中国') ||
-                    (end($domainParts) == '公司') || (end($domainParts) == '网络')) {
-
+                    (array_key_exists(end($domainParts), $this->_validIdns))) {
                     reset($domainParts);
 
                     // Hostname characters are: *(label dot)(label dot label); max 254 chars
@@ -533,7 +558,7 @@ class Hostname extends AbstractValidator
                     /**
                      * Match against IDN hostnames
                      * Note: Keep label regex short to avoid issues with long patterns when matching IDN hostnames
-                     * @see Zend_Validate_Hostname_Interface
+                     * @see \Zend\Validator\Hostname\Interface
                      */
                     $regexChars = array(0 => '/^[a-z0-9\x2d]{1,63}$/i');
                     if ($this->_options['idn'] &&  isset($this->_validIdns[strtoupper($this->_tld)])) {
@@ -609,6 +634,15 @@ class Hostname extends AbstractValidator
             }
         } else if ($this->_options['allow'] & self::ALLOW_DNS) {
             $this->_error(self::INVALID_HOSTNAME);
+        }
+
+        // Check for URI Syntax (RFC3986)
+        if ($this->_options['allow'] & self::ALLOW_URI) {
+            if (preg_match("/^([a-zA-Z0-9-._~!$&\'()*+,;=]|%[[:xdigit:]]{2}){1,254}$/i", $value)) {
+                return true;
+            } else {
+                $this->_error(self::INVALID_URI);
+            }
         }
 
         // Check input against local network name schema; last chance to pass validation

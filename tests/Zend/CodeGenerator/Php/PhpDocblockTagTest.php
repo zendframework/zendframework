@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ namespace ZendTest\CodeGenerator\Php;
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group Zend_CodeGenerator
@@ -46,12 +46,12 @@ class TagTest extends \PHPUnit_Framework_TestCase
      */
     protected $_tag = null;
 
-    public function setup()
+    public function setUp()
     {
         $this->_tag = new \Zend\CodeGenerator\Php\PhpDocblockTag();
     }
 
-    public function teardown()
+    public function tearDown()
     {
         $this->_tag = null;
     }
@@ -67,7 +67,7 @@ class TagTest extends \PHPUnit_Framework_TestCase
         $this->_tag->setDescription('Foo foo foo');
         $this->assertEquals('Foo foo foo', $this->_tag->getDescription());
     }
-    
+
 
 
 //    public function testDatatypeGetterAndSetterPersistValue()
@@ -88,28 +88,6 @@ class TagTest extends \PHPUnit_Framework_TestCase
 //        $this->_tag->setDatatype('string');
 //        $this->_tag->setDescription('bar bar bar');
 //        $this->assertEquals('@param string $foo bar bar bar', $this->_tag->generate());
-//    }
-
-//
-//    /**
-//     * @var Zend_CodeGenerator_Php_Docblock_Tag
-//     */
-//    protected $_tag = null;
-//
-//    public function setup()
-//    {
-//        $this->_tag = new \Zend\CodeGenerator\Php\Docblock\Tag\Return();
-//    }
-//
-//    public function teardown()
-//    {
-//        $this->_tag = null;
-//    }
-//
-//    public function testDatatypeGetterAndSetterPersistValue()
-//    {
-//        $this->_tag->setDatatype('Foo');
-//        $this->assertEquals('Foo', $this->_tag->getDatatype());
 //    }
 
 }

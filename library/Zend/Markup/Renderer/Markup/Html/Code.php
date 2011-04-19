@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Markup\Renderer\Markup\Html;
-use Zend\Markup;
+use Zend\Markup\Token;
 
 /**
  * Code markup for HTML
@@ -33,21 +33,34 @@ use Zend\Markup;
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Code extends AbstractHtml
 {
 
     /**
+     * Constructor
+     *
+     * Since we don't want any filters on this markup (since they will collide
+     * with PHP's highlight_string() function), we simply override the
+     * constructor.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * Convert the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param Token $token
      * @param string $text
      *
      * @return string
      */
-    public function __invoke(Markup\Token $token, $text)
+    public function __invoke(Token $token, $text)
     {
         return highlight_string($text, true);
     }

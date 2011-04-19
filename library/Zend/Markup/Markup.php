@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Loader\Broker;
 /**
  * @category   Zend
  * @package    Zend_Markup
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Markup
@@ -90,15 +90,16 @@ class Markup
      *
      * @param  string $parser
      * @param  string $renderer
-     * @param  array $options
+     * @param  array $parserOptions
+     * @param  array $rendererOptions
      * @return \Zend\Markup\Renderer\AbstractRenderer
      */
-    public static function factory($parser, $renderer = 'Html', array $options = array())
+    public static function factory($parser, $renderer = 'Html', array $parserOptions = array(), array $rendererOptions = array())
     {
-        $parser         = self::getParserBroker()->load($parser);
+        $parser         = self::getParserBroker()->load($parser, $parserOptions);
         $rendererBroker = self::getRendererBroker();
         $rendererBroker->setParser($parser);
-        $renderer       = $rendererBroker->load($renderer, $options);
+        $renderer       = $rendererBroker->load($renderer, $rendererOptions);
 
         return $renderer;
     }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -42,7 +42,7 @@ use Zend\Queue\Stomp\Client,
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
@@ -113,7 +113,7 @@ class Mock extends Connection
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
@@ -163,5 +163,24 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('testing', $test->getCommand());
         $this->assertEquals(1, $test->getHeader('testing'));
         $this->assertEquals('hello world', $test->getBody());
+    }
+
+    public function testSendAndReceiveByteMessage()
+    {
+        $frame = new Frame();
+        $frame->setCommand('testing');
+        $frame->setHeader('testing',1);
+        $frame->setBody('hello ' . Frame::END_OF_FRAME . ' world');
+
+        $client = new Client();
+        $client->addConnection('tcp', 'localhost', '11232', '\ZendTest\Queue\Stomp\Mock');
+
+        $client->send($frame);
+        $this->assertTrue($client->canRead());
+        $test = $client->receive();
+
+        $this->assertEquals('testing', $test->getCommand());
+        $this->assertEquals(1, $test->getHeader('testing'));
+        $this->assertEquals('hello ' . Frame::END_OF_FRAME . ' world', $test->getBody());
     }
 }

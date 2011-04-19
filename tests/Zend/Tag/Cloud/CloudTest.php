@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Tag
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use Zend\Tag,
  * @category   Zend
  * @package    Zend_Tag
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Tag
  * @group      Zend_Tag_Cloud
@@ -65,7 +65,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testGetAndSetCloudDecorator()
     {
         $cloud = $this->_getCloud();
-        $this->assertTrue($cloud->getCloudDecorator() instanceof \Zend\Tag\Cloud\Decorator\HTMLCloud);
+        $this->assertTrue($cloud->getCloudDecorator() instanceof \Zend\Tag\Cloud\Decorator\HtmlCloud);
 
         $cloud->setCloudDecorator(new TestAsset\CloudDummy());
         $this->assertTrue($cloud->getCloudDecorator() instanceof TestAsset\CloudDummy);
@@ -95,7 +95,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testGetAndSetTagDecorator()
     {
         $cloud = $this->_getCloud();
-        $this->assertTrue($cloud->getTagDecorator() instanceof \Zend\Tag\Cloud\Decorator\HTMLTag);
+        $this->assertTrue($cloud->getTagDecorator() instanceof \Zend\Tag\Cloud\Decorator\HtmlTag);
 
         $cloud->setTagDecorator(new TestAsset\TagDummy());
         $this->assertTrue($cloud->getTagDecorator() instanceof TestAsset\TagDummy);

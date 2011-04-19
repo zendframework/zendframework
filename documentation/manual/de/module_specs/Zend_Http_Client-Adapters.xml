@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22432 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -160,9 +160,10 @@
 
                 <para>
                     Zusätzlich, wenn persistente Verbindungen verwendet werden, sollte man
-                    Keep-Alive <acronym>HTTP</acronym> Anfragen aktivieren wie in <xref
-                        linkend="zend.http.client.configuration" /> beschrieben - andernfalls werden
-                    persistente Verbindungen nur wenig oder gar keinen Effekt haben.
+                    Keep-Alive <acronym>HTTP</acronym> Anfragen aktivieren wie im <link
+                        linkend="zend.http.client.configuration">Abschnitt für Konfiguration</link>
+                    beschrieben - andernfalls werden persistente Verbindungen nur wenig oder gar
+                    keinen Effekt haben.
                 </para>
             </note>
 
@@ -440,9 +441,9 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             <para>
                 Da der Proxy Adapter von <classname>Zend_Http_Client_Adapter_Socket</classname>
                 abgeleitet ist, kann die Stream Kontext Zugriffsmethode verwendet werden
-                (siehe <xref linkend="zend.http.client.adapters.socket.streamcontext" />) um
-                Stream Kontext Optionen auf Proxy Verbindungen zu setzen wie es oben demonstriert
-                wurde.
+                (siehe <link linkend="zend.http.client.adapters.socket.streamcontext">den Abschnitt
+                    für Konfiguration</link>) um Stream Kontext Optionen auf Proxy Verbindungen zu
+                setzen wie es oben demonstriert wurde.
             </para>
         </note>
     </sect2>

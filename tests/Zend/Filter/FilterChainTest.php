@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,51 +28,107 @@ use Zend\Filter\FilterChain,
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
 class FilterChainTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Ensures expected return value from empty filter chain
-     *
-     * @return void
-     */
-    public function testEmpty()
+    public function testEmptyFilterChainReturnsOriginalValue()
     {
-        $filter = new FilterChain();
-        $value  = 'something';
-        $this->assertEquals($value, $filter($value));
+        $chain = new FilterChain();
+        $value = 'something';
+        $this->assertEquals($value, $chain->filter($value));
     }
 
-    /**
-     * Ensures that filters are executed in the expected order (FIFO)
-     *
-     * @return void
-     */
-    public function testFilterOrder()
+    public function testFiltersAreExecutedInFifoOrder()
     {
-        $filter = new FilterChain();
-        $filter->addFilter(new LowerCase())
-               ->addFilter(new StripUpperCase());
+        $chain = new FilterChain();
+        $chain->attach(new LowerCase())
+              ->attach(new StripUpperCase());
         $value = 'AbC';
         $valueExpected = 'abc';
-        $this->assertEquals($valueExpected, $filter($value));
+        $this->assertEquals($valueExpected, $chain->filter($value));
     }
 
-    /**
-     * Ensures that filters can be prepended and will be executed in the
-     * expected order
-     */
-    public function testFilterPrependOrder()
+    public function testFiltersAreExecutedAccordingToPriority()
     {
-        $filter = new FilterChain();
-        $filter->appendFilter(new StripUpperCase())
-               ->prependFilter(new LowerCase());
+        $chain = new FilterChain();
+        $chain->attach(new StripUpperCase())
+              ->attach(new LowerCase, 100);
         $value = 'AbC';
+        $valueExpected = 'b';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testAllowsConnectingArbitraryCallbacks()
+    {
+        $chain = new FilterChain();
+        $chain->attach(function($value) {
+            return strtolower($value);
+        });
+        $value = 'AbC';
+        $this->assertEquals('abc', $chain->filter($value));
+    }
+
+    public function testAllowsConnectingViaClassShortName()
+    {
+        $chain = new FilterChain();
+        $chain->attachByName('string_trim', array('encoding' => 'utf-8'), 100)
+              ->attachByName('strip_tags')
+              ->attachByName('string_to_lower', array('encoding' => 'utf-8'), 900);
+        $value = '<a name="foo"> ABC </a>';
         $valueExpected = 'abc';
-        $this->assertEquals($valueExpected, $filter($value));
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testAllowsConfiguringFilters()
+    {
+        $config = $this->getChainConfig();
+        $chain  = new FilterChain();
+        $chain->setOptions($config);
+        $value = '<a name="foo"> abc </a>';
+        $valueExpected = 'ABC';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testAllowsConfiguringFiltersViaConstructor()
+    {
+        $config = $this->getChainConfig();
+        $chain  = new FilterChain($config);
+        $value = '<a name="foo"> abc </a>';
+        $valueExpected = 'ABC';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testConfigurationAllowsTraversableObjects()
+    {
+        $config = $this->getChainConfig();
+        $config = new \ArrayIterator($config);
+        $chain  = new FilterChain($config);
+        $value = '<a name="foo"> abc </a>';
+        $valueExpected = 'ABC';
+        $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    protected function getChainConfig()
+    {
+        return array(
+            'callbacks' => array(
+                array('callback' => __CLASS__ . '::staticUcaseFilter'),
+                array('priority' => 10000, 'callback' => function($value) {
+                    return trim($value);
+                }),
+            ),
+            'filters' => array(
+                array('name' => 'strip_tags', 'options' => array('encoding' => 'utf-8'), 'priority' => 10100),
+            ),
+        );
+    }
+
+    public static function staticUcaseFilter($value)
+    {
+        return strtoupper($value);
     }
 }
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4126 $"/>
+		<generation date="$Date: 2009-05-05 18:33:13 -0500 (Tue, 05 May 2009) $"/>
+		<language type="cs" /> 
+	</identity>
+		<collations  validSubLocales="cs_CZ">
+			<collation type="standard" >
+				<rules>
+					<reset>C</reset>
+					<p>č</p>
+					<t>Č</t>
+					<reset>H</reset>
+					<p>ch</p>
+					<t>cH</t>
+					<t>Ch</t>
+					<t>CH</t>
+					<reset>R</reset>
+					<p>ř</p>
+					<t>Ř</t>
+					<reset>S</reset>
+					<p>š</p>
+					<t>Š</t>
+					<reset>Z</reset>
+					<p>ž</p>
+					<t>Ž</t>
+				</rules>
+			</collation  >
+			<collation type="digits-after" >
+				<rules>
+					<reset>C</reset>
+					<p>č</p>
+					<t>Č</t>
+					<reset>H</reset>
+					<p>ch</p>
+					<t>cH</t>
+					<t>Ch</t>
+					<t>CH</t>
+					<reset>R</reset>
+					<p>ř</p>
+					<t>Ř</t>
+					<reset>S</reset>
+					<p>š</p>
+					<t>Š</t>
+					<reset>Z</reset>
+					<p>ž</p>
+					<t>Ž</t>
+					<reset><last_non_ignorable/></reset>
+					<pc>0123456789</pc>
+				</rules>
+			</collation  >
+		</collations>
+</ldml>

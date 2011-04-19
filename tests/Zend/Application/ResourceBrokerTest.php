@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Application\ResourceBroker,
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
@@ -58,7 +58,7 @@ class ResourceBrokerTest extends \PHPUnit_Framework_TestCase
     {
         $this->broker->registerSpec('view');
         $view = $this->broker->load('view');
-        $this->assertType('Zend\Application\Resource\View', $view);
+        $this->assertInstanceOf('Zend\Application\Resource\View', $view);
         $this->assertNull($view->getBootstrap());
     }
 
@@ -67,7 +67,7 @@ class ResourceBrokerTest extends \PHPUnit_Framework_TestCase
         $this->broker->setBootstrap($this->bootstrap);
         $this->broker->registerSpec('view');
         $view = $this->broker->load('view');
-        $this->assertType('Zend\Application\Resource\View', $view);
+        $this->assertInstanceOf('Zend\Application\Resource\View', $view);
         $this->assertSame($this->bootstrap, $view->getBootstrap());
     }
 

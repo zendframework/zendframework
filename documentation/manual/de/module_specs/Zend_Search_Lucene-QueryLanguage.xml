@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22757 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -177,18 +177,19 @@ Test*
             <footnote>
                 <para>
                     Es ist zu beachten das es nicht zu einer
-                    <code>Zend_Search_Lucene_Search_QueryParserException</code> kommt, sondern zu
-                    einer <code>Zend_Search_Lucene_Exception</code>. Sie wird wärend dem
-                    Umschreiben der Abfrage geworfen.
+                    <classname>Zend_Search_Lucene_Search_QueryParserException</classname> kommt,
+                    sondern zu einer <classname>Zend_Search_Lucene_Exception</classname>. Sie wird
+                    wärend dem Umschreiben der Abfrage geworfen.
                 </para>
             </footnote>.
         </para>
 
         <para>
             Das kann durch Verwendung der Methoden
-            <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> und
-            <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code> geändert
-            werden.
+            <methodname>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</methodname>
+            und
+            <methodname>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</methodname>
+            geändert werden.
         </para>
     </sect2>
 
@@ -292,9 +293,9 @@ roam~0.8
         <para>
             Deshalb setzt <classname>Zend_Search_Lucene</classname> ein Limit der passenden
             Ausdrücke pro Abfrage (Unterabfrage). Dieses Limit kann durch Verwendung der Methoden
-            <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/
-            <code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code> empfangen und gesetzt
-            werden.
+            <methodname>Zend_Search_Lucene::getTermsPerQueryLimit()</methodname> und
+            <methodname>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</methodname> empfangen und
+            gesetzt werden.
         </para>
 
         <para>
@@ -493,7 +494,7 @@ PHP^4 framework
             </para>
 
             <para>
-                Dieser ist standardmäßig auf <code>OR</code> gesetzt.
+                Dieser ist standardmäßig auf 'OR' gesetzt.
             </para>
 
             <para>

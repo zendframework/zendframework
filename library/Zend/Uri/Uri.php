@@ -131,7 +131,7 @@ class Uri
      * Create a new URI object
      * 
      * @param  \Zend\Uri\Uri|string|null $uri
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($uri = null) 
     {
@@ -755,12 +755,12 @@ class Uri
      * 
      * @param  string $userInfo
      * @return string
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     static public function encodeUserInfo($userInfo)
     {
         if (! is_string($userInfo)) {
-            throw new \InvalidArgumentException("Expecting a string, got " . gettype($userInfo));
+            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($userInfo));
         }
         
         $regex = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:]|%(?![A-Fa-f0-9]{2}))/'; 
@@ -795,7 +795,7 @@ class Uri
     static public function encodeQueryFragment($input)
     {
         if (! is_string($input)) {
-            throw new \InvalidArgumentException("Expecting a string, got " . gettype($input));
+            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($input));
         }   
         
         $regex = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]+|%(?![A-Fa-f0-9]{2}))/'; 
@@ -823,7 +823,7 @@ class Uri
     static public function parseScheme($uriString)
     {
         if (! is_string($uriString)) {
-            throw new \InvalidArgumentException("Expecting a string, got " . gettype($uriString));
+            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($uriString));
         }
         
         if (preg_match('/^([A-Za-z][A-Za-z0-9\.\+\-]*):/', $uriString, $match)) {

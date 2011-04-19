@@ -169,7 +169,15 @@ class Uri
             if (strlen($this->_path) > 0 && substr($this->_path, 0, 1) != '/') return false; 
         } else {
             if ($this->_userInfo || $this->_port) return false;
-            if (! ($this->_path || $this->_query || $this->_fragment)) return false;
+            
+            if ($this->_path) { 
+                // Check path-only (no host) URI
+                if (substr($this->_path, 0, 2) == '//') return false; 
+                
+            } elseif (! ($this->_query || $this->_fragment)) {
+                // No host, path, query or fragment - this is not a valid URI 
+                return false;
+            }
         }
         
         return true;

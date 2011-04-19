@@ -313,7 +313,6 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidUriIsInvalid(Uri $uri)
     {
-        $this->markTestSkipped();
         $this->assertFalse($uri->isValid());
     }
     
@@ -705,14 +704,19 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $obj2 = new Uri;
         $obj2->setPath('//path');
 
-        // A relative URI cannot have a path beginning with ':'
+        // A port-only URI with no host
         $obj3 = new Uri;
-        $obj3->setPath(':path');
+        $obj3->setPort(123);
+        
+        // A userinfo-only URI with no host
+        $obj4 = new Uri; 
+        $obj4->setUserInfo('shahar:password');
         
         return array(
             array($obj1),
             array($obj2),
-            array($obj3)
+            array($obj3),
+            array($obj4)
         );
     }
     

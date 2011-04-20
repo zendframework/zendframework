@@ -302,6 +302,35 @@ class Uri
      */
     public function normalize()
     {
+        if ($this->_scheme) { 
+            $this->_scheme = static::_normalizeScheme($this->_scheme);
+        }
+        
+        if ($this->_host) { 
+            $this->_host = static::_normalizeHost($this->_host);
+        }
+        
+        if ($this->_port) { 
+            $this->_port = static::_normalizePort($this->_port);
+        }
+        
+        if ($this->_path) { 
+            $this->_path = static::_normalizePath($this->_path);
+        }
+        
+        if ($this->_query) { 
+            $this->_query = static::_normalizeQuery($this->_query);
+        }
+        
+        if ($this->_fragment) { 
+            $this->_fragment = static::_normalizeFragment($this->_fragment);
+        }
+        
+        // If path is empty (and we have a host), path should be '/'
+        if ($this->_host && empty($this->_path)) { 
+            $this->_path = '/';
+        }
+        
         return $this;
     }
     
@@ -962,5 +991,131 @@ class Uri
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})+$/';
         return (bool) preg_match($regex, $host);
+    }
+    
+    /**
+     * Part normalization methods
+     * 
+     * These are called by normalize() using static::_normalize*() so they may
+     * be extended or overridden by extending classes to implement additional
+     * scheme specific normalization rules
+     */
+    
+    /**
+     * Normalize the scheme
+     * 
+     * Usually this means simpy converting the scheme to lower case
+     * 
+     * @param  string $scheme
+     * @return string
+     */
+    static protected function _normalizeScheme($scheme)
+    {
+        return strtolower($scheme);
+    }
+    
+    /**
+     * Normalize the host part
+     * 
+     * By default this converts host names to lower case
+     * 
+     * @param  string $host
+     * @return string
+     */
+    static protected function _normalizeHost($host)
+    {
+        return strtolower($host);
+    } 
+    
+    /**
+     * Normalize the port
+     * 
+     * In scheme specific classes, this may include unsetting the port if
+     * the default port is used
+     * 
+     * @param  integer $port
+     * @return integer | null
+     */
+    static protected function _normalizePort($port)
+    {
+        return $port; 
+    }
+    
+    /**
+     * Normalize the path
+     * 
+     * This involves removing redundant dot segments, decoding any over-encoded
+     * characters and encoding everything that needs to be encoded and is not
+     * 
+     * @param  string $path
+     * @return string
+     */
+    static protected function _normalizePath($path)
+    {
+        $path = self::encodePath(
+            self::_decodeUrlEncodedChars(
+                self::removePathDotSegments($path),
+                '/[' . self::CHAR_UNRESERVED . ':@&=\+\$,\/;%]/'
+            )
+        );
+        
+        return $path;
+    }
+    
+    /**
+     * Normalize the query part
+     * 
+     * This involves decoding everything that doesn't need to be encoded, and
+     * encoding everything else
+     * 
+     * @param  string $query
+     * @return string
+     */
+    static protected function _normalizeQuery($query)
+    {
+        $query = self::encodeQueryFragment(
+            self::_decodeUrlEncodedChars(
+                $query,
+                '/[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]/'
+            )
+        );
+        
+        return $query;
+    }
+    
+    /**
+     * Normalize the fragment part
+     * 
+     * Currently this is exactly the same as _normalizeQuery().
+     * 
+     * @param  string $fragment
+     * @return string
+     */
+    static protected function _normalizeFragment($fragment)
+    {
+        return static::_normalizeQuery($fragment);
+    }
+    
+    /**
+     * Decode all percent encoded characters which are allowed to be represented literally
+     * 
+     * Will not decode any characters which are not listed in the 'allowed' list
+     * 
+     * @param string $input
+     * @param string $allowed Pattern of allowed characters
+     */
+    static protected function _decodeUrlEncodedChars($input, $allowed = '')
+    {
+        $decodeCb = function($match) use ($allowed)
+        {
+            $char = rawurldecode($match[0]);
+            if (preg_match($allowed, $char)) { 
+                return $char;
+            } else {
+                return $match[0];
+            }
+        };
+        
+        return preg_replace_callback('/%[A-Fa-f0-9]{2}/', $decodeCb, $input);
     }
 }

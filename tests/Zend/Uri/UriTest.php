@@ -621,6 +621,19 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test normalizing URLs
+     * 
+     * @param string $orig
+     * @param string $expected
+     * @dataProvider normalizedUrlsProvider
+     */
+    public function testNormalizeUrl($orig, $expected)
+    {
+        $url = new Uri($orig);
+        $this->assertEquals($expected, $url->normalize()->toString());
+    }
+    
+    /**
      * Other tests
      */
     
@@ -1080,6 +1093,22 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
     
+    static public function normalizedUrlsProvider()
+    {
+        return array(
+            array('hTtp://example.com', 'http://example.com/'),
+            array('https://EXAMPLE.COM/FOO/BAR', 'https://example.com/FOO/BAR'),
+            array('FOO:/bar/with space?que%3fry#frag%ment#', 'foo:/bar/with%20space?que?ry#frag%25ment%23'),
+            array('/path/%68%65%6c%6c%6f/world', '/path/hello/world'),
+            array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz')
+        );
+    }
+    
+    /**
+     * Provider for testing the constructor's behavior on invalid input
+     * 
+	 * @return array
+     */
     static public function invalidConstructorInputProvider()
     {
         return array(

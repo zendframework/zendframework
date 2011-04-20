@@ -92,6 +92,18 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that parseScheme throws an exception in case of invalid input
+     
+     * @param  mixed $input
+     * @dataProvider notStringInputProvider
+     * @expectedException \Zend\Uri\Exception\InvalidArgumentException
+     */
+    public function testParseSchemeInvalidInput($input)
+    {
+        $scheme = Uri::parseScheme($input);
+    }
+    
+    /**
      * Test that __toString() (magic) returns an empty string if URI is invalid
      * 
      * @dataProvider invalidUriObjectProvider
@@ -1161,6 +1173,24 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array(true),
             array(array('scheme' => 'http')),
             array(12)
+        );
+    }
+    
+    /**
+     * Provider for testing the behaviors of functions that expect only strings
+     * 
+     * Most of these methods are expected to throw an exception for the 
+     * provided values
+     * 
+     * @return array
+     */
+    static public function notStringInputProvider()
+    {
+        return array(
+            array(new Uri('http://foo.bar')),
+            array(null),
+            array(12),
+            array(array('scheme' => 'http', 'host' => 'example.com'))
         );
     }
 }

@@ -53,7 +53,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         date_default_timezone_set("America/Chicago");
-        \Zend\Locale\Locale::setDefault('en');
+        \Zend\Locale\Locale::setFallback('en');
         Parser\TypeLoader::resetMap();
         $this->_request = new \Zend\Amf\Request\StreamRequest();
     }

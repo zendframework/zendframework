@@ -322,6 +322,43 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that we can set a valid hostname
+     * 
+     * @param string $host
+     * @dataProvider validHostProvider
+     */
+    public function testSetGetValidHost($host)
+    {
+        $uri = new Uri;
+        $uri->setHost($host);
+        $this->assertEquals($host, $uri->getHost());
+    }
+    
+    /**
+     * Test that when setting an invalid host an exception is thrown
+     * 
+     * @param string $host
+     * @dataProvider invalidHostProvider
+     * @expectedException \Zend\Uri\Exception\InvalidUriPartException
+     */
+    public function testSetInvalidHost($host)
+    {
+        $uri = new Uri;
+        $uri->setHost($host);
+    }
+    
+    /**
+     * Test that we can set the host part to 'null'
+     * 
+     */
+    public function testSetNullHost()
+    {
+        $uri = new Uri('http://example.com/bar');
+        $uri->setHost(null);
+        $this->assertNull($uri->getHost());
+    }
+    
+    /**
      * Test that we can use an array to set the query parameters
      * 
      * @param array  $data

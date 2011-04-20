@@ -561,6 +561,14 @@ class Uri
      */
     public function setHost($host)
     {
+        
+        if ($host !== '' && $host !== null && ! self::validateHost($host, $this->_validHostTypes)) {
+            throw new Exception\InvalidUriPartException(
+            	"Host '$host' is not valid or is not accepted by " . get_class($this), 
+                Exception\InvalidUriPartException::INVALID_HOSTNAME
+            );
+        }
+        
         $this->_host = $host;
         return $this;
     }

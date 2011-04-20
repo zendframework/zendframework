@@ -1100,7 +1100,12 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('https://EXAMPLE.COM/FOO/BAR', 'https://example.com/FOO/BAR'),
             array('FOO:/bar/with space?que%3fry#frag%ment#', 'foo:/bar/with%20space?que?ry#frag%25ment%23'),
             array('/path/%68%65%6c%6c%6f/world', '/path/hello/world'),
-            array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz')
+            array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz'),
+            array('File:///SitePages/fi%6ce%20has%20spaces', 'file:///SitePages/file%20has%20spaces'),
+            array('/foo/bar/../baz?do=action#showFragment', '/foo/baz?do=action#showFragment'),
+            
+            // This should be left unchanged, at least for the generic Uri class
+            array('http://example.com:80/file?query=bar', 'http://example.com:80/file?query=bar'),
         );
     }
     

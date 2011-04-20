@@ -225,9 +225,7 @@ class Uri
                 $authority = substr($authority, 0, $colonPos);
             }
             
-            if ($authority) {
-                $this->setHost($authority);
-            }
+            $this->setHost($authority);
         }
         if (! $uri) return $this;
         

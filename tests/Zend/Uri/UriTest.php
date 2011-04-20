@@ -634,6 +634,45 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test the merge() static method for merging new URIs
+     * 
+     * @param string $base
+     * @param string $relative
+     * @param string $expected
+     * @dataProvider resolvedAbsoluteUriProvider
+     */
+    public function testMergeToNewUri($base, $relative, $expected)
+    {
+        $actual = Uri::merge($base, $relative)->toString();
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * Make sure that the ::merge() method does not modify any input objects
+     * 
+     * This performs two checks: 
+     *  1. That the result object is *not* the same object as any of the input ones
+     *  2. That the method doesn't modify the input objects
+     *  
+     */
+    public function testMergeTwoObjectsNotModifying()
+    {
+        $base = new Uri('http://example.com/bar');
+        $ref  = new Uri('baz?qwe=1');
+        
+        $baseSig = serialize($base);
+        $refSig  = serialize($ref);
+        
+        $actual = Uri::merge($base, $ref);
+        
+        $this->assertNotSame($base, $actual);
+        $this->assertNotSame($ref, $actual);
+        
+        $this->assertEquals($baseSig, serialize($base));
+        $this->assertEquals($refSig, serialize($ref));
+    }
+    
+    /**
      * Other tests
      */
     

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage GoGrid
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -30,7 +30,8 @@ class Job extends GoGridAbstract
     const API_GRID_JOB_LIST = 'grid/job/list';
     const API_GRID_JOB_GET = 'grid/job/get';
     /**
-     * get job list API
+     * Get job list API
+     * This call will list all the jobs in the system for a specified date range. The default is the last month.
      *
      * @param array $options
      * @return Zend\Service\GoGrid\ObjectList
@@ -40,19 +41,20 @@ class Job extends GoGridAbstract
         return new GoGridObjectList($result);
     }
     /**
-     * get job API
+     * Get job API
+     * This call will retrieve one or many job objects from your list of jobs
      *
-     * @param array $options
+     * @param string|array $job
      * @return Zend\Service\GoGrid\ObjectList
      */
-    public function get($id, $job, $options=null)
+    public function get($job)
     {
-        if (empty($options)) {
-            $options = array();
+        if (empty($job)) {
+            throw new Exception\InvalidArgumentException("The job.get API needs a id/job parameter");
         }
-        $options['id'] = $id;
-        $options['job'] = $job;
+        $options=array();
+        $options['job']= $job;
         $result= $this->_call(self::API_GRID_JOB_GET, $options);
-        return new GoGridObject($result);
+        return new GoGridObjectList($result);
     }
 }

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage GoGrid
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -58,7 +58,6 @@ abstract class GoGrid
      * @var Zend\Http\Client
      */
     private $_httpClient;
-
     /**
      * __construct
      *
@@ -80,7 +79,6 @@ abstract class GoGrid
             $this->_apiVersion = (string) $apiVer;
         }
     }
-
     /**
      * get the HttpClient static instance
      * 
@@ -93,7 +91,6 @@ abstract class GoGrid
         }
         return $this->_httpClient;
     }
-
     /**
      * Set the API secret
      * 
@@ -105,7 +102,6 @@ abstract class GoGrid
             $this->_secret = (string) $secret;
         }
     }
-
     /**
      * Set the API key
      *
@@ -117,7 +113,6 @@ abstract class GoGrid
             $this->_apiKey = (string) $key;
         }
     }
-
     /**
      * Set the API version
      *
@@ -129,7 +124,6 @@ abstract class GoGrid
             $this->_apiVersion = $ver;
         }
     }
-
     /**
      * Get the API version
      * 
@@ -139,7 +133,6 @@ abstract class GoGrid
     {
         return $this->_apiVersion;
     }
-
     /**
      * Compute the signature for the API call
      * This signature is valid in a window of 10 min with the localtime of the server
@@ -150,7 +143,6 @@ abstract class GoGrid
     {
         return md5($this->_apiKey . $this->_secret . time());
     }
-
     /**
      *
      * @param string $method
@@ -163,13 +155,26 @@ abstract class GoGrid
             throw new Exception\InvalidArgumentException("The options must be an array");
         }
         $client = $this->_getHttpClient();
-        $client->setUri(self::URL_API . $method);
         $client->setParameterGet('format', self::FORMAT_API);
         $client->setParameterGet('api_key', $this->_apiKey);
         $client->setParameterGet('sig', $this->_computeSignature());
         $client->setParameterGet('v', $this->_apiVersion);
         if (!empty($options)) {
-            $client->setParameterGet($options);
+            $get='';
+            foreach ($options as $key=>$value) {
+                if (is_array($value)) {
+                    foreach ($value as $val) {
+                        $get.= $key.'='.urlencode($val).'&';
+                    }
+                } else {
+                    $client->setParameterGet($key, $value);
+                }
+            }
+        }
+        if (!empty($get)) {
+            $client->setUri(self::URL_API . $method.'?'.$get);
+        } else {
+            $client->setUri(self::URL_API . $method);
         }
         $this->_error= false;
         $this->_errorType= null;
@@ -181,7 +186,6 @@ abstract class GoGrid
         $this->_errorType= $response->getStatus();
         return false;
     }
-
     /**
      * Get the last HTTP response
      *

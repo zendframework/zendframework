@@ -118,7 +118,7 @@ abstract class GoGrid
      *
      * @param string $ver
      */
-    public function setVersion($ver)
+    public function setApiVersion($ver)
     {
         if (!empty($ver) && $ver < self::API_VER) {
             $this->_apiVersion = $ver;
@@ -129,7 +129,7 @@ abstract class GoGrid
      * 
      * @return string 
      */
-    public function getVersion()
+    public function getApiVersion()
     {
         return $this->_apiVersion;
     }

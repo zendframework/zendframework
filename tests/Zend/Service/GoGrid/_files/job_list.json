@@ -1,0 +1,168 @@
+{
+    "list": [
+        {
+            "attempts": 1,
+            "command": {
+                "description": "Create Virtual Server",
+                "id": 6,
+                "name": "CreateVirtualServer",
+                "object": "option"
+            },
+            "createdon": 1231007644632,
+            "currentstate": {
+                "description": "Change request has succeeded.",
+                "id": 3,
+                "name": "Succeeded",
+                "object": "option"
+            },
+            "datacenter": {
+                "description": "US East 1 Datacenter",
+                "id": 2,
+                "name": "US-East-1",
+                "object": "option"
+            },
+            "detail": {
+                "description": "tests",
+                "image": "w2k3_64_iis_asp_mssql2k5xp",
+                "ip": "208.113.76.34",
+                "name": "test 2",
+                "type": "virtual_server"
+            },
+            "history": [
+                {
+                    "id": 10242,
+                    "state": {
+                        "description": "Change request is created but not queued yet",
+                        "id": 7,
+                        "name": "Created",
+                        "object": "option"
+                    }
+                },
+                {
+                    "id": 10243,
+                    "state": {
+                        "description": "Change request is new to the system.",
+                        "id": 1,
+                        "name": "Queued",
+                        "object": "option"
+                    }
+                },
+                {
+                    "id": 10244,
+                    "state": {
+                        "description": "Change request is is transient state...Processing.",
+                        "id": 2,
+                        "name": "Processing",
+                        "object": "option"
+                    }
+                },
+                {
+                    "id": 10251,
+                    "state": {
+                        "description": "Change request has succeeded.",
+                        "id": 3,
+                        "name": "Succeeded",
+                        "object": "option"
+                    },
+                    "updatedon": 1231008346317
+                }
+            ],
+            "id": 60531,
+            "lastupdatedon": 1231008346317,
+            "object": "job",
+            "objecttype": {
+                "description": null,
+                "id": 1,
+                "name": "VirtualServer",
+                "object": "option"
+            },
+            "owner": "ankit@gogrid.com"
+        },
+        {
+            "attempts": 1,
+            "command": {
+                "description": "Create Virtual Server",
+                "id": 6,
+                "name": "CreateVirtualServer",
+                "object": "option"
+            },
+            "createdon": 1231007606467,
+            "currentstate": {
+                "description": "Change request has succeeded.",
+                "id": 3,
+                "name": "Succeeded",
+                "object": "option"
+            },
+            "datacenter": {
+                "description": "US West 1 Datacenter",
+                "id": 1,
+                "name": "US-West-1",
+                "object": "option"
+            },
+            "detail": {
+                "description": "tetsss",
+                "image": "centos51_64_lamp",
+                "ip": "208.113.76.32",
+                "name": "test",
+                "type": "virtual_server"
+            },
+            "history": [
+                {
+                    "id": 10239,
+                    "state": {
+                        "description": "Change request is created but not queued yet",
+                        "id": 7,
+                        "name": "Created",
+                        "object": "option"
+                    }
+                },
+                {
+                    "id": 10240,
+                    "state": {
+                        "description": "Change request is new to the system.",
+                        "id": 1,
+                        "name": "Queued",
+                        "object": "option"
+                    }
+                },
+                {
+                    "id": 10241,
+                    "state": {
+                        "description": "Change request is is transient state...Processing.",
+                        "id": 2,
+                        "name": "Processing",
+                        "object": "option"
+                    }
+                },
+                {
+                    "id": 10246,
+                    "state": {
+                        "description": "Change request has succeeded.",
+                        "id": 3,
+                        "name": "Succeeded",
+                        "object": "option"
+                    },
+                    "updatedon": 1231008211834
+                }
+            ],
+            "id": 60530,
+            "lastupdatedon": 1231008211834,
+            "object": "job",
+            "objecttype": {
+                "description": null,
+                "id": 1,
+                "name": "VirtualServer",
+                "object": "option"
+            },
+            "owner": "ankit@gogrid.com"
+        }
+    ],
+    "method": "/grid/job/list",
+    "status": "success",
+    "summary": {
+        "numpages": 1,
+        "returned": 7,
+        "start": 0,
+        "total": 7
+    }
+}

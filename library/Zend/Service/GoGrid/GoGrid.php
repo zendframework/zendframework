@@ -53,11 +53,13 @@ abstract class GoGrid
      */
     protected $_apiVersion = self::VERSION_API;
     /**
-     * HttpClient
-     *
      * @var Zend\Http\Client
      */
-    private $_httpClient;
+    protected $_httpClient;
+    /**
+     * @var Zend\Http\Response
+     */
+    protected $_lastResponse;
     /**
      * __construct
      *
@@ -73,11 +75,9 @@ abstract class GoGrid
         if (!isset($secret)) {
             throw new Exception\InvalidArgumentException("The secret cannot be empty");
         }
-        $this->_apiKey = (string) $key;
-        $this->_secret = (string) $secret;
-        if (!empty($apiVer)) {
-            $this->_apiVersion = (string) $apiVer;
-        }
+        $this->setApiKey($key);
+        $this->setSecret($secret);
+        $this->setApiVersion($apiVer);
     }
     /**
      * get the HttpClient static instance
@@ -176,15 +176,8 @@ abstract class GoGrid
         } else {
             $client->setUri(self::URL_API . $method);
         }
-        $this->_error= false;
-        $this->_errorType= null;
-        $response = $client->request();
-        if ($response->isSuccessful()) {
-            return json_decode($response->getBody(), true);
-        } 
-        $this->_error= true;
-        $this->_errorType= $response->getStatus();
-        return false;
+        $this->_lastResponse = $client->request();
+        return json_decode($this->_lastResponse->getBody(), true);
     }
     /**
      * Get the last HTTP response
@@ -205,21 +198,12 @@ abstract class GoGrid
         return $this->_getHttpClient()->getLastRequest();
     }
     /**
-     * Check if the last request was successful
-     *
-     * @return boolean
-     */
-    public function isSuccessful()
-    {
-        return ($this->_error===false);
-    }
-    /**
      * Get the last error type
      * 
      * @return integer
      */
-    public function getLastError()
+    public function getHttpStatus()
     {
-        return $this->_errorType;
+        return $this->_lastResponse->getStatus();
     }
 }

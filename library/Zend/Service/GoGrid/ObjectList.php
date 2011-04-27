@@ -42,6 +42,7 @@ use Zend\Service\GoGrid\Object;
  */
 class ObjectList implements \Countable, \Iterator, \ArrayAccess
 {
+    const SUCCESS_STATUS= 'success';
     /**
      * @var array Array of Zend\Service\GoGrid\Object
      */
@@ -63,23 +64,41 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     protected $_method;
     /**
-     * @param  array $list
-     * @return void
+     * @var boolean
      */
-    public function __construct($list = null)
+    protected $_error= true;
+    /**
+     * @var string
+     */
+    protected $_errorMsg= '';
+    /**
+     * __construct()
+     * 
+     * @param  array $list
+     * @return boolean
+     */
+    public function __construct($list = array())
     {
-        if (is_array($list)) {
-            $this->_constructFromArray($list['list']);
+        if (empty($list) || !is_array($list)) {
+            return false;
+        }
+        if (array_key_exists('status', $list)) {
+            $this->_status= $list['status'];
+            if ($this->_status!=self::SUCCESS_STATUS) {
+                $this->_errorMsg= $list['list'][0]['message'];
+            } else {
+                $this->_error= false;
+            }
         }
         if (array_key_exists('summary', $list)) {
             $this->_summary= $list['summary'];
         }
-        if (array_key_exists('status', $list)) {
-            $this->_status= $list['status'];
-        }
         if (array_key_exists('method', $list)) {
             $this->_method= $list['method'];
         }
+        if (!$this->_error) {
+            $this->_constructFromArray($list['list']);
+        }    
     }
     /**
      * Transforms the Array to array of posts
@@ -232,14 +251,22 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
         throw new Exception('You are trying to unset read-only property');
     }
     /**
-     * Check if the the object list was successful
+     * Check if the service call was successful
      * 
      * @return boolen
      */
     public function isSuccessful() {
-        return !empty($this->_objects);
+        return ($this->_error===false);
     }
-
+    public function getError() {
+        return $this->_errorMsg;
+    }
+    /**
+     * getSummary
+     *
+     * @param string $key
+     * @return string|array
+     */
     public function getSummary($key=null) {
         if (!empty($key)) {
             if (array_key_exists($key, $this->_summary)) {
@@ -250,9 +277,19 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
         }
         return $this->_summary;
     }
+    /**
+     * getMethod
+     *
+     * @return string
+     */
     public function getMethod() {
         return $this->_method;
     }
+    /**
+     * getStatus
+     *
+     * @return string
+     */
     public function getStatus() {
         return $this->_status;
     }

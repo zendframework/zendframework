@@ -84,7 +84,7 @@ abstract class GoGrid
      * 
      * @return Zend\Http\Client
      */
-    private function _getHttpClient()
+    public function getHttpClient()
     {
         if (empty($this->_httpClient)) {
             $this->_httpClient = new HttpClient();
@@ -120,7 +120,7 @@ abstract class GoGrid
      */
     public function setApiVersion($ver)
     {
-        if (!empty($ver) && $ver < self::API_VER) {
+        if (!empty($ver) && $ver < self::VERSION_API) {
             $this->_apiVersion = $ver;
         }
     }
@@ -154,7 +154,7 @@ abstract class GoGrid
         if (!empty($options) && !is_array($options)) {
             throw new Exception\InvalidArgumentException("The options must be an array");
         }
-        $client = $this->_getHttpClient();
+        $client = $this->getHttpClient();
         $client->setParameterGet('format', self::FORMAT_API);
         $client->setParameterGet('api_key', $this->_apiKey);
         $client->setParameterGet('sig', $this->_computeSignature());
@@ -186,7 +186,7 @@ abstract class GoGrid
      */
     public function getLastResponse()
     {
-        return $this->_getHttpClient()->getLastResponse();
+        return $this->getHttpClient()->getLastResponse();
     }
     /**
      * Get the last HTTP request
@@ -195,7 +195,7 @@ abstract class GoGrid
      */
     public function getLastRequest()
     {
-        return $this->_getHttpClient()->getLastRequest();
+        return $this->getHttpClient()->getLastRequest();
     }
     /**
      * Get the last error type

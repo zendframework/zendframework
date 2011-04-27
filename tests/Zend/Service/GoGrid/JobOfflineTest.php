@@ -23,32 +23,13 @@
  * @namespace
  */
 namespace ZendTest\Service\GoGrid;
-use Zend\Service\GoGrid\Job;
+use Zend\Service\GoGrid\Job,
+        Zend\Service\GoGrid\ObjectList,
+        Zend\Http\Client\Adapter\Test as HttpTest;
 
 /**
  * Test helper
  */
-
-/**
- * @see Zend_Service_Amazon
- */
-
-/**
- * @see Zend_Service_Amazon_ResultSet
- */
-
-/**
- * @see Zend_Service_Amazon_ResultSet
- */
-
-/**
- * @see Zend_Http_Client_Adapter_Socket
- */
-
-/**
- * @see Zend\Http\Client\Adapter\Test
- */
-
 
 /**
  * @category   Zend
@@ -67,14 +48,18 @@ class JobOfflineTest extends \PHPUnit_Framework_TestCase
      * @var Zend\Service\GoGrid\Job
      */
     protected $_job;
-
     /**
      * HTTP client adapter for testing
      *
      * @var Zend\Http\Client\Adapter\Test
      */
     protected $_httpClientAdapterTest;
-
+    /**
+     * Path to test data files
+     *
+     * @var string
+     */
+    protected $_filesPath;
     /**
      * Sets up this test case
      *
@@ -83,6 +68,8 @@ class JobOfflineTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_job = new Job(TESTS_ZEND_SERVICE_GOGRID_OFFLINE_KEY,TESTS_ZEND_SERVICE_GOGRID_OFFLINE_SECRET);
+        $this->_filesPath   = __DIR__ . '/_files';
+        $this->_httpClientAdapterTest = new HttpTest();
 
     }
 
@@ -119,22 +106,25 @@ class JobOfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testJobList()
     {
-        $file= file_get_contents(__DIR__."/_files/job_list.json");
-        $joblist= new Zend\Service\GoGrid\ObjectList($file);
+        $this->_job->getHttpClient()
+                    ->setAdapter($this->_httpClientAdapterTest);
+
+        $this->_httpClientAdapterTest->setResponse($this->_loadResponse(__FUNCTION__));
+
+        $joblist= $this->_job->getList();
 
         $this->assertEquals(count($joblist),2);
-        $this->assertEquals($joblist['status'],'success');
+        $this->assertEquals($joblist->getStatus(),'success');
         
         $job= $joblist[0];
-        $this->assertEquals($job->getAttribute('id'), '60531');
-        $this->assertEquals($job->getAttribute('owner'),'ankit@gogrid.com');
+        $this->assertEquals($job->getAttribute('id'), '583288');
+        $this->assertEquals($job->getAttribute('owner'),'enrico@zend.com');
         $command= $job->getAttribute('command');
-        $this->assertEquals($command['name'],'CreateVirtualServer');
+        $this->assertEquals($command['name'],'DeleteVirtualServer');
         $history= $job->getAttribute('history');
-        $this->assertEquals($history[0]['id'],'10242');
+        $this->assertEquals($history[0]['id'],'3303238');
         $this->assertEquals(count($history),4);
     }
-
     /**
      * testApiVersion
      *
@@ -146,5 +136,14 @@ class JobOfflineTest extends \PHPUnit_Framework_TestCase
         $this->_job->setApiVersion('1.0');
         $this->assertEquals($this->_job->getApiVersion(),'1.0');
     }
-
+    /**
+     * Utility method for returning a string HTTP response, which is loaded from a file
+     *
+     * @param  string $name
+     * @return string
+     */
+    protected function _loadResponse($name)
+    {
+        return file_get_contents("$this->_filesPath/$name.response");
+    }
 }

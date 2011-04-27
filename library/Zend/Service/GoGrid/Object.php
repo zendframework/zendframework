@@ -50,12 +50,4 @@ class Object
         }
         return false;
     }
-    /**
-     * Check if the last call was successful
-     *
-     * @return boolean
-     */
-    public function isSuccessful() {
-        return !empty($this->_attribute);
-    }
 }

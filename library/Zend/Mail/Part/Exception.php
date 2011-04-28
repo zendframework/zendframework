@@ -26,7 +26,7 @@ namespace Zend\Mail\Part;
 use Zend\Mail;
 
 /**
- * @uses       \Zend\Exception
+ * @uses       \Zend\Mail\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

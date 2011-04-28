@@ -33,7 +33,7 @@ use Zend\GData\App;
  * Several different errors may be represented by this exception. For a list
  * of error codes available, see getErrorCode.
  *
- * @uses       \Zend\Exception
+ * @uses       \Exception
  * @uses       \Zend\GData\App\Exception
  * @uses       \Zend\GData\GApps\Error
  * @category   Zend
@@ -42,7 +42,7 @@ use Zend\GData\App;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ServiceException extends \Zend\Exception
+class ServiceException extends \Exception
 {
 
     protected $_rootElement = "AppsForYourDomainErrors";

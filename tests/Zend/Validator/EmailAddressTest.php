@@ -471,7 +471,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(Hostname::ALLOW_ALL, $options['allow']);
             $this->assertTrue($options['mx']);
             set_error_handler($handler);
-        } catch (\Zend\Exception $e) {
+        } catch (\Zend\Validator\Exception\InvalidArgumentException $e) {
             $this->markTestSkipped('MX not available on this system');
         }
     }

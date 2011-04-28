@@ -24,12 +24,12 @@
 namespace Zend\Queue;
 
 /**
- * @uses       \Zend\Exception
+ * @uses       \Exception
  * @category   Zend
  * @package    Zend_Queue
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+class Exception extends \Exception
 {
 }

@@ -389,7 +389,7 @@ class StaticBackend extends AbstractBackend implements Backend
             case Cache\Cache::CLEANING_MODE_MATCHING_TAG:
             case Cache\Cache::CLEANING_MODE_MATCHING_ANY_TAG:
                 if (empty($tags)) {
-                    throw new end\Exception('Cannot use tag matching modes as no tags were defined');
+                    throw new \InvalidArgumentException('Cannot use tag matching modes as no tags were defined');
                 }
                 if ($this->_tagged === null && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
                     $this->_tagged = $tagged;
@@ -429,7 +429,7 @@ class StaticBackend extends AbstractBackend implements Backend
                 break;
             case Cache\Cache::CLEANING_MODE_NOT_MATCHING_TAG:
                 if (empty($tags)) {
-                    throw new \Zend\Exception('Cannot use tag matching modes as no tags were defined');
+                    throw new \InvalidArgumentException('Cannot use tag matching modes as no tags were defined');
                 }
                 if ($this->_tagged === null) {
                     $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME);

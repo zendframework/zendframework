@@ -196,6 +196,7 @@ class Firebug extends AbstractWriter
         FirePhp::getInstance()->send($message,
                                      $label,
                                      $type,
-                                     array('traceOffset'=>6));
+                                     array('traceOffset'=>4,
+                                           'fixZendLogOffsetIfApplicable'=>true));
     }
 }

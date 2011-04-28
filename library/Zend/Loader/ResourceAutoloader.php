@@ -132,7 +132,9 @@ class ResourceAutoloader implements SplAutoloader
     public function getClassPath($class)
     {
         if (null !== $this->getNamespace()) {
-            return $this->getNamespacedClassPath($class);
+            if (false !== ($path = $this->getNamespacedClassPath($class))) {
+                return $path;
+            }
         }
         return $this->getPrefixedClassPath($class);
     }

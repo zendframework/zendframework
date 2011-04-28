@@ -601,7 +601,7 @@ class FirePhp implements Wildfire\Plugin
       if (!$trace) {
           return $trace;
       }
-      for ($i=0 ; $i<sizeof($trace) ; $i++) {
+      for ($i=0 ; $i<count($trace) ; $i++) {
           if (isset($trace[$i]['args'])) {
               $trace[$i]['args'] = $this->_encodeObject($trace[$i]['args']);
           }

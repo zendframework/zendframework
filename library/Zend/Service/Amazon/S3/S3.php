@@ -320,7 +320,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             return $firstpart;
         }
 
-        return $firstpart.'/'.join('/', array_map('rawurlencode', $nameparts));
+        return $firstpart.'/'.implode('/', array_map('rawurlencode', $nameparts));
     }
 
     /**

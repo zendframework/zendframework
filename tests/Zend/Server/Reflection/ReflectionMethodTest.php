@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Server\Reflection;
+
 use Zend\Server\Reflection;
 
 /**
@@ -43,7 +44,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_classRaw = new \ReflectionClass('\Zend\Server\Reflection\Reflection');
+        $this->_classRaw = new \ReflectionClass('\Zend\Server\Reflection');
         $this->_method   = $this->_classRaw->getMethod('reflectClass');
         $this->_class    = new Reflection\ReflectionClass($this->_classRaw);
     }
@@ -106,6 +107,4 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }
-
-
 }

@@ -128,6 +128,17 @@ class Uri
     static protected $_validSchemes = array();
     
     /**
+     * List of default ports per scheme
+     * 
+     * Inheriting URI classes may set this, and the normalization methods will
+     * automatically remove the port if it is equal to the default port for the
+     * current scheme
+     * 
+     * @var array
+     */
+    static protected $_defaultPorts = array();
+    
+    /**
      * Create a new URI object
      * 
      * @param  \Zend\Uri\Uri|string|null $uri
@@ -306,7 +317,7 @@ class Uri
         }
         
         if ($this->_port) { 
-            $this->_port = static::_normalizePort($this->_port);
+            $this->_port = static::_normalizePort($this->_port, $this->_scheme);
         }
         
         if ($this->_path) { 
@@ -1034,14 +1045,22 @@ class Uri
     /**
      * Normalize the port
      * 
-     * In scheme specific classes, this may include unsetting the port if
-     * the default port is used
+     * If the class defines a default port for the current scheme, and the
+     * current port is default, it will be unset. 
      * 
      * @param  integer $port
+     * @param  string  $scheme 
      * @return integer | null
      */
-    static protected function _normalizePort($port)
+    static protected function _normalizePort($port, $scheme = null)
     {
+        if ($scheme && 
+            isset(static::$_defaultPorts[$scheme]) && 
+            $port == static::$_defaultPorts[$scheme]) {
+
+            return null;
+        }
+        
         return $port; 
     }
     

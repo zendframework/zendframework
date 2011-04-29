@@ -35,7 +35,23 @@ namespace Zend\Uri;
  */
 class Http extends Uri
 {
+    /**
+     * @see \Zend\Uri\Uri::$_validSchemes
+     */
     static protected $_validSchemes = array('http', 'https');
+    
+    /**
+     * @see \Zend\Uri\Uri::$_defaultPorts
+     */
+    static protected $_defaultPorts = array(
+        'http'  => 80,
+        'https' => 443
+    );
+    
+    /**
+     * @see \Zend\Uri\Uri::$_validHostTypes
+     */
+    protected $_validHostTypes = self::HOST_DNSORIPV4;
     
     /**
      * Check if the URI is a valid HTTP URI
@@ -48,7 +64,7 @@ class Http extends Uri
      */
     public function isValid()
     {
-        
+        return parent::isValid();
     }
 
     /**
@@ -96,14 +112,15 @@ class Http extends Uri
     /**
      * Validate the host part of an HTTP URI
      * 
-     * Unlike the generic URI syntax, HTTP URIs do not allow IPv6 or reg-name
-     * URIs, only IPv4 and DNS compatible host names.
+     * This overrides the common URI validation method with a DNS or IPv4 only
+     * default. Users may still enforce allowing other host types.
      * 
-     * @param  string $host
+     * @param  string  $host
+     * @param  integer $allowed
      * @return boolean
      */
     static public function validateHost($host, $allowed = self::HOST_DNSORIPV4)
     {
-        
+        return parent::validateHost($host, $allowed);
     }
 }

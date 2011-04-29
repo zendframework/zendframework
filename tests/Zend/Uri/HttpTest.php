@@ -77,6 +77,20 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that normalizing an HTTP URL removes the port depending on scheme 
+     * 
+     * @param string $orig
+     * @param string $expected
+     * @dataProvider portNormalizationTestsProvider
+     */
+    public function testNormalizationRemovesPort($orig, $expected)
+    {
+        $uri = new HttpUri($orig);
+        $uri->normalize();
+        $this->assertEquals($expected, $uri->toString());
+    }
+    
+    /**
      * Data Providers
      */
     
@@ -107,6 +121,17 @@ class HttpTest extends \PHPUnit_Framework_TestCase
             array('mailto'),
             array('g'),
             array('http:')
+        );
+    }
+    
+    static public function portNormalizationTestsProvider()
+    {
+        return array(
+            array('http://www.example.com:80/foo/bar', 'http://www.example.com/foo/bar'),
+            array('http://www.example.com:1234/foo/bar', 'http://www.example.com:1234/foo/bar'),
+            array('https://www.example.com:443/foo/bar', 'https://www.example.com/foo/bar'),
+            array('https://www.example.com:80/foo/bar', 'https://www.example.com:80/foo/bar'),
+            array('http://www.example.com:443/foo/bar', 'http://www.example.com:443/foo/bar'),
         );
     }
 }

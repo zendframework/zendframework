@@ -731,7 +731,7 @@ class Zend_Service_Yahoo
     {
         $difference = array_diff(array_keys($options), $validOptions);
         if ($difference) {
-            throw new Zend\Service\Exception('The following parameters are invalid: ' . join(', ', $difference));
+            throw new Zend\Service\Exception('The following parameters are invalid: ' . implode(', ', $difference));
         }
     }
 

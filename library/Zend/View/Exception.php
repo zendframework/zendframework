@@ -26,7 +26,7 @@ namespace Zend\View;
 /**
  * Exception for Zend_View class.
  *
- * @uses       \Zend\Exception
+ * @uses       \Exception
  * @category   Zend
  * @package    Zend_Date
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

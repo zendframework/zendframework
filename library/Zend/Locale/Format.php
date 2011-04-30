@@ -764,7 +764,7 @@ class Format
             }
         }
 
-        return join($values);
+        return implode($values);
     }
 
     /**

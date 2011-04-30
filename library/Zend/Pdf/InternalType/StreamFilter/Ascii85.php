@@ -127,7 +127,7 @@ class Ascii85 implements StreamFilter
         $data = str_replace($whiteSpace, '', $data);
 
         if (substr($data, -2) != '~>') {
-            throw new \Zend\Exception\CorruptedPdfException('Invalid EOF marker');
+            throw new Exception\CorruptedPdfException('Invalid EOF marker');
             return '';
         }
 

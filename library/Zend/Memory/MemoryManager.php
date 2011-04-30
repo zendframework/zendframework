@@ -203,7 +203,6 @@ class MemoryManager
      * Set memory grow limit
      *
      * @param integer $newLimit
-     * @throws \Zend\Exception
      */
     public function setMemoryLimit($newLimit)
     {

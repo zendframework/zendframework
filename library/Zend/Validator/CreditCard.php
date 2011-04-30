@@ -304,7 +304,7 @@ class CreditCard extends AbstractValidator
                     $this->_error(self::SERVICE, $value);
                     return false;
                 }
-            } catch (\Zend\Exception $e) {
+            } catch (\Exception $e) {
                 $this->_error(self::SERVICEFAILURE, $value);
                 return false;
             }

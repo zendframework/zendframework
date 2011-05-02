@@ -87,7 +87,7 @@ class AutoloaderFactory
         foreach ($options as $class => $opts) {
             if (!class_exists($class)) {
                 $autoloader = self::getStandardAutoloader();
-            	if (!class_exists($class) && !$autoloader->autoload($class))
+                if (!class_exists($class) && !$autoloader->autoload($class)) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(sprintf('Autoloader class "%s" not loaded', $class));
                 }

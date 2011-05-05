@@ -94,7 +94,7 @@ class Bootstrap extends AbstractBootstrap
      * the front controller, and dispatches the front controller.
      *
      * @return mixed
-     * @throws \Zend\Application\BootstrapException
+     * @throws \Zend\Application\Exception\RuntimeException
      */
     public function run()
     {

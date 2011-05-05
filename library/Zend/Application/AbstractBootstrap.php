@@ -99,7 +99,7 @@ abstract class AbstractBootstrap
      *
      * @param  Zend\Application\Application|\Zend\Application\Bootstrapper $application
      * @return void
-     * @throws \Zend\Application\BootstrapException When invalid applicaiton is provided
+     * @throws \Zend\Application\Exception\InvalidArgumentException When invalid application is provided
      */
     public function __construct($application)
     {
@@ -113,6 +113,7 @@ abstract class AbstractBootstrap
      *
      * @param  array $options
      * @return \Zend\Application\AbstractBootstrap
+     * @throws \Zend\Application\Exception\InvalidArgumentException
      */
     public function setOptions(array $options)
     {
@@ -132,7 +133,7 @@ abstract class AbstractBootstrap
 
             if (is_array($brokerOption)) {
                 if (!isset($brokerOption['class'])) {
-                    throw new BootstrapException(
+                    throw new Exception\InvalidArgumentException(
                         'Broker option must contain a "class" key; none provided'
                     );
                 }
@@ -268,8 +269,8 @@ abstract class AbstractBootstrap
 
     /**
      * Set resource plugin broker instance
-     * 
-     * @param  ResourceBroker $broker 
+     *
+     * @param  ResourceBroker $broker
      * @return AbstractBootstrap
      */
     public function setBroker($broker)
@@ -283,7 +284,7 @@ abstract class AbstractBootstrap
             }
             $broker = new $broker();
         }
-        if (!$broker instanceof LazyLoadingBroker 
+        if (!$broker instanceof LazyLoadingBroker
             || !$broker instanceof BootstrapAware
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -298,7 +299,7 @@ abstract class AbstractBootstrap
 
     /**
      * Get resource plugin broker instance
-     * 
+     *
      * @todo   Should this allow using a default class name for lazy loading purposes?
      * @return ResourceBroker
      */
@@ -463,7 +464,7 @@ abstract class AbstractBootstrap
      *
      * @param  null|string|array $resource
      * @return \Zend\Application\AbstractBootstrap
-     * @throws \Zend\Application\BootstrapException When invalid argument was passed
+     * @throws \Zend\Application\Exception\InvalidArgumentException When invalid argument was passed
      */
     final public function bootstrap($resource = null)
     {
@@ -477,7 +478,7 @@ abstract class AbstractBootstrap
      * @param  string $method
      * @param  array  $args
      * @return void
-     * @throws \Zend\Application\BootstrapException On invalid method name
+     * @throws \Zend\Application\Exception\BadMethodCallException On invalid method name
      */
     public function __call($method, $args)
     {
@@ -497,7 +498,7 @@ abstract class AbstractBootstrap
      *
      * @param  null|string|array $resource
      * @return void
-     * @throws \Zend\Application\BootstrapException When invalid argument was passed
+     * @throws \Zend\Application\Exception\InvalidArgumentException When invalid argument was passed
      */
     protected function _bootstrap($resource = null)
     {
@@ -532,7 +533,7 @@ abstract class AbstractBootstrap
      *
      * @param  string $resource
      * @return void
-     * @throws \Zend\Application\BootstrapException When resource not found
+     * @throws \Zend\Application\Exception\InvalidArgumentException When resource not found
      */
     protected function _executeResource($resource)
     {

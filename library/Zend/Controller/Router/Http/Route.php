@@ -22,42 +22,27 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router;
-use Zend\Controller\Request\AbstractRequest;
+namespace Zend\Controller\Router\Http;
+use Zend\Controller\Request\AbstractRequest,
+    Zend\Controller\Router\Route as BaseRoute;
 
 /**
- * Route interface.
+ * Http specific route interface.
  * 
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Route
+interface Route extends BaseRoute
 {
     /**
-     * Create a new route with given options.
-     * 
-     * @param  mixed $options
-     * @return void
-     */
-    public function __construct($options = null);
-    
-    /**
-     * Match a given request.
+     * Match a given request with at a specified path offset.
      * 
      * @param  AbstractRequest $request
+     * @param  integer         $pathOffset
      * @return RouteMatch
      */
-    public function match(AbstractRequest $request);
-    
-    /**
-     * Assemble the route.
-     * 
-     * @param  array $params
-     * @param  array $options
-     * @return mixed
-     */
-    public function assemble(array $params = array(), array $options = array());
+    public function match(AbstractRequest $request, $pathOffset = null);
 }
 

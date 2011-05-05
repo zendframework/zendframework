@@ -24,7 +24,7 @@
  * @namespace
  */
 namespace Zend\Controller\Router;
-use Zend\Controller\Router\Rewrite\Route\Route;
+use Zend\Controller\Router\Route;
 
 /**
  * Priority list
@@ -114,7 +114,7 @@ class PriorityList implements \Iterator, \Countable
             return null;
         }
         
-        return $this->routes[$name];
+        return $this->routes[$name]['route'];
     }
 
     /**

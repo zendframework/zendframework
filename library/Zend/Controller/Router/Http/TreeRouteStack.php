@@ -47,10 +47,10 @@ class TreeRouteStack extends SimpleRouteStack
     protected function init()
     {
         $this->pluginBroker->getClassLoader()->registerPlugins(array(
-            'literal' => __NAMESPACE__ . '\\Route\\Literal',
-            'regex'   => __NAMESPACE__ . '\\Route\\Regex',
-            'segment' => __NAMESPACE__ . '\\Route\\Segment',
-            'part'    => __NAMESPACE__ . '\\Route\\Part',
+            'literal' => __NAMESPACE__ . '\\Literal',
+            'regex'   => __NAMESPACE__ . '\\Regex',
+            'segment' => __NAMESPACE__ . '\\Segment',
+            'part'    => __NAMESPACE__ . '\\Part',
         ));
     }
     

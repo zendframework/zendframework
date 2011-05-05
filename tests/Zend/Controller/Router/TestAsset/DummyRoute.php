@@ -14,46 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_Controller
- * @subpackage Router
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Http\Route;
-use Zend\Controller\Router\Route,
-    Zend\Controller\Router\RouteMatch,
-    Zend\Controller\Request\AbstractRequest,
-    Zend\Controller\Request\Http as HttpRequest;
+namespace ZendTest\Controller\Router\TestAsset;
+use Zend\Controller\Router\Route;
+use Zend\Controller\Request\AbstractRequest;
 
 /**
- * Literal route.
+ * Dummy route
  *
+ * @category   Zend
  * @package    Zend_Controller
- * @subpackage Router
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Literal implements Route
+class DummyRoute implements Route
 {
-    /**
-     * Route to match.
-     * 
-     * @var string
-     */
-    protected $route;
-
-    /**
-     * Default values.
-     *
-     * @var array
-     */
-    protected $defaults;
-
     /**
      * __construct(): defined by Route interface.
      *
@@ -62,34 +46,23 @@ class Literal implements Route
      * @return void
      */
     public function __construct($options = null)
-    {
-        
+    { 
     }
-
+    
     /**
      * match(): defined by Route interface.
      *
      * @see    Route::match()
      * @param  AbstractRequest $request
-     * @return RouteMatch
+     * @return boolean
      */
-    public function match(AbstractRequest $request, $pathOffset = null)
+    public function match(AbstractRequest $request)
     {
-        if ($pathOffset !== null) {
-            if (strpos($request->getRequestUri(), $this->route) === $pathOffset) {
-                return new RouteMatch($this->defaults);
-            }
-        } else {
-            if ($request->getRequestUri() === $this->route) {
-                return new RouteMatch($this->defaults);
-            }
-        }
-
-        return null;
+        return true;
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * assemble(): defined by Route interface.
      *
      * @see    Route::assemble()
      * @param  array $params
@@ -98,6 +71,6 @@ class Literal implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        return $this->route;
+        return '';
     }
 }

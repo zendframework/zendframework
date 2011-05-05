@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Http\Route;
+namespace Zend\Controller\Router\Http;
 use Zend\Controller\Router\Route,
     Zend\Controller\Router\RouteMatch,
     Zend\Controller\Router\PriorityList,
@@ -72,7 +72,7 @@ class Part implements Route
     public function __construct($options)
     {
         if (!isset($options['route']) || !$options['route'] instanceof Route) {
-            throw new UnexpectedValueException('Options must contain a route');
+            throw new UnexpectedValueException('Route not defined or not an instance of Route');
         }
 
         $this->route        = $options['route'];
@@ -106,6 +106,8 @@ class Part implements Route
         $match = $this->route->match($request, $pathOffset);
 
         if ($match !== null) {
+            $nextOffset = $pathOffset + $match->getInternalParameter('length');
+            
             foreach ($this->children as $name => $route) {
                 $subMatch = $route->match($match, $pathOffset);
 
@@ -114,8 +116,7 @@ class Part implements Route
                 }
             }
 
-            if ($this->mayTerminate) {
-                // @todo: also check that the http request is at it's end
+            if ($this->mayTerminate && $nextOffset === strlen($request->getRequestUri())) {
                 return $match;
             }
         }
@@ -133,6 +134,19 @@ class Part implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        // @todo
+        if (!isset($options['name'])) {
+            throw new InvalidArgumentException('Name not defined');
+        }
+        
+        if (null === ($route = $this->route->get($options['name']))) {
+            throw new RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
+        }
+        
+        unset($options['name']);
+        
+        $uri = $this->route->assemble($params, $options)
+             . $route->assemble($params, $options);
+        
+        return $uri;
     }
 }

@@ -23,14 +23,13 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Http\Route;
-use Zend\Controller\Router\Route,
-    Zend\Controller\Router\RouteMatch,
+namespace Zend\Controller\Router\Http;
+use Zend\Controller\Router\RouteMatch,
     Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Request\Http as HttpRequest;
 
 /**
- * Regex route.
+ * Literal route.
  *
  * @package    Zend_Controller
  * @subpackage Router
@@ -38,21 +37,21 @@ use Zend\Controller\Router\Route,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Regex implements Route
+class Literal implements Route
 {
     /**
-     * Regex to match
+     * Route to match.
      * 
      * @var string
      */
-    protected $_regex;
+    protected $route;
 
     /**
-     * Default values
+     * Default values.
      *
      * @var array
      */
-    protected $_defaults;
+    protected $defaults;
 
     /**
      * __construct(): defined by Route interface.
@@ -63,6 +62,24 @@ class Regex implements Route
      */
     public function __construct($options = null)
     {
+        if ($options instanceof \Zend\Config) {
+            $options = $options->toArray();
+        }
+
+        if (!is_array($options)) {
+            throw new InvalidArgumentException('Options must either be an array or an instance of \Zend\Config');
+        }
+
+        if (!isset($options['route']) || !is_string($options['route'])) {
+            throw new InvalidArgumentException('Route not defined nor not a string');
+        }
+        
+        if (!isset($options['defaults']) || !is_array($options['defaults'])) {
+            throw new InvalidArgumentException('Defaults not defined nor not an array');
+        }
+        
+        $this->route    = $options['route'];
+        $this->defaults = $options['defaults'];
     }
 
     /**
@@ -75,17 +92,16 @@ class Regex implements Route
     public function match(AbstractRequest $request, $pathOffset = null)
     {
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->_regex . ')i', $request->getRequestUri(), $match, null, $pathOffset);
+            if (strpos($request->getRequestUri(), $this->route) === $pathOffset) {
+                return new RouteMatch($this->defaults);
+            }
         } else {
-            $result = preg_match('(^' . $this->_regex . '$)i', $request->getRequestUri(), $match);
+            if ($request->getRequestUri() === $this->route) {
+                return new RouteMatch($this->defaults);
+            }
         }
 
-        if ($result === null) {
-            return null;
-        }
-
-        // @todo: examine $match
-        return $this->_defaults;
+        return null;
     }
 
     /**
@@ -98,6 +114,6 @@ class Regex implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        // @todo: implement this
+        return $this->route;
     }
 }

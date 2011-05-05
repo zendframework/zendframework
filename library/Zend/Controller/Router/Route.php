@@ -36,10 +36,10 @@ interface Route
     /**
      * Create a new route with given options.
      * 
-     * @param  array $options
+     * @param  mixed $options
      * @return void
      */
-    public function __construct(array $options = null);
+    public function __construct($options = null);
     
     /**
      * Match a given request.

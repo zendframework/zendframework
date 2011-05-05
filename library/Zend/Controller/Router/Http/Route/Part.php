@@ -62,13 +62,13 @@ class Part implements Route
     protected $_children;
 
     /**
-     * __construct(): defined by Route interface
+     * __construct(): defined by Route interface.
      *
      * @see    Route::__construct()
-     * @param  array $options
+     * @param  mixed $options
      * @return void
      */
-    public function __construct(array $options)
+    public function __construct($options)
     {
         if (!isset($options['route']) || !$options['route'] instanceof Route) {
             throw new UnexpectedValueException('Options must contain a route');

@@ -52,8 +52,9 @@ class SimpleRouteStack implements RouteStack
     protected $pluginBroker;
 
     /**
-     * Create a new route stack
+     * __construct(): defined by Route interface.
      *
+     * @see    Route::__construct()
      * @param  mixed $options
      * @return void
      */
@@ -83,7 +84,7 @@ class SimpleRouteStack implements RouteStack
      * Set options of the route stack.
      *
      * @param  mixed $options
-     * @return Router
+     * @return RouteStack
      */
     public function setOptions($options)
     {
@@ -100,32 +101,41 @@ class SimpleRouteStack implements RouteStack
                 case 'routes':
                     $this->addRoutes($value);
                     break;
+                
+                default:
+                    break;
             }
         }
     }
 
     /**
-     * Append multiple routes.
+     * addRoutes(): defined by RouteStack interface.
      *
+     * @see    Route::addRoutes()
      * @param  array $routes
-     * @return Router
+     * @return RouteStack
      */
     public function addRoutes(array $routes)
     {
-        foreach ($routes as $name => $route) {
-            $this->addRoute($name, $route);
-        }
+        $routes     = new ArrayIterator($routes);
+        $routeStack = $this;
+        
+        iterator_apply($routes, function() use ($routeStack, $routes) {
+            $routeStack->addRoute($routes->key(), $routes->current());
+            return true;
+        });
 
         return $this;
     }
 
     /**
-     * Append a route to the end of the list.
+     * addRoute(): defined by RouteStack interface.
      *
+     * @see    Route::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
-     * @return Router
+     * @return RouteStack
      */
     public function addRoute($name, $route, $priority = null)
     {
@@ -143,10 +153,24 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
+     * removeRoute(): defined by RouteStack interface.
+     *
+     * @see    Route::removeRoute()
+     * @param  string  $name
+     * @return RouteStack
+     */
+    public function removeRoute($name)
+    {
+        $this->routes->remove($name);
+
+        return $this;
+    }
+
+    /**
      * Create a route from array specifications.
      *
      * @param  array $specs
-     * @return Route
+     * @return SimpleRouteStack
      */
     protected function routeFromArray(array $specs)
     {

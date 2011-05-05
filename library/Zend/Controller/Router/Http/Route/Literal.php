@@ -57,10 +57,10 @@ class Literal implements Route
      * __construct(): defined by Route interface.
      *
      * @see    Route::__construct()
-     * @param  array $options
+     * @param  mixed $options
      * @return void
      */
-    public function __construct(array $options = null)
+    public function __construct($options = null)
     {
     }
 

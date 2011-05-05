@@ -94,9 +94,9 @@ $logger->log('Informational message', Zend_Log::INFO);
 
         <para>
             The first parameter of the <methodname>log()</methodname> method is a string
-            <code>message</code> and the second parameter is an integer <code>priority</code>. The
-            priority must be one of the priorities recognized by the Log instance. This is explained
-            in the next section.
+            <property>message</property> and the second parameter is an integer
+            <property>priority</property>. The priority must be one of the priorities recognized by
+            the Log instance. This is explained in the next section.
         </para>
 
         <para>
@@ -157,7 +157,7 @@ DEBUG   = 7;  // Debug: debug messages
         </para>
 
         <para>
-            The priorities are not arbitrary. They come from the BSD <code>syslog</code> protocol,
+            The priorities are not arbitrary. They come from the BSD syslog protocol,
             which is described in <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink>.
             The names and corresponding priority numbers are also
             compatible with another <acronym>PHP</acronym> logging system,
@@ -189,7 +189,7 @@ $logger->addPriority('FOO', 8);
 
         <para>
             The snippet above creates a new priority, <constant>FOO</constant>, whose
-            value is <code>8</code>. The new priority is then available for logging:
+            value is '8'. The new priority is then available for logging:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -209,14 +209,14 @@ $logger->foo('Foo Message');
             When you call the <methodname>log()</methodname> method or one of its shortcuts, a
             log event is created. This is simply an associative array with data
             describing the event that is passed to the writers. The following keys
-            are always created in this array: <code>timestamp</code>,
-            <code>message</code>, <code>priority</code>, and
-            <code>priorityName</code>.
+            are always created in this array: <property>timestamp</property>,
+            <property>message</property>, <property>priority</property>, and
+            <property>priorityName</property>.
         </para>
 
         <para>
-            The creation of the <code>event</code> array is completely transparent.
-            However, knowledge of the <code>event</code> array is required for adding an
+            The creation of the <property>event</property> array is completely transparent.
+            However, knowledge of the <property>event</property> array is required for adding an
             item that does not exist in the default set above.
         </para>
 
@@ -230,7 +230,7 @@ $logger->setEventItem('pid', getmypid());
 ]]></programlisting>
 
         <para>
-            The example above sets a new item named <code>pid</code> and populates
+            The example above sets a new item named <property>pid</property> and populates
             it with the PID of the current process. Once a new item has been
             set, it is available automatically to all writers along with all of the
             other data event data during logging. An item can be overwritten at any

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4263 $"/>
+		<generation date="$Date: 2009-09-22 15:39:01 -0500 (Tue, 22 Sep 2009) $"/>
+		<language type="pa" /> 
+	</identity>
+		<collations validSubLocales="pa_Arab pa_Arab_PK pa_Guru pa_Guru_IN">
+			<collation type="standard">
+				<settings normalization="on"/>
+				<rules>
+					<reset>ੱ</reset>
+						<s>ੰ</s>
+						<s>ਂ</s>
+						<s>ਁ</s>
+						<s>਼</s>
+			        	<reset>ੜ</reset>
+            					<p>੍</p>
+    				</rules>
+			</collation>
+		</collations>
+</ldml>

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Mail\Protocol\Exception;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Imap
@@ -330,7 +330,7 @@ class Imap
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                if (@fputs($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
+                if (@fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
                     throw new Exception\RuntimeException('cannot write - connection closed?');
                 }
                 if (!$this->_assumedNextLine('+ ')) {
@@ -342,7 +342,7 @@ class Imap
             }
         }
 
-        if (@fputs($this->_socket, $line . "\r\n") === false) {
+        if (@fwrite($this->_socket, $line . "\r\n") === false) {
             throw new Exception\RuntimeException('cannot write - connection closed?');
         }
     }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,13 +25,13 @@ use Zend\Controller\Front as FrontController,
     Zend\Loader\Autoloader,
     ZendTest\Application\TestAsset\ZfAppBootstrap,
     Zend\Application\Application,
-    Zend\Application\Resource\Frontcontroller as FrontcontrollerResource;
+    Zend\Application\Resource\FrontController as FrontControllerResource;
 
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
@@ -39,17 +39,6 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        // Store original autoloaders
-        $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no
-            // autoloaders registered...
-            $this->loaders = array();
-        }
-
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
-
         $this->application = new Application('testing');
 
         $this->bootstrap = new ZfAppBootstrap($this->application);
@@ -57,32 +46,19 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        // Restore original autoloaders
-        $loaders = spl_autoload_functions();
-        foreach ($loaders as $loader) {
-            spl_autoload_unregister($loader);
-        }
-
-        foreach ($this->loaders as $loader) {
-            spl_autoload_register($loader);
-        }
-
         FrontController::getInstance()->resetInstance();
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testInitializationCreatesFrontControllerInstance()
     {
-        $resource = new FrontcontrollerResource(array());
+        $resource = new FrontControllerResource(array());
         $resource->init();
         $this->assertTrue($resource->getFrontController() instanceof FrontController);
     }
 
     public function testInitializationPushesFrontControllerToBootstrapWhenPresent()
     {
-        $resource = new FrontcontrollerResource(array());
+        $resource = new FrontControllerResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertSame($resource->getFrontController(), $this->bootstrap->frontController);
@@ -90,7 +66,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetControllerDirectoryWhenStringOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'controllerDirectory' => __DIR__,
         ));
         $resource->init();
@@ -101,7 +77,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetControllerDirectoryWhenArrayOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'controllerDirectory' => array(
                 'foo' => __DIR__,
             ),
@@ -117,7 +93,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllControllerDirectoriesShouldBeSetWhenArrayPassedToControllerDirectoryOption()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'controllerDirectory' => array(
                 'foo' => __DIR__,
                 'bar' => __DIR__,
@@ -134,7 +110,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetModuleControllerDirectoryNameWhenOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'moduleControllerDirectoryName' => 'foo',
         ));
         $resource->init();
@@ -145,7 +121,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetModuleDirectoryWhenOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'moduleDirectory' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                                . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules',
         ));
@@ -177,7 +153,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetDefaultControllerNameWhenOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'defaultControllerName' => 'foo',
         ));
         $resource->init();
@@ -188,7 +164,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetDefaultActionWhenOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'defaultAction' => 'foo',
         ));
         $resource->init();
@@ -199,7 +175,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetDefaultModuleWhenOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'defaultModule' => 'foo',
         ));
         $resource->init();
@@ -210,7 +186,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSetBaseUrlWhenOptionPresent()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'baseUrl' => '/foo',
         ));
         $resource->init();
@@ -225,7 +201,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
             'foo' => 'bar',
             'bar' => 'baz',
         );
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'params' => $params,
         ));
         $resource->init();
@@ -239,7 +215,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
         $plugins = array(
             'Zend\\Controller\\Plugin\\ActionStack',
         );
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'plugins' => $plugins,
         ));
         $resource->init();
@@ -251,7 +227,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldReturnFrontControllerWhenComplete()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'controllerDirectory' => __DIR__,
         ));
         $front = $resource->init();
@@ -260,14 +236,14 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
 
     public function testNoBaseUrlShouldBeSetIfEmptyBaseUrlProvidedInOptions()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'baseurl' => '',
         ));
         $resource->init();
         $front = $resource->getFrontController();
         $this->assertNull($front->getBaseUrl());
     }
-    
+
     /**
      * @group ZF-9044
      */
@@ -286,15 +262,15 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
             5 => 'Zend\Controller\Plugin\PutHandler',
             10 => 'Zend\Controller\Plugin\ErrorHandler',
         );
-        
-        $resource = new FrontcontrollerResource(array(
+
+        $resource = new FrontControllerResource(array(
             'plugins' => $plugins
         ));
 
         $resource->init();
         $front = $resource->getFrontController();
         $plugins = $front->getPlugins();
-        
+
         $this->assertEquals(count($expected), count($plugins));
         foreach($expected as $index => $class) {
         	$this->assertEquals($class, get_class($plugins[$index]));
@@ -306,7 +282,7 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingReturnResponseFlagShouldAlterFrontControllerStatus()
     {
-        $resource = new FrontcontrollerResource(array(
+        $resource = new FrontControllerResource(array(
             'returnresponse' => true,
         ));
         $resource->init();

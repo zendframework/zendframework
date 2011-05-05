@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_GData
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Http;
  * @category   Zend
  * @package    Zend_GData
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  */
@@ -80,7 +80,7 @@ class GDataTest extends \PHPUnit_Framework_TestCase
             // and see if it throws an exception.
             $feed = $gdata->getFeed(new \stdClass());
             $this->fail('Expecting to catch Zend\GData\App\InvalidArgumentException');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\GData\App\InvalidArgumentException', $e,
                 'Expecting Zend\GData\App\InvalidArgumentException, got '.get_class($e));
             $this->assertEquals('You must specify the location as either a string URI or a child of Zend\GData\Query', $e->getMessage());
@@ -95,7 +95,7 @@ class GDataTest extends \PHPUnit_Framework_TestCase
             // and see if it throws an exception.
             $feed = $gdata->getEntry(new \stdClass());
             $this->fail('Expecting to catch Zend\GData\App\InvalidArgumentException');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\GData\App\InvalidArgumentException', $e,
                 'Expecting Zend\GData\App\InvalidArgumentException, got '.get_class($e));
             $this->assertEquals('You must specify the location as either a string URI or a child of Zend\GData\Query', $e->getMessage());

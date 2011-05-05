@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20855 -->
+<!-- EN-Revision: 22768 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
     <title>Zend_Service_SlideShare</title>
@@ -261,9 +261,9 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     Slideshows können empfangen werden wenn Sie ein oder mehrere spezielle Tags
-                    enthalten durch die Verwendung der <code>getSlideShowsByTag</code> Methode und
-                    und der Angabe von ein oder mehreren Tags welche der Slideshow zugeordnet sein
-                    müssen um Sie zu empfangen
+                    enthalten durch die Verwendung der <methodname>getSlideShowsByTag()</methodname>
+                    Methode und der Angabe von ein oder mehreren Tags welche der Slideshow
+                    zugeordnet sein müssen um Sie zu empfangen
                 </para>
             </listitem>
 
@@ -274,9 +274,9 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     Man kann Slideshows empfangen welche Mitglied einer speziellen Gruppe sind
-                    durch Verwendung der <code>getSlideShowsByGroup</code> Methode und der
-                    angabe des Namens der Gruppe welcher die Slideshow angehören muß um Sie zu
-                    empfangen
+                    durch Verwendung der <methodname>getSlideShowsByGroup()</methodname> Methode und
+                    der Angabe des Namens der Gruppe welcher die Slideshow angehören muß um Sie zu
+                    Empfangen
                 </para>
             </listitem>
         </itemizedlist>
@@ -313,10 +313,10 @@ foreach($ss_user as $slideshow) {
 
         <para>
             Standardmäßig cached <classname>Zend_Service_SlideShare</classname> jede Anfrage an den
-            Webservice automatisch in das Dateisystem (Standardpfad <code>/tmp</code>) für
-            12 Stunden. Wenn man das Verhalten ändern will, muß eine eigenes
-            <xref linkend="zend.cache" /> Objekt durch Verwendung der <code>setCacheObject</code>
-            Methode angegeben werden wie anbei gezeigt:
+            Webservice automatisch in das Dateisystem (Standardpfad <filename>/tmp</filename>) für
+            12 Stunden. Wenn man das Verhalten ändern will, muß eine eigenes <link
+                linkend="zend.cache">Zend_Cache</link> Objekt durch Verwendung der
+            <methodname>setCacheObject()</methodname> Methode angegeben werden wie anbei gezeigt:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -348,9 +348,9 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
             Wenn das Verhalten des <acronym>HTTP</acronym> Clients, aus welchen Gründen auch immer,
             geändert werden soll wenn eine Anfrage an den Webservice durchgeführt wird, kann das
             durch die Erstellung einer eigenen Instanz eines <classname>Zend_Http_Client</classname>
-            Objektes durchgeführt werden (siehe <xref linkend="zend.http" />). Das ist zum Beispiel
-            nützlich wenn es gewünscht ist das Timeout für die Verbindung auf etwas anderes als
-            den Standardwert zu setzen wie anbei gezeigt:
+            Objektes durchgeführt werden (siehe <link linkend="zend.http">Zend_Http</link>). Das ist
+            zum Beispiel nützlich wenn es gewünscht ist das Timeout für die Verbindung auf etwas
+            anderes als den Standardwert zu setzen wie anbei gezeigt:
         </para>
 
         <programlisting language="php"><![CDATA[

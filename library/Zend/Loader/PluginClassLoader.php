@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -29,14 +29,14 @@ use ArrayIterator,
     Traversable;
 
 /**
- * Plugin class locater interface
+ * Plugin class locator interface
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginClassLoader implements PluginClassLocater
+class PluginClassLoader implements PluginClassLocator
 {
     /**
      * List of plugin name => class name pairs
@@ -109,7 +109,7 @@ class PluginClassLoader implements PluginClassLocater
      * Register many plugins at once
      *
      * If $map is a string, assumes that the map is the class name of a 
-     * Traversable object (likely a ShortNameLocater); it will then instantiate
+     * Traversable object (likely a ShortNameLocator); it will then instantiate
      * this class and use it to register plugins.
      *
      * If $map is an array or Traversable object, it will iterate it to 

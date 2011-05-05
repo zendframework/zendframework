@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22468 -->
+<!-- EN-Revision: 22760 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -463,7 +463,7 @@ $server->setClass('Services_PricingService',
                 Die Argumente welche an <methodname>setClass()</methodname> wärend der
                 Erstellungszeit des Servers übergeben werden, werden dem Methodenaufruf
                 <command>pricing.calculate()</command> injiziert, wenn er aufgerufen wird. Im obigen
-                Beispiel wird vom Client nur das Argument <code>$purchaseId</code> erwartet.
+                Beispiel wird vom Client nur das Argument <varname>$purchaseId</varname> erwartet.
             </para>
         </example>
 
@@ -733,14 +733,15 @@ echo $server->handle($request);
             <para>
                 <classname>Zend_XmlRpc_Server</classname> verwendet
                 <classname>DOMDocument</classname> der <acronym>PHP</acronym> Erweiterung
-                <code>ext/dom</code> um seine <acronym>XML</acronym> Ausgaben zu erstellen. Wärend
-                <code>ext/dom</code> auf vielen Hosts vorhanden ist, ist es nicht wirklich das
-                schnellste. Benchmarks haben gezeigt das <classname>XmlWriter</classname> von
-                <code>ext/xmlwriter</code> schneller ist.
+                <emphasis>ext/dom</emphasis> um seine <acronym>XML</acronym> Ausgaben zu erstellen.
+                Wärend <emphasis>ext/dom</emphasis> auf vielen Hosts vorhanden ist, ist es nicht
+                wirklich das schnellste. Benchmarks haben gezeigt das
+                <classname>XmlWriter</classname> von <emphasis>ext/xmlwriter</emphasis> schneller
+                ist.
             </para>
 
             <para>
-                Wenn <code>ext/xmlwriter</code> auf dem eigenen Host vorhanden ist, kann ein
+                Wenn <emphasis>ext/xmlwriter</emphasis> auf dem eigenen Host vorhanden ist, kann ein
                 <classname>XmlWriter</classname>-basierter Generator ausgewählt werden um die
                 Performance Unterschiede auszunutzen.
             </para>

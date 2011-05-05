@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 22748 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
     <title>Erstellung einer Maßeinheit</title>
@@ -7,12 +7,12 @@
     <para>
         Bei der Erstellung einer Maßeinheit erwarten die <classname>Zend_Measure_*</classname>
         Methoden den Eingabe-/den Originalwert als ersten Parameter. Dieser kann ein
-        <link linkend="zend.measure.creation.number"><code>nummerisches Argument</code></link>, eine
-        <link linkend="zend.measure.creation.string"><code>Zeichenkette</code></link> oder
-        Einheit, oder eine <link linkend="zend.measure.creation.localized"><code>lokalisierte
-        Zeichenkette</code> mit definierter Einheit</link> sein. Der zweite Parameter definiert die
-        Art der Maßeinheit. Beide Parameter sind zwingend erforderlich. Die Sprache kann als
-        optionaler dritter Parameter definiert werden.
+        <link linkend="zend.measure.creation.number">nummerisches Argument</link>, einen
+        <link linkend="zend.measure.creation.string"><type>String</type></link> oder Einheit, oder
+        eine <link linkend="zend.measure.creation.localized">lokalisierte Zeichenkette mit
+            definierter Einheit</link> sein. Der zweite Parameter definiert die Art der Maßeinheit.
+        Beide Parameter sind zwingend erforderlich. Die Sprache kann als optionaler dritter
+        Parameter definiert werden.
     </para>
 
     <sect2 id="zend.measure.creation.number">

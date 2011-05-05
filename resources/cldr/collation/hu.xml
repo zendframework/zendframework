@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4126 $"/>
+		<generation date="$Date: 2009-05-05 18:33:13 -0500 (Tue, 05 May 2009) $"/>
+		<language type="hu" /> 
+	</identity>
+		<collations  validSubLocales="hu_HU">
+			<collation type="standard" >
+				<rules>
+					<reset>C</reset>
+					<p>cs</p>
+					<t>Cs</t>
+					<t>CS</t>
+					<reset>D</reset>
+					<p>dz</p>
+					<t>Dz</t>
+					<t>DZ</t>
+					<reset>DZ</reset>
+					<p>dzs</p>
+					<t>Dzs</t>
+					<t>DZS</t>
+					<reset>G</reset>
+					<p>gy</p>
+					<t>Gy</t>
+					<t>GY</t>
+					<reset>L</reset>
+					<p>ly</p>
+					<t>Ly</t>
+					<t>LY</t>
+					<reset>N</reset>
+					<p>ny</p>
+					<t>Ny</t>
+					<t>NY</t>
+					<reset>S</reset>
+					<p>sz</p>
+					<t>Sz</t>
+					<t>SZ</t>
+					<reset>T</reset>
+					<p>ty</p>
+					<t>Ty</t>
+					<t>TY</t>
+					<reset>Z</reset>
+					<p>zs</p>
+					<t>Zs</t>
+					<t>ZS</t>
+					<reset>O</reset>
+					<p>ö</p>
+					<t>Ö</t>
+					<s>ő</s>
+					<t>Ő</t>
+					<reset>U</reset>
+					<p>ü</p>
+					<t>Ü</t>
+					<s>ű</s>
+					<t>Ű</t>
+					<reset>cs</reset>
+					<x><t>ccs</t><extend>cs</extend></x>
+					<reset>Cs</reset>
+					<x><t>Ccs</t><extend>cs</extend></x>
+					<reset>CS</reset>
+					<x><t>CCS</t><extend>CS</extend></x>
+					<reset>dz</reset>
+					<x><t>ddz</t><extend>dz</extend></x>
+					<reset>Dz</reset>
+					<x><t>Ddz</t><extend>dz</extend></x>
+					<reset>DZ</reset>
+					<x><t>DDZ</t><extend>DZ</extend></x>
+					<reset>dzs</reset>
+					<x><t>ddzs</t><extend>dzs</extend></x>
+					<reset>Dzs</reset>
+					<x><t>Ddzs</t><extend>dzs</extend></x>
+					<reset>DZS</reset>
+					<x><t>DDZS</t><extend>DZS</extend></x>
+					<reset>gy</reset>
+					<x><t>ggy</t><extend>gy</extend></x>
+					<reset>Gy</reset>
+					<x><t>Ggy</t><extend>gy</extend></x>
+					<reset>GY</reset>
+					<x><t>GGY</t><extend>GY</extend></x>
+					<reset>ly</reset>
+					<x><t>lly</t><extend>ly</extend></x>
+					<reset>Ly</reset>
+					<x><t>Lly</t><extend>ly</extend></x>
+					<reset>LY</reset>
+					<x><t>LLY</t><extend>LY</extend></x>
+					<reset>ny</reset>
+					<x><t>nny</t><extend>ny</extend></x>
+					<reset>Ny</reset>
+					<x><t>Nny</t><extend>ny</extend></x>
+					<reset>NY</reset>
+					<x><t>NNY</t><extend>NY</extend></x>
+					<reset>sz</reset>
+					<x><t>ssz</t><extend>sz</extend></x>
+					<reset>Sz</reset>
+					<x><t>Ssz</t><extend>sz</extend></x>
+					<reset>SZ</reset>
+					<x><t>SSZ</t><extend>SZ</extend></x>
+					<reset>ty</reset>
+					<x><t>tty</t><extend>ty</extend></x>
+					<reset>Ty</reset>
+					<x><t>Tty</t><extend>ty</extend></x>
+					<reset>TY</reset>
+					<x><t>TTY</t><extend>TY</extend></x>
+					<reset>zs</reset>
+					<x><t>zzs</t><extend>zs</extend></x>
+					<reset>Zs</reset>
+					<x><t>Zzs</t><extend>zs</extend></x>
+					<reset>ZS</reset>
+					<x><t>ZZS</t><extend>ZS</extend></x>
+				</rules>
+			</collation  >
+		</collations>
+</ldml>

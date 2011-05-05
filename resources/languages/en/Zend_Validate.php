@@ -15,12 +15,12 @@
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage Ressource
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * EN-Revision: 22668
+ * EN-Revision: 06.Jan.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -200,6 +200,7 @@ return array(
     "'%value%' does not appear to be a valid local network name" => "'%value%' does not appear to be a valid local network name",
     "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' appears to be a local network name but local network names are not allowed",
     "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded",
+    "'%value%' does not appear to be a valid URI hostname" => "'%value%' does not appear to be a valid URI hostname",
 
     // Zend_Validate_Iban
     "Unknown country within the IBAN '%value%'" => "Unknown country within the IBAN '%value%'",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22646 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
@@ -12,7 +12,8 @@
         wie z.B. <acronym>HTTP</acronym> Authentifizierung und Dateiuploads. Erfolgreiche Anfragen
         (und die meisten nicht erfolgreichen ebenfalls) liefern ein
         <classname>Zend_Http_Response</classname> Objekt zurück, welches den Zugriff auf die Header
-        und den Hauptteil der Antwort ermöglichen (siehe <xref linkend="zend.http.response" />).
+        und den Hauptteil der Antwort ermöglichen (siehe <link linkend="zend.http.response">diesen
+            Abschnitt</link>).
     </para>
 
     <sect2 id="zend.http.client.usage">
@@ -54,8 +55,9 @@ $client->setConfig($config);
                     spezielle Zeichen wie das Pipe-Symbol ('|') oder das Karet Symbol ('^') in der
                     URL standardmäßig nicht akzeptiert werden. Das kann geändert werden indem die
                     'allow_unwise' Option von <classname>Zend_Uri</classname> auf
-                    '<constant>TRUE</constant>' gesetzt wird. Siehe <xref
-                        linkend="zend.uri.validation.allowunwise" /> für mehr Informationen.
+                    '<constant>TRUE</constant>' gesetzt wird. Siehe <link
+                        linkend="zend.uri.validation.allowunwise">diesen Abschnitt</link> für mehr
+                    Informationen.
                 </para>
             </note>
         </para>
@@ -109,7 +111,8 @@ $client->setConfig($config);
 
                             <entry>
                                 Ob beim Umleiten genau dem <acronym>RFC</acronym> zu folgen ist
-                                (siehe <xref linkend="zend.http.client.redirections" />)
+                                (siehe <link linkend="zend.http.client.redirections">diesen
+                                    Abschnitt</link>)
                             </entry>
 
                             <entry>boolean</entry>
@@ -152,7 +155,7 @@ $client->setConfig($config);
 
                             <entry>
                                 Zu verwendene Adapterklasse für die Verbindung (siehe
-                                <xref linkend="zend.http.client.adapters" />)
+                                <link linkend="zend.http.client.adapters">diesen Abschnitt</link>)
                             </entry>
 
                             <entry>mixed</entry>
@@ -224,8 +227,10 @@ $response = $client->request();
             </example>
 
             Die request() Methode akzeptiert einen optionalen Parameter - die Anfragemethode.
-            Diese kann GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS oder CONNECT sein, wie im
-            <acronym>HTTP</acronym> Protokoll definiert.
+            Diese kann <property>GET</property>, <property>POST</property>,
+            <property>PUT</property>, <property>HEAD</property>, <property>DELETE</property>,
+            <property>TRACE</property>, <property>OPTIONS</property> oder
+            <property>CONNECT</property> sein, wie im <acronym>HTTP</acronym> Protokoll definiert.
 
             <footnote>
                 <para>
@@ -240,8 +245,9 @@ $response = $client->request();
 
         <para>
             Wenn keine Methode angegeben worden ist, wird die durch den letzten Aufruf von
-            setMethod() gesetzte Methode verwendet. Wenn setMethod() vorher nicht aufgerufen worden
-            ist, wird als Standardmethode GET verwendet (siehe obiges Beispiel).
+            <methodname>setMethod()</methodname> gesetzte Methode verwendet. Wenn
+            <methodname>setMethod()</methodname> vorher nicht aufgerufen worden ist, wird als
+            Standardmethode <constant>GET</constant> verwendet (siehe obiges Beispiel).
 
             <example id="zend.http.client.basic-requests.example-2">
                 <title>Andere Anfragemethoden als GET verwenden</title>
@@ -262,13 +268,14 @@ $response = $client->request();
         <title>Hinzufügen von GET und POST Parametern</title>
 
         <para>
-            Das Hinzufügen von GET Parametern zu einer <acronym>HTTP</acronym> Anfrage ist recht
-            einfach und kann entweder über die Angabe als Teil der URL oder durch Verwendung der
-            setParameterGet() Methode erfolgen. Diese Methode benötigt den Namen des GET Parameter
-            als seinen ersten Parameter und den Wert des GET Parameter als seinen zweiten Parameter.
-            Zur Erleichterung akzeptiert die setParameterGet() Methode auch ein einzelnes
-            assoziatives Array mit GET Parameter als Name => Wert Variablen, was beim setzen von
-            mehreren GET Parametern komfortabler sein kann.
+            Das Hinzufügen von <constant>GET</constant> Parametern zu einer <acronym>HTTP</acronym>
+            Anfrage ist recht einfach und kann entweder über die Angabe als Teil der URL oder durch
+            Verwendung der setParameterGet() Methode erfolgen. Diese Methode benötigt den Namen des
+            <constant>GET</constant> Parameter als seinen ersten Parameter und den Wert des
+            <constant>GET</constant> Parameter als seinen zweiten Parameter. Zur Erleichterung
+            akzeptiert die setParameterGet() Methode auch ein einzelnes assoziatives Array mit
+            <constant>GET</constant> Parameter als Name => Wert Variablen, was beim setzen von
+            mehreren <constant>GET</constant> Parametern komfortabler sein kann.
 
             <example id="zend.http.client.parameters.example-1">
                 <title>Setzen von GET Parametern</title>
@@ -291,11 +298,11 @@ $client->setParameterGet(array(
         </para>
 
         <para>
-            Während GET Parameter bei jeder Anfragemethode gesetzt werden können, können POST
-            Parameter nur im Hauptteil von POST Anfragen versendet werden. Das Hinzufügen von POST
-            Parameter zu einer Anfrage ist sehr ähnlich wie das Hinzufügen von GET Parametern and
-            kann mit der setParameterPost() Methode gemacht werden, die vom Aufbau der
-            setParameterGet() Methode ähnlich ist..
+            Während <constant>GET</constant> Parameter bei jeder Anfragemethode gesetzt werden
+            können, können POST Parameter nur im Hauptteil von POST Anfragen versendet werden. Das
+            Hinzufügen von POST Parameter zu einer Anfrage ist sehr ähnlich wie das Hinzufügen von
+            <constant>GET</constant> Parametern and kann mit der setParameterPost() Methode gemacht
+            werden, die vom Aufbau der setParameterGet() Methode ähnlich ist..
 
             <example id="zend.http.client.parameters.example-2">
                 <title>Setzen von POST Parametern</title>
@@ -313,10 +320,10 @@ $client->setParameterPost(array(
 ]]></programlisting>
             </example>
 
-            Beim Senden einer POST Anfrage ist zu beachten, dass man sowohl GET als auch POST
-            Parameter setzen kann. Auf der anderen Seite wird durch das Setzen von POST Parametern
-            für andere Anfragen als POST kein Fehler ausgeworfen. Solange eine Anfrage keine POST
-            Anfrage ist, werden POST Parameter einfach ignoriert.
+            Beim Senden einer POST Anfrage ist zu beachten, dass man sowohl <constant>GET</constant>
+            als auch POST Parameter setzen kann. Auf der anderen Seite wird durch das Setzen von
+            POST Parametern für andere Anfragen als POST kein Fehler ausgeworfen. Solange eine
+            Anfrage keine POST Anfrage ist, werden POST Parameter einfach ignoriert.
         </para>
     </sect2>
 

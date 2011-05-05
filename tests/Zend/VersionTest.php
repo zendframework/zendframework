@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Version
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,7 @@ use Zend\Version;
  * @category   Zend
  * @package    Zend_Version
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Version
  */
@@ -66,4 +66,16 @@ class Zend_VersionTest extends \PHPUnit_Framework_TestCase
         };
     }
 
+    /**
+     * @group ZF-10363
+     */
+    public function testFetchLatestVersion()
+    {
+        $actual = Version::getLatest();
+        if ('not available' === $actual) {
+            $this->markIncomplete('http://framework.zend.com/ may be down');
+        }
+
+        $this->assertRegExp('/^[1-2](\.[0-9]+){2}/', $actual);
+    }
 }

@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_TimeSync
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ namespace Zend\TimeSync;
  * @uses      \Zend\TimeSync\Protocol
  * @category  Zend
  * @package   Zend_TimeSync
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Sntp extends Protocol
@@ -95,7 +95,7 @@ class Sntp extends Protocol
     {
         $this->_connect();
         $this->_delay = time();
-        fputs($this->_socket, $data);
+        fwrite($this->_socket, $data);
     }
 
     /**

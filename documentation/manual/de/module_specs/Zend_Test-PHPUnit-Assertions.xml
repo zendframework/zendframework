@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: 20807 -->
+<!-- EN-Revision: 22761 -->
+<!-- Reviewed: 22761 -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>Zusicherungen</title>
 
@@ -36,7 +36,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>assertQuery($path, $message = '')</methodname>: Nimmt an, dass ein
+                    <methodname>assertQuery($path, $message)</methodname>: Nimmt an, dass ein
                     oder mehrere DOM Elemente, die dem gegebenen <acronym>CSS</acronym>-Selektor
                     entsprechen, vorhanden sind. Wenn eine <varname>$message</varname> vorhanden
                     ist, wird diese jeder fehlgeschlagenen Meldung einer Zusicherung vorangestellt.
@@ -45,9 +45,9 @@
 
             <listitem>
                 <para>
-                    <methodname>assertQueryContentContains($path, $match, $message =
-                        '')</methodname>: Nimmt an, dass ein oder mehrere DOM Elemente, die dem
-                    angegebenen <acronym>CSS</acronym>-Selektor entsprechen, vorhanden sind, und dass
+                    <methodname>assertQueryContentContains($path, $match, $message)</methodname>:
+                    Nimmt an, dass ein oder mehrere DOM Elemente, die dem angegebenen
+                    <acronym>CSS</acronym>-Selektor entsprechen, vorhanden sind, und dass
                     zumindest einer dem Inhalt entspricht, der in <varname>$match</varname> angegeben
                     wurde. Wenn eine <varname>$message</varname> vorhanden ist, wird diese
                     jeder fehlgeschlagenen Meldung einer Zusicherung vorangestellt.
@@ -56,8 +56,8 @@
 
             <listitem>
                 <para>
-                    <methodname>assertQueryContentRegex($path, $pattern, $message =
-                        '')</methodname>: Nimmt an, dass ein oder mehrere DOM-Elemente vorhanden sind,
+                    <methodname>assertQueryContentRegex($path, $pattern, $message)</methodname>:
+                    Nimmt an, dass ein oder mehrere DOM-Elemente vorhanden sind,
                     die dem angegebenen <acronym>CSS</acronym>-Selektor entsprechen und dass
                     zumindest einer dem Regulären Ausdruck entspricht, der in <varname>$pattern</varname>
                     angegeben wurde, Wenn eine <varname>$message</varname> vorhanden
@@ -67,7 +67,7 @@
 
             <listitem>
                 <para>
-                    <methodname>assertQueryCount($path, $count, $message = '')</methodname>: Nimmt
+                    <methodname>assertQueryCount($path, $count, $message)</methodname>: Nimmt
                     an, dass exakt <varname>$count</varname> DOM-Elemente dem angegebenen
                     <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
                     <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
@@ -77,7 +77,7 @@
 
             <listitem>
                 <para>
-                    <methodname>assertQueryCountMin($path, $count, $message = '')</methodname>:
+                    <methodname>assertQueryCountMin($path, $count, $message)</methodname>:
                     Nimmt an, dass zumindest <varname>$count</varname> DOM-Element dem angegebenen
                     <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
                     <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
@@ -89,7 +89,7 @@
 
             <listitem>
                 <para>
-                    <methodname>assertQueryCountMax($path, $count, $message = '')</methodname>:
+                    <methodname>assertQueryCountMax($path, $count, $message)</methodname>:
                     Nimmt an, dass es nicht mehr als <varname>$count</varname> DOM-Elemente gibt, die
                     dem angegebenen <acronym>CSS</acronym>-Selektor entsprechen. Wenn eine
                     <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
@@ -268,7 +268,7 @@
 
             <listitem>
                 <para>
-                    <methodname>assertHeaderContains($header, $match, $message = '')</methodname>:
+                    <methodname>assertHeaderContains($header, $match, $message)</methodname>:
                     Nimmt an, dass die Antwort den gegebenen Header enthält und dass sein Inhalt den
                     gegebenen String enthält.
                 </para>
@@ -276,7 +276,7 @@
 
             <listitem>
                 <para>
-                    <methodname>assertHeaderRegex($header, $pattern, $message = '')</methodname>:
+                    <methodname>assertHeaderRegex($header, $pattern, $message)</methodname>:
                     Nimmt an, dass die Antwort den gegebenen Header enthält und dass sein Inhalt der
                     gegebenen Regex entspricht.
                 </para>

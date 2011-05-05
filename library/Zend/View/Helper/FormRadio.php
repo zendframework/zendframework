@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormRadio extends FormElement
@@ -116,7 +116,7 @@ class FormRadio extends FormElement
         $list  = array();
 
         // should the name affect an array collection?
-        $name = $this->view->escape($name);
+        $name = $this->view->vars()->escape($name);
         if ($this->_isArray && ('[]' != substr($name, -2))) {
             $name .= '[]';
         }
@@ -126,7 +126,7 @@ class FormRadio extends FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof \Zend\View\AbstractView) && !$this->view->broker('doctype')->isXhtml()) {
+        if (method_exists($this->view, 'broker') && !$this->view->broker('doctype')->isXhtml()) {
             $endTag= '>';
         }
 
@@ -136,7 +136,7 @@ class FormRadio extends FormElement
 
             // Should the label be escaped?
             if ($escape) {
-                $opt_label = $this->view->escape($opt_label);
+                $opt_label = $this->view->vars()->escape($opt_label);
             }
 
             // is it disabled?
@@ -163,7 +163,7 @@ class FormRadio extends FormElement
                     . '<input type="' . $this->_inputType . '"'
                     . ' name="' . $name . '"'
                     . ' id="' . $optId . '"'
-                    . ' value="' . $this->view->escape($opt_value) . '"'
+                    . ' value="' . $this->view->vars()->escape($opt_value) . '"'
                     . $checked
                     . $disabled
                     . $this->_htmlAttribs($attribs)

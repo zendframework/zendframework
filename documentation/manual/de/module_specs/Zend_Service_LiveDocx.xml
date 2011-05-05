@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
-<!-- Reviewed: 21819 -->
+<!-- EN-Revision: 22745 -->
+<!-- Reviewed: 22745 -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
 
@@ -338,7 +338,8 @@
             <para>
                 Durch Verwendung dieses Dialogs kann man die benötigten Merge-Felder in das eigene
                 Dokument einfügen. Anbei ist ein Screenshot der Lizenzvereinbarung in Microsoft
-                Word 2007. Die Merge-Felder sind als <code>{ MERGEFIELD FieldName }</code> markiert:
+                Word 2007. Die Merge-Felder sind als <command>{ MERGEFIELD FieldName }</command>
+                markiert:
             </para>
 
             <para>

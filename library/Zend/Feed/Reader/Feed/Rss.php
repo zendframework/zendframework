@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Reader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use Zend\Date;
 * @uses \Zend\Feed\Reader\Feed\AbstractFeed
 * @category Zend
 * @package Reader
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+* @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Rss extends AbstractFeed
@@ -52,10 +52,10 @@ class Rss extends AbstractFeed
     {
         parent::__construct($dom, $type);
 
-        $dublinCoreClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Feed');
-        $this->_extensions['DublinCore\\Feed'] = new $dublinCoreClass($dom, $this->_data['type'], $this->_xpath);
+        $dublinCoreClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\Feed');
+        $this->_extensions['DublinCore\Feed'] = new $dublinCoreClass($dom, $this->_data['type'], $this->_xpath);
         $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
-        $this->_extensions['Atom\\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $this->_extensions['Atom\Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 && $this->getType() !== Reader\Reader::TYPE_RSS_090) {
             $xpathPrefix = '/rss/channel';

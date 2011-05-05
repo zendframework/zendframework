@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -39,7 +39,7 @@ use Zend\Serializer\Exception\InvalidArgumentException,
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PythonPickle extends AbstractAdapter
@@ -174,10 +174,11 @@ class PythonPickle extends AbstractAdapter
     {
         switch ($name) {
             case 'protocol':
-                $value = $this->_checkProtocolNumber($value);
-                if ($value === false) {
-                    throw new InvalidArgumentException("Invalid or unknown protocol version '{$number}'");
+                $number = $this->_checkProtocolNumber($value);
+                if ($number === false) {
+                    throw new InvalidArgumentException("Invalid or unknown protocol version '{$value}'");
                 }
+                $value = $number;
                 break;
         }
 

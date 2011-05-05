@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Db\Select;
  * @package    Zend_Db
  * @subpackage UnitTests
  * @group      Zend_Db
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractTest extends \ZendTest\Db\TestSetup
@@ -335,7 +335,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
                    ->reset(Select::FROM)
                    ->columns('product_id');
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("No table has been specified for the FROM clause", $e->getMessage());
@@ -623,7 +623,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $select->foo();
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("Unrecognized method 'foo()'", $e->getMessage());
@@ -669,7 +669,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $select->joinFooUsing();
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("Unrecognized method 'joinFooUsing()'", $e->getMessage());
@@ -695,7 +695,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $select->joinCrossUsing("zfbugs_products", "$product_id");
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("Cannot perform a joinUsing with method 'joinCrossUsing()'", $e->getMessage());
@@ -867,7 +867,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $result = $stmt->fetchAll();
             $this->assertEquals(1, count($result));
             $this->assertEquals(200.45, $result[0]['price_total']);
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             setlocale(LC_ALL, $locale);
             throw $e;
         }

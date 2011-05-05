@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22448 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -38,15 +38,16 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         <para>
             Weil diese Beispiele eigenen Code verwenden müssen wir die Präfixe der Namespaces
             für diesen Code in unserer Konfiguration registrieren; dies wird mit dem
-            Konfigurationsschlüssel <code>autoloaderNamespaces</code> getan, welcher ein Array ist.
+            Konfigurationsschlüssel <property>autoloaderNamespaces</property> getan, welcher ein
+            Array ist.
         </para>
 
         <para>
             Zusätzlich, um sicherzustellen das eigene Plugin Ressourcen erkannt werden, müssen wir
             einen Plugin Präfix Pfad in der Bootstrap registrieren. Das wird mit dem
-            Konfigurationsschlüssel <code>pluginpaths</code> getan, welcher ein assoziatives Array
-            ist, mit Schlüsseln die den zu verwendenden Präfix kennzeichnen , und Werten welche den
-            Pfad kennzeichnen der diesem Präfix entspricht.
+            Konfigurationsschlüssel <property>pluginpaths</property> getan, welcher ein assoziatives
+            Array ist, mit Schlüsseln die den zu verwendenden Präfix kennzeichnen , und Werten
+            welche den Pfad kennzeichnen der diesem Präfix entspricht.
         </para>
     </note>
 

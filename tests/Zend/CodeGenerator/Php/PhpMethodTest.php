@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\CodeGenerator\Php;
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group Zend_CodeGenerator
@@ -196,4 +196,25 @@ EOS;
         $this->assertEquals($expected, $codeGenProperty->generate());
     }
 
+    /**
+     * @group ZF-7268
+     */
+    public function testDefaultValueGenerationDoesNotIncludeTrailingSemicolon()
+    {
+        $method = new Php\PhpMethod(array(
+            'name' => 'setOptions',
+        ));
+        $default = new Php\PhpParameterDefaultValue();
+        $default->setValue(array());
+
+        $param   = new Php\PhpParameter(array(
+            'name' => 'options',
+            'type' => 'array',
+        ));
+        $param->setDefaultValue($default);
+
+        $method->setParameter($param);
+        $generated = $method->generate();
+        $this->assertRegexp('/array \$options = array\(\)\)/', $generated, $generated);
+    }
 }

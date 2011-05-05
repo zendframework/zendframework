@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.adapter">
     <title>Zend_Serializer_Adapter</title>
@@ -143,21 +143,33 @@
                         <entry><emphasis>cycleCheck</emphasis></entry>
                         <entry><type>boolean</type></entry>
                         <entry>false</entry>
-                        <entry>Siehe <xref linkend= "zend.json.advanced.objects1"/></entry>
+
+                        <entry>
+                            Siehe <link linkend= "zend.json.advanced.objects1">diesen
+                                Abschnitt</link>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><emphasis>objectDecodeType</emphasis></entry>
                         <entry><type>Zend_Json::TYPE_*</type></entry>
                         <entry>Zend_Json::TYPE_ARRAY</entry>
-                        <entry>Siehe <xref linkend= "zend.json.advanced.objects1"/></entry>
+
+                        <entry>
+                            Siehe <link linkend= "zend.json.advanced.objects1">diesen
+                                Abschnitt</link>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><emphasis>enableJsonExprFinder</emphasis></entry>
                         <entry><type>boolean</type></entry>
                         <entry>false</entry>
-                        <entry>Siehe <xref linkend= "zend.json.advanced.expr"/></entry>
+
+                        <entry>
+                            Siehe <link linkend= "zend.json.advanced.expr">diesen
+                                Abschnitt</link>
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

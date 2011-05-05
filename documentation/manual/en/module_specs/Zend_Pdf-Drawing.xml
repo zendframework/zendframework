@@ -258,7 +258,7 @@ $pdfPage->drawText('Hello world!', 72, 720);
             database), you can indicate the character encoding at draw time and
             <classname>Zend_Pdf</classname> will handle the conversion for you. You can supply
             source strings in any encoding method supported by <acronym>PHP</acronym>'s
-            <code><ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code>
+            <ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink>
             function:
         </para>
 

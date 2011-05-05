@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Db;
  * @package    Zend_Db
  * @subpackage UnitTests
  * @group      Zend_Db
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractTest extends \ZendTest\Db\TestSetup
@@ -194,7 +194,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $db = new $adapterClass($params);
             $db->getConnection(); // force a connection
             $this->fail("Expected to catch $exceptionClass");
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType($exceptionClass, $e, "Expected to catch $exceptionClass, got ".get_class($e));
             $this->assertContains("Configuration array must have a key for '$param'", $e->getMessage());
         }
@@ -749,7 +749,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $sql = $this->_db->limit('SELECT * FROM zfproducts', 0);
             $this->fail('Expected to catch Zend_Db_Adapter_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Adapter\Exception', $e,
                 'Expecting object of type Zend_Db_Adapter_Exception, got '.get_class($e));
         }
@@ -757,7 +757,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $sql = $this->_db->limit('SELECT * FROM zfproducts', 1, -1);
             $this->fail('Expected to catch Zend_Db_Adapter_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Adapter\Exception', $e,
                 'Expecting object of type Zend_Db_Adapter_Exception, got '.get_class($e));
         }
@@ -869,7 +869,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $lower = $this->_testAdapterOptionCaseFoldingCommon(-999);
             $this->fail('Expected exception not thrown');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Adapter\Exception', $e,
                 'Expecting object of type Zend_Db_Adapter_Exception, got '.get_class($e));
             $this->assertEquals("Case must be one of the following constants: Zend_Db::CASE_NATURAL, Zend_Db::CASE_LOWER, Zend_Db::CASE_UPPER", $e->getMessage());
@@ -906,7 +906,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $this->_db->query('Bogus query');
             $this->fail('Expected exception not thrown');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
@@ -922,7 +922,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $this->_db->query('SELECT * FROM BogusTable');
             $this->fail('Expected exception not thrown');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
@@ -1498,7 +1498,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $this->_db->setFetchMode(-999);
             $this->fail('Expected exception not thrown');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Adapter\Exception', $e,
                 'Expecting object of type Zend_Db_Adapter_Exception, got '.get_class($e));
             $this->assertEquals("Invalid fetch mode '-999' specified", $e->getMessage());
@@ -1844,7 +1844,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         try {
             $this->_db->setProfiler($profilerOptions);
             $this->fail('Expected to catch Zend_Db_Profiler_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Profiler\Exception', $e);
             $this->assertEquals('Class stdClass does not extend Zend_Db_Profiler', $e->getMessage());
         }

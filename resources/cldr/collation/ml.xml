@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5037 $"/>
+		<generation date="$Date: 2010-09-01 10:38:23 -0500 (Wed, 01 Sep 2010) $"/>
+		<language type="ml" />
+	</identity>
+	<collations  validSubLocales="ml_IN">
+		<collation type="standard">
+			<rules>
+				<reset>ഃ</reset>
+				<s>ഽ</s>
+				<reset>ോ</reset>
+				<p>ൗ</p>
+				<reset>ൗ</reset>
+				<t>ൌ</t>
+				<reset>ക്</reset>
+				<s>ക്‍</s>
+				<reset>ക്‍</reset>
+				<t>ൿ</t>
+
+				<reset>ണ്</reset>
+				<s>ണ്‍ </s>
+				<reset>ണ്‍ </reset>
+				<t>ൺ</t>
+
+				<reset>ന്</reset>
+				<s>ന്‍</s>
+				<reset>ന്‍</reset>
+				<t>ൻ</t>
+
+				<reset>ര്</reset>
+				<s>ര്‍</s>
+				<reset>ര്‍</reset>
+				<t>ർ</t>
+
+				<reset>ല്</reset>
+				<s>ല്‍</s>
+				<reset>ല്‍</reset>
+				<t>ൽ</t>
+
+				<reset>ള്</reset>
+				<s>ള്‍</s>
+				<reset>ള്‍</reset>
+				<t>ൾ</t>
+				<reset>മ്</reset>
+				<s>ം</s>
+				<reset>ന്</reset>
+				<t>ൻ്</t>
+			</rules>
+		</collation>
+	</collations>
+</ldml>
+

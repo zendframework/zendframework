@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormSubmit extends FormElement
@@ -68,15 +68,15 @@ class FormSubmit extends FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof \Zend\View\AbstractView) && !$this->view->broker('doctype')->isXhtml()) {
+        if (($this->view instanceof \Zend\View\PhpRenderer) && !$this->view->broker('doctype')->isXhtml()) {
             $endTag= '>';
         }
 
         // Render the button.
         $xhtml = '<input type="submit"'
-               . ' name="' . $this->view->escape($name) . '"'
-               . ' id="' . $this->view->escape($id) . '"'
-               . ' value="' . $this->view->escape($value) . '"'
+               . ' name="' . $this->view->vars()->escape($name) . '"'
+               . ' id="' . $this->view->vars()->escape($id) . '"'
+               . ' value="' . $this->view->vars()->escape($value) . '"'
                . $disabled
                . $this->_htmlAttribs($attribs)
                . $endTag;

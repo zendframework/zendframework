@@ -14,8 +14,8 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Filter
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,19 +28,19 @@ use Zend\Log\Factory,
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Filter\FilterInterface
- * @uses       \Zend\Log\FactoryInterface
+ * @uses       \Zend\Log\Filter
+ * @uses       \Zend\Log\Factory
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Filter
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractFilter implements Filter, Factory
 {
     /**
      * Validate and optionally convert the config to array
-     * 
+     *
      * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
      * @return array
      * @throws \Zend\Log\Exception\InvalidArgumentException

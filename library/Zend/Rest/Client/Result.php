@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ namespace Zend\Rest\Client;
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Result implements \IteratorAggregate 
@@ -162,7 +162,7 @@ class Result implements \IteratorAggregate
 
         $result = $this->_sxml->xpath("//$name");
 
-        if (sizeof($result) > 0) {
+        if (count($result) > 0) {
             return true;
         }
 
@@ -233,7 +233,7 @@ class Result implements \IteratorAggregate
             return (string) $message[0];
         } else {
             $result = $this->_sxml->xpath('//response');
-            if (sizeof($result) > 1) {
+            if (count($result) > 1) {
                 return (string) "An error occured.";
             } else {
                 return (string) $result[0];

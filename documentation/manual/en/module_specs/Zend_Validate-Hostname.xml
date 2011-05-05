@@ -95,8 +95,20 @@ if ($validator->isValid($hostname)) {
             <constant>ALLOW_DNS</constant> to allow only
             <acronym>DNS</acronym> hostnames, <constant>ALLOW_IP</constant> to allow IP addresses,
             <constant>ALLOW_LOCAL</constant> to allow local network names, and
-            <constant>ALLOW_ALL</constant> to allow all three types. To just check for IP addresses
-            you can use the example below:
+            <constant>ALLOW_ALL</constant> to allow all three above types.
+        </para>
+
+        <para>
+            Additionally there is <constant>ALLOW_URI</constant> which allows to check hostnames
+            according to <link linkend="http://tools.ietf.org/html/rfc3986">RFC3986</link>. These
+            are registered names which are used by <acronym>WINS</acronym>, NetInfo and also local
+            hostnames like those defined within your <filename>.hosts</filename> file. For security
+            reasons <constant>ALLOW_URI</constant> is not contained within
+            <constant>ALLOW_ALL</constant>.
+        </para>
+
+        <para>
+            To just check for IP addresses you can use the example below:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -112,8 +124,8 @@ if ($validator->isValid($hostname)) {
 ]]></programlisting>
 
         <para>
-            As well as using <constant>ALLOW_ALL</constant> to accept all hostnames types you can
-            combine these types to allow for combinations. For example, to accept
+            As well as using <constant>ALLOW_ALL</constant> to accept all common hostnames types
+            you can combine these types to allow for combinations. For example, to accept
             <acronym>DNS</acronym> and Local hostnames instantiate your
             <classname>Zend_Validate_Hostname</classname> object as so:
         </para>

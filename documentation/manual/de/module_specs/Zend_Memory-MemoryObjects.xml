@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22748 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-objects">
     <title>Memory Objekte</title>
@@ -70,8 +70,8 @@ $memObject = $memoryManager->createLocked($data);
         <title>Memory Container 'value' Eigenschaft</title>
 
         <para>
-            Die '<code>value</code>' Eigenschaft des Memory Containers (gesperrt oder verschiebbar)
-            kann verwendet werden um mit Memory Objekt Daten zu arbeiten:
+            Die '<property>value</property>' Eigenschaft des Memory Containers (gesperrt oder
+            verschiebbar) kann verwendet werden um mit Memory Objekt Daten zu arbeiten:
         </para>
 
         <programlisting language="php"><![CDATA[

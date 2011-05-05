@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Application
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ namespace Zend\Application;
 /**
  * @category   Zend
  * @package    Zend_Application
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Application
@@ -124,8 +124,8 @@ class Application
 
     /**
      * Set autoloader
-     * 
-     * @param  \Zend\Loader\SplAutoloader $autoloader 
+     *
+     * @param  \Zend\Loader\SplAutoloader $autoloader
      * @return Application
      */
     public function setAutoloader(\Zend\Loader\SplAutoloader $autoloader)
@@ -172,6 +172,10 @@ class Application
 
         if (!empty($options['autoloadernamespaces'])) {
             $this->setAutoloaderNamespaces($options['autoloadernamespaces']);
+        }
+
+        if (!empty($option['autoloaderprefixes'])) {
+            $this->setAutoloaderPrefixes($options['autoloaderprefixes']);
         }
 
         if (!empty($options['autoloaderzfpath'])) {
@@ -315,9 +319,30 @@ class Application
     {
         $autoloader = $this->getAutoloader();
 
-        foreach ($namespaces as $namespace) {
-            $autoloader->registerNamespace($namespace);
+        foreach ($namespaces as $namespace => $directory) {
+            $autoloader->registerNamespace($namespace, $directory);
+        }        
+        
+        $autoloader->register();
+        
+        return $this;
+    }
+
+    /**
+     * Set autoloader prefixes
+     *
+     * @param array $prefixes
+     * @return \Zend\Application\Application
+     */
+    public function setAutoloaderPrefixes(array $prefixes)
+    {
+        $autoloader = $this->getAutoloader();
+
+        foreach ($prefixes as $prefix => $directory) {
+            $autoloader->registerPrefix($prefix, $directory);
         }
+
+        $autoloader->register();
 
         return $this;
     }

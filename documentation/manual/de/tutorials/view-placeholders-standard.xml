@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21997 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.view.placeholders.standard">
     <title>Standard Platzhalter</title>
 
     <para>
-        In der <link linkend="learning.view.placeholders.basics">voerherigen Sektion</link>, haben
+        In der <link linkend="learning.view.placeholders.basics">vorherigen Sektion</link>, haben
         wir den <methodname>placeholder()</methodname> View Helfer kennengelernt, und wie er für das
         Sammeln eigener Inhalte verwendet werden kann. In dieser Sektion sehen wir uns einige
         konkrete Platzhalter an die mit Zend Framework ausgeliefert werden, und wie Sie für den
@@ -20,7 +20,7 @@
         Inhalte enthält, aber spezifische Inhalte auf dem Controller und/oder der Aktion basieren;
         wenn man <acronym>CSS</acronym> Dateien spezifizieren will um Sie basieren auf der Sektion
         in der man sich befindet zu Laden; wenn man spezifische JavaScript Skripts zu
-        unterschiedlichen Zeiten laden will; oder wenn man die <acronym>DocType</acronym>
+        unterschiedlichen Zeiten laden will; oder wenn man die <emphasis>DocType</emphasis>
         Deklaration setzen will.
     </para>
 
@@ -33,13 +33,13 @@
         <title>Setzen vom DocType</title>
 
         <para>
-            Die <acronym>DocType</acronym> Deklaration ist problematisch zu merken, und oft ist es
+            Die <emphasis>DocType</emphasis> Deklaration ist problematisch zu merken, und oft ist es
             essentiell Sie in die Dokumente einzubinden um sicherzustellen das der Browser den
             Inhalt richtig darstellt. Der <methodname>doctype()</methodname> View Helfer erlaubt es
-            einfache String Merkmale zu verwenden um den gewünschten <acronym>DocType</acronym> zu
+            einfache String Merkmale zu verwenden um den gewünschten <emphasis>DocType</emphasis> zu
             spezifizieren; zusätzlich fragen andere Helfer den <methodname>doctype()</methodname>
             ab, um sicherzustellen dass die erzeugte Ausgabe mit dem angefragten
-            <acronym>DocType</acronym> übereinstimmt.
+            <emphasis>DocType</emphasis> übereinstimmt.
         </para>
 
         <para>
@@ -135,7 +135,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         <para>
             Und dann im Layout Skript einfach auf dem Helfer am Beginn der Datei
-            <function>echo</function> ausrufen:
+            <methodname>echo()</methodname> ausrufen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -157,8 +157,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <para>
             Oft will eine Site den Namen der Site oder der Firma als Teil des Seitentitels einfügen,
             und dann zusätzliche Informationen basieren auf dem Ort in dieser Site einfügen. Als
-            Beispiel enthält die Website zend.com den String "Zend.com" auf allen Seiten und fügt
-            Informationen basierend auf der Seite voran: "Zend Server - Zend.com". Im Zend Framework
+            Beispiel enthält die Website <filename>zend.com</filename> den String
+            "<filename>Zend.com</filename>" auf allen Seiten und fügt Informationen basierend auf
+            der Seite voran: "Zend Server - <filename>Zend.com</filename>". Im Zend Framework
             kann der <methodname>headTitle()</methodname> View Helfer helfen diese Aufgabe zu
             vereinfachen.
         </para>

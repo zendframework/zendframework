@@ -457,7 +457,7 @@ zf --setup storage-directory
 
             <para>
                 This will create the proper zf.ini file. This <emphasis>should</emphasis>
-                be run after <code>zf --setup storage-directory</code>. If it is not, it will
+                be run after <command>zf --setup storage-directory</command>. If it is not, it will
                 be located inside the users home directory. If it is, it will be located inside
                 the users storage directory.
             </para>

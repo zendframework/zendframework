@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
+<!-- EN-Revision: 22768 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.technorati">
     <title>Zend_Service_Technorati</title>
@@ -138,9 +138,9 @@ $topTags = $technorati->topTags();
             Objekte repräsentiert. Ein Ergebnisset Objekt ist grundsätzlich eine Kollektion von
             Ergebnisobjekten. Es erweitert die grundsätzliche
             <classname>Zend_Service_Technorati_ResultSet</classname> Klasse und implementiert das
-            <acronym>PHP</acronym> Interface <code>SeekableIterator</code>. Der beste Weg um ein
-            Ergebnisset Objekt zu verarbeiten ist dieses mit einem <acronym>PHP</acronym>
-            <code>foreach</code> Statement zu durchlaufen.
+            <acronym>PHP</acronym> Interface <classname>SeekableIterator</classname>. Der beste Weg
+            um ein Ergebnisset Objekt zu verarbeiten ist dieses mit einem <acronym>PHP</acronym>
+            <methodname>foreach()</methodname> Statement zu durchlaufen.
         </para>
 
         <example id="zend.service.technorati.consuming-results.example-1">
@@ -163,7 +163,7 @@ foreach ($resultSet as $result) {
 
         <para>
             Weil <classname>Zend_Service_Technorati_ResultSet</classname> das
-            <code>SeekableIterator</code> Interface implementiert, kann ein spezifisches
+            <classname>SeekableIterator</classname> Interface implementiert, kann ein spezifisches
             Ergebnisobjekt gesucht werden indem dessen Position in der Ergebnissammlung verwendet
             wird.
         </para>
@@ -187,9 +187,9 @@ $result = $resultSet->current();
 
         <note>
             <para>
-                <code>SeekableIterator</code> arbeitet als Array und zählt Positionen beginnend vom
-                Index 0. Das Holen der Position 1 bedeutet das man das zweite Ergebnis der
-                Kollektion erhält.
+                <classname>SeekableIterator</classname> arbeitet als Array und zählt Positionen
+                beginnend vom Index 0. Das Holen der Position 1 bedeutet das man das zweite Ergebnis
+                der Kollektion erhält.
             </para>
         </note>
 
@@ -250,7 +250,7 @@ echo "</ol>";
         </para>
 
         <para>
-            Eine Technorati Abfrage sollte immer mit einem <code>try</code>...<code>catch</code>
+            Eine Technorati Abfrage sollte immer mit einem <command>try ... catch</command>
             Block umhüllt werden.
         </para>
 
@@ -313,56 +313,56 @@ echo "Tägliche Verwendung: " . $key->getApiQueries() . "/" .
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.cosmos"><code>Cosmos</code></link>
+                            linkend="zend.service.technorati.queries.cosmos">Cosmos</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.search"><code>Search</code></link>
+                            linkend="zend.service.technorati.queries.search">Search</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.tag"><code>Tag</code></link>
+                            linkend="zend.service.technorati.queries.tag">Tag</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.dailycounts"><code>DailyCounts</code></link>
+                            linkend="zend.service.technorati.queries.dailycounts">DailyCounts</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.toptags"><code>TopTags</code></link>
+                            linkend="zend.service.technorati.queries.toptags">TopTags</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.bloginfo"><code>BlogInfo</code></link>
+                            linkend="zend.service.technorati.queries.bloginfo">BlogInfo</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.blogposttags"><code>BlogPostTags</code></link>
+                            linkend="zend.service.technorati.queries.blogposttags">BlogPostTags</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link
-                            linkend="zend.service.technorati.queries.getinfo"><code>GetInfo</code></link>
+                            linkend="zend.service.technorati.queries.getinfo">GetInfo</link>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -649,8 +649,8 @@ echo "</ol>";
             typ-spezifisches Ergebnisset welches einfach, mit jedem Ergebnis das in einem Typ
             Ergebnisobjekt enthalten ist, iteriert werden kann. Alle Ergebnisset Klassen erweitern
             die <classname>Zend_Service_Technorati_ResultSet</classname> Klasse und implementieren
-            das <code>SeekableIterator</code> Interface, welches eine einfache Iteration und Suche
-            nach einem spezifischen Ergebnis erlaubt.
+            das <classname>SeekableIterator</classname> Interface, welches eine einfache Iteration
+            und Suche nach einem spezifischen Ergebnis erlaubt.
 
             <itemizedlist>
                 <listitem>
@@ -803,9 +803,9 @@ echo "</ol>";
 
             <para>
                 <classname>Zend_Service_Technorati_ResultSet</classname> Implementiert das
-                <acronym>PHP</acronym> <code>SeekableIterator</code> Interface, und man kann durch
-                alle Ergebnisobjekte mit dem <acronym>PHP</acronym> Statement <code>foreach</code>
-                iterieren.
+                <acronym>PHP</acronym> <classname>SeekableIterator</classname> Interface, und man
+                kann durch alle Ergebnisobjekte mit dem <acronym>PHP</acronym> Statement
+                <methodname>foreach()</methodname> iterieren.
             </para>
 
             <example id="zend.service.technorati.classes.resultset.example-1">

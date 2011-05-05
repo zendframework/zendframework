@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Date
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -46,7 +46,7 @@ if (!defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE')) {
  * @category   Zend
  * @package    Zend_Date
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Date
  */
@@ -5653,6 +5653,15 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $date2->set('Sat, 07 Mar 2009 08:03:50 +0000', Date::RFC_2822);
 
         $this->assertTrue($date2->equals($date));
+    }
+
+    /**
+     * @ZF-10150
+     */
+    public function testChineseFullDates()
+    {
+      $date = new Zend_Date(array('year' => 2008, 'month' => 10, 'day' => 12));
+      $this->assertEquals('2008年10月12日', $date->get(Zend_Date::DATE_LONG, 'zh'));
     }
 }
 

@@ -103,13 +103,13 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             <title>Memory container</title>
 
             <para>
-                The memory container has a virtual or actual <code>value</code>
+                The memory container has a virtual or actual <property>value</property>
                 attribute of string type. This attribute contains the data value
                 specified at memory object creation time.
             </para>
 
             <para>
-                You can operate with this <code>value</code> attribute as
+                You can operate with this <property>value</property> attribute as
                 an object property:
             </para>
 
@@ -157,7 +157,7 @@ $memObject->value = substr($memObject->value, $start, $length);
             <para>
                 The memory manager doesn't swap objects with size less than
                 the specified minimum, due to performance considerations.
-                See <xref linkend="zend.memory.memory-manager.settings.min-size" />
+                See <link linkend="zend.memory.memory-manager.settings.min-size">this section</link>
                 for more details.
             </para>
         </sect3>

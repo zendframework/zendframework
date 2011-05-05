@@ -15,19 +15,20 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Log\Formatter;
 
-use \Zend\Log\Formatter\Simple;
+use ZendTest\Log\TestAsset\StringObject,
+    \Zend\Log\Formatter\Simple;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -88,24 +89,24 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('array', $line);
 
-        $fields['message'] = new SimpleTest_TestObject1();
+        $fields['message'] = new StringObject();
         $line = $f->format($fields);
         $this->assertContains($fields['message']->__toString(), $line);
 
-        $fields['message'] = new SimpleTest_TestObject2();
+        $fields['message'] = new \stdClass();
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
-}
 
-class SimpleTest_TestObject1 
-{
-    public function __toString()
+    /**
+     * @group ZF-9176
+     */
+    public function testFactory()
     {
-        return 'Hello World';
+        $options = array(
+            'format' => '%timestamp% [%priority%]: %message% -- %info%'
+        );
+        $formatter = Simple::factory($options);
+        $this->assertInstanceOf('Zend\Log\Formatter\Simple', $formatter);
     }
-}
-
-class SimpleTest_TestObject2 
-{
 }

@@ -22,9 +22,9 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-$filter = new Zend_Filter_PregReplace(array('match' => 'bob',
+$filter = new Zend_Filter_PregReplace(array('match' => '/bob/',
                                             'replace' => 'john'));
-$input  = 'Hy bob!";
+$input  = 'Hy bob!';
 
 $filter->filter($input);
 // Gibt 'Hy john!' zurück

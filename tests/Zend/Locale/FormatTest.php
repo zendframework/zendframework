@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Format
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,13 +24,13 @@ namespace ZendTest\Locale;
 use \Zend\Locale\Format,
     \Zend\Locale\Exception\InvalidArgumentException,
     \Zend\Locale\Locale,
-    \Zend\Locale\Data;
+    \Zend\Locale\Data\Cldr;
 
 /**
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
@@ -767,7 +767,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         }
 
         $format = Format::setOptions(array('locale' => 'de', 'number_format' => Format::STANDARD));
-        $test   = Data::getContent('de', 'decimalnumber');
+        $test   = Cldr::getContent('de', 'decimalnumber');
         $this->assertEquals($test, $format['number_format']);
 
         try {

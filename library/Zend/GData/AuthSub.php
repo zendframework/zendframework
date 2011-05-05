@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -38,7 +38,7 @@ use Zend\Http\Client;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AuthSub
@@ -123,9 +123,9 @@ class AuthSub
         if ($response->isSuccessful()) {
             $goog_resp = array();
             foreach (explode("\n", $response->getBody()) as $l) {
-                $l = chop($l);
+                $l = rtrim($l);
                 if ($l) {
-                    list($key, $val) = explode('=', chop($l), 2);
+                    list($key, $val) = explode('=', rtrim($l), 2);
                     $goog_resp[$key] = $val;
                 }
             }

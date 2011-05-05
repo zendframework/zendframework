@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.testing">
     <title>Testen eigener Controller und MVC Anwendungen</title>
@@ -29,9 +29,9 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Es gibt trotzdem Zeiten, , in denen man zusätzliche Informationen angeben muß -- GET und
-        POST Variablen, COOKIE Informationen, usw. Man kann die Anfrage mit diesen Informationen
-        ausstatten:
+        Es gibt trotzdem Zeiten, , in denen man zusätzliche Informationen angeben muß --
+        <constant>GET</constant> und POST Variablen, COOKIE Informationen, usw. Man kann die Anfrage
+        mit diesen Informationen ausstatten:
     </para>
 
     <programlisting language="php"><![CDATA[

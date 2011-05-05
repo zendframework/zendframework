@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+    <identity>
+        <version number="$Revision: 5104 $"/>
+        <generation date="$Date: 2010-10-15 09:01:52 -0500 (Fri, 15 Oct 2010) $"/>
+        <language type="se" />
+    </identity>
+    <collations validSubLocales="se_FI se_NO">
+		<collation type="search" >
+			<settings normalization="on"/>
+			<suppress_contractions>[เ-ไ ເ-ໄ]</suppress_contractions>
+			<rules>
+				<reset>ا</reset>
+					<s>آ</s>
+					<s>أ</s>
+					<s>إ</s>
+				<reset>و</reset>
+					<s>ؤ</s>
+				<reset>ي</reset>
+					<s>ئ</s>
+					<s>ى</s>
+				<reset>ه</reset>
+					<s>ة</s>
+				<reset><last_primary_ignorable/></reset>
+					<s>׳</s>
+					<s>״</s>
+					<s>ـ</s>
+					<s>ٌ</s>
+					<s>ٍ</s>
+					<s>َ</s>
+					<s>ُ</s>
+					<s>ِ</s>
+					<s>ّ</s>
+					<s>ْ</s>
+					<s>ฺ</s>
+				
+				
+				
+                <reset before="primary">b</reset>
+                <p>á</p>
+                <t>Á</t>
+                <reset before="primary">d</reset>
+                <p>č</p> 
+                <t>Č</t>
+                <p>ʒ</p> 
+                <t>Ʒ</t>
+                <p>ǯ</p> 
+                <t>Ǯ</t>
+                <reset before="primary">e</reset>
+                <p>đ</p> 
+                <t>Đ</t>
+                <s>ð</s> 
+                <t>Ð</t>
+                <reset before="primary">h</reset>
+                <p>ǧ</p> 
+                <t>Ǧ</t>
+                <p>ǥ</p> 
+                <t>Ǥ</t>
+                <reset before="primary">l</reset>
+                <p>ǩ</p> 
+                <t>Ǩ</t>
+                <reset before="primary">o</reset>
+                <p>ŋ</p> 
+                <t>Ŋ</t>
+                <s>ń</s> 
+                <t>Ń</t>
+                <s>ñ</s> 
+                <t>Ñ</t>
+                <reset before="primary">t</reset>
+                <p>š</p> 
+                <t>Š</t>
+                <reset before="primary">u</reset>
+                <p>ŧ</p> 
+                <t>Ŧ</t>
+                <s>þ</s> 
+                <t>Þ</t>
+                <reset>y</reset>
+                <s>ü</s> 
+                <t>Ü</t>
+                <s>ű</s> 
+                <t>Ű</t>
+                <reset before="primary">ǀ</reset> 
+                <p>ž</p> 
+                <t>Ž</t>
+                <p>ø</p> 
+                <t>Ø</t>
+                <s>œ</s> 
+                <t>Œ</t>
+                <p>æ</p> 
+                <t>Æ</t>
+                <p>å</p> 
+                <t>Å</t>
+                <s>ȧ</s> 
+                <t>Ȧ</t>
+                <p>ä</p> 
+                <t>Ä</t>
+                <s>ã</s> 
+                <t>Ã</t>
+                <p>ö</p> 
+                <t>Ö</t>
+                <s>ő</s> 
+                <t>Ő</t>
+                <s>õ</s> 
+                <t>Õ</t>
+                <s>ô</s> 
+                <t>Ô</t>
+                <s>ǫ</s> 
+                <t>Ǫ</t>
+			</rules>
+		</collation>
+        <collation type="standard" >
+            <rules>
+                <reset before="primary">b</reset>
+                <p>á</p>
+                <t>Á</t>
+                <reset before="primary">d</reset>
+                <p>č</p> 
+                <t>Č</t>
+                <p>ʒ</p> 
+                <t>Ʒ</t>
+                <p>ǯ</p> 
+                <t>Ǯ</t>
+                <reset before="primary">e</reset>
+                <p>đ</p> 
+                <t>Đ</t>
+                <s>ð</s> 
+                <t>Ð</t>
+                <reset before="primary">h</reset>
+                <p>ǧ</p> 
+                <t>Ǧ</t>
+                <p>ǥ</p> 
+                <t>Ǥ</t>
+                <reset before="primary">l</reset>
+                <p>ǩ</p> 
+                <t>Ǩ</t>
+                <reset before="primary">o</reset>
+                <p>ŋ</p> 
+                <t>Ŋ</t>
+                <s>ń</s> 
+                <t>Ń</t>
+                <s>ñ</s> 
+                <t>Ñ</t>
+                <reset before="primary">t</reset>
+                <p>š</p> 
+                <t>Š</t>
+                <reset before="primary">u</reset>
+                <p>ŧ</p> 
+                <t>Ŧ</t>
+                <s>þ</s> 
+                <t>Þ</t>
+                <reset>y</reset>
+                <s>ü</s> 
+                <t>Ü</t>
+                <s>ű</s> 
+                <t>Ű</t>
+                <reset before="primary">ǀ</reset> 
+                <p>ž</p> 
+                <t>Ž</t>
+                <p>ø</p> 
+                <t>Ø</t>
+                <s>œ</s> 
+                <t>Œ</t>
+                <p>æ</p> 
+                <t>Æ</t>
+                <p>å</p> 
+                <t>Å</t>
+                <s>ȧ</s> 
+                <t>Ȧ</t>
+                <p>ä</p> 
+                <t>Ä</t>
+                <s>ã</s> 
+                <t>Ã</t>
+                <p>ö</p> 
+                <t>Ö</t>
+                <s>ő</s> 
+                <t>Ő</t>
+                <s>õ</s> 
+                <t>Õ</t>
+                <s>ô</s> 
+                <t>Ô</t>
+                <s>ǫ</s> 
+                <t>Ǫ</t>
+            </rules>
+        </collation>
+    </collations>
+</ldml>

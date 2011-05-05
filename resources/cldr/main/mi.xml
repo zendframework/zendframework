@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4599 $"/>
+		<generation date="$Date: 2010-02-05 18:15:28 -0600 (Fri, 05 Feb 2010) $"/>
+		<language type="mi"/>
+	</identity>
+	<characters>
+		<exemplarCharacters>[a ā e ē h i ī k m n {ng} o ō p r t u ū w {wh}]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[b c d f g j l q s v x y z]</exemplarCharacters>
+		<exemplarCharacters type="index">[A E H I K M N O P R T U W]</exemplarCharacters>
+	</characters>
+	<dates>
+		<calendars>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="wide">
+							<month type="1">Hānuere</month>
+							<month type="2">Pēpuere</month>
+							<month type="3">Māehe</month>
+							<month type="4">Āperira</month>
+							<month type="5">Mei</month>
+							<month type="6">Hune</month>
+							<month type="7">Hūrae</month>
+							<month type="8">Ākuhata</month>
+							<month type="9">Hepetema</month>
+							<month type="10">Oketopa</month>
+							<month type="11">Noema</month>
+							<month type="12">Tīhema</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="wide">
+							<day type="sun">Rātapu</day>
+							<day type="mon">Mane</day>
+							<day type="tue">Tūrei</day>
+							<day type="wed">Wenerei</day>
+							<day type="thu">Tāite</day>
+							<day type="fri">Paraire</day>
+							<day type="sat">Hātarei</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+			</calendar>
+		</calendars>
+	</dates>
+</ldml>
+

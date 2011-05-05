@@ -239,8 +239,8 @@ array(
 ]]></programlisting>
 
             <para>
-                In the above example <code>plural_0</code> and <code>plural_1</code> are the
-                plural definitions from the source code. And the array at <code>plural_0</code>
+                In the above example 'plural_0' and 'plural_1' are the
+                plural definitions from the source code. And the array at 'plural_0'
                 has all translated plural forms available. Take a look at the following example
                 with real content and translation from English source to German.
             </para>

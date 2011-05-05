@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\View;
  * @uses       \Zend\View\Helper\Placeholder\Container\Standalone
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HeadMeta extends Placeholder\Container\Standalone
@@ -337,7 +337,7 @@ class HeadMeta extends Placeholder\Container\Standalone
             $modifiersString .= $key . '="' . $this->_escape($value) . '" ';
         }
 
-        if ($this->view instanceof View\AbstractView) {
+        if (method_exists($this->view, 'broker')) {
             if ($this->view->broker('doctype')->isHtml5()
             && $type == 'charset') {
 				$tpl = ($this->view->broker('doctype')->isXhtml())

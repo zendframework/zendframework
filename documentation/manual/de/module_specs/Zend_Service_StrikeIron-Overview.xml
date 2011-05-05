@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21831 -->
+<!-- EN-Revision: 22768 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -11,18 +11,26 @@
 
     <para>
         <itemizedlist>
-            <listitem><para><xref linkend="zend.service.strikeiron" /></para></listitem>
-        </itemizedlist>
-
-        <itemizedlist>
             <listitem>
-                <para><xref linkend="zend.service.strikeiron.bundled-services" /></para>
+                <para><link linkend="zend.service.strikeiron">Zend_Service_StrikeIron</link></para>
             </listitem>
         </itemizedlist>
 
         <itemizedlist>
             <listitem>
-                <para><xref linkend="zend.service.strikeiron.advanced-uses" /></para>
+                <para>
+                    <link linkend="zend.service.strikeiron.bundled-services">Gebündelte
+                        Services</link>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <link linkend="zend.service.strikeiron.advanced-uses">Fortgeschrittene
+                        Benutzung</link>
+                </para>
             </listitem>
         </itemizedlist>
     </para>
@@ -186,7 +194,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
         <para>
             Die <methodname>getService()</methodname> Methode gibt einen Client für irgendein
             StrikeIron Service zurück das durch den Namen seiner <acronym>PHP</acronym> Wrapper
-            Klasse definiert wurde. In diesem Fall, referiert der Name <code>SalesUseTaxBasic</code>
+            Klasse definiert wurde. In diesem Fall, referiert der Name 'SalesUseTaxBasic'
             zu der Wrapper Klasse <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>.
             Wrapper sind für drei Services inkludiert und in <link
                 linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
@@ -241,8 +249,8 @@ echo $rateInfo->GST;
 
         <para>
             Das Ergebnis von <methodname>getTaxRateCanada()</methodname> wird in
-            <varname>$rateInfo</varname> gespeichert und hat Eigenschaften wie <code>province</code>
-            und <constant>GST</constant>.
+            <varname>$rateInfo</varname> gespeichert und hat Eigenschaften wie
+            <property>province</property> und <constant>GST</constant>.
         </para>
 
         <para>
@@ -297,24 +305,25 @@ Zend_Service_StrikeIron_Decorator Object
 
         <para>
             In der obigen Ausgabe sehen wir das der Dekorator (<varname>$rateInfo</varname>) ein
-            Objekt ummantelt das <code>GetTaxRateCanadaResult</code> heißt, und das Ergebnis des
-            Aufrufes von <methodname>getTaxRateCanada()</methodname> ist.
+            Objekt ummantelt das <classname>GetTaxRateCanadaResult</classname> heißt, und das
+            Ergebnis des Aufrufes von <methodname>getTaxRateCanada()</methodname> ist.
         </para>
 
         <para>
             Das bedeutet das <varname>$rateInfo</varname> öffentliche Eigenschaften wie
-            <code>abbreviation</code>, <code>province</code>, und <constant>GST</constant> hat.
-            Dieser werden z.B. mit <code>$rateInfo->province</code> aufgerufen.
+            <property>abbreviation</property>, <property>province</property>, und
+            <constant>GST</constant> hat. Dieser werden z.B. mit
+            <command>$rateInfo->province</command> aufgerufen.
         </para>
 
         <tip>
             <para>
                 Die Eigenschaften von StrikeIron Ergebnissen beginnen oft mit einem Großbuchstaben
-                wie <code>Foo</code> oder <code>Bar</code> wobei die meisten <acronym>PHP</acronym>
-                Objekt Eigenschaften normalerweise mit einem Kleinbuchstaben wie <code>foo</code>
-                oder <code>bar</code> beginnen. Der Dekorator wird diesen Eingriff automatisch
-                durchführen sodas eine Eigenschaft von <code>Foo</code> als <code>foo</code> gelesen
-                werden kann.
+                wie <property>Foo</property> oder <property>Bar</property> wobei die meisten
+                <acronym>PHP</acronym> Objekt Eigenschaften normalerweise mit einem Kleinbuchstaben
+                wie <property>foo</property> oder <property>bar</property> beginnen. Der Dekorator
+                wird diesen Eingriff automatisch durchführen sodas eine Eigenschaft von
+                <property>Foo</property> als <property>foo</property> gelesen werden kann.
             </para>
         </tip>
 
@@ -368,8 +377,8 @@ try {
             Methodenaufrufen zu verstehen. Ausnahmen treten für <emphasis>ausgenommene</emphasis>
             Verhaltenweisen auf, wie z.B. ein Netzwerk das abstürzt oder ein abgelaufener Account.
             Fehlgeschlagene Methodenaufrufe die häufig auftreten, wie z.B. wenn
-            <methodname>getTaxRateCanada()</methodname> die angegebene <code>province</code> nicht
-            findet, führen nicht dazu das Ausnahmen geworfen werden.
+            <methodname>getTaxRateCanada()</methodname> die angegebene <property>province</property>
+            nicht findet, führen nicht dazu das Ausnahmen geworfen werden.
         </para>
 
         <note>
@@ -394,9 +403,10 @@ try {
         </para>
 
         <para>
-            Jeder StrikeIron Client, der von der <code>getService</code> Methode zurückgegeben wird,
-            hat die Möglichkeit den Account Status für diesen Service zu prüfen indem die
-            <methodname>getSubscriptionInfo()</methodname> Methode dieses Clients verwendet wird:
+            Jeder StrikeIron Client, der von der <methodname>getService()</methodname> Methode
+            zurückgegeben wird, hat die Möglichkeit den Account Status für diesen Service zu prüfen
+            indem die <methodname>getSubscriptionInfo()</methodname> Methode dieses Clients
+            verwendet wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -413,8 +423,8 @@ echo $subscription->remainingHits;
 
         <para>
             Die <methodname>getSubscriptionInfo()</methodname> Methode gibt ein Objekt zurück, das
-            typischerweise eine <code>remainingHits</code> Eigenschaft hat. Es ist wichtig den
-            Status, für jeden Service der verwendet wird, zu prüfen. Wenn ein Methodenaufruf zu
+            typischerweise eine <property>remainingHits</property> Eigenschaft hat. Es ist wichtig
+            den Status, für jeden Service der verwendet wird, zu prüfen. Wenn ein Methodenaufruf zu
             StrikeIron gemacht wird, nachdem die möglichen Zugriffe aufgebraucht wurden, wird eine
             Ausnahme auftreten.
         </para>

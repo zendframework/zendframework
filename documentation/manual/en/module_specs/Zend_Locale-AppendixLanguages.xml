@@ -183,13 +183,59 @@
                 </row>
 
                 <row>
-                    <entry morerows="1" valign="middle">Azerbaijani</entry>
+                    <entry morerows="1" valign="middle">Asu</entry>
+                    <entry>asa</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>asa_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
+                    <entry morerows="8" valign="middle">Azerbaijani</entry>
                     <entry>az</entry>
                     <entry>---</entry>
                 </row>
 
                 <row>
+                    <entry>az_Arab</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>az_Arab_IR</entry>
+                    <entry>Iran</entry>
+                </row>
+
+                <row>
                     <entry>az_AZ</entry>
+                    <entry>Azerbaijan</entry>
+                </row>
+
+                <row>
+                    <entry>az_Cyrl</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>az_Cyrl_AZ</entry>
+                    <entry>Azerbaijan</entry>
+                </row>
+
+                <row>
+                    <entry>az_IR</entry>
+                    <entry>Iran</entry>
+                </row>
+
+                <row>
+                    <entry>az_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>az_Latn_AZ</entry>
                     <entry>Azerbaijan</entry>
                 </row>
 
@@ -205,6 +251,28 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Bemba</entry>
+                    <entry>bem</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>bem_ZM</entry>
+                    <entry>Zambia</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Bena</entry>
+                    <entry>bez</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>bez_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Bulgarian</entry>
                     <entry>bg</entry>
                     <entry>---</entry>
@@ -213,6 +281,17 @@
                 <row>
                     <entry>bg_BG</entry>
                     <entry>Bulgaria</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Bambara</entry>
+                    <entry>bm</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>bm_ML</entry>
+                    <entry>Mali</entry>
                 </row>
 
                 <row>
@@ -244,6 +323,28 @@
 
                 <row>
                     <entry>bn_IN</entry>
+                    <entry>India</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Breton</entry>
+                    <entry>br</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>br_FR</entry>
+                    <entry>France</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Bodo</entry>
+                    <entry>brx</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>brx_IN</entry>
                     <entry>India</entry>
                 </row>
 
@@ -292,9 +393,25 @@
                 </row>
 
                 <row>
-                    <entry>Coptic</entry>
-                    <entry>cop</entry>
+                    <entry morerows="1" valign="middle">Chiga</entry>
+                    <entry>cgg</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>cgg_UG</entry>
+                    <entry>Uganda</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Cherokee</entry>
+                    <entry>chr</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>chr_US</entry>
+                    <entry>United States</entry>
                 </row>
 
                 <row>
@@ -328,6 +445,17 @@
                 <row>
                     <entry>da_DK</entry>
                     <entry>Denmark</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Taita</entry>
+                    <entry>dav</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>dav_KE</entry>
+                    <entry>Kenya</entry>
                 </row>
 
                 <row>
@@ -389,6 +517,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Embu</entry>
+                    <entry>ebu</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ebu_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
                     <entry morerows="2" valign="middle">Ewe</entry>
                     <entry>ee</entry>
                     <entry>---</entry>
@@ -421,7 +560,7 @@
                 </row>
 
                 <row>
-                    <entry morerows="26" valign="middle">English</entry>
+                    <entry morerows="31" valign="middle">English</entry>
                     <entry>en</entry>
                     <entry>---</entry>
                 </row>
@@ -454,6 +593,16 @@
                 <row>
                     <entry>en_CA</entry>
                     <entry>Canada</entry>
+                </row>
+
+                <row>
+                    <entry>en_Dsrt</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>en_Dsrt_US</entry>
+                    <entry>United States</entry>
                 </row>
 
                 <row>
@@ -502,6 +651,11 @@
                 </row>
 
                 <row>
+                    <entry>en_MU</entry>
+                    <entry>Mauritius</entry>
+                </row>
+
+                <row>
                     <entry>en_NA</entry>
                     <entry>Namibia</entry>
                 </row>
@@ -524,6 +678,11 @@
                 <row>
                     <entry>en_SG</entry>
                     <entry>Singapore</entry>
+                </row>
+
+                <row>
+                    <entry>en_Shaw</entry>
+                    <entry>---</entry>
                 </row>
 
                 <row>
@@ -557,14 +716,24 @@
                 </row>
 
                 <row>
+                    <entry>en_ZZ</entry>
+                    <entry>Unknown Region</entry>
+                </row>
+
+                <row>
                     <entry>Esperanto</entry>
                     <entry>eo</entry>
                     <entry>---</entry>
                 </row>
 
                 <row>
-                    <entry morerows="20" valign="middle">Spanish</entry>
+                    <entry morerows="22" valign="middle">Spanish</entry>
                     <entry>es</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>es_419</entry>
                     <entry>---</entry>
                 </row>
 
@@ -606,6 +775,11 @@
                 <row>
                     <entry>es_ES</entry>
                     <entry>Spain</entry>
+                </row>
+
+                <row>
+                    <entry>es_GQ</entry>
+                    <entry>Equatorial Guinea</entry>
                 </row>
 
                 <row>
@@ -707,6 +881,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Fulah</entry>
+                    <entry>ff</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ff_SN</entry>
+                    <entry>Senegal</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Finnish</entry>
                     <entry>fi</entry>
                     <entry>---</entry>
@@ -740,7 +925,7 @@
                 </row>
 
                 <row>
-                    <entry morerows="7" valign="middle">French</entry>
+                    <entry morerows="31" valign="middle">French</entry>
                     <entry>fr</entry>
                     <entry>---</entry>
                 </row>
@@ -751,8 +936,43 @@
                 </row>
 
                 <row>
+                    <entry>fr_BF</entry>
+                    <entry>Burkina Faso</entry>
+                </row>
+
+                <row>
+                    <entry>fr_BI</entry>
+                    <entry>Burundi</entry>
+                </row>
+
+                <row>
+                    <entry>fr_BJ</entry>
+                    <entry>Benin</entry>
+                </row>
+
+                <row>
+                    <entry>fr_BL</entry>
+                    <entry>Saint Barthélemy</entry>
+                </row>
+
+                <row>
                     <entry>fr_CA</entry>
                     <entry>Canada</entry>
+                </row>
+
+                <row>
+                    <entry>fr_CD</entry>
+                    <entry>Congo - Kinshasa</entry>
+                </row>
+
+                <row>
+                    <entry>fr_CF</entry>
+                    <entry>Central African Republic</entry>
+                </row>
+
+                <row>
+                    <entry>fr_CG</entry>
+                    <entry>Congo - Brazzaville</entry>
                 </row>
 
                 <row>
@@ -761,8 +981,48 @@
                 </row>
 
                 <row>
+                    <entry>fr_CI</entry>
+                    <entry>Côte d’Ivoire</entry>
+                </row>
+
+                <row>
+                    <entry>fr_CM</entry>
+                    <entry>Cameroon</entry>
+                </row>
+
+                <row>
+                    <entry>fr_DJ</entry>
+                    <entry>Djibouti</entry>
+                </row>
+
+                <row>
                     <entry>fr_FR</entry>
                     <entry>France</entry>
+                </row>
+
+                <row>
+                    <entry>fr_GA</entry>
+                    <entry>Gabon</entry>
+                </row>
+
+                <row>
+                    <entry>fr_GN</entry>
+                    <entry>Guinea</entry>
+                </row>
+
+                <row>
+                    <entry>fr_GP</entry>
+                    <entry>Guadeloupe</entry>
+                </row>
+
+                <row>
+                    <entry>fr_GQ</entry>
+                    <entry>Equatorial Guinea</entry>
+                </row>
+
+                <row>
+                    <entry>fr_KM</entry>
+                    <entry>Comoros</entry>
                 </row>
 
                 <row>
@@ -776,8 +1036,53 @@
                 </row>
 
                 <row>
+                    <entry>fr_MF</entry>
+                    <entry>Saint Martin</entry>
+                </row>
+
+                <row>
+                    <entry>fr_MG</entry>
+                    <entry>Madagascar</entry>
+                </row>
+
+                <row>
+                    <entry>fr_ML</entry>
+                    <entry>Mali</entry>
+                </row>
+
+                <row>
+                    <entry>fr_MQ</entry>
+                    <entry>Martinique</entry>
+                </row>
+
+                <row>
+                    <entry>fr_NE</entry>
+                    <entry>Niger</entry>
+                </row>
+
+                <row>
+                    <entry>fr_RE</entry>
+                    <entry>Réunion</entry>
+                </row>
+
+                <row>
+                    <entry>fr_RW</entry>
+                    <entry>Rwanda</entry>
+                </row>
+
+                <row>
                     <entry>fr_SN</entry>
                     <entry>Senegal</entry>
+                </row>
+
+                <row>
+                    <entry>fr_TD</entry>
+                    <entry>Chad</entry>
+                </row>
+
+                <row>
+                    <entry>fr_TG</entry>
+                    <entry>Togo</entry>
                 </row>
 
                 <row>
@@ -863,6 +1168,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Gusii</entry>
+                    <entry>guz</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>guz_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Manx</entry>
                     <entry>gv</entry>
                     <entry>---</entry>
@@ -874,14 +1190,49 @@
                 </row>
 
                 <row>
-                    <entry morerows="4" valign="middle">Hausa</entry>
+                    <entry morerows="11" valign="middle">Hausa</entry>
                     <entry>ha</entry>
                     <entry>---</entry>
                 </row>
 
                 <row>
+                    <entry>ha_Arab</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ha_Arab_NG</entry>
+                    <entry>Nigeria</entry>
+                </row>
+
+                <row>
+                    <entry>ha_Arab_SD</entry>
+                    <entry>Sudan</entry>
+                </row>
+
+                <row>
                     <entry>ha_GH</entry>
                     <entry>Ghana</entry>
+                </row>
+
+                <row>
+                    <entry>ha_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ha_Latn_GH</entry>
+                    <entry>Ghana</entry>
+                </row>
+
+                <row>
+                    <entry>ha_Latn_NE</entry>
+                    <entry>Niger</entry>
+                </row>
+
+                <row>
+                    <entry>ha_Latn_NG</entry>
+                    <entry>Nigeria</entry>
                 </row>
 
                 <row>
@@ -1056,6 +1407,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Machame</entry>
+                    <entry>jmc</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>jmc_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Georgian</entry>
                     <entry>ka</entry>
                     <entry>---</entry>
@@ -1064,6 +1426,17 @@
                 <row>
                     <entry>ka_GE</entry>
                     <entry>Georgia</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Kabyle</entry>
+                    <entry>kab</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>kab_DZ</entry>
+                    <entry>Algeria</entry>
                 </row>
 
                 <row>
@@ -1100,6 +1473,28 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Makonde</entry>
+                    <entry>kde</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>kde_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Kabuverdianu</entry>
+                    <entry>kea</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>kea_CV</entry>
+                    <entry>Cape Verde</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Koro</entry>
                     <entry>kfo</entry>
                     <entry>---</entry>
@@ -1111,9 +1506,41 @@
                 </row>
 
                 <row>
-                    <entry morerows="1" valign="middle">Kazakh</entry>
+                    <entry morerows="1" valign="middle">Koyra Chiini</entry>
+                    <entry>khq</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>khq_ML</entry>
+                    <entry>Mali</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Kikuyu</entry>
+                    <entry>ki</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ki_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
+                    <entry morerows="3" valign="middle">Kazakh</entry>
                     <entry>kk</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>kk_Cyrl</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>kk_Cyrl_KZ</entry>
+                    <entry>Kazakhstan</entry>
                 </row>
 
                 <row>
@@ -1130,6 +1557,17 @@
                 <row>
                     <entry>kl_GL</entry>
                     <entry>Greenland</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Kalenjin</entry>
+                    <entry>kln</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>kln_KE</entry>
+                    <entry>Kenya</entry>
                 </row>
 
                 <row>
@@ -1193,9 +1631,46 @@
                 </row>
 
                 <row>
-                    <entry morerows="1" valign="middle">Kurdish</entry>
+                    <entry morerows="1" valign="middle">Shambala</entry>
+                    <entry>ksb</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ksb_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Colognian</entry>
+                    <entry>ksh</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ksh_DE</entry>
+                    <entry>Germany</entry>
+                </row>
+
+                <row>
+                    <entry morerows="10" valign="middle">Kurdish</entry>
                     <entry>ku</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ku_Arab</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ku_Arab_IQ</entry>
+                    <entry>Iraq</entry>
+                </row>
+
+                <row>
+                    <entry>ku_Arab_IR</entry>
+                    <entry>Iran</entry>
                 </row>
 
                 <row>
@@ -1206,6 +1681,21 @@
                 <row>
                     <entry>ku_IR</entry>
                     <entry>Iran</entry>
+                </row>
+
+                <row>
+                    <entry>ku_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ku_Latn_SY</entry>
+                    <entry>Syria</entry>
+                </row>
+
+                <row>
+                    <entry>ku_Latn_TR</entry>
+                    <entry>Turkey</entry>
                 </row>
 
                 <row>
@@ -1238,6 +1728,28 @@
                 <row>
                     <entry>ky_KG</entry>
                     <entry>Kyrgyzstan</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Langi</entry>
+                    <entry>lag</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>lag_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Ganda</entry>
+                    <entry>lg</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>lg_UG</entry>
+                    <entry>Uganda</entry>
                 </row>
 
                 <row>
@@ -1279,6 +1791,28 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Luo</entry>
+                    <entry>luo</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>luo_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Luyia</entry>
+                    <entry>luy</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>luy_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Latvian</entry>
                     <entry>lv</entry>
                     <entry>---</entry>
@@ -1287,6 +1821,66 @@
                 <row>
                     <entry>lv_LV</entry>
                     <entry>Latvia</entry>
+                </row>
+
+                <row>
+                    <entry morerows="2" valign="middle">Masai</entry>
+                    <entry>mas</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>mas_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
+                    <entry>mas_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Meru</entry>
+                    <entry>mer</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>mer_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Morisyen</entry>
+                    <entry>mfe</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>mfe_MU</entry>
+                    <entry>Mauritius</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Malagasy</entry>
+                    <entry>mg</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>mg_MG</entry>
+                    <entry>Madagascar</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Maori</entry>
+                    <entry>mi</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>mi_NZ</entry>
+                    <entry>New Zealand</entry>
                 </row>
 
                 <row>
@@ -1312,13 +1906,33 @@
                 </row>
 
                 <row>
-                    <entry morerows="2" valign="middle">Mongolian</entry>
+                    <entry morerows="6" valign="middle">Mongolian</entry>
                     <entry>mn</entry>
                     <entry>---</entry>
                 </row>
 
                 <row>
                     <entry>mn_CN</entry>
+                    <entry>China</entry>
+                </row>
+
+                <row>
+                    <entry>mn_Cyrl</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>mn_Cyrl_MN</entry>
+                    <entry>Mongolia</entry>
+                </row>
+
+                <row>
+                    <entry>mn_Mong</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>mn_Mong_CN</entry>
                     <entry>China</entry>
                 </row>
 
@@ -1383,6 +1997,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Nama</entry>
+                    <entry>naq</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>naq_NA</entry>
+                    <entry>Namibia</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Norwegian Bokmal</entry>
                     <entry>nb</entry>
                     <entry>---</entry>
@@ -1391,6 +2016,17 @@
                 <row>
                     <entry>nb_NO</entry>
                     <entry>Norway</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">North Ndebele</entry>
+                    <entry>nd</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>nd_ZW</entry>
+                    <entry>Zimbabwe</entry>
                 </row>
 
                 <row>
@@ -1487,6 +2123,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Nyankole</entry>
+                    <entry>nyn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>nyn_UG</entry>
+                    <entry>Uganda</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Occitan</entry>
                     <entry>oc</entry>
                     <entry>---</entry>
@@ -1525,9 +2172,29 @@
                 </row>
 
                 <row>
-                    <entry morerows="2" valign="middle">Punjabi</entry>
+                    <entry morerows="6" valign="middle">Punjabi</entry>
                     <entry>pa</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>pa_Arab</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>pa_Arab_PK</entry>
+                    <entry>Pakistan</entry>
+                </row>
+
+                <row>
+                    <entry>pa_Guru</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>pa_Guru_IN</entry>
+                    <entry>India</entry>
                 </row>
 
                 <row>
@@ -1563,9 +2230,14 @@
                 </row>
 
                 <row>
-                    <entry morerows="2" valign="middle">Portuguese</entry>
+                    <entry morerows="5" valign="middle">Portuguese</entry>
                     <entry>pt</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>pt_AO</entry>
+                    <entry>Angola</entry>
                 </row>
 
                 <row>
@@ -1574,8 +2246,29 @@
                 </row>
 
                 <row>
+                    <entry>pt_GW</entry>
+                    <entry>Guinea-Bissau</entry>
+                </row>
+
+                <row>
+                    <entry>pt_MZ</entry>
+                    <entry>Mozambique</entry>
+                </row>
+
+                <row>
                     <entry>pt_PT</entry>
                     <entry>Portugal</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Romansh</entry>
+                    <entry>rm</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>rm_CH</entry>
+                    <entry>Switzerland</entry>
                 </row>
 
                 <row>
@@ -1595,9 +2288,25 @@
                 </row>
 
                 <row>
-                    <entry morerows="2" valign="middle">Russian</entry>
+                    <entry morerows="1" valign="middle">Rombo</entry>
+                    <entry>rof</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>rof_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
+                    <entry morerows="3" valign="middle">Russian</entry>
                     <entry>ru</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ru_MD</entry>
+                    <entry>Moldova</entry>
                 </row>
 
                 <row>
@@ -1622,6 +2331,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Rwa</entry>
+                    <entry>rwk</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>rwk_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Sanskrit</entry>
                     <entry>sa</entry>
                     <entry>---</entry>
@@ -1630,6 +2350,17 @@
                 <row>
                     <entry>sa_IN</entry>
                     <entry>India</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Samburu</entry>
+                    <entry>saq</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>saq_KE</entry>
+                    <entry>Kenya</entry>
                 </row>
 
                 <row>
@@ -1646,6 +2377,39 @@
                 <row>
                     <entry>se_NO</entry>
                     <entry>Norway</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Sena</entry>
+                    <entry>seh</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>seh_MZ</entry>
+                    <entry>Mozambique</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Koyraboro Senni</entry>
+                    <entry>ses</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ses_ML</entry>
+                    <entry>Mali</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Sango</entry>
+                    <entry>sg</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>sg_CF</entry>
+                    <entry>Central African Republic</entry>
                 </row>
 
                 <row>
@@ -1667,6 +2431,37 @@
                 <row>
                     <entry>sh_YU</entry>
                     <entry>Serbia</entry>
+                </row>
+
+                <row>
+                    <entry morerows="5" valign="middle">Tachelhit</entry>
+                    <entry>shi</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>shi_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>shi_Latn_MA</entry>
+                    <entry>Morocco</entry>
+                </row>
+
+                <row>
+                    <entry>shi_MA</entry>
+                    <entry>Morocco</entry>
+                </row>
+
+                <row>
+                    <entry>shi_Tfng</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>shi_Tfng_MA</entry>
+                    <entry>Morocco</entry>
                 </row>
 
                 <row>
@@ -1714,6 +2509,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Shona</entry>
+                    <entry>sn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>sn_ZW</entry>
+                    <entry>Zimbabwe</entry>
+                </row>
+
+                <row>
                     <entry morerows="4" valign="middle">Somali</entry>
                     <entry>so</entry>
                     <entry>---</entry>
@@ -1751,7 +2557,7 @@
                 </row>
 
                 <row>
-                    <entry morerows="5" valign="middle">Serbian</entry>
+                    <entry morerows="17" valign="middle">Serbian</entry>
                     <entry>sr</entry>
                     <entry>---</entry>
                 </row>
@@ -1764,6 +2570,66 @@
                 <row>
                     <entry>sr_CS</entry>
                     <entry>Serbia and Montenegro</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Cyrl</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Cyrl_BA</entry>
+                    <entry>Bosnia and Herzegovina</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Cyrl_CS</entry>
+                    <entry>Serbia and Montenegro</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Cyrl_ME</entry>
+                    <entry>Montenegro</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Cyrl_RS</entry>
+                    <entry>Serbia</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Cyrl_YU</entry>
+                    <entry>Serbia</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Latn_BA</entry>
+                    <entry>Bosnia and Herzegovina</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Latn_CS</entry>
+                    <entry>Serbia and Montenegro</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Latn_ME</entry>
+                    <entry>Montenegro</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Latn_RS</entry>
+                    <entry>Serbia</entry>
+                </row>
+
+                <row>
+                    <entry>sr_Latn_YU</entry>
+                    <entry>Serbia</entry>
                 </row>
 
                 <row>
@@ -1795,6 +2661,17 @@
                 <row>
                     <entry>ss_ZA</entry>
                     <entry>South Africa</entry>
+                </row>
+
+                <row>
+                    <entry morerows="1" valign="middle">Saho</entry>
+                    <entry>ssy</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ssy_ER</entry>
+                    <entry>Eritrea</entry>
                 </row>
 
                 <row>
@@ -1857,7 +2734,7 @@
                 </row>
 
                 <row>
-                    <entry morerows="1" valign="middle">Tamil</entry>
+                    <entry morerows="2" valign="middle">Tamil</entry>
                     <entry>ta</entry>
                     <entry>---</entry>
                 </row>
@@ -1865,6 +2742,11 @@
                 <row>
                     <entry>ta_IN</entry>
                     <entry>India</entry>
+                </row>
+
+                <row>
+                    <entry>ta_LK</entry>
+                    <entry>Sri Lanka</entry>
                 </row>
 
                 <row>
@@ -1879,9 +2761,35 @@
                 </row>
 
                 <row>
-                    <entry morerows="1" valign="middle">Tajik</entry>
+                    <entry morerows="2" valign="middle">Teso</entry>
+                    <entry>teo</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>teo_KE</entry>
+                    <entry>Kenya</entry>
+                </row>
+
+                <row>
+                    <entry>teo_UG</entry>
+                    <entry>Uganda</entry>
+                </row>
+
+                <row>
+                    <entry morerows="3" valign="middle">Tajik</entry>
                     <entry>tg</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>tg_Cyrl</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>tg_Cyrl_TJ</entry>
+                    <entry>Tajikistan</entry>
                 </row>
 
                 <row>
@@ -1928,9 +2836,14 @@
                 </row>
 
                 <row>
-                    <entry>Tagalog</entry>
+                    <entry morerows="1" valign="middle">Tagalog</entry>
                     <entry>tl</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>tl_PH</entry>
+                    <entry>Philippines</entry>
                 </row>
 
                 <row>
@@ -2000,9 +2913,40 @@
                 </row>
 
                 <row>
-                    <entry morerows="1" valign="middle">Uighur</entry>
+                    <entry morerows="3" valign="middle"></entry>
+                    <entry>tzm</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>tzm_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>tzm_Latn_MA</entry>
+                    <entry>Morocco</entry>
+                </row>
+
+                <row>
+                    <entry>tzm_MA</entry>
+                    <entry>Morocco</entry>
+                </row>
+
+                <row>
+                    <entry morerows="3" valign="middle">Uighur</entry>
                     <entry>ug</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ug_Arab</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>ug_Arab_CN</entry>
+                    <entry>China</entry>
                 </row>
 
                 <row>
@@ -2038,14 +2982,44 @@
                 </row>
 
                 <row>
-                    <entry morerows="2" valign="middle">Uzbek</entry>
+                    <entry morerows="8" valign="middle">Uzbek</entry>
                     <entry>uz</entry>
                     <entry>---</entry>
                 </row>
 
                 <row>
+                    <entry>uz_Arab</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>uz_Arab_AF</entry>
+                    <entry>Afghanistan</entry>
+                </row>
+
+                <row>
                     <entry>uz_AF</entry>
                     <entry>Afghanistan</entry>
+                </row>
+
+                <row>
+                    <entry>uz_Cyrl</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>uz_Cyrl_UZ</entry>
+                    <entry>Uzbekistan</entry>
+                </row>
+
+                <row>
+                    <entry>uz_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>uz_Latn_UZ</entry>
+                    <entry>Uzbekistan</entry>
                 </row>
 
                 <row>
@@ -2076,6 +3050,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Vunjo</entry>
+                    <entry>vun</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>vun_TZ</entry>
+                    <entry>Tanzania</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Walamo</entry>
                     <entry>wal</entry>
                     <entry>---</entry>
@@ -2087,9 +3072,19 @@
                 </row>
 
                 <row>
-                    <entry morerows="1" valign="middle">Wolof</entry>
+                    <entry morerows="3" valign="middle">Wolof</entry>
                     <entry>wo</entry>
                     <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>wo_Latn</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>wo_Latn_SN</entry>
+                    <entry>Senegal</entry>
                 </row>
 
                 <row>
@@ -2109,6 +3104,17 @@
                 </row>
 
                 <row>
+                    <entry morerows="1" valign="middle">Soga</entry>
+                    <entry>xog</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>xog_UG</entry>
+                    <entry>Uganda</entry>
+                </row>
+
+                <row>
                     <entry morerows="1" valign="middle">Yoruba</entry>
                     <entry>yo</entry>
                     <entry>---</entry>
@@ -2120,7 +3126,7 @@
                 </row>
 
                 <row>
-                    <entry morerows="5" valign="middle">Chinese</entry>
+                    <entry morerows="14" valign="middle">Chinese</entry>
                     <entry>zh</entry>
                     <entry>---</entry>
                 </row>
@@ -2128,6 +3134,51 @@
                 <row>
                     <entry>zh_CN</entry>
                     <entry>China</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hans</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hans_CN</entry>
+                    <entry>China</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hans_HK</entry>
+                    <entry>Hong Kong</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hans_MO</entry>
+                    <entry>Macau</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hans_SG</entry>
+                    <entry>Singapore</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hant</entry>
+                    <entry>---</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hant_HK</entry>
+                    <entry>Hong Kong</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hant_MO</entry>
+                    <entry>Macau</entry>
+                </row>
+
+                <row>
+                    <entry>zh_Hant_TW</entry>
+                    <entry>Taiwan</entry>
                 </row>
 
                 <row>

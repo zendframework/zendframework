@@ -1,0 +1,36 @@
+all:
+    hostname: all
+    name: thisname
+    db:
+        host: 127.0.0.1
+        user: username
+        pass: password
+        name: live
+    one:
+        two:
+            three: multi
+
+staging:
+    _extends: all
+    hostname: staging
+    db:
+        name: dbstaging
+    debug: false
+
+debug:
+    _extends: all
+    hostname: debug
+    debug: true
+    values:
+        changed: yes
+    db:
+        name: dbdebug
+    special:
+        no: no
+        null: null
+        false: false
+
+other_staging:
+    only_in: otherStaging
+    db:
+        pass: anotherpwd

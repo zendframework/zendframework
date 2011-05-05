@@ -11,13 +11,13 @@
         the adapter sends a <acronym>JSON</acronym> string to the browser, which looks exactly
         like the <acronym>JSON</acronym> string which is send by the jsPush adapter. The only
         difference is, that it contains an additional parameter,
-        <code>finished</code>, which is either <constant>FALSE</constant> when
+        <property>finished</property>, which is either <constant>FALSE</constant> when
         <methodname>update()</methodname> is called or <constant>TRUE</constant>, when
         <methodname>finish()</methodname> is called.
     </para>
 
     <para>
-        You can set the adapter options either via the <code>set*</code> methods
+        You can set the adapter options either via the <methodname>set*()</methodname> methods
         or give an array or a <classname>Zend_Config</classname> instance with options as first
         parameter to the constructor. The available options are:
     </para>
@@ -25,7 +25,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>exitAfterSend</code>: Exits the current request after the
+                <property>exitAfterSend</property>: Exits the current request after the
                 data were send to the browser. Default is <constant>TRUE</constant>.
             </para>
         </listitem>

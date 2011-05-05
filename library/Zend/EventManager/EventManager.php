@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\Stdlib\CallbackHandler,
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EventManager implements EventCollection
@@ -154,12 +154,13 @@ class EventManager implements EventCollection
 
         $responses = new ResponseCollection;
         $e         = new $this->eventClass($event, $context, $argv);
+        $handlers  = $this->getHandlers($event);
 
-        if (empty($this->events[$event])) {
+        if ($handlers->isEmpty()) {
             return $this->triggerStaticHandlers($callback, $e, $responses);
         }
 
-        foreach ($this->events[$event] as $handler) {
+        foreach ($handlers as $handler) {
             $responses->push(call_user_func($handler->getCallback(), $e));
             if ($e->propagationIsStopped()) {
                 $responses->setStopped(true);
@@ -170,6 +171,7 @@ class EventManager implements EventCollection
                 break;
             }
         }
+
         if (!$responses->stopped()) {
             $this->triggerStaticHandlers($callback, $e, $responses);
         }

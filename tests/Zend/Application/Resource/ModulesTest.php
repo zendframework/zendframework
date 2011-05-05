@@ -15,23 +15,25 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Application\Resource;
 
 use Zend\Loader\Autoloader,
+    Zend\Application\Resource\FrontController as FrontControllerResource,
     Zend\Application\Resource\Modules as ModulesResource,
     Zend\Application\Application,
     Zend\Controller\Front as FrontController,
     ZendTest\Application\TestAsset\ZfAppBootstrap;
 
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
@@ -39,17 +41,6 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        // Store original autoloaders
-        $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no
-            // autoloaders registered...
-            $this->loaders = array();
-        }
-
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
-
         $this->application = new Application('testing');
 
         $this->bootstrap = new ZfAppBootstrap($this->application);
@@ -60,27 +51,19 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        // Restore original autoloaders
-        $loaders = spl_autoload_functions();
-        foreach ($loaders as $loader) {
-            spl_autoload_unregister($loader);
-        }
-
-        foreach ($this->loaders as $loader) {
-            spl_autoload_register($loader);
-        }
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testInitializationTriggersNothingIfNoModulesRegistered()
     {
 
-        $this->bootstrap->registerPluginResource('Frontcontroller', array());
+        $resource =  new FrontControllerResource();
+        $resource->setBootstrap($this->bootstrap);
+        $resource->init();
+
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
+
         $this->assertFalse(isset($this->bootstrap->default));
         $this->assertFalse(isset($this->bootstrap->foo));
         $this->assertFalse(isset($this->bootstrap->bar));
@@ -92,9 +75,13 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitializationTriggersDefaultModuleBootstrapWhenDiffersFromApplicationBootstrap()
     {
-        $this->bootstrap->registerPluginResource('Frontcontroller', array(
+
+        $resource =  new FrontControllerResource(array(
             'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
+        $resource->setBootstrap($this->bootstrap);
+        $resource->init();
+
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
@@ -104,9 +91,12 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
     public function testInitializationShouldTriggerModuleBootstrapsWhenTheyExist()
     {
 
-        $this->bootstrap->registerPluginResource('Frontcontroller', array(
+        $resource =  new FrontControllerResource(array(
             'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
+        $resource->setBootstrap($this->bootstrap);
+        $resource->init();
+
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
@@ -121,12 +111,16 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
     public function testInitializationShouldSkipModulesWithoutBootstraps()
     {
 
-        $this->bootstrap->registerPluginResource('Frontcontroller', array(
+        $resource =  new FrontControllerResource(array(
             'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
+        $resource->setBootstrap($this->bootstrap);
+        $resource->init();
+
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
+
         $bootstraps = $resource->getExecutedBootstraps();
         $this->assertEquals(4, count((array)$bootstraps));
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
@@ -142,9 +136,12 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
     public function testShouldReturnExecutedBootstrapsWhenComplete()
     {
 
-        $this->bootstrap->registerPluginResource('Frontcontroller', array(
+        $resource =  new FrontControllerResource(array(
             'moduleDirectory' => __DIR__ . '/../TestAsset/modules',
         ));
+        $resource->setBootstrap($this->bootstrap);
+        $resource->init();
+
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $bootstraps = $resource->init();

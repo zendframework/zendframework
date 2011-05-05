@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use \Zend\Log\Logger,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -59,16 +59,16 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be an integer');
         new Priority('foo');
     }
-    
+
     public function testFactory()
     {
         $cfg = array('log' => array('memory' => array(
-            'writerName' => "Mock", 
-            'filterName' => "Priority", 
+            'writerName' => "Mock",
+            'filterName' => "Priority",
             'filterParams' => array(
-                'priority' => '\Zend\Log\Logger::CRIT', 
+                'priority' => '\Zend\Log\Logger::CRIT',
                 'operator' => "<="
-             ),        
+             ),
         )));
 
         $logger = Logger::factory($cfg['log']);
@@ -84,6 +84,6 @@ class PriorityTest extends \PHPUnit_Framework_TestCase
             'filterParams' => array(
                 'priority' => 'somestring',
             ),
-        )));            
+        )));
     }
 }

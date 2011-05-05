@@ -15,19 +15,22 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Log\Writer;
 
-use Zend\Log\Writer\Syslog as SyslogWriter;
+use ZendTest\Log\TestAsset\CustomSyslogWriter,
+    Zend\Log\Writer\Syslog as SyslogWriter,
+    \Zend\Log\Logger,
+    \Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -84,5 +87,31 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
                            ->setApplicationName('my_app');
 
         $this->assertTrue($instance instanceof SyslogWriter);
+    }
+
+    /**
+     * @group ZF-10769
+     */
+    public function testPastFacilityViaConstructor()
+    {
+        $writer = new CustomSyslogWriter(array('facility' => LOG_USER));
+        $this->assertEquals(LOG_USER, $writer->getFacility());
+    }
+
+    /**
+     * @group ZF-8382
+     */
+    public function testWriteWithFormatter()
+    {
+        $event = array(
+            'message' => 'tottakai',
+            'priority' => Logger::ERR
+        );
+
+        $writer = SyslogWriter::factory(array());
+        $formatter = new SimpleFormatter('%message% (this is a test)');
+        $writer->setFormatter($formatter);
+
+        $writer->write($event);
     }
 }

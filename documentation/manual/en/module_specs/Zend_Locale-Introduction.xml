@@ -22,9 +22,9 @@
         and date conventions, etc. Localization involves adding explicit support to systems for
         special needs of these unique groups, such as language translation, and support for local
         customs or conventions for communicating plurals, dates, times, currencies, names, symbols,
-        sorting and ordering, etc. <code>L10n</code> and <code>I18n</code> compliment each other.
-        Zend Framework provides support for these through a combination of components, including
-        <classname>Zend_Locale</classname>, <classname>Zend_Date</classname>,
+        sorting and ordering, etc. <emphasis>L10n</emphasis> and <emphasis>I18n</emphasis>
+        compliment each other. Zend Framework provides support for these through a combination of
+        components, including <classname>Zend_Locale</classname>, <classname>Zend_Date</classname>,
         <classname>Zend_Measure</classname>, <classname>Zend_Translate</classname>,
         <classname>Zend_Currency</classname>, and <classname>Zend_TimeSync</classname>.
     </para>
@@ -105,12 +105,6 @@
                         <acronym>CLDR</acronym></ulink>.
                 </para>
             </listitem>
-
-            <listitem>
-                <para>
-                    <code>TODO</code> - Localization of collations
-                </para>
-            </listitem>
         </itemizedlist>
     </sect2>
 
@@ -121,8 +115,8 @@
             Each computer user makes use of Locales, even when they don't know it. Applications
             lacking localization support, normally have implicit support for one particular locale
             (the locale of the author). When a class or function makes use of localization, we say
-            it is <code>locale-aware</code>. How does the code know which localization the user is
-            expecting?
+            it is <emphasis>locale-aware</emphasis>. How does the code know which localization the
+            user is expecting?
         </para>
 
         <para>
@@ -140,9 +134,9 @@
             Locale identifiers consist of information about the user's language and
             preferred/primary geographic region (e.g. state or province of home or workplace). The
             locale identifier strings used in Zend Framework are internationally defined standard
-            abbreviations of language and region, written as <code>language_REGION</code>. Both the
-            language and region parts are abbreviated to alphabetic, <acronym>ASCII</acronym>
-            characters.
+            abbreviations of language and region, written as <emphasis>language_REGION</emphasis>.
+            Both the language and region parts are abbreviated to alphabetic,
+            <acronym>ASCII</acronym> characters.
         </para>
 
         <note>
@@ -157,9 +151,9 @@
         </note>
 
         <para>
-            A user from USA would expect the language <code>English</code> and the region
+            A user from USA would expect the language English and the region
             <constant>USA</constant>, yielding the locale identifier "en_US". A user in Germany
-            would expect the language <code>German</code> and the region <code>Germany</code>,
+            would expect the language German and the region Germany,
             yielding the locale identifier "de_DE". See the <ulink
                 url="http://unicode.org/cldr/data/diff/supplemental/languages_and_territories.html">list
                 of pre-defined locale and region combinations</ulink>, if you need to select a
@@ -175,7 +169,7 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
         </example>
 
         <para>
-            A German user in America might expect the language <code>German</code> and the region
+            A German user in America might expect the language German and the region
             <constant>USA</constant>, but these non-standard mixes are not supported directly as
             recognized "locales". Instead, if an invalid combination is used, then it will
             automatically be truncated by dropping the region code. For example, "de_IS" would be
@@ -205,9 +199,9 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
         <title>Selecting the Right Locale</title>
 
         <para>
-            For most situations, <code>new Zend_Locale()</code> will automatically select the
+            For most situations, <command>new Zend_Locale()</command> will automatically select the
             correct locale, with preference given to information provided by the user's web browser.
-            However, if <code>new Zend_Locale(Zend_Locale::ENVIRONMENT)</code> is used, then
+            However, if <command>new Zend_Locale(Zend_Locale::ENVIRONMENT)</command> is used, then
             preference will be given to using the host server's environment configuration, as
             described below.
         </para>
@@ -288,9 +282,9 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
             <orderedlist>
                 <listitem>
                     <para>
-                        <code>'browser'</code> - <classname>Zend_Locale</classname> should work with
-                        the information which is provided by the user's Web browser. It is published
-                        by <acronym>PHP</acronym> in the global variable
+                        '<property>browser</property>' - <classname>Zend_Locale</classname> should
+                        work with the information which is provided by the user's Web browser. It
+                        is published by <acronym>PHP</acronym> in the global variable
                         <constant>$_SERVER['HTTP_ACCEPT_LANGUAGE']</constant>.
                     </para>
 
@@ -298,30 +292,30 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                         If a user provides more than one locale within his browser,
                         <classname>Zend_Locale</classname> will use the first found locale. If the
                         user does not provide a locale or the script is being called from the
-                        command line the automatic locale <code>'environment'</code> will
+                        command line the automatic locale '<property>environment</property>' will
                         automatically be used and returned.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>'environment'</code> - <classname>Zend_Locale</classname> should work
-                        with the information which is provided by the host server. It is published
-                        by <acronym>PHP</acronym> via the internal function
+                        '<property>environment</property>' - <classname>Zend_Locale</classname>
+                        should work with the information which is provided by the host server. It
+                        is published by <acronym>PHP</acronym> via the internal function
                         <methodname>setlocale()</methodname>.
                     </para>
 
                     <para>
                         If a environment provides more than one locale,
                         <classname>Zend_Locale</classname> will use the first found locale. If the
-                        host does not provide a locale the automatic locale <code>'browser'</code>
-                        will automatically be used and returned.
+                        host does not provide a locale the automatic locale
+                        '<property>browser</property>' will automatically be used and returned.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>'auto'</code> - <classname>Zend_Locale</classname> should
+                        '<property>auto</property>' - <classname>Zend_Locale</classname> should
                         automatically detect any locale which can be worked with. It will first
                         search for a users locale and then, if not successful, search for the host
                         locale.
@@ -508,8 +502,8 @@ echo $date->getDate();
             <acronym>CLDR</acronym>/ISO date format specifier tokens and <acronym>PHP</acronym>'s
             date() tokens. The 'fix_date' option enables or disables heuristics that attempt to
             correct invalid dates. The 'number_format' option specifies a default number format for
-            use with <methodname>toNumber()</methodname> (see <xref
-                linkend= "zend.locale.number.localize"/>).
+            use with <methodname>toNumber()</methodname> (see <link
+                linkend= "zend.locale.number.localize">this section</link>).
         </para>
 
         <para>
@@ -532,10 +526,10 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
         <para>
             For working with the standard definitions of a locale the option
             <constant>Zend_Locale_Format::STANDARD</constant> can be used. Setting the option
-            <constant>Zend_Locale_Format::STANDARD</constant> for <code>date_format</code> uses the
-            standard definitions from the actual set locale. Setting it for number_format uses the
-            standard number format for this locale. And setting it for locale uses the standard
-            locale for this environment or browser.
+            <constant>Zend_Locale_Format::STANDARD</constant> for <property>date_format</property>
+            uses the standard definitions from the actual set locale. Setting it for
+            <property>number_format</property> uses the standard number format for this locale.
+            And setting it for locale uses the standard locale for this environment or browser.
         </para>
 
         <example id="zend.locale.formatoptions.example-2">
@@ -564,7 +558,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
             <classname>Zend_Cache</classname>. Use the static method
             <methodname>Zend_Locale::setCache($cache)</methodname> if you are using
             <classname>Zend_Locale</classname>. <classname>Zend_Locale_Format</classname> can be
-            speeded up the using the option <code>cache</code> within
+            speeded up the using the option <property>cache</property> within
             <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>.
             If you are using both classes you should only set the cache for
             <classname>Zend_Locale</classname>, otherwise the last set cache will overwrite the

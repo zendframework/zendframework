@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use \Zend\Log\Writer\Stream as StreamWriter,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -42,7 +42,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
             new StreamWriter($resource);
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertType('Zend\Log\Exception\InvalidArgumentException', $e);
+            $this->assertInstanceOf('Zend\Log\Exception\InvalidArgumentException', $e);
             $this->assertRegExp('/not a stream/i', $e->getMessage());
         }
         xml_parser_free($resource);
@@ -124,7 +124,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains($expected, $contents);
     }
-    
+
     public function testFactoryStream()
     {
         $cfg = array('log' => array('memory' => array(
@@ -138,7 +138,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
         $logger = Logger::factory($cfg['log']);
         $this->assertTrue($logger instanceof Logger);
     }
-    
+
     public function testFactoryUrl()
     {
         $cfg = array('log' => array('memory' => array(

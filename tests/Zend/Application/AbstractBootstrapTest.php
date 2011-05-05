@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ use Zend\Loader\ResourceAutoloader,
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
@@ -41,29 +41,12 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        // Store original autoloaders
-        $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no
-            // autoloaders registered...
-            $this->loaders = array();
-        }
-
         $this->application = new Application\Application('testing');
         $this->error = false;
     }
 
     public function tearDown()
     {
-        // Restore original autoloaders
-        $loaders = spl_autoload_functions();
-        foreach ($loaders as $loader) {
-            spl_autoload_unregister($loader);
-        }
-
-        foreach ($this->loaders as $loader) {
-            spl_autoload_register($loader);
-        }
     }
 
     public function handleError($errno, $errstr)
@@ -581,7 +564,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $bootstrap = new Application\Bootstrap($this->application);
         $bootstrap->setApplication($bootstrap);
     }
-    
+
     /**
      * @group ZF-7696
      * @group disable
@@ -631,7 +614,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         ));
         $bootstrap = $application->getBootstrap();
         $broker    = $bootstrap->getBroker();
-        $this->assertType('ZendTest\Application\TestAsset\ResourceBroker', $broker);
+        $this->assertInstanceOf('ZendTest\Application\TestAsset\ResourceBroker', $broker);
     }
 
     public function testCanPassConcreteBrokerViaOptions()
@@ -656,7 +639,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         ));
         $bootstrap = $application->getBootstrap();
         $broker    = $bootstrap->getBroker();
-        $this->assertType('ZendTest\Application\TestAsset\ResourceBroker', $broker);
+        $this->assertInstanceOf('ZendTest\Application\TestAsset\ResourceBroker', $broker);
         $this->assertEquals(array('foo' => 'bar'), $broker->options);
     }
 }

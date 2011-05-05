@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Measure
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Locale\Math;
  * @uses       Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Measure
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Number extends AbstractMeasure
@@ -294,7 +294,7 @@ class Number extends AbstractMeasure
 
             $split = preg_split('//', strrev($input), -1, PREG_SPLIT_NO_EMPTY);
 
-            for ($x =0; $x < sizeof($split); $x++) {
+            for ($x =0; $x < count($split); $x++) {
                 if ($split[$x] == '/') {
                     continue;
                 }

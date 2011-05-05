@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 22760 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
@@ -20,8 +20,9 @@
         <para>
             <classname>Zend_Text_Table</classname> erwartet die Strings standardmäßig als UTF-8
             kodiert. Wenn das nicht der Fall ist, kann entweder die Zeichenkodierung als Parameter
-            an den <code>Constructor</code> übergeben werden, oder an die <code>setContent</code>
-            Methode von <classname>Zend_Text_Table_Column</classname>. Wenn man im kompletten
+            an den <methodname>constructor()</methodname> übergeben werden, oder an die
+            <methodname>setContent()</methodname> Methode von
+            <classname>Zend_Text_Table_Column</classname>. Wenn man im kompletten
             Prozess eine andere Kodierung verwendet, kann man die standardmäßige Eingabekodierung
             mit <methodname>Zend_Text_Table::setInputCharset($charset)</methodname> setzen. Im Fall,
             das man eine andere Ausgabekodierung für die Tabelle benötigt, kann diese mit
@@ -38,31 +39,32 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>columnWidths</code> (required): Ein Array das alle Spalten mit Ihrer
-                    Breite in Zeichen definiert.
+                    <property>columnWidths</property> (required): Ein Array das alle Spalten mit
+                    Ihrer Breite in Zeichen definiert.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>decorator</code>: Der Dekorator der für die Tabellenränder verwendet wird.
-                    Der Standard ist <code>unicode</code>, aber man kann auch <code>ascii</code>
-                    spezifizieren, oder eine Instanz eines eigenen Dekoratorobjekts angeben.
+                    <property>decorator</property>: Der Dekorator der für die Tabellenränder
+                    verwendet wird. Der Standard ist <emphasis>unicode</emphasis>, aber man kann
+                    auch <emphasis>ascii</emphasis> spezifizieren, oder eine Instanz eines eigenen
+                    Dekoratorobjekts angeben.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>padding</code>: Die linke und rechte Füllung innerhalb der Spalten in
-                    Zeichen. Die Standardfüllung ist Null.
+                    <property>padding</property>: Die linke und rechte Füllung innerhalb der Spalten
+                    in Zeichen. Die Standardfüllung ist Null.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>AutoSeparate</code>: Der Weg auf dem Zeilen mit horizontalen Linien
-                    getrennt werden. Der Standard ist eine Trennung zwischen allen Zeilen. Das ist
-                    als Bitmaske definiert die ein oder mehrere der folgenden Konstanten von
+                    <property>AutoSeparate</property>: Der Weg auf dem Zeilen mit horizontalen
+                    Linien getrennt werden. Der Standard ist eine Trennung zwischen allen Zeilen.
+                    Das ist als Bitmaske definiert die ein oder mehrere der folgenden Konstanten von
                     <classname>Zend_Text_Table</classname> haben kann:
 
                     <itemizedlist>
@@ -97,18 +99,19 @@
     <para>
         Zeilen werden zur Tabelle einfach hinzugefügt indem eine neue Instanz von
         <classname>Zend_Text_Table_Row</classname> erstellt, und der Tabelle über die
-        <code>appendRow</code> Methode angehängt wird. Zeilen selbst haben keine Optionen. Man kann
-        der <code>appendRow</code> Methode auch direkt auch ein Array geben, welches dann
-        automatisch in ein Zeilenobjekt konvertiert wird, welches mehrere Spaltenobjekte enthält.
+        <methodname>appendRow()</methodname> Methode angehängt wird. Zeilen selbst haben keine
+        Optionen. Man kann der <methodname>appendRow()</methodname> Methode auch direkt auch ein
+        Array geben, welches dann automatisch in ein Zeilenobjekt konvertiert wird, welches mehrere
+        Spaltenobjekte enthält.
     </para>
 
     <para>
         Auf dem gleichen Weg kann man Spalten zu Zeilen hinzufügen. Man erstellt eine neue Instanz
         von <classname>Zend_Text_Table_Column</classname> und setzt dann entweder die Zeilenoptionen
-        im Constructor, oder später mit den <code>set*</code> Methoden. Der erste Parameter ist der
-        Inhalt der Spalte, welcher mehrere Zeilen haben kann, welche im besten Fall einfach durch
-        das <code>\n</code> Zeichen getrennt sind. Der zweite Parameter definiert die Ausrichtung,
-        welche standardmäßig <code>left</code> ist, und eine der Klassenkonstanten von
+        im Constructor, oder später mit den <methodname>set*()</methodname> Methoden. Der erste
+        Parameter ist der Inhalt der Spalte, welcher mehrere Zeilen haben kann, welche im besten
+        Fall einfach durch das '\n' Zeichen getrennt sind. Der zweite Parameter definiert die
+        Ausrichtung, welche standardmäßig 'left' ist, und eine der Klassenkonstanten von
         <classname>Zend_Text_Table_Column</classname> sein kann:
 
         <itemizedlist>
@@ -121,15 +124,17 @@
         definiert, wird die Spalte über 2 Spalten der Tabelle gespannt. Der letzt Parameter
         definiert die Kodierung des Inhalts, welche angegeben werden sollte, wenn der Inhalt weder
         ASCII noch UTF-8 ist. Um die Spalte zur Zeile hinzuzufügen, muß einfach
-        <code>appendColumn</code> im Zeilenobjekt, mit dem Spaltenobjekt als Parameter, aufgerufen
-        werden. Alternativ kann ein String direkt an die <code>appendColumn</code> Methode übergeben
-        werden.
+        <methodname>appendColumn()</methodname> im Zeilenobjekt, mit dem Spaltenobjekt als
+        Parameter, aufgerufen werden. Alternativ kann ein String direkt an die
+        <methodname>appendColumn()</methodname> Methode übergeben werden.
     </para>
 
     <para>
-        Um die Tabelle letztendlich darzustellen, kann man entweder die <code>render</code> Methode
-        der Tabelle verwenden, oder die magische <code>__toString</code> Methode der Tabelle, indem
-        man <code>echo $table;</code> oder <code>$tableString = (string) $table</code> ausführt.
+        Um die Tabelle letztendlich darzustellen, kann man entweder die
+        <methodname>render()</methodname> Methode der Tabelle verwenden, oder die magische
+        <methodname>__toString()</methodname> Methode der Tabelle, indem man
+        <command>echo $table;</command> oder <command>$tableString = (string) $table</command>
+        ausführt.
     </para>
 
     <example id="zend.text.table.example.using">

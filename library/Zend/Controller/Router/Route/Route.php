@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Router
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use Zend\Translator;
  * @uses       \Zend\Registry
  * @package    Zend_Controller
  * @subpackage Router
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
@@ -493,7 +493,7 @@ class Route extends AbstractRoute
         } else {
             try {
                 $translator = \Zend\Registry::get('Zend_Translate');
-            } catch (\Zend\Exception $e) {
+            } catch (\RuntimeException $e) {
                 $translator = null;
             }
 
@@ -551,7 +551,7 @@ class Route extends AbstractRoute
         } else {
             try {
                 $locale = \Zend\Registry::get('Zend_Locale');
-            } catch (\Zend\Exception $e) {
+            } catch (\RuntimeException $e) {
                 $locale = null;
             }
 

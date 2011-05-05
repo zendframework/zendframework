@@ -457,8 +457,8 @@ $server->setClass('Services_PricingService',
             <para>
                 The arguments passed at <methodname>setClass()</methodname> at server construction
                 time are injected into the method call <command>pricing.calculate()</command> on
-                remote invokation. In the example above, only the argument <code>$purchaseId</code>
-                is expected from the client.
+                remote invokation. In the example above, only the argument
+                <varname>$purchaseId</varname> is expected from the client.
             </para>
         </example>
 
@@ -694,15 +694,15 @@ echo $server->handle($request);
             <para>
                 <classname>Zend_XmlRpc_Server</classname> uses
                 <classname>DOMDocument</classname> of <acronym>PHP</acronym>
-                extension <code>ext/dom</code> to generate it's
-                <acronym>XML</acronym> output. While <code>ext/dom</code> is
+                extension <emphasis>ext/dom</emphasis> to generate it's
+                <acronym>XML</acronym> output. While <emphasis>ext/dom</emphasis> is
                 available on a lot of hosts it is not exactly the fastest.
                 Benchmarks have shown, that <classname>XmlWriter</classname>
-                from <code>ext/xmlwriter</code> performs better.
+                from <emphasis>ext/xmlwriter</emphasis> performs better.
             </para>
 
             <para>
-                If <code>ext/xmlwriter</code> is available on your host, you can
+                If <emphasis>ext/xmlwriter</emphasis> is available on your host, you can
                 select a the <classname>XmlWriter</classname>-based generator
                 to leaverage the performance differences.
             </para>

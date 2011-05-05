@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5207 $"/>
+		<generation date="$Date: 2010-11-18 15:08:20 -0600 (Thu, 18 Nov 2010) $"/>
+		<language type="ps" /> 
+	</identity>
+		<collations  validSubLocales="ps_AF">
+			<collation type="standard" >
+				<settings normalization="on"  />
+				<rules>
+					<reset>َ</reset>
+					<sc>ًٌٍُِ</sc>
+					<reset before="primary">ا</reset>
+					<p>آ</p>
+					<reset>ا</reset>
+					<sc>أٲٱإٳ</sc>
+					<p>ء</p>
+					<reset>ت</reset>
+					<p>ټ</p>
+					<s>ٹ</s>
+					<reset>ج</reset>
+					<p>ځ</p>
+					<s>حٔ</s>
+					<reset>چ</reset>
+					<p>څ</p>
+					<reset>د</reset>
+					<p>ډ</p>
+					<s>ڈ</s>
+					<reset>ر</reset>
+					<p>ړ</p>
+					<s>ڑ</s>
+					<reset>ژ</reset>
+					<p>ږ</p>
+					<reset>ک</reset>
+					<sc>ڪك</sc>
+					<reset>ګ</reset>
+					<s>گ</s>
+					<reset>ڼ</reset>
+					<s>ڻ</s>
+					<reset>و</reset>
+					<sc>ؤۇۉ</sc>
+					<reset>ه</reset>
+					<t>ۀ</t>
+					<t>هٔ</t>
+					<sc>ەہھةۃ</sc>
+					<reset>ی</reset>
+					<sc>ىےيېۍ</sc>
+					<s>یٔ</s>
+					<t>ىٔ</t>
+					<t>ئ</t>
+					<reset> </reset>
+					<s>&#x200C;</s>
+					<s>&#x200D;</s>
+				</rules>
+			</collation  >
+		</collations>
+</ldml>

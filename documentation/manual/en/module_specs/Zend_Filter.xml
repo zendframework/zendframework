@@ -183,6 +183,41 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
             </itemizedlist>
         </sect3>
     </sect2>
+
+    <sect2 id="zend.filter.introduction.caveats">
+        <title>Double filtering</title>
+
+        <para>
+            When using two filters after each other you have to keep in mind that it is often not
+            possible to get the original output by using the opposite filter. Take the following
+            example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$original = "my_original_content";
+
+// Attach a filter
+$filter   = new Zend_Filter_Word_UnderscoreToCamelCase();
+$filtered = $filter->filter($original);
+
+// Use it's opposite
+$filter2  = new Zend_Filter_Word_CamelCaseToUnderscore();
+$filtered = $filter2->filter($filtered)
+]]></programlisting>
+
+        <para>
+            The above code example could lead to the impression that you will get the original
+            output after the second filter has been applied. But thinking logically this is not the
+            case. After applying the first filter <emphasis>my_original_content</emphasis> will be
+            changed to <emphasis>MyOriginalContent</emphasis>. But after applying the second filter
+            the result is <emphasis>My_Original_Content</emphasis>.
+        </para>
+
+        <para>
+            As you can see it is not always possible to get the original output by using a filter
+            which seems to be the opposite. It depends on the filter and also on the given input.
+        </para>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

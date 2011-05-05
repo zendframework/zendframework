@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22392 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -521,8 +521,8 @@ CREATE TABLE IF NOT EXISTS `subscription` (
             <para>
                 Das Löschen eines Abos folgt exakt dem gleichen Pattern wie im vorherigen Beispiel,
                 mit der Ausnahme das stattdessen <methodname>unsubscribeAll()</methodname>
-                aufgerufen wird. Die enthaltenen Parameter  sind identisch mit einer Aboanfrage mit
-                der Ausnahme das "hub.mode" auf "unsubscribe" gesetzt wird.
+                aufgerufen wird. Die enthaltenen Parameter sind identisch mit einer Aboanfrage mit
+                der Ausnahme das "<property>hub.mode</property>" auf "unsubscribe" gesetzt wird.
             </para>
 
             <para>

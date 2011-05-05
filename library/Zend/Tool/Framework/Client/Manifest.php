@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage Framework
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -39,7 +39,7 @@ use Zend\Tool\Framework\Metadata,
  * @uses       \Zend\Tool\Framework\RegistryEnabled
  * @category   Zend
  * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Manifest implements RegistryEnabled, MetadataManifestable
@@ -88,7 +88,7 @@ class Manifest implements RegistryEnabled, MetadataManifestable
 
         // setup the camelCase to dashed filter to use since cli expects dashed named
         $lowerFilter = new \Zend\Filter\FilterChain();
-        $lowerFilter->addFilter(new \Zend\Filter\StringToLower());
+        $lowerFilter->attach(new \Zend\Filter\StringToLower());
 
         // get the registry to get the action and provider repository
         $actionRepository   = $this->_registry->getActionRepository();

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage SimpleDb
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Http,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage SimpleDb
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
@@ -443,7 +443,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
             foreach ($params as $key => $value) {
                 $params_out[] = rawurlencode($key)."=".rawurlencode($value);
             }
-            $request->setRawData(join('&', $params_out), Http\Client::ENC_URLENCODED);
+            $request->setRawData(implode('&', $params_out), Http\Client::ENC_URLENCODED);
             $httpResponse = $request->request();
         } catch (Http\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();

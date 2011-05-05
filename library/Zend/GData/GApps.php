@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -49,7 +49,7 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GApps extends GData
@@ -126,7 +126,7 @@ class GApps extends GData
      * @throws \Zend\GData\GApps\ServiceException
      * @throws mixed
      */
-    public static function throwServiceExceptionIfDetected($e) 
+    public static function throwServiceExceptionIfDetected($e)
     {
         // Check to make sure that there actually response!
         // This can happen if the connection dies before the request
@@ -824,7 +824,7 @@ class GApps extends GData
                         $foundClassName = $name . '\\' . $class;
                      }
                      break;
-                 } catch (\Zend\Exception $e) {
+                 } catch (\Exception $e) {
                      // package wasn't here- continue searching
                  }
             }
@@ -888,7 +888,7 @@ class GApps extends GData
      * @throws \Zend\GData\App\InvalidArgumentException
      * @throws \Zend\GData\App\HttpException
      */
-    public function retrieveUser ($username) 
+    public function retrieveUser ($username)
     {
         $query = $this->newUserQuery($username);
         try {
@@ -1135,7 +1135,7 @@ class GApps extends GData
     {
         $i = 0;
         $group = $this->newGroupEntry();
-        
+
         $properties[$i] = $this->newProperty();
         $properties[$i]->name = 'groupId';
         $properties[$i]->value = $groupId;
@@ -1157,8 +1157,8 @@ class GApps extends GData
             $properties[$i]->name = 'emailPermission';
             $properties[$i]->value = $emailPermission;
             $i++;
-        }        
-        
+        }
+
         $group->property = $properties;
 
         return $this->insertGroup($group);
@@ -1197,7 +1197,7 @@ class GApps extends GData
      * @return Zend\GData\GApps\GroupFeed Collection of Zend\GData\GroupEntry objects
      *              representing all groups apart of the domain.
      */
-    public function retrieveAllGroups() 
+    public function retrieveAllGroups()
     {
         return $this->retrieveAllEntriesForFeed($this->retrievePageOfGroups());
     }
@@ -1214,7 +1214,7 @@ class GApps extends GData
 
         $this->delete($uri);
     }
-    
+
     /**
      * Check to see if a member id or group id is a member of group
      *
@@ -1226,7 +1226,7 @@ class GApps extends GData
     {
         $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/member/' . $memberId;
-        
+
         //if the enitiy is not a member, an exception is thrown
         try {
             $results = $this->get($uri);
@@ -1310,7 +1310,7 @@ class GApps extends GData
 
         $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/owner';
-        
+
         return $this->insertOwner($owner, $uri);
     }
 
@@ -1340,9 +1340,9 @@ class GApps extends GData
     {
         $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/owner/' . $email;
-        
+
         //if the enitiy is not an owner of the group, an exception is thrown
-        try {            
+        try {
             $results = $this->get($uri);
         } catch (Exception $e) {
             $results = false;
@@ -1384,7 +1384,7 @@ class GApps extends GData
     {
         $i = 0;
         $group = $this->newGroupEntry();
-        
+
         $properties[$i] = $this->newProperty();
         $properties[$i]->name = 'groupId';
         $properties[$i]->value = $groupId;
@@ -1410,20 +1410,20 @@ class GApps extends GData
             $properties[$i]->value = $emailPermission;
             $i++;
         }
-        
+
         $group->property = $properties;
 
         $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId;
 
-        return $this->updateEntry($group, $uri, 'Zend\GData\GApps\GroupEntry');        
+        return $this->updateEntry($group, $uri, 'Zend\GData\GApps\GroupEntry');
     }
 
     /**
      * Retrieve all of the groups that a user is a member of
      *
      * @param string $memberId Member username
-     * @param bool $directOnly (Optional) If true, members with direct association 
+     * @param bool $directOnly (Optional) If true, members with direct association
      *             only will be considered
      * @return Zend\GData\GApps\GroupFeed Collection of Zend\GData\GroupEntry
      *              objects representing all groups member is apart of in the domain.

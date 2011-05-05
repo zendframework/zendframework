@@ -98,7 +98,7 @@ foreach ($registry as $index => $value) {
         </para>
 
         <para>
-            Use the traditional <code>new</code> operator to instantiate
+            Use the traditional <emphasis>new</emphasis> operator to instantiate
             <classname>Zend_Registry</classname>. Instantiating <classname>Zend_Registry</classname>
             using its constructor also makes initializing the entries in the registry simple by
             taking an associative array as an argument.

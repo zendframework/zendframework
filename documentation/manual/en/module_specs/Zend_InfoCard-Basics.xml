@@ -45,13 +45,13 @@
 ]]></programlisting>
 
         <para>
-            In the example above, the <code>requiredClaims</code>
-            <code>&lt;param&gt;</code> tag is used to identify pieces of
-            information known as claims (i.e. person's first name, last name)
-            which the web site (a.k.a "relying party") needs in order a user to
-            authenticate using an information card. For your reference, the full
-            <acronym>URI</acronym> (for instance the <code>givenname</code> claim) is as follows:
-            <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname</code>
+            In the example above, the <property>requiredClaims</property>
+            &lt;param&gt; tag is used to identify pieces of information known as claims (i.e.
+            person's first name, last name) which the web site (a.k.a "relying party") needs in
+            order a user to authenticate using an information card. For your reference, the full
+            <acronym>URI</acronym> (for instance the <emphasis>givenname</emphasis> claim) is as
+            follows:
+            <filename>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname</filename>
         </para>
 
         <para>
@@ -65,7 +65,7 @@
         </para>
 
         <para>
-            Note, Information cards can only be <code>HTTP POST</code>ed to
+            Note, Information cards can only be <acronym>HTTP</acronym> <acronym>POST</acronym>ed to
             <acronym>SSL</acronym>-encrypted <acronym>URL</acronym>s. Please consult your web
             server's documentation on how to set up <acronym>SSL</acronym> encryption.
         </para>
@@ -143,10 +143,9 @@ if (isset($_POST['xmlToken'])) {
             <classname>Zend_Auth_Adapter_InfoCard</classname> and pass the <acronym>XML</acronym>
             data posted by the card selector into it. Once an instance has been created you
             must then provide at least one <acronym>SSL</acronym> certificate public/private key
-            pair used by the web server that received the <code>HTTP
-            POST</code>. These files are used to validate the destination
-            of the information posted to the server and are a requirement when
-            using Information Cards.
+            pair used by the web server that received the <acronym>HTTP</acronym>
+            <acronym>POST</acronym>. These files are used to validate the destination of the
+            information posted to the server and are a requirement when using Information Cards.
         </para>
 
         <para>
@@ -231,13 +230,13 @@ if (isset($_POST['xmlToken'])) {
             can be ascertained by calling the
             <methodname>Zend_InfoCard_Claims::isValid()</methodname> method. Claims
             themselves can either be retrieved by simply accessing the
-            identifier desired (i.e. <code>givenname</code>) as a property of
+            identifier desired (i.e. <property>givenname</property>) as a property of
             the object or through the <methodname>getClaim()</methodname> method.
         </para>
 
         <para>
             In most cases you will never need to use the <methodname>getClaim()</methodname>
-            method. However, if your <code>requiredClaims</code> mandate that
+            method. However, if your <property>requiredClaims</property> mandate that
             you request claims from multiple different sources/namespaces then
             you will need to extract them explicitly using this method (simply
             pass it the full <acronym>URI</acronym> of the claim to retrieve its value from within
@@ -265,8 +264,8 @@ if (isset($_POST['xmlToken'])) {
             authentication system by storing the private personal identifier
             (PPI) to a previously traditionally-authenticated account and
             including at least the
-            <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier</code>
-            claim as part of the <code>requiredClaims</code> of the request. If
+            <filename>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier</filename>
+            claim as part of the <property>requiredClaims</property> of the request. If
             this claim is requested then the <classname>Zend_InfoCard_Claims</classname>
             object will provide a unique identifier for the specific card that
             was submitted by calling the <methodname>getCardID()</methodname> method.

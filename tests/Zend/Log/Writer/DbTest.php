@@ -15,20 +15,21 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Log\Writer;
 
-use \Zend\Log\Writer\Db as DbWriter,
+use ZendTest\Log\TestAsset\MockDbAdapter,
+    \Zend\Log\Writer\Db as DbWriter,
     \Zend\Log\Logger;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -38,7 +39,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         $this->tableName = 'db-table-name';
 
-        $this->db     = new DbTest_MockDbAdapter();
+        $this->db     = new MockDbAdapter();
         $this->writer = new DbWriter($this->db, $this->tableName);
     }
 
@@ -120,16 +121,4 @@ class DbTest extends \PHPUnit_Framework_TestCase
     	$this->setExpectedException('PHPUnit_Framework_Error');
         $this->writer->setFormatter(new \StdClass());
     }
-}
-
-
-class DbTest_MockDbAdapter
-{
-    public $calls = array();
-
-    public function __call($method, $params)
-    {
-        $this->calls[$method][] = $params;
-    }
-
 }

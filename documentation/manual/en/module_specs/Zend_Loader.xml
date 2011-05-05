@@ -39,9 +39,9 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             The <varname>$dirs</varname> argument specifies which directories to search for the
-            file in. If the value is <constant>NULL</constant>, only the <code>include_path</code>
+            file in. If the value is <constant>NULL</constant>, only the include_path
             is searched; if the value is a string or an array, the directory or directories
-            specified will be searched, followed by the <code>include_path</code>.
+            specified will be searched, followed by the <property>include_path</property>.
         </para>
 
         <para>
@@ -79,8 +79,9 @@ if (Zend_Loader::isReadable($filename)) {
             check. This may contain path information.
             This method is a wrapper for the <acronym>PHP</acronym> function
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
-            The <acronym>PHP</acronym> function does not search the <code>include_path</code>,
-            while <methodname>Zend_Loader::isReadable()</methodname> does.
+            The <acronym>PHP</acronym> function does not search the
+            <property>include_path</property>, while
+            <methodname>Zend_Loader::isReadable()</methodname> does.
         </para>
     </sect2>
 </sect1>

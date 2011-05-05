@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21305 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
     <title>Globales Session Management</title>
@@ -511,12 +511,13 @@ if (!isset($defaultNamespace->initialized)) {
             Wenn die Fehlermeldung "Cannot modify header information - headers already sent"
             erscheint, sollte entweder die Verwendung von <constant>TRUE</constant> als Wert für das
             erste Argument (die Entfernung des Session Cookies anfragen) vermieden werden, oder
-            unter <xref linkend="zend.session.global_session_management.headers_sent" /> nachgesehen
-            werden. Deswegen muß entweder <methodname>Zend_Session::destroy(true)</methodname>
-            aufgerufen werden bevor <acronym>PHP</acronym> <acronym>HTTP</acronym> Header gesendet
-            hat, oder die Pufferung der Ausgabe muß aktiviert sein. Auch die komplette Ausgabe die
-            gesendet werden soll, darf die gesetzte Puffergröße nicht überschreiten, um das Senden
-            der Ausgabe vor dem Aufruf von <methodname>destroy()</methodname> zu Verhindern.
+            in <link linkend="zend.session.global_session_management.headers_sent">diesem
+                Abschnitt</link> nachgesehen werden. Deswegen muß entweder
+            <methodname>Zend_Session::destroy(true)</methodname> aufgerufen werden bevor
+            <acronym>PHP</acronym> <acronym>HTTP</acronym> Header gesendet hat, oder die Pufferung
+            der Ausgabe muß aktiviert sein. Auch die komplette Ausgabe die gesendet werden soll,
+            darf die gesetzte Puffergröße nicht überschreiten, um das Senden der Ausgabe vor dem
+            Aufruf von <methodname>destroy()</methodname> zu Verhindern.
         </para>
 
         <note>

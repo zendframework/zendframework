@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,13 +32,14 @@ use Zend\Log;
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Stream extends AbstractWriter
 {
     /**
      * Holds the PHP stream to log to.
+     *
      * @var null|stream
      */
     protected $_stream = null;
@@ -46,15 +47,16 @@ class Stream extends AbstractWriter
     /**
      * Class Constructor
      *
-     * @param  streamOrUrl     Stream or URL to open as a stream
-     * @param  mode            Mode, only applicable if a URL is given
+     * @param array|string|resource $streamOrUrl Stream or URL to open as a stream
+     * @param string|null $mode Mode, only applicable if a URL is given
+     * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @throws \Zend\Log\Excpeiton\RuntimeException
+     * @throws \Zend\Log\Exception\RuntimeException
      */
-    public function __construct($streamOrUrl, $mode = \NULL)
+    public function __construct($streamOrUrl, $mode = null)
     {
         // Setting the default
-        if ($mode === NULL) {
+        if (null === $mode) {
             $mode = 'a';
         }
 
@@ -81,29 +83,29 @@ class Stream extends AbstractWriter
 
         $this->_formatter = new Log\Formatter\Simple();
     }
-    
+
     /**
-     * Create a new instance of Zend_Log_Writer_Mock
-     * 
+     * Create a new instance of Zend_Log_Writer_Stream
+     *
      * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Mock
+     * @return \Zend\Log\Writer\Stream
      */
     public static function factory($config = array())
     {
         $config = self::_parseConfig($config);
         $config = array_merge(array(
-            'stream' => null, 
+            'stream' => null,
             'mode'   => null,
         ), $config);
 
-        $streamOrUrl = isset($config['url']) ? $config['url'] : $config['stream']; 
-        
+        $streamOrUrl = isset($config['url']) ? $config['url'] : $config['stream'];
+
         return new self(
-            $streamOrUrl, 
+            $streamOrUrl,
             $config['mode']
         );
     }
-    
+
     /**
      * Close the stream resource.
      *

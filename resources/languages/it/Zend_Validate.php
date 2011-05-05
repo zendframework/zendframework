@@ -15,21 +15,22 @@
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage Ressource
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id:$
  */
 
 /**
- * EN-Revision: 21759
+ * EN-Revision: 22668
  */
 return array(
     // Zend_Validate_Alnum
-    "Invalid type given, value should be float, string, or integer" => "Tipo di dato non valido: il dato dev'essere di tipo float, stringa o intero.",
-    "'%value%' contains characters which are non alphabetic and no digits" => "'%value%' contine caratteri che non sono alfanumerici",
+    "Invalid type given. String, integer or float expected" => "Tipo di dato non valido. Era atteso un dato di tipo string, float o integer",
+    "'%value%' contains characters which are non alphabetic and no digits" => "'%value%' contiene caratteri che non sono alfanumerici",
     "'%value%' is an empty string" => "'%value%' è una stringa vuota",
 
     // Zend_Validate_Alpha
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
     "'%value%' contains non alphabetic characters" => "'%value%' contiene caratteri non alfabetici",
     "'%value%' is an empty string" => "'%value%' è una stringa vuota",
 
@@ -37,7 +38,7 @@ return array(
     "'%value%' failed checksum validation" => "'%value%' non ha un checksum valido",
     "'%value%' contains invalid characters" => "'%value%' contiene caratteri non permessi",
     "'%value%' should have a length of %length% characters" => "'%value%' non ha la lunghezza corretta di %length% caratteri",
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend_Validate_Between
     "'%value%' is not between '%min%' and '%max%', inclusively" => "'%value%' non è compreso tra '%min%' e '%max%', inclusi",
@@ -45,37 +46,37 @@ return array(
 
     // Zend_Validate_Callback
     "'%value%' is not valid" => "'%value%' non è valido",
-    "Failure within the callback, exception returned" => "Callback fallita, eccezione ritornata",
+    "An exception has been raised within the callback" => "Un'eccezione è stata sollevata all'interno della callback",
 
     // Zend_Validate_Ccnum
     "'%value%' must contain between 13 and 19 digits" => "'%value%' deve contenere tra 13 e 19 cifre",
     "Luhn algorithm (mod-10 checksum) failed on '%value%'" => "L'algoritmo di Luhn (checksum mod-10) è fallito su '%value%'",
 
     // Zend_Validate_CreditCard
-    "Luhn algorithm (mod-10 checksum) failed on '%value%'" => "L'algoritmo di Luhn (checksum mod-10) è fallito su '%value%'",
+    "'%value%' seems to contain an invalid checksum" => "'%value%' sembra avere un checksum non valido",
     "'%value%' must contain only digits" => "'%value%' deve contenere solo cifre",
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
     "'%value%' contains an invalid amount of digits" => "'%value%' contiene un numero non valido di cifre",
     "'%value%' is not from an allowed institute" => "'%value%' proviene da un istituto non supportato",
-    "Validation of '%value%' has been failed by the service" => "'%value%' non è stato validato dal servizio",
-    "The service returned a failure while validating '%value%'" => "Il servizio ha ritornato validazione negativa per '%value%'",
+    "'%value%' seems to be an invalid creditcard number" => "'%value%' sembra essere un numero di carta di credito non valido",
+    "An exception has been raised while validating '%value%'" => "Un'eccezione è stata sollevada durante la validazione di '%value%'",
 
     // Zend_Validate_Date
-    "Invalid type given, value should be string, integer, array or Zend_Date" => "Tipo di dato non valido, il dato dev'essere di tipo stringa, intero, array o Zend_Date",
+    "Invalid type given. String, integer, array or Zend_Date expected" => "Tipo di dato non valido. Era atteso un dato di tipo string, integer, array o Zend_Date",
     "'%value%' does not appear to be a valid date" => "'%value%' non sembra essere una data valida",
     "'%value%' does not fit the date format '%format%'" => "'%value%' non corrisponde al formato data '%format%'",
 
     // Zend_Validate_Db_Abstract
-    "No record matching %value% was found" => "Non è stato trovato una riga con valore %value%",
-    "A record matching %value% was found" => "E' già stata trovata una riga con valore %value%",
+    "No record matching %value% was found" => "Non è stato trovato un record con valore %value%",
+    "A record matching %value% was found" => "E' stato trovato un record con valore %value%",
 
     // Zend_Validate_Digits
-    "Invalid type given, value should be float, string, or integer" => "Tipo di dato non valido: il dato dev'essere di tipo float, stringa o intero.",
-    "'%value%' contains characters which are not digits; but only digits are allowed" => "'%value%' contiene caratteri che non sono cifre, ma solo le cifre sono ammesse",
+    "Invalid type given. String, integer or float expected" => "Tipo di dato non valido. Era atteso un dato di tipo string, float o integer",
+    "'%value%' must contain only digits" => "'%value%' deve contenere solo cifre",
     "'%value%' is an empty string" => "'%value%' è una stringa vuota",
 
     // Zend_Validate_EmailAddress
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
     "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' non è un indirizzo email valido nel formato base local-part@hostname",
     "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' non è un hostname valido nell'indirizzo email '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' non sembra avere un record MX DNS valido nell'indirizzo email %value%'",
@@ -92,23 +93,23 @@ return array(
     // Zend_Validate_File_Crc32
     "File '%value%' does not match the given crc32 hashes" => "Il file '%value%' non ha un hash crc32 tra quelli consentiti",
     "A crc32 hash could not be evaluated for the given file" => "L'hash crc32 non può essere calcolato per il file dato",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_ExcludeExtension
     "File '%value%' has a false extension" => "Il file '%value%' ha un'estensione invalida",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_ExcludeMimeType
     "File '%value%' has a false mimetype of '%type%'" => " Il file '%value%' ha un mimetype non consentito: '%type%'",
     "The mimetype of file '%value%' could not be detected" => "Il mimetype del file '%value%' non può essere individuato",
-    "File '%value%' can not be read" => "Il file '%value%' non può essere letto",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_Exists
     "File '%value%' does not exist" => "Il file '%value%' non esiste",
 
     // Zend_Validate_File_Extension
     "File '%value%' has a false extension" => "Il file '%value%' ha un'estensione invalida",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "I file devono avere in totale una dimensione massima di '%max%' ma è stata rilevata una dimensione di '%size%'",
@@ -118,7 +119,7 @@ return array(
     // Zend_Validate_File_Hash
     "File '%value%' does not match the given hashes" => "I file '%value%' non corrisponde agli hash dati",
     "A hash could not be evaluated for the given file" => "Un hash non può essere valutato per il file dato",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_ImageSize
     "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "La larghezza massima consentita per l'immagine '%value%' è '%maxwidth%' ma è stata rilevata una larghezza di '%width%'",
@@ -126,27 +127,27 @@ return array(
     "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "L'altezza massima consentita per l'immagine '%value%' è '%maxheight%' ma è stata rilevata un'altezza di '%height%'",
     "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "L'altezza minima consentita per l'immagine '%value%' è '%minheight%' ma è stata rilevata un'altezza di '%height%'",
     "The size of image '%value%' could not be detected" => "Le dimensioni dell'immagine '%value%' non possono essere rilevate",
-    "File '%value%' can not be read" => "Il file '%value%' non può essere letto",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_IsCompressed
     "File '%value%' is not compressed, '%type%' detected" => "Il file '%value%' non è un file compresso, ma un file di tipo '%type%'",
     "The mimetype of file '%value%' could not be detected" => "Il mimetype del file '%value%' non può essere rilevato",
-    "File '%value%' can not be read" => "Il file '%value%' non può essere letto",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_IsImage
     "File '%value%' is no image, '%type%' detected" => "Il file '%value%' non è un'immagine, ma un file di tipo '%type%'",
     "The mimetype of file '%value%' could not be detected" => "Il mimetype del file '%value%' non può essere rilevato",
-    "File '%value%' can not be read" => "Il file '%value%' non può essere letto",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_Md5
     "File '%value%' does not match the given md5 hashes" => "Il file '%value%' non corrisponde agli hash md5 dati",
     "A md5 hash could not be evaluated for the given file" => "Un hash md5 non può essere valutato per il file dato",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_MimeType
     "File '%value%' has a false mimetype of '%type%'" => "Il file '%value%' ha un mimetype invalido: '%type%'",
     "The mimetype of file '%value%' could not be detected" => "Il mimetype del file '%value%' non può essere rilevato",
-    "File '%value%' can not be read" => "Il file '%value%' non può essere letto",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_NotExists
     "File '%value%' exists" => "Il file '%value%' esiste già",
@@ -154,12 +155,12 @@ return array(
     // Zend_Validate_File_Sha1
     "File '%value%' does not match the given sha1 hashes" => "Il file '%value%' non corrisponde agli hash sha1 dati",
     "A sha1 hash could not be evaluated for the given file" => "Un hash sha1 non può essere valutato per il file dato",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_Size
     "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "La dimensione massima consentita per il file '%value%' è '%max%' ma è stata rilevata una dimensione di '%size%'",
     "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "La dimensione minima consentita per il file '%value%' è '%min%' ma è stata rilevata una dimensione di '%size%'",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_File_Upload
     "File '%value%' exceeds the defined ini size" => "Il file '%value%' eccede la dimensione definita nell'ini",
@@ -176,21 +177,21 @@ return array(
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Il file contiene troppe parole, ne sono consentite massimo '%max%' ma ne sono state contate '%count%'",
     "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Il file contiene troppe poche parole, ne sono consentite minimo '%min%' ma ne sono state contate '%count%'",
-    "File '%value%' could not be found" => "Il file '%value%' non può essere trovato",
+    "File '%value%' is not readable or does not exist" => "Il file '%value%' non è leggibile o non esiste",
 
     // Zend_Validate_Float
-    "Invalid type given, value should be float, string, or integer" => "Tipo di dato non valido: il dato dev'essere di tipo float, stringa o intero.",
+    "Invalid type given. String, integer or float expected" => "Tipo di dato non valido. Era atteso un dato di tipo string, float o integer",
     "'%value%' does not appear to be a float" => "'%value%' non sembra essere un dato di tipo float",
 
     // Zend_Validate_GreaterThan
     "'%value%' is not greater than '%min%'" => "'%value%' non è maggiore di '%min%'",
 
     // Zend_Validate_Hex
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
     "'%value%' has not only hexadecimal digit characters" => "'%value%' non è composto solo da caratteri esadecimali",
 
     // Zend_Validate_Hostname
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
     "'%value%' appears to be an IP address, but IP addresses are not allowed" => "'%value%' sembra essere un indirizzo IP, ma gli indirizzi IP non sono consentiti",
     "'%value%' appears to be a DNS hostname but cannot match TLD against known list" => "'%value%' sembra essere un hostname DNS ma il suo TLD è sconosciuto",
     "'%value%' appears to be a DNS hostname but contains a dash in an invalid position" => "'%value%' sembra essere un hostname DNS ma contiene un trattino in una posizione non valida",
@@ -207,58 +208,58 @@ return array(
     "'%value%' has failed the IBAN check" => "'%value%' ha fallito il controllo IBAN",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "Il token '%token%' non corrisponde al token dato '%value%'",
+    "The two given tokens do not match" => "I due token dati non corrispondono",
     "No token was provided to match against" => "Non è stato dato nessun token per il confronto",
 
     // Zend_Validate_InArray
     "'%value%' was not found in the haystack" => "'%value%' non è stato trovato nell'array",
 
     // Zend_Validate_Int
-    "Invalid type given, value should be string or integer" => "Tipo di dato non valido, il dato dev'essere una stringa o un intero",
+    "Invalid type given. String or integer expected" => "Tipo di dato non valido. Era atteso un dato di tipo string o integer",
     "'%value%' does not appear to be an integer" => "'%value%' non sembra essere un intero",
 
     // Zend_Validate_Ip
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
     "'%value%' does not appear to be a valid IP address" => "'%value%' non sembra essere un indirizzo IP valido",
 
     // Zend_Validate_Isbn
-    "Invalid type given, value should be string or integer" => "Tipo di dato non valido, il dato dev'essere una stringa o un intero",
+    "Invalid type given. String or integer expected" => "Tipo di dato non valido. Era atteso un dato di tipo string o integer",
     "'%value%' is no valid ISBN number" => "'%value%' non è un numero ISBN valido",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' non è minore di '%max%'",
 
     // Zend_Validate_NotEmpty
-    "Invalid type given, value should be float, string, array, boolean or integer" => "Tipo di dato non valido, il dato dev'essere di tipo float, stringa, array, booleano o intero",
+    "Invalid type given. String, integer, float, boolean or array expected" => "Tipo di dato non valido. Era atteso un dato di tipo string, integer, float, boolean o array",
     "Value is required and can't be empty" => "Il dato è richiesto e non può essere vuoto",
 
     // Zend_Validate_PostCode
-    "Invalid type given. The value should be a string or a integer" => "Tipo di dato non valido. Il dato dev'essere una stringa o un intero",
+    "Invalid type given. String or integer expected" => "Tipo di dato non valido. Era atteso un dato di tipo string o integer",
     "'%value%' does not appear to be a postal code" => "'%value%' non sembra essere un codice postale",
 
     // Zend_Validate_Regex
-    "Invalid type given, value should be string, integer or float" => "Tipo di dato non valido: il dato dev'essere di tipo stringa, intero o float.",
+    "Invalid type given. String, integer or float expected" => "Tipo di dato non valido. Era atteso un dato di tipo string, float o integer",
     "'%value%' does not match against pattern '%pattern%'" => "'%value%' non corrisponde al pattern '%pattern%'",
     "There was an internal error while using the pattern '%pattern%'" => "Si è verificato un errore interno usando il pattern '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' non è una sitemap changefreq valida",
-    "Invalid type given, the value should be a string" => "Invalid type given, the value should be a string",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => "'%value%' non è un sitemap lastmod valido",
-    "Invalid type given, the value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => "'%value%' non è una sitemap location valida",
-    "Invalid type given, the value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => "'%value%' non è una sitemap priority valida",
-    "Invalid type given, the value should be a integer, a float or a numeric string" => "Tipo di dato non valido, il dato dev'essere di tipo intero, float o una stringa numerica",
+    "Invalid type given. Numeric string, integer or float expected" => "Tipo di dato non valido. Era atteso un dato di tipo stringa numerica, float o integer",
 
     // Zend_Validate_StringLength
-    "Invalid type given, value should be a string" => "Tipo di dato non valido, il dato dev'essere una stringa",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
     "'%value%' is less than %min% characters long" => "'%value%' è meno lungo di %min% caratteri",
     "'%value%' is more than %max% characters long" => "'%value%' è più lungo di %max% caratteri",
 );

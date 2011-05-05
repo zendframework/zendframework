@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Filter\InputFilter,
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
@@ -149,7 +149,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $f1 = $input->field1;
-        $this->assertType('array', $f1);
+        $this->assertInternalType('array', $f1);
         $this->assertEquals(array('foo', 'bar', 'baz'), $f1);
     }
 
@@ -188,15 +188,15 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
-        $this->assertType('array', $messages['month']);
+        $this->assertInternalType('array', $messages['month']);
         $this->assertEquals("'6abc ' must contain only digits", current($messages['month']));
 
         $errors = $input->getErrors();
-        $this->assertType('array', $errors);
+        $this->assertInternalType('array', $errors);
         $this->assertEquals(array('month'), array_keys($errors));
-        $this->assertType('array', $errors['month']);
+        $this->assertInternalType('array', $errors['month']);
         $this->assertEquals("notDigits", $errors['month'][0]);
     }
 
@@ -248,7 +248,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('6', $month);
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month2'), array_keys($messages));
         $this->assertEquals("'13' is not between '1' and '12', inclusively", current($messages['month2']));
     }
@@ -274,10 +274,10 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field2', 'field3'), array_keys($messages));
-        $this->assertType('array', $messages['field2']);
-        $this->assertType('array', $messages['field3']);
+        $this->assertInternalType('array', $messages['field2']);
+        $this->assertInternalType('array', $messages['field3']);
         $this->assertEquals("'abc123' must contain only digits",
             current($messages['field2']));
         $this->assertEquals("'150' is not between '1' and '100', inclusively",
@@ -307,10 +307,10 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field2a', 'field2b'), array_keys($messages));
-        $this->assertType('array', $messages['field2a']);
-        $this->assertType('array', $messages['field2b']);
+        $this->assertInternalType('array', $messages['field2a']);
+        $this->assertInternalType('array', $messages['field2b']);
         $this->assertEquals("'abc123' must contain only digits",
             current($messages['field2a']));
         $this->assertEquals("'abc123' is not between '1' and '100', inclusively",
@@ -356,7 +356,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field2'), array_keys($messages));
         $this->assertEquals("'123' contains non alphabetic characters",
             current($messages['field2']));
@@ -392,7 +392,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('rule2'), array_keys($messages));
         $this->assertEquals("Not all strings in the argument are equal",
             current($messages['rule2']));
@@ -438,7 +438,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('rule2', 'rule3'), array_keys($messages));
         $this->assertEquals(array('isEmpty' => "You must give a non-empty value for field 'password3'"),
                             $messages['rule2']);
@@ -472,7 +472,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1', 'field2'), array_keys($messages));
         $this->assertEquals(
             $messageUserDefined,
@@ -512,7 +512,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($input->field1);
         $this->assertNotNull($input->field2);
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
         $this->assertEquals("You must give a non-empty value for field 'field1'", current($messages['field1']));
     }
@@ -540,7 +540,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return true');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
         $this->assertEquals("You must give a non-empty value for field 'field1'", current($messages['field1']));
     }
@@ -609,7 +609,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('nick'), array_keys($messages));
         $this->assertEquals(1, count($messages['nick']));
     }
@@ -639,9 +639,9 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($input->field1);
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1Rule'), array_keys($messages));
-        $this->assertType('array', $messages['field1Rule']);
+        $this->assertInternalType('array', $messages['field1Rule']);
         $this->assertEquals("You cannot give an empty value for field 'field1', according to rule 'field1Rule'", current($messages['field1Rule']));
     }
 
@@ -666,7 +666,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $missing = $input->getMissing();
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         // make sure field5 and field7 are not counted as missing
         $this->assertEquals(array('field1', 'field3'), array_keys($missing));
 
@@ -699,7 +699,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $missing = $input->getMissing();
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         $this->assertEquals(array('rule1'), array_keys($missing));
         $this->assertEquals(array("Field 'field2' is required by rule 'rule1', but the field is missing"), $missing['rule1']);
     }
@@ -755,9 +755,9 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field2', 'field3'), array_keys($messages));
-        $this->assertType('array', $messages['field2']);
+        $this->assertInternalType('array', $messages['field2']);
         $this->assertEquals("You must give a non-empty value for field 'field2'", current($messages['field2']));
     }
 
@@ -779,7 +779,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(1, count($messages['month']));
         $this->assertEquals($digitsMesg, current($messages['month']));
@@ -808,7 +808,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(2, count($messages['month']));
         $this->assertEquals($digitsMesg, $messages['month']['notDigits']);
@@ -838,7 +838,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
         $this->assertEquals(3, count($messages['field1']));
         $this->assertEquals($digitsMesg, $messages['field1']['notDigits']);
@@ -866,7 +866,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(2, count($messages['month']));
         $this->assertEquals("'13abc' must contain only digits", current($messages['month']));
@@ -893,7 +893,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(1, count($messages['month']));
     }
@@ -921,7 +921,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(2, count($messages['month']));
         // $this->assertEquals($digitsMesg, $messages['month'][0]);
@@ -951,7 +951,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
         $this->assertEquals(2, count($messages['month']));
         // $this->assertEquals($digitsMesg, $messages['month'][0]);
@@ -1009,7 +1009,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $missing = $input->getMissing();
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         $this->assertEquals(array('month'), array_keys($missing));
         $this->assertEquals("Field 'month' is required by rule 'month', but the field is missing", $missing['month'][0]);
     }
@@ -1035,7 +1035,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $missing = $input->getMissing();
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         $this->assertEquals(array('monthRule'), array_keys($missing));
         $this->assertEquals("I looked for month but I did not find it; it is required by rule monthRule", $missing['monthRule'][0]);
     }
@@ -1072,7 +1072,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $unknown = $input->getUnknown();
-        $this->assertType('array', $unknown);
+        $this->assertInternalType('array', $unknown);
         $this->assertThat($unknown, $this->arrayHasKey('unknown'));
     }
 
@@ -1096,11 +1096,11 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $invalid = $input->getInvalid();
         $missing = $input->getMissing();
 
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month', 'field2'), array_keys($messages));
-        $this->assertType('array', $invalid);
+        $this->assertInternalType('array', $invalid);
         $this->assertEquals(array('month'), array_keys($invalid));
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         $this->assertEquals(array('field2'), array_keys($missing));
         $this->assertEquals(array_merge($invalid, $missing), $messages);
     }
@@ -1143,11 +1143,11 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $input = new InputFilter(null, null);
 
         $broker = $input->getPluginBroker(InputFilter::VALIDATOR);
-        $this->assertType('Zend\Validator\ValidatorBroker', $broker,
+        $this->assertInstanceOf('Zend\Validator\ValidatorBroker', $broker,
             'Expected object of type Zend\Validator\ValidatorBroker, got ' , get_class($broker));
 
         $broker = $input->getPluginBroker(InputFilter::FILTER);
-        $this->assertType('Zend\Filter\FilterBroker', $broker,
+        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker,
             'Expected object of type Zend\Filter\FilterBroker, got ' , get_class($broker));
 
         $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
@@ -1274,7 +1274,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
         $this->assertEquals(1, count($messages['field1']), 'Expected rule for field1 to break 1 validator');
         $this->assertEquals("'150' is not between '1' and '100', inclusively",
@@ -1327,7 +1327,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('123', (string) $input->field3);
 
         $messages = $input->getMessages();
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertThat($messages, $this->arrayHasKey('field1'));
         $this->assertEquals("'abc' must contain only digits", current($messages['field1']));
     }
@@ -1353,7 +1353,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $missing = $input->getMissing();
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         $this->assertEquals(array('field2'), array_keys($missing));
         $this->assertEquals("Field 'field2' is required by rule 'field2', but the field is missing", $missing['field2'][0]);
     }
@@ -1418,7 +1418,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasValid(), 'Expected hasValid() to return true');
 
         $multi = $input->getEscaped('multiSelect');
-        $this->assertType('array', $multi);
+        $this->assertInternalType('array', $multi);
         $this->assertEquals(3, count($multi));
         $this->assertEquals(array('C&amp;H', 'B&amp;O', 'AT&amp;T'), $multi);
     }
@@ -1738,7 +1738,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($input->hasMissing(), 'Expected hasMissing() to return true');
 
         $missing = $input->getMissing();
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         $this->assertEquals(array('rule1'), array_keys($missing));
         $this->assertEquals(array("Still missing"), $missing['rule1']);
     }
@@ -1768,7 +1768,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($input->hasValid(), 'Expected hasValid() to return false');
 
         $missing = $input->getMissing();
-        $this->assertType('array', $missing);
+        $this->assertInternalType('array', $missing);
         $this->assertEquals(array('rule1'), array_keys($missing));
         $this->assertEquals(array("Still missing"), $missing['rule1']);
     }

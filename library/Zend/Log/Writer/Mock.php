@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,18 +29,22 @@ namespace Zend\Log\Writer;
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mock extends AbstractWriter
 {
     /**
      * array of log events
+     *
+     * @var array
      */
     public $events = array();
 
     /**
      * shutdown called?
+     *
+     * @var boolean
      */
     public $shutdown = false;
 
@@ -67,11 +71,11 @@ class Mock extends AbstractWriter
 
     /**
      * Create a new instance of Zend_Log_Writer_Mock
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Mock
      */
-    static public function factory($config = array()) 
+    static public function factory($config = array())
     {
         return new self();
     }

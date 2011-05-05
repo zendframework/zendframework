@@ -52,7 +52,7 @@ $server->handle();
 
         <para>
             To call a <classname>Zend_Rest_Server</classname> service, you must supply a
-            GET/POST <code>method</code> argument with a value that is the
+            <constant>GET</constant>/POST <code>method</code> argument with a value that is the
             method you wish to call. You can then follow that up with any number
             of arguments using either the name of the argument (i.e. "who") or
             using <code>arg</code> following by the numeric position of the

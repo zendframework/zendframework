@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22745 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.extending">
     <title>Zend_Tool erweitern</title>
@@ -873,10 +873,11 @@ class Zend_Tool_Framework_Client_Storage
             <para>
                 Projektspezifische Provider werden auf dem selben Weg erstellt wie reine Framework
                 Provider, mit einer Ausnahme: Projektprovider müssen
-                <code>Zend_Tool_Project_Provider_Abstract</code> erweitern. Diese Klasse kommt mit
-                einigen signifikanten Funktionalitäten welche Entwicklern helfen existierende
-                Projekte zu laden, das Profilobjekt zu erhalten, und in der Lage zu sein das Profil
-                zu suchen, und später dann alle Änderungen im aktuellen Projektprofil zu speichern.
+                <classname>Zend_Tool_Project_Provider_Abstract</classname> erweitern. Diese Klasse
+                kommt mit einigen signifikanten Funktionalitäten welche Entwicklern helfen
+                existierende Projekte zu laden, das Profilobjekt zu erhalten, und in der Lage zu
+                sein das Profil zu suchen, und später dann alle Änderungen im aktuellen
+                Projektprofil zu speichern.
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Router
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Rewrite;
+namespace Zend\Controller\Router;
 use Zend\Controller\Router\Rewrite\Route\Route;
 
 /**
@@ -31,10 +31,9 @@ use Zend\Controller\Router\Rewrite\Route\Route;
  *
  * @package    Zend_Controller
  * @subpackage Router
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://manuals.rubyonrails.com/read/chapter/65
- */
+  */
 class PriorityList implements \Iterator, \Countable
 {
     /**
@@ -184,7 +183,7 @@ class PriorityList implements \Iterator, \Countable
     /**
      * count(): defined by \Countable interface
      *
-     * @see    \Countable::valid()
+     * @see    \Countable::count()
      * @return integer
      */
     public function count() {

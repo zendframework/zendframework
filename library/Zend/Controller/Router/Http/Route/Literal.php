@@ -23,11 +23,13 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Rewrite\Route;
-use Zend\Controller\Request\Http as HttpRequest;
+namespace Zend\Controller\Router\Http\Route;
+use Zend\Controller\Router\Route,
+    Zend\Controller\Request\AbstractRequest,
+    Zend\Controller\Request\Http as HttpRequest;
 
 /**
- * Regex route
+ * Literal route.
  *
  * @package    Zend_Controller
  * @subpackage Router
@@ -35,69 +37,65 @@ use Zend\Controller\Request\Http as HttpRequest;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Regex implements Route
+class Literal implements Route
 {
     /**
-     * Regex to match
+     * Route to match.
      * 
      * @var string
      */
-    protected $_regex;
+    protected $route;
 
     /**
-     * Default values
+     * Default values.
      *
      * @var array
      */
-    protected $_defaults;
+    protected $defaults;
 
     /**
-     * Create a new literal route
+     * __construct(): defined by Route interface.
      *
-     * @param  string $regex
-     * @param  array  $defaults
+     * @see    Route::__construct()
+     * @param  array $options
      * @return void
      */
-    public function __construct($regex, $defaults = array())
+    public function __construct(array $options = null)
     {
-        $this->_route    = $regex;
-        $this->_defaults = $defaults;
     }
 
     /**
-     * match(): defined by Route interface
+     * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  HttpRequest $request
-     * @param  integer     $pathOffset
-     * @return boolean
+     * @param  AbstractRequest $request
+     * @return RouteMatch
      */
-    public function match(HttpRequest $request, $pathOffset = null)
+    public function match(AbstractRequest $request, $pathOffset = null)
     {
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->_regex . ')i', $request->getRequestUri(), $match, null, $pathOffset);
+            if (strpos($request->getRequestUri(), $this->_route) === $pathOffset) {
+                return $this->_defaults;
+            }
         } else {
-            $result = preg_match('(^' . $this->_regex . '$)i', $request->getRequestUri(), $match);
+            if ($request->getRequestUri() === $this->_route) {
+                return $this->_defaults;
+            }
         }
 
-        if ($result === null) {
-            return null;
-        }
-
-        // @todo: examine $match
-        return $this->_defaults;
+        return null;
     }
 
     /**
-     * assemble(): Defined by Route interface
+     * assemble(): Defined by Route interface.
      *
      * @see    Route::assemble()
      * @param  array $params
      * @param  array $options
-     * @return string
+     * @return mixed
      */
     public function assemble(array $params = null, array $options = null)
     {
-        // @todo: implement this
+        return $this->route;
     }
 }

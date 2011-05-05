@@ -30,5 +30,31 @@ namespace Zend\Controller\Router;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Controller\Exception
-{}
+interface RouteStack extends Route
+{
+    /**
+     * Add a route to the stack.
+     * 
+     * @param  string $name
+     * @param  mixed  $route
+     * @return RouteStack
+     */
+    public function addRoute($name, $route);
+
+    /**
+     * Add multiple routes to the stack.
+     * 
+     * @param  array $routes
+     * @return RouteStack
+     */
+    public function addRoutes(array $routes);
+    
+    /**
+     * Remove a route from the stack.
+     * 
+     * @param  string $name
+     * @return RouteStack
+     */
+    public function removeRoute($name);
+}
+

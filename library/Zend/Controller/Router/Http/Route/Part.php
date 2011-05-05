@@ -23,12 +23,14 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Rewrite\Route;
-use Zend\Controller\Router\Rewrite\PriorityList;
-use Zend\Controller\Request\Http as HttpRequest;
+namespace Zend\Controller\Router\Http\Route;
+use Zend\Controller\Router\Route,
+    Zend\Controller\Router\PriorityList,
+    Zend\Controller\Request\AbstractRequest,
+    Zend\Controller\Request\Http as HttpRequest;
 
 /**
- * Route part
+ * Route part.
  *
  * @package    Zend_Controller
  * @subpackage Router
@@ -92,14 +94,13 @@ class Part implements Route
     }
 
     /**
-     * match(): defined by Route interface
+     * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  HttpRequest $request
-     * @param  integer     $pathOffset
-     * @return boolean
+     * @param  AbstractRequest $request
+     * @return RouteMatch
      */
-    public function match(HttpRequest $request, $pathOffset = null)
+    public function match(AbstractRequest $request, $pathOffset = null)
     {
         $match = $this->_route->match($request, $pathOffset);
 
@@ -122,12 +123,12 @@ class Part implements Route
     }
 
     /**
-     * assemble(): Defined by Route interface
+     * assemble(): Defined by Route interface.
      *
      * @see    Route::assemble()
      * @param  array $params
      * @param  array $options
-     * @return string
+     * @return mixed
      */
     public function assemble(array $params = null, array $options = null)
     {

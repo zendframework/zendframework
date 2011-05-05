@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Router
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,45 +23,64 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router\Rewrite;
-use Zend\Controller\Router\Rewrite\Route;
-use Zend\Controller\Request\Http as HttpRequest;
+namespace Zend\Controller\Router;
+use Zend\Controller\Request;
+use Zend\Loader\PluginBroker;
 
 /**
- * Ruby routing based router
+ * Simple route stack implementation.
  *
  * @package    Zend_Controller
  * @subpackage Router
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Router
+class SimpleRouteStack implements RouteStack
 {
     /**
-     * Heap containing all routes
+     * Stack containing all routes.
      *
      * @var PriorityList
      */
-    protected $_routes;
+    protected $routes;
+    
+    /**
+     * Plugin broker to load routes.
+     * 
+     * @var PluginBroker
+     */
+    protected $pluginBroker;
 
     /**
-     * Instantiate a new router
+     * Create a new route stack
      *
      * @param  mixed $options
      * @return void
      */
     public function __construct($options = null)
     {
-        $this->_routes = new PriorityList();
+        $this->routes       = new PriorityList();
+        $this->pluginBroker = new PluginBroker(array(
+            'auto_register_plugins' => false
+        ));
 
         if ($options !== null) {
             $this->setOptions($options);
         }
+        
+        $this->init();
     }
+    
+    /**
+     * Init method for extending classes.
+     * 
+     * @return void
+     */
+    protected function init()
+    {}
 
     /**
-     * Set options of the router
+     * Set options of the route stack.
      *
      * @param  mixed $options
      * @return Router
@@ -86,7 +105,7 @@ class Router
     }
 
     /**
-     * Append multiple routes
+     * Append multiple routes.
      *
      * @param  array $routes
      * @return Router
@@ -101,75 +120,58 @@ class Router
     }
 
     /**
-     * Append a route to the end of the list
+     * Append a route to the end of the list.
      *
-     * @param  string $name
-     * @param  mixed  $route
+     * @param  string  $name
+     * @param  mixed   $route
+     * @param  integer $priority
      * @return Router
      */
-    public function addRoute($name, $route)
+    public function addRoute($name, $route, $priority = null)
     {
         if (is_array($route)) {
-            $route = $this->_routeFromArray($specs);
+            $route = $this->routeFromArray($specs);
         }
 
-        if (!$route instanceof Route\Route) {
-            throw new InvalidArgumentException('Supplied route must either be an array or a route object');
+        if (!$route instanceof Route) {
+            throw new InvalidArgumentException('Supplied route must either be an array or a Route object');
         }
 
-        $this->_routes[$name] = $route;
+        $this->routes->insert($name, $route, $priority);
 
         return $this;
     }
 
     /**
-     * Create a route from array specifications
+     * Create a route from array specifications.
      *
      * @param  array $specs
-     * @return Route\Route
+     * @return Route
      */
-    protected function _routeFromArray(array $specs)
+    protected function routeFromArray(array $specs)
     {
         if (!isset($specs['type']) || !is_string($specs['type'])) {
             throw new InvalidArgumentException('Type not defined or not a string');
         } elseif (!isset($specs['options']) || !is_array($specs['options'])) {
             throw new InvalidArgumentException('Options not defined or not an array');
         }
-
-        if (strpos($specs['type'], '\\') !== false) {
-            $className = $specs['type'];
-        } else {
-            $className = 'Route\\' . $specs['type'];
-        }
-
-        $route = new $className($specs['options']);
-
-        if (isset($specs['routes'])) {
-            $options = array(
-                'route'         => $route,
-                'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate'])
-            );
-
-            $route = new Route\Part($options);
-
-            foreach ($specs['routes'] as $subName => $subSpecs) {
-                $route->append($subName, $this->_routeFromArray($subSpecs));
-            }
-        }
+        
+        $route = $this->pluginBroker->load($specs['type'], $specs['options']);
 
         return $route;
     }
 
     /**
-     * Route a request
+     * match(): defined by Route interface.
      *
-     * @param  HttpRequest $request
-     * @return RouterMatch
+     * @see    Route::match()
+     * @param  Request $request
+     * @return RouteMatch
      */
-    public function route(HttpRequest $request)
+    public function match(Request $request)
     {
-        foreach ($this->_routes as $route) {
-            if (($result = $route->match($request)) !== null) {
+        foreach ($this->routes as $route) {
+            if (null !== ($result = $route->match($request))) {
                 return $match;
             }
         }
@@ -178,14 +180,25 @@ class Router
     }
 
     /**
-     * Assemble an URL
+     * assemble(): defined by Route interface.
      *
+     * @see    Route::assemble()
      * @param  array $params
      * @param  array $options
-     * @return string
+     * @return mixed
      */
     public function assemble(array $params = null, array $options = null)
     {
+        if (!isset($options['name'])) {
+            throw new InvalidArgumentException('Name not defined');
+        }
         
+        if (null === ($route = $this->route->get($options['name']))) {
+            throw new RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
+        }
+        
+        unset($options['name']);
+        
+        return $route->assemble($params, $options);
     }
 }

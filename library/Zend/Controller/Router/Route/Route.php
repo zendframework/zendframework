@@ -493,7 +493,7 @@ class Route extends AbstractRoute
         } else {
             try {
                 $translator = \Zend\Registry::get('Zend_Translate');
-            } catch (\Zend\Exception $e) {
+            } catch (\RuntimeException $e) {
                 $translator = null;
             }
 
@@ -551,7 +551,7 @@ class Route extends AbstractRoute
         } else {
             try {
                 $locale = \Zend\Registry::get('Zend_Locale');
-            } catch (\Zend\Exception $e) {
+            } catch (\RuntimeException $e) {
                 $locale = null;
             }
 

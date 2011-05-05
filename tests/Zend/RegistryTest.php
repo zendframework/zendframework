@@ -73,7 +73,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         try {
             Registry::get('foo');
             $this->fail('Expected exception when trying to fetch a non-existent key.');
-        } catch (\Zend\Exception $e) {
+        } catch (\RuntimeException $e) {
             $this->assertContains('No entry is registered for key', $e->getMessage());
         }
         $registry = Registry::getInstance();
@@ -149,7 +149,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         try {
             $registry = Registry::setClassName(new \stdClass());
             $this->fail('Expected exception, because setClassName() wants a string');
-        } catch (\Zend\Exception $e) {
+        } catch (\RuntimeException $e) {
             $this->assertContains('Argument is not a class name', $e->getMessage());
         }
     }
@@ -166,7 +166,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         try {
             $foo = Registry::get('foo');
             $this->fail('Expected exception when trying to fetch a non-existent key.');
-        } catch (\Zend\Exception $e) {
+        } catch (\RuntimeException $e) {
             $this->assertContains('No entry is registered for key', $e->getMessage());
         }
     }
@@ -178,13 +178,13 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         try {
             Registry::setClassName('anyclass');
             $this->fail('Expected exception, because we cannot initialize the registry if it is already initialized.');
-        } catch (\Zend\Exception $e) {
+        } catch (\RuntimeException $e) {
             $this->assertContains('Registry is already initialized', $e->getMessage());
         }
         try {
             Registry::setInstance(new Registry());
             $this->fail('Expected exception, because we cannot initialize the registry if it is already initialized.');
-        } catch (\Zend\Exception $e) {
+        } catch (\RuntimeException $e) {
             $this->assertContains('Registry is already initialized', $e->getMessage());
         }
     }

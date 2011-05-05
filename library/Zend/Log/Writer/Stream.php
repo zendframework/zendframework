@@ -51,7 +51,7 @@ class Stream extends AbstractWriter
      * @param string|null $mode Mode, only applicable if a URL is given
      * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @throws \Zend\Log\Excpeiton\RuntimeException
+     * @throws \Zend\Log\Exception\RuntimeException
      */
     public function __construct($streamOrUrl, $mode = null)
     {

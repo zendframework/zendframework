@@ -95,7 +95,7 @@ class Sntp extends Protocol
     {
         $this->_connect();
         $this->_delay = time();
-        fputs($this->_socket, $data);
+        fwrite($this->_socket, $data);
     }
 
     /**

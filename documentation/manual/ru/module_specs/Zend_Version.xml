@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 23282 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
 
@@ -6,15 +7,16 @@
 
     <para>
         <classname>Zend_Version</classname> имеет константу
-        <code>Zend_Version::VERSION</code>, которая содержит строку
+        <constant>Zend_Version::VERSION</constant>, которая содержит строку
         с номером версии текущей инсталляции Zend Framework.
-        Например, <classname>Zend_Version::VERSION</classname> может содержать
+        Например, <constant>Zend_Version::VERSION</constant> может содержать
         "1.7.4".
     </para>
 
     <para>
-        Статический метод <code>Zend_Version::compareVersion($version)</code>
-        основан на PHP-функции <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        Статический метод <methodname>Zend_Version::compareVersion($version)</methodname>
+        основан на <acronym>PHP</acronym>-функции <ulink
+            url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>.
         Метод возвращает -1, если указанная версия
         более поздняя, чем версия установленного Zend Framework; 0, если они
         одинаковые, и +1, если указанная версия более ранняя, чем версия
@@ -23,12 +25,27 @@
 
     <example id="zend.version.reading.example">
         <title>Пример использования метода compareVersion()</title>
+
         <programlisting language="php"><![CDATA[
 // возвращает -1, 0 или 1
 $cmp = Zend_Version::compareVersion('2.0.0');
 ]]></programlisting>
     </example>
 
+    <para>
+        Статический метод <methodname>Zend_Version::getLatest()</methodname> возвращает номер версии
+        последнего стабильного релиза, доступного для скачивания на сайте
+        <ulink url="http://framework.zend.com/download/latest">Zend Framework</ulink>.
+    </para>
+
+    <example id="zend.version.latest.example">
+        <title>Пример использования метода getLatest()</title>
+
+        <programlisting language="php"><![CDATA[
+// возвращает 1.11.0 (или более позднюю версию)
+echo Zend_Version::getLatest();
+]]></programlisting>
+    </example>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

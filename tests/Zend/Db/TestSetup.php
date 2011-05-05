@@ -81,7 +81,7 @@ abstract class TestSetup extends \PHPUnit_Framework_TestCase
         $this->_db = \Zend\Db\DB::factory($this->getDriver(), $this->_util->getParams());
         try {
             $conn = $this->_db->getConnection();
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->_db = null;
             $this->assertType('Zend\Db\Adapter\Exception', $e,
                 'Expecting Zend_Db_Adapter_Exception, got ' . get_class($e));

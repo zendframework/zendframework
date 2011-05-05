@@ -260,4 +260,55 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
         $logger = Logger::factory($cfg['log']);
         $this->assertTrue($logger instanceof Logger);
     }
+
+    /**
+     * @group ZF-10537
+     */
+    public function testFileLineOffsets()
+    {
+        $firephp = FirePhp::getInstance();
+        $channel = Channel\HttpHeaders::getInstance();
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
+        $firephp->setOption('includeLineNumbers', true);
+        $firephp->setOption('maxTraceDepth', 0);
+
+        $lines = array();
+        // NOTE: Do NOT separate the following pairs otherwise the line numbers will not match for the test
+
+        // Message number: 1
+        $lines[] = __LINE__ + 1;
+        $this->_logger->log('Hello World', Logger::INFO);
+
+        // Message number: 2
+        $this->_logger->addPriority('TRACE', 8);
+        $this->_writer->setPriorityStyle(8, 'TRACE');
+        $lines[] = __LINE__ + 1;
+        $this->_logger->trace('Trace to here');
+
+        // Message number: 3
+        $this->_logger->addPriority('TABLE', 9);
+        $this->_writer->setPriorityStyle(9, 'TABLE');
+        $table = array('Summary line for the table',
+                       array(
+                           array('Column 1', 'Column 2'),
+                           array('Row 1 c 1',' Row 1 c 2'),
+                           array('Row 2 c 1',' Row 2 c 2')
+                       )
+                      );
+        $lines[] = __LINE__ + 1;
+        $this->_logger->table($table);
+
+        // Message number: 4
+        $lines[] = __LINE__ + 1;
+        $this->_logger->info('Hello World');
+
+        $messages = $protocol->getMessages();
+        $messages = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][FirePhp::PLUGIN_URI];
+
+        for ($i = 0; $i < count($messages); $i++) {
+            if (!preg_match_all('/FirebugTest\.php","Line":' . $lines[$i] . '/', $messages[$i], $m)) {
+                $this->fail("File and line does not match for message number: " . ($i + 1));
+            }
+        }
+    }
 }

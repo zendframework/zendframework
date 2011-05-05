@@ -24,7 +24,6 @@
 namespace Zend\Rest;
 
 /**
- * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Rest
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

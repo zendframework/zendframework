@@ -25,6 +25,7 @@
  */
 namespace Zend\Controller\Router\Http\Route;
 use Zend\Controller\Router\Route,
+    Zend\Controller\Router\RouteMatch,
     Zend\Controller\Router\PriorityList,
     Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Request\Http as HttpRequest;
@@ -41,25 +42,25 @@ use Zend\Controller\Router\Route,
 class Part implements Route
 {
     /**
-     * Route to match
+     * Route to match.
      * 
      * @var Route
      */
-    protected $_route;
+    protected $route;
 
     /**
-     * Wether the route may terminate
+     * Whether the route may terminate.
      *
      * @var boolean
      */
-    protected $_mayTerminate;
+    protected $mayTerminate;
 
     /**
-     * Children of the route
+     * Children of the route.
      *
      * @var PriorityList
      */
-    protected $_children;
+    protected $children;
 
     /**
      * __construct(): defined by Route interface.
@@ -74,13 +75,13 @@ class Part implements Route
             throw new UnexpectedValueException('Options must contain a route');
         }
 
-        $this->_route        = $options['route'];
-        $this->_mayTerminate = (isset($options['may_terminate']) && $options['may_terminate']);
-        $this->_children     = new PriorityList();
+        $this->route        = $options['route'];
+        $this->mayTerminate = (isset($options['may_terminate']) && $options['may_terminate']);
+        $this->children     = new PriorityList();
     }
 
     /**
-     * Append a route to the part
+     * Append a route to the part.
      *
      * @param  string $name
      * @param  Route $route
@@ -88,7 +89,7 @@ class Part implements Route
      */
     public function append($name, Route $route)
     {
-        $this->_children[$name] = $route;
+        $this->children->insert($name, $route);
 
         return $this;
     }
@@ -102,10 +103,10 @@ class Part implements Route
      */
     public function match(AbstractRequest $request, $pathOffset = null)
     {
-        $match = $this->_route->match($request, $pathOffset);
+        $match = $this->route->match($request, $pathOffset);
 
         if ($match !== null) {
-            foreach ($this->_children as $name => $route) {
+            foreach ($this->children as $name => $route) {
                 $subMatch = $route->match($match, $pathOffset);
 
                 if ($subMatch !== null) {
@@ -113,7 +114,7 @@ class Part implements Route
                 }
             }
 
-            if ($this->_mayTerminate) {
+            if ($this->mayTerminate) {
                 // @todo: also check that the http request is at it's end
                 return $match;
             }

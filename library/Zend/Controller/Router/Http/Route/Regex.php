@@ -25,6 +25,7 @@
  */
 namespace Zend\Controller\Router\Http\Route;
 use Zend\Controller\Router\Route,
+    Zend\Controller\Router\RouteMatch,
     Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Request\Http as HttpRequest;
 

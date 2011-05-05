@@ -37,35 +37,35 @@ use Zend\Controller\Router\Rewrite\Route\Route;
 class PriorityList implements \Iterator, \Countable
 {
     /**
-     * Internal list of all routes
+     * Internal list of all routes.
      *
      * @var array
      */
-    protected $_routes = array();
+    protected $routes = array();
 
     /**
-     * Serial assigned to routes to preserve LIFO
+     * Serial assigned to routes to preserve LIFO.
      * 
      * @var integer
      */
-    protected $_serial = 0;
+    protected $serial = 0;
 
     /**
-     * Internal counter to avoid usage of count()
+     * Internal counter to avoid usage of count().
      *
      * @var integer
      */
-    protected $_count = 0;
+    protected $count = 0;
 
     /**
-     * Wether the list was already sorted
+     * Whether the list was already sorted.
      *
      * @var boolean
      */
-    protected $_sorted = false;
+    protected $sorted = false;
 
     /**
-     * Insert a new route
+     * Insert a new route.
      *
      * @param  string  $name
      * @param  Route   $route
@@ -74,48 +74,67 @@ class PriorityList implements \Iterator, \Countable
      */
     public function insert($name, Route $route, $priority)
     {
-        $this->_sorted = false;
-        $this->_count++;
+        $this->sorted = false;
+        $this->count++;
 
-        $this->_routes[$name] = array(
+        $this->routes[$name] = array(
             'route'    => $route,
             'priority' => $priority,
-            'serial'   => $this->_serial++
+            'serial'   => $this->serial++
         );
     }
 
     /**
-     * Remove a route
+     * Remove a route.
      *
      * @param  string $name
      * @return void
      */
     public function remove($name)
     {
-        $this->_sorted = false;
-        $this->_count--;
+        if (!isset($this->routes[$name])) {
+            return;
+        }
+        
+        $this->sorted = false;
+        $this->count--;
 
-        unset($this->_routes['name']);
+        unset($this->routes[$name]);
+    }
+    
+    /**
+     * Get a route.
+     * 
+     * @param  string $name 
+     * @return Route
+     */
+    public function get($name)
+    {
+        if (!isset($this->routes[$name])) {
+            return null;
+        }
+        
+        return $this->routes[$name];
     }
 
     /**
-     * Sort all routes
+     * Sort all routes.
      *
      * @return void
      */
-    protected function _sort()
+    protected function sort()
     {
-        uasort($this->_routes, array($this, '_compare'));
+        uasort($this->routes, array($this, 'compare'));
     }
 
     /**
-     * Compare the priority of two routes
+     * Compare the priority of two routes.
      *
      * @param  array $route1,
      * @param  array $route2
      * @return integer
      */
-    protected function _compare(array $route1, array $route2)
+    protected function compare(array $route1, array $route2)
     {
         if ($route1['priority'] === $route2['priority']) {
             return ($route1['serial'] > $route2['serial'] ? -1 : 1);
@@ -125,53 +144,53 @@ class PriorityList implements \Iterator, \Countable
     }
 
     /**
-     * rewind(): defined by \Iterator interface
+     * rewind(): defined by \Iterator interface.
      *
      * @see    \Iterator::rewind()
      * @return void
      */
     public function rewind() {
-        if (!$this->_sorted) {
-            $this->_sort();
+        if (!$this->sorted) {
+            $this->sort();
         }
 
-        reset($this->_routes);
+        reset($this->routes);
     }
 
     /**
-     * current(): defined by \Iterator interface
+     * current(): defined by \Iterator interface.
      *
      * @see    \Iterator::current()
      * @return Route
      */
     public function current() {
-        $node = current($this->_routes);
+        $node = current($this->routes);
         return ($node !== false ? $node['route'] : false);
     }
 
     /**
-     * key(): defined by \Iterator interface
+     * key(): defined by \Iterator interface.
      *
      * @see    \Iterator::key()
      * @return string
      */
     public function key() {
-        return key($this->_routes);
+        return key($this->routes);
     }
 
     /**
-     * next(): defined by \Iterator interface
+     * next(): defined by \Iterator interface.
      *
      * @see    \Iterator::next()
      * @return Route
      */
     public function next() {
-        $node = next($this->_routes);
+        $node = next($this->routes);
         return ($node !== false ? $node['route'] : false);
     }
 
     /**
-     * valid(): defined by \Iterator interface
+     * valid(): defined by \Iterator interface.
      *
      * @see    \Iterator::valid()
      * @return boolean
@@ -181,12 +200,12 @@ class PriorityList implements \Iterator, \Countable
     }
 
     /**
-     * count(): defined by \Countable interface
+     * count(): defined by \Countable interface.
      *
      * @see    \Countable::count()
      * @return integer
      */
     public function count() {
-        return $this->_count;
+        return $this->count;
     }
 }

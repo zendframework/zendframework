@@ -25,6 +25,7 @@
  */
 namespace Zend\Controller\Router\Http\Route;
 use Zend\Controller\Router\Route,
+    Zend\Controller\Router\RouteMatch,
     Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Request\Http as HttpRequest;
 
@@ -62,6 +63,7 @@ class Literal implements Route
      */
     public function __construct($options = null)
     {
+        
     }
 
     /**
@@ -74,12 +76,12 @@ class Literal implements Route
     public function match(AbstractRequest $request, $pathOffset = null)
     {
         if ($pathOffset !== null) {
-            if (strpos($request->getRequestUri(), $this->_route) === $pathOffset) {
-                return $this->_defaults;
+            if (strpos($request->getRequestUri(), $this->route) === $pathOffset) {
+                return new RouteMatch($this->defaults);
             }
         } else {
-            if ($request->getRequestUri() === $this->_route) {
-                return $this->_defaults;
+            if ($request->getRequestUri() === $this->route) {
+                return new RouteMatch($this->defaults);
             }
         }
 

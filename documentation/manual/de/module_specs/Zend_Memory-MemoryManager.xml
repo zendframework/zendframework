@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22762 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-manager">
     <title>Memory Manager</title>
@@ -41,7 +41,7 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
         </para>
 
         <para>
-            Der spezielle Name '<code>None</code>' kann als Backend Name verwendet werden,
+            Der spezielle Name 'None' kann als Backend Name verwendet werden,
             zusätzlich zu den Standard <classname>Zend_Cache</classname> Backends.
         </para>
 
@@ -50,14 +50,14 @@ $memoryManager = Zend_Memory::factory('None');
 ]]></programlisting>
 
         <para>
-            Wenn '<code>None</code>' als Backend Name verwendet wird, dann tauscht der
+            Wenn 'None' als Backend Name verwendet wird, dann tauscht der
             Memory Manager niemals die Memory Blöcke. Das ist nützlich wenn man weiß das
             Speicher nicht limitiert ist oder die Gesamtgröße der Objekte nie das
             Speicherlimit erreicht.
         </para>
 
         <para>
-            Das '<code>None</code>' Backend benötigt keine Definition von Optionen.
+            Das 'None' Backend benötigt keine Definition von Optionen.
         </para>
     </sect2>
 
@@ -183,9 +183,9 @@ $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
             </para>
 
             <para>
-                Der Standardwert ist zweidrittel des Wertes von '<code>memory_limit</code>'
-                in php.ini oder 'kein Limit' (-1) wenn '<code>memory_limit</code>' in der
-                php.ini nihct gesetzt ist.
+                Der Standardwert ist zweidrittel des Wertes von 'memory_limit'
+                in php.ini oder 'kein Limit' (-1) wenn 'memory_limit' in der
+                php.ini nicht gesetzt ist.
             </para>
         </sect3>
 

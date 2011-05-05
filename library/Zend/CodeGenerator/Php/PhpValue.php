@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage PHP
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -308,7 +308,6 @@ class PhpValue extends AbstractPhp
                 foreach ($value as $n => $v) {
                     $v->setArrayDepth($this->_arrayDepth + 1);
                     $partV = $v->generate();
-                    $partV = substr($partV, 0, strlen($partV)-1);
                     if ($n === $noKeyIndex) {
                         $outputParts[] = $partV;
                         $noKeyIndex++;
@@ -331,8 +330,6 @@ class PhpValue extends AbstractPhp
                     "Type '".get_class($value)."' is unknown or cannot be used as property default value."
                 );
         }
-
-        $output .= ';';
 
         return $output;
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 22757 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
@@ -712,10 +712,10 @@ if ($consumer->verify($_GET, $id, $sreg)) {
             Zend Framework bietet eine spezielle Klasse für die Unterstützung von Benutzer
             Authentifikation: <classname>Zend_Auth</classname>. Diese Klasse kann zusammen mit
             <classname>Zend_OpenId_Consumer</classname> verwendet werden. Das folgende Beispiel
-            zeigt wie <code>OpenIdAdapter</code> das
-            <classname>Zend_Auth_Adapter_Interface</classname> mit der <code>authenticate</code>
-            Methode implementiert. Diese führt eine Authentifikations Anfrage und Verifikation
-            durch.
+            zeigt wie <classname>OpenIdAdapter</classname> das
+            <classname>Zend_Auth_Adapter_Interface</classname> mit der
+            <methodname>authenticate()</methodname> Methode implementiert. Diese führt eine
+            Authentifikations Anfrage und Verifikation durch.
         </para>
 
         <para>

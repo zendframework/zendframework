@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
+<!-- EN-Revision: 22747 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.infocard.basics">
     <title>Einführung</title>
@@ -47,13 +47,14 @@
 ]]></programlisting>
 
         <para>
-            Im obigen Beispiel wird das <code>requiredClaims</code> <code>&lt;param&gt;</code> Tag
-            verwendet um Teile von Informationen zu identifizieren die als Forderung bekannt sind
-            (z.B. der Vorname und Nachname einer Person) welche eine Webseite (genannt "vertrauende
-            Forderung) benötigt um einen Benutzer authentifizieren zu können der eine
-            Informationskarte verwendet. Zur Referenz, ist die komplette <acronym>URI</acronym> (zum
-            Beispiel die <code>givename</code> Anforderung) wie folgt:
-            <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname</code>
+            Im obigen Beispiel wird das <property>requiredClaims</property>
+            <emphasis>&lt;param&gt;</emphasis> Tag verwendet um Teile von Informationen zu
+            identifizieren die als Forderung bekannt sind (z.B. der Vorname und Nachname einer
+            Person) welche eine Webseite (genannt "vertrauende Forderung) benötigt um einen Benutzer
+            authentifizieren zu können der eine Informationskarte verwendet. Zur Referenz, ist die
+            komplette <acronym>URI</acronym> (zum Beispiel die <code>givename</code> Anforderung)
+            wie folgt:
+            <filename>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname</filename>
         </para>
 
         <para>
@@ -68,9 +69,9 @@
 
         <para>
             Beachte das Informationskarten nur zu <acronym>SSL</acronym>-verschlüsselten
-            <acronym>URL</acronym>s <code>HTTP POST</code>et werden können. Die Dokumentation des
-            WebServers sollte konsultiert werden für Details zum Einrichten einer
-            <acronym>SSL</acronym> Verschlüsselung.
+            <acronym>URL</acronym>s <acronym>HTTP</acronym> <acronym>POST</acronym>et werden können.
+            Die Dokumentation des WebServers sollte konsultiert werden für Details zum Einrichten
+            einer <acronym>SSL</acronym> Verschlüsselung.
         </para>
     </sect2>
 
@@ -149,9 +150,10 @@ if (isset($_POST['xmlToken'])) {
             Kartenauswahl geschickten <acronym>XML</acronym> Daten an Ihn übergeben. Sobald die
             Instanz erstellt wurde muß zumindest ein <acronym>SSL</acronym>
             Zertifizieruntsschlüssel, ein Paar öffentlich/privat der vom Webserver verwendet wird,
-            übergeben werden der mit <code>HTTP POST</code> empfangen wurde. Diese Dateien werden
-            verwendet um das Ziel der Information das an den Server geschickt wurde zu überprüfen
-            und sind eine Notwendigkeit wenn Informationskarten verwendet werden.
+            übergeben werden der mit <acronym>HTTP</acronym> <acronym>POST</acronym> empfangen
+            wurde. Diese Dateien werden verwendet um das Ziel der Information das an den Server
+            geschickt wurde zu überprüfen und sind eine Notwendigkeit wenn Informationskarten
+            verwendet werden.
         </para>
 
         <para>
@@ -236,13 +238,14 @@ if (isset($_POST['xmlToken'])) {
             hat. Wie im obigen Beispiel gezeigt, kann die Gültigkeit der Informationskarte
             sichergestellt werden indem die <methodname>Zend_InfoCard_Claims::isValid()</methodname>
             Methode aufgerufen wird. Forderungen ihrerseits können entweder empfangen werden indem
-            auf den gewünschten Identikator zugegriffen wird (z.B. <code>givenname</code>) als eine
-            Eigenschaft des Objekts oder durch die <methodname>getClaim()</methodname> Methode.
+            auf den gewünschten Identikator zugegriffen wird (z.B. <property>givenname</property>)
+            als eine Eigenschaft des Objekts oder durch die <methodname>getClaim()</methodname>
+            Methode.
         </para>
 
         <para>
             In den meisten Fällen ist es nicht notwendig die <methodname>getClaim()</methodname>
-            Methode zu verwenden. Wenn es <code>requiredClaims</code> trotzdem erfordert das
+            Methode zu verwenden. Wenn es <property>requiredClaims</property> trotzdem erfordert das
             Forderungen von verschiedenen unterschiedlichen Quellen/Namensräumen angefragt werden
             ist es notwendig diese explizit durch Verwendung dieser Methode zu extrahieren (indem
             einfach die komplette <acronym>URI</acronym> der Forderung übergeben wird, damit der
@@ -269,11 +272,12 @@ if (isset($_POST['xmlToken'])) {
             Es ist möglich Unterstützung für Informationskarten zu einem bestehenden
             Authentifizierungssystem hinzuzufügen durch Speicherung des privaten persönlichen
             Identifikators (PPI) zum vorher traditionell-authentifizierten Zugang und zumindest die
-            <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier</code>
-            Forderung als Teil der <code>requiredClaims</code> der Anfrage zu inkludieren. Wenn
-            diese Forderung angefragt wird, biete das <classname>Zend_InfoCard_Claims</classname>
-            Objekt einen eideutigen Identifikator für diese spezielle Karte anzubieten die durch den
-            Aufruf der <methodname>getCardID()</methodname> Methode übermittelt wurde.
+            <filename>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier</filename>
+            Forderung als Teil der <property>requiredClaims</property> der Anfrage zu inkludieren.
+            Wenn diese Forderung angefragt wird, biete das
+            <classname>Zend_InfoCard_Claims</classname> Objekt einen eideutigen Identifikator für
+            diese spezielle Karte anzubieten die durch den Aufruf der
+            <methodname>getCardID()</methodname> Methode übermittelt wurde.
         </para>
 
         <para>

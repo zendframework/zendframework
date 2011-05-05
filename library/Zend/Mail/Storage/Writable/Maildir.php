@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -43,7 +43,7 @@ use Zend\Mail\Storage,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Maildir extends MaildirFolder implements Writable
@@ -477,7 +477,7 @@ class Maildir extends MaildirFolder implements Writable
         if (is_resource($message) && get_resource_type($message) == 'stream') {
             stream_copy_to_stream($message, $temp_file['handle']);
         } else {
-            fputs($temp_file['handle'], $message);
+            fwrite($temp_file['handle'], $message);
         }
         fclose($temp_file['handle']);
 
@@ -819,8 +819,8 @@ class Maildir extends MaildirFolder implements Writable
             $definition[] = $value . $type;
         }
         $definition = implode(',', $definition);
-        fputs($fh, "$definition\n");
-        fputs($fh, "$total_size $messages\n");
+        fwrite($fh, "$definition\n");
+        fwrite($fh, "$total_size $messages\n");
         fclose($fh);
         rename($tmp['filename'], $this->_rootdir . 'maildirsize');
         foreach ($timestamps as $dir => $timestamp) {

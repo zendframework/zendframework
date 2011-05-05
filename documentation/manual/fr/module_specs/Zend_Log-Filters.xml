@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22432 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.log.filters">
     <title>Filtres</title>
@@ -37,7 +37,7 @@ $logger->emerg("Message d'urgence");
 
         <para>
             Pour filtrer seulement sur un instance spécifique de rédacteur, employer la
-            méthode <code>addFilter</code> de ce rédacteur : <programlisting language="php"><![CDATA[
+            méthode <methodname>addFilter()</methodname> de ce rédacteur : <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 
 $redacteur1 =
@@ -58,5 +58,5 @@ $logger->info("Message d'information");
 // écrit dans les 2 logs
 $logger->emerg("Message d'urgence");
 ]]></programlisting></para>
-        </sect2>
-    </sect1>
+    </sect2>
+</sect1>

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,13 +25,14 @@
 namespace ZendTest\Wildfire;
 use Zend\Wildfire\Channel,
     Zend\Wildfire\Plugin\FirePhp,
-    Zend\Controller;
+    Zend\Controller,
+    Zend\Controller\Request\Simple as SimpleRequest;
 
 /**
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Wildfire
  */
@@ -115,13 +116,13 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->_request->setUserAgentExtensionEnabled(false);
 
         $this->assertFalse($channel->isReady(true));
-        
+
         $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
-        
+
         $this->assertTrue($channel->isReady(true));
 
         $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
-        
+
         $this->assertTrue($channel->isReady(true));
     }
 
@@ -138,11 +139,11 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($channel->isReady());
 
         $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
-        
+
         $this->assertTrue($channel->isReady());
 
         $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
-        
+
         $this->assertTrue($channel->isReady());
     }
 
@@ -933,6 +934,71 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                             '[{"Type":"TABLE","Label":"Label"},[["Col1","Col2"],[{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":"** Max Object Depth (2) **"}},{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":{"__className":"ZendTest\\\\Wildfire\\\\TestObject3","public:name":"Name","public:value":"Value","undeclared:testArray":["val1","** Max Array Depth (1) **"],"undeclared:child":"** Max Object Depth (2) **"}}]]]');
     }
 
+    /**
+     * @group ZF-10526
+     */
+    public function testNonHTTPRequest()
+    {
+        $this->_request = new SimpleRequest();
+        $this->_response = new Response();
+
+        $channel = Channel\HttpHeaders::getInstance();
+        $channel->setRequest($this->_request);
+        $channel->setResponse($this->_response);
+
+        // this should not fail with: PHP Fatal error:  Call to undefined method Zend_Controller_Request_Simple::getHeader()
+        $this->assertFalse($channel->isReady());
+
+        // this should not fail with: PHP Fatal error:  Call to undefined method Zend_Controller_Request_Simple::getHeader()
+        $firephp = FirePhp::getInstance();
+        $firephp->send('This is a log message!');
+    }
+
+    /**
+     * @group ZF-10537
+     */
+    public function testFileLineOffsets()
+    {
+        $this->_setupWithoutFrontController();
+
+        $firephp = FirePhp::getInstance();
+        $channel = Channel\HttpHeaders::getInstance();
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
+        $firephp->setOption('includeLineNumbers', true);
+        $firephp->setOption('maxTraceDepth', 0);
+
+        $lines = array();
+        // NOTE: Do NOT separate the following pairs otherwise the line numbers will not match for the test
+
+        // Message number: 1
+        $lines[] = __LINE__+1;
+        $firephp->send('Hello World');
+
+        // Message number: 2
+        $lines[] = __LINE__+1;
+        $firephp->send('Hello World', null, 'TRACE');
+
+        // Message number: 3
+        $table = array('Summary line for the table',
+                       array(
+                           array('Column 1', 'Column 2'),
+                           array('Row 1 c 1',' Row 1 c 2'),
+                           array('Row 2 c 1',' Row 2 c 2')
+                       )
+                      );
+        $lines[] = __LINE__+1;
+        $firephp->send($table, null, 'TABLE');
+
+        $messages = $protocol->getMessages();
+        $messages = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][FirePhp::PLUGIN_URI];
+
+        for( $i=0 ; $i<sizeof($messages) ; $i++ ) {
+            if(!preg_match_all('/WildfireTest\.php","Line":' . $lines[$i] . '/', $messages[$i], $m)) {
+                $this->fail("File and line does not match for message number: " . ($i+1));
+            }
+
+        }
+    }
 }
 
 class TestObject1

@@ -26,8 +26,8 @@
                 in its most basic form – is an object that holds a pointer
                 to a web page. In addition to the pointer itself, the page
                 object contains a number of other properties that are
-                typically relevant for navigation, such as <code>label</code>,
-                <code>title</code>, etc.
+                typically relevant for navigation, such as <property>label</property>,
+                <property>title</property>, etc.
             </para>
 
             <para>
@@ -76,9 +76,9 @@
             namespace do not deal with rendering of navigational elements.
             Rendering is done with navigational view helpers. However,
             pages contain information that is used by view helpers
-            when rendering, such as; label, <acronym>CSS</acronym> class, title,
-            <code>lastmod</code> and <code>priority</code> properties for
-            sitemaps, etc.
+            when rendering, such as; <property>label</property>, <acronym>CSS</acronym> class,
+            <property>title</property>, <property>lastmod</property> and
+            <property>priority</property> properties for sitemaps, etc.
         </para>
 
         <para>

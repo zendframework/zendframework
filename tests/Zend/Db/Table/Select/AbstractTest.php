@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Db\Table\Select;
  * @subpackage UnitTests
  * @group      Zend_Db
  * @group      Zend_Db_Select
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractTest extends \ZendTest\Db\Select\AbstractTest
@@ -93,7 +93,7 @@ abstract class AbstractTest extends \ZendTest\Db\Select\AbstractTest
     protected function _getSelectTable($table)
     {
         if (!array_key_exists($table, $this->_table)) {
-            throw new \Zend\Exception('Non-existent table name');
+            throw new \RuntimeException('Non-existent table name');
         }
 
         return $this->_table[$table];
@@ -150,7 +150,7 @@ abstract class AbstractTest extends \ZendTest\Db\Select\AbstractTest
         try {
             $query = $select->assemble();
             $this->fail('Expected to catch Zend_Db_Table_Select_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend_Db_Table_Select_Exception', $e);
             $this->assertEquals('Select query cannot join with another table', $e->getMessage());
         }

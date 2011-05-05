@@ -15,7 +15,7 @@
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,14 +25,13 @@
 namespace Zend\Ldap;
 
 /**
- * @uses       \Zend\Exception
+ * @uses       \Exception
  * @category   Zend
  * @package    Zend_Ldap
- * @uses       \Zend\Exception
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
+class Exception extends \Exception
 {
     const LDAP_SUCCESS                        = 0x00;
     const LDAP_OPERATIONS_ERROR               = 0x01;

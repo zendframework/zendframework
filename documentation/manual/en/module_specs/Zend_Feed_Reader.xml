@@ -44,7 +44,7 @@
             by an internal cache (non-persistant) so repeat <acronym>API</acronym> calls for the
             same feed will avoid additional <acronym>DOM</acronym> or XPath use. Thirdly, importing
             feeds from a <acronym>URI</acronym> can take advantage of
-            <acronym>HTTP</acronym> Conditional <acronym>GET</acronym> requests
+            <acronym>HTTP</acronym> Conditional <constant>GET</constant> requests
             which allow servers to issue an empty 304 response when the
             requested feed has not changed since the last time you requested it.
             In the final case, an instance of <classname>Zend_Cache</classname>
@@ -73,7 +73,7 @@
             that much different to <classname>Zend_Feed</classname>. Feeds can
             be imported from a string, file, <acronym>URI</acronym> or an instance of type
             <classname>Zend_Feed_Abstract</classname>. Importing from a <acronym>URI</acronym> can
-            additionally utilise a <acronym>HTTP</acronym> Conditional <acronym>GET</acronym>
+            additionally utilise a <acronym>HTTP</acronym> Conditional <constant>GET</constant>
             request. If importing fails, an exception will be raised. The end result will be an
             object of type <classname>Zend_Feed_Reader_FeedInterface</classname>, the
             core implementations of which are
@@ -290,7 +290,8 @@ Zend_Feed_Reader::setCache($cache);
             <para>
                 The big question often asked when importing a feed frequently, is
                 if it has even changed. With a cache enabled, you can add <acronym>HTTP</acronym>
-                Conditional <acronym>GET</acronym> support to your arsenal to answer that question.
+                Conditional <constant>GET</constant> support to your arsenal to answer that
+                question.
             </para>
 
             <para>
@@ -333,7 +334,7 @@ $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 
             <para>
                 In the example above, with <acronym>HTTP</acronym> Conditional
-                <acronym>GET</acronym> requests enabled, the response header values for ETag and
+                <constant>GET</constant> requests enabled, the response header values for ETag and
                 Last-Modified will be cached along with the feed. For the next 24hrs (the cache
                 lifetime), feeds will only be updated on the cache if a non-304 response is received
                 containing a valid <acronym>RSS</acronym> or Atom <acronym>XML</acronym> document.

@@ -30,7 +30,7 @@ if ($validator->isValid($email)) {
 
         <para>
             This will match the email address <varname>$email</varname> and on failure populate
-            <code>$validator->getMessages()</code> with useful error messages.
+            <methodname>getMessages()</methodname> with useful error messages.
         </para>
     </sect3>
 
@@ -104,9 +104,10 @@ $validator->setOptions(array('domain' => false));
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> will match any valid email address
-            according to RFC2822. For example, valid emails include <code>bob@domain.com</code>,
-            <code>bob+jones@domain.us</code>, <code>"bob@jones"@domain.com</code> and
-            <code>"bob jones"@domain.com</code>
+            according to RFC2822. For example, valid emails include
+            <emphasis>bob@domain.com</emphasis>, <emphasis>bob+jones@domain.us</emphasis>,
+            <emphasis>"bob@jones"@domain.com</emphasis> and
+            <emphasis>"bob jones"@domain.com</emphasis>
         </para>
 
         <para>
@@ -139,8 +140,8 @@ $validator->setOptions(array('domain' => FALSE));
             The hostname part of an email address is validated against <link
                 linkend="zend.validate.set.hostname">
                 <classname>Zend_Validate_Hostname</classname></link>. By default
-            only DNS hostnames of the form <code>domain.com</code> are accepted, though if you wish
-            you can accept IP addresses and Local hostnames too.
+            only DNS hostnames of the form <filename>domain.com</filename> are accepted, though if
+            you wish you can accept IP addresses and Local hostnames too.
         </para>
 
         <para>
@@ -202,8 +203,8 @@ $validator = new Zend_Validate_EmailAddress(
 
         <para>
             Alternatively you can either pass <constant>TRUE</constant> or
-            <constant>FALSE</constant> to <code>$validator->setValidateMx()</code> to enable or
-            disable MX validation.
+            <constant>FALSE</constant> to <methodname>setValidateMx()</methodname> to enable
+            or disable MX validation.
         </para>
 
         <para>

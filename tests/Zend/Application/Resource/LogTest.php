@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Loader\Autoloader,
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
@@ -38,16 +38,6 @@ class LogTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        // Store original autoloaders
-        $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
-            // spl_autoload_functions does not return empty array when no
-            // autoloaders registered...
-            $this->loaders = array();
-        }
-
-        Autoloader::resetInstance();
-        $this->autoloader = Autoloader::getInstance();
         $this->application = new Application\Application('testing');
         $this->bootstrap = new Application\Bootstrap($this->application);
 
@@ -56,18 +46,6 @@ class LogTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        // Restore original autoloaders
-        $loaders = spl_autoload_functions();
-        foreach ($loaders as $loader) {
-            spl_autoload_unregister($loader);
-        }
-
-        foreach ($this->loaders as $loader) {
-            spl_autoload_register($loader);
-        }
-
-        // Reset autoloader instance so it doesn't affect other tests
-        Autoloader::resetInstance();
     }
 
     public function testInitializationInitializesLogObject()
@@ -113,7 +91,7 @@ class LogTest extends \PHPUnit_Framework_TestCase
         rewind($stream);
         $this->assertContains($message, stream_get_contents($stream));
     }
-    
+
     /**
      * @group ZF-8602
      */
@@ -135,5 +113,43 @@ class LogTest extends \PHPUnit_Framework_TestCase
         $resource = new LogResource($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
+    }
+
+    /**
+     * @group ZF-9790
+     */
+    public function testInitializationWithFilterAndFormatter()
+    {
+        $stream = fopen('php://memory', 'w+');
+        $options = array(
+            'memory' => array(
+                'writerName' => 'Stream',
+                'writerParams' => array(
+                     'stream' => $stream,
+                ),
+                'filterName' => 'Priority',
+                'filterParams' => array(
+                    'priority' => \Zend\Log\Logger::INFO,
+                ),
+                'formatterName' => 'Simple',
+                'formatterParams' => array(
+                    'format' => '%timestamp%: %message%',
+                )
+            )
+        );
+        $message = 'tottakai';
+
+        $resource = new LogResource($options);
+        $resource->setBootstrap($this->bootstrap);
+        $log = $resource->init();
+
+        $this->assertType('Zend\Log\Logger', $log);
+
+        $log->log($message, \Zend\Log\Logger::INFO);
+        rewind($stream);
+        $contents = stream_get_contents($stream);
+
+        $this->assertStringEndsWith($message, $contents);
+        $this->assertRegexp('/\d\d:\d\d:\d\d/', $contents);
     }
 }

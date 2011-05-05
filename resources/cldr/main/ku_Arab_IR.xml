@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4618 $"/>
+		<generation date="$Date: 2010-02-06 09:33:33 -0600 (Sat, 06 Feb 2010) $"/>
+		<language type="ku"/>
+		<script type="Arab"/>
+		<territory type="IR"/>
+	</identity>
+	<localeDisplayNames>
+		<languages>
+			<language type="zh">چینی</language>
+		</languages>
+	</localeDisplayNames>
+</ldml>
+

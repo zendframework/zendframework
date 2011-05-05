@@ -2,11 +2,11 @@
 <!-- EN-Revision: 21825 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.mail">
-    <title>Écrire vers un émail</title>
+    <title>Écrire vers un courriel</title>
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> va écrire les entrées du log dans un message
-        émail en utilisant <classname>Zend_Mail</classname>. Le constructeur de
+        courriel en utilisant <classname>Zend_Mail</classname>. Le constructeur de
         <classname>Zend_Log_Writer_Mail</classname> requière un objet
         <classname>Zend_Mail</classname> et optionnellement un objet
         <classname>Zend_Layout</classname>.
@@ -63,7 +63,7 @@ $log->error('unable to connect to database');
 
         <para>
             Une instance de <classname>Zend_Layout</classname> peut être utilisée pour générer
-            du HTML qui fera partie de l'émail multipart. Si <classname>Zend_Layout</classname>
+            du HTML qui fera partie du courriel multipart. Si <classname>Zend_Layout</classname>
             est utilisé, <classname>Zend_Log_Writer_Mail</classname> considérera que le corps HTML
             du message sera la valeur du rendu de <classname>Zend_Layout</classname>.
         </para>
@@ -114,9 +114,9 @@ $log->error('unable to connect to database');
 
         <para>
             La méthode <methodname>setSubjectPrependText()</methodname> est utilisée à la place de
-            <methodname>Zend_Mail::setSubject()</methodname> pour que la ligne de sujet dans l'émail
-            soit générée dynamiquement avant l'envoi de l'émail. Par exemple, si le texte indiqué
-            est "Erreurs depuis ce script", le sujet de l'émail généré par
+            <methodname>Zend_Mail::setSubject()</methodname> pour que la ligne de sujet dans le courriel
+            soit générée dynamiquement avant l'envoi de ce dernier. Par exemple, si le texte indiqué
+            est "Erreurs depuis ce script", le sujet du courriel généré par
             <classname>Zend_Log_Writer_Mail</classname> avec 2 warnings et 5 errors sera alors
             "Erreurs depuis ce script (warn = 2; error = 5)". Si le sujet n'est pas indiqué
             via <classname>Zend_Log_Writer_Mail</classname>, la ligne de sujet

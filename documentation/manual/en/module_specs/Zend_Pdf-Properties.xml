@@ -11,8 +11,8 @@
 
     <para>
         Historically this information is stored using special Info structure. This structure
-        is available for read and writing as an associative array using <code>properties</code>
-        public property of <classname>Zend_Pdf</classname> objects:
+        is available for read and writing as an associative array using
+        <property>properties</property> public property of <classname>Zend_Pdf</classname> objects:
     </para>
 
     <programlisting language="php"><![CDATA[

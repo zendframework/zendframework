@@ -469,9 +469,9 @@ if (!isset($defaultNamespace->initialized)) {
         <para>
             If you see the error message, "Cannot modify header information - headers already sent",
             then either avoid using <constant>TRUE</constant> as the value for the first argument
-            (requesting removal of the session cookie), or see <xref
-                linkend="zend.session.global_session_management.headers_sent" />. Thus,
-            <methodname>Zend_Session::destroy(true)</methodname> must either be called before
+            (requesting removal of the session cookie), or see <link
+                linkend="zend.session.global_session_management.headers_sent">this section</link>.
+            Thus, <methodname>Zend_Session::destroy(true)</methodname> must either be called before
             <acronym>PHP</acronym> has sent <acronym>HTTP</acronym> headers, or output buffering
             must be enabled. Also, the total output sent must not exceed the set buffer size, in
             order to prevent triggering sending the output before the call to

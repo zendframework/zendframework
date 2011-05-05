@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21831 -->
+<!-- EN-Revision: 22768 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: Erweiterte Verwendung</title>
@@ -22,7 +22,7 @@
 
         <para>
             Um ein StrikeIron Service zu probieren für das keine Wrapper Klasse vorhanden ist, muß
-            die <code>wsdl</code> Option statt der <code>class</code> Option an
+            die <property>wsdl</property> Option statt der <property>class</property> Option an
             <methodname>getService()</methodname> übergeben werden:
         </para>
 
@@ -72,24 +72,25 @@ echo $result->listingName;
             Jeder StrikeIron Client (Subklasse von
             <classname>Zend_Service_StrikeIron_Base</classname>) enthält eine
             <methodname>getSoapClient()</methodname> Methode um die darunterliegende Instanz von
-            <code>SOAPClient</code> zu retournieren, die für die Kommunikation mit StrikeIron
-            verwendet wird.
+            <classname>SOAPClient</classname> zu retournieren, die für die Kommunikation mit
+            StrikeIron verwendet wird.
         </para>
 
         <para>
             <acronym>PHP</acronym>'s <ulink
                 url="http://www.php.net/manual/de/function.soap-soapclient-construct.php">SOAPClient</ulink>
-            hat eine <code>trace</code> Option die dazu führt dass das <acronym>XML</acronym>, das
-            wärend der letzten Transaktion getauscht wurde, gemerkt wird.
-            <classname>Zend_Service_StrikeIron</classname> aktiviert die <code>trace</code> Option
-            nicht standardmäßig aber das kann einfach getan werden durch Spezifizierung der Option
-            die dazu verwendet wird den <code>SOAPClient</code> Konstruktor zu übergeben.
+            hat eine <property>trace</property> Option die dazu führt dass das
+            <acronym>XML</acronym>, das wärend der letzten Transaktion getauscht wurde, gemerkt
+            wird. <classname>Zend_Service_StrikeIron</classname> aktiviert die
+            <property>trace</property> Option nicht standardmäßig aber das kann einfach getan werden
+            durch Spezifizierung der Option die dazu verwendet wird den
+            <classname>SOAPClient</classname> Konstruktor zu übergeben.
         </para>
 
         <para>
             Um die SOAP Transaktion zu betrachten muß die <methodname>getSoapClient()</methodname>
-            Methode aufgerufen werden um die <code>SOAPClient</code> Instanz zu erhalten und
-            anschließend die entsprechenden Methoden wie <ulink
+            Methode aufgerufen werden um die <classname>SOAPClient</classname> Instanz zu erhalten
+            und anschließend die entsprechenden Methoden wie <ulink
                 url="http://www.php.net/manual/de/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
             und <ulink
                 url="http://www.php.net/manual/de/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:

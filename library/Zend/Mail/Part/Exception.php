@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -26,10 +26,10 @@ namespace Zend\Mail\Part;
 use Zend\Mail;
 
 /**
- * @uses       \Zend\Exception
+ * @uses       \Zend\Mail\Exception
  * @category   Zend
  * @package    Zend_Mail
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Exception extends Mail\Exception

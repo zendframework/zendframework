@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Channel
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,9 +23,10 @@
  * @namespace
  */
 namespace Zend\Wildfire\Channel;
-use Zend\Wildfire;
-use Zend\Wildfire\Protocol;
-use Zend\Controller;
+use Zend\Wildfire,
+    Zend\Wildfire\Protocol,
+    Zend\Controller,
+    Zend\Controller\Request\Http as HttpRequest;
 
 /**
  * Implements communication via HTTP request and response headers for Wildfire Protocols.
@@ -41,7 +42,7 @@ use Zend\Controller;
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Channel
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HttpHeaders
@@ -258,6 +259,10 @@ class HttpHeaders
             && !$this->_response
         ) {
             return true;
+        }
+
+        if (!($this->getRequest() instanceof HttpRequest)) {
+            return false;
         }
 
         return ($this->getResponse()->canSendHeaders()

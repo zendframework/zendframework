@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Stdlib
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id:$
  */
@@ -29,7 +29,7 @@ use Zend\Stdlib\SplPriorityQueue;
  * @package    Zend_Stdlib
  * @subpackage UnitTests
  * @group      Zend_Stdlib
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SplPriorityQueueTest extends \PHPUnit_Framework_TestCase
@@ -41,6 +41,22 @@ class SplPriorityQueueTest extends \PHPUnit_Framework_TestCase
         $this->queue->insert('bar', 4);
         $this->queue->insert('baz', 2);
         $this->queue->insert('bat', 1);
+    }
+
+    public function testMaintainsInsertOrderForDataOfEqualPriority()
+    {
+        $queue = new SplPriorityQueue();
+        $queue->insert('foo', 1000);
+        $queue->insert('bar', 1000);
+        $queue->insert('baz', 1000);
+        $queue->insert('bat', 1000);
+
+        $expected = array('foo', 'bar', 'baz', 'bat');
+        $test     = array();
+        foreach ($queue as $datum) {
+            $test[] = $datum;
+        }
+        $this->assertEquals($expected, $test);
     }
 
     public function testSerializationAndDeserializationShouldMaintainState()
@@ -64,10 +80,10 @@ class SplPriorityQueueTest extends \PHPUnit_Framework_TestCase
     public function testCanRetrieveQueueAsArray()
     {
         $expected = array(
-            4 => 'bar', 
-            3 => 'foo', 
-            2 => 'baz', 
-            1 => 'bat',
+            'bar', 
+            'foo', 
+            'baz', 
+            'bat',
         );
         $test     = $this->queue->toArray();
         $this->assertSame($expected, $test, var_export($test, 1));

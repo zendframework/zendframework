@@ -123,7 +123,7 @@ Zend_Layout::startMvc();
         <para>
             <methodname>startMvc()</methodname> can take an optional array of options or
             <classname>Zend_Config</classname> object to customize the instance; these
-            options are detailed in <xref linkend="zend.layout.options" />.
+            options are detailed in <link linkend="zend.layout.options">this section</link>.
         </para>
 
         <para>

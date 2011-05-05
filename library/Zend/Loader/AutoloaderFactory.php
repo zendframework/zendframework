@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ require_once __DIR__ . '/SplAutoloader.php';
 /**
  * @category   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AutoloaderFactory
@@ -86,7 +86,8 @@ class AutoloaderFactory
 
         foreach ($options as $class => $opts) {
             if (!class_exists($class)) {
-                if (!self::getStandardAutoloader()->autoload($class)) {
+                $autoloader = self::getStandardAutoloader();
+                if (!class_exists($class) && !$autoloader->autoload($class)) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(sprintf('Autoloader class "%s" not loaded', $class));
                 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ namespace Zend\View\Helper;
  * @uses       \Zend\View\Helper\Partial\Exception
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Partial extends AbstractHelper
@@ -83,7 +83,7 @@ class Partial extends AbstractHelper
                 throw $e;
             }
             $viewsDir = dirname($moduleDir) . '/views';
-            $view->addBasePath($viewsDir);
+            $view->resolver()->addPath($viewsDir . '/scripts');
         } elseif ((null == $model) && (null !== $module)
             && (is_array($module) || is_object($module)))
         {

@@ -1,0 +1,54 @@
+{
+    "testing": {
+        "definitions": [
+            {
+                "class": "Zend\\Di\\TestAsset\\Struct",
+                "params": {
+                    "param1": "foo",
+                    "param2": "bar"
+                },
+                "param_map": {
+                    "param1": 0,
+                    "param2": 1
+                }
+            },
+            {
+                "class": "Zend\\Di\\TestAsset\\DummyParams",
+                "constructor_callback": {
+                    "class": "Zend\\Di\\TestAsset\\StaticFactory",
+                    "method": "factory"
+                },
+                "params": {
+                    "struct": { "__reference": "struct" },
+                    "params": {"foo": "bar"}
+                },
+                "param_map": {
+                    "struct": 0,
+                    "params": 1
+                }
+            },
+            {
+                "class": "Zend\\Di\\TestAsset\\InjectedMethod",
+                "methods": [
+                    {
+                        "name": "setObject",
+                        "args": [ { "__reference": "params" } ]
+                    }
+                ]
+            },
+            {
+                "class": "Zend\\Di\\TestAsset\\InspectedClass",
+                "params": {
+                    "baz": "BAZ",
+                    "foo": "FOO"
+                }
+            }
+        ],
+        "aliases": {
+            "struct": "Zend\\Di\\TestAsset\\Struct",
+            "params": "Zend\\Di\\TestAsset\\DummyParams",
+            "injected": "Zend\\Di\\TestAsset\\InjectedMethod",
+            "inspected": "Zend\\Di\\TestAsset\\InspectedClass"
+        }
+    }
+}

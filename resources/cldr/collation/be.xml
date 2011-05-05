@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4975 $"/>
+		<generation date="$Date: 2010-06-09 17:36:15 -0500 (Wed, 09 Jun 2010) $"/>
+		<language type="be"/> 
+	</identity>
+	<collations  validSubLocales="be_BY">
+		<collation type="standard">
+			<suppress_contractions>[АаӘәГгЕеЖжЗзІіОоӨөКкЧчЫыЭэѴѵ]</suppress_contractions>
+			<rules>
+			    <reset>Е</reset>
+			        <p>ё</p>
+			        <t>Ё</t>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

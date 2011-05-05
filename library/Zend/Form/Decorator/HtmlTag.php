@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,8 +24,7 @@
  */
 namespace Zend\Form\Decorator;
 
-use Zend\Filter,
-    Zend\View\AbstractView;
+use Zend\Filter;
 
 /**
  * Zend_Form_Decorator_Element_HtmlTag
@@ -50,7 +49,7 @@ use Zend\Filter,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HtmlTag extends AbstractDecorator
@@ -115,8 +114,8 @@ class HtmlTag extends AbstractDecorator
     {
         if (!isset($this->_tagFilter)) {
             $this->_tagFilter = new Filter\FilterChain();
-            $this->_tagFilter->addFilter(new Filter\Alnum())
-                             ->addFilter(new Filter\StringToLower());
+            $this->_tagFilter->attach(new Filter\Alnum())
+                             ->attach(new Filter\StringToLower());
         }
         return $this->_tagFilter->filter($tag);
     }
@@ -247,9 +246,7 @@ class HtmlTag extends AbstractDecorator
             $this->_encoding = 'UTF-8';
         } elseif (null === ($view = $element->getView())) {
             $this->_encoding = 'UTF-8';
-        } elseif (!$view instanceof AbstractView
-            && !method_exists($view, 'getEncoding')
-        ) {
+        } elseif (!method_exists($view, 'getEncoding')) {
             $this->_encoding = 'UTF-8';
         } else {
             $this->_encoding = $view->getEncoding();

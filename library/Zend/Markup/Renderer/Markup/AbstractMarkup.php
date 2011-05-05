@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use Zend\Markup\Renderer\Markup,
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractMarkup implements Markup
@@ -133,41 +133,14 @@ abstract class AbstractMarkup implements Markup
      * Adds a filter to the chain
      *
      * @param  \Zend\Filter\Filter $filter
-     * @param  string $placement
-     *
+     * @param  int $priority Priority at which to add filter; higher numbers are executed earlier. Defaults to 0
      * @return \Zend\Markup\Renderer\AbstractMarkup
      */
-    public function addFilter(Filter $filter, $placement = FilterChain::CHAIN_APPEND)
+    public function addFilter(Filter $filter, $priority = 0)
     {
-        $this->getFilterChain()->addFilter($filter, $placement);
+        $this->getFilterChain()->attach($filter, $priority);
 
         return $this;
-    }
-
-    /**
-     * Add a filter to the end of the chain
-     *
-     * @param  \Zend\Filter\Filter $filter
-     *
-     * @return \Zend\Markup\Renderer\AbstractMarkup
-     */
-    public function appendFilter(Filter $filter)
-    {
-        $this->getFilterChain()->appendFilter($filter);
-
-        return $this;
-    }
-
-    /**
-     * Add a filter to the start of the chain
-     *
-     * @param  \Zend\Filter\Filter $filter
-     *
-     * @return \Zend\Markup\Renderer\AbstractMarkup
-     */
-    public function prependFilter(Filter $filter)
-    {
-        $this->getFilterChain()->prependFilter($filter);
     }
 
     /**

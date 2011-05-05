@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4208 $"/>
+		<generation date="$Date: 2009-07-03 13:17:21 -0500 (Fri, 03 Jul 2009) $"/>
+		<language type="nso"/> 
+	</identity>
+	<collations validSubLocales="nso_ZA">
+		<collation type="standard" >
+			<rules>
+				<reset>E</reset>
+				<p>ê</p>
+				<t>Ê</t>
+				<reset>O</reset>
+				<p>ô</p>
+				<t>Ô</t>
+				<reset>S</reset>
+				<p>š</p>
+				<t>Š</t>
+			</rules>
+		</collation  >
+	</collations>
+</ldml>

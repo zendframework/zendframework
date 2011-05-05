@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,7 +23,7 @@
  */
 namespace Zend\View;
 
-use Zend\Stdlib\FilterChain,
+use Zend\Filter\FilterChain,
     ArrayAccess;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Stdlib\FilterChain,
  * @todo       Allow specifying string names for broker, filter chain, variables
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PhpRenderer implements Renderer
@@ -93,7 +93,7 @@ class PhpRenderer implements Renderer
      *
      * Returns the object instance, as it is its own template engine
      *
-     * @return \Zend\View\AbstractView
+     * @return \Zend\View\PhpRenderer
      */
     public function getEngine()
     {
@@ -162,7 +162,7 @@ class PhpRenderer implements Renderer
      * Expects either an array, or an object implementing ArrayAccess.
      * 
      * @param  array|ArrayAccess $variables 
-     * @return AbstractView
+     * @return PhpRenderer
      */
     public function setVars($variables)
     {
@@ -243,7 +243,7 @@ class PhpRenderer implements Renderer
      * Set filter chain
      * 
      * @param  FilterChain $filters 
-     * @return Zend\View\AbstractView
+     * @return Zend\View\PhpRenderer
      */
     public function setFilterChain(FilterChain $filters)
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 22748 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout Konfigurations Optionen</title>
@@ -103,9 +103,9 @@
         <title>HelferKlasse und PluginKlasse müssen an startMvc() übergeben werden</title>
 
         <para>
-            Damit die <code>helperClass</code> und <code>pluginClass</code> Einstellungen wirken,
-            müssen diese als Option an <methodname>startMvc()</methodname> übergeben werden; wenn
-            sie später gesetzt werden, haben Sie keinen Effekt.
+            Damit die <property>helperClass</property> und <property>pluginClass</property>
+            Einstellungen wirken, müssen diese als Option an <methodname>startMvc()</methodname>
+            übergeben werden; wenn sie später gesetzt werden, haben Sie keinen Effekt.
         </para>
     </note>
 
@@ -196,9 +196,9 @@ $layout->setConfig($options);
 ]]></programlisting>
 
             <para>
-                Es ist zu beachten das einige Optionen, wie <code>pluginClass</code> und
-                <code>helperClass</code>, keinen Effekt haven wenn Sie mit Hilfe dieser Methode
-                übergeben werden; sie müssen mit dem Konstruktor oder der
+                Es ist zu beachten das einige Optionen, wie <property>pluginClass</property> und
+                <property>helperClass</property>, keinen Effekt haven wenn Sie mit Hilfe dieser
+                Methode übergeben werden; sie müssen mit dem Konstruktor oder der
                 <methodname>startMvc()</methodname> Methode übergeben werden.
             </para>
         </example>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5097 $" />
+		<generation date="$Date: 2010-10-14 01:15:01 -0500 (Thu, 14 Oct 2010) $" />
+		<language type="hr" />
+	</identity>
+	<collations validSubLocales="hr_HR">
+		<collation type="search" >
+			<settings normalization="on"/>
+			<suppress_contractions>[เ-ไ ເ-ໄ]</suppress_contractions>
+			<rules>
+				<reset>ا</reset>
+					<s>آ</s>
+					<s>أ</s>
+					<s>إ</s>
+				<reset>و</reset>
+					<s>ؤ</s>
+				<reset>ي</reset>
+					<s>ئ</s>
+					<s>ى</s>
+				<reset>ه</reset>
+					<s>ة</s>
+				<reset><last_primary_ignorable/></reset>
+					<s>׳</s>
+					<s>״</s>
+					<s>ـ</s>
+					<s>ٌ</s>
+					<s>ٍ</s>
+					<s>َ</s>
+					<s>ُ</s>
+					<s>ِ</s>
+					<s>ّ</s>
+					<s>ْ</s>
+					<s>ฺ</s>
+				
+				
+				
+				<reset>C</reset>
+				<p>č</p>
+				<t>Č</t>
+				<p>ć</p>
+				<t>Ć</t>
+				<reset>D</reset>
+				<p>dž</p>
+				<t>ǆ</t>
+				<t>Dž</t>
+				<t>ǅ</t>
+				<t>DŽ</t>
+				<t>Ǆ</t>
+				<p>đ</p>
+				<t>Đ</t>
+				<reset>L</reset>
+				<p>lj</p>
+				<t>ǉ</t>
+				<t>Lj</t>
+				<t>ǈ</t>
+				<t>LJ</t>
+				<t>Ǉ</t>
+				<reset>N</reset>
+				<p>nj</p>
+				<t>ǌ</t>
+				<t>Nj</t>
+				<t>ǋ</t>
+				<t>NJ</t>
+				<t>Ǌ</t>
+				<reset>S</reset>
+				<p>š</p>
+				<t>Š</t>
+				<reset>Z</reset>
+				<p>ž</p>
+				<t>Ž</t>
+			</rules>
+		</collation>
+		<collation type="standard">
+			<rules>
+				<reset>C</reset>
+				<p>č</p>
+				<t>Č</t>
+				<p>ć</p>
+				<t>Ć</t>
+				<reset>D</reset>
+				<p>dž</p>
+				<t>ǆ</t>
+				<t>Dž</t>
+				<t>ǅ</t>
+				<t>DŽ</t>
+				<t>Ǆ</t>
+				<p>đ</p>
+				<t>Đ</t>
+				<reset>L</reset>
+				<p>lj</p>
+				<t>ǉ</t>
+				<t>Lj</t>
+				<t>ǈ</t>
+				<t>LJ</t>
+				<t>Ǉ</t>
+				<reset>N</reset>
+				<p>nj</p>
+				<t>ǌ</t>
+				<t>Nj</t>
+				<t>ǋ</t>
+				<t>NJ</t>
+				<t>Ǌ</t>
+				<reset>S</reset>
+				<p>š</p>
+				<t>Š</t>
+				<reset>Z</reset>
+				<p>ž</p>
+				<t>Ž</t>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

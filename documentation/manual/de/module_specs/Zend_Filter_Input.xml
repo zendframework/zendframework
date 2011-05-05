@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
+<!-- EN-Revision: 22743 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -350,7 +350,8 @@ if ($input->hasUnknown()) {
                 zurück, in dem die Regelnamen einem Array von Fehler Identifizierern entsprechen.
                 Fehler Identifizierer sind fixe Strings, um Gründe für eine fehlgeschlagene
                 Prüfung, zu identifizieren, wobei Nachrichten selbst geändert werden können. Siehe
-                <xref linkend="zend.validate.introduction.using" /> für mehr Informationen.
+                <link linkend="zend.validate.introduction.using">dieses Kapitel</link> für mehr
+                Informationen.
             </para>
 
             <para>

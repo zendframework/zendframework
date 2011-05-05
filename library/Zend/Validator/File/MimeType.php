@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Validator,
  * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MimeType extends Validator\AbstractValidator
@@ -193,7 +193,7 @@ class MimeType extends Validator\AbstractValidator
         } else if (!(class_exists('finfo', false))) {
             $this->_magicfile = null;
             throw new Exception\InvalidArgumentException('Magicfile can not be set. There is no finfo extension installed');
-        } else if (!is_readable($file)) {
+        } else if (!is_file($file) || !is_readable($file)) {
             throw new Exception\InvalidArgumentException('The given magicfile can not be read');
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,13 +25,13 @@
 namespace ZendTest\Measure;
 use Zend\Measure;
 use Zend\Registry;
-use Zend\Locale\Data;
+use Zend\Locale\Data\Cldr;
 
 /**
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
@@ -43,7 +43,7 @@ class TemperatureTest extends \PHPUnit_Framework_TestCase
             $registry = Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        Data::removeCache();
+        Cldr::removeCache();
 
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');

@@ -1,0 +1,1 @@
+{"one":{"one":1},"two":{"two":2},"multiinherit":{"_extends":["one","two"]}}

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -46,7 +46,7 @@ use Zend\Navigation\AbstractPage,
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Sitemap extends AbstractHelper
@@ -313,7 +313,7 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $curDoc = $this->view->url();
+            $curDoc = $this->getView()->broker('url')->direct();
             $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
             $url = rtrim($this->getServerUrl(), '/') . '/'
                  . $curDoc 
@@ -383,7 +383,7 @@ class Sitemap extends AbstractHelper
             }
 
             // get absolute url from page
-            if (!$url = $this->url($page)) {
+            if (!$url = $this->getView()->broker('url')->direct($page->toArray())) {
                 // skip page if it has no url (rare case)
                 continue;
             }

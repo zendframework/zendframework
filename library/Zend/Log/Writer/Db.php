@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,29 +32,31 @@ use Zend\Log;
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Db extends AbstractWriter
 {
     /**
      * Database adapter instance
+     *
      * @var Zend_Db_Adapter
      */
-    private $_db;
+    protected $_db;
 
     /**
      * Name of the log table in the database
+     *
      * @var string
      */
-    private $_table;
+    protected $_table;
 
     /**
      * Relates database columns names to log data field keys.
      *
      * @var null|array
      */
-    private $_columnMap;
+    protected $_columnMap;
 
     /**
      * Class constructor
@@ -62,6 +64,7 @@ class Db extends AbstractWriter
      * @param Zend_Db_Adapter $db   Database adapter instance
      * @param string $table         Log table in database
      * @param array $columnMap
+     * @return void
      */
     public function __construct($db, $table, $columnMap = null)
     {
@@ -72,7 +75,7 @@ class Db extends AbstractWriter
 
     /**
      * Create a new instance of Zend_Log_Writer_Db
-     * 
+     *
      * @param  array|\Zend\Config\Config $config
      * @return \Zend\Log\Writer\Db
      */
@@ -98,8 +101,9 @@ class Db extends AbstractWriter
 
     /**
      * Formatting is not possible on this writer
-     * 
+     *
      * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return void
      */
     public function setFormatter(\Zend\Log\Formatter $formatter)
     {

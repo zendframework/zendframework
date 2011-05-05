@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4263 $"/>
+		<generation date="$Date: 2009-09-22 15:39:01 -0500 (Tue, 22 Sep 2009) $"/>
+		<language type="kok"/>
+	</identity>
+		<collations  validSubLocales="kok_IN">
+<collation type="standard">
+<settings normalization="on"/>
+<rules>
+<reset>ॐ</reset>
+<p>ं</p>
+<s>ँ</s>
+<p>ः</p>
+<reset>ह</reset>
+<p>ळ</p>
+<p>क्ष</p>
+
+</rules>
+</collation>
+		</collations>
+</ldml>
+

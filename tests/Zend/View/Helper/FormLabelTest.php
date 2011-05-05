@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace ZendTest\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -47,7 +47,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\View();
+        $this->view = new \Zend\View\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormLabel();
         $this->helper->setView($this->view);
     }
@@ -71,15 +71,15 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
     public function testFormLabelWithInputNeedingEscapesUsesViewEscaping()
     {
         $label = $this->helper->direct('<&foo', '</bar>');
-        $expected = '<label for="' . $this->view->escape('<&foo') . '">' . $this->view->escape('</bar>') . '</label>';
+        $expected = '<label for="' . $this->view->vars()->escape('<&foo') . '">' . $this->view->vars()->escape('</bar>') . '</label>';
         $this->assertEquals($expected, $label);
     }
 
     public function testViewIsSetAndSameAsCallingViewObject()
     {
-        $this->assertTrue(isset($this->helper->view));
-        $this->assertTrue($this->helper->view instanceof \Zend\View\ViewEngine);
-        $this->assertSame($this->view, $this->helper->view);
+        $view = $this->helper->getView();
+        $this->assertTrue($view instanceof \Zend\View\Renderer);
+        $this->assertSame($this->view, $view);
     }
 
     public function testAttribsAreSet()

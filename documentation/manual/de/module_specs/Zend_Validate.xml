@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
-<!-- Reviewed: 21992 -->
+<!-- EN-Revision: 22743 -->
+<!-- Reviewed: 22743 -->
 <sect1 id="zend.validate.introduction">
     <title>Einführung</title>
 
@@ -227,7 +227,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
         <para>
             Die Klasse <classname>Zend_Filter_Input</classname> erlaubt es, auch mehrfache Filter und
             Prüfklassen zu instanzieren und bei Bedarf aufzurufen, um Sets von Eingabedaten zu
-            bearbeiten. Siehe <xref linkend="zend.filter.input" />.
+            bearbeiten. Siehe <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
         <sect3 id="zend.validate.introduction.static.namespaces">

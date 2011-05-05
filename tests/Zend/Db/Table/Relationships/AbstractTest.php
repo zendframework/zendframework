@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Db\Table;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Db
  * @group      Zend_Db_Table
@@ -143,7 +143,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $result = $parentRow1->nonExistantMethod();
             $this->fail('Expected to catch Zend_Db_Table_Row_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\RowException', $e,
                 'Expecting object of type Zend_Db_Table_Row_Exception got '.get_class($e));
             $this->assertEquals("Unrecognized method 'nonExistantMethod()'", $e->getMessage());
@@ -672,7 +672,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table->getReference('\ZendTest\Db\Table\TestAsset\TableAccounts', 'Nonexistent');
             $this->fail('Expected to catch Zend\Db\Table\Exception for nonexistent reference rule');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend\Db\Table\Exception got '.get_class($e));
         }
@@ -680,7 +680,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table->getReference('Nonexistent', 'Reporter');
             $this->fail('Expected to catch Zend\Db\Table\Exception for nonexistent rule tableClass');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend\Db\Table\Exception got '.get_class($e));
         }
@@ -688,7 +688,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table->getReference('Nonexistent');
             $this->fail('Expected to catch Zend\Db\Table\Exception for nonexistent rule tableClass');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend\Db\Table\Exception got '.get_class($e));
         }
@@ -887,7 +887,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $parentRow->$account_name = 'clarabell';
         try {
             $parentRow->save();
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('Failed with unexpected '.get_class($e).': '.$e->getMessage());
         }
 
@@ -929,7 +929,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $bug_id = $childRow1->$bug_id_column;
         try {
             $childRow1->save();
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('Failed with unexpected '.get_class($e).': '.$e->getMessage());
         }
 
@@ -967,7 +967,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $row1->$product_name = 'AmigaOS';
         try {
             $row1->save();
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('Failed with unexpected '.get_class($e).': '.$e->getMessage());
         }
 

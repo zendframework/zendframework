@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Measure
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Locale\Math;
  * @uses       Zend\Registry
  * @category   Zend
  * @package    Zend_Measure
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractMeasure
@@ -68,9 +68,9 @@ abstract class AbstractMeasure
     /**
      * Zend\Measure\MeasureAbstract is an abstract class for the different measurement types
      *
-     * @param  $value  mixed  - Value as string, integer, real or float
-     * @param  $type   type   - OPTIONAL a measure type f.e. Zend\Measure\Length::METER
-     * @param  $locale locale - OPTIONAL a Zend\Zend\Locale Type
+     * @param  mixed       $value  Value as string, integer, real or float
+     * @param  string      $type   OPTIONAL a measure type f.e. Zend\Measure\Length::METER
+     * @param  Zend_Locale $locale OPTIONAL a Zend\Zend\Locale Type
      * @throws Zend\Measure\Exception
      */
     public function __construct($value, $type = null, $locale = null)

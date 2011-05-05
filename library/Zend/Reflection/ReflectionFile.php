@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\Reflection;
  * @uses       \Zend\Reflection\ReflectionFunction
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ReflectionFile implements \Reflector
@@ -60,12 +60,12 @@ class ReflectionFile implements \Reflector
      * @var string
      */
     protected $_namespace       = null;
-    
+
     /**
      * @var string[]
      */
     protected $_uses            = array();
-    
+
     /**
      * @var string[]
      */
@@ -113,20 +113,12 @@ class ReflectionFile implements \Reflector
      * Find realpath of file based on include_path
      *
      * @param  string $fileName
-     * @return string
+     * @return string|boolean On success, the resolved absolute filename is returned.
+     *                        On failure, FALSE is returned.
      */
     public static function findRealpathInIncludePath($fileName)
     {
-        $includePaths = \Zend\Loader::explodeIncludePath();
-        while (count($includePaths) > 0) {
-            $filePath = array_shift($includePaths) . DIRECTORY_SEPARATOR . $fileName;
-
-            if ( ($foundRealpath = realpath($filePath)) !== false) {
-                break;
-            }
-        }
-
-        return $foundRealpath;
+        return stream_resolve_include_path($fileName);
     }
 
     /**
@@ -199,24 +191,24 @@ class ReflectionFile implements \Reflector
 
     /**
      * getNamespace()
-     * 
+     *
      * @return string
      */
     public function getNamespace()
     {
         return $this->_namespace;
     }
-    
+
     /**
      * getUses()
-     * 
+     *
      * @return array
      */
     public function getUses()
     {
         return $this->_uses;
     }
-    
+
     /**
      * Return the reflection classes of the classes found inside this file
      *
@@ -396,7 +388,7 @@ class ReflectionFile implements \Reflector
                 case T_NAMESPACE:
                     $namespaceTrapped = true;
                     continue;
-                    
+
                 // use
                 case T_USE:
                     $useTrapped = true;
@@ -405,12 +397,12 @@ class ReflectionFile implements \Reflector
                         'as' => ''
                         );
                     continue;
-                    
+
                 // use (as)
                 case T_AS:
                     $useAsTrapped = true;
                     continue;
-                    
+
                 // Functions
                 case T_FUNCTION:
                     if ($openBraces == 0) {
@@ -437,12 +429,12 @@ class ReflectionFile implements \Reflector
                     break;
             }
         }
-        
+
         // cleanup uses
         foreach ($this->_uses as $useIndex => $useInfo) {
             $this->_uses[$useIndex]['namespace'] = rtrim($this->_uses[$useIndex]['namespace'], '\\');
             $this->_uses[$useIndex]['as'] = rtrim($this->_uses[$useIndex]['as'], '\\');
-            
+
             if ($this->_uses[$useIndex]['as'] == '') {
                 if (($lastSeparator = strrpos($this->_uses[$useIndex]['namespace'], '\\')) !== false) {
                     $this->_uses[$useIndex]['asResolved'] = substr($this->_uses[$useIndex]['namespace'], $lastSeparator+1);
@@ -452,9 +444,9 @@ class ReflectionFile implements \Reflector
             } else {
                 $this->_uses[$useIndex]['asResolved'] = $this->_uses[$useIndex]['as'];
             }
-            
+
         }
-        
+
 
         $this->_endLine = count(explode("\n", $this->_contents));
     }

@@ -40,7 +40,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ]]></programlisting>
 
         <para>
-            Any objects thus decoded are returned as <code>StdClass</code> objects
+            Any objects thus decoded are returned as <classname>StdClass</classname> objects
             with properties corresponding to the key/value pairs in the <acronym>JSON</acronym>
             notation.
         </para>
@@ -105,9 +105,10 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             object. It implements the value object pattern and is immutable. You can set the
             javascript expression as the first constructor argument. By default
             <classname>Zend_Json::encode</classname> does not encode javascript callbacks, you have
-            to pass the option <code>'enableJsonExprFinder' = true</code> into the
-            <code>encode</code> function. If enabled the expression support works for all nested
-            expressions in large object structures. A usage example would look like:
+            to pass the option <property>enableJsonExprFinder</property> and set it to
+            <constant>TRUE</constant> into the <methodname>encode</methodname> function. If
+            enabled the expression support works for all nested expressions in large object
+            structures. A usage example would look like:
         </para>
 
         <programlisting language="php"><![CDATA[

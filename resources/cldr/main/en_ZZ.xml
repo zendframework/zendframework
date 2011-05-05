@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5015 $"/>
+		<generation date="$Date: 2010-08-17 20:30:00 -0700 (Tue, 17 August 2010) $"/>
+		<language type="en"/>
+		<territory type="ZZ"/>
+	</identity>
+	<localeDisplayNames>
+		<types>
+			<type type="roc" key="calendar">en: Minguo Calendar; alts: Republic of China Calendar, Republican Calendar; origin 1912</type>
+		</types>
+	</localeDisplayNames>
+</ldml>

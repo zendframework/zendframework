@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Db\Statement\PDO;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Db
  * @group      Zend_Db_Statement
@@ -65,7 +65,7 @@ abstract class AbstractPdoTest extends AbstractTest
         try {
             $stmt->nextRowset();
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals('SQLSTATE[IM001]: Driver does not support this function: driver does not support multiple rowsets', $e->getMessage());
@@ -93,7 +93,7 @@ abstract class AbstractPdoTest extends AbstractTest
         try {
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertTrue($e->hasChainedException(), 'Missing Chained Exception');

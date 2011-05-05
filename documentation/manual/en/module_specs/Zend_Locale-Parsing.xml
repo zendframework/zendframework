@@ -67,26 +67,26 @@ print $number; // will return 13524.678
                 Since <methodname>getNumber($value, array $options = array())</methodname> can
                 normalize extremely large numbers, check the result carefully before using finite
                 precision calculations, such as ordinary <acronym>PHP</acronym> math operations. For
-                example, <code>if ((string)int_val($number) != $number) { use <ulink
+                example, <command>if ((string)int_val($number) != $number) {<command> use <ulink
                     url="http://www.php.net/bc">BCMath</ulink> or <ulink
-                    url="http://www.php.net/gmp">GMP</ulink></code>. Most <acronym>PHP</acronym>
+                    url="http://www.php.net/gmp">GMP</ulink>. Most <acronym>PHP</acronym>
                 installations support the BCMath extension.
             </para>
 
             <para>
                 Also, the precision of the resulting decimal representation can be rounded to a
                 desired length with <methodname>getNumber()</methodname> with the option
-                <code>'precision'</code>. If no precision is given, no rounding occurs. Use only
-                <acronym>PHP</acronym> integers to specify the precision.
+                '<property>precision</property>'. If no precision is given, no rounding occurs. Use
+                only <acronym>PHP</acronym> integers to specify the precision.
             </para>
 
             <para>
                 If the resulting decimal representation should be truncated to a desired length
-                instead of rounded the option <code>'number_format'</code> can be used instead.
-                Define the length of the decimal representation with the desired length of zeros.
-                The result will then not be rounded. So if the defined precision within
-                <code>number_format</code> is zero the value "1.6" will return "1", not "2. See the
-                example nearby:
+                instead of rounded the option '<property>number_format</property>' can be used
+                instead. Define the length of the decimal representation with the desired length
+                of zeros. The result will then not be rounded. So if the defined precision within
+                <property>number_format</property> is zero the value "1.6" will return "1", not "2.
+                See the example nearby:
             </para>
 
             <example id="zend.locale.number.normalize.precision.example-1">

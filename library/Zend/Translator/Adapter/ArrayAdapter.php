@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Translator
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,7 +24,7 @@
 namespace Zend\Translator\Adapter;
 
 use Zend\Translator\Adapter as TranslationAdapter,
-	Zend\Translator\Adapter\Exception\InvalidArgumentException;
+    Zend\Translator\Adapter\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
@@ -32,13 +32,11 @@ use Zend\Translator\Adapter as TranslationAdapter,
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translator
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ArrayAdapter extends TranslationAdapter
 {
-    private $_data = array();
-
     /**
      * Load translation data
      *
@@ -51,7 +49,7 @@ class ArrayAdapter extends TranslationAdapter
      */
     protected function _loadTranslationData($data, $locale, array $options = array())
     {
-        $this->_data = array();
+        $result = array();
         if (!is_array($data)) {
             if (file_exists($data)) {
                 ob_start();
@@ -59,16 +57,17 @@ class ArrayAdapter extends TranslationAdapter
                 ob_end_clean();
             }
         }
+
         if (!is_array($data)) {
             throw new InvalidArgumentException("Error including array or file '".$data."'");
         }
 
-        if (!isset($this->_data[$locale])) {
-            $this->_data[$locale] = array();
+        if (!isset($result[$locale])) {
+            $result[$locale] = array();
         }
 
-        $this->_data[$locale] = $data + $this->_data[$locale];
-        return $this->_data;
+        $result[$locale] = $data + $result[$locale];
+        return $result;
     }
 
     /**

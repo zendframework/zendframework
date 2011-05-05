@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,13 +23,13 @@ namespace ZendTest\View;
 
 use Zend\View\PhpRenderer,
     Zend\View\TemplatePathStack,
-    Zend\Stdlib\FilterChain;
+    Zend\Filter\FilterChain;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  */
@@ -47,7 +47,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesTemplatePathStackAsDefaultResolver()
     {
-        $this->assertType('Zend\View\TemplatePathStack', $this->renderer->resolver());
+        $this->assertInstanceOf('Zend\View\TemplatePathStack', $this->renderer->resolver());
     }
 
     public function testCanSetResolverInstance()
@@ -66,7 +66,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesVariablesObjectForVarsByDefault()
     {
-        $this->assertType('Zend\View\Variables', $this->renderer->vars());
+        $this->assertInstanceOf('Zend\View\Variables', $this->renderer->vars());
     }
 
     public function testCanSpecifyArrayAccessForVars()
@@ -91,13 +91,13 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesHelperBrokerByDefault()
     {
-        $this->assertType('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
     }
 
     public function testPassingArgumentToBrokerReturnsHelperByThatName()
     {
         $helper = $this->renderer->broker('doctype');
-        $this->assertType('Zend\View\Helper\Doctype', $helper);
+        $this->assertInstanceOf('Zend\View\Helper\Doctype', $helper);
     }
 
     public function testPassingStringOfUndefinedClassToSetBrokerRaisesException()
@@ -109,7 +109,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testPassingValidStringClassToSetBrokerCreatesBroker()
     {
         $this->renderer->setBroker('Zend\View\HelperBroker');
-        $this->assertType('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
     }
 
     public function invalidBrokers()
@@ -140,7 +140,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesFilterChainByDefault()
     {
-        $this->assertType('Zend\Stdlib\FilterChain', $this->renderer->getFilterChain());
+        $this->assertInstanceOf('Zend\Filter\FilterChain', $this->renderer->getFilterChain());
     }
 
     public function testMaySetExplicitFilterChainInstance()

@@ -29,7 +29,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         There will be times, however, that you need to provide extra
-        information -- GET and POST variables, COOKIE information, etc. You can
+        information -- <constant>GET</constant> and POST variables, COOKIE information, etc. You can
         populate the request with that information:
     </para>
 

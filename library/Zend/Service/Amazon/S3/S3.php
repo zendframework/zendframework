@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -39,7 +39,7 @@ use Zend\Service\Amazon,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://docs.amazonwebservices.com/AmazonS3/2006-03-01/
  */
@@ -320,7 +320,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             return $firstpart;
         }
 
-        return $firstpart.'/'.join('/', array_map('rawurlencode', $nameparts));
+        return $firstpart.'/'.implode('/', array_map('rawurlencode', $nameparts));
     }
 
     /**

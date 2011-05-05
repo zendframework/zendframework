@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage PHP
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Reflection;
  * @uses       \Zend\CodeGenerator\Php\Exception
  * @category   Zend
  * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PhpFile extends AbstractPhp
@@ -496,10 +496,6 @@ class PhpFile extends AbstractPhp
             $output = '<?php' . self::LINE_FEED;
         }
         
-        if ($namespace = $this->getNamespace()) {
-            // @todo
-        }
-
         // if there are markers, put the body into the output
         $body = $this->getBody();
         if (preg_match('#/\* Zend_CodeGenerator_Php_File-(.*?)Marker:#', $body)) {
@@ -521,6 +517,11 @@ class PhpFile extends AbstractPhp
         // newline
         $output .= self::LINE_FEED;
 
+        // namespace, if any
+        if ($namespace = $this->getNamespace()) {
+            $output .= sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
+        }
+
         // process required files
         // @todo marker replacement for required files
         $requiredFiles = $this->getRequiredFiles();
@@ -530,6 +531,20 @@ class PhpFile extends AbstractPhp
             }
 
             $output .= self::LINE_FEED;
+        }
+
+        // process import statements
+        $uses = $this->getUses();
+        if (!empty($uses)) {
+            foreach ($uses as $use) {
+                list($import, $alias) = $use;
+                if (null === $alias) {
+                    $output .= sprintf('use %s;%s', $import, self::LINE_FEED);
+                } else {
+                    $output .= sprintf('use %s as %s;%s', $import, $alias, self::LINE_FEED);
+                }
+            }
+            $output.= self::LINE_FEED;
         }
 
         // process classes

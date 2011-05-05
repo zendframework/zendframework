@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,21 +23,18 @@
  */
 namespace Zend\Stdlib;
 
+use Serializable;
+
 /**
  * Serializable version of SplQueue
  *
  * @category   Zend
  * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SplQueue extends \SplQueue
+class SplQueue extends \SplQueue implements Serializable
 {
-    /**
-     * @var array Used for serialization
-     */
-    private $_data = array();
-
     /**
      * Return an array representing the queue
      * 
@@ -55,24 +52,23 @@ class SplQueue extends \SplQueue
     /**
      * Serialize
      * 
-     * @return array
+     * @return string
      */
-    public function __sleep()
+    public function serialize()
     {
-        $this->_data = $this->toArray();
-        return array('_data');
+        return serialize($this->toArray());
     }
 
     /**
      * Unserialize
      * 
+     * @param  string $data
      * @return void
      */
-    public function __wakeup()
+    public function unserialize($data)
     {
-        foreach ($this->_data as $item) {
+        foreach (unserialize($data) as $item) {
             $this->push($item);
         }
-        $this->_data = array();
     }
 }

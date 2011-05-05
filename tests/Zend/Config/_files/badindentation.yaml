@@ -1,0 +1,6 @@
+all: 
+  hostname: all
+  name: thisname
+  foo:
+    bar
+     baz

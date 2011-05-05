@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -40,7 +40,7 @@ use Zend\Validator\Hostname as HostnameValidator,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @todo Implement proxy settings
  */
@@ -135,7 +135,7 @@ abstract class AbstractProtocol
         $this->_validHost->addValidator(new HostnameValidator(HostnameValidator::ALLOW_ALL));
 
         if (!$this->_validHost->isValid($host)) {
-            throw new Protocol\Exception\RuntimeException(join(', ', $this->_validHost->getMessages()));
+            throw new Protocol\Exception\RuntimeException(implode(', ', $this->_validHost->getMessages()));
         }
 
         $this->_host = $host;

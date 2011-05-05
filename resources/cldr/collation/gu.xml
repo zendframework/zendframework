@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 5024 $" />
+		<generation date="$Date: 2010-08-20 15:00:12 -0500 (Fri, 20 Aug 2010) $" />
+		<language type="gu" />
+	</identity>
+	<collations validSubLocales="gu_IN">
+		<collation type="standard">
+			<settings normalization="on" />
+			<rules>
+				<reset>ૐ</reset>
+				<p>ં</p>
+				<s>ઁ</s>
+				<p>ઃ</p>
+			</rules>
+		</collation>
+	</collations>
+</ldml>

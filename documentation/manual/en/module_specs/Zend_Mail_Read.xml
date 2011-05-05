@@ -341,7 +341,7 @@ echo '</pre>';
             class of <classname>Zend_Mail_Message</classname>, so you have the same methods:
             <methodname>getHeader()</methodname>, <methodname>getHeaders()</methodname>,
             <methodname>getContent()</methodname>, <methodname>getPart()</methodname>,
-            <code>isMultipart</code> and the properties for headers.
+            <methodname>isMultipart()</methodname> and the properties for headers.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -356,9 +356,10 @@ echo $part->getContent();
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Mail_Part</classname> also implements <code>RecursiveIterator</code>,
-            which makes it easy to scan through all parts. And for easy output, it also implements
-            the magic method <methodname>__toString()</methodname>, which returns the content.
+            <classname>Zend_Mail_Part</classname> also implements
+            <classname>RecursiveIterator</classname>, which makes it easy to scan through all
+            parts. And for easy output, it also implements the magic method
+            <methodname>__toString()</methodname>, which returns the content.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -457,18 +458,18 @@ if (!$message->hasFlag('$SpamTested')) {
             All storages, except Pop3, support folders, also called mailboxes. The interface
             implemented by all storages supporting folders is called
             <classname>Zend_Mail_Storage_Folder_Interface</classname>. Also all of these classes
-            have an additional optional parameter called <code>folder</code>, which is the folder
-            selected after login, in the constructor.
+            have an additional optional parameter called <property>folder</property>, which is the
+            folder selected after login, in the constructor.
         </para>
 
         <para>
             For the local storages you need to use separate classes called
             <classname>Zend_Mail_Storage_Folder_Mbox</classname> or
             <classname>Zend_Mail_Storage_Folder_Maildir</classname>. Both need one parameter called
-            <code>dirname</code> with the name of the base dir. The format for maildir is as defined
-            in maildir++ (with a dot as default delimiter), Mbox is a directory hierarchy with Mbox
-            files. If you don't have a Mbox file called INBOX in your Mbox base dir you need to set
-            another folder in the constructor.
+            <property>dirname</property> with the name of the base dir. The format for maildir is as
+            defined in maildir++ (with a dot as default delimiter), Mbox is a directory hierarchy
+            with Mbox files. If you don't have a Mbox file called INBOX in your Mbox base dir you
+            need to set another folder in the constructor.
         </para>
 
         <para>
@@ -507,7 +508,7 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             With the method getFolders($root = null) you can get the folder hierarchy starting with
             the root folder or the given folder. It's returned as an instance of
             <classname>Zend_Mail_Storage_Folder</classname>, which implements
-            <code>RecursiveIterator</code> and all children are also instances of
+            <classname>RecursiveIterator</classname> and all children are also instances of
             <classname>Zend_Mail_Storage_Folder</classname>. Each of these instances has a local and
             a global name returned by the methods <methodname>getLocalName()</methodname> and
             <methodname>getGlobalName()</methodname>. The global name is the absolute name from the

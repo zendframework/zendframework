@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -15,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +27,7 @@ namespace Zend\Filter;
  * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StripTags extends AbstractFilter
@@ -243,7 +242,14 @@ class StripTags extends AbstractFilter
             $pos   = strrpos($value, '<!--');
             $start = substr($value, 0, $pos);
             $value = substr($value, $pos);
-            $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value);
+
+            // If there is no comment closing tag, strip whole text
+            if (!preg_match('/--\s*>/s', $value)) {
+                $value = '';
+            } else {
+                $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value);
+            }
+
             $value = $start . $value;
         }
 

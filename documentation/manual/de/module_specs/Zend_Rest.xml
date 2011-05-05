@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 22741 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.introduction">
     <title>Einführung</title>
@@ -8,8 +8,8 @@
         REST Web Services verwenden ein service-spezifisches <acronym>XML</acronym> Format. Dieser
         ad-hoc Standard bedeutet, dass die Art des Zugriffs auf einen REST Web Service, für jeden
         Service unterschiedlich ist. REST Web Services verwenden typischerweise
-        <acronym>URL</acronym> Parameter (GET Daten) oder Pfad Informationen für die Anfrage von
-        Daten und POST Daten für das Senden von Daten.
+        <acronym>URL</acronym> Parameter (<constant>GET</constant> Daten) oder Pfad Informationen
+        für die Anfrage von Daten und POST Daten für das Senden von Daten.
     </para>
 
     <para>

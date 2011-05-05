@@ -1,0 +1,135 @@
+<?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Stdlib
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+
+namespace ZendTest\Stdlib;
+
+use Zend\Stdlib\PriorityQueue,
+    SplPriorityQueue;
+
+/**
+ * @category   Zend
+ * @package    Zend_Stdlib
+ * @subpackage UnitTests
+ * @group      Zend_Stdlib
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class PriorityQueueTest extends \PHPUnit_Framework_TestCase
+{
+    public function setUp()
+    {
+        $this->queue = new PriorityQueue();
+        $this->queue->insert('foo', 3);
+        $this->queue->insert('bar', 4);
+        $this->queue->insert('baz', 2);
+        $this->queue->insert('bat', 1);
+    }
+
+    public function testSerializationAndDeserializationShouldMaintainState()
+    {
+        $s = serialize($this->queue);
+        $unserialized = unserialize($s);
+        $count = count($this->queue);
+        $this->assertSame($count, count($unserialized), 'Expected count ' . $count . '; received ' . count($unserialized));
+
+        $expected = array();
+        foreach ($this->queue as $item) {
+            $expected[] = $item;
+        }
+        $test = array();
+        foreach ($unserialized as $item) {
+            $test[] = $item;
+        }
+        $this->assertSame($expected, $test, 'Expected: ' . var_export($expected, 1) . "\nReceived:" . var_export($test, 1));
+    }
+
+    public function testRetrievingQueueAsArrayReturnsDataOnlyByDefault()
+    {
+        $expected = array(
+            'foo',
+            'bar',
+            'baz',
+            'bat',
+        );
+        $test     = $this->queue->toArray();
+        $this->assertSame($expected, $test, var_export($test, 1));
+    }
+
+    public function testCanCastToArrayOfPrioritiesOnly()
+    {
+        $expected = array(
+            3,
+            4,
+            2,
+            1,
+        );
+        $test     = $this->queue->toArray(PriorityQueue::EXTR_PRIORITY);
+        $this->assertSame($expected, $test, var_export($test, 1));
+    }
+
+    public function testCanCastToArrayOfDataPriorityPairs()
+    {
+        $expected = array(
+            array('data' => 'foo', 'priority' => 3),
+            array('data' => 'bar', 'priority' => 4),
+            array('data' => 'baz', 'priority' => 2),
+            array('data' => 'bat', 'priority' => 1),
+        );
+        $test     = $this->queue->toArray(PriorityQueue::EXTR_BOTH);
+        $this->assertSame($expected, $test, var_export($test, 1));
+    }
+
+    public function testCanIterateMultipleTimesAndReceiveSameResults()
+    {
+        $expected = array('bar', 'foo', 'baz', 'bat');
+
+        for ($i = 1; $i < 3; $i++) {
+            $test = array();
+            foreach ($this->queue as $item) {
+                $test[] = $item;
+            }
+            $this->assertEquals($expected, $test, 'Failed at iteration ' . $i);
+        }
+    }
+
+    public function testCanRemoveItemFromQueue()
+    {
+        $this->queue->remove('baz');
+        $expected = array('bar', 'foo', 'bat');
+        $test = array();
+        foreach ($this->queue as $item) {
+            $test[] = $item;
+        }
+        $this->assertEquals($expected, $test);
+    }
+
+    public function testCanTestForExistenceOfItemInQueue()
+    {
+        $this->assertTrue($this->queue->contains('foo'));
+        $this->assertFalse($this->queue->contains('foobar'));
+    }
+
+    public function testCanTestForExistenceOfPriorityInQueue()
+    {
+        $this->assertTrue($this->queue->hasPriority(3));
+        $this->assertFalse($this->queue->hasPriority(1000));
+    }
+}

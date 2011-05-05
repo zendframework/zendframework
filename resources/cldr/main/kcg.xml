@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4763 $"/>
+		<generation date="$Date: 2010-02-27 01:03:37 -0600 (Sat, 27 Feb 2010) $"/>
+		<language type="kcg"/>
+	</identity>
+	<characters>
+		<exemplarCharacters>[a {a\u0331} b {ch} {chy} d e f g {gb} {gh} {ghw} {ghy} i {i\u0331} j {jhy} k {kh} {kp} l m n {ng} {ny} o p r s {sh} {shy} t {ts} u v w y z]</exemplarCharacters>
+		<exemplarCharacters type="index">[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z]</exemplarCharacters>
+	</characters>
+	<dates>
+		<calendars>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">Juw</month>
+							<month type="2">Swi</month>
+							<month type="3">Tsa</month>
+							<month type="4">Nya</month>
+							<month type="5">Tsw</month>
+							<month type="6">Ata</month>
+							<month type="7">Ana</month>
+							<month type="8">Ari</month>
+							<month type="9">Aku</month>
+							<month type="10">Swa</month>
+							<month type="11">Man</month>
+							<month type="12">Mas</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">Zwat Juwung</month>
+							<month type="2">Zwat Swiyang</month>
+							<month type="3">Zwat Tsat</month>
+							<month type="4">Zwat Nyai</month>
+							<month type="5">Zwat Tswon</month>
+							<month type="6">Zwat Ataah</month>
+							<month type="7">Zwat Anatat</month>
+							<month type="8">Zwat Arinai</month>
+							<month type="9">Zwat Akubunyung</month>
+							<month type="10">Zwat Swag</month>
+							<month type="11">Zwat Mangjuwang</month>
+							<month type="12">Zwat Swag-Ma-Suyang</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">Lad</day>
+							<day type="mon">Tan</day>
+							<day type="tue">Tal</day>
+							<day type="wed">Lar</day>
+							<day type="thu">Lam</day>
+							<day type="fri">Jum</day>
+							<day type="sat">Asa</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">Ladi</day>
+							<day type="mon">Tanii</day>
+							<day type="tue">Talata</day>
+							<day type="wed">Larba</day>
+							<day type="thu">Lamit</day>
+							<day type="fri">Juma</day>
+							<day type="sat">Asabat</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<eras>
+					<eraNames>
+						<era type="0">Gabanin Miladi</era>
+						<era type="1">Miladi</era>
+					</eraNames>
+					<eraAbbr>
+						<era type="0">GM</era>
+						<era type="1">M</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE, y MMMM dd</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>y MMMM d</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="medium">
+						<dateFormat>
+							<pattern>y MMM d</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern>yy/MM/dd</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+				<timeFormats>
+					<timeFormatLength type="full">
+						<timeFormat>
+							<pattern>HH:mm:ss zzzz</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="long">
+						<timeFormat>
+							<pattern>HH:mm:ss z</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="medium">
+						<timeFormat>
+							<pattern>HH:mm:ss</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="short">
+						<timeFormat>
+							<pattern>HH:mm</pattern>
+						</timeFormat>
+					</timeFormatLength>
+				</timeFormats>
+			</calendar>
+		</calendars>
+	</dates>
+	<numbers>
+		<currencies>
+			<currency type="NGN">
+				<displayName>Nera</displayName>
+			</currency>
+		</currencies>
+	</numbers>
+</ldml>
+

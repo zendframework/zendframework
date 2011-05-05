@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use \Zend\Log\Formatter\Xml as XmlFormatter;
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -63,7 +63,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $line = $f->format(array('message' => 'foo', 'priority' => 42));
 
         $sxml = @simplexml_load_string($line);
-        $this->assertType('SimpleXMLElement', $sxml, 'Formatted XML is invalid');
+        $this->assertInstanceOf('SimpleXMLElement', $sxml, 'Formatted XML is invalid');
     }
 
     /**
@@ -89,5 +89,42 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $line = $f->format(array('message' => '&amp', 'priority' => 42));
 
         $this->assertContains('&amp;amp', $line);
+    }
+
+    public function testConstructorWithArray()
+    {
+        $options = array(
+            'rootElement' => 'log',
+            'elementMap' => array(
+                'word' => 'message',
+                'priority' => 'priority'
+            )
+        );
+        $event = array(
+            'message' => 'tottakai',
+            'priority' => 4
+        );
+        $expected = '<log><word>tottakai</word><priority>4</priority></log>';
+
+        $formatter = new XmlFormatter($options);
+        $output = $formatter->format($event);
+        $this->assertContains($expected, $output);
+        $this->assertEquals('UTF-8', $formatter->getEncoding());
+    }
+
+    /**
+     * @group ZF-9176
+     */
+    public function testFactory()
+    {
+        $options = array(
+            'rootElement' => 'log',
+            'elementMap' => array(
+                'timestamp' => 'timestamp',
+                'response' => 'message'
+            )
+        );
+        $formatter = XmlFormatter::factory($options);
+        $this->assertInstanceOf('Zend\Log\Formatter\Xml', $formatter);
     }
 }

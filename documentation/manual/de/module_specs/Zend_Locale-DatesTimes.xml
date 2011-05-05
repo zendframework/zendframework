@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
+<!-- EN-Revision: 22752 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
     <title>Arbeiten mit Daten und Zeiten</title>
@@ -215,14 +215,14 @@ Array
         <para>
             Da <methodname>getDate()</methodname> "lokalisierbar" ist, ist die Angabe von
             <varname>$locale</varname> ausreichend um Datumseingaben einem Gebietsschema Format
-            zuzuordnen. Die Option '<code>fix_date</code>' verwendet einfache Tests um
+            zuzuordnen. Die Option '<property>fix_date</property>' verwendet einfache Tests um
             herauszufinden ob Tag oder Monat ungültig sind, um dann eine Heuristik anzuwenden die
             versucht alle gefundenen Probleme zu korrigieren. Anzumerken ist auch die Verwendung von
             '<constant>Zend_Locale_Format::STANDARD</constant>' als Wert für
-            '<code>date_format</code>' bei der Funktion <methodname>setOptions()</methodname> um zu
-            verhindern dass das klassenweit gesetzte standardmäßige Datumsformat verwendet wird. Das
-            zwingt getDate dazu das standardmäßige Datumsformat dieser <varname>$locale</varname> zu
-            verwenden.
+            '<property>date_format</property>' bei der Funktion
+            <methodname>setOptions()</methodname> um zu verhindern dass das klassenweit gesetzte
+            standardmäßige Datumsformat verwendet wird. Das zwingt getDate dazu das standardmäßige
+            Datumsformat dieser <varname>$locale</varname> zu verwenden.
         </para>
 
         <example id="zend.locale.date.normalize.example-2">
@@ -382,8 +382,8 @@ print_r ($date);
         </note>
 
         <para>
-            Die Option '<code>fix_date</code>' benutzt einfache Tests um herauszufinden ob der Tag
-            oder das Monat ungültig sind, und wendet dann eine Heuristik an die versucht die
+            Die Option '<property>fix_date</property>' benutzt einfache Tests um herauszufinden ob
+            der Tag oder das Monat ungültig sind, und wendet dann eine Heuristik an die versucht die
             erkannten Probleme zu beheben. <methodname>getDate()</methodname> erkennt und behebt
             automatisch einige Problem mit falschen Eingabe, wie zum Beispiel ein falsch plaziertes
             Jahr:
@@ -412,11 +412,11 @@ print_r ($date);
                 $locale))</methodname> kann benutzt werden um zu prüfen ob eine Zeichenkette alle
             erwarteten Datumsteile enthält. Die Methode <methodname>checkDateFormat()</methodname>
             benutzt <methodname>getDate()</methodname> aber ohne die Verwendung der Option
-            <code>'fixdate'</code> um zu verhindern das <constant>TRUE</constant> zurück gegeben
-            wird wenn die Eingabe nicht dem Datumsformat entspricht. Wenn Fehler in der Eingabe
-            gefunden werden, wie zum Beispiel getauschte Werte für Monat oder Jahr, wendet die
-            Option <code>'fixdate'</code> eine Heuristik an um das "richtige" Datum zu eruieren
-            bevor dieses auf Gültigkeit geprüft wird.
+            '<property>fixdate</property>' um zu verhindern das <constant>TRUE</constant> zurück
+            gegeben wird wenn die Eingabe nicht dem Datumsformat entspricht. Wenn Fehler in der
+            Eingabe gefunden werden, wie zum Beispiel getauschte Werte für Monat oder Jahr, wendet
+            die Option '<property>fixdate</property>' eine Heuristik an um das "richtige" Datum zu
+            eruieren bevor dieses auf Gültigkeit geprüft wird.
         </para>
 
         <example id="zend.locale.date.test.example-1">
@@ -473,8 +473,8 @@ if (Zend_Locale_Format::getTime('13:44:42',
         <para>
             <methodname>checkDateFormat()</methodname> kann verwendet werden um zu prüfen ob eine
             Zeichenkette eine gültige Zeit enthält. Die Verwendung ist genau die gleiche wie beim
-            Prüfen von Daten und <code>date_format</code> sollte die Teile enthalten von denen
-            erwartet wird das man Sie erhält.
+            Prüfen von Daten und <property>date_format</property> sollte die Teile enthalten von
+            denen erwartet wird das man Sie erhält.
         </para>
 
         <example id="zend.locale.time.test.example-1">

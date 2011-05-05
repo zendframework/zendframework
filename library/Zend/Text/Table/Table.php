@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,18 +24,14 @@
 namespace Zend\Text\Table;
 
 use Zend\Config,
-    Zend\Loader\PluginLoader;
+    Zend\Loader\PrefixPathLoader;
 
 /**
  * Zend_Text_Table enables developers to create tables out of characters
  *
- * @uses      \Zend\Loader\PluginLoader
- * @uses      \Zend\Text\Table\Exception
- * @uses      \Zend\Text\Table\Column
- * @uses      \Zend\Text\Table\Row
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Table
@@ -93,7 +89,7 @@ class Table
     /**
      * Plugin loader for decorators
      *
-     * @var Zend\Loader\ShortNameLocater
+     * @var Zend\Loader\ShortNameLocator
      */
     protected $_pluginLoader = null;
 
@@ -252,14 +248,14 @@ class Table
     /**
      * Get the plugin loader for decorators
      *
-     * @return \Zend\Loader\ShortNameLocater
+     * @return \Zend\Loader\ShortNameLocator
      */
     public function getPluginLoader()
     {
         if ($this->_pluginLoader === null) {
             $prefix     = 'Zend\Text\Table\Decorator\\';
             $pathPrefix = 'Zend/Text/Table/Decorator/';
-            $this->_pluginLoader = new PluginLoader(array($prefix => $pathPrefix));
+            $this->_pluginLoader = new PrefixPathLoader(array($prefix => $pathPrefix));
         }
 
         return $this->_pluginLoader;

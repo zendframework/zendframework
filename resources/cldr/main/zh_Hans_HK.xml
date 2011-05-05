@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ldml>
+	<identity>
+		<version number="$Revision: 4772 $"/>
+		<generation date="$Date: 2010-02-28 19:38:08 -0600 (Sun, 28 Feb 2010) $"/>
+		<language type="zh"/>
+		<script type="Hans"/>
+		<territory type="HK"/>
+	</identity>
+	<localeDisplayNames>
+		<types>
+			<type type="big5han" key="collation">繁体中文笔划顺序</type>
+			<type type="gb2312han" key="collation">简体中文拼音顺序</type>
+		</types>
+	</localeDisplayNames>
+	<dates>
+		<calendars>
+			<calendar type="gregorian">
+				<dateTimeFormats>
+					<availableFormats>
+						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
+						<dateFormatItem id="yMEd">yyyy-M-dEEE</dateFormatItem>
+						<dateFormatItem id="yyyyM">yyyy年M月</dateFormatItem>
+					</availableFormats>
+					<intervalFormats>
+						<intervalFormatItem id="Hmv">
+							<greatestDifference id="a">vHH:mm至HH:mm</greatestDifference>
+							<greatestDifference id="H">vHH:mm至HH:mm</greatestDifference>
+							<greatestDifference id="m">vHH:mm至HH:mm</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Hv">
+							<greatestDifference id="H">vHH至HH</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M–M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="y">
+							<greatestDifference id="y">y–y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMEd">
+							<greatestDifference id="d">y年M月d日E至M月d日E</greatestDifference>
+						</intervalFormatItem>
+					</intervalFormats>
+				</dateTimeFormats>
+			</calendar>
+		</calendars>
+		<timeZoneNames>
+			<fallbackFormat>{1}（{0}）</fallbackFormat>
+			<metazone type="Acre">
+				<long>
+					<standard>阿克里时间</standard>
+				</long>
+				<short>
+					<standard>ACT（阿克里）</standard>
+					<daylight>ACST（阿克里）</daylight>
+				</short>
+			</metazone>
+			<metazone type="Aktyubinsk">
+				<long>
+					<standard>阿尔卑斯时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Almaty">
+				<long>
+					<standard>阿拉木图时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Amazon">
+				<long>
+					<standard>亚马逊时间</standard>
+				</long>
+			</metazone>
+			<metazone type="America_Central">
+				<long>
+					<generic>中部时间</generic>
+				</long>
+			</metazone>
+			<metazone type="America_Eastern">
+				<long>
+					<generic>东部时间</generic>
+				</long>
+			</metazone>
+			<metazone type="America_Mountain">
+				<long>
+					<generic>山区时间</generic>
+				</long>
+			</metazone>
+			<metazone type="America_Pacific">
+				<long>
+					<generic>太平洋时间</generic>
+				</long>
+			</metazone>
+			<metazone type="Anadyr">
+				<long>
+					<standard>阿纳德尔时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Aqtau">
+				<long>
+					<standard>阿克图时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Aqtobe">
+				<long>
+					<standard>阿克托别时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Argentina">
+				<long>
+					<standard>阿根廷时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Argentina_Western">
+				<long>
+					<standard>阿根廷西部时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Armenia">
+				<long>
+					<standard>亚美尼亚时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Ashkhabad">
+				<long>
+					<standard>阿什哈巴德时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Azerbaijan">
+				<long>
+					<standard>阿塞拜疆时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Baku">
+				<long>
+					<standard>巴库时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Bangladesh">
+				<long>
+					<standard>孟加拉时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Bhutan">
+				<long>
+					<standard>不丹时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Borneo">
+				<long>
+					<standard>婆罗洲时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Brasilia">
+				<long>
+					<standard>巴西利亚时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Brunei">
+				<long>
+					<standard>文莱达鲁萨兰时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Chile">
+				<long>
+					<standard>智利时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Choibalsan">
+				<long>
+					<standard>乔巴山时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Dacca">
+				<long>
+					<standard>达卡时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Dushanbe">
+				<long>
+					<standard>杜尚别时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Dutch_Guiana">
+				<long>
+					<standard>荷属圭亚那时间</standard>
+				</long>
+			</metazone>
+			<metazone type="East_Timor">
+				<long>
+					<standard>东帝汶时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Ecuador">
+				<long>
+					<standard>厄瓜多尔时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Frunze">
+				<long>
+					<standard>伏龙芝时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Georgia">
+				<long>
+					<standard>格鲁吉亚时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Greenland_Central">
+				<long>
+					<standard>格陵兰中部时间</standard>
+					<daylight>格陵兰中部夏令时间</daylight>
+				</long>
+			</metazone>
+			<metazone type="Greenland_Eastern">
+				<long>
+					<standard>格林兰东部时间</standard>
+					<daylight>格陵兰东部时间</daylight>
+				</long>
+			</metazone>
+			<metazone type="Greenland_Western">
+				<long>
+					<standard>格林兰西部时间</standard>
+					<daylight>格陵兰西部时间</daylight>
+				</long>
+			</metazone>
+			<metazone type="Indonesia_Central">
+				<long>
+					<standard>印度尼西亚中部时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Indonesia_Eastern">
+				<long>
+					<standard>印度尼西亚东部时间</standard>
+				</long>
+			</metazone>
+			<metazone type="Indonesia_Western">
+				<long>
+					<standard>印度尼西亚西部时间</standard>
+				</long>
+			</metazone>
+		</timeZoneNames>
+	</dates>
+	<numbers>
+		<currencies>
+			<currency type="HKD">
+				<symbol>$</symbol>
+			</currency>
+		</currencies>
+	</numbers>
+</ldml>
+

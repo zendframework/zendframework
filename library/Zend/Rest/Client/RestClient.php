@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\Uri;
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RestClient extends \Zend\Service\AbstractService
@@ -237,7 +237,7 @@ class RestClient extends \Zend\Service\AbstractService
             return new Result($response->getBody());
         } else {
             // More than one arg means it's definitely a Zend_Rest_Server
-            if (sizeof($args) == 1) {
+            if (count($args) == 1) {
                 // Uses first called function name as method name
                 if (!isset($this->_data['method'])) {
                     $this->_data['method'] = $method;
@@ -246,7 +246,7 @@ class RestClient extends \Zend\Service\AbstractService
                 $this->_data[$method]  = $args[0];
             } else {
                 $this->_data['method'] = $method;
-                if (sizeof($args) > 0) {
+                if (count($args) > 0) {
                     foreach ($args as $key => $arg) {
                         $key = 'arg' . $key;
                         $this->_data[$key] = $arg;

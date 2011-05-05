@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,14 +23,14 @@
  */
 namespace Zend\Session;
 
-use Zend\SignalSlot\SignalSlot;
+use Zend\EventManager\EventCollection;
 
 /**
  * Session manager interface
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Manager
@@ -55,7 +55,7 @@ interface Manager
     public function forgetMe();
     public function expireSessionCookie();
 
-    public function setValidatorChain(SignalSlot $chain);
+    public function setValidatorChain(EventCollection $chain);
     public function getValidatorChain();
     public function isValid();
 }

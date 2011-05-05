@@ -140,21 +140,30 @@
                           <entry><emphasis>cycleCheck</emphasis></entry>
                           <entry><type>boolean</type></entry>
                           <entry>false</entry>
-                          <entry>See <xref linkend="zend.json.advanced.objects1"/></entry>
+
+                          <entry>
+                              See <link linkend="zend.json.advanced.objects1">this section</link>
+                          </entry>
                       </row>
 
                       <row>
                           <entry><emphasis>objectDecodeType</emphasis></entry>
                           <entry><type>Zend_Json::TYPE_*</type></entry>
                           <entry>Zend_Json::TYPE_ARRAY</entry>
-                          <entry>See <xref linkend= "zend.json.advanced.objects1"/></entry>
+
+                          <entry>
+                              See <link linkend= "zend.json.advanced.objects1">this section</link>
+                          </entry>
                       </row>
 
                       <row>
                           <entry><emphasis>enableJsonExprFinder</emphasis></entry>
                           <entry><type>boolean</type></entry>
                           <entry>false</entry>
-                          <entry>See <xref linkend= "zend.json.advanced.expr"/></entry>
+
+                          <entry>
+                              See <link linkend= "zend.json.advanced.expr">this section</link>
+                          </entry>
                       </row>
                   </tbody>
              </tgroup>

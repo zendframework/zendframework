@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,17 +23,17 @@
  */
 namespace Zend\Session;
 
-use Zend\SignalSlot\Signals;
+use Zend\EventManager\EventManager;
 
 /**
- * Zend_Session_Validator_Interface
+ * Validator chain for validating sessions
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain extends Signals
+class ValidatorChain extends EventManager
 {
     /**
      * @var Storage
@@ -63,20 +63,30 @@ class ValidatorChain extends Signals
     /**
      * Attach a handler to the session validator chain
      * 
-     * @param  string $topic 
-     * @param  string|object|Closure $context 
-     * @param  null|string $handler 
-     * @return Zend\Stdlib\SignalHandler
+     * @param  string $event
+     * @param  callback $context 
+     * @param  int $priority 
+     * @return Zend\Stdlib\CallbackHandler
      */
-    public function connect($topic, $context, $handler = null)
+    public function attach($event, $callback, $priority = 1)
     {
+        $context = null;
+        if ($callback instanceof Validator) {
+            $context = $callback;
+        } elseif (is_array($callback)) {
+            $test = array_shift($callback);
+            if ($test instanceof Validator) {
+                $context = $test;
+            }
+            array_unshift($callback, $test);
+        }
         if ($context instanceof Validator) {
             $data = $context->getData();
             $name = $context->getName();
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::connect($topic, $context, $handler);
+        $handle = parent::connect($event, $callback, $priority);
         return $handle;
     }
 

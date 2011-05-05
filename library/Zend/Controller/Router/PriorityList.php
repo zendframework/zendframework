@@ -96,7 +96,6 @@ class PriorityList implements \Iterator, \Countable
             return;
         }
         
-        $this->sorted = false;
         $this->count--;
 
         unset($this->routes[$name]);

@@ -28,13 +28,15 @@ abstract class Rackspace
 {
     const US_AUTH_URL= 'https://auth.api.rackspacecloud.com/v1.0';
     const UK_AUTH_URL= 'https://lon.auth.api.rackspacecloud.com/v1.0';
+    const API_FORMAT= 'json';
     const USER_AGENT= 'Zend\Service\Rackspace';
     const ACCOUNT_CONTAINER_COUNT= "X-account-container-count";
     const ACCOUNT_BYTES_USED= "X-account-bytes-used";
     const CONTAINER_OBJ_COUNT= "X-account-object-count";
     const CONTAINER_BYTES_USE= "X-Container-Bytes-Used";
-    const METADATA_HEADER= "X-Object-Meta-";
-    const MANIFEST_HEADER= "X-Object-Manifest";
+    const METADATA_OBJECT_HEADER= "X-Object-Meta-";
+    const METADATA_CONTAINER_HEADER= "X-Container-Meta-";
+    const MANIFEST_OBJECT_HEADER= "X-Object-Manifest";
     const CDN_URI= "X-CDN-URI";
     const CDN_SSL_URI= "X-CDN-SSL-URI";
     const CDN_ENABLED= "X-CDN-Enabled";
@@ -61,6 +63,7 @@ abstract class Rackspace
      */
     protected $_httpClient;
     protected $_errorMsg;
+    protected $_errorStatus;
     protected $_storageUrl;
     protected $_cdnUrl;
 
@@ -147,8 +150,21 @@ abstract class Rackspace
         }
         return $this->_token;
     }
+    /**
+     * Get the error msg of the last REST call
+     *
+     * @return string
+     */
     public function getErrorMsg() {
         return $this->_errorMsg;
+    }
+    /**
+     * Get the error status of the last REST call
+     * 
+     * @return strig 
+     */
+    public function getErrorStatus() {
+        return $this->_errorStatus;
     }
     /**
      * get the HttpClient instance
@@ -172,15 +188,19 @@ abstract class Rackspace
      * @param string $body
      * @return Zend\Http\Response
      */
-    protected function _httpCall($url,$method,$headers,$get=null,$body=null)
+    protected function _httpCall($url,$method,$headers=array(),$get=array(),$body=null)
     {
         $client = $this->getHttpClient();
         $client->resetParameters(true);
+        if (!array_key_exists(self::AUTH_USER_HEADER, $headers)) {
+            $headers[self::AUTH_TOKEN]= $this->getToken();
+        } 
         $client->setHeaders($headers);
         $client->setMethod($method);
-        if (!empty($get)) {
-            $client->setParameterGet($get);
+        if (!array_key_exists('format', $get)) {
+            $get['format']= self::API_FORMAT;
         }
+        $client->setParameterGet($get);
         if (!empty($body)) {
             $client->setRawData($body);
         }
@@ -206,6 +226,7 @@ abstract class Rackspace
             return true;
         } else {
             $this->_errorMsg= $result->getBody();
+            $this->_errorStatus= $result->getStatus();
         }
         return false;
     } 

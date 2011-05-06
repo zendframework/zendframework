@@ -22,6 +22,7 @@
 namespace Zend\Service\Rackspace;
 
 use Zend\Service\Rackspace\Rackspace as RackspaceAbstract,
+        Zend\Service\Rackspace\Files\Container,
         Zend\Service\Rackspace\Files\ContainerList,
         Zend\Service\Rackspace\Files\ObjectList,
         Zend\Http\Client as HttpClient,
@@ -81,25 +82,12 @@ class Files extends RackspaceAbstract
     /**
      * Get all the containers
      *
-     * @param integer $limit
-     * @param string $marker
-     * @return ContainerList
+     * @param array $options
+     * @return ContainerList|boolean
      */
-    public function getContainers($limit=0,$marker=null)
+    public function getContainers($options=array())
     {
-        $get=array(
-            'format' => self::API_FORMAT
-        );
-        if (!empty($limit)) {
-            $get['limit']= $limit;
-        }
-        if (!empty($marker)) {
-            $get['marker']= $marker;
-        }
-        $headers=array(
-            self::AUTH_TOKEN => $this->getToken()
-        );
-        $result= $this->_httpCall($this->getStorageUrl(),HttpClient::GET,$headers,$get);
+        $result= $this->_httpCall($this->getStorageUrl(),HttpClient::GET,null,$options);
         if ($result->isSuccessful()) {
             return new ContainerList($this,json_decode($result->getBody(),true));
         }
@@ -115,13 +103,7 @@ class Files extends RackspaceAbstract
      */
     public function getInfoContainers()
     {
-        $get=array(
-            'format' => self::API_FORMAT
-        );
-        $headers=array(
-            self::AUTH_TOKEN => $this->getToken()
-        );
-        $result= $this->_httpCall($this->getStorageUrl(),HttpClient::HEAD,$headers,$get);
+        $result= $this->_httpCall($this->getStorageUrl(),HttpClient::HEAD);
         if ($result->isSuccessful()) {
             $this->_countContainers= $result->getHeader(self::ACCOUNT_CONTAINER_COUNT);
             $this->_sizeContainers= $result->getHeader(self::ACCOUNT_BYTES_USED);
@@ -139,32 +121,86 @@ class Files extends RackspaceAbstract
      * Get all the files of a container
      *
      * @param string $container
+     * @param array $options
+     * @return  ContainerObject|boolean
      */
-    public function getFiles($container)
+    public function getFiles($container,$options=array())
     {
         if (empty($container)) {
-            throw new InvalidArgumentException("You must pass the container name");
+            throw new InvalidArgumentException("You must specify the container name");
         }
-        $get=array(
-            'format' => self::API_FORMAT
-        );
-        $headers=array(
-            self::AUTH_TOKEN => $this->getToken()
-        );
-        $container= urlencode($container);
-        $result= $this->_httpCall($this->getStorageUrl().'/'.$container,HttpClient::GET,$headers,$get);
+        $result= $this->_httpCall($this->getStorageUrl().'/'.rawurlencode($container),HttpClient::GET,null,$options);
         if ($result->isSuccessful()) {
             return new ObjectList($this,json_decode($result->getBody(),true));
         }
         return false;
     }
-    public function createContainer($container)
+    /**
+     * Create a container
+     *
+     * @param string $container
+     * @param array $metadata
+     * @return boolean
+     */
+    public function createContainer($container,$metadata=array())
     {
-
+        if (empty($container)) {
+            throw new InvalidArgumentException("You must specify the container name");
+        }
+        $headers=array();
+        if (!empty($metadata)) {
+            foreach ($metadata as $key => $value) {
+                $headers[self::METADATA_CONTAINER_HEADER.rawurlencode($key)]= rawurlencode($value);
+            }
+        }
+        $result= $this->_httpCall($this->getStorageUrl().'/'.rawurlencode($container),HttpClient::PUT,$headers);
+        $status= $result->getStatus();
+        switch ($status) {
+            case '201': // break intentionally omitted
+                $data= array(
+                    'name' => $container,
+                    'count' => 0,
+                    'bytes' => 0
+                );
+                return new Container($this,$data);
+            case '202':
+                $this->_errorMsg= 'The container already exists';
+                break;
+            default:
+                $this->_errorMsg= $result->getBody();
+                break;
+        }
+        $this->_errorStatus= $result->getStatus();
+        return false;
     }
+    /**
+     * Delete a container (only if it's empty)
+     *
+     * @param sting $container
+     * @return boolean
+     */
     public function deleteContainer($container)
     {
-        
+        if (empty($container)) {
+            throw new InvalidArgumentException("You must specify the container name");
+        }
+        $result= $this->_httpCall($this->getStorageUrl().'/'.rawurlencode($container),HttpClient::DELETE);
+        $status= $result->getStatus();
+        switch ($status) {
+            case '204': // break intentionally omitted
+                return true;
+            case '409':
+                $this->_errorMsg= 'The container is not empty, I cannot delete it.';
+                break;
+            case '404':
+                $this->_errorMsg= 'The container was not found.';
+                break;
+            default:
+                $this->_errorMsg= $result->getBody();
+                break;
+        }
+        $this->_errorStatus= $result->getStatus();
+        return false;
     }
     public function getMetadataContainer($container)
     {

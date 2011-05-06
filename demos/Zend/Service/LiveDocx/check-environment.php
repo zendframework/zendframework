@@ -36,11 +36,15 @@ $counter = 1;
 
 // -----------------------------------------------------------------------------
 
-printf('%sEnvironment Checker for Zend Framework LiveDocx Component%s%s', PHP_EOL, PHP_EOL, PHP_EOL);
+echo PHP_EOL;
+
+Helper::printLine('Environment Checker for Zend Framework LiveDocx Component' . PHP_EOL . PHP_EOL);
+
+Helper::printLine('If requested by technical support, please send the entire output of this script to the support engineers. The information contained within is vital to debug your environment. Thank you.' . PHP_EOL . PHP_EOL);
 
 // -----------------------------------------------------------------------------
 
-Helper::printCheckEnvironmentLine($counter, sprintf('Checking OS (%s)', PHP_OS), TEST_PASS);
+Helper::printLineToc($counter, sprintf('Checking OS (%s)', PHP_OS), TEST_PASS);
 
 $counter++;
 
@@ -53,13 +57,13 @@ if (1 === version_compare(PHP_VERSION, MIN_PHP_VERSION)) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, sprintf('Checking PHP version (%s)', PHP_VERSION), $result);
+Helper::printLineToc($counter, sprintf('Checking PHP version (%s)', PHP_VERSION), $result);
 
 $counter++;
 
 // -----------------------------------------------------------------------------
 
-Helper::printCheckEnvironmentLine($counter, sprintf('Checking memory limit (%s)', ini_get('memory_limit')), TEST_PASS);
+Helper::printLineToc($counter, sprintf('Checking memory limit (%s)', ini_get('memory_limit')), TEST_PASS);
 
 $counter++;
 
@@ -72,7 +76,7 @@ if (in_array('http', stream_get_wrappers())) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking HTTP stream wrapper', $result);
+Helper::printLineToc($counter, 'Checking HTTP stream wrapper', $result);
 
 $counter++;
 
@@ -85,7 +89,7 @@ if (in_array('https', stream_get_wrappers())) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking HTTPS stream wrapper', $result);
+Helper::printLineToc($counter, 'Checking HTTPS stream wrapper', $result);
 
 $counter++;
 
@@ -98,7 +102,7 @@ if (true === method_exists('\Zend\Debug', 'dump')) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking Zend Framework path', $result);
+Helper::printLineToc($counter, 'Checking Zend Framework path', $result);
 
 $counter++;
 
@@ -111,22 +115,26 @@ if (1 === Version::compareVersion(PHP_VERSION, MIN_PHP_VERSION)) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, sprintf('Checking Zend Framework version (%s)', Version::VERSION), $result);
+Helper::printLineToc($counter, sprintf('Checking Zend Framework version (%s)', Version::VERSION), $result);
 
 $counter++;
 
 // -----------------------------------------------------------------------------
 
 if (extension_loaded('openssl')) {
-    $result = TEST_PASS;
+    $version = OPENSSL_VERSION_TEXT;
+    $result  = TEST_PASS;
 } else {
-    $result = TEST_FAIL;
-    $failed = true;
+    $version = 'N/A';
+    $result  = TEST_FAIL;
+    $failed  = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking OpenSSL extension', $result);
+Helper::printLineToc($counter, sprintf('Checking OpenSSL extension (%s)', $version), $result);
 
 $counter++;
+
+unset($version);
 
 // -----------------------------------------------------------------------------
 
@@ -137,7 +145,7 @@ if (extension_loaded('soap')) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking SOAP extension', $result);
+Helper::printLineToc($counter, 'Checking SOAP extension', $result);
 
 $counter++;
 
@@ -150,7 +158,7 @@ if (extension_loaded('dom')) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking DOM extension', $result);
+Helper::printLineToc($counter, 'Checking DOM extension', $result);
 
 $counter++;
 
@@ -163,22 +171,26 @@ if (extension_loaded('simplexml')) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking SimpleXML extension', $result);
+Helper::printLineToc($counter, 'Checking SimpleXML extension', $result);
 
 $counter++;
 
 // -----------------------------------------------------------------------------
 
 if (extension_loaded('libxml')) {
-    $result = TEST_PASS;
+    $version = LIBXML_DOTTED_VERSION;
+    $result  = TEST_PASS;
 } else {
-    $result = TEST_FAIL;
-    $failed = true;
+    $version = 'N/A';
+    $result  = TEST_FAIL;
+    $failed  = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking libXML extension', $result);
+Helper::printLineToc($counter, sprintf('Checking libXML extension (%s)', $version), $result);
 
 $counter++;
+
+unset($version);
 
 // -----------------------------------------------------------------------------
 
@@ -197,11 +209,11 @@ if ($httpResponse->isSuccessful()) {
 
     $simplexml = new SimpleXMLElement($httpResponse->getBody());
     foreach ($keys as $key => $value) {
-        Helper::printCheckEnvironmentLine($counter, sprintf('Checking your %s (%s)', $keys[$key], $simplexml->$key), TEST_PASS);
+        Helper::printLineToc($counter, sprintf('Checking your %s (%s)', $keys[$key], $simplexml->$key), TEST_PASS);
         $counter++;
     }
 } else {
-    Helper::printCheckEnvironmentLine($counter, 'Checking your geo data', TEST_FAIL);
+    Helper::printLineToc($counter, 'Checking your geo data', TEST_FAIL);
     $failed = true;
 }
 
@@ -220,7 +232,7 @@ if ($httpClient->request()->isSuccessful()) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, sprintf('Checking backend WSDL (%01.2fs)', $duration), $result);
+Helper::printLineToc($counter, sprintf('Checking backend WSDL (%01.2fs)', $duration), $result);
 
 $counter++;
 
@@ -234,7 +246,7 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME') &&
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, 'Checking backend credentials are defined', $result);
+Helper::printLineToc($counter, 'Checking backend credentials are defined', $result);
 
 $counter++;
 
@@ -263,7 +275,7 @@ if (is_null($errorMessage)) {
     $failed = true;
 }
 
-Helper::printCheckEnvironmentLine($counter, sprintf('Logging into backend service (%01.2fs)', $duration), $result);
+Helper::printLineToc($counter, sprintf('Logging into backend service (%01.2fs)', $duration), $result);
 
 $counter++;
 
@@ -285,7 +297,7 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL') &&
         $failed   = true;
     }
 
-    Helper::printCheckEnvironmentLine($counter, sprintf('[PREMIUM] Checking backend WSDL (%01.2fs)', $duration), $result);
+    Helper::printLineToc($counter, sprintf('[PREMIUM] Checking backend WSDL (%01.2fs)', $duration), $result);
 
     $counter++;
 }
@@ -322,7 +334,7 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME')     &&
         $failed = true;
     }
 
-    Helper::printCheckEnvironmentLine($counter, sprintf('[PREMIUM] Logging into backend service (%01.2fs)', $duration), $result);
+    Helper::printLineToc($counter, sprintf('[PREMIUM] Logging into backend service (%01.2fs)', $duration), $result);
 
     $counter++;
 }

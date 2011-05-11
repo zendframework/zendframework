@@ -351,7 +351,7 @@ class Container
      * Enable the CDN for the container
      *
      * @param integer $ttl
-     * @return array|boolean
+     * @return boolean
      */
     public function enableCdn($ttl=RackspaceFiles::CDN_TTL_MIN) {
         $result= $this->_service->enableCdnContainer($this->getName(),$ttl);
@@ -361,8 +361,9 @@ class Container
            $this->_logRetention= true;
            $this->_cdnUri= $result['cdn_uri'];
            $this->_cdnUriSsl= $result['cdn_uri_ssl'];
+           return true;
         }
-        return $result;
+        return false;
     }
     /**
      * Disable the CDN for the container

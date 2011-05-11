@@ -59,17 +59,30 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     protected $_service;
     /**
+     * The container name of the object list
+     * 
+     * @var string
+     */
+    protected $_container;
+    /**
      * __construct()
      *
      * @param  array $list
      * @return boolean
      */
-    public function __construct(RackspaceFiles $service,$list = array())
+    public function __construct(RackspaceFiles $service,$list,$container)
     {
-        if (!($service instanceof RackspaceFiles) || !is_array($list)) {
-            throw new InvalidArgumentException("You must pass a RackspaceFiles object and an array");
+        if (!($service instanceof RackspaceFiles)) {
+            throw new InvalidArgumentException("You must pass a RackspaceFiles object");
+        }
+        if (empty($list)) {
+            throw new InvalidArgumentException("You must pass an array of data objects");
+        }
+        if (empty($container)) {
+            throw new InvalidArgumentException("You must pass the container of the object list");
         }
         $this->_service= $service;
+        $this->_container= $container;
         $this->_constructFromArray($list);
     }
     /**
@@ -81,6 +94,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     private function _constructFromArray(array $list)
     {
         foreach ($list as $obj) {
+            $obj['container']= $this->_container;
             $this->_addObject(new Object($this->_service,$obj));
         }
     }

@@ -30,21 +30,6 @@ abstract class Rackspace
     const UK_AUTH_URL= 'https://lon.auth.api.rackspacecloud.com/v1.0';
     const API_FORMAT= 'json';
     const USER_AGENT= 'Zend\Service\Rackspace';
-    const ACCOUNT_CONTAINER_COUNT= "X-account-container-count";
-    const ACCOUNT_BYTES_USED= "X-account-bytes-used";
-    const CONTAINER_OBJ_COUNT= "X-account-object-count";
-    const CONTAINER_BYTES_USE= "X-Container-Bytes-Used";
-    const METADATA_OBJECT_HEADER= "X-Object-Meta-";
-    const METADATA_CONTAINER_HEADER= "X-Container-Meta-";
-    const MANIFEST_OBJECT_HEADER= "X-Object-Manifest";
-    const CDN_URI= "X-CDN-URI";
-    const CDN_SSL_URI= "X-CDN-SSL-URI";
-    const CDN_ENABLED= "X-CDN-Enabled";
-    const CDN_LOG_RETENTION= "X-Log-Retention";
-    const CDN_ACL_USER_AGENT= "X-User-Agent-ACL";
-    const CDN_ACL_REFERRER= "X-Referrer-ACL";
-    const CDN_TTL= "X-TTL";
-    const CDNM_URL= "X-CDN-Management-Url";
     const STORAGE_URL= "X-Storage-Url";
     const AUTH_TOKEN= "X-Auth-Token";
     const AUTH_USER_HEADER= "X-Auth-User";
@@ -52,21 +37,59 @@ abstract class Rackspace
     const AUTH_USER_HEADER_LEGACY= "X-Storage-User";
     const AUTH_KEY_HEADER_LEGACY= "X-Storage-Pass";
     const AUTH_TOKEN_LEGACY= "X-Storage-Token";
-    const CDN_EMAIL= "X-Purge-Email";
-    
+    const CDNM_URL= "X-CDN-Management-Url";
+    /**
+     * Rackspace Key
+     *
+     * @var string
+     */
     protected $_key;
+    /**
+     * Rackspace account name
+     *
+     * @var string
+     */
     protected $_user;
+    /**
+     * Token of authentication
+     *
+     * @var string
+     */
     protected $_token;
+    /**
+     * Authentication URL
+     *
+     * @var string
+     */
     protected $_authUrl;
     /**
      * @var Zend\Http\Client
      */
     protected $_httpClient;
+    /**
+     * Error Msg
+     *
+     * @var string
+     */
     protected $_errorMsg;
+    /**
+     * HTTP error status
+     *
+     * @var string
+     */
     protected $_errorStatus;
+    /**
+     * Storage URL
+     *
+     * @var string
+     */
     protected $_storageUrl;
+    /**
+     * CDN URL
+     *
+     * @var string
+     */
     protected $_cdnUrl;
-
     /**
      * __construct()
      *
@@ -92,21 +115,38 @@ abstract class Rackspace
         $this->setKey($key);
         $this->setAuthUrl($authUrl);
     }
-
+    /**
+     * Get User account
+     *
+     * @return string
+     */
     public function getUser()
     {
         return $this->_user;
     }
-
+    /**
+     * Get user key
+     *
+     * @return string
+     */
     public function getKey()
     {
         return $this->_key;
     }
-
+    /**
+     * Get authentication URL
+     *
+     * @return string
+     */
     public function getAuthUrl()
     {
         return $this->_authUrl;
     }
+    /**
+     * Get the storage URL
+     *
+     * @return string|boolean
+     */
     public function getStorageUrl() {
         if (empty($this->_storageUrl)) {
             if (!$this->authenticate()) {
@@ -115,32 +155,62 @@ abstract class Rackspace
         }
         return $this->_storageUrl;
     }
+    /**
+     * Get the CDN URL
+     *
+     * @return string|boolean
+     */
     public function getCdnUrl() {
         if (empty($this->_cdnUrl)) {
             if (!$this->authenticate()) {
                 return false;
             }
         }
-        return $this->_cdnUrl();
+        return $this->_cdnUrl;
     }
+    /**
+     * Set the user account
+     *
+     * @param string $user
+     * @return void
+     */
     public function setUser($user)
     {
         if (!empty($user)) {
             $this->_user = $user;
         }
     }
+    /**
+     * Set the authentication key
+     *
+     * @param string $key
+     * @return void
+     */
     public function setKey($key)
     {
         if (!empty($key)) {
             $this->_key = $key;
         }
     }
+    /**
+     * Set the Authentication URL
+     *
+     * @param string $url
+     * @return void
+     */
     public function setAuthUrl($url)
     {
         if (!empty($url) && in_array($url, array(self::US_AUTH_URL, self::UK_AUTH_URL))) {
             $this->_authUrl = $url;
+        } else {
+            throw new Exception\InvalidArgumentException("The authentication URL is not valid");
         }
     }
+    /**
+     * Get the authentication token
+     *
+     * @return string
+     */
     public function getToken()
     {
         if (empty($this->_token)) {
@@ -179,6 +249,15 @@ abstract class Rackspace
         return $this->_httpClient;
     }
     /**
+     * Return true is the last call was successful
+     * 
+     * @return boolean 
+     */
+    public function isSuccessful()
+    {
+        return ($this->_errorMsg=='');
+    }
+    /**
      * HTTP call
      *
      * @param string $url
@@ -192,12 +271,12 @@ abstract class Rackspace
     {
         $client = $this->getHttpClient();
         $client->resetParameters(true);
-        if (!array_key_exists(self::AUTH_USER_HEADER, $headers)) {
+        if (empty($headers[self::AUTH_USER_HEADER])) {
             $headers[self::AUTH_TOKEN]= $this->getToken();
         } 
         $client->setHeaders($headers);
         $client->setMethod($method);
-        if (!array_key_exists('format', $get)) {
+        if (empty($get['format'])) {
             $get['format']= self::API_FORMAT;
         }
         $client->setParameterGet($get);
@@ -205,6 +284,8 @@ abstract class Rackspace
             $client->setRawData($body);
         }
         $client->setUri($url);
+        $this->_errorMsg='';
+        $this->_errorStatus='';
         return $client->request();
     }
     /**
@@ -224,10 +305,9 @@ abstract class Rackspace
             $this->_storageUrl= $result->getHeader(self::STORAGE_URL);
             $this->_cdnUrl= $result->getHeader(self::CDNM_URL);
             return true;
-        } else {
-            $this->_errorMsg= $result->getBody();
-            $this->_errorStatus= $result->getStatus();
         }
+        $this->_errorMsg= $result->getBody();
+        $this->_errorStatus= $result->getStatus();
         return false;
     } 
 }

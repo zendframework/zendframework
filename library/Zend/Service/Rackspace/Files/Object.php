@@ -26,28 +26,71 @@ use Zend\Service\Rackspace\Files as RackspaceFiles,
 
 class Object
 {
+    /**
+     * Name of the object
+     *
+     * @var string
+     */
     protected $_name;
+    /**
+     * MD5 value of the object's content
+     *
+     * @var string
+     */
     protected $_hash;
+    /**
+     * Size in bytes of the object's content
+     *
+     * @var integer
+     */
     protected $_size;
+    /**
+     * Content type of the object's content
+     *
+     * @var <type>
+     */
     protected $_contentType;
+    /**
+     * Date of the last modified of the object
+     *
+     * @var string
+     */
     protected $_lastModified;
-
-    public function getName() {
-        return $this->_name;
-    }
-    public function getHash() {
-        return $this->_hash;
-    }
-    public function getSize() {
-        return $this->_size;
-    }
-    public function getContentType() {
-        return $this->_contentType;
-    }
-    public function getLastModified() {
-        return $this->_lastModified;
-    }
-
+    /**
+     * Object content
+     *
+     * @var string
+     */
+    protected $_file;
+    /**
+     * Name of the container where the object is stored
+     *
+     * @var string
+     */
+    protected $_container;
+    /**
+     * If it's true means we called the getMetadata API
+     *
+     * @var boolean
+     */
+    private $_getMetadata = false;
+    /**
+     * __construct()
+     * 
+     * You must pass the RackspaceFiles object of the caller and an associative
+     * array with the keys "name", "container", "hash", "bytes", "content_type",
+     * "last_modified", "file" where:
+     * name= name of the object
+     * container= name of the container where the object is stored
+     * hash= the MD5 of the object's content
+     * bytes= size in bytes of the object's content
+     * content_type= content type of the object's content
+     * last_modified= date of the last modified of the object
+     * file= content of the object
+     * 
+     * @param RackspaceFiles $service
+     * @param array $data 
+     */
     public function __construct(RackspaceFiles $service,$data)
     {
         if (!($service instanceof RackspaceFiles) || !is_array($data)) {
@@ -55,6 +98,9 @@ class Object
         }
         if (!array_key_exists('name', $data)) {
              throw new InvalidArgumentException("You must pass the name of the object in the array (name)");
+        }
+        if (!array_key_exists('container', $data)) {
+             throw new InvalidArgumentException("You must pass the container of the object in the array (container)");
         }
         if (!array_key_exists('hash', $data)) {
              throw new InvalidArgumentException("You must pass the hash of the object in the array (hash)");
@@ -69,13 +115,148 @@ class Object
              throw new InvalidArgumentException("You must pass the last modified data of the object in the array (last_modified)");
         }
         $this->_name= $data['name'];
+        $this->_container= $data['container'];
         $this->_hash= $data['hash'];
         $this->_size= $data['bytes'];
         $this->_contentType= $data['content_type'];
         $this->_lastModified= $data['last_modified'];
+        if (!empty($data['file'])) {
+            $this->_file= $data['file'];
+        }
         $this->_service= $service;
     }
-    public function getMetadata() {
-
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName() {
+        return $this->_name;
+    }
+    /**
+     * Get the name of the container
+     *
+     * @return string
+     */
+    public function getContainer() {
+        return $this->_container;
+    }
+    /**
+     * Get the MD5 of the object's content
+     *
+     * @return string
+     */
+    public function getHash() {
+        return $this->_hash;
+    }
+    /**
+     * Get the size of the object's content
+     *
+     * @return integer
+     */
+    public function getSize() {
+        return $this->_size;
+    }
+    /**
+     * Get the content type of the object's content
+     *
+     * @return string
+     */
+    public function getContentType() {
+        return $this->_contentType;
+    }
+    /**
+     * Get the data of the last modified of the object
+     *
+     * @return string
+     */
+    public function getLastModified() {
+        return $this->_lastModified;
+    }
+    /**
+     * Get the content of the object
+     *
+     * @return string
+     */
+    public function getFile() {
+        return $this->_file;
+    }
+    /**
+     * Get the metadata of the object
+     * If you don't pass the $key it returns the entire array of metadata value
+     *
+     * @param string $key
+     * @return string|array
+     */
+    public function getMetadata($key=null) {
+        if (empty($this->_metadata) && (!$this->_getMetadata)) {
+            $result= $this->_service->getMetadataObject($this->_container,$this->_name);
+            if (!empty($result)) {
+                $this->_hash= $data['hash'];
+                $this->_size= $data['bytes'];
+                $this->_contentType= $data['content_type'];
+                $this->_lastModified= $data['last_modified'];
+                if (!empty($result['metadata'])) {
+                    $this->_metadata= $result['metadata'];
+                }
+            }
+            $this->_getMetadata= true;
+        }
+        if (!empty($this->_metadata[$key])) {
+            return $this->_metadata[$key];
+        }
+        return $this->_metadata;
+    }
+    /**
+     * Set the metadata value
+     * The old metadata values are replaced with the new one
+     * 
+     * @param array $metadata
+     * @return boolean
+     */
+    public function setMetadata($metadata) {
+        return $this->_service->setMetadataObject($this->_container,$this->_name,$metadata);
+    }
+    /**
+     * Copy the object to another container
+     * You can add metadata information to the destination object, change the
+     * content_type and the name of the object
+     *
+     * @param string $container_dest
+     * @param string $name_dest
+     * @param array $metadata
+     * @param string $content_type
+     * @return boolean
+     */
+    public function copyTo($container_dest,$name_dest,$metadata=array(),$content_type=null) {
+        return $this->_service->copyObject($this->_container,$this->_name,$container_dest,$name_dest,$metadata,$content_type);
+    }
+    /**
+     * Get the CDN URL of the object
+     *
+     * @return string
+     */
+    public function getCdnUrl() {
+        $result= $this->_service->getInfoCdn($this->_container);
+        if ($result!==false) {
+            if ($result['cdn_enabled']) {
+                return $result['cdn_uri'].'/'.$this->_name;
+            }
+        }
+        return false;
+    }
+    /**
+     * Get the CDN SSL URL of the object
+     *
+     * @return string
+     */
+    public function getCdnUrlSsl() {
+        $result= $this->_service->getInfoCdn($this->_container);
+        if ($result!==false) {
+            if ($result['cdn_enabled']) {
+                return $result['cdn_uri_ssl'].'/'.$this->_name;
+            }
+        }
+        return false;
     }
 }

@@ -67,7 +67,7 @@ class JobOfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_job = new Job(TESTS_ZEND_SERVICE_GOGRID_OFFLINE_KEY,TESTS_ZEND_SERVICE_GOGRID_OFFLINE_SECRET);
+        $this->_job = new Job(TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY,TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET);
         $this->_filesPath   = __DIR__ . '/_files';
         $this->_httpClientAdapterTest = new HttpTest();
 
@@ -84,7 +84,7 @@ class JobOfflineTest extends \PHPUnit_Framework_TestCase
             'Zend\Service\GoGrid\Exception\InvalidArgumentException',
             'The key cannot be empty'
         );
-        $job= new Job(null,TESTS_ZEND_SERVICE_GOGRID_OFFLINE_SECRET);
+        $job= new Job(null,TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET);
     }
     /**
      * Ensures that __construct() throws an exception when given an empty secret attribute
@@ -97,7 +97,7 @@ class JobOfflineTest extends \PHPUnit_Framework_TestCase
             'Zend\Service\GoGrid\Exception\InvalidArgumentException',
             'The secret cannot be empty'
         );
-        $job= new Job(TESTS_ZEND_SERVICE_GOGRID_OFFLINE_KEY,null);
+        $job= new Job(TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY,null);
     }
     /**
      * testJobList

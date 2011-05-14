@@ -42,9 +42,9 @@ class PluginBroker implements Broker
     protected $classLoader;
     
     /**
-     * @var boolean Whether plugins should be automatically registered
+     * @var boolean Whether plugins should be registered on load
      */
-    protected $autoRegisterPlugins = true;
+    protected $registerPluginsOnLoad = true;
 
     /**
      * @var array Cache of loaded plugin instances
@@ -144,8 +144,8 @@ class PluginBroker implements Broker
                     // been registered
                     $plugins = $value;
                     break;
-                case 'auto_register_plugins':
-                    $this->setAutoRegisterPlugins($value);
+                case 'register_plugins_on_load':
+                    $this->setRegisterPluginsOnLoad($value);
                     break;
                 case 'validator':
                     $this->setValidator($value);
@@ -199,7 +199,7 @@ class PluginBroker implements Broker
             $instance = $r->newInstanceArgs($options);
         }
 
-        if ($this->getAutoRegisterPlugins()) {
+        if ($this->getRegisterPluginsOnLoad()) {
             $this->register($pluginName, $instance);
         }
         
@@ -293,25 +293,25 @@ class PluginBroker implements Broker
     }
     
     /**
-     * Set if plugins should be atuomatically registered
+     * Set if plugins should be registered on load.
      * 
      * @param  boolean $flag
      * @return PluginBroker
      */
-    public function setAutoRegisterPlugins($flag)
+    public function setRegisterPluginsOnLoad($flag)
     {
-        $this->autoRegisterPlugins = (bool) $flag;
+        $this->registerPluginsOnLoad = (bool) $flag;
         return $this;
     }
 
     /**
-     * Retrieve if plugins are automatically registered
+     * Retrieve if plugins are registered on load.
      * 
      * @return boolean
      */
-    public function getAutoRegisterPlugins()
+    public function getRegisterPluginsOnLoad()
     {
-        return $this->autoRegisterPlugins;
+        return $this->registerPluginsOnLoad;
     }
 
     /**

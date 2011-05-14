@@ -30,7 +30,7 @@ namespace Zend\Config;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Config implements \Countable, \Iterator
+class Config implements \Countable, \Iterator, \ArrayAccess
 {
     /**
      * Whether in-memory modifications to configuration data are allowed
@@ -306,6 +306,55 @@ class Config implements \Countable, \Iterator
         return $this->_index < $this->_count;
     }
 
+    /**
+     * offsetExists(): defined by ArrayAccess interface.
+     * 
+     * @see    ArrayAccess::offsetExists()
+     * @param  mixed $offset
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return $this->__isset($offset);
+    }
+    
+    /**
+     * offsetGet(): defined by ArrayAccess interface.
+     * 
+     * @see    ArrayAccess::offsetGet()
+     * @param  mixed $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->__get($offset);
+    }
+    
+    /**
+     * offsetSet(): defined by ArrayAccess interface.
+     * 
+     * @see    ArrayAccess::offsetSet()
+     * @param  mixed $offset
+     * @param  mixed $value
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->__set($offset, $value);
+    }
+    
+    /**
+     * offsetUnset(): defined by ArrayAccess interface.
+     * 
+     * @see    ArrayAccess::offsetUnset()
+     * @param  mixed $offset
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        $this->__unset($offset);
+    }
+    
     /**
      * Returns the section name(s) loaded.
      *

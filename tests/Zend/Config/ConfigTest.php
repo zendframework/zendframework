@@ -316,6 +316,25 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(456, $stdConfig->{2});
 
     }
+    
+    public function testArrayAccess()
+    {
+        $config = new Config($this->_all, true);
+
+        $this->assertEquals('thisname', $config['name']);
+        $config['name'] = 'anothername';
+        $this->assertEquals('anothername', $config['name']);
+        $this->assertEquals('multi', $config['one']['two']['three']);
+
+        $this->assertTrue(isset($config['hostname']));
+        $this->assertTrue(isset($config['db']['name']));
+
+        unset($config['hostname']);
+        unset($config['db']['name']);
+
+        $this->assertFalse(isset($config['hostname']));
+        $this->assertFalse(isset($config['db']['name']));
+    }
 
     /**
      * Ensures that toArray() supports objects of types other than Zend_Config

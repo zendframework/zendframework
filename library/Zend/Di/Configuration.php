@@ -129,9 +129,6 @@ class Configuration
                 case 'param_map':
                     $definition->setParamMap($value);
                     break;
-                case 'tags':
-                    $definition->addTags($value);
-                    break;
                 case 'shared':
                     $definition->setShared((bool) $value);
                     break;

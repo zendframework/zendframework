@@ -143,48 +143,6 @@ class DefinitionTest extends TestCase
         }
     }
 
-    public function testCanAddSingleTags()
-    {
-        $this->definition->addTag('foo');
-        $this->assertTrue($this->definition->hasTag('foo'));
-    }
-
-    /**
-     * @dataProvider invalidTags
-     */
-    public function testPassingInvalidTagRaisesException($tag)
-    {
-        $this->setExpectedException('Zend\Di\Exception\InvalidArgumentException', 'Tag');
-        $this->definition->addTag($tag);
-    }
-
-    public function invalidTags()
-    {
-        return array(
-            array(1),
-            array(1.0),
-            array(false),
-            array(new \stdClass),
-            array(array()),
-        );
-    }
-
-    public function testHasTagReturnsFalseWhenTagNotPresent()
-    {
-        $this->assertFalse($this->definition->hasTag('foo'));
-    }
-
-    public function testCanAddManyTagsAtOnce()
-    {
-        $tags = array(
-            'foo',
-            'bar',
-            'baz',
-        );
-        $this->definition->addTags($tags);
-        $this->assertEquals($tags, $this->definition->getTags());
-    }
-
     public function testNoConstructorCallbackByDefault()
     {
         $this->assertFalse($this->definition->hasConstructorCallback());

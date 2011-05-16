@@ -57,13 +57,6 @@ class Definition implements DependencyDefinition
     protected $shareInstances = true;
 
     /**
-     * Tags by which this definition may be alternately retrieved
-     * 
-     * @var array
-     */
-    protected $tags = array();
-
-    /**
      * Create a definition for the given class name
      * 
      * @param  string $className 
@@ -229,61 +222,6 @@ class Definition implements DependencyDefinition
     public function isShared()
     {
         return $this->shareInstances;
-    }
-    
-    /**
-     * Add a tag
-     *
-     * Tags may be used by container-defined classes to retrieve dependencies, 
-     * plugins, helpers, etc.
-     * 
-     * @param  string $tag 
-     * @return Definition
-     */
-    public function addTag($tag)
-    {
-        if (!is_string($tag) || empty($tag)) {
-            throw new Exception\InvalidArgumentException('Tag must be a string and non-empty');
-        }
-        if (!in_array($tag, $this->tags)) {
-            $this->tags[] = $tag;
-        }
-        return $this;
-    }
-
-    /**
-     * Add many tags at once
-     * 
-     * @param  array $tags 
-     * @return Definition
-     */
-    public function addTags(array $tags)
-    {
-        foreach ($tags as $tag) {
-            $this->addTag($tag);
-        }
-        return $this;
-    }
-
-    /**
-     * Retrieve all tags associated with this class
-     * 
-     * @return array
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Is the given tag associated with this definition
-     * 
-     * @param  string $tag 
-     * @return bool
-     */
-    public function hasTag($tag)
-    {
-        return (in_array($tag, $this->tags));
     }
     
     /**

@@ -22,11 +22,6 @@ interface DependencyDefinition
     public function setShared($flag = true);
     public function isShared();
     
-    public function addTag($tag);
-    public function addTags(array $tags);
-    public function getTags();
-    public function hasTag($tag);
-    
     public function addMethodCall($name, array $args);
     /**
      * @return InjectibleMethods

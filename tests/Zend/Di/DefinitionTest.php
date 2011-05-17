@@ -17,6 +17,12 @@ class DefinitionTest extends TestCase
         $this->assertEquals(__CLASS__, $this->definition->getClass());
     }
 
+    public function testClassNameIsMutable()
+    {
+        $this->definition->setClass('foo');
+        $this->assertEquals('foo', $this->definition->getClass());
+    }
+
     public function testParamsAreEmptyByDefault()
     {
         foreach ($this->definition->getParams() as $param) {
@@ -141,6 +147,41 @@ class DefinitionTest extends TestCase
                     $this->fail('Unexpected method encountered');
             }
         }
+    }
+
+    public function testCanSerializeDefinitionToArray()
+    {
+        $definition = new Definition('Foo');
+        $definition->setParams(array(
+                        'name'   => 'foo',
+                        'class'  => 'Foo',
+                        'object' => array('__reference' => 'Baz'),
+                   ))
+                   ->setParamMap(array(
+                       'name'   => 1,
+                       'class'  => 0,
+                       'object' => 2,
+                   ))
+                   ->addMethodCall('bar', array('one', 'two'))
+                   ->addMethodCall('baz', array(array('__reference' => 'Bar')));
+        $expected = array(
+            'class'   => 'Foo',
+            'methods' => array(
+                array('name' => 'bar', 'args' => array('one', 'two')),
+                array('name' => 'baz', 'args' => array(array('__reference' => 'Bar'))),
+            ),
+            'param_map' => array(
+                'name'   => 1,
+                'class'  => 0,
+                'object' => 2,
+            ),
+            'params'    => array(
+                'Foo',
+                'foo',
+                array('__reference' => 'Baz'),
+            ),
+        );
+        $this->assertEquals($expected, $definition->toArray());
     }
 
     public function testNoConstructorCallbackByDefault()

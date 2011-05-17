@@ -6,6 +6,7 @@ interface DependencyDefinition
     public function __construct($className);
 
     public function getClass();
+    public function setClass($name);
 
     public function setConstructorCallback($callback);
     public function getConstructorCallback();
@@ -27,4 +28,11 @@ interface DependencyDefinition
      * @return InjectibleMethods
      */
     public function getMethodCalls();
+
+    /**
+     * Serialization
+     *
+     * @return array
+     */
+    public function toArray();
 }

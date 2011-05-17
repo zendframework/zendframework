@@ -64,7 +64,7 @@ class Definition implements DependencyDefinition
      */
     public function __construct($className)
     {
-        $this->className         = $className;
+        $this->setClass($className);
         $this->injectibleMethods = new Methods();
     }
 
@@ -76,6 +76,18 @@ class Definition implements DependencyDefinition
     public function getClass()
     {
         return $this->className;
+    }
+
+    /**
+     * Set the class name the definition describes
+     * 
+     * @param  string $name 
+     * @return Definition
+     */
+    public function setClass($name)
+    {
+        $this->className = $name;
+        return $this;
     }
 
     /**
@@ -246,6 +258,40 @@ class Definition implements DependencyDefinition
     public function getMethodCalls()
     {
         return $this->injectibleMethods;
+    }
+
+    public function toArray()
+    {
+        $params = array();
+        foreach ($this->getParams() as $name => $value) {
+            if ($value instanceof Reference) {
+                $value = array('__reference' => $value->getServiceName());
+            }
+            $params[$name] = $value;
+        }
+
+        $methods = array();
+        foreach ($this->getMethodCalls() as $method) {
+            $args = array();
+            foreach ($method->getArgs() as $key => $arg) {
+                if ($arg instanceof Reference) {
+                    $args[$key] = array('__reference' => $arg->getServiceName());
+                } else {
+                    $args[$key] = $arg;
+                }
+            }
+            $methods[] = array(
+                'name' => $method->getName(), 
+                'args' => $args,
+            );
+        }
+
+        return array(
+            'class'     => $this->getClass(),
+            'methods'   => $methods,
+            'param_map' => ($this->constructorParamMap) ?: array(),
+            'params'    => $params,
+        );
     }
 
     /**

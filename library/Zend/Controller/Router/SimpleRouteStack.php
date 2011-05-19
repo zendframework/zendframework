@@ -88,16 +88,15 @@ class SimpleRouteStack implements RouteStack
      */
     public function setOptions($options)
     {
-        if ($options instanceof \Zend\Config) {
-            $options = $options->toArray();
-        }
-
-        if (!is_array($options)) {
-            throw new InvalidArgumentException('Options must either be an array or an instance of \Zend\Config');
+        if (!is_array($options) && !$options instanceof \Traversable) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected an array or Traversable; received "%s"',
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
         }
 
         foreach ($options as $key => $value) {
-            switch ($key) {
+            switch (strtolower($key)) {
                 case 'routes':
                     $this->addRoutes($value);
                     break;
@@ -112,12 +111,19 @@ class SimpleRouteStack implements RouteStack
      * addRoutes(): defined by RouteStack interface.
      *
      * @see    Route::addRoutes()
-     * @param  array $routes
+     * @param  mixed $routes
      * @return RouteStack
      */
-    public function addRoutes(array $routes)
+    public function addRoutes($routes)
     {
-        $routes     = new ArrayIterator($routes);
+        if (is_array($routes)) {
+            $routes = new ArrayIterator($routes);
+        }
+        
+        if (!$routes instanceof Traversable) {
+            throw new InvalidArgumentException('Routes provided are invalid; must be traversable');
+        }        
+        
         $routeStack = $this;
         
         iterator_apply($routes, function() use ($routeStack, $routes) {
@@ -139,7 +145,7 @@ class SimpleRouteStack implements RouteStack
      */
     public function addRoute($name, $route, $priority = null)
     {
-        if (is_array($route)) {
+        if (is_array($route) || $route instanceof \ArrayAccess) {
             $route = $this->routeFromArray($specs);
         }
 
@@ -174,6 +180,13 @@ class SimpleRouteStack implements RouteStack
      */
     protected function routeFromArray(array $specs)
     {
+        if (!is_array($options) && !$options instanceof \ArrayAccess) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected an array or ArrayAccess; received "%s"',
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+    
         if (!isset($specs['type']) || !is_string($specs['type'])) {
             throw new InvalidArgumentException('Type not defined or not a string');
         } elseif (!isset($specs['options']) || !is_array($specs['options'])) {

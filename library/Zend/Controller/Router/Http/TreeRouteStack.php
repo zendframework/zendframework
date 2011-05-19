@@ -58,10 +58,10 @@ class TreeRouteStack extends SimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  array $specs
+     * @param  mixed $specs
      * @return Route
      */
-    protected function routeFromArray(array $specs)
+    protected function routeFromArray($specs)
     {
         $route = parent::routeFromArray($specs);
         

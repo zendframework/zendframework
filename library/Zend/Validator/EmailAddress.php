@@ -243,18 +243,6 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
-     * Whether MX checking via getmxrr is supported or not
-     *
-     * This currently only works on UNIX systems
-     *
-     * @return boolean
-     */
-    public function validateMxSupported()
-    {
-        return function_exists('getmxrr');
-    }
-
-    /**
      * Returns the set validateMx option
      *
      * @return boolean
@@ -274,10 +262,6 @@ class EmailAddress extends AbstractValidator
      */
     public function setValidateMx($mx)
     {
-        if ((bool) $mx && !$this->validateMxSupported()) {
-            throw new Exception\InvalidArgumentException('MX checking not available on this system');
-        }
-
         $this->_options['mx'] = (bool) $mx;
         return $this;
     }
@@ -441,7 +425,7 @@ class EmailAddress extends AbstractValidator
         $result = getmxrr($this->_hostname, $mxHosts);
         if (!$result) {
             $this->_error(self::INVALID_MX_RECORD);
-        } else if ($this->_options['deep'] && function_exists('checkdnsrr')) {
+        } else if ($this->_options['deep']) {
             $validAddress = false;
             $reserved     = true;
             foreach ($mxHosts as $hostname) {

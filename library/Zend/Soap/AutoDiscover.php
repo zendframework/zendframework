@@ -99,7 +99,7 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function __construct($strategy = true, $uri=null, $wsdlClass=null)
     {
-        $this->_reflection = new \Zend\Server\Reflection();
+        $this->_reflection = new \Zend\Server\Reflection\Reflection();
         $this->setComplexTypeStrategy($strategy);
 
         if($uri !== null) {

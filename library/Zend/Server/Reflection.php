@@ -14,7 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,19 +21,21 @@
 /**
  * @namespace
  */
-namespace Zend\Server\Reflection;
+namespace Zend\Server;
+
+use Zend\Server\Reflection\ReflectionClass,
+    Zend\Server\Reflection\ReflectionFunction;
 
 /**
  * Reflection for determining method signatures to use with server classes
  *
  * @uses       ReflectionClass
  * @uses       ReflectionObject
- * @uses       \Zend\Server\Reflection\ClassReflection
+ * @uses       \Zend\Server\Reflection\ReflectionClass
  * @uses       \Zend\Server\Reflection\Exception
- * @uses       \Zend\Server\Reflection\FunctionReflection
+ * @uses       \Zend\Server\Reflection\ReflectionFunction
  * @category   Zend
  * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -64,11 +65,11 @@ class Reflection
         } elseif (class_exists($class)) {
             $reflection = new \ReflectionClass($class);
         } else {
-            throw new Exception\InvalidArgumentException('Invalid class or object passed to attachClass()');
+            throw new Reflection\Exception\InvalidArgumentException('Invalid class or object passed to attachClass()');
         }
 
         if ($argv && !is_array($argv)) {
-            throw new Exception\InvalidArgumentException('Invalid argv argument passed to reflectClass');
+            throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectClass');
         }
 
         return new ReflectionClass($reflection, $namespace, $argv);
@@ -94,12 +95,11 @@ class Reflection
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {
         if (!is_string($function) || !function_exists($function)) {
-            throw new Exception\InvalidArgumentException('Invalid function "' . $function . '" passed to reflectFunction');
+            throw new Reflection\Exception\InvalidArgumentException('Invalid function "' . $function . '" passed to reflectFunction');
         }
 
-
         if ($argv && !is_array($argv)) {
-            throw new Exception\InvalidArgumentException('Invalid argv argument passed to reflectClass');
+            throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectClass');
         }
 
         return new ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);

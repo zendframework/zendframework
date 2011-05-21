@@ -65,17 +65,15 @@ class TreeRouteStack extends SimpleRouteStack
     {
         $route = parent::routeFromArray($specs);
         
-        if (isset($specs['routes'])) {
+        if (isset($specs['routes'])) {      
             $options = array(
                 'route'         => $route,
-                'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate'])
+                'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate']),
+                'child_routes'  => $specs['routes'],
+                'plugin_broker' => $this->pluginBroker
             );
 
             $route = $this->pluginBroker->load('part', $options);
-
-            foreach ($specs['routes'] as $subName => $subSpecs) {
-                $route->append($subName, $this->routeFromArray($subSpecs));
-            }
         }
 
         return $route;

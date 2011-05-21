@@ -60,13 +60,16 @@ class SimpleRouteStack implements RouteStack
      */
     public function __construct($options = null)
     {
-        $this->routes       = new PriorityList();
-        $this->pluginBroker = new PluginBroker(array(
-            'auto_register_plugins' => false
-        ));
+        $this->routes = new PriorityList();
 
         if ($options !== null) {
             $this->setOptions($options);
+        }
+        
+        if ($this->pluginBroker === null) {
+            $this->pluginBroker = new PluginBroker(array(
+                'auto_register_plugins' => false
+            ));            
         }
         
         $this->init();
@@ -101,10 +104,36 @@ class SimpleRouteStack implements RouteStack
                     $this->addRoutes($value);
                     break;
                 
+                case 'plugin_broker':
+                    $this->setPluginBroker($value);
+                    break;
+                
                 default:
                     break;
             }
         }
+    }
+    
+    /**
+     * Set the plugin broker.
+     * 
+     * @param  PluginBroker $broker
+     * @return SimpleRouteStack
+     */
+    public function setPluginBroker(PluginBroker $broker)
+    {
+        $this->pluginBroker = $broker;
+        return $this;
+    }
+    
+    /**
+     * Get the plugin broker.
+     * 
+     * @return PluginBroker
+     */
+    public function getPluginBroker()
+    {
+        return $this->pluginBroker;
     }
 
     /**
@@ -118,11 +147,9 @@ class SimpleRouteStack implements RouteStack
     {
         if (is_array($routes)) {
             $routes = new ArrayIterator($routes);
-        }
-        
-        if (!$routes instanceof Traversable) {
+        } elseif (!$routes instanceof Traversable) {
             throw new InvalidArgumentException('Routes provided are invalid; must be traversable');
-        }        
+        }
         
         $routeStack = $this;
         
@@ -145,12 +172,8 @@ class SimpleRouteStack implements RouteStack
      */
     public function addRoute($name, $route, $priority = null)
     {
-        if (is_array($route) || $route instanceof \ArrayAccess) {
-            $route = $this->routeFromArray($specs);
-        }
-
         if (!$route instanceof Route) {
-            throw new InvalidArgumentException('Supplied route must either be an array or a Route object');
+            $route = $this->routeFromArray($route);
         }
 
         $this->routes->insert($name, $route, $priority);
@@ -175,10 +198,10 @@ class SimpleRouteStack implements RouteStack
     /**
      * Create a route from array specifications.
      *
-     * @param  array $specs
+     * @param  mixed $specs
      * @return SimpleRouteStack
      */
-    protected function routeFromArray(array $specs)
+    protected function routeFromArray($specs)
     {
         if (!is_array($options) && !$options instanceof \ArrayAccess) {
             throw new InvalidArgumentException(sprintf(
@@ -187,10 +210,10 @@ class SimpleRouteStack implements RouteStack
             ));
         }
     
-        if (!isset($specs['type']) || !is_string($specs['type'])) {
-            throw new InvalidArgumentException('Type not defined or not a string');
-        } elseif (!isset($specs['options']) || !is_array($specs['options'])) {
-            throw new InvalidArgumentException('Options not defined or not an array');
+        if (!isset($specs['type'])) {
+            throw new InvalidArgumentException('Missing "type" option');
+        } elseif (!isset($specs['options'])) {
+            throw new InvalidArgumentException('Missing "name" option');
         }
         
         $route = $this->pluginBroker->load($specs['type'], $specs['options']);

@@ -27,6 +27,7 @@ namespace Zend\Controller\Router\Http;
 use Zend\Controller\Router\Route,
     Zend\Controller\Router\RouteMatch,
     Zend\Controller\Router\PriorityList,
+    Zend\Controller\Router\Http\TreeRouteStack,
     Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Request\Http as HttpRequest;
 
@@ -39,7 +40,7 @@ use Zend\Controller\Router\Route,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Part implements Route
+class Part extends TreeRouteStack
 {
     /**
      * Route to match.
@@ -54,13 +55,13 @@ class Part implements Route
      * @var boolean
      */
     protected $mayTerminate;
-
+    
     /**
-     * Children of the route.
-     *
-     * @var PriorityList
+     * Child routes.
+     * 
+     * @var mixed
      */
-    protected $children;
+    protected $childRoutes;
 
     /**
      * __construct(): defined by Route interface.
@@ -69,29 +70,38 @@ class Part implements Route
      * @param  mixed $options
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
+        parent::__construct($options);
+        
+        if (!is_array($options) && !$options instanceof \ArrayAccess) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected an array or Traversable; received "%s"',
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+        
         if (!isset($options['route']) || !$options['route'] instanceof Route) {
             throw new UnexpectedValueException('Route not defined or not an instance of Route');
         }
 
         $this->route        = $options['route'];
         $this->mayTerminate = (isset($options['may_terminate']) && $options['may_terminate']);
-        $this->children     = new PriorityList();
+        
+        if (isset($options['child_routes'])) {
+            $this->childRoutes = $options['child_routes'];
+        }
     }
-
+    
     /**
-     * Append a route to the part.
-     *
-     * @param  string $name
-     * @param  Route $route
-     * @return Part
+     * init(): defined by SimpleRouteStack.
+     * 
+     * @see    SimpleRouteStack::init()
+     * @return void
      */
-    public function append($name, Route $route)
+    protected function init()
     {
-        $this->children->insert($name, $route);
-
-        return $this;
+        // Don't register HTTP plugins again.
     }
 
     /**
@@ -106,6 +116,11 @@ class Part implements Route
         $match = $this->route->match($request, $pathOffset);
 
         if ($match !== null) {
+            if ($this->childRoutes !== null) {
+                $this->addRoutes($this->childRoutes);
+                $this->childRoutes = null;
+            }
+            
             $nextOffset = $pathOffset + $match->getInternalParameter('length');
             
             foreach ($this->children as $name => $route) {
@@ -134,18 +149,13 @@ class Part implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        if (!isset($options['name'])) {
-            throw new InvalidArgumentException('Name not defined');
+       if ($this->childRoutes !== null) {
+            $this->addRoutes($this->childRoutes);
+            $this->childRoutes = null;
         }
-        
-        if (null === ($route = $this->route->get($options['name']))) {
-            throw new RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
-        }
-        
-        unset($options['name']);
         
         $uri = $this->route->assemble($params, $options)
-             . $route->assemble($params, $options);
+             . parent::assemble($params, $options);
         
         return $uri;
     }

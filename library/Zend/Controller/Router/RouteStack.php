@@ -35,19 +35,20 @@ interface RouteStack extends Route
     /**
      * Add a route to the stack.
      * 
-     * @param  string $name
-     * @param  mixed  $route
+     * @param  string  $name
+     * @param  mixed   $route
+     * @param  integer $priority
      * @return RouteStack
      */
-    public function addRoute($name, $route);
+    public function addRoute($name, $route, $priority = null);
 
     /**
      * Add multiple routes to the stack.
      * 
-     * @param  array $routes
+     * @param  mixed $routes
      * @return RouteStack
      */
-    public function addRoutes(array $routes);
+    public function addRoutes($routes);
     
     /**
      * Remove a route from the stack.

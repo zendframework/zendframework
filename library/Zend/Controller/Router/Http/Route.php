@@ -37,7 +37,7 @@ use Zend\Controller\Request\AbstractRequest,
 interface Route extends BaseRoute
 {
     /**
-     * Match a given request with at a specified path offset.
+     * Match a given request with a specified path offset.
      * 
      * @param  AbstractRequest $request
      * @param  integer         $pathOffset

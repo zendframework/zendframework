@@ -250,10 +250,8 @@ class SimpleRouteStack implements RouteStack
     public function assemble(array $params = null, array $options = null)
     {
         if (!isset($options['name'])) {
-            throw new InvalidArgumentException('Name not defined');
-        }
-        
-        if (null === ($route = $this->route->get($options['name']))) {
+            throw new InvalidArgumentException('Missing "name" option');
+        } elseif (null === ($route = $this->route->get($options['name']))) {
             throw new RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
         }
         

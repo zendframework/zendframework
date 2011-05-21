@@ -82,7 +82,7 @@ class Part extends TreeRouteStack
         }
         
         if (!isset($options['route']) || !$options['route'] instanceof Route) {
-            throw new UnexpectedValueException('Route not defined or not an instance of Route');
+            throw new InvalidArgumentException('Route not defined or not an instance of Route');
         }
 
         $this->route        = $options['route'];

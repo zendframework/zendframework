@@ -225,25 +225,12 @@ abstract class AbstractBootstrap
     /**
      * Get class resources (as resource/method pairs)
      *
-     * Uses get_class_methods() by default, reflection on prior to 5.2.6,
-     * as a bug prevents the usage of get_class_methods() there.
-     *
      * @return array
      */
     public function getClassResources()
     {
         if (null === $this->_classResources) {
-            if (version_compare(PHP_VERSION, '5.2.6') === -1) {
-                $class        = new \ReflectionObject($this);
-                $classMethods = $class->getMethods();
-                $methodNames  = array();
-
-                foreach ($classMethods as $method) {
-                    $methodNames[] = $method->getName();
-                }
-            } else {
-                $methodNames = get_class_methods($this);
-            }
+            $methodNames = get_class_methods($this);
 
             $this->_classResources = array();
             foreach ($methodNames as $method) {

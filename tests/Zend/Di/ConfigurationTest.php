@@ -123,7 +123,7 @@ class ConfigurationTest extends TestCase
                     'methods' => array(
                         array(
                             'name' => 'setObject',
-                            'args' => array(
+                            'params' => array(
                                 array('__reference' => 'params'),
                             ),
                         ),
@@ -164,7 +164,7 @@ class ConfigurationTest extends TestCase
                     'methods' => array(
                         array(
                             'name' => 'method_name',
-                            'args' => array( /* ... * / ),
+                            'params' => array( /* ... * / ),
                                 // if value is an array, look for '__reference' 
                                 // key, and, if found, create a Reference object
                         ),

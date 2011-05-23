@@ -32,7 +32,7 @@
                 "methods": [
                     {
                         "name": "setObject",
-                        "args": [ { "__reference": "params" } ]
+                        "params": [ { "__reference": "params" } ]
                     }
                 ]
             },

@@ -3,7 +3,7 @@ namespace Zend\Di;
 
 interface InjectibleMethod
 {
-    public function __construct($name, array $args);
+    public function __construct($name, array $params);
     public function getName();
-    public function getArgs();
+    public function getParams();
 }

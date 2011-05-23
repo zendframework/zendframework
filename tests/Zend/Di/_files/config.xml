@@ -32,7 +32,7 @@
             <methods>
                 <method>
                     <name>setObject</name>
-                    <args><params><__reference>params</__reference></params></args>
+                    <params><params><__reference>params</__reference></params></params>
                 </method>
             </methods>
         </definitions>

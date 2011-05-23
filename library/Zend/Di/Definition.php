@@ -240,12 +240,12 @@ class Definition implements DependencyDefinition
      * Add a method to be called and injected
      * 
      * @param  string $name 
-     * @param  array $args 
+     * @param  array $params 
      * @return Definition
      */
-    public function addMethodCall($name, array $args)
+    public function addMethodCall($name, array $params)
     {
-        $method = new Method($name, $args);
+        $method = new Method($name, $params);
         $this->injectibleMethods->insert($method);
         return $this;
     }
@@ -272,17 +272,17 @@ class Definition implements DependencyDefinition
 
         $methods = array();
         foreach ($this->getMethodCalls() as $method) {
-            $args = array();
-            foreach ($method->getArgs() as $key => $arg) {
-                if ($arg instanceof Reference) {
-                    $args[$key] = array('__reference' => $arg->getServiceName());
+            $methodParams = array();
+            foreach ($method->getParams() as $key => $methodParam) {
+                if ($methodParam instanceof Reference) {
+                    $methodParams[$key] = array('__reference' => $methodParam->getServiceName());
                 } else {
-                    $args[$key] = $arg;
+                    $methodParams[$key] = $methodParam;
                 }
             }
             $methods[] = array(
                 'name' => $method->getName(), 
-                'args' => $args,
+                'params' => $methodParams,
             );
         }
 

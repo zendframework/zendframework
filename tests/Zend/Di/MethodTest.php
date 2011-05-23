@@ -14,10 +14,10 @@ class MethodTest extends TestCase
         $this->assertEquals($name, $method->getName());
     }
 
-    public function testMethodReturnsArgsPassedToConstructor()
+    public function testMethodReturnsParamsPassedToConstructor()
     {
         $name   = uniqid();
-        $args   = array(
+        $params   = array(
             'foo',
             new \stdClass,
             true,
@@ -26,7 +26,7 @@ class MethodTest extends TestCase
             0.00,
             array('bar'),
         );
-        $method = new Method($name, $args);
-        $this->assertEquals($args, $method->getArgs());
+        $method = new Method($name, $params);
+        $this->assertEquals($params, $method->getParams());
     }
 }

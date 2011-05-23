@@ -233,7 +233,7 @@ class DependencyInjector implements DependencyInjection
                 return new $class($param1, $param2);
             default:
                 $params = $this->resolveReferences($params);
-                $r = new ReflectionClass($class);
+                $r = new \ReflectionClass($class);
                 return $r->newInstanceArgs($params);
         }
     }
@@ -286,7 +286,7 @@ class DependencyInjector implements DependencyInjection
                 continue;
             }
 
-            $params = $info->getArgs();
+            $params = $info->getParams();
             foreach ($params as $key => $param) {
                 if ($param instanceof DependencyReference) {
                     $params[$key] = $this->get($param->getServiceName());

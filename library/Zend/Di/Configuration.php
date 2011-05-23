@@ -161,11 +161,11 @@ class Configuration
                 continue;
             }
             $method = $methodDefinition['name'];
-            $args   = array();
-            if (isset($methodDefinition['args']) && is_array($methodDefinition['args'])) {
-                $args = $this->resolveReferences($methodDefinition['args']);
+            $params   = array();
+            if (isset($methodDefinition['params']) && is_array($methodDefinition['params'])) {
+                $params = $this->resolveReferences($methodDefinition['params']);
             }
-            $definition->addMethodCall($method, $args);
+            $definition->addMethodCall($method, $params);
         }
     }
 

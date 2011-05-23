@@ -118,7 +118,7 @@ class ContainerBuilder
             $methods = '';
             foreach ($definition->getMethodCalls() as $method) {
                 $methodName   = $method->getName();
-                $methodParams = $method->getArgs();
+                $methodParams = $method->getParams();
 
                 // Create method parameter representation
                 foreach ($methodParams as $key => $param) {

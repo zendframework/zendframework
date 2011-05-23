@@ -21,19 +21,19 @@ class Method implements InjectibleMethod
      * Arguments to pass to the method
      * @var array
      */
-    protected $args;
+    protected $params;
 
     /**
      * Construct the method signature
      * 
      * @param  strinb $name 
-     * @param  array $args 
+     * @param  array $params 
      * @return void
      */
-    public function __construct($name, array $args)
+    public function __construct($name, array $params)
     {
         $this->name = $name;
-        $this->args = $args;
+        $this->params = $params;
     }
 
     /**
@@ -51,8 +51,8 @@ class Method implements InjectibleMethod
      * 
      * @return array
      */
-    public function getArgs()
+    public function getParams()
     {
-        return $this->args;
+        return $this->params;
     }
 }

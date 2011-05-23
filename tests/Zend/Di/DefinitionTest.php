@@ -138,10 +138,10 @@ class DefinitionTest extends TestCase
         foreach ($methods as $name => $method) {
             switch ($name) {
                 case 'foo':
-                    $this->assertSame(array(), $method->getArgs());
+                    $this->assertSame(array(), $method->getParams());
                     break;
                 case 'bar':
-                    $this->assertSame(array('bar'), $method->getArgs());
+                    $this->assertSame(array('bar'), $method->getParams());
                     break;
                 default:
                     $this->fail('Unexpected method encountered');
@@ -167,8 +167,8 @@ class DefinitionTest extends TestCase
         $expected = array(
             'class'   => 'Foo',
             'methods' => array(
-                array('name' => 'bar', 'args' => array('one', 'two')),
-                array('name' => 'baz', 'args' => array(array('__reference' => 'Bar'))),
+                array('name' => 'bar', 'params' => array('one', 'two')),
+                array('name' => 'baz', 'params' => array(array('__reference' => 'Bar'))),
             ),
             'param_map' => array(
                 'name'   => 1,

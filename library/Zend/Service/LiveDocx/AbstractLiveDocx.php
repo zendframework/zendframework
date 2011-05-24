@@ -42,7 +42,7 @@ abstract class AbstractLiveDocx
      * LiveDocx service version
      * @since LiveDocx 1.0
      */
-    const VERSION = '1.2';
+    const VERSION = '2.0';
 
     /**
      * SOAP client used to connect to LiveDocx service
@@ -52,7 +52,7 @@ abstract class AbstractLiveDocx
     protected $_soapClient;
         
     /**
-     * WSDL of LiveDocx web service
+     * Wsdl of LiveDocx web service
      * @var   string
      * @since LiveDocx 1.0
      */
@@ -136,7 +136,7 @@ abstract class AbstractLiveDocx
     protected function _initSoapClient($endpoint)
     {
         $this->_soapClient = new SoapClient();
-        $this->_soapClient->setWSDL($endpoint);
+        $this->_soapClient->setWsdl($endpoint);
     }
     
     /**
@@ -178,32 +178,34 @@ abstract class AbstractLiveDocx
         if (!$this->isLoggedIn()) {
             
             if (null === $this->getUsername()) {
-                throw new Exception(
+                throw new Exception\InvalidArgumentException(
                     'Username has not been set. To set username specify the options array in the constructor or call setUsername($username) after instantiation.'
                 );
             }
             
             if (null === $this->getPassword()) {
-                throw new Exception(
+                throw new Exception\InvalidArgumentException(
                     'Password has not been set. To set password specify the options array in the constructor or call setPassword($password) after instantiation.'
                 );
             }
             
             if (null === $this->getSoapClient()) {
-                $this->_initSoapClient($this->getWSDL());
+                $this->_initSoapClient($this->getWsdl());
             }            
-            
+
+
             try {
-                $this->getSoapClient()->LogIn(array(
+                @$this->getSoapClient()->LogIn(array(
                     'username' => $this->getUsername(),
                     'password' => $this->getPassword(),
                 ));
                 $this->_loggedIn = true;
-            } catch (\SoapFault $e) {
-                throw new Exception(
-                    'Cannot login into LiveDocx service. Please check that your server can download the WSDL (' . $this->getWSDL() . ') and that your username and password are valid.', 0, $e
+            } catch (\Exception $e) {
+                throw new Exception\RuntimeException(
+                    'Cannot login into LiveDocx service. ' . $e->getMessage()
                 );
-            }            
+            }
+            
         }
         
         return $this->_loggedIn;
@@ -222,9 +224,9 @@ abstract class AbstractLiveDocx
             try {
                 $this->getSoapClient()->LogOut();
                 $this->_loggedIn = false;
-            } catch (Exception $e) {
-                throw new Exception(
-                    'Cannot log out of LiveDocx service.', 0, $e
+            } catch (\Exception $e) {
+                throw new Exception\RuntimeException(
+                    'Cannot log out of LiveDocx service. ' . $e->getMessage()
                 );
             }            
         }
@@ -268,12 +270,12 @@ abstract class AbstractLiveDocx
     }
 
     /**
-     * Set WSDL of LiveDocx web service
+     * Set Wsdl of LiveDocx web service
      * 
      * @return Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */      
-    public function setWSDL($wsdl) 
+    public function setWsdl($wsdl)
     {
         $this->_wsdl = $wsdl;
         return $this;
@@ -310,15 +312,15 @@ abstract class AbstractLiveDocx
     }
     
     /**
-     * Return WSDL of LiveDocx web service
+     * Return Wsdl of LiveDocx web service
      * 
      * @return Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */      
-    public function getWSDL() 
+    public function getWsdl()
     {
         if (null !== $this->getSoapClient()) {
-            return $this->getSoapClient()->getWSDL();
+            return $this->getSoapClient()->getWsdl();
         } else {
             return $this->_wsdl;
         }

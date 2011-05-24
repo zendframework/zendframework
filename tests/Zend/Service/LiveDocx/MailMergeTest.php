@@ -27,10 +27,6 @@ namespace Zend\Service\LiveDocx;
 
 use Zend\Soap\Client as SoapClient;
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'MailMergeTest::main');
-}
-
 
 /**
  * Zend_Service_LiveDocx test case
@@ -47,146 +43,200 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_TEMPLATE_1 = 'phpunit-template.docx';
     const TEST_TEMPLATE_2 = 'phpunit-template-block-fields.doc';
-    const TEST_IMAGE_1 = 'image-01.png';
-    const TEST_IMAGE_2 = 'image-02.png';
-    const ENDPOINT = 'https://api.livedocx.com/2.0/mailmerge.asmx?wsdl';
 
-    public $path;
-    public $mailMerge;
+    const TEST_IMAGE_1    = 'image-01.png';
+    const TEST_IMAGE_2    = 'image-02.png';
+    
+    const ENDPOINT        = 'https://api.livedocx.com/2.0/mailmerge.asmx?wsdl';
+
+    public $_path;
+    public $_mailMerge;
 
     // -------------------------------------------------------------------------
 
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME')
-            || !constant('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD')
-        ) {
+        if (!constant('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME') ||
+                !constant('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD')) {
             $this->markTestSkipped('LiveDocx tests disabled');
-            return;
+            return true;
         }
         
-        $this->mailMerge = new MailMerge();
-        $this->mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
-                        ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+        $this->_mailMerge = new MailMerge();
+        $this->_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+                         ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
-        foreach($this->mailMerge->listTemplates() as $template) {
-            $this->mailMerge->deleteTemplate($template['filename']);
+        foreach($this->_mailMerge->listTemplates() as $template) {
+            $this->_mailMerge->deleteTemplate($template['filename']);
         }
 
-        $this->path = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'MailMerge');
+        $this->_path = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'MailMerge');
     }
 
     public function tearDown()
     {
-        if (isset($this->mailMerge)) {
-            foreach ($this->mailMerge->listTemplates() as $template) {
-                $this->mailMerge->deleteTemplate($template['filename']);
+        if (isset($this->_mailMerge)) {
+            foreach ($this->_mailMerge->listTemplates() as $template) {
+                $this->_mailMerge->deleteTemplate($template['filename']);
             }
-            unset($this->mailMerge);
+            unset($this->_mailMerge);
         }
+    }
+
+    // -------------------------------------------------------------------------
+
+    public function testInvalidArgumentExceptionMissingUsername()
+    {
+        $_mailMerge = new MailMerge();
+
+        try {
+            $_mailMerge->logIn();
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\InvalidArgumentException $e) {}
+
+        unset($_mailMerge);
+    }
+
+    public function testInvalidArgumentExceptionMissingPassword()
+    {
+        $_mailMerge = new MailMerge();
+        $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME);
+
+        try {
+            $_mailMerge->logIn();
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\InvalidArgumentException $e) {}
+
+        unset($_mailMerge);
+    }
+
+    public function testRuntimeExceptionInvalidCredentials()
+    {
+        $_mailMerge = new MailMerge();
+        $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+                   ->setPassword('invalid-password');
+        
+        try {
+            $_mailMerge->logIn();
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\RuntimeException $e) {}
+
+        unset($_mailMerge);
+
+        $_mailMerge = new MailMerge();
+        $_mailMerge->setUsername('invalid-username')
+                   ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+
+        try {
+            $_mailMerge->logIn();
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\RuntimeException $e) {}
+
+        unset($_mailMerge);
+    }
+
+    public function testRuntimeExceptionWsdlHttpFileNotFound()
+    {
+        $_mailMerge = new MailMerge();
+        $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+                   ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD)
+                   ->setWsdl('http://www.livedocx.com/file-not-found.wsdl');
+
+        try {
+            $_mailMerge->logIn();
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\RuntimeException $e) {}
+
+        $this->assertFalse($_mailMerge->logOut());
+
+        unset($_mailMerge);
     }
 
     // -------------------------------------------------------------------------
 
     public function testLoginUsernamePassword()
     {
-        $mailMerge = new MailMerge();
-        $mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME);
-        $mailMerge->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
-        $this->assertTrue($mailMerge->logIn());
+        $_mailMerge = new MailMerge();
+
+        $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+                   ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
+
+        $this->assertTrue($_mailMerge->logIn());
+
+        unset($_mailMerge);
     }
-    
+
     public function testLoginUsernamePasswordSoapClient()
     {
-        $mailMerge = new MailMerge();
-        $mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME);
-        $mailMerge->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
-        $mailMerge->setSoapClient(new SoapClient(self::ENDPOINT));
-        $this->assertTrue($mailMerge->logIn());
-    }    
-        
-    /**
-     * @expectedException \Zend\Service\LiveDocx\Exception
-     */
-    public function testLoginUsernamePasswordException()
-    {
-        $mailMerge = new MailMerge();
-        $mailMerge->setUsername('phpunitInvalidUsername');
-        $mailMerge->setPassword('phpunitInvalidPassword');
-        $mailMerge->logIn();
+        $_mailMerge = new MailMerge();
+
+        $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+                   ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD)
+                   ->setSoapClient(new SoapClient(self::ENDPOINT));
+
+        $this->assertTrue($_mailMerge->logIn());
+
+        unset($_mailMerge);
     }
-    
-    /**
-     * @expectedException \Zend\Service\LiveDocx\Exception
-     */
-    public function testLoginUsernamePasswordSoapClientException()
-    {
-        $mailMerge = new MailMerge();
-        $mailMerge->setUsername('phpunitInvalidUsername');
-        $mailMerge->setPassword('phpunitInvalidPassword');
-        $mailMerge->setSoapClient(new SoapClient(self::ENDPOINT));
-        $mailMerge->logIn();
-    }    
-    
+
     public function testConstructorOptionsUsernamePassword()
-    {    
-        $mailMerge = new MailMerge(
+    {
+        $_mailMerge = new MailMerge(
             array (
                 'username' => TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME,
                 'password' => TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD
             )
-        );   
-        $this->assertTrue($mailMerge->logIn());
+        );
+
+        $this->assertTrue($_mailMerge->logIn());
+
+        unset($_mailMerge);
     }
-    
+
     public function testConstructorOptionsUsernamePasswordSoapClient()
-    {    
-        $mailMerge = new MailMerge(
+    {
+        $_mailMerge = new MailMerge(
             array (
-                'username' => TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME,
-                'password' => TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD,
+                'username'   => TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME,
+                'password'   => TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD,
                 'soapClient' => new SoapClient(self::ENDPOINT)
             )
-        );   
-        $this->assertTrue($mailMerge->logIn());
-    }    
+        );
+
+        $this->assertTrue($_mailMerge->logIn());
+
+        unset($_mailMerge);
+    }
 
     // -------------------------------------------------------------------------
 
     public function testSetLocalTemplate()
     {
-        $this->assertTrue(is_a($this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->assertTrue(is_a($this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1), '\Zend\Service\LiveDocx\MailMerge'));
         $this->setExpectedException('\Zend\Service\LiveDocx\Exception');
-        @$this->mailMerge->setLocalTemplate('phpunit-nonexistent.doc');
+        @$this->_mailMerge->setLocalTemplate('phpunit-nonexistent.doc');
     }
 
     public function testSetRemoteTemplate()
     {
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->assertTrue(is_a($this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1), '\Zend\Service\LiveDocx\MailMerge'));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->assertTrue(is_a($this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
     }
-
-
+    
     public function testSetFieldValues()
     {
         $testValues = array('software' => 'phpunit');
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
-        $this->assertTrue(is_a($this->mailMerge->setFieldValues($testValues), '\Zend\Service\LiveDocx\MailMerge'));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
+        $this->assertTrue(is_a($this->_mailMerge->setFieldValues($testValues), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->assertTrue(is_a($this->mailMerge->setFieldValues($testValues), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->assertTrue(is_a($this->_mailMerge->setFieldValues($testValues), '\Zend\Service\LiveDocx\MailMerge'));
     }
 
     public function testSetFieldValue()
@@ -195,13 +245,13 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $testValue = 'phpunit';
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->assertTrue(is_a($this->mailMerge->setFieldValue($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->assertTrue(is_a($this->_mailMerge->setFieldValue($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->assertTrue(is_a($this->mailMerge->setFieldValue($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->assertTrue(is_a($this->_mailMerge->setFieldValue($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
     }
 
     public function testAssign()
@@ -210,13 +260,13 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $testValue = 'phpunit';
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->assertTrue(is_a($this->mailMerge->assign($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->assertTrue(is_a($this->_mailMerge->assign($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->assertTrue(is_a($this->mailMerge->assign($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->assertTrue(is_a($this->_mailMerge->assign($testKey, $testValue), '\Zend\Service\LiveDocx\MailMerge'));
     }
 
     public function testSetBlockFieldValues()
@@ -228,13 +278,13 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
                             array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest') );
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->assertTrue(is_a($this->mailMerge->setBlockFieldValues($testKey, $testValues), '\Zend\Service\LiveDocx\MailMerge'));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->assertTrue(is_a($this->_mailMerge->setBlockFieldValues($testKey, $testValues), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->assertTrue(is_a($this->mailMerge->setBlockFieldValues($testKey, $testValues), '\Zend\Service\LiveDocx\MailMerge'));
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->assertTrue(is_a($this->_mailMerge->setBlockFieldValues($testKey, $testValues), '\Zend\Service\LiveDocx\MailMerge'));
     }
 
     // -------------------------------------------------------------------------
@@ -252,16 +302,16 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         );
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->assertNull($this->mailMerge->createDocument());
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->assertNull($this->_mailMerge->createDocument());
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->assertNull($this->mailMerge->createDocument());
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->assertNull($this->_mailMerge->createDocument());
     }
 
     public function testRetrieveDocument()
@@ -279,22 +329,22 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         );
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->mailMerge->createDocument();
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->_mailMerge->createDocument();
         foreach ($formats as $format) {
-            $document = $this->mailMerge->retrieveDocument($format);
+            $document = $this->_mailMerge->retrieveDocument($format);
             $this->assertGreaterThan(2048, strlen($document));
         }
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->mailMerge->createDocument();
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->_mailMerge->createDocument();
         foreach ($formats as $format) {
-            $document = $this->mailMerge->retrieveDocument($format);
+            $document = $this->_mailMerge->retrieveDocument($format);
             $this->assertGreaterThan(2048, strlen($document));
         }
     }
@@ -302,7 +352,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     public function testRetrieveDocumentAppended()
     {
         $formats = array('doc', 'docx', 'html', 'pdf', 'rtf', 'txd', 'txt');
-        
+
         $testValues = array(
             array(
                 'software' => 'phpunit - document 1',
@@ -325,22 +375,22 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         );
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->mailMerge->createDocument();
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->_mailMerge->createDocument();
         foreach ($formats as $format) {
-            $document = $this->mailMerge->retrieveDocument($format);
+            $document = $this->_mailMerge->retrieveDocument($format);
             $this->assertGreaterThan(2048, strlen($document));
         }
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->mailMerge->createDocument();
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->_mailMerge->createDocument();
         foreach ($formats as $format) {
-            $document = $this->mailMerge->retrieveDocument($format);
+            $document = $this->_mailMerge->retrieveDocument($format);
             $this->assertGreaterThan(2048, strlen($document));
         }
     }
@@ -350,25 +400,25 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     public function testGetTemplateFormats()
     {
         $expectedResults = array('doc' , 'docx' , 'rtf' , 'txd');
-        $this->assertEquals($expectedResults, $this->mailMerge->getTemplateFormats());
+        $this->assertEquals($expectedResults, $this->_mailMerge->getTemplateFormats());
     }
 
     public function testGetDocumentFormats()
     {
         $expectedResults = array('doc' , 'docx' , 'html' , 'pdf' , 'rtf' , 'txd' , 'txt');
-        $this->assertEquals($expectedResults, $this->mailMerge->getDocumentFormats());
+        $this->assertEquals($expectedResults, $this->_mailMerge->getDocumentFormats());
     }
 
     public function testGetImageImportFormats()
     {
         $expectedResults = array('bmp' , 'gif' , 'jpg' , 'png' , 'tiff', 'wmf');
-        $this->assertEquals($expectedResults, $this->mailMerge->getImageImportFormats());
+        $this->assertEquals($expectedResults, $this->_mailMerge->getImageImportFormats());
     }
 
     public function testGetImageExportFormats()
     {
         $expectedResults = array('bmp' , 'gif' , 'jpg' , 'png' , 'tiff');
-        $this->assertEquals($expectedResults, $this->mailMerge->getImageExportFormats());
+        $this->assertEquals($expectedResults, $this->_mailMerge->getImageExportFormats());
     }
 
     // -------------------------------------------------------------------------
@@ -393,11 +443,11 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'tiff' => '20a96a94762a531e9879db0aa6bd673f'
         );
 
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->mailMerge->createDocument();
-        foreach($this->mailMerge->getImageExportFormats() as $format) {
-            $bitmaps = $this->mailMerge->getBitmaps(1, 1, 20, $format);
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->_mailMerge->createDocument();
+        foreach($this->_mailMerge->getImageExportFormats() as $format) {
+            $bitmaps = $this->_mailMerge->getBitmaps(1, 1, 20, $format);
             $this->assertEquals($expectedResults[$format], md5(serialize($bitmaps)));
         }
     }
@@ -422,18 +472,18 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'tiff' => '98bad79380a80c9cc43dfffc5158d0f9'
         );
 
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->assign($testValues);
-        $this->mailMerge->createDocument();
-        foreach($this->mailMerge->getImageExportFormats() as $format) {
-            $bitmaps = $this->mailMerge->getAllBitmaps(20, $format);
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->assign($testValues);
+        $this->_mailMerge->createDocument();
+        foreach($this->_mailMerge->getImageExportFormats() as $format) {
+            $bitmaps = $this->_mailMerge->getAllBitmaps(20, $format);
             $this->assertEquals($expectedResults[$format], md5(serialize($bitmaps)));
         }
     }
 
     public function testGetFontNames()
     {
-        $fonts = $this->mailMerge->getFontNames();
+        $fonts = $this->_mailMerge->getFontNames();
         if (is_array($fonts) && count($fonts) > 5) {
             foreach (array('Courier New' , 'Verdana' , 'Arial' , 'Times New Roman') as $font) {
                 if (in_array($font, $fonts)) {
@@ -455,14 +505,14 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'monthly_fee', 'total_net', 'tax', 'tax_value', 'total');
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_2);
-        $this->assertEquals($expectedResults, $this->mailMerge->getFieldNames());
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_2);
+        $this->assertEquals($expectedResults, $this->_mailMerge->getFieldNames());
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->assertEquals($expectedResults, $this->mailMerge->getFieldNames());
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->assertEquals($expectedResults, $this->_mailMerge->getFieldNames());
     }
 
     public function testGetBlockFieldNames()
@@ -470,14 +520,14 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $expectedResults = array('connection_number', 'connection_duration', 'fee');
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_2);
-        $this->assertEquals($expectedResults, $this->mailMerge->getBlockFieldNames('connection'));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_2);
+        $this->assertEquals($expectedResults, $this->_mailMerge->getBlockFieldNames('connection'));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->assertEquals($expectedResults, $this->mailMerge->getBlockFieldNames('connection'));
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->assertEquals($expectedResults, $this->_mailMerge->getBlockFieldNames('connection'));
     }
 
     public function testGetBlockNames()
@@ -485,39 +535,39 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $expectedResults = array('connection');
 
         // Remote Template
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_2);
-        $this->assertEquals($expectedResults, $this->mailMerge->getBlockNames());
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_2);
+        $this->assertEquals($expectedResults, $this->_mailMerge->getBlockNames());
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
 
         // Local Template
-        $this->mailMerge->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->assertEquals($expectedResults, $this->mailMerge->getBlockNames());
+        $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->assertEquals($expectedResults, $this->_mailMerge->getBlockNames());
     }
 
     // -------------------------------------------------------------------------
 
     public function testUploadTemplate()
     {
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
-        $this->assertNull($this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->assertNull($this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
     }
 
     public function testDownloadTemplate()
     {
         $expectedResults = '2f076af778ca5f8afc9661cfb9deb7c6';
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $template = $this->mailMerge->downloadTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $template = $this->_mailMerge->downloadTemplate(self::TEST_TEMPLATE_2);
         $this->assertEquals($expectedResults, md5($template));
     }
 
     public function testDeleteTemplate()
     {
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
         $templateDeleted = true;
-        foreach($this->mailMerge->listTemplates() as $template) {
+        foreach($this->_mailMerge->listTemplates() as $template) {
             if($template['filename'] == self::TEST_TEMPLATE_2) {
                 $templateDeleted = false;
             }
@@ -527,14 +577,14 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 
     public function testListTemplates()
     {
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
 
         // Where templates uploaded and are being listed?
         $testTemplate1Exists = false;
         $testTemplate2Exists = false;
 
-        $templates = $this->mailMerge->listTemplates();
+        $templates = $this->_mailMerge->listTemplates();
         foreach($templates as $template) {
             if(self::TEST_TEMPLATE_1 === $template['filename']) {
                 $testTemplate1Exists = true;
@@ -558,40 +608,40 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($template['modifyTime'] > mktime(0, 0, 0, 1, 1, 1980));
         }
 
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
     }
 
     public function testTemplateExists()
     {
-        $this->mailMerge->uploadTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
-        $this->assertTrue($this->mailMerge->templateExists(self::TEST_TEMPLATE_2));
-        $this->mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
+        $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
+        $this->assertTrue($this->_mailMerge->templateExists(self::TEST_TEMPLATE_2));
+        $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_2);
     }
 
     // -------------------------------------------------------------------------
 
     public function testUploadImage()
     {
-        $this->mailMerge->deleteImage(self::TEST_IMAGE_2);
-        $this->assertNull($this->mailMerge->uploadImage($this->path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2));
-        $this->mailMerge->deleteImage(self::TEST_IMAGE_2);
+        $this->_mailMerge->deleteImage(self::TEST_IMAGE_2);
+        $this->assertNull($this->_mailMerge->uploadImage($this->_path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2));
+        $this->_mailMerge->deleteImage(self::TEST_IMAGE_2);
     }
 
     public function testDownloadImage()
     {
         $expectedResults = 'f8b663e465acd570414395d5c33541ab';
-        $this->mailMerge->uploadImage($this->path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
-        $image = $this->mailMerge->downloadImage(self::TEST_IMAGE_2);
+        $this->_mailMerge->uploadImage($this->_path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
+        $image = $this->_mailMerge->downloadImage(self::TEST_IMAGE_2);
         $this->assertEquals($expectedResults, md5($image));
     }
 
     public function testDeleteImage()
     {
-        $this->mailMerge->uploadImage($this->path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
-        $this->mailMerge->deleteImage(self::TEST_IMAGE_2);
+        $this->_mailMerge->uploadImage($this->_path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
+        $this->_mailMerge->deleteImage(self::TEST_IMAGE_2);
         $imageDeleted = true;
-        foreach($this->mailMerge->listImages() as $image) {
+        foreach($this->_mailMerge->listImages() as $image) {
             if($image['filename'] == self::TEST_IMAGE_2) {
                 $imageDeleted = false;
             }
@@ -601,14 +651,14 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 
     public function testListImages()
     {
-        $this->mailMerge->uploadImage($this->path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_1);
-        $this->mailMerge->uploadImage($this->path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
+        $this->_mailMerge->uploadImage($this->_path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_1);
+        $this->_mailMerge->uploadImage($this->_path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
 
         // Where images uploaded and are being listed?
         $testImage1Exists = false;
         $testImage2Exists = false;
 
-        $images = $this->mailMerge->listImages();
+        $images = $this->_mailMerge->listImages();
         foreach($images as $image) {
             if(self::TEST_IMAGE_1 === $image['filename']) {
                 $testImage1Exists = true;
@@ -632,15 +682,15 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($image['modifyTime'] > mktime(0, 0, 0, 1, 1, 1980));
         }
 
-        $this->mailMerge->deleteImage(self::TEST_IMAGE_1);
-        $this->mailMerge->deleteImage(self::TEST_IMAGE_2);
+        $this->_mailMerge->deleteImage(self::TEST_IMAGE_1);
+        $this->_mailMerge->deleteImage(self::TEST_IMAGE_2);
     }
 
     public function testImageExists()
     {
-        $this->mailMerge->uploadImage($this->path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
-        $this->assertTrue($this->mailMerge->imageExists(self::TEST_IMAGE_2));
-        $this->mailMerge->deleteImage(self::TEST_IMAGE_2);
+        $this->_mailMerge->uploadImage($this->_path . DIRECTORY_SEPARATOR . self::TEST_IMAGE_2);
+        $this->assertTrue($this->_mailMerge->imageExists(self::TEST_IMAGE_2));
+        $this->_mailMerge->deleteImage(self::TEST_IMAGE_2);
     }
 
     // -------------------------------------------------------------------------
@@ -691,8 +741,5 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $actualResults = MailMerge::multiAssocArrayToArrayOfArrayOfString($testValues);
         $this->assertEquals($expectedResults, $actualResults);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'MailMergeTest::main') {
-    MailMergeTest::main();
+    
 }

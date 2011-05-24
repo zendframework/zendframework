@@ -148,7 +148,7 @@ class MailMerge extends AbstractLiveDocx
     public function setLocalTemplate($filename)
     {
         if (!is_readable($filename)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot read local template from disk.'
             );            
         }
@@ -161,7 +161,7 @@ class MailMerge extends AbstractLiveDocx
                 'format'   => self::getFormat($filename),
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot set local template.', 0, $e
             );
         }
@@ -187,7 +187,7 @@ class MailMerge extends AbstractLiveDocx
                 'filename' => $filename,
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot set remote template.', 0, $e
             );
         }
@@ -221,7 +221,7 @@ class MailMerge extends AbstractLiveDocx
                 'fieldValues' => self::$method($values),
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot set field values.', 0, $e
             );
         }
@@ -266,7 +266,7 @@ class MailMerge extends AbstractLiveDocx
                 'blockFieldValues' => self::multiAssocArrayToArrayOfArrayOfString($blockFieldValues)
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot set block field values.', 0, $e
             );
         }
@@ -296,7 +296,7 @@ class MailMerge extends AbstractLiveDocx
                 $this->setFieldValue($field, $value);
             }
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot assign data to template.', 0, $e
             );
         }
@@ -323,7 +323,7 @@ class MailMerge extends AbstractLiveDocx
                 'password' => $password
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot set document password. This method can be used on PDF files only.', 0, $e
             );
         }
@@ -355,7 +355,7 @@ class MailMerge extends AbstractLiveDocx
                 'password'    => $password
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot set document access permissions.', 0, $e
             );
         }
@@ -384,7 +384,7 @@ class MailMerge extends AbstractLiveDocx
         try {
             $this->getSoapClient()->CreateDocument();
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'Cannot create document.', 0, $e
             );
         }
@@ -410,7 +410,7 @@ class MailMerge extends AbstractLiveDocx
                 'format' => $format,
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'Cannot retrieve document - call setLocalTemplate() or setRemoteTemplate() first.', 0, $e
             );
         }
@@ -640,7 +640,7 @@ class MailMerge extends AbstractLiveDocx
     public function uploadTemplate($filename)
     {
         if (!is_readable($filename)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot read local template from disk.'
             );
         }
@@ -653,7 +653,7 @@ class MailMerge extends AbstractLiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'Cannot upload template.', 0, $e
             );
         }
@@ -676,7 +676,7 @@ class MailMerge extends AbstractLiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'Cannot download template', 0, $e
             );
         }
@@ -814,7 +814,7 @@ class MailMerge extends AbstractLiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot download shared document.', 0, $e
             );
         }
@@ -1003,7 +1003,7 @@ class MailMerge extends AbstractLiveDocx
     public function uploadImage($filename)
     {
         if (!is_readable($filename)) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Cannot read image file from disk.'
             );
         }
@@ -1016,7 +1016,7 @@ class MailMerge extends AbstractLiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'Cannot upload image'
             );
         }
@@ -1039,7 +1039,7 @@ class MailMerge extends AbstractLiveDocx
                 'filename' => basename($filename),
             ));
         } catch (Exception $e) {
-            throw new Exception(
+            throw new Exception\RuntimeException(
                 'Cannot download image'
             );
         }

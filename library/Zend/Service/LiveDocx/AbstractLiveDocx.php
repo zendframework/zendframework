@@ -193,7 +193,6 @@ abstract class AbstractLiveDocx
                 $this->_initSoapClient($this->getWsdl());
             }            
 
-
             try {
                 @$this->getSoapClient()->LogIn(array(
                     'username' => $this->getUsername(),
@@ -202,7 +201,7 @@ abstract class AbstractLiveDocx
                 $this->_loggedIn = true;
             } catch (\Exception $e) {
                 throw new Exception\RuntimeException(
-                    'Cannot login into LiveDocx service. ' . $e->getMessage()
+                    $e->getMessage()
                 );
             }
             
@@ -226,7 +225,7 @@ abstract class AbstractLiveDocx
                 $this->_loggedIn = false;
             } catch (\Exception $e) {
                 throw new Exception\RuntimeException(
-                    'Cannot log out of LiveDocx service. ' . $e->getMessage()
+                    $e->getMessage()
                 );
             }            
         }

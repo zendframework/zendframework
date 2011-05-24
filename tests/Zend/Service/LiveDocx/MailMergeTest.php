@@ -85,7 +85,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 
     // -------------------------------------------------------------------------
 
-    public function testInvalidArgumentExceptionMissingUsername()
+    public function testMissingUsername()
     {
         $_mailMerge = new MailMerge();
 
@@ -97,7 +97,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         unset($_mailMerge);
     }
 
-    public function testInvalidArgumentExceptionMissingPassword()
+    public function testMissingPassword()
     {
         $_mailMerge = new MailMerge();
         $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME);
@@ -110,7 +110,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         unset($_mailMerge);
     }
 
-    public function testRuntimeExceptionInvalidCredentials()
+    public function testInvalidCredentials()
     {
         $_mailMerge = new MailMerge();
         $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
@@ -135,7 +135,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         unset($_mailMerge);
     }
 
-    public function testRuntimeExceptionWsdlHttpFileNotFound()
+    public function testWsdlHttpFileNotFound()
     {
         $_mailMerge = new MailMerge();
         $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
@@ -150,6 +150,34 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($_mailMerge->logOut());
 
         unset($_mailMerge);
+    }
+
+    // -------------------------------------------------------------------------
+
+    
+    public function testSetLocalTemplateNotOnLocalFileSystem()
+    {
+        try {
+            $this->_mailMerge->setLocalTemplate('invalid-template'); 
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\InvalidArgumentException $e) {}
+    }
+
+    public function testSetRemoteTemplateNotOnRemoteFileSystem()
+    {
+        try {
+            $this->_mailMerge->setRemoteTemplate('invalid-template');
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\RuntimeException $e) {}
+        
+    }
+
+    public function testUploadTemplateNotOnLocalFileSystem()
+    {
+        try {
+            $this->_mailMerge->uploadTemplate('invalid-template');
+            $this->fail('exception expected');
+        } catch (\Zend\Service\LiveDocx\Exception\InvalidArgumentException $e) {}
     }
 
     // -------------------------------------------------------------------------

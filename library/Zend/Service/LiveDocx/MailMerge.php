@@ -160,9 +160,9 @@ class MailMerge extends AbstractLiveDocx
                 'template' => base64_encode(file_get_contents($filename)),
                 'format'   => self::getFormat($filename),
             ));
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot set local template.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
 
@@ -186,9 +186,9 @@ class MailMerge extends AbstractLiveDocx
             $this->getSoapClient()->SetRemoteTemplate(array(
                 'filename' => $filename,
             ));
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot set remote template.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
 
@@ -220,9 +220,9 @@ class MailMerge extends AbstractLiveDocx
             $this->getSoapClient()->SetFieldValues(array(
                 'fieldValues' => self::$method($values),
             ));
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot set field values.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
 
@@ -265,9 +265,9 @@ class MailMerge extends AbstractLiveDocx
                 'blockName'        => $blockName,
                 'blockFieldValues' => self::multiAssocArrayToArrayOfArrayOfString($blockFieldValues)
             ));
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot set block field values.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
 
@@ -295,9 +295,9 @@ class MailMerge extends AbstractLiveDocx
             } else {
                 $this->setFieldValue($field, $value);
             }
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot assign data to template.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
 
@@ -322,9 +322,9 @@ class MailMerge extends AbstractLiveDocx
             $this->getSoapClient()->SetDocumentPassword(array(
                 'password' => $password
             ));
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot set document password. This method can be used on PDF files only.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
         
@@ -354,9 +354,9 @@ class MailMerge extends AbstractLiveDocx
                 'permissions' => $permissions,
                 'password'    => $password
             ));
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot set document access permissions.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
         
@@ -383,9 +383,9 @@ class MailMerge extends AbstractLiveDocx
 
         try {
             $this->getSoapClient()->CreateDocument();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new Exception\RuntimeException(
-                'Cannot create document.', 0, $e
+                $e->getMessage()
             );
         }
     }
@@ -409,9 +409,9 @@ class MailMerge extends AbstractLiveDocx
             $result = $this->getSoapClient()->RetrieveDocument(array(
                 'format' => $format,
             ));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new Exception\RuntimeException(
-                'Cannot retrieve document - call setLocalTemplate() or setRemoteTemplate() first.', 0, $e
+                $e->getMessage()
             );
         }
 
@@ -652,9 +652,9 @@ class MailMerge extends AbstractLiveDocx
                 'template' => base64_encode(file_get_contents($filename)),
                 'filename' => basename($filename),
             ));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new Exception\RuntimeException(
-                'Cannot upload template.', 0, $e
+                $e->getMessage()
             );
         }
     }
@@ -813,9 +813,9 @@ class MailMerge extends AbstractLiveDocx
             $result = $this->getSoapClient()->DownloadSharedDocument(array(
                 'filename' => basename($filename),
             ));
-        } catch (Exception $e) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot download shared document.', 0, $e
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
             );
         }
 
@@ -1017,7 +1017,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception\RuntimeException(
-                'Cannot upload image'
+                $e->getMessage()
             );
         }
     }
@@ -1038,9 +1038,9 @@ class MailMerge extends AbstractLiveDocx
             $result = $this->getSoapClient()->DownloadImage(array(
                 'filename' => basename($filename),
             ));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new Exception\RuntimeException(
-                'Cannot download image'
+                $e->getMessage()
             );
         }
 

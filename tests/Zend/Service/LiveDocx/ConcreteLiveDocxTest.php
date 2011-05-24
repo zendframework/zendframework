@@ -28,9 +28,6 @@ namespace ZendTest\Service;
 namespace Zend\Service\LiveDocx;
 
 
-class ConcreteLiveDocx extends AbstractLiveDocx { }
-
-
 /**
  * @category   Zend
  * @package    Zend_Service_LiveDocx
@@ -110,3 +107,5 @@ class ConcreteLiveDocxTest extends \PHPUnit_Framework_TestCase
     // -------------------------------------------------------------------------
 
 }
+
+class ConcreteLiveDocx extends AbstractLiveDocx { }

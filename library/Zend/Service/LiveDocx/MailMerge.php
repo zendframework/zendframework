@@ -131,7 +131,7 @@ class MailMerge extends AbstractLiveDocx
         $this->_fieldValues      = array();
         $this->_blockFieldValues = array();
 
-        $this->setWSDL(self::WSDL);
+        $this->setWsdl(self::WSDL);
 
         parent::__construct($options);
     }

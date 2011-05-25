@@ -576,13 +576,21 @@ define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
 /**
  * Zend_Service_LiveDocx configuration
  *
- * Define username and password in order to run unit tests for LiveDocX web
- * services.
+ * Define username and password in order to run unit tests for LiveDocx web services.
  *
  * phpunit/phpunit will typically work.
  */
 define('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME', false);
 define('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD', false);
+
+/**
+ * Zend_Service_LiveDocx premium configuration
+ *
+ * Define username, password, WSDL in order to run unit tests for premium LiveDocx web services.
+ */
+define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME', false);
+define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD', false);
+define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL',     false);
 
 /**
  * Zend_Service_ReCaptcha tests

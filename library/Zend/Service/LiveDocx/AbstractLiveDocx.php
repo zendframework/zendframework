@@ -73,9 +73,11 @@ abstract class AbstractLiveDocx
     /**
      * Constructor
      *
-     * Optionally, pass an array of options (or Zend\Config\Config object).
+     * Optionally, pass an array of options (or \Zend\Config\Config object).
      *
-     * @param  array|Zend\Config\Config $options
+     * @param  array | \Zend\Config\Config $options
+     * @return void
+     * @since  LiveDocx 1.0
      */
     public function __construct($options = null)
     {
@@ -107,7 +109,7 @@ abstract class AbstractLiveDocx
      * One or more of username, password, soapClient
      * 
      * @param  $options
-     * @return Zend\Service\AbstractLiveDocx
+     * @return \Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.2
      */
     public function setOptions(array $options)
@@ -130,8 +132,8 @@ abstract class AbstractLiveDocx
      *
      * @param string $username
      * @param string $password
-     *
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\InvalidArgumentException
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @return boolean
      * @since  LiveDocx 1.2
      */
@@ -176,7 +178,7 @@ abstract class AbstractLiveDocx
     /**
      * Log out of the LiveDocx service
      *
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @return boolean
      * @since  LiveDocx 1.2
      */
@@ -199,8 +201,8 @@ abstract class AbstractLiveDocx
     /**
      * Set SOAP client
      *
-     * @param  Zend\Soap\Client $soapClient
-     * @return Zend\Service\AbstractLiveDocx
+     * @param  \Zend\Soap\Client $soapClient
+     * @return \Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.2
      */
     public function setSoapClient($soapClient)
@@ -225,7 +227,6 @@ abstract class AbstractLiveDocx
      * Init Soap client - connect to SOAP service
      *
      * @param  string $endpoint
-     * @throws Zend\Service\LiveDocx\Exception
      * @return void
      * @since  LiveDocx 1.2
      */
@@ -238,7 +239,7 @@ abstract class AbstractLiveDocx
     /**
      * Set username
      * 
-     * @return Zend\Service\AbstractLiveDocx
+     * @return \Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */
     public function setUsername($username)
@@ -251,7 +252,7 @@ abstract class AbstractLiveDocx
     /**
      * Return current username
      *
-     * @return string|null
+     * @return string | null
      * @since  LiveDocx 1.0
      */
     public function getUsername()
@@ -266,7 +267,7 @@ abstract class AbstractLiveDocx
     /**
      * Set password
      * 
-     * @return Zend\Service\AbstractLiveDocx
+     * @return \Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */
     public function setPassword($password)
@@ -279,7 +280,7 @@ abstract class AbstractLiveDocx
     /**
      * Return current password
      *
-     * @return string|null
+     * @return string | null
      * @since  LiveDocx 1.0
      */
     public function getPassword()
@@ -294,7 +295,7 @@ abstract class AbstractLiveDocx
     /**
      * Set WSDL of LiveDocx web service
      * 
-     * @return Zend\Service\AbstractLiveDocx
+     * @return \Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */
     public function setWsdl($wsdl)
@@ -307,7 +308,7 @@ abstract class AbstractLiveDocx
     /**
      * Return WSDL of LiveDocx web service
      *
-     * @return Zend\Service\AbstractLiveDocx
+     * @return \Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.0
      */
     public function getWsdl()

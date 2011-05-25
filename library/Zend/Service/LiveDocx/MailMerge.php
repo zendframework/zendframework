@@ -141,8 +141,8 @@ class MailMerge extends AbstractLiveDocx
      * (i.e. a template stored locally on YOUR server)
      *
      * @param  string $filename
-     * @return Zend\Service\LiveDocx\MailMerge
-     * @throws Zend\Service\LiveDocx\Exception
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\InvalidArgumentException
      * @since  LiveDocx 1.0
      */
     public function setLocalTemplate($filename)
@@ -174,8 +174,8 @@ class MailMerge extends AbstractLiveDocx
      * (i.e. a template stored remotely on the LIVEDOCX server)
      *
      * @param  string $filename
-     * @return Zend\Service\LiveDocx\MailMerge
-     * @throws Zend\Service\LiveDocx\Exception
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.0
      */
     public function setRemoteTemplate($filename)
@@ -199,8 +199,8 @@ class MailMerge extends AbstractLiveDocx
      * Set an associative or multi-associative array of keys and values pairs
      *
      * @param  array $values
-     * @return Zend\Service\LiveDocx\MailMerge
-     * @throws Zend\Service\LiveDocx\Exception
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.0
      */
     public function setFieldValues($values)
@@ -235,8 +235,8 @@ class MailMerge extends AbstractLiveDocx
      * @param string $field
      * @param array|string $value
      *
-     * @throws Zend\Service\LiveDocx\Exception
-     * @return Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
+     * @return \Zend\Service\LiveDocx\MailMerge
      * @since  LiveDocx 1.0
      */
     public function setFieldValue($field, $value)
@@ -252,8 +252,8 @@ class MailMerge extends AbstractLiveDocx
      * @param string $blockName
      * @param array $blockFieldValues
      *
-     * @return Zend\Service\LiveDocx\MailMerge
-     * @throws Zend\Service\LiveDocx\Exception
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.0
      */
     public function setBlockFieldValues($blockName, $blockFieldValues)
@@ -279,8 +279,8 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param array|string $field
      * @param array|string $value
-     * @return Zend\Service\LiveDocx\MailMerge
-     * @throws Zend\Service\LiveDocx\Exception
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.0
      */
     public function assign($field, $value = null)
@@ -310,8 +310,8 @@ class MailMerge extends AbstractLiveDocx
      * This method can only be used for PDF documents
      * 
      * @param  string  $password
-     * @return Zend\Service\LiveDocx\MailMerge
-     * @throws Zend\Service\LiveDocx\Exception
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.2 Premium
      */
     public function setDocumentPassword($password)
@@ -341,8 +341,8 @@ class MailMerge extends AbstractLiveDocx
      * 
      * @param  array  $permissions 
      * @param  string $password
-     * @return Zend\Service\LiveDocx\MailMerge
-     * @throws Zend\Service\LiveDocx\Exception
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.2 Premium
      */
     public function setDocumentAccessPermissions($permissions, $password)
@@ -366,7 +366,7 @@ class MailMerge extends AbstractLiveDocx
     /**
      * Merge assigned data with template to generate document
      *
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @return void
      * @since  LiveDocx 1.0
      */
@@ -395,7 +395,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param string $format
      *
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @return binary
      * @since  LiveDocx 1.0
      */
@@ -634,7 +634,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\InvalidArgumentException
      * @since  LiveDocx 1.0
      */
     public function uploadTemplate($filename)
@@ -664,7 +664,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return binary
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.0
      */
     public function downloadTemplate($filename)
@@ -689,7 +689,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.0
      */
     public function deleteTemplate($filename)
@@ -802,7 +802,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return binary
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 1.0
      */
     public function downloadSharedDocument($filename)
@@ -997,7 +997,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\InvalidArgumentException
      * @since  LiveDocx 2.0
      */
     public function uploadImage($filename)
@@ -1027,7 +1027,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 2.0
      */
     public function downloadImage($filename)
@@ -1072,7 +1072,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @return void
-     * @throws Zend\Service\LiveDocx\Exception
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @since  LiveDocx 2.0
      */
     public function deleteImage($filename)

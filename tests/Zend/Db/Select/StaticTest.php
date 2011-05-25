@@ -40,7 +40,7 @@ class StaticTest extends AbstractTest
     {
         $this->markTestSkipped('This suite is skipped until Zend\DB can be refactored.');
     }
-    
+
     /**
      * Test basic use of the Zend_Db_Select class.
      *
@@ -691,9 +691,6 @@ class StaticTest extends AbstractTest
      */
     public function testPhp53Assembly()
     {
-        if (version_compare(PHP_VERSION, 5.3) == -1 ) {
-            $this->markTestSkipped('This test needs at least PHP 5.3');
-        }
         $select = $this->_db->select();
         $select->from('table1', '*');
         $select->joinLeft(array('table2'), 'table1.id=table2.id');

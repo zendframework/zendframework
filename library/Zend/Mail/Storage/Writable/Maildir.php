@@ -347,8 +347,8 @@ class Maildir extends MaildirFolder implements Writable
     protected function _createUniqueId()
     {
         $id = '';
-        $id .= function_exists('microtime') ? microtime(true) : (time() . ' ' . rand(0, 100000));
-        $id .= '.' . (function_exists('posix_getpid') ? posix_getpid() : rand(50, 65535));
+        $id .= microtime(true);
+        $id .= '.' . getmypid();
         $id .= '.' . php_uname('n');
 
         return $id;

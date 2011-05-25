@@ -357,13 +357,7 @@ class InfoCard
 
         $PKcipher = Cipher::getInstanceByURI($encryptedKey->getEncryptionMethod());
 
-        $base64DecodeSupportsStrictParam = version_compare(PHP_VERSION, '5.2.0', '>=');
-
-        if ($base64DecodeSupportsStrictParam) {
-            $keyCipherValueBase64Decoded = base64_decode($encryptedKey->getCipherValue(), true);
-        } else {
-            $keyCipherValueBase64Decoded = base64_decode($encryptedKey->getCipherValue());
-        }
+        $keyCipherValueBase64Decoded = base64_decode($encryptedKey->getCipherValue(), true);
 
         $symmetricKey = $PKcipher->decrypt(
             $keyCipherValueBase64Decoded,
@@ -373,11 +367,7 @@ class InfoCard
 
         $symCipher = Cipher::getInstanceByURI($encryptedData->getEncryptionMethod());
 
-        if ($base64DecodeSupportsStrictParam) {
-            $dataCipherValueBase64Decoded = base64_decode($encryptedData->getCipherValue(), true);
-        } else {
-            $dataCipherValueBase64Decoded = base64_decode($encryptedData->getCipherValue());
-        }
+        $dataCipherValueBase64Decoded = base64_decode($encryptedData->getCipherValue(), true);
 
         $signedToken = $symCipher->decrypt($dataCipherValueBase64Decoded, $symmetricKey);
 

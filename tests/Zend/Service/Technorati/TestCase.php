@@ -48,17 +48,6 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
         }
     }
 
-    protected function _testConstructThrowsExceptionWithInvalidDom($className, $match)
-    {
-        if (self::skipInvalidArgumentTypeTests()) {
-            $this->markTestIncomplete('Failure to meet type hint results in fatal error in PHP < 5.2.0');
-            return;
-        }
-
-        // This test is unnecessary. PHP type hinting is well tested, and will throw
-        // catchable fatal errors on invalid argument types. Do nothing here.
-    }
-
     protected function _testResultSetItemsInstanceOfResult($resultSetClassName, $args, $resultClassName)
     {
         $reflection = new ReflectionClass($resultSetClassName);
@@ -137,13 +126,6 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
         $xpath = new DOMXPath($dom);
         $domElements = $xpath->query($exp);
         return $domElements->item($item);
-    }
-
-    public static function skipInvalidArgumentTypeTests()
-    {
-        // PHP < 5.2.0 returns a fatal error
-        // instead of a catchable Exception (ZF-2334)
-        return version_compare(phpversion(), "5.2.0", "<");
     }
 
 }

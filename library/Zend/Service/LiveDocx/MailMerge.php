@@ -675,7 +675,7 @@ class MailMerge extends AbstractLiveDocx
             ));
         } catch (Exception $e) {
             throw new Exception\RuntimeException(
-                'Cannot download template', 0, $e
+                'Cannot download template'
             );
         }
 

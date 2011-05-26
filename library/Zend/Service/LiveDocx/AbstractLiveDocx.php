@@ -107,8 +107,7 @@ abstract class AbstractLiveDocx
     }
 
     /**
-     * Set options
-     * One or more of username, password or soapClient.
+     * Set options. Valid options are username, password and soapClient.
      * 
      * @param  $options
      * @throws \Zend\Service\LiveDocx\Exception\InvalidArgumentException

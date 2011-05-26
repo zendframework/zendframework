@@ -24,54 +24,57 @@
  */
 namespace Zend\Service\LiveDocx;
 
+
 /**
- * @uses       Exception
- * @uses       Zend\Soap\Client
+ * @uses       \Zend\Config\Config
  * @category   Zend
  * @package    Zend_Service
  * @subpackage LiveDocx
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @since      LiveDocx 1.0
  */
 abstract class AbstractLiveDocx
 {
     /**
-     * LiveDocx service version
+     * LiveDocx service version.
      * @since LiveDocx 1.0
      */
     const VERSION = '2.0';
 
-    /**
-     * SOAP client used to connect to LiveDocx service
-     * @var   Zend\Soap\Client
-     * @since LiveDocx 1.0
-     */
-    protected $_soapClient;
 
     /**
-     * Wsdl of LiveDocx web service
+     * SOAP client used to connect to LiveDocx service.
+     * @var   \Zend\Soap\Client
+     * @since LiveDocx 1.0
+     */
+    protected $_soapClient = null;
+
+    /**
+     * WSDL of LiveDocx service.
      * @var   string
      * @since LiveDocx 1.0
      */
-    protected $_wsdl;
+    protected $_wsdl = null;
 
     /**
-     * Array of credentials (username and password) to log into backend server
+     * Array of credentials (username and password) to log into LiveDocx service.
      * @var   array
      * @since LiveDocx 1.2
      */
-    protected $_credentials;
+    protected $_credentials = array();
 
     /**
-     * Set to true, when session is logged into backend server
+     * Status of connection to LiveDocx service.
+     * When set to true, session is logged into LiveDocx service.
+     * When set to false, session is not logged into LiveDocx service.
      * @var   boolean
      * @since LiveDocx 1.2
      */
-    protected $_loggedIn;
+    protected $_isLoggedIn = null;
+
 
     /**
-     * Constructor
+     * Constructor.
      *
      * Optionally, pass an array of options (or \Zend\Config\Config object).
      *
@@ -81,8 +84,7 @@ abstract class AbstractLiveDocx
      */
     public function __construct($options = null)
     {
-        $this->_credentials = array();
-        $this->_loggedIn = false;
+        $this->_setIsLoggedIn(false);
 
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
@@ -94,28 +96,29 @@ abstract class AbstractLiveDocx
     }
 
     /**
-     * Clean up and log out of LiveDocx service
+     * Clean up and log out of LiveDocx service.
      *
      * @return boolean
      * @since  LiveDocx 1.0
      */
     public function __destruct()
     {
-        return $this->logOut();
+        return $this->_logOut();
     }
 
     /**
      * Set options
-     * One or more of username, password, soapClient
+     * One or more of username, password or soapClient.
      * 
      * @param  $options
+     * @throws \Zend\Service\LiveDocx\Exception\InvalidArgumentException
      * @return \Zend\Service\AbstractLiveDocx
      * @since  LiveDocx 1.2
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . $key;
+            $method = 'set' . ucfirst($key);
             if (!method_exists($this, $method)) {
                 throw new Exception\InvalidArgumentException(
                     'Invalid option specified - ' . $key
@@ -128,7 +131,199 @@ abstract class AbstractLiveDocx
     }
 
     /**
-     * Log in to LiveDocx service
+     * Set SOAP client.
+     *
+     * @param  \Zend\Soap\Client $soapClient
+     * @return \Zend\Service\AbstractLiveDocx
+     * @since  LiveDocx 1.2
+     */
+    public function setSoapClient($soapClient)
+    {
+        $this->_soapClient = $soapClient;
+
+        return $this;
+    }
+
+    /**
+     * Get SOAP client.
+     *
+     * @return \Zend\Soap\Client
+     * @since  LiveDocx 1.2
+     */
+    public function getSoapClient()
+    {
+        return $this->_soapClient;
+    }
+
+    /**
+     * Instantiate SOAP client.
+     *
+     * @param  string $endpoint
+     * @return void
+     * @since  LiveDocx 1.2
+     */
+    protected function _initSoapClient($endpoint)
+    {
+        $this->_soapClient = new \Zend\Soap\Client();
+        $this->_soapClient->setWsdl($endpoint);
+    }
+
+    /**
+     * Set username.
+     * 
+     * @return \Zend\Service\AbstractLiveDocx
+     * @since  LiveDocx 1.0
+     */
+    public function setUsername($username)
+    {
+        $this->_credentials['username'] = $username;
+
+        return $this;
+    }
+
+    /**
+     * Return username.
+     *
+     * @return string | null
+     * @since  LiveDocx 1.0
+     */
+    public function getUsername()
+    {
+        if (isset($this->_credentials['username'])) {
+            return $this->_credentials['username'];
+        }
+
+        return null;
+    }
+
+    /**
+     * Set password.
+     * 
+     * @return \Zend\Service\AbstractLiveDocx
+     * @since  LiveDocx 1.0
+     */
+    public function setPassword($password)
+    {
+        $this->_credentials['password'] = $password;
+
+        return $this;
+    }
+
+    /**
+     * Return password.
+     *
+     * @return string | null
+     * @since  LiveDocx 1.0
+     */
+    public function getPassword()
+    {
+        if (isset($this->_credentials['password'])) {
+            return $this->_credentials['password'];
+        }
+
+        return null;
+    }
+
+    /**
+     * Set WSDL of LiveDocx service.
+     * 
+     * @return \Zend\Service\AbstractLiveDocx
+     * @since  LiveDocx 1.0
+     */
+    public function setWsdl($wsdl)
+    {
+        $this->_wsdl = $wsdl;
+
+        return $this;
+    }
+
+    /**
+     * Return WSDL of LiveDocx service.
+     *
+     * @return \Zend\Service\AbstractLiveDocx
+     * @since  LiveDocx 1.0
+     */
+    public function getWsdl()
+    {
+        if (null !== $this->getSoapClient()) {
+            return $this->getSoapClient()->getWsdl();
+        } else {
+            return $this->_wsdl;
+        }
+    }
+
+    /**
+     * Return the document format (extension) of a filename.
+     *
+     * @param  string $filename
+     * @return string
+     * @since  LiveDocx 1.0
+     */
+    public function getFormat($filename)
+    {
+        return strtolower(substr(strrchr($filename, '.'), 1));
+    }
+
+    /**
+     * Return the current API version.
+     *
+     * @return string
+     * @since  LiveDocx 1.0
+     */
+    public function getVersion()
+    {
+        return self::VERSION;
+    }
+
+    /**
+     * Compare the current API version with another version.
+     *
+     * @param  string $version (STRING NOT FLOAT).
+     * @return int -1 (version is less than API version), 0 (versions are equal), or 1 (version is greater than API version).
+     * @since  LiveDocx 1.0
+     */
+    public function compareVersion($version)
+    {
+        return version_compare($version, $this->getVersion());
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Return logged into LiveDocx service status.
+     * (true = logged in, false = not logged in).
+     *
+     * @return boolean
+     * @since  LiveDocx 1.2
+     */
+    protected function _getIsLoggedIn()
+    {
+        return $this->_isLoggedIn;
+    }
+
+    /**
+     * Set logged into LiveDocx service status.
+     * (true = logged in, false = not logged in).
+     *
+     * @throws \Zend\Service\LiveDocx\Exception\InvalidArgumentException
+     * @return boolean
+     * @since  LiveDocx 1.2
+     */
+    protected function _setIsLoggedIn($state)
+    {
+        if (!is_bool($state)) {
+            throw new Exception\InvalidArgumentException(
+                'Logged in status must be boolean.'
+            );
+        }
+
+        $this->_isLoggedIn = $state;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Log in to LiveDocx service.
      *
      * @param string $username
      * @param string $password
@@ -137,9 +332,9 @@ abstract class AbstractLiveDocx
      * @return boolean
      * @since  LiveDocx 1.2
      */
-    public function logIn()
+    protected function _logIn()
     {
-        if (!$this->isLoggedIn()) {
+        if (false === $this->_getIsLoggedIn()) {
 
             if (null === $this->getUsername()) {
                 throw new Exception\InvalidArgumentException(
@@ -164,7 +359,7 @@ abstract class AbstractLiveDocx
                     'username' => $this->getUsername(),
                     'password' => $this->getPassword()
                 ));
-                $this->_loggedIn = true;
+                $this->_setIsLoggedIn(true);
             } catch (\Exception $e) {
                 throw new Exception\RuntimeException(
                     $e->getMessage()
@@ -172,22 +367,22 @@ abstract class AbstractLiveDocx
             }
         }
 
-        return $this->_loggedIn;
+        return $this->_isLoggedIn;
     }
 
     /**
-     * Log out of the LiveDocx service
+     * Log out of the LiveDocx service.
      *
      * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
      * @return boolean
      * @since  LiveDocx 1.2
      */
-    public function logOut()
+    protected function _logOut()
     {
-        if ($this->isLoggedIn()) {
+        if ($this->_getIsLoggedIn()) {
             try {
                 $this->getSoapClient()->LogOut();
-                $this->_loggedIn = false;
+                $this->_setIsLoggedIn(false);
             } catch (\Exception $e) {
                 throw new Exception\RuntimeException(
                     $e->getMessage()
@@ -195,175 +390,9 @@ abstract class AbstractLiveDocx
             }
         }
 
-        return $this->_loggedIn;
+        return $this->_isLoggedIn;
     }
 
-    /**
-     * Set SOAP client
-     *
-     * @param  \Zend\Soap\Client $soapClient
-     * @return \Zend\Service\AbstractLiveDocx
-     * @since  LiveDocx 1.2
-     */
-    public function setSoapClient($soapClient)
-    {
-        $this->_soapClient = $soapClient;
-
-        return $this;
-    }
-
-    /**
-     * Get SOAP client
-     *
-     * @return Zend\Soap\Client
-     * @since  LiveDocx 1.2
-     */
-    public function getSoapClient()
-    {
-        return $this->_soapClient;
-    }
-
-    /**
-     * Init Soap client - connect to SOAP service
-     *
-     * @param  string $endpoint
-     * @return void
-     * @since  LiveDocx 1.2
-     */
-    protected function _initSoapClient($endpoint)
-    {
-        $this->_soapClient = new \Zend\Soap\Client();
-        $this->_soapClient->setWsdl($endpoint);
-    }
-
-    /**
-     * Set username
-     * 
-     * @return \Zend\Service\AbstractLiveDocx
-     * @since  LiveDocx 1.0
-     */
-    public function setUsername($username)
-    {
-        $this->_credentials['username'] = $username;
-
-        return $this;
-    }
-
-    /**
-     * Return current username
-     *
-     * @return string | null
-     * @since  LiveDocx 1.0
-     */
-    public function getUsername()
-    {
-        if (isset($this->_credentials['username'])) {
-            return $this->_credentials['username'];
-        }
-
-        return null;
-    }
-
-    /**
-     * Set password
-     * 
-     * @return \Zend\Service\AbstractLiveDocx
-     * @since  LiveDocx 1.0
-     */
-    public function setPassword($password)
-    {
-        $this->_credentials['password'] = $password;
-
-        return $this;
-    }
-
-    /**
-     * Return current password
-     *
-     * @return string | null
-     * @since  LiveDocx 1.0
-     */
-    public function getPassword()
-    {
-        if (isset($this->_credentials['password'])) {
-            return $this->_credentials['password'];
-        }
-
-        return null;
-    }
-
-    /**
-     * Set WSDL of LiveDocx web service
-     * 
-     * @return \Zend\Service\AbstractLiveDocx
-     * @since  LiveDocx 1.0
-     */
-    public function setWsdl($wsdl)
-    {
-        $this->_wsdl = $wsdl;
-
-        return $this;
-    }
-
-    /**
-     * Return WSDL of LiveDocx web service
-     *
-     * @return \Zend\Service\AbstractLiveDocx
-     * @since  LiveDocx 1.0
-     */
-    public function getWsdl()
-    {
-        if (null !== $this->getSoapClient()) {
-            return $this->getSoapClient()->getWsdl();
-        } else {
-            return $this->_wsdl;
-        }
-    }
-
-    /**
-     * Return the document format (extension) of a filename
-     *
-     * @param  string $filename
-     * @return string
-     * @since  LiveDocx 1.0
-     */
-    public function getFormat($filename)
-    {
-        return strtolower(substr(strrchr($filename, '.'), 1));
-    }
-
-    /**
-     * Return the current API version
-     *
-     * @return string
-     * @since  LiveDocx 1.0
-     */
-    public function getVersion()
-    {
-        return self::VERSION;
-    }
-
-    /**
-     * Compare the current API version with another version
-     *
-     * @param  string $version (STRING NOT FLOAT)
-     * @return int -1 (version is less than API version), 0 (versions are equal), or 1 (version is greater than API version)
-     * @since  LiveDocx 1.0
-     */
-    public function compareVersion($version)
-    {
-        return version_compare($version, $this->getVersion());
-    }
-
-    /**
-     * Return true, if session is currently logged into the backend server
-     *
-     * @return boolean
-     * @since  LiveDocx 1.2
-     */
-    public function isLoggedIn()
-    {
-        return $this->_loggedIn;
-    }
+    // -------------------------------------------------------------------------
 
 }

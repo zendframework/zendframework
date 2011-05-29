@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\System\Provider;
-use Zend\Tool\Framework;
+use Zend\Tool\Framework,
+    Zend\Tool\Framework\Provider\AbstractProvider,
+    Zend\Tool\Framework\Exception\RuntimeException;
 
 /**
  * Configuration Provider
@@ -40,7 +42,7 @@ use Zend\Tool\Framework;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Config extends Framework\Provider\AbstractProvider
+class Config extends AbstractProvider
 {
     /**
      * @var array
@@ -185,10 +187,9 @@ class Config extends Framework\Provider\AbstractProvider
      */
     public function enableProvider($className)
     {
-        end\Loader::loadClass($className);
         $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend_Tool_Framework_Provider_Interface", $reflClass->getInterfaceNames())) {
-            throw new Framework\Exception("Given class is not a provider");
+        if (!in_array("Zend\Tool\Framework\Provider", $reflClass->getInterfaceNames())) {
+            throw new RuntimeException("Given class is not a provider");
         }
         $this->_doEnable($className);
     }

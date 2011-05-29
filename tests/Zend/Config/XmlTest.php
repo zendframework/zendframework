@@ -181,11 +181,24 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-3578
+     * @group ZF2-13
      */
     public function testInvalidXmlFile()
     {
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'parser error');
-        $config = new Xml($this->_xmlFileInvalid);
+        try {
+            $config = new Xml($this->_xmlFileInvalid);
+            $this->fail('Missing expected exception');
+        } catch (\Zend\Config\Exception\InvalidArgumentException $e) {
+            // read exception stack
+            do {
+                $stack[] = $e;
+            } while ( ($e = $e->getPrevious()) );
+
+            // test two thrown xml errors
+            $this->assertEquals(2, count($stack));
+            $this->assertContains('tag mismatch', $stack[0]->getMessage());
+            $this->assertContains('undefined', $stack[1]->getMessage());
+        }
     }
 
     /**

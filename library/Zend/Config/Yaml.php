@@ -158,14 +158,11 @@ class Yaml extends Config
             }
         }
 
-        // Suppress warnings and errors while loading file
-        set_error_handler(array($this, '_loadFileErrorHandler'));
-        $yaml = file_get_contents($yaml);
-        restore_error_handler();
-
-        // Check if there was a error while loading file
-        if ($this->_loadFileErrorStr !== null) {
-            throw new Exception\RuntimeException($this->_loadFileErrorStr);
+        // read the yaml file
+        $yaml = @file_get_contents($yaml);
+        if ($yaml === false) {
+            $err = error_get_last();
+            throw new Exception\RuntimeException($err['message']);
         }
 
         // Override static value for ignore_constants if provided in $options

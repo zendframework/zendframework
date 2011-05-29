@@ -86,15 +86,6 @@ class Config implements \Countable, \Iterator
     protected $_extends = array();
 
     /**
-     * Load file error string.
-     *
-     * Is null if there was no error while file loading
-     *
-     * @var string
-     */
-    protected $_loadFileErrorStr = null;
-
-    /**
      * Zend_Config provides a property based interface to
      * an array. The data are read-only unless $allowModifications
      * is set to true on construction.
@@ -432,23 +423,6 @@ class Config implements \Countable, \Iterator
         }
         // remember that this section extends another section
         $this->_extends[$extendingSection] = $extendedSection;
-    }
-
-    /**
-     * Handle any errors from simplexml_load_file or parse_ini_file
-     *
-     * @param integer $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param integer $errline
-     */
-    protected function _loadFileErrorHandler($errno, $errstr, $errfile, $errline)
-    {
-        if ($this->_loadFileErrorStr === null) {
-            $this->_loadFileErrorStr = $errstr;
-        } else {
-            $this->_loadFileErrorStr .= (PHP_EOL . $errstr);
-        }
     }
 
     /**

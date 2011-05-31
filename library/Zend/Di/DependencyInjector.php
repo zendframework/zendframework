@@ -21,6 +21,13 @@ class DependencyInjector implements DependencyInjection
     protected $instances = array();
 
     /**
+     * All the class dependencies [source][dependency]
+     * 
+     * @var array 
+     */
+    protected $dependencies= array();
+
+    /**
      * Lazy-load a class
      *
      * Attempts to load the class (or service alias) provided. If it has been 
@@ -194,7 +201,28 @@ class DependencyInjector implements DependencyInjection
 
         return $this->definitions[$service];
     }
-
+    /**
+     * Check for Circular Dependencies
+     *
+     * @param string $class
+     * @param array|string $dependency
+     * @return boolean
+     */
+    protected function checkCircularDependency($class, $dependency)
+    {
+        if (is_array($dependency)) {
+            foreach ($dependency as $dep) {
+                if (isset($this->dependencies[$dep][$class]) && $this->dependencies[$dep][$class]) {
+                    throw new Exception\RuntimeException("Circular dependency detected: $class depends on $dep and viceversa");
+                }
+            }
+        } else {
+            if (isset($this->dependencies[$dependency][$class]) && $this->dependencies[$dependency][$class]) {
+                throw new Exception\RuntimeException("Circular dependency detected: $class depends on $dependency and viceversa");
+            }
+        }
+        return true;
+    }
     /**
      * Retrieve a class instance based on class name
      *
@@ -208,6 +236,7 @@ class DependencyInjector implements DependencyInjection
      */
     protected function getInstanceFromClassName($class, array $params)
     {
+        $originalParams= $params;
         // Hack to avoid Reflection in most common use cases
         switch (count($params)) {
             case 0:
@@ -219,20 +248,31 @@ class DependencyInjector implements DependencyInjection
                 }
                 if ($param instanceof DependencyReference) {
                     $param = $this->get($param->getServiceName());
+                    $this->dependencies[$class][$param]= true;
                 }
+                $this->checkCircularDependency($class, $param);
                 return new $class($param);
             case 2:
                 $param1 = array_shift($params);
                 if ($param1 instanceof DependencyReference) {
                     $param1 = $this->get($param1->getServiceName());
+                    $this->dependencies[$class][$param1]= true;
                 }
                 $param2 = array_shift($params);
                 if ($param2 instanceof DependencyReference) {
                     $param2 = $this->get($param2->getServiceName());
+                    $this->dependencies[$class][$param2]= true;
                 }
+                $this->checkCircularDependency($class, $originalParams);
                 return new $class($param1, $param2);
             default:
+                foreach ($params as $key => $value) {
+                    if ($value instanceof DependencyReference) {
+                        $this->dependencies[$class][$value]= true;
+                    }
+                }
                 $params = $this->resolveReferences($params);
+                $this->checkCircularDependency($class, $originalParams);
                 $r = new \ReflectionClass($class);
                 return $r->newInstanceArgs($params);
         }

@@ -151,7 +151,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $value = $bugs->info('_non_existent_');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e);
             $this->assertEquals('There is no table information for the key "_non_existent_"', $e->getMessage());
         }
@@ -320,7 +320,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $ref = $table->getReference('\ZendTest\Db\Table\TestAsset\TableAccounts', 'Verifier');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e);
             $this->assertEquals('No reference rule "Verifier" from table ZendTest\Db\Table\TestAsset\TableBugs to table \ZendTest\Db\Table\TestAsset\TableAccounts', $e->getMessage());
         }
@@ -328,7 +328,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $ref = $table->getReference('\ZendTest\Db\Table\TestAsset\TableProducts');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e);
             $this->assertEquals('No reference from table ZendTest\Db\Table\TestAsset\TableBugs to table \ZendTest\Db\Table\TestAsset\TableProducts', $e->getMessage());
         }
@@ -336,7 +336,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $ref = $table->getReference('\ZendTest\Db\Table\TestAsset\TableProducts', 'Product');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e);
             $this->assertEquals('No reference rule "Product" from table ZendTest\Db\Table\TestAsset\TableBugs to table \ZendTest\Db\Table\TestAsset\TableProducts', $e->getMessage());
         }
@@ -344,7 +344,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $ref = $table->getReference('\ZendTest\Db\Table\TestAsset\TableProducts', 'Reporter');
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e);
             $this->assertEquals('Reference rule "Reporter" does not reference table \ZendTest\Db\Table\TestAsset\TableProducts', $e->getMessage());
         }
@@ -394,7 +394,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table = new \ZendTest\Db\Table\TestAsset\TableBugs();
             $this->fail('Zend_Db_Table_Exception should be thrown');
-        }catch(\Zend\Exception $e) {
+        }catch(\Exception $e) {
          $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
         }
@@ -429,7 +429,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             Table\AbstractTable::setDefaultAdapter(new \stdClass());
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals("Argument must be of type Zend_Db_Adapter_Abstract, or a Registry key where a Zend_Db_Adapter_Abstract object is stored", $e->getMessage());
@@ -451,7 +451,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
             $table = $this->_getTable('\ZendTest\Db\Table\TestAsset\TableBugs', array('primary' => ''));
             $primary = $table->info(Table\AbstractTable::PRIMARY);
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertContains("Primary key column(s)", $e->getMessage());
@@ -465,7 +465,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
             $table   = new \ZendTest\Db\Table\TestAsset\TableBugs(array('primary' => 'foo'));
             $primary = $table->info(Table\AbstractTable::PRIMARY);
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertContains("Primary key column(s)", $e->getMessage());
@@ -484,7 +484,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                 array('name' => $tableName));
             $primary = $table->info(Table\AbstractTable::PRIMARY);
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals('A table must have a primary key, but none was found', $e->getMessage());
@@ -502,7 +502,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table = $this->_getTable('\ZendTest\Db\Table\TestAsset\TableSpecial',
                 array('name' => $tableName, 'primary' => 'id'));
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('Expected to succeed without a Zend_Db_Table_Exception');
         }
 
@@ -522,7 +522,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table = new \ZendTest\Db\Table\TestAsset\TableBugs(array('db' => 327));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals("Argument must be of type Zend_Db_Adapter_Abstract, or a Registry key where a Zend_Db_Adapter_Abstract object is stored", $e->getMessage());
@@ -535,7 +535,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table = new \ZendTest\Db\Table\TestAsset\TableBugs(array('db' => 'registered_db'));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals("Argument must be of type Zend_Db_Adapter_Abstract, or a Registry key where a Zend_Db_Adapter_Abstract object is stored", $e->getMessage());
@@ -566,7 +566,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table->find(1);
             $this->fail('Expected to catch Zend_Db_Table_Exception for missing key');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals('Too few columns for the primary key', $e->getMessage());
@@ -579,7 +579,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table->find(1, 2);
             $this->fail('Expected to catch Zend_Db_Table_Exception for incorrect key count');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals('Too many columns for the primary key', $e->getMessage());
@@ -610,7 +610,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $rowset = $table->find(array(1, 1), 2);
             $this->fail('Expected to catch Zend_Db_Table_Exception for incorrect key count');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals('Missing value(s) for the primary key', $e->getMessage());
@@ -1410,7 +1410,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             Table\AbstractTable::setDefaultMetadataCache(new \stdClass());
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals("Argument must be of type Zend_Cache_Core, or a Registry key where a Zend_Cache_Core object is stored", $e->getMessage());
@@ -1436,7 +1436,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table = new \ZendTest\Db\Table\TestAsset\TableBugs(array('metadataCache' => 327));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals("Argument must be of type Zend_Cache_Core, or a Registry key where a Zend_Cache_Core object is stored", $e->getMessage());
@@ -1449,7 +1449,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         try {
             $table = new \ZendTest\Db\Table\TestAsset\TableBugs(array('metadataCache' => 'registered_metadata_cache'));
             $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend_Db_Table_Exception, got '.get_class($e));
             $this->assertEquals("Argument must be of type Zend_Cache_Core, or a Registry key where a Zend_Cache_Core object is stored", $e->getMessage());

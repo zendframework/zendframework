@@ -223,7 +223,7 @@ class Proxy extends Socket
             $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
             if ($gotStatus) {
                 $response .= $line;
-                if (!chop($line)) break;
+                if (!rtrim($line)) break;
             }
         }
 

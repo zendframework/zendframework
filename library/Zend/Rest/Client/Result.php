@@ -162,7 +162,7 @@ class Result implements \IteratorAggregate
 
         $result = $this->_sxml->xpath("//$name");
 
-        if (sizeof($result) > 0) {
+        if (count($result) > 0) {
             return true;
         }
 
@@ -233,7 +233,7 @@ class Result implements \IteratorAggregate
             return (string) $message[0];
         } else {
             $result = $this->_sxml->xpath('//response');
-            if (sizeof($result) > 1) {
+            if (count($result) > 1) {
                 return (string) "An error occured.";
             } else {
                 return (string) $result[0];

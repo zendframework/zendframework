@@ -26,8 +26,7 @@ namespace Zend\Markup;
 /**
  * Exception class for Zend_Markup
  *
- * @uses       \Zend\Exception
- * @category   Zend 
+ * @category   Zend
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

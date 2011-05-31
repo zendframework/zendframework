@@ -155,7 +155,7 @@ class Movable extends AbstractContainer
      *
      * @param string $property
      * @param  string $value
-     * @throws \Zend\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function __set($property, $value)
     {

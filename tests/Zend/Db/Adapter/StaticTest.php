@@ -96,7 +96,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         try {
             // this test used to read as 'TestNamespace', but due to ZF-5606 has been changed
             $db = Db\Db::factory('StaticAdapter', array('dbname' => 'dummy', 'adapterNamespace' => '\ZendTest\Db\Adapter\TestAsset\Testnamespace'));
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('Caught exception of type '.get_class($e).' where none was expected: '.$e->getMessage());
         }
         
@@ -113,7 +113,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         try {
             $db = Db\Db::factory('Version', array('dbname' => 'dummy', 'adapterNamespace' => 'Zend'));
             $this->fail('Expected to catch Zend_Db_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Exception', $e,
                 'Expected exception of type Zend_Db_Exception, got '.get_class($e));
             $this->assertEquals("Adapter class 'Zend\Version' does not extend Zend\Db\Adapter\AbstractAdapter", $e->getMessage());
@@ -125,7 +125,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         try {
             $db = Db\Db::factory(null);
             $this->fail('Expected to catch Zend_Db_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Exception', $e,
                 'Expected exception of type Zend_Db_Exception, got '.get_class($e));
             $this->assertEquals($e->getMessage(), 'Adapter name must be specified in a string');
@@ -169,7 +169,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         try {
             $db = Db\Db::factory('StaticAdapter', array());
             $this->fail('Expected to catch Zend_Db_Adapter_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend_Db_Adapter_Exception', $e,
                 'Expected exception of type Zend_Db_Adapter_Exception, got '.get_class($e));
             $this->assertEquals("Configuration must have a key for 'dbname' that names the database instance", $e->getMessage());
@@ -203,7 +203,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         try {
             $db = Db\Db::factory($config1);
             $this->fail('Expected to catch Zend_Db_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend_Db_Exception', $e,
                 'Expected exception of type Zend_Db_Exception, got '.get_class($e));
             $this->assertEquals($e->getMessage(), 'Adapter name must be specified in a string');

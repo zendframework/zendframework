@@ -24,7 +24,6 @@
 namespace Zend\Reflection;
 
 /**
- * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

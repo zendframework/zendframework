@@ -2,6 +2,6 @@
 namespace Zend\Search\Lucene\Exception;
 
 class UnsupportedMethodCallException
-	extends \Zend\Exception
+	extends \BadMethodCallException
 	implements \Zend\Search\Lucene\Exception
 {}

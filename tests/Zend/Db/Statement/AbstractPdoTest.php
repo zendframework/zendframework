@@ -65,7 +65,7 @@ abstract class AbstractPdoTest extends AbstractTest
         try {
             $stmt->nextRowset();
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals('SQLSTATE[IM001]: Driver does not support this function: driver does not support multiple rowsets', $e->getMessage());
@@ -93,7 +93,7 @@ abstract class AbstractPdoTest extends AbstractTest
         try {
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertType('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertTrue($e->hasChainedException(), 'Missing Chained Exception');

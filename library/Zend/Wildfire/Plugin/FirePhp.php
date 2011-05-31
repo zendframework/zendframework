@@ -466,7 +466,8 @@ class FirePhp implements Wildfire\Plugin
             if (!isset($meta['File']) || !isset($meta['Line'])) {
 
                 if (!$trace) {
-                    $trace = $firephp->_getStackTrace($options);
+                    $trace = $firephp->_getStackTrace(array_merge($options,
+                                                                  array('maxTraceDepth'=>$options['maxTraceDepth']+1)));
                 }
 
                 $meta['File'] = isset($trace[0]['file'])?$trace[0]['file']:'';
@@ -504,7 +505,22 @@ class FirePhp implements Wildfire\Plugin
     {
         $trace = debug_backtrace();
 
-        return array_splice($trace, $options['traceOffset'], $options['maxTraceDepth']);
+        $trace = array_splice($trace, $options['traceOffset']);
+
+        if (!count($trace)) {
+            return $trace;
+        }
+
+        if (isset($options['fixZendLogOffsetIfApplicable']) && $options['fixZendLogOffsetIfApplicable']) {
+            if (count($trace) >=3 &&
+                isset($trace[0]['file']) && substr($trace[0]['file'], -10, 10)=='Logger.php' &&
+                isset($trace[1]['function']) && $trace[1]['function']=='__call') {
+
+                $trace = array_splice($trace, 2);
+            }
+        }
+
+        return array_splice($trace, 0, $options['maxTraceDepth']);
     }
 
     /**
@@ -601,7 +617,7 @@ class FirePhp implements Wildfire\Plugin
       if (!$trace) {
           return $trace;
       }
-      for ($i=0 ; $i<sizeof($trace) ; $i++) {
+      for ($i=0 ; $i<count($trace) ; $i++) {
           if (isset($trace[$i]['args'])) {
               $trace[$i]['args'] = $this->_encodeObject($trace[$i]['args']);
           }

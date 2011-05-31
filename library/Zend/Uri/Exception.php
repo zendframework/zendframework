@@ -26,7 +26,6 @@ namespace Zend\Uri;
 /**
  * Exceptions for Zend_Uri
  *
- * @uses      \Zend\Exception
  * @category  Zend
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

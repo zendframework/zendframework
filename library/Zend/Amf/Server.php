@@ -516,7 +516,7 @@ class Server implements \Zend\Server\Server
         } else {
             // authentication failed, good bye
             throw new Exception\RuntimeException(
-                "Authentication failed: " . join("\n",
+                "Authentication failed: " . implode("\n",
                     $result->getMessages()), $result->getCode());
         }
 

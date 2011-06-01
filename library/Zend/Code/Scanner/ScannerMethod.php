@@ -6,6 +6,7 @@ class ScannerMethod implements ScannerInterface
 {
     protected $isScanned = false;
     
+    protected $scannerClass = null;
     protected $class = null;
     protected $uses = array();
     protected $name = null;
@@ -19,11 +20,25 @@ class ScannerMethod implements ScannerInterface
     protected $tokens = array();
     protected $infos = array();
     
-    public function __construct(array $methodTokens, $class = null, array $uses = array())
+    public function __construct(array $methodTokens, array $uses = array())
     {
         $this->tokens = $methodTokens;
-        $this->class = $class;
         $this->uses = $uses;
+    }
+    
+    public function setClass($class)
+    {
+        $this->class = $class;
+    }
+    
+    public function setScannerClass(ScannerClass $scannerClass)
+    {
+        $this->scannerClass = $scannerClass;
+    }
+    
+    public function getClassScanner()
+    {
+        return $this->scannerClass;
     }
     
     protected function scan()
@@ -114,6 +129,7 @@ class ScannerMethod implements ScannerInterface
         // first token is paren let loop increase
         $parenCount = 1;
         $info = null;
+        $position = 0;
         
         while (true) {
             $tokenIndex++;
@@ -138,7 +154,7 @@ class ScannerMethod implements ScannerInterface
             if ($parenCount == 1 && isset($info)) {
                 $nextToken = (isset($info['name']) && is_string($this->tokens[$tokenIndex+1])) ? $this->tokens[$tokenIndex+1] : null;
                 if ((is_string($token) && $token == ',') || (isset($nextToken) && $nextToken == ')')) {
-                    $info['tokenEnd'] = $tokenIndex;
+                    $info['tokenEnd'] = $tokenIndex - 1;
                     $this->infos[] = $info;
                     unset($info);
                 }
@@ -161,7 +177,8 @@ class ScannerMethod implements ScannerInterface
                     'tokenEnd'    => null,
                     'lineStart'   => $this->tokens[$tokenIndex][2],
                     'lineEnd'     => null,
-                    'name'        => null
+                    'name'        => null,
+                    'position'    => ++$position
                 );
             }
 
@@ -269,11 +286,16 @@ class ScannerMethod implements ScannerInterface
             }
         }
         
-        return new $returnScanner(
-            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] - 1),
-            $this->name,
+        $p = new $returnScanner(
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
             $this->uses
             );
+        $p->setDeclaringFunction($this->name);
+        $p->setDeclaringScannerFunction($this);
+        $p->setDeclaringClass($this->class);
+        $p->setDeclaringScannerClass($this->scannerClass);
+        $p->setPosition($info['position']);
+        return $p;
     }
 
     public static function export()

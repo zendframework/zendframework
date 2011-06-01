@@ -25,7 +25,7 @@ abstract class BarClass
         // two
     }
     
-    protected function three(\ArrayObject $o, $t = 2, FooBarBaz\BazBarFoo $bbf = self::BAR)
+    protected function three(\ArrayObject $o, &$t = 2, FooBarBaz\BazBarFoo $bbf = self::BAR)
     {
         // two
     }

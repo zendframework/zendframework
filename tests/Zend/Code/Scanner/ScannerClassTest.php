@@ -4,7 +4,7 @@ namespace ZendTest\Code\Scanner;
 
 use Zend\Code\Scanner\ScannerFile;
 
-final class ScannerClassTest extends \PHPUnit_Framework_TestCase
+class ScannerClassTest extends \PHPUnit_Framework_TestCase
 {
     
     public function testScannerClassHasClassInformation()

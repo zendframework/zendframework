@@ -455,7 +455,7 @@ class ScannerTokenArray implements ScannerInterface
         }
         
         return new $returnScannerClass(
-            array_slice($this->tokens, $info['tokenStart'], ($info['tokenEnd'] - $info['tokenStart'] - 1)), // zero indexed array
+            array_slice($this->tokens, $info['tokenStart'], ($info['tokenEnd'] - $info['tokenStart'] + 1)), // zero indexed array
             $info['namespace'],
             $uses
             );

@@ -398,6 +398,11 @@ class ScannerClass implements ScannerInterface
         return $return;
     }
     
+    /**
+     * @param string|int $methodNameOrInfoIndex
+     * @param string $returnScannerClass
+     * @return Zend\Code\Scanner\ScannerMethod
+     */
     public function getMethod($methodNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ScannerMethod')
     {
         $this->scan();
@@ -432,11 +437,13 @@ class ScannerClass implements ScannerInterface
             }
         }
         
-        return new $returnScannerClass(
-            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] - 1),
-            $this->name,
+        $m = new $returnScannerClass(
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
             $this->uses
             );
+        $m->setClass($this->name);
+        $m->setScannerClass($this);
+        return $m;
     }
     
     public static function export()

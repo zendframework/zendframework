@@ -7,37 +7,33 @@ use Zend\Code\Scanner\ScannerFile;
 class ScannerFileTest extends \PHPUnit_Framework_TestCase
 {
     
-    public function testFileScannerReturnsNamespacesWithoutScannerClass()
+    public function testScannerFileReturnsNamespacesWithoutScannerClass()
     {
         $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
-        $fileScanner->scan();
         $namespaces = $fileScanner->getNamespaces();
         $this->assertInternalType('array', $namespaces);
         $this->assertContains('ZendTest\Code\TestAsset', $namespaces);
     }
     
-    public function testFileScannerReturnsClassesWithoutScannerClass()
+    public function testScannerFileReturnsClassesWithoutScannerClass()
     {
         $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
-        $fileScanner->scan();
         $classes = $fileScanner->getClasses();
         $this->assertInternalType('array', $classes);
         $this->assertContains('ZendTest\Code\TestAsset\FooClass', $classes);
     }
     
-    public function testFileScannerReturnsFunctionsWithoutScannerClass()
+    public function testScannerFileReturnsFunctionsWithoutScannerClass()
     {
         $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/functions.php');
-        $fileScanner->scan();
         $functions = $fileScanner->getFunctions();
         $this->assertInternalType('array', $functions);
         $this->assertContains('ZendTest\Code\TestAsset\foo_bar', $functions);
     }
     
-    public function testFileScannerReturnsClassesWithScannerClass()
+    public function testScannerFileReturnsClassesWithScannerClass()
     {
         $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
-        $fileScanner->scan();
         $classes = $fileScanner->getClasses(true);
         $this->assertInternalType('array', $classes);
         $class = array_shift($classes);

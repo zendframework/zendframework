@@ -4,6 +4,8 @@ namespace Zend\Code\Scanner;
 
 class ScannerClass implements ScannerInterface
 {
+    protected $isScanned = false;
+    
     protected $namespace = null;
     protected $uses = array();
     protected $name = null;
@@ -28,7 +30,7 @@ class ScannerClass implements ScannerInterface
         $this->uses = $uses;
     }
     
-    public function scan()
+    protected function scan()
     {
         if (!$this->tokens) {
             throw new \RuntimeException('No tokens were provided');
@@ -82,40 +84,42 @@ class ScannerClass implements ScannerInterface
             }
         }
         
-        // find constants
-        // find properties
-        // find methods
-        // var_dump($this);
+        $this->isScanned = true;
     }
     
-    protected function scanClassInfo($classTokenIndex, &$fastForward)
+    protected function scanClassInfo($tokenIndex, &$fastForward)
     {
-        if (isset($this->tokens[$classTokenIndex-2]) && is_array($this->tokens[$classTokenIndex-2])) {
-            $tokenTwoBack = $this->tokens[$classTokenIndex-2];
+        if (isset($this->tokens[$tokenIndex-2]) && is_array($this->tokens[$tokenIndex-2])) {
+            $tokenTwoBack = $this->tokens[$tokenIndex-2];
         }
+        
+        // T_ABSTRACT & T_FINAL will have been bypassed if no class name, and will alwasy be 2 tokens behind T_CLASS
         $this->isAbstract = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_ABSTRACT));
         $this->isFinal = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_FINAL));
-        $this->isInterface = (is_array($this->tokens[$classTokenIndex]) && $this->tokens[$classTokenIndex][0] == T_INTERFACE);
-        $this->shortName = $this->tokens[$classTokenIndex+2][1];
+        
+        $this->isInterface = (is_array($this->tokens[$tokenIndex]) && $this->tokens[$tokenIndex][0] == T_INTERFACE);
+        $this->shortName = $this->tokens[$tokenIndex+2][1];
         $this->name = (($this->namespace) ? $this->namespace . '\\' : '') . $this->shortName;
         
-        $index = $classTokenIndex;
         
         $context = null;
         $interfaceIndex = 0;
         while (true) {
             $fastForward++;
-            $token = $this->tokens[$index++];
-            if (is_string($token)) {
-                if ($context == T_IMPLEMENTS && $token == ',') {
-                    $interfaceIndex++;
-                    $this->shortInterfaces[$interfaceIndex] = '';
-                }
-                if ($token == '{') {
-                    $context = null;
-                    break;
-                }
+            $tokenIndex++;
+            $token = $this->tokens[$tokenIndex];
+            
+            // BREAK ON
+            if (is_string($token) && $token == '{') {
+                break;
             }
+            
+            // ANALYZE
+            if (is_string($token) && $context == T_IMPLEMENTS && $token == ',') {
+                $interfaceIndex++;
+                $this->shortInterfaces[$interfaceIndex] = '';
+            }
+            
             if (is_array($token)) {
                 if ($token[0] == T_NS_SEPARATOR || $token[0] == T_STRING) {
                     if ($context == T_EXTENDS) {
@@ -127,7 +131,7 @@ class ScannerClass implements ScannerInterface
                 if ($token[0] == T_EXTENDS) {
                     die('found extends');
                     $fastForward += 2;
-                    $index += 2;
+                    $tokenIndex += 2;
                     $this->shortParentClass = '';
                 }
                 if ($token[0] == T_IMPLEMENTS) {
@@ -135,8 +139,10 @@ class ScannerClass implements ScannerInterface
                     $this->shortInterfaces[$interfaceIndex] = '';
                 }
             }
+
         }
         
+        // create function to resolve short names with uses
         $namespace = $this->namespace;
         $uses = $this->uses;
         $resolveUseFunc = function (&$value, $key = null) use (&$namespace, &$uses) {
@@ -171,23 +177,27 @@ class ScannerClass implements ScannerInterface
 
     }
     
-    protected function scanConstant($constTokenIndex, &$fastForward)
+    protected function scanConstant($tokenIndex, &$fastForward)
     {
         $info = array(
             'type'       => 'constant',
-            'tokenStart' => $constTokenIndex,
+            'tokenStart' => $tokenIndex,
             'tokenEnd'   => null,
-            'lineStart'  => $this->tokens[$constTokenIndex][2],
+            'lineStart'  => $this->tokens[$tokenIndex][2],
             'lineEnd'    => null,
             'name'       => null,
             'value'	     => null
             );
             
-        $index = $constTokenIndex;
-
-        do {
+        while (true) {
             $fastForward++;
-            $token = $this->tokens[$index++];
+            $tokenIndex++;
+            $token = $this->tokens[$tokenIndex];
+            
+            // BREAK ON
+            if (is_string($token) && $token == ';') {
+                break;
+            }
             
             if ((is_array($token) && $token[0] == T_WHITESPACE) || (is_string($token) && $token == '=')) {
                 continue;
@@ -199,74 +209,47 @@ class ScannerClass implements ScannerInterface
                 $info['lineEnd'] = $token[2];
             }
             
-        } while (!(is_string($token) && $token == ';'));
+        }
         
-        $info['tokenEnd'] = $index;
+        $info['tokenEnd'] = $tokenIndex;
         $this->infos[] = $info;
     }
     
-    protected function scanMethod($memberTokenIndex, &$fastForward)
+    protected function scanMethod($tokenIndex, &$fastForward)
     {
-        //static $visibilities = array(T_PUBLIC => 'public', T_PROTECTED => 'protected', T_PRIVATE => 'private');
-        
         $info = array(
         	'type'        => 'method',
-            'tokenStart'  => $memberTokenIndex,
+            'tokenStart'  => $tokenIndex,
             'tokenEnd'    => null,
-            'lineStart'   => $this->tokens[$memberTokenIndex][2],
+            'lineStart'   => $this->tokens[$tokenIndex][2],
             'lineEnd'     => null,
             'name'        => null
-            /*
-            'visibility'  => null,
-            'isFinal'     => false,
-            'isStatic'    => false
-            */
             );
         
-        $index = $memberTokenIndex;
-
         $braceCount = 0;
-        do {
+        while (true) {
             $fastForward++;
-            $token = $this->tokens[$index++];
+            $tokenIndex++;
+            $token = $this->tokens[$tokenIndex];
             
+            // BREAK ON
+            if (is_string($token) && $token == '}' && $braceCount == 1) {
+                break;
+            }
+            
+            // ANALYZE
             if (is_string($token)) {
                 if ($token == '{') {
                     $braceCount++;
                 }
                 if ($token == '}') {
-                    $braceCount = ($braceCount == 1) ? false : ($braceCount - 1);
+                    $braceCount--;
                 }
             }
             
-            switch ($token[0]) {
-                case T_PUBLIC:
-                case T_PROTECTED:
-                case T_PRIVATE:
-                case T_FINAL:
-                case T_STATIC:
-                    continue;
-            }
-            
-            /*
-            if (isset($visibilities[$token[0]])) { // T_PUBLIC, T_PROTECTED, T_PRIVATE
-                //$info['visibility'] = $visibilities[$token[0]];
-                continue;
-            }
-            
-            if ($token[0] === T_FINAL) {
-                //$info['isFinal'] = true;
-                continue;
-            }
-            
-            if ($token[0] === T_STATIC) {
-                //$info['isStatic'] = true;
-                continue;
-            }
-            */
-            
             if ($token[0] === T_FUNCTION) {
-                $info['name'] = $this->tokens[$index+1][1];
+                // next token after T_WHITESPACE is name
+                $info['name'] = $this->tokens[$tokenIndex+2][1];
                 continue;
             } 
             
@@ -274,56 +257,36 @@ class ScannerClass implements ScannerInterface
                 $info['lineEnd'] = $token[2];
             }
             
-        } while ($braceCount !== false);
+        }
         
-        $info['tokenEnd'] = $index;
+        $info['tokenEnd'] = $tokenIndex;
         $this->infos[] = $info;
     }
     
-    protected function scanProperty($propertyTokenIndex, &$fastForward)
+    protected function scanProperty($tokenIndex, &$fastForward)
     {
-        //static $visibilities = array(T_PUBLIC => 'public', T_PROTECTED => 'protected', T_PRIVATE => 'private');
         $info = array(
         	'type'        => 'property',
-            'tokenStart'  => $propertyTokenIndex,
+            'tokenStart'  => $tokenIndex,
             'tokenEnd'    => null,
-            'lineStart'   => $this->tokens[$propertyTokenIndex][2],
+            'lineStart'   => $this->tokens[$tokenIndex][2],
             'lineEnd'     => null,
             'name'        => null
-            /*
-            'visibility'  => null,
-            'isStatic'    => false,
-            'value'       => null
-            */
             );
         
-        $index = $propertyTokenIndex;
+        $index = $tokenIndex;
 
-        do {
+        while (true) {
             $fastForward++;
-            $token = $this->tokens[$index++];
+            $tokenIndex++;
+            $token = $this->tokens[$tokenIndex];
             
-            switch ($token[0]) {
-                case T_PUBLIC:
-                case T_PROTECTED:
-                case T_PRIVATE:
-                case T_FINAL:
-                case T_STATIC:
-                    continue;
+            // BREAK ON
+            if (is_string($token) && $token = ';') {
+                break;
             }
             
-            /*
-            if (isset($visibilities[$token[0]])) { // T_PUBLIC, T_PROTECTED, T_PRIVATE
-                $info['visibility'] = $visibilities[$token[0]];
-                continue;
-            }
-            
-            if ($token[0] === T_STATIC) {
-                $info['isStatic'] = true;
-                continue;
-            }
-            */
-            
+            // ANALYZE
             if ($token[0] === T_VARIABLE) {
                 $info['name'] = ltrim($token[1], '$');
                 continue;
@@ -333,7 +296,7 @@ class ScannerClass implements ScannerInterface
                 $info['lineEnd'] = $token[2];
             }
             
-        } while (!(is_string($token) && $token == ';'));
+        }
         
         $info['tokenEnd'] = $index;
         $this->infos[] = $info;
@@ -341,36 +304,44 @@ class ScannerClass implements ScannerInterface
     
     public function getName()
     {
+        $this->scan();
         return $this->name;
     }
     
     public function getShortName()
     {
+        $this->scan();
         return $this->shortName;
     }
     
     public function isFinal()
     {
+        $this->scan();
         return $this->isFinal;
     }
 
     public function isAbstract()
     {
+        $this->scan();
         return $this->isAbstract;
     }
     
     public function isInterface()
     {
+        $this->scan();
         return $this->isInterface;
     }
 
     public function getInterfaces()
     {
+        $this->scan();
         return $this->interfaces;
     }
     
     public function getConstants()
     {
+        $this->scan();
+        
         $return = array();
         
         foreach ($this->infos as $info) {
@@ -389,6 +360,8 @@ class ScannerClass implements ScannerInterface
     
     public function getProperties($returnScannerProperty = false)
     {
+        $this->scan();
+        
         $return = array();
         
         foreach ($this->infos as $info) {
@@ -407,6 +380,8 @@ class ScannerClass implements ScannerInterface
     
     public function getMethods($returnScannerMethod = false)
     {
+        $this->scan();
+        
         $return = array();
         
         foreach ($this->infos as $info) {
@@ -425,6 +400,8 @@ class ScannerClass implements ScannerInterface
     
     public function getMethod($methodNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ScannerMethod')
     {
+        $this->scan();
+        
         // process the class requested
         static $baseScannerClass = 'Zend\Code\Scanner\ScannerMethod';
         if ($returnScannerClass !== $baseScannerClass) {
@@ -455,22 +432,21 @@ class ScannerClass implements ScannerInterface
             }
         }
         
-        $uses = array();
-        for ($u = 0; $u < count($this->infos); $u++) {
-            if ($this->infos[$u]['type'] == 'use') {
-                foreach ($this->infos[$u]['statements'] as $useStatement) {
-                    $useKey = ($useStatement['as']) ?: $useStatement['asComputed'];
-                    $uses[$useKey] = $useStatement['use'];
-                }
-            }
-        }
-        
         return new $returnScannerClass(
-            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart']),
-            $info['namespace'],
-            $uses
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] - 1),
+            $this->name,
+            $this->uses
             );
     }
     
+    public static function export()
+    {
+        // @todo
+    }
+    
+    public function __toString()
+    {
+        // @todo
+    }
     
 }

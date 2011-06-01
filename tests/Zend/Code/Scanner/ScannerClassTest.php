@@ -9,10 +9,8 @@ final class ScannerClassTest extends \PHPUnit_Framework_TestCase
     
     public function testScannerClassHasClassInformation()
     {
-        $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
-        $fileScanner->scan();
-        $class = $fileScanner->getClass('ZendTest\Code\TestAsset\FooClass');
-        $class->scan();
+        $file = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertEquals('ZendTest\Code\TestAsset\FooClass', $class->getName());
         $this->assertEquals('FooClass', $class->getShortName());
         $this->assertFalse($class->isFinal());
@@ -29,31 +27,34 @@ final class ScannerClassTest extends \PHPUnit_Framework_TestCase
     
     public function testScannerClassHasConstant()
     {
-        $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
-        $fileScanner->scan();
-        $class = $fileScanner->getClass('ZendTest\Code\TestAsset\FooClass');
-        $class->scan();
+        $file = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertInternalType('array', $class->getConstants());
         //
     }
     
     public function testScannerClassHasProperties()
     {
-        $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
-        $fileScanner->scan();
-        $class = $fileScanner->getClass('ZendTest\Code\TestAsset\FooClass');
-        $class->scan();
+        $file = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertInternalType('array', $class->getProperties());
         $this->assertContains('bar', $class->getProperties());
     }
     
     public function testScannerClassHasMethods()
     {
-        $fileScanner = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
-        $fileScanner->scan();
-        $class = $fileScanner->getClass('ZendTest\Code\TestAsset\FooClass');
-        $class->scan();
+        $file = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertContains('fooBarBaz', $class->getMethods());
+    }
+    
+    public function testScannerClassReturnsMethodsWithScannerMethod()
+    {
+        $file = new ScannerFile(__DIR__ . '/../TestAsset/FooClass.php');
+        $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+        $methods = $class->getMethods(true);
+        $method = array_shift($methods);
+        $this->assertInstanceOf('Zend\Code\Scanner\ScannerMethod', $method);
     }
     
 }

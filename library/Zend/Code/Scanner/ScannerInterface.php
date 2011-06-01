@@ -4,5 +4,6 @@ namespace Zend\Code\Scanner;
 
 interface ScannerInterface
 {
-    public function scan();
+    public static function export();
+    public function __toString();
 }

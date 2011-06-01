@@ -19,9 +19,10 @@ class ScannerFile extends ScannerTokenArray implements ScannerInterface
         if (!file_exists($file)) {
             throw new \InvalidArgumentException('File not found');
         }
+        $this->reset();
     }
     
-    public function scan()
+    protected function scan()
     {
         if (!$this->file) {
             throw new \RuntimeException('File was not provided');
@@ -30,7 +31,15 @@ class ScannerFile extends ScannerTokenArray implements ScannerInterface
         parent::scan();
     }
     
-
+    public static function export()
+    {
+        // @todo
+    }
+    
+    public function __toString()
+    {
+        // @todo
+    }
     
     
 }

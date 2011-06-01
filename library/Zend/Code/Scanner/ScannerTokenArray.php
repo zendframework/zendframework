@@ -4,6 +4,7 @@ namespace Zend\Code\Scanner;
 
 class ScannerTokenArray implements ScannerInterface
 {
+    protected $isScanned = false;
     
     protected $tokens = array();
     
@@ -16,13 +17,24 @@ class ScannerTokenArray implements ScannerInterface
         }
     }
 
+    public function reset()
+    {
+        $this->isScanned = false;
+        $this->infos = array();
+    }
+    
     public function setTokens(array $tokens)
     {
         $this->tokens = $tokens;
+        $this->reset();
     }
     
-    public function scan()
+    protected function scan()
     {
+        if ($this->isScanned) {
+            return;
+        }
+        
         if (!$this->tokens) {
             throw new \RuntimeException('No tokens were provided');
         }
@@ -66,191 +78,244 @@ class ScannerTokenArray implements ScannerInterface
                 $tokenIndex += $fastForward - 1;
             }            
         }
+        
+        $this->isScanned = true;
     }
     
-    protected function scanNamespace($namespaceTokenIndex, &$fastForward)
+    protected function scanNamespace($tokenIndex, &$fastForward)
     {
         $info = array(
             'type'       => 'namespace',
-            'tokenStart' => $namespaceTokenIndex,
+            'tokenStart' => $tokenIndex,
             'tokenEnd'   => null,
-            'lineStart'  => $this->tokens[$namespaceTokenIndex][2],
+            'lineStart'  => $this->tokens[$tokenIndex][2],
             'lineEnd'    => null,
             'namespace'  => null
-            );
-        $namespaceName = '';
-        $index = $namespaceTokenIndex;
-        $token = null;
-        do {
+        );
+
+        // move past current T_NAMESPACE & following T_WHITESPACE
+        $tokenIndex++; 
+        $fastForward++;
+        
+        while (true) {
+            $tokenIndex++;
             $fastForward++;
-            $token = $this->tokens[$index++];
+            $token = $this->tokens[$tokenIndex];
+            
+            // BREAK ON:
+            if (is_string($token) && $token == ';') {
+                break;
+            }
+            
+            // ANALYZE
             if (is_array($token)) {
                 $info['lineEnd'] = $token[2];
                 if ($token[0] == T_WHITESPACE) {
                     continue;
                 }
                 if ($token[0] == T_NS_SEPARATOR || $token[0] == T_STRING) {
-                    $namespaceName .= (is_string($token)) ? $token : $token[1];
+                    $info['namespace'] .= (is_string($token)) ? $token : $token[1];
                 }
             }
-        } while (!(is_string($token) && $token == ';'));
+        }
         
-        $info['tokenEnd'] = $index;
-        $info['namespace'] = $namespaceName;
+        $info['tokenEnd'] = $tokenIndex;
         $this->infos[] = $info;
-        return $namespaceName;
+        
+        return $info['namespace'];
     }
     
-    protected function scanUse($useTokenIndex, &$fastForward)
+    protected function scanUse($tokenIndex, &$fastForward)
     {
         $info = array(
             'type'       => 'use',
-            'tokenStart' => $useTokenIndex,
+            'tokenStart' => $tokenIndex,
             'tokenEnd'   => null,
-            'lineStart'  => $this->tokens[$useTokenIndex][2],
+            'lineStart'  => $this->tokens[$tokenIndex][2],
             'lineEnd'    => null,
             'statements' => array()
-            );
+        );
+        
         static $statementTemplate = array(
             'use' => null,
             'as' => null,
             'asComputed' => null
-            );
-        $statement = $statementTemplate;
+        );
+        
+        // skip current token T_USE and following T_WHITESPACE
+        $tokenIndex++; 
+        $fastForward++;
+        
+        $sCount = 0;
+        $info['statements'][$sCount] = $statementTemplate;
         $hasAs = false;
-        $index = $useTokenIndex;
-        $token = null;
-        do {
+
+        while (true) {
+            $tokenIndex++;
             $fastForward++;
-            $token = $this->tokens[$index++];
+            $token = $this->tokens[$tokenIndex];
+
+            // BREAK ON:
+            if (is_string($token) && $token == ';') {
+                break;
+            }
+            
+            // ANALYZE
             if (is_array($token)) {
+                // store known line end
                 $info['lineEnd'] = $token[2];
-                if ($token[0] == T_WHITESPACE) {
-                    continue;
-                }
+                
                 if ($token[0] == T_NS_SEPARATOR || $token[0] == T_STRING) {
                     if ($hasAs == false) {
-                        $statement['use'] .= (is_string($token)) ? $token : $token[1];
+                        $info['statements'][$sCount]['use'] .= (is_string($token)) ? $token : $token[1];
                     } else {
-                        $statement['as'] = $token[1]; // always a string
+                        $info['statements'][$sCount]['as'] = $token[1]; // always a string
                     }
                 }
                 if ($token[0] == T_AS) {
                     $hasAs = true;
                 }
             }
-            if (is_string($token) && $token == ',' || $token == ';') {
+            
+            if (is_string($token) && $token == ',') {
                 if (!$hasAs) {
-                    $statement['asComputed'] = substr($statement['use'], strrpos($statement['use'], '\\')+1);
+                    $statement['asComputed'] = substr(
+                        $info['statements'][$sCount]['use'],
+                        (strrpos($info['statements'][$sCount]['use'],'\\')+1)
+                    );
                 }
-                $info['statements'][] = $statement;
-                $statement = $statementTemplate;
+                $sCount++;
+                $info['statements'][$sCount] = $statementTemplate;
                 $hasAs = false;
             }
+            
         }
-        while (!(is_string($token) && $token == ';'));
         
-        $info['tokenEnd'] = $index;
+        $info['tokenEnd'] = $tokenIndex;
         $this->infos[] = $info;
     }
     
-    protected function scanInclude($includeTokenIndex, &$fastForward)
+    protected function scanInclude($tokenIndex, &$fastForward)
     {
         static $types = array(T_INCLUDE => 'include', T_INCLUDE_ONCE => 'include_once', T_REQUIRE => 'require', T_REQUIRE_ONCE => 'require_once');
         $info = array(
             'type'        => 'include',
-            'tokenStart'  => $includeTokenIndex,
+            'tokenStart'  => $tokenIndex,
             'tokenEnd'    => null,
-            'lineStart'   => $this->tokens[$includeTokenIndex][2],
+            'lineStart'   => $this->tokens[$tokenIndex][2],
             'lineEnd'     => null,
-            'includeType' => $types[$this->tokens[$includeTokenIndex][0]],
+            'includeType' => $types[$this->tokens[$tokenIndex][0]],
             'path'        => ''
             );
 
         $path = '';
-        $index = $includeTokenIndex;
+        $index = $tokenIndex;
         
         // move past include & the required whitespace
-        $fastForward += 2;
-        $index += 2;
+        $fastForward++;
+        $index++;
 
-        do {
+        while (true) {
             $fastForward++;
+            $tokenIndex++;
             $token = $this->tokens[$index++];
+            
+            // BREAK ON
+            if (is_string($token) && $token == ';') {
+                break;
+            }
+            
+            // ANALYZE
             if (is_array($token)) {
                 $info['lineEnd'] = $token[2];
-            }
+            }            
+            
             $info['path'] .= (is_string($token)) ? $token : $token[1];
-        } while (!(is_string($token) && $token == ';'));
+        }
         
-        $info['tokenEnd'] = $index;
+        $info['tokenEnd'] = $tokenIndex;
         $this->infos[] = $info;
     }
     
-    protected function scanClass($classTokenIndex, &$fastForward, $namespace = null)
+    protected function scanClass($tokenIndex, &$fastForward, $namespace = null)
     {
         $info = array(
             'type'        => 'class',
-            'tokenStart'  => $classTokenIndex,
+            'tokenStart'  => $tokenIndex,
             'tokenEnd'    => null,
-            'lineStart'   => $this->tokens[$classTokenIndex][2],
+            'lineStart'   => $this->tokens[$tokenIndex][2],
             'lineEnd'     => null,
             'namespace'   => $namespace,
             'name'        => null,
             'shortName'   => null
             );
         
-        $index = $classTokenIndex;
-        
-        $firstToken = $this->tokens[$classTokenIndex];
-        
-        if ($firstToken[0] === T_FINAL || $firstToken[0] === T_ABSTRACT) {
-            $info['shortName'] = $this->tokens[$classTokenIndex+4][1];
+        // if FINAL or ABSTRACT marker is found, find name accordingly
+        if ($this->tokens[$tokenIndex][0] === T_FINAL || $this->tokens[$tokenIndex][0] === T_ABSTRACT) {
+            $info['shortName'] = $this->tokens[$tokenIndex+4][1];
         } else {
-            $info['shortName'] = $this->tokens[$classTokenIndex+2][1];
+            $info['shortName'] = $this->tokens[$tokenIndex+2][1];
         }
         
         $info['name'] = (($namespace) ? $namespace . '\\' : '') . $info['shortName'];
-        
+
         $braceCount = 0;
-        do {
+        while (true) {
             $fastForward++;
-            $token = $this->tokens[$index++];
+            $tokenIndex++;
+            $token = $this->tokens[$tokenIndex];
+            
+            // BREAK ON
+            if (is_string($token) && $token == '}' && $braceCount == 1) {
+                break;
+            }
+            
+            // ANALYZE
             if (is_string($token)) {
                 if ($token == '{') {
                     $braceCount++;
                 }
                 if ($token == '}') {
-                    $braceCount = ($braceCount == 1) ? false : ($braceCount - 1);
+                    $braceCount--;
                 }
             }
+            
             if (is_array($token)) {
                 $info['lineEnd'] = $token[2];
             }
-        } while ($braceCount !== false);
+            
+
+        }
         
-        $info['tokenEnd'] = $index;
+        $info['tokenEnd'] = $tokenIndex;
         $this->infos[] = $info;
     }
     
-    protected function scanFunction($functionTokenIndex, &$fastForward, $namespace = null, $usesComputed = array())
+    protected function scanFunction($tokenIndex, &$fastForward, $namespace = null, $usesComputed = array())
     {
         $info = array(
             'type'        => 'function',
-            'tokenStart'  => $functionTokenIndex,
+            'tokenStart'  => $tokenIndex,
             'tokenEnd'    => null,
-            'lineStart'   => $this->tokens[$functionTokenIndex][2],
+            'lineStart'   => $this->tokens[$tokenIndex][2],
             'lineEnd'     => null,
-            'name'        => $namespace . '\\' . $this->tokens[$functionTokenIndex+2][1],
-            'shortName'   => $this->tokens[$functionTokenIndex+2][1],
+            'name'        => $namespace . '\\' . $this->tokens[$tokenIndex+2][1],
+            'shortName'   => $this->tokens[$tokenIndex+2][1],
             'namespace'   => $namespace,
             );
 
-        $index = $functionTokenIndex;
         $braceCount = 0;
-        do {
+        while (true) {
             $fastForward++;
-            $token = $this->tokens[$index++];
+            $tokenIndex++;
+            $token = $this->tokens[$tokenIndex];
+            
+            // BREAK ON
+            if ($braceCount === false) {
+                break;
+            }
+            
+            // ANALYZE
             if (is_string($token)) {
                 if ($token == '{') {
                     $context = null;
@@ -263,15 +328,17 @@ class ScannerTokenArray implements ScannerInterface
             if (is_array($token)) {
                 $info['lineEnd'] = $token[2];
             }
-        } while ($braceCount !== false);
+        }
         
-        $info['tokenEnd'] = $index;
+        $info['tokenEnd'] = $tokenIndex;
         $this->infos[] = $info;
     }
             
     
     public function getNamespaces($returnScannerClass = false)
     {
+        $this->scan();
+        
         if (!$returnScannerClass) {
             $namespaces = array();
             foreach ($this->infos as $info) {
@@ -291,6 +358,8 @@ class ScannerTokenArray implements ScannerInterface
     
     public function getUses($returnScannerClass = false)
     {
+        $this->scan();
+        
         if (!$returnScannerClass) {
             $namespaces = array();
             foreach ($this->infos as $info) {
@@ -310,11 +379,14 @@ class ScannerTokenArray implements ScannerInterface
     
     public function getIncludes($returnScannerClass = false)
     {
+        $this->scan();
         // @todo Implement getIncludes() in ScannerTokenArray
     }
     
     public function getClasses($returnScannerClass = false)
     {
+        $this->scan();
+        
         $return = array();
         
         foreach ($this->infos as $info) {
@@ -340,6 +412,8 @@ class ScannerTokenArray implements ScannerInterface
      */
     public function getClass($classNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ScannerClass')
     {
+        $this->scan();
+        
         // process the class requested
         static $baseScannerClass = 'Zend\Code\Scanner\ScannerClass';
         if ($returnScannerClass !== $baseScannerClass) {
@@ -381,7 +455,7 @@ class ScannerTokenArray implements ScannerInterface
         }
         
         return new $returnScannerClass(
-            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart']),
+            array_slice($this->tokens, $info['tokenStart'], ($info['tokenEnd'] - $info['tokenStart'] - 1)), // zero indexed array
             $info['namespace'],
             $uses
             );
@@ -389,6 +463,8 @@ class ScannerTokenArray implements ScannerInterface
     
     public function getFunctions($returnScannerClass = false)
     {
+        $this->scan();
+        
         if (!$returnScannerClass) {
             $functions = array();
             foreach ($this->infos as $info) {
@@ -404,6 +480,16 @@ class ScannerTokenArray implements ScannerInterface
             $scannerClass = new $returnScannerClass;
             // @todo
         }
+    }
+    
+    public static function export()
+    {
+        // @todo
+    }
+    
+    public function __toString()
+    {
+        // @todo
     }
     
 }

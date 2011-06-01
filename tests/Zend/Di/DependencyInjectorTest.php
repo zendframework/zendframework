@@ -342,6 +342,39 @@ class DependencyInjectorTest extends TestCase
         $this->assertSame($testParams, $testStruct->params, sprintf('Params: %s; struct: %s', var_export($testParams, 1), var_export($testStruct, 1)));
     }
 
+     /**
+     * Test for Circular Dependencies
+     */
+    public function testCircularDependencies() 
+    {
+        $classA= new Definition('ZendTest\Di\TestAsset\ClassA');
+        $classA->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassB'));
+        $this->di->setDefinition($classA, 'A');
+        
+        $classB= new Definition('ZendTest\Di\TestAsset\ClassB');
+        $classB->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassA'));
+        $this->setExpectedException('Zend\Di\Exception\RuntimeException');
+        $this->di->setDefinition($classB, 'B');
+    }
+    /**
+     * Test for No Circular Dependencies
+     */
+    public function testNoCircularDependencies() 
+    {
+        $classA= new Definition('ZendTest\Di\TestAsset\ClassA');
+        $this->di->setDefinition($classA, 'A');
+        
+        $classB= new Definition('ZendTest\Di\TestAsset\ClassB');
+        $this->di->setDefinition($classB, 'B');
+
+        $a= $this->di->get('A');
+        $b= $this->di->get('B');
+        
+        $a->setParam($b);
+        $b->setParam($a);
+        $this->assertEquals($a->getParam(),$b);
+        $this->assertEquals($b->getParam(),$a);
+    }
     /**
      * @todo tests for recursive DI calls
      */

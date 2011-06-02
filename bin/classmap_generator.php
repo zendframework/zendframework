@@ -126,6 +126,9 @@ iterator_apply($l, function() use ($l, $map, $strip){
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getRealpath());
 
+    // Replace directory separators with constant
+    $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);
+
     $map->{$namespace . $file->classname} = $filename;
 
     return true;
@@ -138,6 +141,9 @@ $content = '<' . "?php\n"
 
 // Prefix with __DIR__; modify the generated content
 $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+
+// Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
+$content = str_replace("\\'", "'", $content);
 
 // Write the contents to disk
 file_put_contents($output, $content);

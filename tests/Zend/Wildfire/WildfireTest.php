@@ -839,15 +839,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                             [FirePhp::PLUGIN_URI]
                             [0];
 
-        if (version_compare(phpversion(), '5.3' , '<')) {
-
-          $this->assertEquals($message,
-                              '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject1","public:name":"Name","public:value":"Value","protected:static:protectedStatic":"** Need PHP 5.3 to get value **"}]');
-        } elseif (version_compare(phpversion(), '5.3' , '>=')) {
-
-          $this->assertEquals($message,
+        $this->assertEquals($message,
                               '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject1","public:name":"Name","public:value":"Value","protected:static:protectedStatic":"ProtectedStatic"}]');
-        }
 
         $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
                             [FirePhp::PLUGIN_URI]
@@ -875,17 +868,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                             [FirePhp::PLUGIN_URI]
                             [0];
 
-        if (version_compare(phpversion(), '5.3' , '<')) {
-
-          $this->assertEquals($message,
-                              '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject2","public:public":"Public","private:private":"Private","protected:protected":"Protected","public:static:static":"Static","private:static:staticPrivate":"** Need PHP 5.3 to get value **","protected:static:staticProtected":"** Need PHP 5.3 to get value **"}]');
-
-        } else
-        if (version_compare(phpversion(), '5.3' , '>=')) {
-
-          $this->assertEquals($message,
+        $this->assertEquals($message,
                               '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject2","public:public":"Public","private:private":"Private","protected:protected":"Protected","public:static:static":"Static","private:static:staticPrivate":"StaticPrivate","protected:static:staticProtected":"StaticProtected"}]');
-        }
     }
 
     /**

@@ -419,6 +419,43 @@ class Uri
      */
     public function makeRelative($baseUri)
     {
+        // Copy base URI, we should not modify it
+        $baseUri = new static($baseUri);
+        
+        $this->normalize();
+        $baseUri->normalize();
+        
+        if ($this->getHost() && $baseUri->getHost() && ($this->getHost() != $baseUri->getHost())) {
+            // Not the same hostname 
+            return $this; 
+        }
+        
+        if ($this->getPort() && $baseUri->getPort() && ($this->getPort() != $baseUri->getPort())) { 
+            // Not the same port
+            return $this;
+        }
+        
+        if ($this->getScheme() && $baseUri->getScheme() && ($this->getScheme() != $baseUri->getScheme())) {
+            // Not the same scheme (e.g. HTTP vs. HTTPS) 
+            return $this;
+        }
+        
+        // Remove host, port and scheme
+        $this->setHost(null)
+             ->setPort(null)
+             ->setScheme(null);
+        
+        // Is path the same? 
+        if ($this->getPath() == $baseUri->getPath()) { 
+            $this->setPath('');
+        }
+        
+        $pathParts = preg_split('|(/)|', $this->getPath(), null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $baseParts = preg_split('|(/)|', $baseUri->getPath(), null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        
+        $matchingParts = array_intersect_assoc($pathParts, $baseParts);
+        var_dump($matchingParts);
+        
         return $this;
     }
     

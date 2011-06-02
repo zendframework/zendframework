@@ -722,6 +722,18 @@ class UriTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test that makeRelative() works as expected
+     * 
+     * @dataProvider commonBaseUriProvider
+     */
+    public function testMakeRelative($base, $url, $expected)
+    {
+        $url = new Uri($url);
+        $url->makeRelative($base);
+        $this->assertEquals($expected, $url->toString());
+    }
+    
+    /**
      * Other tests
      */
     
@@ -1196,6 +1208,16 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('http://example.com:80/file?query=bar', 'http://example.com:80/file?query=bar'),
         );
     }
+    
+    static public function commonBaseUriProvider()
+    {
+        return array(
+     	    array('http://example.com/dir/subdir/', 'http://example.com/dir/subdir/more/file1.txt', 'more/file1.txt'),
+     	    array('http://example.com/dir/subdir/', 'http://example.com/dir/otherdir/file2.txt',    '../otherdir/file2.txt'),
+     	    array('http://example.com/dir/subdir/', 'http://otherhost.com/dir/subdir/file3.txt',    'http://otherhost.com/dir/subdir/file3.txt'),
+        );
+    }
+    
     
     /**
      * Provider for testing the constructor's behavior on invalid input

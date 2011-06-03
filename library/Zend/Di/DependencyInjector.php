@@ -21,6 +21,13 @@ class DependencyInjector implements DependencyInjection
     protected $instances = array();
 
     /**
+     * All the class dependencies [source][dependency]
+     * 
+     * @var array 
+     */
+    protected $dependencies= array();
+
+    /**
      * Lazy-load a class
      *
      * Attempts to load the class (or service alias) provided. If it has been 
@@ -103,7 +110,28 @@ class DependencyInjector implements DependencyInjection
         }
         return $this;
     }
-    
+    /**
+     * Check for Circular Dependencies
+     *
+     * @param string $class
+     * @param array|string $dependency
+     * @return boolean
+     */
+    protected function checkCircularDependency($class, $dependency)
+    {
+        if (is_array($dependency)) {
+            foreach ($dependency as $dep) {
+                if (isset($this->dependencies[$dep][$class]) && $this->dependencies[$dep][$class]) {
+                    throw new Exception\RuntimeException("Circular dependency detected: $class depends on $dep and viceversa");
+                }
+            }
+        } else {
+            if (isset($this->dependencies[$dependency][$class]) && $this->dependencies[$dependency][$class]) {
+                throw new Exception\RuntimeException("Circular dependency detected: $class depends on $dependency and viceversa");
+            }
+        }
+        return true;
+    }
     /**
      * Add a definition, optionally with a service name alias
      * 
@@ -117,6 +145,13 @@ class DependencyInjector implements DependencyInjection
         $this->definitions[$className] = $definition;
         if (null !== $serviceName && !empty($serviceName)) {
             $this->aliases[$serviceName] = $className;
+        }
+        foreach ($definition->getParams() as $param) {
+            if ($param instanceof Reference) {
+                $serviceName= $param->getServiceName();
+                $this->dependencies[$className][$serviceName]= true;
+                $this->checkCircularDependency($className, $serviceName);
+            } 
         }
         return $this;
     }
@@ -194,7 +229,6 @@ class DependencyInjector implements DependencyInjection
 
         return $this->definitions[$service];
     }
-
     /**
      * Retrieve a class instance based on class name
      *

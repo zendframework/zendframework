@@ -574,6 +574,13 @@ define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_ENABLED', false);
 define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
 
 /**
+ * Zend_service_GoGrid offline tests
+ */
+
+define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY','Enter GoGrid key here');
+define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET','Enter GoGrid secret here');
+
+/**
  * Zend_Service_LiveDocx configuration
  *
  * Define username and password in order to run unit tests for LiveDocX web
@@ -583,6 +590,12 @@ define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
  */
 define('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME', false);
 define('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD', false);
+
+/**
+ * Zend_Service_Rackspace tests
+ */
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER','Enter Rackspace user here');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY','Enter Rackspace key here');
 
 /**
  * Zend_Service_ReCaptcha tests

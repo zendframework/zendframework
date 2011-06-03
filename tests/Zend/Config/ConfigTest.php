@@ -94,13 +94,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testIsset()
     {
-        if (version_compare(PHP_VERSION, '5.1', '>=')) {
-            $config = new Config($this->_all, false);
+        $config = new Config($this->_all, false);
 
-            $this->assertFalse(isset($config->notarealkey));
-            $this->assertTrue(isset($config->hostname)); // top level
-            $this->assertTrue(isset($config->db->name)); // one level down
-        }
+        $this->assertFalse(isset($config->notarealkey));
+        $this->assertTrue(isset($config->hostname)); // top level
+        $this->assertTrue(isset($config->db->name)); // one level down
     }
 
     public function testModification()

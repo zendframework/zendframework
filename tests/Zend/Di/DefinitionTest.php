@@ -1,7 +1,9 @@
 <?php
 namespace ZendTest\Di;
 
-use Zend\Di\Definition;
+use Zend\Di\Definition,
+    Zend\Di\InjectibleMethod,
+    Zend\Di\Method;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
@@ -10,6 +12,20 @@ class DefinitionTest extends TestCase
     public function setUp()
     {
         $this->definition = new Definition(__CLASS__);
+    }
+
+    /**
+     * Stub for testing
+     */
+    public function foo()
+    {
+    }
+
+    /**
+     * Stub for testing
+     */
+    public function bar($message)
+    {
     }
 
     public function testCanRetrieveConfiguredClassName()
@@ -129,6 +145,9 @@ class DefinitionTest extends TestCase
         $this->assertFalse($this->definition->isShared());
     }
 
+    /**
+     * @group fml
+     */
     public function testAddingMethodCallsAggregates()
     {
         $this->definition->addMethodCall('foo', array());
@@ -147,6 +166,32 @@ class DefinitionTest extends TestCase
                     $this->fail('Unexpected method encountered');
             }
         }
+    }
+
+    public function testCanPassInjectibleMethodObjectToAddMethodCall()
+    {
+        $definition = new Definition('Foo');
+        $method     = new Method('bar', array());
+        $definition->addMethodCall($method);
+        $this->assertEquals('Foo', $method->getClass());
+    }
+
+    public function testCanPassParameterMapWhenCallingAddMethodCallWithStringMethod()
+    {
+        $definition = new Definition('Foo');
+        $definition->addMethodCall('bar', array('message' => 'BAR'), array('message' => 0));
+        foreach ($definition->getMethodCalls() as $method) {
+            $this->assertEquals(array('message' => 0), $method->getParamMap());
+        }
+    }
+
+    public function testCanPassParametersAndParameterMapWhenCallingAddMethodCallWithInjectibleMethod()
+    {
+        $definition = new Definition('Foo');
+        $method     = new Method('bar', array());
+        $definition->addMethodCall($method, array('message' => 'BAR'), array('message' => 0));
+        $this->assertEquals(array('message' => 0), $method->getParamMap());
+        $this->assertEquals(array('BAR'), $method->getParams());
     }
 
     public function testCanSerializeDefinitionToArray()

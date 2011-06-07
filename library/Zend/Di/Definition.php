@@ -240,12 +240,32 @@ class Definition implements DependencyDefinition
      * Add a method to be called and injected
      * 
      * @param  string $name 
-     * @param  array $params 
+     * @param  array|null $params 
+     * @param  array|null $paramMap
      * @return Definition
      */
-    public function addMethodCall($name, array $params)
+    public function addMethodCall($name, array $params = null, array $paramMap = null)
     {
-        $method = new Method($name, $params);
+        if (!is_string($name) && !($name instanceof InjectibleMethod)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'addMethodCall() expects a string method name or InjectibleMethod object as an argument; received "%s"',
+                (is_object($name) ? get_class($name) : gettype($name))
+            ));
+        }
+
+        if ($name instanceof InjectibleMethod) {
+            $method = $name;
+            if (is_array($params)) {
+                $method->setParams($params);
+            }
+            if (is_array($paramMap)) {
+                $method->setParamMap($paramMap);
+            }
+        } else {
+            $method = new Method($name, $params, $paramMap);
+        }
+
+        $method->setClass($this->getClass());
         $this->injectibleMethods->insert($method);
         return $this;
     }
@@ -281,7 +301,7 @@ class Definition implements DependencyDefinition
                 }
             }
             $methods[] = array(
-                'name' => $method->getName(), 
+                'name'   => $method->getName(), 
                 'params' => $methodParams,
             );
         }

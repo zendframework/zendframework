@@ -23,7 +23,7 @@ interface DependencyDefinition
     public function setShared($flag = true);
     public function isShared();
     
-    public function addMethodCall($name, array $params);
+    public function addMethodCall($name, array $params = null, array $paramMap = null);
     /**
      * @return InjectibleMethods
      */

@@ -41,10 +41,10 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetSignalShouldReturnSignal()
+    public function testGetEventShouldReturnEvent()
     {
         $handler = new CallbackHandler('foo', 'rand');
-        $this->assertEquals('foo', $handler->getSignal());
+        $this->assertEquals('foo', $handler->getEvent());
     }
 
     public function testCallbackShouldBeStringIfNoHandlerPassedToConstructor()

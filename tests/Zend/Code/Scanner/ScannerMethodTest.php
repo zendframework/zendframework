@@ -35,6 +35,7 @@ class ScannerMethodTest extends \PHPUnit_Framework_TestCase
         $file = new ScannerFile(__DIR__ . '/../TestAsset/BarClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method = $class->getMethod('three');
+        $this->assertEquals(array('o', 't', 'bbf'), $method->getParameters());
         $parameter = $method->getParameter('t');
         $this->assertInstanceOf('Zend\Code\Scanner\ScannerParameter', $parameter);
         $this->assertEquals('t', $parameter->getName());

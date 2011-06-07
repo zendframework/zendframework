@@ -6,6 +6,8 @@ class ScannerFile extends ScannerTokenArray implements ScannerInterface
 {
     protected $isScanned = false;
     
+    protected $file = null;
+    
     public function __construct($file = null, $options = null)
     {
         if ($file) {
@@ -20,6 +22,11 @@ class ScannerFile extends ScannerTokenArray implements ScannerInterface
             throw new \InvalidArgumentException('File not found');
         }
         $this->reset();
+    }
+    
+    public function getFile()
+    {
+        return $this->file;
     }
     
     protected function scan()

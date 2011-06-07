@@ -72,6 +72,24 @@ class ScannerParameter
             }
         }
         
+        if ($this->class) {
+            $namespace = (($decClassLastSlash = strrpos($this->declaringClass, '\\')) !== false) 
+                ? substr($this->declaringClass, 0, $decClassLastSlash) : null;
+            if ((!$this->uses && !$namespace) || strlen($this->class) <= 0 || $this->class{0} == '\\') {
+                $this->class = ltrim($this->class, '\\');
+            } else {
+                if ($namespace || $this->uses) {
+                    $firstPartEnd = (strpos($this->class, '\\')) ?: strlen($this->class-1);
+                    $firstPart = substr($this->class, 0, $firstPartEnd);
+                    if (array_key_exists($firstPart, $this->uses)) {
+                        $this->class = substr_replace($this->class, $this->uses[$firstPart], 0, $firstPartEnd);
+                    } elseif ($namespace) {
+                        $this->class = $namespace . '\\' . $this->class;
+                    }
+                }
+            }
+        }
+        
         if ($token[0] == T_WHITESPACE) {
             $token = $this->tokens[++$tokenIndex];
         }
@@ -86,6 +104,7 @@ class ScannerParameter
         $token = (isset($this->tokens[++$tokenIndex])) ? $this->tokens[$tokenIndex] : null;
         
         if (!$token) {
+            $this->isScanned = true;
             return;
         }
         
@@ -95,10 +114,12 @@ class ScannerParameter
         }
         
         if (!$token) {
+            $this->isScanned = true;
             return;
         }
         
         if (!(is_string($token) && $token == '=')) {
+            $this->isScanned = true;
             return;
         }
         
@@ -116,6 +137,36 @@ class ScannerParameter
         do {
             $this->defaultValue .= ((is_array($token)) ? $token[1] : $token);
         } while (($token = (isset($this->tokens[++$tokenIndex])) ? $this->tokens[$tokenIndex] : false));
+        
+        if ($this->class) {
+                // create function to resolve short names with uses
+
+            $uses = $this->uses;
+            $resolveUseFunc = function (&$value, $key = null) use (&$namespace, &$uses) {
+                if (!$uses || strlen($value) <= 0 || $value{0} == '\\') {
+                    $value = ltrim($value, '\\');
+                    return;
+                }
+                
+                if ($namespace || $uses) {
+                    $firstPartEnd = (strpos($value, '\\')) ?: strlen($value-1);
+                    $firstPart = substr($value, 0, $firstPartEnd);
+                    if (array_key_exists($firstPart, $uses)) {
+                        $value = substr_replace($value, $uses[$firstPart], 0, $firstPartEnd);
+                        return;
+                    }
+                    if ($namespace) {
+                        $value = $namespace . '\\' . $value;
+                        return;
+                    }
+                }
+            };
+            
+            if ($this->shortInterfaces) {
+                $this->interfaces = $this->shortInterfaces;
+                array_walk($this->interfaces, $resolveUseFunc);
+            }
+        }
         
         $this->isScanned = true;
     }

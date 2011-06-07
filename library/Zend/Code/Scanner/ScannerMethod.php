@@ -75,7 +75,7 @@ class ScannerMethod implements ScannerInterface
         */
         
         //$this->scanBody($tokenIndex);
-        
+
         $this->isScanned = true;
     }
     
@@ -138,10 +138,36 @@ class ScannerMethod implements ScannerInterface
             
             // BREAK ON
             if ($parenCount == 1 && is_string($token) && $token == ')') {
+                if ($info) {
+                    $info['tokenEnd'] = $tokenIndex - 1;
+                    $this->infos[] = $info;
+                }
                 break;
             }
             
             // ANALYZE
+                    
+            // gather line information if we can
+            if (!isset($info)) {
+                $info = array(
+                	'type'        => 'parameter',
+                    'tokenStart'  => $tokenIndex,
+                    'tokenEnd'    => null,
+                    'lineStart'   => $token[2],
+                    'lineEnd'     => $token[2],
+                    'name'        => null,
+                    'position'    => ++$position
+                );
+            }
+            
+            if (is_array($token) && isset($info)) {
+                $info['lineEnd'] = $token[2];
+            }
+            
+            if (is_array($token) && $token[0] === T_WHITESPACE) {
+                continue;
+            }
+            
             if (is_string($token)) {
                 if ($token == '(') {
                     $parenCount++;
@@ -149,37 +175,17 @@ class ScannerMethod implements ScannerInterface
                 if ($token == ')') {
                     $parenCount--;
                 }
-            }
-            
-            if ($parenCount == 1 && isset($info)) {
-                $nextToken = (isset($info['name']) && is_string($this->tokens[$tokenIndex+1])) ? $this->tokens[$tokenIndex+1] : null;
-                if ((is_string($token) && $token == ',') || (isset($nextToken) && $nextToken == ')')) {
-                    $info['tokenEnd'] = $tokenIndex - 1;
-                    $this->infos[] = $info;
-                    unset($info);
+                
+                if ($parenCount !== 1) {
+                    continue;
                 }
-                unset($nextToken);
+                
             }
             
-            if (is_array($token) && isset($info)) {
-                $info['lineEnd'] = $token[2];
-            }
-            
-            if ($parenCount > 1 || is_string($token)) {
-                continue;
-            }
-            
-            // gather line information if we can
-            if (!isset($info)) {
-                $info = array(
-                	'type'        => 'parameter',
-                    'tokenStart'  => $tokenIndex,
-                    'tokenEnd'    => null,
-                    'lineStart'   => $this->tokens[$tokenIndex][2],
-                    'lineEnd'     => null,
-                    'name'        => null,
-                    'position'    => ++$position
-                );
+            if (isset($info) && is_string($token) && $token == ',') {
+                $info['tokenEnd'] = $tokenIndex - 1;
+                $this->infos[] = $info;
+                unset($info);
             }
 
             if (is_array($token) && $token[0] === T_VARIABLE) {
@@ -237,7 +243,7 @@ class ScannerMethod implements ScannerInterface
         $this->scan();
         
         $return = array();
-        
+
         foreach ($this->infos as $info) {
             if ($info['type'] != 'parameter') {
                 continue;

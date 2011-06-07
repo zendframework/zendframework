@@ -129,9 +129,7 @@ class ScannerClass implements ScannerInterface
                     }
                 }
                 if ($token[0] == T_EXTENDS) {
-                    die('found extends');
-                    $fastForward += 2;
-                    $tokenIndex += 2;
+                    $context = T_EXTENDS;
                     $this->shortParentClass = '';
                 }
                 if ($token[0] == T_IMPLEMENTS) {
@@ -332,6 +330,12 @@ class ScannerClass implements ScannerInterface
         return $this->isInterface;
     }
 
+    public function getParentClass()
+    {
+        $this->scan();
+        return $this->parentClass;
+    }
+    
     public function getInterfaces()
     {
         $this->scan();
@@ -348,12 +352,7 @@ class ScannerClass implements ScannerInterface
             if ($info['type'] != 'constant') {
                 continue;
             }
-
-            //if (!$returnScanner) {
-                $return[] = $info['name'];
-            //} else {
-            //    $return[] = $this->getClass($info['name'], $returnScannerProperty);
-            //}
+            $return[] = $info['name'];
         }
         return $return;
     }
@@ -444,6 +443,16 @@ class ScannerClass implements ScannerInterface
         $m->setClass($this->name);
         $m->setScannerClass($this);
         return $m;
+    }
+    
+    public function hasMethod($name)
+    {
+        foreach ($this->infos as $infoIndex => $info) {
+            if ($info['type'] === 'method' && $info['name'] === $name) {
+                return true;
+            }
+        }
+        return false;
     }
     
     public static function export()

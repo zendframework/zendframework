@@ -22,6 +22,6 @@ class ScannerParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($parameter->isDefaultValueAvailable());
         $this->assertTrue($parameter->isOptional());
         $this->assertTrue($parameter->isPassedByReference());
-        
     }
+
 }

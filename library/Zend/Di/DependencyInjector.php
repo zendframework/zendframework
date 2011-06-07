@@ -26,7 +26,12 @@ class DependencyInjector implements DependencyInjection
      * @var array 
      */
     protected $dependencies= array();
-
+    /**
+     * All the class references [dependency][source]
+     * 
+     * @var array 
+     */
+    protected $references= array();
     /**
      * Lazy-load a class
      *
@@ -133,6 +138,24 @@ class DependencyInjector implements DependencyInjection
         return true;
     }
     /**
+     * Check the circular dependencies path between two definitions 
+     * 
+     * @param type $class
+     * @param type $dependency 
+     * @return void
+     */
+    protected function checkPathDependencies($class, $dependency) {
+        if (!empty($this->references[$class])) {
+            foreach ($this->references[$class] as $key => $value) {
+                if ($this->dependencies[$key][$class]) {
+                    $this->dependencies[$key][$dependency]= true;
+                    $this->checkCircularDependency($key, $dependency);
+                    $this->checkPathDependencies($key,$dependency);
+                }
+            }
+        }
+    }
+    /**
      * Add a definition, optionally with a service name alias
      * 
      * @param  DependencyDefinition $definition 
@@ -150,7 +173,9 @@ class DependencyInjector implements DependencyInjection
             if ($param instanceof Reference) {
                 $serviceName= $param->getServiceName();
                 $this->dependencies[$className][$serviceName]= true;
+                $this->references[$serviceName][$className]= true;
                 $this->checkCircularDependency($className, $serviceName);
+                $this->checkPathDependencies($className, $serviceName);
             } 
         }
         return $this;

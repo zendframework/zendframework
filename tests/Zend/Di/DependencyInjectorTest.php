@@ -342,10 +342,12 @@ class DependencyInjectorTest extends TestCase
         $this->assertSame($testParams, $testStruct->params, sprintf('Params: %s; struct: %s', var_export($testParams, 1), var_export($testStruct, 1)));
     }
 
-     /**
-     * Test for Circular Dependencies
+    /**
+     * Test for Circular Dependencies (case 1)
+     * 
+     * A->B, B->A
      */
-    public function testCircularDependencies() 
+    public function testCircularDependencies1() 
     {
         $classA= new Definition('ZendTest\Di\TestAsset\ClassA');
         $classA->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassB'));
@@ -357,7 +359,51 @@ class DependencyInjectorTest extends TestCase
         $this->di->setDefinition($classB, 'B');
     }
     /**
-     * Test for No Circular Dependencies
+     * Test for Circular Dependencies (case 2)
+     * 
+     * A->B, B->C, C->A
+     */
+    public function testCircularDependencies2() 
+    {
+        $classA= new Definition('ZendTest\Di\TestAsset\ClassA');
+        $classA->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassB'));
+        $this->di->setDefinition($classA, 'A');
+        
+        $classB= new Definition('ZendTest\Di\TestAsset\ClassB');
+        $classB->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassC'));
+        $this->di->setDefinition($classB, 'B');
+        
+        $classC= new Definition('ZendTest\Di\TestAsset\ClassC');
+        $classC->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassA'));
+        $this->setExpectedException('Zend\Di\Exception\RuntimeException');
+        $this->di->setDefinition($classC, 'C');
+    }
+    /**
+     * Test for Circular Dependencies (case 3)
+     * 
+     * A->B, B->C, C->D, D->B
+     */
+    public function testCircularDependencies3() 
+    {
+        $classA= new Definition('ZendTest\Di\TestAsset\ClassA');
+        $classA->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassB'));
+        $this->di->setDefinition($classA, 'A');
+        
+        $classB= new Definition('ZendTest\Di\TestAsset\ClassB');
+        $classB->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassC'));
+        $this->di->setDefinition($classB, 'B');
+        
+        $classC= new Definition('ZendTest\Di\TestAsset\ClassC');
+        $classC->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassD'));
+        $this->di->setDefinition($classC, 'C');
+        
+        $classD= new Definition('ZendTest\Di\TestAsset\ClassD');
+        $classD->setParam('param', new Reference('ZendTest\Di\TestAsset\ClassB'));
+        $this->setExpectedException('Zend\Di\Exception\RuntimeException');
+        $this->di->setDefinition($classD, 'D');
+    }
+    /**
+     * Test for NO Circular Dependencies
      */
     public function testNoCircularDependencies() 
     {

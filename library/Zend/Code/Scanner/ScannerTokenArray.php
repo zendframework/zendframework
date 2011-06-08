@@ -2,13 +2,16 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerTokenArray implements ScannerInterface
+use Zend\Code\Scanner,
+    Zend\Code\Exception;
+
+class ScannerTokenArray implements Scanner
 {
     protected $isScanned = false;
-    
-    protected $tokens = array();
-    
-    protected $infos = array();
+
+    protected $tokens    = array();
+
+    protected $infos     = array();
     
     public function __construct($tokens = null, $options = null)
     {
@@ -20,7 +23,7 @@ class ScannerTokenArray implements ScannerInterface
     public function reset()
     {
         $this->isScanned = false;
-        $this->infos = array();
+        $this->infos     = array();
     }
     
     public function setTokens(array $tokens)
@@ -36,7 +39,7 @@ class ScannerTokenArray implements ScannerInterface
         }
         
         if (!$this->tokens) {
-            throw new \RuntimeException('No tokens were provided');
+            throw new Exception\RuntimeException('No tokens were provided');
         }
 
         $currentNamespace = null;
@@ -50,26 +53,31 @@ class ScannerTokenArray implements ScannerInterface
                 case T_DOC_COMMENT:
                     echo 'Found Doc Comment' . PHP_EOL;
                     break;
+
                 case T_NAMESPACE:
                     $currentNamespace = $this->scanNamespace($tokenIndex, $fastForward);
                     break;
+
                 case T_USE:
-                    $this->scanUse($tokenIndex, $fastForward);
                     // process uses
+                    $this->scanUse($tokenIndex, $fastForward);
                     break;
+
                 case T_INCLUDE:
                 case T_INCLUDE_ONCE:
                 case T_REQUIRE:
                 case T_REQUIRE_ONCE:
-                    $this->scanInclude($tokenIndex, $fastForward);
                     // process include
+                    $this->scanInclude($tokenIndex, $fastForward);
                     break;
+
                 case T_FINAL:
                 case T_ABSTRACT:
                 case T_CLASS:
                 case T_INTERFACE:
                     $this->scanClass($tokenIndex, $fastForward, $currentNamespace);
                     break;
+
                 case T_FUNCTION:
                     $this->scanFunction($tokenIndex, $fastForward, $currentNamespace);
                     break;
@@ -90,7 +98,7 @@ class ScannerTokenArray implements ScannerInterface
             'tokenEnd'   => null,
             'lineStart'  => $this->tokens[$tokenIndex][2],
             'lineEnd'    => null,
-            'namespace'  => null
+            'namespace'  => null,
         );
 
         // move past current T_NAMESPACE & following T_WHITESPACE
@@ -120,7 +128,7 @@ class ScannerTokenArray implements ScannerInterface
         }
         
         $info['tokenEnd'] = $tokenIndex;
-        $this->infos[] = $info;
+        $this->infos[]    = $info;
         
         return $info['namespace'];
     }
@@ -133,22 +141,23 @@ class ScannerTokenArray implements ScannerInterface
             'tokenEnd'   => null,
             'lineStart'  => $this->tokens[$tokenIndex][2],
             'lineEnd'    => null,
-            'statements' => array()
+            'statements' => array(),
         );
         
+        // Static for performance purposes
         static $statementTemplate = array(
-            'use' => null,
-            'as' => null,
-            'asComputed' => null
+            'use'        => null,
+            'as'         => null,
+            'asComputed' => null,
         );
         
         // skip current token T_USE and following T_WHITESPACE
         $tokenIndex++; 
         $fastForward++;
         
-        $sCount = 0;
+        $hasAs                       = false;
+        $sCount                      = 0;
         $info['statements'][$sCount] = $statementTemplate;
-        $hasAs = false;
 
         while (true) {
             $tokenIndex++;
@@ -192,12 +201,19 @@ class ScannerTokenArray implements ScannerInterface
         }
         
         $info['tokenEnd'] = $tokenIndex;
-        $this->infos[] = $info;
+        $this->infos[]    = $info;
     }
     
     protected function scanInclude($tokenIndex, &$fastForward)
     {
-        static $types = array(T_INCLUDE => 'include', T_INCLUDE_ONCE => 'include_once', T_REQUIRE => 'require', T_REQUIRE_ONCE => 'require_once');
+        // Static for performance purposes
+        static $types = array(
+            T_INCLUDE      => 'include',
+            T_INCLUDE_ONCE => 'include_once',
+            T_REQUIRE      => 'require',
+            T_REQUIRE_ONCE => 'require_once',
+        );
+
         $info = array(
             'type'        => 'include',
             'tokenStart'  => $tokenIndex,
@@ -205,10 +221,10 @@ class ScannerTokenArray implements ScannerInterface
             'lineStart'   => $this->tokens[$tokenIndex][2],
             'lineEnd'     => null,
             'includeType' => $types[$this->tokens[$tokenIndex][0]],
-            'path'        => ''
-            );
+            'path'        => '',
+        );
 
-        $path = '';
+        $path  = '';
         $index = $tokenIndex;
         
         // move past include & the required whitespace
@@ -247,11 +263,13 @@ class ScannerTokenArray implements ScannerInterface
             'lineEnd'     => null,
             'namespace'   => $namespace,
             'name'        => null,
-            'shortName'   => null
-            );
+            'shortName'   => null,
+        );
         
         // if FINAL or ABSTRACT marker is found, find name accordingly
-        if ($this->tokens[$tokenIndex][0] === T_FINAL || $this->tokens[$tokenIndex][0] === T_ABSTRACT) {
+        if ($this->tokens[$tokenIndex][0] === T_FINAL 
+            || $this->tokens[$tokenIndex][0] === T_ABSTRACT
+        ) {
             $info['shortName'] = $this->tokens[$tokenIndex+4][1];
         } else {
             $info['shortName'] = $this->tokens[$tokenIndex+2][1];
@@ -288,7 +306,7 @@ class ScannerTokenArray implements ScannerInterface
         }
         
         $info['tokenEnd'] = $tokenIndex;
-        $this->infos[] = $info;
+        $this->infos[]    = $info;
     }
     
     protected function scanFunction($tokenIndex, &$fastForward, $namespace = null, $usesComputed = array())
@@ -302,7 +320,7 @@ class ScannerTokenArray implements ScannerInterface
             'name'        => $namespace . '\\' . $this->tokens[$tokenIndex+2][1],
             'shortName'   => $this->tokens[$tokenIndex+2][1],
             'namespace'   => $namespace,
-            );
+        );
 
         $braceCount = 0;
         while (true) {
@@ -331,7 +349,7 @@ class ScannerTokenArray implements ScannerInterface
         }
         
         $info['tokenEnd'] = $tokenIndex;
-        $this->infos[] = $info;
+        $this->infos[]    = $info;
     }
             
     
@@ -349,7 +367,7 @@ class ScannerTokenArray implements ScannerInterface
             return $namespaces;
         } else {
             if ($returnScannerClass === true) {
-                $returnScannerClass = '\Zend\Code\Scanner\ScannerNamespace';
+                $returnScannerClass = 'Zend\Code\Scanner\ScannerNamespace';
             }
             $scannerClass = new $returnScannerClass;
             // @todo
@@ -368,13 +386,7 @@ class ScannerTokenArray implements ScannerInterface
                 }
             }
             return $namespaces;
-        } /*else {
-            if ($returnScannerClass === true) {
-                $returnScannerClass = '\Zend\Code\Scanner\ScannerClasss';
-            }
-            $scannerClass = new $returnScannerClass;
-            // @todo
-        } */
+        }
     }
     
     public function getIncludes($returnScannerClass = false)
@@ -414,22 +426,27 @@ class ScannerTokenArray implements ScannerInterface
     {
         $this->scan();
         
-        // process the class requested
+        // Process the class requested
+        // Static for performance reasons
         static $baseScannerClass = 'Zend\Code\Scanner\ScannerClass';
         if ($returnScannerClass !== $baseScannerClass) {
             if (!is_string($returnScannerClass)) {
                 $returnScannerClass = $baseScannerClass;
             }
             $returnScannerClass = ltrim($returnScannerClass, '\\');
-            if ($returnScannerClass !== $baseScannerClass && !is_subclass_of($returnScannerClass, $baseScannerClass)) {
-                throw new \RuntimeException('Class must be or extend ' . $baseScannerClass);
+            if ($returnScannerClass !== $baseScannerClass 
+                && !is_subclass_of($returnScannerClass, $baseScannerClass)
+            ) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Class must be or extend "%s"', $baseScannerClass
+                ));
             }
         }
         
         if (is_int($classNameOrInfoIndex)) {
             $info = $this->infos[$classNameOrInfoIndex];
             if ($info['type'] != 'class') {
-                throw new \InvalidArgumentException('Index of info offset is not about a class');
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a class');
             }
         } elseif (is_string($classNameOrInfoIndex)) {
             $classFound = false;
@@ -448,17 +465,21 @@ class ScannerTokenArray implements ScannerInterface
         for ($u = 0; $u < count($this->infos); $u++) {
             if ($this->infos[$u]['type'] == 'use') {
                 foreach ($this->infos[$u]['statements'] as $useStatement) {
-                    $useKey = ($useStatement['as']) ?: $useStatement['asComputed'];
+                    $useKey        = ($useStatement['as']) ?: $useStatement['asComputed'];
                     $uses[$useKey] = $useStatement['use'];
                 }
             }
         }
         
         return new $returnScannerClass(
-            array_slice($this->tokens, $info['tokenStart'], ($info['tokenEnd'] - $info['tokenStart'] + 1)), // zero indexed array
+            array_slice(
+                $this->tokens, 
+                $info['tokenStart'], 
+                ($info['tokenEnd'] - $info['tokenStart'] + 1)
+            ), // zero indexed array
             $info['namespace'],
             $uses
-            );
+        );
     }
     
     public function getFunctions($returnScannerClass = false)
@@ -475,7 +496,7 @@ class ScannerTokenArray implements ScannerInterface
             return $functions;
         } else {
             if ($returnScannerClass === true) {
-                $returnScannerClass = '\Zend\Code\Scanner\ScannerFunction';
+                $returnScannerClass = 'Zend\Code\Scanner\ScannerFunction';
             }
             $scannerClass = new $returnScannerClass;
             // @todo

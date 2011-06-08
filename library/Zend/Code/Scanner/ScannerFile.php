@@ -2,11 +2,14 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerFile extends ScannerTokenArray implements ScannerInterface
+use Zend\Code\Scanner,
+    Zend\Code\Exception;
+
+class ScannerFile extends ScannerTokenArray implements Scanner
 {
     protected $isScanned = false;
     
-    protected $file = null;
+    protected $file      = null;
     
     public function __construct($file = null, $options = null)
     {
@@ -19,7 +22,9 @@ class ScannerFile extends ScannerTokenArray implements ScannerInterface
     {
         $this->file = $file;
         if (!file_exists($file)) {
-            throw new \InvalidArgumentException('File not found');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'File "%s" not found', $file
+            ));
         }
         $this->reset();
     }
@@ -32,7 +37,7 @@ class ScannerFile extends ScannerTokenArray implements ScannerInterface
     protected function scan()
     {
         if (!$this->file) {
-            throw new \RuntimeException('File was not provided');
+            throw new Exception\RuntimeException('File was not provided');
         }
         $this->setTokens(token_get_all(file_get_contents($this->file)));
         parent::scan();

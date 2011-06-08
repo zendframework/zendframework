@@ -2,12 +2,16 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerDirectory implements ScannerInterface
+use Zend\Code\Scanner,
+    Zend\Code\Exception,
+    RecursiveDirectoryIterator;
+
+class ScannerDirectory implements Scanner
 {
-    protected $isScanned = false;
-    protected $directories = array();
+    protected $isScanned            = false;
+    protected $directories          = array();
     protected $fileScannerFileClass = 'Zend\Code\Scanner\ScannerFile';
-    protected $scannerFiles = array();
+    protected $scannerFiles         = array();
     
     public function __construct($directory = null)
     {
@@ -33,7 +37,9 @@ class ScannerDirectory implements ScannerInterface
     {
         $realDir = realpath($directory);
         if (!$realDir) {
-            throw new \InvalidArgumentException('Directory does not exist');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Directory "%s" does not exist', $realDir
+            ));
         }
         $this->directories[] = $realDir;
     }
@@ -48,9 +54,9 @@ class ScannerDirectory implements ScannerInterface
         
         // iterate directories creating file scanners
         foreach ($this->directories as $directory) {
-            foreach (new \RecursiveDirectoryIterator($directory) as $item) {
+            foreach (new RecursiveDirectoryIterator($directory) as $item) {
                 if ($item->isFile() && preg_match('#\.php$#', $item->getRealPath())) {
-                    $this->scannerFiles[] = new ScannerFile($item->getRealpath());
+                    $this->scannerFiles[] = new ScannerFile($item->getRealPath());
                 }
             }
         }

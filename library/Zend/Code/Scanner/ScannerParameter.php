@@ -4,28 +4,28 @@ namespace Zend\Code\Scanner;
 
 class ScannerParameter
 {
-    protected $isScanned = false;
-    
-    protected $declaringScannerClass = null;
-    protected $declaringClass = null;
+    protected $isScanned                = false;
+
+    protected $declaringScannerClass    = null;
+    protected $declaringClass           = null;
     protected $declaringScannerFunction = null;
-    protected $declaringFunction = null;
-    protected $defaultValue = null;
-    protected $class = null;
-    protected $name = null;
-    protected $position = null;
-    protected $isArray = false;
-    protected $isDefaultValueAvailable = false;
-    protected $isOptional = false;
-    protected $isPassedByReference = false;
-    
-    protected $tokens = null;
-    protected $uses = array();
+    protected $declaringFunction        = null;
+    protected $defaultValue             = null;
+    protected $class                    = null;
+    protected $name                     = null;
+    protected $position                 = null;
+    protected $isArray                  = false;
+    protected $isDefaultValueAvailable  = false;
+    protected $isOptional               = false;
+    protected $isPassedByReference      = false;
+
+    protected $tokens                   = null;
+    protected $uses                     = array();
     
     public function __construct(array $parameterTokens, array $uses = array())
     {
         $this->tokens = $parameterTokens;
-        $this->uses = $uses;
+        $this->uses   = $uses;
     }
     
     public function setDeclaringClass($class)
@@ -74,7 +74,8 @@ class ScannerParameter
         
         if ($this->class) {
             $namespace = (($decClassLastSlash = strrpos($this->declaringClass, '\\')) !== false) 
-                ? substr($this->declaringClass, 0, $decClassLastSlash) : null;
+                       ? substr($this->declaringClass, 0, $decClassLastSlash) 
+                       : null;
             if ((!$this->uses && !$namespace) || strlen($this->class) <= 0 || $this->class{0} == '\\') {
                 $this->class = ltrim($this->class, '\\');
             } else {
@@ -101,7 +102,9 @@ class ScannerParameter
         
         // next token is sure a T_VARIABLE
         $this->name = ltrim($token[1], '$');
-        $token = (isset($this->tokens[++$tokenIndex])) ? $this->tokens[$tokenIndex] : null;
+        $token = (isset($this->tokens[++$tokenIndex])) 
+               ? $this->tokens[$tokenIndex] 
+               : null;
         
         if (!$token) {
             $this->isScanned = true;
@@ -110,7 +113,9 @@ class ScannerParameter
         
         // move past whitespace if it exist
         if ($token[0] == T_WHITESPACE) {
-            $token = (isset($this->tokens[++$tokenIndex])) ? $this->tokens[$tokenIndex] : null;
+            $token = (isset($this->tokens[++$tokenIndex])) 
+                   ? $this->tokens[$tokenIndex] 
+                   : null;
         }
         
         if (!$token) {
@@ -128,15 +133,20 @@ class ScannerParameter
         
         // move past whitespace if it exist
         if ($token[0] == T_WHITESPACE) {
-            $token = (isset($this->tokens[++$tokenIndex])) ? $this->tokens[$tokenIndex] : null;
+            $token = (isset($this->tokens[++$tokenIndex])) 
+                   ? $this->tokens[$tokenIndex] 
+                   : null;
         }
         
-        $this->isOptional = true;
+        $this->isOptional              = true;
         $this->isDefaultValueAvailable = true;
         
         do {
             $this->defaultValue .= ((is_array($token)) ? $token[1] : $token);
-        } while (($token = (isset($this->tokens[++$tokenIndex])) ? $this->tokens[$tokenIndex] : false));
+            $token = (isset($this->tokens[++$tokenIndex])) 
+                   ? $this->tokens[$tokenIndex] 
+                   : false;
+        } while ($token);
         
         if ($this->class) {
                 // create function to resolve short names with uses

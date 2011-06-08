@@ -2,23 +2,26 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerMethod implements ScannerInterface
+use Zend\Code\Scanner,
+    Zend\Code\Exception;
+
+class ScannerMethod implements Scanner
 {
-    protected $isScanned = false;
-    
+    protected $isScanned    = false;
+
     protected $scannerClass = null;
-    protected $class = null;
-    protected $uses = array();
-    protected $name = null;
-    protected $isFinal = false;
-    protected $isAbstract = false;
-    protected $isPublic = true;
-    protected $isProtected = false;
-    protected $isPrivate = false;
-    protected $isStatic = false;
-    
-    protected $tokens = array();
-    protected $infos = array();
+    protected $class        = null;
+    protected $uses         = array();
+    protected $name         = null;
+    protected $isFinal      = false;
+    protected $isAbstract   = false;
+    protected $isPublic     = true;
+    protected $isProtected  = false;
+    protected $isPrivate    = false;
+    protected $isStatic     = false;
+
+    protected $tokens       = array();
+    protected $infos        = array();
     
     public function __construct(array $methodTokens, array $uses = array())
     {
@@ -48,11 +51,11 @@ class ScannerMethod implements ScannerInterface
         }
         
         if (!$this->tokens) {
-            throw new \RuntimeException('No tokens were provided');
+            throw new Exception\RuntimeException('No tokens were provided');
         }
 
         $fastForward = 0;
-        $tokenIndex = 0;
+        $tokenIndex  = 0;
         
         $this->scanMethodInfo($tokenIndex, $fastForward);
         
@@ -68,14 +71,6 @@ class ScannerMethod implements ScannerInterface
         
         $this->scanParameters($tokenIndex, $fastForward);
         
-        /*
-        if ($this->tokens[$tokenIndex] != '{') {
-            return;
-        }
-        */
-        
-        //$this->scanBody($tokenIndex);
-
         $this->isScanned = true;
     }
     
@@ -98,22 +93,28 @@ class ScannerMethod implements ScannerInterface
                 case T_FINAL:
                     $this->isFinal = true;
                     continue;
+
                 case T_ABSTRACT:
                     $this->isAbstract = true;
                     continue;
+
                 case T_PUBLIC:
                     continue;
+
                 case T_PROTECTED:
                     $this->isProtected = true;
                     $this->isPublic = false;
                     continue;
+
                 case T_PRIVATE:
                     $this->isPrivate = true;
                     $this->isPublic = false;
                     continue;
+
                 case T_STATIC:
                     $this->isStatic = true;
                     continue;
+
                 case T_STRING:
                     $this->name = $token[1];
                     continue;
@@ -128,8 +129,8 @@ class ScannerMethod implements ScannerInterface
     {
         // first token is paren let loop increase
         $parenCount = 1;
-        $info = null;
-        $position = 0;
+        $info       = null;
+        $position   = 0;
         
         while (true) {
             $tokenIndex++;
@@ -156,7 +157,7 @@ class ScannerMethod implements ScannerInterface
                     'lineStart'   => $token[2],
                     'lineEnd'     => $token[2],
                     'name'        => null,
-                    'position'    => ++$position
+                    'position'    => ++$position,
                 );
             }
             
@@ -184,7 +185,7 @@ class ScannerMethod implements ScannerInterface
             
             if (isset($info) && is_string($token) && $token == ',') {
                 $info['tokenEnd'] = $tokenIndex - 1;
-                $this->infos[] = $info;
+                $this->infos[]    = $info;
                 unset($info);
             }
 
@@ -263,21 +264,26 @@ class ScannerMethod implements ScannerInterface
         $this->scan();
         
         // process the class requested
+        // Static for performance reasons
         static $baseScannerClass = 'Zend\Code\Scanner\ScannerParameter';
         if ($returnScanner !== $baseScannerClass) {
             if (!is_string($returnScanner)) {
                 $returnScanner = $baseScannerClass;
             }
             $returnScanner = ltrim($returnScanner, '\\');
-            if ($returnScanner !== $baseScannerClass && !is_subclass_of($returnScanner, $baseScannerClass)) {
-                throw new \RuntimeException('Class must be or extend ' . $baseScannerClass);
+            if ($returnScanner !== $baseScannerClass 
+                && !is_subclass_of($returnScanner, $baseScannerClass)
+            ) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Class must be or extend "%s"', $baseScannerClass
+                ));
             }
         }
         
         if (is_int($parameterNameOrInfoIndex)) {
             $info = $this->infos[$parameterNameOrInfoIndex];
             if ($info['type'] != 'parameter') {
-                throw new \InvalidArgumentException('Index of info offset is not about a parameter');
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a parameter');
             }
         } elseif (is_string($parameterNameOrInfoIndex)) {
             $methodFound = false;

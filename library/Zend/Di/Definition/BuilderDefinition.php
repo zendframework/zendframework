@@ -64,11 +64,12 @@ class BuilderDefinition implements Definition
     
     public function hasInjectionMethods($class)
     {
+        /* @var $class Zend\Di\Definition\Builder\PhpClass */
         $class = $this->getClass($class);
         if ($class === false) {
             throw new Exception\RuntimeException('Cannot find class object in this builder definition.');
         }
-        return $class->getInstantiator();
+        return (count($class->getInjectionMethods()) > 0);
     }
     
     public function getInjectionMethods($class)

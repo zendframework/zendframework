@@ -13,7 +13,7 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">../library/</directory>
+            <!-- <directory suffix=".php">../library/</directory> -->
         </whitelist>
     </filter>
 </phpunit>

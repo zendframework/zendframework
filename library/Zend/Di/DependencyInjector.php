@@ -28,12 +28,14 @@ class DependencyInjector implements DependencyInjection
      */
     protected $references = array();
     
+    protected $circularDependencyCheck = true;
+    
     /**
      * @param Zend\DI\Configuration $config
      */
     public function __construct(Configuration $config = null)
     {
-        if ($this->config) {
+        if ($config) {
             $this->setConfiguration($config);
         }
     }
@@ -43,7 +45,7 @@ class DependencyInjector implements DependencyInjection
         // @todo process this
     }
     
-    public function setDefinition(Definition\DefinitionInterface $definition)
+    public function setDefinition(Definition $definition)
     {
         $this->definition = $definition;
         return $this;
@@ -112,13 +114,11 @@ class DependencyInjector implements DependencyInjection
     public function newInstance($name, array $params = array(), $isShared = true)
     {
         $this->getDefinition();
-        
-        // check if name is alias
-        //$class = (array_key_exists($name, $this->aliases)) ? $this->aliases[$name] : $name;
-        $class = $name;
+
+        $class = $this->getInstanceManager()->getClassFromAlias($name);
         
         if (!$this->definition->hasClass($class)) {
-            throw new Exception\InvalidArgumentException('Invalid class name or alias provided.');
+            throw new Exception\ClassNotFoundException('Class or alias name ' . $name . ' could not be located in provided definition.');
         }
         
         $instantiator = $this->definition->getInstantiator($class);
@@ -241,13 +241,13 @@ class DependencyInjector implements DependencyInjection
         $index = 0;
         foreach ($this->definition->getInjectionMethodParameters($class, $method) as $name => $value) {
             if ($value === null && !array_key_exists($name, $params)) {
-                throw new Exception\RuntimeException('Missing parameter named ' . $name . ' for ' . $class . '::' . $method);
+                throw new Exception\MissingPropertyException('Missing parameter named ' . $name . ' for ' . $class . '::' . $method);
             }
             
             // circular dep check
             if ($isInstantiator && $value !== null) {
                 $this->dependencies[$class][$value]= true;
-                //$this->references[$serviceName][$className]= true;
+                $this->checkCircularDependency($class, $value);
             }
             
             if ($value === null) {
@@ -273,12 +273,12 @@ class DependencyInjector implements DependencyInjection
         if (is_array($dependency)) {
             foreach ($dependency as $dep) {
                 if (isset($this->dependencies[$dep][$class]) && $this->dependencies[$dep][$class]) {
-                    throw new Exception\RuntimeException("Circular dependency detected: $class depends on $dep and viceversa");
+                    throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on $dep and viceversa");
                 }
             }
         } else {
             if (isset($this->dependencies[$dependency][$class]) && $this->dependencies[$dependency][$class]) {
-                throw new Exception\RuntimeException("Circular dependency detected: $class depends on $dependency and viceversa");
+                throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on $dependency and viceversa");
             }
         }
         return true;
@@ -291,6 +291,7 @@ class DependencyInjector implements DependencyInjection
      * @param type $dependency 
      * @return void
      */
+    /*
     protected function checkPathDependencies($class, $dependency)
     {
         if (!empty($this->references[$class])) {
@@ -303,5 +304,6 @@ class DependencyInjector implements DependencyInjection
             }
         }
     }
+    */
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace ZendTest\Di;
+namespace ZendTest\Di\Definition;
 
-use Zend\Di\Configuration;
+use Zend\Di\Definition\Configuration;
 
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {

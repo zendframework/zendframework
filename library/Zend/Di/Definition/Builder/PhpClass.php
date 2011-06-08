@@ -25,9 +25,15 @@ class PhpClass
         return $this;
     }
     
+    public function getInstantiator()
+    {
+        return $this->instantiator;
+    }
+    
     public function addSuperType($superType)
     {
         $this->superTypes[] = $superType;
+        return $this;
     }
     
     public function getSuperTypes()
@@ -38,11 +44,12 @@ class PhpClass
     public function addInjectionMethod(InjectionMethod $injectionMethod)
     {
         $this->injectionMethods[] = $injectionMethod;
+        return $this;
     }
     
     public function getInjectionMethods()
     {
-        $this->injectionMethods;
+        return $this->injectionMethods;
     }
 
 }

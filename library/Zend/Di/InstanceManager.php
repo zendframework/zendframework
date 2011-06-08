@@ -104,6 +104,19 @@ class InstanceManager implements InstanceCollection
      * (non-PHPdoc)
      * @see Zend\Di.InstanceCollection::getProperty()
      */
+    public function hasProperty($classOrAlias, $name)
+    {
+        // @todo better alias property management
+        if (isset($this->properties[$classOrAlias])) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see Zend\Di.InstanceCollection::getProperty()
+     */
     public function getProperty($classOrAlias, $name)
     {
         // @todo better alias property management

@@ -40,11 +40,11 @@ class ArrayDefinition implements Definition
     public function getInstantiator($class)
     {
         if (!isset($this->dataArray[$class])) {
-            return array();
+            return null;
         }
         
         if (!isset($this->dataArray[$class]['instantiator'])) {
-            return array();
+            return '__construct';
         }
         
         return $this->dataArray[$class]['instantiator'];

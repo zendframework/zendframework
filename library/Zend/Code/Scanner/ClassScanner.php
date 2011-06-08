@@ -148,20 +148,19 @@ class ClassScanner implements Scanner
 
         }
         
-        // create function to resolve short names with uses
-        $namespace = $this->namespace;
-        $uses      = $this->uses;
+        $data = (object) array(
+            'namespace' => $this->namespace,
+            'uses'      => $this->uses,
+        );
 
-        
         if ($this->shortInterfaces) {
             $this->interfaces = $this->shortInterfaces;
-            $data = (object) array('namespace' => $namespace, 'uses' => $uses);
             array_walk($this->interfaces, array('Zend\Code\Scanner\Util', 'resolveImports'), $data);
         }
         
         if ($this->shortParentClass) {
             $this->parentClass = $this->shortParentClass;
-            $resolveUseFunc($this->parentClass);
+            Util::resolveImports($this->parentClass, null, $data);
         }
 
     }

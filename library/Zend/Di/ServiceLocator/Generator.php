@@ -1,7 +1,9 @@
 <?php
-namespace Zend\Di;
+// @todo refactor to use new Definition interface
+namespace Zend\Di\ServiceLocator;
 
-use Zend\CodeGenerator\Php as CodeGen;
+use Zend\CodeGenerator\Php as CodeGen,
+    Zend\Di\Exception;
 
 class ContainerBuilder
 {

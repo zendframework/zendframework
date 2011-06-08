@@ -1,5 +1,6 @@
 <?php
-namespace Zend\Di;
+
+namespace Zend\Di\ServiceLocator;
 
 class ServiceLocator implements ServiceLocation
 {

@@ -1,37 +1,75 @@
 <?php
+
 namespace Zend\Di;
 
 class DependencyInjector implements DependencyInjection
 {
     /**
-     * Aliases to attached definitions
-     * @var array
+     * @var Zend\Di\Definition
      */
-    protected $aliases = array();
-
+    protected $definition = null;
+    
     /**
-     * Aggregated definitions
-     * @var array
+     * @var Zend\Di\InstanceCollection
      */
-    protected $definitions = array();
-
-    /**
-     * Already loaded instances, by classname
-     */
-    protected $instances = array();
+    protected $instanceManager = null;
 
     /**
      * All the class dependencies [source][dependency]
      * 
      * @var array 
      */
-    protected $dependencies= array();
+    protected $dependencies = array();
+    
     /**
      * All the class references [dependency][source]
      * 
      * @var array 
      */
-    protected $references= array();
+    protected $references = array();
+    
+    /**
+     * @param Zend\DI\Configuration $config
+     */
+    public function __construct(Configuration $config = null)
+    {
+        if ($this->config) {
+            $this->setConfiguration($config);
+        }
+    }
+    
+    public function setConfiguration(Configuration $config)
+    {
+        // @todo process this
+    }
+    
+    public function setDefinition(Definition\DefinitionInterface $definition)
+    {
+        $this->definition = $definition;
+        return $this;
+    }
+    
+    
+    public function getDefinition()
+    {
+        if ($this->definition == null) {
+            $this->definition = new Definition\RuntimeDefinition();
+        }
+        return $this->definition;
+    }
+    
+    /**
+     * 
+     * @return Zend\Di\InstanceManager
+     */
+    public function getInstanceManager()
+    {
+        if ($this->instanceManager == null) {
+            $this->instanceManager = new InstanceManager();
+        }
+        return $this->instanceManager;
+    }
+
     /**
      * Lazy-load a class
      *
@@ -45,14 +83,22 @@ class DependencyInjector implements DependencyInjection
      */
     public function get($name, array $params = array())
     {
+        /*
+        if ($params) {
+            throw new \Exception('Implementation not complete: get needs to hash params');
+        }
+        */
+        
+        $im = $this->getInstanceManager();
+        
         // Cached instance
-        if (isset($this->instances[$name])) {
-            return $this->instances[$name];
+        if ($im->hasSharedInstance($name, $params)) {
+            return $im->getSharedInstance($name, $params);
         }
 
         return $this->newInstance($name, $params);
     }
-
+    
     /**
      * Retrieve a new instance of a class
      *
@@ -63,58 +109,158 @@ class DependencyInjector implements DependencyInjection
      * @param  array $params Parameters to pass to the constructor
      * @return object|null
      */
-    public function newInstance($name, array $params = array())
+    public function newInstance($name, array $params = array(), $isShared = true)
     {
-        // Class name provided
-        if (isset($this->definitions[$name])) {
-            $instance = $this->getInstanceFromDefinition($this->definitions[$name], $params);
-            if ($this->definitions[$name]->isShared()) {
-                $this->instances[$name] = $instance;
-            }
-            return $instance;
+        $this->getDefinition();
+        
+        // check if name is alias
+        //$class = (array_key_exists($name, $this->aliases)) ? $this->aliases[$name] : $name;
+        $class = $name;
+        
+        if (!$this->definition->hasClass($class)) {
+            throw new Exception\InvalidArgumentException('Invalid class name or alias provided.');
         }
-
-        // Alias resolved to definition
-        if (false !== $definition = $this->getDefinitionFromAlias($name)) {
-            $class = $definition->getClass();
-            if (isset($this->instances[$class])) {
-                return $this->instances[$class];
+        
+        $instantiator = $this->definition->getInstantiator($class);
+        $injectionMethods = $this->definition->getInjectionMethods($class);
+        
+        if ($instantiator === '__construct') {
+            $object = $this->createInstanceViaConstructor($class, $params);
+            if (in_array('__construct', $injectionMethods)) {
+                unset($injectionMethods[array_search('__construct', $injectionMethods)]);
             }
-            $instance = $this->getInstanceFromDefinition($definition, $params);
-            if ($definition->isShared()) {
-                $this->instances[$name]  = $instance;
-                $this->instances[$class] = $instance;
+        } elseif (is_callable($instantiator)) {
+            $object = $this->createInstanceViaCallback($instantiator, $params);
+            // @todo make sure we can create via a real object factory
+            throw new \Exception('incomplete implementation');
+        } else {
+            throw new Exception\RuntimeException('Invalid instantiator');
+        }
+        
+        if ($injectionMethods) {
+            foreach ($injectionMethods as $injectionMethod) {
+                $this->handleInjectionMethodForObject($object, $injectionMethod, $params);
             }
-            return $instance;
         }
-
-        // Test if class exists, and return instance if possible
-        if (!class_exists($name)) {
-            return null;
+        
+        if ($isShared) {
+            $this->getInstanceManager()->addSharedInstance($object, $class, $params);
         }
-        $instance = $this->getInstanceFromClassName($name, $params);
-        return $instance;
+        
+        return $object;
     }
     
     /**
-     * Set many definitions at once
+     * Retrieve a class instance based on class name
      *
-     * String keys will be used as the $serviceName argument to 
-     * {@link setDefinition()}.
-     *
-     * @param  array|Traversable $definitions Iterable Definition objects
-     * @return DependencyInjector
+     * Any parameters provided will be used as constructor arguments. If any 
+     * given parameter is a DependencyReference object, it will be fetched
+     * from the container so that the instance may be injected.
+     * 
+     * @param  string $class 
+     * @param  array $params 
+     * @return object
      */
-    public function setDefinitions($definitions)
+    protected function createInstanceViaConstructor($class, $params)
     {
-        foreach ($definitions as $name => $definition) {
-            if (!is_string($name) || is_numeric($name) || empty($name)) {
-                $name = null;
-            }
-            $this->setDefinition($definition, $name);
+        $callParameters = array();
+        if ($this->definition->hasInjectionMethod($class, '__construct')) {
+            $callParameters = $this->resolveMethodParameters($class, '__construct', $params, true);
         }
-        return $this;
+
+        // Hack to avoid Reflection in most common use cases
+        switch (count($callParameters)) {
+            case 0:
+                return new $class();
+            case 1:
+                return new $class($callParameters[0]);
+            case 2:
+                return new $class($callParameters[0], $callParameters[1]);
+            case 3:
+                return new $class($callParameters[0], $callParameters[1], $callParameters[3]);
+            default:
+                $r = new \ReflectionClass($class);
+                return $r->newInstanceArgs($callParameters);
+        }
     }
+    
+    
+    /**
+     * Get an object instance from the defined callback
+     * 
+     * @param  callback $callback 
+     * @param  array $params 
+     * @return object
+     * @throws Exception\InvalidCallbackException
+     */
+    protected function createInstanceViaCallback($callback, $params)
+    {
+        if (!is_callable($callback)) {
+            throw new Exception\InvalidCallbackException('An invalid constructor callback was provided');
+        }
+        
+        if (is_array($callback)) {
+            $class = (is_object($callback[0])) ? get_class($callback[0]) : $callback[0];
+            $method = $callback[1];
+        }
+
+        $callParameters = array();
+        if ($this->definition->hasInjectionMethod($class, $method)) {
+            $callParameters = $this->resolveMethodParameters($class, $method, $params, true);
+        }
+        return call_user_func_array($callback, $callParameters);
+    }
+    
+    /**
+     * This parameter will handle any injection methods and resolution of
+     * dependencies for such methods 
+     * 
+     * @param object $object
+     * @param string $method
+     * @param array $params
+     */
+    protected function handleInjectionMethodForObject($object, $method, $params)
+    {
+        // @todo make sure to resolve the supertypes for both the object & definition
+        $callParameters = $this->resolveMethodParameters(get_class($object), $method, $params);
+        call_user_func_array(array($object, $method), $callParameters);
+    }
+    
+    /**
+     * Resolve parameters referencing other services
+     * 
+     * @param  array $params 
+     * @return array
+     */
+    protected function resolveMethodParameters($class, $method, array $params, $isInstantiator = false)
+    {
+        $resultParams = array();
+        
+        $params = array_merge($params, $this->getInstanceManager()->getProperties($class));
+        
+        $index = 0;
+        foreach ($this->definition->getInjectionMethodParameters($class, $method) as $name => $value) {
+            if ($value === null && !array_key_exists($name, $params)) {
+                throw new Exception\RuntimeException('Missing parameter named ' . $name . ' for ' . $class . '::' . $method);
+            }
+            
+            // circular dep check
+            if ($isInstantiator && $value !== null) {
+                $this->dependencies[$class][$value]= true;
+                //$this->references[$serviceName][$className]= true;
+            }
+            
+            if ($value === null) {
+                $resultParams[$index] = $params[$name];
+            } else {
+                $resultParams[$index] = $this->get($value, $params);
+            }
+            $index++;
+        }
+
+        return $resultParams;
+    }
+    
     /**
      * Check for Circular Dependencies
      *
@@ -137,6 +283,7 @@ class DependencyInjector implements DependencyInjection
         }
         return true;
     }
+
     /**
      * Check the circular dependencies path between two definitions 
      * 
@@ -144,214 +291,17 @@ class DependencyInjector implements DependencyInjection
      * @param type $dependency 
      * @return void
      */
-    protected function checkPathDependencies($class, $dependency) {
+    protected function checkPathDependencies($class, $dependency)
+    {
         if (!empty($this->references[$class])) {
             foreach ($this->references[$class] as $key => $value) {
                 if ($this->dependencies[$key][$class]) {
-                    $this->dependencies[$key][$dependency]= true;
+                    $this->dependencies[$key][$dependency] = true;
                     $this->checkCircularDependency($key, $dependency);
                     $this->checkPathDependencies($key,$dependency);
                 }
             }
         }
     }
-    /**
-     * Add a definition, optionally with a service name alias
-     * 
-     * @param  DependencyDefinition $definition 
-     * @param  string $serviceName 
-     * @return DependencyInjector
-     */
-    public function setDefinition(DependencyDefinition $definition, $serviceName = null)
-    {
-        $className = $definition->getClass();
-        $this->definitions[$className] = $definition;
-        if (null !== $serviceName && !empty($serviceName)) {
-            $this->aliases[$serviceName] = $className;
-        }
-        foreach ($definition->getParams() as $param) {
-            if ($param instanceof Reference) {
-                $serviceName= $param->getServiceName();
-                $this->dependencies[$className][$serviceName]= true;
-                $this->references[$serviceName][$className]= true;
-                $this->checkCircularDependency($className, $serviceName);
-                $this->checkPathDependencies($className, $serviceName);
-            } 
-        }
-        return $this;
-    }
 
-    /**
-     * Alias a given service/class name so that it may be referenced by another name
-     * 
-     * @param  string $alias 
-     * @param  string $serviceName Class name or service/alias name
-     * @return DependencyInjector
-     */
-    public function setAlias($alias, $serviceName)
-    {
-        $this->aliases[$alias] = $serviceName;
-        return $this;
-    }
-
-    /**
-     * Retrieve aggregated definitions
-     * 
-     * @return array
-     */
-    public function getDefinitions()
-    {
-        return $this->definitions;
-    }
-
-    /**
-     * Retrieve defined aliases
-     * 
-     * @return array
-     */
-    public function getAliases()
-    {
-        return $this->aliases;
-    }
-
-    /**
-     * Get an object instance based on a Definition object
-     * 
-     * @param  DependencyDefinition $definition 
-     * @param  array $params 
-     * @return object
-     */
-    protected function getInstanceFromDefinition(DependencyDefinition $definition, array $params)
-    {
-        $class  = $definition->getClass();
-        $params = array_merge($definition->getParams(), $params);
-
-        if ($definition->hasConstructorCallback()) {
-            $object = $this->getInstanceFromCallback($definition->getConstructorCallback(), $params);
-        } else {
-            $object = $this->getInstanceFromClassName($class, $params);
-        }
-        $this->injectMethods($object, $definition);
-        return $object;
-    }
-
-    /**
-     * Resolve a Definition class based on the alias provided
-     * 
-     * @param  string $name 
-     * @return false|DependencyDefinition
-     */
-    protected function getDefinitionFromAlias($name)
-    {
-        if (!isset($this->aliases[$name])) {
-            return false;
-        }
-
-        $service = $this->aliases[$name];
-        if (!isset($this->definitions[$service])) {
-            return $this->getDefinitionFromAlias($service);
-        }
-
-        return $this->definitions[$service];
-    }
-    /**
-     * Retrieve a class instance based on class name
-     *
-     * Any parameters provided will be used as constructor arguments. If any 
-     * given parameter is a DependencyReference object, it will be fetched
-     * from the container so that the instance may be injected.
-     * 
-     * @param  string $class 
-     * @param  array $params 
-     * @return object
-     */
-    protected function getInstanceFromClassName($class, array $params)
-    {
-        // Hack to avoid Reflection in most common use cases
-        switch (count($params)) {
-            case 0:
-                return new $class();
-            case 1:
-                $param = array_shift($params);
-                if (null === $param) {
-                    return new $class();
-                }
-                if ($param instanceof DependencyReference) {
-                    $param = $this->get($param->getServiceName());
-                }
-                return new $class($param);
-            case 2:
-                $param1 = array_shift($params);
-                if ($param1 instanceof DependencyReference) {
-                    $param1 = $this->get($param1->getServiceName());
-                }
-                $param2 = array_shift($params);
-                if ($param2 instanceof DependencyReference) {
-                    $param2 = $this->get($param2->getServiceName());
-                }
-                return new $class($param1, $param2);
-            default:
-                $params = $this->resolveReferences($params);
-                $r = new \ReflectionClass($class);
-                return $r->newInstanceArgs($params);
-        }
-    }
-
-    /**
-     * Get an object instance from the defined callback
-     * 
-     * @param  callback $callback 
-     * @param  array $params 
-     * @return object
-     * @throws Exception\InvalidCallbackException
-     */
-    protected function getInstanceFromCallback($callback, array $params)
-    {
-        if (!is_callable($callback)) {
-            throw new Exception\InvalidCallbackException('An invalid constructor callback was provided');
-        }
-        $params = $this->resolveReferences($params);
-        return call_user_func_array($callback, $params);
-    }
-
-    /**
-     * Resolve parameters referencing other services
-     * 
-     * @param  array $params 
-     * @return array
-     */
-    protected function resolveReferences(array $params)
-    {
-        foreach ($params as $key => $value) {
-            if ($value instanceof DependencyReference) {
-                $params[$key] = $this->get($value->getServiceName());
-            }
-        }
-        return $params;
-    }
-
-    /**
-     * Call setter methods in order to inject dependencies
-     * 
-     * @param  object $object 
-     * @param  DependencyDefinition $definition 
-     * @return void
-     */
-    protected function injectMethods($object, DependencyDefinition $definition)
-    {
-        foreach ($definition->getMethodCalls() as $name => $info)
-        {
-            if (!method_exists($object, $name)) {
-                continue;
-            }
-
-            $params = $info->getParams();
-            foreach ($params as $key => $param) {
-                if ($param instanceof DependencyReference) {
-                    $params[$key] = $this->get($param->getServiceName());
-                }
-            }
-            call_user_func_array(array($object, $name), $params);
-        }
-    }
 }

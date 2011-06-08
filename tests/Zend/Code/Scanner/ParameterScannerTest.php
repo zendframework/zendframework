@@ -2,16 +2,16 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\ScannerFile;
+use Zend\Code\Scanner\FileScanner,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class ScannerParameterTest extends \PHPUnit_Framework_TestCase
+class ParameterScannerTest extends TestCase
 {
-    
-    public function testScannerParamterHasParameterInformation()
+    public function testParameterScannerHasParameterInformation()
     {
-        $file = new ScannerFile(__DIR__ . '/../TestAsset/BarClass.php');
-        $class = $file->getClass('ZendTest\Code\TestAsset\BarClass');
-        $method = $class->getMethod('three');
+        $file      = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $class     = $file->getClass('ZendTest\Code\TestAsset\BarClass');
+        $method    = $class->getMethod('three');
         $parameter = $method->getParameter('t');
         $this->assertEquals('ZendTest\Code\TestAsset\BarClass', $parameter->getDeclaringClass());
         $this->assertEquals('three', $parameter->getDeclaringFunction());
@@ -23,5 +23,4 @@ class ScannerParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($parameter->isOptional());
         $this->assertTrue($parameter->isPassedByReference());
     }
-
 }

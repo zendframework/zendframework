@@ -5,7 +5,7 @@ namespace Zend\Code\Scanner;
 use Zend\Code\Scanner,
     Zend\Code\Exception;
 
-class ScannerTokenArray implements Scanner
+class TokenArrayScanner implements Scanner
 {
     protected $isScanned = false;
 
@@ -367,7 +367,7 @@ class ScannerTokenArray implements Scanner
             return $namespaces;
         } else {
             if ($returnScannerClass === true) {
-                $returnScannerClass = 'Zend\Code\Scanner\ScannerNamespace';
+                $returnScannerClass = 'Zend\Code\Scanner\NamespaceScanner';
             }
             $scannerClass = new $returnScannerClass;
             // @todo
@@ -392,7 +392,7 @@ class ScannerTokenArray implements Scanner
     public function getIncludes($returnScannerClass = false)
     {
         $this->scan();
-        // @todo Implement getIncludes() in ScannerTokenArray
+        // @todo Implement getIncludes() in TokenArrayScanner
     }
     
     public function getClasses($returnScannerClass = false)
@@ -420,15 +420,15 @@ class ScannerTokenArray implements Scanner
      * Enter description here ...
      * @param string|int $classNameOrInfoIndex
      * @param string $returnScannerClass
-     * @return Zend\Code\Scanner\ScannerClass
+     * @return Zend\Code\Scanner\ClassScanner
      */
-    public function getClass($classNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ScannerClass')
+    public function getClass($classNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ClassScanner')
     {
         $this->scan();
         
         // Process the class requested
         // Static for performance reasons
-        static $baseScannerClass = 'Zend\Code\Scanner\ScannerClass';
+        static $baseScannerClass = 'Zend\Code\Scanner\ClassScanner';
         if ($returnScannerClass !== $baseScannerClass) {
             if (!is_string($returnScannerClass)) {
                 $returnScannerClass = $baseScannerClass;
@@ -496,7 +496,7 @@ class ScannerTokenArray implements Scanner
             return $functions;
         } else {
             if ($returnScannerClass === true) {
-                $returnScannerClass = 'Zend\Code\Scanner\ScannerFunction';
+                $returnScannerClass = 'Zend\Code\Scanner\FunctionScanner';
             }
             $scannerClass = new $returnScannerClass;
             // @todo

@@ -2,7 +2,7 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerDocComment
+class DocCommentScanner
 {
     // @todo
     // This should be able to use the doccomment extension, or tokenize itself

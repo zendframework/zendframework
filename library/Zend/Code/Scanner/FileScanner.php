@@ -5,7 +5,7 @@ namespace Zend\Code\Scanner;
 use Zend\Code\Scanner,
     Zend\Code\Exception;
 
-class ScannerFile extends ScannerTokenArray implements Scanner
+class FileScanner extends TokenArrayScanner implements Scanner
 {
     protected $isScanned = false;
     

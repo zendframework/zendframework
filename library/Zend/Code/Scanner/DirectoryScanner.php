@@ -6,11 +6,11 @@ use Zend\Code\Scanner,
     Zend\Code\Exception,
     RecursiveDirectoryIterator;
 
-class ScannerDirectory implements Scanner
+class DirectoryScanner implements Scanner
 {
     protected $isScanned            = false;
     protected $directories          = array();
-    protected $fileScannerFileClass = 'Zend\Code\Scanner\ScannerFile';
+    protected $fileScannerFileClass = 'Zend\Code\Scanner\FileScanner';
     protected $scannerFiles         = array();
     
     public function __construct($directory = null)
@@ -56,7 +56,7 @@ class ScannerDirectory implements Scanner
         foreach ($this->directories as $directory) {
             foreach (new RecursiveDirectoryIterator($directory) as $item) {
                 if ($item->isFile() && preg_match('#\.php$#', $item->getRealPath())) {
-                    $this->scannerFiles[] = new ScannerFile($item->getRealPath());
+                    $this->scannerFiles[] = new FileScanner($item->getRealPath());
                 }
             }
         }
@@ -71,7 +71,7 @@ class ScannerDirectory implements Scanner
         
         $classes = array();
         foreach ($this->scannerFiles as $scannerFile) {
-            /* @var $scannerFile Zend\Code\Scanner\ScannerFile */
+            /* @var $scannerFile Zend\Code\Scanner\FileScanner */
             $classes = array_merge($classes, $scannerFile->getClasses($returnScannerClass));
         }
         
@@ -84,15 +84,15 @@ class ScannerDirectory implements Scanner
      * Enter description here ...
      * @param string|int $classNameOrInfoIndex
      * @param string $returnScannerClass
-     * @return Zend\Code\Scanner\ScannerClass
+     * @return Zend\Code\Scanner\ClassScanner
      */
     /*
-    public function getClass($classNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ScannerClass')
+    public function getClass($classNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ClassScanner')
     {
         $this->scan();
         
         // process the class requested
-        static $baseScannerClass = 'Zend\Code\Scanner\ScannerClass';
+        static $baseScannerClass = 'Zend\Code\Scanner\ClassScanner';
         if ($returnScannerClass !== $baseScannerClass) {
             if (!is_string($returnScannerClass)) {
                 $returnScannerClass = $baseScannerClass;

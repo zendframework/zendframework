@@ -5,7 +5,7 @@ namespace Zend\Code\Scanner;
 use Zend\Code\Scanner,
     Zend\Code\Exception;
 
-class ScannerMethod implements Scanner
+class MethodScanner implements Scanner
 {
     protected $isScanned    = false;
 
@@ -34,7 +34,7 @@ class ScannerMethod implements Scanner
         $this->class = $class;
     }
     
-    public function setScannerClass(ScannerClass $scannerClass)
+    public function setScannerClass(ClassScanner $scannerClass)
     {
         $this->scannerClass = $scannerClass;
     }
@@ -259,13 +259,13 @@ class ScannerMethod implements Scanner
         return $return;
     }
     
-    public function getParameter($parameterNameOrInfoIndex, $returnScanner = 'Zend\Code\Scanner\ScannerParameter')
+    public function getParameter($parameterNameOrInfoIndex, $returnScanner = 'Zend\Code\Scanner\ParameterScanner')
     {
         $this->scan();
         
         // process the class requested
         // Static for performance reasons
-        static $baseScannerClass = 'Zend\Code\Scanner\ScannerParameter';
+        static $baseScannerClass = 'Zend\Code\Scanner\ParameterScanner';
         if ($returnScanner !== $baseScannerClass) {
             if (!is_string($returnScanner)) {
                 $returnScanner = $baseScannerClass;

@@ -2,7 +2,7 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerValue
+class ValueScanner
 {
     // @todo
 }

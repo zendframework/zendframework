@@ -2,7 +2,7 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerDocCommentTag
+class DocCommentTagScanner
 {
     // @todo
 }

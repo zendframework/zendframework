@@ -2,7 +2,7 @@
 
 namespace Zend\Code\Scanner;
 
-class ScannerParameter
+class ParameterScanner
 {
     protected $isScanned                = false;
 
@@ -33,7 +33,7 @@ class ScannerParameter
         $this->declaringClass = $class;
     }
     
-    public function setDeclaringScannerClass(ScannerClass $scannerClass)
+    public function setDeclaringScannerClass(ClassScanner $scannerClass)
     {
         $this->declaringScannerClass = $scannerClass;
     }
@@ -43,7 +43,7 @@ class ScannerParameter
         $this->declaringFunction = $function;
     }
     
-    public function setDeclaringScannerFunction(ScannerMethod $scannerFunction)
+    public function setDeclaringScannerFunction(MethodScanner $scannerFunction)
     {
         $this->declaringScannerFunction = $scannerFunction;
     }

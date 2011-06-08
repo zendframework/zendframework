@@ -2,9 +2,10 @@
 
 namespace ZendTest\Di;
 
-use Zend\Di\DependencyInjector;
+use Zend\Di\DependencyInjector,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
+class DependencyInjectorTest extends TestCase
 {
     public function testDependencyInjectorWillUsePokeYokeInstanceManager()
     {

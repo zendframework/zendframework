@@ -2,12 +2,13 @@
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\ArrayDefinition;
+use Zend\Di\Definition\ArrayDefinition,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class ArrayDefinitionTest extends \PHPUnit_Framework_TestCase
+class ArrayDefinitionTest extends TestCase
 {
-    public function testTrue()
+    public function testStub()
     {
-        $this->assertTrue(true); // placeholder
+        $this->markTestIncomplete();
     }
 }

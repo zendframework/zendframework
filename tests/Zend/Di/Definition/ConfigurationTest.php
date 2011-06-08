@@ -2,12 +2,13 @@
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\Configuration;
+use Zend\Di\Definition\Configuration,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTest extends TestCase
 {
-    public function testTrue()
+    public function testStub()
     {
-        $this->assertTrue(true); // placeholder
+        $this->markTestIncomplete();
     }
 }

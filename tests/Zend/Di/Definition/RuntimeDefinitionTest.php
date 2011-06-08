@@ -2,12 +2,13 @@
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\RuntimeDefinition;
+use Zend\Di\Definition\RuntimeDefinition,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class RuntimeDefinitionTest extends \PHPUnit_Framework_TestCase
+class RuntimeDefinitionTest extends TestCase
 {
-    public function testTrue()
+    public function testStub()
     {
-        $this->assertTrue(true); // placeholder
+        $this->markTestIncomplete();
     }
 }

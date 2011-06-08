@@ -2,9 +2,10 @@
 
 namespace ZendTest\Di;
 
-use Zend\Di\InstanceManager;
+use Zend\Di\InstanceManager,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class InstanceManagerTest extends \PHPUnit_Framework_TestCase
+class InstanceManagerTest extends TestCase
 {
     
     public function testInstanceManagerImplementsInterface()

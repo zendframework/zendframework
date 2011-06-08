@@ -3,9 +3,10 @@
 namespace ZendTest\Di\Definition;
 
 use Zend\Di\Definition\BuilderDefinition,
-    Zend\Di\Definition\Builder;
+    Zend\Di\Definition\Builder,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class BuilderDefinitionTest extends \PHPUnit_Framework_TestCase
+class BuilderDefinitionTest extends TestCase
 {
     
     public function testBuilderImplementsDefinition()

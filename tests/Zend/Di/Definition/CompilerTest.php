@@ -3,17 +3,15 @@
 namespace ZendTest\Di\Definition;
 
 use Zend\Di\Definition\Compiler,
-    Zend\Code\Scanner\ScannerDirectory;
+    Zend\Code\Scanner\DirectoryScanner,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class CompilerTest extends \PHPUnit_Framework_TestCase
+class CompilerTest extends TestCase
 {
-    
-    
-    
     public function testCompilerCompilesAgainstConstructorInjectionAssets()
     {
         $compiler = new Compiler;
-        $compiler->addCodeScannerDirectory(new ScannerDirectory(__DIR__ . '/../TestAsset/CompilerClasses'));
+        $compiler->addCodeScannerDirectory(new DirectoryScanner(__DIR__ . '/../TestAsset/CompilerClasses'));
         $definition = $compiler->compile();
         $this->assertInstanceOf('Zend\Di\Definition\ArrayDefinition', $definition);
         
@@ -23,8 +21,8 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
         	'ZendTest\Di\TestAsset\CompilerClasses\A',
   			'ZendTest\Di\TestAsset\CompilerClasses\B',
             'ZendTest\Di\TestAsset\CompilerClasses\C',
-  			'ZendTest\Di\TestAsset\CompilerClasses\D'
-            );
+  			'ZendTest\Di\TestAsset\CompilerClasses\D',
+        );
         $classes = $definition->getClasses();
         foreach ($assertClasses as $assertClass) {
             $this->assertContains($assertClass, $classes);

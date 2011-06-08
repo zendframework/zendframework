@@ -2,18 +2,21 @@
 
 namespace Zend\Di\Definition;
 
+use Zend\Code\Scanner\ClassScanner,
+    Zend\Code\Scanner\DirectoryScanner,
+    Zend\Code\Scanner\FileScanner;
+
 class Compiler
 {
-    
     protected $codeScanners = array();
     protected $codeReflectors = array();
     
-    public function addCodeScannerDirectory(\Zend\Code\Scanner\ScannerDirectory $scannerDirectory)
+    public function addCodeScannerDirectory(DirectoryScanner $scannerDirectory)
     {
         $this->codeScanners[] = $scannerDirectory;
     }
     
-    public function addCodeScannerFile(\Zend\Code\Scanner\ScannerFile $scannerFile)
+    public function addCodeScannerFile(FileScanner $scannerFile)
     {
         $this->codeScanners[] = $scannerFile;
     }
@@ -31,15 +34,12 @@ class Compiler
             
             $scannerClasses = $codeScanner->getClasses(true);
             
-            /* @var $class Zend\Code\Scanner\ScannerClass */
+            /* @var $class Zend\Code\Scanner\ClassScanner */
             foreach ($scannerClasses as $scannerClass) {
                 
                 if ($scannerClass->isAbstract() || $scannerClass->isInterface()) {
                     continue;
                 }
-                
-                $className = $scannerClass->getName();
-                $data[$className] = array();
                 
                 // determine supertypes
                 $superTypes = array();
@@ -50,19 +50,19 @@ class Compiler
                     $superTypes = array_merge($superTypes, $interfaces);
                 }
                 
-                $data[$className]['superTypes'] = $superTypes;
-                
-                $data[$className]['instantiator'] = $this->compileScannerInstantiator($scannerClass);
-                $data[$className]['injectionMethods'] = $this->compileScannerInjectionMethods($scannerClass);
-                
-
+                $className = $scannerClass->getName();
+                $data[$className] = array(
+                    'superTypes'       => $superTypes,
+                    'instantiator'     => $this->compileScannerInstantiator($scannerClass),
+                    'injectionMethods' => $this->compileScannerInjectionMethods($scannerClass),
+                );
             }
         }
         
         return new ArrayDefinition($data);
     }
     
-    public function compileScannerInstantiator(\Zend\Code\Scanner\ScannerClass $scannerClass)
+    public function compileScannerInstantiator(ClassScanner $scannerClass)
     {
         if ($scannerClass->hasMethod('__construct')) {
             $construct = $scannerClass->getMethod('__construct');
@@ -74,12 +74,11 @@ class Compiler
         return null;
         
         // @todo scan parent classes for instantiator
-        //$scannerClass->getParentClass();
     }
     
-    public function compileScannerInjectionMethods(\Zend\Code\Scanner\ScannerClass $scannerClass)
+    public function compileScannerInjectionMethods(ClassScanner $scannerClass)
     {
-        $data = array();
+        $data      = array();
         $className = $scannerClass->getName();
         foreach ($scannerClass->getMethods(true) as $scannerMethod) {
             $methodName = $scannerMethod->getName();
@@ -118,5 +117,4 @@ class Compiler
     public function getInjectionMethods($class);
     public function getInjectionMethodParameters($class, $method);    
      */
-    
 }

@@ -149,32 +149,11 @@ class ParameterScanner
         } while ($token);
         
         if ($this->class) {
-                // create function to resolve short names with uses
-
             $uses = $this->uses;
-            $resolveUseFunc = function (&$value, $key = null) use (&$namespace, &$uses) {
-                if (!$uses || strlen($value) <= 0 || $value{0} == '\\') {
-                    $value = ltrim($value, '\\');
-                    return;
-                }
-                
-                if ($namespace || $uses) {
-                    $firstPartEnd = (strpos($value, '\\')) ?: strlen($value-1);
-                    $firstPart = substr($value, 0, $firstPartEnd);
-                    if (array_key_exists($firstPart, $uses)) {
-                        $value = substr_replace($value, $uses[$firstPart], 0, $firstPartEnd);
-                        return;
-                    }
-                    if ($namespace) {
-                        $value = $namespace . '\\' . $value;
-                        return;
-                    }
-                }
-            };
-            
             if ($this->shortInterfaces) {
                 $this->interfaces = $this->shortInterfaces;
-                array_walk($this->interfaces, $resolveUseFunc);
+                $data = (object) array('namespace' => $namespace, 'uses' => $uses);
+                array_walk($this->interfaces, array('Zend\Code\Scanner\Util', 'resolveImports'), $data);
             }
         }
         

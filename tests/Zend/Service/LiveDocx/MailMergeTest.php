@@ -255,7 +255,6 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 
     public function testMissingUsername()
     {
-        
         $_mailMerge = new MailMerge();
 
         try {

@@ -738,6 +738,66 @@ class MailMerge extends AbstractLiveDocx
     }
 
     /**
+     * Determines whether sub-templates should be ignored during the merge process.
+     *
+     * @param  boolean $ignoreSubTemplates
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @since  LiveDocx 1.2
+     */
+    public function setIgnoreSubTemplates($ignoreSubTemplates)
+    {
+        $this->_logIn();
+
+        if (!is_bool($ignoreSubTemplates)) {
+            throw new Exception\RuntimeException('ignoreSubTemplates must be boolean.');
+        }
+
+        try {
+            $this->getSoapClient()->SetIgnoreSubTemplates(array(
+                'ignoreSubTemplates' => $ignoreSubTemplates
+            ));
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Determines which sub-templates should be ignored during the merge process.
+     *
+     * @param  array filenames
+     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
+     * @return \Zend\Service\LiveDocx\MailMerge
+     * @since  LiveDocx 1.2
+     */
+    public function setSubTemplateIgnoreList($filenames)
+    {
+        $this->_logIn();
+
+        if (!is_array($filenames)) {
+            throw new Exception\RuntimeException('filenames must be an array.');
+        }
+
+        $filenames = array_values($filenames);
+
+        try {
+            $this->getSoapClient()->SetSubTemplateIgnoreList(array(
+                'filenames' => $filenames
+            ));
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                $e->getMessage()
+            );
+        }
+
+        return $this;
+    }
+    
+    /**
      * Share a document - i.e. the document is available to all over the Internet.
      *
      * @return string
@@ -1177,70 +1237,6 @@ class MailMerge extends AbstractLiveDocx
         trigger_error($errorMessage, E_USER_NOTICE);
 
         return $this->$replacement();
-    }
-
-    // -------------------------------------------------------------------------
-    
-    /**
-     * Determines whether sub-templates should be ignored during the merge process.
-     *
-     * IMPORTANT: This method is in active development on the backend server and
-     *            is currently unstable. Do not use it in production applications.
-     *
-     * @param  boolean $ignore
-     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
-     * @return \Zend\Service\LiveDocx\MailMerge
-     * @since  LiveDocx 2.0
-     */
-    public function setIgnoreSubTemplates($ignore)
-    {
-        $this->_logIn();
-
-        try {
-            $this->getSoapClient()->SetIgnoreSubTemplates(array(
-                'ignore' => $ignore
-            ));
-        } catch (\Exception $e) {
-            throw new Exception\RuntimeException(
-                $e->getMessage()
-            );
-        }
-
-        return $this;
-    }
-
-    /**
-     * Determines which sub-templates should be ignored during the merge process.
-     *
-     * IMPORTANT: This method is in active development on the backend server and
-     *            is currently unstable. Do not use it in production applications.
-     *
-     * @param  array filenames
-     * @throws \Zend\Service\LiveDocx\Exception\RuntimeException
-     * @return \Zend\Service\LiveDocx\MailMerge
-     * @since  LiveDocx 2.0
-     */
-    public function setSubTemplateIgnoreList($filenames)
-    {
-        $this->_logIn();
-
-        if (!is_array($filenames)) {
-            throw new Exception\RuntimeException('filenames must be an array.');
-        }
-
-        $filenames = array_values($filenames);
-
-        try {
-            $this->getSoapClient()->SetSubTemplateIgnoreList(array(
-                'filenames' => $filenames
-            ));
-        } catch (\Exception $e) {
-            throw new Exception\RuntimeException(
-                $e->getMessage()
-            );
-        }
-
-        return $this;
     }
 
 }

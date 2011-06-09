@@ -13,6 +13,10 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     const TEST_TEMPLATE_1 = 'phpunit-template.docx';
     const TEST_TEMPLATE_2 = 'phpunit-template-block-fields.doc';
 
+    const TEST_INCLUDE_MAINTEMPLATE  = 'maintemplate.docx';
+    const TEST_INCLUDE_SUBTEMPLATE_1 = 'subtemplate1.docx';
+    const TEST_INCLUDE_SUBTEMPLATE_2 = 'subtemplate2.docx';
+
     const TEST_IMAGE_1    = 'image-01.png';
     const TEST_IMAGE_2    = 'image-02.png';
 
@@ -129,7 +133,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 
         unset($soapClient);
     }
-    
+
     // -------------------------------------------------------------------------
 
     public function testGetFormat()
@@ -138,12 +142,12 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals('docx',  $this->_mailMerge->getFormat('document-123.doc'));
         $this->assertNotEquals('docx',  $this->_mailMerge->getFormat('document123.doc'));
         $this->assertNotEquals('docx',  $this->_mailMerge->getFormat('document.123.doc'));
-        
+
         $this->assertEquals('docx', $this->_mailMerge->getFormat('document.docx'));
         $this->assertEquals('docx', $this->_mailMerge->getFormat('document-123.docx'));
         $this->assertEquals('docx', $this->_mailMerge->getFormat('document123.docx'));
         $this->assertEquals('docx', $this->_mailMerge->getFormat('document.123.docx'));
-        
+
         $this->assertEquals('doc',  $this->_mailMerge->getFormat('document.doc'));
         $this->assertEquals('doc',  $this->_mailMerge->getFormat('document-123.doc'));
         $this->assertEquals('doc',  $this->_mailMerge->getFormat('document123.doc'));
@@ -203,7 +207,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $_mailMerge->setWsdl($wsdl);
 
         $this->assertTrue(is_a($_mailMerge->setWsdl($wsdl), '\Zend\Service\LiveDocx\MailMerge'));
-        
+
         $this->assertEquals($wsdl, $_mailMerge->getWsdl());
 
         unset($_mailMerge);
@@ -283,7 +287,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $_mailMerge = new MailMerge();
         $_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
                    ->setPassword('invalid-password');
-        
+
         try {
             $_mailMerge->listTemplates();
             $this->fail('exception expected');
@@ -319,11 +323,11 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     }
 
     // -------------------------------------------------------------------------
-    
+
     public function testSetLocalTemplateMissingOnLocalFileSystem()
     {
         try {
-            $this->_mailMerge->setLocalTemplate('invalid-template'); 
+            $this->_mailMerge->setLocalTemplate('invalid-template');
             $this->fail('exception expected');
         } catch (Exception\InvalidArgumentException $e) {}
     }
@@ -420,7 +424,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_a($this->_mailMerge->setRemoteTemplate(self::TEST_TEMPLATE_1), '\Zend\Service\LiveDocx\MailMerge'));
         $this->_mailMerge->deleteTemplate(self::TEST_TEMPLATE_1);
     }
-    
+
     public function testSetFieldValues()
     {
         $testValues = array('software' => 'phpunit');
@@ -482,6 +486,85 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         // Local template
         $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
         $this->assertTrue(is_a($this->_mailMerge->setBlockFieldValues($testKey, $testValues), '\Zend\Service\LiveDocx\MailMerge'));
+    }
+
+    // -------------------------------------------------------------------------
+
+    protected function _setUpIncludeTemplate()
+    {
+        $filenames = array (
+            self::TEST_INCLUDE_MAINTEMPLATE,
+            self::TEST_INCLUDE_SUBTEMPLATE_1,
+            self::TEST_INCLUDE_SUBTEMPLATE_2
+        );
+
+        foreach ($filenames as $filename) {
+
+            if ($this->_mailMerge->templateExists($filename)) {
+                $this->_mailMerge->deleteTemplate($filename);
+            }
+
+            $this->_mailMerge->uploadTemplate($this->_path .
+                DIRECTORY_SEPARATOR . $filename);
+        }
+    }
+
+    public function testIncludeSubTemplates()
+    {
+        $this->_setUpIncludeTemplate();
+
+        $this->_mailMerge->setRemoteTemplate(self::TEST_INCLUDE_MAINTEMPLATE);
+        $this->_mailMerge->createDocument();
+        $this->assertEquals(44273, strlen($this->_mailMerge->retrieveDocument('pdf')));
+    }
+
+    public function testSetIgnoreSubTemplates()
+    {
+        $this->_setUpIncludeTemplate();
+
+        $this->_mailMerge->setIgnoreSubTemplates(true);
+        $this->_mailMerge->setRemoteTemplate(self::TEST_INCLUDE_MAINTEMPLATE);
+        $this->_mailMerge->createDocument();
+        $this->assertEquals(42200, strlen($this->_mailMerge->retrieveDocument('pdf')));
+    }
+
+    public function testPremiumsetSubTemplateIgnoreListAll()
+    {
+        $this->_setUpPremium();
+        $this->_setUpIncludeTemplate();
+
+        $this->_mailMerge->setSubTemplateIgnoreList(array(self::TEST_INCLUDE_SUBTEMPLATE_1, self::TEST_INCLUDE_SUBTEMPLATE_2));
+        $this->_mailMerge->setRemoteTemplate(self::TEST_INCLUDE_MAINTEMPLATE);
+        $this->_mailMerge->createDocument();
+        $this->assertEquals(56858, strlen($this->_mailMerge->retrieveDocument('pdf')));
+
+        $this->_tearDownPremium();
+    }
+
+    public function testPremiumsetSubTemplateIgnoreListFirst()
+    {
+        $this->_setUpPremium();
+        $this->_setUpIncludeTemplate();
+
+        $this->_mailMerge->setSubTemplateIgnoreList(array(self::TEST_INCLUDE_SUBTEMPLATE_1));
+        $this->_mailMerge->setRemoteTemplate(self::TEST_INCLUDE_MAINTEMPLATE);
+        $this->_mailMerge->createDocument();
+        $this->assertEquals(58500, strlen($this->_mailMerge->retrieveDocument('pdf')));
+
+        $this->_tearDownPremium();
+    }
+
+    public function testPremiumsetSubTemplateIgnoreListLast()
+    {
+        $this->_setUpPremium();
+        $this->_setUpIncludeTemplate();
+
+        $this->_mailMerge->setSubTemplateIgnoreList(array(self::TEST_INCLUDE_SUBTEMPLATE_2));
+        $this->_mailMerge->setRemoteTemplate(self::TEST_INCLUDE_MAINTEMPLATE);
+        $this->_mailMerge->createDocument();
+        $this->assertEquals(58406, strlen($this->_mailMerge->retrieveDocument('pdf')));
+
+        $this->_tearDownPremium();
     }
 
     // -------------------------------------------------------------------------
@@ -1106,5 +1189,6 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     }
 
     // -------------------------------------------------------------------------
+
     
 }

@@ -24,7 +24,7 @@
  */
 namespace Zend\Tool\Framework\Client;
 
-use Zend\Tool\Framework\Exception;
+use Zend\Tool\Framework\Client\Exception;
 
 /**
  * @uses       \Zend\Config\Config

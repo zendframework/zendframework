@@ -3,9 +3,11 @@
 /**
  * @namespace
  */
-namespace Zend\Service\LiveDocx;
+namespace ZendTest\Service\LiveDocx;
 
-use Zend\Soap\Client as SoapClient;
+use Zend\Service\LiveDocx\MailMerge,
+    Zend\Soap\Client as SoapClient,
+    PHPUnit_Framework_TestCase as TestCase;
 
 
 class MailMergeTest extends \PHPUnit_Framework_TestCase
@@ -27,8 +29,9 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME') ||
-                !constant('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD')) {
+        if (!constant('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME') 
+            || !constant('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD')
+        ) {
             $this->markTestSkipped('LiveDocx tests disabled');
             return true;
         }
@@ -37,11 +40,11 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->_mailMerge->setUsername(TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME)
                          ->setPassword(TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
-        foreach($this->_mailMerge->listTemplates() as $template) {
+        foreach ($this->_mailMerge->listTemplates() as $template) {
             $this->_mailMerge->deleteTemplate($template['filename']);
         }
 
-        $this->_path = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'MailMerge');
+        $this->_path = __DIR__ . DIRECTORY_SEPARATOR . 'MailMerge';
 
         return true;
     }
@@ -248,7 +251,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'username'       => 'invalid-username',
             'password'       => 'invalid-password',
             'wsdl'           => 'http://example.com/somewhere.wsdl',
-            'invalid-option' => 'invalid-option'
+            'invalid-option' => 'invalid-option',
         );
 
         try {
@@ -473,10 +476,12 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
     public function testSetBlockFieldValues()
     {
         $testKey    = 'connection';
-        $testValues = array(array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest'),
-                            array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest'),
-                            array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest'),
-                            array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest') );
+        $testValues = array(
+            array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest'),
+            array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest'),
+            array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest'),
+            array('connection_number' => 'unittest', 'connection_duration' => 'unittest', 'fee' => 'unittest'),
+        );
 
         // Remote template
         $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
@@ -578,7 +583,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         // Remote template
@@ -605,7 +610,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         // Remote template
@@ -641,7 +646,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
                 'date'     => 'phpunit - document 1',
                 'time'     => 'phpunit - document 1',
                 'city'     => 'phpunit - document 1',
-                'country'  => 'phpunit - document 1'
+                'country'  => 'phpunit - document 1',
             ),
             array(
                 'software' => 'phpunit - document 2',
@@ -650,7 +655,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
                 'date'     => 'phpunit - document 2',
                 'time'     => 'phpunit - document 2',
                 'city'     => 'phpunit - document 2',
-                'country'  => 'phpunit - document 2'
+                'country'  => 'phpunit - document 2',
             ),
         );
 
@@ -712,7 +717,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         $expectedResults = array(
@@ -720,7 +725,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'gif'  => 'd7281d7b6352ff897917e25d6b92746f',
             'jpg'  => 'e0b20ea2c9a6252886f689f227109085',
             'png'  => 'c449f0c2726f869e9a42156e366f1bf9',
-            'tiff' => '20a96a94762a531e9879db0aa6bd673f'
+            'tiff' => '20a96a94762a531e9879db0aa6bd673f',
         );
 
         $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
@@ -741,7 +746,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         $expectedResults = array(
@@ -749,7 +754,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'gif'  => '2255fee47b4af8438b109efc3cb0d304',
             'jpg'  => 'e1acfc3001fc62567de2a489eccdb552',
             'png'  => '15eac34d08e602cde042862b467fa865',
-            'tiff' => '98bad79380a80c9cc43dfffc5158d0f9'
+            'tiff' => '98bad79380a80c9cc43dfffc5158d0f9',
         );
 
         $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
@@ -770,7 +775,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
@@ -796,7 +801,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
@@ -834,7 +839,8 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $expectedResults = array(
             'phone', 'date', 'name', 'customer_number', 'invoice_number',
             'account_number', 'service_phone', 'service_fax', 'month',
-            'monthly_fee', 'total_net', 'tax', 'tax_value', 'total');
+            'monthly_fee', 'total_net', 'tax', 'tax_value', 'total',
+        );
 
         // Remote template
         $this->_mailMerge->uploadTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
@@ -1118,7 +1124,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);
@@ -1126,7 +1132,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
         $this->_mailMerge->setDocumentAccessPermissions(
             array(
                 'AllowHighLevelPrinting',
-                'AllowExtractContents'
+                'AllowExtractContents',
             ),
             'phpunit-2'
         );
@@ -1148,7 +1154,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             'date'     => 'phpunit',
             'time'     => 'phpunit',
             'city'     => 'phpunit',
-            'country'  => 'phpunit'
+            'country'  => 'phpunit',
         );
 
         $this->_mailMerge->setLocalTemplate($this->_path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_1);

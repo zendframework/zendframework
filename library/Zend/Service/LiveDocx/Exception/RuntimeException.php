@@ -24,6 +24,8 @@
  */
 namespace Zend\Service\LiveDocx\Exception;
 
+use Zend\Service\LiveDocx\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Service
@@ -31,8 +33,6 @@ namespace Zend\Service\LiveDocx\Exception;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException extends \RuntimeException implements \Zend\Service\LiveDocx\Exception
+class RuntimeException extends \RuntimeException implements Exception
 {
-
 }
-

@@ -235,6 +235,7 @@ class DependencyInjectorTest extends TestCase
      * Test for Circular Dependencies (case 1)
      * 
      * A->B, B->A
+     * @group CircurlarDependencyCheck
      */
     public function testNewInstanceThrowsExceptionOnBasicCircularDependency()
     {
@@ -248,17 +249,34 @@ class DependencyInjectorTest extends TestCase
      * Test for Circular Dependencies (case 2)
      * 
      * C->D, D->E, E->C
+     * @group CircurlarDependencyCheck
      */
     public function testNewInstanceThrowsExceptionOnThreeLevelCircularDependency()
     {
-        $this->markTestSkipped('This currently does not work');
         $di = new DependencyInjector();
 
         $this->setExpectedException(
         	'Zend\Di\Exception\CircularDependencyException',
-        	'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\B depends on ZendTest\Di\TestAsset\CircularClasses\A and viceversa'
+        	'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\E depends on ZendTest\Di\TestAsset\CircularClasses\C and viceversa'
         );
         $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\C');
+    }
+    
+    /**
+     * Test for Circular Dependencies (case 2)
+     * 
+     * C->D, D->E, E->C
+     * @group CircurlarDependencyCheck
+     */
+    public function testNewInstanceThrowsExceptionWhenEnteringInMiddleOfCircularDependency()
+    {
+        $di = new DependencyInjector();
+
+        $this->setExpectedException(
+        	'Zend\Di\Exception\CircularDependencyException',
+        	'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\C depends on ZendTest\Di\TestAsset\CircularClasses\D and viceversa'
+        );
+        $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\D');
     }
     
 }

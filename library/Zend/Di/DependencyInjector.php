@@ -19,7 +19,7 @@ class DependencyInjector implements DependencyInjection
      * 
      * @var array 
      */
-    protected $dependencies = array();
+    protected $currentDependencies = array();
     
     /**
      * All the class references [dependency][source]
@@ -113,16 +113,16 @@ class DependencyInjector implements DependencyInjection
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
-        $this->getDefinition();
+        $definition = $this->getDefinition();
 
         $class = $this->getInstanceManager()->getClassFromAlias($name);
         
-        if (!$this->definition->hasClass($class)) {
+        if (!$definition->hasClass($class)) {
             throw new Exception\ClassNotFoundException('Class or alias name ' . $name . ' could not be located in provided definition.');
         }
         
-        $instantiator = $this->definition->getInstantiator($class);
-        $injectionMethods = $this->definition->getInjectionMethods($class);
+        $instantiator = $definition->getInstantiator($class);
+        $injectionMethods = $definition->getInjectionMethods($class);
         
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params);
@@ -246,64 +246,23 @@ class DependencyInjector implements DependencyInjection
             
             // circular dep check
             if ($isInstantiator && $value !== null) {
-                $this->dependencies[$class][$value]= true;
-                $this->checkCircularDependency($class, $value);
+                if (in_array($value, $this->currentDependencies)) {
+                    throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on $value and viceversa");
+                }
+                //$this->checkCircularDependency($class, $value);
             }
             
             if ($value === null) {
                 $resultParams[$index] = $params[$name];
             } else {
+                array_push($this->currentDependencies, $class);
                 $resultParams[$index] = $this->get($value, $params);
+                array_pop($this->currentDependencies);
             }
             $index++;
         }
 
         return $resultParams;
     }
-    
-    /**
-     * Check for Circular Dependencies
-     *
-     * @param string $class
-     * @param array|string $dependency
-     * @return boolean
-     */
-    protected function checkCircularDependency($class, $dependency)
-    {
-        if (is_array($dependency)) {
-            foreach ($dependency as $dep) {
-                if (isset($this->dependencies[$dep][$class]) && $this->dependencies[$dep][$class]) {
-                    throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on $dep and viceversa");
-                }
-            }
-        } else {
-            if (isset($this->dependencies[$dependency][$class]) && $this->dependencies[$dependency][$class]) {
-                throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on $dependency and viceversa");
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Check the circular dependencies path between two definitions 
-     * 
-     * @param type $class
-     * @param type $dependency 
-     * @return void
-     */
-    /*
-    protected function checkPathDependencies($class, $dependency)
-    {
-        if (!empty($this->references[$class])) {
-            foreach ($this->references[$class] as $key => $value) {
-                if ($this->dependencies[$key][$class]) {
-                    $this->dependencies[$key][$dependency] = true;
-                    $this->checkCircularDependency($key, $dependency);
-                    $this->checkPathDependencies($key,$dependency);
-                }
-            }
-        }
-    }
-    */
 
 }

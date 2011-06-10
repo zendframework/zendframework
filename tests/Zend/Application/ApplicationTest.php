@@ -167,7 +167,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function testPassingStringBootstrapPathOptionShouldRegisterBootstrap()
     {
         $this->application->setOptions(array(
-            'bootstrap' => __DIR__ . '/TestAsset/modules/default/Bootstrap.php',
+            'bootstrap' => __DIR__ . '/TestAsset/modules/application/Bootstrap.php',
         ));
         $bootstrap = $this->application->getBootstrap();
         $this->assertTrue($bootstrap instanceof \Bootstrap);

@@ -421,4 +421,23 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('baz', $application->getOption('foo'));
     }
+    
+    /**
+     * @group ZF-10898
+     */
+    public function testPassingStringIniDistfileConfigPathOptionToConstructorShouldLoadOptions()
+    {
+        $application = new Application\Application('testing', dirname(__FILE__) . '/_files/appconfig.ini.dist');
+        $this->assertTrue($application->hasOption('foo'));
+    }
+
+    /**
+     * @group ZF-10898
+     */
+    public function testPassingArrayOptionsWithConfigKeyDistfileShouldLoadOptions()
+    {
+        $application = new Application\Application('testing', array('bar' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.ini.dist'));
+        $this->assertTrue($application->hasOption('foo'));
+        $this->assertTrue($application->hasOption('bar'));
+    }
 }

@@ -132,7 +132,7 @@ class Proxy extends Socket
 
         // Add Proxy-Authorization header
         if ($this->config['proxy_user'] && ! isset($headers['proxy-authorization'])) {
-            $headers['proxy-authorization'] = Client\Client::encodeAuthHeader(
+            $headers['proxy-authorization'] = Client::encodeAuthHeader(
                 $this->config['proxy_user'], $this->config['proxy_pass'], $this->config['proxy_auth']
             );
         }

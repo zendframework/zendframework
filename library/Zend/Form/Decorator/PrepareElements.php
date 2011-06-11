@@ -80,12 +80,14 @@ class PrepareElements extends FormElements
                  ->setTranslator($translator);
             if ($item instanceof Form\Element) {
                 $item->setBelongsTo($belongsTo);
-            } elseif (!empty($belongsTo) && ($item instanceof Form\Form)) {
-                if ($item->isArray()) {
-                    $name = $this->mergeBelongsTo($belongsTo, $item->getElementsBelongTo());
-                    $item->setElementsBelongTo($name, true);
-                } else {
-                    $item->setElementsBelongTo($belongsTo, true);
+            } elseif ($item instanceof Form\Form) {
+                if (!empty($belongsTo)) {
+                    if ($item->isArray()) {
+                        $name = $this->mergeBelongsTo($belongsTo, $item->getElementsBelongTo());
+                        $item->setElementsBelongTo($name, true);
+                    } else {
+                        $item->setElementsBelongTo($belongsTo, true);
+                    }
                 }
                 $this->_recursivelyPrepareForm($item);
             } elseif (!empty($belongsTo) && ($item instanceof Form\DisplayGroup)) {

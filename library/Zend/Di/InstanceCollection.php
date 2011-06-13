@@ -4,9 +4,12 @@ namespace Zend\Di;
 
 interface InstanceCollection
 {
-    public function hasSharedInstance($classOrAlias, array $params = array());
-    public function getSharedInstance($classOrAlias, array $params = array());
-    public function addSharedInstance($object, $class, array $params = array());
+    public function hasSharedInstance($classOrAlias);
+    public function getSharedInstance($classOrAlias);
+    public function addSharedInstance($instance, $class);
+    public function hasSharedInstanceWithParameters($classOrAlias, array $params);
+    public function getSharedInstanceWithParameters($classOrAlias, array $params);
+    public function addSharedInstanceWithParameters($instance, $class, array $params);
     public function getClassFromAlias($alias);
     public function addAlias($class, $alias);
     public function hasProperties($classOrAlias);

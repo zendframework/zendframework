@@ -10,7 +10,7 @@ class AggregateDefinition implements Definition
     protected $definitions = array(); 
     
     
-    public function addDefinition(DefinitionInterface $definition)
+    public function addDefinition(Definition $definition)
     {
         $this->definitions[] = $definition;
     }
@@ -38,7 +38,7 @@ class AggregateDefinition implements Definition
     {
         $superTypes = array();
         foreach ($this->definitions as $definition) {
-            $superTypes = array_merge($superTypes, $definition->getSuperTypes());
+            $superTypes = array_merge($superTypes, $definition->getClassSupertypes());
         }
         return $superTypes;
     }
@@ -67,7 +67,7 @@ class AggregateDefinition implements Definition
     {
         foreach ($this->definitions as $definition) {
             if ($definition->hasClass($class)) {
-                return $definition->hasInjectionMethod($class);
+                return $definition->hasInjectionMethod($class, $method);
             }
         }
         return false;
@@ -86,8 +86,8 @@ class AggregateDefinition implements Definition
     public function getInjectionMethodParameters($class, $method)
     {
         foreach ($this->definitions as $definition) {
-            if ($definition->hasClass($class)) {
-                return $definition->getInjectionMethodParameters($class);
+            if ($definition->hasClass($class) && $definition->hasInjectionMethod($class, $method)) {
+                return $definition->getInjectionMethodParameters($class, $method);
             }
         }
         return false;

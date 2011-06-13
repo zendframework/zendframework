@@ -256,8 +256,8 @@ class DependencyInjectorTest extends TestCase
         $di = new DependencyInjector();
 
         $this->setExpectedException(
-        	'Zend\Di\Exception\CircularDependencyException',
-        	'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\E depends on ZendTest\Di\TestAsset\CircularClasses\C and viceversa'
+            'Zend\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\E depends on ZendTest\Di\TestAsset\CircularClasses\C and viceversa'
         );
         $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\C');
     }
@@ -273,8 +273,8 @@ class DependencyInjectorTest extends TestCase
         $di = new DependencyInjector();
 
         $this->setExpectedException(
-        	'Zend\Di\Exception\CircularDependencyException',
-        	'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\C depends on ZendTest\Di\TestAsset\CircularClasses\D and viceversa'
+            'Zend\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\C depends on ZendTest\Di\TestAsset\CircularClasses\D and viceversa'
         );
         $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\D');
     }

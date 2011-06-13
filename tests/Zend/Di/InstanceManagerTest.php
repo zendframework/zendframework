@@ -23,6 +23,22 @@ class InstanceManagerTest extends TestCase
         $this->assertSame($obj, $im->getSharedInstance('ZendTest\Di\TestAsset\BasicClass')); 
     }
     
+    public function testInstanceManagerCanPersistInstancesWithParameters()
+    {
+        $im = new InstanceManager();
+        $obj1 = new TestAsset\BasicClass();
+        $obj2 = new TestAsset\BasicClass();
+        $obj3 = new TestAsset\BasicClass();
+        
+        $im->addSharedInstance($obj1, 'foo');
+        $im->addSharedInstanceWithParameters($obj2, 'foo', array('foo' => 'bar'));
+        $im->addSharedInstanceWithParameters($obj3, 'foo', array('foo' => 'baz'));
+        
+        $this->assertSame($obj1, $im->getSharedInstance('foo'));
+        $this->assertSame($obj2, $im->getSharedInstanceWithParameters('foo', array('foo' => 'bar')));
+        $this->assertSame($obj3, $im->getSharedInstanceWithParameters('foo', array('foo' => 'baz')));
+    }
+    
     public function testInstanceManagerCanPersistProperties()
     {
         $im = new InstanceManager();
@@ -31,5 +47,7 @@ class InstanceManagerTest extends TestCase
         $this->assertTrue($im->hasProperty('ZendTest\Di\TestAsset\BasicClass', 'foo'));
         $this->assertEquals('bar', $im->getProperty('ZendTest\Di\TestAsset\BasicClass', 'foo')); 
     }
+    
+
     
 }

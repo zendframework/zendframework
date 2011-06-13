@@ -9,6 +9,40 @@ class BuilderDefinition implements Definition
 {
     
     protected $classes = array();
+
+    public function createClassesFromArray(array $builderData)
+    {
+        foreach ($builderData as $className => $classInfo) {
+            $class = new Builder\PhpClass();
+            $class->setName($className);
+            foreach ($classInfo as $type => $typeData) {
+                switch (strtolower($type)) {
+                    case 'supertypes':
+                        foreach ($typeData as $superType) {
+                            $class->addSuperType($superType);
+                        }
+                        break;
+                    case 'instantiator':
+                        $class->setInstantiator($typeData);
+                        break;
+                    case 'injectionmethods':
+                    case 'injectionmethod':
+                        foreach ($typeData as $injectionMethodName => $injectionMethodData) {
+                            $injectionMethod = new Builder\InjectionMethod();
+                            $injectionMethod->setName($injectionMethodName);
+                            foreach ($injectionMethodData as $parameterName => $parameterType) {
+                                $parameterType = ($parameterType) ?: null; // force empty string to null
+                                $injectionMethod->addParameter($parameterName, $parameterType);
+                            }
+                            $class->addInjectionMethod($injectionMethod);
+                        }
+                        break;
+                    
+                }
+            }
+            $this->addClass($class);
+        }
+    }
     
     public function addClass(Builder\PhpClass $phpClass)
     {

@@ -20,17 +20,22 @@ class RuntimeDefinition implements Definition
     }
     
     /**
+     * Set the Lookup Type
+     * 
+     * @param string $lookupType
+     */
+    public function setLookupType($lookupType)
+    {
+        $this->lookupType = $lookupType;
+    }
+    
+    /**
      * Track classes when using EXPLICIT lookups
      * @param unknown_type $class
      */
     public function addClass($class)
     {
         $this->classes[] = $class;
-    }
-    
-    public function setLookupType($lookupType)
-    {
-        $this->lookupType = $lookupType;
     }
     
     public function hasClass($class)

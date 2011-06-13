@@ -51,7 +51,7 @@ class TokenArrayScanner implements Scanner
             $fastForward = 0;
             switch ($token[0]) {
                 case T_DOC_COMMENT:
-                    echo 'Found Doc Comment' . PHP_EOL;
+                    // @todo Implement docblock scanner
                     break;
 
                 case T_NAMESPACE:

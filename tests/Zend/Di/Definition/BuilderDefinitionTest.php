@@ -39,4 +39,37 @@ class BuilderDefinitionTest extends TestCase
         $this->assertEquals(array('bar' => 'Bar'), $definition->getInjectionMethodParameters('Foo', 'injectBar'));
     }
     
+    public function testBuilderCanBuildFromArray()
+    {
+        $ini = new \Zend\Config\Ini(__DIR__ . '/../_files/sample.ini', 'section-b');
+        $iniAsArray = $ini->toArray();
+        $definitionArray = $iniAsArray['di']['definitions'][1];
+        unset($definitionArray['class']);
+        
+        $definition = new BuilderDefinition();
+        $definition->createClassesFromArray($definitionArray);
+        
+        $this->assertTrue($definition->hasClass('My\DbAdapter'));
+        $this->assertEquals('__construct', $definition->getInstantiator('My\DbAdapter'));
+        $this->assertEquals(
+            array('username' => null, 'password' => null),
+            $definition->getInjectionMethodParameters('My\DbAdapter', '__construct')
+            );
+        
+        $this->assertTrue($definition->hasClass('My\Mapper'));
+        $this->assertEquals('__construct', $definition->getInstantiator('My\Mapper'));
+        $this->assertEquals(
+            array('dbAdapter' => 'My\DbAdapter'),
+            $definition->getInjectionMethodParameters('My\Mapper', '__construct')
+            );
+        
+        $this->assertTrue($definition->hasClass('My\Repository'));
+        $this->assertEquals('__construct', $definition->getInstantiator('My\Repository'));
+        $this->assertEquals(
+            array('mapper' => 'My\Mapper'),
+            $definition->getInjectionMethodParameters('My\Repository', '__construct')
+            );
+        
+    }
+    
 }

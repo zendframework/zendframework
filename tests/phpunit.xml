@@ -1,7 +1,9 @@
 <phpunit bootstrap="./Bootstrap.php" colors="true">
+    <!-- 
     <testsuite name="Zend Framework Test Suite">
         <directory>./</directory>
     </testsuite>
+     -->
 
     <groups>
         <exclude>
@@ -13,7 +15,7 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">../library/</directory>
+            <!-- <directory suffix=".php">../library/</directory> -->
         </whitelist>
     </filter>
 </phpunit>

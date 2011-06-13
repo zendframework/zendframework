@@ -39,8 +39,6 @@ function ZendTest_Autoloader($class)
     $ns       = array_shift($segments);
 
     switch ($ns) {
-        case 'PHPUnit':
-            return include_once str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
         case 'Zend':
             $file = dirname(__DIR__) . '/library/Zend/';
             break;

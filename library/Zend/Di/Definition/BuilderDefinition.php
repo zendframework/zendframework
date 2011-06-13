@@ -47,6 +47,7 @@ class BuilderDefinition implements Definition
     public function addClass(Builder\PhpClass $phpClass)
     {
         $this->classes[] = $phpClass;
+        return $this;
     }
     
     public function getClasses()

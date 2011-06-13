@@ -1,7 +1,8 @@
 <?php
 
-namespace Zend\Di,
-          Traversable;
+namespace Zend\Di;
+
+use Traversable;
 
 class Configuration
 {

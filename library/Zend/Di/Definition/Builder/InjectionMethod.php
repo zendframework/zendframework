@@ -12,6 +12,7 @@ class InjectionMethod
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
     
     public function getName()
@@ -26,6 +27,7 @@ class InjectionMethod
         } else {
             throw new \Exception('Implementation for parameter placement is incomplete');
         }
+        return $this;
     }
     
     public function getParameters()

@@ -1,5 +1,5 @@
 <?php
-namespace Zend\Di\ServiceLocator;
+namespace Zend\Di;
 
 interface ServiceLocation
 {

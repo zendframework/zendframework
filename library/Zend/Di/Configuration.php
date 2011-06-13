@@ -1,6 +1,7 @@
 <?php
 
-namespace Zend\Di;
+namespace Zend\Di,
+          Traversable;
 
 class Configuration
 {
@@ -13,8 +14,12 @@ class Configuration
     
     public function __construct($data)
     {
-        if ($data instanceof \Zend\Config\Config) {
-            $data = $data->toArray();
+        if ($data instanceof Traversable) {
+            if (method_exists($data, 'toArray')) {
+                $data = $data->toArray();
+            } else {
+                $data = iterator_to_array($data, true);
+            }
         } elseif (!is_array($data)) {
             throw new Exception\InvalidArgumentException('Configuration data must be of type Zend\Config\Config or an array');
         }

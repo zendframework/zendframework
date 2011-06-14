@@ -1,0 +1,31 @@
+- Ability to provide both class properties and method-specific parameters via
+  configuration (which solves disambiguation when multiple methods specify the
+  same parameter names)
+
+  Proposed solution:
+
+        array(
+            'properties' => array(
+                'Zend\Foo\Bar' => array(
+                    'public' => true,
+                    'methods' => array(
+                        '__construct' => array(
+                            'params' => array(
+                                'foo' => 'bar',
+                            ),
+                            'class' => 'Some\Default\Class'
+                        ),
+                        'setConfig' => array(
+                            'params' => array(
+                                'bar' => 'baz',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        )
+
+- Ability to pass configuration to a generated ServiceLocator
+- Skip optional arguments if not passed in configuration or part of definition
+  (current behavior is to raise an exception if *any* arguments are missing)
+- 

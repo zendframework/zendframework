@@ -124,8 +124,8 @@ class Generator
             // Create method call code
             $methods = '';
             foreach ($meta->getMethods() as $methodData) {
-                $methodName   = $method['name'];
-                $methodParams = $method['params'];
+                $methodName   = $methodData['name'];
+                $methodParams = $methodData['params'];
 
                 // Create method parameter representation
                 foreach ($methodParams as $key => $param) {

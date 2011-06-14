@@ -3,9 +3,10 @@
 namespace Zend\Di\ServiceLocator;
 
 use Zend\CodeGenerator\Php as CodeGen,
+    Zend\Di\DependencyInjection,
     Zend\Di\Exception;
 
-class ContainerBuilder
+class Generator
 {
     protected $containerClass = 'ApplicationContext';
 
@@ -23,14 +24,14 @@ class ContainerBuilder
      */
     public function __construct(DependencyInjection $injector)
     {
-        $this->injector = $injector;
+        $this->injector = new DependencyInjectorProxy($injector);
     }
 
     /**
      * Set the class name for the generated service locator container
      * 
      * @param  string $name 
-     * @return ContainerBuilder
+     * @return Generator
      */
     public function setContainerClass($name)
     {
@@ -42,7 +43,7 @@ class ContainerBuilder
      * Set the namespace to use for the generated class file
      * 
      * @param  string $namespace 
-     * @return ContainerBuilder
+     * @return Generator
      */
     public function setNamespace($namespace)
     {
@@ -61,15 +62,18 @@ class ContainerBuilder
      */
     public function getCodeGenerator($filename = null)
     {
+        $injector       = $this->injector;
+        $im             = $injector->getInstanceManager();
         $indent         = '    ';
-        $aliases        = $this->reduceAliases($this->injector->getAliases());
+        $aliases        = $this->reduceAliases($im->getAliases());
         $caseStatements = array();
         $getters        = array();
+        $definition     = $injector->getDefinition();
 
-        foreach ($this->injector->getDefinitions() as $definition) {
-            $name   = $definition->getClass();
+        foreach ($definition->getClasses() as $name) {
             $getter = $this->normalizeAlias($name);
-            $params = $definition->getParams();
+            $meta   = $injector->get($name);
+            $params = $meta->getParams();
             
             // Build parameter list for instantiation
             foreach ($params as $key => $param) {
@@ -79,8 +83,8 @@ class ContainerBuilder
                         throw new Exception\RuntimeException('Arguments in definitions may not contain objects');
                     }
                     $params[$key] = $string;
-                } elseif ($param instanceof DependencyReference) {
-                    $params[$key] = sprintf('$this->%s()', $this->normalizeAlias($param->getServiceName()));
+                } elseif ($param instanceof GeneratorInstance) {
+                    $params[$key] = sprintf('$this->%s()', $this->normalizeAlias($param->getName()));
                 } else {
                     $message = sprintf('Unable to use object arguments when building containers. Encountered with "%s", parameter of type "%s"', $name, get_class($param));
                     throw new Exception\RuntimeException($message);
@@ -98,10 +102,11 @@ class ContainerBuilder
             }
 
             // Create instantiation code
-            $creation = '';
-            if ($definition->hasConstructorCallback()) {
+            $creation    = '';
+            $constructor = $meta->getConstructor();
+            if ('__construct' != $constructor) {
                 // Constructor callback
-                $callback = var_export($definition->getConstructorCallback(), 1);
+                $callback = var_export($constructor, 1);
                 if (strstr($callback, '::__set_state(')) {
                     throw new Exception\RuntimeException('Unable to build containers that use callbacks requiring object instances');
                 }
@@ -118,9 +123,9 @@ class ContainerBuilder
 
             // Create method call code
             $methods = '';
-            foreach ($definition->getMethodCalls() as $method) {
-                $methodName   = $method->getName();
-                $methodParams = $method->getParams();
+            foreach ($meta->getMethods() as $methodData) {
+                $methodName   = $method['name'];
+                $methodParams = $method['params'];
 
                 // Create method parameter representation
                 foreach ($methodParams as $key => $param) {
@@ -130,7 +135,7 @@ class ContainerBuilder
                             throw new Exception\RuntimeException('Arguments in definitions may not contain objects');
                         }
                         $methodParams[$key] = $string;
-                    } elseif ($param instanceof DependencyReference) {
+                    } elseif ($param instanceof GeneratorInstance) {
                         $methodParams[$key] = sprintf('$this->%s()', $this->normalizeAlias($param->getServiceName()));
                     } else {
                         $message = sprintf('Unable to use object arguments when generating method calls. Encountered with class "%s", method "%s", parameter of type "%s"', $name, $methodName, get_class($param));
@@ -153,7 +158,7 @@ class ContainerBuilder
 
             // Generate caching statement
             $storage = '';
-            if ($definition->isShared()) {
+            if ($im->hasSharedInstance($name, $params)) {
                 $storage = sprintf("\$this->services['%s'] = \$object;\n", $name);
             }
 
@@ -161,7 +166,7 @@ class ContainerBuilder
             $getterBody = '';
 
             // Create fetch of stored service
-            if ($definition->isShared()) {
+            if ($im->hasSharedInstance($name, $params)) {
                 $getterBody .= sprintf("if (isset(\$this->services['%s'])) {\n",  $name);
                 $getterBody .= sprintf("%sreturn \$this->services['%s'];\n}\n\n", $indent, $name);
             }
@@ -231,14 +236,14 @@ class ContainerBuilder
         // Create class code generation object
         $container = new CodeGen\PhpClass();
         $container->setName($this->containerClass)
-                  ->setExtendedClass('DependencyInjectionContainer')
+                  ->setExtendedClass('ServiceLocator')
                   ->setMethod($get)
                   ->setMethods($getters)
                   ->setMethods($aliasMethods);
 
         // Create PHP file code generation object
         $classFile = new CodeGen\PhpFile();
-        $classFile->setUse('Zend\Di\DependencyInjectionContainer')
+        $classFile->setUse('Zend\Di\ServiceLocator')
                   ->setClass($container);
 
         if (null !== $this->namespace) {

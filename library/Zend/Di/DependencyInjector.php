@@ -155,7 +155,7 @@ class DependencyInjector implements DependencyInjection
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
-        $definition = $this->getDefinition();
+        $definition      = $this->getDefinition();
         $instanceManager = $this->getInstanceManager();
         
         if ($instanceManager->hasAlias($name)) {
@@ -171,7 +171,7 @@ class DependencyInjector implements DependencyInjection
             throw new Exception\ClassNotFoundException('Class ' . $aliasMsg . $class . ' could not be located in provided definition.');
         }
         
-        $instantiator = $definition->getInstantiator($class);
+        $instantiator     = $definition->getInstantiator($class);
         $injectionMethods = $definition->getInjectionMethods($class);
         
         if ($instantiator === '__construct') {

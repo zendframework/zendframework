@@ -53,6 +53,15 @@
     <part id="learning">
         <title>&part.learning.title;</title>
 
+        <chapter id="learning.di">
+            <title>Learning Dependency Injection</title>
+            <xi:include href="tutorials/quickstart-di.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/quickstart-di.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
         <chapter id="learning.quickstart">
             <title>&part.learning.quickstart.title;</title>
             <xi:include href="tutorials/quickstart-intro-mvc.xml">

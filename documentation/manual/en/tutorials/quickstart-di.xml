@@ -2,10 +2,7 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
                   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <article>
-  <articleinfo>
-    <title></title>
-  </articleinfo>
-<section id="very-brief-introduction-to-di.">
+<section id="learning.di.very-brief-introduction-to-di">
   <title>Very brief introduction to Di.</title>
   <para>
     <emphasis>Dependency Injection</emphasis> is a concept that has been
@@ -29,13 +26,13 @@ $b = new B(new A));
     on DI</ulink>.
   </para>
 </section>
-<section id="very-brief-introduction-to-di-container.">
+<section id="learning.di.very-brief-introduction-to-di-container">
   <title>Very brief introduction to Di Container.</title>
   <programlisting language="php"><![CDATA[
 TBD.
 ]]></programlisting>
 </section>
-<section id="simplest-usage-case-2-classes-one-consumes-the-other">
+<section id="learning.di.simplest-usage-case-2-classes-one-consumes-the-other">
   <title>Simplest usage case (2 classes, one consumes the other)</title>
   <para>
     In the simplest use case, a developer might have one class
@@ -59,7 +56,7 @@ namespace My {
         protected $a = null;
         public function __construct(A $a)
         {
-            $this-&gt;a = $a;
+            $this->a = $a;
         }
     }
 }
@@ -84,7 +81,7 @@ $b = new B(new A());
   </para>
   <programlisting language="php"><![CDATA[
 $di = new Zend\Di\DependencyInjector;
-$b = $di-&gt;get('My\B'); // will produce a B object that is consuming an A object
+$b = $di->get('My\B'); // will produce a B object that is consuming an A object
 ]]></programlisting>
   <para>
     Moreover, by using the <literal>DependencyInjector::get()</literal>
@@ -94,7 +91,7 @@ $b = $di-&gt;get('My\B'); // will produce a B object that is consuming an A obje
     <literal>DependencyInjector::newInstance()</literal> method:
   </para>
   <programlisting language="php"><![CDATA[
-$b = $di-&gt;newInstance('My\B');
+$b = $di->newInstance('My\B');
 ]]></programlisting>
   <para>
     Let's assume for a moment that <literal>A</literal> requires some
@@ -110,8 +107,8 @@ namespace My {
         protected $password = null;
         public function __construct($username, $password)
         {
-            $this-&gt;username = $username;
-            $this-&gt;password = $password;
+            $this->username = $username;
+            $this->password = $password;
         }
     }
 
@@ -120,7 +117,7 @@ namespace My {
         protected $a = null;
         public function __construct(A $a)
         {
-            $this-&gt;a = $a;
+            $this->a = $a;
         }
     }
 
@@ -129,7 +126,7 @@ namespace My {
         protected $b = null;
         public function __construct(B $b)
         {
-            $this-&gt;b = $b;
+            $this->b = $b;
         }
     }
 
@@ -144,8 +141,8 @@ namespace My {
   </para>
   <programlisting language="php"><![CDATA[
 $di = new Zend\Di\DependencyInjector;
-$di-&gt;getInstanceManager()-&gt;setProperty('A', 'username', 'MyUsernameValue');
-$di-&gt;getInstanceManager()-&gt;setProperty('A', 'password', 'MyHardToGuessPassword%$#');
+$di->getInstanceManager()->setProperty('A', 'username', 'MyUsernameValue');
+$di->getInstanceManager()->setProperty('A', 'password', 'MyHardToGuessPassword%$#');
 ]]></programlisting>
   <para>
     Now that our container has values it can use when creating
@@ -155,9 +152,9 @@ $di-&gt;getInstanceManager()-&gt;setProperty('A', 'password', 'MyHardToGuessPass
     the same:
   </para>
   <programlisting language="php"><![CDATA[
-$c = $di-&gt;get('My\C');
+$c = $di->get('My\C');
 // or
-$c = $di-&gt;newInstance('My\C');
+$c = $di->newInstance('My\C');
 ]]></programlisting>
   <para>
     Simple enough, but what if we wanted to pass in these parameters at
@@ -168,13 +165,13 @@ $c = $di-&gt;newInstance('My\C');
   </para>
   <programlisting language="php"><![CDATA[
 $parameters = array(
-    'username' =&gt; 'MyUsernameValue',
-    'password' =&gt; 'MyHardToGuessPassword%$#',
+    'username' => 'MyUsernameValue',
+    'password' => 'MyHardToGuessPassword%$#',
 );
 
-$c = $di-&gt;get('My\C', $parameters);
+$c = $di->get('My\C', $parameters);
 // or
-$c = $di-&gt;newInstance('My\C', $parameters);
+$c = $di->newInstance('My\C', $parameters);
 ]]></programlisting>
   <para>
     Constructor injection is not the only supported type of injection.
@@ -190,7 +187,7 @@ namespace My {
         protected $a;
         public function setA(A $a)
         {
-            $this-&gt;a = $a;
+            $this->a = $a;
         }
     }
 }
@@ -209,7 +206,7 @@ namespace My {
     based injection.
   </para>
 </section>
-<section id="simplest-usage-case-without-type-hints">
+<section id="learning.di.simplest-usage-case-without-type-hints">
   <title>Simplest Usage Case Without Type-hints</title>
   <para>
     If your code does not have type-hints or you are using 3rd party
@@ -252,7 +249,7 @@ namespace My {
         protected $a;
         public function setA($a)
         {
-            $this-&gt;a = $a;
+            $this->a = $a;
         }
     }
 }
@@ -268,31 +265,31 @@ use Zend\Di\DependencyInjector,
 
 // Describe this class:
 $builder = new Definition\BuilderDefinition;
-$builder-&gt;addClass(($class = new Builder\PhpClass));
+$builder->addClass(($class = new Builder\PhpClass));
 
-$class-&gt;setName('My\B');
-$class-&gt;addInjectableMethod(($im = new Builder\InjectibleMethod));
+$class->setName('My\B');
+$class->addInjectableMethod(($im = new Builder\InjectibleMethod));
 
-$im-&gt;setName('setA');
-$im-&gt;addParameter('a', 'My\A');
+$im->setName('setA');
+$im->addParameter('a', 'My\A');
 
 // Use both our Builder Definition as well as the default 
 // RuntimeDefinition, builder first
 $aDef = new Definition\AggregateDefinition;
-$aDef-&gt;addDefinition($builder);
-$aDef-&gt;addDefinition(new Definition\RuntimeDefinition);
+$aDef->addDefinition($builder);
+$aDef->addDefinition(new Definition\RuntimeDefinition);
 
 // Now make sure the DependencyInjector understands it
 $di = new DependencyInjector;
-$di-&gt;setDefinition($aDef);
+$di->setDefinition($aDef);
 
 // and finally, create C
 $parameters = array(
-    'username' =&gt; 'MyUsernameValue',
-    'password' =&gt; 'MyHardToGuessPassword%$#',
+    'username' => 'MyUsernameValue',
+    'password' => 'MyHardToGuessPassword%$#',
 );
 
-$c = $di-&gt;get('My\C', $parameters);
+$c = $di->get('My\C', $parameters);
 ]]></programlisting>
   <para>
     This above usage scenario provides that whatever the code looks
@@ -304,7 +301,7 @@ $c = $di-&gt;get('My\C', $parameters);
     objects you might require.
   </para>
 </section>
-<section id="simplest-usage-case-with-compiled-definition">
+<section id="learning.di.simplest-usage-case-with-compiled-definition">
   <title>Simplest usage case with Compiled Definition</title>
   <para>
     Without going into the gritty details, as you might expect, PHP at
@@ -383,10 +380,10 @@ $c = $di-&gt;get('My\C', $parameters);
   </para>
   <programlisting language="php"><![CDATA[
 $compiler = new Zend\Di\Definition\Compiler();
-$compiler-&gt;addCodeScannerDirectory(
+$compiler->addCodeScannerDirectory(
     new Zend\Code\Scanner\ScannerDirectory('path/to/library/My/')
 );
-$definition = $compiler-&gt;compile();
+$definition = $compiler->compile();
 ]]></programlisting>
   <para>
     This definition can then be directly used by the
@@ -396,10 +393,10 @@ $definition = $compiler-&gt;compile();
   </para>
   <programlisting language="php"><![CDATA[
 $di = new Zend\Di\Di;
-$di-&gt;setDefinition($definition);
-$di-&gt;getInstanceManager()-&gt;setProperty('My\A', 'username', 'foo');
-$di-&gt;getInstanceManager()-&gt;setProperty('My\A', 'password', 'bar');
-$c = $di-&gt;get('My\C');
+$di->setDefinition($definition);
+$di->getInstanceManager()->setProperty('My\A', 'username', 'foo');
+$di->getInstanceManager()->setProperty('My\A', 'password', 'bar');
+$c = $di->get('My\C');
 ]]></programlisting>
   <para>
     One strategy for persisting these compiled definitions would be the
@@ -408,13 +405,13 @@ $c = $di-&gt;get('My\C');
   <programlisting language="php"><![CDATA[
 if (!file_exists(__DIR__ . '/di-definition.php') &amp;&amp; $isProduction) {
     $compiler = new Zend\Di\Definition\Compiler();
-    $compiler-&gt;addCodeScannerDirectory(
+    $compiler->addCodeScannerDirectory(
         new Zend\Code\Scanner\ScannerDirectory('path/to/library/My/')
     );
-    $definition = $compiler-&gt;compile();
+    $definition = $compiler->compile();
     file_put_contents(
         __DIR__ . '/di-definition.php', 
-        '&lt;?php return ' . var_export($definition-&gt;toArray(), true) . ';'
+        '&lt;?php return ' . var_export($definition->toArray(), true) . ';'
     );
 } else {
     $definition = new Zend\Di\Definition\ArrayDefinition(
@@ -434,7 +431,7 @@ if (!file_exists(__DIR__ . '/di-definition.php') &amp;&amp; $isProduction) {
     of your application's dispatched actions.
   </para>
 </section>
-<section id="creating-a-precompiled-definition-for-others-to-use">
+<section id="learning.di.creating-a-precompiled-definition-for-others-to-use">
   <title>Creating a precompiled definition for others to use</title>
   <para>
     If you are a 3rd party code developer, it makes sense to produce a
@@ -450,23 +447,23 @@ if (!file_exists(__DIR__ . '/di-definition.php') &amp;&amp; $isProduction) {
   <programlisting language="php"><![CDATA[
 // First, compile the information
 $compiler = new Zend\Di\Definition\Compiler();
-$compiler-&gt;addCodeScannerDirectory(new Zend\Code\Scanner\DirectoryScanner(__DIR__ . '/My/'));
-$definition = $compiler-&gt;compile();
+$compiler->addCodeScannerDirectory(new Zend\Code\Scanner\DirectoryScanner(__DIR__ . '/My/'));
+$definition = $compiler->compile();
 
 // Now, create a Definition class for this information
 $codeGenerator = new Zend\CodeGenerator\Php\PhpFile();
-$codeGenerator-&gt;setClass(($class = new Zend\CodeGenerator\Php\PhpClass()));
-$class-&gt;setNamespaceName('My');
-$class-&gt;setName('DiDefinition');
-$class-&gt;setExtendedClass('\Zend\Di\Definition\ArrayDefinition');
-$class-&gt;setMethod(array(
-    'name' =&gt; '__construct',
-    'body' =&gt; 'parent::__construct(' . var_export($definition-&gt;toArray(), true) . ');'
+$codeGenerator->setClass(($class = new Zend\CodeGenerator\Php\PhpClass()));
+$class->setNamespaceName('My');
+$class->setName('DiDefinition');
+$class->setExtendedClass('\Zend\Di\Definition\ArrayDefinition');
+$class->setMethod(array(
+    'name' => '__construct',
+    'body' => 'parent::__construct(' . var_export($definition->toArray(), true) . ');'
 ));
-file_put_contents(__DIR__ . '/My/DiDefinition.php', $codeGenerator-&gt;generate());
+file_put_contents(__DIR__ . '/My/DiDefinition.php', $codeGenerator->generate());
 ]]></programlisting>
 </section>
-<section id="using-multiple-definitions-from-multiple-sources">
+<section id="learning.di.using-multiple-definitions-from-multiple-sources">
   <title>Using Multiple Definitions From Multiple Sources</title>
   <para>
     In all actuality, you will be using code from multiple places, some
@@ -483,29 +480,169 @@ $di = new DependencyInjector;
 $diDefAggregate = new Definition\Aggregate();
 
 // first add in provided Definitions, for example
-$diDefAggregate-&gt;addDefinition(new ThirdParty\Dbal\DiDefinition());
-$diDefAggregate-&gt;addDefinition(new Zend\Controller\DiDefinition());
+$diDefAggregate->addDefinition(new ThirdParty\Dbal\DiDefinition());
+$diDefAggregate->addDefinition(new Zend\Controller\DiDefinition());
 
 // for code that does not have TypeHints
 $builder = new Definition\BuilderDefinition();
-$builder-&gt;addClass(($class = Builder\PhpClass));
-$class-&gt;addInjectionMethod(($injectMethod = new Builder\InjectionMethod()));
-$injectMethod-&gt;setName('injectImplementation');
-$injectMethod-&gt;addParameter('implementation', 'Class\For\Specific\Implementation');
+$builder->addClass(($class = Builder\PhpClass));
+$class->addInjectionMethod(
+    ($injectMethod = new Builder\InjectionMethod())
+);
+$injectMethod->setName('injectImplementation');
+$injectMethod->addParameter(
+'implementation', 'Class\For\Specific\Implementation'
+);
 
 // now, your application code
 $compiler = new Definition\Compiler()
-$compiler-&gt;addCodeScannerDirectory(new Zend\Code\Scanner\DirectoryScanner(__DIR__ . '/App/'));
-$appDefinition = $compiler-&gt;compile();
-$diDefAggregate-&gt;addDefinition($appDefinition);
+$compiler->addCodeScannerDirectory(
+    new Zend\Code\Scanner\DirectoryScanner(__DIR__ . '/App/')
+);
+$appDefinition = $compiler->compile();
+$diDefAggregate->addDefinition($appDefinition);
 
 // now, pass in properties
-$im = $di-&gt;getInstanceManager();
-$propertiesFromConfig = array( // this could come from Zend\Config\Config::toArray
-    'ThirdParty\Dbal\DbAdapter' =&gt; array('username' =&gt; 'someUsername', 'password' =&gt; 'somePassword'),
-    'Zend\Controller\Helper\ContentType' =&gt; array('default' =&gt; 'xhtml5')
-    );
-$im-&gt;setProperties($propertiesFromConfig);
+$im = $di->getInstanceManager();
+
+// this could come from Zend\Config\Config::toArray
+$propertiesFromConfig = array( 
+    'ThirdParty\Dbal\DbAdapter' => array(
+        'username' => 'someUsername', 
+        'password' => 'somePassword'
+    ),
+    'Zend\Controller\Helper\ContentType' => array(
+        'default' => 'xhtml5'
+    ),
+);
+$im->setProperties($propertiesFromConfig);
 ]]></programlisting>
+</section>
+<section id="learning.di.generating-service-locators">
+    <title>Generating Service Locators</title>
+
+    <para>
+        In production, you want things to be as fast as possible. The Dependency
+        Injection Container, while engineered for speed, still must do a fair
+        bit of work resolving parameters and dependencies at runtime. What if
+        you could speed things up and remove those lookups?
+    </para>
+
+    <para>
+        The <classname>Zend\Di\ServiceLocator\Generator</classname> component
+        can do just that. It takes a configured DI instance, and generates a
+        service locator class for you from it. That class will manage instances
+        for you, as well as provide hard-coded, lazy-loading instantiation of
+        instances.
+    </para>
+
+    <para>
+        The method <methodname>getCodeGenerator()</methodname> returns an
+        instance of <classname>Zend\CodeGenerator\Php\PhpFile</classname>, from
+        which you can then write a class file with the new Service Locator.
+        Methods on the <classname>Generator</classname> class allow you to
+        specify the namespace and class for the generated Service Locator.
+    </para>
+
+    <para>
+        As an example, consider the following:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+use Zend\Di\ServiceLocator\Generator;
+
+// $di is a fully configured DI instance
+$generator = new Generator($di);
+
+$generator->setNamespace('Application')
+          ->setContainerClass('Context');
+$file = $generator->getCodeGenerator();
+$file->setFilename(__DIR__ . '/../Application/Context.php');
+$file->write();
+]]></programlisting>
+
+    <para>
+        The above code will write to
+        <filename>../Application/Context.php</filename>, and that file will
+        contain the class <classname>Application\Context</classname>. That file
+        might look like the following:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+<?php
+
+namespace Application;
+
+use Zend\Di\ServiceLocator;
+
+class Context extends ServiceLocator
+{
+
+    public function get($name, array $params = array())
+    {
+        switch ($name) {
+            case 'composed':
+            case 'My\ComposedClass':
+                return $this->getMyComposedClass();
+        
+            case 'struct':
+            case 'My\Struct':
+                return $this->getMyStruct();
+        
+            default:
+                return parent::get($name, $params);
+        }
+    }
+
+    public function getComposedClass()
+    {
+        if (isset($this->services['My\ComposedClass'])) {
+            return $this->services['My\ComposedClass'];
+        }
+        
+        $object = new \My\ComposedClass();
+        $this->services['My\ComposedClass'] = $object;
+        return $object;
+    }
+    public function getMyStruct()
+    {
+        if (isset($this->services['My\Struct'])) {
+            return $this->services['My\Struct'];
+        }
+        
+        $object = new \My\Struct();
+        $this->services['My\Struct'] = $object;
+        return $object;
+    }
+
+    public function getComposed()
+    {
+        return $this->get('My\ComposedClass');
+    }
+
+    public function getStruct()
+    {
+        return $this->get('My\Struct');
+    }
+}
+]]></programlisting>
+
+    <para>
+        To use this class, you simply consume it as you would a DI container:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$container = new Application\Context;
+
+$struct = $container->get('struct'); // My\Struct instance
+]]></programlisting>
+
+    <para>
+        One note about this functionality in its current incarnation.
+        Configuration is per-environment only at this time. This means that you
+        will need to generate a container per execution environment. Our
+        recommendation is that you do so, and then in your environment, specify
+        the container class to use.
+    </para>
 </section>
 </article>

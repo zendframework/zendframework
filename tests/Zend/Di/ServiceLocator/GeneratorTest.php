@@ -235,6 +235,7 @@ class ContainerBuilderTest extends TestCase
      */
     public function testNullAsOnlyArgumentResultsInEmptyParameterList()
     {
+        $this->markTestIncomplete('Null arguments are currently unsupported');
         $opt = new Builder\PhpClass();
         $opt->setName('ZendTest\Di\TestAsset\OptionalArg');
         $optCtor = new Builder\InjectionMethod();
@@ -267,6 +268,7 @@ class ContainerBuilderTest extends TestCase
      */
     public function testNullAsLastArgumentsResultsInTruncatedParameterList()
     {
+        $this->markTestIncomplete('Null arguments are currently unsupported');
         $struct = new Builder\PhpClass();
         $struct->setName('ZendTest\Di\TestAsset\Struct');
         $structCtor = new Builder\InjectionMethod();
@@ -326,6 +328,7 @@ class ContainerBuilderTest extends TestCase
      */
     public function testNullArgumentsResultInEmptyMethodParameterList()
     {
+        $this->markTestIncomplete('Null arguments are currently unsupported');
         $opt = new Builder\PhpClass();
         $opt->setName('ZendTest\Di\TestAsset\OptionalArg');
         $optCtor = new Builder\InjectionMethod();

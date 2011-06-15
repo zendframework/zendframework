@@ -174,8 +174,9 @@ EOS
                             new Php\PhpMethod(array(
                                 'name' => 'getLog',
                                 'body' => <<<'EOS'
+/* @var $bootstrap Zend\Application\Bootstrap */
 $bootstrap = $this->getInvokeArg('bootstrap');
-if (!$bootstrap->hasPluginResource('Log')) {
+if (!$bootstrap->hasResource('Log')) {
     return false;
 }
 $log = $bootstrap->getResource('Log');

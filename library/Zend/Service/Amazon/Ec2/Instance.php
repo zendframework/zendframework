@@ -41,27 +41,31 @@ use Zend\Service\Amazon,
 class Instance extends AbstractEc2
 {
     /**
-     * Constant for Small Instance TYpe
+     * Constant for Micro INstance Type
+     */
+    const MICRO = 't1.micro';
+    /**
+     * Constant for Small Instance Type
      */
     const SMALL = 'm1.small';
 
     /**
-     * Constant for Large Instance TYpe
+     * Constant for Large Instance Type
      */
     const LARGE = 'm1.large';
 
     /**
-     * Constant for X-Large Instance TYpe
+     * Constant for X-Large Instance Type
      */
     const XLARGE = 'm1.xlarge';
 
     /**
-     * Constant for High CPU Medium Instance TYpe
+     * Constant for High CPU Medium Instance Type
      */
     const HCPU_MEDIUM = 'c1.medium';
 
     /**
-     * Constant for High CPU X-Large Instance TYpe
+     * Constant for High CPU X-Large Instance Type
      */
     const HCPU_XLARGE = 'c1.xlarge';
 

@@ -22,7 +22,8 @@
  */
 namespace Zend\Cloud\Infrastructure\Adapter;
 
-use Zend\Cloud\Infrastructure\Adapter;
+use Zend\Cloud\Infrastructure\Adapter,
+    Zend\Cloud\Infrastructure\Instance;
 
 /**
  * Abstract infrastructure service adapter
@@ -35,13 +36,20 @@ use Zend\Cloud\Infrastructure\Adapter;
  */
 abstract class AbstractAdapter
 {
-
     /**
      * Store the last response from the adpter
      * 
      * @var array
      */
     protected $adapterResult;
+    /**
+     * Valid metrics for monitor
+     * 
+     * @var array
+     */
+    protected $validMetrics= array ( Instance::MONITOR_CPU, Instance::MONITOR_DISK_READ,
+                                     Instance::MONITOR_DISK_WRITE, Instance::MONITOR_NETWORK_IN,
+                                     Instance::MONITOR_NETWORK_OUT);
     /**
      * Get the last result of the adapter
      *

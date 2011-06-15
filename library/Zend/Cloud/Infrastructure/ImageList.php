@@ -1,12 +1,12 @@
 <?php
 /**
- * List of instances
+ * List of images
  *
  * @uses       ArrayAccess
  * @uses       Countable
  * @uses       Iterator
  * @uses       OutOfBoundsException
- * @uses       Zend\Cloud\Infrastructure\Instance
+ * @uses       Zend\Cloud\Infrastructure\Image
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -19,22 +19,23 @@
  */
 namespace Zend\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\Adapter,    
+use Zend\Cloud\Infrastructure\Image,  
     Zend\Cloud\Infrastructure\Exception;
 
-class InstanceList implements \Countable, \Iterator, \ArrayAccess
+class ImageList implements \Countable, \Iterator, \ArrayAccess
 {
     /**
-     * @var array Array of Zend\Cloud\Infrastructure\Instance
+     * @var array Array of Zend\Cloud\Infrastructure\Image
      */
-    protected $instances = array();
+    protected $imagess = array();
     /**
      * @var int Iterator key
      */
     protected $iteratorKey = 0;
     /**
-     * @var Zend\Cloud\Infrastructure\Adapter
+     * The Image adapter (if exists)
+     * 
+     * @var object
      */
     protected $adapter;
     /**
@@ -43,16 +44,13 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
      * @param  array $list
      * @return boolean
      */
-    public function __construct(Adapter $adapter,$instances)
+    public function __construct($images,$adapter=null)
     {
-        if (!($adapter instanceof Adapter)) {
-            throw new Exception\InvalidArgumentException("You must pass a Zend\Cloud\Infrastructure\Adapter");
-        }
-        if (empty($instances)) {
-            throw new Exception\InvalidArgumentException("You must pass an array of Instance's params");
+        if (empty($images) || !is_array($images)) {
+            throw new Exception\InvalidArgumentException("You must pass an array of Image's params");
         }
         $this->adapter= $adapter;
-        $this->constructFromArray($instances);
+        $this->constructFromArray($images);
     }
     /**
      * Transforms the Array to array of Instances
@@ -62,23 +60,23 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
      */
     private function constructFromArray(array $list)
     {
-        foreach ($list as $instance) {
-            $this->addInstance(new Instance($this->adapter,$instance));
+        foreach ($list as $image) {
+            $this->addImage(new Image($image,$this->adapter));
         }
     }
     /**
-     * Add an instance
+     * Add an image
      *
-     * @param  Zend\Service\Cloud\Infrastructure\Instance
-     * @return Zend\Service\Cloud\Infrastructure\InstanceList
+     * @param  Zend\Service\Cloud\Infrastructure\Image
+     * @return Zend\Service\Cloud\Infrastructure\ImageList
      */
-    protected function addInstance (Instance $instance)
+    protected function addImage (Image $image)
     {
-        $this->instances[] = $instance;
+        $this->images[] = $image;
         return $this;
     }
     /**
-     * Return number of instances
+     * Return number of images
      *
      * Implement Countable::count()
      *
@@ -86,18 +84,18 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
      */
     public function count()
     {
-        return count($this->instances);
+        return count($this->images);
     }
     /**
      * Return the current element
      *
      * Implement Iterator::current()
      *
-     * @return Zend\Cloud\Infrastructure\Instance
+     * @return Zend\Cloud\Infrastructure\Image
      */
     public function current()
     {
-        return $this->instances[$this->iteratorKey];
+        return $this->images[$this->iteratorKey];
     }
     /**
      * Return the key of the current element
@@ -167,12 +165,12 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @throws  OutOfBoundsException
-     * @return  Zend\Cloud\Infrastructure\Instance
+     * @return  Zend\Cloud\Infrastructure\Image
      */
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
-            return $this->instances[$offset];
+            return $this->images[$offset];
         } else {
             throw new OutOfBoundsException('Illegal index');
         }

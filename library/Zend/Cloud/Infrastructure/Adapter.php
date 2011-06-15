@@ -1,20 +1,22 @@
 <?php
+/**
+ * Adapter interface for infrastructure service
+ *
+ * @category   Zend
+ * @package    Zend\Cloud
+ * @subpackage Infrastructure
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+
+/**
+ * namespace
+ */
 namespace Zend\Cloud\Infrastructure;
 
 interface Adapter 
 { 
-    // HTTP adapter to use for connections 
     const HTTP_ADAPTER = 'http_adapter'; 
-    const STATUS_RUNNING = 'running'; 
-    const STATUS_STOPPED = 'stopped'; 
-    const STATUS_SHUTTING_DOWN= 'shutting-down'; 
-    const STATUS_TERMINATE= 'terminate';
-    const PARAM_ID= 'id';
-    const PARAM_NAME= 'name';
-    const PARAM_STATUS= 'status';
-    const PARAM_CPU= 'cpu';
-    const PARAM_RAM= 'ram';
- 
     /**
      * Return a list of the available instances
      *
@@ -30,6 +32,14 @@ interface Adapter
      */ 
     public function statusInstance($id); 
  
+    /**
+     * Return the public DNS name of the instance
+     * 
+     * @param string $id
+     * @return string|boolean 
+     */
+    public function publicDnsInstance($id);
+    
     /**
      * Reboot an instance
      *
@@ -72,40 +82,58 @@ interface Adapter
     public function destroyInstance($id); 
  
     /**
-     * Return a list of all the available instances images
+     * Return all the available instances images
      *
      * @return array
      */ 
     public function imagesInstance(); 
- 
+    
     /**
-     * Return the system informations about an instance
+     * Return all the available zones
+     */
+    public function zonesInstance();
+    
+    /**
+     * Return the system informations about the $metric of an instance
      *
      * @param string $id
+     * @param string $metric
+     * @param array $options
      * @return array
      */ 
-    public function monitorInstance($id); 
+    public function monitorInstance($id,$metric,$options=null); 
  
     /**
      * Run arbitrary shell script on an instance
      *
      * @param string $id
-     * @param array $cmd
-     * @return array|false
+     * @param array $param
+     * @param string|array $cmd
+     * @return string|array
      */ 
-    public function deployInstance($id,$cmd); 
+    public function deployInstance($id,$param,$cmd);
+            
+    /**
+     * Get the adapter instance
+     * 
+     * @return object
+     */
+    public function getAdapter();
+    
     /**
      * Get the adapter result
      * 
      * @return array
      */
     public function getAdapterResult();
+    
     /**
      * Get the last HTTP response
      * 
      * @return Zend\Http\Response
      */
     public function getLastHttpResponse();
+    
     /**
      * Ge the last HTTP request
      * 

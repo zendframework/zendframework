@@ -56,7 +56,7 @@ class Resource extends Container
     /**#@-*/
 
     /**
-     * @var Zend_Tool_Project_Context|string
+     * @var Zend\Tool\Project\Context|string
      */
     protected $_context = null;
 

@@ -44,7 +44,7 @@ use Zend\Tool\Framework\Loader,
 class BasicLoader implements Loader, RegistryEnabled
 {
     /**
-     * @var Zend_Tool_Framework_Repository_Interface
+     * @var Zend\Tool\Framework\Repository\Interface
      */
     protected $_registry = null;
 

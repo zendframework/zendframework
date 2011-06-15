@@ -55,11 +55,11 @@ class Action
     {
 
         if (!is_string($actionName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"actionName\" is the name of a action resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Action::createResource() expects \"actionName\" is the name of a action resource to create.');
         }
 
         if (!is_string($controllerName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllerFile = self::_getControllerFileResource($profile, $controllerName, $moduleName);
@@ -81,11 +81,11 @@ class Action
     public static function hasResource(ProjectProfile $profile, $actionName, $controllerName, $moduleName = null)
     {
         if (!is_string($actionName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"actionName\" is the name of a action resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Action::createResource() expects \"actionName\" is the name of a action resource to create.');
         }
 
         if (!is_string($controllerName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Action::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllerFile = self::_getControllerFileResource($profile, $controllerName, $moduleName);

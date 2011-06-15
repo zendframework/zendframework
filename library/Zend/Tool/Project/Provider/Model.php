@@ -40,7 +40,7 @@ class Model extends AbstractProvider
     public static function createResource(ProjectProfile $profile, $modelName, $moduleName = null)
     {
         if (!is_string($modelName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Model::createResource() expects \"modelName\" is the name of a model resource to create.');
         }
 
         if (!($modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName))) {
@@ -71,7 +71,7 @@ class Model extends AbstractProvider
     public static function hasResource(ProjectProfile $profile, $modelName, $moduleName = null)
     {
         if (!is_string($modelName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to check for existence.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Model::createResource() expects \"modelName\" is the name of a model resource to check for existence.');
         }
 
         $modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName);
@@ -113,7 +113,7 @@ class Model extends AbstractProvider
         $name = ucwords($name);
         
         // determine if testing is enabled in the project
-        $testingEnabled = false; //Zend_Tool_Project_Provider_Test::isTestingEnabled($this->_loadedProfile);
+        $testingEnabled = false; //Zend\Tool\Project\Provider\Test::isTestingEnabled($this->_loadedProfile);
         $testModelResource = null;
 
         // Check that there is not a dash or underscore, return if doesnt match regex
@@ -145,7 +145,7 @@ class Model extends AbstractProvider
             $modelResource = self::createResource($this->_loadedProfile, $name, $module);
 
             if ($testingEnabled) {
-                // $testModelResource = Zend_Tool_Project_Provider_Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
+                // $testModelResource = Zend\Tool\Project\Provider\Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
             }
 
         } catch (\Exception $e) {

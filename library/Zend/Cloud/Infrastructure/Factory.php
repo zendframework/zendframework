@@ -1,7 +1,5 @@
 <?php
 /**
- * Factory
- *
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -17,6 +15,14 @@ namespace Zend\Cloud\Infrastructure;
 use Zend\Cloud\AbstractFactory,
     Zend\Cloud\Exception\InvalidArgumentException;
 
+/**
+ * Factory for infrastructure adapters
+ * 
+ * @package    Zend\Cloud
+ * @subpackage Infrastructure
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Factory extends AbstractFactory
 {
     const INFRASTRUCTURE_ADAPTER_KEY = 'infrastructure_adapter';
@@ -29,31 +35,33 @@ class Factory extends AbstractFactory
     /**
      * Constructor
      *
+     * Private ctor - should not be used
+     *
      * @return void
      */
     private function __construct()
     {
-        // private ctor - should not be used
     }
 
     /**
      * Retrieve an adapter instance
      *
-     * @param array $options
+     * @param  array $options
      * @return void
      */
     public static function getAdapter($options = array())
     {
         $adapter = parent::_getAdapter(self::INFRASTRUCTURE_ADAPTER_KEY, $options);
+
         if (!$adapter) {
-            throw new InvalidArgumentException(
-                'Class must be specified using the \''
-                . self::INFRASTRUCTURE_ADAPTER_KEY . '\' key'
-            );
+            throw new InvalidArgumentException(sprintf(
+                'Class must be specified using the "%s" key',
+                self::INFRASTRUCTURE_ADAPTER_KEY
+            ));
         } elseif (!$adapter instanceof self::$_adapterInterface) {
-            throw new InvalidArgumentException(
-                'Adapter must implement \'' . self::$_adapterInterface . '\''
-            );
+            throw new InvalidArgumentException(sprintf(
+                'Adapter must implement "%s"', self::$_adapterInterface
+            ));
         }
         return $adapter;
     }

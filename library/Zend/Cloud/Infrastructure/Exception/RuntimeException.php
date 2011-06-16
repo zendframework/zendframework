@@ -12,7 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       \Zend\Cloud\Infrastructure\Exception
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -26,15 +25,13 @@
 namespace Zend\Cloud\Infrastructure\Exception;
 
 use \Zend\Cloud\Infrastructure\Exception;
+
 /**
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Ec2
+ * @package    Zend\Cloud
+ * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Cloud\Infrastructure\Exception
-{}
-
+class RuntimeException extends \RuntimeException implements Exception
+{
+}

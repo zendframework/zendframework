@@ -34,7 +34,7 @@ use Zend\Cloud\Infrastructure\Adapter,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter
+abstract class AbstractAdapter implements Adapter
 {
     /**
      * Store the last response from the adpter
@@ -42,14 +42,20 @@ abstract class AbstractAdapter
      * @var array
      */
     protected $adapterResult;
+
     /**
      * Valid metrics for monitor
      * 
      * @var array
      */
-    protected $validMetrics= array ( Instance::MONITOR_CPU, Instance::MONITOR_DISK_READ,
-                                     Instance::MONITOR_DISK_WRITE, Instance::MONITOR_NETWORK_IN,
-                                     Instance::MONITOR_NETWORK_OUT);
+    protected $validMetrics = array(
+        Instance::MONITOR_CPU,
+        Instance::MONITOR_DISK_READ,
+        Instance::MONITOR_DISK_WRITE,
+        Instance::MONITOR_NETWORK_IN,
+        Instance::MONITOR_NETWORK_OUT,
+    );
+
     /**
      * Get the last result of the adapter
      *

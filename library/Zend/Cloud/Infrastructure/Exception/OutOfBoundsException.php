@@ -12,7 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       Zend\Cloud\Infrastructure\Exception
  * @category   Zend
  * @package    Zend\Cloud\Infrastructure
  * @subpackage Infrastructure
@@ -25,8 +24,14 @@
  */
 namespace Zend\Cloud\Infrastructure\Exception;
 
-class OutOfBoundsException
-    extends \OutOfBoundsException
-    implements \Zend\Cloud\Infrastructure\Exception
-{}
+use Zend\Cloud\Infrastructure\Exception;
 
+/**
+ * @package    Zend\Cloud\Infrastructure
+ * @subpackage Infrastructure
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class OutOfBoundsException extends \OutOfBoundsException implements Exception
+{
+}

@@ -1,12 +1,5 @@
 <?php
 /**
- * List of images
- *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       Iterator
- * @uses       OutOfBoundsException
- * @uses       Zend\Cloud\Infrastructure\Image
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -20,61 +13,80 @@
 namespace Zend\Cloud\Infrastructure;
 
 use Zend\Cloud\Infrastructure\Image,  
-    Zend\Cloud\Infrastructure\Exception;
+    Zend\Cloud\Infrastructure\Exception,
+    Countable,
+    Iterator,
+    ArrayAccess;
 
-class ImageList implements \Countable, \Iterator, \ArrayAccess
+/**
+ * List of images
+ *
+ * @package    Zend\Cloud
+ * @subpackage Infrastructure
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class ImageList implements Countable, Iterator, ArrayAccess
 {
     /**
      * @var array Array of Zend\Cloud\Infrastructure\Image
      */
-    protected $imagess = array();
+    protected $images = array();
+
     /**
      * @var int Iterator key
      */
     protected $iteratorKey = 0;
+
     /**
      * The Image adapter (if exists)
      * 
      * @var object
      */
     protected $adapter;
+
     /**
-     * __construct()
+     * Constructor
      *
      * @param  array $list
+     * @param  null|object $adapter
      * @return boolean
      */
-    public function __construct($images,$adapter=null)
+    public function __construct($images, $adapter = null)
     {
         if (empty($images) || !is_array($images)) {
-            throw new Exception\InvalidArgumentException("You must pass an array of Image's params");
+            throw new Exception\InvalidArgumentException(__CLASS__ . ' expects an array of images');
         }
-        $this->adapter= $adapter;
+
+        $this->adapter = $adapter;
         $this->constructFromArray($images);
     }
+
     /**
      * Transforms the Array to array of Instances
      *
      * @param  array $list
      * @return void
      */
-    private function constructFromArray(array $list)
+    protected function constructFromArray(array $list)
     {
         foreach ($list as $image) {
-            $this->addImage(new Image($image,$this->adapter));
+            $this->addImage(new Image($image, $this->adapter));
         }
     }
+
     /**
      * Add an image
      *
-     * @param  Zend\Service\Cloud\Infrastructure\Image
-     * @return Zend\Service\Cloud\Infrastructure\ImageList
+     * @param  Image
+     * @return ImageList
      */
-    protected function addImage (Image $image)
+    protected function addImage(Image $image)
     {
         $this->images[] = $image;
         return $this;
     }
+
     /**
      * Return number of images
      *
@@ -86,17 +98,19 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
     {
         return count($this->images);
     }
+
     /**
      * Return the current element
      *
      * Implement Iterator::current()
      *
-     * @return Zend\Cloud\Infrastructure\Image
+     * @return Image
      */
     public function current()
     {
         return $this->images[$this->iteratorKey];
     }
+
     /**
      * Return the key of the current element
      *
@@ -108,6 +122,7 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
     {
         return $this->iteratorKey;
     }
+
     /**
      * Move forward to next element
      *
@@ -117,8 +132,9 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
      */
     public function next()
     {
-        $this->iteratorKey += 1;
+        $this->iteratorKey++;
     }
+
     /**
      * Rewind the Iterator to the first element
      *
@@ -130,6 +146,7 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
     {
         $this->iteratorKey = 0;
     }
+
     /**
      * Check if there is a current element after calls to rewind() or next()
      *
@@ -142,10 +159,10 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
         $numItems = $this->count();
         if ($numItems > 0 && $this->iteratorKey < $numItems) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
+
     /**
      * Whether the offset exists
      *
@@ -158,6 +175,7 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
     {
         return ($offset < $this->count());
     }
+
     /**
      * Return value at given offset
      *
@@ -165,16 +183,16 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @throws  OutOfBoundsException
-     * @return  Zend\Cloud\Infrastructure\Image
+     * @return  Image
      */
     public function offsetGet($offset)
     {
-        if ($this->offsetExists($offset)) {
-            return $this->images[$offset];
-        } else {
-            throw new OutOfBoundsException('Illegal index');
+        if (!$this->offsetExists($offset)) {
+            throw new Exception\OutOfBoundsException('Illegal index');
         }
+        return $this->images[$offset];
     }
+
     /**
      * Throws exception because all values are read-only
      *
@@ -182,22 +200,23 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @param   string  $value
-     * @throws  Zend\Cloud\Infrastructure\Exception
+     * @throws  Exception\InvalidArgumentException
      */
     public function offsetSet($offset, $value)
     {
-        throw new Exception('You are trying to set read-only property');
+        throw new Exception\InvalidArgumentException('You are trying to set read-only property');
     }
+
     /**
      * Throws exception because all values are read-only
      *
      * Implement ArrayAccess::offsetUnset()
      *
      * @param   int     $offset
-     * @throws  Zend\Cloud\Infrastructure\Exception
+     * @throws  Exception\InvalidArgumentException
      */
     public function offsetUnset($offset)
     {
-        throw new Exception('You are trying to unset read-only property');
+        throw new Exception\InvalidArgumentException('You are trying to unset read-only property');
     }
 }

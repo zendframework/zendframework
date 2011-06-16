@@ -1,7 +1,5 @@
 <?php
 /**
- * Instance of an infrastructure service
- *
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -14,86 +12,107 @@
  */
 namespace Zend\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Exception,
-    Zend\Cloud\Infrastructure\Adapter;
-
+/**
+ * Instance of an infrastructure service
+ *
+ * @package    Zend\Cloud
+ * @subpackage Infrastructure
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Instance 
 {
-    const STATUS_RUNNING = 'running'; 
-    const STATUS_STOPPED = 'stopped'; 
-    const STATUS_SHUTTING_DOWN= 'shutting-down'; 
-    const STATUS_REBOOTING= 'rebooting';
-    const STATUS_TERMINATED= 'terminated';
-    const INSTANCE_ID= 'id';
-    const INSTANCE_IMAGEID= 'imageId';
-    const INSTANCE_NAME= 'name';
-    const INSTANCE_STATUS= 'status';
-    const INSTANCE_PUBLICDNS= 'publicDns';
-    const INSTANCE_CPU= 'cpu';
-    const INSTANCE_RAM= 'ram';
-    const INSTANCE_STORAGE= 'storageSize';
-    const INSTANCE_ZONE= 'zone';
-    const INSTANCE_LAUNCHTIME= 'launchTime';
-    const ZONE_NAME= 'zone';
-    const MONITOR_CPU= 'CPU';
-    const MONITOR_NETWORK_IN= 'NetworkIn';
-    const MONITOR_NETWORK_OUT= 'NetworkOut';
-    const MONITOR_DISK_WRITE= 'DiskWrite';
-    const MONITOR_DISK_READ= 'DiskRead';
-    const MONITOR_START_TIME= 'StartTime';
-    const MONITOR_END_TIME= 'EndTime';
-    const SSH_USERNAME= 'user';
-    const SSH_PASSWORD= 'password';
-    const SSH_KEY= 'pritaveKey';
+    const STATUS_RUNNING       = 'running';
+    const STATUS_STOPPED       = 'stopped';
+    const STATUS_SHUTTING_DOWN = 'shutting-down';
+    const STATUS_REBOOTING     = 'rebooting';
+    const STATUS_TERMINATED    = 'terminated';
+    const INSTANCE_ID          = 'id';
+    const INSTANCE_IMAGEID     = 'imageId';
+    const INSTANCE_NAME        = 'name';
+    const INSTANCE_STATUS      = 'status';
+    const INSTANCE_PUBLICDNS   = 'publicDns';
+    const INSTANCE_CPU         = 'cpu';
+    const INSTANCE_RAM         = 'ram';
+    const INSTANCE_STORAGE     = 'storageSize';
+    const INSTANCE_ZONE        = 'zone';
+    const INSTANCE_LAUNCHTIME  = 'launchTime';
+    const ZONE_NAME            = 'zone';
+    const MONITOR_CPU          = 'CPU';
+    const MONITOR_NETWORK_IN   = 'NetworkIn';
+    const MONITOR_NETWORK_OUT  = 'NetworkOut';
+    const MONITOR_DISK_WRITE   = 'DiskWrite';
+    const MONITOR_DISK_READ    = 'DiskRead';
+    const MONITOR_START_TIME   = 'StartTime';
+    const MONITOR_END_TIME     = 'EndTime';
+    const SSH_USERNAME         = 'user';
+    const SSH_PASSWORD         = 'password';
+    const SSH_KEY              = 'pritaveKey';
+
     /**
      * @var Zend\Cloud\Infrastructure\Adapter
      */
     protected $adapter;
+
     /**
      * Instance's attribute
      * 
      * @var array 
      */
     protected $attributes;
+
     /**
      * 
      * @var type 
      */
-    protected $attributeRequired= array ( self::INSTANCE_ID, self::INSTANCE_STATUS );
+    protected $attributeRequired = array(
+        self::INSTANCE_ID,
+        self::INSTANCE_STATUS,
+    );
+
     /**
-     * __construct
+     * Constructor
      * 
-     * @param array $data 
+     * @param  Adapter $adapter
+     * @param  array $data 
+     * @return void
      */
-    public function __construct(Adapter $adapter,$data)
+    public function __construct(Adapter $adapter, array $data = null)
     {
         if (!($adapter instanceof Adapter)) {
             throw new Exception\InvalidArgumentException("You must pass a Zend\Cloud\Infrastructure\Adapter instance");
         }
+
         if (empty($data) || !is_array($data)) {
-            throw new Exception\InvalidArgumentException ("You must pass a array of params");
-        } else {
-            foreach ($this->attributeRequired as $key) {
-                if (empty($data[$key])) {
-                    throw new Exception\InvalidArgumentException ("The param $key is a required param for Zend\Cloud\Infrastructure\Instance");
-                }
+            throw new Exception\InvalidArgumentException ("You must pass an array of params");
+        }
+
+        foreach ($this->attributeRequired as $key) {
+            if (empty($data[$key])) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'The param "%s" is a required param for %s', $key, __CLASS__
+                ));
             }
-        } 
-        $this->adapter= $adapter;
-        $this->attributes= $data;
+        }
+
+        $this->adapter    = $adapter;
+        $this->attributes = $data;
     }
+
     /**
      * Get Attribute with a specific key
      *
      * @param array $data
-     * @return misc|boolean
+     * @return misc|false
      */
-    public function getAttribute($key) {
+    public function getAttribute($key) 
+    {
         if (!empty($this->attributes[$key])) {
             return $this->attributes[$key];
         }
         return false;
     }
+
     /**
      * Get all the attributes
      * 
@@ -103,6 +122,7 @@ class Instance
     {
         return $this->attributes;
     }
+
     /**
      * Get the instance's id
      * 
@@ -112,8 +132,9 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_ID];
     }
+
     /**
-     * Get the instances' image id
+     * Get the instance's image id
      * 
      * @return string 
      */
@@ -121,6 +142,7 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_IMAGEID];
     }
+
     /**
      * Get the instance's name
      * 
@@ -130,6 +152,7 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_NAME];
     }
+
     /**
      * Get the status of the infrastructure
      * 
@@ -142,6 +165,7 @@ class Instance
         }
         return false;
     }
+
     /**
      * Get the instance's CPU
      * 
@@ -151,6 +175,7 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_CPU];
     }
+
     /**
      * Get the instance's RAM size
      * 
@@ -160,6 +185,7 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_RAM];
     }
+
     /**
      * Get the instance's storage size
      * 
@@ -169,6 +195,7 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_STORAGE];
     }
+
     /**
      * Get the instance's zone
      * 
@@ -178,6 +205,7 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_ZONE];
     }
+
     /**
      * Get the instance's launch time
      * 
@@ -187,6 +215,7 @@ class Instance
     {
         return $this->attributes[self::INSTANCE_LAUNCHTIME];
     }
+
     /**
      * Reboot the instance
      * 
@@ -196,6 +225,7 @@ class Instance
     {
         return $this->adapter->rebootInstance($this->attributes[self::INSTANCE_ID]);
     }
+
     /**
      * Stop the instance
      * 
@@ -205,6 +235,7 @@ class Instance
     {
         return $this->adapter->stopInstance($this->attributes[self::INSTANCE_ID]);
     }
+
     /**
      * Start the instance
      * 
@@ -214,6 +245,7 @@ class Instance
     {
         return $this->adapter->startInstance($this->attributes[self::INSTANCE_ID]);
     }
+
     /**
      * Destroy the instance
      * 

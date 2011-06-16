@@ -1,7 +1,5 @@
 <?php
 /**
- * Adapter interface for infrastructure service
- *
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -14,9 +12,18 @@
  */
 namespace Zend\Cloud\Infrastructure;
 
+/**
+ * Adapter interface for infrastructure service
+ * 
+ * @package    Zend\Cloud
+ * @subpackage Infrastructure
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 interface Adapter 
 { 
     const HTTP_ADAPTER = 'http_adapter'; 
+
     /**
      * Return a list of the available instances
      *
@@ -27,7 +34,7 @@ interface Adapter
     /**
      * Return the status of an instance
      *
-     * @param strin $id
+     * @param  string $id
      * @return string
      */ 
     public function statusInstance($id); 
@@ -35,7 +42,7 @@ interface Adapter
     /**
      * Return the public DNS name of the instance
      * 
-     * @param string $id
+     * @param  string $id
      * @return string|boolean 
      */
     public function publicDnsInstance($id);
@@ -51,8 +58,8 @@ interface Adapter
     /**
      * Create a new instance
      *
-     * @param string $name
-     * @param array $options
+     * @param  string $name
+     * @param  array $options
      * @return boolean
      */ 
     public function createInstance($name,$options); 
@@ -60,7 +67,7 @@ interface Adapter
     /**
      * Stop the execution of an instance
      *
-     * @param string $id
+     * @param  string $id
      * @return boolean
      */ 
     public function stopInstance($id); 
@@ -68,7 +75,7 @@ interface Adapter
     /**
      * Start the execution of an instance
      *
-     * @param string $id
+     * @param  string $id
      * @return boolean
      */ 
     public function startInstance($id); 
@@ -76,7 +83,7 @@ interface Adapter
     /**
      * Destroy an instance
      *
-     * @param string $id
+     * @param  string $id
      * @return boolean
      */ 
     public function destroyInstance($id); 
@@ -96,9 +103,9 @@ interface Adapter
     /**
      * Return the system informations about the $metric of an instance
      *
-     * @param string $id
-     * @param string $metric
-     * @param array $options
+     * @param  string $id
+     * @param  string $metric
+     * @param  array $options
      * @return array
      */ 
     public function monitorInstance($id,$metric,$options=null); 
@@ -106,9 +113,9 @@ interface Adapter
     /**
      * Run arbitrary shell script on an instance
      *
-     * @param string $id
-     * @param array $param
-     * @param string|array $cmd
+     * @param  string $id
+     * @param  array $param
+     * @param  string|array $cmd
      * @return string|array
      */ 
     public function deployInstance($id,$param,$cmd);
@@ -135,7 +142,7 @@ interface Adapter
     public function getLastHttpResponse();
     
     /**
-     * Ge the last HTTP request
+     * Get the last HTTP request
      * 
      * @return string
      */

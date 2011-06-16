@@ -20,12 +20,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
+/** @namespace */
 namespace Zend\Cloud\Infrastructure\Adapter\Exception;
 
 use \Zend\Cloud\Infrastructure\Adapter\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -33,8 +32,6 @@ use \Zend\Cloud\Infrastructure\Adapter\Exception;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Cloud\Infrastructure\Adapter\Exception
-{}
-
+class RuntimeException extends \RuntimeException implements Exception
+{
+}

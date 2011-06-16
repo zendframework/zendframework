@@ -1,12 +1,5 @@
 <?php
 /**
- * List of instances
- *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       Iterator
- * @uses       OutOfBoundsException
- * @uses       Zend\Cloud\Infrastructure\Instance
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -19,64 +12,80 @@
  */
 namespace Zend\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\Adapter,    
-    Zend\Cloud\Infrastructure\Exception;
+use Countable,
+    Iterator,
+    ArrayAccess;
 
-class InstanceList implements \Countable, \Iterator, \ArrayAccess
+/**
+ * List of instances
+ *
+ * @package    Zend\Cloud
+ * @subpackage Infrastructure
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class InstanceList implements Countable, Iterator, ArrayAccess
 {
     /**
      * @var array Array of Zend\Cloud\Infrastructure\Instance
      */
     protected $instances = array();
+
     /**
      * @var int Iterator key
      */
     protected $iteratorKey = 0;
+
     /**
      * @var Zend\Cloud\Infrastructure\Adapter
      */
     protected $adapter;
+
     /**
-     * __construct()
+     * Constructor
      *
-     * @param  array $list
-     * @return boolean
+     * @param  Adapter $adapter
+     * @param  array $instances
+     * @return void
      */
-    public function __construct(Adapter $adapter,$instances)
+    public function __construct(Adapter $adapter, array $instances = null)
     {
         if (!($adapter instanceof Adapter)) {
-            throw new Exception\InvalidArgumentException("You must pass a Zend\Cloud\Infrastructure\Adapter");
+            throw new Exception\InvalidArgumentException('You must pass a Zend\Cloud\Infrastructure\Adapter');
         }
         if (empty($instances)) {
-            throw new Exception\InvalidArgumentException("You must pass an array of Instance's params");
+            throw new Exception\InvalidArgumentException('You must pass an array of Instances');
         }
-        $this->adapter= $adapter;
+
+        $this->adapter = $adapter;
         $this->constructFromArray($instances);
     }
+
     /**
      * Transforms the Array to array of Instances
      *
      * @param  array $list
      * @return void
      */
-    private function constructFromArray(array $list)
+    protected function constructFromArray(array $list)
     {
         foreach ($list as $instance) {
             $this->addInstance(new Instance($this->adapter,$instance));
         }
     }
+
     /**
      * Add an instance
      *
-     * @param  Zend\Service\Cloud\Infrastructure\Instance
-     * @return Zend\Service\Cloud\Infrastructure\InstanceList
+     * @param  Instance
+     * @return InstanceList
      */
-    protected function addInstance (Instance $instance)
+    protected function addInstance(Instance $instance)
     {
         $this->instances[] = $instance;
         return $this;
     }
+
     /**
      * Return number of instances
      *
@@ -88,17 +97,19 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
     {
         return count($this->instances);
     }
+
     /**
      * Return the current element
      *
      * Implement Iterator::current()
      *
-     * @return Zend\Cloud\Infrastructure\Instance
+     * @return Instance
      */
     public function current()
     {
         return $this->instances[$this->iteratorKey];
     }
+
     /**
      * Return the key of the current element
      *
@@ -110,6 +121,7 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
     {
         return $this->iteratorKey;
     }
+
     /**
      * Move forward to next element
      *
@@ -119,8 +131,9 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
      */
     public function next()
     {
-        $this->iteratorKey += 1;
+        $this->iteratorKey++;
     }
+
     /**
      * Rewind the Iterator to the first element
      *
@@ -132,6 +145,7 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
     {
         $this->iteratorKey = 0;
     }
+
     /**
      * Check if there is a current element after calls to rewind() or next()
      *
@@ -144,39 +158,40 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
         $numItems = $this->count();
         if ($numItems > 0 && $this->iteratorKey < $numItems) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
+
     /**
      * Whether the offset exists
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param   int     $offset
-     * @return  bool
+     * @param  int $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {
         return ($offset < $this->count());
     }
+
     /**
      * Return value at given offset
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param   int     $offset
-     * @throws  OutOfBoundsException
-     * @return  Zend\Cloud\Infrastructure\Instance
+     * @param  int $offset
+     * @return Instance
+     * @throws Exception\OutOfBoundsException
      */
     public function offsetGet($offset)
     {
-        if ($this->offsetExists($offset)) {
-            return $this->instances[$offset];
-        } else {
-            throw new OutOfBoundsException('Illegal index');
+        if (!$this->offsetExists($offset)) {
+            throw new Exception\OutOfBoundsException('Illegal index');
         }
+        return $this->instances[$offset];
     }
+
     /**
      * Throws exception because all values are read-only
      *
@@ -184,22 +199,23 @@ class InstanceList implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @param   string  $value
-     * @throws  Zend\Cloud\Infrastructure\Exception
+     * @throws  Exception\InvalidArgumentException
      */
     public function offsetSet($offset, $value)
     {
-        throw new Exception('You are trying to set read-only property');
+        throw new Exception\InvalidArgumentException('You are trying to set read-only property');
     }
+
     /**
      * Throws exception because all values are read-only
      *
      * Implement ArrayAccess::offsetUnset()
      *
      * @param   int     $offset
-     * @throws  Zend\Cloud\Infrastructure\Exception
+     * @throws  Exception\InvalidArgumentException
      */
     public function offsetUnset($offset)
     {
-        throw new Exception('You are trying to unset read-only property');
+        throw new Exception\InvalidArgumentException('You are trying to unset read-only property');
     }
 }

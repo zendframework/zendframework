@@ -1,5 +1,7 @@
 <?php
 /**
+ * Instance of an infrastructure service
+ *
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure

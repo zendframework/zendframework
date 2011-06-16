@@ -1,5 +1,7 @@
 <?php
 /**
+ * Instance of an infrastructure service
+ *
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -11,6 +13,9 @@
  * namespace
  */
 namespace Zend\Cloud\Infrastructure;
+
+use Zend\Cloud\Infrastructure\Exception,
+    Zend\Cloud\Infrastructure\Adapter;
 
 /**
  * Instance of an infrastructure service
@@ -37,17 +42,18 @@ class Instance
     const INSTANCE_STORAGE     = 'storageSize';
     const INSTANCE_ZONE        = 'zone';
     const INSTANCE_LAUNCHTIME  = 'launchTime';
-    const ZONE_NAME            = 'zone';
-    const MONITOR_CPU          = 'CPU';
+    const MONITOR_CPU          = 'CpuUsage';
     const MONITOR_NETWORK_IN   = 'NetworkIn';
     const MONITOR_NETWORK_OUT  = 'NetworkOut';
     const MONITOR_DISK_WRITE   = 'DiskWrite';
     const MONITOR_DISK_READ    = 'DiskRead';
     const MONITOR_START_TIME   = 'StartTime';
     const MONITOR_END_TIME     = 'EndTime';
-    const SSH_USERNAME         = 'user';
+    const SSH_USERNAME         = 'username';
     const SSH_PASSWORD         = 'password';
-    const SSH_KEY              = 'pritaveKey';
+    const SSH_PRIVATE_KEY      = 'privateKey';
+    const SSH_PUBLIC_KEY       = 'publicKey';
+    const SSH_PASSPHRASE       = 'passphrase';
 
     /**
      * @var Zend\Cloud\Infrastructure\Adapter
@@ -62,8 +68,9 @@ class Instance
     protected $attributes;
 
     /**
+     * Attributes required for an instance
      * 
-     * @var type 
+     * @var array 
      */
     protected $attributeRequired = array(
         self::INSTANCE_ID,
@@ -154,7 +161,7 @@ class Instance
     }
 
     /**
-     * Get the status of the infrastructure
+     * Get the status of the instance
      * 
      * @return string|boolean 
      */
@@ -164,6 +171,16 @@ class Instance
             return $this->attributes[self::INSTANCE_STATUS];
         }
         return false;
+    }
+
+    /**
+     * Get the public DNS of the instance
+     * 
+     * @return string 
+     */
+    public function getPublicDns()
+    {
+        return $this->attributes[self::INSTANCE_PUBLICDNS];
     }
 
     /**
@@ -181,7 +198,7 @@ class Instance
      * 
      * @return string
      */
-    public function getRam()
+    public function getRamSize()
     {
         return $this->attributes[self::INSTANCE_RAM];
     }
@@ -254,5 +271,29 @@ class Instance
     public function destroy()
     {
         return $this->adapter->destroyInstance($this->attributes[self::INSTANCE_ID]);
+    }
+
+    /**
+     * Return the system informations about the $metric of an instance
+     * 
+     * @param  string $metric
+     * @param  array $options
+     * @return array|boolean
+     */ 
+    public function monitor($metric, $options = null)
+    {
+        return $this->adapter->monitorInstance($this->attributes[self::INSTANCE_ID], $metric, $options);
+    }
+
+    /**
+     * Run arbitrary shell script on the instance
+     *
+     * @param  array $param
+     * @param  string|array $cmd
+     * @return string|array
+     */
+    public function deploy($params, $cmd)
+    {
+        return $this->adapter->deployInstance($this->attributes[self::INSTANCE_ID], $params, $cmd);
     }
 }

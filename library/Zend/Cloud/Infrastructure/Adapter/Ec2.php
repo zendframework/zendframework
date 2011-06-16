@@ -1,5 +1,7 @@
 <?php
 /**
+ * Amazon EC2 adapter for infrastructure service
+ *
  * @category   Zend
  * @package    Zend\Cloud\Infrastructure
  * @subpackage Adapter
@@ -12,14 +14,17 @@
  */
 namespace Zend\Cloud\Infrastructure\Adapter;
 
-use Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
+use Zend\Cloud\Infrastructure\Adapter,
+    Zend\Cloud\Infrastructure\Adapter\AbstractAdapter,
+    Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
     Zend\Service\Amazon\Ec2\Image as Ec2Image,
     Zend\Service\Amazon\Ec2\AvailabilityZones as Ec2Zone,
     Zend\Service\Amazon\Ec2\CloudWatch as Ec2Monitor,
     Zend\Cloud\Infrastructure\Instance,    
     Zend\Cloud\Infrastructure\InstanceList,
     Zend\Cloud\Infrastructure\Image,
-    Zend\Cloud\Infrastructure\ImageList;
+    Zend\Cloud\Infrastructure\ImageList,
+    Zend\Cloud\Infrastructure\Adapter\Exception;
 
 /**
  * Amazon EC2 adapter for infrastructure service
@@ -363,7 +368,7 @@ class Ec2 extends AbstractAdapter
         foreach ($this->adapterResult as $zone) {
             if (strtolower($zone['zoneState'])==='available') {
                 $zones[] = array (
-                    Instance::ZONE_NAME => $zone['zoneName'],
+                    Instance::INSTANCE_ZONE => $zone['zoneName'],
                 );
             }
         }

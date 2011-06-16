@@ -392,7 +392,7 @@ $definition = $compiler->compile();
     disk):
   </para>
   <programlisting language="php"><![CDATA[
-$di = new Zend\Di\Di;
+$di = new Zend\Di\DependencyInjector;
 $di->setDefinition($definition);
 $di->getInstanceManager()->setProperty('My\A', 'username', 'foo');
 $di->getInstanceManager()->setProperty('My\A', 'password', 'bar');

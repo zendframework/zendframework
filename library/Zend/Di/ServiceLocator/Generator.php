@@ -123,8 +123,11 @@ class Generator
 
             // Create method call code
             $methods = '';
-            foreach ($meta->getMethods() as $methodData) {
-                $methodName   = $methodData['name'];
+            foreach ($meta->getMethods() as $key => $methodData) {
+                if (!isset($methodData['name']) && !isset($methodData['method'])) {
+                    continue;
+                }
+                $methodName   = isset($methodData['name']) ? $methodData['name'] : $methodData['method'];
                 $methodParams = $methodData['params'];
 
                 // Create method parameter representation
@@ -136,7 +139,7 @@ class Generator
                         }
                         $methodParams[$key] = $string;
                     } elseif ($param instanceof GeneratorInstance) {
-                        $methodParams[$key] = sprintf('$this->%s()', $this->normalizeAlias($param->getServiceName()));
+                        $methodParams[$key] = sprintf('$this->%s()', $this->normalizeAlias($param->getName()));
                     } else {
                         $message = sprintf('Unable to use object arguments when generating method calls. Encountered with class "%s", method "%s", parameter of type "%s"', $name, $methodName, get_class($param));
                         throw new Exception\RuntimeException($message);

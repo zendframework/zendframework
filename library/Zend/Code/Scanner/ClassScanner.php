@@ -73,7 +73,7 @@ class ClassScanner implements Scanner
                     do {
                         $subToken = $this->tokens[$subTokenIndex++];
                     } while (!(is_array($subToken) && $subToken[0] == T_FUNCTION) 
-                             && !(is_string($subToken) && $subToken == '=')
+                             && !(is_string($subToken) && $subToken == ';')
                     );
 
                     if (is_array($subToken)) {
@@ -89,7 +89,7 @@ class ClassScanner implements Scanner
                 $tokenIndex += $fastForward - 1;
             }
         }
-        
+
         $this->isScanned = true;
     }
     

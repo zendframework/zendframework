@@ -24,14 +24,14 @@ class ClassScannerTest extends TestCase
         $this->assertInternalType('array', $methods);
         $this->assertContains('fooBarBaz', $methods);
     }
-    
+
     public function testClassScannerHasConstant()
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertInternalType('array', $class->getConstants());
     }
-    
+
     public function testClassScannerHasProperties()
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
@@ -39,14 +39,14 @@ class ClassScannerTest extends TestCase
         $this->assertInternalType('array', $class->getProperties());
         $this->assertContains('bar', $class->getProperties());
     }
-    
+
     public function testClassScannerHasMethods()
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertContains('fooBarBaz', $class->getMethods());
     }
-    
+
     public function testClassScannerReturnsMethodsWithMethodScanners()
     {
         $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
@@ -56,4 +56,5 @@ class ClassScannerTest extends TestCase
             $this->assertInstanceOf('Zend\Code\Scanner\MethodScanner', $method);
         }
     }
+
 }

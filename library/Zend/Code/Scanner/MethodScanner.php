@@ -49,16 +49,16 @@ class MethodScanner implements Scanner
         if ($this->isScanned) {
             return;
         }
-        
+
         if (!$this->tokens) {
             throw new Exception\RuntimeException('No tokens were provided');
         }
 
         $fastForward = 0;
         $tokenIndex  = 0;
-        
+
         $this->scanMethodInfo($tokenIndex, $fastForward);
-        
+
         if ($fastForward) {
             $tokenIndex += $fastForward - 1;
             $fastForward = 0;

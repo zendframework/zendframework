@@ -40,4 +40,13 @@ class MethodScannerTest extends TestCase
         $this->assertInstanceOf('Zend\Code\Scanner\ParameterScanner', $parameter);
         $this->assertEquals('t', $parameter->getName());
     }
+
+    public function testClassScannerReturnsPropertyWithNoDefault()
+    {
+        $file  = new FileScanner(__DIR__ . '/../TestAsset/BazClass.php');
+        $class = $file->getClass('BazClass');
+        $method = $class->getMethod('__construct');
+        $this->assertTrue($method->isPublic());
+    }
+
 }

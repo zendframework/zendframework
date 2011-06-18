@@ -2,7 +2,7 @@ Welcome to the Zend Framework 2.0.0 Release!
 
 RELEASE INFORMATION
 ---------------
-Zend Framework 2.0.0dev2
+Zend Framework 2.0.0dev3
 
 THIS RELEASE IS A DEVELOPMENT RELEASE AND NOT INTENDED FOR PRODUCTION USE.
 PLEASE USE AT YOUR OWN RISK.
@@ -10,15 +10,11 @@ PLEASE USE AT YOUR OWN RISK.
 NEW FEATURES
 ------------
 
-This release concludes two different milestones:
+This release contains the following:
 
- - Autoloading and Plugin Loading:
-   http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Milestones#ZendFramework2.0Milestones-Milestone%3AAutoloading%26PluginLoading
- - Exceptions
-   http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Milestones#ZendFramework2.0Milestones-Milestone%3AExceptions
-
-Several components are still in progress, or were skipped due to planned
-rewrites later.
+ - EventManager component (Zend\EventManager)
+ - Initial prototype/development of a comprehensive Dependency Injection
+   component (Zend\Di)
 
 SYSTEM REQUIREMENTS
 -------------------

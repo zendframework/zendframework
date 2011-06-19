@@ -210,7 +210,7 @@ class Server extends AbstractServer
             if (!is_string($func) || !function_exists($func)) {
                 throw new Server\Exception\InvalidArgumentException('Unable to attach function; invalid', 611);
             }
-            $reflection = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
+            $reflection = Reflection::reflectFunction($func, $argv, $namespace);
             $this->_buildSignature($reflection);
         }
     }
@@ -244,7 +244,7 @@ class Server extends AbstractServer
             $argv = array_slice($argv, 2);
         }
 
-        $dispatchable = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+        $dispatchable = Reflection::reflectClass($class, $argv, $namespace);
         foreach ($dispatchable->getMethods() as $reflection) {
             $this->_buildSignature($reflection, $class);
         }

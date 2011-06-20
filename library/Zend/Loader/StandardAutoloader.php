@@ -223,7 +223,7 @@ class StandardAutoloader implements SplAutoloader
         if (false !== strpos($class, self::NS_SEPARATOR)) {
             if ($this->loadClass($class, self::LOAD_NS)) {
                 return $class;
-            } elseif ($this->isFallbackAutoloader()) {
+            } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
             return false;
@@ -231,12 +231,11 @@ class StandardAutoloader implements SplAutoloader
         if (false !== strpos($class, self::PREFIX_SEPARATOR)) {
             if ($this->loadClass($class, self::LOAD_PREFIX)) {
                 return $class;
-            } elseif ($this->isFallbackAutoloader()) {
+            } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
             return false;
         }
-                return $this->loadClass($class, self::ACT_AS_FALLBACK);
         return false;
     }
 

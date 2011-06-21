@@ -55,7 +55,7 @@ class Application
             $runner->setServiceLocator($this->serviceLocator);
         }
         
-        $this->dispatcher->run($this);
+        $runner->run($this);
     }
     
 }

@@ -19,10 +19,12 @@
  */
  
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Feed;
-use Zend\Feed\Reader;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Exception;
 
 /**
 * @uses \Zend\Feed\Exception
@@ -291,13 +293,18 @@ abstract class AbstractFeed implements Reader\Feed
 
     protected function _loadExtensions()
     {
-        $all = Reader\Reader::getExtensions();
+        $all  = Reader\Reader::getExtensions();
         $feed = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
-            $className = Reader\Reader::getPluginLoader()->getClassName($extension);
+            if (!$className = Reader\Reader::getPluginLoader()->getClassName($extension)) {
+                continue;
+            }
+            if (!class_exists($className)) {
+                throw new Exception(sprintf('Unable to load extension "%s"; cannot find class', $extension));
+            }
             $this->_extensions[$extension] = new $className(
                 $this->getDomDocument(), $this->_data['type'], $this->_xpath
             );

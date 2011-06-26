@@ -839,15 +839,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                             [FirePhp::PLUGIN_URI]
                             [0];
 
-        if (version_compare(phpversion(), '5.3' , '<')) {
-
-          $this->assertEquals($message,
-                              '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject1","public:name":"Name","public:value":"Value","protected:static:protectedStatic":"** Need PHP 5.3 to get value **"}]');
-        } elseif (version_compare(phpversion(), '5.3' , '>=')) {
-
-          $this->assertEquals($message,
+        $this->assertEquals($message,
                               '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject1","public:name":"Name","public:value":"Value","protected:static:protectedStatic":"ProtectedStatic"}]');
-        }
 
         $message = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
                             [FirePhp::PLUGIN_URI]
@@ -875,17 +868,8 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
                             [FirePhp::PLUGIN_URI]
                             [0];
 
-        if (version_compare(phpversion(), '5.3' , '<')) {
-
-          $this->assertEquals($message,
-                              '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject2","public:public":"Public","private:private":"Private","protected:protected":"Protected","public:static:static":"Static","private:static:staticPrivate":"** Need PHP 5.3 to get value **","protected:static:staticProtected":"** Need PHP 5.3 to get value **"}]');
-
-        } else
-        if (version_compare(phpversion(), '5.3' , '>=')) {
-
-          $this->assertEquals($message,
+        $this->assertEquals($message,
                               '[{"Type":"LOG"},{"__className":"ZendTest\\\\Wildfire\\\\TestObject2","public:public":"Public","private:private":"Private","protected:protected":"Protected","public:static:static":"Static","private:static:staticPrivate":"StaticPrivate","protected:static:staticProtected":"StaticProtected"}]');
-        }
     }
 
     /**
@@ -952,6 +936,52 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         // this should not fail with: PHP Fatal error:  Call to undefined method Zend_Controller_Request_Simple::getHeader()
         $firephp = FirePhp::getInstance();
         $firephp->send('This is a log message!');
+    }
+
+    /**
+     * @group ZF-10537
+     */
+    public function testFileLineOffsets()
+    {
+        $this->_setupWithoutFrontController();
+
+        $firephp = FirePhp::getInstance();
+        $channel = Channel\HttpHeaders::getInstance();
+        $protocol = $channel->getProtocol(FirePhp::PROTOCOL_URI);
+        $firephp->setOption('includeLineNumbers', true);
+        $firephp->setOption('maxTraceDepth', 0);
+
+        $lines = array();
+        // NOTE: Do NOT separate the following pairs otherwise the line numbers will not match for the test
+
+        // Message number: 1
+        $lines[] = __LINE__+1;
+        $firephp->send('Hello World');
+
+        // Message number: 2
+        $lines[] = __LINE__+1;
+        $firephp->send('Hello World', null, 'TRACE');
+
+        // Message number: 3
+        $table = array('Summary line for the table',
+                       array(
+                           array('Column 1', 'Column 2'),
+                           array('Row 1 c 1',' Row 1 c 2'),
+                           array('Row 2 c 1',' Row 2 c 2')
+                       )
+                      );
+        $lines[] = __LINE__+1;
+        $firephp->send($table, null, 'TABLE');
+
+        $messages = $protocol->getMessages();
+        $messages = $messages[FirePhp::STRUCTURE_URI_FIREBUGCONSOLE][FirePhp::PLUGIN_URI];
+
+        for( $i=0 ; $i<sizeof($messages) ; $i++ ) {
+            if(!preg_match_all('/WildfireTest\.php","Line":' . $lines[$i] . '/', $messages[$i], $m)) {
+                $this->fail("File and line does not match for message number: " . ($i+1));
+            }
+
+        }
     }
 }
 

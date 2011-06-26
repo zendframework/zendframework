@@ -24,7 +24,7 @@
  */
 namespace Zend\View\Helper;
 
-use Zend\Loader\ShortNameLocater,
+use Zend\Loader\ShortNameLocator,
     Zend\Loader\PluginClassLoader,
     Zend\Navigation\Container,
     Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
@@ -51,7 +51,7 @@ class Navigation extends AbstractNavigationHelper
     const NS = 'Zend\View\Helper\Navigation';
 
     /**
-     * @var ShortNameLocater
+     * @var ShortNameLocator
      */
     protected $loader;
 
@@ -146,10 +146,10 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Set plugin loader for retrieving navigation helpers
      * 
-     * @param ShortNameLocater $loader 
+     * @param ShortNameLocator $loader 
      * @return void
      */
-    public function setPluginLoader(ShortNameLocater $loader)
+    public function setPluginLoader(ShortNameLocator $loader)
     {
         $this->loader = $loader;
         return $this;
@@ -161,7 +161,7 @@ class Navigation extends AbstractNavigationHelper
      * Lazy-loads an instance of Navigation\HelperLoader if none currently 
      * registered.
      * 
-     * @return ShortNameLocater
+     * @return ShortNameLocator
      */
     public function getPluginLoader()
     {

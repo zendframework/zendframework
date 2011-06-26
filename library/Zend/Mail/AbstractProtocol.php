@@ -135,7 +135,7 @@ abstract class AbstractProtocol
         $this->_validHost->addValidator(new HostnameValidator(HostnameValidator::ALLOW_ALL));
 
         if (!$this->_validHost->isValid($host)) {
-            throw new Protocol\Exception\RuntimeException(join(', ', $this->_validHost->getMessages()));
+            throw new Protocol\Exception\RuntimeException(implode(', ', $this->_validHost->getMessages()));
         }
 
         $this->_host = $host;

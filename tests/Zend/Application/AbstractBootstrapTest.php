@@ -381,7 +381,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         ));
         set_error_handler(array($this, 'handleError'), E_WARNING);
         $bootstrap = new Application\Bootstrap($this->application);
-        $this->assertTrue($bootstrap->hasPluginResource('View'), var_export(array_keys($bootstrap->getPluginResources()), 1));
+        $this->assertTrue($bootstrap->getPlugin()->hasPlugin('View'), var_export(array_keys($bootstrap->getBroker()->getRegisteredPlugins()), 1));
         restore_error_handler();
     }
 
@@ -398,7 +398,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         ));
         set_error_handler(array($this, 'handleError'));
         $bootstrap = new Application\Bootstrap($this->application);
-        $this->assertTrue($bootstrap->hasPluginResource('ZendTest\\Application\\TestAsset\\Resource\\View'));
+        $this->assertTrue($bootstrap->getPlugin()->hasPlugin('ZendTest\\Application\\TestAsset\\Resource\\View'));
         restore_error_handler();
     }
 
@@ -418,7 +418,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $bootstrap->bootstrap('ZendTest\Application\TestAsset\Resource\View');
         $resource = $bootstrap->getResource('ZendTest\Application\TestAsset\Resource\View');
         $this->assertTrue($resource instanceof \ZendTest\Application\TestAsset\Resource\View,
-            var_export(array_keys($bootstrap->getPluginResources()), 1));
+            var_export(array_keys($bootstrap->getBroker()->getRegisteredPlugins()), 1));
         restore_error_handler();
     }
 
@@ -442,7 +442,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $resource2 = $bootstrap->getResource('view');
         $this->assertNotSame($resource1, $resource2);
         $this->assertTrue($resource1 instanceof \ZendTest\Application\TestAsset\Resource\View,
-            var_export(array_keys($bootstrap->getPluginResources()), 1));
+            var_export(array_keys($bootstrap->getBroker()->getRegisteredPlugins()), 1));
         $this->assertTrue($resource2 instanceof \Zend\View\View);
         restore_error_handler();
     }
@@ -466,7 +466,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $bootstrap->bootstrap('layout');
         $resource2 = $bootstrap->getResource('layout');
         $this->assertNotSame($resource1, $resource2);
-        $this->assertTrue($resource1 instanceof Layout, var_export(array_keys($bootstrap->getPluginResources()), 1));
+        $this->assertTrue($resource1 instanceof Layout, var_export(array_keys($bootstrap->getBroker()->getRegisteredPlugins()), 1));
         $this->assertTrue($resource2 instanceof \Zend\Layout\Layout);
         restore_error_handler();
     }
@@ -486,7 +486,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
             ),
         ));
         $bootstrap = new Application\Bootstrap($this->application);
-        $resource = $bootstrap->getPluginResource('foo');
+        $resource = $bootstrap->getBroker()->getPlugin('foo');
         $this->assertTrue($resource->bootstrapSetInConstructor, var_export(get_object_vars($resource), 1));
     }
 
@@ -505,7 +505,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         ));
         set_error_handler(array($this, 'handleError'));
         $bootstrap = new Application\Bootstrap($this->application);
-        $resource = $bootstrap->getPluginResource('FrontController');
+        $resource = $bootstrap->getBroker()->getPlugin('FrontController');
         restore_error_handler();
         $this->assertTrue(false === $this->error, $this->error);
     }

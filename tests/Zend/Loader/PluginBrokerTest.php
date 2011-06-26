@@ -42,7 +42,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
     public function testUsesEmptyPluginClassLoaderByDefault()
     {
         $loader = $this->broker->getClassLoader();
-        $this->assertType('Zend\Loader\ShortNameLocater', $loader);
+        $this->assertType('Zend\Loader\ShortNameLocator', $loader);
         $this->assertType('Zend\Loader\PluginClassLoader', $loader);
         $this->assertEquals(array(), $loader->getRegisteredPlugins());
     }

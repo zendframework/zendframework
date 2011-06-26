@@ -14,7 +14,7 @@ read/subscribe to the following resources:
    http://framework.zend.com/wiki/display/ZFDEV/Contributing+to+Zend+Framework
 
  * ZF Contributor's mailing list:
-   Archives:  http://short.ie/tc64rv
+   Archives: http://zend-framework-community.634137.n4.nabble.com/ZF-Contributor-f680267.html
    Subscribe: zf-contributors-subscribe@lists.zend.com
 
  * ZF Contributor's IRC channel:

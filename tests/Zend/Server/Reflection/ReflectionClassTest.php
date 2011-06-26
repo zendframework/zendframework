@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Server\Reflection;
+
 use Zend\Server\Reflection;
 
 /**
@@ -51,7 +52,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $this->assertTrue($r instanceof Reflection\ReflectionClass);
         $this->assertEquals('', $r->getNamespace());
 
@@ -61,7 +62,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($m instanceof Reflection\ReflectionMethod);
         }
 
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'), 'namespace');
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'), 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
@@ -78,9 +79,9 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function test__call()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $this->assertTrue(is_string($r->getName()));
-        $this->assertEquals('Zend\Server\Reflection\Reflection', $r->getName());
+        $this->assertEquals('Zend\Server\Reflection', $r->getName());
     }
 
     /**
@@ -88,7 +89,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSet()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $r->system = true;
         $this->assertTrue($r->system);
     }
@@ -102,7 +103,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMethods()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
 
         $methods = $r->getMethods();
         $this->assertTrue(is_array($methods));
@@ -116,7 +117,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNamespace()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $this->assertEquals('', $r->getNamespace());
         $r->setNamespace('namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -131,7 +132,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function test__wakeup()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
         $s = serialize($r);
         $u = unserialize($s);
 

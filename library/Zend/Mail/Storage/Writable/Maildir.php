@@ -347,8 +347,8 @@ class Maildir extends MaildirFolder implements Writable
     protected function _createUniqueId()
     {
         $id = '';
-        $id .= function_exists('microtime') ? microtime(true) : (time() . ' ' . rand(0, 100000));
-        $id .= '.' . (function_exists('posix_getpid') ? posix_getpid() : rand(50, 65535));
+        $id .= microtime(true);
+        $id .= '.' . getmypid();
         $id .= '.' . php_uname('n');
 
         return $id;
@@ -477,7 +477,7 @@ class Maildir extends MaildirFolder implements Writable
         if (is_resource($message) && get_resource_type($message) == 'stream') {
             stream_copy_to_stream($message, $temp_file['handle']);
         } else {
-            fputs($temp_file['handle'], $message);
+            fwrite($temp_file['handle'], $message);
         }
         fclose($temp_file['handle']);
 
@@ -819,8 +819,8 @@ class Maildir extends MaildirFolder implements Writable
             $definition[] = $value . $type;
         }
         $definition = implode(',', $definition);
-        fputs($fh, "$definition\n");
-        fputs($fh, "$total_size $messages\n");
+        fwrite($fh, "$definition\n");
+        fwrite($fh, "$total_size $messages\n");
         fclose($fh);
         rename($tmp['filename'], $this->_rootdir . 'maildirsize');
         foreach ($timestamps as $dir => $timestamp) {

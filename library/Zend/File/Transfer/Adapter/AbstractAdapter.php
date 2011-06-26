@@ -27,7 +27,7 @@ use Zend\File\Transfer,
     Zend\File\Transfer\Exception,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\Loader\ShortNameLocater,
+    Zend\Loader\ShortNameLocator,
     Zend\Validator,
     Zend\Filter;
 
@@ -223,12 +223,12 @@ abstract class AbstractAdapter
     /**
      * Set plugin loader to use for validator or filter chain
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
+     * @param  \Zend\Loader\ShortNameLocator $loader
      * @param  string $type 'filter', or 'validator'
      * @return \Zend\File\Transfer\Adapter\AbstractAdapter
      * @throws \Zend\File\Transfer\Exception on invalid type
      */
-    public function setPluginLoader(ShortNameLocater $loader, $type)
+    public function setPluginLoader(ShortNameLocator $loader, $type)
     {
         $type = strtoupper($type);
         switch ($type) {
@@ -248,7 +248,7 @@ abstract class AbstractAdapter
      * 'filter' or 'validator' for $type.
      *
      * @param  string $type
-     * @return \Zend\Loader\ShortNameLocater
+     * @return \Zend\Loader\ShortNameLocator
      * @throws \Zend\File\Transfer\Exception on invalid type.
      */
     public function getPluginLoader($type)

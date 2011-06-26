@@ -27,7 +27,7 @@ namespace Zend;
  * Generic storage class helps to manage global data.
  *
  * @uses       ArrayObject
- * @uses       \Zend\Exception
+ * @uses       \RuntimeException
  * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Registry
@@ -68,12 +68,12 @@ class Registry extends \ArrayObject
      * @param \Zend\Registry $registry An object instance of type \Zend\Registry,
      *   or a subclass.
      * @return void
-     * @throws \Zend\Exception if registry is already initialized.
+     * @throws \RuntimeException if registry is already initialized.
      */
     public static function setInstance(Registry $registry)
     {
         if (self::$_registry !== null) {
-            throw new Exception('Registry is already initialized');
+            throw new \RuntimeException('Registry is already initialized');
         }
 
         self::setClassName(get_class($registry));
@@ -97,17 +97,17 @@ class Registry extends \ArrayObject
      *
      * @param string $registryClassName
      * @return void
-     * @throws \Zend\Exception if the registry is initialized or if the
+     * @throws \RuntimeException if the registry is initialized or if the
      *   class name is not valid.
      */
     public static function setClassName($registryClassName = '\\Zend\\Registry')
     {
         if (self::$_registry !== null) {
-            throw new Exception('Registry is already initialized');
+            throw new \RuntimeException('Registry is already initialized');
         }
 
         if (!is_string($registryClassName)) {
-            throw new Exception("Argument is not a class name");
+            throw new \RuntimeException("Argument is not a class name");
         }
 
         /**
@@ -139,14 +139,14 @@ class Registry extends \ArrayObject
      *
      * @param string $index - get the value associated with $index
      * @return mixed
-     * @throws \Zend\Exception if no entry is registerd for $index.
+     * @throws \RuntimeException if no entry is registerd for $index.
      */
     public static function get($index)
     {
         $instance = self::getInstance();
 
         if (!$instance->offsetExists($index)) {
-            throw new Exception("No entry is registered for key '$index'");
+            throw new \RuntimeException("No entry is registered for key '$index'");
         }
 
         return $instance->offsetGet($index);
@@ -207,5 +207,4 @@ class Registry extends \ArrayObject
     {
         return array_key_exists($index, $this);
     }
-
 }

@@ -114,8 +114,8 @@ if (!$usingStdout) {
     echo "Creating class file map for library in '$path'..." . PHP_EOL;
 }
 
-// Get the ClassFileLocater, and pass it the library path
-$l = new \Zend\File\ClassFileLocater($path);
+// Get the ClassFileLocator, and pass it the library path
+$l = new \Zend\File\ClassFileLocator($path);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
@@ -125,6 +125,9 @@ iterator_apply($l, function() use ($l, $map, $strip){
     $file      = $l->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getRealpath());
+
+    // Replace directory separators with constant
+    $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);
 
     $map->{$namespace . $file->classname} = $filename;
 
@@ -138,6 +141,9 @@ $content = '<' . "?php\n"
 
 // Prefix with __DIR__; modify the generated content
 $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+
+// Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
+$content = str_replace("\\'", "'", $content);
 
 // Write the contents to disk
 file_put_contents($output, $content);

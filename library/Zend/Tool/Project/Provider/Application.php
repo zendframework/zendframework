@@ -51,8 +51,8 @@ class Application
         
         $originalClassNamePrefix = $classNamePrefix;
         
-        if (substr($classNamePrefix, -1) != '_') {
-            $classNamePrefix .= '_';
+        if (substr($classNamePrefix, -1) != '\\') {
+            $classNamePrefix .= '\\';
         }
         
         $configFileResource = $profile->search('ApplicationConfigFile');
@@ -90,5 +90,4 @@ class Application
         // store profile
         $this->_storeProfile();
     }
-    
 }

@@ -279,15 +279,7 @@ class Sitemap extends AbstractHelper
             $enc = $this->view->getEncoding();
         }
 
-        // TODO: remove check when minimum PHP version is >= 5.2.3
-        if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
-            // do not encode existing HTML entities
-            return htmlspecialchars($string, ENT_QUOTES, $enc, false);
-        } else {
-            $string = preg_replace('/&(?!(?:#\d++|[a-z]++);)/ui', '&amp;', $string);
-            $string = str_replace(array('<', '>', '\'', '"'), array('&lt;', '&gt;', '&#39;', '&quot;'), $string);
-            return $string;
-        }
+        return htmlspecialchars($string, ENT_QUOTES, $enc, false);
     }
 
     // Public methods:
@@ -313,10 +305,10 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $curDoc = $this->view->url();
+            $curDoc = $this->getView()->broker('url')->direct();
             $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
             $url = rtrim($this->getServerUrl(), '/') . '/'
-                 . $curDoc 
+                 . $curDoc
                  . (empty($curDoc) ? '' : '/') . $href;
         }
 
@@ -383,7 +375,7 @@ class Sitemap extends AbstractHelper
             }
 
             // get absolute url from page
-            if (!$url = $this->url($page)) {
+            if (!$url = $this->getView()->broker('url')->direct($page->toArray())) {
                 // skip page if it has no url (rare case)
                 continue;
             }

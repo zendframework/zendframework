@@ -95,13 +95,13 @@ class PdoIbmTest extends AbstractPdoTest
         $value = 'value';
         try {
             $stmt->setAttribute(1234, $value);
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertContains('This driver doesn\'t support setting attributes', $e->getMessage());
         }
 
         try {
             $this->assertEquals($value, $stmt->getAttribute(1234), "Expected '$value' #1");
-        } catch (\Zend\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertContains('Driver does not support this function: 1 Unknown attribute', $e->getMessage());
             return;
         }

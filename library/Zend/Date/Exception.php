@@ -24,7 +24,6 @@
 namespace Zend\Date;
 
 /**
- * @uses       \Zend\Exception
  * @category   Zend
  * @package    Zend_Date
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

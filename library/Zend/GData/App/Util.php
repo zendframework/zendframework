@@ -80,7 +80,7 @@ class Util
         $foundKey = $maximumKey;
 
         // Sanity check: Make sure that the collection isn't empty
-        if (sizeof($collection) == 0) {
+        if (count($collection) == 0) {
             throw new Exception("Empty namespace collection encountered.");
         }
 

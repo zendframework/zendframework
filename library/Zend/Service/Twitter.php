@@ -904,6 +904,20 @@ class Twitter extends Rest\Client\RestClient
     }
 
     /**
+     * Returns an array of user objects that retweeted the tweets identified with the given $id
+     *
+     * @param integer $id  The Id of the tweet we want to know who retweeted
+     * @return \Zend\Rest\Client\Result
+     */
+    public function statusRetweetedBy($id)
+    {
+        $this->_init();
+        $path = '/1/statuses/' . $this->_validInteger($id) . '/retweeted_by.xml';
+        $response = $this->_get($path);
+        return new Rest\Client\Result($response->getBody());
+    }
+
+    /**
      * Protected function to validate that the integer is valid or return a 0
      * @param $int
      * @throws \Zend\Http\Client\Exception if HTTP request fails or times out

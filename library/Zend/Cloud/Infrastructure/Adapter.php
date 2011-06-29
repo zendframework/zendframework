@@ -25,6 +25,16 @@ interface Adapter
     const HTTP_ADAPTER = 'http_adapter'; 
 
     /**
+     * The max. amount of time, in seconds, to wait for a status change
+     */
+    const TIMEOUT_STATUS_CHANGE = 30;
+
+    /**
+     * The time step, in seconds, for the status change
+     */
+    const TIME_STEP_STATUS_CHANGE = 5;
+
+    /**
      * Return a list of the available instances
      *
      * @return array
@@ -38,7 +48,17 @@ interface Adapter
      * @return string
      */ 
     public function statusInstance($id); 
- 
+
+    /**
+     * Wait for status $status with a timeout of $timeout seconds
+     * 
+     * @param  string $id
+     * @param  string $status
+     * @param  integer $timeout 
+     * @return boolean
+     */
+    public function waitStatusInstance($id,$status,$timeout=self::TIMEOUT_STATUS_CHANGE);
+    
     /**
      * Return the public DNS name of the instance
      * 

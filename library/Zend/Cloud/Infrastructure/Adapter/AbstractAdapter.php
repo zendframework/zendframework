@@ -65,4 +65,26 @@ abstract class AbstractAdapter implements Adapter
     {
         return $this->adapterResult;
     }
+
+    /**
+     * Wait for status $status with a timeout of $timeout seconds
+     * 
+     * @param  string $id
+     * @param  string $status
+     * @param  integer $timeout 
+     * @return boolean
+     */
+    public function waitStatusInstance($id, $status, $timeout = self::TIMEOUT_STATUS_CHANGE)
+    {
+        if (empty($id) || empty($status)) {
+            return false;
+        }
+
+        $num = 0;
+        while (($num<$timeout) && ($this->statusInstance($id) != $status)) {
+            sleep(self::TIME_STEP_STATUS_CHANGE);
+            $num += self::TIME_STEP_STATUS_CHANGE;
+        }
+        return ($num < $timeout);
+    }
 }

@@ -279,4 +279,24 @@ class DependencyInjectorTest extends TestCase
         $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\D');
     }
     
+    /**
+     * Fix for PHP bug in is_subclass_of
+     * 
+     * @see https://bugs.php.net/bug.php?id=53727
+     */
+    public function testNewInstanceWillUsePreferredClassForInterfaceHints()
+    {
+        $di = new DependencyInjector();
+        $di->getInstanceManager()->addPreferredInstance(
+            'ZendTest\Di\TestAsset\PreferredImplClasses\A',
+            'ZendTest\Di\TestAsset\PreferredImplClasses\BofA'
+        );
+        
+        $c = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\C');
+        $a = $c->a;
+        $this->assertType('ZendTest\Di\TestAsset\PreferredImplClasses\BofA', $a);
+        $d = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\D');
+        $this->assertSame($a, $d->a);
+    }
+    
 }

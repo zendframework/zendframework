@@ -288,6 +288,20 @@ class DependencyInjector implements DependencyInjection
      */
     protected function resolveMethodParameters($class, $method, array $userParams, $isInstantiator, $alias)
     {
+        static $isSubclassFunc = null;
+        static $isSubclassFuncCache = null;
+
+        $isSubclassFunc = function($class, $type) use (&$isSubclassFuncCache) {
+            /* @see https://bugs.php.net/bug.php?id=53727 */
+            if ($isSubclassFuncCache === null) {
+                $isSubclassFuncCache = array();
+            }
+            if (!array_key_exists($class, $isSubclassFuncCache)) {
+                $isSubclassFuncCache[$class] = class_parents($class, true) + class_implements($class, true);
+            }
+            return (isset($isSubclassFuncCache[$class][$type]));
+        };
+        
         $resolvedParams = array();
         
         $injectionMethodParameters = $this->definition->getInjectionMethodParameters($class, $method);
@@ -296,7 +310,6 @@ class DependencyInjector implements DependencyInjection
         $computedLookupParams = array();
         
         foreach ($injectionMethodParameters as $name => $type) {
-            //$computedValueParams[$name] = null;
             
             // first consult user provided parameters
             if (isset($userParams[$name])) {
@@ -326,9 +339,9 @@ class DependencyInjector implements DependencyInjection
                 foreach ($pInstances as $pInstance) {
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || is_subclass_of($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || $isSubclassFunc($pInstanceClass, $type)) {
                         $computedLookupParams[$name] = array($pInstance, $pInstanceClass);
-                        continue;
+                        continue 2;
                     }
                 }
             }
@@ -339,9 +352,9 @@ class DependencyInjector implements DependencyInjection
                 foreach ($pInstances as $pInstance) {
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || is_subclass_of($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || $isSubclassFunc($pInstanceClass, $type)) {
                         $computedLookupParams[$name] = array($pInstance, $pInstanceClass);
-                        continue;
+                        continue 2;
                     }
                 }
             }

@@ -36,9 +36,14 @@ class FileScanner extends TokenArrayScanner implements Scanner
     
     protected function scan()
     {
+        if ($this->isScanned) {
+            return;
+        }
+
         if (!$this->file) {
             throw new Exception\RuntimeException('File was not provided');
         }
+
         $this->setTokens(token_get_all(file_get_contents($this->file)));
         parent::scan();
     }

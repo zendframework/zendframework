@@ -35,6 +35,10 @@ class ClassScanner implements Scanner
     
     protected function scan()
     {
+        if ($this->isScanned) {
+            return;
+        }
+        
         if (!$this->tokens) {
             throw new Exception\RuntimeException('No tokens were provided');
         }

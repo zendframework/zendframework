@@ -18,7 +18,6 @@ class ParameterScanner
     protected $isDefaultValueAvailable  = false;
     protected $isOptional               = false;
     protected $isPassedByReference      = false;
-    protected $shortInterfaces          = false;
 
     protected $tokens                   = null;
     protected $uses                     = array();
@@ -73,7 +72,10 @@ class ParameterScanner
             }
         }
         
-        if ($this->class) {
+        if (strtolower($this->class) == 'array') {
+            $this->isArray = true;
+            $this->class = null;
+        } elseif ($this->class !== null) {
             $namespace = (($decClassLastSlash = strrpos($this->declaringClass, '\\')) !== false) 
                        ? substr($this->declaringClass, 0, $decClassLastSlash) 
                        : null;
@@ -150,12 +152,14 @@ class ParameterScanner
         } while ($token);
         
         if ($this->class) {
+            /*
             $uses = $this->uses;
             if ($this->shortInterfaces) {
                 $this->interfaces = $this->shortInterfaces;
                 $data = (object) array('namespace' => $namespace, 'uses' => $uses);
                 array_walk($this->interfaces, array('Zend\Code\Scanner\Util', 'resolveImports'), $data);
             }
+            */
         }
         
         $this->isScanned = true;

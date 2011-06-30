@@ -140,11 +140,11 @@ class ClassScanner implements Scanner
                         $this->shortInterfaces[$interfaceIndex] .= $token[1];
                     }
                 }
-                if ($token[0] == T_EXTENDS) {
+                if ($token[0] == T_EXTENDS && !$this->isInterface) {
                     $context = T_EXTENDS;
                     $this->shortParentClass = '';
                 }
-                if ($token[0] == T_IMPLEMENTS) {
+                if ($token[0] == T_IMPLEMENTS || ($this->isInterface && $token[0] == T_EXTENDS)) {
                     $context = T_IMPLEMENTS;
                     $this->shortInterfaces[$interfaceIndex] = '';
                 }

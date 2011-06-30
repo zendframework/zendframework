@@ -193,7 +193,7 @@ class TokenArrayScanner implements Scanner
                 if (!$hasAs) {
                     $statement['asComputed'] = substr(
                         $statement['use'],
-                        (strrpos($statement['use'],'\\')+1)
+                        (strrpos($statement['use'],'\\'))
                     );
                 }
                 $info['statements'][$sCount] = $statement;

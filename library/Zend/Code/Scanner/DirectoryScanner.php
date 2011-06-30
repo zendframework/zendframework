@@ -76,6 +76,21 @@ class DirectoryScanner implements Scanner
         
         return $classes;
     }
+    
+    public function getClass($class, $returnScannerClass = true)
+    {
+        $this->scan();
+        
+        foreach ($this->scannerFiles as $scannerFile) {
+            /* @var $scannerFile Zend\Code\Scanner\FileScanner */
+            $classesInFileScanner = $scannerFile->getClasses(false);
+            if (in_array($class, $classesInFileScanner)) {
+                return $scannerFile->getClass($class, $returnScannerClass);
+            }
+        }
+        
+        throw new \InvalidArgumentException('Class not found.');
+    }
 
     public static function export() {}
     public function __toString() {} 

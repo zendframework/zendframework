@@ -11,6 +11,7 @@ class MethodScanner implements Scanner
 
     protected $scannerClass = null;
     protected $class        = null;
+    protected $namespace    = null;
     protected $uses         = array();
     protected $name         = null;
     protected $isFinal      = false;
@@ -23,9 +24,10 @@ class MethodScanner implements Scanner
     protected $tokens       = array();
     protected $infos        = array();
     
-    public function __construct(array $methodTokens, array $uses = array())
+    public function __construct(array $methodTokens, $namespace = null, array $uses = array())
     {
         $this->tokens = $methodTokens;
+        $this->namespace = $namespace;
         $this->uses = $uses;
     }
     
@@ -300,6 +302,7 @@ class MethodScanner implements Scanner
         
         $p = new $returnScanner(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
+            $this->namespace,
             $this->uses
             );
         $p->setDeclaringFunction($this->name);

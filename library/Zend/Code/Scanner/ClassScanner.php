@@ -442,6 +442,7 @@ class ClassScanner implements Scanner
         
         $m = new $returnScannerClass(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
+            $this->namespace,
             $this->uses
             );
         $m->setClass($this->name);

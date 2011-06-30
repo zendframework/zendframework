@@ -158,7 +158,6 @@ class TokenArrayScanner implements Scanner
         $hasAs     = false;
         $sCount    = 0;
         $statement = $statementTemplate;
-        
 
         while (true) {
             $tokenIndex++;
@@ -193,7 +192,7 @@ class TokenArrayScanner implements Scanner
                 if (!$hasAs) {
                     $statement['asComputed'] = substr(
                         $statement['use'],
-                        (strrpos($statement['use'],'\\'))
+                        (strpos($statement['use'],'\\') ? (strrpos($statement['use'],'\\')+1) : 0)
                     );
                 }
                 $info['statements'][$sCount] = $statement;
@@ -385,8 +384,8 @@ class TokenArrayScanner implements Scanner
         if (!$returnScannerClass) {
             $namespaces = array();
             foreach ($this->infos as $info) {
-                if ($info['type'] == 'namespace') {
-                    $namespaces[] = $info['namespace'];
+                if ($info['type'] == 'uses') {
+                    $namespaces[] = $info['uses'];
                 }
             }
             return $namespaces;

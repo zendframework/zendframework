@@ -20,11 +20,13 @@ class ParameterScanner
     protected $isPassedByReference      = false;
 
     protected $tokens                   = null;
+    protected $namespace                = null;
     protected $uses                     = array();
     
-    public function __construct(array $parameterTokens, array $uses = array())
+    public function __construct(array $parameterTokens, $namespace = null, array $uses = array())
     {
         $this->tokens = $parameterTokens;
+        $this->namespace = $namespace;
         $this->uses   = $uses;
     }
     
@@ -76,6 +78,15 @@ class ParameterScanner
             $this->isArray = true;
             $this->class = null;
         } elseif ($this->class !== null) {
+            
+            $data = (object) array(
+                'namespace' => $this->namespace,
+                'uses'      => $this->uses,
+            );
+            
+            Util::resolveImports($this->class, null, $data);
+            
+            /*
             $namespace = (($decClassLastSlash = strrpos($this->declaringClass, '\\')) !== false) 
                        ? substr($this->declaringClass, 0, $decClassLastSlash) 
                        : null;
@@ -92,6 +103,7 @@ class ParameterScanner
                     }
                 }
             }
+            */
         }
         
         if ($token[0] == T_WHITESPACE) {

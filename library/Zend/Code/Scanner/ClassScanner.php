@@ -220,6 +220,9 @@ class ClassScanner implements Scanner
         while (true) {
             $fastForward++;
             $tokenIndex++;
+            if (!isset($this->tokens[$tokenIndex])) {
+                break;
+            }
             $token = $this->tokens[$tokenIndex];
             
             // BREAK ON

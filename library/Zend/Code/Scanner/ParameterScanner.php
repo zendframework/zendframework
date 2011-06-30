@@ -18,6 +18,7 @@ class ParameterScanner
     protected $isDefaultValueAvailable  = false;
     protected $isOptional               = false;
     protected $isPassedByReference      = false;
+    protected $shortInterfaces          = false;
 
     protected $tokens                   = null;
     protected $uses                     = array();

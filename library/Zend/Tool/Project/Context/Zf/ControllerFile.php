@@ -175,7 +175,7 @@ EOS
                                 'name' => 'getLog',
                                 'body' => <<<'EOS'
 $bootstrap = $this->getInvokeArg('bootstrap');
-if (!$bootstrap->hasPluginResource('Log')) {
+if (!$bootstrap->getBroker()->hasPlugin('Log')) {
     return false;
 }
 $log = $bootstrap->getResource('Log');

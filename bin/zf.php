@@ -605,6 +605,7 @@ EOS;
       $configOptions['classesToLoad'] = 'Zend\Tool\Project\Provider\Manifest';
 
         $autoloader = new Zend\Loader\StandardAutoloader();
+        $autoloader->setFallbackAutoloader(true);
         $autoloader->register();
 
       $console = new Zend\Tool\Framework\Client\Console\Console($configOptions);

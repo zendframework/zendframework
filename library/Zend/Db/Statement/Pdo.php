@@ -38,7 +38,7 @@ namespace Zend\Db\Statement;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PDO extends AbstractStatement implements \IteratorAggregate
+class Pdo extends AbstractStatement implements \IteratorAggregate
 {
 
     /**

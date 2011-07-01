@@ -7,7 +7,7 @@ use Zend\Di\Definition,
 
 class BuilderDefinition implements Definition
 {
-    
+    protected $defaultClassBuilder = 'Zend\Di\Definition\Builder\PhpClass';
     protected $classes = array();
 
     public function createClassesFromArray(array $builderData)
@@ -48,6 +48,51 @@ class BuilderDefinition implements Definition
     {
         $this->classes[] = $phpClass;
         return $this;
+    }
+
+    /**
+     * Create a class builder object using default class builder class
+     *
+     * This method is a factory that can be used in place of addClass().
+     * 
+     * @param  null|string $name Optional name of class to assign
+     * @return Builder\PhpClass
+     */
+    public function createClass($name = null)
+    {
+        $builderClass = $this->defaultClassBuilder;
+        $class = new $builderClass();
+        if (null !== $name) {
+            $class->setName($name);
+        }
+
+        $this->addClass($class);
+        return $class;
+    }
+
+    /**
+     * Set the class to use with {@link createClass()}
+     * 
+     * @param  string $class 
+     * @return BuilderDefinition
+     */
+    public function setClassBuilder($class)
+    {
+        $this->defaultClassBuilder = $class;
+        return $this;
+    }
+
+    /**
+     * Get the class used for {@link createClass()}
+     *
+     * This is primarily to allow developers to temporarily override 
+     * the builder strategy.
+     * 
+     * @return string
+     */
+    public function getClassBuilder()
+    {
+        return $this->defaultClassBuilder;
     }
     
     public function getClasses()

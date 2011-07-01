@@ -26,70 +26,78 @@ use Zend\Service\Rackspace\Exception,
 
 abstract class Rackspace
 {
-    const US_AUTH_URL= 'https://auth.api.rackspacecloud.com/v1.0';
-    const UK_AUTH_URL= 'https://lon.auth.api.rackspacecloud.com/v1.0';
-    const API_FORMAT= 'json';
-    const USER_AGENT= 'Zend\Service\Rackspace';
-    const STORAGE_URL= "X-Storage-Url";
-    const AUTH_TOKEN= "X-Auth-Token";
-    const AUTH_USER_HEADER= "X-Auth-User";
-    const AUTH_KEY_HEADER= "X-Auth-Key";
-    const AUTH_USER_HEADER_LEGACY= "X-Storage-User";
-    const AUTH_KEY_HEADER_LEGACY= "X-Storage-Pass";
-    const AUTH_TOKEN_LEGACY= "X-Storage-Token";
-    const CDNM_URL= "X-CDN-Management-Url";
+    const VERSION                = 'v1.0';
+    const US_AUTH_URL            = 'https://auth.api.rackspacecloud.com';
+    const UK_AUTH_URL            = 'https://lon.auth.api.rackspacecloud.com';
+    const API_FORMAT             = 'json';
+    const USER_AGENT             = 'Zend\Service\Rackspace';
+    const STORAGE_URL            = "X-Storage-Url";
+    const AUTHtoken              = "X-Auth-Token";
+    const AUTHuser_HEADER        = "X-Auth-User";
+    const AUTHkey_HEADER         = "X-Auth-Key";
+    const AUTHuser_HEADER_LEGACY = "X-Storage-User";
+    const AUTHkey_HEADER_LEGACY  = "X-Storage-Pass";
+    const AUTHtoken_LEGACY       = "X-Storage-Token";
+    const CDNM_URL               = "X-CDN-Management-Url";
+    const MANAGEMENT_URL         = "X-Server-Management-Url";
     /**
      * Rackspace Key
      *
      * @var string
      */
-    protected $_key;
+    protected $key;
     /**
      * Rackspace account name
      *
      * @var string
      */
-    protected $_user;
+    protected $user;
     /**
      * Token of authentication
      *
      * @var string
      */
-    protected $_token;
+    protected $token;
     /**
      * Authentication URL
      *
      * @var string
      */
-    protected $_authUrl;
+    protected $authUrl;
     /**
      * @var Zend\Http\Client
      */
-    protected $_httpClient;
+    protected $httpClient;
     /**
      * Error Msg
      *
      * @var string
      */
-    protected $_errorMsg;
+    protected $errorMsg;
     /**
-     * HTTP error status
+     * HTTP error code
      *
      * @var string
      */
-    protected $_errorStatus;
+    protected $errorCode;
     /**
      * Storage URL
      *
      * @var string
      */
-    protected $_storageUrl;
+    protected $storageUrl;
     /**
      * CDN URL
      *
      * @var string
      */
-    protected $_cdnUrl;
+    protected $cdnUrl;
+    /**
+     * Server management URL
+     * 
+     * @var string 
+     */
+    protected $managementUrl;
     /**
      * __construct()
      *
@@ -122,7 +130,7 @@ abstract class Rackspace
      */
     public function getUser()
     {
-        return $this->_user;
+        return $this->user;
     }
     /**
      * Get user key
@@ -131,7 +139,7 @@ abstract class Rackspace
      */
     public function getKey()
     {
-        return $this->_key;
+        return $this->key;
     }
     /**
      * Get authentication URL
@@ -140,7 +148,7 @@ abstract class Rackspace
      */
     public function getAuthUrl()
     {
-        return $this->_authUrl;
+        return $this->authUrl;
     }
     /**
      * Get the storage URL
@@ -148,12 +156,12 @@ abstract class Rackspace
      * @return string|boolean
      */
     public function getStorageUrl() {
-        if (empty($this->_storageUrl)) {
+        if (empty($this->storageUrl)) {
             if (!$this->authenticate()) {
                 return false;
             }
         }
-        return $this->_storageUrl;
+        return $this->storageUrl;
     }
     /**
      * Get the CDN URL
@@ -161,12 +169,26 @@ abstract class Rackspace
      * @return string|boolean
      */
     public function getCdnUrl() {
-        if (empty($this->_cdnUrl)) {
+        if (empty($this->cdnUrl)) {
             if (!$this->authenticate()) {
                 return false;
             }
         }
-        return $this->_cdnUrl;
+        return $this->cdnUrl;
+    }
+    /**
+     * Get the management server URL
+     * 
+     * @return string|boolean
+     */     
+    public function getManagementUrl()
+    {
+        if (empty($this->managementUrl)) {
+            if (!$this->authenticate()) {
+                return false;
+            }
+        }
+        return $this->managementUrl;
     }
     /**
      * Set the user account
@@ -177,7 +199,7 @@ abstract class Rackspace
     public function setUser($user)
     {
         if (!empty($user)) {
-            $this->_user = $user;
+            $this->user = $user;
         }
     }
     /**
@@ -189,7 +211,7 @@ abstract class Rackspace
     public function setKey($key)
     {
         if (!empty($key)) {
-            $this->_key = $key;
+            $this->key = $key;
         }
     }
     /**
@@ -201,7 +223,7 @@ abstract class Rackspace
     public function setAuthUrl($url)
     {
         if (!empty($url) && in_array($url, array(self::US_AUTH_URL, self::UK_AUTH_URL))) {
-            $this->_authUrl = $url;
+            $this->authUrl = $url;
         } else {
             throw new Exception\InvalidArgumentException("The authentication URL is not valid");
         }
@@ -213,12 +235,12 @@ abstract class Rackspace
      */
     public function getToken()
     {
-        if (empty($this->_token)) {
+        if (empty($this->token)) {
             if (!$this->authenticate()) {
                 return false;
             }
         }
-        return $this->_token;
+        return $this->token;
     }
     /**
      * Get the error msg of the last REST call
@@ -226,15 +248,15 @@ abstract class Rackspace
      * @return string
      */
     public function getErrorMsg() {
-        return $this->_errorMsg;
+        return $this->errorMsg;
     }
     /**
-     * Get the error status of the last REST call
+     * Get the error code of the last REST call
      * 
      * @return strig 
      */
-    public function getErrorStatus() {
-        return $this->_errorStatus;
+    public function getErrorCode() {
+        return $this->errorCode;
     }
     /**
      * get the HttpClient instance
@@ -243,10 +265,10 @@ abstract class Rackspace
      */
     public function getHttpClient()
     {
-        if (empty($this->_httpClient)) {
-            $this->_httpClient = new HttpClient();
+        if (empty($this->httpClient)) {
+            $this->httpClient = new HttpClient();
         }
-        return $this->_httpClient;
+        return $this->httpClient;
     }
     /**
      * Return true is the last call was successful
@@ -255,7 +277,7 @@ abstract class Rackspace
      */
     public function isSuccessful()
     {
-        return ($this->_errorMsg=='');
+        return ($this->errorMsg=='');
     }
     /**
      * HTTP call
@@ -267,25 +289,28 @@ abstract class Rackspace
      * @param string $body
      * @return Zend\Http\Response
      */
-    protected function _httpCall($url,$method,$headers=array(),$get=array(),$body=null)
+    protected function httpCall($url,$method,$headers=array(),$data=array(),$body=null)
     {
         $client = $this->getHttpClient();
         $client->resetParameters(true);
-        if (empty($headers[self::AUTH_USER_HEADER])) {
-            $headers[self::AUTH_TOKEN]= $this->getToken();
+        if (empty($headers[self::AUTHuser_HEADER])) {
+            $headers[self::AUTHtoken]= $this->getToken();
         } 
-        $client->setHeaders($headers);
         $client->setMethod($method);
         if (empty($get['format'])) {
             $get['format']= self::API_FORMAT;
         }
-        $client->setParameterGet($get);
+        $client->setParameterGet($data);    
         if (!empty($body)) {
             $client->setRawData($body);
+            if (!isset($headers[HttpClient::CONTENT_TYPE])) {
+                $headers[HttpClient::CONTENT_TYPE]= 'application/json';
+            }
         }
+        $client->setHeaders($headers);
         $client->setUri($url);
-        $this->_errorMsg='';
-        $this->_errorStatus='';
+        $this->errorMsg='';
+        $this->errorCode='';
         return $client->request();
     }
     /**
@@ -296,18 +321,19 @@ abstract class Rackspace
     public function authenticate()
     {
         $headers= array (
-            self::AUTH_USER_HEADER => $this->_user,
-            self::AUTH_KEY_HEADER => $this->_key
+            self::AUTHuser_HEADER => $this->user,
+            self::AUTHkey_HEADER => $this->key
         );
-        $result= $this->_httpCall($this->_authUrl,HttpClient::GET, $headers);
+        $result= $this->httpCall($this->authUrl.'/'.self::VERSION,HttpClient::GET, $headers);
         if ($result->getStatus()==204) {
-            $this->_token= $result->getHeader(self::AUTH_TOKEN);
-            $this->_storageUrl= $result->getHeader(self::STORAGE_URL);
-            $this->_cdnUrl= $result->getHeader(self::CDNM_URL);
+            $this->token= $result->getHeader(self::AUTHtoken);
+            $this->storageUrl= $result->getHeader(self::STORAGE_URL);
+            $this->cdnUrl= $result->getHeader(self::CDNM_URL);
+            $this->managementUrl= $result->getHeader(self::MANAGEMENT_URL);
             return true;
         }
-        $this->_errorMsg= $result->getBody();
-        $this->_errorStatus= $result->getStatus();
+        $this->errorMsg= $result->getBody();
+        $this->errorCode= $result->getStatus();
         return false;
     } 
 }

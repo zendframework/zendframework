@@ -22,12 +22,7 @@
 namespace Zend\Service\Rackspace;
 
 use Zend\Service\Rackspace\Rackspace as RackspaceAbstract,
-        Zend\Service\Rackspace\Files\Container,
-        Zend\Service\Rackspace\Files\ContainerList,
-        Zend\Service\Rackspace\Files\Object,
-        Zend\Service\Rackspace\Files\ObjectList,
-        Zend\Http\Client as HttpClient,
-        Zend\Service\Rackspace\Exception\InvalidArgumentException;
+    Zend\Http\Client as HttpClient;
 
 class Files extends RackspaceAbstract
 {
@@ -72,15 +67,15 @@ class Files extends RackspaceAbstract
     /**
      * @var integer
      */
-    protected $_countContainers;
+    protected $countContainers;
     /**
      * @var integer
      */
-    protected $_sizeContainers;
+    protected $sizeContainers;
     /**
      * @var integer
      */
-    protected $_countObjects;
+    protected $countObjects;
     /**
      * Return the total count of containers
      *
@@ -88,10 +83,10 @@ class Files extends RackspaceAbstract
      */
     public function getCountContainers()
     {
-        if (!isset($this->_countContainers)) {
+        if (!isset($this->countContainers)) {
             $this->getInfoContainers();
         }
-        return $this->_countContainers;
+        return $this->countContainers;
     }
     /**
      * Return the size in bytes of all the containers
@@ -100,10 +95,10 @@ class Files extends RackspaceAbstract
      */
     public function getSizeContainers()
     {
-         if (!isset($this->_sizeContainers)) {
+         if (!isset($this->sizeContainers)) {
              $this->getInfoContainers();
          }
-        return $this->_sizeContainers;
+        return $this->sizeContainers;
     }
     /**
      * Return the count of objects contained in all the containers
@@ -112,10 +107,10 @@ class Files extends RackspaceAbstract
      */
     public function getCountObjects()
     {
-        if (!isset($this->_countObjects)) {
+        if (!isset($this->countObjects)) {
             $this->getInfoContainers();
         }
-        return $this->_countObjects;
+        return $this->countObjects;
     }
     /**
      * Get all the containers
@@ -127,10 +122,10 @@ class Files extends RackspaceAbstract
     {
         $result= $this->httpCall($this->getStorageUrl(),HttpClient::GET,null,$options);
         if ($result->isSuccessful()) {
-            $this->_countContainers= $result->getHeader(self::ACCOUNT_CONTAINER_COUNT);
-            $this->_sizeContainers= $result->getHeader(self::ACCOUNT_BYTES_USED);
-            $this->_countObjects= $result->getHeader(self::ACCOUNT_OBJ_COUNT);
-            return new ContainerList($this,json_decode($result->getBody(),true));
+            $this->countContainers= $result->getHeader(self::ACCOUNT_CONTAINER_COUNT);
+            $this->sizeContainers= $result->getHeader(self::ACCOUNT_BYTES_USED);
+            $this->countObjects= $result->getHeader(self::ACCOUNT_OBJ_COUNT);
+            return new Files\ContainerList($this,json_decode($result->getBody(),true));
         }
         return false;
     }
@@ -145,7 +140,7 @@ class Files extends RackspaceAbstract
         $options['enabled_only']= true;
         $result= $this->httpCall($this->getCdnUrl(),HttpClient::GET,null,$options);
          if ($result->isSuccessful()) {
-            return new ContainerList($this,json_decode($result->getBody(),true));
+            return new Files\ContainerList($this,json_decode($result->getBody(),true));
         }
         return false;
     }
@@ -161,13 +156,13 @@ class Files extends RackspaceAbstract
     {
         $result= $this->httpCall($this->getStorageUrl(),HttpClient::HEAD);
         if ($result->isSuccessful()) {
-            $this->_countContainers= $result->getHeader(self::ACCOUNT_CONTAINER_COUNT);
-            $this->_sizeContainers= $result->getHeader(self::ACCOUNT_BYTES_USED);
-            $this->_countObjects= $result->getHeader(self::ACCOUNT_OBJ_COUNT);
+            $this->countContainers= $result->getHeader(self::ACCOUNT_CONTAINER_COUNT);
+            $this->sizeContainers= $result->getHeader(self::ACCOUNT_BYTES_USED);
+            $this->countObjects= $result->getHeader(self::ACCOUNT_OBJ_COUNT);
             $output= array(
-                'tot_containers' => $this->_countContainers,
-                'size_containers' => $this->_sizeContainers,
-                'tot_objects' => $this->_countObjects
+                'tot_containers' => $this->countContainers,
+                'size_containers' => $this->sizeContainers,
+                'tot_objects' => $this->countObjects
             );
             return $output;
         }
@@ -183,11 +178,11 @@ class Files extends RackspaceAbstract
     public function getObjects($container,$options=array())
     {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),HttpClient::GET,null,$options);
         if ($result->isSuccessful()) {
-            return new ObjectList($this,json_decode($result->getBody(),true),$container);
+            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);
         }
         return false;
     }
@@ -201,7 +196,7 @@ class Files extends RackspaceAbstract
     public function createContainer($container,$metadata=array())
     {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $headers=array();
         if (!empty($metadata)) {
@@ -219,15 +214,15 @@ class Files extends RackspaceAbstract
                     'bytes' => 0,
                     'metadata' => $metadata
                 );
-                return new Container($this,$data);
+                return new Files\Container($this,$data);
             case '202':
-                $this->_errorMsg= self::ERROR_CONTAINER_EXIST;
+                $this->errorMsg= self::ERROR_CONTAINER_EXIST;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -239,7 +234,7 @@ class Files extends RackspaceAbstract
     public function deleteContainer($container)
     {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),HttpClient::DELETE);
         $status= $result->getStatus();
@@ -247,16 +242,16 @@ class Files extends RackspaceAbstract
             case '204': // break intentionally omitted
                 return true;
             case '409':
-                $this->_errorMsg= self::ERROR_CONTAINER_NOT_EMPTY;
+                $this->errorMsg= self::ERROR_CONTAINER_NOT_EMPTY;
                 break;
             case '404':
-                $this->_errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
+                $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -268,7 +263,7 @@ class Files extends RackspaceAbstract
     public function getMetadataContainer($container)
     {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),HttpClient::HEAD);
         $status= $result->getStatus();
@@ -290,13 +285,13 @@ class Files extends RackspaceAbstract
                 );
                 return $data;
             case '404':
-                $this->_errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
+                $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -308,7 +303,7 @@ class Files extends RackspaceAbstract
     public function getContainer($container) {
         $result= $this->getMetadataContainer($container);
         if (!empty($result)) {
-            return new Container($this,$result);
+            return new Files\Container($this,$result);
         }
         return false;
     }
@@ -323,10 +318,10 @@ class Files extends RackspaceAbstract
     public function getObject($container,$object,$headers=array())
     {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         if (empty($object)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container).'/'.rawurlencode($object),HttpClient::GET);
         $status= $result->getStatus();
@@ -341,15 +336,15 @@ class Files extends RackspaceAbstract
                     'content_type' => $result->getHeader(self::HEADER_CONTENT_TYPE),
                     'file' => $result->getBody()
                 );
-                return new Object($this,$data);
+                return new Files\Object($this,$data);
             case '404':
-                $this->_errorMsg= self::ERROR_OBJECT_NOT_FOUND;
+                $this->errorMsg= self::ERROR_OBJECT_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -363,13 +358,13 @@ class Files extends RackspaceAbstract
      */
     public function storeObject($container,$object,$file,$metadata=array()) {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         if (empty($object)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
         }
         if (empty($file)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_FILE);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_FILE);
         }
         if (!empty($metadata) && is_array($metadata)) {
             foreach ($metadata as $key => $value) {
@@ -384,16 +379,16 @@ class Files extends RackspaceAbstract
             case '201': // break intentionally omitted
                 return true;
             case '412':
-                $this->_errorMsg= self::ERROR_OBJECT_MISSING_PARAM;
+                $this->errorMsg= self::ERROR_OBJECT_MISSING_PARAM;
                 break;
             case '422':
-                $this->_errorMsg= self::ERROR_OBJECT_CHECKSUM;
+                $this->errorMsg= self::ERROR_OBJECT_CHECKSUM;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -405,10 +400,10 @@ class Files extends RackspaceAbstract
      */
     public function deleteObject($container,$object) {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         if (empty($object)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container).'/'.rawurlencode($object),HttpClient::DELETE);
         $status= $result->getStatus();
@@ -416,13 +411,13 @@ class Files extends RackspaceAbstract
             case '204': // break intentionally omitted
                 return true;
             case '404':
-                $this->_errorMsg= self::ERROR_OBJECT_NOT_FOUND;
+                $this->errorMsg= self::ERROR_OBJECT_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -438,16 +433,16 @@ class Files extends RackspaceAbstract
      */
     public function copyObject($container_source,$obj_source,$container_dest,$obj_dest,$metadata=array(),$content_type=null) {
         if (empty($container_source)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_SOURCE_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_SOURCE_CONTAINER);
         }
         if (empty($obj_source)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_SOURCE_OBJECT);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_SOURCE_OBJECT);
         }
         if (empty($container_dest)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_DEST_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_DEST_CONTAINER);
         }
         if (empty($obj_dest)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_DEST_OBJECT);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_DEST_OBJECT);
         }
         $headers= array(
             self::HEADER_COPY_FROM => '/'.rawurlencode($container_source).'/'.rawurlencode($obj_source),
@@ -468,10 +463,10 @@ class Files extends RackspaceAbstract
             case '201': // break intentionally omitted
                 return true;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -483,10 +478,10 @@ class Files extends RackspaceAbstract
      */
     public function getMetadataObject($container,$object) {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         if (empty($object)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container).'/'.rawurlencode($object),HttpClient::HEAD);
         $status= $result->getStatus();
@@ -511,13 +506,13 @@ class Files extends RackspaceAbstract
                 );
                 return $data;
             case '404':
-                $this->_errorMsg= self::ERROR_OBJECT_NOT_FOUND;
+                $this->errorMsg= self::ERROR_OBJECT_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -532,10 +527,10 @@ class Files extends RackspaceAbstract
     public function setMetadataObject($container,$object,$metadata=array())
     {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         if (empty($object)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
         }
         $headers=array();
         if (!empty($metadata) && is_array($metadata)) {
@@ -549,13 +544,13 @@ class Files extends RackspaceAbstract
             case '202': // break intentionally omitted
                 return true;
             case '404':
-                $this->_errorMsg= self::ERROR_OBJECT_NOT_FOUND;
+                $this->errorMsg= self::ERROR_OBJECT_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -567,13 +562,13 @@ class Files extends RackspaceAbstract
      */
     public function enableCdnContainer ($container,$ttl=self::CDN_TTL_MIN) {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $headers=array();
         if (is_numeric($ttl) && ($ttl>=self::CDN_TTL_MIN) && ($ttl<=self::CDN_TTL_MAX)) {
             $headers[self::CDN_TTL]= $ttl;
         } else {
-            throw new InvalidArgumentException(self::ERROR_CDN_TTL_OUT_OF_RANGE);
+            throw new Exception\InvalidArgumentException(self::ERROR_CDN_TTL_OUT_OF_RANGE);
         }
         $result= $this->httpCall($this->getCdnUrl().'/'.rawurlencode($container),HttpClient::PUT,$headers);
         $status= $result->getStatus();
@@ -585,13 +580,13 @@ class Files extends RackspaceAbstract
                 );
                 return $data;
             case '404':
-                $this->_errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
+                $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -606,17 +601,17 @@ class Files extends RackspaceAbstract
     public function updateCdnContainer($container,$ttl=null,$cdn_enabled=null,$log=null)
     {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         if (empty($ttl) && (!isset($cdn_enabled)) && (!isset($log))) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_UPDATE_CDN);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_UPDATE_CDN);
         }
         $headers=array();
         if (isset($ttl)) {
             if (is_numeric($ttl) && ($ttl>=self::CDN_TTL_MIN) && ($ttl<=self::CDN_TTL_MAX)) {
                 $headers[self::CDN_TTL]= $ttl;
             } else {
-                throw new InvalidArgumentException(self::ERROR_CDN_TTL_OUT_OF_RANGE);
+                throw new Exception\InvalidArgumentException(self::ERROR_CDN_TTL_OUT_OF_RANGE);
             }
         }
         if (isset($cdn_enabled)) {
@@ -643,13 +638,13 @@ class Files extends RackspaceAbstract
                 );
                 return $data;
             case '404':
-                $this->_errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
+                $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
     /**
@@ -660,7 +655,7 @@ class Files extends RackspaceAbstract
      */
     public function getInfoCdn($container) {
         if (empty($container)) {
-            throw new InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $result= $this->httpCall($this->getCdnUrl().'/'.rawurlencode($container),HttpClient::HEAD);
         $status= $result->getStatus();
@@ -675,13 +670,13 @@ class Files extends RackspaceAbstract
                 $data['log_retention']= (strtolower($result->getHeader(self::CDN_LOG_RETENTION))!=='false');
                 return $data;
             case '404':
-                $this->_errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
+                $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
                 break;
             default:
-                $this->_errorMsg= $result->getBody();
+                $this->errorMsg= $result->getBody();
                 break;
         }
-        $this->_errorStatus= $status;
+        $this->errorCode= $status;
         return false;
     }
 }

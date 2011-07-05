@@ -50,7 +50,7 @@ class Servers extends Rackspace
      * Get the list of the servers
      * If $details is true returns detail info
      * 
-     * @param boolean $details
+     * @param  boolean $details
      * @return Zend\Service\Rackspace\Servers\ServerList|boolean
      */
     public function listServers($details=false)
@@ -85,7 +85,7 @@ class Servers extends Rackspace
     /**
      * Get the specified server
      * 
-     * @param string $id 
+     * @param  string $id 
      * @return Zend\Service\Rackspace\Servers\Server
      */
     public function getServer($id) 
@@ -122,7 +122,7 @@ class Servers extends Rackspace
     /**
      * Get the server info as an array
      * 
-     * @param string $id
+     * @param  string $id
      * @return array|boolean 
      */
     public function getServerInfo($id)
@@ -162,9 +162,9 @@ class Servers extends Rackspace
      * The required parameters are specified in $data (name, imageId, falvorId)
      * The $files is an associative array with 'serverPath' => 'localPath'
      * 
-     * @param array $data 
-     * @param array $metadata
-     * @param array $files
+     * @param  array $data 
+     * @param  array $metadata
+     * @param  array $files
      * @return Zend\Service\Rackspace\Servers\Server|boolean
      */
     public function createServer(array $data, $metadata=array(),$files=array())
@@ -287,8 +287,8 @@ class Servers extends Rackspace
     /**
      * Change the server's name
      * 
-     * @param string $id
-     * @param string $name
+     * @param  string $id
+     * @param  string $name
      * @return boolean 
      */
     public function changeServerName($id,$name)
@@ -304,8 +304,8 @@ class Servers extends Rackspace
     /**
      * Change the admin password of the server
      * 
-     * @param string $id
-     * @param string $password
+     * @param  string $id
+     * @param  string $password
      * @return boolean 
      */
     public function changeServerPassword($id,$password)
@@ -321,7 +321,7 @@ class Servers extends Rackspace
     /**
      * Delete a server
      * 
-     * @param string $id
+     * @param  string $id
      * @return boolean 
      */
     public function deleteServer($id)
@@ -359,7 +359,7 @@ class Servers extends Rackspace
     /**
      * Get the server's IPs (public and private)
      * 
-     * @param string $id
+     * @param  string $id
      * @return array|boolean 
      */
     public function getServerIp($id)
@@ -393,7 +393,7 @@ class Servers extends Rackspace
     /**
      * Get the Public IPs of a server
      * 
-     * @param string $id
+     * @param  string $id
      * @return array|boolean
      */
     public function getServerPublicIp($id)
@@ -407,7 +407,7 @@ class Servers extends Rackspace
     /**
      * Get the Private IPs of a server
      * 
-     * @param string $id
+     * @param  string $id
      * @return array|boolean
      */
     public function getServerPrivateIp($id)
@@ -684,7 +684,7 @@ class Servers extends Rackspace
      * the original server is removed and cannot be rolled back to. All resizes are automatically
      * confirmed after 24 hours if they are not explicitly confirmed or reverted.
      *
-     * @param type $id
+     * @param  string $id
      * @return boolean 
      */
     public function confirmResizeServer($id)
@@ -735,7 +735,7 @@ class Servers extends Rackspace
      * automatically confirmed after 24 hours if they have not already been confirmed explicitly or
      * reverted.
      *
-     * @param type $id
+     * @param  string $id
      * @return boolean 
      */
     public function revertResizeServer($id)
@@ -782,7 +782,7 @@ class Servers extends Rackspace
      * 
      * If $details is true returns detail info
      * 
-     * @param boolean $details
+     * @param  boolean $details
      * @return array|boolean
      */
     public function listFlavors($details=false)
@@ -817,7 +817,7 @@ class Servers extends Rackspace
     /**
      * Get the detail of a flavor
      * 
-     * @param string $flavorId
+     * @param  string $flavorId
      * @return array|boolean
      */
     public function getFlavor($flavorId)
@@ -851,7 +851,7 @@ class Servers extends Rackspace
     /**
      * Get the list of the images
      * 
-     * @param boolean $details
+     * @param  boolean $details
      * @return Zend\Service\Rackspace\Servers\ImageList|boolean 
      */
     public function listImages($details=false)
@@ -886,7 +886,7 @@ class Servers extends Rackspace
     /**
      * Get detail about an image
      * 
-     * @param string $id
+     * @param  string $id
      * @return Zend\Service\Rackspace\Servers\Image|boolean
      */
     public function getImage($id)
@@ -920,7 +920,7 @@ class Servers extends Rackspace
     /**
      * Get the info of an image as an array
      * 
-     * @param string $id
+     * @param  string $id
      * @return array|boolean 
      */
     public function getImageInfo($id)
@@ -957,8 +957,8 @@ class Servers extends Rackspace
     /**
      * Create an image for a serverId
      * 
-     * @param string $serverId
-     * @param string $name 
+     * @param  string $serverId
+     * @param  string $name 
      * @return Zend\Service\Rackspace\Servers\Image
      */
     public function createImage($serverId,$name)
@@ -1010,7 +1010,7 @@ class Servers extends Rackspace
     /**
      * Delete an image
      * 
-     * @param string $id
+     * @param  string $id
      * @return boolean 
      */
     public function deleteImage($id)
@@ -1045,7 +1045,7 @@ class Servers extends Rackspace
     /**
      * Get the backup schedule of a server
      * 
-     * @param string $id server's Id
+     * @param  string $id server's Id
      * @return array|boolean 
      */
     public function getBackupSchedule($id)
@@ -1211,7 +1211,7 @@ class Servers extends Rackspace
     /**
      * Get the shared IP group
      * 
-     * @param integer $id
+     * @param  integer $id
      * @return Zend\Service\Rackspace\Servers\SharedIpGroup|boolean 
      */
     public function getSharedIpGroup($id)
@@ -1248,7 +1248,7 @@ class Servers extends Rackspace
     /**
      * Get the shared IP group info as an array
      * 
-     * @param integer $id
+     * @param  integer $id
      * @return array|boolean 
      */
     public function getSharedIpGroupInfo($id)
@@ -1329,7 +1329,7 @@ class Servers extends Rackspace
     /**
      * Delete a Shared Ip Group
      * 
-     * @param integer $id 
+     * @param  integer $id 
      * @return boolean
      */
     public function deleteSharedIpGroup($id)

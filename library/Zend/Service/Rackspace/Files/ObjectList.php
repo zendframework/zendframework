@@ -47,23 +47,23 @@ use Zend\Service\Rackspace\Files\Object,
 class ObjectList implements \Countable, \Iterator, \ArrayAccess
 {
     /**
-     * @var array Array of Zend\Service\GoGrid\Object
+     * @var array of Zend\Service\GoGrid\Object
      */
-    protected $_objects = array();
+    protected $objects = array();
     /**
      * @var int Iterator key
      */
-    protected $_iteratorKey = 0;
+    protected $iteratorKey = 0;
     /**
      * @var RackspaceFiles
      */
-    protected $_service;
+    protected $service;
     /**
      * The container name of the object list
      * 
      * @var string
      */
-    protected $_container;
+    protected $container;
     /**
      * __construct()
      *
@@ -81,8 +81,8 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
         if (empty($container)) {
             throw new InvalidArgumentException("You must pass the container of the object list");
         }
-        $this->_service= $service;
-        $this->_container= $container;
+        $this->service= $service;
+        $this->container= $container;
         $this->_constructFromArray($list);
     }
     /**
@@ -94,8 +94,8 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     private function _constructFromArray(array $list)
     {
         foreach ($list as $obj) {
-            $obj['container']= $this->_container;
-            $this->_addObject(new Object($this->_service,$obj));
+            $obj['container']= $this->container;
+            $this->_addObject(new Object($this->service,$obj));
         }
     }
     /**
@@ -106,7 +106,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     protected function _addObject (Object $obj)
     {
-        $this->_objects[] = $obj;
+        $this->objects[] = $obj;
         return $this;
     }
     /**
@@ -118,7 +118,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     public function count()
     {
-        return count($this->_objects);
+        return count($this->objects);
     }
     /**
      * Return the current element
@@ -129,7 +129,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     public function current()
     {
-        return $this->_objects[$this->_iteratorKey];
+        return $this->objects[$this->iteratorKey];
     }
     /**
      * Return the key of the current element
@@ -140,7 +140,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     public function key()
     {
-        return $this->_iteratorKey;
+        return $this->iteratorKey;
     }
     /**
      * Move forward to next element
@@ -151,7 +151,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     public function next()
     {
-        $this->_iteratorKey += 1;
+        $this->iteratorKey += 1;
     }
     /**
      * Rewind the Iterator to the first element
@@ -162,7 +162,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      */
     public function rewind()
     {
-        $this->_iteratorKey = 0;
+        $this->iteratorKey = 0;
     }
     /**
      * Check if there is a current element after calls to rewind() or next()
@@ -174,7 +174,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     public function valid()
     {
         $numItems = $this->count();
-        if ($numItems > 0 && $this->_iteratorKey < $numItems) {
+        if ($numItems > 0 && $this->iteratorKey < $numItems) {
             return true;
         } else {
             return false;
@@ -204,7 +204,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
-            return $this->_objects[$offset];
+            return $this->objects[$offset];
         } else {
             throw new OutOfBoundsException('Illegal index');
         }

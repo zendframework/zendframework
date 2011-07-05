@@ -184,7 +184,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->_files->authenticate());
         $this->assertFalse($this->_files->isSuccessful());
-        $this->assertEquals($this->_files->getErrorStatus(),'401');
+        $this->assertEquals($this->_files->getErrorCode(),'401');
         $this->assertEquals($this->_files->getErrorMsg(),'Bad username or password');
 
     }

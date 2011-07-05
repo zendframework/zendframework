@@ -23,79 +23,79 @@
 namespace Zend\Service\Rackspace\Files;
 
 use Zend\Service\Rackspace\Files as RackspaceFiles,
- Zend\Service\Rackspace\Exception\InvalidArgumentException;
+    Zend\Service\Rackspace\Exception;
 
 class Container
 {
-    const ERROR_PARAM_CONSTRUCT= 'You must pass a RackspaceFiles and an array';
-    const ERROR_PARAM_NO_NAME= 'You must pass the container name in the array (name)';
-    const ERROR_PARAM_NO_TTL= 'You must pass the CDN ttl of the container in the array (ttl)';
-    const ERROR_PARAM_NO_LOG_RETENTION= 'You must pass the CDN log retention of the container in the array (log_retention)';
-    const ERROR_PARAM_NO_CDN_URI= 'You must pass the CDN uri of the container in the array (cdn_uri)';
-    const ERROR_PARAM_NO_COUNT= 'You must pass the object count of the container in the array (count)';
-    const ERROR_PARAM_NO_BYTES= 'You must pass the byte size of the container in the array (bytes)';
+    const ERROR_PARAM_CONSTRUCT        = 'You must pass a RackspaceFiles and an array';
+    const ERROR_PARAM_NO_NAME          = 'You must pass the container name in the array (name)';
+    const ERROR_PARAM_NO_TTL           = 'You must pass the CDN ttl of the container in the array (ttl)';
+    const ERROR_PARAM_NO_LOG_RETENTION = 'You must pass the CDN log retention of the container in the array (log_retention)';
+    const ERROR_PARAM_NO_CDN_URI       = 'You must pass the CDN uri of the container in the array (cdn_uri)';
+    const ERROR_PARAM_NO_COUNT         = 'You must pass the object count of the container in the array (count)';
+    const ERROR_PARAM_NO_BYTES         = 'You must pass the byte size of the container in the array (bytes)';
     /**
      * @var string
      */
-    protected $_name;
+    protected $name;
     /**
      * Count total of object in the container
      *
      * @var integer
      */
-    protected $_objectCount;
+    protected $objectCount;
     /**
      * Size in byte of the container
      *
      * @var integer
      */
-    protected $_size;
+    protected $size;
     /**
      * @var array
      */
-    protected $_metadata = array();
+    protected $metadata = array();
     /**
      * If it's true means we called the getMetadata API
      * 
      * @var boolean
      */
-    private $_getMetadata = false;
+    protected $getMetadata = false;
     /**
      * The service that has created the container object
      *
-     * @var RackspaceFile
+     * @var Zend\Service\Rackspace\Files
      */
-    protected $_service;
+    protected $service;
     /**
      * CDN enabled
      * 
      * @var boolean
      */
-    protected $_cdn;
+    protected $cdn;
     /**
      * CDN URI
      *
      * @var string
      */
-    protected $_cdnUri;
+    protected $cdnUri;
     /**
      * CDN URI SSL
      *
      * @var string
      */
-    protected $_cdnUriSsl;
+    protected $cdnUriSsl;
     /**
      * TTL of the CDN container
      *
      * @var integer
      */
-    protected $_ttl;
+    protected $ttl;
     /**
      * Log retention enabled for the CDN
      *
      * @var boolean
      */
-    protected $_logRetention;
+    protected $logRetention;
     /**
      * __construct()
      *
@@ -134,22 +134,22 @@ class Container
                 throw new InvalidArgumentException(self::ERROR_PARAM_NO_BYTES);
             }
         }
-        $this->_service = $service;
-        $this->_name = $data['name'];
+        $this->service = $service;
+        $this->name = $data['name'];
         if (!empty($data['cdn_enabled'])) {
-            $this->_cdn= (strtolower($data['cdn_enabled'])!=='false');
-            $this->_ttl= $data['ttl'];
-            $this->_logRetention= (strtolower($data['log_retention'])!=='false');
-            $this->_cdnUri= $data['cdn_uri'];
+            $this->cdn= (strtolower($data['cdn_enabled'])!=='false');
+            $this->ttl= $data['ttl'];
+            $this->logRetention= (strtolower($data['log_retention'])!=='false');
+            $this->cdnUri= $data['cdn_uri'];
             if (!empty($data['cdn_uri_ssl'])) {
-                $this->_cdnUriSsl= $data['cdn_uri_ssl'];
+                $this->cdnUriSsl= $data['cdn_uri_ssl'];
             }
         } else  {
-            $this->_objectCount = $data['count'];
-            $this->_size = $data['bytes'];
+            $this->objectCount = $data['count'];
+            $this->size = $data['bytes'];
             if (!empty($data['metadata']) && is_array($data['metadata'])) {
-                $this->_metadata = $data['metadata'];
-                $this->_getMetadata = true;
+                $this->metadata = $data['metadata'];
+                $this->getMetadata = true;
             }
         }
     }
@@ -160,7 +160,7 @@ class Container
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
     /**
      * Get the size in bytes of the container
@@ -169,10 +169,10 @@ class Container
      */
     public function getSize()
     {
-        if (!isset($this->_size)) {
+        if (!isset($this->size)) {
             $null= $this->getMetadata();
         }
-        return $this->_size;
+        return $this->size;
     }
     /**
      * Get the total count of objects in the container
@@ -181,10 +181,10 @@ class Container
      */
     public function getObjectCount()
     {
-        if (!isset($this->_size)) {
+        if (!isset($this->size)) {
             $null= $this->getMetadata();
         }
-        return $this->_objectCount;
+        return $this->objectCount;
     }
     /**
      * Return true if the container is CDN enabled
@@ -193,21 +193,22 @@ class Container
      */
     public function isCdnEnabled()
     {
-        if (!isset($this->_cdn)) {
+        if (!isset($this->cdn)) {
             $this->updateCdnInfo();
         }
-        return $this->_cdn;
+        return $this->cdn;
     }
     /**
      * Get the TTL of the CDN
      * 
      * @return integer 
      */
-    public function getCdnTtl() {
-        if (!isset($this->_ttl)) {
+    public function getCdnTtl() 
+    {
+        if (!isset($this->ttl)) {
             $this->updateCdnInfo();
         }
-        return $this->_ttl;
+        return $this->ttl;
     }
     /**
      * Return true if the log retention is enabled for the CDN
@@ -216,10 +217,10 @@ class Container
      */
     public function isCdnLogEnabled()
     {
-        if (!isset($this->_logRetention)) {
+        if (!isset($this->logRetention)) {
             $this->updateCdnInfo();
         }
-        return $this->_logRetention;
+        return $this->logRetention;
     }
     /**
      * Get the CDN URI
@@ -228,10 +229,10 @@ class Container
      */
     public function getCdnUri()
     {
-        if (!isset($this->_cdnUri)) {
+        if (!isset($this->cdnUri)) {
             $this->updateCdnInfo();
         }
-        return $this->_cdnUri;
+        return $this->cdnUri;
     }
     /**
      * Get the CDN URI SSL
@@ -240,10 +241,10 @@ class Container
      */
     public function getCdnUriSsl()
     {
-        if (!isset($this->_cdnUriSsl)) {
+        if (!isset($this->cdnUriSsl)) {
             $this->updateCdnInfo();
         }
-        return $this->_cdnUriSsl;
+        return $this->cdnUriSsl;
     }
     /**
      * Get the metadata of the container
@@ -255,21 +256,21 @@ class Container
      */
     public function getMetadata($key=null)
     {
-        if (empty($this->_metadata) && (!$this->_getMetadata)) {
-            $result = $this->_service->getMetadataContainer($this->getName());
+        if (empty($this->metadata) && (!$this->getMetadata)) {
+            $result = $this->service->getMetadataContainer($this->getName());
             if (!empty($result)) {
-                $this->_objectCount = $result['tot_objects'];
-                $this->_size = $result['size'];
+                $this->objectCount = $result['tot_objects'];
+                $this->size = $result['size'];
                 if (!empty($result['metadata']) && is_array($result['metadata'])) {
-                    $this->_metadata = $result['metadata'];
+                    $this->metadata = $result['metadata'];
                 }
             }
-            $this->_getMetadata = true;
+            $this->getMetadata = true;
         }
-        if (!empty($this->_metadata[$key])) {
-            return $this->_metadata[$key];
+        if (!empty($this->metadata[$key])) {
+            return $this->metadata[$key];
         }
-        return $this->_metadata;
+        return $this->metadata;
     }
     /**
      * Get all the object of the container
@@ -278,7 +279,7 @@ class Container
      */
     public function getObjects()
     {
-        return $this->_service->getObjects($this->getName());
+        return $this->service->getObjects($this->getName());
     }
     /**
      * Get an object of the container
@@ -289,7 +290,7 @@ class Container
      */
     public function getObject($name, $headers=array())
     {
-        return $this->_service->getObject($this->getName(), $name, $headers);
+        return $this->service->getObject($this->getName(), $name, $headers);
     }
     /**
      * Add an object in the container
@@ -301,7 +302,7 @@ class Container
      */
     public function addObject($name, $file, $metadata=array())
     {
-        return $this->_service->storeObject($this->getName(), $name, $file, $metadata);
+        return $this->service->storeObject($this->getName(), $name, $file, $metadata);
     }
     /**
      * Delete an object in the container
@@ -311,7 +312,7 @@ class Container
      */
     public function deleteObject($obj)
     {
-        return $this->_service->deleteObject($this->getName(), $obj);
+        return $this->service->deleteObject($this->getName(), $obj);
     }
     /**
      * Copy an object to another container
@@ -325,7 +326,7 @@ class Container
      */
     public function copyObject($obj_source, $container_dest, $obj_dest, $metadata=array(), $content_type=null)
     {
-        return $this->_service->copyObject($this->getName(), $obj_source, $container_dest, $obj_dest, $metadata, $content_type);
+        return $this->service->copyObject($this->getName(), $obj_source, $container_dest, $obj_dest, $metadata, $content_type);
     }
     /**
      * Get the metadata of an object in the container
@@ -335,7 +336,7 @@ class Container
      */
     public function getMetadataObject($object)
     {
-        return $this->_service->getMetadataObject($this->getName(),$object);
+        return $this->service->getMetadataObject($this->getName(),$object);
     }
     /**
      * Set the metadata of an object in the container
@@ -344,8 +345,9 @@ class Container
      * @param array $metadata
      * @return boolean
      */
-    public function setMetadataObject($object,$metadata=array()) {
-        return $this->_service->setMetadataObject($this->getName(),$object,$metadata);
+    public function setMetadataObject($object,$metadata=array()) 
+    {
+        return $this->service->setMetadataObject($this->getName(),$object,$metadata);
     }
     /**
      * Enable the CDN for the container
@@ -353,14 +355,15 @@ class Container
      * @param integer $ttl
      * @return boolean
      */
-    public function enableCdn($ttl=RackspaceFiles::CDN_TTL_MIN) {
-        $result= $this->_service->enableCdnContainer($this->getName(),$ttl);
+    public function enableCdn($ttl=RackspaceFiles::CDN_TTL_MIN) 
+    {
+        $result= $this->service->enableCdnContainer($this->getName(),$ttl);
         if ($result!==false) {
-           $this->_cdn= true;
-           $this->_ttl= $ttl;
-           $this->_logRetention= true;
-           $this->_cdnUri= $result['cdn_uri'];
-           $this->_cdnUriSsl= $result['cdn_uri_ssl'];
+           $this->cdn= true;
+           $this->ttl= $ttl;
+           $this->logRetention= true;
+           $this->cdnUri= $result['cdn_uri'];
+           $this->cdnUriSsl= $result['cdn_uri_ssl'];
            return true;
         }
         return false;
@@ -370,10 +373,11 @@ class Container
      * 
      * @return boolean
      */
-    public function disableCdn() {
-        $result=  $this->_service->updateCdnContainer($this->getName(),null,false);
+    public function disableCdn() 
+    {
+        $result=  $this->service->updateCdnContainer($this->getName(),null,false);
         if ($result!==false) {
-            $this->_cdn= false;
+            $this->cdn= false;
             $this->_resetParamsCdn();
             return true;
         }
@@ -385,10 +389,11 @@ class Container
      * @param integer $ttl
      * @return boolean
      */
-    public function changeTtlCdn($ttl) {
-        $result=  $this->_service->updateCdnContainer($this->getName(),$ttl);
+    public function changeTtlCdn($ttl) 
+    {
+        $result=  $this->service->updateCdnContainer($this->getName(),$ttl);
         if ($result!==false) {
-            $this->_ttl= $ttl;
+            $this->ttl= $ttl;
             return true;
         }
         return false;
@@ -398,10 +403,11 @@ class Container
      *
      * @return boolean
      */
-    public function enableLogCdn() {
-        $result=  $this->_service->updateCdnContainer($this->getName(),null,null,true);
+    public function enableLogCdn() 
+    {
+        $result=  $this->service->updateCdnContainer($this->getName(),null,null,true);
         if ($result!==false) {
-            $this->_logRetention= true;
+            $this->logRetention= true;
             return true;
         }
         return false;
@@ -411,10 +417,11 @@ class Container
      *
      * @return boolean
      */
-    public function disableLogCdn() {
-        $result=  $this->_service->updateCdnContainer($this->getName(),null,null,false);
+    public function disableLogCdn() 
+    {
+        $result=  $this->service->updateCdnContainer($this->getName(),null,null,false);
         if ($result!==false) {
-             $this->_logRetention= false;
+             $this->logRetention= false;
             return true;
         }
         return false;
@@ -424,14 +431,15 @@ class Container
      *
      * @return boolean
      */
-    public function updateCdnInfo() {
-        $result=  $this->_service->getInfoCdn($this->getName());
+    public function updateCdnInfo() 
+    {
+        $result=  $this->service->getInfoCdn($this->getName());
         if ($result!==false) {
-            $this->_cdn= (strtolower($result['cdn_enabled'])!=='false');
-            $this->_ttl= $result['ttl'];
-            $this->_logRetention= (strtolower($result['log_retention'])!=='false');
-            $this->_cdnUri= $result['cdn_uri'];
-            $this->_cdnUriSsl= $result['cdn_uri_ssl'];
+            $this->cdn= (strtolower($result['cdn_enabled'])!=='false');
+            $this->ttl= $result['ttl'];
+            $this->logRetention= (strtolower($result['log_retention'])!=='false');
+            $this->cdnUri= $result['cdn_uri'];
+            $this->cdnUriSsl= $result['cdn_uri_ssl'];
             return true;
         }
         return false;
@@ -439,10 +447,11 @@ class Container
     /**
      * Reset all the parameters related to the CDN container
      */
-    private function _resetParamsCdn() {
-        $this->_ttl= null;
-        $this->_logRetention= null;
-        $this->_cdnUri= null;
-        $this->_cdnUriSsl= null;
+    private function _resetParamsCdn() 
+    {
+        $this->ttl= null;
+        $this->logRetention= null;
+        $this->cdnUri= null;
+        $this->cdnUriSsl= null;
     }
 }

@@ -605,7 +605,7 @@ define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL',     false);
 /**
  * Zend_Service_Rackspace tests
  */
-define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED', fals);
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED', false);
 define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER','insertUserName');
 define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY','insertKey');
 define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME','test-zf-rackspace');

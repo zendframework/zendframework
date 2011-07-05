@@ -94,9 +94,8 @@ class Server
      * @var Zend\Service\Rackspace\Servers
      */
     protected $service;
-    
     /**
-     * Construct
+     * Constructor
      *
      * @param RackspaceServers $service
      * @param array $data

@@ -32,12 +32,12 @@ abstract class Rackspace
     const API_FORMAT             = 'json';
     const USER_AGENT             = 'Zend\Service\Rackspace';
     const STORAGE_URL            = "X-Storage-Url";
-    const AUTHtoken              = "X-Auth-Token";
-    const AUTHuser_HEADER        = "X-Auth-User";
-    const AUTHkey_HEADER         = "X-Auth-Key";
-    const AUTHuser_HEADER_LEGACY = "X-Storage-User";
-    const AUTHkey_HEADER_LEGACY  = "X-Storage-Pass";
-    const AUTHtoken_LEGACY       = "X-Storage-Token";
+    const AUTHTOKEN              = "X-Auth-Token";
+    const AUTHUSER_HEADER        = "X-Auth-User";
+    const AUTHKEY_HEADER         = "X-Auth-Key";
+    const AUTHUSER_HEADER_LEGACY = "X-Storage-User";
+    const AUTHKEY_HEADER_LEGACY  = "X-Storage-Pass";
+    const AUTHTOKEN_LEGACY       = "X-Storage-Token";
     const CDNM_URL               = "X-CDN-Management-Url";
     const MANAGEMENT_URL         = "X-Server-Management-Url";
     /**
@@ -99,7 +99,7 @@ abstract class Rackspace
      */
     protected $managementUrl;
     /**
-     * __construct()
+     * Constructor
      *
      * You must pass the account and the Rackspace authentication key.
      * Optional: the authentication url (default is US)
@@ -155,7 +155,8 @@ abstract class Rackspace
      *
      * @return string|boolean
      */
-    public function getStorageUrl() {
+    public function getStorageUrl() 
+    {
         if (empty($this->storageUrl)) {
             if (!$this->authenticate()) {
                 return false;
@@ -168,7 +169,8 @@ abstract class Rackspace
      *
      * @return string|boolean
      */
-    public function getCdnUrl() {
+    public function getCdnUrl() 
+    {
         if (empty($this->cdnUrl)) {
             if (!$this->authenticate()) {
                 return false;
@@ -243,19 +245,21 @@ abstract class Rackspace
         return $this->token;
     }
     /**
-     * Get the error msg of the last REST call
+     * Get the error msg of the last HTTP call
      *
      * @return string
      */
-    public function getErrorMsg() {
+    public function getErrorMsg() 
+    {
         return $this->errorMsg;
     }
     /**
-     * Get the error code of the last REST call
+     * Get the error code of the last HTTP call
      * 
      * @return strig 
      */
-    public function getErrorCode() {
+    public function getErrorCode() 
+    {
         return $this->errorCode;
     }
     /**
@@ -293,8 +297,8 @@ abstract class Rackspace
     {
         $client = $this->getHttpClient();
         $client->resetParameters(true);
-        if (empty($headers[self::AUTHuser_HEADER])) {
-            $headers[self::AUTHtoken]= $this->getToken();
+        if (empty($headers[self::AUTHUSER_HEADER])) {
+            $headers[self::AUTHTOKEN]= $this->getToken();
         } 
         $client->setMethod($method);
         if (empty($get['format'])) {
@@ -321,12 +325,12 @@ abstract class Rackspace
     public function authenticate()
     {
         $headers= array (
-            self::AUTHuser_HEADER => $this->user,
-            self::AUTHkey_HEADER => $this->key
+            self::AUTHUSER_HEADER => $this->user,
+            self::AUTHKEY_HEADER => $this->key
         );
         $result= $this->httpCall($this->authUrl.'/'.self::VERSION,HttpClient::GET, $headers);
         if ($result->getStatus()==204) {
-            $this->token= $result->getHeader(self::AUTHtoken);
+            $this->token= $result->getHeader(self::AUTHTOKEN);
             $this->storageUrl= $result->getHeader(self::STORAGE_URL);
             $this->cdnUrl= $result->getHeader(self::CDNM_URL);
             $this->managementUrl= $result->getHeader(self::MANAGEMENT_URL);

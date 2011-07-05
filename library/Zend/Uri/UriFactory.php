@@ -94,7 +94,6 @@ abstract class UriFactory
         
         if ($scheme && isset(static::$_schemeClasses[$scheme])) {
             $class = static::$_schemeClasses[$scheme];
-            \Zend\Loader::loadClass($class); 
             $uri = new $class($uri);
             if (! $uri instanceof Uri) { 
                 throw new \InvalidArgumentException("class '$class' registered for scheme '$scheme' is not a subclass of \\Zend\\Uri\\Uri");

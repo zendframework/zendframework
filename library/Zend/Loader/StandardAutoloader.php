@@ -236,6 +236,9 @@ class StandardAutoloader implements SplAutoloader
             }
             return false;
         }
+        if ($isFallback) {
+            return $this->loadClass($class, self::ACT_AS_FALLBACK);
+        }
         return false;
     }
 

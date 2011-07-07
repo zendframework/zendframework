@@ -27,7 +27,7 @@ use Zend\Tool\Framework\Provider,
     Zend\Tool\Framework\RegistryEnabled;
 
 /**
- * The purpose of Zend_Tool_Framework_Provider_Signature is to derive
+ * The purpose of Zend\Tool\Framework\Provider\Signature is to derive
  * callable signatures from the provided provider.
  *
  * @uses       \Zend\Reflection\ReflectionClass
@@ -301,10 +301,10 @@ class Signature implements RegistryEnabled
             }
 
             /**
-             * check to see if the method was a required method by a Zend_Tool_* interface
+             * check to see if the method was a required method by a Zend\Tool\* interface
              */
             foreach ($method->getDeclaringClass()->getInterfaces() as $methodDeclaringClassInterface) {
-                if (strpos($methodDeclaringClassInterface->getName(), 'Zend_Tool_') === 0
+                if (strpos($methodDeclaringClassInterface->getName(), 'Zend\\Tool\\') === 0
                     && $methodDeclaringClassInterface->hasMethod($methodName)) {
                     continue 2;
                 }

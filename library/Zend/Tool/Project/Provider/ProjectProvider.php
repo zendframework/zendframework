@@ -70,9 +70,9 @@ class ProjectProvider extends AbstractProvider
     }
 
     /**
-     * Create stub for Zend_Tool Project Provider
+     * Create stub for Zend\Tool Project Provider
      *
-     * @var string       $name            class name for new Zend_Tool Project Provider
+     * @var string       $name            class name for new Zend\Tool Project Provider
      * @var array|string $actions         list of provider methods
      * @throws \Zend\Tool\Project\Provider\Exception
      */

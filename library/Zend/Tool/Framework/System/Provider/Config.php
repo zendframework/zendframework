@@ -61,7 +61,7 @@ class Config extends AbstractProvider
      */
     public function create()
     {
-        /* @var $userConfig Zend_Tool_Framework_Client_Config */
+        /* @var $userConfig Zend\Tool\Framework\Client\Config */
         $userConfig = $this->_registry->getConfig();
 
         $resp = $this->_registry->getResponse();
@@ -239,7 +239,7 @@ class Config extends AbstractProvider
     {
         end\Loader::loadClass($className);
         $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend_Tool_Framework_Manifest_Interface", $reflClass->getInterfaceNames())) {
+        if (!in_array("Zend\\Tool\\Framework\\Manifest\\Interface", $reflClass->getInterfaceNames())) {
             throw new Framework\Exception("Given class is not a manifest.");
         }
         $this->_doEnable($className);
@@ -293,7 +293,7 @@ class Config extends AbstractProvider
      */
     protected function _loadUserConfigIfExists()
     {
-        /* @var $userConfig Zend_Tool_Framework_Client_Config */
+        /* @var $userConfig Zend\Tool\Framework\Client\Config */
         $userConfig = $this->_registry->getConfig();
 
         $resp = $this->_registry->getResponse();

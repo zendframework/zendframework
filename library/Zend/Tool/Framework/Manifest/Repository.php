@@ -115,7 +115,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
                 if (!$provider instanceof \Zend\Tool\Framework\Provider) {
                     throw new Exception\InvalidArgumentException(
                         'A provider provided by the ' . get_class($manifest)
-                        . ' does not implement Zend_Tool_Framework_Provider_Interface'
+                        . ' does not implement Zend\\Tool\\Framework\\Provider\\Interface'
                         );
                 }
                 if (!$providerRepository->hasProvider($provider, false)) {
@@ -160,7 +160,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
     /**
      * addMetadata() - add a metadata peice by peice
      *
-     * @param Zend_Tool_Framework_Manifest_Metadata $metadata
+     * @param Zend\Tool\Framework\Manifest\Metadata $metadata
      * @return \Zend\Tool\Framework\Manifest\Repository
      */
     public function addMetadata(Metadata $metadata)
@@ -193,7 +193,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
                     
                     if (!$metadata instanceof Metadata) {
                         throw new Exception\RuntimeException(
-                            'A Zend_Tool_Framework_Metadata_Interface object was not found in manifest ' . get_class($manifest)
+                            'A Zend\\Tool\\Framework\\Metadata\\Interface object was not found in manifest ' . get_class($manifest)
                             );
                     }
 
@@ -217,7 +217,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
      *
      * @param array $searchProperties
      * @param bool $includeNonExistentProperties
-     * @return Zend_Tool_Framework_Manifest_Metadata[]
+     * @return Zend\Tool\Framework\Manifest\Metadata[]
      */
     public function getMetadatas(Array $searchProperties = array(), $includeNonExistentProperties = true)
     {
@@ -259,7 +259,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
      *
      * @param array $searchProperties
      * @param bool $includeNonExistentProperties
-     * @return Zend_Tool_Framework_Manifest_Metadata
+     * @return Zend\Tool\Framework\Manifest\Metadata
      */
     public function getMetadata(Array $searchProperties = array(), $includeNonExistentProperties = true)
     {

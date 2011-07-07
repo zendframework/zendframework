@@ -63,7 +63,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
     protected $_providerSignatures = array();
 
     /**
-     * @var array Array of Zend_Tool_Framework_Provider_Inteface
+     * @var array Array of Zend\Tool\Framework\Provider\Inteface
      */
     protected $_providers = array();
 

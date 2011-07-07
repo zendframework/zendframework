@@ -8,8 +8,26 @@ use Zend\Code\Scanner\ClassScanner,
 
 class Compiler
 {
+    protected $introspectionRuleset = null;
     protected $codeScanners = array();
     protected $codeReflectors = array();
+    
+    public function setIntrospectionRuleset(IntrospectionRuleset $introspectionRuleset)
+    {
+        $this->introspectionRuleset = $introspectionRuleset;
+    }
+    
+    /**
+     * 
+     * @return Zend\Di\Definition\IntrospectionRuleset
+     */
+    public function getIntrospectionRuleset()
+    {
+        if ($this->introspectionRuleset == null) {
+            $this->introspectionRuleset = new IntrospectionRuleset();
+        }
+        return $this->introspectionRuleset;
+    }
     
     public function addCodeScannerDirectory(DirectoryScanner $scannerDirectory)
     {
@@ -80,10 +98,13 @@ class Compiler
     {
         $data      = array();
         $className = $scannerClass->getName();
+        $strategy  = $this->getStrategy();
         foreach ($scannerClass->getMethods(true) as $scannerMethod) {
             $methodName = $scannerMethod->getName();
             
             // determine initiator & constructor dependencies
+            $constructorRules = $strategy->getConstructorRules();
+            if ($constructorRules[''])
             if ($methodName === '__construct' && $scannerMethod->isPublic()) {
                 $params = $scannerMethod->getParameters(true);
                 if ($params) {

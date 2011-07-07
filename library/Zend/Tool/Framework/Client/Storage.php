@@ -48,10 +48,6 @@ class Storage
 
     public function setAdapter($adapter)
     {
-        if (is_string($adapter)) {
-            $storageAdapterClass = 'Zend\Tool\Framework\Client\Storage\\' . ucfirst($adapter);
-            $adapter = new $storageAdapterClass();
-        }
         $this->_adapter = $adapter;
     }
 

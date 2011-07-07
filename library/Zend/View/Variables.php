@@ -80,7 +80,7 @@ class Variables extends ArrayObject
         
         // Load each variable into the object using offsetSet() so that they
         // are escaped correctly.
-        foreach($variables as $key => $value) {
+        foreach ($variables as $key => $value) {
             $this->$key = $value;
         }
         $this->setOptions($options);

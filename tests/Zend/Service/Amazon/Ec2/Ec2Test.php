@@ -73,11 +73,16 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
         $this->assertType('\Zend\Service\Amazon\Ec2\Elasticip', $object);
     }
 
-
     public function testFactoryReturnsEbsObject()
     {
         $object = Ec2\Ec2::factory('ebs', 'access_key', 'secret_access_key');
         $this->assertType('\Zend\Service\Amazon\Ec2\Ebs', $object);
+    }
+
+    public function testFactoryReturnsAvailabilityZonesObject()
+    {
+        $object = Ec2\Ec2::factory('availabilityzones', 'access_key', 'secret_access_key');
+        $this->assertType('\Zend\Service\Amazon\Ec2\AvailabilityZones', $object);
     }
 
     public function testFactoryReturnImageObject()
@@ -98,5 +103,13 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
         $this->assertType('\Zend\Service\Amazon\Ec2\Securitygroups', $object);
     }
 
+    public function testFactoryWillFailInvalidSection()
+    {
+        try {
+            $object = Ec2\Ec2::factory('avaavaavailabilityzones', 'access_key', 'secret_access_key');
+            $this->fail('RuntimeException was expected but not thrown');    
+        } catch (Ec2\Exception\RuntimeException $e) {
+        }
+    }
 }
 

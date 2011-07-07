@@ -98,13 +98,13 @@ class Compiler
     {
         $data      = array();
         $className = $scannerClass->getName();
-        $strategy  = $this->getStrategy();
+        //$strategy  = $this->getStrategy();
         foreach ($scannerClass->getMethods(true) as $scannerMethod) {
             $methodName = $scannerMethod->getName();
             
             // determine initiator & constructor dependencies
-            $constructorRules = $strategy->getConstructorRules();
-            if ($constructorRules[''])
+            //$constructorRules = $strategy->getConstructorRules();
+            //if ($constructorRules[''])
             if ($methodName === '__construct' && $scannerMethod->isPublic()) {
                 $params = $scannerMethod->getParameters(true);
                 if ($params) {

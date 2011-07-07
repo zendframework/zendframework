@@ -19,11 +19,8 @@ class IntrospectionRuleset
         'pattern'             => 'set[A-Z]{1}\w*',
         'includedClasses'     => array(),
         'excludedClasses'     => array(),
-        /* 'includedMethods'     => array(),
-        'excludedMethods'     => array(), */
         'methodMaximumParams' => 1,
-        'paramTypeMustExist'  => true,
-        'paramCanBeOptional'  => false,
+        'paramCanBeOptional'  => true,
         );
     
     protected $interfaceRules = array(
@@ -71,13 +68,21 @@ class IntrospectionRuleset
         return $this;
     }
     
-    public function getRules()
+    public function getRules($ruleType)
     {
-        return array(
-            self::TYPE_CONSTRUCTOR => $this->construtorRules,
-            self::TYPE_SETTER => $this->setterRules,
-            self::TYPE_INTERFACE => $this->interfaceRules
-        );
+        if (!$ruleType) {
+            return array(
+                self::TYPE_CONSTRUCTOR => $this->construtorRules,
+                self::TYPE_SETTER => $this->setterRules,
+                self::TYPE_INTERFACE => $this->interfaceRules
+            );
+        } else {
+            switch ($ruleType) {
+                case self::TYPE_CONSTRUCTOR: return $this->construtorRules;
+                case self::TYPE_SETTER: return $this->setterRules;
+                case self::TYPE_INTERFACE: return $this->interfaceRules;
+            }
+        }
     }
     
     public function addConstructorRule($name, $value)

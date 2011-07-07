@@ -246,7 +246,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
             throw new Exception('Invalid feed type specified: ' . $type . '.'
             . ' Should be one of "rss" or "atom".');
         }
-        $renderClass = 'Renderer\\Feed\\' . $type;
+        $renderClass = '\\Zend\\Feed\\Writer\\Renderer\\Feed\\' . $type;
         $renderer = new $renderClass($this);
         if ($ignoreExceptions) {
             $renderer->ignoreExceptions();

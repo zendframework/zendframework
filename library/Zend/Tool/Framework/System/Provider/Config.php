@@ -66,13 +66,13 @@ class Config extends AbstractProvider
 
         $resp = $this->_registry->getResponse();
         if ($userConfig->exists()) {
-            throw new Framework\Exception(
+            throw new RuntimeException(
                 "A configuration already exists, cannot create a new one.");
         }
 
         $homeDirectory = $this->_detectHomeDirectory();
 
-        $writer = new end\Config\Writer\Ini();
+        $writer = new Zend\Config\Writer\Ini();
         $writer->setRenderWithoutSections();
         $filename = $homeDirectory."/.zf.ini";
 
@@ -81,7 +81,7 @@ class Config extends AbstractProvider
                 'includepath' => get_include_path(),
             ),
         );
-        $writer->write($filename, new end\Config\Config($config));
+        $writer->write($filename, new Zend\Config\Config($config));
 
         $resp = $this->_registry->getResponse();
         $resp->appendContent("Successfully written Zend Tool config.");
@@ -221,12 +221,12 @@ class Config extends AbstractProvider
                     array("color" => "green", "aligncenter" => true)
                 );
             } else {
-                throw new Framework\Exception(
+                throw new RuntimeException(
                     "Could not write user configuration to persistence."
                 );
             }
         } else {
-            throw new Framework\Exception(
+            throw new RuntimeException(
                 "Provider/Manifest '".$className."' is already enabled."
             );
         }
@@ -237,10 +237,9 @@ class Config extends AbstractProvider
      */
     public function enableManifest($className)
     {
-        end\Loader::loadClass($className);
         $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend\\Tool\\Framework\\Manifest\\Interface", $reflClass->getInterfaceNames())) {
-            throw new Framework\Exception("Given class is not a manifest.");
+        if (!in_array("Zend\\Tool\\Framework\\Manifest", $reflClass->getInterfaceNames())) {
+            throw new RuntimeException("Given class is not a manifest.");
         }
         $this->_doEnable($className);
     }
@@ -277,12 +276,12 @@ class Config extends AbstractProvider
                     array("color" => "green", "aligncenter" => true)
                 );
             } else {
-                throw new Framework\Exception(
+                throw new RuntimeException(
                     "Could not write user configuration to persistence."
                 );
             }
         } else {
-            throw new Framework\Exception(
+            throw new RuntimeException(
                 "Provider/Manifest '".$className."' is not enabled."
             );
         }

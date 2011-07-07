@@ -195,7 +195,7 @@ class Config
     public function getConfigInstance()
     {
         if(!$this->exists()) {
-            throw new Exception("Client has no persistent configuration.");
+            throw new Exception\RuntimeException("Client has no persistent configuration.");
         }
 
         return $this->_config;

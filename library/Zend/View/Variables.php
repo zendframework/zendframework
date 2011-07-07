@@ -73,10 +73,16 @@ class Variables extends ArrayObject
     public function __construct(array $variables = array(), array $options = array()) 
     {
         parent::__construct(
-            $variables, 
+            array(), 
             ArrayObject::STD_PROP_LIST|ArrayObject::ARRAY_AS_PROPS, 
             'ArrayIterator'
         );
+        
+        // Load each variable into the object using offsetSet() so that they
+        // are escaped correctly.
+        foreach($variables as $key => $value) {
+            $this->$key = $value;
+        }
         $this->setOptions($options);
     }
 

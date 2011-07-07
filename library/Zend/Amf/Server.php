@@ -791,7 +791,7 @@ class Server implements \Zend\Server\Server
 
         $this->_classAllowed[is_object($class) ? get_class($class) : $class] = true;
 
-        $this->_methods[] = Reflection\Reflection::reflectClass($class, $argv, $namespace);
+        $this->_methods[] = Reflection::reflectClass($class, $argv, $namespace);
         $this->_buildDispatchTable();
 
         return $this;
@@ -825,7 +825,7 @@ class Server implements \Zend\Server\Server
             if (!is_string($func) || !function_exists($func)) {
                 throw new Exception\InvalidArgumentException('Unable to attach function');
             }
-            $this->_methods[] = Reflection\Reflection::reflectFunction($func, $argv, $namespace);
+            $this->_methods[] = Reflection::reflectFunction($func, $argv, $namespace);
         }
 
         $this->_buildDispatchTable();

@@ -235,7 +235,7 @@ class DependencyInjectorTest extends TestCase
      * Test for Circular Dependencies (case 1)
      * 
      * A->B, B->A
-     * @group CircurlarDependencyCheck
+     * @group CircularDependencyCheck
      */
     public function testNewInstanceThrowsExceptionOnBasicCircularDependency()
     {
@@ -249,7 +249,7 @@ class DependencyInjectorTest extends TestCase
      * Test for Circular Dependencies (case 2)
      * 
      * C->D, D->E, E->C
-     * @group CircurlarDependencyCheck
+     * @group CircularDependencyCheck
      */
     public function testNewInstanceThrowsExceptionOnThreeLevelCircularDependency()
     {
@@ -266,7 +266,7 @@ class DependencyInjectorTest extends TestCase
      * Test for Circular Dependencies (case 2)
      * 
      * C->D, D->E, E->C
-     * @group CircurlarDependencyCheck
+     * @group CircularDependencyCheck
      */
     public function testNewInstanceThrowsExceptionWhenEnteringInMiddleOfCircularDependency()
     {

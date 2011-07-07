@@ -173,7 +173,7 @@ class DependencyInjector implements DependencyInjection
         
         $instantiator     = $definition->getInstantiator($class);
         $injectionMethods = $definition->getInjectionMethods($class);
-        
+
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params, $alias);
             if (in_array('__construct', $injectionMethods)) {
@@ -186,7 +186,7 @@ class DependencyInjector implements DependencyInjection
         } else {
             throw new Exception\RuntimeException('Invalid instantiator');
         }
-        
+
         if ($injectionMethods) {
             foreach ($injectionMethods as $injectionMethod) {
                 $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias);
@@ -262,7 +262,7 @@ class DependencyInjector implements DependencyInjection
         if ($this->definition->hasInjectionMethod($class, $method)) {
             $callParameters = $this->resolveMethodParameters($class, $method, $params, true);
         }
-        return call_user_func_array($callback, $callParameters);
+        return call_user_func_array($callback, $callParameters); 
     }
     
     /**
@@ -277,7 +277,9 @@ class DependencyInjector implements DependencyInjection
     {
         // @todo make sure to resolve the supertypes for both the object & definition
         $callParameters = $this->resolveMethodParameters(get_class($object), $method, $params, false, $alias);
-        call_user_func_array(array($object, $method), $callParameters);
+        if ($callParameters !== array_fill(0, count($callParameters), null)) {
+            call_user_func_array(array($object, $method), $callParameters);
+        }
     }
     
     /**
@@ -308,8 +310,10 @@ class DependencyInjector implements DependencyInjection
         
         $computedValueParams = array();
         $computedLookupParams = array();
+        $computedOptionalParams = array();
         
-        foreach ($injectionMethodParameters as $name => $type) {
+        foreach ($injectionMethodParameters as $name => $info) {
+            list($type, $isOptional, $isTypeInstantiable) = $info;
             
             // first consult user provided parameters
             if (isset($userParams[$name])) {
@@ -364,8 +368,12 @@ class DependencyInjector implements DependencyInjection
                 $computedValueParams[$name] = $this->instanceManager->getProperty($class, $name);
                 continue;
             }
+
+            if ($isOptional) {
+                $computedOptionalParams[$name] = true;
+            }
             
-            if ($type) {
+            if ($type && $isTypeInstantiable === true) {
                 $computedLookupParams[$name] = array($type, $type);
             }
             
@@ -373,18 +381,20 @@ class DependencyInjector implements DependencyInjection
 
         $index = 0;
         foreach ($injectionMethodParameters as $name => $value) {
-            
+
             if (isset($computedValueParams[$name])) {
                 $resolvedParams[$index] = $computedValueParams[$name];
             } elseif (isset($computedLookupParams[$name])) {
                 if ($isInstantiator && in_array($computedLookupParams[$name][1], $this->currentDependencies)) {
-                    throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on $value and viceversa");
+                    throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on {$value[0]} and viceversa");
                 }
                 array_push($this->currentDependencies, $class);
                 $resolvedParams[$index] = $this->get($computedLookupParams[$name][0], $userParams);
                 array_pop($this->currentDependencies);
-            } else {
+            } elseif (!array_key_exists($name, $computedOptionalParams)) {
                 throw new Exception\MissingPropertyException('Missing parameter named ' . $name . ' for ' . $class . '::' . $method);
+            } else {
+                $resolvedParams[$index] = null;
             }
             
             $index++;

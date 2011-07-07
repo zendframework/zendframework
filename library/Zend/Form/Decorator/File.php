@@ -25,8 +25,7 @@
 namespace Zend\Form\Decorator;
 
 use Zend\File\Transfer\Adapter,
-    Zend\Form\Element,
-    Zend\View\ViewEngine as View;
+    Zend\Form\Element;
 
 /**
  * Zend_Form_Decorator_File
@@ -92,8 +91,8 @@ class File extends AbstractDecorator implements FileDecorator
         }
 
         $view = $element->getView();
-        if (!$view instanceof View) {
-            return $content;
+        if (null === $view) {
+            throw new Exception\UnexpectedValueException('File decorator cannot render without a registered view object');
         }
 
         $name      = $element->getName();
@@ -108,13 +107,13 @@ class File extends AbstractDecorator implements FileDecorator
         $size      = $element->getMaxFileSize();
         if ($size > 0) {
             $element->setMaxFileSize(0);
-            $markup[] = $view->formHidden('MAX_FILE_SIZE', $size);
+            $markup[] = $view->broker('formHidden')->direct('MAX_FILE_SIZE', $size);
         }
 
         if (Adapter\Http::isApcAvailable()) {
-            $markup[] = $view->formHidden(ini_get('apc.rfc1867_name'), uniqid(), array('id' => 'progress_key'));
+            $markup[] = $view->broker('formHidden')->direct(ini_get('apc.rfc1867_name'), uniqid(), array('id' => 'progress_key'));
         } else if (Adapter\Http::isUploadProgressAvailable()) {
-            $markup[] = $view->formHidden('UPLOAD_IDENTIFIER', uniqid(), array('id' => 'progress_key'));
+            $markup[] = $view->broker('formHidden')->direct('UPLOAD_IDENTIFIER', uniqid(), array('id' => 'progress_key'));
         }
 
         if ($element->isArray()) {
@@ -123,10 +122,10 @@ class File extends AbstractDecorator implements FileDecorator
             for ($i = 0; $i < $count; ++$i) {
                 $htmlAttribs        = $attribs;
                 $htmlAttribs['id'] .= '-' . $i;
-                $markup[] = $view->formFile($name, $htmlAttribs);
+                $markup[] = $view->broker('formFile')->direct($name, null, $htmlAttribs);
             }
         } else {
-            $markup[] = $view->formFile($name, $attribs);
+            $markup[] = $view->broker('formFile')->direct($name, null, $attribs);
         }
 
         $markup = implode($separator, $markup);

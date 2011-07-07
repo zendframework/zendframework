@@ -64,43 +64,43 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
     public function testFactoryReturnsKeyPairObject()
     {
         $object = Ec2\Ec2::factory('keypair', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\Keypair', $object);
+        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Keypair', $object);
     }
 
     public function testFactoryReturnsElasticIpObject()
     {
         $object = Ec2\Ec2::factory('elasticip', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\Elasticip', $object);
+        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Elasticip', $object);
     }
 
     public function testFactoryReturnsEbsObject()
     {
         $object = Ec2\Ec2::factory('ebs', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\Ebs', $object);
+        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Ebs', $object);
     }
 
     public function testFactoryReturnsAvailabilityZonesObject()
     {
         $object = Ec2\Ec2::factory('availabilityzones', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\AvailabilityZones', $object);
+        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\AvailabilityZones', $object);
     }
 
     public function testFactoryReturnImageObject()
     {
         $object = Ec2\Ec2::factory('image', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\Image', $object);
+        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Image', $object);
     }
 
     public function testFactoryReturnsInstanceObject()
     {
         $object = Ec2\Ec2::factory('instance', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\Instance', $object);
+        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Instance', $object);
     }
 
     public function testFactoryReturnsSecurityGroupsObject()
     {
         $object = Ec2\Ec2::factory('security', 'access_key', 'secret_access_key');
-        $this->assertType('\Zend\Service\Amazon\Ec2\Securitygroups', $object);
+        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Securitygroups', $object);
     }
 
     public function testFactoryWillFailInvalidSection()

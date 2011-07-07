@@ -40,7 +40,7 @@ class Directory implements Adapter
     public function __construct($directoryPath)
     {
         if (!file_exists($directoryPath)) {
-            throw new \Zend\Tool\Framework\Client\Exception(__CLASS__ . ': the supplied directory does not exist');
+            throw new Exception\UnexpectedValueException(__CLASS__ . ': the supplied directory does not exist');
         }
         $this->_directoryPath = $directoryPath;
     }

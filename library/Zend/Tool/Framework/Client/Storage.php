@@ -25,7 +25,6 @@
 namespace Zend\Tool\Framework\Client;
 
 /**
- * @uses       \Zend\Loader
  * @uses       \Zend\Tool\Framework\Client\Storage\Adapter
  * @category   Zend
  * @package    Zend_Tool
@@ -51,7 +50,6 @@ class Storage
     {
         if (is_string($adapter)) {
             $storageAdapterClass = 'Zend\Tool\Framework\Client\Storage\\' . ucfirst($adapter);
-            \Zend\Loader::loadClass($storageAdapterClass);
             $adapter = new $storageAdapterClass();
         }
         $this->_adapter = $adapter;

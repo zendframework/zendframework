@@ -25,7 +25,8 @@
 namespace Zend\Form\Decorator;
 
 use Zend\File\Transfer\Adapter,
-    Zend\Form\Element;
+    Zend\Form\Element,
+    Zend\View\Renderer;
 
 /**
  * Zend_Form_Decorator_File
@@ -91,8 +92,8 @@ class File extends AbstractDecorator implements FileDecorator
         }
 
         $view = $element->getView();
-        if (null === $view) {
-            throw new Exception\UnexpectedValueException('File decorator cannot render without a registered view object');
+        if (!$view instanceof Renderer || !method_exists($view, 'broker')) {
+            throw new Exception\UnexpectedValueException('File decorator cannot render without a registered view object containing a broker() method');
         }
 
         $name      = $element->getName();

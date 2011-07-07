@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+use Zend\Locale\Locale;
+
 /**
  * @category   Zend
  * @package    Zend_resources
@@ -76,7 +78,7 @@ class resources_LanguagesTest extends PHPUnit_Framework_TestCase
     public function testIsLocale()
     {
         foreach ($this->_languages as $lang) {
-            if (!Zend\Locale\Locale::isLocale($lang, true)) {
+            if (!\Zend\Locale\Locale::isLocale($lang, true)) {
                 $this->fail("Language directory '{$lang}' not a valid locale");
             }
         }

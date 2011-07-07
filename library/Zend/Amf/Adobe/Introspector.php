@@ -24,6 +24,10 @@
 namespace Zend\Amf\Adobe;
 
 use Zend\Amf\Exception,
+    Zend\Reflection\ReflectionClass,
+    Zend\Reflection\ReflectionProperty,
+    Zend\Server\Reflection,
+    Zend\Server\Reflection\ReflectionClass as ServerReflectionClass,
     SplFileInfo;
 
 /**
@@ -105,7 +109,7 @@ class Introspector
         $this->_types = $this->_xml->createElement('types');
         $this->_ops   = $this->_xml->createElement('operations');
 
-        $r = \Zend\Server\Reflection::reflectClass($serviceClass);
+        $r = Reflection::reflectClass($serviceClass);
         $this->_addService($r, $this->_ops);
 
         $serv->appendChild($this->_types);
@@ -141,7 +145,7 @@ class Introspector
             return;
         }
 
-        $rc = new \Zend\Reflection\ReflectionClass($typename);
+        $rc = new ReflectionClass($typename);
         foreach ($rc->getProperties() as $prop) {
             if (!$prop->isPublic()) {
                 continue;
@@ -164,7 +168,7 @@ class Introspector
      * @param  DOMElement $target target XML element
      * @return void
      */
-    protected function _addService(\Zend\Server\Reflection\ReflectionClass $refclass, \DOMElement $target)
+    protected function _addService(ServerReflectionClass $refclass, \DOMElement $target)
     {
         foreach ($refclass->getMethods() as $method) {
             if (!$method->isPublic()
@@ -211,7 +215,7 @@ class Introspector
      * @param  \Zend\Reflection\ReflectionProperty $prop reflection property object
      * @return string Property type
      */
-    protected function _getPropertyType(\Zend\Reflection\ReflectionProperty $prop)
+    protected function _getPropertyType(ReflectionProperty $prop)
     {
         $docBlock = $prop->getDocComment();
 

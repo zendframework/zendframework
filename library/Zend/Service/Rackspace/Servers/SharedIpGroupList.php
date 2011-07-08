@@ -78,8 +78,8 @@ class SharedIpGroupList implements \Countable, \Iterator, \ArrayAccess
      */
     private function constructFromArray(array $list)
     {
-        foreach ($list as $shared) {
-            $this->addSharedIpGroup(new SharedIpGroup($this->service,$shared));
+        foreach ($list as $share) {
+            $this->addSharedIpGroup(new SharedIpGroup($this->service,$share));
         }
     }
     /**
@@ -88,10 +88,23 @@ class SharedIpGroupList implements \Countable, \Iterator, \ArrayAccess
      * @param  Zend\Service\Rackspace\Servers\SharedIpGroup $shared
      * @return Zend\Service\Rackspace\Servers\SharedIpGroupList
      */
-    protected function addSharedIpGroup (SharedIpGroup $shared)
+    protected function addSharedIpGroup (SharedIpGroup $share)
     {
-        $this->shared[] = $shared;
+        $this->shared[] = $share;
         return $this;
+    }
+    /**
+     * To Array
+     * 
+     * @return array 
+     */
+    public function toArray()
+    {
+        $array= array();
+        foreach ($this->shared as $share) {
+            $array[]= $share->toArray();
+        }
+        return $array;
     }
     /**
      * Return number of shared Ip Groups

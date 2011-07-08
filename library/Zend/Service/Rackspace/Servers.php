@@ -120,43 +120,6 @@ class Servers extends Rackspace
         return false;
     }
     /**
-     * Get the server info as an array
-     * 
-     * @param  string $id
-     * @return array|boolean 
-     */
-    public function getServerInfo($id)
-    {
-        if (empty($id)) {
-            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_ID);
-        }
-        $result= $this->httpCall($this->getManagementUrl().'/servers/'.rawurlencode($id),HttpClient::GET);
-        $status= $result->getStatus();
-        switch ($status) {
-            case '200' : 
-            case '203' : // break intentionally omitted   
-                $server = json_decode($result->getBody(),true);
-                return $server['server'];
-            case '503' :
-                $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
-                break;
-            case '401' :
-                $this->errorMsg= self::ERROR_UNAUTHORIZED;
-                break;
-            case '404' :
-                $this->errorMsg= self::ERROR_ITEM_NOT_FOUND;
-                break;
-            case '413' :
-                $this->errorMsg= self::ERROR_OVERLIMIT;
-                break;
-            default:
-                $this->errorMsg= $result->getBody();
-                break;
-        }
-        $this->errorCode= $status;
-        return false;
-    }
-    /**
      * Create a new server
      * 
      * The required parameters are specified in $data (name, imageId, falvorId)
@@ -364,31 +327,12 @@ class Servers extends Rackspace
      */
     public function getServerIp($id)
     {
-        if (empty($id)) {
-            throw new Exception\InvalidArgumentException('You didn\'t specified the ID of the server');
+        $result= $this->getServer($id);
+        if ($result===false) {
+            return false;
         }
-        $result= $this->httpCall($this->getManagementUrl().'/servers/'.rawurlencode($id).'/ips',HttpClient::GET);
-        $status= $result->getStatus();
-        switch ($status) {
-            case '200' : 
-            case '203' : // break intentionally omitted   
-                $addresses = json_decode($result->getBody(),true);
-                return $addresses['addresses'];
-            case '503' :
-                $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
-                break;
-            case '401' :
-                $this->errorMsg= self::ERROR_UNAUTHORIZED;
-                break;
-            case '413' :
-                $this->errorMsg= self::ERROR_OVERLIMIT;
-                break;
-            default:
-                $this->errorMsg= $result->getBody();
-                break;
-        }
-        $this->errorCode= $status;
-        return false;
+        $result= $result->toArray();
+        return $result['addresses'];
     }
     /**
      * Get the Public IPs of a server
@@ -399,10 +343,10 @@ class Servers extends Rackspace
     public function getServerPublicIp($id)
     {
         $addresses= $this->getServerIp($id);
-        if ($addresses!==false) {
-            return $addresses['public'];
+        if ($addresses===false) {
+            return false;
         }
-        return false;
+        return $addresses['public'];
     }
     /**
      * Get the Private IPs of a server
@@ -413,10 +357,10 @@ class Servers extends Rackspace
     public function getServerPrivateIp($id)
     {
         $addresses= $this->getServerIp($id);
-        if ($addresses!==false) {
-            return $addresses['private'];
+        if ($addresses===false) {
+            return false;
         }
-        return false;
+        return $addresses['private'];
     }
     /**
      * Share an ip address for a server (id)
@@ -918,43 +862,6 @@ class Servers extends Rackspace
         return false;
     }
     /**
-     * Get the info of an image as an array
-     * 
-     * @param  string $id
-     * @return array|boolean 
-     */
-    public function getImageInfo($id)
-    {
-        if (empty($id)) {
-            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_ID);
-        }
-        $result= $this->httpCall($this->getManagementUrl().'/images/'.rawurlencode($id),HttpClient::GET);
-        $status= $result->getStatus();
-        switch ($status) {
-            case '200' : 
-            case '203' : // break intentionally omitted   
-                $image = json_decode($result->getBody(),true);
-                return $image['image'];
-            case '503' :
-                $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
-                break;
-            case '401' :
-                $this->errorMsg= self::ERROR_UNAUTHORIZED;
-                break;
-            case '404' :
-                $this->errorMsg= self::ERROR_ITEM_NOT_FOUND;
-                break;
-            case '413' :
-                $this->errorMsg= self::ERROR_OVERLIMIT;
-                break;
-            default:
-                $this->errorMsg= $result->getBody();
-                break;
-        }
-        $this->errorCode= $status;
-        return false;
-    }
-    /**
      * Create an image for a serverId
      * 
      * @param  string $serverId
@@ -1226,43 +1133,6 @@ class Servers extends Rackspace
             case '203' : // break intentionally omitted   
                 $group= json_decode($result->getBody(),true);
                 return new Servers\SharedIpGroup($this,$group['sharedIpGroup']);
-            case '503' :
-                $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
-                break;
-            case '401' :
-                $this->errorMsg= self::ERROR_UNAUTHORIZED;
-                break;
-            case '404' :
-                $this->errorMsg= self::ERROR_ITEM_NOT_FOUND;
-                break;
-            case '413' :
-                $this->errorMsg= self::ERROR_OVERLIMIT;
-                break;
-            default:
-                $this->errorMsg= $result->getBody();
-                break;
-        }
-        $this->errorCode= $status;
-        return false;
-    }
-    /**
-     * Get the shared IP group info as an array
-     * 
-     * @param  integer $id
-     * @return array|boolean 
-     */
-    public function getSharedIpGroupInfo($id)
-    {
-        if (empty($id)) {
-            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_ID);
-        }
-        $result= $this->httpCall($this->getManagementUrl().'/shared_ip_groups/'.rawurlencode($id),HttpClient::GET);
-        $status= $result->getStatus();
-        switch ($status) {
-            case '200' : 
-            case '203' : // break intentionally omitted   
-                $group= json_decode($result->getBody(),true);
-                return $group['sharedIpGroup'];
             case '503' :
                 $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
                 break;

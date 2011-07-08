@@ -94,6 +94,19 @@ class ServerList implements \Countable, \Iterator, \ArrayAccess
         return $this;
     }
     /**
+     * To Array
+     * 
+     * @return array 
+     */
+    public function toArray()
+    {
+        $array= array();
+        foreach ($this->servers as $server) {
+            $array[]= $server->toArray();
+        }
+        return $array;
+    }
+    /**
      * Return number of servers
      *
      * Implement Countable::count()

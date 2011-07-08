@@ -25,11 +25,11 @@
 namespace ZendTest\Cloud\Infrastructure\Adapter;
 
 use Zend\Cloud\Infrastructure\Adapter,
-    Zend\Cloud\Infrastructure\Adapter\Ec2,
+    Zend\Cloud\Infrastructure\Adapter\Rackspace,
     Zend\Http\Client\Adapter\Socket,
     Zend\Cloud\Infrastructure\Instance;
 
-class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
+class RackspaceOnlineTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Timeout in seconds for status change
@@ -63,18 +63,18 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-        if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
-            self::markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Ec2 online tests are not enabled');
+        if (!constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED')) {
+            self::markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Rackspace online tests are not enabled');
         }
-        if(!defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
-            self::markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
+        if(!defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER') || !defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY')) {
+            self::markTestSkipped('Constants User and Key have to be set.');
         }
 
         self::$infrastructure = \Zend\Cloud\Infrastructure\Factory::getAdapter(array( 
-            \Zend\Cloud\Infrastructure\Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2', 
-            \Zend\Cloud\Infrastructure\Adapter\Ec2::AWS_ACCESS_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 
-            \Zend\Cloud\Infrastructure\Adapter\Ec2::AWS_SECRET_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'), 
-            \Zend\Cloud\Infrastructure\Adapter\Ec2::AWS_REGION     => constant('TESTS_ZEND_SERVICE_AMAZON_EC2_ZONE')   
+            \Zend\Cloud\Infrastructure\Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Rackspace', 
+            \Zend\Cloud\Infrastructure\Adapter\Rackspace::RACKSPACE_USER   => constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER'), 
+            \Zend\Cloud\Infrastructure\Adapter\Rackspace::RACKSPACE_KEY    => constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY'), 
+            \Zend\Cloud\Infrastructure\Adapter\Rackspace::RACKSPACE_REGION => constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_REGION')   
         )); 
 
         self::$httpClientAdapterSocket = new \Zend\Http\Client\Adapter\Socket();
@@ -99,9 +99,12 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstants()
     {
-        $this->assertEquals('aws_accesskey', Ec2::AWS_ACCESS_KEY);
-        $this->assertEquals('aws_secretkey', Ec2::AWS_SECRET_KEY);
-        $this->assertEquals('aws_region', Ec2::AWS_REGION);
+        $this->assertEquals('rackspace_user', Rackspace::RACKSPACE_USER);
+        $this->assertEquals('rackspace_key', Rackspace::RACKSPACE_KEY);
+        $this->assertEquals('rackspace_region', Rackspace::RACKSPACE_REGION);
+        $this->assertEquals('USA',Rackspace::RACKSPACE_ZONE_USA);
+        $this->assertEquals('UK',Rackspace::RACKSPACE_ZONE_UK);
+        $this->assertTrue(Rackspace::MONITOR_CPU_SAMPLES>0);
     }
     /**
      * Test construct with missing params
@@ -112,14 +115,14 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
             'Zend\Cloud\Infrastructure\Adapter\Exception\InvalidArgumentException',
             'Invalid options provided'
         );
-        $image = new Ec2('foo');
+        $instance = new Rackspace('foo');
     }
     /**
      * Test getAdapter
      */
     public function testGetAdapter()
     {
-        $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Instance',self::$infrastructure->getAdapter());
+        $this->assertInstanceOf('Zend\Service\Rackspace\Servers',self::$infrastructure->getAdapter());
     }
     /**
      * Test create an instance
@@ -127,13 +130,15 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     public function testCreateInstance()
     {
         $options = array (
-            Instance::INSTANCE_IMAGEID => constant('TESTS_ZEND_SERVICE_AMAZON_EC2_IMAGE_ID'),
-            Ec2::AWS_SECURITY_GROUP => array(constant('TESTS_ZEND_SERVICE_AMAZON_EC2_SECURITY_GROUP'))
+            'imageId'  => constant('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID'),
+            'flavorId' => constant('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_FLAVORID'),
+            'metadata' => array (
+                'foo' => 'bar'
+            )
         );
-        $instance = self::$infrastructure->createInstance('test', $options);
+        $instance = self::$infrastructure->createInstance(constant('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGE_NAME'), $options);
         self::$instanceId= $instance->getId();
-        $this->assertEquals(constant('TESTS_ZEND_SERVICE_AMAZON_EC2_IMAGE_ID'), $instance->getImageId());
-        $this->assertTrue(self::$infrastructure->WaitStatusInstance(self::$instanceId, Instance::STATUS_RUNNING));
+        $this->assertEquals(constant('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID'), $instance->getImageId());
     }
     /**
      * Test last HTTP request
@@ -165,15 +170,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     public function testListInstance()
     {
         $instances = self::$infrastructure->listInstances(self::$instanceId);
-        $found = false;
-        foreach ($instances as $instance) {
-            if ($instance->getId()==self::$instanceId) {
-                $found = true;
-                break;
-            }
-        }
-        $this->assertTrue($found);
-        unset($instances);
+        $this->assertTrue(!empty($instances));
     }
     /**
      * Test images instance
@@ -182,7 +179,6 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $images = self::$infrastructure->imagesInstance();
         $this->assertTrue(!empty($images));
-        unset($images);
     }
     /**
      * Test zones instance
@@ -197,10 +193,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function testMonitorInstance()
     {
-        $monitor= self::$infrastructure->monitorInstance(self::$instanceId,Instance::MONITOR_CPU);
-        $adapterResult= self::$infrastructure->getAdapterResult();
-        $this->assertTrue(!empty($adapterResult['label']));
-        unset($monitor);
+        $this->markTestSkipped('Test monitor instance skipped');
     }
     /**
      * Test deploy instance
@@ -239,6 +232,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function testDestroyInstance()
     {
+        $this->assertTrue(self::$infrastructure->WaitStatusInstance(self::$instanceId, Instance::STATUS_RUNNING));
         $this->assertTrue(self::$infrastructure->destroyInstance(self::$instanceId));
     }
 }
@@ -246,18 +240,18 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure\Adapter\Ec2
+ * @package    Zend\Cloud\Infrastructure\Adapter\Rackspace
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend\Cloud\Infrastructure
- * @group      Zend\Cloud\Infrastructure\Adapter\Ec2
+ * @group      Zend\Cloud\Infrastructure\Adapter\Rackspace
  */
 class Skip extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Ec2 online tests not enabled with an access key ID in '
+        $this->markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Rackspace online tests not enabled in '
                              . 'TestConfiguration.php');
     }
 

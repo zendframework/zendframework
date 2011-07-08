@@ -108,9 +108,12 @@ class SharedIpGroup
     public function getServersId()
     {
         if (empty($this->serversId)) {
-            $info= $this->service->getSharedIpGroupInfo($this->id);
-            if (($info!==false) && isset($info['servers'])) {
-                $this->serversId= $info['servers'];
+            $info= $this->service->getSharedIpGroup($this->id);
+            if (($info!==false)) {
+                $info= $info->toArray();
+                if (isset($info['servers'])) {
+                    $this->serversId= $info['servers'];
+                }
             }    
         }
         return $this->serversId;
@@ -143,5 +146,18 @@ class SharedIpGroup
     {
         $data['sharedIpGroupId']= (integer) $this->id;
         return $this->service->createServer($data,$metadata,$files);
+    }
+    /**
+     * To Array
+     * 
+     * @return array 
+     */
+    public function toArray()
+    {
+        return array (
+            'name'    => $this->name,
+            'id'      => $this->id,
+            'servers' => $this->serversId
+        );
     }
 }

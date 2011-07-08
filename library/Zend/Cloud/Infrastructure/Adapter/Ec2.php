@@ -11,17 +11,14 @@
 
 namespace Zend\Cloud\Infrastructure\Adapter;
 
-use Zend\Cloud\Infrastructure\Adapter,
-    Zend\Cloud\Infrastructure\Adapter\AbstractAdapter,
-    Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
+use Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
     Zend\Service\Amazon\Ec2\Image as Ec2Image,
     Zend\Service\Amazon\Ec2\AvailabilityZones as Ec2Zone,
     Zend\Service\Amazon\Ec2\CloudWatch as Ec2Monitor,
     Zend\Cloud\Infrastructure\Instance,    
     Zend\Cloud\Infrastructure\InstanceList,
     Zend\Cloud\Infrastructure\Image,
-    Zend\Cloud\Infrastructure\ImageList,
-    Zend\Cloud\Infrastructure\Adapter\Exception;
+    Zend\Cloud\Infrastructure\ImageList;
 
 /**
  * Amazon EC2 adapter for infrastructure service
@@ -36,9 +33,10 @@ class Ec2 extends AbstractAdapter
     /**
      * AWS constants
      */
-    const AWS_ACCESS_KEY = 'aws_accesskey';
-    const AWS_SECRET_KEY = 'aws_secretkey';
-    const AWS_REGION     = 'aws_region';
+    const AWS_ACCESS_KEY     = 'aws_accesskey';
+    const AWS_SECRET_KEY     = 'aws_secretkey';
+    const AWS_REGION         = 'aws_region';
+    const AWS_SECURITY_GROUP = 'securityGroup';
 
     /**
      * Ec2 Instance 
@@ -95,8 +93,13 @@ class Ec2 extends AbstractAdapter
      * @var array 
      */
     protected $mapStatus = array (
-        'running'    => Instance::STATUS_RUNNING,
-        'terminated' => Instance::STATUS_TERMINATED,
+        'running'       => Instance::STATUS_RUNNING,
+        'terminated'    => Instance::STATUS_TERMINATED,
+        'pending'       => Instance::STATUS_PENDING,
+        'shutting-down' => Instance::STATUS_SHUTTING_DOWN,
+        'stopping'      => Instance::STATUS_PENDING,
+        'stopped'       => Instance::STATUS_STOPPED,
+        'rebooting'     => Instance::STATUS_REBOOTING,
     );
 
     /**
@@ -120,12 +123,18 @@ class Ec2 extends AbstractAdapter
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Zend_Config) {
-            $options = $options->toArray();
+        if (is_object($options)) {
+            if (method_exists($options, 'toArray')) {
+                $options= $options->toArray();
+            } elseif ($options instanceof \Traversable) {
+                $options = iterator_to_array($options);
+            }
         }
-        if (!is_array($options)) {
+        
+        if (empty($options) || !is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options provided');
         }
+        
         if (!isset($options[self::AWS_ACCESS_KEY]) || !isset($options[self::AWS_SECRET_KEY])) {
             throw new Exception\InvalidArgumentException('AWS keys not specified!');
         }
@@ -147,7 +156,6 @@ class Ec2 extends AbstractAdapter
         if (isset($options[self::HTTP_ADAPTER])) {
             $this->ec2->getHttpClient()->setAdapter($options[self::HTTP_ADAPTER]);
         }
-        $this->options = $options;
     }
 
     /**
@@ -161,7 +169,7 @@ class Ec2 extends AbstractAdapter
         $result = array();       
         if (!empty($attr) && is_array($attr)) {
             $result[Instance::INSTANCE_ID]         = $attr['instanceId'];
-            $result[Instance::INSTANCE_STATUS]     = $attr['instanceState']['name'];
+            $result[Instance::INSTANCE_STATUS]     = $this->mapStatus[$attr['instanceState']['name']];
             $result[Instance::INSTANCE_PUBLICDNS]  = $attr['dnsName'];
             $result[Instance::INSTANCE_IMAGEID]    = $attr['imageId'];
             $result[Instance::INSTANCE_ZONE]       = $attr['availabilityZone'];
@@ -235,7 +243,7 @@ class Ec2 extends AbstractAdapter
             return false;
         }    
         $result = $this->adapterResult['instances'][0];
-        return $this->mapStatus[$result['instanteState']['name']];
+        return $this->mapStatus[$result['instanceState']['name']];
     }
 
     /**
@@ -255,7 +263,7 @@ class Ec2 extends AbstractAdapter
     }
 
     /**
-     * Reboot one or more instances
+     * Reboot an instance
      *
      * @param string $id
      * @return boolean
@@ -274,6 +282,7 @@ class Ec2 extends AbstractAdapter
      */ 
     public function createInstance($name, $options)
     {
+        // @todo instance's name management?
         $this->adapterResult = $this->ec2->run($options);
         if (empty($this->adapterResult)) {
             return false;
@@ -282,25 +291,25 @@ class Ec2 extends AbstractAdapter
     }
 
     /**
-     * Stop one or more instances
+     * Stop an instance
      *
      * @param  string $id
      * @return boolean
      */ 
     public function stopInstance($id)
     {
-        return $this->ec2->stop($id);
+       throw new Exception\RuntimeException('The stopInstance method is not implemented in the adapter');
     }
  
     /**
-     * Start one or more instances
+     * Start an instance
      *
      * @param  string $id
      * @return boolean
      */ 
     public function startInstance($id)
     {
-        return $this->ec2->start($id);
+        throw new Exception\RuntimeException('The startInstance method is not implemented in the adapter');
     }
  
     /**
@@ -311,7 +320,8 @@ class Ec2 extends AbstractAdapter
      */ 
     public function destroyInstance($id)
     {
-        return $this->ec2->terminate($id);
+        $this->adapterResult = $this->ec2->terminate($id);
+        return (!empty($this->adapterResult));
     }
  
     /**
@@ -373,7 +383,7 @@ class Ec2 extends AbstractAdapter
     }
 
     /**
-     * Return the system informations about the $metric of an instance
+     * Return the system information about the $metric of an instance
      * 
      * @param  string $id
      * @param  string $metric
@@ -421,13 +431,15 @@ class Ec2 extends AbstractAdapter
         $num                 = 0;
         $average             = 0;
 
-        foreach ($this->adapterResult['datapoints'] as $result) {
-            $monitor['series'][] = array (
-                'timestamp' => $result['Timestamp'],
-                'value'     => $result['Average'],
-            );
-            $average += $result['Average'];
-            $num++;
+        if (!empty($this->adapterResult['datapoints'])) {
+            foreach ($this->adapterResult['datapoints'] as $result) {
+                $monitor['series'][] = array (
+                    'timestamp' => $result['Timestamp'],
+                    'value'     => $result['Average'],
+                );
+                $average += $result['Average'];
+                $num++;
+            }
         }
 
         if ($num>0) {
@@ -435,58 +447,6 @@ class Ec2 extends AbstractAdapter
         }
         return $monitor;
     }
-
-    /**
-     * Run arbitrary shell script on an instance
-     *
-     * @param  string $id
-     * @param  array $param
-     * @param  string|array $cmd
-     * @return string|array
-     */ 
-    public function deployInstance($id, $params, $cmd)
-    {
-        if (!function_exists("ssh2_connect")) {
-            throw new Exception\RuntimeException('Deployment requires the PHP "SSH" extension (ext/ssh2)');
-        }
-        if (empty($id)) {
-            throw new Exception\InvalidArgumentException('You must specify the instance where to deploy');
-        }
-        if (empty($cmd)) {
-            throw new Exception\InvalidArgumentException('You must specify the shell commands to run on the instance');
-        }
-        if (empty($params) 
-            || empty($params[Instance::SSH_USERNAME]) 
-            || (empty($params[Instance::SSH_PASSWORD]) 
-                && empty($params[Instance::SSH_KEY]))
-        ) {
-            throw new Exception\InvalidArgumentException('You must specify the params for the SSH connection');
-        }
-        $host = $this->publicDnsInstance($id);
-        if (empty($host)) {
-            throw new Exception\RuntimeException(sprintf(
-                'The instance identified by "%s" does not exist', $id
-            ));
-        }
-        $conn = ssh2_connect($host);
-        if (!ssh2_auth_password($conn, $params[Instance::SSH_USERNAME], $params[Instance::SSH_PASSWORD])) {
-            throw new Exception\RuntimeException('SSH authentication failed');
-        }
-
-        if (is_array($cmd)) {
-            $result = array();
-            foreach ($cmd as $command) {
-                $stream = ssh2_exec($conn, $command);
-                stream_set_blocking($stream, true); 
-                $result[$command] = stream_get_contents($stream);
-            }
-        } else {
-            $stream = ssh2_exec($conn, $cmd);
-            $result = stream_set_blocking($stream, true); 
-        }    
-        return $result;
-    }
-
     /**
      * Get the adapter 
      * 

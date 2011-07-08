@@ -94,6 +94,19 @@ class ImageList implements \Countable, \Iterator, \ArrayAccess
         return $this;
     }
     /**
+     * To Array
+     * 
+     * @return array 
+     */
+    public function toArray()
+    {
+        $array= array();
+        foreach ($this->images as $image) {
+            $array[]= $image->toArray();
+        }
+        return $array;
+    }
+    /**
      * Return number of images
      *
      * Implement Countable::count()

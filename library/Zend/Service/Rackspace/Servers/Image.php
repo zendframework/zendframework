@@ -166,8 +166,9 @@ class Image
      */
     public function getStatus()
     {
-        $data= $this->service->getImageInfo($this->id);
-        if (!empty($data)) {
+        $data= $this->service->getImage($this->id);
+        if ($data!==false) {
+            $data= $data->toArray();
             $this->status= $data['status'];
             return $this->status;
         }
@@ -180,11 +181,29 @@ class Image
      */
     public function getProgress()
     {
-        $data= $this->service->getImageInfo($this->id);
-        if (!empty($data)) {
+        $data= $this->service->getImage($this->id);
+        if ($data!==false) {
+            $data= $data->toArray();
             $this->progress= $data['progress'];
             return $this->progress;
         }
         return false;
+    }
+    /**
+     * To Array
+     * 
+     * @return array 
+     */
+    public function toArray()
+    {
+        return array (
+            'name'     => $this->name,
+            'id'       => $this->id,
+            'serverId' => $this->serverId,
+            'updated'  => $this->updated,
+            'created'  => $this->created,
+            'status'   => $this->status,
+            'progress' => $this->progress
+        );
     }
 }

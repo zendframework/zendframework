@@ -50,10 +50,12 @@ abstract class AbstractAdapter implements Adapter
      */
     protected $validMetrics = array(
         Instance::MONITOR_CPU,
+        Instance::MONITOR_RAM,
+        Instance::MONITOR_DISK,
         Instance::MONITOR_DISK_READ,
         Instance::MONITOR_DISK_WRITE,
         Instance::MONITOR_NETWORK_IN,
-        Instance::MONITOR_NETWORK_OUT,
+        Instance::MONITOR_NETWORK_OUT
     );
 
     /**
@@ -86,5 +88,75 @@ abstract class AbstractAdapter implements Adapter
             $num += self::TIME_STEP_STATUS_CHANGE;
         }
         return ($num < $timeout);
+    }
+    /**
+     * Run arbitrary shell script on an instance
+     *
+     * @param  string $id
+     * @param  array $param
+     * @param  string|array $cmd
+     * @return string|array
+     */ 
+    public function deployInstance($id, $params, $cmd)
+    {
+        if (!function_exists("ssh2_connect")) {
+            throw new Exception\RuntimeException('Deployment requires the PHP "SSH" extension (ext/ssh2)');
+        }
+        if (empty($id)) {
+            throw new Exception\InvalidArgumentException('You must specify the instance where to deploy');
+        }
+        if (empty($cmd)) {
+            throw new Exception\InvalidArgumentException('You must specify the shell commands to run on the instance');
+        }
+        if (empty($params) 
+            || empty($params[Instance::SSH_USERNAME]) 
+            || (empty($params[Instance::SSH_PASSWORD]) 
+                && empty($params[Instance::SSH_KEY]))
+        ) {
+            throw new Exception\InvalidArgumentException('You must specify the params for the SSH connection');
+        }
+        $host = $this->publicDnsInstance($id);
+        if (empty($host)) {
+            throw new Exception\RuntimeException(sprintf(
+                'The instance identified by "%s" does not exist', $id
+            ));
+        }
+        $conn = ssh2_connect($host);
+        if (!ssh2_auth_password($conn, $params[Instance::SSH_USERNAME], $params[Instance::SSH_PASSWORD])) {
+            throw new Exception\RuntimeException('SSH authentication failed');
+        }
+
+        if (is_array($cmd)) {
+            $result = array();
+            foreach ($cmd as $command) {
+                $stream = ssh2_exec($conn, $command);     
+                $errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
+                stream_set_blocking($errorStream, true);
+                stream_set_blocking($stream, true); 
+                $output= stream_get_contents($stream);
+                $error= stream_get_contents($errorStream);
+                
+                if (empty($error)) {
+                    $result[$command] = $output;
+                } else {
+                    $result[$command] = $error;
+                }
+            }
+        } else {
+            $stream = ssh2_exec($conn, $cmd);
+            $result = stream_set_blocking($stream, true); 
+            $errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
+            stream_set_blocking($errorStream, true);
+            stream_set_blocking($stream, true); 
+            $output= stream_get_contents($stream);
+            $error= stream_get_contents($errorStream);
+            
+            if (empty($error)) {
+                $result = $output;
+            } else {
+                $result = $error;
+            }
+        }    
+        return $result;
     }
 }

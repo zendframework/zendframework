@@ -14,8 +14,6 @@
  */
 namespace Zend\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Exception;
-
 /**
  * Instance of an infrastructure service
  * 
@@ -57,9 +55,10 @@ class Image
      * @var array
      */
     protected $attributeRequired = array(
-        self::IMAGE_ID, self::IMAGE_OWNERID,
-        self::IMAGE_DESCRIPTION, self::IMAGE_PLATFORM,
-        self::IMAGE_ARCHITECTURE, self::IMAGE_NAME,
+        self::IMAGE_ID, 
+        self::IMAGE_DESCRIPTION, 
+        self::IMAGE_PLATFORM, 
+        self::IMAGE_ARCHITECTURE,
     );
 
     /**
@@ -70,6 +69,14 @@ class Image
      */
     public function __construct($data, $adapter=null) 
     {
+        if (is_object($data)) {
+            if (method_exists($data, 'toArray')) {
+                $data= $data->toArray();
+            } elseif ($data instanceof \Traversable) {
+                $data = iterator_to_array($data);
+            }
+        }
+        
         if (empty($data) || !is_array($data)) {
             throw new Exception\InvalidArgumentException('You must pass an array of parameters');
         }
@@ -77,7 +84,7 @@ class Image
         foreach ($this->attributeRequired as $key) {
             if (empty($data[$key])) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'The param "%s" is a required paramater for class %s',
+                    'The param "%s" is a required parameter for class %s',
                     $key, __CLASS__
                 ));
             }

@@ -14,9 +14,6 @@
  */
 namespace Zend\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Exception,
-    Zend\Cloud\Infrastructure\Adapter;
-
 /**
  * Instance of an infrastructure service
  *
@@ -32,6 +29,8 @@ class Instance
     const STATUS_SHUTTING_DOWN = 'shutting-down';
     const STATUS_REBOOTING     = 'rebooting';
     const STATUS_TERMINATED    = 'terminated';
+    const STATUS_PENDING       = 'pending';
+    const STATUS_REBUILD       = 'rebuild';
     const INSTANCE_ID          = 'id';
     const INSTANCE_IMAGEID     = 'imageId';
     const INSTANCE_NAME        = 'name';
@@ -43,8 +42,10 @@ class Instance
     const INSTANCE_ZONE        = 'zone';
     const INSTANCE_LAUNCHTIME  = 'launchTime';
     const MONITOR_CPU          = 'CpuUsage';
+    const MONITOR_RAM          = 'RamUsage';
     const MONITOR_NETWORK_IN   = 'NetworkIn';
     const MONITOR_NETWORK_OUT  = 'NetworkOut';
+    const MONITOR_DISK         = 'DiskUsage';
     const MONITOR_DISK_WRITE   = 'DiskWrite';
     const MONITOR_DISK_READ    = 'DiskRead';
     const MONITOR_START_TIME   = 'StartTime';
@@ -75,6 +76,10 @@ class Instance
     protected $attributeRequired = array(
         self::INSTANCE_ID,
         self::INSTANCE_STATUS,
+        self::INSTANCE_IMAGEID,
+        self::INSTANCE_ZONE,
+        self::INSTANCE_RAM,
+        self::INSTANCE_STORAGE,
     );
 
     /**
@@ -84,12 +89,20 @@ class Instance
      * @param  array $data 
      * @return void
      */
-    public function __construct(Adapter $adapter, array $data = null)
+    public function __construct(Adapter $adapter, $data = null)
     {
         if (!($adapter instanceof Adapter)) {
             throw new Exception\InvalidArgumentException("You must pass a Zend\Cloud\Infrastructure\Adapter instance");
         }
 
+        if (is_object($data)) {
+            if (method_exists($data, 'toArray')) {
+                $data= $data->toArray();
+            } elseif ($data instanceof \Traversable) {
+                $data = iterator_to_array($data);
+            }
+        }
+        
         if (empty($data) || !is_array($data)) {
             throw new Exception\InvalidArgumentException ("You must pass an array of params");
         }
@@ -167,10 +180,19 @@ class Instance
      */
     public function getStatus()
     {
-        if (!empty($this->attributes[self::INSTANCE_STATUS])) {
-            return $this->attributes[self::INSTANCE_STATUS];
-        }
-        return false;
+        return $this->adapter->statusInstance($this->attributes[self::INSTANCE_ID]);
+    }
+
+    /**
+     * Wait for status $status with a timeout of $timeout seconds
+     * 
+     * @param  string $status
+     * @param  integer $timeout 
+     * @return boolean
+     */
+    public function waitStatus($status,$timeout=Adapter::TIMEOUT_STATUS_CHANGE)
+    {
+        return $this->adapter->waitStatusInstance($this->attributes[self::INSTANCE_ID], $status, $timeout);
     }
 
     /**
@@ -180,6 +202,9 @@ class Instance
      */
     public function getPublicDns()
     {
+        if (!isset($this->attributes[self::INSTANCE_PUBLICDNS])) {
+            $this->attributes[self::INSTANCE_PUBLICDNS]= $this->adapter->publicDnsInstance($this->attributes[self::INSTANCE_ID]);
+        }
         return $this->attributes[self::INSTANCE_PUBLICDNS];
     }
 
@@ -277,7 +302,7 @@ class Instance
      * Return the system informations about the $metric of an instance
      * 
      * @param  string $metric
-     * @param  array $options
+     * @param  null|array $options
      * @return array|boolean
      */ 
     public function monitor($metric, $options = null)

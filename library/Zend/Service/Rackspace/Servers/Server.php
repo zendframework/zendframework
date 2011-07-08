@@ -201,8 +201,9 @@ class Server
      */
     public function getStatus()
     {
-        $data= $this->service->getServerInfo($this->id);
-        if (!empty($data)) {
+        $data= $this->service->getServer($this->id);
+        if ($data!==false) {
+            $data= $data->toArray();
             $this->status= $data['status'];
             return $this->status;
         }
@@ -215,8 +216,9 @@ class Server
      */
     public function getProgress()
     {
-        $data= $this->service->getServerInfo($this->id);
-        if (!empty($data)) {
+        $data= $this->service->getServer($this->id);
+        if ($data!==false) {
+            $data= $data->toArray();
             $this->progress= $data['progress'];
             return $this->progress;
         }
@@ -299,5 +301,25 @@ class Server
     public function reboot($hard=false)
     {
         return $this->service->rebootServer($this->id,$hard);
+    }
+    /**
+     * To Array
+     * 
+     * @return array 
+     */
+    public function toArray()
+    {
+        return array (
+            'name'      => $this->name,
+            'id'        => $this->id,
+            'imageId'   => $this->imageId,
+            'flavorId'  => $this->flavorId,
+            'hostId'    => $this->hostId,
+            'status'    => $this->status,
+            'progress'  => $this->progress,
+            'adminPass' => $this->adminPass,
+            'addresses' => $this->addresses,
+            'metadata'  => $this->metadata
+        );
     }
 }

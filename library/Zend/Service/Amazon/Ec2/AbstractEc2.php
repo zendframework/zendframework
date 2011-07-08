@@ -199,11 +199,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         $parameters['AWSAccessKeyId']   = $this->_getAccessKey();
         $parameters['SignatureVersion'] = $this->_ec2SignatureVersion;
         $parameters['Timestamp']        = gmdate('Y-m-d\TH:i:s\Z');
-        // @todo update the AWS API version
-        // hack to manage different services based on different API version 
-        if (!isset($parameters['Version'])) {
-            $parameters['Version']          = $this->_ec2ApiVersion;
-        }    
+        $parameters['Version']          = $this->_ec2ApiVersion;   
         $parameters['SignatureMethod']  = $this->_ec2SignatureMethod;
         $parameters['Signature']        = $this->signParameters($parameters);
 

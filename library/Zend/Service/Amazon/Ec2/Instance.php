@@ -344,7 +344,7 @@ class Instance extends AbstractEc2
         } elseif($instanceId) {
             $params['InstanceId.1'] = $instanceId;
         }
-
+        
         $response = $this->sendRequest($params);
         $xpath = $response->getXPath();
 
@@ -357,88 +357,6 @@ class Instance extends AbstractEc2
             $item['instanceId'] = $xpath->evaluate('string(ec2:instanceId/text())', $node);
             $item['shutdownState']['code'] = $xpath->evaluate('string(ec2:shutdownState/ec2:code/text())', $node);
             $item['shutdownState']['name'] = $xpath->evaluate('string(ec2:shutdownState/ec2:name/text())', $node);
-            $item['previousState']['code'] = $xpath->evaluate('string(ec2:previousState/ec2:code/text())', $node);
-            $item['previousState']['name'] = $xpath->evaluate('string(ec2:previousState/ec2:name/text())', $node);
-
-            $return[] = $item;
-            unset($item);
-        }
-
-        return $return;
-    }
-    /**
-     * Stop one or more instances. 
-     *
-     * @param string|array $instanceId      One or more instance IDs returned.
-     * @return array
-     */
-    public function stop($instanceId)
-    {
-        $params = array();
-        $params['Action'] = 'StopInstances';
-
-        if(is_array($instanceId) && !empty($instanceId)) {
-            foreach($instanceId as $k=>$name) {
-                $params['InstanceId.' . ($k+1)] = $name;
-            }
-        } elseif($instanceId) {
-            $params['InstanceId.1'] = $instanceId;
-        }
-
-        $params['Version']= '2011-05-15'; 
-        $response = $this->sendRequest($params);
-        $xpath = $response->getXPath();
-        
-        $nodes = $xpath->query('//ec2:instancesSet/ec2:item');
-
-        $return = array();
-        foreach($nodes as $node) {
-            $item = array();
-
-            $item['instanceId'] = $xpath->evaluate('string(ec2:instanceId/text())', $node);
-            $item['currentState']['code'] = $xpath->evaluate('string(ec2:currentState/ec2:code/text())', $node);
-            $item['currentState']['name'] = $xpath->evaluate('string(ec2:currentState/ec2:name/text())', $node);
-            $item['previousState']['code'] = $xpath->evaluate('string(ec2:previousState/ec2:code/text())', $node);
-            $item['previousState']['name'] = $xpath->evaluate('string(ec2:previousState/ec2:name/text())', $node);
-
-            $return[] = $item;
-            unset($item);
-        }
-
-        return $return;
-    }
-    /**
-     * Start one or more instances. 
-     *
-     * @param string|array $instanceId      One or more instance IDs returned.
-     * @return array
-     */
-    public function start($instanceId)
-    {
-        $params = array();
-        $params['Action'] = 'StartInstances';
-
-        if(is_array($instanceId) && !empty($instanceId)) {
-            foreach($instanceId as $k=>$name) {
-                $params['InstanceId.' . ($k+1)] = $name;
-            }
-        } elseif($instanceId) {
-            $params['InstanceId.1'] = $instanceId;
-        }
-
-        $params['Version']= '2011-05-15'; 
-        $response = $this->sendRequest($params);
-        $xpath = $response->getXPath();
-        
-        $nodes = $xpath->query('//ec2:instancesSet/ec2:item');
-
-        $return = array();
-        foreach($nodes as $node) {
-            $item = array();
-
-            $item['instanceId'] = $xpath->evaluate('string(ec2:instanceId/text())', $node);
-            $item['currentState']['code'] = $xpath->evaluate('string(ec2:currentState/ec2:code/text())', $node);
-            $item['currentState']['name'] = $xpath->evaluate('string(ec2:currentState/ec2:name/text())', $node);
             $item['previousState']['code'] = $xpath->evaluate('string(ec2:previousState/ec2:code/text())', $node);
             $item['previousState']['name'] = $xpath->evaluate('string(ec2:previousState/ec2:name/text())', $node);
 

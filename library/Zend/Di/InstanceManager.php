@@ -8,7 +8,9 @@ class InstanceManager implements InstanceCollection
      * Preferred Instances for classes and aliases
      * @var unknown_type
      */
-    protected $preferredInstances = array();
+    protected $generalTypePreferences = array();
+    
+    protected $specificTypePreferences = array();
     
     /**
      * Properties array
@@ -138,64 +140,67 @@ class InstanceManager implements InstanceCollection
             $this->setProperties($alias, $properties);
         }
         if ($preferredInstances) {
-            $this->setPreferredInstances($alias, $preferredInstances);
+            $this->setTypePreference($alias, $preferredInstances);
         }
     }
     
-    public function hasPreferredInstances($classOrAlias)
+    public function hasTypePreference($forType, $forSpecificInstance = null)
     {
-        $key = ($this->hasAlias($classOrAlias)) ? 'alias:' . $classOrAlias : $classOrAlias;
-        return (isset($this->preferredInstances[$key]) && $this->preferredInstances[$key]);
+        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        if ($forSpecificInstance) {
+            return (isset($this->specificTypePreferences[$forSpecificInstance]) && isset($this->specificTypePreferences[$forSpecificInstance][$key]));
+        } else {
+            return (isset($this->generalTypePreferences[$key]) && $this->generalTypePreferences[$key]);
+        }
     }
     
-    public function setPreferredInstances($classOrAlias, array $preferredInstances)
+    public function setTypePreference($forType, array $preferredInstances, $forSpecificInstance = null)
     {
-        $key = ($this->hasAlias($classOrAlias)) ? 'alias:' . $classOrAlias : $classOrAlias;
+        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
         foreach ($preferredInstances as $preferredInstance) {
-            $this->addPreferredInstance($key, $preferredInstance);
+            $this->addTypePreference($key, $preferredInstance);
         }
         return $this;
     }
 
-    public function getPreferredInstances($classOrAlias)
+    public function getTypePreference($forType, $forSpecificInstance = null)
     {
-        $key = ($this->hasAlias($classOrAlias)) ? 'alias:' . $classOrAlias : $classOrAlias;
-        if (isset($this->preferredInstances[$key])) {
-            return $this->preferredInstances[$key];
+        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        if (isset($this->generalTypePreferences[$key])) {
+            return $this->generalTypePreferences[$key];
         }
         return array();
     }
     
-    public function unsetPreferredInstances($classOrAlias)
+    public function unsetTypePreference($forType, $forSpecificInstance = null)
     {
-        $key = ($this->hasAlias($classOrAlias)) ? 'alias:' . $classOrAlias : $classOrAlias;
-        if (isset($this->preferredInstances[$key])) {
-            unset($this->preferredInstances[$key]);
+        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        if (isset($this->generalTypePreferences[$key])) {
+            unset($this->generalTypePreferences[$key]);
         }
         return false;
     }
     
-    public function addPreferredInstance($classOrAlias, $preferredInstance)
+    public function addTypePreference($forType, $preferredType, $forSpecificInstance = null)
     {
-        $key = ($this->hasAlias($classOrAlias)) ? 'alias:' . $classOrAlias : $classOrAlias;
-        if (!isset($this->preferredInstances[$key])) {
-            $this->preferredInstances[$key] = array();
+        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        if (!isset($this->generalTypePreferences[$key])) {
+            $this->generalTypePreferences[$key] = array();
         }
-        $this->preferredInstances[$key][] = $preferredInstance;
+        $this->typePreference[$key][] = $preferredType;
         return $this;
     }
 
-    public function removePreferredInstance($classOrAlias, $preferredInstance)
+    public function removeTypePreference($forType, $preferredType, $forSpecificInstance = null)
     {
-        $key = ($this->hasAlias($classOrAlias)) ? 'alias:' . $classOrAlias : $classOrAlias;
-        if (!isset($this->preferredInstances[$key]) || !in_array($preferredInstance, $this->preferredInstances[$key])) {
+        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        if (!isset($this->generalTypePreferences[$key]) || !in_array($preferredType, $this->generalTypePreferences[$key])) {
             return false;
         }
-        unset($this->preferredInstances[$key][array_search($key, $this->preferredInstances)]);
+        unset($this->typePreference[$key][array_search($key, $this->generalTypePreferences)]);
         return $this;
     }
     
-
     
     /**
      * (non-PHPdoc)

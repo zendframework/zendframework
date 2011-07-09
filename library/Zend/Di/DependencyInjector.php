@@ -204,6 +204,11 @@ class DependencyInjector implements DependencyInjection
         return $object;
     }
     
+    public function resolveObjectDependencies($object)
+    {
+        
+    }
+    
     /**
      * Retrieve a class instance based on class name
      *
@@ -305,7 +310,7 @@ class DependencyInjector implements DependencyInjection
         };
         
         $resolvedParams = array();
-        
+
         $injectionMethodParameters = $this->definition->getInjectionMethodParameters($class, $method);
         
         $computedValueParams = array();

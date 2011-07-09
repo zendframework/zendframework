@@ -88,8 +88,8 @@ class RuntimeDefinition implements Definition
     
     public function hasInjectionMethod($class, $method)
     {
-        $c = new \ReflectionClass($class);
-        return $c->hasMethod($method);
+        $injectionMethods = $this->getInjectionMethods($class);
+        return (array_key_exists($method, $injectionMethods));
     }
     
     public function getInjectionMethods($class)

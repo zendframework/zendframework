@@ -287,7 +287,7 @@ class DependencyInjectorTest extends TestCase
     public function testNewInstanceWillUsePreferredClassForInterfaceHints()
     {
         $di = new DependencyInjector();
-        $di->getInstanceManager()->addPreferredInstance(
+        $di->getInstanceManager()->addTypePreference(
             'ZendTest\Di\TestAsset\PreferredImplClasses\A',
             'ZendTest\Di\TestAsset\PreferredImplClasses\BofA'
         );

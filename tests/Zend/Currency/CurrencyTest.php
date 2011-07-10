@@ -564,7 +564,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-6560
+     * @group ZF-6560
      */
     public function testPrecisionForCurrency()
     {
@@ -579,7 +579,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-6561
+     * @group ZF-6561
      */
     public function testNegativeRendering()
     {
@@ -591,7 +591,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-7359
+     * @group ZF-7359
      */
     public function testPHPsScientificBug()
     {
@@ -601,7 +601,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-7864
+     * @group ZF-7864
      */
     public function testCurrencyToToCurrency()
     {

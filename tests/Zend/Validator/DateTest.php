@@ -98,7 +98,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that characters trailing an otherwise valid date cause the input to be invalid
      *
-     * @see    http://framework.zend.com/issues/browse/ZF-1804
+     * @group  ZF-1804
      * @return void
      */
     public function testCharactersTrailingInvalid()
@@ -112,7 +112,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that characters leading an otherwise valid date cause the input to be invalid
      *
-     * @see    http://framework.zend.com/issues/browse/ZF-1804
+     * @group  ZF-1804
      * @return void
      */
     public function testCharactersLeadingInvalid()
@@ -136,7 +136,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator can handle different manual dateformats
      *
-     * @see    http://framework.zend.com/issues/browse/ZF-2003
+     * @group  ZF-2003
      * @return void
      */
     public function testUseManualFormat()
@@ -162,7 +162,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator can handle different dateformats from locale
      *
-     * @see    http://framework.zend.com/issues/browse/ZF-2003
+     * @group  ZF-2003
      * @return void
      */
     public function testUseLocaleFormat()
@@ -200,7 +200,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator can handle different dateformats from locale
      *
-     * @see    http://framework.zend.com/issues/browse/ZF-2003
+     * @group  ZF-2003
      * @return void
      */
     public function testLocaleContructor()
@@ -258,7 +258,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
      * @param  integer $errline
      * @param  array   $errcontext
      * @return void
-     * @see    http://framework.zend.com/issues/browse/ZF-2789
+     * @group  ZF-2789
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
     {

@@ -155,7 +155,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2090
+     * @group ZF-2090
      */
     public function testSuccessfullyDetectsEmptyArrayParameterAsArray()
     {
@@ -176,9 +176,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-1412
-     *
-     * @return void
+     * @group ZF-1412
      */
     public function testSuccessfulRpcMethodCallWithMixedDateParameters()
     {
@@ -647,16 +645,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->xmlrpcClient->call('method'));
         $this->assertSame($expectedUserAgent, $this->httpClient->getHeader('user-agent'));
     }
-    
+
     /**
      * @group ZF-8478
      */
     public function testPythonSimpleXMLRPCServerWithUnsupportedMethodSignatures()
     {
-    	$introspector = new Client\ServerIntrospection(
+        $introspector = new Client\ServerIntrospection(
             new TestClient('http://localhost/')
             );
-        
+
         $this->setExpectedException('Zend\XmlRpc\Client\Exception\IntrospectException', 'Invalid signature for method "add"');
         $signature = $introspector->getMethodSignature('add');
     }
@@ -727,9 +725,9 @@ class PythonSimpleXMLRPCServerWithUnsupportedIntrospection extends Client\Server
 /** related to ZF-8478 */
 class TestClient extends Client {
     public function getProxy($namespace = '') {
-    	if (empty($this->_proxyCache[$namespace])) {
-    	    $this->_proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
-    	}
+        if (empty($this->_proxyCache[$namespace])) {
+            $this->_proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
+        }
         return parent::getProxy($namespace);
     }
 }

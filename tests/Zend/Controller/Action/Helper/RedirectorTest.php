@@ -425,8 +425,8 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/', $this->redirector->getRedirectUrl());
     }
 
-    /**#@+
-     * @see ZF-1734
+    /**
+     * @group ZF-1734
      */
     public function testPassingNullActionAndNullControllerWithModuleShouldGoToDefaultControllerAndActions()
     {
@@ -478,8 +478,6 @@ class RedirectorTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains('https://', $test);
         $this->assertEquals('http://localhost/bar/baz', $test);
     }
-
-    /**#@-*/
 }
 
 /**

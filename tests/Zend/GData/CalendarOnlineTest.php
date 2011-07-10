@@ -65,7 +65,7 @@ class CalendarOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-1701
+     * @group ZF-1701
      */
     /*
     public function testCalendarOnlineFeed()

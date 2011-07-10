@@ -284,8 +284,12 @@ abstract class AbstractDb extends AbstractValidator
          * Build select object
          */
         $select = new DBSelect($this->_adapter);
-        $select->from($this->_table, array($this->_field), $this->_schema)
-               ->where($this->_adapter->quoteIdentifier($this->_field, true).' = ?', $value);
+        $select->from($this->_table, array($this->_field), $this->_schema);
+        if ($db->supportsParameters(&apos;named&apos;)) {
+            $select->where($db->quoteIdentifier($this->_field, true).&apos; = :value&apos;); // named
+        } else {
+            $select->where($db->quoteIdentifier($this->_field, true).&apos; = ?&apos;); // positional
+        }
         if ($this->_exclude !== null) {
             if (is_array($this->_exclude)) {
                 $select->where($this->_adapter->quoteIdentifier($this->_exclude['field'], true).' != ?', $this->_exclude['value']);
@@ -298,7 +302,11 @@ abstract class AbstractDb extends AbstractValidator
         /**
          * Run query
          */
-        $result = $this->_adapter->fetchRow($select, array(), Db::FETCH_ASSOC);
+        $result = $this->_adapter->fetchRow(
+            $select,
+            array(&apos;value&apos; => $value), // this should work whether db supports positional or named params
+            Db::FETCH_ASSOC
+        );
 
         return $result;
     }

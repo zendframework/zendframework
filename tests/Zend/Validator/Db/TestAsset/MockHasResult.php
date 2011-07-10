@@ -34,6 +34,13 @@ use Zend\Db\Adapter\AbstractAdapter;
  */
 class MockHasResult extends AbstractAdapter
 {
+    protected $_supportsParametersValues = array('named' => true, 'positional' => true);
+
+    public function setSupportsParametersValues(array $supportsParametersValues)
+    {
+        $this->_supportsParametersValues = $supportsParametersValues;
+    }
+
     /**
      * Returns an array to emulate a result
      *
@@ -110,7 +117,10 @@ class MockHasResult extends AbstractAdapter
     }
     public function supportsParameters($type)
     {
-        return null;
+        if (in_array($type, $this->_supportsParametersValues)) {
+            return $this->_supportsParametersValues[$type];
+        }
+        return false;
     }
     public function getServerVersion()
     {

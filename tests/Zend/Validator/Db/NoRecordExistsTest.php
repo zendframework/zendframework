@@ -202,4 +202,22 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterNoResult);
         $this->assertTrue($validator->isValid('value1'));
     }
+
+    /**
+     *
+     * @group ZF-10705
+     */
+    public function testCreatesQueryBasedOnNamedOrPositionalAvailablity()
+    {
+        Zend_Db_Table_Abstract::setDefaultAdapter(null);
+        $this->_adapterHasResult->setSupportsParametersValues(array('named' => false, 'positional' => true));
+        $validator = new Zend_Validate_Db_RecordExists('users', 'field1', null, $this->_adapterHasResult);
+        $wherePart = $validator->getSelect()->getPart('where');
+        $this->assertEquals($wherePart[0], '("field1" = ?)');
+
+        $this->_adapterHasResult->setSupportsParametersValues(array('named' => true, 'positional' => true));
+        $validator = new Zend_Validate_Db_RecordExists('users', 'field1', null, $this->_adapterHasResult);
+        $wherePart = $validator->getSelect()->getPart('where');
+        $this->assertEquals($wherePart[0], '("field1" = :value)');
+    }
 }

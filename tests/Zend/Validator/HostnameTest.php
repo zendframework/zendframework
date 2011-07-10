@@ -398,4 +398,27 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    /**
+     * Ensure that a trailing "." in a local hostname is permitted
+     *
+     * @group ZF-6363
+     */
+    public function testTrailingDot()
+    {
+        $valuesExpected = array(
+            array(Hostname::ALLOW_ALL, true, array('example.', 'example.com.', '~ex%20ample.')),
+            array(Hostname::ALLOW_ALL, false, array('example..')),
+            array(Hostname::ALLOW_ALL, true, array('1.2.3.4.')),
+            array(Hostname::ALLOW_DNS, false, array('example..', '~ex%20ample..')),
+            array(Hostname::ALLOW_LOCAL, true, array('example.', 'example.com.')),
+        );
+
+        foreach ($valuesExpected as $element) {
+            $validator = new Hostname($element[0]);
+            foreach ($element[2] as $input) {
+                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+            }
+        }
+    }
 }

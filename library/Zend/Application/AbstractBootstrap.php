@@ -550,12 +550,15 @@ abstract class AbstractBootstrap
         }
 
         $broker = $this->getBroker();
+        if($broker->isRun($resourceName))
+           return;
+
         if ($broker->hasPlugin($resource)) {
             $this->_started[$resourceName] = true;
-            $plugin = $broker->load($resource);
+            $plugin = $broker->load($resourceName);
             $return = $plugin->init();
             unset($this->_started[$resourceName]);
-            $this->_markRun($resourceName);
+            $broker->markRun($resourceName);
 
             if (null !== $return) {
                 $this->getContainer()->{$resourceName} = $return;

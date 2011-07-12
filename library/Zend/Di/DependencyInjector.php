@@ -117,6 +117,7 @@ class DependencyInjector implements DependencyInjection
     }
     
     /**
+     * 
      * @return Zend\Di\InstanceManager
      */
     public function getInstanceManager()

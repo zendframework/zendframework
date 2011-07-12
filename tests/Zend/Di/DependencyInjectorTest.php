@@ -2,21 +2,18 @@
 
 namespace ZendTest\Di;
 
+use Zend\Debug;
+
 use Zend\Di\DependencyInjector,
     PHPUnit_Framework_TestCase as TestCase;
 
 class DependencyInjectorTest extends TestCase
 {
-    public function testDependencyInjectorWillUsePokeYokeInstanceManager()
+
+    public function testDependencyInjectorHasBuiltInImplementations()
     {
         $di = new DependencyInjector();
-        $this->assertInstanceOf('Zend\Di\InstanceCollection', $di->getInstanceManager());
         $this->assertInstanceOf('Zend\Di\InstanceManager', $di->getInstanceManager());
-    }
-    
-    public function testDependencyInjectorWillUsePokeYokeRuntimeDefinition()
-    {
-        $di = new DependencyInjector();
         $this->assertInstanceOf('Zend\Di\Definition', $di->getDefinition());
         $this->assertInstanceOf('Zend\Di\Definition\RuntimeDefinition', $di->getDefinition());
     }
@@ -140,8 +137,7 @@ class DependencyInjectorTest extends TestCase
         $di = new DependencyInjector();
         
         $im = $di->getInstanceManager();
-        $im->setProperty('ZendTest\Di\TestAsset\ConstructorInjection\X', 'one', 1);
-        $im->setProperty('ZendTest\Di\TestAsset\ConstructorInjection\X', 'two', 2);
+        $im->setParameters('ZendTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
         
         $y = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\Y');
         $this->assertEquals(1, $y->x->one);
@@ -167,8 +163,7 @@ class DependencyInjectorTest extends TestCase
         $di = new DependencyInjector();
         
         $im = $di->getInstanceManager();
-        $im->setProperty('ZendTest\Di\TestAsset\ConstructorInjection\X', 'one', 1);
-        $im->setProperty('ZendTest\Di\TestAsset\ConstructorInjection\X', 'two', 2);
+        $im->setParameters('ZendTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
         
         $z = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\Z');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\Y', $z->y);
@@ -223,8 +218,7 @@ class DependencyInjectorTest extends TestCase
         $di = new DependencyInjector();
         
         $im = $di->getInstanceManager();
-        $im->setProperty('ZendTest\Di\TestAsset\SetterInjection\X', 'one', 1);
-        $im->setProperty('ZendTest\Di\TestAsset\SetterInjection\X', 'two', 2);
+        $im->setParameters('ZendTest\Di\TestAsset\SetterInjection\X', array('one' => 1, 'two' => 2));
         
         $y = $di->newInstance('ZendTest\Di\TestAsset\SetterInjection\Y');
         $this->assertEquals(1, $y->x->one);
@@ -294,9 +288,22 @@ class DependencyInjectorTest extends TestCase
         
         $c = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\C');
         $a = $c->a;
-        $this->assertType('ZendTest\Di\TestAsset\PreferredImplClasses\BofA', $a);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\PreferredImplClasses\BofA', $a);
         $d = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\D');
         $this->assertSame($a, $d->a);
+    }
+    
+    public function testNewInstanceWillRunArbitraryMethodsAccordingToConfiguration()
+    {
+        $di = new DependencyInjector();
+        $im = $di->getInstanceManager();
+        $im->setMethods('ZendTest\Di\TestAsset\ConfigParameter\A', array(
+        	'setSomeInt' => array('value' => 5),
+            'injectM' => array('m' => 10)
+        ));
+        $b = $di->newInstance('ZendTest\Di\TestAsset\ConfigParameter\B');
+        $this->assertEquals(5, $b->a->someInt);
+        $this->assertEquals(10, $b->a->m);
     }
     
 }

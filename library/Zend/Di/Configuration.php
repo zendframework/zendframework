@@ -105,12 +105,10 @@ class Configuration
                         $im->addAlias($aliasName, $className);
                     }
                     break;
-                case 'properties':
-                case 'property':
-                    foreach ($data as $classOrAlias => $properties) {
-                        foreach ($properties as $propName => $propValue) {
-                            $im->setProperty($classOrAlias, $propName, $propValue);
-                        }
+                case 'parameters':
+                case 'parameter':
+                    foreach ($data as $classOrAlias => $parameters) {
+                        $im->setParameters($classOrAlias, $parameters);
                     }
                     break;
                 case 'preferences':
@@ -119,10 +117,10 @@ class Configuration
                     foreach ($data as $classOrAlias => $preferredValueOrValues) {
                         if (is_array($preferredValueOrValues)) {
                             foreach ($preferredValueOrValues as $preferredValue) {
-                                $im->addPreferredInstance($classOrAlias, $preferredValue);
+                                $im->addTypePreference($classOrAlias, $preferredValue);
                             }
                         } else {
-                            $im->addPreferredInstance($classOrAlias, $preferredValueOrValues);
+                            $im->addTypePreference($classOrAlias, $preferredValueOrValues);
                         }
                     }
             }

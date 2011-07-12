@@ -15,6 +15,11 @@ class DependencyInjector implements DependencyInjection
     protected $instanceManager = null;
 
     /**
+     * @var string
+     */
+    protected $instanceContext = array();
+    
+    /**
      * All the class dependencies [source][dependency]
      * 
      * @var array 
@@ -99,7 +104,7 @@ class DependencyInjector implements DependencyInjection
     public function createInstanceManager($class)
     {
         $instanceManager = new $class();
-        if (!$instanceManager instanceof InstanceCollection) {
+        if (!$instanceManager instanceof InstanceManager) {
             throw new Exception\InvalidArgumentException('The class provided to the InstanceManager factory ' . $class . ' does not implement the InstanceCollection interface');
         }
         return $instanceManager;
@@ -129,6 +134,8 @@ class DependencyInjector implements DependencyInjection
      */
     public function get($name, array $params = array())
     {
+        array_push($this->instanceContext, array('GET', $name));
+        
         $im = $this->getInstanceManager();
         
         if ($params) {
@@ -140,7 +147,9 @@ class DependencyInjector implements DependencyInjection
                 return $im->getSharedInstance($name, $params);
             }
         }
-        return $this->newInstance($name, $params);
+        $instance = $this->newInstance($name, $params);
+        array_pop($this->instanceContext);
+        return $instance;
     }
     
     /**
@@ -155,6 +164,7 @@ class DependencyInjector implements DependencyInjection
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
+        // localize dependencies (this also will serve as poka-yoke)
         $definition      = $this->getDefinition();
         $instanceManager = $this->getInstanceManager();
         
@@ -166,6 +176,8 @@ class DependencyInjector implements DependencyInjection
             $alias = null;
         }
 
+        array_push($this->instanceContext, array('NEW', $class, $alias));
+        
         if (!$definition->hasClass($class)) {
             $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
             throw new Exception\ClassNotFoundException('Class ' . $aliasMsg . $class . ' could not be located in provided definition.');
@@ -191,6 +203,18 @@ class DependencyInjector implements DependencyInjection
             foreach ($injectionMethods as $injectionMethod) {
                 $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias);
             }
+
+            $iConfig = ($instanceManager->hasAlias($alias) && $instanceManager->hasConfiguration($alias))
+                ? $instanceManager->getConfiguration($alias)
+                : $instanceManager->getConfiguration(get_class($object));
+
+            if ($iConfig['methods']) {
+                foreach ($iConfig['methods'] as $iConfigMethod => $iConfigMethodParams) {
+                    // skip methods processed by handleInjectionMethodForObject
+                    if (in_array($iConfigMethod, $injectionMethods)) continue; 
+                    call_user_func_array(array($object, $iConfigMethod), array_values($iConfigMethodParams));
+                }
+            }
         }
         
         if ($isShared) {
@@ -201,13 +225,19 @@ class DependencyInjector implements DependencyInjection
             }
         }
         
+        array_pop($this->instanceContext);
         return $object;
     }
     
-    public function resolveObjectDependencies($object)
-    {
-        
-    }
+    /**
+     * @todo 
+     * Enter description here ...
+     * @param unknown_type $object
+     */
+    // public function resolveObjectDependencies($object)
+    // {
+    //     
+    // }
     
     /**
      * Retrieve a class instance based on class name
@@ -293,7 +323,7 @@ class DependencyInjector implements DependencyInjection
      * @param  array $params 
      * @return array
      */
-    protected function resolveMethodParameters($class, $method, array $userParams, $isInstantiator, $alias)
+    protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $isInstantiator, $alias)
     {
         static $isSubclassFunc = null;
         static $isSubclassFuncCache = null;
@@ -309,77 +339,149 @@ class DependencyInjector implements DependencyInjection
             return (isset($isSubclassFuncCache[$class][$type]));
         };
         
+        // parameters for this method, in proper order, to be returned
         $resolvedParams = array();
-
+        
+        // parameter requirements from the definition
         $injectionMethodParameters = $this->definition->getInjectionMethodParameters($class, $method);
         
-        $computedValueParams = array();
-        $computedLookupParams = array();
-        $computedOptionalParams = array();
+        // computed parameters array
+        $computedParams = array(
+            'value'    => array(),
+            'lookup'   => array(),
+            'optional' => array()
+        );
+        
+        // retrieve instance configurations for all contexts
+        $iConfig = array();
+        $aliases = $this->instanceManager->getAliases();
+        
+        // for the alias in the dependency tree
+        if ($alias && $this->instanceManager->hasConfiguration($alias)) {
+            $iConfig['thisAlias'] = $this->instanceManager->getConfiguration($alias);
+        }
+        
+        // for the current class in the dependency tree
+        if ($this->instanceManager->hasConfiguration($class)) {
+            $iConfig['thisClass'] = $this->instanceManager->getConfiguration($class);
+        }
+        
+        // for the parent class, provided we are deeper than one node
+        list($requestedClass, $requestedAlias) = ($this->instanceContext[0][0] == 'NEW')
+            ? array($this->instanceContext[0][1], $this->instanceContext[0][2])
+            : array($this->instanceContext[1][1], $this->instanceContext[1][2]);
+
+        if ($requestedClass != $class && $this->instanceManager->hasConfiguration($requestedClass)) {
+            $iConfig['requestedClass'] = $this->instanceManager->getConfiguration($requestedClass);
+            if ($requestedAlias) {
+                $iConfig['requestedAlias'] = $this->instanceManager->getConfiguration($requestedAlias);
+            }
+        }
+
+        // This is a 2 pass system for resolving parameters
+        // first pass will find the sources, the second pass will order them and resolve lookups if they exist
+        // MOST methods will only have a single parameters to resolve, so this should be fast
         
         foreach ($injectionMethodParameters as $name => $info) {
             list($type, $isOptional, $isTypeInstantiable) = $info;
-            
-            // first consult user provided parameters
-            if (isset($userParams[$name])) {
-                if (is_string($userParams[$name])) {
-                    if ($this->instanceManager->hasAlias($userParams[$name])) {
-                        $computedLookupParams[$name] = array($userParams[$name], $this->instanceManager->getClassFromAlias($userParams[$name]));    
-                    } elseif ($this->definition->hasClass($userParams[$name])) {
-                        $computedLookupParams[$name] = array($userParams[$name], $userParams[$name]);
+
+            // PRIORITY 1 - consult user provided parameters
+            if (isset($callTimeUserParams[$name])) {
+                if (is_string($callTimeUserParams[$name])) {
+                    if ($this->instanceManager->hasAlias($callTimeUserParams[$name])) {
+                        // was an alias provided?
+                        $computedParams['lookup'][$name] = array($callTimeUserParams[$name], $this->instanceManager->getClassFromAlias($callTimeUserParams[$name]));    
+                    } elseif ($this->definition->hasClass($callTimeUserParams[$name])) {
+                        // was a known class provided?
+                        $computedParams['lookup'][$name] = array($callTimeUserParams[$name], $callTimeUserParams[$name]);
                     } else {
-                        $computedValueParams[$name] = $userParams[$name];
+                        // must be a value
+                        $computedParams['value'][$name] = $callTimeUserParams[$name]; 
                     }
                 } else {
-                    $computedValueParams[$name] = $userParams[$name];
+                    // int, float, null, object, etc
+                    $computedParams['value'][$name] = $callTimeUserParams[$name];
                 }
                 continue;
             }
             
-            // next consult alias specific properties
-            if ($alias && $this->instanceManager->hasProperty($alias, $name)) {
-                $computedValueParams[$name] = $this->instanceManager->getProperty($alias, $name);
-                continue;
+            // PRIORITY 2 -specific instance configuration (thisAlias) - this alias
+            // PRIORITY 3 -THEN specific instance configuration (thisClass) - this class
+            // PRIORITY 4 -THEN specific instance configuration (requestedAlias) - requested alias
+            // PRIORITY 5 -THEN specific instance configuration (requestedClass) - requested class
+            
+            foreach (array('thisAlias', 'thisClass', 'requestedAlias', 'requestedClass') as $thisIndex) {
+                // check the provided parameters config
+                if (isset($iConfig[$thisIndex]['parameters'][$name])) {
+                    if (isset($aliases[$iConfig[$thisIndex]['parameters'][$name]])) {
+                        $computedParams['lookup'][$name] = array(
+                            $iConfig[$thisIndex]['parameters'][$name],
+                            $this->instanceManager->getClassFromAlias($iConfig[$thisIndex]['parameters'][$name])
+                        );
+                    } elseif ($this->definition->hasClass($iConfig[$thisIndex]['parameters'][$name])) {
+                        $computedParams['lookup'][$name] = array(
+                            $iConfig[$thisIndex]['parameters'][$name],
+                            $iConfig[$thisIndex]['parameters'][$name]
+                        );
+                    } else {
+                        $computedParams['value'][$name] = $iConfig[$thisIndex]['parameters'][$name];
+                    }
+                    continue 2;
+                }
+                // check the provided method config
+                if (isset($iConfig[$thisIndex]['methods'][$method][$name])) {
+                    if (isset($aliases[$iConfig[$thisIndex]['methods'][$method][$name]])) {
+                        $computedParams['lookup'][$name] = array(
+                            $iConfig[$thisIndex]['methods'][$method][$name],
+                            $this->instanceManager->getClassFromAlias($iConfig[$thisIndex]['methods'][$method][$name])
+                        );
+                    } elseif ($this->definition->hasClass($iConfig[$thisIndex]['methods'][$method][$name])) {
+                        $computedParams['lookup'][$name] = array(
+                            $iConfig[$thisIndex]['methods'][$method][$name],
+                            $iConfig[$thisIndex]['methods'][$method][$name]
+                        );
+                    } else {
+                        $computedParams['value'][$name] = $iConfig[$thisIndex]['methods'][$method][$name];
+                    }
+                    continue 2;
+                }
+            
             }
+            
+            // PRIORITY 6 - globally preferred implementations
             
             // next consult alias level preferred instances
-            if ($alias && $this->instanceManager->hasPreferredInstances($alias)) {
-                $pInstances = $this->instanceManager->getPreferredInstances($alias);
+            if ($alias && $this->instanceManager->hasTypePreferences($alias)) {
+                $pInstances = $this->instanceManager->getTypePreferences($alias);
                 foreach ($pInstances as $pInstance) {
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || $isSubclassFunc($pInstanceClass, $type)) {
-                        $computedLookupParams[$name] = array($pInstance, $pInstanceClass);
+                        $computedParams['lookup'][$name] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
             }
-            
+
             // next consult class level preferred instances
-            if ($type && $this->instanceManager->hasPreferredInstances($type)) {
-                $pInstances = $this->instanceManager->getPreferredInstances($type);
+            if ($type && $this->instanceManager->hasTypePreferences($type)) {
+                $pInstances = $this->instanceManager->getTypePreferences($type);
                 foreach ($pInstances as $pInstance) {
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || $isSubclassFunc($pInstanceClass, $type)) {
-                        $computedLookupParams[$name] = array($pInstance, $pInstanceClass);
+                        $computedParams['lookup'][$name] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
-            }
-            
-            // finally consult alias specific properties
-            if ($this->instanceManager->hasProperty($class, $name)) {
-                $computedValueParams[$name] = $this->instanceManager->getProperty($class, $name);
-                continue;
             }
 
             if ($isOptional) {
-                $computedOptionalParams[$name] = true;
+                $computedParams['optional'][$name] = true;
             }
             
             if ($type && $isTypeInstantiable === true) {
-                $computedLookupParams[$name] = array($type, $type);
+                $computedParams['lookup'][$name] = array($type, $type);
             }
             
         }
@@ -387,16 +489,16 @@ class DependencyInjector implements DependencyInjection
         $index = 0;
         foreach ($injectionMethodParameters as $name => $value) {
 
-            if (isset($computedValueParams[$name])) {
-                $resolvedParams[$index] = $computedValueParams[$name];
-            } elseif (isset($computedLookupParams[$name])) {
-                if ($isInstantiator && in_array($computedLookupParams[$name][1], $this->currentDependencies)) {
+            if (isset($computedParams['value'][$name])) {
+                $resolvedParams[$index] = $computedParams['value'][$name];
+            } elseif (isset($computedParams['lookup'][$name])) {
+                if ($isInstantiator && in_array($computedParams['lookup'][$name][1], $this->currentDependencies)) {
                     throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on {$value[0]} and viceversa");
                 }
                 array_push($this->currentDependencies, $class);
-                $resolvedParams[$index] = $this->get($computedLookupParams[$name][0], $userParams);
+                $resolvedParams[$index] = $this->get($computedParams['lookup'][$name][0], $callTimeUserParams);
                 array_pop($this->currentDependencies);
-            } elseif (!array_key_exists($name, $computedOptionalParams)) {
+            } elseif (!array_key_exists($name, $computedParams['optional'])) {
                 throw new Exception\MissingPropertyException('Missing parameter named ' . $name . ' for ' . $class . '::' . $method);
             } else {
                 $resolvedParams[$index] = null;

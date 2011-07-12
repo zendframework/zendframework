@@ -20,7 +20,7 @@ class InstanceManager /* implements InstanceCollection */
     
     /**
      * The template to use for housing configuration information
-	 * @var array 
+     * @var array 
      */
     protected $configurationTemplate = array(
         /** 

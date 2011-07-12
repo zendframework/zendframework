@@ -18,10 +18,10 @@ class CompilerTest extends TestCase
         $this->assertTrue($definition->hasClass('ZendTest\Di\TestAsset\CompilerClasses\A'));
         
         $assertClasses = array(
-        	'ZendTest\Di\TestAsset\CompilerClasses\A',
-  			'ZendTest\Di\TestAsset\CompilerClasses\B',
+            'ZendTest\Di\TestAsset\CompilerClasses\A',
+            'ZendTest\Di\TestAsset\CompilerClasses\B',
             'ZendTest\Di\TestAsset\CompilerClasses\C',
-  			'ZendTest\Di\TestAsset\CompilerClasses\D',
+            'ZendTest\Di\TestAsset\CompilerClasses\D',
         );
         $classes = $definition->getClasses();
         foreach ($assertClasses as $assertClass) {

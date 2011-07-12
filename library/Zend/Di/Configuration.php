@@ -22,7 +22,9 @@ class Configuration
                 $data = iterator_to_array($data, true);
             }
         } elseif (!is_array($data)) {
-            throw new Exception\InvalidArgumentException('Configuration data must be of type Zend\Config\Config or an array');
+            throw new Exception\InvalidArgumentException(
+                'Configuration data must be of type Zend\Config\Config or an array'
+            );
         }
         $this->data = $data;
     }
@@ -53,7 +55,10 @@ class Configuration
     {
         if ($di->hasDefinition()) {
             if (!$di->getDefinition() instanceof Definition\AggregateDefinition) {
-                throw new Exception\InvalidArgumentException('In order to configure multiple definitions, the primary definition must not be set, or must be of type AggregateDefintion');
+                throw new Exception\InvalidArgumentException(
+                    'In order to configure multiple definitions, the primary definition must not be set, '
+                    . 'or must be of type AggregateDefintion'
+                );
             }
         } else {
             $di->setDefinition($di->createDefinition('Zend\Di\Definition\AggregateDefinition'));
@@ -69,7 +74,10 @@ class Configuration
         if ($di->hasDefinition()) {
             $aggregateDef = $di->getDefinition();
             if (!$aggregateDef instanceof Definition\AggregateDefinition) {
-                throw new Exception\InvalidArgumentException('In order to configure multiple definitions, the primary definition must not be set, or must be of type AggregateDefintion');
+                throw new Exception\InvalidArgumentException(
+                    'In order to configure multiple definitions, the primary definition must not be set, '
+                    . 'or must be of type AggregateDefintion'
+                );
             }
         } /* else {
             $aggregateDef = $di->createDefinition('Zend\Di\Definition\AggregateDefinition');
@@ -109,6 +117,12 @@ class Configuration
                 case 'parameter':
                     foreach ($data as $classOrAlias => $parameters) {
                         $im->setParameters($classOrAlias, $parameters);
+                    }
+                    break;
+                case 'method':
+                case 'methods':
+                    foreach ($data as $classOrAlias => $methods) {
+                        $im->setMethods($classOrAlias, $methods);
                     }
                     break;
                 case 'preferences':

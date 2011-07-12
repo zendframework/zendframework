@@ -63,7 +63,10 @@ class DependencyInjector implements DependencyInjection
     {
         $definition = new $class();
         if (!$definition instanceof Definition) {
-            throw new Exception\InvalidArgumentException('The class provided to the Definition factory ' . $class . ' does not implement the Definition interface');
+            throw new Exception\InvalidArgumentException(
+                'The class provided to the Definition factory ' . $class 
+                . ' does not implement the Definition interface'
+            );
         }
         return $definition;
     }
@@ -105,7 +108,10 @@ class DependencyInjector implements DependencyInjection
     {
         $instanceManager = new $class();
         if (!$instanceManager instanceof InstanceManager) {
-            throw new Exception\InvalidArgumentException('The class provided to the InstanceManager factory ' . $class . ' does not implement the InstanceCollection interface');
+            throw new Exception\InvalidArgumentException(
+                'The class provided to the InstanceManager factory ' . $class 
+                . ' does not implement the InstanceCollection interface'
+            );
         }
         return $instanceManager;
     }
@@ -180,7 +186,9 @@ class DependencyInjector implements DependencyInjection
         
         if (!$definition->hasClass($class)) {
             $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
-            throw new Exception\ClassNotFoundException('Class ' . $aliasMsg . $class . ' could not be located in provided definition.');
+            throw new Exception\ClassNotFoundException(
+                'Class ' . $aliasMsg . $class . ' could not be located in provided definition.'
+            );
         }
         
         $instantiator     = $definition->getInstantiator($class);
@@ -390,10 +398,16 @@ class DependencyInjector implements DependencyInjection
                 if (is_string($callTimeUserParams[$name])) {
                     if ($this->instanceManager->hasAlias($callTimeUserParams[$name])) {
                         // was an alias provided?
-                        $computedParams['lookup'][$name] = array($callTimeUserParams[$name], $this->instanceManager->getClassFromAlias($callTimeUserParams[$name]));    
+                        $computedParams['lookup'][$name] = array(
+                            $callTimeUserParams[$name],
+                            $this->instanceManager->getClassFromAlias($callTimeUserParams[$name])
+                        );    
                     } elseif ($this->definition->hasClass($callTimeUserParams[$name])) {
                         // was a known class provided?
-                        $computedParams['lookup'][$name] = array($callTimeUserParams[$name], $callTimeUserParams[$name]);
+                        $computedParams['lookup'][$name] = array(
+                            $callTimeUserParams[$name],
+                            $callTimeUserParams[$name]
+                        );
                     } else {
                         // must be a value
                         $computedParams['value'][$name] = $callTimeUserParams[$name]; 
@@ -493,13 +507,17 @@ class DependencyInjector implements DependencyInjection
                 $resolvedParams[$index] = $computedParams['value'][$name];
             } elseif (isset($computedParams['lookup'][$name])) {
                 if ($isInstantiator && in_array($computedParams['lookup'][$name][1], $this->currentDependencies)) {
-                    throw new Exception\CircularDependencyException("Circular dependency detected: $class depends on {$value[0]} and viceversa");
+                    throw new Exception\CircularDependencyException(
+                        "Circular dependency detected: $class depends on {$value[0]} and viceversa"
+                    );
                 }
                 array_push($this->currentDependencies, $class);
                 $resolvedParams[$index] = $this->get($computedParams['lookup'][$name][0], $callTimeUserParams);
                 array_pop($this->currentDependencies);
             } elseif (!array_key_exists($name, $computedParams['optional'])) {
-                throw new Exception\MissingPropertyException('Missing parameter named ' . $name . ' for ' . $class . '::' . $method);
+                throw new Exception\MissingPropertyException(
+                    'Missing parameter named ' . $name . ' for ' . $class . '::' . $method
+                );
             } else {
                 $resolvedParams[$index] = null;
             }

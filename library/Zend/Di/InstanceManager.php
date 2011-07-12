@@ -94,7 +94,8 @@ class InstanceManager /* implements InstanceCollection */
         $hashKey = $this->createHashForKeys($classOrAlias, array_keys($params));
         $hashValue = $this->createHashForValues($classOrAlias, $params);
         
-        if (!isset($this->sharedInstancesWithParams[$hashKey]) || !is_array($this->sharedInstancesWithParams[$hashKey])) {
+        if (!isset($this->sharedInstancesWithParams[$hashKey]) 
+            || !is_array($this->sharedInstancesWithParams[$hashKey])) {
             $this->sharedInstancesWithParams[$hashKey] = array();
         }
 
@@ -147,7 +148,9 @@ class InstanceManager /* implements InstanceCollection */
     public function addAlias($alias, $class, array $properties = array(), array $preferredInstances = array())
     {
         if (!preg_match('#^[a-zA-Z0-9-_]+$#', $alias)) {
-            throw new Exception\InvalidArgumentException('Aliases must be alphanumeric and can contain dashes and underscores only.');
+            throw new Exception\InvalidArgumentException(
+                'Aliases must be alphanumeric and can contain dashes and underscores only.'
+            );
         }
         $this->aliases[$alias] = $class;
         if ($properties) {

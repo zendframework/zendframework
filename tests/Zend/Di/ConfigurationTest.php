@@ -25,21 +25,19 @@ class ConfigurationTest extends TestCase
         $this->assertTrue($im->hasAlias('my-dbAdapter'));
         $this->assertEquals('My\DbAdapter', $im->getClassFromAlias('my-dbAdapter'));
         
-        $this->assertTrue($im->hasTypePreference('my-repository'));
-        $this->assertContains('my-mapper', $im->getTypePreference('my-repository'));
+        $this->assertTrue($im->hasTypePreferences('my-repository'));
+        $this->assertContains('my-mapper', $im->getTypePreferences('my-repository'));
         
-        $this->assertTrue($im->hasTypePreference('my-mapper'));
-        $this->assertContains('my-dbAdapter', $im->getTypePreference('my-mapper'));
+        $this->assertTrue($im->hasTypePreferences('my-mapper'));
+        $this->assertContains('my-dbAdapter', $im->getTypePreferences('my-mapper'));
         
-        $this->assertTrue($im->hasProperty('My\DbAdapter', 'username'));
-        $this->assertEquals('readonly', $im->getProperty('My\DbAdapter', 'username'));
+        $this->assertTrue($im->hasConfiguration('My\DbAdapter'));
+        $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'methods' => array());
+        $this->assertEquals($expected, $im->getConfiguration('My\DbAdapter'));
         
-        $this->assertTrue($im->hasProperty('My\DbAdapter', 'password'));
-        $this->assertEquals('mypassword', $im->getProperty('My\DbAdapter', 'password'));
-        
-        $this->assertTrue($im->hasProperty('my-dbAdapter', 'username'));
-        $this->assertEquals('readwrite', $im->getProperty('my-dbAdapter', 'username'));
-        
+        $this->assertTrue($im->hasConfiguration('my-dbAdapter'));
+        $expected = array('parameters' => array('username' => 'readwrite'), 'methods' => array());
+        $this->assertEquals($expected, $im->getConfiguration('my-dbAdapter'));
     }
     
     public function testConfigurationCanConfigureBuilderDefinitionFromIni()

@@ -298,7 +298,7 @@ class DependencyInjectorTest extends TestCase
         $di = new DependencyInjector();
         $im = $di->getInstanceManager();
         $im->setMethods('ZendTest\Di\TestAsset\ConfigParameter\A', array(
-        	'setSomeInt' => array('value' => 5),
+            'setSomeInt' => array('value' => 5),
             'injectM' => array('m' => 10)
         ));
         $b = $di->newInstance('ZendTest\Di\TestAsset\ConfigParameter\B');

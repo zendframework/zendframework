@@ -145,7 +145,7 @@ class InstanceManager /* implements InstanceCollection */
     /**
      * 
      */
-    public function addAlias($alias, $class, array $properties = array(), array $preferredInstances = array())
+    public function addAlias($alias, $class, array $parameters = array())
     {
         if (!preg_match('#^[a-zA-Z0-9-_]+$#', $alias)) {
             throw new Exception\InvalidArgumentException(
@@ -153,17 +153,14 @@ class InstanceManager /* implements InstanceCollection */
             );
         }
         $this->aliases[$alias] = $class;
-        if ($properties) {
-            $this->setProperties($alias, $properties);
-        }
-        if ($preferredInstances) {
-            $this->setTypePreference($alias, $preferredInstances);
+        if ($parameters) {
+            $this->setParameters($alias, $parameters);
         }
     }
     
-    public function hasConfiguration($type)
+    public function hasConfiguration($aliasOrClass)
     {
-        $key = ($this->hasAlias($type)) ? 'alias:' . $type : $type;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $aliasOrClass : $aliasOrClass;
         if (!isset($this->configurations[$key])) {
             return false;
         }
@@ -173,9 +170,9 @@ class InstanceManager /* implements InstanceCollection */
         return true;
     }
     
-    public function setConfiguration($type, array $configuration, $append = false)
+    public function setConfiguration($aliasOrClass, array $configuration, $append = false)
     {
-        $key = ($this->hasAlias($type)) ? 'alias:' . $type : $type;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $aliasOrClass : $aliasOrClass;
         if (!isset($this->configurations[$key])) {
             $this->configurations[$key] = $this->configurationTemplate;
         }
@@ -193,9 +190,9 @@ class InstanceManager /* implements InstanceCollection */
         }
     }
     
-    public function getConfiguration($type)
+    public function getConfiguration($aliasOrClass)
     {
-        $key = ($this->hasAlias($type)) ? 'alias:' . $type : $type;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $aliasOrClass : $aliasOrClass;
         if (isset($this->configurations[$key])) {
             return $this->configurations[$key];            
         } else {
@@ -210,9 +207,9 @@ class InstanceManager /* implements InstanceCollection */
      * @param string $type Alias or Class
      * @param array $parameters Multi-dim array of parameters and their values
      */
-    public function setParameters($type, array $parameters)
+    public function setParameters($aliasOrClass, array $parameters)
     {
-        return $this->setConfiguration($type, array('parameters' => $parameters), true);
+        return $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
     }
     
     /**
@@ -222,45 +219,45 @@ class InstanceManager /* implements InstanceCollection */
      * @param string $type Alias or Class
      * @param array $methods Multi-dim array of methods and their parameters
      */
-    public function setMethods($type, array $methods)
+    public function setMethods($aliasOrClass, array $methods)
     {
-        return $this->setConfiguration($type, array('methods' => $methods), true);
+        return $this->setConfiguration($aliasOrClass, array('methods' => $methods), true);
     }
     
 
-    public function hasTypePreferences($forType)
+    public function hasTypePreferences($interfaceOrAbstract)
     {
-        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
         return (isset($this->typePreferences[$key]) && $this->typePreferences[$key]);
     }
 
-    public function setTypePreference($forType, array $preferredImplementations)
+    public function setTypePreference($interfaceOrAbstract, array $preferredImplementations)
     {
-        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
         foreach ($preferredImplementations as $preferredImplementation) {
             $this->addTypePreference($key, $preferredImplementation);
         }
         return $this;
     }
 
-    public function getTypePreferences($forType)
+    public function getTypePreferences($interfaceOrAbstract)
     {
-        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
         if (isset($this->typePreferences[$key])) {
             return $this->typePreferences[$key];
         }
         return array();
     }
     
-    public function unsetTypePreferences($forType)
+    public function unsetTypePreferences($interfaceOrAbstract)
     {
-        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
         unset($this->typePreferences[$key]);
     }
 
-    public function addTypePreference($forType, $preferredImplementation)
+    public function addTypePreference($interfaceOrAbstract, $preferredImplementation)
     {
-        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
         if (!isset($this->typePreferences[$key])) {
             $this->typePreferences[$key] = array();
         }
@@ -268,9 +265,9 @@ class InstanceManager /* implements InstanceCollection */
         return $this;
     }
 
-    public function removeTypePreference($forType, $preferredType)
+    public function removeTypePreference($interfaceOrAbstract, $preferredType)
     {
-        $key = ($this->hasAlias($forType)) ? 'alias:' . $forType : $forType;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
         if (!isset($this->generalTypePreferences[$key]) || !in_array($preferredType, $this->typePreferences[$key])) {
             return false;
         }

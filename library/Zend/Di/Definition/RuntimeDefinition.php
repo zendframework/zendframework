@@ -38,6 +38,11 @@ class RuntimeDefinition implements Definition
         return $this->introspectionRuleset;
     }
     
+    /**
+     * Return nothing
+     * 
+     * @return array
+     */
     public function getClasses()
     {
         return array();
@@ -61,17 +66,31 @@ class RuntimeDefinition implements Definition
     {
         $this->classes[] = $class;
     }
-    
+
+    /**
+     * Return whether the class exists
+     * 
+     * @return bool
+     */
     public function hasClass($class)
     {
         return class_exists($class, true);
     }
-    
+
+    /**
+     * Return the supertypes for this class
+     * 
+     * @return array of types
+     */
     public function getClassSupertypes($class)
     {
         return class_parents($class) + class_implements($class);
     }
-    
+
+    /**
+     * Get the instiatiator
+     * @return string|callable
+     */
     public function getInstantiator($class)
     {
         $class = new \ReflectionClass($class);
@@ -80,18 +99,34 @@ class RuntimeDefinition implements Definition
         }
         return false;
     }
-    
+
+    /**
+     * Return if there are injection methods
+     * 
+     * @return bool
+     */
     public function hasInjectionMethods($class)
     {
-        
+        $methods = $this->getInjectionMethods($class);
+        return (count($methods) > 0);
     }
-    
+
+    /**
+     * Return injection methods
+     * 
+     * @return bool
+     */
     public function hasInjectionMethod($class, $method)
     {
         $injectionMethods = $this->getInjectionMethods($class);
         return (array_key_exists($method, $injectionMethods));
     }
-    
+
+    /**
+     * Return an array of the injection methods
+     * 
+     * @return array
+     */
     public function getInjectionMethods($class)
     {
         $introspectionRuleset = $this->getIntrospectionRuleset();
@@ -182,7 +217,12 @@ class RuntimeDefinition implements Definition
 
         return array_keys($this->injectionMethodCache[$className]);
     }
-    
+
+    /**
+     * Return the parameters for a method
+     * 
+     * @return array
+     */
     public function getInjectionMethodParameters($class, $method)
     {
         $params = array();

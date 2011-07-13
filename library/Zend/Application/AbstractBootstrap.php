@@ -551,8 +551,10 @@ abstract class AbstractBootstrap
         }
 
         $broker = $this->getBroker();
-        if($broker->isRun($resourceName))
+
+        if ($broker->isRun($resourceName)) {
            return;
+        }
 
         if ($broker->hasPlugin($resource)) {
             $this->_started[$resourceName] = true;

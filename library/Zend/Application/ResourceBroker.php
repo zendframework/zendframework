@@ -47,7 +47,7 @@ class ResourceBroker extends PluginSpecBroker implements BootstrapAware
     /**
      * @var array Initializers that have been run
      */
-    protected $_run = array();
+    protected $run = array();
 
 
     /**
@@ -111,19 +111,19 @@ class ResourceBroker extends PluginSpecBroker implements BootstrapAware
      */
     public function markRun($resource)
     {
-        if (!in_array($resource, $this->_run)) {
-            $this->_run[] = $resource;
+        if (!in_array($resource, $this->run)) {
+            $this->run[] = $resource;
         }
     }
     
     /**
-     * Cehck if resource as having run
+     * Check if resource has run
      *
      * @param  string $resource
      * @return void
      */
     public function isRun($resource)
     {
-        return in_array($resource, $this->_run);
+        return in_array($resource, $this->run);
     }
 }

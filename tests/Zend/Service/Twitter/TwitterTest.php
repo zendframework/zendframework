@@ -604,9 +604,10 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
     public function testYouCanRetrieveTheUsersWhoRetweetedATweet()
     {
         $twitter = new Service\Twitter();
-        $response = $twitter->statusRetweetedBy(85607267692584960);
+        $response = $twitter->statusRetweetedBy('85607267692584960');
 
         $this->assertTrue($response instanceof Rest\Client\Result);
+        $this->assertTrue(is_array($response->name), var_export($response, 1));
         $this->assertTrue(in_array('Alessandro Nadalin', $response->name));
     }
     

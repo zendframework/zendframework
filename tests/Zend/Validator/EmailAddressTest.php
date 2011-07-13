@@ -368,7 +368,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2861
+     * @group ZF-2861
      */
     public function testHostnameValidatorMessagesShouldBeTranslated()
     {
@@ -400,7 +400,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-4888
+     * @group ZF-4888
      */
     public function testEmailsExceedingLength()
     {
@@ -414,7 +414,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-4352
+     * @group ZF-4352
      */
     public function testNonStringValidation()
     {
@@ -422,7 +422,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-7490
+     * @group ZF-7490
      */
     public function testSettingHostnameMessagesThroughEmailValidator()
     {

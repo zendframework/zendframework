@@ -336,7 +336,7 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that webSearch() works as expected when searching for 'php'
      *
-     *  @see ZF-2358
+     * @group ZF-2358
      */
     public function testWebSearchForSite()
     {

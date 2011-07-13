@@ -95,7 +95,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-3206
+     * @group ZF-3206
      */
     public function testSpecifyingLabelPlacementShouldNotOverwriteValue()
     {

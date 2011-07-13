@@ -536,8 +536,8 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('modules' . DIRECTORY_SEPARATOR . 'application', $controllerDirs['application']);
     }
 
-    /**#@+
-     * @see ZF-2910
+    /**
+     * @group ZF-2910
      */
     public function testShouldAllowRetrievingCurrentModuleDirectory()
     {
@@ -563,7 +563,6 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         $this->testAddModuleDirectory();
         $this->assertNull($this->_controller->getModuleDirectory('bogus-foo-bar'));
     }
-    /**#@-*/
 
     /**
      * ZF-2435

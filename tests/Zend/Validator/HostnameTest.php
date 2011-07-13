@@ -273,8 +273,8 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     /**
      * Test changed with ZF-6676, as IP check is only involved when IP patterns match
      *
-     * @see ZF-2861
-     * @see ZF-6676
+     * @group ZF-2861
+     * @group ZF-6676
      */
     public function testValidatorMessagesShouldBeTranslated()
     {
@@ -299,7 +299,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-6033
+     * @group ZF-6033
      */
     public function testNumberNames()
     {
@@ -318,7 +318,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-6133
+     * @group ZF-6133
      */
     public function testPunycodeDecoding()
     {
@@ -355,7 +355,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-7277
+     * @group ZF-7277
      */
     public function testDifferentIconvEncoding()
     {

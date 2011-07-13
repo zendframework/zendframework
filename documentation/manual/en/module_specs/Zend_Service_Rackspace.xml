@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.rackspace">
+    <title>Zend\Service\Rackspace</title>
+
+    <sect2 id="zend.service.rackspace.introduction">
+        <title>Introduction</title>
+
+        <para>
+            The <classname>Zend\Service\Rackspace</classname> is a class that
+            provides a simple <acronym>API</acronym> to manage the Rackspace
+            cloud services: Files and Servers.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.rackspace.registering">
+        <title>Registering with Rackspace</title>
+
+        <para>
+            Before you can get started with <classname>Zend\Service\Rackspace</classname>, you must
+            first register for an account. Please see the
+            <ulink url="http://www.rackspace.com/cloud/">Cloud services</ulink>
+            page on the Rackspace website for more information.
+        </para>
+
+        <para>
+            After registering, you can get the Username and the API Key from the Rackspace management
+            console under the menu "Your Account" > "API Access".
+            These informations are required to use the <classname>Zend\Service\Rackspace</classname>
+            classes.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.rackspace.feature.files">
+        <title>Cloud Files</title>
+
+        <para>
+            The Cloud Files is a service to store any files in a cloud environment.
+            A user can store an unlimited quantity of files and each file can be as
+            large as 5 gigabytes. The files can be private or public. The private files
+            can be accessed using the API of Rackspace. The public files are accessed using
+            a <acronym>CDN</acronym> (Content Delivery Network).
+            Rackspace exposes a <acronym>REST</acronym> API to manage the Cloud Files.
+        </para>
+
+        <para>
+            <classname>Zend\Service\Rackspace\Files</classname> provides the following functionality:
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Upload files programmatically for tight integration with your application
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Enable Cloud Files CDN integration on any container for public distribution
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Create Containers programmatically
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Retrieve lists of containers and files
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.rackspace.feature.servers">
+        <title>Cloud Servers</title>
+
+        <para>
+            Rackspace Cloud Servers is a compute service that provides server capacity in the cloud.
+            Cloud Servers come in different flavors of memory, disk space, and CPU.
+        </para>
+
+        <para>
+            <classname>Zend\Service\Rackspace\Servers</classname> provides the following functionality:
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Create/delete new servers
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        List and get information on each server
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Manage the public/private IP addresses of a server
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Resize the server capacity
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Reboot a server
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Create new images for a server
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Manage the backup of a server
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Create a group of server to share the IP addresses for High Availability architecture
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+
+    
+</sect1>

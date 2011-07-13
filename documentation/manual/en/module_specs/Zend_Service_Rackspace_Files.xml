@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.rackspace.files">
+    <title>Zend\Service\Rackspace\Files</title>
+
+    <sect2 id="zend.service.rackspace.files.intro">
+        <title>Overview</title>
+
+        <para>
+            The <classname>Zend\Service\Rackspace\Files</classname> is a class that
+            provides a simple <acronym>API</acronym> to manage the Rackspace Cloud Files.
+        </para>
+    </sect2>
+
+
+    <sect2 id="zend.service.rackspace.files.quick-start">
+        <title>Quick Start</title>
+        
+        <para>
+            To use this class you have to pass the username and the API's key
+            of Rackspace in the construction of the class.
+        </para>
+        
+         <programlisting language="php"><![CDATA[
+            $user = 'username';
+            $key  = 'secret key';
+
+            $rackspace = new Zend\Service\Rackspace\Files($user,$key);
+]]></programlisting>
+        
+        <para>
+            A container is a storage compartment for your data and provides a way for you to organize
+            your data. You can think of a container as a folder in Windows® or a directory in UNIX®.
+            The primary difference between a container and these other file system concepts is that
+            containers cannot be nested. You can, however, create an unlimited number of containers
+            within your account. Data must be stored in a container so you must have at least one
+            container defined in your account prior to uploading data.
+        </para>
+        
+        <para>
+            The only restrictions on container names is that they cannot contain a forward slash (/)
+            and must be less than 256 bytes in length (please note that the length restriction applies to
+            the name using the URL encoded format).
+        </para>
+        
+        <para>
+            The containers are managed using the class <classname>Zend\Service\Rackspace\Files\Container</classname>.
+        </para>
+        
+        <para>
+            An object (file) is the basic storage entity and any optional metadata that represents the files
+            you store in the Cloud Files system. When you upload data to Cloud Files, the data is stored
+            as-is (no compression or encryption) and consists of a location (container), the object's
+            name, and any metadata consisting of key/value pairs. For instance, you may chose to store
+            a backup of your digital photos and organize them into albums. In this case, each object
+            could be tagged with metadata such as Album : Caribbean Cruise or Album :
+            Aspen Ski Trip.
+        </para>
+        
+        <para>
+            The only restriction on object names is that they must be less than 1024 bytes in length
+            after URL encoding. Cloud Files has a limit on the size of a single uploaded object;
+            by default this is 5 GB. For metadata, you should not exceed 90 individual key/value pairs
+            for any one object and the total byte length of all key/value pairs should not exceed 4KB (4096 bytes).
+        </para>
+        
+        <para>
+            The objects are managed using the class <classname>Zend\Service\Rackspace\Files\Object</classname>.
+        </para>
+        
+        <para>
+            To create a new container you can use the <emphasis>createContainer</emphasis> method.
+        </para>
+        
+        <programlisting language="php"><![CDATA[  
+            $container= $rackspace->createContainer('test');
+            if ($container===false) {
+               die("ERROR: %s",$rackspace->getErrorMsg());
+            } 
+            printf("Name: %s,$container->getName());
+]]></programlisting>
+
+        <para>
+            This example create a container with name <emphasis>test</emphasis>. The result of <emphasis>createContainer</emphasis>
+            is a new instance of <classname>Zend\Service\Rackspace\Files\Container</classname>.
+        </para>
+        
+        <para>
+            To store an object (file) in a container you can use the <emphasis>storeObject</emphasis> method.
+        </para>
+        
+        <programlisting language="php"><![CDATA[
+            $name= 'example.jpg';
+            $file= file_get_contents($name);
+            $metadata= array (
+                'foo' => 'bar'
+            );
+            if ($rackspace->storeObject('test',$name,$file,$metadata)!==false) {
+                echo 'Object stored successfully';
+            } else {
+                printf("ERROR: %s",$rackspace->getErrorMsg());
+            }
+]]></programlisting>
+
+        <para>
+            This example store a file image <emphasis>example.jpg</emphasis> in the container <emphasis>test</emphasis>
+            with the metadata specified in the array <emphasis>$metadata</emphasis>.
+        </para>
+        
+        <para>
+            To delete an object (file) you can use the <emphasis>deleteObject</emphasis> method.
+        </para>
+        
+        <programlisting language="php"><![CDATA[           
+            if ($rackspace->deleteObject('test','example.jpg')!==false) {
+                echo 'Object deleted successfully';
+            } else {
+                printf("ERROR: %s",$rackspace->getErrorMsg());
+            }
+]]></programlisting>
+
+        <para>
+            This example delete the object <emphasis>example.jpg</emphasis> in the container <emphasis>test</emphasis>.
+        </para>
+        
+        <para>
+            To publish a container as <acronym>CDN</acronym> (Content Delivery Network) you can use the <emphasis>enableCdnContainer</emphasis> method.
+        </para>
+        
+        <programlisting language="php"><![CDATA[     
+            $cdnInfo= $rackspace->enableCdnContainer('test');
+            
+            if ($cdnInfo!==false) {
+                print_r($cdnInfo);
+            } else {
+                printf("ERROR: %s",$rackspace->getErrorMsg());
+            }
+]]></programlisting>
+
+        <para>
+            This example publish the container <emphasis>test</emphasis> as <acronym>CDN</acronym>.
+            If the operation is successfull returns an associative arrays with the following values:
+            <itemizedlist mark='opencircle'>
+                <listitem>
+                    <para>
+                        <emphasis>cdn_uri</emphasis>, the url of the CDN container;
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>cdn_uri_ssl</emphasis>, the ssl url of the CDN container;
+                    </para>
+                </listitem>            
+            </itemizedlist>  
+        </para>
+            
+    </sect2>
+ 
+    <sect2 id="zend.service.rackspace.files.methods">
+        <title>Available Methods</title>
+ 
+        <variablelist>
+            <varlistentry id="zend.service.rackspace.files.methods.get-containers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getContainers</methodname>
+                        <methodparam>
+                            <funcparams>$options=aray()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Returns all the containers available. The return is an instance of <classname>Zend\Service\Rackspace\Files\ContainerList</classname>
+                    </para>
+                    <para>
+                        The <emphasis>$options</emphasis> contains the following optional parameters:
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    <emphasis>limit</emphasis>, for an integer value n, limits the number of results to at most n values.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>marker</emphasis>, given a string value x, return object names greater in value than the specified marker.
+                                </para>
+                            </listitem>
+                        </itemizedlist>    
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </sect2>
+ 
+    <sect2 id="zend.service.rackspace.files.examples">
+        <title>Examples</title>
+ 
+        <example id="zend.service.rackspace.files.examples.authenticate">
+            <title>Authenticate</title>
+ 
+            <para>Check if the username and the key are valid for the Rackspace authentication.</para>
+ 
+            <programlisting language="php"><![CDATA[
+            $user = 'username';
+            $key  = 'secret key';
+
+            $rackspace = new Zend\Service\Rackspace\Files($user,$key);
+
+            if ($rackspace->authenticate()) {
+                printf("Authenticated with token: %s",$rackspace->getToken());
+            } else {
+                printf("ERROR: %s",$rackspace->getErrorMsg());
+            }
+]]></programlisting>
+        </example>
+    </sect2>
+    
+</sect1>

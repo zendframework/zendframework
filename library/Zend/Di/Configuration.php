@@ -22,7 +22,9 @@ class Configuration
                 $data = iterator_to_array($data, true);
             }
         } elseif (!is_array($data)) {
-            throw new Exception\InvalidArgumentException('Configuration data must be of type Zend\Config\Config or an array');
+            throw new Exception\InvalidArgumentException(
+                'Configuration data must be of type Zend\Config\Config or an array'
+            );
         }
         $this->data = $data;
     }
@@ -53,7 +55,10 @@ class Configuration
     {
         if ($di->hasDefinition()) {
             if (!$di->getDefinition() instanceof Definition\AggregateDefinition) {
-                throw new Exception\InvalidArgumentException('In order to configure multiple definitions, the primary definition must not be set, or must be of type AggregateDefintion');
+                throw new Exception\InvalidArgumentException(
+                    'In order to configure multiple definitions, the primary definition must not be set, '
+                    . 'or must be of type AggregateDefintion'
+                );
             }
         } else {
             $di->setDefinition($di->createDefinition('Zend\Di\Definition\AggregateDefinition'));
@@ -69,7 +74,10 @@ class Configuration
         if ($di->hasDefinition()) {
             $aggregateDef = $di->getDefinition();
             if (!$aggregateDef instanceof Definition\AggregateDefinition) {
-                throw new Exception\InvalidArgumentException('In order to configure multiple definitions, the primary definition must not be set, or must be of type AggregateDefintion');
+                throw new Exception\InvalidArgumentException(
+                    'In order to configure multiple definitions, the primary definition must not be set, '
+                    . 'or must be of type AggregateDefintion'
+                );
             }
         } /* else {
             $aggregateDef = $di->createDefinition('Zend\Di\Definition\AggregateDefinition');
@@ -101,32 +109,38 @@ class Configuration
             switch (strtolower($target)) {
                 case 'aliases':
                 case 'alias':
-                    foreach ($data as $aliasName => $className) {
-                        $im->addAlias($aliasName, $className);
-                    }
-                    break;
-                case 'properties':
-                case 'property':
-                    foreach ($data as $classOrAlias => $properties) {
-                        foreach ($properties as $propName => $propValue) {
-                            $im->setProperty($classOrAlias, $propName, $propValue);
-                        }
+                    foreach ($data as $n => $v) {
+                        $im->addAlias($n, $v);
                     }
                     break;
                 case 'preferences':
-                case 'preferredinstances':
-                case 'preferredinstance':
-                    foreach ($data as $classOrAlias => $preferredValueOrValues) {
-                        if (is_array($preferredValueOrValues)) {
-                            foreach ($preferredValueOrValues as $preferredValue) {
-                                $im->addPreferredInstance($classOrAlias, $preferredValue);
+                case 'preference':
+                    foreach ($data as $n => $v) {
+                        if (is_array($v)) {
+                            foreach ($v as $v2) {
+                                $im->addTypePreference($n, $v2);
                             }
                         } else {
-                            $im->addPreferredInstance($classOrAlias, $preferredValueOrValues);
+                            $im->addTypePreference($n, $v);
+                        }
+                    }
+                    break;
+                default:
+                    foreach ($data as $n => $v) {
+                        switch ($n) {
+                            case 'parameters':
+                            case 'parameter':
+                                $im->setParameters($target, $v);
+                                break;
+                            case 'methods':
+                            case 'method':
+                                $im->setMethods($target, $v);
+                                break;
                         }
                     }
             }
         }
+
     }
     
 }

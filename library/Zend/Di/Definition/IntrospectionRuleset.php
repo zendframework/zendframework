@@ -16,9 +16,9 @@ class IntrospectionRuleset
     
     protected $setterRules = array(
         'enabled'		      => true,
-        'pattern'             => 'set[A-Z]{1}\w*',
+        'pattern'             => '^set[A-Z]{1}\w*',
         'includedClasses'     => array(),
-        'excludedClasses'     => array(),
+        'excludedClasses'     => array('ArrayObject'),
         'methodMaximumParams' => 1,
         'paramCanBeOptional'  => true,
         );

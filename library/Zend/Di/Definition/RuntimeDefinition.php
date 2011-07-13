@@ -119,7 +119,7 @@ class RuntimeDefinition implements Definition
     public function hasInjectionMethod($class, $method)
     {
         $injectionMethods = $this->getInjectionMethods($class);
-        return (array_key_exists($method, $injectionMethods));
+        return (in_array($method, $injectionMethods));
     }
 
     /**
@@ -137,7 +137,7 @@ class RuntimeDefinition implements Definition
         $className = $c->getName();
         
         if (array_key_exists($className, $this->injectionMethodCache)) {
-            return $this->injectionMethodCache[$className];
+            return array_keys($this->injectionMethodCache[$className]);
         }
         
         // constructor injection
@@ -165,6 +165,8 @@ class RuntimeDefinition implements Definition
         if ($sRules['enabled']) {
             /* @var $m ReflectionMethod */
             foreach ($c->getMethods() as $m) {
+                $declaringClassName = $m->getDeclaringClass()->getName();
+                
                 if ($m->getNumberOfParameters() == 0) {
                     continue;
                 }
@@ -175,9 +177,14 @@ class RuntimeDefinition implements Definition
                 }
 
                 // explicity NOT in excluded classes
-                if ($sRules['excludedClasses'] && in_array($className, $sRules['excludedClasses'])) {
+                if ($sRules['excludedClasses']
+                    && (in_array($className, $sRules['excludedClasses'])
+                        || in_array($declaringClassName, $sRules['excludedClasses']))) {
                     continue;
                 }
+                
+                // declaring class 
+                
                 // if there is a pattern & it does not match
                 if ($sRules['pattern'] && !preg_match('/' . $sRules['pattern'] . '/', $m->getName())) {
                     continue;
@@ -236,7 +243,7 @@ class RuntimeDefinition implements Definition
         
         $injectionMethods = $this->getInjectionMethods($class);
 
-        if (!array_key_exists($method, $injectionMethods)) {
+        if (!in_array($method, $injectionMethods)) {
             throw new \Exception('Injectible method was not found.');
         }
         $m = $c->getMethod($method);

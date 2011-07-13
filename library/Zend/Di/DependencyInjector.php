@@ -147,10 +147,12 @@ class DependencyInjector implements DependencyInjection
         
         if ($params) {
             if (($fastHash = $im->hasSharedInstanceWithParameters($name, $params, true))) {
+                array_pop($this->instanceContext);
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         } else {
             if ($im->hasSharedInstance($name, $params)) {
+                array_pop($this->instanceContext);
                 return $im->getSharedInstance($name, $params);
             }
         }
@@ -220,7 +222,7 @@ class DependencyInjector implements DependencyInjection
             if ($iConfig['methods']) {
                 foreach ($iConfig['methods'] as $iConfigMethod => $iConfigMethodParams) {
                     // skip methods processed by handleInjectionMethodForObject
-                    if (in_array($iConfigMethod, $injectionMethods)) continue; 
+                    if (in_array($iConfigMethod, $injectionMethods) && $iConfigMethod !== '__construct') continue; 
                     call_user_func_array(array($object, $iConfigMethod), array_values($iConfigMethodParams));
                 }
             }
@@ -445,12 +447,14 @@ class DependencyInjector implements DependencyInjection
                 }
                 // check the provided method config
                 if (isset($iConfig[$thisIndex]['methods'][$method][$name])) {
-                    if (isset($aliases[$iConfig[$thisIndex]['methods'][$method][$name]])) {
+                    if (is_string(is_string($iConfig[$thisIndex]['methods'][$method][$name]))
+                        && isset($aliases[$iConfig[$thisIndex]['methods'][$method][$name]])) {
                         $computedParams['lookup'][$name] = array(
                             $iConfig[$thisIndex]['methods'][$method][$name],
                             $this->instanceManager->getClassFromAlias($iConfig[$thisIndex]['methods'][$method][$name])
                         );
-                    } elseif ($this->definition->hasClass($iConfig[$thisIndex]['methods'][$method][$name])) {
+                    } elseif (is_string(is_string($iConfig[$thisIndex]['methods'][$method][$name]))
+                        && $this->definition->hasClass($iConfig[$thisIndex]['methods'][$method][$name])) {
                         $computedParams['lookup'][$name] = array(
                             $iConfig[$thisIndex]['methods'][$method][$name],
                             $iConfig[$thisIndex]['methods'][$method][$name]
@@ -495,7 +499,7 @@ class DependencyInjector implements DependencyInjection
                 $computedParams['optional'][$name] = true;
             }
             
-            if ($type && $isTypeInstantiable === true) {
+            if ($type && $isTypeInstantiable === true && !$isOptional) {
                 $computedParams['lookup'][$name] = array($type, $type);
             }
             

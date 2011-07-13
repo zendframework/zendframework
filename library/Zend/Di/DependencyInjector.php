@@ -430,12 +430,14 @@ class DependencyInjector implements DependencyInjection
             foreach (array('thisAlias', 'thisClass', 'requestedAlias', 'requestedClass') as $thisIndex) {
                 // check the provided parameters config
                 if (isset($iConfig[$thisIndex]['parameters'][$name])) {
-                    if (isset($aliases[$iConfig[$thisIndex]['parameters'][$name]])) {
+                    if (is_string($iConfig[$thisIndex]['parameters'][$name])
+                        && isset($aliases[$iConfig[$thisIndex]['parameters'][$name]])) {
                         $computedParams['lookup'][$name] = array(
                             $iConfig[$thisIndex]['parameters'][$name],
                             $this->instanceManager->getClassFromAlias($iConfig[$thisIndex]['parameters'][$name])
                         );
-                    } elseif ($this->definition->hasClass($iConfig[$thisIndex]['parameters'][$name])) {
+                    } elseif (is_string($iConfig[$thisIndex]['parameters'][$name])
+                        && $this->definition->hasClass($iConfig[$thisIndex]['parameters'][$name])) {
                         $computedParams['lookup'][$name] = array(
                             $iConfig[$thisIndex]['parameters'][$name],
                             $iConfig[$thisIndex]['parameters'][$name]

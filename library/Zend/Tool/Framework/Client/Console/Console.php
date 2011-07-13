@@ -148,7 +148,7 @@ class Console
                 );
         }
 
-        // which classes are essential to initializing Zend_Tool_Framework_Client_Console
+        // which classes are essential to initializing Zend\Tool\Framework\Client\Console
         $classesToLoad = array(
             'Zend\Tool\Framework\Client\Console\Manifest',    
             'Zend\Tool\Framework\System\Manifest'

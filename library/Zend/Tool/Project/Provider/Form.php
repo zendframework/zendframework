@@ -42,7 +42,7 @@ class Form extends AbstractProvider
     public static function createResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Form::createResource() expects \"formName\" is the name of a form resource to create.');
         }
 
         if (!($formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName))) {
@@ -73,7 +73,7 @@ class Form extends AbstractProvider
     public static function hasResource(ProjectProfile $profile, $formName, $moduleName = null)
     {
         if (!is_string($formName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Form::createResource() expects \"formName\" is the name of a form resource to check for existence.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Form::createResource() expects \"formName\" is the name of a form resource to check for existence.');
         }
 
         $formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName);
@@ -129,7 +129,7 @@ class Form extends AbstractProvider
 
             if ($testingEnabled) {
                 $testFormResource = null;
-                // $testFormResource = Zend_Tool_Project_Provider_Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
+                // $testFormResource = Zend\Tool\Project\Provider\Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
             }
 
         } catch (\Exception $e) {

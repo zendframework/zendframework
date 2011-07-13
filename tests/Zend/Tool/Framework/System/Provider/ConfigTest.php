@@ -101,6 +101,32 @@ class ConfigTest extends AbstractTest
         // Use either "zf disable config.provider" or "zf enable config.manifest
     }
 
+    public function testEnableAndDisableProvider()
+    {
+        $ini = __DIR__. '/_files/enable.ini';
+        file_put_contents($ini, '');
+
+        $clientConfig = new ClientConfig;
+        $clientConfig->setConfigFilePath($ini);
+        $this->_registry->setConfig($clientConfig);
+        $config = $this->_configProvider;
+
+        $providerName = 'Zend\\Tool\Framework\\System\\Provider\\Version';
+
+        $config->enableProvider($providerName);
+        $configs = $clientConfig->basicloader->classes;
+        $this->assertEquals($providerName, $configs->current());
+
+        try {
+            $config->enableProvider($providerName);
+            $this->fail('RuntimeException was expected but not thrown');
+        } catch (RuntimeException $re ) {
+        }
+
+        $config->disableProvider($providerName);
+        $this->assertEmpty($configs->current());
+    }
+
     public function testLoadUserConfigIfExists()
     {
         $ref = new \ReflectionObject($this->_configProvider);
@@ -139,6 +165,7 @@ class ConfigTest extends AbstractTest
         $this->_registry->setConfig($clientConfig);
         $config = $this->_configProvider;
 
+        // Test enable provider 
         try {
             $config->enableProvider('TestNamespace\TestInvalidProvider');
             $this->fail('RuntimeException was expected but not thrown');
@@ -146,9 +173,46 @@ class ConfigTest extends AbstractTest
         }
 
         $config->enableProvider('TestNamespace\TestProvider');
-        $providers = $clientConfig->basicloader->classes->toArray();
-        $this->assertEquals('TestNamespace\TestProvider', current($providers));
+        $configs = $clientConfig->basicloader->classes;
+        $this->assertEquals('TestNamespace\TestProvider', $configs->current());
         
+        // Test disable provider
+        try {
+            $config->disableProvider('TestNamespace\TestInvalidProvider');
+            $this->fail('RuntimeException was expected but not thrown');
+        } catch (RuntimeException $re) {
+        }
+
+        $config->disableProvider('TestNamespace\TestProvider');
+        $this->assertEmpty($configs->current(), 'No config setting will exists');
+
+        /**
+         * manifest test
+         */
+        $loader->autoload('TestNamespace\TestManifest');
+        $loader->autoload('TestNamespace\TestInvalidManifest');
+
+        try {
+            $config->enableManifest('TestNamespace\TestInvalidManifest');
+            $this->fail('RuntimeException was expected but not thrown');
+        } catch (RuntimeException $re) {
+        }
+
+        $config->enableManifest('TestNamespace\TestManifest');
+
+        $configs = $clientConfig->basicloader->classes;
+        $this->assertEquals('TestNamespace\TestManifest', $configs->current());
+
+        try {
+            $config->disableManifest('TestNamespace\TestInvalidManifest');
+            $this->fail('RuntimeException was expected but not thrown');
+        } catch (RuntimeException $re) {
+        }
+
+        $config->disableManifest('TestNamespace\TestManifest');
+        $this->assertEmpty($configs->current(), 'No config setting will exists');
+
+        // cleanup
         file_put_contents($ini, '');
     }
 }

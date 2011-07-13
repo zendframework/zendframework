@@ -181,7 +181,7 @@ class Container implements \RecursiveIterator, \Countable
                 throw new Exception\InvalidArgumentException('Context by name ' . $context . ' was not found in the context registry.');
             }
         } elseif (!$context instanceof \Zend\Tool\Project\Context) {
-            throw new Exception\InvalidArgumentException('Context must be of type string or Zend_Tool_Project_Context_Interface.');
+            throw new Exception\InvalidArgumentException('Context must be of type string or Zend\\Tool\\Project\\Context\\Interface.');
         }
 
         $newResource = new Resource($context);

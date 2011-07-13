@@ -160,7 +160,7 @@ class DbTable
         
         $bootstrapResource = $this->_loadedProfile->search('BootstrapFile');
         
-        /* @var $zendApp Zend_Application */
+        /* @var $zendApp Zend\Application */
         $zendApp = $bootstrapResource->getApplicationInstance();
         
         try {
@@ -170,7 +170,7 @@ class DbTable
             return;
         }
         
-        /* @var $db Zend_Db_Adapter_Abstract */
+        /* @var $db Zend\Db\Adapter\Abstract */
         $db = $zendApp->getBootstrap()->getResource('db');
         
         $tableResources = array();

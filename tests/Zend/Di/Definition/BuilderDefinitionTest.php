@@ -71,5 +71,50 @@ class BuilderDefinitionTest extends TestCase
             );
         
     }
+
+    public function testCanCreateClassFromFluentInterface()
+    {
+        $builder = new BuilderDefinition();
+        $class = $builder->createClass('Foo');
+
+        $this->assertTrue($builder->hasClass('Foo'));
+    }
     
+    public function testCanCreateInjectionMethodsAndPopulateFromFluentInterface()
+    {
+        $builder = new BuilderDefinition();
+        $foo     = $builder->createClass('Foo');
+        $foo->setName('Foo');
+        $foo->createInjectionMethod('setBar')
+            ->addParameter('bar', 'Bar');
+        $foo->createInjectionMethod('setConfig')
+            ->addParameter('config', null);
+
+        $this->assertTrue($builder->hasClass('Foo'));
+        $this->assertTrue($builder->hasInjectionMethod('Foo', 'setBar'));
+        $this->assertTrue($builder->hasInjectionMethod('Foo', 'setConfig'));
+
+        $this->assertEquals(array('bar' => 'Bar'), $builder->getInjectionMethodParameters('Foo', 'setBar'));
+        $this->assertEquals(array('config' => null), $builder->getInjectionMethodParameters('Foo', 'setConfig'));
+    }
+
+    public function testBuilderCanSpecifyClassToUseWithCreateClass()
+    {
+        $builder = new BuilderDefinition();
+        $this->assertEquals('Zend\Di\Definition\Builder\PhpClass', $builder->getClassBuilder());
+
+        $builder->setClassBuilder('Foo');
+        $this->assertEquals('Foo', $builder->getClassBuilder());
+    }
+
+    public function testClassBuilderCanSpecifyClassToUseWhenCreatingInjectionMethods()
+    {
+        $builder = new BuilderDefinition();
+        $class   = $builder->createClass('Foo');
+
+        $this->assertEquals('Zend\Di\Definition\Builder\InjectionMethod', $class->getMethodBuilder());
+
+        $class->setMethodBuilder('Foo');
+        $this->assertEquals('Foo', $class->getMethodBuilder());
+    }
 }

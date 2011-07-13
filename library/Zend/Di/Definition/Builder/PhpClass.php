@@ -4,9 +4,10 @@ namespace Zend\Di\Definition\Builder;
 
 class PhpClass
 {
-    protected $name = null;
-    protected $instantiator = '__construct';
-    protected $injectionMethods = array();
+    protected $defaultMethodBuilder = 'Zend\Di\Definition\Builder\InjectionMethod';
+    protected $name                 = null;
+    protected $instantiator         = '__construct';
+    protected $injectionMethods     = array();
     
     public function setName($name)
     {
@@ -45,6 +46,53 @@ class PhpClass
     {
         $this->injectionMethods[] = $injectionMethod;
         return $this;
+    }
+
+    /**
+     * Create and register an injection method
+     *
+     * Optionally takes the method name.
+     *
+     * This method may be used in lieu of addInjectionMethod() in 
+     * order to provide a more fluent interface for building classes with
+     * injection methods.
+     * 
+     * @param  null|string $name 
+     * @return InjectionMethod
+     */
+    public function createInjectionMethod($name = null)
+    {
+        $builder = $this->defaultMethodBuilder;
+        $method  = new $builder();
+        if (null !== $name) {
+            $method->setName($name);
+        }
+        $this->addInjectionMethod($method);
+        return $method;
+    }
+
+    /**
+     * Override which class will be used by {@link createInjectionMethod()}
+     * 
+     * @param  string $class 
+     * @return PhpClass
+     */
+    public function setMethodBuilder($class)
+    {
+        $this->defaultMethodBuilder = $class;
+        return $this;
+    }
+
+    /**
+     * Determine what class will be used by {@link createInjectionMethod()}
+     *
+     * Mainly to provide the ability to temporarily override the class used.
+     * 
+     * @return string
+     */
+    public function getMethodBuilder()
+    {
+        return $this->defaultMethodBuilder;
     }
     
     public function getInjectionMethods()

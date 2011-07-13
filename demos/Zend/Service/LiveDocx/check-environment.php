@@ -260,7 +260,7 @@ try {
     $mailMerge = new MailMerge();
     $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
               ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD)
-              ->logIn();
+              ->listTemplates();
     $duration = microtime(true) - $microtime;
     unset($mailMerge);
 } catch (Exception $e) {
@@ -319,7 +319,7 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME')     &&
         $mailMerge->setWsdl(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL)
                   ->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME)
                   ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD)
-                  ->logIn();
+                  ->listTemplates();
         $duration = microtime(true) - $microtime;
         unset($mailMerge);
     } catch (Exception $e) {

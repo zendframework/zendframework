@@ -33,7 +33,7 @@ class Application
     {
         $this->bootstrapper = new $this->bootstrapperClass;
         if (!$this->bootstrapper instanceof BootstrapInterface) {
-            throw new \RuntimeException('Bootstrap class must implement Zend\Application\BootstrapInterface');
+            throw new \RuntimeException('Bootstrap class must implement Zend\Mvc\Application\BootstrapInterface');
         }
         $this->bootstrapper->bootstrap($this);
     }
@@ -48,14 +48,14 @@ class Application
         $runner = new $this->runnerClass;
         
         if (!$runner instanceof RunnerInterface) {
-            throw new \RuntimeException('Runner class must implement Zend\Application\RunnerInterface');
+            throw new \RuntimeException('Runner class must implement Zend\Mvc\Application\RunnerInterface');
         }
         
         if ($this->serviceLocator && $runner instanceof ServiceLocatorAwareInterface) {
             $runner->setServiceLocator($this->serviceLocator);
         }
         
-        $this->dispatcher->run($this);
+        $runner->run($this);
     }
     
 }

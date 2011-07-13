@@ -25,7 +25,7 @@
 namespace Zend\Tool\Project\Context\Zf;
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend\Tool\Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
@@ -82,7 +82,7 @@ class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
             $this->_scriptName = $scriptName;
             $this->_filesystemName = $scriptName . '.phtml';
         } else {
-            throw Zend_Tool_Project_Exception('Either a forActionName or scriptName is required.');
+            throw Zend\Tool\Project\Exception('Either a forActionName or scriptName is required.');
         }
 
         parent::init();

@@ -117,11 +117,12 @@ class ReflectionFileTest extends \PHPUnit_Framework_TestCase
 
     public function testFileGetFunctionsReturnsFunctions()
     {
-        $this->markTestSkipped('Regex in Zend_Reflection_File needs work in the function department');
-        $fileToRequire = __DIR__ . '/_files/FileOfFunctions.php';
+        //$this->markTestSkipped('Regex in Zend_Reflection_File needs work in the function department');
+        $fileToRequire = __DIR__ . '/TestAsset/FileOfFunctions.php';
         include_once $fileToRequire;
         $reflectionFile = new Reflection\ReflectionFile($fileToRequire);
-        echo count($reflectionFile->getFunctions());
+        $funcs = $reflectionFile->getFunctions();
+        $this->assertTrue(current($funcs) instanceof \Zend\Reflection\ReflectionFunction);
     }
 
     public function testFileCanReflectFileWithInterface()

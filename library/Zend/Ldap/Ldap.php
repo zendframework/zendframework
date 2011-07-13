@@ -112,7 +112,7 @@ class Ldap
      */
     public static function explodeDn($dn, array &$keys = null, array &$vals = null)
     {
-        return DN::checkDn($dn, $keys, $vals);
+        return Dn::checkDn($dn, $keys, $vals);
     }
 
     /**
@@ -516,7 +516,7 @@ class Ldap
      */
     protected function _getAccountDn($acctname)
     {
-        if (DN::checkDn($acctname)) {
+        if (Dn::checkDn($acctname)) {
             return $acctname;
         }
         $acctname = $this->getCanonicalAccountName($acctname, self::ACCTNAME_FORM_USERNAME);
@@ -761,7 +761,7 @@ class Ldap
         } else {
             /* Check to make sure the username is in DN form.
              */
-            if (!DN::checkDn($username)) {
+            if (!Dn::checkDn($username)) {
                 if ($this->_getBindRequiresDn()) {
                     /* moreCreds stops an infinite loop if _getUsername does not
                      * return a DN and the bind requires it
@@ -868,7 +868,7 @@ class Ldap
         if ($basedn === null) {
             $basedn = $this->getBaseDn();
         }
-        else if ($basedn instanceof DN) {
+        else if ($basedn instanceof Dn) {
             $basedn = $basedn->toString();
         }
 
@@ -903,11 +903,11 @@ class Ldap
         return $this->_createCollection($iterator, $collectionClass);
     }
 
-	/**
+    /**
      * Extension point for collection creation
      *
-     * @param  \Zend\Ldap\Collection\DefaultIterator	$iterator
-     * @param  string|null								$collectionClass
+     * @param  \Zend\Ldap\Collection\DefaultIterator    $iterator
+     * @param  string|null                              $collectionClass
      * @return \Zend\Ldap\Collection
      * @throws \Zend\Ldap\Exception
      */
@@ -1091,8 +1091,8 @@ class Ldap
      */
     public function add($dn, array $entry)
     {
-        if (!($dn instanceof DN)) {
-            $dn = DN::factory($dn, null);
+        if (!($dn instanceof Dn)) {
+            $dn = Dn::factory($dn, null);
         }
         self::prepareLdapEntryArray($entry);
         foreach ($entry as $key => $value) {
@@ -1101,9 +1101,9 @@ class Ldap
             }
         }
 
-        $rdnParts = $dn->getRdn(DN::ATTR_CASEFOLD_LOWER);
+        $rdnParts = $dn->getRdn(Dn::ATTR_CASEFOLD_LOWER);
         foreach ($rdnParts as $key => $value) {
-            $value = DN::unescapeValue($value);
+            $value = Dn::unescapeValue($value);
             if (!array_key_exists($key, $entry)) {
                 $entry[$key] = array($value);
             } else if (!in_array($value, $entry[$key])) {
@@ -1135,12 +1135,12 @@ class Ldap
      */
     public function update($dn, array $entry)
     {
-        if (!($dn instanceof DN)) {
-            $dn = DN::factory($dn, null);
+        if (!($dn instanceof Dn)) {
+            $dn = Dn::factory($dn, null);
         }
         self::prepareLdapEntryArray($entry);
 
-        $rdnParts = $dn->getRdn(DN::ATTR_CASEFOLD_LOWER);
+        $rdnParts = $dn->getRdn(Dn::ATTR_CASEFOLD_LOWER);
         foreach ($rdnParts as $key => $value) {
             $value = Dn::unescapeValue($value);
             if (array_key_exists($key, $entry) && !in_array($value, $entry[$key])) {
@@ -1177,7 +1177,7 @@ class Ldap
      */
     public function save($dn, array $entry)
     {
-        if ($dn instanceof DN) {
+        if ($dn instanceof Dn) {
             $dn = $dn->toString();
         }
         if ($this->exists($dn)) $this->update($dn, $entry);
@@ -1195,7 +1195,7 @@ class Ldap
      */
     public function delete($dn, $recursively = false)
     {
-        if ($dn instanceof DN) {
+        if ($dn instanceof Dn) {
             $dn = $dn->toString();
         }
         if ($recursively === true) {
@@ -1224,7 +1224,7 @@ class Ldap
      */
     protected function _getChildrenDns($parentDn)
     {
-        if ($parentDn instanceof DN) {
+        if ($parentDn instanceof Dn) {
             $parentDn = $parentDn->toString();
         }
         $children = array();
@@ -1254,20 +1254,20 @@ class Ldap
      */
     public function moveToSubtree($from, $to, $recursively = false, $alwaysEmulate = false)
     {
-        if ($from instanceof DN) {
+        if ($from instanceof Dn) {
             $orgDnParts = $from->toArray();
         } else {
-            $orgDnParts = DN::explodeDn($from);
+            $orgDnParts = Dn::explodeDn($from);
         }
 
-        if ($to instanceof DN) {
+        if ($to instanceof Dn) {
             $newParentDnParts = $to->toArray();
         } else {
-            $newParentDnParts = DN::explodeDn($to);
+            $newParentDnParts = Dn::explodeDn($to);
         }
 
         $newDnParts = array_merge(array(array_shift($orgDnParts)), $newParentDnParts);
-        $newDn = DN::fromArray($newDnParts);
+        $newDn = Dn::fromArray($newDnParts);
         return $this->rename($from, $newDn, $recursively, $alwaysEmulate);
     }
 
@@ -1307,18 +1307,18 @@ class Ldap
         else if ($recursively) $emulate = true;
 
         if ($emulate === false) {
-            if ($from instanceof DN) {
+            if ($from instanceof Dn) {
                 $from = $from->toString();
             }
 
-            if ($to instanceof DN) {
+            if ($to instanceof Dn) {
                 $newDnParts = $to->toArray();
             } else {
-                $newDnParts = DN::explodeDn($to);
+                $newDnParts = Dn::explodeDn($to);
             }
 
-            $newRdn = DN::implodeRdn(array_shift($newDnParts));
-            $newParent = DN::implodeDn($newDnParts);
+            $newRdn = Dn::implodeRdn(array_shift($newDnParts));
+            $newParent = Dn::implodeDn($newDnParts);
             $isOK = @ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
             if($isOK === false) {
                 throw new Exception($this, 'renaming ' . $from . ' to ' . $to);
@@ -1343,20 +1343,20 @@ class Ldap
      */
     public function copyToSubtree($from, $to, $recursively = false)
     {
-        if ($from instanceof DN) {
+        if ($from instanceof Dn) {
             $orgDnParts = $from->toArray();
         } else {
-            $orgDnParts = DN::explodeDn($from);
+            $orgDnParts = Dn::explodeDn($from);
         }
 
-        if ($to instanceof DN) {
+        if ($to instanceof Dn) {
             $newParentDnParts = $to->toArray();
         } else {
-            $newParentDnParts = DN::explodeDn($to);
+            $newParentDnParts = Dn::explodeDn($to);
         }
 
         $newDnParts = array_merge(array(array_shift($orgDnParts)), $newParentDnParts);
-        $newDn = DN::fromArray($newDnParts);
+        $newDn = Dn::fromArray($newDnParts);
         return $this->copy($from, $newDn, $recursively);
     }
 
@@ -1373,19 +1373,19 @@ class Ldap
     {
         $entry = $this->getEntry($from, array(), true);
 
-        if ($to instanceof DN) {
+        if ($to instanceof Dn) {
             $toDnParts = $to->toArray();
         } else {
-            $toDnParts = DN::explodeDn($to);
+            $toDnParts = Dn::explodeDn($to);
         }
         $this->add($to, $entry);
 
         if ($recursively === true && $this->countChildren($from)>0) {
             $children = $this->_getChildrenDns($from);
             foreach ($children as $c) {
-                $cDnParts = DN::explodeDn($c);
+                $cDnParts = Dn::explodeDn($c);
                 $newChildParts = array_merge(array(array_shift($cDnParts)), $toDnParts);
-                $newChild = DN::implodeDn($newChildParts);
+                $newChild = Dn::implodeDn($newChildParts);
                 $this->copy($c, $newChild, true);
             }
         }
@@ -1395,7 +1395,7 @@ class Ldap
     /**
      * Returns the specified DN as a Zend_Ldap_Node
      *
-     * @param  string|\Zend\Ldap\dN $dn
+     * @param  string|\Zend\Ldap\Dn $dn
      * @return \Zend\Ldap\Node|null
      * @throws \Zend\Ldap\Exception
      */

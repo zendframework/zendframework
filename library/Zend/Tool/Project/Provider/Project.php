@@ -165,7 +165,7 @@ class Project
             <uploadsDirectory enabled="false" />
         </dataDirectory>
         <docsDirectory>
-            <file filesystemName="README.txt" defaultContentCallback="Zend_Tool_Project_Provider_Project::getDefaultReadmeContents"/>
+            <file filesystemName="README.txt" defaultContentCallback="Zend\Tool\Project\Provider\Project::getDefaultReadmeContents"/>
         </docsDirectory>
         <libraryDirectory>
             <zfStandardLibraryDirectory enabled="false" />

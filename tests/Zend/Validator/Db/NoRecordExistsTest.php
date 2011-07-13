@@ -25,6 +25,7 @@
 namespace ZendTest\Validator\Db;
 
 use Zend\Db\Table\AbstractTable,
+    Zend\Validator\Db\RecordExists as RecordExistsValidator,
     Zend\Validator\Db\NoRecordExists as NoRecordExistsValidator;
 
 
@@ -201,5 +202,25 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
         AbstractTable::setDefaultAdapter(null);
         $validator = new NoRecordExistsValidator('users', 'field1', null, $this->_adapterNoResult);
         $this->assertTrue($validator->isValid('value1'));
+    }
+
+    /**
+     *
+     * @group ZF-10705
+     */
+    public function testCreatesQueryBasedOnNamedOrPositionalAvailablity()
+    {
+        AbstractTable::setDefaultAdapter(null);
+        $this->_adapterHasResult->setSupportsParametersValues(array('named' => false, 'positional' => true));
+        $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
+        $validator->isValid('foo');
+        $wherePart = $validator->getSelect()->getPart('where');
+        $this->assertEquals($wherePart[0], '("field1" = ?)');
+
+        $this->_adapterHasResult->setSupportsParametersValues(array('named' => true, 'positional' => true));
+        $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
+        $validator->isValid('foo');
+        $wherePart = $validator->getSelect()->getPart('where');
+        $this->assertEquals($wherePart[0], '("field1" = :value)');
     }
 }

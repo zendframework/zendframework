@@ -642,6 +642,18 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\Application\TestAsset\ResourceBroker', $broker);
         $this->assertEquals(array('foo' => 'bar'), $broker->options);
     }
+    
+    /**
+     * @group ZF2-30
+     */
+    public function testMultipleApplicationResourcesInitialization()
+    {
+        define('APPLICATION_PATH', __DIR__);
+        $application = new Application\Application('testing', __DIR__.'/TestAsset/Zf2-30.ini');        
+        $application->bootstrap();      
+        $loadedResource = $application->getBootstrap()->getBroker()->load('zf30');  
+        $this->assertFalse(($loadedResource->getInitCount() > 1), 'Resource Zf30 initilized '.$loadedResource->getInitCount().' times');
+    }
 }
 
 class Layout extends AbstractResource

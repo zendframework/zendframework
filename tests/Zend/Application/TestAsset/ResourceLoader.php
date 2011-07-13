@@ -21,7 +21,7 @@
 
 namespace ZendTest\Application\TestAsset;
 
-use Zend\Application\ResourceBroker as BaseResourceBroker;
+use Zend\Application\ResourceLoader as BaseResourceLoader;
 
 /**
  * @category   Zend
@@ -30,12 +30,11 @@ use Zend\Application\ResourceBroker as BaseResourceBroker;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResourceBroker extends BaseResourceBroker
+class ResourceLoader extends BaseResourceLoader
 {
-    protected $defaultClassLoader = 'ZendTest\Application\TestAsset\ResourceLoader';
-        
     public function __construct($options = null)
     {
+        $this->plugins['zf30'] = 'ZendTest\Application\TestAsset\Resource\Zf30';
         $this->options = $options;
     }
 }

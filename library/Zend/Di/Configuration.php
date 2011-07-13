@@ -109,36 +109,38 @@ class Configuration
             switch (strtolower($target)) {
                 case 'aliases':
                 case 'alias':
-                    foreach ($data as $aliasName => $className) {
-                        $im->addAlias($aliasName, $className);
-                    }
-                    break;
-                case 'parameters':
-                case 'parameter':
-                    foreach ($data as $classOrAlias => $parameters) {
-                        $im->setParameters($classOrAlias, $parameters);
-                    }
-                    break;
-                case 'method':
-                case 'methods':
-                    foreach ($data as $classOrAlias => $methods) {
-                        $im->setMethods($classOrAlias, $methods);
+                    foreach ($data as $n => $v) {
+                        $im->addAlias($n, $v);
                     }
                     break;
                 case 'preferences':
-                case 'preferredinstances':
-                case 'preferredinstance':
-                    foreach ($data as $classOrAlias => $preferredValueOrValues) {
-                        if (is_array($preferredValueOrValues)) {
-                            foreach ($preferredValueOrValues as $preferredValue) {
-                                $im->addTypePreference($classOrAlias, $preferredValue);
+                case 'preference':
+                    foreach ($data as $n => $v) {
+                        if (is_array($v)) {
+                            foreach ($v as $v2) {
+                                $im->addTypePreference($n, $v2);
                             }
                         } else {
-                            $im->addTypePreference($classOrAlias, $preferredValueOrValues);
+                            $im->addTypePreference($n, $v);
+                        }
+                    }
+                    break;
+                default:
+                    foreach ($data as $n => $v) {
+                        switch ($n) {
+                            case 'parameters':
+                            case 'parameter':
+                                $im->setParameters($target, $v);
+                                break;
+                            case 'methods':
+                            case 'method':
+                                $im->setMethods($target, $v);
+                                break;
                         }
                     }
             }
         }
+
     }
     
 }

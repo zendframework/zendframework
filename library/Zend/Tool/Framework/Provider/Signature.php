@@ -234,6 +234,10 @@ class Signature implements RegistryEnabled
 
         if ($this->_name == null) {
             $className = get_class($this->_provider);
+            $name = $className;
+            if (strpos($name, '_')) {
+                $name = substr($name, strrpos($name, '_')+1);
+            }
             $name = substr($className, strrpos($className, '\\')+1);
             $name = preg_replace('#(Provider|Manifest)$#', '', $name);
             $this->_name = $name;

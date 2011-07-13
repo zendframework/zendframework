@@ -24,8 +24,11 @@
  */
 namespace Zend\Tool\Project\Provider;
 
-use Zend\Tool\Project\Context,
-    Zend\Tool\Project\Profile\Profile as ProjectProfile;
+use Zend\Tool\Framework\Provider\AbstractProvider as FrameworkAbstractProvider,
+    Zend\Tool\Framework\Provider\Initializable,
+    Zend\Tool\Project\Context,
+    Zend\Tool\Project\Profile\Profile as ProjectProfile,
+    Zend\Tool\Project\Provider\Exception\RuntimeException;
 
 /**
  * @category   Zend
@@ -33,7 +36,9 @@ use Zend\Tool\Project\Context,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractProvider
+abstract class AbstractProvider 
+    extends FrameworkAbstractProvider
+    implements Initializable
 {
 
     const NO_PROFILE_THROW_EXCEPTION = true;
@@ -51,16 +56,12 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
      */
     protected $_loadedProfile = null;
 
-    /**
-     * constructor
-     *
-     * YOU SHOULD NOT OVERRIDE THIS, unless you know what you are doing
-     *
-     */
     public function __construct()
     {
         // initialize the ZF Contexts (only once per php request)
         if (!self::$_isInitialized) {
+
+            // load all base contexts ONCE
             $contextRegistry = Context\Repository::getInstance();
             $contextRegistry->addContextsFromDirectory(
                 dirname(__DIR__) . '/Context/Zf/', 'Zend\Tool\Project\Context\Zf\\'
@@ -68,6 +69,16 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
             $contextRegistry->addContextsFromDirectory(
                 dirname(__DIR__) . '/Context/Filesystem/', 'Zend\Tool\Project\Context\Filesystem\\'
             );
+
+            // determine if there are project specfic providers ONCE
+            $profilePath = $this->_findProfileDirectory();
+            if ($this->_hasProjectProviderDirectory($profilePath . DIRECTORY_SEPARATOR . '.zfproject.xml')) {
+                $profile = $this->_loadProfile();
+                // project providers directory resource
+                $ppd = $profile->search('ProjectProvidersDirectory');
+                $ppd->loadProviders($this->_registry);
+            }
+
             self::$_isInitialized = true;
         }
 
@@ -97,6 +108,25 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
      */
     protected function _loadProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION, $projectDirectory = null, $searchParentDirectories = true)
     {
+        $foundPath = $this->_findProfileDirectory($projectDirectory, $searchParentDirectories);
+
+        if ($foundPath == false) {
+            if ($loadProfileFlag == self::NO_PROFILE_THROW_EXCEPTION) {
+                throw new RuntimeException('A project profile was not found.');
+            } else {
+                return false;
+            }
+        }
+        
+        $profile = new ProjectProfile();
+        $profile->setAttribute('projectDirectory', $foundPath);
+        $profile->loadFromFile();
+        $this->_loadedProfile = $profile;
+        return $profile;
+    }
+
+    protected function _findProfileDirectory($projectDirectory = null, $searchParentDirectories = true)
+    {
         // use the cwd if no directory was provided
         if ($projectDirectory == null) {
             $projectDirectory = getcwd();
@@ -116,11 +146,8 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
 
             $profile->setAttribute('projectDirectory', $projectDirectoryAssembled);
             if ($profile->isLoadableFromFile()) {
-                chdir($projectDirectoryAssembled);
-
-                $profile->loadFromFile();
-                $this->_loadedProfile = $profile;
-                break;
+                unset($profile);
+                return $projectDirectoryAssembled;
             }
 
             // break after first run if we are not to check upper directories
@@ -129,14 +156,6 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
             }
 
             array_pop($parentDirectoriesArray);
-        }
-
-        if ($this->_loadedProfile == null) {
-            if ($loadProfileFlag == self::NO_PROFILE_THROW_EXCEPTION) {
-                throw new Exception\RuntimeException('A project profile was not found.');
-            } elseif ($loadProfileFlag == self::NO_PROFILE_RETURN_FALSE) {
-                return false;
-            }
         }
 
         return $profile;
@@ -198,6 +217,26 @@ abstract class AbstractProvider extends \Zend\Tool\Framework\Provider\AbstractPr
 
         $engine = new Context\Content\Engine($storage);
         return $engine->getContent($context, $methodName, $parameters);
+    }
+
+    protected function _hasProjectProviderDirectory($pathToProfileFile)
+    {
+        // do some static analysis of the file so that we can determin whether or not to incure
+        // the cost of loading the profile before the system is fully bootstrapped
+        if (!file_exists($pathToProfileFile)) {
+            return false;
+        }
+        
+        $contents = file_get_contents($pathToProfileFile);
+        if (strstr($contents, '<projectProvidersDirectory') === false) {
+            return false;
+        }
+        
+        if (strstr($contents, '<projectProvidersDirectory enabled="false"')) {
+            return false;
+        }
+        
+        return true;
     }
 
     /**

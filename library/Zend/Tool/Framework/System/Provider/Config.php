@@ -78,7 +78,7 @@ class Config extends AbstractProvider
 
         $config = array(
             'php' => array(
-                'includepath' => get_include_path(),
+                'include_path' => get_include_path(),
             ),
         );
         $writer->write($filename, new Zend\Config\Config($config));

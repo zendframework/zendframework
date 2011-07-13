@@ -47,6 +47,13 @@ class ArgumentParser implements RegistryEnabled
     protected $_registry = null;
 
     /**
+     * Holds the manifest repository taken from the registry.
+     *
+     * @var Zend_Tool_Framework_Manifest_Repository
+     */
+    protected $_manifestRepository = null;
+
+    /**
      * @var \Zend\Tool\Framework\Client\Request
      */
     protected $_request = null;
